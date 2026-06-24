@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Die Basics der Küche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f4ef;
+    --surface: #ffffff;
+    --surface-2: #f7f9f5;
+    --ink: #1e251d;
+    --ink-soft: #586056;
+    --ink-mute: #8c948a;
+    --line: #e4e8df;
+    --line-soft: #eef1ea;
+    --accent: #2f6b46;
+    --accent-deep: #234f34;
+    --accent-soft: #e7f1ea;
+    --warm: #bf5429;
+    --warm-soft: #f8ebe2;
+    --shadow-sm: 0 1px 2px rgba(31, 38, 30, 0.05);
+    --shadow: 0 1px 2px rgba(31, 38, 30, 0.04), 0 8px 24px rgba(31, 38, 30, 0.06);
+    --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 48px 28px 96px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding-bottom: 40px;
+    margin-bottom: 44px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    height: 1px;
+    width: 32px;
+    background: var(--accent);
+    opacity: 0.4;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(38px, 6.5vw, 62px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-bottom: 14px;
+  }
+
+  h1 .accent { color: var(--accent); }
+
+  .subtitle {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Layout */
+  .layout {
+    display: grid;
+    grid-template-columns: 224px 1fr;
+    gap: 52px;
+    align-items: start;
+  }
+
+  .sidebar { position: sticky; top: 28px; }
+
+  .nav { display: flex; flex-direction: column; gap: 3px; }
+
+  .nav-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-radius: 9px;
+    padding: 11px 14px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .nav-item:hover { background: var(--surface-2); color: var(--ink); }
+
+  .nav-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .nav-item.active {
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+
+  .nav-item .n-idx {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    opacity: 0.7;
+  }
+
+  .nav-item.active .n-idx { opacity: 1; }
+
+  /* Content */
+  .content { min-width: 0; }
+
+  .panel { display: none; animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .panel.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-head { margin-bottom: 30px; }
+
+  .panel-head .ph-idx {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .panel-head h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 5px 0 9px;
+  }
+
+  .panel-head p { font-size: 15.5px; color: var(--ink-soft); max-width: 580px; }
+
+  /* Section label */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  .block + .block { margin-top: 42px; }
+
+  /* Cards */
+  .def-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover { border-color: #d5dccf; }
+
+  .def-card h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    margin-bottom: 9px;
+  }
+
+  .def-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+
+  .def-card .tag {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 7px;
+  }
+
+  .def-card .formula {
+    display: inline-block;
+    margin-bottom: 12px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    padding: 4px 11px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rule-card { position: relative; padding-left: 28px; }
+  .rule-card::before {
+    content: '';
+    position: absolute;
+    top: 26px; left: 14px;
+    width: 4px; height: 18px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  /* Spec cards (pans, oils) */
+  .spec-card { margin-bottom: 16px; }
+
+  .sc-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 32px; }
+
+  .sc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+
+  .sc-head h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; }
+
+  .sc-badge {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 7px;
+    white-space: nowrap;
+  }
+
+  .sc-lede { font-size: 15px; color: var(--ink-soft); line-height: 1.62; }
+
+  .smoke {
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--warm-soft);
+    color: var(--warm);
+    padding: 4px 11px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .spec-rows { display: grid; gap: 11px; }
+
+  .spec-row { display: grid; grid-template-columns: 76px 1fr; gap: 14px; align-items: baseline; }
+
+  .sr-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+
+  .sr-label.good { color: var(--accent); }
+  .sr-label.bad { color: var(--warm); }
+  .sr-label.neutral { color: var(--ink-mute); }
+
+  .sr-val { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+
+  .steps {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    display: grid;
+    gap: 10px;
+  }
+
+  .steps .steps-cap {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 2px;
+  }
+
+  .step-mini { display: grid; grid-template-columns: 24px 1fr; gap: 13px; align-items: baseline; }
+
+  .sm-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sm-text { font-size: 14.5px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* Glossary */
+  .glossary {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .gloss-item {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 22px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: baseline;
+  }
+
+  .gloss-item:last-child { border-bottom: none; }
+
+  .gloss-term { font-family: var(--font-display); font-weight: 600; font-size: 16.5px; color: var(--accent-deep); line-height: 1.3; }
+
+  .gloss-def { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+
+  /* Ratio grid */
+  .ratio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(152px, 1fr)); gap: 16px; }
+
+  .ratio-item {
+    text-align: center;
+    padding: 24px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .ratio-item .r-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .ratio-item .r-value { font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .ratio-item.heat .r-value { color: var(--warm); }
+  .ratio-item .r-sub { font-size: 12.5px; color: var(--ink-soft); margin-top: 10px; }
+
+  /* Reference table */
+  .ref-table {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .ref-row {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 20px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: baseline;
+  }
+
+  .ref-row:last-child { border-bottom: none; }
+  .ref-key { font-weight: 500; font-size: 16px; }
+  .ref-val { font-size: 14px; color: var(--ink-soft); line-height: 1.5; font-variant-numeric: tabular-nums; }
+  .ref-val .hot { color: var(--warm); font-weight: 500; }
+
+  /* Note box */
+  .note {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 26px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .container { padding: 40px 22px 80px; }
+    .layout { grid-template-columns: 1fr; gap: 4px; }
+    .sidebar { position: static; margin-bottom: 24px; }
+    .nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .nav-item {
+      flex: 0 0 auto;
+      width: auto;
+      gap: 0;
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-size: 14.5px;
+    }
+    .nav-item:hover { background: var(--surface); color: var(--ink-soft); }
+    .nav-item.active {
+      box-shadow: none;
+      border-color: transparent;
+      background: var(--accent);
+      color: #fff;
+    }
+    .nav-item .n-idx { display: none; }
+    .sc-grid { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  @media (max-width: 560px) {
+    .container { padding: 30px 16px 72px; }
+    .header { padding-bottom: 28px; margin-bottom: 28px; }
+    h1 { font-size: 33px; }
+    .subtitle { font-size: 15px; }
+    .nav-item { font-size: 14px; padding: 8px 13px; }
+    .panel-head { margin-bottom: 22px; }
+    .card { padding: 19px; }
+    .def-grid { grid-template-columns: 1fr; }
+    .sc-head { flex-wrap: wrap; }
+    .spec-row { grid-template-columns: 1fr; gap: 2px; }
+    .spec-row .sr-label { padding-top: 0; }
+    .gloss-item { grid-template-columns: 1fr; gap: 4px; padding: 15px 18px; }
+    .ref-row { grid-template-columns: 1fr; gap: 4px; padding: 13px 18px; }
+    .ratio-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ratio-item { padding: 18px 10px; }
+    .ratio-item .r-value { font-size: 24px; }
+    .ratio-item .r-label { font-size: 10px; letter-spacing: 0.06em; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .panel { animation: none; }
+    .nav-item, .card { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="header">
+      <div class="eyebrow">Immer griffbereit</div>
+      <h1>Die <span class="accent">Basics</span> der Küche</h1>
+      <p class="subtitle">Techniken, Pfannen, Öle und Regeln zum schnellen Nachschlagen.</p>
+    </header>
+
+    <div class="layout">
+
+      <aside class="sidebar">
+        <nav class="nav" role="tablist">
+          <button class="nav-item active" data-panel="technik" role="tab"><span class="n-idx">01</span><span class="n-title">Techniken</span></button>
+          <button class="nav-item" data-panel="pfannen" role="tab"><span class="n-idx">02</span><span class="n-title">Pfannen</span></button>
+          <button class="nav-item" data-panel="oele" role="tab"><span class="n-idx">03</span><span class="n-title">Öle</span></button>
+          <button class="nav-item" data-panel="temperatur" role="tab"><span class="n-idx">04</span><span class="n-title">Temperaturen</span></button>
+          <button class="nav-item" data-panel="regeln" role="tab"><span class="n-idx">05</span><span class="n-title">Faustregeln</span></button>
+          <button class="nav-item" data-panel="saucen" role="tab"><span class="n-idx">06</span><span class="n-title">Saucen</span></button>
+          <button class="nav-item" data-panel="masse" role="tab"><span class="n-idx">07</span><span class="n-title">Maße &amp; Mengen</span></button>
+          <button class="nav-item" data-panel="begriffe" role="tab"><span class="n-idx">08</span><span class="n-title">Begriffe</span></button>
+        </nav>
+      </aside>
+
+      <main class="content">
+
+        <!-- 01 TECHNIKEN -->
+        <section class="panel active" id="technik">
+          <div class="panel-head">
+            <span class="ph-idx">01</span>
+            <h2>Techniken</h2>
+            <p>Die wichtigsten Garmethoden, was sie bewirken und wofür sie taugen.</p>
+          </div>
+          <div class="def-grid">
+            <div class="card def-card">
+              <h3>Scharf anbraten</h3>
+              <p>Bei sehr hoher Hitze schnell eine braune Kruste bilden. Die Maillard-Reaktion liefert die Röstaromen. Wenig bewegen und erst wenden, wenn sich das Stück von selbst löst.</p>
+              <span class="tag">Steak · Filets · Fleischstücke</span>
+            </div>
+            <div class="card def-card">
+              <h3>Sautieren</h3>
+              <p>In wenig heißem Fett bei hoher Hitze garen, dabei ständig in Bewegung. Funktioniert nur mit kleinen, gleich großen Stücken.</p>
+              <span class="tag">Gemüse · Streifen · Pilze</span>
+            </div>
+            <div class="card def-card">
+              <h3>Schmoren</h3>
+              <p>Erst scharf anbraten, dann mit wenig Flüssigkeit zugedeckt lange bei niedriger Hitze garen. Macht zähe Stücke butterzart.</p>
+              <span class="tag">Gulasch · Braten · Ochsenbacke</span>
+            </div>
+            <div class="card def-card">
+              <h3>Dünsten</h3>
+              <p>Im eigenen Saft oder wenig Fett und Flüssigkeit bei niedriger Hitze geschlossen garen. Schonend und aromaschonend.</p>
+              <span class="tag">Gemüse · Fisch · Zwiebeln</span>
+            </div>
+            <div class="card def-card">
+              <h3>Dämpfen</h3>
+              <p>Über kochendem Wasser nur im Dampf garen, ohne Kontakt zur Flüssigkeit. Sehr schonend, hält Nährstoffe und Farbe.</p>
+              <span class="tag">Gemüse · Fisch · Klöße</span>
+            </div>
+            <div class="card def-card">
+              <h3>Kochen / Sieden</h3>
+              <p>In sprudelnd kochendem Wasser bei 100 °C. Kräftige Bewegung im Topf.</p>
+              <span class="tag">Pasta · Kartoffeln · Eier</span>
+            </div>
+            <div class="card def-card">
+              <h3>Köcheln / Simmern</h3>
+              <p>Knapp unter dem Siedepunkt, es steigen nur kleine Bläschen auf. Schonender als volles Kochen.</p>
+              <span class="tag">Saucen · Suppen · Fonds</span>
+            </div>
+            <div class="card def-card">
+              <h3>Pochieren</h3>
+              <p>In Flüssigkeit knapp unter dem Kochpunkt, etwa 70 bis 85 °C, sanft garen. Die Oberfläche bleibt fast ruhig.</p>
+              <span class="tag">Eier · Fisch · Geflügel</span>
+            </div>
+            <div class="card def-card">
+              <h3>Blanchieren</h3>
+              <p>Sehr kurz in kochendes Wasser, dann sofort in Eiswasser abschrecken. Erhält Farbe und Biss, erleichtert das Schälen.</p>
+              <span class="tag">Grünes Gemüse · Tomaten · Mandeln</span>
+            </div>
+            <div class="card def-card">
+              <h3>Frittieren</h3>
+              <p>In viel heißem Fett, etwa 160 bis 180 °C, schwimmend garen. Gibt eine rundum knusprige Kruste.</p>
+              <span class="tag">Pommes · Schnitzel · Teigwaren</span>
+            </div>
+            <div class="card def-card">
+              <h3>Braten im Ofen</h3>
+              <p>Mit trockener Hitze rundum garen. Größere Stücke werden außen braun und innen gleichmäßig gar.</p>
+              <span class="tag">Braten · Geflügel · Wurzelgemüse</span>
+            </div>
+            <div class="card def-card">
+              <h3>Konfieren</h3>
+              <p>Sehr langsam in reichlich Fett bei niedriger Temperatur garen. Wird butterzart und hält sich lange im eigenen Fett.</p>
+              <span class="tag">Entenkeule · Knoblauch · Tomaten</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 02 PFANNEN -->
+        <section class="panel" id="pfannen">
+          <div class="panel-head">
+            <span class="ph-idx">02</span>
+            <h2>Pfannen</h2>
+            <p>Welche Pfanne wofür, womit du sie befeuerst und wie du sie richtig benutzt.</p>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Edelstahl</h3><span class="sc-badge">Allrounder</span></div>
+                <p class="sc-lede">Robust, langlebig und verträgt jede Hitze sowie den Backofen. Bräunt hervorragend und bildet Bratensatz, ideal für Pfannensaucen. Braucht aber Technik, sonst klebt alles fest.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Steak, Fleisch bräunen, Pfannensaucen, alles scharf Angebratene</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Eier, Pfannkuchen, empfindlichen Fisch, alles was leicht klebt</div></div>
+                  <div class="spec-row"><div class="sr-label neutral">Öl</div><div class="sr-val">Neutrales Öl mit hohem Rauchpunkt oder Butterschmalz</div></div>
+                </div>
+                <div class="steps">
+                  <div class="steps-cap">So benutzt du sie</div>
+                  <div class="step-mini"><div class="sm-num">1</div><div class="sm-text">Leer auf mittlere Hitze vorheizen</div></div>
+                  <div class="step-mini"><div class="sm-num">2</div><div class="sm-text">Wassertropfen-Test: tanzt der Tropfen als Perle (Leidenfrost), ist sie bereit</div></div>
+                  <div class="step-mini"><div class="sm-num">3</div><div class="sm-text">Erst dann Öl hinein</div></div>
+                  <div class="step-mini"><div class="sm-num">4</div><div class="sm-text">Gargut einlegen und liegen lassen, es löst sich von selbst sobald die Kruste da ist</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Gusseisen</h3><span class="sc-badge">Hitzespeicher</span></div>
+                <p class="sc-lede">Speichert Hitze enorm und gibt sie gleichmäßig ab, unschlagbar für eine kräftige Kruste. Schwer und träge beim Aufheizen. Muss eingebrannt und gepflegt werden, dann bildet sich die natürliche Patina.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Steak scharf anbraten, Schmoren, Braten, Backofen</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Schnelle Hitzewechsel, lange säurereiche Gerichte, Spülmaschine</div></div>
+                  <div class="spec-row"><div class="sr-label neutral">Öl</div><div class="sr-val">Butterschmalz oder hoch erhitzbares Öl. Nach dem Spülen dünn einölen</div></div>
+                </div>
+                <div class="steps">
+                  <div class="steps-cap">So benutzt du sie</div>
+                  <div class="step-mini"><div class="sm-num">1</div><div class="sm-text">Langsam und geduldig vorheizen, sie braucht ihre Zeit</div></div>
+                  <div class="step-mini"><div class="sm-num">2</div><div class="sm-text">Tropfen-Test oder ein paar Minuten Zeit geben</div></div>
+                  <div class="step-mini"><div class="sm-num">3</div><div class="sm-text">Öl hinein, kurz warten</div></div>
+                  <div class="step-mini"><div class="sm-num">4</div><div class="sm-text">Scharf anbraten, dann in Ruhe die Kruste bilden lassen</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Schmiedeeisen</h3><span class="sc-badge">Profi-Pfanne</span></div>
+                <p class="sc-lede">Aus blankem Eisen wie Gusseisen, aber leichter und reagiert schneller auf Hitzeänderungen. Bildet mit der Zeit eine natürliche Antihaft-Patina. Der Klassiker in der Profiküche.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Braten, Steak, Bratkartoffeln, hohe Hitze, Backofen</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Säurereiche Saucen lange köcheln, Spülmaschine, in Wasser stehen lassen</div></div>
+                  <div class="spec-row"><div class="sr-label neutral">Öl</div><div class="sr-val">Hoch erhitzbares Öl oder Butterschmalz. Heiß auswischen, dünn einölen</div></div>
+                </div>
+                <div class="steps">
+                  <div class="steps-cap">So benutzt du sie</div>
+                  <div class="step-mini"><div class="sm-num">1</div><div class="sm-text">Auf mittlere bis hohe Hitze vorheizen</div></div>
+                  <div class="step-mini"><div class="sm-num">2</div><div class="sm-text">Wassertropfen-Test wie bei Edelstahl</div></div>
+                  <div class="step-mini"><div class="sm-num">3</div><div class="sm-text">Öl hinein</div></div>
+                  <div class="step-mini"><div class="sm-num">4</div><div class="sm-text">Anbraten, danach nur auswischen statt spülen</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Beschichtet</h3><span class="sc-badge">Für Empfindliches</span></div>
+                <p class="sc-lede">Die klassische Alltagspfanne mit Antihaft-Beschichtung. Nichts klebt, wenig Öl nötig, leicht zu reinigen. Die Beschichtung verträgt aber keine hohe Hitze und kein Metallbesteck.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Eier, Omelett, Pfannkuchen, Fisch, schonendes Braten</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Scharf Anbraten, leeres Erhitzen, Metallbesteck, sehr heißen Backofen</div></div>
+                  <div class="spec-row"><div class="sr-label neutral">Öl</div><div class="sr-val">Wenig Öl oder etwas Butter reicht. Niemals leer aufheizen</div></div>
+                </div>
+                <div class="steps">
+                  <div class="steps-cap">So benutzt du sie</div>
+                  <div class="step-mini"><div class="sm-num">1</div><div class="sm-text">Nur niedrige bis mittlere Hitze</div></div>
+                  <div class="step-mini"><div class="sm-num">2</div><div class="sm-text">Etwas Fett hinein, bevor sie heiß wird</div></div>
+                  <div class="step-mini"><div class="sm-num">3</div><div class="sm-text">Gargut bei sanfter Hitze garen</div></div>
+                  <div class="step-mini"><div class="sm-num">4</div><div class="sm-text">Mit Holz- oder Silikonwender arbeiten</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Wok</h3><span class="sc-badge">Hohe Hitze, schnell</span></div>
+                <p class="sc-lede">Runde Form, die die Hitze am Boden bündelt. Gemacht für sehr hohe Temperaturen und ständiges Rühren. Gart kleine Stücke in Sekunden, alles bleibt in Bewegung.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Pfannenrühren (Stir-fry), schnelles Gemüse, Fleischstreifen, asiatisch</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Langsames Garen, große flache Stücke, niedrige Hitze</div></div>
+                  <div class="spec-row"><div class="sr-label neutral">Öl</div><div class="sr-val">Hoch erhitzbar wie Erdnussöl. Geröstetes Sesamöl erst zum Schluss</div></div>
+                </div>
+                <div class="steps">
+                  <div class="steps-cap">So benutzt du ihn</div>
+                  <div class="step-mini"><div class="sm-num">1</div><div class="sm-text">Wok stark erhitzen bis er leicht raucht</div></div>
+                  <div class="step-mini"><div class="sm-num">2</div><div class="sm-text">Öl hinein und einmal schwenken</div></div>
+                  <div class="step-mini"><div class="sm-num">3</div><div class="sm-text">Zutaten der Reihe nach zügig garen</div></div>
+                  <div class="step-mini"><div class="sm-num">4</div><div class="sm-text">Ständig rühren und alles in Bewegung halten</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Grillpfanne</h3><span class="sc-badge">Grillmuster ohne Grill</span></div>
+                <p class="sc-lede">Schwere Pfanne mit Rillen, die Grillstreifen und Röstaromen erzeugen. Das Gargut liegt nur auf den Stegen, Fett läuft in die Rillen. Wird sehr heiß.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Steak, Gemüse, Halloumi, wenn kein Grill da ist</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Saucen, kleine Teile, alles mit viel Flüssigkeit</div></div>
+                  <div class="spec-row"><div class="sr-label neutral">Öl</div><div class="sr-val">Öl dünn direkt auf das Gargut statt in die Pfanne</div></div>
+                </div>
+                <div class="steps">
+                  <div class="steps-cap">So benutzt du sie</div>
+                  <div class="step-mini"><div class="sm-num">1</div><div class="sm-text">Pfanne richtig heiß werden lassen</div></div>
+                  <div class="step-mini"><div class="sm-num">2</div><div class="sm-text">Gargut leicht einölen</div></div>
+                  <div class="step-mini"><div class="sm-num">3</div><div class="sm-text">Auflegen und liegen lassen für klare Streifen</div></div>
+                  <div class="step-mini"><div class="sm-num">4</div><div class="sm-text">Für ein Karomuster einmal um 90 Grad drehen</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 03 ÖLE -->
+        <section class="panel" id="oele">
+          <div class="panel-head">
+            <span class="ph-idx">03</span>
+            <h2>Öle &amp; Fette</h2>
+            <p>Rauchpunkt, Charakter und wo jedes Öl glänzt oder eben nicht.</p>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Butterschmalz / Ghee</h3></div>
+                <span class="smoke">ca. 250 °C · sehr hoch</span>
+                <p class="sc-lede" style="margin-top:14px;">Butter ohne Milcheiweiß und Wasser. Voller Buttergeschmack, aber extrem hitzestabil. Praktisch das ideale Bratfett.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Pro</div><div class="sr-val">Sehr hoch erhitzbar, Buttergeschmack, lange haltbar</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Contra</div><div class="sr-val">Teurer als neutrale Öle, gesättigtes Fett</div></div>
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Scharf Anbraten, Steak, Braten, alles bei hoher Hitze</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Kalte Salate und Dressings</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Butter</h3></div>
+                <span class="smoke">ca. 150 °C · niedrig</span>
+                <p class="sc-lede" style="margin-top:14px;">Bester Geschmack und schöne Bräunung, aber das Milcheiweiß verbrennt schnell und wird bitter.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Pro</div><div class="sr-val">Top Aroma, bräunt schön zu nussiger Beurre noisette</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Contra</div><div class="sr-val">Verbrennt früh, nicht für hohe Hitze</div></div>
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Sanftes Braten, Saucen, Finishen, Arrosieren</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Scharf Anbraten allein, Frittieren</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Natives Olivenöl extra</h3></div>
+                <span class="smoke">ca. 160–190 °C · niedrig bis mittel</span>
+                <p class="sc-lede" style="margin-top:14px;">Aromatisch und hochwertig, kalt am besten. Hitze zerstört die feinen Aromen, zum Hochbraten lohnt sich das teure Öl nicht.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Pro</div><div class="sr-val">Viel Geschmack, gesunde Fette, ideal kalt</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Contra</div><div class="sr-val">Hitzeempfindlich, teuer, deutlicher Eigengeschmack</div></div>
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Salate, Dressing, Dips, Finishen, sanftes Dünsten</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Scharf Anbraten, Frittieren</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Rapsöl</h3></div>
+                <span class="smoke">ca. 200 °C · mittel bis hoch</span>
+                <p class="sc-lede" style="margin-top:14px;">Der neutrale Allrounder. Günstig, gutes Fettsäureprofil, fast geschmacklos. Die erste Wahl für den Alltag.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Pro</div><div class="sr-val">Neutral, günstig, vielseitig, gesunde Fette</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Contra</div><div class="sr-val">Wenig Eigengeschmack</div></div>
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Alltag, Braten, Backen, Dressing</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Wenn du Aroma vom Öl selbst willst</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Sonnenblumenöl</h3></div>
+                <span class="smoke">ca. 225 °C · hoch</span>
+                <p class="sc-lede" style="margin-top:14px;">Raffiniert, neutral und hoch erhitzbar. Klassiker zum Braten und Frittieren.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Pro</div><div class="sr-val">Hoher Rauchpunkt, neutral, günstig</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Contra</div><div class="sr-val">Kaum Eigenaroma</div></div>
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Braten, Frittieren, Backen</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Wenn Geschmack vom Öl gefragt ist</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Erdnussöl</h3></div>
+                <span class="smoke">ca. 230 °C · hoch</span>
+                <p class="sc-lede" style="margin-top:14px;">Hoch erhitzbar mit leicht nussiger Note. Der Standard für Wok und Frittieren.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Pro</div><div class="sr-val">Sehr hitzestabil, dezent nussig</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Contra</div><div class="sr-val">Allergen, etwas teurer</div></div>
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Wok, Frittieren, asiatische Küche</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Haushalte mit Nussallergie</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Kokosöl</h3></div>
+                <span class="smoke">ca. 175 °C · mittel</span>
+                <p class="sc-lede" style="margin-top:14px;">Bei Raumtemperatur fest, mit typischem Kokosaroma (raffiniert neutraler). Passt zu süßen und asiatischen Gerichten.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Pro</div><div class="sr-val">Aroma, fest und stabil, gut zum Backen</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Contra</div><div class="sr-val">Starker Eigengeschmack, viel gesättigtes Fett</div></div>
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Asiatisch, Currys, Süßes, Backen</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Herzhaftes ohne gewollte Kokosnote</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spec-card">
+            <div class="sc-grid">
+              <div class="sc-main">
+                <div class="sc-head"><h3>Sesamöl, geröstet</h3></div>
+                <span class="smoke">niedrig · Würzöl</span>
+                <p class="sc-lede" style="margin-top:14px;">Intensiv geröstet und sehr aromatisch. Kein Bratöl, sondern ein Gewürz. Schon ein paar Tropfen reichen.</p>
+              </div>
+              <div class="sc-detail">
+                <div class="spec-rows">
+                  <div class="spec-row"><div class="sr-label good">Pro</div><div class="sr-val">Kräftiges Aroma, prägt asiatische Gerichte</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Contra</div><div class="sr-val">Verbrennt schnell, sehr dominant</div></div>
+                  <div class="spec-row"><div class="sr-label good">Gut für</div><div class="sr-val">Zum Schluss über Wok-Gerichte, Marinaden, Dips</div></div>
+                  <div class="spec-row"><div class="sr-label bad">Nicht für</div><div class="sr-val">Braten oder Erhitzen</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">Faustregel: je heißer du brätst, desto höher muss der Rauchpunkt sein. Über dem Rauchpunkt wird das Öl bitter und bildet unerwünschte Stoffe, dann lieber wegkippen und neu starten.</div>
+        </section>
+
+        <!-- 04 TEMPERATUREN -->
+        <section class="panel" id="temperatur">
+          <div class="panel-head">
+            <span class="ph-idx">04</span>
+            <h2>Temperaturen</h2>
+            <p>Kerntemperaturen für Fleisch und Fisch, dazu die Rauchpunkte der Öle im Überblick.</p>
+          </div>
+
+          <div class="block">
+            <div class="section-label">Kerntemperatur · Fleisch &amp; Fisch</div>
+            <div class="ratio-grid">
+              <div class="ratio-item heat"><span class="r-label">Rind / Lamm</span><div class="r-value">55–62 °C</div><div class="r-sub">Medium Rare bis Medium</div></div>
+              <div class="ratio-item heat"><span class="r-label">Schwein</span><div class="r-value">63–70 °C</div><div class="r-sub">rosa-saftig bis durch</div></div>
+              <div class="ratio-item heat"><span class="r-label">Geflügel</span><div class="r-value">72–74 °C</div><div class="r-sub">immer ganz durch</div></div>
+              <div class="ratio-item heat"><span class="r-label">Hackfleisch</span><div class="r-value">70–72 °C</div><div class="r-sub">immer ganz durch</div></div>
+              <div class="ratio-item heat"><span class="r-label">Fisch</span><div class="r-value">50–55 °C</div><div class="r-sub">glasig bis gerade gar</div></div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="section-label">Öl · Rauchpunkte (ungefähr)</div>
+            <div class="ref-table">
+              <div class="ref-row"><div class="ref-key">Butter</div><div class="ref-val">ca. 150 °C · niedrige Hitze</div></div>
+              <div class="ref-row"><div class="ref-key">Natives Olivenöl extra</div><div class="ref-val">ca. 160 bis 190 °C · niedrig bis mittel</div></div>
+              <div class="ref-row"><div class="ref-key">Kokosöl</div><div class="ref-val">ca. 175 °C · mittel</div></div>
+              <div class="ref-row"><div class="ref-key">Rapsöl (raffiniert)</div><div class="ref-val">ca. 200 °C · mittel bis hoch</div></div>
+              <div class="ref-row"><div class="ref-key">Sonnenblumenöl (raffiniert)</div><div class="ref-val">ca. 225 °C · hoch</div></div>
+              <div class="ref-row"><div class="ref-key">Erdnussöl</div><div class="ref-val">ca. 230 °C · hoch</div></div>
+              <div class="ref-row"><div class="ref-key">Butterschmalz / Ghee</div><div class="ref-val"><span class="hot">ca. 250 °C · sehr hoch</span></div></div>
+            </div>
+          </div>
+
+          <div class="note">Für die genaue Steak-Garstufe inklusive der Pfanne-raus-Temperaturen (Carryover-Cooking) schau in deine separate Steak-Karte. Hier nur die Übersicht, damit sich nichts doppelt.</div>
+        </section>
+
+        <!-- 05 FAUSTREGELN -->
+        <section class="panel" id="regeln">
+          <div class="panel-head">
+            <span class="ph-idx">05</span>
+            <h2>Faustregeln</h2>
+            <p>Die Prinzipien, die fast immer gelten, egal was in der Pfanne liegt.</p>
+          </div>
+          <div class="def-grid">
+            <div class="card def-card rule-card"><h3>Pfanne richtig vorheizen</h3><p>Edelstahl leer vorheizen und den Wassertropfen-Test machen. Tanzt der Tropfen als Perle (Leidenfrost), erst dann das Öl rein. So klebt nichts.</p></div>
+            <div class="card def-card rule-card"><h3>Fleisch trocken tupfen</h3><p>Feuchtigkeit verhindert Bräunung. Nur eine trockene Oberfläche gibt eine Kruste statt Dampf.</p></div>
+            <div class="card def-card rule-card"><h3>Pfanne nicht überladen</h3><p>Zu viel auf einmal kühlt die Pfanne und alles dünstet statt zu braten. Lieber in mehreren Portionen.</p></div>
+            <div class="card def-card rule-card"><h3>Ruhen lassen</h3><p>Nach dem Braten 5 bis 10 Min ruhen lassen, damit sich der Saft verteilt und beim Anschneiden nicht ausläuft.</p></div>
+            <div class="card def-card rule-card"><h3>Gegen die Faser schneiden</h3><p>Quer zur Muskelfaser schneiden macht das Fleisch zarter und leichter zu kauen.</p></div>
+            <div class="card def-card rule-card"><h3>Öl zum Garpunkt wählen</h3><p>Hohe Hitze braucht hohen Rauchpunkt (neutrales Öl, Butterschmalz). Natives Olivenöl nur für niedrige Hitze und zum Finishen.</p></div>
+            <div class="card def-card rule-card"><h3>Salzen mit Timing</h3><p>Salz zieht Wasser. Entweder weit vorher (trocken, über Nacht) oder direkt vor dem Braten. Die Zone dazwischen macht die Oberfläche nass.</p></div>
+            <div class="card def-card rule-card"><h3>Am Ende abschmecken</h3><p>Salz, Säure (Zitrone, Essig) und Frische zum Schluss. Säure hebt den Geschmack ähnlich wie Salz.</p></div>
+            <div class="card def-card rule-card"><h3>Frische Kräuter spät</h3><p>Getrocknete Kräuter brauchen Zeit und Hitze, frische gibst du erst zum Schluss dazu, sonst verlieren sie Aroma.</p></div>
+            <div class="card def-card rule-card"><h3>Anbraten versiegelt nichts</h3><p>Der Saft bleibt nicht durch die Kruste drin, das ist ein Mythos. Es geht allein um Röstaromen.</p></div>
+            <div class="card def-card rule-card"><h3>Kerntemperatur schlägt Zeit</h3><p>Ein Thermometer ist zuverlässiger als jede Minutenangabe. Garstufe immer über die Kerntemperatur steuern.</p></div>
+            <div class="card def-card rule-card"><h3>Carryover einplanen</h3><p>Fleisch gart nach dem Herausnehmen durch die Resthitze noch nach. Darum etwas früher rausnehmen.</p></div>
+          </div>
+        </section>
+
+        <!-- 06 SAUCEN -->
+        <section class="panel" id="saucen">
+          <div class="panel-head">
+            <span class="ph-idx">06</span>
+            <h2>Saucen</h2>
+            <p>Die Basen für den Alltag und die fünf klassischen Muttersaucen.</p>
+          </div>
+
+          <div class="block">
+            <div class="section-label">Basen für den Alltag</div>
+            <div class="def-grid">
+              <div class="card def-card"><span class="formula">1 : 1 · Butter : Mehl</span><h3>Mehlschwitze (Roux)</h3><p>Gleiche Teile Butter und Mehl bei mittlerer Hitze verrühren, dann mit Flüssigkeit aufgießen. Bindet Saucen und Suppen.</p></div>
+              <div class="card def-card"><span class="formula">3 : 1 · Öl : Säure</span><h3>Vinaigrette</h3><p>Drei Teile Öl, ein Teil Säure, etwas Senf, Salz und Pfeffer. Der Senf hilft beim Emulgieren.</p></div>
+              <div class="card def-card"><h3>Pfannensauce</h3><p>Den Bratensatz mit Wein oder Brühe ablöschen, reduzieren und mit kalter Butter montieren. Aus dem, was nach dem Braten in der Pfanne bleibt.</p></div>
+              <div class="card def-card"><h3>Mayonnaise</h3><p>Eigelb mit Senf und etwas Säure verrühren, dann das Öl langsam einrühren bis es emulgiert. Basis für Aioli und Remoulade.</p></div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="section-label">Die fünf Muttersaucen</div>
+            <div class="def-grid">
+              <div class="card def-card"><h3>Béchamel</h3><p>Helle Mehlschwitze plus Milch. Basis für Käsesauce (Mornay) und Lasagne.</p></div>
+              <div class="card def-card"><h3>Velouté</h3><p>Helle Mehlschwitze plus heller Fond von Huhn, Fisch oder Kalb.</p></div>
+              <div class="card def-card"><h3>Espagnole</h3><p>Braune Mehlschwitze plus brauner Fond und Tomate. Basis für Demi-Glace und Bratensaucen.</p></div>
+              <div class="card def-card"><h3>Sauce Tomate</h3><p>Tomaten mit Gemüse und Aromaten eingekocht. Basis für viele Tomatensaucen.</p></div>
+              <div class="card def-card"><h3>Hollandaise</h3><p>Eigelb mit warmer Butter emulgiert plus Zitrone oder Essig. Nicht zu heiß, sonst gerinnt sie. Basis für Béarnaise.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 07 MASSE & MENGEN -->
+        <section class="panel" id="masse">
+          <div class="panel-head">
+            <span class="ph-idx">07</span>
+            <h2>Maße &amp; Mengen</h2>
+            <p>Klassische Verhältnisse und die Umrechnungen, die man ständig braucht.</p>
+          </div>
+
+          <div class="block">
+            <div class="section-label">Klassische Verhältnisse</div>
+            <div class="ratio-grid">
+              <div class="ratio-item"><span class="r-label">Mehlschwitze</span><div class="r-value">1 : 1</div><div class="r-sub">Butter zu Mehl</div></div>
+              <div class="ratio-item"><span class="r-label">Vinaigrette</span><div class="r-value">3 : 1</div><div class="r-sub">Öl zu Säure</div></div>
+              <div class="ratio-item"><span class="r-label">Reis · Quellmethode</span><div class="r-value">1 : 1,5</div><div class="r-sub">Reis zu Wasser</div></div>
+              <div class="ratio-item"><span class="r-label">Pasta</span><div class="r-value">100 g</div><div class="r-sub">auf 1 L Wasser · 10 g Salz</div></div>
+              <div class="ratio-item"><span class="r-label">Salzlake (Brine)</span><div class="r-value">60 g</div><div class="r-sub">Salz auf 1 L Wasser (≈ 6 %)</div></div>
+              <div class="ratio-item"><span class="r-label">Pizzateig</span><div class="r-value">60–65 %</div><div class="r-sub">Wasser zur Mehlmenge</div></div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="section-label">Maße &amp; Umrechnung</div>
+            <div class="ref-table">
+              <div class="ref-row"><div class="ref-key">1 TL (Teelöffel)</div><div class="ref-val">= 5 ml</div></div>
+              <div class="ref-row"><div class="ref-key">1 EL (Esslöffel)</div><div class="ref-val">= 15 ml = 3 TL</div></div>
+              <div class="ref-row"><div class="ref-key">1 Tasse</div><div class="ref-val">≈ 150 ml (DE) bzw. 240 ml (US cup)</div></div>
+              <div class="ref-row"><div class="ref-key">1 Schuss</div><div class="ref-val">≈ 1 bis 2 EL Flüssigkeit</div></div>
+              <div class="ref-row"><div class="ref-key">1 Prise</div><div class="ref-val">was zwischen zwei Finger passt</div></div>
+              <div class="ref-row"><div class="ref-key">1 Messerspitze</div><div class="ref-val">sehr kleine Menge, knapp sichtbar</div></div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="section-label">Gewicht gängiger Zutaten (ungefähr)</div>
+            <div class="ref-table">
+              <div class="ref-row"><div class="ref-key">Mehl</div><div class="ref-val">1 EL ≈ 10 g · 100 ml ≈ 55 g</div></div>
+              <div class="ref-row"><div class="ref-key">Zucker</div><div class="ref-val">1 EL ≈ 12 bis 15 g</div></div>
+              <div class="ref-row"><div class="ref-key">Salz</div><div class="ref-val">1 TL ≈ 5 bis 6 g</div></div>
+              <div class="ref-row"><div class="ref-key">Butter</div><div class="ref-val">1 EL ≈ 15 g</div></div>
+              <div class="ref-row"><div class="ref-key">Reis (roh)</div><div class="ref-val">100 ml ≈ 80 g</div></div>
+              <div class="ref-row"><div class="ref-key">Wasser / Flüssigkeit</div><div class="ref-val">1 ml = 1 g · 1 EL = 15 g</div></div>
+            </div>
+          </div>
+
+          <div class="note">Tassenangaben sind ungenau, weil eine Tasse je nach Rezept und Land verschieden groß ist. Wo es genau sein muss, etwa beim Backen, lieber die Waage nehmen.</div>
+        </section>
+
+        <!-- 08 BEGRIFFE -->
+        <section class="panel" id="begriffe">
+          <div class="panel-head">
+            <span class="ph-idx">08</span>
+            <h2>Begriffe</h2>
+            <p>Das Küchen-Vokabular, falls in einem Rezept mal ein Wort hängen bleibt.</p>
+          </div>
+          <div class="glossary">
+            <div class="gloss-item"><div class="gloss-term">Ablöschen / Deglacieren</div><div class="gloss-def">Den Bratensatz am Pfannenboden mit Flüssigkeit lösen. Gibt viel Geschmack an die Sauce.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Al dente</div><div class="gloss-def">„Auf den Zahn". Pasta oder Gemüse mit leichtem Biss, nicht durchgekocht.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Aromaten</div><div class="gloss-def">Zwiebel, Knoblauch, Kräuter und Gewürze, die einer Speise das Grundaroma geben.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Bain-Marie</div><div class="gloss-def">Wasserbad. Schonendes Erhitzen ohne direkten Kontakt zur Hitzequelle.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Carryover-Cooking</div><div class="gloss-def">Nachgaren durch die Resthitze, nachdem das Fleisch aus der Pfanne oder dem Ofen kommt.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Emulgieren</div><div class="gloss-def">Fett und Wasser stabil verbinden, etwa in Mayonnaise oder Vinaigrette.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Fond</div><div class="gloss-def">Kräftiger Sud aus Knochen, Gemüse und Aromaten. Basis für Saucen und Suppen.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Glasieren</div><div class="gloss-def">Mit einer reduzierten, oft zuckerhaltigen Flüssigkeit überziehen. Gibt Glanz.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Karamellisieren</div><div class="gloss-def">Zucker oder Zwiebeln durch Hitze bräunen, bis süß-nussige Aromen entstehen.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Konfieren</div><div class="gloss-def">Sehr langsam in Fett bei niedriger Temperatur garen. Macht zart und haltbar.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Leidenfrost-Effekt</div><div class="gloss-def">Wassertropfen tanzt als Perle auf sehr heißer Pfanne. Zeigt die richtige Brattemperatur.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Maillard-Reaktion</div><div class="gloss-def">Bräunung von Eiweiß und Zucker bei Hitze. Quelle fast aller Röstaromen.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Marinieren</div><div class="gloss-def">Zutaten in eine Würzflüssigkeit einlegen, für mehr Geschmack und Zartheit.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Mirepoix / Soffritto</div><div class="gloss-def">Fein gewürfelte Zwiebel, Karotte und Sellerie als Geschmacksbasis.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Montieren</div><div class="gloss-def">Eine Sauce mit kalter Butter aufschlagen. Gibt Glanz und Bindung.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Panieren</div><div class="gloss-def">Mehl, Ei und Paniermehl als Hülle für eine knusprige Kruste.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Reduzieren</div><div class="gloss-def">Flüssigkeit offen einkochen, um Geschmack und Bindung zu konzentrieren.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Tranchieren</div><div class="gloss-def">Ein großes Stück Fleisch fachgerecht zerlegen und aufschneiden.</div></div>
+            <div class="gloss-item"><div class="gloss-term">Velveting</div><div class="gloss-def">Fleisch mit Natron oder Stärke behandeln, damit es seidig zart wird (asiatische Technik).</div></div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <footer class="footer">
+      Lesen · Kochen · Abschmecken · Nachwürzen
+    </footer>
+
+  </div>
+
+<script>
+  const navItems = document.querySelectorAll('.nav-item');
+  const panels = document.querySelectorAll('.panel');
+  const content = document.querySelector('.content');
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const target = item.dataset.panel;
+      navItems.forEach(n => n.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById(target).classList.add('active');
+      if (window.innerWidth <= 860) {
+        content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
