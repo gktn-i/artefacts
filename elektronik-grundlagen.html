@@ -3,35 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elektronik 101 — Hobby-Referenz</title>
+<meta name="color-scheme" content="light dark">
+<title>Elektronik 101 · Hobby-Referenz</title>
 <style>
+/* ============================================================
+   DESIGN TOKENS  ·  Theme hier zentral anpassen
+   ============================================================ */
+:root{
+  --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f1f3f6; --surface-hover:#f5f8fc;
+  --text:#1b1e23; --muted:#697079; --faint:#98a0aa;
+  --border:#e4e7ec; --border-strong:#d3d7de; --track:#e6e8ec;
+  --accent:#1a5fb4; --accent-ink:#0c447c; --accent-soft:#e8f1fb; --accent-border:#a4c8ee;
+  --warn-bg:#fbeee7; --warn-ink:#8a3416;
+  --danger-bg:#fcf2f0; --danger-border:#e6b0a8; --danger-accent:#b0281a;
+  --radius:12px; --radius-sm:8px; --radius-xs:6px;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --shadow-tabs:0 6px 14px -8px rgba(16,24,40,.22);
+  --mono:'SF Mono',Menlo,Consolas,'Roboto Mono',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#16181c; --surface:#1f2229; --surface-2:#262a31; --surface-hover:#262a31;
+    --text:#e7e9ec; --muted:#9aa2ad; --faint:#727a85;
+    --border:#2e333b; --border-strong:#3a404a; --track:#333842;
+    --accent:#5b9bd8; --accent-ink:#b5d4f4; --accent-soft:#0d2c4d; --accent-border:#1d5a99;
+    --warn-bg:#3a1c10; --warn-ink:#f3c3ae;
+    --danger-bg:#2a1512; --danger-border:#6b2418; --danger-accent:#d14836;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.6);
+  }
+  /* Kategorie-Badges (dunkel) */
+  .cat-passiv .cb{background:#042C53;color:#B5D4F4}
+  .cat-halbleiter .cb{background:#26215C;color:#CECBF6}
+  .cat-ic .cb{background:#501313;color:#F7C1C1}
+  .cat-mech .cb{background:#04342C;color:#9FE1CB}
+  .cat-power .cb{background:#412402;color:#FAC775}
+  .cat-schutz .cb{background:#4A1B0C;color:#F5C4B3}
+  .cat-modul .cb{background:#2C2C2A;color:#D3D1C7}
+  .cat-board .cb{background:#33204F;color:#DDC7F8}
+  .cat-sensor .cb{background:#0A3644;color:#A8DCEE}
+  .cat-kabel .cb{background:#3D2A10;color:#F2CFA0}
+  .cat-verbrauch .cb{background:#26330A;color:#CBE596}
+  /* Gefahren-Stufen (dunkel) */
+  .lvl-ok{background:#04342C;color:#9FE1CB}
+  .lvl-warn{background:#412402;color:#FAC775}
+  .lvl-bad{background:#4A1B0C;color:#F5C4B3}
+  .lvl-crit{background:#B0281A;color:#fff}
+}
+
+/* ============================================================
+   BASIS
+   ============================================================ */
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a1a;background:#fff;padding:1.5rem;max-width:1200px;margin:0 auto}
-@media(prefers-color-scheme:dark){body{background:#1a1a1a;color:#e0e0e0}}
-h1{font-size:21px;font-weight:600;margin-bottom:.3rem}
-.sub{font-size:12.5px;color:#888;margin-bottom:1.2rem}
-h2{font-size:16px;font-weight:600;margin:1.6rem 0 .7rem;padding-bottom:4px;border-bottom:1px solid #ddd}
-h3{font-size:13.5px;font-weight:600;margin:1.1rem 0 .5rem;color:#0C447C}
-@media(prefers-color-scheme:dark){h2{border-bottom-color:#444}h3{color:#B5D4F4}}
-p{font-size:13px;line-height:1.65;margin-bottom:.6rem}
-.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.2rem;position:sticky;top:0;background:#fff;padding:8px 0;z-index:10}
-@media(prefers-color-scheme:dark){.tabs{background:#1a1a1a}}
-.tabs button{font-size:13px;padding:7px 14px;cursor:pointer;background:transparent;border:1px solid #ccc;border-radius:8px;color:#666;transition:all .15s;font-weight:500}
-.tabs button.active{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
-.tabs button:hover{background:#f5f5f5}
-.controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
-.controls button{font-size:12px;padding:4px 10px;cursor:pointer;background:transparent;border:1px solid #ccc;border-radius:8px;color:#666;transition:all .15s}
-.controls button.active{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
-.controls button:hover{background:#f5f5f5}
-.search{padding:6px 10px;font-size:13px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;width:260px;margin-bottom:.5rem}
-.tbl-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:760px}
-th{text-align:left;padding:8px 6px;font-weight:500;font-size:11.5px;color:#888;border-bottom:1px solid #ccc;cursor:pointer;user-select:none;white-space:nowrap}
-th:hover{color:#1a1a1a}
-th .ar{font-size:10px;margin-left:2px}
-td{padding:8px 6px;border-bottom:1px solid #eee;vertical-align:top;line-height:1.5}
-tr:hover td{background:#f9f9f9}
-.cb{display:inline-block;font-size:11px;padding:2px 7px;border-radius:8px;font-weight:500;white-space:nowrap}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;
+  padding:1.5rem 1.5rem 4rem;max-width:1080px;margin:0 auto;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent-soft);color:var(--accent-ink)}
+
+/* ============================================================
+   TYPOGRAFIE
+   ============================================================ */
+h1{font-size:25px;font-weight:700;letter-spacing:-.02em;margin-bottom:.35rem}
+.sub{font-size:13.5px;color:var(--muted);margin-bottom:1.3rem;max-width:70ch;line-height:1.55}
+h2{font-size:17px;font-weight:600;letter-spacing:-.01em;margin:2rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+h3{font-size:14px;font-weight:600;margin:1.15rem 0 .5rem;color:var(--accent-ink)}
+p{font-size:13.5px;line-height:1.65;margin-bottom:.6rem}
+
+/* ============================================================
+   TAB-NAVIGATION (sticky)
+   ============================================================ */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;z-index:20;
+  margin:0 -1.5rem 1.5rem;padding:.65rem 1.5rem;background:var(--bg);
+  border-bottom:1px solid var(--border);box-shadow:var(--shadow-tabs)}
+.tabs button{display:inline-flex;align-items:center;gap:.42em;font-family:inherit;
+  font-size:13px;font-weight:500;padding:6px 13px;cursor:pointer;background:transparent;
+  border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);
+  transition:background .15s,color .15s,border-color .15s}
+.tabs button .ti{font-size:14px;line-height:1;opacity:.9}
+.tabs button:hover{background:var(--surface-2);color:var(--text)}
+.tabs button.active{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-border);font-weight:600}
+
+/* ============================================================
+   FILTER-BUTTONS & BUTTON
+   ============================================================ */
+.controls{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1rem}
+.controls button{font-family:inherit;font-size:12.5px;font-weight:500;padding:5px 12px;cursor:pointer;
+  background:transparent;border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);transition:all .15s}
+.controls button:hover{background:var(--surface-2);color:var(--text)}
+.controls button.active{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-border);font-weight:600}
+.btn{font-family:inherit;font-size:13px;font-weight:600;padding:8px 18px;cursor:pointer;
+  border:1px solid var(--accent-border);border-radius:var(--radius-sm);
+  background:var(--accent-soft);color:var(--accent-ink);transition:filter .15s}
+.btn:hover{filter:brightness(.97)}
+
+/* ============================================================
+   SUCHE
+   ============================================================ */
+.search{font-family:inherit;padding:8px 12px;font-size:13.5px;border:1px solid var(--border-strong);
+  border-radius:var(--radius-sm);background:var(--surface);color:var(--text);width:100%;max-width:320px;margin-bottom:.8rem}
+.search:focus{outline:none;border-color:var(--accent-border);box-shadow:0 0 0 3px var(--accent-soft)}
+
+/* ============================================================
+   TABELLEN
+   ============================================================ */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);box-shadow:var(--shadow-sm);margin-bottom:.4rem}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
+th{text-align:left;padding:10px 12px;font-weight:600;font-size:11px;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--faint);background:var(--surface-2);
+  border-bottom:1px solid var(--border);cursor:default;user-select:none;white-space:nowrap}
+th:has(.ar){cursor:pointer}
+th:has(.ar):hover{color:var(--text)}
+th .ar{font-size:9px;margin-left:3px;color:var(--accent)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:not(.dr):hover td{background:var(--surface-hover)}
+
+/* ============================================================
+   KATEGORIE-BADGES
+   ============================================================ */
+.cb{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
 .cat-passiv .cb{background:#E6F1FB;color:#0C447C}
 .cat-halbleiter .cb{background:#EEEDFE;color:#3C3489}
 .cat-ic .cb{background:#FCEBEB;color:#791F1F}
@@ -39,96 +131,110 @@ tr:hover td{background:#f9f9f9}
 .cat-power .cb{background:#FAEEDA;color:#633806}
 .cat-schutz .cb{background:#FAECE7;color:#712B13}
 .cat-modul .cb{background:#F1EFE8;color:#444441}
-.count{font-size:12px;color:#888;margin-bottom:8px}
-.dr td{padding:12px 10px;background:#f5f5f3;font-size:12.5px;line-height:1.7}
-.dr b{color:#0C447C}
-.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.tag{font-size:11px;padding:2px 7px;border-radius:8px;background:#e8e8e5;color:#666}
-.tag.warn{background:#FAECE7;color:#712B13}
-.card{border:1px solid #e2e2e2;border-radius:10px;padding:14px 16px;margin-bottom:10px;background:#fafafa}
+.cat-board .cb{background:#F3E8FD;color:#5B21B6}
+.cat-sensor .cb{background:#E3F2F9;color:#155E75}
+.cat-kabel .cb{background:#FDF2E4;color:#7C4A12}
+.cat-verbrauch .cb{background:#EEF2E3;color:#3F5211}
+
+/* ============================================================
+   DETAIL-ZEILE, ZÄHLER, TAGS
+   ============================================================ */
+.count{font-size:12.5px;color:var(--muted);margin-bottom:10px;font-weight:500}
+.dr td{padding:14px 16px;background:var(--surface-2);font-size:13px;line-height:1.7}
+.dr b{color:var(--accent-ink)}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.tag{font-size:11px;font-weight:500;padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--border-strong);color:var(--muted)}
+.tag.warn{background:var(--warn-bg);border-color:transparent;color:var(--warn-ink);font-weight:600}
+
+/* ============================================================
+   KARTEN & RASTER
+   ============================================================ */
+.card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;background:var(--surface);box-shadow:var(--shadow-sm)}
 .card h3{margin-top:0}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
-.formula{font-family:'SF Mono',Menlo,Consolas,monospace;background:#eef3f8;padding:3px 8px;border-radius:6px;font-size:13px;color:#0C447C;display:inline-block;margin:2px 0}
-ul{margin:.3rem 0 .6rem 1.1rem}
-li{font-size:13px;line-height:1.6;margin-bottom:3px}
-li.warn{color:#791F1F}
-.lvl{display:inline-block;font-size:11px;padding:2px 8px;border-radius:8px;font-weight:600;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+
+/* ============================================================
+   FORMELN, LISTEN
+   ============================================================ */
+.formula{font-family:var(--mono);background:var(--accent-soft);padding:3px 9px;border-radius:var(--radius-xs);font-size:13px;color:var(--accent-ink);display:inline-block;margin:2px 0;font-weight:500}
+ul{margin:.4rem 0 .6rem 1.2rem}
+li{font-size:13.5px;line-height:1.6;margin-bottom:5px}
+li::marker{color:var(--faint)}
+li.warn{color:var(--warn-ink)}
+
+/* ============================================================
+   GEFAHREN-STUFEN & HINWEIS-BOX
+   ============================================================ */
+.lvl{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;font-weight:600;white-space:nowrap}
 .lvl-ok{background:#E1F5EE;color:#085041}
 .lvl-warn{background:#FAEEDA;color:#633806}
 .lvl-bad{background:#FAECE7;color:#791F1F}
 .lvl-crit{background:#791F1F;color:#fff}
-.danger-box{border:1px solid #E0A9A9;border-left:4px solid #B0281A;border-radius:10px;padding:12px 16px;margin-bottom:10px;background:#FCF2F0}
-.rate{display:flex;align-items:center;gap:6px;min-width:62px}
-.rate-bar{flex:1;height:6px;border-radius:3px;background:#e2e2e2;overflow:hidden;min-width:34px}
-.rate-fill{height:100%;border-radius:3px;background:#2F73BC}
-.rate-num{font-size:11px;color:#888;width:14px;text-align:right;flex-shrink:0}
-.rule{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #eee;font-size:13px;line-height:1.55}
-.rule:last-child{border-bottom:none}
-.rule .ico{font-size:15px;flex-shrink:0;width:22px;text-align:center}
-.kbd{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:11.5px;background:#e8e8e8;padding:1px 6px;border-radius:5px}
-.calc{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:.6rem 0}
-.calc label{font-size:11.5px;color:#888;display:block;margin-bottom:3px}
-.calc input,.calc select{padding:6px 9px;font-size:13px;border:1px solid #ddd;border-radius:7px;background:#fff;color:#1a1a1a;width:120px}
-.calc-out{font-size:14px;font-weight:600;padding:8px 14px;border-radius:8px;background:#E6F1FB;color:#0C447C;margin-top:8px;display:inline-block}
-.colorband{display:inline-block;width:14px;height:22px;border-radius:3px;border:1px solid rgba(0,0,0,.25);margin:0 1px;vertical-align:middle}
+.danger-box{border:1px solid var(--danger-border);border-left:4px solid var(--danger-accent);border-radius:var(--radius);padding:14px 18px;margin-bottom:12px;background:var(--danger-bg)}
+
+/* ============================================================
+   BEWERTUNGS-BALKEN
+   ============================================================ */
+.rate{display:flex;align-items:center;gap:8px;min-width:64px}
+.rate-bar{flex:1;height:7px;border-radius:999px;background:var(--track);overflow:hidden;min-width:36px}
+.rate-fill{height:100%;border-radius:999px;background:var(--accent)}
+.rate-num{font-size:11px;color:var(--muted);width:15px;text-align:right;flex-shrink:0;font-weight:600}
+
+/* ============================================================
+   REGEL-ZEILEN, KBD
+   ============================================================ */
+.rule{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13.5px;line-height:1.55}
+.rule:first-child{padding-top:2px}
+.rule:last-child{padding-bottom:2px;border-bottom:none}
+.rule .ico{font-size:16px;flex-shrink:0;width:24px;text-align:center;line-height:1.5}
+.kbd{font-family:var(--mono);font-size:11.5px;background:var(--surface-2);border:1px solid var(--border);padding:1px 6px;border-radius:5px}
+
+/* ============================================================
+   RECHNER
+   ============================================================ */
+.calc{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:.7rem 0}
+.calc label{font-size:11.5px;color:var(--muted);display:block;margin-bottom:4px;font-weight:500}
+.calc input,.calc select{font-family:inherit;padding:8px 10px;font-size:13.5px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);width:130px}
+.calc input:focus,.calc select:focus{outline:none;border-color:var(--accent-border);box-shadow:0 0 0 3px var(--accent-soft)}
+.calc-out{font-size:14px;font-weight:600;padding:9px 15px;border-radius:var(--radius-sm);background:var(--accent-soft);color:var(--accent-ink);margin-top:8px;display:inline-block}
+.big-out{font-size:19px;font-weight:700;color:var(--accent-ink);margin-top:12px;padding:10px 16px;background:var(--accent-soft);border-radius:var(--radius-sm);display:inline-block;max-width:100%}
+.colorband{display:inline-block;width:16px;height:26px;border-radius:4px;border:1px solid rgba(0,0,0,.2);margin:0 1px;vertical-align:middle;box-shadow:var(--shadow-sm)}
+
+/* ============================================================
+   HILFSKLASSEN
+   ============================================================ */
 .hidden{display:none}
-.note{font-size:12px;color:#888;font-style:italic;margin-top:4px}
-.big-out{font-size:18px;font-weight:700;color:#0C447C;margin-top:10px}
-@media(prefers-color-scheme:dark){
-.sub,.count,.note{color:#999}
-.tabs button,.controls button{border-color:#555;color:#aaa}
-.tabs button:hover,.controls button:hover{background:#333}
-.tabs button.active,.controls button.active{background:#042C53;color:#B5D4F4;border-color:#185FA5}
-.search,.calc input,.calc select{background:#2a2a2a;border-color:#444;color:#e0e0e0}
-th{color:#999;border-bottom-color:#444}
-th:hover{color:#e0e0e0}
-td{border-bottom-color:#333}
-tr:hover td{background:#252525}
-.dr td{background:#252525}
-.dr b{color:#B5D4F4}
-.tag{background:#333;color:#aaa}
-.tag.warn{background:#4A1B0C;color:#F5C4B3}
-li.warn{color:#F5C4B3}
-.lvl-ok{background:#04342C;color:#9FE1CB}
-.lvl-warn{background:#412402;color:#FAC775}
-.lvl-bad{background:#4A1B0C;color:#F5C4B3}
-.lvl-crit{background:#B0281A;color:#fff}
-.danger-box{background:#2A1512;border-color:#6B2418;border-left-color:#D14836}
-.rate-bar{background:#3a3a3a}
-.rate-fill{background:#5B9BD8}
-.card{background:#222;border-color:#3a3a3a}
-.formula{background:#042C53;color:#B5D4F4}
-.calc-out,.big-out{background:#042C53;color:#B5D4F4}
-.kbd{background:#333;color:#ccc}
-.rule{border-bottom-color:#333}
-.cat-passiv .cb{background:#042C53;color:#B5D4F4}
-.cat-halbleiter .cb{background:#26215C;color:#CECBF6}
-.cat-ic .cb{background:#501313;color:#F7C1C1}
-.cat-mech .cb{background:#04342C;color:#9FE1CB}
-.cat-power .cb{background:#412402;color:#FAC775}
-.cat-schutz .cb{background:#4A1B0C;color:#F5C4B3}
-.cat-modul .cb{background:#2C2C2A;color:#D3D1C7}
+.note{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:5px;line-height:1.55}
+
+/* ============================================================
+   RESPONSIV
+   ============================================================ */
+@media(max-width:600px){
+  body{padding:1rem 1rem 3rem}
+  .tabs{margin:0 -1rem 1.2rem;padding:.6rem 1rem}
+  h1{font-size:22px}
+  h2{font-size:16px}
 }
 </style>
 </head>
 <body>
-<h1>Elektronik 101 — Hobby-Referenz</h1>
-<div class="sub">Nachschlagewerk für Feinelektronik & Bastelprojekte · Grundlagen, Bauteile, Regeln, Standard-Abläufe</div>
+<h1>Elektronik 101 · Hobby-Referenz</h1>
+<div class="sub">Nachschlagewerk für Feinelektronik & Bastelprojekte · Bauteile, Boards, Displays, Motoren, Messen, Sicherheit & Rechner</div>
 
 <div class="tabs" id="tabs"></div>
 
 <!-- ============ TAB 1: GRUNDLAGEN ============ -->
 <section id="t-grundlagen">
 
-<h2>Die 4 Kerngrößen — das musst du verinnerlichen</h2>
+<h2>Die 4 Kerngrößen: das musst du verinnerlichen</h2>
 <div class="grid2">
-<div class="card"><h3>Spannung (U) — Volt (V)</h3>
+<div class="card"><h3>Spannung (U): Volt (V)</h3>
 <p>Der "Druck", der die Ladung durch den Draht schiebt. Vergleich: Wasserdruck im Schlauch. Misst man immer <b>zwischen zwei Punkten</b> (parallel zum Bauteil).</p></div>
-<div class="card"><h3>Strom (I) — Ampere (A)</h3>
+<div class="card"><h3>Strom (I): Ampere (A)</h3>
 <p>Die Menge Ladung, die pro Sekunde fließt. Vergleich: wie viel Wasser durch den Schlauch läuft. Misst man <b>im Stromfluss</b> (Bauteil auftrennen, Messgerät dazwischen).</p></div>
-<div class="card"><h3>Widerstand (R) — Ohm (Ω)</h3>
+<div class="card"><h3>Widerstand (R): Ohm (Ω)</h3>
 <p>Wie stark ein Bauteil den Strom bremst. Vergleich: enge Stelle im Schlauch. Mehr Widerstand = weniger Strom bei gleicher Spannung.</p></div>
-<div class="card"><h3>Leistung (P) — Watt (W)</h3>
+<div class="card"><h3>Leistung (P): Watt (W)</h3>
 <p>Wie viel Energie pro Sekunde umgesetzt wird. Bei Bauteilen heißt das: wie viel Wärme entsteht. Zu viel Watt = das Bauteil wird heiß und stirbt.</p></div>
 </div>
 
@@ -150,7 +256,7 @@ li.warn{color:#F5C4B3}
 <div class="card"><h3>GND / Masse</h3><p>Der gemeinsame Bezugspunkt (0 Volt), auf den sich alle Spannungen beziehen. Alle Minuspole und Masseleitungen werden zusammengeschaltet ("gemeinsame Masse").</p></div>
 <div class="card"><h3>DC / Gleichstrom</h3><p>Strom fließt immer in eine Richtung (Batterie, USB, Netzteil). Hat festes Plus und Minus.</p></div>
 <div class="card"><h3>AC / Wechselstrom</h3><p>Strom wechselt ständig die Richtung (Steckdose, 230 V). In Hobby-Projekten meist nur als Eingang fürs Netzteil relevant.</p></div>
-<div class="card"><h3>Frequenz — Hertz (Hz)</h3><p>Wie oft pro Sekunde etwas schwingt/sich wiederholt. 1 Hz = einmal pro Sekunde. Wichtig bei Takt, Signalen, Tönen.</p></div>
+<div class="card"><h3>Frequenz: Hertz (Hz)</h3><p>Wie oft pro Sekunde etwas schwingt/sich wiederholt. 1 Hz = einmal pro Sekunde. Wichtig bei Takt, Signalen, Tönen.</p></div>
 <div class="card"><h3>Kurzschluss</h3><p>Plus und Minus direkt verbunden, ohne Bauteil dazwischen. Strom wird sehr groß → Hitze, Rauch, kaputtes Netzteil. Immer vermeiden.</p></div>
 <div class="card"><h3>Polarität</h3><p>Manche Bauteile haben Plus und Minus und müssen richtig herum eingebaut werden (LED, Elko, Diode, Akku). Falsch herum = Funktion weg oder Bauteil kaputt.</p></div>
 <div class="card"><h3>Logikpegel (HIGH / LOW)</h3><p>Digitale Bauteile kennen nur zwei Zustände: HIGH (Spannung da, meist 3,3 V oder 5 V) = "1", LOW (0 V) = "0".</p></div>
@@ -159,8 +265,12 @@ li.warn{color:#F5C4B3}
 <div class="card"><h3>Spannungsteiler</h3><p>Zwei Widerstände in Reihe greifen in der Mitte eine kleinere Spannung ab. Standard-Trick, um z. B. 5 V auf einen 3,3 V messbaren Wert zu bringen.</p></div>
 <div class="card"><h3>PWM (Pulsweiten-Modulation)</h3><p>Schnelles An/Aus-Schalten, um Helligkeit (LED) oder Drehzahl (Motor) zu steuern. Längeres "An" = mehr Leistung. Spart Wärme gegenüber Widerstand.</p></div>
 <div class="card"><h3>Datenblatt</h3><p>Das offizielle Dokument zum Bauteil (Hersteller-PDF). Enthält Grenzwerte, Pin-Belegung und Beispielschaltungen. Im Zweifel immer dort nachsehen.</p></div>
-<div class="card"><h3>Kapazität — Farad (F)</h3><p>Wie viel Ladung ein Kondensator speichern kann. In der Praxis winzig: µF (Mikro), nF (Nano), pF (Piko).</p></div>
-<div class="card"><h3>Induktivität — Henry (H)</h3><p>Eigenschaft einer Spule: sie wehrt sich gegen Stromänderungen. In der Praxis mH oder µH. Wichtig in Wandlern, Filtern, Funk.</p></div>
+<div class="card"><h3>Kapazität: Farad (F)</h3><p>Wie viel Ladung ein Kondensator speichern kann. In der Praxis winzig: µF (Mikro), nF (Nano), pF (Piko).</p></div>
+<div class="card"><h3>Induktivität: Henry (H)</h3><p>Eigenschaft einer Spule: sie wehrt sich gegen Stromänderungen. In der Praxis mH oder µH. Wichtig in Wandlern, Filtern, Funk.</p></div>
+<div class="card"><h3>Analog vs. Digital</h3><p><b>Analog</b> ist ein stufenloser Wert (jede beliebige Spannung), <b>digital</b> kennt nur an oder aus. Ein Lichtsensor liefert analog, ein Taster digital.</p></div>
+<div class="card"><h3>Offener Eingang (Floating)</h3><p>Ein Eingang, an dem nichts anliegt, ist nicht sauber 0 oder 1, sondern "schwebt" und liefert Zufallswerte. Deshalb braucht er einen Pull-up oder Pull-down.</p></div>
+<div class="card"><h3>Wirkungsgrad</h3><p>Wie viel der zugeführten Energie tatsächlich nützlich ankommt, der Rest wird Wärme. Ein Schaltregler mit 90 % verheizt nur 10 %, ein Linearregler oft viel mehr.</p></div>
+<div class="card"><h3>Spannungsabfall</h3><p>Jedes Bauteil "verbraucht" ein Stück Spannung. An einer Diode fallen etwa 0,7 V ab, an einem Widerstand je nach Strom. In Reihe summieren sich die Abfälle zur Gesamtspannung.</p></div>
 </div>
 
 <h2>Einheiten-Vorsätze (Größenordnungen)</h2>
@@ -169,7 +279,7 @@ li.warn{color:#F5C4B3}
 <tbody>
 <tr><td>Mega</td><td>M</td><td>1 000 000</td><td>Ω (Widerstände), Hz (Takt)</td></tr>
 <tr><td>Kilo</td><td>k</td><td>1 000</td><td>Ω (Widerstände), Hz</td></tr>
-<tr><td>—</td><td>—</td><td>1</td><td>V, A, Ω</td></tr>
+<tr><td>(keiner)</td><td>–</td><td>1</td><td>V, A, Ω</td></tr>
 <tr><td>Milli</td><td>m</td><td>0,001</td><td>A (Strom), V, H</td></tr>
 <tr><td>Mikro</td><td>µ</td><td>0,000001</td><td>F (Elkos), A, H</td></tr>
 <tr><td>Nano</td><td>n</td><td>0,000000001</td><td>F (Keramik-Kondensatoren)</td></tr>
@@ -180,7 +290,7 @@ li.warn{color:#F5C4B3}
 
 <!-- ============ TAB 2: KOMPONENTEN ============ -->
 <section id="t-komponenten" class="hidden">
-<input class="search" type="text" placeholder="Bauteil oder Anwendung suchen..." id="q">
+<input class="search" type="text" placeholder="Suchen: Bauteil, Anwendung, Kennwert..." id="q">
 <div class="controls" id="cats"></div>
 <div class="count" id="count"></div>
 <div class="tbl-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
@@ -190,7 +300,7 @@ li.warn{color:#F5C4B3}
 <!-- ============ TAB 3: REGELN & PRAXIS ============ -->
 <section id="t-regeln" class="hidden">
 
-<h2>Goldene Regeln — immer beachten</h2>
+<h2>Goldene Regeln: immer beachten</h2>
 <div class="card">
 <div class="rule"><span class="ico">💡</span><div><b>LED nie ohne Vorwiderstand.</b> Eine LED begrenzt ihren Strom nicht selbst. Ohne Widerstand zieht sie zu viel und brennt durch. (Rechner im Tab "Rechner".)</div></div>
 <div class="rule"><span class="ico">🔌</span><div><b>Polarität prüfen, bevor du Strom gibst.</b> Elko, LED, Diode, Akku, Modul-Versorgung: falsch herum kann sofort zerstören.</div></div>
@@ -217,10 +327,10 @@ li.warn{color:#F5C4B3}
 <p class="note">Reihenfolge merken: Spannung misst man nebendran, Strom misst man mittendrin.</p>
 </div>
 
-<h3>Löten — die Basics</h3>
+<h3>Löten: die Basics</h3>
 <div class="card">
 <ul>
-<li><b>Temperatur:</b> bleihaltiges Lot ca. 320–340 °C, bleifrei ca. 350–370 °C.</li>
+<li><b>Temperatur:</b> bleihaltiges Lot ca. 320 bis 340 °C, bleifrei ca. 350 bis 370 °C.</li>
 <li><b>Reihenfolge:</b> erst die <b>Lötstelle</b> mit der Spitze erwärmen, dann den Draht (Lot) an die Stelle führen, nicht an die Spitze. Lot fließt zur Wärme.</li>
 <li><b>Gute Lötstelle:</b> glänzend, glatt, kegelförmig. Matt/kugelig = "kalte" Lötstelle, neu machen.</li>
 <li><b>Flussmittel</b> entfernt Oxid und lässt Lot sauber fließen. Bei SMD fast Pflicht.</li>
@@ -239,7 +349,7 @@ li.warn{color:#F5C4B3}
 </ul>
 </div>
 
-<h2>Good to know — Praxis-Wissen</h2>
+<h2>Good to know: Praxis-Wissen</h2>
 <div class="card">
 <div class="rule"><span class="ico">🎨</span><div><b>Widerstands-Farbcode</b> liest man von der Seite, wo die Ringe näher am Rand sitzen. (Decoder im Tab "Rechner".)</div></div>
 <div class="rule"><span class="ico">🔢</span><div><b>SMD-Beschriftung:</b> "103" heißt 10 + 3 Nullen = 10 000 Ω = 10 kΩ. Gleiches Prinzip oft bei Kondensatoren in pF.</div></div>
@@ -256,7 +366,7 @@ li.warn{color:#F5C4B3}
 
 <h2>LED-Vorwiderstand berechnen</h2>
 <div class="card">
-<p class="note">Formel: R = (Versorgung − LED-Spannung) / LED-Strom. Typisch: rote LED ~2,0 V, weiß/blau ~3,2 V, Strom 10–20 mA.</p>
+<p class="note">Formel: R = (Versorgung − LED-Spannung) / LED-Strom. Typisch: rote LED ~2,0 V, weiß/blau ~3,2 V, Strom 10 bis 20 mA.</p>
 <div class="calc">
 <div><label>Versorgung (V)</label><input type="number" id="led-vs" value="5" step="0.1"></div>
 <div><label>LED-Spannung (V)</label><input type="number" id="led-vf" value="2.0" step="0.1"></div>
@@ -266,7 +376,7 @@ li.warn{color:#F5C4B3}
 <p class="note" id="led-note"></p>
 </div>
 
-<h2>Ohmsches Gesetz — was du kennst, fülle ich aus</h2>
+<h2>Ohmsches Gesetz: was du kennst, fülle ich aus</h2>
 <div class="card">
 <p class="note">Trage zwei Werte ein, leer lassen was du suchst.</p>
 <div class="calc">
@@ -274,7 +384,7 @@ li.warn{color:#F5C4B3}
 <div><label>Strom I (A)</label><input type="number" id="ohm-i" step="any"></div>
 <div><label>Widerstand R (Ω)</label><input type="number" id="ohm-r" step="any"></div>
 </div>
-<button class="controls" style="padding:6px 14px;font-size:13px;border:1px solid #85B7EB;border-radius:8px;background:#E6F1FB;color:#0C447C;cursor:pointer" onclick="calcOhm()">Berechnen</button>
+<button class="btn" onclick="calcOhm()">Berechnen</button>
 <div class="big-out" id="ohm-out"></div>
 </div>
 
@@ -318,12 +428,12 @@ li.warn{color:#F5C4B3}
 
 <h2>Die Buchsen richtig stecken</h2>
 <div class="card">
-<div class="rule"><span class="ico">⚫</span><div><b>COM</b> — hier steckt die <b>schwarze</b> Leitung. Immer. Egal was du misst. "COM" steht für den gemeinsamen Minus-Bezugspunkt.</div></div>
-<div class="rule"><span class="ico">🔴</span><div><b>VΩ / VΩmA</b> (oft beschriftet mit V, Ω, Hz, Symbolen) — hier steckt die <b>rote</b> Leitung für fast alles: Spannung, Widerstand, Durchgang, Diode, Kondensator, kleine Ströme.</div></div>
-<div class="rule"><span class="ico">⚠️</span><div><b>10A / 20A</b> — eigene Buchse nur für <b>große Ströme</b>. Rote Leitung hier rein, wenn du Strom über ~0,2 A misst. Achtung: oft ohne Sicherung → Fehler killt das Gerät.</div></div>
+<div class="rule"><span class="ico">⚫</span><div><b>COM</b>: hier steckt die <b>schwarze</b> Leitung. Immer. Egal was du misst. "COM" steht für den gemeinsamen Minus-Bezugspunkt.</div></div>
+<div class="rule"><span class="ico">🔴</span><div><b>VΩ / VΩmA</b> (oft beschriftet mit V, Ω, Hz, Symbolen): hier steckt die <b>rote</b> Leitung für fast alles: Spannung, Widerstand, Durchgang, Diode, Kondensator, kleine Ströme.</div></div>
+<div class="rule"><span class="ico">⚠️</span><div><b>10A / 20A</b>: eigene Buchse nur für <b>große Ströme</b>. Rote Leitung hier rein, wenn du Strom über ~0,2 A misst. Achtung: oft ohne Sicherung → Fehler killt das Gerät.</div></div>
 </div>
 
-<h2>Symbole am Drehrad — was bedeutet was</h2>
+<h2>Symbole am Drehrad: was bedeutet was</h2>
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th>Symbol / Beschriftung</th><th>Bedeutung</th><th>Wofür du es brauchst</th></tr></thead>
 <tbody>
@@ -345,12 +455,12 @@ li.warn{color:#F5C4B3}
 
 <h2>Die Tasten (Settings) verstehen</h2>
 <div class="card">
-<div class="rule"><span class="ico">🔄</span><div><b>RANGE</b> — wechselt den Messbereich von Hand. Brauchst du nur bei Geräten <b>ohne</b> Auto-Range (siehe unten).</div></div>
-<div class="rule"><span class="ico">📌</span><div><b>HOLD</b> — friert den aktuellen Wert auf dem Display ein. Praktisch, wenn du an einer schlecht einsehbaren Stelle misst.</div></div>
-<div class="rule"><span class="ico">0️⃣</span><div><b>REL / ZERO / Δ</b> — setzt den aktuellen Wert als neuen Nullpunkt. Nützlich, um den Eigenwiderstand der Messleitungen abzuziehen (erst Spitzen zusammenhalten, dann REL drücken).</div></div>
-<div class="rule"><span class="ico">🔀</span><div><b>SELECT / MODE / FUNC</b> — schaltet zwischen mehreren Funktionen auf derselben Drehrad-Stellung um (z. B. Ω ↔ Durchgang ↔ Diode).</div></div>
-<div class="rule"><span class="ico">📈</span><div><b>MAX / MIN</b> — merkt sich den höchsten/niedrigsten Wert während der Messung.</div></div>
-<div class="rule"><span class="ico">💡</span><div><b>Backlight</b> — Display-Beleuchtung. Schaltet sich oft nach kurzer Zeit selbst aus, um Batterie zu sparen.</div></div>
+<div class="rule"><span class="ico">🔄</span><div><b>RANGE</b>: wechselt den Messbereich von Hand. Brauchst du nur bei Geräten <b>ohne</b> Auto-Range (siehe unten).</div></div>
+<div class="rule"><span class="ico">📌</span><div><b>HOLD</b>: friert den aktuellen Wert auf dem Display ein. Praktisch, wenn du an einer schlecht einsehbaren Stelle misst.</div></div>
+<div class="rule"><span class="ico">0️⃣</span><div><b>REL / ZERO / Δ</b>: setzt den aktuellen Wert als neuen Nullpunkt. Nützlich, um den Eigenwiderstand der Messleitungen abzuziehen (erst Spitzen zusammenhalten, dann REL drücken).</div></div>
+<div class="rule"><span class="ico">🔀</span><div><b>SELECT / MODE / FUNC</b>: schaltet zwischen mehreren Funktionen auf derselben Drehrad-Stellung um (z. B. Ω ↔ Durchgang ↔ Diode).</div></div>
+<div class="rule"><span class="ico">📈</span><div><b>MAX / MIN</b>: merkt sich den höchsten/niedrigsten Wert während der Messung.</div></div>
+<div class="rule"><span class="ico">💡</span><div><b>Backlight</b>: Display-Beleuchtung. Schaltet sich oft nach kurzer Zeit selbst aus, um Batterie zu sparen.</div></div>
 </div>
 
 <h2>Auto-Range vs. manueller Bereich</h2>
@@ -361,13 +471,13 @@ li.warn{color:#F5C4B3}
 
 <h2>Display-Anzeigen lesen</h2>
 <div class="card">
-<div class="rule"><span class="ico">🔠</span><div><b>OL</b> (oder <b>1</b> ganz links) — "Over Limit". Bei Spannung/Widerstand: Wert zu groß für den Bereich. Bei Durchgang/Widerstand: <b>keine Verbindung</b> (unendlich).</div></div>
-<div class="rule"><span class="ico">➖</span><div><b>Minus-Zeichen</b> vor der Zahl — du hast rote und schwarze Spitze vertauscht. Der Wert stimmt trotzdem, nur die Polung ist umgekehrt.</div></div>
-<div class="rule"><span class="ico">🔋</span><div><b>Batterie-Symbol</b> — die Batterie <b>im Messgerät</b> ist schwach. Werte werden dann ungenau.</div></div>
+<div class="rule"><span class="ico">🔠</span><div><b>OL</b> (oder <b>1</b> ganz links): "Over Limit". Bei Spannung/Widerstand: Wert zu groß für den Bereich. Bei Durchgang/Widerstand: <b>keine Verbindung</b> (unendlich).</div></div>
+<div class="rule"><span class="ico">➖</span><div><b>Minus-Zeichen</b> vor der Zahl: du hast rote und schwarze Spitze vertauscht. Der Wert stimmt trotzdem, nur die Polung ist umgekehrt.</div></div>
+<div class="rule"><span class="ico">🔋</span><div><b>Batterie-Symbol</b>: die Batterie <b>im Messgerät</b> ist schwach. Werte werden dann ungenau.</div></div>
 <div class="rule"><span class="ico">🔢</span><div>Einheiten-Buchstabe beachten: <b>m</b> (Milli), <b>k</b> (Kilo), <b>M</b> (Mega), <b>µ</b> (Mikro). "4.7k Ω" sind 4700 Ω.</div></div>
 </div>
 
-<h2>Schritt für Schritt — die wichtigsten Messungen</h2>
+<h2>Schritt für Schritt: die wichtigsten Messungen</h2>
 
 <h3>① Gleichspannung messen (Batterie, Netzteil, Schaltung)</h3>
 <div class="card"><ul>
@@ -396,7 +506,7 @@ li.warn{color:#F5C4B3}
 <div class="card"><ul>
 <li>Rot in die <b>mA</b>- oder <b>10A</b>-Buchse stecken (je nach erwartetem Strom), Schwarz bleibt in COM.</li>
 <li>Drehrad auf <b>A⎓ / mA</b>.</li>
-<li>Den Stromkreis <b>auftrennen</b> und das Messgerät <b>in Reihe dazwischen</b> hängen — der Strom muss durch das Gerät fließen.</li>
+<li>Den Stromkreis <b>auftrennen</b> und das Messgerät <b>in Reihe dazwischen</b> hängen: der Strom muss durch das Gerät fließen.</li>
 <li class="warn"><b>Nie</b> die Spitzen in dieser Stellung einfach an Plus und Minus halten → das ist ein Kurzschluss durch das Gerät, die Sicherung fliegt (oder das Gerät stirbt).</li>
 </ul></div>
 
@@ -467,9 +577,9 @@ li.warn{color:#F5C4B3}
 
 <h3>Die drei Tasten</h3>
 <div class="card">
-<div class="rule"><span class="ico">▶️</span><div><b>Test / Power</b> — kurz drücken schaltet ein bzw. startet eine Messung. Zum <b>Ausschalten</b> die Taste auf einem Bildschirm <b>außerhalb</b> einer laufenden Messung lange gedrückt halten.</div></div>
-<div class="rule"><span class="ico">🔀</span><div><b>Mode / Modus-Schalter</b> — wechselt zwischen den Betriebsarten, vor allem zwischen normalem <b>Bauteiltest</b> und <b>IR-Decoding</b> (Fernbedienung auslesen).</div></div>
-<div class="rule"><span class="ico">⚡</span><div><b>High-Voltage</b> — legt die höhere Spannung an, die für die <b>Zener-Dioden-Messung</b> nötig ist. Nur im Zener-Bereich verwenden.</div></div>
+<div class="rule"><span class="ico">▶️</span><div><b>Test / Power</b>: kurz drücken schaltet ein bzw. startet eine Messung. Zum <b>Ausschalten</b> die Taste auf einem Bildschirm <b>außerhalb</b> einer laufenden Messung lange gedrückt halten.</div></div>
+<div class="rule"><span class="ico">🔀</span><div><b>Mode / Modus-Schalter</b>: wechselt zwischen den Betriebsarten, vor allem zwischen normalem <b>Bauteiltest</b> und <b>IR-Decoding</b> (Fernbedienung auslesen).</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>High-Voltage</b>: legt die höhere Spannung an, die für die <b>Zener-Dioden-Messung</b> nötig ist. Nur im Zener-Bereich verwenden.</div></div>
 </div>
 
 <h2>So testest du ein Bauteil (Standard-Ablauf)</h2>
@@ -516,19 +626,19 @@ li.warn{color:#F5C4B3}
 <h2>Das Herzstück: CV und CC</h2>
 <p>Ein Labornetzteil arbeitet in einem von zwei Zuständen. Eine LED zeigt an, in welchem es gerade ist.</p>
 <div class="grid2">
-<div class="card"><h3>CV — Konstantspannung (Normalfall)</h3><p>Das Netzteil hält die eingestellte Spannung konstant. Der Strom ergibt sich aus dem, was die Schaltung gerade braucht. Solange der Verbrauch unter deinem Strom-Limit bleibt, läufst du in CV.</p></div>
-<div class="card"><h3>CC — Konstantstrom (Schutzfall)</h3><p>Will die Schaltung <b>mehr</b> Strom ziehen als erlaubt (z. B. Kurzschluss oder Fehler), springt das Netzteil auf CC: Es <b>begrenzt den Strom</b> auf dein Limit und <b>senkt dafür die Spannung</b> ab. Deine Schaltung wird dadurch nicht überlastet.</p></div>
+<div class="card"><h3>CV: Konstantspannung (Normalfall)</h3><p>Das Netzteil hält die eingestellte Spannung konstant. Der Strom ergibt sich aus dem, was die Schaltung gerade braucht. Solange der Verbrauch unter deinem Strom-Limit bleibt, läufst du in CV.</p></div>
+<div class="card"><h3>CC: Konstantstrom (Schutzfall)</h3><p>Will die Schaltung <b>mehr</b> Strom ziehen als erlaubt (z. B. Kurzschluss oder Fehler), springt das Netzteil auf CC: Es <b>begrenzt den Strom</b> auf dein Limit und <b>senkt dafür die Spannung</b> ab. Deine Schaltung wird dadurch nicht überlastet.</p></div>
 </div>
 <p class="note">Merke: In CV bestimmt die Schaltung den Strom, in CC bestimmt das Netzteil den Strom. Schlägt es unerwartet auf CC um, stimmt meist etwas in der Schaltung nicht.</p>
 
 <h2>Bedienelemente & Buchsen</h2>
 <div class="card">
-<div class="rule"><span class="ico">🔵</span><div><b>Voltage (V)</b> — stellt die Ausgangsspannung ein. Oft grob + fein (zwei Knöpfe oder Tasten).</div></div>
-<div class="rule"><span class="ico">🟠</span><div><b>Current (A)</b> — stellt das Stromlimit ein, ab dem auf CC umgeschaltet wird.</div></div>
-<div class="rule"><span class="ico">⏻</span><div><b>Output On/Off</b> — schaltet die Buchsen scharf. Solange Output aus ist, liegt nichts an den Klemmen an. <b>Immer zuerst einstellen, dann einschalten.</b></div></div>
-<div class="rule"><span class="ico">🔴</span><div><b>Rote Buchse (+)</b> — Pluspol des Ausgangs.</div></div>
-<div class="rule"><span class="ico">⚫</span><div><b>Schwarze Buchse (−)</b> — Minuspol des Ausgangs.</div></div>
-<div class="rule"><span class="ico">🟢</span><div><b>Grüne Buchse (GND / Erde)</b> — das ist die <b>Schutzerde</b> (Gehäuse/Netz), <b>nicht</b> der Minuspol! Plus und Minus "schweben" frei. Nur wenn du es brauchst, kannst du Minus mit GND verbinden.</div></div>
+<div class="rule"><span class="ico">🔵</span><div><b>Voltage (V)</b>: stellt die Ausgangsspannung ein. Oft grob + fein (zwei Knöpfe oder Tasten).</div></div>
+<div class="rule"><span class="ico">🟠</span><div><b>Current (A)</b>: stellt das Stromlimit ein, ab dem auf CC umgeschaltet wird.</div></div>
+<div class="rule"><span class="ico">⏻</span><div><b>Output On/Off</b>: schaltet die Buchsen scharf. Solange Output aus ist, liegt nichts an den Klemmen an. <b>Immer zuerst einstellen, dann einschalten.</b></div></div>
+<div class="rule"><span class="ico">🔴</span><div><b>Rote Buchse (+)</b>: Pluspol des Ausgangs.</div></div>
+<div class="rule"><span class="ico">⚫</span><div><b>Schwarze Buchse (−)</b>: Minuspol des Ausgangs.</div></div>
+<div class="rule"><span class="ico">🟢</span><div><b>Grüne Buchse (GND / Erde)</b>: das ist die <b>Schutzerde</b> (Gehäuse/Netz), <b>nicht</b> der Minuspol! Plus und Minus "schweben" frei. Nur wenn du es brauchst, kannst du Minus mit GND verbinden.</div></div>
 </div>
 
 <h2>Standard-Vorgang: Strombegrenzung vorab einstellen</h2>
@@ -937,14 +1047,20 @@ li.warn{color:#F5C4B3}
 
 <script>
 /* ---------- TABS ---------- */
-const TABS=[{k:"grundlagen",l:"Grundlagen"},{k:"komponenten",l:"Komponenten"},{k:"displays",l:"Displays"},{k:"motoren",l:"Motoren"},{k:"mcu",l:"Mikrocontroller"},{k:"regeln",l:"Regeln & Praxis"},{k:"sicherheit",l:"Sicherheit"},{k:"steckbrett",l:"Steckbrett"},{k:"messgeraet",l:"Messgerät"},{k:"lcrp1",l:"LCR-P1"},{k:"netzteil",l:"Labornetzteil"},{k:"rechner",l:"Rechner"}];
+const TABS=[{k:"grundlagen",l:"Grundlagen",i:"⚡"},{k:"komponenten",l:"Komponenten",i:"🧩"},{k:"displays",l:"Displays",i:"🖥️"},{k:"motoren",l:"Motoren",i:"⚙️"},{k:"mcu",l:"Mikrocontroller",i:"🤖"},{k:"steckbrett",l:"Steckbrett",i:"🔌"},{k:"regeln",l:"Regeln & Praxis",i:"📋"},{k:"sicherheit",l:"Sicherheit",i:"⚠️"},{k:"messgeraet",l:"Messgerät",i:"📟"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},{k:"rechner",l:"Rechner",i:"🧮"}];
 const tabsDiv=document.getElementById("tabs");
-TABS.forEach((t,i)=>{const b=document.createElement("button");b.textContent=t.l;b.className=i===0?"active":"";b.onclick=()=>{
+function showTab(k){
 TABS.forEach(x=>document.getElementById("t-"+x.k).classList.add("hidden"));
-document.getElementById("t-"+t.k).classList.remove("hidden");
-tabsDiv.querySelectorAll("button").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+const sec=document.getElementById("t-"+k);
+if(sec)sec.classList.remove("hidden");
+tabsDiv.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.k===k));
+try{localStorage.setItem("etab",k)}catch(e){}
 window.scrollTo(0,0);
-};tabsDiv.appendChild(b)});
+}
+TABS.forEach(t=>{const b=document.createElement("button");b.innerHTML=`<span class="ti">${t.i}</span>${t.l}`;b.dataset.k=t.k;b.onclick=()=>showTab(t.k);tabsDiv.appendChild(b)});
+let startTab=TABS[0].k;
+try{const saved=localStorage.getItem("etab");if(saved&&TABS.some(t=>t.k===saved))startTab=saved}catch(e){}
+showTab(startTab);
 
 /* ---------- KOMPONENTEN ---------- */
 const C=[
@@ -957,7 +1073,7 @@ const C=[
 {n:"Diode (z. B. 1N4007)",cat:"halbleiter",catL:"Halbleiter",fn:"Lässt Strom nur in EINE Richtung durch (Einbahnstraße).",app:"Verpolungsschutz, Gleichrichtung, Freilaufdiode an Spulen/Relais.",det:{kenn:"Sperrspannung (V) und Durchlassstrom (A). 1N4007 = 1000 V / 1 A.",kompat:"GEPOLT! Ring markiert die Kathode (Minus-/Ausgangsseite).",achtung:"Im Durchlass fallen ~0,7 V ab. Sperrspannung des Bauteils nicht überschreiten.",tags:["GEPOLT","Ring = Kathode","~0,7 V Verlust"]}},
 {n:"Schottky-Diode",cat:"halbleiter",catL:"Halbleiter",fn:"Diode mit geringem Spannungsabfall (~0,3 V) und schnell.",app:"Verpolungsschutz, Schaltregler, dort wo wenig Verlust zählt.",det:{kenn:"Niedrige Durchlassspannung, hohe Schaltgeschwindigkeit.",kompat:"GEPOLT, Ring = Kathode, wie normale Diode.",achtung:"Höherer Sperrstrom als Standarddiode, niedrigere Sperrspannung.",tags:["GEPOLT","wenig Verlust","schnell"]}},
 {n:"Zener-Diode",cat:"halbleiter",catL:"Halbleiter",fn:"Begrenzt Spannung auf festen Wert (lässt rückwärts ab Schwelle durch).",app:"Spannungsbegrenzung, Referenzspannung, einfacher Überspannungsschutz.",det:{kenn:"Zener-Spannung (z. B. 5,1 V) und Leistung.",kompat:"GEPOLT, wird in Sperrrichtung betrieben (umgekehrt zur normalen Diode).",achtung:"Braucht meist Vorwiderstand. Nicht für große Ströme/Leistung.",tags:["GEPOLT","feste Spannung"]}},
-{n:"LED",cat:"halbleiter",catL:"Halbleiter",fn:"Leuchtdiode: wandelt Strom in Licht.",app:"Statusanzeige, Beleuchtung, Optokoppler-Eingang.",det:{kenn:"Durchlassspannung je Farbe (rot ~2 V, blau/weiß ~3,2 V), Strom 10–20 mA.",kompat:"GEPOLT! Langes Beinchen = Plus (Anode), abgeflachte Seite = Minus.",achtung:"NIE ohne Vorwiderstand betreiben, sonst sofort durchgebrannt.",tags:["GEPOLT","Vorwiderstand Pflicht","langes Bein = +"]}},
+{n:"LED",cat:"halbleiter",catL:"Halbleiter",fn:"Leuchtdiode: wandelt Strom in Licht.",app:"Statusanzeige, Beleuchtung, Optokoppler-Eingang.",det:{kenn:"Durchlassspannung je Farbe (rot ~2 V, blau/weiß ~3,2 V), Strom 10 bis 20 mA.",kompat:"GEPOLT! Langes Beinchen = Plus (Anode), abgeflachte Seite = Minus.",achtung:"NIE ohne Vorwiderstand betreiben, sonst sofort durchgebrannt.",tags:["GEPOLT","Vorwiderstand Pflicht","langes Bein = +"]}},
 {n:"Bipolar-Transistor (NPN/PNP)",cat:"halbleiter",catL:"Halbleiter",fn:"Kleiner Steuerstrom schaltet/verstärkt großen Strom.",app:"Schalter für Relais/LED, Signalverstärkung. NPN sehr verbreitet (z. B. BC547, 2N2222).",det:{kenn:"3 Pins: Basis (Steuer), Kollektor, Emitter. Strom-Verstärkung hFE.",kompat:"Basis braucht Vorwiderstand. NPN schaltet gegen Masse, PNP gegen Plus.",achtung:"Pinbelegung je Typ unterschiedlich → Datenblatt. Max. Strom/Spannung beachten.",tags:["3 Pins","Basis-Vorwiderstand","NPN/PNP"]}},
 {n:"MOSFET",cat:"halbleiter",catL:"Halbleiter",fn:"Spannungsgesteuerter Schalter, verlustarm bei hohen Strömen.",app:"Motoren, LED-Streifen, Power-Schalter per Mikrocontroller-Pin.",det:{kenn:"3 Pins: Gate (Steuer), Drain, Source. N-Kanal am häufigsten.",kompat:"Für 3,3/5 V-Steuerung 'Logic-Level'-Typ wählen, sonst schaltet er nicht voll durch.",achtung:"ESD-empfindlich (Gate). Gate-Widerstand + Pull-down empfohlen. Logic-Level beachten.",tags:["Logic-Level wählen","ESD-empfindlich","3 Pins"]}},
 {n:"Optokoppler",cat:"halbleiter",catL:"Halbleiter",fn:"Überträgt Signal per Licht, trennt zwei Stromkreise galvanisch (elektrisch).",app:"Sichere Trennung Mikrocontroller ↔ Netzspannung, Störschutz.",det:{kenn:"LED-Eingang + Foto-Transistor-Ausgang in einem Gehäuse.",kompat:"Eingang wie LED behandeln (Vorwiderstand), Ausgang wie Transistor.",achtung:"Beide Seiten haben getrennte Masse - das ist der Sinn der Trennung.",tags:["galvanische Trennung","LED-Eingang"]}},
@@ -973,6 +1089,69 @@ const C=[
 {n:"Sicherung",cat:"schutz",catL:"Schutz",fn:"Unterbricht den Stromkreis bei zu hohem Strom (schmilzt durch).",app:"Schutz vor Überstrom/Kurzschluss, Brandschutz.",det:{kenn:"Nennstrom (A) und Charakteristik (flink/träge). Auch rückstellbar (PTC/Polyfuse).",kompat:"In die Plus-Leitung, vor die zu schützende Schaltung.",achtung:"Nennstrom knapp über Normalbetrieb wählen. Nie überbrücken.",tags:["flink/träge","in Plus-Leitung"]}},
 {n:"Sensor-Modul (allgemein)",cat:"modul",catL:"Modul",fn:"Fertige Platine, die eine Größe misst (Temp, Licht, Abstand, Bewegung).",app:"Eingangsdaten für Projekte: DHT22 (Temp/Feuchte), HC-SR04 (Abstand), PIR (Bewegung).",det:{kenn:"Schnittstelle: analog (Spannung), digital (an/aus), I²C oder SPI (Bus).",kompat:"Betriebsspannung prüfen (3,3 V vs 5 V) und Logikpegel zum Mikrocontroller.",achtung:"Bei 5 V-Sensor an 3,3 V-Controller (ESP32) Pegel anpassen.",tags:["3,3 V / 5 V prüfen","I²C / SPI / analog"]}},
 {n:"Li-Ion / LiPo Akku",cat:"power",catL:"Stromquelle",fn:"Wiederaufladbarer Energiespeicher, hohe Energiedichte.",app:"Mobile Projekte, Wearables, alles ohne Steckdose.",det:{kenn:"Eine Zelle: 3,7 V nominal, 4,2 V voll, ~3,0 V leer. Kapazität in mAh.",kompat:"Laden NUR mit passendem Laderegler (z. B. TP4056 für 1 Zelle).",achtung:"Tiefentladung & Überladung gefährlich. Schutzschaltung (BMS) verwenden. Nicht beschädigen.",tags:["BMS/Schutz!","3,0-4,2 V","Spezial-Lader"]}},
+/* ---- Boards ---- */
+{n:"ESP32 DevKit (WROOM-32)",cat:"board",catL:"Board",fn:"Das klassische ESP32-Board: WLAN + Bluetooth, 2 Kerne.",app:"Standard für alles Vernetzte: smarte Sensoren, Heimautomatisierung.",det:{kenn:"240 MHz Dual-Core, WLAN 2,4 GHz, Bluetooth, ~30 nutzbare Pins.",kompat:"3,3-V-Logik! Versorgung über USB oder 5-V-Pin (Regler an Bord).",achtung:"Pins vertragen keine 5 V. Beim Flashen manchmal BOOT-Taste halten. Braucht kräftige USB-Quelle.",tags:["3,3 V Pins","WLAN+BT","Standard"]}},
+{n:"ESP32-S3 Board",cat:"board",catL:"Board",fn:"Stärkere ESP32-Variante mit mehr Speicher und KI-Beschleunigung.",app:"Anspruchsvolle Projekte: Displays, Kamera, Sprach-/Bilderkennung.",det:{kenn:"Dual-Core LX7, oft mit PSRAM, natives USB (kann Tastatur/Maus simulieren).",kompat:"3,3-V-Logik. Viele Varianten (N8R2, N16R8 = Flash/PSRAM-Größe).",achtung:"Beim Kauf auf Flash/PSRAM-Angabe achten, die Unterschiede sind groß.",tags:["3,3 V Pins","PSRAM","natives USB"]}},
+{n:"ESP32-C3 Super Mini",cat:"board",catL:"Board",fn:"Winziges, sehr günstiges ESP32-Board mit WLAN und Bluetooth.",app:"Kleine smarte Geräte, wo wenig Platz und Leistung reicht.",det:{kenn:"1 RISC-V-Kern, 160 MHz, daumennagelgroß, USB-C.",kompat:"3,3-V-Logik, weniger Pins (~11 nutzbar). Arduino/ESPHome-tauglich.",achtung:"Antenne winzig: WLAN-Reichweite schwächer als beim großen DevKit.",tags:["3,3 V Pins","winzig","sehr günstig"]}},
+{n:"ESP8266 D1 Mini",cat:"board",catL:"Board",fn:"Kompaktes, billiges WLAN-Board, der Vorgänger des ESP32.",app:"Einfache WLAN-Schalter und -Sensoren, Tasmota/ESPHome-Klassiker.",det:{kenn:"1 Kern 80/160 MHz, nur WLAN (kein Bluetooth), 1 Analogeingang.",kompat:"3,3-V-Logik. Shield-System mit stapelbaren Aufsteckplatinen.",achtung:"Wenige freie Pins, einige haben Sonderfunktionen beim Start.",tags:["3,3 V Pins","nur WLAN","billig"]}},
+{n:"Arduino Nano",cat:"board",catL:"Board",fn:"Der kompakte Klassiker mit 5-V-Logik, steckbrettfreundlich.",app:"Lernen, einfache Steuerungen, Projekte mit 5-V-Sensorik.",det:{kenn:"ATmega328P, 16 MHz, 5-V-Logik, sehr robust.",kompat:"Verträgt 5-V-Signale direkt, ideal mit klassischem Zubehör.",achtung:"Kein Funk, wenig Speicher. Clones nutzen oft CH340-USB-Chip (Treiber nötig).",tags:["5 V Logik","robust","Einsteiger"]}},
+{n:"Raspberry Pi Pico 2 (W)",cat:"board",catL:"Board",fn:"Günstiges, sparsames Board, stark mit Python. W-Version mit Funk.",app:"Stromsparende Projekte, Python-Einstieg, präzise Signalsteuerung (PIO).",det:{kenn:"RP2350: 2 Kerne (ARM oder RISC-V), 520 KB RAM, 4 MB Flash.",kompat:"3,3-V-Logik. Programmieren als USB-Laufwerk (Datei rüberziehen).",achtung:"Nur 3 Analogeingänge. W-Variante nötig, wenn WLAN gebraucht wird.",tags:["3,3 V Pins","MicroPython","sparsam"]}},
+{n:"ATtiny85 / Digispark",cat:"board",catL:"Board",fn:"Winziger Chip für Mini-Aufgaben mit wenigen Pins.",app:"Kleinstprojekte: ein Sensor, eine LED-Spielerei, USB-Gadget.",det:{kenn:"8-Bit, 8 KB Flash, 5-6 nutzbare Pins.",kompat:"Arduino-IDE-tauglich mit Zusatz-Board-Paket.",achtung:"Sehr begrenzt in Speicher und Pins, bewusst nur für Kleines.",tags:["winzig","wenige Pins"]}},
+/* ---- Spannungs- & Lademodule ---- */
+{n:"Buck-Modul MP1584 (einstellbar)",cat:"modul",catL:"Modul",fn:"Kleiner Abwärtswandler: macht aus höherer eine niedrigere Spannung, per Poti einstellbar.",app:"12 V auf 5 V oder 3,3 V für Logik, effizienter Ersatz für Linearregler.",det:{kenn:"Eingang bis ~28 V, bis 3 A (mit Kühlung, dauerhaft eher 1,5-2 A).",kompat:"Ausgang VOR dem Anschließen mit Multimeter einstellen.",achtung:"Poti ist empfindlich, nach dem Einstellen mit Lack sichern. Bei Volllast Kühlung.",tags:["vorher einstellen","Buck","bis ~3 A"]}},
+{n:"Buck-Modul mit Festspannung (3,3/5/9/12 V)",cat:"modul",catL:"Modul",fn:"Abwärtswandler mit fester Ausgangsspannung, nichts einzustellen.",app:"Feste Versorgung, wenn kein Verstellen gewünscht ist (z. B. immer 5 V).",det:{kenn:"Typisch Eingang 5-30 V, Ausgang fest, bis ~3 A.",kompat:"Ausführung passend zur Zielspannung kaufen (steht auf dem Modul).",achtung:"Nichts falsch einzustellen, dafür unflexibel. Polung IN/OUT beachten.",tags:["fest","narrensicher","Buck"]}},
+{n:"Buck-Modul LM2596",cat:"modul",catL:"Modul",fn:"Größerer, robuster einstellbarer Abwärtswandler mit Poti.",app:"Kräftigere Lasten, Versorgung aus 12/24-V-Quellen.",det:{kenn:"Eingang bis ~35 V, nominell 3 A (real mit Kühlkörper).",kompat:"Groß genug für Schraubklemmen-Adapter, leicht zu handhaben.",achtung:"Viele Billig-Clones erreichen die 3 A nicht dauerhaft. Warm = Kühlkörper.",tags:["robust","Poti","Buck"]}},
+{n:"Boost-Modul MT3608",cat:"modul",catL:"Modul",fn:"Aufwärtswandler: macht aus niedriger eine höhere Spannung (z. B. Akku auf 5 V).",app:"Akku-Projekte: 3,7 V auf 5 V oder 9/12 V hochsetzen.",det:{kenn:"Eingang 2-24 V, Ausgang bis 28 V, max. 2 A (eher weniger bei großem Hub).",kompat:"Per Poti einstellen. Ausgang immer HÖHER als Eingang.",achtung:"Kann keine Spannung senken. Je größer der Hub, desto weniger Strom verfügbar.",tags:["Boost","vorher einstellen","Akku auf 5 V"]}},
+{n:"Laderegler TP4056 (USB-C)",cat:"modul",catL:"Modul",fn:"Lädt eine einzelne Li-Ion/LiPo-Zelle sicher über USB.",app:"Alles Akku-Betriebene: 18650 oder LiPo laden, oft mit Schutzschaltung an Bord.",det:{kenn:"Lädt auf 4,2 V, Standard-Ladestrom 1 A (über Widerstand änderbar).",kompat:"Version MIT Schutz (6 Beinchen-Chip zusätzlich) nehmen: schützt vor Tiefentladung.",achtung:"Nur für 1 Zelle! Laden und gleichzeitig Last dran ist nur eingeschränkt sauber.",tags:["1 Zelle","mit Schutz kaufen","4,2 V"]}},
+{n:"Pegelwandler (Level Shifter)",cat:"modul",catL:"Modul",fn:"Übersetzt Signale zwischen 3,3-V- und 5-V-Welt in beide Richtungen.",app:"5-V-Sensor an ESP32/Pico, I²C zwischen verschiedenen Pegeln.",det:{kenn:"Meist 4 oder 8 Kanäle, bidirektional (beide Richtungen).",kompat:"Beide Seiten brauchen ihre Versorgung (LV = 3,3 V, HV = 5 V) plus Masse.",achtung:"Für schnelle Signale (z. B. WS2812) besser spezielle Treiberchips.",tags:["3,3↔5 V","bidirektional"]}},
+{n:"Relais-Modul",cat:"modul",catL:"Modul",fn:"Fertiges Relais mit Treiber, Freilaufdiode und oft Optokoppler an Bord.",app:"Lasten sicher per Mikrocontroller schalten, ohne eigene Treiberschaltung.",det:{kenn:"1-8 Kanäle, Spule 5 V oder 3,3 V, Kontakte oft 10 A / 250 V.",kompat:"Auf Auslöselogik achten: viele Module schalten bei LOW (active low).",achtung:"Für Netzspannung nur mit Erfahrung und sauberem Aufbau (Abstände, Gehäuse).",tags:["Treiber dabei","active low häufig"]}},
+{n:"RTC-Modul DS3231",cat:"modul",catL:"Modul",fn:"Präzise Echtzeituhr mit eigener Pufferbatterie: kennt Uhrzeit auch stromlos.",app:"Uhren, Datenlogger mit Zeitstempel, zeitgesteuerte Abläufe.",det:{kenn:"Sehr ganggenau (temperaturkompensiert), I²C-Anschluss.",kompat:"Knopfzelle als Puffer. Bibliotheken für alle gängigen Boards.",achtung:"Bei Modulen mit Lade-Schaltung: normale CR2032 NICHT laden (Lade-Widerstand entfernen oder LIR2032 nutzen).",tags:["I²C","Knopfzellen-Puffer"]}},
+{n:"microSD-Karten-Modul",cat:"modul",catL:"Modul",fn:"Kartenleser zum Speichern von Daten auf microSD.",app:"Datenlogger, Einstellungen speichern, Audio-Dateien abspielen.",det:{kenn:"SPI-Anschluss. Karten bis 32 GB (FAT32) sind am unkompliziertesten.",kompat:"3,3-V- und 5-V-Varianten (mit Regler/Pegelwandler an Bord) beachten.",achtung:"Karte sauber formatieren. Beim Schreiben Spannungsspitzen: Stützkondensator hilft.",tags:["SPI","FAT32"]}},
+{n:"WS2812-LEDs (Neopixel)",cat:"modul",catL:"Modul",fn:"RGB-LEDs mit eingebautem Chip: jede LED einzeln farbsteuerbar über eine Datenleitung.",app:"Lichteffekte, Statusanzeigen, Matrizen, Ambilight.",det:{kenn:"5 V, eine Datenleitung, ~60 mA pro LED bei voll Weiß.",kompat:"Datenleitung mit ~330-Ω-Widerstand, dicker Elko an der Versorgung.",achtung:"Strom summiert sich schnell: 60 LEDs voll Weiß sind schon 3,6 A! Netzteil danach wählen.",tags:["5 V","Strom summiert sich!","1 Datenleitung"]}},
+/* ---- Display-Module ---- */
+{n:"OLED-Modul 0,96\" (SSD1306)",cat:"modul",catL:"Modul",fn:"Kleines, gestochen scharfes Display, jedes Pixel leuchtet selbst.",app:"Messwerte, Status, kleine Menüs. Details im Tab Displays.",det:{kenn:"128x64 Pixel, einfarbig, I²C (nur 2 Datenleitungen).",kompat:"3,3 und 5 V tauglich. Bibliotheken: U8g2, Adafruit SSD1306.",achtung:"Bei Dauerbetrieb kann sich ein Standbild leicht einbrennen.",tags:["I²C","stromsparend"]}},
+{n:"E-Paper-Modul (Waveshare/WeAct)",cat:"modul",catL:"Modul",fn:"Elektronisches Papier: hält das Bild ohne Strom, top bei Tageslicht.",app:"Wetterstation, Kalender, Etiketten, Batterie-/Solarprojekte.",det:{kenn:"Gängig 1,54\" bis 7,5\", schwarz/weiß, teils mit Rot/Gelb. SPI.",kompat:"Waveshare und WeAct liefern Bibliotheken und Beispielcode.",achtung:"Bildwechsel dauert Sekunden und flackert dabei, das ist normal. Nicht zu oft hintereinander aktualisieren.",tags:["SPI","0 Strom im Halten","langsam"]}},
+{n:"TFT/IPS-Modul (ST7789)",cat:"modul",catL:"Modul",fn:"Farbdisplay mit kräftigen Farben und guten Blickwinkeln.",app:"Bunte Anzeigen, Diagramme, kleine Oberflächen.",det:{kenn:"Gängig 1,3\" bis 2,4\", z. B. 240x240 Pixel, SPI.",kompat:"3,3-V-Logik. Bibliothek TFT_eSPI (ESP32) sehr verbreitet.",achtung:"Hintergrundbeleuchtung zieht dauerhaft Strom, nichts für Batterie-Dauerbetrieb.",tags:["SPI","IPS = gute Winkel"]}},
+{n:"LCD1602 mit I²C-Adapter",cat:"modul",catL:"Modul",fn:"Der Klassiker für 2 Zeilen Text, mit I²C-Rucksack kinderleicht.",app:"Einfache Textausgaben, Retro-Projekte, Statusanzeigen.",det:{kenn:"16 Zeichen x 2 Zeilen, I²C über den aufgelöteten Adapter.",kompat:"Meist 5 V. Kontrast über Poti auf dem Adapter einstellen.",achtung:"Zeigt nichts an? Fast immer nur der Kontrast falsch eingestellt.",tags:["I²C","5 V","nur Text"]}},
+{n:"7-Segment-Modul TM1637",cat:"modul",catL:"Modul",fn:"Vier große Ziffern wie bei einer Digitaluhr, mit 2 Leitungen steuerbar.",app:"Uhren, Zähler, Temperaturanzeige auf Distanz.",det:{kenn:"4 Ziffern mit Doppelpunkt, Helligkeit regelbar.",kompat:"3,3 und 5 V tauglich, einfache Bibliotheken.",achtung:"Nur Zahlen und wenige Buchstaben darstellbar.",tags:["2 Leitungen","gut ablesbar"]}},
+/* ---- Sensorik ---- */
+{n:"LDR (Fotowiderstand)",cat:"sensor",catL:"Sensorik",fn:"Widerstand, der bei Licht kleiner wird: das einfachste Lichtmessgerät.",app:"Dämmerungsschalter, Helligkeit messen, Lichtschranken-Basteleien.",det:{kenn:"Typ 5528 & Co.: hell wenige kΩ, dunkel bis MΩ.",kompat:"Mit Festwiderstand als Spannungsteiler an einen Analogeingang.",achtung:"Träge und ungenau, für präzise Messung Fotodiode/BH1750 nehmen.",tags:["analog","Spannungsteiler","träge"]}},
+{n:"NTC-Thermistor",cat:"sensor",catL:"Sensorik",fn:"Widerstand, der bei Wärme kleiner wird: einfacher Temperaturfühler.",app:"Temperatur grob messen, Übertemperatur erkennen (auch in 3D-Drucker-Hotends!).",det:{kenn:"Gängig 10 kΩ bei 25 °C (NTC 3950).",kompat:"Als Spannungsteiler an Analogeingang, Umrechnung per Formel/Tabelle.",achtung:"Kennlinie ist krumm, für genaue Werte Kalibrierung oder DS18B20 nutzen.",tags:["analog","10k Standard"]}},
+{n:"DS18B20 (Temperatur, digital)",cat:"sensor",catL:"Sensorik",fn:"Digitaler Temperaturfühler, auch als wasserdichte Kabelversion.",app:"Genaue Temperatur in Luft oder Flüssigkeit, mehrere Fühler an einer Leitung.",det:{kenn:"±0,5 °C, Bereich -55 bis +125 °C, 1-Wire-Bus.",kompat:"Braucht 4,7-kΩ-Pull-up auf der Datenleitung. Viele Fühler parallel möglich.",achtung:"Billig-Fakes verbreitet, die bei Hitze falsch messen. Bei Markenhändler kaufen.",tags:["1-Wire","Pull-up 4,7k","wasserdicht erhältlich"]}},
+{n:"DHT22 / AM2302 (Temp+Feuchte)",cat:"sensor",catL:"Sensorik",fn:"Misst Temperatur und Luftfeuchtigkeit in einem Gehäuse.",app:"Wetterstation, Raumklima, Gewächshaus.",det:{kenn:"±0,5 °C, ±2-5 % Feuchte, eigenes 1-Draht-Protokoll.",kompat:"Pull-up auf Datenleitung, fertige Bibliotheken überall.",achtung:"Langsam (alle 2 s ein Wert). Moderner Ersatz: SHT31/BME280.",tags:["träge","Pull-up"]}},
+{n:"BME280 (Temp+Feuchte+Druck)",cat:"sensor",catL:"Sensorik",fn:"Präziser 3-in-1-Umweltsensor inklusive Luftdruck.",app:"Wetterstation deluxe, Höhenmessung, Raumklima.",det:{kenn:"I²C (oder SPI), sehr genau und schnell.",kompat:"3,3-V-Module überall erhältlich, top Bibliotheken.",achtung:"Verwechslungsgefahr: BMP280 (ohne Feuchte!) sieht fast gleich aus.",tags:["I²C","BMP≠BME!"]}},
+{n:"HC-SR04 (Ultraschall-Abstand)",cat:"sensor",catL:"Sensorik",fn:"Misst Entfernung per Schall-Echo, wie eine Fledermaus.",app:"Abstandswarner, Füllstand, Roboter-Hinderniserkennung.",det:{kenn:"~2-400 cm, Trigger/Echo-Pins, 5 V.",kompat:"An 3,3-V-Boards das Echo-Signal über Spannungsteiler führen.",achtung:"Weiche/schräge Flächen schlucken das Echo, Messung wird unzuverlässig.",tags:["5 V","Echo-Pegel wandeln"]}},
+{n:"PIR-Bewegungsmelder (HC-SR501)",cat:"sensor",catL:"Sensorik",fn:"Erkennt Bewegung von Wärmequellen (Menschen, Tiere).",app:"Licht bei Bewegung, Alarmanlagen, Anwesenheitserkennung.",det:{kenn:"Reichweite/Haltezeit per Potis einstellbar, Ausgang digital HIGH.",kompat:"Läuft ab 5 V (intern 3,3 V), Ausgang direkt lesbar.",achtung:"Braucht nach dem Einschalten ~1 Minute Aufwärmzeit. Zugluft/Wärmequellen lösen Fehlalarme aus.",tags:["digital","Aufwärmzeit"]}},
+{n:"MPU6050 (Beschleunigung+Gyro)",cat:"sensor",catL:"Sensorik",fn:"Spürt Neigung, Bewegung und Drehung, der Lagesensor.",app:"Selbstbalancierendes, Gestensteuerung, Vibration messen, Drohnen.",det:{kenn:"6 Achsen (3x Beschleunigung, 3x Drehrate), I²C.",kompat:"Fertige Bibliotheken mit Lageberechnung vorhanden.",achtung:"Rohwerte driften, für stabile Winkel Filter/Bibliothek nutzen.",tags:["I²C","6 Achsen"]}},
+{n:"Hall-Sensor / Reed-Kontakt",cat:"sensor",catL:"Sensorik",fn:"Erkennt Magnete: Hall elektronisch, Reed als Magnetschalter.",app:"Tür/Fenster-Kontakt, Drehzahl messen, Endlagen-Erkennung.",det:{kenn:"Reed = mechanischer Kontakt (potentialfrei), Hall = Chip (z. B. A3144).",kompat:"Reed wie einen Taster behandeln, Hall braucht Versorgung + Pull-up.",achtung:"Reed-Röhrchen sind aus Glas: nicht knicken, vorsichtig biegen.",tags:["Magnet","Reed = Glas!"]}},
+{n:"Drehencoder KY-040",cat:"sensor",catL:"Sensorik",fn:"Endlos drehbarer Knopf, der Drehschritte und Richtung meldet, mit Drucktaster.",app:"Menüs bedienen, Werte einstellen, Lautstärkeknopf.",det:{kenn:"2 versetzte Signale (A/B) verraten die Richtung, plus Taster.",kompat:"3 Eingänge am Board, Bibliotheken erledigen die Auswertung.",achtung:"Prellt stark: ohne Entprellung (Software/Kondensator) springen Werte.",tags:["Prellen!","endlos drehbar"]}},
+{n:"Joystick-Modul (2 Achsen)",cat:"sensor",catL:"Sensorik",fn:"Daumen-Joystick wie am Gamepad: zwei Potis plus Druck-Taster.",app:"Roboter fernsteuern, Kamera schwenken, Menünavigation.",det:{kenn:"X/Y analog (2 Analogeingänge nötig), Taster digital.",kompat:"An 3,3-V-Boards Werte-Skala beachten (Mittelstellung ≈ halber Messbereich).",achtung:"Mittelstellung streut, im Code eine Totzone einbauen.",tags:["2x analog","Totzone einplanen"]}},
+{n:"Buzzer (aktiv/passiv)",cat:"sensor",catL:"Sensorik",fn:"Kleiner Tongeber für Pieptöne und einfache Melodien.",app:"Alarm, Tastenklick, Melodie, Statuston.",det:{kenn:"Aktiv: piept bei Gleichspannung von selbst. Passiv: braucht Tonsignal (PWM), kann Melodien.",kompat:"Größere Typen über Transistor schalten, kleine oft direkt am Pin ok.",achtung:"Aktiv und passiv sehen gleich aus! Test: an Batterie piept nur der aktive.",tags:["aktiv≠passiv","PWM für Melodie"]}},
+/* ---- Stromquellen & Batteriearten ---- */
+{n:"18650-Zelle + Halter",cat:"power",catL:"Stromquelle",fn:"Die Standard-Rundzelle unter den Li-Ion-Akkus, wechselbar im Halter.",app:"Powerbanks, Lampen, mobile Projekte mit ordentlich Kapazität.",det:{kenn:"3,7 V nominal, real 1800-3500 mAh. Halter für 1-4 Zellen.",kompat:"Laden über TP4056, geschützte und ungeschützte Zellen beachten (Länge!).",achtung:"Fantasie-Angaben wie 9800 mAh sind Fake. Markenzellen (Samsung, LG, Sanyo) kaufen.",tags:["3,7 V","Fake-mAh meiden","TP4056"]}},
+{n:"LiFePO4-Zelle",cat:"power",catL:"Stromquelle",fn:"Die sichere, langlebige Schwester des Li-Ion mit 3,2 V.",app:"Solar-/Dauerprojekte, wo Sicherheit und viele Ladezyklen zählen.",det:{kenn:"3,2 V nominal, 3,65 V voll. Tausende Ladezyklen, sehr temperaturstabil.",kompat:"Braucht EIGENE Laderegler (3,65 V), normale Li-Ion-Lader überladen sie nicht korrekt.",achtung:"Nicht mit TP4056-Standard laden (falsche Ladeschlussspannung).",tags:["3,2 V","sehr sicher","eigener Lader"]}},
+{n:"Knopfzelle CR2032",cat:"power",catL:"Stromquelle",fn:"Flache 3-V-Zelle für Winzig-Verbraucher und Pufferung.",app:"RTC-Puffer, Fernbedienungen, kleine Sensoren.",det:{kenn:"3 V, ~220 mAh, NICHT wiederaufladbar.",kompat:"Wiederaufladbares Pendant heißt LIR2032 (3,6 V).",achtung:"Für Kinder extrem gefährlich beim Verschlucken, sicher lagern!",tags:["3 V","nicht ladbar","Kindergefahr"]}},
+{n:"AA/AAA & 9-V-Block",cat:"power",catL:"Stromquelle",fn:"Die klassischen Haushaltsbatterien und ihre Akku-Versionen.",app:"Einfache Geräte, Fernbedienungen, Erstversorgung von Projekten.",det:{kenn:"Alkaline-Zelle 1,5 V, NiMH-Akku 1,2 V. 9-V-Block hat wenig Kapazität.",kompat:"3x AA (4,5 V) oder 4x NiMH (4,8 V) sind brauchbare 5-V-nahe Quellen.",achtung:"Leere Alkaline laufen gern aus: aus Geräten nehmen bei Nichtgebrauch.",tags:["1,5/1,2 V","auslaufgefahr"]}},
+{n:"Solarzelle (klein)",cat:"power",catL:"Stromquelle",fn:"Wandelt Licht in Strom, für autarke Kleinprojekte.",app:"Garten-Sensor, E-Paper-Anzeige, Akku nachladen.",det:{kenn:"Gängig 5 V oder 6 V mit 1-3 W. Leistung stark lichtabhängig.",kompat:"Mit Laderegler + Akku als Puffer kombinieren, nie direkt an die Schaltung.",achtung:"Im Innenraum kommt fast nichts an. Angaben gelten für pralle Sonne.",tags:["+Laderegler","+Akku-Puffer"]}},
+/* ---- Kabel & Verbinder ---- */
+{n:"Jumper-Kabel (Dupont)",cat:"kabel",catL:"Kabel/Verbinder",fn:"Die Standard-Steckkabel fürs Steckbrett in drei Sorten.",app:"Prototypen verdrahten: Board zu Breadboard zu Modul.",det:{kenn:"Stecker-Stecker, Stecker-Buchse, Buchse-Buchse, meist 10-30 cm.",kompat:"Passen auf 2,54-mm-Stiftleisten (der Standard überall).",achtung:"Billige haben dünne Adern und Wackelkontakte, erste Fehlerquelle beim Debuggen.",tags:["3 Sorten","2,54 mm"]}},
+{n:"Schaltlitze / Silikonlitze",cat:"kabel",catL:"Kabel/Verbinder",fn:"Flexible Einzeladern zum Selbstkonfektionieren, Silikon bleibt auch bei Hitze weich.",app:"Feste Verdrahtung, Lötverbindungen, bewegte Kabel.",det:{kenn:"Größe in AWG: 22 AWG fürs Steckbrett-Umfeld, 18 AWG für mehr Strom.",kompat:"Kleinere AWG-Zahl = dickerer Draht = mehr Strom erlaubt.",achtung:"Zu dünner Draht für viel Strom wird heiß (siehe Tab Sicherheit).",tags:["AWG-Logik","Silikon = hitzefest"]}},
+{n:"Stiftleisten (Pin Header)",cat:"kabel",catL:"Kabel/Verbinder",fn:"Die Steckkontakte im 2,54-mm-Raster, männlich und weiblich, zum Auflöten.",app:"Boards steckbar machen, Module verbinden, eigene Adapter.",det:{kenn:"Abbrechbar auf beliebige Länge, gerade oder gewinkelt.",kompat:"Passt zu Dupont-Kabeln, Breadboards und Lochraster.",achtung:"Beim Einlöten zuerst nur einen Pin heften und Ausrichtung prüfen.",tags:["2,54 mm","abbrechbar"]}},
+{n:"JST-Steckverbinder",cat:"kabel",catL:"Kabel/Verbinder",fn:"Kleine verpolungssichere Steckerfamilie, Standard bei Akkus und Modulen.",app:"Akku-Anschlüsse (LiPo!), lösbare Verbindungen zwischen Baugruppen.",det:{kenn:"Familien: PH (2,0 mm, LiPo-Standard), XH (2,5 mm), SH (1,0 mm, winzig).",kompat:"Familie und Rastermaß müssen exakt passen, die Namen ähneln sich.",achtung:"Bei fertigen Akku-Kabeln Polung prüfen: Rot ist NICHT immer Plus!",tags:["PH/XH/SH","Polung prüfen!"]}},
+{n:"Schraubklemmen",cat:"kabel",catL:"Kabel/Verbinder",fn:"Kabel festschrauben statt löten, jederzeit wieder lösbar.",app:"Netzteil-Anschlüsse, dickere Drähte, wechselnde Verkabelung.",det:{kenn:"Rastermaß 5,08 oder 3,5 mm für Platinen, plus Reihen-/Hebelklemmen (Wago-Stil).",kompat:"Für Litze Aderendhülsen verwenden, dann sitzt es sauber.",achtung:"Regelmäßig nachziehen bei Vibration, lose Klemme = Wärmestelle.",tags:["lösbar","Aderendhülsen"]}},
+{n:"Krokodilklemmen",cat:"kabel",catL:"Kabel/Verbinder",fn:"Schnelle Klemmverbindung ohne Löten, ideal zum Messen und Testen.",app:"Provisorien, Messgerät anklemmen, Bauteil kurz kontaktieren.",det:{kenn:"Auch als Kroko-zu-Dupont-Mischkabel sehr praktisch.",kompat:"Passt an fast alles, was Metall zeigt.",achtung:"Rutschen leicht ab und schließen dann Nachbarn kurz: Blick drauf behalten.",tags:["Provisorium","Abrutsch-Gefahr"]}},
+{n:"USB-Kabel & USB-Breakouts",cat:"kabel",catL:"Kabel/Verbinder",fn:"Strom- und Datenzufuhr; Breakout-Platinen führen USB-Pins zum Anzapfen heraus.",app:"Boards flashen, 5 V abgreifen, USB-C-Buchse in eigene Projekte einbauen.",det:{kenn:"USB liefert 5 V; USB-C-Breakouts brauchen 2 Widerstände (5,1 kΩ), um 5 V vom Netzteil zu bekommen.",kompat:"Für Datenverbindung echte Datenkabel nutzen, es gibt reine Ladekabel!",achtung:"Board wird nicht erkannt? Sehr oft ist nur das Kabel ein Ladekabel ohne Datenadern.",tags:["Ladekabel-Falle","5,1k bei USB-C"]}},
+/* ---- Verbrauchsmaterial ---- */
+{n:"Lötzinn",cat:"verbrauch",catL:"Verbrauch",fn:"Das Metall, das die Verbindung herstellt, mit Flussmittel-Seele im Kern.",app:"Jede Lötarbeit. Details im Löt-Referenz-Tool.",det:{kenn:"Bleihaltig (Sn60Pb40) fließt leichter, bleifrei (SAC305) ist Standard neu. 0,8 mm Allround.",kompat:"Temperatur je Sorte: bleihaltig ~330 °C, bleifrei ~360 °C.",achtung:"Nach dem Löten Hände waschen (bleihaltig), gut lüften.",tags:["0,8 mm Allround","Hände waschen"]}},
+{n:"Flussmittel (Flux)",cat:"verbrauch",catL:"Verbrauch",fn:"Entfernt Oxid und lässt Lot sauber fließen, das Geheimnis schöner Lötstellen.",app:"SMD-Löten, Entlöten, nachbessern alter Lötstellen. Als Stift, Spritze oder Paste.",det:{kenn:"No-Clean-Flux (z. B. Stift 951) muss nicht entfernt werden.",kompat:"Ergänzt die Flussmittel-Seele im Lötzinn, ersetzt sie bei Rework.",achtung:"Aggressive Sorten (Lötwasser/Lötfett für Klempner) NIE auf Elektronik!",tags:["No-Clean","kein Lötfett!"]}},
+{n:"Entlötlitze",cat:"verbrauch",catL:"Verbrauch",fn:"Kupfergeflecht, das flüssiges Lot aufsaugt wie ein Docht.",app:"Bauteile auslöten, Lötbrücken entfernen, Pads säubern.",det:{kenn:"2,0-2,5 mm Breite ist der Allrounder.",kompat:"Mit etwas Flux auf der Litze saugt sie deutlich besser.",achtung:"Wird beim Arbeiten heiß bis zur Fingerspitze: nachfassen, nicht festhalten.",tags:["+Flux = besser","wird heiß"]}},
+{n:"Kapton-Band (Polyimid)",cat:"verbrauch",catL:"Verbrauch",fn:"Hauchdünnes, hitzefestes Klebeband, das Löttemperaturen übersteht.",app:"Bauteile beim Löten/Heißluft abdecken, Isolieren, 3D-Druck-Betten.",det:{kenn:"Hält ~260 °C aus, elektrisch isolierend, rückstandsfrei ablösbar.",kompat:"Der Standard beim Schutz von Nachbar-Bauteilen bei Heißluft-Arbeiten.",achtung:"Billige Fälschungen schrumpeln bei Hitze, auf Polyimid achten.",tags:["~260 °C","isolierend"]}},
+{n:"Schrumpfschlauch",cat:"verbrauch",catL:"Verbrauch",fn:"Schlauch, der sich bei Wärme festzieht und Lötstellen isoliert.",app:"Kabelverbindungen isolieren, Zugentlastung, Kabel bündeln.",det:{kenn:"Schrumpfrate meist 2:1. Sortimentsbox mit mehreren Durchmessern lohnt.",kompat:"Mit Heißluft oder vorsichtig Feuerzeug (Abstand!) schrumpfen.",achtung:"VOR dem Verlöten aufs Kabel schieben, der Klassiker unter den vergessenen Schritten.",tags:["vorher aufschieben!","2:1"]}},
+{n:"Heißkleber",cat:"verbrauch",catL:"Verbrauch",fn:"Schnelle mechanische Fixierung und Zugentlastung, elektrisch isolierend.",app:"Kabel fixieren, Module im Gehäuse befestigen, Provisorien.",det:{kenn:"Niedertemperatur-Sticks schonen empfindliche Teile.",kompat:"Haftet auf den meisten Kunststoffen, lässt sich mit Isopropanol wieder lösen.",achtung:"Keine tragende Verbindung und nichts für heiße Stellen (erweicht wieder).",tags:["Zugentlastung","nicht hitzefest"]}},
+{n:"Isopropanol (IPA)",cat:"verbrauch",catL:"Verbrauch",fn:"Der Reinigungsalkohol der Elektronik: löst Flussmittelreste rückstandsfrei.",app:"Platinen nach dem Löten reinigen, Kontakte säubern, Kleberreste entfernen.",det:{kenn:"99,9 % nehmen, verdunstet rückstandsfrei. Mit Wattestäbchen oder ESD-Pinsel.",kompat:"Sicher für fast alle Platinen und Gehäuse-Kunststoffe.",achtung:"Leicht entzündlich, weg von Funken und offener Flamme. Gut lüften.",tags:["99,9 %","entzündlich"]}},
+/* ---- Mechanik-Ergänzung ---- */
+{n:"Mini-Breadboard (170 Kontakte)",cat:"mech",catL:"Elektromech.",fn:"Winziges Steckbrett für kleine Schaltungen, oft zusammensteckbar.",app:"Ein Sensor plus Board schnell testen, dauerhaft im Projektgehäuse.",det:{kenn:"170 Kontakte, meist ohne Versorgungsschienen, klebbare Rückseite.",kompat:"Gleiche 5er-Gruppen-Logik wie das große Steckbrett (Tab Steckbrett).",achtung:"Keine Randschienen: Plus/Minus selbst als Spalten definieren.",tags:["ohne Schienen","klebbar"]}},
+{n:"Lochrasterplatine",cat:"mech",catL:"Elektromech.",fn:"Platine mit Lötpunkten im 2,54-mm-Raster für den dauerhaften Aufbau.",app:"Getestete Steckbrett-Schaltungen fest verlöten. Details im Tab Steckbrett.",det:{kenn:"Punktraster (einzelne Pads) oder Streifenraster (verbundene Reihen).",kompat:"Passt zu allen bedrahteten Bauteilen und Stiftleisten.",achtung:"Beim Streifenraster Trennstellen nicht vergessen (aufbohren).",tags:["2,54 mm","Punkt/Streifen"]}},
 ];
 const CDESC={
 "Widerstand":"Eine Engstelle für den Strom. Je größer der Wert, desto weniger Strom kommt bei gleicher Spannung durch. Das einfachste und häufigste Bauteil überhaupt.",
@@ -1000,18 +1179,74 @@ const CDESC={
 "Sicherung":"Eine Sollbruchstelle: schmilzt bei zu viel Strom durch und unterbricht den Kreis, bevor etwas durchbrennt oder Feuer fängt.",
 "Sensor-Modul (allgemein)":"Eine fertige kleine Platine, die etwas misst, etwa Temperatur, Licht, Abstand oder Bewegung, und das Ergebnis an den Mikrocontroller meldet.",
 "Li-Ion / LiPo Akku":"Ein wiederaufladbarer Energiespeicher mit viel Energie auf wenig Raum. Kräftig, aber empfindlich: braucht eine Schutzschaltung und sorgsamen Umgang.",
+"ESP32 DevKit (WROOM-32)":"Das Arbeitspferd unter den Funk-Boards: ein kompletter kleiner Computer mit WLAN und Bluetooth für ein paar Euro.",
+"ESP32-S3 Board":"Der aufgebohrte ESP32: mehr Tempo und Speicher, und er kann sich am PC sogar als Tastatur oder Maus ausgeben.",
+"ESP32-C3 Super Mini":"WLAN und Bluetooth im Daumennagel-Format. Wenn wenig Platz ist und ein Kern reicht.",
+"ESP8266 D1 Mini":"Der günstige Veteran fürs WLAN: kann weniger als der ESP32, reicht aber für viele smarte Kleinigkeiten völlig.",
+"Arduino Nano":"Der zuverlässige Klassiker in klein: keine Funkerei, dafür gutmütige 5-V-Logik und riesige Anleitungs-Auswahl.",
+"Raspberry Pi Pico 2 (W)":"Das Sparsamkeits-Board: günstig, stromsparend und mit Python besonders einsteigerfreundlich.",
+"ATtiny85 / Digispark":"Ein Mini-Gehirn für Mini-Aufgaben: wenn ein ganzes Board zu viel wäre.",
+"Buck-Modul MP1584 (einstellbar)":"Ein effizienter Spannungs-Herunterdreher im Briefmarkenformat: aus 12 V werden einstellbar z. B. 5 V, fast ohne Wärme.",
+"Buck-Modul mit Festspannung (3,3/5/9/12 V)":"Wie das einstellbare Buck-Modul, nur mit fest eingebauter Zielspannung: einstecken, fertig, nichts zu verstellen.",
+"Buck-Modul LM2596":"Der größere, gutmütige Spannungs-Herunterdreher mit Poti, gut für etwas kräftigere Verbraucher.",
+"Boost-Modul MT3608":"Der Spannungs-Hochdreher: zaubert aus einer Akkuzelle die 5 V, die viele Schaltungen brauchen.",
+"Laderegler TP4056 (USB-C)":"Die kleine Ladestation für eine Li-Ion-Zelle: regelt das Laden sicher und passt an jedes USB-Netzteil.",
+"Pegelwandler (Level Shifter)":"Ein Dolmetscher zwischen der 3,3-V- und der 5-V-Welt, damit sich Boards und Module verstehen, ohne sich zu beschädigen.",
+"Relais-Modul":"Ein Relais mit fertig aufgebauter Ansteuerung drumherum: einfach ans Board stecken, ohne eigene Treiberschaltung.",
+"RTC-Modul DS3231":"Eine Armbanduhr für dein Projekt: kennt Uhrzeit und Datum auch dann noch, wenn der Strom weg war.",
+"microSD-Karten-Modul":"Ein Speicherkarten-Leser fürs Projekt: schreibt Messwerte und Dateien auf microSD.",
+"WS2812-LEDs (Neopixel)":"Farb-LEDs mit eigenem Köpfchen: jede einzelne lässt sich über eine einzige Datenleitung in jede Farbe schalten.",
+"OLED-Modul 0,96\" (SSD1306)":"Ein gestochen scharfes Mini-Display, das mit zwei Datenleitungen auskommt und kaum Strom braucht.",
+"E-Paper-Modul (Waveshare/WeAct)":"Elektronisches Papier: zeigt sein Bild auch komplett ohne Strom weiter an, wie ein bedrucktes Blatt.",
+"TFT/IPS-Modul (ST7789)":"Das bunte Fenster fürs Projekt: kräftige Farben und aus jedem Winkel gut ablesbar.",
+"LCD1602 mit I²C-Adapter":"Zwei Zeilen Text im Retro-Look, dank aufgelötetem Adapter mit nur vier Drähten angeschlossen.",
+"7-Segment-Modul TM1637":"Vier Leuchtziffern wie am Radiowecker: perfekt, wenn nur eine Zahl gut lesbar sein soll.",
+"LDR (Fotowiderstand)":"Ein Widerstand mit Lichtgefühl: je heller, desto besser leitet er. Der einfachste Weg, Helligkeit zu messen.",
+"NTC-Thermistor":"Ein Widerstand mit Wärmegefühl: je heißer, desto besser leitet er. Der einfachste Temperaturfühler.",
+"DS18B20 (Temperatur, digital)":"Ein Thermometer als Bauteil, das fertige Gradzahlen liefert, auf Wunsch wasserdicht am Kabel.",
+"DHT22 / AM2302 (Temp+Feuchte)":"Ein Raumklima-Wächter: misst Temperatur und Luftfeuchte in einem Gehäuse.",
+"BME280 (Temp+Feuchte+Druck)":"Die kleine Wetterstation auf einem Chip: Temperatur, Feuchte und Luftdruck in präzise.",
+"HC-SR04 (Ultraschall-Abstand)":"Misst Abstand wie eine Fledermaus: Schall aussenden, aufs Echo warten, Entfernung errechnen.",
+"PIR-Bewegungsmelder (HC-SR501)":"Das Auge für Bewegung: erkennt die Körperwärme vorbeilaufender Menschen und Tiere.",
+"MPU6050 (Beschleunigung+Gyro)":"Der Gleichgewichtssinn fürs Projekt: spürt Neigung, Bewegung und Drehung.",
+"Hall-Sensor / Reed-Kontakt":"Magnet-Spürnasen: melden, wenn ein Magnet in die Nähe kommt, etwa an Tür oder Fenster.",
+"Drehencoder KY-040":"Ein Drehknopf ohne Anschlag, der jedem Klick eine Richtung zuordnet, ideal für Menüs.",
+"Joystick-Modul (2 Achsen)":"Ein Daumen-Steuerknüppel wie am Gamepad: zwei Richtungen plus Draufdrücken.",
+"Buzzer (aktiv/passiv)":"Der Piepser: der aktive piept von allein, der passive ist ein Mini-Lautsprecher für Melodien.",
+"18650-Zelle + Halter":"Der Standard-Akku in Batterieform: kräftig, wechselbar und in Haltern für jedes Projekt nutzbar.",
+"LiFePO4-Zelle":"Der Sicherheits-Akku: brandträge und mit tausenden Ladezyklen, dafür mit eigener Ladelogik.",
+"Knopfzelle CR2032":"Die flache Uhrenbatterie: hält jahrelang winzige Verbraucher wie eine Echtzeituhr am Leben.",
+"AA/AAA & 9-V-Block":"Die Batterien aus der Küchenschublade: unkompliziert, überall erhältlich und für einfache Projekte völlig ok.",
+"Solarzelle (klein)":"Ein Mini-Kraftwerk aus Licht: lädt zusammen mit Akku und Laderegler autarke Außenprojekte.",
+"Jumper-Kabel (Dupont)":"Die bunten Steckkabel, mit denen auf dem Steckbrett alles mit allem verbunden wird.",
+"Schaltlitze / Silikonlitze":"Draht von der Rolle zum Selbst-Zuschneiden, die Silikon-Version bleibt sogar neben dem Lötkolben weich.",
+"Stiftleisten (Pin Header)":"Die Steckerleisten zum Auflöten, die Platinen und Module überhaupt erst steckbar machen.",
+"JST-Steckverbinder":"Kleine Stecker mit Verwechslungsschutz: einmal richtig verkabelt, passt es immer nur richtig herum.",
+"Schraubklemmen":"Kabel anschrauben statt anlöten: hält fest und lässt sich jederzeit wieder lösen.",
+"Krokodilklemmen":"Die Schnellverbinder zum Anklipsen: perfekt für Messungen und schnelle Tests ohne Löten.",
+"USB-Kabel & USB-Breakouts":"USB als Stromquelle und Datenweg, Breakout-Platinen machen die USB-Anschlüsse fürs Basteln zugänglich.",
+"Lötzinn":"Das Verbindungsmetall: schmilzt am Kolben und erstarrt zur leitfähigen, festen Verbindung.",
+"Flussmittel (Flux)":"Das Putzmittel fürs Löten: macht Oberflächen sauber, damit das Lot glatt fließt statt zu klumpen.",
+"Entlötlitze":"Ein Kupfer-Schwamm für flüssiges Lot: aufsetzen, erhitzen, und die Litze saugt das Zinn weg.",
+"Kapton-Band (Polyimid)":"Das Hitzeschutz-Klebeband: übersteht Löttemperaturen und schützt Nachbar-Bauteile bei Heißluft.",
+"Schrumpfschlauch":"Ein Isolier-Schlauch, der sich mit Wärme festzieht und blanke Lötstellen sauber ummantelt.",
+"Heißkleber":"Der schnelle Festhalter: fixiert Kabel und Module im Gehäuse und entlastet Lötstellen von Zug.",
+"Isopropanol (IPA)":"Der Reinigungsalkohol: löst Flussmittelreste und Schmutz und verdunstet ohne Spuren.",
+"Mini-Breadboard (170 Kontakte)":"Das Steckbrett im Westentaschenformat: für eine Handvoll Bauteile, oft direkt zum Aufkleben.",
+"Lochrasterplatine":"Die Zwischenstufe zur echten Platine: getestete Schaltungen dauerhaft festlöten, Loch für Loch.",
 };
-const ccats=[{k:"all",l:"Alle"},{k:"passiv",l:"Passiv"},{k:"halbleiter",l:"Halbleiter"},{k:"ic",l:"IC / Aktiv"},{k:"mech",l:"Elektromech."},{k:"power",l:"Stromquelle"},{k:"schutz",l:"Schutz"},{k:"modul",l:"Modul"}];
+const ccats=[{k:"all",l:"Alle"},{k:"passiv",l:"Passiv"},{k:"halbleiter",l:"Halbleiter"},{k:"ic",l:"IC / Aktiv"},{k:"board",l:"Boards"},{k:"modul",l:"Modul"},{k:"sensor",l:"Sensorik"},{k:"mech",l:"Elektromech."},{k:"power",l:"Stromquelle"},{k:"schutz",l:"Schutz"},{k:"kabel",l:"Kabel/Verbinder"},{k:"verbrauch",l:"Verbrauch"}];
 let activeCat="all",sortCol="n",sortDir=1,expanded=null;
 const ccols=[{k:"n",l:"Bauteil"},{k:"catL",l:"Kategorie"},{k:"fn",l:"Was es macht"},{k:"app",l:"Wo eingesetzt"}];
 function renderC(){
 const q=document.getElementById("q").value.toLowerCase();
-let data=C.filter(f=>(activeCat==="all"||f.cat===activeCat)&&(!q||f.n.toLowerCase().includes(q)||f.fn.toLowerCase().includes(q)||f.app.toLowerCase().includes(q)));
+let data=C.filter(f=>(activeCat==="all"||f.cat===activeCat)&&(!q||f.n.toLowerCase().includes(q)||f.fn.toLowerCase().includes(q)||f.app.toLowerCase().includes(q)||(CDESC[f.n]||"").toLowerCase().includes(q)||(f.det&&(f.det.kenn+f.det.kompat+f.det.achtung).toLowerCase().includes(q))));
 data.sort((a,b)=>{let av=a[sortCol],bv=b[sortCol];return sortDir*String(av).localeCompare(String(bv))});
-document.getElementById("count").textContent=data.length+" Bauteile";
+document.getElementById("count").textContent=data.length+(data.length===1?" Bauteil":" Bauteile")+(q||activeCat!=="all"?" gefunden":"");
 let th="<tr>"+ccols.map(c=>`<th onclick="doSortC('${c.k}')">${c.l}<span class="ar">${sortCol===c.k?(sortDir===1?"\u25b2":"\u25bc"):""}</span></th>`).join("")+"</tr>";
 document.getElementById("thead").innerHTML=th;
 let tb="";
+if(data.length===0){tb=`<tr><td colspan="${ccols.length}" style="padding:20px;text-align:center;color:#888">Nichts gefunden. Anderen Suchbegriff probieren oder Filter auf „Alle" stellen.</td></tr>`}
 data.forEach(f=>{
 tb+=`<tr class="cat-${f.cat}" style="cursor:pointer" onclick="toggleC('${f.n.replace(/'/g,"\\'")}')">`;
 ccols.forEach(c=>{
@@ -1046,7 +1281,7 @@ const vs=parseFloat(document.getElementById("led-vs").value);
 const vf=parseFloat(document.getElementById("led-vf").value);
 const i=parseFloat(document.getElementById("led-i").value)/1000;
 const out=document.getElementById("led-out");const note=document.getElementById("led-note");
-if(isNaN(vs)||isNaN(vf)||isNaN(i)||i<=0){out.textContent="—";return}
+if(isNaN(vs)||isNaN(vf)||isNaN(i)||i<=0){out.textContent="…";return}
 if(vf>=vs){out.textContent="Versorgung muss höher als LED-Spannung sein";note.textContent="";return}
 const r=(vs-vf)/i;
 const pw=(vs-vf)*i;
@@ -1127,7 +1362,7 @@ const vin=parseFloat(document.getElementById("vt-in").value);
 const r1=parseFloat(document.getElementById("vt-r1").value);
 const r2=parseFloat(document.getElementById("vt-r2").value);
 const out=document.getElementById("vt-out");
-if(isNaN(vin)||isNaN(r1)||isNaN(r2)||(r1+r2)<=0){out.textContent="—";return}
+if(isNaN(vin)||isNaN(r1)||isNaN(r2)||(r1+r2)<=0){out.textContent="…";return}
 const vout=vin*r2/(r1+r2);
 out.textContent=`Ausgang ≈ ${vout.toFixed(3)} V`;
 }
