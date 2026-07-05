@@ -187,8 +187,7 @@
    ARTEFAKTE  -  hier neue Eintraege ergaenzen.
    Felder: title, desc, cat, file, date ("YYYY-MM-DD"), tags[]
    Datei noch nicht hochgeladen? file leer lassen -> Karte wird
-   als "nicht verlinkt" markiert (z.B. minare-rechner, wenn du
-   ihn nicht oeffentlich stellen willst).
+   als "nicht verlinkt" markiert.
    ============================================================ */
 const ARTEFAKTE = [
   // ---- Kueche ----
@@ -202,17 +201,14 @@ const ARTEFAKTE = [
   { title:"Dremel 8250 Cheatsheet", desc:"Drehzahlen nach Material, Bits mit Erkennungsmerkmalen und max. Drehzahl je Aufsatz.", cat:"DIY/Handwerk", file:"dremel-8250-cheatsheet.html", date:"2026-06-26", tags:["dremel","drehzahl","bits","rpm","schleifen","fraesen"] },
 
   // ---- Elektronik & Technik ----
-  { title:"Elektronik 101", desc:"Hobby-Referenz zu Grundlagen, Bauteilen und Schaltungen.", cat:"Elektronik & Technik", file:"elektronik-grundlagen.html", date:"2026-03-08", tags:["elektronik","grundlagen","schaltung","ohm"] },
+  { title:"Elektronik 101", desc:"Hobby-Referenz zu Bauteilen, Boards, Displays, Motoren, Messen und Sicherheit inkl. Rechner.", cat:"Elektronik & Technik", file:"elektronik-grundlagen.html", date:"2026-07-04", tags:["elektronik","grundlagen","bauteile","schaltung","ohm","rechner"] },
   { title:"Maker Komponenten Datenbank", desc:"Bauteile, Kennwerte und Auswahlhilfen fuer Maker- und Elektronikprojekte.", cat:"Elektronik & Technik", file:"maker-komponenten.html", date:"2026-03-02", tags:["komponenten","bauteile","maker","sensoren"] },
   { title:"Robotik Referenz", desc:"Aktorik, Sensorik und Steuerung im kompakten Ueberblick.", cat:"Elektronik & Technik", file:"robotik-referenz.html", date:"2026-03-14", tags:["robotik","sensoren","motoren","steuerung"] },
   { title:"Mechanical Engineering Cheat Sheet", desc:"Formeln, Kennwerte und Faustregeln aus dem Maschinenbau.", cat:"Elektronik & Technik", file:"mechanical-engineering-cheatsheet.html", date:"2026-03-20", tags:["maschinenbau","formeln","mechanik","werkstoffe"] },
 
   // ---- 3D-Druck ----
   { title:"3D-Druck Filament & Düsen Vergleich", desc:"Materialvergleich, Drucktemperaturen, Einsatzgebiete und Duesenwahl.", cat:"3D-Druck", file:"3d-filament-vergleich.html", date:"2026-03-09", tags:["pla","petg","asa","bambu","filament","duese"] },
-  { title:"Rentabilitäts-Simulator 3D-Druck", desc:"Stueckkosten, Deckungsbeitrag und Szenarien fuer das 3D-Druck-Geschaeft.", cat:"3D-Druck", file:"rentabilitaets-simulator.html", date:"2026-06-05", tags:["kalkulation","marge","kosten","business"] },
-
-  // ---- Minare ----
-  { title:"Minaré Rechner", desc:"Produktuebersicht mit Massen und Live-Marge plus Szenarienrechner. Enthaelt Kalkulation, nicht oeffentlich stellen.", cat:"Minaré", file:"", date:"2026-06-08", tags:["minaré","kalkulation","marge","jesmonite","guss"] }
+  { title:"Rentabilitäts-Simulator 3D-Druck", desc:"Stueckkosten, Deckungsbeitrag und Szenarien fuer das 3D-Druck-Geschaeft.", cat:"3D-Druck", file:"rentabilitaets-simulator.html", date:"2026-06-05", tags:["kalkulation","marge","kosten","business"] }
 ];
 
 /* Farbe je Kategorie. Reihenfolge hier = Reihenfolge der Sektionen.
@@ -221,8 +217,7 @@ const CAT_COLORS = {
   "Küche":"#ef5b54",
   "DIY/Handwerk":"#f0a830",
   "Elektronik & Technik":"#38c6d9",
-  "3D-Druck":"#4fc77d",
-  "Minaré":"#9d7be0"
+  "3D-Druck":"#4fc77d"
 };
 const DEFAULT_COLOR = "#8b94a3";
 const colorOf = (c)=> CAT_COLORS[c] || DEFAULT_COLOR;
