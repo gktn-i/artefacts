@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homeserver 101 · Referenz</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a1a;background:#fff;padding:1.5rem;line-height:1.55}
+@media(prefers-color-scheme:dark){body{background:#1a1a1a;color:#e0e0e0}}
+h1{font-size:21px;font-weight:600;margin-bottom:.25rem}
+.sub{font-size:12.5px;color:#888;margin-bottom:1rem}
+h2{font-size:16px;font-weight:600;margin:1.6rem 0 .7rem}
+h3{font-size:13.5px;font-weight:600;margin:1rem 0 .4rem;color:#0C447C}
+@media(prefers-color-scheme:dark){h3{color:#7FB4E8}}
+p{font-size:13px;margin-bottom:.5rem}
+ul,ol{font-size:13px;margin:.3rem 0 .6rem 1.1rem}
+li{margin-bottom:.28rem}
+strong,b{font-weight:600}
+code{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:11.5px;background:#f2f2f2;border:1px solid #e4e4e4;border-radius:5px;padding:1px 5px;white-space:nowrap}
+pre{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:11.5px;background:#f7f7f7;border:1px solid #e4e4e4;border-radius:10px;padding:12px 14px;overflow-x:auto;margin:.5rem 0;line-height:1.5}
+pre code{background:none;border:none;padding:0;white-space:pre}
+
+/* tab nav */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.2rem;position:sticky;top:0;background:#fff;padding:.6rem 0;z-index:10;border-bottom:1px solid #eee}
+.tabs button{font-size:12px;padding:6px 12px;cursor:pointer;background:transparent;border:1px solid #ccc;border-radius:8px;color:#666;transition:all .15s;white-space:nowrap}
+.tabs button.active{background:#E6F1FB;color:#0C447C;border-color:#85B7EB;font-weight:500}
+.tabs button:hover{background:#f5f5f5}
+.panel{display:none;animation:fade .2s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:.6rem 0}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
+.card{border:1px solid #e0e0e0;border-radius:10px;padding:12px 14px;background:#fff}
+.card .ct{font-size:13.5px;font-weight:600;margin-bottom:3px}
+.card .cd{font-size:12px;color:#666;margin-bottom:6px}
+.card ul{margin:.2rem 0 0 1rem;font-size:12px}
+.card li{margin-bottom:.2rem}
+
+/* badges */
+.b{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:7px;font-weight:600;letter-spacing:.2px}
+.b-blau{background:#E6F1FB;color:#0C447C}
+.b-rot{background:#FCEBEB;color:#791F1F}
+.b-gruen{background:#E1F5EE;color:#085041}
+.b-gelb{background:#FAEEDA;color:#633806}
+.b-lila{background:#EEEDFE;color:#3C3489}
+.b-grau{background:#efefef;color:#555}
+
+/* difficulty / rating pills */
+.diff{font-size:11px;font-weight:600;padding:2px 8px;border-radius:7px;white-space:nowrap}
+.d1{background:#E1F5EE;color:#085041}
+.d2{background:#FAEEDA;color:#633806}
+.d3{background:#FCEBEB;color:#791F1F}
+
+/* table */
+.tbl-wrap{overflow-x:auto;margin:.5rem 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:640px}
+th{text-align:left;padding:8px 7px;font-weight:500;font-size:11.5px;color:#888;border-bottom:1px solid #ccc;white-space:nowrap}
+td{padding:8px 7px;border-bottom:1px solid #eee;vertical-align:top}
+tr:hover td{background:#f9f9f9}
+
+/* steps */
+.steps{counter-reset:s;margin:.5rem 0}
+.step{position:relative;padding:10px 12px 10px 44px;border:1px solid #e0e0e0;border-radius:10px;margin-bottom:8px;background:#fff;font-size:13px}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:10px;width:22px;height:22px;border-radius:50%;background:#0C447C;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.step b{font-weight:600}
+
+/* callouts */
+.note{border-left:3px solid #85B7EB;background:#F4F9FE;padding:9px 12px;border-radius:0 8px 8px 0;font-size:12.5px;margin:.6rem 0}
+.tip{border-left:3px solid #1D9E75;background:#F0FAF6;padding:9px 12px;border-radius:0 8px 8px 0;font-size:12.5px;margin:.6rem 0}
+.warn{border-left:3px solid #E24B4A;background:#FEF4F4;padding:9px 12px;border-radius:0 8px 8px 0;font-size:12.5px;margin:.6rem 0}
+.note b,.tip b,.warn b{font-weight:600}
+
+/* good vs bad */
+.gb{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:.6rem 0}
+@media(max-width:560px){.gb{grid-template-columns:1fr}.grid,.grid.wide{grid-template-columns:1fr}}
+.gb-col{border:1px solid #e0e0e0;border-radius:10px;padding:12px}
+.gb-col h4{font-size:12.5px;margin-bottom:6px}
+.gb-col.good h4{color:#085041}
+.gb-col.bad h4{color:#791F1F}
+.gb-col ul{margin-left:1rem;font-size:12px}
+
+/* checklists */
+.check{list-style:none;margin-left:0}
+.check li{padding-left:22px;position:relative}
+.check li::before{content:"☐";position:absolute;left:0;color:#0C447C;font-size:13px}
+@media(prefers-color-scheme:dark){.check li::before{color:#7FB4E8}}
+
+/* glossary */
+dl{font-size:12.5px;margin:.4rem 0}
+dt{font-weight:600;margin-top:.55rem}
+dd{margin-left:0;color:#555}
+@media(prefers-color-scheme:dark){dd{color:#aaa}}
+
+/* calculator */
+.calc{border:1px solid #e0e0e0;border-radius:10px;padding:14px;background:#fafafa;max-width:520px;margin:.6rem 0}
+.calc label{display:block;font-size:12px;color:#666;margin:.5rem 0 .2rem}
+.calc input{width:100%;padding:7px 10px;font-size:13px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a}
+.calc .res{margin-top:.8rem;font-size:13px;background:#E6F1FB;color:#0C447C;border-radius:8px;padding:10px 12px}
+.calc .res b{font-size:15px}
+
+.legend{font-size:11.5px;color:#999;margin-top:1.2rem;padding-top:.8rem;border-top:1px solid #eee}
+
+@media(prefers-color-scheme:dark){
+.sub,.card .cd,.legend{color:#999}
+code{background:#2a2a2a;border-color:#3a3a3a}
+pre{background:#242424;border-color:#3a3a3a}
+.tabs{background:#1a1a1a;border-bottom-color:#333}
+.tabs button{border-color:#555;color:#aaa}
+.tabs button:hover{background:#2a2a2a}
+.tabs button.active{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+.card,.step,.gb-col{background:#2a2a2a;border-color:#3a3a3a}
+th{color:#999;border-bottom-color:#444}
+td{border-bottom-color:#333}
+tr:hover td{background:#252525}
+.step::before{background:#185FA5}
+.note{background:#0E2438;border-left-color:#185FA5}
+.tip{background:#0C2620;border-left-color:#1D9E75}
+.warn{background:#2E1414;border-left-color:#E24B4A}
+.legend{border-top-color:#333}
+.b-blau{background:#042C53;color:#B5D4F4}
+.b-rot{background:#501313;color:#F7C1C1}
+.b-gruen{background:#04342C;color:#9FE1CB}
+.b-gelb{background:#412402;color:#FAC775}
+.b-lila{background:#26215C;color:#CECBF6}
+.b-grau{background:#333;color:#bbb}
+.d1{background:#04342C;color:#9FE1CB}
+.d2{background:#412402;color:#FAC775}
+.d3{background:#501313;color:#F7C1C1}
+.calc{background:#242424;border-color:#3a3a3a}
+.calc input{background:#2a2a2a;border-color:#444;color:#e0e0e0}
+.calc .res{background:#042C53;color:#B5D4F4}
+}
+</style>
+</head>
+<body>
+<h1>Homeserver 101</h1>
+<div class="sub">Komplette Referenz für den eigenen Homeserver: Planung, Hardware, OS, Storage, Backup, Netzwerk, Fernzugriff, Sicherheit, Docker, Dienste, Betrieb und Troubleshooting.</div>
+
+<div class="tabs" id="tabs"></div>
+
+<!-- ================= START ================= -->
+<div class="panel active" data-p="start">
+<h2>Was ist ein Homeserver &amp; wofür?</h2>
+<p>Ein Rechner, der 24/7 zuhause läuft und Dienste für dich bereitstellt – statt Cloud-Abos, mit voller Kontrolle über die eigenen Daten.</p>
+
+<div class="grid">
+<div class="card"><div class="ct">🎬 Medien</div><div class="cd">Eigenes Netflix: Filme, Serien, Musik, Hörbücher streamen.</div><ul><li>Jellyfin, Plex, Navidrome</li></ul></div>
+<div class="card"><div class="ct">☁️ Cloud-Ersatz</div><div class="cd">Dateien, Fotos und Kalender selbst hosten.</div><ul><li>Nextcloud, Immich, Syncthing</li></ul></div>
+<div class="card"><div class="ct">🛡️ Netzwerk</div><div class="cd">Werbe- und Tracker-Blocker für alle Geräte, lokales DNS.</div><ul><li>Pi-hole, AdGuard Home</li></ul></div>
+<div class="card"><div class="ct">🏠 Smart Home</div><div class="cd">Zentrale für Automatisierung, lokal statt Hersteller-Cloud.</div><ul><li>Home Assistant</li></ul></div>
+<div class="card"><div class="ct">💾 Backup-Ziel</div><div class="cd">Zentrale Sicherung aller PCs, Handys und Dokumente.</div><ul><li>Restic, Paperless-ngx, PBS</li></ul></div>
+<div class="card"><div class="ct">🧪 Lernen &amp; Basteln</div><div class="cd">Linux, Docker, Netzwerke, Virtualisierung in echt lernen.</div><ul><li>VMs, LXC, Testumgebungen</li></ul></div>
+</div>
+
+<h2>Die 10 Grundregeln</h2>
+<div class="steps">
+<div class="step"><b>Zweck vor Kauf.</b> Erst festlegen, was der Server tun soll – daraus ergibt sich die Hardware, nicht umgekehrt.</div>
+<div class="step"><b>Klein anfangen.</b> Ein Gerät, ein Dienst, dann erweitern. Kein 10-Dienste-Big-Bang am ersten Wochenende.</div>
+<div class="step"><b>RAID ist kein Backup.</b> RAID schützt vor Plattenausfall, nicht vor Löschen, Ransomware, Blitz oder Diebstahl.</div>
+<div class="step"><b>Backup vor Daten.</b> Erst wenn die 3-2-1-Sicherung steht, kommen wichtige Daten auf den Server.</div>
+<div class="step"><b>Nichts direkt ins Internet.</b> Fernzugriff über VPN (Tailscale/WireGuard). Port-Forwarding nur bewusst, gehärtet und minimal.</div>
+<div class="step"><b>Updates sind Pflicht.</b> Ein ungepatchter Server im Netz ist ein offenes Fenster. Feste Update-Routine einplanen.</div>
+<div class="step"><b>Dokumentieren.</b> IPs, Ports, Zugänge, Konfigs notieren (Passwortmanager + Git für Compose-Dateien). Zukunfts-Ich dankt.</div>
+<div class="step"><b>Restore testen.</b> Ein Backup, das nie wiederhergestellt wurde, ist Hoffnung – kein Backup.</div>
+<div class="step"><b>Eine Änderung nach der anderen.</b> Vor Änderungen Snapshot/Backup, danach prüfen. Nie zwei Baustellen gleichzeitig.</div>
+<div class="step"><b>Strom zählt.</b> Das Gerät läuft 24/7 – Idle-Verbrauch ist wichtiger als Peak-Leistung. Faustregel: 1 W ≈ 3 €/Jahr.</div>
+</div>
+
+<h2>Standard-Vorgehen: von 0 zum laufenden Server</h2>
+<div class="steps">
+<div class="step"><b>Zweck &amp; Budget definieren.</b> Welche Dienste? Wie viele Nutzer? Wie viel Speicher in 3 Jahren?</div>
+<div class="step"><b>Hardware wählen.</b> Siehe Tab „Hardware“ – für die meisten: gebrauchter Mini-PC oder N100-Box.</div>
+<div class="step"><b>OS installieren.</b> Siehe Tab „Betriebssystem“ – Empfehlung: Proxmox (flexibel) oder Debian + Docker (schlank).</div>
+<div class="step"><b>Grund-Setup.</b> Updates, feste IP (DHCP-Reservierung), SSH-Key, eigener Admin-User, Zeitzone/NTP.</div>
+<div class="step"><b>Storage einrichten.</b> Platten, Dateisystem, ggf. Pool/RAID, SMART-Monitoring aktivieren.</div>
+<div class="step"><b>Docker + erster Dienst.</b> Etwas Unkritisches zum Üben, z. B. Uptime Kuma oder ein Dashboard.</div>
+<div class="step"><b>Backup einrichten &amp; Restore testen.</b> Erst jetzt wichtige Daten auf den Server geben.</div>
+<div class="step"><b>Monitoring &amp; Benachrichtigungen.</b> Uptime Kuma, SMART-Alerts, Backup-Reports (z. B. via ntfy).</div>
+<div class="step"><b>Weitere Dienste, einer nach dem anderen.</b> Jeweils: Compose anlegen → testen → dokumentieren → ins Backup aufnehmen.</div>
+<div class="step"><b>Fernzugriff zuletzt.</b> Tailscale/WireGuard einrichten – erst wenn Basis, Backup und Sicherheit stehen.</div>
+</div>
+
+<div class="tip"><b>Faustregel Reihenfolge:</b> Stabilität → Sicherheit → Backup → Komfort. Neue Features immer erst, wenn die Ebene darunter steht.</div>
+</div>
+
+<!-- ================= HARDWARE ================= -->
+<div class="panel" data-p="hardware">
+<h2>Hardware-Optionen im Vergleich</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Option</th><th>Preis (ca.)</th><th>Idle-Verbrauch</th><th>Leistung</th><th>Erweiterbar</th><th>Geeignet für</th></tr>
+<tr><td><b>Raspberry Pi 5</b></td><td>80–130 €</td><td>3–6 W</td><td>niedrig</td><td>kaum (USB/NVMe-HAT)</td><td>Pi-hole, Home Assistant, kleine Dienste</td></tr>
+<tr><td><b>Mini-PC (Intel N100/N150)</b></td><td>150–250 €</td><td>6–12 W</td><td>mittel</td><td>begrenzt (1× NVMe, 1× SATA)</td><td>Allround-Einstieg, Docker, Jellyfin</td></tr>
+<tr><td><b>Gebrauchter Office-Mini (Dell/Lenovo/HP „1L“)</b></td><td>80–200 €</td><td>8–15 W</td><td>mittel–hoch</td><td>begrenzt</td><td>Preis-Leistungs-Tipp, Proxmox-Einstieg</td></tr>
+<tr><td><b>Fertig-NAS (Synology/QNAP/Ugreen)</b></td><td>300–800 € + Platten</td><td>15–40 W</td><td>mittel</td><td>Platten ja, sonst wenig</td><td>„Soll einfach laufen“, viel Storage</td></tr>
+<tr><td><b>Eigenbau (ITX/ATX)</b></td><td>400–1000 €</td><td>20–60 W</td><td>frei wählbar</td><td>voll (Platten, PCIe, ECC)</td><td>Viel Storage + Leistung, ZFS, Zukunftssicherheit</td></tr>
+</table>
+</div>
+<div class="tip"><b>Einsteiger-Empfehlung:</b> gebrauchter 1-Liter-Mini-PC oder N100-Box. Günstig, sparsam, leise – und stark genug für 10+ Container. Aufrüsten kann man später immer noch.</div>
+
+<h2>Worauf beim Kauf achten</h2>
+<div class="grid">
+<div class="card"><div class="ct">CPU</div><div class="cd">Effizienz schlägt Kerne.</div><ul><li>Intel mit <b>QuickSync</b> (iGPU) = Hardware-Transcoding für Jellyfin/Plex/Immich</li><li>N100 reicht für die meisten Setups</li><li>Viele VMs/Nutzer → i5/Ryzen ab 6 Kernen</li></ul></div>
+<div class="card"><div class="ct">RAM</div><div class="cd">Der häufigste Engpass.</div><ul><li>Nur Docker: <b>8 GB</b> ok, <b>16 GB</b> komfortabel</li><li>Proxmox/VMs: <b>16–32 GB</b></li><li>ZFS mag RAM (Faustregel: ab 8 GB + 1 GB je TB ist komfortabel)</li><li><b>ECC</b>: nice-to-have für ZFS/Datengrab, kein Muss im Hobby</li></ul></div>
+<div class="card"><div class="ct">Storage-Anschlüsse</div><div class="cd">Bestimmt die Ausbaufähigkeit.</div><ul><li>NVMe für OS + Container (schnell)</li><li>SATA-Ports / HBA für Daten-HDDs</li><li>USB-Platten nur für Backups, <b>nicht</b> für Pools/RAID</li></ul></div>
+<div class="card"><div class="ct">Netzwerk</div><div class="cd">Kabel ist Pflicht.</div><ul><li><b>1 GbE reicht</b> für fast alles (≈ 110 MB/s)</li><li>2,5 GbE = sinnvolles Future-Proofing</li><li><b>Kein WLAN</b> für den Server – immer LAN</li></ul></div>
+<div class="card"><div class="ct">Idle-Verbrauch</div><div class="cd">Die wichtigste Zahl bei 24/7.</div><ul><li>1 W Dauerlast ≈ 8,76 kWh/Jahr ≈ 3 €/Jahr (bei 0,35 €/kWh)</li><li>Alter Gaming-PC (60 W idle) ≈ 180 €/Jahr</li><li>HDDs: je ca. 3–8 W, Spindown abwägen</li></ul></div>
+<div class="card"><div class="ct">USV (unterbrechungsfreie Stromversorgung)</div><div class="cd">Schutz vor Stromausfall.</div><ul><li>Sauberes Herunterfahren schützt Dateisystem &amp; Datenbanken</li><li>Besonders wichtig bei ZFS-Pools und Nextcloud/Immich (DB!)</li><li>Anbindung per USB + <b>NUT</b> oder apcupsd → Auto-Shutdown</li></ul></div>
+</div>
+
+<h3>Standort &amp; Aufstellung</h3>
+<ul>
+<li>Kühl, trocken, staubarm, mit Luftzirkulation – nicht im geschlossenen Schrank ohne Lüftung</li>
+<li>In Router-/Switch-Nähe (LAN-Kabel), Steckdosenleiste mit Überspannungsschutz</li>
+<li>Lautstärke bedenken: HDDs klackern – Schlafzimmer ist ein schlechter Ort</li>
+<li>BIOS: „Restore on AC Power Loss“ auf <b>Power On</b> → Server startet nach Stromausfall selbst</li>
+</ul>
+
+<h2>Stromkosten-Rechner</h2>
+<div class="calc">
+<label for="c-watt">Durchschnittlicher Verbrauch (Watt)</label>
+<input id="c-watt" type="number" value="15" min="0" step="1">
+<label for="c-preis">Strompreis (€/kWh)</label>
+<input id="c-preis" type="number" value="0.35" min="0" step="0.01">
+<div class="res" id="c-res"></div>
+</div>
+</div>
+
+<!-- ================= OS ================= -->
+<div class="panel" data-p="os">
+<h2>Betriebssystem wählen</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>System</th><th>Typ</th><th>Schwierigkeit</th><th>Kosten</th><th>Stark bei</th><th>Bedenken</th></tr>
+<tr><td><b>Proxmox VE</b></td><td>Hypervisor (VMs + LXC)</td><td><span class="diff d2">mittel</span></td><td>kostenlos</td><td>Flexibilität, Snapshots, Backups, alles auf einem Gerät</td><td>Storage/NAS-Funktionen nur per VM/Umweg</td></tr>
+<tr><td><b>Debian/Ubuntu Server + Docker</b></td><td>Pures Linux</td><td><span class="diff d2">mittel</span></td><td>kostenlos</td><td>Schlank, maximale Kontrolle, wenig Overhead</td><td>Alles selbst bauen (Backup, Monitoring)</td></tr>
+<tr><td><b>TrueNAS Scale</b></td><td>NAS-OS (ZFS-first)</td><td><span class="diff d2">mittel</span></td><td>kostenlos</td><td>Storage, ZFS, Freigaben, Snapshots</td><td>Apps/Container weniger flexibel als pures Docker</td></tr>
+<tr><td><b>Unraid</b></td><td>NAS-OS</td><td><span class="diff d1">leicht</span></td><td>Lizenz (ab ~50 $)</td><td>Gemischte Plattengrößen, einfache UI, große Community</td><td>Kostenpflichtig, Parity statt klassischem RAID</td></tr>
+<tr><td><b>OpenMediaVault</b></td><td>NAS-OS (Debian-Basis)</td><td><span class="diff d1">leicht</span></td><td>kostenlos</td><td>Leichtes NAS auf schwacher Hardware (auch Pi)</td><td>Weniger poliert, Docker via Plugin</td></tr>
+<tr><td><b>Synology DSM / QNAP QTS</b></td><td>Hersteller-OS</td><td><span class="diff d1">leicht</span></td><td>im NAS enthalten</td><td>„Einschalten und läuft“, gute Apps</td><td>Gebunden an Hersteller-Hardware, weniger Lerneffekt</td></tr>
+</table>
+</div>
+
+<div class="tip"><b>Empfehlung:</b> Ein Gerät für alles → <b>Proxmox</b> (unten Docker-VM/LXC, daneben Test-VMs, eingebaute Backups). Nur Container, so einfach wie möglich → <b>Debian + Docker</b>. Storage im Mittelpunkt → <b>TrueNAS Scale</b> oder <b>Unraid</b>.</div>
+
+<h2>VM vs. LXC vs. Docker</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Technik</th><th>Isolation</th><th>Overhead</th><th>Wofür</th></tr>
+<tr><td><b>VM</b> (virtuelle Maschine)</td><td>voll (eigener Kernel)</td><td>hoch (RAM fest reserviert)</td><td>Fremde OS, Home Assistant OS, unsichere Experimente, Firewall</td></tr>
+<tr><td><b>LXC</b> (System-Container)</td><td>mittel (teilt Kernel)</td><td>sehr gering</td><td>Leichte Linux-Dienste unter Proxmox (Pi-hole, kleine Tools)</td></tr>
+<tr><td><b>Docker</b> (App-Container)</td><td>App-Ebene</td><td>gering</td><td>Standard für Self-Hosting-Apps – fast jede App liefert ein Image</td></tr>
+</table>
+</div>
+<div class="note"><b>Bewährtes Proxmox-Muster:</b> Eine Debian-VM als „Docker-Host“ für alle App-Container + einzelne LXC/VMs für Sonderfälle. Docker direkt im LXC geht, macht aber gern Probleme bei Updates.</div>
+
+<h2>Grund-Setup direkt nach der Installation</h2>
+<ul class="check">
+<li>System-Updates einspielen (<code>apt update &amp;&amp; apt full-upgrade</code>)</li>
+<li>Feste IP vergeben – am besten als <b>DHCP-Reservierung im Router</b> (überlebt Neuinstallationen)</li>
+<li>Eigenen Admin-User anlegen, <code>sudo</code> statt root-Arbeit</li>
+<li>SSH-Key hinterlegen, danach <b>Passwort-Login und Root-Login deaktivieren</b></li>
+<li>Zeitzone + NTP prüfen (<code>timedatectl</code>) – wichtig für Logs, Zertifikate, Backups</li>
+<li>Hostname sinnvoll setzen (z. B. <code>server01</code>)</li>
+<li>Firewall aktivieren (<code>ufw</code>: nur SSH + benötigte Ports erlauben)</li>
+<li><code>fail2ban</code> installieren (blockt Brute-Force auf SSH)</li>
+<li>Automatische Sicherheitsupdates: <code>unattended-upgrades</code> (nur Security-Repo)</li>
+<li>SMART-Monitoring aktivieren (<code>smartd</code>) + Mail/Push bei Fehlern</li>
+</ul>
+</div>
+
+<!-- ================= STORAGE ================= -->
+<div class="panel" data-p="storage">
+<h2>Platten richtig wählen</h2>
+<div class="grid">
+<div class="card"><div class="ct">SSD (NVMe/SATA)</div><div class="cd">Für OS, Container, Datenbanken, Fotos-Cache.</div><ul><li>Schnell, lautlos, sparsam</li><li>Für Dauerbetrieb: auf TBW-Wert achten</li><li>Proxmox/ZFS schreibt viel → billige QLC-SSDs meiden</li></ul></div>
+<div class="card"><div class="ct">HDD (3,5&quot;)</div><div class="cd">Für Massendaten: Medien, Backups, Archiv.</div><ul><li><b>NAS-Serien</b> nehmen: WD Red Plus, Seagate IronWolf, Toshiba N300</li><li><b>CMR statt SMR</b> – SMR-Platten sind Gift für RAID/ZFS</li><li>Vor Einsatz Langtest: <code>smartctl -t long</code></li></ul></div>
+<div class="card"><div class="ct">Aufteilung (bewährt)</div><div class="cd">Trennung von System und Daten.</div><ul><li>NVMe: OS + Docker + AppData</li><li>HDDs: Medien, Dateien, Fotos-Originale</li><li>Externe/2. Platte: Backups</li></ul></div>
+</div>
+
+<h2>Dateisysteme</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Dateisystem</th><th>Snapshots</th><th>Checksummen (Bitrot-Schutz)</th><th>RAID integriert</th><th>Wofür</th></tr>
+<tr><td><b>ext4</b></td><td>–</td><td>–</td><td>– (mdadm separat)</td><td>Einfach &amp; robust; Standard für Einzelplatten und OS</td></tr>
+<tr><td><b>ZFS</b></td><td>✓</td><td>✓</td><td>✓ (Mirror/RAIDZ)</td><td>Datenintegrität, Pools, Replikation; Proxmox &amp; TrueNAS nativ</td></tr>
+<tr><td><b>Btrfs</b></td><td>✓</td><td>✓</td><td>teilweise (RAID5/6 unreif)</td><td>Snapshots auf Einzelplatten/Mirror; Synology nutzt es</td></tr>
+<tr><td><b>XFS</b></td><td>–</td><td>–</td><td>–</td><td>Große Dateien/Medien, Unraid-Standard</td></tr>
+</table>
+</div>
+
+<h2>RAID-Level Überblick</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Level</th><th>Platten min.</th><th>Nutzbare Kapazität</th><th>Verkraftet Ausfall</th><th>Hinweis</th></tr>
+<tr><td><b>Keins (Einzelplatte)</b></td><td>1</td><td>100 %</td><td>0</td><td>Völlig ok, wenn Backup existiert</td></tr>
+<tr><td><b>RAID 0</b> (Stripe)</td><td>2</td><td>100 %</td><td><span class="b b-rot">0 – eine weg, alles weg</span></td><td>Für Homeserver praktisch nie sinnvoll</td></tr>
+<tr><td><b>RAID 1 / ZFS Mirror</b></td><td>2</td><td>50 %</td><td>1</td><td>Einfach, schnell wiederhergestellt – Standard-Tipp</td></tr>
+<tr><td><b>RAID 5 / RAIDZ1</b></td><td>3</td><td>(n−1)/n</td><td>1</td><td>Bei großen Platten (&gt;8 TB) riskant beim Rebuild</td></tr>
+<tr><td><b>RAID 6 / RAIDZ2</b></td><td>4</td><td>(n−2)/n</td><td>2</td><td>Guter Kompromiss bei 4+ großen Platten</td></tr>
+<tr><td><b>RAID 10</b></td><td>4</td><td>50 %</td><td>1 je Mirror</td><td>Schnell, teuer in Kapazität</td></tr>
+<tr><td><b>Unraid Parity</b></td><td>2</td><td>n−1 (bzw. n−2)</td><td>1–2</td><td>Gemischte Plattengrößen möglich, Platten einzeln lesbar</td></tr>
+</table>
+</div>
+
+<div class="warn"><b>RAID ist kein Backup.</b> RAID hält den Betrieb bei Plattenausfall am Laufen – mehr nicht. Gegen versehentliches Löschen, Ransomware, Softwarefehler, Überspannung, Feuer und Diebstahl hilft <b>nur ein Backup</b> (siehe Tab „Backup“).</div>
+
+<h2>Laufende Pflege</h2>
+<ul>
+<li><b>SMART überwachen:</b> <code>smartd</code> oder Scrutiny (Web-UI); auf <i>Reallocated Sectors</i>, <i>Pending Sectors</i>, Temperatur achten</li>
+<li><b>ZFS/Btrfs Scrub:</b> monatlich automatisch laufen lassen – findet stille Datenfehler</li>
+<li><b>Füllstand:</b> Pools unter 80–85 % halten (Performance + ZFS-Gesundheit)</li>
+<li><b>Plattenausfall-Plan:</b> Ersatzplatte-Modell notieren; bei RAID: defekte Platte identifizieren (Seriennummer!), tauschen, Rebuild abwarten, erst dann entwarnen</li>
+<li><b>Neue Platten testen</b> bevor Daten drauf gehen: SMART-Langtest + einmal vollschreiben (z. B. <code>badblocks</code>)</li>
+</ul>
+</div>
+
+<!-- ================= BACKUP ================= -->
+<div class="panel" data-p="backup">
+<h2>Die 3-2-1-Regel</h2>
+<div class="grid">
+<div class="card"><div class="ct">3 Kopien</div><div class="cd">Original + 2 Sicherungen.</div><ul><li>Beispiel: Server + Backup-Platte + Cloud</li></ul></div>
+<div class="card"><div class="ct">2 Medien/Geräte</div><div class="cd">Nicht alles auf demselben Gerät.</div><ul><li>Interne HDD zählt nicht als Backup ihrer Nachbarplatte im selben Pool</li></ul></div>
+<div class="card"><div class="ct">1 Kopie außer Haus</div><div class="cd">Gegen Feuer, Blitz, Diebstahl.</div><ul><li>Verschlüsselte Cloud (Backblaze B2, Hetzner Storage Box) oder Platte bei Familie/Arbeit</li></ul></div>
+</div>
+
+<h2>Was sichern? (Prioritäten)</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Priorität</th><th>Daten</th><th>Beispiele</th><th>Strategie</th></tr>
+<tr><td><span class="b b-rot">Unersetzlich</span></td><td>Persönliche Daten</td><td>Fotos, Dokumente, Passwort-Tresor (Vaultwarden!), Paperless-Archiv</td><td>Voll 3-2-1, verschlüsselt, täglich/automatisch</td></tr>
+<tr><td><span class="b b-gelb">Aufwendig</span></td><td>Konfiguration</td><td>Docker-Compose, .env, AppData, Home-Assistant-Config, VM-Backups</td><td>Täglich automatisch, mind. 2 Ziele</td></tr>
+<tr><td><span class="b b-gruen">Ersetzbar</span></td><td>Wiederbeschaffbares</td><td>Medien, ISOs, Downloads</td><td>Optional; oft reicht 1 Kopie oder gar keine</td></tr>
+</table>
+</div>
+
+<h2>Snapshots vs. Backup</h2>
+<div class="gb">
+<div class="gb-col good"><h4>Snapshot (ZFS/Btrfs/Proxmox)</h4><ul><li>Momentaufnahme in Sekunden, ideal <b>vor Updates/Änderungen</b></li><li>Schneller Rollback</li><li>Liegt auf <b>demselben</b> System → schützt nicht bei Hardware-Defekt</li></ul></div>
+<div class="gb-col bad"><h4>Snapshot allein reicht nicht</h4><ul><li>Kein Schutz bei Plattendefekt, Pool-Verlust, Diebstahl</li><li>Ransomware mit Root-Zugriff kann Snapshots löschen</li><li>→ Immer zusätzlich echtes Backup auf anderes Gerät</li></ul></div>
+</div>
+
+<h2>Werkzeuge</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Tool</th><th>Typ</th><th>Stärken</th><th>Typischer Einsatz</th></tr>
+<tr><td><b>Restic</b></td><td>CLI, dedupliziert + verschlüsselt</td><td>Schnell, viele Backends (lokal, SFTP, S3/B2), <code>restic check</code></td><td>Standard-Tipp für Datei-Backups → Cloud &amp; Platte</td></tr>
+<tr><td><b>Borg / Borgmatic</b></td><td>CLI, dedupliziert + verschlüsselt</td><td>Sehr effizient, ausgereift</td><td>Backups auf eigenes Ziel (SSH/BorgBase)</td></tr>
+<tr><td><b>Proxmox Backup Server</b></td><td>Server-Anwendung</td><td>VM/LXC-Backups inkrementell + verifiziert</td><td>Proxmox-Setups, gern auf Zweitgerät</td></tr>
+<tr><td><b>Duplicati</b></td><td>Web-UI</td><td>Einfach klickbar</td><td>Einsteiger; Restore regelmäßig testen</td></tr>
+<tr><td><b>rsync</b></td><td>CLI, 1:1-Kopie</td><td>Simpel, überall vorhanden</td><td>Medien spiegeln; keine Versionierung!</td></tr>
+<tr><td><b>Syncthing</b></td><td>Sync (kein Backup!)</td><td>Geräte-Sync in Echtzeit</td><td>Verteilen von Daten – löscht auch synchron ⚠️</td></tr>
+</table>
+</div>
+<div class="warn"><b>Sync ≠ Backup:</b> Nextcloud/Syncthing spiegeln auch das Löschen und Verschlüsseln (Ransomware) sofort auf alle Geräte. Backups brauchen <b>Versionierung</b> und am besten ein Ziel, das der Server nicht überschreiben kann (Pull-Backup, Append-only oder Offline-Platte).</div>
+
+<h2>Beispiel-Backup-Plan (bewährt)</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Wann</th><th>Was</th><th>Wohin</th><th>Womit</th></tr>
+<tr><td>täglich, nachts</td><td>AppData + Configs + Dokumente/Fotos</td><td>zweite interne/USB-Platte</td><td>Restic (verschlüsselt, versioniert)</td></tr>
+<tr><td>täglich, nachts</td><td>Unersetzliches (Fotos, Doks, Tresor)</td><td>Cloud (B2/Storage Box)</td><td>Restic, gleicher Job, zweites Repo</td></tr>
+<tr><td>wöchentlich</td><td>VMs/LXC komplett</td><td>PBS oder NAS</td><td>Proxmox-Backup</td></tr>
+<tr><td>monatlich</td><td>Restore-Stichprobe: 1 Datei + 1 Ordner zurückholen</td><td>—</td><td>Hand + Kalender-Erinnerung</td></tr>
+</table>
+</div>
+<ul>
+<li><b>Benachrichtigung einrichten:</b> Backup-Job meldet Erfolg/Fehler (ntfy, E-Mail, Gotify) – stille Fehler sind der Klassiker</li>
+<li><b>Aufbewahrung (Retention):</b> z. B. 7 täglich, 4 wöchentlich, 6 monatlich – schützt auch vor „Fehler erst spät bemerkt“</li>
+<li><b>Verschlüsselungs-Passwort des Backups</b> außerhalb des Servers sichern (Passwortmanager + Zettel) – ohne ist alles weg</li>
+</ul>
+</div>
+
+<!-- ================= NETZWERK ================= -->
+<div class="panel" data-p="netzwerk">
+<h2>Grund-Setup im Heimnetz</h2>
+<ul>
+<li><b>Feste Adresse:</b> DHCP-Reservierung im Router (z. B. FritzBox: „immer die gleiche IP zuweisen“) – besser als statische IP am Gerät</li>
+<li><b>Lokale Namen:</b> statt IPs Namen nutzen – Router-DNS (<code>server.fritz.box</code>), eigenes DNS (Pi-hole „Local DNS Records“) oder Tailscale MagicDNS</li>
+<li><b>IP-Plan notieren:</b> welche Geräte welche Adresse haben, Bereich für Reservierungen festlegen</li>
+<li><b>LAN statt WLAN</b> für Server – stabiler, schneller, geringere Latenz</li>
+</ul>
+
+<h2>Ports verstehen</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Port</th><th>Dienst</th><th>Bemerkung</th></tr>
+<tr><td>22</td><td>SSH</td><td>Fernwartung; nur mit Key, nie ins Internet forwarden</td></tr>
+<tr><td>53</td><td>DNS</td><td>Pi-hole/AdGuard; Konflikt mit systemd-resolved beachten</td></tr>
+<tr><td>80 / 443</td><td>HTTP / HTTPS</td><td>Gehören dem Reverse Proxy – Apps dahinter</td></tr>
+<tr><td>445</td><td>SMB (Dateifreigabe)</td><td>Nur im LAN/VPN – niemals ins Internet</td></tr>
+<tr><td>51820</td><td>WireGuard (UDP)</td><td>Der einzige Port, den man guten Gewissens öffnen kann</td></tr>
+<tr><td>8080, 8443, 3000 …</td><td>App-Webinterfaces</td><td>Typische Docker-Ports; per Reverse Proxy bündeln</td></tr>
+</table>
+</div>
+<div class="note"><b>Ein Port = ein Dienst.</b> Belegte Ports checken mit <code>ss -tulpn</code>. Bei Docker Konflikte über die linke Seite des Mappings lösen: <code>8081:80</code> statt <code>8080:80</code>.</div>
+
+<h2>Reverse Proxy</h2>
+<p>Ein Dienst, der vor allen Web-Apps steht: <code>jellyfin.home.example.de</code> → intern Port 8096. Vorteile: ein Einstiegspunkt, überall HTTPS, keine Portnummern merken.</p>
+<div class="tbl-wrap">
+<table>
+<tr><th>Proxy</th><th>Bedienung</th><th>Stärken</th><th>Für wen</th></tr>
+<tr><td><b>Nginx Proxy Manager</b></td><td>Web-UI</td><td>Klickbar, Let's-Encrypt integriert</td><td>Einsteiger-Standard</td></tr>
+<tr><td><b>Caddy</b></td><td>Config-Datei (sehr kurz)</td><td>Automatisches HTTPS, schlank</td><td>Wer Textconfig mag</td></tr>
+<tr><td><b>Traefik</b></td><td>Docker-Labels</td><td>Erkennt Container automatisch</td><td>Fortgeschrittene, viele Container</td></tr>
+</table>
+</div>
+<div class="tip"><b>HTTPS intern ohne offene Ports:</b> eigene Domain + Let's-Encrypt <b>DNS-Challenge</b> (Wildcard-Zertifikat). So gibt es gültige Zertifikate für interne Dienste, ohne dass etwas aus dem Internet erreichbar ist.</div>
+
+<h2>Weiterführend</h2>
+<div class="grid">
+<div class="card"><div class="ct">VLAN / Netz-Trennung</div><div class="cd">Getrennte Netze für IoT, Gäste, Server.</div><ul><li>Braucht VLAN-fähigen Router/Switch (z. B. OpenWrt, UniFi, OPNsense)</li><li>IoT-Geräte raus aus dem Hauptnetz = großer Sicherheitsgewinn</li><li>Nice-to-have, kein Pflichtprogramm am Anfang</li></ul></div>
+<div class="card"><div class="ct">DynDNS</div><div class="cd">Heim-IP wechselt – DynDNS gibt ihr einen festen Namen.</div><ul><li>Anbieter: deSEC, DuckDNS, Cloudflare-API, Router-integriert</li><li>Nur nötig für selbst gehostetes VPN/Portfreigaben</li></ul></div>
+<div class="card"><div class="ct">IPv6 / CGNAT / DS-Lite</div><div class="cd">Stolperfalle bei Kabel-/Glasfaser-Anschlüssen.</div><ul><li>Ohne öffentliche IPv4 (DS-Lite/CGNAT) funktioniert klassisches Port-Forwarding nicht</li><li>Lösung: Tailscale/ZeroTier (lochen durch NAT) oder Cloudflare Tunnel</li></ul></div>
+</div>
+</div>
+
+<!-- ================= FERNZUGRIFF ================= -->
+<div class="panel" data-p="zugriff">
+<h2>Fernzugriff: die Rangfolge</h2>
+<p>Grundsatz: <b>So wenig wie möglich öffentlich erreichbar machen.</b> Für privaten Zugriff reicht fast immer ein VPN.</p>
+<div class="tbl-wrap">
+<table>
+<tr><th>#</th><th>Methode</th><th>Sicherheit</th><th>Aufwand</th><th>Offener Port?</th><th>Bewertung</th></tr>
+<tr><td>1</td><td><b>Tailscale / ZeroTier / NetBird</b> (Overlay-VPN)</td><td><span class="diff d1">hoch</span></td><td>minimal</td><td>nein</td><td>Erste Wahl: App installieren, einloggen, fertig; funktioniert auch hinter CGNAT</td></tr>
+<tr><td>2</td><td><b>WireGuard selbst gehostet</b> (Server/Router, z. B. FritzBox)</td><td><span class="diff d1">hoch</span></td><td>mittel</td><td>1× UDP</td><td>Ohne Drittanbieter; braucht öffentliche IP + DynDNS</td></tr>
+<tr><td>3</td><td><b>Cloudflare Tunnel</b></td><td><span class="diff d1">hoch</span></td><td>gering</td><td>nein</td><td>Für einzelne Web-Apps, die wirklich öffentlich sein sollen; Traffic läuft über Cloudflare, Video-Streaming per ToS unerwünscht</td></tr>
+<tr><td>4</td><td><b>Port-Forwarding + Reverse Proxy</b></td><td><span class="diff d2">nur gehärtet</span></td><td>hoch</td><td>80/443</td><td>Nur wenn öffentlich nötig (z. B. Nextcloud für Familie): 2FA, fail2ban/CrowdSec, Updates strikt, ggf. Geo-Block</td></tr>
+<tr><td>—</td><td><b>Direkt exponierte Dienste</b> (SMB, RDP, SSH-Passwort, Datenbanken, Docker-API)</td><td><span class="diff d3">nie</span></td><td>—</td><td>—</td><td>Niemals. Werden innerhalb von Minuten gescannt und angegriffen</td></tr>
+</table>
+</div>
+
+<div class="tip"><b>Standard-Empfehlung:</b> Tailscale auf Server + Handy + Laptop. Damit erreichst du alles von unterwegs, als wärst du zuhause – ohne einen einzigen offenen Port. „Subnet Router“-Funktion aktivieren, dann ist das ganze Heimnetz erreichbar.</div>
+
+<h2>Wenn doch etwas öffentlich sein muss</h2>
+<ul class="check">
+<li>Nur über Reverse Proxy mit HTTPS (Let's Encrypt), nie App-Port direkt forwarden</li>
+<li>2FA in der App aktivieren – oder Login davor schalten (Authelia/Authentik)</li>
+<li>fail2ban oder CrowdSec auf die Proxy-Logs ansetzen</li>
+<li>App aktuell halten – öffentliche Dienste haben Update-Priorität</li>
+<li>Eigenes Docker-Netz / VLAN: öffentlicher Dienst kommt nicht an interne Dienste</li>
+<li>Monitoring: Login-Fehlversuche &amp; ungewöhnlichen Traffic im Blick behalten</li>
+<li>Regelmäßig fragen: „Muss das noch öffentlich sein?“ – sonst zurückbauen</li>
+</ul>
+
+<div class="warn"><b>Vaultwarden, Paperless, Home Assistant &amp; Co. enthalten dein digitales Leben.</b> Solche Dienste möglichst nur per VPN erreichbar machen – nicht öffentlich, auch wenn es bequemer wäre.</div>
+</div>
+
+<!-- ================= SICHERHEIT ================= -->
+<div class="panel" data-p="sicherheit">
+<h2>Die goldenen Sicherheitsregeln</h2>
+<div class="grid">
+<div class="card"><div class="ct">Angriffsfläche klein halten</div><ul><li>Nur installieren, was genutzt wird; Ungenutztes entfernen</li><li>Keine offenen Ports „auf Verdacht“</li><li>Standard: alles nur im LAN/VPN erreichbar</li></ul></div>
+<div class="card"><div class="ct">Updates</div><ul><li>OS: Security-Updates automatisch (<code>unattended-upgrades</code>)</li><li>Container: regelmäßig, aber bewusst (siehe Docker-Tab)</li><li>Öffentlich erreichbare Dienste: sofort patchen</li></ul></div>
+<div class="card"><div class="ct">Zugänge</div><ul><li>Passwortmanager, jedes Passwort einmalig &amp; lang</li><li>2FA überall, wo möglich (Admin-UIs zuerst)</li><li>Standard-Passwörter (admin/admin) sofort ändern</li></ul></div>
+<div class="card"><div class="ct">SSH härten</div><ul><li>Nur Key-Login: <code>PasswordAuthentication no</code></li><li><code>PermitRootLogin no</code>, Zugriff per <code>sudo</code></li><li>fail2ban; SSH nie ins Internet forwarden</li></ul></div>
+<div class="card"><div class="ct">Least Privilege</div><ul><li>Dienste laufen als eigener User (PUID/PGID), nicht als root</li><li>Kein <code>privileged: true</code> ohne Grund</li><li>Freigaben: nur nötige Ordner, nur nötige Rechte</li></ul></div>
+<div class="card"><div class="ct">Ransomware-Resilienz</div><ul><li>Versionierte Backups, die der Server nicht löschen kann (Pull/append-only/offline)</li><li>Backup-Ziel mit anderen Zugangsdaten</li><li>Snapshots zusätzlich für schnellen Rollback</li></ul></div>
+</div>
+
+<h2>Häufige Fehler und was stattdessen</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Fehler</th><th>Risiko</th><th>Besser so</th></tr>
+<tr><td>Port-Forward direkt auf App (Jellyfin:8096, HA:8123)</td><td>Bots scannen &amp; exploiten bekannte Ports in Minuten</td><td>VPN; wenn öffentlich: Reverse Proxy + HTTPS + 2FA</td></tr>
+<tr><td>SSH mit Passwort erreichbar</td><td>Brute-Force rund um die Uhr</td><td>SSH-Keys, Passwort-Login aus, fail2ban</td></tr>
+<tr><td>Docker-Socket in Container mounten (Watchtower &amp; Co. unbedacht)</td><td>Socket = Root auf dem Host</td><td>Nur bewusst; Alternativen: manuelle Updates, Socket-Proxy</td></tr>
+<tr><td>Passwörter/Keys in <code>compose.yaml</code> in Git</td><td>Secrets landen öffentlich/kopiert</td><td><code>.env</code>-Datei (in <code>.gitignore</code>) oder Docker Secrets</td></tr>
+<tr><td>„Später mache ich Backup“</td><td>Totalverlust bei erstem Defekt/Fehlgriff</td><td>Backup gehört zum Setup, nicht zur Kür</td></tr>
+<tr><td>Alles im selben Netz mit Billig-IoT</td><td>Kompromittierte Kamera erreicht den Server</td><td>IoT ins Gastnetz/VLAN</td></tr>
+<tr><td>UPnP am Router aktiv</td><td>Geräte öffnen selbstständig Ports</td><td>UPnP deaktivieren, Freigaben nur manuell</td></tr>
+<tr><td>Ein Admin-Passwort für alles</td><td>Ein Leak = alles offen</td><td>Passwortmanager, einmalige Passwörter, 2FA</td></tr>
+</table>
+</div>
+
+<h2>Update-Strategie (Standard-Vorgehen)</h2>
+<div class="steps">
+<div class="step"><b>Vorher sichern:</b> Snapshot (Proxmox/ZFS) oder frisches Backup der App-Daten.</div>
+<div class="step"><b>Changelog überfliegen:</b> Major-Versionen (z. B. Nextcloud 28→29, Immich) haben oft Breaking Changes.</div>
+<div class="step"><b>Update einspielen:</b> OS per <code>apt</code>; Container per <code>docker compose pull &amp;&amp; docker compose up -d</code>.</div>
+<div class="step"><b>Funktion prüfen:</b> App öffnen, Logs checken (<code>docker compose logs -f</code>).</div>
+<div class="step"><b>Bei Problemen:</b> Rollback auf Snapshot bzw. altes Image-Tag – deshalb Versions-Tags statt nur <code>latest</code>.</div>
+</div>
+
+<h2>Sicherheits-Checkliste (regelmäßig durchgehen)</h2>
+<ul class="check">
+<li>Welche Ports sind am Router offen? (Router-UI prüfen – sollte: keiner oder nur VPN)</li>
+<li>Läuft überall die aktuelle Version? (Dashboard/Release-Feeds)</li>
+<li>2FA auf allen Admin-Zugängen aktiv?</li>
+<li>fail2ban/CrowdSec aktiv und Logs unauffällig?</li>
+<li>Backups grün + letzter Restore-Test &lt; 3 Monate?</li>
+<li>Gibt es Dienste/User/Freigaben, die keiner mehr braucht? → entfernen</li>
+</ul>
+</div>
+
+<!-- ================= DOCKER ================= -->
+<div class="panel" data-p="docker">
+<h2>Konzepte in 30 Sekunden</h2>
+<div class="grid">
+<div class="card"><div class="ct">Image</div><div class="cd">Bauplan/Vorlage einer App (z. B. <code>jellyfin/jellyfin:10.9</code>). Unveränderlich, wird aus Registry geladen.</div></div>
+<div class="card"><div class="ct">Container</div><div class="cd">Laufende Instanz eines Images. Wegwerfbar – alles Wichtige liegt in Volumes/Mounts.</div></div>
+<div class="card"><div class="ct">Volume / Bind Mount</div><div class="cd">Persistente Daten. Bind Mount (<code>./data:/config</code>) = Ordner auf dem Host, leicht zu sichern – Standard im Homelab.</div></div>
+<div class="card"><div class="ct">Netzwerk</div><div class="cd">Container im selben Docker-Netz erreichen sich per Namen (<code>http://jellyfin:8096</code>) – ohne Port-Freigabe.</div></div>
+</div>
+
+<h2>Compose als Standard</h2>
+<p>Jeder Dienst als <code>compose.yaml</code>: deklarativ, versionierbar, selbstdokumentierend. Nie Container per Hand mit langen <code>docker run</code>-Befehlen starten.</p>
+<h3>Bewährte Ordnerstruktur</h3>
+<pre><code>/opt/stacks/
+├── jellyfin/
+│   ├── compose.yaml
+│   ├── .env            ← Secrets, nicht in Git
+│   └── config/         ← AppData (Bind Mount)
+├── immich/
+│   ├── compose.yaml
+│   └── ...
+└── proxy/
+    └── compose.yaml</code></pre>
+<h3>Beispiel compose.yaml</h3>
+<pre><code>services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.9.11   # Version pinnen statt :latest
+    restart: unless-stopped
+    ports:
+      - "8096:8096"
+    volumes:
+      - ./config:/config
+      - /srv/medien:/media:ro          # Medien nur lesend
+    environment:
+      - TZ=Europe/Berlin
+    devices:
+      - /dev/dri:/dev/dri              # iGPU für Hardware-Transcoding</code></pre>
+
+<h2>Wichtige Befehle</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Befehl</th><th>Macht</th></tr>
+<tr><td><code>docker compose up -d</code></td><td>Stack starten / Änderungen anwenden</td></tr>
+<tr><td><code>docker compose pull &amp;&amp; docker compose up -d</code></td><td>Update: neue Images ziehen + neu erstellen</td></tr>
+<tr><td><code>docker compose logs -f [dienst]</code></td><td>Logs live ansehen (erster Schritt bei Problemen)</td></tr>
+<tr><td><code>docker compose down</code></td><td>Stack stoppen und Container entfernen (Daten bleiben)</td></tr>
+<tr><td><code>docker ps</code></td><td>Laufende Container + Status/Ports</td></tr>
+<tr><td><code>docker exec -it &lt;name&gt; bash</code></td><td>Shell im Container öffnen</td></tr>
+<tr><td><code>docker system df</code> / <code>docker image prune -a</code></td><td>Speicherverbrauch anzeigen / alte Images aufräumen</td></tr>
+<tr><td><code>docker stats</code></td><td>CPU/RAM-Verbrauch je Container live</td></tr>
+</table>
+</div>
+
+<h2>Best Practices</h2>
+<ul>
+<li><b>Versionen pinnen:</b> <code>image: app:1.2</code> statt <code>:latest</code> → Updates werden bewusst und Rollback ist möglich</li>
+<li><b><code>restart: unless-stopped</code></b> überall – Container starten nach Reboot automatisch</li>
+<li><b>PUID/PGID setzen</b> (linuxserver.io-Images): Container schreibt Dateien als dein User, nicht als root</li>
+<li><b>Ports sparsam mappen:</b> nur veröffentlichen, was gebraucht wird; interne Kommunikation über Docker-Netze; hinter Reverse Proxy reicht oft <b>gar kein</b> Port-Mapping</li>
+<li><b>Secrets in <code>.env</code></b>, nicht in die Compose-Datei; Compose-Dateien in Git sichern</li>
+<li><b>Auto-Updates (Watchtower) mit Vorsicht:</b> praktisch für Unkritisches, gefährlich für DB-Apps (Immich, Nextcloud) – dort manuell mit Changelog. Sanfte Alternative: <b>Diun</b> (benachrichtigt nur)</li>
+<li><b>Verwaltung per UI</b> gefällig? <b>Dockge</b> (compose-treu, empfehlenswert) oder Portainer</li>
+</ul>
+</div>
+
+<!-- ================= DIENSTE ================= -->
+<div class="panel" data-p="dienste">
+<h2>Beliebte Dienste nach Kategorie</h2>
+<p>Bewährte, aktiv gepflegte Projekte. <span class="b b-gruen">Empfehlung</span> = guter Standard-Startpunkt der Kategorie.</p>
+
+<div class="grid wide">
+<div class="card"><div class="ct">📊 Monitoring &amp; Dashboard</div><ul>
+<li><b>Uptime Kuma</b> <span class="b b-gruen">Empfehlung</span> – prüft, ob Dienste laufen; alarmiert per Push</li>
+<li><b>Homepage / Homarr</b> – Startseite mit allen Diensten</li>
+<li><b>Beszel / Netdata</b> – CPU, RAM, Disk, Temperatur</li>
+<li><b>Scrutiny</b> – SMART-Werte aller Platten im Blick</li>
+<li><b>Dozzle</b> – Container-Logs im Browser</li></ul></div>
+<div class="card"><div class="ct">🛡️ DNS &amp; Adblock</div><ul>
+<li><b>AdGuard Home</b> <span class="b b-gruen">Empfehlung</span> – Adblock + DNS, moderne UI</li>
+<li><b>Pi-hole</b> – der Klassiker, riesige Community</li>
+<li>Tipp: als DNS im Router eintragen → wirkt für alle Geräte; zweite Instanz = Ausfallsicherheit</li></ul></div>
+<div class="card"><div class="ct">🎬 Medien</div><ul>
+<li><b>Jellyfin</b> <span class="b b-gruen">Empfehlung</span> – Filme/Serien/Musik, komplett frei</li>
+<li><b>Plex</b> – polierter, aber Konto/Abo-Modell</li>
+<li><b>Navidrome</b> – Musik; <b>Audiobookshelf</b> – Hörbücher/Podcasts</li>
+<li>iGPU durchreichen für Transcoding (QuickSync)</li></ul></div>
+<div class="card"><div class="ct">📷 Fotos</div><ul>
+<li><b>Immich</b> <span class="b b-gruen">Empfehlung</span> – Google-Photos-Ersatz: Auto-Upload, Gesichter, Karte</li>
+<li>Braucht ordentlich RAM (ML-Features) + <b>diszipliniertes Backup</b> (DB + Originale)</li>
+<li><b>PhotoPrism</b> – Alternative ohne Multi-User-Fokus</li></ul></div>
+<div class="card"><div class="ct">☁️ Dateien &amp; Sync</div><ul>
+<li><b>Nextcloud</b> – Cloud-Komplettpaket (Dateien, Kalender, Kontakte)</li>
+<li><b>Syncthing</b> <span class="b b-gruen">Empfehlung</span> – schlanker Geräte-Sync ohne Server-Konto</li>
+<li><b>Samba/SMB</b> – klassische Netzwerkfreigabe für PCs</li>
+<li><b>FileBrowser</b> – simples Web-Dateimanagement</li></ul></div>
+<div class="card"><div class="ct">📄 Dokumente</div><ul>
+<li><b>Paperless-ngx</b> <span class="b b-gruen">Empfehlung</span> – Dokumente scannen, OCR, verschlagworten, wiederfinden</li>
+<li>Papierkram-Gamechanger; Export/Backup einplanen</li>
+<li><b>Stirling-PDF</b> – PDF-Werkzeugkasten im Browser</li></ul></div>
+<div class="card"><div class="ct">🔑 Passwörter</div><ul>
+<li><b>Vaultwarden</b> – Bitwarden-Server, alle Bitwarden-Apps kompatibel</li>
+<li><span class="b b-rot">Kritisch</span>: nur per VPN erreichbar machen, Backups mehrfach + getestet</li>
+<li>Notfallzugriff bedenken: Export/Notfallblatt im Safe</li></ul></div>
+<div class="card"><div class="ct">🏠 Smart Home</div><ul>
+<li><b>Home Assistant</b> <span class="b b-gruen">Empfehlung</span> – Standard für lokale Automatisierung</li>
+<li>Am rundesten als <b>HAOS-VM</b> (Proxmox) statt Container (Add-ons!)</li>
+<li>Zigbee/Thread per USB-Stick (in VM durchreichen)</li></ul></div>
+<div class="card"><div class="ct">🔧 Sonstiges</div><ul>
+<li><b>Gitea/Forgejo</b> – eigener Git-Server (Compose-Dateien!)</li>
+<li><b>ntfy / Gotify</b> – Push-Benachrichtigungen vom Server aufs Handy</li>
+<li><b>*arr-Stack</b> (Sonarr/Radarr) – Medienverwaltung</li>
+<li><b>Frigate</b> – Kamera-NVR mit Objekterkennung</li></ul></div>
+</div>
+
+<h2>Sinnvolle Startreihenfolge</h2>
+<div class="steps">
+<div class="step"><b>Uptime Kuma + ntfy:</b> Monitoring zuerst – du merkst sofort, wenn später etwas ausfällt.</div>
+<div class="step"><b>AdGuard Home / Pi-hole:</b> sofort spürbarer Nutzen fürs ganze Netz, geringes Risiko.</div>
+<div class="step"><b>Jellyfin oder Immich:</b> der „Wow-Effekt“ – Medien bzw. Fotos.</div>
+<div class="step"><b>Paperless / Nextcloud / Syncthing:</b> Dokumente und Dateien, sobald Backup-Routine steht.</div>
+<div class="step"><b>Vaultwarden / Home Assistant:</b> Kritisches zuletzt – wenn Betrieb, Backup und VPN sicher sitzen.</div>
+</div>
+</div>
+
+<!-- ================= BETRIEB ================= -->
+<div class="panel" data-p="betrieb">
+<h2>Wartungsroutinen</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Rhythmus</th><th>Aufgaben</th><th>Aufwand</th></tr>
+<tr><td><b>Täglich (automatisch)</b></td><td>Backups laufen; Monitoring prüft Dienste; Alerts kommen aufs Handy – du machst: nichts, solange alles grün ist</td><td>0 min</td></tr>
+<tr><td><b>Wöchentlich</b></td><td>Dashboard/Alerts überfliegen; Backup-Reports grün?; Speicherstand (<code>df -h</code>); OS-Updates einspielen</td><td>10–15 min</td></tr>
+<tr><td><b>Monatlich</b></td><td>Container-Updates (mit Snapshot davor); SMART-Werte checken; Restore-Stichprobe (1 Datei zurückholen); <code>docker image prune</code></td><td>30–60 min</td></tr>
+<tr><td><b>Halbjährlich</b></td><td>Restore-Ernstfallprobe (kompletten Dienst wiederherstellen); Zugänge/Dienste aufräumen; offene Ports prüfen; Staub entfernen; Doku aktualisieren</td><td>1–2 h</td></tr>
+</table>
+</div>
+
+<h2>Dokumentation führen</h2>
+<div class="grid">
+<div class="card"><div class="ct">Was dokumentieren</div><ul><li>IP-Plan, Hostnames, Portliste</li><li>Welcher Dienst, wo liegen die Daten, wie wird gesichert</li><li>Besonderheiten/Workarounds („Warum ist X so eingestellt?“)</li><li>Restore-Anleitung: „Server tot – was tun?“ Schritt für Schritt</li></ul></div>
+<div class="card"><div class="ct">Wo dokumentieren</div><ul><li>Zugangsdaten: <b>nur</b> im Passwortmanager</li><li>Compose/Configs: Git-Repo (ohne Secrets)</li><li>Notizen: Markdown-Ordner, Wiki oder Notiz-App – Hauptsache <b>außerhalb</b> des Servers verfügbar</li></ul></div>
+<div class="card"><div class="ct">Benachrichtigungen</div><ul><li>Ein Kanal für alles: <b>ntfy</b> (selbst gehostet) oder Gotify/Telegram/E-Mail</li><li>Anschließen: Uptime Kuma, Backup-Jobs, smartd, fail2ban</li><li>Regel: Fehler müssen dich <b>erreichen</b>, nicht in Logs versauern</li></ul></div>
+</div>
+
+<h2>Grundsätze für ruhigen Betrieb</h2>
+<ul>
+<li><b>Boring is good:</b> ein stabiler Dienst ist mehr wert als drei halbfertige</li>
+<li><b>Änderungsfenster:</b> nichts Wichtiges freitags abends oder vor dem Urlaub updaten</li>
+<li><b>Vor jeder Änderung:</b> Snapshot/Backup → ändern → testen → dokumentieren</li>
+<li><b>Familie bedenken:</b> wenn andere die Dienste nutzen, Ausfälle kommunizieren und Kritisches (DNS!) redundant auslegen oder Fallback konfigurieren</li>
+<li><b>Kapazität im Blick:</b> Platten &lt; 80 %, RAM-Auslastung beobachten, bevor es eng wird planen</li>
+</ul>
+</div>
+
+<!-- ================= TROUBLESHOOTING ================= -->
+<div class="panel" data-p="hilfe">
+<h2>Troubleshooting: Standardvorgehen</h2>
+<div class="steps">
+<div class="step"><b>Was hat sich geändert?</b> 90 % der Probleme folgen auf ein Update, eine Config-Änderung oder volle Platten.</div>
+<div class="step"><b>Von unten nach oben prüfen:</b> Strom → Netzwerk (<code>ping</code>) → Host erreichbar (SSH) → Dienst läuft (<code>docker ps</code>) → Logs.</div>
+<div class="step"><b>Logs lesen:</b> <code>docker compose logs -f</code> bzw. <code>journalctl -u dienst -e</code> – die Fehlermeldung sagt fast immer, was los ist.</div>
+<div class="step"><b>Fehlermeldung wörtlich suchen</b> (GitHub Issues des Projekts zuerst) – jemand hatte das Problem schon.</div>
+<div class="step"><b>Eine Änderung pro Versuch,</b> dann testen. Wildes Rumprobieren macht’s schlimmer und undokumentierbar.</div>
+</div>
+
+<h2>Häufige Probleme</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Symptom</th><th>Erste Checks</th><th>Typische Ursache</th></tr>
+<tr><td>Dienst nicht erreichbar</td><td><code>docker ps</code>, richtige IP:Port?, <code>ss -tulpn</code></td><td>Container down, Port-Mapping falsch, Firewall, falsche URL</td></tr>
+<tr><td>Container startet immer neu (Restart-Loop)</td><td><code>docker logs &lt;name&gt;</code></td><td>Fehlende Env-Variable, kaputte Config, Rechte auf Volume, Port belegt</td></tr>
+<tr><td>„Permission denied“ auf Dateien</td><td><code>ls -l</code> auf dem Host, PUID/PGID im Compose</td><td>Container-User ≠ Datei-Besitzer</td></tr>
+<tr><td>Platte voll</td><td><code>df -h</code>, <code>docker system df</code>, <code>ncdu /</code></td><td>Alte Images, Log-Wildwuchs, Downloads, Backups aufs falsche Ziel</td></tr>
+<tr><td>Alles langsam</td><td><code>htop</code>, <code>docker stats</code>, <code>iostat</code>, SMART</td><td>RAM voll (Swap!), ein Container frisst CPU, sterbende Platte</td></tr>
+<tr><td>Nach Update kaputt</td><td>Changelog/Breaking Changes, Logs</td><td>Major-Update mit Migrationsschritt → Rollback auf Snapshot/altes Tag, Anleitung lesen</td></tr>
+<tr><td>Kein Internet im ganzen Netz</td><td>Läuft Pi-hole/AdGuard? Router-DNS?</td><td>DNS-Server down = „Internet kaputt“; Fallback-DNS im Router hinterlegen</td></tr>
+<tr><td>Server nach Stromausfall aus</td><td>BIOS-Einstellung</td><td>„Restore on AC Power Loss“ nicht auf Power On</td></tr>
+<tr><td>Von unterwegs nicht erreichbar</td><td>VPN verbunden? DynDNS aktuell? CGNAT?</td><td>DS-Lite/CGNAT ohne öffentliche IPv4 → Tailscale nutzen</td></tr>
+</table>
+</div>
+
+<h2>Diagnose-Werkzeugkasten</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Befehl</th><th>Zeigt</th></tr>
+<tr><td><code>htop</code></td><td>CPU, RAM, Prozesse live</td></tr>
+<tr><td><code>df -h</code> / <code>ncdu /pfad</code></td><td>Plattenfüllstand / was den Platz frisst</td></tr>
+<tr><td><code>ss -tulpn</code></td><td>Offene Ports + welcher Prozess lauscht</td></tr>
+<tr><td><code>journalctl -e</code> / <code>-u ssh</code></td><td>Systemlogs (Ende) / eines Dienstes</td></tr>
+<tr><td><code>docker compose logs -f</code></td><td>Container-Logs live</td></tr>
+<tr><td><code>ping</code> / <code>dig name</code> / <code>traceroute</code></td><td>Erreichbarkeit / DNS-Auflösung / Netzwerkpfad</td></tr>
+<tr><td><code>smartctl -a /dev/sda</code></td><td>Gesundheit einer Platte</td></tr>
+<tr><td><code>sensors</code></td><td>Temperaturen</td></tr>
+<tr><td><code>uptime</code> / <code>free -h</code></td><td>Last &amp; Laufzeit / RAM-Belegung</td></tr>
+</table>
+</div>
+
+<h2>Glossar</h2>
+<dl>
+<dt>NAS</dt><dd>Network Attached Storage – Speicher-Server im Netzwerk, Spezialfall des Homeservers.</dd>
+<dt>Headless</dt><dd>Betrieb ohne Monitor/Tastatur – Verwaltung per SSH und Web-UIs.</dd>
+<dt>Hypervisor</dt><dd>Software, die VMs verwaltet (z. B. Proxmox VE).</dd>
+<dt>VM / LXC / Container</dt><dd>Voll virtualisierter Rechner / leichter System-Container / App-Container (Docker).</dd>
+<dt>Reverse Proxy</dt><dd>Vermittler, der Anfragen anhand des Domainnamens an die richtige App weiterleitet und HTTPS übernimmt.</dd>
+<dt>VPN</dt><dd>Verschlüsselter Tunnel ins Heimnetz (WireGuard, Tailscale) – der sichere Weg für Fernzugriff.</dd>
+<dt>VLAN</dt><dd>Virtuell getrennte Netze auf derselben Hardware – z. B. IoT vom Server isolieren.</dd>
+<dt>DNS / DHCP</dt><dd>Namen → IP-Adressen auflösen / automatische IP-Vergabe im Netz.</dd>
+<dt>Port-Forwarding</dt><dd>Router leitet Anfragen aus dem Internet an ein internes Gerät weiter – sparsam einsetzen.</dd>
+<dt>CGNAT / DS-Lite</dt><dd>Anschluss ohne eigene öffentliche IPv4 – klassische Portfreigaben funktionieren nicht.</dd>
+<dt>DynDNS</dt><dd>Dienst, der die wechselnde Heim-IP unter festem Namen erreichbar hält.</dd>
+<dt>ZFS / Pool / Scrub</dt><dd>Dateisystem mit Prüfsummen / Verbund mehrerer Platten / Prüf-Lauf gegen stille Datenfehler.</dd>
+<dt>Snapshot</dt><dd>Eingefrorener Datenstand für schnellen Rollback – ergänzt Backups, ersetzt sie nicht.</dd>
+<dt>SMART</dt><dd>Selbstdiagnose von Festplatten/SSDs – Frühwarnsystem für Ausfälle.</dd>
+<dt>CMR / SMR</dt><dd>Aufzeichnungsverfahren von HDDs – für NAS/RAID immer CMR wählen.</dd>
+<dt>TBW</dt><dd>Total Bytes Written – Schreib-Lebensdauer einer SSD.</dd>
+<dt>ECC-RAM</dt><dd>Arbeitsspeicher mit Fehlerkorrektur – Bonus für Datenintegrität.</dd>
+<dt>USV / UPS</dt><dd>Batterie-Puffer für sauberes Herunterfahren bei Stromausfall.</dd>
+<dt>NUT</dt><dd>Network UPS Tools – verbindet USV mit Server für Auto-Shutdown.</dd>
+<dt>Let's Encrypt / TLS</dt><dd>Kostenlose Zertifikate / Verschlüsselung hinter HTTPS.</dd>
+<dt>2FA</dt><dd>Zweiter Faktor beim Login (App-Code, Passkey) – Pflicht für Admin-Zugänge.</dd>
+<dt>fail2ban / CrowdSec</dt><dd>Sperrt IPs nach wiederholten Fehlversuchen automatisch.</dd>
+<dt>PUID/PGID</dt><dd>User-/Gruppen-ID, unter der ein Container auf Dateien zugreift.</dd>
+<dt>IaC</dt><dd>Infrastructure as Code – Setup als Textdateien (Compose, Ansible) statt Klick-Historie.</dd>
+<dt>Homelab</dt><dd>Der Überbegriff fürs Ganze – Heimserver + Netzwerk + Basteln + Lernen.</dd>
+</dl>
+</div>
+
+<div class="legend">Homeserver 101 · Referenz für Planung, Aufbau und Betrieb · Stand 07/2026 · Software-Empfehlungen sind Momentaufnahmen – Prinzipien (Backup, VPN, Updates, Doku) bleiben.</div>
+
+<script>
+const TABS=[
+ {k:"start",l:"🚀 Start & Regeln"},
+ {k:"hardware",l:"🖥️ Hardware"},
+ {k:"os",l:"💿 Betriebssystem"},
+ {k:"storage",l:"💾 Storage & RAID"},
+ {k:"backup",l:"🛟 Backup"},
+ {k:"netzwerk",l:"🌐 Netzwerk"},
+ {k:"zugriff",l:"🔑 Fernzugriff"},
+ {k:"sicherheit",l:"🛡️ Sicherheit"},
+ {k:"docker",l:"🐳 Docker"},
+ {k:"dienste",l:"📦 Dienste"},
+ {k:"betrieb",l:"🔧 Wartung & Betrieb"},
+ {k:"hilfe",l:"🩺 Hilfe & Glossar"}
+];
+const tabsDiv=document.getElementById("tabs");
+function showTab(k){
+ document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.dataset.p===k));
+ tabsDiv.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.k===k));
+ try{localStorage.setItem("hstab",k)}catch(e){}
+ window.scrollTo({top:0});
+}
+TABS.forEach(t=>{const b=document.createElement("button");b.textContent=t.l;b.dataset.k=t.k;b.onclick=()=>showTab(t.k);tabsDiv.appendChild(b)});
+let start=TABS[0].k;
+try{const s=localStorage.getItem("hstab");if(s&&TABS.some(t=>t.k===s))start=s}catch(e){}
+showTab(start);
+
+/* Stromkosten-Rechner */
+function calcStrom(){
+ const w=parseFloat(document.getElementById("c-watt").value)||0;
+ const p=parseFloat(document.getElementById("c-preis").value)||0;
+ const kwh=w*24*365/1000;
+ const jahr=kwh*p;
+ document.getElementById("c-res").innerHTML=
+  `≈ <b>${kwh.toFixed(0)} kWh/Jahr</b> → <b>${jahr.toFixed(2)} €/Jahr</b> (${(jahr/12).toFixed(2)} €/Monat)`;
+}
+["c-watt","c-preis"].forEach(id=>document.getElementById(id).addEventListener("input",calcStrom));
+calcStrom();
+</script>
+</body>
+</html>
