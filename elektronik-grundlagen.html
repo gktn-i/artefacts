@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light dark">
 <title>Elektronik 101 · Hobby-Referenz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    DESIGN TOKENS  ·  Theme hier zentral anpassen
@@ -13,21 +16,24 @@
   --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f1f3f6; --surface-hover:#f5f8fc;
   --text:#1b1e23; --muted:#697079; --faint:#98a0aa;
   --border:#e4e7ec; --border-strong:#d3d7de; --track:#e6e8ec;
-  --accent:#1a5fb4; --accent-ink:#0c447c; --accent-soft:#e8f1fb; --accent-border:#a4c8ee;
+  --accent:#0e7c8c; --accent-ink:#0b5f6d; --accent-soft:#e2f3f6; --accent-border:#96cfd9;
+  --rate-bad:#d64b3c; --rate-mid:#e59a3c; --rate-good:#3da66e;
   --warn-bg:#fbeee7; --warn-ink:#8a3416;
   --danger-bg:#fcf2f0; --danger-border:#e6b0a8; --danger-accent:#b0281a;
   --radius:12px; --radius-sm:8px; --radius-xs:6px;
   --shadow-sm:0 1px 2px rgba(16,24,40,.05);
   --shadow-tabs:0 6px 14px -8px rgba(16,24,40,.22);
-  --mono:'SF Mono',Menlo,Consolas,'Roboto Mono',monospace;
-  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  --mono:'JetBrains Mono','SF Mono',Menlo,Consolas,'Roboto Mono',monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  --display:'Space Grotesk',system-ui,sans-serif;
 }
 @media(prefers-color-scheme:dark){
   :root{
     --bg:#16181c; --surface:#1f2229; --surface-2:#262a31; --surface-hover:#262a31;
     --text:#e7e9ec; --muted:#9aa2ad; --faint:#727a85;
     --border:#2e333b; --border-strong:#3a404a; --track:#333842;
-    --accent:#5b9bd8; --accent-ink:#b5d4f4; --accent-soft:#0d2c4d; --accent-border:#1d5a99;
+    --accent:#38c6d9; --accent-ink:#8adeeb; --accent-soft:#0b3138; --accent-border:#17606d;
+    --rate-bad:#e0604f; --rate-mid:#eda94e; --rate-good:#4dbb82;
     --warn-bg:#3a1c10; --warn-ink:#f3c3ae;
     --danger-bg:#2a1512; --danger-border:#6b2418; --danger-accent:#d14836;
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
@@ -64,9 +70,10 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
 /* ============================================================
    TYPOGRAFIE
    ============================================================ */
-h1{font-size:25px;font-weight:700;letter-spacing:-.02em;margin-bottom:.35rem}
+h1{font-family:var(--display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin-bottom:.35rem}
+a{color:var(--accent-ink)}
 .sub{font-size:13.5px;color:var(--muted);margin-bottom:1.3rem;max-width:70ch;line-height:1.55}
-h2{font-size:17px;font-weight:600;letter-spacing:-.01em;margin:2rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+h2{font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:-.01em;margin:2rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
 h3{font-size:14px;font-weight:600;margin:1.15rem 0 .5rem;color:var(--accent-ink)}
 p{font-size:13.5px;line-height:1.65;margin-bottom:.6rem}
 
@@ -249,6 +256,18 @@ li.warn{color:var(--warn-ink)}
 <p>Widerstände addieren sich: <span class="formula">R = R1 + R2 + …</span> · Strom überall gleich · Spannung teilt sich auf.</p>
 <h3>Parallelschaltung (nebeneinander)</h3>
 <p>Kehrwerte addieren: <span class="formula">1/R = 1/R1 + 1/R2 + …</span> · Spannung überall gleich · Strom teilt sich auf. Gesamtwiderstand ist <b>kleiner</b> als der kleinste Einzelwiderstand.</p>
+<h3>Kirchhoffsche Regeln (die Namen dahinter)</h3>
+<p><b>Knotenregel:</b> An jeder Verzweigung fließt genauso viel Strom hinein wie heraus. Beispiel: 300 mA hinein → 100 mA + 200 mA auf zwei Zweige verteilt heraus.</p>
+<p><b>Maschenregel:</b> In jedem geschlossenen Stromkreis summieren sich die Spannungsabfälle zur Quellenspannung. Beispiel: 5-V-Quelle = 2 V an der LED + 3 V am Vorwiderstand. Genau diese beiden Regeln stecken hinter Reihen- und Parallelschaltung.</p>
+<h3>Einmal durchgerechnet (LED-Vorwiderstand)</h3>
+<p>LED an 5 V: LED-Spannung 2 V, Wunschstrom 15 mA. Am Widerstand fallen 5 − 2 = 3 V ab → <span class="formula">R = 3 V / 0,015 A = 200 Ω</span> → aufgerundet auf den nächsten E12-Normwert: <b>220 Ω</b>. Verlustleistung: 3 V × 0,014 A ≈ 41 mW — ein 1/4-W-Widerstand reicht locker.</p>
+</div>
+
+<h2>Kondensator laden: die RC-Zeitkonstante</h2>
+<div class="card">
+<h3>τ = R × C</h3>
+<p>Lädt man einen Kondensator über einen Widerstand, bestimmt die Zeitkonstante <span class="formula">τ = R × C</span> das Tempo: Nach τ ist er zu ~63 % geladen, nach 5·τ praktisch voll (&gt;99 %). Entladen läuft spiegelbildlich (nach τ sind noch ~37 % da).</p>
+<p class="note">Beispiel: 10 kΩ × 100 µF → τ = 1 s, voll nach ~5 s. Dieses Prinzip nutzt z. B. der 555-Timer: sein RC-Glied bestimmt Blinktakt und Zeitintervalle.</p>
 </div>
 
 <h2>Begriffe einfach erklärt (Glossar)</h2>
@@ -259,7 +278,7 @@ li.warn{color:var(--warn-ink)}
 <div class="card"><h3>Frequenz: Hertz (Hz)</h3><p>Wie oft pro Sekunde etwas schwingt/sich wiederholt. 1 Hz = einmal pro Sekunde. Wichtig bei Takt, Signalen, Tönen.</p></div>
 <div class="card"><h3>Kurzschluss</h3><p>Plus und Minus direkt verbunden, ohne Bauteil dazwischen. Strom wird sehr groß → Hitze, Rauch, kaputtes Netzteil. Immer vermeiden.</p></div>
 <div class="card"><h3>Polarität</h3><p>Manche Bauteile haben Plus und Minus und müssen richtig herum eingebaut werden (LED, Elko, Diode, Akku). Falsch herum = Funktion weg oder Bauteil kaputt.</p></div>
-<div class="card"><h3>Logikpegel (HIGH / LOW)</h3><p>Digitale Bauteile kennen nur zwei Zustände: HIGH (Spannung da, meist 3,3 V oder 5 V) = "1", LOW (0 V) = "0".</p></div>
+<div class="card"><h3>Logikpegel (HIGH / LOW)</h3><p>Digitale Bauteile kennen zwei Zustände: HIGH = "1" (nahe Versorgungsspannung, meist 3,3 V oder 5 V) und LOW = "0" (nahe 0 V). Dahinter stehen definierte Schwellbereiche — dazwischen ist der Pegel undefiniert. Deshalb brauchen offene Eingänge einen Pull-up oder Pull-down.</p></div>
 <div class="card"><h3>Pull-up / Pull-down</h3><p>Ein Widerstand, der einen Eingang auf einen festen Pegel zieht, wenn nichts anderes anliegt. Verhindert "flatternde", undefinierte Eingänge. Pull-up zieht auf HIGH, Pull-down auf LOW.</p></div>
 <div class="card"><h3>Entkopplungs-Kondensator</h3><p>Kleiner Kondensator (oft 100 nF) direkt neben jedem IC. Glättet kurze Spannungseinbrüche und stabilisiert die Versorgung. Faustregel: einen pro Chip.</p></div>
 <div class="card"><h3>Spannungsteiler</h3><p>Zwei Widerstände in Reihe greifen in der Mitte eine kleinere Spannung ab. Standard-Trick, um z. B. 5 V auf einen 3,3 V messbaren Wert zu bringen.</p></div>
@@ -284,6 +303,19 @@ li.warn{color:var(--warn-ink)}
 <tr><td>Mikro</td><td>µ</td><td>0,000001</td><td>F (Elkos), A, H</td></tr>
 <tr><td>Nano</td><td>n</td><td>0,000000001</td><td>F (Keramik-Kondensatoren)</td></tr>
 <tr><td>Piko</td><td>p</td><td>0,000000000001</td><td>F (sehr kleine Kondensatoren)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kondensator-Codes entschlüsseln</h2>
+<p>Kleine Kondensatoren tragen den Wert als 3-stelligen Code in Pikofarad: erste zwei Ziffern, dritte Ziffer = Anzahl der Nullen. Elkos tragen dagegen Klartext (z. B. „470 µF 25 V").</p>
+<div class="tbl-wrap"><table style="min-width:520px">
+<thead><tr><th>Aufdruck</th><th>Rechnung</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td>102</td><td>10 + 2 Nullen = 1 000 pF</td><td>1 nF</td></tr>
+<tr><td>223</td><td>22 + 3 Nullen = 22 000 pF</td><td>22 nF</td></tr>
+<tr><td>104</td><td>10 + 4 Nullen = 100 000 pF</td><td><b>100 nF</b> (der Standard-Entkoppler)</td></tr>
+<tr><td>474</td><td>47 + 4 Nullen = 470 000 pF</td><td>470 nF</td></tr>
+<tr><td>105</td><td>10 + 5 Nullen = 1 000 000 pF</td><td>1 µF</td></tr>
 </tbody>
 </table></div>
 </section>
@@ -330,22 +362,21 @@ li.warn{color:var(--warn-ink)}
 <h3>Löten: die Basics</h3>
 <div class="card">
 <ul>
-<li><b>Temperatur:</b> bleihaltiges Lot ca. 320 bis 340 °C, bleifrei ca. 350 bis 370 °C.</li>
+<li><b>Temperatur der Spitze:</b> bleihaltiges Lot 300–330 °C, bleifrei 330–370 °C. Nicht mit dem Schmelzpunkt des Lots verwechseln (bleihaltig 183–190 °C, bleifrei ~217 °C) — die Reserve gleicht Wärmeverluste an Pad und Beinchen aus.</li>
 <li><b>Reihenfolge:</b> erst die <b>Lötstelle</b> mit der Spitze erwärmen, dann den Draht (Lot) an die Stelle führen, nicht an die Spitze. Lot fließt zur Wärme.</li>
-<li><b>Gute Lötstelle:</b> glänzend, glatt, kegelförmig. Matt/kugelig = "kalte" Lötstelle, neu machen.</li>
+<li><b>Gute Lötstelle:</b> konkave, geschlossene Kehle, sauber benetzt. Bleihaltig glänzt, bleifrei ist von Natur aus matter — Mattigkeit allein ist kein Fehler. Kugelig und schlecht benetzt = kalte Lötstelle: frisches Flussmittel dazu und neu aufschmelzen.</li>
 <li><b>Flussmittel</b> entfernt Oxid und lässt Lot sauber fließen. Bei SMD fast Pflicht.</li>
 <li><b>THT</b> = Bauteile mit Drahtbeinchen durch Löcher (einfach). <b>SMD</b> = winzige Bauteile auf der Oberfläche (fein, braucht Übung, Lupe/Pinzette).</li>
 <li><b>Entlöten:</b> Entlötlitze (saugt Lot auf) oder Entlötpumpe.</li>
+<li>Ausführlich (SMD, Heißluft, Fehlerbilder): eigenes Artefakt <a href="loeten-referenz.html">Löten-Referenz</a>.</li>
 </ul>
 </div>
 
 <h3>Steckbrett (Breadboard) nutzen</h3>
 <div class="card">
 <ul>
-<li>Die langen Schienen am Rand (oft rot/blau) sind durchgehend: für Plus und Masse.</li>
-<li>In der Mitte sind die Reihen jeweils <b>5er-Gruppen senkrecht</b> verbunden, getrennt durch die Mittelrille.</li>
-<li>ICs werden mittig über die Rille gesteckt, damit beide Beinchenreihen getrennt sind.</li>
-<li>Nur für Prototypen/Tests, nicht für dauerhafte oder hohe Ströme.</li>
+<li>Kurzform: Randschienen = Plus/Masse (durchgehend), Mittelfeld = senkrechte 5er-Gruppen, ICs über die Mittelrille.</li>
+<li>Nur für Prototypen und kleine Ströme. Innenleben, Stolperfallen und der Weg zur Lochrasterplatine: Tab „Steckbrett".</li>
 </ul>
 </div>
 
@@ -378,13 +409,12 @@ li.warn{color:var(--warn-ink)}
 
 <h2>Ohmsches Gesetz: was du kennst, fülle ich aus</h2>
 <div class="card">
-<p class="note">Trage zwei Werte ein, leer lassen was du suchst.</p>
+<p class="note">Trage zwei Werte ein und lass das dritte Feld leer — das Ergebnis erscheint sofort. Sind alle drei gefüllt, wird auf Stimmigkeit geprüft.</p>
 <div class="calc">
 <div><label>Spannung U (V)</label><input type="number" id="ohm-u" step="any"></div>
 <div><label>Strom I (A)</label><input type="number" id="ohm-i" step="any"></div>
 <div><label>Widerstand R (Ω)</label><input type="number" id="ohm-r" step="any"></div>
 </div>
-<button class="btn" onclick="calcOhm()">Berechnen</button>
 <div class="big-out" id="ohm-out"></div>
 </div>
 
@@ -514,6 +544,7 @@ li.warn{color:var(--warn-ink)}
 <div class="card"><ul>
 <li>Schwarz in COM, Rot in VΩ, Drehrad auf das Dioden-Symbol ▷⊢.</li>
 <li>Rot an Anode (Plus), Schwarz an Kathode (Ring/Minus): zeigt die Durchlassspannung (z. B. 0,6 V bei Diode, ~1,8 V bei roter LED, LED leuchtet schwach).</li>
+<li>Blaue/weiße LEDs (Durchlassspannung ~3 V) leuchten dabei oft nicht und zeigen <b>OL</b>, weil die Prüfspannung vieler Multimeter nicht ausreicht — das ist <b>kein</b> Defekt.</li>
 <li>Spitzen umdrehen: muss <b>OL</b> zeigen. Zeigt es in beide Richtungen 0 oder OL → Diode defekt.</li>
 </ul></div>
 
@@ -1055,12 +1086,16 @@ const sec=document.getElementById("t-"+k);
 if(sec)sec.classList.remove("hidden");
 tabsDiv.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.k===k));
 try{localStorage.setItem("etab",k)}catch(e){}
+if(location.hash!=="#"+k)history.replaceState(null,"","#"+k);
 window.scrollTo(0,0);
 }
 TABS.forEach(t=>{const b=document.createElement("button");b.innerHTML=`<span class="ti">${t.i}</span>${t.l}`;b.dataset.k=t.k;b.onclick=()=>showTab(t.k);tabsDiv.appendChild(b)});
 let startTab=TABS[0].k;
 try{const saved=localStorage.getItem("etab");if(saved&&TABS.some(t=>t.k===saved))startTab=saved}catch(e){}
+const hashTab=location.hash.slice(1);
+if(TABS.some(t=>t.k===hashTab))startTab=hashTab;
 showTab(startTab);
+window.addEventListener("hashchange",()=>{const k=location.hash.slice(1);if(TABS.some(t=>t.k===k))showTab(k)});
 
 /* ---------- KOMPONENTEN ---------- */
 const C=[
@@ -1142,7 +1177,7 @@ const C=[
 {n:"Krokodilklemmen",cat:"kabel",catL:"Kabel/Verbinder",fn:"Schnelle Klemmverbindung ohne Löten, ideal zum Messen und Testen.",app:"Provisorien, Messgerät anklemmen, Bauteil kurz kontaktieren.",det:{kenn:"Auch als Kroko-zu-Dupont-Mischkabel sehr praktisch.",kompat:"Passt an fast alles, was Metall zeigt.",achtung:"Rutschen leicht ab und schließen dann Nachbarn kurz: Blick drauf behalten.",tags:["Provisorium","Abrutsch-Gefahr"]}},
 {n:"USB-Kabel & USB-Breakouts",cat:"kabel",catL:"Kabel/Verbinder",fn:"Strom- und Datenzufuhr; Breakout-Platinen führen USB-Pins zum Anzapfen heraus.",app:"Boards flashen, 5 V abgreifen, USB-C-Buchse in eigene Projekte einbauen.",det:{kenn:"USB liefert 5 V; USB-C-Breakouts brauchen 2 Widerstände (5,1 kΩ), um 5 V vom Netzteil zu bekommen.",kompat:"Für Datenverbindung echte Datenkabel nutzen, es gibt reine Ladekabel!",achtung:"Board wird nicht erkannt? Sehr oft ist nur das Kabel ein Ladekabel ohne Datenadern.",tags:["Ladekabel-Falle","5,1k bei USB-C"]}},
 /* ---- Verbrauchsmaterial ---- */
-{n:"Lötzinn",cat:"verbrauch",catL:"Verbrauch",fn:"Das Metall, das die Verbindung herstellt, mit Flussmittel-Seele im Kern.",app:"Jede Lötarbeit. Details im Löt-Referenz-Tool.",det:{kenn:"Bleihaltig (Sn60Pb40) fließt leichter, bleifrei (SAC305) ist Standard neu. 0,8 mm Allround.",kompat:"Temperatur je Sorte: bleihaltig ~330 °C, bleifrei ~360 °C.",achtung:"Nach dem Löten Hände waschen (bleihaltig), gut lüften.",tags:["0,8 mm Allround","Hände waschen"]}},
+{n:"Lötzinn",cat:"verbrauch",catL:"Verbrauch",fn:"Das Metall, das die Verbindung herstellt, mit Flussmittel-Seele im Kern.",app:"Jede Lötarbeit. Details im Löt-Referenz-Tool.",det:{kenn:"Bleihaltig (Sn60Pb40) fließt leichter, bleifrei (SAC305) ist Standard neu. 0,8 mm Allround.",kompat:"Spitzentemperatur: bleihaltig 300–330 °C, bleifrei 330–370 °C (Schmelzpunkt liegt viel tiefer: 183–190 bzw. ~217 °C).",achtung:"Nach dem Löten Hände waschen (bleihaltig), gut lüften.",tags:["0,8 mm Allround","Hände waschen"]}},
 {n:"Flussmittel (Flux)",cat:"verbrauch",catL:"Verbrauch",fn:"Entfernt Oxid und lässt Lot sauber fließen, das Geheimnis schöner Lötstellen.",app:"SMD-Löten, Entlöten, nachbessern alter Lötstellen. Als Stift, Spritze oder Paste.",det:{kenn:"No-Clean-Flux (z. B. Stift 951) muss nicht entfernt werden.",kompat:"Ergänzt die Flussmittel-Seele im Lötzinn, ersetzt sie bei Rework.",achtung:"Aggressive Sorten (Lötwasser/Lötfett für Klempner) NIE auf Elektronik!",tags:["No-Clean","kein Lötfett!"]}},
 {n:"Entlötlitze",cat:"verbrauch",catL:"Verbrauch",fn:"Kupfergeflecht, das flüssiges Lot aufsaugt wie ein Docht.",app:"Bauteile auslöten, Lötbrücken entfernen, Pads säubern.",det:{kenn:"2,0-2,5 mm Breite ist der Allrounder.",kompat:"Mit etwas Flux auf der Litze saugt sie deutlich besser.",achtung:"Wird beim Arbeiten heiß bis zur Fingerspitze: nachfassen, nicht festhalten.",tags:["+Flux = besser","wird heiß"]}},
 {n:"Kapton-Band (Polyimid)",cat:"verbrauch",catL:"Verbrauch",fn:"Hauchdünnes, hitzefestes Klebeband, das Löttemperaturen übersteht.",app:"Bauteile beim Löten/Heißluft abdecken, Isolieren, 3D-Druck-Betten.",det:{kenn:"Hält ~260 °C aus, elektrisch isolierend, rückstandsfrei ablösbar.",kompat:"Der Standard beim Schutz von Nachbar-Bauteilen bei Heißluft-Arbeiten.",achtung:"Billige Fälschungen schrumpeln bei Hitze, auf Polyimid achten.",tags:["~260 °C","isolierend"]}},
@@ -1248,7 +1283,7 @@ document.getElementById("thead").innerHTML=th;
 let tb="";
 if(data.length===0){tb=`<tr><td colspan="${ccols.length}" style="padding:20px;text-align:center;color:#888">Nichts gefunden. Anderen Suchbegriff probieren oder Filter auf „Alle" stellen.</td></tr>`}
 data.forEach(f=>{
-tb+=`<tr class="cat-${f.cat}" style="cursor:pointer" onclick="toggleC('${f.n.replace(/'/g,"\\'")}')">`;
+tb+=`<tr class="cat-${f.cat}" style="cursor:pointer" data-n="${f.n.replace(/"/g,"&quot;")}">`;
 ccols.forEach(c=>{
 if(c.k==="catL"){tb+=`<td><span class="cb">${f.catL}</span></td>`}
 else if(c.k==="n"){tb+=`<td><b>${f.n}</b></td>`}
@@ -1270,6 +1305,7 @@ document.getElementById("tbody").innerHTML=tb;
 }
 window.doSortC=function(k){if(sortCol===k)sortDir*=-1;else{sortCol=k;sortDir=1}renderC()};
 window.toggleC=function(n){expanded=expanded===n?null:n;renderC()};
+document.getElementById("tbody").addEventListener("click",e=>{const tr=e.target.closest("tr[data-n]");if(tr)toggleC(tr.dataset.n)});
 const cDiv=document.getElementById("cats");
 ccats.forEach(c=>{const b=document.createElement("button");b.textContent=c.l;b.className=c.k==="all"?"active":"";b.onclick=()=>{activeCat=c.k;cDiv.querySelectorAll("button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderC()};cDiv.appendChild(b)});
 document.getElementById("q").addEventListener("input",renderC);
@@ -1281,22 +1317,25 @@ const vs=parseFloat(document.getElementById("led-vs").value);
 const vf=parseFloat(document.getElementById("led-vf").value);
 const i=parseFloat(document.getElementById("led-i").value)/1000;
 const out=document.getElementById("led-out");const note=document.getElementById("led-note");
-if(isNaN(vs)||isNaN(vf)||isNaN(i)||i<=0){out.textContent="…";return}
+if(isNaN(vs)||isNaN(vf)||isNaN(i)||i<=0){out.textContent="…";note.textContent="";return}
 if(vf>=vs){out.textContent="Versorgung muss höher als LED-Spannung sein";note.textContent="";return}
 const r=(vs-vf)/i;
 const pw=(vs-vf)*i;
-// nächster E12-Wert
+// auf den nächsthöheren E12-Wert AUFrunden (kleinerer Widerstand hieße mehr Strom als geplant)
 const e12=[10,12,15,18,22,27,33,39,47,56,68,82];
-let best=r,bd=1e9;
-for(let dec=0;dec<6;dec++){for(const e of e12){const v=e*Math.pow(10,dec);if(Math.abs(v-r)<bd){bd=Math.abs(v-r);best=v}}}
-out.textContent=`R ≈ ${r.toFixed(0)} Ω  →  Normwert ${best} Ω`;
-note.textContent=`Verlustleistung am Widerstand: ${(pw*1000).toFixed(0)} mW → ein 1/4-W-Widerstand (250 mW) reicht ${pw*1000<200?'locker':'knapp, ggf. 1/2 W nehmen'}.`;
+let best=null;
+outer:for(let dec=0;dec<7;dec++){for(const e of e12){const v=e*Math.pow(10,dec);if(v>=r-1e-9){best=v;break outer}}}
+if(best===null)best=82e6;
+const mw=pw*1000;
+const ptxt=mw<=200?"ein 1/4-W-Widerstand (250 mW) reicht locker":mw<=250?"ein 1/4-W-Widerstand (250 mW) ist an der Grenze — besser 1/2 W nehmen":"über 250 mW — mindestens einen 1/2-W-Widerstand nehmen";
+out.textContent=`R ≈ ${r.toFixed(0)} Ω  →  Normwert ${best} Ω (aufgerundet)`;
+note.textContent=`Verlustleistung am Widerstand: ${mw.toFixed(0)} mW — ${ptxt}.`;
 }
 ["led-vs","led-vf","led-i"].forEach(id=>document.getElementById(id).addEventListener("input",calcLED));
 calcLED();
 
 /* ---------- RECHNER: OHM ---------- */
-window.calcOhm=function(){
+function calcOhm(){
 const u=parseFloat(document.getElementById("ohm-u").value);
 const i=parseFloat(document.getElementById("ohm-i").value);
 const r=parseFloat(document.getElementById("ohm-r").value);
@@ -1304,12 +1343,16 @@ const out=document.getElementById("ohm-out");
 const has=[!isNaN(u),!isNaN(i),!isNaN(r)].filter(Boolean).length;
 if(has<2){out.textContent="Bitte zwei Werte eingeben";return}
 let U=u,I=i,R=r;
-if(isNaN(u))U=I*R;
-else if(isNaN(i))I=U/R;
-else if(isNaN(r))R=U/I;
+if(has===3){
+if(Math.abs(u-i*r)>Math.max(0.005,Math.abs(u)*0.01)){out.textContent=`Die drei Werte passen nicht zusammen: zu I und R gehört U = ${(i*r).toFixed(3)} V. Ein Feld leeren, dann rechne ich es aus.`;return}
+}else if(isNaN(u)){U=I*R}
+else if(isNaN(i)){if(R===0){out.textContent="R = 0 Ω wäre ein Kurzschluss — der Strom ist dann nicht begrenzt.";return}I=U/R}
+else{if(I===0){out.textContent="Bei I = 0 A fließt nichts — R lässt sich so nicht bestimmen.";return}R=U/I}
 const P=U*I;
 out.innerHTML=`U = ${U.toFixed(3)} V &nbsp;·&nbsp; I = ${I.toFixed(4)} A (${(I*1000).toFixed(1)} mA) &nbsp;·&nbsp; R = ${R.toFixed(1)} Ω &nbsp;·&nbsp; P = ${P.toFixed(3)} W`;
-};
+}
+["ohm-u","ohm-i","ohm-r"].forEach(id=>document.getElementById(id).addEventListener("input",calcOhm));
+calcOhm();
 
 /* ---------- RECHNER: FARBCODE ---------- */
 const colors=[
@@ -1320,9 +1363,9 @@ const colors=[
 {n:"Gelb",v:4,hex:"#f1c40f",mult:10000,tol:null},
 {n:"Grün",v:5,hex:"#27ae60",mult:100000,tol:"±0,5%"},
 {n:"Blau",v:6,hex:"#2980b9",mult:1000000,tol:"±0,25%"},
-{n:"Violett",v:7,hex:"#8e44ad",mult:10000000,tol:null},
-{n:"Grau",v:8,hex:"#7f8c8d",mult:null,tol:null},
-{n:"Weiß",v:9,hex:"#ecf0f1",mult:null,tol:null},
+{n:"Violett",v:7,hex:"#8e44ad",mult:10000000,tol:"±0,1%"},
+{n:"Grau",v:8,hex:"#7f8c8d",mult:100000000,tol:"±0,05%"},
+{n:"Weiß",v:9,hex:"#ecf0f1",mult:1000000000,tol:null},
 {n:"Gold",v:null,hex:"#c9a227",mult:0.1,tol:"±5%"},
 {n:"Silber",v:null,hex:"#bdc3c7",mult:0.01,tol:"±10%"},
 ];
@@ -1346,11 +1389,13 @@ document.getElementById("cb1").style.background=c1.hex;
 document.getElementById("cb2").style.background=c2.hex;
 document.getElementById("cb3").style.background=c3.hex;
 document.getElementById("cb4").style.background=c4.hex;
+const nice=x=>String(parseFloat(x.toPrecision(6)));
 let val=(c1.v*10+c2.v)*c3.mult;
 let disp;
-if(val>=1e6)disp=(val/1e6)+" MΩ";
-else if(val>=1e3)disp=(val/1e3)+" kΩ";
-else disp=val+" Ω";
+if(val>=1e9)disp=nice(val/1e9)+" GΩ";
+else if(val>=1e6)disp=nice(val/1e6)+" MΩ";
+else if(val>=1e3)disp=nice(val/1e3)+" kΩ";
+else disp=nice(val)+" Ω";
 document.getElementById("band-out").textContent=`${disp}  ${c4.tol}`;
 }
 ["b1","b2","b3","b4"].forEach(id=>document.getElementById(id).addEventListener("change",calcBand));
@@ -1370,7 +1415,7 @@ out.textContent=`Ausgang ≈ ${vout.toFixed(3)} V`;
 calcVT();
 
 /* ---------- VERGLEICHSMATRIZEN ---------- */
-function rateColor(v){if(v<=3)return"#D64B3C";if(v<=6)return"#E59A3C";return"#3DA66E";}
+function rateColor(v){if(v<=3)return"var(--rate-bad)";if(v<=6)return"var(--rate-mid)";return"var(--rate-good)";}
 function renderRating(containerId,headers,rows){
 let h="<div class='tbl-wrap'><table style='min-width:700px'><thead><tr>";
 headers.forEach((hd,i)=>h+=`<th style='${i===0?"":"min-width:88px"}'>${hd}</th>`);
