@@ -683,6 +683,30 @@ li.warn{color:var(--warn-ink)}
 </ul></div>
 <p class="note">Faustregel fürs Limit: knapp über dem normalen Verbrauch. So bleibt Reserve für den Betrieb, aber ein Fehler wird sofort gedeckelt.</p>
 
+<h2>Welche Spannung, welches Strom-Limit? Typische Einstellungen</h2>
+<p>Richtwerte für die häufigsten Hobby-Zwecke. Die Logik dahinter: <b>Spannung</b> = was der Verbraucher laut Aufdruck/Datenblatt braucht, <b>Strom-Limit</b> = sein normaler Verbrauch plus 20–50 % Reserve.</p>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Zweck</th><th>Spannung</th><th>Strom-Limit</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td>Unbekannte oder frisch reparierte Schaltung zum ersten Mal</td><td>erwartete Betriebsspannung</td><td>0,05–0,1 A, langsam erhöhen</td><td>„Smoke-Test": springt das Netzteil sofort auf CC, stimmt etwas nicht</td></tr>
+<tr><td>3,3-V-Module und -Sensoren direkt</td><td>3,3 V</td><td>0,2–0,5 A</td><td>ESP32 zieht kurze WLAN-Spitzen → eher 0,5 A</td></tr>
+<tr><td>Arduino / ESP32-Board über den 5-V-Pin</td><td>5 V</td><td>0,5–1 A</td><td>umgeht den Board-Regler — Spannung exakt einstellen</td></tr>
+<tr><td>Logikschaltung mit ein paar LEDs/Sensoren</td><td>5 V</td><td>0,5 A</td><td>reicht für die meisten Steckbrett-Aufbauten</td></tr>
+<tr><td>Servo (SG90 / MG90S)</td><td>5–6 V</td><td>1–2 A</td><td>Stellspitzen sind kurz, aber hoch</td></tr>
+<tr><td>WS2812-LED-Streifen</td><td>5 V</td><td>60 mA je LED bei voll Weiß</td><td>60 LEDs → bis 3,6 A; Limit passend setzen, dicke Zuleitung</td></tr>
+<tr><td>Kleiner DC-/Getriebemotor (TT-Motor)</td><td>6 V</td><td>1–1,5 A</td><td>Anlauf-/Blockierstrom ist ein Vielfaches des Nennstroms</td></tr>
+<tr><td>12-V-Lüfter oder 12-V-LED-Streifen</td><td>12 V</td><td>Nennstrom + ~30 %</td><td>Angabe steht auf dem Gerät bzw. Streifen</td></tr>
+<tr><td>12-V-Motor unter Last</td><td>12 V</td><td>2–3× Nennstrom (Anlauf)</td><td>zu knapp gesetzt riegelt CC schon beim Start ab</td></tr>
+<tr><td>Li-Ion-Zelle grob laden (Notbehelf)</td><td>exakt 4,20 V</td><td>0,5 × Kapazität (1 Ah → 0,5 A)</td><td>nie unbeaufsichtigt — siehe Warnung unter „Worauf achten"</td></tr>
+</tbody>
+</table></div>
+<div class="card">
+<div class="rule"><span class="ico">🎯</span><div><b>Limit = Verbrauch + 20–50 % Reserve.</b> Lieber knapp starten und bei Bedarf erhöhen — ein zu großzügiges Limit schützt nichts.</div></div>
+<div class="rule"><span class="ico">📟</span><div><b>Spannung vor dem Anschließen prüfen.</b> Kurz Output an, Anzeige (oder Multimeter) kontrollieren, dann erst die Schaltung dran.</div></div>
+<div class="rule"><span class="ico">⚙️</span><div><b>Motoren nach dem Anlaufstrom auslegen, nicht nach dem Nennstrom.</b> Beim Start und bei Blockade fließt ein Vielfaches (Details im Tab „Motoren").</div></div>
+</div>
+<p class="note"><b>Praktischer CC-Trick:</b> Eine LED ohne Vorwiderstand testen: Spannung auf 5 V, Strom-Limit auf 15 mA, LED anschließen. Das Netzteil geht in CC und arbeitet als Konstantstromquelle — durch die LED fließen exakt 15 mA, egal welche Farbe.</p>
+
 <h2>Begriffe einfach erklärt</h2>
 <div class="grid2">
 <div class="card"><h3>OVP / OCP</h3><p>Überspannungs- und Überstromschutz. Schaltet den Ausgang hart ab, wenn ein eingestellter Grenzwert überschritten wird. Zusätzliche Sicherheitsnetze über CV/CC hinaus.</p></div>
