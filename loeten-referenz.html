@@ -252,12 +252,12 @@ tbody tr:hover td{background:var(--surface-hover)}
 
 <h3>Jede Session</h3>
 <div class="steps">
-<div class="step"><b>Aufheizen und verzinnen.</b> Spitze sauber abstreifen, frisch benetzen. Sie muss glänzen.</div>
-<div class="step"><b>Temperatur wählen.</b> Bleihaltig 300–330 °C, bleifrei 330–370 °C — so niedrig, wie das Lot noch sauber fließt (Details im Tab <a class="goto" href="#temp">Temperaturen</a>).</div>
-<div class="step"><b>Fixieren.</b> Platine in die dritte Hand, Bauteile und Flussmittel bereitlegen.</div>
-<div class="step"><b>Löten.</b> Pad und Bauteil gemeinsam erwärmen, Lot ans Werkstück geben, wenige Sekunden.</div>
-<div class="step"><b>Prüfen.</b> Sichtkontrolle, bei Bedarf Durchgang messen.</div>
-<div class="step"><b>Reinigen und parken.</b> Flussmittelreste mit IPA entfernen, Spitze dick verzinnt ausschalten.</div>
+<div class="step"><b>Temperatur einstellen und aufheizen.</b> Bleihaltig 300–330 °C, bleifrei 330–370 °C (Details im Tab <a class="goto" href="#temp">Temperaturen</a>). Warten, bis die Anzeige die Zieltemperatur hält.</div>
+<div class="step"><b>Spitze putzen und verzinnen.</b> Spitze in der Messingwolle abstreifen. Etwas Lotdraht direkt an die Spitze halten, bis er schmilzt und sie überzieht, nochmal kurz abstreifen. Die Spitze muss jetzt silbrig glänzen — wenn nicht: wiederholen oder Tip Tinner.</div>
+<div class="step"><b>Arbeitsplatz richten.</b> Platine in die dritte Hand klemmen. Lot, Flussmittel, Pinzette und Entlötlitze in Griffweite. Kolben zwischen den Stellen immer in den Halter, nie auf den Tisch.</div>
+<div class="step"><b>Löten.</b> Ablauf je nach Bauteil — Tab <a class="goto" href="#tht">THT</a> oder <a class="goto" href="#smd">SMD</a>. Grundmuster immer gleich: Spitze anlegen → warten → Lot zugeben → Lot weg → Spitze weg.</div>
+<div class="step"><b>Prüfen.</b> Jede Stelle ansehen (konkave Kehle? benetzt?), bei Zweifeln mit dem Multimeter Durchgang messen — Strom erst danach.</div>
+<div class="step"><b>Aufräumen.</b> Flussmittelreste mit IPA und Wattestäbchen entfernen. Spitze abstreifen, dick mit frischem Lot überziehen (Schutzschicht), dann erst ausschalten.</div>
 </div>
 
 <h3>Spickzettel</h3>
@@ -274,9 +274,10 @@ tbody tr:hover td{background:var(--surface-hover)}
 <div class="card">
 <div class="ct"><span class="b b-all">SMD</span> Chip (0603–1206)</div>
 <ul>
-<li>Ein Pad verzinnen</li>
+<li>Ein Pad verzinnen, Flussmittel auf beide</li>
 <li>Bauteil mit Pinzette ins schmelzende Lot schieben</li>
-<li>Sitz prüfen, dann zweite Seite löten</li>
+<li>Spitze weg → erst dann Pinzette loslassen</li>
+<li>Sitz prüfen, zweite Seite löten, erste nachlöten</li>
 </ul>
 <a class="goto" href="#smd">Vollständige Anleitung →</a>
 </div>
@@ -309,12 +310,32 @@ tbody tr:hover td{background:var(--surface-hover)}
 <h3>Kernwerkzeuge</h3>
 <div class="grid">
 <div class="card"><div class="ct">Lötstation (geregelt)</div><div class="cd">Herzstück. Hält die Temperatur konstant.</div><ul><li>Wechselbare Spitzen wichtig</li><li>Schnelles Aufheizen spart Nerven</li><li>Bewährte Marken: Hakko, JBC, Weller, Pinecil</li></ul></div>
-<div class="card"><div class="ct">Lötspitzen</div><div class="cd">Die Form bestimmt die Wärmeübertragung.</div><ul><li><b>Meißel / Chisel:</b> Allrounder, gibt viel Wärme ab</li><li><b>Bleistift / Conical:</b> Feinarbeit, wenig Kontaktfläche</li><li><b>Hufeisen / Hoof:</b> Drag-Soldering, hält Lot in der Wölbung</li></ul></div>
+<div class="card"><div class="ct">Lötspitzen</div><div class="cd">Die Form bestimmt die Wärmeübertragung.</div><ul><li><b>Meißel / Chisel:</b> Allrounder, gibt viel Wärme ab</li><li><b>Bleistift / Conical:</b> Feinarbeit, wenig Kontaktfläche</li><li><b>Hufeisen / Hoof:</b> Drag-Soldering, hält Lot in der Wölbung</li><li>Konkrete TS-Spitzen: Tabelle unten</li></ul></div>
 <div class="card"><div class="ct">Heißluftstation</div><div class="cd">Temperatur und Luftstrom getrennt regelbar.</div><ul><li>Verschiedene Düsen je Bauteilgröße</li><li>Regelbarer Luftstrom ist Pflicht</li></ul></div>
 <div class="card"><div class="ct">Heizplatte / Preheater</div><div class="cd">Mini-Reflow und Vorwärmung.</div><ul><li>Gleichmäßige Temperaturverteilung wichtig</li><li>Manche Modelle mit Profilsteuerung</li></ul></div>
 </div>
 
 <div class="tip"><b>Neue Spitze einbrennen:</b> Beim allerersten Aufheizen sofort Lot anbieten und die Spitze verzinnen, sobald es schmilzt — die frische Eisenschicht darf nie trocken glühen. Danach gilt dauerhaft: Spitze immer verzinnt lagern und dick verzinnt ausschalten, nie blank.</div>
+
+<h3>Spitzen für TS100 / TS101 / Pinecil (TS-Serie)</h3>
+<p>TS100, TS101 und Pinecil (V1/V2) nutzen dasselbe Spitzensystem — jede Spitze hier passt auf alle drei. Für den Pinecil V2 gibt es dieselben Formen zusätzlich als kürzere Pine64-Version (heizt schneller, präziser zu führen).</p>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Spitze</th><th>Form</th><th>Am besten für</th></tr></thead>
+<tbody>
+<tr><td><b>TS-B2</b></td><td>runde Kuppe (liegt meist bei)</td><td>Allrounder für den Einstieg: THT, Kabel. Solide, aber die Schrägen unten übertragen Wärme besser</td></tr>
+<tr><td><b>TS-BC2</b></td><td>45°-Schräge, 2 mm (Mini-Hufeisen)</td><td><b>Der Alltags-Favorit:</b> THT, SMD-Chips und Drag-Soldering — die schräge Fläche hält einen Lottropfen</td></tr>
+<tr><td><b>TS-C1</b></td><td>45°-Schräge, 1 mm</td><td>feines SMD (0603/0402) mit mehr Wärmenachschub als eine Nadelspitze</td></tr>
+<tr><td><b>TS-C4</b></td><td>45°-Schräge, 4 mm</td><td>große Pads, Masseflächen, dicke Kabel, Steckverbinder — maximale Wärmeübertragung</td></tr>
+<tr><td><b>TS-D24</b></td><td>Meißel, 2,4 mm</td><td>THT-Standard: Stiftleisten, Widerstände, überall wo eine flache Kante hilft</td></tr>
+<tr><td><b>TS-K</b></td><td>großes Messer</td><td>Drag über breite Pinreihen, Lötbrücken „aufschneiden", mit der Fläche große Pads — Spitze, Kante und Fläche nutzbar</td></tr>
+<tr><td><b>TS-KU</b></td><td>schmales Messer</td><td>wie TS-K, nur feiner — für kleinere ICs und engere Platinen</td></tr>
+<tr><td><b>TS-I</b></td><td>feine Nadel</td><td>Feinarbeit an engen Stellen; wenig Wärmenachschub, nur für kleine Lötstellen</td></tr>
+<tr><td><b>TS-ILS</b></td><td>lange, extra feine Nadel</td><td>präziseste Spitze: 0402, feine IC-Pins, Reparatur zwischen Bauteilen — am wenigsten Wärme</td></tr>
+<tr><td><b>TS-JL02</b></td><td>gebogene feine Spitze</td><td>schwer erreichbare Stellen: unter Bauteile, hinter Steckverbinder, in Gehäusen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Kaufempfehlung:</b> <b>TS-BC2</b> als Immer-drauf-Spitze, dazu <b>TS-D24</b> für THT-Serien und <b>TS-ILS</b> (oder TS-C1) für feines SMD — diese drei decken praktisch alles ab. TS-C4 erst, wenn dicke Kabel oder Masseflächen dazukommen.</div>
+<div class="warn"><b>Spitze nur stromlos wechseln:</b> Bei TS100/TS101/Pinecil sitzen Heizelement und Kontakte in der Spitze. Gerät vom Strom trennen, Spitze abkühlen lassen (oder mit Silikonmatte greifen), dann tauschen — nie unter Spannung ziehen.</div>
 
 <h3>Halten, Sehen, Reinigen</h3>
 <div class="grid">
@@ -444,13 +465,15 @@ tbody tr:hover td{background:var(--surface-hover)}
 <h2><span class="b b-kolben">Lötkolben</span> THT löten</h2>
 <p>THT steht für Through-Hole Technology: bedrahtete Bauteile durch Bohrungen. Der einfachste Einstieg.</p>
 <div class="steps">
-<div class="step"><b>Spitze vorbereiten.</b> Aufheizen, abstreifen, frisch verzinnen. Nur eine saubere, glänzende Spitze überträgt Wärme.</div>
-<div class="step"><b>Bauteil einsetzen.</b> Durch die Bohrung stecken, Beinchen auf der Rückseite leicht spreizen, damit es hält.</div>
-<div class="step"><b>Beide Teile erwärmen.</b> Spitze gleichzeitig an Pad und Beinchen anlegen, ein bis zwei Sekunden.</div>
-<div class="step"><b>Lot zuführen.</b> Lot an die Lötstelle geben, nicht an die Spitze. Es muss am erwärmten Werkstück schmelzen.</div>
-<div class="step"><b>Fließen lassen.</b> Das Lot zieht in das Loch und bildet eine kleine konkave Kehle, vulkanförmig um das Beinchen.</div>
-<div class="step"><b>Reihenfolge beim Lösen.</b> Erst das Lot wegnehmen, dann die Spitze. So bleibt die Form sauber.</div>
-<div class="step"><b>Beinchen kürzen.</b> Überstand mit dem Seitenschneider knapp über der Lötstelle abschneiden.</div>
+<div class="step"><b>Spitze vorbereiten.</b> Kolben aus dem Halter, in der Messingwolle abstreifen, einen Hauch Lot auf die Spitze schmelzen. Glänzt sie silbrig? Weiter. Kolben zurück in den Halter.</div>
+<div class="step"><b>Bauteil einsetzen.</b> Beinchen von oben durch die Bohrungen stecken, bis das Bauteil aufliegt. Platine umdrehen, beide Beinchen leicht nach außen biegen (~30°) — jetzt fällt nichts mehr raus.</div>
+<div class="step"><b>Lot bereit halten.</b> Lotdraht in die eine Hand, Kolben in die andere. Beide gleichzeitig zur Lötstelle führen, ohne dass sie sich schon berühren.</div>
+<div class="step"><b>Spitze anlegen und warten.</b> Spitze so an die Stelle drücken, dass sie Pad <b>und</b> Beinchen gleichzeitig berührt. 1–2 Sekunden nur halten — noch kein Lot.</div>
+<div class="step"><b>Lot zugeben.</b> Lotdraht von der gegenüberliegenden Seite an Pad + Beinchen drücken (nicht an die Spitze). Schmilzt er nicht sofort: 1 Sekunde länger warten, dann nochmal.</div>
+<div class="step"><b>Fließen lassen.</b> So viel Draht nachschieben, bis das Loch gefüllt ist und sich eine kleine konkave Kehle ums Beinchen bildet — dauert 1–2 Sekunden.</div>
+<div class="step"><b>Lösen — in dieser Reihenfolge:</b> Erst den Lotdraht wegziehen. Spitze noch ~1 Sekunde dranlassen, damit alles glatt verläuft. Dann Spitze weg, Kolben in den Halter.</div>
+<div class="step"><b>Erstarren lassen.</b> 2–3 Sekunden nichts bewegen, nicht pusten. Erst dann die Platine anfassen.</div>
+<div class="step"><b>Beinchen kürzen.</b> Mit dem Seitenschneider knapp über der Kehle abschneiden. Abgeschnittene Enden fliegen — mit dem Finger abdecken oder wegdrehen.</div>
 </div>
 
 <div class="gb">
@@ -495,10 +518,14 @@ tbody tr:hover td{background:var(--surface-hover)}
 <h2><span class="b b-kolben">Lötkolben</span> SMD löten</h2>
 <h3>Chip-Bauteile (Widerstand, Kondensator, 0603–1206)</h3>
 <div class="steps">
-<div class="step"><b>Ein Pad verzinnen.</b> Nur eines der beiden Pads mit etwas Lot vorbereiten.</div>
-<div class="step"><b>Bauteil halten und antippen.</b> Mit der Pinzette positionieren, Spitze auf das verzinnte Pad, das Bauteil rutscht in das schmelzende Lot.</div>
-<div class="step"><b>Ausrichtung prüfen.</b> Sitzt es gerade und plan auf beiden Pads?</div>
-<div class="step"><b>Zweite Seite löten.</b> Das andere Pad normal verlöten. Fertig.</div>
+<div class="step"><b>Ein Pad verzinnen.</b> Spitze auf <b>eines</b> der beiden Pads (1 Sekunde), etwas Lot zugeben, Spitze weg. Auf dem Pad bleibt ein kleiner Lothügel. Kolben in den Halter.</div>
+<div class="step"><b>Flussmittel.</b> Einen Tupfer Flussmittel auf beide Pads (Pen oder Gel-Spritze).</div>
+<div class="step"><b>Bauteil auflegen.</b> Mit der Pinzette seitlich greifen und so auf die Pads legen, dass beide Enden auf ihren Pads liegen. Pinzette hält das Bauteil — <b>nicht loslassen</b>.</div>
+<div class="step"><b>Einschieben.</b> Kolben in die freie Hand. Spitze auf den Lothügel drücken, das Lot wird flüssig — jetzt das Bauteil mit der Pinzette in das flüssige Lot schieben, bis es plan aufliegt.</div>
+<div class="step"><b>Spitze weg, dann erst loslassen.</b> Spitze abheben, 1–2 Sekunden warten (Lot wird fest), dann die Pinzette öffnen. Wer vorher loslässt, verschiebt das Bauteil.</div>
+<div class="step"><b>Sitz prüfen.</b> Liegt es gerade und plan auf beiden Pads? Wenn nicht: Lothügel wieder schmelzen und mit der Pinzette nachschieben.</div>
+<div class="step"><b>Zweite Seite löten.</b> Spitze an Pad + Bauteilende (1 Sekunde), Lot zugeben bis ein kleines Fillet entsteht, Lot weg, Spitze weg.</div>
+<div class="step"><b>Erste Seite fertig machen.</b> Dort ist bis jetzt nur der Lothügel — Spitze nochmal kurz an Pad + Bauteilende, bei Bedarf einen Hauch Lot dazu, bis auch hier ein sauberes Fillet steht.</div>
 </div>
 
 <div class="gb">
@@ -536,11 +563,16 @@ tbody tr:hover td{background:var(--surface-hover)}
 
 <h3>ICs mit vielen Pins (SOIC, TSSOP, QFP) per Drag-Soldering</h3>
 <div class="steps">
-<div class="step"><b>Pads verzinnen, IC fixieren.</b> Einen Eckpin antacken, Ausrichtung exakt prüfen, dann den diagonal gegenüberliegenden Eckpin festlöten.</div>
-<div class="step"><b>Großzügig Flussmittel.</b> Über alle Pins flüssiges Flussmittel auftragen. Das ist der eigentliche Trick.</div>
-<div class="step"><b>Drag.</b> Mit wenig Lot an der Spitze langsam über die Pinreihe ziehen. Das Flussmittel verhindert Brücken.</div>
-<div class="step"><b>Brücken entfernen.</b> Verbleibende Brücken mit Entlötlitze und Flussmittel abziehen.</div>
-<div class="step"><b>Kontrolle.</b> Unter Lupe oder Mikroskop jeden Pin prüfen, Durchgang testen.</div>
+<div class="step"><b>Ein Eck-Pad verzinnen.</b> Nur eines: Spitze drauf, etwas Lot, Spitze weg — kleiner Lothügel.</div>
+<div class="step"><b>IC auflegen und ausrichten.</b> Mit der Pinzette so platzieren, dass <b>alle</b> Pins genau auf ihren Pads liegen (Pin-1-Markierung beachten!). Pinzette hält die Position.</div>
+<div class="step"><b>Eckpin antacken.</b> Spitze auf den verzinnten Eckpin, der Lothügel schmilzt und verbindet Pin und Pad. Spitze weg, 1 Sekunde warten, Pinzette loslassen.</div>
+<div class="step"><b>Ausrichtung kontrollieren.</b> Unter der Lupe: Sitzen wirklich alle Pins auf ihren Pads? Wenn nicht: Eckpin wieder schmelzen und das IC nachrichten — jetzt geht das noch.</div>
+<div class="step"><b>Gegenecke festlöten.</b> Den diagonal gegenüberliegenden Eckpin normal löten (Spitze dran, Lot dazu, Lot weg, Spitze weg). Das IC sitzt jetzt fest.</div>
+<div class="step"><b>Flussmittel auftragen.</b> Großzügig über alle Pins einer Reihe — das ist der eigentliche Trick.</div>
+<div class="step"><b>Drag.</b> Einen kleinen Lottropfen an die Spitze nehmen (Hufeisen-/BC-Spitze ideal). Spitze flach am Anfang der Pinreihe aufsetzen und langsam (ca. 1 cm in 2–3 Sekunden) über alle Pins ziehen — das Lot verteilt sich von selbst, das Flussmittel verhindert Brücken.</div>
+<div class="step"><b>Alle Seiten gleich.</b> Pro Pinreihe: erst Flussmittel, dann Drag.</div>
+<div class="step"><b>Brücken entfernen.</b> Flussmittel auf die Brücke, Entlötlitze auflegen, Spitze auf die Litze drücken — die Brücke saugt sich ein. Litze <b>zusammen mit der Spitze</b> abheben, nie kalt abreißen (reißt Pads ab).</div>
+<div class="step"><b>Kontrolle.</b> Unter Lupe/Mikroskop jeden Pin ansehen, benachbarte Pins mit dem Multimeter auf Kurzschluss prüfen.</div>
 </div>
 <div class="tip"><b>Merksatz für feine ICs:</b> Lieber bewusst Brücken ziehen und dann mit Litze sauber abziehen, als jeden Pin einzeln treffen zu wollen. Flussmittel macht den Unterschied.</div>
 
@@ -570,18 +602,21 @@ tbody tr:hover td{background:var(--surface-hover)}
 <h2><span class="b b-luft">Heißluft</span> löten und entlöten</h2>
 <h3>Bauteil setzen (z. B. QFN)</h3>
 <div class="steps">
-<div class="step"><b>Pads vorbereiten.</b> Dünn Lötpaste auftragen, oder Pads verzinnen und Flussmittel dazu.</div>
-<div class="step"><b>Bauteil platzieren.</b> Mit der Pinzette grob ausrichten. Grobe Genauigkeit reicht — Self-Alignment zieht es gerade.</div>
-<div class="step"><b>Düse und Werte wählen.</b> Düsengröße passend zum Bauteil, Temperatur je nach Lot (siehe Tab <a class="goto" href="#temp">Temperaturen</a>), Luftstrom eher niedrig.</div>
-<div class="step"><b>Gleichmäßig erhitzen.</b> Kreisende Bewegung über dem Bauteil, bis das Lot sichtbar fließt und das Teil leicht „einrastet&#8220;.</div>
-<div class="step"><b>Abkühlen lassen.</b> Nicht anpusten, nicht bewegen, bis das Lot fest ist.</div>
+<div class="step"><b>Station einstellen.</b> Passende Düse aufstecken (etwas größer als das Bauteil). Temperatur je nach Lot (Tab <a class="goto" href="#temp">Temperaturen</a>), Luftstrom niedrig (~30 %). Aufheizen lassen.</div>
+<div class="step"><b>Pads vorbereiten.</b> Dünn Lötpaste auf jedes Pad — oder Pads mit dem Kolben verzinnen und Flussmittel darüber geben.</div>
+<div class="step"><b>Bauteil platzieren.</b> Mit der Pinzette grob mittig auflegen. Grobe Genauigkeit reicht — Self-Alignment zieht es beim Schmelzen gerade.</div>
+<div class="step"><b>Nachbarn schützen.</b> Empfindliche Bauteile und Stecker daneben mit Kapton abdecken.</div>
+<div class="step"><b>Erhitzen.</b> Düse senkrecht, ~1 cm Abstand, langsame kleine Kreise über dem Bauteil. Nach 10–30 Sekunden wird das Lot glänzend flüssig und das Bauteil „rastet&#8220; sichtbar in Position.</div>
+<div class="step"><b>Luft wegnehmen.</b> Düse langsam nach oben wegziehen (nicht seitlich über andere Bauteile), Heißluft in den Halter.</div>
+<div class="step"><b>Abkühlen lassen.</b> 10–20 Sekunden nichts bewegen, nicht anpusten. Erst dann prüfen.</div>
 </div>
 <h3>Bauteil entlöten</h3>
 <div class="steps">
-<div class="step"><b>Umgebung schützen.</b> Nachbarbauteile mit Kapton abdecken.</div>
-<div class="step"><b>Flussmittel dazu.</b> Etwas Flussmittel rund um das Bauteil hilft beim gleichmäßigen Aufschmelzen.</div>
-<div class="step"><b>Gleichmäßig erhitzen.</b> Das ganze Bauteil erwärmen, bis alle Lötstellen flüssig sind.</div>
-<div class="step"><b>Abheben.</b> Mit der Pinzette sanft anheben, nicht hebeln. Das schont die Pads.</div>
+<div class="step"><b>Umgebung schützen.</b> Nachbarbauteile mit Kapton abdecken. Pinzette griffbereit in die freie Hand.</div>
+<div class="step"><b>Flussmittel dazu.</b> Etwas Flussmittel rund um alle Anschlüsse — schmilzt gleichmäßiger.</div>
+<div class="step"><b>Gleichmäßig erhitzen.</b> Düse ~1 cm über dem Bauteil kreisen lassen, bis <b>alle</b> Lötstellen flüssig sind. Test: das Bauteil mit der Pinzette sanft anstupsen — bewegt es sich leicht, ist alles offen.</div>
+<div class="step"><b>Abheben.</b> Senkrecht nach oben mit der Pinzette abnehmen, nicht hebeln und nicht drehen — sonst reißen Pads mit ab. Heißes Bauteil auf hitzefeste Unterlage legen.</div>
+<div class="step"><b>Pads aufräumen.</b> Restlot mit Entlötlitze abnehmen, Flussmittelreste mit IPA reinigen.</div>
 </div>
 <div class="warn"><b>Wegblas-Gefahr:</b> Zu hoher Luftstrom schießt kleine Chips quer über die Platine. Lieber etwas heißer und geduldiger als stürmisch.</div>
 </div>
