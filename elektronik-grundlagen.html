@@ -562,6 +562,66 @@ li.warn{color:var(--warn-ink)}
 <li>Besser unter Last messen (im Gerät eingebaut), denn leere Batterien zeigen ohne Last oft noch fast volle Spannung.</li>
 </ul></div>
 
+<h2>Messen an SMD-Boards & Mikrocontrollern</h2>
+<p>Auf modernen Platinen sind die Kontakte winzig und dicht — dünne Standard-Prüfspitzen rutschen ab und schließen Nachbar-Pins kurz. Das eigentliche Messen bleibt dasselbe, aber du brauchst feineres Werkzeug und einen Plan, wo du überhaupt drankommst.</p>
+
+<h3>Das richtige Werkzeug</h3>
+<div class="grid2">
+<div class="card"><h3>SMD-Grabber / IC-Hook-Klemmen</h3><p>Federklemmen mit winzigem Haken, die sich an einem einzelnen Pin oder Bauteilbein <b>festkrallen</b>. So hältst du die eine Seite fest und hast eine Hand frei fürs Antasten. Wichtigstes Zubehör für SMD.</p></div>
+<div class="card"><h3>Feine Nadel-Prüfspitzen</h3><p>Spitze, gehärtete Nadeln (oder aufsteckbare Nadeladapter). Treffen einzelne Pins, ohne den Nachbarn zu berühren. Manche haben eine Feder („Backprobe"), die sicher aufsetzt.</p></div>
+<div class="card"><h3>Lupe / Mikroskop</h3><p>Ab 0603/feinem Pitch ohne Vergrößerung kaum machbar. Ein Mikroskop zeigt dir, welchen Pin die Spitze wirklich berührt — Pflicht bei der Fehlersuche.</p></div>
+<div class="card"><h3>Dritte Hand / PCB-Halter</h3><p>Hält die Platine ruhig. Beim Antasten mit einer Hand ist eine wackelnde Platine die häufigste Ursache für Abrutscher und Kurzschlüsse.</p></div>
+</div>
+
+<h3>Wo klemmst du Masse (GND) an?</h3>
+<div class="card">
+<p>Fast jede Messung braucht einen Massebezug für die schwarze Leitung. Auf SMD-Boards findest du GND hier zuverlässig:</p>
+<ul>
+<li><b>Metallschirmung / Abschirmbleche</b>, USB-Stecker-Gehäuse, Klinken-/HDMI-Rahmen — fast immer mit GND verbunden.</li>
+<li><b>Große Bauteile:</b> der Minuspol größerer Elkos, die Massefläche unter Modulen.</li>
+<li><b>Testpunkte</b> mit „GND", „⏚" oder oft schwarz/mehrfach vorhanden.</li>
+<li><b>Schrauben-/Befestigungslöcher</b> sind häufig auf Masse gelegt.</li>
+</ul>
+<p style="margin-bottom:0">Sicher ist: einen bekannten GND-Punkt mit der Durchgangsprüfung gegen den vermuteten prüfen — piept = dieselbe Masse.</p>
+</div>
+
+<h3>Antasten ohne Kurzschluss</h3>
+<div class="card"><ul>
+<li><b>Eine Seite festklemmen.</b> SMD-Grabber an GND (oder an den festen Punkt), mit der Nadelspitze nur noch einen Kontakt suchen — so kann nur eine Spitze verrutschen.</li>
+<li><b>An größeren Stellen messen, nicht am Pin selbst.</b> Jeder Pin führt meist zu einem <b>Via</b>, einem <b>Testpunkt (TP)</b> oder einem Bauteil-Ende in der Nähe — dort ist mehr Platz und du triffst sicherer.</li>
+<li><b>Durchgang an feinen Pins:</b> Piepton-Modus, eine Spitze fest, mit der anderen antippen. Sanft aufsetzen, nicht kratzen.</li>
+<li><b>Kurzschluss zwischen Nachbar-Pins suchen:</b> zwei benachbarte Pins antasten — piept es, sind sie ungewollt verbunden (Lötbrücke).</li>
+</ul></div>
+
+<h3>In-Circuit messen: was geht, was nicht</h3>
+<div class="card">
+<div class="rule"><span class="ico">✅</span><div><b>Durchgang & Kurzschluss</b> gehen fast immer (stromlos): Verbindung Pin ↔ Via ↔ Bauteil verfolgen, Lötbrücken finden.</div></div>
+<div class="rule"><span class="ico">✅</span><div><b>Rail-Spannungen im Betrieb</b> (3,3 V, 1,8 V, 5 V) an Testpunkten oder Regler-Ausgängen prüfen — Board an, schwarz an GND, rot an den Punkt.</div></div>
+<div class="rule"><span class="ico">⚠️</span><div><b>Widerstand & Kapazität im eingebauten Zustand sind unzuverlässig:</b> parallele Bauteile verfälschen den Wert. Für den echten Wert das Bauteil einseitig auslöten (oder den LCR-P1 am ausgebauten Teil nutzen).</div></div>
+<div class="rule"><span class="ico">🔬</span><div><b>Diodentest als Reparatur-Trick:</b> im Dioden-Modus jeden Pin gegen GND messen und die Werte mit einem baugleichen, funktionierenden Board vergleichen. Ein stark abweichender Wert (z. B. fast 0 = Kurzschluss) zeigt das defekte Bauteil.</div></div>
+</div>
+
+<h3>Totes Board? Diagnose-Reihenfolge</h3>
+<div class="card"><ul>
+<li><b>1. Sichtprüfung:</b> verkohlte Stellen, aufgeblähte Elkos, kalte/gebrochene Lötstellen, verschobene Bauteile.</li>
+<li><b>2. Kurzschluss auf der Versorgung:</b> stromlos den Widerstand zwischen VCC und GND messen. Nahe 0 Ω = Kurzschluss (defekter Kondensator, IC oder Lötbrücke), bevor du überhaupt einschaltest.</li>
+<li><b>3. Strom mit Limit einspeisen:</b> Labornetzteil auf die Board-Spannung, Strombegrenzung niedrig. Zieht es sofort das volle Limit, ist irgendwo ein Kurzschluss — fühle mit dem Finger, welches Bauteil warm wird.</li>
+<li><b>4. Spannungs-Rails prüfen:</b> kommt am Regler-Eingang Spannung an, aber nicht am Ausgang? Dann ist der Regler oder seine Last verdächtig. Jede Rail (5 V → 3,3 V → 1,8 V …) der Reihe nach durchgehen.</li>
+<li><b>5. Takt & Reset:</b> liegt am Mikrocontroller die Versorgung, ein Reset-Pegel (meist HIGH) und ein Takt an? (Takt sicher nur mit Oszi/Logic Analyzer, siehe unten.)</li>
+</ul></div>
+
+<h3>Grenzen des Multimeters — wann Oszi oder Logic Analyzer?</h3>
+<div class="card">
+<p>Ein Multimeter zeigt nur <b>langsame, gemittelte</b> Werte. Bei allem, was sich schnell ändert, brauchst du anderes Werkzeug:</p>
+<ul>
+<li><b>PWM:</b> das Multimeter zeigt nur den Durchschnitt (halbe Spannung bei 50 %), nicht Frequenz oder Puls-Breite. Der <b>Hz-/%-Modus</b> hilft grob, sauber zeigt es nur ein Oszilloskop.</li>
+<li><b>I²C / SPI / UART:</b> im Ruhezustand kannst du den Pegel prüfen (I²C-Leitungen liegen dank Pull-up auf HIGH). Die eigentlichen Daten sieht nur ein <b>Logic Analyzer</b> (günstig, ideal für digitale Busse) oder ein Oszilloskop.</li>
+<li><b>Quarz / Takt:</b> ob er schwingt, verrät zuverlässig nur das Oszilloskop — Antasten kann den empfindlichen Oszillator sogar stören.</li>
+<li><b>Sleep-Strom (µA):</b> Mikrocontroller im Tiefschlaf ziehen Mikroampere. Das misst ein Standard-Multimeter kaum sauber — dafür gibt es spezielle Strom-Messadapter (z. B. „Power Profiler").</li>
+</ul>
+<p style="margin-bottom:0"><b>Faustregel:</b> steht ein Wert still → Multimeter reicht. Ändert er sich schnell oder ist es ein Datensignal → Logic Analyzer (digital) oder Oszilloskop (analog & Timing).</p>
+</div>
+
 <h2>Sicherheit & häufige Fehler</h2>
 <div class="card">
 <div class="rule"><span class="ico">🔌</span><div><b>Rote Leitung nach Strommessung zurückstecken!</b> Der häufigste Fehler: Leitung bleibt in der A-Buchse, dann misst man Spannung → Kurzschluss. Nach jeder Strommessung Rot zurück in VΩ.</div></div>
