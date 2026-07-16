@@ -358,6 +358,18 @@ tbody tr:hover td{background:var(--surface-hover)}
 <!-- ============ MATERIAL ============ -->
 <div class="panel" data-p="material">
 <h2>Verbrauchsmaterial</h2>
+<p>Zur schnellen Orientierung — was du für welche Methode brauchst. Details zu jedem Punkt stehen darunter.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Methode</th><th>Lot / Material</th><th>Flussmittel</th></tr></thead>
+<tbody>
+<tr><td><span class="b b-kolben">Lötkolben</span> THT</td><td>Lotdraht 0,8–1,0 mm (mit Flussmittelseele)</td><td>meist keins extra nötig</td></tr>
+<tr><td><span class="b b-kolben">Lötkolben</span> SMD-Chips</td><td>Lotdraht 0,5–0,8 mm</td><td>Tacky-Flux hilft sehr</td></tr>
+<tr><td><span class="b b-kolben">Lötkolben</span> ICs (Drag)</td><td>wenig Lotdraht an der Spitze</td><td>Flux-Pen + reichlich Tacky-Flux</td></tr>
+<tr><td><span class="b b-luft">Heißluft</span> Rework</td><td>Lötpaste oder verzinnte Pads</td><td>Tacky-Flux / Gel</td></tr>
+<tr><td><span class="b b-platte">Reflow</span> Heizplatte/Ofen</td><td>Lötpaste (per Schablone oder Spritze)</td><td>steckt schon in der Paste</td></tr>
+<tr><td><span class="b b-warn">Entlöten</span></td><td>Entlötlitze, -pumpe, Low-Melt-Legierung</td><td>Flux-Pen / Gel</td></tr>
+</tbody>
+</table></div>
 
 <h3>Lötzinn (Lot)</h3>
 <p>Zwei Welten: Bleihaltig lötet sich leichter und bei niedrigerer Temperatur, bleifrei ist RoHS-konform und Pflicht für alles, das in den Verkauf geht.</p>
@@ -384,10 +396,10 @@ tbody tr:hover td{background:var(--surface-hover)}
 <div class="tbl-wrap"><table style="min-width:680px">
 <thead><tr><th>Produkt (Beispiele)</th><th>Typ</th><th>Form</th><th>Reinigen?</th><th>Am besten für</th></tr></thead>
 <tbody>
-<tr><td><b>Kester #951</b>, MG Chemicals 8341</td><td>No-Clean, low-solids</td><td>Flux-Pen (flüssig, dünn)</td><td>nein</td><td>THT, Kabel und Pads verzinnen, alte Lötstellen auffrischen, Drag-Soldering vorbereiten</td></tr>
-<tr><td><b>ChipQuik SMD291</b>, AMTECH NC-559</td><td>No-Clean</td><td>Tacky-Gel (Spritze)</td><td>nein (optional)</td><td>SMD-Chips, QFN/QFP, BGA-Reballing, Heißluft-Rework — zäh, hält Bauteile an Ort</td></tr>
-<tr><td><b>AMTECH RMA-223</b>, Kester 186</td><td>RMA (Kolophonium)</td><td>Gel/Paste (Spritze)</td><td>ja, mit IPA</td><td>hartnäckige Oxidation, Rework wenn du ohnehin reinigst</td></tr>
-<tr><td>Kolophonium / Rosin</td><td>Kolophonium</td><td>fester Block</td><td>ja, mit IPA</td><td>günstiger Klassiker, Spitze/Entlötlitze eintauchen</td></tr>
+<tr><td><b>Kester #951</b>, MG Chemicals 8341</td><td>No-Clean, low-solids</td><td>Flux-Pen (flüssig, dünn)</td><td>nein</td><td><span class="b b-kolben">Lötkolben</span> THT, Kabel und Pads verzinnen, alte Lötstellen auffrischen, Drag-Soldering vorbereiten</td></tr>
+<tr><td><b>ChipQuik SMD291</b>, AMTECH NC-559</td><td>No-Clean</td><td>Tacky-Gel (Spritze)</td><td>nein (optional)</td><td><span class="b b-kolben">SMD</span> <span class="b b-luft">Heißluft</span> Chips, QFN/QFP, BGA-Reballing, Rework — zäh, hält Bauteile an Ort</td></tr>
+<tr><td><b>AMTECH RMA-223</b>, Kester 186</td><td>RMA (Kolophonium)</td><td>Gel/Paste (Spritze)</td><td>ja, mit IPA</td><td><span class="b b-luft">Rework</span> hartnäckige Oxidation, wenn du ohnehin reinigst</td></tr>
+<tr><td>Kolophonium / Rosin</td><td>Kolophonium</td><td>fester Block</td><td>ja, mit IPA</td><td><span class="b b-kolben">Lötkolben</span> günstiger Klassiker, Spitze/Entlötlitze eintauchen</td></tr>
 </tbody>
 </table></div>
 
