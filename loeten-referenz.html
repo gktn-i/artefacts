@@ -322,7 +322,7 @@ tbody tr:hover td{background:var(--surface-hover)}
 <div class="tbl-wrap"><table style="min-width:680px">
 <thead><tr><th>Spitze</th><th>Form</th><th>Am besten für</th></tr></thead>
 <tbody>
-<tr><td><b>TS-B2</b></td><td>runde Kuppe (liegt meist bei)</td><td>Allrounder für den Einstieg: THT, Kabel. Solide, aber die Schrägen unten übertragen Wärme besser</td></tr>
+<tr><td><b>TS-B2</b></td><td>konisch / Bleistift (liegt meist bei)</td><td>Allrounder für den Einstieg: THT, Kabel. Solide, aber die Schräg-Spitzen unten übertragen Wärme besser</td></tr>
 <tr><td><b>TS-BC2</b></td><td>45°-Schräge, 2 mm (Mini-Hufeisen)</td><td><b>Der Alltags-Favorit:</b> THT, SMD-Chips und Drag-Soldering — die schräge Fläche hält einen Lottropfen</td></tr>
 <tr><td><b>TS-C1</b></td><td>45°-Schräge, 1 mm</td><td>feines SMD (0603/0402) mit mehr Wärmenachschub als eine Nadelspitze</td></tr>
 <tr><td><b>TS-C4</b></td><td>45°-Schräge, 4 mm</td><td>große Pads, Masseflächen, dicke Kabel, Steckverbinder — maximale Wärmeübertragung</td></tr>
@@ -351,7 +351,7 @@ tbody tr:hover td{background:var(--surface-hover)}
 <div class="card"><div class="ct">Entlötlitze (Wick)</div><div class="cd">Kupfergeflecht saugt flüssiges Lot auf. Top für Pads und Brücken.</div></div>
 <div class="card"><div class="ct">Entlötpumpe</div><div class="cd">Saugt geschmolzenes Lot weg. Gut für THT-Durchkontaktierungen.</div></div>
 <div class="card"><div class="ct">Heißluft</div><div class="cd">Beste Methode, um ganze SMD-Bauteile schadenfrei abzuheben.</div></div>
-<div class="card"><div class="ct">Low-Melt-Legierung (ChipQuik)</div><div class="cd">Schmilzt bei ~60–70 °C und hält alle Pins gleichzeitig flüssig. Ideal, um Multipin-ICs ohne Heißluft abzuheben.</div></div>
+<div class="card"><div class="ct">Low-Melt-Legierung (ChipQuik SMD1)</div><div class="cd">Schmilzt bei ~58 °C und hält alle Pins gleichzeitig flüssig. Ideal, um Multipin-ICs ohne Heißluft abzuheben.</div></div>
 </div>
 </div>
 
@@ -384,7 +384,7 @@ tbody tr:hover td{background:var(--surface-hover)}
 <div class="tbl-wrap"><table style="min-width:680px">
 <thead><tr><th>Produkt (Beispiele)</th><th>Typ</th><th>Form</th><th>Reinigen?</th><th>Am besten für</th></tr></thead>
 <tbody>
-<tr><td><b>Kester #951</b>, MG Chemicals 835</td><td>No-Clean, low-solids</td><td>Flux-Pen (flüssig, dünn)</td><td>nein</td><td>THT, Kabel und Pads verzinnen, alte Lötstellen auffrischen, Drag-Soldering vorbereiten</td></tr>
+<tr><td><b>Kester #951</b>, MG Chemicals 8341</td><td>No-Clean, low-solids</td><td>Flux-Pen (flüssig, dünn)</td><td>nein</td><td>THT, Kabel und Pads verzinnen, alte Lötstellen auffrischen, Drag-Soldering vorbereiten</td></tr>
 <tr><td><b>ChipQuik SMD291</b>, AMTECH NC-559</td><td>No-Clean</td><td>Tacky-Gel (Spritze)</td><td>nein (optional)</td><td>SMD-Chips, QFN/QFP, BGA-Reballing, Heißluft-Rework — zäh, hält Bauteile an Ort</td></tr>
 <tr><td><b>AMTECH RMA-223</b>, Kester 186</td><td>RMA (Kolophonium)</td><td>Gel/Paste (Spritze)</td><td>ja, mit IPA</td><td>hartnäckige Oxidation, Rework wenn du ohnehin reinigst</td></tr>
 <tr><td>Kolophonium / Rosin</td><td>Kolophonium</td><td>fester Block</td><td>ja, mit IPA</td><td>günstiger Klassiker, Spitze/Entlötlitze eintauchen</td></tr>
@@ -437,7 +437,7 @@ tbody tr:hover td{background:var(--surface-hover)}
   <text class="zone" x="365" y="240">Reflow</text>
   <text class="zone" x="458" y="240">Abkühlen</text>
 </svg>
-<p class="cd" style="font-size:12.5px;color:var(--muted)">Kurve beispielhaft für bleifrei (SAC305, Peak 240–250 °C). Bleihaltig läuft identisch ab, nur rund 30 °C niedriger (Peak 205–215 °C).</p>
+<p class="cd" style="font-size:12.5px;color:var(--muted)">Kurve beispielhaft für bleifrei (SAC305, Peak 240–250 °C). Bleihaltig läuft identisch ab, nur rund 30–35 °C niedriger (Peak 205–215 °C).</p>
 
 <div class="steps">
 <div class="step"><b>Vorheizen (Preheat).</b> Von Raumtemperatur auf rund 150 °C, langsam mit 1–2 °C pro Sekunde. Schützt Bauteile vor Thermoschock.</div>
@@ -589,7 +589,7 @@ tbody tr:hover td{background:var(--surface-hover)}
 
 <h4 style="font-size:13px;margin:.8rem 0 .3rem">Multipin-ICs (SOIC, TSSOP, QFP)</h4>
 <div class="steps">
-<div class="step"><b>Am einfachsten mit Low-Melt-Legierung.</b> Eine niedrigschmelzende Legierung (z. B. ChipQuik SMD1) mit Flussmittel über alle Pins einer Reihe verteilen — sie senkt den Schmelzpunkt auf ~60–70 °C und hält so alle Pins gleichzeitig flüssig.</div>
+<div class="step"><b>Am einfachsten mit Low-Melt-Legierung.</b> Eine niedrigschmelzende Legierung (z. B. ChipQuik SMD1) mit Flussmittel über alle Pins einer Reihe verteilen — sie senkt den Schmelzpunkt der Mischung auf ~58 °C und hält so alle Pins gleichzeitig flüssig.</div>
 <div class="step"><b>Beide Seiten flüssig halten.</b> Bei zwei Pinreihen Legierung auf beide auftragen, abwechselnd nachheizen, bis das ganze IC „schwimmt".</div>
 <div class="step"><b>Abheben.</b> Mit der Pinzette sanft anheben, sobald alle Pins flüssig sind — nicht hebeln, sonst reißen Pads ab.</div>
 <div class="step"><b>Pads aufbereiten.</b> Alte Legierung und Lot mit Entlötlitze + Flussmittel entfernen, mit IPA reinigen, dann neu verzinnen.</div>
