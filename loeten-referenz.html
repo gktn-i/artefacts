@@ -330,6 +330,7 @@ tbody tr:hover td{background:var(--surface-hover)}
 <div class="card"><div class="ct">Entlötlitze (Wick)</div><div class="cd">Kupfergeflecht saugt flüssiges Lot auf. Top für Pads und Brücken.</div></div>
 <div class="card"><div class="ct">Entlötpumpe</div><div class="cd">Saugt geschmolzenes Lot weg. Gut für THT-Durchkontaktierungen.</div></div>
 <div class="card"><div class="ct">Heißluft</div><div class="cd">Beste Methode, um ganze SMD-Bauteile schadenfrei abzuheben.</div></div>
+<div class="card"><div class="ct">Low-Melt-Legierung (ChipQuik)</div><div class="cd">Schmilzt bei ~60–70 °C und hält alle Pins gleichzeitig flüssig. Ideal, um Multipin-ICs ohne Heißluft abzuheben.</div></div>
 </div>
 </div>
 
@@ -348,13 +349,29 @@ tbody tr:hover td{background:var(--surface-hover)}
 </ul>
 
 <h3>Flussmittel (Flux)</h3>
-<p>Entfernt die Oxidschicht auf den Metallflächen und lässt das Lot fließen und benetzen. Bei SMD der wichtigste Helfer überhaupt.</p>
+<p>Entfernt die Oxidschicht auf den Metallflächen und lässt das Lot fließen und benetzen. Die Flussmittelseele im Lotdraht reicht für einfaches THT — extra Flux ist der entscheidende Helfer bei SMD, Rework und beim Entlöten.</p>
+
+<h4 style="font-size:13px;margin:.6rem 0 .3rem">Die vier Typen</h4>
 <ul>
-<li><b>No-Clean:</b> Rückstand darf meist drauf bleiben. Bequem fürs Hobby.</li>
-<li><b>Kolophonium / Rosin (RMA):</b> Klassiker, Rückstände mit IPA entfernen.</li>
-<li><b>Wasserlöslich:</b> aggressiv, muss zwingend gründlich abgewaschen werden.</li>
-<li><b>Formen:</b> Flux-Pen, Spritze, Tacky Flux (zähe Paste, hält Bauteile leicht fest).</li>
+<li><b>No-Clean:</b> minimaler, trockener Rückstand darf meist drauf bleiben. Der bequeme Standard fürs Hobby.</li>
+<li><b>RMA (Kolophonium, mild aktiviert):</b> klassisch, gute Aktivität, klebrige Rückstände mit IPA entfernen.</li>
+<li><b>Kolophonium / Rosin (fest):</b> günstiger Klassiker, Spitze oder Litze eintauchen. Rückstand mit IPA.</li>
+<li><b>Wasserlöslich (OA):</b> sehr aggressiv, muss zwingend gründlich abgewaschen werden — im Hobby eher meiden.</li>
 </ul>
+
+<h4 style="font-size:13px;margin:.8rem 0 .3rem">Konkrete Produkte und wofür</h4>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Produkt (Beispiele)</th><th>Typ</th><th>Form</th><th>Reinigen?</th><th>Am besten für</th></tr></thead>
+<tbody>
+<tr><td><b>Kester #951</b>, MG Chemicals 835</td><td>No-Clean, low-solids</td><td>Flux-Pen (flüssig, dünn)</td><td>nein</td><td>THT, Kabel und Pads verzinnen, alte Lötstellen auffrischen, Drag-Soldering vorbereiten</td></tr>
+<tr><td><b>ChipQuik SMD291</b>, AMTECH NC-559</td><td>No-Clean</td><td>Tacky-Gel (Spritze)</td><td>nein (optional)</td><td>SMD-Chips, QFN/QFP, BGA-Reballing, Heißluft-Rework — zäh, hält Bauteile an Ort</td></tr>
+<tr><td><b>AMTECH RMA-223</b>, Kester 186</td><td>RMA (Kolophonium)</td><td>Gel/Paste (Spritze)</td><td>ja, mit IPA</td><td>hartnäckige Oxidation, Rework wenn du ohnehin reinigst</td></tr>
+<tr><td>Kolophonium / Rosin</td><td>Kolophonium</td><td>fester Block</td><td>ja, mit IPA</td><td>günstiger Klassiker, Spitze/Entlötlitze eintauchen</td></tr>
+</tbody>
+</table></div>
+
+<div class="tip"><b>Einsteiger-Set:</b> Ein <b>No-Clean-Flux-Pen</b> (z. B. Kester 951) für THT und Kabel plus eine <b>No-Clean-Tacky-Flux-Spritze</b> (z. B. ChipQuik SMD291) für SMD deckt rund 95 % aller Arbeiten ab.</div>
+<div class="warn"><b>Vorsicht Fälschungen:</b> AMTECH NC-559 und RMA-223 werden auf Online-Marktplätzen massenhaft gefälscht — nachgemachte Spritzen wirken oft schlechter oder hinterlassen korrosive Rückstände. Für verlässliche Qualität ChipQuik oder MG Chemicals beim seriösen Händler kaufen. Und: <b>niemals Klempner-Lötwasser oder Lötfett</b> (säurehaltig) auf Elektronik.</div>
 
 <h3>Lötpaste (Solder Paste)</h3>
 <p>Gemisch aus winzigen Lotkügelchen und Flussmittel. Nur für Reflow per Heizplatte, Heißluft oder Ofen.</p>
@@ -526,6 +543,26 @@ tbody tr:hover td{background:var(--surface-hover)}
 <div class="step"><b>Kontrolle.</b> Unter Lupe oder Mikroskop jeden Pin prüfen, Durchgang testen.</div>
 </div>
 <div class="tip"><b>Merksatz für feine ICs:</b> Lieber bewusst Brücken ziehen und dann mit Litze sauber abziehen, als jeden Pin einzeln treffen zu wollen. Flussmittel macht den Unterschied.</div>
+
+<h3>SMD entlöten (mit dem Lötkolben)</h3>
+<p>Ohne Heißluft geht das Abnehmen über den Trick, <b>alle Anschlüsse gleichzeitig flüssig zu halten</b>. Immer reichlich frisches Flussmittel dazugeben.</p>
+
+<h4 style="font-size:13px;margin:.7rem 0 .3rem">Chip-Bauteile (2-polig: Widerstand, Kondensator, LED)</h4>
+<div class="steps">
+<div class="step"><b>Flussmittel auf beide Pads.</b> Das senkt die nötige Temperatur und lässt das Lot besser fließen.</div>
+<div class="step"><b>Wippen:</b> beide Enden abwechselnd kurz erwärmen, das Bauteil mit der Pinzette leicht ankippen und hin- und herwippen, bis es frei ist.</div>
+<div class="step"><b>Oder Lotbrücke:</b> so viel frisches Lot auf beide Enden geben, dass ein durchgehender Lotklecks beide Pads überbrückt. Mit der Spitze gleichzeitig flüssig halten und das Bauteil seitlich abschieben.</div>
+<div class="step"><b>Pads säubern.</b> Restliches Lot mit Entlötlitze abziehen, Flussmittelreste mit IPA entfernen.</div>
+</div>
+
+<h4 style="font-size:13px;margin:.8rem 0 .3rem">Multipin-ICs (SOIC, TSSOP, QFP)</h4>
+<div class="steps">
+<div class="step"><b>Am einfachsten mit Low-Melt-Legierung.</b> Eine niedrigschmelzende Legierung (z. B. ChipQuik SMD1) mit Flussmittel über alle Pins einer Reihe verteilen — sie senkt den Schmelzpunkt auf ~60–70 °C und hält so alle Pins gleichzeitig flüssig.</div>
+<div class="step"><b>Beide Seiten flüssig halten.</b> Bei zwei Pinreihen Legierung auf beide auftragen, abwechselnd nachheizen, bis das ganze IC „schwimmt".</div>
+<div class="step"><b>Abheben.</b> Mit der Pinzette sanft anheben, sobald alle Pins flüssig sind — nicht hebeln, sonst reißen Pads ab.</div>
+<div class="step"><b>Pads aufbereiten.</b> Alte Legierung und Lot mit Entlötlitze + Flussmittel entfernen, mit IPA reinigen, dann neu verzinnen.</div>
+</div>
+<div class="note"><b>Für QFN, BGA und thermisch kräftige Bauteile</b> (große Masseflächen) ist Heißluft die schonendere Methode — siehe Tab <a class="goto" href="#heissluft">Heißluft</a>.</div>
 </div>
 
 <!-- ============ ABLAUF HEISSLUFT ============ -->
