@@ -585,30 +585,63 @@ li.warn{color:var(--warn-ink)}
 <p style="margin-bottom:0">Sicher ist: einen bekannten GND-Punkt mit der Durchgangsprüfung gegen den vermuteten prüfen — piept = dieselbe Masse.</p>
 </div>
 
-<h3>Antasten ohne Kurzschluss</h3>
+<h3>Erst vorbereiten (gilt für alle Messungen unten)</h3>
 <div class="card"><ul>
-<li><b>Eine Seite festklemmen.</b> SMD-Grabber an GND (oder an den festen Punkt), mit der Nadelspitze nur noch einen Kontakt suchen — so kann nur eine Spitze verrutschen.</li>
-<li><b>An größeren Stellen messen, nicht am Pin selbst.</b> Jeder Pin führt meist zu einem <b>Via</b>, einem <b>Testpunkt (TP)</b> oder einem Bauteil-Ende in der Nähe — dort ist mehr Platz und du triffst sicherer.</li>
-<li><b>Durchgang an feinen Pins:</b> Piepton-Modus, eine Spitze fest, mit der anderen antippen. Sanft aufsetzen, nicht kratzen.</li>
-<li><b>Kurzschluss zwischen Nachbar-Pins suchen:</b> zwei benachbarte Pins antasten — piept es, sind sie ungewollt verbunden (Lötbrücke).</li>
+<li>Board auf den PCB-Halter, unter die Lupe/Mikroskop.</li>
+<li>Schwarze Leitung mit dem <b>SMD-Grabber an einen GND-Punkt</b> klemmen (siehe oben) — die bleibt dort. Mit der roten <b>Nadelspitze</b> tastest du.</li>
+<li>Nicht den winzigen Pin selbst treffen, sondern das nahe <b>Via / Testpunkt (TP) / Bauteil-Ende</b> — dort ist mehr Platz. Sanft aufsetzen, nicht kratzen.</li>
 </ul></div>
 
-<h3>In-Circuit messen: was geht, was nicht</h3>
-<div class="card">
-<div class="rule"><span class="ico">✅</span><div><b>Durchgang & Kurzschluss</b> gehen fast immer (stromlos): Verbindung Pin ↔ Via ↔ Bauteil verfolgen, Lötbrücken finden.</div></div>
-<div class="rule"><span class="ico">✅</span><div><b>Rail-Spannungen im Betrieb</b> (3,3 V, 1,8 V, 5 V) an Testpunkten oder Regler-Ausgängen prüfen — Board an, schwarz an GND, rot an den Punkt.</div></div>
-<div class="rule"><span class="ico">⚠️</span><div><b>Widerstand & Kapazität im eingebauten Zustand sind unzuverlässig:</b> parallele Bauteile verfälschen den Wert. Für den echten Wert das Bauteil einseitig auslöten (oder den LCR-P1 am ausgebauten Teil nutzen).</div></div>
-<div class="rule"><span class="ico">🔬</span><div><b>Diodentest als Reparatur-Trick:</b> im Dioden-Modus jeden Pin gegen GND messen und die Werte mit einem baugleichen, funktionierenden Board vergleichen. Ein stark abweichender Wert (z. B. fast 0 = Kurzschluss) zeigt das defekte Bauteil.</div></div>
-</div>
+<h3>① Spannung an einer Rail messen &nbsp;<span class="note" style="font-style:normal">Board AN</span></h3>
+<div class="card"><ol>
+<li>Schwarz in <b>COM</b>, Rot in <b>VΩ</b>. Drehrad auf <b>V⎓ / DCV</b>.</li>
+<li>Schwarzen Grabber an GND, Board einschalten.</li>
+<li>Mit der roten Nadel den Testpunkt / das Bauteil-Ende antippen.</li>
+<li>Ablesen. Soll: 5 V / 3,3 V / 1,8 V je nach Rail. <b>0 V</b> = keine Versorgung → rückwärts Richtung Regler suchen.</li>
+</ol></div>
 
-<h3>Totes Board? Diagnose-Reihenfolge</h3>
-<div class="card"><ul>
-<li><b>1. Sichtprüfung:</b> verkohlte Stellen, aufgeblähte Elkos, kalte/gebrochene Lötstellen, verschobene Bauteile.</li>
-<li><b>2. Kurzschluss auf der Versorgung:</b> stromlos den Widerstand zwischen VCC und GND messen. Nahe 0 Ω = Kurzschluss (defekter Kondensator, IC oder Lötbrücke), bevor du überhaupt einschaltest.</li>
-<li><b>3. Strom mit Limit einspeisen:</b> Labornetzteil auf die Board-Spannung, Strombegrenzung niedrig. Zieht es sofort das volle Limit, ist irgendwo ein Kurzschluss — fühle mit dem Finger, welches Bauteil warm wird.</li>
-<li><b>4. Spannungs-Rails prüfen:</b> kommt am Regler-Eingang Spannung an, aber nicht am Ausgang? Dann ist der Regler oder seine Last verdächtig. Jede Rail (5 V → 3,3 V → 1,8 V …) der Reihe nach durchgehen.</li>
-<li><b>5. Takt & Reset:</b> liegt am Mikrocontroller die Versorgung, ein Reset-Pegel (meist HIGH) und ein Takt an? (Takt sicher nur mit Oszi/Logic Analyzer, siehe unten.)</li>
-</ul></div>
+<h3>② Durchgang an einem feinen Pin &nbsp;<span class="note" style="font-style:normal">Board AUS</span></h3>
+<div class="card"><ol>
+<li>Schwarz <b>COM</b>, Rot <b>VΩ</b>, Drehrad auf das <b>)))</b>-Symbol (Piepton).</li>
+<li>Board <b>stromlos</b> machen.</li>
+<li>Kurz beide Spitzen zusammenhalten → muss piepen (Funktionscheck).</li>
+<li>Schwarzen Grabber an das eine Ende, mit der roten Nadel das andere antippen.</li>
+<li><b>Piep</b> = verbunden. Kein Ton = unterbrochen.</li>
+</ol></div>
+
+<h3>③ Lötbrücke zwischen Nachbar-Pins finden &nbsp;<span class="note" style="font-style:normal">Board AUS</span></h3>
+<div class="card"><ol>
+<li>Gleicher Piep-Modus, Board stromlos.</li>
+<li>Zwei <b>direkt nebeneinander</b> liegende Pins gleichzeitig antippen.</li>
+<li><b>Piept es</b> → ungewollte Verbindung (Lötbrücke) → unter der Lupe suchen und mit Litze entfernen. (Ausnahme: Pins, die laut Schaltung eh verbunden sind.)</li>
+</ol></div>
+
+<h3>④ Kurzschluss auf der Versorgung prüfen &nbsp;<span class="note" style="font-style:normal">Board AUS · vor dem 1. Einschalten</span></h3>
+<div class="card"><ol>
+<li>Drehrad auf <b>Ω</b> (kleiner Bereich), Board stromlos.</li>
+<li>Schwarz an <b>GND</b>, Rot an <b>VCC / eine Rail</b>.</li>
+<li><b>Nahe 0 Ω</b> = Kurzschluss (defekter Kondensator, IC oder Lötbrücke) → <b>nicht einschalten</b>, erst Ursache suchen.</li>
+<li>Ein paar hundert Ω bis „OL" = in Ordnung.</li>
+</ol></div>
+
+<h3>⑤ Defektes Bauteil per Diodentest finden &nbsp;<span class="note" style="font-style:normal">Board AUS</span></h3>
+<div class="card"><ol>
+<li>Drehrad auf das <b>Dioden-Symbol ▷⊢</b>, Board stromlos.</li>
+<li>Schwarz an GND, mit Rot nacheinander die verdächtigen Pins antippen, Werte notieren.</li>
+<li>Dieselben Pins an einem <b>baugleichen, funktionierenden Board</b> messen.</li>
+<li>Ein stark <b>abweichender Wert</b> (fast 0 = Kurzschluss) zeigt das defekte Bauteil.</li>
+</ol></div>
+
+<div class="danger-box"><p style="margin:0"><b>Nicht in-circuit messbar:</b> Widerstands- und Kapazitätswerte im eingebauten Zustand stimmen nicht (parallele Bauteile verfälschen). Für den echten Wert das Bauteil <b>einseitig auslöten</b> und dann messen — oder den LCR-P1 am ausgebauten Teil nutzen.</p></div>
+
+<h3>Totes Board? Diagnose in dieser Reihenfolge</h3>
+<div class="card"><ol>
+<li><b>Ansehen.</b> Verkohlte Stellen, aufgeblähte Elkos, kalte/gebrochene Lötstellen, verschobene Bauteile.</li>
+<li><b>Versorgung auf Kurzschluss</b> (Rezept ④). Nahe 0 Ω → erst reparieren, dann Strom.</li>
+<li><b>Strom mit Limit einspeisen.</b> Labornetzteil auf die Board-Spannung, Strombegrenzung niedrig. Zieht es sofort das volle Limit → irgendwo Kurzschluss; mit dem Finger fühlen, welches Bauteil warm wird.</li>
+<li><b>Rails der Reihe nach</b> (Rezept ①). Kommt am Regler-Eingang Spannung an, aber nicht am Ausgang → Regler oder seine Last defekt. 5 V → 3,3 V → 1,8 V … durchgehen.</li>
+<li><b>Takt &amp; Reset am Mikrocontroller.</b> Versorgung da? Reset-Pin auf HIGH? Takt vorhanden? (Takt sicher nur mit Oszi/Logic Analyzer — siehe unten.)</li>
+</ol></div>
 
 <h3>Grenzen des Multimeters — wann Oszi oder Logic Analyzer?</h3>
 <div class="card">
