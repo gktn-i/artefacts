@@ -482,6 +482,57 @@ tbody tr:hover td{background:var(--surface-hover)}
 <table id="compTbl"><thead></thead><tbody></tbody></table>
 </div>
 <div class="note"><b>Pitch</b> ist der Abstand von Pinmitte zu Pinmitte. Je kleiner der Pitch, desto eher brauchst du Flussmittel, Entlötlitze und ein Mikroskop.</div>
+
+<h2>SMD-Chips: Größen erkennen &amp; Werte ablesen</h2>
+<p>Die zweipoligen Chip-Bauteile (Widerstände „R", Kondensatoren „C") haben genormte Gehäuse. Der Name ist das <b>Zoll-Maß</b>: „1206" = 0,12″ × 0,06″ lang×breit. Gleiche Größe gilt für R und C.</p>
+<div class="tbl-wrap"><table style="min-width:620px">
+<thead><tr><th>Bauform</th><th>Maße (L × B)</th><th>Von Hand löten</th></tr></thead>
+<tbody>
+<tr><td><b>1206</b></td><td>3,2 × 1,6 mm</td><td>sehr gut — größter gängiger Chip, guter Einstieg</td></tr>
+<tr><td><b>0805</b></td><td>2,0 × 1,25 mm</td><td>einsteigerfreundlich</td></tr>
+<tr><td><b>0603</b></td><td>1,6 × 0,8 mm</td><td>mit etwas Übung gut</td></tr>
+<tr><td><b>0402</b></td><td>1,0 × 0,5 mm</td><td>fummelig — Pinzette und Lupe nötig</td></tr>
+<tr><td><b>0201</b></td><td>0,6 × 0,3 mm</td><td>von Hand kaum sinnvoll (Reflow)</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Achtung Zoll vs. Millimeter:</b> Es gibt auch eine <b>metrische</b> Benennung (0603 imperial = „1608" metrisch). Verwirrend: „0603 metrisch" wäre in Zoll ein 0201! Im Hobby und in westlichen Shops ist fast immer die <b>Zoll-Angabe</b> gemeint — im Zweifel die Maße in mm vergleichen.</div>
+
+<h3>Widerstand oder Kondensator? So unterscheidest du sie</h3>
+<div class="gb">
+<div class="gb-col good"><h4>Widerstand (R)</h4><ul>
+<li><b>Beschriftet</b> — trägt fast immer einen Zahlencode</li>
+<li>Körper meist <b>schwarz</b> mit heller Schrift, Enden silbrig</li>
+<li>Ungepolt — Richtung egal</li>
+</ul></div>
+<div class="gb-col bad"><h4>Keramik-Kondensator (MLCC)</h4><ul>
+<li><b>Unbeschriftet</b> — praktisch nie ein Aufdruck</li>
+<li>Körperfarbe <b>beige / hellbraun / grau</b></li>
+<li>Ungepolt; Wert nur aus Rolle/Doku oder per Messung (LCR-P1)</li>
+</ul></div>
+</div>
+<div class="note"><b>Faustregel:</b> <b>Beschriftet = Widerstand</b>, <b>unbeschriftet und beige = Keramik-Kondensator.</b> Das ist die schnellste Unterscheidung, wenn beide lose vor dir liegen.</div>
+
+<h3>SMD-Widerstand ablesen (Code)</h3>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Aufdruck</th><th>Bedeutung</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td><b>103</b></td><td>10 + 3 Nullen (3-stellig, E24)</td><td>10 000 Ω = 10 kΩ</td></tr>
+<tr><td><b>472</b></td><td>47 + 2 Nullen</td><td>4 700 Ω = 4,7 kΩ</td></tr>
+<tr><td><b>220</b></td><td>22 + 0 Nullen</td><td>22 Ω (nicht 220 Ω!)</td></tr>
+<tr><td><b>4R7</b></td><td>R = Komma</td><td>4,7 Ω</td></tr>
+<tr><td><b>R100</b></td><td>R = Komma vorne</td><td>0,1 Ω</td></tr>
+<tr><td><b>1002</b></td><td>100 + 2 Nullen (4-stellig, Präzision 1 %)</td><td>10 000 Ω = 10 kΩ</td></tr>
+<tr><td><b>000 / 0</b></td><td>Null-Ohm-Brücke</td><td>0 Ω (nur eine Drahtbrücke)</td></tr>
+</tbody>
+</table></div>
+<div class="note">Selten: der <b>EIA-96-Code</b> (zwei Ziffern + ein Buchstabe, z. B. „01C") auf sehr kleinen Präzisionswiderständen — dann brauchst du eine Umrechnungstabelle oder misst einfach nach.</div>
+
+<h3>Gepolte SMD-Bauteile erkennen</h3>
+<div class="card"><ul>
+<li><b>Tantal-Kondensator:</b> hat einen aufgedruckten <b>Balken = Pluspol (+)</b>. <span class="b b-warn">Achtung</span> Ausnahme! Bei fast allem anderen markiert ein Strich den Minus/die Kathode — beim Tantal ist es Plus.</li>
+<li><b>SMD-Alu-Elko (rund, Metalltopf):</b> die abgeschrägte/dunkle Seite = <b>Minus</b>.</li>
+<li><b>Diode / LED:</b> Strich oder farbige Markierung = <b>Kathode (Minus)</b>.</li>
+</ul></div>
 </div>
 
 <!-- ============ ABLAUF THT ============ -->
