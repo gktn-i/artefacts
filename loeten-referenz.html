@@ -372,13 +372,19 @@ tbody tr:hover td{background:var(--surface-hover)}
 </table></div>
 
 <h3>Lötzinn (Lot)</h3>
-<p>Zwei Welten: Bleihaltig lötet sich leichter und bei niedrigerer Temperatur, bleifrei ist RoHS-konform und Pflicht für alles, das in den Verkauf geht.</p>
-<ul>
-<li><b>Sn63Pb37 (bleihaltig, eutektisch):</b> schmilzt scharf bei 183 °C, verzeiht am meisten. Beliebt im Hobby.</li>
-<li><b>Sn60Pb40 (bleihaltig):</b> fast gleichwertig, schmilzt bei 183–190 °C (kleiner „Teig&#8220;-Bereich statt scharfem Punkt).</li>
-<li><b>SAC305 (bleifrei, Sn96,5Ag3Cu0,5):</b> schmilzt bei 217–220 °C, braucht eine heißere Spitze. Die Oberfläche wird satiniert bis leicht matt — das ist bei bleifrei <b>normal</b>, kein Fehlerzeichen.</li>
-<li><b>Immer mit Flussmittelseele</b> (Flussmittel im Kern des Drahts) — niemals Sanitär- oder Stangenlot für Elektronik.</li>
-</ul>
+<p>Zwei Welten: Bleihaltig lötet sich leichter und bei niedrigerer Temperatur, bleifrei ist RoHS-konform und Pflicht für alles, das in den Verkauf geht. Die gängigen Draht-Legierungen:</p>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Legierung</th><th>Blei?</th><th>Schmelzpunkt</th><th>Eigenschaften &amp; wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Sn63Pb37</b> (eutektisch)</td><td><span class="b b-warn">Blei</span></td><td>183 °C (scharf)</td><td>verzeiht am meisten, erstarrt schlagartig — der <b>Hobby-Liebling</b> zum Üben</td></tr>
+<tr><td><b>Sn60Pb40</b></td><td><span class="b b-warn">Blei</span></td><td>183–190 °C</td><td>fast gleichwertig, kleiner „Teig"-Bereich statt scharfem Punkt</td></tr>
+<tr><td><b>SAC305</b> (Sn96,5Ag3Cu0,5)</td><td><span class="b b-ok">frei</span></td><td>217–220 °C</td><td>der bleifreie <b>Standard</b>, silberhaltig, benetzt gut; braucht heißere Spitze, wird satiniert-matt (normal)</td></tr>
+<tr><td><b>Sn99,3Cu0,7</b> (SnCu)</td><td><span class="b b-ok">frei</span></td><td>227 °C</td><td>das <b>günstigste bleifrei</b> (ohne Silber), fließt etwas zäher — gängig für Consumer/Klempner-nahe Ware</td></tr>
+<tr><td><b>Sn96,5Ag3,5</b> (SnAg)</td><td><span class="b b-ok">frei</span></td><td>221 °C</td><td>silberhaltig, mechanisch fest — eher industriell</td></tr>
+<tr><td><b>Sn42Bi58</b> (SnBi, Low-Temp)</td><td><span class="b b-ok">frei</span></td><td>138 °C</td><td>sehr niedrige Temperatur, schonend — aber <b>spröde</b>, nicht mit bleihaltigem Lot mischen (meist als Paste, selten als Draht)</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Immer Draht mit Flussmittelseele</b> (Flussmittel im Kern) — niemals Sanitär- oder Stangenlot für Elektronik. Fürs Hobby ist <b>Sn63Pb37</b> am gutmütigsten; wenn bleifrei, dann <b>SAC305</b> (löten) oder <b>Sn99,3Cu0,7</b> (günstig).</div>
 
 <h4 style="font-size:13px;margin:.8rem 0 .3rem">Welcher Durchmesser wofür?</h4>
 <p>Der Durchmesser bestimmt, wie fein du dosieren kannst. Dünner = präziser, aber du musst mehr nachschieben; dicker = schneller viel Lot, aber gröber. Ein dünner Draht ist der bessere Allrounder — für dicke Stellen schiebst du einfach mehr nach.</p>
@@ -494,6 +500,30 @@ tbody tr:hover td{background:var(--surface-hover)}
 <table id="compTbl"><thead></thead><tbody></tbody></table>
 </div>
 <div class="note"><b>Pitch</b> ist der Abstand von Pinmitte zu Pinmitte. Je kleiner der Pitch, desto eher brauchst du Flussmittel, Entlötlitze und ein Mikroskop.</div>
+
+<h2>Bauteil-Kürzel lesen (Schaltplan &amp; Platine)</h2>
+<p>Auf der Platine und im Schaltplan hat jedes Bauteil ein <b>Kürzel + eine Nummer</b> (z. B. <b>R1, C13, D2, Q1, U1</b>). Der Buchstabe sagt, <b>was</b> es ist — die Zahl ist nur die laufende Nummer (Position), <b>kein Wert</b>.</p>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Kürzel</th><th>Bauteil</th></tr></thead>
+<tbody>
+<tr><td><b>R</b></td><td>Widerstand (Resistor)</td></tr>
+<tr><td><b>C</b></td><td>Kondensator (Capacitor)</td></tr>
+<tr><td><b>L</b></td><td>Spule / Induktivität</td></tr>
+<tr><td><b>D</b> (oft „LED")</td><td>Diode oder LED</td></tr>
+<tr><td><b>Q</b></td><td>Transistor oder MOSFET</td></tr>
+<tr><td><b>U</b> / IC</td><td>integrierter Schaltkreis (IC) — z. B. NE555, CD4017</td></tr>
+<tr><td><b>Y</b> / X / XTAL</td><td>Quarz / Oszillator</td></tr>
+<tr><td><b>SW</b> / S</td><td>Schalter / Taster</td></tr>
+<tr><td><b>J</b> / P / CN</td><td>Steckverbinder / Stiftleiste</td></tr>
+<tr><td><b>JP</b></td><td>Jumper / Lötbrücke</td></tr>
+<tr><td><b>RV</b> / VR / POT</td><td>Potentiometer</td></tr>
+<tr><td><b>F</b></td><td>Sicherung (Fuse)</td></tr>
+<tr><td><b>TP</b></td><td>Testpunkt (zum Messen)</td></tr>
+<tr><td><b>BT</b> / BAT</td><td>Batterie / Akku</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Wo steht der Wert?</b> Nicht im Kürzel — sondern (a) im <b>Schaltplan</b> neben dem Symbol, (b) in der <b>Stückliste (BOM)</b> oder (c) als <b>Aufdruck</b> auf dem Bauteil. Beispiel aus einer Stückliste: „<b>0805 331</b>" = 330-Ω-Widerstand im 0805-Gehäuse · „<b>SOT-23 J3Y</b>" = NPN-Transistor 8050 (Marking J3Y) · „<b>1206 4148</b>" = Diode 1N4148 im 1206-Gehäuse.</div>
+<div class="tip"><b>So liest du eine Platine:</b> Kürzel + Nummer auf der Platine suchen → in der Stückliste dieselbe Nummer nachschlagen → dort stehen Gehäuse und Wert. Umgekehrt beim Bestücken: Stückliste sagt „R50–R60 = 330 Ω" → alle diese Positionen mit 330-Ω-Widerständen bestücken.</div>
 
 <h2>Welches Gehäuse enthält was?</h2>
 <p>Das Gehäuse (die Bauform) verrät dir oft schon, um welche Art Bauteil es sich handelt. Grobe Zuordnung:</p>
