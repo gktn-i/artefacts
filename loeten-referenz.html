@@ -495,8 +495,28 @@ tbody tr:hover td{background:var(--surface-hover)}
 </div>
 <div class="note"><b>Pitch</b> ist der Abstand von Pinmitte zu Pinmitte. Je kleiner der Pitch, desto eher brauchst du Flussmittel, Entlötlitze und ein Mikroskop.</div>
 
+<h2>Welches Gehäuse enthält was?</h2>
+<p>Das Gehäuse (die Bauform) verrät dir oft schon, um welche Art Bauteil es sich handelt. Grobe Zuordnung:</p>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Gehäuse</th><th>Typ</th><th>Pins</th><th>Was typischerweise drinsteckt</th></tr></thead>
+<tbody>
+<tr><td><b>Chip</b> (0402–1206)</td><td><span class="b b-all">SMD</span></td><td>2</td><td>Widerstand, Kondensator, Spule oder LED</td></tr>
+<tr><td><b>SOT-23</b></td><td><span class="b b-all">SMD</span></td><td>3–6</td><td>Transistor, <b>MOSFET</b>, kleiner Spannungsregler, Referenz</td></tr>
+<tr><td><b>SOT-223 / DPAK</b></td><td><span class="b b-all">SMD</span></td><td>3–4</td><td>Leistungs-MOSFET/-Transistor, Spannungsregler</td></tr>
+<tr><td><b>SOIC / SOP</b></td><td><span class="b b-all">SMD</span></td><td>8–16</td><td>ICs: Operationsverstärker, Logik, EEPROM, kleine Controller</td></tr>
+<tr><td><b>TSSOP</b></td><td><span class="b b-all">SMD</span></td><td>8–28</td><td>schmalere ICs, Treiber, Logik</td></tr>
+<tr><td><b>QFP / TQFP</b></td><td><span class="b b-all">SMD</span></td><td>32–100+</td><td><b>Mikrocontroller</b> und größere ICs (Pins ringsum)</td></tr>
+<tr><td><b>QFN / DFN</b></td><td><span class="b b-all">SMD</span></td><td>6–64</td><td>moderne ICs, Mikrocontroller, Regler, Funk-Chips (Pads unter dem Gehäuse)</td></tr>
+<tr><td><b>BGA</b></td><td><span class="b b-all">SMD</span></td><td>viele</td><td>komplexe Chips: große Mikrocontroller, Speicher, ganze Systeme</td></tr>
+<tr><td><b>DIP</b></td><td><span class="b b-kolben">THT</span></td><td>8–40</td><td>bedrahtete ICs (fürs Steckbrett)</td></tr>
+<tr><td><b>TO-92</b></td><td><span class="b b-kolben">THT</span></td><td>3</td><td>kleine Transistoren</td></tr>
+<tr><td><b>TO-220</b></td><td><span class="b b-kolben">THT</span></td><td>3</td><td>Leistungstransistoren/-MOSFETs, Spannungsregler (z. B. 7805)</td></tr>
+</tbody>
+</table></div>
+<div class="note">Die genaue Funktion und Pinbelegung steht immer im <b>Datenblatt</b> — die Aufschrift auf dem Chip (z. B. „1N4148", „AMS1117") eintippen und danach suchen.</div>
+
 <h2>SMD-Chips: Größen erkennen &amp; Werte ablesen</h2>
-<p>Die zweipoligen Chip-Bauteile (Widerstände „R", Kondensatoren „C") haben genormte Gehäuse. Der Name ist das <b>Zoll-Maß</b>: „1206" = 0,12″ × 0,06″ lang×breit. Gleiche Größe gilt für R und C.</p>
+<p>Die <b>zweipoligen</b> Chip-Bauteile im gleichen Gehäuse können ein <b>Widerstand (R), Kondensator (C), eine Spule (L) oder LED</b> sein — von außen oft nur schwer zu unterscheiden (siehe unten). Der Name ist das <b>Zoll-Maß</b>: „1206" = 0,12″ × 0,06″ lang×breit. Gleiche Größe gilt für R und C.</p>
 <div class="tbl-wrap"><table style="min-width:620px">
 <thead><tr><th>Bauform</th><th>Maße (L × B)</th><th>Von Hand löten</th></tr></thead>
 <tbody>
@@ -538,6 +558,28 @@ tbody tr:hover td{background:var(--surface-hover)}
 </tbody>
 </table></div>
 <div class="note">Selten: der <b>EIA-96-Code</b> (zwei Ziffern + ein Buchstabe, z. B. „01C") auf sehr kleinen Präzisionswiderständen — dann brauchst du eine Umrechnungstabelle oder misst einfach nach.</div>
+
+<h3>Kondensator-Wert ermitteln</h3>
+<p>Kondensatoren sind kniffliger als Widerstände, weil viele keinen Wert aufgedruckt haben. So kommst du dran:</p>
+<div class="card"><ul>
+<li><b>SMD-Keramik (MLCC) — unbeschriftet:</b> kein Aufdruck. Wert nur durch <b>Messen</b> (Bauteiltester/LCR-Meter wie der FNIRSI LCR-P1 oder Multimeter mit Kapazitäts-Bereich „Cx") oder aus <b>Schaltplan / Stückliste (BOM) / Rollenbeschriftung</b>.</li>
+<li><b>Bedrahteter Keramik-C — Code auf dem Körper</b> (in Pikofarad!): kleiner Wert direkt („18" = 18 pF), sonst 3-stellig wie beim Widerstand, aber das Ergebnis ist pF.</li>
+<li><b>Folien-C:</b> Wert meist im Klartext aufgedruckt (z. B. „100n", „0.1µF").</li>
+<li><b>Elko / Tantal:</b> Wert <b>und Spannung</b> stehen drauf, gepolt (z. B. „470µF 25V").</li>
+</ul></div>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Aufdruck</th><th>Bedeutung</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td><b>18</b> (oder 180)</td><td>direkt in pF</td><td>18 pF (typische Quarz-Lastkapazität)</td></tr>
+<tr><td><b>47</b></td><td>direkt in pF</td><td>47 pF</td></tr>
+<tr><td><b>101</b></td><td>10 + 1 Null (pF)</td><td>100 pF</td></tr>
+<tr><td><b>102</b></td><td>10 + 2 Nullen (pF)</td><td>1 000 pF = 1 nF</td></tr>
+<tr><td><b>104</b></td><td>10 + 4 Nullen (pF)</td><td>100 000 pF = 100 nF (der Standard-Entkoppler)</td></tr>
+<tr><td><b>224</b></td><td>22 + 4 Nullen (pF)</td><td>220 000 pF = 220 nF</td></tr>
+</tbody>
+</table></div>
+<p style="font-size:12.5px;color:var(--muted)">Ein Buchstabe dahinter ist die Toleranz: J = ±5 %, K = ±10 %, M = ±20 %.</p>
+<div class="warn"><b>Verwechslungsgefahr:</b> Der gleiche 3-Ziffern-Code bedeutet beim <b>Widerstand Ohm</b>, beim <b>Kondensator Pikofarad</b>! „<b>220</b>" ist als Widerstand 22 Ω, als Kondensator 22 pF. Immer erst klären, welches Bauteil du vor dir hast.</div>
 
 <h3>Gepolte SMD-Bauteile erkennen</h3>
 <div class="card"><ul>
