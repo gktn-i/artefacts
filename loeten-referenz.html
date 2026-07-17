@@ -199,6 +199,39 @@ tbody tr:hover td{background:var(--surface-hover)}
   h2{font-size:16px}
   .grid{grid-template-columns:1fr}
 }
+
+/* ============================================================
+   IN-PAGE TOC · „Auf dieser Seite"
+   ============================================================ */
+h2[id],h3[id]{scroll-margin-top:84px}
+#tocBtn{position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:50%;
+  border:1px solid var(--border-strong);background:var(--surface);color:var(--text);
+  box-shadow:var(--shadow-tabs);cursor:pointer;font-size:19px;line-height:1;
+  display:none;align-items:center;justify-content:center}
+#tocBtn:hover{background:var(--surface-2)}
+#tocBtn.show{display:flex}
+#tocNav{position:fixed;right:16px;bottom:74px;z-index:60;width:242px;max-height:66vh;overflow:auto;
+  background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);
+  box-shadow:var(--shadow-tabs);padding:.55rem;display:none;-webkit-overflow-scrolling:touch}
+#tocNav.open{display:block}
+.toc-head{font-family:var(--display);font-size:11.5px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--muted);margin:.15rem .3rem .5rem;padding-bottom:.42rem;
+  border-bottom:1px solid var(--border)}
+#tocList{list-style:none;display:flex;flex-direction:column;gap:1px}
+#tocList a{display:block;padding:.37rem .5rem;border-radius:var(--radius-xs);font-size:13px;
+  color:var(--text);text-decoration:none;line-height:1.34;border-left:2px solid transparent}
+#tocList a:hover{background:var(--surface-2)}
+#tocList a.toc-l3{padding-left:1.15rem;font-size:12.5px;color:var(--muted)}
+#tocList a.active{background:var(--accent-soft);color:var(--accent-ink);
+  border-left-color:var(--accent);font-weight:600}
+@media(min-width:1600px){
+  #tocBtn{display:none !important}
+  #tocNav.has-items{display:block;right:auto;bottom:auto;
+    left:max(16px,calc((100vw - 1080px) / 2 - 236px));top:88px;width:224px;max-height:calc(100vh - 108px)}
+}
+@media(max-width:600px){
+  #tocNav{width:min(76vw,242px)}
+}
 </style>
 </head>
 <body>
@@ -858,6 +891,12 @@ tbody tr:hover td{background:var(--surface-hover)}
 
 <div class="legend">Richtwerte für Hobby-Elektronik. Temperaturen und Materialien je nach Hersteller, Spitze und Bauteil anpassen. Im Zweifel an einem Reststück testen.</div>
 
+<button id="tocBtn" type="button" aria-label="Auf dieser Seite" aria-expanded="false" aria-controls="tocNav" title="Auf dieser Seite">📑</button>
+<nav id="tocNav" aria-label="Auf dieser Seite">
+<div class="toc-head">Auf dieser Seite</div>
+<ol id="tocList"></ol>
+</nav>
+
 <script>
 /* ---------- TABS mit Deep-Linking (#hash) ---------- */
 const TABS=[
@@ -982,6 +1021,52 @@ document.querySelector("#"+id+" tbody").innerHTML=tb;
 }
 r();
 }
+</script>
+
+<script>
+/* ---------- IN-PAGE TOC · „Auf dieser Seite" ---------- */
+(function(){
+  const ACTIVE_SEL='.panel.active';
+  const listEl=document.getElementById('tocList');
+  const nav=document.getElementById('tocNav');
+  const btn=document.getElementById('tocBtn');
+  const tabsEl=document.getElementById('tabs');
+  let obs=null;
+  function setActive(id){listEl.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));}
+  function closeNav(){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+  function goTo(h){
+    const off=(tabsEl?tabsEl.offsetHeight:0)+14;
+    const y=h.getBoundingClientRect().top+window.pageYOffset-off;
+    window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+    if(window.innerWidth<1600)closeNav();
+  }
+  function build(){
+    if(obs){obs.disconnect();obs=null;}
+    listEl.innerHTML='';closeNav();
+    const sec=document.querySelector(ACTIVE_SEL);
+    let heads=sec?[...sec.querySelectorAll('h2')]:[];
+    if(heads.length<3&&sec)heads=[...sec.querySelectorAll('h2,h3')];
+    if(heads.length<2){nav.classList.remove('has-items');btn.classList.remove('show');return;}
+    heads.forEach((h,i)=>{
+      if(!h.id)h.id=(sec.getAttribute('data-p')||'sec')+'-h'+i;
+      const li=document.createElement('li');
+      const a=document.createElement('a');
+      a.href='#'+h.id;a.textContent=h.textContent.trim();
+      if(h.tagName==='H3')a.className='toc-l3';
+      a.addEventListener('click',e=>{e.preventDefault();goTo(h);});
+      li.appendChild(a);listEl.appendChild(li);
+    });
+    nav.classList.add('has-items');btn.classList.add('show');
+    obs=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)setActive(en.target.id);});},{rootMargin:'-42% 0px -53% 0px',threshold:0});
+    heads.forEach(h=>obs.observe(h));
+    setActive(heads[0].id);
+  }
+  btn.addEventListener('click',e=>{e.stopPropagation();const o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});
+  document.addEventListener('click',e=>{if(window.innerWidth>=1600)return;if(nav.classList.contains('open')&&!nav.contains(e.target)&&e.target!==btn)closeNav();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});
+  if(typeof window.activate==='function'){const _o=window.activate;window.activate=function(p,u){_o(p,u);build();};}
+  build();
+})();
 </script>
 </body>
 </html>
