@@ -377,9 +377,21 @@ tbody tr:hover td{background:var(--surface-hover)}
 <li><b>Sn63Pb37 (bleihaltig, eutektisch):</b> schmilzt scharf bei 183 °C, verzeiht am meisten. Beliebt im Hobby.</li>
 <li><b>Sn60Pb40 (bleihaltig):</b> fast gleichwertig, schmilzt bei 183–190 °C (kleiner „Teig&#8220;-Bereich statt scharfem Punkt).</li>
 <li><b>SAC305 (bleifrei, Sn96,5Ag3Cu0,5):</b> schmilzt bei 217–220 °C, braucht eine heißere Spitze. Die Oberfläche wird satiniert bis leicht matt — das ist bei bleifrei <b>normal</b>, kein Fehlerzeichen.</li>
-<li><b>Durchmesser:</b> 0,5–0,7 mm für SMD und Feinarbeit, <b>0,8 mm als Allrounder</b>, 1,0 mm für große THT-Pads und Kabel.</li>
 <li><b>Immer mit Flussmittelseele</b> (Flussmittel im Kern des Drahts) — niemals Sanitär- oder Stangenlot für Elektronik.</li>
 </ul>
+
+<h4 style="font-size:13px;margin:.8rem 0 .3rem">Welcher Durchmesser wofür?</h4>
+<p>Der Durchmesser bestimmt, wie fein du dosieren kannst. Dünner = präziser, aber du musst mehr nachschieben; dicker = schneller viel Lot, aber gröber. Ein dünner Draht ist der bessere Allrounder — für dicke Stellen schiebst du einfach mehr nach.</p>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Durchmesser</th><th>Am besten für</th></tr></thead>
+<tbody>
+<tr><td><b>0,3–0,4 mm</b></td><td>feines SMD (0402/0603), IC-Pins, Drag-Soldering — sehr genaue Dosierung</td></tr>
+<tr><td><b>0,5–0,6 mm</b></td><td>SMD-Chips, kleine THT-Bauteile, die meisten Feinarbeiten</td></tr>
+<tr><td><b>0,7–0,8 mm</b></td><td><span class="b b-ok">Allrounder</span> — deckt vom SMD bis zum normalen THT fast alles ab; wenn du nur eine Rolle kaufst, diese</td></tr>
+<tr><td><b>1,0–1,5 mm</b></td><td>große THT-Pads, Massflächen, dicke Kabel, Steckverbinder — viel Lot auf einmal</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Einsteiger:</b> Eine Rolle <b>0,7 oder 0,8 mm</b> reicht für den Anfang. Eine zweite dünne Rolle (<b>0,3–0,4 mm</b>) lohnt sich, sobald du feines SMD lötest.</div>
 
 <h3>Flussmittel (Flux)</h3>
 <p>Entfernt die Oxidschicht auf den Metallflächen und lässt das Lot fließen und benetzen. Die Flussmittelseele im Lotdraht reicht für einfaches THT — extra Flux ist der entscheidende Helfer bei SMD, Rework und beim Entlöten.</p>
@@ -670,6 +682,28 @@ tbody tr:hover td{background:var(--surface-hover)}
 <div class="step"><b>Pads aufbereiten.</b> Alte Legierung und Lot mit Entlötlitze + Flussmittel entfernen, mit IPA reinigen, dann neu verzinnen.</div>
 </div>
 <div class="note"><b>Für QFN, BGA und thermisch kräftige Bauteile</b> (große Masseflächen) ist Heißluft die schonendere Methode — siehe Tab <a class="goto" href="#heissluft">Heißluft</a>.</div>
+
+<h3>SMD-Troubleshooting: was tun, wenn …</h3>
+<div class="gb">
+<div class="gb-col bad"><h4>Zu viel Lot / Lotbrücke zwischen Pins</h4><ul>
+<li>Frisches Flussmittel über die Stelle geben.</li>
+<li>Saubere Entlötlitze auflegen, Spitze fest draufdrücken — das überschüssige Lot saugt sich in die Litze.</li>
+<li>Litze <b>zusammen mit der Spitze</b> abheben (nie kalt abreißen — reißt Pads).</li>
+<li>Bei einer echten Brücke reicht oft schon: Flussmittel drauf und mit sauberer, heißer Spitze einmal drüberstreichen — die Oberflächenspannung zieht das Lot auseinander.</li>
+</ul></div>
+<div class="gb-col good"><h4>Zu wenig Lot / Pin hängt in der Luft</h4><ul>
+<li>Flussmittel auf den Pin, Spitze mit einem Hauch frischem Lot an Pin und Pad, bis ein kleines Fillet steht.</li>
+<li>Kein zusätzliches Bauteil-Lot nötig — nur so viel, dass die Kehle geschlossen ist.</li>
+</ul></div>
+</div>
+<div class="card"><ul>
+<li><b>Bauteil sitzt schief / verrutscht:</b> eine Seite wieder aufschmelzen und mit der Pinzette nachschieben, dann festhalten bis das Lot fest ist.</li>
+<li><b>Tombstone (ein Ende hochgestellt):</b> beide Enden gleichzeitig erwärmen (Spitze quer über beide oder Heißluft), dann legt sich der Chip flach zurück.</li>
+<li><b>Lot fließt nicht, bildet Kugeln:</b> zu wenig oder verbrauchtes Flussmittel → frisches Flux dazu; Spitze sauber und heiß genug?</li>
+<li><b>Pin lässt sich nicht treffen / zu klein:</b> nicht einzeln kämpfen — reichlich Flussmittel und die ganze Reihe per Drag-Soldering ziehen, Brücken danach mit Litze abziehen.</li>
+<li><b>Pad hat sich gelöst (Lifted Pad):</b> weniger Hitze/Zeit, nicht hebeln; wenn schon ab, die Leiterbahn freikratzen und mit dünnem Draht überbrücken.</li>
+</ul></div>
+<div class="tip"><b>Wichtigste Regel bei Problemen:</b> Fast alles wird besser mit <b>frischem Flussmittel</b> und einer <b>sauberen, verzinnten Spitze</b>. Und: die Stelle zwischendurch abkühlen lassen, nicht endlos draufbraten — lange Hitze löst Pads.</div>
 </div>
 
 <!-- ============ ABLAUF HEISSLUFT ============ -->
