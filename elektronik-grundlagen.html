@@ -655,6 +655,33 @@ li.warn{color:var(--warn-ink)}
 <p style="margin-bottom:0"><b>Faustregel:</b> steht ein Wert still → Multimeter reicht. Ändert er sich schnell oder ist es ein Datensignal → Logic Analyzer (digital) oder Oszilloskop (analog & Timing).</p>
 </div>
 
+<h2>Reparatur: „Gerät geht nicht an" — Fehler finden</h2>
+<p>Egal ob Konsole, Laptop, Mini-PC oder Bastelboard: Man arbeitet sich <b>der Stromversorgung entlang</b> vor — von der Steckdose bis zum Chip. Man sucht die Stelle, an der die Spannung <b>abbricht</b>. Dort liegt der Fehler.</p>
+
+<div class="danger-box"><p style="margin:0"><b>Zuerst: Was ist gefährlich?</b> Ein <b>externes Steckernetzteil</b> gibt ungefährliche Niederspannung (5–20 V DC) — da darfst du messen. Ein <b>ins Gerät eingebautes Netzteil</b> (Desktop-PC, manche Konsolen, alles mit direktem 230-V-Kabel) führt innen <b>Netzspannung</b> und hat geladene Kondensatoren → nur mit Erfahrung öffnen. Miss immer nur die <b>Niederspannungs-Seite</b> (nach dem Netzteil).</p></div>
+
+<h3>Schritt 1 — Erst ohne Messgerät eingrenzen</h3>
+<div class="card"><ul>
+<li><b>Lebenszeichen?</b> Leuchtet eine LED, dreht ein Lüfter, macht es ein Geräusch? Nichts = wahrscheinlich Stromversorgung. Etwas = kommt oft weiter (Display, Software).</li>
+<li><b>Netzteil separat testen:</b> Lädt/läuft es an einem <b>anderen</b> gleichen Gerät? Oder ein anderes passendes Netzteil am kranken Gerät? So trennst du Netzteil vs. Gerät.</li>
+<li><b>Kabel & Buchse ansehen:</b> Wackelkontakt, geknickte Kabel, verbogene/oxidierte Pins, lockere Ladebuchse.</li>
+<li><b>Hart zurücksetzen:</b> Strom und Akku trennen, Power-Taste ~30 s halten (entlädt Restspannung), dann neu versuchen.</li>
+</ul></div>
+
+<h3>Schritt 2 — Mit dem Multimeter der Reihe nach messen</h3>
+<p>Immer: schwarze Leitung in <b>COM</b>, rote in <b>VΩ</b>. Schwarz = Minus/Masse, Rot = der Punkt, den du prüfst.</p>
+
+<div class="card"><ol>
+<li><b>Kommt Spannung aus dem Netzteil?</b> Drehrad auf <b>V⎓ / DCV</b>. Beim Hohlstecker: rote Spitze <b>innen in die Öffnung</b> (meist Plus), schwarze <b>außen an den Metallmantel</b>. Soll = aufgedruckte Spannung (z. B. 19 V Laptop, 12 V Konsole). <b>0 V</b> → Netzteil oder Kabel defekt.</li>
+<li><b>Kommt die Spannung im Gerät an?</b> Gerät geöffnet: schwarz an einen <b>Massepunkt</b> (Metallschirm, Minuspol großer Elko), rot direkt an die <b>Lötpunkte der DC-/Ladebuchse</b>. Spannung am Stecker, aber nicht dahinter → Buchse kalt/gebrochen.</li>
+<li><b>Sicherung prüfen.</b> Nach der Buchse sitzt oft eine kleine <b>SMD-Sicherung</b>. Drehrad auf <b>Durchgang ())) )</b>, Gerät stromlos, je eine Spitze an ein Ende. <b>Piep</b> = heil, <b>kein Ton</b> = durchgebrannt (dann weiter suchen, warum).</li>
+<li><b>Kurzschluss auf der Versorgung?</b> Drehrad auf <b>Ω</b>, stromlos: schwarz an GND, rot an die Plus-Rail hinter der Buchse. <b>Nahe 0 Ω</b> = Kurzschluss (defekter Kondensator/Chip in der Ladeschaltung) → nicht einschalten.</li>
+<li><b>Ein-Taster & Akku.</b> Taster im <b>Durchgang</b> prüfen (beim Drücken muss es piepen). Akku im <b>V⎓</b> messen — tief entladen (deutlich unter Nennspannung)? Dann lädt/startet manches Gerät nicht.</li>
+</ol></div>
+
+<h3>Die Logik dahinter</h3>
+<div class="card"><p style="margin:0"><b>Verfolge die Spannung von der Quelle nach innen.</b> An der letzten Stelle, wo sie noch <b>da</b> ist, und der ersten, wo sie <b>fehlt</b>, sitzt der Fehler — meist Buchse, Sicherung, Ladechip oder ein kurzschließender Kondensator. Verkohlte, aufgeblähte oder warme Bauteile sind zusätzliche Verdächtige (Sicht + Finger).</p></div>
+
 <h2>Sicherheit & häufige Fehler</h2>
 <div class="card">
 <div class="rule"><span class="ico">🔌</span><div><b>Rote Leitung nach Strommessung zurückstecken!</b> Der häufigste Fehler: Leitung bleibt in der A-Buchse, dann misst man Spannung → Kurzschluss. Nach jeder Strommessung Rot zurück in VΩ.</div></div>
