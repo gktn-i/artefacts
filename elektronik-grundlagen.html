@@ -549,12 +549,34 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <h3>Vorgehen beim Zeichnen</h3>
 <div class="card"><ul>
 <li><b>Blockdiagramm auf Papier:</b> Versorgung → Gehirn → Ein-/Ausgänge als Kästen, bevor ein Symbol platziert wird.</li>
+<li><b>Referenzschaltungen übernehmen:</b> Für jedes IC die „Typical Application" aus dem Datenblatt kopieren. Auch Profis erfinden Beschaltung nicht neu — das Datenblatt ist der Bauplan.</li>
 <li><b>Symbole platzieren:</b> Versorgung oben, GND unten, Eingänge links, Ausgänge rechts.</li>
 <li><b>Netze ziehen:</b> Für VCC/GND Versorgungssymbole statt Leitungen; bei vielen Verbindungen Netznamen (Labels) statt Leitungs-Spaghetti.</li>
 <li><b>Werte + Kürzel vergeben:</b> Jedes Bauteil bekommt R1/C2/U3 … und seinen Wert — die Software nummeriert automatisch.</li>
 <li><b>ERC laufen lassen</b> (Electrical Rules Check): findet unverbundene Pins und vergessene Netze, bevor du sie auf der Platine suchst.</li>
 <li><b>Erst danach Layout:</b> Das Board wird aus dem fertigen, geprüften Schaltplan erzeugt.</li>
 </ul></div>
+
+<h3>Technik-Checkliste: daran beim Entwerfen denken</h3>
+<p>Das sind die Standard-Regeln, die erfahrene Entwickler bei jedem Entwurf automatisch prüfen — sortiert nach Thema:</p>
+<div class="grid2">
+<div class="card"><h3>⚡ Spannung &amp; Strom</h3>
+<div class="rule"><span class="ico">🔀</span><div><b>Pegel prüfen:</b> Ein 5-V-Signal darf <b>nie</b> direkt an einen 3,3-V-Pin (Spannungsteiler oder Levelshifter dazwischen). Andersrum — 3,3 V an einen 5-V-Eingang — funktioniert meist.</div></div>
+<div class="rule"><span class="ico">🧮</span><div><b>Strombudget rechnen:</b> Alle Verbraucher addieren + Reserve. Und: GPIO-Pins liefern nur ~10–20 mA — alles Größere (Motor, Relais, LED-Kette) schaltet ein Transistor/MOSFET, nie der Pin selbst.</div></div>
+<div class="rule"><span class="ico">📉</span><div><b>Nicht am Limit betreiben (Derating):</b> Bauteile nur zu ~50–70 % ihrer Nennwerte ausnutzen. Elko-Spannungsfestigkeit mindestens 1,5–2× der Betriebsspannung (16-V-Elko an 5 V, nicht 6,3-V-Elko an 5 V).</div></div>
+</div>
+<div class="card"><h3>🛡️ Schutz</h3>
+<div class="rule"><span class="ico">🔌</span><div><b>Verpolungsschutz am Eingang:</b> Diode in Serie (einfach, kostet ~0,7 V) oder P-MOSFET (fast verlustfrei) — für den Moment, in dem jemand den Stecker falsch herum anschließt.</div></div>
+<div class="rule"><span class="ico">🧯</span><div><b>Sicherung direkt hinter den Versorgungseingang</b> — vor allem bei Akku-Betrieb.</div></div>
+<div class="rule"><span class="ico">🌀</span><div><b>Freilaufdiode an jede Spule</b> (Relais, Motor, Magnetventil) — ohne sie stirbt der schaltende Transistor an der Abschaltspitze.</div></div>
+<div class="rule"><span class="ico">🖐️</span><div><b>Leitungen nach draußen schützen:</b> Alles, was an Stecker, Taster oder lange Kabel geht, bekommt einen Serienwiderstand (100 Ω–1 kΩ) gegen ESD und Störspitzen.</div></div>
+</div>
+<div class="card"><h3>🔧 Praxis &amp; Beschaffung</h3>
+<div class="rule"><span class="ico">📦</span><div><b>Standardwerte nehmen (E-Reihe):</b> 10 kΩ statt 9,76 kΩ — was jeder Shop führt, ist billig und sofort ersetzbar.</div></div>
+<div class="rule"><span class="ico">📍</span><div><b>Keine offenen Eingänge:</b> Unbenutzte IC-Eingänge und Reset-/Enable-Pins definiert beschalten (Pull-up/Pull-down) — offene CMOS-Eingänge machen Zufallsverhalten.</div></div>
+<div class="rule"><span class="ico">🎯</span><div><b>Testpunkte einplanen:</b> GND und die wichtigsten Spannungen als Messpunkte vorsehen — die Minute beim Zeichnen spart Stunden beim Fehlersuchen.</div></div>
+</div>
+</div>
 
 <h3>Goldene Zeichen-Regeln</h3>
 <div class="card">
