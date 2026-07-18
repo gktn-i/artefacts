@@ -197,6 +197,28 @@ li.warn{color:var(--warn-ink)}
 .kbd{font-family:var(--mono);font-size:11.5px;background:var(--surface-2);border:1px solid var(--border);padding:1px 6px;border-radius:5px}
 
 /* ============================================================
+   SCHALTPLAN-TAB · Schaltzeichen-SVGs & Symbol-Raster
+   ============================================================ */
+.symgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:10px;margin:.6rem 0 .9rem}
+.sym{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);padding:10px 10px 9px;text-align:center;box-shadow:var(--shadow-sm)}
+.sym svg{width:100%;max-width:118px;height:auto;display:block;margin:0 auto 5px}
+.sym .sn{font-size:12.5px;font-weight:600;line-height:1.3}
+.sym .sd{font-size:11px;color:var(--muted);line-height:1.45;margin-top:2px}
+.sym .sref{font-family:var(--mono);font-size:10.5px;color:var(--accent-ink);background:var(--accent-soft);border-radius:4px;padding:0 5px;display:inline-block;margin-top:5px}
+svg.sy .w{stroke:var(--text);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg.sy .f{fill:var(--text);stroke:none}
+svg.sy .lbl{font-family:var(--mono);font-size:10px;fill:var(--muted);stroke:none}
+svg.sy .pin{font-family:var(--mono);font-size:8.5px;fill:var(--faint);stroke:none}
+svg.sy .acc{stroke:var(--accent);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg.sy .accf{fill:var(--accent);stroke:none}
+svg.sy .ok{fill:var(--rate-good);stroke:none;font-size:15px;font-weight:700}
+svg.sy .bad{fill:var(--rate-bad);stroke:none;font-size:15px;font-weight:700}
+svg.sy .con{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+svg.sy .cot{fill:var(--accent-ink);font-family:var(--sans);font-size:12px;font-weight:700;stroke:none}
+.sy-mid{width:100%;max-width:320px;height:auto;display:block;margin:.4rem auto}
+.sy-big{width:100%;max-width:660px;height:auto;display:block;margin:.5rem auto}
+
+/* ============================================================
    RECHNER
    ============================================================ */
 .calc{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:.7rem 0}
@@ -360,6 +382,176 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="count" id="count"></div>
 <div class="tbl-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
 <p class="note">Zeile anklicken für Details: einfache Erklärung, ein konkretes Anwendungsbeispiel, Kennwerte, Kompatibilität und worauf du achten musst.</p>
+</section>
+
+<!-- ============ TAB 2b: SCHALTPLAN ============ -->
+<section id="t-schaltplan" class="hidden">
+
+<h2>Schaltplan, Layout, Bestückungsplan — was ist was?</h2>
+<div class="grid2">
+<div class="card"><h3>📐 Schaltplan (Schematic)</h3><p>Zeigt die <b>Logik</b>: welche Bauteile es gibt und was mit was verbunden ist — als Symbole und Linien. Positionen und Größen sind <b>nicht</b> echt: Ein Bauteil kann im Plan links oben stehen und auf der Platine rechts unten sitzen.</p></div>
+<div class="card"><h3>🟩 Layout (Board)</h3><p>Die <b>echte Platine</b>: wo jedes Bauteil sitzt und wie die Kupferbahnen laufen. Wird aus dem Schaltplan erzeugt. Zum Verstehen einer Schaltung liest man den Schaltplan, nicht das Layout.</p></div>
+<div class="card"><h3>📋 Bestückungsplan &amp; BOM</h3><p>Verbindet beide Welten: <b>R1, C3, U2</b> … stehen im Schaltplan, in der Stückliste (BOM) <b>und</b> auf der Platine — dasselbe Kürzel meint dasselbe Bauteil. Kürzel-Tabelle: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</p></div>
+</div>
+
+<h2>Symbol-Bibliothek: die Schaltzeichen</h2>
+<p>Das sind die Symbole, aus denen praktisch jeder Hobby-Schaltplan besteht. Daneben steht die übliche Beschriftung (Kürzel + Wert).</p>
+<div class="symgrid">
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Widerstand IEC-Symbol: Rechteck"><path class="w" d="M10,32 H40 M80,32 H110"/><rect class="w" x="40" y="24" width="40" height="16"/><text class="lbl" x="60" y="16" text-anchor="middle">10k</text></svg><div class="sn">Widerstand (IEC)</div><div class="sd">europäische Norm</div><div class="sref">R · 10k</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Widerstand US-Symbol: Zickzack-Linie"><path class="w" d="M10,32 H34 L40,20 L52,44 L64,20 L76,44 L82,32 H110"/><text class="lbl" x="60" y="14" text-anchor="middle">10k</text></svg><div class="sn">Widerstand (US)</div><div class="sd">gleiches Bauteil, beide Symbole sind verbreitet</div><div class="sref">R · 10k</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Potentiometer: Widerstand mit Pfeil auf die Mitte"><path class="w" d="M10,36 H40 M80,36 H110"/><rect class="w" x="40" y="28" width="40" height="16"/><path class="w" d="M60,6 V18"/><path class="f" d="M60,28 L55,17 L65,17 Z"/></svg><div class="sn">Potentiometer</div><div class="sd">Pfeil = Schleifer (3. Anschluss)</div><div class="sref">RV · 10k</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Kondensator ungepolt: zwei parallele Platten"><path class="w" d="M10,32 H52 M68,32 H110 M52,16 V48 M68,16 V48"/></svg><div class="sn">Kondensator</div><div class="sd">ungepolt (Keramik, Folie)</div><div class="sref">C · 100n</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Elko gepolt: gerade Plus-Platte und gebogene Minus-Platte"><path class="w" d="M10,32 H52 M52,16 V48"/><path class="w" d="M72,16 Q60,32 72,48"/><path class="w" d="M69,32 H110"/><path class="w" d="M34,12 v10 M29,17 h10"/></svg><div class="sn">Elko (gepolt)</div><div class="sd">gerade Platte = Plus, Bogen = Minus</div><div class="sref">C · 100µ</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Diode: Dreieck mit Querbalken"><path class="w" d="M10,32 H50 M72,32 H110 M72,18 V46"/><path class="f" d="M50,18 L50,46 L72,32 Z"/><text class="lbl" x="30" y="20">A</text><text class="lbl" x="84" y="20">K</text></svg><div class="sn">Diode</div><div class="sd">Strom fließt nur in Pfeilrichtung (A→K)</div><div class="sref">D · 1N4148</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Zener-Diode: Querbalken mit abgeknickten Enden"><path class="w" d="M10,32 H50 M72,32 H110"/><path class="f" d="M50,18 L50,46 L72,32 Z"/><path class="w" d="M72,18 V46 M72,18 L66,13 M72,46 L78,51"/></svg><div class="sn">Zener-Diode</div><div class="sd">Spannungsreferenz, leitet ab U<sub>Z</sub> rückwärts</div><div class="sref">D · 5V1</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Schottky-Diode: Querbalken mit S-förmigen Haken"><path class="w" d="M10,32 H50 M72,32 H110"/><path class="f" d="M50,18 L50,46 L72,32 Z"/><path class="w" d="M78,22 V18 H72 V46 H66 V42"/></svg><div class="sn">Schottky-Diode</div><div class="sd">wenig Spannungsverlust, schnell</div><div class="sref">D · SS14</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="LED: Diode mit zwei abgehenden Pfeilen"><path class="w" d="M10,36 H50 M72,36 H110 M72,22 V50"/><path class="f" d="M50,22 L50,50 L72,36 Z"/><path class="w" d="M56,18 L64,8 M66,22 L74,12"/><path class="f" d="M66,6 L58,9 L63,14 Z"/><path class="f" d="M76,10 L68,13 L73,18 Z"/></svg><div class="sn">LED</div><div class="sd">Pfeile = Licht; langer Draht = Anode (+)</div><div class="sref">D/LED · rot</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="NPN-Transistor: Basisbalken, Pfeil am Emitter zeigt nach außen"><path class="w" d="M10,32 H50 M50,14 V50 M50,26 L80,10 M50,38 L80,54"/><path class="f" d="M80,54 L68,51 L74,44 Z"/><text class="pin" x="14" y="26">B</text><text class="pin" x="86" y="12">C</text><text class="pin" x="86" y="58">E</text></svg><div class="sn">Transistor NPN</div><div class="sd">Pfeil zeigt <b>weg</b> von der Basis</div><div class="sref">Q · BC547</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="PNP-Transistor: Pfeil am Emitter zeigt zur Basis"><path class="w" d="M10,32 H50 M50,14 V50 M50,26 L80,10 M50,38 L80,54"/><path class="f" d="M52,40 L64,43 L58,50 Z"/><text class="pin" x="14" y="26">B</text><text class="pin" x="86" y="12">C</text><text class="pin" x="86" y="58">E</text></svg><div class="sn">Transistor PNP</div><div class="sd">Pfeil zeigt <b>zur</b> Basis</div><div class="sref">Q · BC557</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="N-Kanal-MOSFET: Gate-Balken, unterbrochener Kanal, Pfeil zum Kanal"><path class="w" d="M10,32 H42 M42,16 V48"/><path class="w" d="M52,12 V22 M52,27 V37 M52,42 V52"/><path class="w" d="M52,17 H80 V8 M52,47 H80 V56 M66,32 H80 V47"/><path class="f" d="M54,32 L66,28 L66,36 Z"/><text class="pin" x="14" y="26">G</text><text class="pin" x="86" y="12">D</text><text class="pin" x="86" y="60">S</text></svg><div class="sn">MOSFET (N-Kanal)</div><div class="sd">schaltet Last per Gate-Spannung</div><div class="sref">Q · AO3400</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Spule: Bogenreihe"><path class="w" d="M10,32 H30"/><path class="w" d="M30,32 a10,12 0 0 1 20,0 a10,12 0 0 1 20,0 a10,12 0 0 1 20,0"/><path class="w" d="M90,32 H110"/></svg><div class="sn">Spule / Drossel</div><div class="sd">Induktivität, z. B. in Schaltreglern</div><div class="sref">L · 10µH</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Quarz: Rechteck zwischen zwei Kondensatorplatten"><path class="w" d="M10,32 H46 M46,18 V46 M74,18 V46 M74,32 H110"/><rect class="w" x="52" y="12" width="16" height="40"/></svg><div class="sn">Quarz</div><div class="sd">Taktgeber für Mikrocontroller</div><div class="sref">Y · 16 MHz</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Taster: zwei Kontakte mit schrägem Hebel und Betätiger"><circle class="f" cx="42" cy="36" r="2.6"/><circle class="f" cx="78" cy="36" r="2.6"/><path class="w" d="M10,36 H42 M78,36 H110 M42,36 L76,20"/><path class="w" d="M59,26 V10 M50,10 H68"/></svg><div class="sn">Taster / Schalter</div><div class="sd">offen gezeichnet = „nicht gedrückt"</div><div class="sref">SW · Taster</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Sicherung: Rechteck mit durchgehender Linie"><path class="w" d="M10,32 H110"/><rect class="w" x="40" y="24" width="40" height="16"/></svg><div class="sn">Sicherung</div><div class="sd">trennt bei Überstrom</div><div class="sref">F · 2A</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Batterie: lange dünne Plus-Platte, kurze dicke Minus-Platte"><path class="w" d="M10,32 H48 M48,12 V52"/><path class="w" style="stroke-width:4.5" d="M60,23 V41"/><path class="w" d="M60,32 H110"/><text class="lbl" x="36" y="12">+</text><text class="lbl" x="70" y="12">−</text></svg><div class="sn">Batterie / Zelle</div><div class="sd">langer Strich = Plus</div><div class="sref">BT · 3,7V</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="IC: Rechteck mit Pins und Kerbe"><rect class="w" x="34" y="8" width="52" height="48" rx="2"/><path class="w" d="M54,8 a6,6 0 0 0 12,0"/><path class="w" d="M22,18 H34 M22,32 H34 M22,46 H34 M86,18 H98 M86,32 H98 M86,46 H98"/><text class="pin" x="38" y="21">1</text><text class="pin" x="38" y="35">2</text><text class="pin" x="38" y="49">3</text><text class="lbl" x="60" y="36" text-anchor="middle">U1</text></svg><div class="sn">IC (Chip)</div><div class="sd">Rechteck mit nummerierten Pins, Kerbe/Punkt = Pin 1</div><div class="sref">U · NE555</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Operationsverstärker: Dreieck mit Plus- und Minus-Eingang"><path class="w" d="M40,10 V54 L92,32 Z M24,20 H40 M24,44 H40 M92,32 H108"/><text class="lbl" x="44" y="25">−</text><text class="lbl" x="44" y="49">+</text></svg><div class="sn">OpAmp</div><div class="sd">verstärkt Differenz der Eingänge</div><div class="sref">U · LM358</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Steckverbinder: Klammer mit Pin-Kreisen"><path class="w" d="M56,8 H44 V56 H56"/><circle class="w" cx="62" cy="18" r="3"/><circle class="w" cx="62" cy="32" r="3"/><circle class="w" cx="62" cy="46" r="3"/><path class="w" d="M65,18 H96 M65,32 H96 M65,46 H96"/></svg><div class="sn">Steckverbinder</div><div class="sd">Header, Buchse, USB — Übergang nach außen</div><div class="sref">J · Header</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Drei GND-Symbolvarianten: Balkenstapel, Dreieck, schraffiert"><path class="w" d="M24,12 V30 M12,30 H36 M17,37 H31 M22,44 H26"/><path class="w" d="M60,12 V28 M48,28 L72,28 L60,44 Z"/><path class="w" d="M96,12 V28 M84,28 H108 M88,28 L82,38 M96,28 L90,38 M104,28 L98,38"/><text class="pin" x="24" y="58" text-anchor="middle">GND</text><text class="pin" x="60" y="58" text-anchor="middle">Signal</text><text class="pin" x="96" y="58" text-anchor="middle">Gehäuse</text></svg><div class="sn">Masse (GND)</div><div class="sd">alle GND-Symbole eines Plans sind <b>ein</b> Netz</div><div class="sref">GND · 0V</div></div>
+
+<div class="sym"><svg class="sy" viewBox="0 0 120 64" role="img" aria-label="Versorgungssymbol: Pfeil nach oben mit Spannungsangabe"><path class="w" d="M60,54 V24"/><path class="f" d="M60,8 L52,24 L68,24 Z"/><text class="lbl" x="60" y="63" text-anchor="middle">VCC · +5V · 3V3</text></svg><div class="sn">Versorgung</div><div class="sd">Pfeil/Balken nach oben = Plus-Netz</div><div class="sref">VCC / VDD</div></div>
+
+</div>
+<p class="note">Kürzel-Logik: R = Widerstand, C = Kondensator, D = Diode, Q = Transistor, U = IC, L = Spule, Y = Quarz, SW = Schalter, J = Stecker, F = Sicherung. Vollständige Tabelle: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</p>
+
+<h2>Die Lese-Regeln (Konventionen)</h2>
+<div class="card">
+<div class="rule"><span class="ico">🧭</span><div><b>Plus oben, GND unten.</b> Versorgungsspannung wird oben gezeichnet, Masse unten — Strom „fällt" im Plan von oben nach unten. Signale laufen von links (Eingang) nach rechts (Ausgang).</div></div>
+<div class="rule"><span class="ico">⚫</span><div><b>Punkt = verbunden. Kreuzung ohne Punkt = nicht verbunden.</b> Die wichtigste Regel überhaupt — siehe Grafik unten.</div></div>
+<div class="rule"><span class="ico">🏷️</span><div><b>Gleicher Netzname = verbunden, auch ohne Linie.</b> Steht an zwei Leitungsenden dasselbe Label (<span class="kbd">VCC</span>, <span class="kbd">GND</span>, <span class="kbd">SDA</span> …), sind sie verbunden. Versorgungssymbole sind „Teleporter": jeder VCC-Pfeil hängt am selben Netz.</div></div>
+<div class="rule"><span class="ico">1️⃣</span><div><b>Pin 1 finden:</b> Punkt oder Kerbe am IC-Symbol und am echten Chip. Zählung ab Pin 1 <b>gegen</b> den Uhrzeigersinn (von oben gesehen).</div></div>
+<div class="rule"><span class="ico">🔢</span><div><b>Kürzel + Nummer = eindeutiges Bauteil.</b> R5 im Plan ist R5 auf der Platine und R5 in der Stückliste. Der Wert steht direkt daneben.</div></div>
+</div>
+
+<svg class="sy sy-mid" viewBox="0 0 320 100" role="img" aria-label="Links Kreuzung mit Punkt gleich verbunden, rechts Kreuzung ohne Punkt gleich nicht verbunden"><path class="w" d="M25,50 H135 M80,12 V88"/><circle class="f" cx="80" cy="50" r="4.5"/><text class="ok" x="16" y="30">✓</text><text class="lbl" x="80" y="99" text-anchor="middle">verbunden</text><path class="w" d="M185,50 H295 M240,12 V88"/><text class="bad" x="176" y="30">✗</text><text class="lbl" x="240" y="99" text-anchor="middle">nicht verbunden</text></svg>
+
+<h3>Werte-Kurzschreibweise</h3>
+<div class="tbl-wrap"><table style="min-width:520px">
+<thead><tr><th>Im Plan steht</th><th>Bedeutet</th><th>Merkregel</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">4k7</span></td><td>4,7 kΩ</td><td>Buchstabe ersetzt das Komma (k = Kilo)</td></tr>
+<tr><td><span class="kbd">4R7</span> / <span class="kbd">R47</span></td><td>4,7 Ω / 0,47 Ω</td><td>R steht fürs Komma bei Ohm-Werten unter 10</td></tr>
+<tr><td><span class="kbd">100n</span></td><td>100 nF (= 0,1 µF)</td><td>n = Nano, µ = Mikro, p = Piko</td></tr>
+<tr><td><span class="kbd">10µ</span> / <span class="kbd">10u</span></td><td>10 µF</td><td>u ist Ersatz-Schreibweise für µ</td></tr>
+<tr><td><span class="kbd">22p</span></td><td>22 pF</td><td>typisch bei Quarz-Lastkondensatoren</td></tr>
+<tr><td><span class="kbd">3V3</span> / <span class="kbd">5V0</span></td><td>3,3 V / 5,0 V</td><td>V ersetzt das Komma bei Spannungen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Aufgedruckte Zahlencodes auf den Bauteilen selbst (z. B. „104" = 100 nF): Sektion „Kondensator-Codes" im Tab <a href="#grundlagen">Grundlagen</a>.</p>
+
+<h2>Schaltplan lesen — Schritt für Schritt</h2>
+<div class="card">
+<div class="rule"><span class="ico">①</span><div><b>Versorgung finden.</b> Wo kommt Energie rein — USB, Hohlbuchse, Batterie? Von dort zum Spannungsregler folgen. Notiere, welche Spannungen es gibt (z. B. 5 V rein → 3,3 V für den Chip).</div></div>
+<div class="rule"><span class="ico">②</span><div><b>GND finden.</b> Alle GND-Symbole sind ein Netz — das ist der Bezugspunkt für jede Messung und jedes Signal.</div></div>
+<div class="rule"><span class="ico">③</span><div><b>Das „Gehirn" finden.</b> Das größte IC (meist U1) ist fast immer der Mikrocontroller oder Haupt-Chip. Alles andere hängt drumherum.</div></div>
+<div class="rule"><span class="ico">④</span><div><b>Standard-Blöcke erkennen.</b> Schaltpläne bestehen zu ~80 % aus immer gleichen Mustern (nächste Sektion). Wer die Blöcke kennt, liest nicht mehr Bauteil für Bauteil, sondern Block für Block.</div></div>
+<div class="rule"><span class="ico">⑤</span><div><b>Signalweg verfolgen.</b> Von links nach rechts: Eingang (Sensor, Taster, Stecker) → Verarbeitung (IC) → Ausgang (LED, Motor, Display).</div></div>
+<div class="rule"><span class="ico">⑥</span><div><b>Unbekanntes IC? Datenblatt.</b> Aufdruck ablesen → Datenblatt suchen → Kapitel „Typical Application" ansehen. Praxis-Fakt: Die meiste Beschaltung in echten Geräten <b>ist</b> exakt diese Referenzschaltung aus dem Datenblatt.</div></div>
+</div>
+
+<h2>Standard-Blöcke erkennen (Mustererkennung = 80 % des Lesens)</h2>
+<p>Diese Muster tauchen in fast jedem Plan auf. Symbol-Kombination einmal verinnerlichen — ab dann erkennst du sie auf einen Blick.</p>
+<div class="grid2">
+
+<div class="card"><h3>LED + Vorwiderstand</h3>
+<svg class="sy sy-mid" style="max-width:170px" viewBox="0 0 200 130" role="img" aria-label="Schaltung: Versorgung, Widerstand 330 Ohm, LED, Masse in Reihe"><path class="f" d="M100,6 L93,20 L107,20 Z"/><path class="w" d="M100,20 V32"/><rect class="w" x="92" y="32" width="16" height="26"/><path class="w" d="M100,58 V70"/><path class="f" d="M92,70 L108,70 L100,86 Z"/><path class="w" d="M92,86 H108 M100,86 V102"/><path class="w" d="M112,72 L122,78 M112,80 L122,86"/><path class="w" d="M88,102 H112 M93,108 H107 M98,114 H102"/><text class="lbl" x="86" y="14" text-anchor="end">+5V</text><text class="lbl" x="114" y="48">330Ω</text><text class="lbl" x="86" y="82" text-anchor="end">LED</text></svg>
+<ul><li>Widerstand begrenzt den Strom: 330 Ω an 5 V ≈ 9 mA — sicher für jede Standard-LED</li><li>Reihenfolge egal (R vor oder nach der LED), Hauptsache in Reihe</li></ul></div>
+
+<div class="card"><h3>Spannungsteiler</h3>
+<svg class="sy sy-mid" style="max-width:170px" viewBox="0 0 200 130" role="img" aria-label="Zwei Widerstände in Reihe, Abgriff in der Mitte"><path class="f" d="M70,6 L63,20 L77,20 Z"/><path class="w" d="M70,20 V30"/><rect class="w" x="62" y="30" width="16" height="24"/><path class="w" d="M70,54 V66 M70,66 H148"/><circle class="f" cx="70" cy="66" r="3.4"/><rect class="w" x="62" y="74" width="16" height="24"/><path class="w" d="M70,66 V74 M70,98 V108"/><path class="w" d="M58,108 H82 M63,114 H77 M68,120 H72"/><text class="lbl" x="56" y="14" text-anchor="end">5V</text><text class="lbl" x="84" y="46">R1 10k</text><text class="lbl" x="84" y="90">R2 10k</text><text class="lbl" x="112" y="60">Vout 2,5V</text></svg>
+<ul><li>Teilt Spannung im Verhältnis R2/(R1+R2) — 2× gleicher Wert = Hälfte</li><li>Typisch: Akkuspannung für einen ADC-Pin herunterteilen</li></ul></div>
+
+<div class="card"><h3>Pull-up am Taster / Bus</h3>
+<svg class="sy sy-mid" style="max-width:170px" viewBox="0 0 200 130" role="img" aria-label="Widerstand von Versorgung zum Pin, Taster vom Pin nach Masse"><path class="f" d="M70,6 L63,20 L77,20 Z"/><path class="w" d="M70,20 V30"/><rect class="w" x="62" y="30" width="16" height="24"/><path class="w" d="M70,54 V64 M70,64 H150"/><circle class="f" cx="70" cy="64" r="3.4"/><path class="w" d="M70,64 V76"/><circle class="f" cx="70" cy="80" r="2.6"/><circle class="f" cx="70" cy="104" r="2.6"/><path class="w" d="M70,80 L84,100"/><path class="w" d="M70,104 V112 M58,112 H82 M63,118 H77"/><text class="lbl" x="54" y="14" text-anchor="end">3V3</text><text class="lbl" x="84" y="46">10k</text><text class="lbl" x="148" y="58" text-anchor="end">zum MCU-Pin</text><text class="lbl" x="92" y="96">Taster</text></svg>
+<ul><li>Pin liegt über 10 kΩ auf HIGH; Taster gedrückt zieht ihn auf LOW — nie „floatend"</li><li>Gleicher Block bei I²C: 4,7 kΩ von SDA/SCL nach VCC</li><li>Pull-down = gespiegelt (R nach GND, Taster nach VCC)</li></ul></div>
+
+<div class="card"><h3>Abblockkondensator (100 nF)</h3>
+<svg class="sy sy-mid" style="max-width:170px" viewBox="0 0 200 130" role="img" aria-label="100-Nanofarad-Kondensator zwischen VCC-Pin des ICs und Masse"><path class="f" d="M60,12 L53,26 L67,26 Z"/><path class="w" d="M60,26 V40 M60,40 H122"/><circle class="f" cx="88" cy="40" r="3.4"/><rect class="w" x="122" y="30" width="58" height="70" rx="2"/><text class="lbl" x="151" y="70" text-anchor="middle">U1</text><text class="pin" x="126" y="44">VCC</text><path class="w" d="M88,40 V56 M78,56 H98 M78,64 H98 M88,64 V84"/><path class="w" d="M76,84 H100 M81,90 H95 M86,96 H90"/><path class="w" d="M151,100 V112 M139,112 H163 M144,118 H158"/><text class="lbl" x="74" y="62" text-anchor="end">100n</text><text class="lbl" x="44" y="20" text-anchor="end">5V</text></svg>
+<ul><li>100 nF direkt an <b>jedem</b> VCC-Pin jedes ICs — fängt Stromspitzen ab</li><li>Sieht im Plan „unverbunden" aus, ist aber Pflicht; so nah wie möglich am Pin platziert</li></ul></div>
+
+<div class="card"><h3>Transistor als Schalter</h3>
+<svg class="sy sy-mid" style="max-width:190px" viewBox="0 0 205 130" role="img" aria-label="NPN-Transistor schaltet Relais, Basiswiderstand 1 Kiloohm, Freilaufdiode parallel zur Last"><path class="f" d="M118,4 L111,16 L125,16 Z"/><path class="w" d="M118,16 V20"/><rect class="w" x="108" y="20" width="20" height="24"/><path class="w" d="M118,44 V50"/><path class="w" d="M10,70 H36"/><rect class="w" x="36" y="62" width="28" height="16"/><path class="w" d="M64,70 H92 M92,52 V88 M92,62 L118,50 M92,78 L118,96"/><path class="f" d="M118,96 L106,93 L112,86 Z"/><path class="w" d="M118,96 V106 M106,106 H130 M111,112 H125"/><circle class="f" cx="118" cy="18" r="3"/><circle class="f" cx="118" cy="47" r="3"/><path class="w" d="M118,18 H150 M118,47 H150 M150,18 V24 M150,38 V47"/><path class="f" d="M142,38 L158,38 L150,24 Z"/><path class="w" d="M142,24 H158"/><text class="lbl" x="50" y="56" text-anchor="middle">1k</text><text class="lbl" x="8" y="86">MCU-Pin</text><text class="lbl" x="104" y="34" text-anchor="end">Relais</text><text class="lbl" x="162" y="34">1N4148</text></svg>
+<ul><li>MCU-Pin → 1 kΩ → Basis: kleiner Strom schaltet großen Strom (Relais, Motor, LED-Kette)</li><li>Freilaufdiode (1N4148) <b>immer</b> parallel zu Spule/Relais — schluckt die Abschaltspitze</li><li>Gleiche Rolle übernimmt oft ein N-MOSFET (Gate statt Basis, ohne 1k)</li></ul></div>
+
+<div class="card"><h3>Spannungsregler (AMS1117)</h3>
+<svg class="sy sy-mid" style="max-width:190px" viewBox="0 0 200 130" role="img" aria-label="Linearregler mit Eingangs- und Ausgangskondensator"><rect class="w" x="70" y="30" width="60" height="34" rx="2"/><text class="lbl" x="100" y="44" text-anchor="middle">AMS1117</text><text class="lbl" x="100" y="57" text-anchor="middle">3V3</text><path class="w" d="M14,40 H70 M130,40 H186"/><circle class="f" cx="40" cy="40" r="3.4"/><circle class="f" cx="160" cy="40" r="3.4"/><path class="w" d="M40,40 V56 M32,56 H48 M32,64 H48 M40,64 V96"/><path class="w" d="M160,40 V56 M152,56 H168 M152,64 H168 M160,64 V96"/><path class="w" d="M100,64 V96 M30,96 H170"/><circle class="f" cx="100" cy="96" r="3.4"/><path class="w" d="M100,96 V104 M88,104 H112 M93,110 H107 M98,116 H102"/><text class="lbl" x="16" y="32">5V →</text><text class="lbl" x="184" y="32" text-anchor="end">→ 3,3V</text><text class="lbl" x="26" y="62" text-anchor="end">10µ</text><text class="lbl" x="174" y="62">22µ</text></svg>
+<ul><li>Standardbeschaltung aus dem Datenblatt: Elko am Eingang (10 µF) und Ausgang (22 µF)</li><li>Braucht ~1,1 V „Luft": aus 5 V werden stabile 3,3 V, aus 3,7 V nicht zuverlässig</li></ul></div>
+
+<div class="card"><h3>Quarz + Lastkondensatoren</h3>
+<svg class="sy sy-mid" style="max-width:190px" viewBox="0 0 200 130" role="img" aria-label="Quarz zwischen zwei MCU-Pins, je ein 22-Picofarad-Kondensator nach Masse"><rect class="w" x="14" y="24" width="48" height="72" rx="2"/><text class="lbl" x="38" y="64" text-anchor="middle">MCU</text><path class="w" d="M62,40 H185 M62,80 H160"/><circle class="f" cx="120" cy="40" r="3.4"/><circle class="f" cx="120" cy="80" r="3.4"/><path class="w" d="M120,40 V52 M108,52 H132 M108,68 H132 M120,68 V80"/><rect class="w" x="110" y="56" width="20" height="8"/><path class="w" d="M185,40 V56 M177,56 H193 M177,62 H193 M185,62 V104"/><path class="w" d="M160,80 V92 M152,92 H168 M152,98 H168 M160,98 V104"/><path class="w" d="M152,104 H193 M164,112 H180 M169,118 H175"/><text class="lbl" x="136" y="64">8 MHz</text><text class="lbl" x="175" y="52" text-anchor="end">22p</text><text class="lbl" x="150" y="90" text-anchor="end">22p</text></svg>
+<ul><li>Quarz zwischen den zwei XTAL-Pins, je 18–22 pF von jedem Pin nach GND</li><li>Deshalb bedeutet „C = 18 pF" bei einem Quarz-Setup: Lastkondensator (Tab <a href="#grundlagen">Grundlagen</a>)</li></ul></div>
+
+</div>
+
+<h2>Ein echtes Beispiel, komplett gelesen: NE555-Blinker</h2>
+<p>Die Klassiker-Schaltung (astabiler NE555) — derselbe Chip wie auf dem SMD-Übungsboard. So wendest du die Lese-Schritte an:</p>
+<svg class="sy sy-big" viewBox="0 0 640 390" role="img" aria-label="Vollständiger Schaltplan eines NE555-Blinkers mit nummerierten Callouts"><path class="w" d="M70,40 H560"/><path class="w" d="M90,40 V26"/><path class="f" d="M90,12 L83,26 L97,26 Z"/><text class="lbl" x="108" y="22">+5…12 V</text><circle class="con" cx="40" cy="20" r="11"/><text class="cot" x="40" y="25" text-anchor="middle">1</text><path class="w" d="M70,330 H560"/><path class="w" d="M110,330 V338 M98,338 H122 M103,344 H117 M108,350 H112"/><circle class="con" cx="40" cy="310" r="11"/><text class="cot" x="40" y="315" text-anchor="middle">2</text><rect class="w" x="300" y="100" width="150" height="210" rx="3"/><text class="lbl" x="375" y="192" text-anchor="middle">U1</text><text class="lbl" x="375" y="210" text-anchor="middle">NE555</text><circle class="con" cx="375" cy="76" r="11"/><text class="cot" x="375" y="81" text-anchor="middle">3</text><path class="w" d="M340,100 V40 M410,100 V40"/><circle class="f" cx="340" cy="40" r="3.6"/><circle class="f" cx="410" cy="40" r="3.6"/><text class="pin" x="332" y="118">8 VCC</text><text class="pin" x="398" y="118">4 RST</text><path class="w" d="M375,310 V330"/><text class="pin" x="356" y="300">1 GND</text><circle class="f" cx="160" cy="40" r="3.6"/><path class="w" d="M160,40 V60"/><rect class="w" x="152" y="60" width="16" height="30"/><text class="lbl" x="144" y="79" text-anchor="end">R1 10k</text><path class="w" d="M160,90 V140 M160,140 H300"/><circle class="f" cx="160" cy="140" r="3.6"/><text class="pin" x="306" y="144">7 DIS</text><path class="w" d="M160,140 V160"/><rect class="w" x="152" y="160" width="16" height="30"/><text class="lbl" x="144" y="179" text-anchor="end">R2 100k</text><path class="w" d="M160,190 V240"/><circle class="f" cx="160" cy="240" r="3.6"/><path class="w" d="M160,240 H262 M262,240 H300 M262,240 V200 M262,200 H300"/><circle class="f" cx="262" cy="240" r="3.6"/><text class="pin" x="306" y="204">6 THR</text><text class="pin" x="306" y="244">2 TRI</text><path class="w" d="M160,240 V262 M148,262 H172"/><path class="w" d="M148,274 Q160,284 172,274"/><path class="w" d="M160,279 V330"/><path class="w" d="M136,252 v8 M132,256 h8"/><text class="lbl" x="182" y="272">C1 10µ</text><path class="w" d="M450,170 H500"/><text class="pin" x="444" y="174" text-anchor="end">3 OUT</text><path class="w" d="M500,170 V190"/><rect class="w" x="492" y="190" width="16" height="28"/><text class="lbl" x="516" y="208">R3 330Ω</text><path class="w" d="M500,218 V238"/><path class="f" d="M492,238 L508,238 L500,254 Z"/><path class="w" d="M492,254 H508 M500,254 V330"/><path class="w" d="M512,240 L522,246 M512,248 L522,254"/><circle class="con" cx="556" cy="222" r="11"/><text class="cot" x="556" y="227" text-anchor="middle">4</text><text class="lbl" x="486" y="250" text-anchor="end">LED</text><path class="w" d="M450,260 H480 M480,260 V282 M472,282 H488 M472,290 H488 M480,290 V330"/><text class="pin" x="444" y="264" text-anchor="end">5 CTRL</text><text class="lbl" x="506" y="296">C2 10n</text><text class="lbl" x="320" y="372" text-anchor="middle">f = 1,44 / ((R1 + 2·R2) · C1) ≈ 0,7 Hz → LED blinkt etwa alle 1,5 Sekunden</text></svg>
+<div class="card">
+<div class="rule"><span class="ico">①</span><div><b>Versorgung:</b> Die obere Linie ist das Plus-Netz (5–12 V). Pin 8 (VCC) und Pin 4 (Reset, dauerhaft auf HIGH) hängen daran.</div></div>
+<div class="rule"><span class="ico">②</span><div><b>GND:</b> Die untere Linie. Pin 1, C1, C2 und die LED enden hier.</div></div>
+<div class="rule"><span class="ico">③</span><div><b>Das Gehirn:</b> U1 = NE555. Datenblatt-Wissen: R1/R2/C1 an den Pins 7/6/2 bestimmen das Takt-Tempo — genau die „Typical Application" aus dem Datenblatt.</div></div>
+<div class="rule"><span class="ico">④</span><div><b>Bekannter Block:</b> An Pin 3 (Ausgang) hängt „LED + Vorwiderstand" aus der Sektion oben. C2 an Pin 5 ist ein Abblock-Kondensator. Nichts an dieser Schaltung ist neu — nur Blöcke kombiniert.</div></div>
+</div>
+
+<h2>Selbst zeichnen: Werkzeuge &amp; Vorgehen</h2>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Programm</th><th>Kosten</th><th>Für wen</th></tr></thead>
+<tbody>
+<tr><td><b>KiCad</b></td><td>kostenlos, Open Source</td><td><b>Die Empfehlung.</b> Vollwertig bis Profi-Niveau, riesige Symbol-Bibliothek, Schaltplan + Layout + 3D</td></tr>
+<tr><td><b>EasyEDA</b></td><td>kostenlos (Browser)</td><td>Ohne Installation, direkte JLCPCB-Bestellung; Daten liegen in der Cloud</td></tr>
+<tr><td>Fritzing</td><td>~8 €</td><td>Hübsche Steckbrett-Bilder für Anleitungen — als echtes Schaltplan-Werkzeug unüblich</td></tr>
+</tbody>
+</table></div>
+
+<h3>Vorgehen beim Zeichnen</h3>
+<div class="card"><ul>
+<li><b>Blockdiagramm auf Papier:</b> Versorgung → Gehirn → Ein-/Ausgänge als Kästen, bevor ein Symbol platziert wird.</li>
+<li><b>Symbole platzieren:</b> Versorgung oben, GND unten, Eingänge links, Ausgänge rechts.</li>
+<li><b>Netze ziehen:</b> Für VCC/GND Versorgungssymbole statt Leitungen; bei vielen Verbindungen Netznamen (Labels) statt Leitungs-Spaghetti.</li>
+<li><b>Werte + Kürzel vergeben:</b> Jedes Bauteil bekommt R1/C2/U3 … und seinen Wert — die Software nummeriert automatisch.</li>
+<li><b>ERC laufen lassen</b> (Electrical Rules Check): findet unverbundene Pins und vergessene Netze, bevor du sie auf der Platine suchst.</li>
+<li><b>Erst danach Layout:</b> Das Board wird aus dem fertigen, geprüften Schaltplan erzeugt.</li>
+</ul></div>
+
+<h3>Goldene Zeichen-Regeln</h3>
+<div class="card">
+<div class="rule"><span class="ico">➡️</span><div>Links Eingänge, rechts Ausgänge — der Plan erzählt eine Geschichte von links nach rechts.</div></div>
+<div class="rule"><span class="ico">⬇️</span><div>GND-Symbole zeigen nach unten, Versorgungspfeile nach oben. Nie seitlich.</div></div>
+<div class="rule"><span class="ico">🧊</span><div>100 nF an jeden IC — beim Zeichnen sofort mitsetzen, nicht „später".</div></div>
+<div class="rule"><span class="ico">📖</span><div>Lesbar schlägt kompakt: lieber mehr Platz und Netznamen als gekreuzte Leitungen.</div></div>
+</div>
+
 </section>
 
 <!-- ============ TAB 3: REGELN & PRAXIS ============ -->
@@ -1274,7 +1466,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 
 <script>
 /* ---------- TABS ---------- */
-const TABS=[{k:"grundlagen",l:"Grundlagen",i:"⚡"},{k:"komponenten",l:"Komponenten",i:"🧩"},{k:"displays",l:"Displays",i:"🖥️"},{k:"motoren",l:"Motoren",i:"⚙️"},{k:"mcu",l:"Mikrocontroller",i:"🤖"},{k:"steckbrett",l:"Steckbrett",i:"🔌"},{k:"regeln",l:"Regeln & Praxis",i:"📋"},{k:"sicherheit",l:"Sicherheit",i:"⚠️"},{k:"messgeraet",l:"Messgerät",i:"📟"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},{k:"rechner",l:"Rechner",i:"🧮"}];
+const TABS=[{k:"grundlagen",l:"Grundlagen",i:"⚡"},{k:"komponenten",l:"Komponenten",i:"🧩"},{k:"schaltplan",l:"Schaltplan",i:"📐"},{k:"displays",l:"Displays",i:"🖥️"},{k:"motoren",l:"Motoren",i:"⚙️"},{k:"mcu",l:"Mikrocontroller",i:"🤖"},{k:"steckbrett",l:"Steckbrett",i:"🔌"},{k:"regeln",l:"Regeln & Praxis",i:"📋"},{k:"sicherheit",l:"Sicherheit",i:"⚠️"},{k:"messgeraet",l:"Messgerät",i:"📟"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},{k:"rechner",l:"Rechner",i:"🧮"}];
 const tabsDiv=document.getElementById("tabs");
 function showTab(k){
 TABS.forEach(x=>document.getElementById("t-"+x.k).classList.add("hidden"));
