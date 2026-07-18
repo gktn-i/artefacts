@@ -374,7 +374,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="grid">
 <div class="card"><div class="ct">Pinzetten (ESD)</div><div class="cd">Gerade und gebogen. Für SMD unverzichtbar.</div></div>
 <div class="card"><div class="ct">Dritte Hand / PCB-Halter</div><div class="cd">Fixiert Platine und Kabel — beide Hände bleiben frei.</div></div>
-<div class="card"><div class="ct">Lupe / Mikroskop</div><div class="cd">Ab feinem SMD ist ein Mikroskop ein Gamechanger, sonst reicht eine Lupenlampe.</div></div>
+<div class="card"><div class="ct">Lupe / Mikroskop</div><div class="cd">Ab feinem SMD ist ein Mikroskop ein Gamechanger, sonst reicht eine Lupenlampe. Setup und Teile: Tab <a class="goto" href="#mikroskop">Mikroskop</a>.</div></div>
 <div class="card"><div class="ct">Messingwolle + Schwamm</div><div class="cd">Spitze zwischendurch abstreifen. Messingwolle kühlt die Spitze weniger aus als ein nasser Schwamm.</div></div>
 <div class="card"><div class="ct">Multimeter</div><div class="cd">Durchgangsprüfung auf Lötbrücken und unterbrochene Verbindungen.</div></div>
 <div class="card"><div class="ct">Lötrauchabsaugung <span class="b b-warn">wichtig</span></div><div class="cd">Aktivkohlefilter. Hält Flussmitteldämpfe aus dem Gesicht.</div></div>
@@ -386,6 +386,97 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="card"><div class="ct">Heißluft</div><div class="cd">Beste Methode, um ganze SMD-Bauteile schadenfrei abzuheben.</div></div>
 <div class="card"><div class="ct">Low-Melt-Legierung (ChipQuik SMD1)</div><div class="cd">Schmilzt bei ~58 °C und hält alle Pins gleichzeitig flüssig. Ideal, um Multipin-ICs ohne Heißluft abzuheben.</div></div>
 </div>
+</div>
+
+<!-- ============ MIKROSKOP ============ -->
+<div class="panel" data-p="mikroskop">
+<h2>Stereo-Mikroskop für Micro-Soldering</h2>
+<p>Was in einem typischen Trinokular-Stereomikroskop-Set steckt und was du davon fürs Löten wirklich brauchst.</p>
+
+<div class="tip"><b>Kurzfassung — Setup fürs Löten:</b> WF10X-Okulare + 0.5X-Objektiv + Protection Glass + LED-Ringlicht. Grund: maximaler Arbeitsabstand (165 mm) für Lötkolben und Hände, gute Übersicht. Näher ran geht's über den Zoom-Knopf am Mikroskop selbst.</div>
+
+<h3>Okulare (das, wo du reinschaust)</h3>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Okular</th><th>Vergrößerung</th><th>Sichtfeld</th><th>Fürs Löten</th></tr></thead>
+<tbody>
+<tr><td><b>WF10X</b></td><td>10-fach</td><td>groß</td><td><b>Standard — immer diese</b></td></tr>
+<tr><td>WF20X</td><td>20-fach</td><td>klein, näher dran</td><td>selten: verliert Übersicht und Augenabstand</td></tr>
+</tbody>
+</table></div>
+<div class="note">WF = Wide Field (Weitfeld). Fürs Löten zählen Übersicht und Arbeitsabstand — deshalb WF10X.</div>
+
+<h3>Vorsatz-Objektive (schrauben unten vors Mikroskop)</h3>
+<p>Der wichtigste Teil des Sets: ändert gleichzeitig Vergrößerung <b>und</b> Arbeitsabstand. WD = Working Distance = Platz zwischen Linse und Platine.</p>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Objektiv</th><th>Working Distance</th><th>Vergrößerung</th><th>Fürs Löten</th></tr></thead>
+<tbody>
+<tr><td><b>0.5X</b></td><td><b>165 mm</b></td><td>niedriger</td><td><b>ideal — viel Platz für Kolben und Hände</b></td></tr>
+<tr><td>0.7X</td><td>120 mm</td><td>mittel</td><td>okay, wenn mehr Detail nötig ist; Abstand wird knapper</td></tr>
+<tr><td>2.0X</td><td>30 mm</td><td>stark</td><td>ungeeignet — kein Platz für den Lötkolben darunter</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Faustregel:</b> mehr Vergrößerung = weniger Arbeitsabstand. Fürs Löten gewinnt immer der Abstand.</div>
+
+<h3>Gesamtvergrößerung: die Rechnung</h3>
+<p>Gesamtvergrößerung = <b>Okular × Zoom-Knopf × Vorsatz-Objektiv</b>. Der Zoom-Körper typischer Geräte läuft von 0,7× bis 4,5×.</p>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Kombination</th><th>Bereich</th><th>Reicht für</th></tr></thead>
+<tbody>
+<tr><td><b>WF10X + 0.5X</b> (Empfehlung)</td><td><b>3,5× – 22,5×</b></td><td>alles vom Kabel bis 0402 und QFN — der Löt-Sweetspot</td></tr>
+<tr><td>WF10X + 0.7X</td><td>4,9× – 31,5×</td><td>feinste Inspektion, Abstand nur noch 120 mm</td></tr>
+<tr><td>WF10X ohne Vorsatz</td><td>7× – 45×</td><td>reine Inspektion — zu wenig Platz zum Arbeiten</td></tr>
+</tbody>
+</table></div>
+
+<h3>Zubehör</h3>
+<div class="tbl-wrap"><table style="min-width:620px">
+<thead><tr><th>Teil</th><th>Funktion</th><th>Fürs Löten</th></tr></thead>
+<tbody>
+<tr><td><b>Protection Glass</b></td><td>klare Schutzscheibe ganz unten — fängt Flussmittelspritzer und Lötrauch ab</td><td><b>immer benutzen</b>, schützt die teure Objektivlinse</td></tr>
+<tr><td><b>LED-Ringlicht</b></td><td>Ringbeleuchtung, schiebt sich unten aufs Objektiv</td><td><b>notwendig</b> — ohne Licht kein sauberes Bild</td></tr>
+<tr><td>Silikon-Matte (25×35 cm)</td><td>hitzebeständige Unterlage, magnetisch für Schrauben</td><td>praktisch, kein Muss</td></tr>
+<tr><td>Gelenkarm + Tischklemme</td><td>Halterung des Mikroskops</td><td>Basis-Aufbau</td></tr>
+</tbody>
+</table></div>
+
+<h3>Kamera-Adapter (nur bei Monitor-Betrieb)</h3>
+<p>Diese drei brauchst du <b>nur</b>, wenn eine Kamera an den dritten Tubus (Trinokular-Ausgang oben) soll, um das Bild auf einen Monitor zu übertragen. Fürs Löten durch die Okulare komplett irrelevant.</p>
+<ul>
+<li><b>1x Adapter Lens</b> — Grundadapter für die Kamera</li>
+<li><b>1/2 Adapter Reduce Lens</b> — reduziert das Bild auf 1/2-Zoll-Sensoren</li>
+<li><b>SZM CTV1/2</b> — Anschlussstück für die C-Mount-Kamera</li>
+</ul>
+
+<h3>Aufbau-Reihenfolge fürs Löten</h3>
+<div class="steps">
+<div class="step"><b>WF10X-Okulare</b> in die beiden Tuben stecken.</div>
+<div class="step"><b>0.5X-Objektiv</b> unten anschrauben.</div>
+<div class="step"><b>Protection Glass</b> unter das Objektiv setzen.</div>
+<div class="step"><b>LED-Ringlicht</b> aufschieben und anschließen.</div>
+<div class="step"><b>Auf Arbeitshöhe bringen:</b> Mikroskop am Gelenkarm positionieren, mit dem Zoom-Knopf feinjustieren.</div>
+</div>
+
+<h3>Arbeiten unterm Mikroskop: Praxis-Tipps</h3>
+<div class="grid">
+<div class="card"><div class="ct">Erst richtig einstellen</div><div class="cd">Augenabstand der Tuben anpassen, bis ein rundes Bild entsteht. Dann je Auge den Dioptrien-Ring scharf stellen — einmal sauber gemacht, arbeitet es sich stundenlang entspannt.</div></div>
+<div class="card"><div class="ct">Zoom niedrig zum Arbeiten</div><div class="cd">Gelötet wird bei kleiner Vergrößerung (Übersicht, ruhigeres Bild). Hochzoomen nur kurz zum Inspizieren der fertigen Stelle.</div></div>
+<div class="card"><div class="ct">Hände abstützen</div><div class="cd">Handballen auf den Tisch — unterm Mikroskop sieht man jedes Zittern vergrößert. Platine bewegen statt Kopf und Kolben.</div></div>
+<div class="card"><div class="ct">Rauch absaugen</div><div class="cd">Flussmittelrauch steigt direkt in Optik und Gesicht. Absaugung seitlich positionieren — beschlagene Linsen ruinieren das Bild.</div></div>
+<div class="card"><div class="ct">Protection Glass reinigen</div><div class="cd">Flussmittelbelag regelmäßig mit IPA und fusselfreiem Tuch abwischen. Die Scheibe ist Verschleißteil — die Objektivlinse nicht.</div></div>
+<div class="card"><div class="ct">Wann überhaupt Mikroskop?</div><div class="cd">Ab 0603, QFN und feinen IC-Pins ein Gamechanger. Für THT und große SMD reicht eine Lupenlampe (Tab <a class="goto" href="#equipment">Equipment</a>).</div></div>
+</div>
+
+<h3>Begriffe</h3>
+<div class="tbl-wrap"><table style="min-width:520px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>WD (Working Distance)</b></td><td>Abstand zwischen Objektivlinse und Werkstück — der Platz, in dem du arbeitest</td></tr>
+<tr><td><b>WF (Wide Field)</b></td><td>Weitfeld-Okular mit großem Sichtfeld</td></tr>
+<tr><td><b>Trinokular</b></td><td>Mikroskop mit drittem Tubus oben für den Kamera-Anschluss</td></tr>
+<tr><td><b>C-Mount</b></td><td>Standard-Gewinde für Mikroskop-Kameras</td></tr>
+<tr><td><b>Parfokal</b></td><td>bleibt beim Zoomen scharf — einmal fokussieren reicht</td></tr>
+</tbody>
+</table></div>
 </div>
 
 <!-- ============ MATERIAL ============ -->
@@ -900,7 +991,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <script>
 /* ---------- TABS mit Deep-Linking (#hash) ---------- */
 const TABS=[
-{p:"methoden",l:"Methoden",i:"🧭"},{p:"workflow",l:"Workflow",i:"📋"},{p:"equipment",l:"Equipment",i:"🧰"},{p:"material",l:"Material",i:"🧪"},
+{p:"methoden",l:"Methoden",i:"🧭"},{p:"workflow",l:"Workflow",i:"📋"},{p:"equipment",l:"Equipment",i:"🧰"},{p:"mikroskop",l:"Mikroskop",i:"🔎"},{p:"material",l:"Material",i:"🧪"},
 {p:"temp",l:"Temperaturen",i:"🌡️"},{p:"bauteile",l:"Bauteile",i:"🔩"},{p:"tht",l:"THT löten",i:"📌"},
 {p:"smd",l:"SMD löten",i:"🔬"},{p:"heissluft",l:"Heißluft",i:"💨"},{p:"heizplatte",l:"Heizplatte",i:"🔥"},
 {p:"fehler",l:"Fehler",i:"🩺"},{p:"sicherheit",l:"Sicherheit",i:"⚠️"},{p:"regeln",l:"Regeln",i:"⭐"}
