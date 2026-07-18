@@ -454,7 +454,19 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="rule"><span class="ico">🔢</span><div><b>Kürzel + Nummer = eindeutiges Bauteil.</b> R5 im Plan ist R5 auf der Platine und R5 in der Stückliste. Der Wert steht direkt daneben.</div></div>
 </div>
 
+<div class="grid2">
+<div class="card"><h3>Punkt oder kein Punkt?</h3>
 <svg class="sy sy-mid" viewBox="0 0 320 100" role="img" aria-label="Links Kreuzung mit Punkt gleich verbunden, rechts Kreuzung ohne Punkt gleich nicht verbunden"><path class="w" d="M25,50 H135 M80,12 V88"/><circle class="f" cx="80" cy="50" r="4.5"/><text class="ok" x="16" y="30">✓</text><text class="lbl" x="80" y="99" text-anchor="middle">verbunden</text><path class="w" d="M185,50 H295 M240,12 V88"/><text class="bad" x="176" y="30">✗</text><text class="lbl" x="240" y="99" text-anchor="middle">nicht verbunden</text></svg>
+<p class="note">Zwei Leitungen dürfen sich kreuzen, ohne verbunden zu sein — nur der Punkt macht die Verbindung.</p></div>
+
+<div class="card"><h3>Netznamen: unsichtbare Leitungen</h3>
+<svg class="sy sy-mid" viewBox="0 0 320 100" role="img" aria-label="Zwei getrennte Leitungsenden mit demselben Label SDA sind verbunden"><path class="w" d="M15,45 H100"/><text class="lbl" x="106" y="49">SDA</text><path class="acc" style="stroke-dasharray:5 5" d="M132,45 H186"/><text class="lbl" x="192" y="49">SDA</text><path class="w" d="M218,45 H305"/><text class="ok" x="150" y="28">✓</text><text class="lbl" x="160" y="86" text-anchor="middle">gleicher Name = verbunden, ohne gezeichnete Linie</text></svg>
+<p class="note">Die Leitung endet scheinbar „im Nichts" — das Label sagt, wo es weitergeht. Hält große Pläne lesbar.</p></div>
+
+<div class="card"><h3>Pin-Zählung am IC (Draufsicht)</h3>
+<svg class="sy sy-mid" viewBox="0 0 320 150" role="img" aria-label="DIP-8-Gehäuse von oben: Pin 1 links neben der Kerbe, Zählung läuft die linke Seite hinunter und die rechte hinauf"><rect class="w" x="120" y="20" width="80" height="110" rx="3"/><path class="w" d="M150,20 a10,10 0 0 0 20,0"/><circle class="f" cx="134" cy="34" r="3.5"/><path class="w" d="M100,38 H120 M100,64 H120 M100,90 H120 M100,116 H120 M200,38 H220 M200,64 H220 M200,90 H220 M200,116 H220"/><text class="lbl" x="92" y="42" text-anchor="end">1</text><text class="lbl" x="92" y="68" text-anchor="end">2</text><text class="lbl" x="92" y="94" text-anchor="end">3</text><text class="lbl" x="92" y="120" text-anchor="end">4</text><text class="lbl" x="228" y="42">8</text><text class="lbl" x="228" y="68">7</text><text class="lbl" x="228" y="94">6</text><text class="lbl" x="228" y="120">5</text><path class="acc" d="M72,40 V132 Q72,142 82,142 H238 Q248,142 248,132 V48"/><path class="accf" d="M248,34 L242,48 L254,48 Z"/></svg>
+<p class="note">Punkt/Kerbe markiert Pin 1. Von dort <b>gegen</b> den Uhrzeigersinn: links hinunter, rechts wieder hinauf.</p></div>
+</div>
 
 <h3>Werte-Kurzschreibweise</h3>
 <div class="tbl-wrap"><table style="min-width:520px">
@@ -490,7 +502,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 
 <div class="card"><h3>Spannungsteiler</h3>
 <svg class="sy sy-mid" style="max-width:170px" viewBox="0 0 200 130" role="img" aria-label="Zwei Widerstände in Reihe, Abgriff in der Mitte"><path class="f" d="M70,6 L63,20 L77,20 Z"/><path class="w" d="M70,20 V30"/><rect class="w" x="62" y="30" width="16" height="24"/><path class="w" d="M70,54 V66 M70,66 H148"/><circle class="f" cx="70" cy="66" r="3.4"/><rect class="w" x="62" y="74" width="16" height="24"/><path class="w" d="M70,66 V74 M70,98 V108"/><path class="w" d="M58,108 H82 M63,114 H77 M68,120 H72"/><text class="lbl" x="56" y="14" text-anchor="end">5V</text><text class="lbl" x="84" y="46">R1 10k</text><text class="lbl" x="84" y="90">R2 10k</text><text class="lbl" x="112" y="60">Vout 2,5V</text></svg>
-<ul><li>Teilt Spannung im Verhältnis R2/(R1+R2) — 2× gleicher Wert = Hälfte</li><li>Typisch: Akkuspannung für einen ADC-Pin herunterteilen</li></ul></div>
+<ul><li>Teilt Spannung im Verhältnis R2/(R1+R2) — 2× gleicher Wert = Hälfte</li><li>Typisch: Akkuspannung für einen ADC-Pin herunterteilen</li><li class="warn">Nur für Signale/Messen — <b>nicht als Stromversorgung</b>: sobald eine Last dranhängt, bricht die Spannung ein</li></ul></div>
 
 <div class="card"><h3>Pull-up am Taster / Bus</h3>
 <svg class="sy sy-mid" style="max-width:170px" viewBox="0 0 200 130" role="img" aria-label="Widerstand von Versorgung zum Pin, Taster vom Pin nach Masse"><path class="f" d="M70,6 L63,20 L77,20 Z"/><path class="w" d="M70,20 V30"/><rect class="w" x="62" y="30" width="16" height="24"/><path class="w" d="M70,54 V64 M70,64 H150"/><circle class="f" cx="70" cy="64" r="3.4"/><path class="w" d="M70,64 V76"/><circle class="f" cx="70" cy="80" r="2.6"/><circle class="f" cx="70" cy="104" r="2.6"/><path class="w" d="M70,80 L84,100"/><path class="w" d="M70,104 V112 M58,112 H82 M63,118 H77"/><text class="lbl" x="54" y="14" text-anchor="end">3V3</text><text class="lbl" x="84" y="46">10k</text><text class="lbl" x="148" y="58" text-anchor="end">zum MCU-Pin</text><text class="lbl" x="92" y="96">Taster</text></svg>
