@@ -343,7 +343,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <h3>Kernwerkzeuge</h3>
 <div class="grid">
 <div class="card"><div class="ct">Lötstation (geregelt)</div><div class="cd">Herzstück. Hält die Temperatur konstant.</div><ul><li>Wechselbare Spitzen wichtig</li><li>Schnelles Aufheizen spart Nerven</li><li>Bewährte Marken: Hakko, JBC, Weller, Pinecil</li></ul></div>
-<div class="card"><div class="ct">Lötspitzen</div><div class="cd">Die Form bestimmt die Wärmeübertragung.</div><ul><li><b>Meißel / Chisel:</b> Allrounder, gibt viel Wärme ab</li><li><b>Bleistift / Conical:</b> Feinarbeit, wenig Kontaktfläche</li><li><b>Hufeisen / Hoof:</b> Drag-Soldering, hält Lot in der Wölbung</li><li>Konkrete TS-Spitzen: Tabelle unten</li></ul></div>
+<div class="card"><div class="ct">Lötspitzen</div><div class="cd">Die Form bestimmt die Wärmeübertragung.</div><ul><li><b>Meißel / Chisel:</b> Allrounder, gibt viel Wärme ab</li><li><b>Bleistift / Conical:</b> Feinarbeit, wenig Kontaktfläche</li><li><b>Hufeisen / Hoof:</b> Drag-Soldering, hält Lot in der Wölbung</li><li>Konkrete Spitzen + Namenssysteme aller Marken: Tabellen unten</li></ul></div>
 <div class="card"><div class="ct">Heißluftstation</div><div class="cd">Temperatur und Luftstrom getrennt regelbar.</div><ul><li>Verschiedene Düsen je Bauteilgröße</li><li>Regelbarer Luftstrom ist Pflicht</li></ul></div>
 <div class="card"><div class="ct">Heizplatte / Preheater</div><div class="cd">Mini-Reflow und Vorwärmung.</div><ul><li>Gleichmäßige Temperaturverteilung wichtig</li><li>Manche Modelle mit Profilsteuerung</li></ul></div>
 </div>
@@ -369,6 +369,56 @@ h2[id],h3[id]{scroll-margin-top:84px}
 </table></div>
 <div class="tip"><b>Kaufempfehlung:</b> <b>TS-BC2</b> als Immer-drauf-Spitze, dazu <b>TS-D24</b> für THT-Serien und <b>TS-ILS</b> (oder TS-C1) für feines SMD — diese drei decken praktisch alles ab. TS-C4 erst, wenn dicke Kabel oder Masseflächen dazukommen.</div>
 <div class="warn"><b>Spitze nur stromlos wechseln:</b> Bei TS100/TS101/Pinecil sitzen Heizelement und Kontakte in der Spitze. Gerät vom Strom trennen, Spitze abkühlen lassen (oder mit Silikonmatte greifen), dann tauschen — nie unter Spannung ziehen.</div>
+
+<h3>Spitzen anderer Stationen: die Namenssysteme</h3>
+<p>Die <b>Form</b> steckt in einem Buchstaben- oder Zahlencode, das <b>Präfix</b> sagt, auf welche Station bzw. welches Handstück die Spitze passt. Kartuschen verschiedener Serien sind <b>nicht</b> untereinander tauschbar.</p>
+
+<svg class="sk sk-wide" viewBox="0 0 468 106" role="img" aria-label="Sechs Lötspitzen-Profile im Seitenschnitt: konisch, Hufeisen, Meißel, Messer, Nadel, gebogen">
+<g style="fill:var(--surface-2);stroke:var(--text);stroke-width:2;stroke-linejoin:round;stroke-linecap:round">
+<path d="M8,34 H42 L70,44 L42,54 H8 Z"/>
+<path d="M86,34 H112 L128,54 H86 Z"/>
+<path d="M164,34 H196 L206,39 V49 L196,54 H164 Z"/>
+<path d="M242,34 H262 L290,52 H242 Z"/>
+<path d="M320,40 H352 L380,44 L352,48 H320 Z"/>
+<path d="M398,36 H424 C440,38 448,50 452,64 L446,66 C440,54 432,50 424,50 H398 Z"/>
+</g>
+<g class="lbl" text-anchor="middle">
+<text x="39" y="74">B / BL</text><text x="39" y="88">konisch</text>
+<text x="107" y="74">BC / C</text><text x="107" y="88">Hufeisen</text>
+<text x="185" y="74">D</text><text x="185" y="88">Meißel</text>
+<text x="266" y="74">K</text><text x="266" y="88">Messer</text>
+<text x="350" y="74">I / IL(S)</text><text x="350" y="88">Nadel</text>
+<text x="425" y="74">J</text><text x="425" y="88">gebogen</text>
+</g>
+</svg>
+
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Code</th><th>Form</th><th>Am besten für</th></tr></thead>
+<tbody>
+<tr><td><b>B / BL</b></td><td>konisch / Bleistift</td><td>Kabel, THT, allround-fein — wenig Kontaktfläche</td></tr>
+<tr><td><b>BC / C</b></td><td>abgeschrägte Fläche (Hufeisen)</td><td>Der Alltags-Favorit: THT, SMD-Chips, Drag — hält einen Lottropfen</td></tr>
+<tr><td><b>D</b></td><td>Meißel / Schraubendreher</td><td>Stiftleisten, flache Kante, Masseflächen</td></tr>
+<tr><td><b>K</b></td><td>Messer</td><td>Drag über Pinreihen, Lötbrücken „aufschneiden"</td></tr>
+<tr><td><b>I / IL(S)</b></td><td>Nadel</td><td>feinstes SMD (0402), IC-Pins — wenig Wärmenachschub</td></tr>
+<tr><td><b>J</b></td><td>gebogen</td><td>schwer erreichbare Stellen, unter oder hinter Bauteilen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Genau diese Buchstaben nutzen <b>Hakko T12/T18</b> und die <b>TS-Serie</b> (die TS-Spitzen übernehmen das Hakko-T12-Schema). JBC codiert die Form dagegen als <b>Zahl</b> (z. B. C245-947 = Meißel) — im Shop/Datenblatt nachsehen.</p>
+
+<p>Welche Spitzen-Familie auf welche Station gehört:</p>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Station (Beispiele)</th><th>Spitzen-Familie</th><th>Einordnung</th></tr></thead>
+<tbody>
+<tr><td><b>Hakko FX-888D</b></td><td>T18</td><td>Welt-Standard-Einstiegsstation: günstig, robust, überall erhältlich</td></tr>
+<tr><td><b>Hakko FX-951 / FM-203</b> + Clones (KSGER, Quicko, Aixun)</td><td>T12 / T15</td><td>Sehr verbreitet, riesige und billige Spitzenauswahl. <b>TS-Spitzen teilen dieses Schema</b></td></tr>
+<tr><td><b>JBC</b> (T245-Handstück, z. B. CD-/DDE-Station)</td><td>C245</td><td>Profi-Standard: extrem schnelle Wärmerückkehr. Grobes bis mittleres Löten</td></tr>
+<tr><td><b>JBC</b> (T210-Handstück)</td><td>C210</td><td>Mikro-/Feinarbeit (0402, feine IC-Pins). <b>C105</b> noch kleiner (Nano)</td></tr>
+<tr><td><b>Weller WE1010 / WES51</b></td><td>ET</td><td>Verbreitete Werkstatt-Einsteigerstation</td></tr>
+<tr><td><b>Weller WXMP / WMRP</b></td><td>RT</td><td>Mikro-Lötstift, Kartusche steckt direkt im schlanken Griff</td></tr>
+<tr><td><b>Metcal MX / MFR</b></td><td>STTC</td><td>Selbstregelnd über den Curie-Punkt (feste Temperatur je Spitze). Industrie</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Für Hobby:</b> Eine T12-Station (oder TS101/Pinecil) trifft den Sweetspot aus Preis, Tempo und Spitzenauswahl. JBC ist spürbar schneller und angenehmer, aber deutlich teurer — lohnt bei viel SMD- und Reparaturarbeit.</div>
 
 <h3>Halten, Sehen, Reinigen</h3>
 <div class="grid">
