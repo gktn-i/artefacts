@@ -741,11 +741,11 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <h2>Aufbau eines Multimeters</h2>
 <p>Egal welches Gerät, der Aufbau ist fast immer gleich. Vier Teile musst du kennen:</p>
 <svg class="sy sy-mid" style="max-width:330px" viewBox="0 0 360 322" role="img" aria-label="Multimeter von vorn: Display, Drehrad, drei Buchsen und Messleitungen, nummeriert eins bis vier"><rect class="w" x="90" y="14" width="180" height="272" rx="14"/><rect class="w" x="112" y="34" width="136" height="46" rx="4"/><text class="lbl" x="240" y="66" text-anchor="end" style="font-size:19px">5.03</text><circle class="con" cx="52" cy="57" r="11"/><text class="cot" x="52" y="62" text-anchor="middle">1</text><circle class="w" cx="180" cy="152" r="42"/><path class="w" style="stroke-width:3.2" d="M180,152 L156,124"/><circle class="f" cx="180" cy="152" r="4"/><text class="lbl" x="136" y="102" text-anchor="end">OFF</text><text class="lbl" x="180" y="96" text-anchor="middle">V⎓</text><text class="lbl" x="234" y="112">V~</text><text class="lbl" x="238" y="156">Ω</text><text class="lbl" x="228" y="198">)))</text><text class="lbl" x="126" y="156" text-anchor="end">A⎓</text><circle class="con" cx="52" cy="152" r="11"/><text class="cot" x="52" y="157" text-anchor="middle">2</text><circle class="w" cx="125" cy="248" r="9"/><circle class="w" cx="180" cy="248" r="9"/><circle class="w" cx="235" cy="248" r="9"/><text class="pin" x="125" y="232" text-anchor="middle">10A</text><text class="pin" x="180" y="232" text-anchor="middle">COM</text><text class="pin" x="235" y="232" text-anchor="middle">VΩmA</text><circle class="con" cx="52" cy="248" r="11"/><text class="cot" x="52" y="253" text-anchor="middle">3</text><path style="stroke:var(--text);stroke-width:3;fill:none;stroke-linecap:round" d="M180,257 C180,296 150,308 118,312"/><path style="stroke:var(--rate-bad);stroke-width:3;fill:none;stroke-linecap:round" d="M235,257 C235,296 265,308 296,312"/><text class="lbl" x="110" y="316" text-anchor="end">schwarz</text><text class="lbl" x="304" y="316">rot</text><circle class="con" cx="330" cy="282" r="11"/><text class="cot" x="330" y="287" text-anchor="middle">4</text></svg>
-<div class="grid2">
-<div class="card"><h3>1. Display</h3><p>Zeigt den Messwert und kleine Symbole an (welche Einheit, welcher Modus, schwache Batterie). Steht <b>OL</b> da, ist der Wert zu groß für den Bereich oder es gibt keine Verbindung.</p></div>
-<div class="card"><h3>2. Drehrad (Funktionswähler)</h3><p>Hier stellst du ein, <b>was</b> du messen willst: Spannung, Strom, Widerstand usw. Immer zuerst die richtige Funktion wählen, dann erst die Spitzen anlegen.</p></div>
-<div class="card"><h3>3. Buchsen (Anschlüsse)</h3><p>Meist drei Stück. Die schwarze Leitung steckt fast immer fest in <b>COM</b>. Die rote Leitung wechselt je nach Messung die Buchse (siehe unten).</p></div>
-<div class="card"><h3>4. Messleitungen / Prüfspitzen</h3><p><b>Rot = Plus</b>, <b>Schwarz = Minus/COM</b>. Du fasst nur den isolierten Griff an, nie die blanke Metallspitze bei Spannung.</p></div>
+<div class="card">
+<div class="rule"><span class="ico">①</span><div><b>Display:</b> Messwert + kleine Symbole (Einheit, Modus, schwache Batterie). <b>OL</b> = Wert zu groß für den Bereich oder keine Verbindung.</div></div>
+<div class="rule"><span class="ico">②</span><div><b>Drehrad:</b> wählt, <b>was</b> gemessen wird (Spannung, Strom, Widerstand …). Immer zuerst Funktion wählen, dann Spitzen anlegen.</div></div>
+<div class="rule"><span class="ico">③</span><div><b>Buchsen:</b> Schwarz steckt fast immer fest in <b>COM</b>, Rot wechselt je nach Messung (siehe unten).</div></div>
+<div class="rule"><span class="ico">④</span><div><b>Prüfspitzen:</b> Rot = Plus, Schwarz = Minus/COM. Nur den isolierten Griff anfassen, nie die blanke Spitze bei Spannung.</div></div>
 </div>
 
 <h2>Die Buchsen richtig stecken</h2>
@@ -862,10 +862,26 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <li>Besser unter Last messen (im Gerät eingebaut), denn leere Batterien zeigen ohne Last oft noch fast volle Spannung.</li>
 </ul></div>
 
-<h2>Messen an SMD-Boards & Mikrocontrollern</h2>
-<p>Auf modernen Platinen sind die Kontakte winzig und dicht — dünne Standard-Prüfspitzen rutschen ab und schließen Nachbar-Pins kurz. Das eigentliche Messen bleibt dasselbe, aber du brauchst feineres Werkzeug und einen Plan, wo du überhaupt drankommst.</p>
+<h2>Fehler finden: Kurzschluss, kaputtes Bauteil & Co.</h2>
+<p>Die Schnellübersicht: was du bei welchem Verdacht misst, wo du die Spitzen dranhältst und was die Anzeige bedeutet. Die genauen Handgriffe stehen als Schritt-Rezepte darunter.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Verdacht</th><th>Modus</th><th>Wo dran (Strom)</th><th>Anzeige</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Kurzschluss auf der Versorgung</b></td><td>Ω (klein)</td><td>GND ↔ VCC · <b>aus</b></td><td><b>nahe 0 Ω</b></td><td>Kurzschluss (Kondensator/IC/Lötbrücke) → <b>nicht einschalten</b>, Ursache suchen</td></tr>
+<tr><td>Keine Versorgung an einer Rail</td><td>V⎓</td><td>GND ↔ Rail · <b>an</b></td><td>0 V statt Soll (5/3,3 V)</td><td>Regler oder Zuleitung tot → rückwärts Richtung Regler suchen</td></tr>
+<tr><td>Kabelbruch / Unterbrechung</td><td>Durchgang )))</td><td>beide Enden · <b>aus</b></td><td>kein Piep</td><td>Leitung offen / unterbrochen</td></tr>
+<tr><td>Durchgebrannte Sicherung</td><td>Durchgang )))</td><td>über die Sicherung · <b>aus</b></td><td>kein Piep</td><td>durch → warum? (meist Kurzschluss dahinter)</td></tr>
+<tr><td>Lötbrücke zwischen Pins</td><td>Durchgang )))</td><td>zwei Nachbar-Pins · <b>aus</b></td><td>Piep (obwohl getrennt)</td><td>ungewollte Verbindung → unter der Lupe entfernen</td></tr>
+<tr><td>Diode / LED kaputt</td><td>Diodentest ▷⊢</td><td>über das Bauteil, beide Richtungen · <b>aus</b></td><td>beide 0 / beide OL</td><td>Kurzschluss bzw. unterbrochen (heil: einmal Wert, einmal OL)</td></tr>
+<tr><td>Bauteil allgemein defekt</td><td>Diodentest ▷⊢</td><td>Pin ↔ GND, Vergleich gutes Board · <b>aus</b></td><td>stark abweichend</td><td>Verdächtiger (fast 0 = Kurzschluss im Bauteil)</td></tr>
+<tr><td>Müder Elko (alt/aufgebläht)</td><td>ESR (<a href="#lcrp1">LCR-P1</a>)</td><td>ausgebaut</td><td>hoher ESR</td><td>ersetzen — Kapazität kann noch fast stimmen</td></tr>
+<tr><td>Heißer Hotspot</td><td>Finger / Wärmebild</td><td>Strom mit Limit einspeisen</td><td>wird warm/heiß</td><td>genau dort sitzt das kurzschließende Bauteil</td></tr>
+</tbody>
+</table></div>
+<p class="note">Grundsatz: Ω und Durchgang <b>immer stromlos</b> · Spannung am <b>laufenden</b> Board. Schwarz bleibt an einem GND-Punkt, mit Rot tastest du.</p>
 
-<h3>Das richtige Werkzeug</h3>
+<h3>Das richtige Werkzeug (SMD)</h3>
+<p>Auf modernen Platinen sind die Kontakte winzig und dicht — dünne Standard-Prüfspitzen rutschen ab und schließen Nachbar-Pins kurz. Das Messen bleibt dasselbe, du brauchst nur feineres Werkzeug:</p>
 <div class="grid2">
 <div class="card"><h3>SMD-Grabber / IC-Hook-Klemmen</h3><p>Federklemmen mit winzigem Haken, die sich an einem einzelnen Pin oder Bauteilbein <b>festkrallen</b>. So hältst du die eine Seite fest und hast eine Hand frei fürs Antasten. Wichtigstes Zubehör für SMD.</p></div>
 <div class="card"><h3>Feine Nadel-Prüfspitzen</h3><p>Spitze, gehärtete Nadeln (oder aufsteckbare Nadeladapter). Treffen einzelne Pins, ohne den Nachbarn zu berühren. Manche haben eine Feder („Backprobe"), die sicher aufsetzt.</p></div>
@@ -937,9 +953,9 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <h3>Totes Board? Diagnose in dieser Reihenfolge</h3>
 <div class="card"><ol>
 <li><b>Ansehen.</b> Verkohlte Stellen, aufgeblähte Elkos, kalte/gebrochene Lötstellen, verschobene Bauteile.</li>
-<li><b>Versorgung auf Kurzschluss</b> (Rezept ④). Nahe 0 Ω → erst reparieren, dann Strom.</li>
-<li><b>Strom mit Limit einspeisen.</b> Labornetzteil auf die Board-Spannung, Strombegrenzung niedrig. Zieht es sofort das volle Limit → irgendwo Kurzschluss; mit dem Finger fühlen, welches Bauteil warm wird.</li>
-<li><b>Rails der Reihe nach</b> (Rezept ①). Kommt am Regler-Eingang Spannung an, aber nicht am Ausgang → Regler oder seine Last defekt. 5 V → 3,3 V → 1,8 V … durchgehen.</li>
+<li><b>Versorgung auf Kurzschluss</b> (Ω, siehe Tabelle oben). Nahe 0 Ω → erst reparieren, dann Strom.</li>
+<li><b>Strom mit Limit einspeisen.</b> Labornetzteil auf die Board-Spannung, Strombegrenzung niedrig. Zieht es sofort das volle Limit → irgendwo Kurzschluss. Jetzt <b>Hotspot suchen</b>: mit dem Finger fühlen, welches Bauteil warm wird — oder eine kleine <b>USB-Wärmebildkamera</b> (fürs Handy) draufhalten, die zeigt die heiße Stelle sofort.</li>
+<li><b>Rails der Reihe nach</b> (V⎓, siehe Tabelle). Kommt am Regler-Eingang Spannung an, aber nicht am Ausgang → Regler oder seine Last defekt. 5 V → 3,3 V → 1,8 V … durchgehen.</li>
 <li><b>Takt &amp; Reset am Mikrocontroller.</b> Versorgung da? Reset-Pin auf HIGH? Takt vorhanden? (Takt sicher nur mit Oszi/Logic Analyzer — siehe unten.)</li>
 </ol></div>
 
@@ -951,6 +967,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <li><b>I²C / SPI / UART:</b> im Ruhezustand kannst du den Pegel prüfen (I²C-Leitungen liegen dank Pull-up auf HIGH). Die eigentlichen Daten sieht nur ein <b>Logic Analyzer</b> (günstig, ideal für digitale Busse) oder ein Oszilloskop.</li>
 <li><b>Quarz / Takt:</b> ob er schwingt, verrät zuverlässig nur das Oszilloskop — Antasten kann den empfindlichen Oszillator sogar stören.</li>
 <li><b>Sleep-Strom (µA):</b> Mikrocontroller im Tiefschlaf ziehen Mikroampere. Das misst ein Standard-Multimeter kaum sauber — dafür gibt es spezielle Strom-Messadapter (z. B. „Power Profiler").</li>
+<li><b>Hotspots / Kurzschluss orten:</b> Eine <b>Wärmebildkamera</b> (auch günstige USB-Module fürs Handy) findet das heiß werdende Bauteil in Sekunden — ergänzt die Messung, ersetzt sie nicht.</li>
 </ul>
 <p style="margin-bottom:0"><b>Faustregel:</b> steht ein Wert still → Multimeter reicht. Ändert er sich schnell oder ist es ein Datensignal → Logic Analyzer (digital) oder Oszilloskop (analog & Timing).</p>
 </div>
@@ -1139,7 +1156,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 
 <h2>Begriffe einfach erklärt</h2>
 <div class="grid2">
-<div class="card"><h3>OVP / OCP</h3><p>Überspannungs- und Überstromschutz. Schaltet den Ausgang hart ab, wenn ein eingestellter Grenzwert überschritten wird. Zusätzliche Sicherheitsnetze über CV/CC hinaus.</p></div>
+<div class="card"><h3>OVP / OCP</h3><p><b>O</b>ver-<b>V</b>oltage / <b>O</b>ver-<b>C</b>urrent <b>P</b>rotection (Überspannungs-/Überstromschutz). Wichtiger Unterschied zu CC: <b>CC regelt</b> den Strom auf dein Limit herunter und <b>lässt den Ausgang an</b>. <b>OCP schaltet den Ausgang hart ab</b> (wie ein Sicherungsautomat) und muss neu aktiviert werden — für alle Fälle, in denen ein Fehler sofort <b>komplett</b> trennen soll.</p></div>
 <div class="card"><h3>Ripple / Restwelligkeit</h3><p>Kleine Reste von "Zappeln" auf der eigentlich glatten Gleichspannung. Je weniger, desto sauberer. Wichtig bei empfindlicher Analog- oder Funktechnik.</p></div>
 <div class="card"><h3>Linear vs. Schaltnetzteil</h3><p><b>Linear:</b> sehr saubere Spannung, wenig Ripple, aber schwer und warm. <b>Schaltend:</b> leicht, effizient, günstiger, dafür meist etwas mehr Ripple. Für Hobby reicht ein gutes Schaltnetzteil fast immer.</p></div>
 <div class="card"><h3>Tracking (bei Doppelnetzteilen)</h3><p>Bei Geräten mit zwei Ausgängen koppelt Tracking beide, z. B. für eine symmetrische Versorgung (+12 V und −12 V gleichzeitig für Operationsverstärker).</p></div>
