@@ -1071,8 +1071,13 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <section id="t-netzteil" class="hidden">
 
 <h2>Was ist ein Labornetzteil?</h2>
-<p>Eine einstellbare Gleichstromquelle für die Werkbank. Anders als ein festes Steckernetzteil kannst du hier <b>zwei Dinge getrennt einstellen</b>: die <b>Spannung</b> (wie viel Volt rauskommen) und die <b>Strombegrenzung</b> (wie viel Ampere maximal fließen dürfen). Zwei Anzeigen zeigen dir dabei die tatsächlichen Ist-Werte.</p>
-<p class="note">Die einstellbare Strombegrenzung ist das wichtigste Merkmal: sie wirkt wie eine eingebaute Sicherung und schützt deine Schaltung vor dem Durchbrennen, wenn etwas falsch verdrahtet ist.</p>
+<p>Eine einstellbare Gleichstromquelle für die Werkbank. Anders als ein festes Steckernetzteil stellst du <b>zwei Dinge getrennt</b> ein:</p>
+<div class="card">
+<div class="rule"><span class="ico">🔵</span><div><b>Spannung (V):</b> wie viel Volt am Ausgang anliegen.</div></div>
+<div class="rule"><span class="ico">🟠</span><div><b>Strom-Limit (A):</b> wie viel Ampere maximal fließen dürfen. Das wichtigste Merkmal — wirkt wie eine <b>einstellbare, eingebaute Sicherung</b> und schützt die Schaltung, wenn etwas falsch verdrahtet ist.</div></div>
+<div class="rule"><span class="ico">📟</span><div><b>Zwei Anzeigen</b> zeigen die echten Ist-Werte — nebenbei ein Live-Strommesser für deine Schaltung.</div></div>
+</div>
+<p class="note">Typische Einsätze: Module mit definierter Spannung versorgen statt mit Batterien zu hantieren · Bauteile gezielt an ihren Grenzwerten testen · symmetrische Versorgung (±) für Analogtechnik per Doppelnetzteil.</p>
 
 <h2>Das Herzstück: CV und CC</h2>
 <p>Ein Labornetzteil arbeitet in einem von zwei Zuständen. Eine LED zeigt an, in welchem es gerade ist.</p>
@@ -1084,6 +1089,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <p class="note">Merke: In CV bestimmt die Schaltung den Strom, in CC bestimmt das Netzteil den Strom. Schlägt es unerwartet auf CC um, stimmt meist etwas in der Schaltung nicht.</p>
 
 <h2>Bedienelemente & Buchsen</h2>
+<svg class="sy sy-mid" style="max-width:360px" viewBox="0 0 380 252" role="img" aria-label="Frontplatte eines Labornetzteils: zwei Anzeigen für Volt und Ampere, CV- und CC-Lampe, Voltage- und Current-Drehknopf, Output-Taste und drei Buchsen"><rect class="w" x="20" y="12" width="340" height="228" rx="10"/><rect class="w" x="40" y="28" width="140" height="46" rx="4"/><text class="lbl" x="110" y="58" text-anchor="middle" style="font-size:17px">5.00 V</text><rect class="w" x="200" y="28" width="140" height="46" rx="4"/><text class="lbl" x="270" y="58" text-anchor="middle" style="font-size:17px">0.13 A</text><circle class="accf" cx="46" cy="92" r="4.5"/><text class="pin" x="56" y="96">CV</text><circle class="w" cx="96" cy="92" r="4.5"/><text class="pin" x="106" y="96">CC</text><circle class="w" cx="110" cy="148" r="26"/><path class="w" style="stroke-width:3" d="M110,148 L95,127"/><text class="pin" x="110" y="190" text-anchor="middle">Voltage</text><circle class="w" cx="270" cy="148" r="26"/><path class="w" style="stroke-width:3" d="M270,148 L255,127"/><text class="pin" x="270" y="190" text-anchor="middle">Current</text><rect class="w" x="238" y="202" width="66" height="24" rx="5"/><text class="pin" x="271" y="217" text-anchor="middle">OUTPUT</text><circle style="stroke:var(--rate-bad);stroke-width:2.4;fill:none" cx="60" cy="214" r="8"/><circle style="stroke:var(--text);stroke-width:2.4;fill:none" cx="100" cy="214" r="8"/><circle style="stroke:var(--rate-good);stroke-width:2.4;fill:none" cx="140" cy="214" r="8"/><text class="pin" x="60" y="200" text-anchor="middle">+</text><text class="pin" x="100" y="200" text-anchor="middle">−</text><text class="pin" x="140" y="200" text-anchor="middle">⏚</text></svg>
 <div class="card">
 <div class="rule"><span class="ico">🔵</span><div><b>Voltage (V)</b>: stellt die Ausgangsspannung ein. Oft grob + fein (zwei Knöpfe oder Tasten).</div></div>
 <div class="rule"><span class="ico">🟠</span><div><b>Current (A)</b>: stellt das Stromlimit ein, ab dem auf CC umgeschaltet wird.</div></div>
@@ -1151,12 +1157,6 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="rule"><span class="ico">📟</span><div><b>Verbrauch direkt ablesen.</b> Die Strom-Anzeige zeigt dir live, wie viel deine Schaltung zieht. Praktischer "Nebenbei-Messwert" zur Fehlersuche.</div></div>
 </div>
 
-<h2>Typische Anwendungen</h2>
-<div class="card"><ul>
-<li>Bauteile und Module mit definierter Spannung versorgen, statt mit Batterien zu hantieren.</li>
-<li>LEDs/Bauteile gezielt an ihren Grenzwerten prüfen.</li>
-<li>Symmetrische Versorgung (+/−) für Analogtechnik per Doppelnetzteil.</li>
-</ul></div>
 </section>
 
 <!-- ============ TAB: STECKBRETT ============ -->
