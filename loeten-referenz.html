@@ -623,6 +623,34 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="card"><div class="ct">Isopropanol (IPA)</div><div class="cd">Reinigt Flussmittelrückstände. Brennbar, gut lüften.</div></div>
 <div class="card"><div class="ct">Kapton-Tape</div><div class="cd">Hitzefestes Klebeband. Fixiert Bauteile, schützt Nachbarn bei Heißluft.</div></div>
 </div>
+
+<h3>Verkaufsfertig: Normen &amp; Standards</h3>
+<p>Fürs Hobby und Reparaturen gilt nichts davon. Sobald du etwas Gelötetes aber <b>verkaufst</b>, greifen Regeln. Die wichtigsten zur Orientierung — für echte Zertifizierung immer den Normtext bzw. eine Prüfstelle heranziehen (das hier ist keine Rechtsberatung).</p>
+
+<p><b>Recht &amp; Pflicht (Verkauf in der EU)</b></p>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Norm</th><th>Worum es geht</th><th>Fürs Verkaufen</th></tr></thead>
+<tbody>
+<tr><td><b>RoHS</b> (2011/65/EU, RoHS&nbsp;3: 2015/863)</td><td>verbietet u. a. Blei über 0,1 % in Elektronik</td><td><b>bleifrei löten (SAC305)</b> — bleihaltig nur für Reparatur, Prototyp oder gelistete Ausnahmen</td></tr>
+<tr><td><b>REACH</b> (EG 1907/2006)</td><td>Beschränkung von Chemikalien (Blei ist SVHC, dazu Flussmittel-Inhaltsstoffe)</td><td>Sicherheitsdatenblätter beachten, gelistete Stoffe meiden</td></tr>
+<tr><td><b>WEEE</b> (2012/19/EU)</td><td>Rücknahme &amp; Recycling von Elektroschrott</td><td>Registrierung + Symbol „durchgestrichene Mülltonne" aufs Produkt</td></tr>
+<tr><td><b>CE-Kennzeichnung</b></td><td>Selbsterklärung, dass alle zutreffenden EU-Richtlinien erfüllt sind (EMV, Niederspannung, RoHS …)</td><td>Konformitätserklärung + technische Doku erstellen, dann CE-Zeichen anbringen</td></tr>
+</tbody>
+</table></div>
+
+<p><b>Qualität &amp; Abnahme (IPC-Standards)</b></p>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Standard</th><th>Worum</th><th>Einordnung</th></tr></thead>
+<tbody>
+<tr><td><b>IPC-Klassen 1 / 2 / 3</b></td><td>Zuverlässigkeitsklassen für Baugruppen</td><td>1 = Consumer · <b>2 = Gebrauchsgüter/Industrie (üblicher Verkaufs-Standard)</b> · 3 = lebenswichtig (Medizin, Luftfahrt, Militär)</td></tr>
+<tr><td><b>IPC-A-610</b></td><td>Abnahmekriterien: wie eine akzeptable Lötstelle/Baugruppe aussehen muss</td><td>die „ist es gut genug?"-Referenz — Bilder für gut/nacharbeiten/Ausschuss je Klasse</td></tr>
+<tr><td><b>J-STD-001</b></td><td>Anforderungen an den Löt<b>prozess</b> (Material, Ablauf, Qualifikation)</td><td>was beim Fertigen einzuhalten ist (Schwester zur A-610)</td></tr>
+<tr><td><b>J-STD-004</b></td><td>Klassifizierung von Flussmitteln (Aktivität/Halogenide, z. B. ROL0)</td><td>sagt, ob ein Flux rückstandsarm/zulässig für dein Produkt ist</td></tr>
+</tbody>
+</table></div>
+
+<div class="tip"><b>Praxis-Fazit für ein verkauftes Standardprodukt (Class&nbsp;2):</b> bleifrei löten (<b>SAC305</b>), No-Clean-Flux nehmen oder Rückstände sauber reinigen, Lötstellen nach <b>IPC-A-610 Class&nbsp;2</b> beurteilen — dazu die Pflichten CE + RoHS + WEEE erledigen.</div>
+<div class="warn"><b>Bleihaltig ≠ verkaufstauglich:</b> Sn63Pb37 ist top zum Üben und Reparieren, für <b>neu verkaufte</b> Elektronik in der EU aber durch RoHS praktisch verboten. Ausnahmen (sehr hohe Schmelzpunkte, teils Medizin/Militär) gibt es — die musst du gezielt prüfen.</div>
 </div>
 
 <!-- ============ TEMPERATUREN ============ -->
