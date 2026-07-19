@@ -863,22 +863,23 @@ h2[id],h3[id]{scroll-margin-top:84px}
 </ul></div>
 
 <h2>Fehler finden: Kurzschluss, kaputtes Bauteil & Co.</h2>
-<p>Die Schnellübersicht: was du bei welchem Verdacht misst, wo du die Spitzen dranhältst und was die Anzeige bedeutet. Die genauen Handgriffe stehen als Schritt-Rezepte darunter.</p>
-<div class="tbl-wrap"><table style="min-width:820px">
-<thead><tr><th>Verdacht</th><th>Modus</th><th>Wo dran (Strom)</th><th>Anzeige</th><th>Bedeutung</th></tr></thead>
+<p>Die Schnellübersicht: was du bei welchem Verdacht misst, <b>wo genau die zwei Spitzen hinkommen</b> und was die Anzeige bedeutet. Die genauen Handgriffe stehen als Schritt-Rezepte darunter.</p>
+<p class="note" style="margin-bottom:.7rem"><b>Grundregel zum Verständnis:</b> Die <b>schwarze</b> Spitze steckt in COM und ist der <b>Bezugspunkt</b> — die legst du an Masse (GND) und lässt sie dort. Mit der <b>roten</b> Spitze tastest du den Punkt an, den du prüfen willst. Bei „je eine Spitze" (Durchgang) ist die Reihenfolge egal.</p>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th>Verdacht</th><th>Modus</th><th>Board</th><th>Wo die zwei Spitzen hin</th><th>Anzeige</th><th>Bedeutung</th></tr></thead>
 <tbody>
-<tr><td><b>Kurzschluss auf der Versorgung</b></td><td>Ω (klein)</td><td>GND ↔ VCC · <b>aus</b></td><td><b>nahe 0 Ω</b></td><td>Kurzschluss (Kondensator/IC/Lötbrücke) → <b>nicht einschalten</b>, Ursache suchen</td></tr>
-<tr><td>Keine Versorgung an einer Rail</td><td>V⎓</td><td>GND ↔ Rail · <b>an</b></td><td>0 V statt Soll (5/3,3 V)</td><td>Regler oder Zuleitung tot → rückwärts Richtung Regler suchen</td></tr>
-<tr><td>Kabelbruch / Unterbrechung</td><td>Durchgang )))</td><td>beide Enden · <b>aus</b></td><td>kein Piep</td><td>Leitung offen / unterbrochen</td></tr>
-<tr><td>Durchgebrannte Sicherung</td><td>Durchgang )))</td><td>über die Sicherung · <b>aus</b></td><td>kein Piep</td><td>durch → warum? (meist Kurzschluss dahinter)</td></tr>
-<tr><td>Lötbrücke zwischen Pins</td><td>Durchgang )))</td><td>zwei Nachbar-Pins · <b>aus</b></td><td>Piep (obwohl getrennt)</td><td>ungewollte Verbindung → unter der Lupe entfernen</td></tr>
-<tr><td>Diode / LED kaputt</td><td>Diodentest ▷⊢</td><td>über das Bauteil, beide Richtungen · <b>aus</b></td><td>beide 0 / beide OL</td><td>Kurzschluss bzw. unterbrochen (heil: einmal Wert, einmal OL)</td></tr>
-<tr><td>Bauteil allgemein defekt</td><td>Diodentest ▷⊢</td><td>Pin ↔ GND, Vergleich gutes Board · <b>aus</b></td><td>stark abweichend</td><td>Verdächtiger (fast 0 = Kurzschluss im Bauteil)</td></tr>
-<tr><td>Müder Elko (alt/aufgebläht)</td><td>ESR (<a href="#lcrp1">LCR-P1</a>)</td><td>ausgebaut</td><td>hoher ESR</td><td>ersetzen — Kapazität kann noch fast stimmen</td></tr>
-<tr><td>Heißer Hotspot</td><td>Finger / Wärmebild</td><td>Strom mit Limit einspeisen</td><td>wird warm/heiß</td><td>genau dort sitzt das kurzschließende Bauteil</td></tr>
+<tr><td><b>Kurzschluss auf der Versorgung</b></td><td>Ω (klein)</td><td>aus</td><td><b>Schwarz</b> an GND, <b>Rot</b> an VCC / eine Rail</td><td><b>nahe 0 Ω</b></td><td>Kurzschluss (Kondensator/IC/Lötbrücke) → <b>nicht einschalten</b>, Ursache suchen</td></tr>
+<tr><td>Keine Versorgung an einer Rail</td><td>V⎓</td><td>an</td><td><b>Schwarz</b> an GND, <b>Rot</b> an den Rail-Testpunkt</td><td>0 V statt Soll (5/3,3 V)</td><td>Regler oder Zuleitung tot → rückwärts Richtung Regler suchen</td></tr>
+<tr><td>Kabelbruch / Unterbrechung</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze an die <b>zwei Enden</b> der Leitung</td><td>kein Piep</td><td>Leitung offen / unterbrochen</td></tr>
+<tr><td>Durchgebrannte Sicherung</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze an die <b>zwei Enden</b> der Sicherung</td><td>kein Piep</td><td>durch → warum? (meist Kurzschluss dahinter)</td></tr>
+<tr><td>Lötbrücke zwischen Pins</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze auf <b>zwei benachbarte Pins</b></td><td>Piep (obwohl getrennt)</td><td>ungewollte Verbindung → unter der Lupe entfernen</td></tr>
+<tr><td>Diode / LED kaputt</td><td>Diodentest ▷⊢</td><td>aus</td><td><b>Schwarz</b> an Kathode (Ring), <b>Rot</b> an Anode — dann Spitzen tauschen</td><td>beide 0 / beide OL</td><td>Kurzschluss bzw. unterbrochen (heil: einmal Wert, einmal OL)</td></tr>
+<tr><td>Bauteil allgemein defekt</td><td>Diodentest ▷⊢</td><td>aus</td><td><b>Schwarz</b> an GND, <b>Rot</b> nacheinander auf die Pins (mit gutem Board vergleichen)</td><td>stark abweichend</td><td>Verdächtiger (fast 0 = Kurzschluss im Bauteil)</td></tr>
+<tr><td>Müder Elko (alt/aufgebläht)</td><td>ESR (<a href="#lcrp1">LCR-P1</a>)</td><td>ausgebaut</td><td>Bauteil in den LCR-P1 stecken</td><td>hoher ESR</td><td>ersetzen — Kapazität kann noch fast stimmen</td></tr>
+<tr><td>Heißer Hotspot</td><td>Finger / Wärmebild</td><td>Strom + Limit</td><td>keine Spitzen — Finger/Wärmebild übers Board</td><td>wird warm/heiß</td><td>genau dort sitzt das kurzschließende Bauteil</td></tr>
 </tbody>
 </table></div>
-<p class="note">Grundsatz: Ω und Durchgang <b>immer stromlos</b> · Spannung am <b>laufenden</b> Board. Schwarz bleibt an einem GND-Punkt, mit Rot tastest du.</p>
+<p class="note">Grundsatz: Ω, Durchgang und Diodentest <b>immer stromlos</b> · Spannung am <b>laufenden</b> Board.</p>
 
 <h3>Das richtige Werkzeug (SMD)</h3>
 <p>Auf modernen Platinen sind die Kontakte winzig und dicht — dünne Standard-Prüfspitzen rutschen ab und schließen Nachbar-Pins kurz. Das Messen bleibt dasselbe, du brauchst nur feineres Werkzeug:</p>
