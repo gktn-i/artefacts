@@ -1094,15 +1094,18 @@ h2[id],h3[id]{scroll-margin-top:84px}
 </div>
 
 <h2>Standard-Vorgang: Strombegrenzung vorab einstellen</h2>
-<p>Der wichtigste Handgriff, der deine Schaltung schützt. So stellst du das Stromlimit ein, <b>bevor</b> du die Schaltung anschließt:</p>
-<div class="card"><ul>
-<li>Output <b>aus</b>. Rote und schwarze Buchse mit einem Kabel <b>kurz verbinden</b> (absichtlicher Kurzschluss, der ist hier ungefährlich).</li>
-<li>Stromregler ganz runter, Output <b>an</b>. Das Netzteil ist jetzt in CC.</li>
-<li>Stromregler langsam hochdrehen, bis die Anzeige dein gewünschtes Limit zeigt (z. B. 0,5 A für eine kleine Logik-Schaltung).</li>
-<li>Output <b>aus</b>, Kurzschluss-Kabel entfernen.</li>
-<li>Spannung einstellen, Schaltung anschließen, Output <b>an</b>. Fertig: zieht die Schaltung zu viel, riegelt das Netzteil bei deinem Limit ab.</li>
-</ul></div>
-<p class="note">Faustregel fürs Limit: knapp über dem normalen Verbrauch. So bleibt Reserve für den Betrieb, aber ein Fehler wird sofort gedeckelt.</p>
+<p>Der wichtigste Handgriff, der deine Schaltung schützt: das Stromlimit einstellen, <b>bevor</b> irgendetwas angeschlossen wird.</p>
+<div class="card">
+<p><b>Warum der Trick mit dem Kurzschluss?</b> Der Strom-Drehknopf hat keine Skala — solange kein Strom fließt, zeigt die Anzeige nicht, wo dein Limit gerade steht. Sichtbar wird das Limit erst, wenn das Netzteil tatsächlich begrenzt, also im CC-Zustand (Kennlinie oben). Deshalb zwingst du es <b>absichtlich kurz in CC</b>, indem du die Buchsen direkt verbindest. Das ist am Labornetzteil völlig harmlos: Es ist genau für diesen Fall gebaut und lässt nie mehr Strom fließen, als der Regler erlaubt.</p>
+</div>
+<div class="card">
+<div class="rule"><span class="ico">①</span><div>Output <b>aus</b>. Rote und schwarze Buchse mit einem Messkabel <b>direkt verbinden</b>.</div></div>
+<div class="rule"><span class="ico">②</span><div>Strom-Regler ganz nach links (Minimum), dann Output <b>an</b>. Jetzt leuchtet die <b>CC-Lampe</b> und die Ampere-Anzeige zeigt fast 0 — das Netzteil begrenzt. Genau das wollen wir.</div></div>
+<div class="rule"><span class="ico">③</span><div>Strom-Regler <b>langsam aufdrehen</b>. Die Ampere-Anzeige zeigt dabei live dein zukünftiges Limit an. Beim Wunschwert stoppen (z. B. 0,5 A für eine kleine Logik-Schaltung).</div></div>
+<div class="rule"><span class="ico">④</span><div>Output <b>aus</b>, Kurzschluss-Kabel entfernen. Die Einstellung <b>bleibt gespeichert</b> — der Regler steht ja noch an derselben Position.</div></div>
+<div class="rule"><span class="ico">⑤</span><div>Spannung einstellen, Schaltung anschließen, Output <b>an</b>. Ab jetzt gilt: Will die Schaltung mehr ziehen als dein Limit (Fehler, Kurzschluss), springt das Netzteil auf CC und deckelt — nichts brennt durch.</div></div>
+</div>
+<p class="note">Faustregel fürs Limit: knapp über dem normalen Verbrauch. So bleibt Reserve für den Betrieb, aber ein Fehler wird sofort gedeckelt. — Geräte mit Zifferneingabe (z. B. RD6006- / DPS-Klasse) zeigen das Limit direkt im Display: dort einfach eintippen, der Kurzschluss-Trick ist nur bei klassischen Drehknopf-Geräten nötig.</p>
 
 <h2>Welche Spannung, welches Strom-Limit? Typische Einstellungen</h2>
 <p>Richtwerte für die häufigsten Hobby-Zwecke. Die Logik dahinter: <b>Spannung</b> = was der Verbraucher laut Aufdruck/Datenblatt braucht, <b>Strom-Limit</b> = sein normaler Verbrauch plus 20–50 % Reserve.</p>
