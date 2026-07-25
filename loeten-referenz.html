@@ -73,9 +73,24 @@ strong,b{font-weight:600}
 /* ============================================================
    TAB-NAVIGATION (sticky)
    ============================================================ */
-.tabs{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;z-index:20;
-  margin:0 -1.5rem 1.5rem;padding:.65rem 1.5rem;background:var(--bg);
+.navwrap{position:sticky;top:0;z-index:20;margin:0 -1.5rem 1.5rem;background:var(--bg);
   border-bottom:1px solid var(--border);box-shadow:var(--shadow-tabs)}
+.switch{display:flex;gap:5px;padding:.45rem 1.5rem 0}
+.switch a{display:inline-flex;align-items:center;gap:.4em;font-size:11.5px;font-weight:600;
+  padding:3px 10px;border-radius:999px;text-decoration:none;color:var(--faint);
+  border:1px solid transparent;transition:background .15s,color .15s}
+.switch a:hover{color:var(--text);background:var(--surface-2)}
+.switch a.on{color:var(--accent-ink);background:var(--accent-soft);border-color:var(--accent-border)}
+.tabs,.subtabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.tabs::-webkit-scrollbar,.subtabs::-webkit-scrollbar{display:none}
+.tabs{gap:6px;padding:.5rem 1.5rem .45rem}
+.subtabs{gap:14px;padding:0 1.5rem .5rem}
+.tabs button,.subtabs button{white-space:nowrap;flex:0 0 auto}
+.subtabs button{display:inline-flex;align-items:center;font-family:inherit;font-size:12.5px;
+  font-weight:500;padding:3px 1px 4px;cursor:pointer;background:transparent;border:none;
+  border-bottom:2px solid transparent;color:var(--muted);transition:color .15s,border-color .15s}
+.subtabs button:hover{color:var(--text)}
+.subtabs button.active{color:var(--accent-ink);border-bottom-color:var(--accent);font-weight:600}
 .tabs button{display:inline-flex;align-items:center;gap:.42em;font-family:inherit;
   font-size:13px;font-weight:500;padding:6px 13px;cursor:pointer;background:transparent;
   border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);
@@ -194,7 +209,10 @@ tbody tr:hover td{background:var(--surface-hover)}
    ============================================================ */
 @media(max-width:600px){
   body{padding:1rem 1rem 3rem}
-  .tabs{margin:0 -1rem 1.2rem;padding:.6rem 1rem}
+  .navwrap{margin:0 -1rem 1.2rem}
+  .switch{padding:.4rem 1rem 0}
+  .tabs{padding:.45rem 1rem .4rem}
+  .subtabs{padding:0 1rem .45rem}
   h1{font-size:22px}
   h2{font-size:16px}
   .grid{grid-template-columns:1fr}
@@ -203,7 +221,7 @@ tbody tr:hover td{background:var(--surface-hover)}
 /* ============================================================
    IN-PAGE TOC · „Auf dieser Seite"
    ============================================================ */
-h2[id],h3[id]{scroll-margin-top:84px}
+h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 #tocBtn{position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:50%;
   border:1px solid var(--border-strong);background:var(--surface);color:var(--text);
   box-shadow:var(--shadow-tabs);cursor:pointer;font-size:19px;line-height:1;
@@ -227,7 +245,8 @@ h2[id],h3[id]{scroll-margin-top:84px}
 @media(min-width:1600px){
   #tocBtn{display:none !important}
   #tocNav.has-items{display:block;right:auto;bottom:auto;
-    left:max(16px,calc((100vw - 1080px) / 2 - 236px));top:88px;width:224px;max-height:calc(100vh - 108px)}
+    left:max(16px,calc((100vw - 1080px) / 2 - 236px));top:calc(var(--navh,110px) + 8px);width:224px;
+    max-height:calc(100vh - var(--navh,110px) - 28px)}
 }
 @media(max-width:600px){
   #tocNav{width:min(76vw,242px)}
@@ -236,9 +255,16 @@ h2[id],h3[id]{scroll-margin-top:84px}
 </head>
 <body>
 <h1>Löten · Referenz</h1>
-<div class="sub">Kompakte Referenz für die Hobby-Werkstatt: Lötkolben, Heißluft und Heizplatte — Material, Temperaturen, Technik, Fehlerbilder und Sicherheit. Tabs sind verlinkbar (URL teilt den aktiven Tab).</div>
+<div class="sub">Kompakte Referenz für die Hobby-Werkstatt: Lötkolben, Heißluft und Heizplatte — Werkzeug, Material, Techniken, Bauteile, Fehlerbilder und Sicherheit.</div>
 
+<div class="navwrap">
+<div class="switch">
+<a href="elektronik-grundlagen.html"><span class="ti">⚡</span>Elektronik</a>
+<a class="on" href="loeten-referenz.html"><span class="ti">🔥</span>Löten</a>
+</div>
 <div class="tabs" id="tabs"></div>
+<div class="subtabs" id="subtabs"></div>
+</div>
 
 <!-- ============ METHODEN ============ -->
 <div class="panel active" data-p="methoden">
@@ -445,38 +471,22 @@ h2[id],h3[id]{scroll-margin-top:84px}
 
 <div class="tip"><b>Kurzfassung — Setup fürs Löten:</b> WF10X-Okulare + 0.5X-Objektiv + Protection Glass + LED-Ringlicht. Grund: maximaler Arbeitsabstand (165 mm) für Lötkolben und Hände, gute Übersicht. Näher ran geht's über den Zoom-Knopf am Mikroskop selbst.</div>
 
-<h3>Okulare (das, wo du reinschaust)</h3>
-<div class="tbl-wrap"><table style="min-width:560px">
-<thead><tr><th>Okular</th><th>Vergrößerung</th><th>Sichtfeld</th><th>Fürs Löten</th></tr></thead>
+<h3>Optik: Okular, Objektiv, Vergrößerung</h3>
+<p>Drei Dinge bestimmen das Bild. <b>Gesamtvergrößerung = Okular × Zoom-Knopf × Vorsatz-Objektiv</b> (der Zoom-Körper läuft typisch von 0,7× bis 4,5×). <b>WD</b> = Working Distance = der Platz zwischen Linse und Platine, in dem du arbeitest.</p>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Teil</th><th>Variante</th><th>Kennwert</th><th>Fürs Löten</th></tr></thead>
 <tbody>
-<tr><td><b>WF10X</b></td><td>10-fach</td><td>groß</td><td><b>Standard — immer diese</b></td></tr>
-<tr><td>WF20X</td><td>20-fach</td><td>klein, näher dran</td><td>selten: verliert Übersicht und Augenabstand</td></tr>
-</tbody>
-</table></div>
-<div class="note">WF = Wide Field (Weitfeld). Fürs Löten zählen Übersicht und Arbeitsabstand — deshalb WF10X.</div>
-
-<h3>Vorsatz-Objektive (schrauben unten vors Mikroskop)</h3>
-<p>Der wichtigste Teil des Sets: ändert gleichzeitig Vergrößerung <b>und</b> Arbeitsabstand. WD = Working Distance = Platz zwischen Linse und Platine.</p>
-<div class="tbl-wrap"><table style="min-width:600px">
-<thead><tr><th>Objektiv</th><th>Working Distance</th><th>Vergrößerung</th><th>Fürs Löten</th></tr></thead>
-<tbody>
-<tr><td><b>0.5X</b></td><td><b>165 mm</b></td><td>niedriger</td><td><b>ideal — viel Platz für Kolben und Hände</b></td></tr>
-<tr><td>0.7X</td><td>120 mm</td><td>mittel</td><td>okay, wenn mehr Detail nötig ist; Abstand wird knapper</td></tr>
-<tr><td>2.0X</td><td>30 mm</td><td>stark</td><td>ungeeignet — kein Platz für den Lötkolben darunter</td></tr>
-</tbody>
-</table></div>
-<div class="note"><b>Faustregel:</b> mehr Vergrößerung = weniger Arbeitsabstand. Fürs Löten gewinnt immer der Abstand.</div>
-
-<h3>Gesamtvergrößerung: die Rechnung</h3>
-<p>Gesamtvergrößerung = <b>Okular × Zoom-Knopf × Vorsatz-Objektiv</b>. Der Zoom-Körper typischer Geräte läuft von 0,7× bis 4,5×.</p>
-<div class="tbl-wrap"><table style="min-width:560px">
-<thead><tr><th>Kombination</th><th>Bereich</th><th>Reicht für</th></tr></thead>
-<tbody>
-<tr><td><b>WF10X + 0.5X</b> (Empfehlung)</td><td><b>3,5× – 22,5×</b></td><td>alles vom Kabel bis 0402 und QFN — der Löt-Sweetspot</td></tr>
+<tr><td rowspan="2"><b>Okular</b><br><span class="cd">da schaust du rein</span></td><td><b>WF10X</b></td><td>10-fach, großes Sichtfeld</td><td><b>Standard — immer diese</b></td></tr>
+<tr><td>WF20X</td><td>20-fach, kleines Sichtfeld</td><td>selten: verliert Übersicht und Augenabstand</td></tr>
+<tr><td rowspan="3"><b>Vorsatz-Objektiv</b><br><span class="cd">schraubt unten dran</span></td><td><b>0.5X</b></td><td><b>WD 165 mm</b></td><td><b>ideal — viel Platz für Kolben und Hände</b></td></tr>
+<tr><td>0.7X</td><td>WD 120 mm</td><td>okay, wenn mehr Detail nötig ist; Abstand wird knapper</td></tr>
+<tr><td>2.0X</td><td>WD 30 mm</td><td>ungeeignet — kein Platz für den Lötkolben darunter</td></tr>
+<tr><td rowspan="3"><b>Kombination</b><br><span class="cd">was am Ende rauskommt</span></td><td><b>WF10X + 0.5X</b></td><td><b>3,5× – 22,5×</b></td><td><b>Der Löt-Sweetspot</b> — vom Kabel bis 0402 und QFN</td></tr>
 <tr><td>WF10X + 0.7X</td><td>4,9× – 31,5×</td><td>feinste Inspektion, Abstand nur noch 120 mm</td></tr>
 <tr><td>WF10X ohne Vorsatz</td><td>7× – 45×</td><td>reine Inspektion — zu wenig Platz zum Arbeiten</td></tr>
 </tbody>
 </table></div>
+<div class="note"><b>Faustregel:</b> mehr Vergrößerung = weniger Arbeitsabstand. Fürs Löten gewinnt <b>immer</b> der Abstand. WF = Wide Field (Weitfeld).</div>
 
 <h3>Zubehör</h3>
 <div class="tbl-wrap"><table style="min-width:620px">
@@ -623,34 +633,6 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="card"><div class="ct">Isopropanol (IPA)</div><div class="cd">Reinigt Flussmittelrückstände. Brennbar, gut lüften.</div></div>
 <div class="card"><div class="ct">Kapton-Tape</div><div class="cd">Hitzefestes Klebeband. Fixiert Bauteile, schützt Nachbarn bei Heißluft.</div></div>
 </div>
-
-<h3>Verkaufsfertig: Normen &amp; Standards</h3>
-<p>Fürs Hobby und Reparaturen gilt nichts davon. Sobald du etwas Gelötetes aber <b>verkaufst</b>, greifen Regeln. Die wichtigsten zur Orientierung — für echte Zertifizierung immer den Normtext bzw. eine Prüfstelle heranziehen (das hier ist keine Rechtsberatung).</p>
-
-<p><b>Recht &amp; Pflicht (Verkauf in der EU)</b></p>
-<div class="tbl-wrap"><table style="min-width:660px">
-<thead><tr><th>Norm</th><th>Worum es geht</th><th>Fürs Verkaufen</th></tr></thead>
-<tbody>
-<tr><td><b>RoHS</b> (2011/65/EU, RoHS&nbsp;3: 2015/863)</td><td>verbietet u. a. Blei über 0,1 % in Elektronik</td><td><b>bleifrei löten (SAC305)</b> — bleihaltig nur für Reparatur, Prototyp oder gelistete Ausnahmen</td></tr>
-<tr><td><b>REACH</b> (EG 1907/2006)</td><td>Beschränkung von Chemikalien (Blei ist SVHC, dazu Flussmittel-Inhaltsstoffe)</td><td>Sicherheitsdatenblätter beachten, gelistete Stoffe meiden</td></tr>
-<tr><td><b>WEEE</b> (2012/19/EU)</td><td>Rücknahme &amp; Recycling von Elektroschrott</td><td>Registrierung + Symbol „durchgestrichene Mülltonne" aufs Produkt</td></tr>
-<tr><td><b>CE-Kennzeichnung</b></td><td>Selbsterklärung, dass alle zutreffenden EU-Richtlinien erfüllt sind (EMV, Niederspannung, RoHS …)</td><td>Konformitätserklärung + technische Doku erstellen, dann CE-Zeichen anbringen</td></tr>
-</tbody>
-</table></div>
-
-<p><b>Qualität &amp; Abnahme (IPC-Standards)</b></p>
-<div class="tbl-wrap"><table style="min-width:660px">
-<thead><tr><th>Standard</th><th>Worum</th><th>Einordnung</th></tr></thead>
-<tbody>
-<tr><td><b>IPC-Klassen 1 / 2 / 3</b></td><td>Zuverlässigkeitsklassen für Baugruppen</td><td>1 = Consumer · <b>2 = Gebrauchsgüter/Industrie (üblicher Verkaufs-Standard)</b> · 3 = lebenswichtig (Medizin, Luftfahrt, Militär)</td></tr>
-<tr><td><b>IPC-A-610</b></td><td>Abnahmekriterien: wie eine akzeptable Lötstelle/Baugruppe aussehen muss</td><td>die „ist es gut genug?"-Referenz — Bilder für gut/nacharbeiten/Ausschuss je Klasse</td></tr>
-<tr><td><b>J-STD-001</b></td><td>Anforderungen an den Löt<b>prozess</b> (Material, Ablauf, Qualifikation)</td><td>was beim Fertigen einzuhalten ist (Schwester zur A-610)</td></tr>
-<tr><td><b>J-STD-004</b></td><td>Klassifizierung von Flussmitteln (Aktivität/Halogenide, z. B. ROL0)</td><td>sagt, ob ein Flux rückstandsarm/zulässig für dein Produkt ist</td></tr>
-</tbody>
-</table></div>
-
-<div class="tip"><b>Praxis-Fazit für ein verkauftes Standardprodukt (Class&nbsp;2):</b> bleifrei löten (<b>SAC305</b>), No-Clean-Flux nehmen oder Rückstände sauber reinigen, Lötstellen nach <b>IPC-A-610 Class&nbsp;2</b> beurteilen — dazu die Pflichten CE + RoHS + WEEE erledigen.</div>
-<div class="warn"><b>Bleihaltig ≠ verkaufstauglich:</b> Sn63Pb37 ist top zum Üben und Reparieren, für <b>neu verkaufte</b> Elektronik in der EU aber durch RoHS praktisch verboten. Ausnahmen (sehr hohe Schmelzpunkte, teils Medizin/Militär) gibt es — die musst du gezielt prüfen.</div>
 </div>
 
 <!-- ============ TEMPERATUREN ============ -->
@@ -958,6 +940,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="note"><b>Für QFN, BGA und thermisch kräftige Bauteile</b> (große Masseflächen) ist Heißluft die schonendere Methode — siehe Tab <a class="goto" href="#heissluft">Heißluft</a>.</div>
 
 <h3>SMD-Troubleshooting: was tun, wenn …</h3>
+<p class="note">Die häufigsten SMD-Pannen direkt am Kolben. Vollständige Fehlerbilder-Tabelle: Tab <a class="goto" href="#fehler">Fehler &amp; Regeln</a>.</p>
 <div class="gb">
 <div class="gb-col bad"><h4>Zu viel Lot / Lotbrücke zwischen Pins</h4><ul>
 <li>Frisches Flussmittel über die Stelle geben.</li>
@@ -1002,10 +985,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="step"><b>Pads aufräumen.</b> Restlot mit Entlötlitze abnehmen, Flussmittelreste mit IPA reinigen.</div>
 </div>
 <div class="warn"><b>Wegblas-Gefahr:</b> Zu hoher Luftstrom schießt kleine Chips quer über die Platine. Lieber etwas heißer und geduldiger als stürmisch.</div>
-</div>
 
-<!-- ============ ABLAUF HEIZPLATTE ============ -->
-<div class="panel" data-p="heizplatte">
 <h2><span class="b b-platte">Heizplatte</span> Reflow</h2>
 <p>Ideal, um eine einseitig bestückte SMD-Platine in einem Rutsch zu löten.</p>
 <div class="steps">
@@ -1026,23 +1006,35 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="tbl-wrap">
 <table id="errTbl"><thead></thead><tbody></tbody></table>
 </div>
-</div>
 
-<!-- ============ SICHERHEIT ============ -->
-<div class="panel" data-p="sicherheit">
-<h2>Sicherheit und Gesundheit</h2>
-<div class="grid">
-<div class="card"><div class="ct">Lötrauch <span class="b b-warn">wichtig</span></div><div class="cd">Der sichtbare Rauch ist verdampftes Flussmittel, nicht Blei. Er reizt Atemwege und kann langfristig Asthma auslösen.</div><ul><li>Absaugung mit Aktivkohle oder gut lüften</li><li>Nicht direkt über der Lötstelle atmen</li></ul></div>
-<div class="card"><div class="ct">Blei (bei bleihaltigem Lot)</div><div class="cd">Blei verdampft bei Löttemperatur praktisch nicht — die Gefahr ist die Aufnahme über Hände und Mund.</div><ul><li>Nach dem Löten Hände waschen</li><li>Am Arbeitsplatz nicht essen oder trinken</li></ul></div>
-<div class="card"><div class="ct">Verbrennungen</div><div class="cd">Spitze und Heißluft sind 300 °C und mehr — Bauteile und Platine bleiben lange heiß.</div><ul><li>Kolben immer in den Halter</li><li>Heiße Teile nicht mit den Fingern prüfen</li></ul></div>
-<div class="card"><div class="ct">ESD-Schutz</div><div class="cd">Statische Entladung beschädigt empfindliche ICs — oft unbemerkt.</div><ul><li>Erdungsarmband und ESD-Matte bei kritischen Teilen</li><li>ESD-Pinzetten verwenden</li></ul></div>
-<div class="card"><div class="ct">IPA und Flussmittel</div><div class="cd">Isopropanol ist leicht entzündlich.</div><ul><li>Fern von der heißen Spitze halten</li><li>Augenschutz, falls Flussmittel spritzt</li></ul></div>
-<div class="card"><div class="ct">Arbeitsplatz</div><div class="cd">Ordnung verhindert Unfälle.</div><ul><li>Hitzefeste Unterlage</li><li>Kabel so legen, dass nichts hängen bleibt</li></ul></div>
-</div>
-</div>
+<h2>Verkaufsfertig: Normen &amp; Standards</h2>
+<p>Fürs Hobby und Reparaturen gilt nichts davon. Sobald du etwas Gelötetes aber <b>verkaufst</b>, greifen Regeln. Die wichtigsten zur Orientierung — für echte Zertifizierung immer den Normtext bzw. eine Prüfstelle heranziehen (das hier ist keine Rechtsberatung).</p>
 
-<!-- ============ REGELN ============ -->
-<div class="panel" data-p="regeln">
+<p><b>Recht &amp; Pflicht (Verkauf in der EU)</b></p>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Norm</th><th>Worum es geht</th><th>Fürs Verkaufen</th></tr></thead>
+<tbody>
+<tr><td><b>RoHS</b> (2011/65/EU, RoHS&nbsp;3: 2015/863)</td><td>verbietet u. a. Blei über 0,1 % in Elektronik</td><td><b>bleifrei löten (SAC305)</b> — bleihaltig nur für Reparatur, Prototyp oder gelistete Ausnahmen</td></tr>
+<tr><td><b>REACH</b> (EG 1907/2006)</td><td>Beschränkung von Chemikalien (Blei ist SVHC, dazu Flussmittel-Inhaltsstoffe)</td><td>Sicherheitsdatenblätter beachten, gelistete Stoffe meiden</td></tr>
+<tr><td><b>WEEE</b> (2012/19/EU)</td><td>Rücknahme &amp; Recycling von Elektroschrott</td><td>Registrierung + Symbol „durchgestrichene Mülltonne" aufs Produkt</td></tr>
+<tr><td><b>CE-Kennzeichnung</b></td><td>Selbsterklärung, dass alle zutreffenden EU-Richtlinien erfüllt sind (EMV, Niederspannung, RoHS …)</td><td>Konformitätserklärung + technische Doku erstellen, dann CE-Zeichen anbringen</td></tr>
+</tbody>
+</table></div>
+
+<p><b>Qualität &amp; Abnahme (IPC-Standards)</b></p>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Standard</th><th>Worum</th><th>Einordnung</th></tr></thead>
+<tbody>
+<tr><td><b>IPC-Klassen 1 / 2 / 3</b></td><td>Zuverlässigkeitsklassen für Baugruppen</td><td>1 = Consumer · <b>2 = Gebrauchsgüter/Industrie (üblicher Verkaufs-Standard)</b> · 3 = lebenswichtig (Medizin, Luftfahrt, Militär)</td></tr>
+<tr><td><b>IPC-A-610</b></td><td>Abnahmekriterien: wie eine akzeptable Lötstelle/Baugruppe aussehen muss</td><td>die „ist es gut genug?"-Referenz — Bilder für gut/nacharbeiten/Ausschuss je Klasse</td></tr>
+<tr><td><b>J-STD-001</b></td><td>Anforderungen an den Löt<b>prozess</b> (Material, Ablauf, Qualifikation)</td><td>was beim Fertigen einzuhalten ist (Schwester zur A-610)</td></tr>
+<tr><td><b>J-STD-004</b></td><td>Klassifizierung von Flussmitteln (Aktivität/Halogenide, z. B. ROL0)</td><td>sagt, ob ein Flux rückstandsarm/zulässig für dein Produkt ist</td></tr>
+</tbody>
+</table></div>
+
+<div class="tip"><b>Praxis-Fazit für ein verkauftes Standardprodukt (Class&nbsp;2):</b> bleifrei löten (<b>SAC305</b>), No-Clean-Flux nehmen oder Rückstände sauber reinigen, Lötstellen nach <b>IPC-A-610 Class&nbsp;2</b> beurteilen — dazu die Pflichten CE + RoHS + WEEE erledigen.</div>
+<div class="warn"><b>Bleihaltig ≠ verkaufstauglich:</b> Sn63Pb37 ist top zum Üben und Reparieren, für <b>neu verkaufte</b> Elektronik in der EU aber durch RoHS praktisch verboten. Ausnahmen (sehr hohe Schmelzpunkte, teils Medizin/Militär) gibt es — die musst du gezielt prüfen.</div>
+
 <h2>Goldene Regeln</h2>
 <div class="grid">
 <div class="card"><div class="ct">1. Beide Teile erwärmen</div><div class="cd">Pad und Bauteil zusammen. Lot fließt nur auf Flächen, die selbst heiß genug sind.</div></div>
@@ -1058,6 +1050,19 @@ h2[id],h3[id]{scroll-margin-top:84px}
 </div>
 </div>
 
+<!-- ============ SICHERHEIT ============ -->
+<div class="panel" data-p="sicherheit">
+<h2>Sicherheit und Gesundheit</h2>
+<div class="grid">
+<div class="card"><div class="ct">Lötrauch <span class="b b-warn">wichtig</span></div><div class="cd">Der sichtbare Rauch ist verdampftes Flussmittel, nicht Blei. Er reizt Atemwege und kann langfristig Asthma auslösen.</div><ul><li>Absaugung mit Aktivkohle oder gut lüften</li><li>Nicht direkt über der Lötstelle atmen</li></ul></div>
+<div class="card"><div class="ct">Blei (bei bleihaltigem Lot)</div><div class="cd">Blei verdampft bei Löttemperatur praktisch nicht — die Gefahr ist die Aufnahme über Hände und Mund.</div><ul><li>Nach dem Löten Hände waschen</li><li>Am Arbeitsplatz nicht essen oder trinken</li></ul></div>
+<div class="card"><div class="ct">Verbrennungen</div><div class="cd">Spitze und Heißluft sind 300 °C und mehr — Bauteile und Platine bleiben lange heiß.</div><ul><li>Kolben immer in den Halter</li><li>Heiße Teile nicht mit den Fingern prüfen</li></ul></div>
+<div class="card"><div class="ct">ESD-Schutz</div><div class="cd">Statische Entladung beschädigt empfindliche ICs — oft unbemerkt.</div><ul><li>Erdungsarmband und ESD-Matte bei kritischen Teilen</li><li>ESD-Pinzetten verwenden</li></ul></div>
+<div class="card"><div class="ct">IPA und Flussmittel</div><div class="cd">Isopropanol ist leicht entzündlich.</div><ul><li>Fern von der heißen Spitze halten</li><li>Augenschutz, falls Flussmittel spritzt</li></ul></div>
+<div class="card"><div class="ct">Arbeitsplatz</div><div class="cd">Ordnung verhindert Unfälle.</div><ul><li>Hitzefeste Unterlage</li><li>Kabel so legen, dass nichts hängen bleibt</li></ul></div>
+</div>
+</div>
+
 <div class="legend">Richtwerte für Hobby-Elektronik. Temperaturen und Materialien je nach Hersteller, Spitze und Bauteil anpassen. Im Zweifel an einem Reststück testen.</div>
 
 <button id="tocBtn" type="button" aria-label="Auf dieser Seite" aria-expanded="false" aria-controls="tocNav" title="Auf dieser Seite">📑</button>
@@ -1069,27 +1074,55 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <script>
 /* ---------- TABS mit Deep-Linking (#hash) ---------- */
 const TABS=[
-{p:"methoden",l:"Methoden",i:"🧭"},{p:"workflow",l:"Workflow",i:"📋"},{p:"equipment",l:"Equipment",i:"🧰"},{p:"mikroskop",l:"Mikroskop",i:"🔎"},{p:"material",l:"Material",i:"🧪"},
-{p:"temp",l:"Temperaturen",i:"🌡️"},{p:"bauteile",l:"Bauteile",i:"🔩"},{p:"tht",l:"THT löten",i:"📌"},
-{p:"smd",l:"SMD löten",i:"🔬"},{p:"heissluft",l:"Heißluft",i:"💨"},{p:"heizplatte",l:"Heizplatte",i:"🔥"},
-{p:"fehler",l:"Fehler",i:"🩺"},{p:"sicherheit",l:"Sicherheit",i:"⚠️"},{p:"regeln",l:"Regeln",i:"⭐"}
+{p:"methoden",l:"Methoden",i:"🧭"},{p:"workflow",l:"Workflow",i:"📋"},
+{p:"equipment",l:"Equipment",i:"🧰"},{p:"mikroskop",l:"Mikroskop",i:"🔎"},{p:"material",l:"Material",i:"🧪"},
+{p:"tht",l:"THT löten",i:"📌"},{p:"smd",l:"SMD löten",i:"🔬"},{p:"heissluft",l:"Heißluft & Reflow",i:"💨"},{p:"temp",l:"Temperaturen",i:"🌡️"},
+{p:"bauteile",l:"Bauteile",i:"🔩"},{p:"fehler",l:"Fehler & Regeln",i:"🩺"},{p:"sicherheit",l:"Sicherheit",i:"⚠️"}
 ];
-const tabsDiv=document.getElementById("tabs");
-function activate(p,updateHash){
-  if(!TABS.some(t=>t.p===p))return;
-  document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("active",x.dataset.p===p));
-  document.querySelectorAll(".panel").forEach(x=>x.classList.toggle("active",x.dataset.p===p));
-  if(updateHash&&location.hash!=="#"+p)history.replaceState(null,"","#"+p);
+const GROUPS=[
+{g:"start",l:"Start",i:"🧭",tabs:["methoden","workflow"]},
+{g:"werkzeug",l:"Werkzeug & Material",i:"🧰",tabs:["equipment","mikroskop","material"]},
+{g:"technik",l:"Techniken",i:"🔥",tabs:["tht","smd","heissluft","temp"]},
+{g:"qualitaet",l:"Bauteile & Qualität",i:"🔩",tabs:["bauteile","fehler","sicherheit"]}
+];
+/* alte Anker weiterleiten, damit bestehende Links gültig bleiben */
+const ALIAS={heizplatte:"heissluft",regeln:"fehler"};
+const tabsDiv=document.getElementById("tabs"),subDiv=document.getElementById("subtabs");
+const groupOf=p=>GROUPS.find(G=>G.tabs.includes(p));
+function setNavH(){const n=document.querySelector(".navwrap");if(n)document.documentElement.style.setProperty("--navh",(n.offsetHeight+14)+"px");}
+function renderSub(p){
+  const G=groupOf(p);subDiv.innerHTML="";if(!G)return;
+  G.tabs.forEach(tp=>{const t=TABS.find(x=>x.p===tp);if(!t)return;
+    const b=document.createElement("button");b.textContent=t.l;b.dataset.p=tp;
+    b.classList.toggle("active",tp===p);
+    b.onclick=()=>{activate(tp,true);window.scrollTo({top:0,behavior:"smooth"})};
+    subDiv.appendChild(b);});
 }
-TABS.forEach(t=>{
+function activate(p,updateHash){
+  if(ALIAS[p])p=ALIAS[p];
+  if(!TABS.some(t=>t.p===p))return;
+  const G=groupOf(p);
+  tabsDiv.querySelectorAll("button").forEach(x=>x.classList.toggle("active",!!G&&x.dataset.g===G.g));
+  document.querySelectorAll(".panel").forEach(x=>x.classList.toggle("active",x.dataset.p===p));
+  renderSub(p);
+  try{localStorage.setItem("ltab",p)}catch(e){}
+  if(updateHash&&location.hash!=="#"+p)history.replaceState(null,"","#"+p);
+  setNavH();
+}
+GROUPS.forEach(G=>{
   const b=document.createElement("button");
-  b.innerHTML='<span class="ti">'+t.i+'</span>'+t.l;
-  b.dataset.p=t.p;
-  b.onclick=()=>{activate(t.p,true);window.scrollTo({top:0,behavior:"smooth"})};
+  b.innerHTML='<span class="ti">'+G.i+'</span>'+G.l;
+  b.dataset.g=G.g;
+  b.onclick=()=>{activate(G.tabs[0],true);window.scrollTo({top:0,behavior:"smooth"})};
   tabsDiv.appendChild(b);
 });
-window.addEventListener("hashchange",()=>{activate(location.hash.slice(1),false);window.scrollTo({top:0,behavior:"smooth"})});
-activate(TABS.some(t=>t.p===location.hash.slice(1))?location.hash.slice(1):"methoden",false);
+window.addEventListener("hashchange",()=>{const r=location.hash.slice(1);activate(ALIAS[r]||r,false);window.scrollTo({top:0,behavior:"smooth"})});
+window.addEventListener("resize",setNavH);
+let startP="methoden";
+try{const sv=localStorage.getItem("ltab");if(sv&&TABS.some(t=>t.p===sv))startP=sv}catch(e){}
+const hRaw=location.hash.slice(1),hP=ALIAS[hRaw]||hRaw;
+if(TABS.some(t=>t.p===hP))startP=hP;
+activate(startP,false);
 
 /* ---------- TEMPERATUR-TABELLE ---------- */
 const TEMP=[
