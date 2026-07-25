@@ -2250,23 +2250,30 @@ function buildSide(active){
   markActiveHeading();
 }
 /* ---- Scrollspy für die Abschnittsliste ---- */
-let spy = null;
+let spy = null, spyLock = 0, lockId = null;
+function setActiveLink(id){
+  sideNav.querySelectorAll(".ssec a").forEach(a=>a.classList.toggle("on", a.dataset.h===id));
+}
 function markActiveHeading(){
   if(spy){ spy.disconnect(); spy = null; }
   const links = [...sideNav.querySelectorAll(".ssec a")];
   if(!links.length) return;
-  const set = id => links.forEach(a=>a.classList.toggle("on", a.dataset.h===id));
-  spy = new IntersectionObserver(es=>{ es.forEach(en=>{ if(en.isIntersecting) set(en.target.id); }); },
-        {rootMargin:"-40% 0px -55% 0px", threshold:0});
+  spy = new IntersectionObserver(es=>{
+    if(Date.now() < spyLock) return;            // waehrend des Sprungs nicht mitwandern
+    es.forEach(en=>{ if(en.isIntersecting) setActiveLink(en.target.id); });
+  },{rootMargin:"-40% 0px -55% 0px", threshold:0});
   links.forEach(a=>{ const el = document.getElementById(a.dataset.h); if(el) spy.observe(el); });
-  set(links[0].dataset.h);
+  setActiveLink(Date.now() < spyLock && lockId ? lockId : links[0].dataset.h);
 }
 function jump(tab,id){
-  cur(tab);
+  const same = activeTab() === tab;
+  spyLock = Date.now() + 1000; lockId = id;
+  if(!same) cur(tab);                            // nur bei echtem Tabwechsel nach oben springen
   requestAnimationFrame(()=>{
     if(window.__openSection) window.__openSection(id);
     const el = document.getElementById(id);
     if(!el) return;
+    setActiveLink(id);
     el.scrollIntoView({behavior:"smooth", block:"start"});
     el.classList.remove("hl"); void el.offsetWidth; el.classList.add("hl");
   });
