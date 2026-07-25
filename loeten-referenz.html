@@ -452,7 +452,7 @@ h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 <div class="card"><div class="ct">Dritte Hand / PCB-Halter</div><div class="cd">Fixiert Platine und Kabel — beide Hände bleiben frei.</div></div>
 <div class="card"><div class="ct">Lupe / Mikroskop</div><div class="cd">Ab feinem SMD ist ein Mikroskop ein Gamechanger, sonst reicht eine Lupenlampe. Setup und Teile: Tab <a class="goto" href="#mikroskop">Mikroskop</a>.</div></div>
 <div class="card"><div class="ct">Messingwolle + Schwamm</div><div class="cd">Spitze zwischendurch abstreifen. Messingwolle kühlt die Spitze weniger aus als ein nasser Schwamm.</div></div>
-<div class="card"><div class="ct">Multimeter</div><div class="cd">Durchgangsprüfung auf Lötbrücken und unterbrochene Verbindungen.</div></div>
+<div class="card"><div class="ct">Multimeter</div><div class="cd">Durchgangsprüfung auf Lötbrücken und unterbrochene Verbindungen. Bedienung und Fehlersuche: <a href="elektronik-grundlagen.html#messgeraet">Elektronik 101 → Multimeter</a>.</div></div>
 <div class="card"><div class="ct">Lötrauchabsaugung <span class="b b-warn">wichtig</span></div><div class="cd">Aktivkohlefilter. Hält Flussmitteldämpfe aus dem Gesicht.</div></div>
 </div>
 <h3>Entlöten</h3>
@@ -677,6 +677,7 @@ h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 <!-- ============ BAUTEILE ============ -->
 <div class="panel" data-p="bauteile">
 <h2>Bauteile und Bauformen</h2>
+<p class="note">Diese Tabelle sortiert nach <b>Lötbarkeit</b>. Was ein Bauteil <b>tut</b> (Funktion, Kennwerte, Anwendungsbeispiele): <a href="elektronik-grundlagen.html#komponenten">Elektronik 101 → Bauteil-Datenbank</a>.</p>
 <p>Filtere nach Typ und sieh, wie schwer das Teil von Hand zu löten ist und womit.</p>
 <input class="search" id="cq" type="text" placeholder="Bauteil suchen (Name, Typ, Pitch, Werkzeug) …">
 <div class="filt" id="cfilt"></div>
@@ -704,6 +705,12 @@ h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 <tr><td><b>F</b></td><td>Sicherung (Fuse)</td></tr>
 <tr><td><b>TP</b></td><td>Testpunkt (zum Messen)</td></tr>
 <tr><td><b>BT</b> / BAT</td><td>Batterie / Akku</td></tr>
+<tr><td><b>K</b> / RY</td><td>Relais</td></tr>
+<tr><td><b>T</b> / TR</td><td>Transformator</td></tr>
+<tr><td><b>TH</b> / RT</td><td>Thermistor (NTC/PTC)</td></tr>
+<tr><td><b>M</b></td><td>Motor</td></tr>
+<tr><td><b>LS</b> / SP</td><td>Lautsprecher / Buzzer</td></tr>
+<tr><td><b>ANT</b> / E</td><td>Antenne</td></tr>
 </tbody>
 </table></div>
 <div class="note"><b>Wo steht der Wert?</b> Nicht im Kürzel — sondern (a) im <b>Schaltplan</b> neben dem Symbol, (b) in der <b>Stückliste (BOM)</b> oder (c) als <b>Aufdruck</b> auf dem Bauteil. Beispiel aus einer Stückliste: „<b>0805 331</b>" = 330-Ω-Widerstand im 0805-Gehäuse · „<b>SOT-23 J3Y</b>" = NPN-Transistor 8050 (Marking J3Y) · „<b>1206 4148</b>" = Diode 1N4148 im 1206-Gehäuse.</div>
@@ -1053,6 +1060,7 @@ h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 <!-- ============ SICHERHEIT ============ -->
 <div class="panel" data-p="sicherheit">
 <h2>Sicherheit und Gesundheit</h2>
+<p class="note">Hier geht es um <b>thermische und chemische</b> Gefahren beim Löten. Die <b>elektrischen</b> Gefahren (Spannung, Kondensatoren, 230 V) stehen in <a href="elektronik-grundlagen.html#sicherheit">Elektronik 101 → Sicherheit</a>.</p>
 <div class="grid">
 <div class="card"><div class="ct">Lötrauch <span class="b b-warn">wichtig</span></div><div class="cd">Der sichtbare Rauch ist verdampftes Flussmittel, nicht Blei. Er reizt Atemwege und kann langfristig Asthma auslösen.</div><ul><li>Absaugung mit Aktivkohle oder gut lüften</li><li>Nicht direkt über der Lötstelle atmen</li></ul></div>
 <div class="card"><div class="ct">Blei (bei bleihaltigem Lot)</div><div class="cd">Blei verdampft bei Löttemperatur praktisch nicht — die Gefahr ist die Aufnahme über Hände und Mund.</div><ul><li>Nach dem Löten Hände waschen</li><li>Am Arbeitsplatz nicht essen oder trinken</li></ul></div>

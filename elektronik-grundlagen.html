@@ -400,6 +400,7 @@ h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 <tr><td>105</td><td>10 + 5 Nullen = 1 000 000 pF</td><td>1 µF</td></tr>
 </tbody>
 </table></div>
+<p class="note">Unbeschriftete SMD-Kondensatoren, Toleranz-Buchstaben (J/K/M) und wie du gepolte Typen erkennst: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</p>
 </section>
 
 <!-- ============ TAB 2: KOMPONENTEN ============ -->
@@ -693,7 +694,7 @@ h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 <h2>Good to know: Praxis-Wissen</h2>
 <div class="card">
 <div class="rule"><span class="ico">🎨</span><div><b>Widerstands-Farbcode</b> liest man von der Seite, wo die Ringe näher am Rand sitzen. (Decoder im Tab <a href="#rechner">Rechner</a>.)</div></div>
-<div class="rule"><span class="ico">🔢</span><div><b>SMD-Beschriftung:</b> "103" heißt 10 + 3 Nullen = 10 000 Ω = 10 kΩ. Gleiches Prinzip oft bei Kondensatoren in pF.</div></div>
+<div class="rule"><span class="ico">🔢</span><div><b>SMD-Beschriftung:</b> "103" heißt 10 + 3 Nullen = 10 kΩ. Alle Code-Varianten (auch EIA-96 und Kondensatoren): <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</div></div>
 <div class="rule"><span class="ico">📐</span><div><b>E-Reihen:</b> Widerstände gibt es nur in genormten Stufen (E12: 10, 12, 15, 18, 22…). Krumme Wunschwerte gibt es selten, nächsten Normwert nehmen.</div></div>
 <div class="rule"><span class="ico">🟦</span><div><b>Transistor als Schalter:</b> kleiner Strom (Basis/Gate) schaltet großen Strom — Standard, um mit einem MCU-Pin Motor/Relais zu schalten. MOSFET (Spannung am Gate) für hohe Ströme, Bipolar (Strom in die Basis) für kleine Signale. Schaltung: Tab <a href="#schaltplan">Schaltplan</a>.</div></div>
 <div class="rule"><span class="ico">📉</span><div><b>Linearregler (7805) verheizt die Differenz</b> als Wärme: 12 V → 5 V bei 1 A = 7 W Hitze. Bei großem Abstand lieber Schaltregler (Buck) nehmen.</div></div>
@@ -963,7 +964,7 @@ h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 <div class="grid2">
 <div class="card"><h3>SMD-Grabber / IC-Hook-Klemmen</h3><p>Federklemmen mit winzigem Haken, die sich an einem einzelnen Pin oder Bauteilbein <b>festkrallen</b>. So hältst du die eine Seite fest und hast eine Hand frei fürs Antasten. Wichtigstes Zubehör für SMD.</p></div>
 <div class="card"><h3>Feine Nadel-Prüfspitzen</h3><p>Spitze, gehärtete Nadeln (oder aufsteckbare Nadeladapter). Treffen einzelne Pins, ohne den Nachbarn zu berühren. Manche haben eine Feder („Backprobe"), die sicher aufsetzt.</p></div>
-<div class="card"><h3>Lupe / Mikroskop</h3><p>Ab 0603/feinem Pitch ohne Vergrößerung kaum machbar. Ein Mikroskop zeigt dir, welchen Pin die Spitze wirklich berührt — Pflicht bei der Fehlersuche.</p></div>
+<div class="card"><h3>Lupe / Mikroskop</h3><p>Ab 0603/feinem Pitch ohne Vergrößerung kaum machbar. Ein Mikroskop zeigt dir, welchen Pin die Spitze wirklich berührt. Setup und Teile: <a href="loeten-referenz.html#mikroskop">Löten-Referenz → Mikroskop</a>.</p></div>
 <div class="card"><h3>Dritte Hand / PCB-Halter</h3><p>Hält die Platine ruhig. Beim Antasten mit einer Hand ist eine wackelnde Platine die häufigste Ursache für Abrutscher und Kurzschlüsse.</p></div>
 </div>
 
