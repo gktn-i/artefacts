@@ -80,9 +80,19 @@ p{font-size:13.5px;line-height:1.65;margin-bottom:.6rem}
 /* ============================================================
    TAB-NAVIGATION (sticky)
    ============================================================ */
-.tabs{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;z-index:20;
-  margin:0 -1.5rem 1.5rem;padding:.65rem 1.5rem;background:var(--bg);
+.navwrap{position:sticky;top:0;z-index:20;margin:0 -1.5rem 1.5rem;background:var(--bg);
   border-bottom:1px solid var(--border);box-shadow:var(--shadow-tabs)}
+.switch{display:flex;gap:5px;padding:.45rem 1.5rem 0}
+.switch a{display:inline-flex;align-items:center;gap:.4em;font-size:11.5px;font-weight:600;
+  padding:3px 10px;border-radius:999px;text-decoration:none;color:var(--faint);
+  border:1px solid transparent;transition:background .15s,color .15s}
+.switch a:hover{color:var(--text);background:var(--surface-2)}
+.switch a.on{color:var(--accent-ink);background:var(--accent-soft);border-color:var(--accent-border)}
+.tabs,.subtabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.tabs::-webkit-scrollbar,.subtabs::-webkit-scrollbar{display:none}
+.tabs{gap:6px;padding:.5rem 1.5rem .45rem}
+.subtabs{gap:14px;padding:0 1.5rem .5rem}
+.tabs button,.subtabs button{white-space:nowrap;flex:0 0 auto}
 .tabs button{display:inline-flex;align-items:center;gap:.42em;font-family:inherit;
   font-size:13px;font-weight:500;padding:6px 13px;cursor:pointer;background:transparent;
   border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);
@@ -90,6 +100,11 @@ p{font-size:13.5px;line-height:1.65;margin-bottom:.6rem}
 .tabs button .ti{font-size:14px;line-height:1;opacity:.9}
 .tabs button:hover{background:var(--surface-2);color:var(--text)}
 .tabs button.active{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-border);font-weight:600}
+.subtabs button{display:inline-flex;align-items:center;font-family:inherit;font-size:12.5px;
+  font-weight:500;padding:3px 1px 4px;cursor:pointer;background:transparent;border:none;
+  border-bottom:2px solid transparent;color:var(--muted);transition:color .15s,border-color .15s}
+.subtabs button:hover{color:var(--text)}
+.subtabs button.active{color:var(--accent-ink);border-bottom-color:var(--accent);font-weight:600}
 
 /* ============================================================
    FILTER-BUTTONS & BUTTON
@@ -240,7 +255,10 @@ svg.sy .cot{fill:var(--accent-ink);font-family:var(--sans);font-size:12px;font-w
    ============================================================ */
 @media(max-width:600px){
   body{padding:1rem 1rem 3rem}
-  .tabs{margin:0 -1rem 1.2rem;padding:.6rem 1rem}
+  .navwrap{margin:0 -1rem 1.2rem}
+  .switch{padding:.4rem 1rem 0}
+  .tabs{padding:.45rem 1rem .4rem}
+  .subtabs{padding:0 1rem .45rem}
   h1{font-size:22px}
   h2{font-size:16px}
 }
@@ -248,7 +266,7 @@ svg.sy .cot{fill:var(--accent-ink);font-family:var(--sans);font-size:12px;font-w
 /* ============================================================
    IN-PAGE TOC · „Auf dieser Seite"
    ============================================================ */
-h2[id],h3[id]{scroll-margin-top:84px}
+h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 #tocBtn{position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:50%;
   border:1px solid var(--border-strong);background:var(--surface);color:var(--text);
   box-shadow:var(--shadow-tabs);cursor:pointer;font-size:19px;line-height:1;
@@ -272,7 +290,8 @@ h2[id],h3[id]{scroll-margin-top:84px}
 @media(min-width:1600px){
   #tocBtn{display:none !important}
   #tocNav.has-items{display:block;right:auto;bottom:auto;
-    left:max(16px,calc((100vw - 1080px) / 2 - 236px));top:88px;width:224px;max-height:calc(100vh - 108px)}
+    left:max(16px,calc((100vw - 1080px) / 2 - 236px));top:calc(var(--navh,110px) + 8px);width:224px;
+    max-height:calc(100vh - var(--navh,110px) - 28px)}
 }
 @media(max-width:600px){
   #tocNav{width:min(76vw,242px)}
@@ -281,9 +300,16 @@ h2[id],h3[id]{scroll-margin-top:84px}
 </head>
 <body>
 <h1>Elektronik 101 · Hobby-Referenz</h1>
-<div class="sub">Nachschlagewerk für Feinelektronik & Bastelprojekte · Bauteile, Boards, Displays, Motoren, Messen, Sicherheit & Rechner</div>
+<div class="sub">Nachschlagewerk für Feinelektronik &amp; Bastelprojekte · Grundlagen, Bauteile, Schaltpläne, Messen, Sicherheit &amp; Rechner</div>
 
+<div class="navwrap">
+<div class="switch">
+<a class="on" href="elektronik-grundlagen.html"><span class="ti">⚡</span>Elektronik</a>
+<a href="loeten-referenz.html"><span class="ti">🔥</span>Löten</a>
+</div>
 <div class="tabs" id="tabs"></div>
+<div class="subtabs" id="subtabs"></div>
+</div>
 
 <!-- ============ TAB 1: GRUNDLAGEN ============ -->
 <section id="t-grundlagen">
@@ -374,6 +400,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <tr><td>105</td><td>10 + 5 Nullen = 1 000 000 pF</td><td>1 µF</td></tr>
 </tbody>
 </table></div>
+<p class="note">Unbeschriftete SMD-Kondensatoren, Toleranz-Buchstaben (J/K/M) und wie du gepolte Typen erkennst: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</p>
 </section>
 
 <!-- ============ TAB 2: KOMPONENTEN ============ -->
@@ -631,8 +658,8 @@ h2[id],h3[id]{scroll-margin-top:84px}
 
 </section>
 
-<!-- ============ TAB 3: REGELN & PRAXIS ============ -->
-<section id="t-regeln" class="hidden">
+<!-- ============ TAB: PRAXIS & AUFBAU ============ -->
+<section id="t-praxis" class="hidden">
 
 <h2>Goldene Regeln: immer beachten</h2>
 <div class="card">
@@ -664,23 +691,52 @@ h2[id],h3[id]{scroll-margin-top:84px}
 </ul>
 </div>
 
-<h3>Steckbrett (Breadboard) nutzen</h3>
-<div class="card">
-<ul>
-<li>Kurzform: Randschienen = Plus/Masse (durchgehend), Mittelfeld = senkrechte 5er-Gruppen, ICs über die Mittelrille.</li>
-<li>Nur für Prototypen und kleine Ströme. Innenleben, Stolperfallen und der Weg zur Lochrasterplatine: Tab <a href="#steckbrett">Steckbrett</a>.</li>
-</ul>
-</div>
-
 <h2>Good to know: Praxis-Wissen</h2>
 <div class="card">
 <div class="rule"><span class="ico">🎨</span><div><b>Widerstands-Farbcode</b> liest man von der Seite, wo die Ringe näher am Rand sitzen. (Decoder im Tab <a href="#rechner">Rechner</a>.)</div></div>
-<div class="rule"><span class="ico">🔢</span><div><b>SMD-Beschriftung:</b> "103" heißt 10 + 3 Nullen = 10 000 Ω = 10 kΩ. Gleiches Prinzip oft bei Kondensatoren in pF.</div></div>
+<div class="rule"><span class="ico">🔢</span><div><b>SMD-Beschriftung:</b> "103" heißt 10 + 3 Nullen = 10 kΩ. Alle Code-Varianten (auch EIA-96 und Kondensatoren): <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</div></div>
 <div class="rule"><span class="ico">📐</span><div><b>E-Reihen:</b> Widerstände gibt es nur in genormten Stufen (E12: 10, 12, 15, 18, 22…). Krumme Wunschwerte gibt es selten, nächsten Normwert nehmen.</div></div>
 <div class="rule"><span class="ico">🟦</span><div><b>Transistor als Schalter:</b> kleiner Strom (Basis/Gate) schaltet großen Strom — Standard, um mit einem MCU-Pin Motor/Relais zu schalten. MOSFET (Spannung am Gate) für hohe Ströme, Bipolar (Strom in die Basis) für kleine Signale. Schaltung: Tab <a href="#schaltplan">Schaltplan</a>.</div></div>
 <div class="rule"><span class="ico">📉</span><div><b>Linearregler (7805) verheizt die Differenz</b> als Wärme: 12 V → 5 V bei 1 A = 7 W Hitze. Bei großem Abstand lieber Schaltregler (Buck) nehmen.</div></div>
 <div class="rule"><span class="ico">🧮</span><div><b>Kondensator glättet, Spule filtert.</b> Großer Elko am Reglereingang/-ausgang stabilisiert die Versorgung. 100 nF Keramik neben jedem IC.</div></div>
 </div>
+
+<h2>Steckbrett (Breadboard)</h2>
+<p>Die schnellste Art, eine Schaltung aufzubauen, <b>ohne zu löten</b>. Du steckst Bauteile und Drähte einfach in die Löcher, kannst alles wieder umstecken und mehrfach verwenden. Perfekt zum Ausprobieren, bevor etwas fest verlötet wird.</p>
+
+<h2>Wie es innen verdrahtet ist</h2>
+<svg class="sy sy-mid" style="max-width:460px" viewBox="0 0 478 270" role="img" aria-label="Steckbrett von oben: waagerechte Versorgungsschienen, senkrechte 5er-Gruppen im Mittelfeld, Mittelrille mit IC darüber"><rect class="w" x="20" y="12" width="280" height="246" rx="8"/><path style="stroke:var(--rate-bad);stroke-width:1.6;fill:none" d="M40,34 H280"/><path style="stroke:#4d82c4;stroke-width:1.6;fill:none" d="M40,52 H280"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,34 H278 M46,52 H278"/><text class="lbl" x="34" y="39" text-anchor="end" style="fill:var(--rate-bad)">+</text><text class="lbl" x="34" y="57" text-anchor="end" style="fill:#4d82c4">−</text><path class="acc" style="stroke-width:3" d="M110,84 V148"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,84 H278 M46,100 H278 M46,116 H278 M46,132 H278 M46,148 H278"/><path class="w" style="stroke-width:1" d="M20,160 H300 M20,172 H300"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,184 H278 M46,200 H278 M46,216 H278 M46,232 H278 M46,248 H278"/><rect class="w" x="196" y="146" width="72" height="40" rx="3" style="fill:var(--surface)"/><path class="w" d="M196,160 a8,8 0 0 1 0,12"/><text class="lbl" x="232" y="170" text-anchor="middle">IC</text><text class="lbl" x="310" y="38">Schienen: waagerecht</text><text class="lbl" x="310" y="51">durchgehend (+/−)</text><text class="lbl" x="310" y="112">5er-Gruppe: senkrecht</text><text class="lbl" x="310" y="125">verbunden, jede Spalte</text><text class="lbl" x="310" y="138">für sich</text><text class="lbl" x="310" y="170">Mittelrille trennt</text><text class="lbl" x="310" y="183">oben und unten</text><text class="lbl" x="310" y="210">IC sitzt über der Rille</text><path class="w" style="stroke-dasharray:4 4;stroke-width:1" d="M306,205 L272,182 M306,108 L116,112"/></svg>
+<div class="grid2">
+<div class="card"><h3>Versorgungsschienen (am Rand)</h3><p>Die langen Reihen außen, meist mit rotem (+) und blauem (−) Strich markiert. Sie sind <b>waagerecht durchgehend</b> verbunden. Hier legst du Plus und Masse an, sodass du sie überall abgreifen kannst.</p></div>
+<div class="card"><h3>Kontaktfeld (in der Mitte)</h3><p>Die kurzen Reihen im Inneren sind <b>senkrecht in 5er-Gruppen</b> verbunden. Alle fünf Löcher einer Spalte hängen zusammen, aber jede Spalte ist von der nächsten getrennt.</p></div>
+<div class="card"><h3>Die Mittelrille</h3><p>Die Kerbe in der Mitte trennt die obere von der unteren Hälfte. <b>ICs steckt man genau über die Rille</b>, damit die linke und rechte Beinchenreihe nicht kurzgeschlossen werden.</p></div>
+<div class="card"><h3>Jumper-Kabel</h3><p>Zum Verbinden der Punkte. Drei Sorten: Stecker-Stecker (Board zu Board), Stecker-Buchse (zu Modulen/Pins) und Buchse-Buchse. Alle drei lohnen sich im Vorrat.</p></div>
+</div>
+
+<h2>Aufbau in der Praxis</h2>
+<div class="card"><ul>
+<li>Zuerst Plus und Masse von der Quelle auf die beiden Versorgungsschienen legen.</li>
+<li>ICs mittig über die Rille setzen, Kerbe/Punkt am Chip zeigt Pin 1.</li>
+<li>Bauteile in getrennte Spalten stecken, Verbindungen mit Jumpern ziehen.</li>
+<li>Kurze, flach liegende Drähte halten den Aufbau übersichtlich und die Fehlersuche einfach.</li>
+</ul></div>
+
+<h2>Worauf achten</h2>
+<div class="card">
+<div class="rule"><span class="ico">➗</span><div><b>Versorgungsschienen sind bei langen Boards oft in der Mitte unterbrochen.</b> Dann mit einem kurzen Draht durchbrücken, sonst hat die zweite Hälfte keinen Strom.</div></div>
+<div class="rule"><span class="ico">🔌</span><div><b>Nur für kleine Ströme.</b> Die Kontakte vertragen keine hohen Leistungen. Für Motoren oder viel Strom ungeeignet.</div></div>
+<div class="rule"><span class="ico">📻</span><div><b>Nichts für hohe Frequenzen.</b> Die Steckkontakte stören schnelle/empfindliche Signale (z. B. Funk). Für Logik und einfache Schaltungen aber top.</div></div>
+<div class="rule"><span class="ico">🪡</span><div><b>Keine dicken Drähte reinzwängen.</b> Zu dicke Beinchen leiern die Kontakte aus, danach wackelt alles. Dünne Schaltlitze (ca. 22 AWG) oder Jumper nehmen.</div></div>
+<div class="rule"><span class="ico">🔍</span><div><b>Wackelkontakte sind die häufigste Fehlerquelle.</b> Wenn etwas sporadisch nicht geht, zuerst alle Steckverbindungen nachdrücken.</div></div>
+</div>
+
+<h2>Der nächste Schritt: Lochrasterplatine</h2>
+<p>Wenn die Schaltung auf dem Steckbrett zuverlässig läuft, lötest du sie auf einer <b>Lochrasterplatine</b> dauerhaft fest. Das Rastermaß ist überall <b>2,54 mm</b>, dadurch passen fast alle bedrahteten Bauteile und Stiftleisten direkt hinein.</p>
+<div class="grid2">
+<div class="card"><h3>Punktraster</h3><p>Jedes Loch hat ein eigenes, einzelnes Lötpad. Alle Verbindungen ziehst du selbst mit Draht oder Lötbrücken. Maximale Freiheit, etwas mehr Arbeit.</p></div>
+<div class="card"><h3>Streifenraster (Stripboard)</h3><p>Ganze Reihen sind als Kupferstreifen schon verbunden. Praktisch, aber du musst Streifen dort, wo keine Verbindung sein soll, gezielt <b>auftrennen</b> (z. B. mit einem Bohrer von Hand).</p></div>
+</div>
+<p class="note">Tipp: das Steckbrett-Layout möglichst 1:1 auf die Lochrasterplatine übertragen, dann übernimmst du die schon getestete Anordnung und machst weniger Fehler.</p>
 </section>
 
 <!-- ============ TAB 4: RECHNER ============ -->
@@ -865,14 +921,36 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <h2>Fehler finden: Kurzschluss, kaputtes Bauteil & Co.</h2>
 <p>Die Schnellübersicht: was du bei welchem Verdacht misst, <b>wo genau die zwei Spitzen hinkommen</b> und was die Anzeige bedeutet. Die genauen Handgriffe stehen als Schritt-Rezepte darunter.</p>
 <p class="note" style="margin-bottom:.7rem"><b>Grundregel zum Verständnis:</b> Die <b>schwarze</b> Spitze steckt in COM und ist der <b>Bezugspunkt</b> — die legst du an Masse (GND) und lässt sie dort. Mit der <b>roten</b> Spitze tastest du den Punkt an, den du prüfen willst. Bei „je eine Spitze" (Durchgang) ist die Reihenfolge egal.</p>
+
+<h3>Piepen oder nicht? Der Merksatz</h3>
+<p>Der Durchgangsprüfer piept, wenn zwei Punkte verbunden sind. Ob das <b>gut oder schlecht</b> ist, hängt allein davon ab, ob dort eine Verbindung <b>hingehört</b>:</p>
+<div class="grid2">
+<div class="card"><h3>✓ Piep <b>erwartet</b> — hier soll es piepen</h3>
+<ul>
+<li><b>Leitung / Kabel</b> von Ende zu Ende → kein Piep = Kabelbruch</li>
+<li><b>Sicherung</b> über beide Enden → kein Piep = durchgebrannt</li>
+<li><b>Taster gedrückt</b> → kein Piep = Taster defekt</li>
+<li><b>Lötstelle</b> Bauteilbein ↔ Leiterbahn → kein Piep = kalte Stelle</li>
+<li><b>GND-Punkt</b> gegen bekannte Masse → Piep = dieselbe Masse</li>
+</ul>
+<p class="note" style="margin-bottom:0">Hier ist <b>Stille das Alarmsignal.</b></p></div>
+<div class="card"><h3>✗ Piep <b>verdächtig</b> — hier darf es nicht piepen</h3>
+<ul>
+<li><b>Zwei benachbarte IC-Pins</b> → Piep = Lötbrücke</li>
+<li><b>VCC gegen GND</b> → Piep = Kurzschluss, <b>nicht einschalten</b></li>
+<li><b>Zwei getrennte Netze</b> → Piep = ungewollte Verbindung</li>
+</ul>
+<p class="note" style="margin-bottom:0">Hier ist <b>der Ton das Alarmsignal.</b> Ausnahme: Pins, die laut Schaltung ohnehin verbunden sind (z. B. mehrere GND-Pins) — im <a href="#schaltplan">Schaltplan</a> gegenprüfen.</p></div>
+</div>
+<div class="tip" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;margin:.7rem 0"><b>Immer zuerst:</b> beide Spitzen kurz zusammenhalten — es <b>muss</b> piepen. Damit weißt du, dass Gerät, Kabel und Modus stimmen, bevor du einem „kein Piep" glaubst.</div>
 <div class="tbl-wrap"><table style="min-width:940px">
 <thead><tr><th>Verdacht</th><th>Modus</th><th>Board</th><th>Wo die zwei Spitzen hin</th><th>Anzeige</th><th>Bedeutung</th></tr></thead>
 <tbody>
 <tr><td><b>Kurzschluss auf der Versorgung</b></td><td>Ω (klein)</td><td>aus</td><td><b>Schwarz</b> an GND, <b>Rot</b> an VCC / eine Rail</td><td><b>nahe 0 Ω</b></td><td>Kurzschluss (Kondensator/IC/Lötbrücke) → <b>nicht einschalten</b>, Ursache suchen</td></tr>
 <tr><td>Keine Versorgung an einer Rail</td><td>V⎓</td><td>an</td><td><b>Schwarz</b> an GND, <b>Rot</b> an den Rail-Testpunkt</td><td>0 V statt Soll (5/3,3 V)</td><td>Regler oder Zuleitung tot → rückwärts Richtung Regler suchen</td></tr>
-<tr><td>Kabelbruch / Unterbrechung</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze an die <b>zwei Enden</b> der Leitung</td><td>kein Piep</td><td>Leitung offen / unterbrochen</td></tr>
-<tr><td>Durchgebrannte Sicherung</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze an die <b>zwei Enden</b> der Sicherung</td><td>kein Piep</td><td>durch → warum? (meist Kurzschluss dahinter)</td></tr>
-<tr><td>Lötbrücke zwischen Pins</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze auf <b>zwei benachbarte Pins</b></td><td>Piep (obwohl getrennt)</td><td>ungewollte Verbindung → unter der Lupe entfernen</td></tr>
+<tr><td>Kabelbruch / Unterbrechung</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze an die <b>zwei Enden</b> der Leitung</td><td><b>kein</b> Piep <span class="note" style="font-style:normal">(Piep wäre gut)</span></td><td>Leitung offen / unterbrochen</td></tr>
+<tr><td>Durchgebrannte Sicherung</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze an die <b>zwei Enden</b> der Sicherung</td><td><b>kein</b> Piep <span class="note" style="font-style:normal">(Piep wäre gut)</span></td><td>durch → warum? (meist Kurzschluss dahinter)</td></tr>
+<tr><td>Lötbrücke zwischen Pins</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze auf <b>zwei benachbarte Pins</b></td><td><b>Piep</b> <span class="note" style="font-style:normal">(hier darf keiner kommen)</span></td><td>ungewollte Verbindung → unter der Lupe entfernen</td></tr>
 <tr><td>Diode / LED kaputt</td><td>Diodentest ▷⊢</td><td>aus</td><td><b>Schwarz</b> an Kathode (Ring), <b>Rot</b> an Anode — dann Spitzen tauschen</td><td>beide 0 / beide OL</td><td>Kurzschluss bzw. unterbrochen (heil: einmal Wert, einmal OL)</td></tr>
 <tr><td>Bauteil allgemein defekt</td><td>Diodentest ▷⊢</td><td>aus</td><td><b>Schwarz</b> an GND, <b>Rot</b> nacheinander auf die Pins (mit gutem Board vergleichen)</td><td>stark abweichend</td><td>Verdächtiger (fast 0 = Kurzschluss im Bauteil)</td></tr>
 <tr><td>Müder Elko (alt/aufgebläht)</td><td>ESR (<a href="#lcrp1">LCR-P1</a>)</td><td>ausgebaut</td><td>Bauteil in den LCR-P1 stecken</td><td>hoher ESR</td><td>ersetzen — Kapazität kann noch fast stimmen</td></tr>
@@ -886,7 +964,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="grid2">
 <div class="card"><h3>SMD-Grabber / IC-Hook-Klemmen</h3><p>Federklemmen mit winzigem Haken, die sich an einem einzelnen Pin oder Bauteilbein <b>festkrallen</b>. So hältst du die eine Seite fest und hast eine Hand frei fürs Antasten. Wichtigstes Zubehör für SMD.</p></div>
 <div class="card"><h3>Feine Nadel-Prüfspitzen</h3><p>Spitze, gehärtete Nadeln (oder aufsteckbare Nadeladapter). Treffen einzelne Pins, ohne den Nachbarn zu berühren. Manche haben eine Feder („Backprobe"), die sicher aufsetzt.</p></div>
-<div class="card"><h3>Lupe / Mikroskop</h3><p>Ab 0603/feinem Pitch ohne Vergrößerung kaum machbar. Ein Mikroskop zeigt dir, welchen Pin die Spitze wirklich berührt — Pflicht bei der Fehlersuche.</p></div>
+<div class="card"><h3>Lupe / Mikroskop</h3><p>Ab 0603/feinem Pitch ohne Vergrößerung kaum machbar. Ein Mikroskop zeigt dir, welchen Pin die Spitze wirklich berührt. Setup und Teile: <a href="loeten-referenz.html#mikroskop">Löten-Referenz → Mikroskop</a>.</p></div>
 <div class="card"><h3>Dritte Hand / PCB-Halter</h3><p>Hält die Platine ruhig. Beim Antasten mit einer Hand ist eine wackelnde Platine die häufigste Ursache für Abrutscher und Kurzschlüsse.</p></div>
 </div>
 
@@ -957,20 +1035,13 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <li><b>Versorgung auf Kurzschluss</b> (Ω, siehe Tabelle oben). Nahe 0 Ω → erst reparieren, dann Strom.</li>
 <li><b>Strom mit Limit einspeisen.</b> Labornetzteil auf die Board-Spannung, Strombegrenzung niedrig. Zieht es sofort das volle Limit → irgendwo Kurzschluss. Jetzt <b>Hotspot suchen</b>: mit dem Finger fühlen, welches Bauteil warm wird — oder eine kleine <b>USB-Wärmebildkamera</b> (fürs Handy) draufhalten, die zeigt die heiße Stelle sofort.</li>
 <li><b>Rails der Reihe nach</b> (V⎓, siehe Tabelle). Kommt am Regler-Eingang Spannung an, aber nicht am Ausgang → Regler oder seine Last defekt. 5 V → 3,3 V → 1,8 V … durchgehen.</li>
-<li><b>Takt &amp; Reset am Mikrocontroller.</b> Versorgung da? Reset-Pin auf HIGH? Takt vorhanden? (Takt sicher nur mit Oszi/Logic Analyzer — siehe unten.)</li>
+<li><b>Takt &amp; Reset am Mikrocontroller.</b> Versorgung da? Reset-Pin auf HIGH? Takt vorhanden? (Takt sicher nur mit <a href="#oszilloskop">Oszilloskop</a> oder Logic Analyzer.)</li>
 </ol></div>
 
-<h3>Grenzen des Multimeters — wann Oszi oder Logic Analyzer?</h3>
+<h3>Grenzen des Multimeters</h3>
 <div class="card">
-<p>Ein Multimeter zeigt nur <b>langsame, gemittelte</b> Werte. Bei allem, was sich schnell ändert, brauchst du anderes Werkzeug:</p>
-<ul>
-<li><b>PWM:</b> das Multimeter zeigt nur den Durchschnitt (halbe Spannung bei 50 %), nicht Frequenz oder Puls-Breite. Der <b>Hz-/%-Modus</b> hilft grob, sauber zeigt es nur ein Oszilloskop.</li>
-<li><b>I²C / SPI / UART:</b> im Ruhezustand kannst du den Pegel prüfen (I²C-Leitungen liegen dank Pull-up auf HIGH). Die eigentlichen Daten sieht nur ein <b>Logic Analyzer</b> (günstig, ideal für digitale Busse) oder ein Oszilloskop.</li>
-<li><b>Quarz / Takt:</b> ob er schwingt, verrät zuverlässig nur das Oszilloskop — Antasten kann den empfindlichen Oszillator sogar stören.</li>
-<li><b>Sleep-Strom (µA):</b> Mikrocontroller im Tiefschlaf ziehen Mikroampere. Das misst ein Standard-Multimeter kaum sauber — dafür gibt es spezielle Strom-Messadapter (z. B. „Power Profiler").</li>
-<li><b>Hotspots / Kurzschluss orten:</b> Eine <b>Wärmebildkamera</b> (auch günstige USB-Module fürs Handy) findet das heiß werdende Bauteil in Sekunden — ergänzt die Messung, ersetzt sie nicht.</li>
-</ul>
-<p style="margin-bottom:0"><b>Faustregel:</b> steht ein Wert still → Multimeter reicht. Ändert er sich schnell oder ist es ein Datensignal → Logic Analyzer (digital) oder Oszilloskop (analog & Timing).</p>
+<p>Ein Multimeter zeigt nur <b>langsame, gemittelte</b> Werte. Es versagt bei: <b>PWM</b> (zeigt nur den Durchschnitt), <b>I²C/SPI/UART-Daten</b>, <b>Quarz/Takt</b> und <b>Sleep-Strom im µA-Bereich</b>.</p>
+<p style="margin-bottom:0"><b>Faustregel:</b> steht ein Wert still → Multimeter. Datensignal auf einem Bus → Logic Analyzer. Geht es um die Signalform → <a href="#oszilloskop">Oszilloskop</a>. Für heiße Stellen: eine <b>Wärmebildkamera</b> findet das kurzschließende Bauteil in Sekunden.</p>
 </div>
 
 <h2>Reparatur: „Gerät geht nicht an" — Fehler finden</h2>
@@ -1005,10 +1076,73 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="rule"><span class="ico">🔌</span><div><b>Rote Leitung nach Strommessung zurückstecken!</b> Der häufigste Fehler: Leitung bleibt in der A-Buchse, dann misst man Spannung → Kurzschluss. Nach jeder Strommessung Rot zurück in VΩ.</div></div>
 <div class="rule"><span class="ico">🧰</span><div><b>Erst Funktion wählen, dann anlegen.</b> Nie das Drehrad drehen, während die Spitzen unter Spannung stehen.</div></div>
 <div class="rule"><span class="ico">🚫</span><div><b>Widerstand/Durchgang nur stromlos.</b> An einer Schaltung unter Spannung gemessen → falsche Werte und evtl. Schaden am Gerät.</div></div>
-<div class="rule"><span class="ico">⚡</span><div><b>Netzspannung (230 V) ist kein Anfänger-Spielfeld.</b> Nur mit Gerät der passenden Schutzklasse (CAT II / III), einwandfreien Leitungen und Erfahrung. Im Zweifel Finger weg.</div></div>
-<div class="rule"><span class="ico">🤲</span><div><b>Eine-Hand-Regel</b> bei höheren Spannungen: nur eine Hand benutzen, damit kein Strom über die Brust durch den Körper fließen kann.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Netzspannung (230 V) ist kein Anfänger-Spielfeld.</b> Passende Messkategorie (CAT II/III), einwandfreie Leitungen, Eine-Hand-Regel — alle Regeln dazu im Tab <a href="#sicherheit">Sicherheit</a>.</div></div>
 <div class="rule"><span class="ico">⏳</span><div><b>Bei Auto-Range Geduld.</b> Den Wert eine Sekunde einpendeln lassen, bevor du abliest.</div></div>
 </div>
+</section>
+
+<!-- ============ TAB: OSZILLOSKOP ============ -->
+<section id="t-oszilloskop" class="hidden">
+
+<h2>Wozu ein Oszilloskop?</h2>
+<p>Das Multimeter zeigt dir <b>eine Zahl</b> — den Mittelwert. Das Oszilloskop zeigt dir den <b>zeitlichen Verlauf</b> als Kurve: Form, Frequenz, Störungen, Timing. Alles, was sich schnell ändert, sieht man erst hier.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Werkzeug</th><th>Zeigt</th><th>Nimm es für</th></tr></thead>
+<tbody>
+<tr><td><b>Multimeter</b></td><td>einen gemittelten Zahlenwert</td><td>Spannung, Strom, Widerstand, Durchgang — alles, was stillsteht</td></tr>
+<tr><td><b>Logic Analyzer</b></td><td>viele digitale Leitungen als 0/1 über der Zeit, dekodiert</td><td>I²C, SPI, UART: <b>was</b> die Bits sagen. Günstig (ab ~15 €)</td></tr>
+<tr><td><b>Oszilloskop</b></td><td>den echten Spannungsverlauf als Kurve</td><td>Signalform, Störungen, Ripple, Flanken, Timing — <b>wie</b> das Signal aussieht</td></tr>
+</tbody>
+</table></div>
+<p class="note">Faustregel: Steht der Wert still → Multimeter. Sind es Daten auf einem Bus → Logic Analyzer. Geht es um die <b>Form</b> oder um Analoges → Oszilloskop.</p>
+
+<h2>Das Bild verstehen: Raster, Zeit, Spannung</h2>
+<p>Der Schirm ist ein Raster aus Kästchen („Divisions"). Zwei Knöpfe legen fest, was ein Kästchen bedeutet:</p>
+<svg class="sy sy-mid" style="max-width:430px" viewBox="-46 0 486 250" role="img" aria-label="Oszilloskop-Schirm mit Raster, Rechtecksignal, Triggerlinie und Beschriftung der Achsen"><rect class="w" x="30" y="14" width="336" height="196" rx="4"/><g style="stroke:var(--border);stroke-width:1;fill:none"><path d="M72,14 V210 M114,14 V210 M156,14 V210 M198,14 V210 M240,14 V210 M282,14 V210 M324,14 V210"/><path d="M30,42 H366 M30,70 H366 M30,98 H366 M30,126 H366 M30,154 H366 M30,182 H366"/></g><path class="acc" style="stroke-width:2.4" d="M30,168 H72 V70 H156 V168 H240 V70 H324 V168 H366"/><path style="stroke:var(--rate-bad);stroke-width:1.4;stroke-dasharray:5 4;fill:none" d="M30,112 H366"/><text class="lbl" x="372" y="116" style="fill:var(--rate-bad)">Trigger</text><path style="stroke:var(--rate-bad);stroke-width:1.4;fill:none" d="M366,112 l-7,-5 M366,112 l-7,5"/><text class="lbl" x="198" y="234" text-anchor="middle">Zeit → &nbsp;·&nbsp; ein Kästchen = Zeitbasis (s/div)</text><text class="lbl" x="22" y="60" text-anchor="end">Spannung</text><text class="lbl" x="22" y="74" text-anchor="end">↑ V/div</text></svg>
+<div class="card">
+<div class="rule"><span class="ico">↔️</span><div><b>Zeitbasis (s/div):</b> wie viel Zeit ein Kästchen waagerecht bedeutet. Zu schnell = nur ein Strich, zu langsam = ein Brei. Richtig ist, wenn <b>2–5 Perioden</b> auf dem Schirm stehen.</div></div>
+<div class="rule"><span class="ico">↕️</span><div><b>Vertikal (V/div):</b> wie viel Spannung ein Kästchen senkrecht bedeutet. Richtig ist, wenn das Signal <b>gut die halbe bis ganze Schirmhöhe</b> füllt — dann nutzt du die Auflösung aus.</div></div>
+<div class="rule"><span class="ico">🎯</span><div><b>Trigger:</b> der wichtigste Knopf. Er sagt „zeichne immer dann, wenn das Signal diesen <b>Pegel</b> in dieser <b>Flanke</b> (steigend/fallend) kreuzt". <b>Ohne Trigger kein stehendes Bild</b> — die Kurve flackert dann nur durchs Bild.</div></div>
+<div class="rule"><span class="ico">🔗</span><div><b>Kopplung DC / AC:</b> <b>DC</b> zeigt alles (Normalfall). <b>AC</b> blendet den Gleichanteil aus — genau richtig, um z. B. 50 mV Ripple auf einer 12-V-Leitung sichtbar zu machen.</div></div>
+</div>
+<p class="note">Erste Hilfe, wenn nichts zu sehen ist: <b>Auto-Set</b> drücken. Danach von Hand nachjustieren — Auto-Set trifft Zeitbasis und Trigger meist grob, aber selten optimal.</p>
+
+<h2>Der Tastkopf: 1× oder 10×?</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Stellung</th><th>Was passiert</th><th>Wann</th></tr></thead>
+<tbody>
+<tr><td><b>10×</b> (Standard)</td><td>teilt das Signal durch 10, belastet die Schaltung kaum (ca. 10 MΩ), volle Bandbreite</td><td><b>Der Normalfall</b> — hier lässt du ihn</td></tr>
+<tr><td>1×</td><td>leitet direkt durch (1 MΩ), aber stark reduzierte Bandbreite und mehr Rauschen</td><td>nur für sehr kleine, langsame Signale</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Am Gerät dieselbe Stellung einstellen!</b> Steht der Tastkopf auf 10× und das Oszi auf 1×, zeigt es <b>ein Zehntel</b> der echten Spannung an — aus 5 V werden angezeigte 0,5 V. Der häufigste Anfängerfehler.</div>
+<div class="card">
+<div class="rule"><span class="ico">🔧</span><div><b>Tastkopf abgleichen (einmal pro Gerät):</b> Spitze an den Kalibrier-Ausgang des Oszis (meist 1 kHz Rechteck). Mit dem kleinen Schräubchen am Tastkopf drehen, bis die Rechteck-Ecken <b>scharf und gerade</b> sind — nicht verrundet und nicht überschwingend.</div></div>
+<div class="rule"><span class="ico">📏</span><div><b>Masse-Krokodil so kurz wie möglich.</b> Lange Masseleitungen erzeugen Klingeln und Überschwingen im Bild, das gar nicht in der Schaltung ist. Bei schnellen Signalen die Federspitze statt des Kabels nutzen.</div></div>
+</div>
+
+<div class="danger-box"><p style="margin:0"><b>⚠️ Die Masse-Klemme ist die Gefahrenstelle.</b> Sie liegt intern auf <b>Schutzerde</b>. Klemmst du sie an einen Punkt, der nicht auf Erdpotenzial liegt (z. B. irgendwo in einem netzbetriebenen Gerät ohne Trenntrafo), erzeugst du einen <b>Kurzschluss über den Schutzleiter</b> — Funken, zerstörtes Oszi, Lebensgefahr. Regel: <b>Nur an batterie- oder netzteilgespeisten Kleinspannungs-Schaltungen messen.</b> Für alles am Netz braucht es einen Trenntrafo oder einen Differenztastkopf. Siehe Tab <a href="#sicherheit">Sicherheit</a>.</p></div>
+
+<h2>Worauf du beim Kauf achtest</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Kennwert</th><th>Faustregel</th><th>Fürs Hobby</th></tr></thead>
+<tbody>
+<tr><td><b>Bandbreite</b></td><td>mindestens <b>5× die höchste Signalfrequenz</b> (sonst werden Rechteck-Flanken rund)</td><td><b>100 MHz</b> deckt praktisch alles ab</td></tr>
+<tr><td><b>Abtastrate</b></td><td>ca. <b>5–10× die Bandbreite</b>; theoretisches Minimum wäre 2× (Nyquist), das reicht in der Praxis nicht</td><td>1 GSa/s</td></tr>
+<tr><td><b>Kanäle</b></td><td>2 = Signal + Referenz vergleichen, 4 = Bus-Leitungen zusammen ansehen</td><td>2 reichen, 4 sind komfortabel</td></tr>
+<tr><td><b>Speichertiefe</b></td><td>je mehr, desto länger kannst du bei feiner Zeitauflösung aufzeichnen</td><td>ab ~10 Mpts angenehm</td></tr>
+</tbody>
+</table></div>
+<p class="note">Gängige Einsteigergeräte dieser Klasse: Rigol DHO800/DHO900, Siglent SDS800X HD, Owon. Viele haben Bus-Dekodierung (I²C/SPI/UART) an Bord und ersetzen dann teilweise den Logic Analyzer.</p>
+
+<h2>Typische Messungen im Hobby</h2>
+<div class="grid2">
+<div class="card"><h3>PWM prüfen</h3><p>Tastkopf an den Ausgangspin, Masse an GND. Ablesen: <b>Frequenz</b> und <b>Tastgrad</b> (wie breit der High-Anteil im Verhältnis zur Periode ist). Das Multimeter zeigt hier nur den nutzlosen Mittelwert.</p></div>
+<div class="card"><h3>Schwingt der Quarz?</h3><p>Mit <b>10×</b>-Tastkopf an einen der beiden XTAL-Pins. Sinusähnliche Schwingung = läuft. Wichtig: Antasten kann den empfindlichen Oszillator stören oder stoppen — nur kurz prüfen.</p></div>
+<div class="card"><h3>Netzteil-Ripple messen</h3><p>Kopplung auf <b>AC</b>, V/div klein (z. B. 20 mV). Jetzt siehst du die Restwelligkeit auf der geglätteten Gleichspannung. Viel Ripple = müder Elko oder überlasteter Regler.</p></div>
+<div class="card"><h3>Taster entprellen</h3><p>Beim Drücken siehst du das mechanische <b>Prellen</b>: mehrere schnelle Flanken statt einer. Genau der Grund, warum Software oder ein RC-Glied entprellen muss.</p></div>
+</div>
+
 </section>
 
 <!-- ============ TAB: FNIRSI LCR-P1 ============ -->
@@ -1177,46 +1311,6 @@ h2[id],h3[id]{scroll-margin-top:84px}
 
 </section>
 
-<!-- ============ TAB: STECKBRETT ============ -->
-<section id="t-steckbrett" class="hidden">
-
-<h2>Steckbrett (Breadboard)</h2>
-<p>Die schnellste Art, eine Schaltung aufzubauen, <b>ohne zu löten</b>. Du steckst Bauteile und Drähte einfach in die Löcher, kannst alles wieder umstecken und mehrfach verwenden. Perfekt zum Ausprobieren, bevor etwas fest verlötet wird.</p>
-
-<h2>Wie es innen verdrahtet ist</h2>
-<svg class="sy sy-mid" style="max-width:460px" viewBox="0 0 478 270" role="img" aria-label="Steckbrett von oben: waagerechte Versorgungsschienen, senkrechte 5er-Gruppen im Mittelfeld, Mittelrille mit IC darüber"><rect class="w" x="20" y="12" width="280" height="246" rx="8"/><path style="stroke:var(--rate-bad);stroke-width:1.6;fill:none" d="M40,34 H280"/><path style="stroke:#4d82c4;stroke-width:1.6;fill:none" d="M40,52 H280"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,34 H278 M46,52 H278"/><text class="lbl" x="34" y="39" text-anchor="end" style="fill:var(--rate-bad)">+</text><text class="lbl" x="34" y="57" text-anchor="end" style="fill:#4d82c4">−</text><path class="acc" style="stroke-width:3" d="M110,84 V148"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,84 H278 M46,100 H278 M46,116 H278 M46,132 H278 M46,148 H278"/><path class="w" style="stroke-width:1" d="M20,160 H300 M20,172 H300"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,184 H278 M46,200 H278 M46,216 H278 M46,232 H278 M46,248 H278"/><rect class="w" x="196" y="146" width="72" height="40" rx="3" style="fill:var(--surface)"/><path class="w" d="M196,160 a8,8 0 0 1 0,12"/><text class="lbl" x="232" y="170" text-anchor="middle">IC</text><text class="lbl" x="310" y="38">Schienen: waagerecht</text><text class="lbl" x="310" y="51">durchgehend (+/−)</text><text class="lbl" x="310" y="112">5er-Gruppe: senkrecht</text><text class="lbl" x="310" y="125">verbunden, jede Spalte</text><text class="lbl" x="310" y="138">für sich</text><text class="lbl" x="310" y="170">Mittelrille trennt</text><text class="lbl" x="310" y="183">oben und unten</text><text class="lbl" x="310" y="210">IC sitzt über der Rille</text><path class="w" style="stroke-dasharray:4 4;stroke-width:1" d="M306,205 L272,182 M306,108 L116,112"/></svg>
-<div class="grid2">
-<div class="card"><h3>Versorgungsschienen (am Rand)</h3><p>Die langen Reihen außen, meist mit rotem (+) und blauem (−) Strich markiert. Sie sind <b>waagerecht durchgehend</b> verbunden. Hier legst du Plus und Masse an, sodass du sie überall abgreifen kannst.</p></div>
-<div class="card"><h3>Kontaktfeld (in der Mitte)</h3><p>Die kurzen Reihen im Inneren sind <b>senkrecht in 5er-Gruppen</b> verbunden. Alle fünf Löcher einer Spalte hängen zusammen, aber jede Spalte ist von der nächsten getrennt.</p></div>
-<div class="card"><h3>Die Mittelrille</h3><p>Die Kerbe in der Mitte trennt die obere von der unteren Hälfte. <b>ICs steckt man genau über die Rille</b>, damit die linke und rechte Beinchenreihe nicht kurzgeschlossen werden.</p></div>
-<div class="card"><h3>Jumper-Kabel</h3><p>Zum Verbinden der Punkte. Drei Sorten: Stecker-Stecker (Board zu Board), Stecker-Buchse (zu Modulen/Pins) und Buchse-Buchse. Alle drei lohnen sich im Vorrat.</p></div>
-</div>
-
-<h2>Aufbau in der Praxis</h2>
-<div class="card"><ul>
-<li>Zuerst Plus und Masse von der Quelle auf die beiden Versorgungsschienen legen.</li>
-<li>ICs mittig über die Rille setzen, Kerbe/Punkt am Chip zeigt Pin 1.</li>
-<li>Bauteile in getrennte Spalten stecken, Verbindungen mit Jumpern ziehen.</li>
-<li>Kurze, flach liegende Drähte halten den Aufbau übersichtlich und die Fehlersuche einfach.</li>
-</ul></div>
-
-<h2>Worauf achten</h2>
-<div class="card">
-<div class="rule"><span class="ico">➗</span><div><b>Versorgungsschienen sind bei langen Boards oft in der Mitte unterbrochen.</b> Dann mit einem kurzen Draht durchbrücken, sonst hat die zweite Hälfte keinen Strom.</div></div>
-<div class="rule"><span class="ico">🔌</span><div><b>Nur für kleine Ströme.</b> Die Kontakte vertragen keine hohen Leistungen. Für Motoren oder viel Strom ungeeignet.</div></div>
-<div class="rule"><span class="ico">📻</span><div><b>Nichts für hohe Frequenzen.</b> Die Steckkontakte stören schnelle/empfindliche Signale (z. B. Funk). Für Logik und einfache Schaltungen aber top.</div></div>
-<div class="rule"><span class="ico">🪡</span><div><b>Keine dicken Drähte reinzwängen.</b> Zu dicke Beinchen leiern die Kontakte aus, danach wackelt alles. Dünne Schaltlitze (ca. 22 AWG) oder Jumper nehmen.</div></div>
-<div class="rule"><span class="ico">🔍</span><div><b>Wackelkontakte sind die häufigste Fehlerquelle.</b> Wenn etwas sporadisch nicht geht, zuerst alle Steckverbindungen nachdrücken.</div></div>
-</div>
-
-<h2>Der nächste Schritt: Lochrasterplatine</h2>
-<p>Wenn die Schaltung auf dem Steckbrett zuverlässig läuft, lötest du sie auf einer <b>Lochrasterplatine</b> dauerhaft fest. Das Rastermaß ist überall <b>2,54 mm</b>, dadurch passen fast alle bedrahteten Bauteile und Stiftleisten direkt hinein.</p>
-<div class="grid2">
-<div class="card"><h3>Punktraster</h3><p>Jedes Loch hat ein eigenes, einzelnes Lötpad. Alle Verbindungen ziehst du selbst mit Draht oder Lötbrücken. Maximale Freiheit, etwas mehr Arbeit.</p></div>
-<div class="card"><h3>Streifenraster (Stripboard)</h3><p>Ganze Reihen sind als Kupferstreifen schon verbunden. Praktisch, aber du musst Streifen dort, wo keine Verbindung sein soll, gezielt <b>auftrennen</b> (z. B. mit einem Bohrer von Hand).</p></div>
-</div>
-<p class="note">Tipp: das Steckbrett-Layout möglichst 1:1 auf die Lochrasterplatine übertragen, dann übernimmst du die schon getestete Anordnung und machst weniger Fehler.</p>
-</section>
 
 <!-- ============ TAB: SICHERHEIT ============ -->
 <section id="t-sicherheit" class="hidden">
@@ -1225,68 +1319,65 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="danger-box">
 <p style="margin:0"><b>Nicht die Spannung tötet, sondern der Strom durch den Körper.</b> Die Spannung ist nur der Druck, der diesen Strom treibt. Schon weniger als ein Zehntel Ampere durch den Brustkorb kann tödlich sein. Deshalb ist die entscheidende Frage immer: <b>wie viel Strom kann durch mich fließen?</b></p>
 </div>
-<p>Gute Nachricht für dich: Fast alle Hobby-Spannungen (3,3 V, 5 V, 12 V, 24 V) sind für den Körper <b>ungefährlich zu berühren</b>, solange die Haut trocken ist. Die echten Gefahren im Hobby sind eher <b>Brände, Verbrennungen und explodierende Akkus</b> als der Stromschlag. Trotzdem solltest du die Grenzen kennen.</p>
+<p>Für die Praxis gibt es <b>zwei getrennte Welten</b> — mit völlig unterschiedlichen Regeln. Verwechsle sie nie:</p>
+<div class="grid2">
+<div class="card"><h3>🔋 Kleinspannung — dein Alltag</h3><p>Batterie, USB, Steckernetzteil, Labornetzteil: <b>3,3 V bis 24 V</b>. Berühren ist bei trockener Haut ungefährlich. Die echten Risiken heißen hier <b>Brand, Verbrennung, explodierender Akku</b> — nicht Stromschlag.</p></div>
+<div class="card"><h3>⚡ Netzspannung — eigene Liga</h3><p>Alles ab der Steckdose: <b>230 V</b>. Hier reicht ein Fehler für einen tödlichen Unfall. Andere Regeln, andere Schutzausrüstung, andere Erfahrung nötig. Ohne Vorwissen: Finger weg.</p></div>
+</div>
 
-<h2>Spannung und der Mensch: wo wird es gefährlich?</h2>
+<h2>Kleinspannung (bis 50 V): Feinelektronik</h2>
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th>Spannung</th><th>Einstufung</th><th>Was bei Berührung passiert</th></tr></thead>
 <tbody>
 <tr><td>3,3 / 5 / 12 V</td><td><span class="lvl lvl-ok">harmlos</span></td><td>Spürst du normalerweise gar nicht. Kein Risiko für den Körper bei trockener Haut.</td></tr>
 <tr><td>24 / 48 V</td><td><span class="lvl lvl-ok">meist harmlos</span></td><td>Trocken kein Problem. Bei nasser Haut langsam spürbar.</td></tr>
-<tr><td>bis 50 V Wechsel / 120 V Gleich</td><td><span class="lvl lvl-warn">Schutzgrenze</span></td><td>Offizielle Grenze für "Schutzkleinspannung". Darunter gilt Berühren trockener Haut als sicher. Das ist die Linie, ab der man vorsichtig wird.</td></tr>
+<tr><td>bis 50 V Wechsel / 120 V Gleich</td><td><span class="lvl lvl-warn">Schutzgrenze</span></td><td>Offizielle Grenze für „Schutzkleinspannung". Darunter gilt Berühren trockener Haut als sicher. Das ist die Linie, ab der man vorsichtig wird.</td></tr>
 <tr><td>ab ~50 V Wechsel</td><td><span class="lvl lvl-bad">gefährlich</span></td><td>Kann genug Strom durch den Körper treiben, um zu schaden. Ab hier nicht mehr sorglos anfassen.</td></tr>
-<tr><td>230 V (Steckdose)</td><td><span class="lvl lvl-crit">lebensgefährlich</span></td><td>Kann Herzkammerflimmern und Tod auslösen. Nur mit Erfahrung, FI-Schutzschalter und Schutzklasse arbeiten.</td></tr>
-</tbody>
-</table></div>
-<p class="note">Wechselspannung (wie aus der Steckdose, 50 Hz) ist bei gleichem Wert gefährlicher als Gleichspannung, weil sie das Herz leichter aus dem Takt bringt.</p>
-
-<h2>Strom durch den Körper: was passiert ab wie viel?</h2>
-<p class="note">Faustwerte für Wechselstrom auf dem Weg Hand zu Hand. Individuell verschieden, also als Größenordnung verstehen.</p>
-<div class="tbl-wrap"><table style="min-width:640px">
-<thead><tr><th>Strom</th><th>Stufe</th><th>Wirkung auf den Körper</th></tr></thead>
-<tbody>
-<tr><td>ab ~0,5 mA</td><td><span class="lvl lvl-ok">Wahrnehmung</span></td><td>Gerade als Kribbeln spürbar (Normwert nach IEC 0,5 mA).</td></tr>
-<tr><td>5 bis 10 mA</td><td><span class="lvl lvl-warn">schmerzhaft</span></td><td>Deutlich unangenehm, Muskeln zucken.</td></tr>
-<tr><td>ca. 6 bis 16 mA</td><td><span class="lvl lvl-bad">Loslass-Grenze</span></td><td>Die Muskeln verkrampfen so, dass man den Leiter <b>nicht mehr loslassen kann</b> — bei empfindlicheren Personen (Frauen, Kinder) schon am unteren Ende. Besonders tückisch.</td></tr>
-<tr><td>ab ~30 mA</td><td><span class="lvl lvl-bad">Atemnot</span></td><td>Atemmuskeln verkrampfen. Genau hier schaltet ein FI-Schutzschalter ab.</td></tr>
-<tr><td>ab ~50 mA</td><td><span class="lvl lvl-crit">Herzgefahr</span></td><td>Herzkammerflimmern wird wahrscheinlich, das ist lebensbedrohlich.</td></tr>
-<tr><td>über ~100 mA</td><td><span class="lvl lvl-crit">tödlich</span></td><td>Durchs Herz fast sicher tödlich. Dazu schwere Verbrennungen.</td></tr>
 </tbody>
 </table></div>
 
-<h2>Warum nasse Haut alles verändert</h2>
-<div class="card">
-<p>Dein Körper bremst den Strom über seinen <b>Widerstand</b>. Der hängt fast nur von der Haut ab:</p>
+<h3>Die Regeln für Kleinspannung</h3>
+<div class="grid2">
+<div class="card"><h3>✓ Immer</h3>
 <ul>
-<li><b>Trockene Haut:</b> sehr hoher Widerstand (grob 50 bis 100 kΩ). Bei 50 V fließt daher nur etwa 0,5 bis 1 mA, kaum spürbar.</li>
-<li><b>Nasse oder schwitzige Haut:</b> der Widerstand bricht auf wenige tausend Ω ein. Dieselben 50 V treiben dann plötzlich ein Vielfaches an Strom durch dich, bis in den gefährlichen Bereich.</li>
-</ul>
-<p style="margin-bottom:0">Darum: <b>nie mit feuchten Händen, nie im Nassen, nie schwitzend an höhere Spannungen.</b> Dieselbe Spannung, die trocken harmlos ist, kann nass gefährlich werden.</p>
+<li><b>Strombegrenzung setzen,</b> bevor du eine neue Schaltung einschaltest (<a href="#netzteil">Labornetzteil</a>) — deckelt jeden Kurzschluss.</li>
+<li><b>Polarität prüfen,</b> bevor Strom fließt: Elko, LED, Diode, Akku, Modul.</li>
+<li><b>Große Elkos entladen,</b> bevor du sie anfasst oder auslötest (Anleitung unten).</li>
+<li><b>Ringe, Armband, Kette ablegen</b> — Metall an einer starken Quelle verschweißt und verbrennt.</li>
+<li><b>Schutzbrille</b> bei Akkus, Elkos und allem, was platzen kann.</li>
+<li><b>Lüften und absaugen</b> beim Löten — Flussmitteldampf gehört nicht in die Lunge.</li>
+</ul></div>
+<div class="card"><h3>✗ Niemals</h3>
+<ul>
+<li><b>Kondensator mit dem Schraubendreher kurzschließen</b> — Funkenschlag, spritzendes Metall. Immer über einen Widerstand.</li>
+<li><b>LiPo/Li-Ion kurzschließen, quetschen oder anstechen</b> — Brand bis Explosion.</li>
+<li><b>Akkus unbeaufsichtigt laden,</b> schon gar nicht über Nacht oder auf Brennbarem.</li>
+<li><b>Heiße Bauteile anfassen,</b> um „zu fühlen, ob sie warm sind" — erst abschalten, dann kurz antippen.</li>
+<li><b>Lötkolben ablegen</b> außerhalb des Halters (≈350 °C, sofortige Verbrennung).</li>
+<li><b>Weiterarbeiten, wenn etwas heiß wird oder riecht</b> — sofort abschalten, Ursache suchen.</li>
+</ul></div>
 </div>
 
-<h2>Versteckte Gefahren trotz niedriger Spannung</h2>
+<h3>Versteckte Gefahren trotz niedriger Spannung</h3>
 <div class="card">
-<div class="rule"><span class="ico">⚡</span><div><b>Geladene Kondensatoren beißen auch nach dem Ausschalten.</b> Große Elkos in Netzteilen, Foto-Blitze und vor allem der Kondensator einer <b>Mikrowelle</b> speichern gefährliche Energie, teils tödlich. Vor dem Anfassen über einen Widerstand entladen — Schritt-für-Schritt-Anleitung weiter unten.</div></div>
-<div class="rule"><span class="ico">🔥</span><div><b>Lithium-Akku-Kurzschluss</b> setzt schlagartig sehr viel Strom frei: Hitze, Brand, im schlimmsten Fall Explosion. Plus und Minus einer LiPo-Zelle nie direkt verbinden, nie mechanisch beschädigen.</div></div>
-<div class="rule"><span class="ico">🪙</span><div><b>Kurzschluss an einer starken Quelle</b> (Akku, Labornetzteil ohne Limit): dünnes Metall kann glühen oder verschweißen. Verbrennungsgefahr, schmelzende Werkzeuge. Ringe und Armbänder ablegen.</div></div>
-<div class="rule"><span class="ico">🌡️</span><div><b>Lötkolben ~350 °C, Heißluft noch heißer.</b> Sofortige Verbrennung. Abgelegt immer in den Halter, Kabel nie über die Spitze.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Geladene Kondensatoren beißen auch nach dem Ausschalten.</b> Große Elkos in Netzteilen, Foto-Blitze und vor allem der Kondensator einer <b>Mikrowelle</b> speichern gefährliche Energie, teils tödlich. Vor dem Anfassen über einen Widerstand entladen — Anleitung direkt darunter.</div></div>
+<div class="rule"><span class="ico">🔥</span><div><b>Lithium-Akku-Kurzschluss</b> setzt schlagartig sehr viel Strom frei: Hitze, Brand, im schlimmsten Fall Explosion.</div></div>
+<div class="rule"><span class="ico">🪙</span><div><b>Kurzschluss an einer starken Quelle</b> (Akku, Labornetzteil ohne Limit): dünnes Metall kann glühen oder verschweißen. Verbrennungsgefahr, schmelzende Werkzeuge.</div></div>
+<div class="rule"><span class="ico">🌡️</span><div><b>Lötkolben ~350 °C, Heißluft noch heißer.</b> Sofortige Verbrennung. Kabel nie über die Spitze führen.</div></div>
 </div>
 
-<h2>Kondensator sicher entladen: Schritt für Schritt</h2>
+<h3>Kondensator sicher entladen: Schritt für Schritt</h3>
 <p>Kondensatoren halten ihre Ladung auch nach dem Ausschalten — große Elkos teils stundenlang. Vor dem Anfassen, Messen (Kapazität) oder Auslöten deshalb kontrolliert entladen:</p>
 <div class="card">
 <div class="rule"><span class="ico">1️⃣</span><div><b>Einschätzen.</b> Kleine Kondensatoren in 3,3/5-V-Schaltungen (nF bis wenige µF) sind harmlos. Vorsicht ab großen Elkos (ab ~100 µF) oder höheren Spannungen (ab ~25–50 V). Netzteil-Primärseite, Foto-Blitze und Mikrowellen-Kondensatoren sind kein Anfänger-Terrain.</div></div>
 <div class="rule"><span class="ico">2️⃣</span><div><b>Spannung messen.</b> Multimeter auf V⎓, Spitzen an beide Anschlüsse — so siehst du, ob überhaupt noch Ladung drin ist und wie viel.</div></div>
 <div class="rule"><span class="ico">3️⃣</span><div><b>Über einen Widerstand entladen.</b> Einen Widerstand von 1–10 kΩ (bei großen Elkos ein leistungsfähiger Typ, z. B. 5–10 W) einige Sekunden an beide Pole halten — mit isolierten Krokodilklemmen oder Prüfspitzen, nie mit den Fingern an blankem Metall.</div></div>
-<div class="rule"><span class="ico">4️⃣</span><div><b>Zeit abschätzen.</b> Die Entladung folgt der RC-Zeitkonstante <span class="formula">τ = R × C</span> (Tab <a href="#grundlagen">Grundlagen</a>): Nach 5·τ ist der Kondensator praktisch leer. Beispiel: 4700 µF über 1 kΩ → τ ≈ 4,7 s → nach ~25 s entladen.</div></div>
+<div class="rule"><span class="ico">4️⃣</span><div><b>Zeit abschätzen.</b> Die Entladung folgt der RC-Zeitkonstante <span class="formula">τ = R × C</span> (Tab <a href="#grundlagen">Basics</a>): Nach 5·τ ist der Kondensator praktisch leer. Beispiel: 4700 µF über 1 kΩ → τ ≈ 4,7 s → nach ~25 s entladen.</div></div>
 <div class="rule"><span class="ico">5️⃣</span><div><b>Nachmessen.</b> Erst weiterarbeiten, wenn das Multimeter unter ~1 V zeigt. Große Kondensatoren laden sich nach dem Entladen von selbst wieder etwas auf („dielektrische Erholung") — direkt vor dem Anfassen noch einmal prüfen.</div></div>
 </div>
-<div class="danger-box">
-<p style="margin:0"><b>Nie mit dem Schraubendreher kurzschließen.</b> Der Funkenschlag kann den Kondensator beschädigen, die Werkzeugspitze anschmelzen und bei großen Kondensatoren Metall verspritzen. Immer über einen Widerstand entladen — der macht dasselbe, nur kontrolliert.</p>
-</div>
 
-<h2>Wärme, Leistung und Brandgefahr</h2>
-<p>Jedes Bauteil setzt überschüssige Energie als <b>Wärme</b> um. Zu viel davon ist die häufigste Brandursache im Hobby. Was bei Überlastung passiert:</p>
+<h3>Wärme, Leistung und Brandgefahr</h3>
+<p>Jedes Bauteil setzt überschüssige Energie als <b>Wärme</b> um. Zu viel davon ist die häufigste Brandursache im Hobby:</p>
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th>Situation</th><th>Folge</th></tr></thead>
 <tbody>
@@ -1300,8 +1391,52 @@ h2[id],h3[id]{scroll-margin-top:84px}
 
 <h2>Netzspannung (230 V): eine eigene Liga</h2>
 <div class="danger-box">
-<p style="margin:0 0 8px"><b>230 V aus der Steckdose ist kein Einsteiger-Spielfeld.</b> Hier reicht ein Fehler für einen tödlichen Unfall oder Wohnungsbrand. Wenn du nicht sicher weißt, was du tust, lass es oder hol jemanden mit Erfahrung dazu.</p>
-<p style="margin:0">Pflicht bei Netzarbeit: ein <b>FI-Schutzschalter (RCD)</b> in der Zuleitung, Geräte der passenden Schutzklasse, einwandfreie Isolierung und die <b>Eine-Hand-Regel</b> (nur eine Hand benutzen, damit kein Strom über die Brust von Hand zu Hand fließt).</p>
+<p style="margin:0"><b>230 V aus der Steckdose ist kein Einsteiger-Spielfeld.</b> Hier reicht ein Fehler für einen tödlichen Unfall oder Wohnungsbrand. Wenn du nicht sicher weißt, was du tust, lass es oder hol jemanden mit Erfahrung dazu. Das gilt auch für <b>eingebaute</b> Netzteile in Geräten — dort liegt innen Netzspannung an, und die Elkos bleiben nach dem Ausstecken geladen.</p>
+</div>
+
+<h3>Die Regeln für Netzspannung</h3>
+<div class="grid2">
+<div class="card"><h3>✓ Immer</h3>
+<ul>
+<li><b>FI-Schutzschalter (RCD)</b> in der Zuleitung — schaltet bei ~30 mA Fehlerstrom ab, bevor es kritisch wird.</li>
+<li><b>Eine-Hand-Regel:</b> die zweite Hand in die Hosentasche, damit kein Strom von Hand zu Hand über die Brust fließt.</li>
+<li><b>Spannungsfrei machen und nachmessen</b> — ausgesteckt heißt nicht entladen.</li>
+<li><b>Messgerät mit passender Kategorie</b> (CAT II für Geräte, CAT III für Installation) und unbeschädigte Leitungen.</li>
+<li><b>Trenntrafo,</b> wenn du mit dem <a href="#oszilloskop">Oszilloskop</a> an netzbetriebener Elektronik messen willst.</li>
+</ul></div>
+<div class="card"><h3>✗ Niemals</h3>
+<ul>
+<li><b>Allein arbeiten,</b> wenn du unerfahren bist — im Notfall kann dich niemand vom Stromkreis trennen.</li>
+<li><b>Bei Nässe, Schwitzen oder auf leitendem Boden</b> arbeiten (siehe Hautwiderstand unten).</li>
+<li><b>Oszi-Masseklemme an einen netzbetriebenen Punkt</b> — erzeugt einen Kurzschluss über den Schutzleiter.</li>
+<li><b>Schutzleiter abklemmen</b> oder eine Sicherung überbrücken, „damit es läuft".</li>
+<li><b>Improvisierte Isolierung</b> (Klebeband, Lüsterklemme offen liegend) irgendwo in Netznähe.</li>
+</ul></div>
+</div>
+
+<h3>Strom durch den Körper: was passiert ab wie viel?</h3>
+<p class="note">Faustwerte für Wechselstrom auf dem Weg Hand zu Hand. Individuell verschieden, also als Größenordnung verstehen.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Strom</th><th>Stufe</th><th>Wirkung auf den Körper</th></tr></thead>
+<tbody>
+<tr><td>ab ~0,5 mA</td><td><span class="lvl lvl-ok">Wahrnehmung</span></td><td>Gerade als Kribbeln spürbar (Normwert nach IEC 0,5 mA).</td></tr>
+<tr><td>5 bis 10 mA</td><td><span class="lvl lvl-warn">schmerzhaft</span></td><td>Deutlich unangenehm, Muskeln zucken.</td></tr>
+<tr><td>ca. 6 bis 16 mA</td><td><span class="lvl lvl-bad">Loslass-Grenze</span></td><td>Die Muskeln verkrampfen so, dass man den Leiter <b>nicht mehr loslassen kann</b> — bei empfindlicheren Personen (Frauen, Kinder) schon am unteren Ende. Besonders tückisch.</td></tr>
+<tr><td>ab ~30 mA</td><td><span class="lvl lvl-bad">Atemnot</span></td><td>Atemmuskeln verkrampfen. Genau hier schaltet ein FI-Schutzschalter ab.</td></tr>
+<tr><td>ab ~50 mA</td><td><span class="lvl lvl-crit">Herzgefahr</span></td><td>Herzkammerflimmern wird wahrscheinlich, das ist lebensbedrohlich.</td></tr>
+<tr><td>über ~100 mA</td><td><span class="lvl lvl-crit">tödlich</span></td><td>Durchs Herz fast sicher tödlich. Dazu schwere Verbrennungen.</td></tr>
+</tbody>
+</table></div>
+<p class="note">Wechselspannung (50 Hz) ist bei gleichem Wert gefährlicher als Gleichspannung, weil sie das Herz leichter aus dem Takt bringt.</p>
+
+<h3>Warum nasse Haut alles verändert</h3>
+<div class="card">
+<p>Dein Körper bremst den Strom über seinen <b>Widerstand</b>. Der hängt fast nur von der Haut ab:</p>
+<ul>
+<li><b>Trockene Haut:</b> sehr hoher Widerstand (grob 50 bis 100 kΩ). Bei 50 V fließt daher nur etwa 0,5 bis 1 mA, kaum spürbar.</li>
+<li><b>Nasse oder schwitzige Haut:</b> der Widerstand bricht auf wenige tausend Ω ein. Dieselben 50 V treiben dann plötzlich ein Vielfaches an Strom durch dich, bis in den gefährlichen Bereich.</li>
+</ul>
+<p style="margin-bottom:0">Darum: <b>nie mit feuchten Händen, nie im Nassen, nie schwitzend an höhere Spannungen.</b> Dieselbe Spannung, die trocken harmlos ist, kann nass gefährlich werden.</p>
 </div>
 
 <h2>Im Notfall</h2>
@@ -1362,7 +1497,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <p class="note">Anschluss: HDMI oder DSI · <b>Gut für:</b> Dashboards, Mediacenter, Touch-Bedienpanels, alles mit Desktop oder Browser.</p></div>
 </div>
 
-<h2>Typen im Vergleich (1 bis 10)</h2>
+<h2>Displays im Vergleich (1 bis 10)</h2>
 <div id="display-rating"></div>
 <p class="note">Höhere Balken bedeuten mehr von der jeweiligen Eigenschaft. "Sparsam" meint geringen Stromverbrauch, "Tempo" die Geschwindigkeit des Bildaufbaus. Grobe Orientierungswerte.</p>
 
@@ -1381,7 +1516,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="rule"><span class="ico">🖥️</span><div><b>HDMI / DSI</b> sind die Monitor-Anschlüsse, praktisch nur am Raspberry Pi und ähnlichen Mini-Computern.</div></div>
 </div>
 
-<h2>Auswahlhilfe: für das nimm das</h2>
+<h2>Auswahlhilfe: welches Display?</h2>
 <div class="tbl-wrap"><table style="min-width:560px">
 <thead><tr><th>Du willst…</th><th>Empfehlung</th></tr></thead>
 <tbody>
@@ -1426,7 +1561,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <p class="note">Ansteuerung: ESC (Motorregler), bekommt ein servoähnliches Steuersignal · <b>Gut für:</b> Drohnen, RC-Modelle, E-Bikes, schnelle effiziente Antriebe. Schwäche: teurer, komplexere Steuerung.</p></div>
 </div>
 
-<h2>Typen im Vergleich (1 bis 10)</h2>
+<h2>Motoren im Vergleich (1 bis 10)</h2>
 <div id="motor-rating"></div>
 <p class="note">Höhere Balken bedeuten mehr von der jeweiligen Eigenschaft. "Einfachheit" meint, wie leicht die Ansteuerung ist, "Günstig" wie preiswert. Grobe Orientierungswerte, keine Labormessung.</p>
 
@@ -1454,7 +1589,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="rule"><span class="ico">⚙️</span><div><b>Freilaufdiode.</b> Bei einfachen Schaltungen mit MOSFET nötig. Fertige Treiber-Module haben den Schutz meist schon eingebaut.</div></div>
 </div>
 
-<h2>Auswahlhilfe: für das nimm das</h2>
+<h2>Auswahlhilfe: welcher Motor?</h2>
 <div class="tbl-wrap"><table style="min-width:560px">
 <thead><tr><th>Du brauchst…</th><th>Empfehlung</th></tr></thead>
 <tbody>
@@ -1539,7 +1674,7 @@ h2[id],h3[id]{scroll-margin-top:84px}
 <div class="rule"><span class="ico">📍</span><div><b>Nicht jeder Pin kann alles.</b> Manche sind nur Eingang, manche stören beim Start (Boot-Pins). Pin-Belegungsplan ("Pinout") des Boards bereithalten.</div></div>
 </div>
 
-<h2>Auswahlhilfe: für das nimm das</h2>
+<h2>Auswahlhilfe: welches Board?</h2>
 <div class="tbl-wrap"><table style="min-width:560px">
 <thead><tr><th>Du willst…</th><th>Empfehlung</th></tr></thead>
 <tbody>
@@ -1561,24 +1696,51 @@ h2[id],h3[id]{scroll-margin-top:84px}
 
 <script>
 /* ---------- TABS ---------- */
-const TABS=[{k:"grundlagen",l:"Grundlagen",i:"⚡"},{k:"komponenten",l:"Komponenten",i:"🧩"},{k:"schaltplan",l:"Schaltplan",i:"📐"},{k:"displays",l:"Displays",i:"🖥️"},{k:"motoren",l:"Motoren",i:"⚙️"},{k:"mcu",l:"Mikrocontroller",i:"🤖"},{k:"steckbrett",l:"Steckbrett",i:"🔌"},{k:"regeln",l:"Regeln & Praxis",i:"📋"},{k:"sicherheit",l:"Sicherheit",i:"⚠️"},{k:"messgeraet",l:"Messgerät",i:"📟"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},{k:"rechner",l:"Rechner",i:"🧮"}];
-const tabsDiv=document.getElementById("tabs");
+const TABS=[
+{k:"grundlagen",l:"Basics",i:"⚡"},{k:"schaltplan",l:"Schaltplan",i:"📐"},{k:"rechner",l:"Rechner",i:"🧮"},
+{k:"komponenten",l:"Datenbank",i:"🧩"},{k:"displays",l:"Displays",i:"🖥️"},{k:"motoren",l:"Motoren",i:"⚙️"},{k:"mcu",l:"Mikrocontroller",i:"🤖"},
+{k:"messgeraet",l:"Multimeter",i:"📟"},{k:"oszilloskop",l:"Oszilloskop",i:"📉"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},
+{k:"sicherheit",l:"Sicherheit",i:"⚠️"},{k:"praxis",l:"Praxis & Aufbau",i:"📋"}
+];
+const GROUPS=[
+{g:"basis",l:"Grundlagen",i:"⚡",tabs:["grundlagen","schaltplan","rechner"]},
+{g:"teile",l:"Bauteile",i:"🧩",tabs:["komponenten","displays","motoren","mcu"]},
+{g:"messen",l:"Messen & Werkzeug",i:"🔧",tabs:["messgeraet","oszilloskop","lcrp1","netzteil"]},
+{g:"sicher",l:"Sicherheit & Praxis",i:"⚠️",tabs:["sicherheit","praxis"]}
+];
+/* alte Anker weiterleiten, damit bestehende Links gültig bleiben */
+const ALIAS={steckbrett:"praxis",regeln:"praxis"};
+const tabsDiv=document.getElementById("tabs"),subDiv=document.getElementById("subtabs");
+const groupOf=k=>GROUPS.find(G=>G.tabs.includes(k));
+function setNavH(){const n=document.querySelector(".navwrap");if(n)document.documentElement.style.setProperty("--navh",(n.offsetHeight+14)+"px");}
+function renderSub(k){
+const G=groupOf(k);subDiv.innerHTML="";if(!G)return;
+G.tabs.forEach(tk=>{const t=TABS.find(x=>x.k===tk);if(!t)return;
+const b=document.createElement("button");b.textContent=t.l;b.dataset.k=tk;
+b.classList.toggle("active",tk===k);b.onclick=()=>showTab(tk);subDiv.appendChild(b);});
+}
 function showTab(k){
-TABS.forEach(x=>document.getElementById("t-"+x.k).classList.add("hidden"));
+if(ALIAS[k])k=ALIAS[k];
+if(!TABS.some(t=>t.k===k))k=TABS[0].k;
+TABS.forEach(x=>{const s=document.getElementById("t-"+x.k);if(s)s.classList.add("hidden");});
 const sec=document.getElementById("t-"+k);
 if(sec)sec.classList.remove("hidden");
-tabsDiv.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.k===k));
+const G=groupOf(k);
+tabsDiv.querySelectorAll("button").forEach(b=>b.classList.toggle("active",!!G&&b.dataset.g===G.g));
+renderSub(k);
 try{localStorage.setItem("etab",k)}catch(e){}
 if(location.hash!=="#"+k)history.replaceState(null,"","#"+k);
+setNavH();
 window.scrollTo(0,0);
 }
-TABS.forEach(t=>{const b=document.createElement("button");b.innerHTML=`<span class="ti">${t.i}</span>${t.l}`;b.dataset.k=t.k;b.onclick=()=>showTab(t.k);tabsDiv.appendChild(b)});
+GROUPS.forEach(G=>{const b=document.createElement("button");b.innerHTML=`<span class="ti">${G.i}</span>${G.l}`;b.dataset.g=G.g;b.onclick=()=>showTab(G.tabs[0]);tabsDiv.appendChild(b)});
 let startTab=TABS[0].k;
 try{const saved=localStorage.getItem("etab");if(saved&&TABS.some(t=>t.k===saved))startTab=saved}catch(e){}
-const hashTab=location.hash.slice(1);
+const hashRaw=location.hash.slice(1),hashTab=ALIAS[hashRaw]||hashRaw;
 if(TABS.some(t=>t.k===hashTab))startTab=hashTab;
 showTab(startTab);
-window.addEventListener("hashchange",()=>{const k=location.hash.slice(1);if(TABS.some(t=>t.k===k))showTab(k)});
+window.addEventListener("hashchange",()=>{const r=location.hash.slice(1),k=ALIAS[r]||r;if(TABS.some(t=>t.k===k))showTab(k)});
+window.addEventListener("resize",setNavH);
 
 /* ---------- KOMPONENTEN ---------- */
 const C=[
@@ -1668,8 +1830,8 @@ const C=[
 {n:"Heißkleber",cat:"verbrauch",catL:"Verbrauch",fn:"Schnelle mechanische Fixierung und Zugentlastung, elektrisch isolierend.",app:"Kabel fixieren, Module im Gehäuse befestigen, Provisorien.",det:{kenn:"Niedertemperatur-Sticks schonen empfindliche Teile.",kompat:"Haftet auf den meisten Kunststoffen, lässt sich mit Isopropanol wieder lösen.",achtung:"Keine tragende Verbindung und nichts für heiße Stellen (erweicht wieder).",bsp:"Fixiert das ESP32-Board und die Kabel im 3D-gedruckten Gehäuse.",tags:["Zugentlastung","nicht hitzefest"]}},
 {n:"Isopropanol (IPA)",cat:"verbrauch",catL:"Verbrauch",fn:"Der Reinigungsalkohol der Elektronik: löst Flussmittelreste rückstandsfrei.",app:"Platinen nach dem Löten reinigen, Kontakte säubern, Kleberreste entfernen.",det:{kenn:"99,9 % nehmen, verdunstet rückstandsfrei. Mit Wattestäbchen oder ESD-Pinsel.",kompat:"Sicher für fast alle Platinen und Gehäuse-Kunststoffe.",achtung:"Leicht entzündlich, weg von Funken und offener Flamme. Gut lüften.",bsp:"Entfernt nach dem Löten die Flussmittelreste — die Platine sieht aus wie neu.",tags:["99,9 %","entzündlich"]}},
 /* ---- Mechanik-Ergänzung ---- */
-{n:"Mini-Breadboard (170 Kontakte)",cat:"mech",catL:"Elektromech.",fn:"Winziges Steckbrett für kleine Schaltungen, oft zusammensteckbar.",app:"Ein Sensor plus Board schnell testen, dauerhaft im Projektgehäuse.",det:{kenn:"170 Kontakte, meist ohne Versorgungsschienen, klebbare Rückseite.",kompat:"Gleiche 5er-Gruppen-Logik wie das große Steckbrett (Tab <a href='#steckbrett'>Steckbrett</a>).",achtung:"Keine Randschienen: Plus/Minus selbst als Spalten definieren.",bsp:"Ein Sensor plus ESP32-C3 als Mini-Aufbau, direkt ins Projektgehäuse geklebt.",tags:["ohne Schienen","klebbar"]}},
-{n:"Lochrasterplatine",cat:"mech",catL:"Elektromech.",fn:"Platine mit Lötpunkten im 2,54-mm-Raster für den dauerhaften Aufbau.",app:"Getestete Steckbrett-Schaltungen fest verlöten. Details im Tab <a href='#steckbrett'>Steckbrett</a>.",det:{kenn:"Punktraster (einzelne Pads) oder Streifenraster (verbundene Reihen).",kompat:"Passt zu allen bedrahteten Bauteilen und Stiftleisten.",achtung:"Beim Streifenraster Trennstellen nicht vergessen (aufbohren).",bsp:"Die auf dem Steckbrett getestete Wetterstations-Schaltung wird hier dauerhaft verlötet.",tags:["2,54 mm","Punkt/Streifen"]}},
+{n:"Mini-Breadboard (170 Kontakte)",cat:"mech",catL:"Elektromech.",fn:"Winziges Steckbrett für kleine Schaltungen, oft zusammensteckbar.",app:"Ein Sensor plus Board schnell testen, dauerhaft im Projektgehäuse.",det:{kenn:"170 Kontakte, meist ohne Versorgungsschienen, klebbare Rückseite.",kompat:"Gleiche 5er-Gruppen-Logik wie das große Steckbrett (Tab <a href='#praxis'>Praxis & Aufbau</a>).",achtung:"Keine Randschienen: Plus/Minus selbst als Spalten definieren.",bsp:"Ein Sensor plus ESP32-C3 als Mini-Aufbau, direkt ins Projektgehäuse geklebt.",tags:["ohne Schienen","klebbar"]}},
+{n:"Lochrasterplatine",cat:"mech",catL:"Elektromech.",fn:"Platine mit Lötpunkten im 2,54-mm-Raster für den dauerhaften Aufbau.",app:"Getestete Steckbrett-Schaltungen fest verlöten. Details im Tab <a href='#praxis'>Praxis & Aufbau</a>.",det:{kenn:"Punktraster (einzelne Pads) oder Streifenraster (verbundene Reihen).",kompat:"Passt zu allen bedrahteten Bauteilen und Stiftleisten.",achtung:"Beim Streifenraster Trennstellen nicht vergessen (aufbohren).",bsp:"Die auf dem Steckbrett getestete Wetterstations-Schaltung wird hier dauerhaft verlötet.",tags:["2,54 mm","Punkt/Streifen"]}},
 ];
 const CDESC={
 "Widerstand":"Eine Engstelle für den Strom. Je größer der Wert, desto weniger Strom kommt bei gleicher Spannung durch. Das einfachste und häufigste Bauteil überhaupt.",
