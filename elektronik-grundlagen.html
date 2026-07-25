@@ -64,7 +64,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;
-  padding:1.5rem 1.5rem 4rem;max-width:1080px;margin:0 auto;-webkit-font-smoothing:antialiased}
+  margin:0;padding:0;-webkit-font-smoothing:antialiased;min-height:100vh}
 ::selection{background:var(--accent-soft);color:var(--accent-ink)}
 
 /* ============================================================
@@ -80,31 +80,6 @@ p{font-size:13.5px;line-height:1.65;margin-bottom:.6rem}
 /* ============================================================
    TAB-NAVIGATION (sticky)
    ============================================================ */
-.navwrap{position:sticky;top:0;z-index:20;margin:0 -1.5rem 1.5rem;background:var(--bg);
-  border-bottom:1px solid var(--border);box-shadow:var(--shadow-tabs)}
-.switch{display:flex;gap:5px;padding:.45rem 1.5rem 0}
-.switch a{display:inline-flex;align-items:center;gap:.4em;font-size:11.5px;font-weight:600;
-  padding:3px 10px;border-radius:999px;text-decoration:none;color:var(--faint);
-  border:1px solid transparent;transition:background .15s,color .15s}
-.switch a:hover{color:var(--text);background:var(--surface-2)}
-.switch a.on{color:var(--accent-ink);background:var(--accent-soft);border-color:var(--accent-border)}
-.tabs,.subtabs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
-.tabs::-webkit-scrollbar,.subtabs::-webkit-scrollbar{display:none}
-.tabs{gap:6px;padding:.5rem 1.5rem .45rem}
-.subtabs{gap:14px;padding:0 1.5rem .5rem}
-.tabs button,.subtabs button{white-space:nowrap;flex:0 0 auto}
-.tabs button{display:inline-flex;align-items:center;gap:.42em;font-family:inherit;
-  font-size:13px;font-weight:500;padding:6px 13px;cursor:pointer;background:transparent;
-  border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);
-  transition:background .15s,color .15s,border-color .15s}
-.tabs button .ti{font-size:14px;line-height:1;opacity:.9}
-.tabs button:hover{background:var(--surface-2);color:var(--text)}
-.tabs button.active{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-border);font-weight:600}
-.subtabs button{display:inline-flex;align-items:center;font-family:inherit;font-size:12.5px;
-  font-weight:500;padding:3px 1px 4px;cursor:pointer;background:transparent;border:none;
-  border-bottom:2px solid transparent;color:var(--muted);transition:color .15s,border-color .15s}
-.subtabs button:hover{color:var(--text)}
-.subtabs button.active{color:var(--accent-ink);border-bottom-color:var(--accent);font-weight:600}
 
 /* ============================================================
    FILTER-BUTTONS & BUTTON
@@ -254,62 +229,133 @@ svg.sy .cot{fill:var(--accent-ink);font-family:var(--sans);font-size:12px;font-w
    RESPONSIV
    ============================================================ */
 @media(max-width:600px){
-  body{padding:1rem 1rem 3rem}
-  .navwrap{margin:0 -1rem 1.2rem}
-  .switch{padding:.4rem 1rem 0}
-  .tabs{padding:.45rem 1rem .4rem}
-  .subtabs{padding:0 1rem .45rem}
   h1{font-size:22px}
   h2{font-size:16px}
 }
 
 /* ============================================================
-   IN-PAGE TOC · „Auf dieser Seite"
+   APP-SHELL · Sidebar, Topbar, Such-Palette
    ============================================================ */
-h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
-#tocBtn{position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:50%;
-  border:1px solid var(--border-strong);background:var(--surface);color:var(--text);
-  box-shadow:var(--shadow-tabs);cursor:pointer;font-size:19px;line-height:1;
-  display:none;align-items:center;justify-content:center}
-#tocBtn:hover{background:var(--surface-2)}
-#tocBtn.show{display:flex}
-#tocNav{position:fixed;right:16px;bottom:74px;z-index:60;width:242px;max-height:66vh;overflow:auto;
-  background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);
-  box-shadow:var(--shadow-tabs);padding:.55rem;display:none;-webkit-overflow-scrolling:touch}
-#tocNav.open{display:block}
-.toc-head{font-family:var(--display);font-size:11.5px;font-weight:600;text-transform:uppercase;
-  letter-spacing:.05em;color:var(--muted);margin:.15rem .3rem .5rem;padding-bottom:.42rem;
-  border-bottom:1px solid var(--border)}
-#tocList{list-style:none;display:flex;flex-direction:column;gap:1px}
-#tocList a{display:block;padding:.37rem .5rem;border-radius:var(--radius-xs);font-size:13px;
-  color:var(--text);text-decoration:none;line-height:1.34;border-left:2px solid transparent}
-#tocList a:hover{background:var(--surface-2)}
-#tocList a.toc-l3{padding-left:1.15rem;font-size:12.5px;color:var(--muted)}
-#tocList a.active{background:var(--accent-soft);color:var(--accent-ink);
-  border-left-color:var(--accent);font-weight:600}
-@media(min-width:1600px){
-  #tocBtn{display:none !important}
-  #tocNav.has-items{display:block;right:auto;bottom:auto;
-    left:max(16px,calc((100vw - 1080px) / 2 - 236px));top:calc(var(--navh,110px) + 8px);width:224px;
-    max-height:calc(100vh - var(--navh,110px) - 28px)}
+#side{position:fixed;left:0;top:0;bottom:0;width:266px;z-index:70;display:flex;flex-direction:column;
+  background:var(--surface);border-right:1px solid var(--border);overflow:hidden}
+.side-head{padding:.8rem .75rem .6rem;border-bottom:1px solid var(--border)}
+.side-switch{display:flex;gap:4px;margin-bottom:.55rem}
+.side-switch a{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:.35em;
+  font-size:11.5px;font-weight:600;padding:5px 6px;border-radius:7px;text-decoration:none;
+  color:var(--faint);border:1px solid transparent;transition:background .15s,color .15s}
+.side-switch a:hover{color:var(--text);background:var(--surface-2)}
+.side-switch a.on{color:var(--accent-ink);background:var(--accent-soft);border-color:var(--accent-border)}
+#openSearch{width:100%;display:flex;align-items:center;gap:.5em;font-family:inherit;font-size:12.5px;
+  padding:7px 10px;border-radius:8px;cursor:pointer;background:var(--bg);
+  border:1px solid var(--border-strong);color:var(--muted);text-align:left}
+#openSearch:hover{border-color:var(--accent-border);color:var(--text)}
+#openSearch .k{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--faint);
+  border:1px solid var(--border);border-radius:4px;padding:0 4px}
+#sideNav{flex:1;overflow-y:auto;padding:.45rem .5rem 2rem;-webkit-overflow-scrolling:touch}
+.sg{font-family:var(--display);font-size:10.5px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--faint);margin:.9rem .55rem .25rem}
+#sideNav > .sg:first-child{margin-top:.15rem}
+#sideNav a,#sideNav button{display:block;width:100%;text-align:left;font-family:inherit;font-size:13px;
+  padding:5px 9px;border-radius:6px;border:none;background:transparent;color:var(--text);
+  text-decoration:none;cursor:pointer;line-height:1.35;border-left:2px solid transparent}
+#sideNav a:hover,#sideNav button:hover{background:var(--surface-2)}
+#sideNav button.on{background:var(--accent-soft);color:var(--accent-ink);font-weight:600;
+  border-left-color:var(--accent)}
+.ssec{display:none;margin:.1rem 0 .3rem}
+.ssec.show{display:block}
+.ssec a{font-size:12px;color:var(--muted);padding:3px 9px 3px 21px}
+.ssec a.on{color:var(--accent-ink);font-weight:600;border-left-color:var(--accent-border)}
+.side-foot{padding:.55rem .8rem .75rem;border-top:1px solid var(--border);font-size:11px;color:var(--faint)}
+main{margin-left:266px;max-width:1080px;padding:1.6rem 1.9rem 5rem}
+#topbar{display:none;position:sticky;top:0;z-index:40;align-items:center;gap:.6rem;
+  padding:.5rem .9rem;background:var(--bg);border-bottom:1px solid var(--border)}
+#navBtn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;
+  border-radius:8px;border:1px solid var(--border-strong);background:var(--surface);
+  color:var(--text);font-size:15px;cursor:pointer;flex:0 0 auto}
+#topbar .tt{font-family:var(--display);font-weight:600;font-size:13.5px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+#topbar .ts{margin-left:auto;font-size:11.5px;color:var(--faint);border:1px solid var(--border-strong);
+  background:var(--surface);border-radius:7px;padding:5px 10px;cursor:pointer;font-family:inherit;flex:0 0 auto}
+#scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:65}
+#scrim.show{display:block}
+@media(max-width:1000px){
+  #side{transform:translateX(-100%);transition:transform .2s ease;box-shadow:0 0 40px rgba(0,0,0,.4)}
+  #side.open{transform:none}
+  main{margin-left:0;padding:0 1rem 4rem;max-width:none}
+  #topbar{display:flex;margin:0 -1rem 1rem;padding-left:1rem;padding-right:1rem}
 }
-@media(max-width:600px){
-  #tocNav{width:min(76vw,242px)}
-}
+/* Such-Palette */
+#pal{display:none;position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.5);padding:7vh 1rem 1rem}
+#pal.open{display:block}
+.pal-box{max-width:640px;margin:0 auto;background:var(--surface);border:1px solid var(--border-strong);
+  border-radius:var(--radius);box-shadow:0 24px 60px -20px rgba(0,0,0,.55);overflow:hidden}
+#palIn{width:100%;font-family:inherit;font-size:15px;padding:14px 16px;border:none;outline:none;
+  background:transparent;color:var(--text);border-bottom:1px solid var(--border)}
+#palOut{max-height:58vh;overflow-y:auto;padding:.3rem}
+.pr{display:block;width:100%;text-align:left;padding:7px 11px;border-radius:7px;border:none;
+  background:transparent;color:var(--text);font-family:inherit;font-size:13.5px;cursor:pointer;line-height:1.4}
+.pr:hover,.pr.sel{background:var(--accent-soft);color:var(--accent-ink)}
+.pr .pw{display:block;font-size:11px;color:var(--faint);margin-top:1px}
+.pr.sel .pw,.pr:hover .pw{color:var(--accent-ink);opacity:.8}
+.pal-empty{padding:1.3rem;text-align:center;color:var(--muted);font-size:13px}
+.pal-hint{padding:.45rem .85rem;border-top:1px solid var(--border);font-size:10.5px;color:var(--faint);
+  font-family:var(--mono)}
+.pr mark{background:transparent;color:inherit;font-weight:700;padding:0}
+h2[id],h3[id]{scroll-margin-top:76px}
+.hl{animation:hlflash 1.8s ease}
+@keyframes hlflash{0%,22%{background:var(--accent-soft)}100%{background:transparent}}
+/* ============================================================
+   LESBARKEIT · luftigere Tabellen, Faltabschnitte, Kernaussagen
+   ============================================================ */
+table{font-size:13.5px}
+th{padding:11px 14px;font-size:10.5px}
+td{padding:13px 14px;line-height:1.6}
+tbody tr+tr td{border-top:1px solid var(--border)}
+td:first-child{font-weight:500}
+.tbl-wrap{border-radius:var(--radius)}
+
+/* Faltbare Abschnitte */
+.fold{cursor:pointer;display:flex;align-items:center;gap:.55em;user-select:none;
+  transition:color .15s}
+.fold:hover{color:var(--accent-ink)}
+.fold::before{content:"";flex:0 0 auto;width:0;height:0;
+  border-left:6px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;
+  opacity:.55;transition:transform .18s ease}
+.fold.open::before{transform:rotate(90deg) translateX(1px)}
+.sec-body{display:none;animation:secin .18s ease}
+.sec-body.open{display:block}
+@keyframes secin{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+.foldbar{display:flex;justify-content:flex-end;margin:-.4rem 0 .2rem}
+.foldbar button{font-family:inherit;font-size:11.5px;color:var(--muted);background:transparent;
+  border:1px solid var(--border-strong);border-radius:999px;padding:3px 11px;cursor:pointer}
+.foldbar button:hover{color:var(--text);background:var(--surface-2)}
+
+/* Kernaussage */
+.kurz{display:flex;gap:.7em;align-items:flex-start;border:1px solid var(--accent-border);
+  background:var(--accent-soft);border-radius:var(--radius-sm);padding:11px 15px;margin:.5rem 0 .9rem;
+  font-size:13.5px;line-height:1.6;color:var(--accent-ink)}
+.kurz::before{content:"💡";flex:0 0 auto;font-size:15px;line-height:1.35}
+.kurz b{font-weight:700}
 </style>
 </head>
 <body>
+<aside id="side">
+<div class="side-head">
+<div class="side-switch">
+<a class="on" href="elektronik-grundlagen.html">⚡ Elektronik</a>
+<a href="loeten-referenz.html">🔥 Löten</a>
+</div>
+<button id="openSearch" type="button">🔍 Suchen … <span class="k">⌘K</span></button>
+</div>
+<nav id="sideNav" aria-label="Inhalt"></nav>
+<div class="side-foot">⌘K / Strg+K oder <b>/</b> öffnet die Suche</div>
+</aside>
+<div id="scrim"></div>
+<main>
+<div id="topbar"><button id="navBtn" type="button" aria-label="Menü öffnen">☰</button><span class="tt">Elektronik 101</span><button class="ts" type="button">🔍 Suchen</button></div>
 <h1>Elektronik 101 · Hobby-Referenz</h1>
 <div class="sub">Nachschlagewerk für Feinelektronik &amp; Bastelprojekte · Grundlagen, Bauteile, Schaltpläne, Messen, Sicherheit &amp; Rechner</div>
 
-<div class="navwrap">
-<div class="switch">
-<a class="on" href="elektronik-grundlagen.html"><span class="ti">⚡</span>Elektronik</a>
-<a href="loeten-referenz.html"><span class="ti">🔥</span>Löten</a>
-</div>
-<div class="tabs" id="tabs"></div>
-<div class="subtabs" id="subtabs"></div>
-</div>
 
 <!-- ============ TAB 1: GRUNDLAGEN ============ -->
 <section id="t-grundlagen">
@@ -1688,11 +1734,8 @@ h2[id],h3[id]{scroll-margin-top:var(--navh,110px)}
 </table></div>
 </section>
 
-<button id="tocBtn" type="button" aria-label="Auf dieser Seite" aria-expanded="false" aria-controls="tocNav" title="Auf dieser Seite">📑</button>
-<nav id="tocNav" aria-label="Auf dieser Seite">
-<div class="toc-head">Auf dieser Seite</div>
-<ol id="tocList"></ol>
-</nav>
+</main>
+
 
 <script>
 /* ---------- TABS ---------- */
@@ -1710,37 +1753,22 @@ const GROUPS=[
 ];
 /* alte Anker weiterleiten, damit bestehende Links gültig bleiben */
 const ALIAS={steckbrett:"praxis",regeln:"praxis"};
-const tabsDiv=document.getElementById("tabs"),subDiv=document.getElementById("subtabs");
-const groupOf=k=>GROUPS.find(G=>G.tabs.includes(k));
-function setNavH(){const n=document.querySelector(".navwrap");if(n)document.documentElement.style.setProperty("--navh",(n.offsetHeight+14)+"px");}
-function renderSub(k){
-const G=groupOf(k);subDiv.innerHTML="";if(!G)return;
-G.tabs.forEach(tk=>{const t=TABS.find(x=>x.k===tk);if(!t)return;
-const b=document.createElement("button");b.textContent=t.l;b.dataset.k=tk;
-b.classList.toggle("active",tk===k);b.onclick=()=>showTab(tk);subDiv.appendChild(b);});
-}
 function showTab(k){
 if(ALIAS[k])k=ALIAS[k];
 if(!TABS.some(t=>t.k===k))k=TABS[0].k;
 TABS.forEach(x=>{const s=document.getElementById("t-"+x.k);if(s)s.classList.add("hidden");});
 const sec=document.getElementById("t-"+k);
 if(sec)sec.classList.remove("hidden");
-const G=groupOf(k);
-tabsDiv.querySelectorAll("button").forEach(b=>b.classList.toggle("active",!!G&&b.dataset.g===G.g));
-renderSub(k);
 try{localStorage.setItem("etab",k)}catch(e){}
 if(location.hash!=="#"+k)history.replaceState(null,"","#"+k);
-setNavH();
 window.scrollTo(0,0);
 }
-GROUPS.forEach(G=>{const b=document.createElement("button");b.innerHTML=`<span class="ti">${G.i}</span>${G.l}`;b.dataset.g=G.g;b.onclick=()=>showTab(G.tabs[0]);tabsDiv.appendChild(b)});
 let startTab=TABS[0].k;
 try{const saved=localStorage.getItem("etab");if(saved&&TABS.some(t=>t.k===saved))startTab=saved}catch(e){}
 const hashRaw=location.hash.slice(1),hashTab=ALIAS[hashRaw]||hashRaw;
 if(TABS.some(t=>t.k===hashTab))startTab=hashTab;
 showTab(startTab);
 window.addEventListener("hashchange",()=>{const r=location.hash.slice(1),k=ALIAS[r]||r;if(TABS.some(t=>t.k===k))showTab(k)});
-window.addEventListener("resize",setNavH);
 
 /* ---------- KOMPONENTEN ---------- */
 const C=[
@@ -2106,49 +2134,242 @@ renderRating("mcu-rating",
 ]);
 </script>
 
+<div id="pal" role="dialog" aria-label="Suche">
+<div class="pal-box">
+<input id="palIn" type="text" placeholder="Suchen: Bauteil, Wert, Begriff, Anleitung …" autocomplete="off" spellcheck="false">
+<div id="palOut"></div>
+<div class="pal-hint">↑↓ wählen · ⏎ öffnen · Esc schließen</div>
+</div>
+</div>
 <script>
-/* ---------- IN-PAGE TOC · „Auf dieser Seite" ---------- */
+window.__TABKEY__="k";
+/* ---------- Faltbare Abschnitte in langen Tabs ---------- */
 (function(){
-  const ACTIVE_SEL='section[id^="t-"]:not(.hidden)';
-  const listEl=document.getElementById('tocList');
-  const nav=document.getElementById('tocNav');
-  const btn=document.getElementById('tocBtn');
-  const tabsEl=document.getElementById('tabs');
-  let obs=null;
-  function setActive(id){listEl.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));}
-  function closeNav(){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}
-  function goTo(h){
-    const off=(tabsEl?tabsEl.offsetHeight:0)+14;
-    const y=h.getBoundingClientRect().top+window.pageYOffset-off;
-    window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
-    if(window.innerWidth<1600)closeNav();
+const KEY=window.__TABKEY__;
+const SECOF=k=>document.getElementById("t-"+k)||document.querySelector('.panel[data-p="'+k+'"]');
+const MIN=5;                       // ab so vielen h2 wird gefaltet
+function build(sec){
+  if(!sec||sec.dataset.folded)return;
+  let TAG="H2", hs=[...sec.querySelectorAll(":scope > h2")];
+  if(hs.length<MIN){const h3=[...sec.querySelectorAll(":scope > h3")];if(h3.length>=4){TAG="H3";hs=h3;}}
+  if(hs.length<4){sec.dataset.folded="no";return;}
+  sec.dataset.folded="yes";
+  hs.forEach((h,i)=>{
+    const body=document.createElement("div");
+    body.className="sec-body"+(i===0?" open":"");
+    let n=h.nextSibling;
+    while(n&&!(n.nodeType===1&&n.tagName===TAG)){const nx=n.nextSibling;body.appendChild(n);n=nx;}
+    h.after(body);
+    h.classList.add("fold");if(i===0)h.classList.add("open");
+    h.setAttribute("role","button");h.setAttribute("tabindex","0");
+    const tog=()=>{h.classList.toggle("open");body.classList.toggle("open");};
+    h.addEventListener("click",tog);
+    h.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tog();}});
+  });
+  const bar=document.createElement("div");bar.className="foldbar";
+  const btn=document.createElement("button");btn.type="button";btn.textContent="Alle aufklappen";
+  btn.onclick=()=>{
+    const allOpen=hs.every(h=>h.classList.contains("open"));
+    hs.forEach(h=>{h.classList.toggle("open",!allOpen);
+      const b=h.nextElementSibling;if(b&&b.classList.contains("sec-body"))b.classList.toggle("open",!allOpen);});
+    btn.textContent=allOpen?"Alle aufklappen":"Alle zuklappen";
+  };
+  bar.appendChild(btn);sec.insertBefore(bar,sec.firstChild);
+}
+window.__openSection=function(id){
+  const el=document.getElementById(id);if(!el)return;
+  const h=el.classList&&el.classList.contains("fold")?el:el.closest(".sec-body")?.previousElementSibling;
+  if(h&&h.classList.contains("fold")&&!h.classList.contains("open")){
+    h.classList.add("open");
+    const b=h.nextElementSibling;if(b&&b.classList.contains("sec-body"))b.classList.add("open");
   }
-  function build(){
-    if(obs){obs.disconnect();obs=null;}
-    listEl.innerHTML='';closeNav();
-    const sec=document.querySelector(ACTIVE_SEL);
-    let heads=sec?[...sec.querySelectorAll('h2')]:[];
-    if(heads.length<3&&sec)heads=[...sec.querySelectorAll('h2,h3')];
-    if(heads.length<2){nav.classList.remove('has-items');btn.classList.remove('show');return;}
-    heads.forEach((h,i)=>{
-      if(!h.id)h.id=(sec.id||'sec')+'-h'+i;
-      const li=document.createElement('li');
-      const a=document.createElement('a');
-      a.href='#'+h.id;a.textContent=h.textContent.trim();
-      if(h.tagName==='H3')a.className='toc-l3';
-      a.addEventListener('click',e=>{e.preventDefault();goTo(h);});
-      li.appendChild(a);listEl.appendChild(li);
+  const box=el.closest(".sec-body");
+  if(box&&!box.classList.contains("open")){
+    box.classList.add("open");
+    const ph=box.previousElementSibling;if(ph&&ph.classList.contains("fold"))ph.classList.add("open");
+  }
+};
+function run(){TABS.forEach(t=>build(SECOF(t[KEY])));}
+run();
+})();
+const OTHER={file:"loeten-referenz.html",name:"🔥 Löten · Referenz",links:[["methoden","Start & Methoden"],["equipment","Werkzeug & Material"],["tht","Techniken (THT/SMD)"],["bauteile","Bauteile & Qualität"]]};
+/* ---------- APP-SHELL: Sidebar-Navigation + globale Suche ---------- */
+(function(){
+const KEY = window.__TABKEY__;                 // "k" (Elektronik) oder "p" (Löten)
+const GO  = window.showTab || window.activate; // vorhandene Tab-Umschaltung
+const cur = k => (window.showTab ? window.showTab(k) : window.activate(k, true));
+const SECOF = k => document.getElementById("t-"+k) || document.querySelector('.panel[data-p="'+k+'"]');
+const sideNav = document.getElementById("sideNav");
+const pal = document.getElementById("pal"), palIn = document.getElementById("palIn"), palOut = document.getElementById("palOut");
+const side = document.getElementById("side"), scrim = document.getElementById("scrim");
+
+/* ---- Sidebar aufbauen ---- */
+function slug(s){return s.toLowerCase().replace(/[^a-z0-9äöüß]+/g,"-").replace(/^-|-$/g,"").slice(0,40);}
+function headings(k){
+  const sec = SECOF(k); if(!sec) return [];
+  let hs = [...sec.querySelectorAll("h2")];
+  if(hs.length < 2) hs = [...sec.querySelectorAll("h2,h3")];
+  hs.forEach((h,i)=>{ if(!h.id) h.id = k+"--"+(slug(h.textContent)||("h"+i)); });
+  return hs;
+}
+function buildSide(active){
+  sideNav.innerHTML = "";
+  GROUPS.forEach(G=>{
+    const gl = document.createElement("div"); gl.className="sg"; gl.textContent=G.l; sideNav.appendChild(gl);
+    G.tabs.forEach(tk=>{
+      const t = TABS.find(x=>x[KEY]===tk); if(!t) return;
+      const b = document.createElement("button");
+      b.textContent = t.l; b.dataset.t = tk;
+      b.classList.toggle("on", tk===active);
+      b.onclick = ()=>{ cur(tk); closeSide(); };
+      sideNav.appendChild(b);
+      if(tk===active){
+        const box = document.createElement("div"); box.className="ssec show";
+        headings(tk).forEach(h=>{
+          const a = document.createElement("a");
+          a.href = "#"+tk; a.textContent = h.textContent.trim(); a.dataset.h = h.id;
+          a.onclick = e=>{ e.preventDefault(); jump(tk,h.id); closeSide(); };
+          box.appendChild(a);
+        });
+        if(box.children.length) sideNav.appendChild(box);
+      }
     });
-    nav.classList.add('has-items');btn.classList.add('show');
-    obs=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)setActive(en.target.id);});},{rootMargin:'-42% 0px -53% 0px',threshold:0});
-    heads.forEach(h=>obs.observe(h));
-    setActive(heads[0].id);
+  });
+  const gl = document.createElement("div"); gl.className="sg"; gl.textContent=OTHER.name; sideNav.appendChild(gl);
+  OTHER.links.forEach(([href,label])=>{
+    const a = document.createElement("a"); a.href = OTHER.file+"#"+href; a.textContent = label;
+    sideNav.appendChild(a);
+  });
+  const tt = document.querySelector("#topbar .tt");
+  if(tt){ const t = TABS.find(x=>x[KEY]===active); tt.textContent = t ? t.l : document.title; }
+  markActiveHeading();
+}
+/* ---- Scrollspy für die Abschnittsliste ---- */
+let spy = null;
+function markActiveHeading(){
+  if(spy){ spy.disconnect(); spy = null; }
+  const links = [...sideNav.querySelectorAll(".ssec a")];
+  if(!links.length) return;
+  const set = id => links.forEach(a=>a.classList.toggle("on", a.dataset.h===id));
+  spy = new IntersectionObserver(es=>{ es.forEach(en=>{ if(en.isIntersecting) set(en.target.id); }); },
+        {rootMargin:"-40% 0px -55% 0px", threshold:0});
+  links.forEach(a=>{ const el = document.getElementById(a.dataset.h); if(el) spy.observe(el); });
+  set(links[0].dataset.h);
+}
+function jump(tab,id){
+  cur(tab);
+  requestAnimationFrame(()=>{
+    if(window.__openSection) window.__openSection(id);
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.scrollIntoView({behavior:"smooth", block:"start"});
+    el.classList.remove("hl"); void el.offsetWidth; el.classList.add("hl");
+  });
+}
+/* ---- Mobile Sidebar ---- */
+function openSide(){ side.classList.add("open"); scrim.classList.add("show"); }
+function closeSide(){ side.classList.remove("open"); scrim.classList.remove("show"); }
+const nb = document.getElementById("navBtn"); if(nb) nb.onclick = openSide;
+scrim.onclick = closeSide;
+
+/* ---- Suchindex ---- */
+let IDX = null;
+function nearestId(el, tab){
+  let n = el;
+  while(n && n !== document.body){
+    let p = n.previousElementSibling;
+    while(p){ if(/^H[23]$/.test(p.tagName) && p.id) return p.id; p = p.previousElementSibling; }
+    n = n.parentElement;
   }
-  btn.addEventListener('click',e=>{e.stopPropagation();const o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});
-  document.addEventListener('click',e=>{if(window.innerWidth>=1600)return;if(nav.classList.contains('open')&&!nav.contains(e.target)&&e.target!==btn)closeNav();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeNav();});
-  if(typeof window.showTab==='function'){const _o=window.showTab;window.showTab=function(k){_o(k);build();};}
-  build();
+  return tab;
+}
+function buildIndex(){
+  const out = [];
+  TABS.forEach(t=>{
+    const k = t[KEY], sec = SECOF(k); if(!sec) return;
+    headings(k).forEach(h=>out.push({t:k,tl:t.l,id:h.id,x:h.textContent.trim(),w:h.tagName==="H2"?0:1}));
+    sec.querySelectorAll("table tbody tr").forEach(tr=>{
+      const c = [...tr.children].map(td=>td.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
+      if(!c.length) return;
+      out.push({t:k,tl:t.l,id:nearestId(tr,k),x:c.slice(0,2).join(" — "),w:3});
+    });
+    sec.querySelectorAll(".card > h3, .card .ct, .sym .sn, .rule b:first-child").forEach(el=>{
+      const x = el.textContent.replace(/\s+/g," ").trim();
+      if(x.length < 2) return;
+      out.push({t:k,tl:t.l,id:nearestId(el,k),x:x,w:2});
+    });
+  });
+  return out;
+}
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function hi(s,q){
+  const i = s.toLowerCase().indexOf(q);
+  if(i < 0) return esc(s);
+  return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+q.length))+"</mark>"+esc(s.slice(i+q.length));
+}
+let sel = 0, hits = [];
+function search(q){
+  q = q.trim().toLowerCase();
+  palOut.innerHTML = ""; hits = []; sel = 0;
+  if(q.length < 2){
+    palOut.innerHTML = '<div class="pal-empty">Mindestens 2 Zeichen — sucht durch Überschriften, Tabellen und Karten beider Seiten.</div>';
+    return;
+  }
+  if(!IDX) IDX = buildIndex();
+  const seen = new Set();
+  IDX.forEach(e=>{
+    const l = e.x.toLowerCase(), i = l.indexOf(q);
+    if(i < 0) return;
+    const key = e.t+"|"+e.x;
+    if(seen.has(key)) return; seen.add(key);
+    hits.push({...e, s: (i===0?0:1) + e.w*2});
+  });
+  hits.sort((a,b)=>a.s-b.s || a.x.length-b.x.length);
+  hits = hits.slice(0,40);
+  if(!hits.length){ palOut.innerHTML = '<div class="pal-empty">Nichts gefunden für „'+esc(q)+'".</div>'; return; }
+  hits.forEach((h,i)=>{
+    const b = document.createElement("button");
+    b.className = "pr" + (i===0?" sel":"");
+    b.innerHTML = hi(h.x,q) + '<span class="pw">'+esc(h.tl)+"</span>";
+    b.onclick = ()=>{ closePal(); jump(h.t,h.id); };
+    palOut.appendChild(b);
+  });
+}
+function move(d){
+  const rows = [...palOut.querySelectorAll(".pr")];
+  if(!rows.length) return;
+  rows[sel] && rows[sel].classList.remove("sel");
+  sel = (sel + d + rows.length) % rows.length;
+  rows[sel].classList.add("sel");
+  rows[sel].scrollIntoView({block:"nearest"});
+}
+function openPal(){ pal.classList.add("open"); palIn.value=""; search(""); palIn.focus(); }
+function closePal(){ pal.classList.remove("open"); }
+document.getElementById("openSearch").onclick = openPal;
+const ts = document.querySelector("#topbar .ts"); if(ts) ts.onclick = openPal;
+palIn.addEventListener("input", ()=>search(palIn.value));
+palIn.addEventListener("keydown", e=>{
+  if(e.key==="ArrowDown"){e.preventDefault();move(1);}
+  else if(e.key==="ArrowUp"){e.preventDefault();move(-1);}
+  else if(e.key==="Enter"){e.preventDefault();const r=palOut.querySelectorAll(".pr")[sel];if(r)r.click();}
+  else if(e.key==="Escape"){closePal();}
+});
+pal.addEventListener("click", e=>{ if(e.target===pal) closePal(); });
+document.addEventListener("keydown", e=>{
+  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="k"){ e.preventDefault(); pal.classList.contains("open")?closePal():openPal(); }
+  else if(e.key==="/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)){ e.preventDefault(); openPal(); }
+  else if(e.key==="Escape"){ closePal(); closeSide(); }
+});
+
+/* ---- an die Tab-Umschaltung hängen ---- */
+function activeTab(){
+  const s = document.querySelector('section[id^="t-"]:not(.hidden)') || document.querySelector(".panel.active");
+  if(!s) return TABS[0][KEY];
+  return s.id ? s.id.slice(2) : s.getAttribute("data-p");
+}
+if(window.showTab){ const o = window.showTab; window.showTab = function(k){ o(k); buildSide(activeTab()); }; }
+if(window.activate){ const o = window.activate; window.activate = function(p,u){ o(p,u); buildSide(activeTab()); }; }
+buildSide(activeTab());
 })();
 </script>
 </body>
