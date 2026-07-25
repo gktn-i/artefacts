@@ -261,10 +261,15 @@ svg.sy .cot{fill:var(--accent-ink);font-family:var(--sans);font-size:12px;font-w
 #sideNav a:hover,#sideNav button:hover{background:var(--surface-2)}
 #sideNav button.on{background:var(--accent-soft);color:var(--accent-ink);font-weight:600;
   border-left-color:var(--accent)}
-.ssec{display:none;margin:.1rem 0 .3rem}
+.ssec{display:none;margin:.25rem 0 .6rem 1.15rem;padding-left:.8rem;
+  border-left:2px solid var(--border-strong)}
 .ssec.show{display:block}
-.ssec a{font-size:12px;color:var(--muted);padding:3px 9px 3px 21px}
-.ssec a.on{color:var(--accent-ink);font-weight:600;border-left-color:var(--accent-border)}
+#sideNav .ssec a{font-size:12px;line-height:1.42;color:var(--muted);padding:4px 8px;
+  border-radius:5px;border-left:none}
+#sideNav .ssec a:hover{background:var(--surface-2);color:var(--text)}
+#sideNav .ssec a.on{color:var(--accent-ink);font-weight:600;background:var(--accent-soft)}
+#sideNav button{font-weight:500}
+#sideNav .sg.other{margin-top:1.3rem;padding-top:.95rem;border-top:1px solid var(--border)}
 .side-foot{padding:.55rem .8rem .75rem;border-top:1px solid var(--border);font-size:11px;color:var(--faint)}
 main{margin-left:266px;max-width:1080px;padding:1.6rem 1.9rem 5rem}
 #topbar{display:none;position:sticky;top:0;z-index:40;align-items:center;gap:.6rem;
@@ -2235,7 +2240,7 @@ function buildSide(active){
       }
     });
   });
-  const gl = document.createElement("div"); gl.className="sg"; gl.textContent=OTHER.name; sideNav.appendChild(gl);
+  const gl = document.createElement("div"); gl.className="sg other"; gl.textContent=OTHER.name; sideNav.appendChild(gl);
   OTHER.links.forEach(([href,label])=>{
     const a = document.createElement("a"); a.href = OTHER.file+"#"+href; a.textContent = label;
     sideNav.appendChild(a);
