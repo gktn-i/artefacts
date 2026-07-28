@@ -426,7 +426,7 @@ td:first-child{font-weight:500}
 <h2>Equipment und Werkzeuge</h2>
 <h3>Kernwerkzeuge</h3>
 <div class="grid">
-<div class="card"><div class="ct">Lötstation (geregelt)</div><div class="cd">Herzstück. Hält die Temperatur konstant.</div><ul><li>Wechselbare Spitzen wichtig</li><li>Schnelles Aufheizen spart Nerven</li><li>Bewährte Marken: Hakko, JBC, Weller, Pinecil</li></ul></div>
+<div class="card"><div class="ct">Lötstation (geregelt)</div><div class="cd">Herzstück. Hält die Temperatur konstant.</div><ul><li>Wechselbare Spitzen wichtig</li><li>Schnelles Aufheizen spart Nerven</li><li><b>Kartuschen-System</b> (Heizer in der Spitze) schlägt klassische Kolben: JBC C245/C210 und Nachbauten wie GeeBoon TC22, Sugon, Aixun</li><li>Klassisch/mobil: Hakko T12, TS101, Pinecil</li></ul></div>
 <div class="card"><div class="ct">Lötspitzen</div><div class="cd">Die Form bestimmt die Wärmeübertragung.</div><ul><li><b>Meißel / Chisel:</b> Allrounder, gibt viel Wärme ab</li><li><b>Bleistift / Conical:</b> Feinarbeit, wenig Kontaktfläche</li><li><b>Hufeisen / Hoof:</b> Drag-Soldering, hält Lot in der Wölbung</li><li>Konkrete Spitzen + Namenssysteme aller Marken: Tabellen unten</li></ul></div>
 <div class="card"><div class="ct">Heißluftstation</div><div class="cd">Temperatur und Luftstrom getrennt regelbar.</div><ul><li>Verschiedene Düsen je Bauteilgröße</li><li>Regelbarer Luftstrom ist Pflicht</li></ul></div>
 <div class="card"><div class="ct">Heizplatte / Preheater</div><div class="cd">Mini-Reflow und Vorwärmung.</div><ul><li>Gleichmäßige Temperaturverteilung wichtig</li><li>Manche Modelle mit Profilsteuerung</li></ul></div>
@@ -434,7 +434,47 @@ td:first-child{font-weight:500}
 
 <div class="tip"><b>Neue Spitze einbrennen:</b> Beim allerersten Aufheizen sofort Lot anbieten und die Spitze verzinnen, sobald es schmilzt — die frische Eisenschicht darf nie trocken glühen. Danach gilt dauerhaft: Spitze immer verzinnt lagern und dick verzinnt ausschalten, nie blank.</div>
 
-<h3>Spitzen für TS100 / TS101 / Pinecil (TS-Serie)</h3>
+<h3>JBC-Kartuschen C245 &amp; C210 — der Werkstatt-Standard</h3>
+<p>JBC (und die kompatiblen Stationen wie <b>GeeBoon TC22</b>, Sugon, Aixun) hat Heizelement und Sensor <b>direkt in der Spitze</b>. Die Wärme kommt dadurch sofort nach — du arbeitest <b>kühler</b> als mit einem klassischen Kolben und trotzdem schneller.</p>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Kartusche</th><th>Griff</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>C245</b></td><td>T245</td><td><b>Der Allrounder.</b> THT, Stiftleisten, SMD-Chips, Drag-Soldering, Kabel, Masseflächen — 80 % aller Arbeiten</td></tr>
+<tr><td><b>C210</b></td><td>T210</td><td><b>Mikro-Arbeit.</b> 0402/0201, feine IC-Pins, Fädeldraht, Pad-Reparatur unterm Mikroskop</td></tr>
+<tr><td>C115 / C105</td><td>T115 / Nano</td><td>Noch feiner — für die meisten Hobby-Arbeiten nicht nötig</td></tr>
+</tbody>
+</table></div>
+
+<h3>Temperatur-Presets (3 pro Griff)</h3>
+<p>Fang <b>immer beim niedrigsten Preset an.</b> Fließt das Lot in ~2 Sekunden sauber, passt es. Bleibt es zäh: erst eine <b>größere Spitze</b> probieren, dann erst mehr Hitze.</p>
+<div class="tbl-wrap"><table style="min-width:620px">
+<thead><tr><th>Griff</th><th>Preset</th><th>Temperatur</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><b>T210</b><br><span class="cd">fein</span></td><td>1</td><td><b>300 °C</b></td><td>bleihaltig: 0402/0201, feine IC-Pins, Fädeldraht, Pad-Reparatur</td></tr>
+<tr><td>2</td><td><b>330 °C</b></td><td>Allround: bleihaltig größere Chips, bleifrei fein</td></tr>
+<tr><td>3</td><td><b>360 °C</b></td><td>bleifrei: mehrere Pins am Stück, kleine Masseflächen</td></tr>
+<tr><td rowspan="3"><b>T245</b><br><span class="cd">allround</span></td><td>1</td><td><b>330 °C</b></td><td>bleihaltig Standard: THT, Stiftleisten, SMD-Chips, Drag</td></tr>
+<tr><td>2</td><td><b>360 °C</b></td><td>bleifrei Standard (SAC305), Drag über lange Pinreihen</td></tr>
+<tr><td>3</td><td><b>400 °C</b></td><td><b>nur kurz:</b> Masseflächen, dicke Kabel, Abschirmbleche, Steckverbinder mit viel Kupfer</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Warum kühler als beim TS101?</b> Ein klassischer Kolben hat den Sensor <b>hinter</b> dem Heizer — bricht die Spitzentemperatur beim Aufsetzen ein, merkt er es spät und man kompensiert mit einer höheren Einstellung. Bei JBC sitzt der Sensor <b>in</b> der Spitze und regelt in Millisekunden nach. Deshalb reichen 330 °C dort, wo ein TS101 gern 350–370 °C sehen will.</div>
+<div class="warn"><b>Nicht dauerhaft über 400 °C.</b> Das oxidiert die Eisenschicht der Spitze (kürzere Lebensdauer) und verbrennt das Flussmittel, bevor es wirken kann. Und: <b>Standby im Ständer aktiviert lassen</b> — das ist der größte Hebel für die Kartuschen-Lebensdauer.</div>
+
+<h3>Welche Spitzenform bei JBC?</h3>
+<p>Die Zahl hinter dem Bindestrich codiert Form und Größe (z. B. <b>C245-947</b> = Meißel 2,4 mm, der meistgekaufte Allrounder). Nach Form ausgewählt:</p>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Form</th><th>C245 (allround)</th><th>C210 (fein)</th></tr></thead>
+<tbody>
+<tr><td><b>Meißel</b> (Chisel)</td><td><b>2,4 mm — die Immer-drauf-Spitze</b> (C245-947). Dazu evtl. 1,0 mm für Feineres</td><td>0,4–1,0 mm für IC-Pins und Chips</td></tr>
+<tr><td><b>Hufeisen / Bevel</b></td><td>Drag-Soldering über lange Pinreihen, hält einen Lottropfen</td><td>Drag an feinem Pitch (QFP/TSSOP)</td></tr>
+<tr><td><b>Konisch / Nadel</b></td><td>selten nötig — überträgt am wenigsten Wärme</td><td>einzelne Pads, 0201, Fädeldraht</td></tr>
+<tr><td><b>Breit / Klinge</b></td><td>Masseflächen, dicke Kabel, Abschirmbleche</td><td>—</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Start-Set:</b> Für den T245 eine <b>Meißel 2,4 mm</b> als Dauerspitze, für den T210 eine <b>Meißel 0,4–0,8 mm</b>. Damit deckst du fast alles ab; eine Hufeisenspitze lohnt, sobald du regelmäßig Drag-Soldering machst.</div>
+
+<h3>Alternative: TS100 / TS101 / Pinecil (TS-Serie)</h3>
 <p>TS100, TS101 und Pinecil (V1/V2) nutzen dasselbe Spitzensystem — jede Spitze hier passt auf alle drei. Für den Pinecil V2 gibt es dieselben Formen zusätzlich als kürzere Pine64-Version (heizt schneller, präziser zu führen).</p>
 <div class="tbl-wrap"><table style="min-width:680px">
 <thead><tr><th>Spitze</th><th>Form</th><th>Am besten für</th></tr></thead>
@@ -696,7 +736,8 @@ td:first-child{font-weight:500}
 <!-- ============ TEMPERATUREN ============ -->
 <div class="panel" data-p="temp">
 <h2>Temperaturen</h2>
-<p>Richtwerte. Höher heißt nicht besser: Zu viel Hitze beschädigt Pads und Bauteile, zu wenig gibt kalte Stellen. Wenn Spitze und Lot passen, reicht meist die untere Hälfte des Bereichs. Wichtig: Die Werkzeug-Temperatur liegt deutlich <b>über</b> dem Schmelzpunkt des Lots — die Reserve gleicht Wärmeverluste an Pad und Beinchen aus.</p>
+<div class="tip"><b>Bei Kartuschen-Systemen (JBC C245/C210, GeeBoon TC22) rund 20–30 °C niedriger einstellen</b> als hier angegeben — der Sensor sitzt in der Spitze und regelt sofort nach. Konkrete Presets: Tab <a class="goto" href="#equipment">Equipment</a>.</div>
+<p>Richtwerte für klassische Kolben. Höher heißt nicht besser: Zu viel Hitze beschädigt Pads und Bauteile, zu wenig gibt kalte Stellen. Wenn Spitze und Lot passen, reicht meist die untere Hälfte des Bereichs. Wichtig: Die Werkzeug-Temperatur liegt deutlich <b>über</b> dem Schmelzpunkt des Lots — die Reserve gleicht Wärmeverluste an Pad und Beinchen aus.</p>
 <div class="tbl-wrap">
 <table id="tempTbl"><thead></thead><tbody></tbody></table>
 </div>
