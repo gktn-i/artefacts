@@ -1422,10 +1422,28 @@ td:first-child{font-weight:500}
 <div class="card">
 <div class="rule"><span class="ico">1️⃣</span><div><b>Einschätzen.</b> Kleine Kondensatoren in 3,3/5-V-Schaltungen (nF bis wenige µF) sind harmlos. Vorsicht ab großen Elkos (ab ~100 µF) oder höheren Spannungen (ab ~25–50 V). Netzteil-Primärseite, Foto-Blitze und Mikrowellen-Kondensatoren sind kein Anfänger-Terrain.</div></div>
 <div class="rule"><span class="ico">2️⃣</span><div><b>Spannung messen.</b> Multimeter auf V⎓, Spitzen an beide Anschlüsse — so siehst du, ob überhaupt noch Ladung drin ist und wie viel.</div></div>
-<div class="rule"><span class="ico">3️⃣</span><div><b>Über einen Widerstand entladen.</b> Einen Widerstand von 1–10 kΩ (bei großen Elkos ein leistungsfähiger Typ, z. B. 5–10 W) einige Sekunden an beide Pole halten — mit isolierten Krokodilklemmen oder Prüfspitzen, nie mit den Fingern an blankem Metall.</div></div>
+<div class="rule"><span class="ico">3️⃣</span><div><b>Über einen Widerstand entladen.</b> Einen Widerstand von 1–10 kΩ (bei großen Elkos ein leistungsfähiger Typ, z. B. 5–10 W) einige Sekunden an beide Pole halten — mit isolierten Krokodilklemmen oder Prüfspitzen, nie mit den Fingern an blankem Metall. Alternativen (Glühlampe, Entladestift, LED) stehen in der Tabelle darunter.</div></div>
 <div class="rule"><span class="ico">4️⃣</span><div><b>Zeit abschätzen.</b> Die Entladung folgt der RC-Zeitkonstante <span class="formula">τ = R × C</span> (Tab <a href="#grundlagen">Basics</a>): Nach 5·τ ist der Kondensator praktisch leer. Beispiel: 4700 µF über 1 kΩ → τ ≈ 4,7 s → nach ~25 s entladen.</div></div>
 <div class="rule"><span class="ico">5️⃣</span><div><b>Nachmessen.</b> Erst weiterarbeiten, wenn das Multimeter unter ~1 V zeigt. Große Kondensatoren laden sich nach dem Entladen von selbst wieder etwas auf („dielektrische Erholung") — direkt vor dem Anfassen noch einmal prüfen.</div></div>
 </div>
+
+<h3>Womit entladen? Die Möglichkeiten im Vergleich</h3>
+<p>Der Widerstand ist der Standard, aber nicht die einzige Option. Alle Verfahren machen dasselbe: Energie langsam in Wärme umwandeln. Unterschied ist nur der Komfort.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Methode</th><th>Wie</th><th>Wann sinnvoll</th><th>Achtung</th></tr></thead>
+<tbody>
+<tr><td><b>Widerstand</b> (Standard)</td><td>1–10 kΩ, 5–10 W, mit isolierten Klemmen an beide Pole</td><td>Immer richtig, von 5 V bis Netzteil-Elko</td><td>Kein Feedback — Ende nur per Messgerät erkennbar</td></tr>
+<tr><td><b>Glühlampe</b></td><td>Kleine 230-V-Glühlampe (z. B. 25–60 W) als Last anklemmen</td><td>Netzteil-Elkos, Röhrentechnik: leuchtet und wird dunkler → sichtbarer Fortschritt</td><td>Nur echte <b>Glühlampe</b>. LED- und Energiesparlampen enthalten Elektronik und funktionieren nicht.</td></tr>
+<tr><td><b>Entladewerkzeug / Entladestift</b></td><td>Fertiger Stift mit eingebautem Widerstand, teils mit Spannungsanzeige</td><td>Wer regelmäßig an Netzteilen, Blitzgeräten oder Mikrowellen arbeitet</td><td>Auf Spannungsfestigkeit achten (mind. so hoch wie die Schaltung)</td></tr>
+<tr><td><b>LED + Vorwiderstand</b></td><td>LED in Reihe mit z. B. 1 kΩ, richtig gepolt</td><td>Kleinspannung bis ~30 V: die LED erlischt, wenn der Kondensator leer ist</td><td>LED zeigt nur bis zu ihrer Flussspannung (~2 V) an — Restladung bleibt</td></tr>
+<tr><td><b>Eingebauter Bleeder-Widerstand</b></td><td>Fest parallel zum Kondensator verbaut, entlädt von selbst</td><td>Zuerst prüfen: viele Netzteile und Geräte haben ihn bereits</td><td>Kann defekt oder abgelötet sein — trotzdem immer nachmessen</td></tr>
+<tr><td><b>Elektronische Last</b></td><td>Labor-Last auf konstanten Strom oder Widerstand stellen</td><td>Wer sie hat: definierte, protokollierbare Entladung</td><td>Spannungsgrenze des Geräts beachten</td></tr>
+</tbody>
+</table></div>
+<div class="danger-box">
+<p style="margin:0"><b>Nicht kurzschließen.</b> Ein Kondensator mit Schraubendreher oder Draht direkt überbrückt entlädt sich in Millisekunden: Funken, Brandspuren an der Klinge, verschweißte Kontakte, im schlimmsten Fall platzt der Kondensator. Auch das Bauteil selbst nimmt Schaden. Immer über eine Last, nie direkt.</p>
+</div>
+<p class="note">Das Multimeter allein entlädt praktisch nicht: sein Innenwiderstand liegt bei ~10 MΩ, ein 4700-µF-Elko hätte damit τ ≈ 13 Stunden. Es ist Anzeige, keine Last.</p>
 
 <h3>Wärme, Leistung und Brandgefahr</h3>
 <p>Jedes Bauteil setzt überschüssige Energie als <b>Wärme</b> um. Zu viel davon ist die häufigste Brandursache im Hobby:</p>
