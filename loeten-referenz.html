@@ -699,9 +699,19 @@ td:first-child{font-weight:500}
 <tr><td><b>Kester #951</b>, ChipQuik NC191, MG Chemicals 8341</td><td>No-Clean, low-solids</td><td>Flux-Pen / Flasche (flüssig, dünn)</td><td>nein</td><td><span class="b b-kolben">Lötkolben</span> THT, Kabel und Pads verzinnen, alte Lötstellen auffrischen, Drag-Soldering und Pins über die Reihe benetzen</td></tr>
 <tr><td><b>ChipQuik SMD291</b>, AMTECH NC-559</td><td>No-Clean</td><td>Tacky-Gel (Spritze)</td><td>nein (optional)</td><td><span class="b b-kolben">SMD</span> <span class="b b-luft">Heißluft</span> Chips, QFN/QFP, BGA-Reballing, Rework — zäh, hält Bauteile an Ort</td></tr>
 <tr><td><b>AMTECH RMA-223</b>, Kester 186</td><td>RMA (Kolophonium)</td><td>Gel/Paste (Spritze)</td><td>ja, mit IPA</td><td><span class="b b-luft">Rework</span> hartnäckige Oxidation, wenn du ohnehin reinigst</td></tr>
+<tr><td><b>„Nano-Flux"</b> (Mechanic, Relife, Amaoe u. ä.)</td><td>No-Clean, sehr niedrigviskos</td><td>Mini-Spritze mit feiner Nadel</td><td>nein (Rest ist minimal)</td><td><span class="b b-kolben">Micro</span> <span class="b b-luft">BGA</span> Arbeiten unterm Mikroskop: 0201/01005, feine BGA-Kugeln, Fädeldraht-Reparatur</td></tr>
 <tr><td>Kolophonium / Rosin</td><td>Kolophonium</td><td>fester Block</td><td>ja, mit IPA</td><td><span class="b b-kolben">Lötkolben</span> günstiger Klassiker, Spitze/Entlötlitze eintauchen</td></tr>
 </tbody>
 </table></div>
+
+<h4 style="font-size:13px;margin:.8rem 0 .3rem">Was „Nano-Flux" bedeutet</h4>
+<p>Kein Markenname und keine eigene Chemie, sondern eine <b>Produktklasse</b> aus der Handy-/Micro-Reparatur: ein No-Clean-Gel, das bewusst <b>sehr dünn</b> eingestellt ist und in einer kleinen Spritze mit Kanüle kommt.</p>
+<div class="grid">
+<div class="card"><div class="ct">✓ Stärken</div><div class="cd">Kriecht durch Kapillarwirkung unter QFN-Böden und zwischen BGA-Kugeln, wo zähes Gel nicht hinkommt. Sehr wenig Rückstand — auf Boards, die man nicht waschen kann, ein echter Vorteil. Punktgenau dosierbar, verdeckt unterm Mikroskop nichts.</div></div>
+<div class="card"><div class="ct">✗ Grenzen</div><div class="cd">Zu dünn zum <b>Halten</b> von Bauteilen — beim Platzieren und bei Heißluft schwimmt das Teil weg. Dafür weiter Tacky-Gel nehmen. Und die Aktivität ist niedrig: gegen starke Oxidation oder alte, graue Lötstellen kommt es nicht an, da ist RMA die bessere Wahl.</div></div>
+<div class="card"><div class="ct">⚠ Beim Kauf</div><div class="cd">Die Kategorie ist voll von Kopien mit wechselnder Qualität. Kaufkriterien: Herstellungs-/Haltbarkeitsdatum aufgedruckt, Sicherheitsdatenblatt verfügbar, Spritze dicht verschlossen. Im Zweifel bei einem Markenprodukt bleiben — schlechtes Flux hinterlässt korrosive Rückstände, die Monate später als Grünspan zurückkommen.</div></div>
+</div>
+<div class="tip"><b>Die drei Flux-Konsistenzen im Überblick:</b> <b>flüssig</b> (Pen/Flasche) für THT, Kabel und Drag-Soldering · <b>Tacky-Gel</b> zum Platzieren und Festhalten von SMD · <b>Nano/dünnes Gel</b> für alles unter dem Mikroskop, wo es hineinkriechen soll. Wer alle drei hat, deckt jede Arbeit ab.</div>
 
 <div class="tip"><b>Einsteiger-Set:</b> Ein <b>flüssiges No-Clean-Flux</b> (Pen/Flasche, z. B. Kester 951 oder ChipQuik NC191) für THT, Kabel und Drag plus eine <b>No-Clean-Tacky-Flux-Spritze</b> (z. B. ChipQuik SMD291) fürs Platzieren und Rework von SMD deckt rund 95 % aller Arbeiten ab.</div>
 <div class="warn"><b>Vorsicht Fälschungen:</b> AMTECH NC-559 und RMA-223 werden auf Online-Marktplätzen massenhaft gefälscht — nachgemachte Spritzen wirken oft schlechter oder hinterlassen korrosive Rückstände. Für verlässliche Qualität ChipQuik oder MG Chemicals beim seriösen Händler kaufen. Und: <b>niemals Klempner-Lötwasser oder Lötfett</b> (säurehaltig) auf Elektronik.</div>
@@ -725,6 +735,53 @@ td:first-child{font-weight:500}
 </table></div>
 <div class="tip"><b>Einsteiger-Tipp:</b> <b>Sn63Pb37</b> ist zum Üben am gutmütigsten. Wer bleifrei will oder empfindliche Teile schont, nimmt die <b>Low-Temp-Paste (Sn42Bi57Ag1, ~138 °C)</b> — deutlich niedrigere Reflow-Temperatur. Korngröße <b>T4</b> deckt fast alles ab. Seriöse Marken: Chip Quik, Kester, MG Chemicals; günstige China-Pasten (Mechanic, Relife) gehen, schwanken aber in Qualität.</div>
 <div class="warn"><b>Low-Temp-Paste (SnBi) beachten:</b> Bismut-Lot ist <b>spröder</b> — nicht für mechanisch belastete Stellen (Steckverbinder, Kabel). Und <b>nie mit bleihaltigem Lot mischen</b>: Sn-Pb-Bi bildet eine sehr niedrig schmelzende, spröde Phase, die Lötstellen unzuverlässig macht.</div>
+
+<h3>Reparaturdraht &amp; Jumper Wire</h3>
+<p>Wenn eine Leiterbahn gerissen ist, ein Pad fehlt oder eine Verbindung nachträglich gelegt werden muss, brauchst du Draht — und zwar den <b>richtigen</b>. Zu dünn heißt Spannungsabfall und abgerissene Brücke, zu dick heißt, er hebt beim ersten Anstoßen das Pad mit ab.</p>
+
+<h4 style="font-size:13px;margin:.8rem 0 .3rem">Durchmesser, AWG und was durchpasst</h4>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Ø</th><th>≈ AWG</th><th>Widerstand</th><th>Kurze Brücke trägt</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>0,02 mm</b></td><td>~52</td><td>~53 Ω/m</td><td>wenige mA</td><td>Feinste Pad-Reparatur unterm Mikroskop, kaum sichtbar. Reißt beim Schiefansehen.</td></tr>
+<tr><td><b>0,05 mm</b></td><td>44</td><td>8,5 Ω/m</td><td>~50 mA</td><td>Signalleitungen an BGA-Pads, Datenleitungen auf Handy-Boards</td></tr>
+<tr><td><b>0,08 mm</b></td><td>40</td><td>3,3 Ω/m</td><td>~90 mA</td><td>Allrounder für Signalreparatur — noch gut handhabbar</td></tr>
+<tr><td><b>0,10 mm</b></td><td>38</td><td>2,1 Ω/m</td><td>~140 mA</td><td><b>Der Standard für Fädeldraht-Reparaturen.</b> Dünn genug für feinen Pitch, robust genug zum Arbeiten.</td></tr>
+<tr><td><b>0,13 mm</b></td><td>36</td><td>1,3 Ω/m</td><td>~230 mA</td><td>Signale plus kleine Verbraucher (LED, Sensor)</td></tr>
+<tr><td><b>0,16 mm</b></td><td>34</td><td>0,84 Ω/m</td><td>~360 mA</td><td>Kurze Versorgungsbrücken auf dem Board</td></tr>
+<tr><td><b>0,20 mm</b></td><td>32</td><td>0,54 Ω/m</td><td>~570 mA</td><td>Rail-Reparatur bei kleinen Strömen</td></tr>
+<tr><td><b>0,25 mm</b></td><td>30</td><td>0,34 Ω/m</td><td>~860 mA</td><td><b>Kynar-Wire-Wrap-Standard</b> — der klassische Mod-/Bodge-Wire</td></tr>
+<tr><td><b>0,32 mm</b></td><td>28</td><td>0,21 Ω/m</td><td>~1,4 A</td><td>Versorgungsleitungen, Akku-Anschlüsse an kleinen Geräten</td></tr>
+<tr><td><b>0,40 mm</b></td><td>26</td><td>0,13 Ω/m</td><td>~2,2 A</td><td>Alles ab etwa 1 A — darunter wird es warm</td></tr>
+<tr><td><b>0,51 mm</b></td><td>24</td><td>0,084 Ω/m</td><td>~3,5 A</td><td>Leistungsbrücken, Motor- und Ladeleitungen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Stromwerte gelten für eine <b>kurze, frei liegende</b> Brücke, nicht für Meterware im Bündel — dort ist nur etwa ein Sechstel davon zulässig. Und: 0,01 mm wird zwar angeboten, praktisch handhabbar beginnt es bei <b>0,02 mm</b>. Zum Rechnen: 20 mm mit 0,1 mm Draht ergeben ~43 mΩ — für Signale völlig egal, bei 1 A wären es aber schon 43 mV Verlust und 43 mW Wärme in einem Draht, der dafür ohnehin zu dünn ist.</p>
+
+<h4 style="font-size:13px;margin:.8rem 0 .3rem">Isoliert oder blank — welche Sorte wofür</h4>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Sorte</th><th>Isolierung</th><th>Verarbeiten</th><th>Dafür nehmen</th></tr></thead>
+<tbody>
+<tr><td><b>Kupferlackdraht, lötbar</b> (UEW/Polyurethan)</td><td>hauchdünner Lack, praktisch keine Dicke</td><td><b>Kein Abisolieren:</b> Ende in einen Lotklecks bei 350–380 °C halten, der Lack verbrennt und der Draht verzinnt sich selbst</td><td><b>Die erste Wahl für Leiterbahn-Reparatur.</b> Liegt flach auf der Platine, darf über andere Bahnen laufen, verschwindet unter UV-Lack.</td></tr>
+<tr><td>Kupferlackdraht, <b>nicht</b> lötbar (Polyimid/ML)</td><td>zäher Hochtemperatur-Lack</td><td>Muss mechanisch abgekratzt oder chemisch entfernt werden</td><td>Für Reparaturen eher meiden. Erkennbar daran, dass er im Lot einfach nicht benetzt.</td></tr>
+<tr><td><b>Kynar / Wire-Wrap</b> (30 AWG, PVDF)</td><td>zäh, hitzefest, sehr dünnwandig</td><td>Abisolieren mit Spezialabisolierer oder vorsichtig mit der Klinge</td><td><b>Mod- und Bodge-Wire</b> über größere Strecken. Zieht sich beim Löten nicht zurück, ist farbig und dadurch nachvollziehbar.</td></tr>
+<tr><td><b>PTFE-Litze, versilbert</b> (Teflon)</td><td>PTFE, hält Lötkolbenhitze aus</td><td>Abisolieren, Litze verzinnen</td><td><b>Alles, was sich bewegt:</b> Kabel zu Displays, Akkus, Deckeln. Litze bricht nicht durch Biegewechsel, Massivdraht schon.</td></tr>
+<tr><td>PVC-Litze (Standard-Schaltdraht)</td><td>PVC — schmilzt bei Lötwärme zurück</td><td>Abisolieren, schnell arbeiten</td><td>Nur außerhalb der Hitzezone. Auf der Platine zieht sich die Isolierung zurück und legt blanken Draht frei.</td></tr>
+<tr><td><b>Blanker Kupferdraht</b></td><td>keine</td><td>Direkt löten</td><td>Nur <b>sehr kurze</b> Brücken zwischen benachbarten Pads, wo nichts gekreuzt wird. Sobald der Draht über eine andere Bahn läuft: Kurzschlussgefahr.</td></tr>
+</tbody>
+</table></div>
+
+<h4 style="font-size:13px;margin:.8rem 0 .3rem">Die Entscheidung in fünf Regeln</h4>
+<ol>
+<li><b>Wie viel Strom fließt?</b> Das legt den Durchmesser fest — Tabelle oben, und im Zweifel eine Stufe dicker.</li>
+<li><b>Kreuzt der Draht etwas?</b> Ja → isoliert, immer. Nein und kürzer als ein paar Millimeter → blank ist erlaubt.</li>
+<li><b>Bewegt sich das Ende?</b> Ja → <b>Litze</b> (PTFE). Massivdraht bricht an der Lötstelle durch Biegewechsel — die häufigste Ursache für „die Reparatur hat drei Wochen gehalten".</li>
+<li><b>Wie fein ist die Stelle?</b> Unter dem Mikroskop an BGA- oder 0201-Pads: 0,05–0,1 mm Lackdraht. Alles Gröbere reißt beim Löten das Pad ab.</li>
+<li><b>Muss es jemand nachvollziehen können?</b> Dann farbiger Kynar-Draht statt unsichtbarem Lackdraht — auch für dich selbst in einem Jahr.</li>
+</ol>
+
+<div class="tip"><b>Saubere Fädeldraht-Reparatur, Schritt für Schritt:</b> ① Bruchstelle beidseitig freilegen (Lötstopplack vorsichtig abkratzen), blankes Kupfer verzinnen. ② Draht auf Länge plus ~20 % schneiden, beide Enden im Lotklecks verzinnen (Lack brennt ab). ③ Ein Ende antacken, Draht flach anlegen, zweites Ende antacken. ④ <b>Durchgang messen</b> — und gegen die Nachbarbahnen prüfen, dass nichts piept. ⑤ Fixieren: ein Tropfen <b>UV-Lötstopplack</b> (grünes Öl) drüber und aushärten, oder Kapton-Tape. Ohne Fixierung wirkt jede Bewegung direkt auf die Lötstelle.</div>
+<div class="warn"><b>Der häufigste Fehler:</b> zu straff gespannt. Der Draht braucht eine minimale Schlaufe, sonst zieht jede Temperaturdehnung und jeder Stoß direkt am Pad — und das Pad ist immer schwächer als der Draht.</div>
 
 <div class="grid" style="margin-top:1rem">
 <div class="card"><div class="ct">Tip Tinner</div><div class="cd">Aktivator-Paste, rettet oxidierte, nicht mehr benetzende Spitzen.</div></div>
