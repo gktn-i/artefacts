@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumix S1 II Cheat Sheet</title>
+<meta name="description" content="Aufnahme-Referenz zur Lumix S1 II: Presets, Codecs, Dual Native ISO, V-Log, Shutter, Readout/Crop, Foto-Modi und Szenarien.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14110d;--panel:#1c1812;--panel-2:#231e16;--line:#37301f;
+    --ink:#efe7d6;--ink-dim:#b6aa92;--ink-faint:#7c7360;
+    --amber:#e8a13a;--amber-soft:#f0c47e;--rec:#e2402f;--cool:#6fa6b8;--radius:4px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;padding:0 16px 72px}
+  .wrap{max-width:1080px;margin:0 auto}
+
+  /* header */
+  header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
+    flex-wrap:wrap;padding:38px 0 22px;border-bottom:1px solid var(--line);margin-bottom:40px}
+  .brand .eyebrow{font-family:'Oswald',sans-serif;font-weight:500;letter-spacing:.34em;
+    text-transform:uppercase;font-size:.7rem;color:var(--amber);display:flex;align-items:center;gap:9px;margin-bottom:6px}
+  .recdot{width:8px;height:8px;border-radius:50%;background:var(--rec);
+    box-shadow:0 0 0 0 rgba(226,64,47,.5);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(226,64,47,.45)}70%{box-shadow:0 0 0 7px rgba(226,64,47,0)}100%{box-shadow:0 0 0 0 rgba(226,64,47,0)}}
+  .brand h1{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(2.1rem,6vw,3.4rem);
+    line-height:.95;letter-spacing:.01em;text-transform:uppercase}
+  .brand h1 span{color:var(--amber)}
+  .brand .sub{color:var(--ink-dim);font-size:.95rem;margin-top:8px;max-width:52ch}
+  .printbtn{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-dim);background:transparent;border:1px solid var(--line);
+    border-radius:var(--radius);padding:9px 14px;cursor:pointer;transition:.18s;white-space:nowrap}
+  .printbtn:hover{border-color:var(--amber);color:var(--amber)}
+
+  /* section scaffold */
+  section{margin-bottom:50px}
+  .seclabel{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+  .seclabel .num{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--amber);letter-spacing:.1em}
+  .seclabel h2{font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;
+    letter-spacing:.12em;font-size:1.18rem}
+  .seclabel .hint{font-size:.78rem;color:var(--ink-faint);margin-left:auto;
+    font-family:'IBM Plex Mono',monospace;text-align:right}
+  .lead{font-size:.88rem;color:var(--ink-dim);margin-bottom:18px;max-width:80ch}
+  .lead code{font-family:'IBM Plex Mono',monospace;color:var(--amber-soft);font-size:.82rem}
+
+  /* tables */
+  .tablewrap{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  thead th{background:var(--panel-2);text-align:left;font-family:'IBM Plex Mono',monospace;
+    font-weight:500;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+    padding:11px 14px;border-bottom:1px solid var(--line)}
+  tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--panel)}
+  .mode{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);white-space:nowrap}
+  .res{font-family:'IBM Plex Mono',monospace;color:var(--ink-dim);font-size:.8rem}
+  .fps{font-family:'IBM Plex Mono',monospace;color:var(--amber-soft)}
+  .num-c{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-weight:600;white-space:nowrap}
+  .cool-c{font-family:'IBM Plex Mono',monospace;color:var(--cool);font-weight:600;white-space:nowrap}
+  .use{color:var(--ink-dim);font-size:.83rem;max-width:30ch}
+  .codec-cell{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--ink-dim);white-space:nowrap}
+  .tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.06em;
+    text-transform:uppercase;padding:2px 7px;border-radius:99px;border:1px solid var(--line);
+    color:var(--ink-faint);white-space:nowrap;margin:1px 0}
+  .tag.og{color:var(--cool);border-color:rgba(111,166,184,.4)}
+  .tag.alli{color:var(--amber);border-color:rgba(232,161,58,.4)}
+  .tag.fav{color:var(--rec);border-color:rgba(226,64,47,.45)}
+  .tag.r43{color:var(--amber-soft);border-color:rgba(240,196,126,.35)}
+  .note{font-size:.78rem;color:var(--ink-faint);margin-top:12px;line-height:1.6}
+  .note b{color:var(--ink-dim);font-weight:600}
+
+  /* GOP diagram */
+  .gop{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
+    padding:18px 19px;margin-bottom:18px;display:flex;flex-direction:column;gap:14px}
+  .goprow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .goprow .gl{font-family:'IBM Plex Mono',monospace;font-size:.74rem;font-weight:600;
+    color:var(--ink);flex:0 0 78px}
+  .frames{display:flex;gap:4px}
+  .frame{width:22px;height:22px;border-radius:2px;display:grid;place-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600}
+  .frame.i{background:rgba(232,161,58,.18);color:var(--amber);border:1px solid rgba(232,161,58,.5)}
+  .frame.p{background:var(--panel-2);color:var(--ink-faint);border:1px solid var(--line)}
+  .frame.b{background:transparent;color:var(--ink-faint);border:1px dashed var(--line)}
+  .gcap{font-size:.78rem;color:var(--ink-dim)}
+  .gcap b{color:var(--ink);font-weight:600}
+
+  /* codec cards + meters */
+  .codecgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.codecgrid{grid-template-columns:1fr}}
+  .ccard{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
+    padding:17px 18px;display:flex;flex-direction:column;gap:13px}
+  .chead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .cname{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;
+    letter-spacing:.06em;font-size:1.02rem;color:var(--ink)}
+  .cbadge{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.05em;
+    color:var(--amber-soft);border:1px solid var(--line);border-radius:99px;padding:2px 8px;white-space:nowrap}
+  .cdesc{font-size:.82rem;color:var(--ink-dim);line-height:1.5}
+  .meters{display:flex;flex-direction:column;gap:7px}
+  .meter{display:flex;align-items:center;gap:10px}
+  .meter .ml{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--ink-faint);flex:0 0 86px}
+  .segs{display:flex;gap:3px;flex:1}
+  .seg{height:7px;flex:1;border-radius:1px;background:var(--panel-2);border:1px solid rgba(255,255,255,.03)}
+  .meter.size .seg.on{background:var(--amber);border-color:var(--amber)}
+  .meter.load .seg.on{background:var(--rec);border-color:var(--rec)}
+  .meter.flex .seg.on{background:var(--cool);border-color:var(--cool)}
+  .cwhen{border-top:1px solid var(--line);padding-top:10px;font-size:.81rem;color:var(--ink-dim)}
+  .cwhen b{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--amber);display:block;margin-bottom:3px}
+
+  /* ISO block */
+  .iso{border:1px solid var(--line);border-radius:var(--radius);
+    background:radial-gradient(120% 140% at 0% 0%, rgba(232,161,58,.07), transparent 55%),var(--panel);
+    padding:26px 26px 30px}
+  .iso-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  @media(max-width:720px){.iso-grid{grid-template-columns:1fr;gap:26px}}
+  .basepair{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:24px}
+  .base{flex:1 1 130px;border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:var(--bg)}
+  .base .lbl{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px}
+  .base .val{font-family:'Oswald',sans-serif;font-weight:600;font-size:2.5rem;line-height:1;color:var(--ink)}
+  .base.low .val{color:var(--cool)}
+  .base.high .val{color:var(--amber)}
+  .base .det{font-size:.74rem;color:var(--ink-dim);margin-top:6px}
+  .scale{margin-top:6px}
+  .scale .track{position:relative;height:6px;border-radius:99px;
+    background:linear-gradient(90deg,var(--cool),var(--panel-2) 40%,var(--panel-2) 60%,var(--amber));margin:30px 0 8px}
+  .tick{position:absolute;top:50%;transform:translate(-50%,-50%);text-align:center}
+  .tick .dot{width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid var(--bg);margin:0 auto}
+  .tick .t-lbl{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--ink-dim);
+    position:absolute;top:-22px;left:50%;transform:translateX(-50%);white-space:nowrap}
+  .tick.boost .dot{background:var(--rec)}
+  .tick.boost .t-lbl{color:var(--rec)}
+  .scaleends{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;
+    font-size:.64rem;color:var(--ink-faint)}
+  .praxis h3{font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.1em;
+    font-size:.84rem;color:var(--amber);margin-bottom:10px}
+  .praxis ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .praxis li{position:relative;padding-left:18px;font-size:.85rem;color:var(--ink-dim)}
+  .praxis li::before{content:"\203A";position:absolute;left:0;color:var(--amber);font-weight:700}
+  .praxis li b{color:var(--ink);font-weight:600;font-family:'IBM Plex Mono',monospace}
+
+  /* row lists */
+  .stack{display:flex;flex-direction:column;gap:11px}
+  .row{display:flex;gap:16px;align-items:baseline;border:1px solid var(--line);border-radius:var(--radius);
+    padding:13px 16px;background:var(--panel)}
+  .row .rk{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.82rem;color:var(--amber-soft);
+    flex:0 0 172px;line-height:1.4}
+  .row .rv{font-size:.85rem;color:var(--ink-dim)}
+  .row .rv code{font-family:'IBM Plex Mono',monospace;color:var(--amber-soft);font-size:.8rem}
+  @media(max-width:560px){.row{flex-direction:column;gap:5px}.row .rk{flex:none}}
+
+  /* split cols */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:720px){.split{grid-template-columns:1fr}}
+  .col{border:1px solid var(--line);border-radius:var(--radius);padding:18px 19px;background:var(--panel)}
+  .col h3{font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.1em;
+    font-size:.84rem;color:var(--cool);margin-bottom:8px}
+  .col.amber h3{color:var(--amber)}
+  .col ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px}
+  .col li{position:relative;padding-left:16px;font-size:.83rem;color:var(--ink-dim)}
+  .col li::before{content:"\2013";position:absolute;left:0;color:var(--ink-faint)}
+  .col code{font-family:'IBM Plex Mono',monospace;color:var(--amber-soft);font-size:.8rem}
+
+  .notes{border:1px dashed var(--line);border-radius:var(--radius);padding:22px;background:var(--panel-2);min-height:110px}
+  .notes .ph{font-size:.85rem;color:var(--ink-faint);line-height:1.7}
+  .notes .ph b{color:var(--ink-dim)}
+
+  footer{border-top:1px solid var(--line);padding-top:18px;margin-top:8px;font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;color:var(--ink-faint);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  /* tabs */
+  .tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:34px;flex-wrap:wrap}
+  .tab{font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.1em;
+    font-size:.82rem;color:var(--ink-faint);background:transparent;border:none;border-bottom:2px solid transparent;
+    padding:11px 16px;cursor:pointer;transition:.18s;margin-bottom:-1px}
+  .tab:hover{color:var(--ink-dim)}
+  .tab.active{color:var(--amber);border-bottom-color:var(--amber)}
+  .tabpanel{display:none}
+  .tabpanel.active{display:block}
+  .uc{font-family:'Oswald',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.04em;
+    font-size:.82rem;color:var(--amber-soft);white-space:nowrap}
+  .why-c{font-size:.83rem;color:var(--ink-dim)}
+  .tablewrap.wide{overflow-x:auto}
+  .tablewrap.wide table{min-width:700px}
+  .grouphead td{background:var(--panel-2);font-family:'Oswald',sans-serif;text-transform:uppercase;
+    letter-spacing:.1em;font-size:.72rem;color:var(--amber);padding:9px 14px;font-weight:500}
+  .grouphead:hover td{background:var(--panel-2)}
+
+  /* featured allrounder */
+  .seclabel .num.star{color:var(--rec);font-size:.95rem;line-height:1}
+  .featured{border:1px solid rgba(232,161,58,.35);border-radius:var(--radius);
+    background:radial-gradient(130% 130% at 0% 0%, rgba(232,161,58,.10), transparent 60%),var(--panel);padding:22px 24px}
+  .feat-grid{display:grid;grid-template-columns:1fr 240px;gap:26px;align-items:start}
+  @media(max-width:720px){.feat-grid{grid-template-columns:1fr;gap:24px}}
+  .recipe-mode{font-family:'Oswald',sans-serif;font-weight:600;font-size:2rem;line-height:1;
+    color:var(--amber);text-transform:uppercase;letter-spacing:.02em}
+  .recipe-mode span{display:block;font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:500;
+    letter-spacing:.08em;color:var(--ink-dim);text-transform:none;margin-top:7px}
+  .recipe-why{font-size:.86rem;color:var(--ink-dim);margin-top:12px;max-width:54ch}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+  @media(max-width:560px){.chips{grid-template-columns:1fr}}
+  .chip{border:1px solid var(--line);border-radius:var(--radius);background:var(--bg);padding:8px 11px}
+  .chip .ck{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-faint);display:block;margin-bottom:2px}
+  .chip .cv{font-size:.8rem;color:var(--ink);line-height:1.35}
+  .reframe-title{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:12px;text-align:center}
+  .reframe{position:relative;width:100%;max-width:230px;aspect-ratio:3/2;border:1.5px solid var(--amber);
+    border-radius:2px;background:rgba(232,161,58,.06);margin:0 auto}
+  .ov{position:absolute}
+  .ov span{position:absolute;font-family:'IBM Plex Mono',monospace;font-size:.56rem;padding:0 3px;
+    background:var(--panel);border-radius:2px;white-space:nowrap}
+  .o169{top:7.81%;bottom:7.81%;left:0;right:0;border:1px dashed var(--cool)}
+  .o169 span{top:-7px;left:3px;color:var(--cool)}
+  .o11{top:0;bottom:0;left:16.67%;right:16.67%;border:1px dashed var(--amber-soft)}
+  .o11 span{bottom:-7px;left:3px;color:var(--amber-soft)}
+  .o916{top:0;bottom:0;left:31.25%;right:31.25%;border:1px dashed var(--rec)}
+  .o916 span{bottom:3px;left:50%;transform:translateX(-50%);color:var(--rec)}
+  .reframe-legend{font-size:.74rem;color:var(--ink-faint);text-align:center;margin-top:12px}
+  .variant{margin-top:14px;border:1px solid var(--line);border-left:3px solid var(--cool);
+    border-radius:var(--radius);background:var(--panel);padding:13px 16px}
+  .variant .vk{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--cool);margin-bottom:4px}
+  .variant .vv{font-size:.83rem;color:var(--ink-dim);line-height:1.55}
+  .variant .vv b{color:var(--ink);font-weight:600}
+  .variant code{font-family:'IBM Plex Mono',monospace;color:var(--amber-soft);font-size:.8rem}
+
+  /* print */
+  @media print{
+    @page{margin:13mm}
+    body{background:#fff;color:#111;padding:0}
+    .printbtn,.recdot{display:none}
+    .brand h1 span,.brand .eyebrow{color:#a8640a}
+    section{break-inside:avoid;margin-bottom:20px}
+    .tablewrap,.row,.col,.iso,.base,.notes,.ccard,.gop,.featured,.chip,.variant{border-color:#ccc;background:#fff!important;box-shadow:none}
+    .recipe-mode,.recipe-why span{color:#a8640a!important}
+    .chip .cv,.variant .vv{color:#333!important}
+    .reframe{border-color:#a8640a}.o169{border-color:#1f6f86}.o916{border-color:#c0291a}
+    .seclabel .num.star{color:#c0291a!important}
+    .tabs{display:none}
+    .tabpanel{display:block!important}
+    .grouphead td{background:#f2f2f2!important;color:#a8640a!important}
+    .uc{color:#a8640a!important}.why-c{color:#333!important}
+    thead th{background:#f2f2f2;color:#444}
+    tbody tr:hover{background:none}
+    .mode,.brand h1,.seclabel h2,.cname{color:#111!important}
+    .res,.use,.col li,.praxis li,.row .rv,.cdesc,.cwhen,.lead{color:#333!important}
+    .fps,.num-c,.base.high .val,.row .rk,.col code,.row .rv code,.cbadge,.cwhen b{color:#a8640a!important}
+    .cool-c,.base.low .val,.col h3,.tag.og{color:#1f6f86!important}
+    .tag.fav,.tick.boost .dot{color:#c0291a!important}
+    .seg{border-color:#ccc}
+    .meter.size .seg.on{background:#a8640a}.meter.load .seg.on{background:#c0291a}.meter.flex .seg.on{background:#1f6f86}
+    .frame.i{background:#f3e3c4;color:#a8640a;border-color:#a8640a}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="eyebrow"><span class="recdot"></span>Aufnahme Cheat Sheet</div>
+      <h1>Lumix <span>S1&nbsp;II</span></h1>
+      <p class="sub">Schnellreferenz: Presets, Codecs, Dual Native ISO, V-Log Belichtung, Shutter, Readout/Crop, Praxis. Spherical Hauptmodus, Anamorph bei Bedarf.</p>
+    </div>
+    <button class="printbtn" onclick="window.print()">Drucken / PDF</button>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Bereiche">
+    <button class="tab active" data-tab="tab-main" data-k="uebersicht" role="tab" aria-selected="true">Übersicht</button>
+    <button class="tab" data-tab="tab-foto" data-k="foto" role="tab" aria-selected="false">Foto</button>
+    <button class="tab" data-tab="tab-szen" data-k="szenarien" role="tab" aria-selected="false">Szenarien</button>
+    <button class="tab" data-tab="tab-all" data-k="modi" role="tab" aria-selected="false">Alle Aufnahmemodi</button>
+  </div>
+
+  <div class="tabpanel active" id="tab-main">
+
+  <!-- 01 PRESETS -->
+  <section>
+    <div class="seclabel"><span class="num">01</span><h2>Meine Aufnahme-Presets</h2><span class="hint">&#9733; = Favorit &middot; OG = Open Gate</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Modus</th><th>Auflösung &middot; Ratio</th><th>fps</th><th>Codec</th><th>Einsatz</th><th>Tag</th></tr></thead>
+        <tbody>
+          <tr><td class="mode">6K 25p</td><td class="res">5952&times;3968 &middot; 3:2</td><td class="fps">25p</td><td class="codec-cell">420 10-bit &middot; L &middot; HEVC</td><td class="use">Reframe quer+hoch, Hero / Multiformat</td><td><span class="tag og">Open Gate</span></td></tr>
+          <tr><td class="mode">6K 50p</td><td class="res">Widescreen 16:9</td><td class="fps">50p</td><td class="codec-cell">420 10-bit &middot; L &middot; HEVC</td><td class="use">Höchste Auflösung flüssig, kein 3:2</td><td></td></tr>
+          <tr><td class="mode">5.9K 50p</td><td class="res">16:9</td><td class="fps">50p</td><td class="codec-cell">420 10-bit &middot; L &middot; HEVC</td><td class="use">16:9 Allrounder + Slowmo-Reserve, kein Crop</td><td></td></tr>
+          <tr><td class="mode">5.9K 25p</td><td class="res">16:9</td><td class="fps">25p</td><td class="codec-cell">420 10-bit &middot; L &middot; HEVC</td><td class="use">16:9 Standard, kleinere Files</td><td></td></tr>
+          <tr><td class="mode">5.1K 50p</td><td class="res">5088&times;3392 &middot; 3:2</td><td class="fps">50p</td><td class="codec-cell">420 10-bit &middot; L &middot; 300</td><td class="use">OG + 50p, oversampled 6K. Reframe + flüssig</td><td><span class="tag fav">&#9733; Fav</span> <span class="tag og">OG</span></td></tr>
+          <tr><td class="mode">5.1K 25p</td><td class="res">5088&times;3392 &middot; 3:2</td><td class="fps">25p</td><td class="codec-cell">420 10-bit &middot; L &middot; HEVC</td><td class="use">OG Standard, spart Platz ggü. 6K</td><td><span class="tag og">OG</span></td></tr>
+          <tr><td class="mode">4.8K 50p</td><td class="res">4:3</td><td class="fps">50p</td><td class="codec-cell">420 10-bit &middot; L &middot; HEVC</td><td class="use">Anamorph / Hochkant-Reserve</td><td><span class="tag r43">4:3</span></td></tr>
+          <tr><td class="mode">4.8K 25p</td><td class="res">4:3</td><td class="fps">25p</td><td class="codec-cell">420 10-bit &middot; L &middot; HEVC</td><td class="use">Anamorph / Hochkant, Standard-Look</td><td><span class="tag r43">4:3</span></td></tr>
+          <tr><td class="mode">4K 25p</td><td class="res">3840&times;2160 &middot; 16:9</td><td class="fps">25p</td><td class="codec-cell">422 10-bit &middot; ALL-I &middot; AVC</td><td class="use">Heavy Grade / Key, robustes Master</td><td><span class="tag alli">ALL-I</span></td></tr>
+          <tr><td class="mode">4K 50p</td><td class="res">3840&times;2160 &middot; 16:9</td><td class="fps">50p</td><td class="codec-cell">422 10-bit &middot; ALL-I &middot; 600</td><td class="use">Flüssig + Grade, braucht schnelle Karte</td><td><span class="tag fav">&#9733; Fav</span> <span class="tag alli">ALL-I</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Bitrate:</b> bestätigt 5.1K 50p L = 300 Mbps, 4K 50p ALL-I = 600 Mbps. Übrige HEVC LongGOP ca. 150&ndash;300, 4K ALL-I ca. 400&ndash;600. Exakt + Ratio steht im Infokasten links bei markiertem Modus.</p>
+  </section>
+
+  <!-- ALLROUNDER -->
+  <section>
+    <div class="seclabel"><span class="num star">&#9733;</span><h2>Allrounder &middot; Go-To</h2><span class="hint">Open Gate 3:2</span></div>
+    <div class="featured">
+      <div class="feat-grid">
+        <div class="feat-main">
+          <div class="recipe-mode">5.1K 50p<span>Open Gate &middot; 3:2 &middot; 5088&times;3392</span></div>
+          <p class="recipe-why">Oversampled aus 6K (scharf), volle 3:2 Reframe-Freiheit, 50p = auf 25p conformen oder 2&times; Slowmo. 300 Mbps HEVC läuft auf SD V90. Der Modus, den man im Zweifel nimmt.</p>
+          <div class="chips">
+            <div class="chip"><span class="ck">Codec</span><span class="cv">420 10-bit LongGOP &middot; HEVC &middot; 300 Mbps</span></div>
+            <div class="chip"><span class="ck">Shutter</span><span class="cv">1/100 (180&deg; @ 50p, 50 Hz flimmerfrei)</span></div>
+            <div class="chip"><span class="ck">ISO</span><span class="cv">640 Low Base (V-Log)</span></div>
+            <div class="chip"><span class="ck">DR Boost</span><span class="cv">OFF (bei 50p nicht verfügbar)</span></div>
+            <div class="chip"><span class="ck">WB</span><span class="cv">manuell / Kelvin, kein Auto</span></div>
+            <div class="chip"><span class="ck">Profil</span><span class="cv">V-Log + Real Time LUT als Preview</span></div>
+            <div class="chip"><span class="ck">ND</span><span class="cv">Tag ~6&ndash;7 Stops (Variabel-ND)</span></div>
+            <div class="chip"><span class="ck">Karte</span><span class="cv">SD V90 reicht, oder CFexpress</span></div>
+          </div>
+        </div>
+        <div class="feat-side">
+          <div class="reframe-title">Reframe aus 3:2</div>
+          <div class="reframe">
+            <div class="ov o169"><span>16:9</span></div>
+            <div class="ov o11"><span>1:1</span></div>
+            <div class="ov o916"><span>9:16</span></div>
+          </div>
+          <div class="reframe-legend">Ein Take &rarr; 16:9, 9:16, 1:1, 4:5</div>
+        </div>
+      </div>
+    </div>
+    <div class="variant">
+      <div class="vk">Varianten &middot; Max Detail vs Max Dynamik</div>
+      <div class="vv"><b>Max Detail:</b> 6K 25p Open Gate (3:2), Shutter 1/50. Volle Auflösung + Reframe, aber kein DR Boost. <b>Max Dynamik:</b> 5.9K 25p oder 4K 25p (16:9) + <b>DR Boost ON</b> &rarr; Low Base 1000, bis ~15 Stops. DR Boost gibt es nur in diesen 16:9-Modi bei &le;30p, nicht im Open Gate und nicht in 6K. Achtung RS ~25&ndash;28 ms, kein schnelles Schwenken. Open Gate ist immer HEVC 420 LongGOP &ndash; f&uuml;r ALL-I / 4:2:2 auf <code>4K ALL-I</code> wechseln.</div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section>
+    <div class="seclabel"><span class="num">02</span><h2>Best für jeden Use Case</h2><span class="hint">schneller Griff</span></div>
+    <div class="tablewrap wide">
+      <table>
+        <thead><tr><th>Use Case</th><th>Empfehlung</th><th>Warum</th></tr></thead>
+        <tbody>
+          <tr><td><span class="uc">Open Gate / Reframe</span></td><td class="mode">5.1K 50p OG (3:2)</td><td class="why-c">Oversampled aus 6K, 50p, voller Sensor. Ein Take &rarr; alle Formate.</td></tr>
+          <tr><td><span class="uc">Anamorph</span></td><td class="mode">4.8K 4:3</td><td class="why-c">Max Sensorhöhe für Desqueeze. 1.33&times; / 1.5&times; / 2&times;.</td></tr>
+          <tr><td><span class="uc">Slow Mo moderat</span></td><td class="mode">5.9K 50p / 5.1K 50p</td><td class="why-c">2&times; auf 25p conformen, bei voller Auflösung.</td></tr>
+          <tr><td><span class="uc">Slow Mo extrem</span></td><td class="mode">4K 120p / FHD 240p</td><td class="why-c">~5&times; bzw. ~10&times;. Crop + AF-Einschränkungen einplanen.</td></tr>
+          <tr><td><span class="uc">Heavy Grade / Key</span></td><td class="mode">4K 422 ALL-I</td><td class="why-c">4:2:2, jedes Bild Keyframe, schnitt-stabil. Kein Open Gate.</td></tr>
+          <tr><td><span class="uc">Max Auflösung</span></td><td class="mode">6K 25p OG (3:2)</td><td class="why-c">Voller 6K Sensor, max Detail + Reframe. Nur &le;30p.</td></tr>
+          <tr><td><span class="uc">Max Dynamik</span></td><td class="mode">5.9K 25p / 4K 25p + DR Boost</td><td class="why-c">Bis ~15 Stops. DR Boost nur in diesen 16:9-Modi &le;30p, nicht Open Gate / 6K.</td></tr>
+          <tr><td><span class="uc">Low Light</span></td><td class="mode">High Base ISO 5000</td><td class="why-c">Zweite native Basis, sauber. Lichtstarke Optik dazu.</td></tr>
+          <tr><td><span class="uc">Delivery 16:9 fertig</span></td><td class="mode">5.9K 50p (16:9)</td><td class="why-c">Quasi 6K-Qualität, kein Crop, kein Reframe nötig.</td></tr>
+          <tr><td><span class="uc">Max Flexibilität / RAW</span></td><td class="mode">ProRes RAW 5.8K</td><td class="why-c">WB &amp; ISO erst in Post. Crop + CFexpress einplanen.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Vollständige Liste aller Modi mit Beschreibung im Tab <b>Alle Aufnahmemodi</b> oben.</p>
+  </section>
+
+  <!-- 02 CODECS -->
+  <section>
+    <div class="seclabel"><span class="num">03</span><h2>Codecs</h2><span class="hint">Container MOV (auch MP4)</span></div>
+    <p class="lead">Drei Achsen bestimmen jeden Modus: <code>Codec</code> (Effizienz vs Schnitt-Last), <code>LongGOP vs ALL-Intra</code> (Kompressionsart) und <code>Chroma/Bit</code>. Die GOP-Struktur entscheidet, wie flüssig sich das Material schneiden lässt.</p>
+
+    <div class="gop">
+      <div class="goprow">
+        <span class="gl">ALL-I</span>
+        <div class="frames">
+          <span class="frame i">I</span><span class="frame i">I</span><span class="frame i">I</span><span class="frame i">I</span><span class="frame i">I</span><span class="frame i">I</span>
+        </div>
+        <span class="gcap"><b>Jedes Bild = Keyframe.</b> Direkter Zugriff, schnelles Scrubbing, robust beim Grading. Große Files.</span>
+      </div>
+      <div class="goprow">
+        <span class="gl">LongGOP</span>
+        <div class="frames">
+          <span class="frame i">I</span><span class="frame b">B</span><span class="frame p">P</span><span class="frame b">B</span><span class="frame p">P</span><span class="frame b">B</span><span class="frame p">P</span><span class="frame i">I</span>
+        </div>
+        <span class="gcap"><b>Keyframe + Differenzbilder.</b> Kleine Files, aber decode-intensiv. Im Schnitt ggf. Proxies.</span>
+      </div>
+    </div>
+
+    <div class="codecgrid">
+      <div class="ccard">
+        <div class="chead"><span class="cname">H.265 / HEVC</span><span class="cbadge">420 10-bit &middot; LongGOP</span></div>
+        <p class="cdesc">Effizienter Codec für alle hochauflösenden 4:2:0 Modi (6K / 5.9K / 5.1K / 4.8K). Kleine Files bei hoher Auflösung, dafür decode-intensiv.</p>
+        <div class="meters">
+          <div class="meter size"><span class="ml">Dateigröße</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div></div>
+          <div class="meter load"><span class="ml">Schnitt-Last</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div></div>
+          <div class="meter flex"><span class="ml">Flexibilität</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div></div>
+        </div>
+        <div class="cwhen"><b>Nimm wenn</b>hohe Auflösung + Speicher sparen + Reframe. Im Schnitt Proxies oder HW-Decode.</div>
+      </div>
+
+      <div class="ccard">
+        <div class="chead"><span class="cname">H.264 / AVC</span><span class="cbadge">422 10-bit &middot; ALL-Intra</span></div>
+        <p class="cdesc">4:2:2 ALL-Intra in 4K / C4K bis 600 Mbps. Breit kompatibel, leicht zu dekodieren, robust beim Grading und Keying.</p>
+        <div class="meters">
+          <div class="meter size"><span class="ml">Dateigröße</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div></div>
+          <div class="meter load"><span class="ml">Schnitt-Last</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div></div>
+          <div class="meter flex"><span class="ml">Flexibilität</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div></div>
+        </div>
+        <div class="cwhen"><b>Nimm wenn</b>4K-Master, Heavy Grade / Key, flüssiger Schnitt ohne Proxies.</div>
+      </div>
+
+      <div class="ccard">
+        <div class="chead"><span class="cname">ProRes 422 / HQ</span><span class="cbadge">intern &middot; bis ~1.9 Gbps</span></div>
+        <p class="cdesc">Edit-ready Mezzanine. Featherlight im Schnitt, kein Transcode nötig, sehr sauberes Grading. Braucht CFexpress oder SSD.</p>
+        <div class="meters">
+          <div class="meter size"><span class="ml">Dateigröße</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div></div>
+          <div class="meter load"><span class="ml">Schnitt-Last</span><div class="segs"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div></div>
+          <div class="meter flex"><span class="ml">Flexibilität</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div></div>
+        </div>
+        <div class="cwhen"><b>Nimm wenn</b>direkt edit-ready Master, Resolve / FCP ohne Transcode, schnelle Turnarounds.</div>
+      </div>
+
+      <div class="ccard">
+        <div class="chead"><span class="cname">ProRes RAW / HQ</span><span class="cbadge">intern &middot; pixel-by-pixel</span></div>
+        <p class="cdesc">Sensor-RAW intern: 5.8K &le;30p / 4K &le;60p, immer pixel-by-pixel = Crop. WB und ISO erst in Post fest. Nur CFexpress, FCP-zentriert.</p>
+        <div class="meters">
+          <div class="meter size"><span class="ml">Dateigröße</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div></div>
+          <div class="meter load"><span class="ml">Schnitt-Last</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div></div>
+          <div class="meter flex"><span class="ml">Flexibilität</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div></div>
+        </div>
+        <div class="cwhen"><b>Nimm wenn</b>max Spielraum, WB/ISO-Rettung, High-End-Grade. Crop + DR-Boost-Quirks einplanen.</div>
+      </div>
+    </div>
+    <p class="note"><b>Klein & schnell:</b> H.264 8-bit 4:2:0 LongGOP (FHD / 4K, 20&ndash;100 Mbps) nur für schnelle Web-Deliverables, nicht zum Graden. <b>Container:</b> MOV für ProRes/RAW &amp; alle Pro-Modi, MP4 nur H.264/H.265.</p>
+  </section>
+
+  <!-- 03 DUAL NATIVE ISO -->
+  <section>
+    <div class="seclabel"><span class="num">04</span><h2>Dual Native ISO &middot; V-Log</h2><span class="hint">Werte für V-Log</span></div>
+    <div class="iso">
+      <div class="iso-grid">
+        <div>
+          <div class="basepair">
+            <div class="base low"><div class="lbl">Low Base</div><div class="val">640</div><div class="det">Arbeits-Basis bei Tag. Sauberstes, detailreichstes Bild.</div></div>
+            <div class="base high"><div class="lbl">High Base</div><div class="val">5000</div><div class="det">Zweite Basis für Low Light. Sauber, ohne Rauschsprung.</div></div>
+          </div>
+          <div class="scale">
+            <div class="track">
+              <div class="tick" style="left:8%"><span class="t-lbl">640 &middot;LOW</span><div class="dot"></div></div>
+              <div class="tick boost" style="left:30%"><span class="t-lbl">1000 &middot;DR&nbsp;BOOST</span><div class="dot"></div></div>
+              <div class="tick" style="left:88%"><span class="t-lbl">5000 &middot;HIGH</span><div class="dot"></div></div>
+            </div>
+            <div class="scaleends"><span>ISO 100</span><span>native Stufen</span><span>ISO 51200</span></div>
+          </div>
+        </div>
+        <div class="praxis">
+          <h3>Praxis</h3>
+          <ul>
+            <li>Tag: auf <b>640</b> bleiben, Belichtung über <b>ND</b> regeln.</li>
+            <li>Low Light: direkt auf <b>5000</b> springen, nicht durch die Zwischenstufen.</li>
+            <li><b>DR Boost ON</b>: Low Base &rarr; <b>1000</b>, ca. +1 Blende Lichter, bis ~15 Stops. Nur <b>5.9K / 4K 25p</b> (16:9, &le;30p), nicht Open Gate / 6K. Readout langsam (RS ~25&ndash;28 ms).</li>
+            <li><b>DR Boost OFF</b> für Action / HFR / saubere RS (~10&ndash;12 ms).</li>
+            <li>Normal-Gamma (kein Log): Dual Native um <b>100 / 640</b>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="note"><b>Obere Basis:</b> video-orientierte Quellen nennen 5000, einzelne Labortests ~4000. Kann je nach Firmware / Gamma leicht variieren &ndash; native Stufen an der ISO-Anzeige prüfen.</p>
+  </section>
+
+  <!-- 04 V-LOG BELICHTUNG -->
+  <section>
+    <div class="seclabel"><span class="num">05</span><h2>V-Log Belichtung</h2><span class="hint">V-Log / V-Gamut Reference</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Referenz</th><th>Code Value (10-bit)</th><th>IRE / Waveform</th><th>Hinweis</th></tr></thead>
+        <tbody>
+          <tr><td class="mode">Schwarz 0%</td><td class="cool-c">128</td><td class="cool-c">7.3</td><td class="use">Rausch- / Pedestal-Boden</td></tr>
+          <tr><td class="mode">Mittelgrau 18%</td><td class="num-c">433</td><td class="num-c">42</td><td class="use">Belichtungsanker. Graukarte hierauf (False Color grün / Zebra 42)</td></tr>
+          <tr><td class="mode">Weiß 90%</td><td class="num-c">602</td><td class="num-c">61</td><td class="use">Diffuses Weiß / Papier</td></tr>
+          <tr><td class="mode">Clip / Superweiß</td><td class="res">&mdash;</td><td class="num-c">109</td><td class="use">V-Log löst bis ~80 IRE auf, ~1.5 Stops über 90% Weiß</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Haut:</b> dunkle Haut ~42 IRE, helle Haut Peak ~52&ndash;55 IRE (nicht über 55, da Weiß bei 61). <b>Methode:</b> 18% Grau auf 42 IRE, oder leicht ETTR (~+1 bis +1&frac23; Stop) und in Post zurück für mehr Schatten-SNR. Log View Assist zum Gegenchecken.</p>
+  </section>
+
+  <!-- 05 SHUTTER -->
+  <section>
+    <div class="seclabel"><span class="num">06</span><h2>Shutter &middot; 180&deg;</h2><span class="hint">180&deg; = 1 / (2 &times; fps)</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>fps</th><th>180&deg; (1/x)</th><th>90&deg; (knackiger)</th><th>Flimmerfrei 50 Hz</th></tr></thead>
+        <tbody>
+          <tr><td class="fps">24p</td><td class="num-c">1/48</td><td class="res">1/96</td><td class="cool-c">1/50</td></tr>
+          <tr><td class="fps">25p</td><td class="num-c">1/50</td><td class="res">1/100</td><td class="cool-c">1/50 &middot; 1/100</td></tr>
+          <tr><td class="fps">30p</td><td class="num-c">1/60</td><td class="res">1/120</td><td class="cool-c">1/50 &middot; 1/100</td></tr>
+          <tr><td class="fps">50p</td><td class="num-c">1/100</td><td class="res">1/200</td><td class="cool-c">1/100</td></tr>
+          <tr><td class="fps">60p</td><td class="num-c">1/120</td><td class="res">1/240</td><td class="cool-c">1/100 (Kompromiss)</td></tr>
+          <tr><td class="fps">100p</td><td class="num-c">1/200</td><td class="res">1/400</td><td class="cool-c">1/200</td></tr>
+          <tr><td class="fps">120p</td><td class="num-c">1/240</td><td class="res">1/480</td><td class="cool-c">1/200 (Kompromiss)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>50 Hz Kunstlicht:</b> Vielfache von 1/50 (1/50, 1/100). 1/60 nur bei echtem 60 Hz. Bei 60/120p unter 50 Hz ist 1/100 der flimmerärmste Kompromiss.</p>
+  </section>
+
+  <!-- 06 READOUT & CROP -->
+  <section>
+    <div class="seclabel"><span class="num">07</span><h2>Readout &amp; Crop je Modus</h2><span class="hint">RS bei DR Boost OFF</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Modus</th><th>Crop</th><th>Rolling Shutter</th><th>Hinweis</th></tr></thead>
+        <tbody>
+          <tr><td class="mode">6K 3:2 OG (&le;30p)</td><td class="cool-c">1.0&times;</td><td class="num-c">~12 ms</td><td class="use">Voller Sensor</td></tr>
+          <tr><td class="mode">5.9K / 4K 16:9 (&le;60p)</td><td class="cool-c">1.0&times;</td><td class="num-c">~10 ms</td><td class="use">Oversampled, kein Crop</td></tr>
+          <tr><td class="mode">5.1K 3:2 OG (&le;60p)</td><td class="cool-c">1.0&times;</td><td class="num-c">~12 ms</td><td class="use">Oversampled aus 6K</td></tr>
+          <tr><td class="mode">4.8K 4:3 OG (&le;60p)</td><td class="cool-c">1.0&times;</td><td class="res">~12 ms</td><td class="use">4:3, anamorph-freundlich</td></tr>
+          <tr><td class="mode">C4K 100&ndash;120p</td><td class="num-c">~1.17&times;</td><td class="res">Line-Skip</td><td class="use">DCI, leichter Crop</td></tr>
+          <tr><td class="mode">4K (UHD) 100&ndash;120p</td><td class="num-c">~1.24&times;</td><td class="res">Line-Skip</td><td class="use">Detailverlust, AF eingeschränkt</td></tr>
+          <tr><td class="mode">FHD 240p</td><td class="num-c">~1.21&times;</td><td class="res">Line-Skip</td><td class="use">Starke Slowmo, kein C-AF</td></tr>
+          <tr><td class="mode">2.4:1 6K/Cs4K (&le;120p)</td><td class="cool-c">1.0&times; horiz.</td><td class="res">schnell</td><td class="use">Scope aus voller Breite, 120p ohne 1.24&times; Crop</td></tr>
+          <tr><td class="mode">APS-C / S35</td><td class="num-c">1.5&times;</td><td class="res">&mdash;</td><td class="use">Crop-Modi</td></tr>
+          <tr><td class="mode">DR Boost ON (5.9K/4K 25p)</td><td class="cool-c">1.0&times;</td><td class="num-c">~25 ms</td><td class="use">Nur 16:9 &le;30p, nicht Open Gate / 6K. RS sichtbar, nicht für schnelle Bewegung.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Merke:</b> DR Boost gibt es nur in 5.9K/4K 25p (16:9, &le;30p), nicht im Open Gate, in 6K oder bei HFR. Für Schwenks / Action DR Boost aus.</p>
+  </section>
+
+  <!-- 07 MEDIEN -->
+  <section>
+    <div class="seclabel"><span class="num">08</span><h2>Medien je Codec</h2></div>
+    <div class="stack">
+      <div class="row"><div class="rk">HEVC LongGOP 420</div><div class="rv">SD UHS-II <code>V60 / V90</code> reicht.</div></div>
+      <div class="row"><div class="rk">AVC ALL-I (bis 600)</div><div class="rv">SD <code>V90</code> oder CFexpress Type B.</div></div>
+      <div class="row"><div class="rk">ProRes / ProRes RAW</div><div class="rv">CFexpress Type B oder externe USB-C SSD. RAW nur CFexpress.</div></div>
+      <div class="row"><div class="rk">Slots</div><div class="rv">Slot 1 = <code>CFexpress Type B</code> &middot; Slot 2 = <code>SD UHS-II</code> &middot; + externe SSD via USB-C.</div></div>
+    </div>
+  </section>
+
+  <!-- 08 HFR / AF / OUTPUT -->
+  <section>
+    <div class="seclabel"><span class="num">09</span><h2>High-FPS, AF &amp; Output</h2><span class="hint">Gotchas</span></div>
+    <div class="stack">
+      <div class="row"><div class="rk">4K 120p</div><div class="rv"><code>1.24&times;</code> Crop (C4K ~1.17&times;), verliert Subjekterkennung.</div></div>
+      <div class="row"><div class="rk">FHD 240p</div><div class="rv">Verliert kontinuierlichen AF (nur fixierter Fokus).</div></div>
+      <div class="row"><div class="rk">2.4:1 Modus</div><div class="rv">6K / Cs4K bis 120p ohne 1.24&times; Crop, schnellerer Readout. Cinemascope direkt.</div></div>
+      <div class="row"><div class="rk">Aufnahmezeit</div><div class="rv">Unbegrenzt dank aktiver Kühlung, kein 30-min-Limit.</div></div>
+      <div class="row"><div class="rk">RAW intern</div><div class="rv">ProRes RAW / HQ: 5.8K &le;30p, 4K &le;60p, pixel-by-pixel (Crop), CFexpress.</div></div>
+      <div class="row"><div class="rk">RAW-Out HDMI</div><div class="rv">ProRes RAW (Atomos) / BRAW (Blackmagic) bis 5.8K&ndash;5.9K.</div></div>
+      <div class="row"><div class="rk">Audio</div><div class="rv">LPCM intern &middot; mit DMW-XLR2: 4-Kanal &amp; <code>32-bit Float</code> (kein Pegeln).</div></div>
+      <div class="row"><div class="rk">Profile</div><div class="rv">V-Log (14+ Stops, 15+ mit DR Boost), HLG, Real Time LUT. ARRI LogC3 per kostenpfl. Firmware.</div></div>
+    </div>
+  </section>
+
+  <!-- 09 ANAMORPH VS SPHERICAL -->
+  <section>
+    <div class="seclabel"><span class="num">10</span><h2>Anamorph vs Spherical</h2></div>
+    <div class="split">
+      <div class="col amber">
+        <h3>Spherical &middot; Hauptmodus</h3>
+        <ul>
+          <li>16:9 fertig: <code>5.9K 50p</code> oder <code>4K ALL-I</code></li>
+          <li>Multiformat quer+hoch: OG <code>5.1K 50p</code> / <code>6K 25p</code></li>
+          <li>Heavy Grade / Key: <code>4K 422 ALL-I</code></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Anamorph &middot; bei Bedarf</h3>
+        <ul>
+          <li>Modus: <code>4.8K 4:3</code> (ideal) oder OG <code>3:2</code></li>
+          <li>Desqueeze-Vorschau in der Kamera aktivieren</li>
+          <li>Squeeze merken: <code>1.33&times;</code> / <code>1.5&times;</code> / <code>2&times;</code></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 PRAXIS -->
+  <section>
+    <div class="seclabel"><span class="num">11</span><h2>Praxis &amp; Workflow</h2></div>
+    <div class="stack">
+      <div class="row"><div class="rk">HEVC schneiden</div><div class="rv">HW-Decode aktiv oder zu ProRes transcodieren / Proxies, sonst ruckelt das Scrubbing.</div></div>
+      <div class="row"><div class="rk">Real Time LUT</div><div class="rv">V-Log + LUT nur als Monitor-Preview = max flexibel. LUT bakein = fertiger Look ohne Grade.</div></div>
+      <div class="row"><div class="rk">Dual Card</div><div class="rv"><code>Backup</code> (gleichzeitig beide) oder <code>Relay</code> (Slot 1 voll &rarr; 2). ProRes/ALL-I auf CFexpress, SD als Backup.</div></div>
+      <div class="row"><div class="rk">ND bei Tag</div><div class="rv">Base 640 + 1/100 ist hell &rarr; sonniger Tag oft ND ~6&ndash;7 Stops. Variabel-ND praktisch.</div></div>
+      <div class="row"><div class="rk">Proxy</div><div class="rv">Parallele Proxy-Aufnahme aktivieren bei hochauflösendem HEVC fürs schnelle Offline-Editing.</div></div>
+      <div class="row"><div class="rk">HLG vs V-Log</div><div class="rv">HLG = direktes HDR-Delivery ohne Log-Grade. V-Log = max Spielraum, muss entwickelt werden.</div></div>
+      <div class="row"><div class="rk">Vor dem Dreh</div><div class="rv">Frame-Limit-Liste auf eigene Modi kürzen, ND-Plan, Karten-Speed checken, Profil + LUT setzen.</div></div>
+    </div>
+  </section>
+
+  <!-- 12 NOTIZEN -->
+  <section>
+    <div class="seclabel"><span class="num">12</span><h2>Notizen &amp; zukünftige Daten</h2><span class="hint">erweiterbar</span></div>
+    <div class="notes">
+      <p class="ph"><b>Platz für später:</b> Custom-Sets (C1&ndash;C3) Belegung &middot; ND-Stufen pro Lichtsituation &middot; Lieblings-LUTs / Looks &middot; WB-Presets &middot; IBIS / E-Stabi Crop-Werte &middot; Firmware-Stand. Sag was rein soll, dann ergänze ich die Sektion.</p>
+    </div>
+  </section>
+
+  </div><!-- /tab-main -->
+
+  <div class="tabpanel" id="tab-all">
+    <section>
+      <div class="seclabel"><span class="num">A</span><h2>Alle Aufnahmemodi</h2><span class="hint">offizielle Liste &middot; Full-Frame &amp; APS-C</span></div>
+      <p class="lead">Komplette Modus-Matrix der S1 II nach Sensorfläche und Seitenverhältnis. Framerates h&auml;ngen von der Systemfrequenz ab (<code>59.94 Hz</code> = 30/60/120p, <code>50.00 Hz</code> = 25/50/100p, <code>24.00 Hz</code> = 24/48/96p). <code>*&sup1;</code> = Bildausschnitt wird enger (Crop). <code>*&sup2;</code> = FHD 240p mit Einschr&auml;nkung (kein kontinuierlicher AF).</p>
+
+      <div class="tablewrap wide">
+        <table>
+          <thead><tr><th>Modus</th><th>Chroma &middot; Bit</th><th>Framerates</th><th>Einsatz</th></tr></thead>
+          <tbody>
+            <tr class="grouphead"><td colspan="4">Full-Frame &middot; 3:2 &middot; Open Gate</td></tr>
+            <tr><td class="mode">6K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">30p / 25p / 24p</td><td class="use">Max Auflösung Open Gate, max Reframe. Kein DR Boost (nur 5.9K/4K 25p).</td></tr>
+            <tr><td class="mode">5.1K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">Open Gate bis 60p, oversampled aus 6K. Der Allrounder.</td></tr>
+
+            <tr class="grouphead"><td colspan="4">Full-Frame &middot; 4:3 &middot; Anamorph</td></tr>
+            <tr><td class="mode">4.8K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">4:3 f&uuml;r Anamorphoten (Desqueeze) oder max H&ouml;he fürs Hochkant.</td></tr>
+
+            <tr class="grouphead"><td colspan="4">Full-Frame &middot; 16:9</td></tr>
+            <tr><td class="mode">5.9K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">16:9 Allrounder, kein Crop. Quasi 6K fertig fürs Delivery.</td></tr>
+            <tr><td class="mode">4K</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">Delivery-4K, oversampled. ALL-I / ProRes f&uuml;r Heavy Grade.</td></tr>
+            <tr><td class="mode">4K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">120p*&sup1; / 100p*&sup1;</td><td class="use">HFR ~5&times; Slowmo, Crop (~1.24&times;), keine Subjekterkennung.</td></tr>
+            <tr><td class="mode">FHD</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">240p*&sup1;*&sup2; / 200p &middot; 120p/100p &middot; 60p/50p/48p &middot; 30p/25p/24p</td><td class="use">Bis ~10&times; Slowmo. 240p mit Crop, kein C-AF.</td></tr>
+
+            <tr class="grouphead"><td colspan="4">Full-Frame &middot; 17:9 (DCI)</td></tr>
+            <tr><td class="mode">5.8K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">DCI-naher Widescreen, etwas mehr Breite als 16:9.</td></tr>
+            <tr><td class="mode">C4K</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">DCI-4K Master, oversampled. ALL-I / ProRes f&uuml;r Grade.</td></tr>
+            <tr><td class="mode">C4K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">120p*&sup1; / 100p*&sup1; / 96p</td><td class="use">DCI HFR ~5&times;, Crop (~1.17&times;).</td></tr>
+
+            <tr class="grouphead"><td colspan="4">Full-Frame &middot; 2.4:1 (Scope)</td></tr>
+            <tr><td class="mode">6K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">Cinemascope aus voller 6K-Breite, kein Crop.</td></tr>
+            <tr><td class="mode">Cs4K</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">Cinemascope 4K, 4:2:2 f&uuml;r Grade.</td></tr>
+            <tr><td class="mode">Cs4K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">120p / 100p / 96p</td><td class="use">Scope HFR bis ~5&times; ohne 1.24&times; Crop.</td></tr>
+
+            <tr class="grouphead"><td colspan="4">APS-C / Super35 (1.5&times;) &middot; 4:3</td></tr>
+            <tr><td class="mode">3.3K</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">Anamorph im S35-Crop, 4:2:2.</td></tr>
+            <tr><td class="mode">3.3K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">120p*&sup1; / 100p*&sup1;</td><td class="use">S35 Anamorph-HFR, Crop.</td></tr>
+
+            <tr class="grouphead"><td colspan="4">APS-C / Super35 &middot; 16:9</td></tr>
+            <tr><td class="mode">4K</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">S35 4K, Tele-Reichweite, 4:2:2.</td></tr>
+            <tr><td class="mode">4K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">120p / 100p</td><td class="use">S35 HFR, weniger Detailverlust als FF-4K-120.</td></tr>
+            <tr><td class="mode">FHD</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">120p/100p &middot; 60p/50p/48p &middot; 30p/25p/24p</td><td class="use">S35 FHD, 4:2:2 bis 120p.</td></tr>
+
+            <tr class="grouphead"><td colspan="4">APS-C / Super35 &middot; 17:9 (DCI)</td></tr>
+            <tr><td class="mode">C4K</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">S35 DCI-4K.</td></tr>
+            <tr><td class="mode">C4K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">120p / 100p / 96p</td><td class="use">S35 DCI HFR.</td></tr>
+
+            <tr class="grouphead"><td colspan="4">APS-C / Super35 &middot; 2.4:1 (Scope)</td></tr>
+            <tr><td class="mode">Cs4K</td><td class="codec-cell">4:2:2 10-bit</td><td class="fps">60p/50p/48p &middot; 30p/25p/24p</td><td class="use">S35 Cinemascope 4K.</td></tr>
+            <tr><td class="mode">Cs4K</td><td class="codec-cell">4:2:0 10-bit</td><td class="fps">120p / 100p / 96p</td><td class="use">S35 Scope HFR.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>Codec-Wrapper:</b> 4:2:2 ALL-Intra = H.264/AVC, 4:2:0 10-bit = H.265/HEVC LongGOP, plus ProRes 422/HQ in C4K/4K und h&ouml;her. <b>RAW separat:</b> ProRes RAW / RAW HQ intern in 5.8K &le;30p und 4K &le;60p (pixel-by-pixel, Crop, nur CFexpress) sowie als HDMI-Out an Atomos/Blackmagic. <b>Stills/Sensor:</b> 24.1 MP, Open Gate 6K 3:2 = 5952&times;3968, 5.1K = 5088&times;3392.</p>
+    </section>
+  </div><!-- /tab-all -->
+
+  <div class="tabpanel" id="tab-foto">
+
+    <!-- F01 BRACKETING -->
+    <section>
+      <div class="seclabel"><span class="num">01</span><h2>Bracketing</h2><span class="hint">Belichtung &middot; Blende &middot; Fokus &middot; WB &middot; Blitz</span></div>
+      <div class="tablewrap wide">
+        <table>
+          <thead><tr><th>Szenario</th><th>Typ</th><th>Einstellung</th><th>Blende</th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td><span class="uc">HDR Landschaft / Sonnenuntergang</span></td><td class="mode">Belichtung</td><td class="fps">5&middot;1 EV / 3&middot;2 EV</td><td class="cool-c">f/8&ndash;11 (fix)</td><td class="why-c">Stativ, in Post zu HDR mergen.</td></tr>
+            <tr><td><span class="uc">Innenraum mit Fenstern / Architektur</span></td><td class="mode">Belichtung</td><td class="fps">7&middot;1 EV</td><td class="cool-c">f/8 (fix)</td><td class="why-c">Extremer Kontrast Fenster zu Innen.</td></tr>
+            <tr><td><span class="uc">Schnelle / unsichere Belichtung</span></td><td class="mode">Belichtung</td><td class="fps">3&middot;2/3 EV, Burst</td><td class="cool-c">f/4&ndash;5.6</td><td class="why-c">Einmaliger Moment, bestes Bild wählen.</td></tr>
+            <tr><td><span class="uc">Makro / Produkt / Modell 1:18 / Elektronik</span></td><td class="mode">Fokus</td><td class="fps">Schritt 1&ndash;3 &middot; 30&ndash;60 Bilder &middot; nah&rarr;fern</td><td class="cool-c">f/5.6&ndash;8</td><td class="why-c">Focus Stacking macht die Tiefe, nicht die Blende. Beugung meiden.</td></tr>
+            <tr><td><span class="uc">Landschaft front-to-back scharf</span></td><td class="mode">Fokus</td><td class="fps">Schritt 4&ndash;5 &middot; 8&ndash;15 Bilder &middot; nah&rarr;fern</td><td class="cool-c">f/8</td><td class="why-c">Weniger Bilder reichen bei großen Distanzen.</td></tr>
+            <tr><td><span class="uc">Mischlicht / WB unsicher (JPEG)</span></td><td class="mode">Weißabgleich</td><td class="fps">3 Bilder / Color Temp</td><td class="cool-c">nach Motiv</td><td class="why-c">Bei RAW unnötig, WB kommt in Post.</td></tr>
+            <tr><td><span class="uc">Schärfe vs Bokeh / Beugung testen</span></td><td class="mode">Blende</td><td class="fps">3&ndash;5 über den Bereich</td><td class="cool-c">f/2.8 &rarr; f/8</td><td class="why-c">A-Modus. Hier ist die Blende der Bracket selbst.</td></tr>
+            <tr><td><span class="uc">Blitz / Studio absichern</span></td><td class="mode">Blitz</td><td class="fps">±EV</td><td class="cool-c">f/8&ndash;11</td><td class="why-c">Nur Blitzleistung variiert.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>Blende generell:</b> FF-Sweet-Spot f/5.6&ndash;8, Beugung ab ~f/11 sichtbar. Bei Belichtungs- und Fokus-Bracketing bleibt die Blende konstant, nur beim Blenden-Bracket &auml;ndert sie sich. <b>AEB:</b> Anzahl&middot;EV-Schritt, 3&middot;1/3 bis 7&middot;1. <b>Fokusschritt:</b> klein = mehr &Uuml;berlappung (Makro), groß = weniger Bilder.</p>
+    </section>
+
+    <!-- F02 DRIVE / BURST -->
+    <section>
+      <div class="seclabel"><span class="num">02</span><h2>Drive &amp; Burst</h2><span class="hint">partially-stacked Sensor</span></div>
+      <div class="tablewrap wide">
+        <table>
+          <thead><tr><th>Modus</th><th>Speed</th><th>AF / Blitz</th><th>Einsatz</th></tr></thead>
+          <tbody>
+            <tr><td class="mode">Mechanisch H+</td><td class="num-c">10 fps</td><td class="why-c">AFC, blitz-tauglich</td><td class="use">Blitz, kontrollierte Action, geringste Verzerrung.</td></tr>
+            <tr><td class="mode">Elektronisch SH</td><td class="num-c">70 fps</td><td class="why-c">AFS/AFC, blackout-free</td><td class="use">Sport, Wildlife, Fahrzeuge. Speed Priority. Kein Blitz.</td></tr>
+            <tr><td class="mode">SH Pre-Burst</td><td class="num-c">bis 70 fps</td><td class="why-c">1.5 s Puffer vorab</td><td class="use">Nimmt schon vor dem Durchdrücken auf. Unvorhersehbarer Moment.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>Bekannte L&uuml;cke:</b> zwischen 10 und 70 fps gibt es keine Zwischenstufen. <b>Rolling Shutter</b> ist dank stacked Sensor gering, bei sehr schnellen Schwenks dennoch beachten. SH / Pre-Burst sind <b>nicht in HEIF</b> speicherbar.</p>
+    </section>
+
+    <!-- F03 VERSCHLUSS -->
+    <section>
+      <div class="seclabel"><span class="num">03</span><h2>Verschluss-Typen</h2></div>
+      <div class="stack">
+        <div class="row"><div class="rk">Mechanisch</div><div class="rv">60s&ndash;1/8000, Blitzsync ~<code>1/250</code>. Robust gegen Banding unter Kunstlicht. Standardwahl.</div></div>
+        <div class="row"><div class="rk">Elektronisch</div><div class="rv">bis <code>1/16000</code>, lautlos, kein Verschleiß, 70 fps. Rolling Shutter gering, aber Banding unter LED/Neon möglich, Blitz eingeschränkt.</div></div>
+        <div class="row"><div class="rk">EFC (1. Vorhang el.)</div><div class="rv">Reduziert Shutter-Shock bei mittleren Zeiten. Gut f&uuml;r Tele / Makro auf Stativ.</div></div>
+        <div class="row"><div class="rk">Anti-Flicker</div><div class="rv">Bei Kunstlicht aktivieren: Flicker Decrease (elektr.) bzw. Anti-Flicker-Timing (mech.) gegen Banding.</div></div>
+      </div>
+    </section>
+
+    <!-- F04 ISO FOTO -->
+    <section>
+      <div class="seclabel"><span class="num">04</span><h2>ISO Foto</h2><span class="hint">Dual Base 100 / 800</span></div>
+      <div class="basepair">
+        <div class="base low"><div class="lbl">Low Base</div><div class="val">100</div><div class="det">Sauberste Basis, max Dynamik. Standard bei Tag.</div></div>
+        <div class="base high"><div class="lbl">High Base</div><div class="val">800</div><div class="det">Zweite native Stufe f&uuml;r Low Light.</div></div>
+      </div>
+      <p class="note"><b>Range:</b> ISO 100&ndash;51200, erweitert 50&ndash;204800. <b>Wichtig:</b> die Foto-Dual-Base (100/800) ist NICHT die V-Log-Video-Basis (640/5000). Bei wenig Licht direkt auf 800 statt durch die Zwischenwerte.</p>
+    </section>
+
+    <!-- F05 HIGH RES -->
+    <section>
+      <div class="seclabel"><span class="num">05</span><h2>High Resolution Mode</h2><span class="hint">Pixel-Shift</span></div>
+      <div class="stack">
+        <div class="row"><div class="rk">Auflösung</div><div class="rv"><code>96 MP</code> aus 8 kombinierten Bildern.</div></div>
+        <div class="row"><div class="rk">Stativ</div><div class="rv">Nicht zwingend, auch handheld scharf (sensorseitig kompensiert).</div></div>
+        <div class="row"><div class="rk">Einsatz</div><div class="rv">Produkt, Repro, Landschaft, Architektur. Max Detail aus 24 MP heraus.</div></div>
+        <div class="row"><div class="rk">Limit</div><div class="rv">Bewegung im Bild erzeugt Artefakte. Nicht als HEIF speicherbar.</div></div>
+      </div>
+    </section>
+
+    <!-- F06 MESSUNG -->
+    <section>
+      <div class="seclabel"><span class="num">06</span><h2>Belichtungsmessung</h2></div>
+      <div class="stack">
+        <div class="row"><div class="rk">Mehrfeld (Multi)</div><div class="rv">Ausgewogen über das ganze Bild. Standard.</div></div>
+        <div class="row"><div class="rk">Mittenbetont</div><div class="rv">Gewichtet die Mitte. Motiv zentral.</div></div>
+        <div class="row"><div class="rk">Spot</div><div class="rv">Punktgenau am AF-Feld. High-Contrast, Gegenlicht, B&uuml;hne.</div></div>
+        <div class="row"><div class="rk">Highlight-betont</div><div class="rv">Sch&uuml;tzt die Lichter vor Clipping. Konzert / Spot-Beleuchtung.</div></div>
+      </div>
+    </section>
+
+    <!-- F07 SPEZIAL -->
+    <section>
+      <div class="seclabel"><span class="num">07</span><h2>Spezial-Modi</h2></div>
+      <div class="stack">
+        <div class="row"><div class="rk">Live View Composite</div><div class="rv">Addiert nur hellere Pixel live. Startrails, Lightpainting, Feuerwerk ohne &Uuml;berbelichtung.</div></div>
+        <div class="row"><div class="rk">Langzeit / Bulb</div><div class="rv">Bis 30 min. Stativ + Fernausl&ouml;ser / Selbstausl&ouml;ser.</div></div>
+        <div class="row"><div class="rk">Mehrfachbelichtung</div><div class="rv">In-camera mehrere Bilder &uuml;berlagern.</div></div>
+        <div class="row"><div class="rk">Zeitraffer / Stop Motion</div><div class="rv">Intervallaufnahme und Stop Motion direkt in der Kamera, Ausgabe bis 6K.</div></div>
+      </div>
+    </section>
+
+    <!-- F08 DATEI / STYLE -->
+    <section>
+      <div class="seclabel"><span class="num">08</span><h2>Datei &amp; Photo Style</h2></div>
+      <div class="stack">
+        <div class="row"><div class="rk">RAW</div><div class="rv">14-bit, max Spielraum f&uuml;r Grading und Belichtungskorrektur.</div></div>
+        <div class="row"><div class="rk">HEIF</div><div class="rv">10-bit, HLG / HDR, effizienter als JPEG. Auf HDR-Displays natürliche Gradation. Nicht mit SH-Burst.</div></div>
+        <div class="row"><div class="rk">JPEG</div><div class="rv">8-bit, fertig zum Teilen. Zwei Kompressionsstufen.</div></div>
+        <div class="row"><div class="rk">Real Time LUT</div><div class="rv">Eigener Look direkt aufs Foto gebacken (gleiche LUTs wie Video).</div></div>
+        <div class="row"><div class="rk">Photo Styles</div><div class="rv">Standard, Natural, Flat, L.Monochrome (S/D), Cinelike u.a.</div></div>
+      </div>
+    </section>
+
+  </div><!-- /tab-foto -->
+
+  <div class="tabpanel" id="tab-szen">
+
+    <!-- S01 VIDEO -->
+    <section>
+      <div class="seclabel"><span class="num">01</span><h2>Video-Szenarien</h2><span class="hint">50 Hz / PAL als Basis</span></div>
+      <div class="tablewrap wide">
+        <table>
+          <thead><tr><th>Szenario</th><th>Modus</th><th>fps &middot; Shutter</th><th>ISO &middot; Profil</th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td><span class="uc">Interview / Talking Head</span></td><td class="mode">4K 25p ALL-I</td><td class="fps">25p &middot; 1/50</td><td class="cool-c">640 &middot; V-Log +DR Boost</td><td class="why-c">Stativ, ND, 25p filmic. DR Boost f&uuml;r Fensterlicht.</td></tr>
+            <tr><td><span class="uc">Imagefilm / B-Roll</span></td><td class="mode">5.1K 50p OG / 5.9K 50p</td><td class="fps">50p &middot; 1/100</td><td class="cool-c">640 &middot; V-Log</td><td class="why-c">Gimbal / IBIS, Reframe-Reserve, leichte Slowmo.</td></tr>
+            <tr><td><span class="uc">Event / Hochzeit (run &amp; gun)</span></td><td class="mode">5.9K 50p / 4K 50p</td><td class="fps">50p &middot; 1/100</td><td class="cool-c">640&ndash;Auto &middot; HLG o. V-Log</td><td class="why-c">Dual-Card Backup, IBIS Active, AFC. Audio extern / Board-Feed. HLG = Delivery ohne Grade.</td></tr>
+            <tr><td><span class="uc">Sport / Motorsport</span></td><td class="mode">4K 50/60p (120p Slowmo)</td><td class="fps">1/100 Mitzieher &middot; 1/250 crisp</td><td class="cool-c">640&ndash;Auto &middot; DR Boost off</td><td class="why-c">AFC + Subjekterkennung, Urban-Sports-AF. Panning weicher bei 1/100.</td></tr>
+            <tr><td><span class="uc">Slow Motion (Highlight)</span></td><td class="mode">4K 120p / FHD 240p</td><td class="fps">1/250 / 1/500</td><td class="cool-c">640+ &middot; DR Boost off</td><td class="why-c">Auf 25p conformen &rarr; ~5&times; bzw. ~10&times;. Crop beachten.</td></tr>
+            <tr><td><span class="uc">Low Light / Konzert / Nacht</span></td><td class="mode">5.9K / 4K 25&ndash;50p</td><td class="fps">1/50&ndash;1/100</td><td class="cool-c">High Base 5000 &middot; V-Log</td><td class="why-c">Lichtstarke Optik. DR Boost nur &le;30p.</td></tr>
+            <tr><td><span class="uc">Vlog / Selbstaufnahme</span></td><td class="mode">4K 50p / OG 5.1K</td><td class="fps">50p &middot; 1/100</td><td class="cool-c">640 &middot; Real Time LUT o. HLG</td><td class="why-c">IBIS Boost, Gesichts-AF, externes Mikro. LUT = kein Grade nötig.</td></tr>
+            <tr><td><span class="uc">Anamorph (cinematic)</span></td><td class="mode">4.8K 4:3</td><td class="fps">25p &middot; 1/50</td><td class="cool-c">640 &middot; V-Log</td><td class="why-c">Desqueeze-Preview an, Squeeze 1.5&times; / 2&times; merken.</td></tr>
+            <tr><td><span class="uc">Multiformat / Social</span></td><td class="mode">OG 5.1K 50p / 6K 25p</td><td class="fps">50p/1/100 &middot; 25p/1/50</td><td class="cool-c">640 &middot; V-Log</td><td class="why-c">Ein Take &rarr; 16:9, 9:16, 1:1 in Post.</td></tr>
+            <tr><td><span class="uc">Produkt / Tabletop / Makro</span></td><td class="mode">4K 25p ALL-I</td><td class="fps">25p &middot; 1/50</td><td class="cool-c">640 &middot; V-Log +DR Boost</td><td class="why-c">Stativ, kontrolliertes Licht, Focus Pulls.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S02 FOTO -->
+    <section>
+      <div class="seclabel"><span class="num">02</span><h2>Foto-Szenarien</h2><span class="hint">RAW in 3:2 = max Flexibilität</span></div>
+      <div class="tablewrap wide">
+        <table>
+          <thead><tr><th>Szenario</th><th>Drive / Verschluss</th><th>Blende</th><th>ISO</th><th>Format &middot; Ratio</th><th>Hinweis</th></tr></thead>
+          <tbody>
+            <tr><td><span class="uc">Landschaft</span></td><td class="mode">Einzel &middot; mech</td><td class="cool-c">f/8&ndash;11</td><td class="cool-c">100</td><td class="fps">RAW 3:2</td><td class="why-c">Stativ, ggf. Belichtungs- oder Fokus-Bracket.</td></tr>
+            <tr><td><span class="uc">Architektur / Immobilien</span></td><td class="mode">Einzel &middot; mech</td><td class="cool-c">f/8</td><td class="cool-c">100</td><td class="fps">RAW 3:2</td><td class="why-c">HDR-Bracket 7&middot;1, Stativ, Linien gerade.</td></tr>
+            <tr><td><span class="uc">Porträt</span></td><td class="mode">Einzel / AFC</td><td class="cool-c">f/1.4&ndash;2.8</td><td class="cool-c">100&ndash;400</td><td class="fps">RAW 4:3</td><td class="why-c">Augen-AF, flache DOF, 4:3 etwas mehr H&ouml;he.</td></tr>
+            <tr><td><span class="uc">Produkt / Modell 1:18 / Elektronik</span></td><td class="mode">Einzel &middot; Fokus-Bracket</td><td class="cool-c">f/5.6&ndash;8</td><td class="cool-c">100</td><td class="fps">RAW 3:2 / High-Res 96MP</td><td class="why-c">Stacking macht die Tiefe, Stativ, kontrolliertes Licht.</td></tr>
+            <tr><td><span class="uc">Sport / Motorsport</span></td><td class="mode">SH 70 fps / Pre-Burst</td><td class="cool-c">f/2.8&ndash;5.6</td><td class="cool-c">Auto</td><td class="fps">RAW 3:2</td><td class="why-c">AFC + Subjekt, 1/1000+ crisp, Mitzieher langsamer.</td></tr>
+            <tr><td><span class="uc">Tiere (H&uuml;hner / Katzen)</span></td><td class="mode">SH / Pre-Burst</td><td class="cool-c">f/4&ndash;5.6</td><td class="cool-c">Auto</td><td class="fps">RAW 3:2</td><td class="why-c">Tier-AF, Pre-Burst f&uuml;r unvorhersehbare Bewegung.</td></tr>
+            <tr><td><span class="uc">Street / Reportage</span></td><td class="mode">Einzel &middot; elektr. lautlos</td><td class="cool-c">f/5.6&ndash;8</td><td class="cool-c">Auto</td><td class="fps">RAW 3:2</td><td class="why-c">Leise, schnell, Zonenfokus.</td></tr>
+            <tr><td><span class="uc">Event / Hochzeit</span></td><td class="mode">SH / Pre-Burst &middot; Blitz = mech</td><td class="cool-c">f/2.8&ndash;4</td><td class="cool-c">Auto (Cap ~12800)</td><td class="fps">RAW 3:2</td><td class="why-c">Dual-Card Backup, E-Shutter leise f&uuml;r Zeremonie, Anti-Flicker, WB pro Raum.</td></tr>
+            <tr><td><span class="uc">Astro / Sterne</span></td><td class="mode">Bulb / Live Composite</td><td class="cool-c">f/2.8</td><td class="cool-c">1600&ndash;6400</td><td class="fps">RAW 3:2</td><td class="why-c">Stativ, Startrails via Live Composite.</td></tr>
+            <tr><td><span class="uc">Makro (Detail)</span></td><td class="mode">Einzel &middot; Fokus-Bracket</td><td class="cool-c">f/5.6&ndash;8</td><td class="cool-c">100&ndash;400</td><td class="fps">RAW 3:2</td><td class="why-c">Stacking, evtl. Blitz, Beugung meiden.</td></tr>
+            <tr><td><span class="uc">High-Res Repro / Max Detail</span></td><td class="mode">High-Res 96MP &middot; Stativ</td><td class="cool-c">f/5.6&ndash;8</td><td class="cool-c">100</td><td class="fps">RAW 3:2</td><td class="why-c">Nur statische Motive, kein Wind / keine Bewegung.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>Ratio:</b> immer RAW in <b>3:2</b> (natives Sensorformat, volle 24 MP). Anderes Ratio nur als Sucher-Guide setzen, finalen Crop in der Post &ndash; bei RAW geht nichts verloren, nur JPEG/HEIF backen den Crop fest ein.</p>
+    </section>
+
+  </div><!-- /tab-szen -->
+
+  <footer>
+    <span>LUMIX S1 II &middot; Persönliches Cheat Sheet</span>
+    <span>Werte für V-Log &middot; bei Firmware-Update gegenprüfen</span>
+  </footer>
+
+</div>
+<script>
+  /* ---------- TABS mit Deep-Linking (#hash) ---------- */
+  var TABS = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var KEYS = TABS.map(function(t){return t.dataset.k});
+
+  function showTab(k, updateHash, scroll){
+    if(KEYS.indexOf(k) === -1) k = KEYS[0];
+    TABS.forEach(function(t){
+      var on = t.dataset.k === k;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(t.dataset.tab).classList.toggle('active', on);
+    });
+    try{ localStorage.setItem('lumixtab', k) }catch(e){}
+    if(updateHash !== false && location.hash !== '#'+k) history.replaceState(null, '', '#'+k);
+    if(scroll !== false) window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  TABS.forEach(function(t){
+    t.addEventListener('click', function(){ showTab(t.dataset.k, true, true) });
+  });
+
+  var start = KEYS[0];
+  try{ var sv = localStorage.getItem('lumixtab'); if(sv && KEYS.indexOf(sv) !== -1) start = sv }catch(e){}
+  var h = location.hash.slice(1);
+  if(KEYS.indexOf(h) !== -1) start = h;
+  showTab(start, false, false);
+
+  window.addEventListener('hashchange', function(){
+    var r = location.hash.slice(1);
+    if(KEYS.indexOf(r) !== -1) showTab(r, false, true);
+  });
+</script>
+</body>
+</html>

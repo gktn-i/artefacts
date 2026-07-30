@@ -25,7 +25,7 @@
     --mono:'JetBrains Mono',ui-monospace,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-text-size-adjust:100%}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   body{
     background:var(--bg);
     color:var(--text);
@@ -34,9 +34,10 @@
     -webkit-font-smoothing:antialiased;
   }
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  a{color:inherit}
 
   /* ---- Header ---- */
-  header{border-bottom:1px solid var(--border);padding:34px 0 24px}
+  header{padding:34px 0 20px}
   .brand{
     display:flex;align-items:center;gap:9px;
     font-family:var(--mono);color:var(--faint);
@@ -44,35 +45,54 @@
   }
   .brand .caret{color:var(--muted);animation:blink 1.4s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
+  .head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
   h1{
     font-family:var(--display);font-weight:700;
     font-size:clamp(30px,5vw,46px);letter-spacing:-0.02em;
-    margin:8px 0 14px;line-height:1.02;
+    margin:8px 0 12px;line-height:1.02;
   }
+  .stats{font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .stats b{color:var(--muted);font-weight:500}
   /* spectrum bar = color legend */
   .spectrum{display:flex;gap:3px;height:7px;border-radius:4px;overflow:hidden;margin-bottom:14px;max-width:520px}
   .spectrum button{flex:1;border:none;cursor:pointer;padding:0;transition:flex .25s ease, opacity .15s}
   .spectrum button:hover{opacity:.8}
-  .tagline{color:var(--muted);font-size:14px;max-width:58ch}
+  .tagline{color:var(--muted);font-size:14px;max-width:60ch}
 
-  /* ---- Controls ---- */
-  .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:22px}
-  .search{position:relative;flex:1 1 320px;min-width:0}
+  /* ---- Sticky Toolbar ---- */
+  .toolbar{
+    position:sticky;top:0;z-index:20;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+    padding:12px 0;margin-top:20px;
+  }
+  .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .search{position:relative;flex:1 1 300px;min-width:0}
   .search input{
     width:100%;background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius);color:var(--text);font-family:var(--ui);
-    font-size:15px;padding:12px 14px 12px 40px;outline:none;
+    font-size:15px;padding:11px 14px 11px 40px;outline:none;
     transition:border-color .15s, box-shadow .15s;
   }
   .search input::placeholder{color:var(--faint)}
   .search input:focus{border-color:var(--border-bright);box-shadow:0 0 0 3px rgba(255,255,255,0.05)}
   .search .ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--faint);font-family:var(--mono);font-size:15px;pointer-events:none}
   .search kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:11px;color:var(--faint);border:1px solid var(--border);border-radius:5px;padding:2px 6px}
-  .sort{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--muted);font-family:var(--ui);font-size:14px;padding:12px 14px;cursor:pointer;outline:none}
+  .sort{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--muted);font-family:var(--ui);font-size:14px;padding:11px 12px;cursor:pointer;outline:none}
   .sort:focus-visible{border-color:var(--border-bright)}
 
+  /* view toggle */
+  .views{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:3px;gap:3px}
+  .views button{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--faint);
+    background:transparent;border:none;border-radius:8px;padding:7px 11px;cursor:pointer;transition:.15s;
+  }
+  .views button:hover{color:var(--text)}
+  .views button[aria-pressed="true"]{background:var(--surface-2);color:var(--text);box-shadow:inset 0 0 0 1px var(--border-bright)}
+
   /* ---- Filter chips ---- */
-  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
   .chip{
     font-family:var(--mono);font-size:12px;color:var(--muted);
     background:var(--surface);border:1px solid var(--border);border-radius:100px;
@@ -88,40 +108,85 @@
   .chip[aria-pressed="true"] .dot{background:rgba(11,13,16,0.55)}
   .chip[aria-pressed="true"] .ct{color:rgba(11,13,16,0.6)}
   .chip:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb, var(--c,#fff) 30%, transparent)}
+  .chip.reset{color:var(--faint);border-style:dashed}
+  .chip.reset:hover{color:var(--text)}
+
+  /* result line */
+  .resline{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--faint);padding:14px 0 4px}
+  .resline .hint{margin-left:auto}
+  .resline .hint kbd{border:1px solid var(--border);border-radius:4px;padding:1px 5px;color:var(--muted)}
 
   /* ---- Sections ---- */
-  main{padding:30px 0 70px}
-  .section{margin-bottom:38px}
-  .section-head{display:flex;align-items:center;gap:11px;margin-bottom:15px;padding-bottom:11px;border-bottom:1px solid var(--border);border-bottom-color:color-mix(in srgb, var(--c) 30%, var(--border))}
+  main{padding:8px 0 70px}
+  .section{margin-bottom:34px}
+  .section-head{display:flex;align-items:center;gap:11px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);border-bottom-color:color-mix(in srgb, var(--c) 30%, var(--border))}
   .section-head .dot{width:11px;height:11px;border-radius:50%;background:var(--c);box-shadow:0 0 12px color-mix(in srgb, var(--c) 60%, transparent)}
   .section-head h2{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-0.01em;color:var(--c)}
   .section-head .ct{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--faint)}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+  /* ---- Grid view ---- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
   .card{
     display:flex;flex-direction:column;background:var(--surface);
     border:1px solid var(--border);border-radius:var(--radius);
-    padding:17px 18px 14px;text-decoration:none;color:inherit;position:relative;overflow:hidden;
+    padding:16px 18px 13px;color:inherit;position:relative;overflow:hidden;
     transition:border-color .15s, transform .15s, background .15s;
   }
   .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);transform:scaleY(0);transform-origin:top;transition:transform .18s ease}
   .card:hover{border-color:color-mix(in srgb, var(--c) 50%, var(--border));background:var(--surface-2);transform:translateY(-2px)}
   .card:hover::before{transform:scaleY(1)}
-  .card:focus-visible{outline:none;border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb, var(--c) 25%, transparent)}
-  .card .cat{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:0.03em;color:var(--c);text-transform:uppercase;margin-bottom:9px}
+  .card:focus-within{border-color:var(--c)}
+  .card .cat{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:0.03em;color:var(--c);text-transform:uppercase;margin-bottom:8px}
   .card .cat .d{width:6px;height:6px;border-radius:50%;background:var(--c)}
-  .card h3{font-family:var(--display);font-weight:600;font-size:18px;line-height:1.2;letter-spacing:-0.01em;margin-bottom:7px}
+  .card .cat .big{margin-left:auto;text-transform:none;letter-spacing:0;color:var(--faint);border:1px solid var(--border);border-radius:4px;padding:0 5px;font-size:10px}
+  .card h3{font-family:var(--display);font-weight:600;font-size:17.5px;line-height:1.2;letter-spacing:-0.01em;margin-bottom:6px}
+  /* Titel-Link deckt die ganze Karte ab, Kapitel-Links liegen darueber */
+  .card h3 a{text-decoration:none}
+  .card h3 a::after{content:"";position:absolute;inset:0;z-index:0}
+  .card h3 a:focus-visible{outline:none}
   .card p{color:var(--muted);font-size:13.5px;line-height:1.45;flex:1}
-  .card .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+  .card .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
   .card .tag{font-family:var(--mono);font-size:10.5px;color:var(--faint);border:1px solid var(--border);border-radius:4px;padding:1px 6px}
-  .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:13px;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+  .jump{position:relative;z-index:1;display:flex;gap:6px;flex-wrap:wrap;margin-top:11px;padding-top:11px;border-top:1px dashed var(--border)}
+  .jump .lbl{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.05em;text-transform:uppercase;width:100%;margin-bottom:-3px}
+  .jump a{
+    font-family:var(--mono);font-size:11px;text-decoration:none;color:var(--muted);
+    background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:3px 8px;
+    transition:.15s;
+  }
+  .jump a:hover{color:var(--c);border-color:color-mix(in srgb, var(--c) 55%, var(--border));background:var(--surface)}
+  .jump a:focus-visible{outline:none;box-shadow:0 0 0 2px color-mix(in srgb, var(--c) 45%, transparent)}
+  .card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
   .card .open{color:var(--muted);transition:color .15s}
   .card:hover .open{color:var(--c)}
   .card.missing{opacity:0.5}
   .card.missing .open{color:var(--faint)}
 
-  .empty{text-align:center;padding:70px 20px;color:var(--muted);border:1px dashed var(--border);border-radius:var(--radius)}
+  /* ---- List view ---- */
+  .view-list .grid{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .view-list .card{
+    flex-direction:row;align-items:baseline;gap:14px;flex-wrap:wrap;
+    border:none;border-bottom:1px solid var(--border);border-radius:0;
+    padding:11px 16px;transform:none!important;
+  }
+  .view-list .grid .card:last-child{border-bottom:none}
+  .view-list .card::before{width:2px}
+  .view-list .card .cat{margin-bottom:0;flex:0 0 auto;font-size:0}
+  .view-list .card .cat .d{width:7px;height:7px}
+  .view-list .card .cat .big{display:none}
+  .view-list .card h3{font-size:15px;margin-bottom:0;flex:0 0 auto;max-width:100%}
+  .view-list .card p{
+    font-size:12.5px;flex:1 1 240px;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .view-list .card .tags,.view-list .card .jump{display:none}
+  .view-list .card .foot{margin-top:0;flex:0 0 auto;gap:14px}
+  .view-list .card .foot span:first-child{color:var(--faint)}
+
+  .empty{text-align:center;padding:60px 20px;color:var(--muted);border:1px dashed var(--border);border-radius:var(--radius)}
   .empty .big{font-family:var(--mono);font-size:13px;color:var(--faint);margin-bottom:8px}
+  .empty button{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--text);background:var(--surface);border:1px solid var(--border-bright);border-radius:8px;padding:8px 14px;cursor:pointer}
+  .empty button:hover{border-color:var(--muted)}
 
   footer{border-top:1px solid var(--border);padding:22px 0 50px;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
   footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
@@ -132,10 +197,13 @@
   }
   @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-  @media (max-width:560px){
+  @media (max-width:620px){
     .grid{grid-template-columns:1fr}
     .search kbd{display:none}
-    header{padding:26px 0 18px}
+    header{padding:26px 0 14px}
+    .views button{padding:7px 9px}
+    .view-list .card p{display:none}
+    .resline .hint{display:none}
   }
 </style>
 </head>
@@ -145,13 +213,18 @@
   <div class="wrap">
     <div class="brand"><span class="caret">&#9608;</span> ARTEFAKTE / REGISTRY</div>
     <h1>Artefakte</h1>
+    <div class="stats" id="stats"></div>
     <div class="spectrum" id="spectrum" aria-hidden="true"></div>
-    <p class="tagline">Katalog meiner selbstgebauten Reference-Tools und HTML-Artefakte. Tippen zum Filtern, Farbe zeigt die Kategorie.</p>
+    <p class="tagline">Katalog meiner selbstgebauten Reference-Tools und HTML-Artefakte. Tippen zum Filtern, Farbe zeigt die Kategorie, die Kapitel-Links springen direkt in den passenden Tab.</p>
+  </div>
+</header>
 
+<div class="toolbar">
+  <div class="wrap">
     <div class="controls">
       <div class="search">
         <span class="ico">&#47;</span>
-        <input id="q" type="search" placeholder="Suchen nach Titel, Kategorie, Tag..." autocomplete="off" aria-label="Artefakte durchsuchen">
+        <input id="q" type="search" placeholder="Suchen nach Titel, Kategorie, Tag oder Kapitel..." autocomplete="off" aria-label="Artefakte durchsuchen">
         <kbd>/</kbd>
       </div>
       <select id="sort" class="sort" aria-label="Sortierung">
@@ -159,18 +232,26 @@
         <option value="old">&Auml;lteste zuerst</option>
         <option value="az">A bis Z</option>
       </select>
+      <div class="views" id="views" role="group" aria-label="Ansicht">
+        <button type="button" data-view="grid" aria-pressed="true">KARTEN</button>
+        <button type="button" data-view="list" aria-pressed="false">KOMPAKT</button>
+      </div>
     </div>
-
     <div class="chips" id="chips"></div>
   </div>
-</header>
+</div>
 
 <main>
   <div class="wrap">
+    <div class="resline">
+      <span id="resline"></span>
+      <span class="hint"><kbd>/</kbd> suchen &middot; <kbd>Enter</kbd> erster Treffer</span>
+    </div>
     <div id="sections"></div>
     <div class="empty" id="empty" style="display:none">
       <div class="big">KEINE TREFFER</div>
       <div>Andere Suche probieren oder Filter zur&uuml;cksetzen.</div>
+      <button type="button" id="resetbtn">Filter zur&uuml;cksetzen</button>
     </div>
   </div>
 </main>
@@ -185,7 +266,10 @@
 <script>
 /* ============================================================
    ARTEFAKTE  -  hier neue Eintraege ergaenzen.
-   Felder: title, desc, cat, file, date ("YYYY-MM-DD"), tags[]
+   Felder:
+     title, desc, cat, file, date ("YYYY-MM-DD"), tags[]
+     big:  true  -> wird als grosse Referenz markiert
+     chap: [{l:"Label", h:"tab-hash"}]  -> Direktsprung in einen Tab
    Datei noch nicht hochgeladen? file leer lassen -> Karte wird
    als "nicht verlinkt" markiert.
    ============================================================ */
@@ -196,18 +280,25 @@ const ARTEFAKTE = [
   { title:"Die Basics der Küche", desc:"Grundtechniken, Standards und Handgriffe als Kochreferenz.", cat:"Küche", file:"koch-basics.html", date:"2026-05-15", tags:["kochen","technik","grundlagen"] },
 
   // ---- DIY / Handwerk ----
-  { title:"Löten Referenz", desc:"Werkzeug, Material, Reparaturdraht, THT/SMD-Techniken, Mikroskop-Setup, Bauteilkunde, Fehlerbilder und Sicherheit — verlinkt mit Elektronik 101.", cat:"DIY/Handwerk", file:"loeten-referenz.html", date:"2026-07-09", tags:["loeten","flux","soldering","reflow","elektronik","mikroskop","reparatur"] },
+  { title:"Löten Referenz", desc:"Werkzeug, Material, Reparaturdraht, THT/SMD-Techniken, Mikroskop-Setup, Bauteilkunde, Fehlerbilder und Sicherheit — verlinkt mit Elektronik 101.", cat:"DIY/Handwerk", file:"loeten-referenz.html", date:"2026-07-09", tags:["loeten","flux","soldering","reflow","elektronik","mikroskop","reparatur"], big:true,
+    chap:[{l:"Workflow",h:"workflow"},{l:"Equipment",h:"equipment"},{l:"Mikroskop",h:"mikroskop"},{l:"THT",h:"tht"},{l:"SMD",h:"smd"},{l:"Temperaturen",h:"temp"},{l:"Fehler",h:"fehler"}] },
   { title:"Schmiermittel Vergleich", desc:"Fette und Oele nach Anwendung, Vertraeglichkeit und Temperaturbereich.", cat:"DIY/Handwerk", file:"schmiermittel-vergleich.html", date:"2026-03-11", tags:["fett","oel","schmierung"] },
   { title:"Dremel 8250 Cheatsheet", desc:"Drehzahlen nach Material, Bits mit Erkennungsmerkmalen und max. Drehzahl je Aufsatz.", cat:"DIY/Handwerk", file:"dremel-8250-cheatsheet.html", date:"2026-06-26", tags:["dremel","drehzahl","bits","rpm","schleifen","fraesen"] },
 
   // ---- Elektronik & Technik ----
-  { title:"Elektronik 101", desc:"Referenz zu Grundlagen, Bauteilen, Schaltplänen, Leistungselektronik (PWM, VRM, MOSFET), Messtechnik, Fehlersuche, Fachbegriffen und Sicherheit — mit Rechnern.", cat:"Elektronik & Technik", file:"elektronik-grundlagen.html", date:"2026-07-09", tags:["elektronik","grundlagen","bauteile","schaltplan","pwm","vrm","oszilloskop","messen","fehlersuche","glossar","rechner"] },
+  { title:"Elektronik 101", desc:"Referenz zu Grundlagen, Bauteilen, Schaltplänen, Leistungselektronik (PWM, VRM, MOSFET), Messtechnik, Fehlersuche, Fachbegriffen und Sicherheit — mit Rechnern.", cat:"Elektronik & Technik", file:"elektronik-grundlagen.html", date:"2026-07-09", tags:["elektronik","grundlagen","bauteile","schaltplan","pwm","vrm","oszilloskop","messen","fehlersuche","glossar","rechner"], big:true,
+    chap:[{l:"Basics",h:"grundlagen"},{l:"Schaltplan",h:"schaltplan"},{l:"Leistung & PWM",h:"leistung"},{l:"Rechner",h:"rechner"},{l:"Datenbank",h:"komponenten"},{l:"Multimeter",h:"messgeraet"},{l:"Oszilloskop",h:"oszilloskop"},{l:"Sicherheit",h:"sicherheit"}] },
   { title:"Maker Komponenten Datenbank", desc:"Bauteile, Kennwerte und Auswahlhilfen fuer Maker- und Elektronikprojekte.", cat:"Elektronik & Technik", file:"maker-komponenten.html", date:"2026-03-02", tags:["komponenten","bauteile","maker","sensoren"] },
   { title:"Robotik Referenz", desc:"Aktorik, Sensorik und Steuerung im kompakten Ueberblick.", cat:"Elektronik & Technik", file:"robotik-referenz.html", date:"2026-03-14", tags:["robotik","sensoren","motoren","steuerung"] },
   { title:"Mechanical Engineering Cheat Sheet", desc:"Formeln, Kennwerte und Faustregeln aus dem Maschinenbau.", cat:"Elektronik & Technik", file:"mechanical-engineering-cheatsheet.html", date:"2026-03-20", tags:["maschinenbau","formeln","mechanik","werkstoffe"] },
 
+  // ---- Foto & Video ----
+  { title:"Lumix S1 II Cheat Sheet", desc:"Aufnahme-Referenz zur S1 II: Presets, Codecs, Dual Native ISO, V-Log-Belichtung, Shutter, Readout und Crop, Foto-Modi und fertige Szenarien.", cat:"Foto & Video", file:"lumix-s1ii-cheatsheet.html", date:"2026-07-30", tags:["lumix","s1ii","v-log","codec","open gate","iso","foto","video"],
+    chap:[{l:"Übersicht",h:"uebersicht"},{l:"Foto",h:"foto"},{l:"Szenarien",h:"szenarien"},{l:"Alle Modi",h:"modi"}] },
+
   // ---- IT & Server ----
-  { title:"Homeserver 101", desc:"Komplette Referenz: Hardware, OS, Storage, Backup, Netzwerk, Fernzugriff, Sicherheit, Docker, Dienste und Betrieb.", cat:"IT & Server", file:"homeserver-101.html", date:"2026-07-09", tags:["homeserver","nas","docker","proxmox","backup","sicherheit","selfhosting"] },
+  { title:"Homeserver 101", desc:"Komplette Referenz: Hardware, OS, Storage, Backup, Netzwerk, Fernzugriff, Sicherheit, Docker, Dienste und Betrieb.", cat:"IT & Server", file:"homeserver-101.html", date:"2026-07-09", tags:["homeserver","nas","docker","proxmox","backup","sicherheit","selfhosting"], big:true,
+    chap:[{l:"Hardware",h:"hardware"},{l:"Storage",h:"storage"},{l:"Backup",h:"backup"},{l:"Netzwerk",h:"netzwerk"},{l:"Fernzugriff",h:"zugriff"},{l:"Docker",h:"docker"},{l:"Dienste",h:"dienste"}] },
 
   // ---- 3D-Druck ----
   { title:"3D-Druck Filament & Düsen Vergleich", desc:"Materialvergleich, Drucktemperaturen, Einsatzgebiete und Duesenwahl.", cat:"3D-Druck", file:"3d-filament-vergleich.html", date:"2026-03-09", tags:["pla","petg","asa","bambu","filament","duese"] },
@@ -220,6 +311,7 @@ const CAT_COLORS = {
   "Küche":"#ef5b54",
   "DIY/Handwerk":"#f0a830",
   "Elektronik & Technik":"#38c6d9",
+  "Foto & Video":"#e2699f",
   "IT & Server":"#9a7ff2",
   "3D-Druck":"#4fc77d"
 };
@@ -233,8 +325,13 @@ const qEl        = document.getElementById('q');
 const sortEl     = document.getElementById('sort');
 const emptyEl    = document.getElementById('empty');
 const footEl     = document.getElementById('footcount');
+const statsEl    = document.getElementById('stats');
+const reslineEl  = document.getElementById('resline');
+const viewsEl    = document.getElementById('views');
 
 let activeCat = 'ALLE';
+let view = 'grid';
+try{ const v = localStorage.getItem('artview'); if(v==='grid'||v==='list') view = v; }catch(e){}
 
 const esc = (s)=> (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmtDate = (s)=>{ if(!s) return ''; const p=s.split('-'); if(p.length<2) return s; if(p.length===2) return p[1]+'.'+p[0]; return p[2]+'.'+p[1]+'.'+p[0]; };
@@ -263,10 +360,28 @@ function renderChips(){
   cats.forEach(c=>{
     html+=`<button class="chip" data-cat="${esc(c)}" style="--c:${colorOf(c)}" aria-pressed="${activeCat===c}"><span class="dot"></span>${esc(c)} <span class="ct">${counts[c]}</span></button>`;
   });
+  if(activeCat!=='ALLE' || qEl.value.trim()!==''){
+    html+=`<button class="chip reset" data-cat="__reset">&#10005; zur&uuml;cksetzen</button>`;
+  }
   chipsEl.innerHTML=html;
   chipsEl.querySelectorAll('.chip').forEach(btn=>{
-    btn.addEventListener('click',()=>{ activeCat=btn.dataset.cat; renderChips(); render(); });
+    btn.addEventListener('click',()=>{
+      if(btn.dataset.cat==='__reset'){ resetFilters(); return; }
+      activeCat=btn.dataset.cat; renderChips(); render();
+    });
   });
+}
+
+function resetFilters(){
+  activeCat='ALLE'; qEl.value='';
+  renderChips(); render();
+}
+
+function setView(v){
+  view=v;
+  try{ localStorage.setItem('artview',v) }catch(e){}
+  document.body.classList.toggle('view-list', v==='list');
+  viewsEl.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.view===v)));
 }
 
 function sortList(list){
@@ -280,24 +395,35 @@ function sortList(list){
 function cardHtml(a,i){
   const c=colorOf(a.cat);
   const has=a.file && a.file.trim()!=='';
-  const tag=has?'a':'div';
-  const href=has?`href="${esc(a.file)}"`:'';
+  const title=has
+    ? `<a href="${esc(a.file)}">${esc(a.title)}</a>`
+    : esc(a.title);
   const tags=(a.tags&&a.tags.length)?`<div class="tags">${a.tags.slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:'';
-  return `<${tag} class="card${has?'':' missing'}" ${href} style="--c:${c};animation-delay:${Math.min(i*26,240)}ms">
-    <div class="cat"><span class="d"></span>${esc(a.cat)}</div>
-    <h3>${esc(a.title)}</h3>
+  const jump=(has && a.chap && a.chap.length)
+    ? `<div class="jump"><span class="lbl">Kapitel</span>${a.chap.map(k=>`<a href="${esc(a.file)}#${esc(k.h)}">${esc(k.l)}</a>`).join('')}</div>`
+    : '';
+  const bigBadge = a.big ? `<span class="big">gro&szlig;e Referenz</span>` : '';
+  return `<article class="card${has?'':' missing'}" style="--c:${c};animation-delay:${Math.min(i*26,240)}ms">
+    <div class="cat"><span class="d"></span>${esc(a.cat)}${bigBadge}</div>
+    <h3>${title}</h3>
     <p>${esc(a.desc)}</p>
     ${tags}
+    ${jump}
     <div class="foot"><span>${fmtDate(a.date)}</span><span class="open">${has?'oeffnen &rarr;':'nicht verlinkt'}</span></div>
-  </${tag}>`;
+  </article>`;
+}
+
+function matcher(){
+  const q=qEl.value.trim().toLowerCase();
+  return (a)=>{
+    if(!q) return true;
+    const hay=[a.title,a.desc,a.cat,(a.tags||[]).join(' '),(a.chap||[]).map(k=>k.l).join(' ')].join(' ').toLowerCase();
+    return hay.includes(q);
+  };
 }
 
 function render(){
-  const q=qEl.value.trim().toLowerCase();
-  const match=(a)=>{
-    if(!q) return true;
-    return [a.title,a.desc,a.cat,(a.tags||[]).join(' ')].join(' ').toLowerCase().includes(q);
-  };
+  const match=matcher();
   const cats=presentCats().filter(c=> activeCat==='ALLE' || c===activeCat);
   let total=0, html='';
   cats.forEach(c=>{
@@ -311,16 +437,44 @@ function render(){
   });
   sectionsEl.innerHTML=html;
   emptyEl.style.display= total? 'none':'block';
+
+  const filtered = activeCat!=='ALLE' || qEl.value.trim()!=='';
+  reslineEl.textContent = filtered
+    ? `${total} von ${ARTEFAKTE.length} Artefakten` + (activeCat!=='ALLE' ? ` · ${activeCat}` : '')
+    : `${ARTEFAKTE.length} Artefakte · ${presentCats().length} Kategorien`;
+}
+
+function firstHit(){
+  const link=sectionsEl.querySelector('.card h3 a');
+  return link ? link.getAttribute('href') : null;
 }
 
 document.addEventListener('keydown',(e)=>{
   if(e.key==='/' && document.activeElement!==qEl){ e.preventDefault(); qEl.focus(); }
-  if(e.key==='Escape' && document.activeElement===qEl){ qEl.value=''; render(); qEl.blur(); }
+  if(e.key==='Escape' && document.activeElement===qEl){ qEl.value=''; renderChips(); render(); qEl.blur(); }
+  if(e.key==='Enter' && document.activeElement===qEl){
+    const h=firstHit();
+    if(h){ e.preventDefault(); window.location.href=h; }
+  }
 });
-qEl.addEventListener('input',render);
+qEl.addEventListener('input',()=>{ renderChips(); render(); });
 sortEl.addEventListener('change',render);
+viewsEl.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+document.getElementById('resetbtn').addEventListener('click',resetFilters);
+
+/* Kopfzeilen-Statistik */
+(function(){
+  const newest=[...ARTEFAKTE].sort((x,y)=>(y.date||'').localeCompare(x.date||''))[0];
+  const bigCount=ARTEFAKTE.filter(a=>a.big).length;
+  statsEl.innerHTML =
+    `<span><b>${ARTEFAKTE.length}</b> Artefakte</span>`+
+    `<span><b>${presentCats().length}</b> Kategorien</span>`+
+    `<span><b>${bigCount}</b> gro&szlig;e Referenzen</span>`+
+    (newest?`<span>zuletzt: <b>${esc(newest.title)}</b> (${fmtDate(newest.date)})</span>`:'');
+})();
 
 footEl.textContent = ARTEFAKTE.length + ' Artefakte in ' + presentCats().length + ' Kategorien';
+setView(view);
 buildSpectrum();
 renderChips();
 render();

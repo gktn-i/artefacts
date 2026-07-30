@@ -741,16 +741,20 @@ const TABS=[
  {k:"hilfe",l:"🩺 Hilfe & Glossar"}
 ];
 const tabsDiv=document.getElementById("tabs");
-function showTab(k){
+function showTab(k,updateHash){
  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.dataset.p===k));
  tabsDiv.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.k===k));
  try{localStorage.setItem("hstab",k)}catch(e){}
+ if(updateHash!==false&&location.hash!=="#"+k)history.replaceState(null,"","#"+k);
  window.scrollTo({top:0});
 }
 TABS.forEach(t=>{const b=document.createElement("button");b.textContent=t.l;b.dataset.k=t.k;b.onclick=()=>showTab(t.k);tabsDiv.appendChild(b)});
 let start=TABS[0].k;
 try{const s=localStorage.getItem("hstab");if(s&&TABS.some(t=>t.k===s))start=s}catch(e){}
-showTab(start);
+const hs=location.hash.slice(1);
+if(TABS.some(t=>t.k===hs))start=hs;
+showTab(start,false);
+window.addEventListener("hashchange",()=>{const r=location.hash.slice(1);if(TABS.some(t=>t.k===r))showTab(r,false)});
 
 /* Stromkosten-Rechner */
 function calcStrom(){
