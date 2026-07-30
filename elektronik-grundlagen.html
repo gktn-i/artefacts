@@ -396,6 +396,61 @@ td:first-child{font-weight:500}
 <p>LED an 5 V: LED-Spannung 2 V, Wunschstrom 15 mA. Am Widerstand fallen 5 − 2 = 3 V ab → <span class="formula">R = 3 V / 0,015 A = 200 Ω</span> → aufgerundet auf den nächsten E12-Normwert: <b>220 Ω</b>. Verlustleistung am Widerstand: 3 V × 0,0136 A ≈ 41 mW (der reale Strom durch 220 Ω) — ein 1/4-W-Widerstand (250 mW) reicht locker. Interaktiv: <a href="#rechner">Tab Rechner</a>.</p>
 </div>
 
+<h2>Reihe und Parallel: was sich addiert, was sich aufteilt</h2>
+<div class="kurz"><div><b>Nur zwei Sätze musst du behalten.</b> <b>Reihe</b> = ein einziger Weg → der <b>Strom</b> ist überall gleich, die <b>Spannung</b> teilt sich auf. <b>Parallel</b> = mehrere Wege → die <b>Spannung</b> ist überall gleich, der <b>Strom</b> teilt sich auf. Alles andere folgt daraus.</div></div>
+<div class="grid2">
+<div class="card"><h3>Reihe: hintereinander</h3>
+<svg class="sy sy-mid" style="max-width:220px" viewBox="0 0 220 130" role="img" aria-label="Reihenschaltung: Quelle mit zwei hintereinander liegenden Widerstaenden"><path class="w" d="M40,30 H85 M119,30 H180 M180,30 V55 M180,89 V100 M180,100 H40 M40,100 V63 M40,55 V30"/><rect class="w" x="85" y="22" width="34" height="16"/><rect class="w" x="172" y="55" width="16" height="34"/><path class="w" d="M28,55 H52 M34,63 H46"/><text class="lbl" x="102" y="16" text-anchor="middle">R1</text><text class="lbl" x="196" y="76">R2</text><text class="lbl" x="22" y="62" text-anchor="end">U</text><path class="f" d="M105,106 L93,100 L93,112 Z"/><text class="lbl" x="110" y="122">I überall gleich</text></svg>
+<ul>
+<li>Ein Weg → <b>I<sub>1</sub> = I<sub>2</sub> = I<sub>ges</sub></b></li>
+<li>Spannungen addieren sich: <span class="formula">U<sub>ges</sub> = U<sub>1</sub> + U<sub>2</sub></span></li>
+<li>Widerstände addieren sich: <span class="formula">R = R1 + R2</span> — Ergebnis immer <b>größer</b> als der größte Einzelwert</li>
+<li>Fällt <b>ein</b> Bauteil aus, ist der ganze Zweig tot</li>
+</ul></div>
+<div class="card"><h3>Parallel: nebeneinander</h3>
+<svg class="sy sy-mid" style="max-width:220px" viewBox="0 0 220 130" role="img" aria-label="Parallelschaltung: Quelle mit zwei nebeneinander liegenden Widerstaenden"><path class="w" d="M30,30 H190 M30,100 H190 M190,30 V100 M30,30 V55 M30,63 V100 M110,30 V48 M110,82 V100 M170,30 V48 M170,82 V100"/><rect class="w" x="102" y="48" width="16" height="34"/><rect class="w" x="162" y="48" width="16" height="34"/><path class="w" d="M18,55 H42 M24,63 H36"/><text class="lbl" x="98" y="70" text-anchor="end">R1</text><text class="lbl" x="158" y="70" text-anchor="end">R2</text><text class="lbl" x="12" y="62" text-anchor="end">U</text><text class="lbl" x="110" y="122" text-anchor="middle">U überall gleich</text></svg>
+<ul>
+<li>Mehrere Wege → <b>U<sub>1</sub> = U<sub>2</sub> = U<sub>ges</sub></b></li>
+<li>Ströme addieren sich: <span class="formula">I<sub>ges</sub> = I<sub>1</sub> + I<sub>2</sub></span></li>
+<li>Kehrwerte addieren: <span class="formula">1/R = 1/R1 + 1/R2</span> — Ergebnis immer <b>kleiner</b> als der kleinste Einzelwert</li>
+<li>Fällt ein Zweig aus, laufen die anderen weiter</li>
+</ul></div>
+</div>
+
+<h3>Die Übersicht: was macht welche Größe?</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Größe</th><th>In Reihe</th><th>Parallel</th></tr></thead>
+<tbody>
+<tr><td><b>Strom I</b></td><td>überall <b>gleich</b></td><td><b>teilt sich auf</b> (Summe der Zweige = Gesamtstrom)</td></tr>
+<tr><td><b>Spannung U</b></td><td><b>teilt sich auf</b> (Summe der Abfälle = Quellenspannung)</td><td>überall <b>gleich</b></td></tr>
+<tr><td><b>Widerstand R</b></td><td>R1 + R2 → <b>größer</b></td><td>1/R = 1/R1 + 1/R2 → <b>kleiner</b></td></tr>
+<tr><td><b>Kondensator C</b></td><td>1/C = 1/C1 + 1/C2 → <b>kleiner</b></td><td>C1 + C2 → <b>größer</b></td></tr>
+<tr><td><b>Spule L</b></td><td>L1 + L2 → <b>größer</b></td><td>1/L = 1/L1 + 1/L2 → <b>kleiner</b></td></tr>
+<tr><td><b>Akkuzellen</b></td><td><b>Spannung</b> addiert sich, Kapazität (Ah) bleibt</td><td><b>Kapazität</b> addiert sich, Spannung bleibt</td></tr>
+<tr><td><b>Spannungsfestigkeit</b> von Kondensatoren</td><td>addiert sich (2 × 25 V = 50 V)</td><td>bleibt die des schwächsten Teils</td></tr>
+<tr><td><b>Wärme</b> (Verlustleistung)</td><td>der <b>größte</b> Widerstand wird am heißesten (P = I²·R, gleicher Strom)</td><td>der <b>kleinste</b> Widerstand wird am heißesten (P = U²/R, gleiche Spannung)</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Merkhilfe für die Vertauschung:</b> Widerstand und Kondensator verhalten sich genau umgekehrt. Stell dir den Kondensator als <b>Fläche</b> vor — zwei nebeneinander ergeben eine größere Fläche, also mehr Kapazität. Und den Widerstand als <b>Engstelle im Rohr</b> — zwei Rohre nebeneinander lassen mehr durch, also weniger Widerstand.</p>
+
+<h3>Formeln für den Alltag</h3>
+<div class="card">
+<p><b>Zwei Widerstände parallel</b> (der Fall, den man ständig braucht): <span class="formula">R = (R1 × R2) / (R1 + R2)</span></p>
+<p><b>N gleiche Widerstände parallel:</b> <span class="formula">R = R<sub>einzeln</sub> / N</span> — zwei gleiche parallel sind immer die Hälfte.</p>
+<p><b>Spannungsteiler</b> (zwei Widerstände in Reihe, in der Mitte abgegriffen): <span class="formula">U<sub>aus</sub> = U<sub>ein</sub> × R2 / (R1 + R2)</span></p>
+<p style="margin-bottom:0"><b>Stromteiler</b> (zwei Widerstände parallel): durch den <b>kleineren</b> Widerstand fließt der <b>größere</b> Strom — <span class="formula">I<sub>1</sub> = I<sub>ges</sub> × R2 / (R1 + R2)</span></p>
+</div>
+
+<h3>Wo dir das in der Praxis begegnet</h3>
+<div class="grid2">
+<div class="card"><h3>Widerstandswert bauen</h3><p>Du brauchst 500 Ω, hast aber nur 1 kΩ: zwei davon parallel. Nebeneffekt: die Verlustleistung teilt sich ebenfalls auf zwei Bauteile auf — zwei 1/4-W-Widerstände parallel vertragen zusammen 1/2 W.</p></div>
+<div class="card"><h3>LEDs richtig verschalten</h3><p><b>In Reihe</b> fließt durch alle derselbe Strom → gleiche Helligkeit, ein Vorwiderstand reicht. Voraussetzung: die Summe der Flussspannungen passt unter die Versorgung. <b>Parallel ohne eigenen Vorwiderstand</b> ist ein klassischer Fehler: die LED mit der niedrigsten Flussspannung zieht den meisten Strom, wird heller, heißer, niederohmiger — und stirbt zuerst. Parallel also <b>je LED ein eigener Widerstand</b>.</p></div>
+<div class="card"><h3>Entkopplung am IC</h3><p>Großer Elko und kleiner 100-nF-Keramik <b>parallel</b>: die Kapazitäten addieren sich, und weil auch die Innenwiderstände (ESR) parallel liegen, sinkt der Gesamt-ESR. Der Elko liefert die Energie für langsame Einbrüche, der Keramik für die schnellen.</p></div>
+<div class="card"><h3>Akkupacks: 3S2P lesen</h3><p><b>S</b> = in Serie, <b>P</b> = parallel. „3S2P" heißt drei Zellen in Reihe (3 × 3,7 V = 11,1 V nominal) und davon zwei Stränge parallel (doppelte Kapazität). Merksatz: <b>S macht Volt, P macht Amperestunden.</b></p></div>
+<div class="card"><h3>Kondensatoren in Reihe</h3><p>Verdoppelt die Spannungsfestigkeit, halbiert die Kapazität. In der Praxis braucht es dann <b>Symmetrierwiderstände</b> parallel zu jedem Kondensator, sonst verteilt sich die Spannung ungleich und einer wird überlastet.</p></div>
+<div class="card"><h3>Messfehler durch Parallelschaltung</h3><p>Deshalb misst man Widerstände <b>einseitig ausgelötet</b>: eingebaut liegt alles Umliegende parallel und der gemessene Wert ist immer <b>kleiner</b> als der echte. Siehe Tab <a href="#messgeraet">Multimeter</a>.</p></div>
+</div>
+
 <h2>Kondensator laden: die RC-Zeitkonstante</h2>
 <div class="card">
 <h3>τ = R × C</h3>
@@ -416,10 +471,10 @@ td:first-child{font-weight:500}
 <div class="card"><h3>Pull-up / Pull-down &amp; Floating</h3><p>Ein offener („floatender") Eingang schwebt zwischen den Pegeln und liefert Zufallswerte. Ein Pull-up-Widerstand zieht ihn fest auf HIGH, ein Pull-down auf LOW, solange nichts anderes anliegt — Standardwert 10 kΩ.</p></div>
 <div class="card"><h3>Entkopplungs-Kondensator</h3><p>Kleiner Kondensator (oft 100 nF) direkt neben jedem IC. Glättet kurze Spannungseinbrüche und stabilisiert die Versorgung. Faustregel: einen pro Chip.</p></div>
 <div class="card"><h3>Spannungsteiler</h3><p>Zwei Widerstände in Reihe greifen in der Mitte eine kleinere Spannung ab. Standard-Trick, um z. B. 5 V auf einen 3,3 V messbaren Wert zu bringen.</p></div>
-<div class="card"><h3>PWM (Pulsweiten-Modulation)</h3><p>Schnelles An/Aus-Schalten, um Helligkeit (LED) oder Drehzahl (Motor) zu steuern. Längeres "An" = mehr Leistung. Spart Wärme gegenüber Widerstand.</p></div>
+<div class="card"><h3>PWM (Pulsweiten-Modulation)</h3><p>Schnelles An/Aus-Schalten, um Helligkeit (LED) oder Drehzahl (Motor) zu steuern. Längeres "An" = mehr Leistung. Spart Wärme gegenüber Widerstand. Ausführlich mit Frequenzen und Schaltungen: Tab <a href="#leistung">Leistung &amp; PWM</a>.</p></div>
 <div class="card"><h3>Datenblatt</h3><p>Das offizielle Dokument zum Bauteil (Hersteller-PDF). Enthält Grenzwerte, Pin-Belegung und Beispielschaltungen. Im Zweifel immer dort nachsehen.</p></div>
 <div class="card"><h3>Kapazität: Farad (F)</h3><p>Wie viel Ladung ein Kondensator speichern kann. In der Praxis winzig: µF (Mikro), nF (Nano), pF (Piko).</p></div>
-<div class="card"><h3>Induktivität: Henry (H)</h3><p>Eigenschaft einer Spule: sie wehrt sich gegen Stromänderungen. In der Praxis mH oder µH. Wichtig in Wandlern, Filtern, Funk.</p></div>
+<div class="card"><h3>Induktivität: Henry (H)</h3><p>Eigenschaft einer Spule: sie wehrt sich gegen Stromänderungen. In der Praxis mH oder µH. Wichtig in Wandlern, Filtern, Funk. Kennwerte und Bauformen: Tab <a href="#leistung">Leistung &amp; PWM</a>.</p></div>
 <div class="card"><h3>Analog vs. Digital</h3><p><b>Analog</b> ist ein stufenloser Wert (jede beliebige Spannung), <b>digital</b> kennt nur an oder aus. Ein Lichtsensor liefert analog, ein Taster digital.</p></div>
 <div class="card"><h3>Wirkungsgrad</h3><p>Wie viel der zugeführten Energie tatsächlich nützlich ankommt, der Rest wird Wärme. Ein Schaltregler mit 90 % verheizt nur 10 %, ein Linearregler oft viel mehr.</p></div>
 <div class="card"><h3>Spannungsabfall</h3><p>Jedes Bauteil "verbraucht" ein Stück Spannung. An einer Diode fallen etwa 0,7 V ab, an einem Widerstand je nach Strom. In Reihe summieren sich die Abfälle zur Gesamtspannung.</p></div>
@@ -1320,6 +1375,344 @@ td:first-child{font-weight:500}
 </div>
 </section>
 
+
+<!-- ============ TAB: LEISTUNG & PWM ============ -->
+<section id="t-leistung" class="hidden">
+
+<h2>PWM: an und aus statt halb</h2>
+<p>Um eine LED zu dimmen oder einen Motor langsamer laufen zu lassen, könnte man einen Widerstand davorsetzen — der verheizt die Differenz. <b>Pulsweiten-Modulation</b> macht es anders: der Schalter ist entweder <b>ganz an</b> oder <b>ganz aus</b> und wechselt so schnell, dass die Last nur den Mittelwert merkt.</p>
+<svg class="sy sy-mid" style="max-width:420px" viewBox="-34 8 410 160" role="img" aria-label="Drei PWM-Signale mit 25, 50 und 75 Prozent Tastgrad und dem jeweiligen Mittelwert"><path class="w" style="stroke-width:1.5" d="M20,40 V22 H35 V40 H80 V22 H95 V40 H140 V22 H155 V40 H200 V22 H215 V40 H260 V22 H275 V40 H320"/><path class="acc" style="stroke-dasharray:5 4" d="M20,35.5 H320"/><text class="lbl" x="14" y="35" text-anchor="end">25 %</text><text class="lbl" x="326" y="39">Ø 3 V</text><path class="w" style="stroke-width:1.5" d="M20,90 V72 H50 V90 H80 V72 H110 V90 H140 V72 H170 V90 H200 V72 H230 V90 H260 V72 H290 V90 H320"/><path class="acc" style="stroke-dasharray:5 4" d="M20,81 H320"/><text class="lbl" x="14" y="85" text-anchor="end">50 %</text><text class="lbl" x="326" y="89">Ø 6 V</text><path class="w" style="stroke-width:1.5" d="M20,140 V122 H65 V140 H80 V122 H125 V140 H140 V122 H185 V140 H200 V122 H245 V140 H260 V122 H305 V140 H320"/><path class="acc" style="stroke-dasharray:5 4" d="M20,126.5 H320"/><text class="lbl" x="14" y="135" text-anchor="end">75 %</text><text class="lbl" x="326" y="139">Ø 9 V</text><text class="lbl" x="20" y="160">Versorgung 12 V · gestrichelt = Mittelwert</text></svg>
+<div class="card">
+<p><b>Tastgrad (Duty Cycle)</b> ist der Anteil der Zeit, in der eingeschaltet ist: <span class="formula">D = t<sub>an</sub> / (t<sub>an</sub> + t<sub>aus</sub>)</span></p>
+<p>Daraus folgt der Mittelwert: <span class="formula">U<sub>mittel</sub> = D × U<sub>Versorgung</sub></span> — 12 V bei 25 % Tastgrad ergeben im Mittel 3 V.</p>
+<p style="margin-bottom:0"><b>Aber Vorsicht:</b> Die Last sieht weiterhin die vollen 12 V in Impulsen. Bei einem <b>Widerstand</b> gilt für die Leistung <span class="formula">P = D × U²/R</span>, nicht (D×U)²/R. Bei einer <b>LED</b> zählt der mittlere Strom fürs Auge. Bei einer <b>Spule</b> (Motor, Schaltregler) glättet die Induktivität den Strom zu einem echten Mittelwert.</p>
+</div>
+<div class="kurz"><div><b>Warum PWM effizient ist:</b> Ein Schalter ist entweder <b>offen</b> (kein Strom → keine Verlustleistung) oder <b>zu</b> (fast keine Spannung darüber → kaum Verlustleistung). Verluste entstehen nur in den Millionstel-Sekunden des Umschaltens. Ein Vorwiderstand dagegen verheizt permanent die Differenz.</div></div>
+
+<h3>Welche Frequenz wofür?</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Anwendung</th><th>Übliche Frequenz</th><th>Warum genau dort</th></tr></thead>
+<tbody>
+<tr><td>LED dimmen</td><td>200 Hz – 20 kHz</td><td>Unter ~100 Hz sieht das Auge Flimmern, in Kameras noch bei einigen hundert Hz. Höher ist unkritisch.</td></tr>
+<tr><td>DC-Motor / Lüfter</td><td>~20–25 kHz</td><td>Zwischen 1 und 15 kHz pfeift der Motor hörbar. Über 20 kHz liegt es außerhalb des Hörbereichs.</td></tr>
+<tr><td>Heizung, Peltier, Pumpe</td><td>1–100 Hz</td><td>Die Last ist träge, schnelles Schalten bringt nichts und erzeugt nur Schaltverluste.</td></tr>
+<tr><td>Schaltregler (Buck/Boost, VRM)</td><td>300 kHz – 2 MHz</td><td>Je höher, desto kleiner dürfen Spule und Kondensator sein — dafür steigen die Schaltverluste.</td></tr>
+<tr><td>Class-D-Audioverstärker</td><td>250–500 kHz</td><td>Muss weit über der höchsten Tonfrequenz liegen, damit der Ausgangsfilter sauber trennt.</td></tr>
+<tr><td><b>Servo-Signal</b></td><td>50 Hz</td><td><b>Kein Leistungs-PWM.</b> Hier codiert die Pulsbreite eine <i>Position</i>: 1,0 ms = links, 1,5 ms = Mitte, 2,0 ms = rechts. Der Tastgrad ist bedeutungslos.</td></tr>
+</tbody>
+</table></div>
+<p class="note">Faustregel für die Frequenzwahl: so niedrig wie möglich (weniger Schaltverluste, weniger Störstrahlung), aber hoch genug, dass die Last die einzelnen Pulse nicht mehr auflöst — und außerhalb des Hörbereichs, wenn eine Spule im Spiel ist.</p>
+
+<h2>Der Schalter: MOSFET verstehen</h2>
+<p>PWM braucht etwas, das schnell und verlustarm schaltet. Das ist praktisch immer ein <b>MOSFET</b>: gesteuert wird er durch eine <b>Spannung</b> am Gate, nicht durch einen Strom.</p>
+<div class="grid2">
+<div class="card"><h3>Die drei Anschlüsse</h3>
+<ul>
+<li><b>Gate (G)</b> — die Steuerelektrode. Isoliert, zieht im Ruhezustand <b>keinen</b> Strom. Sie wirkt wie ein kleiner Kondensator, der beim Umschalten geladen und entladen werden muss.</li>
+<li><b>Drain (D)</b> und <b>Source (S)</b> — dazwischen fließt der Laststrom.</li>
+<li>Eingebaut ist immer eine <b>Body-Diode</b> von Source nach Drain. Sie leitet in der Gegenrichtung — mal Schutz, mal Störung.</li>
+</ul></div>
+<div class="card"><h3>Die vier Zahlen aus dem Datenblatt</h3>
+<ul>
+<li><b>V<sub>GS(th)</sub></b> — Schwellspannung, ab der er anfängt zu leiten. Nicht die Spannung, bei der er <i>voll</i> durchsteuert.</li>
+<li><b>R<sub>DS(on)</sub></b> — Durchlasswiderstand, <b>immer</b> mit der Angabe „bei V<sub>GS</sub> = x V" lesen.</li>
+<li><b>I<sub>D</sub></b> — Dauerstrom, meist bei unrealistischer Kühlung angegeben.</li>
+<li><b>Q<sub>g</sub></b> — Gate-Ladung. Bestimmt, wie viel Strom der Treiber liefern muss und wie hoch die Schaltverluste sind.</li>
+</ul></div>
+</div>
+<div class="danger-box"><p style="margin:0"><b>Der häufigste Anfängerfehler:</b> Ein Standard-MOSFET (z. B. IRF540N) braucht <b>10 V</b> am Gate, um voll durchzusteuern. An 3,3 V oder 5 V vom Mikrocontroller leitet er nur teilweise, hat statt Milliohm mehrere Ohm und wird glühend heiß. Für den direkten Anschluss an einen MCU-Pin brauchst du einen <b>Logic-Level-Typ</b> (z. B. AO3400, IRLZ44N, IRLB8721) — erkennbar daran, dass R<sub>DS(on)</sub> bei V<sub>GS</sub> = 2,5 V oder 4,5 V spezifiziert ist.</p></div>
+<div class="card">
+<div class="rule"><span class="ico">🔗</span><div><b>Gate-Widerstand</b> 22–100 Ω in Reihe: bremst das Umschalten leicht ab, dämpft Schwingungen und begrenzt den Stromstoß, den der MCU-Pin liefern muss.</div></div>
+<div class="rule"><span class="ico">⬇️</span><div><b>Pulldown</b> 10–100 kΩ vom Gate nach Source: solange der Mikrocontroller bootet, ist sein Pin hochohmig. Ohne Pulldown schwebt das Gate und der MOSFET schaltet zufällig ein.</div></div>
+<div class="rule"><span class="ico">🔥</span><div><b>Wärme kommt aus zwei Quellen:</b> Durchlassverluste <span class="formula">P = I² × R<sub>DS(on)</sub></span> und Schaltverluste, die mit der Frequenz steigen. Wird ein MOSFET bei niedriger Frequenz heiß, ist es fast immer der Durchlasswiderstand — also zu wenig Gate-Spannung.</div></div>
+</div>
+
+<h2>High-Side oder Low-Side?</h2>
+<p>Die Last hat zwei Anschlüsse — Plus und Masse. Der Schalter kann in beiden Leitungen sitzen, und das macht einen erheblichen Unterschied.</p>
+<svg class="sy sy-mid" style="max-width:420px" viewBox="0 0 420 200" role="img" aria-label="Vergleich: Low-Side-Schalter in der Masseleitung, High-Side-Schalter in der Plusleitung"><path class="w" d="M40,30 H160"/><text class="pin" x="40" y="24">+12 V</text><path class="w" d="M100,30 V46 M100,80 V96"/><rect class="w" x="82" y="46" width="36" height="34" rx="3"/><text class="lbl" x="100" y="68" text-anchor="middle">Last</text><rect class="w" x="82" y="96" width="36" height="30" rx="3"/><text class="lbl" x="100" y="116" text-anchor="middle">Q</text><path class="w" d="M100,126 V150 M86,150 H114 M91,156 H109 M96,161 H104"/><path class="w" d="M60,111 H82"/><text class="pin" x="56" y="114" text-anchor="end">MCU</text><text class="pin" x="122" y="94">D</text><text class="pin" x="122" y="132">S</text><text class="lbl" x="100" y="182" text-anchor="middle">Low-Side</text><text class="pin" x="100" y="194" text-anchor="middle">schaltet die Masse</text><path class="w" d="M260,30 H380"/><text class="pin" x="260" y="24">+12 V</text><path class="w" d="M320,30 V46 M320,80 V96"/><rect class="w" x="302" y="46" width="36" height="34" rx="3"/><text class="lbl" x="320" y="68" text-anchor="middle">Q</text><rect class="w" x="302" y="96" width="36" height="30" rx="3"/><text class="lbl" x="320" y="116" text-anchor="middle">Last</text><path class="w" d="M320,126 V150 M306,150 H334 M311,156 H329 M316,161 H324"/><path class="w" d="M280,61 H302"/><text class="pin" x="276" y="64" text-anchor="end">Treiber</text><text class="pin" x="342" y="50">D</text><text class="pin" x="342" y="88">S</text><text class="lbl" x="320" y="182" text-anchor="middle">High-Side</text><text class="pin" x="320" y="194" text-anchor="middle">schaltet das Plus</text></svg>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th></th><th>Low-Side (schaltet GND)</th><th>High-Side (schaltet +)</th></tr></thead>
+<tbody>
+<tr><td><b>Ansteuerung</b></td><td><b>Einfach.</b> Source liegt auf GND, das Gate wird direkt gegen GND angesteuert — ein MCU-Pin genügt (Logic-Level-Typ).</td><td><b>Aufwendig.</b> Bei einem N-Kanal muss das Gate <i>über</i> der Versorgung liegen → Bootstrap-Kondensator, Ladungspumpe oder fertiger High-Side-Treiber.</td></tr>
+<tr><td><b>Die Last im Aus-Zustand</b></td><td>Hängt weiter am Plus. Ihr „Masse"-Anschluss schwebt auf Versorgungspotenzial.</td><td>Ist komplett spannungsfrei — <b>sicherer</b>.</td></tr>
+<tr><td><b>Gemeinsame Masse</b></td><td><b>Problem.</b> Hat die Last einen eigenen Massebezug (USB-Gerät, Sensor mit Datenleitung, Gehäusemasse), fließt der Strom über diesen Umweg und der Schalter wirkt nicht.</td><td><b>Kein Problem.</b> Die Masse bleibt durchgehend verbunden.</td></tr>
+<tr><td><b>Berührsicherheit</b></td><td>Am ausgeschalteten Gerät liegt weiterhin Spannung an.</td><td>Ausgeschaltet ist wirklich aus.</td></tr>
+<tr><td><b>P-Kanal als Alternative</b></td><td>—</td><td>P-Kanal-MOSFET braucht keinen Bootstrap (Gate wird nach unten gezogen), hat aber bei gleicher Größe den 2–3-fachen R<sub>DS(on)</sub>. Für Lastschalter bis wenige Ampere die pragmatische Lösung.</td></tr>
+</tbody>
+</table></div>
+<div class="card">
+<div class="rule"><span class="ico">✅</span><div><b>Nimm Low-Side,</b> wenn die Last isoliert ist und nur an diesem einen Kreis hängt: LED-Streifen, Lüfter, Relaisspule, Heizelement. Einfachste und billigste Lösung.</div></div>
+<div class="rule"><span class="ico">✅</span><div><b>Nimm High-Side,</b> wenn die Last eine gemeinsame Masse hat, wenn sie im Aus-Zustand wirklich spannungsfrei sein muss, oder wenn ein Mensch drankommt.</div></div>
+<div class="rule"><span class="ico">💡</span><div><b>Was ist ein Bootstrap?</b> Ein kleiner Kondensator, der in der Phase, in der der Schaltknoten auf GND liegt, über eine Diode aus der Versorgung geladen wird. Springt der Knoten dann nach oben, „reitet" die geladene Kondensatorspannung mit und liegt so <i>über</i> der Versorgung — genau das braucht das Gate. Daraus folgt: eine Halbbrücke mit Bootstrap kann <b>nicht dauerhaft 100 % einschalten</b>, weil der Kondensator sonst nie nachgeladen wird.</div></div>
+</div>
+
+<h2>Halbbrücke, H-Brücke und Totzeit</h2>
+<div class="grid2">
+<div class="card"><h3>Halbbrücke</h3><p>Ein High-Side- und ein Low-Side-MOSFET übereinander. Ihr Verbindungspunkt heißt <b>Schaltknoten</b> und wird abwechselnd auf Plus und auf Masse gelegt. Das ist der Grundbaustein <b>jedes</b> Abwärtswandlers und jeder Motorbrücke.</p></div>
+<div class="card"><h3>H-Brücke (Vollbrücke)</h3><p>Zwei Halbbrücken nebeneinander, die Last hängt dazwischen. Damit lässt sich die Stromrichtung <b>umkehren</b> → Motor vorwärts und rückwärts. Details und fertige Treiber im Tab <a href="#motoren">Motoren</a>.</p></div>
+</div>
+<div class="danger-box"><p style="margin:0"><b>Shoot-Through — der Klassiker, der Brücken killt:</b> Wären beide MOSFETs gleichzeitig leitend, läge die Versorgung direkt auf Masse. Der Kurzschlussstrom zerstört beide innerhalb von Mikrosekunden. Deshalb schaltet der Treiber den einen erst <b>aus</b> und wartet eine <b>Totzeit (Dead Time)</b> von typisch 10–100 ns, bevor der andere <b>ein</b>schaltet. Diese Totzeit ist keine Feinheit, sondern überlebenswichtig — beim Selbstbau nie zwei Gates aus einem Signal ableiten, ohne sie zu verriegeln.</p></div>
+<div class="card">
+<div class="rule"><span class="ico">🔁</span><div><b>Was während der Totzeit passiert:</b> Der Spulenstrom will weiterfließen und nimmt den einzigen verbleibenden Weg — die <b>Body-Diode</b> des unteren MOSFETs. Die leitet, hat aber einen deutlich höheren Spannungsabfall (~0,7 V) als der durchgesteuerte Kanal (wenige Millivolt).</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Synchrongleichrichtung:</b> Deshalb schaltet man den unteren MOSFET direkt danach aktiv ein. Statt 0,7 V an einer Diode fallen dann nur noch I × R<sub>DS(on)</sub> ab. Bei 20 A sind das der Unterschied zwischen 14 W und unter 1 W Verlust — genau der Grund, warum moderne Wandler statt einer Diode einen zweiten MOSFET haben.</div></div>
+</div>
+
+<h2>VRM: die Stromversorgung moderner Chips</h2>
+<p><b>VRM</b> steht für <i>Voltage Regulator Module</i> — die Baugruppe, die aus den 12 V des Netzteils die Kernspannung eines Prozessors macht. Das sind je nach Chip 0,8 bis 1,4 V, dafür bei <b>sehr</b> hohem Strom: eine CPU zieht im Boost 150–250 A, eine Grafikkarte noch mehr. Ein Linearregler würde dabei über 2 kW verheizen — es geht nur schaltend.</p>
+<svg class="sy sy-mid" style="max-width:460px" viewBox="0 0 470 192" role="img" aria-label="Blockbild einer VRM-Phase: PWM-Controller, Treiber, High-Side- und Low-Side-MOSFET, Spule, Kondensator, Last"><rect class="w" x="8" y="72" width="58" height="28" rx="3"/><text class="pin" x="37" y="90" text-anchor="middle">PWM-Ctrl</text><path class="w" d="M66,86 H82"/><path class="f" d="M82,86 L74,82 L74,90 Z"/><rect class="w" x="84" y="72" width="50" height="28" rx="3"/><text class="pin" x="109" y="90" text-anchor="middle">Treiber</text><path class="w" d="M134,80 H160 M134,92 H160 M160,80 V56 M160,92 V116"/><path class="f" d="M186,56 L176,52 L176,60 Z"/><path class="f" d="M186,116 L176,112 L176,120 Z"/><path class="w" d="M160,56 H176 M160,116 H176"/><path class="w" d="M212,20 H240"/><text class="pin" x="208" y="24" text-anchor="end">+12 V</text><path class="w" d="M226,20 V44"/><rect class="w" x="188" y="44" width="76" height="26" rx="3"/><text class="pin" x="226" y="61" text-anchor="middle">High-Side FET</text><path class="w" d="M226,70 V104"/><rect class="w" x="188" y="104" width="76" height="26" rx="3"/><text class="pin" x="226" y="121" text-anchor="middle">Low-Side FET</text><path class="w" d="M226,130 V152 M212,152 H240 M217,158 H235 M222,163 H228"/><circle class="f" cx="226" cy="87" r="3"/><text class="pin" x="182" y="90" text-anchor="end">SW</text><path class="w" d="M226,87 H288"/><path class="w" d="M288,87 a9,11 0 0 1 18,0 a9,11 0 0 1 18,0 a9,11 0 0 1 18,0"/><text class="lbl" x="315" y="72" text-anchor="middle">L</text><path class="w" d="M342,87 H388"/><circle class="f" cx="366" cy="87" r="3"/><path class="w" d="M366,87 V104 M354,104 H378 M354,112 H378 M366,112 V132 M354,132 H378 M359,138 H373 M364,143 H368"/><text class="lbl" x="386" y="100">C</text><rect class="w" x="388" y="73" width="72" height="28" rx="3"/><text class="pin" x="424" y="91" text-anchor="middle">CPU-Kern</text><text class="lbl" x="424" y="128" text-anchor="middle">1,2 V / 150 A</text><text class="lbl" x="8" y="184">SW = Schaltknoten · Treiber steuert beide Gates mit Totzeit dazwischen</text></svg>
+<h3>Was in einer Phase passiert</h3>
+<div class="card"><ol>
+<li>Der <b>PWM-Controller</b> misst die Ausgangsspannung und entscheidet, wie lange eingeschaltet werden muss.</li>
+<li>Der <b>Treiber</b> macht daraus zwei kräftige Gate-Signale — mit Totzeit dazwischen.</li>
+<li>Der <b>High-Side-FET</b> legt die 12 V an den Schaltknoten. Der Strom in der Spule <b>steigt</b>, sie speichert Energie.</li>
+<li>Der <b>Low-Side-FET</b> zieht den Schaltknoten auf Masse. Die Spule gibt ihre Energie ab, der Strom <b>fällt</b> — aber er fließt weiter, das ist der Trick.</li>
+<li><b>Spule und Kondensator</b> glätten die Rechteckpulse zu einer nahezu glatten Gleichspannung.</li>
+</ol>
+<p style="margin-bottom:0">Daraus ergibt sich die Kernformel jedes Abwärtswandlers: <span class="formula">U<sub>aus</sub> = D × U<sub>ein</sub></span>. Für 1,2 V aus 12 V heißt das <b>10 % Tastgrad</b> — der High-Side-FET ist nur ein Zehntel der Zeit an, der Low-Side-FET neun Zehntel. Deshalb ist der untere FET meist der größere oder doppelt bestückt.</p></div>
+
+<h3>Warum mehrere Phasen?</h3>
+<div class="card">
+<p>Ein Mainboard mit „12+2 Phasen" hat zwölf solcher Baugruppen für den CPU-Kern, die <b>zeitversetzt</b> schalten. Das bringt drei Dinge:</p>
+<ul>
+<li><b>Strom aufteilen:</b> 150 A auf zwölf Phasen sind ~12 A pro MOSFET und Spule statt einer unbaubaren Einzelstufe.</li>
+<li><b>Wärme verteilen:</b> zwölf warme Bauteile statt eines glühenden.</li>
+<li><b>Weniger Restwelligkeit:</b> weil die Phasen versetzt arbeiten, überlappen sich ihre Stromwellen und heben sich teilweise auf — die Ausgangsspannung wird glatter bei kleineren Kondensatoren.</li>
+</ul>
+<p style="margin-bottom:0">Die Angabe „12+2" heißt: 12 Phasen für den Kern (V<sub>core</sub>), 2 für die Nebenspannungen (SoC, Speichercontroller). Achtung beim Marketing: manche Boards verdoppeln nur die MOSFETs pro Phase und zählen das als eigene Phase.</p>
+</div>
+
+<h3>VRM-Fehler finden</h3>
+<p>Für die Reparatur ist das direkt verwertbar — jeder Fehlermodus hat ein eigenes Messbild:</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Symptom</th><th>Wo messen</th><th>Anzeige</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>Board tot, 12-V-Rail kurzgeschlossen</td><td>Ω, stromlos: Schaltknoten (Spulen-Anschluss zum FET) gegen GND</td><td>nahe 0 Ω</td><td><b>Low-Side-FET durchlegiert</b> — der häufigste VRM-Tod</td></tr>
+<tr><td>CPU sofort defekt / Board raucht beim Start</td><td>Ω, stromlos: Schaltknoten gegen +12 V</td><td>nahe 0 Ω</td><td><b>High-Side-FET durchlegiert</b> → die vollen 12 V liegen am Kern an</td></tr>
+<tr><td>Eine Phase bleibt kalt, andere überhitzen</td><td>Wärmebild oder Finger im Betrieb</td><td>eine Spule deutlich kühler</td><td>Treiber oder MOSFET dieser Phase tot — die übrigen tragen die Last mit</td></tr>
+<tr><td>Kernspannung zu niedrig, Rechner instabil</td><td>V⎓, Board an: Spulen-Ausgang gegen GND</td><td>unter Sollwert, schwankend</td><td>Phase ausgefallen, Regelkreis am Limit oder Rückkopplung defekt</td></tr>
+<tr><td>Alles misst plausibel, aber keine Ausgangsspannung</td><td>V⎓ am Enable/PGOOD-Pin des Controllers</td><td>kein Freigabesignal</td><td>Der Controller wird gar nicht erst gestartet — Fehler liegt vor dem VRM</td></tr>
+</tbody>
+</table></div>
+<p class="note">Vorgehen und Grundlagen dazu im Tab <a href="#messgeraet">Multimeter</a> — insbesondere die Milliohm-Methode zum Einkreisen und der Abschnitt zum Diodentest. Alle Phasen liegen parallel: eine einzelne durchlegierte Phase zieht die ganze Rail auf 0 Ω, deshalb misst man <b>Phase für Phase</b> und vergleicht.</p>
+
+<h2>Wandler-Typen im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Typ</th><th>Kann</th><th>Wirkungsgrad</th><th>Sauberkeit</th><th>Wann nehmen</th></tr></thead>
+<tbody>
+<tr><td><b>Linearregler / LDO</b><br><span class="note" style="font-style:normal">AMS1117, LM317, MCP1700</span></td><td>nur herunter</td><td>U<sub>aus</sub>/U<sub>ein</sub> — bei 12 V → 3,3 V nur 28 %</td><td><b>sehr sauber</b>, kein Schaltrauschen</td><td>Kleine Ströme und geringe Differenz; überall dort, wo Rauschen stört (Analogteil, Sensor, Funk, Audio)</td></tr>
+<tr><td><b>Abwärtswandler (Buck)</b><br><span class="note" style="font-style:normal">MP1584, LM2596, TPS5430</span></td><td>nur herunter</td><td>85–95 %</td><td>Restwelligkeit im mV-Bereich</td><td>Der Standard, sobald mehr als ein paar hundert mA fließen oder die Differenz groß ist</td></tr>
+<tr><td><b>Aufwärtswandler (Boost)</b><br><span class="note" style="font-style:normal">MT3608, TPS61088</span></td><td>nur hinauf</td><td>80–92 %</td><td>Restwelligkeit höher als beim Buck</td><td>Aus einer Zelle 5 V machen, LED-Ketten, Anzeigen mit höherer Spannung</td></tr>
+<tr><td><b>Buck-Boost / SEPIC</b></td><td>hinauf <b>und</b> herunter</td><td>80–90 %</td><td>mittel</td><td>Wenn die Eingangsspannung über den Sollwert wandert — Akkubetrieb: 4,2 V voll, 3,0 V leer, Ausgang 3,3 V</td></tr>
+<tr><td><b>Ladungspumpe</b></td><td>verdoppeln oder invertieren, kleine Ströme</td><td>je nach Typ</td><td>mittel</td><td>Wenn nur wenige mA gebraucht werden und keine Spule aufs Board passt — z. B. negative Hilfsspannung</td></tr>
+<tr><td><b>Sperrwandler (Flyback), isoliert</b></td><td>herunter/hinauf, galvanisch getrennt</td><td>75–90 %</td><td>mittel</td><td>Überall dort, wo Netzspannung im Spiel ist — genau das steckt in jedem Steckernetzteil</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><div><b>Die Faustregel:</b> Verlustleistung eines LDO ist <span class="formula">P = (U<sub>ein</sub> − U<sub>aus</sub>) × I</span>. Ein AMS1117 an 12 V, der 3,3 V bei 500 mA liefert, verheizt <b>4,35 W</b> — das ist ohne Kühlkörper der sichere Hitzetod. Bei derselben Aufgabe verliert ein Buck-Wandler etwa 0,2 W. Umgekehrt: für 3,3 V aus 5 V bei 50 mA ist der LDO mit 85 mW Verlust die einfachere, ruhigere Wahl.</div></div>
+
+<h2>Die Spule (Induktivität) im Detail</h2>
+<p>Der Kondensator wehrt sich gegen <b>Spannungs</b>änderungen, die Spule gegen <b>Strom</b>änderungen. Genau das macht sie zum Herzstück jedes Schaltreglers: sie sorgt dafür, dass der Strom weiterfließt, auch wenn der Schalter längst offen ist.</p>
+<div class="card">
+<p><b>Das Grundgesetz:</b> <span class="formula">U = L × ΔI/Δt</span> — versucht man, den Strom durch eine Spule schnell zu ändern, entsteht eine Gegenspannung. Je abrupter die Änderung, desto höher die Spannung.</p>
+<p style="margin-bottom:0">Deshalb erzeugt jede abgeschaltete Spule (Relais, Motor, Magnetventil) eine Spannungsspitze, die den schaltenden Transistor zerstört — und deshalb gehört an jede Spule eine <b>Freilaufdiode</b>. Im Schaltregler ist genau derselbe Effekt der Nutzeffekt.</p>
+</div>
+<h3>Die Kennwerte, auf die es ankommt</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Kennwert</th><th>Was er bedeutet</th><th>Was passiert, wenn man ihn ignoriert</th></tr></thead>
+<tbody>
+<tr><td><b>L</b> — Induktivität in µH/mH</td><td>Wie stark sie sich gegen Stromänderungen wehrt</td><td>Zu klein: hohe Stromwelligkeit, laute Wandler. Zu groß: träge Regelung, mehr Kupferverluste.</td></tr>
+<tr><td><b>I<sub>sat</sub></b> — Sättigungsstrom</td><td>Ab hier <b>sättigt der Kern</b> und die Induktivität bricht ein</td><td><b>Der gefährlichste Wert.</b> Über I<sub>sat</sub> wirkt die Spule fast nur noch wie ein Draht, der Strom schießt hoch und zerstört den MOSFET. Passiert schlagartig, nicht allmählich.</td></tr>
+<tr><td><b>I<sub>rms</sub></b> — Dauerstrom</td><td>Thermische Grenze durch den Drahtwiderstand</td><td>Sie wird langsam heiß, Isolation und Kern altern.</td></tr>
+<tr><td><b>DCR</b> — Gleichstromwiderstand</td><td>Widerstand des Wickeldrahts (mΩ)</td><td>Direkter Wirkungsgradverlust: P = I² × DCR. Bei 10 A machen 20 mΩ schon 2 W aus.</td></tr>
+<tr><td><b>SRF</b> — Eigenresonanzfrequenz</td><td>Darüber verhält sie sich wie ein Kondensator</td><td>Der Filter wirkt oberhalb nicht mehr — für die Störfrequenz muss die SRF passen.</td></tr>
+<tr><td><b>Geschirmt / ungeschirmt</b></td><td>Ob der Kern das Magnetfeld einschließt</td><td>Ungeschirmt strahlt ein und aus — neben empfindlicher Analogtechnik oder Funk stört das messbar.</td></tr>
+</tbody>
+</table></div>
+<h3>Die drei Bauformen, die dir begegnen</h3>
+<div class="grid2">
+<div class="card"><h3>Leistungsdrossel (Power Inductor)</h3><p>Der dicke, meist quadratische Klotz neben den MOSFETs — in Wandlern und VRMs. Typisch 0,1–47 µH bei mehreren Ampere. Erkennbar an der geschirmten Bauform und dem sichtbaren dicken Draht.</p></div>
+<div class="card"><h3>Ferritperle (Ferrite Bead)</h3><p>Sieht aus wie ein Widerstand, wird aber <b>nicht in Henry angegeben, sondern in Ohm bei 100 MHz</b> (z. B. „600 Ω @ 100 MHz"). Sie bremst gezielt Hochfrequenzstörungen und lässt Gleichstrom durch. Standard zwischen digitaler und analoger Versorgung.</p></div>
+<div class="card"><h3>Stromkompensierte Drossel</h3><p>Zwei gegenläufige Wicklungen auf einem Kern. Nutzsignal geht durch, gleichphasige Störungen (Gleichtakt) werden gedämpft. Zu finden in Netzteil-Eingängen und auf Datenleitungen wie USB und CAN.</p></div>
+<div class="card"><h3>Messen und prüfen</h3><p>Ein Multimeter zeigt an einer Spule nur den <b>Drahtwiderstand</b> (oft unter 1 Ω) — das sagt nichts über die Induktivität. Für den echten Wert braucht es einen <a href="#lcrp1">LCR-Tester</a>. Eine durchgebrannte Drossel misst OL, eine kurzgeschlossene Windung bemerkt man am Multimeter praktisch nie.</p></div>
+</div>
+
+<h2>Kondensatoren im Schaltregler</h2>
+<div class="card">
+<div class="rule"><span class="ico">🔵</span><div><b>Eingangskondensator:</b> puffert die harten Stromimpulse, die der High-Side-FET aus der Zuleitung reißt. Fehlt er oder ist er zu weit weg, schwingt die Versorgung und der ganze Aufbau stört.</div></div>
+<div class="rule"><span class="ico">🟢</span><div><b>Ausgangskondensator:</b> glättet die Restwelligkeit und fängt Lastsprünge ab, bis die Regelung nachzieht.</div></div>
+<div class="rule"><span class="ico">📉</span><div><b>ESR</b> (Ersatz-Serienwiderstand): der unvermeidliche Innenwiderstand. Er bestimmt, wie viel Welligkeit übrig bleibt und wie warm der Kondensator wird. Ein alternder Elko verliert kaum Kapazität, aber sein ESR steigt — genau das ist der typische „Netzteil-Elko-Tod". Deshalb misst ein <a href="#lcrp1">ESR-Tester</a> mehr aus als ein Kapazitätsmessgerät.</div></div>
+<div class="rule"><span class="ico">⚠️</span><div><b>Der DC-Bias-Effekt bei Keramikkondensatoren:</b> Ein MLCC mit X5R/X7R verliert unter Gleichspannung dramatisch an Kapazität. Ein 10-µF-Typ für 6,3 V hat an 5 V real oft nur noch 2–4 µF. Wer nach Aufdruck rechnet, baut Wandler, die unter Last instabil werden. Gegenmittel: höhere Spannungsfestigkeit oder größere Bauform wählen — <b>C0G/NP0</b> ist frei davon, gibt es aber nur in kleinen Werten.</div></div>
+</div>
+</section>
+
+
+<!-- ============ TAB: FACHBEGRIFFE ============ -->
+<section id="t-begriffe" class="hidden">
+
+<p class="sub" style="margin:0 0 1rem">Die Abkürzungen, über die man in Datenblättern, Schaltplänen und Reparatur-Videos stolpert — jeweils in einem Satz, mit dem Hinweis, warum sie in der Praxis zählt. Suchen geht am schnellsten mit <b>⌘K</b> bzw. <b>Strg+K</b>.</p>
+
+<h2>Bussysteme &amp; Schnittstellen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Begriff</th><th>Was es ist</th><th>Worauf es in der Praxis ankommt</th></tr></thead>
+<tbody>
+<tr><td><b>I²C</b> (IIC, TWI)</td><td>Zweidraht-Bus (SDA = Daten, SCL = Takt) für viele Bauteile an denselben zwei Leitungen</td><td>Braucht <b>Pull-up-Widerstände</b> (typ. 4,7 kΩ) — ohne sie läuft nichts. Jedes Gerät hat eine Adresse; zwei gleiche Adressen am Bus = Konflikt. 100 kHz / 400 kHz / 1 MHz, nur kurze Strecken auf dem Board.</td></tr>
+<tr><td><b>SPI</b></td><td>Vierdraht-Bus: MOSI, MISO, SCK und je Gerät eine eigene CS-Leitung</td><td>Deutlich schneller als I²C (10–100 MHz) und vollduplex, kostet aber pro Gerät einen Pin. Keine Adressen — die Auswahl macht CS.</td></tr>
+<tr><td><b>UART</b> (seriell)</td><td>Zwei Leitungen (TX, RX), <b>ohne</b> Taktleitung, Punkt-zu-Punkt</td><td>Beide Seiten müssen dieselbe <b>Baudrate</b> eingestellt haben (9600, 115200 …), sonst kommt nur Müll an. TX geht immer an RX der Gegenseite.</td></tr>
+<tr><td><b>RS-232</b></td><td>UART mit ±12-V-Pegeln (alter PC-Anschluss)</td><td>Darf <b>nie</b> direkt an einen 3,3-V-Mikrocontroller — dazwischen gehört ein Pegelwandler (MAX3232).</td></tr>
+<tr><td><b>RS-485</b></td><td>Differenzieller Zweidraht-Bus für lange Strecken (bis ~1200 m)</td><td>Industriestandard, meist mit Modbus. Beide Busenden mit <b>120 Ω</b> abschließen, sonst Reflexionen.</td></tr>
+<tr><td><b>CAN</b> (Controller Area Network)</td><td>Differenzieller Zweidraht-Bus aus dem Fahrzeugbau (CAN-H / CAN-L)</td><td><b>Kein Master.</b> Jeder Teilnehmer darf senden; kollidieren zwei, gewinnt die Nachricht mit der niedrigeren ID — ohne dass die andere verloren geht (verlustfreie Arbitrierung). Sehr störfest durch Differenzsignal. Klassisch bis 1 Mbit/s, <b>CAN-FD</b> bis 5–8 Mbit/s. Abschluss: 120 Ω an beiden Enden.</td></tr>
+<tr><td><b>LIN</b></td><td>Einzeldraht-Bus im Auto, langsam (bis 20 kbit/s), ein Master</td><td>Für unkritische Nebensachen wie Fensterheber und Spiegel — dort, wo CAN zu teuer wäre.</td></tr>
+<tr><td><b>1-Wire</b></td><td>Daten und teils Versorgung über eine einzige Leitung</td><td>Klassiker: Temperatursensor DS18B20. Jedes Bauteil hat eine eindeutige Seriennummer ab Werk.</td></tr>
+<tr><td><b>USB</b></td><td>Differenzielles Paar (D+/D−), Host steuert, Gerät antwortet</td><td>12 Mbit/s (Full Speed), 480 Mbit/s (High Speed), 5 Gbit/s+ ab USB 3. Leitungsimpedanz 90 Ω differenziell — beim Layout kein Detail, sondern Bedingung.</td></tr>
+<tr><td><b>USB-PD</b> (Power Delivery)</td><td>Aushandeln der Versorgungsspannung über die CC-Leitungen</td><td>Verhandelt 5 / 9 / 15 / 20 V (mit EPR bis 48 V), bis 5 A — daher bis 240 W. Ohne gültige Aushandlung bleibt es bei 5 V.</td></tr>
+<tr><td><b>I²S</b></td><td>Digitale <b>Audio</b>-Übertragung (Bitclock, Wordselect, Daten)</td><td>Trotz des ähnlichen Namens nichts mit I²C zu tun — reiner Datenstrom ohne Adressen.</td></tr>
+<tr><td><b>PCIe</b></td><td>Serielle Punkt-zu-Punkt-Verbindung in Lanes (x1, x4, x8, x16)</td><td>Jede Lane ist ein eigenes differenzielles Paar je Richtung. Mehr Lanes = mehr Bandbreite, nicht mehr Geräte.</td></tr>
+<tr><td><b>MIPI DSI / CSI</b></td><td>Hochgeschwindigkeits-Schnittstellen für Display (DSI) und Kamera (CSI)</td><td>In jedem Smartphone und auf Einplatinenrechnern. Sehr empfindliche differenzielle Paare — beschädigte Flexkabel sind ein häufiger Fehler.</td></tr>
+<tr><td><b>JTAG</b></td><td>Debug- und Testschnittstelle (TCK, TMS, TDI, TDO)</td><td>Kann Chips programmieren <b>und</b> per Boundary-Scan Lötstellen prüfen, ohne dass die Software läuft.</td></tr>
+<tr><td><b>SWD</b></td><td>Zweidraht-Debug bei ARM-Cortex (SWDIO, SWCLK)</td><td>Die abgespeckte JTAG-Variante — das, was ein ST-Link oder J-Link üblicherweise nutzt.</td></tr>
+<tr><td><b>Ethernet / RMII / RGMII</b></td><td>Netzwerk; RMII/RGMII sind die Verbindungen zwischen Controller (MAC) und Übertrager-Chip (PHY)</td><td>Zwischen PHY und Buchse sitzt immer ein <b>Übertrager</b> (Magnetics) zur galvanischen Trennung — häufig im RJ45 integriert.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Speicher</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Begriff</th><th>Was es ist</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>SRAM</b></td><td>Statischer Arbeitsspeicher — hält den Inhalt ohne Auffrischen, solange Strom da ist</td><td>Sehr schnell, aber flächenintensiv und teuer. Das ist der RAM <i>in</i> einem Mikrocontroller und der CPU-Cache.</td></tr>
+<tr><td><b>DRAM</b></td><td>Dynamischer Speicher — jede Zelle ist ein winziger Kondensator und muss ständig <b>aufgefrischt</b> werden</td><td>Billig und dicht, deshalb der Hauptspeicher. Ohne Strom sofort leer.</td></tr>
+<tr><td><b>DDR</b> (DDR3/4/5)</td><td>„Double Data Rate" — überträgt bei steigender <b>und</b> fallender Taktflanke</td><td>„DDR4-3200" meint 3200 Millionen Übertragungen/s, nicht 3200 MHz Takt. Generationen sind mechanisch und elektrisch inkompatibel.</td></tr>
+<tr><td><b>VRAM</b></td><td>Grafikspeicher. Ursprünglich ein eigener Typ mit zwei Ports, heute Sammelbegriff für den Speicher auf einer Grafikkarte</td><td>Konkret meist <b>GDDR6/GDDR6X</b>: auf Bandbreite statt auf niedrige Latenz optimiert. Auf der Karte sind es die Chips rund um den Grafikprozessor — beim Reparieren häufige Kandidaten für Hitzeschäden.</td></tr>
+<tr><td><b>HBM</b></td><td>Gestapelte Speicherchips direkt neben dem Prozessor auf demselben Träger</td><td>Extrem breite Anbindung bei kurzen Wegen — in Beschleunigern und High-End-Grafikkarten. Nicht reparierbar, nur komplett tauschbar.</td></tr>
+<tr><td><b>NAND-Flash</b></td><td>Nichtflüchtiger Speicher, dessen Zellen wie ein NAND-Gatter <b>in Reihe</b> verschaltet sind</td><td>Hohe Dichte, aber nur <b>blockweise</b> löschbar und mit begrenzter Zahl an Schreibzyklen. Braucht deshalb Fehlerkorrektur (ECC) und Wear Leveling. Steckt in SSD, SD-Karte, USB-Stick, eMMC.</td></tr>
+<tr><td><b>NOR-Flash</b></td><td>Zellen parallel verschaltet — jede Adresse direkt lesbar</td><td>Code kann direkt daraus ausgeführt werden (XIP). Kleiner und teurer pro Bit, deshalb typisch für BIOS/UEFI und Firmware.</td></tr>
+<tr><td><b>EEPROM</b></td><td>Nichtflüchtig, <b>byteweise</b> beschreibbar</td><td>Für Konfiguration, Kalibrierwerte, Seriennummern. Klein (KB-Bereich), dafür ~1 Million Schreibzyklen.</td></tr>
+<tr><td><b>eMMC</b></td><td>NAND-Flash plus Controller in einem verlöteten BGA-Gehäuse</td><td>Der „Datenträger" in Handys, Tablets, Einplatinenrechnern. Fest verlötet — Datenrettung heißt Auslöten und Auslesen.</td></tr>
+<tr><td><b>UFS</b></td><td>Nachfolger von eMMC, seriell statt parallel und vollduplex</td><td>Deutlich schneller, kann lesen und schreiben gleichzeitig. Standard in aktuellen Smartphones.</td></tr>
+<tr><td><b>SLC / MLC / TLC / QLC</b></td><td>Wie viele Bits pro Flash-Zelle gespeichert werden (1/2/3/4)</td><td>Mehr Bits = billiger, aber langsamer und weniger Schreibzyklen. SLC hält ~100 000 Zyklen, QLC nur noch ~1000.</td></tr>
+<tr><td><b>FRAM / MRAM</b></td><td>Nichtflüchtige Speicher mit praktisch unbegrenzten Schreibzyklen</td><td>Für Daten, die ständig geschrieben werden (Zählerstände, Logs) — dort, wo EEPROM verschleißen würde.</td></tr>
+<tr><td><b>ROM / Mask ROM</b></td><td>Bei der Chipfertigung fest einprogrammiert</td><td>Nicht änderbar. Enthält z. B. den Boot-Loader, der ein Gerät überhaupt erst startbereit macht.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Logikgatter — und warum NAND zweimal vorkommt</h2>
+<p>„NAND" bezeichnet zwei völlig verschiedene Dinge: ein <b>Logikgatter</b> und eine <b>Flash-Bauart</b>. Der Zusammenhang: die Flash-Zellen sind so verschaltet wie die Transistoren in einem NAND-Gatter — in Reihe. Beim NOR-Flash liegen sie parallel, wie im NOR-Gatter.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Gatter</th><th>Ausgang ist HIGH, wenn …</th><th>Merksatz</th></tr></thead>
+<tbody>
+<tr><td><b>AND</b> (UND)</td><td>… <b>alle</b> Eingänge HIGH sind</td><td>Beide Bedingungen müssen erfüllt sein</td></tr>
+<tr><td><b>OR</b> (ODER)</td><td>… <b>mindestens ein</b> Eingang HIGH ist</td><td>Eines genügt</td></tr>
+<tr><td><b>NOT</b> (Inverter)</td><td>… der Eingang LOW ist</td><td>Dreht um</td></tr>
+<tr><td><b>NAND</b></td><td>… <b>nicht alle</b> Eingänge HIGH sind (AND mit Inverter dahinter)</td><td><b>Universell:</b> aus NAND-Gattern allein lässt sich jede beliebige Logik bauen — deshalb ist es der Grundbaustein in Chips</td></tr>
+<tr><td><b>NOR</b></td><td>… <b>kein</b> Eingang HIGH ist</td><td>Ebenfalls universell einsetzbar</td></tr>
+<tr><td><b>XOR</b> (Exklusiv-ODER)</td><td>… <b>genau ein</b> Eingang HIGH ist</td><td>„Ungleich" — Basis von Addierern und Prüfsummen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Ein kleiner Kreis (Bubble) am Ausgang eines Symbols bedeutet immer <b>invertiert</b>. Dasselbe Prinzip bei Signalnamen im Schaltplan: <b>RESET</b> ist aktiv bei HIGH, <b>/RESET</b> oder <b>RESET#</b> ist aktiv bei LOW — deshalb sitzt an solchen Pins fast immer ein Pull-up.</p>
+
+<h2>Leistung &amp; Regelung</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>VRM</b></td><td>Voltage Regulator Module — die mehrphasige Schaltregler-Baugruppe, die aus 12 V die Kernspannung eines Prozessors macht. Ausführlich im Tab <a href="#leistung">Leistung &amp; PWM</a>.</td></tr>
+<tr><td><b>PWM</b></td><td>Pulsweiten-Modulation: schnelles Ein/Aus, wobei der Ein-Anteil (Tastgrad) die abgegebene Leistung bestimmt.</td></tr>
+<tr><td><b>PFM</b></td><td>Pulsfrequenz-Modulation: bei sehr kleiner Last schaltet der Regler nur noch gelegentlich einen Puls. Spart Ruhestrom, erzeugt dafür unregelmäßiges Rauschen.</td></tr>
+<tr><td><b>LDO</b></td><td>Low-Dropout-Regler: Linearregler, der schon mit geringer Differenz zwischen Ein- und Ausgang auskommt (oft 0,1–0,5 V). Sehr rauscharm, verheizt aber die Differenz.</td></tr>
+<tr><td><b>SMPS</b></td><td>Switched-Mode Power Supply — Sammelbegriff für alle schaltenden Netzteile und Wandler.</td></tr>
+<tr><td><b>Dropout</b></td><td>Die Mindestdifferenz, die ein Linearregler braucht. Ein 5-V-Regler mit 2 V Dropout liefert an 6 V Eingang keine sauberen 5 V mehr.</td></tr>
+<tr><td><b>I<sub>q</sub></b> (Ruhestrom)</td><td>Was der Regler selbst verbraucht, auch ohne Last. Bei Batteriebetrieb entscheidend — Unterschiede zwischen 1 µA und 5 mA bestimmen die Laufzeit.</td></tr>
+<tr><td><b>ESR / ESL</b></td><td>Ersatz-Serienwiderstand bzw. -induktivität eines Kondensators. Bestimmen, wie gut er schnelle Stromspitzen liefern kann. Steigender ESR ist das typische Alterungsmerkmal von Elkos.</td></tr>
+<tr><td><b>Ripple</b> (Restwelligkeit)</td><td>Der Rest an Wechselspannung, den der Wandler nicht wegglättet. Sichtbar nur mit dem <a href="#oszilloskop">Oszilloskop</a>, im AC-Modus gemessen.</td></tr>
+<tr><td><b>OCP</b></td><td>Over Current Protection — Abschalten oder Begrenzen bei zu hohem Strom. Genau das macht die Strombegrenzung am <a href="#netzteil">Labornetzteil</a>.</td></tr>
+<tr><td><b>OVP / UVP</b></td><td>Über- bzw. Unterspannungsschutz.</td></tr>
+<tr><td><b>OTP</b></td><td>Over Temperature Protection — thermische Abschaltung. (In anderem Zusammenhang auch „One Time Programmable" für einmalig beschreibbaren Speicher.)</td></tr>
+<tr><td><b>SCP</b></td><td>Short Circuit Protection — reagiert schneller und härter als OCP.</td></tr>
+<tr><td><b>UVLO</b></td><td>Under Voltage Lock-Out: Der Chip startet erst über einer Mindestspannung und bleibt darunter definiert aus, statt undefiniert zu zucken.</td></tr>
+<tr><td><b>Soft-Start</b></td><td>Die Ausgangsspannung fährt langsam hoch, damit der Einschaltstrom in die Kondensatoren nicht die Schutzschaltung auslöst.</td></tr>
+<tr><td><b>PGOOD</b></td><td>„Power Good" — Meldeleitung, die HIGH wird, sobald die Spannung stabil im Fenster liegt. Löst oft den nächsten Regler in der Startkette aus. Bei toten Boards ein sehr nützlicher Messpunkt.</td></tr>
+<tr><td><b>Enable (EN)</b></td><td>Freigabe-Eingang. Liegt er nicht auf HIGH, startet der Regler nicht — bei einer Diagnose immer als Erstes prüfen.</td></tr>
+<tr><td><b>Bootstrap</b></td><td>Kondensator, der die Gate-Spannung für einen High-Side-N-Kanal-MOSFET über die Versorgung hebt.</td></tr>
+<tr><td><b>Dead Time</b> (Totzeit)</td><td>Die Pause, in der beide MOSFETs einer Halbbrücke aus sind. Verhindert Shoot-Through.</td></tr>
+<tr><td><b>Synchrongleichrichtung</b></td><td>Ein aktiv geschalteter MOSFET ersetzt die Freilaufdiode → statt 0,7 V fallen nur Millivolt ab.</td></tr>
+<tr><td><b>Line / Load Regulation</b></td><td>Wie stark der Ausgang schwankt, wenn sich die <b>Eingangsspannung</b> bzw. die <b>Last</b> ändert.</td></tr>
+<tr><td><b>Transient Response</b></td><td>Wie schnell der Regler auf einen Lastsprung reagiert. Zeigt sich als kurzer Einbruch — nur im Oszilloskop sichtbar.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Signal &amp; Messgrößen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Bandbreite</b></td><td>Bis zu welcher Frequenz ein Gerät oder eine Leitung ein Signal noch korrekt überträgt. Faustregel fürs Oszilloskop: mindestens das 5-Fache der Signalfrequenz.</td></tr>
+<tr><td><b>Anstiegszeit</b> (Rise Time)</td><td>Wie lange eine Flanke von 10 % auf 90 % braucht. Hängt direkt mit der Bandbreite zusammen: <span class="formula">t<sub>r</sub> ≈ 0,35 / Bandbreite</span></td></tr>
+<tr><td><b>Slew Rate</b></td><td>Wie schnell ein Verstärkerausgang seine Spannung ändern kann, in V/µs. Zu langsam = verrundete Rechtecke.</td></tr>
+<tr><td><b>Jitter</b></td><td>Zeitliches Zittern einer Taktflanke. Bei schnellen Bussen der Grund, warum Daten „manchmal" kippen.</td></tr>
+<tr><td><b>Impedanz</b> (Leitungswellenwiderstand)</td><td>Der Widerstand, den eine Leiterbahn einem schnellen Signal entgegensetzt — bestimmt durch Breite, Abstand zur Massefläche und Material. Übliche Werte: 50 Ω einzeln, 90 Ω differenziell (USB), 100 Ω differenziell (Ethernet, CAN, LVDS).</td></tr>
+<tr><td><b>Termination</b> (Abschluss)</td><td>Widerstand am Leitungsende, der Reflexionen verhindert. Bei CAN und RS-485 sind das die 120 Ω an <b>beiden</b> Enden — fehlen sie, wird der Bus unzuverlässig.</td></tr>
+<tr><td><b>Differenzialpaar</b></td><td>Zwei Leitungen, die dasselbe Signal gegenläufig führen. Der Empfänger wertet nur die <b>Differenz</b> aus, sodass eingestreute Störungen auf beiden Adern sich aufheben. Prinzip hinter USB, CAN, Ethernet, HDMI.</td></tr>
+<tr><td><b>Gleichtakt</b> (Common Mode)</td><td>Der Anteil, der auf beiden Adern gleich ist — meist die Störung. Wird von stromkompensierten Drosseln gedämpft.</td></tr>
+<tr><td><b>SNR</b></td><td>Signal-Rausch-Abstand in dB. Je größer, desto sauberer das Nutzsignal.</td></tr>
+<tr><td><b>Abtastrate / Nyquist</b></td><td>Wie oft pro Sekunde digitalisiert wird. Man muss mindestens <b>doppelt</b> so schnell abtasten wie die höchste Signalfrequenz — praktisch eher 5–10-fach.</td></tr>
+<tr><td><b>Aliasing</b></td><td>Zu langsam abgetastet → es erscheint ein Signal, das gar nicht existiert. Der Grund für seltsame, langsame „Geisterwellen" auf dem Oszilloskop.</td></tr>
+<tr><td><b>Übersprechen</b> (Crosstalk)</td><td>Ein schnelles Signal koppelt in die Nachbarleitung. Gegenmittel: Abstand halten oder eine Masseleitung dazwischen.</td></tr>
+<tr><td><b>Ground Bounce</b></td><td>Kurzer Massepotenzialsprung durch schnelle Stromspitzen. Deshalb sitzen Entkopplungskondensatoren direkt am IC und nicht irgendwo auf der Platine.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Gehäuse, Bauformen &amp; Fertigung</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>THT / SMD</b></td><td>Durchsteck- bzw. oberflächenmontierte Bauteile. Löttechnik dazu: <a href="loeten-referenz.html#tht">Löten-Referenz</a>.</td></tr>
+<tr><td><b>0402 / 0201 / 01005</b></td><td>Bauteilgröße in Zoll-Schreibweise: 0402 = 1,0 × 0,5 mm, 0201 = 0,6 × 0,3 mm, 01005 = 0,4 × 0,2 mm. <b>Achtung:</b> es gibt dieselben Zahlen auch metrisch — „0402 metrisch" ist das, was imperial 01005 heißt.</td></tr>
+<tr><td><b>SOT-23</b></td><td>Kleines Dreibein-Gehäuse für Transistoren, MOSFETs und kleine Regler.</td></tr>
+<tr><td><b>SOIC / SOP / TSSOP</b></td><td>Gehäuse mit seitlich herausstehenden Beinchen. Gut von Hand lötbar, Rastermaß 1,27 mm bzw. 0,65 mm.</td></tr>
+<tr><td><b>QFP / TQFP / LQFP</b></td><td>Quadratisch mit Beinchen an allen vier Seiten. Typisch für Mikrocontroller, Rastermaß 0,4–0,8 mm.</td></tr>
+<tr><td><b>QFN / DFN</b></td><td>Keine Beinchen, nur Kontaktflächen an der Unterseite und meist ein großes Kühlpad in der Mitte. Nur mit Heißluft oder Reflow sinnvoll zu löten.</td></tr>
+<tr><td><b>BGA</b></td><td>Ball Grid Array — Kontakte als Lotkugel-Raster unter dem Chip. Nicht sichtbar, nur per Röntgen oder elektrisch prüfbar.</td></tr>
+<tr><td><b>LGA</b></td><td>Wie BGA, aber flache Kontaktflächen statt Kugeln — der Sockeltyp aktueller Prozessoren.</td></tr>
+<tr><td><b>WLCSP / CSP</b></td><td>Der nackte Chip mit Kugeln direkt darauf, kaum größer als der Halbleiter selbst. In Smartphones allgegenwärtig.</td></tr>
+<tr><td><b>PoP</b> (Package on Package)</td><td>Speicher-Gehäuse sitzt gestapelt auf dem Prozessor. Beim Auslöten müssen beide Ebenen einzeln behandelt werden.</td></tr>
+<tr><td><b>Underfill</b></td><td>Harz, das unter ein BGA gespritzt wird, damit es Stöße überlebt. Macht die Reparatur erheblich schwerer.</td></tr>
+<tr><td><b>Reballing</b></td><td>Einem ausgelöteten BGA neue Lotkugeln verpassen, bevor es wieder eingesetzt wird.</td></tr>
+<tr><td><b>Via</b></td><td>Durchkontaktierung zwischen zwei Lagen. <b>Blind Via</b> geht nur von außen bis in eine Innenlage, <b>Buried Via</b> verbindet nur Innenlagen, <b>Micro-Via</b> ist lasergebohrt und winzig.</td></tr>
+<tr><td><b>HDI</b></td><td>High Density Interconnect — Platinen mit Micro-Vias und sehr feinen Strukturen. Standard in Smartphones.</td></tr>
+<tr><td><b>Stackup</b> (Lagenaufbau)</td><td>Welche Kupferlage wofür da ist. Übliche Vierlagen-Ordnung: Signal / Masse / Versorgung / Signal — die durchgehende Massefläche ist entscheidend für Störfestigkeit.</td></tr>
+<tr><td><b>Lötstopplack</b> (Solder Mask)</td><td>Die grüne (oder farbige) Schicht. Verhindert, dass Lot dorthin fließt, wo es nicht hin soll. Als UV-härtender Lack auch das Mittel, um Reparaturdrähte zu fixieren.</td></tr>
+<tr><td><b>Stencil</b> (Schablone)</td><td>Dünne Metallfolie mit Ausschnitten, um Lötpaste passgenau auf alle Pads aufzutragen.</td></tr>
+<tr><td><b>Nutzen / Panel</b></td><td>Mehrere Platinen in einem Fertigungsstück, nach der Bestückung getrennt (geritzt oder ausgefräst).</td></tr>
+<tr><td><b>Fiducial</b></td><td>Runde Passermarke auf der Platine, an der sich Bestückungsautomat und Schablone ausrichten.</td></tr>
+<tr><td><b>DFM</b></td><td>Design for Manufacturing — das Layout so gestalten, dass es fertigbar und prüfbar bleibt (Mindestabstände, Testpunkte, Bauteilorientierung).</td></tr>
+<tr><td><b>ICT / Flying Probe</b></td><td>Automatischer Test der bestückten Platine — über ein Nadelbett oder mit beweglichen Prüfnadeln.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kürzel im Datenblatt</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Bauteil</th><th>Kürzel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><b>Diode</b></td><td>V<sub>F</sub> / I<sub>F</sub></td><td>Durchlassspannung und -strom (Silizium ~0,7 V, Schottky ~0,3 V)</td></tr>
+<tr><td>V<sub>R</sub></td><td>Sperrspannung, die sie in Gegenrichtung aushält</td></tr>
+<tr><td>t<sub>rr</sub></td><td>Sperrverzögerungszeit — wie schnell sie beim Umpolen wirklich sperrt. Für Schaltregler entscheidend.</td></tr>
+<tr><td rowspan="4"><b>MOSFET</b></td><td>V<sub>GS(th)</sub></td><td>Schwellspannung, ab der er zu leiten <i>beginnt</i></td></tr>
+<tr><td>R<sub>DS(on)</sub></td><td>Durchlasswiderstand — immer zusammen mit der zugehörigen V<sub>GS</sub> lesen</td></tr>
+<tr><td>Q<sub>g</sub> / C<sub>iss</sub></td><td>Gate-Ladung bzw. Eingangskapazität → bestimmt Treiberbedarf und Schaltverluste</td></tr>
+<tr><td>V<sub>DS</sub> / I<sub>D</sub></td><td>Maximale Spannung Drain–Source und Dauerstrom</td></tr>
+<tr><td rowspan="3"><b>Bipolar&shy;transistor</b></td><td>h<sub>FE</sub> (β)</td><td>Stromverstärkung — streut von Exemplar zu Exemplar erheblich</td></tr>
+<tr><td>V<sub>CE(sat)</sub></td><td>Restspannung im durchgeschalteten Zustand (~0,2 V). Bei hohen Strömen die Wärmequelle.</td></tr>
+<tr><td>I<sub>C</sub> / V<sub>CEO</sub></td><td>Maximaler Kollektorstrom und Sperrspannung</td></tr>
+<tr><td rowspan="3"><b>Kondensator</b></td><td>ESR / ESL</td><td>Innerer Serienwiderstand und -induktivität</td></tr>
+<tr><td>Ripple Current</td><td>Wie viel Wechselstrom er dauerhaft aushält, ohne zu überhitzen</td></tr>
+<tr><td>DC-Bias</td><td>Kapazitätsverlust von Keramikkondensatoren unter Gleichspannung — oft 50–80 %</td></tr>
+<tr><td rowspan="2"><b>Spule</b></td><td>I<sub>sat</sub> / I<sub>rms</sub></td><td>Sättigungs- und Dauerstrom</td></tr>
+<tr><td>DCR / SRF</td><td>Drahtwiderstand und Eigenresonanzfrequenz</td></tr>
+<tr><td rowspan="4"><b>Allgemein</b></td><td>Absolute Maximum Ratings</td><td><b>Zerstörungsgrenzen</b>, keine Betriebswerte. Dauerbetrieb dort ist immer falsch.</td></tr>
+<tr><td>Recommended Operating Conditions</td><td>Der Bereich, für den die garantierten Daten gelten — <b>das</b> ist die Auslegungsgrundlage.</td></tr>
+<tr><td>T<sub>J</sub> / θ<sub>JA</sub></td><td>Sperrschichttemperatur und Wärmewiderstand zur Umgebung (K/W). Damit rechnet man aus, wie heiß der Chip wirklich wird.</td></tr>
+<tr><td>MSL</td><td>Moisture Sensitivity Level — wie lange ein Bauteil nach dem Öffnen der Verpackung an Luft bleiben darf, bevor es vor dem Reflow getrocknet werden muss. Ignoriert man das, platzt das Gehäuse („Popcorn-Effekt").</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><div><b>Die wichtigste Datenblatt-Regel:</b> „Absolute Maximum Ratings" und „Recommended Operating Conditions" sind zwei verschiedene Tabellen. Die erste sagt, ab wann das Bauteil kaputtgeht, die zweite, wo es die versprochenen Eigenschaften hat. Ausgelegt wird <b>immer</b> nach der zweiten — mit Abstand zur ersten.</div></div>
+</section>
+
 <!-- ============ TAB: OSZILLOSKOP ============ -->
 <section id="t-oszilloskop" class="hidden">
 
@@ -1951,13 +2344,13 @@ td:first-child{font-weight:500}
 <script>
 /* ---------- TABS ---------- */
 const TABS=[
-{k:"grundlagen",l:"Basics",i:"⚡"},{k:"schaltplan",l:"Schaltplan",i:"📐"},{k:"rechner",l:"Rechner",i:"🧮"},
+{k:"grundlagen",l:"Basics",i:"⚡"},{k:"schaltplan",l:"Schaltplan",i:"📐"},{k:"leistung",l:"Leistung & PWM",i:"🔌"},{k:"rechner",l:"Rechner",i:"🧮"},{k:"begriffe",l:"Fachbegriffe",i:"📖"},
 {k:"komponenten",l:"Datenbank",i:"🧩"},{k:"displays",l:"Displays",i:"🖥️"},{k:"motoren",l:"Motoren",i:"⚙️"},{k:"mcu",l:"Mikrocontroller",i:"🤖"},
 {k:"messgeraet",l:"Multimeter",i:"📟"},{k:"oszilloskop",l:"Oszilloskop",i:"📉"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},
 {k:"sicherheit",l:"Sicherheit",i:"⚠️"},{k:"praxis",l:"Praxis & Aufbau",i:"📋"}
 ];
 const GROUPS=[
-{g:"basis",l:"Grundlagen",i:"⚡",tabs:["grundlagen","schaltplan","rechner"]},
+{g:"basis",l:"Grundlagen",i:"⚡",tabs:["grundlagen","schaltplan","leistung","rechner","begriffe"]},
 {g:"teile",l:"Bauteile",i:"🧩",tabs:["komponenten","displays","motoren","mcu"]},
 {g:"messen",l:"Messen & Werkzeug",i:"🔧",tabs:["messgeraet","oszilloskop","lcrp1","netzteil"]},
 {g:"sicher",l:"Sicherheit & Praxis",i:"⚠️",tabs:["sicherheit","praxis"]}
