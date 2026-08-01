@@ -428,16 +428,23 @@
 
 /* ------------------------------------------- Anpassung an App-Shell-Seiten
    Löten & Elektronik 101 haben eine eigene fixierte Sidebar + Topbar.
-   Beide rutschen um die Leistenhöhe nach unten.                          */
+   Beide rutschen um die Leistenhöhe nach unten.
+
+   Stapelreihenfolge: der Scrim gehört UNTER die Sidebar, sonst legt er sich
+   über die geöffnete Schublade und schluckt alle Taps. Die Suchpalette der
+   Seite liegt als Modal ganz oben.                                        */
 body.hbx-app #side {
   top: var(--hbx-h);
+  z-index: 810;
 }
 body.hbx-app #topbar {
   top: var(--hbx-h);
 }
-body.hbx-app #pal,
 body.hbx-app #scrim {
-  z-index: 780;
+  z-index: 805;
+}
+body.hbx-app #pal {
+  z-index: 850;
 }
 
 /* Sprungziele nicht unter die Leiste rutschen lassen. */
