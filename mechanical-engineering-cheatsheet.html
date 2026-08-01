@@ -150,6 +150,9 @@ tr:hover td{background:#252525}
 .dd-col li{color:#d5d5d5}
 }
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
 <h1>Mechanical Engineering Cheat Sheet</h1>
@@ -560,6 +563,11 @@ document.querySelectorAll("#views button").forEach(b=>b.classList.toggle("active
 }
 const vDiv=document.getElementById("views");
 views.forEach(v=>{const b=document.createElement("button");b.textContent=v.l;b.dataset.v=v.k;b.className=v.k==="konzepte"?"active":"";b.onclick=()=>switchView(v.k);vDiv.appendChild(b)});
+/* Deep-Link aus dem Hub: #konzepte usw. waehlt die Ansicht direkt an */
+function goView(v){if(!views.some(x=>x.k===v))return;switchView(v);if(decodeURIComponent(location.hash.slice(1))!==v)history.replaceState(null,"","#"+v);}
+vDiv.querySelectorAll("button").forEach(b=>{b.onclick=()=>goView(b.dataset.v)});
+window.addEventListener("hashchange",()=>goView(decodeURIComponent(location.hash.slice(1))));
+goView(decodeURIComponent(location.hash.slice(1))||"konzepte");
 </script>
 </body>
 </html>

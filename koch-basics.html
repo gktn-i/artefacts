@@ -495,6 +495,9 @@
     .nav-item, .card { transition: none; }
   }
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
   <div class="container">
@@ -1074,18 +1077,29 @@
   const panels = document.querySelectorAll('.panel');
   const content = document.querySelector('.content');
 
+  const KEYS = [...navItems].map(n => n.dataset.panel);
+
+  /* Panel-Wechsel mit Deep-Link (#technik, #pfannen, ...) */
+  function showPanel(target, scroll) {
+    if (!KEYS.includes(target)) return;
+    navItems.forEach(n => n.classList.toggle('active', n.dataset.panel === target));
+    panels.forEach(p => p.classList.toggle('active', p.id === target));
+    if (decodeURIComponent(location.hash.slice(1)) !== target) {
+      history.replaceState(null, '', '#' + target);
+    }
+    if (scroll && window.innerWidth <= 860) {
+      content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
   navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const target = item.dataset.panel;
-      navItems.forEach(n => n.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      item.classList.add('active');
-      document.getElementById(target).classList.add('active');
-      if (window.innerWidth <= 860) {
-        content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
+    item.addEventListener('click', () => showPanel(item.dataset.panel, true));
   });
+  window.addEventListener('hashchange', () => {
+    showPanel(decodeURIComponent(location.hash.slice(1)), false);
+  });
+  const kHash = decodeURIComponent(location.hash.slice(1));
+  if (KEYS.includes(kHash)) showPanel(kHash, false);
 </script>
 </body>
 </html>

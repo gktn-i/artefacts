@@ -39,6 +39,9 @@ h1{font-size:20px;font-weight:500;margin-bottom:16px}
 .uc-box{margin-top:8px;padding:8px 12px;border:0.5px solid #333;border-radius:8px;background:#1a1a1a}
 .uc-box li{font-size:13px;color:#aaa;margin:2px 0 2px 16px}
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
 <h1>Schmiermittel Vergleich</h1>
@@ -175,6 +178,19 @@ function render(){
   });
 }
 render();
+
+/* Deep-Link aus dem Hub: #oel, #fett, #spray, #spezial, #paste, #reiniger */
+const slugCat={};
+Object.keys(catMap).forEach(c=>{if(catMap[c])slugCat[catMap[c]]=c});
+function applyHash(){
+  const c=slugCat[decodeURIComponent(location.hash.slice(1)).toLowerCase()];
+  if(!c||c===activeCat)return;
+  activeCat=c;
+  document.querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("active",x.textContent===c));
+  render();
+}
+applyHash();
+window.addEventListener("hashchange",applyHash);
 </script>
 </body>
 </html>

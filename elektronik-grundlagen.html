@@ -239,12 +239,6 @@ svg.sy .cot{fill:var(--accent-ink);font-family:var(--sans);font-size:12px;font-w
 #side{position:fixed;left:0;top:0;bottom:0;width:266px;z-index:70;display:flex;flex-direction:column;
   background:var(--surface);border-right:1px solid var(--border);overflow:hidden}
 .side-head{padding:.8rem .75rem .6rem;border-bottom:1px solid var(--border)}
-.side-switch{display:flex;gap:4px;margin-bottom:.55rem}
-.side-switch a{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:.35em;
-  font-size:11.5px;font-weight:600;padding:5px 6px;border-radius:7px;text-decoration:none;
-  color:var(--faint);border:1px solid transparent;transition:background .15s,color .15s}
-.side-switch a:hover{color:var(--text);background:var(--surface-2)}
-.side-switch a.on{color:var(--accent-ink);background:var(--accent-soft);border-color:var(--accent-border)}
 #openSearch{width:100%;display:flex;align-items:center;gap:.5em;font-family:inherit;font-size:12.5px;
   padding:7px 10px;border-radius:8px;cursor:pointer;background:var(--bg);
   border:1px solid var(--border-strong);color:var(--muted);text-align:left}
@@ -342,14 +336,13 @@ td:first-child{font-weight:500}
 .kurz::before{content:"💡";flex:0 0 auto;font-size:15px;line-height:1.35}
 .kurz b{font-weight:700}
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
 <aside id="side">
 <div class="side-head">
-<div class="side-switch">
-<a class="on" href="elektronik-grundlagen.html">⚡ Elektronik</a>
-<a href="loeten-referenz.html">🔥 Löten</a>
-</div>
 <button id="openSearch" type="button">🔍 Suchen … <span class="k">⌘K</span></button>
 </div>
 <nav id="sideNav" aria-label="Inhalt"></nav>
