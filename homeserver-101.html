@@ -134,6 +134,9 @@ tr:hover td{background:#252525}
 .calc .res{background:#042C53;color:#B5D4F4}
 }
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
 <h1>Homeserver 101</h1>
@@ -745,12 +748,17 @@ function showTab(k){
  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.dataset.p===k));
  tabsDiv.querySelectorAll("button").forEach(b=>b.classList.toggle("active",b.dataset.k===k));
  try{localStorage.setItem("hstab",k)}catch(e){}
+ if(decodeURIComponent(location.hash.slice(1))!==k)history.replaceState(null,"","#"+k);
  window.scrollTo({top:0});
 }
 TABS.forEach(t=>{const b=document.createElement("button");b.textContent=t.l;b.dataset.k=t.k;b.onclick=()=>showTab(t.k);tabsDiv.appendChild(b)});
 let start=TABS[0].k;
 try{const s=localStorage.getItem("hstab");if(s&&TABS.some(t=>t.k===s))start=s}catch(e){}
+/* Deep-Link aus dem Hub schlaegt den zuletzt genutzten Tab */
+const hStart=decodeURIComponent(location.hash.slice(1));
+if(TABS.some(t=>t.k===hStart))start=hStart;
 showTab(start);
+window.addEventListener("hashchange",()=>{const r=decodeURIComponent(location.hash.slice(1));if(TABS.some(t=>t.k===r))showTab(r)});
 
 /* Stromkosten-Rechner */
 function calcStrom(){

@@ -424,6 +424,9 @@
     .tabs { grid-template-columns: 1fr; }
   }
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
   <div class="container">
@@ -636,15 +639,22 @@
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.panel;
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById(target).classList.add('active');
-    });
-  });
+  const KEYS = [...tabs].map(t => t.dataset.panel);
+
+  /* Methode wechseln, per #basting / #reverse auch direkt verlinkbar */
+  function showPanel(target) {
+    if (!KEYS.includes(target)) return;
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.panel === target));
+    panels.forEach(p => p.classList.toggle('active', p.id === target));
+    if (decodeURIComponent(location.hash.slice(1)) !== target) {
+      history.replaceState(null, '', '#' + target);
+    }
+  }
+
+  tabs.forEach(tab => tab.addEventListener('click', () => showPanel(tab.dataset.panel)));
+  window.addEventListener('hashchange', () => showPanel(decodeURIComponent(location.hash.slice(1))));
+  const sHash = decodeURIComponent(location.hash.slice(1));
+  if (KEYS.includes(sHash)) showPanel(sHash);
 </script>
 </body>
 </html>

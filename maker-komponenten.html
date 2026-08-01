@@ -119,6 +119,9 @@ tr:hover td{background:#252525}
 .gl-def{color:#aaa}
 }
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
 <h1>Maker Komponenten Datenbank</h1>
@@ -449,6 +452,11 @@ document.querySelectorAll("#views button").forEach(b=>b.classList.toggle("active
 }
 const vDiv=document.getElementById("views");
 views.forEach(v=>{const b=document.createElement("button");b.textContent=v.l;b.dataset.v=v.k;b.className=v.k==="komp"?"active":"";b.onclick=()=>switchView(v.k);vDiv.appendChild(b)});
+/* Deep-Link aus dem Hub: #komp usw. waehlt die Ansicht direkt an */
+function goView(v){if(!views.some(x=>x.k===v))return;switchView(v);if(decodeURIComponent(location.hash.slice(1))!==v)history.replaceState(null,"","#"+v);}
+vDiv.querySelectorAll("button").forEach(b=>{b.onclick=()=>goView(b.dataset.v)});
+window.addEventListener("hashchange",()=>goView(decodeURIComponent(location.hash.slice(1))));
+goView(decodeURIComponent(location.hash.slice(1))||"komp");
 </script>
 </body>
 </html>

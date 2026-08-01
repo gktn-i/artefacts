@@ -9,12 +9,15 @@
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>body{margin:0}</style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
 <div id="root"></div>
 
 <script type="text/babel" data-presets="react">
-const { useState } = React;
+const { useState, useEffect } = React;
 
 const data = {
   edel: {
@@ -318,8 +321,26 @@ function StarRating({ value }) {
 }
 
 function App() {
-  const [active, setActive] = useState("edel");
+  const [active, setActive] = useState(() => {
+    const h = decodeURIComponent(location.hash.slice(1));
+    return categories.includes(h) ? h : "edel";
+  });
   const [openCard, setOpenCard] = useState(null);
+
+  /* Deep-Link aus dem Hub: #edel, #steak, #special, #schmor, #andere */
+  useEffect(() => {
+    if (decodeURIComponent(location.hash.slice(1)) !== active) {
+      history.replaceState(null, "", "#" + active);
+    }
+  }, [active]);
+  useEffect(() => {
+    const onHash = () => {
+      const h = decodeURIComponent(location.hash.slice(1));
+      if (categories.includes(h)) setActive(h);
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
 
   return (
     <div

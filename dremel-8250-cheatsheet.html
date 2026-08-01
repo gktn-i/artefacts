@@ -129,6 +129,9 @@ tr:hover td{background:#252525}
 .s-var{background:#26215C;color:#CECBF6}
 }
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
 <h1>Dremel 8250 Cheatsheet</h1>
@@ -498,15 +501,20 @@ const tabDefs=[
 ];
 const tabBar=document.getElementById('tabs');
 tabBar.innerHTML=tabDefs.map((t,i)=>`<button class="${i===0?'active':''}" data-t="${t.p}">${t.l}</button>`).join('');
+/* Tab-Wechsel mit Deep-Link (#material, #bits, #aufsatz, #basics) */
+function showTab(p,scroll){
+if(!tabDefs.some(t=>t.p===p))return;
+tabBar.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.dataset.t===p));
+document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.dataset.p===p));
+if(decodeURIComponent(location.hash.slice(1))!==p)history.replaceState(null,'','#'+p);
+if(scroll)window.scrollTo(0,0);
+}
 tabBar.querySelectorAll('button').forEach(btn=>{
-btn.addEventListener('click',()=>{
-tabBar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
-btn.classList.add('active');
-document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-document.querySelector(`.panel[data-p="${btn.dataset.t}"]`).classList.add('active');
-window.scrollTo(0,0);
+btn.addEventListener('click',()=>showTab(btn.dataset.t,true));
 });
-});
+window.addEventListener('hashchange',()=>showTab(decodeURIComponent(location.hash.slice(1)),false));
+const dHash=decodeURIComponent(location.hash.slice(1));
+showTab(tabDefs.some(t=>t.p===dHash)?dHash:tabDefs[0].p,false);
 
 document.getElementById('legend').textContent='Dremel 8250 · Drehzahlbereich 5.000–30.000 RPM · Spannzangen 0,8–3,2 mm · Angaben sind Richtwerte, immer am Reststück testen.';
 </script>
