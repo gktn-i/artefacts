@@ -1,0 +1,502 @@
+/* ============================================================================
+   ARTEFAKTE · CHROME
+   ----------------------------------------------------------------------------
+   Gemeinsame Kopfleiste + globale Suche für ALLE Seiten.
+
+   Wird von jeder Artefakt-Datei am Ende von <head> eingebunden, damit sie
+   deren Inline-Styles überschreiben kann. Alle Klassen sind mit `hbx-`
+   vorangestellt und die Farben liegen in eigenen `--hbx-*`-Variablen — dadurch
+   kollidiert nichts mit den Tokens der einzelnen Artefakte.
+
+   Hell/Dunkel wird nicht geraten: shell.js misst die Hintergrundhelligkeit der
+   Seite und setzt `data-hbx-theme` auf <html>. So passt die Leiste auch zu den
+   Artefakten mit fest verdrahtetem Theme.
+   ========================================================================== */
+
+:root {
+  --hbx-h: 44px;
+  --hbx-bg: rgba(255, 255, 255, 0.82);
+  --hbx-solid: #ffffff;
+  --hbx-text: #1b1e23;
+  --hbx-muted: #697079;
+  --hbx-faint: #98a0aa;
+  --hbx-border: #e0e4ea;
+  --hbx-hover: #f1f3f6;
+  --hbx-shadow: 0 18px 48px -22px rgba(16, 24, 40, 0.45);
+  --hbx-c: #0e7c8c;
+  --hbx-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --hbx-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+:root[data-hbx-theme="dark"] {
+  --hbx-bg: rgba(26, 29, 35, 0.82);
+  --hbx-solid: #1f2229;
+  --hbx-text: #e7e9ec;
+  --hbx-muted: #9aa2ad;
+  --hbx-faint: #727a85;
+  --hbx-border: #333842;
+  --hbx-hover: #2a2f37;
+  --hbx-shadow: 0 18px 48px -18px rgba(0, 0, 0, 0.75);
+  --hbx-c: #38c6d9;
+}
+
+/* ---------------------------------------------------------------- Leiste */
+.hbx-bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 800;
+  height: var(--hbx-h);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 10px 0 12px;
+  background: var(--hbx-bg);
+  border-bottom: 1px solid var(--hbx-border);
+  font-family: var(--hbx-font);
+  font-size: 13px;
+  color: var(--hbx-text);
+  box-sizing: border-box;
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+}
+.hbx-bar *,
+.hbx-pal * {
+  box-sizing: border-box;
+}
+
+.hbx-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 9px 5px 7px;
+  border-radius: 8px;
+  color: var(--hbx-text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: background 0.14s;
+}
+.hbx-home:hover {
+  background: var(--hbx-hover);
+}
+.hbx-home .m {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  background: linear-gradient(140deg, var(--hbx-c), color-mix(in srgb, var(--hbx-c) 35%, transparent));
+  flex: 0 0 auto;
+}
+
+.hbx-sep {
+  color: var(--hbx-faint);
+  flex: 0 0 auto;
+  font-size: 13px;
+  opacity: 0.75;
+  padding: 0 1px;
+}
+
+.hbx-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 34vw;
+  padding: 5px 9px;
+  border-radius: 8px;
+  color: var(--hbx-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 0 1 auto;
+  transition: background 0.14s, color 0.14s;
+}
+.hbx-crumb:hover {
+  background: var(--hbx-hover);
+  color: var(--hbx-text);
+}
+.hbx-crumb.cur {
+  color: var(--hbx-text);
+  font-weight: 600;
+}
+.hbx-crumb .i {
+  font-size: 13px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+/* Modul-Wechsler ------------------------------------------------------- */
+.hbx-pick {
+  position: relative;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.hbx-pick > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 40vw;
+  padding: 5px 8px 5px 9px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--hbx-text);
+  font: 600 13px/1.2 var(--hbx-font);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hbx-pick > button:hover,
+.hbx-pick.open > button {
+  background: var(--hbx-hover);
+}
+.hbx-pick > button .cv {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hbx-pick > button::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 0;
+  height: 0;
+  margin-left: 1px;
+  border: 3.5px solid transparent;
+  border-top-color: var(--hbx-faint);
+  transform: translateY(2px);
+}
+.hbx-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 236px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 5px;
+  background: var(--hbx-solid);
+  border: 1px solid var(--hbx-border);
+  border-radius: 11px;
+  box-shadow: var(--hbx-shadow);
+}
+.hbx-pick.open .hbx-menu {
+  display: block;
+}
+.hbx-menu .gl {
+  padding: 8px 9px 4px;
+  font: 600 10px/1 var(--hbx-font);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--hbx-faint);
+}
+.hbx-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 9px;
+  border-radius: 7px;
+  color: var(--hbx-text);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.3;
+}
+.hbx-menu a:hover {
+  background: var(--hbx-hover);
+}
+.hbx-menu a.on {
+  color: var(--hbx-c);
+  font-weight: 600;
+}
+.hbx-menu a .i {
+  flex: 0 0 auto;
+  font-size: 13px;
+}
+.hbx-menu a .k {
+  margin-left: auto;
+  font: 400 10px/1 var(--hbx-mono);
+  color: var(--hbx-faint);
+}
+
+/* Aktionen rechts ------------------------------------------------------ */
+.hbx-spacer {
+  flex: 1 1 auto;
+  min-width: 8px;
+}
+.hbx-act {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 9px;
+  border: 1px solid var(--hbx-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--hbx-muted);
+  font: 500 12.5px/1 var(--hbx-font);
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  transition: color 0.14s, border-color 0.14s, background 0.14s;
+}
+.hbx-act:hover {
+  color: var(--hbx-text);
+  border-color: color-mix(in srgb, var(--hbx-c) 55%, var(--hbx-border));
+  background: var(--hbx-hover);
+}
+.hbx-act .k {
+  font: 400 10px/1 var(--hbx-mono);
+  color: var(--hbx-faint);
+  border: 1px solid var(--hbx-border);
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+.hbx-act .lbl-s {
+  display: none;
+}
+
+/* -------------------------------------------------------- Fuß: Nachbarn */
+.hbx-foot {
+  font-family: var(--hbx-font);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 26px 22px 42px;
+  color: var(--hbx-muted);
+}
+.hbx-foot .hd {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+  font: 600 10.5px/1 var(--hbx-font);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hbx-faint);
+}
+.hbx-foot .hd::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--hbx-border);
+}
+.hbx-foot .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hbx-foot a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border: 1px solid var(--hbx-border);
+  border-radius: 9px;
+  background: var(--hbx-solid);
+  color: var(--hbx-text);
+  text-decoration: none;
+  font-size: 13px;
+  transition: border-color 0.14s, transform 0.14s;
+}
+.hbx-foot a:hover {
+  border-color: color-mix(in srgb, var(--hbx-c) 55%, var(--hbx-border));
+  transform: translateY(-1px);
+}
+.hbx-foot a.up {
+  color: var(--hbx-c);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------- Such-Palette */
+.hbx-pal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  padding: 9vh 16px 16px;
+  background: rgba(8, 10, 14, 0.5);
+  font-family: var(--hbx-font);
+}
+.hbx-pal.open {
+  display: block;
+}
+.hbx-pal .box {
+  max-width: 620px;
+  margin: 0 auto;
+  background: var(--hbx-solid);
+  border: 1px solid var(--hbx-border);
+  border-radius: 14px;
+  box-shadow: var(--hbx-shadow);
+  overflow: hidden;
+}
+.hbx-pal input {
+  width: 100%;
+  padding: 15px 17px;
+  border: 0;
+  border-bottom: 1px solid var(--hbx-border);
+  background: transparent;
+  color: var(--hbx-text);
+  font: 400 15px/1.3 var(--hbx-font);
+  outline: none;
+}
+.hbx-pal input::placeholder {
+  color: var(--hbx-faint);
+}
+.hbx-pal .out {
+  max-height: 56vh;
+  overflow-y: auto;
+  padding: 5px;
+}
+.hbx-pal .gl {
+  padding: 9px 10px 4px;
+  font: 600 10px/1 var(--hbx-font);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--hbx-faint);
+}
+.hbx-pal .r {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 11px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--hbx-text);
+  font: 400 13.5px/1.35 var(--hbx-font);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.hbx-pal .r:hover,
+.hbx-pal .r.sel {
+  background: var(--hbx-hover);
+}
+.hbx-pal .r .dot {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rc, var(--hbx-c));
+}
+.hbx-pal .r .tx {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.hbx-pal .r .tt {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hbx-pal .r .sb {
+  display: block;
+  font-size: 11px;
+  color: var(--hbx-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hbx-pal .r .kd {
+  flex: 0 0 auto;
+  font: 400 9.5px/1 var(--hbx-mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--hbx-faint);
+  border: 1px solid var(--hbx-border);
+  border-radius: 4px;
+  padding: 3px 5px;
+}
+.hbx-pal .r mark {
+  background: transparent;
+  color: var(--hbx-c);
+  font-weight: 700;
+}
+.hbx-pal .msg {
+  padding: 26px 18px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--hbx-muted);
+}
+.hbx-pal .hint {
+  display: flex;
+  gap: 14px;
+  padding: 8px 13px;
+  border-top: 1px solid var(--hbx-border);
+  font: 400 10.5px/1 var(--hbx-mono);
+  color: var(--hbx-faint);
+}
+
+/* ------------------------------------------- Anpassung an App-Shell-Seiten
+   Löten & Elektronik 101 haben eine eigene fixierte Sidebar + Topbar.
+   Beide rutschen um die Leistenhöhe nach unten.
+
+   Stapelreihenfolge: der Scrim gehört UNTER die Sidebar, sonst legt er sich
+   über die geöffnete Schublade und schluckt alle Taps. Die Suchpalette der
+   Seite liegt als Modal ganz oben.                                        */
+body.hbx-app #side {
+  top: var(--hbx-h);
+  z-index: 810;
+}
+body.hbx-app #topbar {
+  top: var(--hbx-h);
+}
+body.hbx-app #scrim {
+  z-index: 805;
+}
+body.hbx-app #pal {
+  z-index: 850;
+}
+
+/* Sprungziele nicht unter die Leiste rutschen lassen. */
+body.hbx-on:not(.hbx-app) [id] {
+  scroll-margin-top: calc(var(--hbx-h) + 14px);
+}
+body.hbx-app h2[id],
+body.hbx-app h3[id] {
+  scroll-margin-top: calc(var(--hbx-h) + 76px);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --hbx-h: 42px;
+  }
+  .hbx-bar {
+    padding: 0 8px;
+    gap: 0;
+  }
+  .hbx-home span:not(.m) {
+    display: none;
+  }
+  .hbx-crumb.hub .t {
+    display: none;
+  }
+  .hbx-crumb {
+    max-width: 30vw;
+    padding: 5px 6px;
+  }
+  .hbx-pick > button {
+    max-width: 46vw;
+  }
+  .hbx-act .lbl {
+    display: none;
+  }
+  .hbx-act .lbl-s {
+    display: inline;
+  }
+  .hbx-act .k {
+    display: none;
+  }
+  .hbx-menu {
+    left: auto;
+    right: 0;
+  }
+  .hbx-pal {
+    padding: 6vh 10px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hbx-foot a:hover {
+    transform: none;
+  }
+}

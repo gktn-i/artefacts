@@ -102,6 +102,9 @@ tr:hover td{background:#252525}
 .nozzle-cat-special .cb{background:#26215C;color:#CECBF6}
 }
 </style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
 </head>
 <body>
 <h1>3D-Druck Filament & D&uuml;sen Vergleich</h1>
@@ -145,13 +148,19 @@ tr:hover td{background:#252525}
 
 <script>
 // ==================== TAB SWITCHING ====================
+const TABKEYS=['filament','nozzle','infill'];
 function switchTab(t){
+if(TABKEYS.indexOf(t)<0)return;
 document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
 document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
 document.getElementById('tab-'+t).classList.add('active');
-const idx=t==='filament'?0:t==='nozzle'?1:2;
-document.querySelectorAll('.tab')[idx].classList.add('active');
+document.querySelectorAll('.tab')[TABKEYS.indexOf(t)].classList.add('active');
+if(decodeURIComponent(location.hash.slice(1))!==t)history.replaceState(null,'','#'+t);
 }
+/* Deep-Link aus dem Hub: #filament, #nozzle, #infill */
+window.addEventListener('hashchange',()=>switchTab(decodeURIComponent(location.hash.slice(1))));
+const fHash=decodeURIComponent(location.hash.slice(1));
+if(TABKEYS.indexOf(fHash)>=0)switchTab(fHash);
 
 // ==================== FILAMENT DATA ====================
 const F=[
