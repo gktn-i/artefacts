@@ -766,17 +766,38 @@ td:first-child{font-weight:500}
 <tr><td><b>Kupferlackdraht, lötbar</b> (UEW/Polyurethan)</td><td>hauchdünner Lack, praktisch keine Dicke</td><td><b>Kein Abisolieren:</b> Ende in einen Lotklecks bei 350–380 °C halten, der Lack verbrennt und der Draht verzinnt sich selbst</td><td><b>Die erste Wahl für Leiterbahn-Reparatur.</b> Liegt flach auf der Platine, darf über andere Bahnen laufen, verschwindet unter UV-Lack.</td></tr>
 <tr><td>Kupferlackdraht, <b>nicht</b> lötbar (Polyimid/ML)</td><td>zäher Hochtemperatur-Lack</td><td>Muss mechanisch abgekratzt oder chemisch entfernt werden</td><td>Für Reparaturen eher meiden. Erkennbar daran, dass er im Lot einfach nicht benetzt.</td></tr>
 <tr><td><b>Kynar / Wire-Wrap</b> (30 AWG, PVDF)</td><td>zäh, hitzefest, sehr dünnwandig</td><td>Abisolieren mit Spezialabisolierer oder vorsichtig mit der Klinge</td><td><b>Mod- und Bodge-Wire</b> über größere Strecken. Zieht sich beim Löten nicht zurück, ist farbig und dadurch nachvollziehbar.</td></tr>
-<tr><td><b>PTFE-Litze, versilbert</b> (Teflon)</td><td>PTFE, hält Lötkolbenhitze aus</td><td>Abisolieren, Litze verzinnen</td><td><b>Alles, was sich bewegt:</b> Kabel zu Displays, Akkus, Deckeln. Litze bricht nicht durch Biegewechsel, Massivdraht schon.</td></tr>
-<tr><td>PVC-Litze (Standard-Schaltdraht)</td><td>PVC — schmilzt bei Lötwärme zurück</td><td>Abisolieren, schnell arbeiten</td><td>Nur außerhalb der Hitzezone. Auf der Platine zieht sich die Isolierung zurück und legt blanken Draht frei.</td></tr>
-<tr><td><b>Blanker Kupferdraht</b></td><td>keine</td><td>Direkt löten</td><td>Nur <b>sehr kurze</b> Brücken zwischen benachbarten Pads, wo nichts gekreuzt wird. Sobald der Draht über eine andere Bahn läuft: Kurzschlussgefahr.</td></tr>
+<tr><td><b>Versilberte PTFE-Litze</b> (Teflon, „Silberdraht&#8220;, MIL-Spec M22759/11)</td><td>PTFE, dauerhaft bis <b>200 °C</b> — hält jede Lötkolbenhitze aus</td><td>Abisolieren, dann verzinnt sie sich fast von allein: die Silberschicht benetzt sofort</td><td><b>Die beste Allround-Litze auf der Platine</b> und alles, was sich bewegt: Kabel zu Displays, Akkus, Deckeln. Litze bricht nicht durch Biegewechsel, Massivdraht schon.</td></tr>
+<tr><td><b>Versilberter Kupferdraht, blank</b> (massiv, SPC)</td><td>keine</td><td>Direkt löten, benetzt sofort ohne Kratzen oder Schmirgeln</td><td>Kurze Brücken, Masseverbindungen, HF- und Freiluft-Aufbauten. Liegt jahrelang im Regal und ist trotzdem noch lötbar — blankes Kupfer nicht.</td></tr>
+<tr><td>Verzinnte Litze, PVC (Standard-Schaltdraht)</td><td>PVC — schmilzt bei Lötwärme zurück, ca. 80–105 °C</td><td>Abisolieren, schnell arbeiten</td><td>Nur außerhalb der Hitzezone. Auf der Platine zieht sich die Isolierung zurück und legt blanken Draht frei.</td></tr>
+<tr><td><b>Blanker Kupferdraht</b></td><td>keine</td><td>Direkt löten, oxidierte Oberfläche vorher blank machen</td><td>Nur <b>sehr kurze</b> Brücken zwischen benachbarten Pads, wo nichts gekreuzt wird. Sobald der Draht über eine andere Bahn läuft: Kurzschlussgefahr.</td></tr>
 </tbody>
 </table></div>
+
+<h4 style="font-size:13px;margin:.8rem 0 .3rem">Versilbert, verzinnt oder blank — was die Beschichtung bringt</h4>
+<p>„Silberhaltiges Kabel&#8220; heißt in der Praxis fast immer <b>versilberte Kupferlitze</b> (englisch <i>silver-plated copper</i>, kurz <b>SPC</b>): ein ganz normaler Kupferleiter mit einer hauchdünnen Silberschicht, meist unter PTFE-Isolierung. Der Kern ist Kupfer — es ist kein Silberdraht, auch wenn er im Handel oft so heißt. Nicht verwechseln mit <b>silberhaltigem Lot</b> (SAC305, SnAg): das ist die Legierung im Lötzinn und steht weiter oben im Abschnitt <b>Lötzinn (Lot)</b>.</p>
+<div class="grid">
+<div class="card"><div class="ct">① Lötbarkeit auf Jahre</div><div class="cd">Kupfer oxidiert und wird dann schlecht lötbar. <b>Silberoxid leitet weiter und lässt sich löten</b> — versilberte Litze benetzt auch nach langer Lagerung sofort, ohne Kratzen oder aggressives Flux. Das ist im Alltag der wichtigste Punkt.</div></div>
+<div class="card"><div class="ct">② Hitzefestigkeit</div><div class="cd">PTFE wird bei sehr hoher Temperatur verarbeitet und ist dauerhaft bis <b>200 °C</b> einsetzbar. Eine <b>Zinn</b>schicht kann da nicht mitgehen (Zinn schmilzt bei 232 °C) — verzinnte Leiter sind deshalb bei etwa <b>150 °C</b> am Ende. Wer PTFE will, bekommt automatisch versilbert oder vernickelt.</div></div>
+<div class="card"><div class="ct">③ Hochfrequenz</div><div class="cd">Bei hohen Frequenzen fließt der Strom nur in der äußersten Randschicht des Leiters (<b>Skin-Effekt</b>) — und Silber ist der beste elektrische Leiter überhaupt. Deshalb sind Koax-Innenleiter und HF-Litzen versilbert. <b>Bei Gleichstrom und NF bringt das nichts</b> — dort zählt nur der Querschnitt.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Beschichtung</th><th>Dauertemperatur</th><th>Löten</th><th>Typisch</th></tr></thead>
+<tbody>
+<tr><td><b>versilbert</b> (SPC)</td><td>bis 200 °C (mit PTFE)</td><td><span class="b b-ok">sehr gut</span> benetzt sofort</td><td>Reparatur- und Mod-Litze, HF, Luftfahrt, alles Hitzenahe</td></tr>
+<tr><td><b>verzinnt</b> (TPC)</td><td>bis ca. 150 °C</td><td><span class="b b-ok">gut</span></td><td>Standard-Schaltlitze, Steckerkonfektion — günstig und völlig ausreichend</td></tr>
+<tr><td>blank (Rein-Kupfer)</td><td>—</td><td><span class="b b-warn">nur frisch</span> oxidiert mit der Zeit</td><td>Wickelgut, sehr kurze Brücken, alles was sofort verarbeitet wird</td></tr>
+<tr><td>vernickelt</td><td>260 °C und mehr</td><td><span class="b b-warn">zäh</span> braucht aktiveres Flux</td><td>Ofen-, Heiz- und Thermofühlerleitungen — für die Werkbank ungeeignet</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Was man kaufen sollte:</b> Versilberte PTFE-Litze in <b>28–30 AWG</b> (0,25–0,32 mm) ist der Allrounder für Reparaturen auf der Platine: dünn genug für enge Stellen, hitzefest genug, dass die Isolierung beim Löten <b>nicht zurückschmilzt</b> — genau der Punkt, an dem PVC-Litze nervt. Für Akku- und Versorgungsleitungen dieselbe Sorte in 24–26 AWG. Preislich liegt sie deutlich über PVC-Litze, aber man braucht davon nur wenige Meter.</div>
+<div class="tip"><b>Beim Löten trotzdem zügig arbeiten.</b> Die Silberschicht ist nur wenige Mikrometer dick. Bleibt die Spitze zu lange dran, löst sie sich ins Lot auf und darunter kommt blankes Kupfer zum Vorschein — die Stelle oxidiert dann wie jeder andere Kupferdraht. Ein bis zwei Sekunden reichen ohnehin, weil die Litze so bereitwillig benetzt.</div>
+<div class="warn"><b>Rotpest (Red Plague):</b> Der eine Nachteil versilberter Kupferleiter. Wo die Silberschicht verletzt ist und Feuchtigkeit hinkommt, bildet sich zwischen Silber und Kupfer ein galvanisches Element — das Kupfer korrodiert zu rotbraunem Kupfer(I)-oxid, das unter der Isolierung entlangwandert. Erkennbar an <b>rot-braunen Flecken</b> auf der sonst silbrigen Litze. Der Leiter wird hochohmig und mechanisch spröde. In Luft- und Raumfahrt ein bekanntes Thema (die NASA hat dafür einen eigenen Kontrollplan). Fürs Hobby heißt das schlicht: fleckige oder angerissene Litze nicht verbauen, Schnittenden nicht dauerfeucht liegen lassen und Reste trocken lagern.</div>
 
 <h4 style="font-size:13px;margin:.8rem 0 .3rem">Die Entscheidung in fünf Regeln</h4>
 <ol>
 <li><b>Wie viel Strom fließt?</b> Das legt den Durchmesser fest — Tabelle oben, und im Zweifel eine Stufe dicker.</li>
 <li><b>Kreuzt der Draht etwas?</b> Ja → isoliert, immer. Nein und kürzer als ein paar Millimeter → blank ist erlaubt.</li>
-<li><b>Bewegt sich das Ende?</b> Ja → <b>Litze</b> (PTFE). Massivdraht bricht an der Lötstelle durch Biegewechsel — die häufigste Ursache für „die Reparatur hat drei Wochen gehalten".</li>
+<li><b>Bewegt sich das Ende?</b> Ja → <b>Litze</b>, am besten versilbert mit PTFE. Massivdraht bricht an der Lötstelle durch Biegewechsel — die häufigste Ursache für „die Reparatur hat drei Wochen gehalten".</li>
 <li><b>Wie fein ist die Stelle?</b> Unter dem Mikroskop an BGA- oder 0201-Pads: 0,05–0,1 mm Lackdraht. Alles Gröbere reißt beim Löten das Pad ab.</li>
 <li><b>Muss es jemand nachvollziehen können?</b> Dann farbiger Kynar-Draht statt unsichtbarem Lackdraht — auch für dich selbst in einem Jahr.</li>
 </ol>
