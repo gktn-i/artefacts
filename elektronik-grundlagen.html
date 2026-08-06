@@ -335,6 +335,19 @@ td:first-child{font-weight:500}
   font-size:13.5px;line-height:1.6;color:var(--accent-ink)}
 .kurz::before{content:"💡";flex:0 0 auto;font-size:15px;line-height:1.35}
 .kurz b{font-weight:700}
+
+/* Sidebar: Gliederungsebene sichtbar machen */
+#sideNav .ssec a.lv3{padding-left:19px}
+#sideNav .ssec a.lv4{padding-left:31px;font-size:11.5px;color:var(--faint)}
+#sideNav .ssec a.lv4:hover,#sideNav .ssec a.lv4.on{color:var(--accent-ink)}
+/* Suchtreffer: Antwortspalte als zweite Zeile */
+.pr .pw{display:block}
+.pr .px{opacity:.85}
+.pr .px mark{font-weight:700}
+.pr-x{display:block;padding:9px 11px;margin:.25rem;border-radius:7px;font-size:13px;
+  font-weight:600;text-decoration:none;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid var(--accent-border)}
+.pr-x:hover{filter:brightness(.97)}
 </style>
 <link rel="stylesheet" href="assets/chrome.css">
 <script defer src="assets/registry.js"></script>
@@ -1420,7 +1433,9 @@ td:first-child{font-weight:500}
 <tr><td>Logik-Rail 5 V / 3,3 V / 1,8 V</td><td>Diode</td><td>0,3–0,6 V</td><td>0,000–0,010 V</td><td>Der Standardtest auf Rail-Kurzschluss</td></tr>
 <tr><td>Core- / GPU- / SoC-Rail (&lt; 1,2 V)</td><td>Diode</td><td>0,05–0,30 V</td><td>0,000–0,005 V</td><td>Von Haus aus niedrig, weil viele Kondensatoren und Halbleiter parallel hängen — <b>nicht</b> mit einem Kurzschluss verwechseln</td></tr>
 <tr><td>Eingangs- / Akkurail</td><td>Diode</td><td>0,3–0,7 V</td><td>0,000 V</td><td>0,000 V heißt hier fast immer: Verpolschutz, Eingangs-FET oder ein MLCC ist durch</td></tr>
-<tr><td>beliebige Rail</td><td>Ω</td><td>einige Ω bis kΩ</td><td>&lt; 1–2 Ω</td><td>Gröber als der Diodenmodus, aber gut für den schnellen Ja/Nein-Blick</td></tr>
+<tr><td>Logik-Rail 5 V / 3,3 V, im Ω-Modus</td><td>Ω</td><td>~100 Ω bis mehrere kΩ</td><td>unter ~5 Ω</td><td>Die Schwelle hängt von der Rail ab — ausführliche Tabelle und die Milliohm-Methode zum Einkreisen im Tab <a href="#messgeraet">Multimeter</a></td></tr>
+<tr><td>Core-Rail 0,9–1,2 V, im Ω-Modus</td><td>Ω</td><td>oft nur 1–20 Ω</td><td>unter ~0,5 Ω</td><td>Viele Stützkondensatoren und geringer Innenwiderstand — niedrige Ω-Werte sind hier normal</td></tr>
+<tr><td>Motor- / Endstufen-Rail 12–48 V, im Ω-Modus</td><td>Ω</td><td>einige zehn Ω bis kΩ</td><td>unter ~2 Ω</td><td>Es gibt keine feste Grenze: 0,0 Ω in beide Richtungen ist immer ein Kurzschluss, alles dazwischen entscheidet der Vergleich</td></tr>
 <tr><td>beliebige Rail, im Betrieb</td><td>V⎓</td><td>Nennwert ±5 %</td><td>fehlt · zu niedrig · schwankt</td><td>Erst messen, wenn stromlos nichts Auffälliges gefunden wurde</td></tr>
 </tbody>
 </table></div>
@@ -1441,7 +1456,7 @@ td:first-child{font-weight:500}
 <p class="note">Faustregel für die Reihenfolge innerhalb eines Schritts: erst stromlos im Diodenmodus gegen Masse (findet Kurzschlüsse gefahrlos), dann erst Spannung anlegen und im Betrieb messen.</p>
 
 <h2>Kurzschluss auf einer Rail eingrenzen</h2>
-<p>Wenn Schritt 1 oder 3 eine Rail bei 0,000 V zeigt, steht fest <i>dass</i> etwas kurzschließt — nicht <i>was</i>. Drei Verfahren, um das Bauteil zu finden, ohne die halbe Platine auszulöten:</p>
+<p>Wenn Schritt 1 oder 3 eine Rail bei 0,000 V zeigt, steht fest <i>dass</i> etwas kurzschließt — nicht <i>was</i>. Drei Verfahren, um das Bauteil zu finden, ohne die halbe Platine auszulöten. Die vierte, die <b>Milliohm-Methode</b> mit dem Tischmultimeter, steht ausführlich im Tab <a href="#messgeraet">Multimeter</a> und ist die genaueste, wenn du ein Tischgerät hast:</p>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Methode</th><th>Vorgehen</th><th>Was sie zeigt</th></tr></thead>
 <tbody>
@@ -2942,9 +2957,12 @@ const side = document.getElementById("side"), scrim = document.getElementById("s
 
 /* ---- Sidebar aufbauen ---- */
 function slug(s){return s.toLowerCase().replace(/[^a-z0-9äöüß]+/g,"-").replace(/^-|-$/g,"").slice(0,40);}
+/* Nicht jede Überschrift gliedert: h3/h4 in Karten und Vergleichsspalten sind
+   Bauteil-Beschriftungen. Die bleiben aus Navigation und Index draußen. */
+const HDECO = ".card, .gb-col, .sym, .grid2 > div, .rule, .calc, .acc";
 function headings(k){
   const sec = SECOF(k); if(!sec) return [];
-  let hs = [...sec.querySelectorAll("h2")];
+  let hs = [...sec.querySelectorAll("h2,h3,h4")].filter(h=>!h.closest(HDECO));
   if(hs.length < 2) hs = [...sec.querySelectorAll("h2,h3")];
   hs.forEach((h,i)=>{ if(!h.id) h.id = k+"--"+(slug(h.textContent)||("h"+i)); });
   return hs;
@@ -2965,6 +2983,7 @@ function buildSide(active){
         headings(tk).forEach(h=>{
           const a = document.createElement("a");
           a.href = "#"+tk; a.textContent = h.textContent.trim(); a.dataset.h = h.id;
+          a.className = "lv"+h.tagName.charAt(1);
           a.onclick = e=>{ e.preventDefault(); jump(tk,h.id); closeSide(); };
           box.appendChild(a);
         });
@@ -3022,7 +3041,7 @@ function nearestId(el, tab){
   let n = el;
   while(n && n !== document.body){
     let p = n.previousElementSibling;
-    while(p){ if(/^H[23]$/.test(p.tagName) && p.id) return p.id; p = p.previousElementSibling; }
+    while(p){ if(/^H[234]$/.test(p.tagName) && p.id) return p.id; p = p.previousElementSibling; }
     n = n.parentElement;
   }
   return tab;
@@ -3032,15 +3051,31 @@ function buildIndex(){
   TABS.forEach(t=>{
     const k = t[KEY], sec = SECOF(k); if(!sec) return;
     headings(k).forEach(h=>out.push({t:k,tl:t.l,id:h.id,x:h.textContent.trim(),w:h.tagName==="H2"?0:1}));
+    /* Tabellenkopf: damit man die Tabelle über ihre Spaltennamen findet */
+    sec.querySelectorAll("table").forEach(tb=>{
+      const th = [...tb.querySelectorAll("thead th")].map(x=>x.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
+      if(th.length < 2) return;
+      out.push({t:k,tl:t.l,id:nearestId(tb,k),x:"Tabelle: "+th.join(" · "),w:2});
+    });
     sec.querySelectorAll("table tbody tr").forEach(tr=>{
       const c = [...tr.children].map(td=>td.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
       if(!c.length) return;
-      out.push({t:k,tl:t.l,id:nearestId(tr,k),x:c.slice(0,2).join(" — "),w:3});
+      /* Spalte 3+ ist die eigentliche Antwort — mitindizieren statt wegwerfen */
+      out.push({t:k,tl:t.l,id:nearestId(tr,k),x:c.slice(0,2).join(" — "),xtra:c.slice(2).join(" · "),w:3});
     });
     sec.querySelectorAll(".card > h3, .card .ct, .sym .sn, .rule b:first-child").forEach(el=>{
       const x = el.textContent.replace(/\s+/g," ").trim();
       if(x.length < 2) return;
       out.push({t:k,tl:t.l,id:nearestId(el,k),x:x,w:2});
+    });
+    /* Hinweiskaesten und Kartentexte: Fliesstext, der bisher unauffindbar war.
+       Hohes Gewicht, damit Ueberschriften und Tabellen davor bleiben. */
+    sec.querySelectorAll(".tip, .warn, .note, .kurz, .card .cd, .step, .gb-col li").forEach(el=>{
+      const full = el.textContent.replace(/\s+/g," ").trim();
+      if(full.length < 12) return;
+      const cut = full.indexOf(":");
+      const head = (cut > 3 && cut < 70) ? full.slice(0, cut) : full.slice(0, 60);
+      out.push({t:k,tl:t.l,id:nearestId(el,k),x:head,xtra:full,w:5});
     });
   });
   return out;
@@ -3051,30 +3086,54 @@ function hi(s,q){
   if(i < 0) return esc(s);
   return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+q.length))+"</mark>"+esc(s.slice(i+q.length));
 }
+/* Ausschnitt der Antwortspalte, bei Bedarf um die Fundstelle herum */
+function snip(s,q){
+  const MAX = 120;
+  if(!s) return "";
+  if(s.length <= MAX) return s;
+  if(!q) return s.slice(0,MAX)+"…";
+  const i = s.toLowerCase().indexOf(q);
+  if(i < 0) return s.slice(0,MAX)+"…";
+  const a = Math.max(0, i-45);
+  return (a>0?"…":"") + s.slice(a, a+MAX) + (a+MAX < s.length ? "…" : "");
+}
 let sel = 0, hits = [];
 function search(q){
   q = q.trim().toLowerCase();
   palOut.innerHTML = ""; hits = []; sel = 0;
   if(q.length < 2){
-    palOut.innerHTML = '<div class="pal-empty">Mindestens 2 Zeichen — sucht durch Überschriften, Tabellen und Karten beider Seiten.</div>';
+    palOut.innerHTML = '<div class="pal-empty">Mindestens 2 Zeichen — sucht durch Überschriften, Tabellen und Karten dieser Seite.</div>';
     return;
   }
   if(!IDX) IDX = buildIndex();
   const seen = new Set();
   IDX.forEach(e=>{
-    const l = e.x.toLowerCase(), i = l.indexOf(q);
+    let i = e.x.toLowerCase().indexOf(q), inX = false;
+    if(i < 0 && e.xtra){
+      const j = e.xtra.toLowerCase().indexOf(q);
+      if(j >= 0){ i = j; inX = true; }        /* Treffer nur in der Antwortspalte */
+    }
     if(i < 0) return;
     const key = e.t+"|"+e.x;
     if(seen.has(key)) return; seen.add(key);
-    hits.push({...e, s: (i===0?0:1) + e.w*2});
+    hits.push({...e, inX, s: (i===0?0:1) + e.w*2 + (inX?4:0)});
   });
   hits.sort((a,b)=>a.s-b.s || a.x.length-b.x.length);
   hits = hits.slice(0,40);
-  if(!hits.length){ palOut.innerHTML = '<div class="pal-empty">Nichts gefunden für „'+esc(q)+'".</div>'; return; }
+  if(!hits.length){
+    palOut.innerHTML = '<div class="pal-empty">Nichts auf dieser Seite für „'+esc(q)+'".</div>';
+    const x = document.createElement("a");        /* bewusst kein .pr — Enter soll nicht wegspringen */
+    x.className = "pr-x"; x.href = OTHER.file+"?q="+encodeURIComponent(q);
+    x.innerHTML = "In "+esc(OTHER.name)+" weitersuchen →";
+    palOut.appendChild(x);
+    return;
+  }
   hits.forEach((h,i)=>{
     const b = document.createElement("button");
     b.className = "pr" + (i===0?" sel":"");
-    b.innerHTML = hi(h.x,q) + '<span class="pw">'+esc(h.tl)+"</span>";
+    let sub = esc(h.tl);
+    if(h.xtra) sub += ' <span class="px">'+ (h.inX ? hi(snip(h.xtra,q),q) : esc(snip(h.xtra))) +'</span>';
+    b.innerHTML = hi(h.x,q) + '<span class="pw">'+sub+"</span>";
     b.onclick = ()=>{ closePal(); jump(h.t,h.id); };
     palOut.appendChild(b);
   });
@@ -3090,6 +3149,12 @@ function move(d){
 function openPal(){ pal.classList.add("open"); palIn.value=""; search(""); palIn.focus(); }
 function closePal(){ pal.classList.remove("open"); }
 document.getElementById("openSearch").onclick = openPal;
+/* von der Partnerseite herübergereichter Suchbegriff */
+(function(){
+  const q = new URLSearchParams(location.search).get("q");
+  if(!q) return;
+  openPal(); palIn.value = q; search(q.toLowerCase());
+})();
 const ts = document.querySelector("#topbar .ts"); if(ts) ts.onclick = openPal;
 palIn.addEventListener("input", ()=>search(palIn.value));
 palIn.addEventListener("keydown", e=>{
