@@ -348,6 +348,39 @@ td:first-child{font-weight:500}
   font-weight:600;text-decoration:none;color:var(--accent-ink);background:var(--accent-soft);
   border:1px solid var(--accent-border)}
 .pr-x:hover{filter:brightness(.97)}
+
+/* ============================================================
+   TABELLEN AUF SCHMALEN DISPLAYS
+   Statt horizontal zu scrollen (bisher lagen 48-55 % der Breite
+   ausserhalb) wird jede Zeile zu einer Karte. Die Spaltennamen
+   kommen aus dem <thead> und haengen per data-l an jeder Zelle.
+   ============================================================ */
+td.numcell{font-family:var(--mono);font-size:12.5px;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+th,td{font-variant-numeric:tabular-nums}
+h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink)}
+
+@media(max-width:620px){
+  .tbl-wrap{overflow-x:visible;border:none;background:transparent;box-shadow:none;margin:.6rem 0}
+  .tbl-wrap table{min-width:0!important;width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+  .tbl-wrap thead{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .tbl-wrap tbody tr{display:block;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:9px;padding:3px 0 5px}
+  .tbl-wrap tbody tr:hover td{background:transparent}
+  .tbl-wrap tbody td{display:block;width:auto;border:none;border-top:none!important;
+    padding:5px 14px;line-height:1.5;text-align:left}
+  .tbl-wrap tbody td:empty{display:none}
+  .tbl-wrap tbody td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);
+    font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--faint);margin-bottom:1px}
+  .tbl-wrap tbody td:first-child{font-weight:600;font-size:14px;padding-top:9px;padding-bottom:8px;
+    border-bottom:1px solid var(--border)!important;margin-bottom:3px}
+  .tbl-wrap tbody td:first-child::before{display:none}
+  .tbl-wrap tbody td[colspan]{background:var(--surface-2);font-weight:600;border-bottom:none!important;
+    margin:0;border-radius:var(--radius) var(--radius) 0 0}
+  .tbl-wrap tbody td.numcell{white-space:normal}
+}
 </style>
 <link rel="stylesheet" href="assets/chrome.css">
 <script defer src="assets/registry.js"></script>
@@ -3180,6 +3213,26 @@ if(window.showTab){ const o = window.showTab; window.showTab = function(k){ o(k)
 if(window.activate){ const o = window.activate; window.activate = function(p,u){ o(p,u); buildSide(activeTab()); }; }
 buildSide(activeTab());
 })();
+
+/* ---------- Tabellen fuer schmale Displays vorbereiten ----------
+   Spaltennamen aus dem <thead> an jede Zelle haengen (data-l) und
+   ueberwiegend numerische Zellen markieren, damit Messwerte beim
+   Ueberfliegen aus der Prosa herausstechen. */
+window.__prepTables = function(root){
+  (root||document).querySelectorAll("table").forEach(tb=>{
+    const th = [...tb.querySelectorAll("thead th")].map(x=>x.textContent.replace(/\s+/g," ").trim());
+    tb.querySelectorAll("tbody tr").forEach(tr=>{
+      [...tr.children].forEach((td,i)=>{
+        if(!td.hasAttribute("colspan") && th[i]) td.setAttribute("data-l", th[i]);
+        const t = td.textContent.trim();
+        /* kurz, enthaelt eine Ziffer, ist kein Fliesstext */
+        if(i>0 && t.length<=26 && /\d/.test(t) && t.split(" ").length<=5) td.classList.add("numcell");
+        else td.classList.remove("numcell");
+      });
+    });
+  });
+};
+window.__prepTables();
 </script>
 </body>
 </html>
