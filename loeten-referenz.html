@@ -364,7 +364,8 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 
 
 <!-- ============ METHODEN ============ -->
-<div class="panel active" data-p="methoden">
+<div class="panel active" data-p="start">
+
 <h2>Die drei Methoden im Überblick</h2>
 <p>Welches Werkzeug du nimmst, hängt vor allem vom Bauteil ab. Faustregel: Lötkolben für alles mit zugänglichen Pins, Heißluft für Bauteile mit Pads unter dem Gehäuse oder zum Entlöten, Heizplatte, wenn viele SMD-Teile auf einmal auf eine Platine sollen.</p>
 
@@ -399,10 +400,6 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 </div>
 
 <div class="note"><b>Realistisches Einsteiger-Setup:</b> Eine gute Lötstation deckt 90 Prozent ab. Heißluft kommt dazu, sobald du QFN oder feine ICs verbaust. Eine Heizplatte lohnt erst, wenn du eigene SMD-Platinen in kleinen Stückzahlen bestückst.</div>
-</div>
-
-<!-- ============ WORKFLOW ============ -->
-<div class="panel" data-p="workflow">
 <h2>Workflow am Lötkolben</h2>
 <p>Der Ablauf einer Session in Kurzform, plus Spickzettel für die häufigsten Aufgaben. Die ausführlichen Anleitungen stehen in den Tabs <a class="goto" href="#tht">THT löten</a>, <a class="goto" href="#smd">SMD löten</a> und <a class="goto" href="#fehler">Fehler</a>.</p>
 
@@ -457,8 +454,10 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 </div>
 </div>
 
-<div class="tip"><b>Schnellhilfe:</b> Lot fließt nicht? Spitze säubern und frisch verzinnen, Flussmittel dazu, notfalls 10–20 °C höher. Brücke? Flussmittel drauf, Überschuss mit Entlötlitze abziehen. Kugelig und schlecht benetzt? Kalte Stelle — frisches Flussmittel dazu und neu aufschmelzen.</div>
-</div>
+<div class="tip"><b>Schnellhilfe:</b> Lot fließt nicht? Spitze säubern und frisch verzinnen, Flussmittel dazu, notfalls 10–20 °C höher. Brücke? Flussmittel drauf, Überschuss mit Entlötlitze abziehen. Kugelig und schlecht benetzt? Kalte Stelle — frisches Flussmittel dazu und neu aufschmelzen.</div></div>
+
+<!-- ============ WORKFLOW ============ -->
+
 
 <!-- ============ EQUIPMENT ============ -->
 <div class="panel" data-p="equipment">
@@ -594,7 +593,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 </div>
 <h3>Entlöten</h3>
 <div class="grid">
-<div class="card"><div class="ct">Entlötlitze (Wick)</div><div class="cd">Kupfergeflecht saugt flüssiges Lot auf. Top für Pads und Brücken. Breiten, Technik und Tricks: <a class="goto" href="#material">Material → Entlötlitze</a>.</div></div>
+<div class="card"><div class="ct">Entlötlitze (Wick)</div><div class="cd">Kupfergeflecht saugt flüssiges Lot auf. Top für Pads und Brücken. Breiten, Technik und Tricks: <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a>.</div></div>
 <div class="card"><div class="ct">Entlötpumpe</div><div class="cd">Saugt geschmolzenes Lot weg. Gut für THT-Durchkontaktierungen.</div></div>
 <div class="card"><div class="ct">Heißluft</div><div class="cd">Beste Methode, um ganze SMD-Bauteile schadenfrei abzuheben.</div></div>
 <div class="card"><div class="ct">Low-Melt-Legierung (ChipQuik SMD1)</div><div class="cd">Schmilzt bei ~58 °C und hält alle Pins gleichzeitig flüssig. Ideal, um Multipin-ICs ohne Heißluft abzuheben.</div></div>
@@ -678,6 +677,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 
 <!-- ============ MATERIAL ============ -->
 <div class="panel" data-p="material">
+
 <h2>Verbrauchsmaterial</h2>
 <p>Zur schnellen Orientierung — was du für welche Methode brauchst. Details zu jedem Punkt stehen darunter.</p>
 <div class="tbl-wrap"><table style="min-width:640px">
@@ -692,7 +692,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 </tbody>
 </table></div>
 
-<h3>Lötzinn (Lot)</h3>
+<h2>Lötzinn (Lot)</h2>
 <p>Zwei Welten: Bleihaltig lötet sich leichter und bei niedrigerer Temperatur, bleifrei ist RoHS-konform und Pflicht für alles, das in den Verkauf geht. Die gängigen Draht-Legierungen:</p>
 <div class="tbl-wrap"><table style="min-width:720px">
 <thead><tr><th>Legierung</th><th>Blei?</th><th>Schmelzpunkt</th><th>Eigenschaften &amp; wofür</th></tr></thead>
@@ -720,7 +720,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 </table></div>
 <div class="tip"><b>Einsteiger:</b> Eine Rolle <b>0,7 oder 0,8 mm</b> reicht für den Anfang. Eine zweite dünne Rolle (<b>0,3–0,4 mm</b>) lohnt sich, sobald du feines SMD lötest.</div>
 
-<h3>Flussmittel (Flux)</h3>
+<h2>Flussmittel (Flux)</h2>
 <p>Entfernt die Oxidschicht auf den Metallflächen und lässt das Lot fließen und benetzen. Die Flussmittelseele im Lotdraht reicht für einfaches THT — extra Flux ist der entscheidende Helfer bei SMD, Rework und beim Entlöten.</p>
 
 <h4>Die vier Typen</h4>
@@ -756,7 +756,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <div class="tip"><b>Einsteiger-Set:</b> Ein <b>flüssiges No-Clean-Flux</b> (Pen/Flasche, z. B. Kester 951 oder ChipQuik NC191) für THT, Kabel und Drag plus eine <b>No-Clean-Tacky-Flux-Spritze</b> (z. B. ChipQuik SMD291) fürs Platzieren und Rework von SMD deckt rund 95 % aller Arbeiten ab.</div>
 <div class="warn"><b>Vorsicht Fälschungen:</b> AMTECH NC-559 und RMA-223 werden auf Online-Marktplätzen massenhaft gefälscht — nachgemachte Spritzen wirken oft schlechter oder hinterlassen korrosive Rückstände. Für verlässliche Qualität ChipQuik oder MG Chemicals beim seriösen Händler kaufen. Und: <b>niemals Klempner-Lötwasser oder Lötfett</b> (säurehaltig) auf Elektronik.</div>
 
-<h3>Lötpaste (Solder Paste)</h3>
+<h2>Lötpaste (Solder Paste)</h2>
 <p>Gemisch aus winzigen Lotkügelchen und Flussmittel. Nur für Reflow per Heizplatte, Heißluft oder Ofen.</p>
 <ul>
 <li><b>Korngröße:</b> T3 oder T4 fürs Hobby, T4/T5 für sehr feinen Pitch.</li>
@@ -776,7 +776,14 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <div class="tip"><b>Einsteiger-Tipp:</b> <b>Sn63Pb37</b> ist zum Üben am gutmütigsten. Wer bleifrei will oder empfindliche Teile schont, nimmt die <b>Low-Temp-Paste (Sn42Bi57Ag1, ~138 °C)</b> — deutlich niedrigere Reflow-Temperatur. Korngröße <b>T4</b> deckt fast alles ab. Seriöse Marken: Chip Quik, Kester, MG Chemicals; günstige China-Pasten (Mechanic, Relife) gehen, schwanken aber in Qualität.</div>
 <div class="warn"><b>Low-Temp-Paste (SnBi) beachten:</b> Bismut-Lot ist <b>spröder</b> — nicht für mechanisch belastete Stellen (Steckverbinder, Kabel). Und <b>nie mit bleihaltigem Lot mischen</b>: Sn-Pb-Bi bildet eine sehr niedrig schmelzende, spröde Phase, die Lötstellen unzuverlässig macht.</div>
 
-<h3>Reparaturdraht &amp; Jumper Wire</h3>
+<div class="note">Draht, Entlötlitze und die Nacharbeit stehen in den Tabs <a class="goto" href="#draht">Draht &amp; Litze</a> und <a class="goto" href="#finish">Reinigen &amp; Schützen</a>.</div>
+</div>
+
+<!-- ============ DRAHT & LITZE ============ -->
+<div class="panel" data-p="draht">
+<h2>Draht und Entlötlitze</h2>
+<p>Womit man Verbindungen wiederherstellt und womit man Lot wieder wegbekommt. Lot, Flussmittel und Paste stehen im Tab <a class="goto" href="#material">Lot &amp; Flussmittel</a>.</p>
+<h2>Reparaturdraht &amp; Jumper Wire</h2>
 <p>Wenn eine Leiterbahn gerissen ist, ein Pad fehlt oder eine Verbindung nachträglich gelegt werden muss, brauchst du Draht — und zwar den <b>richtigen</b>. Zu dünn heißt Spannungsabfall und abgerissene Brücke, zu dick heißt, er hebt beim ersten Anstoßen das Pad mit ab.</p>
 
 <h4>Durchmesser, AWG und was durchpasst</h4>
@@ -844,7 +851,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <div class="tip"><b>Saubere Fädeldraht-Reparatur, Schritt für Schritt:</b> ① Bruchstelle beidseitig freilegen (Lötstopplack vorsichtig abkratzen), blankes Kupfer verzinnen. ② Draht auf Länge plus ~20 % schneiden, beide Enden im Lotklecks verzinnen (Lack brennt ab). ③ Ein Ende antacken, Draht flach anlegen, zweites Ende antacken. ④ <b>Durchgang messen</b> — und gegen die Nachbarbahnen prüfen, dass nichts piept. ⑤ Fixieren: ein Tropfen <b>UV-Lötstopplack</b> (grünes Öl) drüber und aushärten, oder Kapton-Tape. Ohne Fixierung wirkt jede Bewegung direkt auf die Lötstelle.</div>
 <div class="warn"><b>Der häufigste Fehler:</b> zu straff gespannt. Der Draht braucht eine minimale Schlaufe, sonst zieht jede Temperaturdehnung und jeder Stoß direkt am Pad — und das Pad ist immer schwächer als der Draht.</div>
 
-<h3>Entlötlitze (Wick)</h3>
+<h2>Entlötlitze (Wick)</h2>
 <p>Feines, mit Flussmittel getränktes Kupfergeflecht. Flüssiges Lot wird durch <b>Kapillarwirkung</b> hineingesaugt — dieselbe Kraft, die Wasser in einem Schwamm hochzieht. Die Litze ist das Werkzeug für Lötbrücken, für das Leerräumen von THT-Löchern und für alles, was mit BGA-Pads zu tun hat.</p>
 
 <h4>Breite wählen</h4>
@@ -915,7 +922,13 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 </ul>
 <div class="warn"><b>Litze braucht mehr Temperatur als eine normale Lötstelle</b> — das Geflecht schluckt Wärme. Statt die Station hochzudrehen: kurzes Stück nehmen, breitere Spitze aufstecken und Flussmittel nachlegen. Erst wenn das alles nicht reicht, 10–20 °C mehr geben.</div>
 
-<h3>Reinigen: Flussmittelreste entfernen</h3>
+</div>
+
+<!-- ============ REINIGEN & SCHUETZEN ============ -->
+<div class="panel" data-p="finish">
+<h2>Nach dem Löten</h2>
+<p>Was übrig bleibt: Flussmittelreste runter, blanke Stellen wieder abdecken.</p>
+<h2>Reinigen: Flussmittelreste entfernen</h2>
 <p>No-Clean-Rückstand darf normalerweise drauf bleiben. Sobald du aber viel Flux verbraucht hast (Rework, BGA, Drag-Soldering), wird die Stelle klebrig, zieht Staub an und verdeckt bei der Sichtkontrolle genau das, was du beurteilen willst. Und: nicht jeder Rückstand ist wirklich harmlos — bei Billig-Flux unbekannter Herkunft ist Reinigen Pflicht.</p>
 <div class="steps">
 <div class="step"><b>Grob mit IPA und Pinsel.</b> Isopropanol <b>99 %</b> (nicht 70 % — das restliche Wasser bleibt zurück), ESD-sicherer Pinsel, in eine Richtung arbeiten.</div>
@@ -927,7 +940,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <div class="warn"><b>Grenzen des Tricks:</b> Nur auf trockener Platine, nie mit Akku dran. Nicht auf Kunststoffteile, Displaystecker oder Klebefolien halten — die vertragen 160 °C schlechter als das Board. Und: 150–160 °C sind gemessen an der <b>Düse</b>; bei kleinem Abstand kommt mehr an, als die Anzeige sagt. Lieber niedrig anfangen.</div>
 <div class="tip"><b>Ultraschallbad?</b> Reinigt gründlich, ist aber nichts für Boards mit Mikrofonen, Lautsprechern, offenen Steckern oder Schirmblechen mit Flüssigkeitsindikator. Für die Hobby-Werkstatt sind IPA, Pinsel, fusselfreie Tücher und der Hot-Air-Trick der bessere Weg.</div>
 
-<h3>Lötstopplack (Solder Mask / „grünes Öl&#8220;)</h3>
+<h2>Lötstopplack (Solder Mask / „grünes Öl&#8220;)</h2>
 <p>Die grüne (oder blaue, schwarze, rote) Schicht auf jeder Platine ist der <b>Lötstopplack</b>. Er hat drei Aufgaben: Er isoliert die Leiterbahnen, er schützt das Kupfer vor Korrosion, und er begrenzt beim Löten das flüssige Lot auf die freien Pads — deshalb der Name. Ohne ihn würde Lot einfach über die Bahnen laufen.</p>
 
 <h4>Was du in der Werkstatt brauchst</h4>
@@ -959,8 +972,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <div class="card"><div class="ct">Tip Tinner</div><div class="cd">Aktivator-Paste, rettet oxidierte, nicht mehr benetzende Spitzen.</div></div>
 <div class="card"><div class="ct">Isopropanol (IPA)</div><div class="cd">Reinigt Flussmittelrückstände. Brennbar, gut lüften.</div></div>
 <div class="card"><div class="ct">Kapton-Tape</div><div class="cd">Hitzefestes Klebeband. Fixiert Bauteile, schützt Nachbarn bei Heißluft.</div></div>
-</div>
-</div>
+</div></div>
 
 <!-- ============ TEMPERATUREN ============ -->
 <div class="panel" data-p="temp">
@@ -1273,7 +1285,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <div class="step"><b>Abheben.</b> Mit der Pinzette sanft anheben, sobald alle Pins flüssig sind — nicht hebeln, sonst reißen Pads ab.</div>
 <div class="step"><b>Pads aufbereiten.</b> Alte Legierung und Lot mit Entlötlitze + Flussmittel entfernen, mit IPA reinigen, dann neu verzinnen.</div>
 </div>
-<div class="note"><b>Für QFN, BGA und thermisch kräftige Bauteile</b> (große Masseflächen) ist Heißluft die schonendere Methode — siehe Tab <a class="goto" href="#heissluft">Heißluft</a>. BGA-Chips, die wieder eingebaut werden sollen, brauchen danach neue Lotkugeln: Tab <a class="goto" href="#reballing">Reballing</a>. Litzen-Technik im Detail (Breite, Länge, Winkel): <a class="goto" href="#material">Material → Entlötlitze</a>.</div>
+<div class="note"><b>Für QFN, BGA und thermisch kräftige Bauteile</b> (große Masseflächen) ist Heißluft die schonendere Methode — siehe Tab <a class="goto" href="#heissluft">Heißluft</a>. BGA-Chips, die wieder eingebaut werden sollen, brauchen danach neue Lotkugeln: Tab <a class="goto" href="#reballing">Reballing</a>. Litzen-Technik im Detail (Breite, Länge, Winkel): <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a>.</div>
 
 <h3>SMD-Troubleshooting: was tun, wenn …</h3>
 <p class="note">Die häufigsten SMD-Pannen direkt am Kolben. Vollständige Fehlerbilder-Tabelle: Tab <a class="goto" href="#fehler">Fehler &amp; Regeln</a>.</p>
@@ -1370,7 +1382,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <tr><td><b>Stencils</b> (Schablonen)</td><td><span class="b b-warn">Pflicht</span></td><td>Universal-Set und/oder chipspezifisch — Details unten</td></tr>
 <tr><td><b>Lotkugeln</b></td><td>Pflicht (oder Paste)</td><td>Sortiment 0,25–0,6 mm, bleihaltig Sn63Pb37 für Reparaturen</td></tr>
 <tr><td><b>Tacky-Flux</b> + <b>dünnes Flux</b></td><td><span class="b b-warn">Pflicht</span></td><td>Tacky zum Halten, dünnflüssig zum Kriechen unter den Chip. Tab <a class="goto" href="#material">Material</a></td></tr>
-<tr><td><b>Entlötlitze</b> 1,5–2,0 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Zum Abziehen der alten Kugeln. Technik: <a class="goto" href="#material">Material → Entlötlitze</a></td></tr>
+<tr><td><b>Entlötlitze</b> 1,5–2,0 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Zum Abziehen der alten Kugeln. Technik: <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a></td></tr>
 <tr><td><b>Bleihaltiges Lot</b> Sn63Pb37, 0,5–0,8 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Auch wenn das Board bleifrei ist — zum Aufmischen der alten Kugeln (siehe Schritt 2)</td></tr>
 <tr><td><b>Mini-Spachtel</b> / Rakel</td><td>Pflicht</td><td>Metall- oder Kunststoffklinge, gerade Kante ohne Scharten</td></tr>
 <tr><td><b>Kapton-Tape</b>, Alufolie</td><td>empfohlen</td><td>Nachbarn und Kunststoffteile abdecken</td></tr>
@@ -1407,7 +1419,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 
 <h3>Kugeln abziehen mit der Entlötlitze</h3>
 <div class="steps">
-<div class="step"><b>Litze kurz abschneiden.</b> Nur so viel, wie du brauchst — 1–2 cm. Warum, steht ausführlich unter <a class="goto" href="#material">Material → Entlötlitze</a>: Ein langer Litzenschwanz zieht Wärme aus der Arbeitsstelle weg, dein Kolben muss dagegenheizen und du brauchst mehr Temperatur für dasselbe Ergebnis.</div>
+<div class="step"><b>Litze kurz abschneiden.</b> Nur so viel, wie du brauchst — 1–2 cm. Warum, steht ausführlich unter <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a>: Ein langer Litzenschwanz zieht Wärme aus der Arbeitsstelle weg, dein Kolben muss dagegenheizen und du brauchst mehr Temperatur für dasselbe Ergebnis.</div>
 <div class="step"><b>Flux auf die Litze und auf den Chip.</b> Trockene Litze saugt schlecht und schmiert.</div>
 <div class="step"><b>Flach und in eine Richtung ziehen.</b> Spitze <b>auf</b> die Litze, Litze flach auf das Lotfeld, dann in einem Zug in eine Richtung. Nicht schrubben, nicht hin und her, nie senkrecht drücken.</div>
 <div class="step"><b>Litze weiterdrehen, Reste weg.</b> Gesättigte Stellen saugen nicht mehr. Immer ein frisches Stück nachschieben.</div>
@@ -1423,7 +1435,7 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <div class="step"><b>Sofort abwischen.</b> Solange der Flux warm und flüssig ist, mit einem <b>fusselfreien Tuch</b> und <b>IPA 99 %</b> abnehmen. Immer in eine Richtung wischen, Tuchseite oft wechseln, sonst verteilst du den Dreck nur.</div>
 <div class="step"><b>Nachkontrolle.</b> Unter dem Mikroskop schräg gegen das Licht schauen — Rückstände zeigen sich als matte Schlieren. Bei Bedarf wiederholen.</div>
 </div>
-<div class="tip"><b>Derselbe Trick funktioniert auf dem Board</b> — überall dort, wo alter, harter Flux zwischen Bauteilen klebt und der Pinsel allein nicht mehr weiterkommt. Details und Grenzen: <a class="goto" href="#material">Material → Reinigen</a>.</div>
+<div class="tip"><b>Derselbe Trick funktioniert auf dem Board</b> — überall dort, wo alter, harter Flux zwischen Bauteilen klebt und der Pinsel allein nicht mehr weiterkommt. Details und Grenzen: <a class="goto" href="#finish">Reinigen &amp; Schützen</a>.</div>
 
 <h2>Schritt 3 · Stencil auswählen</h2>
 <p>Der Stencil (die Schablone) ist ein dünnes Stahlblech mit einem Lochraster. Die Löcher legen fest, wo eine Kugel landet und wie groß sie sein darf.</p>
@@ -1867,19 +1879,19 @@ h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink
 <script>
 /* ---------- TABS mit Deep-Linking (#hash) ---------- */
 const TABS=[
-{p:"methoden",l:"Methoden",i:"🧭"},{p:"workflow",l:"Workflow",i:"📋"},
-{p:"equipment",l:"Equipment",i:"🧰"},{p:"mikroskop",l:"Mikroskop",i:"🔎"},{p:"material",l:"Material",i:"🧪"},
+{p:"start",l:"Start & Workflow",i:"🧭"},
+{p:"equipment",l:"Equipment",i:"🧰"},{p:"mikroskop",l:"Mikroskop",i:"🔎"},{p:"material",l:"Lot & Flussmittel",i:"🧪"},{p:"draht",l:"Draht & Litze",i:"🧵"},{p:"finish",l:"Reinigen & Schützen",i:"🧽"},
 {p:"tht",l:"THT löten",i:"📌"},{p:"smd",l:"SMD löten",i:"🔬"},{p:"heissluft",l:"Heißluft & Reflow",i:"💨"},{p:"reballing",l:"Reballing",i:"⚪"},{p:"temp",l:"Temperaturen",i:"🌡️"},
 {p:"bauteile",l:"Bauteile",i:"🔩"},{p:"soc",l:"SoC & BGA-Typen",i:"🧠"},{p:"fehler",l:"Fehler & Regeln",i:"🩺"},{p:"sicherheit",l:"Sicherheit",i:"⚠️"}
 ];
 const GROUPS=[
-{g:"start",l:"Start",i:"🧭",tabs:["methoden","workflow"]},
-{g:"werkzeug",l:"Werkzeug & Material",i:"🧰",tabs:["equipment","mikroskop","material"]},
+{g:"start",l:"Start",i:"🧭",tabs:["start"]},
+{g:"werkzeug",l:"Werkzeug & Material",i:"🧰",tabs:["equipment","mikroskop","material","draht","finish"]},
 {g:"technik",l:"Techniken",i:"🔥",tabs:["tht","smd","heissluft","reballing","temp"]},
 {g:"qualitaet",l:"Bauteile & Qualität",i:"🔩",tabs:["bauteile","soc","fehler","sicherheit"]}
 ];
 /* alte Anker weiterleiten, damit bestehende Links gültig bleiben */
-const ALIAS={heizplatte:"heissluft",regeln:"fehler"};
+const ALIAS={heizplatte:"heissluft",regeln:"fehler",methoden:"start",workflow:"start"};
 function activate(p,updateHash){
   if(ALIAS[p])p=ALIAS[p];
   if(!TABS.some(t=>t.p===p))return;
@@ -1888,7 +1900,7 @@ function activate(p,updateHash){
   if(updateHash&&location.hash!=="#"+p)history.replaceState(null,"","#"+p);
 }
 window.addEventListener("hashchange",()=>{const r=location.hash.slice(1);activate(ALIAS[r]||r,false);window.scrollTo({top:0,behavior:"smooth"})});
-let startP="methoden";
+let startP="start";
 try{const sv=localStorage.getItem("ltab");if(sv&&TABS.some(t=>t.p===sv))startP=sv}catch(e){}
 const hRaw=location.hash.slice(1),hP=ALIAS[hRaw]||hRaw;
 if(TABS.some(t=>t.p===hP))startP=hP;
@@ -2058,7 +2070,7 @@ window.__openSection=function(id){
 function run(){TABS.forEach(t=>build(SECOF(t[KEY])));}
 run();
 })();
-const OTHER={file:"elektronik-grundlagen.html",name:"⚡ Elektronik 101",links:[["grundlagen","Grundlagen"],["komponenten","Bauteile & Module"],["messgeraet","Messen & Werkzeug"],["sicherheit","Sicherheit & Praxis"]]};
+const OTHER={file:"elektronik-grundlagen.html",name:"⚡ Elektronik 101",links:[["grundlagen","Grundlagen"],["komponenten","Bauteile & Module"],["messgeraet","Multimeter"],["messen","Messen & Werte"],["fehlersuche","Fehlersuche"],["sicherheit","Sicherheit & Praxis"]]};
 /* ---------- APP-SHELL: Sidebar-Navigation + globale Suche ---------- */
 (function(){
 const KEY = window.__TABKEY__;                 // "k" (Elektronik) oder "p" (Löten)
