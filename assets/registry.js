@@ -42,11 +42,11 @@
               name: "Elektronik 101",
               icon: "⚡",
               kind: "Referenz",
-              updated: "2026-07-09",
+              updated: "2026-08-06",
               desc:
                 "Die große Referenz: Grundgrößen, Schaltpläne lesen, Leistungselektronik, " +
-                "Messtechnik, Fehlersuche, Fachbegriffe — mit eingebauten Rechnern.",
-              tags: ["grundlagen", "schaltplan", "messen", "pwm", "fehlersuche", "rechner"],
+                "Messtechnik, Board-Diagnose, Fehlersuche, Fachbegriffe — mit eingebauten Rechnern.",
+              tags: ["grundlagen", "schaltplan", "messen", "pwm", "fehlersuche", "diodenmodus", "richtwerte", "rechner"],
               sections: [
                 { h: "grundlagen", t: "Basics" },
                 { h: "schaltplan", t: "Schaltplan lesen" },
@@ -58,6 +58,7 @@
                 { h: "motoren", t: "Motoren" },
                 { h: "mcu", t: "Mikrocontroller" },
                 { h: "messgeraet", t: "Multimeter" },
+                { h: "boarddiagnose", t: "Board-Diagnose" },
                 { h: "oszilloskop", t: "Oszilloskop" },
                 { h: "lcrp1", t: "LCR-P1" },
                 { h: "netzteil", t: "Labornetzteil" },

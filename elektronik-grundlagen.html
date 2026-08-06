@@ -1055,7 +1055,7 @@ td:first-child{font-weight:500}
 </div>
 
 <h2>Was ist ein guter Wert? Referenztabelle</h2>
-<p>Ein Messwert allein sagt nichts — er braucht einen Sollwert. Die wichtigsten Erwartungswerte auf einen Blick:</p>
+<p>Ein Messwert allein sagt nichts — er braucht einen Sollwert. Die wichtigsten Erwartungswerte auf einen Blick. Richtwerte für <b>eingelötete</b> Bauteile, Rails gegen Masse und die Messreihenfolge bei der Fehlersuche stehen im Tab <a href="#boarddiagnose">Board-Diagnose</a>.</p>
 <div class="tbl-wrap"><table style="min-width:860px">
 <thead><tr><th>Was du misst</th><th>Modus</th><th>Soll (in Ordnung)</th><th>Auffällig</th></tr></thead>
 <tbody>
@@ -1368,6 +1368,146 @@ td:first-child{font-weight:500}
 </div>
 </section>
 
+
+<!-- ============ TAB: BOARD-DIAGNOSE ============ -->
+<section id="t-boarddiagnose" class="hidden">
+
+<div class="kurz"><div><b>Der Tab <a href="#messgeraet">Multimeter</a> erklärt das Gerät</b> — dieser hier liefert die <b>Sollwerte auf der bestückten Platine</b>. Also: Was zeigt ein intakter Ausschnitt einer Schaltung an, in welcher Reihenfolge misst man sich durch, und warum ist ein Vergleichswert am Ende mehr wert als jede Tabelle.</div></div>
+<p>Alle Diodenmodus- und Widerstandsmessungen gelten <b>stromlos</b>: Akku ab, Netzteil ab, Elkos entladen. Schwarze Prüfspitze bei Messungen gegen Masse immer auf GND, mit der roten wird angetastet.</p>
+
+<h2>Richtwerte im eingebauten Zustand</h2>
+<p>Werte für Bauteile, die <b>eingelötet</b> sind — deshalb weichen sie teils von den Einzelbauteil-Werten in der <a href="#messgeraet">Referenztabelle im Multimeter-Tab</a> ab. Der Diodenmodus ist hier der Standardmodus, weil er noch unterscheidet, wo der Ω-Modus längst 0 anzeigt.</p>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Bauteil</th><th>Messmodus</th><th>Typischer Wert</th><th>Verdächtiger Wert</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Halbleiterübergänge</td></tr>
+<tr><td>PN-Diode Silizium (1N4148, 1N400x)</td><td>Diode, Durchlass</td><td>0,55–0,75 V</td><td>&lt; 0,3 V · 0,000 V · OL</td><td>0,000 V = durchlegiert · OL in beide Richtungen = unterbrochen</td></tr>
+<tr><td>PN-Diode Silizium</td><td>Diode, Sperrichtung</td><td>OL</td><td>jeder endliche Wert</td><td>Auf dem Board verhindern Parallelpfade oft das OL — im Zweifel einseitig auslöten</td></tr>
+<tr><td>BJT Basis–Emitter / Basis–Kollektor</td><td>Diode</td><td>0,55–0,75 V</td><td>&lt; 0,4 V · OL</td><td>NPN: Rot an Basis. PNP: Schwarz an Basis</td></tr>
+<tr><td>BJT Kollektor–Emitter</td><td>Diode</td><td>OL in beide Richtungen</td><td>jeder endliche Wert</td><td>Ein Wert in beide Richtungen = durchlegiert</td></tr>
+<tr><td>Z-Diode</td><td>Diode, Durchlass</td><td>0,55–0,75 V</td><td>0,000 V</td><td>Die Z-Spannung misst kein Multimeter — dafür <a href="#netzteil">Labornetzteil</a> mit Strombegrenzung und Vorwiderstand</td></tr>
+<tr><td>Germanium-Diode</td><td>Diode, Durchlass</td><td>0,2–0,4 V</td><td>0,000 V</td><td>Nur in Altgeräten — nicht mit einer Schottky verwechseln</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Schottky-Dioden</td></tr>
+<tr><td>Schottky, Durchlass</td><td>Diode</td><td>0,15–0,45 V</td><td>0,000 V · OL</td><td>Der niedrige Wert ist <b>normal</b> und kein Teilkurzschluss</td></tr>
+<tr><td>Schottky, Sperrichtung</td><td>Diode</td><td>OL, oft aber ein hoher Restwert</td><td>0,000 V</td><td>Schottky hat prinzipbedingt mehr Sperrstrom — „nicht ganz OL" ist hier kein Defekt</td></tr>
+<tr><td>Schottky als Verpolschutz / ORing in der Versorgung</td><td>Diode</td><td>0,2–0,4 V</td><td>0,000 V</td><td>Durchlegierte Verpolschutzdiode ist eine der häufigsten Ursachen für eine kurzgeschlossene Eingangsrail</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">MOSFET (N-Kanal, Anreicherungstyp)</td></tr>
+<tr><td>Body-Diode: <b>Rot an S</b>, Schwarz an D</td><td>Diode</td><td>0,4–0,7 V</td><td>0,000 V · OL</td><td>Vor jeder Messung Gate gegen Source kurzschließen (Gate entladen)</td></tr>
+<tr><td><b>Rot an D</b>, Schwarz an S</td><td>Diode</td><td>OL</td><td>0,000 V · &lt; 0,1 V</td><td>Ein Wert in <b>beide</b> Richtungen = durchlegiert. Das mit Abstand häufigste FET-Ausfallbild</td></tr>
+<tr><td>Gate gegen Source und Gate gegen Drain</td><td>Diode oder Ω</td><td>OL</td><td>jeder Wert unter ~1 MΩ</td><td>Gate-Durchschlag. Vorher entladen, sonst misst man nur die gespeicherte Gate-Ladung</td></tr>
+<tr><td>Schalttest: Gate kurz mit <b>Rot</b> antippen</td><td>Diode</td><td>D–S wird danach niederohmig</td><td>keine Änderung</td><td>Beweist, dass der FET überhaupt schaltet. Danach Gate wieder gegen Source entladen</td></tr>
+<tr><td>P-Kanal-MOSFET</td><td>Diode</td><td>wie oben, <b>alle Polaritäten vertauscht</b></td><td>—</td><td>Die Body-Diode zeigt hier von Drain nach Source</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Sicherungen</td></tr>
+<tr><td>Schmelzsicherung / SMD-Sicherung</td><td>Ω</td><td>0,00–0,5 Ω</td><td>OL</td><td>Bei Parallelpfaden einseitig auslöten</td></tr>
+<tr><td>Schmelzsicherung, in-circuit</td><td>Diode</td><td>0,000–0,005 V</td><td>jeder Wert &gt; 0,05 V</td><td>Schneller als Ω, weil die Auflösung im mV-Bereich liegt</td></tr>
+<tr><td>Rückstellbare Sicherung (PTC / Polyfuse)</td><td>Ω</td><td>0,05–2 Ω kalt</td><td>OL · &gt; 10 Ω</td><td>Ein ausgelöster PTC ist hochohmig und wird erst nach dem Abkühlen wieder normal — nicht vorschnell als defekt einstufen</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Spulen und Ferrite</td></tr>
+<tr><td>Ferritperle (Bead)</td><td>Ω</td><td>0,00–1 Ω</td><td>OL</td><td>Typisches Ausfallbild: unterbrochen nach Überstrom. Der Ω-Wert sagt <b>nichts</b> über die HF-Wirkung aus</td></tr>
+<tr><td>Speicherdrossel eines Schaltwandlers</td><td>Ω</td><td>0,00–0,10 Ω, meist unter der Auflösung</td><td>OL</td><td>Von einem Kurzschluss praktisch nicht zu unterscheiden — REL/Zero gegen den Leitungswiderstand nutzen</td></tr>
+<tr><td>Trafo-, Relais-, Motorwicklung</td><td>Ω</td><td>einige Ω bis einige kΩ</td><td>OL · deutlich unter der Vergleichswicklung</td><td><b>Windungsschluss zeigt der Ω-Modus nicht</b> — dafür identische Wicklung vergleichen oder <a href="#lcrp1">LCR-Messgerät</a></td></tr>
+<tr><td>Spule oder Ferrit allgemein</td><td>Diode</td><td>0,000–0,020 V</td><td>&gt; 0,05 V</td><td>Verhält sich im Diodenmodus wie ein Stück Draht</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Elkos</td></tr>
+<tr><td>Elko, ausgelötet</td><td>Kapazität</td><td>Nennwert <b>±20 %</b></td><td>mehr als −20 % · stark schwankend</td><td>Vorher entladen, sonst Fehlanzeige oder Schaden am Messgerät</td></tr>
+<tr><td>Elko, in-circuit</td><td>Kapazität</td><td>Summe aller parallelen Kondensatoren</td><td>—</td><td>Misst nie ein Einzelbauteil — nur als Vergleich zwischen zwei Boards brauchbar</td></tr>
+<tr><td>Elko</td><td>Ω</td><td>Wert steigt sichtbar an, dann OL</td><td>konstant niederohmig</td><td>Der Ladetest. Bleibt der Wert klein: defekt oder niederohmig überbrückt</td></tr>
+<tr><td>Elko</td><td>Diode</td><td>Anzeige läuft von 0 hoch</td><td>0,000 V konstant</td><td>Gleiches Prinzip, feinere Auflösung</td></tr>
+<tr><td><b>ESR</b> eines Elkos</td><td>—</td><td>mit dem Multimeter <b>nicht messbar</b></td><td>—</td><td>Ein alter Elko kann die volle Nennkapazität und trotzdem viel zu hohen ESR haben — dafür <a href="#lcrp1">LCR-P1</a> oder ESR-Meter</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Keramikkondensatoren (MLCC)</td></tr>
+<tr><td>MLCC, ausgelötet</td><td>Kapazität</td><td>Nennwert ±10–20 %</td><td>0 · weit daneben</td><td>Werte unter etwa 1 nF liegen unter der Auflösung vieler Multimeter</td></tr>
+<tr><td>MLCC</td><td>Diode / Ω</td><td>OL</td><td>0,000 V · wenige Ω</td><td>Ein gerissener MLCC ist ein satter Kurzschluss. Nach Sturz oder verbogenem Board der häufigste Rail-Killer</td></tr>
+<tr><td>MLCC, in-circuit</td><td>Kapazität</td><td>Summe der Rail-Kapazität</td><td>—</td><td>Nur im Vergleich mit einem zweiten Board aussagekräftig</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Spannungsrails gegen Masse (Schwarz an GND)</td></tr>
+<tr><td>Logik-Rail 5 V / 3,3 V / 1,8 V</td><td>Diode</td><td>0,3–0,6 V</td><td>0,000–0,010 V</td><td>Der Standardtest auf Rail-Kurzschluss</td></tr>
+<tr><td>Core- / GPU- / SoC-Rail (&lt; 1,2 V)</td><td>Diode</td><td>0,05–0,30 V</td><td>0,000–0,005 V</td><td>Von Haus aus niedrig, weil viele Kondensatoren und Halbleiter parallel hängen — <b>nicht</b> mit einem Kurzschluss verwechseln</td></tr>
+<tr><td>Eingangs- / Akkurail</td><td>Diode</td><td>0,3–0,7 V</td><td>0,000 V</td><td>0,000 V heißt hier fast immer: Verpolschutz, Eingangs-FET oder ein MLCC ist durch</td></tr>
+<tr><td>beliebige Rail</td><td>Ω</td><td>einige Ω bis kΩ</td><td>&lt; 1–2 Ω</td><td>Gröber als der Diodenmodus, aber gut für den schnellen Ja/Nein-Blick</td></tr>
+<tr><td>beliebige Rail, im Betrieb</td><td>V⎓</td><td>Nennwert ±5 %</td><td>fehlt · zu niedrig · schwankt</td><td>Erst messen, wenn stromlos nichts Auffälliges gefunden wurde</td></tr>
+</tbody>
+</table></div>
+<div class="tip" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;margin:.7rem 0"><b>0,000 V im Diodenmodus</b> ist die einzige Anzeige, die für sich allein schon eine Aussage ist: dort liegt ein echter Kurzschluss. Alles andere in dieser Tabelle braucht einen Vergleichswert, um etwas zu bedeuten.</div>
+
+<h2>Messreihenfolge bei der Fehlersuche</h2>
+<p>Immer von der Quelle Richtung Verbraucher. Wer mitten im Board anfängt, misst Folgefehler und sucht am Ende ein Bauteil, das nur deshalb tot aussieht, weil ihm die Versorgung fehlt.</p>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th>#</th><th>Schritt</th><th>Modus</th><th>Erwartung</th><th>Wenn es abweicht</th></tr></thead>
+<tbody>
+<tr><td><b>1</b></td><td><b>Eingangsspannung</b> — am Stecker, hinter Sicherung und hinter dem Verpolschutz</td><td>stromlos Diode gegen GND, dann V⎓</td><td>Diodenwert 0,3–0,7 V · danach der Nennwert</td><td>0,000 V → zuerst diesen Kurzschluss suchen, bevor irgendetwas eingeschaltet wird. Gar keine Spannung → Netzteil, Kabel, Buchse, Sicherung</td></tr>
+<tr><td><b>2</b></td><td><b>Hauptrail</b> — Ausgang des ersten Wandlers, z. B. 5 V oder 3,3 V</td><td>V⎓</td><td>Nennwert ±5 %</td><td>Fehlt sie: Wandler-IC, Speicherdrossel, High- und Low-Side-FET sowie den Eingang des Wandlers prüfen</td></tr>
+<tr><td><b>3</b></td><td><b>Abgeleitete Rails</b> — 1,8 V, 1,2 V, Core, I/O, PLL, der Reihe nach</td><td>stromlos Diode gegen GND, dann V⎓</td><td>jeweils der Nennwert</td><td>Eine einzelne tote Rail → deren Wandler oder LDO. <b>Alle</b> tot → gemeinsames Enable, Sequencer oder die Hauptrail bricht unter Last ein</td></tr>
+<tr><td><b>4</b></td><td><b>Enable und Feedback</b> an jedem Wandler, der nicht anläuft</td><td>V⎓</td><td>EN auf High-Pegel der Steuerlogik · FB auf der Referenzspannung des ICs (oft 0,6–1,25 V, Datenblatt)</td><td>EN fehlt → die Ursache liegt <b>vor</b> dem Wandler (Sequencer, PMIC, Reset). FB daneben → Rückkoppelteiler, Lötstelle oder die Last</td></tr>
+<tr><td><b>5</b></td><td><b>Datensignale und Takt</b> — Reset, Quarz, I²C/SPI, Busleitungen</td><td>V⎓, <a href="#oszilloskop">Oszilloskop</a></td><td>Reset High · Takt vorhanden · I²C-Leitungen per Pull-up auf Rail-Niveau</td><td>Erst sinnvoll, wenn alle Rails stehen. Vorher misst man nur, dass nichts läuft</td></tr>
+</tbody>
+</table></div>
+<p class="note">Faustregel für die Reihenfolge innerhalb eines Schritts: erst stromlos im Diodenmodus gegen Masse (findet Kurzschlüsse gefahrlos), dann erst Spannung anlegen und im Betrieb messen.</p>
+
+<h2>Kurzschluss auf einer Rail eingrenzen</h2>
+<p>Wenn Schritt 1 oder 3 eine Rail bei 0,000 V zeigt, steht fest <i>dass</i> etwas kurzschließt — nicht <i>was</i>. Drei Verfahren, um das Bauteil zu finden, ohne die halbe Platine auszulöten:</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Methode</th><th>Vorgehen</th><th>Was sie zeigt</th></tr></thead>
+<tbody>
+<tr><td><b>Spannungsabfall verfolgen</b> (Injection)</td><td><a href="#netzteil">Labornetzteil</a> strombegrenzt (0,5–2 A) auf die Rail geben, mit dem Multimeter im mV-Bereich den Spannungsabfall entlang der Rail abtasten</td><td>Der Wert wird zum Fehler hin <b>kleiner</b> — am tiefsten Punkt sitzt das Bauteil. Am schärfsten mit einem Tisch-DMM</td></tr>
+<tr><td><b>Wärme</b></td><td>Rail strombegrenzt speisen, dann mit dem Finger oder einer Wärmebildkamera über das Board gehen</td><td>Das kurzschließende Bauteil wird als erstes warm. Schnellste Methode, wenn der Kurzschluss richtig Strom zieht</td></tr>
+<tr><td><b>Sektionieren</b></td><td>Ferritperlen, 0-Ω-Brücken und Sicherungen der Reihe nach auslöten und die Rail dabei beobachten</td><td>Trennt die Rail in Abschnitte, bis der Kurzschluss verschwindet — dann liegt er im zuletzt getrennten Zweig</td></tr>
+</tbody>
+</table></div>
+<div class="danger-box"><b>Strombegrenzung ist Pflicht.</b> Eine kurzgeschlossene Rail ohne Limit anzufahren zerstört das, was du gerade suchst — oft samt Leiterbahn. Erst das Limit einstellen (Ausgang kurzschließen, Limit einregeln), dann anschließen. Vorgehen im Tab <a href="#netzteil">Labornetzteil</a>.</div>
+
+<h2>Grenzen der Richtwerte</h2>
+<p>Absolute Richtwerte gelten für <b>Bauteile</b>, nicht für <b>Baugruppen</b>. Sobald ein Bauteil eingelötet ist, misst man immer die Parallelschaltung von allem, was am selben Knoten hängt.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Effekt</th><th>Folge für die Messung</th></tr></thead>
+<tbody>
+<tr><td>Parallelpfade auf dem Knoten</td><td>Ein intaktes Bauteil kann viel zu niedrig messen, ein defektes viel zu unauffällig</td></tr>
+<tr><td>ESD-Schutzdioden in ICs</td><td>Erzeugen an fast jedem Pin einen Diodenwert gegen GND und gegen VCC — auch dort, wo im Schaltplan gar keine Diode steht</td></tr>
+<tr><td>Kapazität an der Rail</td><td>Der Diodenmodus zeigt erst nach dem Aufladen einen stabilen Wert. Große Rails brauchen ein bis zwei Sekunden — der <b>Endwert</b> zählt</td></tr>
+<tr><td>Prüfspannung des Messgeräts</td><td>Je nach Gerät 1–3 V im Diodenmodus. Zwei Multimeter zeigen an derselben Stelle unterschiedliche Werte — Referenzwerte deshalb <b>immer mit demselben Gerät</b> aufnehmen</td></tr>
+<tr><td>Temperatur und Restladung</td><td>Warme Boards und nicht entladene Elkos verschieben die Werte reproduzierbar nach unten bzw. oben</td></tr>
+<tr><td>Bauteiltoleranz und Revision</td><td>Derselbe Gerätetyp kann je nach Boardrevision andere Bauteile tragen — Werte gelten nicht automatisch über Revisionen hinweg</td></tr>
+</tbody>
+</table></div>
+
+<h2>Vergleichsmessungen — was wirklich zuverlässig ist</h2>
+<p>Statt einen Messwert gegen eine allgemeine Tabelle zu halten, hält man ihn gegen einen zweiten Messwert, der unter denselben Bedingungen entstanden ist. Nach Aussagekraft sortiert:</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Vergleich</th><th>Vorgehen</th><th>Aussagekraft</th><th>Grenze</th></tr></thead>
+<tbody>
+<tr><td><b>Funktionierendes Board</b> derselben Revision</td><td>Denselben Punkt mit demselben Gerät auf beiden Boards messen</td><td><b>Höchste.</b> Deckt auch Fehler auf, nach denen man gar nicht gesucht hätte</td><td>Zweites Board nötig, Revision muss stimmen</td></tr>
+<tr><td><b>Symmetrischer Schaltungsblock</b> auf demselben Board</td><td>Kanal A gegen Kanal B, Phase 1 gegen Phase 2 einer mehrphasigen Versorgung, RAM-Kanal 1 gegen 2, USB-Port 1 gegen 2</td><td>Sehr hoch — und ohne zweites Board zu haben</td><td>Nur dort, wo es Symmetrie gibt. Beide Seiten können auch gleichzeitig defekt sein</td></tr>
+<tr><td><b>Gleichartige Pins</b> desselben ICs</td><td>Alle GND-Pins, alle VDD-Pins oder alle Pins desselben Busses gegeneinander</td><td>Hoch für einzelne gerissene oder unterbrochene Verbindungen</td><td>Sagt nichts darüber, ob das IC selbst funktioniert</td></tr>
+<tr><td><b>Eigene Referenzwerte</b> vom intakten Gerät</td><td>Einmal am funktionierenden Gerät alles vermessen und notieren — Vorlage unten</td><td>Hoch, und mit der Zeit die beste Datenbasis überhaupt</td><td>Erfordert Disziplin, <b>bevor</b> etwas kaputt ist</td></tr>
+<tr><td><b>Datenblatt / Boardview</b></td><td>Sollwerte für Enable, Feedback und Referenzen nachschlagen</td><td>Hoch für einzelne Pins</td><td>Sagt nichts über die Parallelpfade auf genau diesem Board</td></tr>
+<tr><td>Allgemeine Richtwerttabelle</td><td>Die Tabelle oben</td><td>Gut als Einstieg und um Größenordnungen einzuordnen</td><td><b>Am schwächsten.</b> Erkennt zuverlässig nur eindeutige Fälle: 0,000 V und OL</td></tr>
+</tbody>
+</table></div>
+<div class="tip" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;margin:.7rem 0"><b>Merksatz:</b> Ein einzelner Messwert ist eine Beobachtung. Eine Aussage wird daraus erst durch einen zweiten Wert, mit dem man ihn vergleicht.</div>
+
+<h2>Vorlage: eigene Referenzwerte</h2>
+<p>Pro Gerätefamilie eine Tabelle, einmal am <b>funktionierenden</b> Gerät aufgenommen — mit demselben Multimeter, stromlos und entladen. Das ist der Aufwand, der sich beim zweiten Defekt derselben Bauart auszahlt.</p>
+<div class="card">
+<div class="rule"><span class="ico">📇</span><div><b>Gerät:</b> Modell <b>und</b> Boardrevision. Werte gelten nicht automatisch über Revisionen hinweg.</div></div>
+<div class="rule"><span class="ico">📍</span><div><b>Messpunkt:</b> eindeutig benennen — Bauteilkennung mit Pad oder Pin, oder ein Testpunkt: <span class="kbd">C412 / Pad 1</span>, <span class="kbd">U3 Pin 12</span>, <span class="kbd">TP7</span>. Nicht „irgendwo an 3,3 V".</div></div>
+<div class="rule"><span class="ico">🎯</span><div><b>Sollwert:</b> der am intakten Gerät gemessene Wert, <b>immer mit Modus</b> — z. B. <span class="kbd">0,42 V Diode</span> oder <span class="kbd">3,31 V ⎓</span>.</div></div>
+<div class="rule"><span class="ico">📓</span><div><b>gemessen:</b> der Wert im Fehlerfall. Bleibt beim Anlegen der Referenz leer.</div></div>
+<div class="rule"><span class="ico">🗓️</span><div><b>Datum:</b> damit später nachvollziehbar bleibt, mit welchem Stand und mit welchem Messgerät gemessen wurde.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Gerät</th><th>Messpunkt</th><th>Sollwert</th><th>gemessen</th><th>Datum</th></tr></thead>
+<tbody>
+<tr><td>XY-Board Rev. B</td><td><span class="kbd">L3 / Pad Ausgang</span> (1,8-V-Rail)</td><td>0,38 V Diode gegen GND</td><td>0,002 V</td><td>2026-08-06</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">— ab hier eigene Zeilen —</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zum Ausdrucken oder als Vorlage für die eigene Datei. Ergänzend zum Kopieren: <span class="kbd">Gerät | Messpunkt | Sollwert | gemessen | Datum</span></p>
+
+</section>
 
 <!-- ============ TAB: LEISTUNG & PWM ============ -->
 <section id="t-leistung" class="hidden">
@@ -2339,13 +2479,13 @@ td:first-child{font-weight:500}
 const TABS=[
 {k:"grundlagen",l:"Basics",i:"⚡"},{k:"schaltplan",l:"Schaltplan",i:"📐"},{k:"leistung",l:"Leistung & PWM",i:"🔌"},{k:"rechner",l:"Rechner",i:"🧮"},{k:"begriffe",l:"Fachbegriffe",i:"📖"},
 {k:"komponenten",l:"Datenbank",i:"🧩"},{k:"displays",l:"Displays",i:"🖥️"},{k:"motoren",l:"Motoren",i:"⚙️"},{k:"mcu",l:"Mikrocontroller",i:"🤖"},
-{k:"messgeraet",l:"Multimeter",i:"📟"},{k:"oszilloskop",l:"Oszilloskop",i:"📉"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},
+{k:"messgeraet",l:"Multimeter",i:"📟"},{k:"boarddiagnose",l:"Board-Diagnose",i:"🩺"},{k:"oszilloskop",l:"Oszilloskop",i:"📉"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},
 {k:"sicherheit",l:"Sicherheit",i:"⚠️"},{k:"praxis",l:"Praxis & Aufbau",i:"📋"}
 ];
 const GROUPS=[
 {g:"basis",l:"Grundlagen",i:"⚡",tabs:["grundlagen","schaltplan","leistung","rechner","begriffe"]},
 {g:"teile",l:"Bauteile",i:"🧩",tabs:["komponenten","displays","motoren","mcu"]},
-{g:"messen",l:"Messen & Werkzeug",i:"🔧",tabs:["messgeraet","oszilloskop","lcrp1","netzteil"]},
+{g:"messen",l:"Messen & Werkzeug",i:"🔧",tabs:["messgeraet","boarddiagnose","oszilloskop","lcrp1","netzteil"]},
 {g:"sicher",l:"Sicherheit & Praxis",i:"⚠️",tabs:["sicherheit","praxis"]}
 ];
 /* alte Anker weiterleiten, damit bestehende Links gültig bleiben */
