@@ -1,0 +1,286 @@
+---
+/* ============================================================================
+   Eine dynamische Route für zwei Seitentypen:
+     · Hub-Seiten   (hub-werkstatt.html, hub-kueche.html, …)
+     · native Module (koch-basics.html, …) — deren Inhalte liegen als
+       src/content/<modul-id>/<abschnitt-hash>.astro
+
+   Ein Modul gilt als „nativ", sobald sein Ordner unter src/content/ existiert.
+   Der Build wacht darüber, dass Registry-Abschnitte und Content-Dateien
+   deckungsgleich sind — läuft etwas auseinander, bricht er ab.
+   ========================================================================== */
+import Base from "../layouts/Base.astro";
+import HubCard from "../components/HubCard.astro";
+import { hubs, moduleById, hubById, relatedOf, fmtDate } from "../lib/registry.mjs";
+
+export function getStaticPaths() {
+  const files = import.meta.glob("../content/*/*.astro");
+  const nativeIds = [...new Set(Object.keys(files).map((p) => p.split("/")[2]))];
+  const paths = [];
+  for (const h of hubs) {
+    paths.push({ params: { slug: h.file.replace(/\.html$/, "") }, props: { type: "hub", id: h.id } });
+  }
+  for (const id of nativeIds) {
+    const m = moduleById(id);
+    if (!m) throw new Error(`src/content/${id}/ hat keinen Registry-Eintrag`);
+    paths.push({ params: { slug: m.file.replace(/\.html$/, "") }, props: { type: "mod", id } });
+  }
+  return paths;
+}
+
+const { type, id } = Astro.props;
+const hub = type === "hub" ? hubById(id) : moduleById(id).hub;
+const mod = type === "mod" ? moduleById(id) : null;
+
+/* Abschnitts-Komponenten laden und gegen die Registry prüfen. */
+const secFiles = import.meta.glob("../content/*/*.astro", { eager: true });
+const secComp = (mid, h) => {
+  const f = secFiles[`../content/${mid}/${h}.astro`];
+  if (!f) throw new Error(`Fehlender Abschnitt: src/content/${mid}/${h}.astro`);
+  return f.default;
+};
+if (mod) {
+  const have = Object.keys(secFiles)
+    .filter((p) => p.split("/")[2] === mod.id)
+    .map((p) => p.split("/")[3].replace(/\.astro$/, ""));
+  const want = mod.sections.map((s) => s.h);
+  for (const h of have) {
+    if (!want.includes(h)) throw new Error(`src/content/${mod.id}/${h}.astro fehlt in der Registry`);
+  }
+}
+
+const related = relatedOf(id).filter((m) => !mod || m.id !== mod.id);
+const SHOWN = 8;
+const title = mod ? `${mod.name} · ${hub.name} · Artefakte` : `${hub.name} · Artefakte`;
+const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
+---
+
+<Base title={title} description={desc} hub={hub} mod={mod}>
+  {
+    /* ================================ HUB-SEITE ================================ */
+    !mod && (
+      <>
+        <header class="hero">
+          <div class="wrap">
+            <div class="kicker">{hub.tagline}</div>
+            <h1><span class="ic">{hub.icon}</span>{hub.name}</h1>
+            <p class="lead">{hub.desc}</p>
+            <button class="bigsearch" type="button" data-hbx-search>
+              <span aria-hidden="true">🔍</span>
+              <span class="t">In diesem Hub und allen anderen suchen …</span>
+              <span class="k">⌘K</span>
+            </button>
+            <div class="stats">
+              <span><b>{hub.modules.length}</b> Module</span>
+              <span><b>{hub.sectionCount}</b> Abschnitte</span>
+              <span><b>{hub.areas.length}</b> Bereiche</span>
+              <span>zuletzt <b>{fmtDate(hub.updated)}</b></span>
+            </div>
+            <nav class="jump" aria-label="Bereiche">
+              {hub.areas.map((ar) => (
+                <a href={`#a-${ar.id}`}>{ar.name} <span class="ct">{ar.modules.length}</span></a>
+              ))}
+            </nav>
+          </div>
+        </header>
+
+        <main>
+          <div class="wrap">
+            {hub.areas.map((ar) => (
+              <section class="area" id={`a-${ar.id}`}>
+                <div class="area-head">
+                  <h2>{ar.name}</h2>
+                  <span class="ct">{ar.modules.length} Module</span>
+                </div>
+                <p class="d">{ar.desc}</p>
+                <div class="modgrid">
+                  {ar.modules.map((m) => (
+                    <article class="mod">
+                      <div class="hd">
+                        <span class="ic">{m.icon}</span>
+                        <h3><a href={m.file}>{m.name}</a></h3>
+                        <span class="kind">{m.kind}</span>
+                      </div>
+                      <p>{m.desc}</p>
+                      {m.sections.length > 0 && (
+                        <div class="secs">
+                          {m.sections.slice(0, SHOWN).map((s) => (
+                            <a href={`${m.file}#${s.h}`}>{s.t}</a>
+                          ))}
+                          {m.sections.length > SHOWN && (
+                            <>
+                              <span class="rest" style="display:none">
+                                {m.sections.slice(SHOWN).map((s) => (
+                                  <a href={`${m.file}#${s.h}`}>{s.t}</a>
+                                ))}
+                              </span>
+                              <button type="button" data-more>+{m.sections.length - SHOWN} weitere</button>
+                            </>
+                          )}
+                        </div>
+                      )}
+                      <div class="foot">
+                        <span>{m.sections.length ? `${m.sections.length} Abschnitte` : "Einzelseite"}</span>
+                        <span>{fmtDate(m.updated)}</span>
+                        <a class="open" href={m.file}>öffnen →</a>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <section class="blk">
+            <div class="wrap">
+              <div class="eyebrow">Andere Hubs</div>
+              <div class="hubgrid">
+                {hubs.filter((h) => h.id !== hub.id).map((h) => <HubCard hub={h} />)}
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <script is:inline>
+          /* Abschnitts-Chips aufklappen */
+          document.addEventListener("click", function (e) {
+            var b = e.target.closest("[data-more]");
+            if (!b) return;
+            var rest = b.parentElement.querySelector(".rest");
+            if (rest) rest.style.display = "contents";
+            b.remove();
+          });
+        </script>
+      </>
+    )
+  }
+
+  {
+    /* =============================== MODUL-SEITE =============================== */
+    mod && (
+      <div class="mlay">
+        <aside class="msd" id="msd">
+          <div class="msd-head">
+            <span class="ic">{mod.icon}</span>
+            <div>
+              <div class="nm">{mod.name}</div>
+              <div class="kd">{mod.kind} · {hub.icon} {hub.name}</div>
+            </div>
+          </div>
+          <nav class="msd-nav" id="msdNav" aria-label="Abschnitte">
+            {mod.sections.map((s, i) => (
+              <a href={`#${s.h}`} data-h={s.h} class={i === 0 ? "on" : undefined}>{s.t}</a>
+            ))}
+          </nav>
+          <div class="msd-foot">
+            <a href={hub.file}>{hub.icon} {hub.name}-Hub</a>
+            {related.map((m) => (
+              <a href={m.file}>{m.icon} {m.name}</a>
+            ))}
+          </div>
+        </aside>
+        <div class="mscrim" id="mscrim"></div>
+
+        <main class="mmain">
+          <div class="mtop" id="mtop">
+            <button id="mburger" type="button" aria-label="Abschnitte öffnen">☰</button>
+            <span class="tt">{mod.name}</span>
+            <button class="ts" type="button" data-hbx-search>🔍 Suchen</button>
+          </div>
+
+          <header class="mhead">
+            <h1>{mod.name}</h1>
+            <p>{mod.desc}</p>
+          </header>
+
+          <div class="mcontent" data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
+            {mod.sections.map((s) => {
+              const C = secComp(mod.id, s.h);
+              return (
+                <section class="msec" id={s.h}>
+                  <h2 class="msec-t">{s.t}</h2>
+                  <C />
+                </section>
+              );
+            })}
+          </div>
+
+          <div class="hbx-foot">
+            <div class="hd">Weiter im Hub {hub.name}</div>
+            <div class="row">
+              <a class="up" href={hub.file}>
+                <span>{hub.icon}</span><span>Alle {hub.modules.length} Module im {hub.name}-Hub</span>
+              </a>
+              {hub.modules.filter((m) => m.id !== mod.id).map((m) => (
+                <a href={m.file}><span>{m.icon}</span><span>{m.name}</span></a>
+              ))}
+            </div>
+            {related.filter((m) => m.hub.id !== hub.id).length > 0 && (
+              <>
+                <div class="hd">Verwandt in anderen Hubs</div>
+                <div class="row">
+                  {related.filter((m) => m.hub.id !== hub.id).map((m) => (
+                    <a href={m.file}>
+                      <span>{m.icon}</span><span>{m.name}</span>
+                      <span class="hx">{m.hub.icon} {m.hub.name}</span>
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </main>
+      </div>
+
+      <script is:inline>
+        /* ---- Abschnitts-Router: ein Abschnitt sichtbar, per #hash adressiert ---- */
+        (function () {
+          var nav = document.getElementById("msdNav");
+          if (!nav) return;
+          var secs = Array.prototype.slice.call(document.querySelectorAll(".msec"));
+          var links = Array.prototype.slice.call(nav.querySelectorAll("a"));
+          var KEYS = secs.map(function (s) { return s.id; });
+
+          function show(h, push) {
+            if (KEYS.indexOf(h) < 0) h = KEYS[0];
+            secs.forEach(function (s) { s.classList.toggle("on", s.id === h); });
+            links.forEach(function (a) { a.classList.toggle("on", a.dataset.h === h); });
+            if (push && decodeURIComponent(location.hash.slice(1)) !== h) {
+              history.replaceState(null, "", "#" + h);
+            }
+            var tt = document.querySelector("#mtop .tt");
+            var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
+            if (tt && lk) tt.textContent = lk.textContent;
+          }
+
+          window.addEventListener("hashchange", function () {
+            show(decodeURIComponent(location.hash.slice(1)), false);
+            window.scrollTo({ top: 0 });
+          });
+          show(decodeURIComponent(location.hash.slice(1)) || KEYS[0], false);
+          /* Der Browser springt beim Laden zum #anker und schiebt den Kopf
+             unter die Leiste — Abschnitt ist schon sichtbar, also nach oben. */
+          requestAnimationFrame(function () { window.scrollTo(0, 0); });
+
+          /* ---- Mobile Schublade ---- */
+          var side = document.getElementById("msd");
+          var scrim = document.getElementById("mscrim");
+          function openSide() { side.classList.add("open"); scrim.classList.add("show"); }
+          function closeSide() { side.classList.remove("open"); scrim.classList.remove("show"); }
+          document.getElementById("mburger").addEventListener("click", openSide);
+          scrim.addEventListener("click", closeSide);
+          document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeSide(); });
+
+          nav.addEventListener("click", function (e) {
+            var a = e.target.closest("a");
+            if (!a) return;
+            e.preventDefault();
+            show(a.dataset.h, true);
+            closeSide();
+            window.scrollTo({ top: 0 });
+          });
+        })();
+      </script>
+    )
+  }
+</Base>

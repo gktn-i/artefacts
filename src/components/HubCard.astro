@@ -1,0 +1,32 @@
+---
+/* Hub-Karte — auf dem Index (mit Modul-Chips) und als „Andere Hubs". */
+interface Props {
+  hub: any;
+  delay?: number;
+  mods?: boolean;
+}
+const { hub, delay = 0, mods = false } = Astro.props;
+const shown = hub.modules.slice(0, 5);
+const rest = hub.modules.length - shown.length;
+---
+
+<a
+  class="hubcard rise"
+  href={hub.file}
+  style={`--cl:${hub.accent.l};--cd:${hub.accent.d};animation-delay:${delay}ms`}
+>
+  <div class="top"><span class="ic">{hub.icon}</span><h2>{hub.name}</h2></div>
+  <div class="tag">{hub.tagline}</div>
+  <p>{hub.desc}</p>
+  {mods && (
+    <div class="mods">
+      {shown.map((m: any) => <span>{m.name}</span>)}
+      {rest > 0 && <span class="more">+{rest} weitere</span>}
+    </div>
+  )}
+  <div class="foot">
+    <span>{hub.modules.length} Module</span>
+    <span>{hub.sectionCount} Abschnitte</span>
+    <span class="go">Hub öffnen →</span>
+  </div>
+</a>

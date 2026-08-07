@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuts Atlas · Rind & rotes Fleisch</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>body{margin:0}</style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
+<script defer src="assets/palette.js"></script>
+</head>
+<body data-pagefind-body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
+
+const data = {
+  edel: {
+    label: "Edelstücke",
+    sub: "Die Krone vom Rind",
+    cuts: [
+      {
+        de: "Filet",
+        en: "Tenderloin",
+        zart: 5,
+        garung: "Kurzbraten",
+        temp: "Medium Rare",
+        herkunft: "Innenseite des Rückens, kaum beansprucht",
+        erkennen: "Lange schmale Zylinderform, samtige Oberfläche, fast keine Marmorierung, dunkelrot und mager.",
+        notiz: "Zartestes Stück überhaupt, dafür weniger Eigengeschmack. Nicht überbraten, sonst trocken.",
+      },
+      {
+        de: "Rib Eye",
+        en: "Entrecôte / Hochrippe",
+        zart: 4,
+        garung: "Grillen, Braten",
+        temp: "Medium Rare",
+        herkunft: "Hohe Rippe, vorderer Rücken",
+        erkennen: "Rundliche bis ovale Form, das berühmte Fettauge (Spinalis) sitzt seitlich oben, starke Marmorierung im ganzen Stück.",
+        notiz: "Das Steak mit dem berühmten Fettauge in der Mitte. Maximaler Geschmack durch Marmorierung.",
+      },
+      {
+        de: "Roastbeef",
+        en: "Striploin / NY Strip",
+        zart: 4,
+        garung: "Grillen, Braten",
+        temp: "Medium Rare",
+        herkunft: "Hinterer Rücken, über der Hüfte",
+        erkennen: "Längliche rechteckige Form, dicker geschlossener Fettrand an einer Längsseite, feine gleichmäßige Marmorierung.",
+        notiz: "Klassisches Steakhouse Steak. Fester Biss, klarer Rindergeschmack, schöner Fettrand.",
+      },
+      {
+        de: "T Bone & Porterhouse",
+        en: "T Bone / Porterhouse",
+        zart: 5,
+        garung: "Grillen",
+        temp: "Medium Rare",
+        herkunft: "Übergang Roastbeef zu Filet, mit Knochen",
+        erkennen: "T förmiger Knochen in der Mitte, größerer Striploin Anteil auf einer Seite, kleinerer Filet Anteil auf der anderen.",
+        notiz: "Zwei Steaks in einem: Striploin auf der einen, Filet auf der anderen Seite. Porterhouse hat den größeren Filetanteil.",
+      },
+      {
+        de: "Tomahawk",
+        en: "Tomahawk",
+        zart: 4,
+        garung: "Reverse Sear, Grillen",
+        temp: "Medium Rare",
+        herkunft: "Rib Eye mit langem Rippenknochen",
+        erkennen: "Rib Eye Form mit langem freigelegtem Rippenknochen (15 bis 20 cm), erinnert an eine Streitaxt.",
+        notiz: "Show Steak. Geschmacklich Rib Eye, optisch ein Statement. Rückwärts garen, dann kross anbraten.",
+      },
+    ],
+  },
+  steak: {
+    label: "Steakklassiker",
+    sub: "Solide Allrounder",
+    cuts: [
+      {
+        de: "Rumpsteak",
+        en: "Sirloin",
+        zart: 3,
+        garung: "Kurzbraten",
+        temp: "Medium Rare bis Medium",
+        herkunft: "Hinterviertel, Hüftbereich",
+        erkennen: "Rechteckig kompakte Form, charakteristisch dicker durchgehender Fettrand an einer Seite, festes dunkelrotes Fleisch.",
+        notiz: "Deutscher Klassiker. Fettrand vor dem Braten einschneiden, sonst wölbt sich das Steak.",
+      },
+      {
+        de: "Hüftsteak",
+        en: "Top Sirloin",
+        zart: 3,
+        garung: "Kurzbraten, Grillen",
+        temp: "Medium Rare",
+        herkunft: "Hüfte, hinterer Rücken",
+        erkennen: "Eher rundliche oder ovale Form, sehr mager, kaum Fettrand, dunkelrot mit feinen Sehnen.",
+        notiz: "Mageres Steak mit gutem Geschmack. Preis Leistung sehr stark.",
+      },
+      {
+        de: "Bürgermeisterstück",
+        en: "Tri Tip",
+        zart: 4,
+        garung: "Niedrig garen, Grillen",
+        temp: "Medium Rare",
+        herkunft: "Hüfte, dreieckiger Muskel",
+        erkennen: "Deutlich dreieckige flache Form, ein Ende dicker und spitz zulaufend, sichtbare Fasern verlaufen schräg.",
+        notiz: "Auch Pastorenstück genannt. Hat es früher der Pfarrer behalten. Im Ganzen garen, gegen die Faser schneiden.",
+      },
+      {
+        de: "Picanha",
+        en: "Tafelspitz mit Fettdeckel",
+        zart: 4,
+        garung: "Grillen, Churrasco",
+        temp: "Medium Rare",
+        herkunft: "Hüftdeckel mit kompletter Fettschicht",
+        erkennen: "Dreiecksform mit dicker (2 bis 3 cm) durchgehender weißer Fettkappe auf einer Seite, darunter intensiv rotes Fleisch.",
+        notiz: "Das brasilianische Lieblingsstück. Fettdeckel macht den Geschmack. In dicken C förmigen Scheiben grillen.",
+      },
+    ],
+  },
+  special: {
+    label: "Specialty Cuts",
+    sub: "Geheimtipps mit Charakter",
+    cuts: [
+      {
+        de: "Flank Steak",
+        en: "Bavette / Flanke",
+        zart: 3,
+        garung: "Scharf grillen",
+        temp: "Medium Rare",
+        herkunft: "Bauchlappen, hinten",
+        erkennen: "Flach, lang und breit (ca. 30 cm), sehr deutliche lange parallele Fasern in eine Richtung, kaum Fett.",
+        notiz: "Intensiver Geschmack, lange Fasern. Unbedingt quer zur Faser in dünne Scheiben schneiden.",
+      },
+      {
+        de: "Skirt Steak",
+        en: "Saumfleisch",
+        zart: 3,
+        garung: "Sehr heiß und kurz",
+        temp: "Medium Rare",
+        herkunft: "Zwischen Brust und Bauch, Zwerchfellpfeiler",
+        erkennen: "Sehr langes schmales bandförmiges Stück (40 bis 60 cm), dünn und mit groben sichtbaren Querfasern, fast wie ein dickes Band.",
+        notiz: "Klassiker für Fajitas. Riesiger Geschmack, marinieren lohnt sich. Niemals durchbraten.",
+      },
+      {
+        de: "Hanger Steak",
+        en: "Onglet / Nierenzapfen",
+        zart: 3,
+        garung: "Kurzbraten",
+        temp: "Medium Rare",
+        herkunft: "Innerer Zwerchfellpfeiler, hängt am Zwerchfell",
+        erkennen: "Zwei lange Muskelstränge entlang einer dicken Mittelsehne, sehr dunkles fast schon bräunlich-rotes Fleisch.",
+        notiz: "Bistro Klassiker in Frankreich. Kraftvoller, fast leberartiger Geschmack. Mittelsehne entfernen.",
+      },
+      {
+        de: "Flat Iron",
+        en: "Schulterscharrel",
+        zart: 4,
+        garung: "Grillen, Kurzbraten",
+        temp: "Medium Rare",
+        herkunft: "Schulter, oberhalb des Schulterblatts",
+        erkennen: "Rechteckig flach mit gleichmäßiger Dicke (wie ein Bügeleisen, daher der Name), längs eine deutliche Mittelsehne im rohen Stück.",
+        notiz: "Nach Filet das zweitzarteste Stück vom Rind. Mittelsehne muss entfernt werden, Metzger fragen.",
+      },
+      {
+        de: "Denver Cut",
+        en: "Denver",
+        zart: 4,
+        garung: "Grillen",
+        temp: "Medium Rare",
+        herkunft: "Schulter, gegenüberliegender Muskel zum Flat Iron",
+        erkennen: "Länglich kompakt, deutlich dicker als Flat Iron, intensive feine Marmorierung über die ganze Fläche.",
+        notiz: "Schöne Marmorierung, super zart. In Deutschland noch ein Geheimtipp.",
+      },
+    ],
+  },
+  schmor: {
+    label: "Schmorstücke",
+    sub: "Lange Garzeit, riesiger Lohn",
+    cuts: [
+      {
+        de: "Brisket",
+        en: "Rinderbrust",
+        zart: 2,
+        garung: "Smoken, Schmoren (10 bis 14 Std)",
+        temp: "Kerntemperatur 92 bis 96°C",
+        herkunft: "Brust, vorne unten",
+        erkennen: "Großes flaches Stück (4 bis 7 kg), zwei Muskeln (flacher Flat + dickerer Point) durch eine Fettschicht getrennt, dicke Fettkappe oben.",
+        notiz: "Königsdisziplin im BBQ. Geduld ist alles. Punkt erreichen, an dem Kollagen zu Gelatine wird.",
+      },
+      {
+        de: "Beinscheibe",
+        en: "Ossobuco",
+        zart: 2,
+        garung: "Schmoren (2 bis 3 Std)",
+        temp: "Niedrig und langsam",
+        herkunft: "Hinterhaxe, mit Markknochen",
+        erkennen: "Runde Scheibe mit weißem Markknochen in der Mitte, drumherum Fleisch von Bindegewebe und Silberhaut umschlossen.",
+        notiz: "Italienischer Klassiker. Mark im Knochen ist die Belohnung. Mit Gremolata servieren.",
+      },
+      {
+        de: "Tafelspitz",
+        en: "Tri Tip Cap",
+        zart: 3,
+        garung: "Sieden, Schmoren",
+        temp: "85°C im Sud ziehen lassen",
+        herkunft: "Hüfte, dreieckig",
+        erkennen: "Dreieckig spitz zulaufend mit dünner Fettauflage, ähnlich Picanha aber kompakter und mit dünnerer Fettkappe.",
+        notiz: "Wiener Klassiker. In klarer Brühe gegart, mit Apfelkren und Schnittlauchsoße.",
+      },
+      {
+        de: "Rinderbacke",
+        en: "Beef Cheek",
+        zart: 2,
+        garung: "Schmoren (3 bis 4 Std)",
+        temp: "Niedrig und langsam",
+        herkunft: "Kaumuskel der Backe",
+        erkennen: "Rundlich kompaktes Stück (ca. faustgroß), dunkelrot mit deutlich sichtbaren silbrigen Sehnen und Bindegewebsschichten.",
+        notiz: "Stark beanspruchter Muskel, deshalb viel Bindegewebe. Schmilzt nach langer Garzeit butterzart.",
+      },
+      {
+        de: "Schulter / Bug",
+        en: "Chuck",
+        zart: 2,
+        garung: "Schmoren, Smoken",
+        temp: "Kerntemperatur ca. 90°C",
+        herkunft: "Vorderer Bereich, Schulter",
+        erkennen: "Großes unregelmäßig geformtes Stück mit verschiedenen Muskelgruppen, sichtbare Bindegewebsstränge und Fetteinlagerungen durchziehen das Fleisch.",
+        notiz: "Sauerbraten, Gulasch, Pulled Beef. Vielseitiger geht es nicht.",
+      },
+    ],
+  },
+  andere: {
+    label: "Andere rote Sorten",
+    sub: "Lamm, Kalb, Wild",
+    cuts: [
+      {
+        de: "Lammkarree",
+        en: "Rack of Lamb",
+        zart: 5,
+        garung: "Braten, Sous Vide",
+        temp: "Medium Rare (54°C Kern)",
+        herkunft: "Lamm, Rücken mit Rippen",
+        erkennen: "Reihe von 6 bis 8 Rippenknochen mit Fleischbogen oben, Knochen meist freigeputzt (French Trim), elegantes festliches Aussehen.",
+        notiz: "Mit Kräuterkruste klassisch. Kurz scharf anbraten, im Ofen ziehen lassen.",
+      },
+      {
+        de: "Lammkeule",
+        en: "Leg of Lamb",
+        zart: 3,
+        garung: "Braten, Niedrig garen",
+        temp: "Medium (58 bis 60°C)",
+        herkunft: "Lamm, Hinterkeule",
+        erkennen: "Große keulenförmige Form (1,5 bis 2,5 kg), klar als Bein erkennbar, oft mit Knochen, helle Fettkappe außen, rosa-rotes Fleisch.",
+        notiz: "Ostern Klassiker. Mit Knoblauch und Rosmarin spicken. Gegen die Faser tranchieren.",
+      },
+      {
+        de: "Kalbsfilet",
+        en: "Veal Tenderloin",
+        zart: 5,
+        garung: "Kurzbraten, Sous Vide",
+        temp: "Rosa (58°C)",
+        herkunft: "Kalb, Innenfilet",
+        erkennen: "Wie Rinderfilet in Form, aber deutlich kleiner und heller (zartrosa statt dunkelrot), sehr feine Struktur.",
+        notiz: "Sehr zart und mild. Vorsicht beim Garen, Kalb wird schnell trocken. Butter nachhelfen lassen.",
+      },
+      {
+        de: "Kalbsschnitzel",
+        en: "Veal Cutlet",
+        zart: 4,
+        garung: "Wiener Schnitzel braten",
+        temp: "Goldbraun in der Pfanne",
+        herkunft: "Kalb, Oberschale aus der Keule",
+        erkennen: "Sehr dünn (3 bis 4 mm) plattiert, fast weiß bis hellrosa, große flache Fläche, gleichmäßige Dicke.",
+        notiz: "Original Wiener Schnitzel. Schwimmend in Butterschmalz, soufflieren lassen.",
+      },
+      {
+        de: "Hirschrücken",
+        en: "Venison Saddle",
+        zart: 5,
+        garung: "Braten, Niedrig garen",
+        temp: "Medium Rare (54°C)",
+        herkunft: "Hirsch, Rücken",
+        erkennen: "Langer schmaler Strang, sehr dunkelrot bis fast burgunderfarben, kaum sichtbare Marmorierung, dichte feine Faser.",
+        notiz: "König unter dem Wild. Sehr mager, daher nicht überraschen. Mit Wacholder und Preiselbeeren.",
+      },
+      {
+        de: "Rehrücken",
+        en: "Roe Deer Saddle",
+        zart: 5,
+        garung: "Kurz braten",
+        temp: "Medium Rare",
+        herkunft: "Reh, Rücken",
+        erkennen: "Wie Hirschrücken aber deutlich kleiner und feiner (oft nur 200 bis 400 g pro Strang), dunkelrot mit sehr zarter Struktur.",
+        notiz: "Feinster Wildgeschmack, sehr fettarm. Glücksgriff im Herbst.",
+      },
+    ],
+  },
+};
+
+const categories = Object.keys(data);
+
+function StarRating({ value }) {
+  return (
+    <div className="flex gap-0.5">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <span
+          key={i}
+          className={i <= value ? "text-[#c8102e]" : "text-stone-700"}
+          style={{ fontSize: "11px" }}
+        >
+          ●
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function App() {
+  const [active, setActive] = useState(() => {
+    const h = decodeURIComponent(location.hash.slice(1));
+    return categories.includes(h) ? h : "edel";
+  });
+  const [openCard, setOpenCard] = useState(null);
+
+  /* Deep-Link aus dem Hub: #edel, #steak, #special, #schmor, #andere */
+  useEffect(() => {
+    if (decodeURIComponent(location.hash.slice(1)) !== active) {
+      history.replaceState(null, "", "#" + active);
+    }
+  }, [active]);
+  useEffect(() => {
+    const onHash = () => {
+      const h = decodeURIComponent(location.hash.slice(1));
+      if (categories.includes(h)) setActive(h);
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  return (
+    <div
+      className="min-h-screen w-full"
+      style={{
+        background:
+          "radial-gradient(ellipse at top, #2a1a14 0%, #1a0f0a 50%, #0d0705 100%)",
+        fontFamily: "'DM Sans', system-ui, sans-serif",
+      }}
+    >
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=DM+Sans:wght@400;500;600&display=swap');
+        .display { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
+        .grain::before {
+          content: '';
+          position: absolute; inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+          opacity: 0.08;
+          pointer-events: none;
+          mix-blend-mode: overlay;
+        }
+        .card-enter { animation: rise 0.35s ease-out; }
+        @keyframes rise {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
+      <div className="grain relative max-w-3xl mx-auto px-5 py-8">
+        <header className="mb-8">
+          <div
+            className="text-[10px] tracking-[0.3em] uppercase mb-3"
+            style={{ color: "#c8102e" }}
+          >
+            Cuts Atlas
+          </div>
+          <h1
+            className="display text-4xl leading-none mb-2"
+            style={{ color: "#f5e6d3", fontWeight: 600 }}
+          >
+            Rind & rotes Fleisch
+          </h1>
+          <p
+            className="text-sm"
+            style={{ color: "#a89580" }}
+          >
+            Tippe ein Stück an für Details, Zubereitung und Tipps.
+          </p>
+        </header>
+
+        <div className="flex gap-1.5 mb-6 overflow-x-auto pb-2 -mx-5 px-5">
+          {categories.map((key) => {
+            const cat = data[key];
+            const isActive = active === key;
+            return (
+              <button
+                key={key}
+                onClick={() => {
+                  setActive(key);
+                  setOpenCard(null);
+                }}
+                className="flex-shrink-0 px-3.5 py-2 rounded-full text-xs font-medium transition-all whitespace-nowrap"
+                style={{
+                  background: isActive ? "#c8102e" : "rgba(245, 230, 211, 0.06)",
+                  color: isActive ? "#fff" : "#a89580",
+                  border: `1px solid ${isActive ? "#c8102e" : "rgba(245, 230, 211, 0.1)"}`,
+                }}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mb-6">
+          <div
+            className="display text-2xl mb-1"
+            style={{ color: "#f5e6d3", fontWeight: 600, fontStyle: "italic" }}
+          >
+            {data[active].sub}
+          </div>
+          <div
+            className="h-px w-12"
+            style={{ background: "#c8102e" }}
+          />
+        </div>
+
+        <div className="space-y-2.5">
+          {data[active].cuts.map((cut, idx) => {
+            const isOpen = openCard === idx;
+            return (
+              <div
+                key={cut.de}
+                className="card-enter rounded-xl overflow-hidden transition-all"
+                style={{
+                  background: isOpen
+                    ? "rgba(245, 230, 211, 0.08)"
+                    : "rgba(245, 230, 211, 0.04)",
+                  border: `1px solid ${isOpen ? "rgba(200, 16, 46, 0.4)" : "rgba(245, 230, 211, 0.08)"}`,
+                }}
+              >
+                <button
+                  onClick={() => setOpenCard(isOpen ? null : idx)}
+                  className="w-full px-4 py-3.5 flex items-center justify-between gap-3 text-left"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div
+                      className="display text-lg leading-tight"
+                      style={{ color: "#f5e6d3", fontWeight: 600 }}
+                    >
+                      {cut.de}
+                    </div>
+                    <div
+                      className="text-[11px] mt-0.5 truncate"
+                      style={{ color: "#8a7560" }}
+                    >
+                      {cut.en}
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                    <StarRating value={cut.zart} />
+                    <div
+                      className="text-[10px] uppercase tracking-wider"
+                      style={{ color: "#8a7560" }}
+                    >
+                      Zartheit
+                    </div>
+                  </div>
+                </button>
+
+                {isOpen && (
+                  <div
+                    className="px-4 pb-4 pt-1 space-y-3 text-sm"
+                    style={{ color: "#d4c0a8" }}
+                  >
+                    <div
+                      className="h-px w-full mb-3"
+                      style={{ background: "rgba(245, 230, 211, 0.1)" }}
+                    />
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <div
+                          className="uppercase tracking-wider mb-1"
+                          style={{ color: "#8a7560", fontSize: "10px" }}
+                        >
+                          Garmethode
+                        </div>
+                        <div style={{ color: "#f5e6d3" }}>{cut.garung}</div>
+                      </div>
+                      <div>
+                        <div
+                          className="uppercase tracking-wider mb-1"
+                          style={{ color: "#8a7560", fontSize: "10px" }}
+                        >
+                          Garstufe
+                        </div>
+                        <div style={{ color: "#f5e6d3" }}>{cut.temp}</div>
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        className="uppercase tracking-wider mb-1"
+                        style={{ color: "#8a7560", fontSize: "10px" }}
+                      >
+                        Woran erkennen
+                      </div>
+                      <div style={{ color: "#f5e6d3" }} className="text-xs leading-relaxed">
+                        {cut.erkennen}
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        className="uppercase tracking-wider mb-1"
+                        style={{ color: "#8a7560", fontSize: "10px" }}
+                      >
+                        Herkunft am Tier
+                      </div>
+                      <div style={{ color: "#f5e6d3" }} className="text-xs">
+                        {cut.herkunft}
+                      </div>
+                    </div>
+                    <div
+                      className="rounded-lg p-3 text-xs leading-relaxed"
+                      style={{
+                        background: "rgba(200, 16, 46, 0.08)",
+                        borderLeft: "2px solid #c8102e",
+                        color: "#e8d4bc",
+                      }}
+                    >
+                      {cut.notiz}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <footer
+          className="mt-10 pt-6 text-center text-[10px] uppercase tracking-[0.25em]"
+          style={{
+            color: "#5a4a3a",
+            borderTop: "1px solid rgba(245, 230, 211, 0.06)",
+          }}
+        >
+          Zartheit · 5 = butterzart · 1 = lange schmoren
+        </footer>
+      </div>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+</script>
+</body>
+</html>

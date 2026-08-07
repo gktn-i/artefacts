@@ -1,0 +1,15 @@
+{
+  "name": "artefakte",
+  "private": true,
+  "type": "module",
+  "description": "Nachschlagewerke für Werkstatt, Küche und Homelab — bib.gktn.dev",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "pagefind": "^1.3.0"
+  }
+}
