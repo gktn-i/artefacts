@@ -1,62 +1,64 @@
 # Artefakte
 
-Statische Nachschlagewerke, gehostet auf <https://bib.gktn.dev> (GitHub Pages, kein Build-Schritt).
+Nachschlagewerke für Werkstatt, Küche und Homelab — <https://bib.gktn.dev>.
 
-## Aufbau
+Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
+Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
 
-Drei Ebenen, mehr nicht:
+## Struktur
 
 ```
-index.html          Übersicht über alle Hubs
-  hub-<id>.html     ein Hub pro Lebensbereich, gruppiert seine Module in Bereiche
-    <modul>.html    das eigentliche Artefakt
+src/data/registry.json     EINZIGE Datenquelle: Hubs → Bereiche → Module → Abschnitte
+src/content/<modul>/       native Inhalte, eine .astro-Datei pro Abschnitt
+src/pages/index.astro      Startseite
+src/pages/[slug].astro     Hub-Seiten + native Modulseiten (URL bleibt <name>.html)
+src/layouts/, components/  Base-Layout, Chrome-Leiste, Hub-Karte
+src/styles/site.css        Design-Tokens, Hub-/Modul-Layout, Content-System
+public/<modul>.html        Legacy-Artefakte (eigenständige HTML-Monolithen)
+public/assets/             chrome.css + shell.js (Legacy-Brücke) + palette.js (Suche, geteilt)
 ```
 
-| Hub | Datei | Bereiche |
-|---|---|---|
-| 🔧 Werkstatt | `hub-werkstatt.html` | Elektronik · Mechanik & Werkzeug · 3D-Druck |
-| 🍳 Küche | `hub-kueche.html` | Grundlagen & Technik · Fleisch |
-| 🖥️ Homelab | `hub-homelab.html` | Server & Betrieb |
+Drei Ebenen: **Index → Hub → Modul.** Hubs: 🔧 Werkstatt · 🍳 Küche · 🖥️ Homelab.
 
-## Gemeinsame Teile
+## Zwei Sorten Module
 
-| Datei | Zweck |
+**Nativ** (`src/content/<id>/`): Inhalte in kleinen Dateien, ein Abschnitt = eine Datei.
+Layout, Sidebar, Hash-Router, Suche und Dark Mode kommen vom System. Ein Modul ist
+nativ, sobald sein Content-Ordner existiert — der Build prüft, dass Registry-Abschnitte
+und Dateien deckungsgleich sind.
+
+**Legacy** (`public/<id>.html`): unangetastete Monolithen mit eigenem Design. Sie
+bekommen Chrome-Leiste + Suche zur Laufzeit über `shell.js`/`palette.js` injiziert;
+`/assets/registry.js` wird beim Build aus `registry.json` generiert.
+
+Migration = Inhalte nach `src/content/<id>/<hash>.astro` zerlegen, Legacy-Datei
+löschen. URLs und `#hash`-Deep-Links bleiben identisch (`build.format: "file"`).
+
+## Arbeiten
+
+```
+npm install
+npm run dev        # Dev-Server (ohne Volltextindex)
+npm run build      # dist/ inkl. Pagefind-Index
+npm run preview
+```
+
+Neues Modul: Eintrag in `registry.json` + Content-Ordner (nativ) oder HTML in
+`public/` (Legacy). Index, Hub-Seite, Breadcrumb, Suche, verwandte Module ziehen nach.
+
+**Verwandte Module:** `related: ["id", …]` in der Registry, einseitig gepflegt,
+wird symmetrisch aufgelöst und quer über die Hubs angezeigt.
+
+**Suche (⌘K):** Registry-Treffer (Hubs/Module/Abschnitte) sofort, Volltext aus dem
+Pagefind-Index nachgeladen — auch über die Legacy-Seiten. Nur `dist` nach `npm run
+build` enthält den Index; im Dev-Server gibt es nur die Registry-Treffer.
+
+## Stand der Migration
+
+| Modul | Status |
 |---|---|
-| `assets/registry.js` | **Einzige Datenquelle.** Hubs, Bereiche, Module, Abschnitte. |
-| `assets/chrome.css` | Kopfleiste + globale Suche, auf jeder Seite. Alles unter `hbx-` gekapselt. |
-| `assets/shell.js` | Baut Breadcrumb, Modul-Wechsler, Suche und die Nachbar-Leiste am Seitenende. |
-| `assets/hub.css` | Design der Hub- und Index-Seiten (nicht in den Artefakten geladen). |
-| `assets/hubpage.js` | Rendert eine Hub-Seite aus der Registry. |
-| `assets/indexpage.js` | Rendert die Startseite aus der Registry. |
+| Küchen-Basics, Perfektes Steak | ✅ nativ |
+| übrige 11 (`public/*.html`) | Legacy, Migration modulweise |
 
-Die Artefakte behalten ihr eigenes Design. Sie binden nur das Chrome ein — die drei
-Zeilen stehen direkt vor `</head>`, also **nach** dem eigenen `<style>`:
-
-```html
-<link rel="stylesheet" href="assets/chrome.css">
-<script defer src="assets/registry.js"></script>
-<script defer src="assets/shell.js"></script>
-```
-
-## Deep-Links
-
-Jeder Tab bzw. jede Ansicht eines Artefakts ist über `datei.html#abschnitt` direkt
-erreichbar; Hub-Seiten und Suche verlinken ausschließlich so. Wer ein Artefakt mit
-Tabs ergänzt, hängt die Umschaltung an `location.hash` (Muster: `history.replaceState`
-beim Wechsel, `hashchange`-Listener, Hash-Auswertung beim Start).
-
-## Neues Modul aufnehmen
-
-1. HTML-Datei ins Wurzelverzeichnis legen, die drei Chrome-Zeilen einbinden.
-2. Eintrag in `assets/registry.js` im passenden `areas[].modules[]` ergänzen —
-   `sections` sind die Tabs mit ihrem Hash.
-3. Fertig. Index, Hub-Seite, Breadcrumb, Modul-Wechsler und Suche ziehen automatisch nach.
-
-Feste Themes: Artefakte ohne `prefers-color-scheme` bekommen in der Registry ein
-`theme: "dark"` bzw. `"light"`, damit die Kopfleiste dazu passt.
-
-## Bekannte Baustelle
-
-`fleisch-cuts-explorer.html` lädt React, ReactDOM und Babel zur Laufzeit von unpkg.
-Ohne Netz oder bei CDN-Ausfall bleibt die Seite leer. Alle anderen Artefakte kommen
-ohne externe Abhängigkeiten aus (nur Google Fonts, mit Fallback).
+`fleisch-cuts-explorer.html` lädt React/Babel zur Laufzeit von unpkg — einziges
+Modul mit externer Abhängigkeit; beim Migrieren neu bauen statt zerlegen.

@@ -1,0 +1,64 @@
+---
+/* ============================================================================
+   Grundgerüst jeder Astro-Seite: Fonts, Chrome-Leiste, Theme, Fußzeile.
+   Die Leiste wird hier serverseitig gerendert — shell.js läuft nur noch auf
+   den Legacy-Artefakten in public/.
+   ========================================================================== */
+import Chrome from "../components/Chrome.astro";
+import "../styles/site.css";
+
+interface Props {
+  title: string;
+  description: string;
+  hub?: any; /* Hub-Objekt aus lib/registry — färbt Akzent + Breadcrumb */
+  mod?: any; /* Modul-Objekt, wenn die Seite ein Modul ist */
+}
+const { title, description, hub, mod } = Astro.props;
+
+const accent = hub ? hub.accent : { l: "#0e7c8c", d: "#38c6d9" };
+const accCss =
+  `html[data-acc]{--c:${accent.l};--hbx-c:${accent.l}}` +
+  `html[data-acc][data-hbx-theme="dark"]{--c:${accent.d};--hbx-c:${accent.d}}`;
+---
+
+<!doctype html>
+<html lang="de" data-acc>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/chrome.css" />
+    <style is:inline set:html={accCss}></style>
+    <script is:inline>
+      /* Theme vor dem ersten Paint setzen, damit nichts aufblitzt. */
+      (function () {
+        var q = matchMedia("(prefers-color-scheme: dark)");
+        function a() {
+          document.documentElement.setAttribute("data-hbx-theme", q.matches ? "dark" : "light");
+        }
+        a();
+        if (q.addEventListener) q.addEventListener("change", a);
+      })();
+    </script>
+    <script is:inline defer src="/assets/registry.js"></script>
+    <script is:inline defer src="/assets/palette.js"></script>
+  </head>
+  <body class="hbx-on native">
+    <Chrome hub={hub} mod={mod} />
+    <slot />
+    <footer class="site">
+      <div class="wrap">
+        <span><a href="index.html">← Alle Hubs</a></span>
+        <span>Struktur in <code>src/data/registry.json</code> · Inhalte in <code>src/content/</code></span>
+      </div>
+    </footer>
+  </body>
+</html>

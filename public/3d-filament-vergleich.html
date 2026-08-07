@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D-Druck Filament & Düsen Vergleich</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a1a;background:#fff;padding:1.5rem}
+@media(prefers-color-scheme:dark){body{background:#1a1a1a;color:#e0e0e0}}
+h1{font-size:20px;font-weight:500;margin-bottom:1rem}
+.tabs{display:flex;gap:0;margin-bottom:1.2rem;border-bottom:2px solid #e0e0e0}
+.tab{font-size:14px;padding:8px 18px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-2px;font-weight:500;transition:all .15s}
+.tab:hover{color:#1a1a1a}
+.tab.active{color:#0C447C;border-bottom-color:#0C447C}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
+.controls button{font-size:12px;padding:4px 10px;cursor:pointer;background:transparent;border:1px solid #ccc;border-radius:8px;color:#666;transition:all .15s}
+.controls button.active{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
+.controls button:hover{background:#f5f5f5}
+.search{padding:6px 10px;font-size:13px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;width:220px;margin-bottom:.5rem}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:1050px}
+th{text-align:left;padding:8px 6px;font-weight:500;font-size:11.5px;color:#888;border-bottom:1px solid #ccc;cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:#1a1a1a}
+th .ar{font-size:10px;margin-left:2px}
+td{padding:7px 6px;border-bottom:1px solid #eee;vertical-align:top}
+tr:hover td{background:#f9f9f9}
+.cb{display:inline-block;font-size:11px;padding:2px 7px;border-radius:8px;font-weight:500}
+.cat-standard .cb{background:#E6F1FB;color:#0C447C}
+.cat-engineering .cb{background:#EEEDFE;color:#3C3489}
+.cat-flexible .cb{background:#E1F5EE;color:#085041}
+.cat-composite .cb{background:#FAECE7;color:#712B13}
+.cat-specialty .cb{background:#FAEEDA;color:#633806}
+.cat-highperf .cb{background:#FCEBEB;color:#791F1F}
+.cat-support .cb{background:#F1EFE8;color:#444441}
+.bar{height:6px;border-radius:3px;background:#e8e8e8;position:relative;min-width:60px}
+.bar-fill{height:100%;border-radius:3px;position:absolute;left:0;top:0}
+.bar-str .bar-fill{background:#534AB7}
+.bar-tmp .bar-fill{background:#E24B4A}
+.bar-flex .bar-fill{background:#1D9E75}
+.bar-ease .bar-fill{background:#378ADD}
+.bar-therm .bar-fill{background:#E8933A}
+.bar-wear .bar-fill{background:#8B5CF6}
+.bar-flow .bar-fill{background:#378ADD}
+.val{font-size:11px;color:#999;margin-top:1px}
+.dr td{padding:12px 8px;background:#f5f5f3;font-size:12.5px;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tag{font-size:11px;padding:2px 6px;border-radius:8px;background:#e8e8e5;color:#666}
+.tag-pro{background:#E1F5EE;color:#085041}
+.tag-con{background:#FCEBEB;color:#791F1F}
+.uc{margin-top:8px;padding:8px 10px;border-radius:8px;border:1px solid #e0e0e0;background:#fff}
+.uc-title{font-size:11.5px;font-weight:500;color:#888;margin-bottom:4px}
+.uc-list{font-size:12.5px;color:#1a1a1a;line-height:1.8}
+.count{font-size:12px;color:#888;margin-bottom:8px}
+.price{font-weight:500;white-space:nowrap}
+.price-low{color:#1D9E75}
+.price-mid{color:#B08C18}
+.price-high{color:#E24B4A}
+.footnote{font-size:11px;color:#999;margin-top:10px}
+.section-label{font-size:14px;font-weight:500;color:#0C447C;margin:0.8rem 0 0.5rem;padding-bottom:4px}
+.section-divider{border-top:1px solid #e0e0e0;margin:1.2rem 0}
+@media(prefers-color-scheme:dark){.section-label{color:#B5D4F4}.section-divider{border-top-color:#444}}
+.nozzle-cat .cb{background:#E6F1FB;color:#0C447C}
+.nozzle-cat-premium .cb{background:#FAEEDA;color:#633806}
+.nozzle-cat-hf .cb{background:#E1F5EE;color:#085041}
+.nozzle-cat-special .cb{background:#EEEDFE;color:#3C3489}
+@media(prefers-color-scheme:dark){
+.search{background:#2a2a2a;border-color:#444;color:#e0e0e0}
+.tabs{border-bottom-color:#444}
+.tab{color:#888}
+.tab:hover{color:#e0e0e0}
+.tab.active{color:#B5D4F4;border-bottom-color:#B5D4F4}
+.controls button{border-color:#555;color:#aaa}
+.controls button:hover{background:#333}
+.controls button.active{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+th{color:#999;border-bottom-color:#444}
+th:hover{color:#e0e0e0}
+td{border-bottom-color:#333}
+tr:hover td{background:#252525}
+.bar{background:#444}
+.dr td{background:#252525}
+.tag{background:#333;color:#aaa}
+.tag-pro{background:#04342C;color:#9FE1CB}
+.tag-con{background:#501313;color:#F7C1C1}
+.uc{background:#2a2a2a;border-color:#444}
+.uc-list{color:#e0e0e0}
+.price-low{color:#3ec99e}
+.price-mid{color:#d4a82a}
+.price-high{color:#f06a6a}
+.cat-standard .cb{background:#042C53;color:#B5D4F4}
+.cat-engineering .cb{background:#26215C;color:#CECBF6}
+.cat-flexible .cb{background:#04342C;color:#9FE1CB}
+.cat-composite .cb{background:#4A1B0C;color:#F5C4B3}
+.cat-specialty .cb{background:#412402;color:#FAC775}
+.cat-highperf .cb{background:#501313;color:#F7C1C1}
+.cat-support .cb{background:#2C2C2A;color:#D3D1C7}
+.nozzle-cat .cb{background:#042C53;color:#B5D4F4}
+.nozzle-cat-premium .cb{background:#412402;color:#FAC775}
+.nozzle-cat-hf .cb{background:#04342C;color:#9FE1CB}
+.nozzle-cat-special .cb{background:#26215C;color:#CECBF6}
+}
+</style>
+<link rel="stylesheet" href="assets/chrome.css">
+<script defer src="assets/registry.js"></script>
+<script defer src="assets/shell.js"></script>
+<script defer src="assets/palette.js"></script>
+</head>
+<body data-pagefind-body>
+<h1>3D-Druck Filament & D&uuml;sen Vergleich</h1>
+<div class="tabs">
+<div class="tab active" onclick="switchTab('filament')">&#9670; Filamente</div>
+<div class="tab" onclick="switchTab('nozzle')">&#9670; D&uuml;sen / Nozzles</div>
+<div class="tab" onclick="switchTab('infill')">&#9670; Infill-Muster</div>
+</div>
+
+<!-- ==================== TAB 1: FILAMENTE ==================== -->
+<div class="tab-content active" id="tab-filament">
+<input class="search" type="text" placeholder="Filament oder Use Case suchen..." id="q">
+<div class="controls" id="cats"></div>
+<div class="count" id="count"></div>
+<div class="tbl-wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+<div class="footnote">* Ungef&auml;hre Richtpreise pro kg Spule (Stand Mitte 2026). Tats&auml;chliche Preise variieren je nach Hersteller, Farbe und H&auml;ndler.</div>
+</div>
+
+<!-- ==================== TAB 2: DÜSEN ==================== -->
+<div class="tab-content" id="tab-nozzle">
+<div class="section-label">D&uuml;sengr&ouml;&szlig;en</div>
+<div class="count" id="scount"></div>
+<div class="tbl-wrap"><table><thead id="sthead"></thead><tbody id="stbody"></tbody></table></div>
+<div class="section-divider"></div>
+<div class="section-label">D&uuml;senmaterialien</div>
+<input class="search" type="text" placeholder="D&uuml;sentyp, Material oder Use Case suchen..." id="qn">
+<div class="controls" id="ncats"></div>
+<div class="count" id="ncount"></div>
+<div class="tbl-wrap"><table><thead id="nthead"></thead><tbody id="ntbody"></tbody></table></div>
+<div class="footnote">* Preise f&uuml;r einzelne D&uuml;sen (Stand Mitte 2026). Hotend-Assemblies mit integrierter D&uuml;se kosten deutlich mehr.</div>
+</div>
+
+<!-- ==================== TAB 3: INFILL ==================== -->
+<div class="tab-content" id="tab-infill">
+<input class="search" type="text" placeholder="Infill-Muster oder Use Case suchen..." id="qi">
+<div class="controls" id="icats"></div>
+<div class="count" id="icount"></div>
+<div class="tbl-wrap"><table><thead id="ithead"></thead><tbody id="itbody"></tbody></table></div>
+<div class="footnote">&#9733; = Top-Empfehlung. Isotropie = gleichm&auml;&szlig;ige Festigkeit in alle Richtungen. Einstellbar unter Bambu Studio: Process &rarr; Strength &rarr; Sparse Infill Pattern.</div>
+</div>
+
+<script>
+// ==================== TAB SWITCHING ====================
+const TABKEYS=['filament','nozzle','infill'];
+function switchTab(t){
+if(TABKEYS.indexOf(t)<0)return;
+document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
+document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
+document.getElementById('tab-'+t).classList.add('active');
+document.querySelectorAll('.tab')[TABKEYS.indexOf(t)].classList.add('active');
+if(decodeURIComponent(location.hash.slice(1))!==t)history.replaceState(null,'','#'+t);
+}
+/* Deep-Link aus dem Hub: #filament, #nozzle, #infill */
+window.addEventListener('hashchange',()=>switchTab(decodeURIComponent(location.hash.slice(1))));
+const fHash=decodeURIComponent(location.hash.slice(1));
+if(TABKEYS.indexOf(fHash)>=0)switchTab(fHash);
+
+// ==================== FILAMENT DATA ====================
+const F=[
+{n:"PLA",cat:"standard",catL:"Standard",tmp:"180\u2013220",bed:"20\u201360",str:4,heat:2,flex:2,ease:10,chem:2,uv:2,pMin:12,pMax:25,desc:"Einfachstes Filament, biobasiert, ideal f\u00fcr Prototypen und Deko.",props:["Biologisch abbaubar","Geruchsarm","Niedrige Schrumpfung"],nozzle:"0.4mm Standard",uc:["Prototypen und Konzeptmodelle","Figuren, Vasen, Deko-Objekte","Architekturmodelle","Cosplay-R\u00fcstungen (nicht mechanisch belastet)","Lehrmittel und Schulprojekte","Geh\u00e4use f\u00fcr Indoor-Elektronik"]},
+{n:"PLA+/PLA Pro",cat:"standard",catL:"Standard",tmp:"200\u2013230",bed:"50\u201360",str:5,heat:3,flex:3,ease:9,chem:2,uv:2,pMin:16,pMax:30,desc:"Verst\u00e4rktes PLA mit besserer Schlagfestigkeit und Layerhaftung.",props:["Bessere Z\u00e4higkeit als PLA","Leicht zu drucken"],nozzle:"0.4mm Standard",uc:["Funktionsprototypen mit Belastung","Spielzeug und Kindersachen","Halterungen und Clips (Indoor)","Cosplay-Teile mit Belastung","Geh\u00e4use f\u00fcr Bastelprojekte"]},
+{n:"PETG",cat:"standard",catL:"Standard",tmp:"220\u2013250",bed:"70\u201380",str:6,heat:5,flex:4,ease:8,chem:6,uv:5,pMin:16,pMax:30,desc:"Guter Allrounder, chemisch best\u00e4ndig, lebensmittelecht m\u00f6glich.",props:["Lebensmittelecht (FDA)","Gute Chemikalienbest\u00e4ndigkeit","Geringe Schrumpfung"],nozzle:"0.4mm Standard",uc:["Lebensmittelbeh\u00e4lter und K\u00fcchenhelfer","Outdoor-Schilder und Halterungen","Mechanische Funktionsteile","Medizinische Schutzvisiere","Aquarien-Zubeh\u00f6r","Werkzeughalter"]},
+{n:"ABS",cat:"engineering",catL:"Engineering",tmp:"220\u2013260",bed:"95\u2013110",str:6,heat:6,flex:4,ease:4,chem:6,uv:3,pMin:15,pMax:28,desc:"Klassiker f\u00fcr mechanische Teile, braucht Einhausung wegen Warping.",props:["Acetongl\u00e4ttbar","Gute Schlagfestigkeit","Warping-anf\u00e4llig"],nozzle:"0.4mm Standard",uc:["LEGO-\u00e4hnliche Bauteile","KFZ-Innenraumteile","Geh\u00e4use f\u00fcr Elektronik","Funktionale Schnappverbindungen","Acetongl\u00e4tten f\u00fcr glatte Oberfl\u00e4chen","Jigs und Vorrichtungen"]},
+{n:"ASA",cat:"engineering",catL:"Engineering",tmp:"235\u2013260",bed:"90\u2013110",str:6,heat:6,flex:4,ease:5,chem:6,uv:8,pMin:20,pMax:35,desc:"UV-best\u00e4ndige Alternative zu ABS, ideal f\u00fcr Au\u00dfenanwendungen.",props:["UV-best\u00e4ndig","Wetterbest\u00e4ndig","Acetongl\u00e4ttbar"],nozzle:"0.4mm Standard",uc:["Gartenger\u00e4te-Halter","Auto-Au\u00dfenteile (Spiegelkappen, Abdeckungen)","Wetterstationen-Geh\u00e4use","Outdoor-Kamera-Halterungen","Solaranlagen-Kabelf\u00fchrungen","Briefkasten-Zubeh\u00f6r"]},
+{n:"PA6/Nylon 6",cat:"engineering",catL:"Engineering",tmp:"240\u2013270",bed:"70\u201390",str:8,heat:7,flex:6,ease:3,chem:7,uv:4,pMin:30,pMax:65,desc:"Sehr z\u00e4h und verschlei\u00dffest, nimmt Feuchtigkeit auf.",props:["Sehr hohe Abriebfestigkeit","Hygroskopisch","Trocknung n\u00f6tig"],nozzle:"0.4mm geh\u00e4rtet empfohlen",uc:["Zahnr\u00e4der und Getriebeteile","Scharniere mit hoher Belastung","Gleitlager und Buchsen","Kabelbinder-Ersatz (belastbar)","Sportger\u00e4te-Teile","Werkzeuggriffe"]},
+{n:"PA12/Nylon 12",cat:"engineering",catL:"Engineering",tmp:"240\u2013270",bed:"70\u201390",str:7,heat:6,flex:7,ease:4,chem:7,uv:4,pMin:35,pMax:70,desc:"Weniger feuchtigkeitsempfindlich als PA6, gute Flexibilit\u00e4t.",props:["Weniger hygroskopisch","Gute Erm\u00fcdungsbest\u00e4ndigkeit"],nozzle:"0.4mm geh\u00e4rtet empfohlen",uc:["Lebende Scharniere (Living Hinges)","Snap-Fit Verbindungen","Rohrleitungs-Clips","Federnde Rastnasen","Outdoor-Befestigungen","Dichtungsringe (nicht chemisch belastet)"]},
+{n:"PA-CF (Nylon Carbon)",cat:"composite",catL:"Composite",tmp:"250\u2013280",bed:"80\u2013100",str:9,heat:8,flex:3,ease:3,chem:7,uv:5,pMin:50,pMax:170,desc:"Carbonfaserverst\u00e4rktes Nylon, extrem steif und leicht.",props:["Sehr hohe Steifigkeit","Leichtbau","Abrasiv"],nozzle:"0.4mm geh\u00e4rteter Stahl Pflicht",uc:["Drohnen-Rahmen und -Arme","Roboter-Strukturteile","CNC-Ersatzteile und Vorrichtungen","Leichtbau-Halterungen (Industrie)","RC-Car Chassis-Teile","Kamera-Gimbal-Teile"]},
+{n:"PA-GF (Nylon Glas)",cat:"composite",catL:"Composite",tmp:"250\u2013280",bed:"80\u2013100",str:8,heat:7,flex:4,ease:3,chem:7,uv:5,pMin:40,pMax:90,desc:"Glasfaserverst\u00e4rktes Nylon, g\u00fcnstiger als CF, weniger spr\u00f6de.",props:["Gute Steifigkeit","Weniger spr\u00f6de als CF","Abrasiv"],nozzle:"0.4mm geh\u00e4rteter Stahl Pflicht",uc:["Motorhalterungen","Strukturelle Geh\u00e4use","Montagewerkzeuge und Lehren","Automotive-Clips und Halter","Pumpengeh\u00e4use-Prototypen","Maschinen-Abdeckungen"]},
+{n:"PETG-CF",cat:"composite",catL:"Composite",tmp:"230\u2013260",bed:"70\u201385",str:7,heat:6,flex:3,ease:5,chem:6,uv:5,pMin:35,pMax:65,desc:"Carbonfaserverst\u00e4rktes PETG, einfacher zu drucken als PA-CF.",props:["Leichter druckbar als PA-CF","Gute Dimensionsstabilit\u00e4t"],nozzle:"0.4mm geh\u00e4rteter Stahl",uc:["Stative und Halterungen","Leichte Werkzeug-Jigs","Geh\u00e4use mit hoher Formstabilit\u00e4t","Drohnen-Zubeh\u00f6r (Einstieg)","Teleskop-Adapter","Schienen und F\u00fchrungen"]},
+{n:"PLA-CF",cat:"composite",catL:"Composite",tmp:"200\u2013230",bed:"50\u201360",str:6,heat:3,flex:2,ease:7,chem:2,uv:2,pMin:25,pMax:50,desc:"Carbon-PLA f\u00fcr steifere Optik/Prototypen, nicht f\u00fcr Last.",props:["Einfach zu drucken","Matte Oberfl\u00e4che","Optisch ansprechend"],nozzle:"0.4mm geh\u00e4rteter Stahl",uc:["Optische Prototypen mit Carbon-Look","Modellbau-Strukturteile","Laptop-St\u00e4nder","Kabelmanagement (steif)","Dekorative Abdeckungen","Messe-/Pr\u00e4sentationsmodelle"]},
+{n:"TPU 95A",cat:"flexible",catL:"Flexibel",tmp:"210\u2013230",bed:"30\u201360",str:5,heat:4,flex:9,ease:5,chem:5,uv:5,pMin:22,pMax:40,desc:"Standard-Flex, Shore 95A, f\u00fcr Schutzh\u00fcllen, Dichtungen.",props:["Gute Elastizit\u00e4t","Abriebfest","Direkt-Extruder empfohlen"],nozzle:"0.4mm Standard, langsam",uc:["Handyh\u00fcllen und Tablet-Bumper","Vibrationsd\u00e4mpfer","Schuhsohlen-Prototypen","Dichtungen und O-Ringe","Sto\u00dff\u00e4nger f\u00fcr Roboter","Grip-\u00dcberz\u00fcge f\u00fcr Werkzeuge"]},
+{n:"TPU 85A",cat:"flexible",catL:"Flexibel",tmp:"210\u2013230",bed:"30\u201360",str:4,heat:4,flex:10,ease:3,chem:5,uv:5,pMin:30,pMax:55,desc:"Weicheres TPU, gummiartig, f\u00fcr sehr flexible Teile.",props:["Sehr weich","Schwieriger zu drucken","Direkt-Extruder Pflicht"],nozzle:"0.4mm Standard, sehr langsam",uc:["Weiche Griffe und \u00dcberz\u00fcge","Flexible Schutzkappen","Wearables und Armb\u00e4nder","Tierspielzeug","Ergonomische Polster","Vibrationsisolierung (empfindlich)"]},
+{n:"TPE",cat:"flexible",catL:"Flexibel",tmp:"200\u2013230",bed:"30\u201350",str:3,heat:3,flex:10,ease:3,chem:4,uv:4,pMin:30,pMax:55,desc:"Thermoplastisches Elastomer, sehr gummiartig.",props:["Extrem flexibel","Schwierig zu drucken"],nozzle:"0.4mm Direkt-Extruder",uc:["Gummi\u00e4hnliche Dichtungen","Faltbare Beh\u00e4lter","Dehnbare Abdeckungen","Schuheinlagen","Flexible Verbindungselemente"]},
+{n:"TPC (Copolyester flex)",cat:"flexible",catL:"Flexibel",tmp:"210\u2013240",bed:"40\u201360",str:5,heat:5,flex:8,ease:5,chem:6,uv:6,pMin:35,pMax:65,desc:"Flexibles Copolyester, chemisch best\u00e4ndiger als TPU.",props:["Bessere Chemikalienbest\u00e4ndigkeit","UV-best\u00e4ndiger als TPU"],nozzle:"0.4mm Standard",uc:["Chemisch belastete Dichtungen","Outdoor-flexible Teile","Automotive-Manschetten","Industrielle Schwingungsd\u00e4mpfer","Schlauch-Adapter"]},
+{n:"PC (Polycarbonat)",cat:"highperf",catL:"Hochleistung",tmp:"260\u2013310",bed:"100\u2013120",str:9,heat:9,flex:4,ease:2,chem:6,uv:6,pMin:35,pMax:65,desc:"Extrem schlagfest und hitzebest\u00e4ndig, braucht hohe Temps.",props:["Optisch klar m\u00f6glich","Sehr schlagfest","Einhausung Pflicht"],nozzle:"0.4mm geh\u00e4rtet, >260\u00b0C Hotend",uc:["Transparente Schutzabdeckungen","Scheinwerfer-Prototypen","Schutzvisiere und Helme","Hochtemperatur-Geh\u00e4use","Maschinenschutzscheiben","Elektrische Isolatoren"]},
+{n:"PC-ABS",cat:"highperf",catL:"Hochleistung",tmp:"250\u2013280",bed:"100\u2013110",str:8,heat:8,flex:4,ease:3,chem:6,uv:4,pMin:40,pMax:75,desc:"Blend aus PC und ABS, leichter druckbar als reines PC.",props:["Gute Schlagfestigkeit","Einfacher als PC","Einhausung n\u00f6tig"],nozzle:"0.4mm geh\u00e4rtet, >250\u00b0C Hotend",uc:["Automotive-Innenverkleidungen","Belastete Elektronikgeh\u00e4use","Werkzeugmaschinen-Abdeckungen","Schalttafel-Geh\u00e4use","Funktionale Prototypen (Industrie)"]},
+{n:"PC-CF",cat:"composite",catL:"Composite",tmp:"260\u2013300",bed:"100\u2013115",str:10,heat:9,flex:2,ease:2,chem:7,uv:6,pMin:60,pMax:130,desc:"Carbonverst\u00e4rktes Polycarbonat, maximale Steifigkeit+Hitze.",props:["Extrem steif","H\u00f6chste Hitzebest\u00e4ndigkeit","Sehr abrasiv"],nozzle:"0.6mm geh\u00e4rteter Stahl Pflicht",uc:["End-Use Industrieteile","Spritzguss-Formwerkzeuge (Prototyp)","Hochtemperatur-Jigs","Motorsport-Halterungen","Maschinenteile nahe W\u00e4rmequellen"]},
+{n:"PEI/ULTEM",cat:"highperf",catL:"Hochleistung",tmp:"340\u2013380",bed:"120\u2013160",str:9,heat:10,flex:3,ease:1,chem:9,uv:7,pMin:150,pMax:350,desc:"Luft-/Raumfahrt-Material, HDT >200\u00b0C, chemisch fast inert.",props:["Extrem hitzebest\u00e4ndig","Chemisch inert","Spezial-Drucker n\u00f6tig"],nozzle:"Spezial, >400\u00b0C Hotend",uc:["Flugzeug-Kabinenteile (FAR 25.853)","Autoklav-taugliche Werkzeuge","Sterilisierbare medizinische Instrumente","Hochtemperatur-Isolatoren","Raumfahrt-Halterungen","Leiterplatten-Testadapter"]},
+{n:"PEEK",cat:"highperf",catL:"Hochleistung",tmp:"370\u2013410",bed:"120\u2013160",str:10,heat:10,flex:3,ease:1,chem:10,uv:8,pMin:350,pMax:700,desc:"Top-Engineering-Polymer, Medizin+Aerospace, extrem teuer.",props:["Medizintauglich","Chemisch fast inert","Spezial-Drucker >400\u00b0C"],nozzle:"Spezial, >400\u00b0C Hotend",uc:["Medizinische Implantate (Wirbels\u00e4ule, Sch\u00e4del)","Aerospace-Strukturteile","Ventil- und Pumpenk\u00f6rper (Chemie)","Hochtemperatur-Lagerbuchsen","\u00d6l-/Gas-Bohrkopf-Teile","Halbleiter-Wafer-Tr\u00e4ger"]},
+{n:"PEKK",cat:"highperf",catL:"Hochleistung",tmp:"340\u2013360",bed:"120\u2013150",str:9,heat:10,flex:3,ease:1,chem:10,uv:8,pMin:400,pMax:550,desc:"\u00c4hnlich PEEK, etwas leichter druckbar, Aerospace.",props:["Etwas einfacher als PEEK","Aerospace-zertifiziert"],nozzle:"Spezial, >380\u00b0C Hotend",uc:["Aerospace-Halterungen und Brackets","Triebwerksnahe Leitungshalter","Satelliten-Komponenten","Hochtemperatur-Pr\u00fcfvorrichtungen","Milit\u00e4rische Geh\u00e4use"]},
+{n:"PPS",cat:"highperf",catL:"Hochleistung",tmp:"290\u2013330",bed:"120\u2013150",str:8,heat:9,flex:2,ease:1,chem:10,uv:7,pMin:200,pMax:400,desc:"Polyphenylensulfid, extreme Chemikalienbest\u00e4ndigkeit.",props:["Chemisch extrem best\u00e4ndig","Flammenresistent","Spr\u00f6de"],nozzle:"Spezial-Hotend",uc:["Chemie-Anlagen Ventilk\u00f6rper","Filtergeh\u00e4use (aggressive Medien)","Elektrische Isolatoren (Hochtemp)","Abgasf\u00fchrungen","Pharma-Produktionskontaktteile"]},
+{n:"PP (Polypropylen)",cat:"engineering",catL:"Engineering",tmp:"220\u2013250",bed:"80\u2013100",str:5,heat:5,flex:7,ease:3,chem:8,uv:4,pMin:28,pMax:55,desc:"Lebensmittelecht, chemisch best\u00e4ndig, starkes Warping.",props:["Lebensmittelecht","Sehr chemisch best\u00e4ndig","Starkes Warping"],nozzle:"0.4mm Standard, PP-Druckbett",uc:["Lebensmittelbeh\u00e4lter (sp\u00fclmaschinenfest)","Labor-Chemikalienbeh\u00e4lter","Living Hinges (Klappdeckel)","Batteriefach-Abdeckungen","Medizinische Einwegbeh\u00e4lter","Automobilteile (Kraftstoffbest\u00e4ndig)"]},
+{n:"HIPS",cat:"support",catL:"Support",tmp:"220\u2013240",bed:"90\u2013110",str:4,heat:5,flex:3,ease:6,chem:4,uv:3,pMin:16,pMax:28,desc:"In Limonene l\u00f6slich, Support-Material f\u00fcr ABS.",props:["L\u00f6slich in Limonene","Support f\u00fcr ABS"],nozzle:"0.4mm Standard",uc:["L\u00f6slicher Support f\u00fcr ABS-Drucke","Komplexe \u00dcberh\u00e4nge bei ABS","Leichte Verpackungseins\u00e4tze","Budget-Prototypen (als Hauptmaterial)"]},
+{n:"PVA",cat:"support",catL:"Support",tmp:"180\u2013210",bed:"45\u201360",str:2,heat:2,flex:2,ease:4,chem:1,uv:1,pMin:30,pMax:65,desc:"Wasserl\u00f6sliches Support-Material f\u00fcr PLA/PETG.",props:["Wasserl\u00f6slich","Feuchtigkeitsempfindlich","Trocken lagern"],nozzle:"0.4mm Standard",uc:["Wasserl\u00f6slicher Support f\u00fcr PLA","Komplexe Geometrien mit Hohlr\u00e4umen","Modelle mit vielen \u00dcberh\u00e4ngen","Prototypen mit innenliegenden Kan\u00e4len"]},
+{n:"BVOH",cat:"support",catL:"Support",tmp:"190\u2013220",bed:"50\u201360",str:2,heat:2,flex:2,ease:5,chem:1,uv:1,pMin:40,pMax:75,desc:"Wasserl\u00f6slich wie PVA, aber schneller aufl\u00f6send.",props:["Schneller l\u00f6slich als PVA","Breite Kompatibilit\u00e4t"],nozzle:"0.4mm Standard",uc:["Schnell l\u00f6slicher Support (PLA/PETG/PA)","Serienproduktion mit Support","Komplexe Multimaterial-Drucke"]},
+{n:"POM (Acetal/Delrin)",cat:"engineering",catL:"Engineering",tmp:"200\u2013220",bed:"100\u2013130",str:7,heat:6,flex:5,ease:3,chem:8,uv:3,pMin:35,pMax:65,desc:"Extrem niedriger Reibungskoeffizient, f\u00fcr Zahnr\u00e4der/Lager.",props:["Selbstschmierend","Sehr verschlei\u00dffest","Schwieriges Bed-Adhesion"],nozzle:"0.4mm Standard",uc:["Zahnr\u00e4der und Ritzel","Gleitlager und Buchsen","F\u00f6rderbandf\u00fchrungen","Clip-Verschl\u00fcsse (belastet)","Pr\u00e4zisions-Getriebeteile","Rollenlager-K\u00e4fige"]},
+{n:"PVDF",cat:"specialty",catL:"Spezial",tmp:"230\u2013260",bed:"80\u2013100",str:7,heat:7,flex:4,ease:2,chem:10,uv:8,pMin:150,pMax:300,desc:"Fluorpolymer, extrem chemisch best\u00e4ndig, piezoelektrisch.",props:["Piezoelektrisch","Extrem chemisch best\u00e4ndig","Flammenresistent"],nozzle:"0.4mm Spezial",uc:["Chemie-Rohrleitungsteile","Piezoelektrische Sensoren","Halbleiter-Nasschemie-Bauteile","Ventilk\u00f6rper f\u00fcr aggressive Medien","Ultraschall-Wandler"]},
+{n:"ESD-PETG/ABS",cat:"specialty",catL:"Spezial",tmp:"230\u2013260",bed:"70\u2013100",str:6,heat:5,flex:3,ease:5,chem:6,uv:4,pMin:40,pMax:80,desc:"Elektrostatisch ableitend, Schutz f\u00fcr Elektronik.",props:["ESD-ableitend","10\u2076\u201310\u2079 \u03a9 Oberfl\u00e4chenwiderstand"],nozzle:"0.4mm Standard",uc:["ESD-Trays f\u00fcr Leiterplatten","Chip-Transport-Schienen","Geh\u00e4use f\u00fcr empfindliche Elektronik","Werkst\u00fcck-Halter in Reinr\u00e4umen","Antistatische Werkzeuggriffe"]},
+{n:"Leitf\u00e4higes PLA/TPU",cat:"specialty",catL:"Spezial",tmp:"200\u2013230",bed:"40\u201360",str:3,heat:2,flex:5,ease:5,chem:2,uv:2,pMin:30,pMax:60,desc:"Elektrisch leitf\u00e4hig durch Carbon-Partikel, f\u00fcr Sensoren.",props:["Elektrisch leitf\u00e4hig","~10\u00b2\u201310\u2074 \u03a9/cm","F\u00fcr Sensoren/Touch"],nozzle:"0.6mm empfohlen",uc:["Kapazitive Touch-Sensoren","Leitf\u00e4hige Schaltfl\u00e4chen","EMI-Abschirmgeh\u00e4use","Wearable-Elektroden (Prototyp)","Drucksensoren","Leiterbahnen in Prototypen"]},
+{n:"Metall-Fill",cat:"specialty",catL:"Spezial",tmp:"195\u2013220",bed:"50\u201360",str:4,heat:3,flex:2,ease:5,chem:3,uv:3,pMin:30,pMax:55,desc:"PLA-Basis mit Metallpulver, polierbar f\u00fcr Metalllook.",props:["Polierbar","Schwerer als PLA","Abrasiv"],nozzle:"0.6mm geh\u00e4rtet empfohlen",uc:["Schmuck und Accessoires","Dekorative B\u00fcsten und Statuen","Replika-Requisiten (Film/Theater)","M\u00f6belgriffe und Beschl\u00e4ge (Optik)","Pokale und Auszeichnungen","Steampunk-Projekte"]},
+{n:"Holz-Fill",cat:"specialty",catL:"Spezial",tmp:"180\u2013220",bed:"50\u201360",str:3,heat:2,flex:2,ease:6,chem:1,uv:2,pMin:25,pMax:45,desc:"PLA mit Holzfasern, Temperatur beeinflusst Farbton.",props:["Holzoptik","Schleif- und bemalbar","Temp steuert Farbe"],nozzle:"0.6mm empfohlen",uc:["Dekorative Holzoptik-Vasen","Bilderrahmen","Modellbau-Geb\u00e4ude","Spielfiguren (Brettspiele)","Namensschilder und T\u00fcrschilder","Naturoptik-Lampenschirme"]},
+{n:"Keramik-Fill",cat:"specialty",catL:"Spezial",tmp:"190\u2013220",bed:"50\u201360",str:3,heat:3,flex:1,ease:4,chem:4,uv:5,pMin:35,pMax:60,desc:"PLA/Binder mit Keramikpartikeln, sinterbar f\u00fcr echte Keramik.",props:["Sinterbar","Keramikoptik"],nozzle:"0.6mm geh\u00e4rtet",uc:["Sinterbare Keramikteile","Dekorative Steinoptik-Objekte","Architekturmodelle","Kunstobjekte","Prototypen f\u00fcr Keramikproduktion"]},
+{n:"PA6-GF30",cat:"composite",catL:"Composite",tmp:"260\u2013290",bed:"90\u2013110",str:9,heat:8,flex:3,ease:2,chem:7,uv:5,pMin:60,pMax:130,desc:"30% Glasfaser-Nylon, Spritzguss-Ersatz, extrem steif.",props:["30% Glasfaseranteil","Spritzguss-Alternative","Sehr abrasiv"],nozzle:"0.6mm geh\u00e4rteter Stahl Pflicht",uc:["Spritzguss-Ersatzteile (Kleinserien)","Motorhalterungen","Strukturelle Industriegeh\u00e4use","Maschinenteile unter Last","Automotive End-Use Parts"]},
+{n:"PPA-CF/GF",cat:"composite",catL:"Composite",tmp:"280\u2013320",bed:"100\u2013120",str:9,heat:9,flex:3,ease:2,chem:8,uv:6,pMin:80,pMax:170,desc:"Polyphthalamid verst\u00e4rkt, h\u00f6here Hitze als PA-CF.",props:["HDT >200\u00b0C","Automotive-tauglich","Einhausung Pflicht"],nozzle:"0.4mm geh\u00e4rteter Stahl, >300\u00b0C Hotend",uc:["Motorraum-Komponenten","Turbolader-nahe Halterungen","Unter-der-Haube Automotive-Teile","Hochtemperatur-Industrietools","Aerospace-Vorrichtungen"]},
+{n:"TPU 60A",cat:"flexible",catL:"Flexibel",tmp:"200\u2013220",bed:"30\u201350",str:3,heat:3,flex:10,ease:2,chem:4,uv:4,pMin:35,pMax:65,desc:"Ultra-weiches TPU, extrem gummiartig, sehr schwer zu drucken.",props:["Extrem weich","Nur Direkt-Extruder","Sehr langsam drucken"],nozzle:"0.4mm Direkt-Extruder, <15mm/s",uc:["Weiche Dichtlippen","Silikonguss-Ersatz (Prototyp)","Ergonomische Soft-Touch-Griffe","Hautfreundliche Wearable-B\u00e4nder","Flexible Verschlusskappen","Sto\u00dfabsorber"]}
+];
+
+// ==================== NOZZLE SIZE DATA ====================
+const S=[
+{n:"0.2 mm",detail:8,speed:2,str:3,flow:2,desc:"Feinste verf\u00fcgbare Gr\u00f6\u00dfe. Extrem detailliert aber sehr langsam. Braucht niedrige Layer-H\u00f6he (0.05\u20130.12 mm) und perfekte Kalibrierung. Verstopfungsgefahr bei Partikelf\u00fcllungen.",pro:["H\u00f6chste Detailaufl\u00f6sung und sch\u00e4rfste Kanten","Feinste Texturen und Schriftz\u00fcge","D\u00fcnnste W\u00e4nde m\u00f6glich"],con:["Extrem langsam (3\u20135x l\u00e4nger als 0.4mm)","Sehr verstopfungsanf\u00e4llig","Nicht f\u00fcr Filamente mit Partikeln (CF/GF/Holz)","Layer-Haftung schlechter durch d\u00fcnne Linien"],uc:["Miniaturen und Tabletop-Figuren (28mm)","Feinste Schriftz\u00fcge und Logos","Schmuck-Prototypen","Pr\u00e4zise mechanische Kleinstteile"]},
+{n:"0.4 mm",detail:6,speed:6,str:6,flow:6,desc:"Der universelle Standard. Bester Kompromiss aus Detail, Geschwindigkeit und Festigkeit. Kommt bei fast allen Druckern als Werksd\u00fcse. Erste Wahl f\u00fcr 90% aller Drucke.",pro:["Bester Allround-Kompromiss","Standard bei allen Druckern, beste Software-Unterst\u00fctzung","Gute Detailaufl\u00f6sung bei akzeptabler Geschwindigkeit","Kompatibel mit allen Filamenten"],con:["Nicht die schnellste Option f\u00fcr gro\u00dfe Teile","Nicht die feinste Option f\u00fcr Miniaturen","Kompromiss in allen Richtungen"],uc:["Alltagsdrucke und Prototypen","Funktionsteile mit gutem Detail","Geh\u00e4use, Halterungen, Clips","Multicolor-Drucke (AMS)","Eigentlich alles au\u00dfer Extremf\u00e4lle"]},
+{n:"0.6 mm",detail:4,speed:8,str:8,flow:8,desc:"Deutlich schneller und st\u00e4rker als 0.4mm. Ideal f\u00fcr Funktionsteile wo Festigkeit wichtiger als Feindetail ist. Pflicht-Empfehlung f\u00fcr stark abrasive Filamente (PA6-GF30, PC-CF).",pro:["~40% schneller als 0.4mm bei \u00e4hnlichem Ergebnis","Deutlich st\u00e4rkere Teile durch breitere Linien","Bessere Layer-Haftung","Weniger Verstopfung bei CF/GF-Filamenten","Pflichtgr\u00f6\u00dfe f\u00fcr PA6-GF30, PC-CF"],con:["Sichtbar gr\u00f6bere Oberfl\u00e4che","Feine Details und d\u00fcnne W\u00e4nde eingeschr\u00e4nkt","Kleine Bohrungen und Rundungen ungenauer"],uc:["Funktionsteile mit mechanischer Belastung","CF/GF-verst\u00e4rkte Composites","Jigs, Vorrichtungen, Werkzeuge","Gro\u00dfe Strukturteile","Outdoor-Teile und Halterungen"]},
+{n:"0.8 mm",detail:2,speed:9,str:9,flow:9,desc:"Speed-D\u00fcse f\u00fcr gro\u00dfe, robuste Teile. Sehr schnell, sehr starke Teile, aber grobe Oberfl\u00e4che. Gut f\u00fcr Vase-Mode und dicke Funktionsteile.",pro:["Sehr schneller Druck (2\u20133x schneller als 0.4mm)","Extrem stabile Teile","Exzellent f\u00fcr Vase-Mode","Kaum Verstopfungsgefahr"],con:["Grobe Oberfl\u00e4che, sichtbare Linien","Kaum Feindetail m\u00f6glich","Min. Wandst\u00e4rke ~1.6mm","Kleine Modelle sehen schlecht aus"],uc:["Gro\u00dfe Vasen und Beh\u00e4lter (Vase-Mode)","Robuste Werkstatt-Halterungen","Gro\u00dfe Prototypen (schnell)","Blument\u00f6pfe, Aufbewahrung, Organizer"]},
+{n:"1.0 mm",detail:1,speed:10,str:10,flow:10,desc:"Maximaler Durchsatz. Nur f\u00fcr sehr gro\u00dfe, grobe Teile oder Vase-Mode. Braucht Hotend mit ausreichend Heizleistung (High-Flow).",pro:["Schnellster m\u00f6glicher Druck","Maximum an Festigkeit","Perfekt f\u00fcr riesige Modelle"],con:["Sehr grobe Oberfl\u00e4che","Kein Detail m\u00f6glich","Braucht High-Flow-Hotend","Min. Wandst\u00e4rke ~2mm","Wenige Drucker unterst\u00fctzen es sinnvoll"],uc:["Riesige Modelle und Props","Grobe Werkst\u00fccke und Prototypen","Schnellstm\u00f6gliche Druckzeit","Vase-Mode f\u00fcr XXL-Objekte"]}
+];
+let sExpanded=null,sSortCol="n",sSortDir=1;
+const scols=[{k:"n",l:"Gr\u00f6\u00dfe"},{k:"detail",l:"Detailgrad",bar:1,cls:"bar-ease"},{k:"speed",l:"Geschwindigk.",bar:1,cls:"bar-flex"},{k:"str",l:"Teilefestigkeit",bar:1,cls:"bar-str"},{k:"flow",l:"Durchsatz",bar:1,cls:"bar-therm"}];
+function renderSizes(){
+document.getElementById("scount").textContent=S.length+" D\u00fcsengr\u00f6\u00dfen";
+let th="<tr>"+scols.map(c=>'<th onclick="sdoSort(\''+c.k+'\')">'+c.l+'<span class="ar">'+(sSortCol===c.k?(sSortDir===1?"\u25b2":"\u25bc"):"")+'</span></th>').join("")+"</tr>";
+document.getElementById("sthead").innerHTML=th;
+let data=[...S];
+data.sort((a,b)=>{let av=a[sSortCol],bv=b[sSortCol];if(typeof av==="string")return sSortDir*av.localeCompare(bv);return sSortDir*(av-bv)});
+let tb="";
+data.forEach(f=>{
+const isStd=f.n==="0.4 mm";
+tb+='<tr class="'+(isStd?"cat-engineering":"cat-standard")+'" style="cursor:pointer" onclick="stoggle(\''+f.n+'\')">';
+scols.forEach(c=>{
+if(c.bar){tb+='<td><div class="bar '+c.cls+'"><div class="bar-fill" style="width:'+f[c.k]*10+'%"></div></div><div class="val">'+f[c.k]+'/10</div></td>'}
+else{tb+='<td><span class="cb">'+(isStd?'\u2605 ':'')+f[c.k]+'</span></td>'}
+});
+tb+='</tr>';
+if(sExpanded===f.n){
+tb+='<tr class="dr"><td colspan="'+scols.length+'">'+(isStd?'<span class="cb" style="background:#E1F5EE;color:#085041;margin-bottom:6px;display:inline-block">\u2605 Standard / Empfehlung f\u00fcr Einsteiger</span><br>':'')+'<strong>'+f.n+'</strong> \u2014 '+f.desc;
+tb+='<div class="tags" style="margin-top:8px">';
+f.pro.forEach(p=>{tb+='<span class="tag tag-pro">\u2713 '+p+'</span>'});
+f.con.forEach(p=>{tb+='<span class="tag tag-con">\u2717 '+p+'</span>'});
+tb+='</div>';
+tb+='<div class="uc"><div class="uc-title">Empfohlen f\u00fcr</div><div class="uc-list">'+f.uc.map(u=>'\u2022 '+u).join('<br>')+'</div></div></td></tr>';
+}
+});
+document.getElementById("stbody").innerHTML=tb;
+}
+window.sdoSort=function(k){if(sSortCol===k)sSortDir*=-1;else{sSortCol=k;sSortDir=1}renderSizes()};
+window.stoggle=function(n){sExpanded=sExpanded===n?null:n;renderSizes()};
+renderSizes();
+
+// ==================== NOZZLE MATERIAL DATA ====================
+const N=[
+{n:"Messing (Brass)",cat:"std",catL:"Standard",therm:10,wear:2,flow:7,maxT:300,pMin:1,pMax:5,desc:"Das Standard-Material. Beste W\u00e4rmeleitf\u00e4higkeit, g\u00fcnstig, aber weich und verschlei\u00dft schnell bei abrasiven Filamenten.",sizes:"0.2, 0.4, 0.6, 0.8, 1.0 mm",brands:"E3D, Bambu Lab (P1S Standard), Creality, Prusa, MK8 generisch",pro:["Beste W\u00e4rmeleitf\u00e4higkeit aller Materialien","Sehr g\u00fcnstig, Multipack m\u00f6glich","Glatte Innenoberfl\u00e4che, wenig Clogs","Verf\u00fcgbar f\u00fcr alle Drucker"],con:["Verschlei\u00dft extrem schnell bei CF/GF (1\u20133 Drucke)","Nicht lebensmittelsicher (kann Blei enthalten)","Nicht f\u00fcr Glow-in-the-Dark oder Metall-Fill geeignet"],uc:["PLA, PETG, ABS, ASA Alltagsdrucke","Prototypen und Deko ohne abrasive Filamente","Einsteiger und Schulprojekte","Wenn Pr\u00e4zision wichtiger als Langlebigkeit ist"]},
+{n:"Geh\u00e4rteter Stahl (Hardened Steel)",cat:"std",catL:"Standard",therm:5,wear:8,flow:6,maxT:450,pMin:8,pMax:25,desc:"10\u201320x h\u00e4rter als Messing. Der Allrounder f\u00fcr abrasive Filamente, aber schlechtere W\u00e4rmeleitung. Oft +5\u201310\u00b0C Temp-Offset n\u00f6tig.",sizes:"0.2, 0.4, 0.6, 0.8 mm",brands:"E3D, Bambu Lab (X1C Standard), Micro Swiss, Slice Engineering, Brozzl",pro:["Hoch verschlei\u00dffest, h\u00e4lt viele Spulen CF/GF","Preis-Leistung f\u00fcr abrasive Materialien top","Hohe Temperaturtoleranz (bis 450\u00b0C)","Gute Verf\u00fcgbarkeit"],con:["~50% geringere W\u00e4rmeleitf\u00e4higkeit als Messing","Braucht +5\u201310\u00b0C h\u00f6here Drucktemperatur","Rauere Innenoberfl\u00e4che, etwas mehr Reibung","Nicht so verschlei\u00dffest wie Rubin/Karbid"],uc:["Carbon Fiber und Glasfaser Filamente","Metall-Fill, Holz-Fill, Keramik-Fill","Glow-in-the-Dark (Strontiumaluminat ist abrasiv!)","Wer nur einen D\u00fcsentyp f\u00fcr alles will"]},
+{n:"Geh\u00e4rteter Stahl High-Flow (CHT)",cat:"hf",catL:"High-Flow",therm:5,wear:8,flow:9,maxT:450,pMin:10,pMax:30,desc:"Geh\u00e4rteter Stahl mit geteiltem Innenkanal (CHT-Design). Bis zu 30% mehr Durchfluss, ideal f\u00fcr gro\u00dfe/schnelle Drucke.",sizes:"0.4, 0.6, 0.8 mm",brands:"Bambu Lab (HF-Serie), Bondtech CHT, E3D ObXidian, 3rd-Party CHT-Clones",pro:["Bis 30% mehr volumetrischer Durchfluss","Schnellere Druckzeiten bei dicken Linien","Verschlei\u00dffest wie normaler geh\u00e4rteter Stahl","Ideal f\u00fcr Vase-Mode und gro\u00dfe Teile"],con:["Geteilter Kanal kann bei feinen Details Stringing verursachen","Qualit\u00e4t von Clones variiert stark","Nicht ideal f\u00fcr 0.2mm feine Drucke","Teurer als Standard-Stahl"],uc:["Speed-Printing und Vase-Mode","Gro\u00dfe Funktionsteile und Prototypen","Produktions-Drucke mit abrasiven Materialien","Bambu Lab X1C/P1S/P2S mit HF-Hotend"]},
+{n:"Edelstahl (Stainless Steel)",cat:"std",catL:"Standard",therm:4,wear:6,flow:5,maxT:350,pMin:5,pMax:15,desc:"Korrosionsbest\u00e4ndig und lebensmittelsicher, aber schlechteste W\u00e4rmeleitung. Weniger verschlei\u00dffest als geh\u00e4rteter Stahl.",sizes:"0.4, 0.6 mm",brands:"Bambu Lab (P1S Standard), E3D, Prusa",pro:["Lebensmittelsicher (kein Blei)","Korrosionsbest\u00e4ndig","Besser als Messing bei leicht abrasiven Filamenten"],con:["Schlechteste W\u00e4rmeleitf\u00e4higkeit","Braucht deutlich h\u00f6here Temps","Weniger verschlei\u00dffest als geh\u00e4rteter Stahl","Begrenzte Gr\u00f6\u00dfenauswahl"],uc:["Lebensmittelkontakt-Teile (PETG/PP)","Korrosive Umgebungen","Wer bleifrei drucken m\u00f6chte","Medizinische Prototypen"]},
+{n:"Bimetall (Kupferkern + Stahlspitze)",cat:"std",catL:"Standard",therm:8,wear:7,flow:7,maxT:450,pMin:12,pMax:35,desc:"Kupfer- oder Messing-K\u00f6rper f\u00fcr W\u00e4rmeleitung, geh\u00e4rtete Stahlspitze f\u00fcr Verschlei\u00df. Best of Both Worlds.",sizes:"0.4, 0.6, 0.8 mm",brands:"Micro Swiss, Kingroon, diverse AliExpress/3rd-Party, TH3D",pro:["Gute W\u00e4rmeleitung UND Verschlei\u00dffestigkeit","Weniger Temp-Offset als reiner Stahl","Guter Kompromiss f\u00fcr gemischten Filament-Einsatz"],con:["Verbindungsstelle Kupfer/Stahl kann bei Billigprodukten brechen","Qualit\u00e4t sehr herstellerabh\u00e4ngig","Nicht so verschlei\u00dffest wie Vollstahl an der Spitze","Etwas teurer als reiner geh\u00e4rteter Stahl"],uc:["Wechsel zwischen PLA und CF-Filamenten","Wer keine Temp-Offsets einstellen will","Multi-Material-Drucker (AMS)","Allround-D\u00fcse f\u00fcr Fortgeschrittene"]},
+{n:"Rubin / Saphir (Ruby-tipped)",cat:"premium",catL:"Premium",therm:8,wear:9,flow:7,maxT:400,pMin:80,pMax:120,desc:"Messing-K\u00f6rper mit eingepresstem synthetischen Rubin an der Spitze. Extrem verschlei\u00dffest bei guter W\u00e4rmeleitung.",sizes:"0.4, 0.6 mm",brands:"E3D Olsson Ruby, DUROZZLE Ruby, 3DMakerEngineering",pro:["Rubinharte Spitze (Mohs 9), fast so hart wie Diamant","Messingk\u00f6rper beh\u00e4lt gute W\u00e4rmeleitung","Extrem lange Lebensdauer bei abrasiven Filamenten","Weniger Reibung als Stahl"],con:["Rubin ist hart aber spr\u00f6de: Crash = Spitze ab","Teuer (80\u2013120\u20ac pro D\u00fcse)","Empfindlich gegen Aufsetzer auf dem Druckbett","Begrenzte Gr\u00f6\u00dfenauswahl"],uc:["Dauerhafte CF/GF-Produktion ohne D\u00fcsenwechsel","Print-Farms mit abrasiven Filamenten","Wer bereit ist, vorsichtig mit der D\u00fcse umzugehen","Premium-Setup f\u00fcr Nylon-CF Dauerbetrieb"]},
+{n:"Wolframkarbid (Tungsten Carbide)",cat:"premium",catL:"Premium",therm:7,wear:10,flow:7,maxT:450,pMin:50,pMax:90,desc:"Industriematerial, fast so hart wie Diamant aber weniger spr\u00f6de als Rubin. Hohe W\u00e4rmeleitf\u00e4higkeit und extreme Standzeit.",sizes:"0.4, 0.6 mm",brands:"3DMakerEngineering, Dyze Design, AddiTec",pro:["H\u00e4rtestes nicht-spr\u00f6des D\u00fcsenmaterial","Exzellente W\u00e4rmeleitf\u00e4higkeit (besser als Stahl)","Crash-resistenter als Rubin","Quasi unbegrenzte Lebensdauer"],con:["Teuer (50\u201390\u20ac pro D\u00fcse)","Schwerer als andere D\u00fcsen","Begrenzte Verf\u00fcgbarkeit und Druckerkompatibilit\u00e4t","Nicht f\u00fcr jeden Hotend-Typ verf\u00fcgbar"],uc:["Industrie/Produktion mit CF/GF Dauerbetrieb","Endgame-D\u00fcse, die man nie wieder wechselt","Wer Crashes nicht ausschlie\u00dfen kann","Hochvolumen-Fertigung mit Composites"]},
+{n:"Diamant (Diamond-tipped)",cat:"premium",catL:"Premium",therm:9,wear:10,flow:8,maxT:400,pMin:100,pMax:180,desc:"Synthetischer Diamant als D\u00fcsenspitze. H\u00f6chste H\u00e4rte + beste W\u00e4rmeleitf\u00e4higkeit aller D\u00fcsenmaterialien.",sizes:"0.4, 0.6 mm",brands:"NDJ (Natural Diamond Jet), 3DMakerEngineering DiamondBack",pro:["H\u00e4rteste bekannte D\u00fcsenspitze (Mohs 10)","Beste W\u00e4rmeleitf\u00e4higkeit aller Nozzle-Materialien","Kein Temp-Offset n\u00f6tig","Extrem glatte Oberfl\u00e4che, weniger Clogs"],con:["Teuerste Option (100\u2013180\u20ac)","Diamant ist hart aber kann bei Schlag splittern","Sehr eingeschr\u00e4nkte Verf\u00fcgbarkeit","Overkill f\u00fcr Hobby-Anwendungen"],uc:["Absolutes Premium-Setup f\u00fcr Dauerbetrieb","Industrielle 24/7-Produktion mit Composites","Wenn beste Druckqualit\u00e4t + Langlebigkeit gefragt","Forschung und Spezialmaterialien"]},
+{n:"ObXidian (E3D x Bambu Lab)",cat:"hf",catL:"High-Flow",therm:7,wear:9,flow:10,maxT:450,pMin:25,pMax:45,desc:"Gemeinsam von E3D und Bambu Lab entwickelt. ObXidian-geh\u00e4rtete D\u00fcse mit E3DLC-Beschichtung. 60% mehr Durchfluss.",sizes:"0.4, 0.6 mm",brands:"Bambu Lab / E3D (exklusiv f\u00fcr Bambu H2/P2/X2 Serie)",pro:["60% mehr Durchfluss als Standard-Hotend","ObXidian-H\u00e4rtung + E3DLC Anti-Stick-Beschichtung","Optimiert f\u00fcr Bambu-\u00d6kosystem (Firmware-Integration)","Sehr gute Verschlei\u00dffestigkeit"],con:["Nur f\u00fcr Bambu Lab H2/P2/X2 Drucker","Teurer als Standard-D\u00fcsen","Braucht Bambu-spezifisches Hotend-Assembly","Nicht nachr\u00fcstbar auf \u00e4ltere Bambu-Modelle"],uc:["Bambu Lab P2S / H2D / X2D Speed-Printing","Hoher Durchsatz mit abrasiven Filamenten","Produktions-Setups im Bambu-\u00d6kosystem","Maximale Geschwindigkeit + Verschlei\u00dfschutz"]},
+{n:"Kupfer (Copper / Plated Copper)",cat:"special",catL:"Spezialisiert",therm:10,wear:3,flow:8,maxT:350,pMin:15,pMax:40,desc:"Reine Kupferd\u00fcse oder vernickelt. Beste W\u00e4rmeleitung f\u00fcr High-Speed, aber weich wie Messing.",sizes:"0.4, 0.6, 0.8 mm",brands:"Bambu Lab (A1 Serie), Slice Engineering Vanadium-Plated, Trianglelab",pro:["Noch bessere W\u00e4rmeleitung als Messing","Ideal f\u00fcr High-Speed-Druck (schnelles Aufschmelzen)","Vernickelung sch\u00fctzt teilweise vor Verschlei\u00df"],con:["Ohne Beschichtung sehr weich","Nicht f\u00fcr abrasive Filamente","Vernickelung nutzt sich ab","Teurer als Messing"],uc:["High-Speed PLA/PETG Drucke (600+ mm/s)","Bambu Lab A1 Serie","Speed-Benchy und schnelle Prototypen","Wenn maximaler Flow bei Standard-Filamenten gefragt"]},
+{n:"Siliziumkarbid-Beschichtung (SiC)",cat:"special",catL:"Spezialisiert",therm:8,wear:8,flow:8,maxT:400,pMin:20,pMax:45,desc:"Messing- oder Kupferd\u00fcse mit Siliziumkarbid-Beschichtung. Kombiniert gute W\u00e4rmeleitung mit Verschlei\u00dfschutz.",sizes:"0.4, 0.6 mm",brands:"Slice Engineering Vanadium, Micro Swiss TwinClad",pro:["Gute W\u00e4rmeleitung des Grundk\u00f6rpers bleibt erhalten","Beschichtung sch\u00fctzt gegen Abrasion","Glattere Oberfl\u00e4che als geh\u00e4rteter Stahl","Kein Temp-Offset n\u00f6tig"],con:["Beschichtung kann sich langfristig abtragen","Teurer als reiner geh\u00e4rteter Stahl","Nicht so langlebig wie Karbid/Diamant bei starker Abrasion","Weniger verbreitet"],uc:["Gelegentliche abrasive Filamente neben Standard-Material","Wer keinen Temp-Offset m\u00f6chte","Guter Kompromiss zwischen Brass und Hardened Steel","Qualit\u00e4tsbewusste Hobbyisten"]}
+];
+
+// ==================== FILAMENT RENDERING ====================
+const cats=[{k:"all",l:"Alle"},{k:"standard",l:"Standard"},{k:"engineering",l:"Engineering"},{k:"composite",l:"Composite"},{k:"flexible",l:"Flexibel"},{k:"highperf",l:"Hochleistung"},{k:"specialty",l:"Spezial"},{k:"support",l:"Support"}];
+let activeCat="all",sortCol="n",sortDir=1,expanded=null;
+const cols=[{k:"n",l:"Filament"},{k:"catL",l:"Kategorie"},{k:"pMin",l:"Preis \u20ac/kg *"},{k:"tmp",l:"Drucktemp \u00b0C"},{k:"bed",l:"Betttemp \u00b0C"},{k:"str",l:"Festigkeit",bar:1,cls:"bar-str"},{k:"heat",l:"Hitzebest\u00e4nd.",bar:1,cls:"bar-tmp"},{k:"flex",l:"Flexibilit\u00e4t",bar:1,cls:"bar-flex"},{k:"ease",l:"Druckbarkeit",bar:1,cls:"bar-ease"},{k:"chem",l:"Chem."},{k:"uv",l:"UV"}];
+function pc(m){return m<30?"price-low":m<80?"price-mid":"price-high"}
+function renderFilament(){
+const q=document.getElementById("q").value.toLowerCase();
+let data=F.filter(f=>(activeCat==="all"||f.cat===activeCat)&&(!q||f.n.toLowerCase().includes(q)||f.desc.toLowerCase().includes(q)||f.uc.some(u=>u.toLowerCase().includes(q))));
+data.sort((a,b)=>{let av=a[sortCol],bv=b[sortCol];if(typeof av==="string")return sortDir*av.localeCompare(bv);return sortDir*(av-bv)});
+document.getElementById("count").textContent=data.length+" Filamente";
+let th="<tr>"+cols.map(c=>'<th onclick="doSort(\''+c.k+'\')">'+c.l+'<span class="ar">'+(sortCol===c.k?(sortDir===1?"\u25b2":"\u25bc"):"")+'</span></th>').join("")+"</tr>";
+document.getElementById("thead").innerHTML=th;
+let tb="";
+data.forEach(f=>{
+const rc="cat-"+f.cat;
+tb+='<tr class="'+rc+'" style="cursor:pointer" onclick="toggle(\''+f.n.replace(/'/g,"\\'")+'\')">';
+cols.forEach(c=>{
+if(c.bar){tb+='<td><div class="bar '+c.cls+'"><div class="bar-fill" style="width:'+f[c.k]*10+'%"></div></div><div class="val">'+f[c.k]+'/10</div></td>'}
+else if(c.k==="catL"){tb+='<td><span class="cb">'+f.catL+'</span></td>'}
+else if(c.k==="pMin"){tb+='<td class="price '+pc(f.pMin)+'">'+f.pMin+'\u2013'+f.pMax+' \u20ac</td>'}
+else if(c.k==="chem"||c.k==="uv"){tb+='<td style="font-size:12px;color:#888">'+f[c.k]+'/10</td>'}
+else{tb+='<td>'+f[c.k]+'</td>'}
+});
+tb+='</tr>';
+if(expanded===f.n){
+tb+='<tr class="dr"><td colspan="'+cols.length+'"><strong>'+f.n+'</strong> \u2014 '+f.desc+'<br><strong>D\u00fcse:</strong> '+f.nozzle+' \u00b7 <strong>Preis:</strong> ca. '+f.pMin+'\u2013'+f.pMax+' \u20ac/kg<div class="tags">'+f.props.map(p=>'<span class="tag">'+p+'</span>').join('')+'</div><div class="uc"><div class="uc-title">Beispiel Use Cases</div><div class="uc-list">'+f.uc.map(u=>'\u2022 '+u).join('<br>')+'</div></div></td></tr>';
+}
+});
+document.getElementById("tbody").innerHTML=tb;
+}
+window.doSort=function(k){if(sortCol===k)sortDir*=-1;else{sortCol=k;sortDir=1}renderFilament()};
+window.toggle=function(n){expanded=expanded===n?null:n;renderFilament()};
+
+// ==================== NOZZLE RENDERING ====================
+const ncats=[{k:"all",l:"Alle"},{k:"std",l:"Standard"},{k:"hf",l:"High-Flow"},{k:"premium",l:"Premium"},{k:"special",l:"Spezialisiert"}];
+let nActiveCat="all",nSortCol="n",nSortDir=1,nExpanded=null;
+const ncols=[{k:"n",l:"D\u00fcsentyp"},{k:"catL",l:"Kategorie"},{k:"pMin",l:"Preis/St\u00fcck *"},{k:"therm",l:"W\u00e4rmeleitung",bar:1,cls:"bar-therm"},{k:"wear",l:"Verschlei\u00dffest.",bar:1,cls:"bar-wear"},{k:"flow",l:"Durchfluss",bar:1,cls:"bar-flow"},{k:"maxT",l:"Max Temp \u00b0C"},{k:"sizes",l:"Gr\u00f6\u00dfen"}];
+function npc(m){return m<15?"price-low":m<50?"price-mid":"price-high"}
+function renderNozzle(){
+const q=document.getElementById("qn").value.toLowerCase();
+let data=N.filter(f=>(nActiveCat==="all"||f.cat===nActiveCat)&&(!q||f.n.toLowerCase().includes(q)||f.desc.toLowerCase().includes(q)||f.brands.toLowerCase().includes(q)||f.uc.some(u=>u.toLowerCase().includes(q))));
+data.sort((a,b)=>{let av=a[nSortCol],bv=b[nSortCol];if(typeof av==="string")return nSortDir*av.localeCompare(bv);return nSortDir*(av-bv)});
+document.getElementById("ncount").textContent=data.length+" D\u00fcsentypen";
+let th="<tr>"+ncols.map(c=>'<th onclick="ndoSort(\''+c.k+'\')">'+c.l+'<span class="ar">'+(nSortCol===c.k?(nSortDir===1?"\u25b2":"\u25bc"):"")+'</span></th>').join("")+"</tr>";
+document.getElementById("nthead").innerHTML=th;
+let tb="";
+data.forEach(f=>{
+const rc="nozzle-cat"+(f.cat==="premium"?"-premium":f.cat==="hf"?"-hf":f.cat==="special"?"-special":"");
+tb+='<tr class="'+rc+'" style="cursor:pointer" onclick="ntoggle(\''+f.n.replace(/'/g,"\\'")+'\')">';
+ncols.forEach(c=>{
+if(c.bar){tb+='<td><div class="bar '+c.cls+'"><div class="bar-fill" style="width:'+f[c.k]*10+'%"></div></div><div class="val">'+f[c.k]+'/10</div></td>'}
+else if(c.k==="catL"){tb+='<td><span class="cb">'+f.catL+'</span></td>'}
+else if(c.k==="pMin"){tb+='<td class="price '+npc(f.pMin)+'">'+f.pMin+'\u2013'+f.pMax+' \u20ac</td>'}
+else if(c.k==="maxT"){tb+='<td>'+f[c.k]+'\u00b0C</td>'}
+else{tb+='<td>'+f[c.k]+'</td>'}
+});
+tb+='</tr>';
+if(nExpanded===f.n){
+tb+='<tr class="dr"><td colspan="'+ncols.length+'"><strong>'+f.n+'</strong> \u2014 '+f.desc+'<br><strong>Marken:</strong> '+f.brands;
+tb+='<div class="tags" style="margin-top:8px">';
+f.pro.forEach(p=>{tb+='<span class="tag tag-pro">\u2713 '+p+'</span>'});
+f.con.forEach(p=>{tb+='<span class="tag tag-con">\u2717 '+p+'</span>'});
+tb+='</div>';
+tb+='<div class="uc"><div class="uc-title">Empfohlen f\u00fcr</div><div class="uc-list">'+f.uc.map(u=>'\u2022 '+u).join('<br>')+'</div></div></td></tr>';
+}
+});
+document.getElementById("ntbody").innerHTML=tb;
+}
+window.ndoSort=function(k){if(nSortCol===k)nSortDir*=-1;else{nSortCol=k;nSortDir=1}renderNozzle()};
+window.ntoggle=function(n){nExpanded=nExpanded===n?null:n;renderNozzle()};
+
+// ==================== INIT ====================
+const cDiv=document.getElementById("cats");
+cats.forEach(c=>{const b=document.createElement("button");b.textContent=c.l;b.className=c.k==="all"?"active":"";b.onclick=()=>{activeCat=c.k;cDiv.querySelectorAll("button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderFilament()};cDiv.appendChild(b)});
+document.getElementById("q").addEventListener("input",renderFilament);
+renderFilament();
+
+const nDiv=document.getElementById("ncats");
+ncats.forEach(c=>{const b=document.createElement("button");b.textContent=c.l;b.className=c.k==="all"?"active":"";b.onclick=()=>{nActiveCat=c.k;nDiv.querySelectorAll("button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderNozzle()};nDiv.appendChild(b)});
+document.getElementById("qn").addEventListener("input",renderNozzle);
+renderNozzle();
+
+// ==================== INFILL DATA ====================
+const I=[
+{n:"Gyroid",cat:"allround",catL:"Allrounder",str:9,speed:7,matEff:8,iso:10,dim:"3D",density:"10\u201330%",topPick:true,desc:"Gleichm\u00e4\u00dfige Festigkeit in alle Richtungen (isotrop). Geschwungene, sich nicht kreuzende Linien. Bambu Lab und Prusa empfehlen Gyroid als Standard-Infill f\u00fcr die meisten Anwendungen.",pro:["Isotrope Festigkeit (gleich stark in alle Richtungen)","Kreuzt sich nicht auf einer Schicht = weniger Vibrationen","Kann mit Harz oder Fl\u00fcssigkeit gef\u00fcllt werden","Gutes Verh\u00e4ltnis Festigkeit/Material"],con:["Langsamer als Grid oder Lines","Etwas mehr Filament als einfache 2D-Muster","Komplexere Berechnung im Slicer"],uc:["Funktionsteile mit Belastung aus mehreren Richtungen","Allround-Einstellung f\u00fcr alles","CF/GF Filamente (Bambu-Empfehlung)","Outdoor-Teile mit wechselnder Belastung"]},
+{n:"Grid (Gitter)",cat:"schnell",catL:"Schnell",str:6,speed:9,matEff:5,iso:4,dim:"2D",density:"10\u201330%",topPick:true,desc:"Einfaches Kreuzgitter, schnell zu drucken. Stark in X/Y, aber schwach diagonal. Guter Standard wenn Geschwindigkeit wichtiger als Allround-Festigkeit ist.",pro:["Sehr schnell zu drucken","Einfach und zuverl\u00e4ssig","Gute Festigkeit in X und Y Achse","Gute Top-Layer Unterst\u00fctzung"],con:["Schwach in Diagonalrichtung","2D-Muster, keine Z-Versteifung","Linien kreuzen sich = mehr Vibrationen"],uc:["Schnelle Prototypen","Einfache Geh\u00e4use und Boxen","Teile mit Belastung nur in X/Y","Wenn Druckzeit wichtiger als Festigkeit"]},
+{n:"Lightning",cat:"schnell",catL:"Schnell",str:2,speed:10,matEff:10,iso:1,dim:"2D",density:"5\u201315%",topPick:true,desc:"Baumf\u00f6rmiges Minimal-Infill, nur dort wo Top-Layer St\u00fctzung brauchen. Extremer Material- und Zeitsparer, aber quasi keine strukturelle Festigkeit.",pro:["Schnellstes Infill-Muster \u00fcberhaupt","Extremes Materialersparnis (bis 70% weniger)","Perfekt f\u00fcr rein dekorative Objekte"],con:["Quasi keine strukturelle Festigkeit","Teile brechen leicht bei Belastung","Nicht f\u00fcr funktionale Teile"],uc:["Figuren, Statuen, B\u00fcsten","Vasen und Deko-Objekte","Architekturmodelle (nur Optik)","Cosplay-Teile ohne mechanische Belastung"]},
+{n:"Cubic (W\u00fcrfel)",cat:"stark",catL:"Stark",str:8,speed:6,matEff:7,iso:8,dim:"3D",density:"15\u201330%",topPick:true,desc:"3D-W\u00fcrfelmuster, um 45\u00b0 gedreht. Gute Festigkeit in alle Richtungen, schneller als Honeycomb. Geschlossene Lufttaschen f\u00fcr gute Druckfestigkeit.",pro:["Gute 3D-Festigkeit in alle Richtungen","Schneller als Honeycomb und 3D Honeycomb","Geschlossene Zellen = gute Druckfestigkeit"],con:["Nicht ganz so isotrop wie Gyroid","Etwas mehr Material als Lightning/Lines"],uc:["Mechanisch belastete Funktionsteile","Teile die Druck von oben aushalten m\u00fcssen","Zahnr\u00e4der und Halterungen","Alternative zu Gyroid wenn schneller sein soll"]},
+{n:"CrossHatch",cat:"schnell",catL:"Schnell",str:5,speed:9,matEff:6,iso:4,dim:"2D",density:"10\u201325%",topPick:true,desc:"Neues Bambu-Studio-Muster: Schnell und stabil. Linien kreuzen sich nicht auf derselben Schicht, weniger Vibrationen bei hoher Geschwindigkeit.",pro:["Sehr schnell bei High-Speed-Druckern","Keine Kreuzungen auf gleicher Schicht = leise","Stabiler als Lines/Zig-Zag","Optimiert f\u00fcr Bambu Lab Speed-Profile"],con:["Schw\u00e4cher als Gyroid oder Cubic","Relativ neues Muster, weniger Erfahrungswerte","2D-Muster"],uc:["Speed-Printing auf Bambu Lab Druckern","Schnelle Funktionsprototypen","Gro\u00dfe Teile mit moderater Belastung"]},
+{n:"Honeycomb (Waben)",cat:"stark",catL:"Stark",str:8,speed:4,matEff:7,iso:6,dim:"2D",density:"15\u201330%",topPick:false,desc:"Klassisches Wabenmuster inspiriert von der Natur. Exzellente Lastverteilung und gutes Festigkeits-Gewichts-Verh\u00e4ltnis, aber langsam wegen vieler Richtungswechsel.",pro:["Exzellente Lastverteilung","Sehr gutes Festigkeits-Gewichts-Verh\u00e4ltnis","Nat\u00fcrlich optimierte Struktur"],con:["Deutlich langsamer als Grid oder Gyroid","Viele scharfe Richtungswechsel = Vibrationen","2D-Muster, nicht isotrop in Z"],uc:["Leichtbau-Teile mit Fl\u00e4chenlast","Drohnen-Rahmen und Platten","Sandwich-Strukturen"]},
+{n:"Adaptive Cubic",cat:"stark",catL:"Stark",str:7,speed:7,matEff:9,iso:7,dim:"3D",density:"10\u201325%",topPick:false,desc:"Wie Cubic, aber die Dichte passt sich automatisch an: dichter nahe W\u00e4nden und Top-Layern, sp\u00e4rlicher im Inneren.",pro:["Automatische Dichteanpassung spart Material","Mehr Infill wo es gebraucht wird","Schneller als volles Cubic"],con:["Weniger gleichm\u00e4\u00dfig als normales Cubic","Festigkeit schwerer vorhersagbar"],uc:["Gro\u00dfe Teile wo Material gespart werden soll","Kostenbewusste Funktionsteile"]},
+{n:"3D Honeycomb",cat:"stark",catL:"Stark",str:9,speed:3,matEff:6,iso:7,dim:"3D",density:"15\u201330%",topPick:false,desc:"Dreidimensionale Wabenstruktur. Eine der st\u00e4rksten Optionen, aber sehr langsam wegen komplexer Pfade.",pro:["Sehr hohe Festigkeit in alle Richtungen","3D-Struktur mit Z-Verstrebung"],con:["Sehr langsam zu drucken","Viel Material","Komplexe Pfade = mehr Vibrationen"],uc:["Maximal belastete Funktionsteile","Industrielle Endteile"]},
+{n:"Lines (Linien)",cat:"schnell",catL:"Schnell",str:3,speed:9,matEff:7,iso:2,dim:"2D",density:"10\u201320%",topPick:false,desc:"Parallele Linien in einer Richtung pro Schicht, alterniert 90\u00b0 pro Layer. Minimal und schnell, kaum strukturelle Festigkeit.",pro:["Sehr schnell zu drucken","Wenig Material","Keine Richtungswechsel = leise"],con:["Sehr schwach in einer Richtung pro Layer","Kaum strukturelle Festigkeit"],uc:["Schnelle visuelle Prototypen","Miniaturen und Tabletop-Figuren"]},
+{n:"Triangles (Dreiecke)",cat:"stark",catL:"Stark",str:8,speed:6,matEff:6,iso:5,dim:"2D",density:"15\u201330%",topPick:false,desc:"Dreiecksnetzwerk mit guter Scherfestigkeit. Stark in der Ebene, aber 2D-Muster ohne Z-Verstrebung.",pro:["Exzellente Scherfestigkeit","Gutes Festigkeits-Gewichts-Verh\u00e4ltnis"],con:["2D-Muster, schwach in Z","Scharfe Winkel bei Speed-Druck problematisch"],uc:["Teile mit seitlicher Scherbelastung","Platten und Fl\u00e4chenelemente"]},
+{n:"Concentric (Konzentrisch)",cat:"spezial",catL:"Spezialisiert",str:4,speed:7,matEff:6,iso:3,dim:"2D",density:"15\u201340%",topPick:false,desc:"Folgt der Au\u00dfenkontur nach innen. Gut f\u00fcr flexible Teile und d\u00fcnne W\u00e4nde, aber schlecht f\u00fcr Druckfestigkeit von oben.",pro:["Macht Teile flexibler/federnder","Gut f\u00fcr d\u00fcnne, gebogene Teile"],con:["Schlecht f\u00fcr Top-Layer St\u00fctzung","Kaum Druckfestigkeit von oben"],uc:["Flexible TPU-Teile","Federnde Clips und Halter","D\u00fcnnwandige Beh\u00e4lter"]},
+{n:"Zig-Zag",cat:"schnell",catL:"Schnell",str:3,speed:9,matEff:7,iso:2,dim:"2D",density:"10\u201320%",topPick:false,desc:"\u00c4hnlich wie Lines, aber als durchgehender Zick-Zack-Pfad ohne Retraction. Schnell und materialeffizient.",pro:["Schnell wie Lines, durchgehender Pfad","Keine Retractions n\u00f6tig"],con:["Schwach wie Lines","Nicht f\u00fcr mechanische Belastung"],uc:["Schnelle Prototypen und Testdrucke","Wenn Retraction-Probleme vermieden werden sollen"]},
+{n:"Tri-Hexagon",cat:"stark",catL:"Stark",str:8,speed:5,matEff:6,iso:6,dim:"2D",density:"15\u201330%",topPick:false,desc:"Kombination aus Dreiecken und Sechsecken. Sehr starkes 2D-Muster mit guter Lastverteilung.",pro:["Sehr stark in der Ebene","Kombiniert Vorteile von Triangles und Honeycomb"],con:["Langsamer als einfache Muster","Viele Richtungswechsel"],uc:["Mechanische Plattenbauteile","Strukturplatten und Abdeckungen"]},
+{n:"Cross (Kreuz)",cat:"spezial",catL:"Spezialisiert",str:3,speed:6,matEff:7,iso:3,dim:"2D",density:"10\u201325%",topPick:false,desc:"Kreuzmuster das dem Teil Flexibilit\u00e4t verleiht. Gut f\u00fcr weiche, nachgiebige Teile.",pro:["Macht Teile flexibler und federnder","Gut kombiniert mit TPU/TPE"],con:["Schwache strukturelle Festigkeit","Begrenzte Anwendungsf\u00e4lle"],uc:["TPU/TPE flexible Teile","Sto\u00dfd\u00e4mpfer und Polster"]},
+{n:"Locked Zag",cat:"spezial",catL:"Spezialisiert",str:6,speed:7,matEff:6,iso:4,dim:"2D",density:"15\u201330%",topPick:false,desc:"Neues Bambu-Muster mit Skin+Skeleton-System: Cross-Zag-Haut f\u00fcr sch\u00f6ne Seitenfl\u00e4chen, Zig-Zag-Skelett f\u00fcr Festigkeit.",pro:["Sch\u00f6ne Seitenfl\u00e4chen-Textur (Cross-Zag Optik)","Inneres Skelett gibt strukturelle Festigkeit","Skin-/Skeleton-Dichte einzeln einstellbar"],con:["Komplexere Einstellungen (Skin/Skeleton/Depth)","Nur in neueren Bambu Studio Versionen"],uc:["Teile wo Seitenfl\u00e4chen-Optik wichtig ist","D\u00fcnnwandige Teile mit durchscheinendem Muster"]},
+{n:"Support Cubic",cat:"schnell",catL:"Schnell",str:4,speed:8,matEff:9,iso:5,dim:"3D",density:"5\u201315%",topPick:false,desc:"Vereinfachtes Cubic, nur f\u00fcr Top-Layer-St\u00fctzung optimiert. \u00c4hnliches Konzept wie Lightning, aber als 3D-Struktur.",pro:["Sehr materialeffizient","Schneller als normales Cubic","3D-Struktur f\u00fcr etwas mehr Halt als Lightning"],con:["Wenig strukturelle Festigkeit","Nicht f\u00fcr mechanisch belastete Teile"],uc:["Leichte Deko-Teile mit besserer Top-Qualit\u00e4t als Lightning","Material sparen bei visuellen Prototypen"]}
+];
+const icats=[{k:"all",l:"Alle"},{k:"allround",l:"\u2605 Allrounder"},{k:"stark",l:"Stark"},{k:"schnell",l:"Schnell"},{k:"spezial",l:"Spezialisiert"}];
+let iActiveCat="all",iSortCol="n",iSortDir=1,iExpanded=null;
+const icols=[{k:"n",l:"Infill-Muster"},{k:"catL",l:"Kategorie"},{k:"density",l:"Empf. Dichte"},{k:"dim",l:"Dim."},{k:"str",l:"Festigkeit",bar:1,cls:"bar-str"},{k:"speed",l:"Geschwindigk.",bar:1,cls:"bar-ease"},{k:"matEff",l:"Materialeffizienz",bar:1,cls:"bar-flex"},{k:"iso",l:"Isotropie",bar:1,cls:"bar-therm"}];
+function renderInfill(){
+const q=document.getElementById("qi").value.toLowerCase();
+let data=I.filter(f=>(iActiveCat==="all"||f.cat===iActiveCat)&&(!q||f.n.toLowerCase().includes(q)||f.desc.toLowerCase().includes(q)||f.uc.some(u=>u.toLowerCase().includes(q))));
+data.sort((a,b)=>{let av=a[iSortCol],bv=b[iSortCol];if(typeof av==="string")return iSortDir*av.localeCompare(bv);return iSortDir*(av-bv)});
+document.getElementById("icount").textContent=data.length+" Infill-Muster";
+let th="<tr>"+icols.map(c=>'<th onclick="idoSort(\''+c.k+'\')">'+c.l+'<span class="ar">'+(iSortCol===c.k?(iSortDir===1?"\u25b2":"\u25bc"):"")+'</span></th>').join("")+"</tr>";
+document.getElementById("ithead").innerHTML=th;
+let tb="";
+data.forEach(f=>{
+const rc=f.cat==="allround"?"cat-engineering":f.cat==="stark"?"cat-composite":f.cat==="schnell"?"cat-standard":"cat-specialty";
+tb+='<tr class="'+rc+'" style="cursor:pointer" onclick="itoggle(\''+f.n.replace(/'/g,"\\'")+'\')">';
+icols.forEach(c=>{
+if(c.bar){tb+='<td><div class="bar '+c.cls+'"><div class="bar-fill" style="width:'+f[c.k]*10+'%"></div></div><div class="val">'+f[c.k]+'/10</div></td>'}
+else if(c.k==="catL"){tb+='<td><span class="cb">'+(f.topPick?'\u2605 ':'')+f.catL+'</span></td>'}
+else if(c.k==="dim"){tb+='<td style="font-size:12px;color:'+(f.dim==="3D"?"#1D9E75":"#888")+'">'+f.dim+'</td>'}
+else{tb+='<td>'+f[c.k]+'</td>'}
+});
+tb+='</tr>';
+if(iExpanded===f.n){
+tb+='<tr class="dr"><td colspan="'+icols.length+'">'+(f.topPick?'<span class="cb" style="background:#E1F5EE;color:#085041;margin-bottom:6px;display:inline-block">\u2605 Top-Empfehlung</span><br>':'')+'<strong>'+f.n+'</strong> \u2014 '+f.desc;
+tb+='<div class="tags" style="margin-top:8px">';
+f.pro.forEach(p=>{tb+='<span class="tag tag-pro">\u2713 '+p+'</span>'});
+f.con.forEach(p=>{tb+='<span class="tag tag-con">\u2717 '+p+'</span>'});
+tb+='</div>';
+tb+='<div class="uc"><div class="uc-title">Empfohlen f\u00fcr</div><div class="uc-list">'+f.uc.map(u=>'\u2022 '+u).join('<br>')+'</div></div></td></tr>';
+}
+});
+document.getElementById("itbody").innerHTML=tb;
+}
+window.idoSort=function(k){if(iSortCol===k)iSortDir*=-1;else{iSortCol=k;iSortDir=1}renderInfill()};
+window.itoggle=function(n){iExpanded=iExpanded===n?null:n;renderInfill()};
+const iDiv=document.getElementById("icats");
+icats.forEach(c=>{const b=document.createElement("button");b.textContent=c.l;b.className=c.k==="all"?"active":"";b.onclick=()=>{iActiveCat=c.k;iDiv.querySelectorAll("button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderInfill()};iDiv.appendChild(b)});
+document.getElementById("qi").addEventListener("input",renderInfill);
+renderInfill();
+</script>
+</body>
+</html>
