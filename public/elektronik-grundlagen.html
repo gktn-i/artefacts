@@ -335,6 +335,52 @@ td:first-child{font-weight:500}
   font-size:13.5px;line-height:1.6;color:var(--accent-ink)}
 .kurz::before{content:"💡";flex:0 0 auto;font-size:15px;line-height:1.35}
 .kurz b{font-weight:700}
+
+/* Sidebar: Gliederungsebene sichtbar machen */
+#sideNav .ssec a.lv3{padding-left:19px}
+#sideNav .ssec a.lv4{padding-left:31px;font-size:11.5px;color:var(--faint)}
+#sideNav .ssec a.lv4:hover,#sideNav .ssec a.lv4.on{color:var(--accent-ink)}
+/* Suchtreffer: Antwortspalte als zweite Zeile */
+.pr .pw{display:block}
+.pr .px{opacity:.85}
+.pr .px mark{font-weight:700}
+.pr-x{display:block;padding:9px 11px;margin:.25rem;border-radius:7px;font-size:13px;
+  font-weight:600;text-decoration:none;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid var(--accent-border)}
+.pr-x:hover{filter:brightness(.97)}
+
+/* ============================================================
+   TABELLEN AUF SCHMALEN DISPLAYS
+   Statt horizontal zu scrollen (bisher lagen 48-55 % der Breite
+   ausserhalb) wird jede Zeile zu einer Karte. Die Spaltennamen
+   kommen aus dem <thead> und haengen per data-l an jeder Zelle.
+   ============================================================ */
+td.numcell{font-family:var(--mono);font-size:12.5px;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+th,td{font-variant-numeric:tabular-nums}
+h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink)}
+
+@media(max-width:620px){
+  .tbl-wrap{overflow-x:visible;border:none;background:transparent;box-shadow:none;margin:.6rem 0}
+  .tbl-wrap table{min-width:0!important;width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+  .tbl-wrap thead{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .tbl-wrap tbody tr{display:block;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:9px;padding:3px 0 5px}
+  .tbl-wrap tbody tr:hover td{background:transparent}
+  .tbl-wrap tbody td{display:block;width:auto;border:none;border-top:none!important;
+    padding:5px 14px;line-height:1.5;text-align:left}
+  .tbl-wrap tbody td:empty{display:none}
+  .tbl-wrap tbody td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);
+    font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--faint);margin-bottom:1px}
+  .tbl-wrap tbody td:first-child{font-weight:600;font-size:14px;padding-top:9px;padding-bottom:8px;
+    border-bottom:1px solid var(--border)!important;margin-bottom:3px}
+  .tbl-wrap tbody td:first-child::before{display:none}
+  .tbl-wrap tbody td[colspan]{background:var(--surface-2);font-weight:600;border-bottom:none!important;
+    margin:0;border-radius:var(--radius) var(--radius) 0 0}
+  .tbl-wrap tbody td.numcell{white-space:normal}
+}
 </style>
 <link rel="stylesheet" href="assets/chrome.css">
 <script defer src="assets/registry.js"></script>
@@ -894,6 +940,7 @@ td:first-child{font-weight:500}
 <!-- ============ TAB: MESSGERÄT ============ -->
 <section id="t-messgeraet" class="hidden">
 
+
 <h2>Welches Multimeter? Hand oder Tisch</h2>
 <div class="kurz"><div><b>Beide haben ihren Platz.</b> Das <b>Handgerät</b> ist das robuste Universalwerkzeug für unterwegs, Netzspannung und grobe Ja/Nein-Fragen. Das <b>Tischmultimeter</b> ist das Präzisionsgerät für die Werkbank: mehr Stellen, ruhigere Anzeige, beide Hände frei.</div></div>
 <div class="grid2">
@@ -1055,8 +1102,23 @@ td:first-child{font-weight:500}
 <div class="rule"><span class="ico">🔢</span><div>Einheiten-Buchstabe beachten: <b>m</b> (Milli), <b>k</b> (Kilo), <b>M</b> (Mega), <b>µ</b> (Mikro). "4.7k Ω" sind 4700 Ω.</div></div>
 </div>
 
+<h2>Sicherheit & häufige Fehler</h2>
+<div class="card">
+<div class="rule"><span class="ico">🔌</span><div><b>Rote Leitung nach Strommessung zurückstecken!</b> Der häufigste Fehler: Leitung bleibt in der A-Buchse, dann misst man Spannung → Kurzschluss. Nach jeder Strommessung Rot zurück in VΩ.</div></div>
+<div class="rule"><span class="ico">🧰</span><div><b>Erst Funktion wählen, dann anlegen.</b> Nie das Drehrad drehen, während die Spitzen unter Spannung stehen.</div></div>
+<div class="rule"><span class="ico">🚫</span><div><b>Widerstand/Durchgang nur stromlos.</b> An einer Schaltung unter Spannung gemessen → falsche Werte und evtl. Schaden am Gerät.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Netzspannung (230 V) ist kein Anfänger-Spielfeld.</b> Passende Messkategorie (CAT II/III), einwandfreie Leitungen, Eine-Hand-Regel — alle Regeln dazu im Tab <a href="#sicherheit">Sicherheit</a>.</div></div>
+<div class="rule"><span class="ico">⏳</span><div><b>Bei Auto-Range Geduld.</b> Den Wert eine Sekunde einpendeln lassen, bevor du abliest.</div></div>
+<div class="rule"><span class="ico">🖥️</span><div><b>Beim Tischgerät auf die Messkategorie achten.</b> CAT II 600 V heißt: Steckdosen-Stromkreis ja, Verteilung nein. Und es hat keine Abschaltautomatik — es misst auch nach Stunden noch im A-Bereich weiter, wenn du es dort vergessen hast.</div></div>
+<div class="rule"><span class="ico">🧷</span><div><b>Kein Bezug zur Erde annehmen.</b> Auch beim netzbetriebenen Tisch-DMM ist COM ein <b>schwebender</b> Eingang, keine Schutzerde. Zwei Geräte gleichzeitig an unterschiedlichen Punkten sind kein Problem — anders als beim <a href="#oszilloskop">Oszilloskop</a>, dessen Masseklemme fest auf Erde liegt.</div></div>
+</div></section>
+
+<!-- ============ TAB: MESSEN ============ -->
+<section id="t-messen" class="hidden">
+
+<div class="kurz"><div><b>Die Handgriffe und die Erwartungswerte.</b> Wie das Gerät selbst funktioniert, steht im Tab <a href="#messgeraet">Multimeter</a>; was du tust, wenn ein Wert nicht stimmt, im Tab <a href="#fehlersuche">Fehlersuche</a>.</div></div>
 <h2>Was ist ein guter Wert? Referenztabelle</h2>
-<p>Ein Messwert allein sagt nichts — er braucht einen Sollwert. Die wichtigsten Erwartungswerte auf einen Blick:</p>
+<p>Ein Messwert allein sagt nichts — er braucht einen Sollwert. Die wichtigsten Erwartungswerte auf einen Blick. Richtwerte für <b>eingelötete</b> Bauteile, Rails gegen Masse und die Messreihenfolge stehen im Tab <a href="#fehlersuche">Fehlersuche</a>.</p>
 <div class="tbl-wrap"><table style="min-width:860px">
 <thead><tr><th>Was du misst</th><th>Modus</th><th>Soll (in Ordnung)</th><th>Auffällig</th></tr></thead>
 <tbody>
@@ -1149,6 +1211,83 @@ td:first-child{font-weight:500}
 <li>Faustwerte: AA/AAA frisch ~1,5 V, leer unter ~1,2 V · 9-V-Block frisch ~9 V · Li-Ion-Zelle voll 4,2 V, leer ~3,0 V.</li>
 <li>Besser unter Last messen (im Gerät eingebaut), denn leere Batterien zeigen ohne Last oft noch fast volle Spannung.</li>
 </ul></div>
+
+</section>
+
+<!-- ============ TAB: FEHLERSUCHE ============ -->
+<section id="t-fehlersuche" class="hidden">
+
+<div class="kurz"><div><b>Alles zur Fehlersuche an einer Baugruppe an einem Ort.</b> Erst die Sollwerte auf der bestückten Platine, dann die Reihenfolge, in der man sich durchmisst, dann die einzelnen Handgriffe — und zum Schluss, warum ein Vergleichswert mehr wert ist als jede Tabelle.</div></div>
+
+
+<p>Alle Diodenmodus- und Widerstandsmessungen gelten <b>stromlos</b>: Akku ab, Netzteil ab, Elkos entladen. Schwarze Prüfspitze bei Messungen gegen Masse immer auf GND, mit der roten wird angetastet.</p>
+
+<h2>Richtwerte im eingebauten Zustand</h2>
+<p>Werte für Bauteile, die <b>eingelötet</b> sind — deshalb weichen sie teils von den Einzelbauteil-Werten in der <a href="#messen">Referenztabelle im Tab Messen &amp; Werte</a> ab. Der Diodenmodus ist hier der Standardmodus, weil er noch unterscheidet, wo der Ω-Modus längst 0 anzeigt.</p>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Bauteil</th><th>Messmodus</th><th>Typischer Wert</th><th>Verdächtiger Wert</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Halbleiterübergänge</td></tr>
+<tr><td>PN-Diode Silizium (1N4148, 1N400x)</td><td>Diode, Durchlass</td><td>0,55–0,75 V</td><td>&lt; 0,3 V · 0,000 V · OL</td><td>0,000 V = durchlegiert · OL in beide Richtungen = unterbrochen</td></tr>
+<tr><td>PN-Diode Silizium</td><td>Diode, Sperrichtung</td><td>OL</td><td>jeder endliche Wert</td><td>Auf dem Board verhindern Parallelpfade oft das OL — im Zweifel einseitig auslöten</td></tr>
+<tr><td>BJT Basis–Emitter / Basis–Kollektor</td><td>Diode</td><td>0,55–0,75 V</td><td>&lt; 0,4 V · OL</td><td>NPN: Rot an Basis. PNP: Schwarz an Basis</td></tr>
+<tr><td>BJT Kollektor–Emitter</td><td>Diode</td><td>OL in beide Richtungen</td><td>jeder endliche Wert</td><td>Ein Wert in beide Richtungen = durchlegiert</td></tr>
+<tr><td>Z-Diode</td><td>Diode, Durchlass</td><td>0,55–0,75 V</td><td>0,000 V</td><td>Die Z-Spannung misst kein Multimeter — dafür <a href="#netzteil">Labornetzteil</a> mit Strombegrenzung und Vorwiderstand</td></tr>
+<tr><td>Germanium-Diode</td><td>Diode, Durchlass</td><td>0,2–0,4 V</td><td>0,000 V</td><td>Nur in Altgeräten — nicht mit einer Schottky verwechseln</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Schottky-Dioden</td></tr>
+<tr><td>Schottky, Durchlass</td><td>Diode</td><td>0,15–0,45 V</td><td>0,000 V · OL</td><td>Der niedrige Wert ist <b>normal</b> und kein Teilkurzschluss</td></tr>
+<tr><td>Schottky, Sperrichtung</td><td>Diode</td><td>OL, oft aber ein hoher Restwert</td><td>0,000 V</td><td>Schottky hat prinzipbedingt mehr Sperrstrom — „nicht ganz OL" ist hier kein Defekt</td></tr>
+<tr><td>Schottky als Verpolschutz / ORing in der Versorgung</td><td>Diode</td><td>0,2–0,4 V</td><td>0,000 V</td><td>Durchlegierte Verpolschutzdiode ist eine der häufigsten Ursachen für eine kurzgeschlossene Eingangsrail</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">MOSFET (N-Kanal, Anreicherungstyp)</td></tr>
+<tr><td>Body-Diode: <b>Rot an S</b>, Schwarz an D</td><td>Diode</td><td>0,4–0,7 V</td><td>0,000 V · OL</td><td>Vor jeder Messung Gate gegen Source kurzschließen (Gate entladen)</td></tr>
+<tr><td><b>Rot an D</b>, Schwarz an S</td><td>Diode</td><td>OL</td><td>0,000 V · &lt; 0,1 V</td><td>Ein Wert in <b>beide</b> Richtungen = durchlegiert. Das mit Abstand häufigste FET-Ausfallbild</td></tr>
+<tr><td>Gate gegen Source und Gate gegen Drain</td><td>Diode oder Ω</td><td>OL</td><td>jeder Wert unter ~1 MΩ</td><td>Gate-Durchschlag. Vorher entladen, sonst misst man nur die gespeicherte Gate-Ladung</td></tr>
+<tr><td>Schalttest: Gate kurz mit <b>Rot</b> antippen</td><td>Diode</td><td>D–S wird danach niederohmig</td><td>keine Änderung</td><td>Beweist, dass der FET überhaupt schaltet. Danach Gate wieder gegen Source entladen</td></tr>
+<tr><td>P-Kanal-MOSFET</td><td>Diode</td><td>wie oben, <b>alle Polaritäten vertauscht</b></td><td>—</td><td>Die Body-Diode zeigt hier von Drain nach Source</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Sicherungen</td></tr>
+<tr><td>Schmelzsicherung / SMD-Sicherung</td><td>Ω</td><td>0,00–0,5 Ω</td><td>OL</td><td>Bei Parallelpfaden einseitig auslöten</td></tr>
+<tr><td>Schmelzsicherung, in-circuit</td><td>Diode</td><td>0,000–0,005 V</td><td>jeder Wert &gt; 0,05 V</td><td>Schneller als Ω, weil die Auflösung im mV-Bereich liegt</td></tr>
+<tr><td>Rückstellbare Sicherung (PTC / Polyfuse)</td><td>Ω</td><td>0,05–2 Ω kalt</td><td>OL · &gt; 10 Ω</td><td>Ein ausgelöster PTC ist hochohmig und wird erst nach dem Abkühlen wieder normal — nicht vorschnell als defekt einstufen</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Spulen und Ferrite</td></tr>
+<tr><td>Ferritperle (Bead)</td><td>Ω</td><td>0,00–1 Ω</td><td>OL</td><td>Typisches Ausfallbild: unterbrochen nach Überstrom. Der Ω-Wert sagt <b>nichts</b> über die HF-Wirkung aus</td></tr>
+<tr><td>Speicherdrossel eines Schaltwandlers</td><td>Ω</td><td>0,00–0,10 Ω, meist unter der Auflösung</td><td>OL</td><td>Von einem Kurzschluss praktisch nicht zu unterscheiden — REL/Zero gegen den Leitungswiderstand nutzen</td></tr>
+<tr><td>Trafo-, Relais-, Motorwicklung</td><td>Ω</td><td>einige Ω bis einige kΩ</td><td>OL · deutlich unter der Vergleichswicklung</td><td><b>Windungsschluss zeigt der Ω-Modus nicht</b> — dafür identische Wicklung vergleichen oder <a href="#lcrp1">LCR-Messgerät</a></td></tr>
+<tr><td>Spule oder Ferrit allgemein</td><td>Diode</td><td>0,000–0,020 V</td><td>&gt; 0,05 V</td><td>Verhält sich im Diodenmodus wie ein Stück Draht</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Elkos</td></tr>
+<tr><td>Elko, ausgelötet</td><td>Kapazität</td><td>Nennwert <b>±20 %</b></td><td>mehr als −20 % · stark schwankend</td><td>Vorher entladen, sonst Fehlanzeige oder Schaden am Messgerät</td></tr>
+<tr><td>Elko, in-circuit</td><td>Kapazität</td><td>Summe aller parallelen Kondensatoren</td><td>—</td><td>Misst nie ein Einzelbauteil — nur als Vergleich zwischen zwei Boards brauchbar</td></tr>
+<tr><td>Elko</td><td>Ω</td><td>Wert steigt sichtbar an, dann OL</td><td>konstant niederohmig</td><td>Der Ladetest. Bleibt der Wert klein: defekt oder niederohmig überbrückt</td></tr>
+<tr><td>Elko</td><td>Diode</td><td>Anzeige läuft von 0 hoch</td><td>0,000 V konstant</td><td>Gleiches Prinzip, feinere Auflösung</td></tr>
+<tr><td><b>ESR</b> eines Elkos</td><td>—</td><td>mit dem Multimeter <b>nicht messbar</b></td><td>—</td><td>Ein alter Elko kann die volle Nennkapazität und trotzdem viel zu hohen ESR haben — dafür <a href="#lcrp1">LCR-P1</a> oder ESR-Meter</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Keramikkondensatoren (MLCC)</td></tr>
+<tr><td>MLCC, ausgelötet</td><td>Kapazität</td><td>Nennwert ±10–20 %</td><td>0 · weit daneben</td><td>Werte unter etwa 1 nF liegen unter der Auflösung vieler Multimeter</td></tr>
+<tr><td>MLCC</td><td>Diode / Ω</td><td>OL</td><td>0,000 V · wenige Ω</td><td>Ein gerissener MLCC ist ein satter Kurzschluss. Nach Sturz oder verbogenem Board der häufigste Rail-Killer</td></tr>
+<tr><td>MLCC, in-circuit</td><td>Kapazität</td><td>Summe der Rail-Kapazität</td><td>—</td><td>Nur im Vergleich mit einem zweiten Board aussagekräftig</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Spannungsrails gegen Masse (Schwarz an GND)</td></tr>
+<tr><td>Logik-Rail 5 V / 3,3 V / 1,8 V</td><td>Diode</td><td>0,3–0,6 V</td><td>0,000–0,010 V</td><td>Der Standardtest auf Rail-Kurzschluss</td></tr>
+<tr><td>Core- / GPU- / SoC-Rail (&lt; 1,2 V)</td><td>Diode</td><td>0,05–0,30 V</td><td>0,000–0,005 V</td><td>Von Haus aus niedrig, weil viele Kondensatoren und Halbleiter parallel hängen — <b>nicht</b> mit einem Kurzschluss verwechseln</td></tr>
+<tr><td>Eingangs- / Akkurail</td><td>Diode</td><td>0,3–0,7 V</td><td>0,000 V</td><td>0,000 V heißt hier fast immer: Verpolschutz, Eingangs-FET oder ein MLCC ist durch</td></tr>
+<tr><td>Logik-Rail 5 V / 3,3 V, im Ω-Modus</td><td>Ω</td><td>~100 Ω bis mehrere kΩ</td><td>unter ~5 Ω</td><td>Die Schwelle hängt von der Rail ab — ausführliche Tabelle und die Milliohm-Methode zum Einkreisen stehen weiter unten unter <b>Fehler finden</b></td></tr>
+<tr><td>Core-Rail 0,9–1,2 V, im Ω-Modus</td><td>Ω</td><td>oft nur 1–20 Ω</td><td>unter ~0,5 Ω</td><td>Viele Stützkondensatoren und geringer Innenwiderstand — niedrige Ω-Werte sind hier normal</td></tr>
+<tr><td>Motor- / Endstufen-Rail 12–48 V, im Ω-Modus</td><td>Ω</td><td>einige zehn Ω bis kΩ</td><td>unter ~2 Ω</td><td>Es gibt keine feste Grenze: 0,0 Ω in beide Richtungen ist immer ein Kurzschluss, alles dazwischen entscheidet der Vergleich</td></tr>
+<tr><td>beliebige Rail, im Betrieb</td><td>V⎓</td><td>Nennwert ±5 %</td><td>fehlt · zu niedrig · schwankt</td><td>Erst messen, wenn stromlos nichts Auffälliges gefunden wurde</td></tr>
+</tbody>
+</table></div>
+<div class="tip" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;margin:.7rem 0"><b>0,000 V im Diodenmodus</b> ist die einzige Anzeige, die für sich allein schon eine Aussage ist: dort liegt ein echter Kurzschluss. Alles andere in dieser Tabelle braucht einen Vergleichswert, um etwas zu bedeuten.</div>
+
+<h2>Messreihenfolge bei der Fehlersuche</h2>
+<p>Immer von der Quelle Richtung Verbraucher. Wer mitten im Board anfängt, misst Folgefehler und sucht am Ende ein Bauteil, das nur deshalb tot aussieht, weil ihm die Versorgung fehlt.</p>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th>#</th><th>Schritt</th><th>Modus</th><th>Erwartung</th><th>Wenn es abweicht</th></tr></thead>
+<tbody>
+<tr><td><b>1</b></td><td><b>Eingangsspannung</b> — am Stecker, hinter Sicherung und hinter dem Verpolschutz</td><td>stromlos Diode gegen GND, dann V⎓</td><td>Diodenwert 0,3–0,7 V · danach der Nennwert</td><td>0,000 V → zuerst diesen Kurzschluss suchen, bevor irgendetwas eingeschaltet wird. Gar keine Spannung → Netzteil, Kabel, Buchse, Sicherung</td></tr>
+<tr><td><b>2</b></td><td><b>Hauptrail</b> — Ausgang des ersten Wandlers, z. B. 5 V oder 3,3 V</td><td>V⎓</td><td>Nennwert ±5 %</td><td>Fehlt sie: Wandler-IC, Speicherdrossel, High- und Low-Side-FET sowie den Eingang des Wandlers prüfen</td></tr>
+<tr><td><b>3</b></td><td><b>Abgeleitete Rails</b> — 1,8 V, 1,2 V, Core, I/O, PLL, der Reihe nach</td><td>stromlos Diode gegen GND, dann V⎓</td><td>jeweils der Nennwert</td><td>Eine einzelne tote Rail → deren Wandler oder LDO. <b>Alle</b> tot → gemeinsames Enable, Sequencer oder die Hauptrail bricht unter Last ein</td></tr>
+<tr><td><b>4</b></td><td><b>Enable und Feedback</b> an jedem Wandler, der nicht anläuft</td><td>V⎓</td><td>EN auf High-Pegel der Steuerlogik · FB auf der Referenzspannung des ICs (oft 0,6–1,25 V, Datenblatt)</td><td>EN fehlt → die Ursache liegt <b>vor</b> dem Wandler (Sequencer, PMIC, Reset). FB daneben → Rückkoppelteiler, Lötstelle oder die Last</td></tr>
+<tr><td><b>5</b></td><td><b>Datensignale und Takt</b> — Reset, Quarz, I²C/SPI, Busleitungen</td><td>V⎓, <a href="#oszilloskop">Oszilloskop</a></td><td>Reset High · Takt vorhanden · I²C-Leitungen per Pull-up auf Rail-Niveau</td><td>Erst sinnvoll, wenn alle Rails stehen. Vorher misst man nur, dass nichts läuft</td></tr>
+</tbody>
+</table></div>
+<p class="note">Faustregel für die Reihenfolge innerhalb eines Schritts: erst stromlos im Diodenmodus gegen Masse (findet Kurzschlüsse gefahrlos), dann erst Spannung anlegen und im Betrieb messen.</p>
 
 <h2>Fehler finden: Kurzschluss, kaputtes Bauteil & Co.</h2>
 <p>Die Schnellübersicht: was du bei welchem Verdacht misst, <b>wo genau die zwei Spitzen hinkommen</b> und was die Anzeige bedeutet. Die genauen Handgriffe stehen als Schritt-Rezepte darunter.</p>
@@ -1357,16 +1496,72 @@ td:first-child{font-weight:500}
 <h3>Die Logik dahinter</h3>
 <div class="card"><p style="margin:0"><b>Verfolge die Spannung von der Quelle nach innen.</b> An der letzten Stelle, wo sie noch <b>da</b> ist, und der ersten, wo sie <b>fehlt</b>, sitzt der Fehler — meist Buchse, Sicherung, Ladechip oder ein kurzschließender Kondensator. Verkohlte, aufgeblähte oder warme Bauteile sind zusätzliche Verdächtige (Sicht + Finger).</p></div>
 
-<h2>Sicherheit & häufige Fehler</h2>
+<h2>Kurzschluss auf einer Rail eingrenzen</h2>
+<p>Wenn Schritt 1 oder 3 eine Rail bei 0,000 V zeigt, steht fest <i>dass</i> etwas kurzschließt — nicht <i>was</i>. Drei Verfahren, um das Bauteil zu finden, ohne die halbe Platine auszulöten. Die vierte, die <b>Milliohm-Methode</b> mit dem Tischmultimeter, steht ausführlich weiter unten unter <b>Fehler finden</b> und ist die genaueste, wenn du ein Tischgerät hast:</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Methode</th><th>Vorgehen</th><th>Was sie zeigt</th></tr></thead>
+<tbody>
+<tr><td><b>Spannungsabfall verfolgen</b> (Injection)</td><td><a href="#netzteil">Labornetzteil</a> strombegrenzt (0,5–2 A) auf die Rail geben, mit dem Multimeter im mV-Bereich den Spannungsabfall entlang der Rail abtasten</td><td>Der Wert wird zum Fehler hin <b>kleiner</b> — am tiefsten Punkt sitzt das Bauteil. Am schärfsten mit einem Tisch-DMM</td></tr>
+<tr><td><b>Wärme</b></td><td>Rail strombegrenzt speisen, dann mit dem Finger oder einer Wärmebildkamera über das Board gehen</td><td>Das kurzschließende Bauteil wird als erstes warm. Schnellste Methode, wenn der Kurzschluss richtig Strom zieht</td></tr>
+<tr><td><b>Sektionieren</b></td><td>Ferritperlen, 0-Ω-Brücken und Sicherungen der Reihe nach auslöten und die Rail dabei beobachten</td><td>Trennt die Rail in Abschnitte, bis der Kurzschluss verschwindet — dann liegt er im zuletzt getrennten Zweig</td></tr>
+</tbody>
+</table></div>
+<div class="danger-box"><b>Strombegrenzung ist Pflicht.</b> Eine kurzgeschlossene Rail ohne Limit anzufahren zerstört das, was du gerade suchst — oft samt Leiterbahn. Erst das Limit einstellen (Ausgang kurzschließen, Limit einregeln), dann anschließen. Vorgehen im Tab <a href="#netzteil">Labornetzteil</a>.</div>
+
+<h2>Grenzen der Richtwerte</h2>
+<p>Absolute Richtwerte gelten für <b>Bauteile</b>, nicht für <b>Baugruppen</b>. Sobald ein Bauteil eingelötet ist, misst man immer die Parallelschaltung von allem, was am selben Knoten hängt.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Effekt</th><th>Folge für die Messung</th></tr></thead>
+<tbody>
+<tr><td>Parallelpfade auf dem Knoten</td><td>Ein intaktes Bauteil kann viel zu niedrig messen, ein defektes viel zu unauffällig</td></tr>
+<tr><td>ESD-Schutzdioden in ICs</td><td>Erzeugen an fast jedem Pin einen Diodenwert gegen GND und gegen VCC — auch dort, wo im Schaltplan gar keine Diode steht</td></tr>
+<tr><td>Kapazität an der Rail</td><td>Der Diodenmodus zeigt erst nach dem Aufladen einen stabilen Wert. Große Rails brauchen ein bis zwei Sekunden — der <b>Endwert</b> zählt</td></tr>
+<tr><td>Prüfspannung des Messgeräts</td><td>Je nach Gerät 1–3 V im Diodenmodus. Zwei Multimeter zeigen an derselben Stelle unterschiedliche Werte — Referenzwerte deshalb <b>immer mit demselben Gerät</b> aufnehmen</td></tr>
+<tr><td>Temperatur und Restladung</td><td>Warme Boards und nicht entladene Elkos verschieben die Werte reproduzierbar nach unten bzw. oben</td></tr>
+<tr><td>Bauteiltoleranz und Revision</td><td>Derselbe Gerätetyp kann je nach Boardrevision andere Bauteile tragen — Werte gelten nicht automatisch über Revisionen hinweg</td></tr>
+</tbody>
+</table></div>
+
+<h2>Vergleichsmessungen — was wirklich zuverlässig ist</h2>
+<p>Statt einen Messwert gegen eine allgemeine Tabelle zu halten, hält man ihn gegen einen zweiten Messwert, der unter denselben Bedingungen entstanden ist. Nach Aussagekraft sortiert:</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Vergleich</th><th>Vorgehen</th><th>Aussagekraft</th><th>Grenze</th></tr></thead>
+<tbody>
+<tr><td><b>Funktionierendes Board</b> derselben Revision</td><td>Denselben Punkt mit demselben Gerät auf beiden Boards messen</td><td><b>Höchste.</b> Deckt auch Fehler auf, nach denen man gar nicht gesucht hätte</td><td>Zweites Board nötig, Revision muss stimmen</td></tr>
+<tr><td><b>Symmetrischer Schaltungsblock</b> auf demselben Board</td><td>Kanal A gegen Kanal B, Phase 1 gegen Phase 2 einer mehrphasigen Versorgung, RAM-Kanal 1 gegen 2, USB-Port 1 gegen 2</td><td>Sehr hoch — und ohne zweites Board zu haben</td><td>Nur dort, wo es Symmetrie gibt. Beide Seiten können auch gleichzeitig defekt sein</td></tr>
+<tr><td><b>Gleichartige Pins</b> desselben ICs</td><td>Alle GND-Pins, alle VDD-Pins oder alle Pins desselben Busses gegeneinander</td><td>Hoch für einzelne gerissene oder unterbrochene Verbindungen</td><td>Sagt nichts darüber, ob das IC selbst funktioniert</td></tr>
+<tr><td><b>Eigene Referenzwerte</b> vom intakten Gerät</td><td>Einmal am funktionierenden Gerät alles vermessen und notieren — Vorlage unten</td><td>Hoch, und mit der Zeit die beste Datenbasis überhaupt</td><td>Erfordert Disziplin, <b>bevor</b> etwas kaputt ist</td></tr>
+<tr><td><b>Datenblatt / Boardview</b></td><td>Sollwerte für Enable, Feedback und Referenzen nachschlagen</td><td>Hoch für einzelne Pins</td><td>Sagt nichts über die Parallelpfade auf genau diesem Board</td></tr>
+<tr><td>Allgemeine Richtwerttabelle</td><td>Die Tabelle oben</td><td>Gut als Einstieg und um Größenordnungen einzuordnen</td><td><b>Am schwächsten.</b> Erkennt zuverlässig nur eindeutige Fälle: 0,000 V und OL</td></tr>
+</tbody>
+</table></div>
+<div class="tip" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;margin:.7rem 0"><b>Merksatz:</b> Ein einzelner Messwert ist eine Beobachtung. Eine Aussage wird daraus erst durch einen zweiten Wert, mit dem man ihn vergleicht.</div>
+
+<h2>Vorlage: eigene Referenzwerte</h2>
+<p>Pro Gerätefamilie eine Tabelle, einmal am <b>funktionierenden</b> Gerät aufgenommen — mit demselben Multimeter, stromlos und entladen. Das ist der Aufwand, der sich beim zweiten Defekt derselben Bauart auszahlt.</p>
 <div class="card">
-<div class="rule"><span class="ico">🔌</span><div><b>Rote Leitung nach Strommessung zurückstecken!</b> Der häufigste Fehler: Leitung bleibt in der A-Buchse, dann misst man Spannung → Kurzschluss. Nach jeder Strommessung Rot zurück in VΩ.</div></div>
-<div class="rule"><span class="ico">🧰</span><div><b>Erst Funktion wählen, dann anlegen.</b> Nie das Drehrad drehen, während die Spitzen unter Spannung stehen.</div></div>
-<div class="rule"><span class="ico">🚫</span><div><b>Widerstand/Durchgang nur stromlos.</b> An einer Schaltung unter Spannung gemessen → falsche Werte und evtl. Schaden am Gerät.</div></div>
-<div class="rule"><span class="ico">⚡</span><div><b>Netzspannung (230 V) ist kein Anfänger-Spielfeld.</b> Passende Messkategorie (CAT II/III), einwandfreie Leitungen, Eine-Hand-Regel — alle Regeln dazu im Tab <a href="#sicherheit">Sicherheit</a>.</div></div>
-<div class="rule"><span class="ico">⏳</span><div><b>Bei Auto-Range Geduld.</b> Den Wert eine Sekunde einpendeln lassen, bevor du abliest.</div></div>
-<div class="rule"><span class="ico">🖥️</span><div><b>Beim Tischgerät auf die Messkategorie achten.</b> CAT II 600 V heißt: Steckdosen-Stromkreis ja, Verteilung nein. Und es hat keine Abschaltautomatik — es misst auch nach Stunden noch im A-Bereich weiter, wenn du es dort vergessen hast.</div></div>
-<div class="rule"><span class="ico">🧷</span><div><b>Kein Bezug zur Erde annehmen.</b> Auch beim netzbetriebenen Tisch-DMM ist COM ein <b>schwebender</b> Eingang, keine Schutzerde. Zwei Geräte gleichzeitig an unterschiedlichen Punkten sind kein Problem — anders als beim <a href="#oszilloskop">Oszilloskop</a>, dessen Masseklemme fest auf Erde liegt.</div></div>
+<div class="rule"><span class="ico">📇</span><div><b>Gerät:</b> Modell <b>und</b> Boardrevision. Werte gelten nicht automatisch über Revisionen hinweg.</div></div>
+<div class="rule"><span class="ico">📍</span><div><b>Messpunkt:</b> eindeutig benennen — Bauteilkennung mit Pad oder Pin, oder ein Testpunkt: <span class="kbd">C412 / Pad 1</span>, <span class="kbd">U3 Pin 12</span>, <span class="kbd">TP7</span>. Nicht „irgendwo an 3,3 V".</div></div>
+<div class="rule"><span class="ico">🎯</span><div><b>Sollwert:</b> der am intakten Gerät gemessene Wert, <b>immer mit Modus</b> — z. B. <span class="kbd">0,42 V Diode</span> oder <span class="kbd">3,31 V ⎓</span>.</div></div>
+<div class="rule"><span class="ico">📓</span><div><b>gemessen:</b> der Wert im Fehlerfall. Bleibt beim Anlegen der Referenz leer.</div></div>
+<div class="rule"><span class="ico">🗓️</span><div><b>Datum:</b> damit später nachvollziehbar bleibt, mit welchem Stand und mit welchem Messgerät gemessen wurde.</div></div>
 </div>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Gerät</th><th>Messpunkt</th><th>Sollwert</th><th>gemessen</th><th>Datum</th></tr></thead>
+<tbody>
+<tr><td>XY-Board Rev. B</td><td><span class="kbd">L3 / Pad Ausgang</span> (1,8-V-Rail)</td><td>0,38 V Diode gegen GND</td><td>0,002 V</td><td>2026-08-06</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">— ab hier eigene Zeilen —</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zum Ausdrucken oder als Vorlage für die eigene Datei. Ergänzend zum Kopieren: <span class="kbd">Gerät | Messpunkt | Sollwert | gemessen | Datum</span></p>
 </section>
 
 
@@ -2340,17 +2535,17 @@ td:first-child{font-weight:500}
 const TABS=[
 {k:"grundlagen",l:"Basics",i:"⚡"},{k:"schaltplan",l:"Schaltplan",i:"📐"},{k:"leistung",l:"Leistung & PWM",i:"🔌"},{k:"rechner",l:"Rechner",i:"🧮"},{k:"begriffe",l:"Fachbegriffe",i:"📖"},
 {k:"komponenten",l:"Datenbank",i:"🧩"},{k:"displays",l:"Displays",i:"🖥️"},{k:"motoren",l:"Motoren",i:"⚙️"},{k:"mcu",l:"Mikrocontroller",i:"🤖"},
-{k:"messgeraet",l:"Multimeter",i:"📟"},{k:"oszilloskop",l:"Oszilloskop",i:"📉"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},
+{k:"messgeraet",l:"Multimeter",i:"📟"},{k:"messen",l:"Messen & Werte",i:"📐"},{k:"fehlersuche",l:"Fehlersuche",i:"🩺"},{k:"oszilloskop",l:"Oszilloskop",i:"📉"},{k:"lcrp1",l:"LCR-P1",i:"🔬"},{k:"netzteil",l:"Labornetzteil",i:"🔋"},
 {k:"sicherheit",l:"Sicherheit",i:"⚠️"},{k:"praxis",l:"Praxis & Aufbau",i:"📋"}
 ];
 const GROUPS=[
 {g:"basis",l:"Grundlagen",i:"⚡",tabs:["grundlagen","schaltplan","leistung","rechner","begriffe"]},
 {g:"teile",l:"Bauteile",i:"🧩",tabs:["komponenten","displays","motoren","mcu"]},
-{g:"messen",l:"Messen & Werkzeug",i:"🔧",tabs:["messgeraet","oszilloskop","lcrp1","netzteil"]},
+{g:"messen",l:"Messen & Werkzeug",i:"🔧",tabs:["messgeraet","messen","fehlersuche","oszilloskop","lcrp1","netzteil"]},
 {g:"sicher",l:"Sicherheit & Praxis",i:"⚠️",tabs:["sicherheit","praxis"]}
 ];
 /* alte Anker weiterleiten, damit bestehende Links gültig bleiben */
-const ALIAS={steckbrett:"praxis",regeln:"praxis"};
+const ALIAS={steckbrett:"praxis",regeln:"praxis",boarddiagnose:"fehlersuche"};
 function showTab(k){
 if(ALIAS[k])k=ALIAS[k];
 if(!TABS.some(t=>t.k===k))k=TABS[0].k;
@@ -2790,7 +2985,7 @@ window.__openSection=function(id){
 function run(){TABS.forEach(t=>build(SECOF(t[KEY])));}
 run();
 })();
-const OTHER={file:"loeten-referenz.html",name:"🔥 Löten · Referenz",links:[["methoden","Start & Methoden"],["equipment","Werkzeug & Material"],["tht","Techniken (THT/SMD)"],["bauteile","Bauteile & Qualität"]]};
+const OTHER={file:"loeten-referenz.html",name:"🔥 Löten · Referenz",links:[["start","Start & Workflow"],["material","Lot & Flussmittel"],["draht","Draht & Litze"],["tht","Techniken (THT/SMD)"],["reballing","Reballing"],["bauteile","Bauteile & Qualität"]]};
 /* ---------- APP-SHELL: Sidebar-Navigation + globale Suche ---------- */
 (function(){
 const KEY = window.__TABKEY__;                 // "k" (Elektronik) oder "p" (Löten)
@@ -2803,9 +2998,12 @@ const side = document.getElementById("side"), scrim = document.getElementById("s
 
 /* ---- Sidebar aufbauen ---- */
 function slug(s){return s.toLowerCase().replace(/[^a-z0-9äöüß]+/g,"-").replace(/^-|-$/g,"").slice(0,40);}
+/* Nicht jede Überschrift gliedert: h3/h4 in Karten und Vergleichsspalten sind
+   Bauteil-Beschriftungen. Die bleiben aus Navigation und Index draußen. */
+const HDECO = ".card, .gb-col, .sym, .grid2 > div, .rule, .calc, .acc";
 function headings(k){
   const sec = SECOF(k); if(!sec) return [];
-  let hs = [...sec.querySelectorAll("h2")];
+  let hs = [...sec.querySelectorAll("h2,h3,h4")].filter(h=>!h.closest(HDECO));
   if(hs.length < 2) hs = [...sec.querySelectorAll("h2,h3")];
   hs.forEach((h,i)=>{ if(!h.id) h.id = k+"--"+(slug(h.textContent)||("h"+i)); });
   return hs;
@@ -2826,6 +3024,7 @@ function buildSide(active){
         headings(tk).forEach(h=>{
           const a = document.createElement("a");
           a.href = "#"+tk; a.textContent = h.textContent.trim(); a.dataset.h = h.id;
+          a.className = "lv"+h.tagName.charAt(1);
           a.onclick = e=>{ e.preventDefault(); jump(tk,h.id); closeSide(); };
           box.appendChild(a);
         });
@@ -2883,7 +3082,7 @@ function nearestId(el, tab){
   let n = el;
   while(n && n !== document.body){
     let p = n.previousElementSibling;
-    while(p){ if(/^H[23]$/.test(p.tagName) && p.id) return p.id; p = p.previousElementSibling; }
+    while(p){ if(/^H[234]$/.test(p.tagName) && p.id) return p.id; p = p.previousElementSibling; }
     n = n.parentElement;
   }
   return tab;
@@ -2893,15 +3092,31 @@ function buildIndex(){
   TABS.forEach(t=>{
     const k = t[KEY], sec = SECOF(k); if(!sec) return;
     headings(k).forEach(h=>out.push({t:k,tl:t.l,id:h.id,x:h.textContent.trim(),w:h.tagName==="H2"?0:1}));
+    /* Tabellenkopf: damit man die Tabelle über ihre Spaltennamen findet */
+    sec.querySelectorAll("table").forEach(tb=>{
+      const th = [...tb.querySelectorAll("thead th")].map(x=>x.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
+      if(th.length < 2) return;
+      out.push({t:k,tl:t.l,id:nearestId(tb,k),x:"Tabelle: "+th.join(" · "),w:2});
+    });
     sec.querySelectorAll("table tbody tr").forEach(tr=>{
       const c = [...tr.children].map(td=>td.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
       if(!c.length) return;
-      out.push({t:k,tl:t.l,id:nearestId(tr,k),x:c.slice(0,2).join(" — "),w:3});
+      /* Spalte 3+ ist die eigentliche Antwort — mitindizieren statt wegwerfen */
+      out.push({t:k,tl:t.l,id:nearestId(tr,k),x:c.slice(0,2).join(" — "),xtra:c.slice(2).join(" · "),w:3});
     });
     sec.querySelectorAll(".card > h3, .card .ct, .sym .sn, .rule b:first-child").forEach(el=>{
       const x = el.textContent.replace(/\s+/g," ").trim();
       if(x.length < 2) return;
       out.push({t:k,tl:t.l,id:nearestId(el,k),x:x,w:2});
+    });
+    /* Hinweiskaesten und Kartentexte: Fliesstext, der bisher unauffindbar war.
+       Hohes Gewicht, damit Ueberschriften und Tabellen davor bleiben. */
+    sec.querySelectorAll(".tip, .warn, .note, .kurz, .card .cd, .step, .gb-col li").forEach(el=>{
+      const full = el.textContent.replace(/\s+/g," ").trim();
+      if(full.length < 12) return;
+      const cut = full.indexOf(":");
+      const head = (cut > 3 && cut < 70) ? full.slice(0, cut) : full.slice(0, 60);
+      out.push({t:k,tl:t.l,id:nearestId(el,k),x:head,xtra:full,w:5});
     });
   });
   return out;
@@ -2912,30 +3127,54 @@ function hi(s,q){
   if(i < 0) return esc(s);
   return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+q.length))+"</mark>"+esc(s.slice(i+q.length));
 }
+/* Ausschnitt der Antwortspalte, bei Bedarf um die Fundstelle herum */
+function snip(s,q){
+  const MAX = 120;
+  if(!s) return "";
+  if(s.length <= MAX) return s;
+  if(!q) return s.slice(0,MAX)+"…";
+  const i = s.toLowerCase().indexOf(q);
+  if(i < 0) return s.slice(0,MAX)+"…";
+  const a = Math.max(0, i-45);
+  return (a>0?"…":"") + s.slice(a, a+MAX) + (a+MAX < s.length ? "…" : "");
+}
 let sel = 0, hits = [];
 function search(q){
   q = q.trim().toLowerCase();
   palOut.innerHTML = ""; hits = []; sel = 0;
   if(q.length < 2){
-    palOut.innerHTML = '<div class="pal-empty">Mindestens 2 Zeichen — sucht durch Überschriften, Tabellen und Karten beider Seiten.</div>';
+    palOut.innerHTML = '<div class="pal-empty">Mindestens 2 Zeichen — sucht durch Überschriften, Tabellen und Karten dieser Seite.</div>';
     return;
   }
   if(!IDX) IDX = buildIndex();
   const seen = new Set();
   IDX.forEach(e=>{
-    const l = e.x.toLowerCase(), i = l.indexOf(q);
+    let i = e.x.toLowerCase().indexOf(q), inX = false;
+    if(i < 0 && e.xtra){
+      const j = e.xtra.toLowerCase().indexOf(q);
+      if(j >= 0){ i = j; inX = true; }        /* Treffer nur in der Antwortspalte */
+    }
     if(i < 0) return;
     const key = e.t+"|"+e.x;
     if(seen.has(key)) return; seen.add(key);
-    hits.push({...e, s: (i===0?0:1) + e.w*2});
+    hits.push({...e, inX, s: (i===0?0:1) + e.w*2 + (inX?4:0)});
   });
   hits.sort((a,b)=>a.s-b.s || a.x.length-b.x.length);
   hits = hits.slice(0,40);
-  if(!hits.length){ palOut.innerHTML = '<div class="pal-empty">Nichts gefunden für „'+esc(q)+'".</div>'; return; }
+  if(!hits.length){
+    palOut.innerHTML = '<div class="pal-empty">Nichts auf dieser Seite für „'+esc(q)+'".</div>';
+    const x = document.createElement("a");        /* bewusst kein .pr — Enter soll nicht wegspringen */
+    x.className = "pr-x"; x.href = OTHER.file+"?q="+encodeURIComponent(q);
+    x.innerHTML = "In "+esc(OTHER.name)+" weitersuchen →";
+    palOut.appendChild(x);
+    return;
+  }
   hits.forEach((h,i)=>{
     const b = document.createElement("button");
     b.className = "pr" + (i===0?" sel":"");
-    b.innerHTML = hi(h.x,q) + '<span class="pw">'+esc(h.tl)+"</span>";
+    let sub = esc(h.tl);
+    if(h.xtra) sub += ' <span class="px">'+ (h.inX ? hi(snip(h.xtra,q),q) : esc(snip(h.xtra))) +'</span>';
+    b.innerHTML = hi(h.x,q) + '<span class="pw">'+sub+"</span>";
     b.onclick = ()=>{ closePal(); jump(h.t,h.id); };
     palOut.appendChild(b);
   });
@@ -2951,6 +3190,12 @@ function move(d){
 function openPal(){ pal.classList.add("open"); palIn.value=""; search(""); palIn.focus(); }
 function closePal(){ pal.classList.remove("open"); }
 document.getElementById("openSearch").onclick = openPal;
+/* von der Partnerseite herübergereichter Suchbegriff */
+(function(){
+  const q = new URLSearchParams(location.search).get("q");
+  if(!q) return;
+  openPal(); palIn.value = q; search(q.toLowerCase());
+})();
 const ts = document.querySelector("#topbar .ts"); if(ts) ts.onclick = openPal;
 palIn.addEventListener("input", ()=>search(palIn.value));
 palIn.addEventListener("keydown", e=>{
@@ -2976,6 +3221,26 @@ if(window.showTab){ const o = window.showTab; window.showTab = function(k){ o(k)
 if(window.activate){ const o = window.activate; window.activate = function(p,u){ o(p,u); buildSide(activeTab()); }; }
 buildSide(activeTab());
 })();
+
+/* ---------- Tabellen fuer schmale Displays vorbereiten ----------
+   Spaltennamen aus dem <thead> an jede Zelle haengen (data-l) und
+   ueberwiegend numerische Zellen markieren, damit Messwerte beim
+   Ueberfliegen aus der Prosa herausstechen. */
+window.__prepTables = function(root){
+  (root||document).querySelectorAll("table").forEach(tb=>{
+    const th = [...tb.querySelectorAll("thead th")].map(x=>x.textContent.replace(/\s+/g," ").trim());
+    tb.querySelectorAll("tbody tr").forEach(tr=>{
+      [...tr.children].forEach((td,i)=>{
+        if(!td.hasAttribute("colspan") && th[i]) td.setAttribute("data-l", th[i]);
+        const t = td.textContent.trim();
+        /* kurz, enthaelt eine Ziffer, ist kein Fliesstext */
+        if(i>0 && t.length<=26 && /\d/.test(t) && t.split(" ").length<=5) td.classList.add("numcell");
+        else td.classList.remove("numcell");
+      });
+    });
+  });
+};
+window.__prepTables();
 </script>
 </body>
 </html>

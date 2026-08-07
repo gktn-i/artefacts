@@ -297,6 +297,52 @@ td:first-child{font-weight:500}
   font-size:13.5px;line-height:1.6;color:var(--accent-ink)}
 .kurz::before{content:"💡";flex:0 0 auto;font-size:15px;line-height:1.35}
 .kurz b{font-weight:700}
+
+/* Sidebar: Gliederungsebene sichtbar machen */
+#sideNav .ssec a.lv3{padding-left:19px}
+#sideNav .ssec a.lv4{padding-left:31px;font-size:11.5px;color:var(--faint)}
+#sideNav .ssec a.lv4:hover,#sideNav .ssec a.lv4.on{color:var(--accent-ink)}
+/* Suchtreffer: Antwortspalte als zweite Zeile */
+.pr .pw{display:block}
+.pr .px{opacity:.85}
+.pr .px mark{font-weight:700}
+.pr-x{display:block;padding:9px 11px;margin:.25rem;border-radius:7px;font-size:13px;
+  font-weight:600;text-decoration:none;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid var(--accent-border)}
+.pr-x:hover{filter:brightness(.97)}
+
+/* ============================================================
+   TABELLEN AUF SCHMALEN DISPLAYS
+   Statt horizontal zu scrollen (bisher lagen 48-55 % der Breite
+   ausserhalb) wird jede Zeile zu einer Karte. Die Spaltennamen
+   kommen aus dem <thead> und haengen per data-l an jeder Zelle.
+   ============================================================ */
+td.numcell{font-family:var(--mono);font-size:12.5px;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+th,td{font-variant-numeric:tabular-nums}
+h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink)}
+
+@media(max-width:620px){
+  .tbl-wrap{overflow-x:visible;border:none;background:transparent;box-shadow:none;margin:.6rem 0}
+  .tbl-wrap table{min-width:0!important;width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+  .tbl-wrap thead{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .tbl-wrap tbody tr{display:block;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:9px;padding:3px 0 5px}
+  .tbl-wrap tbody tr:hover td{background:transparent}
+  .tbl-wrap tbody td{display:block;width:auto;border:none;border-top:none!important;
+    padding:5px 14px;line-height:1.5;text-align:left}
+  .tbl-wrap tbody td:empty{display:none}
+  .tbl-wrap tbody td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);
+    font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--faint);margin-bottom:1px}
+  .tbl-wrap tbody td:first-child{font-weight:600;font-size:14px;padding-top:9px;padding-bottom:8px;
+    border-bottom:1px solid var(--border)!important;margin-bottom:3px}
+  .tbl-wrap tbody td:first-child::before{display:none}
+  .tbl-wrap tbody td[colspan]{background:var(--surface-2);font-weight:600;border-bottom:none!important;
+    margin:0;border-radius:var(--radius) var(--radius) 0 0}
+  .tbl-wrap tbody td.numcell{white-space:normal}
+}
 </style>
 <link rel="stylesheet" href="assets/chrome.css">
 <script defer src="assets/registry.js"></script>
@@ -319,7 +365,8 @@ td:first-child{font-weight:500}
 
 
 <!-- ============ METHODEN ============ -->
-<div class="panel active" data-p="methoden">
+<div class="panel active" data-p="start">
+
 <h2>Die drei Methoden im Überblick</h2>
 <p>Welches Werkzeug du nimmst, hängt vor allem vom Bauteil ab. Faustregel: Lötkolben für alles mit zugänglichen Pins, Heißluft für Bauteile mit Pads unter dem Gehäuse oder zum Entlöten, Heizplatte, wenn viele SMD-Teile auf einmal auf eine Platine sollen.</p>
 
@@ -354,10 +401,6 @@ td:first-child{font-weight:500}
 </div>
 
 <div class="note"><b>Realistisches Einsteiger-Setup:</b> Eine gute Lötstation deckt 90 Prozent ab. Heißluft kommt dazu, sobald du QFN oder feine ICs verbaust. Eine Heizplatte lohnt erst, wenn du eigene SMD-Platinen in kleinen Stückzahlen bestückst.</div>
-</div>
-
-<!-- ============ WORKFLOW ============ -->
-<div class="panel" data-p="workflow">
 <h2>Workflow am Lötkolben</h2>
 <p>Der Ablauf einer Session in Kurzform, plus Spickzettel für die häufigsten Aufgaben. Die ausführlichen Anleitungen stehen in den Tabs <a class="goto" href="#tht">THT löten</a>, <a class="goto" href="#smd">SMD löten</a> und <a class="goto" href="#fehler">Fehler</a>.</p>
 
@@ -412,8 +455,10 @@ td:first-child{font-weight:500}
 </div>
 </div>
 
-<div class="tip"><b>Schnellhilfe:</b> Lot fließt nicht? Spitze säubern und frisch verzinnen, Flussmittel dazu, notfalls 10–20 °C höher. Brücke? Flussmittel drauf, Überschuss mit Entlötlitze abziehen. Kugelig und schlecht benetzt? Kalte Stelle — frisches Flussmittel dazu und neu aufschmelzen.</div>
-</div>
+<div class="tip"><b>Schnellhilfe:</b> Lot fließt nicht? Spitze säubern und frisch verzinnen, Flussmittel dazu, notfalls 10–20 °C höher. Brücke? Flussmittel drauf, Überschuss mit Entlötlitze abziehen. Kugelig und schlecht benetzt? Kalte Stelle — frisches Flussmittel dazu und neu aufschmelzen.</div></div>
+
+<!-- ============ WORKFLOW ============ -->
+
 
 <!-- ============ EQUIPMENT ============ -->
 <div class="panel" data-p="equipment">
@@ -549,7 +594,7 @@ td:first-child{font-weight:500}
 </div>
 <h3>Entlöten</h3>
 <div class="grid">
-<div class="card"><div class="ct">Entlötlitze (Wick)</div><div class="cd">Kupfergeflecht saugt flüssiges Lot auf. Top für Pads und Brücken. Breiten, Technik und Tricks: <a class="goto" href="#material">Material → Entlötlitze</a>.</div></div>
+<div class="card"><div class="ct">Entlötlitze (Wick)</div><div class="cd">Kupfergeflecht saugt flüssiges Lot auf. Top für Pads und Brücken. Breiten, Technik und Tricks: <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a>.</div></div>
 <div class="card"><div class="ct">Entlötpumpe</div><div class="cd">Saugt geschmolzenes Lot weg. Gut für THT-Durchkontaktierungen.</div></div>
 <div class="card"><div class="ct">Heißluft</div><div class="cd">Beste Methode, um ganze SMD-Bauteile schadenfrei abzuheben.</div></div>
 <div class="card"><div class="ct">Low-Melt-Legierung (ChipQuik SMD1)</div><div class="cd">Schmilzt bei ~58 °C und hält alle Pins gleichzeitig flüssig. Ideal, um Multipin-ICs ohne Heißluft abzuheben.</div></div>
@@ -633,6 +678,7 @@ td:first-child{font-weight:500}
 
 <!-- ============ MATERIAL ============ -->
 <div class="panel" data-p="material">
+
 <h2>Verbrauchsmaterial</h2>
 <p>Zur schnellen Orientierung — was du für welche Methode brauchst. Details zu jedem Punkt stehen darunter.</p>
 <div class="tbl-wrap"><table style="min-width:640px">
@@ -647,7 +693,7 @@ td:first-child{font-weight:500}
 </tbody>
 </table></div>
 
-<h3>Lötzinn (Lot)</h3>
+<h2>Lötzinn (Lot)</h2>
 <p>Zwei Welten: Bleihaltig lötet sich leichter und bei niedrigerer Temperatur, bleifrei ist RoHS-konform und Pflicht für alles, das in den Verkauf geht. Die gängigen Draht-Legierungen:</p>
 <div class="tbl-wrap"><table style="min-width:720px">
 <thead><tr><th>Legierung</th><th>Blei?</th><th>Schmelzpunkt</th><th>Eigenschaften &amp; wofür</th></tr></thead>
@@ -662,7 +708,7 @@ td:first-child{font-weight:500}
 </table></div>
 <div class="note"><b>Immer Draht mit Flussmittelseele</b> (Flussmittel im Kern) — niemals Sanitär- oder Stangenlot für Elektronik. Fürs Hobby ist <b>Sn63Pb37</b> am gutmütigsten; wenn bleifrei, dann <b>SAC305</b> (löten) oder <b>Sn99,3Cu0,7</b> (günstig).</div>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Welcher Durchmesser wofür?</h4>
+<h4>Welcher Durchmesser wofür?</h4>
 <p>Der Durchmesser bestimmt, wie fein du dosieren kannst. Dünner = präziser, aber du musst mehr nachschieben; dicker = schneller viel Lot, aber gröber. Ein dünner Draht ist der bessere Allrounder — für dicke Stellen schiebst du einfach mehr nach.</p>
 <div class="tbl-wrap"><table style="min-width:600px">
 <thead><tr><th>Durchmesser</th><th>Am besten für</th></tr></thead>
@@ -675,10 +721,10 @@ td:first-child{font-weight:500}
 </table></div>
 <div class="tip"><b>Einsteiger:</b> Eine Rolle <b>0,7 oder 0,8 mm</b> reicht für den Anfang. Eine zweite dünne Rolle (<b>0,3–0,4 mm</b>) lohnt sich, sobald du feines SMD lötest.</div>
 
-<h3>Flussmittel (Flux)</h3>
+<h2>Flussmittel (Flux)</h2>
 <p>Entfernt die Oxidschicht auf den Metallflächen und lässt das Lot fließen und benetzen. Die Flussmittelseele im Lotdraht reicht für einfaches THT — extra Flux ist der entscheidende Helfer bei SMD, Rework und beim Entlöten.</p>
 
-<h4 style="font-size:13px;margin:.6rem 0 .3rem">Die vier Typen</h4>
+<h4>Die vier Typen</h4>
 <ul>
 <li><b>No-Clean:</b> minimaler, trockener Rückstand darf meist drauf bleiben. Der bequeme Standard fürs Hobby.</li>
 <li><b>RMA (Kolophonium, mild aktiviert):</b> klassisch, gute Aktivität, klebrige Rückstände mit IPA entfernen.</li>
@@ -686,7 +732,7 @@ td:first-child{font-weight:500}
 <li><b>Wasserlöslich (OA):</b> sehr aggressiv, muss zwingend gründlich abgewaschen werden — im Hobby eher meiden.</li>
 </ul>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Konkrete Produkte und wofür</h4>
+<h4>Konkrete Produkte und wofür</h4>
 <div class="tbl-wrap"><table style="min-width:680px">
 <thead><tr><th>Produkt (Beispiele)</th><th>Typ</th><th>Form</th><th>Reinigen?</th><th>Am besten für</th></tr></thead>
 <tbody>
@@ -699,7 +745,7 @@ td:first-child{font-weight:500}
 </table></div>
 
 <div class="note"><b>MG Chemicals 8341 im Detail:</b> Ein <b>klebriges No-Clean-Flussmittel in Pastenform</b> (Spritze 10 ml oder Dose 50 ml) auf Basis von Kolophonium plus synthetischem Harz — nach <b>J-STD-004B als ROL1</b> eingestuft (Rosin, geringe Aktivität, halogenfrei) und RoHS-konform. Für bleifreie Legierungen entwickelt, funktioniert aber genauso mit bleihaltigem Lot. Die Rückstände sind nicht leitend und nicht klebrig und dürfen drauf bleiben. Einordnung: Es ist ein <b>Tacky-Flux</b> wie ChipQuik SMD291 — also zum Halten und Platzieren von SMD, für Heißluft-Rework und BGA-Arbeit, <b>nicht</b> der dünnflüssige Pen-Ersatz für THT. Praktischer Vorteil gegenüber den viel gefälschten AMTECH-Spritzen: MG Chemicals ist ein regulärer Markenhersteller mit Datenblatt und Sicherheitsdatenblatt, im Fachhandel echt zu bekommen. Der Schwesterartikel <b>MG Chemicals 8342</b> ist dagegen ein <b>RA-Kolophoniumflux</b> — aktiver, aber die Rückstände <b>müssen</b> mit IPA runter.</div>
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Was „Nano-Flux" bedeutet</h4>
+<h4>Was „Nano-Flux" bedeutet</h4>
 <p>Kein Markenname und keine eigene Chemie, sondern eine <b>Produktklasse</b> aus der Handy-/Micro-Reparatur: ein No-Clean-Gel, das bewusst <b>sehr dünn</b> eingestellt ist und in einer kleinen Spritze mit Kanüle kommt.</p>
 <div class="grid">
 <div class="card"><div class="ct">✓ Stärken</div><div class="cd">Kriecht durch Kapillarwirkung unter QFN-Böden und zwischen BGA-Kugeln, wo zähes Gel nicht hinkommt. Sehr wenig Rückstand — auf Boards, die man nicht waschen kann, ein echter Vorteil. Punktgenau dosierbar, verdeckt unterm Mikroskop nichts.</div></div>
@@ -711,7 +757,7 @@ td:first-child{font-weight:500}
 <div class="tip"><b>Einsteiger-Set:</b> Ein <b>flüssiges No-Clean-Flux</b> (Pen/Flasche, z. B. Kester 951 oder ChipQuik NC191) für THT, Kabel und Drag plus eine <b>No-Clean-Tacky-Flux-Spritze</b> (z. B. ChipQuik SMD291) fürs Platzieren und Rework von SMD deckt rund 95 % aller Arbeiten ab.</div>
 <div class="warn"><b>Vorsicht Fälschungen:</b> AMTECH NC-559 und RMA-223 werden auf Online-Marktplätzen massenhaft gefälscht — nachgemachte Spritzen wirken oft schlechter oder hinterlassen korrosive Rückstände. Für verlässliche Qualität ChipQuik oder MG Chemicals beim seriösen Händler kaufen. Und: <b>niemals Klempner-Lötwasser oder Lötfett</b> (säurehaltig) auf Elektronik.</div>
 
-<h3>Lötpaste (Solder Paste)</h3>
+<h2>Lötpaste (Solder Paste)</h2>
 <p>Gemisch aus winzigen Lotkügelchen und Flussmittel. Nur für Reflow per Heizplatte, Heißluft oder Ofen.</p>
 <ul>
 <li><b>Korngröße:</b> T3 oder T4 fürs Hobby, T4/T5 für sehr feinen Pitch.</li>
@@ -719,7 +765,7 @@ td:first-child{font-weight:500}
 <li><b>Lagerung:</b> kühl (Kühlschrank), vor Gebrauch auf Raumtemperatur bringen, begrenzte Haltbarkeit.</li>
 </ul>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Konkrete Pasten und wann</h4>
+<h4>Konkrete Pasten und wann</h4>
 <div class="tbl-wrap"><table style="min-width:700px">
 <thead><tr><th>Legierung (Typ)</th><th>Schmelzpunkt</th><th>Beispielprodukte</th><th>Am besten für</th></tr></thead>
 <tbody>
@@ -731,10 +777,17 @@ td:first-child{font-weight:500}
 <div class="tip"><b>Einsteiger-Tipp:</b> <b>Sn63Pb37</b> ist zum Üben am gutmütigsten. Wer bleifrei will oder empfindliche Teile schont, nimmt die <b>Low-Temp-Paste (Sn42Bi57Ag1, ~138 °C)</b> — deutlich niedrigere Reflow-Temperatur. Korngröße <b>T4</b> deckt fast alles ab. Seriöse Marken: Chip Quik, Kester, MG Chemicals; günstige China-Pasten (Mechanic, Relife) gehen, schwanken aber in Qualität.</div>
 <div class="warn"><b>Low-Temp-Paste (SnBi) beachten:</b> Bismut-Lot ist <b>spröder</b> — nicht für mechanisch belastete Stellen (Steckverbinder, Kabel). Und <b>nie mit bleihaltigem Lot mischen</b>: Sn-Pb-Bi bildet eine sehr niedrig schmelzende, spröde Phase, die Lötstellen unzuverlässig macht.</div>
 
-<h3>Reparaturdraht &amp; Jumper Wire</h3>
+<div class="note">Draht, Entlötlitze und die Nacharbeit stehen in den Tabs <a class="goto" href="#draht">Draht &amp; Litze</a> und <a class="goto" href="#finish">Reinigen &amp; Schützen</a>.</div>
+</div>
+
+<!-- ============ DRAHT & LITZE ============ -->
+<div class="panel" data-p="draht">
+<h2>Draht und Entlötlitze</h2>
+<p>Womit man Verbindungen wiederherstellt und womit man Lot wieder wegbekommt. Lot, Flussmittel und Paste stehen im Tab <a class="goto" href="#material">Lot &amp; Flussmittel</a>.</p>
+<h2>Reparaturdraht &amp; Jumper Wire</h2>
 <p>Wenn eine Leiterbahn gerissen ist, ein Pad fehlt oder eine Verbindung nachträglich gelegt werden muss, brauchst du Draht — und zwar den <b>richtigen</b>. Zu dünn heißt Spannungsabfall und abgerissene Brücke, zu dick heißt, er hebt beim ersten Anstoßen das Pad mit ab.</p>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Durchmesser, AWG und was durchpasst</h4>
+<h4>Durchmesser, AWG und was durchpasst</h4>
 <div class="tbl-wrap"><table style="min-width:760px">
 <thead><tr><th>Ø</th><th>≈ AWG</th><th>Widerstand</th><th>Kurze Brücke trägt</th><th>Typischer Einsatz</th></tr></thead>
 <tbody>
@@ -753,24 +806,45 @@ td:first-child{font-weight:500}
 </table></div>
 <p class="note">Die Stromwerte gelten für eine <b>kurze, frei liegende</b> Brücke, nicht für Meterware im Bündel — dort ist nur etwa ein Sechstel davon zulässig. Und: 0,01 mm wird zwar angeboten, praktisch handhabbar beginnt es bei <b>0,02 mm</b>. Zum Rechnen: 20 mm mit 0,1 mm Draht ergeben ~43 mΩ — für Signale völlig egal, bei 1 A wären es aber schon 43 mV Verlust und 43 mW Wärme in einem Draht, der dafür ohnehin zu dünn ist.</p>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Isoliert oder blank — welche Sorte wofür</h4>
+<h4>Isoliert oder blank — welche Sorte wofür</h4>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Sorte</th><th>Isolierung</th><th>Verarbeiten</th><th>Dafür nehmen</th></tr></thead>
 <tbody>
 <tr><td><b>Kupferlackdraht, lötbar</b> (UEW/Polyurethan)</td><td>hauchdünner Lack, praktisch keine Dicke</td><td><b>Kein Abisolieren:</b> Ende in einen Lotklecks bei 350–380 °C halten, der Lack verbrennt und der Draht verzinnt sich selbst</td><td><b>Die erste Wahl für Leiterbahn-Reparatur.</b> Liegt flach auf der Platine, darf über andere Bahnen laufen, verschwindet unter UV-Lack.</td></tr>
 <tr><td>Kupferlackdraht, <b>nicht</b> lötbar (Polyimid/ML)</td><td>zäher Hochtemperatur-Lack</td><td>Muss mechanisch abgekratzt oder chemisch entfernt werden</td><td>Für Reparaturen eher meiden. Erkennbar daran, dass er im Lot einfach nicht benetzt.</td></tr>
 <tr><td><b>Kynar / Wire-Wrap</b> (30 AWG, PVDF)</td><td>zäh, hitzefest, sehr dünnwandig</td><td>Abisolieren mit Spezialabisolierer oder vorsichtig mit der Klinge</td><td><b>Mod- und Bodge-Wire</b> über größere Strecken. Zieht sich beim Löten nicht zurück, ist farbig und dadurch nachvollziehbar.</td></tr>
-<tr><td><b>PTFE-Litze, versilbert</b> (Teflon)</td><td>PTFE, hält Lötkolbenhitze aus</td><td>Abisolieren, Litze verzinnen</td><td><b>Alles, was sich bewegt:</b> Kabel zu Displays, Akkus, Deckeln. Litze bricht nicht durch Biegewechsel, Massivdraht schon.</td></tr>
-<tr><td>PVC-Litze (Standard-Schaltdraht)</td><td>PVC — schmilzt bei Lötwärme zurück</td><td>Abisolieren, schnell arbeiten</td><td>Nur außerhalb der Hitzezone. Auf der Platine zieht sich die Isolierung zurück und legt blanken Draht frei.</td></tr>
-<tr><td><b>Blanker Kupferdraht</b></td><td>keine</td><td>Direkt löten</td><td>Nur <b>sehr kurze</b> Brücken zwischen benachbarten Pads, wo nichts gekreuzt wird. Sobald der Draht über eine andere Bahn läuft: Kurzschlussgefahr.</td></tr>
+<tr><td><b>Versilberte PTFE-Litze</b> (Teflon, „Silberdraht&#8220;, MIL-Spec M22759/11)</td><td>PTFE, dauerhaft bis <b>200 °C</b> — hält jede Lötkolbenhitze aus</td><td>Abisolieren, dann verzinnt sie sich fast von allein: die Silberschicht benetzt sofort</td><td><b>Die beste Allround-Litze auf der Platine</b> und alles, was sich bewegt: Kabel zu Displays, Akkus, Deckeln. Litze bricht nicht durch Biegewechsel, Massivdraht schon.</td></tr>
+<tr><td><b>Versilberter Kupferdraht, blank</b> (massiv, SPC)</td><td>keine</td><td>Direkt löten, benetzt sofort ohne Kratzen oder Schmirgeln</td><td>Kurze Brücken, Masseverbindungen, HF- und Freiluft-Aufbauten. Liegt jahrelang im Regal und ist trotzdem noch lötbar — blankes Kupfer nicht.</td></tr>
+<tr><td>Verzinnte Litze, PVC (Standard-Schaltdraht)</td><td>PVC — schmilzt bei Lötwärme zurück, ca. 80–105 °C</td><td>Abisolieren, schnell arbeiten</td><td>Nur außerhalb der Hitzezone. Auf der Platine zieht sich die Isolierung zurück und legt blanken Draht frei.</td></tr>
+<tr><td><b>Blanker Kupferdraht</b></td><td>keine</td><td>Direkt löten, oxidierte Oberfläche vorher blank machen</td><td>Nur <b>sehr kurze</b> Brücken zwischen benachbarten Pads, wo nichts gekreuzt wird. Sobald der Draht über eine andere Bahn läuft: Kurzschlussgefahr.</td></tr>
 </tbody>
 </table></div>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Die Entscheidung in fünf Regeln</h4>
+<h4>Versilbert, verzinnt oder blank — was die Beschichtung bringt</h4>
+<p>„Silberhaltiges Kabel&#8220; heißt in der Praxis fast immer <b>versilberte Kupferlitze</b> (englisch <i>silver-plated copper</i>, kurz <b>SPC</b>): ein ganz normaler Kupferleiter mit einer hauchdünnen Silberschicht, meist unter PTFE-Isolierung. Der Kern ist Kupfer — es ist kein Silberdraht, auch wenn er im Handel oft so heißt. Nicht verwechseln mit <b>silberhaltigem Lot</b> (SAC305, SnAg): das ist die Legierung im Lötzinn und steht weiter oben im Abschnitt <b>Lötzinn (Lot)</b>.</p>
+<div class="grid">
+<div class="card"><div class="ct">① Lötbarkeit auf Jahre</div><div class="cd">Kupfer oxidiert und wird dann schlecht lötbar. <b>Silberoxid leitet weiter und lässt sich löten</b> — versilberte Litze benetzt auch nach langer Lagerung sofort, ohne Kratzen oder aggressives Flux. Das ist im Alltag der wichtigste Punkt.</div></div>
+<div class="card"><div class="ct">② Hitzefestigkeit</div><div class="cd">PTFE wird bei sehr hoher Temperatur verarbeitet und ist dauerhaft bis <b>200 °C</b> einsetzbar. Eine <b>Zinn</b>schicht kann da nicht mitgehen (Zinn schmilzt bei 232 °C) — verzinnte Leiter sind deshalb bei etwa <b>150 °C</b> am Ende. Wer PTFE will, bekommt automatisch versilbert oder vernickelt.</div></div>
+<div class="card"><div class="ct">③ Hochfrequenz</div><div class="cd">Bei hohen Frequenzen fließt der Strom nur in der äußersten Randschicht des Leiters (<b>Skin-Effekt</b>) — und Silber ist der beste elektrische Leiter überhaupt. Deshalb sind Koax-Innenleiter und HF-Litzen versilbert. <b>Bei Gleichstrom und NF bringt das nichts</b> — dort zählt nur der Querschnitt.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Beschichtung</th><th>Dauertemperatur</th><th>Löten</th><th>Typisch</th></tr></thead>
+<tbody>
+<tr><td><b>versilbert</b> (SPC)</td><td>bis 200 °C (mit PTFE)</td><td><span class="b b-ok">sehr gut</span> benetzt sofort</td><td>Reparatur- und Mod-Litze, HF, Luftfahrt, alles Hitzenahe</td></tr>
+<tr><td><b>verzinnt</b> (TPC)</td><td>bis ca. 150 °C</td><td><span class="b b-ok">gut</span></td><td>Standard-Schaltlitze, Steckerkonfektion — günstig und völlig ausreichend</td></tr>
+<tr><td>blank (Rein-Kupfer)</td><td>—</td><td><span class="b b-warn">nur frisch</span> oxidiert mit der Zeit</td><td>Wickelgut, sehr kurze Brücken, alles was sofort verarbeitet wird</td></tr>
+<tr><td>vernickelt</td><td>260 °C und mehr</td><td><span class="b b-warn">zäh</span> braucht aktiveres Flux</td><td>Ofen-, Heiz- und Thermofühlerleitungen — für die Werkbank ungeeignet</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Was man kaufen sollte:</b> Versilberte PTFE-Litze in <b>28–30 AWG</b> (0,25–0,32 mm) ist der Allrounder für Reparaturen auf der Platine: dünn genug für enge Stellen, hitzefest genug, dass die Isolierung beim Löten <b>nicht zurückschmilzt</b> — genau der Punkt, an dem PVC-Litze nervt. Für Akku- und Versorgungsleitungen dieselbe Sorte in 24–26 AWG. Preislich liegt sie deutlich über PVC-Litze, aber man braucht davon nur wenige Meter.</div>
+<div class="tip"><b>Beim Löten trotzdem zügig arbeiten.</b> Die Silberschicht ist nur wenige Mikrometer dick. Bleibt die Spitze zu lange dran, löst sie sich ins Lot auf und darunter kommt blankes Kupfer zum Vorschein — die Stelle oxidiert dann wie jeder andere Kupferdraht. Ein bis zwei Sekunden reichen ohnehin, weil die Litze so bereitwillig benetzt.</div>
+<div class="warn"><b>Rotpest (Red Plague):</b> Der eine Nachteil versilberter Kupferleiter. Wo die Silberschicht verletzt ist und Feuchtigkeit hinkommt, bildet sich zwischen Silber und Kupfer ein galvanisches Element — das Kupfer korrodiert zu rotbraunem Kupfer(I)-oxid, das unter der Isolierung entlangwandert. Erkennbar an <b>rot-braunen Flecken</b> auf der sonst silbrigen Litze. Der Leiter wird hochohmig und mechanisch spröde. In Luft- und Raumfahrt ein bekanntes Thema (die NASA hat dafür einen eigenen Kontrollplan). Fürs Hobby heißt das schlicht: fleckige oder angerissene Litze nicht verbauen, Schnittenden nicht dauerfeucht liegen lassen und Reste trocken lagern.</div>
+
+<h4>Die Entscheidung in fünf Regeln</h4>
 <ol>
 <li><b>Wie viel Strom fließt?</b> Das legt den Durchmesser fest — Tabelle oben, und im Zweifel eine Stufe dicker.</li>
 <li><b>Kreuzt der Draht etwas?</b> Ja → isoliert, immer. Nein und kürzer als ein paar Millimeter → blank ist erlaubt.</li>
-<li><b>Bewegt sich das Ende?</b> Ja → <b>Litze</b> (PTFE). Massivdraht bricht an der Lötstelle durch Biegewechsel — die häufigste Ursache für „die Reparatur hat drei Wochen gehalten".</li>
+<li><b>Bewegt sich das Ende?</b> Ja → <b>Litze</b>, am besten versilbert mit PTFE. Massivdraht bricht an der Lötstelle durch Biegewechsel — die häufigste Ursache für „die Reparatur hat drei Wochen gehalten".</li>
 <li><b>Wie fein ist die Stelle?</b> Unter dem Mikroskop an BGA- oder 0201-Pads: 0,05–0,1 mm Lackdraht. Alles Gröbere reißt beim Löten das Pad ab.</li>
 <li><b>Muss es jemand nachvollziehen können?</b> Dann farbiger Kynar-Draht statt unsichtbarem Lackdraht — auch für dich selbst in einem Jahr.</li>
 </ol>
@@ -778,10 +852,10 @@ td:first-child{font-weight:500}
 <div class="tip"><b>Saubere Fädeldraht-Reparatur, Schritt für Schritt:</b> ① Bruchstelle beidseitig freilegen (Lötstopplack vorsichtig abkratzen), blankes Kupfer verzinnen. ② Draht auf Länge plus ~20 % schneiden, beide Enden im Lotklecks verzinnen (Lack brennt ab). ③ Ein Ende antacken, Draht flach anlegen, zweites Ende antacken. ④ <b>Durchgang messen</b> — und gegen die Nachbarbahnen prüfen, dass nichts piept. ⑤ Fixieren: ein Tropfen <b>UV-Lötstopplack</b> (grünes Öl) drüber und aushärten, oder Kapton-Tape. Ohne Fixierung wirkt jede Bewegung direkt auf die Lötstelle.</div>
 <div class="warn"><b>Der häufigste Fehler:</b> zu straff gespannt. Der Draht braucht eine minimale Schlaufe, sonst zieht jede Temperaturdehnung und jeder Stoß direkt am Pad — und das Pad ist immer schwächer als der Draht.</div>
 
-<h3>Entlötlitze (Wick)</h3>
+<h2>Entlötlitze (Wick)</h2>
 <p>Feines, mit Flussmittel getränktes Kupfergeflecht. Flüssiges Lot wird durch <b>Kapillarwirkung</b> hineingesaugt — dieselbe Kraft, die Wasser in einem Schwamm hochzieht. Die Litze ist das Werkzeug für Lötbrücken, für das Leerräumen von THT-Löchern und für alles, was mit BGA-Pads zu tun hat.</p>
 
-<h4 style="font-size:13px;margin:.6rem 0 .3rem">Breite wählen</h4>
+<h4>Breite wählen</h4>
 <p>Die Litze soll <b>etwa so breit wie die Lötstelle</b> sein. Zu schmal saugt zu wenig und du fängst dreimal an; zu breit legt sich über Nachbarpads, zieht deren Lot mit ab und braucht viel mehr Wärme, bis überhaupt etwas passiert. Die Größennummern und Farben von Chemtronics Soder-Wick haben sich als Quasi-Standard etabliert:</p>
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th>Größe</th><th>Breite</th><th>Farbe</th><th>Wofür</th></tr></thead>
@@ -795,7 +869,7 @@ td:first-child{font-weight:500}
 </table></div>
 <div class="tip"><b>Wenn du nur zwei Rollen kaufst:</b> <b>#2 (1,5 mm)</b> und <b>#3 (2,0 mm)</b>. Damit ist von der QFP-Brücke bis zum BGA-Feld alles abgedeckt.</div>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Die wichtigste Regel: kurz abschneiden</h4>
+<h4>Die wichtigste Regel: kurz abschneiden</h4>
 <p>Der häufigste Fehler ist, mit einem 10 cm langen Litzenschwanz zu arbeiten, der von der Rolle wegläuft. Kupfergeflecht ist ein <b>hervorragender Wärmeleiter</b> — der überstehende Teil zieht die Wärme aus der Arbeitsstelle ab und gibt sie an die Luft weiter. Das hat drei Folgen:</p>
 <ul>
 <li><b>Der Kolben muss dagegenheizen.</b> Du drehst die Temperatur hoch, obwohl das Problem gar nicht die Lötstelle ist. Mehr Hitze und mehr Zeit auf dem Pad — genau das, was Pads ablöst.</li>
@@ -828,7 +902,7 @@ td:first-child{font-weight:500}
 </div>
 </div>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Technik</h4>
+<h4>Technik</h4>
 <div class="steps">
 <div class="step"><b>Frisches Flussmittel</b> auf die Stelle und gerne auch auf die Litze. Die eingearbeitete Flussmittelmenge ist knapp bemessen und bei alter Litze oft verflogen.</div>
 <div class="step"><b>Litze flach auflegen</b>, Spitze <b>auf</b> die Litze drücken — nicht neben sie. Die Wärme muss durch das Geflecht ins Lot.</div>
@@ -838,7 +912,7 @@ td:first-child{font-weight:500}
 <div class="step"><b>Gesättigtes Stück abschneiden.</b> Voll gesogene Litze saugt nicht mehr und wird nur noch heiß.</div>
 </div>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Tricks, die den Unterschied machen</h4>
+<h4>Tricks, die den Unterschied machen</h4>
 <ul>
 <li><b>Im Winkel ansetzen:</b> Legst du die Litze schräg (~30–45°) über einen Pad-Streifen statt längs, berührt nur eine schmale Kante die Lötstelle. Du bekommst eine <b>schmalere, gezieltere Angriffsfläche</b> — praktisch, wenn du zwischen zwei Pins nur eine Brücke wegnehmen willst, ohne das Lot der Nachbarn mitzunehmen. Zusätzlich liegt die Litze dann nicht flach auf und kühlt weniger stark.</li>
 <li><b>Litze vorher „anspitzen&#8220;:</b> Ein schräger Schnitt mit der Seitenschneiderklinge gibt dir eine keilförmige Spitze für Einzelpads.</li>
@@ -849,7 +923,13 @@ td:first-child{font-weight:500}
 </ul>
 <div class="warn"><b>Litze braucht mehr Temperatur als eine normale Lötstelle</b> — das Geflecht schluckt Wärme. Statt die Station hochzudrehen: kurzes Stück nehmen, breitere Spitze aufstecken und Flussmittel nachlegen. Erst wenn das alles nicht reicht, 10–20 °C mehr geben.</div>
 
-<h3>Reinigen: Flussmittelreste entfernen</h3>
+</div>
+
+<!-- ============ REINIGEN & SCHUETZEN ============ -->
+<div class="panel" data-p="finish">
+<h2>Nach dem Löten</h2>
+<p>Was übrig bleibt: Flussmittelreste runter, blanke Stellen wieder abdecken.</p>
+<h2>Reinigen: Flussmittelreste entfernen</h2>
 <p>No-Clean-Rückstand darf normalerweise drauf bleiben. Sobald du aber viel Flux verbraucht hast (Rework, BGA, Drag-Soldering), wird die Stelle klebrig, zieht Staub an und verdeckt bei der Sichtkontrolle genau das, was du beurteilen willst. Und: nicht jeder Rückstand ist wirklich harmlos — bei Billig-Flux unbekannter Herkunft ist Reinigen Pflicht.</p>
 <div class="steps">
 <div class="step"><b>Grob mit IPA und Pinsel.</b> Isopropanol <b>99 %</b> (nicht 70 % — das restliche Wasser bleibt zurück), ESD-sicherer Pinsel, in eine Richtung arbeiten.</div>
@@ -861,10 +941,10 @@ td:first-child{font-weight:500}
 <div class="warn"><b>Grenzen des Tricks:</b> Nur auf trockener Platine, nie mit Akku dran. Nicht auf Kunststoffteile, Displaystecker oder Klebefolien halten — die vertragen 160 °C schlechter als das Board. Und: 150–160 °C sind gemessen an der <b>Düse</b>; bei kleinem Abstand kommt mehr an, als die Anzeige sagt. Lieber niedrig anfangen.</div>
 <div class="tip"><b>Ultraschallbad?</b> Reinigt gründlich, ist aber nichts für Boards mit Mikrofonen, Lautsprechern, offenen Steckern oder Schirmblechen mit Flüssigkeitsindikator. Für die Hobby-Werkstatt sind IPA, Pinsel, fusselfreie Tücher und der Hot-Air-Trick der bessere Weg.</div>
 
-<h3>Lötstopplack (Solder Mask / „grünes Öl&#8220;)</h3>
+<h2>Lötstopplack (Solder Mask / „grünes Öl&#8220;)</h2>
 <p>Die grüne (oder blaue, schwarze, rote) Schicht auf jeder Platine ist der <b>Lötstopplack</b>. Er hat drei Aufgaben: Er isoliert die Leiterbahnen, er schützt das Kupfer vor Korrosion, und er begrenzt beim Löten das flüssige Lot auf die freien Pads — deshalb der Name. Ohne ihn würde Lot einfach über die Bahnen laufen.</p>
 
-<h4 style="font-size:13px;margin:.6rem 0 .3rem">Was du in der Werkstatt brauchst</h4>
+<h4>Was du in der Werkstatt brauchst</h4>
 <p>Als Reparaturmaterial gibt es ihn als <b>UV-härtenden Lötstopplack</b> in kleinen Spritzen (Mechanic, Relife, Amaoe, MG Chemicals und viele No-Names). Er bleibt flüssig, bis du ihn mit UV-Licht bestrahlst — typisch <b>395 nm</b>, also eine gewöhnliche UV-Härtungslampe aus der Handy-Reparatur.</p>
 <div class="tbl-wrap"><table style="min-width:660px">
 <thead><tr><th>Anwendung</th><th>Warum</th></tr></thead>
@@ -877,7 +957,7 @@ td:first-child{font-weight:500}
 </tbody>
 </table></div>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">So wird es sauber</h4>
+<h4>So wird es sauber</h4>
 <div class="steps">
 <div class="step"><b>Erst fertig löten, messen und reinigen.</b> Lack kommt <b>zum Schluss</b>. Unter ausgehärtetem Lack lötet und misst niemand mehr.</div>
 <div class="step"><b>Untergrund entfetten.</b> IPA und fusselfreies Tuch, vollständig trocknen lassen. Auf Flussmittelresten haftet der Lack nicht und blättert später ab.</div>
@@ -893,8 +973,7 @@ td:first-child{font-weight:500}
 <div class="card"><div class="ct">Tip Tinner</div><div class="cd">Aktivator-Paste, rettet oxidierte, nicht mehr benetzende Spitzen.</div></div>
 <div class="card"><div class="ct">Isopropanol (IPA)</div><div class="cd">Reinigt Flussmittelrückstände. Brennbar, gut lüften.</div></div>
 <div class="card"><div class="ct">Kapton-Tape</div><div class="cd">Hitzefestes Klebeband. Fixiert Bauteile, schützt Nachbarn bei Heißluft.</div></div>
-</div>
-</div>
+</div></div>
 
 <!-- ============ TEMPERATUREN ============ -->
 <div class="panel" data-p="temp">
@@ -904,6 +983,7 @@ td:first-child{font-weight:500}
 <div class="tbl-wrap">
 <table id="tempTbl"><thead></thead><tbody></tbody></table>
 </div>
+<div class="note"><b>Warum im Tab <a class="goto" href="#reballing">Reballing</a> andere Heißluft-Werte stehen:</b> Die Zahl hier (bleifrei 320–360 °C) gilt fürs normale SMD-Rework. Beim BGA staffelt sich das nach Aufgabe, weil jede einen anderen Wärmebedarf hat — <b>Kugeln auf dem freien Chip aufschmelzen 330–360 °C</b> (wenig Masse), <b>Chip einlöten 340–370 °C</b> (Board zieht Wärme ab), <b>Chip ausbauen 350–380 °C</b> (alle Kugeln müssen gleichzeitig flüssig sein). Alle drei setzen eine Vorwärmung von unten voraus; ohne sie stimmen sie nicht.</div>
 
 <h3>Reflow-Profil (Heizplatte / Ofen)</h3>
 <p>Die Platine durchläuft vier Phasen. Bei der Heizplatte steuerst du das grob über das Hochregeln der Temperatur.</p>
@@ -1191,7 +1271,7 @@ td:first-child{font-weight:500}
 <h3>SMD entlöten (mit dem Lötkolben)</h3>
 <p>Ohne Heißluft geht das Abnehmen über den Trick, <b>alle Anschlüsse gleichzeitig flüssig zu halten</b>. Immer reichlich frisches Flussmittel dazugeben.</p>
 
-<h4 style="font-size:13px;margin:.7rem 0 .3rem">Chip-Bauteile (2-polig: Widerstand, Kondensator, LED)</h4>
+<h4>Chip-Bauteile (2-polig: Widerstand, Kondensator, LED)</h4>
 <div class="steps">
 <div class="step"><b>Flussmittel auf beide Pads.</b> Das senkt die nötige Temperatur und lässt das Lot besser fließen.</div>
 <div class="step"><b>Wippen:</b> beide Enden abwechselnd kurz erwärmen, das Bauteil mit der Pinzette leicht ankippen und hin- und herwippen, bis es frei ist.</div>
@@ -1199,14 +1279,14 @@ td:first-child{font-weight:500}
 <div class="step"><b>Pads säubern.</b> Restliches Lot mit Entlötlitze abziehen, Flussmittelreste mit IPA entfernen.</div>
 </div>
 
-<h4 style="font-size:13px;margin:.8rem 0 .3rem">Multipin-ICs (SOIC, TSSOP, QFP)</h4>
+<h4>Multipin-ICs (SOIC, TSSOP, QFP)</h4>
 <div class="steps">
 <div class="step"><b>Am einfachsten mit Low-Melt-Legierung.</b> Eine niedrigschmelzende Legierung (z. B. ChipQuik SMD1) mit Flussmittel über alle Pins einer Reihe verteilen — sie senkt den Schmelzpunkt der Mischung auf ~58 °C und hält so alle Pins gleichzeitig flüssig.</div>
 <div class="step"><b>Beide Seiten flüssig halten.</b> Bei zwei Pinreihen Legierung auf beide auftragen, abwechselnd nachheizen, bis das ganze IC „schwimmt".</div>
 <div class="step"><b>Abheben.</b> Mit der Pinzette sanft anheben, sobald alle Pins flüssig sind — nicht hebeln, sonst reißen Pads ab.</div>
 <div class="step"><b>Pads aufbereiten.</b> Alte Legierung und Lot mit Entlötlitze + Flussmittel entfernen, mit IPA reinigen, dann neu verzinnen.</div>
 </div>
-<div class="note"><b>Für QFN, BGA und thermisch kräftige Bauteile</b> (große Masseflächen) ist Heißluft die schonendere Methode — siehe Tab <a class="goto" href="#heissluft">Heißluft</a>. BGA-Chips, die wieder eingebaut werden sollen, brauchen danach neue Lotkugeln: Tab <a class="goto" href="#reballing">Reballing</a>. Litzen-Technik im Detail (Breite, Länge, Winkel): <a class="goto" href="#material">Material → Entlötlitze</a>.</div>
+<div class="note"><b>Für QFN, BGA und thermisch kräftige Bauteile</b> (große Masseflächen) ist Heißluft die schonendere Methode — siehe Tab <a class="goto" href="#heissluft">Heißluft</a>. BGA-Chips, die wieder eingebaut werden sollen, brauchen danach neue Lotkugeln: Tab <a class="goto" href="#reballing">Reballing</a>. Litzen-Technik im Detail (Breite, Länge, Winkel): <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a>.</div>
 
 <h3>SMD-Troubleshooting: was tun, wenn …</h3>
 <p class="note">Die häufigsten SMD-Pannen direkt am Kolben. Vollständige Fehlerbilder-Tabelle: Tab <a class="goto" href="#fehler">Fehler &amp; Regeln</a>.</p>
@@ -1303,7 +1383,7 @@ td:first-child{font-weight:500}
 <tr><td><b>Stencils</b> (Schablonen)</td><td><span class="b b-warn">Pflicht</span></td><td>Universal-Set und/oder chipspezifisch — Details unten</td></tr>
 <tr><td><b>Lotkugeln</b></td><td>Pflicht (oder Paste)</td><td>Sortiment 0,25–0,6 mm, bleihaltig Sn63Pb37 für Reparaturen</td></tr>
 <tr><td><b>Tacky-Flux</b> + <b>dünnes Flux</b></td><td><span class="b b-warn">Pflicht</span></td><td>Tacky zum Halten, dünnflüssig zum Kriechen unter den Chip. Tab <a class="goto" href="#material">Material</a></td></tr>
-<tr><td><b>Entlötlitze</b> 1,5–2,0 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Zum Abziehen der alten Kugeln. Technik: <a class="goto" href="#material">Material → Entlötlitze</a></td></tr>
+<tr><td><b>Entlötlitze</b> 1,5–2,0 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Zum Abziehen der alten Kugeln. Technik: <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a></td></tr>
 <tr><td><b>Bleihaltiges Lot</b> Sn63Pb37, 0,5–0,8 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Auch wenn das Board bleifrei ist — zum Aufmischen der alten Kugeln (siehe Schritt 2)</td></tr>
 <tr><td><b>Mini-Spachtel</b> / Rakel</td><td>Pflicht</td><td>Metall- oder Kunststoffklinge, gerade Kante ohne Scharten</td></tr>
 <tr><td><b>Kapton-Tape</b>, Alufolie</td><td>empfohlen</td><td>Nachbarn und Kunststoffteile abdecken</td></tr>
@@ -1340,7 +1420,7 @@ td:first-child{font-weight:500}
 
 <h3>Kugeln abziehen mit der Entlötlitze</h3>
 <div class="steps">
-<div class="step"><b>Litze kurz abschneiden.</b> Nur so viel, wie du brauchst — 1–2 cm. Warum, steht ausführlich unter <a class="goto" href="#material">Material → Entlötlitze</a>: Ein langer Litzenschwanz zieht Wärme aus der Arbeitsstelle weg, dein Kolben muss dagegenheizen und du brauchst mehr Temperatur für dasselbe Ergebnis.</div>
+<div class="step"><b>Litze kurz abschneiden.</b> Nur so viel, wie du brauchst — 1–2 cm. Warum, steht ausführlich unter <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a>: Ein langer Litzenschwanz zieht Wärme aus der Arbeitsstelle weg, dein Kolben muss dagegenheizen und du brauchst mehr Temperatur für dasselbe Ergebnis.</div>
 <div class="step"><b>Flux auf die Litze und auf den Chip.</b> Trockene Litze saugt schlecht und schmiert.</div>
 <div class="step"><b>Flach und in eine Richtung ziehen.</b> Spitze <b>auf</b> die Litze, Litze flach auf das Lotfeld, dann in einem Zug in eine Richtung. Nicht schrubben, nicht hin und her, nie senkrecht drücken.</div>
 <div class="step"><b>Litze weiterdrehen, Reste weg.</b> Gesättigte Stellen saugen nicht mehr. Immer ein frisches Stück nachschieben.</div>
@@ -1356,7 +1436,7 @@ td:first-child{font-weight:500}
 <div class="step"><b>Sofort abwischen.</b> Solange der Flux warm und flüssig ist, mit einem <b>fusselfreien Tuch</b> und <b>IPA 99 %</b> abnehmen. Immer in eine Richtung wischen, Tuchseite oft wechseln, sonst verteilst du den Dreck nur.</div>
 <div class="step"><b>Nachkontrolle.</b> Unter dem Mikroskop schräg gegen das Licht schauen — Rückstände zeigen sich als matte Schlieren. Bei Bedarf wiederholen.</div>
 </div>
-<div class="tip"><b>Derselbe Trick funktioniert auf dem Board</b> — überall dort, wo alter, harter Flux zwischen Bauteilen klebt und der Pinsel allein nicht mehr weiterkommt. Details und Grenzen: <a class="goto" href="#material">Material → Reinigen</a>.</div>
+<div class="tip"><b>Derselbe Trick funktioniert auf dem Board</b> — überall dort, wo alter, harter Flux zwischen Bauteilen klebt und der Pinsel allein nicht mehr weiterkommt. Details und Grenzen: <a class="goto" href="#finish">Reinigen &amp; Schützen</a>.</div>
 
 <h2>Schritt 3 · Stencil auswählen</h2>
 <p>Der Stencil (die Schablone) ist ein dünnes Stahlblech mit einem Lochraster. Die Löcher legen fest, wo eine Kugel landet und wie groß sie sein darf.</p>
@@ -1800,19 +1880,19 @@ td:first-child{font-weight:500}
 <script>
 /* ---------- TABS mit Deep-Linking (#hash) ---------- */
 const TABS=[
-{p:"methoden",l:"Methoden",i:"🧭"},{p:"workflow",l:"Workflow",i:"📋"},
-{p:"equipment",l:"Equipment",i:"🧰"},{p:"mikroskop",l:"Mikroskop",i:"🔎"},{p:"material",l:"Material",i:"🧪"},
+{p:"start",l:"Start & Workflow",i:"🧭"},
+{p:"equipment",l:"Equipment",i:"🧰"},{p:"mikroskop",l:"Mikroskop",i:"🔎"},{p:"material",l:"Lot & Flussmittel",i:"🧪"},{p:"draht",l:"Draht & Litze",i:"🧵"},{p:"finish",l:"Reinigen & Schützen",i:"🧽"},
 {p:"tht",l:"THT löten",i:"📌"},{p:"smd",l:"SMD löten",i:"🔬"},{p:"heissluft",l:"Heißluft & Reflow",i:"💨"},{p:"reballing",l:"Reballing",i:"⚪"},{p:"temp",l:"Temperaturen",i:"🌡️"},
 {p:"bauteile",l:"Bauteile",i:"🔩"},{p:"soc",l:"SoC & BGA-Typen",i:"🧠"},{p:"fehler",l:"Fehler & Regeln",i:"🩺"},{p:"sicherheit",l:"Sicherheit",i:"⚠️"}
 ];
 const GROUPS=[
-{g:"start",l:"Start",i:"🧭",tabs:["methoden","workflow"]},
-{g:"werkzeug",l:"Werkzeug & Material",i:"🧰",tabs:["equipment","mikroskop","material"]},
+{g:"start",l:"Start",i:"🧭",tabs:["start"]},
+{g:"werkzeug",l:"Werkzeug & Material",i:"🧰",tabs:["equipment","mikroskop","material","draht","finish"]},
 {g:"technik",l:"Techniken",i:"🔥",tabs:["tht","smd","heissluft","reballing","temp"]},
 {g:"qualitaet",l:"Bauteile & Qualität",i:"🔩",tabs:["bauteile","soc","fehler","sicherheit"]}
 ];
 /* alte Anker weiterleiten, damit bestehende Links gültig bleiben */
-const ALIAS={heizplatte:"heissluft",regeln:"fehler"};
+const ALIAS={heizplatte:"heissluft",regeln:"fehler",methoden:"start",workflow:"start"};
 function activate(p,updateHash){
   if(ALIAS[p])p=ALIAS[p];
   if(!TABS.some(t=>t.p===p))return;
@@ -1821,7 +1901,7 @@ function activate(p,updateHash){
   if(updateHash&&location.hash!=="#"+p)history.replaceState(null,"","#"+p);
 }
 window.addEventListener("hashchange",()=>{const r=location.hash.slice(1);activate(ALIAS[r]||r,false);window.scrollTo({top:0,behavior:"smooth"})});
-let startP="methoden";
+let startP="start";
 try{const sv=localStorage.getItem("ltab");if(sv&&TABS.some(t=>t.p===sv))startP=sv}catch(e){}
 const hRaw=location.hash.slice(1),hP=ALIAS[hRaw]||hRaw;
 if(TABS.some(t=>t.p===hP))startP=hP;
@@ -1912,6 +1992,7 @@ else{tb+="<td>"+c[col.k]+"</td>";}
 tb+="</tr>";
 });
 document.querySelector("#compTbl tbody").innerHTML=tb;
+if(window.__prepTables)window.__prepTables(document.getElementById("compTbl"));
 }
 window.csort=function(k){if(cSort===k)cDir*=-1;else{cSort=k;cDir=1}renderComp()};
 renderComp();
@@ -1926,6 +2007,7 @@ document.querySelector("#"+id+" thead").innerHTML=th;
 document.querySelectorAll("#"+id+" thead th").forEach(t=>t.onclick=()=>{const k=t.getAttribute("data-k");if(sc===k)sd*=-1;else{sc=k;sd=1}r()});
 let tb="";data.forEach(row=>{tb+="<tr>"+cols.map(c=>"<td>"+row[c.k]+"</td>").join("")+"</tr>"});
 document.querySelector("#"+id+" tbody").innerHTML=tb;
+if(window.__prepTables)window.__prepTables(document.getElementById(id));
 }
 r();
 }
@@ -1989,7 +2071,7 @@ window.__openSection=function(id){
 function run(){TABS.forEach(t=>build(SECOF(t[KEY])));}
 run();
 })();
-const OTHER={file:"elektronik-grundlagen.html",name:"⚡ Elektronik 101",links:[["grundlagen","Grundlagen"],["komponenten","Bauteile & Module"],["messgeraet","Messen & Werkzeug"],["sicherheit","Sicherheit & Praxis"]]};
+const OTHER={file:"elektronik-grundlagen.html",name:"⚡ Elektronik 101",links:[["grundlagen","Grundlagen"],["komponenten","Bauteile & Module"],["messgeraet","Multimeter"],["messen","Messen & Werte"],["fehlersuche","Fehlersuche"],["sicherheit","Sicherheit & Praxis"]]};
 /* ---------- APP-SHELL: Sidebar-Navigation + globale Suche ---------- */
 (function(){
 const KEY = window.__TABKEY__;                 // "k" (Elektronik) oder "p" (Löten)
@@ -2002,9 +2084,12 @@ const side = document.getElementById("side"), scrim = document.getElementById("s
 
 /* ---- Sidebar aufbauen ---- */
 function slug(s){return s.toLowerCase().replace(/[^a-z0-9äöüß]+/g,"-").replace(/^-|-$/g,"").slice(0,40);}
+/* Nicht jede Überschrift gliedert: h3/h4 in Karten und Vergleichsspalten sind
+   Bauteil-Beschriftungen. Die bleiben aus Navigation und Index draußen. */
+const HDECO = ".card, .gb-col, .sym, .grid2 > div, .rule, .calc, .acc";
 function headings(k){
   const sec = SECOF(k); if(!sec) return [];
-  let hs = [...sec.querySelectorAll("h2")];
+  let hs = [...sec.querySelectorAll("h2,h3,h4")].filter(h=>!h.closest(HDECO));
   if(hs.length < 2) hs = [...sec.querySelectorAll("h2,h3")];
   hs.forEach((h,i)=>{ if(!h.id) h.id = k+"--"+(slug(h.textContent)||("h"+i)); });
   return hs;
@@ -2025,6 +2110,7 @@ function buildSide(active){
         headings(tk).forEach(h=>{
           const a = document.createElement("a");
           a.href = "#"+tk; a.textContent = h.textContent.trim(); a.dataset.h = h.id;
+          a.className = "lv"+h.tagName.charAt(1);
           a.onclick = e=>{ e.preventDefault(); jump(tk,h.id); closeSide(); };
           box.appendChild(a);
         });
@@ -2082,7 +2168,7 @@ function nearestId(el, tab){
   let n = el;
   while(n && n !== document.body){
     let p = n.previousElementSibling;
-    while(p){ if(/^H[23]$/.test(p.tagName) && p.id) return p.id; p = p.previousElementSibling; }
+    while(p){ if(/^H[234]$/.test(p.tagName) && p.id) return p.id; p = p.previousElementSibling; }
     n = n.parentElement;
   }
   return tab;
@@ -2092,15 +2178,31 @@ function buildIndex(){
   TABS.forEach(t=>{
     const k = t[KEY], sec = SECOF(k); if(!sec) return;
     headings(k).forEach(h=>out.push({t:k,tl:t.l,id:h.id,x:h.textContent.trim(),w:h.tagName==="H2"?0:1}));
+    /* Tabellenkopf: damit man die Tabelle über ihre Spaltennamen findet */
+    sec.querySelectorAll("table").forEach(tb=>{
+      const th = [...tb.querySelectorAll("thead th")].map(x=>x.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
+      if(th.length < 2) return;
+      out.push({t:k,tl:t.l,id:nearestId(tb,k),x:"Tabelle: "+th.join(" · "),w:2});
+    });
     sec.querySelectorAll("table tbody tr").forEach(tr=>{
       const c = [...tr.children].map(td=>td.textContent.replace(/\s+/g," ").trim()).filter(Boolean);
       if(!c.length) return;
-      out.push({t:k,tl:t.l,id:nearestId(tr,k),x:c.slice(0,2).join(" — "),w:3});
+      /* Spalte 3+ ist die eigentliche Antwort — mitindizieren statt wegwerfen */
+      out.push({t:k,tl:t.l,id:nearestId(tr,k),x:c.slice(0,2).join(" — "),xtra:c.slice(2).join(" · "),w:3});
     });
     sec.querySelectorAll(".card > h3, .card .ct, .sym .sn, .rule b:first-child").forEach(el=>{
       const x = el.textContent.replace(/\s+/g," ").trim();
       if(x.length < 2) return;
       out.push({t:k,tl:t.l,id:nearestId(el,k),x:x,w:2});
+    });
+    /* Hinweiskaesten und Kartentexte: Fliesstext, der bisher unauffindbar war.
+       Hohes Gewicht, damit Ueberschriften und Tabellen davor bleiben. */
+    sec.querySelectorAll(".tip, .warn, .note, .kurz, .card .cd, .step, .gb-col li").forEach(el=>{
+      const full = el.textContent.replace(/\s+/g," ").trim();
+      if(full.length < 12) return;
+      const cut = full.indexOf(":");
+      const head = (cut > 3 && cut < 70) ? full.slice(0, cut) : full.slice(0, 60);
+      out.push({t:k,tl:t.l,id:nearestId(el,k),x:head,xtra:full,w:5});
     });
   });
   return out;
@@ -2111,30 +2213,54 @@ function hi(s,q){
   if(i < 0) return esc(s);
   return esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+q.length))+"</mark>"+esc(s.slice(i+q.length));
 }
+/* Ausschnitt der Antwortspalte, bei Bedarf um die Fundstelle herum */
+function snip(s,q){
+  const MAX = 120;
+  if(!s) return "";
+  if(s.length <= MAX) return s;
+  if(!q) return s.slice(0,MAX)+"…";
+  const i = s.toLowerCase().indexOf(q);
+  if(i < 0) return s.slice(0,MAX)+"…";
+  const a = Math.max(0, i-45);
+  return (a>0?"…":"") + s.slice(a, a+MAX) + (a+MAX < s.length ? "…" : "");
+}
 let sel = 0, hits = [];
 function search(q){
   q = q.trim().toLowerCase();
   palOut.innerHTML = ""; hits = []; sel = 0;
   if(q.length < 2){
-    palOut.innerHTML = '<div class="pal-empty">Mindestens 2 Zeichen — sucht durch Überschriften, Tabellen und Karten beider Seiten.</div>';
+    palOut.innerHTML = '<div class="pal-empty">Mindestens 2 Zeichen — sucht durch Überschriften, Tabellen und Karten dieser Seite.</div>';
     return;
   }
   if(!IDX) IDX = buildIndex();
   const seen = new Set();
   IDX.forEach(e=>{
-    const l = e.x.toLowerCase(), i = l.indexOf(q);
+    let i = e.x.toLowerCase().indexOf(q), inX = false;
+    if(i < 0 && e.xtra){
+      const j = e.xtra.toLowerCase().indexOf(q);
+      if(j >= 0){ i = j; inX = true; }        /* Treffer nur in der Antwortspalte */
+    }
     if(i < 0) return;
     const key = e.t+"|"+e.x;
     if(seen.has(key)) return; seen.add(key);
-    hits.push({...e, s: (i===0?0:1) + e.w*2});
+    hits.push({...e, inX, s: (i===0?0:1) + e.w*2 + (inX?4:0)});
   });
   hits.sort((a,b)=>a.s-b.s || a.x.length-b.x.length);
   hits = hits.slice(0,40);
-  if(!hits.length){ palOut.innerHTML = '<div class="pal-empty">Nichts gefunden für „'+esc(q)+'".</div>'; return; }
+  if(!hits.length){
+    palOut.innerHTML = '<div class="pal-empty">Nichts auf dieser Seite für „'+esc(q)+'".</div>';
+    const x = document.createElement("a");        /* bewusst kein .pr — Enter soll nicht wegspringen */
+    x.className = "pr-x"; x.href = OTHER.file+"?q="+encodeURIComponent(q);
+    x.innerHTML = "In "+esc(OTHER.name)+" weitersuchen →";
+    palOut.appendChild(x);
+    return;
+  }
   hits.forEach((h,i)=>{
     const b = document.createElement("button");
     b.className = "pr" + (i===0?" sel":"");
-    b.innerHTML = hi(h.x,q) + '<span class="pw">'+esc(h.tl)+"</span>";
+    let sub = esc(h.tl);
+    if(h.xtra) sub += ' <span class="px">'+ (h.inX ? hi(snip(h.xtra,q),q) : esc(snip(h.xtra))) +'</span>';
+    b.innerHTML = hi(h.x,q) + '<span class="pw">'+sub+"</span>";
     b.onclick = ()=>{ closePal(); jump(h.t,h.id); };
     palOut.appendChild(b);
   });
@@ -2150,6 +2276,12 @@ function move(d){
 function openPal(){ pal.classList.add("open"); palIn.value=""; search(""); palIn.focus(); }
 function closePal(){ pal.classList.remove("open"); }
 document.getElementById("openSearch").onclick = openPal;
+/* von der Partnerseite herübergereichter Suchbegriff */
+(function(){
+  const q = new URLSearchParams(location.search).get("q");
+  if(!q) return;
+  openPal(); palIn.value = q; search(q.toLowerCase());
+})();
 const ts = document.querySelector("#topbar .ts"); if(ts) ts.onclick = openPal;
 palIn.addEventListener("input", ()=>search(palIn.value));
 palIn.addEventListener("keydown", e=>{
@@ -2175,6 +2307,26 @@ if(window.showTab){ const o = window.showTab; window.showTab = function(k){ o(k)
 if(window.activate){ const o = window.activate; window.activate = function(p,u){ o(p,u); buildSide(activeTab()); }; }
 buildSide(activeTab());
 })();
+
+/* ---------- Tabellen fuer schmale Displays vorbereiten ----------
+   Spaltennamen aus dem <thead> an jede Zelle haengen (data-l) und
+   ueberwiegend numerische Zellen markieren, damit Messwerte beim
+   Ueberfliegen aus der Prosa herausstechen. */
+window.__prepTables = function(root){
+  (root||document).querySelectorAll("table").forEach(tb=>{
+    const th = [...tb.querySelectorAll("thead th")].map(x=>x.textContent.replace(/\s+/g," ").trim());
+    tb.querySelectorAll("tbody tr").forEach(tr=>{
+      [...tr.children].forEach((td,i)=>{
+        if(!td.hasAttribute("colspan") && th[i]) td.setAttribute("data-l", th[i]);
+        const t = td.textContent.trim();
+        /* kurz, enthaelt eine Ziffer, ist kein Fliesstext */
+        if(i>0 && t.length<=26 && /\d/.test(t) && t.split(" ").length<=5) td.classList.add("numcell");
+        else td.classList.remove("numcell");
+      });
+    });
+  });
+};
+window.__prepTables();
 </script>
 </body>
 </html>

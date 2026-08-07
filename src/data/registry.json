@@ -23,14 +23,16 @@
               "name": "Elektronik 101",
               "icon": "⚡",
               "kind": "Referenz",
-              "updated": "2026-07-09",
-              "desc": "Die große Referenz: Grundgrößen, Schaltpläne lesen, Leistungselektronik, Messtechnik, Fehlersuche, Fachbegriffe — mit eingebauten Rechnern.",
+              "updated": "2026-08-06",
+              "desc": "Die große Referenz: Grundgrößen, Schaltpläne lesen, Leistungselektronik, Messtechnik, Board-Diagnose, Fehlersuche, Fachbegriffe — mit eingebauten Rechnern.",
               "tags": [
                 "grundlagen",
                 "schaltplan",
                 "messen",
                 "pwm",
                 "fehlersuche",
+                "diodenmodus",
+                "richtwerte",
                 "rechner"
               ],
               "sections": [
@@ -75,6 +77,14 @@
                   "t": "Multimeter"
                 },
                 {
+                  "h": "messen",
+                  "t": "Messen & Werte"
+                },
+                {
+                  "h": "fehlersuche",
+                  "t": "Fehlersuche"
+                },
+                {
                   "h": "oszilloskop",
                   "t": "Oszilloskop"
                 },
@@ -102,7 +112,7 @@
               "name": "Löten",
               "icon": "🔥",
               "kind": "Referenz",
-              "updated": "2026-08-01",
+              "updated": "2026-08-06",
               "desc": "Werkzeug, Verbrauchsmaterial und Technik: THT, SMD, Heißluft, Reflow und BGA-Reballing — inklusive Mikroskop-Setup und Fehlerbildern.",
               "tags": [
                 "flux",
@@ -115,12 +125,8 @@
               ],
               "sections": [
                 {
-                  "h": "methoden",
-                  "t": "Methoden"
-                },
-                {
-                  "h": "workflow",
-                  "t": "Workflow"
+                  "h": "start",
+                  "t": "Start & Workflow"
                 },
                 {
                   "h": "equipment",
@@ -132,7 +138,15 @@
                 },
                 {
                   "h": "material",
-                  "t": "Material"
+                  "t": "Lot & Flussmittel"
+                },
+                {
+                  "h": "draht",
+                  "t": "Draht & Litze"
+                },
+                {
+                  "h": "finish",
+                  "t": "Reinigen & Schützen"
                 },
                 {
                   "h": "tht",
