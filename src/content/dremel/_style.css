@@ -1,0 +1,125 @@
+/* Aus dremel-8250-cheatsheet.html uebernommen und unter .mx-dremel gescoped. */
+
+.mx-dremel *{box-sizing:border-box;margin:0;padding:0}
+.mx-dremel{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a1a;background:#fff;padding:1.5rem;line-height:1.55}
+@media(prefers-color-scheme:dark){.mx-dremel{background:#1a1a1a;color:#e0e0e0}}
+.mx-dremel h1{font-size:21px;font-weight:600;margin-bottom:.25rem}
+.mx-dremel .sub{font-size:12.5px;color:#888;margin-bottom:1rem}
+.mx-dremel h2{font-size:16px;font-weight:600;margin:1.6rem 0 .7rem;display:flex;align-items:center;gap:8px}
+.mx-dremel h3{font-size:13.5px;font-weight:600;margin:1rem 0 .4rem;color:#0C447C}
+@media(prefers-color-scheme:dark){.mx-dremel h3{color:#7FB4E8}}
+.mx-dremel p{font-size:13px;margin-bottom:.5rem}
+.mx-dremel ul{font-size:13px;margin:.3rem 0 .6rem 1.1rem}
+.mx-dremel li{margin-bottom:.28rem}
+.mx-dremel strong{font-weight:600}
+
+/* tab nav */
+.mx-dremel .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.2rem;position:sticky;top:0;background:#fff;padding:.6rem 0;z-index:10;border-bottom:1px solid #eee}
+.mx-dremel .tabs button{font-size:12px;padding:6px 12px;cursor:pointer;background:transparent;border:1px solid #ccc;border-radius:8px;color:#666;transition:all .15s;white-space:nowrap}
+.mx-dremel .tabs button.active{background:#E6F1FB;color:#0C447C;border-color:#85B7EB;font-weight:500}
+.mx-dremel .tabs button:hover{background:#f5f5f5}
+.mx-dremel .panel{display:none;animation:fade .2s ease}
+.mx-dremel .panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* cards */
+.mx-dremel .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:.6rem 0}
+.mx-dremel .card{border:1px solid #e0e0e0;border-radius:10px;padding:12px 14px;background:#fff}
+.mx-dremel .card .ct{font-size:13.5px;font-weight:600;margin-bottom:3px}
+.mx-dremel .card .cd{font-size:12px;color:#666;margin-bottom:6px}
+.mx-dremel .card ul{margin:.2rem 0 0 1rem;font-size:12px}
+.mx-dremel .card li{margin-bottom:.2rem}
+
+/* badges */
+.mx-dremel .b{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:7px;font-weight:600;letter-spacing:.2px}
+.mx-dremel .b-cut{background:#FCEBEB;color:#791F1F}
+.mx-dremel .b-grind{background:#FAEEDA;color:#633806}
+.mx-dremel .b-carve{background:#E6F1FB;color:#0C447C}
+.mx-dremel .b-sand{background:#FAECE7;color:#712B13}
+.mx-dremel .b-pol{background:#E1F5EE;color:#085041}
+.mx-dremel .b-clean{background:#EEEDFE;color:#3C3489}
+.mx-dremel .b-drill{background:#E1F5EE;color:#085041}
+.mx-dremel .b-route{background:#FAEEDA;color:#633806}
+
+/* speed pills */
+.mx-dremel .sp{font-size:11px;font-weight:600;padding:2px 8px;border-radius:7px;white-space:nowrap;display:inline-block}
+.mx-dremel .s-low{background:#E1F5EE;color:#085041}
+.mx-dremel .s-mid{background:#FAEEDA;color:#633806}
+.mx-dremel .s-high{background:#FCEBEB;color:#791F1F}
+.mx-dremel .s-var{background:#EEEDFE;color:#3C3489}
+
+/* table */
+.mx-dremel .tbl-wrap{overflow-x:auto;margin:.5rem 0}
+.mx-dremel table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:560px}
+.mx-dremel th{text-align:left;padding:8px 7px;font-weight:500;font-size:11.5px;color:#888;border-bottom:1px solid #ccc;cursor:pointer;user-select:none;white-space:nowrap}
+.mx-dremel th:hover{color:#1a1a1a}
+.mx-dremel th .ar{font-size:10px;margin-left:2px}
+.mx-dremel td{padding:8px 7px;border-bottom:1px solid #eee;vertical-align:top}
+.mx-dremel tr:hover td{background:#f9f9f9}
+.mx-dremel .search{padding:7px 11px;font-size:13px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;width:260px;margin-bottom:.6rem}
+.mx-dremel tr.clk{cursor:pointer}
+.mx-dremel tr.clk .exp{color:#aaa;font-size:10px;margin-right:4px;display:inline-block;transition:transform .15s}
+.mx-dremel tr.clk.open .exp{transform:rotate(90deg)}
+.mx-dremel .dr td{padding:12px 14px;background:#f5f5f3;font-size:12.5px;line-height:1.65}
+.mx-dremel .dr .block{margin-top:9px}
+.mx-dremel .dr .block:first-child{margin-top:0}
+.mx-dremel .dr .blk-title{font-size:10.5px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.mx-dremel .dr .blk-body{font-size:12.5px;line-height:1.6}
+.mx-dremel .swatch{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:5px;border:1px solid rgba(0,0,0,.15)}
+.mx-dremel .filt{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.6rem}
+.mx-dremel .filt button{font-size:11.5px;padding:4px 10px;cursor:pointer;background:transparent;border:1px solid #ccc;border-radius:7px;color:#666}
+.mx-dremel .filt button.active{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
+
+/* callouts */
+.mx-dremel .note{border-left:3px solid #85B7EB;background:#F4F9FE;padding:9px 12px;border-radius:0 8px 8px 0;font-size:12.5px;margin:.6rem 0}
+.mx-dremel .tip{border-left:3px solid #1D9E75;background:#F0FAF6;padding:9px 12px;border-radius:0 8px 8px 0;font-size:12.5px;margin:.6rem 0}
+.mx-dremel .warn{border-left:3px solid #E24B4A;background:#FEF4F4;padding:9px 12px;border-radius:0 8px 8px 0;font-size:12.5px;margin:.6rem 0}
+.mx-dremel .note b, .mx-dremel .tip b, .mx-dremel .warn b{font-weight:600}
+
+/* speed scale bar */
+.mx-dremel .scale{display:flex;border-radius:8px;overflow:hidden;margin:.6rem 0;font-size:10.5px;font-weight:600;text-align:center}
+.mx-dremel .scale div{padding:8px 4px;color:#fff}
+.mx-dremel .scale .x1{background:#1D9E75;flex:1}
+.mx-dremel .scale .x2{background:#3F9E5A;flex:1}
+.mx-dremel .scale .x3{background:#C99A2E;flex:1}
+.mx-dremel .scale .x4{background:#D6792E;flex:1}
+.mx-dremel .scale .x5{background:#CC4A3F;flex:1}
+.mx-dremel .scale .x6{background:#B0322B;flex:1}
+
+.mx-dremel .legend{font-size:11.5px;color:#999;margin-top:1.2rem;padding-top:.8rem;border-top:1px solid #eee}
+
+@media(max-width:520px){.mx-dremel .grid{grid-template-columns:1fr}}
+
+@media(prefers-color-scheme:dark){
+.mx-dremel .sub, .mx-dremel .card .cd, .mx-dremel .legend{color:#999}
+.mx-dremel .tabs{background:#1a1a1a;border-bottom-color:#333}
+.mx-dremel .tabs button{border-color:#555;color:#aaa}
+.mx-dremel .tabs button:hover{background:#2a2a2a}
+.mx-dremel .tabs button.active{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+.mx-dremel .card{background:#2a2a2a;border-color:#3a3a3a}
+.mx-dremel .search{background:#2a2a2a;border-color:#444;color:#e0e0e0}
+.mx-dremel .filt button{border-color:#555;color:#aaa}
+.mx-dremel .filt button.active{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+.mx-dremel th{color:#999;border-bottom-color:#444}
+.mx-dremel th:hover{color:#e0e0e0}
+.mx-dremel td{border-bottom-color:#333}
+.mx-dremel tr:hover td{background:#252525}
+.mx-dremel .dr td{background:#252525}
+.mx-dremel .dr .blk-title{color:#888}
+.mx-dremel .note{background:#0E2438;border-left-color:#185FA5}
+.mx-dremel .tip{background:#0C2620;border-left-color:#1D9E75}
+.mx-dremel .warn{background:#2E1414;border-left-color:#E24B4A}
+.mx-dremel .legend{border-top-color:#333}
+.mx-dremel .b-cut{background:#501313;color:#F7C1C1}
+.mx-dremel .b-grind{background:#412402;color:#FAC775}
+.mx-dremel .b-carve{background:#042C53;color:#B5D4F4}
+.mx-dremel .b-sand{background:#4A1B0C;color:#F5C4B3}
+.mx-dremel .b-pol{background:#04342C;color:#9FE1CB}
+.mx-dremel .b-clean{background:#26215C;color:#CECBF6}
+.mx-dremel .b-drill{background:#04342C;color:#9FE1CB}
+.mx-dremel .b-route{background:#412402;color:#FAC775}
+.mx-dremel .s-low{background:#04342C;color:#9FE1CB}
+.mx-dremel .s-mid{background:#412402;color:#FAC775}
+.mx-dremel .s-high{background:#501313;color:#F7C1C1}
+.mx-dremel .s-var{background:#26215C;color:#CECBF6}
+}

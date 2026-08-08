@@ -1,0 +1,52 @@
+<h2>Die 3-2-1-Regel</h2>
+<div class="grid">
+<div class="card"><div class="ct">3 Kopien</div><div class="cd">Original + 2 Sicherungen.</div><ul><li>Beispiel: Server + Backup-Platte + Cloud</li></ul></div>
+<div class="card"><div class="ct">2 Medien/Geräte</div><div class="cd">Nicht alles auf demselben Gerät.</div><ul><li>Interne HDD zählt nicht als Backup ihrer Nachbarplatte im selben Pool</li></ul></div>
+<div class="card"><div class="ct">1 Kopie außer Haus</div><div class="cd">Gegen Feuer, Blitz, Diebstahl.</div><ul><li>Verschlüsselte Cloud (Backblaze B2, Hetzner Storage Box) oder Platte bei Familie/Arbeit</li></ul></div>
+</div>
+
+<h2>Was sichern? (Prioritäten)</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Priorität</th><th>Daten</th><th>Beispiele</th><th>Strategie</th></tr>
+<tr><td><span class="b b-rot">Unersetzlich</span></td><td>Persönliche Daten</td><td>Fotos, Dokumente, Passwort-Tresor (Vaultwarden!), Paperless-Archiv</td><td>Voll 3-2-1, verschlüsselt, täglich/automatisch</td></tr>
+<tr><td><span class="b b-gelb">Aufwendig</span></td><td>Konfiguration</td><td>Docker-Compose, .env, AppData, Home-Assistant-Config, VM-Backups</td><td>Täglich automatisch, mind. 2 Ziele</td></tr>
+<tr><td><span class="b b-gruen">Ersetzbar</span></td><td>Wiederbeschaffbares</td><td>Medien, ISOs, Downloads</td><td>Optional; oft reicht 1 Kopie oder gar keine</td></tr>
+</table>
+</div>
+
+<h2>Snapshots vs. Backup</h2>
+<div class="gb">
+<div class="gb-col good"><h4>Snapshot (ZFS/Btrfs/Proxmox)</h4><ul><li>Momentaufnahme in Sekunden, ideal <b>vor Updates/Änderungen</b></li><li>Schneller Rollback</li><li>Liegt auf <b>demselben</b> System → schützt nicht bei Hardware-Defekt</li></ul></div>
+<div class="gb-col bad"><h4>Snapshot allein reicht nicht</h4><ul><li>Kein Schutz bei Plattendefekt, Pool-Verlust, Diebstahl</li><li>Ransomware mit Root-Zugriff kann Snapshots löschen</li><li>→ Immer zusätzlich echtes Backup auf anderes Gerät</li></ul></div>
+</div>
+
+<h2>Werkzeuge</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Tool</th><th>Typ</th><th>Stärken</th><th>Typischer Einsatz</th></tr>
+<tr><td><b>Restic</b></td><td>CLI, dedupliziert + verschlüsselt</td><td>Schnell, viele Backends (lokal, SFTP, S3/B2), <code>restic check</code></td><td>Standard-Tipp für Datei-Backups → Cloud &amp; Platte</td></tr>
+<tr><td><b>Borg / Borgmatic</b></td><td>CLI, dedupliziert + verschlüsselt</td><td>Sehr effizient, ausgereift</td><td>Backups auf eigenes Ziel (SSH/BorgBase)</td></tr>
+<tr><td><b>Proxmox Backup Server</b></td><td>Server-Anwendung</td><td>VM/LXC-Backups inkrementell + verifiziert</td><td>Proxmox-Setups, gern auf Zweitgerät</td></tr>
+<tr><td><b>Duplicati</b></td><td>Web-UI</td><td>Einfach klickbar</td><td>Einsteiger; Restore regelmäßig testen</td></tr>
+<tr><td><b>rsync</b></td><td>CLI, 1:1-Kopie</td><td>Simpel, überall vorhanden</td><td>Medien spiegeln; keine Versionierung!</td></tr>
+<tr><td><b>Syncthing</b></td><td>Sync (kein Backup!)</td><td>Geräte-Sync in Echtzeit</td><td>Verteilen von Daten – löscht auch synchron ⚠️</td></tr>
+</table>
+</div>
+<div class="warn"><b>Sync ≠ Backup:</b> Nextcloud/Syncthing spiegeln auch das Löschen und Verschlüsseln (Ransomware) sofort auf alle Geräte. Backups brauchen <b>Versionierung</b> und am besten ein Ziel, das der Server nicht überschreiben kann (Pull-Backup, Append-only oder Offline-Platte).</div>
+
+<h2>Beispiel-Backup-Plan (bewährt)</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Wann</th><th>Was</th><th>Wohin</th><th>Womit</th></tr>
+<tr><td>täglich, nachts</td><td>AppData + Configs + Dokumente/Fotos</td><td>zweite interne/USB-Platte</td><td>Restic (verschlüsselt, versioniert)</td></tr>
+<tr><td>täglich, nachts</td><td>Unersetzliches (Fotos, Doks, Tresor)</td><td>Cloud (B2/Storage Box)</td><td>Restic, gleicher Job, zweites Repo</td></tr>
+<tr><td>wöchentlich</td><td>VMs/LXC komplett</td><td>PBS oder NAS</td><td>Proxmox-Backup</td></tr>
+<tr><td>monatlich</td><td>Restore-Stichprobe: 1 Datei + 1 Ordner zurückholen</td><td>—</td><td>Hand + Kalender-Erinnerung</td></tr>
+</table>
+</div>
+<ul>
+<li><b>Benachrichtigung einrichten:</b> Backup-Job meldet Erfolg/Fehler (ntfy, E-Mail, Gotify) – stille Fehler sind der Klassiker</li>
+<li><b>Aufbewahrung (Retention):</b> z. B. 7 täglich, 4 wöchentlich, 6 monatlich – schützt auch vor „Fehler erst spät bemerkt“</li>
+<li><b>Verschlüsselungs-Passwort des Backups</b> außerhalb des Servers sichern (Passwortmanager + Zettel) – ohne ist alles weg</li>
+</ul>

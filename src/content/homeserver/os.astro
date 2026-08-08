@@ -1,0 +1,39 @@
+<h2>Betriebssystem wählen</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>System</th><th>Typ</th><th>Schwierigkeit</th><th>Kosten</th><th>Stark bei</th><th>Bedenken</th></tr>
+<tr><td><b>Proxmox VE</b></td><td>Hypervisor (VMs + LXC)</td><td><span class="diff d2">mittel</span></td><td>kostenlos</td><td>Flexibilität, Snapshots, Backups, alles auf einem Gerät</td><td>Storage/NAS-Funktionen nur per VM/Umweg</td></tr>
+<tr><td><b>Debian/Ubuntu Server + Docker</b></td><td>Pures Linux</td><td><span class="diff d2">mittel</span></td><td>kostenlos</td><td>Schlank, maximale Kontrolle, wenig Overhead</td><td>Alles selbst bauen (Backup, Monitoring)</td></tr>
+<tr><td><b>TrueNAS Scale</b></td><td>NAS-OS (ZFS-first)</td><td><span class="diff d2">mittel</span></td><td>kostenlos</td><td>Storage, ZFS, Freigaben, Snapshots</td><td>Apps/Container weniger flexibel als pures Docker</td></tr>
+<tr><td><b>Unraid</b></td><td>NAS-OS</td><td><span class="diff d1">leicht</span></td><td>Lizenz (ab ~50 $)</td><td>Gemischte Plattengrößen, einfache UI, große Community</td><td>Kostenpflichtig, Parity statt klassischem RAID</td></tr>
+<tr><td><b>OpenMediaVault</b></td><td>NAS-OS (Debian-Basis)</td><td><span class="diff d1">leicht</span></td><td>kostenlos</td><td>Leichtes NAS auf schwacher Hardware (auch Pi)</td><td>Weniger poliert, Docker via Plugin</td></tr>
+<tr><td><b>Synology DSM / QNAP QTS</b></td><td>Hersteller-OS</td><td><span class="diff d1">leicht</span></td><td>im NAS enthalten</td><td>„Einschalten und läuft“, gute Apps</td><td>Gebunden an Hersteller-Hardware, weniger Lerneffekt</td></tr>
+</table>
+</div>
+
+<div class="tip"><b>Empfehlung:</b> Ein Gerät für alles → <b>Proxmox</b> (unten Docker-VM/LXC, daneben Test-VMs, eingebaute Backups). Nur Container, so einfach wie möglich → <b>Debian + Docker</b>. Storage im Mittelpunkt → <b>TrueNAS Scale</b> oder <b>Unraid</b>.</div>
+
+<h2>VM vs. LXC vs. Docker</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Technik</th><th>Isolation</th><th>Overhead</th><th>Wofür</th></tr>
+<tr><td><b>VM</b> (virtuelle Maschine)</td><td>voll (eigener Kernel)</td><td>hoch (RAM fest reserviert)</td><td>Fremde OS, Home Assistant OS, unsichere Experimente, Firewall</td></tr>
+<tr><td><b>LXC</b> (System-Container)</td><td>mittel (teilt Kernel)</td><td>sehr gering</td><td>Leichte Linux-Dienste unter Proxmox (Pi-hole, kleine Tools)</td></tr>
+<tr><td><b>Docker</b> (App-Container)</td><td>App-Ebene</td><td>gering</td><td>Standard für Self-Hosting-Apps – fast jede App liefert ein Image</td></tr>
+</table>
+</div>
+<div class="note"><b>Bewährtes Proxmox-Muster:</b> Eine Debian-VM als „Docker-Host“ für alle App-Container + einzelne LXC/VMs für Sonderfälle. Docker direkt im LXC geht, macht aber gern Probleme bei Updates.</div>
+
+<h2>Grund-Setup direkt nach der Installation</h2>
+<ul class="check">
+<li>System-Updates einspielen (<code>apt update &amp;&amp; apt full-upgrade</code>)</li>
+<li>Feste IP vergeben – am besten als <b>DHCP-Reservierung im Router</b> (überlebt Neuinstallationen)</li>
+<li>Eigenen Admin-User anlegen, <code>sudo</code> statt root-Arbeit</li>
+<li>SSH-Key hinterlegen, danach <b>Passwort-Login und Root-Login deaktivieren</b></li>
+<li>Zeitzone + NTP prüfen (<code>timedatectl</code>) – wichtig für Logs, Zertifikate, Backups</li>
+<li>Hostname sinnvoll setzen (z. B. <code>server01</code>)</li>
+<li>Firewall aktivieren (<code>ufw</code>: nur SSH + benötigte Ports erlauben)</li>
+<li><code>fail2ban</code> installieren (blockt Brute-Force auf SSH)</li>
+<li>Automatische Sicherheitsupdates: <code>unattended-upgrades</code> (nur Security-Repo)</li>
+<li>SMART-Monitoring aktivieren (<code>smartd</code>) + Mail/Push bei Fehlern</li>
+</ul>

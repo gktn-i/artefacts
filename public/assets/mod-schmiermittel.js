@@ -1,71 +1,4 @@
-<!DOCTYPE html>
-<html lang="de">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Schmiermittel Vergleich</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#e8e6df;background:#1a1a1a;font-size:14px;line-height:1.5;padding:1.5rem}
-h1{font-size:20px;font-weight:500;margin-bottom:16px}
-.search{width:100%;padding:8px 12px;border:0.5px solid #444;border-radius:8px;background:#2a2a2a;color:#e8e6df;font-size:14px;margin-bottom:12px}
-.search:focus{outline:none;border-color:#666}
-.search::placeholder{color:#888}
-.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
-.fbtn{padding:4px 14px;border-radius:8px;border:0.5px solid #444;background:transparent;color:#aaa;font-size:13px;cursor:pointer}
-.fbtn:hover{border-color:#666;color:#ccc}
-.fbtn.active{background:#1a3a5c;color:#85B7EB;border-color:#378ADD}
-.count{font-size:13px;color:#888;margin-bottom:8px}
-.scroll-wrap{overflow-x:auto}
-.tbl{width:100%;border-collapse:collapse;table-layout:fixed;min-width:750px}
-.tbl th{font-size:12px;font-weight:500;color:#888;text-align:left;padding:6px 4px;border-bottom:0.5px solid #333;white-space:nowrap;cursor:pointer;user-select:none}
-.tbl th:hover{color:#ccc}
-.tbl td{padding:8px 4px;border-bottom:0.5px solid #2a2a2a;vertical-align:middle;font-size:13px}
-.tbl tr.row{cursor:pointer}
-.tbl tr.row:hover{background:#222}
-.cat{display:inline-block;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:500}
-.cat-oel{background:#0C447C;color:#B5D4F4}
-.cat-fett{background:#27500A;color:#C0DD97}
-.cat-spray{background:#633806;color:#FAC775}
-.cat-spezial{background:#3C3489;color:#CECBF6}
-.cat-reiniger{background:#791F1F;color:#F7C1C1}
-.cat-paste{background:#72243E;color:#F4C0D1}
-.bar-wrap{display:flex;align-items:center;gap:4px}
-.bar{height:6px;border-radius:3px;min-width:2px}
-.bar-score{font-size:11px;color:#666;min-width:22px}
-.detail{display:none;background:#222;border-radius:8px;padding:12px 16px;margin:0 0 4px}
-.detail.open{display:block}
-.detail p{font-size:13px;color:#aaa;margin-bottom:8px}
-.detail strong{color:#e8e6df;font-weight:500}
-.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.tag{font-size:11px;padding:2px 8px;border-radius:8px;background:#333;color:#aaa}
-.uc-box{margin-top:8px;padding:8px 12px;border:0.5px solid #333;border-radius:8px;background:#1a1a1a}
-.uc-box li{font-size:13px;color:#aaa;margin:2px 0 2px 16px}
-</style>
-<link rel="stylesheet" href="assets/chrome.css">
-<script defer src="assets/registry.js"></script>
-<script defer src="assets/shell.js"></script>
-<script defer src="assets/palette.js"></script>
-</head>
-<body data-pagefind-body>
-<h1>Schmiermittel Vergleich</h1>
-<input class="search" id="search" placeholder="Schmiermittel oder Use Case suchen...">
-<div class="filters" id="filters"></div>
-<div class="count" id="count"></div>
-<div class="scroll-wrap">
-<table class="tbl" id="tbl">
-<thead><tr>
-<th style="width:130px" data-key="name">Produkt ▲</th>
-<th style="width:80px" data-key="cat">Kategorie</th>
-<th style="width:72px" data-key="schmierung">Schmierung</th>
-<th style="width:72px" data-key="kriechfaehigkeit">Kriechfähigk.</th>
-<th style="width:72px" data-key="wasserbestaendigkeit">Wasserres.</th>
-<th style="width:72px" data-key="temperatur">Temp.beständ.</th>
-<th style="width:72px" data-key="kunststoffvertraeglichkeit">Kunststoffvert.</th>
-<th style="width:72px" data-key="haltbarkeit">Haltbarkeit</th>
-</tr></thead>
-<tbody id="tbody"></tbody>
-</table>
-</div>
-
-<script>
+/* Modul-Skript (nativ) — Funktions-JS aus schmiermittel-vergleich.html; Tab-/View-Code entfaellt. */
 const colors={schmierung:'#378ADD',kriechfaehigkeit:'#1D9E75',wasserbestaendigkeit:'#D85A30',temperatur:'#D4537E',kunststoffvertraeglichkeit:'#7F77DD',haltbarkeit:'#639922'};
 const data=[
 {name:"WD-40 Classic",cat:"Spray",catCls:"spray",schmierung:3,kriechfaehigkeit:9,wasserbestaendigkeit:4,temperatur:4,kunststoffvertraeglichkeit:5,haltbarkeit:2,desc:"Universalmittel, primär Kriechöl und Feuchtigkeitsverdränger. Kein echtes Schmiermittel für Dauereinsatz.",tags:["Kriechöl","Feuchtigkeitsverdränger","Kurzzeit"],useCases:["Festsitzende Schrauben lösen","Feuchtigkeit verdrängen","Leichte Rostlösung","Quietschende Scharniere (kurzfristig)","Aufkleber entfernen"]},
@@ -192,6 +125,3 @@ function applyHash(){
 }
 applyHash();
 window.addEventListener("hashchange",applyHash);
-</script>
-</body>
-</html>

@@ -1,0 +1,44 @@
+---
+import "./_style.css";
+---
+<h2>Was ist ein Homeserver &amp; wofür?</h2>
+<p>Ein Rechner, der 24/7 zuhause läuft und Dienste für dich bereitstellt – statt Cloud-Abos, mit voller Kontrolle über die eigenen Daten.</p>
+
+<div class="grid">
+<div class="card"><div class="ct">🎬 Medien</div><div class="cd">Eigenes Netflix: Filme, Serien, Musik, Hörbücher streamen.</div><ul><li>Jellyfin, Plex, Navidrome</li></ul></div>
+<div class="card"><div class="ct">☁️ Cloud-Ersatz</div><div class="cd">Dateien, Fotos und Kalender selbst hosten.</div><ul><li>Nextcloud, Immich, Syncthing</li></ul></div>
+<div class="card"><div class="ct">🛡️ Netzwerk</div><div class="cd">Werbe- und Tracker-Blocker für alle Geräte, lokales DNS.</div><ul><li>Pi-hole, AdGuard Home</li></ul></div>
+<div class="card"><div class="ct">🏠 Smart Home</div><div class="cd">Zentrale für Automatisierung, lokal statt Hersteller-Cloud.</div><ul><li>Home Assistant</li></ul></div>
+<div class="card"><div class="ct">💾 Backup-Ziel</div><div class="cd">Zentrale Sicherung aller PCs, Handys und Dokumente.</div><ul><li>Restic, Paperless-ngx, PBS</li></ul></div>
+<div class="card"><div class="ct">🧪 Lernen &amp; Basteln</div><div class="cd">Linux, Docker, Netzwerke, Virtualisierung in echt lernen.</div><ul><li>VMs, LXC, Testumgebungen</li></ul></div>
+</div>
+
+<h2>Die 10 Grundregeln</h2>
+<div class="steps">
+<div class="step"><b>Zweck vor Kauf.</b> Erst festlegen, was der Server tun soll – daraus ergibt sich die Hardware, nicht umgekehrt.</div>
+<div class="step"><b>Klein anfangen.</b> Ein Gerät, ein Dienst, dann erweitern. Kein 10-Dienste-Big-Bang am ersten Wochenende.</div>
+<div class="step"><b>RAID ist kein Backup.</b> RAID schützt vor Plattenausfall, nicht vor Löschen, Ransomware, Blitz oder Diebstahl.</div>
+<div class="step"><b>Backup vor Daten.</b> Erst wenn die 3-2-1-Sicherung steht, kommen wichtige Daten auf den Server.</div>
+<div class="step"><b>Nichts direkt ins Internet.</b> Fernzugriff über VPN (Tailscale/WireGuard). Port-Forwarding nur bewusst, gehärtet und minimal.</div>
+<div class="step"><b>Updates sind Pflicht.</b> Ein ungepatchter Server im Netz ist ein offenes Fenster. Feste Update-Routine einplanen.</div>
+<div class="step"><b>Dokumentieren.</b> IPs, Ports, Zugänge, Konfigs notieren (Passwortmanager + Git für Compose-Dateien). Zukunfts-Ich dankt.</div>
+<div class="step"><b>Restore testen.</b> Ein Backup, das nie wiederhergestellt wurde, ist Hoffnung – kein Backup.</div>
+<div class="step"><b>Eine Änderung nach der anderen.</b> Vor Änderungen Snapshot/Backup, danach prüfen. Nie zwei Baustellen gleichzeitig.</div>
+<div class="step"><b>Strom zählt.</b> Das Gerät läuft 24/7 – Idle-Verbrauch ist wichtiger als Peak-Leistung. Faustregel: 1 W ≈ 3 €/Jahr.</div>
+</div>
+
+<h2>Standard-Vorgehen: von 0 zum laufenden Server</h2>
+<div class="steps">
+<div class="step"><b>Zweck &amp; Budget definieren.</b> Welche Dienste? Wie viele Nutzer? Wie viel Speicher in 3 Jahren?</div>
+<div class="step"><b>Hardware wählen.</b> Siehe Tab „Hardware“ – für die meisten: gebrauchter Mini-PC oder N100-Box.</div>
+<div class="step"><b>OS installieren.</b> Siehe Tab „Betriebssystem“ – Empfehlung: Proxmox (flexibel) oder Debian + Docker (schlank).</div>
+<div class="step"><b>Grund-Setup.</b> Updates, feste IP (DHCP-Reservierung), SSH-Key, eigener Admin-User, Zeitzone/NTP.</div>
+<div class="step"><b>Storage einrichten.</b> Platten, Dateisystem, ggf. Pool/RAID, SMART-Monitoring aktivieren.</div>
+<div class="step"><b>Docker + erster Dienst.</b> Etwas Unkritisches zum Üben, z. B. Uptime Kuma oder ein Dashboard.</div>
+<div class="step"><b>Backup einrichten &amp; Restore testen.</b> Erst jetzt wichtige Daten auf den Server geben.</div>
+<div class="step"><b>Monitoring &amp; Benachrichtigungen.</b> Uptime Kuma, SMART-Alerts, Backup-Reports (z. B. via ntfy).</div>
+<div class="step"><b>Weitere Dienste, einer nach dem anderen.</b> Jeweils: Compose anlegen → testen → dokumentieren → ins Backup aufnehmen.</div>
+<div class="step"><b>Fernzugriff zuletzt.</b> Tailscale/WireGuard einrichten – erst wenn Basis, Backup und Sicherheit stehen.</div>
+</div>
+
+<div class="tip"><b>Faustregel Reihenfolge:</b> Stabilität → Sicherheit → Backup → Komfort. Neue Features immer erst, wenn die Ebene darunter steht.</div>

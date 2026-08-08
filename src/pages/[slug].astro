@@ -66,6 +66,14 @@ const navGroups = mod
 const PAGE_SCRIPTS: Record<string, string> = {
   loeten: "/assets/mod-loeten.js",
   "elektronik-101": "/assets/mod-elektronik.js",
+  dremel: "/assets/mod-dremel.js",
+  homeserver: "/assets/mod-homeserver.js",
+  maschinenbau: "/assets/mod-maschinenbau.js",
+  "maker-komponenten": "/assets/mod-maker-komponenten.js",
+  robotik: "/assets/mod-robotik.js",
+  filament: "/assets/mod-filament.js",
+  rentabilitaet: "/assets/mod-rentabilitaet.js",
+  schmiermittel: "/assets/mod-schmiermittel.js",
 };
 const pageScript = mod ? PAGE_SCRIPTS[mod.id] : undefined;
 const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";

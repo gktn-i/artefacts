@@ -1,0 +1,61 @@
+<h2>Konzepte in 30 Sekunden</h2>
+<div class="grid">
+<div class="card"><div class="ct">Image</div><div class="cd">Bauplan/Vorlage einer App (z. B. <code>jellyfin/jellyfin:10.9</code>). Unveränderlich, wird aus Registry geladen.</div></div>
+<div class="card"><div class="ct">Container</div><div class="cd">Laufende Instanz eines Images. Wegwerfbar – alles Wichtige liegt in Volumes/Mounts.</div></div>
+<div class="card"><div class="ct">Volume / Bind Mount</div><div class="cd">Persistente Daten. Bind Mount (<code>./data:/config</code>) = Ordner auf dem Host, leicht zu sichern – Standard im Homelab.</div></div>
+<div class="card"><div class="ct">Netzwerk</div><div class="cd">Container im selben Docker-Netz erreichen sich per Namen (<code>http://jellyfin:8096</code>) – ohne Port-Freigabe.</div></div>
+</div>
+
+<h2>Compose als Standard</h2>
+<p>Jeder Dienst als <code>compose.yaml</code>: deklarativ, versionierbar, selbstdokumentierend. Nie Container per Hand mit langen <code>docker run</code>-Befehlen starten.</p>
+<h3>Bewährte Ordnerstruktur</h3>
+<pre><code>/opt/stacks/
+├── jellyfin/
+│   ├── compose.yaml
+│   ├── .env            ← Secrets, nicht in Git
+│   └── config/         ← AppData (Bind Mount)
+├── immich/
+│   ├── compose.yaml
+│   └── ...
+└── proxy/
+    └── compose.yaml</code></pre>
+<h3>Beispiel compose.yaml</h3>
+<pre><code>services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.9.11   # Version pinnen statt :latest
+    restart: unless-stopped
+    ports:
+      - "8096:8096"
+    volumes:
+      - ./config:/config
+      - /srv/medien:/media:ro          # Medien nur lesend
+    environment:
+      - TZ=Europe/Berlin
+    devices:
+      - /dev/dri:/dev/dri              # iGPU für Hardware-Transcoding</code></pre>
+
+<h2>Wichtige Befehle</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Befehl</th><th>Macht</th></tr>
+<tr><td><code>docker compose up -d</code></td><td>Stack starten / Änderungen anwenden</td></tr>
+<tr><td><code>docker compose pull &amp;&amp; docker compose up -d</code></td><td>Update: neue Images ziehen + neu erstellen</td></tr>
+<tr><td><code>docker compose logs -f [dienst]</code></td><td>Logs live ansehen (erster Schritt bei Problemen)</td></tr>
+<tr><td><code>docker compose down</code></td><td>Stack stoppen und Container entfernen (Daten bleiben)</td></tr>
+<tr><td><code>docker ps</code></td><td>Laufende Container + Status/Ports</td></tr>
+<tr><td><code>docker exec -it &lt;name&gt; bash</code></td><td>Shell im Container öffnen</td></tr>
+<tr><td><code>docker system df</code> / <code>docker image prune -a</code></td><td>Speicherverbrauch anzeigen / alte Images aufräumen</td></tr>
+<tr><td><code>docker stats</code></td><td>CPU/RAM-Verbrauch je Container live</td></tr>
+</table>
+</div>
+
+<h2>Best Practices</h2>
+<ul>
+<li><b>Versionen pinnen:</b> <code>image: app:1.2</code> statt <code>:latest</code> → Updates werden bewusst und Rollback ist möglich</li>
+<li><b><code>restart: unless-stopped</code></b> überall – Container starten nach Reboot automatisch</li>
+<li><b>PUID/PGID setzen</b> (linuxserver.io-Images): Container schreibt Dateien als dein User, nicht als root</li>
+<li><b>Ports sparsam mappen:</b> nur veröffentlichen, was gebraucht wird; interne Kommunikation über Docker-Netze; hinter Reverse Proxy reicht oft <b>gar kein</b> Port-Mapping</li>
+<li><b>Secrets in <code>.env</code></b>, nicht in die Compose-Datei; Compose-Dateien in Git sichern</li>
+<li><b>Auto-Updates (Watchtower) mit Vorsicht:</b> praktisch für Unkritisches, gefährlich für DB-Apps (Immich, Nextcloud) – dort manuell mit Changelog. Sanfte Alternative: <b>Diun</b> (benachrichtigt nur)</li>
+<li><b>Verwaltung per UI</b> gefällig? <b>Dockge</b> (compose-treu, empfehlenswert) oder Portainer</li>
+</ul>

@@ -1,0 +1,42 @@
+<h2>Platten richtig wählen</h2>
+<div class="grid">
+<div class="card"><div class="ct">SSD (NVMe/SATA)</div><div class="cd">Für OS, Container, Datenbanken, Fotos-Cache.</div><ul><li>Schnell, lautlos, sparsam</li><li>Für Dauerbetrieb: auf TBW-Wert achten</li><li>Proxmox/ZFS schreibt viel → billige QLC-SSDs meiden</li></ul></div>
+<div class="card"><div class="ct">HDD (3,5&quot;)</div><div class="cd">Für Massendaten: Medien, Backups, Archiv.</div><ul><li><b>NAS-Serien</b> nehmen: WD Red Plus, Seagate IronWolf, Toshiba N300</li><li><b>CMR statt SMR</b> – SMR-Platten sind Gift für RAID/ZFS</li><li>Vor Einsatz Langtest: <code>smartctl -t long</code></li></ul></div>
+<div class="card"><div class="ct">Aufteilung (bewährt)</div><div class="cd">Trennung von System und Daten.</div><ul><li>NVMe: OS + Docker + AppData</li><li>HDDs: Medien, Dateien, Fotos-Originale</li><li>Externe/2. Platte: Backups</li></ul></div>
+</div>
+
+<h2>Dateisysteme</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Dateisystem</th><th>Snapshots</th><th>Checksummen (Bitrot-Schutz)</th><th>RAID integriert</th><th>Wofür</th></tr>
+<tr><td><b>ext4</b></td><td>–</td><td>–</td><td>– (mdadm separat)</td><td>Einfach &amp; robust; Standard für Einzelplatten und OS</td></tr>
+<tr><td><b>ZFS</b></td><td>✓</td><td>✓</td><td>✓ (Mirror/RAIDZ)</td><td>Datenintegrität, Pools, Replikation; Proxmox &amp; TrueNAS nativ</td></tr>
+<tr><td><b>Btrfs</b></td><td>✓</td><td>✓</td><td>teilweise (RAID5/6 unreif)</td><td>Snapshots auf Einzelplatten/Mirror; Synology nutzt es</td></tr>
+<tr><td><b>XFS</b></td><td>–</td><td>–</td><td>–</td><td>Große Dateien/Medien, Unraid-Standard</td></tr>
+</table>
+</div>
+
+<h2>RAID-Level Überblick</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Level</th><th>Platten min.</th><th>Nutzbare Kapazität</th><th>Verkraftet Ausfall</th><th>Hinweis</th></tr>
+<tr><td><b>Keins (Einzelplatte)</b></td><td>1</td><td>100 %</td><td>0</td><td>Völlig ok, wenn Backup existiert</td></tr>
+<tr><td><b>RAID 0</b> (Stripe)</td><td>2</td><td>100 %</td><td><span class="b b-rot">0 – eine weg, alles weg</span></td><td>Für Homeserver praktisch nie sinnvoll</td></tr>
+<tr><td><b>RAID 1 / ZFS Mirror</b></td><td>2</td><td>50 %</td><td>1</td><td>Einfach, schnell wiederhergestellt – Standard-Tipp</td></tr>
+<tr><td><b>RAID 5 / RAIDZ1</b></td><td>3</td><td>(n−1)/n</td><td>1</td><td>Bei großen Platten (&gt;8 TB) riskant beim Rebuild</td></tr>
+<tr><td><b>RAID 6 / RAIDZ2</b></td><td>4</td><td>(n−2)/n</td><td>2</td><td>Guter Kompromiss bei 4+ großen Platten</td></tr>
+<tr><td><b>RAID 10</b></td><td>4</td><td>50 %</td><td>1 je Mirror</td><td>Schnell, teuer in Kapazität</td></tr>
+<tr><td><b>Unraid Parity</b></td><td>2</td><td>n−1 (bzw. n−2)</td><td>1–2</td><td>Gemischte Plattengrößen möglich, Platten einzeln lesbar</td></tr>
+</table>
+</div>
+
+<div class="warn"><b>RAID ist kein Backup.</b> RAID hält den Betrieb bei Plattenausfall am Laufen – mehr nicht. Gegen versehentliches Löschen, Ransomware, Softwarefehler, Überspannung, Feuer und Diebstahl hilft <b>nur ein Backup</b> (siehe Tab „Backup“).</div>
+
+<h2>Laufende Pflege</h2>
+<ul>
+<li><b>SMART überwachen:</b> <code>smartd</code> oder Scrutiny (Web-UI); auf <i>Reallocated Sectors</i>, <i>Pending Sectors</i>, Temperatur achten</li>
+<li><b>ZFS/Btrfs Scrub:</b> monatlich automatisch laufen lassen – findet stille Datenfehler</li>
+<li><b>Füllstand:</b> Pools unter 80–85 % halten (Performance + ZFS-Gesundheit)</li>
+<li><b>Plattenausfall-Plan:</b> Ersatzplatte-Modell notieren; bei RAID: defekte Platte identifizieren (Seriennummer!), tauschen, Rebuild abwarten, erst dann entwarnen</li>
+<li><b>Neue Platten testen</b> bevor Daten drauf gehen: SMART-Langtest + einmal vollschreiben (z. B. <code>badblocks</code>)</li>
+</ul>
