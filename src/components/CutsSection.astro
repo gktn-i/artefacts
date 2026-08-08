@@ -1,0 +1,36 @@
+---
+/* Ein Abschnitt des Cuts Atlas: alle Stücke einer Kategorie als Karten.
+   Server-gerendert aus _data.json — ersetzt die frühere React/CDN-Version. */
+import data from "../content/cuts-atlas/_data.json";
+import "../content/cuts-atlas/_style.css";
+
+interface Props {
+  cat: keyof typeof data;
+}
+const { cat } = Astro.props;
+const c: any = (data as any)[cat];
+---
+
+<p class="lede">{c.sub}</p>
+<div class="cuts">
+  {c.cuts.map((cut: any) => (
+    <article class="cut">
+      <header>
+        <h3>{cut.de}</h3>
+        <span class="en">{cut.en}</span>
+        <span class="zart" title={`Zartheit ${cut.zart} von 5`} aria-label={`Zartheit ${cut.zart} von 5`}>
+          {Array.from({ length: 5 }).map((_, i) => <i class={i < cut.zart ? "on" : undefined} />)}
+        </span>
+      </header>
+      <div class="meta">
+        <span class="b">{cut.garung}</span>
+        <span class="b t">{cut.temp}</span>
+      </div>
+      <div class="rows">
+        <div class="row"><span>Herkunft</span><p>{cut.herkunft}</p></div>
+        <div class="row"><span>Erkennen</span><p>{cut.erkennen}</p></div>
+        <div class="row"><span>Notiz</span><p>{cut.notiz}</p></div>
+      </div>
+    </article>
+  ))}
+</div>

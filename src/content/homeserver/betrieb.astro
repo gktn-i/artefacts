@@ -1,0 +1,26 @@
+<h2>Wartungsroutinen</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Rhythmus</th><th>Aufgaben</th><th>Aufwand</th></tr>
+<tr><td><b>Täglich (automatisch)</b></td><td>Backups laufen; Monitoring prüft Dienste; Alerts kommen aufs Handy – du machst: nichts, solange alles grün ist</td><td>0 min</td></tr>
+<tr><td><b>Wöchentlich</b></td><td>Dashboard/Alerts überfliegen; Backup-Reports grün?; Speicherstand (<code>df -h</code>); OS-Updates einspielen</td><td>10–15 min</td></tr>
+<tr><td><b>Monatlich</b></td><td>Container-Updates (mit Snapshot davor); SMART-Werte checken; Restore-Stichprobe (1 Datei zurückholen); <code>docker image prune</code></td><td>30–60 min</td></tr>
+<tr><td><b>Halbjährlich</b></td><td>Restore-Ernstfallprobe (kompletten Dienst wiederherstellen); Zugänge/Dienste aufräumen; offene Ports prüfen; Staub entfernen; Doku aktualisieren</td><td>1–2 h</td></tr>
+</table>
+</div>
+
+<h2>Dokumentation führen</h2>
+<div class="grid">
+<div class="card"><div class="ct">Was dokumentieren</div><ul><li>IP-Plan, Hostnames, Portliste</li><li>Welcher Dienst, wo liegen die Daten, wie wird gesichert</li><li>Besonderheiten/Workarounds („Warum ist X so eingestellt?“)</li><li>Restore-Anleitung: „Server tot – was tun?“ Schritt für Schritt</li></ul></div>
+<div class="card"><div class="ct">Wo dokumentieren</div><ul><li>Zugangsdaten: <b>nur</b> im Passwortmanager</li><li>Compose/Configs: Git-Repo (ohne Secrets)</li><li>Notizen: Markdown-Ordner, Wiki oder Notiz-App – Hauptsache <b>außerhalb</b> des Servers verfügbar</li></ul></div>
+<div class="card"><div class="ct">Benachrichtigungen</div><ul><li>Ein Kanal für alles: <b>ntfy</b> (selbst gehostet) oder Gotify/Telegram/E-Mail</li><li>Anschließen: Uptime Kuma, Backup-Jobs, smartd, fail2ban</li><li>Regel: Fehler müssen dich <b>erreichen</b>, nicht in Logs versauern</li></ul></div>
+</div>
+
+<h2>Grundsätze für ruhigen Betrieb</h2>
+<ul>
+<li><b>Boring is good:</b> ein stabiler Dienst ist mehr wert als drei halbfertige</li>
+<li><b>Änderungsfenster:</b> nichts Wichtiges freitags abends oder vor dem Urlaub updaten</li>
+<li><b>Vor jeder Änderung:</b> Snapshot/Backup → ändern → testen → dokumentieren</li>
+<li><b>Familie bedenken:</b> wenn andere die Dienste nutzen, Ausfälle kommunizieren und Kritisches (DNS!) redundant auslegen oder Fallback konfigurieren</li>
+<li><b>Kapazität im Blick:</b> Platten &lt; 80 %, RAM-Auslastung beobachten, bevor es eng wird planen</li>
+</ul>

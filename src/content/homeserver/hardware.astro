@@ -1,0 +1,39 @@
+<h2>Hardware-Optionen im Vergleich</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Option</th><th>Preis (ca.)</th><th>Idle-Verbrauch</th><th>Leistung</th><th>Erweiterbar</th><th>Geeignet für</th></tr>
+<tr><td><b>Raspberry Pi 5</b></td><td>80–130 €</td><td>3–6 W</td><td>niedrig</td><td>kaum (USB/NVMe-HAT)</td><td>Pi-hole, Home Assistant, kleine Dienste</td></tr>
+<tr><td><b>Mini-PC (Intel N100/N150)</b></td><td>150–250 €</td><td>6–12 W</td><td>mittel</td><td>begrenzt (1× NVMe, 1× SATA)</td><td>Allround-Einstieg, Docker, Jellyfin</td></tr>
+<tr><td><b>Gebrauchter Office-Mini (Dell/Lenovo/HP „1L“)</b></td><td>80–200 €</td><td>8–15 W</td><td>mittel–hoch</td><td>begrenzt</td><td>Preis-Leistungs-Tipp, Proxmox-Einstieg</td></tr>
+<tr><td><b>Fertig-NAS (Synology/QNAP/Ugreen)</b></td><td>300–800 € + Platten</td><td>15–40 W</td><td>mittel</td><td>Platten ja, sonst wenig</td><td>„Soll einfach laufen“, viel Storage</td></tr>
+<tr><td><b>Eigenbau (ITX/ATX)</b></td><td>400–1000 €</td><td>20–60 W</td><td>frei wählbar</td><td>voll (Platten, PCIe, ECC)</td><td>Viel Storage + Leistung, ZFS, Zukunftssicherheit</td></tr>
+</table>
+</div>
+<div class="tip"><b>Einsteiger-Empfehlung:</b> gebrauchter 1-Liter-Mini-PC oder N100-Box. Günstig, sparsam, leise – und stark genug für 10+ Container. Aufrüsten kann man später immer noch.</div>
+
+<h2>Worauf beim Kauf achten</h2>
+<div class="grid">
+<div class="card"><div class="ct">CPU</div><div class="cd">Effizienz schlägt Kerne.</div><ul><li>Intel mit <b>QuickSync</b> (iGPU) = Hardware-Transcoding für Jellyfin/Plex/Immich</li><li>N100 reicht für die meisten Setups</li><li>Viele VMs/Nutzer → i5/Ryzen ab 6 Kernen</li></ul></div>
+<div class="card"><div class="ct">RAM</div><div class="cd">Der häufigste Engpass.</div><ul><li>Nur Docker: <b>8 GB</b> ok, <b>16 GB</b> komfortabel</li><li>Proxmox/VMs: <b>16–32 GB</b></li><li>ZFS mag RAM (Faustregel: ab 8 GB + 1 GB je TB ist komfortabel)</li><li><b>ECC</b>: nice-to-have für ZFS/Datengrab, kein Muss im Hobby</li></ul></div>
+<div class="card"><div class="ct">Storage-Anschlüsse</div><div class="cd">Bestimmt die Ausbaufähigkeit.</div><ul><li>NVMe für OS + Container (schnell)</li><li>SATA-Ports / HBA für Daten-HDDs</li><li>USB-Platten nur für Backups, <b>nicht</b> für Pools/RAID</li></ul></div>
+<div class="card"><div class="ct">Netzwerk</div><div class="cd">Kabel ist Pflicht.</div><ul><li><b>1 GbE reicht</b> für fast alles (≈ 110 MB/s)</li><li>2,5 GbE = sinnvolles Future-Proofing</li><li><b>Kein WLAN</b> für den Server – immer LAN</li></ul></div>
+<div class="card"><div class="ct">Idle-Verbrauch</div><div class="cd">Die wichtigste Zahl bei 24/7.</div><ul><li>1 W Dauerlast ≈ 8,76 kWh/Jahr ≈ 3 €/Jahr (bei 0,35 €/kWh)</li><li>Alter Gaming-PC (60 W idle) ≈ 180 €/Jahr</li><li>HDDs: je ca. 3–8 W, Spindown abwägen</li></ul></div>
+<div class="card"><div class="ct">USV (unterbrechungsfreie Stromversorgung)</div><div class="cd">Schutz vor Stromausfall.</div><ul><li>Sauberes Herunterfahren schützt Dateisystem &amp; Datenbanken</li><li>Besonders wichtig bei ZFS-Pools und Nextcloud/Immich (DB!)</li><li>Anbindung per USB + <b>NUT</b> oder apcupsd → Auto-Shutdown</li></ul></div>
+</div>
+
+<h3>Standort &amp; Aufstellung</h3>
+<ul>
+<li>Kühl, trocken, staubarm, mit Luftzirkulation – nicht im geschlossenen Schrank ohne Lüftung</li>
+<li>In Router-/Switch-Nähe (LAN-Kabel), Steckdosenleiste mit Überspannungsschutz</li>
+<li>Lautstärke bedenken: HDDs klackern – Schlafzimmer ist ein schlechter Ort</li>
+<li>BIOS: „Restore on AC Power Loss“ auf <b>Power On</b> → Server startet nach Stromausfall selbst</li>
+</ul>
+
+<h2>Stromkosten-Rechner</h2>
+<div class="calc">
+<label for="c-watt">Durchschnittlicher Verbrauch (Watt)</label>
+<input id="c-watt" type="number" value="15" min="0" step="1">
+<label for="c-preis">Strompreis (€/kWh)</label>
+<input id="c-preis" type="number" value="0.35" min="0" step="0.01">
+<div class="res" id="c-res"></div>
+</div>

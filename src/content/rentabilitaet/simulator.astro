@@ -1,0 +1,42 @@
+---
+import "./_style.css";
+---
+<div class="wrap">
+  <p class="sub">Drei Szenarien für dein 3D-Druck-Nebeneinkommen, gerechnet nach der Logik deines Druckkosten-Rechners. Der ehrliche Maßstab ist nicht die Stückmarge, sondern der effektive Stundenlohn, also Gewinn geteilt durch alle Stunden, die du wirklich investierst (CAD, Kommunikation, Nacharbeit, Admin). Alles ist anpassbar. Schätzmodell, keine Garantie.</p>
+
+  <div class="panel">
+    <div class="ph"><span class="ic">◆</span>&nbsp; Globale Annahmen</div>
+    <div class="pb">
+      <div class="grid">
+        <div class="field"><label>Verfügbar / Woche</label><input type="number" step="any" id="stundenWoche" value="10"><span class="suf">h</span></div>
+        <div class="field"><label>Ø-Material / Teil</label><input type="number" step="any" id="materialTeil" value="2"><span class="suf">€</span></div>
+        <div class="field"><label>Druckzeit / Teil</label><input type="number" step="any" id="druckzeitTeil" value="2.5"><span class="suf">h</span></div>
+        <div class="field"><label>CAD / neues Design</label><input type="number" step="any" id="cadDesign" value="3"><span class="suf">h</span></div>
+        <div class="field"><label>Komm. / Auftrag</label><input type="number" step="any" id="commsAuftrag" value="0.3"><span class="suf">h</span></div>
+        <div class="field"><label>Nacharbeit / Teil</label><input type="number" step="any" id="postTeil" value="0.25"><span class="suf">h</span></div>
+        <div class="field"><label>Admin / Monat</label><input type="number" step="any" id="adminMonat" value="4"><span class="suf">h</span></div>
+        <div class="field"><label>Verpackung / Teil</label><input type="number" step="any" id="verpackTeil" value="0.5"><span class="suf">€</span></div>
+        <div class="field"><label>Plattformgebühr</label><input type="number" step="any" id="platformPct" value="10"><span class="suf">%</span></div>
+        <div class="field"><label>Ausschuss</label><input type="number" step="any" id="ausschuss" value="8"><span class="suf">%</span></div>
+        <div class="field"><label>Strompreis</label><input type="number" step="any" id="stromPreis" value="0.35"><span class="suf">€/kWh</span></div>
+        <div class="field"><label>Drucker-Watt</label><input type="number" step="any" id="watt" value="120"><span class="suf">W</span></div>
+        <div class="field"><label>Druckerpreis</label><input type="number" step="any" id="druckerPreis" value="700"><span class="suf">€</span></div>
+        <div class="field"><label>Lebensdauer</label><input type="number" step="any" id="lebensdauer" value="4000"><span class="suf">h</span></div>
+        <div class="field"><label>Druckerkapazität</label><input type="number" step="any" id="kapazitaet" value="250"><span class="suf">h/M</span></div>
+      </div>
+      <div class="toggle" id="kleinToggle"><div class="tg on" id="kleinTg"></div><span style="font-size:12px;color:var(--dim)">Kleinunternehmer §19 (Plattformgebühr ×1,19, da Vorsteuer nicht abziehbar)</span></div>
+    </div>
+  </div>
+
+  <div class="scn" id="scn"></div>
+
+  <div class="panel" style="margin-top:16px">
+    <div class="ph"><span class="ic">◆</span>&nbsp; Der Pfad und die ehrliche Lesart</div>
+    <div class="pb foot">
+      <p class="lead">Was die Zahlen sagen</p>
+      <p style="margin-top:0">Der Engpass ist deine <b>Zeit</b>, nicht die Stückmarge. Solange du viel Neues konstruierst, frisst die CAD-Zeit den Stundenlohn, deshalb ist das Anlauf-Szenario pro Stunde am schwächsten. Der Hebel nach oben heißt <b>Wiederholdrucke</b>: je mehr du aus bereits konstruierten Designs verkaufst, desto weniger neue CAD-Zeit pro Euro, desto höher dein echter Stundenlohn.</p>
+      <p><b>Nebeneinkommen</b> ist realistisch erreichbar und der vernünftige Start. <b>Haupteinkommen</b> verlangt viele Aufträge pro Monat aus überwiegend fertigen Designs, und genau dann läuft dein einzelner Drucker voll. <b>Erst dann</b>, wenn die Druckerauslastung ins Rote geht und du fast nur noch Wiederholdrucke fährst, ergibt eine <b>Farm</b> Sinn. Vorher würde ein zweiter Drucker nur stillstehen, weil nicht die Druckkapazität fehlt, sondern Designs und Nachfrage.</p>
+      <p>Stell oben deine echten Werte ein: wie viele Stunden du wirklich investieren willst, wie schnell du konstruierst, welchen Preis du am Markt hältst. Wenn der grüne Stundenlohn für dich passt, lohnt es sich. Wenn nicht, hast du es gesehen, bevor du Geld und Monate investierst.</p>
+    </div>
+  </div>
+</div>

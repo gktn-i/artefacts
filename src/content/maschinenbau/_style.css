@@ -1,0 +1,146 @@
+/* Aus mechanical-engineering-cheatsheet.html uebernommen und unter .mx-maschinenbau gescoped. */
+
+.mx-maschinenbau *{box-sizing:border-box;margin:0;padding:0}
+.mx-maschinenbau{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a1a;background:#fff;padding:1.5rem}
+@media(prefers-color-scheme:dark){.mx-maschinenbau{background:#1a1a1a;color:#e0e0e0}}
+.mx-maschinenbau h1{font-size:20px;font-weight:500;margin-bottom:.3rem}
+.mx-maschinenbau .sub{font-size:12.5px;color:#888;margin-bottom:1rem;max-width:820px;line-height:1.6}
+.mx-maschinenbau .controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
+.mx-maschinenbau .controls button{font-size:12px;padding:4px 10px;cursor:pointer;background:transparent;border:1px solid #ccc;border-radius:8px;color:#666;transition:all .15s}
+.mx-maschinenbau .controls button.active{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
+.mx-maschinenbau .controls button:hover{background:#f5f5f5}
+.mx-maschinenbau .search{padding:6px 10px;font-size:13px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;width:280px;margin-bottom:.5rem}
+.mx-maschinenbau .tbl-wrap{overflow-x:auto}
+.mx-maschinenbau table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:880px}
+.mx-maschinenbau th{text-align:left;padding:8px 6px;font-weight:500;font-size:11.5px;color:#888;border-bottom:1px solid #ccc;cursor:pointer;user-select:none;white-space:nowrap}
+.mx-maschinenbau th:hover{color:#1a1a1a}
+.mx-maschinenbau th .ar{font-size:10px;margin-left:2px}
+.mx-maschinenbau td{padding:8px 6px;border-bottom:1px solid #eee;vertical-align:top}
+.mx-maschinenbau tr:hover td{background:#f9f9f9}
+.mx-maschinenbau .nm{font-weight:500;white-space:nowrap}
+.mx-maschinenbau .cb{display:inline-block;font-size:11px;padding:2px 7px;border-radius:8px;font-weight:500;white-space:nowrap}
+.mx-maschinenbau .norm{font-size:11.5px;color:#999;white-space:nowrap}
+.mx-maschinenbau .sizes{font-size:11.5px;color:#777}
+.mx-maschinenbau .desc-cell{color:#555;max-width:360px}
+@media(prefers-color-scheme:dark){.mx-maschinenbau .desc-cell{color:#aaa}}
+.mx-maschinenbau .cat-festigkeit .cb{background:#E6F1FB;color:#0C447C}
+.mx-maschinenbau .cat-statik .cb{background:#EEEDFE;color:#3C3489}
+.mx-maschinenbau .cat-bewegung .cb{background:#E1F5EE;color:#085041}
+.mx-maschinenbau .cat-werkstoff .cb{background:#FAECE7;color:#712B13}
+.mx-maschinenbau .cat-thermo .cb{background:#FAEEDA;color:#633806}
+.mx-maschinenbau .cat-fluid .cb{background:#E0F2F4;color:#0A4F58}
+.mx-maschinenbau .cat-toleranz .cb{background:#FBE9F4;color:#7A1659}
+.mx-maschinenbau .cat-antrieb .cb{background:#E9F0FB;color:#1A3E7C}
+.mx-maschinenbau .cat-verbindung .cb{background:#F1EFE8;color:#444441}
+.mx-maschinenbau .cat-fertigung .cb{background:#ECEAFB;color:#2E2080}
+.mx-maschinenbau .cat-elektro .cb{background:#EAF3E8;color:#2E5121}
+.mx-maschinenbau .cat-sicherheit .cb{background:#FCEBEB;color:#791F1F}
+.mx-maschinenbau .dr td{padding:14px 12px;background:#f5f5f3;font-size:12.5px;line-height:1.7}
+.mx-maschinenbau .block{margin-top:10px}
+.mx-maschinenbau .block:first-child{margin-top:0}
+.mx-maschinenbau .blk-title{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.mx-maschinenbau .blk-body{font-size:12.5px;color:#1a1a1a;line-height:1.65}
+.mx-maschinenbau .uc-list{font-size:12.5px;color:#1a1a1a;line-height:1.85}
+.mx-maschinenbau .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.mx-maschinenbau .tag{font-size:11px;padding:2px 7px;border-radius:8px;background:#e8e8e5;color:#666}
+.mx-maschinenbau .meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;font-size:11.5px;color:#666}
+.mx-maschinenbau .meta b{color:#999;font-weight:500}
+.mx-maschinenbau .count{font-size:12px;color:#888;margin-bottom:8px}
+.mx-maschinenbau .footnote{font-size:11px;color:#999;margin-top:12px;line-height:1.6}
+.mx-maschinenbau .formula{font-family:'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace;font-size:12.5px;background:#eef1f5;color:#0C447C;padding:3px 7px;border-radius:6px;display:inline-block;margin:2px 0}
+@media(prefers-color-scheme:dark){
+.mx-maschinenbau .sub{color:#888}
+.mx-maschinenbau .search{background:#2a2a2a;border-color:#444;color:#e0e0e0}
+.mx-maschinenbau .controls button{border-color:#555;color:#aaa}
+.mx-maschinenbau .controls button:hover{background:#333}
+.mx-maschinenbau .controls button.active{background:#042C53;color:#B5D4F4;border-color:#185FA5}
+.mx-maschinenbau th{color:#999;border-bottom-color:#444}
+.mx-maschinenbau th:hover{color:#e0e0e0}
+.mx-maschinenbau td{border-bottom-color:#333}
+.mx-maschinenbau tr:hover td{background:#252525}
+.mx-maschinenbau .norm{color:#777}
+.mx-maschinenbau .sizes{color:#888}
+.mx-maschinenbau .dr td{background:#252525}
+.mx-maschinenbau .tag{background:#333;color:#aaa}
+.mx-maschinenbau .blk-body, .mx-maschinenbau .uc-list{color:#e0e0e0}
+.mx-maschinenbau .blk-title{color:#888}
+.mx-maschinenbau .meta{color:#999}
+.mx-maschinenbau .meta b{color:#777}
+.mx-maschinenbau .formula{background:#0d2438;color:#9BC8F0}
+.mx-maschinenbau .cat-festigkeit .cb{background:#042C53;color:#B5D4F4}
+.mx-maschinenbau .cat-statik .cb{background:#26215C;color:#CECBF6}
+.mx-maschinenbau .cat-bewegung .cb{background:#04342C;color:#9FE1CB}
+.mx-maschinenbau .cat-werkstoff .cb{background:#4A1B0C;color:#F5C4B3}
+.mx-maschinenbau .cat-thermo .cb{background:#412402;color:#FAC775}
+.mx-maschinenbau .cat-fluid .cb{background:#073B42;color:#9BDDE5}
+.mx-maschinenbau .cat-toleranz .cb{background:#4A0E37;color:#F4B5DE}
+.mx-maschinenbau .cat-antrieb .cb{background:#13264A;color:#AFC8F0}
+.mx-maschinenbau .cat-verbindung .cb{background:#2C2C2A;color:#D3D1C7}
+.mx-maschinenbau .cat-fertigung .cb{background:#241B5C;color:#C7BEF5}
+.mx-maschinenbau .cat-elektro .cb{background:#1E3315;color:#BCE0AB}
+.mx-maschinenbau .cat-sicherheit .cb{background:#501313;color:#F7C1C1}
+}
+.mx-maschinenbau .views{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.mx-maschinenbau .views button{font-size:13px;font-weight:500;padding:7px 14px;cursor:pointer;background:transparent;border:1px solid #ccc;border-radius:8px;color:#666;transition:all .15s}
+.mx-maschinenbau .views button.active{background:#0C447C;color:#fff;border-color:#0C447C}
+.mx-maschinenbau .views button:hover:not(.active){background:#f5f5f5}
+.mx-maschinenbau .sec-title{font-size:15px;font-weight:500;margin:.2rem 0 .5rem}
+.mx-maschinenbau .ref-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}
+.mx-maschinenbau .ref-tbl th{text-align:left;padding:9px 10px;font-weight:500;font-size:11.5px;color:#888;border-bottom:1px solid #ccc;white-space:nowrap}
+.mx-maschinenbau .ref-tbl td{padding:9px 10px;border-bottom:1px solid #eee;white-space:nowrap}
+.mx-maschinenbau .ref-tbl tr:hover td{background:#f9f9f9}
+.mx-maschinenbau .ref-tbl .g{font-weight:600}
+.mx-maschinenbau .note{margin-top:16px;padding:12px 14px;border-radius:10px;background:#FAEEDA;border:1px solid #f0d9a8;font-size:12.5px;line-height:1.75;color:#5a4318}
+.mx-maschinenbau .note b{color:#3a2c0a}
+.mx-maschinenbau .note .nt{font-weight:600;display:block;margin-bottom:5px;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.mx-maschinenbau .gl-group{margin-top:20px}
+.mx-maschinenbau .gl-group:first-child{margin-top:6px}
+.mx-maschinenbau .gl-gtitle{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #e5e5e5}
+.mx-maschinenbau .gl-item{margin-bottom:13px}
+.mx-maschinenbau .gl-term{font-weight:600;font-size:13px;margin-bottom:2px}
+.mx-maschinenbau .gl-def{font-size:12.5px;color:#555;line-height:1.65;max-width:780px}
+/* Formel-View */
+.mx-maschinenbau .fcard{border:1px solid #e5e5e5;border-radius:10px;padding:14px 16px;margin-bottom:12px;max-width:820px}
+.mx-maschinenbau .fcard .ftitle{font-size:13.5px;font-weight:600;margin-bottom:2px}
+.mx-maschinenbau .fcard .fsub{font-size:11.5px;color:#999;margin-bottom:8px}
+.mx-maschinenbau .fcard .feq{font-family:'SF Mono',SFMono-Regular,Consolas,'Liberation Mono',Menlo,monospace;font-size:14px;background:#eef1f5;color:#0C447C;padding:8px 12px;border-radius:8px;margin:6px 0;display:block;overflow-x:auto;white-space:nowrap}
+.mx-maschinenbau .fcard .fvars{font-size:12px;color:#555;line-height:1.7;margin-top:6px}
+.mx-maschinenbau .fcard .fnote{font-size:12px;color:#777;line-height:1.6;margin-top:8px;font-style:italic}
+.mx-maschinenbau .fgroup-title{font-size:13px;font-weight:600;color:#0C447C;margin:22px 0 10px;padding-bottom:5px;border-bottom:1px solid #d8e4f0}
+.mx-maschinenbau .fgroup-title:first-child{margin-top:6px}
+/* Do/Dont */
+.mx-maschinenbau .dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:920px}
+.mx-maschinenbau .dd-col{border-radius:10px;padding:14px 16px}
+.mx-maschinenbau .dd-do{background:#E1F5EE;border:1px solid #b8e3d4}
+.mx-maschinenbau .dd-dont{background:#FCEBEB;border:1px solid #f0c8c8}
+.mx-maschinenbau .dd-col h3{font-size:13px;margin-bottom:10px;font-weight:600}
+.mx-maschinenbau .dd-do h3{color:#085041}
+.mx-maschinenbau .dd-dont h3{color:#791F1F}
+.mx-maschinenbau .dd-col ul{list-style:none}
+.mx-maschinenbau .dd-col li{font-size:12.5px;line-height:1.55;margin-bottom:9px;padding-left:18px;position:relative;color:#333}
+.mx-maschinenbau .dd-do li:before{content:"\2713";position:absolute;left:0;color:#13886b;font-weight:700}
+.mx-maschinenbau .dd-dont li:before{content:"\2717";position:absolute;left:0;color:#c0392b;font-weight:700}
+.mx-maschinenbau .dd-section{font-size:14px;font-weight:500;margin:22px 0 10px}
+.mx-maschinenbau .dd-section:first-child{margin-top:4px}
+@media(prefers-color-scheme:dark){
+.mx-maschinenbau .views button{border-color:#555;color:#aaa}
+.mx-maschinenbau .views button.active{background:#185FA5;color:#fff;border-color:#185FA5}
+.mx-maschinenbau .views button:hover:not(.active){background:#333}
+.mx-maschinenbau .ref-tbl th{color:#999;border-bottom-color:#444}
+.mx-maschinenbau .ref-tbl td{border-bottom-color:#333}
+.mx-maschinenbau .ref-tbl tr:hover td{background:#252525}
+.mx-maschinenbau .note{background:#2a2418;border-color:#4a3d20;color:#e8d9b8}
+.mx-maschinenbau .note b{color:#fae0a8}
+.mx-maschinenbau .gl-gtitle{color:#9a9a9a;border-bottom-color:#3a3a3a}
+.mx-maschinenbau .gl-def{color:#aaa}
+.mx-maschinenbau .fcard{border-color:#3a3a3a}
+.mx-maschinenbau .fcard .feq{background:#0d2438;color:#9BC8F0}
+.mx-maschinenbau .fcard .fvars{color:#bbb}
+.mx-maschinenbau .fcard .fnote{color:#999}
+.mx-maschinenbau .fgroup-title{color:#9BC8F0;border-bottom-color:#2a3a4a}
+.mx-maschinenbau .dd-do{background:#0f2e25;border-color:#1c4a3c}
+.mx-maschinenbau .dd-dont{background:#3a1616;border-color:#5a2424}
+.mx-maschinenbau .dd-do h3{color:#7fd9bd}
+.mx-maschinenbau .dd-dont h3{color:#f0a8a8}
+.mx-maschinenbau .dd-col li{color:#d5d5d5}
+}

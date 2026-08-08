@@ -1,0 +1,27 @@
+<h2>Fernzugriff: die Rangfolge</h2>
+<p>Grundsatz: <b>So wenig wie möglich öffentlich erreichbar machen.</b> Für privaten Zugriff reicht fast immer ein VPN.</p>
+<div class="tbl-wrap">
+<table>
+<tr><th>#</th><th>Methode</th><th>Sicherheit</th><th>Aufwand</th><th>Offener Port?</th><th>Bewertung</th></tr>
+<tr><td>1</td><td><b>Tailscale / ZeroTier / NetBird</b> (Overlay-VPN)</td><td><span class="diff d1">hoch</span></td><td>minimal</td><td>nein</td><td>Erste Wahl: App installieren, einloggen, fertig; funktioniert auch hinter CGNAT</td></tr>
+<tr><td>2</td><td><b>WireGuard selbst gehostet</b> (Server/Router, z. B. FritzBox)</td><td><span class="diff d1">hoch</span></td><td>mittel</td><td>1× UDP</td><td>Ohne Drittanbieter; braucht öffentliche IP + DynDNS</td></tr>
+<tr><td>3</td><td><b>Cloudflare Tunnel</b></td><td><span class="diff d1">hoch</span></td><td>gering</td><td>nein</td><td>Für einzelne Web-Apps, die wirklich öffentlich sein sollen; Traffic läuft über Cloudflare, Video-Streaming per ToS unerwünscht</td></tr>
+<tr><td>4</td><td><b>Port-Forwarding + Reverse Proxy</b></td><td><span class="diff d2">nur gehärtet</span></td><td>hoch</td><td>80/443</td><td>Nur wenn öffentlich nötig (z. B. Nextcloud für Familie): 2FA, fail2ban/CrowdSec, Updates strikt, ggf. Geo-Block</td></tr>
+<tr><td>—</td><td><b>Direkt exponierte Dienste</b> (SMB, RDP, SSH-Passwort, Datenbanken, Docker-API)</td><td><span class="diff d3">nie</span></td><td>—</td><td>—</td><td>Niemals. Werden innerhalb von Minuten gescannt und angegriffen</td></tr>
+</table>
+</div>
+
+<div class="tip"><b>Standard-Empfehlung:</b> Tailscale auf Server + Handy + Laptop. Damit erreichst du alles von unterwegs, als wärst du zuhause – ohne einen einzigen offenen Port. „Subnet Router“-Funktion aktivieren, dann ist das ganze Heimnetz erreichbar.</div>
+
+<h2>Wenn doch etwas öffentlich sein muss</h2>
+<ul class="check">
+<li>Nur über Reverse Proxy mit HTTPS (Let's Encrypt), nie App-Port direkt forwarden</li>
+<li>2FA in der App aktivieren – oder Login davor schalten (Authelia/Authentik)</li>
+<li>fail2ban oder CrowdSec auf die Proxy-Logs ansetzen</li>
+<li>App aktuell halten – öffentliche Dienste haben Update-Priorität</li>
+<li>Eigenes Docker-Netz / VLAN: öffentlicher Dienst kommt nicht an interne Dienste</li>
+<li>Monitoring: Login-Fehlversuche &amp; ungewöhnlichen Traffic im Blick behalten</li>
+<li>Regelmäßig fragen: „Muss das noch öffentlich sein?“ – sonst zurückbauen</li>
+</ul>
+
+<div class="warn"><b>Vaultwarden, Paperless, Home Assistant &amp; Co. enthalten dein digitales Leben.</b> Solche Dienste möglichst nur per VPN erreichbar machen – nicht öffentlich, auch wenn es bequemer wäre.</div>

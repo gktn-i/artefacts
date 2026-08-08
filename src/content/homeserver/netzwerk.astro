@@ -1,0 +1,40 @@
+<h2>Grund-Setup im Heimnetz</h2>
+<ul>
+<li><b>Feste Adresse:</b> DHCP-Reservierung im Router (z. B. FritzBox: „immer die gleiche IP zuweisen“) – besser als statische IP am Gerät</li>
+<li><b>Lokale Namen:</b> statt IPs Namen nutzen – Router-DNS (<code>server.fritz.box</code>), eigenes DNS (Pi-hole „Local DNS Records“) oder Tailscale MagicDNS</li>
+<li><b>IP-Plan notieren:</b> welche Geräte welche Adresse haben, Bereich für Reservierungen festlegen</li>
+<li><b>LAN statt WLAN</b> für Server – stabiler, schneller, geringere Latenz</li>
+</ul>
+
+<h2>Ports verstehen</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Port</th><th>Dienst</th><th>Bemerkung</th></tr>
+<tr><td>22</td><td>SSH</td><td>Fernwartung; nur mit Key, nie ins Internet forwarden</td></tr>
+<tr><td>53</td><td>DNS</td><td>Pi-hole/AdGuard; Konflikt mit systemd-resolved beachten</td></tr>
+<tr><td>80 / 443</td><td>HTTP / HTTPS</td><td>Gehören dem Reverse Proxy – Apps dahinter</td></tr>
+<tr><td>445</td><td>SMB (Dateifreigabe)</td><td>Nur im LAN/VPN – niemals ins Internet</td></tr>
+<tr><td>51820</td><td>WireGuard (UDP)</td><td>Der einzige Port, den man guten Gewissens öffnen kann</td></tr>
+<tr><td>8080, 8443, 3000 …</td><td>App-Webinterfaces</td><td>Typische Docker-Ports; per Reverse Proxy bündeln</td></tr>
+</table>
+</div>
+<div class="note"><b>Ein Port = ein Dienst.</b> Belegte Ports checken mit <code>ss -tulpn</code>. Bei Docker Konflikte über die linke Seite des Mappings lösen: <code>8081:80</code> statt <code>8080:80</code>.</div>
+
+<h2>Reverse Proxy</h2>
+<p>Ein Dienst, der vor allen Web-Apps steht: <code>jellyfin.home.example.de</code> → intern Port 8096. Vorteile: ein Einstiegspunkt, überall HTTPS, keine Portnummern merken.</p>
+<div class="tbl-wrap">
+<table>
+<tr><th>Proxy</th><th>Bedienung</th><th>Stärken</th><th>Für wen</th></tr>
+<tr><td><b>Nginx Proxy Manager</b></td><td>Web-UI</td><td>Klickbar, Let's-Encrypt integriert</td><td>Einsteiger-Standard</td></tr>
+<tr><td><b>Caddy</b></td><td>Config-Datei (sehr kurz)</td><td>Automatisches HTTPS, schlank</td><td>Wer Textconfig mag</td></tr>
+<tr><td><b>Traefik</b></td><td>Docker-Labels</td><td>Erkennt Container automatisch</td><td>Fortgeschrittene, viele Container</td></tr>
+</table>
+</div>
+<div class="tip"><b>HTTPS intern ohne offene Ports:</b> eigene Domain + Let's-Encrypt <b>DNS-Challenge</b> (Wildcard-Zertifikat). So gibt es gültige Zertifikate für interne Dienste, ohne dass etwas aus dem Internet erreichbar ist.</div>
+
+<h2>Weiterführend</h2>
+<div class="grid">
+<div class="card"><div class="ct">VLAN / Netz-Trennung</div><div class="cd">Getrennte Netze für IoT, Gäste, Server.</div><ul><li>Braucht VLAN-fähigen Router/Switch (z. B. OpenWrt, UniFi, OPNsense)</li><li>IoT-Geräte raus aus dem Hauptnetz = großer Sicherheitsgewinn</li><li>Nice-to-have, kein Pflichtprogramm am Anfang</li></ul></div>
+<div class="card"><div class="ct">DynDNS</div><div class="cd">Heim-IP wechselt – DynDNS gibt ihr einen festen Namen.</div><ul><li>Anbieter: deSEC, DuckDNS, Cloudflare-API, Router-integriert</li><li>Nur nötig für selbst gehostetes VPN/Portfreigaben</li></ul></div>
+<div class="card"><div class="ct">IPv6 / CGNAT / DS-Lite</div><div class="cd">Stolperfalle bei Kabel-/Glasfaser-Anschlüssen.</div><ul><li>Ohne öffentliche IPv4 (DS-Lite/CGNAT) funktioniert klassisches Port-Forwarding nicht</li><li>Lösung: Tailscale/ZeroTier (lochen durch NAT) oder Cloudflare Tunnel</li></ul></div>
+</div>

@@ -1,0 +1,55 @@
+<h2>Beliebte Dienste nach Kategorie</h2>
+<p>Bewährte, aktiv gepflegte Projekte. <span class="b b-gruen">Empfehlung</span> = guter Standard-Startpunkt der Kategorie.</p>
+
+<div class="grid wide">
+<div class="card"><div class="ct">📊 Monitoring &amp; Dashboard</div><ul>
+<li><b>Uptime Kuma</b> <span class="b b-gruen">Empfehlung</span> – prüft, ob Dienste laufen; alarmiert per Push</li>
+<li><b>Homepage / Homarr</b> – Startseite mit allen Diensten</li>
+<li><b>Beszel / Netdata</b> – CPU, RAM, Disk, Temperatur</li>
+<li><b>Scrutiny</b> – SMART-Werte aller Platten im Blick</li>
+<li><b>Dozzle</b> – Container-Logs im Browser</li></ul></div>
+<div class="card"><div class="ct">🛡️ DNS &amp; Adblock</div><ul>
+<li><b>AdGuard Home</b> <span class="b b-gruen">Empfehlung</span> – Adblock + DNS, moderne UI</li>
+<li><b>Pi-hole</b> – der Klassiker, riesige Community</li>
+<li>Tipp: als DNS im Router eintragen → wirkt für alle Geräte; zweite Instanz = Ausfallsicherheit</li></ul></div>
+<div class="card"><div class="ct">🎬 Medien</div><ul>
+<li><b>Jellyfin</b> <span class="b b-gruen">Empfehlung</span> – Filme/Serien/Musik, komplett frei</li>
+<li><b>Plex</b> – polierter, aber Konto/Abo-Modell</li>
+<li><b>Navidrome</b> – Musik; <b>Audiobookshelf</b> – Hörbücher/Podcasts</li>
+<li>iGPU durchreichen für Transcoding (QuickSync)</li></ul></div>
+<div class="card"><div class="ct">📷 Fotos</div><ul>
+<li><b>Immich</b> <span class="b b-gruen">Empfehlung</span> – Google-Photos-Ersatz: Auto-Upload, Gesichter, Karte</li>
+<li>Braucht ordentlich RAM (ML-Features) + <b>diszipliniertes Backup</b> (DB + Originale)</li>
+<li><b>PhotoPrism</b> – Alternative ohne Multi-User-Fokus</li></ul></div>
+<div class="card"><div class="ct">☁️ Dateien &amp; Sync</div><ul>
+<li><b>Nextcloud</b> – Cloud-Komplettpaket (Dateien, Kalender, Kontakte)</li>
+<li><b>Syncthing</b> <span class="b b-gruen">Empfehlung</span> – schlanker Geräte-Sync ohne Server-Konto</li>
+<li><b>Samba/SMB</b> – klassische Netzwerkfreigabe für PCs</li>
+<li><b>FileBrowser</b> – simples Web-Dateimanagement</li></ul></div>
+<div class="card"><div class="ct">📄 Dokumente</div><ul>
+<li><b>Paperless-ngx</b> <span class="b b-gruen">Empfehlung</span> – Dokumente scannen, OCR, verschlagworten, wiederfinden</li>
+<li>Papierkram-Gamechanger; Export/Backup einplanen</li>
+<li><b>Stirling-PDF</b> – PDF-Werkzeugkasten im Browser</li></ul></div>
+<div class="card"><div class="ct">🔑 Passwörter</div><ul>
+<li><b>Vaultwarden</b> – Bitwarden-Server, alle Bitwarden-Apps kompatibel</li>
+<li><span class="b b-rot">Kritisch</span>: nur per VPN erreichbar machen, Backups mehrfach + getestet</li>
+<li>Notfallzugriff bedenken: Export/Notfallblatt im Safe</li></ul></div>
+<div class="card"><div class="ct">🏠 Smart Home</div><ul>
+<li><b>Home Assistant</b> <span class="b b-gruen">Empfehlung</span> – Standard für lokale Automatisierung</li>
+<li>Am rundesten als <b>HAOS-VM</b> (Proxmox) statt Container (Add-ons!)</li>
+<li>Zigbee/Thread per USB-Stick (in VM durchreichen)</li></ul></div>
+<div class="card"><div class="ct">🔧 Sonstiges</div><ul>
+<li><b>Gitea/Forgejo</b> – eigener Git-Server (Compose-Dateien!)</li>
+<li><b>ntfy / Gotify</b> – Push-Benachrichtigungen vom Server aufs Handy</li>
+<li><b>*arr-Stack</b> (Sonarr/Radarr) – Medienverwaltung</li>
+<li><b>Frigate</b> – Kamera-NVR mit Objekterkennung</li></ul></div>
+</div>
+
+<h2>Sinnvolle Startreihenfolge</h2>
+<div class="steps">
+<div class="step"><b>Uptime Kuma + ntfy:</b> Monitoring zuerst – du merkst sofort, wenn später etwas ausfällt.</div>
+<div class="step"><b>AdGuard Home / Pi-hole:</b> sofort spürbarer Nutzen fürs ganze Netz, geringes Risiko.</div>
+<div class="step"><b>Jellyfin oder Immich:</b> der „Wow-Effekt“ – Medien bzw. Fotos.</div>
+<div class="step"><b>Paperless / Nextcloud / Syncthing:</b> Dokumente und Dateien, sobald Backup-Routine steht.</div>
+<div class="step"><b>Vaultwarden / Home Assistant:</b> Kritisches zuletzt – wenn Betrieb, Backup und VPN sicher sitzen.</div>
+</div>

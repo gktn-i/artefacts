@@ -1,0 +1,71 @@
+<h2>Troubleshooting: Standardvorgehen</h2>
+<div class="steps">
+<div class="step"><b>Was hat sich geändert?</b> 90 % der Probleme folgen auf ein Update, eine Config-Änderung oder volle Platten.</div>
+<div class="step"><b>Von unten nach oben prüfen:</b> Strom → Netzwerk (<code>ping</code>) → Host erreichbar (SSH) → Dienst läuft (<code>docker ps</code>) → Logs.</div>
+<div class="step"><b>Logs lesen:</b> <code>docker compose logs -f</code> bzw. <code>journalctl -u dienst -e</code> – die Fehlermeldung sagt fast immer, was los ist.</div>
+<div class="step"><b>Fehlermeldung wörtlich suchen</b> (GitHub Issues des Projekts zuerst) – jemand hatte das Problem schon.</div>
+<div class="step"><b>Eine Änderung pro Versuch,</b> dann testen. Wildes Rumprobieren macht’s schlimmer und undokumentierbar.</div>
+</div>
+
+<h2>Häufige Probleme</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Symptom</th><th>Erste Checks</th><th>Typische Ursache</th></tr>
+<tr><td>Dienst nicht erreichbar</td><td><code>docker ps</code>, richtige IP:Port?, <code>ss -tulpn</code></td><td>Container down, Port-Mapping falsch, Firewall, falsche URL</td></tr>
+<tr><td>Container startet immer neu (Restart-Loop)</td><td><code>docker logs &lt;name&gt;</code></td><td>Fehlende Env-Variable, kaputte Config, Rechte auf Volume, Port belegt</td></tr>
+<tr><td>„Permission denied“ auf Dateien</td><td><code>ls -l</code> auf dem Host, PUID/PGID im Compose</td><td>Container-User ≠ Datei-Besitzer</td></tr>
+<tr><td>Platte voll</td><td><code>df -h</code>, <code>docker system df</code>, <code>ncdu /</code></td><td>Alte Images, Log-Wildwuchs, Downloads, Backups aufs falsche Ziel</td></tr>
+<tr><td>Alles langsam</td><td><code>htop</code>, <code>docker stats</code>, <code>iostat</code>, SMART</td><td>RAM voll (Swap!), ein Container frisst CPU, sterbende Platte</td></tr>
+<tr><td>Nach Update kaputt</td><td>Changelog/Breaking Changes, Logs</td><td>Major-Update mit Migrationsschritt → Rollback auf Snapshot/altes Tag, Anleitung lesen</td></tr>
+<tr><td>Kein Internet im ganzen Netz</td><td>Läuft Pi-hole/AdGuard? Router-DNS?</td><td>DNS-Server down = „Internet kaputt“; Fallback-DNS im Router hinterlegen</td></tr>
+<tr><td>Server nach Stromausfall aus</td><td>BIOS-Einstellung</td><td>„Restore on AC Power Loss“ nicht auf Power On</td></tr>
+<tr><td>Von unterwegs nicht erreichbar</td><td>VPN verbunden? DynDNS aktuell? CGNAT?</td><td>DS-Lite/CGNAT ohne öffentliche IPv4 → Tailscale nutzen</td></tr>
+</table>
+</div>
+
+<h2>Diagnose-Werkzeugkasten</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Befehl</th><th>Zeigt</th></tr>
+<tr><td><code>htop</code></td><td>CPU, RAM, Prozesse live</td></tr>
+<tr><td><code>df -h</code> / <code>ncdu /pfad</code></td><td>Plattenfüllstand / was den Platz frisst</td></tr>
+<tr><td><code>ss -tulpn</code></td><td>Offene Ports + welcher Prozess lauscht</td></tr>
+<tr><td><code>journalctl -e</code> / <code>-u ssh</code></td><td>Systemlogs (Ende) / eines Dienstes</td></tr>
+<tr><td><code>docker compose logs -f</code></td><td>Container-Logs live</td></tr>
+<tr><td><code>ping</code> / <code>dig name</code> / <code>traceroute</code></td><td>Erreichbarkeit / DNS-Auflösung / Netzwerkpfad</td></tr>
+<tr><td><code>smartctl -a /dev/sda</code></td><td>Gesundheit einer Platte</td></tr>
+<tr><td><code>sensors</code></td><td>Temperaturen</td></tr>
+<tr><td><code>uptime</code> / <code>free -h</code></td><td>Last &amp; Laufzeit / RAM-Belegung</td></tr>
+</table>
+</div>
+
+<h2>Glossar</h2>
+<dl>
+<dt>NAS</dt><dd>Network Attached Storage – Speicher-Server im Netzwerk, Spezialfall des Homeservers.</dd>
+<dt>Headless</dt><dd>Betrieb ohne Monitor/Tastatur – Verwaltung per SSH und Web-UIs.</dd>
+<dt>Hypervisor</dt><dd>Software, die VMs verwaltet (z. B. Proxmox VE).</dd>
+<dt>VM / LXC / Container</dt><dd>Voll virtualisierter Rechner / leichter System-Container / App-Container (Docker).</dd>
+<dt>Reverse Proxy</dt><dd>Vermittler, der Anfragen anhand des Domainnamens an die richtige App weiterleitet und HTTPS übernimmt.</dd>
+<dt>VPN</dt><dd>Verschlüsselter Tunnel ins Heimnetz (WireGuard, Tailscale) – der sichere Weg für Fernzugriff.</dd>
+<dt>VLAN</dt><dd>Virtuell getrennte Netze auf derselben Hardware – z. B. IoT vom Server isolieren.</dd>
+<dt>DNS / DHCP</dt><dd>Namen → IP-Adressen auflösen / automatische IP-Vergabe im Netz.</dd>
+<dt>Port-Forwarding</dt><dd>Router leitet Anfragen aus dem Internet an ein internes Gerät weiter – sparsam einsetzen.</dd>
+<dt>CGNAT / DS-Lite</dt><dd>Anschluss ohne eigene öffentliche IPv4 – klassische Portfreigaben funktionieren nicht.</dd>
+<dt>DynDNS</dt><dd>Dienst, der die wechselnde Heim-IP unter festem Namen erreichbar hält.</dd>
+<dt>ZFS / Pool / Scrub</dt><dd>Dateisystem mit Prüfsummen / Verbund mehrerer Platten / Prüf-Lauf gegen stille Datenfehler.</dd>
+<dt>Snapshot</dt><dd>Eingefrorener Datenstand für schnellen Rollback – ergänzt Backups, ersetzt sie nicht.</dd>
+<dt>SMART</dt><dd>Selbstdiagnose von Festplatten/SSDs – Frühwarnsystem für Ausfälle.</dd>
+<dt>CMR / SMR</dt><dd>Aufzeichnungsverfahren von HDDs – für NAS/RAID immer CMR wählen.</dd>
+<dt>TBW</dt><dd>Total Bytes Written – Schreib-Lebensdauer einer SSD.</dd>
+<dt>ECC-RAM</dt><dd>Arbeitsspeicher mit Fehlerkorrektur – Bonus für Datenintegrität.</dd>
+<dt>USV / UPS</dt><dd>Batterie-Puffer für sauberes Herunterfahren bei Stromausfall.</dd>
+<dt>NUT</dt><dd>Network UPS Tools – verbindet USV mit Server für Auto-Shutdown.</dd>
+<dt>Let's Encrypt / TLS</dt><dd>Kostenlose Zertifikate / Verschlüsselung hinter HTTPS.</dd>
+<dt>2FA</dt><dd>Zweiter Faktor beim Login (App-Code, Passkey) – Pflicht für Admin-Zugänge.</dd>
+<dt>fail2ban / CrowdSec</dt><dd>Sperrt IPs nach wiederholten Fehlversuchen automatisch.</dd>
+<dt>PUID/PGID</dt><dd>User-/Gruppen-ID, unter der ein Container auf Dateien zugreift.</dd>
+<dt>IaC</dt><dd>Infrastructure as Code – Setup als Textdateien (Compose, Ansible) statt Klick-Historie.</dd>
+<dt>Homelab</dt><dd>Der Überbegriff fürs Ganze – Heimserver + Netzwerk + Basteln + Lernen.</dd>
+</dl>
+
+<div class="legend">Homeserver 101 · Referenz für Planung, Aufbau und Betrieb · Stand 07/2026 · Software-Empfehlungen sind Momentaufnahmen – Prinzipien (Backup, VPN, Updates, Doku) bleiben.</div>

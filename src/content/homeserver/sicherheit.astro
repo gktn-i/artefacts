@@ -1,0 +1,43 @@
+<h2>Die goldenen Sicherheitsregeln</h2>
+<div class="grid">
+<div class="card"><div class="ct">Angriffsfläche klein halten</div><ul><li>Nur installieren, was genutzt wird; Ungenutztes entfernen</li><li>Keine offenen Ports „auf Verdacht“</li><li>Standard: alles nur im LAN/VPN erreichbar</li></ul></div>
+<div class="card"><div class="ct">Updates</div><ul><li>OS: Security-Updates automatisch (<code>unattended-upgrades</code>)</li><li>Container: regelmäßig, aber bewusst (siehe Docker-Tab)</li><li>Öffentlich erreichbare Dienste: sofort patchen</li></ul></div>
+<div class="card"><div class="ct">Zugänge</div><ul><li>Passwortmanager, jedes Passwort einmalig &amp; lang</li><li>2FA überall, wo möglich (Admin-UIs zuerst)</li><li>Standard-Passwörter (admin/admin) sofort ändern</li></ul></div>
+<div class="card"><div class="ct">SSH härten</div><ul><li>Nur Key-Login: <code>PasswordAuthentication no</code></li><li><code>PermitRootLogin no</code>, Zugriff per <code>sudo</code></li><li>fail2ban; SSH nie ins Internet forwarden</li></ul></div>
+<div class="card"><div class="ct">Least Privilege</div><ul><li>Dienste laufen als eigener User (PUID/PGID), nicht als root</li><li>Kein <code>privileged: true</code> ohne Grund</li><li>Freigaben: nur nötige Ordner, nur nötige Rechte</li></ul></div>
+<div class="card"><div class="ct">Ransomware-Resilienz</div><ul><li>Versionierte Backups, die der Server nicht löschen kann (Pull/append-only/offline)</li><li>Backup-Ziel mit anderen Zugangsdaten</li><li>Snapshots zusätzlich für schnellen Rollback</li></ul></div>
+</div>
+
+<h2>Häufige Fehler und was stattdessen</h2>
+<div class="tbl-wrap">
+<table>
+<tr><th>Fehler</th><th>Risiko</th><th>Besser so</th></tr>
+<tr><td>Port-Forward direkt auf App (Jellyfin:8096, HA:8123)</td><td>Bots scannen &amp; exploiten bekannte Ports in Minuten</td><td>VPN; wenn öffentlich: Reverse Proxy + HTTPS + 2FA</td></tr>
+<tr><td>SSH mit Passwort erreichbar</td><td>Brute-Force rund um die Uhr</td><td>SSH-Keys, Passwort-Login aus, fail2ban</td></tr>
+<tr><td>Docker-Socket in Container mounten (Watchtower &amp; Co. unbedacht)</td><td>Socket = Root auf dem Host</td><td>Nur bewusst; Alternativen: manuelle Updates, Socket-Proxy</td></tr>
+<tr><td>Passwörter/Keys in <code>compose.yaml</code> in Git</td><td>Secrets landen öffentlich/kopiert</td><td><code>.env</code>-Datei (in <code>.gitignore</code>) oder Docker Secrets</td></tr>
+<tr><td>„Später mache ich Backup“</td><td>Totalverlust bei erstem Defekt/Fehlgriff</td><td>Backup gehört zum Setup, nicht zur Kür</td></tr>
+<tr><td>Alles im selben Netz mit Billig-IoT</td><td>Kompromittierte Kamera erreicht den Server</td><td>IoT ins Gastnetz/VLAN</td></tr>
+<tr><td>UPnP am Router aktiv</td><td>Geräte öffnen selbstständig Ports</td><td>UPnP deaktivieren, Freigaben nur manuell</td></tr>
+<tr><td>Ein Admin-Passwort für alles</td><td>Ein Leak = alles offen</td><td>Passwortmanager, einmalige Passwörter, 2FA</td></tr>
+</table>
+</div>
+
+<h2>Update-Strategie (Standard-Vorgehen)</h2>
+<div class="steps">
+<div class="step"><b>Vorher sichern:</b> Snapshot (Proxmox/ZFS) oder frisches Backup der App-Daten.</div>
+<div class="step"><b>Changelog überfliegen:</b> Major-Versionen (z. B. Nextcloud 28→29, Immich) haben oft Breaking Changes.</div>
+<div class="step"><b>Update einspielen:</b> OS per <code>apt</code>; Container per <code>docker compose pull &amp;&amp; docker compose up -d</code>.</div>
+<div class="step"><b>Funktion prüfen:</b> App öffnen, Logs checken (<code>docker compose logs -f</code>).</div>
+<div class="step"><b>Bei Problemen:</b> Rollback auf Snapshot bzw. altes Image-Tag – deshalb Versions-Tags statt nur <code>latest</code>.</div>
+</div>
+
+<h2>Sicherheits-Checkliste (regelmäßig durchgehen)</h2>
+<ul class="check">
+<li>Welche Ports sind am Router offen? (Router-UI prüfen – sollte: keiner oder nur VPN)</li>
+<li>Läuft überall die aktuelle Version? (Dashboard/Release-Feeds)</li>
+<li>2FA auf allen Admin-Zugängen aktiv?</li>
+<li>fail2ban/CrowdSec aktiv und Logs unauffällig?</li>
+<li>Backups grün + letzter Restore-Test &lt; 3 Monate?</li>
+<li>Gibt es Dienste/User/Freigaben, die keiner mehr braucht? → entfernen</li>
+</ul>

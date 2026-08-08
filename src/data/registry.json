@@ -444,7 +444,6 @@
             {
               "id": "schmiermittel",
               "file": "schmiermittel-vergleich.html",
-              "theme": "dark",
               "name": "Schmiermittel",
               "icon": "🛢️",
               "kind": "Vergleich",
@@ -459,28 +458,8 @@
               ],
               "sections": [
                 {
-                  "h": "oel",
-                  "t": "Öle"
-                },
-                {
-                  "h": "fett",
-                  "t": "Fette"
-                },
-                {
-                  "h": "spray",
-                  "t": "Sprays"
-                },
-                {
-                  "h": "paste",
-                  "t": "Pasten"
-                },
-                {
-                  "h": "spezial",
-                  "t": "Spezial"
-                },
-                {
-                  "h": "reiniger",
-                  "t": "Reiniger"
+                  "h": "vergleich",
+                  "t": "Vergleichstabelle"
                 }
               ],
               "related": [
@@ -533,7 +512,6 @@
             {
               "id": "rentabilitaet",
               "file": "rentabilitaets-simulator.html",
-              "theme": "dark",
               "name": "Rentabilität",
               "icon": "📈",
               "kind": "Rechner",
@@ -545,7 +523,12 @@
                 "kosten",
                 "business"
               ],
-              "sections": []
+              "sections": [
+                {
+                  "h": "simulator",
+                  "t": "Simulator"
+                }
+              ]
             }
           ]
         }
@@ -631,7 +614,6 @@
             {
               "id": "cuts-atlas",
               "file": "fleisch-cuts-explorer.html",
-              "theme": "dark",
               "name": "Cuts Atlas",
               "icon": "🥩",
               "kind": "Atlas",
