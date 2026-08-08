@@ -1,0 +1,163 @@
+<p class="sub" style="margin:0 0 1rem">Die Abkürzungen, über die man in Datenblättern, Schaltplänen und Reparatur-Videos stolpert — jeweils in einem Satz, mit dem Hinweis, warum sie in der Praxis zählt. Suchen geht am schnellsten mit <b>⌘K</b> bzw. <b>Strg+K</b>.</p>
+
+<h2>Bussysteme &amp; Schnittstellen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Begriff</th><th>Was es ist</th><th>Worauf es in der Praxis ankommt</th></tr></thead>
+<tbody>
+<tr><td><b>I²C</b> (IIC, TWI)</td><td>Zweidraht-Bus (SDA = Daten, SCL = Takt) für viele Bauteile an denselben zwei Leitungen</td><td>Braucht <b>Pull-up-Widerstände</b> (typ. 4,7 kΩ) — ohne sie läuft nichts. Jedes Gerät hat eine Adresse; zwei gleiche Adressen am Bus = Konflikt. 100 kHz / 400 kHz / 1 MHz, nur kurze Strecken auf dem Board.</td></tr>
+<tr><td><b>SPI</b></td><td>Vierdraht-Bus: MOSI, MISO, SCK und je Gerät eine eigene CS-Leitung</td><td>Deutlich schneller als I²C (10–100 MHz) und vollduplex, kostet aber pro Gerät einen Pin. Keine Adressen — die Auswahl macht CS.</td></tr>
+<tr><td><b>UART</b> (seriell)</td><td>Zwei Leitungen (TX, RX), <b>ohne</b> Taktleitung, Punkt-zu-Punkt</td><td>Beide Seiten müssen dieselbe <b>Baudrate</b> eingestellt haben (9600, 115200 …), sonst kommt nur Müll an. TX geht immer an RX der Gegenseite.</td></tr>
+<tr><td><b>RS-232</b></td><td>UART mit ±12-V-Pegeln (alter PC-Anschluss)</td><td>Darf <b>nie</b> direkt an einen 3,3-V-Mikrocontroller — dazwischen gehört ein Pegelwandler (MAX3232).</td></tr>
+<tr><td><b>RS-485</b></td><td>Differenzieller Zweidraht-Bus für lange Strecken (bis ~1200 m)</td><td>Industriestandard, meist mit Modbus. Beide Busenden mit <b>120 Ω</b> abschließen, sonst Reflexionen.</td></tr>
+<tr><td><b>CAN</b> (Controller Area Network)</td><td>Differenzieller Zweidraht-Bus aus dem Fahrzeugbau (CAN-H / CAN-L)</td><td><b>Kein Master.</b> Jeder Teilnehmer darf senden; kollidieren zwei, gewinnt die Nachricht mit der niedrigeren ID — ohne dass die andere verloren geht (verlustfreie Arbitrierung). Sehr störfest durch Differenzsignal. Klassisch bis 1 Mbit/s, <b>CAN-FD</b> bis 5–8 Mbit/s. Abschluss: 120 Ω an beiden Enden.</td></tr>
+<tr><td><b>LIN</b></td><td>Einzeldraht-Bus im Auto, langsam (bis 20 kbit/s), ein Master</td><td>Für unkritische Nebensachen wie Fensterheber und Spiegel — dort, wo CAN zu teuer wäre.</td></tr>
+<tr><td><b>1-Wire</b></td><td>Daten und teils Versorgung über eine einzige Leitung</td><td>Klassiker: Temperatursensor DS18B20. Jedes Bauteil hat eine eindeutige Seriennummer ab Werk.</td></tr>
+<tr><td><b>USB</b></td><td>Differenzielles Paar (D+/D−), Host steuert, Gerät antwortet</td><td>12 Mbit/s (Full Speed), 480 Mbit/s (High Speed), 5 Gbit/s+ ab USB 3. Leitungsimpedanz 90 Ω differenziell — beim Layout kein Detail, sondern Bedingung.</td></tr>
+<tr><td><b>USB-PD</b> (Power Delivery)</td><td>Aushandeln der Versorgungsspannung über die CC-Leitungen</td><td>Verhandelt 5 / 9 / 15 / 20 V (mit EPR bis 48 V), bis 5 A — daher bis 240 W. Ohne gültige Aushandlung bleibt es bei 5 V.</td></tr>
+<tr><td><b>I²S</b></td><td>Digitale <b>Audio</b>-Übertragung (Bitclock, Wordselect, Daten)</td><td>Trotz des ähnlichen Namens nichts mit I²C zu tun — reiner Datenstrom ohne Adressen.</td></tr>
+<tr><td><b>PCIe</b></td><td>Serielle Punkt-zu-Punkt-Verbindung in Lanes (x1, x4, x8, x16)</td><td>Jede Lane ist ein eigenes differenzielles Paar je Richtung. Mehr Lanes = mehr Bandbreite, nicht mehr Geräte.</td></tr>
+<tr><td><b>MIPI DSI / CSI</b></td><td>Hochgeschwindigkeits-Schnittstellen für Display (DSI) und Kamera (CSI)</td><td>In jedem Smartphone und auf Einplatinenrechnern. Sehr empfindliche differenzielle Paare — beschädigte Flexkabel sind ein häufiger Fehler.</td></tr>
+<tr><td><b>JTAG</b></td><td>Debug- und Testschnittstelle (TCK, TMS, TDI, TDO)</td><td>Kann Chips programmieren <b>und</b> per Boundary-Scan Lötstellen prüfen, ohne dass die Software läuft.</td></tr>
+<tr><td><b>SWD</b></td><td>Zweidraht-Debug bei ARM-Cortex (SWDIO, SWCLK)</td><td>Die abgespeckte JTAG-Variante — das, was ein ST-Link oder J-Link üblicherweise nutzt.</td></tr>
+<tr><td><b>Ethernet / RMII / RGMII</b></td><td>Netzwerk; RMII/RGMII sind die Verbindungen zwischen Controller (MAC) und Übertrager-Chip (PHY)</td><td>Zwischen PHY und Buchse sitzt immer ein <b>Übertrager</b> (Magnetics) zur galvanischen Trennung — häufig im RJ45 integriert.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Speicher</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Begriff</th><th>Was es ist</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>SRAM</b></td><td>Statischer Arbeitsspeicher — hält den Inhalt ohne Auffrischen, solange Strom da ist</td><td>Sehr schnell, aber flächenintensiv und teuer. Das ist der RAM <i>in</i> einem Mikrocontroller und der CPU-Cache.</td></tr>
+<tr><td><b>DRAM</b></td><td>Dynamischer Speicher — jede Zelle ist ein winziger Kondensator und muss ständig <b>aufgefrischt</b> werden</td><td>Billig und dicht, deshalb der Hauptspeicher. Ohne Strom sofort leer.</td></tr>
+<tr><td><b>DDR</b> (DDR3/4/5)</td><td>„Double Data Rate" — überträgt bei steigender <b>und</b> fallender Taktflanke</td><td>„DDR4-3200" meint 3200 Millionen Übertragungen/s, nicht 3200 MHz Takt. Generationen sind mechanisch und elektrisch inkompatibel.</td></tr>
+<tr><td><b>VRAM</b></td><td>Grafikspeicher. Ursprünglich ein eigener Typ mit zwei Ports, heute Sammelbegriff für den Speicher auf einer Grafikkarte</td><td>Konkret meist <b>GDDR6/GDDR6X</b>: auf Bandbreite statt auf niedrige Latenz optimiert. Auf der Karte sind es die Chips rund um den Grafikprozessor — beim Reparieren häufige Kandidaten für Hitzeschäden.</td></tr>
+<tr><td><b>HBM</b></td><td>Gestapelte Speicherchips direkt neben dem Prozessor auf demselben Träger</td><td>Extrem breite Anbindung bei kurzen Wegen — in Beschleunigern und High-End-Grafikkarten. Nicht reparierbar, nur komplett tauschbar.</td></tr>
+<tr><td><b>NAND-Flash</b></td><td>Nichtflüchtiger Speicher, dessen Zellen wie ein NAND-Gatter <b>in Reihe</b> verschaltet sind</td><td>Hohe Dichte, aber nur <b>blockweise</b> löschbar und mit begrenzter Zahl an Schreibzyklen. Braucht deshalb Fehlerkorrektur (ECC) und Wear Leveling. Steckt in SSD, SD-Karte, USB-Stick, eMMC.</td></tr>
+<tr><td><b>NOR-Flash</b></td><td>Zellen parallel verschaltet — jede Adresse direkt lesbar</td><td>Code kann direkt daraus ausgeführt werden (XIP). Kleiner und teurer pro Bit, deshalb typisch für BIOS/UEFI und Firmware.</td></tr>
+<tr><td><b>EEPROM</b></td><td>Nichtflüchtig, <b>byteweise</b> beschreibbar</td><td>Für Konfiguration, Kalibrierwerte, Seriennummern. Klein (KB-Bereich), dafür ~1 Million Schreibzyklen.</td></tr>
+<tr><td><b>eMMC</b></td><td>NAND-Flash plus Controller in einem verlöteten BGA-Gehäuse</td><td>Der „Datenträger" in Handys, Tablets, Einplatinenrechnern. Fest verlötet — Datenrettung heißt Auslöten und Auslesen.</td></tr>
+<tr><td><b>UFS</b></td><td>Nachfolger von eMMC, seriell statt parallel und vollduplex</td><td>Deutlich schneller, kann lesen und schreiben gleichzeitig. Standard in aktuellen Smartphones.</td></tr>
+<tr><td><b>SLC / MLC / TLC / QLC</b></td><td>Wie viele Bits pro Flash-Zelle gespeichert werden (1/2/3/4)</td><td>Mehr Bits = billiger, aber langsamer und weniger Schreibzyklen. SLC hält ~100 000 Zyklen, QLC nur noch ~1000.</td></tr>
+<tr><td><b>FRAM / MRAM</b></td><td>Nichtflüchtige Speicher mit praktisch unbegrenzten Schreibzyklen</td><td>Für Daten, die ständig geschrieben werden (Zählerstände, Logs) — dort, wo EEPROM verschleißen würde.</td></tr>
+<tr><td><b>ROM / Mask ROM</b></td><td>Bei der Chipfertigung fest einprogrammiert</td><td>Nicht änderbar. Enthält z. B. den Boot-Loader, der ein Gerät überhaupt erst startbereit macht.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Logikgatter — und warum NAND zweimal vorkommt</h2>
+<p>„NAND" bezeichnet zwei völlig verschiedene Dinge: ein <b>Logikgatter</b> und eine <b>Flash-Bauart</b>. Der Zusammenhang: die Flash-Zellen sind so verschaltet wie die Transistoren in einem NAND-Gatter — in Reihe. Beim NOR-Flash liegen sie parallel, wie im NOR-Gatter.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Gatter</th><th>Ausgang ist HIGH, wenn …</th><th>Merksatz</th></tr></thead>
+<tbody>
+<tr><td><b>AND</b> (UND)</td><td>… <b>alle</b> Eingänge HIGH sind</td><td>Beide Bedingungen müssen erfüllt sein</td></tr>
+<tr><td><b>OR</b> (ODER)</td><td>… <b>mindestens ein</b> Eingang HIGH ist</td><td>Eines genügt</td></tr>
+<tr><td><b>NOT</b> (Inverter)</td><td>… der Eingang LOW ist</td><td>Dreht um</td></tr>
+<tr><td><b>NAND</b></td><td>… <b>nicht alle</b> Eingänge HIGH sind (AND mit Inverter dahinter)</td><td><b>Universell:</b> aus NAND-Gattern allein lässt sich jede beliebige Logik bauen — deshalb ist es der Grundbaustein in Chips</td></tr>
+<tr><td><b>NOR</b></td><td>… <b>kein</b> Eingang HIGH ist</td><td>Ebenfalls universell einsetzbar</td></tr>
+<tr><td><b>XOR</b> (Exklusiv-ODER)</td><td>… <b>genau ein</b> Eingang HIGH ist</td><td>„Ungleich" — Basis von Addierern und Prüfsummen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Ein kleiner Kreis (Bubble) am Ausgang eines Symbols bedeutet immer <b>invertiert</b>. Dasselbe Prinzip bei Signalnamen im Schaltplan: <b>RESET</b> ist aktiv bei HIGH, <b>/RESET</b> oder <b>RESET#</b> ist aktiv bei LOW — deshalb sitzt an solchen Pins fast immer ein Pull-up.</p>
+
+<h2>Leistung &amp; Regelung</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>VRM</b></td><td>Voltage Regulator Module — die mehrphasige Schaltregler-Baugruppe, die aus 12 V die Kernspannung eines Prozessors macht. Ausführlich im Tab <a href="#leistung">Leistung &amp; PWM</a>.</td></tr>
+<tr><td><b>PWM</b></td><td>Pulsweiten-Modulation: schnelles Ein/Aus, wobei der Ein-Anteil (Tastgrad) die abgegebene Leistung bestimmt.</td></tr>
+<tr><td><b>PFM</b></td><td>Pulsfrequenz-Modulation: bei sehr kleiner Last schaltet der Regler nur noch gelegentlich einen Puls. Spart Ruhestrom, erzeugt dafür unregelmäßiges Rauschen.</td></tr>
+<tr><td><b>LDO</b></td><td>Low-Dropout-Regler: Linearregler, der schon mit geringer Differenz zwischen Ein- und Ausgang auskommt (oft 0,1–0,5 V). Sehr rauscharm, verheizt aber die Differenz.</td></tr>
+<tr><td><b>SMPS</b></td><td>Switched-Mode Power Supply — Sammelbegriff für alle schaltenden Netzteile und Wandler.</td></tr>
+<tr><td><b>Dropout</b></td><td>Die Mindestdifferenz, die ein Linearregler braucht. Ein 5-V-Regler mit 2 V Dropout liefert an 6 V Eingang keine sauberen 5 V mehr.</td></tr>
+<tr><td><b>I<sub>q</sub></b> (Ruhestrom)</td><td>Was der Regler selbst verbraucht, auch ohne Last. Bei Batteriebetrieb entscheidend — Unterschiede zwischen 1 µA und 5 mA bestimmen die Laufzeit.</td></tr>
+<tr><td><b>ESR / ESL</b></td><td>Ersatz-Serienwiderstand bzw. -induktivität eines Kondensators. Bestimmen, wie gut er schnelle Stromspitzen liefern kann. Steigender ESR ist das typische Alterungsmerkmal von Elkos.</td></tr>
+<tr><td><b>Ripple</b> (Restwelligkeit)</td><td>Der Rest an Wechselspannung, den der Wandler nicht wegglättet. Sichtbar nur mit dem <a href="#oszilloskop">Oszilloskop</a>, im AC-Modus gemessen.</td></tr>
+<tr><td><b>OCP</b></td><td>Over Current Protection — Abschalten oder Begrenzen bei zu hohem Strom. Genau das macht die Strombegrenzung am <a href="#netzteil">Labornetzteil</a>.</td></tr>
+<tr><td><b>OVP / UVP</b></td><td>Über- bzw. Unterspannungsschutz.</td></tr>
+<tr><td><b>OTP</b></td><td>Over Temperature Protection — thermische Abschaltung. (In anderem Zusammenhang auch „One Time Programmable" für einmalig beschreibbaren Speicher.)</td></tr>
+<tr><td><b>SCP</b></td><td>Short Circuit Protection — reagiert schneller und härter als OCP.</td></tr>
+<tr><td><b>UVLO</b></td><td>Under Voltage Lock-Out: Der Chip startet erst über einer Mindestspannung und bleibt darunter definiert aus, statt undefiniert zu zucken.</td></tr>
+<tr><td><b>Soft-Start</b></td><td>Die Ausgangsspannung fährt langsam hoch, damit der Einschaltstrom in die Kondensatoren nicht die Schutzschaltung auslöst.</td></tr>
+<tr><td><b>PGOOD</b></td><td>„Power Good" — Meldeleitung, die HIGH wird, sobald die Spannung stabil im Fenster liegt. Löst oft den nächsten Regler in der Startkette aus. Bei toten Boards ein sehr nützlicher Messpunkt.</td></tr>
+<tr><td><b>Enable (EN)</b></td><td>Freigabe-Eingang. Liegt er nicht auf HIGH, startet der Regler nicht — bei einer Diagnose immer als Erstes prüfen.</td></tr>
+<tr><td><b>Bootstrap</b></td><td>Kondensator, der die Gate-Spannung für einen High-Side-N-Kanal-MOSFET über die Versorgung hebt.</td></tr>
+<tr><td><b>Dead Time</b> (Totzeit)</td><td>Die Pause, in der beide MOSFETs einer Halbbrücke aus sind. Verhindert Shoot-Through.</td></tr>
+<tr><td><b>Synchrongleichrichtung</b></td><td>Ein aktiv geschalteter MOSFET ersetzt die Freilaufdiode → statt 0,7 V fallen nur Millivolt ab.</td></tr>
+<tr><td><b>Line / Load Regulation</b></td><td>Wie stark der Ausgang schwankt, wenn sich die <b>Eingangsspannung</b> bzw. die <b>Last</b> ändert.</td></tr>
+<tr><td><b>Transient Response</b></td><td>Wie schnell der Regler auf einen Lastsprung reagiert. Zeigt sich als kurzer Einbruch — nur im Oszilloskop sichtbar.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Signal &amp; Messgrößen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Bandbreite</b></td><td>Bis zu welcher Frequenz ein Gerät oder eine Leitung ein Signal noch korrekt überträgt. Faustregel fürs Oszilloskop: mindestens das 5-Fache der Signalfrequenz.</td></tr>
+<tr><td><b>Anstiegszeit</b> (Rise Time)</td><td>Wie lange eine Flanke von 10 % auf 90 % braucht. Hängt direkt mit der Bandbreite zusammen: <span class="formula">t<sub>r</sub> ≈ 0,35 / Bandbreite</span></td></tr>
+<tr><td><b>Slew Rate</b></td><td>Wie schnell ein Verstärkerausgang seine Spannung ändern kann, in V/µs. Zu langsam = verrundete Rechtecke.</td></tr>
+<tr><td><b>Jitter</b></td><td>Zeitliches Zittern einer Taktflanke. Bei schnellen Bussen der Grund, warum Daten „manchmal" kippen.</td></tr>
+<tr><td><b>Impedanz</b> (Leitungswellenwiderstand)</td><td>Der Widerstand, den eine Leiterbahn einem schnellen Signal entgegensetzt — bestimmt durch Breite, Abstand zur Massefläche und Material. Übliche Werte: 50 Ω einzeln, 90 Ω differenziell (USB), 100 Ω differenziell (Ethernet, CAN, LVDS).</td></tr>
+<tr><td><b>Termination</b> (Abschluss)</td><td>Widerstand am Leitungsende, der Reflexionen verhindert. Bei CAN und RS-485 sind das die 120 Ω an <b>beiden</b> Enden — fehlen sie, wird der Bus unzuverlässig.</td></tr>
+<tr><td><b>Differenzialpaar</b></td><td>Zwei Leitungen, die dasselbe Signal gegenläufig führen. Der Empfänger wertet nur die <b>Differenz</b> aus, sodass eingestreute Störungen auf beiden Adern sich aufheben. Prinzip hinter USB, CAN, Ethernet, HDMI.</td></tr>
+<tr><td><b>Gleichtakt</b> (Common Mode)</td><td>Der Anteil, der auf beiden Adern gleich ist — meist die Störung. Wird von stromkompensierten Drosseln gedämpft.</td></tr>
+<tr><td><b>SNR</b></td><td>Signal-Rausch-Abstand in dB. Je größer, desto sauberer das Nutzsignal.</td></tr>
+<tr><td><b>Abtastrate / Nyquist</b></td><td>Wie oft pro Sekunde digitalisiert wird. Man muss mindestens <b>doppelt</b> so schnell abtasten wie die höchste Signalfrequenz — praktisch eher 5–10-fach.</td></tr>
+<tr><td><b>Aliasing</b></td><td>Zu langsam abgetastet → es erscheint ein Signal, das gar nicht existiert. Der Grund für seltsame, langsame „Geisterwellen" auf dem Oszilloskop.</td></tr>
+<tr><td><b>Übersprechen</b> (Crosstalk)</td><td>Ein schnelles Signal koppelt in die Nachbarleitung. Gegenmittel: Abstand halten oder eine Masseleitung dazwischen.</td></tr>
+<tr><td><b>Ground Bounce</b></td><td>Kurzer Massepotenzialsprung durch schnelle Stromspitzen. Deshalb sitzen Entkopplungskondensatoren direkt am IC und nicht irgendwo auf der Platine.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Gehäuse, Bauformen &amp; Fertigung</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>THT / SMD</b></td><td>Durchsteck- bzw. oberflächenmontierte Bauteile. Löttechnik dazu: <a href="loeten-referenz.html#tht">Löten-Referenz</a>.</td></tr>
+<tr><td><b>0402 / 0201 / 01005</b></td><td>Bauteilgröße in Zoll-Schreibweise: 0402 = 1,0 × 0,5 mm, 0201 = 0,6 × 0,3 mm, 01005 = 0,4 × 0,2 mm. <b>Achtung:</b> es gibt dieselben Zahlen auch metrisch — „0402 metrisch" ist das, was imperial 01005 heißt.</td></tr>
+<tr><td><b>SOT-23</b></td><td>Kleines Dreibein-Gehäuse für Transistoren, MOSFETs und kleine Regler.</td></tr>
+<tr><td><b>SOIC / SOP / TSSOP</b></td><td>Gehäuse mit seitlich herausstehenden Beinchen. Gut von Hand lötbar, Rastermaß 1,27 mm bzw. 0,65 mm.</td></tr>
+<tr><td><b>QFP / TQFP / LQFP</b></td><td>Quadratisch mit Beinchen an allen vier Seiten. Typisch für Mikrocontroller, Rastermaß 0,4–0,8 mm.</td></tr>
+<tr><td><b>QFN / DFN</b></td><td>Keine Beinchen, nur Kontaktflächen an der Unterseite und meist ein großes Kühlpad in der Mitte. Nur mit Heißluft oder Reflow sinnvoll zu löten.</td></tr>
+<tr><td><b>BGA</b></td><td>Ball Grid Array — Kontakte als Lotkugel-Raster unter dem Chip. Nicht sichtbar, nur per Röntgen oder elektrisch prüfbar.</td></tr>
+<tr><td><b>LGA</b></td><td>Wie BGA, aber flache Kontaktflächen statt Kugeln — der Sockeltyp aktueller Prozessoren.</td></tr>
+<tr><td><b>WLCSP / CSP</b></td><td>Der nackte Chip mit Kugeln direkt darauf, kaum größer als der Halbleiter selbst. In Smartphones allgegenwärtig.</td></tr>
+<tr><td><b>PoP</b> (Package on Package)</td><td>Speicher-Gehäuse sitzt gestapelt auf dem Prozessor. Beim Auslöten müssen beide Ebenen einzeln behandelt werden.</td></tr>
+<tr><td><b>Underfill</b></td><td>Harz, das unter ein BGA gespritzt wird, damit es Stöße überlebt. Macht die Reparatur erheblich schwerer.</td></tr>
+<tr><td><b>Reballing</b></td><td>Einem ausgelöteten BGA neue Lotkugeln verpassen, bevor es wieder eingesetzt wird.</td></tr>
+<tr><td><b>Via</b></td><td>Durchkontaktierung zwischen zwei Lagen. <b>Blind Via</b> geht nur von außen bis in eine Innenlage, <b>Buried Via</b> verbindet nur Innenlagen, <b>Micro-Via</b> ist lasergebohrt und winzig.</td></tr>
+<tr><td><b>HDI</b></td><td>High Density Interconnect — Platinen mit Micro-Vias und sehr feinen Strukturen. Standard in Smartphones.</td></tr>
+<tr><td><b>Stackup</b> (Lagenaufbau)</td><td>Welche Kupferlage wofür da ist. Übliche Vierlagen-Ordnung: Signal / Masse / Versorgung / Signal — die durchgehende Massefläche ist entscheidend für Störfestigkeit.</td></tr>
+<tr><td><b>Lötstopplack</b> (Solder Mask)</td><td>Die grüne (oder farbige) Schicht. Verhindert, dass Lot dorthin fließt, wo es nicht hin soll. Als UV-härtender Lack auch das Mittel, um Reparaturdrähte zu fixieren.</td></tr>
+<tr><td><b>Stencil</b> (Schablone)</td><td>Dünne Metallfolie mit Ausschnitten, um Lötpaste passgenau auf alle Pads aufzutragen.</td></tr>
+<tr><td><b>Nutzen / Panel</b></td><td>Mehrere Platinen in einem Fertigungsstück, nach der Bestückung getrennt (geritzt oder ausgefräst).</td></tr>
+<tr><td><b>Fiducial</b></td><td>Runde Passermarke auf der Platine, an der sich Bestückungsautomat und Schablone ausrichten.</td></tr>
+<tr><td><b>DFM</b></td><td>Design for Manufacturing — das Layout so gestalten, dass es fertigbar und prüfbar bleibt (Mindestabstände, Testpunkte, Bauteilorientierung).</td></tr>
+<tr><td><b>ICT / Flying Probe</b></td><td>Automatischer Test der bestückten Platine — über ein Nadelbett oder mit beweglichen Prüfnadeln.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kürzel im Datenblatt</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Bauteil</th><th>Kürzel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><b>Diode</b></td><td>V<sub>F</sub> / I<sub>F</sub></td><td>Durchlassspannung und -strom (Silizium ~0,7 V, Schottky ~0,3 V)</td></tr>
+<tr><td>V<sub>R</sub></td><td>Sperrspannung, die sie in Gegenrichtung aushält</td></tr>
+<tr><td>t<sub>rr</sub></td><td>Sperrverzögerungszeit — wie schnell sie beim Umpolen wirklich sperrt. Für Schaltregler entscheidend.</td></tr>
+<tr><td rowspan="4"><b>MOSFET</b></td><td>V<sub>GS(th)</sub></td><td>Schwellspannung, ab der er zu leiten <i>beginnt</i></td></tr>
+<tr><td>R<sub>DS(on)</sub></td><td>Durchlasswiderstand — immer zusammen mit der zugehörigen V<sub>GS</sub> lesen</td></tr>
+<tr><td>Q<sub>g</sub> / C<sub>iss</sub></td><td>Gate-Ladung bzw. Eingangskapazität → bestimmt Treiberbedarf und Schaltverluste</td></tr>
+<tr><td>V<sub>DS</sub> / I<sub>D</sub></td><td>Maximale Spannung Drain–Source und Dauerstrom</td></tr>
+<tr><td rowspan="3"><b>Bipolar&shy;transistor</b></td><td>h<sub>FE</sub> (β)</td><td>Stromverstärkung — streut von Exemplar zu Exemplar erheblich</td></tr>
+<tr><td>V<sub>CE(sat)</sub></td><td>Restspannung im durchgeschalteten Zustand (~0,2 V). Bei hohen Strömen die Wärmequelle.</td></tr>
+<tr><td>I<sub>C</sub> / V<sub>CEO</sub></td><td>Maximaler Kollektorstrom und Sperrspannung</td></tr>
+<tr><td rowspan="3"><b>Kondensator</b></td><td>ESR / ESL</td><td>Innerer Serienwiderstand und -induktivität</td></tr>
+<tr><td>Ripple Current</td><td>Wie viel Wechselstrom er dauerhaft aushält, ohne zu überhitzen</td></tr>
+<tr><td>DC-Bias</td><td>Kapazitätsverlust von Keramikkondensatoren unter Gleichspannung — oft 50–80 %</td></tr>
+<tr><td rowspan="2"><b>Spule</b></td><td>I<sub>sat</sub> / I<sub>rms</sub></td><td>Sättigungs- und Dauerstrom</td></tr>
+<tr><td>DCR / SRF</td><td>Drahtwiderstand und Eigenresonanzfrequenz</td></tr>
+<tr><td rowspan="4"><b>Allgemein</b></td><td>Absolute Maximum Ratings</td><td><b>Zerstörungsgrenzen</b>, keine Betriebswerte. Dauerbetrieb dort ist immer falsch.</td></tr>
+<tr><td>Recommended Operating Conditions</td><td>Der Bereich, für den die garantierten Daten gelten — <b>das</b> ist die Auslegungsgrundlage.</td></tr>
+<tr><td>T<sub>J</sub> / θ<sub>JA</sub></td><td>Sperrschichttemperatur und Wärmewiderstand zur Umgebung (K/W). Damit rechnet man aus, wie heiß der Chip wirklich wird.</td></tr>
+<tr><td>MSL</td><td>Moisture Sensitivity Level — wie lange ein Bauteil nach dem Öffnen der Verpackung an Luft bleiben darf, bevor es vor dem Reflow getrocknet werden muss. Ignoriert man das, platzt das Gehäuse („Popcorn-Effekt").</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><div><b>Die wichtigste Datenblatt-Regel:</b> „Absolute Maximum Ratings" und „Recommended Operating Conditions" sind zwei verschiedene Tabellen. Die erste sagt, ab wann das Bauteil kaputtgeht, die zweite, wo es die versprochenen Eigenschaften hat. Ausgelegt wird <b>immer</b> nach der zweiten — mit Abstand zur ersten.</div></div>

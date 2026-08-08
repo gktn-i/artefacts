@@ -1,0 +1,37 @@
+<h2>Temperaturen</h2>
+<div class="tip"><b>Bei Kartuschen-Systemen (JBC C245/C210, GeeBoon TC22) rund 20–30 °C niedriger einstellen</b> als hier angegeben — der Sensor sitzt in der Spitze und regelt sofort nach. Konkrete Presets: Tab <a class="goto" href="#equipment">Equipment</a>.</div>
+<p>Richtwerte für klassische Kolben. Höher heißt nicht besser: Zu viel Hitze beschädigt Pads und Bauteile, zu wenig gibt kalte Stellen. Wenn Spitze und Lot passen, reicht meist die untere Hälfte des Bereichs. Wichtig: Die Werkzeug-Temperatur liegt deutlich <b>über</b> dem Schmelzpunkt des Lots — die Reserve gleicht Wärmeverluste an Pad und Beinchen aus.</p>
+<div class="tbl-wrap">
+<table id="tempTbl"><thead></thead><tbody></tbody></table>
+</div>
+<div class="note"><b>Warum im Tab <a class="goto" href="#reballing">Reballing</a> andere Heißluft-Werte stehen:</b> Die Zahl hier (bleifrei 320–360 °C) gilt fürs normale SMD-Rework. Beim BGA staffelt sich das nach Aufgabe, weil jede einen anderen Wärmebedarf hat — <b>Kugeln auf dem freien Chip aufschmelzen 330–360 °C</b> (wenig Masse), <b>Chip einlöten 340–370 °C</b> (Board zieht Wärme ab), <b>Chip ausbauen 350–380 °C</b> (alle Kugeln müssen gleichzeitig flüssig sein). Alle drei setzen eine Vorwärmung von unten voraus; ohne sie stimmen sie nicht.</div>
+
+<h3>Reflow-Profil (Heizplatte / Ofen)</h3>
+<p>Die Platine durchläuft vier Phasen. Bei der Heizplatte steuerst du das grob über das Hochregeln der Temperatur.</p>
+
+<svg class="sk sk-wide" viewBox="0 0 560 250" role="img" aria-label="Reflow-Temperaturkurve mit den Phasen Preheat, Soak, Reflow und Abkühlen">
+  <path class="axis" d="M45,15 L45,220 L545,220"/>
+  <text class="lbl" x="14" y="20">°C</text>
+  <text class="lbl" x="520" y="236">Zeit</text>
+  <line class="dash" x1="45" y1="104" x2="545" y2="104"/><text class="lbl" x="8" y="108">150</text>
+  <line class="melt" x1="45" y1="53" x2="545" y2="53"/><text class="lbl" x="8" y="57">217</text>
+  <text class="lbl" x="52" y="47" fill="#e24b4a">Schmelzpunkt SAC305 (217 °C)</text>
+  <text class="lbl" x="8" y="35">245</text>
+  <line class="dash" x1="200" y1="15" x2="200" y2="220"/>
+  <line class="dash" x1="330" y1="15" x2="330" y2="220"/>
+  <line class="dash" x1="440" y1="15" x2="440" y2="220"/>
+  <path class="curve" d="M45,201 L200,104 L330,85 C352,79 368,31 388,31 C406,31 420,70 440,88 L545,196"/>
+  <text class="zone" x="90" y="240">Preheat</text>
+  <text class="zone" x="248" y="240">Soak</text>
+  <text class="zone" x="365" y="240">Reflow</text>
+  <text class="zone" x="458" y="240">Abkühlen</text>
+</svg>
+<p class="cd" style="font-size:12.5px;color:var(--muted)">Kurve beispielhaft für bleifrei (SAC305, Peak 240–250 °C). Bleihaltig läuft identisch ab, nur rund 30–35 °C niedriger (Peak 205–215 °C).</p>
+
+<div class="steps">
+<div class="step"><b>Vorheizen (Preheat).</b> Von Raumtemperatur auf rund 150 °C, langsam mit 1–2 °C pro Sekunde. Schützt Bauteile vor Thermoschock.</div>
+<div class="step"><b>Soak.</b> 150–180 °C für 60–120 Sekunden halten. Flussmittel aktiviert sich, die Temperatur gleicht sich über die Platine aus.</div>
+<div class="step"><b>Reflow (Peak).</b> Kurz über den Schmelzpunkt: bleihaltig 205–215 °C, bleifrei 240–250 °C. Das Lot wird flüssig, Bauteile zentrieren sich selbst.</div>
+<div class="step"><b>Abkühlen.</b> Kontrolliert herunter. Platine in dieser Phase nicht bewegen, sonst entstehen gestörte, rissige Lötstellen.</div>
+</div>
+<div class="tip"><b>Self-Alignment:</b> Beim Reflow zieht die Oberflächenspannung des flüssigen Lots leicht schief gesetzte Bauteile gerade. Kleine Platzierfehler korrigieren sich von selbst.</div>

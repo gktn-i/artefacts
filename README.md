@@ -58,7 +58,8 @@ build` enthält den Index; im Dev-Server gibt es nur die Registry-Treffer.
 | Modul | Status |
 |---|---|
 | Küchen-Basics, Perfektes Steak | ✅ nativ |
-| übrige 11 (`public/*.html`) | Legacy, Migration modulweise |
+| Löten, Elektronik 101 | ✅ nativ (eigenes Modul-CSS `_style.css` + `public/assets/mod-*.js` für Rechner/Tabellen/Folds) |
+| übrige 9 (`public/*.html`) | Legacy, Migration modulweise |
 
 `fleisch-cuts-explorer.html` lädt React/Babel zur Laufzeit von unpkg — einziges
 Modul mit externer Abhängigkeit; beim Migrieren neu bauen statt zerlegen.

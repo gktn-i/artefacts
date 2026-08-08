@@ -1,0 +1,149 @@
+<h2>Die wichtigste Grundregel</h2>
+<div class="danger-box">
+<p style="margin:0"><b>Nicht die Spannung tötet, sondern der Strom durch den Körper.</b> Die Spannung ist nur der Druck, der diesen Strom treibt. Schon weniger als ein Zehntel Ampere durch den Brustkorb kann tödlich sein. Deshalb ist die entscheidende Frage immer: <b>wie viel Strom kann durch mich fließen?</b></p>
+</div>
+<p>Für die Praxis gibt es <b>zwei getrennte Welten</b> — mit völlig unterschiedlichen Regeln. Verwechsle sie nie:</p>
+<div class="grid2">
+<div class="card"><h3>🔋 Kleinspannung — dein Alltag</h3><p>Batterie, USB, Steckernetzteil, Labornetzteil: <b>3,3 V bis 24 V</b>. Berühren ist bei trockener Haut ungefährlich. Die echten Risiken heißen hier <b>Brand, Verbrennung, explodierender Akku</b> — nicht Stromschlag.</p></div>
+<div class="card"><h3>⚡ Netzspannung — eigene Liga</h3><p>Alles ab der Steckdose: <b>230 V</b>. Hier reicht ein Fehler für einen tödlichen Unfall. Andere Regeln, andere Schutzausrüstung, andere Erfahrung nötig. Ohne Vorwissen: Finger weg.</p></div>
+</div>
+
+<h2>Kleinspannung (bis 50 V): Feinelektronik</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Spannung</th><th>Einstufung</th><th>Was bei Berührung passiert</th></tr></thead>
+<tbody>
+<tr><td>3,3 / 5 / 12 V</td><td><span class="lvl lvl-ok">harmlos</span></td><td>Spürst du normalerweise gar nicht. Kein Risiko für den Körper bei trockener Haut.</td></tr>
+<tr><td>24 / 48 V</td><td><span class="lvl lvl-ok">meist harmlos</span></td><td>Trocken kein Problem. Bei nasser Haut langsam spürbar.</td></tr>
+<tr><td>bis 50 V Wechsel / 120 V Gleich</td><td><span class="lvl lvl-warn">Schutzgrenze</span></td><td>Offizielle Grenze für „Schutzkleinspannung". Darunter gilt Berühren trockener Haut als sicher. Das ist die Linie, ab der man vorsichtig wird.</td></tr>
+<tr><td>ab ~50 V Wechsel</td><td><span class="lvl lvl-bad">gefährlich</span></td><td>Kann genug Strom durch den Körper treiben, um zu schaden. Ab hier nicht mehr sorglos anfassen.</td></tr>
+</tbody>
+</table></div>
+
+<h3>Die Regeln für Kleinspannung</h3>
+<div class="grid2">
+<div class="card"><h3>✓ Immer</h3>
+<ul>
+<li><b>Strombegrenzung setzen,</b> bevor du eine neue Schaltung einschaltest (<a href="#netzteil">Labornetzteil</a>) — deckelt jeden Kurzschluss.</li>
+<li><b>Polarität prüfen,</b> bevor Strom fließt: Elko, LED, Diode, Akku, Modul.</li>
+<li><b>Große Elkos entladen,</b> bevor du sie anfasst oder auslötest (Anleitung unten).</li>
+<li><b>Ringe, Armband, Kette ablegen</b> — Metall an einer starken Quelle verschweißt und verbrennt.</li>
+<li><b>Schutzbrille</b> bei Akkus, Elkos und allem, was platzen kann.</li>
+<li><b>Lüften und absaugen</b> beim Löten — Flussmitteldampf gehört nicht in die Lunge.</li>
+</ul></div>
+<div class="card"><h3>✗ Niemals</h3>
+<ul>
+<li><b>Kondensator mit dem Schraubendreher kurzschließen</b> — Funkenschlag, spritzendes Metall. Immer über einen Widerstand.</li>
+<li><b>LiPo/Li-Ion kurzschließen, quetschen oder anstechen</b> — Brand bis Explosion.</li>
+<li><b>Akkus unbeaufsichtigt laden,</b> schon gar nicht über Nacht oder auf Brennbarem.</li>
+<li><b>Heiße Bauteile anfassen,</b> um „zu fühlen, ob sie warm sind" — erst abschalten, dann kurz antippen.</li>
+<li><b>Lötkolben ablegen</b> außerhalb des Halters (≈350 °C, sofortige Verbrennung).</li>
+<li><b>Weiterarbeiten, wenn etwas heiß wird oder riecht</b> — sofort abschalten, Ursache suchen.</li>
+</ul></div>
+</div>
+
+<h3>Versteckte Gefahren trotz niedriger Spannung</h3>
+<div class="card">
+<div class="rule"><span class="ico">⚡</span><div><b>Geladene Kondensatoren beißen auch nach dem Ausschalten.</b> Große Elkos in Netzteilen, Foto-Blitze und vor allem der Kondensator einer <b>Mikrowelle</b> speichern gefährliche Energie, teils tödlich. Vor dem Anfassen über einen Widerstand entladen — Anleitung direkt darunter.</div></div>
+<div class="rule"><span class="ico">🔥</span><div><b>Lithium-Akku-Kurzschluss</b> setzt schlagartig sehr viel Strom frei: Hitze, Brand, im schlimmsten Fall Explosion.</div></div>
+<div class="rule"><span class="ico">🪙</span><div><b>Kurzschluss an einer starken Quelle</b> (Akku, Labornetzteil ohne Limit): dünnes Metall kann glühen oder verschweißen. Verbrennungsgefahr, schmelzende Werkzeuge.</div></div>
+<div class="rule"><span class="ico">🌡️</span><div><b>Lötkolben ~350 °C, Heißluft noch heißer.</b> Sofortige Verbrennung. Kabel nie über die Spitze führen.</div></div>
+</div>
+
+<h3>Kondensator sicher entladen: Schritt für Schritt</h3>
+<p>Kondensatoren halten ihre Ladung auch nach dem Ausschalten — große Elkos teils stundenlang. Vor dem Anfassen, Messen (Kapazität) oder Auslöten deshalb kontrolliert entladen:</p>
+<div class="card">
+<div class="rule"><span class="ico">1️⃣</span><div><b>Einschätzen.</b> Kleine Kondensatoren in 3,3/5-V-Schaltungen (nF bis wenige µF) sind harmlos. Vorsicht ab großen Elkos (ab ~100 µF) oder höheren Spannungen (ab ~25–50 V). Netzteil-Primärseite, Foto-Blitze und Mikrowellen-Kondensatoren sind kein Anfänger-Terrain.</div></div>
+<div class="rule"><span class="ico">2️⃣</span><div><b>Spannung messen.</b> Multimeter auf V⎓, Spitzen an beide Anschlüsse — so siehst du, ob überhaupt noch Ladung drin ist und wie viel.</div></div>
+<div class="rule"><span class="ico">3️⃣</span><div><b>Über einen Widerstand entladen.</b> Einen Widerstand von 1–10 kΩ (bei großen Elkos ein leistungsfähiger Typ, z. B. 5–10 W) einige Sekunden an beide Pole halten — mit isolierten Krokodilklemmen oder Prüfspitzen, nie mit den Fingern an blankem Metall. Alternativen (Glühlampe, Entladestift, LED) stehen in der Tabelle darunter.</div></div>
+<div class="rule"><span class="ico">4️⃣</span><div><b>Zeit abschätzen.</b> Die Entladung folgt der RC-Zeitkonstante <span class="formula">τ = R × C</span> (Tab <a href="#grundlagen">Basics</a>): Nach 5·τ ist der Kondensator praktisch leer. Beispiel: 4700 µF über 1 kΩ → τ ≈ 4,7 s → nach ~25 s entladen.</div></div>
+<div class="rule"><span class="ico">5️⃣</span><div><b>Nachmessen.</b> Erst weiterarbeiten, wenn das Multimeter unter ~1 V zeigt. Große Kondensatoren laden sich nach dem Entladen von selbst wieder etwas auf („dielektrische Erholung") — direkt vor dem Anfassen noch einmal prüfen.</div></div>
+</div>
+
+<h3>Womit entladen? Die Möglichkeiten im Vergleich</h3>
+<p>Der Widerstand ist der Standard, aber nicht die einzige Option. Alle Verfahren machen dasselbe: Energie langsam in Wärme umwandeln. Unterschied ist nur der Komfort.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Methode</th><th>Wie</th><th>Wann sinnvoll</th><th>Achtung</th></tr></thead>
+<tbody>
+<tr><td><b>Widerstand</b> (Standard)</td><td>1–10 kΩ, 5–10 W, mit isolierten Klemmen an beide Pole</td><td>Immer richtig, von 5 V bis Netzteil-Elko</td><td>Kein Feedback — Ende nur per Messgerät erkennbar</td></tr>
+<tr><td><b>Glühlampe</b></td><td>Kleine 230-V-Glühlampe (z. B. 25–60 W) als Last anklemmen</td><td>Netzteil-Elkos, Röhrentechnik: leuchtet und wird dunkler → sichtbarer Fortschritt</td><td>Nur echte <b>Glühlampe</b>. LED- und Energiesparlampen enthalten Elektronik und funktionieren nicht.</td></tr>
+<tr><td><b>Entladewerkzeug / Entladestift</b></td><td>Fertiger Stift mit eingebautem Widerstand, teils mit Spannungsanzeige</td><td>Wer regelmäßig an Netzteilen, Blitzgeräten oder Mikrowellen arbeitet</td><td>Auf Spannungsfestigkeit achten (mind. so hoch wie die Schaltung)</td></tr>
+<tr><td><b>LED + Vorwiderstand</b></td><td>LED in Reihe mit z. B. 1 kΩ, richtig gepolt</td><td>Kleinspannung bis ~30 V: die LED erlischt, wenn der Kondensator leer ist</td><td>LED zeigt nur bis zu ihrer Flussspannung (~2 V) an — Restladung bleibt</td></tr>
+<tr><td><b>Eingebauter Bleeder-Widerstand</b></td><td>Fest parallel zum Kondensator verbaut, entlädt von selbst</td><td>Zuerst prüfen: viele Netzteile und Geräte haben ihn bereits</td><td>Kann defekt oder abgelötet sein — trotzdem immer nachmessen</td></tr>
+<tr><td><b>Elektronische Last</b></td><td>Labor-Last auf konstanten Strom oder Widerstand stellen</td><td>Wer sie hat: definierte, protokollierbare Entladung</td><td>Spannungsgrenze des Geräts beachten</td></tr>
+</tbody>
+</table></div>
+<div class="danger-box">
+<p style="margin:0"><b>Nicht kurzschließen.</b> Ein Kondensator mit Schraubendreher oder Draht direkt überbrückt entlädt sich in Millisekunden: Funken, Brandspuren an der Klinge, verschweißte Kontakte, im schlimmsten Fall platzt der Kondensator. Auch das Bauteil selbst nimmt Schaden. Immer über eine Last, nie direkt.</p>
+</div>
+<p class="note">Das Multimeter allein entlädt praktisch nicht: sein Innenwiderstand liegt bei ~10 MΩ, ein 4700-µF-Elko hätte damit τ ≈ 13 Stunden. Es ist Anzeige, keine Last.</p>
+
+<h3>Wärme, Leistung und Brandgefahr</h3>
+<p>Jedes Bauteil setzt überschüssige Energie als <b>Wärme</b> um. Zu viel davon ist die häufigste Brandursache im Hobby:</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Situation</th><th>Folge</th></tr></thead>
+<tbody>
+<tr><td>1/4-W-Widerstand mit 1 W belastet</td><td>Wird sehr heiß, verfärbt sich, raucht, brennt durch.</td></tr>
+<tr><td>Linearregler (z. B. 7805) mit großer Spannungsdifferenz</td><td>Verheizt die Differenz, ohne Kühlkörper Überhitzung und Abschaltung oder Defekt.</td></tr>
+<tr><td>Zu dünner Draht / Leiterbahn für den Strom</td><td>Erhitzt sich, schmilzt die Isolierung, kann einen Kabelbrand auslösen.</td></tr>
+<tr><td>Bauteil verpolt oder überspannt</td><td>Kann sofort durchbrennen, Elkos können aufplatzen.</td></tr>
+</tbody>
+</table></div>
+<p class="note">Merksatz: Wird etwas heiß, das nicht heiß werden soll, sofort abschalten und die Ursache suchen. Heiß ist immer eine Warnung.</p>
+
+<h2>Netzspannung (230 V): eine eigene Liga</h2>
+<div class="danger-box">
+<p style="margin:0"><b>230 V aus der Steckdose ist kein Einsteiger-Spielfeld.</b> Hier reicht ein Fehler für einen tödlichen Unfall oder Wohnungsbrand. Wenn du nicht sicher weißt, was du tust, lass es oder hol jemanden mit Erfahrung dazu. Das gilt auch für <b>eingebaute</b> Netzteile in Geräten — dort liegt innen Netzspannung an, und die Elkos bleiben nach dem Ausstecken geladen.</p>
+</div>
+
+<h3>Die Regeln für Netzspannung</h3>
+<div class="grid2">
+<div class="card"><h3>✓ Immer</h3>
+<ul>
+<li><b>FI-Schutzschalter (RCD)</b> in der Zuleitung — schaltet bei ~30 mA Fehlerstrom ab, bevor es kritisch wird.</li>
+<li><b>Eine-Hand-Regel:</b> die zweite Hand in die Hosentasche, damit kein Strom von Hand zu Hand über die Brust fließt.</li>
+<li><b>Spannungsfrei machen und nachmessen</b> — ausgesteckt heißt nicht entladen.</li>
+<li><b>Messgerät mit passender Kategorie</b> (CAT II für Geräte, CAT III für Installation) und unbeschädigte Leitungen.</li>
+<li><b>Trenntrafo,</b> wenn du mit dem <a href="#oszilloskop">Oszilloskop</a> an netzbetriebener Elektronik messen willst.</li>
+</ul></div>
+<div class="card"><h3>✗ Niemals</h3>
+<ul>
+<li><b>Allein arbeiten,</b> wenn du unerfahren bist — im Notfall kann dich niemand vom Stromkreis trennen.</li>
+<li><b>Bei Nässe, Schwitzen oder auf leitendem Boden</b> arbeiten (siehe Hautwiderstand unten).</li>
+<li><b>Oszi-Masseklemme an einen netzbetriebenen Punkt</b> — erzeugt einen Kurzschluss über den Schutzleiter.</li>
+<li><b>Schutzleiter abklemmen</b> oder eine Sicherung überbrücken, „damit es läuft".</li>
+<li><b>Improvisierte Isolierung</b> (Klebeband, Lüsterklemme offen liegend) irgendwo in Netznähe.</li>
+</ul></div>
+</div>
+
+<h3>Strom durch den Körper: was passiert ab wie viel?</h3>
+<p class="note">Faustwerte für Wechselstrom auf dem Weg Hand zu Hand. Individuell verschieden, also als Größenordnung verstehen.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Strom</th><th>Stufe</th><th>Wirkung auf den Körper</th></tr></thead>
+<tbody>
+<tr><td>ab ~0,5 mA</td><td><span class="lvl lvl-ok">Wahrnehmung</span></td><td>Gerade als Kribbeln spürbar (Normwert nach IEC 0,5 mA).</td></tr>
+<tr><td>5 bis 10 mA</td><td><span class="lvl lvl-warn">schmerzhaft</span></td><td>Deutlich unangenehm, Muskeln zucken.</td></tr>
+<tr><td>ca. 6 bis 16 mA</td><td><span class="lvl lvl-bad">Loslass-Grenze</span></td><td>Die Muskeln verkrampfen so, dass man den Leiter <b>nicht mehr loslassen kann</b> — bei empfindlicheren Personen (Frauen, Kinder) schon am unteren Ende. Besonders tückisch.</td></tr>
+<tr><td>ab ~30 mA</td><td><span class="lvl lvl-bad">Atemnot</span></td><td>Atemmuskeln verkrampfen. Genau hier schaltet ein FI-Schutzschalter ab.</td></tr>
+<tr><td>ab ~50 mA</td><td><span class="lvl lvl-crit">Herzgefahr</span></td><td>Herzkammerflimmern wird wahrscheinlich, das ist lebensbedrohlich.</td></tr>
+<tr><td>über ~100 mA</td><td><span class="lvl lvl-crit">tödlich</span></td><td>Durchs Herz fast sicher tödlich. Dazu schwere Verbrennungen.</td></tr>
+</tbody>
+</table></div>
+<p class="note">Wechselspannung (50 Hz) ist bei gleichem Wert gefährlicher als Gleichspannung, weil sie das Herz leichter aus dem Takt bringt.</p>
+
+<h3>Warum nasse Haut alles verändert</h3>
+<div class="card">
+<p>Dein Körper bremst den Strom über seinen <b>Widerstand</b>. Der hängt fast nur von der Haut ab:</p>
+<ul>
+<li><b>Trockene Haut:</b> sehr hoher Widerstand (grob 50 bis 100 kΩ). Bei 50 V fließt daher nur etwa 0,5 bis 1 mA, kaum spürbar.</li>
+<li><b>Nasse oder schwitzige Haut:</b> der Widerstand bricht auf wenige tausend Ω ein. Dieselben 50 V treiben dann plötzlich ein Vielfaches an Strom durch dich, bis in den gefährlichen Bereich.</li>
+</ul>
+<p style="margin-bottom:0">Darum: <b>nie mit feuchten Händen, nie im Nassen, nie schwitzend an höhere Spannungen.</b> Dieselbe Spannung, die trocken harmlos ist, kann nass gefährlich werden.</p>
+</div>
+
+<h2>Im Notfall</h2>
+<div class="card">
+<div class="rule"><span class="ico">🚫</span><div><b>Stromschlag:</b> die Person <b>nicht</b> berühren, solange sie noch unter Strom steht. Zuerst Strom abschalten (Stecker, Sicherung), dann Notruf, dann helfen.</div></div>
+<div class="rule"><span class="ico">💧</span><div><b>Elektrischer Brand:</b> kein Wasser auf Geräte unter Spannung. Erst Strom trennen. Geeignet sind CO2- oder Pulverlöscher.</div></div>
+<div class="rule"><span class="ico">🔋</span><div><b>Brennender Lithium-Akku:</b> lässt sich kaum löschen und kann wieder aufflammen. Wenn gefahrlos möglich, das Gerät nach draußen bringen, viel Wasser oder Sand, Abstand halten, Feuerwehr rufen.</div></div>
+<div class="rule"><span class="ico">📞</span><div><b>Im Zweifel Notruf 112.</b> Bei Stromschlag mit Bewusstlosigkeit, Herzproblemen oder Verbrennungen immer.</div></div>
+</div>

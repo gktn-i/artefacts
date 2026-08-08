@@ -104,7 +104,51 @@
                   "h": "praxis",
                   "t": "Praxis & Aufbau"
                 }
-              ]
+              ],
+              "groups": [
+                {
+                  "l": "Grundlagen",
+                  "sections": [
+                    "grundlagen",
+                    "schaltplan",
+                    "leistung",
+                    "rechner",
+                    "begriffe"
+                  ]
+                },
+                {
+                  "l": "Bauteile",
+                  "sections": [
+                    "komponenten",
+                    "displays",
+                    "motoren",
+                    "mcu"
+                  ]
+                },
+                {
+                  "l": "Messen & Werkzeug",
+                  "sections": [
+                    "messgeraet",
+                    "messen",
+                    "fehlersuche",
+                    "oszilloskop",
+                    "lcrp1",
+                    "netzteil"
+                  ]
+                },
+                {
+                  "l": "Sicherheit & Praxis",
+                  "sections": [
+                    "sicherheit",
+                    "praxis"
+                  ]
+                }
+              ],
+              "alias": {
+                "steckbrett": "praxis",
+                "regeln": "praxis",
+                "boarddiagnose": "fehlersuche"
+              }
             },
             {
               "id": "loeten",
@@ -187,7 +231,50 @@
               ],
               "related": [
                 "elektronik-101"
-              ]
+              ],
+              "groups": [
+                {
+                  "l": "Start",
+                  "sections": [
+                    "start"
+                  ]
+                },
+                {
+                  "l": "Werkzeug & Material",
+                  "sections": [
+                    "equipment",
+                    "mikroskop",
+                    "material",
+                    "draht",
+                    "finish"
+                  ]
+                },
+                {
+                  "l": "Techniken",
+                  "sections": [
+                    "tht",
+                    "smd",
+                    "heissluft",
+                    "reballing",
+                    "temp"
+                  ]
+                },
+                {
+                  "l": "Bauteile & Qualität",
+                  "sections": [
+                    "bauteile",
+                    "soc",
+                    "fehler",
+                    "sicherheit"
+                  ]
+                }
+              ],
+              "alias": {
+                "heizplatte": "heissluft",
+                "regeln": "fehler",
+                "methoden": "start",
+                "workflow": "start"
+              }
             },
             {
               "id": "robotik",

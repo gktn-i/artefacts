@@ -1,0 +1,99 @@
+<h2>Verbrauchsmaterial</h2>
+<p>Zur schnellen Orientierung — was du für welche Methode brauchst. Details zu jedem Punkt stehen darunter.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Methode</th><th>Lot / Material</th><th>Flussmittel</th></tr></thead>
+<tbody>
+<tr><td><span class="b b-kolben">Lötkolben</span> THT</td><td>Lotdraht 0,8–1,0 mm (mit Flussmittelseele)</td><td>meist keins extra nötig</td></tr>
+<tr><td><span class="b b-kolben">Lötkolben</span> SMD-Chips</td><td>Lotdraht 0,5–0,8 mm</td><td>Tacky-Flux hilft sehr</td></tr>
+<tr><td><span class="b b-kolben">Lötkolben</span> ICs (Drag)</td><td>wenig Lotdraht an der Spitze</td><td>Flux-Pen + reichlich Tacky-Flux</td></tr>
+<tr><td><span class="b b-luft">Heißluft</span> Rework</td><td>Lötpaste oder verzinnte Pads</td><td>Tacky-Flux / Gel</td></tr>
+<tr><td><span class="b b-platte">Reflow</span> Heizplatte/Ofen</td><td>Lötpaste (per Schablone oder Spritze)</td><td>steckt schon in der Paste</td></tr>
+<tr><td><span class="b b-warn">Entlöten</span></td><td>Entlötlitze, -pumpe, Low-Melt-Legierung</td><td>Flux-Pen / Gel</td></tr>
+</tbody>
+</table></div>
+
+<h2>Lötzinn (Lot)</h2>
+<p>Zwei Welten: Bleihaltig lötet sich leichter und bei niedrigerer Temperatur, bleifrei ist RoHS-konform und Pflicht für alles, das in den Verkauf geht. Die gängigen Draht-Legierungen:</p>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Legierung</th><th>Blei?</th><th>Schmelzpunkt</th><th>Eigenschaften &amp; wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Sn63Pb37</b> (eutektisch)</td><td><span class="b b-warn">Blei</span></td><td>183 °C (scharf)</td><td>verzeiht am meisten, erstarrt schlagartig — der <b>Hobby-Liebling</b> zum Üben</td></tr>
+<tr><td><b>Sn60Pb40</b></td><td><span class="b b-warn">Blei</span></td><td>183–190 °C</td><td>fast gleichwertig, kleiner „Teig"-Bereich statt scharfem Punkt</td></tr>
+<tr><td><b>SAC305</b> (Sn96,5Ag3Cu0,5)</td><td><span class="b b-ok">frei</span></td><td>217–220 °C</td><td>der bleifreie <b>Standard</b>, silberhaltig, benetzt gut; braucht heißere Spitze, wird satiniert-matt (normal)</td></tr>
+<tr><td><b>Sn99,3Cu0,7</b> (SnCu)</td><td><span class="b b-ok">frei</span></td><td>227 °C</td><td>das <b>günstigste bleifrei</b> (ohne Silber), fließt etwas zäher — gängig für Consumer/Klempner-nahe Ware</td></tr>
+<tr><td><b>Sn96,5Ag3,5</b> (SnAg)</td><td><span class="b b-ok">frei</span></td><td>221 °C</td><td>silberhaltig, mechanisch fest — eher industriell</td></tr>
+<tr><td><b>Sn42Bi58</b> (SnBi, Low-Temp)</td><td><span class="b b-ok">frei</span></td><td>138 °C</td><td>sehr niedrige Temperatur, schonend — aber <b>spröde</b>, nicht mit bleihaltigem Lot mischen (meist als Paste, selten als Draht)</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Immer Draht mit Flussmittelseele</b> (Flussmittel im Kern) — niemals Sanitär- oder Stangenlot für Elektronik. Fürs Hobby ist <b>Sn63Pb37</b> am gutmütigsten; wenn bleifrei, dann <b>SAC305</b> (löten) oder <b>Sn99,3Cu0,7</b> (günstig).</div>
+
+<h4>Welcher Durchmesser wofür?</h4>
+<p>Der Durchmesser bestimmt, wie fein du dosieren kannst. Dünner = präziser, aber du musst mehr nachschieben; dicker = schneller viel Lot, aber gröber. Ein dünner Draht ist der bessere Allrounder — für dicke Stellen schiebst du einfach mehr nach.</p>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Durchmesser</th><th>Am besten für</th></tr></thead>
+<tbody>
+<tr><td><b>0,3–0,4 mm</b></td><td>feines SMD (0402/0603), IC-Pins, Drag-Soldering — sehr genaue Dosierung</td></tr>
+<tr><td><b>0,5–0,6 mm</b></td><td>SMD-Chips, kleine THT-Bauteile, die meisten Feinarbeiten</td></tr>
+<tr><td><b>0,7–0,8 mm</b></td><td><span class="b b-ok">Allrounder</span> — deckt vom SMD bis zum normalen THT fast alles ab; wenn du nur eine Rolle kaufst, diese</td></tr>
+<tr><td><b>1,0–1,5 mm</b></td><td>große THT-Pads, Massflächen, dicke Kabel, Steckverbinder — viel Lot auf einmal</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Einsteiger:</b> Eine Rolle <b>0,7 oder 0,8 mm</b> reicht für den Anfang. Eine zweite dünne Rolle (<b>0,3–0,4 mm</b>) lohnt sich, sobald du feines SMD lötest.</div>
+
+<h2>Flussmittel (Flux)</h2>
+<p>Entfernt die Oxidschicht auf den Metallflächen und lässt das Lot fließen und benetzen. Die Flussmittelseele im Lotdraht reicht für einfaches THT — extra Flux ist der entscheidende Helfer bei SMD, Rework und beim Entlöten.</p>
+
+<h4>Die vier Typen</h4>
+<ul>
+<li><b>No-Clean:</b> minimaler, trockener Rückstand darf meist drauf bleiben. Der bequeme Standard fürs Hobby.</li>
+<li><b>RMA (Kolophonium, mild aktiviert):</b> klassisch, gute Aktivität, klebrige Rückstände mit IPA entfernen.</li>
+<li><b>Kolophonium / Rosin (fest):</b> günstiger Klassiker, Spitze oder Litze eintauchen. Rückstand mit IPA.</li>
+<li><b>Wasserlöslich (OA):</b> sehr aggressiv, muss zwingend gründlich abgewaschen werden — im Hobby eher meiden.</li>
+</ul>
+
+<h4>Konkrete Produkte und wofür</h4>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Produkt (Beispiele)</th><th>Typ</th><th>Form</th><th>Reinigen?</th><th>Am besten für</th></tr></thead>
+<tbody>
+<tr><td><b>Kester #951</b>, ChipQuik NC191</td><td>No-Clean, low-solids</td><td>Flux-Pen / Flasche (flüssig, dünn)</td><td>nein</td><td><span class="b b-kolben">Lötkolben</span> THT, Kabel und Pads verzinnen, alte Lötstellen auffrischen, Drag-Soldering und Pins über die Reihe benetzen</td></tr>
+<tr><td><b>ChipQuik SMD291</b>, <b>MG Chemicals 8341</b>, AMTECH NC-559</td><td>No-Clean (8341: ROL1)</td><td>Tacky-Gel / Paste (Spritze oder Dose)</td><td>nein (optional)</td><td><span class="b b-kolben">SMD</span> <span class="b b-luft">Heißluft</span> Chips, QFN/QFP, BGA-Reballing, Rework — zäh, hält Bauteile an Ort</td></tr>
+<tr><td><b>AMTECH RMA-223</b>, Kester 186</td><td>RMA (Kolophonium)</td><td>Gel/Paste (Spritze)</td><td>ja, mit IPA</td><td><span class="b b-luft">Rework</span> hartnäckige Oxidation, wenn du ohnehin reinigst</td></tr>
+<tr><td><b>„Nano-Flux"</b> (Mechanic, Relife, Amaoe u. ä.)</td><td>No-Clean, sehr niedrigviskos</td><td>Mini-Spritze mit feiner Nadel</td><td>nein (Rest ist minimal)</td><td><span class="b b-kolben">Micro</span> <span class="b b-luft">BGA</span> Arbeiten unterm Mikroskop: 0201/01005, feine BGA-Kugeln, Fädeldraht-Reparatur</td></tr>
+<tr><td>Kolophonium / Rosin</td><td>Kolophonium</td><td>fester Block</td><td>ja, mit IPA</td><td><span class="b b-kolben">Lötkolben</span> günstiger Klassiker, Spitze/Entlötlitze eintauchen</td></tr>
+</tbody>
+</table></div>
+
+<div class="note"><b>MG Chemicals 8341 im Detail:</b> Ein <b>klebriges No-Clean-Flussmittel in Pastenform</b> (Spritze 10 ml oder Dose 50 ml) auf Basis von Kolophonium plus synthetischem Harz — nach <b>J-STD-004B als ROL1</b> eingestuft (Rosin, geringe Aktivität, halogenfrei) und RoHS-konform. Für bleifreie Legierungen entwickelt, funktioniert aber genauso mit bleihaltigem Lot. Die Rückstände sind nicht leitend und nicht klebrig und dürfen drauf bleiben. Einordnung: Es ist ein <b>Tacky-Flux</b> wie ChipQuik SMD291 — also zum Halten und Platzieren von SMD, für Heißluft-Rework und BGA-Arbeit, <b>nicht</b> der dünnflüssige Pen-Ersatz für THT. Praktischer Vorteil gegenüber den viel gefälschten AMTECH-Spritzen: MG Chemicals ist ein regulärer Markenhersteller mit Datenblatt und Sicherheitsdatenblatt, im Fachhandel echt zu bekommen. Der Schwesterartikel <b>MG Chemicals 8342</b> ist dagegen ein <b>RA-Kolophoniumflux</b> — aktiver, aber die Rückstände <b>müssen</b> mit IPA runter.</div>
+<h4>Was „Nano-Flux" bedeutet</h4>
+<p>Kein Markenname und keine eigene Chemie, sondern eine <b>Produktklasse</b> aus der Handy-/Micro-Reparatur: ein No-Clean-Gel, das bewusst <b>sehr dünn</b> eingestellt ist und in einer kleinen Spritze mit Kanüle kommt.</p>
+<div class="grid">
+<div class="card"><div class="ct">✓ Stärken</div><div class="cd">Kriecht durch Kapillarwirkung unter QFN-Böden und zwischen BGA-Kugeln, wo zähes Gel nicht hinkommt. Sehr wenig Rückstand — auf Boards, die man nicht waschen kann, ein echter Vorteil. Punktgenau dosierbar, verdeckt unterm Mikroskop nichts.</div></div>
+<div class="card"><div class="ct">✗ Grenzen</div><div class="cd">Zu dünn zum <b>Halten</b> von Bauteilen — beim Platzieren und bei Heißluft schwimmt das Teil weg. Dafür weiter Tacky-Gel nehmen. Und die Aktivität ist niedrig: gegen starke Oxidation oder alte, graue Lötstellen kommt es nicht an, da ist RMA die bessere Wahl.</div></div>
+<div class="card"><div class="ct">⚠ Beim Kauf</div><div class="cd">Die Kategorie ist voll von Kopien mit wechselnder Qualität. Kaufkriterien: Herstellungs-/Haltbarkeitsdatum aufgedruckt, Sicherheitsdatenblatt verfügbar, Spritze dicht verschlossen. Im Zweifel bei einem Markenprodukt bleiben — schlechtes Flux hinterlässt korrosive Rückstände, die Monate später als Grünspan zurückkommen.</div></div>
+</div>
+<div class="tip"><b>Die drei Flux-Konsistenzen im Überblick:</b> <b>flüssig</b> (Pen/Flasche) für THT, Kabel und Drag-Soldering · <b>Tacky-Gel</b> zum Platzieren und Festhalten von SMD · <b>Nano/dünnes Gel</b> für alles unter dem Mikroskop, wo es hineinkriechen soll. Wer alle drei hat, deckt jede Arbeit ab.</div>
+
+<div class="tip"><b>Einsteiger-Set:</b> Ein <b>flüssiges No-Clean-Flux</b> (Pen/Flasche, z. B. Kester 951 oder ChipQuik NC191) für THT, Kabel und Drag plus eine <b>No-Clean-Tacky-Flux-Spritze</b> (z. B. ChipQuik SMD291) fürs Platzieren und Rework von SMD deckt rund 95 % aller Arbeiten ab.</div>
+<div class="warn"><b>Vorsicht Fälschungen:</b> AMTECH NC-559 und RMA-223 werden auf Online-Marktplätzen massenhaft gefälscht — nachgemachte Spritzen wirken oft schlechter oder hinterlassen korrosive Rückstände. Für verlässliche Qualität ChipQuik oder MG Chemicals beim seriösen Händler kaufen. Und: <b>niemals Klempner-Lötwasser oder Lötfett</b> (säurehaltig) auf Elektronik.</div>
+
+<h2>Lötpaste (Solder Paste)</h2>
+<p>Gemisch aus winzigen Lotkügelchen und Flussmittel. Nur für Reflow per Heizplatte, Heißluft oder Ofen.</p>
+<ul>
+<li><b>Korngröße:</b> T3 oder T4 fürs Hobby, T4/T5 für sehr feinen Pitch.</li>
+<li><b>Auftrag:</b> per Schablone (Stencil) oder dünn mit der Spritze auf die Pads.</li>
+<li><b>Lagerung:</b> kühl (Kühlschrank), vor Gebrauch auf Raumtemperatur bringen, begrenzte Haltbarkeit.</li>
+</ul>
+
+<h4>Konkrete Pasten und wann</h4>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Legierung (Typ)</th><th>Schmelzpunkt</th><th>Beispielprodukte</th><th>Am besten für</th></tr></thead>
+<tbody>
+<tr><td><b>Sn63Pb37</b> (bleihaltig)</td><td>183 °C</td><td>Chip Quik SMD291, Mechanic XG-Z40</td><td>einfachster Einstieg, verzeiht am meisten, niedrigste Temperatur der Standard-Pasten</td></tr>
+<tr><td><b>SAC305</b> (bleifrei)</td><td>217–220 °C</td><td>Chip Quik SAC305, Kester EP256, MG Chemicals 4902P</td><td>RoHS / alles zum Verkauf, braucht ein heißeres Profil</td></tr>
+<tr><td><b>Sn42Bi57Ag1</b> (bleifrei, Low-Temp)</td><td>~138 °C</td><td>Chip Quik SMDLTLFP („Smooth Flow")</td><td>schonend für empfindliche Bauteile, ideal für Hobby-Heißluft und Heizplatte — niedrigste Temperatur</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Einsteiger-Tipp:</b> <b>Sn63Pb37</b> ist zum Üben am gutmütigsten. Wer bleifrei will oder empfindliche Teile schont, nimmt die <b>Low-Temp-Paste (Sn42Bi57Ag1, ~138 °C)</b> — deutlich niedrigere Reflow-Temperatur. Korngröße <b>T4</b> deckt fast alles ab. Seriöse Marken: Chip Quik, Kester, MG Chemicals; günstige China-Pasten (Mechanic, Relife) gehen, schwanken aber in Qualität.</div>
+<div class="warn"><b>Low-Temp-Paste (SnBi) beachten:</b> Bismut-Lot ist <b>spröder</b> — nicht für mechanisch belastete Stellen (Steckverbinder, Kabel). Und <b>nie mit bleihaltigem Lot mischen</b>: Sn-Pb-Bi bildet eine sehr niedrig schmelzende, spröde Phase, die Lötstellen unzuverlässig macht.</div>
+
+<div class="note">Draht, Entlötlitze und die Nacharbeit stehen in den Tabs <a class="goto" href="#draht">Draht &amp; Litze</a> und <a class="goto" href="#finish">Reinigen &amp; Schützen</a>.</div>
