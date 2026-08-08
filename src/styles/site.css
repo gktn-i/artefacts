@@ -1165,3 +1165,41 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   .gloss-item { grid-template-columns: 1fr; gap: 3px; }
   .ref-row { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* Gruppenlabels + Überschriften-Subnav in der Modul-Sidebar */
+.msd-gl {
+  font-family: var(--display);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+  margin: 13px 10px 4px;
+}
+.msd-nav > .msd-gl:first-child { margin-top: 3px; }
+.msd-sub {
+  margin: 3px 0 8px 13px;
+  padding-left: 9px;
+  border-left: 2px solid var(--border-strong);
+}
+.msd-sub a {
+  display: block;
+  padding: 3.5px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted);
+  text-decoration: none;
+}
+.msd-sub a:hover { background: var(--surface-2); color: var(--text); }
+.msd-sub a.on {
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+  color: var(--c);
+  font-weight: 600;
+}
+.msd-sub a.lv3 { padding-left: 18px; }
+.msd-sub a.lv4 { padding-left: 28px; }
+.mcontent [id] { scroll-margin-top: calc(var(--hbx-h, 44px) + 14px); }
+@media (max-width: 900px) {
+  .mcontent [id] { scroll-margin-top: calc(var(--hbx-h, 44px) + 62px); }
+}

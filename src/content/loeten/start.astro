@@ -1,0 +1,92 @@
+---
+import "./_style.css";
+---
+<h2>Die drei Methoden im Überblick</h2>
+<p>Welches Werkzeug du nimmst, hängt vor allem vom Bauteil ab. Faustregel: Lötkolben für alles mit zugänglichen Pins, Heißluft für Bauteile mit Pads unter dem Gehäuse oder zum Entlöten, Heizplatte, wenn viele SMD-Teile auf einmal auf eine Platine sollen.</p>
+
+<div class="grid">
+<div class="card">
+<div class="ct"><span class="b b-kolben">Lötkolben</span></div>
+<div class="cd">Die Allzweckwaffe. Punktgenaue Hitze über eine Spitze.</div>
+<ul>
+<li><b>Stark bei:</b> THT (bedrahtete Teile), Chip-SMD ab 0603, ICs mit sichtbaren Pins (SOIC, QFP), Kabel, Reparaturen</li>
+<li><b>Schwach bei:</b> Bauteilen mit Pads nur unter dem Gehäuse (QFN, BGA)</li>
+<li><b>Pflicht:</b> temperaturgeregelte Station — keine ungeregelten Baumarkt-Heizstäbe</li>
+</ul>
+</div>
+<div class="card">
+<div class="ct"><span class="b b-luft">Heißluft</span></div>
+<div class="cd">Heißer Luftstrom erwärmt das ganze Bauteil gleichmäßig.</div>
+<ul>
+<li><b>Stark bei:</b> QFN, QFP, kleinen Chips, Entlöten von Multipin-Bauteilen, Nacharbeit</li>
+<li><b>Schwach bei:</b> großen Masseflächen, einzelnen dicken Kabeln</li>
+<li><b>Achtung:</b> Nachbarbauteile mit Kapton schützen, Luftstrom niedrig halten</li>
+</ul>
+</div>
+<div class="card">
+<div class="ct"><span class="b b-platte">Heizplatte</span></div>
+<div class="cd">Erwärmt die ganze Platine von unten. Reflow im Kleinen.</div>
+<ul>
+<li><b>Stark bei:</b> kompletter einseitiger SMD-Bestückung mit Lötpaste, Self-Alignment, Kleinserien</li>
+<li><b>Schwach bei:</b> doppelseitigen Platinen, einzelnen Korrekturen</li>
+<li><b>Bonus:</b> als Vorwärmer für Heißluft und BGA</li>
+</ul>
+</div>
+</div>
+
+<div class="note"><b>Realistisches Einsteiger-Setup:</b> Eine gute Lötstation deckt 90 Prozent ab. Heißluft kommt dazu, sobald du QFN oder feine ICs verbaust. Eine Heizplatte lohnt erst, wenn du eigene SMD-Platinen in kleinen Stückzahlen bestückst.</div>
+<h2>Workflow am Lötkolben</h2>
+<p>Der Ablauf einer Session in Kurzform, plus Spickzettel für die häufigsten Aufgaben. Die ausführlichen Anleitungen stehen in den Tabs <a class="goto" href="#tht">THT löten</a>, <a class="goto" href="#smd">SMD löten</a> und <a class="goto" href="#fehler">Fehler</a>.</p>
+
+<h3>Jede Session</h3>
+<div class="steps">
+<div class="step"><b>Temperatur einstellen und aufheizen.</b> Bleihaltig 300–330 °C, bleifrei 330–370 °C (Details im Tab <a class="goto" href="#temp">Temperaturen</a>). Warten, bis die Anzeige die Zieltemperatur hält.</div>
+<div class="step"><b>Spitze putzen und verzinnen.</b> Spitze in der Messingwolle abstreifen. Etwas Lotdraht direkt an die Spitze halten, bis er schmilzt und sie überzieht, nochmal kurz abstreifen. Die Spitze muss jetzt silbrig glänzen — wenn nicht: wiederholen oder Tip Tinner.</div>
+<div class="step"><b>Arbeitsplatz richten.</b> Platine in die dritte Hand klemmen. Lot, Flussmittel, Pinzette und Entlötlitze in Griffweite. Kolben zwischen den Stellen immer in den Halter, nie auf den Tisch.</div>
+<div class="step"><b>Löten.</b> Ablauf je nach Bauteil — Tab <a class="goto" href="#tht">THT</a> oder <a class="goto" href="#smd">SMD</a>. Grundmuster immer gleich: Spitze anlegen → warten → Lot zugeben → Lot weg → Spitze weg.</div>
+<div class="step"><b>Prüfen.</b> Jede Stelle ansehen (konkave Kehle? benetzt?), bei Zweifeln mit dem Multimeter Durchgang messen — Strom erst danach.</div>
+<div class="step"><b>Aufräumen.</b> Flussmittelreste mit IPA und Wattestäbchen entfernen. Spitze abstreifen, dick mit frischem Lot überziehen (Schutzschicht), dann erst ausschalten.</div>
+</div>
+
+<h3>Spickzettel</h3>
+<div class="grid">
+<div class="card">
+<div class="ct"><span class="b b-kolben">THT</span> Lötstelle</div>
+<ul>
+<li>Spitze an Pad <b>und</b> Beinchen, ca. 2 Sekunden</li>
+<li>Lot zugeben, bis sich eine konkave Kehle bildet</li>
+<li>Erst Lot weg, dann Spitze — Bein kürzen</li>
+</ul>
+<a class="goto" href="#tht">Vollständige Anleitung →</a>
+</div>
+<div class="card">
+<div class="ct"><span class="b b-all">SMD</span> Chip (0603–1206)</div>
+<ul>
+<li>Ein Pad verzinnen, Flussmittel auf beide</li>
+<li>Bauteil mit Pinzette ins schmelzende Lot schieben</li>
+<li>Spitze weg → erst dann Pinzette loslassen</li>
+<li>Sitz prüfen, zweite Seite löten, erste nachlöten</li>
+</ul>
+<a class="goto" href="#smd">Vollständige Anleitung →</a>
+</div>
+<div class="card">
+<div class="ct"><span class="b b-all">SMD</span> IC mit Pins (Drag)</div>
+<ul>
+<li>Eckpin tacken, ausrichten, Gegenecke löten</li>
+<li>Reichlich Flussmittel, mit wenig Lot über die Reihe ziehen</li>
+<li>Brücken mit Entlötlitze abziehen</li>
+</ul>
+<a class="goto" href="#smd">Vollständige Anleitung →</a>
+</div>
+<div class="card">
+<div class="ct"><span class="b b-warn">Entlöten</span> ohne Heißluft</div>
+<ul>
+<li>THT: Lot schmelzen, mit Pumpe absaugen oder Litze</li>
+<li>SMD-Chip: beide Pads abwechselnd heizen, wegkippen</li>
+<li>Litze: auflegen, Spitze drauf, Lot saugt ein</li>
+</ul>
+<a class="goto" href="#heissluft">Entlöten mit Heißluft →</a>
+</div>
+</div>
+
+<div class="tip"><b>Schnellhilfe:</b> Lot fließt nicht? Spitze säubern und frisch verzinnen, Flussmittel dazu, notfalls 10–20 °C höher. Brücke? Flussmittel drauf, Überschuss mit Entlötlitze abziehen. Kugelig und schlecht benetzt? Kalte Stelle — frisches Flussmittel dazu und neu aufschmelzen.</div>

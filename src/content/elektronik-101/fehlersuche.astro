@@ -1,0 +1,345 @@
+<div class="kurz"><div><b>Alles zur Fehlersuche an einer Baugruppe an einem Ort.</b> Erst die Sollwerte auf der bestückten Platine, dann die Reihenfolge, in der man sich durchmisst, dann die einzelnen Handgriffe — und zum Schluss, warum ein Vergleichswert mehr wert ist als jede Tabelle.</div></div>
+
+
+<p>Alle Diodenmodus- und Widerstandsmessungen gelten <b>stromlos</b>: Akku ab, Netzteil ab, Elkos entladen. Schwarze Prüfspitze bei Messungen gegen Masse immer auf GND, mit der roten wird angetastet.</p>
+
+<h2>Richtwerte im eingebauten Zustand</h2>
+<p>Werte für Bauteile, die <b>eingelötet</b> sind — deshalb weichen sie teils von den Einzelbauteil-Werten in der <a href="#messen">Referenztabelle im Tab Messen &amp; Werte</a> ab. Der Diodenmodus ist hier der Standardmodus, weil er noch unterscheidet, wo der Ω-Modus längst 0 anzeigt.</p>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Bauteil</th><th>Messmodus</th><th>Typischer Wert</th><th>Verdächtiger Wert</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Halbleiterübergänge</td></tr>
+<tr><td>PN-Diode Silizium (1N4148, 1N400x)</td><td>Diode, Durchlass</td><td>0,55–0,75 V</td><td>&lt; 0,3 V · 0,000 V · OL</td><td>0,000 V = durchlegiert · OL in beide Richtungen = unterbrochen</td></tr>
+<tr><td>PN-Diode Silizium</td><td>Diode, Sperrichtung</td><td>OL</td><td>jeder endliche Wert</td><td>Auf dem Board verhindern Parallelpfade oft das OL — im Zweifel einseitig auslöten</td></tr>
+<tr><td>BJT Basis–Emitter / Basis–Kollektor</td><td>Diode</td><td>0,55–0,75 V</td><td>&lt; 0,4 V · OL</td><td>NPN: Rot an Basis. PNP: Schwarz an Basis</td></tr>
+<tr><td>BJT Kollektor–Emitter</td><td>Diode</td><td>OL in beide Richtungen</td><td>jeder endliche Wert</td><td>Ein Wert in beide Richtungen = durchlegiert</td></tr>
+<tr><td>Z-Diode</td><td>Diode, Durchlass</td><td>0,55–0,75 V</td><td>0,000 V</td><td>Die Z-Spannung misst kein Multimeter — dafür <a href="#netzteil">Labornetzteil</a> mit Strombegrenzung und Vorwiderstand</td></tr>
+<tr><td>Germanium-Diode</td><td>Diode, Durchlass</td><td>0,2–0,4 V</td><td>0,000 V</td><td>Nur in Altgeräten — nicht mit einer Schottky verwechseln</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Schottky-Dioden</td></tr>
+<tr><td>Schottky, Durchlass</td><td>Diode</td><td>0,15–0,45 V</td><td>0,000 V · OL</td><td>Der niedrige Wert ist <b>normal</b> und kein Teilkurzschluss</td></tr>
+<tr><td>Schottky, Sperrichtung</td><td>Diode</td><td>OL, oft aber ein hoher Restwert</td><td>0,000 V</td><td>Schottky hat prinzipbedingt mehr Sperrstrom — „nicht ganz OL" ist hier kein Defekt</td></tr>
+<tr><td>Schottky als Verpolschutz / ORing in der Versorgung</td><td>Diode</td><td>0,2–0,4 V</td><td>0,000 V</td><td>Durchlegierte Verpolschutzdiode ist eine der häufigsten Ursachen für eine kurzgeschlossene Eingangsrail</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">MOSFET (N-Kanal, Anreicherungstyp)</td></tr>
+<tr><td>Body-Diode: <b>Rot an S</b>, Schwarz an D</td><td>Diode</td><td>0,4–0,7 V</td><td>0,000 V · OL</td><td>Vor jeder Messung Gate gegen Source kurzschließen (Gate entladen)</td></tr>
+<tr><td><b>Rot an D</b>, Schwarz an S</td><td>Diode</td><td>OL</td><td>0,000 V · &lt; 0,1 V</td><td>Ein Wert in <b>beide</b> Richtungen = durchlegiert. Das mit Abstand häufigste FET-Ausfallbild</td></tr>
+<tr><td>Gate gegen Source und Gate gegen Drain</td><td>Diode oder Ω</td><td>OL</td><td>jeder Wert unter ~1 MΩ</td><td>Gate-Durchschlag. Vorher entladen, sonst misst man nur die gespeicherte Gate-Ladung</td></tr>
+<tr><td>Schalttest: Gate kurz mit <b>Rot</b> antippen</td><td>Diode</td><td>D–S wird danach niederohmig</td><td>keine Änderung</td><td>Beweist, dass der FET überhaupt schaltet. Danach Gate wieder gegen Source entladen</td></tr>
+<tr><td>P-Kanal-MOSFET</td><td>Diode</td><td>wie oben, <b>alle Polaritäten vertauscht</b></td><td>—</td><td>Die Body-Diode zeigt hier von Drain nach Source</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Sicherungen</td></tr>
+<tr><td>Schmelzsicherung / SMD-Sicherung</td><td>Ω</td><td>0,00–0,5 Ω</td><td>OL</td><td>Bei Parallelpfaden einseitig auslöten</td></tr>
+<tr><td>Schmelzsicherung, in-circuit</td><td>Diode</td><td>0,000–0,005 V</td><td>jeder Wert &gt; 0,05 V</td><td>Schneller als Ω, weil die Auflösung im mV-Bereich liegt</td></tr>
+<tr><td>Rückstellbare Sicherung (PTC / Polyfuse)</td><td>Ω</td><td>0,05–2 Ω kalt</td><td>OL · &gt; 10 Ω</td><td>Ein ausgelöster PTC ist hochohmig und wird erst nach dem Abkühlen wieder normal — nicht vorschnell als defekt einstufen</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Spulen und Ferrite</td></tr>
+<tr><td>Ferritperle (Bead)</td><td>Ω</td><td>0,00–1 Ω</td><td>OL</td><td>Typisches Ausfallbild: unterbrochen nach Überstrom. Der Ω-Wert sagt <b>nichts</b> über die HF-Wirkung aus</td></tr>
+<tr><td>Speicherdrossel eines Schaltwandlers</td><td>Ω</td><td>0,00–0,10 Ω, meist unter der Auflösung</td><td>OL</td><td>Von einem Kurzschluss praktisch nicht zu unterscheiden — REL/Zero gegen den Leitungswiderstand nutzen</td></tr>
+<tr><td>Trafo-, Relais-, Motorwicklung</td><td>Ω</td><td>einige Ω bis einige kΩ</td><td>OL · deutlich unter der Vergleichswicklung</td><td><b>Windungsschluss zeigt der Ω-Modus nicht</b> — dafür identische Wicklung vergleichen oder <a href="#lcrp1">LCR-Messgerät</a></td></tr>
+<tr><td>Spule oder Ferrit allgemein</td><td>Diode</td><td>0,000–0,020 V</td><td>&gt; 0,05 V</td><td>Verhält sich im Diodenmodus wie ein Stück Draht</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Elkos</td></tr>
+<tr><td>Elko, ausgelötet</td><td>Kapazität</td><td>Nennwert <b>±20 %</b></td><td>mehr als −20 % · stark schwankend</td><td>Vorher entladen, sonst Fehlanzeige oder Schaden am Messgerät</td></tr>
+<tr><td>Elko, in-circuit</td><td>Kapazität</td><td>Summe aller parallelen Kondensatoren</td><td>—</td><td>Misst nie ein Einzelbauteil — nur als Vergleich zwischen zwei Boards brauchbar</td></tr>
+<tr><td>Elko</td><td>Ω</td><td>Wert steigt sichtbar an, dann OL</td><td>konstant niederohmig</td><td>Der Ladetest. Bleibt der Wert klein: defekt oder niederohmig überbrückt</td></tr>
+<tr><td>Elko</td><td>Diode</td><td>Anzeige läuft von 0 hoch</td><td>0,000 V konstant</td><td>Gleiches Prinzip, feinere Auflösung</td></tr>
+<tr><td><b>ESR</b> eines Elkos</td><td>—</td><td>mit dem Multimeter <b>nicht messbar</b></td><td>—</td><td>Ein alter Elko kann die volle Nennkapazität und trotzdem viel zu hohen ESR haben — dafür <a href="#lcrp1">LCR-P1</a> oder ESR-Meter</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Keramikkondensatoren (MLCC)</td></tr>
+<tr><td>MLCC, ausgelötet</td><td>Kapazität</td><td>Nennwert ±10–20 %</td><td>0 · weit daneben</td><td>Werte unter etwa 1 nF liegen unter der Auflösung vieler Multimeter</td></tr>
+<tr><td>MLCC</td><td>Diode / Ω</td><td>OL</td><td>0,000 V · wenige Ω</td><td>Ein gerissener MLCC ist ein satter Kurzschluss. Nach Sturz oder verbogenem Board der häufigste Rail-Killer</td></tr>
+<tr><td>MLCC, in-circuit</td><td>Kapazität</td><td>Summe der Rail-Kapazität</td><td>—</td><td>Nur im Vergleich mit einem zweiten Board aussagekräftig</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">Spannungsrails gegen Masse (Schwarz an GND)</td></tr>
+<tr><td>Logik-Rail 5 V / 3,3 V / 1,8 V</td><td>Diode</td><td>0,3–0,6 V</td><td>0,000–0,010 V</td><td>Der Standardtest auf Rail-Kurzschluss</td></tr>
+<tr><td>Core- / GPU- / SoC-Rail (&lt; 1,2 V)</td><td>Diode</td><td>0,05–0,30 V</td><td>0,000–0,005 V</td><td>Von Haus aus niedrig, weil viele Kondensatoren und Halbleiter parallel hängen — <b>nicht</b> mit einem Kurzschluss verwechseln</td></tr>
+<tr><td>Eingangs- / Akkurail</td><td>Diode</td><td>0,3–0,7 V</td><td>0,000 V</td><td>0,000 V heißt hier fast immer: Verpolschutz, Eingangs-FET oder ein MLCC ist durch</td></tr>
+<tr><td>Logik-Rail 5 V / 3,3 V, im Ω-Modus</td><td>Ω</td><td>~100 Ω bis mehrere kΩ</td><td>unter ~5 Ω</td><td>Die Schwelle hängt von der Rail ab — ausführliche Tabelle und die Milliohm-Methode zum Einkreisen stehen weiter unten unter <b>Fehler finden</b></td></tr>
+<tr><td>Core-Rail 0,9–1,2 V, im Ω-Modus</td><td>Ω</td><td>oft nur 1–20 Ω</td><td>unter ~0,5 Ω</td><td>Viele Stützkondensatoren und geringer Innenwiderstand — niedrige Ω-Werte sind hier normal</td></tr>
+<tr><td>Motor- / Endstufen-Rail 12–48 V, im Ω-Modus</td><td>Ω</td><td>einige zehn Ω bis kΩ</td><td>unter ~2 Ω</td><td>Es gibt keine feste Grenze: 0,0 Ω in beide Richtungen ist immer ein Kurzschluss, alles dazwischen entscheidet der Vergleich</td></tr>
+<tr><td>beliebige Rail, im Betrieb</td><td>V⎓</td><td>Nennwert ±5 %</td><td>fehlt · zu niedrig · schwankt</td><td>Erst messen, wenn stromlos nichts Auffälliges gefunden wurde</td></tr>
+</tbody>
+</table></div>
+<div class="tip" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;margin:.7rem 0"><b>0,000 V im Diodenmodus</b> ist die einzige Anzeige, die für sich allein schon eine Aussage ist: dort liegt ein echter Kurzschluss. Alles andere in dieser Tabelle braucht einen Vergleichswert, um etwas zu bedeuten.</div>
+
+<h2>Messreihenfolge bei der Fehlersuche</h2>
+<p>Immer von der Quelle Richtung Verbraucher. Wer mitten im Board anfängt, misst Folgefehler und sucht am Ende ein Bauteil, das nur deshalb tot aussieht, weil ihm die Versorgung fehlt.</p>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th>#</th><th>Schritt</th><th>Modus</th><th>Erwartung</th><th>Wenn es abweicht</th></tr></thead>
+<tbody>
+<tr><td><b>1</b></td><td><b>Eingangsspannung</b> — am Stecker, hinter Sicherung und hinter dem Verpolschutz</td><td>stromlos Diode gegen GND, dann V⎓</td><td>Diodenwert 0,3–0,7 V · danach der Nennwert</td><td>0,000 V → zuerst diesen Kurzschluss suchen, bevor irgendetwas eingeschaltet wird. Gar keine Spannung → Netzteil, Kabel, Buchse, Sicherung</td></tr>
+<tr><td><b>2</b></td><td><b>Hauptrail</b> — Ausgang des ersten Wandlers, z. B. 5 V oder 3,3 V</td><td>V⎓</td><td>Nennwert ±5 %</td><td>Fehlt sie: Wandler-IC, Speicherdrossel, High- und Low-Side-FET sowie den Eingang des Wandlers prüfen</td></tr>
+<tr><td><b>3</b></td><td><b>Abgeleitete Rails</b> — 1,8 V, 1,2 V, Core, I/O, PLL, der Reihe nach</td><td>stromlos Diode gegen GND, dann V⎓</td><td>jeweils der Nennwert</td><td>Eine einzelne tote Rail → deren Wandler oder LDO. <b>Alle</b> tot → gemeinsames Enable, Sequencer oder die Hauptrail bricht unter Last ein</td></tr>
+<tr><td><b>4</b></td><td><b>Enable und Feedback</b> an jedem Wandler, der nicht anläuft</td><td>V⎓</td><td>EN auf High-Pegel der Steuerlogik · FB auf der Referenzspannung des ICs (oft 0,6–1,25 V, Datenblatt)</td><td>EN fehlt → die Ursache liegt <b>vor</b> dem Wandler (Sequencer, PMIC, Reset). FB daneben → Rückkoppelteiler, Lötstelle oder die Last</td></tr>
+<tr><td><b>5</b></td><td><b>Datensignale und Takt</b> — Reset, Quarz, I²C/SPI, Busleitungen</td><td>V⎓, <a href="#oszilloskop">Oszilloskop</a></td><td>Reset High · Takt vorhanden · I²C-Leitungen per Pull-up auf Rail-Niveau</td><td>Erst sinnvoll, wenn alle Rails stehen. Vorher misst man nur, dass nichts läuft</td></tr>
+</tbody>
+</table></div>
+<p class="note">Faustregel für die Reihenfolge innerhalb eines Schritts: erst stromlos im Diodenmodus gegen Masse (findet Kurzschlüsse gefahrlos), dann erst Spannung anlegen und im Betrieb messen.</p>
+
+<h2>Fehler finden: Kurzschluss, kaputtes Bauteil & Co.</h2>
+<p>Die Schnellübersicht: was du bei welchem Verdacht misst, <b>wo genau die zwei Spitzen hinkommen</b> und was die Anzeige bedeutet. Die genauen Handgriffe stehen als Schritt-Rezepte darunter.</p>
+<p class="note" style="margin-bottom:.7rem"><b>Grundregel zum Verständnis:</b> Die <b>schwarze</b> Spitze steckt in COM und ist der <b>Bezugspunkt</b> — die legst du an Masse (GND) und lässt sie dort. Mit der <b>roten</b> Spitze tastest du den Punkt an, den du prüfen willst. Bei „je eine Spitze" (Durchgang) ist die Reihenfolge egal.</p>
+
+<h3>Piepen oder nicht? Der Merksatz</h3>
+<p>Der Durchgangsprüfer piept, wenn zwei Punkte verbunden sind. Ob das <b>gut oder schlecht</b> ist, hängt allein davon ab, ob dort eine Verbindung <b>hingehört</b>:</p>
+<div class="grid2">
+<div class="card"><h3>✓ Piep <b>erwartet</b> — hier soll es piepen</h3>
+<ul>
+<li><b>Leitung / Kabel</b> von Ende zu Ende → kein Piep = Kabelbruch</li>
+<li><b>Sicherung</b> über beide Enden → kein Piep = durchgebrannt</li>
+<li><b>Taster gedrückt</b> → kein Piep = Taster defekt</li>
+<li><b>Lötstelle</b> Bauteilbein ↔ Leiterbahn → kein Piep = kalte Stelle</li>
+<li><b>GND-Punkt</b> gegen bekannte Masse → Piep = dieselbe Masse</li>
+</ul>
+<p class="note" style="margin-bottom:0">Hier ist <b>Stille das Alarmsignal.</b></p></div>
+<div class="card"><h3>✗ Piep <b>verdächtig</b> — hier darf es nicht piepen</h3>
+<ul>
+<li><b>Zwei benachbarte IC-Pins</b> → Piep = Lötbrücke</li>
+<li><b>VCC gegen GND</b> → Piep = Kurzschluss, <b>nicht einschalten</b></li>
+<li><b>Zwei getrennte Netze</b> → Piep = ungewollte Verbindung</li>
+</ul>
+<p class="note" style="margin-bottom:0">Hier ist <b>der Ton das Alarmsignal.</b> Ausnahme: Pins, die laut Schaltung ohnehin verbunden sind (z. B. mehrere GND-Pins) — im <a href="#schaltplan">Schaltplan</a> gegenprüfen.</p></div>
+</div>
+<div class="tip" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;margin:.7rem 0"><b>Immer zuerst:</b> beide Spitzen kurz zusammenhalten — es <b>muss</b> piepen. Damit weißt du, dass Gerät, Kabel und Modus stimmen, bevor du einem „kein Piep" glaubst.</div>
+<p class="note"><b>Aber: Piep heißt nur „niederohmig", nicht „gut".</b> Die meisten Geräte piepen schon bei ~30–50 Ω. Eine angerissene Leiterbahn mit 20 Ω piept fröhlich und taugt trotzdem nicht als Versorgungsleitung. Bei allem, was Strom tragen soll, deshalb den <b>Ω-Wert ablesen</b> statt nur auf den Ton zu hören — er muss unter ~0,5 Ω liegen. Die Schwelle deines Geräts findest du heraus, indem du einen 10-Ω- und einen 100-Ω-Widerstand anlegst.</p>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th>Verdacht</th><th>Modus</th><th>Board</th><th>Wo die zwei Spitzen hin</th><th>Anzeige</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Kurzschluss auf der Versorgung</b></td><td>Ω (klein)</td><td>aus</td><td><b>Schwarz</b> an GND, <b>Rot</b> an VCC / eine Rail</td><td><b>nahe 0 Ω</b></td><td>Kurzschluss (Kondensator/IC/Lötbrücke) → <b>nicht einschalten</b>, Ursache suchen</td></tr>
+<tr><td>Keine Versorgung an einer Rail</td><td>V⎓</td><td>an</td><td><b>Schwarz</b> an GND, <b>Rot</b> an den Rail-Testpunkt</td><td>0 V statt Soll (5/3,3 V)</td><td>Regler oder Zuleitung tot → rückwärts Richtung Regler suchen</td></tr>
+<tr><td>Kabelbruch / Unterbrechung</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze an die <b>zwei Enden</b> der Leitung</td><td><b>kein</b> Piep <span class="note" style="font-style:normal">(Piep wäre gut)</span></td><td>Leitung offen / unterbrochen</td></tr>
+<tr><td>Durchgebrannte Sicherung</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze an die <b>zwei Enden</b> der Sicherung</td><td><b>kein</b> Piep <span class="note" style="font-style:normal">(Piep wäre gut)</span></td><td>durch → warum? (meist Kurzschluss dahinter)</td></tr>
+<tr><td>Lötbrücke zwischen Pins</td><td>Durchgang )))</td><td>aus</td><td>je eine Spitze auf <b>zwei benachbarte Pins</b></td><td><b>Piep</b> <span class="note" style="font-style:normal">(hier darf keiner kommen)</span></td><td>ungewollte Verbindung → unter der Lupe entfernen</td></tr>
+<tr><td>Diode / LED kaputt</td><td>Diodentest ▷⊢</td><td>aus</td><td><b>Schwarz</b> an Kathode (Ring), <b>Rot</b> an Anode — dann Spitzen tauschen</td><td>beide 0 / beide OL</td><td>Kurzschluss bzw. unterbrochen (heil: einmal Wert, einmal OL)</td></tr>
+<tr><td>Bauteil allgemein defekt</td><td>Diodentest ▷⊢</td><td>aus</td><td><b>Schwarz</b> an GND, <b>Rot</b> nacheinander auf die Pins (mit gutem Board vergleichen)</td><td>stark abweichend</td><td>Verdächtiger (fast 0 = Kurzschluss im Bauteil)</td></tr>
+<tr><td>Spannung bricht kurz ein (Gerät startet neu)</td><td>V⎓ + <b>Min/Max</b></td><td>an</td><td><b>Schwarz</b> an GND, <b>Rot</b> an die Rail — liegen lassen und die Schaltung belasten</td><td><b>Min</b> deutlich unter Soll</td><td>Quelle, Regler oder Zuleitung schafft die Lastspitze nicht</td></tr>
+<tr><td>Ruhestrom zu hoch (Akku über Nacht leer)</td><td>A im <b>µA</b>-Bereich</td><td>an</td><td>Gerät <b>in Reihe</b> in die Versorgung, Schaltung schlafen legen</td><td>deutlich über Datenblattwert</td><td>Etwas schläft nicht mit: Pull-up, LED, Regler-Ruhestrom, offener Eingang</td></tr>
+<tr><td>Müder Elko (alt/aufgebläht)</td><td>ESR (<a href="#lcrp1">LCR-P1</a>)</td><td>ausgebaut</td><td>Bauteil in den LCR-P1 stecken</td><td>hoher ESR</td><td>ersetzen — Kapazität kann noch fast stimmen</td></tr>
+<tr><td>Heißer Hotspot</td><td>Finger / Wärmebild</td><td>Strom + Limit</td><td>keine Spitzen — Finger/Wärmebild übers Board</td><td>wird warm/heiß</td><td>genau dort sitzt das kurzschließende Bauteil</td></tr>
+</tbody>
+</table></div>
+<p class="note">Grundsatz: Ω, Durchgang und Diodentest <b>immer stromlos</b> · Spannung am <b>laufenden</b> Board.</p>
+
+<h3>Warum der Diodentest der bessere Fehlersucher ist</h3>
+<p>Ω-Modus und Diodentest schicken beide einen kleinen Strom durch das Bauteil — aber mit <b>unterschiedlicher Spannung</b>. Genau das macht den Unterschied:</p>
+<div class="grid2">
+<div class="card"><h3>Ω / Durchgang: bewusst schwach</h3>
+<p>Prüfspannung typisch <b>unter 1 V</b>. Das reicht nicht, um einen Halbleiter-Übergang (Diode, Transistor, IC-Schutzdiode) leitend zu machen — <b>Absicht</b>: so misst du wirklich nur Kupfer, Lötstelle und Widerstand, und kein Halbleiter fälscht das Ergebnis.</p>
+<p class="note" style="margin-bottom:0">Deshalb ist Ω der richtige Modus für <b>Kurzschluss-Suche</b>, Leitungen, Sicherungen und Lötbrücken.</p></div>
+<div class="card"><h3>Diodentest: stark genug</h3>
+<p>Leerlaufspannung typisch <b>2–3 V</b> bei rund <b>0,5–1 mA</b> Prüfstrom. Das <b>öffnet</b> Halbleiter-Übergänge, und das Gerät zeigt dir direkt die <b>Durchlassspannung in Volt</b> — eine echte Aussage über den Zustand des Bauteils.</p>
+<p class="note" style="margin-bottom:0">Deshalb ist Diode der richtige Modus für die <b>Bauteil-Beurteilung</b> und das Abtasten von IC-Pins.</p></div>
+</div>
+<div class="kurz"><div><b>Die Merkregel:</b> <b>Ω</b> beantwortet „ist da eine Verbindung, wo keine sein darf?" · <b>Diode</b> beantwortet „ist dieses Bauteil bzw. dieser Pin noch heil?". Im Ω-Modus sieht ein defekter Halbleiter oft aus wie ein gesunder — im Diodenmodus nicht.</div></div>
+
+<p style="margin:1rem 0 .4rem"><b>Die Praxis: Diodenwerte gegen Masse abtasten</b></p>
+<div class="card"><ol>
+<li>Board <b>stromlos</b>, Diodenmodus ▷⊢.</li>
+<li><b>Schwarze</b> Spitze fest an GND (Grabber), mit der <b>roten</b> nacheinander jeden Pin antippen.</li>
+<li>Werte notieren — die absolute Zahl ist zweitrangig, der <b>Vergleich</b> zählt: gegen ein baugleiches gutes Board, gegen die anderen Pins desselben ICs, oder gegen die andere Hälfte eines symmetrischen Schaltungsteils.</li>
+</ol>
+<p style="margin-bottom:0">Wichtig: Die Polung nicht vergessen — schwarz an GND ist bei den meisten ICs die Richtung, in der die internen Schutzdioden <b>leiten</b>. In der Gegenrichtung siehst du meist OL, das ist normal.</p></div>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Anzeige im Diodenmodus</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>0,30–0,70 V</b> an einem Signalpin gegen GND</td><td>Normalbereich — interne Schutzdiode leitet wie vorgesehen</td></tr>
+<tr><td><b>0,00–0,05 V</b> (praktisch null, oft mit Piep)</td><td><b>Kurzschluss</b> im Bauteil oder auf der Leiterbahn → der Hauptverdächtige</td></tr>
+<tr><td><b>OL</b> an einem Pin, der beim guten Board einen Wert zeigt</td><td>Unterbrechung: kalte Lötstelle, gerissene Leiterbahn, Pin nicht kontaktiert</td></tr>
+<tr><td>Wert <b>steigt langsam</b> und bleibt dann stehen</td><td>Normal — ein Kondensator lädt sich auf. Endwert nehmen.</td></tr>
+<tr><td>Beide Richtungen zeigen <b>denselben</b> Wert</td><td>Kein Halbleiter mehr im Spiel — durchlegiert oder ein reiner Widerstand parallel</td></tr>
+<tr><td>Werte <b>gleich</b> an mehreren Pins</td><td>Diese Pins hängen am selben Netz (z. B. mehrere GND- oder VCC-Pins) — im <a href="#schaltplan">Schaltplan</a> gegenprüfen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Grenze der Methode: Auf modernen Boards liegen viele Bauteile parallel. Der Diodentest sagt zuverlässig „hier stimmt etwas nicht", aber nicht immer „dieses eine Bauteil ist es". Für den Beweis das verdächtige Teil <b>einseitig auslöten</b> und noch einmal messen.</p>
+
+<h3>Das richtige Werkzeug (SMD)</h3>
+<p>Auf modernen Platinen sind die Kontakte winzig und dicht — dünne Standard-Prüfspitzen rutschen ab und schließen Nachbar-Pins kurz. Das Messen bleibt dasselbe, du brauchst nur feineres Werkzeug:</p>
+<div class="grid2">
+<div class="card"><h3>SMD-Grabber / IC-Hook-Klemmen</h3><p>Federklemmen mit winzigem Haken, die sich an einem einzelnen Pin oder Bauteilbein <b>festkrallen</b>. So hältst du die eine Seite fest und hast eine Hand frei fürs Antasten. Wichtigstes Zubehör für SMD.</p></div>
+<div class="card"><h3>Feine Nadel-Prüfspitzen</h3><p>Spitze, gehärtete Nadeln (oder aufsteckbare Nadeladapter). Treffen einzelne Pins, ohne den Nachbarn zu berühren. Manche haben eine Feder („Backprobe"), die sicher aufsetzt.</p></div>
+<div class="card"><h3>Lupe / Mikroskop</h3><p>Ab 0603/feinem Pitch ohne Vergrößerung kaum machbar. Ein Mikroskop zeigt dir, welchen Pin die Spitze wirklich berührt. Setup und Teile: <a href="loeten-referenz.html#mikroskop">Löten-Referenz → Mikroskop</a>.</p></div>
+<div class="card"><h3>Dritte Hand / PCB-Halter</h3><p>Hält die Platine ruhig. Beim Antasten mit einer Hand ist eine wackelnde Platine die häufigste Ursache für Abrutscher und Kurzschlüsse.</p></div>
+</div>
+
+<h3>Wo klemmst du Masse (GND) an?</h3>
+<div class="card">
+<p>Fast jede Messung braucht einen Massebezug für die schwarze Leitung. Auf SMD-Boards findest du GND hier zuverlässig:</p>
+<ul>
+<li><b>Metallschirmung / Abschirmbleche</b>, USB-Stecker-Gehäuse, Klinken-/HDMI-Rahmen — fast immer mit GND verbunden.</li>
+<li><b>Große Bauteile:</b> der Minuspol größerer Elkos, die Massefläche unter Modulen.</li>
+<li><b>Testpunkte</b> mit „GND", „⏚" oder oft schwarz/mehrfach vorhanden.</li>
+<li><b>Schrauben-/Befestigungslöcher</b> sind häufig auf Masse gelegt.</li>
+</ul>
+<p style="margin-bottom:0">Sicher ist: einen bekannten GND-Punkt mit der Durchgangsprüfung gegen den vermuteten prüfen — piept = dieselbe Masse.</p>
+</div>
+
+<h3>Erst vorbereiten (gilt für alle Messungen unten)</h3>
+<div class="card"><ul>
+<li>Board auf den PCB-Halter, unter die Lupe/Mikroskop.</li>
+<li>Schwarze Leitung mit dem <b>SMD-Grabber an einen GND-Punkt</b> klemmen (siehe oben) — die bleibt dort. Mit der roten <b>Nadelspitze</b> tastest du.</li>
+<li>Nicht den winzigen Pin selbst treffen, sondern das nahe <b>Via / Testpunkt (TP) / Bauteil-Ende</b> — dort ist mehr Platz. Sanft aufsetzen, nicht kratzen.</li>
+</ul></div>
+
+<h3>① Spannung an einer Rail messen &nbsp;<span class="note" style="font-style:normal">Board AN</span></h3>
+<div class="card"><ol>
+<li>Schwarz in <b>COM</b>, Rot in <b>VΩ</b>. Drehrad auf <b>V⎓ / DCV</b>.</li>
+<li>Schwarzen Grabber an GND, Board einschalten.</li>
+<li>Mit der roten Nadel den Testpunkt / das Bauteil-Ende antippen.</li>
+<li>Ablesen. Soll: 5 V / 3,3 V / 1,8 V je nach Rail. <b>0 V</b> = keine Versorgung → rückwärts Richtung Regler suchen.</li>
+</ol></div>
+
+<h3>② Durchgang an einem feinen Pin &nbsp;<span class="note" style="font-style:normal">Board AUS</span></h3>
+<div class="card"><ol>
+<li>Schwarz <b>COM</b>, Rot <b>VΩ</b>, Drehrad auf das <b>)))</b>-Symbol (Piepton).</li>
+<li>Board <b>stromlos</b> machen.</li>
+<li>Kurz beide Spitzen zusammenhalten → muss piepen (Funktionscheck).</li>
+<li>Schwarzen Grabber an das eine Ende, mit der roten Nadel das andere antippen.</li>
+<li><b>Piep</b> = verbunden. Kein Ton = unterbrochen.</li>
+</ol></div>
+
+<h3>③ Lötbrücke zwischen Nachbar-Pins finden &nbsp;<span class="note" style="font-style:normal">Board AUS</span></h3>
+<div class="card"><ol>
+<li>Gleicher Piep-Modus, Board stromlos.</li>
+<li>Zwei <b>direkt nebeneinander</b> liegende Pins gleichzeitig antippen.</li>
+<li><b>Piept es</b> → ungewollte Verbindung (Lötbrücke) → unter der Lupe suchen und mit Litze entfernen. (Ausnahme: Pins, die laut Schaltung eh verbunden sind.)</li>
+</ol></div>
+
+<h3>④ Kurzschluss auf der Versorgung prüfen &nbsp;<span class="note" style="font-style:normal">Board AUS · vor dem 1. Einschalten</span></h3>
+<div class="card"><ol>
+<li>Drehrad auf <b>Ω</b> (kleiner Bereich), Board stromlos.</li>
+<li>Schwarz an <b>GND</b>, Rot an <b>VCC / eine Rail</b>. Der Wert steigt langsam an (die Stützkondensatoren laden sich) → den <b>Endwert</b> nehmen.</li>
+<li>Dann <b>Spitzen tauschen</b> und noch einmal messen. Halbleiter geben in beide Richtungen verschiedene Werte — der <b>niedrigere</b> zählt.</li>
+</ol>
+<p style="margin:.6rem 0 .3rem"><b>Wie viel Ω ist normal?</b> Das hängt von der Rail ab — „ein paar hundert Ω" gilt längst nicht überall:</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Rail</th><th>Üblicher Bereich</th><th>Verdächtig</th></tr></thead>
+<tbody>
+<tr><td>5 V / 3,3 V Logik-Rail</td><td>~100 Ω bis mehrere kΩ</td><td>unter ~5 Ω</td></tr>
+<tr><td>Kernspannung eines Prozessors (0,9–1,2 V)</td><td>oft nur <b>1–20 Ω</b> — viele Stützkondensatoren und geringer Innenwiderstand</td><td>unter ~0,5 Ω oder deutlich weniger als beim guten Board</td></tr>
+<tr><td>Motor-/Endstufen-Rail (12–48 V)</td><td>einige zehn Ω bis kΩ</td><td>unter ~2 Ω</td></tr>
+</tbody>
+</table></div>
+<p class="note" style="margin-bottom:0">Es gibt keine feste Grenze — <b>0,0 Ω in beide Richtungen ist immer ein Kurzschluss</b>, alles dazwischen entscheidet der Vergleich mit einem baugleichen Board oder mit einer anderen Rail derselben Platine.</p></div>
+
+<div class="card"><h3>Kurzschluss <i>einkreisen</i> — die Milliohm-Methode (Tisch-DMM)</h3>
+<p>Wenn feststeht, <b>dass</b> ein Kurzschluss existiert, findest du damit heraus, <b>wo</b>: Kupfer hat einen winzigen, aber messbaren Widerstand. Je näher an der Kurzschlussstelle, desto kleiner der Messwert.</p>
+<ol>
+<li>Ω-Bereich <b>fest auf 500 Ω</b> stellen (nicht Auto), Rate auf <b>langsam</b>.</li>
+<li>Spitzen zusammenhalten → <b>Rel</b> drücken. Damit ist der Leitungswiderstand (0,1–0,5 Ω) weg und die Anzeige startet bei 0,00 Ω.</li>
+<li>Schwarz fest an GND lassen, mit Rot die Rail an mehreren Punkten antasten und die Werte notieren.</li>
+<li>Der Punkt mit dem <b>kleinsten</b> Wert liegt am dichtesten am Übeltäter — dort weitersuchen. Unterschiede von 10–50 mΩ reichen zur Richtungsangabe.</li>
+</ol>
+<p class="note" style="margin-bottom:0">Braucht Auflösung: mit einem 6 000-Counts-Handgerät zeigt alles gleich „0,1 Ω" an. Genau hier zahlt sich der Bench-DMM aus. Alternative ohne feine Auflösung: mit dem <a href="#netzteil">Labornetzteil</a> Strom mit Limit einspeisen und den <b>warmen Punkt</b> suchen.</p></div>
+
+<h3>⑤ Defektes Bauteil per Diodentest finden &nbsp;<span class="note" style="font-style:normal">Board AUS</span></h3>
+<div class="card"><ol>
+<li>Drehrad auf das <b>Dioden-Symbol ▷⊢</b>, Board stromlos.</li>
+<li>Schwarz an GND, mit Rot nacheinander die verdächtigen Pins antippen, Werte notieren.</li>
+<li>Dieselben Pins an einem <b>baugleichen, funktionierenden Board</b> messen.</li>
+<li>Ein stark <b>abweichender Wert</b> (fast 0 = Kurzschluss) zeigt das defekte Bauteil.</li>
+</ol></div>
+
+<div class="danger-box"><p style="margin:0"><b>Nicht in-circuit messbar:</b> Widerstands- und Kapazitätswerte im eingebauten Zustand stimmen nicht (parallele Bauteile verfälschen). Für den echten Wert das Bauteil <b>einseitig auslöten</b> und dann messen — oder den <a href="#lcrp1">LCR-P1</a> am ausgebauten Teil nutzen.</p></div>
+
+<h3>Totes Board? Diagnose in dieser Reihenfolge</h3>
+<div class="card"><ol>
+<li><b>Ansehen.</b> Verkohlte Stellen, aufgeblähte Elkos, kalte/gebrochene Lötstellen, verschobene Bauteile.</li>
+<li><b>Versorgung auf Kurzschluss</b> (Ω, siehe Tabelle oben). Nahe 0 Ω → erst reparieren, dann Strom.</li>
+<li><b>Strom mit Limit einspeisen.</b> Labornetzteil auf die Board-Spannung, Strombegrenzung niedrig. Zieht es sofort das volle Limit → irgendwo Kurzschluss. Jetzt <b>Hotspot suchen</b>: mit dem Finger fühlen, welches Bauteil warm wird — oder eine kleine <b>USB-Wärmebildkamera</b> (fürs Handy) draufhalten, die zeigt die heiße Stelle sofort.</li>
+<li><b>Rails der Reihe nach</b> (V⎓, siehe Tabelle). Kommt am Regler-Eingang Spannung an, aber nicht am Ausgang → Regler oder seine Last defekt. 5 V → 3,3 V → 1,8 V … durchgehen.</li>
+<li><b>Takt &amp; Reset am Mikrocontroller.</b> Versorgung da? Reset-Pin auf HIGH? Takt vorhanden? (Takt sicher nur mit <a href="#oszilloskop">Oszilloskop</a> oder Logic Analyzer.)</li>
+</ol></div>
+
+<h3>Grenzen des Multimeters</h3>
+<div class="card">
+<p>Ein Multimeter zeigt nur <b>langsame, gemittelte</b> Werte. Es versagt bei allem, was sich schnell ändert: <b>PWM</b> (zeigt nur den Durchschnitt), <b>I²C/SPI/UART-Daten</b>, <b>Quarz/Takt</b> und kurzen Einbrüchen. <b>Sleep-Strom im µA-Bereich</b> geht mit einem Tisch-DMM (eigener µA-Bereich) — aber nur der <i>ruhende</i> Wert; wechselt der Mikrocontroller zwischen Schlaf und Aufwachen hin und her, braucht es einen Strommess-Adapter oder ein Oszilloskop am Shunt.</p>
+<p style="margin-bottom:0"><b>Faustregel:</b> steht ein Wert still → Multimeter. Datensignal auf einem Bus → Logic Analyzer. Geht es um die Signalform → <a href="#oszilloskop">Oszilloskop</a>. Für heiße Stellen: eine <b>Wärmebildkamera</b> findet das kurzschließende Bauteil in Sekunden.</p>
+</div>
+
+<h2>Reparatur: „Gerät geht nicht an" — Fehler finden</h2>
+<p>Egal ob Konsole, Laptop, Mini-PC oder Bastelboard: Man arbeitet sich <b>der Stromversorgung entlang</b> vor — von der Steckdose bis zum Chip. Man sucht die Stelle, an der die Spannung <b>abbricht</b>. Dort liegt der Fehler.</p>
+
+<div class="danger-box"><p style="margin:0"><b>Zuerst: Was ist gefährlich?</b> Ein <b>externes Steckernetzteil</b> gibt ungefährliche Niederspannung (5–20 V DC) — da darfst du messen. Ein <b>ins Gerät eingebautes Netzteil</b> (Desktop-PC, manche Konsolen, alles mit direktem 230-V-Kabel) führt innen <b>Netzspannung</b> und hat geladene Kondensatoren → nur mit Erfahrung öffnen. Miss immer nur die <b>Niederspannungs-Seite</b> (nach dem Netzteil).</p></div>
+
+<h3>Schritt 1 — Erst ohne Messgerät eingrenzen</h3>
+<div class="card"><ul>
+<li><b>Lebenszeichen?</b> Leuchtet eine LED, dreht ein Lüfter, macht es ein Geräusch? Nichts = wahrscheinlich Stromversorgung. Etwas = kommt oft weiter (Display, Software).</li>
+<li><b>Netzteil separat testen:</b> Lädt/läuft es an einem <b>anderen</b> gleichen Gerät? Oder ein anderes passendes Netzteil am kranken Gerät? So trennst du Netzteil vs. Gerät.</li>
+<li><b>Kabel & Buchse ansehen:</b> Wackelkontakt, geknickte Kabel, verbogene/oxidierte Pins, lockere Ladebuchse.</li>
+<li><b>Hart zurücksetzen:</b> Strom und Akku trennen, Power-Taste ~30 s halten (entlädt Restspannung), dann neu versuchen.</li>
+</ul></div>
+
+<h3>Schritt 2 — Mit dem Multimeter der Reihe nach messen</h3>
+<p>Immer: schwarze Leitung in <b>COM</b>, rote in <b>VΩ</b>. Schwarz = Minus/Masse, Rot = der Punkt, den du prüfst.</p>
+
+<div class="card"><ol>
+<li><b>Kommt Spannung aus dem Netzteil?</b> Drehrad auf <b>V⎓ / DCV</b>. Beim Hohlstecker: rote Spitze <b>innen in die Öffnung</b> (meist Plus), schwarze <b>außen an den Metallmantel</b>. Soll = aufgedruckte Spannung (z. B. 19 V Laptop, 12 V Konsole). <b>0 V</b> → Netzteil oder Kabel defekt.</li>
+<li><b>Kommt die Spannung im Gerät an?</b> Gerät geöffnet: schwarz an einen <b>Massepunkt</b> (Metallschirm, Minuspol großer Elko), rot direkt an die <b>Lötpunkte der DC-/Ladebuchse</b>. Spannung am Stecker, aber nicht dahinter → Buchse kalt/gebrochen.</li>
+<li><b>Sicherung prüfen.</b> Nach der Buchse sitzt oft eine kleine <b>SMD-Sicherung</b>. Drehrad auf <b>Durchgang ())) )</b>, Gerät stromlos, je eine Spitze an ein Ende. <b>Piep</b> = heil, <b>kein Ton</b> = durchgebrannt (dann weiter suchen, warum).</li>
+<li><b>Kurzschluss auf der Versorgung?</b> Drehrad auf <b>Ω</b>, stromlos: schwarz an GND, rot an die Plus-Rail hinter der Buchse. <b>Nahe 0 Ω</b> = Kurzschluss (defekter Kondensator/Chip in der Ladeschaltung) → nicht einschalten.</li>
+<li><b>Ein-Taster & Akku.</b> Taster im <b>Durchgang</b> prüfen (beim Drücken muss es piepen). Akku im <b>V⎓</b> messen — tief entladen (deutlich unter Nennspannung)? Dann lädt/startet manches Gerät nicht.</li>
+</ol></div>
+
+<h3>Die Logik dahinter</h3>
+<div class="card"><p style="margin:0"><b>Verfolge die Spannung von der Quelle nach innen.</b> An der letzten Stelle, wo sie noch <b>da</b> ist, und der ersten, wo sie <b>fehlt</b>, sitzt der Fehler — meist Buchse, Sicherung, Ladechip oder ein kurzschließender Kondensator. Verkohlte, aufgeblähte oder warme Bauteile sind zusätzliche Verdächtige (Sicht + Finger).</p></div>
+
+<h2>Kurzschluss auf einer Rail eingrenzen</h2>
+<p>Wenn Schritt 1 oder 3 eine Rail bei 0,000 V zeigt, steht fest <i>dass</i> etwas kurzschließt — nicht <i>was</i>. Drei Verfahren, um das Bauteil zu finden, ohne die halbe Platine auszulöten. Die vierte, die <b>Milliohm-Methode</b> mit dem Tischmultimeter, steht ausführlich weiter unten unter <b>Fehler finden</b> und ist die genaueste, wenn du ein Tischgerät hast:</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Methode</th><th>Vorgehen</th><th>Was sie zeigt</th></tr></thead>
+<tbody>
+<tr><td><b>Spannungsabfall verfolgen</b> (Injection)</td><td><a href="#netzteil">Labornetzteil</a> strombegrenzt (0,5–2 A) auf die Rail geben, mit dem Multimeter im mV-Bereich den Spannungsabfall entlang der Rail abtasten</td><td>Der Wert wird zum Fehler hin <b>kleiner</b> — am tiefsten Punkt sitzt das Bauteil. Am schärfsten mit einem Tisch-DMM</td></tr>
+<tr><td><b>Wärme</b></td><td>Rail strombegrenzt speisen, dann mit dem Finger oder einer Wärmebildkamera über das Board gehen</td><td>Das kurzschließende Bauteil wird als erstes warm. Schnellste Methode, wenn der Kurzschluss richtig Strom zieht</td></tr>
+<tr><td><b>Sektionieren</b></td><td>Ferritperlen, 0-Ω-Brücken und Sicherungen der Reihe nach auslöten und die Rail dabei beobachten</td><td>Trennt die Rail in Abschnitte, bis der Kurzschluss verschwindet — dann liegt er im zuletzt getrennten Zweig</td></tr>
+</tbody>
+</table></div>
+<div class="danger-box"><b>Strombegrenzung ist Pflicht.</b> Eine kurzgeschlossene Rail ohne Limit anzufahren zerstört das, was du gerade suchst — oft samt Leiterbahn. Erst das Limit einstellen (Ausgang kurzschließen, Limit einregeln), dann anschließen. Vorgehen im Tab <a href="#netzteil">Labornetzteil</a>.</div>
+
+<h2>Grenzen der Richtwerte</h2>
+<p>Absolute Richtwerte gelten für <b>Bauteile</b>, nicht für <b>Baugruppen</b>. Sobald ein Bauteil eingelötet ist, misst man immer die Parallelschaltung von allem, was am selben Knoten hängt.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Effekt</th><th>Folge für die Messung</th></tr></thead>
+<tbody>
+<tr><td>Parallelpfade auf dem Knoten</td><td>Ein intaktes Bauteil kann viel zu niedrig messen, ein defektes viel zu unauffällig</td></tr>
+<tr><td>ESD-Schutzdioden in ICs</td><td>Erzeugen an fast jedem Pin einen Diodenwert gegen GND und gegen VCC — auch dort, wo im Schaltplan gar keine Diode steht</td></tr>
+<tr><td>Kapazität an der Rail</td><td>Der Diodenmodus zeigt erst nach dem Aufladen einen stabilen Wert. Große Rails brauchen ein bis zwei Sekunden — der <b>Endwert</b> zählt</td></tr>
+<tr><td>Prüfspannung des Messgeräts</td><td>Je nach Gerät 1–3 V im Diodenmodus. Zwei Multimeter zeigen an derselben Stelle unterschiedliche Werte — Referenzwerte deshalb <b>immer mit demselben Gerät</b> aufnehmen</td></tr>
+<tr><td>Temperatur und Restladung</td><td>Warme Boards und nicht entladene Elkos verschieben die Werte reproduzierbar nach unten bzw. oben</td></tr>
+<tr><td>Bauteiltoleranz und Revision</td><td>Derselbe Gerätetyp kann je nach Boardrevision andere Bauteile tragen — Werte gelten nicht automatisch über Revisionen hinweg</td></tr>
+</tbody>
+</table></div>
+
+<h2>Vergleichsmessungen — was wirklich zuverlässig ist</h2>
+<p>Statt einen Messwert gegen eine allgemeine Tabelle zu halten, hält man ihn gegen einen zweiten Messwert, der unter denselben Bedingungen entstanden ist. Nach Aussagekraft sortiert:</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Vergleich</th><th>Vorgehen</th><th>Aussagekraft</th><th>Grenze</th></tr></thead>
+<tbody>
+<tr><td><b>Funktionierendes Board</b> derselben Revision</td><td>Denselben Punkt mit demselben Gerät auf beiden Boards messen</td><td><b>Höchste.</b> Deckt auch Fehler auf, nach denen man gar nicht gesucht hätte</td><td>Zweites Board nötig, Revision muss stimmen</td></tr>
+<tr><td><b>Symmetrischer Schaltungsblock</b> auf demselben Board</td><td>Kanal A gegen Kanal B, Phase 1 gegen Phase 2 einer mehrphasigen Versorgung, RAM-Kanal 1 gegen 2, USB-Port 1 gegen 2</td><td>Sehr hoch — und ohne zweites Board zu haben</td><td>Nur dort, wo es Symmetrie gibt. Beide Seiten können auch gleichzeitig defekt sein</td></tr>
+<tr><td><b>Gleichartige Pins</b> desselben ICs</td><td>Alle GND-Pins, alle VDD-Pins oder alle Pins desselben Busses gegeneinander</td><td>Hoch für einzelne gerissene oder unterbrochene Verbindungen</td><td>Sagt nichts darüber, ob das IC selbst funktioniert</td></tr>
+<tr><td><b>Eigene Referenzwerte</b> vom intakten Gerät</td><td>Einmal am funktionierenden Gerät alles vermessen und notieren — Vorlage unten</td><td>Hoch, und mit der Zeit die beste Datenbasis überhaupt</td><td>Erfordert Disziplin, <b>bevor</b> etwas kaputt ist</td></tr>
+<tr><td><b>Datenblatt / Boardview</b></td><td>Sollwerte für Enable, Feedback und Referenzen nachschlagen</td><td>Hoch für einzelne Pins</td><td>Sagt nichts über die Parallelpfade auf genau diesem Board</td></tr>
+<tr><td>Allgemeine Richtwerttabelle</td><td>Die Tabelle oben</td><td>Gut als Einstieg und um Größenordnungen einzuordnen</td><td><b>Am schwächsten.</b> Erkennt zuverlässig nur eindeutige Fälle: 0,000 V und OL</td></tr>
+</tbody>
+</table></div>
+<div class="tip" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;margin:.7rem 0"><b>Merksatz:</b> Ein einzelner Messwert ist eine Beobachtung. Eine Aussage wird daraus erst durch einen zweiten Wert, mit dem man ihn vergleicht.</div>
+
+<h2>Vorlage: eigene Referenzwerte</h2>
+<p>Pro Gerätefamilie eine Tabelle, einmal am <b>funktionierenden</b> Gerät aufgenommen — mit demselben Multimeter, stromlos und entladen. Das ist der Aufwand, der sich beim zweiten Defekt derselben Bauart auszahlt.</p>
+<div class="card">
+<div class="rule"><span class="ico">📇</span><div><b>Gerät:</b> Modell <b>und</b> Boardrevision. Werte gelten nicht automatisch über Revisionen hinweg.</div></div>
+<div class="rule"><span class="ico">📍</span><div><b>Messpunkt:</b> eindeutig benennen — Bauteilkennung mit Pad oder Pin, oder ein Testpunkt: <span class="kbd">C412 / Pad 1</span>, <span class="kbd">U3 Pin 12</span>, <span class="kbd">TP7</span>. Nicht „irgendwo an 3,3 V".</div></div>
+<div class="rule"><span class="ico">🎯</span><div><b>Sollwert:</b> der am intakten Gerät gemessene Wert, <b>immer mit Modus</b> — z. B. <span class="kbd">0,42 V Diode</span> oder <span class="kbd">3,31 V ⎓</span>.</div></div>
+<div class="rule"><span class="ico">📓</span><div><b>gemessen:</b> der Wert im Fehlerfall. Bleibt beim Anlegen der Referenz leer.</div></div>
+<div class="rule"><span class="ico">🗓️</span><div><b>Datum:</b> damit später nachvollziehbar bleibt, mit welchem Stand und mit welchem Messgerät gemessen wurde.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Gerät</th><th>Messpunkt</th><th>Sollwert</th><th>gemessen</th><th>Datum</th></tr></thead>
+<tbody>
+<tr><td>XY-Board Rev. B</td><td><span class="kbd">L3 / Pad Ausgang</span> (1,8-V-Rail)</td><td>0,38 V Diode gegen GND</td><td>0,002 V</td><td>2026-08-06</td></tr>
+<tr><td colspan="5" style="background:var(--surface-2);font-weight:600">— ab hier eigene Zeilen —</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zum Ausdrucken oder als Vorlage für die eigene Datei. Ergänzend zum Kopieren: <span class="kbd">Gerät | Messpunkt | Sollwert | gemessen | Datum</span></p>

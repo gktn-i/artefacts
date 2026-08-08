@@ -1,0 +1,267 @@
+/* Aus loeten-referenz.html uebernommen und unter .mx-loeten gescoped.
+   Tokens (hell/dunkel) bleiben lokal — Werte identisch mit site.css. */
+
+/* ============================================================
+   DESIGN TOKENS · gemeinsames System der Artefakte
+   Akzent = Kategoriefarbe "DIY/Handwerk" (Orange)
+   ============================================================ */
+.mx-loeten{
+  --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f1f3f6; --surface-hover:#f8f5ef;
+  --text:#1b1e23; --muted:#697079; --faint:#98a0aa;
+  --border:#e4e7ec; --border-strong:#d3d7de; --track:#e6e8ec;
+  --accent:#b4700f; --accent-ink:#8a5410; --accent-soft:#faf1e0; --accent-border:#e4c388;
+  --ok-bg:#f0faf6; --ok-border:#1d9e75; --ok-ink:#085041;
+  --info-bg:#f4f9fe; --info-border:#85b7eb; --info-ink:#0c447c;
+  --danger-bg:#fef4f4; --danger-border:#e24b4a; --danger-ink:#791f1f;
+  --radius:12px; --radius-sm:8px; --radius-xs:6px;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --shadow-tabs:0 6px 14px -8px rgba(16,24,40,.22);
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+}
+@media(prefers-color-scheme:dark){
+  .mx-loeten{
+    --bg:#16181c; --surface:#1f2229; --surface-2:#262a31; --surface-hover:#2a2721;
+    --text:#e7e9ec; --muted:#9aa2ad; --faint:#727a85;
+    --border:#2e333b; --border-strong:#3a404a; --track:#333842;
+    --accent:#f0a830; --accent-ink:#f5c878; --accent-soft:#382a10; --accent-border:#8a6420;
+    --ok-bg:#0c2620; --ok-ink:#9fe1cb;
+    --info-bg:#0e2438; --info-border:#185fa5; --info-ink:#b5d4f4;
+    --danger-bg:#2e1414; --danger-ink:#f7c1c1;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.6);
+  }
+  .mx-loeten .b-kolben{background:#042C53;color:#B5D4F4}
+  .mx-loeten .b-luft{background:#4A1B0C;color:#F5C4B3}
+  .mx-loeten .b-platte{background:#412402;color:#FAC775}
+  .mx-loeten .b-mat{background:#04342C;color:#9FE1CB}
+  .mx-loeten .b-all{background:#26215C;color:#CECBF6}
+  .mx-loeten .b-warn{background:#501313;color:#F7C1C1}
+  .mx-loeten .b-ok{background:#04342C;color:#9FE1CB}
+  .mx-loeten .d1{background:#04342C;color:#9FE1CB}
+  .mx-loeten .d2{background:#412402;color:#FAC775}
+  .mx-loeten .d3{background:#501313;color:#F7C1C1}
+}
+
+/* ============================================================
+   BASIS & TYPOGRAFIE
+   ============================================================ */
+.mx-loeten *{box-sizing:border-box;margin:0;padding:0}
+.mx-loeten{-webkit-text-size-adjust:100%}
+.mx-loeten{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;
+  margin:0;padding:0;-webkit-font-smoothing:antialiased;min-height:100vh}
+.mx-loeten ::selection{background:var(--accent-soft);color:var(--accent-ink)}
+.mx-loeten h1{font-family:var(--display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin-bottom:.35rem}
+.mx-loeten .sub{font-size:13.5px;color:var(--muted);margin-bottom:1.3rem;max-width:70ch;line-height:1.55}
+.mx-loeten h2{font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:-.01em;margin:1.6rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.mx-loeten h3{font-size:14px;font-weight:600;margin:1.15rem 0 .5rem;color:var(--accent-ink)}
+.mx-loeten p{font-size:13.5px;line-height:1.65;margin-bottom:.6rem}
+.mx-loeten ul{margin:.4rem 0 .6rem 1.2rem}
+.mx-loeten li{font-size:13.5px;line-height:1.6;margin-bottom:5px}
+.mx-loeten li::marker{color:var(--faint)}
+.mx-loeten strong, .mx-loeten b{font-weight:600}
+
+/* ============================================================
+   TAB-NAVIGATION (sticky)
+   ============================================================ */
+.mx-loeten .tabs button{display:inline-flex;align-items:center;gap:.42em;font-family:inherit;
+  font-size:13px;font-weight:500;padding:6px 13px;cursor:pointer;background:transparent;
+  border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);
+  transition:background .15s,color .15s,border-color .15s}
+.mx-loeten .tabs button .ti{font-size:14px;line-height:1;opacity:.9}
+.mx-loeten .tabs button:hover{background:var(--surface-2);color:var(--text)}
+.mx-loeten .tabs button.active{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-border);font-weight:600}
+.mx-loeten .panel{display:none;animation:fade .2s ease}
+.mx-loeten .panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   KARTEN & RASTER
+   ============================================================ */
+.mx-loeten .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:12px;margin:.6rem 0}
+.mx-loeten .card{border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.mx-loeten .card .ct{font-size:14px;font-weight:600;margin-bottom:4px}
+.mx-loeten .card .cd{font-size:12.5px;color:var(--muted);margin-bottom:6px;line-height:1.55}
+.mx-loeten .card ul{margin:.25rem 0 0 1.05rem}
+.mx-loeten .card li{font-size:12.5px;margin-bottom:3px}
+.mx-loeten .goto{display:inline-block;font-size:12px;font-weight:600;color:var(--accent-ink);text-decoration:none;margin-top:7px}
+.mx-loeten .goto:hover{text-decoration:underline}
+
+/* ============================================================
+   BADGES & PILLS
+   ============================================================ */
+.mx-loeten .b{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:3px 9px;border-radius:999px;font-weight:500;letter-spacing:.02em;white-space:nowrap}
+.mx-loeten .b-kolben{background:#E6F1FB;color:#0C447C}
+.mx-loeten .b-luft{background:#FAECE7;color:#712B13}
+.mx-loeten .b-platte{background:#FAEEDA;color:#633806}
+.mx-loeten .b-mat{background:#E1F5EE;color:#085041}
+.mx-loeten .b-all{background:#EEEDFE;color:#3C3489}
+.mx-loeten .b-warn{background:#FCEBEB;color:#791F1F}
+.mx-loeten .b-ok{background:#E1F5EE;color:#085041}
+.mx-loeten .diff{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.mx-loeten .d1{background:#E1F5EE;color:#085041}
+.mx-loeten .d2{background:#FAEEDA;color:#633806}
+.mx-loeten .d3{background:#FCEBEB;color:#791F1F}
+
+/* ============================================================
+   TABELLEN, SUCHE, FILTER
+   ============================================================ */
+.mx-loeten .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);box-shadow:var(--shadow-sm);margin:.5rem 0}
+.mx-loeten table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+.mx-loeten th{text-align:left;padding:10px 12px;font-family:var(--mono);font-weight:500;font-size:10.5px;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--faint);background:var(--surface-2);
+  border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap}
+.mx-loeten th:hover{color:var(--text)}
+.mx-loeten th .ar{font-size:9px;margin-left:3px;color:var(--accent)}
+.mx-loeten td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
+.mx-loeten tbody tr:last-child td{border-bottom:none}
+.mx-loeten tbody tr:hover td{background:var(--surface-hover)}
+.mx-loeten .search{font-family:inherit;padding:8px 12px;font-size:13.5px;border:1px solid var(--border-strong);
+  border-radius:var(--radius-sm);background:var(--surface);color:var(--text);width:100%;max-width:320px;margin-bottom:.8rem}
+.mx-loeten .search:focus{outline:none;border-color:var(--accent-border);box-shadow:0 0 0 3px var(--accent-soft)}
+.mx-loeten .filt{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:.8rem}
+.mx-loeten .filt button{font-family:inherit;font-size:12.5px;font-weight:500;padding:5px 12px;cursor:pointer;
+  background:transparent;border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);transition:all .15s}
+.mx-loeten .filt button:hover{background:var(--surface-2);color:var(--text)}
+.mx-loeten .filt button.active{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-border);font-weight:600}
+
+/* ============================================================
+   SCHRITT-LISTEN
+   ============================================================ */
+.mx-loeten .steps{counter-reset:s;margin:.5rem 0}
+.mx-loeten .step{position:relative;padding:11px 14px 11px 48px;border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:8px;background:var(--surface);font-size:13.5px;line-height:1.6;box-shadow:var(--shadow-sm)}
+.mx-loeten .step::before{counter-increment:s;content:counter(s);position:absolute;left:13px;top:11px;width:23px;height:23px;
+  border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent-border);
+  font-family:var(--mono);font-size:11.5px;font-weight:500;display:flex;align-items:center;justify-content:center}
+
+/* ============================================================
+   HINWEIS-BOXEN
+   ============================================================ */
+.mx-loeten .note, .mx-loeten .tip, .mx-loeten .warn{padding:10px 14px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13px;line-height:1.6;margin:.7rem 0}
+.mx-loeten .note{border-left:3px solid var(--info-border);background:var(--info-bg)}
+.mx-loeten .note b{color:var(--info-ink)}
+.mx-loeten .tip{border-left:3px solid var(--ok-border);background:var(--ok-bg)}
+.mx-loeten .tip b{color:var(--ok-ink)}
+.mx-loeten .warn{border-left:3px solid var(--danger-border);background:var(--danger-bg)}
+.mx-loeten .warn b{color:var(--danger-ink)}
+
+/* ============================================================
+   GUT/SCHLECHT-VERGLEICH & SVG-SKIZZEN
+   ============================================================ */
+.mx-loeten .gb{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:.7rem 0}
+@media(max-width:560px){.mx-loeten .gb{grid-template-columns:1fr}}
+.mx-loeten .gb-col{border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.mx-loeten .gb-col h4{font-size:13px;margin-bottom:6px;font-weight:600}
+.mx-loeten .gb-col.good h4{color:var(--ok-ink)}
+.mx-loeten .gb-col.bad h4{color:var(--danger-ink)}
+.mx-loeten .gb-col ul{margin-left:1.05rem}
+.mx-loeten .gb-col li{font-size:12.5px}
+.mx-loeten .sk{width:100%;max-width:340px;height:auto;display:block;margin:.3rem auto .5rem}
+.mx-loeten .sk-wide{width:100%;max-width:620px;height:auto;display:block;margin:.5rem 0}
+.mx-loeten .sk .pcb{fill:var(--surface-2);stroke:var(--border-strong);stroke-width:1}
+.mx-loeten .sk .pad{fill:#d1913f;stroke:#a86e2b;stroke-width:1}
+.mx-loeten .sk .lead{fill:#aab2bd;stroke:#7d8590;stroke-width:1}
+.mx-loeten .sk .sold{fill:#c3cad4;stroke:#8b93a0;stroke-width:1}
+.mx-loeten .sk .body{fill:#3a3f47;stroke:#23272d;stroke-width:1}
+.mx-loeten .sk .lbl{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.mx-loeten .sk .mark-ok{font-size:17px;fill:#1d9e75;font-weight:700}
+.mx-loeten .sk .mark-bad{font-size:17px;fill:#e24b4a;font-weight:700}
+.mx-loeten .sk .crack{stroke:#e24b4a;stroke-width:1.2;fill:none}
+.mx-loeten .sk .axis{stroke:var(--faint);stroke-width:1;fill:none}
+.mx-loeten .sk .curve{stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linejoin:round;stroke-linecap:round}
+.mx-loeten .sk .dash{stroke:var(--border-strong);stroke-dasharray:4 4;stroke-width:1;fill:none}
+.mx-loeten .sk .melt{stroke:#e24b4a;stroke-dasharray:5 4;stroke-width:1.2;fill:none}
+.mx-loeten .sk .zone{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+
+.mx-loeten .legend{font-size:12px;color:var(--faint);margin-top:1.6rem;padding-top:.9rem;border-top:1px solid var(--border)}
+
+/* ============================================================
+   RESPONSIV
+   ============================================================ */
+@media(max-width:600px){
+  .mx-loeten h1{font-size:22px}
+  .mx-loeten h2{font-size:16px}
+  .mx-loeten .grid{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   LESBARKEIT · luftigere Tabellen, Faltabschnitte, Kernaussagen
+   ============================================================ */
+.mx-loeten table{font-size:13.5px}
+.mx-loeten th{padding:11px 14px;font-size:10.5px}
+.mx-loeten td{padding:13px 14px;line-height:1.6}
+.mx-loeten tbody tr+tr td{border-top:1px solid var(--border)}
+.mx-loeten td:first-child{font-weight:500}
+.mx-loeten .tbl-wrap{border-radius:var(--radius)}
+
+/* Faltbare Abschnitte */
+.mx-loeten .fold{cursor:pointer;display:flex;align-items:center;gap:.55em;user-select:none;
+  transition:color .15s}
+.mx-loeten .fold:hover{color:var(--accent-ink)}
+.mx-loeten .fold::before{content:"";flex:0 0 auto;width:0;height:0;
+  border-left:6px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;
+  opacity:.55;transition:transform .18s ease}
+.mx-loeten .fold.open::before{transform:rotate(90deg) translateX(1px)}
+.mx-loeten .sec-body{display:none;animation:secin .18s ease}
+.mx-loeten .sec-body.open{display:block}
+@keyframes secin{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+.mx-loeten .foldbar{display:flex;justify-content:flex-end;margin:-.4rem 0 .2rem}
+.mx-loeten .foldbar button{font-family:inherit;font-size:11.5px;color:var(--muted);background:transparent;
+  border:1px solid var(--border-strong);border-radius:999px;padding:3px 11px;cursor:pointer}
+.mx-loeten .foldbar button:hover{color:var(--text);background:var(--surface-2)}
+
+/* Kernaussage */
+.mx-loeten .kurz{display:flex;gap:.7em;align-items:flex-start;border:1px solid var(--accent-border);
+  background:var(--accent-soft);border-radius:var(--radius-sm);padding:11px 15px;margin:.5rem 0 .9rem;
+  font-size:13.5px;line-height:1.6;color:var(--accent-ink)}
+.mx-loeten .kurz::before{content:"💡";flex:0 0 auto;font-size:15px;line-height:1.35}
+.mx-loeten .kurz b{font-weight:700}
+
+/* Sidebar: Gliederungsebene sichtbar machen */
+.mx-loeten #sideNav .ssec a.lv3{padding-left:19px}
+.mx-loeten #sideNav .ssec a.lv4{padding-left:31px;font-size:11.5px;color:var(--faint)}
+.mx-loeten #sideNav .ssec a.lv4:hover, .mx-loeten #sideNav .ssec a.lv4.on{color:var(--accent-ink)}
+/* Suchtreffer: Antwortspalte als zweite Zeile */
+.mx-loeten .pr .pw{display:block}
+.mx-loeten .pr .px{opacity:.85}
+.mx-loeten .pr .px mark{font-weight:700}
+.mx-loeten .pr-x{display:block;padding:9px 11px;margin:.25rem;border-radius:7px;font-size:13px;
+  font-weight:600;text-decoration:none;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid var(--accent-border)}
+.mx-loeten .pr-x:hover{filter:brightness(.97)}
+
+/* ============================================================
+   TABELLEN AUF SCHMALEN DISPLAYS
+   Statt horizontal zu scrollen (bisher lagen 48-55 % der Breite
+   ausserhalb) wird jede Zeile zu einer Karte. Die Spaltennamen
+   kommen aus dem <thead> und haengen per data-l an jeder Zelle.
+   ============================================================ */
+.mx-loeten td.numcell{font-family:var(--mono);font-size:12.5px;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.mx-loeten th, .mx-loeten td{font-variant-numeric:tabular-nums}
+.mx-loeten h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink)}
+
+@media(max-width:620px){
+  .mx-loeten .tbl-wrap{overflow-x:visible;border:none;background:transparent;box-shadow:none;margin:.6rem 0}
+  .mx-loeten .tbl-wrap table{min-width:0!important;width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+  .mx-loeten .tbl-wrap thead{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .mx-loeten .tbl-wrap tbody tr{display:block;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:9px;padding:3px 0 5px}
+  .mx-loeten .tbl-wrap tbody tr:hover td{background:transparent}
+  .mx-loeten .tbl-wrap tbody td{display:block;width:auto;border:none;border-top:none!important;
+    padding:5px 14px;line-height:1.5;text-align:left}
+  .mx-loeten .tbl-wrap tbody td:empty{display:none}
+  .mx-loeten .tbl-wrap tbody td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);
+    font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--faint);margin-bottom:1px}
+  .mx-loeten .tbl-wrap tbody td:first-child{font-weight:600;font-size:14px;padding-top:9px;padding-bottom:8px;
+    border-bottom:1px solid var(--border)!important;margin-bottom:3px}
+  .mx-loeten .tbl-wrap tbody td:first-child::before{display:none}
+  .mx-loeten .tbl-wrap tbody td[colspan]{background:var(--surface-2);font-weight:600;border-bottom:none!important;
+    margin:0;border-radius:var(--radius) var(--radius) 0 0}
+  .mx-loeten .tbl-wrap tbody td.numcell{white-space:normal}
+}

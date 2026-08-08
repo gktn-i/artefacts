@@ -1,0 +1,47 @@
+<h2>Nach dem Löten</h2>
+<p>Was übrig bleibt: Flussmittelreste runter, blanke Stellen wieder abdecken.</p>
+<h2>Reinigen: Flussmittelreste entfernen</h2>
+<p>No-Clean-Rückstand darf normalerweise drauf bleiben. Sobald du aber viel Flux verbraucht hast (Rework, BGA, Drag-Soldering), wird die Stelle klebrig, zieht Staub an und verdeckt bei der Sichtkontrolle genau das, was du beurteilen willst. Und: nicht jeder Rückstand ist wirklich harmlos — bei Billig-Flux unbekannter Herkunft ist Reinigen Pflicht.</p>
+<div class="steps">
+<div class="step"><b>Grob mit IPA und Pinsel.</b> Isopropanol <b>99 %</b> (nicht 70 % — das restliche Wasser bleibt zurück), ESD-sicherer Pinsel, in eine Richtung arbeiten.</div>
+<div class="step"><b>Der Hot-Air-Trick bei hartnäckigen Resten.</b> Alter, eingebrannter Flux ist zäh wie Harz und lässt sich kalt kaum lösen. Heißluft auf <b>ca. 150–160 °C</b> stellen, mittleren Luftstrom, und die Stelle kurz überstreichen: Der Rückstand wird wieder <b>dünnflüssig</b>. Das liegt weit unter jedem Lot-Schmelzpunkt (183 °C bleihaltig) — es passiert also nichts an den Lötstellen.</div>
+<div class="step"><b>Sofort abnehmen, solange es warm ist.</b> Mit einem <b>fusselfreien Tuch</b> und IPA abwischen. Immer eine frische Tuchstelle nehmen, sonst schmierst du den gelösten Flux nur um. Wattestäbchen sind hier ungeeignet — sie hinterlassen Fasern, die sich zwischen Pins verhaken.</div>
+<div class="step"><b>Nachspülen und trocknen.</b> Nochmal IPA über die Fläche, mit Druckluft oder der Heißluft auf niedriger Stufe trockenblasen, damit gelöster Schmutz nicht wieder antrocknet.</div>
+<div class="step"><b>Kontrollieren.</b> Schräg gegen das Licht schauen: Rückstände zeigen sich als matte Schlieren oder klebrige Ränder.</div>
+</div>
+<div class="warn"><b>Grenzen des Tricks:</b> Nur auf trockener Platine, nie mit Akku dran. Nicht auf Kunststoffteile, Displaystecker oder Klebefolien halten — die vertragen 160 °C schlechter als das Board. Und: 150–160 °C sind gemessen an der <b>Düse</b>; bei kleinem Abstand kommt mehr an, als die Anzeige sagt. Lieber niedrig anfangen.</div>
+<div class="tip"><b>Ultraschallbad?</b> Reinigt gründlich, ist aber nichts für Boards mit Mikrofonen, Lautsprechern, offenen Steckern oder Schirmblechen mit Flüssigkeitsindikator. Für die Hobby-Werkstatt sind IPA, Pinsel, fusselfreie Tücher und der Hot-Air-Trick der bessere Weg.</div>
+
+<h2>Lötstopplack (Solder Mask / „grünes Öl&#8220;)</h2>
+<p>Die grüne (oder blaue, schwarze, rote) Schicht auf jeder Platine ist der <b>Lötstopplack</b>. Er hat drei Aufgaben: Er isoliert die Leiterbahnen, er schützt das Kupfer vor Korrosion, und er begrenzt beim Löten das flüssige Lot auf die freien Pads — deshalb der Name. Ohne ihn würde Lot einfach über die Bahnen laufen.</p>
+
+<h4>Was du in der Werkstatt brauchst</h4>
+<p>Als Reparaturmaterial gibt es ihn als <b>UV-härtenden Lötstopplack</b> in kleinen Spritzen (Mechanic, Relife, Amaoe, MG Chemicals und viele No-Names). Er bleibt flüssig, bis du ihn mit UV-Licht bestrahlst — typisch <b>395 nm</b>, also eine gewöhnliche UV-Härtungslampe aus der Handy-Reparatur.</p>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Anwendung</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Abgeschabte Stellen abdecken</b></td><td>Nach dem Freilegen einer Leiterbahn liegt blankes Kupfer offen — es korrodiert und kann Kurzschlüsse machen</td></tr>
+<tr><td><b>Fädeldraht fixieren</b></td><td>Ein Tropfen über der Reparatur nimmt jede Zugbelastung vom Pad. Der wichtigste Einsatz überhaupt</td></tr>
+<tr><td><b>Pads gezielt maskieren</b></td><td>Verhindert Lotbrücken an Stellen, wo eng benachbarte Pads sonst zusammenlaufen</td></tr>
+<tr><td><b>Isolieren vor Nachbarbahnen</b></td><td>Wenn ein Draht über andere Bahnen laufen muss und du keine isolierte Sorte hast</td></tr>
+<tr><td><b>Kosmetik</b></td><td>Eine Reparatur unter grünem Lack sieht aus wie Serie — und man findet sie in einem Jahr trotzdem wieder, wenn man sie fotografiert hat</td></tr>
+</tbody>
+</table></div>
+
+<h4>So wird es sauber</h4>
+<div class="steps">
+<div class="step"><b>Erst fertig löten, messen und reinigen.</b> Lack kommt <b>zum Schluss</b>. Unter ausgehärtetem Lack lötet und misst niemand mehr.</div>
+<div class="step"><b>Untergrund entfetten.</b> IPA und fusselfreies Tuch, vollständig trocknen lassen. Auf Flussmittelresten haftet der Lack nicht und blättert später ab.</div>
+<div class="step"><b>Dünn auftragen.</b> Mit Nadel, Zahnstocher oder feinem Pinsel. <b>Dünn ist Pflicht</b> — dicke Schichten härten oben aus und bleiben darunter klebrig-weich. Lieber zwei dünne Lagen mit je eigener Aushärtung.</div>
+<div class="step"><b>Pads freihalten.</b> Alles, was später noch Kontakt braucht (Testpunkte, Stecker, Schrauben-Massepunkte), aussparen. Verlaufener Lack lässt sich vor dem Aushärten mit einem in IPA getränkten Wattestäbchen wieder wegnehmen — danach nur noch mechanisch.</div>
+<div class="step"><b>UV-Härten.</b> Lampe mit ~395 nm, wenige Sekunden bis etwa eine Minute je nach Leistung und Schichtdicke. Fertig ist er, wenn er beim Ankippen nicht mehr fließt und mit dem Zahnstocher nicht mehr klebt.</div>
+<div class="step"><b>Kontrollieren.</b> Klebt es noch, war die Schicht zu dick oder die Bestrahlung zu kurz — nochmal härten. Bleibt eine Stelle weich, abnehmen und neu machen.</div>
+</div>
+<div class="warn"><b>Worauf man achten muss:</b> ① <b>Nicht als Isolator für Spannung.</b> Die Schicht ist einige Mikrometer dünn — sie schützt gegen Zufallskontakt und Korrosion, nicht gegen Netzspannung. ② <b>Nicht direkt am Lötpunkt.</b> Kommt der Kolben später doch nochmal ran, verbrennt der Lack und hinterlässt eine schwarze, schwer entfernbare Kruste. ③ <b>Vor UV-Licht und Sonne schützen</b> — die Spritze härtet sonst intern aus; dunkel und verschlossen lagern. ④ <b>Nicht über Bauteile ziehen</b>, die Wärme abgeben müssen. ⑤ Härtet <b>nicht</b> ohne UV — Warten hilft nicht.</div>
+<div class="tip"><b>Reparatur-Reihenfolge, die sich bewährt hat:</b> Bahn freilegen → verzinnen → Draht setzen → <b>Durchgang und Kurzschluss messen</b> → Flussmittel reinigen → dünn Lötstopplack drüber → UV-härten → nochmal messen. Wer den Lack vor dem Messen aufträgt, macht ihn mit hoher Wahrscheinlichkeit gleich wieder ab.</div>
+
+<div class="grid" style="margin-top:1rem">
+<div class="card"><div class="ct">Tip Tinner</div><div class="cd">Aktivator-Paste, rettet oxidierte, nicht mehr benetzende Spitzen.</div></div>
+<div class="card"><div class="ct">Isopropanol (IPA)</div><div class="cd">Reinigt Flussmittelrückstände. Brennbar, gut lüften.</div></div>
+<div class="card"><div class="ct">Kapton-Tape</div><div class="cd">Hitzefestes Klebeband. Fixiert Bauteile, schützt Nachbarn bei Heißluft.</div></div>
+</div>

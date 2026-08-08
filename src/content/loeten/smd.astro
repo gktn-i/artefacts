@@ -1,0 +1,103 @@
+<h2><span class="b b-kolben">Lötkolben</span> SMD löten</h2>
+<h3>Chip-Bauteile (Widerstand, Kondensator, 0603–1206)</h3>
+<div class="steps">
+<div class="step"><b>Ein Pad verzinnen.</b> Spitze auf <b>eines</b> der beiden Pads (1 Sekunde), etwas Lot zugeben, Spitze weg. Auf dem Pad bleibt ein kleiner Lothügel. Kolben in den Halter.</div>
+<div class="step"><b>Flussmittel.</b> Einen Tupfer Flussmittel auf beide Pads (Pen oder Gel-Spritze).</div>
+<div class="step"><b>Bauteil auflegen.</b> Mit der Pinzette seitlich greifen und so auf die Pads legen, dass beide Enden auf ihren Pads liegen. Pinzette hält das Bauteil — <b>nicht loslassen</b>.</div>
+<div class="step"><b>Einschieben.</b> Kolben in die freie Hand. Spitze auf den Lothügel drücken, das Lot wird flüssig — jetzt das Bauteil mit der Pinzette in das flüssige Lot schieben, bis es plan aufliegt.</div>
+<div class="step"><b>Spitze weg, dann erst loslassen.</b> Spitze abheben, 1–2 Sekunden warten (Lot wird fest), dann die Pinzette öffnen. Wer vorher loslässt, verschiebt das Bauteil.</div>
+<div class="step"><b>Sitz prüfen.</b> Liegt es gerade und plan auf beiden Pads? Wenn nicht: Lothügel wieder schmelzen und mit der Pinzette nachschieben.</div>
+<div class="step"><b>Zweite Seite löten.</b> Spitze an Pad + Bauteilende (1 Sekunde), Lot zugeben bis ein kleines Fillet entsteht, Lot weg, Spitze weg.</div>
+<div class="step"><b>Erste Seite fertig machen.</b> Dort ist bis jetzt nur der Lothügel — Spitze nochmal kurz an Pad + Bauteilende, bei Bedarf einen Hauch Lot dazu, bis auch hier ein sauberes Fillet steht.</div>
+</div>
+
+<div class="gb">
+<div class="gb-col good"><h4>✓ Guter Sitz</h4>
+<svg class="sk" viewBox="0 0 230 125" role="img" aria-label="SMD-Chip korrekt verlötet: liegt plan, Lot-Fillets an beiden Enden">
+  <rect class="pcb" x="15" y="88" width="200" height="20" rx="2"/>
+  <rect class="pad" x="48" y="81" width="40" height="7" rx="2"/>
+  <rect class="pad" x="142" y="81" width="40" height="7" rx="2"/>
+  <rect class="body" x="84" y="57" width="62" height="24" rx="2"/>
+  <rect class="lead" x="70" y="57" width="14" height="24" rx="1"/>
+  <rect class="lead" x="146" y="57" width="14" height="24" rx="1"/>
+  <path class="sold" d="M52,81 C58,79 66,68 70,60 L70,81 Z"/>
+  <path class="sold" d="M178,81 C172,79 164,68 160,60 L160,81 Z"/>
+  <text class="mark-ok" x="25" y="30">✓</text>
+  <text class="lbl" x="115" y="120" text-anchor="middle">liegt plan · Fillet an beiden Enden</text>
+</svg>
+</div>
+<div class="gb-col bad"><h4>✗ Tombstone (Grabstein)</h4>
+<svg class="sk" viewBox="0 0 230 125" role="img" aria-label="SMD-Chip steht senkrecht auf einem Pad: Tombstoning">
+  <rect class="pcb" x="15" y="88" width="200" height="20" rx="2"/>
+  <rect class="pad" x="48" y="81" width="40" height="7" rx="2"/>
+  <rect class="pad" x="142" y="81" width="40" height="7" rx="2"/>
+  <g transform="rotate(-55 74 86)">
+    <rect class="body" x="84" y="62" width="62" height="24" rx="2"/>
+    <rect class="lead" x="70" y="62" width="14" height="24" rx="1"/>
+    <rect class="lead" x="146" y="62" width="14" height="24" rx="1"/>
+  </g>
+  <path class="sold" d="M52,81 C60,76 74,72 82,78 L86,81 Z"/>
+  <text class="mark-bad" x="200" y="30">✗</text>
+  <text class="lbl" x="115" y="120" text-anchor="middle">ein Ende hochgezogen · kein Kontakt</text>
+</svg>
+</div>
+</div>
+<p style="font-size:12.5px;color:var(--muted)">Tombstoning passiert beim Reflow, wenn ein Pad deutlich früher schmilzt als das andere — die Oberflächenspannung zieht das Bauteil hoch. Abhilfe: gleichmäßig erwärmen, Pastenmenge auf beiden Pads gleich.</p>
+
+<h3>ICs mit vielen Pins (SOIC, TSSOP, QFP) per Drag-Soldering</h3>
+<div class="steps">
+<div class="step"><b>Ein Eck-Pad verzinnen.</b> Nur eines: Spitze drauf, etwas Lot, Spitze weg — kleiner Lothügel.</div>
+<div class="step"><b>IC auflegen und ausrichten.</b> Mit der Pinzette so platzieren, dass <b>alle</b> Pins genau auf ihren Pads liegen (Pin-1-Markierung beachten!). Pinzette hält die Position.</div>
+<div class="step"><b>Eckpin antacken.</b> Spitze auf den verzinnten Eckpin, der Lothügel schmilzt und verbindet Pin und Pad. Spitze weg, 1 Sekunde warten, Pinzette loslassen.</div>
+<div class="step"><b>Ausrichtung kontrollieren.</b> Unter der Lupe: Sitzen wirklich alle Pins auf ihren Pads? Wenn nicht: Eckpin wieder schmelzen und das IC nachrichten — jetzt geht das noch.</div>
+<div class="step"><b>Gegenecke festlöten.</b> Den diagonal gegenüberliegenden Eckpin normal löten (Spitze dran, Lot dazu, Lot weg, Spitze weg). Das IC sitzt jetzt fest.</div>
+<div class="step"><b>Flussmittel auftragen.</b> Großzügig über alle Pins einer Reihe — das ist der eigentliche Trick.</div>
+<div class="step"><b>Drag.</b> Einen kleinen Lottropfen an die Spitze nehmen (Hufeisen-/BC-Spitze ideal). Spitze flach am Anfang der Pinreihe aufsetzen und langsam (ca. 1 cm in 2–3 Sekunden) über alle Pins ziehen — das Lot verteilt sich von selbst, das Flussmittel verhindert Brücken.</div>
+<div class="step"><b>Alle Seiten gleich.</b> Pro Pinreihe: erst Flussmittel, dann Drag.</div>
+<div class="step"><b>Brücken entfernen.</b> Flussmittel auf die Brücke, Entlötlitze auflegen, Spitze auf die Litze drücken — die Brücke saugt sich ein. Litze <b>zusammen mit der Spitze</b> abheben, nie kalt abreißen (reißt Pads ab).</div>
+<div class="step"><b>Kontrolle.</b> Unter Lupe/Mikroskop jeden Pin ansehen, benachbarte Pins mit dem Multimeter auf Kurzschluss prüfen.</div>
+</div>
+<div class="tip"><b>Merksatz für feine ICs:</b> Lieber bewusst Brücken ziehen und dann mit Litze sauber abziehen, als jeden Pin einzeln treffen zu wollen. Flussmittel macht den Unterschied.</div>
+
+<h3>SMD entlöten (mit dem Lötkolben)</h3>
+<p>Ohne Heißluft geht das Abnehmen über den Trick, <b>alle Anschlüsse gleichzeitig flüssig zu halten</b>. Immer reichlich frisches Flussmittel dazugeben.</p>
+
+<h4>Chip-Bauteile (2-polig: Widerstand, Kondensator, LED)</h4>
+<div class="steps">
+<div class="step"><b>Flussmittel auf beide Pads.</b> Das senkt die nötige Temperatur und lässt das Lot besser fließen.</div>
+<div class="step"><b>Wippen:</b> beide Enden abwechselnd kurz erwärmen, das Bauteil mit der Pinzette leicht ankippen und hin- und herwippen, bis es frei ist.</div>
+<div class="step"><b>Oder Lotbrücke:</b> so viel frisches Lot auf beide Enden geben, dass ein durchgehender Lotklecks beide Pads überbrückt. Mit der Spitze gleichzeitig flüssig halten und das Bauteil seitlich abschieben.</div>
+<div class="step"><b>Pads säubern.</b> Restliches Lot mit Entlötlitze abziehen, Flussmittelreste mit IPA entfernen.</div>
+</div>
+
+<h4>Multipin-ICs (SOIC, TSSOP, QFP)</h4>
+<div class="steps">
+<div class="step"><b>Am einfachsten mit Low-Melt-Legierung.</b> Eine niedrigschmelzende Legierung (z. B. ChipQuik SMD1) mit Flussmittel über alle Pins einer Reihe verteilen — sie senkt den Schmelzpunkt der Mischung auf ~58 °C und hält so alle Pins gleichzeitig flüssig.</div>
+<div class="step"><b>Beide Seiten flüssig halten.</b> Bei zwei Pinreihen Legierung auf beide auftragen, abwechselnd nachheizen, bis das ganze IC „schwimmt".</div>
+<div class="step"><b>Abheben.</b> Mit der Pinzette sanft anheben, sobald alle Pins flüssig sind — nicht hebeln, sonst reißen Pads ab.</div>
+<div class="step"><b>Pads aufbereiten.</b> Alte Legierung und Lot mit Entlötlitze + Flussmittel entfernen, mit IPA reinigen, dann neu verzinnen.</div>
+</div>
+<div class="note"><b>Für QFN, BGA und thermisch kräftige Bauteile</b> (große Masseflächen) ist Heißluft die schonendere Methode — siehe Tab <a class="goto" href="#heissluft">Heißluft</a>. BGA-Chips, die wieder eingebaut werden sollen, brauchen danach neue Lotkugeln: Tab <a class="goto" href="#reballing">Reballing</a>. Litzen-Technik im Detail (Breite, Länge, Winkel): <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a>.</div>
+
+<h3>SMD-Troubleshooting: was tun, wenn …</h3>
+<p class="note">Die häufigsten SMD-Pannen direkt am Kolben. Vollständige Fehlerbilder-Tabelle: Tab <a class="goto" href="#fehler">Fehler &amp; Regeln</a>.</p>
+<div class="gb">
+<div class="gb-col bad"><h4>Zu viel Lot / Lotbrücke zwischen Pins</h4><ul>
+<li>Frisches Flussmittel über die Stelle geben.</li>
+<li>Saubere Entlötlitze auflegen, Spitze fest draufdrücken — das überschüssige Lot saugt sich in die Litze.</li>
+<li>Litze <b>zusammen mit der Spitze</b> abheben (nie kalt abreißen — reißt Pads).</li>
+<li>Bei einer echten Brücke reicht oft schon: Flussmittel drauf und mit sauberer, heißer Spitze einmal drüberstreichen — die Oberflächenspannung zieht das Lot auseinander.</li>
+</ul></div>
+<div class="gb-col good"><h4>Zu wenig Lot / Pin hängt in der Luft</h4><ul>
+<li>Flussmittel auf den Pin, Spitze mit einem Hauch frischem Lot an Pin und Pad, bis ein kleines Fillet steht.</li>
+<li>Kein zusätzliches Bauteil-Lot nötig — nur so viel, dass die Kehle geschlossen ist.</li>
+</ul></div>
+</div>
+<div class="card"><ul>
+<li><b>Bauteil sitzt schief / verrutscht:</b> eine Seite wieder aufschmelzen und mit der Pinzette nachschieben, dann festhalten bis das Lot fest ist.</li>
+<li><b>Tombstone (ein Ende hochgestellt):</b> beide Enden gleichzeitig erwärmen (Spitze quer über beide oder Heißluft), dann legt sich der Chip flach zurück.</li>
+<li><b>Lot fließt nicht, bildet Kugeln:</b> zu wenig oder verbrauchtes Flussmittel → frisches Flux dazu; Spitze sauber und heiß genug?</li>
+<li><b>Pin lässt sich nicht treffen / zu klein:</b> nicht einzeln kämpfen — reichlich Flussmittel und die ganze Reihe per Drag-Soldering ziehen, Brücken danach mit Litze abziehen.</li>
+<li><b>Pad hat sich gelöst (Lifted Pad):</b> weniger Hitze/Zeit, nicht hebeln; wenn schon ab, die Leiterbahn freikratzen und mit dünnem Draht überbrücken.</li>
+</ul></div>
+<div class="tip"><b>Wichtigste Regel bei Problemen:</b> Fast alles wird besser mit <b>frischem Flussmittel</b> und einer <b>sauberen, verzinnten Spitze</b>. Und: die Stelle zwischendurch abkühlen lassen, nicht endlos draufbraten — lange Hitze löst Pads.</div>

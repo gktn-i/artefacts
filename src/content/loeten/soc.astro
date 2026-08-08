@@ -1,0 +1,86 @@
+<h2>SoC, APU, PMIC — was die Begriffe bedeuten</h2>
+<p>Auf einem modernen Board sitzen wenige große Chips, die fast alles machen. Die Kürzel darauf sagen, <b>welche Rolle</b> ein Chip spielt — nicht, wie er gelötet ist.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Begriff</th><th>Ausgeschrieben</th><th>Was drin steckt</th></tr></thead>
+<tbody>
+<tr><td><b>SoC</b></td><td>System on a Chip</td><td>Ein einziger Chip, der praktisch ein ganzes Computersystem enthält: CPU-Kerne, GPU, Speichercontroller, I/O, oft auch WLAN/Modem, Video-Encoder, Krypto-Einheit. Das Gegenteil des klassischen PCs mit CPU + Northbridge + Southbridge + Grafikkarte. Handys, Tablets, Konsolen, Router, Smart-TVs — alle laufen auf SoCs</td></tr>
+<tr><td><b>APU</b></td><td>Accelerated Processing Unit</td><td>AMDs Bezeichnung für CPU + GPU auf einem Die. In der Praxis das Gleiche wie ein SoC — der Begriff, den Sony und Microsoft für ihre Konsolenchips benutzen</td></tr>
+<tr><td><b>CPU / GPU</b></td><td>Central / Graphics Processing Unit</td><td>Rechenwerk bzw. Grafikeinheit. In Laptops oft noch als getrennte Chips, in Handys und Konsolen im SoC aufgegangen</td></tr>
+<tr><td><b>PMIC</b></td><td>Power Management IC</td><td>Erzeugt aus einer Eingangsspannung die vielen Schienen, die der SoC braucht. Häufiger Ausfallkandidat — und wenn er stirbt, ist meist nicht der SoC schuld</td></tr>
+<tr><td><b>SiP</b></td><td>System in Package</td><td>Mehrere <b>separate Dies</b> in einem Gehäuse, nicht auf einem Die. Von außen ein Chip, innen mehrere</td></tr>
+<tr><td><b>PoP</b></td><td>Package on Package</td><td>Zwei Gehäuse übereinander gelötet — typisch SoC unten, LPDDR-RAM oben. Beim Ausbau darf sich die obere Lage <b>nicht</b> lösen</td></tr>
+<tr><td><b>eMMC / UFS</b></td><td>embedded MultiMediaCard / Universal Flash Storage</td><td>Der fest verlötete „Datenträger&#8220;. eMMC ist der ältere, langsamere Standard, UFS der moderne serielle Nachfolger</td></tr>
+<tr><td><b>eMCP</b></td><td>embedded Multi-Chip Package</td><td>Flash <b>und</b> RAM in einem Gehäuse — in günstigen Handys sehr verbreitet</td></tr>
+<tr><td><b>Baseband</b></td><td>—</td><td>Der Mobilfunk-Prozessor. Eigener Chip neben dem SoC (Qualcomm, Intel, MediaTek)</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Für die Reparatur wichtig:</b> „SoC&#8220; sagt nichts über die Lötbarkeit. Entscheidend sind <b>Gehäuseform</b> (unten), <b>Pitch</b>, <b>Kugelgröße</b> und ob Underfill drunter ist. Ein kleiner PMIC im CSP-Gehäuse kann fummeliger sein als eine große Konsolen-APU.</div>
+
+<h2>Gehäuse mit Kugeln — die Abkürzungen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Kürzel</th><th>Ausgeschrieben</th><th>Typischer Pitch</th><th>Was es in der Praxis heißt</th></tr></thead>
+<tbody>
+<tr><td><b>BGA</b></td><td>Ball Grid Array</td><td>0,8–1,27 mm</td><td>Der Oberbegriff: Kugelraster unter dem Gehäuse. Alles Weitere sind Varianten davon</td></tr>
+<tr><td><b>PBGA / CBGA</b></td><td>Plastic / Ceramic BGA</td><td>0,8–1,27 mm</td><td>Substratmaterial. Keramik ist steifer und thermisch anders — ältere Konsolen- und Industriechips</td></tr>
+<tr><td><b>FBGA</b></td><td>Fine-pitch BGA</td><td>0,4–0,8 mm</td><td>Der Standard für RAM, Flash und mittlere SoCs</td></tr>
+<tr><td><b>FCBGA</b></td><td>Flip-Chip BGA</td><td>0,65–1,0 mm</td><td>Der Die liegt „auf dem Kopf&#8220; direkt auf dem Substrat. Große CPUs, GPUs und Konsolen-APUs</td></tr>
+<tr><td><b>µBGA / CSP</b></td><td>Micro BGA / Chip Scale Package</td><td>0,3–0,5 mm</td><td>Gehäuse kaum größer als der Die (Definition: ≤ 1,2 × Die-Fläche). Handy-Innereien</td></tr>
+<tr><td><b>WLCSP</b></td><td>Wafer Level Chip Scale Package</td><td>0,3–0,4 mm</td><td>Kugeln werden noch auf dem Wafer aufgebracht — praktisch ein nackter Die mit Kugeln. Kein Substrat, sehr empfindlich</td></tr>
+<tr><td><b>LGA</b></td><td>Land Grid Array</td><td>—</td><td><b>Keine Kugeln</b>, nur flache Pads. Wird über Paste oder Sockel kontaktiert. Reballing macht daraus faktisch ein BGA</td></tr>
+<tr><td><b>QFN / DFN</b></td><td>Quad/Dual Flat No-lead</td><td>0,4–0,65 mm</td><td>Pads am Rand der Unterseite, kein Raster. Kein BGA — aber ebenfalls nur mit Heißluft machbar (Tab <a class="goto" href="#heissluft">Heißluft</a>)</td></tr>
+</tbody>
+</table></div>
+
+<h2>BGA-Chips in echten Geräten</h2>
+<p>Die Bezeichnungen, die auf den Chips stehen, und wofür sie gut sind. Nützlich, um Stencils, Kugelgrößen und Ersatzchips zu suchen.</p>
+<div class="warn"><b>Immer den Chip ablesen, nie der Liste vertrauen.</b> Hersteller wechseln Revisionen im laufenden Betrieb: Dieselbe Konsolengeneration hat je nach Baujahr unterschiedliche Endbuchstaben (z. B. <b>CXD90026G</b> / <b>-AG</b> / <b>-BG</b>). Für Stencil und Ersatzteil zählt <b>genau der Aufdruck auf deinem Chip</b>.</div>
+
+<h3>Konsolen und Handhelds</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Gerät</th><th>Bezeichnung auf dem Chip</th><th>Funktion</th><th>Notiz</th></tr></thead>
+<tbody>
+<tr><td>Nintendo Switch (2017, „Erista&#8220;)</td><td><b>ODNX02-A2</b></td><td>SoC — NVIDIA Tegra X1 (T210)</td><td>Der Klassiker. „ODN&#8220; kommt vom Nvidia/Nintendo-Codenamen <b>Odin</b> fürs Board. Typischer Reball-Kandidat bei Blackscreen/BSOD</td></tr>
+<tr><td>Nintendo Switch (ab 2019, Lite, OLED — „Mariko&#8220;)</td><td><b>ODNX10-A1</b></td><td>SoC — Tegra X1+ (T214)</td><td>Sparsamere 16-nm-Revision</td></tr>
+<tr><td>Nintendo Switch</td><td>THGBMHG8C2LBAIL · <b>BGA153</b></td><td>eMMC (32 GB Toshiba)</td><td>Reball/Tausch bei defektem NAND oder für Speicher-Upgrades. Pitch 0,5 mm</td></tr>
+<tr><td>PS4 Fat (CUH-10xx/11xx)</td><td><b>CXD90026G</b> (auch -AG, -BG)</td><td>APU</td><td>Sony-Teilenummern beginnen mit CXD</td></tr>
+<tr><td>PS4 Fat (CUH-12xx)</td><td><b>CXD90037G</b></td><td>APU</td><td>Spätere Fat-Revision</td></tr>
+<tr><td>PS4 Slim (CUH-20xx)</td><td><b>CXD90044GB / GC / GD</b></td><td>APU</td><td></td></tr>
+<tr><td>PS4 Slim &amp; Pro</td><td><b>CXD90046GG</b></td><td>Southbridge („Aeolia/Belize&#8220;)</td><td>Keine APU, aber ein sehr häufiger Defekt- und Tauschkandidat</td></tr>
+<tr><td>PS4 Pro (CUH-7xxx)</td><td>je nach Revision — <b>vom Chip ablesen</b></td><td>APU</td><td>Größerer Die als die Slim-APU</td></tr>
+<tr><td>PS3 (90 nm)</td><td><b>CXD2964GB</b> (+ A/B/C-Varianten)</td><td>Cell Broadband Engine</td><td>Reball-Klassiker der Yellow-Light-Ära</td></tr>
+<tr><td>PS3 (65 nm / 45 nm)</td><td>CXD2981x / <b>CXD2999x</b></td><td>Cell BE</td><td>Die-Shrinks derselben CPU</td></tr>
+<tr><td>PS3 (90 nm)</td><td><b>CXD2971GB</b> (+ A/B/C/D)</td><td>RSX GPU</td><td>Später u. a. CXD5302 in kleineren Fertigungen</td></tr>
+<tr><td>Xbox One (2013, „Durango&#8220;)</td><td><b>X887732-001</b>, Die-Marking DG3001FEG84HR</td><td>APU (AMD Jaguar + Radeon)</td><td>Microsoft nutzt X-Nummern statt Herstellerteilenummern</td></tr>
+<tr><td>Xbox 360</td><td>revisionsabhängig (Xenon, Zephyr, Falcon, Jasper …)</td><td>CPU „Xenon&#8220; / GPU „Xenos&#8220;</td><td>Der RROD-Klassiker: Die originalen bleifreien Kugeln reißen. Reparatur = <b>bleihaltig reballen</b>, nicht reflowen</td></tr>
+<tr><td>Steam Deck</td><td>AMD Custom APU 0405 (LCD: „Aerith&#8220;, OLED: „Sephiroth&#8220;)</td><td>APU „Van Gogh&#8220;</td><td>Zen 2 + RDNA 2</td></tr>
+</tbody>
+</table></div>
+
+<h3>Handys, Tablets und Laptops</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Gerät / Klasse</th><th>Bezeichnung auf dem Chip</th><th>Funktion</th><th>Notiz</th></tr></thead>
+<tbody>
+<tr><td>iPhone 7 / 7 Plus</td><td><b>APL1W24</b></td><td>SoC — Apple A10 Fusion</td><td>Apple-SoCs tragen APL-Nummern, nicht „A10&#8220;. PoP mit RAM obendrauf</td></tr>
+<tr><td>iPhone 8 / X</td><td><b>APL1W72</b></td><td>SoC — Apple A11 Bionic</td><td></td></tr>
+<tr><td>iPhone XS / XR, iPad (2019+)</td><td><b>APL1W81</b></td><td>SoC — Apple A12 Bionic</td><td>Auch als A12X/A12Z in iPad Pro</td></tr>
+<tr><td>MacBook (2018–2020)</td><td>Sandwich-Gehäuse mit RAM-Lage</td><td>Apple T2 Security Chip</td><td>Beliebter Reball-Job (SSD/SMC/Touch-ID-Funktionen). Üblich: <b>0,25-mm-Kugeln</b> mit chipspezifischem Jig. Die RAM-Lage darf sich beim Ausbau nicht trennen</td></tr>
+<tr><td>Android-Flaggschiffe</td><td>z. B. SM8550-AB, S5E9925, MT6983</td><td>SoC (Snapdragon, Exynos, Dimensity, Tensor)</td><td>Fast immer PoP mit Underfill. Chipspezifischer Stencil nötig</td></tr>
+<tr><td>Handy-Speicher</td><td><b>BGA153</b>, <b>BGA169</b>, <b>BGA254</b>, BGA221</td><td>eMMC / UFS / eMCP</td><td>Die Ballzahl ist der Gehäusename. BGA153/169: Pitch 0,5 mm, Ball ~0,25–0,30 mm</td></tr>
+<tr><td>Laptop-Grafik (NVIDIA)</td><td><b>N16P-GT-A2</b>, N17P-G0-A1, N15S-GT-B-A2 …</td><td>Mobile-GPU</td><td>N = Notebook, Zahl = Generation, Buchstabe = Leistungsklasse, -A1/-A2 = Die-Revision. <b>Achtung:</b> Dieselbe Nummer wird je nach Charge als unterschiedliches Marketing-Modell verkauft (z. B. GTX 860M vs. 950M) — nach Teilenummer kaufen, nicht nach Modellnamen</td></tr>
+<tr><td>Laptop-Grafik (AMD)</td><td>216-08xxxxx</td><td>Mobile-GPU</td><td>AMD/ATI-Mobilchips tragen 216-er Nummern</td></tr>
+<tr><td>Laptop-Chipsatz</td><td>SR-Code + Bezeichnung (z. B. BD82HM76)</td><td>Intel PCH</td><td>Der SR-Code auf dem Deckel identifiziert die genaue Variante</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Nicht jeder große Chip ist ein BGA.</b> PMICs, Ladecontroller und USB-Chips sitzen oft in QFN-Gehäusen — die haben Pads am Rand statt Kugeln und werden ohne Stencil ersetzt.</div>
+
+<h2>Stencils, die man haben sollte</h2>
+<p>Was sich lohnt, hängt davon ab, was auf deinem Tisch landet. Von allgemein nach speziell:</p>
+<div class="steps">
+<div class="step"><b>Universal-Set „Direct Heat&#8220; + 90-mm-Jig.</b> Ein Satz Stahlbleche mit Lochrastern in <b>0,2 / 0,25 / 0,3 / 0,35 / 0,4 / 0,45 / 0,5 / 0,55 / 0,6 mm</b> plus Halteplattform. Damit kannst du „irgendein&#8220; BGA reballen, wenn kein passender Spezialstencil existiert. Die üblichen Sets haben 27, 29 oder 130 Bleche — mehr Bleche heißt vor allem mehr Größen, nicht bessere Qualität.</div>
+<div class="step"><b>eMMC BGA153/169.</b> Der meistgebrauchte chipspezifische Stencil überhaupt — Switch, Handys, Tablets, Settop-Boxen. Wenn du nur einen Spezialstencil kaufst, dann diesen.</div>
+<div class="step"><b>Gerätespezifisch nach Schwerpunkt.</b> Für Switch: Tegra (<b>ODNX02-A2</b> / <b>ODNX10-A1</b>), eMMC, RAM. Für PS4: APU-Nummer deiner Revision und <b>CXD90046GG</b> (Southbridge). Für iPhone/iPad: CPU-, NAND-, Baseband- und PMIC-Sets, meist als Serie „A8–A16&#8220; verkauft. Für MacBook: T2/M1-Serien.</div>
+<div class="step"><b>Kugelsortiment.</b> <b>Sn63Pb37</b> in 0,25 / 0,3 / 0,35 / 0,4 / 0,45 / 0,5 / 0,6 mm deckt praktisch alles ab. 0,3 mm geht am schnellsten leer</div>
+<div class="step"><b>Passende Plattform.</b> Stencil und Jig müssen aus demselben System stammen (Amaoe, WL/Wylie, YCS, Qianli, Mechanic sind die gängigen Anbieter). Ein Stencil, der im Jig wackelt, ist wertlos.</div>
+</div>
+<div class="tip"><b>Beim Kauf worauf achten:</b> Ebene Bleche ohne Wellen (gegen das Licht halten), saubere Lochkanten ohne Grat, Angabe der <b>Dicke</b> und der <b>Kugelgröße</b> auf dem Stencil oder der Verpackung, und ein Positionierrahmen oder Chip-Umriss bei chipspezifischen Modellen. Verzogene Bleche kann man nicht mehr geradebiegen.</div>
+<div class="warn"><b>Stencils sind Verbrauchsmaterial.</b> Sie verziehen sich mit jedem Heizzyklus und setzen sich mit Flux zu. Direkt nach der Arbeit mit IPA reinigen, <b>flach</b> lagern (nie in eine Schublade werfen) und bei sichtbarer Welle ersetzen. Ein krummer Stencil liegt nicht plan auf und produziert genau die ungleichen Kugelhöhen, die du vermeiden willst.</div>

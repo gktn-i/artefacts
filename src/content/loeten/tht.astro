@@ -1,0 +1,49 @@
+<h2><span class="b b-kolben">Lötkolben</span> THT löten</h2>
+<p>THT steht für Through-Hole Technology: bedrahtete Bauteile durch Bohrungen. Der einfachste Einstieg.</p>
+<div class="steps">
+<div class="step"><b>Spitze vorbereiten.</b> Kolben aus dem Halter, in der Messingwolle abstreifen, einen Hauch Lot auf die Spitze schmelzen. Glänzt sie silbrig? Weiter. Kolben zurück in den Halter.</div>
+<div class="step"><b>Bauteil einsetzen.</b> Beinchen von oben durch die Bohrungen stecken, bis das Bauteil aufliegt. Platine umdrehen, beide Beinchen leicht nach außen biegen (~30°) — jetzt fällt nichts mehr raus.</div>
+<div class="step"><b>Lot bereit halten.</b> Lotdraht in die eine Hand, Kolben in die andere. Beide gleichzeitig zur Lötstelle führen, ohne dass sie sich schon berühren.</div>
+<div class="step"><b>Spitze anlegen und warten.</b> Spitze so an die Stelle drücken, dass sie Pad <b>und</b> Beinchen gleichzeitig berührt. 1–2 Sekunden nur halten — noch kein Lot.</div>
+<div class="step"><b>Lot zugeben.</b> Lotdraht von der gegenüberliegenden Seite an Pad + Beinchen drücken (nicht an die Spitze). Schmilzt er nicht sofort: 1 Sekunde länger warten, dann nochmal.</div>
+<div class="step"><b>Fließen lassen.</b> So viel Draht nachschieben, bis das Loch gefüllt ist und sich eine kleine konkave Kehle ums Beinchen bildet — dauert 1–2 Sekunden.</div>
+<div class="step"><b>Lösen — in dieser Reihenfolge:</b> Erst den Lotdraht wegziehen. Spitze noch ~1 Sekunde dranlassen, damit alles glatt verläuft. Dann Spitze weg, Kolben in den Halter.</div>
+<div class="step"><b>Erstarren lassen.</b> 2–3 Sekunden nichts bewegen, nicht pusten. Erst dann die Platine anfassen.</div>
+<div class="step"><b>Beinchen kürzen.</b> Mit dem Seitenschneider knapp über der Kehle abschneiden. Abgeschnittene Enden fliegen — mit dem Finger abdecken oder wegdrehen.</div>
+</div>
+
+<div class="gb">
+<div class="gb-col good"><h4>✓ Gute Lötstelle</h4>
+<svg class="sk" viewBox="0 0 230 140" role="img" aria-label="Querschnitt einer guten THT-Lötstelle mit konkaver Kehle">
+  <rect class="pcb" x="15" y="95" width="200" height="22" rx="2"/>
+  <rect class="lead" x="110" y="18" width="10" height="99" rx="1"/>
+  <rect class="pad" x="78" y="90" width="74" height="6" rx="2"/>
+  <path class="sold" d="M82,95 C100,92 106,68 108,48 L122,48 C124,68 130,92 148,95 Z"/>
+  <text class="mark-ok" x="25" y="34">✓</text>
+  <text class="lbl" x="115" y="133" text-anchor="middle">konkave Kehle · voll benetzt</text>
+</svg>
+<ul>
+<li>Konkave, geschlossene Kehle — das Lot ist auf Pad <b>und</b> Beinchen geflossen</li>
+<li>Glänzend bei bleihaltigem Lot, satiniert bis leicht matt bei bleifrei — <b>beides in Ordnung</b></li>
+<li>Kontur von Pad und Beinchen noch erkennbar, kein Klumpen</li>
+</ul>
+</div>
+<div class="gb-col bad"><h4>✗ Kalte / schlechte Stelle</h4>
+<svg class="sk" viewBox="0 0 230 140" role="img" aria-label="Querschnitt einer kalten THT-Lötstelle: kugeliger Klumpen ohne Benetzung">
+  <rect class="pcb" x="15" y="95" width="200" height="22" rx="2"/>
+  <rect class="lead" x="110" y="18" width="10" height="99" rx="1"/>
+  <rect class="pad" x="78" y="90" width="74" height="6" rx="2"/>
+  <ellipse class="sold" cx="115" cy="70" rx="26" ry="21"/>
+  <path class="crack" d="M97,78 L108,68 L104,58"/>
+  <text class="mark-bad" x="25" y="34">✗</text>
+  <text class="lbl" x="115" y="133" text-anchor="middle">Kugel — sitzt auf, benetzt nicht</text>
+</svg>
+<ul>
+<li>Kugelig oder klumpig — das Lot sitzt auf, statt zu benetzen</li>
+<li>Körnige, rissige Oberfläche, Ränder heben sich ab</li>
+<li>Rettung: frisches Flussmittel dazu, beide Teile richtig erwärmen, neu aufschmelzen</li>
+</ul>
+</div>
+</div>
+<div class="note"><b>Merke:</b> Mattigkeit allein ist kein Fehlerzeichen — bleifreies Lot ist von Natur aus matter. Entscheidend sind <b>Form und Benetzung</b>: konkav und geschlossen = gut, kugelig und aufgesetzt = nacharbeiten.</div>
+<div class="warn"><b>Polung beachten:</b> Elkos, Dioden, LEDs und ICs sind gepolt. Markierung prüfen, bevor du lötest. Falsch herum kann das Bauteil sofort zerstören.</div>

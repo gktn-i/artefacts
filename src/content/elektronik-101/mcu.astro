@@ -1,0 +1,80 @@
+<h2>Was ist ein Mikrocontroller?</h2>
+<p>Ein kompletter Mini-Computer auf einem einzigen Chip: Rechenkern, Speicher und Anschlüsse in einem. Er läuft <b>ohne Betriebssystem</b> und führt direkt dein eines Programm aus, immer und immer wieder. Damit liest er Sensoren, trifft Entscheidungen und steuert Ausgänge. Das Herzstück fast jedes Projekts.</p>
+<div class="card">
+<h3>Wichtige Abgrenzung: Mikrocontroller vs. Raspberry Pi</h3>
+<p style="margin-bottom:0">Der große <b>Raspberry Pi</b> (Modell B, Zero usw.) ist <b>kein</b> Mikrocontroller, sondern ein kleiner Linux-Computer mit Betriebssystem, Bildschirmanschluss und vielen Programmen gleichzeitig. Ein Mikrocontroller (Arduino, ESP32, Pico) macht dagegen <b>eine</b> Sache zuverlässig und in Echtzeit, startet sofort und braucht kaum Strom. Für Steuern und Messen nimmt man den Mikrocontroller, für Desktop, Browser oder Kamera-Software den Pi.</p>
+</div>
+
+<h2>Die populären Boards</h2>
+<div class="grid2">
+<div class="card"><h3>Arduino Uno / Nano</h3>
+<p>Der Klassiker für den Einstieg. Einfach, extrem gut dokumentiert, riesige Bibliothek- und Zubehör-Welt. Läuft mit <b>5 V</b> Logik (robust gegenüber Störungen). Schwächen: wenig Rechenleistung, kein Funk an Bord.</p>
+<p class="note">Neuer: <b>Uno R4</b> mit deutlich mehr Leistung (32-Bit) und einer WiFi-Variante. <b>Gut für:</b> Lernen, einfache Sensor- und Schaltprojekte.</p></div>
+
+<div class="card"><h3>ESP32</h3>
+<p>Der Allrounder mit <b>WLAN und Bluetooth an Bord</b>. Zwei Rechenkerne bis 240 MHz, viel Speicher, reiche Anschlüsse. Läuft mit <b>3,3 V</b>. Sehr günstig. Quasi Standard für alles Vernetzte.</p>
+<p class="note">Varianten: <b>S3</b> (mehr Leistung, KI-Beschleunigung), <b>C3</b> (klein, günstig, RISC-V), <b>C6</b> (WiFi 6, Thread/Zigbee). <b>Gut für:</b> smarte Geräte, Sensoren mit App-Anbindung, Heimautomatisierung.</p></div>
+
+<div class="card"><h3>ESP8266</h3>
+<p>Der ältere, kleinere Bruder des ESP32: nur WLAN, ein Kern, sehr billig. 3,3 V. Für reine WLAN-Aufgaben ohne Bluetooth immer noch beliebt.</p>
+<p class="note"><b>Gut für:</b> günstige WLAN-Schalter und -Sensoren, wenn die volle ESP32-Leistung nicht nötig ist.</p></div>
+
+<div class="card"><h3>Raspberry Pi Pico / Pico 2</h3>
+<p>Sehr günstig, sparsam und einsteigerfreundlich, besonders mit Python. Der <b>Pico 2</b> (RP2350) hat zwei kräftigere Kerne, doppelt so viel Speicher und rechnet auch mit Kommazahlen schnell. Läuft mit 3,3 V. Die <b>W</b>-Varianten haben WLAN und Bluetooth.</p>
+<p class="note">Besonderheit: programmierbare Ein-/Ausgänge (PIO) für eigene, exakte Signalprotokolle. <b>Gut für:</b> stromsparende Projekte, Python-Einstieg, präzise Signalsteuerung.</p></div>
+
+<div class="card"><h3>STM32 ("Blue Pill" & Co.)</h3>
+<p>Leistungsstarke ARM-Controller mit sehr präzisen Anschlüssen (Messen, Zeitsteuerung). Skalierbare Familie, lange lieferbar. Kein Funk an Bord, und die Lernkurve ist steiler.</p>
+<p class="note"><b>Gut für:</b> anspruchsvolle Steuerungen, Motorregelung, Robotik, alles wo Präzision und Tempo zählen.</p></div>
+
+<div class="card"><h3>Spezialisten (gut zu wissen)</h3>
+<p><b>Teensy</b>: sehr schnell, top für Audio. <b>nRF52840</b>: Bluetooth-Spezialist, extrem stromsparend. <b>ATtiny</b>: winziger Chip für ganz kleine Aufgaben. Greift man, wenn ein Standard-Board nicht passt.</p></div>
+</div>
+
+<h2>Boards im Vergleich (1 bis 10)</h2>
+<div id="mcu-rating"></div>
+<p class="note">"Funk" meint WLAN/Bluetooth an Bord, "Sparsam" den Stromverbrauch, "Community" die Menge an Anleitungen und fertigen Bibliotheken. Höher ist mehr. Grobe Orientierung.</p>
+
+<h2>Pin-Grundlagen</h2>
+<div class="card">
+<div class="rule"><span class="ico">🔲</span><div><b>GPIO (digitale Pins):</b> können HIGH (an) oder LOW (aus) sein. Damit liest du Taster oder schaltest LEDs, Transistoren usw.</div></div>
+<div class="rule"><span class="ico">📈</span><div><b>Analoge Eingänge (ADC):</b> messen eine Spannung als Zahlwert, z. B. von einem Poti oder Sensor. Nicht jeder Pin kann das.</div></div>
+<div class="rule"><span class="ico">〰️</span><div><b>PWM-Ausgänge:</b> schnelles An/Aus, um Helligkeit, Drehzahl oder Servowinkel stufenlos zu steuern.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Logikpegel 3,3 V vs. 5 V:</b> der wichtigste Stolperstein. ESP32 und Pico vertragen an ihren Pins <b>nur 3,3 V</b>. 5 V von einem Arduino oder Sensor direkt drauf kann den Pin zerstören. Dann Pegelwandler oder Spannungsteiler nutzen.</div></div>
+<div class="rule"><span class="ico">🔌</span><div><b>Pin-Strom ist begrenzt:</b> mit ~20 mA pro Pin planen, 40 mA ist das absolute Maximum. Motoren, LED-Streifen oder Relais nie direkt anschließen, immer über Transistor/MOSFET oder Treiber (Schaltung: Tab <a href="#schaltplan">Schaltplan</a>).</div></div>
+<div class="rule"><span class="ico">🔗</span><div><b>I²C, SPI, UART</b> sind die Datenleitungen zu Displays, Sensoren und Modulen (erklärt im Tab <a href="#displays">Displays</a>). Gemeinsame Masse nicht vergessen.</div></div>
+</div>
+
+<h2>Speicher & Stromversorgung kurz</h2>
+<div class="grid2">
+<div class="card"><h3>Flash vs. RAM</h3><p><b>Flash</b> ist der dauerhafte Programmspeicher (dein Code bleibt nach dem Ausschalten). <b>RAM</b> ist der flüchtige Arbeitsspeicher während des Laufens. Mehr von beidem erlaubt größere Programme und mehr Daten.</p></div>
+<div class="card"><h3>Versorgung</h3><p>Meist über <b>USB</b>. Oder über einen <b>VIN</b>-Pin mit etwas höherer Spannung, die ein Regler auf dem Board herunterregelt. Es gibt auch einen 3,3-V- oder 5-V-Pin zur Versorgung von Modulen. Pin-Spannung des Boards beachten.</p></div>
+</div>
+
+<h2>Womit programmiert man?</h2>
+<div class="card">
+<div class="rule"><span class="ico">🅰️</span><div><b>Arduino IDE</b> (Sprache C/C++): der mit Abstand gängigste Einstieg, läuft für fast alle Boards inklusive ESP32 und Pico. Riesige Bibliotheks-Auswahl.</div></div>
+<div class="rule"><span class="ico">🐍</span><div><b>MicroPython / CircuitPython</b> (Sprache Python): einsteigerfreundlich, schnelles Ausprobieren, besonders beliebt auf Pico und ESP32.</div></div>
+<div class="rule"><span class="ico">🛠️</span><div><b>PlatformIO</b>: komfortable Profi-Umgebung für größere Projekte. <b>ESP-IDF</b>: das tiefe Entwicklerwerkzeug speziell für ESP32.</div></div>
+</div>
+
+<h2>Worauf achten</h2>
+<div class="card">
+<div class="rule"><span class="ico">⚡</span><div><b>3,3 V oder 5 V?</b> Immer zuerst klären, mit welcher Spannung Board und angeschlossenes Teil arbeiten, sonst Pin-Schaden.</div></div>
+<div class="rule"><span class="ico">🔌</span><div><b>Keine Last direkt am Pin.</b> Strombegrenzung beachten, kräftige Verbraucher über Treiber schalten.</div></div>
+<div class="rule"><span class="ico">🔋</span><div><b>Saubere Versorgung.</b> WLAN-Module wie der ESP32 ziehen kurze Stromspitzen. Schwache USB-Quellen führen zu Abstürzen, lieber ein Stützkondensator und eine kräftige Quelle.</div></div>
+<div class="rule"><span class="ico">📍</span><div><b>Nicht jeder Pin kann alles.</b> Manche sind nur Eingang, manche stören beim Start (Boot-Pins). Pin-Belegungsplan ("Pinout") des Boards bereithalten.</div></div>
+</div>
+
+<h2>Auswahlhilfe: welches Board?</h2>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Du willst…</th><th>Empfehlung</th></tr></thead>
+<tbody>
+<tr><td>einfach lernen, simple Projekte</td><td><b>Arduino Uno / Nano</b></td></tr>
+<tr><td>WLAN/Bluetooth, App-Anbindung, smart</td><td><b>ESP32</b></td></tr>
+<tr><td>günstiger reiner WLAN-Schalter/-Sensor</td><td><b>ESP8266</b> oder ESP32-C3</td></tr>
+<tr><td>stromsparend, Python, sehr günstig</td><td><b>Raspberry Pi Pico 2 (W)</b></td></tr>
+<tr><td>hohe Präzision, Motorregelung, Tempo</td><td><b>STM32</b></td></tr>
+<tr><td>volle GUI, Linux, Browser, Kamera</td><td><b>Raspberry Pi</b> (Mini-Computer, kein MCU)</td></tr>
+</tbody>
+</table></div>

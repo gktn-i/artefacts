@@ -1,0 +1,58 @@
+<h2>Wozu ein Oszilloskop?</h2>
+<p>Das Multimeter zeigt dir <b>eine Zahl</b> — den Mittelwert. Das Oszilloskop zeigt dir den <b>zeitlichen Verlauf</b> als Kurve: Form, Frequenz, Störungen, Timing. Alles, was sich schnell ändert, sieht man erst hier.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Werkzeug</th><th>Zeigt</th><th>Nimm es für</th></tr></thead>
+<tbody>
+<tr><td><b>Multimeter</b></td><td>einen gemittelten Zahlenwert</td><td>Spannung, Strom, Widerstand, Durchgang — alles, was stillsteht</td></tr>
+<tr><td><b>Logic Analyzer</b></td><td>viele digitale Leitungen als 0/1 über der Zeit, dekodiert</td><td>I²C, SPI, UART: <b>was</b> die Bits sagen. Günstig (ab ~15 €)</td></tr>
+<tr><td><b>Oszilloskop</b></td><td>den echten Spannungsverlauf als Kurve</td><td>Signalform, Störungen, Ripple, Flanken, Timing — <b>wie</b> das Signal aussieht</td></tr>
+</tbody>
+</table></div>
+<p class="note">Faustregel: Steht der Wert still → Multimeter. Sind es Daten auf einem Bus → Logic Analyzer. Geht es um die <b>Form</b> oder um Analoges → Oszilloskop.</p>
+
+<h2>Das Bild verstehen: Raster, Zeit, Spannung</h2>
+<p>Der Schirm ist ein Raster aus Kästchen („Divisions"). Zwei Knöpfe legen fest, was ein Kästchen bedeutet:</p>
+<svg class="sy sy-mid" style="max-width:430px" viewBox="-46 0 486 250" role="img" aria-label="Oszilloskop-Schirm mit Raster, Rechtecksignal, Triggerlinie und Beschriftung der Achsen"><rect class="w" x="30" y="14" width="336" height="196" rx="4"/><g style="stroke:var(--border);stroke-width:1;fill:none"><path d="M72,14 V210 M114,14 V210 M156,14 V210 M198,14 V210 M240,14 V210 M282,14 V210 M324,14 V210"/><path d="M30,42 H366 M30,70 H366 M30,98 H366 M30,126 H366 M30,154 H366 M30,182 H366"/></g><path class="acc" style="stroke-width:2.4" d="M30,168 H72 V70 H156 V168 H240 V70 H324 V168 H366"/><path style="stroke:var(--rate-bad);stroke-width:1.4;stroke-dasharray:5 4;fill:none" d="M30,112 H366"/><text class="lbl" x="372" y="116" style="fill:var(--rate-bad)">Trigger</text><path style="stroke:var(--rate-bad);stroke-width:1.4;fill:none" d="M366,112 l-7,-5 M366,112 l-7,5"/><text class="lbl" x="198" y="234" text-anchor="middle">Zeit → &nbsp;·&nbsp; ein Kästchen = Zeitbasis (s/div)</text><text class="lbl" x="22" y="60" text-anchor="end">Spannung</text><text class="lbl" x="22" y="74" text-anchor="end">↑ V/div</text></svg>
+<div class="card">
+<div class="rule"><span class="ico">↔️</span><div><b>Zeitbasis (s/div):</b> wie viel Zeit ein Kästchen waagerecht bedeutet. Zu schnell = nur ein Strich, zu langsam = ein Brei. Richtig ist, wenn <b>2–5 Perioden</b> auf dem Schirm stehen.</div></div>
+<div class="rule"><span class="ico">↕️</span><div><b>Vertikal (V/div):</b> wie viel Spannung ein Kästchen senkrecht bedeutet. Richtig ist, wenn das Signal <b>gut die halbe bis ganze Schirmhöhe</b> füllt — dann nutzt du die Auflösung aus.</div></div>
+<div class="rule"><span class="ico">🎯</span><div><b>Trigger:</b> der wichtigste Knopf. Er sagt „zeichne immer dann, wenn das Signal diesen <b>Pegel</b> in dieser <b>Flanke</b> (steigend/fallend) kreuzt". <b>Ohne Trigger kein stehendes Bild</b> — die Kurve flackert dann nur durchs Bild.</div></div>
+<div class="rule"><span class="ico">🔗</span><div><b>Kopplung DC / AC:</b> <b>DC</b> zeigt alles (Normalfall). <b>AC</b> blendet den Gleichanteil aus — genau richtig, um z. B. 50 mV Ripple auf einer 12-V-Leitung sichtbar zu machen.</div></div>
+</div>
+<p class="note">Erste Hilfe, wenn nichts zu sehen ist: <b>Auto-Set</b> drücken. Danach von Hand nachjustieren — Auto-Set trifft Zeitbasis und Trigger meist grob, aber selten optimal.</p>
+
+<h2>Der Tastkopf: 1× oder 10×?</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Stellung</th><th>Was passiert</th><th>Wann</th></tr></thead>
+<tbody>
+<tr><td><b>10×</b> (Standard)</td><td>teilt das Signal durch 10, belastet die Schaltung kaum (ca. 10 MΩ), volle Bandbreite</td><td><b>Der Normalfall</b> — hier lässt du ihn</td></tr>
+<tr><td>1×</td><td>leitet direkt durch (1 MΩ), aber stark reduzierte Bandbreite und mehr Rauschen</td><td>nur für sehr kleine, langsame Signale</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Am Gerät dieselbe Stellung einstellen!</b> Steht der Tastkopf auf 10× und das Oszi auf 1×, zeigt es <b>ein Zehntel</b> der echten Spannung an — aus 5 V werden angezeigte 0,5 V. Der häufigste Anfängerfehler.</div>
+<div class="card">
+<div class="rule"><span class="ico">🔧</span><div><b>Tastkopf abgleichen (einmal pro Gerät):</b> Spitze an den Kalibrier-Ausgang des Oszis (meist 1 kHz Rechteck). Mit dem kleinen Schräubchen am Tastkopf drehen, bis die Rechteck-Ecken <b>scharf und gerade</b> sind — nicht verrundet und nicht überschwingend.</div></div>
+<div class="rule"><span class="ico">📏</span><div><b>Masse-Krokodil so kurz wie möglich.</b> Lange Masseleitungen erzeugen Klingeln und Überschwingen im Bild, das gar nicht in der Schaltung ist. Bei schnellen Signalen die Federspitze statt des Kabels nutzen.</div></div>
+</div>
+
+<div class="danger-box"><p style="margin:0"><b>⚠️ Die Masse-Klemme ist die Gefahrenstelle.</b> Sie liegt intern auf <b>Schutzerde</b>. Klemmst du sie an einen Punkt, der nicht auf Erdpotenzial liegt (z. B. irgendwo in einem netzbetriebenen Gerät ohne Trenntrafo), erzeugst du einen <b>Kurzschluss über den Schutzleiter</b> — Funken, zerstörtes Oszi, Lebensgefahr. Regel: <b>Nur an batterie- oder netzteilgespeisten Kleinspannungs-Schaltungen messen.</b> Für alles am Netz braucht es einen Trenntrafo oder einen Differenztastkopf. Siehe Tab <a href="#sicherheit">Sicherheit</a>.</p></div>
+
+<h2>Worauf du beim Kauf achtest</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Kennwert</th><th>Faustregel</th><th>Fürs Hobby</th></tr></thead>
+<tbody>
+<tr><td><b>Bandbreite</b></td><td>mindestens <b>5× die höchste Signalfrequenz</b> (sonst werden Rechteck-Flanken rund)</td><td><b>100 MHz</b> deckt praktisch alles ab</td></tr>
+<tr><td><b>Abtastrate</b></td><td>ca. <b>5–10× die Bandbreite</b>; theoretisches Minimum wäre 2× (Nyquist), das reicht in der Praxis nicht</td><td>1 GSa/s</td></tr>
+<tr><td><b>Kanäle</b></td><td>2 = Signal + Referenz vergleichen, 4 = Bus-Leitungen zusammen ansehen</td><td>2 reichen, 4 sind komfortabel</td></tr>
+<tr><td><b>Speichertiefe</b></td><td>je mehr, desto länger kannst du bei feiner Zeitauflösung aufzeichnen</td><td>ab ~10 Mpts angenehm</td></tr>
+</tbody>
+</table></div>
+<p class="note">Gängige Einsteigergeräte dieser Klasse: Rigol DHO800/DHO900, Siglent SDS800X HD, Owon. Viele haben Bus-Dekodierung (I²C/SPI/UART) an Bord und ersetzen dann teilweise den Logic Analyzer.</p>
+
+<h2>Typische Messungen im Hobby</h2>
+<div class="grid2">
+<div class="card"><h3>PWM prüfen</h3><p>Tastkopf an den Ausgangspin, Masse an GND. Ablesen: <b>Frequenz</b> und <b>Tastgrad</b> (wie breit der High-Anteil im Verhältnis zur Periode ist). Das Multimeter zeigt hier nur den nutzlosen Mittelwert.</p></div>
+<div class="card"><h3>Schwingt der Quarz?</h3><p>Mit <b>10×</b>-Tastkopf an einen der beiden XTAL-Pins. Sinusähnliche Schwingung = läuft. Wichtig: Antasten kann den empfindlichen Oszillator stören oder stoppen — nur kurz prüfen.</p></div>
+<div class="card"><h3>Netzteil-Ripple messen</h3><p>Kopplung auf <b>AC</b>, V/div klein (z. B. 20 mV). Jetzt siehst du die Restwelligkeit auf der geglätteten Gleichspannung. Viel Ripple = müder Elko oder überlasteter Regler.</p></div>
+<div class="card"><h3>Taster entprellen</h3><p>Beim Drücken siehst du das mechanische <b>Prellen</b>: mehrere schnelle Flanken statt einer. Genau der Grund, warum Software oder ein RC-Glied entprellen muss.</p></div>
+</div>

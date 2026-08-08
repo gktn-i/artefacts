@@ -1,0 +1,140 @@
+<h2>Draht und Entlötlitze</h2>
+<p>Womit man Verbindungen wiederherstellt und womit man Lot wieder wegbekommt. Lot, Flussmittel und Paste stehen im Tab <a class="goto" href="#material">Lot &amp; Flussmittel</a>.</p>
+<h2>Reparaturdraht &amp; Jumper Wire</h2>
+<p>Wenn eine Leiterbahn gerissen ist, ein Pad fehlt oder eine Verbindung nachträglich gelegt werden muss, brauchst du Draht — und zwar den <b>richtigen</b>. Zu dünn heißt Spannungsabfall und abgerissene Brücke, zu dick heißt, er hebt beim ersten Anstoßen das Pad mit ab.</p>
+
+<h4>Durchmesser, AWG und was durchpasst</h4>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Ø</th><th>≈ AWG</th><th>Widerstand</th><th>Kurze Brücke trägt</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>0,02 mm</b></td><td>~52</td><td>~53 Ω/m</td><td>wenige mA</td><td>Feinste Pad-Reparatur unterm Mikroskop, kaum sichtbar. Reißt beim Schiefansehen.</td></tr>
+<tr><td><b>0,05 mm</b></td><td>44</td><td>8,5 Ω/m</td><td>~50 mA</td><td>Signalleitungen an BGA-Pads, Datenleitungen auf Handy-Boards</td></tr>
+<tr><td><b>0,08 mm</b></td><td>40</td><td>3,3 Ω/m</td><td>~90 mA</td><td>Allrounder für Signalreparatur — noch gut handhabbar</td></tr>
+<tr><td><b>0,10 mm</b></td><td>38</td><td>2,1 Ω/m</td><td>~140 mA</td><td><b>Der Standard für Fädeldraht-Reparaturen.</b> Dünn genug für feinen Pitch, robust genug zum Arbeiten.</td></tr>
+<tr><td><b>0,13 mm</b></td><td>36</td><td>1,3 Ω/m</td><td>~230 mA</td><td>Signale plus kleine Verbraucher (LED, Sensor)</td></tr>
+<tr><td><b>0,16 mm</b></td><td>34</td><td>0,84 Ω/m</td><td>~360 mA</td><td>Kurze Versorgungsbrücken auf dem Board</td></tr>
+<tr><td><b>0,20 mm</b></td><td>32</td><td>0,54 Ω/m</td><td>~570 mA</td><td>Rail-Reparatur bei kleinen Strömen</td></tr>
+<tr><td><b>0,25 mm</b></td><td>30</td><td>0,34 Ω/m</td><td>~860 mA</td><td><b>Kynar-Wire-Wrap-Standard</b> — der klassische Mod-/Bodge-Wire</td></tr>
+<tr><td><b>0,32 mm</b></td><td>28</td><td>0,21 Ω/m</td><td>~1,4 A</td><td>Versorgungsleitungen, Akku-Anschlüsse an kleinen Geräten</td></tr>
+<tr><td><b>0,40 mm</b></td><td>26</td><td>0,13 Ω/m</td><td>~2,2 A</td><td>Alles ab etwa 1 A — darunter wird es warm</td></tr>
+<tr><td><b>0,51 mm</b></td><td>24</td><td>0,084 Ω/m</td><td>~3,5 A</td><td>Leistungsbrücken, Motor- und Ladeleitungen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Stromwerte gelten für eine <b>kurze, frei liegende</b> Brücke, nicht für Meterware im Bündel — dort ist nur etwa ein Sechstel davon zulässig. Und: 0,01 mm wird zwar angeboten, praktisch handhabbar beginnt es bei <b>0,02 mm</b>. Zum Rechnen: 20 mm mit 0,1 mm Draht ergeben ~43 mΩ — für Signale völlig egal, bei 1 A wären es aber schon 43 mV Verlust und 43 mW Wärme in einem Draht, der dafür ohnehin zu dünn ist.</p>
+
+<h4>Isoliert oder blank — welche Sorte wofür</h4>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Sorte</th><th>Isolierung</th><th>Verarbeiten</th><th>Dafür nehmen</th></tr></thead>
+<tbody>
+<tr><td><b>Kupferlackdraht, lötbar</b> (UEW/Polyurethan)</td><td>hauchdünner Lack, praktisch keine Dicke</td><td><b>Kein Abisolieren:</b> Ende in einen Lotklecks bei 350–380 °C halten, der Lack verbrennt und der Draht verzinnt sich selbst</td><td><b>Die erste Wahl für Leiterbahn-Reparatur.</b> Liegt flach auf der Platine, darf über andere Bahnen laufen, verschwindet unter UV-Lack.</td></tr>
+<tr><td>Kupferlackdraht, <b>nicht</b> lötbar (Polyimid/ML)</td><td>zäher Hochtemperatur-Lack</td><td>Muss mechanisch abgekratzt oder chemisch entfernt werden</td><td>Für Reparaturen eher meiden. Erkennbar daran, dass er im Lot einfach nicht benetzt.</td></tr>
+<tr><td><b>Kynar / Wire-Wrap</b> (30 AWG, PVDF)</td><td>zäh, hitzefest, sehr dünnwandig</td><td>Abisolieren mit Spezialabisolierer oder vorsichtig mit der Klinge</td><td><b>Mod- und Bodge-Wire</b> über größere Strecken. Zieht sich beim Löten nicht zurück, ist farbig und dadurch nachvollziehbar.</td></tr>
+<tr><td><b>Versilberte PTFE-Litze</b> (Teflon, „Silberdraht&#8220;, MIL-Spec M22759/11)</td><td>PTFE, dauerhaft bis <b>200 °C</b> — hält jede Lötkolbenhitze aus</td><td>Abisolieren, dann verzinnt sie sich fast von allein: die Silberschicht benetzt sofort</td><td><b>Die beste Allround-Litze auf der Platine</b> und alles, was sich bewegt: Kabel zu Displays, Akkus, Deckeln. Litze bricht nicht durch Biegewechsel, Massivdraht schon.</td></tr>
+<tr><td><b>Versilberter Kupferdraht, blank</b> (massiv, SPC)</td><td>keine</td><td>Direkt löten, benetzt sofort ohne Kratzen oder Schmirgeln</td><td>Kurze Brücken, Masseverbindungen, HF- und Freiluft-Aufbauten. Liegt jahrelang im Regal und ist trotzdem noch lötbar — blankes Kupfer nicht.</td></tr>
+<tr><td>Verzinnte Litze, PVC (Standard-Schaltdraht)</td><td>PVC — schmilzt bei Lötwärme zurück, ca. 80–105 °C</td><td>Abisolieren, schnell arbeiten</td><td>Nur außerhalb der Hitzezone. Auf der Platine zieht sich die Isolierung zurück und legt blanken Draht frei.</td></tr>
+<tr><td><b>Blanker Kupferdraht</b></td><td>keine</td><td>Direkt löten, oxidierte Oberfläche vorher blank machen</td><td>Nur <b>sehr kurze</b> Brücken zwischen benachbarten Pads, wo nichts gekreuzt wird. Sobald der Draht über eine andere Bahn läuft: Kurzschlussgefahr.</td></tr>
+</tbody>
+</table></div>
+
+<h4>Versilbert, verzinnt oder blank — was die Beschichtung bringt</h4>
+<p>„Silberhaltiges Kabel&#8220; heißt in der Praxis fast immer <b>versilberte Kupferlitze</b> (englisch <i>silver-plated copper</i>, kurz <b>SPC</b>): ein ganz normaler Kupferleiter mit einer hauchdünnen Silberschicht, meist unter PTFE-Isolierung. Der Kern ist Kupfer — es ist kein Silberdraht, auch wenn er im Handel oft so heißt. Nicht verwechseln mit <b>silberhaltigem Lot</b> (SAC305, SnAg): das ist die Legierung im Lötzinn und steht weiter oben im Abschnitt <b>Lötzinn (Lot)</b>.</p>
+<div class="grid">
+<div class="card"><div class="ct">① Lötbarkeit auf Jahre</div><div class="cd">Kupfer oxidiert und wird dann schlecht lötbar. <b>Silberoxid leitet weiter und lässt sich löten</b> — versilberte Litze benetzt auch nach langer Lagerung sofort, ohne Kratzen oder aggressives Flux. Das ist im Alltag der wichtigste Punkt.</div></div>
+<div class="card"><div class="ct">② Hitzefestigkeit</div><div class="cd">PTFE wird bei sehr hoher Temperatur verarbeitet und ist dauerhaft bis <b>200 °C</b> einsetzbar. Eine <b>Zinn</b>schicht kann da nicht mitgehen (Zinn schmilzt bei 232 °C) — verzinnte Leiter sind deshalb bei etwa <b>150 °C</b> am Ende. Wer PTFE will, bekommt automatisch versilbert oder vernickelt.</div></div>
+<div class="card"><div class="ct">③ Hochfrequenz</div><div class="cd">Bei hohen Frequenzen fließt der Strom nur in der äußersten Randschicht des Leiters (<b>Skin-Effekt</b>) — und Silber ist der beste elektrische Leiter überhaupt. Deshalb sind Koax-Innenleiter und HF-Litzen versilbert. <b>Bei Gleichstrom und NF bringt das nichts</b> — dort zählt nur der Querschnitt.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Beschichtung</th><th>Dauertemperatur</th><th>Löten</th><th>Typisch</th></tr></thead>
+<tbody>
+<tr><td><b>versilbert</b> (SPC)</td><td>bis 200 °C (mit PTFE)</td><td><span class="b b-ok">sehr gut</span> benetzt sofort</td><td>Reparatur- und Mod-Litze, HF, Luftfahrt, alles Hitzenahe</td></tr>
+<tr><td><b>verzinnt</b> (TPC)</td><td>bis ca. 150 °C</td><td><span class="b b-ok">gut</span></td><td>Standard-Schaltlitze, Steckerkonfektion — günstig und völlig ausreichend</td></tr>
+<tr><td>blank (Rein-Kupfer)</td><td>—</td><td><span class="b b-warn">nur frisch</span> oxidiert mit der Zeit</td><td>Wickelgut, sehr kurze Brücken, alles was sofort verarbeitet wird</td></tr>
+<tr><td>vernickelt</td><td>260 °C und mehr</td><td><span class="b b-warn">zäh</span> braucht aktiveres Flux</td><td>Ofen-, Heiz- und Thermofühlerleitungen — für die Werkbank ungeeignet</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Was man kaufen sollte:</b> Versilberte PTFE-Litze in <b>28–30 AWG</b> (0,25–0,32 mm) ist der Allrounder für Reparaturen auf der Platine: dünn genug für enge Stellen, hitzefest genug, dass die Isolierung beim Löten <b>nicht zurückschmilzt</b> — genau der Punkt, an dem PVC-Litze nervt. Für Akku- und Versorgungsleitungen dieselbe Sorte in 24–26 AWG. Preislich liegt sie deutlich über PVC-Litze, aber man braucht davon nur wenige Meter.</div>
+<div class="tip"><b>Beim Löten trotzdem zügig arbeiten.</b> Die Silberschicht ist nur wenige Mikrometer dick. Bleibt die Spitze zu lange dran, löst sie sich ins Lot auf und darunter kommt blankes Kupfer zum Vorschein — die Stelle oxidiert dann wie jeder andere Kupferdraht. Ein bis zwei Sekunden reichen ohnehin, weil die Litze so bereitwillig benetzt.</div>
+<div class="warn"><b>Rotpest (Red Plague):</b> Der eine Nachteil versilberter Kupferleiter. Wo die Silberschicht verletzt ist und Feuchtigkeit hinkommt, bildet sich zwischen Silber und Kupfer ein galvanisches Element — das Kupfer korrodiert zu rotbraunem Kupfer(I)-oxid, das unter der Isolierung entlangwandert. Erkennbar an <b>rot-braunen Flecken</b> auf der sonst silbrigen Litze. Der Leiter wird hochohmig und mechanisch spröde. In Luft- und Raumfahrt ein bekanntes Thema (die NASA hat dafür einen eigenen Kontrollplan). Fürs Hobby heißt das schlicht: fleckige oder angerissene Litze nicht verbauen, Schnittenden nicht dauerfeucht liegen lassen und Reste trocken lagern.</div>
+
+<h4>Die Entscheidung in fünf Regeln</h4>
+<ol>
+<li><b>Wie viel Strom fließt?</b> Das legt den Durchmesser fest — Tabelle oben, und im Zweifel eine Stufe dicker.</li>
+<li><b>Kreuzt der Draht etwas?</b> Ja → isoliert, immer. Nein und kürzer als ein paar Millimeter → blank ist erlaubt.</li>
+<li><b>Bewegt sich das Ende?</b> Ja → <b>Litze</b>, am besten versilbert mit PTFE. Massivdraht bricht an der Lötstelle durch Biegewechsel — die häufigste Ursache für „die Reparatur hat drei Wochen gehalten".</li>
+<li><b>Wie fein ist die Stelle?</b> Unter dem Mikroskop an BGA- oder 0201-Pads: 0,05–0,1 mm Lackdraht. Alles Gröbere reißt beim Löten das Pad ab.</li>
+<li><b>Muss es jemand nachvollziehen können?</b> Dann farbiger Kynar-Draht statt unsichtbarem Lackdraht — auch für dich selbst in einem Jahr.</li>
+</ol>
+
+<div class="tip"><b>Saubere Fädeldraht-Reparatur, Schritt für Schritt:</b> ① Bruchstelle beidseitig freilegen (Lötstopplack vorsichtig abkratzen), blankes Kupfer verzinnen. ② Draht auf Länge plus ~20 % schneiden, beide Enden im Lotklecks verzinnen (Lack brennt ab). ③ Ein Ende antacken, Draht flach anlegen, zweites Ende antacken. ④ <b>Durchgang messen</b> — und gegen die Nachbarbahnen prüfen, dass nichts piept. ⑤ Fixieren: ein Tropfen <b>UV-Lötstopplack</b> (grünes Öl) drüber und aushärten, oder Kapton-Tape. Ohne Fixierung wirkt jede Bewegung direkt auf die Lötstelle.</div>
+<div class="warn"><b>Der häufigste Fehler:</b> zu straff gespannt. Der Draht braucht eine minimale Schlaufe, sonst zieht jede Temperaturdehnung und jeder Stoß direkt am Pad — und das Pad ist immer schwächer als der Draht.</div>
+
+<h2>Entlötlitze (Wick)</h2>
+<p>Feines, mit Flussmittel getränktes Kupfergeflecht. Flüssiges Lot wird durch <b>Kapillarwirkung</b> hineingesaugt — dieselbe Kraft, die Wasser in einem Schwamm hochzieht. Die Litze ist das Werkzeug für Lötbrücken, für das Leerräumen von THT-Löchern und für alles, was mit BGA-Pads zu tun hat.</p>
+
+<h4>Breite wählen</h4>
+<p>Die Litze soll <b>etwa so breit wie die Lötstelle</b> sein. Zu schmal saugt zu wenig und du fängst dreimal an; zu breit legt sich über Nachbarpads, zieht deren Lot mit ab und braucht viel mehr Wärme, bis überhaupt etwas passiert. Die Größennummern und Farben von Chemtronics Soder-Wick haben sich als Quasi-Standard etabliert:</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Größe</th><th>Breite</th><th>Farbe</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>#1</b></td><td>0,8 mm (.030")</td><td>weiß</td><td>Einzelne feine Pins, 0402/0201-Pads, BGA-Einzelpad</td></tr>
+<tr><td><b>#2</b></td><td>1,5 mm (.060")</td><td>gelb</td><td><b>Allrounder für SMD</b> — QFP-Brücken, Chip-Pads, THT-Pads</td></tr>
+<tr><td><b>#3</b></td><td>2,0 mm (.080")</td><td>grün</td><td><b>Allrounder für alles Größere</b> — BGA-Felder abziehen, THT-Reihen, Steckerleisten</td></tr>
+<tr><td><b>#4</b></td><td>2,8 mm (.110")</td><td>blau</td><td>Große Pads, Masseflächen, Abschirmbleche</td></tr>
+<tr><td><b>#5</b></td><td>3,7 mm (.145")</td><td>braun</td><td>Sehr große Flächen, Akku-Kontakte</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Wenn du nur zwei Rollen kaufst:</b> <b>#2 (1,5 mm)</b> und <b>#3 (2,0 mm)</b>. Damit ist von der QFP-Brücke bis zum BGA-Feld alles abgedeckt.</div>
+
+<h4>Die wichtigste Regel: kurz abschneiden</h4>
+<p>Der häufigste Fehler ist, mit einem 10 cm langen Litzenschwanz zu arbeiten, der von der Rolle wegläuft. Kupfergeflecht ist ein <b>hervorragender Wärmeleiter</b> — der überstehende Teil zieht die Wärme aus der Arbeitsstelle ab und gibt sie an die Luft weiter. Das hat drei Folgen:</p>
+<ul>
+<li><b>Der Kolben muss dagegenheizen.</b> Du drehst die Temperatur hoch, obwohl das Problem gar nicht die Lötstelle ist. Mehr Hitze und mehr Zeit auf dem Pad — genau das, was Pads ablöst.</li>
+<li><b>Die Litze saugt später.</b> Das Flussmittel im Geflecht wird erst bei Temperatur aktiv. Ein kalter Zipfel verzögert diesen Moment.</li>
+<li><b>Die Rolle wird heiß.</b> Und du verbrennst dir die Finger oder lässt los, während die Litze am Pad festbackt.</li>
+</ul>
+<div class="gb">
+<div class="gb-col good"><h4>✓ 1–2 cm, direkt in die Pinzette</h4>
+<svg class="sk" viewBox="0 0 230 100" role="img" aria-label="Kurzes Litzenstück auf dem Pad, Wärme bleibt an der Lötstelle">
+  <rect class="pcb" x="15" y="66" width="200" height="16" rx="2"/>
+  <rect class="pad" x="86" y="59" width="52" height="7" rx="2"/>
+  <rect class="lead" x="84" y="52" width="58" height="7" rx="2"/>
+  <path class="sold" d="M104,52 L124,52 L128,36 L100,36 Z"/>
+  <text class="lbl" x="150" y="44">Spitze</text>
+  <text class="lbl" x="115" y="95" text-anchor="middle">Wärme bleibt an der Stelle</text>
+  <text class="mark-ok" x="24" y="30">✓</text>
+</svg>
+</div>
+<div class="gb-col bad"><h4>✗ Langer Schwanz von der Rolle</h4>
+<svg class="sk" viewBox="0 0 230 100" role="img" aria-label="Lange Litze zieht Wärme von der Lötstelle weg">
+  <rect class="pcb" x="15" y="66" width="200" height="16" rx="2"/>
+  <rect class="pad" x="60" y="59" width="40" height="7" rx="2"/>
+  <rect class="lead" x="58" y="52" width="156" height="7" rx="2"/>
+  <path class="sold" d="M70,52 L90,52 L94,36 L66,36 Z"/>
+  <path class="axis" d="M150,50 L150,34 M170,50 L170,34 M190,50 L190,34"/>
+  <text class="lbl" x="170" y="30" text-anchor="middle">Wärme weg</text>
+  <text class="lbl" x="90" y="95" text-anchor="middle">Litze zieht Wärme ab</text>
+  <text class="mark-bad" x="24" y="30">✗</text>
+</svg>
+</div>
+</div>
+
+<h4>Technik</h4>
+<div class="steps">
+<div class="step"><b>Frisches Flussmittel</b> auf die Stelle und gerne auch auf die Litze. Die eingearbeitete Flussmittelmenge ist knapp bemessen und bei alter Litze oft verflogen.</div>
+<div class="step"><b>Litze flach auflegen</b>, Spitze <b>auf</b> die Litze drücken — nicht neben sie. Die Wärme muss durch das Geflecht ins Lot.</div>
+<div class="step"><b>Warten, bis es „einzieht&#8220;.</b> Man sieht und hört, wie das Lot hochgesaugt wird und die Litze silbrig wird. Erst dann bewegen.</div>
+<div class="step"><b>In eine Richtung ziehen.</b> Ein Zug, dann neu ansetzen. Hin- und Herschrubben verteilt Lot, statt es aufzunehmen.</div>
+<div class="step"><b>Litze und Spitze zusammen abheben.</b> Nie kalt abreißen — festgebackene Litze nimmt das Pad mit.</div>
+<div class="step"><b>Gesättigtes Stück abschneiden.</b> Voll gesogene Litze saugt nicht mehr und wird nur noch heiß.</div>
+</div>
+
+<h4>Tricks, die den Unterschied machen</h4>
+<ul>
+<li><b>Im Winkel ansetzen:</b> Legst du die Litze schräg (~30–45°) über einen Pad-Streifen statt längs, berührt nur eine schmale Kante die Lötstelle. Du bekommst eine <b>schmalere, gezieltere Angriffsfläche</b> — praktisch, wenn du zwischen zwei Pins nur eine Brücke wegnehmen willst, ohne das Lot der Nachbarn mitzunehmen. Zusätzlich liegt die Litze dann nicht flach auf und kühlt weniger stark.</li>
+<li><b>Litze vorher „anspitzen&#8220;:</b> Ein schräger Schnitt mit der Seitenschneiderklinge gibt dir eine keilförmige Spitze für Einzelpads.</li>
+<li><b>Etwas frisches Lot dazu:</b> Klingt widersinnig, hilft aber bei alten, oxidierten Stellen enorm — das frische Lot bringt Flussmittel mit und stellt überhaupt erst die Wärmebrücke her, damit das alte Lot fließen kann. Bei bleifreien Stellen zusätzlich <b>bleihaltiges</b> Lot einarbeiten: Es senkt den Schmelzpunkt der Mischung, alles fließt früher und die Litze zieht viel williger (Details im Tab <a class="goto" href="#reballing">Reballing</a>).</li>
+<li><b>Breite Spitze nehmen.</b> Eine Meißelspitze überträgt viel mehr Wärme durch die Litze als eine feine Kegelspitze. Bei Litze gilt: lieber groß und kurz als spitz und lange.</li>
+<li><b>Nicht drücken, bis das Pad quietscht.</b> Sanfter, gleichmäßiger Druck reicht. Kraft ersetzt keine Wärme.</li>
+<li><b>Trocken gewordene Litze auffrischen:</b> Ende kurz in Kolophonium oder Flussmittelgel tauchen.</li>
+</ul>
+<div class="warn"><b>Litze braucht mehr Temperatur als eine normale Lötstelle</b> — das Geflecht schluckt Wärme. Statt die Station hochzudrehen: kurzes Stück nehmen, breitere Spitze aufstecken und Flussmittel nachlegen. Erst wenn das alles nicht reicht, 10–20 °C mehr geben.</div>

@@ -1,0 +1,65 @@
+<h2>Motorarten</h2>
+<p>Die Wahl hängt davon ab, was du brauchst: einfach nur Drehung, kontrollierte <b>Position</b>, viel <b>Kraft</b> oder hohe <b>Drehzahl</b>. Wichtig vorab: Motoren hängen <b>nie direkt</b> am Mikrocontroller-Pin, immer ein Treiber dazwischen (siehe unten).</p>
+
+<div class="grid2">
+<div class="card"><h3>Gleichstrommotor (Bürstenmotor)</h3>
+<p>Der einfachste Motor: Spannung dran und er dreht. Polung tauschen kehrt die Richtung um, mehr Spannung dreht schneller. Drehzahl regelt man per schnellem An/Aus-Schalten (PWM).</p>
+<p class="note">Ansteuerung: H-Brücke (Richtung) oder MOSFET (nur an/aus) · <b>Gut für:</b> Räder, Lüfter, Pumpen. Schwäche: Bürsten verschleißen, keine Positionskontrolle.</p></div>
+
+<div class="card"><h3>Getriebemotor</h3>
+<p>Ein Gleichstrommotor mit angebautem Getriebe: <b>langsamer, dafür viel mehr Kraft</b> (Drehmoment).</p>
+<p class="note">Ansteuerung: wie Gleichstrommotor · <b>Gut für:</b> langsame, kräftige Antriebe wie Roboter-Räder, Klappen, Förderbänder.</p></div>
+
+<div class="card"><h3>Servo</h3>
+<p>Motor, Getriebe und Elektronik in einem Gehäuse. Fährt einen <b>bestimmten Winkel</b> an (meist 0 bis 180°) und hält ihn. Der Winkel wird über die Breite eines Steuerimpulses vorgegeben. Es gibt auch endlos drehende "Continuous"-Servos (dann steuert man Geschwindigkeit statt Winkel).</p>
+<p class="note">Anschluss: 3 Drähte (Plus, Minus, Signal) · <b>Gut für:</b> Lenkung, Greifarme, Kameraschwenk, Klappen. Braucht eine eigene, kräftige Stromversorgung.</p></div>
+
+<div class="card"><h3>Schrittmotor (Stepper)</h3>
+<p>Dreht in vielen <b>kleinen, exakten Schritten</b> (typisch 200 pro Umdrehung, also 1,8° je Schritt). Damit positioniert er sehr genau und wiederholbar, ganz ohne Rückmeldesensor. Über "Mikroschritte" wird es noch feiner.</p>
+<p class="note">Bauformen: <b>bipolar</b> (4 Drähte, kräftig, am häufigsten), <b>unipolar</b> (5-6 Drähte). Größen nach NEMA, z. B. <b>NEMA17</b> im 3D-Drucker. Der kleine 28BYJ-48 ist günstig, aber schwach.<br><b>Gut für:</b> 3D-Drucker, CNC, Kameraslider, alles mit exakter Position. Schwäche: hält die Position auch im Stillstand und wird dabei warm, kann bei Überlast Schritte verlieren.</p></div>
+
+<div class="card"><h3>Bürstenloser Motor (BLDC)</h3>
+<p>Kein Bürstenverschleiß, sehr effizient, kräftig und hohe Drehzahl. Dafür braucht er eine aufwändigere Steuerung.</p>
+<p class="note">Ansteuerung: ESC (Motorregler), bekommt ein servoähnliches Steuersignal · <b>Gut für:</b> Drohnen, RC-Modelle, E-Bikes, schnelle effiziente Antriebe. Schwäche: teurer, komplexere Steuerung.</p></div>
+</div>
+
+<h2>Motoren im Vergleich (1 bis 10)</h2>
+<div id="motor-rating"></div>
+<p class="note">Höhere Balken bedeuten mehr von der jeweiligen Eigenschaft. "Einfachheit" meint, wie leicht die Ansteuerung ist, "Günstig" wie preiswert. Grobe Orientierungswerte, keine Labormessung.</p>
+
+<h2>Treiber: das Bindeglied zum Mikrocontroller</h2>
+<p>Ein Mikrocontroller-Pin liefert nur wenige Milliampere, ein Motor will Hunderte bis Tausende. Der Treiber nimmt das schwache Steuersignal und schaltet damit den starken Motorstrom.</p>
+<div class="grid2">
+<div class="card"><h3>H-Brücke (für Gleichstrommotoren)</h3>
+<p>Schaltung, die einen Motor in <b>beide Richtungen</b> drehen lassen kann. Module: <b>L298N</b> (alt, robust, aber ineffizient und wird heiß), <b>TB6612FNG</b> und <b>DRV8833</b> (moderner, effizienter, kühler).</p></div>
+<div class="card"><h3>Schrittmotor-Treiber</h3>
+<p>Bekommt nur zwei Signale: <b>Step</b> (ein Impuls = ein Schritt) und <b>Direction</b> (Richtung). Verbreitet: <b>A4988</b> (Standard, günstig), <b>DRV8825</b> (mehr Strom, feinere Schritte), <b>TMC2209</b> (sehr leise, beliebt in modernen 3D-Druckern). Der Motorstrom wird per kleinem Poti (VREF) eingestellt.</p></div>
+<div class="card"><h3>ESC (für bürstenlose Motoren)</h3>
+<p>Der Motorregler für BLDC. Bekommt ein servoähnliches Steuersignal und erzeugt daraus die komplexe Ansteuerung. Auf passende Strombelastbarkeit achten.</p></div>
+<div class="card"><h3>Servo (Treiber schon eingebaut)</h3>
+<p>Ein Servo braucht keinen externen Treiber, die Elektronik sitzt schon drin. Es reicht das Steuersignal vom Mikrocontroller plus eine eigene Stromversorgung.</p></div>
+</div>
+
+<h2>Worauf achten</h2>
+<div class="card">
+<div class="rule"><span class="ico">🚫</span><div><b>Nie direkt am Mikrocontroller-Pin.</b> Immer ein Treiber dazwischen, sonst stirbt der Pin am zu hohen Strom.</div></div>
+<div class="rule"><span class="ico">🔋</span><div><b>Eigene Stromversorgung für den Motor.</b> Motoren ziehen viel und erzeugen Störungen. Die Logik (Mikrocontroller) sollte nicht aus derselben Leitung gespeist werden.</div></div>
+<div class="rule"><span class="ico">🔗</span><div><b>Gemeinsame Masse.</b> Motor-Versorgung und Steuer-Elektronik müssen ihre Masse (Minus) miteinander verbinden, sonst kommt das Steuersignal nicht an.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Anlauf- und Blockierstrom einplanen.</b> Beim Start oder wenn er blockiert, zieht ein Motor ein Vielfaches des normalen Stroms. Treiber und Netzteil danach auslegen, nicht nach dem Nennstrom.</div></div>
+<div class="rule"><span class="ico">🎚️</span><div><b>Schrittmotor-Treiber: Strom einstellen (VREF).</b> Zu hoch eingestellt wird heiß, zu niedrig verliert Schritte. Mit dem kleinen Poti am Treiber justieren.</div></div>
+<div class="rule"><span class="ico">🌡️</span><div><b>Treiber kühlen.</b> A4988, DRV8825 und L298N werden warm bis heiß. Kühlkörper aufkleben und für Luft sorgen.</div></div>
+<div class="rule"><span class="ico">⚙️</span><div><b>Freilaufdiode.</b> Bei einfachen Schaltungen mit MOSFET nötig. Fertige Treiber-Module haben den Schutz meist schon eingebaut.</div></div>
+</div>
+
+<h2>Auswahlhilfe: welcher Motor?</h2>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Du brauchst…</th><th>Empfehlung</th></tr></thead>
+<tbody>
+<tr><td>einfache Drehung, Tempo/Richtung grob</td><td><b>Gleichstrommotor</b> + H-Brücke</td></tr>
+<tr><td>viel Kraft bei wenig Drehzahl</td><td><b>Getriebemotor</b></td></tr>
+<tr><td>einen festen Winkel anfahren und halten</td><td><b>Servo</b></td></tr>
+<tr><td>exakte, wiederholbare Position (3D-Druck, CNC)</td><td><b>Schrittmotor</b> + A4988/TMC2209</td></tr>
+<tr><td>möglichst leisen Schrittmotorbetrieb</td><td>Schrittmotor + <b>TMC2209</b></td></tr>
+<tr><td>hohe Drehzahl, effizient (Drohne, RC)</td><td><b>BLDC</b> + ESC</td></tr>
+</tbody>
+</table></div>

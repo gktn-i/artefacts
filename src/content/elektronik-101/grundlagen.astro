@@ -1,0 +1,145 @@
+---
+import "./_style.css";
+---
+<h2>Die 4 Kerngrößen: das musst du verinnerlichen</h2>
+<div class="grid2">
+<div class="card"><h3>Spannung (U): Volt (V)</h3>
+<p>Der "Druck", der die Ladung durch den Draht schiebt. Vergleich: Wasserdruck im Schlauch. Misst man immer <b>zwischen zwei Punkten</b> (parallel zum Bauteil).</p></div>
+<div class="card"><h3>Strom (I): Ampere (A)</h3>
+<p>Die Menge Ladung, die pro Sekunde fließt. Vergleich: wie viel Wasser durch den Schlauch läuft. Misst man <b>im Stromfluss</b> (Bauteil auftrennen, Messgerät dazwischen).</p></div>
+<div class="card"><h3>Widerstand (R): Ohm (Ω)</h3>
+<p>Wie stark ein Bauteil den Strom bremst. Vergleich: enge Stelle im Schlauch. Mehr Widerstand = weniger Strom bei gleicher Spannung.</p></div>
+<div class="card"><h3>Leistung (P): Watt (W)</h3>
+<p>Wie viel Energie pro Sekunde umgesetzt wird. Bei Bauteilen heißt das: wie viel Wärme entsteht. Zu viel Watt = das Bauteil wird heiß und stirbt.</p></div>
+</div>
+
+<h2>Die wichtigsten Formeln</h2>
+<div class="card">
+<h3>Ohmsches Gesetz (das Fundament)</h3>
+<p><span class="formula">U = R × I</span> &nbsp; → &nbsp; <span class="formula">I = U / R</span> &nbsp; → &nbsp; <span class="formula">R = U / I</span></p>
+<p class="note">Eselsbrücke: das "URI"-Dreieck. Deck eine Größe ab, die anderen zwei zeigen die Rechnung.</p>
+<h3>Leistung</h3>
+<p><span class="formula">P = U × I</span> &nbsp; und kombiniert: &nbsp; <span class="formula">P = I² × R</span> &nbsp; oder &nbsp; <span class="formula">P = U² / R</span></p>
+<h3>Reihenschaltung (hintereinander)</h3>
+<p>Widerstände addieren sich: <span class="formula">R = R1 + R2 + …</span> · Strom überall gleich · Spannung teilt sich auf.</p>
+<h3>Parallelschaltung (nebeneinander)</h3>
+<p>Kehrwerte addieren: <span class="formula">1/R = 1/R1 + 1/R2 + …</span> · Spannung überall gleich · Strom teilt sich auf. Gesamtwiderstand ist <b>kleiner</b> als der kleinste Einzelwiderstand.</p>
+<h3>Kirchhoffsche Regeln (die Namen dahinter)</h3>
+<p><b>Knotenregel:</b> An jeder Verzweigung fließt genauso viel Strom hinein wie heraus. Beispiel: 300 mA hinein → 100 mA + 200 mA auf zwei Zweige verteilt heraus.</p>
+<p><b>Maschenregel:</b> In jedem geschlossenen Stromkreis summieren sich die Spannungsabfälle zur Quellenspannung. Beispiel: 5-V-Quelle = 2 V an der LED + 3 V am Vorwiderstand. Genau diese beiden Regeln stecken hinter Reihen- und Parallelschaltung.</p>
+<svg class="sy sy-mid" viewBox="0 0 320 110" role="img" aria-label="Knotenregel: 300 Milliampere fließen in einen Knoten, 100 und 200 Milliampere heraus"><path class="w" d="M20,55 H140 M140,55 L262,25 M140,55 L262,85"/><circle class="f" cx="140" cy="55" r="4"/><path class="f" d="M92,55 L78,48 L78,62 Z"/><path class="f" d="M216,36 L202,33 L206,46 Z"/><path class="f" d="M216,74 L206,64 L202,77 Z"/><text class="lbl" x="52" y="44">300 mA</text><text class="lbl" x="226" y="24">100 mA</text><text class="lbl" x="226" y="102">200 mA</text><text class="lbl" x="160" y="14">rein = raus</text></svg>
+<h3>Einmal durchgerechnet (LED-Vorwiderstand)</h3>
+<p>LED an 5 V: LED-Spannung 2 V, Wunschstrom 15 mA. Am Widerstand fallen 5 − 2 = 3 V ab → <span class="formula">R = 3 V / 0,015 A = 200 Ω</span> → aufgerundet auf den nächsten E12-Normwert: <b>220 Ω</b>. Verlustleistung am Widerstand: 3 V × 0,0136 A ≈ 41 mW (der reale Strom durch 220 Ω) — ein 1/4-W-Widerstand (250 mW) reicht locker. Interaktiv: <a href="#rechner">Tab Rechner</a>.</p>
+</div>
+
+<h2>Reihe und Parallel: was sich addiert, was sich aufteilt</h2>
+<div class="kurz"><div><b>Nur zwei Sätze musst du behalten.</b> <b>Reihe</b> = ein einziger Weg → der <b>Strom</b> ist überall gleich, die <b>Spannung</b> teilt sich auf. <b>Parallel</b> = mehrere Wege → die <b>Spannung</b> ist überall gleich, der <b>Strom</b> teilt sich auf. Alles andere folgt daraus.</div></div>
+<div class="grid2">
+<div class="card"><h3>Reihe: hintereinander</h3>
+<svg class="sy sy-mid" style="max-width:220px" viewBox="0 0 220 130" role="img" aria-label="Reihenschaltung: Quelle mit zwei hintereinander liegenden Widerstaenden"><path class="w" d="M40,30 H85 M119,30 H180 M180,30 V55 M180,89 V100 M180,100 H40 M40,100 V63 M40,55 V30"/><rect class="w" x="85" y="22" width="34" height="16"/><rect class="w" x="172" y="55" width="16" height="34"/><path class="w" d="M28,55 H52 M34,63 H46"/><text class="lbl" x="102" y="16" text-anchor="middle">R1</text><text class="lbl" x="196" y="76">R2</text><text class="lbl" x="22" y="62" text-anchor="end">U</text><path class="f" d="M105,106 L93,100 L93,112 Z"/><text class="lbl" x="110" y="122">I überall gleich</text></svg>
+<ul>
+<li>Ein Weg → <b>I<sub>1</sub> = I<sub>2</sub> = I<sub>ges</sub></b></li>
+<li>Spannungen addieren sich: <span class="formula">U<sub>ges</sub> = U<sub>1</sub> + U<sub>2</sub></span></li>
+<li>Widerstände addieren sich: <span class="formula">R = R1 + R2</span> — Ergebnis immer <b>größer</b> als der größte Einzelwert</li>
+<li>Fällt <b>ein</b> Bauteil aus, ist der ganze Zweig tot</li>
+</ul></div>
+<div class="card"><h3>Parallel: nebeneinander</h3>
+<svg class="sy sy-mid" style="max-width:220px" viewBox="0 0 220 130" role="img" aria-label="Parallelschaltung: Quelle mit zwei nebeneinander liegenden Widerstaenden"><path class="w" d="M30,30 H190 M30,100 H190 M190,30 V100 M30,30 V55 M30,63 V100 M110,30 V48 M110,82 V100 M170,30 V48 M170,82 V100"/><rect class="w" x="102" y="48" width="16" height="34"/><rect class="w" x="162" y="48" width="16" height="34"/><path class="w" d="M18,55 H42 M24,63 H36"/><text class="lbl" x="98" y="70" text-anchor="end">R1</text><text class="lbl" x="158" y="70" text-anchor="end">R2</text><text class="lbl" x="12" y="62" text-anchor="end">U</text><text class="lbl" x="110" y="122" text-anchor="middle">U überall gleich</text></svg>
+<ul>
+<li>Mehrere Wege → <b>U<sub>1</sub> = U<sub>2</sub> = U<sub>ges</sub></b></li>
+<li>Ströme addieren sich: <span class="formula">I<sub>ges</sub> = I<sub>1</sub> + I<sub>2</sub></span></li>
+<li>Kehrwerte addieren: <span class="formula">1/R = 1/R1 + 1/R2</span> — Ergebnis immer <b>kleiner</b> als der kleinste Einzelwert</li>
+<li>Fällt ein Zweig aus, laufen die anderen weiter</li>
+</ul></div>
+</div>
+
+<h3>Die Übersicht: was macht welche Größe?</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Größe</th><th>In Reihe</th><th>Parallel</th></tr></thead>
+<tbody>
+<tr><td><b>Strom I</b></td><td>überall <b>gleich</b></td><td><b>teilt sich auf</b> (Summe der Zweige = Gesamtstrom)</td></tr>
+<tr><td><b>Spannung U</b></td><td><b>teilt sich auf</b> (Summe der Abfälle = Quellenspannung)</td><td>überall <b>gleich</b></td></tr>
+<tr><td><b>Widerstand R</b></td><td>R1 + R2 → <b>größer</b></td><td>1/R = 1/R1 + 1/R2 → <b>kleiner</b></td></tr>
+<tr><td><b>Kondensator C</b></td><td>1/C = 1/C1 + 1/C2 → <b>kleiner</b></td><td>C1 + C2 → <b>größer</b></td></tr>
+<tr><td><b>Spule L</b></td><td>L1 + L2 → <b>größer</b></td><td>1/L = 1/L1 + 1/L2 → <b>kleiner</b></td></tr>
+<tr><td><b>Akkuzellen</b></td><td><b>Spannung</b> addiert sich, Kapazität (Ah) bleibt</td><td><b>Kapazität</b> addiert sich, Spannung bleibt</td></tr>
+<tr><td><b>Spannungsfestigkeit</b> von Kondensatoren</td><td>addiert sich (2 × 25 V = 50 V)</td><td>bleibt die des schwächsten Teils</td></tr>
+<tr><td><b>Wärme</b> (Verlustleistung)</td><td>der <b>größte</b> Widerstand wird am heißesten (P = I²·R, gleicher Strom)</td><td>der <b>kleinste</b> Widerstand wird am heißesten (P = U²/R, gleiche Spannung)</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Merkhilfe für die Vertauschung:</b> Widerstand und Kondensator verhalten sich genau umgekehrt. Stell dir den Kondensator als <b>Fläche</b> vor — zwei nebeneinander ergeben eine größere Fläche, also mehr Kapazität. Und den Widerstand als <b>Engstelle im Rohr</b> — zwei Rohre nebeneinander lassen mehr durch, also weniger Widerstand.</p>
+
+<h3>Formeln für den Alltag</h3>
+<div class="card">
+<p><b>Zwei Widerstände parallel</b> (der Fall, den man ständig braucht): <span class="formula">R = (R1 × R2) / (R1 + R2)</span></p>
+<p><b>N gleiche Widerstände parallel:</b> <span class="formula">R = R<sub>einzeln</sub> / N</span> — zwei gleiche parallel sind immer die Hälfte.</p>
+<p><b>Spannungsteiler</b> (zwei Widerstände in Reihe, in der Mitte abgegriffen): <span class="formula">U<sub>aus</sub> = U<sub>ein</sub> × R2 / (R1 + R2)</span></p>
+<p style="margin-bottom:0"><b>Stromteiler</b> (zwei Widerstände parallel): durch den <b>kleineren</b> Widerstand fließt der <b>größere</b> Strom — <span class="formula">I<sub>1</sub> = I<sub>ges</sub> × R2 / (R1 + R2)</span></p>
+</div>
+
+<h3>Wo dir das in der Praxis begegnet</h3>
+<div class="grid2">
+<div class="card"><h3>Widerstandswert bauen</h3><p>Du brauchst 500 Ω, hast aber nur 1 kΩ: zwei davon parallel. Nebeneffekt: die Verlustleistung teilt sich ebenfalls auf zwei Bauteile auf — zwei 1/4-W-Widerstände parallel vertragen zusammen 1/2 W.</p></div>
+<div class="card"><h3>LEDs richtig verschalten</h3><p><b>In Reihe</b> fließt durch alle derselbe Strom → gleiche Helligkeit, ein Vorwiderstand reicht. Voraussetzung: die Summe der Flussspannungen passt unter die Versorgung. <b>Parallel ohne eigenen Vorwiderstand</b> ist ein klassischer Fehler: die LED mit der niedrigsten Flussspannung zieht den meisten Strom, wird heller, heißer, niederohmiger — und stirbt zuerst. Parallel also <b>je LED ein eigener Widerstand</b>.</p></div>
+<div class="card"><h3>Entkopplung am IC</h3><p>Großer Elko und kleiner 100-nF-Keramik <b>parallel</b>: die Kapazitäten addieren sich, und weil auch die Innenwiderstände (ESR) parallel liegen, sinkt der Gesamt-ESR. Der Elko liefert die Energie für langsame Einbrüche, der Keramik für die schnellen.</p></div>
+<div class="card"><h3>Akkupacks: 3S2P lesen</h3><p><b>S</b> = in Serie, <b>P</b> = parallel. „3S2P" heißt drei Zellen in Reihe (3 × 3,7 V = 11,1 V nominal) und davon zwei Stränge parallel (doppelte Kapazität). Merksatz: <b>S macht Volt, P macht Amperestunden.</b></p></div>
+<div class="card"><h3>Kondensatoren in Reihe</h3><p>Verdoppelt die Spannungsfestigkeit, halbiert die Kapazität. In der Praxis braucht es dann <b>Symmetrierwiderstände</b> parallel zu jedem Kondensator, sonst verteilt sich die Spannung ungleich und einer wird überlastet.</p></div>
+<div class="card"><h3>Messfehler durch Parallelschaltung</h3><p>Deshalb misst man Widerstände <b>einseitig ausgelötet</b>: eingebaut liegt alles Umliegende parallel und der gemessene Wert ist immer <b>kleiner</b> als der echte. Siehe Tab <a href="#messgeraet">Multimeter</a>.</p></div>
+</div>
+
+<h2>Kondensator laden: die RC-Zeitkonstante</h2>
+<div class="card">
+<h3>τ = R × C</h3>
+<p>Lädt man einen Kondensator über einen Widerstand, bestimmt die Zeitkonstante <span class="formula">τ = R × C</span> das Tempo: Nach τ ist er zu ~63 % geladen, nach 5·τ praktisch voll (&gt;99 %). Entladen läuft spiegelbildlich (nach τ sind noch ~37 % da).</p>
+<svg class="sy sy-mid" style="max-width:380px" viewBox="-24 0 364 155" role="img" aria-label="Ladekurve eines Kondensators: nach einer Zeitkonstante 63 Prozent, nach fünf praktisch 100 Prozent"><path class="w" d="M30,18 V130 H312"/><path class="w" style="stroke-dasharray:4 4;stroke-width:1" d="M30,30 H310"/><path class="acc" d="M30,130 L43.5,108 L57,90.7 L70.5,77.3 L84,67 L111,52.3 L138,43.5 L165,38.2 L192,35 L219,33 L246,31.8 L273,31.1 L300,30.7"/><path class="w" style="stroke-dasharray:4 4;stroke-width:1" d="M84,130 V67 M30,67 H84 M300,130 V32"/><text class="lbl" x="26" y="71" text-anchor="end">63 %</text><text class="lbl" x="26" y="34" text-anchor="end">100 %</text><text class="lbl" x="84" y="145" text-anchor="middle">τ</text><text class="lbl" x="300" y="145" text-anchor="middle">5τ</text><text class="lbl" x="312" y="127">Zeit</text></svg>
+<p class="note">Beispiel: 10 kΩ × 100 µF → τ = 1 s, voll nach ~5 s. Dieses Prinzip nutzt z. B. der <a href="#schaltplan">555-Timer</a>: sein RC-Glied bestimmt Blinktakt und Zeitintervalle.</p>
+</div>
+
+<h2>Begriffe einfach erklärt (Glossar)</h2>
+<div class="grid2">
+<div class="card"><h3>GND / Masse</h3><p>Der gemeinsame Bezugspunkt (0 Volt), auf den sich alle Spannungen beziehen. Alle Minuspole und Masseleitungen werden zusammengeschaltet ("gemeinsame Masse").</p></div>
+<div class="card"><h3>DC / Gleichstrom</h3><p>Strom fließt immer in eine Richtung (Batterie, USB, Netzteil). Hat festes Plus und Minus.</p></div>
+<div class="card"><h3>AC / Wechselstrom</h3><p>Strom wechselt ständig die Richtung (Steckdose, 230 V). In Hobby-Projekten meist nur als Eingang fürs Netzteil relevant.</p></div>
+<div class="card"><h3>Frequenz: Hertz (Hz)</h3><p>Wie oft pro Sekunde etwas schwingt/sich wiederholt. 1 Hz = einmal pro Sekunde. Wichtig bei Takt, Signalen, Tönen.</p></div>
+<div class="card"><h3>Kurzschluss</h3><p>Plus und Minus direkt verbunden, ohne Bauteil dazwischen. Strom wird sehr groß → Hitze, Rauch, kaputtes Netzteil. Immer vermeiden.</p></div>
+<div class="card"><h3>Polarität</h3><p>Manche Bauteile haben Plus und Minus und müssen richtig herum eingebaut werden (LED, Elko, Diode, Akku). Falsch herum = Funktion weg oder Bauteil kaputt.</p></div>
+<div class="card"><h3>Logikpegel (HIGH / LOW)</h3><p>Digitale Bauteile kennen zwei Zustände: HIGH = "1" (nahe Versorgungsspannung, meist 3,3 V oder 5 V) und LOW = "0" (nahe 0 V). Dahinter stehen definierte Schwellbereiche — dazwischen ist der Pegel undefiniert.</p></div>
+<div class="card"><h3>Pull-up / Pull-down &amp; Floating</h3><p>Ein offener („floatender") Eingang schwebt zwischen den Pegeln und liefert Zufallswerte. Ein Pull-up-Widerstand zieht ihn fest auf HIGH, ein Pull-down auf LOW, solange nichts anderes anliegt — Standardwert 10 kΩ.</p></div>
+<div class="card"><h3>Entkopplungs-Kondensator</h3><p>Kleiner Kondensator (oft 100 nF) direkt neben jedem IC. Glättet kurze Spannungseinbrüche und stabilisiert die Versorgung. Faustregel: einen pro Chip.</p></div>
+<div class="card"><h3>Spannungsteiler</h3><p>Zwei Widerstände in Reihe greifen in der Mitte eine kleinere Spannung ab. Standard-Trick, um z. B. 5 V auf einen 3,3 V messbaren Wert zu bringen.</p></div>
+<div class="card"><h3>PWM (Pulsweiten-Modulation)</h3><p>Schnelles An/Aus-Schalten, um Helligkeit (LED) oder Drehzahl (Motor) zu steuern. Längeres "An" = mehr Leistung. Spart Wärme gegenüber Widerstand. Ausführlich mit Frequenzen und Schaltungen: Tab <a href="#leistung">Leistung &amp; PWM</a>.</p></div>
+<div class="card"><h3>Datenblatt</h3><p>Das offizielle Dokument zum Bauteil (Hersteller-PDF). Enthält Grenzwerte, Pin-Belegung und Beispielschaltungen. Im Zweifel immer dort nachsehen.</p></div>
+<div class="card"><h3>Kapazität: Farad (F)</h3><p>Wie viel Ladung ein Kondensator speichern kann. In der Praxis winzig: µF (Mikro), nF (Nano), pF (Piko).</p></div>
+<div class="card"><h3>Induktivität: Henry (H)</h3><p>Eigenschaft einer Spule: sie wehrt sich gegen Stromänderungen. In der Praxis mH oder µH. Wichtig in Wandlern, Filtern, Funk. Kennwerte und Bauformen: Tab <a href="#leistung">Leistung &amp; PWM</a>.</p></div>
+<div class="card"><h3>Analog vs. Digital</h3><p><b>Analog</b> ist ein stufenloser Wert (jede beliebige Spannung), <b>digital</b> kennt nur an oder aus. Ein Lichtsensor liefert analog, ein Taster digital.</p></div>
+<div class="card"><h3>Wirkungsgrad</h3><p>Wie viel der zugeführten Energie tatsächlich nützlich ankommt, der Rest wird Wärme. Ein Schaltregler mit 90 % verheizt nur 10 %, ein Linearregler oft viel mehr.</p></div>
+<div class="card"><h3>Spannungsabfall</h3><p>Jedes Bauteil "verbraucht" ein Stück Spannung. An einer Diode fallen etwa 0,7 V ab, an einem Widerstand je nach Strom. In Reihe summieren sich die Abfälle zur Gesamtspannung.</p></div>
+</div>
+
+<h2>Einheiten-Vorsätze (Größenordnungen)</h2>
+<div class="tbl-wrap"><table style="min-width:520px">
+<thead><tr><th>Vorsatz</th><th>Zeichen</th><th>Faktor</th><th>Typisch bei</th></tr></thead>
+<tbody>
+<tr><td>Mega</td><td>M</td><td>1 000 000</td><td>Ω (Widerstände), Hz (Takt)</td></tr>
+<tr><td>Kilo</td><td>k</td><td>1 000</td><td>Ω (Widerstände), Hz</td></tr>
+<tr><td>(keiner)</td><td>–</td><td>1</td><td>V, A, Ω</td></tr>
+<tr><td>Milli</td><td>m</td><td>0,001</td><td>A (Strom), V, H</td></tr>
+<tr><td>Mikro</td><td>µ</td><td>0,000001</td><td>F (Elkos), A, H</td></tr>
+<tr><td>Nano</td><td>n</td><td>0,000000001</td><td>F (Keramik-Kondensatoren)</td></tr>
+<tr><td>Piko</td><td>p</td><td>0,000000000001</td><td>F (sehr kleine Kondensatoren)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kondensator-Codes entschlüsseln</h2>
+<p>Kleine Kondensatoren tragen den Wert als 3-stelligen Code in Pikofarad: erste zwei Ziffern, dritte Ziffer = Anzahl der Nullen. Elkos tragen dagegen Klartext (z. B. „470 µF 25 V").</p>
+<div class="tbl-wrap"><table style="min-width:520px">
+<thead><tr><th>Aufdruck</th><th>Rechnung</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td>102</td><td>10 + 2 Nullen = 1 000 pF</td><td>1 nF</td></tr>
+<tr><td>223</td><td>22 + 3 Nullen = 22 000 pF</td><td>22 nF</td></tr>
+<tr><td>104</td><td>10 + 4 Nullen = 100 000 pF</td><td><b>100 nF</b> (der Standard-Entkoppler)</td></tr>
+<tr><td>474</td><td>47 + 4 Nullen = 470 000 pF</td><td>470 nF</td></tr>
+<tr><td>105</td><td>10 + 5 Nullen = 1 000 000 pF</td><td>1 µF</td></tr>
+</tbody>
+</table></div>
+<p class="note">Unbeschriftete SMD-Kondensatoren, Toleranz-Buchstaben (J/K/M) und wie du gepolte Typen erkennst: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</p>

@@ -1,0 +1,47 @@
+<h2>LED-Vorwiderstand berechnen</h2>
+<div class="card">
+<p class="note">Formel: R = (Versorgung − LED-Spannung) / LED-Strom. Typisch: rote LED ~2,0 V, weiß/blau ~3,2 V, Strom 10 bis 20 mA.</p>
+<div class="calc">
+<div><label>Versorgung (V)</label><input type="number" id="led-vs" value="5" step="0.1"></div>
+<div><label>LED-Spannung (V)</label><input type="number" id="led-vf" value="2.0" step="0.1"></div>
+<div><label>LED-Strom (mA)</label><input type="number" id="led-i" value="15" step="1"></div>
+</div>
+<div class="big-out" id="led-out"></div>
+<p class="note" id="led-note"></p>
+</div>
+
+<h2>Ohmsches Gesetz: was du kennst, fülle ich aus</h2>
+<div class="card">
+<p class="note">Trage zwei Werte ein und lass das dritte Feld leer — das Ergebnis erscheint sofort. Sind alle drei gefüllt, wird auf Stimmigkeit geprüft.</p>
+<div class="calc">
+<div><label>Spannung U (V)</label><input type="number" id="ohm-u" step="any"></div>
+<div><label>Strom I (A)</label><input type="number" id="ohm-i" step="any"></div>
+<div><label>Widerstand R (Ω)</label><input type="number" id="ohm-r" step="any"></div>
+</div>
+<div class="big-out" id="ohm-out"></div>
+</div>
+
+<h2>Widerstands-Farbcode (4 Ringe)</h2>
+<div class="card">
+<div class="calc">
+<div><label>Ring 1</label><select id="b1"></select></div>
+<div><label>Ring 2</label><select id="b2"></select></div>
+<div><label>Multiplikator</label><select id="b3"></select></div>
+<div><label>Toleranz</label><select id="b4"></select></div>
+</div>
+<div style="margin:10px 0">
+<span class="colorband" id="cb1"></span><span class="colorband" id="cb2"></span><span class="colorband" id="cb3"></span><span style="display:inline-block;width:8px"></span><span class="colorband" id="cb4"></span>
+</div>
+<div class="big-out" id="band-out"></div>
+</div>
+
+<h2>Spannungsteiler</h2>
+<div class="card">
+<p class="note">Ausgang = Eingang × R2 / (R1 + R2). R2 ist der untere Widerstand (zur Masse).</p>
+<div class="calc">
+<div><label>Eingang (V)</label><input type="number" id="vt-in" value="5" step="0.1"></div>
+<div><label>R1 oben (Ω)</label><input type="number" id="vt-r1" value="1000" step="any"></div>
+<div><label>R2 unten (Ω)</label><input type="number" id="vt-r2" value="2000" step="any"></div>
+</div>
+<div class="big-out" id="vt-out"></div>
+</div>

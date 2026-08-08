@@ -53,6 +53,22 @@ const related = relatedOf(id).filter((m) => !mod || m.id !== mod.id);
 const SHOWN = 8;
 const title = mod ? `${mod.name} · ${hub.name} · Artefakte` : `${hub.name} · Artefakte`;
 const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
+
+/* Sidebar-Gliederung: Gruppen aus der Registry oder eine flache Liste. */
+const secTitle = (h: string) => mod.sections.find((s: any) => s.h === h)?.t || h;
+const navGroups = mod
+  ? mod.groups
+    ? mod.groups.map((g: any) => ({ label: g.l, hashes: g.sections }))
+    : [{ label: null, hashes: mod.sections.map((s: any) => s.h) }]
+  : [];
+
+/* Zusatz-Skript des Moduls (Rechner, Tabellen-Builder, Folds …). */
+const PAGE_SCRIPTS: Record<string, string> = {
+  loeten: "/assets/mod-loeten.js",
+  "elektronik-101": "/assets/mod-elektronik.js",
+};
+const pageScript = mod ? PAGE_SCRIPTS[mod.id] : undefined;
+const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
 ---
 
 <Base title={title} description={desc} hub={hub} mod={mod}>
@@ -168,8 +184,13 @@ const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
             </div>
           </div>
           <nav class="msd-nav" id="msdNav" aria-label="Abschnitte">
-            {mod.sections.map((s, i) => (
-              <a href={`#${s.h}`} data-h={s.h} class={i === 0 ? "on" : undefined}>{s.t}</a>
+            {navGroups.map((g, gi) => (
+              <>
+                {g.label && <div class="msd-gl">{g.label}</div>}
+                {g.hashes.map((h: string, i: number) => (
+                  <a href={`#${h}`} data-h={h} class={gi === 0 && i === 0 ? "on" : undefined}>{secTitle(h)}</a>
+                ))}
+              </>
             ))}
           </nav>
           <div class="msd-foot">
@@ -193,7 +214,7 @@ const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
             <p>{mod.desc}</p>
           </header>
 
-          <div class="mcontent" data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
+          <div class={`mcontent mx-${mod.id}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
             {mod.sections.map((s) => {
               const C = secComp(mod.id, s.h);
               return (
@@ -204,6 +225,8 @@ const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
               );
             })}
           </div>
+          <script is:inline type="application/json" id="mrouterCfg" set:html={routerCfg} />
+          {pageScript && <script is:inline defer src={pageScript} />}
 
           <div class="hbx-foot">
             <div class="hd">Weiter im Hub {hub.name}</div>
@@ -233,34 +256,126 @@ const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
       </div>
 
       <script is:inline>
-        /* ---- Abschnitts-Router: ein Abschnitt sichtbar, per #hash adressiert ---- */
+        /* ---- Abschnitts-Router ----------------------------------------------
+           Ein Abschnitt sichtbar, per #hash adressiert. Dazu: Alias-Hashes
+           alter Anker, Überschriften-Subnav mit Scrollspy unter dem aktiven
+           Eintrag, Sprung öffnet Faltabschnitte (window.__openSection). */
         (function () {
           var nav = document.getElementById("msdNav");
           if (!nav) return;
+          var cfgEl = document.getElementById("mrouterCfg");
+          var ALIAS = {};
+          try { ALIAS = (JSON.parse(cfgEl.textContent) || {}).alias || {}; } catch (e) {}
+
           var secs = Array.prototype.slice.call(document.querySelectorAll(".msec"));
-          var links = Array.prototype.slice.call(nav.querySelectorAll("a"));
+          var links = Array.prototype.slice.call(nav.querySelectorAll("a[data-h]"));
           var KEYS = secs.map(function (s) { return s.id; });
 
-          function show(h, push) {
-            if (KEYS.indexOf(h) < 0) h = KEYS[0];
+          /* Ein Hash kann Abschnitt, Alias oder Überschriften-Anker sein. */
+          function resolve(raw) {
+            var h = ALIAS[raw] || raw;
+            if (KEYS.indexOf(h) >= 0) return { sec: h, head: null };
+            var i = h.indexOf("--");
+            if (i > 0 && KEYS.indexOf(h.slice(0, i)) >= 0) return { sec: h.slice(0, i), head: h };
+            var el = h && document.getElementById(h);
+            var host = el && el.closest && el.closest(".msec");
+            if (host) return { sec: host.id, head: h };
+            return { sec: KEYS[0], head: null };
+          }
+
+          function slug(s) {
+            return s.toLowerCase().replace(/[^a-z0-9äöüß]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+          }
+          /* h3/h4 in Karten & Co. sind Beschriftungen, keine Gliederung. */
+          var HDECO = ".card, .gb-col, .sym, .grid2 > div, .rule, .calc, .acc, .def-grid, .spec-card, .step";
+          function headings(sec) {
+            var hs = Array.prototype.slice.call(sec.querySelectorAll("h2:not(.msec-t),h3,h4")).filter(function (h) {
+              return !h.closest(HDECO);
+            });
+            if (hs.length < 2) return [];
+            hs.forEach(function (h, i) {
+              if (!h.id) h.id = sec.id + "--" + (slug(h.textContent) || "h" + i);
+            });
+            return hs;
+          }
+
+          var spy = null, spyLock = 0;
+          function markSub(id) {
+            nav.querySelectorAll(".msd-sub a").forEach(function (a) {
+              a.classList.toggle("on", a.dataset.hh === id);
+            });
+          }
+          function buildSub(h) {
+            nav.querySelectorAll(".msd-sub").forEach(function (b) { b.remove(); });
+            if (spy) { spy.disconnect(); spy = null; }
+            var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
+            var sec = document.getElementById(h);
+            if (!lk || !sec) return;
+            var hs = headings(sec);
+            if (!hs.length) return;
+            var box = document.createElement("div");
+            box.className = "msd-sub";
+            hs.forEach(function (hd) {
+              var a = document.createElement("a");
+              a.href = "#" + hd.id;
+              a.textContent = hd.textContent.trim();
+              a.dataset.hh = hd.id;
+              a.className = "lv" + hd.tagName.charAt(1);
+              box.appendChild(a);
+            });
+            lk.after(box);
+            spy = new IntersectionObserver(function (es) {
+              if (Date.now() < spyLock) return;
+              es.forEach(function (en) { if (en.isIntersecting) markSub(en.target.id); });
+            }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
+            hs.forEach(function (hd) { spy.observe(hd); });
+          }
+
+          function jumpTo(id) {
+            spyLock = Date.now() + 1000;
+            if (window.__openSection) window.__openSection(id);
+            var el = document.getElementById(id);
+            if (!el) return;
+            markSub(id);
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+
+          function show(h, opts) {
+            opts = opts || {};
             secs.forEach(function (s) { s.classList.toggle("on", s.id === h); });
             links.forEach(function (a) { a.classList.toggle("on", a.dataset.h === h); });
-            if (push && decodeURIComponent(location.hash.slice(1)) !== h) {
+            if (opts.push !== false && decodeURIComponent(location.hash.slice(1)) !== h) {
               history.replaceState(null, "", "#" + h);
             }
             var tt = document.querySelector("#mtop .tt");
             var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
             if (tt && lk) tt.textContent = lk.textContent;
+            buildSub(h);
+          }
+
+          function go(raw, push) {
+            var r = resolve(decodeURIComponent(raw || ""));
+            show(r.sec, { push: push });
+            if (r.head) requestAnimationFrame(function () { jumpTo(r.head); });
+            else window.scrollTo({ top: 0 });
           }
 
           window.addEventListener("hashchange", function () {
-            show(decodeURIComponent(location.hash.slice(1)), false);
-            window.scrollTo({ top: 0 });
+            go(location.hash.slice(1), false);
           });
-          show(decodeURIComponent(location.hash.slice(1)) || KEYS[0], false);
-          /* Der Browser springt beim Laden zum #anker und schiebt den Kopf
-             unter die Leiste — Abschnitt ist schon sichtbar, also nach oben. */
-          requestAnimationFrame(function () { window.scrollTo(0, 0); });
+
+          var first = resolve(decodeURIComponent(location.hash.slice(1)));
+          show(first.sec, { push: false });
+          /* Browser-Ankersprung beim Laden korrigieren; Ziel ggf. anfahren,
+             sobald das Modul-Skript Folds und Tabellen aufgebaut hat. Der
+             native Sprung kann nach unserem rAF feuern — deshalb zusätzlich
+             nach load noch einmal geraderücken. */
+          function settle() {
+            if (first.head) jumpTo(first.head);
+            else window.scrollTo(0, 0);
+          }
+          requestAnimationFrame(settle);
+          window.addEventListener("load", function () { requestAnimationFrame(settle); });
 
           /* ---- Mobile Schublade ---- */
           var side = document.getElementById("msd");
@@ -275,9 +390,15 @@ const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
             var a = e.target.closest("a");
             if (!a) return;
             e.preventDefault();
-            show(a.dataset.h, true);
+            if (a.dataset.hh) {
+              /* Subnav: innerhalb des Abschnitts springen */
+              history.replaceState(null, "", "#" + a.dataset.hh);
+              jumpTo(a.dataset.hh);
+            } else if (a.dataset.h) {
+              show(a.dataset.h, { push: true });
+              window.scrollTo({ top: 0 });
+            }
             closeSide();
-            window.scrollTo({ top: 0 });
           });
         })();
       </script>

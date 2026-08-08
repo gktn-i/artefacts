@@ -1,0 +1,304 @@
+/* Aus elektronik-grundlagen.html uebernommen und unter .mx-elektronik-101 gescoped. */
+
+/* ============================================================
+   DESIGN TOKENS  ·  Theme hier zentral anpassen
+   ============================================================ */
+.mx-elektronik-101{
+  --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f1f3f6; --surface-hover:#f5f8fc;
+  --text:#1b1e23; --muted:#697079; --faint:#98a0aa;
+  --border:#e4e7ec; --border-strong:#d3d7de; --track:#e6e8ec;
+  --accent:#0e7c8c; --accent-ink:#0b5f6d; --accent-soft:#e2f3f6; --accent-border:#96cfd9;
+  --rate-bad:#d64b3c; --rate-mid:#e59a3c; --rate-good:#3da66e;
+  --warn-bg:#fbeee7; --warn-ink:#8a3416;
+  --danger-bg:#fcf2f0; --danger-border:#e6b0a8; --danger-accent:#b0281a;
+  --radius:12px; --radius-sm:8px; --radius-xs:6px;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --shadow-tabs:0 6px 14px -8px rgba(16,24,40,.22);
+  --mono:'JetBrains Mono','SF Mono',Menlo,Consolas,'Roboto Mono',monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  --display:'Space Grotesk',system-ui,sans-serif;
+}
+@media(prefers-color-scheme:dark){
+  .mx-elektronik-101{
+    --bg:#16181c; --surface:#1f2229; --surface-2:#262a31; --surface-hover:#262a31;
+    --text:#e7e9ec; --muted:#9aa2ad; --faint:#727a85;
+    --border:#2e333b; --border-strong:#3a404a; --track:#333842;
+    --accent:#38c6d9; --accent-ink:#8adeeb; --accent-soft:#0b3138; --accent-border:#17606d;
+    --rate-bad:#e0604f; --rate-mid:#eda94e; --rate-good:#4dbb82;
+    --warn-bg:#3a1c10; --warn-ink:#f3c3ae;
+    --danger-bg:#2a1512; --danger-border:#6b2418; --danger-accent:#d14836;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.6);
+  }
+  .mx-elektronik-101 /* Kategorie-Badges (dunkel) */
+  .cat-passiv .cb{background:#042C53;color:#B5D4F4}
+  .mx-elektronik-101 .cat-halbleiter .cb{background:#26215C;color:#CECBF6}
+  .mx-elektronik-101 .cat-ic .cb{background:#501313;color:#F7C1C1}
+  .mx-elektronik-101 .cat-mech .cb{background:#04342C;color:#9FE1CB}
+  .mx-elektronik-101 .cat-power .cb{background:#412402;color:#FAC775}
+  .mx-elektronik-101 .cat-schutz .cb{background:#4A1B0C;color:#F5C4B3}
+  .mx-elektronik-101 .cat-modul .cb{background:#2C2C2A;color:#D3D1C7}
+  .mx-elektronik-101 .cat-board .cb{background:#33204F;color:#DDC7F8}
+  .mx-elektronik-101 .cat-sensor .cb{background:#0A3644;color:#A8DCEE}
+  .mx-elektronik-101 .cat-kabel .cb{background:#3D2A10;color:#F2CFA0}
+  .mx-elektronik-101 .cat-verbrauch .cb{background:#26330A;color:#CBE596}
+  .mx-elektronik-101 /* Gefahren-Stufen (dunkel) */
+  .lvl-ok{background:#04342C;color:#9FE1CB}
+  .mx-elektronik-101 .lvl-warn{background:#412402;color:#FAC775}
+  .mx-elektronik-101 .lvl-bad{background:#4A1B0C;color:#F5C4B3}
+  .mx-elektronik-101 .lvl-crit{background:#B0281A;color:#fff}
+}
+
+/* ============================================================
+   BASIS
+   ============================================================ */
+.mx-elektronik-101 *{box-sizing:border-box;margin:0;padding:0}
+.mx-elektronik-101{-webkit-text-size-adjust:100%}
+.mx-elektronik-101{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;
+  margin:0;padding:0;-webkit-font-smoothing:antialiased;min-height:100vh}
+.mx-elektronik-101 ::selection{background:var(--accent-soft);color:var(--accent-ink)}
+
+/* ============================================================
+   TYPOGRAFIE
+   ============================================================ */
+.mx-elektronik-101 h1{font-family:var(--display);font-size:25px;font-weight:700;letter-spacing:-.02em;margin-bottom:.35rem}
+.mx-elektronik-101 a{color:var(--accent-ink)}
+.mx-elektronik-101 .sub{font-size:13.5px;color:var(--muted);margin-bottom:1.3rem;max-width:70ch;line-height:1.55}
+.mx-elektronik-101 h2{font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:-.01em;margin:2rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.mx-elektronik-101 h3{font-size:14px;font-weight:600;margin:1.15rem 0 .5rem;color:var(--accent-ink)}
+.mx-elektronik-101 p{font-size:13.5px;line-height:1.65;margin-bottom:.6rem}
+
+/* ============================================================
+   TAB-NAVIGATION (sticky)
+   ============================================================ */
+
+/* ============================================================
+   FILTER-BUTTONS & BUTTON
+   ============================================================ */
+.mx-elektronik-101 .controls{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1rem}
+.mx-elektronik-101 .controls button{font-family:inherit;font-size:12.5px;font-weight:500;padding:5px 12px;cursor:pointer;
+  background:transparent;border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);transition:all .15s}
+.mx-elektronik-101 .controls button:hover{background:var(--surface-2);color:var(--text)}
+.mx-elektronik-101 .controls button.active{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-border);font-weight:600}
+.mx-elektronik-101 .btn{font-family:inherit;font-size:13px;font-weight:600;padding:8px 18px;cursor:pointer;
+  border:1px solid var(--accent-border);border-radius:var(--radius-sm);
+  background:var(--accent-soft);color:var(--accent-ink);transition:filter .15s}
+.mx-elektronik-101 .btn:hover{filter:brightness(.97)}
+
+/* ============================================================
+   SUCHE
+   ============================================================ */
+.mx-elektronik-101 .search{font-family:inherit;padding:8px 12px;font-size:13.5px;border:1px solid var(--border-strong);
+  border-radius:var(--radius-sm);background:var(--surface);color:var(--text);width:100%;max-width:320px;margin-bottom:.8rem}
+.mx-elektronik-101 .search:focus{outline:none;border-color:var(--accent-border);box-shadow:0 0 0 3px var(--accent-soft)}
+
+/* ============================================================
+   TABELLEN
+   ============================================================ */
+.mx-elektronik-101 .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);box-shadow:var(--shadow-sm);margin-bottom:.4rem}
+.mx-elektronik-101 table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
+.mx-elektronik-101 th{text-align:left;padding:10px 12px;font-weight:600;font-size:11px;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--faint);background:var(--surface-2);
+  border-bottom:1px solid var(--border);cursor:default;user-select:none;white-space:nowrap}
+.mx-elektronik-101 th:has(.ar){cursor:pointer}
+.mx-elektronik-101 th:has(.ar):hover{color:var(--text)}
+.mx-elektronik-101 th .ar{font-size:9px;margin-left:3px;color:var(--accent)}
+.mx-elektronik-101 td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
+.mx-elektronik-101 tbody tr:last-child td{border-bottom:none}
+.mx-elektronik-101 tbody tr:not(.dr):hover td{background:var(--surface-hover)}
+
+/* ============================================================
+   KATEGORIE-BADGES
+   ============================================================ */
+.mx-elektronik-101 .cb{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.mx-elektronik-101 .cat-passiv .cb{background:#E6F1FB;color:#0C447C}
+.mx-elektronik-101 .cat-halbleiter .cb{background:#EEEDFE;color:#3C3489}
+.mx-elektronik-101 .cat-ic .cb{background:#FCEBEB;color:#791F1F}
+.mx-elektronik-101 .cat-mech .cb{background:#E1F5EE;color:#085041}
+.mx-elektronik-101 .cat-power .cb{background:#FAEEDA;color:#633806}
+.mx-elektronik-101 .cat-schutz .cb{background:#FAECE7;color:#712B13}
+.mx-elektronik-101 .cat-modul .cb{background:#F1EFE8;color:#444441}
+.mx-elektronik-101 .cat-board .cb{background:#F3E8FD;color:#5B21B6}
+.mx-elektronik-101 .cat-sensor .cb{background:#E3F2F9;color:#155E75}
+.mx-elektronik-101 .cat-kabel .cb{background:#FDF2E4;color:#7C4A12}
+.mx-elektronik-101 .cat-verbrauch .cb{background:#EEF2E3;color:#3F5211}
+
+/* ============================================================
+   DETAIL-ZEILE, ZÄHLER, TAGS
+   ============================================================ */
+.mx-elektronik-101 .count{font-size:12.5px;color:var(--muted);margin-bottom:10px;font-weight:500}
+.mx-elektronik-101 .dr td{padding:14px 16px;background:var(--surface-2);font-size:13px;line-height:1.7}
+.mx-elektronik-101 .dr b{color:var(--accent-ink)}
+.mx-elektronik-101 .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.mx-elektronik-101 .tag{font-size:11px;font-weight:500;padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--border-strong);color:var(--muted)}
+.mx-elektronik-101 .tag.warn{background:var(--warn-bg);border-color:transparent;color:var(--warn-ink);font-weight:600}
+
+/* ============================================================
+   KARTEN & RASTER
+   ============================================================ */
+.mx-elektronik-101 .card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.mx-elektronik-101 .card h3{margin-top:0}
+.mx-elektronik-101 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+
+/* ============================================================
+   FORMELN, LISTEN
+   ============================================================ */
+.mx-elektronik-101 .formula{font-family:var(--mono);background:var(--accent-soft);padding:3px 9px;border-radius:var(--radius-xs);font-size:13px;color:var(--accent-ink);display:inline-block;margin:2px 0;font-weight:500}
+.mx-elektronik-101 ul{margin:.4rem 0 .6rem 1.2rem}
+.mx-elektronik-101 li{font-size:13.5px;line-height:1.6;margin-bottom:5px}
+.mx-elektronik-101 li::marker{color:var(--faint)}
+.mx-elektronik-101 li.warn{color:var(--warn-ink)}
+
+/* ============================================================
+   GEFAHREN-STUFEN & HINWEIS-BOX
+   ============================================================ */
+.mx-elektronik-101 .lvl{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;font-weight:600;white-space:nowrap}
+.mx-elektronik-101 .lvl-ok{background:#E1F5EE;color:#085041}
+.mx-elektronik-101 .lvl-warn{background:#FAEEDA;color:#633806}
+.mx-elektronik-101 .lvl-bad{background:#FAECE7;color:#791F1F}
+.mx-elektronik-101 .lvl-crit{background:#791F1F;color:#fff}
+.mx-elektronik-101 .danger-box{border:1px solid var(--danger-border);border-left:4px solid var(--danger-accent);border-radius:var(--radius);padding:14px 18px;margin-bottom:12px;background:var(--danger-bg)}
+
+/* ============================================================
+   BEWERTUNGS-BALKEN
+   ============================================================ */
+.mx-elektronik-101 .rate{display:flex;align-items:center;gap:8px;min-width:64px}
+.mx-elektronik-101 .rate-bar{flex:1;height:7px;border-radius:999px;background:var(--track);overflow:hidden;min-width:36px}
+.mx-elektronik-101 .rate-fill{height:100%;border-radius:999px;background:var(--accent)}
+.mx-elektronik-101 .rate-num{font-size:11px;color:var(--muted);width:15px;text-align:right;flex-shrink:0;font-weight:600}
+
+/* ============================================================
+   REGEL-ZEILEN, KBD
+   ============================================================ */
+.mx-elektronik-101 .rule{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13.5px;line-height:1.55}
+.mx-elektronik-101 .rule:first-child{padding-top:2px}
+.mx-elektronik-101 .rule:last-child{padding-bottom:2px;border-bottom:none}
+.mx-elektronik-101 .rule .ico{font-size:16px;flex-shrink:0;width:24px;text-align:center;line-height:1.5}
+.mx-elektronik-101 .kbd{font-family:var(--mono);font-size:11.5px;background:var(--surface-2);border:1px solid var(--border);padding:1px 6px;border-radius:5px}
+
+/* ============================================================
+   SCHALTPLAN-TAB · Schaltzeichen-SVGs & Symbol-Raster
+   ============================================================ */
+.mx-elektronik-101 .symgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:10px;margin:.6rem 0 .9rem}
+.mx-elektronik-101 .sym{border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);padding:10px 10px 9px;text-align:center;box-shadow:var(--shadow-sm)}
+.mx-elektronik-101 .sym svg{width:100%;max-width:118px;height:auto;display:block;margin:0 auto 5px}
+.mx-elektronik-101 .sym .sn{font-size:12.5px;font-weight:600;line-height:1.3}
+.mx-elektronik-101 .sym .sd{font-size:11px;color:var(--muted);line-height:1.45;margin-top:2px}
+.mx-elektronik-101 .sym .sref{font-family:var(--mono);font-size:10.5px;color:var(--accent-ink);background:var(--accent-soft);border-radius:4px;padding:0 5px;display:inline-block;margin-top:5px}
+.mx-elektronik-101 svg.sy .w{stroke:var(--text);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.mx-elektronik-101 svg.sy .f{fill:var(--text);stroke:none}
+.mx-elektronik-101 svg.sy .lbl{font-family:var(--mono);font-size:10px;fill:var(--muted);stroke:none}
+.mx-elektronik-101 svg.sy .pin{font-family:var(--mono);font-size:8.5px;fill:var(--faint);stroke:none}
+.mx-elektronik-101 svg.sy .acc{stroke:var(--accent);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.mx-elektronik-101 svg.sy .accf{fill:var(--accent);stroke:none}
+.mx-elektronik-101 svg.sy .ok{fill:var(--rate-good);stroke:none;font-size:15px;font-weight:700}
+.mx-elektronik-101 svg.sy .bad{fill:var(--rate-bad);stroke:none;font-size:15px;font-weight:700}
+.mx-elektronik-101 svg.sy .con{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.mx-elektronik-101 svg.sy .cot{fill:var(--accent-ink);font-family:var(--sans);font-size:12px;font-weight:700;stroke:none}
+.mx-elektronik-101 .sy-mid{width:100%;max-width:320px;height:auto;display:block;margin:.4rem auto}
+.mx-elektronik-101 .sy-big{width:100%;max-width:660px;height:auto;display:block;margin:.5rem auto}
+
+/* ============================================================
+   RECHNER
+   ============================================================ */
+.mx-elektronik-101 .calc{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:.7rem 0}
+.mx-elektronik-101 .calc label{font-size:11.5px;color:var(--muted);display:block;margin-bottom:4px;font-weight:500}
+.mx-elektronik-101 .calc input, .mx-elektronik-101 .calc select{font-family:inherit;padding:8px 10px;font-size:13.5px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);width:130px}
+.mx-elektronik-101 .calc input:focus, .mx-elektronik-101 .calc select:focus{outline:none;border-color:var(--accent-border);box-shadow:0 0 0 3px var(--accent-soft)}
+.mx-elektronik-101 .calc-out{font-size:14px;font-weight:600;padding:9px 15px;border-radius:var(--radius-sm);background:var(--accent-soft);color:var(--accent-ink);margin-top:8px;display:inline-block}
+.mx-elektronik-101 .big-out{font-size:19px;font-weight:700;color:var(--accent-ink);margin-top:12px;padding:10px 16px;background:var(--accent-soft);border-radius:var(--radius-sm);display:inline-block;max-width:100%}
+.mx-elektronik-101 .colorband{display:inline-block;width:16px;height:26px;border-radius:4px;border:1px solid rgba(0,0,0,.2);margin:0 1px;vertical-align:middle;box-shadow:var(--shadow-sm)}
+
+/* ============================================================
+   HILFSKLASSEN
+   ============================================================ */
+.mx-elektronik-101 .hidden{display:none}
+.mx-elektronik-101 .note{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:5px;line-height:1.55}
+
+/* ============================================================
+   RESPONSIV
+   ============================================================ */
+@media(max-width:600px){
+  .mx-elektronik-101 h1{font-size:22px}
+  .mx-elektronik-101 h2{font-size:16px}
+}
+
+/* ============================================================
+   LESBARKEIT · luftigere Tabellen, Faltabschnitte, Kernaussagen
+   ============================================================ */
+.mx-elektronik-101 table{font-size:13.5px}
+.mx-elektronik-101 th{padding:11px 14px;font-size:10.5px}
+.mx-elektronik-101 td{padding:13px 14px;line-height:1.6}
+.mx-elektronik-101 tbody tr+tr td{border-top:1px solid var(--border)}
+.mx-elektronik-101 td:first-child{font-weight:500}
+.mx-elektronik-101 .tbl-wrap{border-radius:var(--radius)}
+
+/* Faltbare Abschnitte */
+.mx-elektronik-101 .fold{cursor:pointer;display:flex;align-items:center;gap:.55em;user-select:none;
+  transition:color .15s}
+.mx-elektronik-101 .fold:hover{color:var(--accent-ink)}
+.mx-elektronik-101 .fold::before{content:"";flex:0 0 auto;width:0;height:0;
+  border-left:6px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;
+  opacity:.55;transition:transform .18s ease}
+.mx-elektronik-101 .fold.open::before{transform:rotate(90deg) translateX(1px)}
+.mx-elektronik-101 .sec-body{display:none;animation:secin .18s ease}
+.mx-elektronik-101 .sec-body.open{display:block}
+@keyframes secin{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+.mx-elektronik-101 .foldbar{display:flex;justify-content:flex-end;margin:-.4rem 0 .2rem}
+.mx-elektronik-101 .foldbar button{font-family:inherit;font-size:11.5px;color:var(--muted);background:transparent;
+  border:1px solid var(--border-strong);border-radius:999px;padding:3px 11px;cursor:pointer}
+.mx-elektronik-101 .foldbar button:hover{color:var(--text);background:var(--surface-2)}
+
+/* Kernaussage */
+.mx-elektronik-101 .kurz{display:flex;gap:.7em;align-items:flex-start;border:1px solid var(--accent-border);
+  background:var(--accent-soft);border-radius:var(--radius-sm);padding:11px 15px;margin:.5rem 0 .9rem;
+  font-size:13.5px;line-height:1.6;color:var(--accent-ink)}
+.mx-elektronik-101 .kurz::before{content:"💡";flex:0 0 auto;font-size:15px;line-height:1.35}
+.mx-elektronik-101 .kurz b{font-weight:700}
+
+/* Sidebar: Gliederungsebene sichtbar machen */
+.mx-elektronik-101 #sideNav .ssec a.lv3{padding-left:19px}
+.mx-elektronik-101 #sideNav .ssec a.lv4{padding-left:31px;font-size:11.5px;color:var(--faint)}
+.mx-elektronik-101 #sideNav .ssec a.lv4:hover, .mx-elektronik-101 #sideNav .ssec a.lv4.on{color:var(--accent-ink)}
+/* Suchtreffer: Antwortspalte als zweite Zeile */
+.mx-elektronik-101 .pr .pw{display:block}
+.mx-elektronik-101 .pr .px{opacity:.85}
+.mx-elektronik-101 .pr .px mark{font-weight:700}
+.mx-elektronik-101 .pr-x{display:block;padding:9px 11px;margin:.25rem;border-radius:7px;font-size:13px;
+  font-weight:600;text-decoration:none;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid var(--accent-border)}
+.mx-elektronik-101 .pr-x:hover{filter:brightness(.97)}
+
+/* ============================================================
+   TABELLEN AUF SCHMALEN DISPLAYS
+   Statt horizontal zu scrollen (bisher lagen 48-55 % der Breite
+   ausserhalb) wird jede Zeile zu einer Karte. Die Spaltennamen
+   kommen aus dem <thead> und haengen per data-l an jeder Zelle.
+   ============================================================ */
+.mx-elektronik-101 td.numcell{font-family:var(--mono);font-size:12.5px;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.mx-elektronik-101 th, .mx-elektronik-101 td{font-variant-numeric:tabular-nums}
+.mx-elektronik-101 h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--accent-ink)}
+
+@media(max-width:620px){
+  .mx-elektronik-101 .tbl-wrap{overflow-x:visible;border:none;background:transparent;box-shadow:none;margin:.6rem 0}
+  .mx-elektronik-101 .tbl-wrap table{min-width:0!important;width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+  .mx-elektronik-101 .tbl-wrap thead{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .mx-elektronik-101 .tbl-wrap tbody tr{display:block;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:9px;padding:3px 0 5px}
+  .mx-elektronik-101 .tbl-wrap tbody tr:hover td{background:transparent}
+  .mx-elektronik-101 .tbl-wrap tbody td{display:block;width:auto;border:none;border-top:none!important;
+    padding:5px 14px;line-height:1.5;text-align:left}
+  .mx-elektronik-101 .tbl-wrap tbody td:empty{display:none}
+  .mx-elektronik-101 .tbl-wrap tbody td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);
+    font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--faint);margin-bottom:1px}
+  .mx-elektronik-101 .tbl-wrap tbody td:first-child{font-weight:600;font-size:14px;padding-top:9px;padding-bottom:8px;
+    border-bottom:1px solid var(--border)!important;margin-bottom:3px}
+  .mx-elektronik-101 .tbl-wrap tbody td:first-child::before{display:none}
+  .mx-elektronik-101 .tbl-wrap tbody td[colspan]{background:var(--surface-2);font-weight:600;border-bottom:none!important;
+    margin:0;border-radius:var(--radius) var(--radius) 0 0}
+  .mx-elektronik-101 .tbl-wrap tbody td.numcell{white-space:normal}
+}
