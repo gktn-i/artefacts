@@ -1,33 +1,83 @@
-<div class="kurz"><b>Heißluft:</b> SMD bleihaltig 280–320 °C / bleifrei 320–360 °C, Luftstrom niedrig, Nachbarn mit Kapton schützen. Reflow-Peak Heizplatte: bleihaltig 205–215 °C, bleifrei 240–250 °C.</div>
-<h2><span class="b b-luft">Heißluft</span> löten und entlöten</h2>
-<h3>Bauteil setzen (z. B. QFN)</h3>
-<div class="steps">
-<div class="step"><b>Station einstellen.</b> Passende Düse aufstecken (etwas größer als das Bauteil). Temperatur je nach Lot (Tab <a class="goto" href="#temp">Temperaturen</a>), Luftstrom niedrig (~30 %). Aufheizen lassen.</div>
-<div class="step"><b>Pads vorbereiten.</b> Dünn Lötpaste auf jedes Pad — oder Pads mit dem Kolben verzinnen und Flussmittel darüber geben.</div>
-<div class="step"><b>Bauteil platzieren.</b> Mit der Pinzette grob mittig auflegen. Grobe Genauigkeit reicht — Self-Alignment zieht es beim Schmelzen gerade.</div>
-<div class="step"><b>Nachbarn schützen.</b> Empfindliche Bauteile und Stecker daneben mit Kapton abdecken.</div>
-<div class="step"><b>Erhitzen.</b> Düse senkrecht, ~1 cm Abstand, langsame kleine Kreise über dem Bauteil. Nach 10–30 Sekunden wird das Lot glänzend flüssig und das Bauteil „rastet&#8220; sichtbar in Position.</div>
-<div class="step"><b>Luft wegnehmen.</b> Düse langsam nach oben wegziehen (nicht seitlich über andere Bauteile), Heißluft in den Halter.</div>
-<div class="step"><b>Abkühlen lassen.</b> 10–20 Sekunden nichts bewegen, nicht anpusten. Erst dann prüfen.</div>
-</div>
-<h3>Bauteil entlöten</h3>
-<div class="steps">
-<div class="step"><b>Umgebung schützen.</b> Nachbarbauteile mit Kapton abdecken. Pinzette griffbereit in die freie Hand.</div>
-<div class="step"><b>Flussmittel dazu.</b> Etwas Flussmittel rund um alle Anschlüsse — schmilzt gleichmäßiger.</div>
-<div class="step"><b>Gleichmäßig erhitzen.</b> Düse ~1 cm über dem Bauteil kreisen lassen, bis <b>alle</b> Lötstellen flüssig sind. Test: das Bauteil mit der Pinzette sanft anstupsen — bewegt es sich leicht, ist alles offen.</div>
-<div class="step"><b>Abheben.</b> Senkrecht nach oben mit der Pinzette abnehmen, nicht hebeln und nicht drehen — sonst reißen Pads mit ab. Heißes Bauteil auf hitzefeste Unterlage legen.</div>
-<div class="step"><b>Pads aufräumen.</b> Restlot mit Entlötlitze abnehmen, Flussmittelreste mit IPA reinigen.</div>
-</div>
-<div class="warn"><b>Wegblas-Gefahr:</b> Zu hoher Luftstrom schießt kleine Chips quer über die Platine. Lieber etwas heißer und geduldiger als stürmisch.</div>
+<div class="kurz"><b>Beide Verfahren schmelzen alle Anschlüsse gleichzeitig.</b> <span class="b b-luft">Heißluft</span> = ein Bauteil gezielt · <span class="b b-platte">Reflow</span> = ganze Platine. Gemeinsame Regel: <b>langsam hoch, kurz flüssig, ruhig abkühlen</b>. Gerätewerte: <a class="goto" href="#heissluftstation">Heißluftstation</a> · <a class="goto" href="#heizplatte">Heizplatte</a>.</div>
 
-<h2><span class="b b-platte">Heizplatte</span> Reflow</h2>
-<p>Ideal, um eine einseitig bestückte SMD-Platine in einem Rutsch zu löten.</p>
-<div class="steps">
-<div class="step"><b>Lötpaste auftragen.</b> Per Schablone über alle Pads oder dünn mit der Spritze pro Pad. Weniger ist mehr.</div>
-<div class="step"><b>Bestücken.</b> Alle Bauteile mit der Pinzette setzen. Reihenfolge egal, grobe Ausrichtung reicht.</div>
-<div class="step"><b>Auf die Platte.</b> Platine plan auflegen, nichts darf wackeln.</div>
-<div class="step"><b>Profil hochfahren.</b> Vorheizen, Soak, dann hoch, bis das Lot überall fließt (Kurve im Tab <a class="goto" href="#temp">Temperaturen</a>).</div>
-<div class="step"><b>Reflow beobachten.</b> Die Pasten-Bröckchen verlaufen schlagartig glänzend, Bauteile zentrieren sich.</div>
-<div class="step"><b>Runterregeln und abkühlen.</b> Platte aus, Platine ruhen lassen, bis alles fest ist.</div>
+<h2>Heißluft &amp; Reflow — das Verfahren</h2>
+<p>Beim Kolben liegt die Wärme <b>punktuell</b> an einer Stelle an. Bei Heißluft und Reflow wird das <b>ganze Bauteil</b> über seinen Schmelzpunkt gebracht. Das ändert alles: Man kann Pads erreichen, die unter dem Gehäuse liegen — muss aber den Wärmeeintrag über die Zeit steuern, statt ihn zu „platzieren".</p>
+
+<h3>Warum das funktioniert: Oberflächenspannung</h3>
+<p>Flüssiges Lot zieht sich zur kleinsten Oberfläche zusammen und benetzt dabei bevorzugt Metall. Zwei Effekte fallen dabei für dich ab:</p>
+<div class="grid">
+<div class="card"><div class="ct">Self-Alignment</div><div class="cd">Sind alle Kugeln/Pads flüssig, zieht die Oberflächenspannung das Bauteil <b>mittig auf seine Pads</b> — sichtbar als kleiner Ruck. Deshalb reicht grobes Platzieren.</div><ul><li>Der Ruck ist dein Signal: jetzt ist alles durchgeschmolzen</li><li>Danach sofort Hitze wegnehmen</li></ul></div>
+<div class="card"><div class="ct">Lot geht dorthin, wo es heiß und sauber ist</div><div class="cd">Oxidiertes oder kaltes Metall benetzt nicht. Deshalb ist <b>Flussmittel</b> hier noch wichtiger als beim Kolben — es hält die Flächen während der ganzen Aufheizzeit blank.</div><ul><li>Kein Flux = Kugeln statt Kehlen</li><li>Zu viel Flux = kocht auf und schiebt Bauteile weg</li></ul></div>
 </div>
-<div class="note"><b>Doppelseitig?</b> Die zweite Seite ist heikel, weil die erste wieder aufschmelzen kann. Fürs Hobby meist: schwere Teile auf die Reflow-Seite, die leichte Seite danach per Lötkolben oder Heißluft.</div>
+
+<h3>Die vier Phasen — bei beiden Verfahren gleich</h3>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Phase</th><th>Was du machst</th><th>Was passiert</th><th>Typischer Fehler</th></tr></thead>
+<tbody>
+<tr><td><b>1 · Vorwärmen</b></td><td>Board (und Umgebung) langsam auf 100–180 °C</td><td>Lösungsmittel dampfen ab, Temperaturdelta sinkt</td><td>Übersprungen → Board verzieht sich, Pads reißen</td></tr>
+<tr><td><b>2 · Soak</b></td><td>Temperatur kurz halten</td><td>Flussmittel wird aktiv und räumt Oxide weg</td><td>Zu kurz → Lot benetzt nicht sauber</td></tr>
+<tr><td><b>3 · Peak</b></td><td>Über den Schmelzpunkt, so kurz wie möglich</td><td>Lot wird flüssig, Self-Alignment</td><td>Zu lang → Bauteil und Pads nehmen Schaden</td></tr>
+<tr><td><b>4 · Abkühlen</b></td><td>Hitze weg, <b>nichts</b> bewegen</td><td>Lot erstarrt zu einem gleichmäßigen Gefüge</td><td>Anpusten/Wackeln → matte, spröde Stellen</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Peak-Regel für alles:</b> <b>20–30 K über dem Schmelzpunkt</b> des Lots. Sn63Pb37 (183 °C) → ~205–215 °C. SAC305 (217–220 °C) → ~240–250 °C. Mehr bringt nichts und kostet Bauteile.</div>
+
+<h3><span class="b b-luft">Heißluft</span> Bauteil setzen</h3>
+<div class="steps">
+<div class="step"><b>Pads vorbereiten.</b> Altlot planziehen, reinigen. Dann Lötpaste dünn auf die Pads — oder Pads verzinnen und Flux darüber.</div>
+<div class="step"><b>Bauteil platzieren.</b> Grob mittig, Pin 1 / Polung prüfen. Tacky-Flux hält es an Ort.</div>
+<div class="step"><b>Nachbarn abdecken</b> (Kapton), Düse passend zur Bauteilgröße, <b>Luftstrom niedrig</b>.</div>
+<div class="step"><b>Vorwärmen</b>, wenn Board groß ist oder Masseflächen im Spiel sind.</div>
+<div class="step"><b>Erhitzen.</b> Düse senkrecht, ~1 cm Abstand, langsame kleine Kreise — nie punktuell stehen bleiben.</div>
+<div class="step"><b>Auf das Self-Alignment warten</b> (10–30 s). Das Bauteil ruckt sichtbar mittig.</div>
+<div class="step"><b>Hitze senkrecht wegziehen</b> — nicht seitlich über andere Bauteile streichen.</div>
+<div class="step"><b>Abkühlen lassen</b>, 10–20 s nichts bewegen. Dann Sichtprüfung und Durchgang messen.</div>
+</div>
+
+<h3><span class="b b-luft">Heißluft</span> Bauteil entlöten</h3>
+<div class="steps">
+<div class="step"><b>Umgebung schützen.</b> Kapton über die Nachbarn, Pinzette in die freie Hand.</div>
+<div class="step"><b>Flux rundum</b> an alle Kanten — überträgt Wärme und verhindert Oxidation.</div>
+<div class="step"><b>Gleichmäßig erhitzen</b> in ruhigen Kreisen, bis <b>alle</b> Anschlüsse flüssig sind.</div>
+<div class="step"><b>Testen statt raten:</b> Bauteil seitlich <b>leicht antippen</b>. Gibt es nach, ist alles offen.</div>
+<div class="step"><b>Senkrecht abheben</b> — nie hebeln, nie drehen. Heißes Bauteil auf hitzefeste Unterlage.</div>
+<div class="step"><b>Pads aufräumen.</b> Restlot mit Entlötlitze, dann IPA.</div>
+</div>
+<div class="warn"><b>Wegblas-Gefahr:</b> Zu hoher Luftstrom schießt kleine Chips quer über die Platine — und kühlt die Umgebung aus, statt besser zu heizen. Lieber geduldig mit wenig Luft als stürmisch.</div>
+
+<h3><span class="b b-platte">Reflow</span> Ganze Platine</h3>
+<div class="steps">
+<div class="step"><b>Paste auftragen.</b> Schablone über alle Pads oder dünn mit der Spritze. Weniger ist mehr.</div>
+<div class="step"><b>Bestücken.</b> Reihenfolge egal, grobe Ausrichtung reicht — Polung und Pin 1 aber prüfen.</div>
+<div class="step"><b>Plan auflegen</b>, mittig auf der Platte. Nichts darf wackeln.</div>
+<div class="step"><b>Profil fahren:</b> Vorheizen → Soak → Peak → Abkühlen (<a class="goto" href="#temp">Temperaturen</a>).</div>
+<div class="step"><b>Reflow beobachten.</b> Die Pasten-Bröckchen verlaufen schlagartig glänzend, Bauteile zentrieren sich.</div>
+<div class="step"><b>Auf der Platte auskühlen lassen</b>, erst handwarm bewegen.</div>
+</div>
+<div class="note"><b>Doppelseitig bestücken?</b> Die zweite Seite schmilzt die erste wieder auf. Praxis: schwere/große Teile auf die Reflow-Seite, die zweite Seite danach mit Kolben oder Heißluft. Alternativ die erste Seite mit höherschmelzendem Lot, die zweite mit Low-Temp — dann bleibt Seite 1 fest.</div>
+
+<h3>Wann welches Verfahren</h3>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Aufgabe</th><th>Werkzeug</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td>Einzelnes QFN/QFP setzen oder tauschen</td><td><span class="b b-luft">Heißluft</span></td><td>Gezielt, Nachbarn bleiben kalt</td></tr>
+<tr><td>Multipin-IC schadenfrei abheben</td><td><span class="b b-luft">Heißluft</span></td><td>Alle Pins gleichzeitig flüssig</td></tr>
+<tr><td>Ganze Platine bestücken</td><td><span class="b b-platte">Reflow</span></td><td>Ein Durchgang, gleichmäßiges Ergebnis</td></tr>
+<tr><td>BGA aus-/einbauen</td><td><b>beides</b></td><td>Platte wärmt vor, Heißluft macht den Peak — <a class="goto" href="#reballing">Reballing</a></td></tr>
+<tr><td>Einzelner THT-Pin</td><td><span class="b b-kolben">Kolben</span></td><td>Heißluft ist hier das falsche Werkzeug</td></tr>
+<tr><td>Chip 0402 einzeln</td><td>beides möglich</td><td>Kolben schneller, Heißluft schonender</td></tr>
+</tbody>
+</table></div>
+
+<h3>Typische Fehlerbilder</h3>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Bild</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Tombstoning</b> — Chip stellt sich senkrecht</td><td>Ein Pad wurde früher flüssig als das andere</td><td>Gleichmäßiger erwärmen, Soak verlängern, Pastenmenge angleichen</td></tr>
+<tr><td><b>Lotperlen</b> rund um Bauteile</td><td>Rampe zu steil — Lösungsmittel kocht schlagartig</td><td>Langsamer aufheizen (Phase 1 verlängern)</td></tr>
+<tr><td><b>Brücken</b> zwischen Pins</td><td>Zu viel Paste oder Bauteil verrutscht</td><td>Weniger Paste, Flux + Litze zum Korrigieren</td></tr>
+<tr><td><b>Matte, körnige Stellen</b></td><td>Beim Erstarren bewegt oder angepustet</td><td>Ruhig auskühlen lassen</td></tr>
+<tr><td><b>Bauteil sitzt schief</b></td><td>Nicht alle Anschlüsse waren flüssig</td><td>Länger halten, vorwärmen, Düse größer</td></tr>
+<tr><td><b>Pads abgerissen</b></td><td>Gehebelt oder zu lange zu heiß</td><td>Erst auf das Nachgeben warten, senkrecht abheben</td></tr>
+</tbody>
+</table></div>

@@ -1,0 +1,144 @@
+<div class="kurz"><b>Zwei Tabellen entscheiden alles:</b> <b>Absolute Maximum Ratings</b> = was das Bauteil <b>überlebt</b> (nie ausnutzen!). <b>Recommended Operating Conditions</b> = wo es <b>funktioniert</b> (danach auslegen). Wer die beiden verwechselt, baut Schaltungen, die auf dem Tisch laufen und im Einsatz sterben.</div>
+
+<h2>Datenblatt lesen</h2>
+<p>Ein Datenblatt ist kein Fließtext, sondern ein Nachschlagewerk. Man liest es nie von vorn bis hinten, sondern springt gezielt zu der Zahl, die man braucht. Dieser Tab zeigt den immer gleichen Aufbau und wo die Fallen liegen.</p>
+
+<h3>Der Aufbau — in dieser Reihenfolge steht es fast immer drin</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>#</th><th>Abschnitt</th><th>Was drinsteht</th><th>Wie oft du es brauchst</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><b>Features / General Description</b></td><td>Marketing-Zusammenfassung, wichtigste Eckwerte</td><td>Zum groben Einordnen — 20 Sekunden</td></tr>
+<tr><td>2</td><td><b>Pin Configuration / Pinout</b></td><td>Gehäusezeichnung mit Pin-Nummern und Namen</td><td><b>Immer</b> — Pin 1 identifizieren</td></tr>
+<tr><td>3</td><td><b>Pin Description</b></td><td>Was jeder Pin tut, Richtung (I/O), ob er beschaltet werden muss</td><td><b>Immer</b> — hier stehen Pflicht-Pull-ups und „do not connect"</td></tr>
+<tr><td>4</td><td><b>Absolute Maximum Ratings</b></td><td>Zerstörungsgrenzen</td><td><b>Immer</b> — als Sicherheitsabstand</td></tr>
+<tr><td>5</td><td><b>Recommended Operating Conditions</b></td><td>Der erlaubte Arbeitsbereich</td><td><b>Immer</b> — hiernach wird ausgelegt</td></tr>
+<tr><td>6</td><td><b>Electrical Characteristics</b></td><td>Die eigentlichen Messwerte mit min/typ/max und Testbedingungen</td><td>Für jeden konkreten Wert</td></tr>
+<tr><td>7</td><td><b>Typical Performance / Kennlinien</b></td><td>Diagramme: Wert über Temperatur, Strom, Spannung</td><td>Wenn der Tabellenwert nicht zu deinem Betriebspunkt passt</td></tr>
+<tr><td>8</td><td><b>Timing Diagrams</b></td><td>Wie schnell Signale kommen dürfen, Setup-/Hold-Zeiten</td><td>Bei Bussen, Speicher, Displays</td></tr>
+<tr><td>9</td><td><b>Application Information</b></td><td>Referenzschaltung, Layout-Hinweise, Bauteilempfehlungen</td><td><b>Sehr nützlich</b> — die geschenkte Musterlösung</td></tr>
+<tr><td>10</td><td><b>Package / Mechanical Data</b></td><td>Maße, Footprint, Lötprofil (Peak-Temperatur!)</td><td>Beim Layouten und beim Löten</td></tr>
+<tr><td>11</td><td><b>Ordering Information</b></td><td>Bestellnummern-Logik: Gehäuse, Temperaturbereich, Verpackung</td><td>Beim Kaufen — Buchstaben entscheiden</td></tr>
+</tbody>
+</table></div>
+
+<h3>Die zwei Tabellen, die man nie verwechseln darf</h3>
+<div class="gb">
+<div class="gb-col bad"><h4>⚠ Absolute Maximum Ratings</h4><ul>
+<li>„Stresses beyond these may cause permanent damage"</li>
+<li>Das sind <b>Zerstörungsgrenzen</b>, keine Betriebswerte</li>
+<li>Schon <b>ein</b> kurzer Moment darüber kann das Bauteil unbrauchbar machen — oft ohne sichtbaren Defekt</li>
+<li>Beispiel: V<sub>CC</sub> max 6,0 V, Pin-Spannung −0,3 V bis V<sub>CC</sub>+0,3 V</li>
+<li><b>Nie</b> als Auslegungswert benutzen</li>
+</ul></div>
+<div class="gb-col good"><h4>✓ Recommended Operating Conditions</h4><ul>
+<li>Der Bereich, in dem alle anderen Angaben <b>gelten</b></li>
+<li>Beispiel: V<sub>CC</sub> 2,7–5,5 V, T<sub>A</sub> −40…+85 °C</li>
+<li>Hiernach wird die Schaltung ausgelegt</li>
+<li>Außerhalb funktioniert das Bauteil vielleicht — aber garantiert ist nichts</li>
+</ul></div>
+</div>
+<div class="kurz"><b>Faustregel für die Praxis:</b> Auslegen auf die Mitte der Recommended-Werte, mit <b>mindestens 20–30 % Abstand</b> zu den Absolute Maximums. Bei Kondensatorspannung und Halbleiter-Verlustleistung eher <b>Faktor 2</b>.</div>
+
+<h3>min · typ · max — und warum „typisch" gefährlich ist</h3>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Spalte</th><th>Bedeutung</th><th>Womit du rechnen musst</th></tr></thead>
+<tbody>
+<tr><td><b>Min</b></td><td>Garantierter Kleinstwert über alle Exemplare und Temperaturen</td><td>Bei Dingen, die groß sein <b>müssen</b> (Ausgangsstrom, Verstärkung, High-Pegel)</td></tr>
+<tr><td><b>Typ</b></td><td>Der Wert eines durchschnittlichen Exemplars bei 25 °C</td><td><b>Nur zur Orientierung.</b> Nicht garantiert, nicht für die Auslegung</td></tr>
+<tr><td><b>Max</b></td><td>Garantierter Größtwert</td><td>Bei Dingen, die klein bleiben <b>müssen</b> (Stromaufnahme, Leckstrom, Offset, R<sub>DS(on)</sub>)</td></tr>
+<tr><td><b>Leere Zellen</b></td><td>Kein garantierter Wert — der Hersteller sichert hier nichts zu</td><td>Wenn dein Design davon abhängt: anderes Bauteil suchen</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Jede Zeile hat Testbedingungen</b> — meist rechts in der Spalte „Conditions" und in Fußnoten. Ein R<sub>DS(on)</sub> von 8 mΩ gilt vielleicht nur bei <b>V<sub>GS</sub> = 10 V</b>. Wer den MOSFET mit 3,3 V am Gate betreibt, bekommt ein Vielfaches davon. <b>Die Bedingung ist Teil des Werts.</b></div>
+
+<h3>Kennlinien lesen</h3>
+<p>Die Diagramme im Abschnitt „Typical Performance" zeigen genau das, was die Tabelle verschweigt: wie sich ein Wert über Temperatur, Strom oder Spannung verändert.</p>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Typische Kennlinie</th><th>Was sie zeigt</th><th>Praxis-Konsequenz</th></tr></thead>
+<tbody>
+<tr><td>Durchlassspannung über Strom (Diode/LED)</td><td>U<sub>F</sub> steigt mit dem Strom</td><td>Vorwiderstand mit dem <b>tatsächlichen</b> U<sub>F</sub> rechnen, nicht mit dem Datenblatt-Typwert</td></tr>
+<tr><td>R<sub>DS(on)</sub> über V<sub>GS</sub> (MOSFET)</td><td>Der Widerstand fällt erst ab einer Mindest-Gatespannung</td><td>Zeigt, ob der Typ wirklich <b>logic level</b> ist</td></tr>
+<tr><td>Kapazität über Spannung (MLCC)</td><td>Keramik-Kondensatoren verlieren unter Spannung Kapazität</td><td>Ein 10-µF-X5R kann bei Nennspannung <b>unter 3 µF</b> liegen — Spannungsklasse doppelt wählen</td></tr>
+<tr><td>Ausgangsspannung über Laststrom (Regler)</td><td>Dropout und Einbruch</td><td>Reicht die Eingangsspannung noch bei Volllast?</td></tr>
+<tr><td>Zulässige Leistung über Temperatur (Derating)</td><td>Die Belastbarkeit sinkt oberhalb einer Grenztemperatur linear</td><td><b>Der wichtigste Chart überhaupt</b> — siehe unten</td></tr>
+<tr><td>Verstärkung über Frequenz (OPV)</td><td>Ab einer Frequenz nimmt die Verstärkung ab</td><td>Bestimmt, wie schnell die Schaltung sein darf</td></tr>
+</tbody>
+</table></div>
+
+<h3>Derating: warum 1 W nicht 1 W ist</h3>
+<p>Angaben zur Belastbarkeit gelten bei einer bestimmten Umgebungstemperatur — oft 25 °C bei freier Luft. Wird es wärmer, sinkt die zulässige Belastung.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Bauteil</th><th>Angabe im Datenblatt</th><th>Was das real bedeutet</th></tr></thead>
+<tbody>
+<tr><td>Widerstand „1/4 W"</td><td>0,25 W bei 70 °C Umgebung</td><td>Dauerlast auf <b>halbe</b> Nennleistung auslegen, sonst wird er braun</td></tr>
+<tr><td>MOSFET „100 W"</td><td>Gilt bei 25 °C <b>Gehäusetemperatur</b> mit idealer Kühlung</td><td>Ohne Kühlkörper realistisch <b>1–3 W</b></td></tr>
+<tr><td>Elko „105 °C, 2000 h"</td><td>Lebensdauer bei Maximaltemperatur</td><td>Je 10 °C kühler etwa <b>doppelte</b> Lebensdauer</td></tr>
+<tr><td>Spannungsregler „1,5 A"</td><td>Bei ausreichender Kühlung</td><td>Verlust = (U<sub>ein</sub> − U<sub>aus</sub>) × I — bei 12→5 V und 0,5 A sind das <b>3,5 W</b> als Wärme</td></tr>
+<tr><td>Kabel „10 A"</td><td>Einzeln verlegt, bei Raumtemperatur</td><td>Im Bündel und im Gehäuse deutlich weniger</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Der ehrliche Kurztest:</b> Rechne die Verlustleistung aus (<span class="formula">P = U × I</span> bzw. <span class="formula">P = I² × R</span>) und vergleiche sie mit der halben Datenblatt-Angabe. Passt es dann immer noch, ist die Auslegung gesund. Was danach im Betrieb zu heiß zum Anfassen ist (über ~60 °C), ist zu heiß.</div>
+
+<h3>Widersprüche: wo die Wahrheit steht</h3>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Quelle</th><th>Verlässlichkeit</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Electrical Characteristics</b> (Tabelle mit min/max)</td><td><b>Höchste</b> — das ist die Zusicherung</td><td>Gilt inklusive Testbedingungen und Fußnoten</td></tr>
+<tr><td>Recommended Operating Conditions</td><td>Hoch</td><td>Rahmen, in dem obige Werte gelten</td></tr>
+<tr><td>Kennlinien / Charts</td><td>Mittel — meist „typical"</td><td>Zeigen Verläufe, keine Garantien</td></tr>
+<tr><td>Features-Seite vorn</td><td><b>Niedrig</b></td><td>Bestwerte unter Idealbedingungen</td></tr>
+<tr><td>Shop-Beschreibung, Modul-Aufdruck</td><td><b>Keine</b></td><td>Häufigste Fehlerquelle bei Fertigmodulen</td></tr>
+<tr><td>Errata / Application Note</td><td>Hoch — überschreibt das Datenblatt</td><td>Bei Mikrocontrollern immer mitlesen</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Bei Widerspruch gilt immer die spezifischere und konservativere Angabe.</b> Wenn vorn „5 A" steht und in der Tabelle „5 A bei T<sub>C</sub> = 25 °C, gepulst", dann kann das Bauteil <b>keine</b> 5 A Dauerstrom.</div>
+
+<h3>Bestellnummern entschlüsseln</h3>
+<p>Der Zahlen-Buchstaben-Salat am Ende einer Bauteilnummer entscheidet über Gehäuse, Temperaturbereich und Verpackung — der Chip selbst ist derselbe.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Element</th><th>Beispiel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Grundtyp</b></td><td>LM358</td><td>Die eigentliche Funktion</td></tr>
+<tr><td><b>Gehäuse-Kürzel</b></td><td>N / P = DIP · D = SOIC · PW = TSSOP · DBV = SOT-23</td><td>Bauform — <b>hier passieren die meisten Fehlkäufe</b></td></tr>
+<tr><td><b>Temperaturbereich</b></td><td>C = 0…70 °C · I = −40…85 °C · Q = Automotive</td><td>Industrial ist meist nur unwesentlich teurer</td></tr>
+<tr><td><b>Verpackung</b></td><td>R / T&amp;R = Rolle (oft 1000+ Stück) · sonst Stange/Tray</td><td>„R" am Ende kann eine Mindestabnahme bedeuten</td></tr>
+<tr><td><b>Suffix für Bleifrei</b></td><td>G, LF, Pb-free, RoHS</td><td>Heute Standard</td></tr>
+</tbody>
+</table></div>
+<div class="note">Bei passiven Bauteilen steckt der Wert in der Nummer: Widerstände als drei bis vier Ziffern (<b>4702</b> = 470 × 10² = 47 kΩ), Kondensatoren genauso (<b>104</b> = 10 × 10⁴ pF = 100 nF). Codes auf dem Bauteil selbst stehen im Tab <a class="goto" href="#komponenten">Bauteil-Datenbank</a>.</div>
+
+<h3>Wie du ein unbekanntes Bauteil identifizierst</h3>
+<div class="steps">
+<div class="step"><b>Aufdruck vollständig notieren.</b> Auch die zweite Zeile — sie enthält oft Datumscode und Fertigungsstätte, nicht den Typ. Der Typ ist meist die <b>längste</b> zusammenhängende Zeichenfolge.</div>
+<div class="step"><b>Gehäuse bestimmen.</b> Pinzahl zählen, Bauform benennen (SOT-23, SOIC-8, QFN-32 …). Das grenzt schon stark ein.</div>
+<div class="step"><b>Nach „Typ + datasheet" suchen</b> — nicht nach dem Typ allein. Fehlt der Hersteller, hilft „Typ + Gehäuse".</div>
+<div class="step"><b>SMD-Code auflösen.</b> Kleine Gehäuse tragen nur einen 2–3-stelligen Code (z. B. „1AM" = BC846A). Dafür gibt es SMD-Code-Tabellen; der Code ist <b>nicht eindeutig</b>, also mit dem Gehäuse gegenprüfen.</div>
+<div class="step"><b>Pinout am Bauteil verifizieren.</b> Diodentest von jedem Pin gegen Masse, Versorgungspins auf Durchgang zu den Rails prüfen. Passt das nicht zum gefundenen Datenblatt, ist es das falsche Bauteil.</div>
+<div class="step"><b>Plausibilität prüfen.</b> Ein 8-poliger Chip neben einer Spule und einem Elko ist wahrscheinlich ein Schaltregler, keiner mit Audio-Funktion. Die Umgebung verrät die Funktion.</div>
+</div>
+
+<h3>Die häufigsten Datenblatt-Fallen</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Falle</th><th>Woran man sie erkennt</th><th>Richtig</th></tr></thead>
+<tbody>
+<tr><td><b>Gepulste Werte</b></td><td>Fußnote „pulsed, t<sub>p</sub> ≤ 300 µs, duty ≤ 2 %"</td><td>Für Dauerbetrieb den DC-Wert suchen</td></tr>
+<tr><td><b>Gate-Spannung beim MOSFET</b></td><td>R<sub>DS(on)</sub> „@ V<sub>GS</sub> = 10 V"</td><td>Wert bei <b>deiner</b> Gatespannung suchen, sonst anderer Typ</td></tr>
+<tr><td><b>Kapazitätsverlust bei MLCC</b></td><td>Nur im Chart, nie in der Tabelle</td><td>Spannungsfestigkeit mindestens verdoppeln</td></tr>
+<tr><td><b>Kühlkörper-Annahme</b></td><td>„R<sub>thJA</sub> = 40 K/W on 1 inch² copper"</td><td>Die Kupferfläche ist Teil der Angabe — ohne sie wird es heißer</td></tr>
+<tr><td><b>Toleranz vergessen</b></td><td>Referenzspannung „2,5 V ±1 %"</td><td>1 % können am Ende der Messkette viel sein</td></tr>
+<tr><td><b>„Not recommended for new designs"</b></td><td>Auf Seite 1 oder im Kopf</td><td>Bauteil ist abgekündigt — für Neubauten Nachfolger nehmen</td></tr>
+<tr><td><b>Fälschungen / Nachbauten</b></td><td>Werte weit neben dem Datenblatt, Aufdruck unsauber</td><td>Bei kritischen Teilen aus seriöser Quelle kaufen</td></tr>
+<tr><td><b>Lötprofil ignoriert</b></td><td>Im Package-Abschnitt: „Peak 260 °C, 10 s"</td><td>Beim Heißluftlöten einhalten — Tab <a class="goto" href="loeten.html#temp">Temperaturen</a></td></tr>
+</tbody>
+</table></div>
+
+<h3>Die Kurzlese-Routine: fünf Minuten pro Bauteil</h3>
+<div class="steps">
+<div class="step"><b>Pinout ansehen</b> — Pin 1 finden, Versorgungspins und Pflichtbeschaltung notieren.</div>
+<div class="step"><b>Recommended Operating Conditions</b> — passt meine Versorgungsspannung? Passt der Temperaturbereich?</div>
+<div class="step"><b>Absolute Maximum Ratings</b> — wo ist Schluss? Habe ich überall Abstand?</div>
+<div class="step"><b>Die zwei bis drei Werte suchen, um die es dir geht</b> (Strom, Spannungsabfall, Verstärkung, Taktrate) — <b>mit</b> Testbedingung.</div>
+<div class="step"><b>Verlustleistung überschlagen</b> und mit der halben zulässigen vergleichen.</div>
+<div class="step"><b>Application-Schaltung ansehen</b> und übernehmen, statt selbst zu erfinden — inklusive der empfohlenen Kondensatorwerte.</div>
+</div>
+<div class="kurz"><b>Wenn du nur eine Sache mitnimmst:</b> Jeder Wert im Datenblatt gilt <b>nur unter seiner Bedingung</b>. Die Bedingung steht daneben oder in der Fußnote — und wird häufiger übersehen als der Wert selbst.</div>

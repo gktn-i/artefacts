@@ -48,3 +48,50 @@
 </div>
 <div class="note"><b>Merke:</b> Mattigkeit allein ist kein Fehlerzeichen — bleifreies Lot ist von Natur aus matter. Entscheidend sind <b>Form und Benetzung</b>: konkav und geschlossen = gut, kugelig und aufgesetzt = nacharbeiten.</div>
 <div class="warn"><b>Polung beachten:</b> Elkos, Dioden, LEDs und ICs sind gepolt. Markierung prüfen, bevor du lötest. Falsch herum kann das Bauteil sofort zerstören.</div>
+
+<h3>Bestückungs-Reihenfolge</h3>
+<p>Immer von <b>flach nach hoch</b> — sonst liegt die Platine beim Umdrehen auf bereits bestückten Teilen auf und alles verrutscht.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>#</th><th>Bauteilgruppe</th><th>Warum an dieser Stelle</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Drahtbrücken, liegende Widerstände, Dioden</td><td>Flachste Teile — Platine liegt beim Wenden plan</td></tr>
+<tr><td>2</td><td>IC-Sockel, Keramikkondensatoren</td><td>Noch flach; Sockel <b>statt</b> IC direkt löten schützt den Chip</td></tr>
+<tr><td>3</td><td>Transistoren, kleine Elkos, Stift-/Buchsenleisten</td><td>Mittelhoch</td></tr>
+<tr><td>4</td><td>Große Elkos, Trafos, Relais, Kühlkörper</td><td>Hoch und schwer — zuletzt</td></tr>
+<tr><td>5</td><td>Mechanik: Klemmen, Buchsen, Taster</td><td>Bestimmen die Gehäusepassung; zum Schluss ausrichten</td></tr>
+<tr><td>6</td><td>ICs in die Sockel stecken</td><td>Erst nach allen Lötarbeiten — kein Hitzestress, kein ESD</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Trick beim Ausrichten:</b> Bei Steckern und Leisten <b>einen</b> Eckpin tacken, dann prüfen ob das Teil plan und gerade sitzt, notfalls diesen einen Pin nochmal erwärmen und geraderücken — erst danach alle übrigen Pins löten.</div>
+
+<h3>Durchkontaktiert oder nicht — der Unterschied</h3>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Platinenart</th><th>Woran erkennbar</th><th>Was das fürs Löten heißt</th></tr></thead>
+<tbody>
+<tr><td><b>Durchkontaktiert (PTH)</b></td><td>Bohrung innen metallisch, Pad auf <b>beiden</b> Seiten</td><td>Lot steigt durch die Bohrung. Von einer Seite löten reicht, wenn es oben austritt. Sehr haltbar</td></tr>
+<tr><td><b>Einseitig / nicht durchkontaktiert</b></td><td>Pad nur auf einer Seite, Bohrung innen blank</td><td>Nur die Padseite trägt. Pads lösen sich leicht — <b>weniger Hitze, kürzer</b>, nicht am Bauteil ziehen</td></tr>
+<tr><td><b>Mit Massefläche am Pad</b></td><td>Pad hängt an großer Kupferfläche</td><td>Zieht die Wärme weg. Größere Spitze, kurz vorwärmen — <b>nicht</b> einfach heißer stellen</td></tr>
+<tr><td><b>Mit Wärmefalle (Thermal Relief)</b></td><td>Pad über vier schmale Stege an der Fläche</td><td>Genau dafür gebaut — lötet sich normal</td></tr>
+</tbody>
+</table></div>
+
+<h3>THT entlöten</h3>
+<div class="steps">
+<div class="step"><b>Flux auf die Lötstelle.</b> Altes Lot ist oxidiert und fließt sonst zäh.</div>
+<div class="step"><b>Frisches Lot zugeben.</b> Klingt falsch, ist aber richtig: es mischt sich mit dem alten und macht das Ganze wieder flüssig und saugfähig.</div>
+<div class="step"><b>Absaugen.</b> Entlötpumpe direkt aufsetzen und auslösen, während das Lot flüssig ist — oder Entlötlitze flach auflegen und in <b>einem</b> Zug abziehen.</div>
+<div class="step"><b>Beinchen lösen.</b> Pin mit der Spitze kurz erwärmen und gleichzeitig mit einer Nadel oder dem Bauteil leicht bewegen, bis er frei im Loch sitzt.</div>
+<div class="step"><b>Mehrpolige Bauteile:</b> Nie an einem Pin ziehen. Entweder alle Pins nacheinander freilegen — oder die Beinchen abkneifen und einzeln herausziehen, wenn das Bauteil ohnehin defekt ist.</div>
+<div class="step"><b>Loch freimachen.</b> Rest-Lot mit der Pumpe entfernen, dann mit einer Nadel bei erwärmtem Lot durchstoßen.</div>
+</div>
+<div class="warn"><b>Häufigster Schaden beim Entlöten:</b> Am Bauteil ziehen, während das Lot noch fest ist. Bei einseitigen Platinen reißt dabei das Pad samt Leiterbahn ab. Immer erst prüfen, ob der Pin wirklich frei ist.</div>
+
+<h3>Bauteil-Besonderheiten</h3>
+<div class="grid">
+<div class="card"><div class="ct">Elko</div><div class="cd">Minusstreifen am Gehäuse, kürzeres Bein = Minus.</div><ul><li>Verträgt Hitze schlecht — zügig löten</li><li>Falsch gepolt kann er aufplatzen</li></ul></div>
+<div class="card"><div class="ct">LED / Diode</div><div class="cd">Kathode markiert (Ring bzw. abgeflachte Seite), längeres Bein = Anode.</div><ul><li>Nie ohne Vorwiderstand betreiben</li></ul></div>
+<div class="card"><div class="ct">DIP-IC</div><div class="cd">Kerbe oder Punkt = Pin 1.</div><ul><li>Zwei diagonale Eckpins tacken, ausrichten, dann Rest</li><li>Besser: Sockel löten, IC danach stecken</li></ul></div>
+<div class="card"><div class="ct">Transistor TO-92 / TO-220</div><div class="cd">Pinbelegung aus dem Datenblatt — nicht raten.</div><ul><li>Bei TO-220 die Kühlfahne prüfen: oft mit einem Anschluss verbunden</li></ul></div>
+<div class="card"><div class="ct">Stift-/Buchsenleiste</div><div class="cd">Viele Pins in einer Reihe.</div><ul><li>Eckpin tacken → ausrichten → Rest löten</li><li>Kunststoffkörper verzieht sich bei zu viel Hitze</li></ul></div>
+<div class="card"><div class="ct">Quarz / Kristall</div><div class="cd">Metallgehäuse, ungepolt.</div><ul><li>Gehäuse liegt oft auf Masse — Kurzschlussgefahr zu Bahnen darunter</li></ul></div>
+</div>

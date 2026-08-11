@@ -1,0 +1,92 @@
+<div class="kurz"><b>Zwei Betriebsarten:</b> <b>Reflow</b> — ganze Platine durchlöten, Peak bleihaltig <b>205–215 °C</b> / bleifrei <b>240–250 °C</b>. <b>Vorwärmen</b> — Board auf <b>100–180 °C</b> halten, damit oben viel weniger Hitze nötig ist. Vorwärmen ist bei BGA keine Option, sondern Pflicht.</div>
+
+<h2>Heizplatte / Vorwärmer</h2>
+<p>Die Platte bringt Wärme <b>flächig von unten</b> ein. Damit löst sie das Grundproblem jeder Rework-Arbeit: Ein kaltes Board saugt die Wärme aus der Lötstelle weg, und man hält mit immer mehr Hitze von oben dagegen — bis Pads, Kleber und Nachbarn leiden.</p>
+
+<h3>Bedienelemente</h3>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Element</th><th>Was es tut</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Solltemperatur</b></td><td>Zieltemperatur der Plattenoberfläche</td><td>Die Platine wird <b>immer kühler</b> als die Platte — Differenz je nach Kontakt und Boardmasse</td></tr>
+<tr><td><b>Profil-Steuerung</b><br><span class="cd">falls vorhanden</span></td><td>Fährt Vorheizen → Soak → Peak → Abkühlen automatisch</td><td>Nur so gut wie das hinterlegte Profil — Lotdatenblatt schlägt Werksvorgabe</td></tr>
+<tr><td><b>Externes Thermoelement</b></td><td>Misst dort, wo es zählt: direkt neben dem Bauteil</td><td>Der wichtigste Zusatz. Ohne ihn rätst du die Boardtemperatur</td></tr>
+<tr><td><b>Timer / Halte-Zeit</b></td><td>Begrenzt die Zeit auf Temperatur</td><td>Gesamtzeit über 150 °C im Minutenbereich halten, nicht Viertelstunde</td></tr>
+</tbody>
+</table></div>
+
+<h3>Betriebsart A · Vorwärmen (der Normalfall)</h3>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Situation</th><th>Platte</th><th>Halten</th><th>Warum genau so</th></tr></thead>
+<tbody>
+<tr><td>Kleine Tochterplatine, wenig Kupfer</td><td><b>100–130 °C</b></td><td>1–2 min</td><td>Bricht das Temperaturdelta, ohne Kleber und Folien zu belasten</td></tr>
+<tr><td>Handy-Mainboard <b>mit Underfill</b></td><td><b>150–180 °C</b> (kurz bis ~200 °C)</td><td>2–3 min</td><td>Underfill wird erst hier zäh-weich</td></tr>
+<tr><td>Laptop-Mainboard</td><td><b>130–160 °C</b></td><td>2–4 min</td><td>Große Kupferlagen brauchen Zeit, bis die Wärme durch ist</td></tr>
+<tr><td>Konsolen-Mainboard</td><td><b>150–180 °C</b></td><td>3–5 min</td><td>Sehr hohe Wärmemasse — sonst wird die Chipmitte nie flüssig</td></tr>
+<tr><td>Einzelner Chip im Reball-Jig</td><td>ohne oder <b>80–120 °C</b></td><td>—</td><td>Der Chip allein hat kaum Masse</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Unter dem Schmelzpunkt bleiben.</b> Vorwärmen darf Lot nicht aufschmelzen, sonst lösen sich Nachbarbauteile mit. Bleihaltig heißt: unter 183 °C. Bleifrei: unter 217 °C.</div>
+
+<h3>Betriebsart B · Reflow (ganze Platine)</h3>
+<p>Ein Reflow-Profil hat vier Phasen. Jede hat eine Aufgabe — deshalb funktioniert „einfach auf Peak heizen" nicht zuverlässig.</p>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Phase</th><th>Bereich</th><th>Dauer</th><th>Was dort passiert</th></tr></thead>
+<tbody>
+<tr><td><b>1 · Vorheizen (Ramp)</b></td><td>25 → 150 °C</td><td>60–90 s</td><td>Lösungsmittel dampfen aus der Paste ab. Zu schnell = Spritzer und Lotperlen</td></tr>
+<tr><td><b>2 · Soak</b></td><td>150–180 °C</td><td>60–120 s</td><td>Alles gleicht sich an, Flussmittel wird aktiv und räumt Oxide weg</td></tr>
+<tr><td><b>3 · Reflow (Peak)</b></td><td>bleihaltig <b>205–215 °C</b><br>bleifrei <b>240–250 °C</b></td><td>30–60 s über Schmelzpunkt</td><td>Lot wird flüssig, Bauteile ziehen sich mittig (Self-Alignment)</td></tr>
+<tr><td><b>4 · Abkühlen</b></td><td>Peak → &lt; 100 °C</td><td>langsam</td><td>Schockkühlen macht Lötstellen spröde und verzieht das Board</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Peak-Regel:</b> <b>20–30 K über dem Schmelzpunkt</b> des Lots, so kurz wie möglich. Sn63Pb37 schmilzt bei 183 °C → Peak ~205–215 °C. SAC305 schmilzt bei 217–220 °C → Peak ~240–250 °C.</div>
+
+<h3>Workflows</h3>
+<h4>① Vorwärmen für Rework</h4>
+<div class="steps">
+<div class="step"><b>Board plan auflegen.</b> Vollflächiger Kontakt — Abstandshalter und Aufkleber unter dem Board machen kalte Zonen.</div>
+<div class="step"><b>Thermoelement neben das Zielbauteil</b> legen und mit Kapton fixieren. Die Plattenanzeige ist nicht die Boardtemperatur.</div>
+<div class="step"><b>Solltemperatur setzen</b> (Tabelle oben) und <b>halten</b>, bis die gemessene Boardtemperatur wirklich steht — nicht sofort weiterarbeiten.</div>
+<div class="step"><b>Von oben arbeiten</b> — mit deutlich reduzierter Heißluft-Temperatur.</div>
+<div class="step"><b>Stufenweise herunterfahren.</b> Nicht abschalten und Board wegziehen.</div>
+</div>
+
+<h4>② Reflow einer bestückten Platine</h4>
+<div class="steps">
+<div class="step"><b>Paste auftragen</b> — Schablone oder Spritze, dünn und gleichmäßig.</div>
+<div class="step"><b>Bauteile setzen.</b> Polung und Pin 1 prüfen — nach dem Aufschmelzen ist Korrigieren teuer.</div>
+<div class="step"><b>Board mittig auflegen.</b> Ränder der Platte sind kühler als die Mitte.</div>
+<div class="step"><b>Profil fahren</b> (Tabelle oben). Ohne Profilsteuerung: Platte auf Soak-Temperatur, halten, dann auf Peak hochstellen.</div>
+<div class="step"><b>Peak beobachten.</b> Sobald überall Self-Alignment sichtbar ist: Wärme weg.</div>
+<div class="step"><b>Auf der Platte abkühlen lassen</b>, nicht herunterziehen. Erst handwarm bewegen.</div>
+<div class="step"><b>Kontrolle.</b> Sicht auf Brücken und Tombstones, dann elektrisch prüfen.</div>
+</div>
+
+<h3>Was schiefgeht</h3>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Symptom</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td>Board verzieht sich (Warpage)</td><td>Zu schnelle Rampe oder einseitige Wärme</td><td>Langsamer aufheizen, Soak einhalten</td></tr>
+<tr><td>Chip in der Mitte wird nicht flüssig, Rand schon</td><td>Kein Vollkontakt, Wärme fließt seitlich weg</td><td>Board plan auflegen, mittig positionieren, länger halten</td></tr>
+<tr><td>Lotperlen und Spritzer rund um Bauteile</td><td>Rampe zu steil — Lösungsmittel kocht</td><td>Phase 1 verlängern</td></tr>
+<tr><td>Tombstoning (Chip stellt sich auf)</td><td>Pads ungleich erwärmt oder ungleiche Pastenmenge</td><td>Gleichmäßiger auftragen, Soak verlängern</td></tr>
+<tr><td>Matte, körnige Lötstellen</td><td>Board beim Erstarren bewegt oder zu schnell gekühlt</td><td>Ruhig abkühlen lassen</td></tr>
+<tr><td>Elkos zischen / wölben sich</td><td>Zu lange über Temperatur</td><td>Gesamtzeit kürzen, empfindliche Teile später von Hand</td></tr>
+</tbody>
+</table></div>
+
+<h3>Grenzen</h3>
+<div class="gb">
+<div class="gb-col good"><h4>✓ Dafür ist sie da</h4><ul>
+<li>Einseitige SMD-Bestückung komplett</li>
+<li>Vorwärmen für Heißluft- und BGA-Arbeit</li>
+<li>Gleichmäßige Wärme über große Flächen</li>
+<li>Kleinserien reproduzierbar</li>
+</ul></div>
+<div class="gb-col bad"><h4>✗ Nicht dafür</h4><ul>
+<li>Doppelseitig bestückte Boards (untere Seite fällt ab)</li>
+<li>Einzelne Korrekturen — dafür Kolben oder Heißluft</li>
+<li>Boards mit Kunststoff, Akku oder Displays dran</li>
+<li>Ersatz für eine saubere Pastenmenge</li>
+</ul></div>
+</div>
+<div class="warn"><b>Immer:</b> Akku raus, Kunststoff und Folienkabel ab, bevor Wärme kommt. Und die Platte bleibt lange heiß — Warnleuchte beachten, nicht auf die Oberfläche fassen.</div>

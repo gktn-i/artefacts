@@ -1,87 +1,153 @@
-<div class="kurz"><b>Labornetzteil:</b> Spannung einstellen, Stromlimit über kurzgeschlossene Buchsen setzen, dann erst ans Board. CC-Anzeige = Netzteil begrenzt gerade.</div>
-<h2>Was ist ein Labornetzteil?</h2>
-<p>Eine einstellbare Gleichstromquelle für die Werkbank. Anders als ein festes Steckernetzteil stellst du <b>zwei Dinge getrennt</b> ein:</p>
-<div class="card">
-<div class="rule"><span class="ico">🔵</span><div><b>Spannung (V):</b> wie viel Volt am Ausgang anliegen.</div></div>
-<div class="rule"><span class="ico">🟠</span><div><b>Strom-Limit (A):</b> wie viel Ampere maximal fließen dürfen. Das wichtigste Merkmal — wirkt wie eine <b>einstellbare, eingebaute Sicherung</b> und schützt die Schaltung, wenn etwas falsch verdrahtet ist.</div></div>
-<div class="rule"><span class="ico">📟</span><div><b>Zwei Anzeigen</b> zeigen die echten Ist-Werte — nebenbei ein Live-Strommesser für deine Schaltung.</div></div>
-</div>
-<p class="note">Typische Einsätze: Module mit definierter Spannung versorgen statt mit Batterien zu hantieren · Bauteile gezielt an ihren Grenzwerten testen · symmetrische Versorgung (±) für Analogtechnik per Doppelnetzteil.</p>
+<div class="kurz"><b>Immer in dieser Reihenfolge:</b> ① <b>Strom-Limit</b> setzen (Buchsen kurzschließen, Regler hochdrehen) · ② Output aus, Spannung einstellen · ③ Schaltung anklemmen · ④ Output an. Das Strom-Limit ist eine einstellbare Sicherung — richtig gesetzt verhindert es fast jeden Rauchschaden.</div>
 
-<h2>Das Herzstück: CV und CC</h2>
-<p>Ein Labornetzteil arbeitet in einem von zwei Zuständen. Eine LED zeigt an, in welchem es gerade ist.</p>
-<div class="grid2">
-<div class="card"><h3>CV: Konstantspannung (Normalfall)</h3><p>Das Netzteil hält die eingestellte Spannung konstant. Der Strom ergibt sich aus dem, was die Schaltung gerade braucht. Solange der Verbrauch unter deinem Strom-Limit bleibt, läufst du in CV.</p></div>
-<div class="card"><h3>CC: Konstantstrom (Schutzfall)</h3><p>Will die Schaltung <b>mehr</b> Strom ziehen als erlaubt (z. B. Kurzschluss oder Fehler), springt das Netzteil auf CC: Es <b>begrenzt den Strom</b> auf dein Limit und <b>senkt dafür die Spannung</b> ab. Deine Schaltung wird dadurch nicht überlastet.</p></div>
+<h2>Labornetzteil — mein Gerät</h2>
+<p>Eine einstellbare Gleichstromquelle, bei der du <b>Spannung und maximalen Strom getrennt</b> vorgibst. Dadurch ist es zugleich Stromversorgung, Schutzschaltung und Live-Strommesser für die Schaltung.</p>
+
+<h3>Das Herzstück: CV und CC</h3>
+<div class="grid">
+<div class="card"><div class="ct">CV — Konstantspannung (Normalfall)</div><div class="cd">Das Netzteil hält die eingestellte <b>Spannung</b> konstant. Wie viel Strom fließt, bestimmt die Schaltung.</div><ul><li>Solange der Verbrauch unter dem Limit bleibt</li><li>Die Ampere-Anzeige ist dann ein Messwert</li></ul></div>
+<div class="card"><div class="ct">CC — Konstantstrom (Schutzfall)</div><div class="cd">Will die Schaltung <b>mehr</b> Strom als erlaubt, begrenzt das Netzteil den <b>Strom</b> und <b>senkt dafür die Spannung</b>.</div><ul><li>Kurzschluss, Verpolung, Bauteilfehler</li><li>Unerwartetes CC = in der Schaltung stimmt etwas nicht</li></ul></div>
 </div>
 <svg class="sy sy-mid" style="max-width:380px" viewBox="-32 0 372 165" role="img" aria-label="Kennlinie eines Labornetzteils: Spannung bleibt konstant bis zum Strom-Limit, danach begrenzt das Gerät den Strom und senkt die Spannung"><path class="w" d="M35,15 V135 H320"/><path class="acc" d="M35,45 H230 L230,133"/><path class="w" style="stroke-dasharray:4 4;stroke-width:1" d="M230,135 V45"/><text class="lbl" x="30" y="49" text-anchor="end">U ein-</text><text class="lbl" x="30" y="61" text-anchor="end">gestellt</text><text class="lbl" x="230" y="150" text-anchor="middle">Strom-Limit</text><text class="lbl" x="130" y="36" text-anchor="middle">CV — Spannung konstant</text><text class="lbl" x="240" y="95">CC — Strom</text><text class="lbl" x="240" y="108">begrenzt</text><text class="lbl" x="316" y="150" text-anchor="end">Strom →</text><text class="lbl" x="18" y="14">U</text></svg>
-<p class="note">Merke: In CV bestimmt die Schaltung den Strom, in CC bestimmt das Netzteil den Strom. Schlägt es unerwartet auf CC um, stimmt meist etwas in der Schaltung nicht.</p>
+<div class="note">In <b>CV</b> bestimmt die Schaltung den Strom, in <b>CC</b> bestimmt das Netzteil den Strom. Welcher Zustand aktiv ist, zeigt eine LED oder ein Symbol im Display — sie ist die wichtigste Information auf der ganzen Frontplatte.</div>
 
-<h2>Bedienelemente & Buchsen</h2>
+<h3>Bedienelemente</h3>
 <svg class="sy sy-mid" style="max-width:360px" viewBox="0 0 380 252" role="img" aria-label="Frontplatte eines Labornetzteils: zwei Anzeigen für Volt und Ampere, CV- und CC-Lampe, Voltage- und Current-Drehknopf, Output-Taste und drei Buchsen"><rect class="w" x="20" y="12" width="340" height="228" rx="10"/><rect class="w" x="40" y="28" width="140" height="46" rx="4"/><text class="lbl" x="110" y="58" text-anchor="middle" style="font-size:17px">5.00 V</text><rect class="w" x="200" y="28" width="140" height="46" rx="4"/><text class="lbl" x="270" y="58" text-anchor="middle" style="font-size:17px">0.13 A</text><circle class="accf" cx="46" cy="92" r="4.5"/><text class="pin" x="56" y="96">CV</text><circle class="w" cx="96" cy="92" r="4.5"/><text class="pin" x="106" y="96">CC</text><circle class="w" cx="110" cy="148" r="26"/><path class="w" style="stroke-width:3" d="M110,148 L95,127"/><text class="pin" x="110" y="190" text-anchor="middle">Voltage</text><circle class="w" cx="270" cy="148" r="26"/><path class="w" style="stroke-width:3" d="M270,148 L255,127"/><text class="pin" x="270" y="190" text-anchor="middle">Current</text><rect class="w" x="238" y="202" width="66" height="24" rx="5"/><text class="pin" x="271" y="217" text-anchor="middle">OUTPUT</text><circle style="stroke:var(--rate-bad);stroke-width:2.4;fill:none" cx="60" cy="214" r="8"/><circle style="stroke:var(--text);stroke-width:2.4;fill:none" cx="100" cy="214" r="8"/><circle style="stroke:var(--rate-good);stroke-width:2.4;fill:none" cx="140" cy="214" r="8"/><text class="pin" x="60" y="200" text-anchor="middle">+</text><text class="pin" x="100" y="200" text-anchor="middle">−</text><text class="pin" x="140" y="200" text-anchor="middle">⏚</text></svg>
-<div class="card">
-<div class="rule"><span class="ico">🔵</span><div><b>Voltage (V)</b>: stellt die Ausgangsspannung ein. Oft grob + fein (zwei Knöpfe oder Tasten).</div></div>
-<div class="rule"><span class="ico">🟠</span><div><b>Current (A)</b>: stellt das Stromlimit ein, ab dem auf CC umgeschaltet wird.</div></div>
-<div class="rule"><span class="ico">⏻</span><div><b>Output On/Off</b>: schaltet die Buchsen scharf. Solange Output aus ist, liegt nichts an den Klemmen an. <b>Immer zuerst einstellen, dann einschalten.</b></div></div>
-<div class="rule"><span class="ico">🔴</span><div><b>Rote Buchse (+)</b>: Pluspol des Ausgangs.</div></div>
-<div class="rule"><span class="ico">⚫</span><div><b>Schwarze Buchse (−)</b>: Minuspol des Ausgangs.</div></div>
-<div class="rule"><span class="ico">🟢</span><div><b>Grüne Buchse (GND / Erde)</b>: das ist die <b>Schutzerde</b> (Gehäuse/Netz), <b>nicht</b> der Minuspol! Plus und Minus "schweben" frei. Nur wenn du es brauchst, kannst du Minus mit GND verbinden.</div></div>
-</div>
-
-<h2>Standard-Vorgang: Strombegrenzung vorab einstellen</h2>
-<p>Der wichtigste Handgriff, der deine Schaltung schützt: das Stromlimit einstellen, <b>bevor</b> irgendetwas angeschlossen wird.</p>
-<div class="card">
-<p><b>Warum der Trick mit dem Kurzschluss?</b> Ohne Stromfluss zeigt die Anzeige das Limit nicht — sichtbar wird es erst im CC-Zustand. Buchsen verbinden zwingt das Netzteil kurz in CC; genau dafür ist es gebaut, mehr als das Limit fließt nie.</p>
-</div>
-<div class="card">
-<div class="rule"><span class="ico">①</span><div>Output <b>aus</b>. Rote und schwarze Buchse mit einem Messkabel <b>direkt verbinden</b>.</div></div>
-<div class="rule"><span class="ico">②</span><div>Strom-Regler ganz nach links (Minimum), dann Output <b>an</b>. Jetzt leuchtet die <b>CC-Lampe</b> und die Ampere-Anzeige zeigt fast 0 — das Netzteil begrenzt. Genau das wollen wir.</div></div>
-<div class="rule"><span class="ico">③</span><div>Strom-Regler <b>langsam aufdrehen</b>. Die Ampere-Anzeige zeigt dabei live dein zukünftiges Limit an. Beim Wunschwert stoppen (z. B. 0,5 A für eine kleine Logik-Schaltung).</div></div>
-<div class="rule"><span class="ico">④</span><div>Output <b>aus</b>, Kurzschluss-Kabel entfernen. Die Einstellung <b>bleibt gespeichert</b> — der Regler steht ja noch an derselben Position.</div></div>
-<div class="rule"><span class="ico">⑤</span><div>Spannung einstellen, Schaltung anschließen, Output <b>an</b>. Ab jetzt gilt: Will die Schaltung mehr ziehen als dein Limit (Fehler, Kurzschluss), springt das Netzteil auf CC und deckelt — nichts brennt durch.</div></div>
-</div>
-<p class="note">Faustregel fürs Limit: knapp über dem normalen Verbrauch. So bleibt Reserve für den Betrieb, aber ein Fehler wird sofort gedeckelt. — Geräte mit Zifferneingabe (z. B. RD6006- / DPS-Klasse) zeigen das Limit direkt im Display: dort einfach eintippen, der Kurzschluss-Trick ist nur bei klassischen Drehknopf-Geräten nötig.</p>
-
-<h2>Welche Spannung, welches Strom-Limit? Typische Einstellungen</h2>
-<p>Richtwerte für die häufigsten Hobby-Zwecke. Die Logik dahinter: <b>Spannung</b> = was der Verbraucher laut Aufdruck/Datenblatt braucht, <b>Strom-Limit</b> = sein normaler Verbrauch plus 20–50 % Reserve.</p>
-<div class="tbl-wrap"><table style="min-width:720px">
-<thead><tr><th>Zweck</th><th>Spannung</th><th>Strom-Limit</th><th>Hinweis</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Element</th><th>Was es tut</th><th>Wann du es anfasst</th></tr></thead>
 <tbody>
-<tr><td>Unbekannte oder frisch reparierte Schaltung zum ersten Mal</td><td>erwartete Betriebsspannung</td><td>0,05–0,1 A, langsam erhöhen</td><td>„Smoke-Test": springt das Netzteil sofort auf CC, stimmt etwas nicht</td></tr>
-<tr><td>3,3-V-Module und -Sensoren direkt</td><td>3,3 V</td><td>0,2–0,5 A</td><td>ESP32 zieht kurze WLAN-Spitzen → eher 0,5 A</td></tr>
-<tr><td>Arduino / ESP32-Board über den 5-V-Pin</td><td>5 V</td><td>0,5–1 A</td><td>umgeht den Board-Regler — Spannung exakt einstellen</td></tr>
-<tr><td>Logikschaltung mit ein paar LEDs/Sensoren</td><td>5 V</td><td>0,5 A</td><td>reicht für die meisten Steckbrett-Aufbauten</td></tr>
-<tr><td>Servo (SG90 / MG90S)</td><td>5–6 V</td><td>1–2 A</td><td>Stellspitzen sind kurz, aber hoch</td></tr>
-<tr><td>WS2812-LED-Streifen</td><td>5 V</td><td>60 mA je LED bei voll Weiß</td><td>60 LEDs → bis 3,6 A; Limit passend setzen, dicke Zuleitung</td></tr>
-<tr><td>Kleiner DC-/Getriebemotor (TT-Motor)</td><td>6 V</td><td>1–1,5 A</td><td>Anlauf-/Blockierstrom ist ein Vielfaches des Nennstroms</td></tr>
-<tr><td>12-V-Lüfter oder 12-V-LED-Streifen</td><td>12 V</td><td>Nennstrom + ~30 %</td><td>Angabe steht auf dem Gerät bzw. Streifen</td></tr>
-<tr><td>12-V-Motor unter Last</td><td>12 V</td><td>2–3× Nennstrom (Anlauf)</td><td>zu knapp gesetzt riegelt CC schon beim Start ab</td></tr>
-<tr><td>Li-Ion-Zelle grob laden (Notbehelf)</td><td>exakt 4,20 V</td><td>0,5 × Kapazität (1 Ah → 0,5 A)</td><td>nie unbeaufsichtigt — siehe Warnung unter „Worauf achten"</td></tr>
+<tr><td><b>Voltage (V)</b></td><td>Stellt die Ausgangsspannung ein, oft grob + fein</td><td>Vor jedem Anschließen — und immer bei ausgeschaltetem Output</td></tr>
+<tr><td><b>Current (A)</b></td><td>Stellt das Strom-Limit ein, ab dem auf CC umgeschaltet wird</td><td><b>Vor jeder neuen Schaltung</b> neu setzen</td></tr>
+<tr><td><b>Output On/Off</b></td><td>Schaltet die Buchsen scharf; solange aus, liegt nichts an</td><td>Immer als <b>letzter</b> Schritt einschalten, als <b>erster</b> ausschalten</td></tr>
+<tr><td><b>Anzeige V / A</b></td><td>Zeigt die <b>Ist-Werte</b>, nicht die Sollwerte</td><td>Ständig mitlesen — der Strom verrät den Zustand der Schaltung</td></tr>
+<tr><td><b>CV/CC-Anzeige</b></td><td>Sagt, welche Größe gerade geregelt wird</td><td>Nach jedem Einschalten prüfen</td></tr>
+<tr><td><b>Rote Buchse (+)</b></td><td>Pluspol</td><td>—</td></tr>
+<tr><td><b>Schwarze Buchse (−)</b></td><td>Minuspol</td><td>—</td></tr>
+<tr><td><b>Grüne Buchse (⏚)</b></td><td><b>Schutzerde</b> des Gehäuses — <b>nicht</b> der Minuspol</td><td>Nur bewusst mit Minus brücken, wenn die Anwendung einen Erdbezug braucht</td></tr>
 </tbody>
 </table></div>
-<div class="card">
-<div class="rule"><span class="ico">🎯</span><div><b>Limit = Verbrauch + 20–50 % Reserve.</b> Lieber knapp starten und bei Bedarf erhöhen — ein zu großzügiges Limit schützt nichts.</div></div>
-<div class="rule"><span class="ico">📟</span><div><b>Spannung vor dem Anschließen prüfen.</b> Kurz Output an, Anzeige (oder Multimeter) kontrollieren, dann erst die Schaltung dran.</div></div>
-<div class="rule"><span class="ico">⚙️</span><div><b>Motoren nach dem Anlaufstrom auslegen, nicht nach dem Nennstrom.</b> Beim Start und bei Blockade fließt ein Vielfaches (Details im Tab <a href="#motoren">Motoren</a>).</div></div>
-</div>
-<p class="note"><b>Praktischer CC-Trick:</b> Eine LED ohne Vorwiderstand testen: Spannung auf 5 V, Strom-Limit auf 15 mA, LED anschließen. Das Netzteil geht in CC und arbeitet als Konstantstromquelle — durch die LED fließen exakt 15 mA, egal welche Farbe.</p>
+<div class="warn"><b>Plus und Minus schweben.</b> Sie haben keinen Bezug zur Erde — deshalb kannst du zwei Netzteile in Reihe schalten oder den Ausgang auf ein beliebiges Potential legen. Verwechselst du aber die grüne Erdbuchse mit dem Minuspol, fließt der Rückstrom über den Schutzleiter statt über deine Leitung. Das ist der klassische Verdrahtungsfehler an diesem Gerät.</div>
 
-<h2>Begriffe einfach erklärt</h2>
-<div class="grid2">
-<div class="card"><h3>OVP / OCP</h3><p><b>O</b>ver-<b>V</b>oltage / <b>O</b>ver-<b>C</b>urrent <b>P</b>rotection (Überspannungs-/Überstromschutz). Wichtiger Unterschied zu CC: <b>CC regelt</b> den Strom auf dein Limit herunter und <b>lässt den Ausgang an</b>. <b>OCP schaltet den Ausgang hart ab</b> (wie ein Sicherungsautomat) und muss neu aktiviert werden — für alle Fälle, in denen ein Fehler sofort <b>komplett</b> trennen soll.</p></div>
-<div class="card"><h3>Ripple / Restwelligkeit</h3><p>Kleine Reste von "Zappeln" auf der eigentlich glatten Gleichspannung. Je weniger, desto sauberer. Wichtig bei empfindlicher Analog- oder Funktechnik.</p></div>
-<div class="card"><h3>Linear vs. Schaltnetzteil</h3><p><b>Linear:</b> sehr saubere Spannung, wenig Ripple, aber schwer und warm. <b>Schaltend:</b> leicht, effizient, günstiger, dafür meist etwas mehr Ripple. Für Hobby reicht ein gutes Schaltnetzteil fast immer.</p></div>
-<div class="card"><h3>Tracking (bei Doppelnetzteilen)</h3><p>Bei Geräten mit zwei Ausgängen koppelt Tracking beide, z. B. für eine symmetrische Versorgung (+12 V und −12 V gleichzeitig für Operationsverstärker).</p></div>
-<div class="card"><h3>Sense-Anschlüsse (4-Draht)</h3><p>Bei besseren Geräten: zwei dünne Extraleitungen messen die Spannung direkt am Verbraucher und gleichen den Spannungsabfall auf den Kabeln aus. Nur bei hohen Strömen/langen Kabeln relevant.</p></div>
-<div class="card"><h3>Serien-/Parallelschaltung</h3><p>Zwei Ausgänge in Reihe = mehr Spannung, parallel = mehr Strom. Nur bei Geräten, die das ausdrücklich erlauben.</p></div>
+<h3>Alle Einstellungen</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Einstellung</th><th>Werte</th><th>Standard</th><th>Wofür ändern</th></tr></thead>
+<tbody>
+<tr><td><b>Ausgangsspannung</b></td><td>0 V bis Gerätemaximum</td><td>Sollspannung des Verbrauchers</td><td>Toleranzen austesten: läuft die Schaltung auch bei 3,0 statt 3,3 V?</td></tr>
+<tr><td><b>Strom-Limit</b></td><td>0 A bis Gerätemaximum</td><td><b>Normalverbrauch + 20–50 %</b></td><td>Bei Erstinbetriebnahme <b>sehr</b> knapp (50–100 mA), danach schrittweise hoch</td></tr>
+<tr><td><b>Output</b></td><td>an / aus</td><td>aus</td><td>Nie mit aktivem Ausgang verkabeln</td></tr>
+<tr><td><b>OVP</b> (Überspannungsschutz)</td><td>Abschaltschwelle in V</td><td>knapp über der Sollspannung</td><td>Schützt die Schaltung, falls der Spannungsregler am Netzteil verstellt wird</td></tr>
+<tr><td><b>OCP</b> (Überstromschutz)</td><td>Abschaltschwelle in A</td><td>aus oder deutlich über dem CC-Limit</td><td><b>Unterschied zu CC:</b> CC regelt herunter und lässt an — OCP <b>schaltet hart ab</b></td></tr>
+<tr><td><b>OPP / OTP</b></td><td>Leistungs- bzw. Temperaturabschaltung</td><td>Werkseinstellung</td><td>Greift bei Dauerlast; Gerät braucht danach Abkühlzeit</td></tr>
+<tr><td><b>Speicherplätze / Presets</b></td><td>feste V/A-Kombinationen</td><td>—</td><td>Wiederkehrende Aufgaben (3,3 V/0,5 A · 5 V/1 A · 12 V/2 A) einmal ablegen</td></tr>
+<tr><td><b>Einschaltverhalten</b></td><td>Output beim Einschalten an / aus</td><td><b>aus</b></td><td>„An" ist bequem und gefährlich — auf „aus" lassen</td></tr>
+<tr><td><b>Sense (4-Draht)</b></td><td>lokal / remote</td><td>lokal</td><td>Bei hohen Strömen oder langen Leitungen: misst direkt am Verbraucher und gleicht den Leitungsabfall aus</td></tr>
+<tr><td><b>Serie / Parallel</b> (Mehrkanalgeräte)</td><td>unabhängig · Serie · Parallel · Tracking</td><td>unabhängig</td><td>Serie = mehr Spannung · Parallel = mehr Strom · Tracking = symmetrisch ±U für Analogtechnik</td></tr>
+</tbody>
+</table></div>
+
+<h3>Werte ablesen und bewerten</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Beobachtung</th><th>Bedeutung</th><th>Was du tust</th></tr></thead>
+<tbody>
+<tr><td><b>CV leuchtet, Strom stabil</b></td><td>Alles normal, die Anzeige ist der echte Verbrauch</td><td>Wert merken — er ist die Referenz für später</td></tr>
+<tr><td><b>Sofort CC beim Einschalten</b></td><td>Kurzschluss, Verpolung oder falsch bestücktes Bauteil</td><td>Output aus. Erst suchen, dann erneut einschalten</td></tr>
+<tr><td><b>Kurz CC, dann CV</b></td><td>Einschaltstrom durch Stützkondensatoren — normal</td><td>Limit leicht erhöhen, wenn es den Start verhindert</td></tr>
+<tr><td><b>Strom deutlich höher als erwartet</b></td><td>Bauteil defekt, Verpolung, oder etwas wird warm</td><td>Sofort ausschalten und Temperaturen abtasten</td></tr>
+<tr><td><b>Strom deutlich niedriger als erwartet</b></td><td>Schaltung startet nicht, Unterbrechung, Verbraucher hängt nicht dran</td><td>Spannung direkt am Verbraucher messen</td></tr>
+<tr><td><b>Spannung sackt unter den Sollwert</b></td><td>Gerät ist in CC gegangen</td><td>CV/CC-Anzeige prüfen — nicht das Netzteil verdächtigen</td></tr>
+<tr><td><b>Anzeige weicht vom Multimeter ab</b></td><td>Eingebaute Anzeigen sind grob (oft ±1 % + Digits)</td><td>Für genaue Werte am <b>Verbraucher</b> messen, nicht am Netzteil</td></tr>
+<tr><td><b>Strom schwankt im Takt</b></td><td>Normale Lastwechsel (Funkmodul, Motor, PWM)</td><td>Mittelwert bewerten; Spitzen mit dem <a class="goto" href="#oszilloskop">Oszilloskop</a> ansehen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die Stromanzeige ist ein vollwertiges Diagnosewerkzeug.</b> Ein Board, das gestern 120 mA gezogen hat und heute 400 mA zieht, hat einen Defekt — auch wenn es noch läuft. Notiere den Normalverbrauch deiner Aufbauten; die Abweichung findet den Fehler oft schneller als jede Messreihe.</div>
+
+<h3>Workflows</h3>
+<h4>① Strom-Limit setzen (der wichtigste Handgriff)</h4>
+<p>Ohne Stromfluss zeigt die Anzeige das Limit nicht — sichtbar wird es erst im CC-Zustand. Deshalb wird der Ausgang bewusst kurzgeschlossen; genau dafür ist das Gerät gebaut, mehr als das Limit fließt nie.</p>
+<div class="steps">
+<div class="step"><b>Output aus.</b> Rote und schwarze Buchse mit einem Messkabel direkt verbinden.</div>
+<div class="step"><b>Strom-Regler auf Minimum</b>, dann Output <b>an</b>. Die CC-Anzeige leuchtet, die Ampere-Anzeige steht nahe null — genau so soll es sein.</div>
+<div class="step"><b>Strom-Regler langsam aufdrehen.</b> Die Anzeige zeigt live dein künftiges Limit. Beim Wunschwert stoppen.</div>
+<div class="step"><b>Output aus</b>, Kurzschlusskabel entfernen. Die Einstellung bleibt erhalten.</div>
+<div class="step"><b>Spannung einstellen</b>, kurz Output an und den Wert kontrollieren, dann wieder aus.</div>
+<div class="step"><b>Schaltung anklemmen</b> (Polung prüfen!) und erst dann Output an.</div>
+</div>
+<div class="note">Geräte mit Zifferneingabe zeigen das Limit direkt im Display — dort tippst du den Wert einfach ein. Der Kurzschluss-Trick ist nur bei reinen Drehknopf-Geräten nötig.</div>
+
+<h4>② Erstinbetriebnahme einer unbekannten Schaltung („Smoke-Test")</h4>
+<div class="steps">
+<div class="step"><b>Sichtprüfung zuerst:</b> Polung der Elkos, Brücken, Lötstellen, Fremdkörper.</div>
+<div class="step"><b>Strom-Limit auf 50–100 mA</b> setzen, Spannung auf den Sollwert.</div>
+<div class="step"><b>Output an und sofort auf die CC-Anzeige schauen.</b> Bleibt sie aus, ist der Grundverbrauch plausibel.</div>
+<div class="step"><b>Geht das Gerät in CC:</b> Output aus, Fehler suchen. Die Spannung ist dabei automatisch eingebrochen — es ist nichts passiert.</div>
+<div class="step"><b>Mit dem Finger prüfen</b>, ob etwas warm wird — bei begrenztem Strom ist das gefahrlos und die schnellste Fehlersuche.</div>
+<div class="step"><b>Limit schrittweise erhöhen</b>, bis die Schaltung normal startet. Den erreichten Wert notieren.</div>
 </div>
 
-<h2>Worauf achten</h2>
-<div class="card">
-<div class="rule"><span class="ico">1️⃣</span><div><b>Reihenfolge: erst einstellen, dann anschließen, dann Output an.</b> Nie mit aktivem Ausgang verkabeln.</div></div>
-<div class="rule"><span class="ico">🛡️</span><div><b>Strombegrenzung bewusst setzen.</b> Sie ist dein bester Schutz gegen Rauchzeichen. Lieber knapp wählen und bei Bedarf erhöhen.</div></div>
-<div class="rule"><span class="ico">🔴</span><div><b>Polarität prüfen.</b> Rot an Plus, Schwarz an Minus. Eine Verpolung kann die Schaltung sofort zerstören.</div></div>
-<div class="rule"><span class="ico">🟢</span><div><b>GND ist nicht Minus.</b> Die grüne Erdbuchse mit dem Minuspol zu verwechseln ist ein klassischer Fehler. Nur bewusst brücken, wenn die Anwendung es verlangt.</div></div>
-<div class="rule"><span class="ico">🔋</span><div><b>Akkus laden mit Vorsicht.</b> Ein Netzteil kann grob laden (Spannung = Ladeschluss, Strom = Ladelimit), hat aber <b>keine</b> Abschaltung und keinen Verpolungsschutz wie ein echtes Ladegerät. Nie unbeaufsichtigt, besser dediziertes Ladegerät nutzen.</div></div>
-<div class="rule"><span class="ico">📟</span><div><b>Verbrauch direkt ablesen.</b> Die Strom-Anzeige zeigt dir live, wie viel deine Schaltung zieht. Praktischer "Nebenbei-Messwert" zur Fehlersuche.</div></div>
+<h4>③ Kurzschluss auf einer Platine finden</h4>
+<div class="steps">
+<div class="step"><b>Spannung sehr niedrig einstellen</b> (0,5–2 V), Strom-Limit auf einige hundert mA bis 1 A.</div>
+<div class="step"><b>An die kurzgeschlossene Rail anschließen.</b> Das Gerät geht sofort in CC und speist einen definierten Strom ein.</div>
+<div class="step"><b>Das defekte Bauteil wird warm</b> — mit Finger, IR-Thermometer oder Wärmebild suchen.</div>
+<div class="step"><b>Alternativ die Milliohm-Methode</b> mit dem <a class="goto" href="#dmm-tisch">Tischmultimeter</a> — beide Verfahren ergänzen sich.</div>
+<div class="step"><b>Nicht zu lange einspeisen:</b> Die niedrige Spannung schützt die Umgebung, aber das defekte Bauteil kann durchbrennen.</div>
 </div>
+
+<h4>④ LED oder Bauteil mit Konstantstrom testen</h4>
+<div class="steps">
+<div class="step"><b>Spannung auf einen Wert über der erwarteten Durchlassspannung</b> stellen (bei LEDs z. B. 5 V).</div>
+<div class="step"><b>Strom-Limit auf den gewünschten Betriebsstrom</b> (LED: 10–20 mA).</div>
+<div class="step"><b>Bauteil anschließen.</b> Das Netzteil geht in CC und arbeitet als Konstantstromquelle — exakt der eingestellte Strom fließt, unabhängig von der Farbe der LED.</div>
+<div class="step"><b>Die angezeigte Spannung ist die Durchlassspannung</b> des Bauteils — ein nützlicher Nebenmesswert.</div>
+</div>
+
+<h4>⑤ Verbrauch einer Baugruppe bestimmen</h4>
+<div class="steps">
+<div class="step"><b>Spannung exakt auf den Sollwert</b>, Limit großzügig, damit nichts begrenzt wird.</div>
+<div class="step"><b>Ruhestrom notieren</b>, danach jede Funktion einzeln aktivieren und den Zuwachs messen.</div>
+<div class="step"><b>Kurze Spitzen</b> (Funkmodul, Motoranlauf) sieht die Netzteilanzeige nicht — dafür Multimeter mit Max/Min oder Oszilloskop mit Shunt.</div>
+<div class="step"><b>Ergebnis dokumentieren:</b> Der Normalverbrauch ist später die beste Referenz für die Fehlersuche.</div>
+</div>
+
+<h3>Typische Einstellungen</h3>
+<p><b>Spannung</b> = was der Verbraucher laut Aufdruck oder Datenblatt braucht. <b>Strom-Limit</b> = normaler Verbrauch plus 20–50 % Reserve.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Zweck</th><th>Spannung</th><th>Strom-Limit</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td>Unbekannte oder frisch reparierte Schaltung</td><td>erwartete Betriebsspannung</td><td><b>0,05–0,1 A</b>, dann erhöhen</td><td>Sofortiges CC = Fehler in der Schaltung</td></tr>
+<tr><td>3,3-V-Module und Sensoren</td><td>3,3 V</td><td>0,2–0,5 A</td><td>WLAN-Module haben kurze Spitzen → eher 0,5 A</td></tr>
+<tr><td>Mikrocontroller-Board über den 5-V-Pin</td><td>5,0 V</td><td>0,5–1 A</td><td>Umgeht den Board-Regler — Spannung exakt einstellen</td></tr>
+<tr><td>Logikaufbau mit LEDs und Sensoren</td><td>5 V</td><td>0,5 A</td><td>Reicht für die meisten Steckbrett-Aufbauten</td></tr>
+<tr><td>Modellbau-Servo</td><td>5–6 V</td><td>1–2 A</td><td>Stellspitzen sind kurz, aber hoch</td></tr>
+<tr><td>Adressierbarer LED-Streifen</td><td>5 V</td><td>ca. 60 mA je LED bei Weiß</td><td>60 LEDs → bis 3,6 A; dicke Zuleitung nötig</td></tr>
+<tr><td>Kleiner Getriebemotor</td><td>6 V</td><td>1–1,5 A</td><td>Anlauf- und Blockierstrom sind ein Vielfaches</td></tr>
+<tr><td>12-V-Lüfter oder LED-Streifen</td><td>12 V</td><td>Nennstrom + 30 %</td><td>Angabe steht auf dem Gerät</td></tr>
+<tr><td>12-V-Motor unter Last</td><td>12 V</td><td>2–3× Nennstrom</td><td>Zu knapp gesetzt riegelt CC schon beim Start ab</td></tr>
+<tr><td>Li-Ion-Zelle notdürftig laden</td><td><b>exakt 4,20 V</b></td><td>0,5 × Kapazität</td><td><b>Nie unbeaufsichtigt</b> — siehe Warnung unten</td></tr>
+</tbody>
+</table></div>
+
+<h3>Begriffe</h3>
+<div class="grid">
+<div class="card"><div class="ct">CC vs. OCP</div><div class="cd"><b>CC</b> regelt den Strom auf das Limit herunter und lässt den Ausgang an. <b>OCP</b> schaltet den Ausgang hart ab und muss quittiert werden.</div><ul><li>CC zum Schützen beim Experimentieren</li><li>OCP, wenn ein Fehler sofort <b>komplett</b> trennen soll</li></ul></div>
+<div class="card"><div class="ct">Ripple / Restwelligkeit</div><div class="cd">Reste von Wechselanteil auf der Gleichspannung. Sichtbar nur mit dem Oszilloskop bei AC-Kopplung.</div><ul><li>Wichtig bei Analog- und Funktechnik</li><li>Messen: Tab <a class="goto" href="#oszilloskop">Oszilloskop</a>, Workflow ④</li></ul></div>
+<div class="card"><div class="ct">Linear vs. Schaltnetzteil</div><div class="cd"><b>Linear:</b> sehr sauber, aber schwer und warm. <b>Schaltend:</b> leicht und effizient, dafür etwas mehr Ripple.</div><ul><li>Für Elektronik-Hobby reicht ein gutes Schaltnetzteil</li></ul></div>
+<div class="card"><div class="ct">Sense-Leitungen (4-Draht)</div><div class="cd">Zwei dünne Extraleitungen messen die Spannung direkt am Verbraucher und gleichen den Leitungsabfall aus.</div><ul><li>Erst bei hohen Strömen oder langen Kabeln relevant</li></ul></div>
+<div class="card"><div class="ct">Tracking</div><div class="cd">Koppelt zwei Ausgänge, typisch für symmetrische Versorgung (+12 V / −12 V für Operationsverstärker).</div><ul><li>Der gemeinsame Punkt wird zur Masse</li></ul></div>
+<div class="card"><div class="ct">Serie und parallel</div><div class="cd">Zwei Ausgänge in Reihe = mehr Spannung, parallel = mehr Strom.</div><ul><li>Nur bei Geräten, die das ausdrücklich erlauben</li></ul></div>
+</div>
+
+<h3>Fehler und Grenzen</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Problem</th><th>Ursache</th><th>Lösung</th></tr></thead>
+<tbody>
+<tr><td>Schaltung startet nicht, Spannung ist zu niedrig</td><td>Gerät hängt in CC</td><td>Limit erhöhen — oder besser: erst herausfinden, warum so viel Strom fließt</td></tr>
+<tr><td>Anzeige zeigt Sollspannung, am Board kommt weniger an</td><td>Spannungsabfall auf dünnen oder langen Leitungen</td><td>Dickere Leitungen, oder Sense-Anschlüsse nutzen</td></tr>
+<tr><td>Beim Anklemmen funkt es</td><td>Output war an</td><td>Reihenfolge einhalten: verkabeln, dann einschalten</td></tr>
+<tr><td>Verpolt angeschlossen</td><td>Rot/Schwarz vertauscht</td><td>Das Strom-Limit begrenzt den Schaden — deshalb wird es <b>vorher</b> gesetzt</td></tr>
+<tr><td>Gerät schaltet unter Last ab</td><td>OTP/OPP: Übertemperatur oder Leistungsgrenze</td><td>Abkühlen lassen, Lüftungsschlitze frei halten, Dauerlast reduzieren</td></tr>
+<tr><td>Messwerte weichen ab</td><td>Eingebaute Anzeigen sind grob</td><td>Mit dem Multimeter am Verbraucher gegenmessen</td></tr>
+<tr><td>Empfindliche Analogschaltung stört</td><td>Ripple des Schaltnetzteils</td><td>Zusätzliche Filterung, oder linear geregelte Quelle</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Akkus laden nur mit voller Aufmerksamkeit.</b> Ein Labornetzteil kann grob laden (Spannung = Ladeschlussspannung, Strom = Ladestrom), hat aber <b>keine Abschaltung, keine Zellüberwachung und keinen Verpolungsschutz</b> wie ein echtes Ladegerät. Nie unbeaufsichtigt, nie über Nacht, nie bei beschädigten Zellen — und Li-Ion niemals über 4,20 V pro Zelle. Für regelmäßiges Laden gehört ein dediziertes Ladegerät her.</div>

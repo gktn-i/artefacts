@@ -1,0 +1,109 @@
+<div class="kurz"><b>Jedes Gerät beantwortet genau eine Art Frage.</b> <b>Multimeter:</b> „Wie groß ist der Wert <i>jetzt</i>?" · <b>Oszilloskop:</b> „Wie sieht das Signal <i>über die Zeit</i> aus?" · <b>Komponententester:</b> „Was ist das für ein Bauteil und ist es heil?" · <b>Labornetzteil:</b> „Wie verhält sich die Schaltung bei <i>dieser</i> Spannung und <i>diesem</i> Strom?"</div>
+
+<h2>Messgeräte im Überblick</h2>
+<p>Dieser Tab ordnet die Geräteklassen allgemein ein: was jede kann, was sie <b>nicht</b> kann und welche Kennzahlen auf dem Datenblatt wirklich zählen. Die Bedienung der eigenen Geräte steht in der Gruppe <b>Meine Geräte</b> in der Seitenleiste.</p>
+
+<h3>Welche Frage — welches Gerät</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Deine Frage</th><th>Gerät</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td>Kommt hier überhaupt Spannung an?</td><td><b>Handmultimeter</b></td><td>Schnell, überall, kein Aufbau nötig</td></tr>
+<tr><td>Ist die 3,3-V-Rail auf ±5 mV genau?</td><td><b>Tischmultimeter</b></td><td>Auflösung und ruhige Anzeige</td></tr>
+<tr><td>Ist das Kabel durchgängig?</td><td><b>Multimeter</b>, Durchgangston</td><td>Ja/Nein ohne Hinsehen</td></tr>
+<tr><td>Wie viel Strom zieht die Schaltung im Schlaf?</td><td><b>Tischmultimeter</b> (µA) oder Netzteil-Anzeige</td><td>µA-Bereich mit eigener Auflösung</td></tr>
+<tr><td>Warum flackert das Signal? Wie sieht die Flanke aus?</td><td><b>Oszilloskop</b></td><td>Einziges Gerät, das den <b>Verlauf</b> zeigt</td></tr>
+<tr><td>Kommt ein PWM-Signal an und mit welchem Tastgrad?</td><td><b>Oszilloskop</b></td><td>Multimeter zeigt nur den Mittelwert</td></tr>
+<tr><td>Was ist das für ein SMD-Bauteil ohne Aufdruck?</td><td><b>Komponententester</b></td><td>Erkennt Typ, Pinbelegung und Wert automatisch</td></tr>
+<tr><td>Ist der Elko noch gut?</td><td><b>Komponententester</b> (Kapazität + ESR)</td><td>Multimeter misst keinen ESR</td></tr>
+<tr><td>Wie verhält sich das Board bei 3,0 statt 3,3 V?</td><td><b>Labornetzteil</b></td><td>Spannung fein einstellbar</td></tr>
+<tr><td>Wo sitzt der Kurzschluss auf der Rail?</td><td><b>Netzteil</b> (Strombegrenzung) + <b>Tisch-DMM</b> (mΩ)</td><td>Netzteil speist kontrolliert ein, DMM ortet</td></tr>
+<tr><td>Welches Bauteil wird heiß?</td><td><b>Finger, IR-Thermometer, Wärmebild</b></td><td>Schnellster Weg zum defekten Bauteil</td></tr>
+<tr><td>Ist an der Steckdose Spannung?</td><td><b>Handmultimeter</b> mit passender CAT-Klasse</td><td>Sicherheit — siehe unten</td></tr>
+</tbody>
+</table></div>
+
+<h3>Die Geräteklassen</h3>
+<div class="grid">
+<div class="card"><div class="ct">Multimeter (Hand)</div><div class="cd">Das Universalwerkzeug. Spannung, Strom, Widerstand, Durchgang, Diode, oft Kapazität und Frequenz.</div><ul><li><b>Stärke:</b> mobil, robust, hohe Messkategorie</li><li><b>Grenze:</b> zeigt nur einen Zahlenwert, keine Kurvenform</li><li>Typisch 2 000–6 000 Counts</li></ul></div>
+<div class="card"><div class="ct">Multimeter (Tisch / Bench)</div><div class="cd">Dasselbe Prinzip, aber präzise: mehr Stellen, stabile Anzeige, Netzbetrieb.</div><ul><li><b>Stärke:</b> Auflösung, Messreihen, beide Hände frei</li><li><b>Grenze:</b> ortsfest, oft nur CAT II</li><li>20 000–2 000 000 Counts</li></ul></div>
+<div class="card"><div class="ct">Oszilloskop</div><div class="cd">Zeichnet Spannung <b>über der Zeit</b>. Das einzige Gerät, das zeigt, <i>wie</i> ein Signal aussieht.</div><ul><li><b>Stärke:</b> Flanken, Störungen, Timing, Ripple</li><li><b>Grenze:</b> ungenauer als ein DMM (typ. 2–3 %), Masse meist geerdet</li><li>Kennzahlen: Bandbreite, Abtastrate, Kanäle</li></ul></div>
+<div class="card"><div class="ct">Komponententester (LCR)</div><div class="cd">Erkennt ein angeschlossenes Bauteil selbstständig und misst seine Kennwerte.</div><ul><li><b>Stärke:</b> Typ, Pinbelegung, Wert, ESR — in zwei Sekunden</li><li><b>Grenze:</b> nur <b>ausgelötete</b> Bauteile zuverlässig</li></ul></div>
+<div class="card"><div class="ct">Labornetzteil</div><div class="cd">Einstellbare Quelle mit Strombegrenzung — und dadurch auch ein Messgerät.</div><ul><li><b>Stärke:</b> begrenzt den Schaden bei Fehlern, zeigt Stromaufnahme live</li><li><b>Grenze:</b> eingebaute Anzeigen sind grob (±1 % oder schlechter)</li></ul></div>
+<div class="card"><div class="ct">Strommesszange</div><div class="cd">Misst Strom über das Magnetfeld — <b>ohne</b> den Kreis aufzutrennen.</div><ul><li><b>Stärke:</b> große Ströme, im laufenden Betrieb</li><li><b>Grenze:</b> unter ~100 mA meist unbrauchbar; DC nur mit Hall-Typen</li></ul></div>
+<div class="card"><div class="ct">Logikanalysator</div><div class="cd">Zeichnet viele digitale Leitungen gleichzeitig auf und dekodiert Protokolle im Klartext.</div><ul><li><b>Stärke:</b> Busse mitlesen (I²C, SPI, UART)</li><li><b>Grenze:</b> nur High/Low, keine Analogform</li><li>Viele Oszilloskope können Protokolle ebenfalls dekodieren</li></ul></div>
+<div class="card"><div class="ct">Signalgenerator</div><div class="cd">Erzeugt definierte Signale (Sinus, Rechteck, PWM) zum Testen.</div><ul><li><b>Stärke:</b> Schaltung gezielt anregen statt auf Zufall warten</li><li><b>Ersatz:</b> ein Mikrocontroller mit PWM reicht für viele Fälle</li></ul></div>
+<div class="card"><div class="ct">Temperatur: IR und Wärmebild</div><div class="cd">Berührungslose Temperaturmessung.</div><ul><li><b>IR-Thermometer:</b> Punktmessung, billig, ungenau auf glänzenden Flächen</li><li><b>Wärmebild:</b> findet den heißen Punkt auf einem ganzen Board sofort</li><li>Fühler am Multimeter für Kontaktmessung</li></ul></div>
+</div>
+<div class="note">Nicht jedes Gerät muss vorhanden sein. Die häufigste sinnvolle Reihenfolge beim Aufrüsten: Handmultimeter → Labornetzteil → Komponententester → Oszilloskop → Tischmultimeter.</div>
+
+<h3>Was die Geräte <i>nicht</i> können</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Gerät</th><th>Kann es nicht</th><th>Was man stattdessen tut</th></tr></thead>
+<tbody>
+<tr><td><b>Multimeter</b></td><td>Kurze Einbrüche, Störimpulse, Signalform erkennen</td><td>Oszilloskop, oder wenigstens Min/Max-Funktion nutzen</td></tr>
+<tr><td><b>Multimeter</b></td><td>Bauteile <b>in</b> der Schaltung sauber messen</td><td>Einseitig auslöten, oder Vergleichsmessung mit einem intakten Board</td></tr>
+<tr><td><b>Multimeter</b></td><td>ESR eines Elkos</td><td>Komponententester oder ESR-Meter</td></tr>
+<tr><td><b>Oszilloskop</b></td><td>Genau messen (typ. ±2–3 %)</td><td>Absolutwerte mit dem DMM prüfen, Form mit dem Skop</td></tr>
+<tr><td><b>Oszilloskop</b></td><td>Zwei Punkte mit unterschiedlichem Bezug gleichzeitig messen</td><td>Differenztastkopf oder Trenntrafo — <b>nie</b> den Schutzleiter abkleben</td></tr>
+<tr><td><b>Komponententester</b></td><td>Bauteile in der Schaltung, Hochspannungsverhalten, Leckströme</td><td>Auslöten; für Elkos zusätzlich unter Betriebsspannung prüfen</td></tr>
+<tr><td><b>Labornetzteil-Anzeige</b></td><td>Präzise messen</td><td>Multimeter direkt an der Last, nicht an den Netzteilklemmen</td></tr>
+<tr><td><b>Strommesszange</b></td><td>Kleine Ströme, mehrere Leiter gleichzeitig</td><td>In Reihe messen; nur <b>einen</b> Leiter umfassen</td></tr>
+</tbody>
+</table></div>
+
+<h3>Die Kennzahlen, auf die es ankommt</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>Auflösung</b> (Counts / Digits)</td><td>Wie fein die Anzeige unterteilt ist. 6 000 Counts = bis 6 000 Schritte pro Bereich</td><td>Sagt nichts über Richtigkeit — nur über die kleinste <b>ablesbare</b> Stufe</td></tr>
+<tr><td><b>Genauigkeit</b></td><td>Angabe als <b>± (x % vom Messwert + y Digits)</b></td><td>Bei 5,000 V und „±0,5 % + 3": 25 mV + 3 Stellen ≈ <b>±28 mV</b></td></tr>
+<tr><td><b>Digits</b> in der Fehlerangabe</td><td>Schritte der <b>letzten</b> Stelle</td><td>Dominieren den Fehler bei kleinen Messwerten</td></tr>
+<tr><td><b>True RMS</b></td><td>Echter Effektivwert auch bei verzerrten Signalen</td><td>Ohne True RMS sind PWM, Dimmer und Schaltnetzteile deutlich falsch</td></tr>
+<tr><td><b>Eingangswiderstand</b></td><td>Typisch 10 MΩ beim DMM, 1 MΩ am Oszilloskop</td><td>Bei hochohmigen Quellen misst das Gerät die Schaltung „herunter"</td></tr>
+<tr><td><b>Bürdenspannung</b></td><td>Spannungsabfall über dem Strom-Shunt im Gerät</td><td>Kann im mA-Bereich mehrere hundert mV betragen — die Schaltung läuft dann nicht mehr</td></tr>
+<tr><td><b>Bandbreite</b> (Oszilloskop)</td><td>Frequenz, bei der die Anzeige schon 30 % zu klein ist (−3 dB)</td><td>Regel: Bandbreite ≥ <b>5×</b> der höchsten interessierenden Frequenz</td></tr>
+<tr><td><b>Abtastrate</b></td><td>Messpunkte pro Sekunde</td><td>Mindestens <b>10×</b> die Signalfrequenz, sonst sieht die Kurve falsch aus</td></tr>
+<tr><td><b>Messrate / Integrationszeit</b></td><td>Wie lange pro Messwert gemittelt wird</td><td>Langsam = ruhig und genau · schnell = zappelig, zeigt aber Änderungen</td></tr>
+<tr><td><b>Kalibrierung</b></td><td>Abgleich gegen ein Normal, typisch jährlich</td><td>Im Hobby unkritisch — aber zwei Geräte gegeneinander vergleichen lohnt sich</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Auflösung ≠ Genauigkeit.</b> Ein Gerät kann 0,1 mV <b>anzeigen</b> und trotzdem 30 mV danebenliegen. Die feine Anzeige ist trotzdem nützlich: für <b>Vergleiche</b> und <b>Änderungen</b> ist sie exakt, auch wenn der Absolutwert leicht verschoben ist.</div>
+
+<h3>Messkategorien: CAT I bis CAT IV</h3>
+<p>Die CAT-Klasse sagt, wie große <b>Spannungsspitzen</b> das Gerät im Fehlerfall verkraftet. Sie ist kein Komfortmerkmal, sondern der Unterschied zwischen einem defekten Gerät und einer Verletzung.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Kategorie</th><th>Wo</th><th>Beispiele</th></tr></thead>
+<tbody>
+<tr><td><b>CAT I</b></td><td>Geräteinterne Elektronik, nicht direkt am Netz</td><td>Batterieschaltungen, Boards hinter dem Netzteil</td></tr>
+<tr><td><b>CAT II</b></td><td>Verbraucher am Steckdosen-Stromkreis</td><td>Steckernetzteile, Haushaltsgeräte mit Stecker</td></tr>
+<tr><td><b>CAT III</b></td><td>Feste Installation, Verteilung</td><td>Unterverteilung, fest angeschlossene Motoren, Steckdosen-Installation</td></tr>
+<tr><td><b>CAT IV</b></td><td>Hausanschluss, Zähler, Freileitung</td><td>Alles vor der Hauptsicherung</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Ein Gerät mit „CAT I 1000 V / CAT II 600 V" darf nicht in den Sicherungskasten</b> — auch dann nicht, wenn dort nur 230 V anliegen. Entscheidend ist die mögliche Störspitze, nicht die Nennspannung. Die Regel gilt auch für die <b>Messleitungen</b>: Sie tragen eine eigene CAT-Angabe, und die schwächste Komponente bestimmt die Klasse des Aufbaus. Alle Regeln zum Arbeiten unter Spannung: Tab <a class="goto" href="#sicherheit">Sicherheit</a>.</div>
+
+<h3>Zubehör, das den Unterschied macht</h3>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Zubehör</th><th>Wofür</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Feine Prüfspitzen</b></td><td>SMD-Pins, IC-Beinchen</td><td>Standardspitzen sind für 0,5-mm-Pitch zu stumpf</td></tr>
+<tr><td><b>Krokodilklemmen / Mikro-Greifer</b></td><td>Freihändig messen</td><td><b>Wichtigstes Zubehör überhaupt</b> — zwei Hände frei für Messobjekt und Werkzeug</td></tr>
+<tr><td><b>Kelvin-Klemmen (4-Leiter)</b></td><td>Sehr kleine Widerstände</td><td>Trennt Strom- und Messpfad, blendet den Leitungswiderstand aus</td></tr>
+<tr><td><b>Rückseitige Bananenstecker-Adapter</b></td><td>Feste Verkabelung zum Netzteil</td><td>Verhindert wackelnde Verbindungen bei Dauermessungen</td></tr>
+<tr><td><b>Tastkopf 10:1</b> (Oszilloskop)</td><td>Standardstellung für fast alles</td><td>Dämpft 10-fach, belastet die Schaltung weniger, muss <b>abgeglichen</b> werden</td></tr>
+<tr><td><b>Kurze Masse-Feder</b> statt Klemmleitung</td><td>Schnelle Signale sauber messen</td><td>Die lange Masseleitung erzeugt sonst künstliches Überschwingen</td></tr>
+<tr><td><b>Ersatzsicherungen</b></td><td>Strommessbereich</td><td>Nur mit gleichem Typ und gleichem Abschaltvermögen ersetzen</td></tr>
+</tbody>
+</table></div>
+
+<h3>Grundregeln, die für jedes Messgerät gelten</h3>
+<div class="steps">
+<div class="step"><b>Erst denken, was du erwartest.</b> Ein Messwert ohne Erwartung ist nur eine Zahl. Sollwerte stehen im Tab <a class="goto" href="#messen">Messen &amp; Werte</a>.</div>
+<div class="step"><b>Gerät und Bereich vor dem Anlegen einstellen</b> — nie umschalten, während die Spitzen unter Spannung stehen.</div>
+<div class="step"><b>Messleitungen prüfen:</b> Spitzen zusammenhalten, Durchgang muss piepen. Ein Kabelbruch sieht aus wie ein defektes Bauteil.</div>
+<div class="step"><b>Bezugspunkt klarmachen.</b> Jede Spannung wird <b>gegen etwas</b> gemessen. Steht die schwarze Spitze an der richtigen Masse?</div>
+<div class="step"><b>Rückwirkung mitdenken.</b> Jedes Messgerät verändert die Schaltung ein wenig: Eingangswiderstand, Bürdenspannung, Tastkopf-Kapazität.</div>
+<div class="step"><b>Zwei Messungen sind besser als eine.</b> Vergleiche gegen eine bekannte gute Stelle, ein zweites Board oder einen berechneten Wert.</div>
+<div class="step"><b>Nach der Strommessung die rote Leitung zurückstecken.</b> Der häufigste teure Fehler überhaupt.</div>
+</div>
+<div class="kurz"><b>Weiterlesen:</b> Was die einzelnen Modi tun und welche Werte normal sind → <a class="goto" href="#messen">Messen &amp; Werte</a>. Systematisch eingrenzen → <a class="goto" href="#fehlersuche">Fehlersuche</a>. Bedienung der eigenen Geräte → Gruppe <b>Meine Geräte</b>.</div>

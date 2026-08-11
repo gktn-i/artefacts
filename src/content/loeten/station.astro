@@ -1,0 +1,115 @@
+<div class="kurz"><b>Alltag:</b> <b>T245 + Meißel 2,4 mm</b> für ~80 % · <b>T210 + Meißel 0,4–0,8 mm</b> für Feines. Immer am <b>niedrigsten Preset</b> anfangen: fließt es in ~2 s, passt es. Sonst erst <b>größere Spitze</b>, dann mehr Grad. Standby an, verzinnt ausschalten.</div>
+
+<h2>Lötstation C245 / C210</h2>
+<p>Kartuschen-System: Heizelement und Sensor sitzen <b>in der Spitze</b>. Die Wärme kommt nach dem Aufsetzen in Millisekunden zurück — deshalb arbeitest du hier <b>kühler</b> als mit einem klassischen Kolben und trotzdem schneller. Was die Bauarten unterscheidet, steht in <a class="goto" href="#werkzeug">Werkzeug-Typen</a>.</p>
+
+<h3>Die zwei Griffe: wann welcher</h3>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Kartusche</th><th>Griff</th><th>Wofür</th><th>Anteil</th></tr></thead>
+<tbody>
+<tr><td><b>C245</b></td><td>T245</td><td>THT, Stiftleisten, SMD-Chips ab 0603, Drag-Soldering, Kabel, Masseflächen, Steckverbinder</td><td><b>~80 %</b></td></tr>
+<tr><td><b>C210</b></td><td>T210</td><td>0402/0201, feine IC-Pins, Fädeldraht, Pad-Reparatur unterm Mikroskop</td><td>~20 %</td></tr>
+<tr><td>C115 / C105</td><td>T115 / Nano</td><td>noch feiner — fürs Hobby praktisch nie nötig</td><td>—</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Griffwechsel-Regel:</b> Wenn die C245-Spitze das Nachbarpad berührt oder die Sicht verdeckt, ist der T210 dran. Alles andere macht der T245 schneller und mit weniger Hitze.</div>
+
+<h3>Alle Einstellungen</h3>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Einstellung</th><th>Bereich</th><th>Standard</th><th>Wofür ändern</th></tr></thead>
+<tbody>
+<tr><td><b>Arbeitstemperatur</b></td><td>~90–450 °C</td><td>Preset 1 des Griffs</td><td>Nur hoch, wenn eine größere Spitze nicht reicht</td></tr>
+<tr><td><b>Presets (3 pro Griff)</b></td><td>frei belegbar</td><td>siehe Tabelle unten</td><td>Bleihaltig / bleifrei / Masseflächen — spart Menü-Fummelei</td></tr>
+<tr><td><b>Sleep / Standby</b></td><td>aus, ~0,5–10 min</td><td><b>1–2 min</b>, an</td><td>Nie ausschalten — größter Hebel für die Kartuschen-Lebensdauer</td></tr>
+<tr><td><b>Sleep-Temperatur</b></td><td>~150–200 °C</td><td><b>~180 °C</b></td><td>Hoch genug für schnelles Aufwachen, tief genug gegen Oxidation</td></tr>
+<tr><td><b>Hibernation / Abschaltung</b></td><td>aus, ~10–60 min</td><td><b>~30 min</b></td><td>Vergessene Station schaltet sich ab</td></tr>
+<tr><td><b>Temperatur-Offset / Kalibrierung</b></td><td>±ca. 50 K</td><td>0</td><td>Nur nach Messung mit Spitzenthermometer anpassen</td></tr>
+<tr><td><b>Einheit</b></td><td>°C / °F</td><td>°C</td><td>—</td></tr>
+<tr><td><b>Tempern / Power-Limit</b></td><td>gerätespezifisch</td><td>voll</td><td>Nur wenn empfindliche Bauteile Hitzeschocks bekommen</td></tr>
+</tbody>
+</table></div>
+<div class="note">Wo genau diese Punkte im Menü liegen und wie sie heißen, unterscheidet sich je nach Stationsmodell — die <b>Funktionen</b> gibt es bei allen C245/C210-kompatiblen Geräten. Im Zweifel ins Handbuch deines Modells schauen.</div>
+
+<h3>Temperatur-Presets: die Startwerte</h3>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Griff</th><th>Preset</th><th>Temperatur</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><b>T210</b><br><span class="cd">fein</span></td><td>1</td><td><b>300 °C</b></td><td>bleihaltig: 0402/0201, feine IC-Pins, Fädeldraht, Pad-Reparatur</td></tr>
+<tr><td>2</td><td><b>330 °C</b></td><td>Allround: bleihaltig größere Chips, bleifrei fein</td></tr>
+<tr><td>3</td><td><b>360 °C</b></td><td>bleifrei: mehrere Pins am Stück, kleine Masseflächen</td></tr>
+<tr><td rowspan="3"><b>T245</b><br><span class="cd">allround</span></td><td>1</td><td><b>330 °C</b></td><td>bleihaltig Standard: THT, Stiftleisten, SMD, Drag</td></tr>
+<tr><td>2</td><td><b>360 °C</b></td><td>bleifrei Standard (SAC305), Drag über lange Pinreihen</td></tr>
+<tr><td>3</td><td><b>400 °C</b></td><td><span class="b b-warn">nur kurz</span> Masseflächen, dicke Kabel, Abschirmbleche</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Nicht dauerhaft über 400 °C.</b> Das oxidiert die Eisenschicht (kürzere Standzeit) und verbrennt das Flussmittel, bevor es wirken kann — die Lötstelle wird schlechter, nicht besser.</div>
+
+<h3>Spitzenwahl in der Praxis</h3>
+<p>Die Zahl hinter dem Bindestrich codiert Form und Größe: <b>C245-947</b> = Meißel 2,4 mm. Formen-Übersicht: <a class="goto" href="#werkzeug">Werkzeug-Typen</a>.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Aufgabe</th><th>Griff</th><th>Spitze</th><th>Preset</th></tr></thead>
+<tbody>
+<tr><td>THT, Stiftleisten, Widerstände</td><td>T245</td><td>Meißel 2,4 mm</td><td>1</td></tr>
+<tr><td>SMD-Chips 0603–1206</td><td>T245</td><td>Meißel 2,4 mm oder 1,0 mm</td><td>1</td></tr>
+<tr><td>Drag-Soldering QFP/TSSOP</td><td>T245</td><td>Hufeisen / Bevel</td><td>1–2</td></tr>
+<tr><td>Masseflächen, dicke Kabel, Schirmbleche</td><td>T245</td><td>Meißel breit / Klinge</td><td>3 (kurz)</td></tr>
+<tr><td>0402 / 0201, feine IC-Pins</td><td>T210</td><td>Meißel 0,4–0,8 mm</td><td>1</td></tr>
+<tr><td>Fädeldraht, Pad-Reparatur</td><td>T210</td><td>Nadel / konisch fein</td><td>1</td></tr>
+<tr><td>Entlötlitze auf BGA-Restlot</td><td>T245</td><td>Meißel 2,4 mm (breit!)</td><td>1–2</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Minimal-Set:</b> C245 Meißel 2,4 mm als Dauerspitze + C210 Meißel 0,4–0,8 mm. Damit deckst du fast alles ab. Eine Hufeisenspitze lohnt, sobald du regelmäßig Drag-Soldering machst.</div>
+
+<h3>Workflows</h3>
+<h4>① Session starten</h4>
+<div class="steps">
+<div class="step"><b>Griff prüfen.</b> Sitzt die Kartusche fest? Sichtprüfung auf Verfärbung und Krater an der Arbeitsfläche.</div>
+<div class="step"><b>Preset wählen</b> — das <b>niedrigste</b>, das zur Aufgabe passt.</div>
+<div class="step"><b>Aufheizen und verzinnen.</b> Sobald die Zieltemperatur steht: in der Messingwolle abstreifen, frisches Lot an die Spitze, nochmal kurz abstreifen. Muss silbrig glänzen.</div>
+<div class="step"><b>Testlötstelle.</b> An einem Reststück prüfen, ob das Lot in ~2 s fließt. Wenn nicht: größere Spitze, erst danach mehr Grad.</div>
+</div>
+
+<h4>② Kartusche wechseln</h4>
+<div class="steps">
+<div class="step"><b>Erst abkühlen lassen</b> oder Wechselhilfe/Silikongriff benutzen — die Kartusche ist auf ganzer Länge heiß.</div>
+<div class="step"><b>Ziehen, nicht drehen.</b> Die Kontakte sitzen längs; Drehen unter Zug beschädigt sie.</div>
+<div class="step"><b>Neue Kartusche einschieben</b> bis zum spürbaren Anschlag. Wackelt sie, sitzt sie nicht.</div>
+<div class="step"><b>Sofort verzinnen</b>, sobald sie das erste Mal heiß ist — nie trocken glühen lassen.</div>
+</div>
+
+<h4>③ Session beenden</h4>
+<div class="steps">
+<div class="step"><b>Abstreifen und dick verzinnen.</b> Die Lotschicht ist der Korrosionsschutz für die Standzeit.</div>
+<div class="step"><b>In den Ständer</b>, Standby greifen lassen, dann ausschalten.</div>
+<div class="step"><b>Nicht abkühlen und blank stehen lassen</b> — genau so stirbt eine Spitze.</div>
+</div>
+
+<h3>Werte richtig deuten</h3>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Beobachtung</th><th>Was es bedeutet</th><th>Reaktion</th></tr></thead>
+<tbody>
+<tr><td>Anzeige fällt beim Aufsetzen um <b>10–30 K</b> und kommt sofort zurück</td><td>Normal — genau dafür ist das System gebaut</td><td>nichts</td></tr>
+<tr><td>Anzeige fällt um <b>&gt;50 K</b> und bleibt unten</td><td>Spitze zu klein für die Wärmemasse</td><td>größere Spitze, ggf. vorwärmen</td></tr>
+<tr><td>Lot fließt trotz richtiger Temperatur zäh</td><td>Flussmittel verbraucht oder Oxid</td><td>Flux dazu, nicht heißer stellen</td></tr>
+<tr><td>Lot perlt an der Spitze ab</td><td>Spitze oxidiert / Eisenschicht defekt</td><td>Tip Tinner; hilft das nicht: tauschen</td></tr>
+<tr><td>Station heizt, Spitze bleibt kalt</td><td>Kartusche nicht kontaktiert oder Heizer defekt</td><td>neu einsetzen, andere Kartusche testen</td></tr>
+<tr><td>Temperatur schwankt sichtbar im Leerlauf</td><td>Sensorkontakt schlecht — Kartusche sitzt locker</td><td>fest einschieben, Kontakte prüfen</td></tr>
+</tbody>
+</table></div>
+
+<h3>Grenzen und häufige Fehler</h3>
+<div class="gb">
+<div class="gb-col good"><h4>✓ Kann das System gut</h4><ul>
+<li>Schnelle Serien mit vielen Lötstellen ohne Nachheizpause</li>
+<li>Empfindliche Bauteile bei niedriger Temperatur</li>
+<li>Drag-Soldering über lange Pinreihen</li>
+<li>Große Masseflächen (kurz, Preset 3, breite Spitze)</li>
+</ul></div>
+<div class="gb-col bad"><h4>✗ Kann es nicht</h4><ul>
+<li>Bauteile mit Pads <b>nur unter</b> dem Gehäuse (QFN, BGA) → <span class="b b-luft">Heißluft</span></li>
+<li>Ganze Platinen auf einmal → <span class="b b-platte">Heizplatte</span></li>
+<li>Große Wärmemassen ohne Vorwärmung dauerhaft halten</li>
+<li>Fehlendes Flussmittel ersetzen</li>
+</ul></div>
+</div>
+<div class="warn"><b>Der teuerste Fehler:</b> Standby deaktivieren und die Station stundenlang auf Arbeitstemperatur stehen lassen. Kartuschen sind Verbrauchsmaterial, aber sie sterben fast immer daran — nicht am Löten.</div>

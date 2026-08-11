@@ -1,4 +1,21 @@
-<div class="kurz"><div><b>Die Handgriffe und die Erwartungswerte.</b> Wie das Gerät selbst funktioniert, steht im Tab <a href="#messgeraet">Multimeter</a>; was du tust, wenn ein Wert nicht stimmt, im Tab <a href="#fehlersuche">Fehlersuche</a>.</div></div>
+<div class="kurz"><div><b>Die Handgriffe und die Erwartungswerte.</b> Welches Gerät wofür taugt, steht im Tab <a href="#messgeraete">Messgeräte im Überblick</a>, die Bedienung der eigenen Geräte in der Gruppe <b>Meine Geräte</b>; was du tust, wenn ein Wert nicht stimmt, im Tab <a href="#fehlersuche">Fehlersuche</a>.</div></div>
+<h2>Was das Messgerät im jeweiligen Modus tut</h2>
+<p>Wenn du das weißt, verstehst du auch, warum ein Modus stromlos gemessen werden muss und ein anderer nicht:</p>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Modus</th><th>Was das Gerät macht</th><th>Folge für dich</th></tr></thead>
+<tbody>
+<tr><td><b>V (Spannung)</b></td><td>Nur <b>zuhören</b>. Der Eingang ist hochohmig (10 MΩ) und entnimmt fast keinen Strom.</td><td>Schaltung bleibt <b>an</b>, parallel messen. Beeinflusst die Schaltung praktisch nicht.</td></tr>
+<tr><td><b>A (Strom)</b></td><td>Der Strom fließt <b>durch</b> einen Shunt-Widerstand im Gerät; gemessen wird der Spannungsabfall daran.</td><td>Kreis <b>auftrennen</b>, in Reihe einschleifen. Der Shunt klaut Spannung (Bürdenspannung).</td></tr>
+<tr><td><b>Ω (Widerstand)</b></td><td>Das Gerät <b>speist selbst</b> einen kleinen, bekannten Strom ein und misst die entstehende Spannung.</td><td>Nur <b>stromlos</b> — Fremdspannung verfälscht oder beschädigt. Prüfspannung bleibt unter ~1 V, damit Halbleiter zubleiben.</td></tr>
+<tr><td><b>))) (Durchgang)</b></td><td>Dasselbe wie Ω, nur mit Piepton unterhalb einer Schwelle (typ. 30–50 Ω) statt Zahl.</td><td>Schnelles Ja/Nein ohne Hinsehen — aber „niederohmig" ist nicht „gut".</td></tr>
+<tr><td><b>▷⊢ (Diode)</b></td><td>Speist ~0,5–1 mA bei <b>2–3 V</b> Leerlaufspannung ein und zeigt den Spannungsabfall in Volt.</td><td>Öffnet Halbleiter-Übergänge → verrät den Zustand von Dioden, Transistoren und IC-Pins.</td></tr>
+<tr><td><b>⊣⊢ (Kapazität)</b></td><td><b>Lädt und entlädt</b> den Kondensator und misst, wie lange das dauert.</td><td>Vorher entladen, sonst stört die Restladung. In der Schaltung verfälschen Parallelbauteile.</td></tr>
+<tr><td><b>Hz (Frequenz)</b></td><td><b>Zählt Nulldurchgänge</b> pro Sekunde — keine Formanalyse.</td><td>Sagt „wie oft", nicht „wie es aussieht". Dafür das <a href="#oszilloskop">Oszilloskop</a>.</td></tr>
+<tr><td><b>°C (Temperatur)</b></td><td>Misst die winzige <b>Thermospannung</b> des angeschlossenen Fühlers (Typ K).</td><td>Nur mit passendem Fühler; ohne Fühler zeigt es Raumtemperatur oder Unsinn.</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><div><b>Kurz:</b> Bei <b>V</b> und <b>Hz</b> horcht das Gerät nur. Bei <b>Ω, ))), Diode und Kapazität</b> speist es selbst etwas ein — deshalb müssen diese vier <b>immer stromlos</b> gemessen werden. Bei <b>A</b> wird das Gerät Teil des Stromkreises.</div></div>
+
 <h2>Was ist ein guter Wert? Referenztabelle</h2>
 <p>Ein Messwert allein sagt nichts — er braucht einen Sollwert. Die wichtigsten Erwartungswerte auf einen Blick. Richtwerte für <b>eingelötete</b> Bauteile, Rails gegen Masse und die Messreihenfolge stehen im Tab <a href="#fehlersuche">Fehlersuche</a>.</p>
 <div class="tbl-wrap"><table style="min-width:860px">

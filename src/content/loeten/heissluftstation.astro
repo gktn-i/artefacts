@@ -1,0 +1,107 @@
+<div class="kurz"><b>Zwei Regler, zwei Bedeutungen:</b> <b>Temperatur</b> = wie heiß die Luft ist · <b>Luftstrom</b> = wie viel Wärme pro Sekunde ankommt. Standard SMD: bleihaltig <b>300 °C</b> / bleifrei <b>340 °C</b>, Luft <b>30–40 %</b>, Düse etwa so groß wie das Bauteil. Nachbarn mit Kapton abdecken.</div>
+
+<h2>Heißluftstation</h2>
+<p>Die Heißluft erwärmt <b>alle Anschlüsse gleichzeitig</b>. Das macht sie zum Werkzeug der Wahl für alles, was der Kolben nicht erreicht — und zum einzigen schadensfreien Weg, ein bestücktes SMD-Bauteil wieder abzuheben.</p>
+
+<h3>Bedienelemente</h3>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Element</th><th>Was es tut</th><th>Wann du es anfasst</th></tr></thead>
+<tbody>
+<tr><td><b>Temperatur-Regler</b></td><td>Solltemperatur der austretenden Luft</td><td>Nach Lot-Legierung und Bauteilgröße</td></tr>
+<tr><td><b>Luftstrom-Regler</b></td><td>Volumenstrom — bestimmt den Wärmeeintrag pro Sekunde <b>und</b> die mechanische Kraft auf Bauteile</td><td>Bei jedem Wechsel der Bauteilgröße</td></tr>
+<tr><td><b>Düse (Nozzle)</b></td><td>Bündelt den Luftstrom auf die Zielfläche</td><td>Passend zur Bauteilgröße wechseln</td></tr>
+<tr><td><b>Ablage-Sensor / Reed-Schalter</b></td><td>Startet beim Abheben, kühlt beim Ablegen automatisch aus</td><td>Nie überbrücken — der Cooldown schützt das Heizelement</td></tr>
+<tr><td><b>Cooldown-Anzeige</b></td><td>Handstück wird mit kalter Luft heruntergekühlt</td><td>Auslaufen lassen, erst dann Netzschalter aus</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Reihenfolge beim Ausschalten:</b> Handstück ablegen → Cooldown komplett durchlaufen lassen → erst dann Netzschalter. Wer sofort abschaltet, lässt die Restwärme im Heizelement stehen; das kostet Lebensdauer.</div>
+
+<h3>Temperatur × Luftstrom — die Arbeitsmatrix</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Aufgabe</th><th>Temperatur bleihaltig</th><th>Temperatur bleifrei</th><th>Luftstrom</th><th>Düse</th></tr></thead>
+<tbody>
+<tr><td>Chip 0402 / 0201 setzen oder abheben</td><td>270–300 °C</td><td>300–330 °C</td><td><b>15–25 %</b></td><td>klein (3–4 mm)</td></tr>
+<tr><td>Chip 0603–1206, SOT, SOD</td><td>290–320 °C</td><td>320–350 °C</td><td>25–35 %</td><td>4–6 mm</td></tr>
+<tr><td>SOIC / TSSOP / QFP</td><td>300–330 °C</td><td>330–360 °C</td><td>30–40 %</td><td>Bauteilgröße</td></tr>
+<tr><td>QFN / DFN</td><td>300–330 °C</td><td>330–360 °C</td><td>30–40 %</td><td>Bauteilgröße</td></tr>
+<tr><td>BGA aufschmelzen (mit Vorwärmung)</td><td>300–330 °C</td><td>330–360 °C</td><td>25–35 %</td><td>groß / Chipgröße</td></tr>
+<tr><td>BGA ausbauen (mit Vorwärmung)</td><td>320–350 °C</td><td>350–380 °C</td><td>30 %</td><td>groß / Chipgröße</td></tr>
+<tr><td>Große Masseflächen, Abschirmbleche</td><td>350–380 °C</td><td>380–400 °C</td><td>50–70 %</td><td>groß</td></tr>
+<tr><td>Schrumpfschlauch</td><td colspan="2">100–150 °C</td><td>30–50 %</td><td>Reflektor</td></tr>
+<tr><td>Kleber/Underfill weich machen</td><td colspan="2">180–200 °C</td><td>30 %</td><td>mittel</td></tr>
+<tr><td>Harten Flux wieder lösen</td><td colspan="2">150–160 °C</td><td>40 %</td><td>mittel</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Merksatz zum Luftstrom:</b> <b>Wenig Luft</b>, wenn etwas <i>wegfliegen</i> kann (lose Kugeln, Paste, 0201). <b>Viel Luft</b>, wenn viel <i>Masse</i> zu erwärmen ist (Masseflächen, dicke Bleche). Hoher Luftstrom heizt nicht besser durch — er bläst nur mehr weg und kühlt die Umgebung aus.</div>
+
+<h3>Düsenwahl</h3>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Düse</th><th>Wirkung</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Rund, klein (3–5 mm)</b></td><td>Punktuell, hohe Strömungsgeschwindigkeit</td><td>Einzelne kleine Chips, gezielte Stellen</td></tr>
+<tr><td><b>Rund, mittel (6–10 mm)</b></td><td>Der Allrounder</td><td>SOIC, QFP, mittlere Bauteile</td></tr>
+<tr><td><b>Rund, groß (&gt;10 mm)</b></td><td>Flächig, sanfter</td><td>BGA, große ICs, Masseflächen</td></tr>
+<tr><td><b>Ohne Düse (offen)</b></td><td>Breit, ungerichtet, sehr sanft</td><td>Vorwärmen kleiner Bereiche, Flux lösen</td></tr>
+<tr><td><b>Reflektor / gebogen</b></td><td>Lenkt die Luft um das Bauteil</td><td>Schrumpfschlauch, empfindliche Nachbarn</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Faustregel:</b> Düse so groß wie das Bauteil — oder eine Nummer größer. Zu klein bedeutet punktuelle Überhitzung in der Mitte bei kalten Rändern.</div>
+
+<h3>Workflows</h3>
+<h4>① SMD-Bauteil abheben</h4>
+<div class="steps">
+<div class="step"><b>Nachbarn schützen.</b> Kapton-Tape oder Alufolie über alles, was in Reichweite steht. Kunststoffstecker und Folienkabel entfernen.</div>
+<div class="step"><b>Flux rundum.</b> Dünnflüssiges Flux an alle Kanten — es überträgt Wärme und verhindert Oxidation.</div>
+<div class="step"><b>Vorwärmen</b>, wenn das Board groß ist oder Masseflächen im Spiel sind (<a class="goto" href="#heizplatte">Heizplatte</a>).</div>
+<div class="step"><b>Temperatur und Luft nach Matrix einstellen</b>, Düse passend, Abstand <b>1–2 cm</b>.</div>
+<div class="step"><b>Gleichmäßig kreisen</b> — über das Bauteil und knapp über den Rand hinaus. Nie punktuell stehen bleiben.</div>
+<div class="step"><b>Auf das Nachgeben warten.</b> Mit der Pinzette seitlich <b>leicht antippen</b>. Gibt es wie auf einem Ölfilm nach, ist alles Lot flüssig.</div>
+<div class="step"><b>Senkrecht abheben</b> — nicht schieben, nicht drehen, nie hebeln.</div>
+</div>
+
+<h4>② SMD-Bauteil setzen</h4>
+<div class="steps">
+<div class="step"><b>Pads vorbereiten.</b> Altlot mit Litze planziehen, reinigen, dünn Flux auftragen.</div>
+<div class="step"><b>Bauteil platzieren.</b> Tacky-Flux hält es an Ort — Pin 1 / Polung prüfen.</div>
+<div class="step"><b>Luftstrom niedrig</b> (sonst schwimmt das Bauteil weg), Temperatur nach Matrix.</div>
+<div class="step"><b>Aufschmelzen</b> und auf das <b>Self-Alignment</b> achten: das Bauteil ruckt sichtbar mittig — das ist das Signal, dass alles flüssig ist.</div>
+<div class="step"><b>Hitze weg</b>, ruhig abkühlen lassen. Nicht anpusten, nicht anfassen.</div>
+<div class="step"><b>Prüfen:</b> Sicht auf Brücken, dann Durchgang messen.</div>
+</div>
+
+<h4>③ Schrumpfschlauch</h4>
+<div class="steps">
+<div class="step"><b>100–150 °C</b>, mittlerer Luftstrom, Reflektordüse.</div>
+<div class="step"><b>Von der Mitte nach außen</b> arbeiten, damit keine Luft eingeschlossen wird.</div>
+<div class="step"><b>Gleichmäßig drehen</b> — punktuelle Hitze verbrennt den Schlauch, statt ihn zu schrumpfen.</div>
+</div>
+
+<h3>Fehlerbilder</h3>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Symptom</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td>Kleinteile fliegen weg</td><td>Luftstrom zu hoch</td><td>Luft runter, Düse größer, Kapton drumherum</td></tr>
+<tr><td>Bauteil lässt sich nicht lösen, Board wird trotzdem heiß</td><td>Wärme fließt in die Massefläche ab</td><td>Vorwärmen von unten — nicht oben mehr Grad geben</td></tr>
+<tr><td>Platinen-Beschriftung wird braun, Lot bleibt fest</td><td>Punktuell zu heiß, zu lange auf einer Stelle</td><td>Kreisen, Abstand vergrößern, Düse größer</td></tr>
+<tr><td>Kunststoffteile verformen sich</td><td>Keine Abdeckung, zu breiter Strahl</td><td>Kapton/Alufolie, kleinere Düse</td></tr>
+<tr><td>Lötstellen matt und körnig nach dem Abkühlen</td><td>Beim Erstarren bewegt oder angepustet</td><td>Ruhig auskühlen lassen</td></tr>
+<tr><td>Handstück heizt nicht mehr</td><td>Heizwendel oder Reed-Schalter defekt</td><td>Ablage-Sensor prüfen, Handstück tauschen</td></tr>
+<tr><td>Pads lösen sich vom Board</td><td>Zu lange zu heiß — Kleber unter dem Pad gibt auf</td><td>Kürzer, mit Vorwärmung, niedrigere Temperatur</td></tr>
+</tbody>
+</table></div>
+
+<h3>Grenzen</h3>
+<div class="gb">
+<div class="gb-col good"><h4>✓ Dafür ist sie da</h4><ul>
+<li>QFN, QFP, BGA — Pads unter dem Gehäuse</li>
+<li>Multipin-Bauteile schadenfrei abheben</li>
+<li>Rework, ohne Nachbarn auszulöten</li>
+<li>Schrumpfschlauch, Kleber, harter Flux</li>
+</ul></div>
+<div class="gb-col bad"><h4>✗ Falsches Werkzeug</h4><ul>
+<li>Einzelne THT-Pins — dafür der Kolben</li>
+<li>Dicke Kabel und große Masseflächen ohne Vorwärmung</li>
+<li>Ganze Platinen bestücken → <span class="b b-platte">Heizplatte</span></li>
+<li>Alles, was neben Elkos und Kunststoff liegt, ohne Abdeckung</li>
+</ul></div>
+</div>

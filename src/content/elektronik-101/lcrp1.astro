@@ -1,70 +1,110 @@
-<div class="kurz"><b>LCR-P1:</b> Bauteil an die Klemmen, Gerät erkennt Typ und Kennwerte selbst — ideal für unbeschriftete Teile, Transistor-Pinbelegung und Kondensator-Check.</div>
-<h2>Was ist der FNIRSI LCR-P1?</h2>
-<p>Ein <b>automatischer Bauteiltester</b>. Der große Unterschied zum Multimeter: Beim Multimeter sagst du dem Gerät, <b>was</b> du messen willst. Beim LCR-P1 steckst du das Bauteil einfach rein, drückst eine Taste, und das Gerät <b>erkennt von selbst</b>, was es ist (Widerstand, Transistor, Diode…), zeigt dir die <b>Pin-Belegung</b> (welches Beinchen was ist) und alle wichtigen Messwerte auf einem kleinen Farbdisplay.</p>
-<p class="note">Ideal zum schnellen Prüfen "ist das Bauteil heil?", zum Sortieren unbekannter Bauteile und zum Aufspüren defekter Kondensatoren. Es ersetzt das Multimeter nicht, es ergänzt es.</p>
+<div class="kurz"><b>Bauteil rein, Taste drücken, ablesen.</b> Das Gerät erkennt <b>selbst</b>, was angeschlossen ist, zeigt die <b>Pinbelegung</b> und alle Kennwerte. Zwei Bedingungen: Bauteil <b>ausgelötet</b> und <b>entladen</b>. Alles andere macht es allein.</div>
 
-<h2>Was er erkennt und anzeigt</h2>
-<div class="tbl-wrap"><table style="min-width:640px">
-<thead><tr><th>Bauteil</th><th>Was angezeigt wird</th></tr></thead>
+<h2>Komponententester — mein Gerät</h2>
+<p>Ein automatischer Bauteiltester (LCR-P1). Der Unterschied zum Multimeter: Dort sagst <b>du</b> dem Gerät, was gemessen werden soll. Hier steckst du das Bauteil ein und das Gerät bestimmt Typ, Pinbelegung und Messwerte selbst — in rund fünf Sekunden.</p>
+
+<h3>Bedienelemente</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Element</th><th>Was es tut</th><th>Wann du es anfasst</th></tr></thead>
 <tbody>
-<tr><td><b>Widerstand</b></td><td>Wert in Ω</td></tr>
-<tr><td><b>Kondensator</b></td><td>Kapazität (µF/nF/pF), dazu <b>ESR</b> (Innenwiderstand) und Verlust</td></tr>
-<tr><td><b>Spule / Induktivität</b></td><td>Wert in H/mH, plus Drahtwiderstand</td></tr>
-<tr><td><b>Diode</b></td><td>Durchlassspannung (Vf) und Flussrichtung</td></tr>
-<tr><td><b>Zener-Diode</b></td><td>Zener-Spannung von 0,01 bis 32 V (eigener Messbereich, siehe unten)</td></tr>
-<tr><td><b>LED</b></td><td>Wird als Diode erkannt; zeigt Durchlassspannung, leuchtet beim Test kurz</td></tr>
-<tr><td><b>Transistor (NPN/PNP)</b></td><td>Verstärkung (hFE), Basis-Spannung, automatische Pin-Zuordnung</td></tr>
-<tr><td><b>MOSFET / JFET / IGBT</b></td><td>Gate-Schwellspannung, Gate-Kapazität, eingebaute Schutzdiode</td></tr>
-<tr><td><b>Thyristor / Triac (SCR)</b></td><td>Zündverhalten (Schwelle unter 5 V, Zündstrom unter 6 mA)</td></tr>
-<tr><td><b>Batterie</b></td><td>Spannung (grober Wert, kein vollwertiger Batterietest)</td></tr>
-<tr><td><b>IR-Fernbedienung</b></td><td>Liest den Code im NEC-Format aus (zum Prüfen/Reparieren von Fernbedienungen)</td></tr>
+<tr><td><b>ZIF-Klemmsockel 1-2-3</b></td><td>Drei nummerierte Klemmen mit Hebel — nimmt bedrahtete Bauteile ohne Kraftaufwand auf</td><td>Standard für alles mit Beinchen. Reihenfolge egal, das Gerät ordnet selbst zu</td></tr>
+<tr><td><b>Wechselbares Testboard</b></td><td>Aufsteckplatine mit Kontaktflächen für <b>SMD</b>, dazu Messhaken</td><td>Für Bauteile ohne Beinchen oder wenn der Sockel nicht passt</td></tr>
+<tr><td><b>Zener-Bereich (K-A-A)</b></td><td>Eigener Messplatz nur für Zener-Dioden, mit eigener höherer Prüfspannung</td><td>Nur für Z-Dioden — zusammen mit der High-Voltage-Taste</td></tr>
+<tr><td><b>Taste Test / Power</b></td><td>Kurz: einschalten bzw. Messung starten · lang (außerhalb einer Messung): ausschalten</td><td>Bei jeder Messung</td></tr>
+<tr><td><b>Taste Mode</b></td><td>Wechselt die Betriebsart — vor allem Bauteiltest ↔ IR-Dekodierung</td><td>Selten; für Fernbedienungs-Check</td></tr>
+<tr><td><b>Taste High-Voltage</b></td><td>Legt die höhere Prüfspannung für die Zener-Messung an</td><td><b>Nur</b> im Zener-Bereich</td></tr>
+<tr><td><b>USB-C</b></td><td>Lädt den eingebauten Akku (300 mAh), überträgt Daten und Firmware</td><td>Alle paar Wochen — Akku nicht tief entladen lagern</td></tr>
 </tbody>
 </table></div>
 
-<h2>Bedienelemente & Anschlüsse</h2>
-<div class="grid2">
-<div class="card"><h3>Klemmsockel (1-2-3 mit Hebel)</h3><p>Der "ZIF-Sockel": du steckst die Beinchen ohne Kraft in die nummerierten Klemmen 1, 2 und 3 und drückst den Hebel runter. Für bedrahtete Bauteile. Das Gerät sagt dir danach, welche Nummer welcher Anschluss ist.</p></div>
-<div class="card"><h3>Austauschbares Testboard</h3><p>Eine aufsteckbare kleine Platine mit Kontaktflächen für <b>SMD-Bauteile</b> (die winzigen ohne Beinchen) oder wenn der Klemmsockel nicht passt. Mitgeliefert sind außerdem Mess-Haken.</p></div>
-<div class="card"><h3>Zener-Bereich (K-A-A)</h3><p>Ein eigener kleiner Messbereich nur für Zener-Dioden, beschriftet mit K und A (Kathode/Anode). Wird zusammen mit der High-Voltage-Taste benutzt.</p></div>
-<div class="card"><h3>USB-C-Anschluss</h3><p>Zum Laden des eingebauten Akkus (300 mAh, hält erstaunlich lange) und für Daten / Firmware-Updates.</p></div>
+<h3>Was das Gerät erkennt und anzeigt</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Bauteil</th><th>Angezeigte Werte</th><th>Damit beurteilst du</th></tr></thead>
+<tbody>
+<tr><td><b>Widerstand</b></td><td>Wert in Ω</td><td>Aufdruck bzw. Farbcode gegenprüfen</td></tr>
+<tr><td><b>Kondensator</b></td><td>Kapazität, <b>ESR</b>, Verlustfaktor</td><td><b>Der wichtigste Fall</b> — siehe ESR-Abschnitt unten</td></tr>
+<tr><td><b>Spule / Induktivität</b></td><td>Induktivität + Drahtwiderstand</td><td>Windungsschluss (Wert viel zu klein), Unterbrechung</td></tr>
+<tr><td><b>Diode</b></td><td>Durchlassspannung U<sub>F</sub>, Flussrichtung</td><td>Typ (Silizium ~0,6 V, Schottky ~0,2–0,4 V) und Polung</td></tr>
+<tr><td><b>Zener-Diode</b></td><td>Zener-Spannung 0,01–32 V</td><td>Welche Z-Spannung das unbeschriftete Teil hat</td></tr>
+<tr><td><b>LED</b></td><td>Wird als Diode erkannt, U<sub>F</sub> angezeigt, leuchtet kurz auf</td><td>Heil oder nicht, Anode/Kathode</td></tr>
+<tr><td><b>Transistor NPN/PNP</b></td><td>Verstärkung h<sub>FE</sub>, Basis-Emitter-Spannung, <b>Pinzuordnung</b></td><td>Typ, Polarität und ob die Strecken heil sind</td></tr>
+<tr><td><b>MOSFET / JFET / IGBT</b></td><td>Gate-Schwellspannung, Gate-Kapazität, Body-Diode</td><td>Ob der Typ <b>logic level</b> ist (Schwelle deutlich unter 3 V)</td></tr>
+<tr><td><b>Thyristor / Triac</b></td><td>Zündverhalten (Schwelle &lt; 5 V, Zündstrom &lt; 6 mA)</td><td>Ob das Bauteil überhaupt zündet</td></tr>
+<tr><td><b>Batterie / Zelle</b></td><td>Spannung (grob)</td><td>Nur ein Anhaltspunkt, kein Batterietest unter Last</td></tr>
+<tr><td><b>IR-Fernbedienung</b></td><td>Liest den Code im NEC-Format aus</td><td>Ob die Fernbedienung überhaupt sendet</td></tr>
+</tbody>
+</table></div>
+
+<h3>Werte ablesen und bewerten</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Anzeige</th><th>Normal</th><th>Verdächtig</th></tr></thead>
+<tbody>
+<tr><td><b>Elko: Kapazität</b></td><td>Aufdruck ±20 %</td><td>Deutlich zu klein = ausgetrocknet · 0 = unterbrochen</td></tr>
+<tr><td><b>Elko: ESR</b></td><td>Kleine Werte, bei größeren Elkos deutlich unter 1 Ω</td><td><b>Mehrere Ω</b> bei einem Elko, der neu unter 1 Ω hätte — müder Elko</td></tr>
+<tr><td><b>Keramik-C</b></td><td>Aufdruck ±10–20 %, ESR sehr klein</td><td>Kurzschluss (wird als Widerstand ~0 Ω erkannt) — der typische MLCC-Tod</td></tr>
+<tr><td><b>Diode U<sub>F</sub></b></td><td>Silizium 0,55–0,75 V · Schottky 0,15–0,45 V · LED 1,6–3,4 V</td><td>Wird als Widerstand erkannt = durchlegiert · gar nicht erkannt = unterbrochen</td></tr>
+<tr><td><b>Transistor h<sub>FE</sub></b></td><td>Kleinsignaltypen 100–600, Leistungstypen 20–100</td><td>Sehr kleiner Wert oder Erkennung als „zwei Dioden" = defekt</td></tr>
+<tr><td><b>MOSFET V<sub>GS(th)</sub></b></td><td>Logic-Level: 1–2,5 V · Standardtyp: 2–4 V</td><td>Über 4 V heißt: an 3,3 V schaltet er <b>nicht</b> voll durch</td></tr>
+<tr><td><b>Widerstand</b></td><td>Innerhalb der Toleranz</td><td>Deutlich zu hoch = überlastet gewesen</td></tr>
+<tr><td><b>„kein Bauteil erkannt"</b></td><td>—</td><td>Kontakt schlecht, Bauteil unterbrochen, oder Typ wird nicht unterstützt</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>ESR ist der eigentliche Grund, dieses Gerät zu besitzen.</b> Der Innenwiderstand eines Elkos <b>steigt</b>, wenn er altert — oft lange bevor die Kapazität sichtbar nachlässt. Ein Elko mit fast korrekter Kapazität, aber hohem ESR, ist der klassische versteckte Fehler auf alten Platinen. Das Multimeter sieht davon nichts.</div>
+
+<h3>Workflows</h3>
+<h4>① Standard-Bauteiltest</h4>
+<div class="steps">
+<div class="step"><b>Bauteil ausgebaut und stromlos.</b> Nie an einer laufenden Schaltung testen — das Gerät legt eine eigene Prüfspannung an.</div>
+<div class="step"><b>Kondensatoren vorher entladen.</b> Es gibt zwar eine Schutzschaltung, aber ein geladener Elko kann beim Einstecken funken.</div>
+<div class="step"><b>Beinchen in die Klemmen 1, 2, 3</b> — jedes Bein in eine <b>eigene</b> Klemme. Bei zwei Beinchen zwei beliebige verschiedene Klemmen. Hebel schließen.</div>
+<div class="step"><b>Test drücken</b> und rund fünf Sekunden warten.</div>
+<div class="step"><b>Ablesen:</b> Bauteiltyp, kleines Schaltbild mit der Pinzuordnung, Messwerte.</div>
+<div class="step"><b>Bei Zweifel wiederholen</b> — schlechter Kontakt ist die häufigste Ursache für ein unplausibles Ergebnis.</div>
 </div>
 
-<h3>Die drei Tasten</h3>
-<div class="card">
-<div class="rule"><span class="ico">▶️</span><div><b>Test / Power</b>: kurz drücken schaltet ein bzw. startet eine Messung. Zum <b>Ausschalten</b> die Taste auf einem Bildschirm <b>außerhalb</b> einer laufenden Messung lange gedrückt halten.</div></div>
-<div class="rule"><span class="ico">🔀</span><div><b>Mode / Modus-Schalter</b>: wechselt zwischen den Betriebsarten, vor allem zwischen normalem <b>Bauteiltest</b> und <b>IR-Decoding</b> (Fernbedienung auslesen).</div></div>
-<div class="rule"><span class="ico">⚡</span><div><b>High-Voltage</b>: legt die höhere Spannung an, die für die <b>Zener-Dioden-Messung</b> nötig ist. Nur im Zener-Bereich verwenden.</div></div>
+<h4>② SMD-Bauteil testen</h4>
+<div class="steps">
+<div class="step"><b>Testboard aufstecken</b> statt den Klemmsockel zu benutzen.</div>
+<div class="step"><b>Bauteil auf die Kontaktflächen legen</b> und mit einer Pinzette oder dem Finger andrücken — bei winzigen Teilen die Messhaken benutzen.</div>
+<div class="step"><b>Kontakt sicherstellen:</b> Oxidierte oder mit Flussmittel verklebte Anschlüsse mit IPA reinigen.</div>
+<div class="step"><b>Test drücken</b> und den Druck während der gesamten Messung halten.</div>
 </div>
 
-<h2>So testest du ein Bauteil (Standard-Ablauf)</h2>
-<div class="card"><ul>
-<li>Bauteil muss <b>ausgebaut bzw. stromlos</b> sein, nie an einer laufenden Schaltung testen.</li>
-<li>Beinchen in die Klemmen <b>1, 2, 3</b> stecken (Reihenfolge egal, das Gerät erkennt die Belegung selbst). Bei drei Beinchen jedes in eine eigene Klemme, bei zwei Beinchen zwei verschiedene Klemmen.</li>
-<li>Hebel runterdrücken, damit das Bauteil festgeklemmt ist. Bei SMD stattdessen das Testboard nutzen.</li>
-<li><b>Test</b>-Taste drücken und kurz warten (ein Durchlauf dauert rund 5 Sekunden).</li>
-<li>Ablesen: Das Display zeigt den <b>Bauteiltyp</b>, ein kleines Schaltbild mit der <b>Pin-Belegung</b> und die Messwerte.</li>
-</ul></div>
-
-<h3>Zener-Diode messen (Sonderfall)</h3>
-<div class="card"><ul>
-<li>Zener-Diode in den eigenen <b>K-A-A-Bereich</b> setzen (Kathode an K, das ist die Ring-Seite).</li>
-<li>Die <b>High-Voltage</b>-Taste verwenden, damit genug Spannung zum Durchbruch anliegt.</li>
-<li>Misst die Zener-Spannung bis 32 V mit eigener Versorgung, genauer als der normale Diodentest.</li>
-</ul></div>
-
-<h3>Kondensator & ESR verstehen</h3>
-<div class="card">
-<p><b>ESR</b> heißt "Innenwiderstand" des Kondensators. Ein gesunder Elko hat einen niedrigen ESR. Wird ein Elko alt oder defekt, <b>steigt der ESR</b>, oft lange bevor sich die Kapazität sichtbar ändert.</p>
-<p>Darum ist der LCR-P1 stark beim Aufspüren <b>müder Elkos</b> auf alten Platinen: hoher ESR-Wert = Verdächtiger, auch wenn die Kapazität noch fast stimmt.</p>
+<h4>③ Zener-Diode messen</h4>
+<div class="steps">
+<div class="step"><b>Z-Diode in den K-A-A-Bereich</b> setzen — Kathode (Ringseite) an <b>K</b>.</div>
+<div class="step"><b>High-Voltage-Taste</b> benutzen, sonst reicht die Prüfspannung nicht bis zum Durchbruch.</div>
+<div class="step"><b>Zener-Spannung ablesen</b> (bis 32 V). Das ist genauer als der normale Diodentest, weil das Gerät hier mit eigener erhöhter Spannung arbeitet.</div>
 </div>
 
-<h2>Worauf achten & Good to know</h2>
-<div class="card">
-<div class="rule"><span class="ico">🔌</span><div><b>Immer stromlos / ausgebaut testen.</b> Das Gerät legt selbst eine kleine Prüfspannung an. Fremdspannung von außen kann es stören oder beschädigen.</div></div>
-<div class="rule"><span class="ico">🔋</span><div><b>Kondensatoren vorher entladen.</b> Das Gerät hat zwar einen Schutz, der geladene Kondensatoren beim Einstecken automatisch entlädt (kann kurz funken), aber ein manuelles Entladen vorher ist sicherer.</div></div>
-<div class="rule"><span class="ico">🎯</span><div><b>Pin-Erkennung als Hilfe, nicht als Gesetz.</b> Bei manchen Dioden und NPN-Transistoren kann die erkannte Pin-Zuordnung daneben liegen. Zum Vergleichen, Sortieren und Defekt-Finden ist das Gerät trotzdem sehr nützlich; für die exakte Pin-Belegung im Zweifel ins Datenblatt schauen.</div></div>
-<div class="rule"><span class="ico">📏</span><div><b>Werte relativ sehen.</b> Die genauen Testbedingungen werden nicht angezeigt, daher sind die Werte gut zum Vergleichen zweier Bauteile, aber nicht als laborgenaue Absolutwerte.</div></div>
-<div class="rule"><span class="ico">⛔</span><div><b>Keine Batterie in den 1-2-3-Klemmsockel direkt einstecken</b>, während keine Messung läuft: dieser Bereich ist dann leitend (kurzschlussartig).</div></div>
-<div class="rule"><span class="ico">⬆️</span><div><b>Firmware-Updates</b> findest du auf der FNIRSI-Website. Sie können Genauigkeit verbessern oder Funktionen ergänzen.</div></div>
-<div class="rule"><span class="ico">🌡️</span><div><b>Lagerung & Pflege:</b> trocken und kühl lagern, Akku auch bei seltenem Gebrauch hin und wieder nachladen und nicht tief entladen.</div></div>
+<h4>④ Elko-Reihenprüfung auf einer alten Platine</h4>
+<div class="steps">
+<div class="step"><b>Verdächtige zuerst:</b> Elkos in der Nähe von Wärmequellen, mit gewölbtem Deckel oder Austritt am Boden.</div>
+<div class="step"><b>Auslöten</b> — eingelötet misst du die halbe Schaltung mit.</div>
+<div class="step"><b>Kapazität <i>und</i> ESR notieren</b>, nicht nur die Kapazität.</div>
+<div class="step"><b>Vergleichen statt bewerten:</b> Gleiche Bauform und gleicher Wert sollten ähnliche ESR-Werte haben. Der Ausreißer ist der Verdächtige.</div>
+<div class="step"><b>Im Zweifel tauschen</b> — Elkos sind billig, die Fehlersuche ist teuer.</div>
 </div>
+
+<h4>⑤ Unbekanntes Bauteil bestimmen</h4>
+<div class="steps">
+<div class="step"><b>Testen und Typ ablesen</b> — das grenzt sofort auf eine Bauteilklasse ein.</div>
+<div class="step"><b>Pinzuordnung notieren</b>, dann mit dem Aufdruck und einem Datenblatt gegenprüfen (Tab <a class="goto" href="#datenblatt">Datenblatt lesen</a>).</div>
+<div class="step"><b>Bei Transistoren und MOSFETs</b> die Schwellwerte mitnehmen: Sie sagen dir, ob der Typ in deiner Schaltung überhaupt funktioniert.</div>
+<div class="step"><b>Zweites gleiches Bauteil messen</b>, wenn vorhanden — zwei übereinstimmende Ergebnisse sind ein starker Beleg.</div>
+</div>
+
+<h3>Fehler und Grenzen</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Thema</th><th>Was passiert</th><th>Was du tust</th></tr></thead>
+<tbody>
+<tr><td><b>Nur ausgelötet zuverlässig</b></td><td>Parallel liegende Bauteile verfälschen jede Messung</td><td>Mindestens einseitig auslöten</td></tr>
+<tr><td><b>Pinerkennung kann irren</b></td><td>Bei manchen Dioden und Transistoren liegt die Zuordnung daneben</td><td>Als Hinweis nehmen, für die endgültige Belegung ins Datenblatt sehen</td></tr>
+<tr><td><b>Werte sind Vergleichswerte</b></td><td>Die Testbedingungen (Frequenz, Strom) werden nicht angezeigt</td><td>Bauteile <b>gegeneinander</b> vergleichen, nicht als Laborwerte verwenden</td></tr>
+<tr><td><b>Keine Fremdspannung</b></td><td>Das Gerät speist selbst ein; äußere Spannung stört oder beschädigt</td><td>Immer stromlos messen, Kondensatoren entladen</td></tr>
+<tr><td><b>Batterie nicht in den 1-2-3-Sockel</b></td><td>Der Sockel ist außerhalb einer laufenden Messung leitend — das ist ein Kurzschluss</td><td>Batteriespannung mit dem <a class="goto" href="#dmm-hand">Multimeter</a> messen</td></tr>
+<tr><td><b>Kein Verhalten unter Last</b></td><td>Leckströme, Spannungsfestigkeit und Verhalten bei Betriebsspannung werden nicht geprüft</td><td>Ein Bauteil kann hier „gut" sein und im Betrieb trotzdem versagen</td></tr>
+<tr><td><b>Keine ICs</b></td><td>Nur diskrete Bauteile werden erkannt</td><td>ICs über ihre Funktion und Versorgungspins prüfen (Tab <a class="goto" href="#fehlersuche">Fehlersuche</a>)</td></tr>
+<tr><td><b>Akku und Pflege</b></td><td>Tiefentladung schadet dem eingebauten Akku</td><td>Trocken lagern, gelegentlich nachladen, Firmware bei Bedarf aktualisieren</td></tr>
+</tbody>
+</table></div>

@@ -1,0 +1,138 @@
+<div class="kurz"><b>Drei Fragen klären fast jedes Bus-Problem:</b> Haben beide Seiten <b>gemeinsame Masse</b>? Stimmen die <b>Pegel</b> (3,3 V ↔ 5 V)? Sind die nötigen <b>Pull-ups bzw. Abschlusswiderstände</b> da? Erst danach lohnt es sich, die Software zu verdächtigen.</div>
+
+<h2>Protokolle &amp; Busse</h2>
+<p>Ein Protokoll legt fest, <b>wie</b> Daten über die Leitungen laufen: welche Leitung was tut, wer wann senden darf, wie ein Bit aussieht. Dieser Tab beschreibt jedes gängige Protokoll nach demselben Raster — Leitungen, Verdrahtung, Einstellungen, typische Fehler.</p>
+
+<h3>Die Auswahl auf einen Blick</h3>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Protokoll</th><th>Leitungen</th><th>Reichweite</th><th>Tempo</th><th>Teilnehmer</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>I²C</b></td><td>2 (SDA, SCL)</td><td>&lt; 1 m</td><td>100 k–1 Mbit/s</td><td>viele (Adressen)</td><td>Sensoren, kleine Displays, EEPROM</td></tr>
+<tr><td><b>SPI</b></td><td>4 (MOSI, MISO, SCK, CS)</td><td>&lt; 30 cm</td><td>1–100 Mbit/s</td><td>viele (je 1 CS)</td><td>Displays, SD-Karte, Flash, Funkmodule</td></tr>
+<tr><td><b>UART</b></td><td>2 (TX, RX)</td><td>&lt; 15 m</td><td>9,6 k–1 Mbit/s</td><td>genau 2</td><td>Debug-Konsole, GPS, Bluetooth-Module</td></tr>
+<tr><td><b>RS-232</b></td><td>2–9, ±12 V</td><td>~15 m</td><td>bis 115 kbit/s</td><td>2</td><td>Altgeräte, Industrie-Konsolen</td></tr>
+<tr><td><b>RS-485</b></td><td>2 differenziell</td><td><b>bis 1200 m</b></td><td>bis 10 Mbit/s</td><td>bis 32+</td><td>Industrie, Modbus, DMX</td></tr>
+<tr><td><b>CAN</b></td><td>2 differenziell</td><td>bis 1000 m</td><td>bis 1 Mbit/s (CAN-FD mehr)</td><td>viele, kein Master</td><td>Fahrzeug, Automation</td></tr>
+<tr><td><b>1-Wire</b></td><td>1 (+ Masse)</td><td>bis ~100 m</td><td>~16 kbit/s</td><td>viele (Seriennummer)</td><td>Temperatursensoren</td></tr>
+<tr><td><b>I²S</b></td><td>3 (BCLK, WS, DATA)</td><td>kurz</td><td>Audio-Datenrate</td><td>1 Sender</td><td>Digital-Audio, Mikrofone, DAC</td></tr>
+<tr><td><b>USB</b></td><td>2 differenziell + Versorgung</td><td>~5 m</td><td>12 M–10 Gbit/s</td><td>Host + Geräte</td><td>alles am PC</td></tr>
+<tr><td><b>JTAG / SWD</b></td><td>4–5 / 2</td><td>kurz</td><td>—</td><td>Debug-Kette</td><td>Programmieren, Debuggen</td></tr>
+<tr><td><b>Ethernet</b></td><td>2–4 Paare</td><td>100 m</td><td>100 M–1 Gbit/s</td><td>Netzwerk</td><td>LAN, PoE</td></tr>
+</tbody>
+</table></div>
+
+<h3>I²C — zwei Drähte, viele Bauteile</h3>
+<div class="grid">
+<div class="card"><h3>Leitungen</h3><ul><li><b>SDA</b> — Daten (bidirektional)</li><li><b>SCL</b> — Takt, kommt vom Master</li><li><b>GND</b> — zwingend gemeinsam</li></ul></div>
+<div class="card"><h3>Verdrahtung</h3><ul><li><b>Pull-ups nach VCC: 4,7 kΩ</b> als Standard</li><li>Kurze Busse / hohes Tempo: 2,2 kΩ</li><li>Viele Module: <b>nur einmal</b> Pull-ups — Module bringen oft eigene mit</li></ul></div>
+<div class="card"><h3>Einstellungen</h3><ul><li>Takt: <b>100 kHz</b> (Standard), 400 kHz (Fast), 1 MHz (Fast+)</li><li>Adresse: 7 Bit (0x08–0x77)</li><li>Im Zweifel mit 100 kHz starten</li></ul></div>
+</div>
+<p><b>Wie es funktioniert:</b> Beide Leitungen werden von den Pull-ups auf High gehalten. Jedes Gerät kann sie nur nach <b>Low</b> ziehen (Open-Drain) — deshalb ist ein Kurzschluss zweier gleichzeitig sendender Geräte unmöglich. Der Master schickt zuerst die 7-Bit-Adresse plus ein Bit für Lesen/Schreiben; nur das angesprochene Gerät antwortet mit einem ACK.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Symptom</th><th>Ursache</th><th>Prüfen</th></tr></thead>
+<tbody>
+<tr><td>Scanner findet kein Gerät</td><td>Pull-ups fehlen, Adresse falsch, Masse fehlt</td><td>SDA/SCL im Ruhezustand messen: müssen <b>beide auf VCC</b> liegen</td></tr>
+<tr><td>SDA hängt dauerhaft auf Low</td><td>Bus blockiert — Gerät wartet mitten in einer Übertragung</td><td>Reset des Geräts; 9 Taktimpulse auf SCL geben den Bus frei</td></tr>
+<tr><td>Zwei Geräte, eins funktioniert nicht</td><td><b>Adresskonflikt</b></td><td>Adresspins (A0/A1/A2) am Bauteil umlöten oder Bauteilvariante wechseln</td></tr>
+<tr><td>Funktioniert nur mit kurzem Kabel</td><td>Buskapazität zu hoch (Grenze ~400 pF)</td><td>Kürzer, kleinere Pull-ups, Takt senken</td></tr>
+<tr><td>Sporadische Fehler</td><td>Pegel-Mismatch 3,3 ↔ 5 V</td><td>Pegelwandler einsetzen (<a class="goto" href="#signale">Signale</a>)</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Erster Schritt bei jedem I²C-Problem:</b> Einen I²C-Scanner laufen lassen. Findet er die Adresse, ist die Hardware in Ordnung und das Problem liegt in der Software. Findet er nichts, ist es Verdrahtung, Pull-up oder Pegel.</div>
+
+<h3>SPI — schnell, aber eine Leitung mehr pro Gerät</h3>
+<div class="grid">
+<div class="card"><h3>Leitungen</h3><ul><li><b>SCK</b> — Takt vom Master</li><li><b>MOSI</b> — Master → Gerät (auch: SDO/COPI)</li><li><b>MISO</b> — Gerät → Master (SDI/CIPO)</li><li><b>CS/SS</b> — eine <b>eigene</b> Leitung je Gerät, aktiv Low</li></ul></div>
+<div class="card"><h3>Die vier Modi</h3><ul><li><b>CPOL</b> — Ruhepegel des Takts (0 = Low)</li><li><b>CPHA</b> — Übernahme bei erster oder zweiter Flanke</li><li>Modus 0 (CPOL 0/CPHA 0) ist der häufigste</li><li>Falscher Modus = nur Müll, kein Fehler</li></ul></div>
+<div class="card"><h3>Einstellungen</h3><ul><li>Taktrate — im Datenblatt des Geräts</li><li>Bitreihenfolge: meist MSB first</li><li>Keine Adressen, keine Pull-ups, keine Rückmeldung</li></ul></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Symptom</th><th>Ursache</th><th>Prüfen</th></tr></thead>
+<tbody>
+<tr><td>Nur 0x00 oder 0xFF zurück</td><td>CS nicht aktiv, MISO nicht verbunden</td><td>CS muss während der Übertragung <b>Low</b> sein</td></tr>
+<tr><td>Daten verschoben oder unsinnig</td><td>Falscher SPI-Modus</td><td>Alle vier Modi durchprobieren</td></tr>
+<tr><td>Funktioniert langsam, nicht schnell</td><td>Leitungen zu lang, keine Masse-Rückführung</td><td>Takt senken, Leitungen kürzen</td></tr>
+<tr><td>Zwei Geräte stören sich</td><td>Zwei CS gleichzeitig aktiv</td><td>Immer nur ein CS auf Low</td></tr>
+</tbody>
+</table></div>
+
+<h3>UART — die Debug-Schnittstelle</h3>
+<p>Kein Takt, dafür müssen beide Seiten dieselbe <b>Baudrate</b> vereinbart haben. <b>TX geht auf RX</b> und umgekehrt — gekreuzt, nicht 1:1.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Einstellung</th><th>Übliche Werte</th><th>Standard</th></tr></thead>
+<tbody>
+<tr><td>Baudrate</td><td>9600, 19200, 38400, 57600, <b>115200</b></td><td>115200 für Debug, 9600 für alte Module</td></tr>
+<tr><td>Datenbits</td><td>7 oder 8</td><td><b>8</b></td></tr>
+<tr><td>Parität</td><td>keine (N), gerade (E), ungerade (O)</td><td><b>N</b></td></tr>
+<tr><td>Stoppbits</td><td>1 oder 2</td><td><b>1</b></td></tr>
+<tr><td>Flusskontrolle</td><td>keine, RTS/CTS, XON/XOFF</td><td>keine</td></tr>
+</tbody>
+</table></div>
+<div class="note">Die Kurzschreibweise <b>115200 8N1</b> heißt: 115200 Baud, 8 Datenbits, keine Parität, 1 Stoppbit — der Normalfall.</div>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Symptom</th><th>Ursache</th></tr></thead>
+<tbody>
+<tr><td>Nur Zeichensalat</td><td>Baudrate stimmt nicht — durchprobieren</td></tr>
+<tr><td>Gar nichts</td><td>TX/RX nicht gekreuzt oder Masse fehlt</td></tr>
+<tr><td>Erste Zeichen fehlen</td><td>Empfänger war beim Senden noch nicht bereit</td></tr>
+<tr><td>Einzelne falsche Zeichen</td><td>Pegelproblem oder Leitung zu lang/gestört</td></tr>
+</tbody>
+</table></div>
+
+<h3>Differenzielle Busse: RS-485 und CAN</h3>
+<p>Beide übertragen ein Bit als <b>Spannungsdifferenz zwischen zwei Leitungen</b>. Eine Störung trifft beide Adern gleich und fällt bei der Differenzbildung heraus — deshalb die großen Reichweiten.</p>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th></th><th>RS-485</th><th>CAN</th></tr></thead>
+<tbody>
+<tr><td><b>Leitungen</b></td><td>A / B (+ GND)</td><td>CAN-H / CAN-L (+ GND)</td></tr>
+<tr><td><b>Wer sendet</b></td><td>Ein Master fragt, Slaves antworten (halbduplex)</td><td>Jeder darf senden; bei Kollision gewinnt die niedrigere ID</td></tr>
+<tr><td><b>Abschluss</b></td><td><b>120 Ω an beiden Busenden</b></td><td><b>120 Ω an beiden Busenden</b></td></tr>
+<tr><td><b>Ruhepegel messen</b></td><td>Differenz nahe 0 V</td><td>beide Leitungen ~2,5 V</td></tr>
+<tr><td><b>Aktiv messen</b></td><td>±1,5–5 V Differenz</td><td>H steigt auf ~3,5 V, L fällt auf ~1,5 V</td></tr>
+<tr><td><b>Typisch mit</b></td><td>Modbus RTU, DMX</td><td>OBD-II, Motorsteuerung, Industrie</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Schnelltest ohne Oszilloskop:</b> Bus stromlos, dann Widerstand zwischen den beiden Adern messen. <b>~60 Ω</b> = beide Abschlusswiderstände da (zwei mal 120 Ω parallel). <b>120 Ω</b> = einer fehlt. <b>Sehr hochohmig</b> = beide fehlen — der Bus wird auf Länge unzuverlässig.</div>
+
+<h3>Weitere Schnittstellen</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Schnittstelle</th><th>Prinzip</th><th>Worauf es ankommt</th></tr></thead>
+<tbody>
+<tr><td><b>1-Wire</b></td><td>Daten (und teils Versorgung) über eine Leitung; jedes Gerät hat eine eindeutige 64-Bit-Seriennummer</td><td>Pull-up <b>4,7 kΩ</b>. Bei langen Strecken oder vielen Sensoren echte Versorgung statt Parasitärspeisung</td></tr>
+<tr><td><b>I²S</b></td><td>Reiner Audio-Datenstrom: Bitclock, Wordselect (links/rechts), Daten</td><td>Trotz Namensähnlichkeit <b>nichts</b> mit I²C zu tun. Keine Adressen, kein Rückkanal</td></tr>
+<tr><td><b>USB</b></td><td>Differenzielles Paar D+/D−, Host steuert, Gerät antwortet</td><td>Leitungsimpedanz 90 Ω, Paar gleich lang führen. Ohne gemeinsame Masse geht nichts</td></tr>
+<tr><td><b>USB-PD</b></td><td>Aushandeln der Spannung über die CC-Leitungen</td><td>5/9/15/20 V bis 5 A. <b>Ohne</b> CC-Widerstände bleibt es bei 5 V — häufigste Ursache für „Kabel lädt nicht"</td></tr>
+<tr><td><b>JTAG</b></td><td>TCK, TMS, TDI, TDO (+ optional TRST) als Kette durch mehrere Chips</td><td>Kann auch Lötstellen prüfen (Boundary-Scan), ohne dass Software läuft</td></tr>
+<tr><td><b>SWD</b></td><td>Zweidraht-Debug bei ARM: SWDIO, SWCLK</td><td>Die abgespeckte JTAG-Variante. Das, was Debug-Adapter üblicherweise nutzen</td></tr>
+<tr><td><b>Ethernet</b></td><td>Differenzielle Paare; MAC im Controller, PHY als Übertrager-Chip</td><td>Zwischen PHY und Buchse sitzen Übertrager (Magnetics) — oft in der Buchse integriert</td></tr>
+<tr><td><b>PWM als Signal</b></td><td>Pulsbreite codiert einen Wert, nicht Leistung</td><td>Servo: 50 Hz, 1,0 ms = links, 1,5 ms = Mitte, 2,0 ms = rechts. Tastgrad ist bedeutungslos</td></tr>
+</tbody>
+</table></div>
+
+<h3>Funk-Protokolle</h3>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Technik</th><th>Reichweite</th><th>Stromhunger</th><th>Datenrate</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>WLAN</b> (2,4/5 GHz)</td><td>~30 m innen</td><td>hoch</td><td>hoch</td><td>Alles, was ins Heimnetz soll</td></tr>
+<tr><td><b>Bluetooth Classic</b></td><td>~10 m</td><td>mittel</td><td>mittel</td><td>Audio, serielle Brücken</td></tr>
+<tr><td><b>BLE</b> (Low Energy)</td><td>~10–30 m</td><td><b>sehr niedrig</b></td><td>niedrig</td><td>Sensoren, Wearables, Batteriebetrieb</td></tr>
+<tr><td><b>Zigbee / Thread</b></td><td>Mesh, je Knoten ~20 m</td><td>niedrig</td><td>niedrig</td><td>Smart Home, viele Knoten</td></tr>
+<tr><td><b>LoRa / LoRaWAN</b></td><td><b>km-Bereich</b></td><td>sehr niedrig</td><td>sehr niedrig</td><td>Sensordaten über weite Strecken</td></tr>
+<tr><td><b>ESP-NOW</b></td><td>~100 m</td><td>niedrig</td><td>mittel</td><td>Direkte Verbindung zwischen Modulen ohne Router</td></tr>
+<tr><td><b>433/868 MHz</b> einfach</td><td>~100 m</td><td>niedrig</td><td>sehr niedrig</td><td>Fernbedienungen, Funksteckdosen</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Antennen-Regel:</b> Kein Metall und keine Masseflächen unter oder direkt neben der Antennenfläche eines Funkmoduls — auch nicht auf der Rückseite der Platine. Das ist der häufigste Grund für „Reichweite viel schlechter als versprochen".</div>
+
+<h3>Fehlersuche am Bus — die Reihenfolge</h3>
+<div class="steps">
+<div class="step"><b>Masse prüfen.</b> Gemeinsames GND zwischen allen Teilnehmern? Ohne Bezugspunkt ist jedes Signal bedeutungslos.</div>
+<div class="step"><b>Versorgung messen.</b> Liegt am Modul wirklich die erwartete Spannung an — unter Last, nicht im Leerlauf?</div>
+<div class="step"><b>Ruhepegel messen.</b> I²C: beide Leitungen auf VCC. UART: TX-Leitung im Ruhezustand High. CAN: beide ~2,5 V.</div>
+<div class="step"><b>Pegel-Kompatibilität klären.</b> 3,3-V-Eingang an 5-V-Ausgang braucht einen Pegelwandler.</div>
+<div class="step"><b>Verdrahtung gegenprüfen.</b> UART gekreuzt? SPI je Gerät ein eigener CS? Pull-ups nur einmal?</div>
+<div class="step"><b>Auf Aktivität schauen.</b> Mit dem Oszilloskop am Takt: kommen überhaupt Flanken? Sind sie sauber rechteckig oder verschliffen?</div>
+<div class="step"><b>Langsamer machen.</b> Takt/Baudrate deutlich senken. Läuft es dann, ist es ein Leitungs- oder Terminierungsproblem.</div>
+<div class="step"><b>Auf ein Gerät reduzieren.</b> Alles abklemmen bis auf einen Teilnehmer — dann einzeln wieder dazu.</div>
+</div>
+<div class="kurz"><b>Was ein Multimeter am Bus kann:</b> Ruhepegel, Versorgung, Durchgang, Abschlusswiderstände. <b>Was es nicht kann:</b> laufende Daten beurteilen — dafür braucht es ein <a class="goto" href="#oszilloskop">Oszilloskop</a>.</div>

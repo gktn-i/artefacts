@@ -1,6 +1,6 @@
 <div class="kurz"><b>Kolben-Startwerte:</b> bleihaltig 300–330 °C · bleifrei 330–370 °C · Schrumpfschlauch 100–150 °C Luft. Erst größere Spitze, dann mehr Hitze.</div>
 <h2>Temperaturen</h2>
-<div class="tip"><b>Bei Kartuschen-Systemen (JBC C245/C210, GeeBoon TC22) rund 20–30 °C niedriger einstellen</b> als hier angegeben — der Sensor sitzt in der Spitze und regelt sofort nach. Konkrete Presets: Tab <a class="goto" href="#equipment">Equipment</a>.</div>
+<div class="tip"><b>Bei Kartuschen-Systemen rund 20–30 °C niedriger einstellen</b> als hier angegeben — Sensor sitzt in der Spitze und regelt sofort nach. Deine konkreten Presets: Tab <a class="goto" href="#station">Lötstation C245/C210</a>.</div>
 <p>Richtwerte für klassische Kolben. Höher heißt nicht besser: Zu viel Hitze beschädigt Pads und Bauteile, zu wenig gibt kalte Stellen. Wenn Spitze und Lot passen, reicht meist die untere Hälfte des Bereichs. Wichtig: Die Werkzeug-Temperatur liegt deutlich <b>über</b> dem Schmelzpunkt des Lots — die Reserve gleicht Wärmeverluste an Pad und Beinchen aus.</p>
 <div class="tbl-wrap">
 <table id="tempTbl"><thead></thead><tbody></tbody></table>
@@ -36,3 +36,67 @@
 <div class="step"><b>Abkühlen.</b> Kontrolliert herunter. Platine in dieser Phase nicht bewegen, sonst entstehen gestörte, rissige Lötstellen.</div>
 </div>
 <div class="tip"><b>Self-Alignment:</b> Beim Reflow zieht die Oberflächenspannung des flüssigen Lots leicht schief gesetzte Bauteile gerade. Kleine Platzierfehler korrigieren sich von selbst.</div>
+
+<h3>Schmelzpunkte auf einen Blick</h3>
+<p>Der Schmelzpunkt ist die <b>Untergrenze</b>. Werkzeug-Temperaturen liegen darüber, weil Pad und Bauteil Wärme abziehen.</p>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Legierung</th><th>Schmelzpunkt</th><th>Peak beim Reflow</th><th>Kolben-Startwert</th></tr></thead>
+<tbody>
+<tr><td><b>Sn42Bi58</b> (Low-Temp)</td><td><b>138 °C</b></td><td>165–180 °C</td><td>210–240 °C</td></tr>
+<tr><td><b>Sn63Pb37</b> (eutektisch)</td><td><b>183 °C</b></td><td>205–215 °C</td><td>300–330 °C</td></tr>
+<tr><td><b>Sn60Pb40</b></td><td>183–190 °C</td><td>205–215 °C</td><td>300–330 °C</td></tr>
+<tr><td><b>SAC305</b> (bleifrei Standard)</td><td><b>217–220 °C</b></td><td>240–250 °C</td><td>330–370 °C</td></tr>
+<tr><td><b>Sn96,5Ag3,5</b></td><td>221 °C</td><td>245–255 °C</td><td>340–370 °C</td></tr>
+<tr><td><b>Sn99,3Cu0,7</b></td><td><b>227 °C</b></td><td>250–260 °C</td><td>350–380 °C</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Nie mischen:</b> Bleihaltig + bleifrei oder Bismut + Blei ergeben eine Mischlegierung mit unbekanntem, oft <b>niedrigerem</b> Schmelzpunkt und sprödem Gefüge. Die Stelle sieht gut aus und versagt später. Beim Reparieren: Altlot restlos entfernen, dann sauber neu aufbauen.</div>
+
+<h3>Was Bauteile aushalten</h3>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Bauteil</th><th>Grenze</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td>Standard-SMD (Widerstand, MLCC)</td><td>260 °C / 10 s</td><td>Unkritisch — hält jedes normale Profil aus</td></tr>
+<tr><td>Elektrolytkondensator</td><td>260 °C / 10 s, oft weniger</td><td>Zügig arbeiten. Zischen oder Wölben = zu lange heiß</td></tr>
+<tr><td>LED</td><td>240–260 °C / 5 s</td><td>Empfindlich. Kurz und mit ausreichend Flux</td></tr>
+<tr><td>Kunststoff-Steckverbinder</td><td>je nach Material 230–260 °C</td><td>Verformt sich, bevor das Lot merklich leidet</td></tr>
+<tr><td>Quarze, Sensoren, Kameramodule</td><td>oft &lt; 240 °C</td><td>Datenblatt lesen. Im Zweifel Low-Temp-Lot</td></tr>
+<tr><td>Platinenmaterial FR-4</td><td>ca. 250–280 °C kurzzeitig</td><td>Darüber: Delamination, braune Verfärbung, Pads lösen sich</td></tr>
+<tr><td>Lötstopplack</td><td>ca. 260 °C</td><td>Blasen und Verfärbung sind das erste sichtbare Warnsignal</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Zeit ist genauso wichtig wie Temperatur.</b> Der Schaden entsteht aus <b>Temperatur × Zeit</b>. 350 °C für zwei Sekunden sind harmloser als 280 °C für zwanzig. Deshalb: lieber die richtige Spitze und schnell fertig als vorsichtig und lange.</div>
+
+<h3>Welche Temperatur für welche Aufgabe</h3>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Aufgabe</th><th>Werkzeug</th><th>bleihaltig</th><th>bleifrei</th></tr></thead>
+<tbody>
+<tr><td>THT, normale Pads</td><td><span class="b b-kolben">Kolben</span></td><td>300–320 °C</td><td>330–350 °C</td></tr>
+<tr><td>SMD-Chips 0603–1206</td><td><span class="b b-kolben">Kolben</span></td><td>300–320 °C</td><td>330–350 °C</td></tr>
+<tr><td>Feines SMD 0402/0201</td><td><span class="b b-kolben">Kolben</span></td><td>280–300 °C</td><td>310–330 °C</td></tr>
+<tr><td>Masseflächen, dicke Kabel</td><td><span class="b b-kolben">Kolben</span></td><td>350–380 °C <span class="b b-warn">kurz</span></td><td>380–400 °C <span class="b b-warn">kurz</span></td></tr>
+<tr><td>Entlötlitze auf Pads</td><td><span class="b b-kolben">Kolben</span></td><td>320–350 °C</td><td>350–380 °C</td></tr>
+<tr><td>SMD setzen / abheben</td><td><span class="b b-luft">Heißluft</span></td><td>290–320 °C</td><td>320–360 °C</td></tr>
+<tr><td>Reflow ganze Platine</td><td><span class="b b-platte">Platte</span></td><td>Peak 205–215 °C</td><td>Peak 240–250 °C</td></tr>
+<tr><td>Vorwärmen für Rework</td><td><span class="b b-platte">Platte</span></td><td colspan="2">100–180 °C je nach Boardgröße</td></tr>
+<tr><td>Harten Flux lösen</td><td><span class="b b-luft">Heißluft</span></td><td colspan="2">150–160 °C</td></tr>
+<tr><td>Schrumpfschlauch</td><td><span class="b b-luft">Heißluft</span></td><td colspan="2">100–150 °C</td></tr>
+</tbody>
+</table></div>
+
+<h3>Woran du merkst, dass die Temperatur falsch ist</h3>
+<div class="gb">
+<div class="gb-col bad"><h4>✗ Zu kalt</h4><ul>
+<li>Lot bleibt zäh, verläuft nicht zur Kehle</li>
+<li>Kugelige, aufgesetzte Stellen</li>
+<li>Man muss lange draufbleiben — <b>das</b> schadet dann wirklich</li>
+<li>Flussmittel wird nicht aktiv, bleibt klebrig</li>
+</ul></div>
+<div class="gb-col bad"><h4>✗ Zu heiß</h4><ul>
+<li>Flussmittel raucht sofort stark und ist weg, bevor es wirkt</li>
+<li>Spritzer, braune Verfärbung am Lötstopplack</li>
+<li>Spitze oxidiert schnell, benetzt schlechter</li>
+<li>Pads lösen sich, Kunststoff verformt sich</li>
+</ul></div>
+</div>
+<div class="tip"><b>Der Zwei-Sekunden-Test:</b> Bei richtiger Temperatur fließt das Lot innerhalb von etwa 2 Sekunden nach dem Zugeben sauber in die Kehle. Dauert es länger, ist fast immer die <b>Spitze zu klein</b> — nicht die Temperatur zu niedrig.</div>

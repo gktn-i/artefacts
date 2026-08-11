@@ -23,16 +23,21 @@
               "name": "Elektronik 101",
               "icon": "⚡",
               "kind": "Referenz",
-              "updated": "2026-08-06",
-              "desc": "Die große Referenz: Grundgrößen, Schaltpläne lesen, Leistungselektronik, Messtechnik, Board-Diagnose, Fehlersuche, Fachbegriffe — mit eingebauten Rechnern.",
+              "updated": "2026-08-11",
+              "desc": "Die große Referenz: Grundgrößen, Schaltpläne, Signale, Leistungselektronik, Protokolle, Messtechnik und Fehlersuche — plus eigene Tabs für Multimeter, Oszilloskop und Netzteil.",
               "tags": [
                 "grundlagen",
                 "schaltplan",
+                "signale",
+                "protokolle",
+                "i2c",
+                "spi",
+                "uart",
                 "messen",
                 "pwm",
                 "fehlersuche",
-                "diodenmodus",
-                "richtwerte",
+                "datenblatt",
+                "oszilloskop",
                 "rechner"
               ],
               "sections": [
@@ -49,12 +54,12 @@
                   "t": "Leistung & PWM"
                 },
                 {
-                  "h": "rechner",
-                  "t": "Rechner"
+                  "h": "signale",
+                  "t": "Signale & Schaltungstechnik"
                 },
                 {
-                  "h": "begriffe",
-                  "t": "Fachbegriffe"
+                  "h": "rechner",
+                  "t": "Rechner"
                 },
                 {
                   "h": "komponenten",
@@ -73,8 +78,20 @@
                   "t": "Mikrocontroller"
                 },
                 {
-                  "h": "messgeraet",
-                  "t": "Multimeter"
+                  "h": "protokolle",
+                  "t": "Protokolle & Busse"
+                },
+                {
+                  "h": "begriffe",
+                  "t": "Fachbegriffe"
+                },
+                {
+                  "h": "datenblatt",
+                  "t": "Datenblatt lesen"
+                },
+                {
+                  "h": "messgeraete",
+                  "t": "Messgeräte im Überblick"
                 },
                 {
                   "h": "messen",
@@ -85,12 +102,20 @@
                   "t": "Fehlersuche"
                 },
                 {
+                  "h": "dmm-hand",
+                  "t": "Handmultimeter"
+                },
+                {
+                  "h": "dmm-tisch",
+                  "t": "Tischmultimeter"
+                },
+                {
                   "h": "oszilloskop",
                   "t": "Oszilloskop"
                 },
                 {
                   "h": "lcrp1",
-                  "t": "LCR-P1"
+                  "t": "Komponententester"
                 },
                 {
                   "h": "netzteil",
@@ -112,25 +137,35 @@
                     "grundlagen",
                     "schaltplan",
                     "leistung",
-                    "rechner",
-                    "begriffe"
+                    "signale",
+                    "rechner"
                   ]
                 },
                 {
-                  "l": "Bauteile",
+                  "l": "Bauteile & Systeme",
                   "sections": [
                     "komponenten",
                     "displays",
                     "motoren",
-                    "mcu"
+                    "mcu",
+                    "protokolle",
+                    "begriffe",
+                    "datenblatt"
                   ]
                 },
                 {
-                  "l": "Messen & Werkzeug",
+                  "l": "Messen & Fehlersuche",
                   "sections": [
-                    "messgeraet",
+                    "messgeraete",
                     "messen",
-                    "fehlersuche",
+                    "fehlersuche"
+                  ]
+                },
+                {
+                  "l": "Meine Geräte",
+                  "sections": [
+                    "dmm-hand",
+                    "dmm-tisch",
                     "oszilloskop",
                     "lcrp1",
                     "netzteil"
@@ -147,7 +182,8 @@
               "alias": {
                 "steckbrett": "praxis",
                 "regeln": "praxis",
-                "boarddiagnose": "fehlersuche"
+                "boarddiagnose": "fehlersuche",
+                "messgeraet": "dmm-hand"
               }
             },
             {
@@ -156,8 +192,8 @@
               "name": "Löten",
               "icon": "🔥",
               "kind": "Referenz",
-              "updated": "2026-08-06",
-              "desc": "Werkzeug, Verbrauchsmaterial und Technik: THT, SMD, Heißluft, Reflow und BGA-Reballing — inklusive Mikroskop-Setup und Fehlerbildern.",
+              "updated": "2026-08-11",
+              "desc": "Werkzeug, Material und Technik: THT, SMD, Heißluft, Reflow und BGA-Reballing — plus eigene Tabs für Lötstation, Heißluft, Heizplatte und Mikroskop.",
               "tags": [
                 "flux",
                 "smd",
@@ -165,7 +201,10 @@
                 "reflow",
                 "reballing",
                 "bga",
-                "mikroskop"
+                "mikroskop",
+                "c245",
+                "c210",
+                "heissluft"
               ],
               "sections": [
                 {
@@ -173,12 +212,8 @@
                   "t": "Start & Workflow"
                 },
                 {
-                  "h": "equipment",
-                  "t": "Equipment"
-                },
-                {
-                  "h": "mikroskop",
-                  "t": "Mikroskop"
+                  "h": "werkzeug",
+                  "t": "Werkzeug-Typen"
                 },
                 {
                   "h": "material",
@@ -227,6 +262,22 @@
                 {
                   "h": "sicherheit",
                   "t": "Sicherheit"
+                },
+                {
+                  "h": "station",
+                  "t": "Lötstation C245/C210"
+                },
+                {
+                  "h": "heissluftstation",
+                  "t": "Heißluftstation"
+                },
+                {
+                  "h": "heizplatte",
+                  "t": "Heizplatte / Vorwärmer"
+                },
+                {
+                  "h": "mikroskop",
+                  "t": "Mikroskop"
                 }
               ],
               "related": [
@@ -240,10 +291,9 @@
                   ]
                 },
                 {
-                  "l": "Werkzeug & Material",
+                  "l": "Grundlagen & Material",
                   "sections": [
-                    "equipment",
-                    "mikroskop",
+                    "werkzeug",
                     "material",
                     "draht",
                     "finish"
@@ -267,13 +317,22 @@
                     "fehler",
                     "sicherheit"
                   ]
+                },
+                {
+                  "l": "Meine Geräte",
+                  "sections": [
+                    "station",
+                    "heissluftstation",
+                    "heizplatte",
+                    "mikroskop"
+                  ]
                 }
               ],
               "alias": {
-                "heizplatte": "heissluft",
                 "regeln": "fehler",
                 "methoden": "start",
-                "workflow": "start"
+                "workflow": "start",
+                "equipment": "werkzeug"
               }
             },
             {
