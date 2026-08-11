@@ -881,14 +881,14 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   .mhead { margin-bottom: 18px; }
 }
 
+.mcontent { font-size: 14.5px; line-height: 1.62; }
 /* ============================================================================
    CONTENT-SYSTEM · gemeinsames Vokabular der migrierten Inhalte
    Die Klassen stammen aus den ursprünglichen Artefakten (def-grid, spec-card,
    ratio-grid, ref-table, glossary, step, …) — hier einmal zentral auf die
    Design-Tokens gezogen, hell wie dunkel.
    ========================================================================== */
-.mcontent { font-size: 14.5px; line-height: 1.62; }
-.mcontent .lede {
+.mx-sys .lede{
   color: var(--muted);
   font-size: 14px;
   margin: -6px 0 18px;
@@ -896,33 +896,33 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
 }
 
 /* --- Karten-Raster (Definitionen, Regeln) --- */
-.def-grid {
+.mx-sys .def-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 12px;
   margin-bottom: 20px;
 }
-.mcontent .card {
+.mx-sys .card{
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow);
   padding: 15px 16px;
 }
-.def-card h3 {
+.mx-sys .def-card h3{
   font-family: var(--display);
   font-weight: 600;
   font-size: 15px;
   margin-bottom: 6px;
 }
-.def-card p { color: var(--muted); font-size: 13px; line-height: 1.55; }
-.def-card .tag {
+.mx-sys .def-card p{ color: var(--muted); font-size: 13px; line-height: 1.55; }
+.mx-sys .def-card .tag{
   display: inline-block;
   margin-top: 10px;
   font: 400 10.5px/1.5 var(--mono);
   color: var(--c);
 }
-.def-card .formula {
+.mx-sys .def-card .formula{
   display: inline-block;
   font: 500 11px/1 var(--mono);
   color: var(--c);
@@ -934,26 +934,26 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
 }
 
 /* --- Ausstattungs-Karten (Pfannen, Öle) --- */
-.spec-card { margin-bottom: 14px; }
-.sc-grid {
+.mx-sys .spec-card{ margin-bottom: 14px; }
+.mx-sys .sc-grid{
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: 18px;
 }
-.sc-head {
+.mx-sys .sc-head{
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 7px;
   flex-wrap: wrap;
 }
-.sc-head h3 {
+.mx-sys .sc-head h3{
   font-family: var(--display);
   font-weight: 600;
   font-size: 17px;
   letter-spacing: -0.01em;
 }
-.sc-badge {
+.mx-sys .sc-badge{
   font: 500 10px/1 var(--mono);
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -963,36 +963,36 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   padding: 4px 9px;
   white-space: nowrap;
 }
-.sc-lede { color: var(--muted); font-size: 13.5px; line-height: 1.6; }
-.spec-rows { display: flex; flex-direction: column; gap: 6px; }
-.spec-row {
+.mx-sys .sc-lede{ color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+.mx-sys .spec-rows{ display: flex; flex-direction: column; gap: 6px; }
+.mx-sys .spec-row{
   display: grid;
   grid-template-columns: 84px minmax(0, 1fr);
   gap: 10px;
   font-size: 12.5px;
 }
-.sr-label {
+.mx-sys .sr-label{
   font: 500 10px/1.7 var(--mono);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--faint);
   white-space: nowrap;
 }
-.sr-label.good { color: #3da66e; }
-.sr-label.bad { color: #d64b3c; }
-:root[data-hbx-theme="dark"] .sr-label.good { color: #4dbb82; }
-:root[data-hbx-theme="dark"] .sr-label.bad { color: #e0604f; }
-.sr-val { color: var(--text); line-height: 1.55; }
-.steps { margin-top: 12px; }
-.steps-cap {
+.mx-sys .sr-label.good{ color: #3da66e; }
+.mx-sys .sr-label.bad{ color: #d64b3c; }
+.mx-sys .sr-label.good{ color: #4dbb82; }
+.mx-sys .sr-label.bad{ color: #e0604f; }
+.mx-sys .sr-val{ color: var(--text); line-height: 1.55; }
+.mx-sys .steps{ margin-top: 12px; }
+.mx-sys .steps-cap{
   font: 500 10px/1 var(--mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--faint);
   margin-bottom: 8px;
 }
-.step-mini { display: flex; gap: 9px; margin-bottom: 6px; font-size: 12.5px; }
-.sm-num {
+.mx-sys .step-mini{ display: flex; gap: 9px; margin-bottom: 6px; font-size: 12.5px; }
+.mx-sys .sm-num{
   flex: 0 0 auto;
   width: 17px;
   height: 17px;
@@ -1002,11 +1002,11 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   font: 600 10px/17px var(--mono);
   text-align: center;
 }
-.sm-text { color: var(--muted); line-height: 1.5; }
+.mx-sys .sm-text{ color: var(--muted); line-height: 1.5; }
 
 /* --- Blöcke mit Zwischenlabel --- */
-.block { margin-bottom: 24px; }
-.section-label {
+.mx-sys .block{ margin-bottom: 24px; }
+.mx-sys .section-label{
   display: flex;
   align-items: center;
   gap: 9px;
@@ -1016,22 +1016,22 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   color: var(--faint);
   margin-bottom: 12px;
 }
-.section-label::after { content: ""; flex: 1 1 auto; height: 1px; background: var(--border); }
+.mx-sys .section-label::after{ content: ""; flex: 1 1 auto; height: 1px; background: var(--border); }
 
 /* --- Kacheln (Kerntemperaturen, Verhältnisse) --- */
-.ratio-grid {
+.mx-sys .ratio-grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 10px;
 }
-.ratio-item {
+.mx-sys .ratio-item{
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 12px 13px;
 }
-.r-label { font: 400 10.5px/1.4 var(--mono); color: var(--faint); }
-.r-value {
+.mx-sys .r-label{ font: 400 10.5px/1.4 var(--mono); color: var(--faint); }
+.mx-sys .r-value{
   font-family: var(--display);
   font-weight: 700;
   font-size: 19px;
@@ -1039,30 +1039,30 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   margin: 4px 0 2px;
   color: var(--c);
 }
-.r-sub { font-size: 11.5px; color: var(--muted); }
+.mx-sys .r-sub{ font-size: 11.5px; color: var(--muted); }
 
 /* --- Schlüssel-Wert-Tabellen --- */
-.ref-table {
+.mx-sys .ref-table{
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   overflow: hidden;
 }
-.ref-row {
+.mx-sys .ref-row{
   display: grid;
   grid-template-columns: minmax(120px, 2fr) minmax(0, 3fr);
   gap: 12px;
   padding: 9px 14px;
   font-size: 13px;
 }
-.ref-row + .ref-row { border-top: 1px solid var(--border); }
-.ref-key { font-weight: 600; }
-.ref-val { color: var(--muted); }
-.ref-val .hot { color: var(--c); font-weight: 600; }
+.mx-sys .ref-row + .ref-row{ border-top: 1px solid var(--border); }
+.mx-sys .ref-key{ font-weight: 600; }
+.mx-sys .ref-val{ color: var(--muted); }
+.mx-sys .ref-val .hot{ color: var(--c); font-weight: 600; }
 
 /* --- Glossar --- */
-.glossary { display: flex; flex-direction: column; }
-.gloss-item {
+.mx-sys .glossary{ display: flex; flex-direction: column; }
+.mx-sys .gloss-item{
   display: grid;
   grid-template-columns: minmax(150px, 1fr) minmax(0, 2.6fr);
   gap: 14px;
@@ -1070,11 +1070,11 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   border-bottom: 1px solid var(--border);
   font-size: 13.5px;
 }
-.gloss-term { font-weight: 600; }
-.gloss-def { color: var(--muted); }
+.mx-sys .gloss-term{ font-weight: 600; }
+.mx-sys .gloss-def{ color: var(--muted); }
 
 /* --- Hinweise --- */
-.note {
+.mx-sys .note{
   display: flex;
   gap: 0.7em;
   border: 1px solid color-mix(in srgb, var(--c) 34%, var(--border));
@@ -1085,39 +1085,39 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   font-size: 13.5px;
   line-height: 1.6;
 }
-.note::before { content: "💡"; flex: 0 0 auto; }
+.mx-sys .note::before{ content: "💡"; flex: 0 0 auto; }
 
 /* --- Rezept: Zutaten + Schritte (Steak) --- */
-.ingredients {
+.mx-sys .ingredients{
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 14px 18px;
   margin-bottom: 22px;
 }
-.ingredients ul { margin: 0; padding-left: 18px; }
-.ingredients li { margin: 4px 0; font-size: 13.5px; }
-.step {
+.mx-sys .ingredients ul{ margin: 0; padding-left: 18px; }
+.mx-sys .ingredients li{ margin: 4px 0; font-size: 13.5px; }
+.mx-sys .step{
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
   gap: 14px;
   padding: 13px 0;
   border-bottom: 1px solid var(--border);
 }
-.step:last-of-type { border-bottom: 0; }
-.step-num {
+.mx-sys .step:last-of-type{ border-bottom: 0; }
+.mx-sys .step-num{
   font: 600 15px/1 var(--mono);
   color: var(--c);
   padding-top: 2px;
 }
-.step-content h3 {
+.mx-sys .step-content h3{
   font-family: var(--display);
   font-weight: 600;
   font-size: 15px;
   margin-bottom: 4px;
 }
-.step-content p { color: var(--muted); font-size: 13.5px; line-height: 1.6; }
-.pull-quote {
+.mx-sys .step-content p{ color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+.mx-sys .pull-quote{
   display: flex;
   gap: 12px;
   margin: 20px 0;
@@ -1126,45 +1126,46 @@ html.no-js .msec { display: block; margin-bottom: 40px; }
   background: var(--surface);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
-.pull-quote .mark { font-family: var(--display); font-size: 26px; color: var(--c); line-height: 1; }
-.pull-quote p { font-size: 13.5px; color: var(--muted); font-style: italic; }
-.temp-card {
+.mx-sys .pull-quote .mark{ font-family: var(--display); font-size: 26px; color: var(--c); line-height: 1; }
+.mx-sys .pull-quote p{ font-size: 13.5px; color: var(--muted); font-style: italic; }
+.mx-sys .temp-card{
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 18px 20px;
   margin-top: 22px;
 }
-.temp-card h4 {
+.mx-sys .temp-card h4{
   font: 600 10.5px/1 var(--ui);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--faint);
   margin-bottom: 14px;
 }
-.temp-grid {
+.mx-sys .temp-grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
   gap: 10px;
 }
-.temp-item {
+.mx-sys .temp-item{
   text-align: center;
   background: var(--surface-2);
   border-radius: var(--radius-sm);
   padding: 11px 8px;
 }
-.temp-item .level { font: 500 10px/1.4 var(--mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
-.temp-item .deg { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--c); margin: 3px 0 6px; }
-.temp-divider { height: 1px; background: var(--border); margin: 0 12px 6px; }
-.temp-item .sub-label { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint); }
-.temp-item .sub-deg { font: 600 12.5px/1.4 var(--mono); color: var(--text); }
-.temp-note { margin-top: 12px; font-size: 11.5px; color: var(--faint); }
+.mx-sys .temp-item .level{ font: 500 10px/1.4 var(--mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.mx-sys .temp-item .deg{ font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--c); margin: 3px 0 6px; }
+.mx-sys .temp-divider{ height: 1px; background: var(--border); margin: 0 12px 6px; }
+.mx-sys .temp-item .sub-label{ font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint); }
+.mx-sys .temp-item .sub-deg{ font: 600 12.5px/1.4 var(--mono); color: var(--text); }
+.mx-sys .temp-note{ margin-top: 12px; font-size: 11.5px; color: var(--faint); }
 
 @media (max-width: 760px) {
-  .sc-grid { grid-template-columns: 1fr; gap: 12px; }
-  .gloss-item { grid-template-columns: 1fr; gap: 3px; }
-  .ref-row { grid-template-columns: 1fr; gap: 2px; }
+  .mx-sys .sc-grid{ grid-template-columns: 1fr; gap: 12px; }
+  .mx-sys .gloss-item{ grid-template-columns: 1fr; gap: 3px; }
+  .mx-sys .ref-row{ grid-template-columns: 1fr; gap: 2px; }
 }
+
 
 /* Gruppenlabels + Überschriften-Subnav in der Modul-Sidebar */
 .msd-gl {

@@ -251,10 +251,10 @@
 .mx-elektronik-101 .foldbar button:hover{color:var(--text);background:var(--surface-2)}
 
 /* Kernaussage */
-.mx-elektronik-101 .kurz{display:flex;gap:.7em;align-items:flex-start;border:1px solid var(--accent-border);
+.mx-elektronik-101 .kurz{display:block;border:1px solid var(--accent-border);
   background:var(--accent-soft);border-radius:var(--radius-sm);padding:11px 15px;margin:.5rem 0 .9rem;
   font-size:13.5px;line-height:1.6;color:var(--accent-ink)}
-.mx-elektronik-101 .kurz::before{content:"💡";flex:0 0 auto;font-size:15px;line-height:1.35}
+.mx-elektronik-101 .kurz::before{content:"💡";margin-right:.55em}
 .mx-elektronik-101 .kurz b{font-weight:700}
 
 /* Sidebar: Gliederungsebene sichtbar machen */

@@ -222,7 +222,7 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
             <p>{mod.desc}</p>
           </header>
 
-          <div class={`mcontent mx-${mod.id}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
+          <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
             {mod.sections.map((s) => {
               const C = secComp(mod.id, s.h);
               return (
