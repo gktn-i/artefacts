@@ -41,6 +41,20 @@
 <p>Ein Servo braucht keinen externen Treiber, die Elektronik sitzt schon drin. Es reicht das Steuersignal vom Mikrocontroller plus eine eigene Stromversorgung.</p></div>
 </div>
 
+<h2>Die Steuersignale konkret</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Motorart</th><th>Signal</th><th>Konkrete Werte</th><th>Was das bewirkt</th></tr></thead>
+<tbody>
+<tr><td><b>Gleichstrommotor</b></td><td>PWM + Richtung</td><td>PWM-Frequenz <b>1–20 kHz</b>, Tastgrad 0–100 %</td><td>Tastgrad = Drehzahl. Unter 1 kHz pfeift der Motor hörbar</td></tr>
+<tr><td><b>Servo (Standard)</b></td><td>Impulsbreite</td><td>Periode <b>20 ms</b> (50 Hz) · Impuls <b>1,0 ms</b> = 0° · <b>1,5 ms</b> = Mitte · <b>2,0 ms</b> = 180°</td><td>Nur die <b>Breite</b> zählt, nicht die Amplitude. Viele Servos gehen etwas darüber hinaus (0,5–2,5 ms)</td></tr>
+<tr><td><b>Continuous-Servo</b></td><td>Impulsbreite</td><td>1,5 ms = Stillstand, darunter/darüber = Drehrichtung und Tempo</td><td>Mittelstellung muss oft per Poti getrimmt werden</td></tr>
+<tr><td><b>Schrittmotor</b></td><td>Step + Direction</td><td>Ein Impuls = ein (Mikro-)Schritt · Richtung als High/Low</td><td>Drehzahl = Impulsrate. Zu schnelle Beschleunigung lässt Schritte verlieren</td></tr>
+<tr><td><b>Schrittmotor: Mikroschritte</b></td><td>Jumper am Treiber</td><td>1/1 · 1/2 · 1/4 · 1/8 · 1/16 · 1/32</td><td>Feiner und leiser, aber weniger Haltemoment je Schritt und mehr Impulse nötig</td></tr>
+<tr><td><b>BLDC über ESC</b></td><td>wie Servo</td><td>1,0 ms = Stopp · 2,0 ms = Vollgas</td><td>Vor dem ersten Start muss der ESC oft <b>kalibriert</b> werden (Vollgas–Stopp anlernen)</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Schrittmotorstrom einstellen (VREF):</b> Bei den gängigen Treibern gilt <span class="formula">I<sub>max</sub> = V<sub>REF</sub> / (8 × R<sub>sense</sub>)</span> — der Sense-Widerstand steht auf dem Modul (typisch 0,1 Ω). Vorgehen: Motorstrom aus dem Datenblatt nehmen, <b>70–80 %</b> davon als Ziel setzen, Treiber ohne Motor mit Strom versorgen und die Spannung am Poti gegen Masse messen. Zu hoch = Motor und Treiber werden heiß, zu niedrig = Schrittverluste unter Last.</div>
+
 <h2>Worauf achten</h2>
 <div class="card">
 <div class="rule"><span class="ico">🚫</span><div><b>Nie direkt am Mikrocontroller-Pin.</b> Immer ein Treiber dazwischen, sonst stirbt der Pin am zu hohen Strom.</div></div>

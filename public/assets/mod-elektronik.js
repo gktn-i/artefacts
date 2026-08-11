@@ -322,6 +322,111 @@ out.textContent=`Ausgang ≈ ${vout.toFixed(3)} V`;
 ["vt-in","vt-r1","vt-r2"].forEach(id=>document.getElementById(id).addEventListener("input",calcVT));
 calcVT();
 
+/* ---------- RECHNER: gemeinsame Helfer ---------- */
+const E12=[10,12,15,18,22,27,33,39,47,56,68,82];
+/* naechster Normwert der E12-Reihe, wahlweise auf- oder abgerundet */
+function e12near(r,up){
+  if(!(r>0))return null;
+  let lo=null,hi=null;
+  for(let dec=-2;dec<9;dec++){for(const e of E12){const v=e*Math.pow(10,dec);
+    if(v<=r+1e-12)lo=v; if(hi===null&&v>=r-1e-12)hi=v;}}
+  return up?(hi===null?lo:hi):(lo===null?hi:lo);
+}
+function fmtR(v){
+  if(v===null||!isFinite(v))return"—";
+  const nice=x=>String(parseFloat(x.toPrecision(4)));
+  if(v>=1e6)return nice(v/1e6)+" MΩ";
+  if(v>=1e3)return nice(v/1e3)+" kΩ";
+  return nice(v)+" Ω";
+}
+/* verdrahtet eine Rechenfunktion an ihre Eingabefelder; fehlt ein Feld, passiert nichts */
+function wire(ids,fn){
+  const els=ids.map(id=>document.getElementById(id));
+  if(els.some(e=>!e))return;
+  els.forEach(e=>e.addEventListener("input",fn));
+  els.forEach(e=>{if(e.tagName==="SELECT")e.addEventListener("change",fn)});
+  fn();
+}
+
+/* ---------- SPANNUNGSTEILER: Hinweis zur Belastbarkeit ---------- */
+function noteVT(){
+  const n=document.getElementById("vt-note");if(!n)return;
+  const vin=parseFloat(document.getElementById("vt-in").value);
+  const r1=parseFloat(document.getElementById("vt-r1").value);
+  const r2=parseFloat(document.getElementById("vt-r2").value);
+  if(isNaN(vin)||isNaN(r1)||isNaN(r2)||(r1+r2)<=0){n.textContent="";return}
+  const i=vin/(r1+r2), p=vin*i;
+  n.textContent=`Querstrom durch den Teiler: ${(i*1000).toFixed(2)} mA · Verlustleistung gesamt ${(p*1000).toFixed(1)} mW. `
+    +`Damit der Ausgang stabil bleibt, muss der angeschlossene Verbraucher mindestens ${fmtR(r2*10)} haben (Zehnfaches von R2) — `
+    +`sonst bricht die Spannung unter Last ein.`;
+}
+wire(["vt-in","vt-r1","vt-r2"],noteVT);
+
+/* ---------- RECHNER: RC-GLIED ---------- */
+function calcRC(){
+  const out=document.getElementById("rc-out"),note=document.getElementById("rc-note");
+  const r=parseFloat(document.getElementById("rc-r").value);
+  const c=parseFloat(document.getElementById("rc-c").value)*parseFloat(document.getElementById("rc-cu").value);
+  if(!(r>0)||!(c>0)){out.textContent="…";note.textContent="";return}
+  const tau=r*c, fg=1/(2*Math.PI*r*c);
+  const t=s=>s>=1?s.toFixed(2)+" s":s>=1e-3?(s*1e3).toFixed(2)+" ms":(s*1e6).toFixed(1)+" µs";
+  const f=x=>x>=1e6?(x/1e6).toFixed(2)+" MHz":x>=1e3?(x/1e3).toFixed(2)+" kHz":x.toFixed(2)+" Hz";
+  out.textContent=`τ = ${t(tau)}  ·  Grenzfrequenz f_g = ${f(fg)}`;
+  note.textContent=`Nach 1 τ ist der Kondensator auf 63 % geladen, nach 5 τ (${t(tau*5)}) praktisch voll. `
+    +`Als Tiefpass bleibt bei ${f(fg)} noch 70 % übrig, darüber sinkt es um Faktor 10 je Faktor 10 Frequenz. `
+    +`Als Entprellung sind 20–50 ms üblich.`;
+}
+wire(["rc-r","rc-c","rc-cu"],calcRC);
+
+/* ---------- RECHNER: VERLUSTLEISTUNG ---------- */
+function calcPW(){
+  const out=document.getElementById("pw-out"),note=document.getElementById("pw-note");
+  const uin=parseFloat(document.getElementById("pw-uin").value);
+  const uout=parseFloat(document.getElementById("pw-uout").value);
+  const i=parseFloat(document.getElementById("pw-i").value)/1000;
+  if(isNaN(uin)||isNaN(uout)||isNaN(i)){out.textContent="…";note.textContent="";return}
+  const du=uin-uout;
+  if(du<0){out.textContent="Die Spannung dahinter kann nicht größer sein als davor";note.textContent="";return}
+  const p=du*i;
+  out.textContent=`Spannungsabfall ${du.toFixed(2)} V × ${(i*1000).toFixed(0)} mA  →  ${p<1?(p*1000).toFixed(0)+" mW":p.toFixed(2)+" W"} Wärme`;
+  const wirk=uin>0?(uout/uin*100):0;
+  let rat;
+  if(p<=0.25)rat="Unkritisch — ein kleines Gehäuse ohne Kühlkörper reicht.";
+  else if(p<=1)rat="Wird deutlich warm. Kühlfläche vorsehen oder auf ein größeres Gehäuse gehen.";
+  else if(p<=3)rat="Kühlkörper nötig. Ohne Kühlung schaltet ein Linearregler thermisch ab.";
+  else rat="Zu viel für einen Linearregler — hier gehört ein Schaltregler hin.";
+  note.textContent=`Wirkungsgrad bei einem Linearregler: ${wirk.toFixed(0)} %. ${rat} `
+    +`Faustregel: Bauteile nur bis zur halben Datenblatt-Angabe belasten (Tab Datenblatt lesen).`;
+}
+wire(["pw-uin","pw-uout","pw-i"],calcPW);
+
+/* ---------- RECHNER: WIDERSTAENDE KOMBINIEREN ---------- */
+function calcRR(){
+  const out=document.getElementById("rr-out");
+  const a=parseFloat(document.getElementById("rr-1").value);
+  const b=parseFloat(document.getElementById("rr-2").value);
+  if(!(a>0)||!(b>0)){out.textContent="…";return}
+  out.textContent=`Reihe: ${fmtR(a+b)}   ·   Parallel: ${fmtR(a*b/(a+b))}`;
+}
+wire(["rr-1","rr-2"],calcRR);
+
+/* ---------- RECHNER: BASISWIDERSTAND ---------- */
+function calcTB(){
+  const out=document.getElementById("tb-out"),note=document.getElementById("tb-note");
+  const u=parseFloat(document.getElementById("tb-u").value);
+  const il=parseFloat(document.getElementById("tb-i").value)/1000;
+  const h=parseFloat(document.getElementById("tb-h").value);
+  if(!(u>0.7)||!(il>0)||!(h>0)){out.textContent=u<=0.7?"Pin-Spannung muss über 0,7 V liegen":"…";note.textContent="";return}
+  const ib=il/h, r=(u-0.7)/ib, norm=e12near(r,false);
+  out.textContent=`Basisstrom ${(ib*1000).toFixed(2)} mA  →  R_B ≈ ${fmtR(r)}  →  Normwert ${fmtR(norm)}`;
+  const ibReal=(u-0.7)/norm;
+  note.textContent=`Hier wird auf den nächstkleineren Normwert abgerundet, damit der Basisstrom eher zu groß als zu klein ist — `
+    +`nur ein voll durchgeschalteter Transistor bleibt kühl. Realer Basisstrom: ${(ibReal*1000).toFixed(2)} mA, `
+    +`Belastung des steuernden Pins ebenfalls ${(ibReal*1000).toFixed(2)} mA (Mikrocontroller-Pins vertragen typisch 20–40 mA). `
+    +`Bei einem MOSFET entfällt diese Rechnung: dort genügen 100–220 Ω in die Gate-Leitung und 10–100 kΩ vom Gate nach Masse.`;
+}
+wire(["tb-u","tb-i","tb-h"],calcTB);
+
 /* ---------- VERGLEICHSMATRIZEN ---------- */
 function rateColor(v){if(v<=3)return"var(--rate-bad)";if(v<=6)return"var(--rate-mid)";return"var(--rate-good)";}
 function renderRating(containerId,headers,rows){

@@ -43,8 +43,42 @@
 <div class="rule"><span class="ico">〰️</span><div><b>PWM-Ausgänge:</b> schnelles An/Aus, um Helligkeit, Drehzahl oder Servowinkel stufenlos zu steuern.</div></div>
 <div class="rule"><span class="ico">⚡</span><div><b>Logikpegel 3,3 V vs. 5 V:</b> der wichtigste Stolperstein. ESP32 und Pico vertragen an ihren Pins <b>nur 3,3 V</b>. 5 V von einem Arduino oder Sensor direkt drauf kann den Pin zerstören. Dann Pegelwandler oder Spannungsteiler nutzen.</div></div>
 <div class="rule"><span class="ico">🔌</span><div><b>Pin-Strom ist begrenzt:</b> mit ~20 mA pro Pin planen, 40 mA ist das absolute Maximum. Motoren, LED-Streifen oder Relais nie direkt anschließen, immer über Transistor/MOSFET oder Treiber (Schaltung: Tab <a href="#schaltplan">Schaltplan</a>).</div></div>
-<div class="rule"><span class="ico">🔗</span><div><b>I²C, SPI, UART</b> sind die Datenleitungen zu Displays, Sensoren und Modulen (erklärt im Tab <a href="#displays">Displays</a>). Gemeinsame Masse nicht vergessen.</div></div>
+<div class="rule"><span class="ico">🔗</span><div><b>I²C, SPI, UART</b> sind die Datenleitungen zu Displays, Sensoren und Modulen — vollständig im Tab <a href="#protokolle">Protokolle &amp; Busse</a>. Gemeinsame Masse nicht vergessen.</div></div>
 </div>
+
+<h3>Sonderpins: die, die dich überraschen</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Pin-Typ</th><th>Besonderheit</th><th>Konsequenz</th></tr></thead>
+<tbody>
+<tr><td><b>Boot-/Strapping-Pins</b></td><td>Ihr Zustand <b>beim Einschalten</b> entscheidet über den Startmodus</td><td>Nichts anhängen, was sie beim Start nach Low oder High zieht — sonst startet das Board nicht oder landet im Flash-Modus</td></tr>
+<tr><td><b>Nur-Eingang-Pins</b></td><td>Können nicht als Ausgang arbeiten, haben oft <b>keinen</b> internen Pull-up</td><td>Externer Pull-up nötig; als Ausgang schlicht wirkungslos</td></tr>
+<tr><td><b>Pins mit ADC 2</b> (ESP32)</td><td>Nicht nutzbar, solange WLAN aktiv ist</td><td>Analoge Messungen auf die erste ADC-Einheit legen</td></tr>
+<tr><td><b>Pins der internen Flash-Anbindung</b></td><td>Fest mit dem Speicherchip verbunden</td><td>Berühren führt zum sofortigen Absturz — im Pinout als „nicht verwenden" markiert</td></tr>
+<tr><td><b>Pins mit LED oder Pull-up on board</b></td><td>Auf dem Board bereits beschaltet</td><td>Der Ruhezustand ist dadurch vorgegeben</td></tr>
+<tr><td><b>Open-Drain-fähige Pins</b></td><td>Können nur nach Low ziehen</td><td>Nötig für I²C und geteilte Interrupt-Leitungen</td></tr>
+<tr><td><b>DAC-Pins</b></td><td>Geben eine echte analoge Spannung aus (nicht PWM)</td><td>Nur wenige Controller haben sie, meist 8 Bit</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Der Pinout-Plan des konkreten Boards ist Pflichtlektüre</b>, bevor du Pins verteilst. „GPIO 12" bedeutet auf zwei Boards mit demselben Chip nicht dasselbe, und die Sonderpins unterscheiden sich je Variante. Ein Board, das nach dem Anschließen eines Sensors nicht mehr startet, hat fast immer ein Strapping-Pin-Problem.</div>
+
+<h3>Begriffe der Mikrocontroller-Welt</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Begriff</th><th>Was es ist</th><th>Wofür du es brauchst</th></tr></thead>
+<tbody>
+<tr><td><b>Interrupt</b></td><td>Ein Ereignis unterbricht das laufende Programm und ruft sofort eine kurze Routine auf</td><td>Für alles, was <b>nicht warten</b> darf: Drehgeber, Zähleingänge, Aufwachen aus dem Schlaf</td></tr>
+<tr><td><b>Timer</b></td><td>Zähler im Chip, der unabhängig vom Programm läuft</td><td>Erzeugt PWM, misst Zeiten, löst regelmäßige Aufgaben aus</td></tr>
+<tr><td><b>Watchdog</b></td><td>Zähler, der das Board zurücksetzt, wenn das Programm ihn nicht regelmäßig zurücksetzt</td><td>Rettet hängende Geräte automatisch — bei Dauerbetrieb einschalten</td></tr>
+<tr><td><b>Brown-out-Reset</b></td><td>Reset, wenn die Versorgungsspannung unter eine Schwelle fällt</td><td>Verhindert undefiniertes Verhalten bei schwacher Versorgung</td></tr>
+<tr><td><b>Bootloader</b></td><td>Kleines Programm im Chip, das neuen Code über USB oder UART entgegennimmt</td><td>Deshalb reicht ein USB-Kabel zum Programmieren — kein Programmiergerät nötig</td></tr>
+<tr><td><b>Deep Sleep</b></td><td>Fast alles wird abgeschaltet, nur ein Weckmechanismus bleibt aktiv</td><td>Batteriebetrieb: statt einigen mA nur noch µA. Aufwecken per Timer oder Pin</td></tr>
+<tr><td><b>ADC-Auflösung</b></td><td>10 Bit = 1024 Stufen, 12 Bit = 4096 Stufen</td><td>Bestimmt die feinste messbare Spannungsänderung — Beschaltung im Tab <a href="#signale">Signale</a></td></tr>
+<tr><td><b>DMA</b></td><td>Datentransport ohne Beteiligung des Rechenkerns</td><td>Displays und Audio laufen dadurch flüssig, während das Programm weiterrechnet</td></tr>
+<tr><td><b>Register</b></td><td>Direkte Steuerzelle der Hardware im Chip</td><td>Bibliotheken schreiben letztlich Register — wichtig, wenn eine Bibliothek nicht reicht</td></tr>
+<tr><td><b>RTOS</b></td><td>Kleines Echtzeit-Betriebssystem für mehrere parallele Aufgaben</td><td>Auf ESP32 bereits vorhanden; sinnvoll, sobald Netzwerk und Steuerung gleichzeitig laufen</td></tr>
+<tr><td><b>Firmware flashen</b></td><td>Programm in den Flash-Speicher schreiben</td><td>Per USB (Bootloader), UART oder Debug-Schnittstelle (<a href="#protokolle">SWD/JTAG</a>)</td></tr>
+<tr><td><b>Pin-Multiplexing</b></td><td>Ein Pin kann mehrere Funktionen haben, aber nur eine gleichzeitig</td><td>Deshalb kollidieren manche Kombinationen aus I²C, SPI und PWM</td></tr>
+</tbody>
+</table></div>
 
 <h2>Speicher & Stromversorgung kurz</h2>
 <div class="grid2">

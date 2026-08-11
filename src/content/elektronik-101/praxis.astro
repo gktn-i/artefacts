@@ -8,7 +8,7 @@
 <div class="rule"><span class="ico">🚫</span><div><b>Nie Plus und Minus direkt verbinden.</b> Kurzschluss. Vor dem Einschalten Verdrahtung kontrollieren.</div></div>
 <div class="rule"><span class="ico">🔗</span><div><b>Gemeinsame Masse.</b> Sobald mehrere Baugruppen zusammenarbeiten, müssen alle GND/Minus verbunden sein, sonst funktionieren Signale nicht.</div></div>
 <div class="rule"><span class="ico">⚙️</span><div><b>Motor/Relais/Spule braucht Freilaufdiode.</b> Beim Abschalten erzeugt eine Spule eine Spannungsspitze, die Transistoren killt. Diode parallel schützt.</div></div>
-<div class="rule"><span class="ico">🧲</span><div><b>ESD beachten (statische Aufladung).</b> Empfindliche Chips (MOSFET, Mikrocontroller) vorher entladen: kurz geerdetes Metall anfassen.</div></div>
+<div class="rule"><span class="ico">🧲</span><div><b>ESD beachten (statische Aufladung).</b> Empfindliche Chips vorher entladen: kurz geerdetes Metall anfassen. Details im Abschnitt <b>ESD</b> weiter unten.</div></div>
 <div class="rule"><span class="ico">📄</span><div><b>Im Zweifel ins Datenblatt.</b> Grenzwerte ("Absolute Maximum Ratings") nie überschreiten.</div></div>
 <div class="rule"><span class="ico">🔋</span><div><b>Li-Ion / LiPo mit Respekt.</b> Nie tiefentladen, nie über 4,2 V/Zelle laden, nie mechanisch beschädigen. Schutzschaltung (BMS) verwenden.</div></div>
 </div>
@@ -32,12 +32,34 @@
 <h2>Good to know: Praxis-Wissen</h2>
 <div class="card">
 <div class="rule"><span class="ico">🎨</span><div><b>Widerstands-Farbcode</b> liest man von der Seite, wo die Ringe näher am Rand sitzen. (Decoder im Tab <a href="#rechner">Rechner</a>.)</div></div>
-<div class="rule"><span class="ico">🔢</span><div><b>SMD-Beschriftung:</b> "103" heißt 10 + 3 Nullen = 10 kΩ. Alle Code-Varianten (auch EIA-96 und Kondensatoren): <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</div></div>
-<div class="rule"><span class="ico">📐</span><div><b>E-Reihen:</b> Widerstände gibt es nur in genormten Stufen (E12: 10, 12, 15, 18, 22…). Krumme Wunschwerte gibt es selten, nächsten Normwert nehmen.</div></div>
-<div class="rule"><span class="ico">🟦</span><div><b>Transistor als Schalter:</b> kleiner Strom (Basis/Gate) schaltet großen Strom — Standard, um mit einem MCU-Pin Motor/Relais zu schalten. MOSFET (Spannung am Gate) für hohe Ströme, Bipolar (Strom in die Basis) für kleine Signale. Schaltung: Tab <a href="#schaltplan">Schaltplan</a>.</div></div>
+<div class="rule"><span class="ico">🔢</span><div><b>SMD-Beschriftung:</b> „103" heißt 10 + 3 Nullen = 10 kΩ. Alle Code-Varianten für Widerstände, Kondensatoren und Spulen: Tab <a href="#rechner">Rechner</a>. EIA-96 und gepolte Bauformen: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</div></div>
+<div class="rule"><span class="ico">📐</span><div><b>E-Reihen:</b> Widerstände gibt es nur in genormten Stufen (E12: 10, 12, 15, 18, 22…). Krumme Wunschwerte gibt es selten — nächsten Normwert nehmen, alle Reihen im Tab <a href="#rechner">Rechner</a>.</div></div>
+<div class="rule"><span class="ico">🟦</span><div><b>Transistor als Schalter:</b> kleiner Strom (Basis/Gate) schaltet großen Strom — Standard, um mit einem MCU-Pin Motor/Relais zu schalten. MOSFET (Spannung am Gate) für hohe Ströme, Bipolar (Strom in die Basis) für kleine Signale. Dimensionierung und Beschaltung: Tab <a href="#signale">Signale &amp; Schaltungstechnik</a>.</div></div>
 <div class="rule"><span class="ico">📉</span><div><b>Linearregler (7805) verheizt die Differenz</b> als Wärme: 12 V → 5 V bei 1 A = 7 W Hitze. Bei großem Abstand lieber Schaltregler (Buck) nehmen.</div></div>
 <div class="rule"><span class="ico">🧮</span><div><b>Kondensator glättet, Spule filtert.</b> Großer Elko am Reglereingang/-ausgang stabilisiert die Versorgung. 100 nF Keramik neben jedem IC.</div></div>
 </div>
+
+<h2>ESD: die Gefahr, die man nicht bemerkt</h2>
+<p>Beim Laufen über Teppich lädst du dich auf mehrere <b>tausend Volt</b> auf. Spürbar ist ein Schlag erst ab etwa 3 000 V — Halbleiter nehmen aber schon ab wenigen hundert Volt Schaden. Deshalb ist der gefährlichste ESD-Schaden der, den du nicht bemerkst.</p>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Was passiert</th><th>Folge</th><th>Woran du es merkst</th></tr></thead>
+<tbody>
+<tr><td><b>Harter Schaden</b></td><td>Bauteil sofort tot</td><td>Funktioniert nicht — ärgerlich, aber eindeutig</td></tr>
+<tr><td><b>Latenter Schaden</b></td><td>Die Isolierschicht im Chip ist vorgeschädigt</td><td><b>Läuft zunächst</b> und fällt Wochen später aus. Der teuerste Fall</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Maßnahme</th><th>Aufwand</th><th>Wann nötig</th></tr></thead>
+<tbody>
+<tr><td><b>Vor dem Anfassen geerdetes Metall berühren</b> (Heizung, Gehäuse eines geerdeten Geräts)</td><td>keiner</td><td><b>Immer</b> — das Minimum</td></tr>
+<tr><td><b>Bauteile in der antistatischen Tüte lassen</b>, bis sie verbaut werden</td><td>keiner</td><td>Immer. Schwarze und silbrige Tüten sind ESD-Verpackung, klare nicht</td></tr>
+<tr><td><b>ESD-Matte + Armband</b> (über 1 MΩ geerdet)</td><td>gering</td><td>Bei MOSFETs, ICs, Speichern, ausgebauten Boards</td></tr>
+<tr><td><b>Luftfeuchtigkeit</b> über 40 %</td><td>keiner</td><td>Im Winter mit trockener Heizungsluft ist das Risiko am größten</td></tr>
+<tr><td><b>Keine Kunststofftüten, kein Styropor</b> auf dem Arbeitsplatz</td><td>keiner</td><td>Immer — beide laden sich stark auf</td></tr>
+<tr><td><b>Chips an den Kanten anfassen</b>, nicht an den Pins</td><td>keiner</td><td>Immer</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Das Armband wird nie direkt geerdet.</b> Es enthält einen Widerstand von etwa 1 MΩ, damit im Fehlerfall kein gefährlicher Strom über dich fließt. Ein Armband ohne diesen Widerstand ist ein Sicherheitsrisiko — nie selbst überbrücken. Und: Ein ESD-Armband hilft <b>nicht</b> gegen Netzspannung, es ist ausschließlich ein Ableiter für statische Ladung.</div>
 
 <h2>Steckbrett (Breadboard)</h2>
 <p>Die schnellste Art, eine Schaltung aufzubauen, <b>ohne zu löten</b>. Du steckst Bauteile und Drähte einfach in die Löcher, kannst alles wieder umstecken und mehrfach verwenden. Perfekt zum Ausprobieren, bevor etwas fest verlötet wird.</p>

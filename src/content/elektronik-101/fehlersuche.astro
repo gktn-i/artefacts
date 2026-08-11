@@ -245,6 +245,7 @@
 </ol></div>
 
 <h3>Grenzen des Multimeters</h3>
+<div class="note">Feinere Werkzeuge für dieselbe Suche: <a href="#dmm-tisch">Tischmultimeter</a> (Milliohm-Ortung, µA-Ruhestrom), <a href="#netzteil">Labornetzteil</a> (Strom begrenzt einspeisen, defektes Bauteil wird warm), <a href="#oszilloskop">Oszilloskop</a> (Takt, Ripple, Einbrüche) und <a href="#lcrp1">Komponententester</a> (ESR ausgelöteter Elkos).</div>
 <div class="card">
 <p>Ein Multimeter zeigt nur <b>langsame, gemittelte</b> Werte. Es versagt bei allem, was sich schnell ändert: <b>PWM</b> (zeigt nur den Durchschnitt), <b>I²C/SPI/UART-Daten</b>, <b>Quarz/Takt</b> und kurzen Einbrüchen. <b>Sleep-Strom im µA-Bereich</b> geht mit einem Tisch-DMM (eigener µA-Bereich) — aber nur der <i>ruhende</i> Wert; wechselt der Mikrocontroller zwischen Schlaf und Aufwachen hin und her, braucht es einen Strommess-Adapter oder ein Oszilloskop am Shunt.</p>
 <p style="margin-bottom:0"><b>Faustregel:</b> steht ein Wert still → Multimeter. Datensignal auf einem Bus → Logic Analyzer. Geht es um die Signalform → <a href="#oszilloskop">Oszilloskop</a>. Für heiße Stellen: eine <b>Wärmebildkamera</b> findet das kurzschließende Bauteil in Sekunden.</p>

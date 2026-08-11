@@ -1,4 +1,4 @@
-<div class="kurz"><b>Vier Rechner:</b> LED-Vorwiderstand · Ohmsches Gesetz · Widerstands-Farbcode · Spannungsteiler — Werte eintragen, Ergebnis kommt mit Normwert-Empfehlung.</div>
+<div class="kurz"><b>Acht Rechner und die Normwert-Tabellen.</b> Werte eintragen, Ergebnis erscheint sofort — inklusive Normwert-Empfehlung und Hinweis zur Belastbarkeit. Die Formeln dahinter stehen im Tab <a class="goto" href="#grundlagen">Basics</a>, die Schaltungen im Tab <a class="goto" href="#signale">Signale &amp; Schaltungstechnik</a>.</div>
 <h2>LED-Vorwiderstand berechnen</h2>
 <div class="card">
 <p class="note">Formel: R = (Versorgung − LED-Spannung) / LED-Strom. Typisch: rote LED ~2,0 V, weiß/blau ~3,2 V, Strom 10 bis 20 mA.</p>
@@ -45,4 +45,94 @@
 <div><label>R2 unten (Ω)</label><input type="number" id="vt-r2" value="2000" step="any"></div>
 </div>
 <div class="big-out" id="vt-out"></div>
+<p class="note" id="vt-note"></p>
 </div>
+
+<h2>RC-Glied: Zeitkonstante und Grenzfrequenz</h2>
+<div class="card">
+<p class="note">τ = R × C bestimmt die Verzögerung, f<sub>g</sub> = 1 / (2 π R C) die Filterwirkung. Beides ist dieselbe Schaltung — nur zwei Blickwinkel.</p>
+<div class="calc">
+<div><label>R (Ω)</label><input type="number" id="rc-r" value="10000" step="any"></div>
+<div><label>C (Wert)</label><input type="number" id="rc-c" value="100" step="any"></div>
+<div><label>Einheit</label><select id="rc-cu"><option value="1e-12">pF</option><option value="1e-9" selected>nF</option><option value="1e-6">µF</option></select></div>
+</div>
+<div class="big-out" id="rc-out"></div>
+<p class="note" id="rc-note"></p>
+</div>
+
+<h2>Verlustleistung und Kühlung</h2>
+<div class="card">
+<p class="note">Für Linearregler, Transistoren und Widerstände: Die Spannung, die über dem Bauteil abfällt, mal dem Strom, der hindurchfließt — das wird zu Wärme.</p>
+<div class="calc">
+<div><label>Spannung davor (V)</label><input type="number" id="pw-uin" value="12" step="0.1"></div>
+<div><label>Spannung dahinter (V)</label><input type="number" id="pw-uout" value="5" step="0.1"></div>
+<div><label>Strom (mA)</label><input type="number" id="pw-i" value="500" step="1"></div>
+</div>
+<div class="big-out" id="pw-out"></div>
+<p class="note" id="pw-note"></p>
+</div>
+
+<h2>Widerstände kombinieren</h2>
+<div class="card">
+<p class="note">Reihe: R = R1 + R2 · Parallel: 1/R = 1/R1 + 1/R2. Nützlich, wenn der gerechnete Wert nicht in der Schublade liegt.</p>
+<div class="calc">
+<div><label>R1 (Ω)</label><input type="number" id="rr-1" value="1000" step="any"></div>
+<div><label>R2 (Ω)</label><input type="number" id="rr-2" value="2200" step="any"></div>
+</div>
+<div class="big-out" id="rr-out"></div>
+</div>
+
+<h2>Basiswiderstand für einen Transistor</h2>
+<div class="card">
+<p class="note">Für den bipolaren Transistor als Schalter (Low-Side). Rechnet mit 0,7 V Basis-Emitter-Spannung und einer bewusst niedrig angesetzten Stromverstärkung, damit der Transistor sicher durchschaltet.</p>
+<div class="calc">
+<div><label>Pin-Spannung (V)</label><input type="number" id="tb-u" value="5" step="0.1"></div>
+<div><label>Laststrom (mA)</label><input type="number" id="tb-i" value="200" step="1"></div>
+<div><label>Angesetzte Verstärkung</label><input type="number" id="tb-h" value="20" step="1"></div>
+</div>
+<div class="big-out" id="tb-out"></div>
+<p class="note" id="tb-note"></p>
+</div>
+
+<h2>Normwerte: E-Reihen</h2>
+<p>Widerstände und Kondensatoren gibt es nicht in beliebigen Werten, sondern in <b>Normreihen</b>. Der gerechnete Wert wird auf den nächsten Wert der Reihe gelegt — meist nach oben, wenn der Widerstand einen Strom begrenzen soll.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Reihe</th><th>Toleranz</th><th>Werte je Dekade</th></tr></thead>
+<tbody>
+<tr><td><b>E6</b></td><td>±20 %</td><td>10 · 15 · 22 · 33 · 47 · 68</td></tr>
+<tr><td><b>E12</b></td><td>±10 %</td><td>10 · 12 · 15 · 18 · 22 · 27 · 33 · 39 · 47 · 56 · 68 · 82</td></tr>
+<tr><td><b>E24</b></td><td>±5 %</td><td>zusätzlich 11 · 13 · 16 · 20 · 24 · 30 · 36 · 43 · 51 · 62 · 75 · 91</td></tr>
+<tr><td><b>E96</b></td><td>±1 %</td><td>96 Werte je Dekade — die üblichen Präzisions-SMD-Widerstände</td></tr>
+</tbody>
+</table></div>
+<div class="note">„Je Dekade" heißt: Die Werte wiederholen sich mit jedem Faktor 10 — aus 47 werden 470, 4,7 k, 47 k und so weiter.</div>
+
+<h2>Aufdruck entschlüsseln</h2>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Aufdruck</th><th>Bauteil</th><th>Bedeutung</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td><b>4702</b> oder <b>472</b></td><td>SMD-Widerstand</td><td>Erste Ziffern = Wert, letzte = Anzahl Nullen</td><td>4702 = 470 × 10² = <b>47 kΩ</b> · 472 = 47 × 10² = <b>4,7 kΩ</b></td></tr>
+<tr><td><b>4R7</b></td><td>SMD-Widerstand</td><td>R steht an der Stelle des Kommas</td><td><b>4,7 Ω</b></td></tr>
+<tr><td><b>000</b> / <b>0</b></td><td>SMD-Widerstand</td><td>Null-Ohm-Brücke</td><td>Drahtbrücke im Widerstandsgehäuse</td></tr>
+<tr><td><b>104</b></td><td>Keramik-Kondensator</td><td>Wert in <b>pF</b>, letzte Ziffer = Nullen</td><td>10 × 10⁴ pF = <b>100 nF</b></td></tr>
+<tr><td><b>223</b></td><td>Keramik-Kondensator</td><td>wie oben</td><td>22 × 10³ pF = <b>22 nF</b></td></tr>
+<tr><td><b>4n7</b> / <b>n47</b></td><td>Kondensator</td><td>Einheitenbuchstabe an der Kommastelle</td><td><b>4,7 nF</b> · <b>0,47 nF</b></td></tr>
+<tr><td><b>100 µF 25 V</b></td><td>Elko</td><td>Kapazität und <b>maximale</b> Spannung</td><td>Spannungsklasse immer mit Reserve wählen</td></tr>
+<tr><td><b>101</b></td><td>Induktivität</td><td>Wert in <b>µH</b></td><td>10 × 10¹ = <b>100 µH</b></td></tr>
+</tbody>
+</table></div>
+
+<h2>Einheiten und Vorsätze</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Vorsatz</th><th>Zeichen</th><th>Faktor</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td>Mega</td><td><b>M</b></td><td>× 1 000 000</td><td>1 MΩ = 1 000 000 Ω</td></tr>
+<tr><td>Kilo</td><td><b>k</b></td><td>× 1 000</td><td>4,7 kΩ = 4 700 Ω</td></tr>
+<tr><td>—</td><td>—</td><td>× 1</td><td>1 V, 1 A, 1 Ω</td></tr>
+<tr><td>Milli</td><td><b>m</b></td><td>÷ 1 000</td><td>470 mA = 0,47 A</td></tr>
+<tr><td>Mikro</td><td><b>µ</b></td><td>÷ 1 000 000</td><td>100 µF = 0,0001 F</td></tr>
+<tr><td>Nano</td><td><b>n</b></td><td>÷ 1 000 000 000</td><td>100 nF = 0,1 µF</td></tr>
+<tr><td>Piko</td><td><b>p</b></td><td>÷ 1 000 000 000 000</td><td>22 pF = 0,022 nF</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Die häufigste Umrechnung im Alltag:</b> <b>1 000 nF = 1 µF</b> und <b>1 000 pF = 1 nF</b>. Ein „100n" ist derselbe Kondensator wie ein „0,1 µF" — beide Schreibweisen stehen in Schaltplänen nebeneinander.</div>

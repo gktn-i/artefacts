@@ -64,6 +64,23 @@
 <div class="rule"><span class="ico">🖥️</span><div><b>HDMI / DSI</b> sind die Monitor-Anschlüsse, praktisch nur am Raspberry Pi und ähnlichen Mini-Computern.</div></div>
 </div>
 
+<h2>Verdrahtung und Adressen auf einen Blick</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Typ</th><th>Anschluss</th><th>Leitungen</th><th>Typische Adresse / Besonderheit</th></tr></thead>
+<tbody>
+<tr><td><b>OLED SSD1306 / SH1106</b></td><td>I²C</td><td>VCC · GND · SDA · SCL</td><td><b>0x3C</b> (selten 0x3D — per Lötbrücke umstellbar). Pull-ups meist auf dem Modul</td></tr>
+<tr><td><b>Zeichen-LCD mit I²C-Modul</b></td><td>I²C</td><td>VCC · GND · SDA · SCL</td><td><b>0x27</b> oder <b>0x3F</b>. Kontrast über das Poti auf der Rückseite einstellen</td></tr>
+<tr><td><b>TFT ST7735 / ILI9341 / ST7789</b></td><td>SPI</td><td>VCC · GND · SCK · MOSI · CS · <b>DC</b> · RST · LED</td><td><b>DC</b> unterscheidet Befehl und Daten — die eine Extraleitung gegenüber normalem SPI</td></tr>
+<tr><td><b>Rundes GC9A01</b></td><td>SPI</td><td>wie TFT</td><td>240 × 240 Pixel; Rahmen wird oft mitbestellt</td></tr>
+<tr><td><b>E-Paper</b></td><td>SPI</td><td>VCC · GND · SCK · MOSI · CS · DC · RST · <b>BUSY</b></td><td><b>BUSY</b> meldet, dass der Bildaufbau läuft — nicht früher weiterschreiben</td></tr>
+<tr><td><b>7-Segment TM1637</b></td><td>2 Pins (eigenes Protokoll)</td><td>VCC · GND · CLK · DIO</td><td>Sieht aus wie I²C, ist aber keines — eigene Bibliothek nötig</td></tr>
+<tr><td><b>MAX7219-Matrix</b></td><td>SPI</td><td>VCC · GND · CLK · DIN · CS</td><td>Module lassen sich kaskadieren (DOUT → DIN des nächsten)</td></tr>
+<tr><td><b>WS2812-Matrix</b></td><td>1 Datenleitung</td><td>5 V · GND · DIN</td><td><b>60 mA je LED</b> bei Weiß — eigene Versorgung, 300–470 Ω in die Datenleitung, 1000 µF am Eingang</td></tr>
+<tr><td><b>Nextion</b></td><td>UART</td><td>VCC · GND · TX · RX</td><td>TX geht an RX der Gegenseite; Oberfläche wird am PC erstellt</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Die drei häufigsten Display-Fehler:</b> ① <b>Falsche Logikspannung</b> — viele Module sind reine 3,3-V-Bauteile; das aufgedruckte „5 V" bezieht sich oft nur auf die Versorgung, nicht auf die Datenleitungen. ② <b>Zwei I²C-Geräte mit derselben Adresse</b> — dann antwortet keines sauber; Adressen mit einem I²C-Scanner auslesen (Tab <a class="goto" href="#protokolle">Protokolle</a>). ③ <b>Zu schwache Versorgung</b> — bei Hintergrundbeleuchtung und LED-Matrizen bricht die Spannung ein, das Bild flackert oder das Board startet neu.</div>
+
 <h2>Auswahlhilfe: welches Display?</h2>
 <div class="tbl-wrap"><table style="min-width:560px">
 <thead><tr><th>Du willst…</th><th>Empfehlung</th></tr></thead>
