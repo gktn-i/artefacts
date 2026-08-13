@@ -1,0 +1,55 @@
+<div class="kurz"><b>Die Slot-Regel:</b> Slot 1 = <b>CFexpress Typ B</b> (ProRes, RAW, ALL-I) · Slot 2 = <b>SD UHS-II</b> (HEVC + Backup) · dazu <b>USB-C-SSD</b> als dritter Weg. Wer nur HEVC LongGOP dreht, kommt komplett mit SD V90 aus — ProRes und RAW starten auf SD gar nicht erst.</div>
+
+<h2>Welches Medium für welchen Codec</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Codec</th><th>Datenrate</th><th>Mindestmedium</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>HEVC LongGOP 4:2:0</b> (Open Gate, 5.9K …)</td><td class="numcell">~150–300 Mbps</td><td class="numcell">SD UHS-II V60/V90</td><td>Der Alltag — läuft auf beiden Slots</td></tr>
+<tr><td><b>AVC ALL-I 4:2:2</b> (4K/C4K)</td><td class="numcell">bis 600 Mbps</td><td class="numcell">SD V90 oder CFexpress</td><td>V60 reicht <b>nicht</b> — Abbruchgefahr</td></tr>
+<tr><td><b>ProRes 422 / HQ</b></td><td class="numcell">bis ~1,9 Gbps</td><td class="numcell">CFexpress Typ B / USB-SSD</td><td>Auf SD startet der Modus nicht</td></tr>
+<tr><td><b>ProRes RAW / RAW HQ</b></td><td class="numcell">bis ~4,2 Gbps</td><td class="numcell"><b>nur</b> CFexpress Typ B</td><td>Auch USB-SSD scheidet für RAW aus</td></tr>
+<tr><td><b>Proxy-Dateien</b></td><td class="numcell">klein</td><td class="numcell">beliebig</td><td>Parallel zur Hauptaufnahme auf die zweite Karte legen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Dual-Card-Strategie:</b> <b>Backup</b> (beide Karten gleichzeitig) für alles Unwiederholbare — Hochzeit, Event, Interview. <b>Relay</b> (Slot 1 voll → weiter auf 2) für lange Drehtage. Kombination aus ProRes/ALL-I auf CFexpress + HEVC- oder Proxy-Kopie auf SD ist der robuste Standard.</div>
+
+<h2>USB-C-SSD als Aufnahmeziel</h2>
+<div class="steps">
+<div class="step"><b>SSD in exFAT</b> formatieren (am besten in der Kamera) und über das USB-C-Kabel direkt anschließen.</div>
+<div class="step"><b>Im Menü USB-SSD aktivieren</b> — die Kamera listet die SSD dann als Aufnahmeziel.</div>
+<div class="step"><b>Strom bedenken:</b> Die SSD zieht aus dem Kamera-Akku. Bei langen Sessions per USB-PD puffern oder Akkugriff nutzen.</div>
+<div class="step"><b>Mechanisch sichern:</b> SSD am Cage/Rig befestigen — ein herausgerissenes Kabel beendet die Aufnahme sofort.</div>
+<div class="step"><b>Grenze kennen:</b> ProRes 422/HQ läuft auf SSD, <b>ProRes RAW nicht</b> — RAW bleibt CFexpress-exklusiv.</div>
+</div>
+
+<h2>Audio</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Weg</th><th>Qualität</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Intern (MOV)</b></td><td class="numcell">LPCM 24-bit</td><td>Atmo und Notton — für mehr die Buchsen nutzen</td></tr>
+<tr><td><b>3,5-mm-Mikrofoneingang</b></td><td class="numcell">analog, Pegel manuell</td><td>Richtmikro oder Funkstrecken-Empfänger auf dem Blitzschuh</td></tr>
+<tr><td><b>DMW-XLR2-Adapter</b></td><td class="numcell">4 Kanäle · <b>32-bit Float</b></td><td>XLR-Mikros; Float heißt: <b>Pegeln entfällt praktisch</b> — Übersteuern wird in der Post gerettet</td></tr>
+<tr><td><b>DMW-DMS1</b> (digitales Richtmikro)</td><td class="numcell">digital über den Schuh</td><td>Seit Firmware 1.4 unterstützt — kabellos sauber für Vlog/Doku</td></tr>
+<tr><td><b>MP4/AAC</b></td><td class="numcell">komprimiert</td><td>Nur Weitergabe-Formate — fürs Schneiden MOV/LPCM nehmen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Ausgänge &amp; Fernsteuerung</h2>
+<div class="grid">
+<div class="card"><div class="ct">HDMI (Typ A)</div><ul><li>Sauberes Signal für Monitor/Recorder</li><li><b>RAW-Out:</b> bis 6K 30p OG → Atomos (ProRes RAW) oder Blackmagic (BRAW)</li><li>Bei RAW-Out übernimmt der Recorder das Monitoring</li></ul></div>
+<div class="card"><div class="ct">USB-C</div><ul><li>Laden + Dauerstrom per USB-PD</li><li>SSD-Aufnahme, Tethering, Webcam-Betrieb</li><li>Datenabzug — schneller als jeder SD-Leser am Laptop</li></ul></div>
+<div class="card"><div class="ct">Apps</div><ul><li><b>LUMIX Lab:</b> Clips aufs Handy, LUTs verwalten (MP4 Lite hilft hier)</li><li><b>LUMIX Flow:</b> Storyboard/Fernsteuerung — seit FW 1.4 in Version 1.5</li></ul></div>
+<div class="card"><div class="ct">Timecode</div><ul><li>TC-Sync über die Blitzschuh-/BNC-Adapter-Lösung</li><li>Für Mehrkamera-Drehs: einmal syncen, dann Freilauf</li></ul></div>
+</div>
+
+<h2>Aufnahmezeit &amp; Wärme</h2>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Situation</th><th>Verhalten</th><th>Maßnahme</th></tr></thead>
+<tbody>
+<tr><td><b>≤30p, alle Codecs</b></td><td class="numcell">praktisch unbegrenzt</td><td>Lüfter regelt — kein 30-Minuten-Limit</td></tr>
+<tr><td><b>50/60p HEVC / ALL-I</b></td><td class="numcell">lange Takes unkritisch</td><td>Lüfter auf <b>Auto</b> lassen, Display leicht abklappen (Luftspalt)</td></tr>
+<tr><td><b>5.8K/5.9K 60p, ProRes-Dauerfeuer</b></td><td class="numcell">kann thermisch begrenzen</td><td>DPReview maß beim Launch ~35–48 min bis Warnung/Abschaltung — <b>Firmware 1.2 hat die Thermik deutlich entschärft</b>; direkte Sonne meiden</td></tr>
+<tr><td><b>Sommer, direkte Sonne</b></td><td class="numcell">früher warm</td><td>Zwischen Takes ausschalten hilft wenig — besser beschatten</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Akku-Realität:</b> Die Laufzeit ist eher mittelmaß — Video mit EVF, IBIS und Lüfter zieht kräftig. Für einen Drehtag: 2–3 Akkus oder eine USB-PD-Powerbank (die Kamera lädt und läuft über USB-C). Kalte Akkus in der Jackentasche vorwärmen.</div>

@@ -1,0 +1,62 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die fünf Werte, die fast jede Aufnahme tragen:</b> <b>5.1K 50p Open Gate</b> · Shutter <b>1/100</b> · ISO <b>640</b> (V-Log Low Base) · WB <b>manuell/Kelvin</b> · bei Tag <b>ND 6–7 Stops</b>. Alles andere ist Feintuning für den jeweiligen Fall.</div>
+
+<h2>Go-To-Setup</h2>
+<div class="featured">
+  <div class="feat-grid">
+    <div>
+      <div class="feat-mode">5.1K 50p</div>
+      <div class="feat-sub">Open Gate · 3:2 · 5088×3392 · oversampled aus 6K</div>
+      <p>Volle 3:2-Reframe-Freiheit, 50p lässt sich auf 25p conformen oder als 2×-Slowmo nutzen, und die 300 Mbps HEVC laufen noch auf einer SD V90. <b>Der Modus, den du im Zweifel nimmst.</b></p>
+      <div class="chips">
+        <div class="chip"><span class="ck">Codec</span><span class="cv">4:2:0 10-bit LongGOP · HEVC · 300 Mbps</span></div>
+        <div class="chip"><span class="ck">Shutter</span><span class="cv"><b>1/100</b> — 180° bei 50p, flimmerfrei bei 50 Hz</span></div>
+        <div class="chip"><span class="ck">ISO</span><span class="cv"><b>640</b> Low Base (V-Log)</span></div>
+        <div class="chip"><span class="ck">DR Boost</span><span class="cv">OFF — bei 50p nicht verfügbar</span></div>
+        <div class="chip"><span class="ck">WB</span><span class="cv">manuell / Kelvin, kein Auto</span></div>
+        <div class="chip"><span class="ck">Profil</span><span class="cv">V-Log + Real Time LUT nur als Preview</span></div>
+        <div class="chip"><span class="ck">ND</span><span class="cv">Tag ~6–7 Stops (Variabel-ND)</span></div>
+        <div class="chip"><span class="ck">Karte</span><span class="cv">SD V90 reicht — oder CFexpress</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="reframe">
+        <div class="rf rf-169"><span>16:9</span></div>
+        <div class="rf rf-11"><span>1:1</span></div>
+        <div class="rf rf-916"><span>9:16</span></div>
+      </div>
+      <div class="rf-cap"><b>Ein Take</b> → 16:9, 9:16, 1:1, 4:5 in der Post</div>
+    </div>
+  </div>
+</div>
+<div class="grid">
+<div class="card"><div class="ct">Variante: Max Detail</div><div class="cd"><b>6K 25p Open Gate</b> (3:2), Shutter 1/50.</div><ul><li>Volle 6K-Auflösung + Reframe</li><li>Kein DR Boost, nur ≤30p</li></ul></div>
+<div class="card"><div class="ct">Variante: Max Dynamik</div><div class="cd"><b>5.9K/C4K/4K 25p</b> (16:9/17:9) + <b>DR Boost ON</b>.</div><ul><li>Low Base wird <b>1000</b>, bis ~15 Stops</li><li>Rolling Shutter steigt auf ~28 ms — keine schnellen Schwenks</li></ul></div>
+<div class="card"><div class="ct">Variante: Heavy Grade</div><div class="cd"><b>4K/C4K 4:2:2 ALL-I</b> oder ProRes.</div><ul><li>Jedes Bild ein Keyframe, schnittstabil</li><li>Kein Open Gate — 16:9/17:9</li></ul></div>
+</div>
+<div class="note"><b>Open Gate ist immer HEVC 4:2:0 LongGOP.</b> Wer 4:2:2 oder ALL-I will, muss auf die 16:9/17:9-Modi wechseln — beides gleichzeitig gibt es nicht. Details im Tab <a class="goto" href="#codecs">Codecs &amp; Container</a>.</div>
+
+<h2>Schnellgriff: Welcher Modus wofür</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Use Case</th><th>Empfehlung</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Reframe / Multiformat</b></td><td class="numcell">5.1K 50p OG (3:2)</td><td>Oversampled aus 6K, 50p, voller Sensor — ein Take, alle Formate</td></tr>
+<tr><td><b>Max Auflösung</b></td><td class="numcell">6K 25p OG (3:2)</td><td>Voller Sensor, maximales Detail. Nur ≤30p</td></tr>
+<tr><td><b>Delivery 16:9 ohne Reframe</b></td><td class="numcell">5.9K 50p</td><td>Quasi 6K-Qualität, kein Crop, fertig fürs 16:9-Master</td></tr>
+<tr><td><b>Max Dynamik</b></td><td class="numcell">5.9K/4K 25p + DR Boost</td><td>Bis ~15 Stops — nur ≤30p, nicht im Open Gate</td></tr>
+<tr><td><b>Heavy Grade / Keying</b></td><td class="numcell">4K/C4K 4:2:2 ALL-I</td><td>Jedes Bild Keyframe, 4:2:2-Farbe, robust im Schnitt</td></tr>
+<tr><td><b>Slow Mo moderat (2×)</b></td><td class="numcell">5.9K 50p / 5.1K 50p</td><td>Auf 25p conformen, volle Auflösung, kein Crop</td></tr>
+<tr><td><b>Slow Mo extrem</b></td><td class="numcell">4K 100p / FHD 200p</td><td>~4× bzw. ~8× bei 25p-Timeline. Crop + AF-Grenzen einplanen</td></tr>
+<tr><td><b>Anamorph</b></td><td class="numcell">4.8K 4:3</td><td>Maximale Sensorhöhe für den Desqueeze</td></tr>
+<tr><td><b>Cinemascope direkt</b></td><td class="numcell">2.4:1 6K / Cs4K</td><td>Scope aus voller Breite; Cs4K bis 100/120p ohne HFR-Crop</td></tr>
+<tr><td><b>Low Light</b></td><td class="numcell">High Base ISO 5000</td><td>Zweite native Basis — direkt hinspringen statt hochdrehen</td></tr>
+<tr><td><b>Max Spielraum / RAW</b></td><td class="numcell">ProRes RAW 5.8K ≤30p</td><td>WB &amp; ISO erst in der Post. Pixel-by-pixel-Crop + CFexpress</td></tr>
+</tbody>
+</table></div>
+<div class="note">Alle Modi mit Chroma, Framerates und Einschränkungen: Tab <a class="goto" href="#modi">Alle Aufnahmemodi</a> · konkrete Drehsituationen: <a class="goto" href="#szenen-video">Video-Szenarien</a>.</div>
+
+<h2>Die Kamera in einem Absatz</h2>
+<p>Die S1 II hat einen <b>24,1-MP-Vollformat-Sensor in teilgestapelter Bauweise</b> (BSI CMOS) — der Readout ist rund 3,5× schneller als bei klassischen Sensoren, daher der geringe Rolling Shutter (~13 ms) und 70-fps-Serien ohne Blackout. Aufgenommen wird bis <b>6K Open Gate</b>, intern auch <b>ProRes RAW</b>; ein Lüfter hält die Aufnahmezeit in fast allen Modi unbegrenzt. V-Log liefert <b>14+ Stops</b>, mit DR Boost <b>~15</b>. Zwei Slots (CFexpress Typ B + SD UHS-II) plus Aufnahme auf USB-C-SSD.</p>
+<div class="tip"><b>PAL-Basis:</b> Alle Werte hier gehen von 50-Hz-Systemfrequenz aus (25p/50p/100p) — passend zu Kunstlicht in Deutschland. Die Kamera kann auch 59,94 Hz (30/60/120p) und 24,00 Hz (24/48p); die Logik bleibt gleich, nur die Zahlen wechseln.</div>

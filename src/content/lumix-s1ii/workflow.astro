@@ -1,0 +1,43 @@
+<div class="kurz"><b>Der Workflow entscheidet mehr als der Modus.</b> V-Log + Real Time LUT nur als <b>Preview</b> = maximale Freiheit in der Post. LUT <b>einbacken</b> = fertiger Look ohne Grade. Beides ist legitim — nur vorher entscheiden, nicht hinterher ärgern.</div>
+
+<h2>Die Workflow-Weichen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Weiche</th><th>Option A</th><th>Option B</th><th>Entscheidungshilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Look</b></td><td>V-Log + LUT als Preview</td><td>LUT einbacken / HLG</td><td>Wird gegradet? → A. Muss es sofort raus? → B</td></tr>
+<tr><td><b>HLG vs. V-Log</b></td><td>HLG = direktes HDR-Delivery</td><td>V-Log = maximaler Spielraum</td><td>HLG braucht keinen Grade, V-Log immer</td></tr>
+<tr><td><b>Schnittmaterial</b></td><td>HEVC + Proxy/HW-Decode</td><td>ALL-I oder ProRes nativ</td><td>Schwacher Rechner oder lange Projekte → B</td></tr>
+<tr><td><b>Karten</b></td><td>Backup (doppelt)</td><td>Relay (nacheinander)</td><td>Unwiederholbar → Backup. Drehtag-Länge → Relay</td></tr>
+<tr><td><b>Ton</b></td><td>intern / 3,5 mm</td><td>XLR2 mit 32-bit Float</td><td>Sobald Sprache wichtig ist → B, Pegeln entfällt</td></tr>
+</tbody>
+</table></div>
+
+<h2>Praxis-Bausteine</h2>
+<div class="grid">
+<div class="card"><div class="ct">HEVC schneiden</div><ul><li>Hardware-Decode aktivieren (Apple Silicon / aktuelle GPU) oder Proxies nutzen</li><li>Kamera-Proxy gleich mit aufnehmen spart das Rendern</li></ul></div>
+<div class="card"><div class="ct">Real Time LUT</div><ul><li>Eigene LUTs per LUMIX Lab auf die Kamera</li><li>Als Preview: V-Log bleibt im File, LUT nur im Sucher</li><li>Eingebacken: Look ist final — für Schnellabgaben</li></ul></div>
+<div class="card"><div class="ct">ND bei Tag</div><ul><li>Base 640 + 1/100 ist hell: sonnig ~6–7 Stops ND</li><li>Variabel-ND als Alltagslösung, Feststärken fürs Set</li></ul></div>
+<div class="card"><div class="ct">Reframe-Ordnung</div><ul><li>Open-Gate-Takes in der Timeline als 3:2-Quelle ablegen</li><li>Je Zielformat eine eigene Sequenz (16:9 / 9:16 / 1:1)</li><li>Erst Bild-Look, dann Formate ableiten</li></ul></div>
+</div>
+
+<h2>Checkliste vor dem Dreh</h2>
+<div class="steps">
+<div class="step"><b>Karten:</b> richtige Typen dabei (CFexpress für ProRes/RAW?), formatiert, Dual-Card-Modus gesetzt.</div>
+<div class="step"><b>Strom:</b> Akkus voll, Powerbank/USB-PD fürs lange Set eingepackt.</div>
+<div class="step"><b>Modusliste:</b> Frame-Limit-Filter aktiv — nur die eigenen Presets sichtbar. C-Slots stimmen noch.</div>
+<div class="step"><b>Profil:</b> V-Log oder HLG gewählt, Real Time LUT als Preview geladen, Zebra 42 + ~78 gesetzt.</div>
+<div class="step"><b>ND-Plan:</b> Licht der Location überschlagen, passende ND-Stufen eingepackt.</div>
+<div class="step"><b>Audio:</b> Mikrofonweg getestet, bei XLR2 die 32-bit-Float-Spur aktiv.</div>
+<div class="step"><b>Stabi:</b> IBIS-Modus zur Aufgabe (Boost statisch / E-Stabi Crop geprüft), Gimbal balanciert.</div>
+<div class="step"><b>Uhr &amp; Timecode:</b> Uhrzeit korrekt (Dateisortierung!), bei Mehrkamera TC gesynct.</div>
+</div>
+
+<h2>Nach dem Dreh</h2>
+<div class="steps">
+<div class="step"><b>Ingest mit Struktur:</b> je Karte ein Ordner <code>Datum_Projekt_Kamera</code>, Kopie verifizieren (Checksumme), erst dann Karten formatieren.</div>
+<div class="step"><b>Backup-Regel 3-2-1:</b> drei Kopien, zwei Medien, eine außer Haus — Rohmaterial ist unwiederholbar.</div>
+<div class="step"><b>Proxies anlegen</b> (falls nicht in der Kamera passiert), dann erst die Timeline bauen.</div>
+<div class="step"><b>V-Log entwickeln:</b> zuerst die offizielle V-Log→709-LUT als Basis, dann kreativ graden — nicht andersherum.</div>
+<div class="step"><b>Karten erst formatieren,</b> wenn das Projekt gesichert oder abgenommen ist.</div>
+</div>
+<div class="note">Belichtungszahlen und Zebra-Werte stehen im Tab <a class="goto" href="#belichtung">ISO, V-Log &amp; Shutter</a> · Karten- und Stromfragen im Tab <a class="goto" href="#medien">Karten, Audio &amp; Output</a>.</div>

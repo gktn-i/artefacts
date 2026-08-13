@@ -1,0 +1,56 @@
+<div class="kurz"><b>Der teilgestapelte Sensor liest in ~13 ms aus</b> — Schwenks und Bewegung sind damit unkritisch. Nur zwei Dinge ändern das: <b>DR Boost ON</b> (~28 ms — Readout halbiert sich) und die <b>HFR-Modi</b> (Crop + Detailverlust). Wer das weiß, wählt den Modus nach Bewegung, nicht nur nach Auflösung.</div>
+
+<h2>Readout &amp; Crop je Modus</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Modus</th><th>Crop</th><th>Rolling Shutter</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>6K 3:2 OG</b> (≤30p)</td><td class="numcell">1,0×</td><td class="numcell">~13 ms</td><td>Voller Sensor</td></tr>
+<tr><td><b>5.9K / 4K 16:9</b> (≤60p)</td><td class="numcell">1,0×</td><td class="numcell">~12–13 ms</td><td>Oversampled, kein Crop — CineD misst 12,7 ms (DR Boost OFF)</td></tr>
+<tr><td><b>5.1K 3:2 OG</b> (≤60p)</td><td class="numcell">1,0×</td><td class="numcell">~13 ms</td><td>Oversampled aus 6K</td></tr>
+<tr><td><b>4.8K 4:3</b> (≤60p)</td><td class="numcell">1,0×</td><td class="numcell">~13 ms</td><td>Anamorph-freundlich</td></tr>
+<tr><td><b>DR Boost ON</b> (16:9/17:9 ≤30p)</td><td class="numcell">1,0×</td><td class="numcell"><b>~28 ms</b></td><td>CineD: 27,5 ms — sichtbares Verziehen bei Schwenks</td></tr>
+<tr><td><b>C4K 100/120p</b></td><td class="numcell">~1,17×</td><td class="numcell">schnell</td><td>Zeilen-Subsampling → weicheres Bild</td></tr>
+<tr><td><b>4K (UHD) 100/120p</b></td><td class="numcell">~1,24×</td><td class="numcell">schnell</td><td>Detailverlust, Subjekterkennung aus</td></tr>
+<tr><td><b>FHD 200/240p</b></td><td class="numcell">~1,21×</td><td class="numcell">schnell</td><td>240p ohne kontinuierlichen AF</td></tr>
+<tr><td><b>2.4:1 Cs4K HFR</b></td><td class="numcell">1,0× horizontal</td><td class="numcell">schnell</td><td>Scope-Zeitlupe ohne den 1,24×-Crop</td></tr>
+<tr><td><b>ProRes RAW 4K</b> (≤60p)</td><td class="numcell">APS-C (pixel-by-pixel)</td><td class="numcell">~19 ms</td><td>CineD: 18,7 ms im RAW-Crop</td></tr>
+<tr><td><b>APS-C / S35</b></td><td class="numcell">1,5×</td><td class="numcell">schneller als FF</td><td>Tele-Verlängerung, weniger Sensorfläche</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Die eine Falle:</b> DR Boost und Bewegung vertragen sich nicht. Bei ~28 ms Readout kippen vertikale Linien im Schwenk sichtbar. Regel: <b>Interview, Tabletop, Landschaft → DR Boost ON</b> erlaubt · <b>Action, Gimbal-Runs, Mitzieher → OFF</b>.</div>
+
+<h2>DR Boost — die Verfügbarkeits-Matrix</h2>
+<div class="gb">
+<div class="gb-col good"><h4>✓ Verfügbar</h4><ul>
+<li>Framerates <b>≤30p</b> (24/25/30p)</li>
+<li>16:9-Modi: 5.9K, 4K</li>
+<li>17:9-Modi: 5.8K, C4K</li>
+<li>Auch in <b>ProRes RAW 5.8K</b> ≤30p</li>
+<li>Nur im V-Log-Workflow sinnvoll — dort Base 1000, bis ~15 Stops</li>
+</ul></div>
+<div class="gb-col bad"><h4>✗ Nicht verfügbar</h4><ul>
+<li>Open Gate 3:2 (6K, 5.1K) und 4:3 (4.8K)</li>
+<li>Alles über 30p — 50p, 60p, HFR</li>
+<li>Nichts für schnelle Bewegung (RS ~28 ms)</li>
+</ul></div>
+</div>
+
+<h2>Stabilisierung: IBIS, Boost, E-Stabi</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Stufe</th><th>Was passiert</th><th>Wann</th></tr></thead>
+<tbody>
+<tr><td><b>IBIS (Body I.S.)</b></td><td>Sensor gleicht bis zu <b>8 Stops</b> aus, kein Crop</td><td>Immer an — Basis für Fotos und Video aus der Hand</td></tr>
+<tr><td><b>+ Optical I.S. (Dual I.S. 2)</b></td><td>Objektiv-Stabi und IBIS arbeiten zusammen</td><td>Mit O.I.S.-Objektiven automatisch, hilft besonders am Tele</td></tr>
+<tr><td><b>I.S. Boost</b></td><td>Hält den Bildausschnitt fast stativfest</td><td>Statische Einstellung ohne Stativ — nicht zum Mitgehen</td></tr>
+<tr><td><b>E-Stabilisierung</b></td><td>Zusätzlicher digitaler Ausgleich, <b>croppt</b> je Stärke</td><td>Gehen/Laufen ohne Gimbal; Crop vorher im Sucher prüfen</td></tr>
+<tr><td><b>Anamorph-I.S.</b></td><td>Stabilisierung auf den Squeeze-Faktor abgestimmt</td><td>Bei anamorphen Optiken aktivieren</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Praxisreihenfolge:</b> Erst IBIS wirken lassen, dann bei Bedarf E-Stabi <b>niedrig</b> dazu. Die hohen E-Stabi-Stufen kosten sichtbar Bildwinkel — wer Open Gate wegen des Reframes filmt, verschenkt damit genau die Reserve, für die der Modus da ist. Für bewegte Kamera bleibt der Gimbal die sauberste Lösung.</div>
+
+<h2>Was der Sensor ist — und was nicht</h2>
+<div class="grid">
+<div class="card"><div class="ct">Teilgestapelt (partially stacked)</div><div class="cd">Nur die Randbereiche tragen Stacked-Elektronik — schneller Readout ohne den Preis eines voll gestapelten Sensors.</div><ul><li>~3,5× schnellerer Readout als klassisch</li><li>70-fps-Serien, ~13 ms RS, blackout-freier Sucher</li></ul></div>
+<div class="card"><div class="ct">Kein Global Shutter</div><div class="cd">Es bleibt Rolling Shutter — nur eben wenig.</div><ul><li>Peitschende Schwenks und Rotorblätter verzerren weiterhin</li><li>Blitz im E-Shutter bleibt eingeschränkt (Banding-Risiko)</li></ul></div>
+<div class="card"><div class="ct">24 MP sind Absicht</div><div class="cd">Weniger Pixel = größere Pixel = die saubere High Base und der schnelle Readout.</div><ul><li>Für mehr Foto-Auflösung: High-Res-Modus 96 MP (Tab <a class="goto" href="#bracketing">Bracketing &amp; High-Res</a>)</li></ul></div>
+</div>

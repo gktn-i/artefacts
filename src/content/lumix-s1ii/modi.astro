@@ -1,0 +1,57 @@
+<div class="kurz"><b>Lesehilfe:</b> Die Framerate hängt an der <b>Systemfrequenz</b> — 50,00 Hz → 25/50/100p · 59,94 Hz → 30/60/120p · 24,00 Hz → 24/48p. <b>*¹</b> = Bildausschnitt wird enger (Crop) · <b>*²</b> = FHD 240p ohne kontinuierlichen AF. 4:2:2-Modi sind H.264/ALL-I-fähig, 4:2:0-Modi laufen als H.265 LongGOP.</div>
+
+<h2>Vollformat</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Modus</th><th>Chroma · Bit</th><th>Framerates</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr class="ghead"><td colspan="4">3:2 · Open Gate</td></tr>
+<tr><td><b>6K</b> <span class="b b-og">OG</span></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">30p / 25p / 24p</td><td>Maximale Auflösung + Reframe. Kein DR Boost</td></tr>
+<tr><td><b>5.1K</b> <span class="b b-og">OG</span></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>Open Gate bis 60p, oversampled aus 6K — der Allrounder</td></tr>
+<tr class="ghead"><td colspan="4">4:3 · Anamorph</td></tr>
+<tr><td><b>4.8K</b> <span class="b b-43">4:3</span></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>Maximale Sensorhöhe für Desqueeze oder Hochkant</td></tr>
+<tr class="ghead"><td colspan="4">16:9</td></tr>
+<tr><td><b>5.9K</b></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>16:9-Allrounder ohne Crop — quasi 6K fürs Delivery</td></tr>
+<tr><td><b>4K</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>Delivery-4K, oversampled. ALL-I/ProRes für Heavy Grade</td></tr>
+<tr><td><b>4K HFR</b> <span class="b b-crop">Crop</span></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">120p*¹ / 100p*¹</td><td>~1,24× Crop, keine Subjekterkennung</td></tr>
+<tr><td><b>FHD</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">240p*¹*² / 200p · 120/100p · 60p … 24p</td><td>Bis ~10× Slowmo; 240p mit ~1,21× Crop, kein C-AF</td></tr>
+<tr class="ghead"><td colspan="4">17:9 (DCI)</td></tr>
+<tr><td><b>5.8K</b></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>DCI-naher Widescreen, etwas breiter als 16:9</td></tr>
+<tr><td><b>C4K</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>DCI-4K-Master, oversampled</td></tr>
+<tr><td><b>C4K HFR</b> <span class="b b-crop">Crop</span></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">120p*¹ / 100p*¹ / 96p</td><td>DCI-Zeitlupe, ~1,17× Crop</td></tr>
+<tr class="ghead"><td colspan="4">2.4:1 (Scope)</td></tr>
+<tr><td><b>6K 2.4:1</b></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>Cinemascope aus voller 6K-Breite, kein Crop</td></tr>
+<tr><td><b>Cs4K</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>Scope-4K mit 4:2:2 fürs Grading</td></tr>
+<tr><td><b>Cs4K HFR</b></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">120p / 100p / 96p</td><td>Scope-Zeitlupe <b>ohne</b> den 1,24×-HFR-Crop</td></tr>
+</tbody>
+</table></div>
+
+<h2>APS-C / Super35 (1,5×)</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Modus</th><th>Chroma · Bit</th><th>Framerates</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr class="ghead"><td colspan="4">4:3 · Anamorph S35</td></tr>
+<tr><td><b>3.3K</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>Anamorph im S35-Crop mit 4:2:2</td></tr>
+<tr><td><b>3.3K HFR</b> <span class="b b-crop">Crop</span></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">120p*¹ / 100p*¹</td><td>S35-Anamorph-Zeitlupe</td></tr>
+<tr class="ghead"><td colspan="4">16:9 S35</td></tr>
+<tr><td><b>4K</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>Tele-Reichweite (1,5×) bei 4:2:2</td></tr>
+<tr><td><b>4K HFR</b></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">120p / 100p</td><td>S35-Zeitlupe — weniger Detailverlust als FF-4K-120</td></tr>
+<tr><td><b>FHD</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">120/100p · 60p … 24p</td><td>S35-FHD, 4:2:2 bis 120p</td></tr>
+<tr class="ghead"><td colspan="4">17:9 + 2.4:1 S35</td></tr>
+<tr><td><b>C4K</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>S35 DCI-4K</td></tr>
+<tr><td><b>C4K HFR</b></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">120p / 100p / 96p</td><td>S35 DCI-Zeitlupe</td></tr>
+<tr><td><b>Cs4K</b></td><td class="numcell">4:2:2 10-bit</td><td class="numcell">60/50/48p · 30/25/24p</td><td>S35 Cinemascope</td></tr>
+<tr><td><b>Cs4K HFR</b></td><td class="numcell">4:2:0 10-bit</td><td class="numcell">120p / 100p / 96p</td><td>S35 Scope-Zeitlupe</td></tr>
+</tbody>
+</table></div>
+
+<h2>RAW — intern und über HDMI</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Weg</th><th>Format</th><th>Auflösung · fps</th><th>Bedingungen</th></tr></thead>
+<tbody>
+<tr><td><b>Intern</b></td><td>ProRes RAW / RAW HQ (MOV)</td><td class="numcell">5.8K ≤30p · 4K ≤60p</td><td>Immer <b>pixel-by-pixel</b>: leichter Crop bei 5.8K, deutlicher (APS-C) bei 4K. Nur CFexpress</td></tr>
+<tr><td><b>HDMI → Atomos</b></td><td>ProRes RAW</td><td class="numcell">bis 6K 30p Open Gate (3:2)</td><td>Externer Recorder, eigene Monitoring-Kette</td></tr>
+<tr><td><b>HDMI → Blackmagic</b></td><td>Blackmagic RAW</td><td class="numcell">bis 6K 30p Open Gate (3:2)</td><td>Video Assist; Grading in Resolve</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Korrigiert beim Faktencheck:</b> Der HDMI-RAW-Ausgang liefert bis zu <b>6K 30p Open Gate</b> — nicht nur 5.8K. Intern bleibt RAW bei 5.8K ≤30p bzw. 4K ≤60p und ist immer pixel-by-pixel (mit Crop), weil RAW nicht oversamplen kann.</div>
+<div class="tip"><b>Stills-Bezug:</b> Der Sensor hat 24,1 MP; Open Gate 6K (3:2) entspricht 5952×3968, 5.1K entspricht 5088×3392. Ein 6K-OG-Standbild ist also ein brauchbares 23-MP-Foto — für Thumbnails und Behind-the-Scenes reicht der Frame-Grab.</div>

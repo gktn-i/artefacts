@@ -1,0 +1,60 @@
+<div class="kurz"><b>Drei Achsen bestimmen jeden Modus:</b> <b>Codec</b> (Dateigröße vs. Schnittlast) · <b>LongGOP vs. ALL-Intra</b> (Kompressionsart) · <b>Chroma/Bit</b> (4:2:0 vs. 4:2:2). Merksatz: Open Gate = immer HEVC 4:2:0 LongGOP · bestes internes Schnittformat ohne ProRes = <b>4K 4:2:2 ALL-I</b>.</div>
+
+<h2>LongGOP vs. ALL-Intra</h2>
+<div class="gop">
+  <div class="goprow">
+    <span class="gl">ALL-I</span>
+    <div class="frames"><span class="frame i">I</span><span class="frame i">I</span><span class="frame i">I</span><span class="frame i">I</span><span class="frame i">I</span><span class="frame i">I</span></div>
+    <span class="gcap"><b>Jedes Bild ein Keyframe.</b> Direkter Zugriff, flüssiges Scrubbing, robust beim Grading — dafür große Dateien.</span>
+  </div>
+  <div class="goprow">
+    <span class="gl">LongGOP</span>
+    <div class="frames"><span class="frame i">I</span><span class="frame b">B</span><span class="frame p">P</span><span class="frame b">B</span><span class="frame p">P</span><span class="frame b">B</span><span class="frame p">P</span><span class="frame i">I</span></div>
+    <span class="gcap"><b>Keyframe + Differenzbilder.</b> Kleine Dateien, aber decode-intensiv — im Schnitt Proxies oder Hardware-Decode.</span>
+  </div>
+</div>
+
+<h2>Die vier Codec-Familien</h2>
+<div class="grid">
+<div class="card"><div class="ct">H.265 / HEVC <span class="b b-og">Open Gate</span></div><div class="cd">4:2:0 10-bit LongGOP — der Codec aller hochauflösenden Modi (6K / 5.9K / 5.1K / 4.8K).</div>
+<div class="meter size"><span class="ml">Dateigröße</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div></div>
+<div class="meter load"><span class="ml">Schnittlast</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div></div>
+<div class="meter flex"><span class="ml">Flexibilität</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span></div></div>
+<ul><li><b>Nimm wenn:</b> hohe Auflösung + Reframe + Speicher sparen</li><li>Im Schnitt: Proxies oder Hardware-Decode einplanen</li></ul></div>
+<div class="card"><div class="ct">H.264 / AVC <span class="b b-alli">ALL-I</span></div><div class="cd">4:2:2 10-bit ALL-Intra in 4K/C4K bis 600 Mbps. Breit kompatibel, leicht zu dekodieren.</div>
+<div class="meter size"><span class="ml">Dateigröße</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div></div>
+<div class="meter load"><span class="ml">Schnittlast</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div></div>
+<div class="meter flex"><span class="ml">Flexibilität</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div></div>
+<ul><li><b>Nimm wenn:</b> 4K-Master, Heavy Grade, Keying, flüssiger Schnitt ohne Proxies</li></ul></div>
+<div class="card"><div class="ct">ProRes 422 / HQ <span class="b b-raw">intern</span></div><div class="cd">Edit-ready Mezzanine bis ~1,9 Gbps — federleicht im Schnitt, kein Transcode.</div>
+<div class="meter size"><span class="ml">Dateigröße</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div></div>
+<div class="meter load"><span class="ml">Schnittlast</span><div class="segs"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div></div>
+<div class="meter flex"><span class="ml">Flexibilität</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div></div>
+<ul><li><b>Nimm wenn:</b> direkt schnittfähiges Master, schnelle Turnarounds</li><li>Braucht CFexpress oder USB-SSD — SD startet nicht</li></ul></div>
+<div class="card"><div class="ct">ProRes RAW / RAW HQ <span class="b b-raw">RAW</span></div><div class="cd">Sensor-RAW intern (5.8K ≤30p / 4K ≤60p), Datenraten bis ~4,2 Gbps. WB und ISO erst in der Post fest.</div>
+<div class="meter size"><span class="ml">Dateigröße</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div></div>
+<div class="meter load"><span class="ml">Schnittlast</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg"></span></div></div>
+<div class="meter flex"><span class="ml">Flexibilität</span><div class="segs"><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span><span class="seg on"></span></div></div>
+<ul><li><b>Nimm wenn:</b> maximaler Spielraum, WB/ISO-Rettung, High-End-Grade</li><li>Pixel-by-pixel-Crop, nur CFexpress; Workflow FCP/Resolve-zentriert</li></ul></div>
+</div>
+<div class="note"><b>Klein &amp; schnell:</b> H.264/H.265 8-bit 4:2:0 LongGOP (FHD/4K, 20–100 Mbps) und <b>MP4 Lite</b> (seit Firmware 1.2, für den Phone-Workflow mit LUMIX Lab) sind reine Weitergabe-Formate — nicht zum Graden.</div>
+
+<h2>Container</h2>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Format</th><th>Inhalt</th><th>Audio</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>MOV</b></td><td>H.264 · H.265 · ProRes · ProRes RAW</td><td class="numcell">LPCM (24-bit / 32-bit Float)</td><td>Standard für Schnitt &amp; Grade — alle Pro-Modi, V-Log, Timecode</td></tr>
+<tr><td><b>MP4</b></td><td>H.264 · H.265</td><td class="numcell">AAC</td><td>Breite Kompatibilität, direkt hochladen. Kein LPCM</td></tr>
+<tr><td><b>MP4 Lite</b></td><td>H.265, niedrige Bitrate</td><td class="numcell">AAC</td><td>Phone-Workflow (LUMIX Lab/Flow), Social, kleine Dateien</td></tr>
+<tr><td><b>ProRes im MOV</b></td><td>422 / HQ / RAW</td><td class="numcell">LPCM</td><td>Edit-ready und High-End-Finish — CFexpress/SSD nötig</td></tr>
+</tbody>
+</table></div>
+
+<h2>Editierbarkeit — vom leichtesten zum zähesten</h2>
+<div class="steps">
+<div class="step"><b>ProRes 422 / HQ.</b> Intra, federleicht, kein Transcode, bestes Grading-Verhalten. Preis: Datenmenge und CFexpress/SSD.</div>
+<div class="step"><b>4K 4:2:2 ALL-I (H.264, MOV).</b> Das beste interne Format ohne ProRes — flüssiges Scrubbing bei einem Viertel der ProRes-Datenmenge.</div>
+<div class="step"><b>4K 4:2:2 LongGOP.</b> Noch 4:2:2 und relativ leicht zu dekodieren, scrubbt aber zäher. Deutlich kleiner.</div>
+<div class="step"><b>HEVC 4:2:0 LongGOP (Open Gate 6K/5.9K/5.1K/4.8K).</b> Kleinste Dateien, am zähesten. Proxies aktivieren oder auf Hardware-Decode (Apple Silicon, moderne GPUs) setzen.</div>
+</div>
+<div class="tip"><b>Proxy direkt mitnehmen:</b> Die Kamera kann bei den hochauflösenden HEVC-Modi parallel eine <b>Proxy-Datei</b> aufzeichnen. Einmal aktiviert, entfällt das Proxy-Rendern im Schnittprogramm komplett — gerade beim 300-Mbps-Open-Gate-Material der größte Workflow-Gewinn.</div>

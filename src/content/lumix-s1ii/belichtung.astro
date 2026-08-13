@@ -1,0 +1,68 @@
+<div class="kurz"><b>V-Log-Belichtung in einem Satz:</b> Graukarte auf <b>42 IRE</b> legen (False Color grün / Zebra 42), ISO auf einer der zwei Basen halten — <b>640</b> bei Tag, <b>5000</b> bei wenig Licht — und Helligkeit über <b>ND</b> statt über ISO regeln. Shutter bleibt bei 180°: <b>1/50</b> für 25p, <b>1/100</b> für 50p.</div>
+
+<h2>Dual Native ISO (V-Log)</h2>
+<p>Der Sensor hat zwei native Verstärkungsstufen. Auf den Basen ist das Bild am saubersten — dazwischen wird nur digital verstärkt, das kostet Qualität ohne Nutzen.</p>
+<div class="basepair">
+  <div class="base low"><div class="lbl">Low Base</div><div class="val">640</div><div class="det">Arbeitsbasis bei Tag — sauberstes, detailreichstes Bild</div></div>
+  <div class="base high"><div class="lbl">High Base</div><div class="val">5000</div><div class="det">Zweite native Basis für Low Light — sauber, ohne Rauschsprung</div></div>
+  <div class="base boost"><div class="lbl">DR Boost ON</div><div class="val">1000</div><div class="det">Low Base steigt um ⅔ EV auf 1000 — dafür bis ~15 Stops</div></div>
+</div>
+<div class="grid">
+<div class="card"><div class="ct">Praxisregeln</div><ul>
+<li>Tag: auf <b>640</b> bleiben, Belichtung über <b>ND</b> regeln</li>
+<li>Low Light: direkt auf <b>5000</b> springen — nicht durch die Zwischenstufen drehen</li>
+<li>Auto-ISO nur, wenn dokumentarisch nötig; dann Bereich auf 640–5000 begrenzen</li></ul></div>
+<div class="card"><div class="ct">DR Boost</div><ul>
+<li>Nur <b>≤30p</b> und nur in den 16:9/17:9-Modi (5.9K, C4K/4K, 5.8K, auch ProRes RAW 5.8K)</li>
+<li><b>Nicht</b> im Open Gate (3:2/4:3), nicht in 6K, nicht bei HFR</li>
+<li>Preis: Rolling Shutter steigt von ~13 auf ~28 ms — nichts für Schwenks</li></ul></div>
+<div class="card"><div class="ct">Ohne Log</div><ul>
+<li>In Normal-Gammas liegen die Basen um <b>ISO 100 / 640</b></li>
+<li>Foto hat eigene Werte — Tab <a class="goto" href="#foto">Foto-Grundlagen</a></li></ul></div>
+</div>
+<div class="note"><b>Zur Einordnung:</b> Panasonic nennt für V-Log <b>640/5000</b>; CineD misst die zweite Stufe im Labor etwas niedriger (~4000). Für die Praxis egal — entscheidend ist, <b>auf</b> einer Basis zu arbeiten. Welche Stufen aktiv sind, zeigt die ISO-Anzeige im Menü (Bereichs-Umschaltpunkt).</div>
+
+<h2>V-Log-Referenzwerte</h2>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Referenz</th><th>Code Value (10-bit)</th><th>IRE / Waveform</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Schwarz 0 %</b></td><td class="numcell">128</td><td class="numcell">7,3</td><td>Pedestal — darunter ist nur Rauschen</td></tr>
+<tr><td><b>Mittelgrau 18 %</b></td><td class="numcell">433</td><td class="numcell">42</td><td><b>Der Belichtungsanker.</b> Graukarte hierauf (False Color grün, Zebra 42)</td></tr>
+<tr><td><b>Weiß 90 %</b></td><td class="numcell">602</td><td class="numcell">61</td><td>Diffuses Weiß, Papier</td></tr>
+<tr><td><b>Sensor-Clip</b></td><td class="numcell">—</td><td class="numcell">~80</td><td>V-Log endet bei ~80 IRE — ca. 1,5 Stops über 90-%-Weiß. Werte darüber nutzt V-Log nicht</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Korrigiert beim Faktencheck:</b> Die frühere Clip-Angabe „109 IRE" war die generische Superweiß-Obergrenze von Videosignalen — <b>V-Log clippt bereits bei ~80 IRE</b>. Wer das Zebra auf 100+ stellt, sieht Clipping deshalb nie kommen; sinnvoll sind Zebra 42 (Grau) und ~77–80 (kurz vor Clip).</div>
+<div class="grid">
+<div class="card"><div class="ct">Haut richtig legen</div><ul><li>Dunkle Haut um <b>~42 IRE</b></li><li>Helle Haut Spitzlicht <b>~52–55 IRE</b> — nicht über 55, Weiß liegt bei 61</li></ul></div>
+<div class="card"><div class="ct">ETTR-Methode</div><ul><li>18-%-Grau auf 42 IRE ist neutral</li><li>Oder <b>+1 bis +1⅔ Stops</b> überbelichten und in der Post zurückziehen → mehr Schatten-Sauberkeit</li><li>CineD misst ~9 Stops Belichtungsspielraum — Überbelichten verzeiht die Kamera besser als Absaufen</li></ul></div>
+<div class="card"><div class="ct">Kontrolle</div><ul><li><b>Log View Assist</b> bzw. Real Time LUT als Preview zum Gegenchecken</li><li>Waveform einblenden — dem EVF-Eindruck bei Log nicht trauen</li></ul></div>
+</div>
+
+<h2>Shutter — 180°-Regel und Flimmern</h2>
+<p>Die 180°-Regel: Belichtungszeit ≈ <b>1 / (2 × Framerate)</b> ergibt natürliche Bewegungsunschärfe. Unter 50-Hz-Kunstlicht zählt zusätzlich: Vielfache von 1/50 sind flimmerfrei.</p>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>fps</th><th>180° (Standard)</th><th>90° (knackiger)</th><th>Flimmerfrei bei 50 Hz</th></tr></thead>
+<tbody>
+<tr><td class="numcell">24p</td><td class="numcell"><b>1/48</b></td><td class="numcell">1/96</td><td class="numcell">1/50</td></tr>
+<tr><td class="numcell">25p</td><td class="numcell"><b>1/50</b></td><td class="numcell">1/100</td><td class="numcell">1/50 · 1/100</td></tr>
+<tr><td class="numcell">30p</td><td class="numcell"><b>1/60</b></td><td class="numcell">1/120</td><td class="numcell">1/50 · 1/100</td></tr>
+<tr><td class="numcell">50p</td><td class="numcell"><b>1/100</b></td><td class="numcell">1/200</td><td class="numcell">1/100</td></tr>
+<tr><td class="numcell">60p</td><td class="numcell"><b>1/120</b></td><td class="numcell">1/240</td><td class="numcell">1/100 (Kompromiss)</td></tr>
+<tr><td class="numcell">100p</td><td class="numcell"><b>1/200</b></td><td class="numcell">1/400</td><td class="numcell">1/200</td></tr>
+<tr><td class="numcell">120p</td><td class="numcell"><b>1/240</b></td><td class="numcell">1/480</td><td class="numcell">1/200 (Kompromiss)</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Merkhilfe fürs 50-Hz-Land:</b> In PAL-Framerates (25/50/100p) fallen 180°-Regel und Flimmerfreiheit zusammen — 1/50, 1/100, 1/200. Genau deshalb ist 25p/50p hier die stressfreie Basis. Bei 30/60/120p unter Kunstlicht ist 1/100 der flimmerärmste Kompromiss; LED-Wände und Billig-LEDs können trotzdem streifen → Testaufnahme.</div>
+
+<h2>ND-Rechnung für den Tag</h2>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Situation</th><th>Ausgang (ISO 640 · 1/100 · f/4)</th><th>ND nötig</th></tr></thead>
+<tbody>
+<tr><td>Praller Sonnentag</td><td>~5–7 Stops zu hell</td><td class="numcell">ND64–ND128 (6–7 Stops)</td></tr>
+<tr><td>Bewölkt / Schatten</td><td>~3–4 Stops zu hell</td><td class="numcell">ND8–ND16 (3–4 Stops)</td></tr>
+<tr><td>Innen am Fenster</td><td>~1–2 Stops zu hell</td><td class="numcell">ND2–ND4 oder Blende schließen</td></tr>
+<tr><td>Innen Kunstlicht</td><td>passt meist ohne</td><td class="numcell">—</td></tr>
+</tbody>
+</table></div>
+<div class="note">Ein <b>Variabel-ND</b> deckt das mit einem Filter ab. Ab der starken Stellung auf Kreuzmuster (X-Pattern) achten — dann eine Stufe zurück. Wer die Blende als Gestaltungsmittel fixiert (z. B. f/2.8 für Freistellung), regelt <b>nur</b> über ND.</div>

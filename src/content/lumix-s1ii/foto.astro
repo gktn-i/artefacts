@@ -1,0 +1,65 @@
+<div class="kurz"><b>Foto-Grundgerüst:</b> <b>RAW in 3:2</b> (natives Format, volle 24 MP) · Basis-ISO <b>100</b> · mechanischer Verschluss als Standard, elektronisch für lautlos und 70 fps · Blitz nur mechanisch (Sync <b>1/250</b>). Der Rest ist Szenen-Feintuning.</div>
+
+<h2>Drive &amp; Burst</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Modus</th><th>Speed</th><th>AF / Blitz</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Einzelbild</b></td><td class="numcell">—</td><td>alles frei</td><td>Standard für Statisches</td></tr>
+<tr><td><b>Mechanisch H</b></td><td class="numcell">10 fps</td><td>AFC, blitztauglich</td><td>Kontrollierte Action, Blitz, geringste Verzerrung</td></tr>
+<tr><td><b>Elektronisch SH</b></td><td class="numcell">70 fps</td><td>AFC/AFS mit AF/AE-Nachführung, blackout-frei</td><td>Sport, Tiere, Fahrzeuge — kein Blitz</td></tr>
+<tr><td><b>SH mit reduzierter Rate</b></td><td class="numcell">wählbar unter 70 fps</td><td>wie SH</td><td>Seit <b>Firmware 1.2</b>: weniger Ausschuss bei gleichem Prinzip</td></tr>
+<tr><td><b>SH Pre-Burst</b></td><td class="numcell">bis 70 fps · 1,5 s Puffer</td><td>wie SH</td><td>Nimmt schon <b>vor</b> dem Durchdrücken auf — der Unvorhersehbar-Moment</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Korrigiert beim Faktencheck:</b> Die „Lücke zwischen 10 und 70 fps" galt nur bis November 2025 — <b>Firmware 1.2</b> hat eine langsamere SH-Stufe nachgereicht (inklusive Pre-Burst). SH-Serien sind weiterhin nicht als HEIF speicherbar, und der Puffer will eine schnelle Karte (CFexpress).</div>
+
+<h2>Verschluss-Typen</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Typ</th><th>Bereich</th><th>Stärken</th><th>Grenzen</th></tr></thead>
+<tbody>
+<tr><td><b>Mechanisch</b></td><td class="numcell">60 s – 1/8000</td><td>Blitzsync <b>1/250</b>, robust gegen Kunstlicht-Banding</td><td>Verschleiß, leises Klacken</td></tr>
+<tr><td><b>Elektronisch</b></td><td class="numcell">bis 1/16000</td><td>Lautlos, 70 fps, kein Verschleiß, kaum RS dank Sensor</td><td>Banding unter LED/Neon möglich, Blitz stark eingeschränkt</td></tr>
+<tr><td><b>EFC</b> (1. Vorhang elektronisch)</td><td class="numcell">wie mechanisch</td><td>Kein Shutter-Shock bei mittleren Zeiten</td><td>Bei sehr kurzen Zeiten Bokeh-Beschnitt möglich → dann voll mechanisch</td></tr>
+<tr><td><b>Anti-Flicker</b></td><td>—</td><td>Synchronisiert die Auslösung auf die Lichtwelle</td><td>Kostet minimal Auslöseverzögerung — unter Kunstlicht trotzdem an</td></tr>
+</tbody>
+</table></div>
+
+<h2>ISO Foto</h2>
+<div class="basepair">
+  <div class="base low"><div class="lbl">Basis</div><div class="val">100</div><div class="det">Sauberste Stufe, maximale Dynamik — Standard bei Tag</div></div>
+  <div class="base high"><div class="lbl">Zweite Stufe</div><div class="val">~800</div><div class="det">Zweite Verstärkungsstufe für wenig Licht — direkt hinspringen</div></div>
+</div>
+<div class="note"><b>Einordnung:</b> Offiziell dokumentiert ist für Fotos nur der Bereich <b>ISO 100–51200</b> (erweitert 50–204800). Die zweite Verstärkungsstufe um ~800 ist ein Community-Messwert (Dual-Conversion-Gain des Sensors) — fürs Arbeiten gilt: Tag auf 100 bleiben, bei wenig Licht direkt auf ~800 statt 400er-Zwischenwerte. <b>Wichtig:</b> Die Foto-Basen sind <b>nicht</b> die V-Log-Video-Basen (640/5000).</div>
+
+<h2>Belichtungsmessung</h2>
+<div class="grid">
+<div class="card"><div class="ct">Mehrfeld (Multi)</div><div class="cd">Ausgewogen übers ganze Bild.</div><ul><li><b>Standard</b> — passt in 90 % der Fälle</li></ul></div>
+<div class="card"><div class="ct">Mittenbetont</div><div class="cd">Gewichtet die Bildmitte.</div><ul><li>Porträt, Motiv zentral</li></ul></div>
+<div class="card"><div class="ct">Spot</div><div class="cd">Punktmessung am AF-Feld.</div><ul><li>Gegenlicht, Bühne, High-Contrast</li></ul></div>
+<div class="card"><div class="ct">Highlight-betont</div><div class="cd">Schützt Lichter vor dem Clipping.</div><ul><li>Konzert, Spot-Beleuchtung, weiße Kleidung</li></ul></div>
+</div>
+
+<h2>Datei &amp; Photo Style</h2>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Format</th><th>Eigenschaft</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>RAW</b></td><td class="numcell">14-bit</td><td>Maximaler Spielraum — <b>der Standard</b>. Ratio-Crops bleiben verlustfrei umkehrbar</td></tr>
+<tr><td><b>HEIF</b></td><td class="numcell">10-bit, HLG</td><td>HDR-Ausgabe ohne Bearbeitung, effizienter als JPEG. Nicht mit SH-Burst</td></tr>
+<tr><td><b>JPEG</b></td><td class="numcell">8-bit</td><td>Fertig zum Teilen, zwei Kompressionsstufen</td></tr>
+<tr><td><b>RAW + JPEG/HEIF</b></td><td>—</td><td>Wenn sofort etwas herausgegeben werden muss und der Rest in die Post geht</td></tr>
+<tr><td><b>Real Time LUT</b></td><td>—</td><td>Eigener Look direkt eingebacken — gleiche LUTs wie im Video-Zweig</td></tr>
+<tr><td><b>Photo Styles</b></td><td>—</td><td>Standard, Natural, Flat, L.Monochrome (S/D), Cinelike u. a. — bei RAW nur Vorschau-Charakter</td></tr>
+</tbody>
+</table></div>
+
+<h2>Custom Modes Foto (C-Slots)</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Slot</th><th>Preset</th><th>Settings</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td class="numcell">C1</td><td><b>Action</b></td><td>SH/Pre-Burst 70 fps · elektronisch · AFC + Subjekt · 1/1000+ · f/2.8–5.6 · Auto-ISO · Anti-Flicker</td><td>Motorsport, Tiere, Event-Momente</td></tr>
+<tr><td class="numcell">C2</td><td><b>Produkt / Stacking</b></td><td>Einzel + Fokus-Bracket · mech/EFC · AFS · f/5.6–8 · ISO 100 · Stativ, 2 s Delay</td><td>Modelle, Elektronik, Makro</td></tr>
+<tr><td class="numcell">C3</td><td><b>Landschaft / Default</b></td><td>Einzel · mechanisch · A-Modus · AFS · f/8 · ISO 100 · RAW 3:2</td><td>Allround-Ausgangspunkt</td></tr>
+<tr><td class="numcell">C4</td><td><b>High-Res 96 MP</b></td><td>Stativ · 2 s Delay · MF/AF-Lock · f/5.6–8 · ISO 100 · M + WB fix</td><td>Repro und Maximaldetail — nur statisch</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Alternative für C4:</b> Wer öfter bei wenig Licht fotografiert als reproduziert, legt stattdessen ein Low-Light-Set (Auto-ISO mit hohem Cap, f/1.4–2.8, AFC) auf den Slot. <b>Blitz-Regel für alle Slots:</b> Blitz nur mit mechanischem Verschluss — im elektronischen C1 bleibt er aus.</div>
