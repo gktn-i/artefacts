@@ -1,4 +1,4 @@
-<div class="kurz"><b>Zwei Betriebsarten:</b> <b>Reflow</b> — ganze Platine durchlöten, Peak bleihaltig <b>205–215 °C</b> / bleifrei <b>240–250 °C</b>. <b>Vorwärmen</b> — Board auf <b>100–180 °C</b> halten, damit oben viel weniger Hitze nötig ist. Vorwärmen ist bei BGA keine Option, sondern Pflicht.</div>
+<div class="kurz"><b>Zwei Betriebsarten:</b> <b>Vorwärmen</b> — drei Standardwerte reichen für fast alles: <b>120 °C</b> (kleine Platine) · <b>150 °C</b> (Laptop/Konsole) · <b>170 °C</b> (Handy-Board mit Underfill). Damit sinkt die nötige Heißluft-Temperatur oben um <b>50–80 °C</b>. <b>Reflow</b> — ganze Platine durchlöten, Peak bleihaltig <b>205–215 °C</b> / bleifrei <b>240–250 °C</b>. Bei BGA ist Vorwärmen keine Option, sondern Pflicht.</div>
 
 <h2>Meine Heizplatte im Griff</h2>
 <p>Die Platte bringt Wärme <b>flächig von unten</b> ein. Damit löst sie das Grundproblem jeder Rework-Arbeit: Ein kaltes Board saugt die Wärme aus der Lötstelle weg, und man hält mit immer mehr Hitze von oben dagegen — bis Pads, Kleber und Nachbarn leiden.</p>
@@ -27,6 +27,50 @@
 </table></div>
 <div class="warn"><b>Unter dem Schmelzpunkt bleiben.</b> Vorwärmen darf Lot nicht aufschmelzen, sonst lösen sich Nachbarbauteile mit. Bleihaltig heißt: unter 183 °C. Bleifrei: unter 217 °C.</div>
 
+<h4>Platte-Soll ist nicht Board-Ist</h4>
+<p>Die Platte regelt ihre <b>Oberfläche</b>. Was im Board ankommt, ist immer weniger — abhängig von Masse, Kupferlagen und wie plan das Board aufliegt. Deshalb stellt man die Platte <b>höher</b> ein als die gewünschte Boardtemperatur.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Board</th><th>Board-Ziel</th><th>Platte einstellen</th><th>Differenz</th><th>Bis der Wert steht</th></tr></thead>
+<tbody>
+<tr><td>Kleine Platine, wenig Kupfer</td><td><b>100–110 °C</b></td><td><b>120 °C</b></td><td class="numcell">~10–20 K</td><td class="numcell">1–2 min</td></tr>
+<tr><td>Handy-Mainboard</td><td><b>130–150 °C</b></td><td><b>160–170 °C</b></td><td class="numcell">~20–30 K</td><td class="numcell">2–3 min</td></tr>
+<tr><td>Handy-Board <b>mit Underfill</b></td><td><b>150–170 °C</b></td><td><b>170–190 °C</b></td><td class="numcell">~20–30 K</td><td class="numcell">3–4 min</td></tr>
+<tr><td>Laptop-Mainboard</td><td><b>120–140 °C</b></td><td><b>150–170 °C</b></td><td class="numcell">~30–40 K</td><td class="numcell">3–5 min</td></tr>
+<tr><td>Konsolen-Mainboard, dicke Massefläche</td><td><b>140–160 °C</b></td><td><b>170–200 °C</b></td><td class="numcell">~30–50 K</td><td class="numcell">4–6 min</td></tr>
+<tr><td>Einzelner Chip im Reball-Jig</td><td><b>80–100 °C</b></td><td><b>90–120 °C</b></td><td class="numcell">~10 K</td><td class="numcell">unter 1 min</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Nur das Thermoelement sagt die Wahrheit.</b> Die Werte oben sind Startwerte — die tatsächliche Differenz hängt an deinem Board und daran, wie plan es aufliegt. Fühler mit Kapton <b>direkt neben dem Zielbauteil</b> fixieren, dann die Platte so nachziehen, dass der Fühler das Board-Ziel zeigt. Ohne Fühler gilt: eher die untere Zeile nehmen und länger warten.</div>
+
+<h4>Was die Vorwärmung oben spart</h4>
+<p>Das ist der eigentliche Sinn der Platte: Je wärmer das Board schon ist, desto weniger muss die Heißluft leisten — und desto weniger leiden Pads, Kleber und Nachbarn.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Board-Temperatur</th><th>Heißluft bleihaltig</th><th>Heißluft bleifrei</th><th>Luftstrom</th><th>Folge</th></tr></thead>
+<tbody>
+<tr><td><b>kalt</b> (~25 °C)</td><td><b>350–380 °C</b></td><td><b>370–400 °C</b></td><td class="numcell">40–50 %</td><td>Pads reißen, Lack wird braun, Kleber gibt auf — der Zustand, den man vermeiden will</td></tr>
+<tr><td><b>100 °C</b></td><td><b>330–350 °C</b></td><td><b>350–370 °C</b></td><td class="numcell">35–40 %</td><td>Schon spürbar entspannter, reicht für kleine Boards</td></tr>
+<tr><td><b>150 °C</b></td><td><b>300–330 °C</b></td><td><b>330–360 °C</b></td><td class="numcell">30 %</td><td><b>Der Arbeitspunkt</b> — Matrix-Werte im Tab <a class="goto" href="#heissluftstation">Heißluftstation</a> gehen von hier aus</td></tr>
+<tr><td><b>170–180 °C</b></td><td><b>290–310 °C</b></td><td><b>320–340 °C</b></td><td class="numcell">25–30 %</td><td>BGA und große Chips lösen sich gleichmäßig statt von den Rändern her</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Merksatz:</b> Jede <b>50 °C</b> Vorwärmung sparen rund <b>20–30 °C</b> Heißluft — und noch mehr Zeit, weil die Wärme nicht erst seitlich ins kalte Board abfließen muss. Deshalb ist die Platte bei BGA kein Komfort, sondern Voraussetzung.</div>
+
+<h4>Was wie viel Vorwärmung verträgt</h4>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Was auf dem Board sitzt</th><th>Unkritisch bis</th><th>Kritisch ab</th><th>Maßnahme</th></tr></thead>
+<tbody>
+<tr><td>Platinenmaterial FR-4</td><td><b>~200 °C</b></td><td>250 °C (Delamination)</td><td>Beim Vorwärmen kein Thema — Grenze setzt das Lot</td></tr>
+<tr><td>Lot bleihaltig / bleifrei</td><td><b>175 °C</b> / <b>205 °C</b></td><td>183 °C / 217 °C = Schmelzpunkt</td><td><b>Die harte Obergrenze.</b> Darüber lösen sich Nachbarbauteile</td></tr>
+<tr><td>Kleber, Underfill</td><td>—</td><td>wird ab <b>~150 °C</b> weich</td><td>Genau erwünscht beim BGA-Ausbau — sonst Vorsicht bei geklebten Teilen</td></tr>
+<tr><td>Elkos</td><td><b>~105 °C</b> dauerhaft</td><td>über 125 °C, minutenlang</td><td>Zeit kurz halten oder Elkos vorher auslöten</td></tr>
+<tr><td>Kunststoffstecker, Halterahmen</td><td><b>~120 °C</b></td><td>ab ~140 °C verformt es sich</td><td>Vorher abziehen — geht fast immer</td></tr>
+<tr><td>Display, OCA-Kleber, Folienkabel</td><td><b>~80 °C</b></td><td>ab ~100 °C irreversibel</td><td><b>Komplett entfernen</b>, nicht abdecken</td></tr>
+<tr><td>Akku / Zelle</td><td>—</td><td><b>ab ~60 °C gefährlich</b></td><td>Immer raus. Keine Ausnahme, kein „nur kurz"</td></tr>
+<tr><td>Kapton-Tape</td><td><b>~250 °C</b></td><td>—</td><td>Das richtige Abdeckmaterial für alles, was bleiben muss</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Zeitbudget nicht vergessen:</b> Nicht nur die Temperatur zählt, sondern <b>Temperatur × Zeit</b>. Über 150 °C sollte ein Board insgesamt im <b>Minutenbereich</b> bleiben — 3–5 Minuten sind normal, 20 Minuten kosten Kleber, Elkos und Padhaftung, auch wenn die Temperatur „unter Schmelzpunkt" war.</div>
+
 <h3>Betriebsart B · Reflow (ganze Platine)</h3>
 <p>Ein Reflow-Profil hat vier Phasen. Jede hat eine Aufgabe — deshalb funktioniert „einfach auf Peak heizen" nicht zuverlässig.</p>
 <div class="tbl-wrap"><table style="min-width:800px">
@@ -45,7 +89,9 @@
 <div class="steps">
 <div class="step"><b>Board plan auflegen.</b> Vollflächiger Kontakt — Abstandshalter und Aufkleber unter dem Board machen kalte Zonen.</div>
 <div class="step"><b>Thermoelement neben das Zielbauteil</b> legen und mit Kapton fixieren. Die Plattenanzeige ist nicht die Boardtemperatur.</div>
-<div class="step"><b>Solltemperatur setzen</b> (Tabelle oben) und <b>halten</b>, bis die gemessene Boardtemperatur wirklich steht — nicht sofort weiterarbeiten.</div>
+<div class="step"><b>In zwei Stufen hochfahren</b>, nicht sofort auf den Endwert: erst ~100 °C, eine Minute halten, dann auf die Solltemperatur aus der Tabelle. Die Rampe verhindert, dass sich das Board verzieht.</div>
+<div class="step"><b>Warten, bis der Fühler wirklich steht</b> — je nach Boardmasse 1–6 Minuten. Die Plattenanzeige ist längst am Ziel, wenn das Board noch 30 K darunter liegt.</div>
+<div class="step"><b>Zeit mitlaufen lassen.</b> Ab hier tickt das Budget: über 150 °C insgesamt im Minutenbereich bleiben.</div>
 <div class="step"><b>Von oben arbeiten</b> — mit deutlich reduzierter Heißluft-Temperatur.</div>
 <div class="step"><b>Stufenweise herunterfahren.</b> Nicht abschalten und Board wegziehen.</div>
 </div>

@@ -1,6 +1,64 @@
-<div class="kurz"><div><b>Die Handgriffe und die Erwartungswerte.</b> Welches Gerät wofür taugt, steht im Tab <a href="#messgeraete">Messgeräte im Überblick</a>, die Bedienung der eigenen Geräte in der Gruppe <b>Meine Geräte</b>; was du tust, wenn ein Wert nicht stimmt, im Tab <a href="#fehlersuche">Fehlersuche</a>.</div></div>
-<h2>Was das Messgerät im jeweiligen Modus tut</h2>
-<p>Wenn du das weißt, verstehst du auch, warum ein Modus stromlos gemessen werden muss und ein anderer nicht:</p>
+<div class="kurz"><div><b>Jeder Modus gehört zu einer von zwei Familien.</b> <b>Horchende Modi</b> (V, mV, A, Hz, °C) messen, was ohnehin da ist — die Schaltung bleibt an. <b>Einspeisende Modi</b> (Ω, CONT, DIODE, CAP) legen selbst eine Prüfspannung an — die Schaltung muss <b>stromlos</b> sein. Wer das weiß, macht die zwei häufigsten Anfängerfehler nicht mehr.</div></div>
+<h2>Die Modi am Drehrad — was jede Beschriftung tut</h2>
+<p>Je nach Gerät stehen Symbole, englische Kürzel oder beides auf dem Drehrad. Diese Tabelle übersetzt sie einmal komplett — <b>was der Modus macht, was im Display steht, wofür du ihn nimmst</b> und die Falle, in die man dabei tappt.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Beschriftung</th><th>Was der Modus macht</th><th>Was im Display steht</th><th>Wofür</th><th>Typische Falle</th></tr></thead>
+<tbody>
+<tr><td><b>V⎓ · DCV · V=</b><br><span class="cd">Gleichspannung</span></td><td>Misst die Spannungs<b>differenz</b> zwischen den beiden Spitzen, hochohmig (10 MΩ)</td><td>Volt, mit Vorzeichen</td><td><b>Der 90-%-Modus.</b> Rails, Batterien, Netzteile, Signale im Ruhezustand</td><td>Kein Bezugspunkt gewählt — Schwarz muss an <b>der</b> Masse liegen, auf die sich der Wert beziehen soll</td></tr>
+<tr><td><b>V~ · ACV</b><br><span class="cd">Wechselspannung</span></td><td>Misst nur den <b>Wechselanteil</b>; der Gleichanteil wird ausgeblendet (AC-gekoppelt)</td><td>Effektivwert in Volt</td><td>Steckdose, Trafo-Ausgang, Brumm auf einer Versorgung</td><td>An PWM und Schaltnetzteilen ohne <b>True RMS</b> deutlich falsch — und Geisterspannungen bei offenen Spitzen</td></tr>
+<tr><td><b>mV⎓ · mV</b></td><td>Wie V⎓, nur mit feinstem Bereich (oft 1 µV Auflösung)</td><td>Millivolt</td><td>Shunt-Messungen, Thermospannungen, Spannungsabfall über einer Leiterbahn</td><td>Sehr empfindlich für Einstreuung — Leitungen kurz halten</td></tr>
+<tr><td><b>A⎓ · mA · µA</b><br><span class="cd">Strom</span></td><td>Leitet den Strom <b>durch</b> einen Shunt im Gerät und misst dessen Spannungsabfall</td><td>Ampere/Milliampere</td><td>Stromaufnahme, Ruhestrom, Verbrauch je Baugruppe</td><td>Gerät muss <b>in Reihe</b>. Spitzen im A-Modus an eine Spannungsquelle = Kurzschluss</td></tr>
+<tr><td><b>Ω · RES · OHM</b><br><span class="cd">Widerstand</span></td><td><b>Speist selbst</b> einen kleinen bekannten Strom ein und rechnet aus der entstehenden Spannung den Widerstand — Prüfspannung bleibt <b>unter ~1 V</b>, damit Halbleiter nicht öffnen</td><td>Ohm, oder <b>OL</b> = zu groß / unterbrochen</td><td>Bauteilwerte, Leitungswiderstand, Wicklungen, Sicherungen</td><td>Nur <b>stromlos</b>. Eingelötet misst du alles Parallele mit — Wert immer <b>kleiner</b> als der echte</td></tr>
+<tr><td><b>CONT · ))) · 🔊</b><br><span class="cd">Durchgang</span></td><td>Technisch dasselbe wie Ω — nur wird unterhalb einer Schwelle (typ. <b>30–50 Ω</b>) gepiept statt eine Zahl gezeigt</td><td>Ton + Zahl (je nach Gerät)</td><td>Ja/Nein ohne hinzusehen: Kabelbruch, Lötbrücke, Sicherung, Steckerbelegung</td><td>„Piept" heißt <b>nicht</b> „gut" — 20 Ω in einer Masseleitung piepen und sind trotzdem ein Fehler</td></tr>
+<tr><td><b>DIODE · ▷⊢</b><br><span class="cd">Diodentest</span></td><td>Speist ~0,5–1 mA bei <b>2–3 V Leerlaufspannung</b> ein — genug, um Halbleiter-Übergänge zu <b>öffnen</b> — und zeigt den Spannungsabfall</td><td>Volt (die Durchlassspannung)</td><td>Dioden, LEDs, Transistorstrecken — und der <b>Board-Schnelltest</b>: jeden IC-Pin gegen Masse abklopfen</td><td>Blaue/weiße LEDs zeigen oft OL, weil 3 V Prüfspannung nicht reichen — <b>kein</b> Defekt</td></tr>
+<tr><td><b>CAP · ⊣⊢ · F</b><br><span class="cd">Kapazität</span></td><td><b>Lädt und entlädt</b> den Kondensator mit definiertem Strom und misst die Zeit daraus</td><td>µF / nF / pF</td><td>Elkos und Keramik-Cs prüfen, unbeschriftete Bauteile bestimmen</td><td>Vorher <b>entladen</b>. Eingelötet verfälschen Parallelbauteile — und ESR sieht dieser Modus <b>nicht</b></td></tr>
+<tr><td><b>Hz · % · DUTY</b><br><span class="cd">Frequenz</span></td><td><b>Zählt Nulldurchgänge</b> pro Sekunde bzw. das Verhältnis High zu Periode. Keine Formanalyse</td><td>Hertz bzw. Prozent</td><td>Takt prüfen, PWM-Frequenz und Tastgrad ablesen</td><td>Sagt „wie oft", nie „wie es aussieht". Verrauschte Signale ergeben Fantasiewerte → <a class="goto" href="#oszilloskop">Oszilloskop</a></td></tr>
+<tr><td><b>°C · TEMP</b></td><td>Misst die winzige <b>Thermospannung</b> eines angeschlossenen Typ-K-Fühlers und rechnet sie in Grad um</td><td>°C oder °F</td><td>Kühlkörper, heiß werdende Bauteile, Lötspitzen grob gegenprüfen</td><td>Ohne Fühler zeigt es Raumtemperatur oder Unsinn; Fühler braucht guten Kontakt und 10–20 s Zeit</td></tr>
+<tr><td><b>hFE</b></td><td>Legt Basisstrom an einen in den Sockel gesteckten Transistor und misst den Kollektorstrom</td><td>Verstärkungsfaktor (Zahl ohne Einheit)</td><td>Bedrahtete Transistoren grob sortieren</td><td>Nur bedrahtet, nur bei passender Sockelbelegung. Der <a class="goto" href="#lcrp1">Komponententester</a> kann das besser und automatisch</td></tr>
+<tr><td><b>NCV</b><br><span class="cd">berührungslos</span></td><td>Erkennt das <b>elektrische Wechselfeld</b> in der Nähe eines Leiters — ganz ohne Kontakt</td><td>Balken/Ton, <b>kein</b> Zahlenwert</td><td>Schnelle Warnung „hier liegt Netzspannung an"</td><td><b>Kein Sicherheitsnachweis.</b> Zeigt nichts bei abgeschirmten oder Gleichspannungsleitungen — Spannungsfreiheit immer messen</td></tr>
+<tr><td><b>LoZ · LowZ</b><br><span class="cd">nicht auf jedem Gerät</span></td><td>Schaltet einen <b>niederohmigen</b> Eingang (einige kΩ) parallel — belastet die Messstelle absichtlich</td><td>Volt, aber ohne Geisterspannung</td><td>Installationstechnik: unterscheidet echte Spannung von eingekoppelter Phantomspannung</td><td><b>Niemals</b> an Elektronik oder Signalleitungen — die Belastung bringt empfindliche Schaltungen aus dem Tritt</td></tr>
+</tbody>
+</table></div>
+
+<h3>Die vier Modi, die am meisten verwechselt werden</h3>
+<div class="grid2">
+<div class="card"><h3>CONT vs. Ω</h3><p>Beide messen dasselbe. Der Unterschied ist nur die <b>Ausgabe</b>: CONT vergleicht gegen eine feste Schwelle und piept, Ω zeigt die Zahl.</p><ul>
+<li><b>CONT nehmen,</b> wenn du beim Messen auf die Spitzen schaust (feine Pins, Steckerbelegung)</li>
+<li><b>Ω nehmen,</b> sobald der Wert selbst zählt — Übergangswiderstände, Wicklungen, Leitungen</li>
+<li>Bei „piept, aber Gerät geht trotzdem nicht": in Ω wechseln und den echten Wert ansehen</li>
+</ul></div>
+<div class="card"><h3>DIODE vs. Ω</h3><p>Der entscheidende Unterschied ist die <b>Prüfspannung</b>: Ω bleibt unter ~1 V und lässt Halbleiter zu, DIODE geht auf 2–3 V und <b>öffnet</b> sie.</p><ul>
+<li>Deshalb misst Ω an einem IC-Pin oft „unendlich", DIODE aber 0,5 V</li>
+<li>Genau darum ist DIODE der <b>Standard-Schnelltest</b> auf Boards: Schwarz an Masse, mit Rot die Pins abfahren</li>
+<li><b>0,000 V</b> an einem Pin = Kurzschluss nach Masse — der schnellste Weg zum toten Bauteil</li>
+</ul></div>
+<div class="card"><h3>CAP — und was er nicht sieht</h3><p>Der Modus misst die <b>Kapazität</b> über Laden und Entladen. Was ein alternder Elko wirklich verliert, ist aber sein <b>ESR</b>.</p><ul>
+<li>Ein müder Elko kann fast korrekte µF zeigen und trotzdem defekt sein</li>
+<li>Für ESR: <a class="goto" href="#lcrp1">Komponententester</a></li>
+<li>Große Elkos brauchen im CAP-Modus mehrere Sekunden bis zum Endwert — nicht vorher ablesen</li>
+</ul></div>
+<div class="card"><h3>AC-Kopplung im V~-Modus</h3><p>V~ blendet den Gleichanteil aus. Ein Signal mit Offset muss deshalb <b>in beiden Modi</b> gemessen werden.</p><ul>
+<li>Beispiel 12-V-Versorgung mit Brumm: V⎓ zeigt 12 V, V~ zeigt die Welligkeit</li>
+<li>Ohne True RMS gilt die V~-Anzeige nur für saubere Sinuskurven</li>
+<li>Offene Spitzen im V~-Modus zeigen fast immer etwas — das ist normal, siehe unten</li>
+</ul></div>
+</div>
+
+<h3>Die Tasten — und woran du merkst, dass sie noch aktiv sind</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Taste</th><th>Was passiert</th><th>Wofür</th><th>Aktiv erkennst du an</th></tr></thead>
+<tbody>
+<tr><td><b>SELECT · MODE · FUNC</b></td><td>Schaltet zwischen mehreren Funktionen <b>derselben</b> Drehrad-Stellung</td><td>Ω → CONT → DIODE, oder V⎓ → V~</td><td>Symbol im Display — nicht der Beschriftung am Rad vertrauen</td></tr>
+<tr><td><b>RANGE</b></td><td>Auto-Range aus, fester Bereich; langes Drücken zurück auf Auto</td><td>Wenn die Anzeige zwischen zwei Bereichen springt oder du feste Stellenzahl brauchst</td><td>„AUTO" verschwindet, Bereichsangabe steht fest</td></tr>
+<tr><td><b>REL · ZERO · Δ</b></td><td>Nimmt den aktuellen Wert als neue Null; angezeigt wird ab da die <b>Abweichung</b></td><td>Leitungswiderstand wegrechnen (Spitzen zusammen → REL), Abweichung von einem Sollwert ablesen</td><td><b>Δ</b> oder „REL" im Display — <b>die häufigste Verwechslungsquelle</b></td></tr>
+<tr><td><b>HOLD</b></td><td>Friert die Anzeige ein, misst aber nicht weiter</td><td>Messpunkt schlecht einsehbar: antasten, dann ablesen</td><td>„H"/„HOLD" — ein Wert, der auffällig still steht, ist verdächtig</td></tr>
+<tr><td><b>MIN/MAX · PEAK</b></td><td>Merkt sich Extremwerte über die Messdauer</td><td>Einschaltstromspitze, kurzer Spannungseinbruch, Wackelkontakt suchen</td><td>„MAX"/„MIN" im Display, Wert ändert sich nur noch nach oben bzw. unten</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Die drei Modi-Fehler, die alle einmal machen:</b> ① Im <b>A-Modus</b> die Spitzen an eine Spannungsquelle halten — Kurzschluss über den Shunt. ② <b>Ω/CONT/DIODE/CAP</b> an einer eingeschalteten Schaltung — falsche Werte, im schlimmsten Fall Schaden. ③ <b>REL</b> aus einer alten Messung noch aktiv und sich über „unmögliche" Werte wundern.</div>
+
+<h2>Warum manche Modi Strom brauchen und andere nicht</h2>
+<p>Dieselben Modi noch einmal — aber von innen betrachtet. Wenn du weißt, <b>was das Gerät selbst tut</b>, ergibt sich die Regel „stromlos oder nicht" von allein:</p>
 <div class="tbl-wrap"><table style="min-width:800px">
 <thead><tr><th>Modus</th><th>Was das Gerät macht</th><th>Folge für dich</th></tr></thead>
 <tbody>
