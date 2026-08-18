@@ -1,4 +1,4 @@
-<div class="kurz"><b>Zwei Regler, zwei Bedeutungen:</b> <b>Temperatur</b> = wie heiß die Luft ist · <b>Luftstrom</b> = wie viel Wärme pro Sekunde ankommt. Standard SMD: bleihaltig <b>300 °C</b> / bleifrei <b>340 °C</b>, Luft <b>30–40 %</b>, Düse etwa so groß wie das Bauteil. Nachbarn mit Kapton abdecken.</div>
+<div class="kurz"><b>Zwei Regler, zwei Bedeutungen:</b> <b>Temperatur</b> = wie heiß die Luft ist · <b>Luftstrom</b> = wie viel Wärme pro Sekunde ankommt. Standard-SMD-Startwerte: bleihaltig <b>310 °C</b> / bleifrei <b>340 °C</b> bei <b>30–35 %</b> Luft, Düse etwa so groß wie das Bauteil, Abstand ~1–2 cm. Nachbarn mit Kapton abdecken.</div>
 
 <h2>Meine Heißluftstation im Griff</h2>
 <p>Die Heißluft erwärmt <b>alle Anschlüsse gleichzeitig</b>. Das macht sie zum Werkzeug der Wahl für alles, was der Kolben nicht erreicht — und zum einzigen schadensfreien Weg, ein bestücktes SMD-Bauteil wieder abzuheben.</p>
@@ -17,22 +17,36 @@
 <div class="warn"><b>Reihenfolge beim Ausschalten:</b> Handstück ablegen → Cooldown komplett durchlaufen lassen → erst dann Netzschalter. Wer sofort abschaltet, lässt die Restwärme im Heizelement stehen; das kostet Lebensdauer.</div>
 
 <h3>Temperatur × Luftstrom — die Arbeitsmatrix</h3>
-<div class="tbl-wrap"><table style="min-width:800px">
-<thead><tr><th>Aufgabe</th><th>Temperatur bleihaltig</th><th>Temperatur bleifrei</th><th>Luftstrom</th><th>Düse</th></tr></thead>
+<p><b>Fetter Wert = so einstellen und loslegen.</b> Die Klammer ist der Korridor zum Nachregeln, wenn Board oder Bauteil aus der Reihe fallen. Alle Temperaturen sind Düsenwerte bei 1–2 cm Abstand.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Aufgabe</th><th>Start bleihaltig</th><th>Start bleifrei</th><th>Luftstrom</th><th>Düse</th><th>Abstand · Zeitgefühl</th></tr></thead>
 <tbody>
-<tr><td>Chip 0402 / 0201 setzen oder abheben</td><td>270–300 °C</td><td>300–330 °C</td><td><b>15–25 %</b></td><td>klein (3–4 mm)</td></tr>
-<tr><td>Chip 0603–1206, SOT, SOD</td><td>290–320 °C</td><td>320–350 °C</td><td>25–35 %</td><td>4–6 mm</td></tr>
-<tr><td>SOIC / TSSOP / QFP</td><td>300–330 °C</td><td>330–360 °C</td><td>30–40 %</td><td>Bauteilgröße</td></tr>
-<tr><td>QFN / DFN</td><td>300–330 °C</td><td>330–360 °C</td><td>30–40 %</td><td>Bauteilgröße</td></tr>
-<tr><td>BGA aufschmelzen (mit Vorwärmung)</td><td>300–330 °C</td><td>330–360 °C</td><td>25–35 %</td><td>groß / Chipgröße</td></tr>
-<tr><td>BGA ausbauen (mit Vorwärmung)</td><td>320–350 °C</td><td>350–380 °C</td><td>30 %</td><td>groß / Chipgröße</td></tr>
-<tr><td>Große Masseflächen, Abschirmbleche</td><td>350–380 °C</td><td>380–400 °C</td><td>50–70 %</td><td>groß</td></tr>
-<tr><td>Schrumpfschlauch</td><td colspan="2">100–150 °C</td><td>30–50 %</td><td>Reflektor</td></tr>
-<tr><td>Kleber/Underfill weich machen</td><td colspan="2">180–200 °C</td><td>30 %</td><td>mittel</td></tr>
-<tr><td>Harten Flux wieder lösen</td><td colspan="2">150–160 °C</td><td>40 %</td><td>mittel</td></tr>
+<tr><td>Chip 0402 / 0201 setzen oder abheben</td><td><b>290 °C</b> (270–300)</td><td><b>320 °C</b> (300–330)</td><td><b>20 %</b> (15–25)</td><td>klein, 3–4 mm</td><td>1,5–2 cm · 10–20 s</td></tr>
+<tr><td>Chip 0603–1206, SOT, SOD</td><td><b>310 °C</b> (290–320)</td><td><b>340 °C</b> (320–350)</td><td><b>30 %</b> (25–35)</td><td>4–6 mm</td><td>1–2 cm · 15–25 s</td></tr>
+<tr><td>SOIC / TSSOP / QFP</td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>35 %</b> (30–40)</td><td>Bauteilgröße</td><td>1–2 cm · 20–40 s</td></tr>
+<tr><td>QFN / DFN</td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>30 %</b> (30–40)</td><td>Bauteilgröße</td><td>1–2 cm · 20–45 s</td></tr>
+<tr><td>BGA aufschmelzen <span class="b b-platte">+ Vorwärmung</span></td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>30 %</b> (25–35)</td><td>groß / Chipgröße</td><td>2–3 cm · 30–90 s</td></tr>
+<tr><td>BGA ausbauen <span class="b b-platte">+ Vorwärmung</span></td><td><b>340 °C</b> (320–350)</td><td><b>365 °C</b> (350–380)</td><td><b>30 %</b></td><td>groß / Chipgröße</td><td>2–3 cm · 30–120 s</td></tr>
+<tr><td>Große Masseflächen, Abschirmbleche</td><td><b>365 °C</b> (350–380)</td><td><b>390 °C</b> (380–400)</td><td><b>60 %</b> (50–70)</td><td>groß</td><td>1–2 cm · bis es nachgibt</td></tr>
+<tr><td>Schrumpfschlauch</td><td colspan="2"><b>120 °C</b> (100–150)</td><td><b>40 %</b> (30–50)</td><td>Reflektor</td><td>2–3 cm · wenige s je Stelle</td></tr>
+<tr><td>Kleber/Underfill weich machen</td><td colspan="2"><b>190 °C</b> (180–200)</td><td><b>30 %</b></td><td>mittel</td><td>2–3 cm · 20–60 s</td></tr>
+<tr><td>Harten Flux wieder lösen</td><td colspan="2"><b>155 °C</b> (150–160)</td><td><b>35 %</b> (30–40)</td><td>offen / mittel</td><td>2–3 cm · 5–10 s je Stelle</td></tr>
 </tbody>
 </table></div>
 <div class="kurz"><b>Merksatz zum Luftstrom:</b> <b>Wenig Luft</b>, wenn etwas <i>wegfliegen</i> kann (lose Kugeln, Paste, 0201). <b>Viel Luft</b>, wenn viel <i>Masse</i> zu erwärmen ist (Masseflächen, dicke Bleche). Hoher Luftstrom heizt nicht besser durch — er bläst nur mehr weg und kühlt die Umgebung aus.</div>
+
+<h4>Die Luftstrom-Stufen — was die Prozente bedeuten</h4>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Stufe</th><th>Charakter</th><th>Wofür</th><th>Woran du sie erkennst</th></tr></thead>
+<tbody>
+<tr><td><b>15–25 %</b> · sehr sanft</td><td>Luft trägt kaum Kraft</td><td>0201/0402, lose BGA-Kugeln, frische Lötpaste, alles was verrutschen kann</td><td>Ein Papierstreifen in 2 cm Abstand <b>zittert nur</b></td></tr>
+<tr><td><b>25–40 %</b> · Standard</td><td>Der Arbeitsbereich</td><td>Fast alle IC-Arbeiten: SOIC, QFP, QFN, BGA</td><td>Papierstreifen <b>flattert deutlich</b>, knickt aber nicht weg</td></tr>
+<tr><td><b>40–55 %</b> · kräftig</td><td>Schneller Wärmeeintrag in offene Flächen</td><td>Schrumpfschlauch, Flux lösen, Vorwärmen freier Bereiche</td><td>Papierstreifen <b>knickt weg</b></td></tr>
+<tr><td><b>55–80 %</b> · stark</td><td>Maximaler Durchsatz</td><td><b>Nur</b> Masseflächen und Abschirmbleche — bläst alles Kleine davon</td><td>Deutlich hörbar, Kleinteile in der Umgebung bewegen sich</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Skalen sind gerätespezifisch:</b> Manche Stationen zeigen Prozent, andere Stufen (1–8) oder l/min — die Prozentwerte hier beschreiben eine typische %-Skala. Auf die eigene Station überträgst du sie mit dem <b>Papierstreifen-Test</b> aus der Tabelle: Station auf 200 °C, Streifen Druckerpapier in 2 cm Abstand, und die eigene Skala einmal durchfahren — die drei Reaktionen (zittert / flattert / knickt) markieren sanft, Standard und kräftig. Einmal gemacht, sitzt die Übersetzung.</div>
+<div class="tip"><b>Nachregeln in der richtigen Reihenfolge:</b> Startwert einstellen → 20–30 Sekunden arbeiten und beobachten. <b>Schmilzt nichts:</b> Temperatur in Schritten von <b>+10–20 °C</b> erhöhen, Luft unverändert lassen. <b>Bauteil wandert oder Kleinteile zittern:</b> Luft runter, nicht die Temperatur. <b>Board wird großflächig heiß, aber das Lot bleibt fest:</b> weder noch — das ist der Fall für die <a class="goto" href="#heizplatte">Vorwärmung von unten</a>. Temperatur ist nie der Ersatz für Geduld oder für die richtige Düse.</div>
 
 <h3>Düsenwahl</h3>
 <div class="tbl-wrap"><table style="min-width:640px">
