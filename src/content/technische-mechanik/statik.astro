@@ -1,0 +1,66 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Statik ist Buchhaltung mit Pfeilen.</b> Ein Körper in Ruhe erfüllt zwei Bedingungen: die Summe aller Kräfte ist null und die Summe aller Momente ist null. Aus diesen beiden Sätzen folgt jede Lagerkraft, die man je braucht.</div>
+
+<h2>Freikörperbild — der wichtigste Handgriff</h2>
+<p>Das Freikörperbild ist kein Zwischenschritt, den man überspringen kann. Es ist der Schritt, an dem sich entscheidet, ob die Rechnung stimmt. Man schneidet das betrachtete Teil gedanklich frei und ersetzt jede entfernte Verbindung durch die Kräfte, die sie ausgeübt hat.</p>
+<div class="steps">
+  <div class="step"><h4>Körper freischneiden</h4>Ein sauberer geschlossener Schnitt um genau das Bauteil, das interessiert. Alles außerhalb verschwindet.</div>
+  <div class="step"><h4>Alle äußeren Kräfte eintragen</h4>Betriebslast, Eigengewicht im Schwerpunkt, Vorspannkräfte. Richtung und Angriffspunkt zählen — ein Pfeil an der falschen Stelle erzeugt ein falsches Moment.</div>
+  <div class="step"><h4>Lager durch ihre Reaktionen ersetzen</h4>Jedes Lager gibt genau die Kräfte ab, die es sperrt. Ein Loslager eine, ein Festlager zwei, eine Einspannung drei (in der Ebene).</div>
+  <div class="step"><h4>Koordinatensystem festlegen und dabeibleiben</h4>Richtungen einmal definieren, dann konsequent mit Vorzeichen rechnen. Ein negatives Ergebnis heißt schlicht: der Pfeil zeigt in die andere Richtung.</div>
+  <div class="step"><h4>Gleichgewicht aufstellen und auflösen</h4>ΣF_x = 0, ΣF_y = 0, ΣM = 0. Den Momentenbezugspunkt so wählen, dass möglichst viele Unbekannte herausfallen.</div>
+</div>
+
+<h2>Die Gleichgewichtsbedingungen</h2>
+<div class="fbox">
+  <span class="f">ΣF_x = 0&nbsp;&nbsp;&nbsp;&nbsp;ΣF_y = 0&nbsp;&nbsp;&nbsp;&nbsp;ΣM_A = 0</span>
+  <span class="l">In der Ebene drei Gleichungen, also maximal drei Unbekannte lösbar. Im Raum sind es sechs.</span>
+</div>
+<p>Ein Moment ist Kraft mal <em>senkrechtem</em> Abstand zur Wirklinie: <span class="formula">M = F · r_⊥</span>. Der häufigste Fehler ist, die schräge Strecke statt des Lotes einzusetzen. Der Bezugspunkt für ΣM ist frei wählbar — geschickt gewählt, eliminiert er zwei Unbekannte auf einen Schlag.</p>
+
+<h2>Lagerarten und was sie sperren</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th data-s="text">Lager</th><th>Symbol im Schnitt</th><th data-s="num">Reaktionen (eben)</th><th>Typisch als</th></tr></thead>
+<tbody>
+<tr><td><b>Loslager</b></td><td>Rolle, Pendelstütze</td><td>1 (senkrecht zur Bahn)</td><td>Rillenkugellager mit Schiebesitz, Gleitschuh, Rolle</td></tr>
+<tr><td><b>Festlager</b></td><td>Gelenk, Bolzen</td><td>2 (zwei Kraftrichtungen)</td><td>Lager mit axialer Festlegung, Bolzenverbindung</td></tr>
+<tr><td><b>Einspannung</b></td><td>Wandanschluss</td><td>3 (zwei Kräfte + Moment)</td><td>Angeschraubter Flansch, eingegossene Säule, Kragarm</td></tr>
+<tr><td><b>Seil / Zugstab</b></td><td>Strich</td><td>1 (nur Zug)</td><td>Seil, Kette, Zuganker — nimmt keinen Druck auf</td></tr>
+<tr><td><b>Kontakt ohne Reibung</b></td><td>Auflagefläche</td><td>1 (nur Druck, normal)</td><td>Auflage, Anschlag — nimmt keinen Zug auf</td></tr>
+</tbody>
+</table></div>
+
+<div class="tip"><b>Faustregel für die Lagerwahl:</b> ein Festlager, alle weiteren als Loslager. Zwei Festlager auf einer Welle sind statisch überbestimmt — die Rechnung wird aufwendig und in der Praxis verspannt sich die Anordnung bei jeder Temperaturänderung. Der Abschnitt <a href="maschinenelemente.html#lagerung">Lagerung</a> zeigt, wie das konstruktiv aussieht.</div>
+
+<h2>Statisch bestimmt oder überbestimmt?</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Statisch bestimmt</h4>
+    <p>Anzahl der Lagerreaktionen = Anzahl der Gleichgewichtsbedingungen. Die Lagerkräfte folgen allein aus dem Gleichgewicht, unabhängig von Material und Steifigkeit.</p>
+    <ul><li>Träger auf zwei Stützen (Fest + Los)</li><li>Kragarm mit Einspannung</li><li>Fachwerke nach der Abzählregel</li><li>Lässt sich von Hand rechnen</li></ul>
+  </div>
+  <div class="gb-col bad"><h4>Statisch überbestimmt</h4>
+    <p>Mehr Lager als nötig. Die Verteilung hängt dann von den Steifigkeiten ab — und von Fertigungstoleranzen, Temperatur und Setzverhalten.</p>
+    <ul><li>Welle in drei Lagern</li><li>Platte auf vier Füßen (der klassische wackelnde Tisch)</li><li>Beidseitig eingespannter Träger</li><li>Braucht Verformungsbedingungen oder FEM</li></ul>
+  </div>
+</div>
+
+<h2>Schwerpunkt und Standsicherheit</h2>
+<p>Der Schwerpunkt ist der Punkt, in dem die Gesamtmasse zusammengefasst angreift. Für zusammengesetzte Körper gilt das gewichtete Mittel:</p>
+<div class="fbox">
+  <span class="f">x_s = Σ(m_i · x_i) / Σm_i</span>
+  <span class="l">Bohrungen und Ausschnitte gehen mit negativer Masse ein — das spart das Zerlegen in viele Teilflächen.</span>
+</div>
+<p>Ein Körper kippt, sobald die Wirklinie der Gewichtskraft die Standfläche verlässt. Praktisch heißt das: schwere Bauteile nach unten, breite Basis, und bei beweglichen Achsen den <em>wandernden</em> Schwerpunkt mitdenken. Ein Roboterarm ist im ausgefahrenen Zustand kritisch, nicht im eingefahrenen.</p>
+
+<div class="stop"><b>Der teuerste Anfängerfehler:</b> das Eigengewicht vergessen. Bei einem 2-m-Aluprofil 40×40 sind das rund 3 kg — bei einer Nutzlast von 5 kg also über ein Drittel obendrauf, und es greift in der Mitte an, wo das Biegemoment am größten ist.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 1: Statik</i>, Springer Vieweg — Kapitel Freikörperbild, Lagerreaktionen, Schwerpunkt.</li>
+    <li><a href="https://engineeringstatics.org/">Engineering Statics: Open and Interactive</a> — Kapitel 5 (Rigid Body Equilibrium) mit interaktiven Freikörperbildern, frei unter CC BY-NC-SA.</li>
+    <li><a href="https://ocw.mit.edu/courses/2-001-mechanics-materials-i-fall-2006/">MIT OCW 2.001</a> — Vorlesungsnotizen zu Gleichgewicht und statischer Bestimmtheit.</li>
+  </ul>
+</div>

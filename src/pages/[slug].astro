@@ -63,20 +63,28 @@ const navGroups = mod
   : [];
 
 /* Zusatz-Skript des Moduls (Rechner, Tabellen-Builder, Folds …). */
+/* Werkstatt-Module, die das gemeinsame Technik-Design und -Skript mitbenutzen.
+   Sie bleiben im Werkstatt-Hub, sehen aber aus wie der Mechatronik-Hub. */
+const MECHA_MODULES = new Set(["maschinenbau", "maker-komponenten", "dremel", "schmiermittel"]);
+
 const PAGE_SCRIPTS: Record<string, string> = {
   loeten: "/assets/mod-loeten.js",
   "elektronik-101": "/assets/mod-elektronik.js",
-  dremel: "/assets/mod-dremel.js",
+  dremel: "/assets/mod-mecha.js",
   homeserver: "/assets/mod-homeserver.js",
-  maschinenbau: "/assets/mod-maschinenbau.js",
-  "maker-komponenten": "/assets/mod-maker-komponenten.js",
+  maschinenbau: "/assets/mod-mecha.js",
+  "maker-komponenten": "/assets/mod-mecha.js",
   robotik: "/assets/mod-robotik.js",
   filament: "/assets/mod-filament.js",
   rentabilitaet: "/assets/mod-rentabilitaet.js",
-  schmiermittel: "/assets/mod-schmiermittel.js",
+  schmiermittel: "/assets/mod-mecha.js",
   "lumix-s1ii": "/assets/mod-lumix-s1ii.js",
   /* Der Mechatronik-Hub teilt sich ein Modul-Skript — es initialisiert
      nur die Bausteine, die auf der jeweiligen Seite auch vorkommen. */
+  "technische-mechanik": "/assets/mod-mecha.js",
+  maschinenelemente: "/assets/mod-mecha.js",
+  werkstoffkunde: "/assets/mod-mecha.js",
+  konstruktion: "/assets/mod-mecha.js",
   elektrotechnik: "/assets/mod-mecha.js",
   analogtechnik: "/assets/mod-mecha.js",
   digitaltechnik: "/assets/mod-mecha.js",
@@ -236,7 +244,7 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
             <p>{mod.desc}</p>
           </header>
 
-          <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}${hub.id === "mechatronik" ? " mx-mecha" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
+          <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}${hub.id === "mechatronik" || MECHA_MODULES.has(mod.id) ? " mx-mecha" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
             {mod.sections.map((s) => {
               const C = secComp(mod.id, s.h);
               return (

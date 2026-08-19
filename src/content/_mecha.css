@@ -430,3 +430,32 @@
 .mx-mecha .sim .legend .ly::before{background:var(--accent)}
 .mx-mecha .sim .legend .lu::before{background:var(--mid)}
 .mx-mecha .sim .legend .lw::before{background:var(--faint)}
+
+/* ==========================================================================
+   AUFKLAPPBARE KATALOGEINTRAEGE
+   Fuer Kataloge mit ausfuehrlichem Text je Eintrag (Konzepte, Komponenten,
+   Bits, Schmiermittel). Die Kopfzeile ist immer sichtbar, das Detail klappt
+   per Klick auf; mod-mecha.js schaltet dazu .det um.
+   ========================================================================== */
+.mx-mecha .kat{display:grid;gap:8px;margin:.2rem 0 1rem}
+.mx-mecha .kitem{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);
+  padding:11px 14px;cursor:pointer;transition:border-color .12s,background .12s}
+.mx-mecha .kitem:hover{border-color:var(--accent-border);background:var(--surface-hover)}
+.mx-mecha .kh{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px}
+.mx-mecha .kt{font-weight:700;font-size:14.5px;color:var(--text)}
+.mx-mecha .kn{font-family:var(--mono);font-size:11.2px;color:var(--faint)}
+.mx-mecha .kd{font-size:13.2px;color:var(--muted);margin-top:4px;line-height:1.5}
+.mx-mecha .kitem::after{content:"Antippen für Details";display:block;margin-top:6px;
+  font:600 10.5px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
+.mx-mecha .kitem:has(.det:not([hidden]))::after{content:"Antippen zum Zuklappen"}
+.mx-mecha .det{margin-top:11px;padding-top:11px;border-top:1px dashed var(--border);
+  font-size:13.2px;line-height:1.6;color:var(--text);cursor:auto}
+.mx-mecha .det h5{margin:.85rem 0 .3rem;font:700 10.8px/1 var(--mono);letter-spacing:.07em;
+  text-transform:uppercase;color:var(--faint)}
+.mx-mecha .det h5:first-child{margin-top:0}
+.mx-mecha .det p{margin:.2rem 0;color:var(--muted)}
+.mx-mecha .det ul{margin:.25rem 0 0;padding-left:1.15rem}
+.mx-mecha .det li{margin:.2rem 0;color:var(--muted)}
+.mx-mecha .kmeta{display:flex;flex-wrap:wrap;gap:5px 8px;margin-top:7px}
+.mx-mecha .kmeta span{font:600 10.8px/1 var(--mono);padding:4px 8px;border-radius:var(--radius-xs);
+  background:var(--surface-2);color:var(--muted);border:1px solid var(--border)}

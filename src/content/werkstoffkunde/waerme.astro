@@ -1,0 +1,58 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Wärmebehandlung ändert die Festigkeit eines Stahls um den Faktor fünf — ohne den E-Modul anzurühren.</b> Der Kohlenstoffgehalt entscheidet, ob überhaupt gehärtet werden kann: unter etwa 0,3 % C ist Stahl nicht durchhärtbar.</div>
+
+<h2>Die Verfahren</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Verfahren</th><th>Ablauf</th><th>Ergebnis</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>Härten</b></td><td>Austenitisieren (800–900 °C), dann schnell abschrecken in Wasser, Öl oder Luft</td><td>Martensit: sehr hart (bis 65 HRC), sehr spröde, mit Eigenspannungen</td><td>C &gt; 0,3 %: C45, 42CrMo4, Werkzeugstahl</td></tr>
+<tr><td><b>Anlassen</b></td><td>Nach dem Härten auf 150–650 °C erwärmen und halten</td><td>Baut Eigenspannungen ab, senkt Härte, erhöht Zähigkeit</td><td>Immer nach dem Härten — ungehärteter Martensit reißt von selbst</td></tr>
+<tr><td><b>Vergüten</b></td><td>Härten + Anlassen bei hoher Temperatur (500–650 °C)</td><td>Beste Kombination aus Festigkeit und Zähigkeit</td><td>Wellen, Achsen, Schrauben 8.8 bis 12.9</td></tr>
+<tr><td><b>Einsatzhärten</b></td><td>Randschicht aufkohlen (900–950 °C in C-Atmosphäre), dann härten</td><td>Harte Randschicht 0,3–2 mm, zäher Kern</td><td>C &lt; 0,25 %: 16MnCr5 für Zahnräder, Bolzen</td></tr>
+<tr><td><b>Nitrieren</b></td><td>Stickstoff bei 500–570 °C eindiffundieren lassen</td><td>Sehr harte, dünne Schicht (0,1–0,5 mm), <b>kaum Verzug</b>, kein Abschrecken nötig</td><td>Nitrierstähle, Spindeln, Führungsbahnen, Formen</td></tr>
+<tr><td><b>Induktionshärten</b></td><td>Örtlich mit Induktionsspule erwärmen und abschrecken</td><td>Selektiv gehärtete Zonen (Laufflächen, Zahnflanken)</td><td>Wellen, Zahnräder, Nockenwellen</td></tr>
+<tr><td><b>Normalglühen</b></td><td>Auf 30–50 K über A₃ erwärmen, an Luft abkühlen</td><td>Gleichmäßiges, feinkörniges Gefüge</td><td>Nach dem Schweißen oder Schmieden</td></tr>
+<tr><td><b>Weichglühen</b></td><td>Lange bei 680–720 °C halten, langsam abkühlen</td><td>Weichstes Gefüge, beste Zerspanbarkeit</td><td>Vor der Bearbeitung von hochlegierten Stählen</td></tr>
+<tr><td><b>Spannungsarmglühen</b></td><td>550–650 °C halten, sehr langsam abkühlen</td><td>Baut Eigenspannungen ab, Gefüge bleibt</td><td>Nach dem Schweißen, vor der Feinbearbeitung</td></tr>
+</tbody>
+</table></div>
+
+<div class="stop"><b>Nach dem Härten immer anlassen — sofort.</b> Frisch gehärteter Martensit steht unter enormen Eigenspannungen und kann über Nacht von selbst reißen. Das Anlassen gehört zum Härten dazu, nicht als optionaler Zusatzschritt. Anlasstemperatur und Haltezeit bestimmen dann die Endhärte; die Anlassschaubilder stehen im Werkstoffdatenblatt.</div>
+
+<h2>Reihenfolge in der Fertigung</h2>
+<div class="steps">
+  <div class="step"><h4>Weichbearbeitung</h4>Drehen, Fräsen, Bohren im weichgeglühten Zustand. Bearbeitungszugabe von 0,2–0,5 mm für die spätere Schleifbearbeitung stehen lassen.</div>
+  <div class="step"><h4>Spannungsarmglühen</h4>Bei stark zerspanten oder geschweißten Teilen vor dem Härten — sonst verzieht sich das Teil beim Härten unkontrolliert.</div>
+  <div class="step"><h4>Härten und Anlassen</h4>Teile möglichst gleichmäßig dick gestalten; Querschnittssprünge und scharfe Kanten sind Härterissausgänge. Bohrungen und Nuten fertig vorsehen — nachträglich lässt sich gehärteter Stahl nur noch erodieren oder schleifen.</div>
+  <div class="step"><h4>Hartbearbeitung</h4>Schleifen oder Hartdrehen auf Endmaß. Der Verzug aus dem Härten wird hier weggenommen.</div>
+  <div class="step"><h4>Oberflächenbehandlung</h4>Brünieren, Beschichten, Nitrieren als Abschluss. Achtung bei galvanischen Verfahren: Wasserstoffversprödung bei hochfesten Teilen; danach tempern.</div>
+</div>
+
+<h2>Aushärten bei Aluminium</h2>
+<p>Aluminiumlegierungen mit Magnesium und Silicium (6000er) oder Zink (7000er) lassen sich aushärten — ein anderer Mechanismus als beim Stahl, aber mit ähnlicher Wirkung:</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Schritt</th><th>Was passiert</th><th>Ergebnis</th></tr></thead>
+<tbody>
+<tr><td>Lösungsglühen (ca. 500 °C)</td><td>Legierungselemente gehen in Lösung</td><td>Weich, übersättigt</td></tr>
+<tr><td>Abschrecken</td><td>Zustand wird eingefroren</td><td>Zustand W, kurzzeitig gut umformbar</td></tr>
+<tr><td>Kaltauslagern (Raumtemperatur, Tage)</td><td>Feine Ausscheidungen bilden sich</td><td>Zustand T4</td></tr>
+<tr><td>Warmauslagern (150–190 °C, Stunden)</td><td>Gezielte Ausscheidungen</td><td>Zustand <b>T6</b> — der Standardfestigkeitszustand</td></tr>
+</tbody>
+</table></div>
+
+<div class="warn"><b>Aluminium verliert seine Festigkeit beim Schweißen.</b> Die Wärmeeinflusszone wird überaltert und fällt in der Streckgrenze auf Werte nahe dem weichgeglühten Zustand zurück — bei 6082-T6 von 290 auf rund 150 N/mm². Das ist kein Fehler, sondern physikalisch unvermeidlich. Wer geschweißte Aluminiumkonstruktionen auslegt, rechnet mit den Werten der Wärmeeinflusszone, nicht mit denen des Grundwerkstoffs.</div>
+
+<div class="tip"><b>Für Prototypen und Kleinserien:</b> Härten im eigenen Ofen ist möglich, aber Verzug und reproduzierbare Härte sind die Schwierigkeiten. Ein gewerblicher Härter kostet für ein Einzelteil oft weniger als zwanzig Euro und liefert ein Prüfprotokoll dazu. Wo es geht, ist der einfachere Weg: bereits vergütet gekauftes Material (C45 vergütet, 42CrMo4 QT) verwenden und die Wärmebehandlung ganz vermeiden.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN ISO 4885 — Eisenwerkstoffe, Wärmebehandlung: Begriffe und Verfahren.</li>
+    <li>DIN EN 10083 — Vergütungsstähle mit Wärmebehandlungsangaben und Anlassschaubildern.</li>
+    <li>DIN EN 515 — Aluminium: Zustandsbezeichnungen (T4, T6, T651, O, H).</li>
+    <li>DIN EN 1999-1-1 (Eurocode 9) — Aluminiumtragwerke; enthält die Abminderungswerte für die Wärmeeinflusszone beim Schweißen.</li>
+    <li>Hans Berns, Werner Theisen, <i>Eisenwerkstoffe — Stahl und Gusseisen</i>, Springer — Gefügeumwandlung und Wärmebehandlung im Detail.</li>
+  </ul>
+</div>

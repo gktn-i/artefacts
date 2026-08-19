@@ -1,0 +1,93 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Spannung ist Kraft pro Fläche, Dehnung ist relative Längenänderung.</b> Solange ein Werkstoff elastisch ist, sind beide proportional — die Konstante heißt E-Modul. Fast die gesamte Festigkeitslehre steckt in diesen zwei Sätzen.</div>
+
+<h2>Die Grundgleichungen</h2>
+<div class="fbox">
+  <span class="f">σ = F / A&nbsp;&nbsp;&nbsp;&nbsp;ε = ΔL / L&nbsp;&nbsp;&nbsp;&nbsp;σ = E · ε</span>
+  <span class="l">1 N/mm² = 1 MPa. Im Maschinenbau rechnet man in N und mm, dann kommt die Spannung direkt in N/mm² heraus.</span>
+</div>
+<p>Aus den drei Gleichungen folgt die Längenänderung eines Zugstabs: <span class="formula">ΔL = F·L / (E·A)</span>. Der Ausdruck <span class="formula">E·A/L</span> ist die Steifigkeit des Stabes in N/mm — mechanisch dasselbe wie eine Federkonstante.</p>
+
+<h2>Das Spannungs-Dehnungs-Diagramm</h2>
+<div class="grid2">
+  <div>
+    <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Spannungs-Dehnungs-Diagramm mit Streckgrenze und Zugfestigkeit">
+      <path class="ax" d="M40,180 H300 M40,180 V20" />
+      <text class="lbla" x="300" y="196" text-anchor="end">Dehnung ε</text>
+      <text class="lbla" x="34" y="26" text-anchor="end">σ</text>
+      <path class="acc" d="M40,180 L110,70" />
+      <path class="acc" d="M110,70 C140,52 160,50 185,48 C215,45 245,58 275,105" />
+      <path class="gl" d="M40,70 H110 M110,70 V180" />
+      <path class="gl" d="M40,48 H185 M185,48 V180" />
+      <circle class="accs" cx="110" cy="70" r="4" />
+      <circle class="accs" cx="185" cy="48" r="4" />
+      <circle class="accs" cx="275" cy="105" r="4" />
+      <text class="lbl" x="34" y="74" text-anchor="end">R_p0,2</text>
+      <text class="lbl" x="34" y="52" text-anchor="end">R_m</text>
+      <text class="lbl" x="118" y="64">Streckgrenze</text>
+      <text class="lbl" x="192" y="42">Zugfestigkeit</text>
+      <text class="lbl" x="271" y="122" text-anchor="middle">Bruch</text>
+      <text class="lblb" x="62" y="140">elastisch</text>
+    </svg>
+  </div>
+  <div>
+    <ul>
+      <li><b>Elastischer Bereich</b> — Gerade mit der Steigung E. Nach Entlastung ist das Teil wieder wie vorher. Hier findet jede normale Auslegung statt.</li>
+      <li><b>R_p0,2 (Streckgrenze)</b> — die Spannung, bei der 0,2 % bleibende Dehnung zurückbleiben. Bei Stahl mit ausgeprägter Streckgrenze heißt sie R_eH. Das ist die Grenze, gegen die man rechnet.</li>
+      <li><b>R_m (Zugfestigkeit)</b> — der Höchstwert. Danach schnürt sich die Probe ein. Als Auslegungsgrenze <em>ungeeignet</em>, weil das Bauteil längst unbrauchbar verformt ist.</li>
+      <li><b>Bruchdehnung A</b> — wie viel Prozent die Probe bis zum Bruch aushält. Maß für Zähigkeit: über 10 % kündigt sich Versagen an, unter 5 % bricht es schlagartig.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Sicherheitsfaktor</h2>
+<div class="fbox">
+  <span class="f">σ_zul = R_p0,2 / S&nbsp;&nbsp;&nbsp;&nbsp;S = σ_zul / σ_vorh</span>
+  <span class="l">Immer gegen die Streckgrenze rechnen, nicht gegen die Zugfestigkeit — außer bei spröden Werkstoffen wie Grauguss, die keine Streckgrenze haben.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th data-s="text">Situation</th><th data-s="num">S</th><th>Begründung</th></tr></thead>
+<tbody>
+<tr><td>Statisch, bekanntes Material, bekannte Last</td><td>1,5 – 2</td><td>Deckt Werkstoffstreuung und Fertigungstoleranzen ab</td></tr>
+<tr><td>Schwellend oder wechselnd belastet</td><td>2 – 3</td><td>Dauerfestigkeit liegt deutlich unter der statischen Grenze</td></tr>
+<tr><td>Stoßbelastung, unklare Lastannahme</td><td>3 – 4</td><td>Lastspitzen sind schwer abzuschätzen</td></tr>
+<tr><td>Knickgefährdete Druckstäbe</td><td>3 – 5</td><td>Versagen ohne Vorwarnung, empfindlich gegen Vorkrümmung</td></tr>
+<tr><td>Über Kopf, Personen darunter</td><td>≥ 4 und Norm</td><td>Hier gilt nicht mehr Faustregel, sondern Regelwerk</td></tr>
+<tr><td>FDM-3D-Druck</td><td>3 – 5</td><td>Anisotrop, Schichtbindung streut stark, Kennwerte unsicher</td></tr>
+</tbody>
+</table></div>
+
+<h2>Querkontraktion und mehrachsige Spannung</h2>
+<p>Ein gezogener Stab wird dünner. Das Verhältnis heißt Querkontraktionszahl <span class="formula">ν = −ε_quer / ε_längs</span>: Stahl 0,3, Aluminium 0,33, Gummi nahezu 0,5 (praktisch inkompressibel), Kork nahe 0. Daraus folgt der Schubmodul:</p>
+<div class="fbox">
+  <span class="f">G = E / (2·(1 + ν))</span>
+  <span class="l">Für Stahl heißt das G ≈ 81 000 N/mm² bei E = 210 000 N/mm². G braucht man für Torsion und Schub.</span>
+</div>
+
+<div class="warn"><b>Ein Denkfehler mit Folgen:</b> „Aluminium ist fast so fest wie Stahl“ stimmt für manche Legierungen bei der Streckgrenze — aber der E-Modul ist mit 70 000 gegen 210 000 N/mm² nur ein Drittel. Ein Aluteil gleicher Geometrie biegt sich <b>dreimal so stark</b> durch. Wenn Steifigkeit gefragt ist und nicht Festigkeit, hilft bei Aluminium nur mehr Querschnitt oder eine bessere Form.</div>
+
+<h2>Flächenpressung — der oft vergessene Nachweis</h2>
+<p>Neben der Spannung im Bauteil zählt die Pressung in der Kontaktfläche: <span class="formula">p = F / A_proj</span>. Sie entscheidet, ob eine Schraube den Flansch eindrückt, ob ein Bolzen sein Auge auswalzt oder ob eine Passfedernut nachgibt.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Paarung</th><th data-s="num">zulässige Pressung p_zul</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td>Stahl auf Stahl, ruhend</td><td>ca. 0,9 · R_p0,2</td><td>Bei S235 also rund 210 N/mm²</td></tr>
+<tr><td>Stahl auf Aluminium</td><td>60 – 120 N/mm²</td><td>Legierungsabhängig; oft der begrenzende Partner</td></tr>
+<tr><td>Bolzen in Kunststoff (PA, POM)</td><td>10 – 30 N/mm²</td><td>Kriecht unter Dauerlast, konservativ ansetzen</td></tr>
+<tr><td>Schraubenkopf auf FDM-Druckteil</td><td>10 – 20 N/mm²</td><td>Große Unterlegscheibe ist hier kein Luxus</td></tr>
+</tbody>
+</table></div>
+
+<div class="stop"><b>Deshalb die Unterlegscheibe:</b> Ein M5-Zylinderkopf hat rund 30 mm² Auflagefläche. Mit 5 kN Vorspannung sind das über 160 N/mm² — genug, um sich in Aluminium und erst recht in ein Druckteil einzugraben. Eine Scheibe mit 15 mm Außendurchmesser bringt gut 130 mm² und damit weniger als 40 N/mm².</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN ISO 6892-1 — Metallische Werkstoffe, Zugversuch bei Raumtemperatur: definiert R_p0,2, R_m und die Bruchdehnung A.</li>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 2: Elastostatik</i> — Kapitel Zug/Druck, Hookesches Gesetz, Querkontraktion.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — Tabellen zu zulässigen Spannungen, Sicherheitsfaktoren und Flächenpressungen.</li>
+    <li>Werkstoffkennwerte im Abschnitt <a href="werkstoffkunde.html#tabellen">Werkstofftabellen</a>.</li>
+  </ul>
+</div>

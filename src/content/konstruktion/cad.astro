@@ -1,0 +1,56 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein CAD-Modell ist nur so gut wie sein Aufbau.</b> Ein Modell, das nach der dritten Änderung zusammenbricht, hat nicht zu wenig Features, sondern zu viele Abhängigkeiten von den falschen Elementen. Die Regeln dafür sind programmübergreifend gleich.</div>
+
+<h2>Programme im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Programm</th><th>Art</th><th data-s="text">Kosten</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>FreeCAD</b></td><td>parametrisch, Historie</td><td>frei, Open Source</td><td>Seit 1.0 deutlich stabiler; vollwertige Baugruppen, FEM-Workbench, CAM. Kein Cloud-Zwang, Dateien bleiben lokal</td></tr>
+<tr><td><b>Onshape</b></td><td>parametrisch, Cloud</td><td>frei für öffentliche Dokumente</td><td>Läuft im Browser, sehr gute Versionierung und Zusammenarbeit. In der Gratisversion sind alle Modelle öffentlich</td></tr>
+<tr><td><b>Autodesk Fusion</b></td><td>parametrisch + direkt</td><td>eingeschränkt frei für privat</td><td>CAD, CAM und Simulation in einem; die Gratisversion wurde mehrfach beschnitten</td></tr>
+<tr><td><b>SolidWorks / Inventor / Creo</b></td><td>parametrisch</td><td>kommerziell</td><td>Industriestandard; Studentenlizenzen verfügbar</td></tr>
+<tr><td><b>OpenSCAD</b></td><td>Skript (CSG)</td><td>frei, Open Source</td><td>Modell als Programmcode: perfekt versionierbar und parametrierbar. Ungeeignet für Freiformflächen</td></tr>
+<tr><td><b>Blender</b></td><td>Polygonmodellierung</td><td>frei, Open Source</td><td>Für Optik und Visualisierung stark, für maßhaltige Technik nicht gedacht</td></tr>
+</tbody>
+</table></div>
+
+<h2>Regeln für robuste Modelle</h2>
+<div class="steps">
+  <div class="step"><h4>Skizzen vollständig bestimmen</h4>Eine Skizze mit Freiheitsgraden verschiebt sich bei jeder Änderung. Die meisten Programme färben unterbestimmte Skizzen ein — dieser Hinweis ist ernst gemeint.</div>
+  <div class="step"><h4>Auf Ursprungsebenen referenzieren, nicht auf Flächen</h4>Der klassische Fehler ist die „Topologische Namensproblematik“: Eine Skizze auf einer Fläche verliert ihren Bezug, sobald diese Fläche durch eine frühere Änderung eine andere interne Kennung bekommt. Ursprungsebenen und eigene Hilfsebenen bleiben stabil.</div>
+  <div class="step"><h4>Parameter zentral pflegen</h4>Wandstärke, Lochabstand, Materialstärke als benannte Variablen in einer Tabelle. Dann ändert sich das ganze Modell konsistent, statt an achtzehn Stellen von Hand.</div>
+  <div class="step"><h4>Wenige, große Features statt vieler kleiner</h4>Eine Skizze mit sechs Bohrungen ist besser als sechs Skizzen mit je einer. Weniger Baumeinträge heißt schnellere Neuberechnung und weniger Bruchstellen.</div>
+  <div class="step"><h4>Fasen und Radien zuletzt</h4>Sie sind die empfindlichsten Features. Am Ende des Baums stören sie keine spätere Änderung, und wenn sie brechen, ist die Reparatur einfach.</div>
+  <div class="step"><h4>Baugruppen von unten nach oben aufbauen</h4>Ein festes Basisteil, alles andere daran ausrichten. Verknüpfungen sparsam setzen — überbestimmte Baugruppen sind so unangenehm wie überbestimmte Skizzen.</div>
+</div>
+
+<div class="stop"><b>Der teuerste CAD-Fehler:</b> ein Modell, das nur der Ersteller ändern kann. Wenn nach drei Monaten niemand mehr versteht, warum eine Bohrung dort sitzt, wird sie beim nächsten Mal neu gezeichnet — samt Fehler. Sprechende Namen für Features und Parameter, ein flacher Baum und eine kurze Notiz im Modell sind billiger als jede Nacharbeit.</div>
+
+<h2>Datenformate</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Format</th><th>Art</th><th>Wofür</th><th>Grenzen</th></tr></thead>
+<tbody>
+<tr><td><b>STEP (.stp, .step)</b></td><td>exakte Geometrie (BREP)</td><td><b>Der Austauschstandard.</b> An Fertiger, an andere CAD-Programme, in die Simulation</td><td>Ohne Historie und Parametrik; AP242 kann zusätzlich Toleranzen (PMI) tragen</td></tr>
+<tr><td><b>IGES (.igs)</b></td><td>exakte Geometrie</td><td>Ältere Systeme, Flächenmodelle</td><td>Veraltet, oft mit Lücken in den Flächen — wo möglich STEP nehmen</td></tr>
+<tr><td><b>STL</b></td><td>Dreiecksnetz</td><td>3D-Druck, schnelle Visualisierung</td><td>Nur Facetten, keine exakten Radien, keine Einheiten, keine Farben</td></tr>
+<tr><td><b>3MF</b></td><td>Netz + Metadaten</td><td>Moderner STL-Ersatz für den Druck</td><td>Trägt Einheiten, Farben und Druckeinstellungen mit</td></tr>
+<tr><td><b>DXF</b></td><td>2D-Kontur</td><td>Laserschneiden, Wasserstrahl, Blechzuschnitt</td><td>Splines vorher in Polylinien wandeln; Einheiten und Layer prüfen</td></tr>
+<tr><td><b>PDF (2D)</b></td><td>Zeichnung</td><td>Fertigungsunterlage mit Toleranzen</td><td>Bleibt neben dem STEP nötig — das 3D-Modell allein ist kein Vertrag</td></tr>
+</tbody>
+</table></div>
+
+<div class="warn"><b>An den Fertiger gehören immer beide Dateien:</b> STEP für die Geometrie und PDF für die Toleranzen, Oberflächen, den Werkstoff und die Kantenangaben. Ein STEP allein ist maßlich exakt, sagt aber nichts darüber, welche Maße wichtig sind — und der Fertiger fertigt dann alles mit Allgemeintoleranz oder fragt nach.</div>
+
+<div class="tip"><b>Versionierung:</b> CAD-Dateien sind Binärdateien und lassen sich in Git nicht sinnvoll zusammenführen. Praktikabel sind: Onshapes eingebaute Versionierung, ein PDM-System, oder bei kleinen Projekten schlicht ein sauberes Namensschema mit Datum und Index plus eine Änderungsnotiz. OpenSCAD ist hier die Ausnahme — als Textdatei funktioniert es in Git perfekt.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>ISO 10303 (STEP), insbesondere AP242 für Geometrie mit Produkt- und Fertigungsinformationen.</li>
+    <li><a href="https://wiki.freecad.org/Feature_editing">FreeCAD-Wiki — Topological Naming Problem</a>: Ursache und Vermeidungsstrategien.</li>
+    <li><a href="https://www.protolabs.de/ressourcen/design-tipps/">Protolabs Design-Tipps</a> — welche Dateien Fertiger tatsächlich brauchen.</li>
+    <li>Pahl/Beitz, <i>Konstruktionslehre</i> — Kapitel rechnerunterstütztes Konstruieren.</li>
+  </ul>
+</div>

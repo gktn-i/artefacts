@@ -1,0 +1,62 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Eine Welle braucht genau eine axiale Festlegung.</b> Zwei Festlager verspannen sich bei jeder Temperaturänderung, keines lässt die Welle wandern. Diese eine Regel und die richtige Passung entscheiden darüber, ob eine Lagerung jahrelang läuft oder nach Wochen heiß wird.</div>
+
+<h2>Die drei Lagerungsarten</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Fest-Los-Lagerung</div><div class="cd">Ein Lager nimmt Radial- und Axialkräfte auf, das andere nur radial und kann axial wandern. <b>Der Standardfall</b> — unempfindlich gegen Temperaturdehnung und Fertigungstoleranzen.</div></div>
+  <div class="card"><div class="ct">Angestellte Lagerung</div><div class="cd">Zwei Schräg- oder Kegelrollenlager gegeneinander vorgespannt (X- oder O-Anordnung). Spielfrei und steif, aber temperaturempfindlich. Für Spindeln und Präzisionsachsen.</div></div>
+  <div class="card"><div class="ct">Schwimmende Lagerung</div><div class="cd">Beide Lager axial lose mit definiertem Gesamtspiel (0,2–0,5 mm). Einfach und billig, aber die Welle hat axiales Spiel. Für unkritische Antriebe.</div></div>
+</div>
+
+<div class="stop"><b>Der Klassiker im Eigenbau:</b> zwei Rillenkugellager, beide innen und außen fest eingepresst und beidseitig axial angeschlagen. Bei 30 K Temperaturunterschied dehnt sich eine 200 mm lange Stahlwelle um 0,07 mm — die Lager werden axial verspannt, laufen heiß, dehnen sich weiter und fressen. Die Lösung kostet nichts: das zweite Lager im Gehäuse axial frei lassen.</div>
+
+<h2>Welche Passung wohin</h2>
+<p>Die Grundregel lautet: <b>der umlaufende Ring bekommt Übermaß, der stillstehende Ring Spiel.</b> Sonst wandert der belastete Ring auf seinem Sitz und trägt ihn ab.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Fall</th><th data-s="text">Wellenpassung</th><th data-s="text">Gehäusepassung</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Umfangslast am Innenring</b> (normaler Antrieb)</td><td>k6, m6 bei höherer Last</td><td>H7 oder J7</td><td>Motorwelle, Getriebewelle, Riemenscheibe</td></tr>
+<tr><td><b>Umfangslast am Außenring</b> (Rad auf feststehender Achse)</td><td>g6 oder h6</td><td>N7 oder P7</td><td>Laufrolle, Umlenkrolle, Spannrolle</td></tr>
+<tr><td><b>Loslagerstelle im Gehäuse</b></td><td>k6</td><td>H7 (verschiebbar)</td><td>Zweites Lager der Welle</td></tr>
+<tr><td><b>Kleine Last, einfache Anwendung</b></td><td>j6</td><td>H7</td><td>Hobby, leichte Antriebe</td></tr>
+<tr><td><b>Dünnwandiges Gehäuse, Aluminium</b></td><td>k6</td><td>J7 bis K7</td><td>Alu dehnt sich stärker — engere Gehäusepassung wählen</td></tr>
+</tbody>
+</table></div>
+<p>Konkrete Grenzmaße gibt der Passungsrechner unter <a href="konstruktion.html#toleranzen">Toleranzen &amp; Passungen</a> aus. Für die exakte Empfehlung gilt immer der Lagerkatalog des Herstellers — die Tabelle oben ist die Kurzfassung davon.</p>
+
+<h2>Gestaltung der Lagerstelle</h2>
+<div class="steps">
+  <div class="step"><h4>Anlageschulter richtig dimensionieren</h4>Die Schulter muss am Ring anliegen, nicht am Käfig oder an der Dichtung. Die Katalogtabelle nennt für jedes Lager den Mindest- und Höchstdurchmesser der Anlagefläche.</div>
+  <div class="step"><h4>Freistich statt scharfer Ecke</h4>Der Übergang von Wellenabsatz zu Sitz braucht einen Radius, der kleiner ist als die Kantenfase des Lagers — sonst sitzt der Ring auf dem Radius auf und kippt. Freistich nach DIN 509 löst beides.</div>
+  <div class="step"><h4>Fügefläche schmieren, nicht kleben</h4>Beim Einpressen dünn ölen. Kraft immer über den Ring einleiten, der Übermaß hat — niemals über die Wälzkörper. Eine Presshülse kostet wenig und rettet viele Lager.</div>
+  <div class="step"><h4>Loslager wirklich frei lassen</h4>Bei H7 im Gehäuse muss der Außenring auch axial Platz haben. Ein zu eng gesetzter Deckel macht aus dem Loslager wieder ein Festlager.</div>
+  <div class="step"><h4>Erwärmen statt schlagen</h4>Lager auf 80–100 °C erwärmen (Heizplatte, Ölbad, Induktionsgerät) und aufschieben. Über 120 °C nicht hinausgehen, sonst leidet die Wärmebehandlung des Stahls und die Fettfüllung.</div>
+</div>
+
+<div class="warn"><b>Niemals Kraft über die Wälzkörper leiten.</b> Wer ein Lager mit einem Schlag auf den Außenring auf die Welle treibt, drückt die Kugeln in die Laufbahn. Das Lager läuft danach — aber es rauscht und fällt nach kurzer Zeit aus. Beim Aufziehen auf die Welle nur auf den Innenring drücken, beim Einpressen ins Gehäuse nur auf den Außenring.</div>
+
+<h2>Wärmedehnung mitrechnen</h2>
+<div class="calc" data-calc="dehnung">
+  <h4>Wärmedehnung und Zwangsspannung</h4>
+  <div class="row">
+    <div><label>Werkstoff</label><select data-k="mat"><option value="stahl" selected>Baustahl</option><option value="edelstahl">Edelstahl A2/A4</option><option value="guss">Grauguss</option><option value="alu">Aluminium</option><option value="messing">Messing</option><option value="kupfer">Kupfer</option><option value="titan">Titan</option><option value="invar">Invar</option><option value="pla">PLA</option><option value="petg">PETG</option><option value="abs">ABS/ASA</option><option value="nylon">Nylon (PA)</option><option value="pc">Polycarbonat</option></select></div>
+    <div><label>Länge in mm</label><input data-k="laenge" type="number" step="any" value="200" /></div>
+    <div><label>Temperaturänderung in K</label><input data-k="dt" type="number" step="any" value="30" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<div class="tip"><b>Aluminiumgehäuse mit Stahlwelle</b> ist der häufigste Mischbaufall. Aluminium dehnt sich mit 23 · 10⁻⁶/K fast doppelt so stark wie Stahl mit 12 · 10⁻⁶/K. Bei Erwärmung wird der Lagersitz im Gehäuse also weiter — deshalb dort eine engere Passung wählen (J7 statt H7) und bei starker Erwärmung den Sitz zusätzlich sichern.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li><a href="https://www.skf.com/group/products/rolling-bearings/principles-of-rolling-bearing-selection">SKF — Grundlagen der Lagerauswahl</a>: Passungstabellen für Wellen und Gehäuse nach Lastfall; maßgebliche Primärquelle.</li>
+    <li>DIN 5425-1 — Wälzlager, Toleranzen für den Einbau.</li>
+    <li>DIN 509 — Freistiche; Formen und Maße für Wellenabsätze.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — Kapitel Wälzlagerungen mit Gestaltungsbeispielen für Fest-Los und angestellte Lagerung.</li>
+  </ul>
+</div>

@@ -1,0 +1,70 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Wälzlager ist ein Katalogteil mit einer definierten Lebensdauer — kein Verschleißteil mit Zufallscharakter.</b> Aus Tragzahl, Belastung und Drehzahl folgt die nominelle Lebensdauer direkt. In der Praxis entscheiden dann Schmierung, Sauberkeit und Fluchtung, ob dieser Wert erreicht wird.</div>
+
+<h2>Bauformen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Bauform</th><th>Belastung</th><th data-s="num">Drehzahl</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Rillenkugellager</b> (6xxx)</td><td>radial, begrenzt axial</td><td>sehr hoch</td><td>Das Standardlager; billig, überall verfügbar, verzeiht wenig Schiefstellung (≈ 2–10′)</td></tr>
+<tr><td><b>Schrägkugellager</b> (7xxx)</td><td>radial + axial (einseitig)</td><td>hoch</td><td>Paarweise angestellt; für Spindeln und vorgespannte Lagerungen</td></tr>
+<tr><td><b>Pendelkugellager</b> (12xx)</td><td>radial</td><td>hoch</td><td>Verträgt mehrere Grad Schiefstellung — für lange, durchbiegende Wellen</td></tr>
+<tr><td><b>Zylinderrollenlager</b> (NU, N)</td><td>hoch radial</td><td>hoch</td><td>Hohe Tragzahl, axial verschiebbar — das ideale Loslager</td></tr>
+<tr><td><b>Kegelrollenlager</b> (3xxxx)</td><td>hoch radial + axial</td><td>mittel</td><td>Paarweise, einstellbar vorgespannt; Radnaben, Spindeln, Getriebe</td></tr>
+<tr><td><b>Nadellager</b></td><td>hoch radial</td><td>mittel</td><td>Sehr kleine Bauhöhe bei hoher Tragzahl; Welle muss gehärtet und geschliffen sein</td></tr>
+<tr><td><b>Axialkugellager</b> (51xxx)</td><td>nur axial</td><td>niedrig</td><td>Reine Axiallast, verträgt keine Radiallast</td></tr>
+<tr><td><b>Gleitlagerbuchse</b> (Bronze, PTFE-Verbund, Kunststoff)</td><td>radial</td><td>niedrig–mittel</td><td>Wartungsfrei, geräuscharm, unempfindlich gegen Stoß und Schmutz; höhere Reibung</td></tr>
+</tbody>
+</table></div>
+
+<h2>Lebensdauer berechnen</h2>
+<div class="fbox">
+  <span class="f">L₁₀ = (C / P)^p&nbsp;&nbsp;&nbsp;&nbsp;L₁₀h = 10⁶ · L₁₀ / (60 · n)</span>
+  <span class="l">C dynamische Tragzahl aus dem Katalog, P äquivalente Belastung, p = 3 für Kugel- und 10/3 für Rollenlager. L₁₀ heißt: 90 % der Lager erreichen diesen Wert.</span>
+</div>
+
+<div class="calc" data-calc="lager">
+  <h4>Nominelle Lebensdauer</h4>
+  <div class="row">
+    <div><label>Lagerart</label><select data-k="typ"><option value="kugel" selected>Kugellager (p = 3)</option><option value="rolle">Rollenlager (p = 10/3)</option></select></div>
+    <div><label>dyn. Tragzahl C in N</label><input data-k="c" type="number" step="any" value="13500" /></div>
+    <div><label>Belastung P in N</label><input data-k="p" type="number" step="any" value="1200" /></div>
+    <div><label>Drehzahl n in min⁻¹</label><input data-k="n" type="number" step="any" value="1500" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<p>Die äquivalente Belastung fasst Radial- und Axialanteil zusammen: <span class="formula">P = X · F_r + Y · F_a</span>. Die Beiwerte X und Y stehen im Herstellerkatalog und hängen vom Verhältnis F_a/F_r ab. Bei reiner Radiallast ist P = F_r.</p>
+
+<div class="warn"><b>Der Exponent macht den Unterschied.</b> Beim Kugellager geht die Belastung mit der dritten Potenz ein: 25 % mehr Last halbieren die Lebensdauer, doppelte Last bedeutet ein Achtel. Umgekehrt gilt: ein Lager eine Baugröße größer verlängert die Lebensdauer oft um das Drei- bis Fünffache — meist die billigste Verbesserung an einer Maschine.</div>
+
+<h2>Statische Tragzahl nicht vergessen</h2>
+<p>Neben C gibt es C₀, die statische Tragzahl. Sie begrenzt die Belastung im Stillstand oder bei sehr langsamer Drehung — dort, wo die Wälzkörper an einer Stelle stehen und sich in die Laufbahn eindrücken (Brinelling). Die statische Kennzahl <span class="formula">S₀ = C₀ / P₀</span> sollte je nach Anspruch bei 1 bis 2,5 liegen, bei Stoßlast und Präzisionsanforderung höher.</p>
+
+<div class="stop"><b>Falschbrinellierung durch Stillstandsvibration:</b> Ein stehendes Lager, das dauerhaft vibriert (Transport, benachbarte Maschine), bekommt Riffel in der Laufbahn, ohne dass es je gelaufen wäre. Deshalb werden Maschinen für den Transport an der Welle festgesetzt und Ersatzlager nicht neben laufenden Anlagen gelagert.</div>
+
+<h2>Schmierung und Dichtung</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Kennung</th><th>Bedeutung</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>offen</b> (z. B. 6000)</td><td>Keine Abdichtung</td><td>Ölbadschmierung, Umlaufschmierung, saubere Umgebung</td></tr>
+<tr><td><b>Z / ZZ</b></td><td>Deckscheibe aus Blech, berührungsfrei</td><td>Geringe Reibung, hohe Drehzahl; hält groben Schmutz ab</td></tr>
+<tr><td><b>RS / 2RS</b></td><td>Dichtscheibe aus Elastomer, schleifend</td><td>Guter Schmutz- und Feuchtigkeitsschutz; etwas mehr Reibung, geringere Grenzdrehzahl</td></tr>
+<tr><td><b>C3</b></td><td>Vergrößerte Radialluft</td><td>Bei Temperaturunterschied zwischen Innen- und Außenring, festem Sitz auf beiden Ringen, Elektromotoren</td></tr>
+</tbody>
+</table></div>
+<p>Etwa 80 % aller vorzeitigen Lagerausfälle gehen auf Schmierung, Verschmutzung oder Einbaufehler zurück, nicht auf Werkstoffermüdung. Fettmenge: bei Standardanwendungen 30–50 % des freien Lagerraums füllen — zu viel Fett führt zu Walkarbeit und Übertemperatur.</p>
+
+<div class="tip"><b>Gleitlager statt Wälzlager</b> lohnt sich bei langsamen, schwingenden oder stoßbelasteten Bewegungen und dort, wo Schmutz oder Wasser im Spiel sind: Gelenke, Klappen, Achsen mit wenigen Umdrehungen pro Minute. Kunststoffgleitlager sind dann wartungsfrei, leise und billiger. Nachteil ist der höhere Reibwert und das temperaturabhängige Spiel.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN ISO 281 — Wälzlager, dynamische Tragzahlen und nominelle Lebensdauer; Grundlage der L₁₀-Formel.</li>
+    <li>DIN ISO 76 — Statische Tragzahlen.</li>
+    <li><a href="https://www.skf.com/group/products/rolling-bearings">SKF Wälzlagerkatalog</a> und <a href="https://medias.schaeffler.de/">Schaeffler medias</a> — Tragzahlen, Beiwerte X und Y, Schmierfristen; die maßgeblichen Primärquellen für Zahlenwerte.</li>
+    <li><a href="https://www.igus.de/iglidur/plain-bearing">igus iglidur</a> — Kennwerte und Auswahlhilfe für Kunststoffgleitlager.</li>
+  </ul>
+</div>
