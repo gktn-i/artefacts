@@ -229,11 +229,12 @@
 <div class="step"><b>Flux dünn auf die Board-Pads</b> — bei großen Chips dünnflüssiges an die Kanten (kriecht unter). Herausquellendes Flux = zu viel.</div>
 <div class="step"><b>Ausrichten.</b> <b>Pin 1</b> beachten, am Siebdruck-Umriss orientieren, leicht andrücken — nie fest drücken.</div>
 <div class="step"><b>Vorwärmen.</b> Board von unten auf Temperatur bringen und halten (Tabelle unten).</div>
-<div class="step"><b>Reflow von oben.</b> Luft <b>25–35 %</b>, bleihaltig <b>300–330 °C</b> / bleifrei <b>340–370 °C</b>, ruhige Kreise.</div>
+<div class="step"><b>Reflow von oben — <u>ohne Düse</u>.</b> Düse abnehmen und mit <b>15–25 % Luftstrom</b> arbeiten: Der offene Strahl ist breit und sanft, der Chip wird nicht verschoben und die Kugeln bleiben liegen. Temperatur wie gehabt — bleihaltig <b>300–330 °C</b> / bleifrei <b>340–370 °C</b>, ruhige Kreise über den Chip und knapp darüber hinaus. Ohne Düse dauert es etwas länger; das ist gewollt, nicht ein Grund für mehr Grad.</div>
 <div class="step"><b>Self-Alignment abwarten.</b> Sind alle Kugeln flüssig, ruckt der Chip sichtbar in Position — das ist das Signal, Hitze sofort weg.</div>
 <div class="step"><b>Langsam abkühlen.</b> Vorwärmung stufenweise runter, Board erst handwarm bewegen.</div>
 <div class="step"><b>Erst messen, dann Strom.</b> Alle Schienen gegen Masse (Kurzschluss?), dann mit Strombegrenzung anfahren — <a class="goto" href="#fehler">Fehler &amp; Regeln</a>.</div>
 </div>
+<div class="tip"><b>Warum beim Einlöten ohne Düse, beim Ausbau aber mit?</b> Beim <b>Ausbau</b> willst du gerichtete Wärme, die schnell durch den Chip geht — große Düse, ~30 % Luft. Beim <b>Einlöten</b> willst du das Gegenteil: möglichst wenig mechanische Kraft, damit der Chip beim Self-Alignment frei auf den Kugeln schwimmt. Deshalb Düse ab und Luft auf <b>15–25 %</b>. Nur bei sehr großen, <b>nicht vorgewärmten</b> Boards lohnt stattdessen die große Düse — besser ist dort aber die <a class="goto" href="#heizplatte">Vorwärmung von unten</a>.</div>
 <div class="warn"><b>Nicht auf den Chip drücken.</b> Weder beim Auflegen noch beim Reflow. Der Chip muss auf den Kugeln <b>schwimmen</b> — Druck plattet Kugeln zu Brücken und quetscht Lot heraus. Ausrichten ja, drücken nein.</div>
 
 <h2>Vorwärmen — warum, wann, wie heiß</h2>

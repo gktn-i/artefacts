@@ -25,15 +25,15 @@
 <tr><td>Chip 0603–1206, SOT, SOD</td><td><b>310 °C</b> (290–320)</td><td><b>340 °C</b> (320–350)</td><td><b>30 %</b> (25–35)</td><td>4–6 mm</td><td>1–2 cm · 15–25 s</td></tr>
 <tr><td>SOIC / TSSOP / QFP</td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>35 %</b> (30–40)</td><td>Bauteilgröße</td><td>1–2 cm · 20–40 s</td></tr>
 <tr><td>QFN / DFN</td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>30 %</b> (30–40)</td><td>Bauteilgröße</td><td>1–2 cm · 20–45 s</td></tr>
-<tr><td>BGA aufschmelzen <span class="b b-platte">+ Vorwärmung</span></td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>30 %</b> (25–35)</td><td>groß / Chipgröße</td><td>2–3 cm · 30–90 s</td></tr>
-<tr><td>BGA ausbauen <span class="b b-platte">+ Vorwärmung</span></td><td><b>340 °C</b> (320–350)</td><td><b>365 °C</b> (350–380)</td><td><b>30 %</b></td><td>groß / Chipgröße</td><td>2–3 cm · 30–120 s</td></tr>
+<tr><td>BGA aufschmelzen <span class="b b-platte">+ Vorwärmung</span></td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>30 %</b> (25–35)</td><td>groß / Chipgröße — oder <b>ohne Düse bei 15–25 %</b></td><td>2–3 cm · 30–90 s</td></tr>
+<tr><td>BGA ausbauen <span class="b b-platte">+ Vorwärmung</span></td><td><b>340 °C</b> (320–350)</td><td><b>365 °C</b> (350–380)</td><td><b>30 %</b></td><td>groß / Chipgröße <span class="b b-warn">gerichtet</span></td><td>2–3 cm · 30–120 s</td></tr>
 <tr><td>Große Masseflächen, Abschirmbleche</td><td><b>365 °C</b> (350–380)</td><td><b>390 °C</b> (380–400)</td><td><b>60 %</b> (50–70)</td><td>groß</td><td>1–2 cm · bis es nachgibt</td></tr>
 <tr><td>Schrumpfschlauch</td><td colspan="2"><b>120 °C</b> (100–150)</td><td><b>40 %</b> (30–50)</td><td>Reflektor</td><td>2–3 cm · wenige s je Stelle</td></tr>
 <tr><td>Kleber/Underfill weich machen</td><td colspan="2"><b>190 °C</b> (180–200)</td><td><b>30 %</b></td><td>mittel</td><td>2–3 cm · 20–60 s</td></tr>
 <tr><td>Harten Flux wieder lösen</td><td colspan="2"><b>155 °C</b> (150–160)</td><td><b>35 %</b> (30–40)</td><td>offen / mittel</td><td>2–3 cm · 5–10 s je Stelle</td></tr>
 </tbody>
 </table></div>
-<div class="kurz"><b>Merksatz zum Luftstrom:</b> <b>Wenig Luft</b>, wenn etwas <i>wegfliegen</i> kann (lose Kugeln, Paste, 0201). <b>Viel Luft</b>, wenn viel <i>Masse</i> zu erwärmen ist (Masseflächen, dicke Bleche). Hoher Luftstrom heizt nicht besser durch — er bläst nur mehr weg und kühlt die Umgebung aus.</div>
+<div class="kurz"><b>Merksatz zum Luftstrom:</b> <b>Wenig Luft</b>, wenn etwas <i>wegfliegen</i> kann (lose Kugeln, Paste, 0201). <b>Viel Luft</b>, wenn viel <i>Masse</i> zu erwärmen ist (Masseflächen, dicke Bleche). Hoher Luftstrom heizt nicht besser durch — er bläst nur mehr weg und kühlt die Umgebung aus. <b>Sonderfall BGA einlöten:</b> Düse ab und <b>15–25 %</b> — der Chip soll beim Self-Alignment frei schwimmen (<a class="goto" href="#reballing">Reballing</a>).</div>
 
 <h4>Die Luftstrom-Stufen — was die Prozente bedeuten</h4>
 <div class="tbl-wrap"><table style="min-width:760px">
@@ -55,7 +55,7 @@
 <tr><td><b>Rund, klein (3–5 mm)</b></td><td>Punktuell, hohe Strömungsgeschwindigkeit</td><td>Einzelne kleine Chips, gezielte Stellen</td></tr>
 <tr><td><b>Rund, mittel (6–10 mm)</b></td><td>Der Allrounder</td><td>SOIC, QFP, mittlere Bauteile</td></tr>
 <tr><td><b>Rund, groß (&gt;10 mm)</b></td><td>Flächig, sanfter</td><td>BGA, große ICs, Masseflächen</td></tr>
-<tr><td><b>Ohne Düse (offen)</b></td><td>Breit, ungerichtet, sehr sanft</td><td>Vorwärmen kleiner Bereiche, Flux lösen</td></tr>
+<tr><td><b>Ohne Düse (offen)</b></td><td>Breit, ungerichtet, sehr sanft — <b>kaum mechanische Kraft</b> auf das Bauteil</td><td>BGA <b>einlöten</b> (Self-Alignment, 15–25 % Luft) · Vorwärmen kleiner Bereiche · Flux lösen</td></tr>
 <tr><td><b>Reflektor / gebogen</b></td><td>Lenkt die Luft um das Bauteil</td><td>Schrumpfschlauch, empfindliche Nachbarn</td></tr>
 </tbody>
 </table></div>
