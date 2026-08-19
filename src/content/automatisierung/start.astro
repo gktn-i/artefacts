@@ -1,0 +1,50 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Automatisierungstechnik ist Mechatronik im Industriemaßstab</b> — mit anderen Prioritäten: Verfügbarkeit über Jahrzehnte, Wartbarkeit durch Dritte, nachvollziehbare Sicherheit. Deshalb sieht eine SPS-Steuerung anders aus als ein Mikrocontroller-Projekt, obwohl sie dasselbe leistet.</div>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#sps"><div class="mt"><span class="i">🖥️</span>SPS-Grundlagen</div><div class="md">Aufbau, Zyklus, Prozessabbild, Adressierung, Baugruppen.</div></a>
+  <a href="#iec61131"><div class="mt"><span class="i">📜</span>IEC 61131-3</div><div class="md">Die genormten Sprachen und was sich mit der Fassung von 2025 geändert hat.</div></a>
+  <a href="#programmierung"><div class="mt"><span class="i">⌨️</span>Programmierpraxis</div><div class="md">Struktur, Bausteine, Schrittketten, Diagnose, typische Fehler.</div></a>
+  <a href="#feldbus"><div class="mt"><span class="i">🔌</span>Feldbusse</div><div class="md">PROFINET, EtherCAT, Modbus, IO-Link, CANopen, TSN.</div></a>
+  <a href="#schaltschrank"><div class="mt"><span class="i">🗄️</span>Schaltschrank</div><div class="md">Aufbau, Verdrahtung, Schutzorgane, Kennzeichnung, Dokumentation.</div></a>
+  <a href="#sicherheit"><div class="mt"><span class="i">🛑</span>Funktionale Sicherheit</div><div class="md">Risikobeurteilung, Performance Level, SIL, Not-Halt, Schutztüren.</div></a>
+  <a href="#hmi"><div class="mt"><span class="i">📊</span>HMI, SCADA &amp; OPC UA</div><div class="md">Bedienung, Visualisierung, Datenanbindung.</div></a>
+  <a href="#iiot"><div class="mt"><span class="i">☁️</span>Industrie 4.0</div><div class="md">Datenerfassung, Verwaltungsschale, Edge, was davon trägt.</div></a>
+</div>
+
+<h2>SPS oder Mikrocontroller?</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Kriterium</th><th>SPS</th><th>Mikrocontroller</th></tr></thead>
+<tbody>
+<tr><td><b>Einstiegskosten</b></td><td>hoch (Hardware und Software ab einigen hundert Euro)</td><td>sehr gering</td></tr>
+<tr><td><b>Robustheit im Schaltschrank</b></td><td>ausgelegt für 24 V, EMV, Temperatur, Vibration</td><td>muss selbst dafür ausgelegt werden</td></tr>
+<tr><td><b>Wartbarkeit durch Dritte</b></td><td><b>sehr gut</b> — jeder Elektriker findet sich in einem KOP-Programm zurecht</td><td>abhängig vom Entwickler und der Dokumentation</td></tr>
+<tr><td><b>Verfügbarkeit von Ersatzteilen</b></td><td>10–20 Jahre garantiert</td><td>Bauteile werden abgekündigt</td></tr>
+<tr><td><b>Funktionale Sicherheit</b></td><td>zertifizierte Sicherheits-SPS verfügbar</td><td>eigene Zertifizierung sehr aufwendig</td></tr>
+<tr><td><b>Rechenleistung je Euro</b></td><td>gering</td><td><b>sehr hoch</b></td></tr>
+<tr><td><b>Flexibilität</b></td><td>begrenzt auf das, was das System vorsieht</td><td>praktisch unbegrenzt</td></tr>
+<tr><td><b>Zykluszeit</b></td><td>1–10 ms typisch, deterministisch</td><td>Mikrosekunden möglich</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die ehrliche Einordnung für private Projekte:</b> Eine SPS lohnt sich, wenn eine Anlage über Jahre laufen und von anderen gewartet werden soll, oder wenn Sicherheitsfunktionen zertifiziert sein müssen. Für alles andere ist ein Mikrocontroller billiger und flexibler. Wer die SPS-Welt kennenlernen will, kommt mit gebrauchter Hardware (Siemens S7-1200, Beckhoff CX) oder einer Software-SPS (CODESYS auf einem Raspberry Pi) für unter hundert Euro hinein — und lernt dabei Denkweisen, die auch in der Mikrocontroller-Welt nützlich sind.</div>
+
+<h2>Was man aus der Automatisierungstechnik mitnehmen kann</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Prozessabbild statt direkter Zugriff</div><div class="cd">Eingänge einmal zu Beginn des Zyklus lesen, Ausgänge am Ende schreiben. Dazwischen arbeitet das Programm mit einem konsistenten Abbild — keine Wettlaufsituationen, kein flackernder Zustand.</div></div>
+  <div class="card"><div class="ct">Schrittketten</div><div class="cd">Ablauf als klar benannte Schritte mit Weiterschaltbedingungen und Zeitüberwachung. Genau das ist ein Zustandsautomat — nur mit einer Notation, die auch ohne Programmierkenntnisse lesbar ist.</div></div>
+  <div class="card"><div class="ct">Definierter sicherer Zustand</div><div class="cd">Was passiert bei Spannungsausfall, Sensordefekt, Kommunikationsabbruch? In der Automatisierung ist diese Frage Pflicht, nicht Kür.</div></div>
+  <div class="card"><div class="ct">Vollständige Dokumentation</div><div class="cd">Stromlaufplan, Klemmenplan, Betriebsmittelkennzeichnung. Ein Schaltschrank ohne Plan ist wertlos — dasselbe gilt für eine Platine ohne Schaltplan.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Karl Heinz John, Michael Tiegelkamp, <i>SPS-Programmierung mit IEC 61131-3</i>, Springer Vieweg — das Standardwerk, an die aktuelle Normfassung angepasst.</li>
+    <li>Günter Wellenreuther, Dieter Zastrow, <i>Automatisieren mit SPS</i>, Springer Vieweg — sehr aufgabenorientiert.</li>
+    <li>IEC 61131-3:2025 — die Norm selbst (kostenpflichtig über DIN oder IEC).</li>
+    <li>Herstellerunterlagen: Siemens TIA-Portal-Handbücher, Beckhoff Infosys, CODESYS Online Help — alle frei zugänglich und sehr umfangreich.</li>
+  </ul>
+</div>

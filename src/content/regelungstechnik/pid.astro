@@ -1,0 +1,93 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der PID-Regler beantwortet drei Fragen:</b> Wie groß ist der Fehler <em>jetzt</em> (P), wie lange besteht er <em>schon</em> (I), und wie schnell <em>ändert</em> er sich (D). Über 90 % aller industriellen Regelkreise arbeiten mit dieser einen Struktur.</div>
+
+<h2>Die Gleichung</h2>
+<div class="fbox">
+  <span class="f">u(t) = K_p · [ e(t) + (1/T_n)·∫e dt + T_v · de/dt ]</span>
+  <span class="l">Standardform: K_p wirkt auf alle drei Anteile. T_n heißt Nachstellzeit, T_v Vorhaltzeit — beide in Sekunden.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Anteil</th><th>Reagiert auf</th><th>Bewirkt</th><th>Nachteil</th></tr></thead>
+<tbody>
+<tr><td><b>P</b> — proportional</td><td>die aktuelle Abweichung</td><td>Sofortige Reaktion, Grundgeschwindigkeit des Kreises</td><td>Lässt eine bleibende Abweichung stehen; zu groß gewählt schwingt der Kreis</td></tr>
+<tr><td><b>I</b> — integral</td><td>die Summe aller Abweichungen</td><td>Beseitigt die bleibende Abweichung vollständig</td><td>Macht träger, verschlechtert die Stabilität, neigt zum Aufsummieren (Windup)</td></tr>
+<tr><td><b>D</b> — differential</td><td>die Änderungsgeschwindigkeit</td><td>Wirkt vorausschauend, dämpft Überschwingen, erlaubt höheres K_p</td><td>Verstärkt Messrauschen massiv; ohne Filter unbrauchbar</td></tr>
+</tbody>
+</table></div>
+
+<h2>Ausprobieren</h2>
+<div class="sim" data-sim="pid">
+  <h4>Regelkreis-Spielwiese</h4>
+  <p class="note" style="margin-top:0">Strecke: zwei hintereinandergeschaltete PT1-Glieder mit einstellbarer Zeitkonstante und Totzeit. Die Stellgröße ist auf ±3 begrenzt, mit Anti-Windup. Sollwertsprung bei t = 1 s.</p>
+  <div class="plot">
+    <svg viewBox="0 0 620 240" role="img" aria-label="Simulierte Sprungantwort des Regelkreises">
+      <path class="gl" d="M40,56 H608 M40,143 H608 M40,187 H608" />
+      <path class="pl-w" d="M40,100 H608" />
+      <path class="ax" d="M40,12 V214 M40,187 H608" />
+      <text class="tx" x="34" y="104" text-anchor="end">Soll</text>
+      <text class="tx" x="34" y="191" text-anchor="end">0</text>
+      <text class="tx" x="34" y="60" text-anchor="end">+50 %</text>
+      <text class="tx" x="600" y="206" text-anchor="end">24 s</text>
+      <path class="pl-u" d="" />
+      <path class="pl-y" d="" />
+    </svg>
+  </div>
+  <div class="legend"><span class="ly">Regelgröße y</span><span class="lu">Stellgröße u</span><span class="lw">Sollwert w</span></div>
+  <div class="sliders">
+    <div class="sl"><label>K_p <b data-pv="kp">1.5</b></label><input type="range" data-p="kp" min="0" max="8" step="0.1" value="1.5" /></div>
+    <div class="sl"><label>T_n (s) <b data-pv="tn">3</b></label><input type="range" data-p="tn" min="0" max="20" step="0.5" value="3" /></div>
+    <div class="sl"><label>T_v (s) <b data-pv="tv">0</b></label><input type="range" data-p="tv" min="0" max="3" step="0.05" value="0" /></div>
+    <div class="sl"><label>Strecke T₁ (s) <b data-pv="t1">1.5</b></label><input type="range" data-p="t1" min="0.3" max="4" step="0.1" value="1.5" /></div>
+    <div class="sl"><label>Totzeit (s) <b data-pv="tt">0</b></label><input type="range" data-p="tt" min="0" max="2" step="0.1" value="0" /></div>
+  </div>
+  <div class="pills" style="margin-top:.7rem">
+    <button type="button" class="b acc" data-preset="1.5,0,0">nur P</button>
+    <button type="button" class="b acc" data-preset="1.5,3,0">PI</button>
+    <button type="button" class="b acc" data-preset="2.5,3,0.6">PID</button>
+    <button type="button" class="b acc" data-preset="6,1.5,0">zu aggressiv</button>
+    <button type="button" class="b acc" data-preset="0.4,8,0">zu zahm</button>
+  </div>
+  <div class="readout" data-sim-out></div>
+  <p class="note"><b>Was man ausprobieren sollte:</b> T_n auf 0 stellen (kein I-Anteil) — die Kurve bleibt unter dem Sollwert stehen, das ist die bleibende Regelabweichung. Dann T_n schrittweise verkleinern: Der Fehler verschwindet, aber es beginnt zu schwingen. Zuletzt Totzeit hinzufügen: Dieselben Parameter, die vorher gut waren, führen jetzt zu Dauerschwingen — ein guter Beleg dafür, warum Totzeit das eigentliche Problem ist.</p>
+</div>
+
+<h2>Was jeder Anteil sichtbar bewirkt</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Änderung</th><th>Anstiegszeit</th><th>Überschwingen</th><th>Ausregelzeit</th><th>Bleibende Abweichung</th><th>Stabilität</th></tr></thead>
+<tbody>
+<tr><td><b>K_p größer</b></td><td>kürzer</td><td>größer</td><td>kaum verändert</td><td>kleiner</td><td>schlechter</td></tr>
+<tr><td><b>T_n kleiner</b> (I stärker)</td><td>etwas kürzer</td><td>größer</td><td>länger</td><td><b>null</b></td><td>schlechter</td></tr>
+<tr><td><b>T_v größer</b> (D stärker)</td><td>kaum verändert</td><td>kleiner</td><td>kürzer</td><td>unverändert</td><td>besser (bis zu einem Punkt)</td></tr>
+</tbody>
+</table></div>
+<p class="note">Diese Tabelle ist eine Faustregel, keine Gesetzmäßigkeit — bei Strecken mit Totzeit oder nichtminimalphasigem Verhalten gilt sie nur eingeschränkt. Zum Einstellen von Hand ist sie trotzdem die nützlichste Übersicht, die es gibt.</p>
+
+<h2>Reglerformen — Vorsicht bei Parameterangaben</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Form</th><th>Gleichung</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Standard (ISA, nichtinteragierend)</b></td><td>K_p·[e + (1/T_n)∫e + T_v·ė]</td><td>K_p wirkt auf alles. Der verbreitetste Fall, auch in diesem Modul verwendet</td></tr>
+<tr><td><b>Parallel</b></td><td>K_p·e + K_i·∫e + K_d·ė</td><td>Drei unabhängige Beiwerte. In Bibliotheken und Codebeispielen üblich. Umrechnung: K_i = K_p/T_n, K_d = K_p·T_v</td></tr>
+<tr><td><b>Serie (interagierend)</b></td><td>K_p'·(1 + 1/(T_n's))·(1 + T_v's)</td><td>Historisch von pneumatischen Reglern; manche Altgeräte nutzen sie noch</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Deshalb passen fremde Parameter oft nicht.</b> Wer Werte aus einer Anleitung übernimmt, muss wissen, welche Form gemeint ist — und ob T_n in Sekunden oder Minuten angegeben wird (in der Verfahrenstechnik oft in Minuten). Der Faktor 60 ist eine erstaunlich häufige Fehlerquelle.</div>
+
+<h2>Die drei Verbesserungen, die praktisch immer nötig sind</h2>
+<div class="steps">
+  <div class="step"><h4>D-Anteil auf die Regelgröße statt auf den Fehler</h4>Bei einem Sollwertsprung ist de/dt theoretisch unendlich — der D-Anteil erzeugt einen Stellgrößen-Peak („derivative kick“). Rechnet man stattdessen −dy/dt, verschwindet das Problem, und das Störverhalten bleibt unverändert.</div>
+  <div class="step"><h4>D-Anteil filtern</h4>Ein reiner Differenzierer verstärkt Rauschen unbegrenzt. Üblich ist ein Tiefpass mit T_f = T_v/N und N zwischen 5 und 20.</div>
+  <div class="step"><h4>Anti-Windup</h4>Steht die Stellgröße an der Begrenzung, darf der I-Anteil nicht weiter aufsummieren. Sonst braucht der Kreis nach dem Erreichen des Sollwerts sehr lange, bis der aufgelaufene Integralwert wieder abgebaut ist. Details unter <a href="#praxis">Praxis</a>.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Karl Johan Åström, Tore Hägglund, <i>Advanced PID Control</i>, ISA 2006 — die maßgebliche Darstellung inklusive aller Reglerformen.</li>
+    <li>Åström &amp; Hägglund, <i>PID Controllers: Theory, Design and Tuning</i>, 2. Auflage.</li>
+    <li>Lunze, <i>Regelungstechnik 1</i>, Kapitel PID-Regler.</li>
+    <li>Brett Beauregard, <a href="http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/">Improving the Beginner's PID</a> — Artikelserie zur praktischen Umsetzung auf Mikrocontrollern, sehr lesenswert.</li>
+  </ul>
+</div>

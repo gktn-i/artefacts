@@ -1,0 +1,111 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Fast jedes technische System lässt sich aus einer Handvoll Bausteinen zusammensetzen.</b> Wer ihre Sprungantworten im Kopf hat, erkennt aus einer Messkurve sofort, womit er es zu tun hat — und das ist der halbe Reglerentwurf.</div>
+
+<h2>Die Grundglieder</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Glied</th><th>G(s)</th><th>Sprungantwort</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>P</b> — proportional</td><td>K</td><td>Springt sofort auf K, bleibt dort</td><td>Spannungsteiler, Hebel, Getriebe</td></tr>
+<tr><td><b>I</b> — integrierend</td><td>K/s</td><td>Steigt linear an, ohne Ende</td><td>Füllstand, Position aus Drehzahl, Kondensator</td></tr>
+<tr><td><b>D</b> — differenzierend</td><td>K·s</td><td>Nadelimpuls — physikalisch nicht realisierbar</td><td>Tachogenerator (näherungsweise)</td></tr>
+<tr><td><b>DT1</b> — reales D</td><td>K·s/(1 + T·s)</td><td>Sprung nach oben, dann Abklingen</td><td>Jeder praktisch gebaute D-Anteil</td></tr>
+<tr><td><b>PT1</b></td><td>K/(1 + T·s)</td><td>e-Funktion; nach T sind 63 % erreicht</td><td>Erwärmung, RC-Glied, Drehzahl mit Reibung</td></tr>
+<tr><td><b>PT2</b></td><td>K/(1 + 2DT·s + T²s²)</td><td>Je nach D schwingend, aperiodisch oder kriechend</td><td>Feder-Masse-Dämpfer, RLC-Kreis, Positionierantrieb</td></tr>
+<tr><td><b>PTt</b> — Totzeit</td><td>e^(−T_t·s)</td><td>Sprung, um T_t verzögert</td><td>Förderband, Rohrleitung, Rechenzeit, Kommunikationsverzögerung</td></tr>
+<tr><td><b>PD</b></td><td>K(1 + T_v·s)</td><td>Sprung über den Endwert, dann zurück</td><td>Regleranteil, Vorhalt</td></tr>
+</tbody>
+</table></div>
+
+<h2>Sprungantworten im Vergleich</h2>
+<svg class="dg l" viewBox="-10 0 620 400" role="img" aria-label="Sprungantworten von P-, I-, PT1-, PT2- und Totzeitglied">
+  <text class="lblb" x="90" y="18">P-Glied</text>
+  <path class="w" d="M30,90 V26 M30,90 H180" />
+  <path class="acc" d="M30,90 H60 V44 H180" />
+  <text class="lblb" x="255" y="18">I-Glied</text>
+  <path class="w" d="M215,90 V26 M215,90 H365" />
+  <path class="acc" d="M215,90 H245 L365,32" />
+  <text class="lblb" x="440" y="18">DT1-Glied</text>
+  <path class="w" d="M400,90 V26 M400,90 H550" />
+  <path class="acc" d="M400,90 H430 V34 C452,34 470,80 500,87 C520,90 535,90 550,90" />
+
+  <text class="lblb" x="90" y="150">PT1-Glied</text>
+  <path class="w" d="M30,222 V158 M30,222 H180" />
+  <path class="acc" d="M30,222 H60 C82,222 92,190 108,180 C128,168 150,176 180,176" />
+  <path class="gd" d="M30,176 H180 M85,158 V222" />
+  <text class="lbl" x="86" y="234" text-anchor="middle">T</text>
+
+  <text class="lblb" x="255" y="150">PT2 (D = 0,4)</text>
+  <path class="w" d="M215,222 V158 M215,222 H365" />
+  <path class="acc" d="M215,222 H240 C258,222 262,162 280,162 C296,162 300,196 316,192 C330,188 334,172 350,176 C358,178 360,178 365,177" />
+  <path class="gd" d="M215,177 H365" />
+
+  <text class="lblb" x="440" y="150">Totzeit</text>
+  <path class="w" d="M400,222 V158 M400,222 H550" />
+  <path class="acc" d="M400,222 H470 V176 H550" />
+  <path class="gd" d="M430,158 V222 M470,158 V222" />
+  <text class="lbl" x="450" y="234" text-anchor="middle">T_t</text>
+
+  <text class="lblb" x="90" y="284">PT2 (D = 1)</text>
+  <path class="w" d="M30,356 V292 M30,356 H180" />
+  <path class="acc" d="M30,356 H55 C80,356 92,326 112,314 C134,302 155,310 180,310" />
+  <path class="gd" d="M30,310 H180" />
+
+  <text class="lblb" x="255" y="284">PT2 (D = 0,1)</text>
+  <path class="w" d="M215,356 V292 M215,356 H365" />
+  <path class="acc" d="M215,356 H235 C250,356 252,294 266,294 C280,294 282,346 296,344 C310,342 312,300 326,302 C338,304 340,336 352,332 C360,330 362,314 365,312" />
+  <path class="gd" d="M215,311 H365" />
+
+  <text class="lblb" x="440" y="284">PD-Glied</text>
+  <path class="w" d="M400,356 V292 M400,356 H550" />
+  <path class="acc" d="M400,356 H428 V300 C450,300 468,322 494,326 C514,329 532,328 550,328" />
+  <path class="gd" d="M400,328 H550" />
+</svg>
+
+<h2>Das PT1-Glied im Detail</h2>
+<div class="fbox">
+  <span class="f">y(t) = K·u₀·(1 − e^(−t/T))</span>
+  <span class="l">Nach T: 63 % · nach 3T: 95 % · nach 5T: 99 %. Die Zeitkonstante lässt sich direkt aus der Kurve ablesen.</span>
+</div>
+<div class="grid">
+  <div class="card"><div class="ct">T ablesen</div><div class="cd">Zwei Wege: bei 63 % des Endwerts die Zeit ablesen, oder die Anfangstangente anlegen — sie schneidet den Endwert genau bei t = T.</div></div>
+  <div class="card"><div class="ct">Reihenschaltung mehrerer PT1</div><div class="cd">Ergibt ein System höherer Ordnung, dessen Sprungantwort einen S-Verlauf hat. Genau daraus entstehen die Verzugszeit T_u und die Ausgleichszeit T_g, die man beim Sprungversuch abliest.</div></div>
+  <div class="card"><div class="ct">Näherung für die Praxis</div><div class="cd">Eine Kette vieler kleiner Zeitkonstanten lässt sich gut als <b>PT1 mit Totzeit</b> annähern. Für die meisten Einstellregeln genügt genau das.</div></div>
+</div>
+
+<h2>Das PT2-Glied und die Dämpfung</h2>
+<div class="fbox">
+  <span class="f">G(s) = K / (1 + 2·D·T·s + T²·s²)&nbsp;&nbsp;·&nbsp;&nbsp;ω₀ = 1/T</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Dämpfung D</th><th>Verhalten</th><th>Überschwingen</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>0</b></td><td>Dauerschwingung</td><td>100 %</td><td>Stabilitätsgrenze — nie gewollt</td></tr>
+<tr><td><b>0,3</b></td><td>Deutlich schwingend</td><td>≈ 37 %</td><td>Zu wenig gedämpft für die meisten Anwendungen</td></tr>
+<tr><td><b>0,5</b></td><td>Schwingend, klingt schnell ab</td><td>≈ 16 %</td><td>Häufiger Kompromiss bei Antrieben</td></tr>
+<tr><td><b>0,707</b></td><td>Optimum aus Schnelligkeit und Ruhe</td><td>≈ 4,3 %</td><td>Der übliche Zielwert; im Frequenzgang maximal flach</td></tr>
+<tr><td><b>1</b></td><td>Aperiodischer Grenzfall</td><td>0 %</td><td>Schnellstmöglich ohne Überschwingen</td></tr>
+<tr><td><b>&gt; 1</b></td><td>Kriechfall</td><td>0 %</td><td>Wenn Überschwingen unter allen Umständen vermieden werden muss</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zusammenhang für die Abschätzung: Anstiegszeit ≈ 1,8/ω₀ bei D = 0,7; Ausregelzeit auf 2 % ≈ 4/(D·ω₀). Wer die gewünschte Reaktionszeit kennt, kann daraus die nötige Kreisfrequenz bestimmen — und weiß damit, welche Bandbreite der Regelkreis braucht.</p>
+
+<h2>Totzeit — der unangenehmste Baustein</h2>
+<div class="stop"><b>Totzeit lässt sich nicht wegregeln.</b> Eine reine Verzögerung fügt Phasendrehung hinzu, ohne die Amplitude zu dämpfen — genau die Kombination, die einen Regelkreis instabil macht. Je Frequenz gilt φ = −ω·T_t im Bogenmaß: bei 1 Hz und 100 ms Totzeit sind das bereits −36°. Praktische Konsequenzen:</div>
+<ul>
+  <li>Das Verhältnis <b>T_t/T</b> bestimmt, wie schnell geregelt werden kann. Über 0,5 wird es schwierig, über 1 sehr schwierig.</li>
+  <li>Der wirksamste Hebel ist, die Totzeit zu <b>verkleinern</b>: schneller messen, näher am Prozess messen, Rechenzeit verkürzen, Kommunikationsverzögerung reduzieren.</li>
+  <li>Ein <b>Smith-Prädiktor</b> kompensiert die bekannte Totzeit rechnerisch — funktioniert gut, reagiert aber empfindlich auf Modellfehler.</li>
+  <li>In digitalen Regelungen ist die Abtastzeit selbst eine Totzeit von etwa T_a/2. Deshalb ist eine zu langsame Abtastung doppelt schädlich.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Lunze, <i>Regelungstechnik 1</i>, Kapitel Übertragungsglieder und Kennwerte.</li>
+    <li>Föllinger, <i>Regelungstechnik</i> — ausführliche Tabellen zu Sprung- und Frequenzantworten.</li>
+    <li>Åström &amp; Hägglund, <i>Advanced PID Control</i>, Kapitel zur Streckencharakterisierung.</li>
+    <li>Simulation zum Nachvollziehen: <a href="https://python-control.readthedocs.io/">python-control</a> mit <code>step_response()</code>, oder <a href="https://www.scilab.org/">Scilab/Xcos</a> als kostenlose MATLAB-Alternative.</li>
+  </ul>
+</div>
