@@ -1,0 +1,63 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Wahl des Controllers entscheidet über Monate Arbeit.</b> Nicht die Rechenleistung ist der übliche Engpass, sondern Peripherie, Werkzeuge, Verfügbarkeit und Dokumentation. Ein Controller mit doppelter Taktfrequenz und schlechtem SDK ist die schlechtere Wahl.</div>
+
+<h2>Die Familien im Überblick</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Familie</th><th>Kern</th><th>Takt</th><th>Speicher</th><th>Funk</th><th>Stärke</th></tr></thead>
+<tbody>
+<tr><td><b>AVR (ATmega, ATtiny)</b></td><td>8 Bit, eigener Kern</td><td>bis 20 MHz</td><td>2–256 kB Flash</td><td>—</td><td>Sehr einfach zu verstehen, tolerant, Arduino-Ursprung. Für Neuentwürfe meist zu schwach</td></tr>
+<tr><td><b>RP2040 / RP2350</b></td><td>2× Cortex-M0+ bzw. 2× M33 <b>oder</b> 2× RISC-V (Hazard3)</td><td>133 / 150 MHz</td><td>264 / 520 kB SRAM, externer QSPI-Flash</td><td>W-Varianten mit WLAN/BLE</td><td>PIO-Blöcke für frei programmierbare Schnittstellen, exzellente Dokumentation, sehr günstig</td></tr>
+<tr><td><b>STM32</b></td><td>Cortex-M0+ bis M7, M33, M55</td><td>48–800 MHz</td><td>16 kB – 4 MB</td><td>bei WB/WBA-Serie</td><td>Riesige Auswahl, sehr viel Peripherie, industrielle Verfügbarkeit. STM32N6 mit 800 MHz Cortex-M55 und NPU als Spitze</td></tr>
+<tr><td><b>ESP32-Familie</b></td><td>Xtensa oder RISC-V</td><td>80–400 MHz</td><td>bis 512 kB SRAM, PSRAM möglich</td><td><b>immer</b></td><td>Funk eingebaut, sehr preiswert, riesige Community. ESP32-P4 (400 MHz RISC-V) für Multimedia, C5 mit 5-GHz-WLAN, C6 mit Wi-Fi 6 und Thread</td></tr>
+<tr><td><b>nRF52 / nRF54</b></td><td>Cortex-M4F / M33 (nRF54H20 zusätzlich mit RISC-V-Koprozessoren)</td><td>64–320 MHz</td><td>bis 2 MB Flash, 1 MB RAM</td><td>BLE, Thread, Matter, Zigbee</td><td>Der Maßstab bei Funk mit sehr geringem Stromverbrauch; nRF54L15 mit 128 MHz M33, 1,5 MB NVM</td></tr>
+<tr><td><b>SAM / PIC / AVR-DA (Microchip)</b></td><td>Cortex-M0+ bis M7, PIC-Kerne</td><td>32–300 MHz</td><td>breit gefächert</td><td>teils</td><td>Sehr lange Verfügbarkeit, gute Analogperipherie</td></tr>
+<tr><td><b>CH32V / GD32V</b></td><td>RISC-V</td><td>48–144 MHz</td><td>16–128 kB</td><td>teils</td><td>Extrem günstig (unter 20 Cent), wachsende Werkzeugunterstützung</td></tr>
+<tr><td><b>i.MX RT (NXP)</b></td><td>Cortex-M7 / M33</td><td>bis 1 GHz</td><td>externer Speicher</td><td>—</td><td>„Crossover“ — Rechenleistung wie ein Anwendungsprozessor bei Mikrocontroller-Determinismus</td></tr>
+</tbody>
+</table></div>
+
+<h2>Auswahl nach Anwendungsfall</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Erstes Projekt, Lernen</div><div class="cd"><b>Raspberry Pi Pico 2</b> oder ein ESP32-Board. Beide billig, gut dokumentiert, mit MicroPython und C nutzbar. Der Pico hat das mit Abstand beste Handbuch für Einsteiger.</div></div>
+  <div class="card"><div class="ct">Etwas mit WLAN oder Bluetooth</div><div class="cd"><b>ESP32-C6</b> oder <b>ESP32-S3</b>. Funk, Speicher und Werkzeuge in einem, sehr viele fertige Bibliotheken. Für Batteriebetrieb über Monate lieber <b>nRF52840</b> oder <b>nRF54L15</b>.</div></div>
+  <div class="card"><div class="ct">Motorsteuerung, Regelung</div><div class="cd"><b>STM32G4</b> oder <b>STM32F4</b> — hochauflösende Timer, mehrere schnelle ADCs, Komparatoren, teils mit Hardware-Beschleuniger für Regelalgorithmen.</div></div>
+  <div class="card"><div class="ct">Viele parallele Schnittstellen</div><div class="cd"><b>RP2350</b> mit seinen PIO-Blöcken: acht kleine Zustandsautomaten, die beliebige Protokolle takten — WS2812, DVI, mehrere UARTs, Encoder, alles ohne CPU-Last.</div></div>
+  <div class="card"><div class="ct">Batterie, Jahre Laufzeit</div><div class="cd"><b>nRF54L</b>, <b>STM32U5</b> oder <b>MSP430</b>. Entscheidend ist nicht der aktive Strom, sondern der Ruhestrom und wie schnell der Controller wieder einschläft.</div></div>
+  <div class="card"><div class="ct">Bildverarbeitung, KI am Gerät</div><div class="cd"><b>ESP32-P4</b>, <b>STM32N6</b> (Cortex-M55 mit NPU) oder gleich ein Linux-System. Vorher genau rechnen: Kamera und Modell bestimmen den Speicherbedarf, nicht die Taktfrequenz.</div></div>
+</div>
+
+<h2>Die Kriterien in der richtigen Reihenfolge</h2>
+<div class="steps">
+  <div class="step"><h4>Peripherie zählen</h4>Wie viele PWM-Kanäle, ADC-Kanäle, UARTs, SPI, CAN? Und: Lassen sich diese Funktionen <b>gleichzeitig</b> auf die vorhandenen Pins legen? Die Alternate-Function-Tabelle im Datenblatt entscheidet häufiger über die Wahl als die Rechenleistung.</div>
+  <div class="step"><h4>Speicher großzügig ansetzen</h4>Ein Netzwerkstack, TLS und ein Dateisystem brauchen schnell 100 kB RAM. Wer knapp wählt, zahlt später mit einem Neuentwurf. Eine Nummer größer kostet meist wenige Cent.</div>
+  <div class="step"><h4>Werkzeuge und Dokumentation prüfen</h4>Gibt es ein vollständiges Referenzhandbuch? Läuft das SDK auf dem eigenen Betriebssystem? Gibt es Beispiele für die benötigte Peripherie? Ein Forum mit aktiven Antworten?</div>
+  <div class="step"><h4>Verfügbarkeit prüfen</h4>Lieferzeit und Lebenszyklus bei Mouser, Digi-Key oder LCSC ansehen. Hersteller geben oft Longevity-Zusagen — für alles, was länger als ein Jahr leben soll, ist das relevant.</div>
+  <div class="step"><h4>Erst dann Rechenleistung</h4>Für Regelung, Kommunikation und Bedienung reichen 48–160 MHz fast immer. Fließkomma-Einheit lohnt sich, sobald Regelalgorithmen oder Signalverarbeitung ins Spiel kommen.</div>
+</div>
+
+<h2>Entwicklungsboards, die sich bewährt haben</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Board</th><th>Preis</th><th>Besonderheit</th></tr></thead>
+<tbody>
+<tr><td><b>Raspberry Pi Pico 2 / 2 W</b></td><td>≈ 5–8 €</td><td>RP2350, wahlweise ARM- oder RISC-V-Kerne, PIO, sehr gutes Handbuch</td></tr>
+<tr><td><b>ESP32-S3-DevKitC / C6-DevKitC</b></td><td>≈ 10–15 €</td><td>Funk komplett, USB direkt am Chip, viel RAM</td></tr>
+<tr><td><b>STM32 Nucleo-64 / Discovery</b></td><td>≈ 15–25 €</td><td>ST-Link-Debugger eingebaut, Arduino-kompatible Steckleiste</td></tr>
+<tr><td><b>nRF52840-DK / nRF54L15-DK</b></td><td>≈ 45–60 €</td><td>Strommessung eingebaut, hervorragend für Batterieoptimierung</td></tr>
+<tr><td><b>Teensy 4.1</b></td><td>≈ 30 €</td><td>i.MX RT1062 mit 600 MHz, Arduino-kompatibel, sehr schnell</td></tr>
+<tr><td><b>Arduino Uno R4 / Nano ESP32</b></td><td>≈ 20–25 €</td><td>Für den Einstieg mit vertrauter Umgebung, aber moderner Hardware</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Ein Board mit eingebautem Debugger ist die beste Investition am Anfang.</b> Wer nur über die serielle Schnittstelle Meldungen ausgibt, verbringt bei jedem echten Fehler Stunden mit Raten. Ein Nucleo-Board oder ein separater Debug-Adapter (ST-Link, J-Link EDU, CMSIS-DAP) kostet wenig und macht Breakpoints, Speicheransicht und Fault-Analyse möglich — siehe <a href="#debug">Debuggen &amp; Messen</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf">RP2350 Datasheet</a> und das <i>Raspberry Pi Pico C/C++ SDK</i>-Handbuch.</li>
+    <li><a href="https://www.espressif.com/en/products/socs">Espressif SoC-Übersicht</a> und die jeweiligen Technical Reference Manuals.</li>
+    <li><a href="https://www.st.com/en/microcontrollers-microprocessors.html">STMicroelectronics STM32-Auswahlhilfe</a>; STM32N6 mit Cortex-M55 und Neural-ART-NPU.</li>
+    <li><a href="https://www.nordicsemi.com/Products">Nordic Semiconductor Produktübersicht</a> — nRF54L15 und nRF54H20.</li>
+    <li>Verfügbarkeit und Lebenszyklus: Produktseiten bei Mouser, Digi-Key und LCSC.</li>
+  </ul>
+</div>

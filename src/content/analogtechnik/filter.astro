@@ -1,0 +1,96 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Filter lässt bestimmte Frequenzen durch und dämpft andere.</b> Die Ordnung bestimmt die Steilheit (20 dB pro Dekade und Ordnung), die Approximation den Charakter: Butterworth für flachen Durchlassbereich, Bessel für saubere Impulsform, Tschebyscheff für maximale Steilheit.</div>
+
+<h2>Das Bode-Diagramm lesen</h2>
+<svg class="dg l" viewBox="-40 0 660 230" role="img" aria-label="Bode-Diagramm eines Tiefpasses erster Ordnung mit Amplituden- und Phasengang">
+  <path class="w" d="M50,20 V120 H580" />
+  <path class="gd" d="M50,40 H580 M50,60 H580 M50,80 H580 M50,100 H580 M170,20 V210 M290,20 V210 M410,20 V210 M500,20 V210" />
+  <path class="acc" d="M50,40 H262 C286,40 300,52 312,66 L580,110" />
+  <text class="lbl" x="44" y="44" text-anchor="end">0 dB</text>
+  <text class="lbl" x="44" y="64" text-anchor="end">−3</text>
+  <text class="lbl" x="44" y="84" text-anchor="end">−20</text>
+  <text class="lbl" x="44" y="104" text-anchor="end">−40</text>
+  <text class="lbla" x="290" y="16" text-anchor="middle">f_g</text>
+  <path class="gd" d="M290,20 V220" />
+  <text class="lbla" x="450" y="82">−20 dB / Dekade</text>
+  <path class="w" d="M50,140 V210 H580" />
+  <path class="midl" d="M50,148 H200 C250,148 260,175 290,178 C320,181 340,200 400,202 H580" />
+  <text class="lbl" x="44" y="152" text-anchor="end">0°</text>
+  <text class="lbl" x="44" y="182" text-anchor="end">−45°</text>
+  <text class="lbl" x="44" y="206" text-anchor="end">−90°</text>
+  <text class="lbl" x="588" y="124">f</text>
+  <text class="lbl" x="588" y="214">f</text>
+</svg>
+<p>Beide Achsen logarithmisch, die Amplitude in Dezibel. Eine Dekade ist ein Faktor 10 in der Frequenz. Ein Filter erster Ordnung fällt mit 20 dB/Dekade (= 6 dB/Oktave) und dreht die Phase um insgesamt 90°, ein Filter zweiter Ordnung mit 40 dB/Dekade und 180°. Diese Phasendrehung ist der Grund, warum Filter in Regelkreisen Stabilität kosten — siehe <a href="regelungstechnik.html#stabilitaet">Regelungstechnik → Stabilität</a>.</p>
+
+<h2>Passive Filter</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Typ</th><th>Aufbau</th><th>Grenzfrequenz</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>RC-Tiefpass</b></td><td>R in Reihe, C nach Masse</td><td>f_g = 1/(2πRC)</td><td>Der Arbeitspferd-Filter. Ausgangswiderstand frequenzabhängig — nachfolgende Stufe belastet ihn</td></tr>
+<tr><td><b>RC-Hochpass</b></td><td>C in Reihe, R nach Masse</td><td>f_g = 1/(2πRC)</td><td>Koppelkondensator: blockt Gleichanteil, lässt Signal durch</td></tr>
+<tr><td><b>LC-Tiefpass</b></td><td>L in Reihe, C nach Masse</td><td>f_g = 1/(2π√(LC))</td><td>40 dB/Dekade, sehr verlustarm — Standard am Ausgang von Schaltreglern</td></tr>
+<tr><td><b>LC-Bandpass</b></td><td>Reihenschwingkreis quer oder Parallelschwingkreis längs</td><td>f₀ = 1/(2π√(LC))</td><td>Güte Q = f₀/B bestimmt die Schmalbandigkeit</td></tr>
+<tr><td><b>Pi-Filter</b></td><td>C – L – C</td><td>—</td><td>Netzfilter, EMV-Entstörung, 60 dB/Dekade</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Kaskadieren ist nicht Multiplizieren.</b> Zwei RC-Tiefpässe hintereinander ergeben nicht einfach 40 dB/Dekade an derselben Grenzfrequenz — die zweite Stufe belastet die erste. Entweder die Stufenimpedanzen um Faktor 10 staffeln oder mit einem Impedanzwandler entkoppeln. Genau dafür gibt es aktive Filter.</div>
+
+<h2>Aktive Filter</h2>
+<p>Ein Operationsverstärker entkoppelt die Stufen und kann zusätzlich einen Pol mit Güte erzeugen — ohne Spule. Die verbreitetste Topologie ist die <b>Sallen-Key-Schaltung</b> zweiter Ordnung: zwei Widerstände, zwei Kondensatoren, ein OPV als Spannungsfolger.</p>
+<div class="grid2">
+  <div class="card"><div class="ct">Sallen-Key</div><div class="cd">Einfach, unkritisch, Verstärkung 1 möglich. Bei hoher Güte reagiert sie empfindlich auf Bauteiltoleranzen. Der Standard für Antialiasing-Filter bis einige hundert Kilohertz.</div></div>
+  <div class="card"><div class="ct">Multiple Feedback (MFB)</div><div class="cd">Invertierend, unempfindlicher gegen OPV-Grenzen bei höheren Frequenzen, gut für Bandpässe.</div></div>
+  <div class="card"><div class="ct">Zustandsvariablenfilter</div><div class="cd">Drei OPVs, liefert Tief-, Hoch- und Bandpass gleichzeitig, Güte und Frequenz getrennt einstellbar. Aufwendig, aber sehr robust.</div></div>
+  <div class="card"><div class="ct">Switched-Capacitor</div><div class="cd">Fertige ICs (z. B. MAX7400-Familie), Grenzfrequenz per Takt einstellbar. Preis: Taktreste im Signal und begrenzte Dynamik.</div></div>
+</div>
+
+<h2>Die Approximationen im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Charakteristik</th><th>Durchlassbereich</th><th>Flankensteilheit</th><th>Sprungantwort</th><th>Nimmt man für</th></tr></thead>
+<tbody>
+<tr><td><b>Butterworth</b></td><td>maximal flach, kein Welligkeit</td><td>mittel</td><td>leichtes Überschwingen</td><td>Der vernünftige Standard, wenn nichts dagegen spricht</td></tr>
+<tr><td><b>Bessel (Thomson)</b></td><td>flach</td><td>am flachsten</td><td>kein Überschwingen, konstante Gruppenlaufzeit</td><td>Impulse, Rechtecksignale, Regelkreise, Sensorsignale mit Sprüngen</td></tr>
+<tr><td><b>Tschebyscheff Typ I</b></td><td>definierte Welligkeit (0,1–3 dB)</td><td>steil</td><td>deutliches Überschwingen und Nachschwingen</td><td>Wenn die Trennschärfe zählt und die Zeitform egal ist</td></tr>
+<tr><td><b>Cauer / elliptisch</b></td><td>Welligkeit in Durchlass <em>und</em> Sperrbereich</td><td>am steilsten</td><td>schlechteste Zeitantwort</td><td>Antialiasing mit knappem Frequenzabstand</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die Regel dahinter:</b> Steilheit im Frequenzbereich wird immer mit Verhalten im Zeitbereich bezahlt. Ein sehr steiles Filter klingelt bei jedem Sprung nach. Wer Sensorsignale mit Sprüngen filtert und danach eine Regelung füttert, nimmt Bessel — dort ist die Gruppenlaufzeit über die Frequenz konstant, das Signal wird nur verzögert, nicht verformt.</div>
+
+<h2>Antialiasing: der einzige Filter, der zwingend analog sein muss</h2>
+<p>Vor jedem Analog-Digital-Wandler müssen alle Frequenzanteile oberhalb der halben Abtastrate entfernt werden. Was dort noch durchkommt, erscheint im Digitalen als scheinbar niederfrequentes Signal und ist danach durch keine Software mehr zu unterscheiden.</p>
+<div class="steps">
+  <div class="step"><h4>Nutzbandbreite festlegen</h4>Was ist die höchste Frequenz, die wirklich interessiert? Bei einem Temperatursensor 1 Hz, bei Audio 20 kHz.</div>
+  <div class="step"><h4>Abtastrate wählen</h4>Mindestens das Doppelte, praktisch das 5- bis 10-Fache der Nutzbandbreite. Damit wird das Filter deutlich einfacher.</div>
+  <div class="step"><h4>Filterordnung bestimmen</h4>Erforderliche Dämpfung bei f_s/2: mindestens die Auflösung des Wandlers, also 6 dB pro Bit. Ein 12-Bit-ADC braucht rund 72 dB.</div>
+  <div class="step"><h4>Oversampling prüfen</h4>Oft billiger als ein hochordriges Filter: mit 16-facher Abtastrate messen, digital mitteln und dezimieren. Das bringt zusätzlich 2 Bit effektive Auflösung pro Vervierfachung der Rate.</div>
+</div>
+<p class="note">Delta-Sigma-Wandler machen genau das intern — sie tasten mit einem Vielfachen der Ausgaberate ab und filtern digital. Deshalb genügt vor ihnen oft ein simples RC-Glied. Details unter <a href="#wandler">ADC &amp; DAC</a>.</p>
+
+<h2>Digitale Filter — die Alternative</h2>
+<div class="gb">
+  <div class="gb-col"><h4>FIR</h4><ul>
+    <li>Immer stabil, exakt lineare Phase möglich</li>
+    <li>Braucht viele Koeffizienten für steile Flanken</li>
+    <li>Einfachster Fall: gleitender Mittelwert</li>
+  </ul></div>
+  <div class="gb-col"><h4>IIR</h4><ul>
+    <li>Sehr wenige Koeffizienten für dieselbe Steilheit</li>
+    <li>Kann instabil werden, Phase nicht linear</li>
+    <li>Der Ein-Zeilen-Klassiker: <span class="formula">y += α·(x − y)</span> — ein digitaler RC-Tiefpass mit α = dt/(dt+RC)</li>
+  </ul></div>
+</div>
+<p>Für Sensorwerte im Mikrocontroller ist der exponentiell gleitende Mittelwert oben meist die richtige Antwort: eine Zeile, keine Historie, kein Speicher. Wo Ausreißer stören, ist ein <b>Medianfilter</b> über 3 oder 5 Werte wirkungsvoller als jeder Tiefpass. Mehr in <a href="informationstechnik.html#dsp">Informationstechnik → Signalverarbeitung</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/an/sloa088/sloa088.pdf">Analysis of the Sallen-Key Architecture</a> und <i>Active Filter Design Techniques</i> (SLOA093).</li>
+    <li>Analog Devices, <i>Analog Filter Design Demystified</i> (MT-085 bis MT-088).</li>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 6.</li>
+    <li><a href="http://sim.okawa-denshi.jp/en/Fkeisan.htm">Okawa Electric Filter Design Tools</a>: kostenlose Rechner für Sallen-Key und MFB mit Bode-Plot.</li>
+    <li>Filterentwurf in Python: <code>scipy.signal.butter</code>, <code>bessel</code>, <code>cheby1</code> — samt Frequenzgangplot.</li>
+  </ul>
+</div>

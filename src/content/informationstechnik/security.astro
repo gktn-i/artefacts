@@ -1,0 +1,84 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Sicherheit beginnt mit einer Frage, nicht mit einem Algorithmus:</b> Wovor genau soll geschützt werden, und wer ist der Angreifer? Ein Gerät im eigenen Keller braucht etwas anderes als eines, das über das Internet erreichbar ist. Ohne Bedrohungsmodell ist jede Krypto-Entscheidung Ratespiel.</div>
+
+<h2>Bedrohungsmodell in fünf Fragen</h2>
+<div class="steps">
+  <div class="step"><h4>Was ist schützenswert?</h4>Messdaten, Steuerungsfähigkeit, Firmware als geistiges Eigentum, Zugangsdaten zu anderen Systemen, die Verfügbarkeit selbst.</div>
+  <div class="step"><h4>Wer greift an?</h4>Neugieriger Nutzer, automatisierter Scanner aus dem Internet, gezielter Angreifer mit physischem Zugriff, jemand mit Laborausrüstung. Der Aufwand skaliert sehr unterschiedlich.</div>
+  <div class="step"><h4>Über welchen Weg?</h4>Netzwerk, Funk, Debug-Schnittstelle, Firmware-Update, Lieferkette, Speicherkarte.</div>
+  <div class="step"><h4>Was ist der Schaden?</h4>Peinlich, teuer oder gefährlich? Ein manipulierter Heizungsregler ist etwas anderes als eine ausgelesene Temperaturkurve.</div>
+  <div class="step"><h4>Was ist der vertretbare Aufwand?</h4>Perfekte Sicherheit gibt es nicht. Das Ziel ist, den Angriff teurer zu machen als den möglichen Gewinn.</div>
+</div>
+
+<h2>Die kryptografischen Bausteine</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Baustein</th><th>Leistet</th><th>Leistet <b>nicht</b></th><th>Aktuelle Wahl</th></tr></thead>
+<tbody>
+<tr><td><b>Hash</b></td><td>Integrität, Fingerabdruck</td><td>Keine Vertraulichkeit, keine Authentizität</td><td>SHA-256, SHA-3, BLAKE2</td></tr>
+<tr><td><b>MAC</b></td><td>Integrität <b>und</b> Authentizität mit geteiltem Schlüssel</td><td>Keine Vertraulichkeit, keine Nichtabstreitbarkeit</td><td>HMAC-SHA256, Poly1305</td></tr>
+<tr><td><b>Symmetrische Verschlüsselung</b></td><td>Vertraulichkeit</td><td>Ohne MAC keine Integrität</td><td>AES-256-GCM, ChaCha20-Poly1305</td></tr>
+<tr><td><b>Asymmetrisch (Signatur)</b></td><td>Authentizität, Nichtabstreitbarkeit</td><td>Langsam für große Datenmengen</td><td>Ed25519, ECDSA P-256</td></tr>
+<tr><td><b>Schlüsselaustausch</b></td><td>Gemeinsames Geheimnis über unsicheren Kanal</td><td>Ohne Authentifizierung angreifbar</td><td>X25519 (ECDH)</td></tr>
+<tr><td><b>Passwort-Hash</b></td><td>Passwörter speichern</td><td>Kein Ersatz für Verschlüsselung</td><td>Argon2id, scrypt, bcrypt — <b>nie</b> SHA allein</td></tr>
+<tr><td><b>Zufallszahlen</b></td><td>Grundlage von allem</td><td>—</td><td>Hardware-TRNG des Controllers; <code>rand()</code> ist kryptografisch wertlos</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Die Regel, die alle Fachleute teilen:</b> Keine eigene Kryptografie entwerfen und keine Primitiven selbst kombinieren. Verwende fertige, geprüfte Bibliotheken — <a href="https://doc.libsodium.org/">libsodium</a>, <a href="https://www.trustedfirmware.org/projects/mbed-tls/">Mbed TLS</a>, <a href="https://github.com/ARMmbed/mbedtls">wolfSSL</a> — und nimm ihre fertigen Verfahren (AEAD statt Verschlüsselung plus separatem MAC). Die Fehler stecken nicht im Algorithmus, sondern in der Anwendung: wiederverwendete Nonces, fehlende Konstantzeit-Vergleiche, ungeprüfte Zertifikate.</div>
+
+<h2>Sicherer Betrieb eines Geräts</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Secure Boot</div><div class="cd">Das ROM prüft die Signatur des Bootloaders, der Bootloader die der Anwendung. Nur signierte Firmware startet. Verfügbar bei ESP32 (Secure Boot v2), STM32 mit TrustZone, RP2350 (signierte Boot-Images).</div></div>
+  <div class="card"><div class="ct">Signierte Updates</div><div class="cd">Die Signatur wird <b>vor</b> dem Schreiben geprüft, nicht danach. Zwei Speicherbereiche im Wechsel und eine Rückfalloption verhindern, dass ein fehlgeschlagenes Update das Gerät unbrauchbar macht.</div></div>
+  <div class="card"><div class="ct">Rollback-Schutz</div><div class="cd">Ein monotoner Zähler verhindert, dass eine alte, korrekt signierte Firmware mit bekannter Lücke wieder eingespielt wird.</div></div>
+  <div class="card"><div class="ct">Debug-Schnittstelle</div><div class="cd">SWD und JTAG erlauben vollen Speicherzugriff. In der Serienfertigung müssen sie gesperrt werden — dauerhaft, per Fuse. Bis dahin sind sie der bequemste Angriffsweg überhaupt.</div></div>
+  <div class="card"><div class="ct">Schlüsselspeicher</div><div class="cd">Schlüssel im normalen Flash sind auslesbar. Besser: eFuses, ein Secure Element (ATECC608, SE050) oder ein TPM. Ein Schlüssel, der nie den Chip verlässt, kann nicht kopiert werden.</div></div>
+  <div class="card"><div class="ct">Individuelle Zugangsdaten</div><div class="cd">Ein Standardpasswort für alle Geräte ist der häufigste Grund für Botnetze aus vernetzten Geräten. Je Gerät ein eigenes, beim ersten Start erzwungen zu änderndes Passwort — inzwischen auch regulatorisch gefordert.</div></div>
+</div>
+
+<h2>TLS in eingebetteten Systemen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Punkt</th><th>Was oft schiefgeht</th><th>Richtig</th></tr></thead>
+<tbody>
+<tr><td><b>Zertifikatsprüfung</b></td><td>Abgeschaltet, weil es „sonst nicht geht“</td><td>Wurzelzertifikat einbetten und prüfen; ohne Prüfung ist TLS wertlos</td></tr>
+<tr><td><b>Uhrzeit</b></td><td>Ohne gültige Zeit schlägt jede Gültigkeitsprüfung fehl</td><td>NTP vor dem ersten TLS-Aufbau, oder eine gepufferte Echtzeituhr</td></tr>
+<tr><td><b>Zertifikatsablauf</b></td><td>Eingebettetes Wurzelzertifikat läuft nach Jahren ab</td><td>Aktualisierbar gestalten oder ein langlebiges Wurzelzertifikat wählen</td></tr>
+<tr><td><b>Speicherbedarf</b></td><td>TLS-Handshake sprengt den RAM kleiner Controller</td><td>Elliptische Kurven statt RSA, kleinere Puffer, oder DTLS über UDP</td></tr>
+<tr><td><b>Zufall</b></td><td>Schwache Zufallszahlen beim Schlüsselaustausch</td><td>Hardware-TRNG verwenden, Entropie beim ersten Start sammeln</td></tr>
+</tbody>
+</table></div>
+
+<h2>Regulatorischer Rahmen in der EU</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Funkanlagenrichtlinie RED, Artikel 3(3)</div><div class="cd">Seit dem 1. August 2025 verbindlich für funkfähige Geräte: Netzschutz, Schutz personenbezogener Daten und Betrugsschutz. Umgesetzt über die Normenreihe EN 18031.</div></div>
+  <div class="card"><div class="ct">Cyber Resilience Act (EU) 2024/2847</div><div class="cd">Gilt für Produkte mit digitalen Elementen. Meldepflichten für aktiv ausgenutzte Schwachstellen greifen ab September 2026, die vollständigen Anforderungen ab Dezember 2027. Verlangt unter anderem Schwachstellenmanagement über die gesamte Nutzungsdauer und eine Software-Stückliste (SBOM).</div></div>
+</div>
+<p class="note">Für private Projekte gilt das nicht — für alles, was verkauft oder in Verkehr gebracht wird, schon. Wer heute ein Produkt entwirft, plant Update-Fähigkeit und Schwachstellenprozess von Anfang an ein, weil beides nachträglich kaum einzubauen ist.</p>
+
+<h2>Die zehn wirksamsten Maßnahmen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Maßnahme</span><span>Aufwand</span><span>Wirkung</span></div>
+  <div class="frow"><span class="fn">Keine Standardpasswörter</span><span class="fe">gering</span><span class="fx">Verhindert die überwiegende Mehrheit automatisierter Angriffe</span></div>
+  <div class="frow"><span class="fn">Debug-Schnittstellen sperren</span><span class="fe">gering</span><span class="fx">Schließt den direktesten physischen Weg</span></div>
+  <div class="frow"><span class="fn">Alle Verbindungen mit TLS</span><span class="fe">mittel</span><span class="fx">Verhindert Mitlesen und Manipulation im Netz</span></div>
+  <div class="frow"><span class="fn">Signierte Firmware-Updates</span><span class="fe">mittel</span><span class="fx">Verhindert dauerhafte Übernahme</span></div>
+  <div class="frow"><span class="fn">Geringste Rechte</span><span class="fe">gering</span><span class="fx">Ein kompromittierter Dienst kompromittiert nicht alles</span></div>
+  <div class="frow"><span class="fn">Netzsegmentierung / eigenes VLAN</span><span class="fe">gering</span><span class="fx">Geräte kommen nicht an die restliche Infrastruktur</span></div>
+  <div class="frow"><span class="fn">Abhängigkeiten aktuell halten</span><span class="fe">laufend</span><span class="fx">Die meisten Lücken sind bekannt und behoben — nur nicht eingespielt</span></div>
+  <div class="frow"><span class="fn">Eingaben validieren</span><span class="fe">gering</span><span class="fx">Pufferüberläufe und Injektionen entstehen fast immer hier</span></div>
+  <div class="frow"><span class="fn">Protokollieren</span><span class="fe">gering</span><span class="fx">Ohne Protokoll merkt man einen Vorfall gar nicht</span></div>
+  <div class="frow"><span class="fn">Nichts unnötig erreichbar machen</span><span class="fe">gering</span><span class="fx">Der sicherste Dienst ist der, der gar nicht läuft</span></div>
+</div>
+<div class="tip"><b>Für das eigene Netz:</b> Ein separates VLAN oder WLAN für Bastelgeräte, kein Port-Forwarding aus dem Internet, Zugriff von außen ausschließlich über VPN. Das erledigt mehr Risiko als jede Krypto-Optimierung im Gerät selbst. Konkrete Umsetzung in <a href="homeserver-101.html#sicherheit">Homeserver 101 → Sicherheit</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://owasp.org/www-project-internet-of-things/">OWASP IoT Top 10</a> — die häufigsten Schwachstellen vernetzter Geräte.</li>
+    <li>EN 18031-1/-2/-3 — harmonisierte Normen zu RED Artikel 3(3).</li>
+    <li>Verordnung (EU) 2024/2847 — Cyber Resilience Act.</li>
+    <li>NIST SP 800-57 (Schlüsselverwaltung) und BSI TR-02102-1 (kryptografische Verfahren, jährlich aktualisiert).</li>
+    <li>Jean-Philippe Aumasson, <i>Serious Cryptography</i>, No Starch Press — verständlich und aktuell.</li>
+  </ul>
+</div>

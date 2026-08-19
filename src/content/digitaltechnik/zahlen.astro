@@ -1,0 +1,94 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Rechner kennen nur Bitmuster — was sie bedeuten, legt die Interpretation fest.</b> Dasselbe Byte 0xFF ist 255 als vorzeichenlose Zahl, −1 im Zweierkomplement und ein Steuerzeichen als ASCII. Fehler entstehen fast immer dort, wo zwei Programmteile dieselben Bits verschieden deuten.</div>
+
+<h2>Die Systeme</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>System</th><th>Basis</th><th>Ziffern</th><th>Schreibweise</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Binär</b></td><td>2</td><td>0, 1</td><td>0b1010, 1010₂</td><td>Bitmasken, Register, Portbelegungen</td></tr>
+<tr><td><b>Oktal</b></td><td>8</td><td>0–7</td><td>0o755, 0755</td><td>Unix-Dateirechte, historische Rechner</td></tr>
+<tr><td><b>Dezimal</b></td><td>10</td><td>0–9</td><td>42</td><td>Alles, was Menschen lesen</td></tr>
+<tr><td><b>Hexadezimal</b></td><td>16</td><td>0–9, A–F</td><td>0x2A, 2Ah</td><td>Speicheradressen, Registerwerte — eine Hexziffer ist genau ein Nibble (4 Bit)</td></tr>
+</tbody>
+</table></div>
+
+<div class="calc" data-calc="zahlen">
+  <h4>Zahlensystem-Umrechner</h4>
+  <div class="row">
+    <div><label>Wert</label><input data-k="wert" type="text" placeholder="0xFF oder 255" /></div>
+    <div><label>Eingabe-Basis</label><select data-k="basis"><option value="10" selected>dezimal</option><option value="16">hexadezimal</option><option value="2">binär</option><option value="8">oktal</option></select></div>
+    <div><label>Wortbreite</label><select data-k="bits"><option value="8" selected>8 Bit</option><option value="16">16 Bit</option><option value="32">32 Bit</option></select></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Negative Zahlen: das Zweierkomplement</h2>
+<p>Es gäbe mehrere Wege, ein Vorzeichen darzustellen — durchgesetzt hat sich genau einer, weil er die Hardware am einfachsten macht.</p>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Verfahren</th><th>−5 bei 8 Bit</th><th>Problem</th></tr></thead>
+<tbody>
+<tr><td><b>Vorzeichen und Betrag</b></td><td>1000 0101</td><td>Zwei Darstellungen für null; Addierer braucht Fallunterscheidung</td></tr>
+<tr><td><b>Einerkomplement</b></td><td>1111 1010</td><td>Immer noch zwei Nullen; Übertrag muss zurückgeführt werden</td></tr>
+<tr><td><b>Zweierkomplement</b></td><td>1111 1011</td><td>Keins — <b>derselbe Addierer</b> funktioniert für positive und negative Zahlen</td></tr>
+</tbody>
+</table></div>
+<div class="steps">
+  <div class="step"><h4>Bilden</h4>Alle Bits invertieren, dann 1 addieren. Aus 5 (0000 0101) wird 1111 1010 + 1 = 1111 1011.</div>
+  <div class="step"><h4>Erkennen</h4>Das höchstwertige Bit ist das Vorzeichenbit: 1 bedeutet negativ.</div>
+  <div class="step"><h4>Zurückrechnen</h4>Wert = Bitmuster − 2ⁿ, wenn das oberste Bit gesetzt ist. 1111 1011 = 251 − 256 = −5.</div>
+  <div class="step"><h4>Wertebereich merken</h4>Bei n Bit: −2^(n−1) bis +2^(n−1) − 1. Bei 8 Bit also −128 … +127 — asymmetrisch, weil die Null zu den positiven Mustern zählt.</div>
+</div>
+<div class="warn"><b>Die Asymmetrie ist eine echte Fehlerquelle.</b> <code>abs(−128)</code> ist bei 8 Bit nicht darstellbar und liefert wieder −128. Dasselbe gilt für INT32_MIN in C. In sicherheitsrelevantem Code wird dieser Fall explizit geprüft — er ist die Ursache mehrerer bekannter Sicherheitslücken.</div>
+
+<h3>Überlauf erkennen</h3>
+<div class="gb">
+  <div class="gb-col"><h4>Vorzeichenlos</h4><p>Überlauf, wenn ein Übertrag aus dem höchsten Bit herausfällt (Carry-Flag). 250 + 10 = 4 bei 8 Bit.</p></div>
+  <div class="gb-col"><h4>Vorzeichenbehaftet</h4><p>Überlauf, wenn beide Operanden dasselbe Vorzeichen haben, das Ergebnis aber ein anderes (Overflow-Flag). 100 + 50 = −106 bei 8 Bit.</p></div>
+</div>
+<p class="note">Prozessoren führen beide Flags getrennt mit — deshalb gibt es in Assembler unterschiedliche Sprungbefehle für vorzeichenbehaftete und vorzeichenlose Vergleiche. In C ist ein Überlauf vorzeichenbehafteter Ganzzahlen <b>undefiniertes Verhalten</b>; der Compiler darf daraus beliebigen Code erzeugen. Bei vorzeichenlosen Typen ist der Umlauf dagegen definiert.</p>
+
+<h2>Weitere Codes</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Code</th><th>Prinzip</th><th>Wo er vorkommt</th></tr></thead>
+<tbody>
+<tr><td><b>BCD</b></td><td>Jede Dezimalziffer in 4 Bit</td><td>Echtzeituhren (DS3231), Siebensegmentanzeigen, Displays — spart die Division durch 10</td></tr>
+<tr><td><b>Gray-Code</b></td><td>Von Schritt zu Schritt ändert sich genau <b>ein</b> Bit</td><td>Absolutwertgeber, Drehgeber. Verhindert Zwischenwerte beim Übergang: bei 0111 → 1000 im Binärcode könnten kurz falsche Codes erscheinen</td></tr>
+<tr><td><b>One-Hot</b></td><td>Genau ein Bit gesetzt</td><td>Zustandsautomaten in FPGAs — schnell, weil kein Decoder nötig</td></tr>
+<tr><td><b>ASCII</b></td><td>7 Bit je Zeichen</td><td>Ziffern ab 0x30, Großbuchstaben ab 0x41, Kleinbuchstaben ab 0x61 (Differenz genau 0x20)</td></tr>
+<tr><td><b>UTF-8</b></td><td>1–4 Byte je Zeichen, ASCII-kompatibel</td><td>Der Standard für Text; ein Umlaut belegt zwei Byte — bei Displaypuffern regelmäßig übersehen</td></tr>
+<tr><td><b>Q-Format (Festkomma)</b></td><td>Ganzzahl mit gedachtem Komma, z. B. Q8.8</td><td>Signalverarbeitung ohne Fließkommaeinheit; deterministisch und schnell</td></tr>
+</tbody>
+</table></div>
+
+<h2>Bitoperationen, die man im Schlaf können muss</h2>
+<div class="flist">
+  <div class="frow hd"><span>Aufgabe</span><span>Ausdruck in C</span><span>Bemerkung</span></div>
+  <div class="frow"><span class="fn">Bit n setzen</span><span class="fe">x |= (1u &lt;&lt; n)</span><span class="fx">ODER mit einer Maske</span></div>
+  <div class="frow"><span class="fn">Bit n löschen</span><span class="fe">x &amp;= ~(1u &lt;&lt; n)</span><span class="fx">UND mit invertierter Maske</span></div>
+  <div class="frow"><span class="fn">Bit n umschalten</span><span class="fe">x ^= (1u &lt;&lt; n)</span><span class="fx">XOR</span></div>
+  <div class="frow"><span class="fn">Bit n prüfen</span><span class="fe">(x &gt;&gt; n) &amp; 1u</span><span class="fx">Liefert 0 oder 1</span></div>
+  <div class="frow"><span class="fn">Feld maskieren</span><span class="fe">(x &gt;&gt; pos) &amp; ((1u&lt;&lt;len)−1)</span><span class="fx">Bitfeld aus einem Register lesen</span></div>
+  <div class="frow"><span class="fn">Auf Vielfaches aufrunden</span><span class="fe">(x + (a−1)) &amp; ~(a−1)</span><span class="fx">Nur für Zweierpotenzen a</span></div>
+  <div class="frow"><span class="fn">Bytes tauschen (16 Bit)</span><span class="fe">(x &gt;&gt; 8) | (x &lt;&lt; 8)</span><span class="fx">Endianness-Umwandlung</span></div>
+</div>
+<div class="tip"><b>Immer <code>unsigned</code> für Bitoperationen.</b> Ein Shift nach links, der in das Vorzeichenbit eines <code>int</code> hineinläuft, ist in C undefiniert. Und <code>1 &lt;&lt; 31</code> ist auf 32-Bit-Systemen bereits problematisch — <code>1u &lt;&lt; 31</code> oder <code>UINT32_C(1) &lt;&lt; 31</code> ist korrekt. Bei Registerzugriffen auf Mikrocontrollern zusätzlich <code>volatile</code> beachten.</div>
+
+<h2>Endianness</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Little Endian</div><div class="cd">Niederwertigstes Byte zuerst im Speicher. 0x12345678 liegt als 78 56 34 12. Verwendet von x86, ARM (im Normalfall), RISC-V.</div></div>
+  <div class="card"><div class="ct">Big Endian</div><div class="cd">Höchstwertiges Byte zuerst: 12 34 56 78. Die „Netzwerk-Byte-Reihenfolge“ in TCP/IP, außerdem in vielen Sensor-Registern (z. B. MPU-6050, BMP280 teilweise).</div></div>
+</div>
+<p class="note">Das ist der Grund, warum ein 16-Bit-Sensorwert manchmal völlig unsinnig aussieht: Die Bytes kommen in der einen Reihenfolge über I²C und werden in der anderen zusammengesetzt. Erste Prüfung bei absurden Messwerten: Bytes tauschen und schauen, ob es plötzlich plausibel wird.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Fricke, <i>Digitaltechnik</i>, Kapitel Zahlensysteme und Codes.</li>
+    <li>Randall Hyde, <i>Write Great Code, Volume 1</i> — sehr gründlich zu Zahlendarstellungen.</li>
+    <li>Sean Anderson, <a href="https://graphics.stanford.edu/~seander/bithacks.html">Bit Twiddling Hacks</a>, Stanford — die kanonische Sammlung von Bittricks.</li>
+    <li>ISO/IEC 9899 (C-Standard), Abschnitte zu Integer-Konvertierungen und undefiniertem Verhalten bei Überlauf.</li>
+  </ul>
+</div>

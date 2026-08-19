@@ -1,0 +1,69 @@
+---
+import "./_style.css";
+---
+<div class="stop"><b>Dieser Abschnitt ersetzt keine Ausbildung.</b> Arbeiten an fest installierten Anlagen im Haus sind in Deutschland und Österreich Elektrofachkräften vorbehalten. Was hier steht, dient dem Verständnis und der eigenen Sicherheit am Basteltisch — nicht als Anleitung zum Eingriff in die Hausinstallation.</div>
+
+<h2>Was Strom im Körper macht</h2>
+<p>Gefährlich ist der <b>Strom</b>, nicht die Spannung — die Spannung bestimmt nur, wie viel Strom durch den Körperwiderstand fließt. Der Körperwiderstand liegt bei trockener Haut und Hand-zu-Hand bei etwa 1000–3000 Ω, bei feuchter Haut oder Durchdringung deutlich darunter.</p>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Strom (50 Hz, Hand zu Hand)</th><th>Wirkung</th></tr></thead>
+<tbody>
+<tr><td><b>&lt; 0,5 mA</b></td><td>Wahrnehmungsschwelle, kein Effekt</td></tr>
+<tr><td><b>0,5–10 mA</b></td><td>Kribbeln bis schmerzhaftes Ziehen; Loslassen noch möglich</td></tr>
+<tr><td><b>10–30 mA</b></td><td>Muskelverkrampfung — die Loslassgrenze liegt bei etwa 10 mA. Ab hier wird es lebensgefährlich, weil man den Leiter nicht mehr loslassen kann</td></tr>
+<tr><td><b>30–50 mA</b></td><td>Atemlähmung bei längerer Einwirkung. Deshalb löst ein FI-Schutzschalter für Personenschutz bei 30 mA aus</td></tr>
+<tr><td><b>&gt; 50 mA</b></td><td>Herzkammerflimmern möglich; ab etwa 100 mA über mehrere Herzzyklen sehr wahrscheinlich</td></tr>
+<tr><td><b>&gt; 1 A</b></td><td>Herzstillstand, schwere innere Verbrennungen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Gleichstrom ist bei gleicher Stromstärke weniger gefährlich für das Herz, verursacht aber stärkere elektrolytische Wirkungen. Die Grenzwerte in IEC/TS 60479-1 liegen für DC etwa um den Faktor 2–4 höher als für 50 Hz. 50 Hz ist ausgerechnet der ungünstigste Bereich für das Herz.</p>
+
+<h2>Die Spannungsgrenzen, die wirklich zählen</h2>
+<div class="grid">
+  <div class="card"><div class="ct">SELV / PELV — ungefährlich</div><div class="cd">Bis <b>25 V AC</b> bzw. <b>60 V DC</b> gilt als Schutz durch Kleinspannung (trockene Umgebung; in Nassbereichen 12 V AC / 30 V DC). Batteriebetrieb, USB, 12-V-Netzteile fallen hierunter. SELV ist zusätzlich von Erde getrennt, PELV geerdet.</div></div>
+  <div class="card"><div class="ct">Über 60 V DC / 25 V AC</div><div class="cd">Ab hier braucht es Schutzmaßnahmen. Bei Li-Ion-Packs ab 15 Zellen in Reihe (≈ 60 V) und bei jedem Netzteil mit Zwischenkreis ist man drin — auch wenn es nach „Kleinspannung“ klingt.</div></div>
+  <div class="card"><div class="ct">325 V DC im Netzteil</div><div class="cd">Hinter dem Gleichrichter jedes Netzteils steht der Scheitelwert von 230 V — und der Elko hält die Ladung nach dem Ausstecken oft minutenlang. Vor jeder Arbeit an offenen Netzteilen: Elko messen, nicht raten.</div></div>
+</div>
+
+<h2>Die Schutzmaßnahmen im Überblick</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Maßnahme</th><th>Prinzip</th><th>Erkennungsmerkmal</th></tr></thead>
+<tbody>
+<tr><td><b>Schutzklasse I</b></td><td>Gehäuse geerdet; bei Isolationsfehler fließt ein Fehlerstrom, die Sicherung löst aus</td><td>Dreipoliger Stecker mit Schutzkontakt</td></tr>
+<tr><td><b>Schutzklasse II</b></td><td>Schutzisolierung — doppelte oder verstärkte Isolierung statt Erdung</td><td>Symbol „Quadrat im Quadrat“, zweipoliger Stecker</td></tr>
+<tr><td><b>Schutzklasse III</b></td><td>Betrieb ausschließlich mit SELV/PELV-Kleinspannung</td><td>Symbol Raute mit römisch III</td></tr>
+<tr><td><b>Fehlerstromschutzschalter (RCD/FI)</b></td><td>Vergleicht Hin- und Rückstrom; Differenz &gt; 30 mA → Abschaltung in &lt; 40 ms</td><td>Prüftaste am Schalter, mindestens halbjährlich betätigen</td></tr>
+<tr><td><b>Leitungsschutzschalter (LS/Sicherung)</b></td><td>Schützt die <b>Leitung</b> vor Überlast und Kurzschluss — nicht den Menschen</td><td>Charakteristik B (Haushalt), C (Motoren), Nennstrom in A</td></tr>
+<tr><td><b>Trenntransformator</b></td><td>Galvanische Trennung vom Netz; ein einzelner Kontakt gegen Erde ist ungefährlich</td><td>Pflicht auf jedem Reparaturplatz für netzbetriebene Geräte</td></tr>
+<tr><td><b>Schutzkleinspannung im Gerät</b></td><td>Netzteil mit verstärkter Isolierung nach EN IEC 62368-1</td><td>Angabe der Isolationsklasse im Datenblatt</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was am Basteltisch tatsächlich passiert</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Kurzschluss am Labornetzteil</div><div class="cd">Strombegrenzung <b>vor</b> dem Einschalten einstellen — nicht danach. Bei einer neuen Schaltung 100–200 mA als Deckel setzen: ein Bestückungsfehler zeigt sich dann als Spannungseinbruch statt als Rauchwolke.</div></div>
+  <div class="card"><div class="ct">Li-Ion-Zellen</div><div class="cd">Ein Kurzschluss an einer 18650 liefert 20–50 A. Kein Schmuck an den Händen, kein loses Werkzeug in der Nähe, immer mit Schutzschaltung (BMS) arbeiten. Beschädigte Zellen nie laden.</div></div>
+  <div class="card"><div class="ct">Elkos in Netzteilen</div><div class="cd">Auch nach Trennen vom Netz geladen. Mit einem Widerstand (z. B. 1 kΩ / 5 W) entladen, nie mit einem Schraubendreher kurzschließen — das schweißt und schleudert.</div></div>
+  <div class="card"><div class="ct">Messen an Netzspannung</div><div class="cd">Nur mit Messgerät der passenden Messkategorie (CAT II für Steckdosenstromkreise, CAT III für Verteilungen) und intakten Prüfleitungen. Billige Multimeter ohne CAT-Angabe gehören nicht an 230 V.</div></div>
+  <div class="card"><div class="ct">Oszilloskop am Netz</div><div class="cd">Der Masseanschluss eines normalen Tastkopfs liegt auf Schutzleiter. Ihn an einen netzführenden Punkt zu klemmen erzeugt einen satten Kurzschluss. Lösung: Differenztastkopf oder das <b>Messobjekt</b> über einen Trenntrafo betreiben — niemals das Oszilloskop erden trennen.</div></div>
+  <div class="card"><div class="ct">Löten und Dämpfe</div><div class="cd">Kolophoniumhaltiges Flussmittel setzt beim Verdampfen Reizstoffe frei. Absaugung oder wenigstens ein Lüfter, der die Fahne wegzieht. Details im Modul <a href="loeten-referenz.html#sicherheit">Löten → Sicherheit</a>.</div></div>
+</div>
+
+<h2>Erste Hilfe bei Stromunfall</h2>
+<div class="steps">
+  <div class="step"><h4>Stromkreis unterbrechen — nicht anfassen</h4>Sicherung heraus, Stecker ziehen, Not-Aus. Wer eine unter Spannung stehende Person berührt, wird selbst Teil des Stromkreises. Falls nichts anderes geht: mit einem isolierenden Gegenstand (trockenes Holz, Kunststoff) wegdrücken.</div>
+  <div class="step"><h4>Notruf 112</h4>Auch wenn die Person ansprechbar wirkt. Herzrhythmusstörungen können mit Stunden Verzögerung auftreten — deshalb gehört jeder Stromunfall über Kleinspannung in ärztliche Beobachtung.</div>
+  <div class="step"><h4>Wiederbelebung, wenn keine normale Atmung</h4>30 Herzdruckmassagen, 2 Beatmungen, im Wechsel. Defibrillator holen lassen, falls verfügbar.</div>
+  <div class="step"><h4>Verbrennungen kühlen, nicht behandeln</h4>Strommarken sind oft klein an der Oberfläche und ausgedehnt im Gewebe. Steril abdecken, nichts auftragen.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>IEC/TS 60479-1 — Wirkungen des elektrischen Stromes auf Menschen und Nutztiere; Grundlage aller genannten Stromgrenzen.</li>
+    <li>DIN VDE 0100-410 — Schutz gegen elektrischen Schlag; definiert SELV, PELV und die Abschaltbedingungen.</li>
+    <li>DGUV Vorschrift 3 — Elektrische Anlagen und Betriebsmittel; regelt Prüfpflichten im gewerblichen Bereich.</li>
+    <li>EN IEC 61010-1 und die Messkategorien CAT I–IV für Messgeräte.</li>
+    <li>EN IEC 62368-1 — Sicherheit von Einrichtungen der Informations- und Kommunikationstechnik (löste EN 60950 und EN 60065 ab).</li>
+  </ul>
+</div>

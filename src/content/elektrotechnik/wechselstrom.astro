@@ -1,0 +1,99 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Bei Wechselstrom reicht eine Zahl nicht mehr — es braucht Betrag <em>und</em> Phase.</b> Der Widerstand wird zur Impedanz, und Kondensator wie Spule verschieben Strom und Spannung gegeneinander. Das Zeigerbild macht daraus Geometrie statt Trigonometrie.</div>
+
+<h2>Die Kennwerte einer Sinusgröße</h2>
+<svg class="dg l" viewBox="0 0 620 190" role="img" aria-label="Sinusschwingung mit Scheitelwert, Effektivwert, Periodendauer und Spitze-Spitze-Wert">
+  <path class="gd" d="M50,100 H580" />
+  <path class="w" d="M50,20 V180 M50,100 H580" />
+  <path class="acc" d="M50,100 C77,100 77,32 104,32 C131,32 131,168 158,168 C185,168 185,32 212,32 C239,32 239,168 266,168 C293,168 293,32 320,32 C347,32 347,168 374,168 C401,168 401,32 428,32 C455,32 455,168 482,168 C509,168 509,100 536,100" />
+  <path class="gd" d="M50,32 H536 M50,168 H536 M50,52 H300 M104,32 V100 M212,32 V100" />
+  <text class="lbl" x="46" y="36" text-anchor="end">û</text>
+  <text class="lbl" x="46" y="56" text-anchor="end">U_eff</text>
+  <text class="lbl" x="46" y="172" text-anchor="end">−û</text>
+  <path class="acc" d="M104,186 H212" /><path class="accf" d="M104,186 l8,-4 v8 z" /><path class="accf" d="M212,186 l-8,-4 v8 z" />
+  <text class="lbla" x="158" y="182" text-anchor="middle">T</text>
+  <text class="lbla" x="556" y="104">t</text>
+  <path class="midl" d="M560,32 V168" /><path class="badf" d="M560,32 l-4,8 h8 z" /><path class="badf" d="M560,168 l-4,-8 h8 z" />
+  <text class="lbl" x="566" y="104">U_ss</text>
+</svg>
+
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Kennwert</th><th>Beziehung (Sinus)</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Scheitelwert û</b></td><td>—</td><td>Höchster Momentanwert. Entscheidet über Spannungsfestigkeit von Bauteilen.</td></tr>
+<tr><td><b>Spitze-Spitze U_ss</b></td><td>U_ss = 2·û</td><td>Was das Oszilloskop von Haus aus misst.</td></tr>
+<tr><td><b>Effektivwert U_eff</b></td><td>U_eff = û/√2 ≈ 0,707·û</td><td>Die Gleichspannung, die dieselbe Wärmeleistung erzeugt. Alle Netzangaben sind Effektivwerte.</td></tr>
+<tr><td><b>Gleichrichtwert</b></td><td>|U| = 2·û/π ≈ 0,637·û</td><td>Mittelwert des Betrags. Billige Multimeter messen das und rechnen auf Sinus hoch — bei nichtsinusförmigen Signalen falsch.</td></tr>
+<tr><td><b>Formfaktor</b></td><td>U_eff / |U| ≈ 1,11</td><td>Nur für reinen Sinus. Deshalb „True RMS“ auf besseren Messgeräten.</td></tr>
+<tr><td><b>Scheitelfaktor (Crest)</b></td><td>û / U_eff ≈ 1,414</td><td>Bei Schaltnetzteil-Stromaufnahme leicht 3 und mehr.</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>230 V sind 325 V.</b> Das Netz führt 230 V Effektivwert, also û = 230·√2 = 325 V Scheitelwert, U_ss = 650 V. Jeder Gleichrichter dahinter lädt seinen Elko auf rund 325 V — deshalb stehen dort 400-V-Typen. Und deshalb ist ein „nur 230 V“-Kontakt kein Grund zur Entwarnung.</div>
+
+<h2>Wie sich R, L und C bei Wechselstrom verhalten</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Widerstand R</div><div class="cd">Strom und Spannung <b>in Phase</b> (φ = 0°). Der Widerstand ist frequenzunabhängig.</div><div class="cd"><span class="formula">Z = R</span></div></div>
+  <div class="card"><div class="ct">Kondensator C</div><div class="cd">Der <b>Strom eilt der Spannung um 90° voraus</b>. Je höher die Frequenz, desto niederohmiger.</div><div class="cd"><span class="formula">X_C = 1/(ω·C)</span></div></div>
+  <div class="card"><div class="ct">Spule L</div><div class="cd">Der <b>Strom eilt der Spannung um 90° nach</b>. Je höher die Frequenz, desto hochohmiger.</div><div class="cd"><span class="formula">X_L = ω·L</span></div></div>
+</div>
+<p><b>Merkhilfe, die wirklich hilft:</b> „<b>I</b>n<b>d</b>uktivität — <b>I</b> kommt <b>d</b>anach.“ Und beim Kondensator umgekehrt: Ehe Spannung an den Platten steht, muss erst Ladung hinfließen — der Strom ist also vorher da.</p>
+
+<h2>Das Zeigerbild</h2>
+<p>Statt Sinusfunktionen zu addieren, zeichnet man rotierende Zeiger: Länge = Effektivwert, Winkel = Phasenlage. Zwei Zeiger addiert man geometrisch. Damit wird aus einer trigonometrischen Übung ein rechtwinkliges Dreieck.</p>
+
+<svg class="dg m" viewBox="0 0 380 200" role="img" aria-label="Zeigerdiagramm einer RL-Reihenschaltung mit Spannungsdreieck">
+  <path class="w" d="M40,170 H340 M40,170 V20" />
+  <path class="acc" d="M40,170 H230" /><path class="accf" d="M230,170 l-9,-5 v10 z" />
+  <path class="acc" d="M230,170 V70" /><path class="accf" d="M230,70 l-5,9 h10 z" />
+  <path class="badl" d="M40,170 L230,70" /><path class="badf" d="M230,70 l-11,1 l5,9 z" />
+  <path class="gd" d="M40,70 H230" />
+  <text class="lbla" x="135" y="188" text-anchor="middle">U_R = I·R</text>
+  <text class="lbla" x="240" y="124">U_L = I·X_L</text>
+  <text class="lbl" x="118" y="112" style="fill:var(--bad)">U_ges</text>
+  <path class="wt" d="M75,170 a35,35 0 0 0 8,-19" />
+  <text class="lbl" x="86" y="162">φ</text>
+  <text class="lbl" x="46" y="34">Im</text>
+  <text class="lbl" x="326" y="186">Re</text>
+</svg>
+<div class="fbox">
+  <span class="f">U_ges = √(U_R² + U_L²)&nbsp;&nbsp;&nbsp;&nbsp;tan φ = U_L / U_R = X_L / R</span>
+  <span class="l">Reihenschaltung: alle Zeiger auf denselben Strom bezogen. Bei Parallelschaltung bezieht man alles auf die gemeinsame Spannung und addiert Ströme.</span>
+</div>
+<div class="warn"><b>Die Falle:</b> Bei Wechselstrom addieren sich Teilspannungen <b>nicht</b> arithmetisch. In einer RL-Reihenschaltung mit 80 V an R und 60 V an L liegen insgesamt 100 V an, nicht 140 V. Wer im Praktikum 3 × 100 V misst und 300 V erwartet, hat genau hier den Fehler.</div>
+
+<h2>Impedanz-Rechner</h2>
+<div class="calc" data-calc="impedanz">
+  <h4>Reihen-RLC bei einer Frequenz</h4>
+  <div class="row">
+    <div><label>f in Hz</label><input data-k="f" type="number" step="any" value="1000" /></div>
+    <div><label>R in Ω</label><input data-k="r" type="number" step="any" value="100" /></div>
+    <div><label>L in mH</label><input data-k="l" type="number" step="any" value="10" /></div>
+    <div><label>C in µF</label><input data-k="c" type="number" step="any" value="1" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Frequenzgang: was bei welcher Frequenz passiert</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Schaltung</th><th>Verhalten</th><th>Grenzfrequenz</th><th>Wofür man sie nimmt</th></tr></thead>
+<tbody>
+<tr><td><b>RC-Tiefpass</b> (R in Reihe, C nach Masse)</td><td>Hohe Frequenzen werden kurzgeschlossen</td><td>f_g = 1/(2πRC)</td><td>Entstören, Glätten, Antialiasing vor dem ADC</td></tr>
+<tr><td><b>RC-Hochpass</b> (C in Reihe, R nach Masse)</td><td>Gleichanteil wird geblockt</td><td>f_g = 1/(2πRC)</td><td>Signalkopplung ohne DC, Offsetentfernung</td></tr>
+<tr><td><b>RL-Tiefpass</b></td><td>wie RC, aber mit Spule in Reihe</td><td>f_g = R/(2πL)</td><td>Stromversorgungsfilter, Motorleitungen</td></tr>
+<tr><td><b>Reihenschwingkreis</b></td><td>Minimale Impedanz bei Resonanz</td><td>f₀ = 1/(2π√(LC))</td><td>Saugkreis, Bandpass</td></tr>
+<tr><td><b>Parallelschwingkreis</b></td><td>Maximale Impedanz bei Resonanz</td><td>f₀ = 1/(2π√(LC))</td><td>Sperrkreis, Oszillator</td></tr>
+</tbody>
+</table></div>
+<p class="note">An der Grenzfrequenz ist die Amplitude auf 1/√2 ≈ 70,7 % gefallen — das sind −3 dB — und die Phase um 45° gedreht. Ein einfaches RC-Glied fällt darüber mit 20 dB pro Dekade ab. Ausführlich mit Bode-Diagrammen in <a href="analogtechnik.html#filter">Analog &amp; Leistung → Filter</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Albach, <i>Grundlagen der Elektrotechnik 2</i>, Kapitel Wechselstromtechnik.</li>
+    <li><a href="https://www.allaboutcircuits.com/textbook/alternating-current/">All About Circuits — AC Circuits</a>.</li>
+    <li><a href="https://www.falstad.com/circuit/">Falstad Circuit Simulator</a>: zeigt Phasenverschiebung und Zeigerbilder live im Browser — für dieses Kapitel das mit Abstand beste Anschauungswerkzeug.</li>
+  </ul>
+</div>

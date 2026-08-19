@@ -1,0 +1,84 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>0,1 + 0,2 ist in Fließkomma nicht 0,3.</b> Das ist kein Bug, sondern die zwangsläufige Folge davon, dass 0,1 im Binärsystem eine unendliche Periode hat. Wer Messwerte, Geld oder Positionen rechnet, muss wissen, wann Fließkomma passt und wann Festkomma die richtige Antwort ist.</div>
+
+<h2>IEEE 754 im Aufbau</h2>
+<svg class="dg l" viewBox="0 0 620 110" role="img" aria-label="Aufbau einer 32-Bit-Fließkommazahl: Vorzeichen, Exponent, Mantisse">
+  <rect class="box" x="30" y="30" width="40" height="42" />
+  <rect class="box" x="70" y="30" width="140" height="42" style="fill:var(--accent-soft)" />
+  <rect class="box" x="210" y="30" width="380" height="42" style="fill:var(--mid-bg)" />
+  <text class="lblb" x="50" y="56" text-anchor="middle">S</text>
+  <text class="lblb" x="140" y="56" text-anchor="middle">Exponent (8 Bit)</text>
+  <text class="lblb" x="400" y="56" text-anchor="middle">Mantisse (23 Bit)</text>
+  <text class="lbl" x="50" y="88" text-anchor="middle">31</text>
+  <text class="lbl" x="140" y="88" text-anchor="middle">30 … 23</text>
+  <text class="lbl" x="400" y="88" text-anchor="middle">22 … 0</text>
+  <text class="lbl" x="310" y="20" text-anchor="middle">float (single precision, 32 Bit)</text>
+</svg>
+<div class="fbox"><span class="f">Wert = (−1)^S · 1,Mantisse · 2^(Exponent − 127)</span>
+<span class="l">Die führende 1 wird nicht gespeichert („hidden bit“) — das bringt ein Bit Genauigkeit geschenkt.</span></div>
+
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Typ</th><th>Bits</th><th>Signifikante Dezimalstellen</th><th>Bereich</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>half (fp16)</b></td><td>16</td><td>≈ 3,3</td><td>±6,5·10⁴</td><td>Neuronale Netze, Grafik</td></tr>
+<tr><td><b>bfloat16</b></td><td>16</td><td>≈ 2,3</td><td>wie float32</td><td>Gleicher Exponentbereich wie float, weniger Mantisse — für maschinelles Lernen</td></tr>
+<tr><td><b>float (single)</b></td><td>32</td><td>≈ 7,2</td><td>±3,4·10³⁸</td><td>Der Standard auf Mikrocontrollern mit FPU</td></tr>
+<tr><td><b>double</b></td><td>64</td><td>≈ 15,9</td><td>±1,8·10³⁰⁸</td><td>Standard in C für Fließkommaliterale und auf dem PC</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Fallen</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Vergleich auf Gleichheit</div><div class="cd"><code>if (x == 0.1)</code> schlägt fehl. Stattdessen mit einer Toleranz vergleichen: <code>fabs(x − y) &lt; eps</code>, wobei eps relativ zur Größenordnung gewählt werden muss.</div></div>
+  <div class="card"><div class="ct">Auslöschung</div><div class="cd">Die Differenz zweier fast gleich großer Zahlen verliert dramatisch an Genauigkeit. Klassiker: Mitternachtsformel bei kleinem Diskriminanten — dort rechnet man besser mit der numerisch stabilen Variante.</div></div>
+  <div class="card"><div class="ct">Akkumulation</div><div class="cd">Zehntausend Additionen kleiner Werte zu einer großen Summe verlieren die kleinen Beiträge komplett. Abhilfe: Kahan-Summation oder paarweise Summation.</div></div>
+  <div class="card"><div class="ct">Zeitzähler</div><div class="cd">Eine float-Zeitvariable, die alle 10 ms erhöht wird, verliert nach wenigen Tagen die Auflösung. Zeit immer als Ganzzahl in Millisekunden oder Mikrosekunden führen.</div></div>
+  <div class="card"><div class="ct">Geld</div><div class="cd">Niemals Fließkomma. Ganzzahlige Cent oder ein Dezimaltyp — sonst entstehen Rundungsdifferenzen, die niemand erklären kann.</div></div>
+  <div class="card"><div class="ct">Spezialwerte</div><div class="cd">NaN, ±Inf, −0. <code>NaN == NaN</code> ist falsch. Eine einzige NaN, die in einen Regelkreis gerät, vergiftet ab da jeden Folgewert.</div></div>
+</div>
+
+<h2>Festkomma: die unterschätzte Alternative</h2>
+<p>Eine Ganzzahl mit gedachtem Komma. Q15 bedeutet: 1 Vorzeichenbit, 15 Nachkommabits, Wertebereich −1 bis knapp +1. Q16.16 heißt 16 Vorkomma- und 16 Nachkommabits.</p>
+<div class="gb">
+  <div class="gb-col good"><h4>Vorteile</h4><ul>
+    <li>Deterministisch — dasselbe Ergebnis auf jeder Plattform</li>
+    <li>Auf Controllern ohne FPU um Größenordnungen schneller</li>
+    <li>Konstante absolute Auflösung über den ganzen Bereich</li>
+    <li>Kein NaN, kein Inf, keine Überraschungen</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Nachteile</h4><ul>
+    <li>Wertebereich muss vorher bekannt sein</li>
+    <li>Nach jeder Multiplikation muss geschoben werden</li>
+    <li>Überlauf ist die Verantwortung des Entwicklers — Sättigung statt Umlauf einbauen</li>
+    <li>Weniger lesbarer Code</li>
+  </ul></div>
+</div>
+<div class="fbox"><span class="f">Q-Multiplikation: c = (int32_t)(((int64_t)a · b) &gt;&gt; Q)</span>
+<span class="l">Zwischenergebnis in doppelter Breite, dann zurückschieben. Wer diesen Schritt vergisst, hat den Faktor 2^Q im Ergebnis.</span></div>
+<p class="note">Regelungstechnik auf kleinen Controllern ohne FPU wird bis heute überwiegend in Festkomma gerechnet — genauso wie Audio-Signalverarbeitung in vielen DSPs. Ein PID-Regler in Q16.16 läuft auf einem 8-Bit-Controller in wenigen Mikrosekunden.</p>
+
+<h2>Ganzzahlen: die Stolpersteine in C</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Falle</th><th>Was passiert</th><th>Richtig</th></tr></thead>
+<tbody>
+<tr><td><b>Integer Promotion</b></td><td><code>uint8_t a = 200, b = 100;</code> — <code>a + b</code> wird als <code>int</code> gerechnet und ergibt 300, nicht 44</td><td>Bewusst casten, wenn Umlauf gewünscht ist</td></tr>
+<tr><td><b>Vorzeichenbehafteter Überlauf</b></td><td>Undefiniertes Verhalten; der Compiler darf die Prüfung wegoptimieren</td><td>Vorher prüfen oder <code>__builtin_add_overflow</code> verwenden</td></tr>
+<tr><td><b>Vergleich signed/unsigned</b></td><td><code>if (i &lt; sizeof(x))</code> mit <code>int i = −1</code> ist wahr, weil −1 zu einer riesigen unsigned-Zahl wird</td><td>Gleiche Vorzeichenklasse verwenden, Warnungen einschalten</td></tr>
+<tr><td><b>Division mit Rundung</b></td><td>Ganzzahldivision schneidet ab; −7/2 ist −3, nicht −4</td><td>Für kaufmännische Rundung: <code>(a + b/2) / b</code> bei positiven Werten</td></tr>
+<tr><td><b>Shift mit negativem Wert</b></td><td>Rechtsshift bei negativen Zahlen ist implementierungsabhängig</td><td>Division verwenden oder auf unsigned wechseln</td></tr>
+<tr><td><b>Zeitvergleich mit Überlauf</b></td><td><code>if (millis() &gt; ziel)</code> bricht beim Überlauf des Zählers</td><td><code>if ((int32_t)(millis() − ziel) &gt;= 0)</code> — die Differenz ist überlaufsicher</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die zwei Compiler-Schalter, die sich immer lohnen:</b> <code>-Wall -Wextra</code> für die Warnungen und <code>-fsanitize=undefined</code> in Testläufen auf dem PC. Der zweite findet Überläufe und undefiniertes Verhalten zur Laufzeit — Fehler, die auf dem Zielsystem sonst als sporadisches Fehlverhalten auftauchen.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>IEEE 754-2019 — Standard for Floating-Point Arithmetic.</li>
+    <li>David Goldberg, <i>What Every Computer Scientist Should Know About Floating-Point Arithmetic</i>, ACM Computing Surveys 1991 — frei verfügbar, immer noch der beste Text dazu.</li>
+    <li><a href="https://float.exposed/">float.exposed</a> — zeigt Bitmuster und exakte Werte interaktiv.</li>
+    <li>MISRA C:2023 — Regeln zu Integer-Konvertierungen, auch außerhalb sicherheitskritischer Projekte lesenswert.</li>
+  </ul>
+</div>

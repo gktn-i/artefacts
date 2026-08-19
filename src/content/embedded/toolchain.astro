@@ -1,0 +1,82 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Vom C-Quelltext zur Datei im Flash sind es vier Schritte:</b> Präprozessor, Compiler, Assembler, Linker. Wer weiß, welcher Schritt gerade meckert, findet den Fehler in Minuten statt Stunden — die meisten unverständlichen Fehlermeldungen kommen vom Linker.</div>
+
+<h2>Der Weg vom Quelltext zum Gerät</h2>
+<div class="steps">
+  <div class="step"><h4>Präprozessor</h4>Löst <code>#include</code>, <code>#define</code> und bedingte Übersetzung auf. Fehler hier: fehlende Header, falsche Include-Pfade, doppelt definierte Makros. Mit <code>gcc -E</code> lässt sich das Ergebnis ansehen.</div>
+  <div class="step"><h4>Compiler</h4>Erzeugt aus jeder Übersetzungseinheit Assembler. Fehler hier: Syntax, Typen, unbekannte Bezeichner. Warnungen ernst nehmen — sie zeigen fast immer echte Probleme.</div>
+  <div class="step"><h4>Assembler</h4>Erzeugt Objektdateien (.o). Selten die Fehlerquelle.</div>
+  <div class="step"><h4>Linker</h4>Fügt alle Objektdateien und Bibliotheken zusammen und legt sie nach dem Linker-Skript im Speicher ab. Fehler hier: <code>undefined reference</code> (Funktion fehlt oder Bibliothek nicht eingebunden), <code>multiple definition</code> (Variable im Header statt in einer .c-Datei), <code>region FLASH overflowed</code> (Programm zu groß).</div>
+  <div class="step"><h4>Umwandeln und Flashen</h4><code>objcopy</code> erzeugt aus der ELF-Datei ein .bin oder .hex. Geflasht wird per Debug-Adapter (SWD/JTAG), Bootloader (DFU, UART) oder Massenspeicher-Emulation.</div>
+</div>
+<div class="tip"><b>Zwei Befehle, die man kennen sollte:</b> <code>arm-none-eabi-size firmware.elf</code> zeigt, wie viel Flash und RAM belegt sind (text = Code, data = initialisierte Variablen, bss = uninitialisierte). Und <code>arm-none-eabi-nm --size-sort -S firmware.elf</code> listet die größten Symbole — der schnellste Weg zu der Frage, warum das Programm plötzlich 40 kB größer ist.</div>
+
+<h2>Die SDK-Landschaft</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>SDK</th><th>Für</th><th>Build</th><th>Charakter</th></tr></thead>
+<tbody>
+<tr><td><b>Arduino Core</b></td><td>fast alles</td><td>Arduino CLI, PlatformIO</td><td>Einfachster Einstieg, riesige Bibliothekssammlung. Auf modernen Cores (ESP32, RP2350, STM32) darunter das jeweilige Hersteller-SDK — man kann beides mischen</td></tr>
+<tr><td><b>ESP-IDF</b></td><td>ESP32-Familie</td><td>CMake, idf.py</td><td>Vollständig, FreeRTOS eingebaut, Konfiguration über menuconfig. Sehr gute Dokumentation</td></tr>
+<tr><td><b>STM32Cube (HAL/LL)</b></td><td>STM32</td><td>CMake oder Makefile, CubeIDE</td><td>CubeMX erzeugt Initialisierungscode aus einer grafischen Pinbelegung — spart viel Zeit, erzeugt aber viel Code</td></tr>
+<tr><td><b>Pico SDK</b></td><td>RP2040/RP2350</td><td>CMake</td><td>Schlank, sauber dokumentiert, mit PIO-Assembler</td></tr>
+<tr><td><b>nRF Connect SDK</b></td><td>Nordic nRF</td><td>West (Zephyr)</td><td>Basiert auf Zephyr; steile Lernkurve, dafür sehr vollständig für Funkanwendungen</td></tr>
+<tr><td><b>Zephyr</b></td><td>herstellerübergreifend</td><td>West, CMake, Kconfig, Devicetree</td><td>Portabel über Hunderte Boards. Aktuelle Version 4.4 (April 2026)</td></tr>
+<tr><td><b>MicroPython / CircuitPython</b></td><td>ESP32, RP2, nRF, STM32</td><td>—</td><td>Interaktiv über REPL, ideal zum Ausprobieren von Sensoren. Für zeitkritische Aufgaben zu langsam und zu wenig deterministisch</td></tr>
+</tbody>
+</table></div>
+
+<h2>Konfiguration: Kconfig und Devicetree</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Kconfig</h4>
+    <p>Beschreibt, <b>welche Softwarebestandteile</b> übersetzt werden: Netzwerkstack ja oder nein, Log-Stufe, Puffergrößen. Aus dem Linux-Kernel übernommen, in Zephyr und ESP-IDF verwendet.</p>
+  </div>
+  <div class="gb-col"><h4>Devicetree</h4>
+    <p>Beschreibt, <b>welche Hardware</b> vorhanden ist und wie sie angeschlossen ist: Welcher Sensor an welchem I²C-Bus mit welcher Adresse, welcher Pin ist eine LED. Der Code fragt danach über Aliase, statt Pinnummern fest einzutragen.</p>
+  </div>
+</div>
+<p class="note">Der Aufwand lohnt sich, sobald eine Firmware auf mehreren Boardvarianten laufen soll: Statt <code>#ifdef</code>-Ketten im Code ändert man eine Overlay-Datei. Für ein einzelnes Bastelprojekt ist es Überbau — für ein Produkt mit drei Hardwareständen die einzige saubere Lösung.</p>
+
+<h2>Debug-Adapter und Flash-Wege</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Weg</th><th>Werkzeug</th><th>Debuggen möglich</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>SWD / JTAG</b></td><td>ST-Link, J-Link, CMSIS-DAP, Raspberry Pi Debug Probe</td><td><b>ja</b></td><td>Der Standardweg. Breakpoints, Speicheransicht, Live-Variablen</td></tr>
+<tr><td><b>USB-DFU</b></td><td>dfu-util</td><td>nein</td><td>Bootloader im ROM, kein Adapter nötig</td></tr>
+<tr><td><b>Seriell (UART-Bootloader)</b></td><td>stm32flash, esptool.py</td><td>nein</td><td>Bei ESP32 der Normalfall; Boot-Pins beachten</td></tr>
+<tr><td><b>Massenspeicher</b></td><td>Datei auf ein Laufwerk kopieren</td><td>nein</td><td>Pico im BOOTSEL-Modus, viele mbed-Boards</td></tr>
+<tr><td><b>OpenOCD / probe-rs</b></td><td>quelloffen</td><td><b>ja</b></td><td>Unterstützt sehr viele Adapter und Ziele; probe-rs ist deutlich einfacher einzurichten</td></tr>
+</tbody>
+</table></div>
+
+<h2>Entwicklungsumgebungen</h2>
+<div class="grid">
+  <div class="card"><div class="ct">VS Code plus Erweiterungen</div><div class="cd">Cortex-Debug, clangd, PlatformIO oder die Hersteller-Erweiterungen. Heute die verbreitetste Kombination; funktioniert auf allen Betriebssystemen gleich.</div></div>
+  <div class="card"><div class="ct">Hersteller-IDE</div><div class="cd">STM32CubeIDE, MPLAB X, e² studio. Alles aus einer Hand inklusive Konfigurationswerkzeug — dafür schwerfällig und herstellergebunden.</div></div>
+  <div class="card"><div class="ct">CLion / Eclipse / Vim</div><div class="cd">Funktionieren alle, sofern das Projekt CMake-basiert ist und eine <code>compile_commands.json</code> erzeugt.</div></div>
+  <div class="card"><div class="ct">Kommandozeile</div><div class="cd">CMake plus Ninja plus GDB. Am besten automatisierbar und in der Fehlersuche am transparentesten — der Weg, den man ohnehin für einen Bauserver braucht.</div></div>
+</div>
+
+<h2>Compiler-Schalter, die man setzen sollte</h2>
+<div class="flist">
+  <div class="frow hd"><span>Schalter</span><span>Wirkung</span><span>Empfehlung</span></div>
+  <div class="frow"><span class="fn">-Og</span><span class="fe">Optimierung, die Debuggen erlaubt</span><span class="fx">Während der Entwicklung</span></div>
+  <div class="frow"><span class="fn">-O2</span><span class="fe">Standardoptimierung</span><span class="fx">Für die Auslieferung</span></div>
+  <div class="frow"><span class="fn">-Os</span><span class="fe">Auf Größe optimieren</span><span class="fx">Wenn der Flash knapp wird</span></div>
+  <div class="frow"><span class="fn">-Wall -Wextra</span><span class="fe">Warnungen einschalten</span><span class="fx">Immer</span></div>
+  <div class="frow"><span class="fn">-ffunction-sections -fdata-sections</span><span class="fe">Jede Funktion in eine eigene Sektion</span><span class="fx">Zusammen mit --gc-sections beim Linker: entfernt ungenutzten Code</span></div>
+  <div class="frow"><span class="fn">-g3</span><span class="fe">Volle Debug-Information</span><span class="fx">Immer — sie landet nicht im Flash, nur in der ELF-Datei</span></div>
+  <div class="frow"><span class="fn">-fno-common</span><span class="fe">Verhindert versehentlich mehrfach definierte Variablen</span><span class="fx">Bei GCC 10 aufwärts Standard</span></div>
+  <div class="frow"><span class="fn">--specs=nano.specs</span><span class="fe">Kleine C-Bibliothek (newlib-nano)</span><span class="fx">Spart mehrere Kilobyte gegenüber der vollen printf-Implementierung</span></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://docs.espressif.com/projects/esp-idf/">ESP-IDF Programming Guide</a>, <a href="https://docs.zephyrproject.org/">Zephyr Documentation</a>, <a href="https://www.raspberrypi.com/documentation/microcontrollers/">Raspberry Pi Pico Documentation</a>.</li>
+    <li><a href="https://interrupt.memfault.com/blog/how-to-write-linker-scripts-for-firmware">Interrupt: How to write a linker script</a> und weitere Artikel zur Toolchain.</li>
+    <li><a href="https://probe.rs/">probe-rs</a> — moderner, quelloffener Debug- und Flash-Werkzeugkasten.</li>
+    <li>GCC-Handbuch, Abschnitte zu Optimierung und Warnungen.</li>
+  </ul>
+</div>

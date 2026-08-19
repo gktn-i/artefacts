@@ -1,0 +1,80 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Diode ist das Ventil der Elektronik</b> — und in der Praxis öfter ein Schutzbauteil als ein Gleichrichter. Vier Kennwerte entscheiden über die Auswahl: Flussspannung U_F, Sperrspannung U_R, Durchlassstrom I_F und Sperrverzögerungszeit t_rr.</div>
+
+<h2>Kennlinie und Kennwerte</h2>
+<svg class="dg m" viewBox="0 0 400 220" role="img" aria-label="Diodenkennlinie mit Durchlassbereich, Sperrbereich und Durchbruch">
+  <path class="w" d="M40,110 H380 M240,20 V210" />
+  <path class="acc" d="M240,110 C270,110 280,104 292,88 C300,76 306,50 312,24" />
+  <path class="acc" d="M40,116 C120,113 180,111 240,110" />
+  <path class="badl" d="M70,110 C66,120 62,150 58,200" />
+  <path class="gd" d="M292,20 V210" />
+  <text class="lbla" x="296" y="18">U_F ≈ 0,7 V</text>
+  <text class="lbl" x="360" y="126">U</text>
+  <text class="lbl" x="248" y="30">I</text>
+  <text class="lbl" x="120" y="104">Sperrbereich (nA)</text>
+  <text class="lbl" x="66" y="214" style="fill:var(--bad)">Durchbruch U_R</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Kennwert</th><th>Bedeutung</th><th>Worauf man achtet</th></tr></thead>
+<tbody>
+<tr><td><b>U_F</b> — Flussspannung</td><td>Spannungsabfall im leitenden Zustand</td><td>Bestimmt die Verlustleistung: P = U_F · I. Bei 3 A und 0,7 V sind das 2,1 W</td></tr>
+<tr><td><b>U_R</b> — Sperrspannung</td><td>Maximale Spannung in Sperrrichtung</td><td>Mindestens das Doppelte der Betriebsspannung wählen; bei Netzgleichrichtung deutlich mehr</td></tr>
+<tr><td><b>I_F</b> — Durchlassstrom</td><td>Dauerstrom bei angegebener Kühlung</td><td>Die Angabe gilt oft bei 25 °C Gehäusetemperatur — im Gerät nie erreicht</td></tr>
+<tr><td><b>I_FSM</b> — Stoßstrom</td><td>Einmalige Spitze, typisch 8,3 ms</td><td>Wichtig beim Laden großer Elkos nach dem Gleichrichter</td></tr>
+<tr><td><b>t_rr</b> — Sperrverzögerung</td><td>Zeit, bis die Diode nach Umpolung wirklich sperrt</td><td>Entscheidend ab einigen kHz; Schottky hat praktisch keine</td></tr>
+<tr><td><b>I_R</b> — Sperrstrom</td><td>Leckstrom in Sperrrichtung</td><td>Bei Schottky-Dioden deutlich höher und stark temperaturabhängig</td></tr>
+<tr><td><b>C_j</b> — Sperrschichtkapazität</td><td>Kapazität im gesperrten Zustand</td><td>Belastet HF-Signale; bei Schutzdioden an schnellen Leitungen kritisch</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Typen und wofür man sie nimmt</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Standard-Silizium (1N4001…4007)</div><div class="cd">U_F ≈ 0,7–1,1 V, t_rr ≈ 2–30 µs. Für Netzgleichrichtung bei 50 Hz und als Freilaufdiode für Relais. Zu langsam für Schaltregler.</div></div>
+  <div class="card"><div class="ct">Schnelle Diode (1N4148, UF4007)</div><div class="cd">t_rr ≈ 4 ns bzw. 75 ns. Signalgleichrichtung, Logikverknüpfung, Freilauf bei schnellen Schaltvorgängen.</div></div>
+  <div class="card"><div class="ct">Schottky (1N5819, SS34, BAT54)</div><div class="cd">U_F ≈ 0,2–0,45 V, keine nennenswerte Sperrverzögerung. Für Schaltregler, Verpolschutz und überall dort, wo jedes Zehntel Volt zählt. Nachteil: höherer Leckstrom, niedrigere Sperrspannung.</div></div>
+  <div class="card"><div class="ct">Zenerdiode</div><div class="cd">Wird in Sperrrichtung betrieben und hält dort eine definierte Spannung. Für einfache Referenzen und Begrenzungen. Unter 5,6 V dominiert der Zener-Effekt (negativer Temperaturkoeffizient), darüber der Lawineneffekt (positiver) — bei etwa 5,6 V heben sich beide auf, deshalb ist das der stabilste Wert.</div></div>
+  <div class="card"><div class="ct">TVS / Suppressordiode</div><div class="cd">Zenerähnlich, aber auf hohe Impulsleistung ausgelegt (kW für Mikrosekunden). Der Standard-Schutz gegen ESD und Überspannungsimpulse an Schnittstellen. Unidirektional für DC-Versorgungen, bidirektional für Signalleitungen mit Wechselanteil.</div></div>
+  <div class="card"><div class="ct">LED</div><div class="cd">Auch eine Diode, mit U_F je nach Farbe: rot ≈ 1,8–2,2 V, gelb/grün ≈ 2,0–2,4 V, blau/weiß ≈ 2,8–3,4 V. Immer mit Strombegrenzung betreiben, nie an Spannung.</div></div>
+</div>
+
+<h2>Die vier Schaltungen, die man ständig braucht</h2>
+<div class="grid2">
+  <div class="card"><h3>Freilaufdiode</h3>
+    <p>Antiparallel über jede induktive Last (Relais, Ventil, Motor). Ohne sie zerstört die Abschaltspitze den Schalttransistor.</p>
+    <p class="note">Standard-Silizium reicht bei Relais. Bei PWM-Ansteuerung von Motoren muss die Diode schnell sein, sonst verheizt sie beim Umschalten Leistung — dort Schottky oder Fast-Recovery.</p>
+  </div>
+  <div class="card"><h3>Verpolschutz</h3>
+    <p>Eine Diode in Reihe zur Versorgung kostet U_F an Spannung und Leistung. Eleganter: ein <b>p-Kanal-MOSFET</b> in der Plusleitung mit Source zur Quelle — er hat nur R_DS(on) statt 0,7 V und schaltet bei Verpolung ab.</p>
+    <p class="note">Bei kleinen Strömen ist die Schottky-Diode der pragmatische Weg. Ab etwa 500 mA lohnt sich der MOSFET fast immer.</p>
+  </div>
+  <div class="card"><h3>Klemmschaltung (Clamping)</h3>
+    <p>Zwei Dioden von der Signalleitung nach Versorgung und Masse begrenzen die Spannung auf V_CC + 0,7 V und −0,7 V. Schützt Mikrocontroller-Eingänge vor Überspannung.</p>
+    <p class="note">Der Strom muss durch einen Reihenwiderstand begrenzt werden — sonst zieht die Klemmung die Versorgung hoch (Latch-up-Gefahr).</p>
+  </div>
+  <div class="card"><h3>Gleichrichtung</h3>
+    <p>Einweg: eine Diode, halbe Ausbeute, starke Welligkeit. Brücke: vier Dioden, doppelte Frequenz der Welligkeit, zwei Flussspannungen Verlust. Für Kleinspannungen ist eine <b>Synchrongleichrichtung</b> mit MOSFETs deutlich effizienter.</p>
+    <p class="note">Glättungskondensator abschätzen: C ≈ I · t / ΔU. Für 1 A, 10 ms und 1 V Welligkeit: 10 000 µF.</p>
+  </div>
+</div>
+
+<div class="warn"><b>Die Sperrverzögerung ist der Grund für unerklärliche Verluste.</b> Eine langsame Diode leitet nach dem Umpolen noch kurz rückwärts. In einem Schaltregler mit 100 kHz passiert das 100 000 Mal pro Sekunde — eine 1N4007 wird dabei heiß, obwohl der Mittelstrom weit unter dem Nennwert liegt. Symptom: eine Diode, die im Betrieb kocht, obwohl die Rechnung sagt, sie dürfte lauwarm sein.</div>
+
+<h2>Auswahl in vier Schritten</h2>
+<div class="steps">
+  <div class="step"><h4>Sperrspannung festlegen</h4>Höchste im Betrieb auftretende Sperrspannung ermitteln, inklusive Schaltspitzen — dann mindestens Faktor 1,5 bis 2 Sicherheit.</div>
+  <div class="step"><h4>Strom und Verlustleistung prüfen</h4>Mittelstrom, Spitzenstrom und U_F bei diesem Strom (nicht der Katalogwert!) aus der Kennlinie ablesen. P = U_F · I_mittel plus Schaltverluste.</div>
+  <div class="step"><h4>Geschwindigkeit wählen</h4>Bis 1 kHz reicht Standard, darüber Fast-Recovery, ab 20 kHz und bei niedrigen Spannungen Schottky.</div>
+  <div class="step"><h4>Thermik nachrechnen</h4>R_thJA aus dem Datenblatt, gewünschte Sperrschichttemperatur unter 100 °C halten. Bei SMD zählt vor allem die angeschlossene Kupferfläche.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 1.6 (Dioden) und Kapitel 9 (Spannungsversorgung).</li>
+    <li>Vishay, <i>General Semiconductor Rectifier Application Notes</i> — insbesondere zu t_rr und Verlustleistungsberechnung.</li>
+    <li>Littelfuse, <a href="https://www.littelfuse.com/products/tvs-diodes">TVS Diode Application Guides</a> — Auslegung gegen ESD und Surge nach IEC 61000-4-2 und -4-5.</li>
+    <li>Datenblätter 1N4148, 1N400x, SS34, BAT54, SMBJ-Reihe.</li>
+  </ul>
+</div>

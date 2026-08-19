@@ -1,0 +1,104 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Sieben Basisgrößen, alles andere ist abgeleitet.</b> In der Elektrotechnik ist das Ampere die Basiseinheit — Volt, Ohm, Farad und Henry ergeben sich daraus. Wer die Vorsätze sicher beherrscht, spart sich die Hälfte aller Rechenfehler.</div>
+
+<h2>Die Größen, um die es geht</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Größe</th><th>Zeichen</th><th>Einheit</th><th>Definition</th><th>Anschauung</th></tr></thead>
+<tbody>
+<tr><td><b>Ladung</b></td><td>Q</td><td>Coulomb (C) = A·s</td><td>Grundgröße; 1 C = 6,241·10<sup>18</sup> Elementarladungen</td><td>Die Wassermenge</td></tr>
+<tr><td><b>Strom</b></td><td>I</td><td>Ampere (A)</td><td>I = dQ/dt — Ladung pro Zeit</td><td>Der Durchfluss</td></tr>
+<tr><td><b>Spannung</b></td><td>U</td><td>Volt (V) = W/A</td><td>Energie pro Ladung zwischen zwei Punkten</td><td>Der Druckunterschied</td></tr>
+<tr><td><b>Widerstand</b></td><td>R</td><td>Ohm (Ω) = V/A</td><td>R = U/I</td><td>Die Engstelle</td></tr>
+<tr><td><b>Leitwert</b></td><td>G</td><td>Siemens (S)</td><td>G = 1/R</td><td>Die Durchlässigkeit</td></tr>
+<tr><td><b>Kapazität</b></td><td>C</td><td>Farad (F) = C/V</td><td>C = Q/U</td><td>Der Eimer</td></tr>
+<tr><td><b>Induktivität</b></td><td>L</td><td>Henry (H) = V·s/A</td><td>u = L·di/dt</td><td>Die Schwungmasse</td></tr>
+<tr><td><b>Leistung</b></td><td>P</td><td>Watt (W)</td><td>P = U·I</td><td>Energie pro Sekunde</td></tr>
+<tr><td><b>Energie</b></td><td>W</td><td>Joule (J), Wattstunde (Wh)</td><td>W = P·t; 1 Wh = 3600 J</td><td>Die Rechnung am Monatsende</td></tr>
+<tr><td><b>Frequenz</b></td><td>f</td><td>Hertz (Hz)</td><td>f = 1/T</td><td>Wiederholungen pro Sekunde</td></tr>
+<tr><td><b>Kreisfrequenz</b></td><td>ω</td><td>1/s</td><td>ω = 2π·f</td><td>Rechengröße im Zeigerbild</td></tr>
+<tr><td><b>Magnetischer Fluss</b></td><td>Φ</td><td>Weber (Wb) = V·s</td><td>u = −dΦ/dt</td><td>Was durch die Spule geht</td></tr>
+<tr><td><b>Flussdichte</b></td><td>B</td><td>Tesla (T) = Wb/m²</td><td>B = Φ/A</td><td>Wie dicht das Feld ist</td></tr>
+<tr><td><b>Feldstärke elektrisch</b></td><td>E</td><td>V/m</td><td>E = U/d im Plattenfeld</td><td>Steilheit des Spannungsgefälles</td></tr>
+</tbody>
+</table></div>
+
+<h2>Vorsätze: die häufigste Fehlerquelle überhaupt</h2>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Vorsatz</th><th>Zeichen</th><th>Faktor</th><th>Typisch in der Elektronik</th></tr></thead>
+<tbody>
+<tr><td>Tera</td><td>T</td><td>10<sup>12</sup></td><td>Speicher, Isolationswiderstände</td></tr>
+<tr><td>Giga</td><td>G</td><td>10<sup>9</sup></td><td>Taktfrequenzen, Funk</td></tr>
+<tr><td>Mega</td><td>M</td><td>10<sup>6</sup></td><td>MHz, MΩ</td></tr>
+<tr><td>Kilo</td><td>k</td><td>10<sup>3</sup></td><td>kΩ — der Alltagswert schlechthin</td></tr>
+<tr><td>—</td><td>—</td><td>1</td><td>V, A, Ω, s</td></tr>
+<tr><td>Milli</td><td>m</td><td>10<sup>−3</sup></td><td>mA, mV, mH</td></tr>
+<tr><td>Mikro</td><td>µ</td><td>10<sup>−6</sup></td><td>µF, µA, µs — im Datenblatt oft als „u“ geschrieben</td></tr>
+<tr><td>Nano</td><td>n</td><td>10<sup>−9</sup></td><td>nF, ns</td></tr>
+<tr><td>Piko</td><td>p</td><td>10<sup>−12</sup></td><td>pF — Leitungskapazitäten, Schwingquarze</td></tr>
+</tbody>
+</table></div>
+
+<div class="calc" data-calc="vorsatz">
+  <h4>Vorsatz umrechnen</h4>
+  <div class="row">
+    <div><label>Wert</label><input data-k="wert" type="text" placeholder="4700" /></div>
+    <div><label>von</label><select data-k="von">
+      <option value="1000000">Mega</option><option value="1000">kilo</option>
+      <option value="1" selected>—</option><option value="0.001">milli</option>
+      <option value="0.000001">mikro</option><option value="0.000000001">nano</option>
+      <option value="0.000000000001">piko</option></select></div>
+    <div><label>nach</label><select data-k="nach">
+      <option value="1000000">Mega</option><option value="1000">kilo</option>
+      <option value="1">—</option><option value="0.001">milli</option>
+      <option value="0.000001" selected>mikro</option><option value="0.000000001">nano</option>
+      <option value="0.000000000001">piko</option></select></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Formelzeichen richtig lesen</h2>
+<p>Die Groß- und Kleinschreibung ist keine Kosmetik, sie trägt Information:</p>
+<div class="grid">
+  <div class="card"><div class="ct">Großbuchstabe: <span class="formula">U, I</span></div><div class="cd">Gleichgröße oder Effektivwert — ein konstanter, zeitunabhängiger Zahlenwert. „Die Versorgung ist 5 V.“</div></div>
+  <div class="card"><div class="ct">Kleinbuchstabe: <span class="formula">u(t), i(t)</span></div><div class="cd">Momentanwert, also der zeitliche Verlauf. „Die Spannung am Kondensator während des Ladens.“</div></div>
+  <div class="card"><div class="ct">Dach: <span class="formula">û, î</span></div><div class="cd">Scheitelwert (Amplitude) einer Wechselgröße. Bei 230 V Netz: û = 325 V.</div></div>
+  <div class="card"><div class="ct">Unterstrich: <span class="formula">U, Z</span> (unterstrichen)</div><div class="cd">Komplexer Zeiger — Betrag und Phase in einer Zahl. In diesem Hub schreiben wir stattdessen ausdrücklich „Zeiger“.</div></div>
+</div>
+
+<h2>Normwerte: warum 4,7 und nicht 5</h2>
+<p>Widerstände und Kondensatoren gibt es nicht in beliebigen Werten, sondern in <b>E-Reihen</b> nach IEC 60063. Die Idee: die Werte liegen logarithmisch gleichmäßig, sodass die Toleranzbänder gerade lückenlos aneinander stoßen. E12 (±10 %) hat zwölf Werte pro Dekade, E24 (±5 %) vierundzwanzig.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Reihe</th><th>Toleranz</th><th>Werte pro Dekade</th><th>Werte</th></tr></thead>
+<tbody>
+<tr><td><b>E6</b></td><td>±20 %</td><td>6</td><td>1,0 · 1,5 · 2,2 · 3,3 · 4,7 · 6,8</td></tr>
+<tr><td><b>E12</b></td><td>±10 %</td><td>12</td><td>1,0 · 1,2 · 1,5 · 1,8 · 2,2 · 2,7 · 3,3 · 3,9 · 4,7 · 5,6 · 6,8 · 8,2</td></tr>
+<tr><td><b>E24</b></td><td>±5 %</td><td>24</td><td>zusätzlich 1,1 · 1,3 · 1,6 · 2,0 · 2,4 · 3,0 · 3,6 · 4,3 · 5,1 · 6,2 · 7,5 · 9,1</td></tr>
+<tr><td><b>E96</b></td><td>±1 %</td><td>96</td><td>dreistellige Werte, z. B. 4,99 kΩ statt 4,7 kΩ</td></tr>
+</tbody>
+</table></div>
+<p class="note">Praktisch: wer eine Grundausstattung anlegt, kauft E12 im Bereich 10 Ω bis 1 MΩ. Damit lässt sich fast jede Schaltung aufbauen; fehlende Werte entstehen durch Reihen- oder Parallelschaltung.</p>
+
+<h2>Konstanten, die immer wieder auftauchen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Konstante</span><span>Wert</span><span>Wo sie auftaucht</span></div>
+  <div class="frow"><span class="fn">Elementarladung e</span><span class="fe">1,602176634·10⁻¹⁹ C</span><span class="fx">Halbleiterphysik, Schrotrauschen</span></div>
+  <div class="frow"><span class="fn">Elektrische Feldkonstante ε₀</span><span class="fe">8,8541878·10⁻¹² F/m</span><span class="fx">Plattenkondensator, Leitungskapazität</span></div>
+  <div class="frow"><span class="fn">Magnetische Feldkonstante µ₀</span><span class="fe">1,25663706·10⁻⁶ H/m</span><span class="fx">Spulen, Wellenwiderstand</span></div>
+  <div class="frow"><span class="fn">Boltzmann-Konstante k</span><span class="fe">1,380649·10⁻²³ J/K</span><span class="fx">Thermisches Rauschen, Diodengleichung</span></div>
+  <div class="frow"><span class="fn">Temperaturspannung U_T</span><span class="fe">≈ 25,85 mV bei 300 K</span><span class="fx">Diodenkennlinie, Bipolartransistor</span></div>
+  <div class="frow"><span class="fn">Lichtgeschwindigkeit c₀</span><span class="fe">299 792 458 m/s</span><span class="fx">Wellenlänge, Signallaufzeit auf Leitungen</span></div>
+  <div class="frow"><span class="fn">Spezifischer Widerstand Kupfer</span><span class="fe">0,0175 Ω·mm²/m bei 20 °C</span><span class="fx">Leitungsauslegung, Spulenwiderstand</span></div>
+</div>
+<p class="note">Seit der SI-Revision von 2019 sind e, k und c₀ <b>exakt definiert</b> — sie haben keine Messunsicherheit mehr, sondern legen die Einheiten fest. ε₀ und µ₀ sind seither Messgrößen mit winziger Unsicherheit, nicht mehr per Definition festgelegt.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://www.bipm.org/en/publications/si-brochure">BIPM — SI Brochure, 9. Auflage</a>: die verbindliche Definition aller Einheiten und Konstanten.</li>
+    <li><a href="https://physics.nist.gov/cuu/Constants/">NIST — CODATA Fundamental Physical Constants</a>: laufend gepflegte Werte inklusive Unsicherheiten.</li>
+    <li>IEC 60063 — Vorzugszahlenreihen für Widerstände und Kondensatoren (E-Reihen).</li>
+  </ul>
+</div>

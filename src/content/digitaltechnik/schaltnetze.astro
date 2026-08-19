@@ -1,0 +1,75 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Schaltnetz hat kein Gedächtnis:</b> Der Ausgang hängt nur von den aktuellen Eingängen ab. Multiplexer, Decoder, Addierer und Komparatoren sind die Bausteine, aus denen jeder Rechenwerk-Teil besteht — und sie tauchen in FPGA-Entwürfen genauso auf wie in einer <code>switch</code>-Anweisung.</div>
+
+<h2>Die Standardbausteine</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Baustein</th><th>Funktion</th><th>Größen</th><th>Wo man ihn wiederfindet</th></tr></thead>
+<tbody>
+<tr><td><b>Multiplexer (MUX)</b></td><td>Wählt einen von 2ⁿ Eingängen aus</td><td>2:1, 4:1, 8:1, 16:1</td><td>Datenpfade in CPUs, Kanalauswahl im ADC, in HDL jedes <code>if</code> in kombinatorischer Logik</td></tr>
+<tr><td><b>Demultiplexer</b></td><td>Leitet einen Eingang auf einen von 2ⁿ Ausgängen</td><td>1:4, 1:8</td><td>Adressdecodierung, Ansteuerung mehrerer Chip-Selects</td></tr>
+<tr><td><b>Decoder</b></td><td>n Bit → einer von 2ⁿ Ausgängen aktiv</td><td>3:8 (74HC138), 4:16</td><td>Speicherbank-Auswahl, Siebensegmentansteuerung, Tastaturmatrix</td></tr>
+<tr><td><b>Encoder / Prioritätsencoder</b></td><td>Aktiver Eingang → Binärzahl; bei mehreren gewinnt der höchste</td><td>8:3 (74HC148)</td><td>Interrupt-Controller: Welche Quelle wird zuerst bedient?</td></tr>
+<tr><td><b>Komparator</b></td><td>Vergleicht zwei Zahlen: &lt;, =, &gt;</td><td>4 Bit (74HC85), beliebig in HDL</td><td>Grenzwertüberwachung, Adressvergleich</td></tr>
+<tr><td><b>Volladdierer</b></td><td>Addiert zwei Bit plus Übertrag</td><td>Kaskadierbar zu beliebiger Breite</td><td>Jede ALU</td></tr>
+<tr><td><b>Barrel Shifter</b></td><td>Verschiebt um beliebig viele Stellen in einem Takt</td><td>—</td><td>Schiebebefehle in Prozessoren; aus MUX-Stufen aufgebaut</td></tr>
+</tbody>
+</table></div>
+
+<h2>Addierer: vom Halbaddierer zur ALU</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Halbaddierer</div><div class="cd">Zwei Eingänge, Summe = A ⊕ B, Übertrag = A · B. Kann keinen eingehenden Übertrag verarbeiten — daher nur für die unterste Stelle brauchbar.</div></div>
+  <div class="card"><div class="ct">Volladdierer</div><div class="cd">Drei Eingänge (A, B, C_in). Summe = A ⊕ B ⊕ C_in, Übertrag = A·B + C_in·(A ⊕ B). Aus zwei Halbaddierern plus einem ODER.</div></div>
+  <div class="card"><div class="ct">Ripple-Carry-Addierer</div><div class="cd">n Volladdierer in Reihe. Einfach, aber langsam: Der Übertrag muss durch alle Stufen laufen, die Verzögerung wächst linear mit der Wortbreite.</div></div>
+  <div class="card"><div class="ct">Carry-Lookahead</div><div class="cd">Berechnet die Überträge vorab aus Generate- und Propagate-Signalen. Verzögerung wächst nur logarithmisch — der Grund, warum ein 64-Bit-Addierer in einem Takt fertig wird.</div></div>
+</div>
+<p class="note"><b>Subtraktion braucht keine eigene Hardware:</b> A − B = A + (¬B) + 1. Man invertiert B und setzt den eingehenden Übertrag auf 1 — genau das leistet das Zweierkomplement. Ein einziger Addierer mit einer XOR-Reihe davor kann addieren und subtrahieren.</p>
+
+<h2>Die 74er-Familie: was man noch kennt</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Typ</th><th>Funktion</th><th>Praktischer Nutzen heute</th></tr></thead>
+<tbody>
+<tr><td><b>74HC00 / 74HC02</b></td><td>4× NAND / 4× NOR</td><td>Glue Logic, Signalinvertierung, Notlösungen beim Debuggen</td></tr>
+<tr><td><b>74HC14</b></td><td>6× Inverter mit Schmitt-Trigger</td><td>Signalaufbereitung, Entprellung, einfache Oszillatoren</td></tr>
+<tr><td><b>74HC125 / 74HC245</b></td><td>Bustreiber mit Tri-State</td><td>Pegelanpassung, Richtungsumschaltung auf Bussen</td></tr>
+<tr><td><b>74HC138</b></td><td>3:8-Decoder</td><td>Chip-Select-Erzeugung, Matrixansteuerung</td></tr>
+<tr><td><b>74HC165 / 74HC595</b></td><td>Schieberegister Ein- / Ausgang</td><td>Portexpander über SPI — sehr verbreitet, sehr billig</td></tr>
+<tr><td><b>74HC4051</b></td><td>Analogmultiplexer 8:1</td><td>Mehrere Analogsignale auf einen ADC-Eingang</td></tr>
+<tr><td><b>74HC74 / 74HC174</b></td><td>D-Flipflops</td><td>Synchronisierung, Zwischenspeicher</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Warum HC und nicht LS:</b> Die alte 74LS-Familie (TTL) braucht deutlich mehr Strom und arbeitet nur bei 5 V. 74HC ist CMOS, läuft von 2 bis 6 V und zieht im Ruhezustand fast nichts. Für 3,3-V-Systeme mit 5-V-Eingangssignalen nimmt man 74HCT (TTL-kompatible Schwellen) oder 74LVC (bis 3,6 V, oft 5-V-tolerante Eingänge). Die Familienbezeichnung ist wichtiger als die Zahl.</div>
+
+<h2>Tri-State und Open-Drain</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Tri-State</h4>
+    <p>Der Ausgang kann drei Zustände annehmen: high, low und hochohmig. Damit dürfen mehrere Treiber an derselben Leitung hängen — solange <b>genau einer</b> aktiv ist. Klassisch bei parallelen Bussen.</p>
+    <p class="note">Bus Contention — zwei aktive Treiber gleichzeitig — bedeutet einen Kurzschluss zwischen Versorgungsschienen. Chips überleben das kurz, aber nicht dauerhaft.</p>
+  </div>
+  <div class="gb-col"><h4>Open-Drain / Open-Collector</h4>
+    <p>Der Ausgang kann nur nach Masse ziehen; den High-Pegel erzeugt ein externer Pull-up. Mehrere Teilnehmer dürfen gleichzeitig treiben — es entsteht eine <b>Wired-AND</b>-Verknüpfung.</p>
+    <p class="note">Genau darauf beruhen I²C (SDA und SCL), der 1-Wire-Bus, CAN und typische Interrupt-Sammelleitungen. Der Pull-up-Widerstand bestimmt Anstiegszeit und damit die maximale Busgeschwindigkeit: 4,7 kΩ für 100 kHz, 2,2 kΩ oder weniger für 400 kHz.</p>
+  </div>
+</div>
+
+<h2>Vom Schaltnetz zum Code</h2>
+<p>Wer Digitaltechnik kann, schreibt besseren Embedded-Code — die Strukturen sind dieselben:</p>
+<div class="flist">
+  <div class="frow hd"><span>Hardware</span><span>Software</span><span>Gemeinsamkeit</span></div>
+  <div class="frow"><span class="fn">Multiplexer</span><span class="fe">switch / Nachschlagetabelle</span><span class="fx">Auswahl aus mehreren Quellen anhand eines Index</span></div>
+  <div class="frow"><span class="fn">Decoder</span><span class="fe">1 &lt;&lt; n</span><span class="fx">Aus einer Zahl wird ein einzelnes gesetztes Bit</span></div>
+  <div class="frow"><span class="fn">Prioritätsencoder</span><span class="fe">__builtin_clz() / CLZ-Befehl</span><span class="fx">Höchstes gesetztes Bit finden — in einem Takt</span></div>
+  <div class="frow"><span class="fn">Maskieren</span><span class="fe">x &amp; maske</span><span class="fx">UND-Verknüpfung Bit für Bit</span></div>
+  <div class="frow"><span class="fn">Wired-AND</span><span class="fe">Open-Drain-Konfiguration im GPIO-Register</span><span class="fx">Mehrere Teilnehmer, ein Signal</span></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Fricke, <i>Digitaltechnik</i>, Kapitel Schaltnetze.</li>
+    <li>Harris &amp; Harris, <i>Digital Design and Computer Architecture</i>, Kapitel 5 — Bausteine bis zur ALU.</li>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/sg/scyt129e/scyt129e.pdf">Logic Guide</a> — Übersicht aller Logikfamilien und Bausteinnummern.</li>
+    <li>NXP, <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">UM10204 — I²C-bus specification and user manual</a>, für Wired-AND und Pull-up-Auslegung.</li>
+  </ul>
+</div>

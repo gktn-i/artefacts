@@ -1,0 +1,93 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Bipolartransistor ist stromgesteuert:</b> ein kleiner Basisstrom steuert einen großen Kollektorstrom. Das Verhältnis heißt Stromverstärkung B (oder h_FE) und schwankt zwischen Exemplaren um Faktor 3 — jede Schaltung, die auf einen bestimmten B-Wert angewiesen ist, ist falsch entworfen.</div>
+
+<h2>Aufbau und Betriebsarten</h2>
+<svg class="dg l" viewBox="0 0 620 170" role="img" aria-label="NPN- und PNP-Transistor mit Stromrichtungen">
+  <text class="lblb" x="150" y="24" text-anchor="middle">NPN</text>
+  <text class="lblb" x="450" y="24" text-anchor="middle">PNP</text>
+  <path class="w" d="M120,50 V130 M90,90 H120 M120,66 L162,44 M120,114 L162,136" />
+  <path class="f" d="M150,120 l14,10 l-4,-13 z" />
+  <text class="lbl" x="82" y="94" text-anchor="end">B</text>
+  <text class="lbl" x="168" y="42">C</text><text class="lbl" x="168" y="142">E</text>
+  <text class="lbla" x="150" y="160" text-anchor="middle">Strom fließt C → E · Pfeil zeigt hinaus</text>
+  <path class="w" d="M420,50 V130 M390,90 H420 M420,66 L462,44 M420,114 L462,136" />
+  <path class="f" d="M432,108 l-14,-10 l4,13 z" />
+  <text class="lbl" x="382" y="94" text-anchor="end">B</text>
+  <text class="lbl" x="468" y="42">C</text><text class="lbl" x="468" y="142">E</text>
+  <text class="lbla" x="450" y="160" text-anchor="middle">Strom fließt E → C · Pfeil zeigt hinein</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Betriebsart</th><th>Bedingung</th><th>U_CE</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Sperrbereich</b></td><td>U_BE &lt; ≈ 0,5 V</td><td>≈ Versorgungsspannung</td><td>Transistor aus</td></tr>
+<tr><td><b>Aktiver Bereich</b></td><td>U_BE ≈ 0,7 V, U_CE &gt; ≈ 1 V</td><td>irgendwo dazwischen</td><td>Verstärken — I_C = B · I_B</td></tr>
+<tr><td><b>Sättigung</b></td><td>Basisstrom im Überfluss</td><td>0,05–0,3 V (U_CEsat)</td><td>Schalten — minimale Verlustleistung</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Für Schaltanwendungen: übersteuern, nicht ausrechnen.</b> Statt mit dem typischen B zu rechnen, nimmt man den Basisstrom bewusst drei- bis zehnmal so groß wie nötig (Übersteuerungsfaktor). Erst dann ist U_CEsat wirklich klein und der Transistor bleibt kalt. Faustformel: <span class="formula">R_B = (U_steuer − 0,7 V) · B_min / (I_C · 5)</span>.</div>
+
+<h2>Die drei Grundschaltungen</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Schaltung</th><th>Eingang / Ausgang</th><th>Spannungsverstärkung</th><th>Eingangswiderstand</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Emitterschaltung</b></td><td>Basis / Kollektor</td><td>hoch, invertierend<br />v ≈ −R_C/R_E</td><td>mittel</td><td>Der Standardverstärker; auch der Schalter</td></tr>
+<tr><td><b>Kollektorschaltung</b> (Emitterfolger)</td><td>Basis / Emitter</td><td>≈ 1, nicht invertierend</td><td>hoch (B · R_E)</td><td>Impedanzwandler, Treiberstufe, Stromverstärkung</td></tr>
+<tr><td><b>Basisschaltung</b></td><td>Emitter / Kollektor</td><td>hoch, nicht invertierend</td><td>niedrig (≈ 1/g_m)</td><td>HF-Stufen, Kaskode, Stromeingänge</td></tr>
+</tbody>
+</table></div>
+
+<h3>Arbeitspunkt stabilisieren</h3>
+<p>Ein Verstärker braucht einen Ruhestrom, der über Temperatur und Exemplarstreuung stabil bleibt. Die bewährte Schaltung ist die <b>Spannungsteiler-Basisvorspannung mit Emitterwiderstand</b>:</p>
+<div class="steps">
+  <div class="step"><h4>Emitterspannung festlegen</h4>U_E ≈ 1–2 V, damit die −2 mV/K der Basis-Emitter-Strecke kaum ins Gewicht fallen.</div>
+  <div class="step"><h4>Emitterwiderstand berechnen</h4>R_E = U_E / I_C. Der Emitterwiderstand ist die eigentliche Gegenkopplung: Steigt I_C, steigt U_E, sinkt U_BE, sinkt I_C.</div>
+  <div class="step"><h4>Basisteiler dimensionieren</h4>Querstrom durch den Teiler etwa zehnmal so groß wie der Basisstrom, dann ist die Basisspannung lastunabhängig. U_B = U_E + 0,7 V.</div>
+  <div class="step"><h4>Kollektorwiderstand wählen</h4>R_C so, dass U_CE im Ruhezustand etwa in der Mitte zwischen U_E und V_CC liegt — dann ist die Aussteuerung symmetrisch.</div>
+  <div class="step"><h4>Verstärkung einstellen</h4>Ohne Wechselstrom-Gegenkopplung wäre v ≈ −g_m·R_C (sehr hoch, aber temperaturabhängig). Mit unüberbrücktem R_E gilt stabil v ≈ −R_C/R_E. Ein Kondensator parallel zu einem Teil von R_E erlaubt hohe Wechselspannungsverstärkung bei stabilem Gleichstromarbeitspunkt.</div>
+</div>
+
+<h2>Wichtige Kennwerte im Datenblatt</h2>
+<div class="flist">
+  <div class="frow hd"><span>Kennwert</span><span>Beispiel BC547</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">U_CEO</span><span class="fe">45 V</span><span class="fx">Maximale Kollektor-Emitter-Spannung bei offener Basis</span></div>
+  <div class="frow"><span class="fn">I_C max</span><span class="fe">100 mA</span><span class="fx">Dauerstrom; darüber gilt keine Kennlinie mehr</span></div>
+  <div class="frow"><span class="fn">P_tot</span><span class="fe">500 mW</span><span class="fx">Bei 25 °C Umgebung; mit Temperatur linear fallend (Derating-Kurve)</span></div>
+  <div class="frow"><span class="fn">h_FE (B)</span><span class="fe">110 … 800</span><span class="fx">Riesige Streuung — deshalb Gruppen A/B/C im Typennamen</span></div>
+  <div class="frow"><span class="fn">U_CEsat</span><span class="fe">0,25 V bei 100 mA</span><span class="fx">Restspannung im Schalterbetrieb</span></div>
+  <div class="frow"><span class="fn">f_T</span><span class="fe">300 MHz</span><span class="fx">Transitfrequenz — dort ist die Stromverstärkung auf 1 gefallen</span></div>
+  <div class="frow"><span class="fn">U_EBO</span><span class="fe">6 V</span><span class="fx">Die Basis-Emitter-Strecke sperrt rückwärts nur wenige Volt — häufig übersehene Zerstörungsursache</span></div>
+</div>
+
+<h2>Bausteine, die man wiedererkennt</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Stromspiegel</div><div class="cd">Zwei gleiche Transistoren, Basen verbunden, einer als Diode geschaltet. Der Strom im zweiten Zweig kopiert den ersten. Grundbaustein jedes integrierten Verstärkers — auf einem Chip sind die Transistoren thermisch gekoppelt und wirklich gleich.</div></div>
+  <div class="card"><div class="ct">Differenzverstärker</div><div class="cd">Zwei Transistoren mit gemeinsamer Stromquelle am Emitter. Verstärkt die Differenz, unterdrückt Gleichtakt. Die Eingangsstufe jedes Operationsverstärkers.</div></div>
+  <div class="card"><div class="ct">Darlington</div><div class="cd">Zwei Transistoren hintereinander, B multipliziert sich (bis 10 000). Preis: doppelte Flussspannung (1,4 V) und langsames Ausschalten. In der Leistungselektronik weitgehend vom MOSFET verdrängt.</div></div>
+  <div class="card"><div class="ct">Konstantstromquelle</div><div class="cd">Transistor mit fester Basisspannung (Zener oder Teiler) und Emitterwiderstand: I ≈ (U_B − 0,7 V)/R_E, weitgehend unabhängig von der Lastspannung. Die einfachste brauchbare LED-Ansteuerung.</div></div>
+  <div class="card"><div class="ct">Kaskode</div><div class="cd">Emitterschaltung plus Basisschaltung darüber. Der obere Transistor hält U_CE des unteren konstant und eliminiert damit den Miller-Effekt — deutlich höhere Bandbreite.</div></div>
+  <div class="card"><div class="ct">Push-Pull-Endstufe</div><div class="cd">NPN und PNP als Gegentaktpaar. Ohne Vorspannung entsteht die Übernahmeverzerrung um den Nullpunkt; zwei Dioden oder eine U_BE-Vervielfacherschaltung als Ruhestromeinstellung beheben das (Klasse AB).</div></div>
+</div>
+
+<h2>BJT oder MOSFET?</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Kriterium</th><th>Bipolartransistor</th><th>MOSFET</th></tr></thead>
+<tbody>
+<tr><td><b>Steuerung</b></td><td>Strom — die Ansteuerung kostet dauerhaft Leistung</td><td>Spannung — statisch praktisch leistungslos</td></tr>
+<tr><td><b>Restspannung beim Schalten</b></td><td>U_CEsat ≈ 0,1–0,3 V, stromunabhängig</td><td>I · R_DS(on) — bei kleinen Strömen weit unter 1 mV</td></tr>
+<tr><td><b>Kleine Ströme (&lt; 100 mA)</b></td><td>oft die einfachere Wahl</td><td>Gate-Schwelle muss zur Logikspannung passen (Logic-Level-Typ)</td></tr>
+<tr><td><b>Große Ströme</b></td><td>schlecht — Verluste steigen linear</td><td>klar besser, R_DS(on) im Milliohm-Bereich verfügbar</td></tr>
+<tr><td><b>Parallelschalten</b></td><td>problematisch, thermisch instabil</td><td>gut — R_DS(on) steigt mit der Temperatur, das gleicht sich aus</td></tr>
+<tr><td><b>Analoge Präzision</b></td><td>besser: exponentiell exakt, niedriges 1/f-Rauschen</td><td>höheres 1/f-Rauschen, größere Offsets</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 2 — die beste Darstellung der Grundschaltungen mit gerechneten Beispielen.</li>
+    <li>Sedra &amp; Smith, <i>Microelectronic Circuits</i>, Kapitel Bipolar Junction Transistors.</li>
+    <li>Datenblätter BC547/BC557, 2N3904/2N3906, BD139/BD140 — mit Derating-Kurven und h_FE-Gruppen.</li>
+  </ul>
+</div>

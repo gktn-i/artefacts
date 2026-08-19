@@ -75,6 +75,19 @@ const PAGE_SCRIPTS: Record<string, string> = {
   rentabilitaet: "/assets/mod-rentabilitaet.js",
   schmiermittel: "/assets/mod-schmiermittel.js",
   "lumix-s1ii": "/assets/mod-lumix-s1ii.js",
+  /* Der Mechatronik-Hub teilt sich ein Modul-Skript — es initialisiert
+     nur die Bausteine, die auf der jeweiligen Seite auch vorkommen. */
+  elektrotechnik: "/assets/mod-mecha.js",
+  analogtechnik: "/assets/mod-mecha.js",
+  digitaltechnik: "/assets/mod-mecha.js",
+  informationstechnik: "/assets/mod-mecha.js",
+  embedded: "/assets/mod-mecha.js",
+  regelungstechnik: "/assets/mod-mecha.js",
+  "sensorik-aktorik": "/assets/mod-mecha.js",
+  automatisierung: "/assets/mod-mecha.js",
+  "pcb-design": "/assets/mod-mecha.js",
+  lernpfad: "/assets/mod-mecha.js",
+  "mecha-referenz": "/assets/mod-mecha.js",
 };
 const pageScript = mod ? PAGE_SCRIPTS[mod.id] : undefined;
 const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
@@ -223,7 +236,7 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
             <p>{mod.desc}</p>
           </header>
 
-          <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
+          <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}${hub.id === "mechatronik" ? " mx-mecha" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
             {mod.sections.map((s) => {
               const C = secComp(mod.id, s.h);
               return (
@@ -296,7 +309,8 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
             return s.toLowerCase().replace(/[^a-z0-9äöüß]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
           }
           /* h3/h4 in Karten & Co. sind Beschriftungen, keine Gliederung. */
-          var HDECO = ".card, .gb-col, .sym, .grid2 > div, .rule, .calc, .acc, .def-grid, .spec-card, .step";
+          var HDECO = ".card, .gb-col, .sym, .grid2 > div, .rule, .calc, .acc, .def-grid, .spec-card, .step, "
+            + ".tip, .warn, .stop, .kpi, .map a, .pstep, .srcs, .gitem, .fbox, figure, .grid > div, .grid3 > div";
           function headings(sec) {
             var hs = Array.prototype.slice.call(sec.querySelectorAll("h2:not(.msec-t),h3,h4")).filter(function (h) {
               return !h.closest(HDECO);

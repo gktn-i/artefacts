@@ -1,0 +1,93 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein RTOS löst genau ein Problem: mehrere Aufgaben, die unabhängig voneinander warten müssen.</b> Es löst kein Problem mit Rechenleistung, Timing-Genauigkeit oder Codequalität — und es fügt eine Fehlerklasse hinzu, die es vorher nicht gab.</div>
+
+<h2>Brauche ich überhaupt eines?</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Ja, wenn …</h4><ul>
+    <li>mehrere Aufgaben blockierend warten (Netzwerk, Benutzer, langsame Peripherie)</li>
+    <li>Aufgaben sehr unterschiedliche Zeitanforderungen haben</li>
+    <li>ein Netzwerkstack oder USB-Stack eingebunden wird, der ohnehin Tasks erwartet</li>
+    <li>das Projekt über Jahre wächst und mehrere Personen daran arbeiten</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Nein, wenn …</h4><ul>
+    <li>zwei oder drei periodische Aufgaben genügen — dann reicht ein Zeitscheiben-Hauptprogramm</li>
+    <li>alles interruptgetrieben und kurz ist</li>
+    <li>der RAM knapp ist: jede Task braucht einen eigenen Stack</li>
+    <li>harte Zeitgarantien im Mikrosekundenbereich nötig sind — dafür ist der Interrupt zuständig, nicht der Scheduler</li>
+  </ul></div>
+</div>
+<div class="card">
+  <h3>Die Alternative: kooperativer Zeitscheiben-Ablauf</h3>
+<pre style="font-family:var(--mono);font-size:12.2px;line-height:1.6;overflow-x:auto;margin:0"><code>while (1) &#123;
+    uint32_t now = tick_ms();
+    if (now - t1 &gt;= 1)    &#123; t1 = now; regelung_tick(); &#125;   /* 1 kHz  */
+    if (now - t10 &gt;= 10)  &#123; t10 = now; tasten_tick(); &#125;    /* 100 Hz */
+    if (now - t100 &gt;= 100)&#123; t100 = now; display_tick(); &#125;  /* 10 Hz  */
+    kommunikation_tick();                                  /* so oft es geht */
+&#125;</code></pre>
+  <p class="note">Voraussetzung: Jede <code>_tick()</code>-Funktion kehrt sofort zurück und ist als Zustandsautomat gebaut. Damit lassen sich erstaunlich komplexe Geräte bauen — deterministisch, ohne Stackprobleme, mit einem einzigen Stack. Die Differenzbildung <code>now - t1</code> ist überlaufsicher, solange beide Werte denselben vorzeichenlosen Typ haben.</p>
+</div>
+
+<h2>Die Bausteine eines RTOS</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Baustein</th><th>Wofür</th><th>Fallstrick</th></tr></thead>
+<tbody>
+<tr><td><b>Task</b></td><td>Eigenständiger Ablauf mit eigenem Stack und Priorität</td><td>Stackgröße wird fast immer zu klein geschätzt</td></tr>
+<tr><td><b>Queue</b></td><td>Daten zwischen Tasks übergeben, blockierend</td><td>Kopiert die Daten — bei großen Strukturen besser Zeiger übergeben</td></tr>
+<tr><td><b>Semaphore (binär)</b></td><td>Signalisierung, typisch von ISR an Task</td><td>Kein Ersatz für einen Mutex: keine Prioritätsvererbung</td></tr>
+<tr><td><b>Mutex</b></td><td>Gegenseitiger Ausschluss beim Zugriff auf eine Ressource</td><td>Nie aus einer ISR verwenden. Prioritätsvererbung aktivieren</td></tr>
+<tr><td><b>Zählender Semaphor</b></td><td>Begrenzte Anzahl gleichartiger Ressourcen</td><td>—</td></tr>
+<tr><td><b>Event Group / Flags</b></td><td>Auf mehrere Bedingungen gleichzeitig warten</td><td>Sparsamer als mehrere Semaphore</td></tr>
+<tr><td><b>Software-Timer</b></td><td>Verzögerte oder periodische Aufrufe</td><td>Läuft in einer eigenen Task — deren Priorität und Stack beachten</td></tr>
+<tr><td><b>Task Notification</b></td><td>Direkte, sehr schnelle Signalisierung an eine Task</td><td>Bei FreeRTOS deutlich schneller und sparsamer als ein Semaphor</td></tr>
+</tbody>
+</table></div>
+
+<h2>FreeRTOS und Zephyr</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Merkmal</th><th>FreeRTOS</th><th>Zephyr</th></tr></thead>
+<tbody>
+<tr><td><b>Umfang</b></td><td>Scheduler plus Synchronisierung, sonst nichts</td><td>Vollständiges Betriebssystem mit Treibermodell, Netzwerkstack, Dateisystem, Bluetooth</td></tr>
+<tr><td><b>Größe</b></td><td>5–10 kB Flash</td><td>ab ~10 kB, realistisch 50–200 kB mit Konnektivität</td></tr>
+<tr><td><b>Konfiguration</b></td><td>Eine Header-Datei</td><td>Kconfig plus Devicetree</td></tr>
+<tr><td><b>Hardware-Abstraktion</b></td><td>keine — man nutzt das Hersteller-SDK</td><td>einheitliche Treiber-APIs über alle Boards</td></tr>
+<tr><td><b>Einstieg</b></td><td>an einem Nachmittag</td><td>mehrere Tage bis Wochen</td></tr>
+<tr><td><b>Wann sinnvoll</b></td><td>Man hat bereits ein SDK und braucht nur den Scheduler</td><td>Mehrere Plattformen, Funk, langfristige Pflege, professionelles Umfeld</td></tr>
+</tbody>
+</table></div>
+<p class="note">FreeRTOS ist in ESP-IDF fest eingebaut — wer mit ESP32 arbeitet, benutzt es ohnehin. Das nRF Connect SDK baut auf Zephyr auf. Beide sind quelloffen; Zephyr steht unter Apache 2.0, FreeRTOS unter MIT.</p>
+
+<h2>Stackgrößen bestimmen</h2>
+<div class="steps">
+  <div class="step"><h4>Großzügig anfangen</h4>1–2 kB je Task als Startwert. Zu klein ist der häufigste Grund für unerklärliche Abstürze.</div>
+  <div class="step"><h4>Muster hineinschreiben</h4>FreeRTOS füllt neue Stacks mit einem Füllwert. <code>uxTaskGetStackHighWaterMark()</code> liefert, wie viel nie benutzt wurde.</div>
+  <div class="step"><h4>Nach realer Last messen</h4>Nicht im Leerlauf, sondern unter Volllast mit allen Fehlerpfaden — gerade Fehlerbehandlung mit <code>printf</code> braucht überraschend viel.</div>
+  <div class="step"><h4>Reserve lassen</h4>Auf den gemessenen Spitzenwert 30–50 % aufschlagen. Interrupts nutzen bei Cortex-M teils denselben Stack.</div>
+  <div class="step"><h4>Überlauf erkennbar machen</h4><code>configCHECK_FOR_STACK_OVERFLOW = 2</code> und einen Hook implementieren, der den Task-Namen ausgibt. Ohne das sucht man den Fehler blind. Wo eine MPU vorhanden ist, schützt sie den Stack in Hardware.</div>
+</div>
+<div class="stop"><b>Vorsicht mit <code>printf</code> und Fließkomma in Tasks:</b> Eine <code>printf</code>-Implementierung mit Fließkomma-Unterstützung braucht schnell 1–2 kB Stack. Wer in fünf Tasks je 512 Byte veranschlagt hat, bekommt einen Absturz, der erst unter bestimmten Bedingungen auftritt. Für Diagnoseausgaben lohnt sich eine schlanke Alternative wie <code>tinyprintf</code> oder ein binäres Protokoll.</div>
+
+<h2>Aufteilung, die sich bewährt hat</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Task</th><th>Priorität</th><th>Aufgabe</th></tr></thead>
+<tbody>
+<tr><td><b>Regelung</b></td><td>hoch</td><td>Feste Periode über einen Timer, kurze Rechenzeit, keine blockierenden Aufrufe</td></tr>
+<tr><td><b>Sensorik</b></td><td>mittel</td><td>Liest Sensoren, füllt einen gemeinsamen Zustand, filtert</td></tr>
+<tr><td><b>Kommunikation</b></td><td>mittel</td><td>Verarbeitet Protokolle, blockiert an Queues</td></tr>
+<tr><td><b>Bedienung / Anzeige</b></td><td>niedrig</td><td>Darf jederzeit unterbrochen werden</td></tr>
+<tr><td><b>Diagnose / Protokoll</b></td><td>niedrigste</td><td>Schreibt in den Flash, wenn sonst nichts zu tun ist</td></tr>
+<tr><td><b>Idle</b></td><td>—</td><td>Legt den Controller schlafen (Tickless Idle) — hier entsteht die Ersparnis bei Batteriebetrieb</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://www.freertos.org/Documentation/RTOS_book.html">Mastering the FreeRTOS Real Time Kernel</a> — kostenloses offizielles Handbuch mit Beispielen.</li>
+    <li><a href="https://docs.zephyrproject.org/latest/kernel/index.html">Zephyr Kernel Services Documentation</a>.</li>
+    <li>Jean Labrosse, <i>µC/OS-III: The Real-Time Kernel</i> — sehr gründlich zu Scheduling-Grundlagen, auch unabhängig vom konkreten Kernel.</li>
+    <li><a href="https://interrupt.memfault.com/blog/rtos-tasks">Interrupt: Tips and Tricks for Debugging RTOS Applications</a>.</li>
+  </ul>
+</div>

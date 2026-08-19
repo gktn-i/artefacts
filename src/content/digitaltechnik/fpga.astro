@@ -1,0 +1,82 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein FPGA ist keine schnellere CPU, sondern etwas grundsätzlich anderes:</b> Man beschreibt keine Befehlsfolge, sondern Hardware, die parallel existiert. Alles, was man hinschreibt, läuft gleichzeitig — das ist der Gewinn und zugleich die größte Umstellung.</div>
+
+<h2>Was in einem FPGA steckt</h2>
+<div class="grid">
+  <div class="card"><div class="ct">LUT (Lookup-Tabelle)</div><div class="cd">Ein kleiner Speicher mit meist 4 oder 6 Adresseingängen, der eine beliebige boolesche Funktion dieser Eingänge realisiert. Statt Gatter zu verdrahten, schreibt man die Wahrheitstabelle hinein.</div></div>
+  <div class="card"><div class="ct">Flipflop</div><div class="cd">Direkt hinter jeder LUT. Deshalb sind Register in FPGAs quasi kostenlos — Pipelining ist dort die naheliegendste Optimierung.</div></div>
+  <div class="card"><div class="ct">Block-RAM</div><div class="cd">Fest eingebaute SRAM-Blöcke, meist 9–36 kBit, dual-port. Für FIFOs, Puffer, Tabellen.</div></div>
+  <div class="card"><div class="ct">DSP-Block</div><div class="cd">Fest verdrahtete Multiplizierer mit Akkumulator. Der Grund, warum FPGAs bei Filtern und Matrixoperationen so stark sind.</div></div>
+  <div class="card"><div class="ct">Taktnetz und PLL</div><div class="cd">Spezielle, laufzeitarme Verbindungen für Takte, dazu PLLs zur Frequenzerzeugung. Takte gehören ausschließlich in dieses Netz, niemals in normale Logikleitungen.</div></div>
+  <div class="card"><div class="ct">I/O-Blöcke</div><div class="cd">Konfigurierbare Pegel (LVCMOS, LVDS), Terminierung, Verzögerungsketten. Die Pinbelegung ist frei — mit Einschränkungen durch Bänke mit gemeinsamer Versorgungsspannung.</div></div>
+</div>
+
+<h2>FPGA, Mikrocontroller oder ASIC?</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Kriterium</th><th>Mikrocontroller</th><th>FPGA</th><th>ASIC</th></tr></thead>
+<tbody>
+<tr><td><b>Entwicklungsaufwand</b></td><td>gering</td><td>mittel bis hoch</td><td>sehr hoch (Millionen)</td></tr>
+<tr><td><b>Stückkosten</b></td><td>0,5 – 15 €</td><td>5 – 5000 €</td><td>ab Stückzahlen am billigsten</td></tr>
+<tr><td><b>Parallelität</b></td><td>gering (Kerne, DMA)</td><td>sehr hoch</td><td>sehr hoch</td></tr>
+<tr><td><b>Deterministische Reaktionszeit</b></td><td>µs, mit Aufwand</td><td>ns, systembedingt</td><td>ns</td></tr>
+<tr><td><b>Änderbarkeit im Feld</b></td><td>Firmware-Update</td><td>Bitstream-Update</td><td>keine</td></tr>
+<tr><td><b>Wofür</b></td><td>Steuerung, Kommunikation, Regelung bis einige kHz</td><td>Viele parallele Kanäle, sehr schnelle Regelung, Signalverarbeitung, eigene Schnittstellen</td><td>Große Stückzahlen, extreme Effizienz</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Der ehrliche Rat:</b> In der Mechatronik löst ein Mikrocontroller 95 % der Aufgaben. Ein FPGA lohnt sich, wenn viele Kanäle gleichzeitig und mit harter Zeitanforderung bedient werden müssen — mehrere Encoder mit hoher Auflösung, ein selbstgebauter Kamerasensor-Interface, eine Motorregelung mit 100 kHz Regeltakt, oder wenn eine Schnittstelle gebraucht wird, die es als Peripherie nicht gibt.</div>
+
+<h2>VHDL und Verilog</h2>
+<div class="gb">
+  <div class="gb-col"><h4>VHDL</h4>
+    <p>Streng typisiert, geschwätzig, in Europa und in der Luft- und Raumfahrt verbreitet. Der Compiler fängt viele Fehler ab, bevor sie in die Synthese gehen.</p>
+  </div>
+  <div class="gb-col"><h4>Verilog / SystemVerilog</h4>
+    <p>Kompakter, C-ähnlich, in Nordamerika und in der Chipentwicklung dominant. SystemVerilog ergänzt Verifikationskonstrukte, die inzwischen Standard sind.</p>
+  </div>
+</div>
+<div class="stop"><b>Die wichtigste Umstellung:</b> HDL ist keine Programmiersprache. <code>a &lt;= b;</code> ist keine Zuweisung, die „passiert“, sondern die Beschreibung einer dauerhaft existierenden Verbindung. Zwei Zeilen nacheinander laufen nicht nacheinander — sie existieren beide gleichzeitig. Wer HDL wie C liest, baut Schaltungen, die in der Simulation funktionieren und in der Hardware nicht.</div>
+
+<h3>Die Regeln, die den Unterschied machen</h3>
+<div class="steps">
+  <div class="step"><h4>Synchron entwerfen</h4>Ein Takt, alle Register an dieser Flanke. Mehrere Taktdomänen nur mit den Techniken aus <a href="#timing">Timing</a>.</div>
+  <div class="step"><h4>Kein Takt aus Logik</h4>Ein aus Gattern erzeugter Takt („gated clock“) landet nicht im Taktnetz und ruiniert die Zeitanalyse. Stattdessen einen Enable-Eingang am Register verwenden.</div>
+  <div class="step"><h4>Vollständige Zuweisungen</h4>In kombinatorischen Blöcken jeden Fall abdecken, sonst entsteht ein ungewolltes Latch. Die Synthesewarnung ernst nehmen.</div>
+  <div class="step"><h4>Reset bewusst wählen</h4>Nicht jedes Register braucht einen Reset. Wo er nötig ist: asynchron aktivieren, synchron freigeben.</div>
+  <div class="step"><h4>Constraints schreiben</h4>Ohne Zeitvorgaben („create_clock“) prüft das Werkzeug nichts und meldet Erfolg, obwohl der Entwurf zu langsam ist. Constraints sind kein Zusatz, sondern Teil des Entwurfs.</div>
+  <div class="step"><h4>Simulieren, bevor synthetisiert wird</h4>Eine Testbench mit erwarteten Werten findet Fehler in Sekunden, die auf der Hardware Stunden kosten.</div>
+</div>
+
+<h2>Einstieg 2026: Boards und Werkzeuge</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Plattform</th><th>Board (Beispiel)</th><th>Toolchain</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Lattice iCE40</b></td><td>iCEBreaker, TinyFPGA, Icesugar</td><td><b>vollständig quelloffen</b>: Yosys + nextpnr + IceStorm</td><td>Der beste Einstieg: kleine Bitstreams, Sekunden statt Minuten Synthesezeit, keine Registrierung</td></tr>
+<tr><td><b>Lattice ECP5</b></td><td>ULX3S, Colorlight-Boards</td><td>quelloffen (Yosys + nextpnr + Trellis)</td><td>Deutlich größer, DDR-RAM möglich, RISC-V-Softcores laufen bequem</td></tr>
+<tr><td><b>AMD/Xilinx Artix-7</b></td><td>Arty A7, Nexys A7</td><td>Vivado (kostenlose Edition)</td><td>Industriestandard, viel Lehrmaterial, große Installation</td></tr>
+<tr><td><b>Altera/Intel Cyclone</b></td><td>DE0-Nano, DE10-Lite</td><td>Quartus Prime Lite</td><td>An Hochschulen verbreitet</td></tr>
+<tr><td><b>Gowin</b></td><td>Tang Nano 9K/20K</td><td>Gowin EDA, teils quelloffen (Apicula)</td><td>Sehr günstig, wachsende Community</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die quelloffene Toolchain <b>Yosys/nextpnr</b> hat den Einstieg grundlegend verändert: Installation in Minuten, Synthese eines mittleren Entwurfs in Sekunden, alles skriptbar. Für iCE40 und ECP5 ist sie inzwischen für viele Projekte die erste Wahl. Wer beruflich in Richtung Xilinx oder Altera will, sollte deren Werkzeuge trotzdem kennen.</p>
+
+<h2>Was man als erstes baut</h2>
+<div class="grid">
+  <div class="card"><div class="ct">1 · Blinkende LED aus einem Zähler</div><div class="cd">Klingt trivial, klärt aber Toolchain, Constraints, Taktfrequenz und Bitstream-Upload.</div></div>
+  <div class="card"><div class="ct">2 · PWM mit einstellbarem Tastverhältnis</div><div class="cd">Erster echter Entwurf mit Vergleicher und Zähler, testbar mit dem Oszilloskop.</div></div>
+  <div class="card"><div class="ct">3 · UART-Sender und -Empfänger</div><div class="cd">Der klassische Lernentwurf: Zustandsautomat, Baudratengenerator, Schieberegister, Synchronisierung des Eingangs.</div></div>
+  <div class="card"><div class="ct">4 · Quadraturdecoder</div><div class="cd">Direkt mechatronisch nützlich: mehrere Encoder gleichzeitig mit voller Auflösung, was ein Mikrocontroller ab einer bestimmten Drehzahl nicht mehr schafft.</div></div>
+  <div class="card"><div class="ct">5 · RISC-V-Softcore einbinden</div><div class="cd">VexRiscv, PicoRV32 oder NEORV32 im FPGA — danach lässt sich Steuerlogik in Software und Zeitkritisches in Hardware aufteilen.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Pong P. Chu, <i>FPGA Prototyping by VHDL Examples</i> bzw. die Verilog-Ausgabe — durchgängige Beispiele auf realer Hardware.</li>
+    <li>Harris &amp; Harris, <i>Digital Design and Computer Architecture</i> — HDL-Grundlagen mit sauberen Stilregeln.</li>
+    <li><a href="https://github.com/YosysHQ">YosysHQ</a> — quelloffene Synthese und Place-and-Route, mit Dokumentation und Beispielprojekten.</li>
+    <li><a href="https://hdlbits.01xz.net/">HDLBits</a> — interaktive Verilog-Übungen mit automatischer Auswertung, kostenlos.</li>
+    <li>Clifford Cummings' SNUG-Papers zu Coding-Stilen in Verilog und SystemVerilog.</li>
+  </ul>
+</div>

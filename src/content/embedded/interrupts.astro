@@ -1,0 +1,93 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Interrupt unterbricht das laufende Programm — genau dort, wo man es am wenigsten erwartet.</b> Deshalb sind fast alle sporadischen, nicht reproduzierbaren Fehler in Firmware Interrupt-Probleme: geteilte Daten ohne Schutz, zu lange Routinen oder eine Prioritätsvergabe, die niemand durchdacht hat.</div>
+
+<h2>Der Ablauf</h2>
+<div class="steps">
+  <div class="step"><h4>Ereignis tritt auf</h4>Peripherie setzt ein Flag und meldet es dem Interrupt-Controller (NVIC bei Cortex-M).</div>
+  <div class="step"><h4>Prozessor sichert den Kontext</h4>Bei Cortex-M werden acht Register automatisch auf den Stack gelegt — deshalb ist die Latenz mit 12 Takten deterministisch und es braucht keinen Assembler-Vorspann.</div>
+  <div class="step"><h4>Handler läuft</h4>Der Vektor zeigt auf die Funktion. Sie sollte kurz sein und keine blockierenden Aufrufe enthalten.</div>
+  <div class="step"><h4>Flag löschen</h4>Sonst wird die Routine sofort erneut aufgerufen. Bei manchen Controllern muss nach dem Löschen zurückgelesen werden, damit der Schreibvorgang die Peripherie erreicht hat, bevor der Handler endet.</div>
+  <div class="step"><h4>Kontext wiederherstellen</h4>Rücksprung ins unterbrochene Programm. Bei Tail-Chaining wird direkt der nächste anstehende Interrupt bedient, ohne zwischendurch zurückzukehren.</div>
+</div>
+
+<h2>Prioritäten</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Ebene</th><th>Beispiel</th><th>Regel</th></tr></thead>
+<tbody>
+<tr><td><b>Höchste</b></td><td>Überstromabschaltung, Not-Halt, Motor-Break</td><td>Muss immer durchkommen, Routine extrem kurz</td></tr>
+<tr><td><b>Hoch</b></td><td>Regelkreis-Tick, Encoder, ADC-Abschluss</td><td>Feste Periode, harte Frist</td></tr>
+<tr><td><b>Mittel</b></td><td>Kommunikation: UART, SPI, CAN, DMA</td><td>Puffer füllen und leeren, keine Verarbeitung</td></tr>
+<tr><td><b>Niedrig</b></td><td>Tastenabfrage, Display, Protokollierung</td><td>Kann warten; gehört meist ohnehin ins Hauptprogramm</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Bei ARM Cortex-M ist die niedrigere Zahl die höhere Priorität.</b> Priorität 0 ist die höchste. Und: Nur die oberen Bits des Prioritätsregisters sind implementiert — bei vier Bit sind das 16 Stufen, die Werte 0, 16, 32 usw. Wer 0, 1, 2 schreibt, bekommt möglicherweise dieselbe Stufe. Bei Verwendung eines RTOS gibt es zusätzlich eine Grenze, unterhalb derer keine RTOS-Aufrufe erlaubt sind (<code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> bei FreeRTOS).</div>
+
+<h2>Geteilte Daten sicher übergeben</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Was <code>volatile</code> leistet</div><div class="cd">Es verhindert, dass der Compiler Zugriffe wegoptimiert oder in Register zwischenspeichert. Ohne <code>volatile</code> kann eine Schleife, die auf ein von der ISR gesetztes Flag wartet, endlos laufen, weil der Compiler das Flag nur einmal liest.</div></div>
+  <div class="card"><div class="ct">Was <code>volatile</code> <b>nicht</b> leistet</div><div class="cd">Es macht Zugriffe nicht atomar. Ein <code>volatile uint32_t</code> auf einem 8-Bit-Controller wird in vier Schritten gelesen — der Interrupt kann mittendrin zuschlagen. Und es ordnet keine Speicherzugriffe über mehrere Variablen hinweg.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Muster</th><th>Wann</th><th>Umsetzung</th></tr></thead>
+<tbody>
+<tr><td><b>Einzelnes Flag</b></td><td>ISR meldet ein Ereignis</td><td><code>volatile bool</code>; in der Hauptschleife prüfen und zurücksetzen</td></tr>
+<tr><td><b>Kritischer Abschnitt</b></td><td>Mehrere zusammengehörige Werte</td><td>Interrupts kurz sperren (<code>__disable_irq()</code> / BASEPRI), Daten kopieren, wieder freigeben. So kurz wie irgend möglich</td></tr>
+<tr><td><b>Ringpuffer</b></td><td>Datenstrom von der ISR ins Hauptprogramm</td><td>Ein Schreiber, ein Leser, Größe als Zweierpotenz. Dann sind ohne jede Sperre nur zwei Indizes nötig</td></tr>
+<tr><td><b>Doppelpuffer</b></td><td>Ganze Datensätze, z. B. vom ADC per DMA</td><td>ISR füllt Puffer A, Hauptprogramm liest Puffer B, dann Tausch</td></tr>
+<tr><td><b>Atomare Operation</b></td><td>Zähler erhöhen</td><td>Bei Cortex-M3 aufwärts LDREX/STREX bzw. die C11-Atomics; alternativ Interrupts kurz sperren</td></tr>
+<tr><td><b>RTOS-Queue</b></td><td>ISR an Task</td><td><code>xQueueSendFromISR()</code> — nie die normale Variante aus einer ISR aufrufen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Der Ringpuffer — das Muster, das man einmal richtig baut</h2>
+<div class="card">
+<pre style="font-family:var(--mono);font-size:12.2px;line-height:1.6;overflow-x:auto;margin:0"><code>#define RB_SIZE 256                 /* Zweierpotenz! */
+static volatile uint8_t  rb[RB_SIZE];
+static volatile uint16_t rb_w = 0, rb_r = 0;
+
+/* nur aus der ISR aufgerufen */
+static inline void rb_put(uint8_t c)
+&#123;
+    uint16_t next = (rb_w + 1u) &amp; (RB_SIZE - 1u);
+    if (next != rb_r) &#123;            /* voll -&gt; Zeichen verwerfen */
+        rb[rb_w] = c;
+        rb_w = next;
+    &#125;
+&#125;
+
+/* nur aus dem Hauptprogramm aufgerufen */
+static inline int rb_get(void)
+&#123;
+    if (rb_r == rb_w) return -1;    /* leer */
+    uint8_t c = rb[rb_r];
+    rb_r = (rb_r + 1u) &amp; (RB_SIZE - 1u);
+    return c;
+&#125;</code></pre>
+</div>
+<p class="note">Warum das ohne Sperren funktioniert: Es gibt genau einen Schreiber für <code>rb_w</code> (die ISR) und genau einen für <code>rb_r</code> (das Hauptprogramm). Jeder liest nur den Index des anderen. Solange die Indizes einzeln atomar geschrieben werden — bei 16 Bit auf einem 32-Bit-Controller gegeben —, kann nichts durcheinandergeraten. Die Zweierpotenz macht aus dem Modulo eine UND-Verknüpfung.</p>
+
+<h2>Typische Fehler und ihre Symptome</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Symptom</th><th>Wahrscheinliche Ursache</th><th>Prüfung</th></tr></thead>
+<tbody>
+<tr><td>Programm hängt in der ISR fest</td><td>Interrupt-Flag nicht gelöscht</td><td>Debugger anhalten, Rücksprungadresse ansehen</td></tr>
+<tr><td>Werte springen sporadisch</td><td>Mehrbyte-Variable ohne Schutz geteilt</td><td>Kritischen Abschnitt einbauen und beobachten, ob es verschwindet</td></tr>
+<tr><td>Alles wird langsam, wenn Daten ankommen</td><td>Verarbeitung in der ISR statt im Hauptprogramm</td><td>GPIO-Pin am Anfang und Ende der ISR umschalten, am Oszilloskop messen</td></tr>
+<tr><td>Hard Fault nach längerer Laufzeit</td><td>Stacküberlauf — ISR verschachteln sich tiefer als vorgesehen</td><td>Stack mit Muster vorbelegen und prüfen, wie weit es überschrieben wurde</td></tr>
+<tr><td>Eine Aufgabe kommt nie dran</td><td>Eine hochpriore Quelle löst dauernd aus</td><td>Interruptzähler je Quelle mitzählen und ausgeben</td></tr>
+<tr><td>Fehler nur mit Optimierung</td><td>Fehlendes <code>volatile</code></td><td>Mit <code>-O0</code> gegentesten; verschwindet der Fehler, ist es fast sicher das</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Das nützlichste Messwerkzeug:</b> Am Anfang der ISR einen GPIO-Pin auf High setzen, am Ende auf Low. Am Oszilloskop oder Logikanalysator sieht man dann sofort, wie lange die Routine läuft, wie oft sie aufgerufen wird und ob sich Interrupts verschachteln. Diese zwei Zeilen Code beantworten mehr Fragen als jede Simulation.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Joseph Yiu, <i>The Definitive Guide to Arm Cortex-M</i> — Kapitel zu NVIC, Prioritäten und Latenz.</li>
+    <li>ARM, <i>Cortex-M Programming Guide to Memory Barrier Instructions</i> (DAI0321).</li>
+    <li><a href="https://www.freertos.org/Documentation/RTOS_book.html">Mastering the FreeRTOS Real Time Kernel</a>, Kapitel Interrupt Management.</li>
+    <li><a href="https://interrupt.memfault.com/blog/cortex-m-fault-debug">Interrupt: How to debug a HardFault on an ARM Cortex-M MCU</a>.</li>
+  </ul>
+</div>

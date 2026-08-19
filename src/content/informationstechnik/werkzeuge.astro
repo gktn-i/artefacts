@@ -1,0 +1,73 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Werkzeuge entscheiden über Tempo und Nerven.</b> Versionsverwaltung, ein reproduzierbarer Build, automatische Tests und statische Analyse kosten am Anfang einen Tag und sparen über die Projektlaufzeit Wochen. Das gilt für ein Bastelprojekt genauso wie für ein Produkt.</div>
+
+<h2>Git — das Minimum, das man wirklich braucht</h2>
+<div class="flist">
+  <div class="frow hd"><span>Befehl</span><span>Was er tut</span><span>Wann</span></div>
+  <div class="frow"><span class="fn">git init / clone</span><span class="fe">Repository anlegen oder holen</span><span class="fx">Einmal am Anfang</span></div>
+  <div class="frow"><span class="fn">git status</span><span class="fe">Was ist geändert, was vorgemerkt</span><span class="fx">Ständig</span></div>
+  <div class="frow"><span class="fn">git add -p</span><span class="fe">Änderungen häppchenweise vormerken</span><span class="fx">Um saubere, kleine Commits zu bauen</span></div>
+  <div class="frow"><span class="fn">git commit -m</span><span class="fe">Stand festschreiben</span><span class="fx">Nach jeder abgeschlossenen Teilaufgabe</span></div>
+  <div class="frow"><span class="fn">git diff / git log --oneline</span><span class="fe">Was hat sich geändert, was ist passiert</span><span class="fx">Vor jedem Commit, bei jeder Fehlersuche</span></div>
+  <div class="frow"><span class="fn">git switch -c name</span><span class="fe">Zweig für ein Experiment</span><span class="fx">Wann immer der Ausgang offen ist</span></div>
+  <div class="frow"><span class="fn">git stash</span><span class="fe">Halbfertiges kurz weglegen</span><span class="fx">Wenn dringend etwas anderes dazwischenkommt</span></div>
+  <div class="frow"><span class="fn">git bisect</span><span class="fe">Fehlerhaften Commit binär eingrenzen</span><span class="fx">„Früher lief das doch“ — findet die Ursache in wenigen Schritten</span></div>
+  <div class="frow"><span class="fn">git tag -a v1.0</span><span class="fe">Stand markieren</span><span class="fx">Bei jeder ausgelieferten Firmware — sonst weiß niemand, was auf dem Gerät läuft</span></div>
+</div>
+<div class="tip"><b>Für Hardwareprojekte besonders wichtig:</b> Auch KiCad-Dateien, Stücklisten, Datenblätter und Gehäusemodelle gehören ins Repository. KiCad-Dateien sind Text und lassen sich diffen. Für große Binärdateien (STEP, Bilder) gibt es Git LFS. Und jede gefertigte Platine bekommt ein Tag — damit lässt sich später zweifelsfrei feststellen, welche Version im Gerät steckt.</div>
+
+<h2>Build-Systeme</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>System</th><th>Charakter</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>Make</b></td><td>Alt, überall vorhanden, eigenwillige Syntax</td><td>Kleine Projekte, Skripte, Hersteller-Beispiele</td></tr>
+<tr><td><b>CMake</b></td><td>Generator für andere Build-Systeme; heute faktisch Standard in C und C++</td><td>ESP-IDF, Zephyr, STM32CubeIDE-Projekte, alles Plattformübergreifende</td></tr>
+<tr><td><b>PlatformIO</b></td><td>Setzt auf SCons auf, verwaltet Toolchains und Bibliotheken automatisch</td><td>Der bequemste Einstieg für Arduino- und ESP-Projekte mit ordentlicher Struktur</td></tr>
+<tr><td><b>West (Zephyr)</b></td><td>Verwaltet Repositories, Konfiguration und Build in einem</td><td>Zephyr-basierte Projekte</td></tr>
+<tr><td><b>Bazel / Meson</b></td><td>Sehr reproduzierbar bzw. sehr schnell</td><td>Große Codebasen; im Embedded-Bereich noch selten</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Reproduzierbarkeit ist wichtiger als Eleganz.</b> Ein Build, der auf einem anderen Rechner oder in einem Jahr nicht mehr funktioniert, ist wertlos — genau der Fall, in dem man Firmware nachbauen muss. Toolchain-Version festschreiben, Abhängigkeiten fixieren, im Zweifel alles in einen Container packen. Ein Skript <code>build.sh</code>, das von null bis zur Binärdatei durchläuft, ist die einfachste Form der Dokumentation.</p>
+
+<h2>Testen von eingebetteter Software</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Modultests auf dem PC</div><div class="cd">Logik, die keine Hardware braucht — Zustandsautomaten, Protokollparser, Regleralgorithmen, Umrechnungen — lässt sich am Rechner testen. Unity, CppUTest oder Ceedling; Ausführung in Sekunden statt Minuten.</div></div>
+  <div class="card"><div class="ct">Hardware abstrahieren</div><div class="cd">Registerzugriffe hinter eine dünne Schicht legen. Dann lässt sich der Rest testen, ohne dass ein Board angeschlossen sein muss. Das ist der Grund, warum diese Trennung sich lohnt — nicht die Portabilität.</div></div>
+  <div class="card"><div class="ct">Tests auf der Zielhardware</div><div class="cd">Für alles, was Timing, Peripherie oder Analogverhalten berührt. Ein Board am Bauserver mit automatischem Flashen ist der Goldstandard, aber auch ein manuell gestarteter Selbsttest hilft.</div></div>
+  <div class="card"><div class="ct">Fuzzing</div><div class="cd">Zufällige und bösartige Eingaben auf Protokollparser werfen. <code>libFuzzer</code> oder AFL++ finden in Minuten Pufferüberläufe, die manuelle Tests nie erwischen — besonders lohnend bei allem, was Daten von außen entgegennimmt.</div></div>
+</div>
+
+<h2>Statische Analyse und Compiler-Schalter</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Werkzeug</th><th>Findet</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>-Wall -Wextra -Werror</b></td><td>Die meisten typischen Fehler</td><td>Kostet nichts. <code>-Werror</code> zwingt dazu, Warnungen tatsächlich zu beheben</td></tr>
+<tr><td><b>-fanalyzer (GCC)</b></td><td>Nullzeiger, doppelte Freigabe, Lecks</td><td>Seit GCC 10, ohne Zusatzwerkzeug</td></tr>
+<tr><td><b>clang-tidy</b></td><td>Stil, Fehlermuster, moderne Alternativen</td><td>Gut in Editoren integrierbar</td></tr>
+<tr><td><b>cppcheck</b></td><td>Klassische C-Fehler</td><td>Schnell, wenige Fehlalarme, kostenlos</td></tr>
+<tr><td><b>-fsanitize=address,undefined</b></td><td>Speicherfehler und undefiniertes Verhalten <b>zur Laufzeit</b></td><td>Nur in PC-Tests, nicht auf dem Zielsystem — aber extrem wirksam</td></tr>
+<tr><td><b>MISRA C / CERT C</b></td><td>Regelwerke für sicherheitskritischen Code</td><td>Pflicht in Automotive und Medizintechnik; einzelne Regeln lohnen sich überall</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was in jedes Projekt gehört</h2>
+<div class="steps">
+  <div class="step"><h4>README mit dem Wesentlichen</h4>Was ist das, wie baut man es, wie flasht man es, welche Hardware wird gebraucht. Der spätere Nutzer ist meistens man selbst in zwei Jahren.</div>
+  <div class="step"><h4>Versionsnummer in der Firmware</h4>Über die serielle Schnittstelle oder ein Register abfragbar, aus dem Git-Stand erzeugt. Ohne das lässt sich nie sicher sagen, welcher Code läuft.</div>
+  <div class="step"><h4>Ein Ordner für Dokumentation</h4>Datenblätter der verwendeten Bauteile, Pinbelegung, Schaltplan als PDF, Notizen zu Entscheidungen. Der Aufwand ist minimal, der Nutzen später riesig.</div>
+  <div class="step"><h4>Diagnoseausgabe von Anfang an</h4>Eine serielle Konsole mit Statuszeilen und Fehlermeldungen kostet 20 Zeilen Code und ist beim ersten Problem Gold wert. Log-Stufen vorsehen, damit sich die Ausgabe abschalten lässt.</div>
+  <div class="step"><h4>Sicherungskopien außerhalb des Rechners</h4>Ein Repository auf einer eigenen Maschine oder einem Dienst. Eine defekte SSD ist die banalste Art, ein halbes Jahr Arbeit zu verlieren.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Scott Chacon, Ben Straub, <a href="https://git-scm.com/book/de/v2">Pro Git</a> — kostenlos, auch auf Deutsch.</li>
+    <li>James Grenning, <i>Test Driven Development for Embedded C</i>, Pragmatic Bookshelf.</li>
+    <li>Elecia White, <i>Making Embedded Systems</i>, O'Reilly — gute Übersicht über Struktur und Werkzeuge.</li>
+    <li><a href="https://interrupt.memfault.com/">Interrupt (Memfault Blog)</a> — hervorragende, praxisnahe Artikel zu Debugging, Build-Systemen und Firmware-Betrieb.</li>
+    <li><a href="https://docs.platformio.org/">PlatformIO</a> und <a href="https://docs.espressif.com/projects/esp-idf/">ESP-IDF</a> Dokumentation.</li>
+  </ul>
+</div>

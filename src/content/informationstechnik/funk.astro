@@ -1,0 +1,78 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Bei Funk gibt es kein „am besten“, nur Kompromisse zwischen drei Größen:</b> Reichweite, Datenrate und Stromverbrauch. Man bekommt immer zwei davon gut — nie alle drei. Wer das akzeptiert, wählt schnell richtig.</div>
+
+<h2>Die Techniken im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Technik</th><th>Band</th><th>Datenrate</th><th>Reichweite</th><th>Strom</th><th>Topologie</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>WLAN 4 (n)</b></td><td>2,4 GHz</td><td>bis 150 Mbit/s</td><td>30–70 m innen</td><td>hoch</td><td>Stern</td><td>ESP8266/ESP32, alles mit vorhandenem Netz</td></tr>
+<tr><td><b>WLAN 6 / 6E</b></td><td>2,4 / 5 / 6 GHz</td><td>bis mehrere Gbit/s</td><td>ähnlich</td><td>hoch</td><td>Stern</td><td>ESP32-C5/C6 unterstützen Wi-Fi 6 auf 2,4 bzw. 5 GHz</td></tr>
+<tr><td><b>Bluetooth LE 5.x / 6.x</b></td><td>2,4 GHz</td><td>0,125–2 Mbit/s</td><td>10–100 m</td><td>sehr niedrig</td><td>Stern, Mesh optional</td><td>Sensoren, Bedienung per Handy, Wearables. Version 6.0 brachte Channel Sounding zur Entfernungsmessung</td></tr>
+<tr><td><b>Thread / Zigbee</b></td><td>2,4 GHz (802.15.4)</td><td>250 kbit/s</td><td>10–30 m je Sprung</td><td>niedrig</td><td><b>Mesh</b></td><td>Hausautomation; Thread trägt IPv6 und ist die Grundlage von Matter</td></tr>
+<tr><td><b>LoRa / LoRaWAN</b></td><td>868 MHz (EU)</td><td>0,3–50 kbit/s</td><td>2–15 km</td><td>sehr niedrig</td><td>Stern über Gateway</td><td>Sensoren im Feld, Landwirtschaft, Zählerfernauslesung</td></tr>
+<tr><td><b>NB-IoT / LTE-M</b></td><td>lizenziert</td><td>20–1000 kbit/s</td><td>Mobilfunkabdeckung</td><td>niedrig bis mittel</td><td>Zellnetz</td><td>Geräte ohne eigenes Netz; braucht SIM und Vertrag</td></tr>
+<tr><td><b>Sub-GHz proprietär</b></td><td>433 / 868 MHz</td><td>1–500 kbit/s</td><td>100 m – 2 km</td><td>niedrig</td><td>frei wählbar</td><td>Fernsteuerungen, Sensornetze mit eigenem Protokoll (nRF24, CC1101, SX127x)</td></tr>
+<tr><td><b>UWB</b></td><td>3,5–6,5 GHz</td><td>bis 27 Mbit/s</td><td>10–50 m</td><td>mittel</td><td>Punkt zu Punkt</td><td>Entfernungsmessung auf wenige Zentimeter genau, Zutrittssysteme</td></tr>
+<tr><td><b>NFC / RFID</b></td><td>13,56 MHz</td><td>106–424 kbit/s</td><td>&lt; 10 cm</td><td>passiv möglich</td><td>Leser zu Tag</td><td>Identifikation, Konfiguration ohne Batterie</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was die Reichweite wirklich bestimmt</h2>
+<div class="fbox">
+  <span class="f">Linkbudget = P_sende + G_sende − Pfadverlust + G_empfang − Empfindlichkeit</span>
+  <span class="l">Alles in dB bzw. dBm. Bleibt am Ende eine positive Reserve, funktioniert die Verbindung — mit typisch 10–20 dB Sicherheitsabstand.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Faktor</th><th>Größenordnung</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Sendeleistung</b></td><td>0–20 dBm (1–100 mW)</td><td>In der EU begrenzt: 20 dBm EIRP bei 2,4 GHz, 14 dBm bei 868 MHz mit Sendezeitbegrenzung</td></tr>
+<tr><td><b>Freiraumdämpfung</b></td><td>40 dB auf 1 m bei 2,4 GHz, +6 dB je Verdopplung</td><td>Niedrigere Frequenz heißt geringere Dämpfung — deshalb kommt 868 MHz weiter als 2,4 GHz</td></tr>
+<tr><td><b>Wand aus Gipskarton</b></td><td>3–5 dB</td><td>Kaum ein Problem</td></tr>
+<tr><td><b>Stahlbetonwand</b></td><td>15–30 dB</td><td>Der übliche Grund für Funklöcher</td></tr>
+<tr><td><b>Metallgehäuse</b></td><td>&gt; 40 dB</td><td>Antenne muss nach außen oder durch ein Kunststofffenster</td></tr>
+<tr><td><b>Empfängerempfindlichkeit</b></td><td>−90 dBm (WLAN) bis −148 dBm (LoRa)</td><td>Jedes Dezibel mehr Empfindlichkeit ist ein Dezibel mehr Reichweitenreserve</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>3 dB mehr Sendeleistung bringt weniger als 3 dB bessere Antenne.</b> Die Sendeleistung ist gesetzlich begrenzt, die Antenne oft der schwächste Punkt. Eine Leiterplattenantenne, die zu dicht an Metall oder an der Masse liegt, verliert leicht 10 dB — das ist mehr, als jede Leistungserhöhung je bringen könnte. Die Referenzlayouts der Modulhersteller sind hier keine Empfehlung, sondern Voraussetzung.</div>
+
+<h2>Antennen — die häufigsten Fehler</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Massefläche unter der Antenne</div><div class="cd">Die Keep-Out-Zone im Datenblatt ist ernst gemeint. Kupfer unter einer Chip- oder Leiterbahnantenne verstimmt sie und kostet den größten Teil der Abstrahlung.</div></div>
+  <div class="card"><div class="ct">Falsche Antennenlänge</div><div class="cd">λ/4 bei 868 MHz sind 8,2 cm, bei 2,4 GHz 3,1 cm. Ein zu kurz abgeschnittener Draht ist eine schlechte Antenne, kein Kompromiss.</div></div>
+  <div class="card"><div class="ct">Fehlende Anpassung</div><div class="cd">Zwischen Funkbaustein und Antenne gehört ein Anpassnetzwerk mit definierten 50 Ω. Ohne dieses geht ein Teil der Leistung als Reflexion zurück.</div></div>
+  <div class="card"><div class="ct">Antenne im Gehäuse eingebaut</div><div class="cd">Kunststoff dämpft wenig, Metall alles. Ein Akku direkt hinter der Antenne wirkt wie ein Reflektor — was manchmal hilft und meistens schadet.</div></div>
+  <div class="card"><div class="ct">Polarisation ignoriert</div><div class="cd">Sender und Empfänger sollten gleich ausgerichtet sein. Zwei um 90° verdrehte lineare Antennen verlieren 20 dB und mehr.</div></div>
+  <div class="card"><div class="ct">Fresnelzone verbaut</div><div class="cd">Bei längeren Strecken muss nicht nur Sichtverbindung bestehen, sondern auch ein Bereich um die direkte Linie frei sein. Ein Baum knapp neben der Linie kostet spürbar Pegel.</div></div>
+</div>
+
+<h2>Regulatorisches in der EU</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Band</th><th>Grenzwert</th><th>Besonderheit</th></tr></thead>
+<tbody>
+<tr><td><b>433,05–434,79 MHz</b></td><td>10 dBm</td><td>Sendezeitbegrenzung je nach Unterband; stark belegt durch Fernbedienungen</td></tr>
+<tr><td><b>863–870 MHz</b></td><td>14 dBm</td><td>Duty Cycle 0,1 % bis 10 % je Unterband — LoRaWAN plant das aktiv ein</td></tr>
+<tr><td><b>2400–2483,5 MHz</b></td><td>20 dBm EIRP</td><td>Frequenzsprung oder Spreizung vorgeschrieben; geteilt mit WLAN, BLE, Zigbee, Mikrowellenherden</td></tr>
+<tr><td><b>5150–5350 MHz</b></td><td>23 dBm, nur innen</td><td>TPC und DFS erforderlich (Radarerkennung)</td></tr>
+</tbody>
+</table></div>
+<p class="note">Für Eigenbauten gilt: Ein <b>zertifiziertes Funkmodul</b> mit eigener Konformitätserklärung erspart praktisch die gesamte Funkprüfung — man muss nur die Einbauvorschriften des Moduls einhalten. Ein selbst entworfener Funkteil bedeutet dagegen eine vollständige Bewertung nach der Funkanlagenrichtlinie 2014/53/EU (RED). Das ist der Hauptgrund, warum ESP32- und nRF-Module in Fertiggeräten so verbreitet sind.</p>
+
+<h2>Auswahl in drei Fragen</h2>
+<div class="steps">
+  <div class="step"><h4>Gibt es eine Infrastruktur?</h4>WLAN im Haus vorhanden → ESP32 ist der kürzeste Weg. Kein Netz vorhanden → LoRa mit eigenem Gateway oder Mobilfunk.</div>
+  <div class="step"><h4>Wie lange muss die Batterie halten?</h4>Jahre auf einer Knopfzelle → BLE oder LoRa mit sehr seltenen Sendevorgängen. Netzbetrieb → WLAN ist unproblematisch. Der Ruhestrom zwischen den Sendevorgängen entscheidet, nicht der Sendestrom.</div>
+  <div class="step"><h4>Wie viele Geräte, und reden sie miteinander?</h4>Viele Knoten in einem Gebäude ohne durchgehende Abdeckung → Mesh (Thread, Zigbee, BLE Mesh). Wenige Knoten an einem Punkt → Stern.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>ETSI EN 300 220 (Sub-GHz) und ETSI EN 300 328 (2,4 GHz) — die maßgeblichen europäischen Funknormen.</li>
+    <li>Funkanlagenrichtlinie 2014/53/EU (RED) und die Bundesnetzagentur-Allgemeinzuteilungen für SRD-Bänder.</li>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/an/swra161b/swra161b.pdf">Antenna Selection Guide</a>.</li>
+    <li>Espressif, Nordic Semiconductor und Semtech: Hardware Design Guidelines der jeweiligen Module — die Keep-Out-Zonen und Anpassnetzwerke stehen dort verbindlich.</li>
+    <li><a href="https://lora-alliance.org/">LoRa Alliance</a> und <a href="https://csa-iot.org/all-solutions/matter/">Connectivity Standards Alliance (Matter, Zigbee)</a>.</li>
+  </ul>
+</div>
