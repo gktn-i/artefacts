@@ -1,5 +1,51 @@
-<div class="sec-title">Formelsammlung</div>
-<div class="sub">Die wichtigsten Formeln nach Themengebiet. Einheiten in SI, sofern nicht anders angegeben. Suche filtert ueber Name, Formel und Variablen.</div>
-<input class="search" type="text" placeholder="Formel suchen, z.B. Drehmoment, Spannung, Biegung..." id="fq">
-<div class="count" id="fcount"></div>
-<div id="formeln-body"></div>
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die wichtigsten Formeln nach Themengebiet.</b> Einheiten in SI, sofern nicht anders angegeben. Die Suche greift über Name, Formel und Formelzeichen.</div>
+
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Formel suchen: Drehmoment, Spannung, Biegung …" aria-label="Formeln durchsuchen" />
+  <div class="count" data-count></div>
+  <div class="gloss" data-list="Formeln">
+    <div class="gsec" data-a="Festigkeit &amp; Spannung">Festigkeit &amp; Spannung</div>
+    <div class="gitem" data-item data-a="Festigkeit &amp; Spannung" data-cat="all" data-k="zug-/druckspannung σ = f / a"><div class="gt">Zug-/Druckspannung<span class="formula">σ = F / A</span></div><div class="gd">σ Spannung [N/mm²], F Kraft [N], A Querschnitt [mm²] — Grundbegriff. Gegen zulässige Spannung (Streckgrenze / SF) prüfen.</div></div>
+    <div class="gitem" data-item data-a="Festigkeit &amp; Spannung" data-cat="all" data-k="zulässige spannung σ_zul = r_e / sf"><div class="gt">Zulässige Spannung<span class="formula">σ_zul = R_e / SF</span></div><div class="gd">R_e Streckgrenze [N/mm²], SF Sicherheitsfaktor — Vorhandene Spannung muss kleiner sein als σ_zul.</div></div>
+    <div class="gitem" data-item data-a="Festigkeit &amp; Spannung" data-cat="all" data-k="dehnung (hooke) σ = e · ε     ε = δl / l"><div class="gt">Dehnung (Hooke)<span class="formula">σ = E · ε     ε = ΔL / L</span></div><div class="gd">E E-Modul [N/mm²], ε Dehnung, ΔL Längenänderung, L Ausgangslänge — Gilt im elastischen Bereich unterhalb der Streckgrenze.</div></div>
+    <div class="gitem" data-item data-a="Festigkeit &amp; Spannung" data-cat="all" data-k="biegespannung σ_b = m_b / w"><div class="gt">Biegespannung<span class="formula">σ_b = M_b / W</span></div><div class="gd">M_b Biegemoment [Nmm], W Widerstandsmoment [mm³] — W Rechteck = b·h²/6, W Kreis = π·d³/32. Höhe geht quadratisch ein.</div></div>
+    <div class="gitem" data-item data-a="Festigkeit &amp; Spannung" data-cat="all" data-k="torsionsspannung τ_t = t / w_t"><div class="gt">Torsionsspannung<span class="formula">τ_t = T / W_t</span></div><div class="gd">T Drehmoment [Nmm], W_t polares Widerstandsmoment [mm³] — W_t Vollkreis = π·d³/16. Hohlwelle fast gleich steif bei viel weniger Masse.</div></div>
+    <div class="gitem" data-item data-a="Festigkeit &amp; Spannung" data-cat="all" data-k="flächenträgheitsmoment i_rechteck = b·h³ / 12"><div class="gt">Flächenträgheitsmoment<span class="formula">I_Rechteck = b·h³ / 12</span></div><div class="gd">b Breite, h Höhe [mm] — Maß für Biegesteifigkeit des Querschnitts. h³: Hochkant ist enorm viel steifer.</div></div>
+    <div class="gitem" data-item data-a="Festigkeit &amp; Spannung" data-cat="all" data-k="durchbiegung kragarm (last am ende) f = f·l³ / (3·e·i)"><div class="gt">Durchbiegung Kragarm (Last am Ende)<span class="formula">f = F·L³ / (3·E·I)</span></div><div class="gd">f Durchbiegung [mm], F Last [N], L Länge [mm], E E-Modul, I Flächenträgheitsmoment — L³: doppelte Länge = achtfache Durchbiegung. Steifigkeit über I und E.</div></div>
+    <div class="gitem" data-item data-a="Festigkeit &amp; Spannung" data-cat="all" data-k="knicklast (euler) f_krit = π²·e·i / (l_k)²"><div class="gt">Knicklast (Euler)<span class="formula">F_krit = π²·E·I / (L_k)²</span></div><div class="gd">L_k Knicklänge [mm] (abh. von Einspannung) — Doppelte Länge = ein Viertel der Knicklast. Schlanke Druckstäbe knicken vor dem Quetschen.</div></div>
+    <div class="gsec" data-a="Statik &amp; Mechanik">Statik &amp; Mechanik</div>
+    <div class="gitem" data-item data-a="Statik &amp; Mechanik" data-cat="all" data-k="kräfte-/momentengleichgewicht σf = 0     σm = 0"><div class="gt">Kräfte-/Momentengleichgewicht<span class="formula">ΣF = 0     ΣM = 0</span></div><div class="gd">alle Kräfte und Momente am ruhenden Körper — Basis jeder Lagerkraft- und Schnittkraftberechnung. Mit Freikörperbild starten.</div></div>
+    <div class="gitem" data-item data-a="Statik &amp; Mechanik" data-cat="all" data-k="drehmoment (hebel) m = f · r"><div class="gt">Drehmoment (Hebel)<span class="formula">M = F · r</span></div><div class="gd">M Moment [Nm], F Kraft [N], r senkrechter Hebelarm [m] — Nur der senkrechte Abstand zur Wirklinie zählt.</div></div>
+    <div class="gitem" data-item data-a="Statik &amp; Mechanik" data-cat="all" data-k="reibungskraft f_r = μ · f_n"><div class="gt">Reibungskraft<span class="formula">F_R = μ · F_N</span></div><div class="gd">μ Reibwert, F_N Normalkraft [N] — Unabhängig von der Fläche. Haftreibung &gt; Gleitreibung.</div></div>
+    <div class="gitem" data-item data-a="Statik &amp; Mechanik" data-cat="all" data-k="hydraulischer druck p = f / a"><div class="gt">Hydraulischer Druck<span class="formula">p = F / A</span></div><div class="gd">p Druck [N/mm² = MPa], F Kraft, A Kolbenfläche — 1 bar = 0,1 MPa = 10 N/cm². Zylinderkraft = p · Kolbenfläche.</div></div>
+    <div class="gsec" data-a="Bewegung &amp; Antrieb">Bewegung &amp; Antrieb</div>
+    <div class="gitem" data-item data-a="Bewegung &amp; Antrieb" data-cat="all" data-k="leistung (rotatorisch) p = m · ω = m · 2π·n"><div class="gt">Leistung (rotatorisch)<span class="formula">P = M · ω = M · 2π·n</span></div><div class="gd">P [W], M Drehmoment [Nm], ω Winkelgeschw. [rad/s], n Drehzahl [1/s] — Praktisch: P[W] = M[Nm] · n[U/min] / 9550.</div></div>
+    <div class="gitem" data-item data-a="Bewegung &amp; Antrieb" data-cat="all" data-k="getriebeübersetzung i = n_an/n_ab = z_ab/z_an"><div class="gt">Getriebeübersetzung<span class="formula">i = n_an/n_ab = z_ab/z_an</span></div><div class="gd">n Drehzahl, z Zähnezahl — Untersetzung (i&gt;1) erhöht Drehmoment um i, senkt Drehzahl um i.</div></div>
+    <div class="gitem" data-item data-a="Bewegung &amp; Antrieb" data-cat="all" data-k="drehmoment nach getriebe m_ab = m_an · i · η"><div class="gt">Drehmoment nach Getriebe<span class="formula">M_ab = M_an · i · η</span></div><div class="gd">η Wirkungsgrad — Wirkungsgrad nicht vergessen, jede Stufe schluckt Leistung.</div></div>
+    <div class="gitem" data-item data-a="Bewegung &amp; Antrieb" data-cat="all" data-k="lineargeschw. spindel v = n · p_steig"><div class="gt">Lineargeschw. Spindel<span class="formula">v = n · P_steig</span></div><div class="gd">v Vorschub [mm/min], n Drehzahl [U/min], P_steig Steigung [mm] — Bei Riemen: v = n · z · Zahnteilung.</div></div>
+    <div class="gitem" data-item data-a="Bewegung &amp; Antrieb" data-cat="all" data-k="steps pro mm (stepper) steps/mm = (schritte·microstep) / weg_pro_u"><div class="gt">Steps pro mm (Stepper)<span class="formula">steps/mm = (Schritte·Microstep) / Weg_pro_U</span></div><div class="gd">Weg_pro_U = Steigung bzw. Riemen z · Teilung — Sauberer ganzzahliger Wert vermeidet Maßfehler in der Achse.</div></div>
+    <div class="gitem" data-item data-a="Bewegung &amp; Antrieb" data-cat="all" data-k="massenträgheitsmoment (scheibe) j = ½ · m · r²"><div class="gt">Massenträgheitsmoment (Scheibe)<span class="formula">J = ½ · m · r²</span></div><div class="gd">J [kg·m²], m Masse, r Radius — Bestimmt das Beschleunigungsmoment M = J · Winkelbeschleunigung.</div></div>
+    <div class="gsec" data-a="Thermik">Thermik</div>
+    <div class="gitem" data-item data-a="Thermik" data-cat="all" data-k="wärmeausdehnung δl = α · l · δt"><div class="gt">Wärmeausdehnung<span class="formula">ΔL = α · L · ΔT</span></div><div class="gd">α Ausdehnungskoeff. [1/K], L Länge, ΔT Temp.differenz [K] — Alu α ≈ 23·10⁻⁶, Stahl ≈ 12·10⁻⁶. Bei langer Achse Festlager/Loslager planen.</div></div>
+    <div class="gitem" data-item data-a="Thermik" data-cat="all" data-k="wärmemenge q = m · c · δt"><div class="gt">Wärmemenge<span class="formula">Q = m · c · ΔT</span></div><div class="gd">Q [J], m Masse, c spez. Wärmekapazität, ΔT — Energie zum Aufheizen. Für Heizbett-/Hotend-Abschätzung.</div></div>
+    <div class="gsec" data-a="Geometrie &amp; Masse">Geometrie &amp; Masse</div>
+    <div class="gitem" data-item data-a="Geometrie &amp; Masse" data-cat="all" data-k="masse aus volumen m = v · ρ"><div class="gt">Masse aus Volumen<span class="formula">m = V · ρ</span></div><div class="gd">V Volumen [cm³], ρ Dichte [g/cm³] — Stahl ≈ 7,85; Alu ≈ 2,70; PLA ≈ 1,24 g/cm³.</div></div>
+    <div class="gitem" data-item data-a="Geometrie &amp; Masse" data-cat="all" data-k="kreisfläche / kreisumfang a = π·d²/4     u = π·d"><div class="gt">Kreisfläche / Kreisumfang<span class="formula">A = π·d²/4     U = π·d</span></div><div class="gd">d Durchmesser — Fläche skaliert mit dem Quadrat des Durchmessers.</div></div>
+    <div class="gitem" data-item data-a="Geometrie &amp; Masse" data-cat="all" data-k="gewindekernloch (faustformel) d_kern ≈ d_nenn − steigung"><div class="gt">Gewindekernloch (Faustformel)<span class="formula">d_Kern ≈ d_Nenn − Steigung</span></div><div class="gd">M6 (Steigung 1,0) → 5,0 mm Kernloch — Für metrisches Regelgewinde zum Gewindeschneiden.</div></div>
+  </div>
+  <div class="none" data-none hidden>Kein Eintrag passt zu dieser Auswahl.</div>
+</div>
+
+<div class="tip"><b>Rechner statt Formel:</b> Balken, Knicklast, Schraubenvorspannung, Passungen, Lagerlebensdauer, Wärmedehnung und Schnittdaten lassen sich im Mechatronik-Hub direkt ausrechnen — siehe <a href="technische-mechanik.html#biegung">Biegung</a>, <a href="maschinenelemente.html#schrauben">Schraubverbindungen</a> und <a href="konstruktion.html#toleranzen">Toleranzen &amp; Passungen</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Woher die Werte stammen</div>
+  <ul>
+    <li>Herbert Wittel u. a., <i>Roloff/Matek Maschinenelemente</i> mit Tabellenbuch, Springer Vieweg — Formeln, Kennwerte und Richtwerte.</li>
+    <li>Dietmar Gross u. a., <i>Technische Mechanik 1–3</i>, Springer Vieweg — die Herleitungen hinter den Formeln.</li>
+    <li>Die Theorie ausführlich im Mechatronik-Hub: <a href="technische-mechanik.html">Technische Mechanik</a>, <a href="maschinenelemente.html">Maschinenelemente</a>, <a href="werkstoffkunde.html">Werkstoffkunde</a> und <a href="konstruktion.html">Konstruktion &amp; Fertigung</a>.</li>
+  </ul>
+</div>

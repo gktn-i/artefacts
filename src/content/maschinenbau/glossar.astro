@@ -1,5 +1,91 @@
-<div class="sec-title">Glossar der Fachbegriffe</div>
-<div class="sub">Erklaerungen zu den Begriffen aus Konzepten, Formeln und Tabellen. Suche filtert ueber Begriff und Erklaerung.</div>
-<input class="search" type="text" placeholder="Begriff suchen, z.B. Sicherheitsfaktor..." id="gq">
-<div class="count" id="gcount"></div>
-<div id="glossar-body"></div>
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Fachbegriffe des Maschinenbaus, nach Themengebiet sortiert.</b> Filtern über die Knöpfe, suchen über das Feld.</div>
+
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Begriff oder Stichwort suchen …" aria-label="Glossar durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="festigkeit">Festigkeit &amp; Spannung</button>
+    <button type="button" data-filter="statik">Statik &amp; Mechanik</button>
+    <button type="button" data-filter="bewegung">Bewegung &amp; Antrieb</button>
+    <button type="button" data-filter="werkstoff">Werkstoffe</button>
+    <button type="button" data-filter="thermo">Thermik</button>
+    <button type="button" data-filter="toleranz">Toleranzen &amp; Passungen</button>
+    <button type="button" data-filter="verbindung">Verbindungstechnik</button>
+    <button type="button" data-filter="fertigung">Fertigung &amp; DfM</button>
+    <button type="button" data-filter="elektro">Elektromechanik</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="gloss" data-list="Begriffen">
+    <div class="gsec" data-a="festigkeit">Festigkeit &amp; Spannung</div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="anisotropie"><div class="gt">Anisotropie</div><div class="gd">Richtungsabhängige Eigenschaften. Bei FDM-3D-Druck sind Teile längs der Schichten viel fester als quer dazu, die Schichtgrenze ist die Schwachstelle.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="dauerfestigkeit / ermüdung"><div class="gt">Dauerfestigkeit / Ermüdung</div><div class="gd">Versagen durch wiederholte Lastwechsel weit unterhalb der Bruchgrenze. Risse starten an Kerben und wachsen pro Zyklus. Stahl hat eine Dauerfestigkeitsgrenze, Alu nicht.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="e-modul (elastizitätsmodul)"><div class="gt">E-Modul (Elastizitätsmodul)</div><div class="gd">Maß für die Steifigkeit, also den Widerstand gegen elastische Verformung. Höher = steifer, sagt aber nichts über die Festigkeit. Stahl rund 210000, Alu rund 70000 N/mm², daher biegt sich Alu dreimal so stark.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="festigkeitsklasse (8.8/10.9/12.9)"><div class="gt">Festigkeitsklasse (8.8/10.9/12.9)</div><div class="gd">Schraubenkennzeichnung. Erste Zahl mal 100 = Zugfestigkeit, erste mal zweite mal 10 = Streckgrenze. 8.8 heißt 800/640 N/mm². Höhere Klasse fester, aber spröder.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="kerbwirkung"><div class="gt">Kerbwirkung</div><div class="gd">Lokale Spannungsspitze an scharfen Ecken, Löchern und Absätzen. Ausgangspunkt für Risse, besonders bei Wechsellast. Ausrunden senkt die Spitze stark.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="knicken"><div class="gt">Knicken</div><div class="gd">Schlagartiges seitliches Ausweichen schlanker Druckstäbe, lange bevor die Druckspannung kritisch wird. Kritische Last sinkt mit dem Quadrat der Länge.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="sicherheitsfaktor (sf)"><div class="gt">Sicherheitsfaktor (SF)</div><div class="gd">Verhältnis von zulässiger zu tatsächlicher Belastung, fängt Unsicherheiten ab. Statisch 1,5–2, stoßartig/unsicher 3–4, bei Personenrisiko deutlich höher.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="spannung (σ, τ)"><div class="gt">Spannung (σ, τ)</div><div class="gd">Kraft pro Fläche, gemessen in N/mm² (= MPa). Normalspannung σ wirkt senkrecht (Zug/Druck/Biegung), Schubspannung τ wirkt parallel (Scheren/Torsion). Der zentrale Begriff, ob ein Bauteil hält.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="streckgrenze (r_e)"><div class="gt">Streckgrenze (R_e)</div><div class="gd">Spannung, ab der das Material dauerhaft plastisch verformt bleibt. Der relevante Festigkeitswert für die Auslegung, Bauteile bleiben darunter.</div></div>
+    <div class="gitem" data-item data-a="festigkeit" data-cat="festigkeit" data-k="zugfestigkeit (r_m)"><div class="gt">Zugfestigkeit (R_m)</div><div class="gd">Höchste Spannung kurz vor dem Bruch, liegt über der Streckgrenze. Bei Schrauben die erste Zahl der Festigkeitsklasse mal 100.</div></div>
+    <div class="gsec" data-a="statik">Statik &amp; Mechanik</div>
+    <div class="gitem" data-item data-a="statik" data-cat="statik" data-k="freikörperbild"><div class="gt">Freikörperbild</div><div class="gd">Skizze eines freigeschnittenen Bauteils mit allen angreifenden Kräften und Momenten. Ausgangspunkt jeder statischen Berechnung.</div></div>
+    <div class="gitem" data-item data-a="statik" data-cat="statik" data-k="moment (drehmoment)"><div class="gt">Moment (Drehmoment)</div><div class="gd">Drehwirkung einer Kraft, Kraft mal senkrechtem Hebelarm, in Nm. Nur der senkrechte Abstand zur Wirklinie zählt.</div></div>
+    <div class="gitem" data-item data-a="statik" data-cat="statik" data-k="reibwert (μ)"><div class="gt">Reibwert (μ)</div><div class="gd">Maß für die Reibung einer Materialpaarung. Reibungskraft = μ mal Normalkraft, unabhängig von der Fläche. Haftreibung größer als Gleitreibung.</div></div>
+    <div class="gitem" data-item data-a="statik" data-cat="statik" data-k="schwerpunkt"><div class="gt">Schwerpunkt</div><div class="gd">Punkt, in dem die Gesamtmasse zusammengefasst wirkt. Wandert er über die Standfläche hinaus, kippt das Objekt.</div></div>
+    <div class="gitem" data-item data-a="statik" data-cat="statik" data-k="vorspannung"><div class="gt">Vorspannung</div><div class="gd">Klemmkraft, mit der eine angezogene Schraube die Teile zusammenpresst. Das eigentliche Ziel beim Anziehen, das Drehmoment ist nur das Mittel.</div></div>
+    <div class="gsec" data-a="bewegung">Bewegung &amp; Antrieb</div>
+    <div class="gitem" data-item data-a="bewegung" data-cat="bewegung" data-k="backlash (spiel)"><div class="gt">Backlash (Spiel)</div><div class="gd">Leerweg in Getriebe oder Spindel, bevor Bewegung übertragen wird. Bei Präzisionsachsen unerwünscht, daher Anti-Backlash-Muttern oder vorgespannte Riemen.</div></div>
+    <div class="gitem" data-item data-a="bewegung" data-cat="bewegung" data-k="kugelspindel vs. trapezspindel"><div class="gt">Kugelspindel vs. Trapezspindel</div><div class="gd">Kugelspindel läuft leicht und präzise, hält aber nicht von selbst. Trapezspindel hat Selbsthemmung (hält Z-Achse), läuft aber schwerer.</div></div>
+    <div class="gitem" data-item data-a="bewegung" data-cat="bewegung" data-k="massenträgheitsmoment (j)"><div class="gt">Massenträgheitsmoment (J)</div><div class="gd">Widerstand eines drehenden Körpers gegen Drehzahländerung. Bestimmt das nötige Beschleunigungsmoment des Motors.</div></div>
+    <div class="gitem" data-item data-a="bewegung" data-cat="bewegung" data-k="selbsthemmung"><div class="gt">Selbsthemmung</div><div class="gd">Eigenschaft, sich unter Last nicht von selbst zurückzudrehen. Trapezspindel und Schneckengetriebe halten die Position ohne Bremse, gut für senkrechte Achsen.</div></div>
+    <div class="gitem" data-item data-a="bewegung" data-cat="bewegung" data-k="untersetzung / übersetzung"><div class="gt">Untersetzung / Übersetzung</div><div class="gd">Drehzahlverhältnis im Getriebe. Untersetzung (langsamer) erhöht das Drehmoment im gleichen Verhältnis, Übersetzung (schneller) verringert es.</div></div>
+    <div class="gsec" data-a="werkstoff">Werkstoffe</div>
+    <div class="gitem" data-item data-a="werkstoff" data-cat="werkstoff" data-k="dichte (ρ)"><div class="gt">Dichte (ρ)</div><div class="gd">Masse pro Volumen in g/cm³. Für Gewichtsabschätzung: Volumen mal Dichte. Stahl 7,85; Alu 2,70; PLA 1,24.</div></div>
+    <div class="gitem" data-item data-a="werkstoff" data-cat="werkstoff" data-k="eloxal / verzinkung"><div class="gt">Eloxal / Verzinkung</div><div class="gd">Korrosionsschutz. Eloxal ist eine harte Oxidschicht auf Alu (auch eingefärbt), Verzinkung ein Zinküberzug auf Stahl.</div></div>
+    <div class="gitem" data-item data-a="werkstoff" data-cat="werkstoff" data-k="hygroskopisch"><div class="gt">Hygroskopisch</div><div class="gd">Nimmt Feuchtigkeit aus der Luft auf (Nylon, PVA, teils PETG). Muss trocken gelagert und vor dem Druck getrocknet werden.</div></div>
+    <div class="gitem" data-item data-a="werkstoff" data-cat="werkstoff" data-k="kontaktkorrosion"><div class="gt">Kontaktkorrosion</div><div class="gd">Bei zwei verschiedenen Metallen in Feuchte wird das unedlere angegriffen (z.B. Alu neben Edelstahl). Durch Trennung oder verträgliche Paarung vermeiden.</div></div>
+    <div class="gitem" data-item data-a="werkstoff" data-cat="werkstoff" data-k="shore-härte"><div class="gt">Shore-Härte</div><div class="gd">Härtemaß für Elastomere wie TPU. Shore A für weich: 95A relativ fest, 60A sehr weich und gummiartig.</div></div>
+    <div class="gsec" data-a="thermo">Thermik</div>
+    <div class="gitem" data-item data-a="thermo" data-cat="thermo" data-k="festlager / loslager"><div class="gt">Festlager / Loslager</div><div class="gd">Ein Lager fixiert axial (Festlager), das andere lässt Längsdehnung zu (Loslager). Verhindert Verspannung bei Wärmeausdehnung.</div></div>
+    <div class="gitem" data-item data-a="thermo" data-cat="thermo" data-k="konvektion"><div class="gt">Konvektion</div><div class="gd">Wärmeabfuhr durch strömende Luft oder Flüssigkeit. Luftstrom über Kühlrippen verbessert die Kühlung mehr als bloße Fläche.</div></div>
+    <div class="gitem" data-item data-a="thermo" data-cat="thermo" data-k="wärmeausdehnungskoeffizient (α)"><div class="gt">Wärmeausdehnungskoeffizient (α)</div><div class="gd">Wie stark sich ein Material pro Grad ausdehnt. Alu rund doppelt so stark wie Stahl. Bei langen Teilen Festlager/Loslager-Konzept nötig.</div></div>
+    <div class="gsec" data-a="toleranz">Toleranzen &amp; Passungen</div>
+    <div class="gitem" data-item data-a="toleranz" data-cat="toleranz" data-k="bezug (datum)"><div class="gt">Bezug (Datum)</div><div class="gd">Referenzfläche oder -achse, auf die sich Lagetoleranzen beziehen. Sinnvoll auf Auflage- oder Zentrierflächen legen.</div></div>
+    <div class="gitem" data-item data-a="toleranz" data-cat="toleranz" data-k="gd&amp;t (form- und lagetoleranz)"><div class="gt">GD&amp;T (Form- und Lagetoleranz)</div><div class="gd">Toleriert Geometrie statt nur Masse: Form (Ebenheit, Rundheit), Lage (Position) und Ausrichtung (Parallelität) bezogen auf Bezüge. Ein maßhaltiges Teil kann trotzdem krumm sein.</div></div>
+    <div class="gitem" data-item data-a="toleranz" data-cat="toleranz" data-k="oberflächenrauheit (ra)"><div class="gt">Oberflächenrauheit (Ra)</div><div class="gd">Mittlerer Rauheitswert in Mikrometer. Kleines Ra (glatt) nötig für Dichtungen, Gleitflächen und Dauerfestigkeit, kostet aber Aufwand.</div></div>
+    <div class="gitem" data-item data-a="toleranz" data-cat="toleranz" data-k="passung (h7/g6 etc.)"><div class="gt">Passung (H7/g6 etc.)</div><div class="gd">Gewolltes Verhältnis von Bohrung und Welle. Großbuchstabe Bohrung, klein Welle. Spielpassung beweglich, Presspassung fest, Übergangspassung dazwischen.</div></div>
+    <div class="gitem" data-item data-a="toleranz" data-cat="toleranz" data-k="presssitz / spielpassung"><div class="gt">Presssitz / Spielpassung</div><div class="gd">Presssitz (Übermaß) muss eingepresst werden und hält durch Reibung. Spielpassung lässt sich frei bewegen. Übergangspassung liegt dazwischen.</div></div>
+    <div class="gsec" data-a="verbindung">Verbindungstechnik</div>
+    <div class="gitem" data-item data-a="verbindung" data-cat="verbindung" data-k="form-/kraft-/stoffschluss"><div class="gt">Form-/Kraft-/Stoffschluss</div><div class="gd">Formschluss hält durch Geometrie (Stift, Passfeder, Schnappnase). Kraftschluss durch Reibung (Schraube, Klemmring, Presssitz). Stoffschluss durch Materialverbund (Kleben, Schweißen, Löten).</div></div>
+    <div class="gitem" data-item data-a="verbindung" data-cat="verbindung" data-k="heat-set-insert"><div class="gt">Heat-Set-Insert</div><div class="gd">Messing-Insert, der mit dem Lötkolben in Kunststoff eingeschmolzen wird und ein belastbares, lösbares Gewinde im 3D-Druck ergibt.</div></div>
+    <div class="gitem" data-item data-a="verbindung" data-cat="verbindung" data-k="selbsthemmung vs. selbstsichernd"><div class="gt">Selbsthemmung vs. selbstsichernd</div><div class="gd">Selbsthemmend bezieht sich auf Spindeln/Gewinde, die sich nicht zurückdrehen. Selbstsichernd bezieht sich auf Verbindungen, die sich durch eingebaute Reibung nicht lösen (Nylonmutter).</div></div>
+    <div class="gitem" data-item data-a="verbindung" data-cat="verbindung" data-k="snap-fit"><div class="gt">Snap-Fit</div><div class="gd">Federnde Rastnase, die beim Fügen über eine Hinterschneidung einrastet. Werkzeuglos, oft wieder lösbar. Lange schlanke Nase biegt, kurze bricht.</div></div>
+    <div class="gitem" data-item data-a="verbindung" data-cat="verbindung" data-k="threadlocker (anaerob)"><div class="gt">Threadlocker (anaerob)</div><div class="gd">Schraubensicherung, die nur unter Luftabschluss im Gewinde aushärtet. Blau mittelfest und lösbar, rot hochfest (braucht Hitze zum Lösen).</div></div>
+    <div class="gitem" data-item data-a="verbindung" data-cat="verbindung" data-k="welle-nabe-verbindung"><div class="gt">Welle-Nabe-Verbindung</div><div class="gd">Drehmomentübertragung von Welle auf Bauteil: Passfeder (Formschluss), Klemmnabe/Spannsatz (kraftschlüssig, spielfrei), Madenschraube (klein), Presssitz.</div></div>
+    <div class="gsec" data-a="fertigung">Fertigung &amp; DfM</div>
+    <div class="gitem" data-item data-a="fertigung" data-cat="fertigung" data-k="dfm (design for manufacturing)"><div class="gt">DfM (Design for Manufacturing)</div><div class="gd">Konstruieren passend zum Fertigungsverfahren. Jedes Verfahren hat Regeln, gegen die man nicht günstig fertigen kann.</div></div>
+    <div class="gitem" data-item data-a="fertigung" data-cat="fertigung" data-k="entformschräge"><div class="gt">Entformschräge</div><div class="gd">Leichte Neigung an Spritzguss- und Gussteilen, damit sie sich aus der Form lösen. Senkrechte Wände klemmen.</div></div>
+    <div class="gitem" data-item data-a="fertigung" data-cat="fertigung" data-k="gleichlauf-/gegenlauffräsen"><div class="gt">Gleichlauf-/Gegenlauffräsen</div><div class="gd">Beim Gleichlauf dreht der Fräser in Vorschubrichtung, bessere Oberfläche. Gegenlauf umgekehrt, robuster bei Spiel, aber rauer.</div></div>
+    <div class="gitem" data-item data-a="fertigung" data-cat="fertigung" data-k="schnittgeschwindigkeit (vc)"><div class="gt">Schnittgeschwindigkeit (vc)</div><div class="gd">Relativgeschwindigkeit zwischen Werkzeug und Werkstück beim Zerspanen, materialabhängig. Daraus folgt die Drehzahl je nach Werkzeugdurchmesser.</div></div>
+    <div class="gitem" data-item data-a="fertigung" data-cat="fertigung" data-k="überhang / 45-grad-regel"><div class="gt">Überhang / 45-Grad-Regel</div><div class="gd">Beim FDM-Druck drucken Flächen flacher als 45 Grad zur Senkrechten ohne Stütze noch sauber, darunter braucht es Stützmaterial.</div></div>
+    <div class="gitem" data-item data-a="fertigung" data-cat="fertigung" data-k="vorschub pro zahn (fz)"><div class="gt">Vorschub pro Zahn (fz)</div><div class="gd">Spanabnahme je Schneide und Umdrehung beim Fräsen. Bestimmt Oberfläche und Werkzeugbelastung.</div></div>
+    <div class="gsec" data-a="elektro">Elektromechanik</div>
+    <div class="gitem" data-item data-a="elektro" data-cat="elektro" data-k="bldc"><div class="gt">BLDC</div><div class="gd">Bürstenloser Gleichstrommotor, effizient und kräftig für Dauerlauf (Spindeln, Gebläse, Fahrantriebe).</div></div>
+    <div class="gitem" data-item data-a="elektro" data-cat="elektro" data-k="haltemoment"><div class="gt">Haltemoment</div><div class="gd">Drehmoment, das ein Stepper im Stillstand hält. Nimmt mit steigender Drehzahl stark ab, daher bei Betriebsdrehzahl bewerten.</div></div>
+    <div class="gitem" data-item data-a="elektro" data-cat="elektro" data-k="schrittmotor (stepper)"><div class="gt">Schrittmotor (Stepper)</div><div class="gd">Motor mit definierten Schritten ohne Sensor, ideal zur Positionierung (Drucker, CNC). Verliert bei Überlast Schritte. Haltemoment sinkt mit der Drehzahl.</div></div>
+    <div class="gitem" data-item data-a="elektro" data-cat="elektro" data-k="servo / closed loop"><div class="gt">Servo / Closed Loop</div><div class="gd">Geregelter Motor mit Encoder-Rückmeldung, fährt Position genau und dynamisch an, verliert keine Schritte. Aufwendiger als Stepper.</div></div>
+  </div>
+  <div class="none" data-none hidden>Kein Begriff passt zu dieser Auswahl.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Woher die Werte stammen</div>
+  <ul>
+    <li>Herbert Wittel u. a., <i>Roloff/Matek Maschinenelemente</i> mit Tabellenbuch, Springer Vieweg — Formeln, Kennwerte und Richtwerte.</li>
+    <li>Dietmar Gross u. a., <i>Technische Mechanik 1–3</i>, Springer Vieweg — die Herleitungen hinter den Formeln.</li>
+    <li>Die Theorie ausführlich im Mechatronik-Hub: <a href="technische-mechanik.html">Technische Mechanik</a>, <a href="maschinenelemente.html">Maschinenelemente</a>, <a href="werkstoffkunde.html">Werkstoffkunde</a> und <a href="konstruktion.html">Konstruktion &amp; Fertigung</a>.</li>
+  </ul>
+</div>

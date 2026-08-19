@@ -1,0 +1,74 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Konstruktionsmethodik ist kein Selbstzweck, sondern Schutz vor der ersten Idee.</b> Wer sofort zeichnet, was ihm einfällt, verliebt sich in eine Lösung, bevor er die Aufgabe verstanden hat. Drei Zwischenschritte verhindern das zuverlässig.</div>
+
+<h2>Die vier Phasen nach VDI 2221</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th data-s="text">Phase</th><th>Ergebnis</th><th>Typische Werkzeuge</th></tr></thead>
+<tbody>
+<tr><td><b>1 · Klären der Aufgabe</b></td><td>Anforderungsliste</td><td>Fragenkatalog, Gespräch mit dem Nutzer, Wettbewerbsanalyse</td></tr>
+<tr><td><b>2 · Konzipieren</b></td><td>Prinziplösung</td><td>Funktionsstruktur, morphologischer Kasten, Skizzen</td></tr>
+<tr><td><b>3 · Entwerfen</b></td><td>Maßstäblicher Entwurf</td><td>CAD, Überschlagsrechnung, Bewertung nach VDI 2225</td></tr>
+<tr><td><b>4 · Ausarbeiten</b></td><td>Fertigungsunterlagen</td><td>Zeichnungen, Stückliste, Toleranzfestlegung, FEM</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Anforderungsliste</h2>
+<p>Jede Anforderung wird als <b>Forderung</b> (muss erfüllt sein) oder <b>Wunsch</b> (mit Gewichtung) eingestuft und, wo möglich, mit einer Zahl versehen. Eine Anforderung ohne Zahl lässt sich nicht prüfen.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Kategorie</th><th>Beispielfragen</th></tr></thead>
+<tbody>
+<tr><td><b>Funktion</b></td><td>Welche Kraft, welcher Weg, welche Geschwindigkeit, welche Genauigkeit, wie oft?</td></tr>
+<tr><td><b>Geometrie</b></td><td>Bauraum, Anschlussmaße, Gewicht, Lochbilder</td></tr>
+<tr><td><b>Umgebung</b></td><td>Temperatur, Feuchte, Medien, Staub, Vibration, EMV</td></tr>
+<tr><td><b>Sicherheit</b></td><td>Wer kann verletzt werden? Welche Norm greift? Was passiert beim Ausfall?</td></tr>
+<tr><td><b>Fertigung</b></td><td>Stückzahl, verfügbare Verfahren, Lieferzeit, Toleranzfähigkeit</td></tr>
+<tr><td><b>Montage und Wartung</b></td><td>Wer baut es zusammen, mit welchem Werkzeug, wie oft muss man heran?</td></tr>
+<tr><td><b>Kosten</b></td><td>Zielpreis je Stück, Werkzeugkosten, Entwicklungsbudget</td></tr>
+<tr><td><b>Recht</b></td><td>CE, RoHS, Lebensmittelkontakt, Produkthaftung</td></tr>
+</tbody>
+</table></div>
+
+<div class="tip"><b>Der wirksamste einzelne Handgriff</b> ist die Frage nach der <em>Funktion</em> statt nach dem Bauteil. „Ich brauche eine Halterung für den Motor“ engt sofort ein. „Das Motormoment muss ins Gestell abgeleitet werden, die Welle muss auf 0,1 mm fluchten“ öffnet Lösungen, die man sonst nicht sieht — etwa den Motor direkt anzuflanschen und die Halterung ganz zu sparen.</div>
+
+<h2>Varianten erzeugen und bewerten</h2>
+<p>Der <b>morphologische Kasten</b> ist das einfachste Werkzeug dafür: Teilfunktionen in die Zeilen, mögliche Lösungen in die Spalten, dann Kombinationen bilden. Aus drei Teilfunktionen mit je drei Lösungen entstehen 27 Varianten — von denen die meisten unsinnig sind, aber zwei oder drei überraschend gut.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Teilfunktion</th><th>Lösung A</th><th>Lösung B</th><th>Lösung C</th></tr></thead>
+<tbody>
+<tr><td>Drehmoment übertragen</td><td>Passfeder</td><td>Spannsatz</td><td>Presssitz</td></tr>
+<tr><td>Axial festlegen</td><td>Wellenmutter</td><td>Sicherungsring</td><td>Anschlagschulter</td></tr>
+<tr><td>Position messen</td><td>Inkrementalgeber</td><td>Absolutgeber</td><td>Endschalter + Schrittzählung</td></tr>
+</tbody>
+</table></div>
+<p>Bewertet wird nach VDI 2225 in zwei Dimensionen: technische Wertigkeit (erfüllt die Anforderungen) und wirtschaftliche Wertigkeit (Kosten). Eine Variante, die technisch führt und wirtschaftlich abfällt, ist selten die richtige.</p>
+
+<h2>Gestaltungsgrundregeln</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Eindeutig</div><div class="cd">Jede Funktion hat genau ein zuständiges Element. Kein Bauteil, das gleichzeitig zentriert, dichtet und Kraft überträgt — sonst verhindert eine Anforderung die andere.</div></div>
+  <div class="card"><div class="ct">Einfach</div><div class="cd">Wenige Teile, wenige Fertigungsschritte, wenige Werkzeugwechsel, symmetrische Formen. Jedes eingesparte Teil spart Kosten, Toleranzkette und eine Fehlerquelle.</div></div>
+  <div class="card"><div class="ct">Sicher</div><div class="cd">Was passiert beim Versagen? Sicheres Bestehen (überdimensioniert), beschränktes Versagen (Sollbruchstelle) oder Redundanz — bewusst entscheiden, nicht dem Zufall überlassen.</div></div>
+</div>
+
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th data-s="text">Prinzip</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Kraftfluss kurz halten</b></td><td>Der direkteste Weg von der Last zum Lager ist der steifste und leichteste. Umwege bedeuten Biegemomente.</td></tr>
+<tr><td><b>Abgestimmte Verformung</b></td><td>Bauteile, die zusammenwirken, sollen sich gleichsinnig verformen — sonst entstehen Zwangskräfte.</td></tr>
+<tr><td><b>Kerbwirkung mindern</b></td><td>Radien statt Ecken, sanfte Querschnittsübergänge, Entlastungskerben.</td></tr>
+<tr><td><b>Ausdehnung zulassen</b></td><td>Ein Festpunkt, alles andere beweglich — bei Temperatur, Feuchte und Setzen.</td></tr>
+<tr><td><b>Fehlmontage ausschließen</b></td><td>Poka Yoke: asymmetrische Lochbilder, Passstifte, unterschiedliche Steckerformen. Was falsch montiert werden kann, wird es irgendwann.</td></tr>
+<tr><td><b>Normteile bevorzugen</b></td><td>Verfügbar, geprüft, billig, austauschbar — und jemand anderes hat die Auslegung schon gemacht.</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>VDI 2221 Blatt 1 und 2 — Entwicklung technischer Produkte und Systeme: Modell der Produktentwicklung.</li>
+    <li>VDI 2225 Blatt 1–4 — Konstruktionsmethodik, technisch-wirtschaftliches Konstruieren; Quelle des Bewertungsverfahrens.</li>
+    <li>Gerhard Pahl, Wolfgang Beitz, Jörg Feldhusen, Karl-Heinrich Grote, <i>Konstruktionslehre</i>, Springer Vieweg — Gestaltungsgrundregeln und Gestaltungsprinzipien.</li>
+    <li>Shigeo Shingo, <i>Zero Quality Control: Source Inspection and the Poka-Yoke System</i> — Ursprung des Poka-Yoke-Prinzips.</li>
+  </ul>
+</div>

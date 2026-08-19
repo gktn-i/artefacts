@@ -1,0 +1,62 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Kinematik beschreibt Bewegung ohne nach der Ursache zu fragen.</b> Weg, Geschwindigkeit, Beschleunigung — jeweils die Ableitung des Vorhergehenden. Das reicht schon, um Verfahrprofile, Taktzeiten und Getriebeübersetzungen zu rechnen.</div>
+
+<h2>Die Grundgrößen</h2>
+<div class="fbox">
+  <span class="f">v = ds/dt&nbsp;&nbsp;&nbsp;&nbsp;a = dv/dt&nbsp;&nbsp;&nbsp;&nbsp;j = da/dt</span>
+  <span class="l">Weg s, Geschwindigkeit v, Beschleunigung a, Ruck j. Umgekehrt: integrieren statt ableiten.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Bewegung</th><th>Weg s(t)</th><th>Geschwindigkeit v(t)</th><th>Nützliche Beziehung</th></tr></thead>
+<tbody>
+<tr><td><b>Gleichförmig</b></td><td>s = v · t</td><td>v = konstant</td><td>—</td></tr>
+<tr><td><b>Gleichmäßig beschleunigt</b></td><td>s = v₀·t + a·t²/2</td><td>v = v₀ + a·t</td><td>v² = v₀² + 2·a·s</td></tr>
+<tr><td><b>Rotation, gleichförmig</b></td><td>φ = ω · t</td><td>ω = 2π·n / 60</td><td>v = ω · r</td></tr>
+<tr><td><b>Rotation, beschleunigt</b></td><td>φ = ω₀·t + α·t²/2</td><td>ω = ω₀ + α·t</td><td>a_t = α · r</td></tr>
+</tbody>
+</table></div>
+<p>Die Umrechnung <span class="formula">ω = 2π·n/60</span> mit n in min⁻¹ ist die meistgebrauchte Zeile in der Antriebstechnik. 3000 min⁻¹ sind 314 rad/s.</p>
+
+<h2>Umrechnung Drehung in Vorschub</h2>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Antrieb</th><th>Vorschub je Umdrehung</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Gewinde- oder Kugelgewindetrieb</b></td><td>= Steigung P</td><td>KGT 1605: 5 mm/U → bei 600 min⁻¹ sind das 3000 mm/min</td></tr>
+<tr><td><b>Zahnriemen</b></td><td>= z_Scheibe · Teilung</td><td>GT2, 20 Zähne: 20 · 2 mm = 40 mm/U</td></tr>
+<tr><td><b>Zahnstange</b></td><td>= π · m · z</td><td>Modul 2, 20 Zähne: 125,7 mm/U</td></tr>
+<tr><td><b>Seiltrieb / Riemenscheibe</b></td><td>= π · d</td><td>Ø50 mm: 157 mm/U</td></tr>
+</tbody>
+</table></div>
+<p>Für Schrittmotorsteuerungen folgt daraus direkt der Wert <b>steps/mm</b>: <span class="formula">steps/mm = (Schritte je Umdrehung · Mikroschritte) / Vorschub je Umdrehung</span>. Bei einem 1,8°-Motor (200 Schritte), 16 Mikroschritten und GT2 mit 20 Zähnen sind das 200 · 16 / 40 = 80 steps/mm.</p>
+
+<h2>Verfahrprofile</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Trapezprofil</h4>
+    <p>Beschleunigen, konstant fahren, bremsen. Die Beschleunigung springt an den Ecken — der Ruck ist theoretisch unendlich.</p>
+    <ul><li>Einfach zu rechnen und zu implementieren</li><li>Regt Schwingungen an, Maschine ruckt hörbar</li><li>Bei steifen, langsamen Achsen völlig ausreichend</li></ul>
+  </div>
+  <div class="gb-col good"><h4>S-Kurve (ruckbegrenzt)</h4>
+    <p>Die Beschleunigung wird selbst hoch- und heruntergefahren. Der Ruck bleibt endlich.</p>
+    <ul><li>Deutlich weniger Schwingungsanregung</li><li>Schont Mechanik, Riemen und Kupplungen</li><li>Etwa 10–15 % längere Fahrzeit bei gleichen Grenzwerten</li><li>Standard in modernen CNC- und Robotersteuerungen</li></ul>
+  </div>
+</div>
+
+<div class="tip"><b>Dreiecksprofil erkennen:</b> Bei kurzen Wegen wird die Zielgeschwindigkeit nie erreicht — das Trapez entartet zum Dreieck. Die Grenze liegt bei <span class="formula">s_min = v_max² / a</span>. Darunter bestimmt allein die Beschleunigung die Taktzeit, eine höhere Maximalgeschwindigkeit bringt nichts mehr. Bei Pick-and-Place-Anwendungen mit kurzen Wegen ist das fast immer der Fall.</div>
+
+<h2>Übersetzungen</h2>
+<div class="fbox">
+  <span class="f">i = n_an / n_ab = z_ab / z_an&nbsp;&nbsp;&nbsp;&nbsp;i_ges = i₁ · i₂ · i₃ …</span>
+  <span class="l">Ins Langsame übersetzt (i &gt; 1) steigt das Drehmoment im gleichen Verhältnis — abzüglich Wirkungsgrad.</span>
+</div>
+<p>Bei mehreren Stufen multiplizieren sich die Übersetzungen, die Wirkungsgrade ebenfalls. Drei Stufen mit je 95 % ergeben zusammen 86 %. Das Spiel (Backlash) addiert sich dagegen — und wird von der letzten Stufe aus gesehen durch die davor liegenden Stufen geteilt, weshalb Spiel in der <em>letzten</em> Stufe am meisten wehtut.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 3: Kinetik</i>, Springer Vieweg — Kapitel Kinematik des Punktes und des starren Körpers.</li>
+    <li>Jens Weber, <i>Bewegungsdesign</i> — Grundlagen ruckbegrenzter Profile; alternativ die Dokumentation zu <a href="https://linuxcnc.org/docs/html/motion/tweaking-steppers.html">LinuxCNC Trajectory Planning</a> für die praktische Umsetzung.</li>
+    <li><a href="https://reprap.org/wiki/Step_rate">RepRap-Wiki — steps/mm</a>: Herleitung und Werte für gängige Antriebe im 3D-Druck.</li>
+  </ul>
+</div>

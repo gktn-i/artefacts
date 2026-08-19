@@ -1,0 +1,47 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Technische Mechanik beantwortet drei Fragen:</b> Hält es? Verformt es sich zu stark? Und bewegt es sich so, wie ich will? Alles andere in diesem Modul sind Werkzeuge, um genau diese drei Fragen mit Zahlen statt mit Bauchgefühl zu beantworten.</div>
+
+<p class="lede">Dieses Modul ist das mechanische Gegenstück zur Elektrotechnik: dort Ladung und Spannung, hier Kraft und Spannung. Wer Maschinenelemente auslegen, ein Getriebe dimensionieren oder ein gedrucktes Teil belastbar machen will, kommt hier vorbei.</p>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#statik"><div class="mt"><span class="i">⚖️</span>Statik</div><div class="md">Freikörperbild, Kräfte- und Momentengleichgewicht, Lagerreaktionen — der Einstieg in jede Rechnung.</div></a>
+  <a href="#schnittgroessen"><div class="mt"><span class="i">✂️</span>Schnittgrößen</div><div class="md">Normalkraft, Querkraft, Biegemoment und ihre Verläufe. Wo im Bauteil ist die Belastung am größten?</div></a>
+  <a href="#spannung"><div class="mt"><span class="i">📊</span>Spannung &amp; Dehnung</div><div class="md">σ = F/A, Hookesches Gesetz, E-Modul, Querkontraktion, Sicherheitsfaktor.</div></a>
+  <a href="#biegung"><div class="mt"><span class="i">📐</span>Biegung</div><div class="md">Flächenträgheitsmoment, Widerstandsmoment, Durchbiegung — warum hochkant so viel steifer ist.</div></a>
+  <a href="#torsion"><div class="mt"><span class="i">🌀</span>Torsion &amp; Schub</div><div class="md">Verdrehte Wellen, polares Widerstandsmoment, warum Rohre so effizient sind.</div></a>
+  <a href="#knicken"><div class="mt"><span class="i">📉</span>Knicken</div><div class="md">Euler-Fälle, Schlankheitsgrad, das plötzliche Versagen ohne Vorwarnung.</div></a>
+  <a href="#kerben"><div class="mt"><span class="i">⚡</span>Kerben &amp; Ermüdung</div><div class="md">Kerbformzahl, Vergleichsspannung, Wöhlerkurve — warum Teile weit unterhalb der Bruchlast brechen.</div></a>
+  <a href="#kinematik"><div class="mt"><span class="i">🏃</span>Kinematik</div><div class="md">Weg, Geschwindigkeit, Beschleunigung, Rampen und Ruck — die Bahn ohne Kräfte.</div></a>
+  <a href="#dynamik"><div class="mt"><span class="i">🎯</span>Dynamik</div><div class="md">Newton, Trägheitsmoment, Impuls und Energie, Rotation und Translation.</div></a>
+  <a href="#schwingungen"><div class="mt"><span class="i">〰️</span>Schwingungen</div><div class="md">Eigenfrequenz, Dämpfung, Resonanz — und wie man ihr aus dem Weg geht.</div></a>
+  <a href="#reibung"><div class="mt"><span class="i">🧲</span>Reibung</div><div class="md">Haft- und Gleitreibung, Selbsthemmung, Seilreibung, Rollwiderstand.</div></a>
+  <a href="maschinenelemente.html"><div class="mt"><span class="i">🔩</span>Weiter zu den Bauteilen</div><div class="md">Schrauben, Lager, Getriebe, Federn — dort wird die Theorie zu konkreten Teilen.</div></a>
+</div>
+
+<h2>Die drei Fragen im Detail</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Hält es?</div><div class="cd">Festigkeitsnachweis. Die auftretende Spannung muss unter der zulässigen bleiben: <span class="formula">σ ≤ R_p0,2 / S</span>. Zuständig sind die Abschnitte Spannung, Biegung, Torsion und Kerben.</div></div>
+  <div class="card"><div class="ct">Verformt es sich zu stark?</div><div class="cd">Steifigkeitsnachweis. Oft der eigentlich kritische: eine Achse, die um 2 mm durchhängt, hält zwar, taugt aber nichts. Zuständig sind Biegung und der E-Modul.</div></div>
+  <div class="card"><div class="ct">Bewegt es sich richtig?</div><div class="cd">Kinematik und Dynamik. Welche Kraft, welches Moment, welche Beschleunigung — die Grundlage jeder Antriebsauslegung.</div></div>
+</div>
+
+<div class="tip"><b>Die Reihenfolge, in der man das lernt,</b> ist nicht verhandelbar: Statik zuerst, denn ohne Freikörperbild und Gleichgewicht lässt sich keine einzige Spannung berechnen. Danach Festigkeitslehre, dann erst Kinematik und Dynamik. Wer mit „Formel für Durchbiegung“ googelt, bevor er Schnittgrößen versteht, setzt reihenweise die falsche Formel ein.</div>
+
+<h2>Was hier bewusst fehlt</h2>
+<p>Dieses Modul deckt die <b>lineare Elastostatik</b> und die <b>Starrkörperdynamik</b> ab — das, womit im Maschinenbau 95 % der Auslegungen gemacht werden. Nicht behandelt werden Plastizität, große Verformungen, Kontaktmechanik im Detail, Bruchmechanik und Kontinuumsmechanik. Wer dort hinmuss, braucht ohnehin FEM und Fachliteratur; der Abschnitt <a href="konstruktion.html#fem">FEM verstehen</a> zeigt, wo die Grenze verläuft.</p>
+
+<div class="warn"><b>Wichtig zur Einordnung:</b> Die Formeln und Richtwerte hier tragen Konstruktionen im Hobby- und Prototypenbereich. Für tragende Bauteile, Maschinen mit Personengefährdung oder alles unter einer Baurechts- oder CE-Pflicht gelten Normen (Eurocode, EN ISO 13849, DIN 743) und ein Nachweis durch jemanden, der dafür geradesteht. Diese Seite ersetzt das nicht.</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Dietmar Gross, Werner Hauger, Jörg Schröder, Wolfgang A. Wall, <i>Technische Mechanik 1–3</i>, Springer Vieweg — der Standard an deutschen Hochschulen; Band 1 Statik, Band 2 Elastostatik, Band 3 Kinetik.</li>
+    <li>Herbert Wittel, Dieter Jannasch u. a., <i>Roloff/Matek Maschinenelemente</i>, Springer Vieweg — mit Tabellenbuch; das Nachschlagewerk für Zahlenwerte.</li>
+    <li>Horst Haberhauer, <i>Maschinenelemente</i>, Springer Vieweg — gut lesbare Alternative mit vielen Beispielen.</li>
+    <li><a href="https://ocw.mit.edu/courses/2-001-mechanics-materials-i-fall-2006/">MIT OpenCourseWare 2.001 — Mechanics &amp; Materials I</a>: vollständige Vorlesung mit Aufgaben, frei zugänglich.</li>
+    <li><a href="https://engineeringstatics.org/">Engineering Statics: Open and Interactive</a> (Baker/Haynes, CC BY-NC-SA) — freies, interaktives Statik-Lehrbuch.</li>
+  </ul>
+</div>

@@ -1,0 +1,88 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Jede Masse an einer Feder schwingt, und jede Maschine ist eine Masse an einer Feder.</b> Die Eigenfrequenz hängt nur von Steifigkeit und Masse ab. Kommt eine Erregung in ihre Nähe, wachsen die Amplituden — bei geringer Dämpfung um ein Vielfaches.</div>
+
+<h2>Eigenfrequenz</h2>
+<div class="fbox">
+  <span class="f">f₀ = (1 / 2π) · √(c / m)&nbsp;&nbsp;&nbsp;&nbsp;f₀ = (1 / 2π) · √(c_t / J)  (Torsion)</span>
+  <span class="l">c ist die Steifigkeit in N/m, m die Masse in kg. Vierfache Steifigkeit verdoppelt die Eigenfrequenz — genau wie ein Viertel der Masse.</span>
+</div>
+<p>Für einen Biegebalken lässt sich c direkt aus der Durchbiegung ableiten: <span class="formula">c = F / f</span>. Ein Ausleger, der sich unter 100 N um 0,5 mm biegt, hat 200 N/mm = 200 000 N/m. Mit 5 kg Masse am Ende ergibt das rund 32 Hz — und liegt damit gefährlich nah an vielen Antriebsfrequenzen.</p>
+
+<h2>Resonanz und Dämpfung</h2>
+<div class="grid2">
+  <div>
+    <svg class="dg" viewBox="0 0 320 200" role="img" aria-label="Vergrößerungsfunktion über dem Frequenzverhältnis für drei Dämpfungsgrade">
+      <path class="ax" d="M40,170 H300 M40,170 V20" />
+      <path class="gl" d="M40,140 H300 M130,20 V170" />
+      <path class="acc" d="M40,140 C70,142 100,150 118,160 C126,166 128,168 130,30 C132,60 140,110 160,130 C200,152 250,160 300,163" />
+      <path class="accs" d="M40,140 C70,142 100,148 118,152 C126,155 130,60 134,80 C150,120 200,150 300,161" />
+      <path class="f" d="M40,140 C80,141 110,143 130,132 C170,140 230,155 300,160" />
+      <text class="lbla" x="300" y="188" text-anchor="end">Erregerfrequenz / f₀</text>
+      <text class="lbl" x="126" y="184" text-anchor="middle">1</text>
+      <text class="lbl" x="34" y="145" text-anchor="end">1</text>
+      <text class="lbl" x="140" y="34">D = 0,02</text>
+      <text class="lbl" x="196" y="96">D = 0,1</text>
+      <text class="lbl" x="214" y="130">D = 0,5</text>
+    </svg>
+  </div>
+  <div>
+    <p>Der Dämpfungsgrad D entscheidet, wie hoch die Resonanzspitze wird. Bei D = 0,02 (blanker Stahl, verschraubt) beträgt die Überhöhung rund das <b>25-fache</b>, bei D = 0,1 nur noch das Fünffache.</p>
+    <ul>
+      <li><b>Weit unterhalb f₀</b> — die Struktur folgt der Erregung, Verhältnis nahe 1.</li>
+      <li><b>Bei f₀</b> — Resonanz. Vergrößerung ≈ 1/(2·D).</li>
+      <li><b>Weit oberhalb f₀</b> — die Masse kann nicht mehr folgen, die Erregung wird isoliert. Ab dem <b>1,41-fachen</b> von f₀ beginnt echte Isolation.</li>
+    </ul>
+    <p>Für Schwingungsisolierung heißt das: Die Aufstellung muss so <em>weich</em> sein, dass f₀ deutlich unter der Störfrequenz liegt — mindestens Faktor 3.</p>
+  </div>
+</div>
+
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>System</th><th data-s="num">Dämpfungsgrad D</th><th>Überhöhung bei Resonanz</th></tr></thead>
+<tbody>
+<tr><td>Geschweißte Stahlstruktur</td><td>0,005 – 0,02</td><td>25 – 100 ×</td></tr>
+<tr><td>Verschraubte Struktur (Reibung in den Fugen)</td><td>0,02 – 0,05</td><td>10 – 25 ×</td></tr>
+<tr><td>Graugussmaschinenbett</td><td>0,02 – 0,04</td><td>12 – 25 ×</td></tr>
+<tr><td>Elastomerlager, Gummipuffer</td><td>0,05 – 0,15</td><td>3 – 10 ×</td></tr>
+<tr><td>Mineralguss / Polymerbeton</td><td>0,03 – 0,08</td><td>6 – 17 ×</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kritische Drehzahl von Wellen</h2>
+<p>Eine rotierende Welle mit Unwucht wird bei ihrer Biegeeigenfrequenz instabil — das ist die kritische Drehzahl. Die Faustregel lautet: Betriebsdrehzahl entweder unter 0,7 · n_krit oder über 1,3 · n_krit halten, den Bereich dazwischen zügig durchfahren.</p>
+<div class="fbox">
+  <span class="f">n_krit ≈ 946 / √f&nbsp;&nbsp;[min⁻¹]</span>
+  <span class="l">Näherung nach Dunkerley mit der statischen Durchbiegung f in mm unter Eigengewicht. Für die lange Trapezspindel im 3D-Drucker der Grund, warum sie ab einer bestimmten Drehzahl zu peitschen anfängt.</span>
+</div>
+
+<h2>Was in der Praxis hilft</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Gegen Resonanz</h4>
+    <ul>
+      <li><b>Verstimmen</b> — Steifigkeit oder Masse ändern, bis f₀ weit genug weg ist. Meist der wirksamste Eingriff.</li>
+      <li><b>Steifer bauen</b> — kürzere Spannweiten, geschlossene Profile, Rippen. Verschiebt f₀ nach oben.</li>
+      <li><b>Dämpfung einbringen</b> — Elastomerlager, Sandfüllung in Hohlprofilen, Constrained-Layer-Dämpfung.</li>
+      <li><b>Drehzahlbereich sperren</b> — in der Steuerung kritische Drehzahlen ausblenden.</li>
+      <li><b>Ruckbegrenzte Profile</b> — regen die Eigenfrequenz gar nicht erst an.</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Was nicht hilft</h4>
+    <ul>
+      <li><b>Mehr Masse ohne mehr Steifigkeit</b> — senkt f₀ und rückt sie oft näher an die Erregung.</li>
+      <li><b>Festeren Stahl nehmen</b> — E ist bei allen Stählen gleich, die Eigenfrequenz ändert sich nicht.</li>
+      <li><b>Die Erregung ignorieren</b> — Unwucht, Zahneingriff und Riemenzähne erzeugen feste Frequenzen, die sich rechnen lassen.</li>
+      <li><b>Härter anziehen</b> — bringt etwas Reibungsdämpfung, verschiebt f₀ aber kaum.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 3: Kinetik</i> — Kapitel Schwingungen, Vergrößerungsfunktion, Dämpfung.</li>
+    <li>DIN ISO 10816 / ISO 20816 — Bewertung der Schwingungen von Maschinen; Grenzwerte für Schwinggeschwindigkeiten.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — Kapitel Achsen und Wellen: kritische Drehzahlen nach Dunkerley.</li>
+    <li>Der Zusammenhang zwischen Eigenfrequenz und Reglerbandbreite steht im Abschnitt <a href="regelungstechnik.html#praxis">Regelungstechnik: Praxis</a>.</li>
+  </ul>
+</div>

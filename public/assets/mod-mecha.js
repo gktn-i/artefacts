@@ -1,9 +1,10 @@
 /* ============================================================================
    MECHATRONIK-HUB · gemeinsames Modul-Skript
-   Alle zwoelf Module des Hubs laden diese Datei. Jeder Baustein prueft zuerst,
-   ob seine Elemente auf der Seite ueberhaupt vorkommen — was fehlt, kostet
-   nichts. Inhalte stehen im HTML (Pagefind-Volltext, Betrieb ohne JS);
-   hier liegt nur Verhalten: Falten, Filtern, Sortieren, Rechnen, Simulieren.
+   Alle Module des Mechatronik-Hubs und die Technik-Module der Werkstatt laden
+   diese Datei. Jeder Baustein prueft zuerst, ob seine Elemente auf der Seite
+   ueberhaupt vorkommen — was fehlt, kostet nichts. Inhalte stehen im HTML
+   (Pagefind-Volltext, Betrieb ohne JS); hier liegt nur Verhalten: Falten,
+   Filtern, Sortieren, Rechnen, Simulieren.
    ========================================================================== */
 (function () {
 "use strict";
@@ -595,6 +596,254 @@ var CALC = {
     return { out: sig(res, 6) + "  (Basiswert: " + (val * from).toExponential(4) + ")",
       hint: "Vorsätze sind reine Zehnerpotenzen. In Datenblättern ist µ oft als „u“ geschrieben, "
         + "weil das Zeichen im ASCII fehlt." };
+  },
+
+  /* ------------------------------------------------------------------
+     MECHANIK
+     ------------------------------------------------------------------ */
+
+  /* --- Querschnittswerte und Biegebalken --------------------------------
+     Flaechentraegheitsmoment I, Widerstandsmoment W, Biegespannung und
+     Durchbiegung fuer die vier Lastfaelle, die im Alltag vorkommen. --- */
+  balken: function (v, el) {
+    var form = ($("[data-k='form']", el) || {}).value || "rechteck";
+    var fall = ($("[data-k='fall']", el) || {}).value || "kragarm-f";
+    var a = v.a, b = v.b, L = v.laenge, E = v.e, F = v.f;
+    if (!isFinite(a)) return { out: "Abmessungen eintragen." };
+    var A, I, W, Wt = NaN, hoch;
+    if (form === "rechteck") {
+      if (!isFinite(b)) return { out: "Breite und Höhe eintragen." };
+      A = a * b; I = a * b * b * b / 12; W = a * b * b / 6; hoch = b;
+    } else if (form === "rund") {
+      A = Math.PI / 4 * a * a; I = Math.PI * Math.pow(a, 4) / 64; W = Math.PI * a * a * a / 32;
+      Wt = 2 * W; hoch = a;
+    } else if (form === "rohr") {
+      if (!isFinite(b) || b >= a) return { out: "Innendurchmesser muss kleiner als der Außendurchmesser sein." };
+      A = Math.PI / 4 * (a * a - b * b);
+      I = Math.PI * (Math.pow(a, 4) - Math.pow(b, 4)) / 64;
+      W = 2 * I / a; Wt = 2 * W; hoch = a;
+    } else {                                   /* Quadratrohr: a aussen, b Wand */
+      if (!isFinite(b) || 2 * b >= a) return { out: "Wandstärke muss kleiner als die halbe Kantenlänge sein." };
+      var i2 = a - 2 * b;
+      A = a * a - i2 * i2;
+      I = (Math.pow(a, 4) - Math.pow(i2, 4)) / 12;
+      W = 2 * I / a; hoch = a;
+    }
+    var geo = "A = " + sig(A, 4) + " mm²  ·  I = " + sig(I, 4) + " mm⁴  ·  W = " + sig(W, 4) + " mm³"
+      + (isFinite(Wt) ? "  ·  W_t = " + sig(Wt, 4) + " mm³" : "");
+    if (!isFinite(L) || !isFinite(F)) {
+      return { out: geo, hint: "Länge, Last und E-Modul ergänzen, dann kommen Biegespannung und Durchbiegung dazu. "
+        + "I und W gelten für Biegung um die Achse senkrecht zur Höhe " + sig(hoch, 3) + " mm." };
+    }
+    /* Momente und Durchbiegung je Lastfall; F in N, Streckenlast q in N/mm */
+    var M, f, txt;
+    if (fall === "kragarm-f")      { M = F * L;          f = F * L * L * L / (3 * E * I);        txt = "Kragarm, Einzellast am Ende"; }
+    else if (fall === "kragarm-q") { M = F * L / 2;      f = F * L * L * L / (8 * E * I);        txt = "Kragarm, Streckenlast"; }
+    else if (fall === "traeger-f") { M = F * L / 4;      f = F * L * L * L / (48 * E * I);       txt = "Träger auf zwei Stützen, Last in der Mitte"; }
+    else                           { M = F * L / 8;      f = 5 * F * L * L * L / (384 * E * I);  txt = "Träger auf zwei Stützen, Streckenlast"; }
+    /* Bei den Streckenlastfaellen ist F die Gesamtlast, nicht q — so ist es
+       vergleichbar und der Nutzer muss nicht umrechnen. */
+    var sigma = M / W;
+    return {
+      out: geo + "  ‖  M_max = " + sig(M / 1000, 4) + " Nm  ·  σ_b = " + sig(sigma, 3) + " N/mm²  ·  f = " + sig(f, 3) + " mm",
+      hint: txt + ". Gesamtlast " + sig(F, 3) + " N über " + sig(L, 3) + " mm. Die Durchbiegung wächst mit der "
+        + "dritten Potenz der Länge und sinkt linear mit I — doppelte Höhe eines Rechtecks bringt achtfache "
+        + "Steifigkeit, doppelte Breite nur die doppelte. Für Stahl ist E = 210000 N/mm², für Aluminium 70000, "
+        + "für PLA rund 3500. Zulässig ist σ_b höchstens Streckgrenze geteilt durch den Sicherheitsfaktor."
+    };
+  },
+
+  /* --- Knicken nach Euler --- */
+  knick: function (v, el) {
+    var fall = ($("[data-k='fall']", el) || {}).value || "2";
+    var beta = { "1": 2, "2": 1, "3": 0.699, "4": 0.5 }[fall];
+    var E = v.e, I = v.i, L = v.laenge, A = v.a;
+    if (!isFinite(E) || !isFinite(I) || !isFinite(L)) return { out: "E-Modul, Flächenträgheitsmoment und Länge eintragen." };
+    var Lk = beta * L;
+    var Fk = Math.PI * Math.PI * E * I / (Lk * Lk);
+    var s = "L_k = " + sig(Lk, 4) + " mm  ·  F_krit = " + sig(Fk, 3) + " N  (" + sig(Fk / 1000, 3) + " kN)";
+    var hint = "Eulerfall " + fall + ", Knicklängenbeiwert β = " + beta + ". ";
+    if (isFinite(A) && A > 0) {
+      var i = Math.sqrt(I / A);
+      var lam = Lk / i;
+      s += "  ·  λ = " + sig(lam, 3);
+      hint += "Trägheitsradius i = " + sig(i, 3) + " mm, Schlankheitsgrad λ = " + sig(lam, 3) + ". "
+        + "Die Eulerformel gilt nur im elastischen Bereich: für Baustahl S235 ab λ ≈ 104, für Aluminium ab "
+        + "λ ≈ 60. Darunter versagt der Stab durch Fließen, nicht durch Knicken — dann mit Tetmajer oder "
+        + "Omega-Verfahren rechnen. ";
+    }
+    hint += "Knicken kündigt sich nicht an, deshalb sind hier Sicherheitsfaktoren von 3 bis 5 üblich. "
+      + "Doppelte Länge viertelt die Knicklast; eine Abstützung in der Mitte vervierfacht sie.";
+    return { out: s, hint: hint };
+  },
+
+  /* --- Schraubenvorspannung und Anziehdrehmoment (VDI 2230, vereinfacht) --- */
+  schraube: function (v, el) {
+    var SZ = {
+      M3:  { d2: 2.675,  d3: 2.387,  P: 0.5,  Dkm: 4.0 },
+      M4:  { d2: 3.545,  d3: 3.141,  P: 0.7,  Dkm: 5.2 },
+      M5:  { d2: 4.480,  d3: 4.019,  P: 0.8,  Dkm: 6.2 },
+      M6:  { d2: 5.350,  d3: 4.773,  P: 1.0,  Dkm: 7.75 },
+      M8:  { d2: 7.188,  d3: 6.466,  P: 1.25, Dkm: 10.3 },
+      M10: { d2: 9.026,  d3: 8.160,  P: 1.5,  Dkm: 12.8 },
+      M12: { d2: 10.863, d3: 9.853,  P: 1.75, Dkm: 15.05 },
+      M14: { d2: 12.701, d3: 11.546, P: 2.0,  Dkm: 17.55 },
+      M16: { d2: 14.701, d3: 13.546, P: 2.0,  Dkm: 20.0 },
+      M20: { d2: 18.376, d3: 17.294, P: 2.5,  Dkm: 25.1 }
+    };
+    var RP = { "8.8": 640, "10.9": 940, "12.9": 1100, "70": 450, "A2-70": 450 };
+    var g = ($("[data-k='groesse']", el) || {}).value || "M8";
+    var fk = ($("[data-k='klasse']", el) || {}).value || "8.8";
+    var s = SZ[g], rp = RP[fk];
+    var mu = isFinite(v.mu) ? v.mu : 0.14;
+    if (!s || !rp) return { out: "Größe und Festigkeitsklasse wählen." };
+    if (mu <= 0 || mu > 0.5) return { out: "Reibungszahl zwischen 0,04 und 0,5 eintragen." };
+    var A0 = Math.PI / 4 * s.d3 * s.d3;
+    var t = 1.5 * (s.d2 / s.d3) * (s.P / (Math.PI * s.d2) + 1.155 * mu);
+    var FM = 0.9 * rp * A0 / Math.sqrt(1 + 3 * t * t);
+    var MA = FM * (0.16 * s.P + 0.58 * s.d2 * mu + s.Dkm / 2 * mu) / 1000;
+    return {
+      out: "M_A = " + sig(MA, 3) + " Nm  ·  Vorspannkraft F_M ≈ " + sig(FM / 1000, 3) + " kN",
+      hint: g + " " + fk + " bei Reibungszahl µ = " + sig(mu, 2) + ", 90 % Ausnutzung der Streckgrenze "
+        + "(R_p0,2 = " + rp + " N/mm²), Regelgewinde, Sechskantkopf auf Stahl. Die Reibung entscheidet fast "
+        + "alles: µ = 0,10 (geölt) bringt bei gleichem Moment rund ein Viertel mehr Vorspannkraft, µ = 0,20 "
+        + "(trocken, rau) ein Viertel weniger. Nur etwa 10 % des Moments landen als Vorspannung im Bolzen, "
+        + "der Rest ist Reibung unter Kopf und im Gewinde. Für sicherheitsrelevante Verbindungen gilt die "
+        + "Herstellerangabe oder die vollständige Rechnung nach VDI 2230, nicht dieser Überschlag."
+    };
+  },
+
+  /* --- ISO-286-Passung, Einheitsbohrung --- */
+  passung: function (v, el) {
+    /* Nennmassbereiche in mm (Obergrenzen), fein genug fuer r und s */
+    var R = [3, 6, 10, 18, 30, 50, 65, 80, 100, 120];
+    var IT = {
+      5:  [4, 5, 6, 8, 9, 11, 13, 13, 15, 15],
+      6:  [6, 8, 9, 11, 13, 16, 19, 19, 22, 22],
+      7:  [10, 12, 15, 18, 21, 25, 30, 30, 35, 35],
+      8:  [14, 18, 22, 27, 33, 39, 46, 46, 54, 54],
+      9:  [25, 30, 36, 43, 52, 62, 74, 74, 87, 87],
+      10: [40, 48, 58, 70, 84, 100, 120, 120, 140, 140],
+      11: [60, 75, 90, 110, 130, 160, 190, 190, 220, 220]
+    };
+    /* Grundabmasse Welle: a..h oberes Abmass es, j..z unteres Abmass ei */
+    var DEV = {
+      e: [-14, -20, -25, -32, -40, -50, -60, -60, -72, -72],
+      f: [-6, -10, -13, -16, -20, -25, -30, -30, -36, -36],
+      g: [-2, -4, -5, -6, -7, -9, -10, -10, -12, -12],
+      h: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      k: [1, 1, 1, 1, 2, 2, 2, 2, 3, 3],
+      m: [2, 4, 6, 7, 8, 9, 11, 11, 13, 13],
+      n: [4, 8, 10, 12, 15, 17, 20, 20, 23, 23],
+      p: [6, 12, 15, 18, 22, 26, 32, 32, 37, 37],
+      r: [10, 15, 19, 23, 28, 34, 41, 43, 51, 54],
+      s: [14, 19, 23, 28, 35, 43, 53, 59, 71, 79]
+    };
+    var d = v.d;
+    var bohr = ($("[data-k='bohrung']", el) || {}).value || "H7";
+    var well = ($("[data-k='welle']", el) || {}).value || "g6";
+    if (!isFinite(d) || d <= 0) return { out: "Nennmaß in mm eintragen." };
+    if (d > 120) return { out: "Diese Tabelle deckt Nennmaße bis 120 mm ab — darüber ins Normblatt ISO 286-2 schauen." };
+    var idx = 0;
+    while (idx < R.length - 1 && d > R[idx]) idx++;
+    var itB = parseInt(bohr.slice(1), 10), itW = parseInt(well.slice(1), 10);
+    var letter = well[0];
+    if (!IT[itB] || !IT[itW] || !DEV[letter]) return { out: "Diese Paarung ist in der Tabelle nicht hinterlegt." };
+    var TB = IT[itB][idx], TW = IT[itW][idx];
+    var EI = 0, ES = TB;                                        /* Einheitsbohrung H */
+    var es, ei;
+    if ("abcdefgh".indexOf(letter) >= 0) { es = DEV[letter][idx]; ei = es - TW; }
+    else { ei = DEV[letter][idx]; es = ei + TW; }
+    var sMax = ES - ei, sMin = EI - es;                          /* µm; negativ = Übermaß */
+    var art = sMin >= 0 ? "Spielpassung" : (sMax <= 0 ? "Übermaßpassung" : "Übergangspassung");
+    var fmt = function (x) { return (x > 0 ? "+" : "") + x + " µm"; };
+    return {
+      out: "Bohrung " + bohr + ": " + sig(d, 6) + " " + fmt(EI) + " / " + fmt(ES)
+        + "  ·  Welle " + well + ": " + sig(d, 6) + " " + fmt(ei) + " / " + fmt(es)
+        + "  ‖  " + art + ": " + (sMin >= 0 ? "Spiel " + sMin + " … " + sMax + " µm"
+          : (sMax <= 0 ? "Übermaß " + (-sMax) + " … " + (-sMin) + " µm"
+            : "von " + (-sMin) + " µm Übermaß bis " + sMax + " µm Spiel")),
+      hint: "Einheitsbohrung — die Bohrung bleibt H, die Passung wird über die Welle eingestellt; so bleibt "
+        + "der Reibahlen- und Lehrensatz klein. Toleranzfeld der Bohrung " + TB + " µm, der Welle " + TW + " µm. "
+        + "Merkhilfe: H7/g6 gleitet, H7/h6 schiebt sich stramm zusammen, H7/k6 sitzt fest und lässt sich noch "
+        + "auspressen, H7/p6 und H7/s6 sind Presssitze und brauchen Kraft oder Temperaturunterschied. "
+        + "Wälzlager sind die Ausnahme: dort gibt der Lagerhersteller Welle und Gehäuse direkt vor."
+    };
+  },
+
+  /* --- Waelzlager: nominelle Lebensdauer L10 --- */
+  lager: function (v, el) {
+    var typ = ($("[data-k='typ']", el) || {}).value || "kugel";
+    var p = typ === "rolle" ? 10 / 3 : 3;
+    var C = v.c, P = v.p, n = v.n;
+    if (!isFinite(C) || !isFinite(P) || P <= 0) return { out: "Tragzahl C und Belastung P eintragen." };
+    var L10 = Math.pow(C / P, p);                                 /* in 10^6 Umdrehungen */
+    var s = "L₁₀ = " + sig(L10, 3) + " · 10⁶ Umdrehungen";
+    var hint = "Exponent p = " + (typ === "rolle" ? "10/3 (Rollenlager)" : "3 (Kugellager)") + ". "
+      + "L₁₀ heißt: 90 % der Lager erreichen diese Laufleistung, 10 % fallen vorher aus. ";
+    if (isFinite(n) && n > 0) {
+      var h = L10 * 1e6 / (60 * n);
+      s += "  ·  L₁₀h = " + sig(h, 3) + " h  (" + sig(h / 24, 3) + " Tage Dauerlauf)";
+      hint += "Bei " + sig(n, 4) + " min⁻¹ sind das " + sig(h, 3) + " Betriebsstunden. Richtwerte: "
+        + "Haushaltsgeräte 1000–2000 h, Elektrowerkzeuge 500–1000 h, Werkzeugmaschinen 20000 h, "
+        + "Getriebe im Dauerbetrieb 30000 h und mehr. ";
+    }
+    hint += "C ist die dynamische Tragzahl aus dem Katalog, P die äquivalente Belastung aus Radial- und "
+      + "Axialanteil (P = X·F_r + Y·F_a). Verdoppelte Last bedeutet beim Kugellager ein Achtel der Lebensdauer. "
+      + "Schmierung, Verschmutzung und Fluchtungsfehler ändern das Ergebnis in der Praxis stärker als die Rechnung.";
+    return { out: s, hint: hint };
+  },
+
+  /* --- Waermedehnung und Zwangsspannung --- */
+  dehnung: function (v, el) {
+    var MAT = {
+      stahl: ["Baustahl", 12, 210000], edelstahl: ["Edelstahl A2/A4", 16, 200000],
+      guss: ["Grauguss", 10, 110000], alu: ["Aluminium", 23, 70000],
+      messing: ["Messing", 19, 100000], kupfer: ["Kupfer", 17, 120000],
+      titan: ["Titan", 8.6, 110000], invar: ["Invar", 1.2, 145000],
+      glas: ["Borosilikatglas", 3.3, 64000], beton: ["Beton", 12, 30000],
+      pla: ["PLA", 68, 3500], petg: ["PETG", 60, 2100], abs: ["ABS/ASA", 90, 2200],
+      nylon: ["Nylon (PA)", 90, 2000], pc: ["Polycarbonat", 65, 2300]
+    };
+    var k = ($("[data-k='mat']", el) || {}).value || "stahl";
+    var m = MAT[k];
+    var L = v.laenge, dT = v.dt;
+    if (!m) return { out: "Werkstoff wählen." };
+    if (!isFinite(L) || !isFinite(dT)) return { out: "Länge und Temperaturänderung eintragen." };
+    var dL = m[1] * 1e-6 * L * dT;
+    var sp = m[2] * m[1] * 1e-6 * dT;
+    return {
+      out: "ΔL = " + sig(dL, 3) + " mm  ·  α = " + m[1] + " · 10⁻⁶/K  ·  bei voller Behinderung σ = " + sig(Math.abs(sp), 3) + " N/mm²",
+      hint: m[0] + ", " + sig(L, 4) + " mm bei " + sig(dT, 3) + " K Temperaturänderung. Die Zwangsspannung "
+        + "hängt nicht von der Länge ab, nur von α, E und ΔT — ein eingespannter Stahlträger baut schon bei "
+        + "40 K rund 100 N/mm² auf, mehr als ein Drittel der Streckgrenze von S235. Deshalb Loslager, "
+        + "Langlöcher und Dehnfugen. Bei Materialpaarungen zählt die Differenz der Ausdehnungskoeffizienten: "
+        + "Aluminium auf Stahl macht 11 · 10⁻⁶/K aus, ein gedrucktes Teil auf Aluminium das Vierfache davon."
+    };
+  },
+
+  /* --- Zerspanung: Schnittgeschwindigkeit, Drehzahl, Vorschub --- */
+  zerspanung: function (v) {
+    var vc = v.vc, d = v.d, z = v.z, fz = v.fz, ap = v.ap, ae = v.ae;
+    if (!isFinite(vc) || !isFinite(d) || d <= 0) return { out: "Schnittgeschwindigkeit und Werkzeugdurchmesser eintragen." };
+    var n = vc * 1000 / (Math.PI * d);
+    var s = "n = " + sig(n, 4) + " min⁻¹";
+    var hint = "v_c = π · d · n / 1000. Richtwerte für HSS: Baustahl 25–35, Aluminium 60–120, Messing 60–90, "
+      + "Kunststoff 100–200 m/min. Für Hartmetall etwa das Drei- bis Fünffache, beschichtet noch mehr. ";
+    if (isFinite(z) && isFinite(fz) && z > 0) {
+      var vf = n * z * fz;
+      s += "  ·  v_f = " + sig(vf, 4) + " mm/min";
+      hint += "Vorschub v_f = n · z · f_z, hier " + z + " Schneiden mit " + sig(fz, 3) + " mm Zahnvorschub. ";
+      if (isFinite(ap) && isFinite(ae)) {
+        var Q = ap * ae * vf / 1000;
+        s += "  ·  Q = " + sig(Q, 3) + " cm³/min";
+        hint += "Zeitspanvolumen Q = a_p · a_e · v_f, ein guter Vergleichswert für die Belastung von Spindel "
+          + "und Maschine. ";
+      }
+    }
+    hint += "Zu kleiner Zahnvorschub ist gefährlicher als zu großer: die Schneide reibt statt zu schneiden, "
+      + "wird heiß und stumpf. Beim Bohren gilt f in mm/Umdrehung statt pro Zahn.";
+    return { out: s, hint: hint };
   }
 };
 

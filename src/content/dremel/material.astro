@@ -14,30 +14,39 @@ import "./_style.css";
 </div>
 
 <div class="tbl-wrap">
-<table id="t-mat">
+<table style="min-width:760px">
 <thead><tr>
-<th data-k="mat">Material<span class="ar"></span></th>
-<th data-k="rpm">Drehzahl<span class="ar"></span></th>
-<th data-k="op">Typische Arbeit</th>
-<th data-k="hint">Hinweis</th>
+<th data-s="text">Material</th>
+<th data-s="num">Drehzahl</th>
+<th>Typische Arbeit</th>
+<th>Hinweis</th>
 </tr></thead>
 <tbody>
-<tr><td>Weichholz</td><td data-v="22500"><span class="sp s-high">20–25k</span></td><td>Fräsen, Schnitzen, Formen</td><td>Höhere Drehzahl gibt saubere Schnitte</td></tr>
-<tr><td>Hartholz</td><td data-v="27000"><span class="sp s-high">25–30k</span></td><td>Fräsen, Bohren, Schleifen</td><td>Hart = hohe Drehzahl, Vorschub gering halten</td></tr>
-<tr><td>MDF / Sperrholz</td><td data-v="25000"><span class="sp s-high">22–28k</span></td><td>Fräsen, Schneiden</td><td>Staubt stark, Absaugung/Maske</td></tr>
-<tr><td>Acryl / PMMA</td><td data-v="12000"><span class="sp s-mid">10–15k</span></td><td>Schneiden, Schleifen</td><td>Schmilzt leicht, langsam + leichter Druck</td></tr>
-<tr><td>Kunststoff allg. (PLA, ABS, PET)</td><td data-v="9000"><span class="sp s-low">5–12k</span></td><td>Entgraten, Schneiden</td><td>Niedrig starten, bei Schmelze runter</td></tr>
-<tr><td>PVC / Rohr</td><td data-v="12000"><span class="sp s-mid">10–15k</span></td><td>Trennen</td><td>Wenig Druck, sonst schmilzt der Schnitt zu</td></tr>
-<tr><td>Aluminium</td><td data-v="17500"><span class="sp s-mid">15–20k</span></td><td>Trennen, Schleifen, Entgraten</td><td>Schmiermittel (Paraffin) gegen Zusetzen</td></tr>
-<tr><td>Messing / Kupfer</td><td data-v="17500"><span class="sp s-mid">15–20k</span></td><td>Trennen, Polieren, Gravieren</td><td>Weiche NE-Metalle, mittlere Drehzahl</td></tr>
-<tr><td>Stahl / Eisen</td><td data-v="28000"><span class="sp s-high">25–30k</span></td><td>Trennen, Schleifen, Entgraten</td><td>Hartmetall = volle Drehzahl; HSS langsamer</td></tr>
-<tr><td>Edelstahl</td><td data-v="28000"><span class="sp s-high">25–30k</span></td><td>Trennen, Schleifen</td><td>Pausen einlegen, wird heiß</td></tr>
-<tr><td>Edelmetall (Gold/Silber)</td><td data-v="9000"><span class="sp s-low">5–12k</span></td><td>Polieren, Feinarbeit</td><td>Niedrig, sonst Hitzeschaden</td></tr>
-<tr><td>Glas</td><td data-v="20000"><span class="sp s-high">18–25k</span></td><td>Gravieren, Schleifen (Diamant)</td><td>Nur Diamantbits, mit Wasser kühlen</td></tr>
-<tr><td>Keramik / Fliese</td><td data-v="25000"><span class="sp s-high">22–28k</span></td><td>Schneiden, Schleifen (Diamant)</td><td>Diamant-/Hartmetall, kühlen</td></tr>
-<tr><td>Stein / Beton</td><td data-v="25000"><span class="sp s-high">22–28k</span></td><td>Schleifen, Gravieren</td><td>Diamant/Siliziumkarbid</td></tr>
-<tr><td>Platine / PCB (FR4)</td><td data-v="15000"><span class="sp s-mid">12–18k</span></td><td>Trennen, Bohren</td><td>Glasfaser stumpft Bits schnell ab</td></tr>
+<tr><td><b>Weichholz</b></td><td data-v="22500"><span class="sp s-high">20–25k</span></td><td>Fräsen, Schnitzen, Formen</td><td>Höhere Drehzahl gibt saubere Schnitte</td></tr>
+<tr><td><b>Hartholz</b></td><td data-v="27000"><span class="sp s-high">25–30k</span></td><td>Fräsen, Bohren, Schleifen</td><td>Hart = hohe Drehzahl, Vorschub gering halten</td></tr>
+<tr><td><b>MDF / Sperrholz</b></td><td data-v="25000"><span class="sp s-high">22–28k</span></td><td>Fräsen, Schneiden</td><td>Staubt stark, Absaugung/Maske</td></tr>
+<tr><td><b>Acryl / PMMA</b></td><td data-v="12000"><span class="sp s-mid">10–15k</span></td><td>Schneiden, Schleifen</td><td>Schmilzt leicht, langsam + leichter Druck</td></tr>
+<tr><td><b>Kunststoff allg. (PLA, ABS, PET)</b></td><td data-v="9000"><span class="sp s-low">5–12k</span></td><td>Entgraten, Schneiden</td><td>Niedrig starten, bei Schmelze runter</td></tr>
+<tr><td><b>PVC / Rohr</b></td><td data-v="12000"><span class="sp s-mid">10–15k</span></td><td>Trennen</td><td>Wenig Druck, sonst schmilzt der Schnitt zu</td></tr>
+<tr><td><b>Aluminium</b></td><td data-v="17500"><span class="sp s-mid">15–20k</span></td><td>Trennen, Schleifen, Entgraten</td><td>Schmiermittel (Paraffin) gegen Zusetzen</td></tr>
+<tr><td><b>Messing / Kupfer</b></td><td data-v="17500"><span class="sp s-mid">15–20k</span></td><td>Trennen, Polieren, Gravieren</td><td>Weiche NE-Metalle, mittlere Drehzahl</td></tr>
+<tr><td><b>Stahl / Eisen</b></td><td data-v="28000"><span class="sp s-high">25–30k</span></td><td>Trennen, Schleifen, Entgraten</td><td>Hartmetall = volle Drehzahl; HSS langsamer</td></tr>
+<tr><td><b>Edelstahl</b></td><td data-v="28000"><span class="sp s-high">25–30k</span></td><td>Trennen, Schleifen</td><td>Pausen einlegen, wird heiß</td></tr>
+<tr><td><b>Edelmetall (Gold/Silber)</b></td><td data-v="9000"><span class="sp s-low">5–12k</span></td><td>Polieren, Feinarbeit</td><td>Niedrig, sonst Hitzeschaden</td></tr>
+<tr><td><b>Glas</b></td><td data-v="20000"><span class="sp s-high">18–25k</span></td><td>Gravieren, Schleifen (Diamant)</td><td>Nur Diamantbits, mit Wasser kühlen</td></tr>
+<tr><td><b>Keramik / Fliese</b></td><td data-v="25000"><span class="sp s-high">22–28k</span></td><td>Schneiden, Schleifen (Diamant)</td><td>Diamant-/Hartmetall, kühlen</td></tr>
+<tr><td><b>Stein / Beton</b></td><td data-v="25000"><span class="sp s-high">22–28k</span></td><td>Schleifen, Gravieren</td><td>Diamant/Siliziumkarbid</td></tr>
+<tr><td><b>Platine / PCB (FR4)</b></td><td data-v="15000"><span class="sp s-mid">12–18k</span></td><td>Trennen, Bohren</td><td>Glasfaser stumpft Bits schnell ab</td></tr>
 </tbody>
 </table>
 </div>
-<div class="note"><b>Faustregeln:</b> Plastik & Schmelzendes → langsam · Bürsten/Polieren → max. 15k · Hartholz, Metall, Glas → hoch · Bohren → hoch. Lass die Drehzahl arbeiten, nicht den Druck.</div>
+<div class="tip"><b>Faustregeln:</b> Plastik & Schmelzendes → langsam · Bürsten/Polieren → max. 15k · Hartholz, Metall, Glas → hoch · Bohren → hoch. Lass die Drehzahl arbeiten, nicht den Druck.</div>
+
+<div class="srcs">
+  <div class="sh">Woher die Werte stammen</div>
+  <ul>
+    <li><a href="https://www.dremel.com/de/de/">Dremel — Drehzahltabelle und Bedienungsanleitung 8250</a>: die Herstellerangaben je Material und Zubehör.</li>
+    <li>Abgeglichen mit den Aufdrucken auf den Zubehörverpackungen; bei Abweichung gilt immer die niedrigere Angabe.</li>
+    <li>Die Grundlagen zur Schnittgeschwindigkeit und zum Zusammenhang von Drehzahl und Werkzeugdurchmesser stehen unter <a href="konstruktion.html#fertigung">Fertigungsverfahren &amp; DFM</a>.</li>
+  </ul>
+</div>

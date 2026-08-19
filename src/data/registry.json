@@ -398,8 +398,8 @@
        "name": "Maker-Komponenten",
        "icon": "🔩",
        "kind": "Datenbank",
-       "updated": "2026-03-02",
-       "desc": "Schrauben, Muttern, Lager, Profile, Magnete und Klebstoffe mit Normen, Größen und Auswahlhilfe — dazu Drehmoment- und Gewindetabellen.",
+       "updated": "2026-08-19",
+       "desc": "Schrauben, Muttern, Lager, Profile, Federn, Magnete und Klebstoffe mit Normen, Größen und Auswahlhilfe — dazu Anziehdrehmomente sowie Kernloch- und Durchgangsbohrungen.",
        "tags": [
         "schrauben",
         "normteile",
@@ -424,6 +424,10 @@
          "h": "glossar",
          "t": "Glossar"
         }
+       ],
+       "related": [
+        "maschinenelemente",
+        "konstruktion"
        ]
       },
       {
@@ -432,8 +436,8 @@
        "name": "Maschinenbau",
        "icon": "📐",
        "kind": "Cheatsheet",
-       "updated": "2026-03-20",
-       "desc": "Kernkonzepte, Formeln, Werkstoffkennwerte und Do's & Don'ts für Festigkeit, Statik, Toleranzen und Antriebe.",
+       "updated": "2026-08-19",
+       "desc": "Kernkonzepte, Formelsammlung, Werkstoffkennwerte und Do's & Don'ts für Festigkeit, Statik, Bewegung, Toleranzen, Fertigung und Antriebe — als schnelles Nachschlagewerk für die Werkstatt.",
        "tags": [
         "formeln",
         "festigkeit",
@@ -463,7 +467,10 @@
         }
        ],
        "related": [
-        "maker-komponenten"
+        "maker-komponenten",
+        "technische-mechanik",
+        "werkstoffkunde",
+        "konstruktion"
        ]
       },
       {
@@ -472,32 +479,76 @@
        "name": "Dremel 8250",
        "icon": "🌀",
        "kind": "Cheatsheet",
-       "updated": "2026-06-26",
-       "desc": "Drehzahl nach Material und Aufsatz, Bits mit Erkennungsmerkmalen und die Grenzen, die man nicht überschreitet.",
+       "updated": "2026-08-19",
+       "desc": "Drehzahl nach Material und Aufsatz, der Zubehörkatalog mit Erkennungsmerkmalen, Arbeitstechniken für Trennen, Schleifen, Gravieren, Polieren und Bohren — und die Grenzen, die man nicht überschreitet.",
        "tags": [
+        "dremel",
+        "8250",
+        "multifunktionswerkzeug",
         "drehzahl",
-        "rpm",
-        "bits",
-        "schleifen",
-        "fräsen"
+        "spannzange",
+        "trennscheibe",
+        "schleifstein",
+        "diamantbit",
+        "fräser",
+        "polieren",
+        "gravieren",
+        "bohren",
+        "ez lock"
        ],
        "sections": [
         {
-         "h": "material",
-         "t": "Drehzahl × Material"
+         "h": "start",
+         "t": "Start & Grundregeln"
         },
         {
-         "h": "bits",
-         "t": "Bits & Aufsätze"
+         "h": "basics",
+         "t": "Grundlagen & Sicherheit"
+        },
+        {
+         "h": "material",
+         "t": "Drehzahl × Material"
         },
         {
          "h": "aufsatz",
          "t": "Drehzahl × Aufsatz"
         },
         {
-         "h": "basics",
-         "t": "Grundlagen & Sicherheit"
+         "h": "bits",
+         "t": "Bits & Aufsätze"
+        },
+        {
+         "h": "technik",
+         "t": "Arbeitstechniken"
         }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "basics"
+         ]
+        },
+        {
+         "l": "Drehzahl",
+         "sections": [
+          "material",
+          "aufsatz"
+         ]
+        },
+        {
+         "l": "Praxis",
+         "sections": [
+          "bits",
+          "technik"
+         ]
+        }
+       ],
+       "related": [
+        "maker-komponenten",
+        "schmiermittel",
+        "konstruktion"
        ]
       },
       {
@@ -505,25 +556,84 @@
        "file": "schmiermittel-vergleich.html",
        "name": "Schmiermittel",
        "icon": "🛢️",
-       "kind": "Vergleich",
-       "updated": "2026-03-11",
-       "desc": "Öle, Fette, Sprays und Pasten nach Schmierwirkung, Kunststoff­verträglichkeit, Wasserresistenz und Temperaturbereich.",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Öl, Fett, Spray, Paste und Trockenschmierstoff: was sie unterscheidet, welches Mittel an welche Stelle gehört, die Verträglichkeit mit Kunststoffen und Dichtungen — plus eine bewertete Vergleichstabelle über 21 gängige Produkte.",
        "tags": [
-        "fett",
+        "schmiermittel",
         "öl",
+        "fett",
+        "kriechöl",
+        "wd-40",
+        "ballistol",
         "ptfe",
-        "silikon",
-        "kriechöl"
+        "mos2",
+        "silikonöl",
+        "nlgi",
+        "viskosität",
+        "kettenöl",
+        "montagepaste",
+        "kontaktfett",
+        "korrosionsschutz"
        ],
        "sections": [
         {
+         "h": "start",
+         "t": "Start & Auswahl"
+        },
+        {
+         "h": "arten",
+         "t": "Öl, Fett, Paste"
+        },
+        {
          "h": "vergleich",
          "t": "Vergleichstabelle"
+        },
+        {
+         "h": "produkte",
+         "t": "Produkte im Detail"
+        },
+        {
+         "h": "anwendung",
+         "t": "Was womit schmieren"
+        },
+        {
+         "h": "kunststoff",
+         "t": "Kunststoff & Dichtungen"
+        },
+        {
+         "h": "fehler",
+         "t": "Fehler & Sicherheit"
         }
        ],
        "related": [
-        "maker-komponenten",
+        "maschinenelemente",
+        "technische-mechanik",
         "dremel"
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "arten"
+         ]
+        },
+        {
+         "l": "Produkte",
+         "sections": [
+          "vergleich",
+          "produkte"
+         ]
+        },
+        {
+         "l": "Anwenden",
+         "sections": [
+          "anwendung",
+          "kunststoff",
+          "fehler"
+         ]
+        }
        ]
       }
      ]
@@ -598,13 +708,496 @@
    "name": "Mechatronik",
    "icon": "⚙️",
    "file": "hub-mechatronik.html",
-   "tagline": "Elektrotechnik · Elektronik · Informationstechnik · Regelung",
+   "tagline": "Mechanik · Elektronik · Informationstechnik · Regelung",
    "desc": "Das Fach, das Mechanik, Elektronik und Software zu einem Gerät zusammenzieht. Vom ohmschen Gesetz über den Operationsverstärker, den Mikrocontroller und den Regelkreis bis zur fertigen Leiterplatte — mit Lernpfad, Glossar und geprüften Quellen.",
    "accent": {
     "l": "#1e5bb8",
     "d": "#63a9f5"
    },
    "areas": [
+    {
+     "name": "Mechanik & Konstruktion",
+     "modules": [
+      {
+       "id": "technische-mechanik",
+       "file": "technische-mechanik.html",
+       "name": "Technische Mechanik",
+       "icon": "📐",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Die Rechenbasis jeder Konstruktion: Freikörperbild und Gleichgewicht, Schnittgrößen, Spannung und Dehnung, Biegung mit Flächenmomenten, Torsion, Knicken, Kerbwirkung und Dauerfestigkeit, dazu Kinematik, Dynamik, Schwingungen und Reibung.",
+       "tags": [
+        "statik",
+        "freikörperbild",
+        "schnittgrößen",
+        "spannung",
+        "dehnung",
+        "hooke",
+        "biegung",
+        "flächenträgheitsmoment",
+        "widerstandsmoment",
+        "torsion",
+        "knicken",
+        "euler",
+        "kerbwirkung",
+        "vergleichsspannung",
+        "dauerfestigkeit",
+        "wöhler",
+        "kinematik",
+        "dynamik",
+        "trägheitsmoment",
+        "schwingung",
+        "resonanz",
+        "reibung"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "statik",
+         "t": "Statik & Freikörperbild"
+        },
+        {
+         "h": "schnittgroessen",
+         "t": "Schnittgrößen & Lager"
+        },
+        {
+         "h": "spannung",
+         "t": "Spannung, Dehnung, Hooke"
+        },
+        {
+         "h": "biegung",
+         "t": "Biegung & Flächenmomente"
+        },
+        {
+         "h": "torsion",
+         "t": "Torsion & Schub"
+        },
+        {
+         "h": "knicken",
+         "t": "Knicken & Stabilität"
+        },
+        {
+         "h": "kerben",
+         "t": "Kerben & Dauerfestigkeit"
+        },
+        {
+         "h": "kinematik",
+         "t": "Kinematik"
+        },
+        {
+         "h": "dynamik",
+         "t": "Dynamik & Trägheit"
+        },
+        {
+         "h": "schwingungen",
+         "t": "Schwingungen & Resonanz"
+        },
+        {
+         "h": "reibung",
+         "t": "Reibung & Haftung"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start"
+         ]
+        },
+        {
+         "l": "Statik & Festigkeit",
+         "sections": [
+          "statik",
+          "schnittgroessen",
+          "spannung",
+          "biegung",
+          "torsion"
+         ]
+        },
+        {
+         "l": "Versagen",
+         "sections": [
+          "knicken",
+          "kerben"
+         ]
+        },
+        {
+         "l": "Bewegung",
+         "sections": [
+          "kinematik",
+          "dynamik",
+          "schwingungen",
+          "reibung"
+         ]
+        }
+       ],
+       "related": [
+        "maschinenbau",
+        "sensorik-aktorik",
+        "regelungstechnik"
+       ]
+      },
+      {
+       "id": "maschinenelemente",
+       "file": "maschinenelemente.html",
+       "name": "Maschinenelemente",
+       "icon": "🔩",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Die Bauteile, aus denen Mechanik entsteht: Schraubverbindungen mit Vorspannung und Sicherung, Welle-Nabe, Fügeverfahren, Wälz- und Gleitlager mit Passungen, Linearführungen, Zahnräder und Getriebe, Riemen und Spindeln, Federn, Dichtungen und Kupplungen.",
+       "tags": [
+        "schraube",
+        "vorspannung",
+        "anziehdrehmoment",
+        "vdi 2230",
+        "schraubensicherung",
+        "passfeder",
+        "presssitz",
+        "kleben",
+        "nieten",
+        "schweißen",
+        "wälzlager",
+        "gleitlager",
+        "lebensdauer",
+        "linearführung",
+        "zahnrad",
+        "modul",
+        "getriebe",
+        "zahnriemen",
+        "kugelgewindetrieb",
+        "feder",
+        "dichtung",
+        "kupplung"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "schrauben",
+         "t": "Schraubverbindungen"
+        },
+        {
+         "h": "sichern",
+         "t": "Sichern & Montieren"
+        },
+        {
+         "h": "welle-nabe",
+         "t": "Welle-Nabe-Verbindungen"
+        },
+        {
+         "h": "fuegen",
+         "t": "Schweißen, Kleben, Nieten"
+        },
+        {
+         "h": "lager",
+         "t": "Wälz- & Gleitlager"
+        },
+        {
+         "h": "lagerung",
+         "t": "Lagerung & Lagerpassungen"
+        },
+        {
+         "h": "fuehrungen",
+         "t": "Linearführungen"
+        },
+        {
+         "h": "getriebe",
+         "t": "Zahnräder & Getriebe"
+        },
+        {
+         "h": "riemen",
+         "t": "Riemen, Ketten, Spindeln"
+        },
+        {
+         "h": "federn",
+         "t": "Federn & Dämpfung"
+        },
+        {
+         "h": "dichtungen",
+         "t": "Dichtungen & Kupplungen"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start"
+         ]
+        },
+        {
+         "l": "Verbinden",
+         "sections": [
+          "schrauben",
+          "sichern",
+          "welle-nabe",
+          "fuegen"
+         ]
+        },
+        {
+         "l": "Lagern & Führen",
+         "sections": [
+          "lager",
+          "lagerung",
+          "fuehrungen"
+         ]
+        },
+        {
+         "l": "Antreiben",
+         "sections": [
+          "getriebe",
+          "riemen"
+         ]
+        },
+        {
+         "l": "Ergänzen",
+         "sections": [
+          "federn",
+          "dichtungen"
+         ]
+        }
+       ],
+       "related": [
+        "maker-komponenten",
+        "schmiermittel",
+        "sensorik-aktorik"
+       ]
+      },
+      {
+       "id": "werkstoffkunde",
+       "file": "werkstoffkunde.html",
+       "name": "Werkstoffkunde",
+       "icon": "🧱",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Woran man einen Werkstoff erkennt und wie man ihn auswählt: Kennwerte richtig lesen, Stahl und Guss, Aluminium und Buntmetalle, Kunststoffe, Verbund- und Sonderwerkstoffe, Wärmebehandlung, Korrosion und Oberflächenschutz — mit Tabellen zum Nachschlagen.",
+       "tags": [
+        "e-modul",
+        "streckgrenze",
+        "zugfestigkeit",
+        "härte",
+        "kerbschlagarbeit",
+        "stahl",
+        "edelstahl",
+        "guss",
+        "aluminium",
+        "messing",
+        "kunststoff",
+        "pom",
+        "peek",
+        "cfk",
+        "wärmebehandlung",
+        "härten",
+        "anlassen",
+        "eloxieren",
+        "korrosion",
+        "kontaktkorrosion",
+        "werkstoffauswahl"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "kennwerte",
+         "t": "Kennwerte richtig lesen"
+        },
+        {
+         "h": "stahl",
+         "t": "Stahl & Guss"
+        },
+        {
+         "h": "nichteisen",
+         "t": "Aluminium & Buntmetalle"
+        },
+        {
+         "h": "kunststoffe",
+         "t": "Kunststoffe"
+        },
+        {
+         "h": "verbund",
+         "t": "Verbund & Sonderwerkstoffe"
+        },
+        {
+         "h": "waerme",
+         "t": "Wärmebehandlung"
+        },
+        {
+         "h": "korrosion",
+         "t": "Korrosion & Oberflächenschutz"
+        },
+        {
+         "h": "auswahl",
+         "t": "Werkstoff auswählen"
+        },
+        {
+         "h": "tabellen",
+         "t": "Werkstofftabellen"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "kennwerte"
+         ]
+        },
+        {
+         "l": "Werkstoffgruppen",
+         "sections": [
+          "stahl",
+          "nichteisen",
+          "kunststoffe",
+          "verbund"
+         ]
+        },
+        {
+         "l": "Behandeln & Schützen",
+         "sections": [
+          "waerme",
+          "korrosion"
+         ]
+        },
+        {
+         "l": "Entscheiden",
+         "sections": [
+          "auswahl",
+          "tabellen"
+         ]
+        }
+       ],
+       "related": [
+        "filament",
+        "maschinenbau",
+        "loeten"
+       ]
+      },
+      {
+       "id": "konstruktion",
+       "file": "konstruktion.html",
+       "name": "Konstruktion & Fertigung",
+       "icon": "📏",
+       "kind": "Anleitung",
+       "updated": "2026-08-19",
+       "desc": "Vom Gedanken zum fertigungsgerechten Teil: Konstruktionsmethodik, technische Zeichnung, Toleranzen und Passungen nach ISO 286, Form- und Lagetoleranzen, Oberflächen, Gewinde und Normteile, CAD-Praxis, FEM-Grundlagen, Fertigungsverfahren und Konstruieren für den 3D-Druck.",
+       "tags": [
+        "konstruktionsmethodik",
+        "technische zeichnung",
+        "schnitt",
+        "bemaßung",
+        "toleranz",
+        "passung",
+        "iso 286",
+        "h7",
+        "gps",
+        "form- und lagetoleranz",
+        "rauheit",
+        "ra",
+        "gewinde",
+        "normteile",
+        "cad",
+        "parametrik",
+        "fem",
+        "dfm",
+        "zerspanen",
+        "umformen",
+        "3d-druck",
+        "toleranzkette"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "methodik",
+         "t": "Konstruktionsmethodik"
+        },
+        {
+         "h": "zeichnung",
+         "t": "Technische Zeichnung"
+        },
+        {
+         "h": "toleranzen",
+         "t": "Toleranzen & Passungen"
+        },
+        {
+         "h": "gps",
+         "t": "Form- & Lagetoleranzen"
+        },
+        {
+         "h": "oberflaeche",
+         "t": "Oberflächen & Rauheit"
+        },
+        {
+         "h": "gewinde",
+         "t": "Gewinde & Normteile"
+        },
+        {
+         "h": "cad",
+         "t": "CAD-Praxis"
+        },
+        {
+         "h": "fem",
+         "t": "FEM verstehen"
+        },
+        {
+         "h": "fertigung",
+         "t": "Fertigungsverfahren & DFM"
+        },
+        {
+         "h": "druck",
+         "t": "Konstruieren für den 3D-Druck"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "methodik"
+         ]
+        },
+        {
+         "l": "Dokumentieren",
+         "sections": [
+          "zeichnung",
+          "toleranzen",
+          "gps",
+          "oberflaeche",
+          "gewinde"
+         ]
+        },
+        {
+         "l": "Werkzeuge",
+         "sections": [
+          "cad",
+          "fem"
+         ]
+        },
+        {
+         "l": "Fertigen",
+         "sections": [
+          "fertigung",
+          "druck"
+         ]
+        }
+       ],
+       "related": [
+        "pcb-design",
+        "filament",
+        "dremel",
+        "maker-komponenten"
+       ]
+      }
+     ]
+    },
     {
      "id": "et-elektronik",
      "name": "Elektrotechnik & Elektronik",
