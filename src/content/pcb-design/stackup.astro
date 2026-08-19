@@ -1,0 +1,100 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Lagenaufbau entscheidet über Störfestigkeit, Wärmeabfuhr und Kosten.</b> Die wichtigste Einzelentscheidung: eine <b>durchgehende Massefläche</b> direkt unter der Signallage. Vier Lagen kosten heute wenig mehr als zwei — und sie lösen den größten Teil aller Layoutprobleme, bevor sie entstehen.</div>
+
+<h2>Die üblichen Aufbauten</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Lagen</th><th>Typischer Aufbau</th><th>Eignung</th><th>Kosten</th></tr></thead>
+<tbody>
+<tr><td><b>1</b></td><td>Nur Unterseite Kupfer</td><td>Sehr einfache Schaltungen, LED-Platinen, Aluminiumkern für Leistungs-LEDs</td><td>am günstigsten</td></tr>
+<tr><td><b>2</b></td><td>Signal oben, Masse unten (möglichst durchgehend)</td><td>Bis etwa 50 MHz, unkritische Analogschaltungen, Sensorbaugruppen</td><td>gering</td></tr>
+<tr><td><b>4</b></td><td>Signal – Masse – Versorgung – Signal</td><td><b>Der Standard.</b> Mikrocontroller, Schaltregler, Busse, alles mit schnellen Flanken</td><td>etwa Faktor 1,5–3 gegenüber zwei Lagen</td></tr>
+<tr><td><b>6</b></td><td>Signal – Masse – Signal – Signal – Masse – Signal</td><td>Dichte Entwürfe, mehrere Versorgungsspannungen, differentielle Hochgeschwindigkeitssignale</td><td>deutlich höher</td></tr>
+<tr><td><b>8+</b></td><td>Mehrere Masse- und Versorgungslagen</td><td>BGA mit vielen Pins, HDI, komplexe Systeme</td><td>hoch</td></tr>
+</tbody>
+</table></div>
+
+<svg class="dg l" viewBox="0 0 620 180" role="img" aria-label="Vierlagiger Aufbau mit Signal, Masse, Versorgung und Signal">
+  <rect class="box" x="60" y="24" width="440" height="16" style="fill:var(--accent-soft)" />
+  <text class="lbl" x="512" y="36">L1 · Signal + Bauteile</text>
+  <rect class="box" x="60" y="46" width="440" height="8" style="fill:var(--surface-2)" />
+  <text class="lbl" x="512" y="54">Prepreg 0,2 mm</text>
+  <rect class="box" x="60" y="60" width="440" height="16" style="fill:var(--mid-bg)" />
+  <text class="lbl" x="512" y="72">L2 · Masse (durchgehend)</text>
+  <rect class="box" x="60" y="82" width="440" height="26" style="fill:var(--surface-2)" />
+  <text class="lbl" x="512" y="100">Kern 1,065 mm</text>
+  <rect class="box" x="60" y="114" width="440" height="16" style="fill:var(--mid-bg)" />
+  <text class="lbl" x="512" y="126">L3 · Versorgung</text>
+  <rect class="box" x="60" y="136" width="440" height="8" style="fill:var(--surface-2)" />
+  <rect class="box" x="60" y="150" width="440" height="16" style="fill:var(--accent-soft)" />
+  <text class="lbl" x="512" y="162">L4 · Signal</text>
+  <text class="lbla" x="54" y="98" text-anchor="end">1,6 mm</text>
+  <path class="acc" d="M46,24 V166" /><path class="accf" d="M46,24 l-4,8 h8 z" /><path class="accf" d="M46,166 l-4,-8 h8 z" />
+</svg>
+<div class="tip"><b>Warum die Lage L2 als Masse so wichtig ist:</b> Der Rückstrom eines schnellen Signals fließt bei hohen Frequenzen nicht den kürzesten Weg, sondern direkt unter der Leiterbahn — dort ist die Schleifenfläche minimal. Eine durchgehende Massefläche in geringem Abstand liefert diesen Pfad automatisch. Genau deshalb ist der Abstand L1 zu L2 klein (0,1–0,2 mm) und der dicke Kern liegt in der Mitte.</div>
+
+<h2>Materialien</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Material</th><th>ε_r</th><th>Verlustfaktor tan δ</th><th>T_g</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>FR4 Standard</b></td><td>4,2–4,8</td><td>0,02</td><td>130–140 °C</td><td>Der Standard für praktisch alles bis einige GHz</td></tr>
+<tr><td><b>FR4 High-Tg</b></td><td>4,2–4,6</td><td>0,02</td><td>170–180 °C</td><td>Bleifreies Löten, mehrfache Reflow-Durchläufe, dickere Aufbauten</td></tr>
+<tr><td><b>Rogers RO4003</b></td><td>3,38</td><td>0,0027</td><td>&gt; 280 °C</td><td>HF ab etwa 2 GHz, Antennen, Radar</td></tr>
+<tr><td><b>Aluminiumkern (IMS)</b></td><td>—</td><td>—</td><td>—</td><td>Leistungs-LEDs, Treiberstufen — leitet Wärme direkt ab</td></tr>
+<tr><td><b>Polyimid (flexibel)</b></td><td>3,4</td><td>0,004</td><td>—</td><td>Flexleiterplatten, Starrflex-Verbindungen</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>ε_r von FR4 ist nicht konstant:</b> Es sinkt mit steigender Frequenz und schwankt je nach Glasgewebe und Harzanteil. Für Impedanzberechnungen bis etwa 1 GHz genügt 4,4 als Näherung; darüber sollte man den Fertiger nach seinem konkreten Aufbau fragen — er kann eine <b>Impedanzkontrolle</b> anbieten und liefert dann die passenden Leiterbahnbreiten.</p>
+
+<h2>Kupferdicke</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Angabe</th><th>Dicke</th><th>Einsatz</th><th>Minimale Bahnbreite</th></tr></thead>
+<tbody>
+<tr><td><b>0,5 oz (18 µm)</b></td><td>18 µm</td><td>Innenlagen, feine Strukturen</td><td>≈ 0,075 mm</td></tr>
+<tr><td><b>1 oz (35 µm)</b></td><td>35 µm</td><td><b>Der Standard</b></td><td>≈ 0,1 mm</td></tr>
+<tr><td><b>2 oz (70 µm)</b></td><td>70 µm</td><td>Ströme über etwa 5 A, Leistungsteile</td><td>≈ 0,2 mm</td></tr>
+<tr><td><b>3–6 oz</b></td><td>105–210 µm</td><td>Wechselrichter, Batteriemanagement</td><td>≈ 0,3 mm und mehr</td></tr>
+</tbody>
+</table></div>
+<p class="note">Dickeres Kupfer bedeutet auch größere minimale Abstände, weil beim Ätzen die Flanken unterschnitten werden. Wer nur an wenigen Stellen hohe Ströme führt, fährt oft besser mit Standardkupfer plus verbreiterten Bahnen, aufgelöteter Kupferschiene oder freigelegten und verzinnten Leiterbahnen.</p>
+
+<h2>Durchkontaktierungen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Typ</th><th>Verbindet</th><th>Kosten</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Durchgehendes Via</b></td><td>alle Lagen</td><td>Standard</td><td>Der Normalfall. Typisch 0,3 mm Bohrung, 0,6 mm Restring</td></tr>
+<tr><td><b>Blind Via</b></td><td>Außenlage zu einer Innenlage</td><td>deutlich höher</td><td>Nur bei HDI-Entwürfen nötig</td></tr>
+<tr><td><b>Buried Via</b></td><td>zwei Innenlagen</td><td>hoch</td><td>Erfordert sequentielle Fertigung</td></tr>
+<tr><td><b>Micro Via</b></td><td>benachbarte Lagen, lasergebohrt</td><td>hoch</td><td>Ab 0,1 mm; für feine BGA-Raster</td></tr>
+<tr><td><b>Via in Pad</b></td><td>—</td><td>mittel</td><td>Muss verfüllt und überplattiert werden, sonst saugt es beim Löten die Paste weg</td></tr>
+<tr><td><b>Thermal Via</b></td><td>Wärmeableitung unter Kühlpads</td><td>Standard</td><td>Mehrere kleine Vias (0,3 mm) im Raster von 1 mm sind wirksamer als wenige große</td></tr>
+</tbody>
+</table></div>
+<div class="fbox">
+  <span class="f">Ein Via mit 0,3 mm Bohrung trägt etwa 1–1,5 A dauerhaft</span>
+  <span class="l">Für höhere Ströme mehrere Vias parallel setzen. Faustregel: je 1 A ein Via, plus Reserve.</span>
+</div>
+
+<h2>Oberflächen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Oberfläche</th><th>Ebenheit</th><th>Lagerfähigkeit</th><th>Kosten</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>HASL bleifrei</b></td><td>schlecht</td><td>&gt; 12 Monate</td><td>am günstigsten</td><td>Der Standard. Für feine Raster unter 0,5 mm ungeeignet, weil die Padoberfläche uneben ist</td></tr>
+<tr><td><b>ENIG</b></td><td>sehr gut</td><td>&gt; 12 Monate</td><td>Aufpreis</td><td>Gold über Nickel. Für BGA, QFN und feine Raster; auch optisch hochwertig</td></tr>
+<tr><td><b>OSP</b></td><td>sehr gut</td><td>3–6 Monate</td><td>günstig</td><td>Organischer Schutz. Nur einmal lötbar, empfindlich beim Hantieren</td></tr>
+<tr><td><b>Immersionszinn</b></td><td>gut</td><td>6 Monate</td><td>mittel</td><td>Für Einpresstechnik geeignet</td></tr>
+<tr><td><b>Hartgold</b></td><td>sehr gut</td><td>—</td><td>hoch</td><td>Nur für Steckkontakte und Tastenfelder, nicht zum Löten</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Für eigene Projekte:</b> HASL für einfache Platinen mit 0805 und Stiftleisten, <b>ENIG</b> sobald QFN, feine Raster oder BGA im Spiel sind — der Aufpreis liegt bei kleinen Platinen oft nur bei wenigen Euro und erspart erhebliche Lötprobleme. OSP nur, wenn die Platine zügig bestückt wird.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>IPC-2221B und IPC-4101 (Basismaterialien).</li>
+    <li>Fertigervorgaben: <a href="https://jlcpcb.com/capabilities/pcb-capabilities">JLCPCB Capabilities</a>, <a href="https://www.pcbway.com/capabilities.html">PCBWay</a>, <a href="https://aisler.net/">Aisler</a>, <a href="https://www.multi-circuit-boards.eu/">Multi-CB</a> — jeder Fertiger veröffentlicht seinen Standardaufbau.</li>
+    <li>Rick Hartley, <i>How to Achieve Proper Grounding</i> — zur Bedeutung der Masselage und des Rückstrompfads.</li>
+    <li>Rogers Corporation, Materialdatenblätter zu HF-Substraten.</li>
+  </ul>
+</div>

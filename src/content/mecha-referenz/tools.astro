@@ -1,0 +1,95 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Werkzeuge, die sich in der Praxis bewährt haben — überwiegend kostenlos oder quelloffen.</b> Aufgenommen ist nur, was gepflegt wird, dokumentiert ist und ohne Anbieterbindung nutzbar bleibt. Filtern nach Gebiet, suchen über Name und Stichwort.</div>
+
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Werkzeug, Aufgabe oder Stichwort suchen …" aria-label="Werkzeuge durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="eda">Leiterplatte</button>
+    <button type="button" data-filter="sim">Simulation</button>
+    <button type="button" data-filter="rechner">Rechner</button>
+    <button type="button" data-filter="code">Rechnen & Code</button>
+    <button type="button" data-filter="embedded">Embedded</button>
+    <button type="button" data-filter="mess">Messtechnik</button>
+    <button type="button" data-filter="mech">Mechanik & CAD</button>
+    <button type="button" data-filter="daten">Bauteile & Daten</button>
+    <button type="button" data-filter="betrieb">Betrieb & Daten</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="tbl-wrap"><table style="min-width:1000px">
+    <thead><tr><th data-s="text">Werkzeug</th><th>Gebiet</th><th>Kosten</th><th>Wofür</th><th>Anmerkung</th></tr></thead>
+    <tbody data-list="Werkzeugen">
+      <tr data-item data-cat="eda" data-k="pcb layout schaltplan"><td><b><a href="https://www.kicad.org/">KiCad</a></b></td><td>Leiterplatte</td><td>kostenlos, quelloffen</td><td>Schaltplan, Layout, 3D, Fertigungsdaten, Rechnerwerkzeuge</td><td>Aktuelle stabile Reihe 10.0. Textdateien, damit git-tauglich. Für praktisch jedes eigene Projekt die richtige Wahl</td></tr>
+      <tr data-item data-cat="eda" data-k="pcb browser lcsc"><td><b><a href="https://easyeda.com/">EasyEDA</a></b></td><td>Leiterplatte</td><td>kostenlos, Cloud</td><td>Schaltplan, Simulation und Layout im Browser</td><td>Direkt an LCSC und JLCPCB angebunden. Sehr niedrige Einstiegshürde, dafür Anbieterbindung</td></tr>
+      <tr data-item data-cat="eda" data-k="pcb quelloffen"><td><b><a href="https://librepcb.org/">LibrePCB</a></b></td><td>Leiterplatte</td><td>kostenlos, quelloffen</td><td>Schaltplan und Layout mit eigenem Bibliothekskonzept</td><td>Konsequent durchdachtes Bibliotheksmodell, kleinere Nutzerbasis</td></tr>
+      <tr data-item data-cat="eda" data-k="pcb datenbank"><td><b><a href="https://horizon-eda.org/">Horizon EDA</a></b></td><td>Leiterplatte</td><td>kostenlos, quelloffen</td><td>EDA mit integrierter Bauteildatenbank</td><td>Interessanter Ansatz für Teileverwaltung</td></tr>
+      <tr data-item data-cat="eda" data-k="bestückung bom kicad"><td><b><a href="https://github.com/openscopeproject/InteractiveHtmlBom">InteractiveHtmlBom</a></b></td><td>Leiterplatte</td><td>kostenlos</td><td>Erzeugt eine anklickbare Bestückungshilfe als HTML</td><td>Beim Handbestücken enorm hilfreich — zeigt zu jedem Bauteil die Position auf der Platine</td></tr>
+      <tr data-item data-cat="sim" data-k="spice analog simulation"><td><b><a href="https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html">LTspice</a></b></td><td>Simulation</td><td>kostenlos</td><td>SPICE-Simulation analoger Schaltungen</td><td>Der Goldstandard für kostenlose Analogsimulation, mit Herstellermodellen. Keine Browser-Version</td></tr>
+      <tr data-item data-cat="sim" data-k="spice quelloffen"><td><b><a href="https://ngspice.sourceforge.io/">ngspice</a></b></td><td>Simulation</td><td>kostenlos, quelloffen</td><td>SPICE-Kern, auch in KiCad eingebunden</td><td>Stabile Version 46 (März 2026). Gut skriptbar, für automatisierte Auswertungen geeignet</td></tr>
+      <tr data-item data-cat="sim" data-k="browser lehre animation"><td><b><a href="https://www.falstad.com/circuit/">Falstad Circuit Simulator</a></b></td><td>Simulation</td><td>kostenlos</td><td>Animierte Schaltungssimulation im Browser</td><td>Unschlagbar zum Verstehen: zeigt Stromfluss, Ladung und Phasenverschiebung in Echtzeit</td></tr>
+      <tr data-item data-cat="sim" data-k="esp32 arduino browser"><td><b><a href="https://wokwi.com/">Wokwi</a></b></td><td>Simulation</td><td>kostenlos für den Grundumfang</td><td>Simuliert Arduino, ESP32, Pi Pico mit Peripherie im Browser</td><td>Ideal, um Code zu prüfen, bevor Hardware da ist. Auch Logikanalysator eingebaut</td></tr>
+      <tr data-item data-cat="sim" data-k="einsteiger arduino"><td><b><a href="https://www.tinkercad.com/circuits">Tinkercad Circuits</a></b></td><td>Simulation</td><td>kostenlos</td><td>Sehr einfache Schaltungs- und Arduino-Simulation</td><td>Für den allerersten Einstieg und für Unterricht</td></tr>
+      <tr data-item data-cat="sim" data-k="digitaltechnik lehre"><td><b><a href="https://github.com/hneemann/Digital">Digital (H. Neemann)</a></b></td><td>Simulation</td><td>kostenlos, quelloffen</td><td>Simulator für digitale Schaltungen</td><td>Sehr gut für Schaltnetze, Schaltwerke und Automaten; kann auch nach VHDL/Verilog exportieren</td></tr>
+      <tr data-item data-cat="sim" data-k="hdl fpga testbench"><td><b><a href="https://www.veripool.org/verilator/">Verilator / GTKWave</a></b></td><td>Simulation</td><td>kostenlos, quelloffen</td><td>HDL-Simulation und Signalverlaufsanzeige</td><td>Der Standardweg, um FPGA-Entwürfe vor der Synthese zu prüfen</td></tr>
+      <tr data-item data-cat="sim" data-k="embedded test ci"><td><b><a href="https://renode.io/">Renode</a></b></td><td>Simulation</td><td>kostenlos, quelloffen</td><td>Simuliert ganze Mikrocontroller-Systeme inklusive Peripherie</td><td>Erlaubt automatisierte Firmware-Tests ohne Hardware</td></tr>
+      <tr data-item data-cat="rechner" data-k="filter sallen-key"><td><b><a href="http://sim.okawa-denshi.jp/en/Fkeisan.htm">Okawa Filter Design</a></b></td><td>Rechner</td><td>kostenlos</td><td>Rechner für aktive und passive Filter mit Bode-Plot</td><td>Sallen-Key und MFB in Sekunden ausgelegt</td></tr>
+      <tr data-item data-cat="rechner" data-k="pcb impedanz leiterbahn"><td><b><a href="https://saturnpcb.com/saturn-pcb-toolkit/">Saturn PCB Toolkit</a></b></td><td>Rechner</td><td>kostenlos</td><td>Sammlung von PCB-Rechnern</td><td>Leiterbahnbreite, Impedanz, Via-Belastbarkeit, Wärme — sehr umfangreich</td></tr>
+      <tr data-item data-cat="rechner" data-k="drossel spule verluste"><td><b><a href="https://www.we-online.com/redexpert">Würth REDEXPERT</a></b></td><td>Rechner</td><td>kostenlos</td><td>Auslegung induktiver Bauelemente mit Verlustmodell</td><td>Rechnet Kern- und Kupferverluste mit gemessenen Daten</td></tr>
+      <tr data-item data-cat="rechner" data-k="netzteil buck auslegung"><td><b><a href="https://www.ti.com/design-resources/design-tools-simulation/webench-power-designer.html">TI WEBENCH</a></b></td><td>Rechner</td><td>kostenlos</td><td>Auslegung kompletter Stromversorgungen</td><td>Liefert Bauteilwerte, Wirkungsgradkurve und Layoutvorschlag</td></tr>
+      <tr data-item data-cat="rechner" data-k="ipc leiterbahn strom"><td><b><a href="https://www.leiton.de/leiton-tools-leiterbahnerwaermung.html">Leiton Leiterbahnrechner</a></b></td><td>Rechner</td><td>kostenlos</td><td>Strombelastbarkeit von Leiterbahnen</td><td>Deutschsprachig, mit Erläuterung der Normgrundlagen</td></tr>
+      <tr data-item data-cat="rechner" data-k="mathematik laplace"><td><b><a href="https://www.wolframalpha.com/">Wolfram Alpha</a></b></td><td>Rechner</td><td>Grundfunktionen kostenlos</td><td>Symbolisches und numerisches Rechnen</td><td>Für Umformungen, Laplace-Transformationen und Einheitenrechnungen</td></tr>
+      <tr data-item data-cat="code" data-k="regelung bode nyquist"><td><b><a href="https://python-control.readthedocs.io/">python-control</a></b></td><td>Rechnen & Code</td><td>kostenlos, quelloffen</td><td>Regelungstechnik in Python</td><td>Übertragungsfunktionen, Bode, Nyquist, Wurzelortskurve, Zustandsraum, LQR — die kostenlose Alternative zur Control System Toolbox</td></tr>
+      <tr data-item data-cat="code" data-k="dsp filter numerik"><td><b><a href="https://scipy.org/">SciPy / NumPy</a></b></td><td>Rechnen & Code</td><td>kostenlos, quelloffen</td><td>Numerik und Signalverarbeitung</td><td>scipy.signal für Filterentwurf, FFT und Systemantworten</td></tr>
+      <tr data-item data-cat="code" data-k="auswertung messdaten"><td><b><a href="https://jupyter.org/">Jupyter</a></b></td><td>Rechnen & Code</td><td>kostenlos, quelloffen</td><td>Interaktive Notizbücher mit Code, Text und Diagrammen</td><td>Ideal für Messauswertung und Auslegungsrechnungen mit Dokumentation</td></tr>
+      <tr data-item data-cat="code" data-k="matlab numerik"><td><b><a href="https://octave.org/">GNU Octave</a></b></td><td>Rechnen & Code</td><td>kostenlos, quelloffen</td><td>MATLAB-kompatible Numerik</td><td>Für vorhandene MATLAB-Skripte</td></tr>
+      <tr data-item data-cat="code" data-k="simulink blockschaltbild"><td><b><a href="https://www.scilab.org/">Scilab / Xcos</a></b></td><td>Rechnen & Code</td><td>kostenlos, quelloffen</td><td>Numerik mit grafischer Blockschaltbildsimulation</td><td>Xcos ist die kostenlose Simulink-Alternative</td></tr>
+      <tr data-item data-cat="code" data-k="assembler optimierung"><td><b><a href="https://godbolt.org/">Compiler Explorer</a></b></td><td>Rechnen & Code</td><td>kostenlos</td><td>Zeigt den erzeugten Assemblercode zu C/C++ in Echtzeit</td><td>Beantwortet in Sekunden, ob eine Optimierung greift oder eine Variable wegoptimiert wurde</td></tr>
+      <tr data-item data-cat="embedded" data-k="build toolchain"><td><b><a href="https://platformio.org/">PlatformIO</a></b></td><td>Embedded</td><td>kostenlos</td><td>Build- und Bibliotheksverwaltung für sehr viele Plattformen</td><td>Verwaltet Toolchains automatisch. Der bequemste Weg zu strukturierten Arduino- und ESP-Projekten</td></tr>
+      <tr data-item data-cat="embedded" data-k="esp32 sdk"><td><b><a href="https://docs.espressif.com/projects/esp-idf/">ESP-IDF</a></b></td><td>Embedded</td><td>kostenlos</td><td>Offizielles SDK für ESP32</td><td>Vollständig, mit FreeRTOS, menuconfig und sehr guter Dokumentation</td></tr>
+      <tr data-item data-cat="embedded" data-k="rtos devicetree"><td><b><a href="https://www.zephyrproject.org/">Zephyr</a></b></td><td>Embedded</td><td>kostenlos, quelloffen</td><td>Portables RTOS mit Treibermodell und Devicetree</td><td>Aktuelle Version 4.4 (April 2026). Steile Lernkurve, dafür herstellerübergreifend</td></tr>
+      <tr data-item data-cat="embedded" data-k="debug swd flash"><td><b><a href="https://probe.rs/">probe-rs</a></b></td><td>Embedded</td><td>kostenlos, quelloffen</td><td>Flashen und Debuggen über viele Adapter</td><td>Deutlich einfacher einzurichten als OpenOCD</td></tr>
+      <tr data-item data-cat="embedded" data-k="jtag swd gdb"><td><b><a href="https://openocd.org/">OpenOCD</a></b></td><td>Embedded</td><td>kostenlos, quelloffen</td><td>Debug-Server für sehr viele Ziele und Adapter</td><td>Der Klassiker; mächtig, aber konfigurationsintensiv</td></tr>
+      <tr data-item data-cat="embedded" data-k="stm32 hal codegen"><td><b><a href="https://www.st.com/en/development-tools/stm32cubemx.html">STM32CubeMX / CubeIDE</a></b></td><td>Embedded</td><td>kostenlos</td><td>Grafische Pin- und Takt-Konfiguration mit Codeerzeugung</td><td>Spart bei STM32 viel Einarbeitung, erzeugt aber umfangreichen Code</td></tr>
+      <tr data-item data-cat="embedded" data-k="ota bootloader signatur"><td><b><a href="https://docs.mcuboot.com/">MCUboot</a></b></td><td>Embedded</td><td>kostenlos, quelloffen</td><td>Sicherer Bootloader mit Signaturprüfung und A/B-Verfahren</td><td>Für Geräte mit Update-Funktion der naheliegende Weg</td></tr>
+      <tr data-item data-cat="mess" data-k="logikanalysator protokoll"><td><b><a href="https://sigrok.org/">sigrok / PulseView</a></b></td><td>Messtechnik</td><td>kostenlos, quelloffen</td><td>Software für Logikanalysatoren und viele Messgeräte</td><td>Dekodiert I²C, SPI, UART, CAN, 1-Wire und Dutzende weitere Protokolle</td></tr>
+      <tr data-item data-cat="mess" data-k="fft spektrum audio"><td><b><a href="https://www.audacityteam.org/">Audacity / REW</a></b></td><td>Messtechnik</td><td>kostenlos</td><td>Signalaufzeichnung und Spektrumanalyse über die Soundkarte</td><td>Für niederfrequente Messungen bis etwa 20 kHz eine ernstzunehmende Alternative zum Messgerät</td></tr>
+      <tr data-item data-cat="mess" data-k="oszilloskop usb"><td><b><a href="https://github.com/OpenHantek/OpenHantek6022">OpenHantek / Scopehal</a></b></td><td>Messtechnik</td><td>kostenlos, quelloffen</td><td>Software für USB-Oszilloskope</td><td>Erweitert günstige Hardware um brauchbare Bedienung</td></tr>
+      <tr data-item data-cat="mech" data-k="cad gehäuse 3d"><td><b><a href="https://www.freecad.org/">FreeCAD</a></b></td><td>Mechanik & CAD</td><td>kostenlos, quelloffen</td><td>Parametrisches 3D-CAD</td><td>Für Gehäuse, Halterungen und Einbauprüfung. STEP-Import aus KiCad möglich</td></tr>
+      <tr data-item data-cat="mech" data-k="skript parametrisch"><td><b><a href="https://openscad.org/">OpenSCAD</a></b></td><td>Mechanik & CAD</td><td>kostenlos, quelloffen</td><td>CAD über Skripte statt über die Maus</td><td>Für parametrische Teile, die sich über Variablen anpassen lassen</td></tr>
+      <tr data-item data-cat="mech" data-k="3d-druck slicer"><td><b><a href="https://www.prusa3d.com/page/prusaslicer_424/">PrusaSlicer / OrcaSlicer</a></b></td><td>Mechanik & CAD</td><td>kostenlos, quelloffen</td><td>Slicer für den 3D-Druck</td><td>Für Gehäuse und Prototypenteile. Materialauswahl siehe Modul Filament</td></tr>
+      <tr data-item data-cat="mech" data-k="frontplatte vektor"><td><b><a href="https://inkscape.org/">Inkscape</a></b></td><td>Mechanik & CAD</td><td>kostenlos, quelloffen</td><td>Vektorgrafik</td><td>Für Frontplatten, Beschriftungen und Laserschnittvorlagen</td></tr>
+      <tr data-item data-cat="daten" data-k="bauteilsuche preis"><td><b><a href="https://octopart.com/">Octopart</a></b></td><td>Bauteile & Daten</td><td>kostenlos</td><td>Bauteilsuche über Distributoren hinweg</td><td>Preis, Verfügbarkeit und Datenblatt in einer Ansicht</td></tr>
+      <tr data-item data-cat="daten" data-k="verfügbarkeit lager"><td><b><a href="https://www.findchips.com/">FindChips</a></b></td><td>Bauteile & Daten</td><td>kostenlos</td><td>Verfügbarkeitssuche</td><td>Alternative zu Octopart, teils andere Distributoren</td></tr>
+      <tr data-item data-cat="daten" data-k="footprint symbol bibliothek"><td><b><a href="https://www.snapeda.com/">SnapEDA / Ultra Librarian</a></b></td><td>Bauteile & Daten</td><td>kostenlos mit Anmeldung</td><td>Fertige Symbole und Footprints</td><td>Zeit sparen — aber jeden Footprint trotzdem gegen das Datenblatt prüfen</td></tr>
+      <tr data-item data-cat="daten" data-k="begriffe norm wörterbuch"><td><b><a href="https://www.electropedia.org/">Electropedia (IEC 60050)</a></b></td><td>Bauteile & Daten</td><td>kostenlos</td><td>Internationales Elektrotechnisches Wörterbuch</td><td>Verbindliche Begriffsdefinitionen, mehrsprachig</td></tr>
+      <tr data-item data-cat="betrieb" data-k="mqtt automation dashboard"><td><b><a href="https://nodered.org/">Node-RED</a></b></td><td>Betrieb & Daten</td><td>kostenlos, quelloffen</td><td>Grafische Verknüpfung von Datenquellen und Aktionen</td><td>Für Prototypen, Hausautomation und Datenanbindung in einem Nachmittag</td></tr>
+      <tr data-item data-cat="betrieb" data-k="trend dashboard zeitreihe"><td><b><a href="https://grafana.com/">Grafana</a></b></td><td>Betrieb & Daten</td><td>kostenlos, quelloffen</td><td>Visualisierung von Zeitreihen</td><td>Zusammen mit InfluxDB oder Prometheus der Standard für Messdatenauswertung</td></tr>
+      <tr data-item data-cat="betrieb" data-k="mqtt broker"><td><b><a href="https://mosquitto.org/">Eclipse Mosquitto</a></b></td><td>Betrieb & Daten</td><td>kostenlos, quelloffen</td><td>MQTT-Broker</td><td>Wenige Megabyte groß, läuft auf jedem Kleinrechner</td></tr>
+      <tr data-item data-cat="betrieb" data-k="hausautomation esphome"><td><b><a href="https://www.home-assistant.io/">Home Assistant</a></b></td><td>Betrieb & Daten</td><td>kostenlos, quelloffen</td><td>Hausautomation mit sehr vielen Anbindungen</td><td>Nimmt eigene Geräte über MQTT oder ESPHome auf</td></tr>
+      <tr data-item data-cat="betrieb" data-k="sps iec61131 plc"><td><b><a href="https://www.codesys.com/">CODESYS</a></b></td><td>Betrieb & Daten</td><td>Grundversion kostenlos</td><td>Herstellerunabhängige SPS-Entwicklungsumgebung</td><td>Läuft mit Laufzeitumgebung auch auf einem Raspberry Pi — der günstigste Einstieg in die SPS-Welt</td></tr>
+      <tr data-item data-cat="betrieb" data-k="opcua industrie"><td><b><a href="https://www.open62541.org/">open62541</a></b></td><td>Betrieb & Daten</td><td>kostenlos, quelloffen</td><td>OPC-UA-Umsetzung in C</td><td>Erlaubt eigene OPC-UA-Server und -Clients</td></tr>
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Kein Werkzeug passt zu dieser Auswahl.</div>
+</div>
+
+<h2>Eine Mindestausstattung an Software</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Für Elektronik</div><div class="cd">KiCad, LTspice, Falstad. Damit lassen sich Schaltungen entwerfen, prüfen und als Platine fertigen — ohne einen Cent für Software.</div></div>
+  <div class="card"><div class="ct">Für Firmware</div><div class="cd">VS Code mit Cortex-Debug, PlatformIO oder das Hersteller-SDK, probe-rs oder OpenOCD, Git.</div></div>
+  <div class="card"><div class="ct">Für Messen und Auswerten</div><div class="cd">PulseView für den Logikanalysator, Python mit NumPy und Matplotlib für die Auswertung.</div></div>
+  <div class="card"><div class="ct">Für Regelung</div><div class="cd">python-control für Entwurf und Analyse, Jupyter für die Dokumentation der Auslegung.</div></div>
+  <div class="card"><div class="ct">Für Mechanik</div><div class="cd">FreeCAD oder OpenSCAD, ein Slicer für den 3D-Druck.</div></div>
+  <div class="card"><div class="ct">Für den Betrieb</div><div class="cd">Mosquitto, Node-RED, InfluxDB und Grafana — zusammen in Docker-Containern auf einem kleinen Server.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Anmerkungen</div>
+  <ul>
+    <li>Preis- und Versionsangaben ändern sich. Vor dem Einsatz kurz auf der Projektseite prüfen — die Verweise führen jeweils zur offiziellen Quelle.</li>
+    <li>Bei quelloffener Software lohnt ein Blick auf die Aktivität des Projekts: letzte Veröffentlichung, offene Fehlermeldungen, Zahl der Mitwirkenden.</li>
+    <li>Serverbetrieb der zuletzt genannten Dienste: <a href="homeserver-101.html#docker">Homeserver 101 → Docker</a>.</li>
+  </ul>
+</div>

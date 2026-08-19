@@ -25,6 +25,16 @@ import "./_style.css";
 </svg>
 <p>Beide Achsen logarithmisch, die Amplitude in Dezibel. Eine Dekade ist ein Faktor 10 in der Frequenz. Ein Filter erster Ordnung fällt mit 20 dB/Dekade (= 6 dB/Oktave) und dreht die Phase um insgesamt 90°, ein Filter zweiter Ordnung mit 40 dB/Dekade und 180°. Diese Phasendrehung ist der Grund, warum Filter in Regelkreisen Stabilität kosten — siehe <a href="regelungstechnik.html#stabilitaet">Regelungstechnik → Stabilität</a>.</p>
 
+<div class="calc" data-calc="db">
+  <h4>Dezibel umrechnen</h4>
+  <div class="row">
+    <div><label>Wert in dB</label><input data-k="db" type="number" step="any" placeholder="-3" /></div>
+    <div><label>oder Faktor</label><input data-k="f" type="number" step="any" placeholder="0.707" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
 <h2>Passive Filter</h2>
 <div class="tbl-wrap"><table style="min-width:780px">
 <thead><tr><th>Typ</th><th>Aufbau</th><th>Grenzfrequenz</th><th>Anmerkung</th></tr></thead>

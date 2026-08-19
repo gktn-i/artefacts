@@ -1,0 +1,73 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Dieser Hub ist eine Sortierung fremden Wissens, keine eigene Forschung.</b> Damit das nachvollziehbar bleibt, steht am Ende jedes Abschnitts, worauf er beruht. Hier stehen die Kriterien, nach denen ausgewählt wurde — und wie man selbst prüft, ob eine Quelle trägt.</div>
+
+<h2>Die Rangfolge der Quellen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Rang</th><th>Art</th><th>Beispiele</th><th>Wann verbindlich</th></tr></thead>
+<tbody>
+<tr><td><b>1</b></td><td>Norm- und Gesetzestext</td><td>IEC, DIN, EN, EU-Verordnungen</td><td>Immer, wenn es um Sicherheit, Zulassung oder Abnahme geht</td></tr>
+<tr><td><b>2</b></td><td>Herstellerdatenblatt und Referenzhandbuch</td><td>Datasheet, Reference Manual, Errata</td><td>Für alles, was ein konkretes Bauteil betrifft. Grenzwerte gelten nur so, wie sie dort stehen</td></tr>
+<tr><td><b>3</b></td><td>Anwendungsberichte des Herstellers</td><td>Application Notes, Design Guides</td><td>Sehr gut für Auslegung und Layout; mit dem erwartbaren Fokus auf eigene Produkte</td></tr>
+<tr><td><b>4</b></td><td>Lehrbücher und Fachliteratur</td><td>Albach, Horowitz &amp; Hill, Lunze, Ott</td><td>Für Verständnis und Herleitung; Auflagen beachten</td></tr>
+<tr><td><b>5</b></td><td>Begutachtete Veröffentlichungen</td><td>IEEE, Springer, ACM</td><td>Für Verfahren und Grenzen; oft hinter Bezahlschranke</td></tr>
+<tr><td><b>6</b></td><td>Fachblogs und Vorträge mit nachprüfbaren Angaben</td><td>Interrupt, Rick Hartley, Analog Dialogue</td><td>Gut, wenn Messungen, Quellen oder Code beigefügt sind</td></tr>
+<tr><td><b>7</b></td><td>Foren und Videos</td><td>mikrocontroller.net, EEVblog, YouTube</td><td>Für Erfahrungswerte und Fehlerbilder; einzelne Aussagen immer gegenprüfen</td></tr>
+<tr><td><b>8</b></td><td>Antworten von Sprachmodellen</td><td>—</td><td>Als Einstieg und zum Sortieren brauchbar. <b>Nie</b> als Beleg: Bauteilnummern, Grenzwerte und Normbezüge werden erfunden</td></tr>
+</tbody>
+</table></div>
+
+<h2>Sieben Prüffragen an jede Quelle</h2>
+<div class="steps">
+  <div class="step"><h4>Wer sagt das, und woher weiß er es?</h4>Eine Angabe ohne nachvollziehbare Herkunft ist eine Behauptung. Bei Herstellern: Steht es im Datenblatt oder im Werbetext?</div>
+  <div class="step"><h4>Gibt es eine Zahl mit Einheit und Bedingung?</h4>„Wird warm“ ist wertlos, „78 °C bei 2 A und 25 °C Umgebung“ ist überprüfbar. Ohne Randbedingung ist auch eine Zahl wenig wert.</div>
+  <div class="step"><h4>Wurde gemessen oder gerechnet?</h4>Beides ist gültig — aber Messungen decken Effekte auf, die kein Modell enthält, und Rechnungen zeigen Zusammenhänge, die eine Einzelmessung nicht zeigt.</div>
+  <div class="step"><h4>Wie alt ist die Angabe?</h4>Bei Bauteilempfehlungen, Werkzeugen und Normen zählt das Datum. Ein Layoutgrundsatz von 1990 gilt oft noch; eine Bauteilempfehlung von 2015 selten.</div>
+  <div class="step"><h4>Wird ein Interessenkonflikt sichtbar?</h4>Ein Anwendungsbericht empfiehlt naturgemäß den eigenen Baustein. Das macht ihn nicht falsch — aber der Vergleich mit Wettbewerbern fehlt.</div>
+  <div class="step"><h4>Sagt eine zweite, unabhängige Quelle dasselbe?</h4>Bei allem, was Geld oder Sicherheit kostet, gehört eine zweite Quelle dazu. Zwei Quellen, die voneinander abgeschrieben haben, zählen als eine.</div>
+  <div class="step"><h4>Passt es zur eigenen Erfahrung — und wenn nicht, warum?</h4>Ein Widerspruch ist kein Grund, die Quelle zu verwerfen, sondern eine Frage, die geklärt werden will. Oft unterscheiden sich die Randbedingungen.</div>
+</div>
+
+<h2>Typische Irrtümer, die sich hartnäckig halten</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Behauptung</th><th>Warum sie so nicht stimmt</th></tr></thead>
+<tbody>
+<tr><td><b>„Analog- und Digitalmasse müssen getrennt werden“</b></td><td>Gilt für langsame Präzisionsanalogtechnik mit Sternpunkt. Ein Schlitz in der Massefläche erzeugt bei heutigen Flankensteilheiten mehr Probleme, als er löst</td></tr>
+<tr><td><b>„Ein 10-µF-Kondensator hat 10 µF“</b></td><td>Klasse-2-Keramikkondensatoren verlieren unter Gleichspannung bis zu 80 % ihrer Kapazität</td></tr>
+<tr><td><b>„Die Diode hat 0,7 V“</b></td><td>Ein Wert für einen bestimmten Strom. Bei 1 mA sind es eher 0,6 V, bei 1 A eher 1,0 V</td></tr>
+<tr><td><b>„Der MOSFET schaltet bei U_GS(th)“</b></td><td>Bei der Schwellenspannung fließen einige Mikroampere. Für vollen Durchlass braucht es deutlich mehr</td></tr>
+<tr><td><b>„Höhere Taktfrequenz bedeutet mehr EMV-Probleme“</b></td><td>Die Flankensteilheit bestimmt das Spektrum, nicht die Wiederholrate</td></tr>
+<tr><td><b>„Mehr Auflösung bedeutet mehr Genauigkeit“</b></td><td>Auflösung, Genauigkeit und Wiederholbarkeit sind drei verschiedene Größen</td></tr>
+<tr><td><b>„Ein Schrittmotor positioniert exakt“</b></td><td>Nur solange er nicht überlastet wird. Schrittverlust wird ohne Encoder nicht bemerkt</td></tr>
+<tr><td><b>„Mikroschritt erhöht die Genauigkeit“</b></td><td>Er verbessert vor allem die Laufruhe; das Haltemoment zwischen den Vollschritten sinkt stark</td></tr>
+<tr><td><b>„CRC schützt vor Manipulation“</b></td><td>Ein CRC ist gegen zufällige Fehler stark und gegen absichtliche Änderung wertlos</td></tr>
+<tr><td><b>„volatile macht Zugriffe atomar“</b></td><td>Es verhindert nur Wegoptimierung. Atomarität braucht Sperren oder Atomics</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was in diesem Hub wie belegt ist</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Zahlenwerte und Grenzwerte</div><div class="cd">Wo möglich aus Normen oder Datenblättern. Wo Größenordnungen genannt werden, ist das als Richtwert gekennzeichnet — sie ersetzen keine Auslegung am konkreten Bauteil.</div></div>
+  <div class="card"><div class="ct">Aktualität</div><div class="cd">Normfassungen, Werkzeugversionen und Bauteilfamilien sind auf dem Stand von August 2026 recherchiert. Bei Normen ist die Fassung mit angegeben, weil Übergangsfristen laufen.</div></div>
+  <div class="card"><div class="ct">Empfehlungen</div><div class="cd">Sind als solche formuliert und begründet. Wo mehrere Wege vertretbar sind, steht das dabei — technische Entscheidungen haben selten genau eine richtige Antwort.</div></div>
+  <div class="card"><div class="ct">Grenzen</div><div class="cd">Dieser Hub ersetzt keine Ausbildung, keine Risikobeurteilung und keine Fachplanung. Bei Netzspannung, Maschinen und Produkten, die in Verkehr gebracht werden, gehört eine fachkundige Person dazu.</div></div>
+</div>
+
+<h2>Wenn etwas falsch ist</h2>
+<p>Fehler in einem Nachschlagewerk sind unvermeidlich — Normen ändern sich, Bauteile werden abgekündigt, und beim Schreiben schleichen sich Irrtümer ein. Zwei Dinge helfen:</p>
+<ul>
+  <li><b>Im Zweifel der Primärquelle folgen.</b> Datenblatt und Normtext gehen jeder Zusammenfassung vor — auch dieser hier.</li>
+  <li><b>Widersprüche notieren.</b> Wenn eine Angabe hier nicht zur eigenen Messung passt, ist das ein Anlass nachzuprüfen: Stimmen die Randbedingungen überein? Ist der Text veraltet? Beides kommt vor.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Übergreifend verwendete Quellen</div>
+  <ul>
+    <li><b>Normen:</b> IEC, DIN, EN und EU-Rechtsakte wie unter <a href="#normen">Normen &amp; Standards</a> aufgeführt.</li>
+    <li><b>Lehrbücher:</b> Albach, Horowitz &amp; Hill, Tietze/Schenk/Gamm, Fricke, Lunze, Åström &amp; Murray, Ott, Fischer, Patterson &amp; Hennessy — Einzelnachweise unter <a href="#buecher">Bücher &amp; Kurse</a>.</li>
+    <li><b>Herstellerdokumentation:</b> Analog Devices, Texas Instruments, STMicroelectronics, Espressif, Nordic Semiconductor, Infineon, Würth Elektronik, Trinamic/ADI, NXP, Raspberry Pi.</li>
+    <li><b>Frei zugängliche Quellen:</b> <a href="https://www.electropedia.org/">Electropedia</a>, <a href="https://eur-lex.europa.eu/">EUR-Lex</a>, <a href="https://www.bipm.org/">BIPM</a>, <a href="https://physics.nist.gov/cuu/Constants/">NIST CODATA</a>, <a href="https://ocw.mit.edu/">MIT OpenCourseWare</a>, <a href="https://fbswiki.org/">Feedback Systems</a>, <a href="https://www.dspguide.com/">dspguide.com</a>.</li>
+    <li><b>Aktualitätsprüfung:</b> Versions- und Normstände wurden im August 2026 gegen die jeweiligen Herausgeberseiten abgeglichen.</li>
+  </ul>
+</div>

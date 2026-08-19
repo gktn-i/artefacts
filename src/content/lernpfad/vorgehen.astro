@@ -1,0 +1,78 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Unterschied zwischen einem Projekt, das fertig wird, und einem, das in der Schublade endet, liegt selten an der Technik.</b> Er liegt daran, ob am Anfang klar war, was „fertig“ bedeutet — und ob das Projekt klein genug geschnitten war.</div>
+
+<h2>Der Ablauf</h2>
+<div class="steps">
+  <div class="step"><h4>1 · Aufschreiben, was es können soll</h4>Eine halbe Seite. Was macht das Gerät, für wen, unter welchen Bedingungen? Was macht es ausdrücklich <b>nicht</b>? Die zweite Frage ist die wichtigere — sie begrenzt den Umfang.</div>
+  <div class="step"><h4>2 · Erfolgskriterium festlegen</h4>Eine prüfbare Bedingung: „regelt auf ±1 K“, „läuft vier Wochen mit einer Batterie“, „positioniert auf 0,1 mm“. Ohne dieses Kriterium ist ein Projekt nie fertig, sondern nur unterbrochen.</div>
+  <div class="step"><h4>3 · Risiken zuerst prüfen</h4>Was könnte grundsätzlich nicht funktionieren? Genau das als Erstes ausprobieren — auf dem Steckbrett, mit einem fertigen Modul, in einer Simulation. Ein Nachmittag hier spart Wochen.</div>
+  <div class="step"><h4>4 · Blockschaltbild und Bauteilauswahl</h4>Welche Baugruppen, welche Schnittstellen dazwischen? Bauteile auswählen und Verfügbarkeit prüfen, bevor der Schaltplan gezeichnet wird.</div>
+  <div class="step"><h4>5 · Aufbau in Stufen</h4>Steckbrett → Lochraster oder Modulaufbau → eigene Platine. Jede Stufe funktioniert für sich; man überspringt sie nur, wenn man die Schaltung schon kennt.</div>
+  <div class="step"><h4>6 · Firmware in Modulen</h4>Jedes Modul einzeln in Betrieb nehmen, mit einem minimalen Testprogramm. Erst dann zusammensetzen.</div>
+  <div class="step"><h4>7 · Fehlerfälle einbauen</h4>Was passiert bei Sensorausfall, Spannungseinbruch, Kommunikationsabbruch, Bedienfehler? Diese Frage gehört vor die Fertigstellung, nicht danach.</div>
+  <div class="step"><h4>8 · Gehäuse und Bedienung</h4>Wird regelmäßig unterschätzt. Ein Gerät ohne Gehäuse wird nicht benutzt — und ein Gehäuse, das erst am Ende entworfen wird, passt nicht.</div>
+  <div class="step"><h4>9 · Dokumentieren</h4>Schaltplan als PDF, Pinbelegung, Bedienung, bekannte Einschränkungen. Für das eigene Ich in zwei Jahren.</div>
+  <div class="step"><h4>10 · Benutzen und nachbessern</h4>Erst im Betrieb zeigt sich, was fehlt. Die zweite Version ist immer die gute.</div>
+</div>
+
+<h2>Umfang begrenzen</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Woran Projekte scheitern</h4><ul>
+    <li>Zu viele Funktionen in Version 1</li>
+    <li>Drei unbekannte Techniken gleichzeitig</li>
+    <li>Kein definiertes Ende — „ich könnte noch …“</li>
+    <li>Perfektionismus am falschen Ort: drei Wochen für das Platinenlayout, während die Grundfunktion ungetestet ist</li>
+    <li>Warten auf ein Bauteil, statt am Rest weiterzuarbeiten</li>
+    <li>Parallel an vier Projekten</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Was hilft</h4><ul>
+    <li>Eine Funktion, die vollständig funktioniert, statt fünf halber</li>
+    <li>Alles Optionale auf eine „Version 2“-Liste schreiben — nicht diskutieren, aufschreiben</li>
+    <li>Fertige Module verwenden, wo das Thema nicht das Lernziel ist</li>
+    <li>Jede Woche einen sichtbaren Fortschritt, auch einen kleinen</li>
+    <li>Zeitbudget je Teilschritt setzen und bei Überschreitung neu entscheiden</li>
+  </ul></div>
+</div>
+
+<h2>Was in jedes Projekt gehört</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Versionsverwaltung von Anfang an</div><div class="cd">Firmware, Schaltplan, Layout, Stückliste, Notizen — alles in einem Repository. Auch bei einem Wochenendprojekt. Der Aufwand ist eine Minute.</div></div>
+  <div class="card"><div class="ct">Prüfpunkte und Diagnoseausgabe</div><div class="cd">Auf der Platine und in der Firmware. Beides kostet fast nichts und spart beim ersten Problem Stunden.</div></div>
+  <div class="card"><div class="ct">Versionsnummer im Gerät</div><div class="cd">Abfragbar über die serielle Schnittstelle, sichtbar auf der Platine. Zwei Exemplare mit unterschiedlichem Stand sind sonst nicht unterscheidbar.</div></div>
+  <div class="card"><div class="ct">Sicherer Zustand definiert</div><div class="cd">Was tut das Gerät beim Einschalten, bei einem Fehler, nach einem Watchdog-Reset? Nicht „letzter Zustand“, sondern eine bewusste Entscheidung.</div></div>
+  <div class="card"><div class="ct">Notizdatei</div><div class="cd">Datum, was gemacht, was gemessen, was entschieden und warum. Nach drei Monaten die wertvollste Datei im Projekt.</div></div>
+  <div class="card"><div class="ct">Stückliste mit Bezugsquellen</div><div class="cd">Damit ein zweites Exemplar in zwei Jahren noch baubar ist.</div></div>
+</div>
+
+<h2>Zeitschätzung ehrlich machen</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Tätigkeit</th><th>Erste Schätzung</th><th>Realität</th></tr></thead>
+<tbody>
+<tr><td><b>Schaltung auf dem Steckbrett</b></td><td>ein Abend</td><td>meist zutreffend</td></tr>
+<tr><td><b>Firmware-Grundfunktion</b></td><td>ein Abend</td><td>zwei bis drei — Peripherie-Initialisierung dauert immer länger</td></tr>
+<tr><td><b>Layout einer kleinen Platine</b></td><td>ein Abend</td><td>zwei Abende plus einer für die Prüfung</td></tr>
+<tr><td><b>Fehlersuche</b></td><td>nicht eingeplant</td><td>rund die Hälfte der Gesamtzeit</td></tr>
+<tr><td><b>Gehäuse und Mechanik</b></td><td>„mach ich schnell“</td><td>oft so lang wie die Elektronik</td></tr>
+<tr><td><b>Dokumentation</b></td><td>nicht eingeplant</td><td>zwei bis vier Stunden, wenn man sie nicht laufend macht</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Eine brauchbare Faustregel:</b> Die eigene erste Schätzung verdoppeln und die nächsthöhere Zeiteinheit nehmen. Aus „drei Stunden“ wird „sechs Tage“ — was sich absurd anhört, aber der Erfahrung erstaunlich nahekommt. Wichtiger als eine genaue Schätzung ist ohnehin, den Umfang so zu schneiden, dass ein Teilergebnis früh benutzbar ist.</div>
+
+<h2>Wann man aufhört</h2>
+<div class="steps">
+  <div class="step"><h4>Erfolgskriterium erreicht</h4>Dann ist Version 1 fertig. Alles Weitere ist Version 2 — und die beginnt nach einer Pause, in der man das Gerät benutzt hat.</div>
+  <div class="step"><h4>Das Lernziel ist erreicht, das Gerät aber nicht fertig</h4>Auch ein legitimer Abschluss. Aufschreiben, was man gelernt hat, den Stand dokumentieren, Bauteile zurücklegen. Kein schlechtes Gewissen.</div>
+  <div class="step"><h4>Es ist zur Pflicht geworden</h4>Weglegen. Ein Hobbyprojekt, an dem man keine Freude mehr hat, wird nicht besser, wenn man sich zwingt.</div>
+  <div class="step"><h4>Die Voraussetzungen fehlen</h4>Ehrlich feststellen, was fehlt, es gezielt lernen und später zurückkommen. Ein pausiertes Projekt mit klarer Notiz ist kein Scheitern.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Weiterführend</div>
+  <ul>
+    <li>Elecia White, <i>Making Embedded Systems</i> — Kapitel zu Projektstruktur und Entwurfsentscheidungen.</li>
+    <li>Ablauf für die Leiterplatte: <a href="leiterplatte-kicad.html#start">Leiterplatte &amp; KiCad → Start &amp; Workflow</a>.</li>
+    <li>Werkzeuge und Versionsverwaltung: <a href="informationstechnik.html#werkzeuge">Informationstechnik → Werkzeuge</a>.</li>
+  </ul>
+</div>

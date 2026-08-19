@@ -1,0 +1,88 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Leiterbahnbreite folgt aus dem Strom und der zulässigen Erwärmung — nicht aus dem Gefühl.</b> IPC-2221 ist die konservative klassische Rechnung, IPC-2152 die moderne, messdatenbasierte. Für den Hausgebrauch reicht IPC-2221; bei hohen Strömen sollte man beide vergleichen.</div>
+
+<h2>Der Rechner</h2>
+<div class="calc" data-calc="trace">
+  <h4>Leiterbahnbreite nach IPC-2221</h4>
+  <div class="row">
+    <div><label>Strom in A</label><input data-k="i" type="number" step="any" value="2" /></div>
+    <div><label>Erwärmung in K</label><input data-k="dt" type="number" step="any" value="20" /></div>
+    <div><label>Kupfer in oz</label><select data-k="cu"><option value="0.5">0,5 oz (18 µm)</option><option value="1" selected>1 oz (35 µm)</option><option value="2">2 oz (70 µm)</option><option value="3">3 oz (105 µm)</option></select></div>
+    <div><label>Lage</label><select data-k="lay"><option value="1" selected>Außenlage</option><option value="0">Innenlage</option></select></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+<div class="fbox">
+  <span class="f">A = (I / (k · ΔT^0,44))^(1/0,725)&nbsp;&nbsp;·&nbsp;&nbsp;k = 0,048 außen, 0,024 innen</span>
+  <span class="l">A ergibt sich in Quadrat-Mil; geteilt durch die Kupferdicke ergibt sich die Breite. Innenlagen tragen bei gleicher Breite nur etwa die Hälfte, weil die Wärme schlechter abgeführt wird.</span>
+</div>
+
+<h2>Richtwerte für 35 µm Kupfer, Außenlage</h2>
+<p class="kurz">Alle Werte stammen aus derselben IPC-2221-Formel wie der Rechner oben — sie sind also untereinander konsistent und lassen sich dort nachrechnen.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="num">Strom</th><th>Breite bei ΔT = 10 K</th><th>Breite bei ΔT = 20 K</th><th>Breite bei ΔT = 40 K</th></tr></thead>
+<tbody>
+<tr><td><b>0,5 A</b></td><td>0,12 mm</td><td>0,08 mm</td><td>0,05 mm</td></tr>
+<tr><td><b>1 A</b></td><td>0,30 mm</td><td>0,20 mm</td><td>0,13 mm</td></tr>
+<tr><td><b>2 A</b></td><td>0,78 mm</td><td>0,51 mm</td><td>0,34 mm</td></tr>
+<tr><td><b>3 A</b></td><td>1,37 mm</td><td>0,90 mm</td><td>0,59 mm</td></tr>
+<tr><td><b>5 A</b></td><td>2,77 mm</td><td>1,82 mm</td><td>1,19 mm</td></tr>
+<tr><td><b>10 A</b></td><td>7,19 mm</td><td>4,72 mm</td><td>3,10 mm</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Ab etwa 5 A wird eine Leiterbahn unpraktisch breit.</b> Die üblichen Auswege: dickeres Kupfer (2 oz halbiert die Breite), mehrere Lagen parallel mit vielen Vias, eine Kupferfläche statt einer Bahn, eine aufgelötete Kupferschiene, oder die Lötstoppmaske über der Bahn weglassen und sie dick verzinnen. Letzteres bringt real etwa 20–40 % — nicht mehr, weil Lot deutlich schlechter leitet als Kupfer.</div>
+
+<h2>IPC-2221 gegen IPC-2152</h2>
+<div class="gb">
+  <div class="gb-col"><h4>IPC-2221</h4>
+    <p>Basiert auf Messungen aus den 1950er-Jahren, die aus militärischen Spezifikationen (MIL-STD-275) stammen. Die Werte wurden 1968 pauschal reduziert, weil die Praxis höhere Erwärmung zeigte.</p>
+    <ul><li>Einfache Formel, überall implementiert</li><li>Bewusst konservativ — für den Hausgebrauch auf der sicheren Seite</li><li>Berücksichtigt weder Platinenmaterial noch benachbarte Kupferflächen</li></ul>
+  </div>
+  <div class="gb-col"><h4>IPC-2152</h4>
+    <p>Von 2009, auf Basis systematischer moderner Messungen. Berücksichtigt Platinendicke, Material, Umgebung (Luft oder Vakuum) und vor allem benachbarte Kupferflächen als Kühlkörper.</p>
+    <ul><li>Deutlich genauer, oft weniger Breite nötig</li><li>Arbeitet mit Diagrammen und Korrekturfaktoren statt einer einzigen Formel</li><li>Für Entwürfe mit hohen Strömen die richtige Grundlage</li></ul>
+  </div>
+</div>
+<p class="note">Ein Effekt, den erst IPC-2152 erfasst: Parallel geführte stromführende Bahnen heizen sich <b>gegenseitig</b> auf. Eine isoliert gerechnete Bahn kann in einem Bündel deutlich heißer werden als vorhergesagt. Wer mehrere Leistungsbahnen nebeneinander führt, sollte Abstand halten oder die Erwärmung messen.</p>
+
+<h2>Der andere Grenzwert: Spannungsfall</h2>
+<div class="fbox">
+  <span class="f">R = ρ · l / (b · d)&nbsp;&nbsp;mit ρ_Cu = 0,0175 Ω·mm²/m</span>
+  <span class="l">Bei 35 µm Kupfer hat eine 1 mm breite Bahn etwa 0,5 mΩ je mm Länge.</span>
+</div>
+<p>Beispiel: 100 mm lange Bahn, 1 mm breit, 35 µm, 2 A. R = 0,0175 · 0,1 / (1 · 0,035) = 50 mΩ, Spannungsfall 100 mV. Bei einer 3,3-V-Versorgung sind das 3 % — für einen Mikrocontroller unkritisch, für eine Referenzspannung schon zu viel. <b>Bei empfindlichen Analogschaltungen begrenzt der Spannungsfall die Bahnbreite, nicht die Erwärmung.</b></p>
+
+<h2>Abstände und Spannungsfestigkeit</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Spannung zwischen Leitern</th><th>Mindestabstand unbeschichtet, B4</th><th>Mit Lötstoppmaske, B1</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>bis 15 V</b></td><td>0,05 mm</td><td>0,05 mm</td><td>Fertigungsgrenze bestimmt</td></tr>
+<tr><td><b>bis 30 V</b></td><td>0,13 mm</td><td>0,13 mm</td><td>—</td></tr>
+<tr><td><b>bis 100 V</b></td><td>0,4 mm</td><td>0,13 mm</td><td>—</td></tr>
+<tr><td><b>bis 300 V</b></td><td>1,25 mm</td><td>0,4 mm</td><td>Netzspannung nach Gleichrichtung</td></tr>
+<tr><td><b>bis 500 V</b></td><td>2,5 mm</td><td>0,8 mm</td><td>—</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Für netzbetriebene Geräte gelten strengere Regeln.</b> Dort unterscheidet man <b>Luftstrecke</b> (kürzester Weg durch die Luft) und <b>Kriechstrecke</b> (entlang der Oberfläche), abhängig von Verschmutzungsgrad, Überspannungskategorie und Isolationsart (Basis-, Zusatz- oder verstärkte Isolierung). Maßgeblich ist EN IEC 62368-1 bzw. EN 61010-1. Für verstärkte Isolierung zwischen Netz und Sekundärseite sind typisch 6–8 mm nötig — deutlich mehr als die IPC-Tabelle oben nahelegt. Zusätzlich hilft ein <b>Isolationsschlitz</b> (durchgefräster Spalt) unter Optokopplern und Übertragern.</div>
+
+<h2>Praktische Layoutregeln für Leistungspfade</h2>
+<div class="steps">
+  <div class="step"><h4>Hin- und Rückleiter nebeneinander</h4>Möglichst übereinander auf benachbarten Lagen. Das minimiert die Schleifenfläche und damit die Induktivität und Abstrahlung.</div>
+  <div class="step"><h4>Keine scharfen Ecken bei hohen Strömen</h4>Nicht wegen Stromdichte — der Effekt ist gering —, sondern weil beim Ätzen an spitzen Ecken Säure stehen bleibt. 45°-Knicke sind der Standard.</div>
+  <div class="step"><h4>Vias großzügig setzen</h4>Jeder Lagenwechsel eines Leistungspfads braucht mehrere Vias. Ein einzelnes 0,3-mm-Via ist bei 3 A der Engpass.</div>
+  <div class="step"><h4>Shunts vierleitrig anschließen</h4>Die Messabgriffe direkt am Bauteilkörper, innerhalb der Stromanschlüsse. Sonst misst man den Widerstand der Zuleitung mit.</div>
+  <div class="step"><h4>Wärmequellen verteilen</h4>Nicht alle Leistungsbauteile nebeneinander. Kupferflächen als Kühlkörper vorsehen und thermisch anbinden — die Rechnung dazu steht im Datenblatt als „Recommended PCB Layout“.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>IPC-2221B — Abschnitt 6.2 (Leiterbahnbreite) und Tabelle 6-1 (Abstände).</li>
+    <li>IPC-2152 — Standard for Determining Current Carrying Capacity in Printed Board Design.</li>
+    <li>EN IEC 62368-1 und EN 61010-1 — Luft- und Kriechstrecken bei Netzspannung.</li>
+    <li>Rechner: das eingebaute Werkzeug in <a href="https://docs.kicad.org/">KiCad</a> (Werkzeuge → Rechner → Leiterbahnbreite) und <a href="https://www.leiton.de/leiton-tools-leiterbahnerwaermung.html">Leiton Leiterbahnerwärmung</a>.</li>
+  </ul>
+</div>

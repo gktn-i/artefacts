@@ -1,10 +1,10 @@
 # Artefakte
 
-Nachschlagewerke für Werkstatt, Küche und Homelab — <https://bib.gktn.dev>.
+Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab und Fotografie — <https://bib.gktn.dev>.
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 13 Module sind native Astro-Module — es gibt keine HTML-Monolithen mehr.
+Alle 25 Module sind native Astro-Module — es gibt keine HTML-Monolithen mehr.
 
 ## Struktur
 
@@ -23,7 +23,9 @@ public/assets/palette.js   globale Suche (⌘K): Registry-Treffer + Pagefind-Vol
 public/assets/chrome.css   Kopfleiste + Palette (gemeinsames Chrome)
 ```
 
-Drei Ebenen: **Index → Hub → Modul.** Hubs: 🔧 Werkstatt · 🍳 Küche · 🖥️ Homelab.
+Drei Ebenen: **Index → Hub → Modul.**
+Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video —
+zusammen 25 Module mit 223 Abschnitten.
 
 ## Wie ein Modul funktioniert
 
@@ -39,6 +41,12 @@ Drei Ebenen: **Index → Hub → Modul.** Hubs: 🔧 Werkstatt · 🍳 Küche ·
   `src/pages/[slug].astro` eingebunden.
 - **Modul-Design:** `_style.css` im Content-Ordner, alles unter `.mx-<id>` gescoped —
   kollidiert mit nichts. Kleine Module kommen ganz ohne aus (Content-System in site.css).
+- **Gemeinsame Stylesheets für einen ganzen Hub** sind möglich: `[slug].astro` hängt
+  bei Bedarf eine zweite Klasse an den Content-Container (`mx-sys` für die Küche,
+  `mx-mecha` für den Mechatronik-Hub). Das zugehörige Stylesheet liegt als
+  `src/content/_mecha.css` und wird von jedem `_style.css` des Hubs nur importiert.
+  Genauso teilen sich alle elf Mechatronik-Module ein einziges
+  `public/assets/mod-mecha.js` (Rechner, Filter, Glossar, PID-Simulation).
 
 Neues Modul: Registry-Eintrag + Content-Ordner. Index, Hub-Seite, Breadcrumb, Suche
 und Verwandt-Links ziehen automatisch nach.

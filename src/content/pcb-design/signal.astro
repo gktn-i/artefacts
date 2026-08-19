@@ -1,0 +1,97 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Nicht die Taktfrequenz entscheidet, ob Signalintegrität ein Thema ist, sondern die <em>Flankensteilheit</em>.</b> Ein 1-kHz-Signal mit 1 ns Anstiegszeit enthält Frequenzanteile bis über 300 MHz — und verhält sich auf einer 10 cm langen Leitung entsprechend.</div>
+
+<h2>Wann eine Leitung zur Leitung wird</h2>
+<div class="fbox">
+  <span class="f">l_krit ≈ t_r · v / 6&nbsp;&nbsp;·&nbsp;&nbsp;f_wichtig ≈ 0,35 / t_r</span>
+  <span class="l">v ≈ 15 cm/ns auf Innenlagen (Stripline), ≈ 18–20 cm/ns auf Außenlagen (Microstrip). Bei t_r = 1 ns ergibt das eine kritische Länge von rund 2,5–3 cm.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Anstiegszeit</th><th>Bandbreite</th><th>Kritische Länge (Außenlage)</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>10 ns</b></td><td>35 MHz</td><td>≈ 30 cm</td><td>Langsame Logik, 74HC bei niedriger Last</td></tr>
+<tr><td><b>5 ns</b></td><td>70 MHz</td><td>≈ 15 cm</td><td>Mikrocontroller-GPIO mit gedrosselter Flanke</td></tr>
+<tr><td><b>2 ns</b></td><td>175 MHz</td><td>≈ 6 cm</td><td>Standard-GPIO, SPI bei hoher Rate</td></tr>
+<tr><td><b>1 ns</b></td><td>350 MHz</td><td>≈ 3 cm</td><td>Schnelle Ausgangstreiber, DDR-Steuerleitungen</td></tr>
+<tr><td><b>0,3 ns</b></td><td>1,2 GHz</td><td>≈ 1 cm</td><td>USB HS, HDMI, Ethernet-PHY</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die einfachste Gegenmaßnahme:</b> Flanken langsamer machen, wo es geht. Viele Mikrocontroller haben eine einstellbare Ausgangsgeschwindigkeit („Slew Rate Control“) — die niedrigste Stufe, die noch funktioniert, ist die richtige. Ein Serienwiderstand von 22–47 Ω wirkt ähnlich und terminiert gleichzeitig.</div>
+
+<h2>Wellenwiderstand</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Schnittstelle</th><th>Zielimpedanz</th><th>Ausführung</th></tr></thead>
+<tbody>
+<tr><td><b>USB 2.0</b></td><td>90 Ω differentiell</td><td>Enges Paar, Längendifferenz &lt; 1,3 mm</td></tr>
+<tr><td><b>Ethernet (100/1000BASE-T)</b></td><td>100 Ω differentiell</td><td>Vier Paare, Übertrager oder integrierte Magnetik</td></tr>
+<tr><td><b>HDMI / DisplayPort</b></td><td>100 Ω differentiell</td><td>Längenausgleich innerhalb und zwischen den Paaren</td></tr>
+<tr><td><b>LVDS</b></td><td>100 Ω differentiell</td><td>Abschluss am Empfänger</td></tr>
+<tr><td><b>CAN</b></td><td>120 Ω differentiell</td><td>Abschluss an beiden Leitungsenden, nicht dazwischen</td></tr>
+<tr><td><b>HF, Antennen</b></td><td>50 Ω single-ended</td><td>Koplanar mit Masse oder Microstrip, durchgehende Massefläche darunter</td></tr>
+<tr><td><b>Speicherbus (DDR)</b></td><td>40–60 Ω single-ended</td><td>Herstellervorgabe, Längenausgleich zwingend</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die nötige Leiterbahnbreite hängt vom Lagenabstand, der Kupferdicke und ε_r ab. Der Rechner in KiCad (Werkzeuge → Rechner → Übertragungsleitungen) liefert sie für Microstrip und Stripline. Wer es genau braucht, bestellt beim Fertiger eine <b>Impedanzkontrolle</b> — dann liefert dieser den exakten Aufbau und die passenden Breiten.</p>
+
+<h2>Terminierung</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Serienterminierung (Quelle)</div><div class="cd">Widerstand direkt am Ausgang, sodass Treiberwiderstand plus Widerstand dem Wellenwiderstand entsprechen. Meist 22–47 Ω. Die einfachste und häufigste Lösung — verbraucht keinen Ruhestrom.</div></div>
+  <div class="card"><div class="ct">Parallelterminierung (Ende)</div><div class="cd">Widerstand am Empfänger gegen Masse oder Versorgung. Wirksam, aber zieht dauerhaft Strom.</div></div>
+  <div class="card"><div class="ct">Thévenin-Terminierung</div><div class="cd">Zwei Widerstände als Teiler am Empfänger. Setzt gleichzeitig einen Ruhepegel — bei Bussen üblich.</div></div>
+  <div class="card"><div class="ct">AC-Terminierung</div><div class="cd">Widerstand plus Kondensator in Reihe. Kein Gleichstromverbrauch, aber zusätzliche Bauteile.</div></div>
+  <div class="card"><div class="ct">Differentieller Abschluss</div><div class="cd">Ein Widerstand zwischen den beiden Leitungen am Empfänger, meist 100 oder 120 Ω. Bei CAN und RS-485 an <b>beiden Enden</b> des Busses, nirgends dazwischen.</div></div>
+  <div class="card"><div class="ct">Wo Terminierung fehlt</div><div class="cd">Symptome: Überschwingen über die Versorgungsspannung, Doppelflanken, sporadische Fehler bei bestimmten Datenmustern. Am Oszilloskop mit kurzer Federklemme messen — eine lange Masseklemme erzeugt das Klingeln selbst.</div></div>
+</div>
+
+<h2>Differentielle Paare routen</h2>
+<div class="steps">
+  <div class="step"><h4>Zusammen und eng führen</h4>Der Abstand zwischen den beiden Leitungen sollte über die ganze Strecke konstant bleiben. Er bestimmt zusammen mit der Breite die differentielle Impedanz.</div>
+  <div class="step"><h4>Längen ausgleichen</h4>Innerhalb des Paares typisch unter 0,1–0,15 mm Differenz. Der Ausgleich sollte möglichst nahe an der Stelle erfolgen, wo die Differenz entsteht.</div>
+  <div class="step"><h4>Durchgehende Bezugsfläche</h4>Kein Schlitz unter dem Paar. Bei einem Lagenwechsel Massevias direkt daneben.</div>
+  <div class="step"><h4>Symmetrie erhalten</h4>Beide Leitungen sollen dieselben Umgebungsbedingungen sehen — gleiche Anzahl Vias, gleiche Nachbarschaft, gleiche Länge im Stecker.</div>
+  <div class="step"><h4>Abstand zu anderen Signalen</h4>Faustregel: mindestens der dreifache Abstand zur Bezugsfläche (3W-Regel) zu benachbarten Leitungen.</div>
+  <div class="step"><h4>Stichleitungen vermeiden</h4>Ein ungenutzter Abzweig wirkt als Resonator. ESD-Schutzdioden gehören direkt in die Leitung, nicht an einen Stich.</div>
+</div>
+
+<h2>Takte und Quarze</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Regel</th><th>Begründung</th></tr></thead>
+<tbody>
+<tr><td><b>Quarz direkt am Controller</b></td><td>Wenige Millimeter Leitungslänge. Die Schwingschaltung ist hochohmig und störempfindlich</td></tr>
+<tr><td><b>Lastkondensatoren nach Datenblatt</b></td><td>C_L = 2·(C_Last − C_Streu). Falsche Werte verstimmen die Frequenz oder verhindern das Anschwingen</td></tr>
+<tr><td><b>Massefläche unter dem Quarz</b></td><td>Und eine Kupferinsel als Schirm um ihn herum, mit Masse verbunden</td></tr>
+<tr><td><b>Nichts unter oder neben dem Quarz routen</b></td><td>Besonders keine schnellen Signale und keine Schaltregler</td></tr>
+<tr><td><b>Taktleitungen kurz und mit Serienwiderstand</b></td><td>Der Takt ist die stärkste Schmalbandquelle auf jeder Platine</td></tr>
+<tr><td><b>Takte nicht über Steckverbinder</b></td><td>Wenn es sein muss: differentiell übertragen und beidseitig Masse mitführen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Fehlersuche bei Signalproblemen</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Symptome und Ursachen</h4><ul>
+    <li><b>Überschwingen über V_CC:</b> fehlende Terminierung, zu steile Flanke</li>
+    <li><b>Doppelte Flanken:</b> Reflexion an einem Impedanzsprung</li>
+    <li><b>Fehler nur bei bestimmten Datenmustern:</b> Übersprechen oder Versorgungseinbruch bei gleichzeitigem Schalten</li>
+    <li><b>Fehler nur bei angeschlossenem Kabel:</b> das Kabel wirkt als Antenne, Filter fehlt</li>
+    <li><b>Bus läuft langsam, aber nicht schnell:</b> zu hohe Kapazität, zu schwacher Pull-up, Leitung zu lang</li>
+  </ul></div>
+  <div class="gb-col"><h4>Richtig messen</h4><ul>
+    <li>Kurze Federklemme statt Krokodilklemme — eine 10 cm lange Masseleitung erzeugt das Klingeln selbst</li>
+    <li>Tastkopf auf 10:1 stellen, sonst belastet die Kapazität das Signal</li>
+    <li>An beiden Enden der Leitung messen, nicht nur beim Empfänger</li>
+    <li>Für differentielle Signale einen Differenztastkopf verwenden</li>
+    <li>Augendiagramm nutzen, wenn das Oszilloskop es beherrscht</li>
+  </ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Howard Johnson, Martin Graham, <i>High-Speed Digital Design: A Handbook of Black Magic</i> — der Klassiker.</li>
+    <li>Eric Bogatin, <i>Signal and Power Integrity — Simplified</i>, Prentice Hall.</li>
+    <li>Texas Instruments, <i>High-Speed Layout Guidelines</i> (SCAA082) und die Layoutabschnitte der jeweiligen PHY-Datenblätter.</li>
+    <li>KiCad-Rechner für Microstrip und Stripline; Fertigerangebote zur Impedanzkontrolle.</li>
+  </ul>
+</div>
