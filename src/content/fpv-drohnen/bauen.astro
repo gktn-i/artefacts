@@ -1,0 +1,75 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Quad wird von innen nach außen gebaut.</b> Erst alles, was später schwer zugänglich ist, dann die Peripherie, zuletzt die Propeller. Wer diese Reihenfolge umdreht, lötet am Ende über einem fertigen Aufbau — und genau dann fallen Lotperlen zwischen die Platinen.</div>
+
+<h2>Werkzeug</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Lötstation</div><div class="cd">Temperaturgeregelt, 60 W oder mehr, mit Meißelspitze 2–3 mm. Die dicken Akkulötpads eines 4-in-1-ESC brauchen Wärmeleistung — ein schwacher Kolben erzeugt kalte Lötstellen und verbrennt gleichzeitig die Platine. Details im Modul <a href="loeten-referenz.html">Löten</a>.</div></div>
+  <div class="card"><div class="ct">Lot und Flussmittel</div><div class="cd">Bleihaltiges Lot 60/40 mit Flussmittelseele ist am gutmütigsten. Zusätzliches Flussmittel als Stift oder Gel für die großen Pads. Danach Reinigen mit Isopropanol.</div></div>
+  <div class="card"><div class="ct">Sechskantschlüssel</div><div class="cd">1,5 / 2,0 / 2,5 mm in guter Qualität. Billige Schlüssel runden Schraubenköpfe aus, und eine ausgerundete M3-Schraube in einem Motorgewinde kostet einen Nachmittag.</div></div>
+  <div class="card"><div class="ct">Smoke Stopper</div><div class="cd">Ein Strombegrenzer für das erste Anstecken. Bei einem Kurzschluss leuchtet nur eine Lampe, statt dass der ESC raucht. Zwanzig Euro, die sich beim ersten Mal bezahlt machen.</div></div>
+  <div class="card"><div class="ct">Multimeter</div><div class="cd">Für Durchgangsprüfung zwischen Plus und Minus vor dem ersten Anstecken — der wichtigste einzelne Prüfschritt beim ganzen Bau. Siehe <a href="elektronik-grundlagen.html">Elektronik 101</a>.</div></div>
+  <div class="card"><div class="ct">Kleinteile</div><div class="cd">Schrumpfschlauch in mehreren Größen, Kabelbinder, Schraubensicherung mittelfest, doppelseitiges Klebeband, Isolierband für Akkupads, TPU-Teile.</div></div>
+</div>
+
+<h2>Bauablauf</h2>
+<div class="steps">
+  <div class="step"><h4>Trocken aufbauen</h4>Alles einmal ohne Löten zusammenstecken. Passt der Stack? Reichen die Motorkabel? Wo liegt der Empfänger, wo die Antennen? Diese zehn Minuten verhindern das spätere Auslöten.</div>
+  <div class="step"><h4>Motoren montieren und Kabel ablängen</h4>Schrauben auf die richtige Länge prüfen — zu lange Motorschrauben zerstören die Wicklung. Kabel so ablängen, dass sie ohne Zug am Pad ankommen, aber nicht in den Propellerkreis ragen.</div>
+  <div class="step"><h4>ESC verlöten</h4>Erst die Akkuleitung mit Kondensator, dann die zwölf Motorleitungen. Pads verzinnen, Kabel verzinnen, dann zusammenführen. Die Phasenreihenfolge ist egal — die Drehrichtung wird später in der Software gesetzt.</div>
+  <div class="step"><h4>Durchgang prüfen</h4>Multimeter auf Durchgangsprüfung, zwischen Plus und Minus der Akkuleitung messen. Ein Piepton heißt Kurzschluss — jetzt suchen, nicht nach dem Anstecken. Ein kurzer Widerstandsaufbau durch den Kondensator ist normal, dauerhafter Durchgang nicht.</div>
+  <div class="step"><h4>Stack aufbauen</h4>FC auf den ESC, Verbindungskabel stecken, Gummitüllen einsetzen, Schrauben mit leichter Vorspannung. Die Ausrichtung des FC-Pfeils nach vorn nicht vergessen — sonst fliegt das Quad um 90° verdreht.</div>
+  <div class="step"><h4>Erstes Anstecken über Smoke Stopper</h4>Ohne Propeller, ohne Empfänger, ohne VTX. Kein Rauch, keine Hitze, LED leuchtet: gut. Dann USB anschließen und prüfen, ob der FC erkannt wird.</div>
+  <div class="step"><h4>Peripherie anlöten</h4>Empfänger, VTX, Kamera, Buzzer, GPS. Jeweils Spannung prüfen, bevor das Bauteil drankommt: 5 V dürfen keine 9 V sein. Ein an 9 V gehängter Empfänger ist sofort tot.</div>
+  <div class="step"><h4>Antennen befestigen</h4>Frei stehend, aus dem Carbon heraus, im 90-Grad-Winkel zueinander, in einem TPU-Halter, der bei einem Aufprall nachgibt. Der VTX bekommt seine Antenne <b>vor</b> dem ersten Einschalten.</div>
+  <div class="step"><h4>Betaflight einrichten</h4>In der Reihenfolge unter <a href="#betaflight">Betaflight einrichten</a>. Propeller bleiben ab, bis Motorreihenfolge, Drehrichtung und Failsafe geprüft sind.</div>
+  <div class="step"><h4>Wiegen</h4>Abfluggewicht mit Akku notieren. Für die rechtliche Einordnung nötig und für die Schub-Gewicht-Rechnung im <a href="#rechner">Rechner</a>.</div>
+</div>
+
+<h2>Prüfliste vor dem Erstflug</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Prüfung</th><th>Wie</th><th>Muss ergeben</th></tr></thead>
+<tbody>
+<tr><td><b>Kurzschluss</b></td><td>Multimeter zwischen Akku-Plus und -Minus</td><td>Kein dauerhafter Durchgang</td></tr>
+<tr><td><b>Motorreihenfolge</b></td><td>Betaflight-Motorentab, ohne Propeller</td><td>Motor 1 = hinten rechts, 2 = vorn rechts, 3 = hinten links, 4 = vorn links</td></tr>
+<tr><td><b>Drehrichtung</b></td><td>Motorentab, ohne Propeller</td><td>Passend zur geplanten Propellermontage</td></tr>
+<tr><td><b>Gyro-Ausrichtung</b></td><td>Quad kippen, Modell im Setup-Tab beobachten</td><td>Modell bewegt sich mit, in die richtige Richtung</td></tr>
+<tr><td><b>Empfängerkanäle</b></td><td>Receiver-Tab, jeden Knüppel einzeln</td><td>Richtiger Balken, richtige Richtung, 1000–1500–2000</td></tr>
+<tr><td><b>Failsafe</b></td><td>Armieren ohne Propeller, Funke aus</td><td>Motoren stoppen sofort</td></tr>
+<tr><td><b>Armieren/Disarmieren</b></td><td>Schalter mehrfach betätigen</td><td>Sicher und eindeutig, kein Zufallsverhalten</td></tr>
+<tr><td><b>VTX-Antenne</b></td><td>Sichtprüfung</td><td>Angeschraubt, bevor Strom fließt</td></tr>
+<tr><td><b>Propeller</b></td><td>Sichtprüfung und Drehrichtung</td><td>Passend, unbeschädigt, Mutter fest</td></tr>
+<tr><td><b>Schrauben</b></td><td>Alle einmal nachziehen</td><td>Fest, mit Schraubensicherung an Motoren und Armen</td></tr>
+<tr><td><b>Akkuriemen</b></td><td>Zug prüfen</td><td>Der Akku darf sich nicht verschieben lassen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Der erste Flug</h2>
+<div class="steps">
+  <div class="step"><h4>Ort wählen</h4>Große freie Fläche, kein Publikum, keine Straße, keine Tiere, kein Wind. Rechtliche Voraussetzungen vorher klären — siehe <a href="#recht">Recht &amp; Sicherheit</a>.</div>
+  <div class="step"><h4>Ohne Brille schweben</h4>Zwanzig Zentimeter hoch, in Sichtweite, ein paar Sekunden. Es geht nur um eine Frage: Bleibt das Quad ruhig oder kippt es? Dann sofort landen und alle vier Motoren anfassen.</div>
+  <div class="step"><h4>Motoren prüfen</h4>Handwarm ist in Ordnung. Ein deutlich heißerer Motor als die anderen heißt: sofort aufhören und suchen. Alle vier heiß heißt Tuning- oder Filterproblem.</div>
+  <div class="step"><h4>Mit Brille schweben</h4>Erst dann. Die Umstellung auf die Brille ist selbst schon eine Übung — sie sollte nicht mit dem Erstflug eines unbekannten Quads zusammenfallen.</div>
+  <div class="step"><h4>Nach dem ersten Akku alles nachziehen</h4>Vibration löst Schrauben. Nach dem ersten Flug jede Schraube prüfen, Lötstellen ansehen, Propeller kontrollieren. Danach ist das Quad eingefahren.</div>
+</div>
+<div class="stop"><b>Vier Regeln, die nicht verhandelbar sind.</b> Erstens: Propeller ab, sobald der Akku steckt und man am Quad arbeitet. Zweitens: Akku ab, bevor man das Quad aufhebt. Drittens: Nie über Menschen. Viertens: Nie mit beschädigtem Propeller starten. Die meisten ernsthaften Verletzungen in diesem Hobby entstehen am Boden, nicht in der Luft.</div>
+
+<h2>Feldkiste</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Ersatz</div><div class="cd">Propeller, Motorschrauben, Akkuriemen, Kabelbinder, ein Ersatzmotor bei längeren Ausflügen</div></div>
+  <div class="card"><div class="ct">Werkzeug</div><div class="cd">Sechskantschlüssel, Propellermutternschlüssel, kleiner Seitenschneider, Schraubensicherung</div></div>
+  <div class="card"><div class="ct">Strom</div><div class="cd">Akkus im getrennten Fach, Akkuchecker, Powerbank für Funke und Brille</div></div>
+  <div class="card"><div class="ct">Notfall</div><div class="cd">Löschdecke oder Sand, Pflaster, Handschuhe. Verletzungen durch Propeller sind Schnittwunden</div></div>
+  <div class="card"><div class="ct">Suche</div><div class="cd">Lauter Buzzer mit eigener Batterie am Quad. Ein verlorenes Quad im hohen Gras findet man ohne Piepser praktisch nie wieder</div></div>
+  <div class="card"><div class="ct">Papiere</div><div class="cd">Nachweis der Registrierung, Kompetenznachweis, Versicherungsbeleg — am einfachsten als Foto auf dem Telefon</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://oscarliang.com/how-to-build-fpv-drone/">Oscar Liang — How to Build an FPV Drone</a>: bebilderte Bauanleitung, laufend auf aktuelle Hardware aktualisiert.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — mehrteilige Build-Serien, in denen jeder Schritt begründet wird; besonders wertvoll für die Prüfschritte vor dem ersten Anstecken.</li>
+    <li>Löttechnik, Flussmittel, Spitzenwahl und Fehlerbilder ausführlich im Modul <a href="loeten-referenz.html">Löten</a>.</li>
+  </ul>
+</div>

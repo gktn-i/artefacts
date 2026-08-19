@@ -1,0 +1,67 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Antennen sind der billigste Weg zu mehr Reichweite und der häufigste Weg, sie zu verlieren.</b> Drei Dezibel mehr Antennengewinn wirken genauso wie doppelte Sendeleistung — kosten aber keinen Strom, keine Wärme und keine Legalität. Umgekehrt macht eine falsch polarisierte, gequetschte oder von Carbon verdeckte Antenne jede Leistungssteigerung zunichte.</div>
+
+<h2>Polarisation</h2>
+<p>Eine Funkwelle schwingt in einer Ebene (linear) oder auf einer Schraubenlinie (zirkular). Sender und Empfänger müssen zusammenpassen — sonst geht ein großer Teil der Energie verloren.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Polarisation</th><th>Kürzel</th><th>Verhalten</th><th>Wo eingesetzt</th></tr></thead>
+<tbody>
+<tr><td><b>Linear</b></td><td>Dipol, „Stab“</td><td>Höchster Gewinn bei gleicher Ausrichtung; kippt das Quad, bricht der Pegel ein. Empfindlich gegen Reflexionen</td><td>RC-Link, einfache Aufbauten</td></tr>
+<tr><td><b>Zirkular rechtsdrehend</b></td><td>RHCP</td><td>Unempfindlich gegen Drehung des Quads; unterdrückt Mehrwegeechos, weil die Reflexion den Drehsinn umkehrt</td><td>Der Standard im analogen Videofunk</td></tr>
+<tr><td><b>Zirkular linksdrehend</b></td><td>LHCP</td><td>Genau wie RHCP, nur andersherum</td><td>Ebenfalls verbreitet — die Wahl ist Konvention, nicht Technik</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>RHCP und LHCP mischen kostet etwa 20 dB.</b> Das ist der Unterschied zwischen „drei Kilometer“ und „dreißig Meter“. Wer sich für einen Drehsinn entscheidet, kauft nur noch diesen — für Quad und Brille. Auf Flugplätzen ist es üblich, sich abzustimmen: Zwei Piloten mit unterschiedlichem Drehsinn stören sich gegenseitig deutlich weniger, was auf demselben Kanal sogar hilfreich sein kann.</div>
+
+<h2>Bauformen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Bauform</th><th>Gewinn</th><th>Abstrahlung</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Dipol / Whip</b></td><td>ca. 2 dBi</td><td>Rundum, mit Nullstellen an den Enden</td><td>Empfänger am Quad, Sender-Grundausstattung</td></tr>
+<tr><td><b>Zirkular („Kleeblatt“, Lollipop)</b></td><td>1–3 dBic</td><td>Rundum, leicht nach oben/unten geschwächt</td><td>VTX am Quad; die Standardlösung</td></tr>
+<tr><td><b>Patch</b></td><td>8–14 dBic</td><td>Keule von 60–120°</td><td>An der Brille, in Flugrichtung. Verdoppelt bis vervierfacht die nutzbare Distanz nach vorn</td></tr>
+<tr><td><b>Helix</b></td><td>10–16 dBic</td><td>Enge Keule von 30–60°</td><td>Long Range mit fester Flugrichtung; braucht Nachführung</td></tr>
+<tr><td><b>Yagi</b></td><td>10–18 dBi</td><td>Sehr eng, linear</td><td>Bodenstation für Flächenflug und Strecke</td></tr>
+<tr><td><b>Moxon / Dipol-Array</b></td><td>5–9 dBi</td><td>Breite Keule</td><td>RC-Link auf Distanz, gutmütiger als Yagi</td></tr>
+</tbody>
+</table></div>
+<p class="note">Gewinn ist kein Verstärker, sondern eine Umverteilung: Was eine Richtantenne nach vorn gewinnt, fehlt zur Seite und nach hinten. Deshalb ist eine 14-dBi-Patch am Kopf nur so lange gut, wie das Quad tatsächlich vorn ist — und deshalb betreibt man sie in einer Brille mit Diversity zusammen mit einer Rundstrahlantenne.</p>
+
+<h2>Diversity</h2>
+<p>Zwei Empfänger, zwei Antennen, ein Bild: Die Brille wählt fortlaufend die bessere Quelle aus. Die sinnvolle Kombination ist fast immer <b>eine Rundstrahlantenne plus eine Richtantenne</b> — die eine deckt alles nahe und seitlich ab, die andere die Distanz nach vorn. Zwei Richtantennen nebeneinander bringen wenig, zwei Rundstrahler auch.</p>
+<div class="fbox">
+  <span class="f">3 dB ≈ doppelte Leistung ≈ 1,41-fache Reichweite  ·  6 dB ≈ doppelte Reichweite</span>
+  <span class="l">Freiraumdämpfung wächst mit dem Quadrat der Entfernung. Deshalb bringen die ersten Dezibel viel und die letzten wenig.</span>
+</div>
+
+<h2>Steckverbinder und Kabel</h2>
+<div class="flist">
+  <div class="frow hd"><span>Thema</span><span>Detail</span><span>Warum es zählt</span></div>
+  <div class="frow"><span class="fn">SMA / RP-SMA</span><span class="fe">Innenleiter vorhanden oder nicht</span><span class="fx">Mechanisch gleich, elektrisch inkompatibel. Falsche Kombination heißt: es schraubt sich zusammen und überträgt nichts</span></div>
+  <div class="frow"><span class="fn">MMCX / U.FL</span><span class="fe">Miniaturstecker</span><span class="fx">Am Quad üblich, weil leicht. U.FL ist für wenige Steckzyklen ausgelegt; wer täglich steckt, nimmt MMCX</span></div>
+  <div class="frow"><span class="fn">Kabeldämpfung</span><span class="fe">bei 5,8 GHz erheblich</span><span class="fx">Dünnes Verlängerungskabel kostet schnell 2–3 dB je Meter. Kurz halten oder besseres Kabel nehmen</span></div>
+  <div class="frow"><span class="fn">Anpassung (SWR)</span><span class="fe">idealerweise &lt; 1,5</span><span class="fx">Schlechte Anpassung reflektiert Leistung zurück in die Endstufe. Beschädigte Antennen sind eine häufige VTX-Todesursache</span></div>
+  <div class="frow"><span class="fn">Zugentlastung</span><span class="fe">TPU-Halter</span><span class="fx">Die Kraft eines Absturzes darf nie am Stecker hängen, sondern am Halter, der brechen darf</span></div>
+</div>
+
+<h2>Ausbreitung in der Praxis</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Der eigene Körper</div><div class="cd">Menschen bestehen weitgehend aus Wasser und dämpfen 5,8 GHz stark. Wer sich mit dem Rücken zum Quad dreht, verliert leicht 10 dB. Bei schwacher Verbindung: mitdrehen.</div></div>
+  <div class="card"><div class="ct">Bäume und Laub</div><div class="cd">Nasses Laub ist bei 5,8 GHz nahezu undurchsichtig. Ein Flug hinter einer Baumreihe ist der klassische Bildverlust — und bei 868 MHz für den RC-Link deutlich unkritischer als bei 2,4 GHz.</div></div>
+  <div class="card"><div class="ct">Mehrwegeausbreitung</div><div class="cd">Reflexionen an Gebäuden und Boden überlagern sich mit dem Direktsignal und löschen es teilweise aus. Zirkulare Polarisation ist genau dagegen erfunden worden.</div></div>
+  <div class="card"><div class="ct">Fresnelzone</div><div class="cd">Für eine saubere Verbindung muss nicht nur die Sichtlinie frei sein, sondern ein Ellipsoid um sie herum. Ein Flug knapp über einer Hügelkante hat Verbindungsprobleme, obwohl man sich sieht.</div></div>
+  <div class="card"><div class="ct">Höhe hilft</div><div class="cd">Der wirksamste Reichweitengewinn ist ein erhöhter Standort — mehr als jede Antenne. Zehn Meter Höhenunterschied ersetzen erstaunlich viel Sendeleistung.</div></div>
+  <div class="card"><div class="ct">Störer am Platz</div><div class="cd">WLAN-Router, andere Piloten, Mobilfunkzellen. Bei unerklärlichen Bildstörungen zuerst den Kanal wechseln, nicht die Hardware tauschen.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>ARRL Antenna Book bzw. Rothammels Antennenbuch — die Standardwerke zur Antennentechnik; alles hier Gesagte steht dort ausführlich hergeleitet.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Messungen zu Polarisationsverlust, Patch-Antennen und Diversity-Kombinationen.</li>
+    <li>Herstellerdiagramme von TrueRC, Lumenier, VAS und Menace — Abstrahldiagramme und Anpassungsmessungen einzelner Modelle.</li>
+    <li>Grundlagen zu Wellenausbreitung, Dezibel und Link-Budget: Modul <a href="informationstechnik.html">Informations- &amp; Rechnertechnik</a>.</li>
+  </ul>
+</div>

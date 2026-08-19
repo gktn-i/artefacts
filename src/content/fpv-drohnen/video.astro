@@ -1,0 +1,80 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Beim Videofunk zählt eine Eigenschaft mehr als Bildqualität: wie das Bild <em>stirbt</em>.</b> Analoges Video wird verrauscht, bleibt aber sichtbar und steuerbar — man sieht das Ende kommen. Digitale Systeme bleiben scharf und schalten dann ohne Vorwarnung ab. Deshalb ist Reichweite bei Analog eine Kurve und bei Digital eine Kante.</div>
+
+<h2>Analog oder digital</h2>
+<div class="tbl-wrap"><table style="min-width:1000px">
+<thead><tr><th data-s="text">System</th><th>Auflösung</th><th>Latenz (Größenordnung)</th><th>Verhalten am Rand</th><th>Gewicht</th><th>Einordnung</th></tr></thead>
+<tbody>
+<tr><td><b>Analog 5,8 GHz</b></td><td>ca. 480–600 TVL</td><td>&lt; 20 ms</td><td>rauscht langsam zu, bleibt nutzbar</td><td>sehr leicht</td><td>Billig, robust, unbegrenzt viele Zuschauer. Bildqualität nach heutigen Maßstäben schwach</td></tr>
+<tr><td><b>HDZero</b></td><td>720p</td><td>am niedrigsten unter den digitalen</td><td>bricht in Blöcke auf, bleibt lange fliegbar</td><td>leicht</td><td>Digitalsystem mit analog-ähnlichem Ausfallverhalten; bei Racern beliebt</td></tr>
+<tr><td><b>Walksnail Avatar</b></td><td>1080p</td><td>gering</td><td>friert ein, dann schwarz</td><td>mittel</td><td>Gutes Bild zu moderatem Preis, offener für Fremdhardware als DJI</td></tr>
+<tr><td><b>DJI (O3 / O4)</b></td><td>1080p, Aufnahme bis 4K</td><td>gering</td><td>friert ein, dann schwarz</td><td>mittel bis schwer</td><td>Bestes Bild und beste Aufnahme, geschlossenes Ökosystem, höchster Preis</td></tr>
+<tr><td><b>OpenIPC</b></td><td>720p/1080p</td><td>je nach Aufbau</td><td>konfigurierbar</td><td>mittel</td><td>Quelloffener Ansatz auf Standard-WLAN-Hardware. Für Bastler interessant, mehr Eigenarbeit</td></tr>
+</tbody>
+</table></div>
+<p class="note">Latenzangaben der Hersteller sind „glass to glass“ gemessen und je nach Modus unterschiedlich; unabhängige Messungen streuen deutlich. Verlässlich ist nur die Rangfolge, nicht die zweite Nachkommastelle. Vor einer Kaufentscheidung: aktuelle Messungen bei den unter <a href="#quellen">Quellen</a> genannten Stellen nachlesen.</p>
+
+<div class="gb">
+  <div class="gb-col good"><h4>Für Analog spricht</h4>
+    <ul>
+      <li>Sanfter Ausfall — man erkennt rechtzeitig, dass die Reichweite endet</li>
+      <li>Sehr leicht und sehr billig, ideal für Micros und Whoops</li>
+      <li>Beliebig viele Zuschauer können auf denselben Kanal gehen</li>
+      <li>Ein Crash kostet einen 15-Euro-VTX, keine 200-Euro-Einheit</li>
+    </ul>
+  </div>
+  <div class="gb-col"><h4>Für Digital spricht</h4>
+    <ul>
+      <li>Deutlich mehr erkennbare Details — Äste, Drähte, Untergrund</li>
+      <li>Aufnahme in Sendequalität oder besser, ohne zweite Kamera</li>
+      <li>Kein Kanalgeschiebe unter mehreren Piloten</li>
+      <li>Weniger Ermüdung auf langen Flugtagen</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Analoges 5,8-GHz-Band</h2>
+<p>Das 5,8-GHz-Band ist in Bänder zu je acht Kanälen aufgeteilt. Praktisch relevant sind zwei Dinge: Kanäle müssen weit genug auseinanderliegen, und nicht jeder Kanal ist überall zulässig.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Band</th><th>Kürzel</th><th>Bereich</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Band A</b></td><td>A / Boscam</td><td>5865–5945 MHz</td><td>Älteste Belegung, teils außerhalb der in der EU nutzbaren Bereiche</td></tr>
+<tr><td><b>Band B</b></td><td>B</td><td>5733–5866 MHz</td><td>Ergänzung zu A</td></tr>
+<tr><td><b>Band E</b></td><td>E</td><td>5645–5945 MHz</td><td>Sehr breit gestreut, viele Kanäle rechtlich problematisch</td></tr>
+<tr><td><b>Band F</b></td><td>F / Fatshark / ImmersionRC</td><td>5740–5880 MHz</td><td>Lange der De-facto-Standard in Europa</td></tr>
+<tr><td><b>Raceband</b></td><td>R</td><td>5658–5917 MHz</td><td>Gleichmäßige Abstände, für mehrere Piloten gleichzeitig ausgelegt</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Zulässigkeit prüfen, nicht raten.</b> In Deutschland ist für 5,8 GHz nicht das ganze Band frei nutzbar, und die zulässige Strahlungsleistung ist deutlich geringer, als viele VTX liefern können. Die maßgebliche Quelle ist die jeweils gültige Allgemeinzuteilung der Bundesnetzagentur — nicht das Handbuch eines Importeurs. Mehr unter <a href="#recht">Recht &amp; Sicherheit</a>.</div>
+<div class="tip"><b>Mehrere Piloten am selben Platz.</b> Faustregel: mindestens 40 MHz Kanalabstand, besser mehr, und die Sendeleistung so weit reduzieren, wie es der Platz erlaubt. Ein Pilot mit 800 mW auf dem Nachbarkanal legt vier andere lahm. Vor dem Einschalten fragen, welcher Kanal frei ist — der Umgangston auf Flugplätzen entscheidet sich meist an genau dieser Stelle.</div>
+
+<h2>VTX-Einstellungen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Begriff</span><span>Typischer Wert</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">Sendeleistung</span><span class="fe">25 / 200 / 400 / 800 mW</span><span class="fx">25 mW reicht für Sichtweite und stört niemanden. Mehr Leistung heißt mehr Wärme und mehr Störung für andere</span></div>
+  <div class="frow"><span class="fn">Pit Mode</span><span class="fe">an beim Einschalten</span><span class="fx">Sehr geringe Leistung zum Einrichten am Boden. Muss vor dem Start deaktiviert werden — sonst reicht das Bild zwanzig Meter weit</span></div>
+  <div class="frow"><span class="fn">SmartAudio / Tramp</span><span class="fe">UART</span><span class="fx">Steuerprotokolle, mit denen Kanal und Leistung aus dem OSD heraus geändert werden. Erspart das Fummeln am Knopf im Rahmen</span></div>
+  <div class="frow"><span class="fn">VTX-Tabelle</span><span class="fe">in Betaflight</span><span class="fx">Legt fest, welche Bänder und Leistungen die Firmware anbietet. Ohne passende Tabelle keine Kanalwahl im OSD</span></div>
+  <div class="frow"><span class="fn">Kühlung</span><span class="fe">Luftstrom nötig</span><span class="fx">Ein VTX auf voller Leistung ohne Fahrtwind wird sehr heiß. Nie längere Zeit am Boden mit voller Leistung senden — und nie ohne Antenne</span></div>
+  <div class="frow"><span class="fn">MSP-DisplayPort</span><span class="fe">bei digitalen Systemen</span><span class="fx">Überträgt das OSD als Text statt als überlagertes Analogbild — deshalb ist das OSD dort scharf</span></div>
+</div>
+<div class="stop"><b>Niemals ohne Antenne senden.</b> Ohne angeschlossene Antenne wird die Sendeleistung reflektiert und in der Endstufe in Wärme umgesetzt. Viele VTX überleben das nur Sekunden. Deshalb gilt die Reihenfolge: Antenne prüfen, dann Akku anstecken — immer, auch bei „nur kurz testen“.</div>
+
+<h2>Aufzeichnung</h2>
+<ul>
+  <li><b>DVR in der Brille</b> zeichnet genau das auf, was der Pilot gesehen hat — inklusive Störungen. Als Erinnerungsstütze nach einem Absturz ist das oft wertvoller als schönes Material: Man sieht, wann das Bild wegging und ob das OSD vorher gewarnt hat.</li>
+  <li><b>Onboard-Aufnahme</b> bei digitalen Systemen liefert die eigentliche Bildqualität, hilft aber bei der Fehlersuche wenig, weil sie nicht zeigt, was übertragen wurde.</li>
+  <li><b>Separate Actioncam</b> ist der Weg zu wirklich guter Bildqualität — mit dem Preis von 30–120 g Zusatzgewicht. Details unter <a href="#kamera">Kameras &amp; Aufnahme</a>.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Vergleichstests der digitalen Systeme, inklusive systematischer Reichweiten- und Ausfallmessungen.</li>
+    <li><a href="https://oscarliang.com/fpv-system/">Oscar Liang — Which FPV System Should You Buy</a>: laufend aktualisierter Vergleich analoger und digitaler Systeme.</li>
+    <li><a href="https://github.com/hd-zero">HDZero</a> und die Herstellerdokumentationen von DJI und Caddx/Walksnail — verbindlich für Kanäle, Leistungsstufen und Firmware.</li>
+    <li>Bundesnetzagentur, Allgemeinzuteilungen für nichtöffentliche Funkanwendungen — maßgeblich für zulässige Frequenzen und Strahlungsleistungen in Deutschland.</li>
+  </ul>
+</div>

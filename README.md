@@ -4,7 +4,7 @@ Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab und Fotografie —
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 25 Module sind native Astro-Module — es gibt keine HTML-Monolithen mehr.
+Alle 26 Module sind native Astro-Module — es gibt keine HTML-Monolithen mehr.
 
 ## Struktur
 
@@ -25,7 +25,7 @@ public/assets/chrome.css   Kopfleiste + Palette (gemeinsames Chrome)
 
 Drei Ebenen: **Index → Hub → Modul.**
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video —
-zusammen 25 Module mit 223 Abschnitten.
+zusammen 26 Module mit 245 Abschnitten.
 
 ## Wie ein Modul funktioniert
 
@@ -45,8 +45,8 @@ zusammen 25 Module mit 223 Abschnitten.
   bei Bedarf eine zweite Klasse an den Content-Container (`mx-sys` für die Küche,
   `mx-mecha` für den Mechatronik-Hub). Das zugehörige Stylesheet liegt als
   `src/content/_mecha.css` und wird von jedem `_style.css` des Hubs nur importiert.
-  Genauso teilen sich alle elf Mechatronik-Module ein einziges
-  `public/assets/mod-mecha.js` (Rechner, Filter, Glossar, PID-Simulation).
+  Genauso teilen sich alle zwölf Mechatronik-Module ein einziges
+  `public/assets/mod-mecha.js` (Rechner, Filter, Glossar, PID-Simulation, FPV-Rechner).
 
 Neues Modul: Registry-Eintrag + Content-Ordner. Index, Hub-Seite, Breadcrumb, Suche
 und Verwandt-Links ziehen automatisch nach.

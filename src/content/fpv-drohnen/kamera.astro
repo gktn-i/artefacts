@@ -1,0 +1,51 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die FPV-Kamera ist ein Steuerinstrument, keine Filmkamera.</b> Ihre wichtigste Eigenschaft ist nicht Auflösung, sondern <em>Dynamikumfang und Latenz</em>: Man muss aus dem Schatten heraus in die Sonne fliegen können, ohne blind zu sein, und das Bild muss ohne merkliche Verzögerung ankommen. Schöne Bilder macht eine zweite Kamera.</div>
+
+<h2>Kennwerte einer FPV-Kamera</h2>
+<div class="flist">
+  <div class="frow hd"><span>Kennwert</span><span>Typisch</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">Sensorgröße</span><span class="fe">1/3″, 1/2,8″, 1/1,8″</span><span class="fx">Größer heißt besseres Verhalten bei wenig Licht. Der wichtigste Einzelwert für Dämmerungsflüge</span></div>
+  <div class="frow"><span class="fn">TVL</span><span class="fe">600–1200 (analog)</span><span class="fx">Auflösungsangabe analoger Kameras. Über die Übertragungsstrecke bleibt davon weniger übrig, als die Zahl verspricht</span></div>
+  <div class="frow"><span class="fn">Dynamikumfang / WDR</span><span class="fe">—</span><span class="fx">Entscheidend beim Flug aus dem Wald in die Sonne. Der Unterschied zwischen guten und schlechten Kameras zeigt sich genau hier</span></div>
+  <div class="frow"><span class="fn">Latenz</span><span class="fe">6–30 ms</span><span class="fx">Kommt zur Übertragungslatenz hinzu. Bei Rennen relevant, beim Freestyle kaum</span></div>
+  <div class="frow"><span class="fn">Bildwinkel</span><span class="fe">2,1 mm ≈ 150°, 2,5 mm ≈ 130°</span><span class="fx">Weit heißt mehr Übersicht und stärkere Verzeichnung; eng wirkt schneller und ist präziser auf Distanz</span></div>
+  <div class="frow"><span class="fn">Seitenverhältnis</span><span class="fe">4:3 oder 16:9</span><span class="fx">Muss zur Brille passen — sonst gestauchtes Bild oder abgeschnittene Ränder</span></div>
+  <div class="frow"><span class="fn">Netzspannung</span><span class="fe">5 V oder 5–36 V</span><span class="fx">Weitbereichskameras lassen sich direkt am Akku betreiben; 5-V-Typen brauchen ein sauberes BEC</span></div>
+</div>
+<div class="tip"><b>Der Kamerawinkel ist eine Fahrwerkseinstellung.</b> Je stärker die Kamera nach oben zeigt, desto schneller kann man fliegen, ohne den Horizont zu verlieren — und desto unnatürlicher fühlt sich langsames Fliegen an. 15–25° für ruhige Flüge und Kamerafahrten, 30–40° für Freestyle, 45° und mehr nur auf der Rennstrecke. Wer das Gefühl hat, das Quad „zieht nach unten“, hat meist zu wenig Winkel.</div>
+
+<h2>Aufnahme: die drei Wege</h2>
+<div class="grid">
+  <div class="card"><div class="ch">DVR in der Brille<span class="n">dokumentation</span></div><div class="cd">Zeichnet exakt das übertragene Bild auf, inklusive OSD und Störungen. Bildqualität ist schlecht, der Nutzen für die Fehlersuche nach einem Absturz sehr hoch. Immer eingeschaltet lassen.</div></div>
+  <div class="card"><div class="ch">Digitale Onboard-Aufnahme<span class="n">komfort</span></div><div class="cd">Bei DJI und Walksnail zeichnet die Lufteinheit selbst auf, teils in 4K. Kein Zusatzgewicht, ordentliche Qualität, aber weniger Kontrolle über Belichtung und Bildlook als bei einer eigenen Kamera.</div></div>
+  <div class="card"><div class="ch">Separate Actioncam<span class="n">qualität</span></div><div class="cd">GoPro, Insta360, DJI Action — oder als „Naked“-Umbau ohne Gehäuse, um Gewicht zu sparen. Die einzige Variante, die wirklich vorzeigbares Material liefert. Kostet 30–120 g und damit spürbar Flugzeit.</div></div>
+</div>
+
+<h2>Was gutes Videomaterial ausmacht</h2>
+<ul>
+  <li><b>Bildstabilisierung nachträglich statt in der Kamera.</b> Gyroflow und die Herstellerlösungen (ReelSteady, RockSteady, HorizonSteady) rechnen die Bewegung anhand der Gyrodaten heraus. Aufnahme mit weitem Bildwinkel und ohne kamerainterne Stabilisierung gibt dabei den größten Spielraum.</li>
+  <li><b>Verschlusszeit doppelt zur Bildrate.</b> 1/50 s bei 25 fps, 1/120 s bei 60 fps. Kürzere Zeiten wirken hart und stroboskopartig — bei schnellen Bewegungen besonders auffällig.</li>
+  <li><b>ND-Filter, um dorthin zu kommen.</b> Bei Tageslicht ist die richtige Verschlusszeit ohne Graufilter nicht erreichbar. ND8 bis ND16 sind die üblichen Werte, und der Filter muss sicher sitzen — ein im Flug verlorener Filter ist teurer als der Filter.</li>
+  <li><b>Flaches Farbprofil nur, wenn nachbearbeitet wird.</b> Sonst sieht das Material einfach nur blass aus. Grundlagen dazu im Modul <a href="lumix-s1ii.html">Foto &amp; Video</a>.</li>
+  <li><b>Vibration ist im Nachhinein nicht zu retten.</b> Jitter durch schlechte Motoraufhängung oder unwuchtige Propeller zerstört das Bild trotz Stabilisierung. Bildqualität beginnt beim Tuning, nicht beim Schnittprogramm.</li>
+</ul>
+
+<h2>Praktische Fallstricke</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Wackelpudding (Jello)</div><div class="cd">Wellenförmige Verzerrung durch Vibration in Kombination mit Rolling Shutter. Ursache ist fast nie die Kamera, sondern Propellerunwucht, ein Lagerschaden oder eine zu harte Kamerabefestigung.</div></div>
+  <div class="card"><div class="ct">Streifen im analogen Bild</div><div class="cd">Kommen aus der Stromversorgung. Erst prüfen: Kondensator vorhanden und heil, VTX und Kamera an derselben sauberen Spannung, Kabel nicht parallel zu den Motorleitungen verlegt.</div></div>
+  <div class="card"><div class="ct">Überbelichteter Himmel</div><div class="cd">Kameraeinstellung, nicht Schicksal. Die meisten FPV-Kameras haben Menüs für Belichtungsmessung und WDR — sie zu ignorieren ist der häufigste Grund für unbrauchbare Bilder bei Gegenlicht.</div></div>
+  <div class="card"><div class="ct">Hitze</div><div class="cd">Actioncams ohne Gehäuse und ohne Fahrtwind überhitzen im Stand innerhalb von Minuten. Nie am Boden aufnehmen lassen, während man noch am Quad arbeitet.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://gyroflow.xyz/">Gyroflow</a> — quelloffene Stabilisierung anhand von Gyrodaten, mit ausführlicher Dokumentation zu Aufnahmeeinstellungen.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Kameravergleiche mit reproduzierbaren Gegenlichtszenen statt Schönwetterbildern.</li>
+    <li>Herstellerdatenblätter von RunCam, Caddx und Foxeer — Sensorgröße, Latenzangaben, Menüfunktionen.</li>
+    <li>Belichtung, Verschlusszeit und Farbprofile allgemein: Hub <a href="hub-foto.html">Foto &amp; Video</a>.</li>
+  </ul>
+</div>

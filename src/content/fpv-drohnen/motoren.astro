@@ -1,0 +1,70 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Zwei Zahlen beschreiben einen FPV-Motor: Statorgröße und kV.</b> Die Statorgröße sagt, wie viel Drehmoment er dauerhaft erzeugen kann, die kV-Zahl, wie schnell er bei gegebener Spannung dreht. Alles andere — Magnete, Lager, Wicklung — entscheidet über Haltbarkeit und Wirkungsgrad, nicht über die Grundauslegung.</div>
+
+<h2>Die Bezeichnung lesen</h2>
+<div class="fbox">
+  <span class="f">2207 — 1960 KV</span>
+  <span class="l">22 mm Statordurchmesser · 7 mm Statorhöhe · 1960 min⁻¹ je Volt im Leerlauf</span>
+</div>
+<p>Der Stator ist das feststehende Eisenpaket mit den Wicklungen — nicht das Gehäuse. Ein größerer Stator hat mehr Eisen und mehr Kupfer, kann also mehr Drehmoment bei weniger Erwärmung erzeugen. Höhe wirkt dabei anders als Durchmesser: mehr Durchmesser bringt Drehmoment bei niedriger Drehzahl (guter Wirkungsgrad, träger), mehr Höhe bringt Drehmoment über den ganzen Drehzahlbereich bei mehr Gewicht.</p>
+<div class="warn"><b>kV ist eine Leerlaufangabe, keine Leistungsangabe.</b> Sie beschreibt nur das Verhältnis von Drehzahl zu Spannung ohne Last. Zwei Motoren mit gleicher kV können völlig unterschiedlich viel Schub liefern. Und: kV ist bauartbedingt der Kehrwert der Spannungskonstante — ein Motor mit doppelter kV hat bei gleichem Stator halb so viel Drehmoment je Ampere.</div>
+
+<h2>Übliche Kombinationen</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Propeller</th><th data-s="text">Stator</th><th>kV bei 4S</th><th>kV bei 6S</th><th>Dauerstrom je Motor</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>31–40 mm (Whoop)</b></td><td>0802–1102</td><td>—</td><td>—</td><td>2–5 A</td><td>1S: 15 000–25 000 kV. Ganz eigene Welt, meist mit Direktantrieb an 1S-HV</td></tr>
+<tr><td><b>2,5–3″</b></td><td>1103–1404</td><td>4500–6000</td><td>3000–4000</td><td>6–12 A</td><td>Toothpicks und kleine Cinewhoops</td></tr>
+<tr><td><b>3,5–4″</b></td><td>1404–1507</td><td>3000–4000</td><td>2500–3000</td><td>10–18 A</td><td>Sub-250-g-Bauten, leichte Cinewhoops</td></tr>
+<tr><td><b>5″ Freestyle</b></td><td>2207 / 2306</td><td>2400–2750</td><td>1750–1900</td><td>25–35 A</td><td>Der meistgebaute Antrieb überhaupt</td></tr>
+<tr><td><b>5″ Race</b></td><td>2207 / 2306</td><td>2600–2900</td><td>1900–2100</td><td>30–40 A</td><td>Kurze Bursts, hohe Spitzenströme</td></tr>
+<tr><td><b>6″</b></td><td>2306 / 2407</td><td>2000–2300</td><td>1500–1700</td><td>25–35 A</td><td>Zwischengröße, gutes Verhältnis aus Schub und Effizienz</td></tr>
+<tr><td><b>7″ Long Range</b></td><td>2807 / 3110</td><td>1500–1800</td><td>1200–1500</td><td>20–30 A</td><td>Auf Effizienz ausgelegt, selten auf Spitzenschub</td></tr>
+<tr><td><b>10″</b></td><td>3115 und größer</td><td>—</td><td>400–900</td><td>15–25 A</td><td>Nutzlast, schwere Kameras, deutlich mehr Energie im System</td></tr>
+</tbody>
+</table></div>
+<p class="note">6S hat 4S weitgehend abgelöst, weil bei gleicher Leistung anderthalbmal weniger Strom fließt: dünnere Kabel, kühlere ESC, weniger Spannungseinbruch. Der Preis ist eine höhere Spannung an allen Bauteilen — ein 4S-VTX überlebt 6S nicht.</p>
+
+<h2>Aufbau und was daran verschleißt</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Lager</div><div class="cd">Zwei Rillenkugellager tragen die Glocke. Sie sind das erste Verschleißteil: Sand, Crashes und seitliche Stöße töten sie. Erkennbar am rauen Lauf, wenn man die Glocke von Hand dreht, und an einem plötzlich schlechteren Tuning ohne erkennbare Ursache. Ersetzbar, aber oft ist der ganze Motor billiger.</div></div>
+  <div class="card"><div class="ct">Magnete</div><div class="cd">In der Glocke sitzen 14 Magnete (bei 12N14P-Wicklung). Sie lösen sich bei Überhitzung — deshalb ist ein dauerhaft über 90 °C heißer Motor kein Betriebszustand, sondern eine Vorstufe zum Ausfall.</div></div>
+  <div class="card"><div class="ct">Welle</div><div class="cd">Verbogene Wellen sind nach härteren Crashes häufig. Test: Propeller abnehmen, Motor langsam drehen, von der Seite auf die Glocke schauen — Taumeln ist sichtbar. Ein taumelnder Motor erzeugt Vibration bei genau der Drehfrequenz und verdirbt jedes Tuning.</div></div>
+  <div class="card"><div class="ct">Wicklung</div><div class="cd">Drei Phasen, sternförmig oder im Dreieck verschaltet. Durchgebrannt riecht es unverwechselbar. Ein Windungsschluss zeigt sich als ungleicher Widerstand zwischen den drei Phasen — mit einem Milliohmmeter messbar.</div></div>
+  <div class="card"><div class="ct">Sicherungsring</div><div class="cd">Ein C-Clip hält die Glocke auf der Welle. Verlorene Clips sind der Grund, warum ein Motor nach dem Crash „von selbst“ auseinanderfällt. Ersatz kostet Cent, gehört in die Feldkiste.</div></div>
+  <div class="card"><div class="ct">Kabel</div><div class="cd">Die drei Phasenleitungen brechen bevorzugt direkt am Motoraustritt. Zugentlastung mit Schrumpfschlauch oder TPU verlängert die Lebensdauer erheblich. Die Reihenfolge der drei Phasen ist beliebig — zwei tauschen kehrt die Drehrichtung um.</div></div>
+</div>
+
+<h2>Schubtabellen lesen</h2>
+<p>Seriöse Hersteller veröffentlichen Messungen je Propeller und Zellenzahl. Darin stehen die einzigen Zahlen, die wirklich vergleichbar sind:</p>
+<div class="flist">
+  <div class="frow hd"><span>Spalte</span><span>Einheit</span><span>Was sie sagt</span></div>
+  <div class="frow"><span class="fn">Thrust</span><span class="fe">g</span><span class="fx">Standschub. Mal vier gerechnet und durch das Abfluggewicht geteilt ergibt das Schub-Gewicht-Verhältnis</span></div>
+  <div class="frow"><span class="fn">Current</span><span class="fe">A</span><span class="fx">Muss zum ESC passen — und zwar der Wert bei Vollgas, nicht der bei 50 %</span></div>
+  <div class="frow"><span class="fn">Power</span><span class="fe">W</span><span class="fx">Elektrische Leistung. Grundlage für Flugzeitabschätzungen</span></div>
+  <div class="frow"><span class="fn">Efficiency</span><span class="fe">g/W</span><span class="fx">Der wichtigste Wert für Long Range. 5″ liegt bei Schwebegas um 4–6 g/W, effiziente 7-Zöller bei 8–10</span></div>
+  <div class="frow"><span class="fn">RPM</span><span class="fe">min⁻¹</span><span class="fx">Zusammen mit dem Propellerdurchmesser die Blattspitzengeschwindigkeit</span></div>
+  <div class="frow"><span class="fn">Temperature</span><span class="fe">°C</span><span class="fx">Selten angegeben, aber aussagekräftig. Über 80 °C nach einem 60-Sekunden-Vollgastest ist grenzwertig</span></div>
+</div>
+<div class="tip"><b>Der Praxistest schlägt jede Tabelle.</b> Nach dem ersten Akku den Motor mit dem Finger anfassen: handwarm ist gut, unangenehm heiß ist ein Hinweis auf zu viel Propeller, zu viel D-Anteil oder ein Filterproblem. Motoren werden bei schlechtem Tuning heiß, nicht nur bei Überlastung — das ist die schnellste kostenlose Diagnose, die es gibt.</div>
+
+<h2>Motor und Propeller aufeinander abstimmen</h2>
+<ul>
+  <li><b>Zu viel Propeller</b> auf zu kleinem Stator: heiße Motoren, kurze Flugzeit, träges Ansprechen, im Extremfall Desync.</li>
+  <li><b>Zu wenig Propeller</b> auf großem Stator: viel Reserve, unnötiges Gewicht, mittelmäßiger Wirkungsgrad.</li>
+  <li><b>Zu hohe kV</b> für den Propellerdurchmesser: hohe Blattspitzengeschwindigkeit, laut, ineffizient, hohe Ströme.</li>
+  <li><b>Zu niedrige kV:</b> das Quad wirkt kraftlos, obwohl der Motor kühl bleibt — Drehzahl fehlt.</li>
+  <li><b>Faustregel für den Wechsel von 4S auf 6S:</b> kV etwa durch 1,5 teilen, dann bleiben Drehzahl und Strombild ähnlich.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Herstellermessungen von T-Motor, iFlight, Emax und BrotherHobby — die einzige belastbare Datenbasis für Schub und Wirkungsgrad.</li>
+    <li><a href="https://www.miniquadtestbench.com/">Mini Quad Test Bench</a> — unabhängige, standardisierte Motor- und Propellermessungen; älterer Bestand, methodisch aber weiterhin lehrreich.</li>
+    <li>Rolf Fischer, <i>Elektrische Maschinen</i>, Hanser — Grundlagen zu Drehmomentkonstante, kV und Wirkungsgrad. Die Motorentheorie steht auch im Modul <a href="sensorik-aktorik.html">Sensorik &amp; Aktorik</a>.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Videos zu Motortemperatur als Tuning-Indikator.</li>
+  </ul>
+</div>

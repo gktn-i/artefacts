@@ -1,0 +1,65 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Propellergröße ist die Leitentscheidung.</b> Aus ihr folgen Rahmengröße, Motorgröße, kV, Zellenzahl, Akkukapazität, Fluggewicht und am Ende sogar die rechtliche Einordnung. Alle üblichen Bauformen sind deshalb nach Zoll benannt — 2, 2,5, 3, 5, 7, 10.</div>
+
+<h2>Die Klassen im Überblick</h2>
+<div class="tbl-wrap"><table style="min-width:1080px">
+<thead><tr><th data-s="text">Klasse</th><th data-s="text">Propeller</th><th>Typ. Abfluggewicht</th><th>Antrieb</th><th>Akku</th><th>Flugzeit</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Tinywhoop</b></td><td>31–40 mm, Ducted</td><td>20–40 g</td><td>0802–1102, 15 000–25 000 kV</td><td>1S 300–550 mAh</td><td>2–4 min</td><td>Wohnung, Büro, Hallen. Der einzige gefahrlose Weg, drinnen zu üben</td></tr>
+<tr><td><b>Toothpick / Micro</b></td><td>2,5–3″</td><td>60–130 g</td><td>1103–1404, 3000–5000 kV</td><td>2S–4S 450–650 mAh</td><td>3–5 min</td><td>Parks, enge Spots, windarme Tage. Leicht genug, um wenig kaputtzumachen</td></tr>
+<tr><td><b>Cinewhoop</b></td><td>2,5–3,5″ mit Prop-Guards</td><td>250–400 g</td><td>1404–1507, 3000–4500 kV</td><td>4S 850–1300 mAh</td><td>3–5 min</td><td>Kamerafahrten nah an Menschen und Objekten; die Umrandung ist Sicherheitsmerkmal, nicht Zierde</td></tr>
+<tr><td><b>5-Zoll-Freestyle</b></td><td>5″</td><td>550–750 g</td><td>2207/2306, 1750–1900 kV (6S)</td><td>6S 1050–1500 mAh</td><td>3–5 min</td><td>Der Standard der Szene. Alles Zubehör, jede Anleitung und jedes Ersatzteil gibt es dafür</td></tr>
+<tr><td><b>5-Zoll-Race</b></td><td>5″, steilere Steigung</td><td>380–500 g</td><td>2207, 1900–2100 kV (6S)</td><td>6S 850–1100 mAh</td><td>1,5–3 min</td><td>Rennstrecke. Kompromisslos auf Beschleunigung gebaut, entsprechend unruhig</td></tr>
+<tr><td><b>7-Zoll Long Range</b></td><td>7″</td><td>800–1300 g</td><td>2807/3110, 1200–1500 kV (6S)</td><td>6S LiPo oder 6S Li-Ion</td><td>10–25 min</td><td>Strecke, Landschaft, Höhe. Braucht GPS, gute Funkstrecke und deutlich mehr Disziplin</td></tr>
+<tr><td><b>10-Zoll und größer</b></td><td>10″+</td><td>1,5–3 kg</td><td>3115 und größer, 400–900 kV</td><td>6S–8S, hohe Kapazität</td><td>15–30 min</td><td>Schwere Kameras, Nutzlast. Deutlich gefährlicher; rechtlich fast immer eine andere Kategorie</td></tr>
+<tr><td><b>Sub-250 g</b></td><td>2,5–4″, Leichtbau</td><td>&lt; 250 g mit Akku</td><td>1404–1806</td><td>3S–4S</td><td>4–8 min</td><td>Eigene Klasse aus rechtlichen Gründen: unter 250 g gelten in der EU die geringsten Auflagen</td></tr>
+<tr><td><b>Flächenflug (Wing)</b></td><td>Ein Zugpropeller</td><td>600–1500 g</td><td>Ein Motor, oft 2207–2814</td><td>4S–6S</td><td>20–60 min</td><td>Große Strecken bei wenig Energie. Kann nicht schweben und braucht Start- und Landefläche</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Zahlen sind übliche Bereiche, keine Vorschriften. Die Motorbezeichnung 2207 heißt: Stator 22 mm Durchmesser, 7 mm Höhe — mehr dazu unter <a href="#motoren">Motoren</a>.</p>
+
+<h2>Freestyle, Race, Cinematic — der Unterschied liegt im Kompromiss</h2>
+<div class="grid">
+  <div class="card"><div class="ch">Freestyle<span class="n">allrounder</span></div><div class="cd">Gebaut auf Drehmomentreserve und Robustheit. Etwas schwerer, etwas langsamer als ein Renner, dafür verzeiht es Fehler und übersteht Einschläge. Wer nicht genau weiß, was er will, baut Freestyle.</div></div>
+  <div class="card"><div class="ch">Race<span class="n">zeit</span></div><div class="cd">Jedes Gramm zählt, jede Reserve wird gestrichen. Sehr direkte Reaktion, kaum Dämpfung, wenig Flugzeit. Am Simulator und auf der Strecke großartig, im Alltag anstrengend.</div></div>
+  <div class="card"><div class="ch">Cinematic<span class="n">bild</span></div><div class="cd">Weiches Ansprechverhalten, geringe Vibration, oft Prop-Guards und schwerere Kameras. Getunt auf ruhige Bewegung statt auf Reaktionszeit — die Regelung wird bewusst träger eingestellt.</div></div>
+  <div class="card"><div class="ch">Long Range<span class="n">strecke</span></div><div class="cd">Effizienz statt Schub: große Propeller, niedrige kV, sparsame Funkstrecke. Dazu GPS-Rückkehr, Redundanz und ein sehr sorgfältiger Blick auf Reichweite und Akkureserve.</div></div>
+</div>
+
+<h2>Fertig kaufen oder selbst bauen</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Kürzel</th><th>Bedeutung</th><th>Enthält</th><th>Für wen</th></tr></thead>
+<tbody>
+<tr><td><b>RTF</b></td><td>Ready to Fly</td><td>Quad, Funke, Goggles, oft Akku</td><td>Reines Ausprobieren. Meist herstellergebunden und schlecht erweiterbar</td></tr>
+<tr><td><b>BNF</b></td><td>Bind and Fly</td><td>Quad mit Empfänger, ohne Funke und Goggles</td><td>Der sinnvolle Einstieg: eigene Funke und Goggles behalten, das Quad ist austauschbar</td></tr>
+<tr><td><b>PNP</b></td><td>Plug and Play</td><td>Quad ohne Empfänger</td><td>Wer seinen Funkstandard schon gewählt hat</td></tr>
+<tr><td><b>Kit / DIY</b></td><td>Einzelteile</td><td>Nichts vormontiert</td><td>Volle Kontrolle, volle Verantwortung. Rechne mit einem Wochenende und einer Lötstation</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Der pragmatische Weg.</b> Erst Funke und Goggles kaufen (die bleiben über Jahre), dann Simulator, dann ein BNF-Quad. Der erste Eigenbau lohnt sich, sobald man weiß, was man reparieren muss — dann ist auch klar, welche Teile man will.</div>
+
+<h2>Was die Klasse rechtlich bedeutet</h2>
+<p>In der EU hängt fast alles am Abfluggewicht, nicht an der Bauart. Die Grenze bei 250 g ist deshalb keine Marketingzahl, sondern der Punkt, an dem sich die Auflagen deutlich unterscheiden. Ein selbstgebautes Quad trägt keine C-Klassenkennzeichnung und fällt damit in die Unterkategorie A3 — Details und die genauen Bedingungen unter <a href="#recht">Recht &amp; Sicherheit</a>.</p>
+<div class="warn"><b>Sub-250 g ist eine Bauaufgabe, kein Etikett.</b> Die 250 g gelten <em>mit</em> Akku, Kamera und allem, was mitfliegt. Wer knapp darunter landen will, muss beim Rahmen, beim Akku und bei jedem TPU-Teil rechnen — und danach wiegen, nicht schätzen.</div>
+
+<h2>Woran man Klassen unterscheidet, wenn Zahlen fehlen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Merkmal</span><span>Kennwert</span><span>Was es verrät</span></div>
+  <div class="frow"><span class="fn">Propellerdurchmesser</span><span class="fe">Zoll</span><span class="fx">Legt Schubcharakter fest: groß = viel Schub bei wenig Drehzahl = effizient und träge</span></div>
+  <div class="frow"><span class="fn">Motor-Statorgröße</span><span class="fe">z. B. 2207</span><span class="fx">Muss zum Propeller passen; zu kleiner Stator wird heiß, zu großer ist totes Gewicht</span></div>
+  <div class="frow"><span class="fn">kV</span><span class="fe">min⁻¹ je Volt</span><span class="fx">Zusammen mit der Zellenzahl die Drehzahl. Große Propeller brauchen kleine kV</span></div>
+  <div class="frow"><span class="fn">Zellenzahl</span><span class="fe">1S–8S</span><span class="fx">6S ist heute Standard bei 5″ und größer; höhere Spannung heißt weniger Strom bei gleicher Leistung</span></div>
+  <div class="frow"><span class="fn">Abfluggewicht</span><span class="fe">g inkl. Akku</span><span class="fx">Bestimmt Schub-Gewicht-Verhältnis und rechtliche Kategorie</span></div>
+  <div class="frow"><span class="fn">Rahmen-Radstand</span><span class="fe">mm diagonal</span><span class="fx">5″ liegt bei 210–230 mm, 7″ bei 290–320 mm. Grober Größenindikator</span></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://oscarliang.com/fpv-drone-guide/">Oscar Liang — FPV Drone Beginner Guide</a>: laufend aktualisierte Klasseneinteilung und Bauteilempfehlungen.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a>: Build-Serien je Klasse, jeweils mit Begründung der Teilewahl.</li>
+    <li>Verordnung (EU) 2019/947 sowie die delegierte Verordnung (EU) 2019/945 — maßgeblich für die Gewichtsgrenzen und Klassenkennzeichen.</li>
+  </ul>
+</div>

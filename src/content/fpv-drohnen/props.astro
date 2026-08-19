@@ -1,0 +1,76 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Propeller sind das billigste Bauteil mit dem größten Einfluss.</b> Ein Wechsel von 5×4,3×3 auf 5×4,8×3 verändert Stromaufnahme, Flugzeit, Motortemperatur und Fluggefühl stärker als die meisten PID-Änderungen. Und sie sind Verbrauchsmaterial: ein angeschlagener Propeller gehört in den Müll, nicht zurück auf den Motor.</div>
+
+<h2>Die Bezeichnung lesen</h2>
+<div class="fbox">
+  <span class="f">5 × 4,3 × 3</span>
+  <span class="l">5 Zoll Durchmesser · 4,3 Zoll Steigung · 3 Blätter</span>
+</div>
+<p>Die <b>Steigung</b> (Pitch) ist der Weg, den der Propeller in einer Umdrehung theoretisch zurücklegen würde, wenn er sich in einen Festkörper schrauben würde. Sie ist damit das Getriebe des Antriebs: viel Steigung heißt hohe Endgeschwindigkeit und hohe Stromaufnahme, wenig Steigung heißt besseres Ansprechen und mehr Flugzeit.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Änderung</th><th>Schub im Stand</th><th>Endgeschwindigkeit</th><th>Strom</th><th>Ansprechen</th><th>Flugzeit</th></tr></thead>
+<tbody>
+<tr><td><b>Mehr Durchmesser</b></td><td>deutlich mehr</td><td>etwas mehr</td><td>mehr</td><td>träger</td><td>länger (bei angepasster kV)</td></tr>
+<tr><td><b>Mehr Steigung</b></td><td>etwas mehr</td><td>deutlich mehr</td><td>deutlich mehr</td><td>träger im unteren Bereich</td><td>kürzer</td></tr>
+<tr><td><b>Mehr Blätter</b></td><td>mehr</td><td>weniger</td><td>mehr</td><td>direkter, „griffiger“</td><td>kürzer</td></tr>
+<tr><td><b>Breiteres Blatt</b></td><td>mehr</td><td>—</td><td>mehr</td><td>direkter</td><td>kürzer</td></tr>
+</tbody>
+</table></div>
+
+<h2>Blattzahl</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">2 Blätter</div><div class="cd">Der beste Wirkungsgrad. Leiser, längere Flugzeit, weniger Griff bei schnellen Manövern. Standard bei Long Range und Flächenflug.</div></div>
+  <div class="card"><div class="ct">3 Blätter</div><div class="cd">Der Kompromiss und die klare Mehrheit bei 5 Zoll: gutes Ansprechen, gute Kontrolle im Prop Wash, akzeptabler Verbrauch.</div></div>
+  <div class="card"><div class="ct">4–5 Blätter</div><div class="cd">Sehr viel Griff und Schub bei geringem Wirkungsgrad. Ducted-Bauten und Rennen auf engen Kursen; sonst selten sinnvoll.</div></div>
+</div>
+
+<h2>Drehrichtung und Montage</h2>
+<p>Diagonal gegenüberliegende Propeller drehen gleichsinnig, benachbarte gegensinnig. Welches Paar in welche Richtung dreht, ist eine Entscheidung — sie muss nur zur eingestellten Motordrehrichtung in Betaflight passen:</p>
+<div class="gb">
+  <div class="gb-col good"><h4>Props out</h4>
+    <ul>
+      <li>Vordere Propeller drehen nach außen</li>
+      <li>Schleudert aufgewirbeltes Material vom Kamerabild weg</li>
+      <li>Gilt als etwas ruhiger im Prop Wash</li>
+      <li>Bei Freestyle die verbreitetste Wahl</li>
+    </ul>
+  </div>
+  <div class="gb-col"><h4>Props in</h4>
+    <ul>
+      <li>Vordere Propeller drehen nach innen</li>
+      <li>Betaflight-Voreinstellung</li>
+      <li>Bei manchen Bauten minimal effizienter</li>
+      <li>Weniger Staubfahne bei Starts von losem Untergrund</li>
+    </ul>
+  </div>
+</div>
+<div class="stop"><b>Ein falsch montierter Propeller ist der häufigste Erstflug-Fehler.</b> Das Quad kippt beim Armieren sofort um oder springt hoch und schlägt ein. Vor jedem Erstflug: Motordrehrichtung im Betaflight-Motorentab prüfen (ohne Propeller!), danach Propeller passend zur Drehrichtung aufsetzen. Auf den Propellern selbst steht die Drehrichtung meist als winzige Prägung oder als Farbe.</div>
+
+<h2>Material und Zustand</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Polycarbonat</div><div class="cd">Der Standard. Zäh, biegt sich eher als zu brechen, gutes Verhältnis von Steifigkeit zu Gewicht.</div></div>
+  <div class="card"><div class="ct">Weiche Mischungen</div><div class="cd">Für Cinewhoops und Innenflug: verzeihen Berührungen, sind aber weniger präzise und erzeugen mehr Blattflattern.</div></div>
+  <div class="card"><div class="ct">Carbonverstärkt</div><div class="cd">Sehr steif und präzise, splittert aber und ist gefährlicher. Für Rennen üblich, für den Alltag zweifelhaft.</div></div>
+  <div class="card"><div class="ct">Wann er in den Müll gehört</div><div class="cd">Jede Kerbe an der Vorderkante, jeder Riss an der Nabe, jedes sichtbare Weißbrechen. Ein angeschlagenes Blatt erzeugt Unwucht — und Unwucht ist genau die Vibration, die das Gyro nicht wegfiltern kann.</div></div>
+  <div class="card"><div class="ct">Unwucht prüfen</div><div class="cd">Am Quad: einzelnen Motor im Betaflight-Motorentab auf mittlere Drehzahl bringen und den Rahmen fühlen. Deutlich spürbares Kribbeln bei einem Motor und nicht bei den anderen heißt: Propeller oder Motor tauschen.</div></div>
+  <div class="card"><div class="ct">Vorrat</div><div class="cd">Zehn Sätze sind kein Luxus, sondern die Voraussetzung dafür, dass ein Flugtag nicht nach zwanzig Minuten endet. Propeller sind das einzige Bauteil, von dem man mehr braucht, als man denkt.</div></div>
+</div>
+
+<h2>Blattspitzengeschwindigkeit</h2>
+<div class="fbox">
+  <span class="f">v_Spitze = π · d · n / 60</span>
+  <span class="l">d in Metern, n in min⁻¹. Ab etwa 200 m/s (Mach 0,6) fällt der Wirkungsgrad merklich, der Lärm steigt stark.</span>
+</div>
+<p>Diese Grenze ist der eigentliche Grund für die kV-Tabellen aus dem Abschnitt <a href="#motoren">Motoren</a>: ein 7-Zöller mit 2400 kV an 6S würde die Blattspitzen in den unwirtschaftlichen Bereich treiben, lange bevor der Motor thermisch am Limit ist. Nachrechnen im <a href="#rechner">Rechner</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Herstellerdaten von HQProp, Gemfan, T-Motor, Azure Power — Geometrie, Gewicht und teilweise Schubmessungen.</li>
+    <li><a href="https://oscarliang.com/">oscarliang.com</a> — Vergleichsartikel zu Propellergrößen, Steigung und Blattzahl.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Messreihen zu Propellerwechsel und dessen Wirkung auf Strom und Flugzeit.</li>
+    <li>Grundlagen der Propellertheorie (Blattelement- und Strahltheorie): Quan Quan, <i>Introduction to Multicopter Design and Control</i>, Kapitel Propulsion System.</li>
+  </ul>
+</div>
