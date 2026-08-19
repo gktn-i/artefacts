@@ -1,0 +1,121 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>IEC 61131-3 normt die Programmierung speicherprogrammierbarer Steuerungen</b> — Sprachen, Datentypen, Bausteinarten. Die vierte Fassung von 2025 führt Strukturierten Text, Kontaktplan und Funktionsplan als Kernsprachen; die Anweisungsliste, seit 2013 abgekündigt, ist darin nicht mehr enthalten.</div>
+
+<h2>Die Sprachen</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Sprache</th><th>Kürzel</th><th>Art</th><th>Stärke</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Kontaktplan</b></td><td>KOP / LD</td><td>grafisch</td><td>Sieht aus wie ein Stromlaufplan — jeder Elektriker liest es sofort</td><td>Verriegelungen, Verknüpfungen, Betriebsartenlogik</td></tr>
+<tr><td><b>Funktionsplan</b></td><td>FUP / FBD</td><td>grafisch</td><td>Datenfluss von links nach rechts, gut für Signalverarbeitung</td><td>Analogwertverarbeitung, Regelung, komplexere Verknüpfungen</td></tr>
+<tr><td><b>Strukturierter Text</b></td><td>ST</td><td>textuell</td><td>Mächtig wie eine Hochsprache, versionierbar, gut diffbar</td><td>Berechnungen, Algorithmen, Schleifen, alles Komplexe</td></tr>
+<tr><td><b>Ablaufsprache</b></td><td>AS / SFC</td><td>grafisch</td><td>Schritte und Transitionen — ein Zustandsautomat in Normnotation</td><td>Prozessabläufe, Rezepturen, Rüstvorgänge</td></tr>
+<tr><td><b>Anweisungsliste</b></td><td>AWL / IL</td><td>textuell</td><td>—</td><td>Historisch, assemblerähnlich. Seit der 3. Fassung abgekündigt, in der 4. Fassung von 2025 entfallen. In Altanlagen noch anzutreffen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Welche Sprache wofür — die Praxisregel:</b> Verriegelungen und Sicherheitslogik in <b>KOP</b>, weil sie auch nach Jahren von jedem Instandhalter gelesen werden muss. Berechnungen, Umrechnungen und Algorithmen in <b>ST</b>, weil KOP dort unlesbar wird. Abläufe in <b>AS</b>. Die Norm erlaubt ausdrücklich, Sprachen innerhalb eines Projekts zu mischen — und genau das ist der sinnvolle Weg.</div>
+
+<h2>Strukturierter Text — die Grundlagen</h2>
+<div class="card">
+<pre style="font-family:var(--mono);font-size:12.2px;line-height:1.6;overflow-x:auto;margin:0"><code>FUNCTION_BLOCK FB_Fuellstandregelung
+VAR_INPUT
+    rIstwert     : REAL;
+    rSollwert    : REAL;
+    bFreigabe    : BOOL;
+END_VAR
+VAR_OUTPUT
+    rStellgroesse : REAL;
+    bWarnung      : BOOL;
+END_VAR
+VAR
+    rIntegral    : REAL;
+    fbTimer      : TON;
+END_VAR
+
+IF NOT bFreigabe THEN
+    rStellgroesse := 0.0;
+    rIntegral     := 0.0;
+    RETURN;
+END_IF
+
+// PI-Regler mit Anti-Windup
+rIntegral := LIMIT(0.0, rIntegral + (rSollwert - rIstwert) * 0.01, 100.0);
+rStellgroesse := LIMIT(0.0, 2.5 * (rSollwert - rIstwert) + rIntegral, 100.0);
+
+// Warnung, wenn die Abweichung laenger als 30 s besteht
+fbTimer(IN := ABS(rSollwert - rIstwert) &gt; 5.0, PT := T#30S);
+bWarnung := fbTimer.Q;</code></pre>
+</div>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Element</th><th>Syntax</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Zuweisung</b></td><td><code>a := b;</code></td><td>Nicht <code>=</code> — das ist der Vergleich</td></tr>
+<tr><td><b>Vergleich</b></td><td><code>= &lt;&gt; &lt; &gt; &lt;= &gt;=</code></td><td><code>&lt;&gt;</code> statt <code>!=</code></td></tr>
+<tr><td><b>Logik</b></td><td><code>AND OR XOR NOT</code></td><td>Ausgeschrieben</td></tr>
+<tr><td><b>Verzweigung</b></td><td><code>IF … THEN … ELSIF … ELSE … END_IF;</code></td><td>Immer mit END_IF abschließen</td></tr>
+<tr><td><b>Auswahl</b></td><td><code>CASE x OF 1: … 2: … ELSE … END_CASE;</code></td><td>Die Grundlage jeder Schrittkette in ST</td></tr>
+<tr><td><b>Schleifen</b></td><td><code>FOR WHILE REPEAT</code></td><td>Zykluszeit im Auge behalten</td></tr>
+<tr><td><b>Zeitliteral</b></td><td><code>T#500MS</code>, <code>T#1H30M</code></td><td>Eigener Datentyp TIME</td></tr>
+<tr><td><b>Kommentar</b></td><td><code>(* … *)</code> oder <code>// …</code></td><td>Der Zeilenkommentar kam mit der 3. Fassung dazu</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Bausteinarten</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Funktion (FUN)</div><div class="cd">Kein Gedächtnis. Gleiche Eingänge ergeben immer dasselbe Ergebnis. Für Berechnungen und Umrechnungen — das Gegenstück zu einer reinen Funktion in C.</div></div>
+  <div class="card"><div class="ct">Funktionsbaustein (FB)</div><div class="cd">Mit eigenem Speicher je Instanz. Jede Instanz behält ihre Werte zwischen den Aufrufen — der Baustein für Timer, Regler, Zustandsautomaten. Entspricht einem Objekt.</div></div>
+  <div class="card"><div class="ct">Programm (PRG)</div><div class="cd">Oberste Ebene, wird einer Task zugeordnet. Ruft Funktionsbausteine auf.</div></div>
+  <div class="card"><div class="ct">Datentyp (DUT/STRUCT)</div><div class="cd">Eigene zusammengesetzte Typen. Eine Struktur „Antrieb“ mit Sollwert, Istwert, Status und Fehlercode macht Schnittstellen lesbar.</div></div>
+</div>
+<div class="fbox">
+  <span class="f">Funktion = zustandslos&nbsp;&nbsp;·&nbsp;&nbsp;Funktionsbaustein = mit Instanzdaten&nbsp;&nbsp;·&nbsp;&nbsp;Programm = Einstiegspunkt</span>
+</div>
+
+<h2>Standardbausteine, die man kennt</h2>
+<div class="flist">
+  <div class="frow hd"><span>Baustein</span><span>Funktion</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">TON</span><span class="fe">Einschaltverzögerung</span><span class="fx">Q wird erst nach PT gesetzt, wenn IN durchgehend true war</span></div>
+  <div class="frow"><span class="fn">TOF</span><span class="fe">Ausschaltverzögerung</span><span class="fx">Q bleibt nach dem Wegfall von IN noch PT lang gesetzt</span></div>
+  <div class="frow"><span class="fn">TP</span><span class="fe">Impulsgeber</span><span class="fx">Fester Impuls der Länge PT, unabhängig von IN</span></div>
+  <div class="frow"><span class="fn">CTU / CTD / CTUD</span><span class="fe">Zähler</span><span class="fx">Vorwärts, rückwärts, beides</span></div>
+  <div class="frow"><span class="fn">R_TRIG / F_TRIG</span><span class="fe">Flankenerkennung</span><span class="fx">Der wichtigste Baustein überhaupt — ohne Flankenauswertung feuert jede Aktion in jedem Zyklus erneut</span></div>
+  <div class="frow"><span class="fn">RS / SR</span><span class="fe">Speicherglied</span><span class="fx">Unterschied ist die Vorrangigkeit: RS setzt Rücksetzen vor, SR das Setzen</span></div>
+  <div class="frow"><span class="fn">LIMIT / SEL / MUX</span><span class="fe">Begrenzen, auswählen, umschalten</span><span class="fx">Ersparen viele IF-Verzweigungen</span></div>
+  <div class="frow"><span class="fn">SCALE / NORM_X</span><span class="fe">Analogwert umrechnen</span><span class="fx">Rohwert des Wandlers in physikalische Einheiten</span></div>
+</div>
+
+<h2>Konfiguration und Tasks</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Task-Typ</th><th>Auslösung</th><th>Verwendung</th></tr></thead>
+<tbody>
+<tr><td><b>Zyklisch (frei laufend)</b></td><td>so schnell wie möglich</td><td>Hauptprogramm, Verknüpfungslogik</td></tr>
+<tr><td><b>Zeitgesteuert (Weckalarm)</b></td><td>feste Periode, z. B. alle 10 ms</td><td>Regelungen — nur hier ist die Abtastzeit konstant</td></tr>
+<tr><td><b>Ereignisgesteuert (Prozessalarm)</b></td><td>Flanke an einem Eingang</td><td>Schnelle Reaktionen, Zählimpulse</td></tr>
+<tr><td><b>Anlauf (OB100)</b></td><td>einmal beim Start</td><td>Initialisierung, Rücksetzen von Zuständen</td></tr>
+<tr><td><b>Fehler-OBs</b></td><td>bei Diagnoseereignissen</td><td>Baugruppenausfall, Programmierfehler abfangen — sonst geht die CPU in STOP</td></tr>
+</tbody>
+</table></div>
+
+<h2>Herstellerwelten</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>System</th><th>Software</th><th>Charakter</th></tr></thead>
+<tbody>
+<tr><td><b>Siemens SIMATIC</b></td><td>TIA Portal</td><td>Marktführer im deutschsprachigen Raum. Eigene Begriffe (OB, FB, FC, DB), teilweise abweichend von der Norm</td></tr>
+<tr><td><b>Beckhoff TwinCAT</b></td><td>TwinCAT 3 (in Visual Studio)</td><td>PC-basiert, sehr leistungsfähig, EtherCAT-nah, objektorientierte Erweiterungen</td></tr>
+<tr><td><b>CODESYS</b></td><td>CODESYS Development System</td><td>Herstellerunabhängige Laufzeit, von vielen Anbietern lizenziert. Läuft auch auf einem Raspberry Pi — der günstigste Einstieg</td></tr>
+<tr><td><b>Rockwell/Allen-Bradley</b></td><td>Studio 5000</td><td>Dominant in Nordamerika</td></tr>
+<tr><td><b>Wago, Phoenix, Lenze, Schneider</b></td><td>meist CODESYS-basiert</td><td>Projekte lassen sich mit Einschränkungen portieren</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Norm sichert Konzepte und Sprachen, keine vollständige Portierbarkeit. Herstellerspezifische Bibliotheken, Hardwarekonfiguration und Kommunikationsbausteine unterscheiden sich erheblich. Wer portabel bleiben will, kapselt herstellerspezifische Aufrufe in eigenen Bausteinen — dieselbe Idee wie eine Hardware-Abstraktionsschicht in der Firmware.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>IEC 61131-3:2025 — vierte Ausgabe, veröffentlicht im Mai 2025.</li>
+    <li>John &amp; Tiegelkamp, <i>SPS-Programmierung mit IEC 61131-3</i>, an die aktuelle Normfassung angepasst.</li>
+    <li>PLCopen — Bibliotheken für Motion Control und Safety, herstellerübergreifend standardisiert.</li>
+    <li><a href="https://content.helpme-codesys.com/">CODESYS Online Help</a> und das <a href="https://infosys.beckhoff.com/">Beckhoff Information System</a> — beide frei zugänglich und sehr ausführlich.</li>
+  </ul>
+</div>

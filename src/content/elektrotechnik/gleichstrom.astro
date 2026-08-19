@@ -1,0 +1,148 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Gleichstromkreis ist 80 % der Elektronik im Alltag.</b> Reihe: ein Weg, Strom überall gleich, Spannungen addieren sich. Parallel: mehrere Wege, Spannung überall gleich, Ströme addieren sich. Alles Weitere folgt daraus.</div>
+
+<h2>Ohmsches Gesetz und Leistung</h2>
+<div class="fbox">
+  <span class="f">U = R · I&nbsp;&nbsp;&nbsp;&nbsp;P = U · I = I²·R = U²/R</span>
+  <span class="l">Vier Größen, zwei Gleichungen — zwei bekannte Werte reichen immer.</span>
+</div>
+
+<div class="calc" data-calc="ohm">
+  <h4>Ohm-Rechner — zwei beliebige Werte genügen</h4>
+  <div class="row">
+    <div><label>U in V</label><input data-k="u" type="number" step="any" placeholder="5" /></div>
+    <div><label>I in A</label><input data-k="i" type="number" step="any" placeholder="0.02" /></div>
+    <div><label>R in Ω</label><input data-k="r" type="number" step="any" /></div>
+    <div><label>P in W</label><input data-k="p" type="number" step="any" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Reihe und Parallel</h2>
+<div class="gb">
+  <div class="gb-col">
+    <h4>Reihenschaltung</h4>
+    <svg class="dg m" viewBox="0 0 230 130" role="img" aria-label="Reihenschaltung aus Quelle und zwei Widerständen">
+      <path class="w" d="M45,28 H88 M122,28 H186 M186,28 V56 M186,90 V102 M186,102 H45 M45,102 V64 M45,56 V28" />
+      <rect class="box" x="88" y="20" width="34" height="16" rx="2" />
+      <rect class="box" x="178" y="56" width="16" height="34" rx="2" />
+      <path class="w" d="M33,56 H57 M39,64 H51" />
+      <text class="lbl" x="105" y="14" text-anchor="middle">R1</text>
+      <text class="lbl" x="200" y="76">R2</text>
+      <text class="lbl" x="27" y="63" text-anchor="end">U</text>
+      <path class="accf" d="M112,108 L100,102 L100,114 Z" />
+      <text class="lbla" x="118" y="122">I überall gleich</text>
+    </svg>
+    <ul>
+      <li><span class="formula">R = R1 + R2 + …</span> — immer größer als der größte Einzelwert</li>
+      <li>Strom identisch, Spannungen teilen sich im Verhältnis der Widerstände auf</li>
+      <li>Ein Bauteil fällt aus → der ganze Zweig ist tot</li>
+      <li>Kondensatoren verhalten sich umgekehrt: <span class="formula">1/C = 1/C1 + 1/C2</span></li>
+    </ul>
+  </div>
+  <div class="gb-col">
+    <h4>Parallelschaltung</h4>
+    <svg class="dg m" viewBox="0 0 230 130" role="img" aria-label="Parallelschaltung aus Quelle und zwei Widerständen">
+      <path class="w" d="M35,28 H196 M35,102 H196 M196,28 V102 M35,28 V56 M35,64 V102 M115,28 V48 M115,82 V102 M172,28 V48 M172,82 V102" />
+      <rect class="box" x="107" y="48" width="16" height="34" rx="2" />
+      <rect class="box" x="164" y="48" width="16" height="34" rx="2" />
+      <path class="w" d="M23,56 H47 M29,64 H41" />
+      <text class="lbl" x="103" y="70" text-anchor="end">R1</text>
+      <text class="lbl" x="160" y="70" text-anchor="end">R2</text>
+      <text class="lbl" x="17" y="63" text-anchor="end">U</text>
+      <text class="lbla" x="115" y="122" text-anchor="middle">U überall gleich</text>
+    </svg>
+    <ul>
+      <li><span class="formula">1/R = 1/R1 + 1/R2 + …</span> — immer kleiner als der kleinste Einzelwert</li>
+      <li>Zwei Widerstände: <span class="formula">R = R1·R2/(R1+R2)</span></li>
+      <li>N gleiche parallel: <span class="formula">R = R_einzeln / N</span></li>
+      <li>Ein Zweig fällt aus → die anderen laufen weiter</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Was sich wie verhält — die Übersicht</h3>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Größe</th><th>In Reihe</th><th>Parallel</th></tr></thead>
+<tbody>
+<tr><td><b>Strom I</b></td><td>überall gleich</td><td>teilt sich auf</td></tr>
+<tr><td><b>Spannung U</b></td><td>teilt sich auf</td><td>überall gleich</td></tr>
+<tr><td><b>Widerstand R</b></td><td>addiert sich → größer</td><td>Kehrwerte addieren → kleiner</td></tr>
+<tr><td><b>Kondensator C</b></td><td>Kehrwerte addieren → kleiner</td><td>addiert sich → größer</td></tr>
+<tr><td><b>Spule L</b></td><td>addiert sich → größer</td><td>Kehrwerte addieren → kleiner</td></tr>
+<tr><td><b>Spannungsfestigkeit von C</b></td><td>addiert sich (2 × 25 V = 50 V)</td><td>die des schwächsten Bauteils</td></tr>
+<tr><td><b>Verlustleistung</b></td><td>der größte Widerstand wird am heißesten (P = I²R)</td><td>der kleinste Widerstand wird am heißesten (P = U²/R)</td></tr>
+<tr><td><b>Akkuzellen</b></td><td>Spannung addiert sich, Kapazität bleibt</td><td>Kapazität addiert sich, Spannung bleibt</td></tr>
+</tbody>
+</table></div>
+
+<h2>Spannungsteiler — und warum er unter Last zusammenbricht</h2>
+<p>Zwei Widerstände in Reihe, in der Mitte abgegriffen. Unbelastet gilt schlicht:</p>
+<div class="fbox"><span class="f">U_aus = U_ein · R2 / (R1 + R2)</span><span class="l">Nur solange nichts nennenswert Strom aus der Mitte zieht.</span></div>
+<p>Sobald ein Verbraucher am Abgriff hängt, liegt dessen Widerstand <b>parallel zu R2</b> — der Teiler liefert weniger Spannung als gerechnet. Faustregel: Der Querstrom durch den Teiler soll mindestens das Zehnfache des Laststroms betragen, sonst wird aus dem Teiler eine Zufallsschaltung.</p>
+
+<div class="calc" data-calc="teiler">
+  <h4>Spannungsteiler mit und ohne Last</h4>
+  <div class="row">
+    <div><label>U_ein in V</label><input data-k="uin" type="number" step="any" value="12" /></div>
+    <div><label>R1 in Ω</label><input data-k="r1" type="number" step="any" value="10000" /></div>
+    <div><label>R2 in Ω</label><input data-k="r2" type="number" step="any" value="10000" /></div>
+    <div><label>Last in Ω (optional)</label><input data-k="rl" type="number" step="any" placeholder="z. B. 10000" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<div class="stop"><b>Der Klassiker:</b> Ein Spannungsteiler ist keine Spannungsversorgung. Wer aus 12 V mit zwei Widerständen 5 V für einen Mikrocontroller machen will, bekommt beim ersten Lastwechsel Reset-Schleifen. Für Versorgungen gehört ein Linear- oder Schaltregler hin — siehe <a href="analogtechnik.html#versorgung">Analog &amp; Leistung → Linear- und Schaltregler</a>. Spannungsteiler sind für <b>Messsignale</b> und <b>Referenzen</b> da.</div>
+
+<h2>Innenwiderstand: warum die Batterie unter Last einbricht</h2>
+<p>Jede reale Quelle hat einen Innenwiderstand R_i. Das Ersatzschaltbild ist eine ideale Quelle mit Leerlaufspannung U₀ in Reihe zu R_i. Unter Last fällt an R_i Spannung ab:</p>
+<div class="fbox"><span class="f">U_klemme = U₀ − I · R_i</span><span class="l">Deshalb misst eine leere AA-Zelle im Leerlauf noch 1,4 V und bricht unter 500 mA auf 1,0 V ein.</span></div>
+<div class="grid3">
+  <div class="card"><div class="ct">Alkaline AA</div><div class="cd">R_i ≈ 150–300 mΩ frisch, steigt beim Entladen deutlich an</div></div>
+  <div class="card"><div class="ct">Li-Ion 18650</div><div class="cd">R_i ≈ 20–80 mΩ — deshalb liefern sie hohe Ströme ohne Einbruch</div></div>
+  <div class="card"><div class="ct">Labornetzteil</div><div class="cd">R_i praktisch null, dafür begrenzt es aktiv den Strom</div></div>
+</div>
+<p class="note">Praktische Messung: Leerlaufspannung messen, dann einen bekannten Lastwiderstand anschließen und erneut messen. R_i = (U₀ − U_last) / I_last. Das funktioniert an Batterien, Netzteilen und Signalquellen gleichermaßen.</p>
+
+<h2>Leistungsanpassung — und wann sie falsch ist</h2>
+<p>Die maximale <em>Leistung</em> überträgt eine Quelle an eine Last, wenn R_Last = R_i. Das ist ein Klassiker in Prüfungen — und in der Energietechnik ein Fehler, denn der Wirkungsgrad beträgt dann genau 50 %: die Hälfte der Energie verheizt die Quelle.</p>
+<div class="gb">
+  <div class="gb-col good"><h4>Leistungsanpassung sinnvoll</h4><ul>
+    <li>Hochfrequenz und Antennen: 50 Ω überall, weil Reflexionen vermieden werden müssen</li>
+    <li>Audio-Signalübertragung im Kleinsignalbereich</li>
+    <li>Sensoren mit winzigen Signalen, bei denen es auf jedes Mikrowatt ankommt</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Leistungsanpassung falsch</h4><ul>
+    <li>Jede Energieversorgung: dort will man R_Last ≫ R_i, also Spannungsanpassung</li>
+    <li>Motoren, Netzteile, Akkus — Ziel ist Wirkungsgrad, nicht Maximalleistung</li>
+    <li>Digitale Signale auf kurzen Leitungen: dort zählt der Pegel, nicht die Leistung</li>
+  </ul></div>
+</div>
+
+<h2>Temperaturabhängigkeit</h2>
+<p>Metalle werden bei Erwärmung <b>hochohmiger</b>, Halbleiter meist <b>niederohmiger</b>. Für Kupfer gilt näherungsweise:</p>
+<div class="fbox"><span class="f">R(ϑ) = R₂₀ · [1 + α · (ϑ − 20 °C)]&nbsp;&nbsp;mit α_Cu ≈ 0,0039 / K</span></div>
+<p>Eine Kupferwicklung, die sich von 20 °C auf 100 °C erwärmt, hat rund 31 % mehr Widerstand. Genau daraus bestimmt man in der Praxis die Wicklungstemperatur eines Motors oder Trafos, ohne einen Sensor hineinzubauen — man misst den Widerstand kalt und warm.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Material</th><th>ρ bei 20 °C in Ω·mm²/m</th><th>α in 1/K</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Silber</b></td><td>0,0159</td><td>0,0038</td><td>bester Leiter, zu teuer für Leitungen</td></tr>
+<tr><td><b>Kupfer</b></td><td>0,0175</td><td>0,0039</td><td>der Standard</td></tr>
+<tr><td><b>Aluminium</b></td><td>0,0282</td><td>0,0038</td><td>leichter, in Freileitungen und Motoren</td></tr>
+<tr><td><b>Konstantan</b></td><td>0,49</td><td>≈ 0,00002</td><td>praktisch temperaturunabhängig → Präzisionswiderstände, DMS</td></tr>
+<tr><td><b>Nickel-Chrom</b></td><td>1,1</td><td>0,0002</td><td>Heizwendeln</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Albach, <i>Grundlagen der Elektrotechnik 1</i>, Kapitel Gleichstromnetzwerke.</li>
+    <li><a href="https://www.allaboutcircuits.com/textbook/direct-current/">All About Circuits — DC Circuits</a>, frei zugänglich.</li>
+    <li>Datenblätter Energizer/Panasonic zu Innenwiderstand und Entladekurven von Primärzellen.</li>
+  </ul>
+</div>

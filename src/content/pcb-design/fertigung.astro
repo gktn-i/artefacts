@@ -1,0 +1,88 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Bestellung ist der Moment, in dem Fehler teuer werden.</b> Zehn Minuten Prüfung der Fertigungsdaten sparen zwei Wochen Wartezeit. Der wichtigste Schritt: die erzeugten Gerber-Dateien im Betrachter öffnen und Lage für Lage ansehen — nicht das Layout, sondern das, was der Fertiger bekommt.</div>
+
+<h2>Welche Dateien gebraucht werden</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Datei</th><th>Inhalt</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Gerber je Kupferlage</b></td><td>F.Cu, In1.Cu, In2.Cu, B.Cu</td><td>Format <b>Gerber X2</b> enthält Lagenzuordnung und Netznamen als Metadaten — deutlich weniger Missverständnisse</td></tr>
+<tr><td><b>Lötstoppmaske</b></td><td>F.Mask, B.Mask</td><td>Definiert, wo <b>keine</b> Maske ist — also die freien Pads</td></tr>
+<tr><td><b>Bestückungsdruck</b></td><td>F.Silkscreen, B.Silkscreen</td><td>Beschriftung; darf nicht auf Pads liegen</td></tr>
+<tr><td><b>Pastenmaske</b></td><td>F.Paste, B.Paste</td><td>Nur für die Lotpastenschablone nötig</td></tr>
+<tr><td><b>Umriss</b></td><td>Edge.Cuts</td><td>Der Fräsweg. Muss eine geschlossene Kontur sein</td></tr>
+<tr><td><b>Bohrdaten</b></td><td>Excellon (.drl)</td><td>Getrennt nach durchkontaktiert (PTH) und nicht durchkontaktiert (NPTH)</td></tr>
+<tr><td><b>Positionsdatei</b></td><td>Centroid / Pick-and-Place (.pos, .csv)</td><td>Nur bei maschineller Bestückung. Koordinaten, Drehung, Lage</td></tr>
+<tr><td><b>Stückliste</b></td><td>BOM (.csv)</td><td>Mit Herstellerteilenummern und Bestellnummern</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Viele Fertiger nehmen inzwischen direkt die KiCad-Datei</b> (.kicad_pcb) oder bieten ein Zusatzmodul, das die Daten in ihrem gewünschten Format erzeugt. Das reduziert Fehlerquellen, koppelt das Projekt aber an einen Anbieter. Für die eigene Archivierung sollte man die Gerber-Dateien trotzdem erzeugen und mit dem Projekt ablegen — sie sind das herstellerunabhängige Austauschformat.</div>
+
+<h2>Prüfen, bevor bestellt wird</h2>
+<div class="steps">
+  <div class="step"><h4>Gerber-Betrachter öffnen</h4>Alle Lagen laden, einzeln ein- und ausblenden. Sind alle da? Stimmt die Ausrichtung? Ist der Umriss geschlossen?</div>
+  <div class="step"><h4>Lötstoppmaske kontrollieren</h4>Sind alle Pads frei? Gibt es Bereiche, wo die Maske fehlt und Kupfer offen liegt, obwohl es nicht soll?</div>
+  <div class="step"><h4>Bohrdaten überlagern</h4>Liegen alle Bohrungen in Pads? Fehlt eine Befestigungsbohrung? Sind durchkontaktierte und nicht durchkontaktierte Bohrungen richtig getrennt?</div>
+  <div class="step"><h4>Bestückungsdruck lesen</h4>Ist er nach dem Bestücken noch sichtbar? Überlagert er Pads? Ist Pin 1 markiert?</div>
+  <div class="step"><h4>Fertigungsgrenzen abgleichen</h4>Minimale Bahnbreite, minimaler Abstand, kleinster Bohrdurchmesser, Restring — gegen die veröffentlichten Angaben des gewählten Fertigers.</div>
+  <div class="step"><h4>Datenvorschau des Fertigers ansehen</h4>Die meisten zeigen nach dem Hochladen eine Vorschau. Die letzten fünf Minuten vor dem Absenden sind die wertvollsten.</div>
+</div>
+
+<h2>Design for Manufacturing</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Punkt</th><th>Standardgrenze</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Minimale Leiterbahnbreite</b></td><td>0,127 mm (5 mil)</td><td>Darunter steigen Kosten und Ausschussrate deutlich</td></tr>
+<tr><td><b>Minimaler Abstand</b></td><td>0,127 mm</td><td>Ätzprozessgrenze</td></tr>
+<tr><td><b>Kleinste Bohrung</b></td><td>0,3 mm mechanisch</td><td>Kleiner nur mit Laser (Micro Via), deutlich teurer</td></tr>
+<tr><td><b>Restring</b></td><td>0,15 mm</td><td>Das Kupfer rund um die Bohrung. Zu klein heißt Ausbrüche bei Bohrtoleranzen</td></tr>
+<tr><td><b>Kupfer zum Rand</b></td><td>0,3 mm</td><td>Fräser hat Toleranz; Grate erzeugen Kurzschlüsse</td></tr>
+<tr><td><b>Kleinste Beschriftung</b></td><td>0,8 mm Höhe, 0,15 mm Strichstärke</td><td>Kleiner wird unleserlich oder verschwindet ganz</td></tr>
+<tr><td><b>Lötstoppsteg</b></td><td>0,1 mm</td><td>Zwischen zwei Pads. Darunter läuft die Maske zusammen</td></tr>
+<tr><td><b>Nutzen und Ritzung</b></td><td>Panel mit V-Cut oder Fräsung</td><td>Bei kleinen Platinen spart ein Nutzen Geld; Bauteile 0,5 mm von der Trennlinie fernhalten</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Die Grenzen unterscheiden sich je Fertiger und Preisklasse.</b> Wer die Standardklasse nutzt (die billigste), bekommt oft 0,127 mm als Minimum; feinere Strukturen kosten Aufpreis oder sind gar nicht möglich. Die Fertigervorgaben <b>vor</b> dem Layout in die Entwurfsregeln des Werkzeugs eintragen — dann meldet die DRC Verstöße sofort statt erst bei der Bestellung.</div>
+
+<h2>Fertiger im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Anbieter</th><th>Sitz</th><th>Preis</th><th>Besonderheit</th></tr></thead>
+<tbody>
+<tr><td><b>JLCPCB</b></td><td>China</td><td>sehr günstig</td><td>Bestückung mit eigenem Bauteillager, sehr schnell. Zoll und Versand beachten</td></tr>
+<tr><td><b>PCBWay</b></td><td>China</td><td>günstig</td><td>Breites Angebot bis Sonderaufbauten, guter Kundendienst</td></tr>
+<tr><td><b>Aisler</b></td><td>Niederlande</td><td>mittel</td><td>EU-Fertigung, sehr einfacher Ablauf, direkte KiCad-Anbindung</td></tr>
+<tr><td><b>Eurocircuits</b></td><td>Belgien/Deutschland</td><td>mittel bis hoch</td><td>Sehr gute Datenprüfung mit Rückmeldung, EU-Fertigung, Kleinserien</td></tr>
+<tr><td><b>Multi-CB</b></td><td>Deutschland</td><td>mittel</td><td>Viele Optionen, ausführliche technische Angaben</td></tr>
+<tr><td><b>Würth Elektronik</b></td><td>Deutschland</td><td>hoch</td><td>Für Serien und anspruchsvolle Aufbauten</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Bei Bestellungen außerhalb der EU</b> kommen Einfuhrumsatzsteuer und gegebenenfalls Zoll dazu; ab bestimmten Werten wird eine Zollanmeldung nötig. Bei kleinen Platinenmengen ist der Preisunterschied trotzdem oft erheblich. Für Produkte, die in Verkehr gebracht werden, spielt zusätzlich die Rückverfolgbarkeit der Fertigung eine Rolle.</p>
+
+<h2>Bestückung durch den Fertiger</h2>
+<div class="steps">
+  <div class="step"><h4>Bauteile aus dem Anbieterlager wählen</h4>Wer die im Lager vorhandenen Teile verwendet, spart die Beschaffung und Einrichtekosten. Die Auswahl früh prüfen — sie beeinflusst die Bauteilauswahl im Schaltplan.</div>
+  <div class="step"><h4>Drehwinkel prüfen</h4>Die häufigste Fehlerquelle bei maschineller Bestückung. Die Bezugsorientierung des Fertigers weicht oft von der des Werkzeugs ab; die meisten veröffentlichen eine Tabelle mit den erwarteten Winkeln je Bauform.</div>
+  <div class="step"><h4>Polarität eindeutig machen</h4>Bei Dioden, Elkos und ICs im Bestückungsdruck und in der Kupferlage markieren. Fehlende Markierungen führen zu Rückfragen — oder zu falsch bestückten Platinen.</div>
+  <div class="step"><h4>Einseitig bestücken lassen</h4>Beidseitige Bestückung kostet einen zweiten Durchlauf. Wo möglich alle SMD-Teile auf eine Seite legen.</div>
+  <div class="step"><h4>Durchsteckbauteile selbst löten</h4>Bei kleinen Stückzahlen fast immer günstiger, weil Handbestückung beim Fertiger teuer ist.</div>
+  <div class="step"><h4>Erstmuster prüfen lassen</h4>Manche Anbieter bieten eine Freigabe anhand von Fotos vor der Serie. Nutzen — es fängt Verwechslungen ab.</div>
+</div>
+
+<h2>Selbst bestücken</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Schablone</div><div class="cd">Edelstahl, mit Rahmen oder ohne. Kostet 5–20 € und macht den Unterschied zwischen mühsamem Aufbringen von Hand und einem sauberen Pastenauftrag in Sekunden.</div></div>
+  <div class="card"><div class="ct">Lotpaste</div><div class="cd">Bleifrei SAC305 als Standard, Korngröße Typ 4 für feine Raster. Kühl lagern, vor Gebrauch auf Raumtemperatur bringen, Haltbarkeit beachten.</div></div>
+  <div class="card"><div class="ct">Heizplatte oder Reflow-Ofen</div><div class="cd">Für kleine Platinen genügt eine geregelte Heizplatte, für größere ein Ofen mit Profilsteuerung. Details in <a href="loeten-referenz.html#heizplatte">Löten → Heizplatte</a>.</div></div>
+  <div class="card"><div class="ct">Nacharbeit</div><div class="cd">Heißluft, Flussmittel, Entlötlitze, Mikroskop. Für QFN und BGA unverzichtbar — siehe <a href="loeten-referenz.html#heissluft">Löten → Heißluft &amp; Reflow</a>.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Ucamco, <a href="https://www.ucamco.com/en/gerber">Gerber Format Specification</a> — die maßgebliche Definition, inklusive X2-Erweiterungen.</li>
+    <li>IPC-A-600 (Abnahmekriterien für Leiterplatten) und IPC-A-610 (für Baugruppen).</li>
+    <li>Fertigervorgaben: JLCPCB, PCBWay, Aisler, Eurocircuits, Multi-CB — jeweils die Seite mit den Fertigungsgrenzen.</li>
+    <li>Löt- und Reflow-Praxis: <a href="loeten-referenz.html">Löten</a>.</li>
+  </ul>
+</div>

@@ -1,0 +1,99 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Prozessor holt Befehle, decodiert sie, führt sie aus und schreibt zurück.</b> Alles, was Rechner seit sechzig Jahren schneller gemacht hat, ist eine Variation von zwei Ideen: mehrere dieser Schritte gleichzeitig ausführen (Pipeline) und den Speicherzugriff verstecken (Cache).</div>
+
+<h2>Von-Neumann und Harvard</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Von-Neumann</h4>
+    <p>Ein gemeinsamer Speicher für Programm und Daten, ein Bus. Einfach und flexibel — Programme können sich selbst laden und verändern.</p>
+    <ul><li>Der Bus ist der Flaschenhals: Befehl holen und Daten lesen konkurrieren</li><li>PCs, die meisten Anwendungsprozessoren</li></ul>
+  </div>
+  <div class="gb-col"><h4>Harvard</h4>
+    <p>Getrennte Speicher und Busse für Programm und Daten. Beide Zugriffe im selben Takt möglich.</p>
+    <ul><li>Schneller und deterministischer</li><li>AVR, PIC, viele DSPs; ARM Cortex-M nutzt eine modifizierte Variante mit getrennten Bussen auf einen gemeinsamen Adressraum</li></ul>
+  </div>
+</div>
+
+<h2>Die Pipeline</h2>
+<svg class="dg l" viewBox="0 0 620 160" role="img" aria-label="Fünfstufige Pipeline mit überlappenden Befehlen">
+  <text class="lbl" x="54" y="40" text-anchor="end">Befehl 1</text>
+  <text class="lbl" x="54" y="68" text-anchor="end">Befehl 2</text>
+  <text class="lbl" x="54" y="96" text-anchor="end">Befehl 3</text>
+  <text class="lbl" x="54" y="124" text-anchor="end">Befehl 4</text>
+  <rect class="accs" x="64" y="26" width="86" height="20" /><text class="lbl" x="107" y="40" text-anchor="middle">IF</text>
+  <rect class="accs" x="150" y="26" width="86" height="20" /><text class="lbl" x="193" y="40" text-anchor="middle">ID</text>
+  <rect class="accs" x="236" y="26" width="86" height="20" /><text class="lbl" x="279" y="40" text-anchor="middle">EX</text>
+  <rect class="accs" x="322" y="26" width="86" height="20" /><text class="lbl" x="365" y="40" text-anchor="middle">MEM</text>
+  <rect class="accs" x="408" y="26" width="86" height="20" /><text class="lbl" x="451" y="40" text-anchor="middle">WB</text>
+  <rect class="accs" x="150" y="54" width="86" height="20" /><text class="lbl" x="193" y="68" text-anchor="middle">IF</text>
+  <rect class="accs" x="236" y="54" width="86" height="20" /><text class="lbl" x="279" y="68" text-anchor="middle">ID</text>
+  <rect class="accs" x="322" y="54" width="86" height="20" /><text class="lbl" x="365" y="68" text-anchor="middle">EX</text>
+  <rect class="accs" x="408" y="54" width="86" height="20" /><text class="lbl" x="451" y="68" text-anchor="middle">MEM</text>
+  <rect class="accs" x="494" y="54" width="86" height="20" /><text class="lbl" x="537" y="68" text-anchor="middle">WB</text>
+  <rect class="accs" x="236" y="82" width="86" height="20" /><text class="lbl" x="279" y="96" text-anchor="middle">IF</text>
+  <rect class="accs" x="322" y="82" width="86" height="20" /><text class="lbl" x="365" y="96" text-anchor="middle">ID</text>
+  <rect class="accs" x="408" y="82" width="86" height="20" /><text class="lbl" x="451" y="96" text-anchor="middle">EX</text>
+  <rect class="accs" x="322" y="110" width="86" height="20" /><text class="lbl" x="365" y="124" text-anchor="middle">IF</text>
+  <rect class="accs" x="408" y="110" width="86" height="20" /><text class="lbl" x="451" y="124" text-anchor="middle">ID</text>
+  <text class="lbla" x="310" y="150" text-anchor="middle">Nach dem Einlaufen: ein Befehl pro Takt fertig — bei fünffacher Latenz je Einzelbefehl</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Konflikt (Hazard)</th><th>Ursache</th><th>Lösung</th></tr></thead>
+<tbody>
+<tr><td><b>Datenkonflikt</b></td><td>Ein Befehl braucht ein Ergebnis, das noch nicht zurückgeschrieben ist</td><td>Forwarding (Ergebnis direkt weiterreichen), sonst Pipeline-Stillstand</td></tr>
+<tr><td><b>Steuerungskonflikt</b></td><td>Nach einem Sprung ist unklar, welcher Befehl folgt</td><td>Sprungvorhersage; bei Fehlvorhersage wird die Pipeline verworfen</td></tr>
+<tr><td><b>Ressourcenkonflikt</b></td><td>Zwei Stufen brauchen dieselbe Einheit</td><td>Einheit duplizieren oder Zugriff serialisieren</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Warum das für Mechatronik zählt:</b> Eine tiefe Pipeline mit Sprungvorhersage macht die Ausführungszeit <b>variabel</b>. Für harte Echtzeit ist das ein Problem — deshalb haben Cortex-M-Controller kurze Pipelines (3 Stufen bei M0/M3) und deshalb geben Hersteller für sicherheitskritische Systeme Worst-Case-Zeiten statt Durchschnittswerten an.</p>
+
+<h2>Speicherhierarchie</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Ebene</th><th>Größe</th><th>Zugriffszeit</th><th>Verhältnis zum Register</th></tr></thead>
+<tbody>
+<tr><td><b>Register</b></td><td>32–256 Byte</td><td>&lt; 1 Takt</td><td>1×</td></tr>
+<tr><td><b>L1-Cache</b></td><td>16–64 kB</td><td>3–5 Takte</td><td>≈ 4×</td></tr>
+<tr><td><b>L2-Cache</b></td><td>256 kB – 2 MB</td><td>10–20 Takte</td><td>≈ 15×</td></tr>
+<tr><td><b>L3-Cache</b></td><td>4–64 MB</td><td>30–60 Takte</td><td>≈ 45×</td></tr>
+<tr><td><b>DRAM</b></td><td>GB</td><td>200–400 Takte</td><td>≈ 300×</td></tr>
+<tr><td><b>SSD</b></td><td>TB</td><td>10–100 µs</td><td>≈ 100 000×</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die praktische Konsequenz:</b> Ein Cache-Fehltreffer kostet so viel wie hundert Rechenoperationen. Deshalb schlägt ein einfacher Algorithmus auf einem zusammenhängenden Array oft einen theoretisch besseren auf einer verzeigerten Struktur. Datenlayout ist auf modernen Prozessoren wichtiger als Befehlszählen — bei Mikrocontrollern ohne Cache gilt das nicht, dort zählt wieder jeder Befehl.</div>
+
+<h3>Cache-Grundbegriffe</h3>
+<ul>
+  <li><b>Cache-Line:</b> Die kleinste Einheit, typisch 32 oder 64 Byte. Ein einziges gelesenes Byte holt die ganze Linie.</li>
+  <li><b>Assoziativität:</b> Wie viele Plätze eine Adresse belegen darf. Direkt abgebildet (1-fach) ist billig, aber anfällig für Konflikte; 4- bis 16-fach ist üblich.</li>
+  <li><b>Write-Through gegen Write-Back:</b> Sofort in den Hauptspeicher schreiben oder erst beim Verdrängen. Write-Back ist schneller, macht aber DMA-Zugriffe gefährlich.</li>
+  <li><b>Kohärenz:</b> Wenn DMA oder ein zweiter Kern in den Speicher schreibt, muss der Cache invalidiert werden. Auf Cortex-M7 mit D-Cache ist das die häufigste Ursache für „DMA liefert alte Daten“.</li>
+</ul>
+
+<h2>Was moderne Prozessoren zusätzlich tun</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Superskalar</div><div class="cd">Mehrere Befehle pro Takt starten, wenn sie unabhängig sind. Cortex-M7 ist zweifach superskalar, Anwendungsprozessoren vier- bis achtfach.</div></div>
+  <div class="card"><div class="ct">Out-of-Order</div><div class="cd">Befehle in geänderter Reihenfolge ausführen und das Ergebnis wieder in Programmreihenfolge bringen. Kostet viel Fläche und Strom, bringt viel Durchsatz — und macht Zeitverhalten unvorhersagbar.</div></div>
+  <div class="card"><div class="ct">SIMD</div><div class="cd">Ein Befehl auf mehreren Datenwörtern: ARM NEON, Helium (MVE) auf Cortex-M55/M85, RISC-V Vector. Für Filter und Bildverarbeitung ein Faktor 4 bis 16.</div></div>
+  <div class="card"><div class="ct">Spekulation</div><div class="cd">Ergebnisse berechnen, bevor feststeht, ob sie gebraucht werden. Die Grundlage von Spectre und Meltdown — Sicherheitslücken, die aus reiner Leistungsoptimierung entstanden.</div></div>
+  <div class="card"><div class="ct">Mehrkern</div><div class="cd">Echte Parallelität. In der Mechatronik oft als asymmetrische Aufteilung: ein Kern für Echtzeit, ein Kern für Kommunikation und Bedienung (z. B. ESP32, i.MX RT, Zynq).</div></div>
+  <div class="card"><div class="ct">Beschleuniger</div><div class="cd">Krypto-Einheiten, CRC-Rechenwerke, DSP-Blöcke, NPUs für neuronale Netze. Sie erledigen in einem Takt, wofür Software hundert bräuchte — sie zu kennen lohnt sich vor jeder Optimierung.</div></div>
+</div>
+
+<h2>Wo die Zeit wirklich hingeht</h2>
+<div class="steps">
+  <div class="step"><h4>Erst messen, dann optimieren</h4>Ein Zeitzähler um verdächtige Codeabschnitte oder ein GPIO-Pin, der am Oszilloskop mitläuft, ist auf Mikrocontrollern das direkteste Werkzeug überhaupt.</div>
+  <div class="step"><h4>Die häufigsten Bremsen kennen</h4>Fließkomma ohne FPU (Faktor 50–200), <code>printf</code> mit Formatierung, Division ohne Hardware-Divider, blockierende Wartezeiten, Speicherzugriff auf externes RAM.</div>
+  <div class="step"><h4>Compiler arbeiten lassen</h4><code>-O2</code> statt <code>-O0</code> bringt oft Faktor 3 bis 10. Wer optimierten Code debuggen muss, nimmt <code>-Og</code>.</div>
+  <div class="step"><h4>Algorithmus vor Mikrooptimierung</h4>Eine Nachschlagetabelle statt einer Winkelfunktion, ein Sortierverfahren mit besserer Komplexität, weniger Neuberechnung — das bringt Größenordnungen, Assembler-Tricks bringen Prozente.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Patterson &amp; Hennessy, <i>Computer Organization and Design — RISC-V Edition</i>.</li>
+    <li>Bryant &amp; O'Hallaron, <i>Computer Systems: A Programmer's Perspective</i>, Kapitel 5 und 6 — Optimierung und Speicherhierarchie.</li>
+    <li>Ulrich Drepper, <a href="https://people.freebsd.org/~lstewart/articles/cpumemory.pdf">What Every Programmer Should Know About Memory</a>, kostenlos.</li>
+    <li>ARM Cortex-M Technical Reference Manuals — Pipeline-Tiefe, Buszyklen und Cache-Verhalten stehen dort konkret.</li>
+  </ul>
+</div>

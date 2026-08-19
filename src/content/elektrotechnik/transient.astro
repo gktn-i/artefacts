@@ -1,0 +1,107 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Kondensator und Spule haben ein Gedächtnis.</b> Spannung am Kondensator und Strom durch die Spule können sich nicht sprunghaft ändern — daraus folgt jeder Einschaltvorgang, jede Zeitkonstante und jede Schwingung. Wer diese Kurven im Kopf hat, versteht später die Regelungstechnik ohne Umweg.</div>
+
+<h2>Das RC-Glied</h2>
+<div class="fbox">
+  <span class="f">u_C(t) = U₀ · (1 − e^(−t/τ))&nbsp;&nbsp;mit&nbsp;&nbsp;τ = R · C</span>
+  <span class="l">Beim Entladen spiegelbildlich: u_C(t) = U₀ · e^(−t/τ).</span>
+</div>
+<svg class="dg l" viewBox="-30 0 640 200" role="img" aria-label="Ladekurve und Entladekurve eines Kondensators mit Zeitkonstanten">
+  <path class="w" d="M40,20 V170 H580" />
+  <path class="gd" d="M40,34 H560 M40,68 H160" />
+  <path class="acc" d="M40,170 C67,170 76,90 103,73 C130,56 148,45 175,39 C220,30 250,36 300,34" />
+  <path class="badl" d="M300,34 C330,34 340,110 367,130 C400,150 430,162 480,167 C520,170 540,170 560,170" style="stroke-dasharray:5 3" />
+  <path class="gd" d="M103,73 V170 M175,39 V170 M300,34 V170 M367,130 V170" />
+  <text class="lbl" x="36" y="38" text-anchor="end">100 %</text>
+  <text class="lbl" x="36" y="72" text-anchor="end">63 %</text>
+  <text class="lbl" x="36" y="174" text-anchor="end">0</text>
+  <text class="lbl" x="103" y="186" text-anchor="middle">τ</text>
+  <text class="lbl" x="175" y="186" text-anchor="middle">2τ</text>
+  <text class="lbl" x="300" y="186" text-anchor="middle">5τ</text>
+  <text class="lbla" x="180" y="24">Laden</text>
+  <text class="lbl" x="410" y="60" style="fill:var(--bad)">Entladen (37 % nach τ)</text>
+  <text class="lbla" x="586" y="174">t</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Nach</th><th>geladen auf</th><th>entladen auf</th></tr></thead>
+<tbody>
+<tr><td>1 τ</td><td>63,2 %</td><td>36,8 %</td></tr>
+<tr><td>2 τ</td><td>86,5 %</td><td>13,5 %</td></tr>
+<tr><td>3 τ</td><td>95,0 %</td><td>5,0 %</td></tr>
+<tr><td>4 τ</td><td>98,2 %</td><td>1,8 %</td></tr>
+<tr><td>5 τ</td><td>99,3 % — praktisch fertig</td><td>0,7 %</td></tr>
+</tbody>
+</table></div>
+
+<div class="calc" data-calc="rc">
+  <h4>Zeitkonstante und Grenzfrequenz</h4>
+  <div class="row">
+    <div><label>R in Ω</label><input data-k="r" type="number" step="any" value="10000" /></div>
+    <div><label>C in µF</label><input data-k="c" type="number" step="any" value="1" /></div>
+    <div><label>oder L in mH</label><input data-k="l" type="number" step="any" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h3>Wo RC-Glieder in der Praxis stecken</h3>
+<div class="grid">
+  <div class="card"><div class="ct">Tasterentprellung</div><div class="cd">Ein mechanischer Kontakt prellt 1–20 ms. Ein RC mit τ ≈ 10 ms plus Schmitt-Trigger-Eingang macht daraus eine saubere Flanke. Alternative in Software: Zustand erst nach zwei gleichen Abtastungen im Abstand von 10 ms übernehmen.</div></div>
+  <div class="card"><div class="ct">Reset-Verzögerung</div><div class="cd">Viele ältere Mikrocontroller brauchen einen definierten Reset beim Einschalten. 10 kΩ mit 100 nF ergibt τ = 1 ms — genug, damit die Versorgung stabil steht.</div></div>
+  <div class="card"><div class="ct">Antialiasing vor dem ADC</div><div class="cd">Ein RC-Tiefpass vor dem Wandlereingang unterdrückt Frequenzen oberhalb der Nyquist-Grenze. Ohne ihn erscheint jede Störung als scheinbar langsames Nutzsignal.</div></div>
+  <div class="card"><div class="ct">Snubber</div><div class="cd">RC in Reihe, parallel zum Schalter oder zur Diode. Bedämpft die Schwingung, die beim harten Abschalten einer Induktivität entsteht, und senkt die Störabstrahlung.</div></div>
+</div>
+
+<h2>Das RL-Glied</h2>
+<div class="fbox"><span class="f">i_L(t) = I₀ · (1 − e^(−t/τ))&nbsp;&nbsp;mit&nbsp;&nbsp;τ = L / R</span></div>
+<p>Der Strom in einer Spule baut sich mit derselben Kurvenform auf wie die Spannung am Kondensator. Der entscheidende Unterschied liegt im <b>Abschalten</b>: Wird der Stromkreis geöffnet, versucht die Spule den Strom aufrechtzuerhalten und erzeugt dafür eine beliebig hohe Gegenspannung.</p>
+<div class="stop"><b>Freilaufdiode ist Pflicht.</b> Beim Abschalten eines Relais mit 100 mA und 100 mH und einem Schaltvorgang in 1 µs entsteht rechnerisch u = L·di/dt = 0,1 H · 100 mA/1 µs = <b>10 kV</b>. In der Realität begrenzt der Lichtbogen oder der durchbrechende Transistor das — nur ist der Transistor danach kaputt. Eine antiparallele Diode über der Spule (1N4148 für kleine, 1N4007 für größere Relais) leitet den Strom sanft ab. Bei schnellen Abschaltvorgängen nimmt man eine Schottky- oder eine Zenerdiode in Reihe, um die Abschaltzeit kurz zu halten.</div>
+
+<h2>Der Schwingkreis: RLC in Reihe</h2>
+<p>Kommen L und C zusammen, pendelt Energie zwischen elektrischem und magnetischem Feld hin und her. R bestimmt, wie schnell die Schwingung ausklingt.</p>
+<div class="fbox">
+  <span class="f">ω₀ = 1/√(LC)&nbsp;&nbsp;·&nbsp;&nbsp;D = R/2 · √(C/L)&nbsp;&nbsp;·&nbsp;&nbsp;Q = 1/(2D)</span>
+  <span class="l">D ist der Dämpfungsgrad, Q die Güte. Beides beschreibt dasselbe von zwei Seiten.</span>
+</div>
+<svg class="dg l" viewBox="-10 0 620 200" role="img" aria-label="Drei Sprungantworten: schwingend, aperiodischer Grenzfall und kriechend">
+  <path class="w" d="M40,20 V170 H580" />
+  <path class="gd" d="M40,60 H580" />
+  <path class="badl" d="M40,170 C64,170 70,26 100,26 C130,26 134,88 160,88 C186,88 190,44 216,44 C242,44 246,72 272,72 C300,72 310,54 340,58 C380,62 420,60 560,60" />
+  <path class="acc" d="M40,170 C80,170 90,66 130,62 C180,58 230,60 300,60 C400,60 480,60 560,60" />
+  <path class="good" d="M40,170 C110,170 140,140 200,116 C280,86 380,66 460,62 C500,60 530,60 560,60" />
+  <text class="lbl" x="36" y="64" text-anchor="end">Soll</text>
+  <text class="lbl" x="104" y="20" style="fill:var(--bad)">D &lt; 1 schwingend</text>
+  <text class="lbla" x="300" y="52">D = 1 aperiodischer Grenzfall</text>
+  <text class="lbl" x="250" y="140" style="fill:var(--ok)">D &gt; 1 kriechend</text>
+  <text class="lbla" x="586" y="174">t</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Dämpfungsgrad D</th><th>Verhalten</th><th>Wo man das will</th></tr></thead>
+<tbody>
+<tr><td><b>D = 0</b></td><td>Ungedämpfte Dauerschwingung</td><td>Oszillator, Schwingquarz (nur näherungsweise erreichbar)</td></tr>
+<tr><td><b>0 &lt; D &lt; 1</b></td><td>Gedämpfte Schwingung mit Überschwingen</td><td>Filter mit steiler Flanke; D ≈ 0,7 gilt als guter Kompromiss</td></tr>
+<tr><td><b>D = 1</b></td><td>Aperiodischer Grenzfall — schnellstmöglich ohne Überschwingen</td><td>Messgeräte, Positionierantriebe</td></tr>
+<tr><td><b>D &gt; 1</b></td><td>Kriechfall — kein Überschwingen, aber langsam</td><td>Wo Überschwingen teuer ist: Fahrstuhl, Werkzeugzustellung</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Dieselbe Mathematik, anderes Fach.</b> Diese drei Kurven tauchen in der <a href="regelungstechnik.html#glieder">Regelungstechnik</a> als PT2-Glied wieder auf — und in der Mechanik als Feder-Masse-Dämpfer-System. Ein RLC-Kreis, ein Stoßdämpfer und ein geregelter Positionierantrieb gehorchen derselben Differentialgleichung zweiter Ordnung. Wer das einmal verstanden hat, spart sich das Lernen dreimal.</div>
+
+<h2>Ladungsausgleich und Einschaltströme</h2>
+<p>Ein leerer Kondensator ist im ersten Moment ein Kurzschluss. Beim Einschalten eines Netzteils mit 1000 µF Ausgangselko begrenzt nur der Innenwiderstand der Quelle plus der ESR des Elkos den Strom. Bei 12 V und 50 mΩ Gesamtwiderstand sind das rechnerisch 240 A Spitze — kurz, aber genug, um Schaltkontakte zu verschweißen und Leiterbahnen zu belasten.</p>
+<ul>
+  <li><b>NTC-Begrenzer</b> in Reihe: kalt hochohmig, warm niederohmig. Billig, aber bei schnellem Wiedereinschalten wirkungslos, weil noch heiß.</li>
+  <li><b>Vorladewiderstand mit Relais-Überbrückung</b>: der saubere Weg bei größeren Anlagen und in der Antriebstechnik.</li>
+  <li><b>Soft-Start im Regler</b>: der Wandler fährt die Ausgangsspannung in Millisekunden hoch, statt sie zuzuschalten. Bei modernen Schaltreglern eingebaut.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Albach, <i>Grundlagen der Elektrotechnik 2</i>, Kapitel Ausgleichsvorgänge.</li>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Abschnitte zu RC-Zeitkonstanten und Snubbern.</li>
+    <li>Vishay und TDK: Application Notes zu NTC-Einschaltstrombegrenzern mit Auslegungsbeispielen.</li>
+    <li><a href="https://www.falstad.com/circuit/">Falstad Circuit Simulator</a>: die drei Dämpfungsfälle lassen sich dort in einer Minute selbst erzeugen.</li>
+  </ul>
+</div>

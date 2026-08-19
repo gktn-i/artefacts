@@ -1,0 +1,84 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Laplace-Transformation macht aus Ableiten eine Multiplikation.</b> Damit wird aus einer Differentialgleichung eine Bruchgleichung, und aus dem Verketten von Systemen ein Multiplizieren. Genau dieselbe Idee wie das jω der komplexen Wechselstromrechnung — nur allgemeiner.</div>
+
+<h2>Die Regeln, die man braucht</h2>
+<div class="flist">
+  <div class="frow hd"><span>Zeitbereich</span><span>Bildbereich</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">df/dt</span><span class="fe">s·F(s) − f(0)</span><span class="fx">Ableiten wird Multiplikation mit s</span></div>
+  <div class="frow"><span class="fn">∫f dt</span><span class="fe">F(s)/s</span><span class="fx">Integrieren wird Division durch s</span></div>
+  <div class="frow"><span class="fn">f(t − T_t)</span><span class="fe">e^(−s·T_t)·F(s)</span><span class="fx">Totzeit wird ein Exponentialfaktor</span></div>
+  <div class="frow"><span class="fn">Sprung σ(t)</span><span class="fe">1/s</span><span class="fx">Das Standard-Testsignal</span></div>
+  <div class="frow"><span class="fn">Impuls δ(t)</span><span class="fe">1</span><span class="fx">Deshalb ist die Impulsantwort die Rücktransformierte von G(s)</span></div>
+  <div class="frow"><span class="fn">e^(−at)</span><span class="fe">1/(s + a)</span><span class="fx">Der abklingende Anteil eines PT1-Glieds</span></div>
+</div>
+
+<h2>Die Übertragungsfunktion</h2>
+<div class="fbox">
+  <span class="f">G(s) = Y(s) / U(s)</span>
+  <span class="l">Ausgang durch Eingang im Bildbereich, bei verschwindenden Anfangsbedingungen. Beschreibt das System vollständig.</span>
+</div>
+<div class="grid2">
+  <div class="card"><div class="ct">Reihenschaltung</div><div class="cd">Übertragungsfunktionen werden <b>multipliziert</b>: G_ges = G₁ · G₂. Deshalb addieren sich im Bode-Diagramm die Dezibel und die Phasen.</div></div>
+  <div class="card"><div class="ct">Parallelschaltung</div><div class="cd">Werden <b>addiert</b>: G_ges = G₁ + G₂. Genau so setzt sich der PID-Regler aus seinen drei Anteilen zusammen.</div></div>
+  <div class="card"><div class="ct">Rückführung (negativ)</div><div class="cd"><span class="formula">G_w = G₀ / (1 + G₀)</span> mit G₀ als offenem Kreis. Die wichtigste Formel der Regelungstechnik.</div></div>
+  <div class="card"><div class="ct">Störübertragung</div><div class="cd"><span class="formula">G_z = G_S / (1 + G₀)</span> — auch die Störwirkung wird um den Faktor (1 + G₀) gedämpft. Hohe Kreisverstärkung unterdrückt Störungen, macht aber instabil.</div></div>
+</div>
+
+<h2>Pole und Nullstellen</h2>
+<p>Schreibt man G(s) als Bruch, sind die <b>Pole</b> die Nullstellen des Nenners und die <b>Nullstellen</b> die des Zählers. Ihre Lage in der komplexen Ebene sagt alles über das Verhalten:</p>
+<svg class="dg m" viewBox="0 0 400 240" role="img" aria-label="s-Ebene mit stabilem und instabilem Bereich, Polen und deren Bedeutung">
+  <rect class="accs" x="20" y="20" width="180" height="200" style="fill:var(--ok-bg);stroke:none" />
+  <rect class="accs" x="200" y="20" width="180" height="200" style="fill:var(--bad-bg);stroke:none" />
+  <path class="w" d="M20,120 H380 M200,20 V220" />
+  <text class="lbl" x="372" y="136">Re</text><text class="lbl" x="208" y="30">Im</text>
+  <text class="lbl" x="100" y="40" text-anchor="middle" style="fill:var(--ok)">stabil (Re &lt; 0)</text>
+  <text class="lbl" x="300" y="40" text-anchor="middle" style="fill:var(--bad)">instabil (Re &gt; 0)</text>
+  <path class="f" d="M96,116 l8,8 M104,116 l-8,8" style="stroke:var(--text);stroke-width:2" />
+  <text class="lbl" x="100" y="140" text-anchor="middle">reeller Pol</text>
+  <path class="f" d="M56,76 l8,8 M64,76 l-8,8" style="stroke:var(--text);stroke-width:2" />
+  <path class="f" d="M56,156 l8,8 M64,156 l-8,8" style="stroke:var(--text);stroke-width:2" />
+  <text class="lbl" x="60" y="70" text-anchor="middle">Polpaar</text>
+  <text class="lbl" x="60" y="182" text-anchor="middle">→ Schwingung</text>
+  <circle class="w" cx="150" cy="120" r="6" style="fill:none" />
+  <text class="lbl" x="150" y="146" text-anchor="middle">Nullstelle</text>
+  <text class="lbl" x="286" y="120" text-anchor="middle">×</text>
+  <text class="lbl" x="290" y="140" text-anchor="middle">wächst</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Pollage</th><th>Zeitverhalten</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Reell, negativ</b></td><td>Abklingende e-Funktion; je weiter links, desto schneller</td><td>PT1-Glied</td></tr>
+<tr><td><b>Konjugiert komplex, negativ</b></td><td>Gedämpfte Schwingung; Realteil bestimmt das Abklingen, Imaginärteil die Frequenz</td><td>Schwingfähiges PT2</td></tr>
+<tr><td><b>Auf der imaginären Achse</b></td><td>Ungedämpfte Dauerschwingung</td><td>Stabilitätsgrenze</td></tr>
+<tr><td><b>Im Ursprung</b></td><td>Integrierendes Verhalten</td><td>I-Glied, Position aus Drehzahl</td></tr>
+<tr><td><b>Rechte Halbebene</b></td><td>Aufklingend — instabil</td><td>Inverses Pendel ohne Regelung</td></tr>
+<tr><td><b>Nullstelle rechts</b></td><td>Nichtminimalphasig: läuft erst in die falsche Richtung</td><td>Boost-Wandler, Kesselfüllstand</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die praktische Kurzfassung:</b> Alle Pole links von der imaginären Achse — das System ist stabil. Wie weit links sie liegen, bestimmt die Geschwindigkeit; wie weit sie von der reellen Achse entfernt sind, wie stark es schwingt. Der Reglerentwurf besteht im Kern darin, die Pole des <em>geschlossenen</em> Kreises an eine gute Stelle zu schieben.</div>
+
+<h2>Die drei Sätze, die man ausrechnen kann, ohne rückzutransformieren</h2>
+<div class="flist">
+  <div class="frow hd"><span>Satz</span><span>Formel</span><span>Nutzen</span></div>
+  <div class="frow"><span class="fn">Endwertsatz</span><span class="fe">y(∞) = lim(s→0) s·Y(s)</span><span class="fx">Bleibende Regelabweichung ohne Simulation ablesen</span></div>
+  <div class="frow"><span class="fn">Anfangswertsatz</span><span class="fe">y(0⁺) = lim(s→∞) s·Y(s)</span><span class="fx">Sprunghöhe direkt nach dem Sprung — zeigt Durchgriff</span></div>
+  <div class="frow"><span class="fn">Statische Verstärkung</span><span class="fe">K = G(0)</span><span class="fx">Wie viel Ausgang je Eingang im Beharrungszustand</span></div>
+</div>
+<div class="card">
+  <h3>Beispiel: bleibende Abweichung</h3>
+  <p>Strecke G_S = 2/(1 + 5s), Regler nur mit P-Anteil, K_R = 4. Offener Kreis G₀ = 8/(1 + 5s), also G₀(0) = 8.</p>
+  <p>Bleibende Abweichung bei einem Sollwertsprung: <span class="formula">e(∞) = 1/(1 + G₀(0)) = 1/9 ≈ 11 %</span>.</p>
+  <p class="note">Ein reiner P-Regler an einer Strecke mit Ausgleich lässt immer einen Rest stehen. Erst ein I-Anteil bringt G₀(0) auf unendlich und damit die bleibende Abweichung auf null — das ist der ganze Grund, warum es den I-Anteil gibt.</p>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Lunze, <i>Regelungstechnik 1</i>, Kapitel Laplace-Transformation und Übertragungsfunktion.</li>
+    <li>Papula, <i>Mathematik für Ingenieure</i>, Band 2 — Laplace mit Korrespondenztabelle.</li>
+    <li>Åström &amp; Murray, <a href="https://fbswiki.org/">Feedback Systems</a>, Kapitel 8 und 9.</li>
+    <li>Brian Douglas, Videoserie zu Übertragungsfunktionen und Pollagen.</li>
+  </ul>
+</div>

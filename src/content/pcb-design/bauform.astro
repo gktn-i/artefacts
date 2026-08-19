@@ -1,0 +1,86 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Bauform entscheidet, ob man die Platine selbst bestücken kann.</b> 0805 und SOIC gehen mit Lötkolben und ruhiger Hand; 0402 und QFN brauchen Schablone, Lotpaste und Heißluft oder Reflow. Diese Entscheidung fällt beim Bauteilkauf, nicht beim Löten.</div>
+
+<h2>Passive Bauformen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Bauform</th><th>Maße (mm)</th><th>Belastbarkeit</th><th>Handlötbar</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>2512</b></td><td>6,3 × 3,2</td><td>1 W</td><td>sehr gut</td><td>Leistungswiderstände, Shunts</td></tr>
+<tr><td><b>1206</b></td><td>3,2 × 1,6</td><td>0,25 W</td><td>sehr gut</td><td>Höhere Spannungsfestigkeit als kleinere Bauformen</td></tr>
+<tr><td><b>0805</b></td><td>2,0 × 1,25</td><td>0,125 W</td><td>gut</td><td>Der Einstiegskompromiss; für Prototypen ideal</td></tr>
+<tr><td><b>0603</b></td><td>1,6 × 0,8</td><td>0,1 W</td><td>machbar</td><td>Der heutige Standard in Serienprodukten</td></tr>
+<tr><td><b>0402</b></td><td>1,0 × 0,5</td><td>0,063 W</td><td>schwierig</td><td>Nur mit Mikroskop und Pinzette; sehr enge Toleranzen</td></tr>
+<tr><td><b>0201 und kleiner</b></td><td>0,6 × 0,3</td><td>0,05 W</td><td>nein</td><td>Nur maschinell</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Praxisregel für eigene Entwürfe:</b> 0805 für Prototypen und Kleinserien mit Handbestückung, 0603 sobald eine Schablone im Spiel ist. Der Platzgewinn von 0402 lohnt sich nur, wenn die Baugröße wirklich begrenzt ist — und er erhöht die Fehlerquote beim Bestücken deutlich. Für Abblockkondensatoren ist die kleinere Bauform allerdings elektrisch besser, weil sie weniger Eigeninduktivität hat.</div>
+
+<h2>Halbleitergehäuse</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Gehäuse</th><th>Pins</th><th>Rastermaß</th><th>Handlötbar</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>SOT-23</b></td><td>3–6</td><td>0,95 mm</td><td>gut</td><td>Transistoren, kleine Regler, Referenzen</td></tr>
+<tr><td><b>SOIC / SO</b></td><td>8–28</td><td>1,27 mm</td><td>sehr gut</td><td>Operationsverstärker, Logik, Speicher. Die gutmütigste SMD-Bauform</td></tr>
+<tr><td><b>TSSOP</b></td><td>8–56</td><td>0,65 mm</td><td>gut</td><td>Kompakter Nachfolger von SOIC</td></tr>
+<tr><td><b>LQFP</b></td><td>32–208</td><td>0,5–0,8 mm</td><td>machbar</td><td>Der Standard bei Mikrocontrollern. Mit Flussmittel und Abziehlitze gut beherrschbar</td></tr>
+<tr><td><b>QFN / DFN</b></td><td>6–68</td><td>0,4–0,65 mm</td><td>nur mit Heißluft oder Reflow</td><td>Keine sichtbaren Beinchen, Kühlpad unter dem Gehäuse. Kompakt und elektrisch gut, aber nicht nacharbeitbar ohne Werkzeug</td></tr>
+<tr><td><b>BGA</b></td><td>36–2000+</td><td>0,4–1,0 mm</td><td>nein</td><td>Braucht Reflow, meist vier Lagen und Vias-in-Pad. Nacharbeit nur mit Reballing</td></tr>
+<tr><td><b>TO-220 / TO-263 (D²PAK)</b></td><td>3</td><td>—</td><td>sehr gut</td><td>Leistungshalbleiter, mit Kühlfahne</td></tr>
+<tr><td><b>SOD-123 / SMA / SMB</b></td><td>2</td><td>—</td><td>gut</td><td>Dioden in aufsteigender Belastbarkeit</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Das Kühlpad unter QFN- und DFN-Gehäusen ist meist elektrisch mit Masse verbunden</b> — und thermisch zwingend anzubinden. Ohne mehrere Vias unter dem Pad überhitzt der Baustein bei Nennlast. Gleichzeitig darf die Pastenmaske über dem Pad nicht vollflächig sein, sonst schwimmt das Bauteil beim Reflow auf. Übliche Lösung: mehrere kleinere Öffnungen mit etwa 50–70 % Flächendeckung.</div>
+
+<h2>Footprints prüfen</h2>
+<div class="steps">
+  <div class="step"><h4>Maßzeichnung im Datenblatt aufschlagen</h4>Nicht die Beispielabbildung, sondern die bemaßte Zeichnung mit den Toleranzen.</div>
+  <div class="step"><h4>Pad-Abstände nachmessen</h4>Im Footprinteditor mit dem Messwerkzeug. Rastermaß und Gesamtbreite vergleichen.</div>
+  <div class="step"><h4>Pin 1 identifizieren</h4>Der häufigste teure Fehler. Die Markierung im Bestückungsdruck muss mit der im Datenblatt übereinstimmen — und beide mit der Realität am Bauteil.</div>
+  <div class="step"><h4>Pad-Größe beurteilen</h4>IPC-7351 unterscheidet drei Dichteklassen: Most (viel Platz, gut lötbar), Nominal, Least (dicht gepackt). Für Handbestückung die großzügigere Variante wählen.</div>
+  <div class="step"><h4>Bestückungsdruck prüfen</h4>Umriss außerhalb der Pads, Pin-1-Markierung sichtbar, Bezeichner lesbar und nach dem Bestücken nicht verdeckt.</div>
+  <div class="step"><h4>3D-Ansicht kontrollieren</h4>Ragt das Bauteil über den Platinenrand? Kollidiert es mit einem Nachbarn oder dem Gehäuse? Die Prüfung dauert Sekunden.</div>
+</div>
+
+<h2>Durchsteckmontage — wann sie noch sinnvoll ist</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Weiterhin sinnvoll bei</h4><ul>
+    <li>Steckverbindern, die mechanisch belastet werden</li>
+    <li>Bauteilen, die Zug- oder Steckkräfte aufnehmen</li>
+    <li>Großen Elkos und Übertragern</li>
+    <li>Prototypen mit häufigem Bauteiltausch</li>
+    <li>Alles, was auf einem Steckbrett vorprobiert wird</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Nachteile</h4><ul>
+    <li>Längere Anschlussbeine bedeuten mehr Induktivität — bei HF unbrauchbar</li>
+    <li>Bohrungen unterbrechen Masseflächen auf allen Lagen</li>
+    <li>Teurer in der maschinellen Fertigung</li>
+    <li>Beidseitige Bestückung praktisch ausgeschlossen</li>
+  </ul></div>
+</div>
+
+<h2>Steckverbinder auswählen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Typ</th><th>Raster</th><th>Strom</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Stiftleiste 2,54 mm</b></td><td>2,54 mm</td><td>bis 3 A</td><td>Prototypen, Erweiterungen, Jumper. Nicht rüttelfest ohne Verriegelung</td></tr>
+<tr><td><b>JST-XH / -PH</b></td><td>2,5 / 2,0 mm</td><td>2–3 A</td><td>Verriegelt, verpolsicher; der Standard für interne Verbindungen</td></tr>
+<tr><td><b>Molex Micro-Fit</b></td><td>3,0 mm</td><td>bis 8,5 A</td><td>Leistungsverbindungen, verriegelt</td></tr>
+<tr><td><b>Schraubklemme</b></td><td>3,5 / 5,08 mm</td><td>bis 16 A</td><td>Feldverdrahtung, Anschluss durch den Anwender</td></tr>
+<tr><td><b>Federkraftklemme</b></td><td>3,5 / 5,0 mm</td><td>bis 10 A</td><td>Werkzeuglos, rüttelfest — im Feld die bessere Wahl</td></tr>
+<tr><td><b>FFC/FPC</b></td><td>0,5 / 1,0 mm</td><td>&lt; 0,5 A</td><td>Displays, Kameras. Sehr flach, aber empfindlich</td></tr>
+<tr><td><b>USB-C</b></td><td>—</td><td>bis 5 A</td><td>Mechanisch stark belastet — Typen mit Durchsteck-Verankerung wählen</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Verpolsicherheit einplanen:</b> Ein Steckverbinder, der sich verkehrt herum stecken lässt, wird irgendwann verkehrt herum gesteckt. Codierte Gehäuse, unterschiedliche Polzahlen für unterschiedliche Funktionen und ein Verpolschutz in der Schaltung sind billiger als der Schaden.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>IPC-7351B — Generic Requirements for Surface Mount Design and Land Pattern Standard, mit den drei Dichteklassen.</li>
+    <li>IPC-7093 — Design and Assembly Process Implementation for Bottom Termination Components (QFN, DFN).</li>
+    <li>JEDEC-Gehäusekennungen (MO-Serie) — die verbindlichen Maßangaben, auf die Datenblätter verweisen.</li>
+    <li>Löttechnik zu den einzelnen Bauformen: <a href="loeten-referenz.html#smd">Löten → SMD löten</a> und <a href="loeten-referenz.html#bauteile">Bauteile</a>.</li>
+  </ul>
+</div>

@@ -1,0 +1,104 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Motorwahl entscheidet über den halben Antriebsstrang.</b> Drei Fragen führen fast immer zur Antwort: Braucht es genaue Positionierung? Wie hoch ist die Drehzahl? Und darf ein Encoder mit ins Spiel? Erst danach zählen Drehmoment und Preis.</div>
+
+<h2>Der Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Motortyp</th><th>Ansteuerung</th><th>Positionierung</th><th>Drehzahl</th><th>Wirkungsgrad</th><th>Wartung</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Bürsten-Gleichstrommotor</b></td><td>PWM plus H-Brücke</td><td>nur mit Encoder</td><td>hoch</td><td>50–75 %</td><td>Bürstenverschleiß</td><td>Billige Antriebe, Modellbau, Werkzeuge</td></tr>
+<tr><td><b>Getriebemotor</b></td><td>wie oben</td><td>nur mit Encoder</td><td>niedrig, hohes Moment</td><td>40–70 %</td><td>Getriebespiel</td><td>Fahrantriebe, Fördereinrichtungen</td></tr>
+<tr><td><b>Schrittmotor</b></td><td>Schrittsequenz mit Stromregelung</td><td><b>ohne Sensor</b>, solange nicht überlastet</td><td>niedrig bis mittel</td><td>30–60 %</td><td>gering</td><td>3D-Drucker, CNC, Positionierachsen</td></tr>
+<tr><td><b>Modellbau-Servo</b></td><td>PWM-Pulsbreite 1–2 ms</td><td>eingebaut, ±90–180°</td><td>gering</td><td>—</td><td>Getriebeverschleiß</td><td>Modellbau, Klappen, einfache Achsen</td></tr>
+<tr><td><b>BLDC (blockkommutiert)</b></td><td>elektronisch, mit Hall-Sensoren oder sensorlos</td><td>nur mit Geber</td><td>sehr hoch</td><td>85–92 %</td><td>praktisch keine</td><td>Drohnen, Lüfter, Pumpen, E-Bikes</td></tr>
+<tr><td><b>PMSM mit FOC</b></td><td>feldorientierte Regelung</td><td>mit Absolutgeber sehr genau</td><td>hoch</td><td>90–96 %</td><td>keine</td><td>Servoantriebe, Werkzeugmaschinen, Fahrzeugantriebe</td></tr>
+<tr><td><b>Asynchronmotor</b></td><td>direkt am Netz oder über Frequenzumrichter</td><td>nur mit Geber</td><td>hoch</td><td>85–95 %</td><td>sehr gering</td><td>Pumpen, Lüfter, Werkzeugmaschinen-Spindeln</td></tr>
+<tr><td><b>Linearmotor</b></td><td>wie PMSM</td><td>direkt, ohne Umsetzung</td><td>sehr hohe Beschleunigung</td><td>hoch</td><td>keine</td><td>Bestückungsautomaten, Präzisionsachsen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Eignungsprofil</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Typ</th><th>Präzision</th><th>Moment bei Stillstand</th><th>Drehzahl</th><th>Einfachheit</th><th>Preis (günstig = hoch)</th></tr></thead>
+<tbody>
+<tr><td><b>DC-Motor</b></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:20%;background:var(--rate-bad)"></div></div><span class="rate-num">2</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:30%;background:var(--rate-bad)"></div></div><span class="rate-num">3</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:80%;background:var(--rate-good)"></div></div><span class="rate-num">8</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td></tr>
+<tr><td><b>Schrittmotor</b></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%;background:var(--rate-good)"></div></div><span class="rate-num">10</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:30%;background:var(--rate-bad)"></div></div><span class="rate-num">3</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:70%;background:var(--rate-mid)"></div></div><span class="rate-num">7</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:70%;background:var(--rate-mid)"></div></div><span class="rate-num">7</span></div></td></tr>
+<tr><td><b>Servo (Modellbau)</b></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:60%;background:var(--rate-mid)"></div></div><span class="rate-num">6</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:70%;background:var(--rate-mid)"></div></div><span class="rate-num">7</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:30%;background:var(--rate-bad)"></div></div><span class="rate-num">3</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%;background:var(--rate-good)"></div></div><span class="rate-num">10</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:80%;background:var(--rate-good)"></div></div><span class="rate-num">8</span></div></td></tr>
+<tr><td><b>BLDC</b></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:50%;background:var(--rate-mid)"></div></div><span class="rate-num">5</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:40%;background:var(--rate-mid)"></div></div><span class="rate-num">4</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%;background:var(--rate-good)"></div></div><span class="rate-num">10</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:40%;background:var(--rate-mid)"></div></div><span class="rate-num">4</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:50%;background:var(--rate-mid)"></div></div><span class="rate-num">5</span></div></td></tr>
+<tr><td><b>PMSM mit FOC</b></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%;background:var(--rate-good)"></div></div><span class="rate-num">10</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:20%;background:var(--rate-bad)"></div></div><span class="rate-num">2</span></div></td>
+  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:20%;background:var(--rate-bad)"></div></div><span class="rate-num">2</span></div></td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Zahlen sind Einordnungen für typische Vertreter der jeweiligen Klasse, keine Messwerte. Sie helfen bei der Vorauswahl — die Entscheidung fällt am konkreten Datenblatt.</p>
+
+<h2>Schrittmotor im Detail</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Bauformen</div><div class="cd">Hybrid-Schrittmotoren mit 1,8° (200 Schritte/U) sind der Standard, 0,9°-Typen gibt es für höhere Auflösung. NEMA 17 und NEMA 23 bezeichnen nur den Flanschmaßstandard, nicht die Leistung.</div></div>
+  <div class="card"><div class="ct">Mikroschritt</div><div class="cd">Zwischenpositionen durch anteilige Ströme in beiden Wicklungen. Verbessert vor allem die Laufruhe; die <b>Positioniergenauigkeit</b> steigt deutlich weniger, weil das Haltemoment zwischen den Vollschritten stark abnimmt.</div></div>
+  <div class="card"><div class="ct">Drehmomentabfall</div><div class="cd">Mit steigender Drehzahl fällt das Moment, weil die Induktivität der Wicklung den Stromaufbau bremst. Deshalb arbeiten Treiber mit deutlich höherer Spannung als der Nennspannung des Motors und regeln den Strom (Chopper).</div></div>
+  <div class="card"><div class="ct">Schrittverlust</div><div class="cd">Wird der Motor überlastet, verliert er Schritte — ohne jede Rückmeldung. Die Position ist danach falsch. Gegenmittel: Reserve einplanen, Beschleunigungsrampen fahren, oder einen Encoder ergänzen (Closed-Loop-Schrittmotor).</div></div>
+  <div class="card"><div class="ct">Resonanzen</div><div class="cd">Bei bestimmten Drehzahlen (oft 100–300 Schritte/s) gerät das System in Resonanz und verliert Schritte. Mikroschritt, Dämpfer oder ein Beschleunigen über diesen Bereich hinweg helfen.</div></div>
+  <div class="card"><div class="ct">Haltemoment kostet Strom</div><div class="cd">Ein Schrittmotor zieht im Stillstand vollen Strom. Bei längeren Pausen den Strom absenken (StandStill Current Reduction) — sonst wird er unnötig heiß.</div></div>
+</div>
+
+<h2>BLDC und PMSM</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Aspekt</th><th>Blockkommutierung (6-Schritt)</th><th>Feldorientierte Regelung (FOC)</th></tr></thead>
+<tbody>
+<tr><td><b>Stromform</b></td><td>Rechteck, jeweils zwei Phasen bestromt</td><td>Sinus, alle drei Phasen</td></tr>
+<tr><td><b>Rundlauf</b></td><td>Drehmomentwelligkeit spürbar</td><td>sehr gleichmäßig</td></tr>
+<tr><td><b>Rechenaufwand</b></td><td>gering</td><td>Clarke- und Park-Transformation, zwei Stromregler, meist 10–20 kHz Regeltakt</td></tr>
+<tr><td><b>Positionsinformation</b></td><td>drei Hall-Sensoren oder Gegen-EMK</td><td>Encoder oder Beobachter, hochauflösend</td></tr>
+<tr><td><b>Moment bei Stillstand</b></td><td>schlecht (sensorlos gar nicht)</td><td>volles Moment</td></tr>
+<tr><td><b>Wirkungsgrad</b></td><td>gut</td><td>am besten</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>FOC ist erreichbar geworden.</b> Was vor zehn Jahren einen DSP und Wochen Entwicklung brauchte, läuft heute auf einem STM32G4 oder einem ESP32 mit fertigen Bibliotheken. <a href="https://simplefoc.com/">SimpleFOC</a> ist quelloffen, gut dokumentiert und läuft mit gängigen Treiberboards — der praktischste Einstieg in feldorientierte Regelung für eigene Projekte.</div>
+
+<h2>Motorkennwerte lesen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Kennwert</span><span>Bedeutung</span><span>Fallstrick</span></div>
+  <div class="frow"><span class="fn">Nennmoment M_N</span><span class="fe">Dauerhaft abgebbares Moment</span><span class="fx">Gilt bei angegebener Kühlung und Umgebungstemperatur</span></div>
+  <div class="frow"><span class="fn">Haltemoment</span><span class="fe">Moment im Stillstand (Schrittmotor)</span><span class="fx">Sinkt mit der Drehzahl stark ab — Drehmomentkurve ansehen</span></div>
+  <div class="frow"><span class="fn">Spitzenmoment</span><span class="fe">Kurzzeitig, für Beschleunigung</span><span class="fx">Zeitbegrenzt; Dauerbetrieb dort zerstört den Motor</span></div>
+  <div class="frow"><span class="fn">Momentkonstante k_M</span><span class="fe">Nm je Ampere</span><span class="fx">Direkt gekoppelt an die Spannungskonstante k_E</span></div>
+  <div class="frow"><span class="fn">Spannungskonstante k_E</span><span class="fe">V je 1000 min⁻¹ (bzw. K_v als Kehrwert)</span><span class="fx">Bestimmt die erreichbare Drehzahl bei gegebener Spannung</span></div>
+  <div class="frow"><span class="fn">Rotorträgheitsmoment J</span><span class="fe">kg·m²</span><span class="fx">Entscheidend für die Beschleunigung; siehe Trägheitsanpassung</span></div>
+  <div class="frow"><span class="fn">Wicklungswiderstand</span><span class="fe">Ω je Phase</span><span class="fx">Bestimmt die Verluste im Stillstand</span></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Rolf Fischer, <i>Elektrische Maschinen</i>, Hanser — das deutschsprachige Standardwerk.</li>
+    <li>Duane Hanselman, <i>Brushless Permanent Magnet Motor Design</i> — für BLDC und PMSM.</li>
+    <li>Trinamic/ADI, <i>Stepper Motor Application Notes</i> — Chopper-Verfahren, StealthChop, StallGuard.</li>
+    <li><a href="https://simplefoc.com/">SimpleFOC</a> — quelloffene FOC-Bibliothek mit sehr guter Dokumentation.</li>
+    <li>Texas Instruments, <i>Field Oriented Control of Permanent Magnet Motors</i> (BPRA073) und die InstaSPIN-Unterlagen.</li>
+  </ul>
+</div>

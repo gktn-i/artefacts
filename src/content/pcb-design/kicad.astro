@@ -1,0 +1,76 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>KiCad ist seit Jahren die naheliegende Wahl für eigene Leiterplatten:</b> quelloffen, ohne Größen- oder Lagenbegrenzung, ohne Lizenzbindung an eine Cloud. Die aktuelle stabile Reihe ist <b>10.0</b> (Erstveröffentlichung im März 2026).</div>
+
+<h2>Die Programmteile</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Teil</th><th>Aufgabe</th><th>Dateiendung</th></tr></thead>
+<tbody>
+<tr><td><b>Projektverwaltung</b></td><td>Klammer um alle Dateien</td><td>.kicad_pro</td></tr>
+<tr><td><b>Schaltplaneditor</b></td><td>Schaltung zeichnen, Bauteile zuordnen, ERC</td><td>.kicad_sch</td></tr>
+<tr><td><b>Symboleditor</b></td><td>Eigene Schaltplansymbole</td><td>.kicad_sym</td></tr>
+<tr><td><b>Layouteditor</b></td><td>Platzieren, Routen, DRC, Fertigungsdaten</td><td>.kicad_pcb</td></tr>
+<tr><td><b>Footprinteditor</b></td><td>Eigene Fußabdrücke</td><td>.kicad_mod</td></tr>
+<tr><td><b>Gerber-Betrachter</b></td><td>Fertigungsdaten prüfen, bevor sie rausgehen</td><td>—</td></tr>
+<tr><td><b>3D-Ansicht</b></td><td>Mechanische Prüfung, Export nach STEP</td><td>—</td></tr>
+<tr><td><b>Rechnerwerkzeuge</b></td><td>Leiterbahnbreite, Wellenwiderstand, Spannungsteiler, E-Reihen, Farbcode</td><td>—</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Alle KiCad-Dateien sind Textdateien.</b> Damit lassen sich Projekte sinnvoll in Git verwalten: Änderungen sind als Diff sichtbar, Zweige und Zusammenführungen funktionieren. Das ist ein handfester Vorteil gegenüber Werkzeugen mit Binärformaten — und der Grund, warum in einem Hardwareprojekt Schaltplan, Layout, Stückliste und Firmware im selben Repository liegen sollten.</div>
+
+<h2>Bibliotheken verstehen</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Symbol</div><div class="cd">Das Schaltplanbild mit den Anschlüssen und ihren elektrischen Typen (Eingang, Ausgang, Versorgung, passiv). Die Typen wertet die elektrische Regelprüfung aus.</div></div>
+  <div class="card"><div class="ct">Footprint</div><div class="cd">Die Kupferflächen, Lötstoppmaske, Pastenmaske, Bestückungsdruck und die Umrisse auf der Platine. Hier entstehen die teuersten Fehler.</div></div>
+  <div class="card"><div class="ct">3D-Modell</div><div class="cd">Nur für die visuelle und mechanische Prüfung. Wichtig, wenn ein Gehäuse dazukommt.</div></div>
+  <div class="card"><div class="ct">Eigene Bibliothek anlegen</div><div class="cd">Projektspezifische oder eigene Bauteile in eine eigene Bibliothek, die mit dem Projekt versioniert wird. Sonst fehlt bei einem Rechnerwechsel plötzlich ein Symbol.</div></div>
+</div>
+<div class="stop"><b>Jeden Footprint gegen das Datenblatt prüfen.</b> Auch die mitgelieferten Bibliotheken sind nicht unfehlbar, und Bauteile mit gleichem Namen gibt es in mehreren Ausführungen. Der Ablauf: Maßzeichnung des Datenblatts öffnen, Pad-Abstände, Pad-Größen und Pin-1-Markierung im Footprinteditor nachmessen. Fünf Minuten je kritischem Bauteil — gegen zwei Wochen Wartezeit auf eine neue Platine.</div>
+
+<h2>Werkzeuge, die man kennen sollte</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Werkzeug</th><th>Nutzen</th></tr></thead>
+<tbody>
+<tr><td><b>Elektrische Regelprüfung (ERC)</b></td><td>Findet nicht angeschlossene Pins, gegeneinander treibende Ausgänge, fehlende Stromversorgungssymbole</td></tr>
+<tr><td><b>Entwurfsregelprüfung (DRC)</b></td><td>Prüft Abstände, Bahnbreiten, Bohrungen gegen die eingestellten Randbedingungen. Vor der Fertigung muss sie fehlerfrei durchlaufen</td></tr>
+<tr><td><b>Randbedingungen (Design Rules)</b></td><td>Vorgaben des Fertigers eintragen: minimale Leiterbahnbreite, Abstand, Bohrdurchmesser, Ringbreite. Nicht die Voreinstellung übernehmen</td></tr>
+<tr><td><b>Netzklassen</b></td><td>Unterschiedliche Regeln je Netzgruppe — breitere Bahnen und größere Abstände für Leistungsnetze, definierter Wellenwiderstand für schnelle Signale</td></tr>
+<tr><td><b>Interaktives Routen mit Schieben</b></td><td>Bestehende Bahnen weichen aus, statt zu blockieren. Spart sehr viel Zeit</td></tr>
+<tr><td><b>Differentielle Paare</b></td><td>Zwei Netze mit den Endungen _P und _N werden gemeinsam geroutet, mit Längenausgleich</td></tr>
+<tr><td><b>Length Tuning</b></td><td>Mäander zum Ausgleich von Laufzeitunterschieden bei parallelen Bussen</td></tr>
+<tr><td><b>Rechnerwerkzeuge</b></td><td>Leiterbahnbreite nach IPC, Microstrip- und Streifenleitungsimpedanz, Via-Belastbarkeit — direkt eingebaut</td></tr>
+<tr><td><b>3D-Betrachter und STEP-Export</b></td><td>Prüfen, ob die Baugruppe ins Gehäuse passt, bevor beides gefertigt wird</td></tr>
+</tbody>
+</table></div>
+
+<h2>Alternativen und wann sie passen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Werkzeug</th><th>Kosten</th><th>Charakter</th></tr></thead>
+<tbody>
+<tr><td><b>KiCad</b></td><td>kostenlos, quelloffen</td><td>Voller Funktionsumfang, keine Begrenzungen, Textformate, aktive Entwicklung. Für praktisch alles die richtige Wahl</td></tr>
+<tr><td><b>EasyEDA</b></td><td>kostenlos, cloudbasiert</td><td>Sehr niedrige Einstiegshürde, direkt an LCSC und JLCPCB angebunden. Abhängigkeit von einem Anbieter</td></tr>
+<tr><td><b>Eagle</b></td><td>eingestellt</td><td>In Fusion aufgegangen. Ältere Projekte lassen sich nach KiCad importieren</td></tr>
+<tr><td><b>Altium Designer</b></td><td>sehr teuer</td><td>Industriestandard für große Entwürfe, ausgereiftes Bibliotheks- und Variantenmanagement</td></tr>
+<tr><td><b>Horizon EDA / LibrePCB</b></td><td>kostenlos</td><td>Interessante Ansätze, kleinere Nutzerbasis</td></tr>
+</tbody>
+</table></div>
+
+<h2>Der erste Entwurf — was man üben sollte</h2>
+<div class="steps">
+  <div class="step"><h4>Etwas Kleines, das man wirklich braucht</h4>Ein Breakout-Board für einen Sensor, ein Adapter, eine Verteilplatine. Nicht das ambitionierte Projekt als Erstversuch.</div>
+  <div class="step"><h4>Nur bekannte Bauformen verwenden</h4>0805 oder 0603 für Passive, SOIC statt QFN, Stiftleisten im 2,54-mm-Raster. Handbestückbar bleiben.</div>
+  <div class="step"><h4>Zwei Lagen mit durchgehender Massefläche unten</h4>Reicht für den Anfang und vermittelt die wichtigste Layoutregel gleich mit.</div>
+  <div class="step"><h4>Reichlich Prüfpunkte und Beschriftung</h4>Jede Versorgung, jedes wichtige Signal auf einen Testpunkt. Bauteilwerte im Bestückungsdruck.</div>
+  <div class="step"><h4>Gerber-Dateien im Betrachter prüfen</h4>Vor dem Absenden Lage für Lage ansehen. Fehlende Lötstoppmaske oder eine falsche Bohrdatei fallen dort sofort auf.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://docs.kicad.org/">docs.kicad.org</a> — offizielle Handbücher, mehrsprachig.</li>
+    <li><a href="https://www.kicad.org/blog/">KiCad-Blog</a> mit den Versionshinweisen zur 10.0-Reihe.</li>
+    <li><a href="https://forum.kicad.info/">KiCad-Forum</a> — sehr aktiv und hilfsbereit.</li>
+    <li>Contextual Electronics und Phil's Lab (YouTube) — durchgängige Projektvideos von der Idee bis zur bestückten Platine.</li>
+  </ul>
+</div>

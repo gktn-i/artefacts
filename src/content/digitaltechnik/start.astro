@@ -1,0 +1,44 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Digitaltechnik ist Analogtechnik mit nur zwei erlaubten Zuständen.</b> Der Gewinn: Störungen werden bei jeder Stufe wieder ausgebügelt, solange der Pegel im richtigen Bereich bleibt. Der Preis: Zeit wird zur kritischen Größe — Setup, Hold, Laufzeit und Metastabilität sind die eigentlichen Themen jenseits der Wahrheitstabelle.</div>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#zahlen"><div class="mt"><span class="i">🔢</span>Zahlensysteme</div><div class="md">Binär, hex, Zweierkomplement, BCD, Gray — und warum negative Zahlen so aussehen, wie sie aussehen.</div></a>
+  <a href="#boole"><div class="mt"><span class="i">∧</span>Boolesche Algebra</div><div class="md">Gesetze, De Morgan, KV-Diagramm, Minimierung von Hand.</div></a>
+  <a href="#schaltnetze"><div class="mt"><span class="i">🔗</span>Schaltnetze</div><div class="md">Gatter, Multiplexer, Decoder, Addierer, ALU — Logik ohne Gedächtnis.</div></a>
+  <a href="#flipflops"><div class="mt"><span class="i">💾</span>Flipflops</div><div class="md">Latch gegen Flipflop, D, JK, T, Register, Zähler, Schieberegister.</div></a>
+  <a href="#automaten"><div class="mt"><span class="i">🔁</span>Zustandsautomaten</div><div class="md">Moore und Mealy, Zustandsdiagramm, Codierung, Umsetzung in Hardware und Software.</div></a>
+  <a href="#timing"><div class="mt"><span class="i">⏱️</span>Timing</div><div class="md">Setup, Hold, Clock Skew, Metastabilität, Taktdomänenübergänge.</div></a>
+  <a href="#logikfamilien"><div class="mt"><span class="i">🔌</span>Logikfamilien</div><div class="md">TTL, CMOS, LVCMOS, LVDS; Pegel, Fan-out, Pegelwandler.</div></a>
+  <a href="#speicher"><div class="mt"><span class="i">🗄️</span>Speicher</div><div class="md">SRAM, DRAM, Flash, EEPROM, FRAM — Aufbau, Lebensdauer, Auswahl.</div></a>
+  <a href="#fpga"><div class="mt"><span class="i">🧱</span>FPGA &amp; HDL</div><div class="md">LUT, Flipflop, Blockram; VHDL und Verilog; Toolchains und der Einstieg.</div></a>
+</div>
+
+<h2>Warum digital überhaupt gewonnen hat</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Regeneration</div><div class="cd">Jede Logikstufe erzeugt saubere Pegel neu. Nach hundert Stufen ist das Signal genauso gut wie am Anfang — bei analoger Verarbeitung addieren sich Rauschen und Verzerrung.</div></div>
+  <div class="card"><div class="ct">Exakte Reproduzierbarkeit</div><div class="cd">Eine Kopie ist bitgenau identisch. Speichern, übertragen, wiederherstellen — beliebig oft.</div></div>
+  <div class="card"><div class="ct">Skalierung</div><div class="cd">Ein Transistor mehr kostet praktisch nichts, sobald der Chip einmal existiert. Genau darauf beruht die gesamte Rechnerentwicklung der letzten sechzig Jahre.</div></div>
+  <div class="card"><div class="ct">Programmierbarkeit</div><div class="cd">Dieselbe Hardware macht etwas völlig anderes, wenn man den Speicherinhalt ändert. Das gibt es analog nicht.</div></div>
+</div>
+<div class="warn"><b>Und wo digital verliert:</b> Jede Umsetzung in beide Richtungen kostet Zeit, Strom und Genauigkeit. Ein einfacher analoger Tiefpass mit zwei Bauteilen braucht digital einen Wandler, einen Rechenkern, eine Taktversorgung und eine Rekonstruktion. Für die kleinsten Signale und für die schnellsten Reaktionen bleibt analog überlegen. Deshalb steht in jedem mechatronischen Gerät beides nebeneinander.</div>
+
+<h2>Was hier nicht steht</h2>
+<p>Dieses Modul behandelt Digitaltechnik als Hardwaredisziplin. Angrenzend:</p>
+<ul>
+  <li><a href="informationstechnik.html">Informationstechnik</a> — Codierung, Rechnerarchitektur, Netzwerke, Signalverarbeitung.</li>
+  <li><a href="embedded-firmware.html">Embedded &amp; Firmware</a> — der Mikrocontroller in der Praxis, Peripherie, Toolchain, RTOS.</li>
+  <li><a href="elektronik-grundlagen.html#protokolle">Elektronik 101 → Protokolle</a> — I²C, SPI, UART aus der Anwendersicht mit Verdrahtungsdetails.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Klaus Fricke, <i>Digitaltechnik — Lehr- und Übungsbuch für Elektrotechniker und Informatiker</i>, Springer Vieweg.</li>
+    <li>M. Morris Mano, Michael Ciletti, <i>Digital Design</i>, Pearson — international der Standard.</li>
+    <li>Harris &amp; Harris, <i>Digital Design and Computer Architecture</i>, Morgan Kaufmann — verbindet Digitaltechnik und Rechnerbau, mit RISC-V-Ausgabe.</li>
+    <li><a href="https://nandgame.com/">nandgame.com</a> und <a href="https://www.nand2tetris.org/">nand2tetris</a> — vom NAND-Gatter zum funktionierenden Rechner, kostenlos und ausgezeichnet zum Selbststudium.</li>
+  </ul>
+</div>

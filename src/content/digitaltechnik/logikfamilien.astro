@@ -1,0 +1,77 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein High-Pegel ist kein fester Wert, sondern ein Bereich.</b> Ob zwei Bausteine miteinander sprechen können, entscheidet sich an vier Zahlen: V_OH, V_IH, V_OL und V_IL. Der Abstand dazwischen heißt Störabstand — und er ist der Grund, warum digitale Signale überhaupt robust sind.</div>
+
+<h2>Die vier Pegel</h2>
+<svg class="dg m" viewBox="0 0 400 210" role="img" aria-label="Pegelbereiche und Störabstände zwischen Sender und Empfänger">
+  <rect class="box" x="60" y="20" width="110" height="170" />
+  <rect class="box" x="240" y="20" width="110" height="170" />
+  <rect class="accs" x="60" y="20" width="110" height="42" />
+  <rect class="accs" x="60" y="150" width="110" height="40" style="fill:var(--mid-bg);stroke:var(--mid-border)" />
+  <rect class="accs" x="240" y="20" width="110" height="66" />
+  <rect class="accs" x="240" y="128" width="110" height="62" style="fill:var(--mid-bg);stroke:var(--mid-border)" />
+  <text class="lblb" x="115" y="14" text-anchor="middle">Sender</text>
+  <text class="lblb" x="295" y="14" text-anchor="middle">Empfänger</text>
+  <text class="lbl" x="115" y="45" text-anchor="middle">V_OH …</text>
+  <text class="lbl" x="115" y="175" text-anchor="middle">… V_OL</text>
+  <text class="lbl" x="295" y="58" text-anchor="middle">gilt als HIGH</text>
+  <text class="lbl" x="295" y="165" text-anchor="middle">gilt als LOW</text>
+  <text class="lbl" x="295" y="110" text-anchor="middle">verboten</text>
+  <path class="acc" d="M176,50 H234" /><path class="accf" d="M238,50 l-9,-4 v8 z" />
+  <path class="acc" d="M176,166 H234" /><path class="accf" d="M238,166 l-9,-4 v8 z" />
+  <text class="lbla" x="205" y="42" text-anchor="middle">Reserve</text>
+  <text class="lbla" x="205" y="204" text-anchor="middle">Störabstand = Reserve oben wie unten</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Familie</th><th>Versorgung</th><th>V_IL max / V_IH min</th><th>V_OL max / V_OH min</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td><b>TTL / 74LS</b></td><td>5 V</td><td>0,8 V / 2,0 V</td><td>0,5 V / 2,7 V</td><td>Historisch, hoher Stromverbrauch, Eingang zieht Strom</td></tr>
+<tr><td><b>74HC</b> (CMOS)</td><td>2–6 V</td><td>0,3·V_CC / 0,7·V_CC</td><td>≈ 0 V / ≈ V_CC</td><td>Bei 5 V braucht ein HIGH mindestens 3,5 V — <b>3,3-V-Signale reichen nicht sicher</b></td></tr>
+<tr><td><b>74HCT</b></td><td>5 V</td><td>0,8 V / 2,0 V</td><td>≈ 0 V / ≈ V_CC</td><td>CMOS-Ausgang, TTL-Eingangsschwellen — der klassische 3,3-V-nach-5-V-Übersetzer</td></tr>
+<tr><td><b>74LVC</b></td><td>1,65–3,6 V</td><td>0,8 V / 2,0 V</td><td>0,55 V / V_CC−0,45 V</td><td>Viele Typen 5-V-tolerant am Eingang; schnell und der heutige Standard</td></tr>
+<tr><td><b>LVCMOS 3,3 V</b></td><td>3,3 V</td><td>0,8 V / 2,0 V</td><td>0,4 V / 2,4 V</td><td>Der verbreitetste Pegel bei Mikrocontrollern</td></tr>
+<tr><td><b>LVCMOS 1,8 V</b></td><td>1,8 V</td><td>0,63 V / 1,17 V</td><td>0,45 V / 1,35 V</td><td>Bei modernen SoCs und Speichern üblich</td></tr>
+<tr><td><b>LVDS</b></td><td>differentiell, ±350 mV</td><td>—</td><td>—</td><td>Sehr schnell, sehr störfest, geringe Abstrahlung; für Displays und Hochgeschwindigkeitsverbindungen</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Die häufigste Pegelfalle:</b> Ein 3,3-V-Mikrocontroller treibt einen 74HC-Baustein an 5 V. Der Ausgang liefert 3,3 V, der Eingang verlangt mindestens 3,5 V. Es funktioniert am Schreibtisch bei Zimmertemperatur — und fällt bei Kälte oder einem anderen Exemplar aus. Richtig: 74HCT, 74LVC oder ein echter Pegelwandler.</div>
+
+<h2>Pegelanpassung in der Praxis</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Richtung</th><th>Lösung</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>5 V → 3,3 V, langsam</b></td><td>Spannungsteiler (z. B. 10 k / 20 k)</td><td>Billig, aber die Leitungskapazität begrenzt die Geschwindigkeit</td></tr>
+<tr><td><b>5 V → 3,3 V, schnell</b></td><td>74LVC-Puffer mit 5-V-toleranten Eingängen</td><td>Der saubere Weg</td></tr>
+<tr><td><b>3,3 V → 5 V</b></td><td>74HCT-Puffer</td><td>Ein einzelner 74HCT14 löst sehr viele Probleme</td></tr>
+<tr><td><b>Bidirektional, Open-Drain (I²C)</b></td><td>MOSFET-Pegelwandler (BSS138-Schaltung) oder fertiges IC (TXS0102, PCA9306)</td><td>Nur für Open-Drain-Busse; an Push-Pull-Signalen funktioniert die Schaltung nicht</td></tr>
+<tr><td><b>Bidirektional, Push-Pull</b></td><td>Pegelwandler mit Richtungspin (TXB-Serie, 74LVC245)</td><td>Richtung muss von der Schaltung vorgegeben werden</td></tr>
+<tr><td><b>5-V-Eingang lesen mit 3,3-V-MCU</b></td><td>Prüfen, ob der Pin 5-V-tolerant ist</td><td>Steht im Datenblatt („FT“-Pins bei STM32). Sonst Teiler oder Puffer</td></tr>
+</tbody>
+</table></div>
+
+<h2>Fan-out, Treiberstärke, Leitungslänge</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Fan-out</div><div class="cd">Bei CMOS praktisch unbegrenzt, was den statischen Strom angeht — begrenzend ist die <b>Kapazität</b>. Jeder Eingang bringt 3–10 pF mit, jede Leiterbahn etwa 1 pF/cm. Mehr Kapazität heißt flachere Flanken und mehr dynamischer Stromverbrauch.</div></div>
+  <div class="card"><div class="ct">Dynamischer Stromverbrauch</div><div class="cd"><span class="formula">P = C · U² · f</span> — jede Umladung kostet Energie. Deshalb sinkt der Verbrauch quadratisch, wenn die Versorgungsspannung sinkt, und deshalb schalten Mikrocontroller bei niedrigem Takt so viel Strom ab.</div></div>
+  <div class="card"><div class="ct">Serienterminierung</div><div class="cd">22–47 Ω direkt am Ausgang machen aus dem niederohmigen Treiber zusammen mit der Leitung eine angepasste Quelle. Verhindert Reflexionen und Überschwinger — bei jeder Leitung sinnvoll, die länger ist als ein paar Zentimeter.</div></div>
+  <div class="card"><div class="ct">Schmitt-Trigger-Eingang</div><div class="cd">Zwei verschiedene Schaltschwellen für steigende und fallende Flanke. Macht aus langsamen oder verrauschten Signalen saubere Flanken. Bei den meisten Mikrocontroller-Pins vorhanden, bei 74HC nur bei den „14“- und „132“-Typen.</div></div>
+</div>
+
+<h2>Unbenutzte Pins und Pull-Widerstände</h2>
+<div class="steps">
+  <div class="step"><h4>CMOS-Eingänge nie offen lassen</h4>Ein offener Eingang schwebt zwischen den Pegeln und lässt beide Transistoren der Ausgangsstufe teilweise leiten — der Baustein zieht dauerhaft Strom und schwingt möglicherweise. Immer auf V_CC oder Masse legen, direkt oder über 10 kΩ.</div>
+  <div class="step"><h4>Pull-up-Wert bewusst wählen</h4>Für I²C bestimmt er die Anstiegszeit: R_max ≈ t_r/(0,847·C_bus). Bei 400 pF Buskapazität und 300 ns Anstiegszeit sind das rund 900 Ω. Zu große Pull-ups sind die häufigste Ursache für einen I²C-Bus, der bei 400 kHz aussteigt.</div>
+  <div class="step"><h4>Interne Pull-ups kennen</h4>Mikrocontroller haben meist 20–50 kΩ eingebaut — genug für einen Taster, zu schwach für I²C oder lange Leitungen.</div>
+  <div class="step"><h4>Boot-Pins beachten</h4>Viele SoCs lesen beim Start bestimmte Pins ein, um den Bootmodus zu bestimmen. Hängt dort eine Last, startet das Gerät nicht. Beim ESP32 und bei STM32-Controllern ist das eine klassische Erstinbetriebnahme-Falle.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/sg/scyt129e/scyt129e.pdf">Logic Guide</a> — alle Familien mit Pegeln und Auswahlhilfe.</li>
+    <li>Texas Instruments, <i>Voltage Level Translation</i> (SCEA083) und <i>I²C Bus Pullup Resistor Calculation</i> (SLVA689).</li>
+    <li>NXP, <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">UM10204 — I²C-bus specification</a>, Kapitel zur Anstiegszeit.</li>
+    <li>Datenblätter 74HC14, 74HCT245, 74LVC1G17, BSS138-Pegelwandler.</li>
+  </ul>
+</div>

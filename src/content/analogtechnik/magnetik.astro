@@ -1,0 +1,85 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Spule ist das Bauteil, das am häufigsten falsch ausgewählt wird.</b> Zwei Ströme stehen im Datenblatt: I_rms begrenzt die Erwärmung, I_sat die Sättigung. Wer nur den Mittelstrom betrachtet, baut einen Wandler, der bei Lastsprüngen in die Sättigung geht — und dabei kurzzeitig zum Kurzschluss wird.</div>
+
+<h2>Was in einer Drossel passiert</h2>
+<div class="fbox">
+  <span class="f">u = L · di/dt&nbsp;&nbsp;·&nbsp;&nbsp;W = ½·L·I²&nbsp;&nbsp;·&nbsp;&nbsp;B = L·I/(N·A_e)</span>
+  <span class="l">Die letzte Beziehung ist die entscheidende: Die Flussdichte im Kern wächst linear mit dem <b>Spitzenstrom</b>. Erreicht sie B_sat, bricht L zusammen.</span>
+</div>
+<svg class="dg m" viewBox="0 0 400 200" role="img" aria-label="Induktivität über Strom: konstanter Bereich und Sättigungsknick">
+  <path class="w" d="M50,30 V160 H370" />
+  <path class="acc" d="M50,50 H210 C250,50 265,62 280,90 C295,120 310,145 350,152" />
+  <path class="gd" d="M50,66 H280 M280,50 V160" />
+  <text class="lbl" x="44" y="54" text-anchor="end">L₀</text>
+  <text class="lbl" x="44" y="70" text-anchor="end">−20 %</text>
+  <text class="lbla" x="284" y="176">I_sat</text>
+  <text class="lbl" x="378" y="164">I</text>
+  <text class="lbl" x="56" y="26">L</text>
+  <text class="lbl" x="120" y="44">linearer Bereich</text>
+  <text class="lbl" x="310" y="120" style="fill:var(--bad)">Sättigung</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Angabe im Datenblatt</th><th>Bedeutung</th><th>Konsequenz</th></tr></thead>
+<tbody>
+<tr><td><b>L</b></td><td>Nenninduktivität, meist bei 100 kHz und kleinem Strom gemessen</td><td>Bei Betriebsstrom oft schon niedriger</td></tr>
+<tr><td><b>I_sat</b></td><td>Strom, bei dem L um 20 oder 30 % gefallen ist (Kriterium steht dabei!)</td><td>Muss über dem <b>Spitzenstrom</b> liegen, nicht über dem Mittelwert</td></tr>
+<tr><td><b>I_rms</b></td><td>Strom für eine bestimmte Übertemperatur, meist 40 K</td><td>Bestimmt die Erwärmung, nicht die Funktion</td></tr>
+<tr><td><b>DCR</b></td><td>Gleichstromwiderstand der Wicklung</td><td>Direkte Verlustquelle: P = I²·DCR</td></tr>
+<tr><td><b>SRF</b></td><td>Eigenresonanzfrequenz durch Wicklungskapazität</td><td>Oberhalb verhält sich die Spule kapazitiv — für Filter unbrauchbar</td></tr>
+<tr><td><b>Abschirmung</b></td><td>geschirmt / ungeschirmt</td><td>Ungeschirmte Drosseln streuen kräftig in die Nachbarschaft</td></tr>
+</tbody>
+</table></div>
+
+<h2>Sättigungsverhalten nach Kernmaterial</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Ferrit — harte Sättigung</h4>
+    <p>Die Induktivität bricht bei Erreichen von B_sat abrupt ein. Vorteil: geringe Verluste, hohe Permeabilität, klein. Nachteil: Bei Überstrom geht die Drossel schlagartig in die Knie, der Strom schießt hoch, der Schalttransistor stirbt.</p>
+  </div>
+  <div class="gb-col"><h4>Eisenpulver / Sendust — weiche Sättigung</h4>
+    <p>Die Induktivität nimmt allmählich ab. Vorteil: gutmütig bei Lastsprüngen, verzeiht Auslegungsfehler. Nachteil: höhere Kernverluste, größeres Bauvolumen für dieselbe Induktivität.</p>
+  </div>
+</div>
+<p class="note">In Schaltnetzteilen mit hoher Frequenz und guter Stromregelung setzt man Ferrit ein, in Filtern und robusten Anwendungen Pulverkerne. Ein Luftspalt im Ferritkern verschiebt die Sättigung zu höheren Strömen, senkt aber die Induktivität — deshalb haben Speicherdrosseln fast immer einen Spalt, Übertrager dagegen nicht.</p>
+
+<h2>Verluste in der Magnetik</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Verlustart</th><th>Abhängigkeit</th><th>Reduzieren durch</th></tr></thead>
+<tbody>
+<tr><td><b>Kupferverluste (DC)</b></td><td>I²·DCR</td><td>dickerer Draht, weniger Windungen, größerer Kern</td></tr>
+<tr><td><b>Kupferverluste (AC)</b></td><td>Skin- und Proximity-Effekt</td><td>HF-Litze, flache Bänder, verschachtelte Wicklung</td></tr>
+<tr><td><b>Hysterese</b></td><td>≈ f · B̂^2,5 (Steinmetz-Gleichung)</td><td>kleinere Flussdichte, besseres Material</td></tr>
+<tr><td><b>Wirbelströme im Kern</b></td><td>f² · B̂²</td><td>Ferrit statt massivem Eisen, dünnere Bleche</td></tr>
+<tr><td><b>Streuinduktivität</b></td><td>Bauform und Wickelanordnung</td><td>enge Kopplung, Sandwich-Wicklung; bei Flyback bewusst genutzt</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Faustregel für die Praxis:</b> Wird eine Drossel im Betrieb deutlich über 60 °C warm, stimmt etwas nicht — entweder ist der DCR zu hoch, der Kern zu klein oder die Frequenz zu hoch für das Material. Ein Wärmebild oder auch nur der Finger ist bei der Fehlersuche in Schaltnetzteilen erstaunlich aussagekräftig.</div>
+
+<h2>Übertrager im Schaltwandler</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Flyback-Übertrager</div><div class="cd">Speichert Energie im Luftspalt und gibt sie in der Sperrphase ab. Streng genommen zwei gekoppelte Drosseln, kein Transformator. Deshalb hat er einen Luftspalt und deshalb bestimmt die Streuinduktivität die Spannungsspitze am Schalter — ein Snubber ist Pflicht.</div></div>
+  <div class="card"><div class="ct">Forward-/LLC-Übertrager</div><div class="cd">Überträgt Energie, während der Schalter leitet, und speichert nichts. Kein Luftspalt, engere Kopplung, höherer Wirkungsgrad — dafür braucht es eine Entmagnetisierung oder Resonanzbetrieb.</div></div>
+  <div class="card"><div class="ct">Stromkompensierte Drossel</div><div class="cd">Beide Leiter durch denselben Kern, gegensinnig gewickelt. Für den Nutzstrom heben sich die Felder auf (keine Sättigung), für Gleichtaktstörungen wirkt die volle Induktivität. Der Standardbaustein im Netzeingangsfilter.</div></div>
+  <div class="card"><div class="ct">Stromwandler</div><div class="cd">Misst Wechselströme berührungslos. Bürdewiderstand niemals offen lassen — an einer offenen Sekundärwicklung entstehen bei Betriebsstrom im Primärkreis lebensgefährliche Spannungen.</div></div>
+</div>
+
+<h2>Ferritperlen richtig einsetzen</h2>
+<p>Eine Ferritperle ist keine Induktivität, sondern ein <b>frequenzabhängiger Widerstand</b>: Bei niedrigen Frequenzen ist sie fast ein Kurzschluss, im spezifizierten Bereich wandelt sie Störenergie in Wärme. Die Angabe „600 Ω“ gilt bei 100 MHz — bei 10 MHz sind es vielleicht 60 Ω.</p>
+<div class="steps">
+  <div class="step"><h4>Störfrequenz bestimmen</h4>Erst messen (Oszilloskop, FFT), dann eine Perle mit Impedanzmaximum in diesem Bereich auswählen.</div>
+  <div class="step"><h4>Gleichstromwiderstand prüfen</h4>Bei Versorgungsleitungen erzeugt der DCR einen Spannungsabfall. 0,3 Ω bei 500 mA sind 150 mV — für einen 3,3-V-Zweig oft schon zu viel.</div>
+  <div class="step"><h4>Sättigung beachten</h4>Auch Ferritperlen sättigen: Bei Nennstrom fällt die Impedanz oft auf die Hälfte. Die Kurve „Impedanz über Gleichstrom“ steht im Datenblatt.</div>
+  <div class="step"><h4>Nicht blind in Signalleitungen setzen</h4>Eine Perle in einer schnellen Digitalleitung verschlechtert die Flanke und kann Reflexionen erzeugen. Dort gehören Serienwiderstände oder eine saubere Impedanzanpassung hin.</div>
+</div>
+<div class="warn"><b>Die klassische Fehlkombination:</b> Ferritperle plus großer Keramikkondensator ergibt einen Schwingkreis mit hoher Güte. Statt zu dämpfen, überhöht diese Kombination die Störung bei der Resonanzfrequenz um 10–20 dB. Abhilfe: einen kleinen Dämpfungswiderstand (1–10 Ω) in Reihe zum Kondensator oder einen Elko mit ESR parallel setzen.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Würth Elektronik, <i>Trilogie der induktiven Bauelemente</i> — das ausführlichste frei verfügbare deutschsprachige Werk zu diesem Thema.</li>
+    <li>TDK und Murata: Application Notes zu Ferritperlen mit Impedanz-über-Strom-Kurven.</li>
+    <li>Colonel Wm. T. McLyman, <i>Transformer and Inductor Design Handbook</i> — für eigene Wicklungsauslegung.</li>
+    <li>Texas Instruments, <i>Selecting Inductors for Buck Converters</i> (SLVA733).</li>
+  </ul>
+</div>

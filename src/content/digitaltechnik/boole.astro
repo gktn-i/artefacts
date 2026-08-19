@@ -1,0 +1,105 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Boolesche Algebra ist die Rechenregel für Wahrheitswerte</b> — und zugleich die Bauanleitung für Schaltungen. Zwei Sätze reichen erstaunlich weit: De Morgan (ein UND lässt sich durch ODER mit Negationen ersetzen) und die Tatsache, dass NAND allein für jede beliebige Funktion genügt.</div>
+
+<h2>Die Grundverknüpfungen</h2>
+<div class="symgrid">
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="UND-Gatter"><path class="w" d="M30,12 H62 a18,18 0 0 1 0,36 H30 Z M10,22 H30 M10,38 H30 M80,30 H100" /><text class="lbl" x="46" y="34" text-anchor="middle">&amp;</text></svg>
+    <div class="sn">UND (AND)</div><div class="sd">1, wenn alle Eingänge 1 sind</div><div class="sr">Y = A · B</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="ODER-Gatter"><path class="w" d="M28,12 q22,18 0,36 q34,0 52,-18 q-18,-18 -52,-18 Z M8,22 H30 M8,38 H30 M80,30 H100" /><text class="lbl" x="48" y="34" text-anchor="middle">≥1</text></svg>
+    <div class="sn">ODER (OR)</div><div class="sd">1, wenn mindestens ein Eingang 1 ist</div><div class="sr">Y = A + B</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="NICHT-Gatter"><path class="w" d="M32,14 L32,46 L66,30 Z M10,30 H32 M74,30 H100" /><circle class="w" cx="70" cy="30" r="4" /></svg>
+    <div class="sn">NICHT (NOT)</div><div class="sd">Kehrt den Eingang um</div><div class="sr">Y = Ā</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="NAND-Gatter"><path class="w" d="M28,12 H58 a18,18 0 0 1 0,36 H28 Z M8,22 H28 M8,38 H28 M84,30 H100" /><circle class="w" cx="80" cy="30" r="4" /><text class="lbl" x="44" y="34" text-anchor="middle">&amp;</text></svg>
+    <div class="sn">NAND</div><div class="sd">Negiertes UND — universell</div><div class="sr">Y = ¬(A · B)</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="NOR-Gatter"><path class="w" d="M26,12 q22,18 0,36 q34,0 52,-18 q-18,-18 -52,-18 Z M6,22 H28 M6,38 H28 M84,30 H100" /><circle class="w" cx="80" cy="30" r="4" /><text class="lbl" x="46" y="34" text-anchor="middle">≥1</text></svg>
+    <div class="sn">NOR</div><div class="sd">Negiertes ODER — ebenfalls universell</div><div class="sr">Y = ¬(A + B)</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="XOR-Gatter"><path class="w" d="M30,12 q22,18 0,36 q34,0 52,-18 q-18,-18 -52,-18 Z M22,12 q22,18 0,36 M6,22 H26 M6,38 H26 M82,30 H100" /><text class="lbl" x="50" y="34" text-anchor="middle">=1</text></svg>
+    <div class="sn">XOR</div><div class="sd">1, wenn genau ein Eingang 1 ist</div><div class="sr">Y = A ⊕ B</div>
+  </div>
+</div>
+
+<h2>Die Gesetze</h2>
+<div class="flist">
+  <div class="frow hd"><span>Gesetz</span><span>Form</span><span>Merkhilfe</span></div>
+  <div class="frow"><span class="fn">Neutrale Elemente</span><span class="fe">A · 1 = A · A + 0 = A</span><span class="fx">Wie in der Arithmetik</span></div>
+  <div class="frow"><span class="fn">Extremalgesetze</span><span class="fe">A · 0 = 0 · A + 1 = 1</span><span class="fx">Das ODER mit 1 „gewinnt“ immer</span></div>
+  <div class="frow"><span class="fn">Idempotenz</span><span class="fe">A · A = A · A + A = A</span><span class="fx">Doppelt hilft nicht doppelt</span></div>
+  <div class="frow"><span class="fn">Komplement</span><span class="fe">A · Ā = 0 · A + Ā = 1</span><span class="fx">Entweder oder</span></div>
+  <div class="frow"><span class="fn">Kommutativ</span><span class="fe">A · B = B · A</span><span class="fx">Reihenfolge egal</span></div>
+  <div class="frow"><span class="fn">Distributiv</span><span class="fe">A·(B+C) = A·B + A·C</span><span class="fx">Ausmultiplizieren — gilt hier in beide Richtungen</span></div>
+  <div class="frow"><span class="fn">Absorption</span><span class="fe">A + A·B = A</span><span class="fx">Der wichtigste Vereinfachungsschritt</span></div>
+  <div class="frow"><span class="fn">De Morgan</span><span class="fe">¬(A·B) = Ā + B̄ · ¬(A+B) = Ā · B̄</span><span class="fx">Negation wandert nach innen, Operator kippt</span></div>
+</div>
+<div class="tip"><b>De Morgan in der Praxis:</b> Wer nur NAND-Gatter im Bauteilfach hat, baut damit alles. NOT = NAND mit verbundenen Eingängen; AND = NAND gefolgt von NOT; OR = NAND mit invertierten Eingängen. Genau darauf beruht, dass CMOS-Chips fast ausschließlich aus NAND- und NOR-Strukturen bestehen — sie sind in dieser Technologie am einfachsten und schnellsten zu bauen.</div>
+
+<h2>Von der Wahrheitstabelle zur Gleichung</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Disjunktive Normalform (DNF)</div><div class="cd">Für jede Zeile mit Ausgang 1 einen UND-Term bilden, alle mit ODER verknüpfen. „Summe von Produkten“. Der übliche Weg, weil meist weniger Einsen als Nullen vorkommen.</div></div>
+  <div class="card"><div class="ct">Konjunktive Normalform (KNF)</div><div class="cd">Für jede Zeile mit Ausgang 0 einen ODER-Term bilden (Eingänge invertiert), alle mit UND verknüpfen. „Produkt von Summen“. Lohnt sich, wenn wenige Nullen auftreten.</div></div>
+</div>
+
+<h2>KV-Diagramm (Karnaugh-Veitch)</h2>
+<p>Die Wahrheitstabelle so umsortiert, dass sich zwischen benachbarten Feldern genau ein Eingang ändert (Gray-Code an den Rändern). Zusammenfassbare Terme liegen dann geometrisch nebeneinander.</p>
+<svg class="dg m" viewBox="0 0 340 210" role="img" aria-label="KV-Diagramm mit vier Variablen und zwei zusammengefassten Blöcken">
+  <rect class="box" x="80" y="40" width="240" height="160" />
+  <path class="w" d="M140,40 V200 M200,40 V200 M260,40 V200 M80,80 H320 M80,120 H320 M80,160 H320" />
+  <text class="lbl" x="110" y="34" text-anchor="middle">00</text>
+  <text class="lbl" x="170" y="34" text-anchor="middle">01</text>
+  <text class="lbl" x="230" y="34" text-anchor="middle">11</text>
+  <text class="lbl" x="290" y="34" text-anchor="middle">10</text>
+  <text class="lbl" x="74" y="64" text-anchor="end">00</text>
+  <text class="lbl" x="74" y="104" text-anchor="end">01</text>
+  <text class="lbl" x="74" y="144" text-anchor="end">11</text>
+  <text class="lbl" x="74" y="184" text-anchor="end">10</text>
+  <text class="lbl" x="112" y="20" text-anchor="middle">AB</text>
+  <text class="lbl" x="60" y="34" text-anchor="end">CD</text>
+  <text class="lblb" x="110" y="66" text-anchor="middle">0</text><text class="lblb" x="170" y="66" text-anchor="middle">1</text>
+  <text class="lblb" x="230" y="66" text-anchor="middle">1</text><text class="lblb" x="290" y="66" text-anchor="middle">0</text>
+  <text class="lblb" x="110" y="106" text-anchor="middle">0</text><text class="lblb" x="170" y="106" text-anchor="middle">1</text>
+  <text class="lblb" x="230" y="106" text-anchor="middle">1</text><text class="lblb" x="290" y="106" text-anchor="middle">0</text>
+  <text class="lblb" x="110" y="146" text-anchor="middle">1</text><text class="lblb" x="170" y="146" text-anchor="middle">1</text>
+  <text class="lblb" x="230" y="146" text-anchor="middle">0</text><text class="lblb" x="290" y="146" text-anchor="middle">0</text>
+  <text class="lblb" x="110" y="186" text-anchor="middle">1</text><text class="lblb" x="170" y="186" text-anchor="middle">1</text>
+  <text class="lblb" x="230" y="186" text-anchor="middle">0</text><text class="lblb" x="290" y="186" text-anchor="middle">0</text>
+  <rect class="acc" x="146" y="46" width="108" height="68" rx="10" style="fill:none" />
+  <rect class="acc" x="86" y="126" width="108" height="68" rx="10" style="fill:none;stroke:var(--mid)" />
+</svg>
+<div class="steps">
+  <div class="step"><h4>Blöcke bilden</h4>Nur Einsen zusammenfassen, immer in Zweierpotenzgrößen: 1, 2, 4, 8, 16 Felder. Rechtecke, keine L-Formen.</div>
+  <div class="step"><h4>So groß wie möglich</h4>Jeder Block, der doppelt so groß ist, spart eine Variable im Term. Überlappungen sind ausdrücklich erlaubt und meist nötig.</div>
+  <div class="step"><h4>Ränder verbinden</h4>Das Diagramm ist ein Torus: Die linke Spalte grenzt an die rechte, die obere Zeile an die untere. Die vier Ecken bilden zusammen einen gültigen Block.</div>
+  <div class="step"><h4>Don't-Care nutzen</h4>Eingangskombinationen, die nie auftreten, werden mit X markiert und dürfen als 1 oder 0 gewertet werden — je nachdem, was größere Blöcke ergibt. Das ist oft der größte Vereinfachungsgewinn.</div>
+  <div class="step"><h4>Terme ablesen</h4>Pro Block einen UND-Term aus den Variablen, die sich innerhalb des Blocks <b>nicht</b> ändern. Alle Terme mit ODER verbinden.</div>
+</div>
+<p class="note">Ab fünf Variablen wird das Verfahren unhandlich. Dann übernimmt der Rechner: Quine-McCluskey als exaktes Verfahren, Espresso als Heuristik — beides steckt in jeder Synthesesoftware für FPGAs und Logikbausteine. Von Hand rechnet man KV-Diagramme trotzdem, weil sie ein Gefühl dafür geben, wo Aufwand entsteht.</p>
+
+<h2>Hazards: wenn die Logik kurz das Falsche ausgibt</h2>
+<p>Gatter haben Laufzeiten. Ändern sich zwei Eingänge scheinbar gleichzeitig, kann der Ausgang für wenige Nanosekunden einen falschen Wert annehmen, obwohl die Gleichung stimmt.</p>
+<div class="gb">
+  <div class="gb-col"><h4>Statischer Hazard</h4><p>Der Ausgang sollte konstant bleiben, macht aber einen kurzen Ausreißer. Ursache: Ein Signal erreicht zwei Gatter über verschieden lange Pfade. Abhilfe: einen redundanten Term ergänzen, der die Lücke zwischen zwei KV-Blöcken überbrückt.</p></div>
+  <div class="gb-col"><h4>Dynamischer Hazard</h4><p>Der Ausgang wechselt mehrfach, bevor er den Endwert annimmt. Tritt bei mehrstufiger Logik auf.</p></div>
+</div>
+<div class="warn"><b>Warum das in der Praxis meist egal ist — und wann nicht:</b> In <b>synchronen</b> Schaltungen wird der Ausgang erst mit der Taktflanke übernommen; bis dahin sind alle Ausreißer abgeklungen. Kritisch werden Hazards nur dort, wo ein Signal direkt einen Takt-, Reset- oder Enable-Eingang treibt — dort löst ein einziger Spike ein echtes Ereignis aus. Deshalb die Grundregel: <b>niemals kombinatorische Logik als Takt verwenden</b>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Fricke, <i>Digitaltechnik</i>, Kapitel Schaltalgebra und Minimierung.</li>
+    <li>Mano &amp; Ciletti, <i>Digital Design</i>, Kapitel 2 und 3.</li>
+    <li>Espresso-Minimierer (UC Berkeley) — der Algorithmus, den alle Synthesewerkzeuge verwenden.</li>
+    <li><a href="https://nandgame.com/">nandgame.com</a> — baut Schritt für Schritt aus NAND-Gattern einen Rechner, ideal zum Ausprobieren der Gesetze.</li>
+  </ul>
+</div>

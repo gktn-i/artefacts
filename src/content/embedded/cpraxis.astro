@@ -1,0 +1,101 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>C ist in Embedded-Systemen deshalb Standard, weil es nichts versteckt.</b> Genau das ist auch das Problem: Der Compiler darf unter bestimmten Annahmen alles wegoptimieren, was nach diesen Annahmen unmöglich ist. Wer die Annahmen kennt, schreibt Code, der auch mit <code>-O2</code> noch tut, was er soll.</div>
+
+<h2>Die Schlüsselwörter, die zählen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Schlüsselwort</th><th>Bedeutung</th><th>Wann verwenden</th></tr></thead>
+<tbody>
+<tr><td><b>volatile</b></td><td>Jeder Zugriff muss wirklich stattfinden</td><td>Hardwareregister, von ISR geänderte Variablen. <b>Nicht</b> als Ersatz für Atomarität</td></tr>
+<tr><td><b>const</b></td><td>Wird nicht verändert</td><td>Nachschlagetabellen — landet dann in .rodata statt im RAM</td></tr>
+<tr><td><b>static</b> (Dateiebene)</td><td>Nur in dieser Übersetzungseinheit sichtbar</td><td>Standard für alles, was nicht ausdrücklich exportiert wird. Erlaubt dem Compiler bessere Optimierung</td></tr>
+<tr><td><b>static</b> (in Funktion)</td><td>Behält den Wert zwischen Aufrufen, liegt nicht auf dem Stack</td><td>DMA-Puffer, Zustandsvariablen; Vorsicht bei Wiedereintritt</td></tr>
+<tr><td><b>inline</b> / <code>static inline</code></td><td>Vorschlag zum Einbetten</td><td>Kurze Zugriffsfunktionen in Headern</td></tr>
+<tr><td><b>restrict</b></td><td>Zusicherung, dass zwei Zeiger nicht auf dasselbe zeigen</td><td>In Rechenschleifen — kann erhebliche Beschleunigung bringen</td></tr>
+<tr><td><b>_Atomic</b> / <code>stdatomic.h</code></td><td>Garantiert unteilbare Operationen</td><td>Zähler, die von ISR und Hauptprogramm verändert werden</td></tr>
+</tbody>
+</table></div>
+
+<h2>Feste Breiten und Typen</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Immer <code>stdint.h</code></div><div class="cd"><code>uint8_t</code>, <code>int16_t</code>, <code>uint32_t</code> statt <code>char</code>, <code>short</code>, <code>int</code>. Die Breite von <code>int</code> ist plattformabhängig — auf AVR 16 Bit, auf ARM 32 Bit. Code, der davon abhängt, bricht beim Portieren.</div></div>
+  <div class="card"><div class="ct"><code>bool</code> aus <code>stdbool.h</code></div><div class="cd">Klarer als <code>int</code> mit 0 und 1, und der Compiler kann besser prüfen.</div></div>
+  <div class="card"><div class="ct"><code>size_t</code> für Größen und Indizes</div><div class="cd">Vorzeichenlos und passend zur Plattform. Vergleiche mit vorzeichenbehafteten Typen vermeiden.</div></div>
+  <div class="card"><div class="ct">Aufzählungen für Zustände</div><div class="cd"><code>typedef enum</code> statt magischer Zahlen. Der Compiler warnt bei <code>switch</code>, wenn ein Fall fehlt.</div></div>
+</div>
+
+<h2>Hardwareregister ansprechen</h2>
+<div class="card">
+<pre style="font-family:var(--mono);font-size:12.2px;line-height:1.6;overflow-x:auto;margin:0"><code>/* Falsch: der Compiler darf den Zugriff wegoptimieren */
+uint32_t *reg = (uint32_t *)0x40020014;
+
+/* Richtig: volatile, damit jeder Zugriff wirklich erfolgt */
+#define GPIOA_ODR (*(volatile uint32_t *)0x40020014u)
+
+/* Bit setzen, ohne die anderen zu stören */
+GPIOA_ODR |=  (1u &lt;&lt; 5);
+GPIOA_ODR &amp;= ~(1u &lt;&lt; 5);
+
+/* Bitfeld schreiben: erst löschen, dann setzen */
+#define MODE_MASK  (3u &lt;&lt; 10)
+#define MODE_OUT   (1u &lt;&lt; 10)
+GPIOA_MODER = (GPIOA_MODER &amp; ~MODE_MASK) | MODE_OUT;</code></pre>
+</div>
+<div class="warn"><b>Read-Modify-Write ist nicht atomar.</b> <code>reg |= bit;</code> besteht aus drei Schritten. Unterbricht ein Interrupt dazwischen und ändert dasselbe Register, geht die Änderung verloren. Viele Controller bieten dafür <b>Set/Reset-Register</b> (BSRR bei STM32) oder Bit-Banding — beides erledigt die Operation in einem einzigen Schreibzugriff und ist damit unterbrechungsfest.</div>
+
+<h2>Fallen, die immer wieder zuschlagen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Falle</th><th>Was passiert</th><th>Richtig</th></tr></thead>
+<tbody>
+<tr><td><b>Zeiger auf lokale Variable zurückgeben</b></td><td>Der Speicher ist nach dem Rücksprung ungültig</td><td><code>static</code>, Puffer vom Aufrufer, oder Wert kopieren</td></tr>
+<tr><td><b><code>strcpy</code> ohne Längenprüfung</b></td><td>Pufferüberlauf</td><td><code>snprintf</code> mit Größenangabe; <code>strncpy</code> terminiert nicht garantiert</td></tr>
+<tr><td><b><code>sizeof</code> auf einen Zeiger</b></td><td>Liefert die Zeigergröße, nicht die Arraygröße</td><td>Länge separat übergeben; <code>sizeof(arr)/sizeof(arr[0])</code> nur im Gültigkeitsbereich des Arrays</td></tr>
+<tr><td><b>Ganzzahldivision mit Rundungserwartung</b></td><td><code>7/2</code> ist 3</td><td>Vorher multiplizieren, Festkomma nutzen oder bewusst runden</td></tr>
+<tr><td><b>Vergleich signed mit unsigned</b></td><td>−1 wird zu einer riesigen positiven Zahl</td><td>Gleiche Vorzeichenklasse; <code>-Wsign-compare</code> aktivieren</td></tr>
+<tr><td><b>Zeitvergleich mit <code>&gt;</code></b></td><td>Bricht beim Überlauf des Millisekundenzählers</td><td><code>(uint32_t)(now - start) &gt;= dauer</code></td></tr>
+<tr><td><b>Fehlendes <code>break</code> im <code>switch</code></b></td><td>Durchfallen in den nächsten Fall</td><td>Absicht mit <code>/* fallthrough */</code> kennzeichnen; <code>-Wimplicit-fallthrough</code> aktivieren</td></tr>
+<tr><td><b>Zeiger-Umdeutung auf Puffer</b></td><td>Nicht ausgerichteter Zugriff oder Verletzung der Aliasing-Regeln</td><td><code>memcpy</code> in eine passende Struktur — moderne Compiler optimieren das weg</td></tr>
+<tr><td><b>Rückgabewert ignoriert</b></td><td>Fehler bleiben unbemerkt</td><td>Jeden Rückgabewert prüfen oder bewusst mit <code>(void)</code> verwerfen</td></tr>
+<tr><td><b><code>malloc</code> im laufenden Betrieb</b></td><td>Fragmentierung, unbestimmte Laufzeit, irgendwann kein Speicher mehr</td><td>Statische Puffer oder ein Pool fester Blockgröße</td></tr>
+</tbody>
+</table></div>
+
+<h2>Muster, die sich bewährt haben</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Modul mit klarer Schnittstelle</div><div class="cd">Eine <code>.h</code>-Datei mit den öffentlichen Funktionen, alles andere <code>static</code> in der <code>.c</code>-Datei. Kein Zugriff auf interne Variablen von außen.</div></div>
+  <div class="card"><div class="ct">Init, Tick, Handler</div><div class="cd">Jedes Modul bekommt dieselbe Struktur: <code>xyz_init()</code>, <code>xyz_tick()</code> (zyklisch, kehrt sofort zurück) und gegebenenfalls einen ISR-Anteil. Sehr leicht zu verstehen und zu testen.</div></div>
+  <div class="card"><div class="ct">Fehlercodes statt stiller Fehler</div><div class="cd">Ein einheitlicher Aufzählungstyp als Rückgabewert. Ein zentraler Fehlerzähler mit letztem Code erleichtert die Diagnose erheblich.</div></div>
+  <div class="card"><div class="ct">Hardware hinter einer dünnen Schicht</div><div class="cd">Nicht wegen Portabilität, sondern damit sich Logik ohne Hardware testen lässt — siehe <a href="informationstechnik.html#werkzeuge">Informationstechnik → Werkzeuge</a>.</div></div>
+  <div class="card"><div class="ct">Konfiguration an einer Stelle</div><div class="cd">Pinbelegung, Zeitkonstanten und Grenzwerte in einer <code>config.h</code>. Spart Suchen und macht Hardwarevarianten beherrschbar.</div></div>
+  <div class="card"><div class="ct">Statische Zusicherungen</div><div class="cd"><code>_Static_assert(sizeof(frame_t) == 16, "Rahmengröße");</code> — prüft Annahmen zur Übersetzungszeit statt im Feld.</div></div>
+</div>
+
+<h2>C++ auf dem Mikrocontroller</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Nützlich</h4><ul>
+    <li><code>constexpr</code> — Berechnungen zur Übersetzungszeit, kostet zur Laufzeit nichts</li>
+    <li>Aufzählungsklassen (<code>enum class</code>) — typsicher</li>
+    <li>Referenzen statt Zeiger, wo kein Nullwert vorkommen kann</li>
+    <li>Templates für typsichere Puffer und Einheiten</li>
+    <li>RAII für Sperren und Ressourcen</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Vorsicht</h4><ul>
+    <li>Ausnahmen (<code>exceptions</code>) — meist abgeschaltet, kosten Flash und Determinismus</li>
+    <li>RTTI und <code>dynamic_cast</code> — dasselbe</li>
+    <li><code>std::string</code>, <code>std::vector</code> — dynamische Speicheranforderung</li>
+    <li>Virtuelle Funktionen — vtable im RAM, indirekter Aufruf; in engen ISRs vermeiden</li>
+    <li>iostreams — sehr groß, für Diagnoseausgaben ungeeignet</li>
+  </ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Kernighan &amp; Ritchie, <i>The C Programming Language</i> — immer noch die knappste Referenz.</li>
+    <li>MISRA C:2023 — Regelwerk für sicherheitskritische Software; viele Regeln lohnen sich generell.</li>
+    <li>CERT C Coding Standard (SEI) — frei zugänglich, mit Begründungen und Beispielen.</li>
+    <li>Michael Barr, <i>Embedded C Coding Standard</i> — kostenlos als PDF, kurz und praxisnah.</li>
+    <li>Dan Saks, Vorträge zu <code>volatile</code>, <code>const</code> und C++ in eingebetteten Systemen.</li>
+  </ul>
+</div>

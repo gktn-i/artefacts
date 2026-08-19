@@ -1,0 +1,79 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Debuggen ist kein Raten, sondern Eingrenzen.</b> Vier Werkzeuge decken praktisch alles ab: ein Debug-Adapter für Breakpoints und Speicheransicht, eine serielle Diagnoseausgabe, ein Logikanalysator für Busse und ein GPIO-Pin am Oszilloskop für Zeitmessungen.</div>
+
+<h2>Der Debug-Adapter</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Schnittstelle</th><th>Leitungen</th><th>Kann</th></tr></thead>
+<tbody>
+<tr><td><b>SWD</b></td><td>SWDIO, SWCLK, GND (+ Reset)</td><td>Halten, Einzelschritt, Speicher lesen und schreiben, Breakpoints, Flashen — der Standard bei Cortex-M</td></tr>
+<tr><td><b>JTAG</b></td><td>TCK, TMS, TDI, TDO, GND</td><td>Wie SWD, zusätzlich Boundary Scan und Verkettung mehrerer Bausteine</td></tr>
+<tr><td><b>SWO / ITM</b></td><td>eine zusätzliche Leitung</td><td>Diagnoseausgabe mit sehr geringer Rückwirkung, bis zu mehreren Mbit/s — deutlich schneller als UART</td></tr>
+<tr><td><b>ETM / Trace</b></td><td>4–5 Leitungen</td><td>Lückenloser Befehlsverlauf. Nur bei größeren Kernen und mit teurerem Adapter</td></tr>
+<tr><td><b>RTT (SEGGER)</b></td><td>keine zusätzliche</td><td>Zwei Ringpuffer im RAM, vom Debugger im laufenden Betrieb gelesen. Sehr schnell, kaum Rückwirkung</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Vier Pins reservieren, immer.</b> SWDIO, SWCLK, GND und Reset auf einer Stiftleiste oder als Tag-Connect-Pads. Der Platz ist minimal, der Nutzen enorm — und beim ersten Problem am fertigen Gerät ist es zu spät, sie nachzurüsten. Wer die Pins für andere Zwecke braucht, sollte wissen, dass viele Controller SWD nach dem Umkonfigurieren erst nach einem Reset wieder freigeben.</div>
+
+<h2>Hard Fault analysieren</h2>
+<p>Ein Hard Fault ist kein Zufall, sondern eine präzise Fehlermeldung — man muss sie nur lesen.</p>
+<div class="steps">
+  <div class="step"><h4>Fault-Register auswerten</h4>Bei Cortex-M: CFSR (Configurable Fault Status Register) sagt, welche Art von Fehler vorlag. MMFAR und BFAR enthalten die Adresse, an der es passierte.</div>
+  <div class="step"><h4>Gesicherten Kontext finden</h4>Der Prozessor legt beim Fault acht Register auf den Stack. Darin steht der <b>PC</b> — die Adresse des Befehls, der den Fault ausgelöst hat — und der <b>LR</b> mit der Rücksprungadresse.</div>
+  <div class="step"><h4>Adresse in Code übersetzen</h4><code>arm-none-eabi-addr2line -e firmware.elf 0x0800xxxx</code> liefert Datei und Zeile. Damit ist die Fehlerstelle in Sekunden gefunden.</div>
+  <div class="step"><h4>Ursache zuordnen</h4>Häufigste Fälle: Nullzeiger, nicht ausgerichteter Zugriff, Sprung in nicht vorhandenen Speicher (oft ein nicht initialisierter Funktionszeiger), Stacküberlauf, Zugriff auf abgeschaltete Peripherie.</div>
+  <div class="step"><h4>Handler nachrüsten</h4>Ein Hard-Fault-Handler, der die Register über die serielle Schnittstelle ausgibt oder in einen reset-festen Speicherbereich schreibt, macht auch Fehler im Feld auswertbar.</div>
+</div>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Fault-Typ</th><th>Häufige Ursache</th></tr></thead>
+<tbody>
+<tr><td><b>Bus Fault (PRECISERR)</b></td><td>Zugriff auf eine ungültige Adresse — Nullzeiger, Peripherie ohne aktivierten Takt</td></tr>
+<tr><td><b>Usage Fault (UNALIGNED)</b></td><td>32-Bit-Zugriff auf eine ungerade Adresse; oft durch Zeiger-Umdeutung auf Puffer</td></tr>
+<tr><td><b>Usage Fault (INVSTATE)</b></td><td>Sprung an eine Adresse ohne gesetztes Thumb-Bit — typischerweise ein kaputter Funktionszeiger</td></tr>
+<tr><td><b>Memory Manage Fault</b></td><td>MPU-Verletzung, häufig Stacküberlauf bei geschütztem Stack</td></tr>
+<tr><td><b>Escalated Hard Fault</b></td><td>Ein Fault innerhalb eines Fault-Handlers oder ein deaktivierter Handler</td></tr>
+</tbody>
+</table></div>
+
+<h2>Logging, das im Betrieb funktioniert</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Log-Stufen</div><div class="cd">ERROR, WARN, INFO, DEBUG. Zur Übersetzungszeit abschaltbar, damit im Auslieferungsstand weder Flash noch Rechenzeit verbraucht werden.</div></div>
+  <div class="card"><div class="ct">Zeitstempel</div><div class="cd">Jede Zeile mit Millisekunden seit dem Start. Ohne Zeitbezug lassen sich Abläufe nicht rekonstruieren.</div></div>
+  <div class="card"><div class="ct">Nicht blockierend ausgeben</div><div class="cd">Ein blockierendes <code>printf</code> über UART bei 115 200 Baud braucht für 80 Zeichen rund 7 ms — genug, um einen Regelkreis zu ruinieren. Ringpuffer plus DMA oder RTT verwenden.</div></div>
+  <div class="card"><div class="ct">Absturzberichte speichern</div><div class="cd">Fault-Register und die letzten Log-Zeilen in einen Speicherbereich schreiben, der den Reset überlebt, und beim nächsten Start ausgeben. Für Fehler, die nur alle drei Tage auftreten, die einzige Chance.</div></div>
+</div>
+
+<h2>Messen statt vermuten</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Frage</th><th>Werkzeug</th><th>Vorgehen</th></tr></thead>
+<tbody>
+<tr><td><b>Wie lange läuft diese Funktion?</b></td><td>GPIO-Pin plus Oszilloskop</td><td>Pin am Anfang setzen, am Ende löschen. Zeigt auch Jitter und Verschachtelung</td></tr>
+<tr><td><b>Wie oft wird der Interrupt ausgelöst?</b></td><td>Zähler plus Ausgabe</td><td>Häufiger als erwartet ist ein typischer Befund</td></tr>
+<tr><td><b>Was liegt wirklich auf dem Bus?</b></td><td>Logikanalysator mit <a href="https://sigrok.org/wiki/PulseView">PulseView</a></td><td>Dekodiert I²C, SPI, UART, CAN direkt</td></tr>
+<tr><td><b>Warum bricht die Spannung ein?</b></td><td>Oszilloskop, AC-gekoppelt</td><td>Am Versorgungspin des Controllers messen, nicht am Netzteil</td></tr>
+<tr><td><b>Wo bleibt der Speicher?</b></td><td><code>arm-none-eabi-size</code>, <code>nm --size-sort</code></td><td>Zeigt die größten Symbole</td></tr>
+<tr><td><b>Wie viel Stack ist übrig?</b></td><td>Füllmuster prüfen</td><td>Beim Start Muster schreiben, im Betrieb zählen, wie viel überschrieben wurde</td></tr>
+<tr><td><b>Was macht der Compiler daraus?</b></td><td><code>objdump -d</code> oder <a href="https://godbolt.org/">Compiler Explorer</a></td><td>Zeigt sofort, ob eine Optimierung greift oder eine Variable wegoptimiert wurde</td></tr>
+</tbody>
+</table></div>
+
+<h2>Vorgehen bei sporadischen Fehlern</h2>
+<div class="steps">
+  <div class="step"><h4>Reproduzierbar machen</h4>Ein Fehler, der einmal pro Woche auftritt, ist nicht zu debuggen. Erst die Bedingung finden, die ihn provoziert — Last erhöhen, Temperatur ändern, Kommunikation fluten.</div>
+  <div class="step"><h4>Reset-Ursache auslesen</h4>Fast jeder Controller speichert sie in einem Register: Watchdog, Brownout, Software-Reset, Pin. Diese Information beim Start ausgeben — sie beantwortet die halbe Frage.</div>
+  <div class="step"><h4>Halbieren</h4>Die Hälfte der Funktionalität abschalten. Bleibt der Fehler, weiter in dieser Hälfte suchen. Dasselbe Prinzip wie <code>git bisect</code>, nur auf Funktionen angewandt.</div>
+  <div class="step"><h4>Hardware ausschließen</h4>Versorgung mit dem Oszilloskop ansehen, Verbindungen nachmessen, ein zweites Exemplar probieren. Erstaunlich viele „Softwarefehler“ sind kalte Lötstellen oder Spannungseinbrüche.</div>
+  <div class="step"><h4>Annahmen prüfen, nicht bestätigen</h4>Die produktivste Frage ist „Was, wenn meine Vermutung falsch ist?“ — und die produktivste Handlung, genau das zu messen.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://interrupt.memfault.com/blog/cortex-m-fault-debug">Interrupt: How to debug a HardFault on an ARM Cortex-M MCU</a> — mit vollständigem Beispiel-Handler.</li>
+    <li>Joseph Yiu, <i>The Definitive Guide to Arm Cortex-M</i> — Fault-Register und Debug-Architektur.</li>
+    <li><a href="https://sigrok.org/">sigrok / PulseView</a> und <a href="https://probe.rs/">probe-rs</a> — quelloffene Werkzeuge.</li>
+    <li>SEGGER, <i>RTT — Real Time Transfer</i> Dokumentation.</li>
+    <li>David Agans, <i>Debugging: The 9 Indispensable Rules</i> — kein Embedded-Buch, aber das beste zum Vorgehen.</li>
+  </ul>
+</div>

@@ -1,0 +1,99 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Spannungsversorgung entscheidet über Wirkungsgrad, Störpegel und Zuverlässigkeit.</b> Linearregler sind leise und einfach, verbrennen aber die Differenz. Schaltregler sind effizient, erzeugen aber Störungen und stellen Ansprüche ans Layout. Die Wahl ist fast immer eine Frage der Spannungsdifferenz mal Strom.</div>
+
+<h2>Linearregler (LDO)</h2>
+<div class="fbox">
+  <span class="f">η = U_aus / U_ein&nbsp;&nbsp;·&nbsp;&nbsp;P_verlust = (U_ein − U_aus) · I_aus</span>
+  <span class="l">Ohne Ausnahme. Ein LDO ist ein geregelter Widerstand, mehr nicht.</span>
+</div>
+<div class="grid2">
+  <div class="card"><div class="ct">Wann ein LDO die richtige Wahl ist</div><ul>
+    <li>Kleine Spannungsdifferenz (5 V → 3,3 V)</li>
+    <li>Kleine Ströme (unter ~300 mA)</li>
+    <li>Störempfindliche Analogschaltungen, HF-Empfänger, Referenzen</li>
+    <li>Als Nachregler <b>hinter</b> einem Schaltregler — das ist der beste Kompromiss aus Wirkungsgrad und Ruhe</li>
+  </ul></div>
+  <div class="card"><div class="ct">Kennwerte, die zählen</div><ul>
+    <li><b>Dropout:</b> Mindestdifferenz Ein zu Aus — klassisch 2 V (7805), moderne LDOs 0,1–0,3 V</li>
+    <li><b>PSRR:</b> Wie gut Rippel unterdrückt wird — bricht oberhalb einiger 10 kHz stark ein</li>
+    <li><b>Ruhestrom I_q:</b> Bei Batteriebetrieb entscheidend, 1 µA bis 5 mA</li>
+    <li><b>Ausgangskondensator:</b> Manche Typen brauchen einen bestimmten ESR-Bereich, sonst schwingen sie. Datenblatt lesen, nicht raten</li>
+  </ul></div>
+</div>
+<div class="warn"><b>Der 7805 ist kein LDO.</b> Er braucht rund 2 V Dropout, hat 5 mA Ruhestrom und keine nennenswerte PSRR oberhalb von 10 kHz. Für neue Entwürfe gibt es bessere Typen — AMS1117 als billigen Standard, AP2112 oder MCP1700 für kleine Ströme, TPS7A47 oder LT3045 für rauscharme Analogversorgung.</div>
+
+<h2>Schaltregler-Topologien</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Topologie</th><th>U_aus zu U_ein</th><th>Galvanische Trennung</th><th>Typischer Wirkungsgrad</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Buck (Abwärts)</b></td><td>kleiner</td><td>nein</td><td>88–96 %</td><td>Der häufigste Fall: 12 V → 5 V, 5 V → 3,3 V bei größeren Strömen</td></tr>
+<tr><td><b>Boost (Aufwärts)</b></td><td>größer</td><td>nein</td><td>85–94 %</td><td>Batterie → 5 V, LED-Ketten, Sensorspeisung</td></tr>
+<tr><td><b>Buck-Boost / SEPIC</b></td><td>beides</td><td>nein</td><td>80–90 %</td><td>Li-Ion (3,0–4,2 V) auf feste 3,3 V</td></tr>
+<tr><td><b>Inverting</b></td><td>negativ</td><td>nein</td><td>80–90 %</td><td>Negative Hilfsspannung für OPVs</td></tr>
+<tr><td><b>Flyback (Sperrwandler)</b></td><td>beliebig</td><td><b>ja</b></td><td>78–90 %</td><td>Netzteile bis ~100 W, Hilfsversorgungen</td></tr>
+<tr><td><b>Forward / LLC</b></td><td>beliebig</td><td><b>ja</b></td><td>90–96 %</td><td>Netzteile ab ~100 W, PC-Netzteile</td></tr>
+<tr><td><b>Ladungspumpe</b></td><td>Vielfache / negativ</td><td>nein</td><td>70–90 %</td><td>Kleine Ströme ohne Spule, z. B. −5 V für ein Display</td></tr>
+</tbody>
+</table></div>
+
+<h3>Buck-Wandler auslegen</h3>
+<div class="steps">
+  <div class="step"><h4>Tastverhältnis bestimmen</h4><span class="formula">D ≈ U_aus / U_ein</span> — bei 12 V auf 5 V also 0,42. Zu kleine Tastverhältnisse (unter etwa 0,1) verlangen sehr kurze Einschaltzeiten, die viele Regler nicht schaffen.</div>
+  <div class="step"><h4>Drossel wählen</h4><span class="formula">L = U_aus·(1−D)/(ΔI_L·f)</span> mit ΔI_L = 20–40 % des Ausgangsstroms. Größere Welligkeit heißt kleinere Spule, aber mehr Rippel und mehr Kernverluste.</div>
+  <div class="step"><h4>Sättigungsstrom prüfen</h4>I_sat der Drossel muss über I_aus + ΔI_L/2 liegen, plus Reserve für Lastsprünge. Der thermische Nennstrom I_rms allein reicht nicht — siehe <a href="#magnetik">Magnetik</a>.</div>
+  <div class="step"><h4>Ausgangskondensator</h4>Bestimmt Rippel und Verhalten bei Lastsprüngen. Bei Keramik dominiert die Kapazität, bei Elkos der ESR: ΔU ≈ ΔI_L · ESR.</div>
+  <div class="step"><h4>Eingangskondensator nicht vergessen</h4>Er liefert die pulsförmigen Eingangsströme. Er gehört <b>direkt</b> an den Schalter, mit kürzestmöglicher Schleife zu Masse. Das ist die kritischste Leiterschleife der ganzen Schaltung.</div>
+</div>
+
+<div class="stop"><b>Die heiße Schleife.</b> Beim Buck-Regler fließt beim Umschalten ein Strom mit sehr hohem di/dt durch die Schleife Eingangskondensator → High-Side-Schalter → Low-Side-Schalter → zurück. Diese Fläche muss so klein wie irgend möglich sein — sie ist die Hauptquelle abgestrahlter Störungen. Eine durchgehende Massefläche direkt unter der Schaltung und ein Eingangskondensator im Millimeterabstand sind keine Kür, sondern Voraussetzung. Alles Weitere in <a href="#emv">EMV</a> und <a href="leiterplatte-kicad.html#layout">Leiterplatte → Layout-Regeln</a>.</div>
+
+<h2>Fertiges Modul oder eigener Regler?</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Fertigmodul (LM2596-Platine, Traco/Recom-Modul)</h4><ul>
+    <li>Layout und Magnetik sind erledigt — der häufigste Anfängerfehler entfällt</li>
+    <li>Zertifizierte Module haben geprüfte Isolation und EMV-Werte</li>
+    <li>Billige Standardmodule vom Marktplatz sind oft überbewertet: „3 A“ heißt in der Praxis 1,5 A mit Kühlung</li>
+  </ul></div>
+  <div class="gb-col"><h4>Eigener Regler-IC</h4><ul>
+    <li>Deutlich billiger in Stückzahlen und kompakter</li>
+    <li>Hersteller-Tools (TI WEBENCH, Analog LTpowerCAD) liefern Bauteilwerte und Layout-Vorschlag</li>
+    <li>Referenzlayout aus dem Datenblatt übernehmen — dort steckt die eigentliche Ingenieursleistung</li>
+    <li>Alternativ: <b>Power-Modul</b> mit integrierter Drossel (z. B. TPSM-Serie) — kostet mehr, spart aber jedes Layout-Risiko</li>
+  </ul></div>
+</div>
+
+<h2>Störungen aus dem Schaltregler heraushalten</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Maßnahme</th><th>Wirkung</th><th>Kosten</th></tr></thead>
+<tbody>
+<tr><td><b>Heiße Schleife minimieren</b></td><td>Die wirksamste Einzelmaßnahme gegen Abstrahlung</td><td>nur Sorgfalt im Layout</td></tr>
+<tr><td><b>Durchgehende Massefläche</b></td><td>Kurze Rückstrompfade, geringe Schleifenfläche</td><td>eine Lage mehr</td></tr>
+<tr><td><b>Eingangs-Pi-Filter (C–L–C)</b></td><td>Dämpft leitungsgebundene Störungen zur Quelle hin</td><td>eine Drossel</td></tr>
+<tr><td><b>Snubber am Schaltknoten</b></td><td>Bedämpft das Klingeln, senkt Spitzen um 10–20 dB</td><td>etwas Wirkungsgrad</td></tr>
+<tr><td><b>Ferritperle plus LDO für Analogteil</b></td><td>Trennt empfindliche Schaltungen sauber ab</td><td>etwas Spannungsabfall</td></tr>
+<tr><td><b>Spread Spectrum im Regler</b></td><td>Verteilt die Störenergie über ein Frequenzband, senkt Spitzenpegel in der Messung</td><td>oft nur ein Pin — löst aber kein Layoutproblem</td></tr>
+</tbody>
+</table></div>
+
+<h2>Schutzbeschaltung, die in jedes Gerät gehört</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Verpolschutz</div><div class="cd">p-Kanal-MOSFET in der Plusleitung oder Schottky in Reihe. Bei größeren Strömen ideale Diode mit Controller.</div></div>
+  <div class="card"><div class="ct">Überspannung</div><div class="cd">TVS-Diode nach dem Eingang, ausgelegt auf die Impulsform nach IEC 61000-4-5. In Fahrzeugen zusätzlich auf Load Dump nach ISO 7637-2 auslegen.</div></div>
+  <div class="card"><div class="ct">Überstrom</div><div class="cd">Polyfuse (PTC) für rücksetzbare Begrenzung, Schmelzsicherung dort, wo eine harte Trennung nötig ist. Elektronische Lastschalter (eFuse) können beides plus Strombegrenzung beim Einschalten.</div></div>
+  <div class="card"><div class="ct">Einschaltstrom</div><div class="cd">NTC oder Soft-Start im Regler. Ohne beides verschweißen Schaltkontakte und Sicherungen lösen sporadisch aus.</div></div>
+  <div class="card"><div class="ct">Brownout</div><div class="cd">Sinkt die Versorgung langsam, kann ein Mikrocontroller undefiniert arbeiten und Flash korrumpieren. Brownout-Detektor aktivieren — bei den meisten MCUs per Fuse oder Register.</div></div>
+  <div class="card"><div class="ct">Entladepfad</div><div class="cd">Ein Widerstand über dem Eingangselko entlädt ihn nach dem Abziehen des Netzsteckers. Bei Netzgeräten in EN IEC 62368-1 gefordert und für die Wartung schlicht sinnvoll.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/an/slyt614/slyt614.pdf">Power Supply Layout and EMI</a> sowie <i>Buck Converter Design Guide</i> (SLVA477).</li>
+    <li>Analog Devices / Linear Technology, <i>LT Journal</i>-Artikel zu Buck-Layout und Hot Loop.</li>
+    <li>Christophe Basso, <i>Switch-Mode Power Supplies</i>, McGraw-Hill — die Referenz zur Regelkreisauslegung von Schaltwandlern.</li>
+    <li>Würth Elektronik, <i>DC/DC-Wandler-Handbuch</i> und der zugehörige <a href="https://www.we-online.com/redexpert">REDEXPERT</a>-Rechner für Drosseln.</li>
+    <li>EN IEC 62368-1 — Sicherheitsanforderungen für Netzteile in IT- und Unterhaltungsgeräten.</li>
+  </ul>
+</div>

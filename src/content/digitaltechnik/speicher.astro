@@ -1,0 +1,85 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Speicher unterscheiden sich in vier Dimensionen:</b> flüchtig oder nicht, wahlfrei oder blockweise, wie oft beschreibbar, wie schnell. Aus diesen vier Fragen ergibt sich in fast jedem Fall eindeutig, welche Technologie passt.</div>
+
+<h2>Die Übersicht</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Typ</th><th>Flüchtig</th><th>Zugriff</th><th>Schreibzyklen</th><th>Geschwindigkeit</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>SRAM</b></td><td>ja</td><td>byteweise, wahlfrei</td><td>unbegrenzt</td><td>ns</td><td>Cache, Arbeitsspeicher im Mikrocontroller</td></tr>
+<tr><td><b>DRAM</b></td><td>ja (Refresh nötig)</td><td>zeilenweise</td><td>unbegrenzt</td><td>10–100 ns</td><td>Hauptspeicher in Rechnern und großen SoCs</td></tr>
+<tr><td><b>NOR-Flash</b></td><td>nein</td><td>lesen byteweise, löschen blockweise</td><td>10 000 – 100 000</td><td>lesen schnell, schreiben langsam</td><td>Programmspeicher im Mikrocontroller, Boot-ROM</td></tr>
+<tr><td><b>NAND-Flash</b></td><td>nein</td><td>seitenweise</td><td>1 000 – 100 000 (je nach SLC/MLC/TLC)</td><td>hoher Durchsatz, hohe Latenz</td><td>SSD, SD-Karte, eMMC</td></tr>
+<tr><td><b>EEPROM</b></td><td>nein</td><td>byteweise schreib- und löschbar</td><td>100 000 – 1 Mio.</td><td>Schreiben 3–10 ms je Seite</td><td>Kalibrierdaten, Konfiguration, Betriebsstundenzähler</td></tr>
+<tr><td><b>FRAM</b></td><td>nein</td><td>byteweise, wie RAM</td><td>10¹⁰ – 10¹⁴</td><td>ns, kein Schreibdelay</td><td>Datenlogger mit hoher Schreibrate, Zustandssicherung bei Spannungsausfall</td></tr>
+<tr><td><b>MRAM</b></td><td>nein</td><td>byteweise</td><td>praktisch unbegrenzt</td><td>ns</td><td>Industrie, Luftfahrt; teuer, aber sehr robust</td></tr>
+</tbody>
+</table></div>
+
+<h2>SRAM gegen DRAM</h2>
+<div class="gb">
+  <div class="gb-col"><h4>SRAM — 6 Transistoren je Bit</h4>
+    <p>Zwei kreuzgekoppelte Inverter halten das Bit, solange Spannung anliegt. Kein Refresh, sehr schnell, sehr einfach anzusteuern.</p>
+    <ul><li>Groß und teuer je Bit</li><li>Deshalb nur wenige hundert Kilobyte im Mikrocontroller</li><li>Statischer Leckstrom bestimmt den Ruhestromverbrauch moderner Chips</li></ul>
+  </div>
+  <div class="gb-col"><h4>DRAM — 1 Transistor plus 1 Kondensator</h4>
+    <p>Das Bit steckt als Ladung in einem winzigen Kondensator und muss alle paar Millisekunden aufgefrischt werden.</p>
+    <ul><li>Sehr hohe Dichte, billig je Gigabyte</li><li>Braucht einen Controller für Refresh, Zeilen- und Spaltenadressierung</li><li>Latenz durch Zeilenaktivierung — deshalb sind sequentielle Zugriffe viel schneller als wahlfreie</li></ul>
+  </div>
+</div>
+<p class="note">Mikrocontroller mit externem Speicher (ESP32 mit PSRAM, STM32 mit FMC/SDRAM) haben dafür einen eigenen Controller an Bord. Der Zugriff ist dann deutlich langsamer als auf internes SRAM — bei zeitkritischem Code lohnt es sich, ihn ausdrücklich ins interne RAM zu legen.</p>
+
+<h2>Flash verstehen: warum Löschen blockweise geht</h2>
+<div class="steps">
+  <div class="step"><h4>Programmieren heißt: Bits von 1 auf 0 setzen</h4>Ein gelöschter Flash-Sektor besteht aus lauter Einsen. Beim Schreiben werden gezielt Nullen gesetzt — einzelne Bits von 0 zurück auf 1 geht nicht.</div>
+  <div class="step"><h4>Löschen setzt einen ganzen Block auf 1</h4>Blockgrößen liegen bei 4 kB (NOR-Sektoren) bis 256 kB. Deshalb muss man vor dem Ändern eines einzelnen Bytes den ganzen Block sichern, löschen und neu schreiben.</div>
+  <div class="step"><h4>Verschleiß ist real</h4>Jeder Löschzyklus schädigt das Oxid. 10 000 Zyklen klingen viel — bei einem Zähler, der jede Sekunde geschrieben wird, sind sie in unter drei Stunden verbraucht.</div>
+  <div class="step"><h4>Wear Leveling</h4>Schreibvorgänge über den ganzen Speicher verteilen, statt immer dieselbe Stelle zu benutzen. SD-Karten und SSDs machen das intern; im Mikrocontroller-Flash muss man es selbst tun oder ein Dateisystem wie LittleFS verwenden.</div>
+  <div class="step"><h4>Spannungsausfall beim Schreiben</h4>Der gefährlichste Moment. Ohne Vorkehrung entsteht ein halb geschriebener Block. Gegenmittel: Doppelpufferung mit Prüfsumme, ein Journal oder FRAM für Daten, die jederzeit konsistent sein müssen.</div>
+</div>
+<div class="tip"><b>Praxisregel für Konfigurationsdaten:</b> Nie bei jeder Änderung schreiben, sondern gesammelt beim Herunterfahren oder nach einer Wartezeit ohne weitere Änderung. Und immer zwei Kopien im Wechsel mit Sequenznummer und CRC — dann existiert nach jedem Abbruch mindestens eine gültige Version.</div>
+
+<h2>Zellentypen im NAND-Flash</h2>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Typ</th><th>Bit je Zelle</th><th>Zyklen (Größenordnung)</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>SLC</b></td><td>1</td><td>50 000 – 100 000</td><td>Industrie, teuer, sehr robust</td></tr>
+<tr><td><b>MLC</b></td><td>2</td><td>3 000 – 10 000</td><td>Kompromiss</td></tr>
+<tr><td><b>TLC</b></td><td>3</td><td>500 – 3 000</td><td>Der Standard in Consumer-SSDs</td></tr>
+<tr><td><b>QLC</b></td><td>4</td><td>100 – 1 000</td><td>Hohe Kapazität, geringe Ausdauer</td></tr>
+</tbody>
+</table></div>
+<p class="note">Billige SD-Karten sind eine der häufigsten Ausfallursachen in Dauerbetrieb-Projekten. Für Datenlogger und Raspberry-Pi-Systeme lohnen Karten mit Angabe zur Ausdauer (Endurance-Klassen) oder gleich ein Verzicht auf häufige Schreibvorgänge. Siehe auch <a href="homeserver-101.html#storage">Homeserver 101 → Storage</a>.</p>
+
+<h2>Speicher am Mikrocontroller anschließen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Schnittstelle</th><th>Typische Bausteine</th><th>Geschwindigkeit</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>I²C</b></td><td>24Cxx-EEPROM, FM24-FRAM</td><td>100–400 kHz, selten 1 MHz</td><td>Zwei Leitungen, viele Teilnehmer, langsam</td></tr>
+<tr><td><b>SPI</b></td><td>25Qxx-NOR-Flash, 23LCxx-SRAM</td><td>bis 100 MHz</td><td>Der Standard für externen Flash</td></tr>
+<tr><td><b>Quad-SPI / OctoSPI</b></td><td>W25Q-Serie, PSRAM</td><td>bis 400 MB/s</td><td>Erlaubt Ausführen direkt aus dem externen Flash (XIP)</td></tr>
+<tr><td><b>SDIO</b></td><td>SD-Karten, eMMC</td><td>bis 200 MB/s</td><td>Braucht Dateisystem und Treiber</td></tr>
+<tr><td><b>Paralleler Bus (FMC)</b></td><td>SRAM, SDRAM, Displays</td><td>hoch</td><td>Viele Pins, dafür schnell und wahlfrei</td></tr>
+</tbody>
+</table></div>
+
+<h2>Fehlerkorrektur im Speicher</h2>
+<p>Bitfehler entstehen durch kosmische Strahlung, Alterung und Grenzwertbetrieb. Bei großen Speichern sind sie statistisch unvermeidlich.</p>
+<ul>
+  <li><b>Parität:</b> Erkennt einen einzelnen Bitfehler, kann ihn nicht korrigieren.</li>
+  <li><b>SECDED (Hamming + Parität):</b> Korrigiert ein Bit, erkennt zwei. Der Standard bei ECC-RAM.</li>
+  <li><b>BCH- und LDPC-Codes:</b> In NAND-Flash-Controllern; korrigieren Dutzende Bitfehler je Seite — ohne sie wäre TLC-Flash gar nicht nutzbar.</li>
+  <li><b>ECC im Mikrocontroller-Flash:</b> Viele moderne Controller (STM32, RP2350, automotive-taugliche Typen) haben ECC eingebaut. Ein Nebeneffekt: Man kann nicht beliebig oft in dieselbe Zelle nachschreiben, weil die ECC-Bits mitgeschrieben werden.</li>
+</ul>
+<p>Wie Hamming-Codes funktionieren, steht in <a href="informationstechnik.html#fehlerschutz">Informationstechnik → Fehlererkennung und Korrektur</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Bruce Jacob, Spencer Ng, David Wang, <i>Memory Systems: Cache, DRAM, Disk</i>, Morgan Kaufmann.</li>
+    <li>Micron und Winbond Datenblätter — Endurance-Angaben und Löschblockgrößen stehen dort konkret.</li>
+    <li>ARM/STMicroelectronics Referenzhandbücher zum Flash-Interface (Zykluszahlen, ECC, Programmierprozedur).</li>
+    <li><a href="https://github.com/littlefs-project/littlefs">LittleFS</a> — ausfallsicheres Dateisystem für Mikrocontroller-Flash, mit lesenswerter Designbeschreibung.</li>
+  </ul>
+</div>

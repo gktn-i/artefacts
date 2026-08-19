@@ -1,0 +1,76 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Fehlererkennung kostet wenige Bits, Fehlerkorrektur viele.</b> Die Frage ist deshalb nie „welcher Code ist der beste“, sondern: Kann ich die Nachricht wiederholen? Wenn ja, reicht Erkennung plus Neuübertragung. Wenn nicht — Funk in eine Richtung, Speicher, Rundfunk — braucht es Korrektur.</div>
+
+<h2>Der Werkzeugkasten</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Verfahren</th><th>Overhead</th><th>Erkennt</th><th>Korrigiert</th><th>Wo eingesetzt</th></tr></thead>
+<tbody>
+<tr><td><b>Parität</b></td><td>1 Bit</td><td>alle ungeradzahligen Bitfehler</td><td>nichts</td><td>UART, alter RAM, einfache Protokolle</td></tr>
+<tr><td><b>Prüfsumme (Summe modulo n)</b></td><td>8–32 Bit</td><td>viele, aber nicht systematisch</td><td>nichts</td><td>Intel-Hex, NMEA, einfache Sensorprotokolle</td></tr>
+<tr><td><b>CRC-8 / CRC-16 / CRC-32</b></td><td>8–32 Bit</td><td>alle Bündelfehler bis zur Registerbreite, alle 1- und 2-Bit-Fehler</td><td>nichts</td><td>CAN, Ethernet, USB, MODBUS, ZIP</td></tr>
+<tr><td><b>Hamming (7,4) / SECDED</b></td><td>3–8 Bit je Wort</td><td>2 Bit</td><td>1 Bit</td><td>ECC-RAM, Mikrocontroller-Flash</td></tr>
+<tr><td><b>Reed-Solomon</b></td><td>2·t Symbole für t Fehler</td><td>Bündelfehler</td><td>ja, symbolweise</td><td>QR-Code, CD/DVD, DVB, RAID 6</td></tr>
+<tr><td><b>Faltungscode + Viterbi</b></td><td>Faktor 2–3</td><td>—</td><td>ja, kontinuierlich</td><td>GSM, Satellit, GPS</td></tr>
+<tr><td><b>LDPC / Turbo</b></td><td>variabel</td><td>—</td><td>nahe an der Shannon-Grenze</td><td>WLAN (ab 802.11n), 5G, DVB-S2, moderne SSDs</td></tr>
+<tr><td><b>Kryptografischer Hash (SHA-256)</b></td><td>256 Bit</td><td>alles, auch absichtliche Änderung</td><td>nichts</td><td>Firmware-Signatur, Integritätsprüfung</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Prüfsumme ist nicht CRC ist nicht Hash.</b> Eine einfache Summe übersieht vertauschte Bytes vollständig. Ein CRC ist gegen zufällige Übertragungsfehler sehr stark, aber gegen absichtliche Manipulation wertlos — man kann zu jeder gewünschten Nachricht den passenden CRC berechnen. Für Sicherheit braucht es einen kryptografischen Hash mit Signatur oder einen MAC. Die drei zu verwechseln ist einer der häufigsten Designfehler in vernetzten Geräten.</div>
+
+<h2>CRC verstehen</h2>
+<p>Der CRC behandelt die Nachricht als Polynom über GF(2) und berechnet den Rest der Division durch ein festgelegtes Generatorpolynom. In Hardware ist das ein rückgekoppeltes Schieberegister — deshalb sitzt ein CRC-Rechenwerk in fast jedem Kommunikationsbaustein.</p>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Variante</th><th>Polynom</th><th>Wo</th></tr></thead>
+<tbody>
+<tr><td><b>CRC-8-SAE-J1850</b></td><td>0x1D</td><td>Fahrzeugbus, kurze Rahmen</td></tr>
+<tr><td><b>CRC-8-Dallas/Maxim</b></td><td>0x31</td><td>1-Wire-Sensoren (DS18B20)</td></tr>
+<tr><td><b>CRC-16-CCITT</b></td><td>0x1021</td><td>XMODEM, Bluetooth, viele Sensorprotokolle</td></tr>
+<tr><td><b>CRC-16-MODBUS</b></td><td>0x8005</td><td>MODBUS RTU</td></tr>
+<tr><td><b>CRC-32 (IEEE 802.3)</b></td><td>0x04C11DB7</td><td>Ethernet, ZIP, PNG</td></tr>
+<tr><td><b>CRC-15</b></td><td>0x4599</td><td>CAN 2.0</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Der Grund, warum CRC-Implementierungen so oft nicht zusammenpassen:</b> Neben dem Polynom gehören vier weitere Parameter zur Definition — Startwert, Ein- und Ausgangsspiegelung (reflected in/out) und der abschließende XOR-Wert. Zwei Implementierungen mit demselben Polynom liefern unterschiedliche Ergebnisse, wenn diese Parameter abweichen. Der <a href="https://reveng.sourceforge.io/crc-catalogue/">CRC RevEng Catalogue</a> listet die vollständige Parametrisierung aller gebräuchlichen Varianten — die Referenz, wenn ein Gerät die eigene Prüfsumme ablehnt.</div>
+
+<h2>Hamming-Code: wie Korrektur funktioniert</h2>
+<div class="steps">
+  <div class="step"><h4>Prüfbits an Zweierpotenzstellen</h4>Bei Hamming(7,4) liegen die Prüfbits an Position 1, 2 und 4, die Datenbits an 3, 5, 6 und 7.</div>
+  <div class="step"><h4>Jedes Prüfbit deckt eine Bitgruppe ab</h4>Prüfbit 1 alle Positionen, deren Bit 0 gesetzt ist (1, 3, 5, 7); Prüfbit 2 die mit Bit 1 (2, 3, 6, 7); Prüfbit 4 die mit Bit 2 (4, 5, 6, 7).</div>
+  <div class="step"><h4>Beim Empfang nachrechnen</h4>Alle Prüfgleichungen erneut auswerten. Stimmen alle, ist die Nachricht in Ordnung.</div>
+  <div class="step"><h4>Das Syndrom zeigt direkt die Fehlerstelle</h4>Die verletzten Prüfbits ergeben binär gelesen genau die Position des gekippten Bits. Bit umdrehen, fertig.</div>
+  <div class="step"><h4>SECDED durch ein Zusatzbit</h4>Ein zusätzliches Gesamtparitätsbit erlaubt die Unterscheidung: ein Fehler (korrigierbar) oder zwei (erkennbar, aber nicht korrigierbar). Das ist der Code in ECC-Arbeitsspeicher.</div>
+</div>
+<div class="fbox"><span class="f">2^k ≥ n + k + 1</span><span class="l">Wie viele Prüfbits k für n Datenbits nötig sind. Für 8 Datenbits also 4 Prüfbits, für 64 Datenbits nur 7 — Korrektur wird bei größeren Blöcken relativ billiger.</span></div>
+
+<h2>Reed-Solomon: Korrektur von Bündelfehlern</h2>
+<p>Arbeitet nicht mit einzelnen Bits, sondern mit Symbolen (typisch 8 Bit). Ein Code RS(255, 223) überträgt 223 Datensymbole plus 32 Prüfsymbole und korrigiert bis zu 16 beliebig gestörte Symbole je Block — auch wenn in jedem betroffenen Symbol alle acht Bits falsch sind.</p>
+<div class="grid">
+  <div class="card"><div class="ct">Warum das zu Kratzern passt</div><div class="cd">Ein Kratzer auf einer CD zerstört zusammenhängende Bits. Durch Verschachtelung (Interleaving) verteilen sich diese auf viele Blöcke, in denen jeweils nur wenige Symbole betroffen sind — genau die Situation, für die Reed-Solomon gemacht ist.</div></div>
+  <div class="card"><div class="ct">QR-Codes</div><div class="cd">Vier Fehlerkorrekturstufen (L 7 %, M 15 %, Q 25 %, H 30 %). Deshalb funktioniert ein QR-Code noch mit einem aufgedruckten Logo in der Mitte — das ist bewusst eingeplante Redundanz.</div></div>
+</div>
+
+<h2>Praktische Entscheidungshilfe</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Situation</th><th>Empfehlung</th></tr></thead>
+<tbody>
+<tr><td>Serielle Verbindung mit Rückkanal, kurze Rahmen</td><td>CRC-16 plus Neuübertragung bei Fehler</td></tr>
+<tr><td>Sensorwert über I²C im selben Gerät</td><td>Meist gar nichts — kurze Leitung, geringes Risiko. Bei kritischen Werten Plausibilitätsprüfung im Code</td></tr>
+<tr><td>Funkverbindung in eine Richtung</td><td>Vorwärtsfehlerkorrektur (im Funkstandard meist enthalten) plus CRC obendrauf</td></tr>
+<tr><td>Firmware-Update</td><td>SHA-256 plus Signatur, dazu zwei Speicherbereiche (A/B) mit Rückfallmöglichkeit</td></tr>
+<tr><td>Konfiguration im Flash</td><td>CRC über den Datensatz, zwei Kopien im Wechsel, Sequenznummer</td></tr>
+<tr><td>Langzeitarchiv</td><td>Prüfsummen je Datei plus regelmäßiges Nachprüfen (Scrubbing) — ein Dateisystem wie ZFS oder btrfs macht das automatisch</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Ross N. Williams, <a href="http://www.ross.net/crc/download/crc_v3.txt">A Painless Guide to CRC Error Detection Algorithms</a> — der klassische Text, kostenlos.</li>
+    <li>Greg Cook, <a href="https://reveng.sourceforge.io/crc-catalogue/">CRC RevEng Catalogue of Parametrised CRC Algorithms</a>.</li>
+    <li>Philip Koopman, <i>Best CRC Polynomials</i> (Carnegie Mellon) — welches Polynom bei welcher Nachrichtenlänge wirklich schützt.</li>
+    <li>MacKay, <i>Information Theory, Inference, and Learning Algorithms</i>, Kapitel zu Hamming, LDPC und Turbo-Codes.</li>
+    <li>ISO/IEC 18004 — QR-Code, inklusive Fehlerkorrekturstufen.</li>
+  </ul>
+</div>

@@ -1,0 +1,109 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der MOSFET ist spannungsgesteuert und im eingeschalteten Zustand ein Widerstand.</b> Zwei Zahlen bestimmen alles: <b>R_DS(on)</b> (Durchlassverluste) und <b>Q_g</b> (Gate-Ladung → Schaltverluste). Wer bei niedriger Frequenz schaltet, optimiert R_DS(on); wer schnell schaltet, Q_g.</div>
+
+<h2>Die Grundtypen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Typ</th><th>Leitet, wenn</th><th>Schaltung</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>n-Kanal, selbstsperrend</b></td><td>U_GS positiv über der Schwelle</td><td>Low-Side (Last oben, MOSFET nach Masse)</td><td>Der Normalfall: Motoren, LEDs, Heizungen schalten</td></tr>
+<tr><td><b>p-Kanal, selbstsperrend</b></td><td>U_GS negativ (Gate unter Source)</td><td>High-Side (MOSFET zwischen Plus und Last)</td><td>Verpolschutz, Lastschalter, einfache High-Side-Steuerung</td></tr>
+<tr><td><b>n-Kanal, selbstleitend</b></td><td>bereits bei U_GS = 0</td><td>selten</td><td>Konstantstromquellen, HF, Startschaltungen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Jeder Leistungs-MOSFET enthält bauartbedingt eine <b>Body-Diode</b> von Source nach Drain. Sie ist bei Halbbrücken erwünscht (Freilauf), verhindert aber, dass ein einzelner MOSFET in Rückwärtsrichtung sperrt. Für bidirektionale Lastschalter braucht es zwei MOSFETs Rücken an Rücken.</p>
+
+<h2>Die Kennwerte, auf die es ankommt</h2>
+<div class="flist">
+  <div class="frow hd"><span>Kennwert</span><span>Bedeutung</span><span>Falle</span></div>
+  <div class="frow"><span class="fn">U_DS</span><span class="fe">Sperrspannung Drain–Source</span><span class="fx">Schaltspitzen einrechnen; bei induktiven Lasten leicht das Doppelte der Versorgung</span></div>
+  <div class="frow"><span class="fn">R_DS(on)</span><span class="fe">Widerstand im leitenden Zustand</span><span class="fx">Wird bei einer bestimmten U_GS angegeben. Steigt mit der Temperatur um Faktor 1,5–2 bei 100 °C</span></div>
+  <div class="frow"><span class="fn">U_GS(th)</span><span class="fe">Schwellenspannung</span><span class="fx">Der Wert, ab dem <em>gerade eben</em> ein paar Mikroampere fließen — <b>nicht</b> die Spannung für vollen Durchlass</span></div>
+  <div class="frow"><span class="fn">Q_g</span><span class="fe">Gate-Ladung</span><span class="fx">Bestimmt den Treiberstrom: I = Q_g / t_schalt</span></div>
+  <div class="frow"><span class="fn">C_iss / C_oss / C_rss</span><span class="fe">Eingangs-, Ausgangs-, Rückwirkungskapazität</span><span class="fx">C_rss (Miller) bremst die Flanke am stärksten</span></div>
+  <div class="frow"><span class="fn">U_GS max</span><span class="fe">meist ±20 V</span><span class="fx">Das Gate-Oxid ist dünn — eine statische Entladung reicht zum Durchschlag</span></div>
+  <div class="frow"><span class="fn">SOA</span><span class="fe">Sicherer Arbeitsbereich</span><span class="fx">Im Linearbetrieb deutlich enger als der Datenblattstrom vermuten lässt</span></div>
+</div>
+
+<div class="stop"><b>Der häufigste Anfängerfehler:</b> Einen Standard-MOSFET mit U_GS(th) = 2–4 V direkt an einen 3,3-V- oder 5-V-Logikausgang hängen. Bei 5 V am Gate ist er nur teilweise leitend, R_DS(on) liegt statt bei 20 mΩ bei mehreren Ohm, und das Bauteil wird bei 2 A glühend heiß. Lösung: <b>Logic-Level-MOSFET</b> nehmen, dessen R_DS(on) ausdrücklich bei U_GS = 2,5 V oder 4,5 V spezifiziert ist — oder einen Gate-Treiber mit höherer Spannung verwenden.</div>
+
+<h2>Verluste richtig rechnen</h2>
+<div class="fbox">
+  <span class="f">P_leit = I² · R_DS(on)·k_T&nbsp;&nbsp;+&nbsp;&nbsp;P_schalt ≈ ½ · U_DS · I · (t_on + t_off) · f</span>
+  <span class="l">k_T ist der Temperaturfaktor (bei 100 °C rund 1,5). Dazu kommen Gate-Treiberverluste P_g = Q_g · U_GS · f.</span>
+</div>
+<div class="card">
+  <h3>Durchgerechnet: 5 A schalten bei 24 V, 20 kHz</h3>
+  <p>MOSFET mit R_DS(on) = 25 mΩ bei 25 °C, t_on + t_off = 100 ns, Q_g = 30 nC, Treiber mit 10 V.</p>
+  <ul>
+    <li>Leitverluste bei 100 °C: 5² · 0,025 · 1,5 = <b>0,94 W</b></li>
+    <li>Schaltverluste: 0,5 · 24 · 5 · 100 ns · 20 000 = <b>1,2 W</b></li>
+    <li>Gate-Treiber: 30 nC · 10 V · 20 kHz = <b>6 mW</b> (vernachlässigbar)</li>
+    <li>Gesamt ≈ 2,1 W → bei R_thJA = 50 K/W im SMD-Gehäuse wären das 105 K Übertemperatur. <b>Kühlfläche zwingend.</b></li>
+  </ul>
+  <p class="note">Bemerkenswert: Bei 20 kHz übersteigen die Schaltverluste bereits die Leitverluste. Verdoppelt man die Frequenz, verdoppeln sie sich mit. Genau deshalb sind schnelle Gate-Treiber wichtiger als der letzte Milliohm R_DS(on).</p>
+</div>
+
+<h2>Gate-Ansteuerung</h2>
+<div class="grid2">
+  <div class="card"><h3>Gate-Widerstand</h3>
+    <p>10–47 Ω in die Gate-Leitung. Er bedämpft die Schwingung aus Gate-Induktivität und C_iss und begrenzt den Spitzenstrom aus dem Treiber. Größer heißt langsamer und störärmer, aber verlustreicher — das ist ein bewusster Kompromiss, kein Nebenschauplatz.</p>
+  </div>
+  <div class="card"><h3>Pull-down am Gate</h3>
+    <p>10–100 kΩ vom Gate nach Source. Sorgt dafür, dass der MOSFET sicher sperrt, solange der steuernde Mikrocontroller noch im Reset ist und seine Pins hochohmig sind. Ohne diesen Widerstand schaltet die Last beim Einschalten unkontrolliert.</p>
+  </div>
+  <div class="card"><h3>Gate-Treiber-IC</h3>
+    <p>Ab einigen Ampere Peak nötig. Ein Mikrocontroller-Pin liefert 20 mA — um 30 nC in 100 ns umzuladen, braucht es 300 mA. Treiber-ICs liefern 1–4 A und haben definierte Verzögerungszeiten.</p>
+  </div>
+  <div class="card"><h3>High-Side und Bootstrap</h3>
+    <p>Ein n-Kanal-MOSFET in der Plusleitung braucht am Gate eine Spannung <b>über</b> der Versorgung. Das liefert eine Bootstrap-Schaltung (Kondensator, der bei jedem Low-Zustand nachgeladen wird) oder eine isolierte Hilfsversorgung. Deshalb funktioniert eine Halbbrücke nicht ohne Mindest-Schaltfrequenz.</p>
+  </div>
+</div>
+
+<h2>Halbbrücke und H-Brücke</h2>
+<svg class="dg m" viewBox="0 0 380 200" role="img" aria-label="H-Brücke aus vier MOSFETs mit Motor in der Mitte">
+  <path class="w" d="M40,30 H340 M40,170 H340 M60,30 V70 M60,120 V170 M320,30 V70 M320,120 V170" />
+  <rect class="box" x="46" y="70" width="28" height="50" rx="3" />
+  <rect class="box" x="306" y="70" width="28" height="50" rx="3" />
+  <path class="w" d="M180,30 V70 M180,120 V170 M240,30 V70 M240,120 V170" />
+  <text class="lbl" x="60" y="100" text-anchor="middle">Q1</text>
+  <text class="lbl" x="320" y="100" text-anchor="middle">Q3</text>
+  <path class="acc" d="M60,95 H150 M230,95 H320" />
+  <circle class="accs" cx="190" cy="95" r="30" />
+  <text class="lbla" x="190" y="100" text-anchor="middle" style="font-size:12px">M</text>
+  <text class="lbl" x="46" y="24">+U</text>
+  <text class="lbl" x="46" y="186">GND</text>
+  <rect class="box" x="46" y="122" width="28" height="46" rx="3" style="opacity:.55" />
+  <rect class="box" x="306" y="122" width="28" height="46" rx="3" style="opacity:.55" />
+  <text class="lbl" x="60" y="150" text-anchor="middle">Q2</text>
+  <text class="lbl" x="320" y="150" text-anchor="middle">Q4</text>
+</svg>
+<p>Zwei Schalter in Reihe zwischen Plus und Masse bilden eine Halbbrücke, vier eine H-Brücke — die Standardschaltung zum Umkehren der Drehrichtung eines Gleichstrommotors. Zwei Regeln entscheiden über Funktion oder Rauchentwicklung:</p>
+<ul>
+  <li><b>Totzeit (Dead Time):</b> Nie dürfen oberer und unterer Schalter gleichzeitig leiten. Zwischen Aus und Ein liegt eine Pause von typisch 100 ns bis 2 µs. Fehlt sie, entsteht ein Querstrom (Shoot-Through), der die Brücke in Millisekunden zerstört.</li>
+  <li><b>Freilaufpfad:</b> Der Motorstrom muss beim Umschalten weiterfließen können. Die Body-Dioden übernehmen das, sind aber langsam — bei hohen Frequenzen parallele Schottky-Dioden oder Synchrongleichrichtung vorsehen.</li>
+</ul>
+<p class="note">Fertige Treiberbausteine (DRV8871, BTS7960, TB6612FNG, DRV8323) nehmen einem Totzeit, Bootstrap und Schutzfunktionen ab. Für den Einstieg ist das der pragmatische Weg — die Details versteht man beim Lesen ihres Datenblatts trotzdem. Motorseitig geht es weiter in <a href="sensorik-aktorik.html#treiber">Sensorik &amp; Antriebe → Motortreiber</a>.</p>
+
+<h2>IGBT — wann statt MOSFET</h2>
+<p>Der IGBT kombiniert den spannungsgesteuerten Gate-Eingang des MOSFET mit dem bipolaren Ausgang. Er hat eine feste Sättigungsspannung (1,5–2,5 V) statt eines Widerstands. Damit ist er bei <b>hohen Spannungen und hohen Strömen</b> im Vorteil, bei niedrigen Spannungen dagegen unterlegen.</p>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Bereich</th><th>Beste Wahl</th><th>Grund</th></tr></thead>
+<tbody>
+<tr><td>bis 100 V, beliebige Frequenz</td><td>Silizium-MOSFET</td><td>R_DS(on) im Milliohm-Bereich, sehr schnell</td></tr>
+<tr><td>100–650 V, hohe Frequenz</td><td>GaN oder SiC-MOSFET</td><td>geringste Schaltverluste, kompakte Magnetik</td></tr>
+<tr><td>600–1700 V, bis ~20 kHz</td><td>IGBT</td><td>Sättigungsspannung schlägt R_DS(on) bei großen Chipflächen</td></tr>
+<tr><td>ab 1200 V, hohe Frequenz</td><td>SiC-MOSFET</td><td>verdrängt IGBTs zunehmend in Wechselrichtern</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Infineon, <a href="https://www.infineon.com/">MOSFET Power Losses Calculation Using the Data-Sheet Parameters</a> — die Referenz für die Verlustrechnung.</li>
+    <li>Texas Instruments, <i>Fundamentals of MOSFET and IGBT Gate Driver Circuits</i> (SLUA618) — Bootstrap, Totzeit, Miller-Plateau.</li>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 3.</li>
+    <li>Datenblätter IRLZ44N (Logic Level), IRF3205, BSS138, AO3400 — jeweils die R_DS(on)-über-U_GS-Kurve ansehen.</li>
+  </ul>
+</div>

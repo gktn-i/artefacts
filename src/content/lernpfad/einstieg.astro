@@ -1,0 +1,85 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Projekte für die ersten Monate:</b> überschaubar, nützlich, mit klarem Erfolgskriterium. Jedes bringt eine konkrete Fähigkeit — und lässt sich an einem Abend bis an einem Wochenende fertigstellen.</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="ch"><span>1 · Blinklicht mit Taster</span><span class="n">2 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> GPIO als Ein- und Ausgang, Pull-Widerstand, Entprellung, LED-Vorwiderstand berechnen.</div>
+    <div class="cd"><b>Material:</b> Mikrocontroller-Board, LED, 220 Ω, Taster, Steckbrett.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Ein Tastendruck genau einen Zustandswechsel auslöst — nicht drei.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>2 · Temperaturanzeige</span><span class="n">3 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> I²C, Sensorbibliothek, Display ansteuern, Werte formatieren.</div>
+    <div class="cd"><b>Material:</b> BME280 oder DS18B20, OLED-Display 128×64, Board.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Der Wert plausibel ist und sich beim Anhauchen ändert.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>3 · Lastschalter mit MOSFET</span><span class="n">3 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> Warum ein GPIO keine Last treibt, Logic-Level-MOSFET, Gate-Widerstand, Freilaufdiode.</div>
+    <div class="cd"><b>Material:</b> IRLZ44N oder AO3400, Motor oder LED-Streifen, Diode, separate Versorgung.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Der MOSFET bei Volllast kalt bleibt und der Controller beim Abschalten nicht abstürzt.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>4 · Spannungsteiler als Messeingang</span><span class="n">2 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> ADC nutzen, Referenz verstehen, Teiler dimensionieren, Messfehler abschätzen.</div>
+    <div class="cd"><b>Material:</b> Zwei Widerstände, Board, Multimeter zum Gegenmessen.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Deine Messung mit dem Multimeter auf 2 % übereinstimmt und du erklären kannst, woher die Abweichung kommt.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>5 · PWM-Dimmer</span><span class="n">3 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> Timer und PWM, Tastverhältnis, warum Helligkeit nicht linear zum Tastverhältnis ist.</div>
+    <div class="cd"><b>Material:</b> LED-Streifen, MOSFET, Potentiometer oder Drehgeber.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Die Dimmung im unteren Bereich fein genug ist — dafür braucht es eine Gamma-Kurve.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>6 · Drehgeber auswerten</span><span class="n">3 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> Quadratursignale, Zustandsauswertung, warum Interrupts hier oft die schlechtere Lösung sind.</div>
+    <div class="cd"><b>Material:</b> Mechanischer Drehgeber KY-040 oder EC11.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Auch schnelles Drehen keinen einzigen Schritt verliert und keine Sprünge erzeugt.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>7 · Serielle Ausgabe und Logging</span><span class="n">2 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> UART, Baudrate, Terminalprogramm, strukturierte Diagnoseausgabe mit Zeitstempel.</div>
+    <div class="cd"><b>Material:</b> Nur das Board und ein Terminalprogramm.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Du drei Log-Stufen hast und sie zur Übersetzungszeit abschalten kannst.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>8 · Lochraster-Aufbau</span><span class="n">4 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> Löten, Verdrahtung planen, Zugentlastung, mechanischer Aufbau.</div>
+    <div class="cd"><b>Material:</b> Lochrasterplatine, Buchsenleisten, Draht, eine deiner bisherigen Schaltungen.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Der Aufbau einen Sturz vom Tisch übersteht und alle Lötstellen glänzen.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>9 · Batteriebetrieb</span><span class="n">4 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> Schlafmodi, Aufwachquellen, Stromverbrauch messen, Laufzeit rechnen.</div>
+    <div class="cd"><b>Material:</b> Board mit Deep-Sleep-Unterstützung, Batteriehalter, Multimeter im µA-Bereich.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Der gemessene Mittelstrom mit deiner Rechnung auf 20 % übereinstimmt.</div>
+  </div>
+  <div class="card">
+    <div class="ch"><span>10 · Messwerte ins Netz</span><span class="n">5 h</span></div>
+    <div class="cd"><b>Was du lernst:</b> WLAN, MQTT, JSON, Broker, Visualisierung.</div>
+    <div class="cd"><b>Material:</b> ESP32, MQTT-Broker (auch als Docker-Container auf dem eigenen Server), Node-RED oder Home Assistant.</div>
+    <div class="cd"><b>Fertig, wenn:</b> Der Wert nach einem Neustart des Geräts automatisch wieder erscheint.</div>
+  </div>
+</div>
+
+<h2>Was jedes dieser Projekte gemeinsam hat</h2>
+<div class="steps">
+  <div class="step"><h4>Ein prüfbares Erfolgskriterium</h4>Nicht „es funktioniert“, sondern eine Bedingung, die man messen kann. Ohne das weiß man nie, ob man fertig ist.</div>
+  <div class="step"><h4>Ein neuer Baustein je Projekt</h4>Nicht drei unbekannte Dinge gleichzeitig. Wenn etwas nicht geht, muss die Fehlerursache eingrenzbar bleiben.</div>
+  <div class="step"><h4>Wiederverwendbar</h4>Jedes dieser Projekte wird in einem späteren Gerät zum Modul. Der Code dafür gehört in ein Repository, nicht in den Papierkorb.</div>
+</div>
+<div class="tip"><b>Ein Tipp, der überraschend viel bringt:</b> Nach jedem fertigen Projekt fünf Zeilen aufschreiben — was war das Ziel, was hat länger gedauert als gedacht, was würdest du beim nächsten Mal anders machen. Diese Notizen sind nach einem Jahr wertvoller als der Code.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen und Material</div>
+  <ul>
+    <li>Bibliotheken und Beispiele: <a href="https://github.com/adafruit">Adafruit</a> und <a href="https://github.com/sparkfun">SparkFun</a> auf GitHub; <a href="https://docs.espressif.com/projects/esp-idf/">ESP-IDF</a>; <a href="https://www.raspberrypi.com/documentation/microcontrollers/">Pico SDK</a>.</li>
+    <li>Charles Platt, <i>Make: Electronics</i> — projektbasiert, mit sehr guten Erklärungen zu den Grundlagen.</li>
+    <li>Bauteile: <a href="https://www.reichelt.de/">Reichelt</a>, <a href="https://www.mouser.de/">Mouser</a>, <a href="https://www.tme.eu/de/">TME</a>, <a href="https://www.berrybase.de/">BerryBase</a>.</li>
+    <li>Ergänzende Praxis: <a href="elektronik-grundlagen.html#praxis">Elektronik 101 → Praxis &amp; Aufbau</a>.</li>
+  </ul>
+</div>

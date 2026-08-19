@@ -1,0 +1,92 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Man braucht weniger, als die meisten Listen behaupten — und Bestimmtes früher, als man denkt.</b> Reihenfolge: Multimeter, Lötstation, Labornetzteil, Logikanalysator, Oszilloskop. Alles andere ergibt sich.</div>
+
+<h2>Stufe 1 — der Anfang</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Gerät</th><th>Preisrahmen</th><th>Worauf achten</th></tr></thead>
+<tbody>
+<tr><td><b>Digitalmultimeter</b></td><td>30–80 €</td><td>True RMS, Durchgangsprüfer mit schneller Reaktion, Kapazitätsmessung, µA-Bereich für Ruhestrommessung. CAT-Angabe passend zur Anwendung. Marken mit Prüfzeichen bevorzugen</td></tr>
+<tr><td><b>Lötstation</b></td><td>60–200 €</td><td>Geregelt, schneller Spitzenwechsel, Kartuschenspitzen (T12, C245). Eine Station mit 20-Sekunden-Aufheizzeit wird tatsächlich benutzt</td></tr>
+<tr><td><b>Seitenschneider und Pinzette</b></td><td>20–40 €</td><td>Flush Cutter für bündiges Abschneiden, ESD-sichere Pinzette mit feiner Spitze</td></tr>
+<tr><td><b>Steckbrett und Drahtbrücken</b></td><td>15–25 €</td><td>Nicht das billigste — schlechte Federkontakte erzeugen Fehler, die man nirgends findet</td></tr>
+<tr><td><b>Bauteilsortiment</b></td><td>40–80 €</td><td>Widerstände E12 von 10 Ω bis 1 MΩ, Kondensatoren, LEDs, Dioden, Transistoren, Stiftleisten</td></tr>
+<tr><td><b>Mikrocontroller-Board</b></td><td>5–20 €</td><td>Raspberry Pi Pico 2 oder ESP32. Zwei kaufen — das zweite dient als Vergleich bei Problemen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Das billigste sinnvolle Multimeter reicht länger, als man denkt</b> — aber ein Gerät ohne µA-Bereich wird ärgerlich, sobald Batteriebetrieb ein Thema wird. Und ein Durchgangsprüfer, der eine halbe Sekunde braucht, macht das Durchklingeln einer Platine zur Qual. Diese beiden Punkte sind beim Kauf wichtiger als die letzte Stelle in der Anzeige.</div>
+
+<h2>Stufe 2 — sobald es ernster wird</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Gerät</th><th>Preisrahmen</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Labornetzteil mit Strombegrenzung</b></td><td>60–200 €</td><td><b>Die lohnendste Anschaffung überhaupt.</b> Rettet bei jedem Bestückungsfehler die Baugruppe. 0–30 V, 0–5 A reicht für fast alles</td></tr>
+<tr><td><b>Logikanalysator</b></td><td>15–150 €</td><td>Acht Kanäle mit <a href="https://sigrok.org/wiki/PulseView">PulseView</a> genügen für I²C, SPI, UART, CAN. Bei Busproblemen unersetzlich</td></tr>
+<tr><td><b>Entlötlitze und Flussmittel</b></td><td>15–30 €</td><td>Flussmittel im Stift oder als Gel. Ohne Flussmittel ist SMD-Nacharbeit Glückssache</td></tr>
+<tr><td><b>Dritte Hand oder Platinenhalter</b></td><td>20–60 €</td><td>Ein Halter mit Klemmbacken schlägt die klassische Krokodilklemmen-Konstruktion deutlich</td></tr>
+<tr><td><b>Lupe oder USB-Mikroskop</b></td><td>25–120 €</td><td>Für Sichtprüfung und feine Raster. Ein einfaches USB-Mikroskop reicht am Anfang</td></tr>
+<tr><td><b>Heißluftstation</b></td><td>60–200 €</td><td>Für SMD-Bauteile mit vielen Pins und für Nacharbeit. Details in <a href="loeten-referenz.html#heissluftstation">Löten → Heißluftstation</a></td></tr>
+<tr><td><b>Komponententester (LCR-T4 o. ä.)</b></td><td>15–40 €</td><td>Erkennt Bauteiltyp, Pinbelegung und Werte automatisch. Für unbeschriftete Teile aus der Bastelkiste sehr praktisch</td></tr>
+</tbody>
+</table></div>
+
+<h2>Stufe 3 — Oszilloskop</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Wann es sich lohnt</div><div class="cd">Sobald Signale nicht mehr statisch sind: PWM, Busse, Schaltregler, Regelkreise, Störungen. Bis dahin reicht ein Multimeter — danach ersetzt kein Multimeter das Oszilloskop.</div></div>
+  <div class="card"><div class="ct">Bandbreite</div><div class="cd">Für Mikrocontroller-Projekte reichen 50–100 MHz. Faustregel: mindestens die fünffache Bandbreite der höchsten interessierenden Signalfrequenz — bei Rechtecksignalen zählen die Oberwellen.</div></div>
+  <div class="card"><div class="ct">Kanäle</div><div class="cd">Zwei genügen oft, vier sind deutlich komfortabler — etwa um Takt, Daten, Chip-Select und Versorgung gleichzeitig zu sehen.</div></div>
+  <div class="card"><div class="ct">Was mehr bringt als Bandbreite</div><div class="cd">Protokolldekodierung, eine brauchbare Triggerlogik, tiefer Speicher und eine flüssige Bedienung. Ein Gerät, das man ungern benutzt, wird nicht benutzt.</div></div>
+  <div class="card"><div class="ct">Preisrahmen</div><div class="cd">200–500 € für ein brauchbares Einsteigergerät neu; gebrauchte Markengeräte oft deutlich günstiger. Ein USB-Oszilloskop ist eine Alternative, wenn der Platz fehlt.</div></div>
+  <div class="card"><div class="ct">Tastköpfe</div><div class="cd">Die mitgelieferten reichen anfangs. Wichtig: Tastkopf kompensieren (Rechtecksignal am Kalibrierausgang), 10:1 verwenden und die kurze Federklemme statt der langen Masseleitung — sonst misst man das eigene Klingeln.</div></div>
+</div>
+
+<h2>Stufe 4 — eigene Platinen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Gerät</th><th>Preisrahmen</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Vorwärm- oder Reflow-Heizplatte</b></td><td>50–200 €</td><td>Geregelt, mit Profilfunktion. Für kleine Platinen ausreichend</td></tr>
+<tr><td><b>Lotpaste und Schablone</b></td><td>10–40 €</td><td>Paste kühl lagern; Schablone je Platine bestellen</td></tr>
+<tr><td><b>Stereomikroskop</b></td><td>150–500 €</td><td>Ab QFN und feinen Rastern eine erhebliche Erleichterung. Gebrauchtgeräte sind hier eine gute Option</td></tr>
+<tr><td><b>Debug-Adapter</b></td><td>10–100 €</td><td>ST-Link, J-Link EDU, Raspberry Pi Debug Probe oder ein CMSIS-DAP-Adapter</td></tr>
+<tr><td><b>Isopropanol und Bürste</b></td><td>10 €</td><td>Zum Entfernen von Flussmittelresten. Wichtiger, als es klingt: Reste sind hygroskopisch und erzeugen Leckströme</td></tr>
+</tbody>
+</table></div>
+
+<h2>Arbeitsplatz einrichten</h2>
+<div class="steps">
+  <div class="step"><h4>Licht</h4>Hell und blendfrei, möglichst von zwei Seiten. Eine Lupenleuchte oder ein Ringlicht am Mikroskop. Schlechtes Licht ist die häufigste Ursache für übersehene Lötfehler.</div>
+  <div class="step"><h4>Absaugung</h4>Ein Lötrauchabsauger oder wenigstens ein Lüfter, der die Dämpfe wegzieht — nicht ins Gesicht. Kolophonium reizt die Atemwege.</div>
+  <div class="step"><h4>ESD-Schutz</h4>Ableitfähige Matte und Handgelenkband über 1 MΩ. Für Bastelprojekte oft entbehrlich, für empfindliche Bauteile (MOSFETs, MEMS, HF) sinnvoll.</div>
+  <div class="step"><h4>Ordnung im Kleinteilelager</h4>Sortimentskästen mit Beschriftung, SMD-Bauteile in Blisterstreifen oder Sortimentbüchern. Wer eine halbe Stunde nach einem 10-kΩ-Widerstand sucht, verliert die Lust.</div>
+  <div class="step"><h4>Feste Steckdosenleiste mit Schalter</h4>Alles zusammen abschaltbar. Verhindert, dass ein Lötkolben über Nacht anbleibt.</div>
+  <div class="step"><h4>Platz zum Liegenlassen</h4>Ein Projekt, das jeden Abend abgebaut werden muss, wird nicht fertig. Eine feste Ecke ist mehr wert als jedes Werkzeug.</div>
+</div>
+
+<h2>Was man nicht braucht</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Häufige Fehlkäufe</h4><ul>
+    <li>Großes Bauteilsortiment mit tausend unsortierten Teilen — man findet nie das richtige</li>
+    <li>Billiges Oszilloskop mit 20 MHz und schlechter Bedienung</li>
+    <li>Teure Lötstation, bevor man löten kann</li>
+    <li>Sensorsammlungen mit 37 Modulen, von denen man drei benutzt</li>
+    <li>Vollausgestattete 3D-Drucker-Werkstatt, bevor das erste elektronische Projekt fertig ist</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Besser investiert</h4><ul>
+    <li>Ein gutes Multimeter statt zwei billige</li>
+    <li>Labornetzteil vor Oszilloskop</li>
+    <li>Bauteile gezielt für das aktuelle Projekt, dafür mit Datenblatt</li>
+    <li>Ein Fachbuch, das man wirklich durcharbeitet</li>
+    <li>Zeit — sie ist der eigentliche Engpass</li>
+  </ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Weiterführend</div>
+  <ul>
+    <li>Messgeräte im Detail: <a href="elektronik-grundlagen.html#messgeraete">Elektronik 101 → Messgeräte im Überblick</a>.</li>
+    <li>Lötwerkzeug: <a href="loeten-referenz.html#werkzeug">Löten → Werkzeug-Typen</a>.</li>
+    <li><a href="https://sigrok.org/">sigrok / PulseView</a> — quelloffene Software für Logikanalysatoren und viele Messgeräte.</li>
+    <li>Bezugsquellen und Werkzeugempfehlungen: <a href="mechatronik-nachschlagewerk.html#webseiten">Nachschlagewerk → Webseiten &amp; Foren</a>.</li>
+  </ul>
+</div>

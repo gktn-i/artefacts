@@ -1,0 +1,101 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Theorie kennt einen linearen Regler an einer linearen Strecke.</b> Die Praxis kennt Stellgrößenbegrenzung, Messrauschen, Reibung, Spiel und Sensoren, die manchmal Unsinn liefern. Der Unterschied zwischen einem Regler, der im Labor funktioniert, und einem, der im Gerät läuft, steckt genau hier.</div>
+
+<h2>Anti-Windup</h2>
+<p>Steht die Stellgröße an ihrer Grenze, wirkt keine Änderung mehr — der Regelkreis ist offen. Der I-Anteil summiert trotzdem weiter und baut einen riesigen Wert auf. Beim Erreichen des Sollwerts dauert es dann sehr lange, bis dieser Wert wieder abgebaut ist, und die Regelgröße schießt weit über.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Verfahren</th><th>Prinzip</th><th>Bewertung</th></tr></thead>
+<tbody>
+<tr><td><b>Integrator anhalten</b></td><td>Wenn die Stellgröße begrenzt ist und der Fehler in dieselbe Richtung zeigt, nicht weiter integrieren</td><td>Einfach, wirksam, zwei Zeilen Code</td></tr>
+<tr><td><b>Integrator klemmen</b></td><td>Den Integralanteil auf den Stellbereich begrenzen</td><td>Sehr einfach, bei stark unterschiedlichen Anteilen etwas grob</td></tr>
+<tr><td><b>Back-Calculation</b></td><td>Die Differenz zwischen berechneter und tatsächlicher Stellgröße mit einem Beiwert zurückrechnen und vom Integral abziehen</td><td>Das Verfahren der Wahl; die Rückkehr aus der Begrenzung lässt sich einstellen</td></tr>
+<tr><td><b>Bedingtes Integrieren</b></td><td>Nur integrieren, wenn der Fehler unter einer Schwelle liegt</td><td>Verhindert Windup bei großen Sollwertsprüngen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Woran man Windup erkennt:</b> Nach einem großen Sollwertsprung überschwingt der Kreis stark und braucht viel länger als erwartet, um sich zu fangen — obwohl kleine Sprünge sauber laufen. Die Stellgröße stand dabei längere Zeit an der Grenze. Der Test ist einfach: Sollwertsprung so groß wählen, dass die Begrenzung sicher erreicht wird.</div>
+
+<h2>Messrauschen und der D-Anteil</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Warum D so empfindlich ist</div><div class="cd">Der D-Anteil verstärkt proportional zur Frequenz. Ein Rauschanteil bei 500 Hz wird hundertmal stärker verstärkt als ein Nutzsignal bei 5 Hz. Ohne Filter ist die Stellgröße reines Rauschen.</div></div>
+  <div class="card"><div class="ct">Filter richtig auslegen</div><div class="cd">Tiefpass mit T_f = T_v/N, N zwischen 5 und 20. Kleineres N heißt stärkere Filterung — und mehr Phasenverlust, siehe <a href="#stabilitaet">Stabilität</a>.</div></div>
+  <div class="card"><div class="ct">Besser als filtern: sauberer messen</div><div class="cd">Ein Encoder mit höherer Auflösung, eine bessere Verkabelung oder eine geschirmte Zuleitung bringen mehr als jeder Filter. Rauschen zu unterdrücken ist immer die zweitbeste Lösung.</div></div>
+  <div class="card"><div class="ct">Drehzahl aus Position</div><div class="cd">Die Differenz zweier Positionswerte ist bei feiner Auflösung und kurzer Abtastzeit stark quantisiert. Besser: Zeit zwischen Flanken messen, oder einen Beobachter verwenden.</div></div>
+</div>
+
+<h2>Kaskadenregelung</h2>
+<svg class="dg l" viewBox="0 0 620 130" role="img" aria-label="Kaskadenregelung mit äußerem Positions- und innerem Drehzahlkreis">
+  <path class="w" d="M20,52 H44" /><path class="f" d="M48,52 l-8,-4 v8 z" />
+  <circle class="accs" cx="60" cy="52" r="12" /><text class="lbl" x="60" y="56" text-anchor="middle">−</text>
+  <path class="w" d="M72,52 H92" /><path class="f" d="M96,52 l-8,-4 v8 z" />
+  <rect class="box" x="98" y="36" width="74" height="32" rx="4" /><text class="lbl" x="135" y="56" text-anchor="middle">Positionsregler</text>
+  <path class="w" d="M172,52 H196" /><path class="f" d="M200,52 l-8,-4 v8 z" />
+  <circle class="accs" cx="212" cy="52" r="12" /><text class="lbl" x="212" y="56" text-anchor="middle">−</text>
+  <path class="w" d="M224,52 H244" /><path class="f" d="M248,52 l-8,-4 v8 z" />
+  <rect class="box" x="250" y="36" width="70" height="32" rx="4" /><text class="lbl" x="285" y="56" text-anchor="middle">Drehzahlregler</text>
+  <path class="w" d="M320,52 H344" /><path class="f" d="M348,52 l-8,-4 v8 z" />
+  <rect class="box" x="350" y="36" width="60" height="32" rx="4" /><text class="lbl" x="380" y="56" text-anchor="middle">Motor</text>
+  <path class="w" d="M410,52 H434" /><path class="f" d="M438,52 l-8,-4 v8 z" />
+  <rect class="box" x="440" y="36" width="66" height="32" rx="4" /><text class="lbl" x="473" y="56" text-anchor="middle">Mechanik</text>
+  <path class="w" d="M506,52 H580" />
+  <path class="acc" d="M420,52 V90 H212 V64" /><path class="accf" d="M212,64 l-4,8 h8 z" />
+  <path class="w" d="M552,52 V114 H60 V64" /><path class="f" d="M60,64 l-4,8 h8 z" />
+  <text class="lbl" x="316" y="86" style="fill:var(--accent)">Drehzahl (innen, schnell)</text>
+  <text class="lbl" x="300" y="110">Position (außen, langsam)</text>
+  <text class="lbl" x="14" y="56" text-anchor="end">w</text>
+  <text class="lbl" x="588" y="56">y</text>
+</svg>
+<div class="steps">
+  <div class="step"><h4>Wann sie sich lohnt</h4>Wenn eine schnelle innere Größe messbar ist, die die langsame äußere beeinflusst — Strom vor Drehzahl vor Position, Vorlauftemperatur vor Raumtemperatur.</div>
+  <div class="step"><h4>Der Gewinn</h4>Störungen im inneren Kreis (Lastschwankung, Reibung, Versorgungsschwankung) werden ausgeregelt, bevor sie den äußeren erreichen. Außerdem linearisiert der innere Kreis die Strecke für den äußeren.</div>
+  <div class="step"><h4>Die Regel</h4>Der innere Kreis muss <b>mindestens dreimal, besser fünf- bis zehnmal schneller</b> sein als der äußere. Sonst schwingen beide gegeneinander.</div>
+  <div class="step"><h4>Reihenfolge beim Einstellen</h4>Immer von innen nach außen. Erst den inneren Kreis fertig einstellen und schließen, dann den äußeren — mit dem geschlossenen inneren Kreis als Teil der Strecke.</div>
+  <div class="step"><h4>Begrenzungen weiterreichen</h4>Der Ausgang des äußeren Reglers ist der Sollwert des inneren und muss auf dessen zulässigen Bereich begrenzt werden. Das ist zugleich eine elegante Strombegrenzung: Der Positionsregler kann dann keinen unzulässigen Strom anfordern.</div>
+</div>
+
+<h2>Vorsteuerung</h2>
+<p>Der Regler reagiert erst, wenn eine Abweichung besteht. Was man vorher weiß, sollte man nicht abwarten:</p>
+<div class="gb">
+  <div class="gb-col"><h4>Führungsvorsteuerung</h4>
+    <p>Aus dem bekannten Sollwertverlauf wird direkt eine Stellgröße berechnet und aufgeschaltet. Der Regler korrigiert nur noch den Rest.</p>
+    <p class="note">Bei einem Antrieb: Beschleunigungsmoment aus dem geplanten Geschwindigkeitsprofil vorausberechnen. Das reduziert den Schleppfehler oft um eine Größenordnung.</p>
+  </div>
+  <div class="gb-col"><h4>Störgrößenaufschaltung</h4>
+    <p>Eine messbare Störung wird direkt kompensiert, ohne den Umweg über die Regelabweichung.</p>
+    <p class="note">Beispiel: Außentemperatur bei der Heizungsregelung, bekanntes Lastmoment bei einem Antrieb, Eingangsspannung bei einem Wandler.</p>
+  </div>
+</div>
+<div class="tip"><b>Vorsteuerung ist die wirkungsvollste einzelne Maßnahme, um einen Regelkreis schneller zu machen — ohne die Stabilität anzutasten.</b> Sie liegt außerhalb des Kreises und kann ihn deshalb nicht destabilisieren. Der Preis: Sie braucht ein Modell und wirkt nur so gut, wie das Modell stimmt.</div>
+
+<h2>Nichtlinearitäten beherrschen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Effekt</th><th>Symptom</th><th>Gegenmaßnahme</th></tr></thead>
+<tbody>
+<tr><td><b>Haftreibung</b></td><td>Der Antrieb bleibt kurz vor dem Ziel stehen und ruckt dann; Grenzzyklen um den Sollwert</td><td>Reibungskompensation aufschalten, Losbrechmoment vorsteuern, Toleranzband akzeptieren</td></tr>
+<tr><td><b>Spiel im Getriebe</b></td><td>Beim Richtungswechsel passiert erst nichts, dann schlägt es durch</td><td>Vorspannung mechanisch, Spielkompensation in Software, oder direkt am Abtrieb messen</td></tr>
+<tr><td><b>Ventilkennlinie</b></td><td>Verstärkung ändert sich über den Hub um Faktor 5</td><td>Kennlinie invertieren, bevor die Stellgröße ausgegeben wird</td></tr>
+<tr><td><b>Sättigung</b></td><td>Ab einem Punkt bewirkt mehr Stellgröße nichts</td><td>Begrenzung im Regler abbilden, Anti-Windup</td></tr>
+<tr><td><b>Arbeitspunktabhängige Verstärkung</b></td><td>Regler ist bei kleiner Last zu träge, bei großer instabil</td><td>Gain Scheduling: Parametersätze je Bereich, sanft überblenden</td></tr>
+<tr><td><b>Quantisierung</b></td><td>Grenzzyklen mit der Amplitude eines LSB</td><td>Auflösung erhöhen, Totband um den Sollwert, oder Dithering</td></tr>
+</tbody>
+</table></div>
+
+<h2>Sicherheit im Regelkreis</h2>
+<ul>
+  <li><b>Plausibilitätsprüfung des Messwerts:</b> Sensor abgerissen, Kurzschluss, Wert außerhalb des physikalisch Möglichen — jeder dieser Fälle muss zu einem definierten Verhalten führen, nicht zu einer Stellgröße von 100 %.</li>
+  <li><b>Zeitüberwachung:</b> Bleibt der Messwert konstant, obwohl gestellt wird, ist etwas kaputt.</li>
+  <li><b>Stellgröße hart begrenzen</b> — und zwar zusätzlich in Hardware, wo es gefährlich werden kann (Break-Eingang am Timer, Überstromkomparator).</li>
+  <li><b>Definierter Zustand beim Start und beim Fehler:</b> Heizung aus, Motor stromlos, Ventil in Sicherheitsstellung. Nie „letzter Wert“.</li>
+  <li><b>Watchdog:</b> Bleibt die Regelroutine stehen, muss die Anlage in den sicheren Zustand fallen — nicht mit der letzten Stellgröße weiterlaufen.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Åström &amp; Hägglund, <i>Advanced PID Control</i>, Kapitel zu Anti-Windup, Vorsteuerung und Kaskade.</li>
+    <li>Lunze, <i>Regelungstechnik 2</i>, Kapitel Mehrschleifige Regelung.</li>
+    <li>Texas Instruments und Analog Devices: Anwendungsberichte zur Motorregelung mit Kaskadenstruktur (Strom, Drehzahl, Position).</li>
+    <li>Für die funktionale Sicherheit der Anlage: <a href="automatisierung-sps.html#sicherheit">Automatisierung → Funktionale Sicherheit</a>.</li>
+  </ul>
+</div>

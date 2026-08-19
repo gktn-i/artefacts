@@ -1,0 +1,49 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Firmware ist der Teil, in dem alles zusammenläuft.</b> Die Elektronik gibt vor, was möglich ist, die Regelungstechnik, was passieren soll — und hier wird daraus ein Gerät, das startet, arbeitet, sich meldet und sich aktualisieren lässt. Es ist auch der Teil, in dem die meiste Entwicklungszeit steckt.</div>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#mcus"><div class="mt"><span class="i">🔎</span>MCU-Landschaft 2026</div><div class="md">Welche Familien es gibt, wofür sie taugen, was man realistisch wählt.</div></a>
+  <a href="#toolchain"><div class="mt"><span class="i">🔧</span>Toolchain &amp; Build</div><div class="md">Compiler, Linker, Flash-Werkzeuge, SDK-Landschaft, Arduino gegen HAL gegen Register.</div></a>
+  <a href="#peripherie"><div class="mt"><span class="i">🔌</span>Peripherie</div><div class="md">GPIO, Timer, PWM, ADC, DMA — was die Hardware ohne die CPU erledigt.</div></a>
+  <a href="#interrupts"><div class="mt"><span class="i">⚡</span>Interrupts</div><div class="md">Prioritäten, Latenz, geteilte Daten, atomare Zugriffe, typische Fehler.</div></a>
+  <a href="#busse"><div class="mt"><span class="i">🚌</span>Bussysteme</div><div class="md">I²C, SPI, UART, CAN, USB — Auswahl, Verdrahtung, Fehlersuche.</div></a>
+  <a href="#rtos"><div class="mt"><span class="i">🧵</span>RTOS</div><div class="md">FreeRTOS und Zephyr, Tasks, Queues, Semaphore, Stackdimensionierung.</div></a>
+  <a href="#speicherbild"><div class="mt"><span class="i">🗺️</span>Speicherbild</div><div class="md">Linker-Skript, Sektionen, Startup, Bootloader, OTA-Updates.</div></a>
+  <a href="#debug"><div class="mt"><span class="i">🐞</span>Debuggen</div><div class="md">SWD, Breakpoints, Hard Fault analysieren, Logging, Logikanalysator.</div></a>
+  <a href="#strom"><div class="mt"><span class="i">🔋</span>Stromsparen</div><div class="md">Schlafmodi, Aufwachquellen, Messung, realistische Laufzeitrechnung.</div></a>
+  <a href="#cpraxis"><div class="mt"><span class="i">📝</span>C-Praxis</div><div class="md">volatile, static, Fixpunkt, Ringpuffer, die Fallen im Detail.</div></a>
+</div>
+
+<h2>Die drei Ebenen, auf denen man arbeiten kann</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Ebene</th><th>Beispiel</th><th>Vorteil</th><th>Grenze</th></tr></thead>
+<tbody>
+<tr><td><b>Ökosystem-Bibliothek</b></td><td>Arduino, MicroPython, CircuitPython</td><td>In Minuten zum ersten Ergebnis, riesige Bibliothekssammlung</td><td>Verdeckt, was wirklich passiert; Timing und Stromverbrauch schwer im Griff</td></tr>
+<tr><td><b>Hersteller-SDK / HAL</b></td><td>STM32Cube HAL, ESP-IDF, nRF Connect SDK, Pico SDK</td><td>Voller Zugriff auf die Peripherie, ordentlich dokumentiert, produktionstauglich</td><td>Umfangreich, herstellerspezifisch, Einarbeitung nötig</td></tr>
+<tr><td><b>Register direkt</b></td><td>Zugriff über die CMSIS-Header</td><td>Volle Kontrolle, minimaler Code, exaktes Timing</td><td>Jedes Detail selbst; nur sinnvoll für kritische Stellen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Ein pragmatischer Weg:</b> Mit dem Ökosystem anfangen, um die Idee zu prüfen. Sobald es funktioniert, auf das Hersteller-SDK wechseln — dort ist alles erreichbar, was für ein fertiges Gerät gebraucht wird. Register direkt nur dort, wo es wirklich nötig ist: enge Interruptroutinen, exaktes Timing, Peripherie, die die HAL nicht abdeckt. Und in jedem Fall lohnt es sich, einmal das Referenzhandbuch des eigenen Controllers durchzublättern — nicht zu lesen, nur durchzublättern, um zu wissen, was drinsteckt.</div>
+
+<h2>Wie ein Projekt typischerweise verläuft</h2>
+<div class="steps">
+  <div class="step"><h4>Board zum Leben erwecken</h4>Versorgung prüfen, Takt konfigurieren, eine LED blinken lassen, serielle Ausgabe zum Laufen bringen. Erst wenn das steht, lohnt alles andere.</div>
+  <div class="step"><h4>Peripherie einzeln in Betrieb nehmen</h4>Jeden Sensor, jeden Aktor für sich testen — mit einem minimalen Programm. Wer alles gleichzeitig aufbaut, sucht Fehler in einem Suchraum, der zu groß ist.</div>
+  <div class="step"><h4>Struktur festlegen</h4>Was läuft im Interrupt, was im Hauptprogramm, was periodisch? Wo liegen die geteilten Daten? Diese Entscheidung im Nachhinein zu ändern ist teuer.</div>
+  <div class="step"><h4>Funktion aufbauen</h4>Zustandsautomaten statt verschachtelter Wartezeiten. Alles Zeitgesteuerte über einen zentralen Systemtick.</div>
+  <div class="step"><h4>Robust machen</h4>Watchdog, Brownout, Plausibilitätsprüfungen, definiertes Verhalten bei Sensorausfall, Fehlerprotokoll im Flash.</div>
+  <div class="step"><h4>Wartbar machen</h4>Versionsnummer, Diagnoseausgabe, Update-Weg, Dokumentation der Pinbelegung.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Elecia White, <i>Making Embedded Systems</i>, 2. Auflage, O'Reilly.</li>
+    <li>Joseph Yiu, <i>The Definitive Guide to Arm Cortex-M</i> (verschiedene Ausgaben je Kern).</li>
+    <li><a href="https://interrupt.memfault.com/">Interrupt — Memfault Engineering Blog</a>: sehr fundierte Artikel zu Debugging, Fault-Analyse, Bootloadern und Firmware-Betrieb.</li>
+    <li>Referenzhandbuch und Datenblatt des jeweiligen Controllers — die einzige verbindliche Quelle.</li>
+  </ul>
+</div>

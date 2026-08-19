@@ -1,0 +1,78 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Zwischen dem physikalischen Effekt und der Zahl im Rechner liegen mehrere Umwandlungen — und jede kostet Genauigkeit.</b> Die wichtigste Regel: <b>Verstärken, bevor gestört wird.</b> Ein Millivolt-Signal, das erst zehn Meter durch einen Schaltschrank läuft und dann verstärkt wird, ist verloren.</div>
+
+<h2>Signalkonditionierung</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Stufe</th><th>Aufgabe</th><th>Typische Umsetzung</th></tr></thead>
+<tbody>
+<tr><td><b>Anregung</b></td><td>Der Sensor braucht eine Speisung: Strom durch einen Widerstandssensor, Spannung an einer Brücke</td><td>Konstantstromquelle, geregelte Referenz. Möglichst gepulst, um Selbsterwärmung zu vermeiden</td></tr>
+<tr><td><b>Schutz</b></td><td>Überspannung, ESD, Verpolung abfangen</td><td>Reihenwiderstand plus Klemmdioden, TVS am Steckverbinder</td></tr>
+<tr><td><b>Verstärkung</b></td><td>Signal auf den Eingangsbereich des Wandlers bringen</td><td>Instrumentenverstärker bei Differenzsignalen, OPV bei Einzelsignalen</td></tr>
+<tr><td><b>Filterung</b></td><td>Alles oberhalb der Nutzbandbreite entfernen</td><td>RC oder aktives Filter — <b>vor</b> dem ADC, analog</td></tr>
+<tr><td><b>Pegelanpassung</b></td><td>Nullpunkt verschieben, damit auch negative Werte messbar sind</td><td>Bezug auf halbe Versorgung, oder Wandler mit Differenzeingang</td></tr>
+<tr><td><b>Wandlung</b></td><td>Analog zu digital</td><td>SAR für schnelle Messungen, Delta-Sigma für hochauflösende langsame</td></tr>
+<tr><td><b>Linearisierung</b></td><td>Kennlinie in physikalische Einheiten umrechnen</td><td>Polynom oder Tabelle mit Interpolation — in Software</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Brückenschaltung</h2>
+<p>Der Standard für alles, was seinen Widerstand ändert: Dehnungsmessstreifen, Drucksensoren, Pt100. Vier Widerstände, Messung der Differenz in der Mitte.</p>
+<div class="fbox">
+  <span class="f">U_diff = U_speisung · (R2/(R1+R2) − R4/(R3+R4))</span>
+  <span class="l">Bei Vollbrücke mit vier aktiven Elementen: U_diff = U_speisung · ΔR/R — viermal empfindlicher als ein Einzelelement.</span>
+</div>
+<div class="grid">
+  <div class="card"><div class="ct">Viertelbrücke</div><div class="cd">Ein aktiver DMS, drei feste Widerstände. Einfach, aber temperaturempfindlich und wenig empfindlich.</div></div>
+  <div class="card"><div class="ct">Halbbrücke</div><div class="cd">Zwei aktive Elemente, gegensinnig belastet. Temperatureffekte heben sich weitgehend auf.</div></div>
+  <div class="card"><div class="ct">Vollbrücke</div><div class="cd">Vier aktive Elemente. Höchste Empfindlichkeit, beste Temperaturkompensation. Der Standard in Wägezellen.</div></div>
+  <div class="card"><div class="ct">Ratiometrisch messen</div><div class="cd">Brücke <b>und</b> ADC-Referenz aus derselben Spannung speisen. Dann kürzt sich die Speisespannung heraus und ihre Genauigkeit spielt keine Rolle mehr — der wichtigste Trick bei Brückensensoren.</div></div>
+</div>
+<div class="tip"><b>Fertige Bausteine ersparen viel Arbeit:</b> Der HX711 (24 Bit, für Wägezellen) und der ADS1256 oder ADS1220 (Delta-Sigma mit eingebautem Verstärker) enthalten Anregung, Verstärkung und Wandlung in einem Chip. Für Wägezellen, Dehnungsmessstreifen und Thermoelemente ist das fast immer der bessere Weg als ein selbstgebauter Verstärkerzug.</div>
+
+<h2>Zwei-, Drei- und Vierleiteranschluss</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Anschluss</th><th>Prinzip</th><th>Fehler durch Leitungswiderstand</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>Zweileiter</b></td><td>Strom und Messung über dieselben Leitungen</td><td>Voll wirksam: 1 Ω Leitung sind bei Pt100 rund 2,6 K Fehler</td><td>Kurze Strecken, unkritische Messungen</td></tr>
+<tr><td><b>Dreileiter</b></td><td>Eine zusätzliche Leitung erlaubt Kompensation, wenn alle drei gleich sind</td><td>Weitgehend kompensiert</td><td>Der Industriestandard bei Pt100</td></tr>
+<tr><td><b>Vierleiter (Kelvin)</b></td><td>Getrennte Strom- und Messleitungen; über die Messleitungen fließt kein Strom</td><td>Vollständig eliminiert</td><td>Präzisionsmessung, Shunts, Labormessgeräte</td></tr>
+</tbody>
+</table></div>
+<p class="note">Dasselbe Prinzip gilt beim Strommessen mit einem Shunt: Die Spannungsabgriffe gehören <b>innerhalb</b> der Stromanschlüsse, sonst misst man den Übergangswiderstand der Lötstellen mit. Bei einem 1-mΩ-Shunt und 10 A sind das schnell 30 % Fehler.</p>
+
+<h2>Der Standard 4–20 mA</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Warum er sich gehalten hat</h4><ul>
+    <li>Der Leitungswiderstand ist egal — ein Strom bleibt ein Strom</li>
+    <li>Ein Drahtbruch ist erkennbar: 0 mA sind ein Fehler, nicht der Messbereichsanfang</li>
+    <li>Sehr störfest, auch über hunderte Meter</li>
+    <li>Zweileitertechnik: Der Sensor speist sich aus dem Messstrom selbst</li>
+  </ul></div>
+  <div class="gb-col"><h4>Umsetzung</h4><ul>
+    <li>Beim Empfänger ein Bürdewiderstand, meist 250 Ω → 1–5 V</li>
+    <li>Auflösung im Rechner: 16 mA über den ADC-Bereich</li>
+    <li>HART überlagert dem Strom ein digitales Signal für Konfiguration und Diagnose</li>
+    <li>Für kurze Strecken im Gerät ist ein digitaler Bus einfacher und billiger</li>
+  </ul></div>
+</div>
+
+<h2>Störungen fernhalten</h2>
+<div class="steps">
+  <div class="step"><h4>Differentiell übertragen</h4>Zwei Leitungen, Störung wirkt auf beide gleich, der Instrumentenverstärker zieht sie ab. Die wirksamste Einzelmaßnahme bei kleinen Signalen.</div>
+  <div class="step"><h4>Verdrillen und schirmen</h4>Verdrillen wirkt gegen magnetische Einkopplung, der Schirm gegen elektrische. Bei niederfrequenten Analogsignalen den Schirm <b>einseitig</b> auflegen — sonst fließt ein Ausgleichsstrom.</div>
+  <div class="step"><h4>Analog- und Leistungsleitungen trennen</h4>Nicht im selben Kabelkanal, nicht parallel über längere Strecken. Wo Kreuzungen nötig sind, im rechten Winkel.</div>
+  <div class="step"><h4>Nur einen Massebezugspunkt</h4>Zwei Erdungen an verschiedenen Stellen erzeugen eine Brummschleife. Wenn zwei getrennte Systeme verbunden werden müssen: galvanisch trennen (Optokoppler, digitaler Isolator, Trennverstärker).</div>
+  <div class="step"><h4>50 Hz gezielt eliminieren</h4>Über ein ganzzahliges Vielfaches der Netzperiode mitteln (20 ms). Das entfernt den Brumm systematisch und ohne Filter — genau das machen Tischmultimeter mit ihrer NPLC-Einstellung.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Analog Devices, <i>Practical Design Techniques for Sensor Signal Conditioning</i> — kostenloses Handbuch, sehr gründlich.</li>
+    <li>Texas Instruments, <i>Analog Engineer's Circuit Cookbook: Sensors</i> und die Precision Labs-Serie zu Brückensensoren.</li>
+    <li>Hoffmann, <i>Handbuch der Messtechnik</i>, Kapitel Signalkonditionierung.</li>
+    <li>HBM, <i>Grundlagen der Dehnungsmessstreifen-Technik</i> — frei verfügbar, sehr praxisnah.</li>
+  </ul>
+</div>

@@ -1,0 +1,73 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Peripherie ist der eigentliche Grund, einen Mikrocontroller zu nehmen.</b> Timer, DMA und Wandler arbeiten unabhängig von der CPU weiter — richtig eingesetzt erledigt die Hardware Aufgaben, für die Software zu langsam und zu ungenau wäre.</div>
+
+<h2>GPIO richtig konfigurieren</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Einstellung</th><th>Optionen</th><th>Wann was</th></tr></thead>
+<tbody>
+<tr><td><b>Richtung</b></td><td>Eingang, Ausgang, Alternate Function, Analog</td><td>Analog schaltet die Digitalstufe ab und spart Strom — für ADC-Pins immer</td></tr>
+<tr><td><b>Ausgangstyp</b></td><td>Push-Pull, Open-Drain</td><td>Open-Drain für I²C, Wired-AND, Pegelanpassung nach oben</td></tr>
+<tr><td><b>Pull-Widerstand</b></td><td>Pull-up, Pull-down, keiner</td><td>Eingänge nie floaten lassen. Interne Pull-ups liegen bei 20–50 kΩ</td></tr>
+<tr><td><b>Flankensteilheit</b></td><td>Low, Medium, High Speed</td><td>So langsam wie möglich — steile Flanken erzeugen Störungen und Überschwingen</td></tr>
+<tr><td><b>Treiberstärke</b></td><td>2–20 mA je nach Controller</td><td>Gesamtstrom über alle Pins beachten, nicht nur den je Pin</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Der Strom durch einen GPIO-Pin ist begrenzt — der über die ganze Portgruppe auch.</b> Ein STM32 verträgt oft 20 mA je Pin, aber nur 80–120 mA über den gesamten Baustein. Acht LEDs mit je 20 mA direkt am Controller sind bereits jenseits der Spezifikation. Ab wenigen Milliampere gehört ein Transistor oder Treiberbaustein dazwischen.</div>
+
+<h2>Timer: der vielseitigste Block</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Zeitbasis</div><div class="cd">Zähler plus Vorteiler erzeugen einen periodischen Interrupt. Der Systemtick für alles Zeitgesteuerte.</div></div>
+  <div class="card"><div class="ct">PWM (Compare)</div><div class="cd">Der Ausgang wechselt bei einem Vergleichswert. Auflösung und Frequenz teilen sich denselben Zähler: bei 16 Bit und 100 MHz Takt sind 1 kHz PWM mit voller Auflösung möglich, 100 kHz nur noch mit rund 10 Bit.</div></div>
+  <div class="card"><div class="ct">Input Capture</div><div class="cd">Der Zählerstand wird bei einer Flanke am Eingang festgehalten — ohne Interrupt-Jitter. Für Frequenz-, Pulsweiten- und Drehzahlmessung deutlich genauer als Software.</div></div>
+  <div class="card"><div class="ct">Encoder-Modus</div><div class="cd">Der Timer wertet zwei Quadratursignale direkt aus und zählt vor und zurück. Kein Interrupt, keine verlorenen Schritte — für Drehgeber die einzige richtige Lösung.</div></div>
+  <div class="card"><div class="ct">Komplementäre Ausgänge mit Totzeit</div><div class="cd">Advanced-Timer erzeugen zwei zueinander invertierte PWM-Signale mit einstellbarer Totzeit — Voraussetzung für jede Halbbrücke. Dazu ein Break-Eingang, der bei Überstrom die Ausgänge in Hardware sofort abschaltet.</div></div>
+  <div class="card"><div class="ct">Verkettung</div><div class="cd">Ein Timer triggert den nächsten oder den ADC. Damit lässt sich zum Beispiel exakt in der Mitte der PWM-Einschaltphase messen — der Standardtrick bei Motorstromregelung.</div></div>
+</div>
+
+<h2>DMA — Daten bewegen ohne CPU</h2>
+<p>Der DMA-Controller kopiert selbstständig zwischen Peripherie und Speicher. Der Prozessor wird erst am Ende (oder zur Hälfte) benachrichtigt.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Anwendung</th><th>Ohne DMA</th><th>Mit DMA</th></tr></thead>
+<tbody>
+<tr><td><b>ADC mit 100 kSa/s</b></td><td>100 000 Interrupts pro Sekunde — die CPU macht nichts anderes mehr</td><td>Ein Interrupt je gefülltem Puffer</td></tr>
+<tr><td><b>Display über SPI</b></td><td>Jedes Byte einzeln geschrieben, Bildaufbau spürbar langsam</td><td>Ganzer Rahmen im Hintergrund, CPU rechnet weiter</td></tr>
+<tr><td><b>UART-Empfang</b></td><td>Bei hoher Baudrate gehen Zeichen verloren</td><td>Ringpuffer im Hintergrund, mit Idle-Interrupt für Paketende</td></tr>
+<tr><td><b>WS2812-LEDs</b></td><td>Bit-Banging blockiert alles</td><td>PWM oder SPI mit DMA, exaktes Timing ohne CPU-Last</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Die drei DMA-Fallen:</b> (1) Der Puffer muss dort liegen, wo der DMA-Controller hinkommt — bei manchen Controllern erreicht er das schnelle CCM-RAM <b>nicht</b>. (2) Bei aktivem Daten-Cache (Cortex-M7) muss vor dem Lesen invalidiert und nach dem Schreiben zurückgeschrieben werden, sonst sieht die CPU alte Daten. (3) Ein Puffer auf dem Stack ist ungültig, sobald die Funktion verlassen wird — DMA-Puffer gehören nach <code>static</code> oder in einen globalen Bereich.</div>
+
+<h2>ADC in der Praxis</h2>
+<div class="steps">
+  <div class="step"><h4>Abtastzeit lang genug wählen</h4>Der interne Sample-and-Hold-Kondensator braucht Zeit zum Laden. Bei hochohmiger Quelle die längste Abtastzeit einstellen — sonst hängt der Messwert vom vorher gemessenen Kanal ab.</div>
+  <div class="step"><h4>Referenz klären</h4>Wird gegen V_DDA gemessen, wandert der Messwert mit der Versorgung. Für absolute Messungen eine externe Referenz oder die interne Referenzspannung mit dem Werkskalibrierwert nutzen.</div>
+  <div class="step"><h4>Über mehrere Werte mitteln</h4>Oversampling mit 16 Werten bringt zwei zusätzliche effektive Bits. Viele Controller können das in Hardware.</div>
+  <div class="step"><h4>Zeitpunkt festlegen</h4>Bei PWM-getriebenen Lasten in der Mitte der Ein- oder Ausschaltphase messen, per Timer getriggert. Zufällig gemessene Werte sind bei geschalteten Lasten wertlos.</div>
+  <div class="step"><h4>Interne Kanäle nutzen</h4>Temperatursensor, Referenzspannung und Versorgungsüberwachung sind meist eingebaut — nützlich für Selbstdiagnose ohne Zusatzbauteile.</div>
+</div>
+
+<h2>Weitere Blöcke, die oft übersehen werden</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Block</th><th>Was er leistet</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Watchdog</b></td><td>Löst Reset aus, wenn er nicht regelmäßig zurückgesetzt wird</td><td>Pflicht in jedem Gerät, das unbeaufsichtigt läuft. Fenster-Watchdog erkennt auch zu häufiges Zurücksetzen</td></tr>
+<tr><td><b>RTC</b></td><td>Uhrzeit mit Batteriepufferung, Weckfunktion</td><td>Zeitstempel, geplantes Aufwachen aus dem Tiefschlaf</td></tr>
+<tr><td><b>Komparator</b></td><td>Analoge Schwelle in Hardware, ohne CPU</td><td>Überstromabschaltung in Nanosekunden, Nulldurchgangserkennung</td></tr>
+<tr><td><b>CRC-Einheit</b></td><td>Prüfsumme in Hardware</td><td>Firmware-Integrität, Protokolle — deutlich schneller als Software</td></tr>
+<tr><td><b>TRNG</b></td><td>Echter Zufallsgenerator</td><td>Schlüssel, Nonces, eindeutige Kennungen</td></tr>
+<tr><td><b>Eindeutige ID</b></td><td>96–128 Bit Seriennummer im Chip</td><td>Geräteidentifikation, MAC-Adresse ableiten</td></tr>
+<tr><td><b>PIO (nur RP2040/RP2350)</b></td><td>Kleine, frei programmierbare Zustandsautomaten an den Pins</td><td>Beliebige Protokolle in Hardware — der interessanteste Peripherieblock der letzten Jahre</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Referenzhandbuch des jeweiligen Controllers — Timer- und DMA-Kapitel sind gerätespezifisch und lassen sich nicht verallgemeinern.</li>
+    <li>STMicroelectronics AN4776 (Timer-Übersicht) und AN4031 (DMA-Nutzung).</li>
+    <li><a href="https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf">RP2350 Datasheet</a>, Kapitel PIO — mit Beispielprogrammen.</li>
+    <li><a href="https://interrupt.memfault.com/">Interrupt (Memfault)</a> — Artikel zu DMA, Cache-Kohärenz und Watchdog-Strategien.</li>
+  </ul>
+</div>

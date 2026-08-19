@@ -1,0 +1,92 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Gutes Layout entsteht beim Platzieren, nicht beim Routen.</b> Wer Bauteile nach Signalfluss und Funktionsgruppen anordnet, hat danach kaum Probleme. Wer erst alles hinlegt und dann verbindet, kämpft mit jeder Leiterbahn.</div>
+
+<h2>Reihenfolge beim Layout</h2>
+<div class="steps">
+  <div class="step"><h4>Mechanik zuerst</h4>Platinenumriss, Befestigungsbohrungen, Steckverbinder, Bedienelemente, Bauteile mit vorgegebener Position. Diese Dinge sind nicht verhandelbar — alles andere ordnet sich ihnen unter.</div>
+  <div class="step"><h4>Funktionsgruppen bilden</h4>Spannungsversorgung, Mikrocontroller mit seiner Beschaltung, Analogteil, Leistungsteil, Schnittstellen. Jede Gruppe bleibt räumlich zusammen.</div>
+  <div class="step"><h4>Kritische Bauteile platzieren</h4>Schaltregler mit ihrer heißen Schleife, Quarz beim Controller, Abblockkondensatoren an den Versorgungspins, Analog-Eingangsstufe nah am Wandler.</div>
+  <div class="step"><h4>Masseflächen anlegen</h4>Bevor geroutet wird, nicht danach. Dann sieht man sofort, wo Engstellen entstehen.</div>
+  <div class="step"><h4>Versorgung routen</h4>Breite Bahnen oder Flächen, kurze Wege, ausreichend Vias.</div>
+  <div class="step"><h4>Kritische Signale routen</h4>Takte, differentielle Paare, empfindliche Analogsignale, Rückkopplungspfade von Reglern.</div>
+  <div class="step"><h4>Rest routen</h4>Alles Unkritische zuletzt — notfalls mit Umwegen.</div>
+  <div class="step"><h4>Aufräumen und prüfen</h4>DRC fehlerfrei, Beschriftung lesbar, 3D-Ansicht kontrollieren, Gerber-Dateien im Betrachter durchgehen.</div>
+</div>
+
+<h2>Masseführung — die wichtigsten Regeln</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Eine durchgehende Massefläche</div><div class="cd">Keine Aufteilung in „Analogmasse“ und „Digitalmasse“, solange man nicht genau weiß, warum. Eine geschlitzte Massefläche zwingt Rückströme auf Umwege und macht aus dem Umweg eine Antenne — sie verursacht in der Praxis mehr Probleme, als sie löst.</div></div>
+  <div class="card"><div class="ct">Rückstrompfad mitdenken</div><div class="cd">Bei hohen Frequenzen fließt der Rückstrom direkt unter der Leiterbahn. Führt die Bahn über einen Schlitz in der Massefläche, entsteht eine große Schleife — das ist die häufigste Ursache für EMV-Probleme.</div></div>
+  <div class="card"><div class="ct">Lagenwechsel mit Massevia</div><div class="cd">Wechselt ein schnelles Signal die Lage, braucht sein Rückstrom ebenfalls einen Weg. Ein Massevia direkt daneben liefert ihn.</div></div>
+  <div class="card"><div class="ct">Sternpunkt bei Analogschaltungen</div><div class="cd">Für <b>niederfrequente</b> Präzisionsanalogtechnik: alle Massepunkte auf einen gemeinsamen Punkt führen, damit Lastströme keinen Spannungsabfall im Messpfad erzeugen. Das ist etwas anderes als eine getrennte Massefläche.</div></div>
+  <div class="card"><div class="ct">Leistungsmasse gezielt führen</div><div class="cd">Der Rückstrom einer H-Brücke oder eines Schaltreglers gehört nicht durch den Massebereich unter dem Analogeingang. Platzieren, nicht schlitzen.</div></div>
+  <div class="card"><div class="ct">Kupferflächen anbinden</div><div class="cd">Nicht angeschlossene Kupferinseln wirken als Antennen. Entweder sauber mit Masse verbinden oder entfernen.</div></div>
+</div>
+<div class="stop"><b>Der Klassiker: „Analog- und Digitalmasse trennen“.</b> Diese Empfehlung stammt aus einer Zeit mit langsamen Signalen und ohne durchgehende Masselagen. Bei heutigen Flankensteilheiten richtet ein Schlitz in der Massefläche fast immer mehr Schaden an als Nutzen. Die Ausnahme sind Wandler mit ausdrücklich getrennten AGND- und DGND-Pins <b>und</b> einer klaren Vorgabe im Datenblatt. Im Zweifel: eine Fläche, sorgfältig platzieren.</div>
+
+<h2>Abblockung</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Maßnahme</th><th>Detail</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>100 nF je Versorgungspin</b></td><td>Bauform 0402 oder 0603, direkt am Pin</td><td>Liefert den Strom für schnelle Schaltvorgänge, bevor die Versorgungsleitung reagieren kann</td></tr>
+<tr><td><b>Kurze Schleife</b></td><td>Kondensator, Pin und Massevia in wenigen Millimetern</td><td>Die Zuleitungsinduktivität bestimmt die Wirkung, nicht der Kapazitätswert. 5 mm Leitung sind 5 nH — bei 100 MHz sind das 3 Ω</td></tr>
+<tr><td><b>Via direkt am Kondensator</b></td><td>Nicht über eine lange Bahn zur Massefläche</td><td>Dasselbe Argument</td></tr>
+<tr><td><b>Zusätzlich 1–10 µF je Zweig</b></td><td>Bauform 0805 oder 1206</td><td>Deckt langsamere Lastwechsel ab</td></tr>
+<tr><td><b>Elko am Eingang</b></td><td>10–470 µF</td><td>Energiespeicher für die Versorgung insgesamt</td></tr>
+<tr><td><b>Nicht zu viele parallel</b></td><td>Zwei Werte reichen meist</td><td>Sehr viele unterschiedliche Werte parallel erzeugen Antiresonanzen — die vermeintliche Verbesserung wird zur Störstelle</td></tr>
+</tbody>
+</table></div>
+
+<h2>Wärme im Layout</h2>
+<div class="steps">
+  <div class="step"><h4>Kupferfläche als Kühlkörper</h4>Bei SMD-Leistungsbauteilen ist die angeschlossene Kupferfläche der Kühlkörper. Das Datenblatt gibt an, welche Fläche welchem Wärmewiderstand entspricht — der Unterschied zwischen minimalem Pad und 6 cm² Fläche kann Faktor drei betragen.</div>
+  <div class="step"><h4>Thermische Vias</h4>Unter Kühlpads mehrere Vias mit 0,3 mm im Raster von etwa 1 mm. Sie führen die Wärme auf die Rückseite, wo eine weitere Kupferfläche sitzt.</div>
+  <div class="step"><h4>Wärmequellen verteilen</h4>Nicht alle Leistungsbauteile in eine Ecke. Und temperaturempfindliche Bauteile — Referenzen, Quarze, Sensoren — davon fernhalten.</div>
+  <div class="step"><h4>Thermal Relief bei Lötpads</h4>Ein Pad, das direkt an einer großen Kupferfläche hängt, lässt sich kaum von Hand löten, weil die Wärme sofort abfließt. Für Handbestückung Wärmefallen (Speichen) verwenden, für maschinelle Bestückung direkte Anbindung.</div>
+  <div class="step"><h4>Temperatur messen</h4>Bei der ersten Inbetriebnahme mit Wärmebildkamera oder Kontaktthermometer. Ein Bauteil, das über 100 °C geht, altert erheblich schneller.</div>
+</div>
+
+<h2>Abstände und mechanische Vorgaben</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Element</th><th>Empfehlung</th></tr></thead>
+<tbody>
+<tr><td><b>Abstand Kupfer zum Platinenrand</b></td><td>mindestens 0,3 mm, besser 0,5 mm — beim Fräsen entstehen sonst Grate und Kurzschlüsse</td></tr>
+<tr><td><b>Befestigungsbohrungen</b></td><td>Kupferfreie Zone rundum, außer die Bohrung soll bewusst mit Masse verbunden sein. Platz für Schraubenkopf und Unterlegscheibe einplanen</td></tr>
+<tr><td><b>Nutzentrennung</b></td><td>Bei Ritzung (V-Cut) mindestens 0,5 mm Abstand von Bauteilen zur Trennlinie; bei Fräsen mit Haltestegen Bruchstellen einplanen</td></tr>
+<tr><td><b>Bauteilhöhe</b></td><td>Im 3D-Modell prüfen — vor allem bei Gehäusen mit knappem Innenmaß</td></tr>
+<tr><td><b>Bestückungsdruck</b></td><td>Nie auf Pads. Bezeichner so setzen, dass sie nach dem Bestücken lesbar bleiben</td></tr>
+<tr><td><b>Polaritätsmarkierung</b></td><td>Für Dioden, Elkos und ICs im Bestückungsdruck <b>und</b> möglichst auch in der Kupferlage — beim Nachbestücken Gold wert</td></tr>
+</tbody>
+</table></div>
+
+<h2>Prüfliste vor der Fertigung</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Elektrisch</h4><ul>
+    <li>DRC fehlerfrei, gegen die Fertigervorgaben</li>
+    <li>Alle Netze verbunden, keine ungerouteten Verbindungen</li>
+    <li>Abblockkondensatoren an jedem Versorgungspin, kurz angebunden</li>
+    <li>Leistungsbahnen breit genug</li>
+    <li>Massefläche durchgehend, keine unnötigen Schlitze</li>
+    <li>Prüfpunkte an allen Versorgungen</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Mechanisch und Fertigung</h4><ul>
+    <li>Umriss stimmt, Bohrungen an der richtigen Stelle</li>
+    <li>3D-Ansicht ohne Kollisionen</li>
+    <li>Bestückungsdruck lesbar, Pin 1 markiert</li>
+    <li>Projektname und Version auf der Platine</li>
+    <li>Gerber-Dateien im Betrachter kontrolliert</li>
+    <li>Stückliste vollständig mit Herstellerteilenummern</li>
+  </ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Henry W. Ott, <i>Electromagnetic Compatibility Engineering</i>, Kapitel 16 und 17 — Leiterplattenlayout und Masseführung.</li>
+    <li>Rick Hartley, <i>How to Achieve Proper Grounding</i> — Vortrag, frei verfügbar; die klarste Darstellung des Rückstrompfad-Arguments.</li>
+    <li>Texas Instruments, <i>PCB Design Guidelines For Reduced EMI</i> (SZZA009) und die Layoutabschnitte der Regler-Datenblätter.</li>
+    <li>IPC-2221B, Abschnitte zu Abständen und thermischen Anforderungen.</li>
+  </ul>
+</div>

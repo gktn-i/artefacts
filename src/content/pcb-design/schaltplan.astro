@@ -1,0 +1,99 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Schaltplan ist die eigentliche Dokumentation einer Baugruppe.</b> Ein Layout kann man neu machen, eine Firmware neu schreiben — aber wenn niemand mehr versteht, warum dieser Widerstand dort sitzt, ist die Schaltung verloren. Lesbarkeit ist deshalb keine Kosmetik.</div>
+
+<h2>Gliederung</h2>
+<div class="steps">
+  <div class="step"><h4>Signalfluss von links nach rechts</h4>Eingänge links, Verarbeitung in der Mitte, Ausgänge rechts. Versorgung oben, Masse unten. Diese Konvention macht jeden Plan sofort lesbar.</div>
+  <div class="step"><h4>Nach Funktionsgruppen aufteilen</h4>Bei mehr als etwa dreißig Bauteilen auf mehrere Blätter: Versorgung, Mikrocontroller, Analogteil, Schnittstellen, Leistungsteil. Ein Übersichtsblatt mit Hierarchie oben.</div>
+  <div class="step"><h4>Netzlabels statt langer Leitungen</h4>Ein Label <code>VBUS</code> oder <code>SPI_SCK</code> ist lesbarer als eine Leitung quer über das Blatt. Aber: Labels sparsam und eindeutig benennen, sonst entstehen unbeabsichtigte Verbindungen.</div>
+  <div class="step"><h4>Werte, Toleranzen und Bauformen eintragen</h4>Nicht nur „100n“, sondern „100 nF / 50 V / X7R / 0603“. Diese Angaben landen in der Stückliste und sparen später Rückfragen.</div>
+  <div class="step"><h4>Kommentare in den Plan</h4>Warum 4,7 kΩ und nicht 10 kΩ? Warum diese Diode? Ein Textfeld daneben ist die billigste Dokumentation, die es gibt.</div>
+</div>
+
+<h2>Bezeichner nach Norm</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Kürzel</th><th>Bauteil</th><th>Kürzel</th><th>Bauteil</th></tr></thead>
+<tbody>
+<tr><td><b>R</b></td><td>Widerstand</td><td><b>U</b></td><td>Integrierte Schaltung</td></tr>
+<tr><td><b>C</b></td><td>Kondensator</td><td><b>Q</b></td><td>Transistor</td></tr>
+<tr><td><b>L</b></td><td>Spule, Drossel</td><td><b>D</b></td><td>Diode, LED</td></tr>
+<tr><td><b>J</b></td><td>Steckverbinder</td><td><b>Y</b></td><td>Quarz, Oszillator</td></tr>
+<tr><td><b>SW</b></td><td>Schalter, Taster</td><td><b>F</b></td><td>Sicherung</td></tr>
+<tr><td><b>TP</b></td><td>Prüfpunkt</td><td><b>K</b></td><td>Relais</td></tr>
+<tr><td><b>FB</b></td><td>Ferritperle</td><td><b>MH</b></td><td>Bohrung, Befestigung</td></tr>
+</tbody>
+</table></div>
+<p class="note">Nummerierung nach Blatt und Position, nicht durcheinander: R101–R199 auf Blatt 1, R201–R299 auf Blatt 2. In KiCad erledigt das die automatische Annotation, wenn man sie blattweise einstellt.</p>
+
+<h2>Was in jeden Schaltplan gehört</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Abblockkondensatoren</div><div class="cd">100 nF an jedem Versorgungspin jedes ICs. Zusätzlich 1–10 µF je Versorgungszweig. Sie gehören in den Plan, auch wenn sie „selbstverständlich“ sind — was nicht gezeichnet ist, wird nicht bestückt.</div></div>
+  <div class="card"><div class="ct">Prüfpunkte</div><div class="cd">Jede Versorgung, Reset, wichtige Signale. Ein Pad mit 1 mm Durchmesser kostet nichts und spart bei der Fehlersuche viel.</div></div>
+  <div class="card"><div class="ct">Programmier- und Debug-Anschluss</div><div class="cd">SWD oder JTAG, mit Masse und Reset. Auch wenn ein Bootloader vorgesehen ist — wenn der nicht startet, ist SWD der einzige Weg hinein.</div></div>
+  <div class="card"><div class="ct">Reservebauteile</div><div class="cd">Nicht bestückte Plätze (DNP) für einen zusätzlichen Widerstand, eine Brücke, einen Kondensator. Damit lässt sich eine Fehlentscheidung ohne neue Platine korrigieren.</div></div>
+  <div class="card"><div class="ct">Verpolschutz und Sicherung</div><div class="cd">Am Eingang jeder Versorgung. Ein verpoltes Netzteil ist der häufigste Weg, eine fertige Baugruppe zu zerstören.</div></div>
+  <div class="card"><div class="ct">Status-LED</div><div class="cd">Eine LED an der Versorgung und eine am Controller. Beim ersten Einschalten die schnellste Rückmeldung überhaupt.</div></div>
+  <div class="card"><div class="ct">Pull-Widerstände</div><div class="cd">An Reset, an Boot-Pins, an I²C-Leitungen, an Enable-Eingängen. Ein offener Enable-Pin führt zu Verhalten, das nicht reproduzierbar ist.</div></div>
+  <div class="card"><div class="ct">Kennzeichnung</div><div class="cd">Projektname, Version, Datum im Schriftfeld — und als Kupfer- oder Bestückungsdrucktext auf der Platine selbst.</div></div>
+</div>
+
+<h2>Elektrische Regelprüfung sinnvoll nutzen</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Meldung</th><th>Bedeutung</th><th>Vorgehen</th></tr></thead>
+<tbody>
+<tr><td><b>Pin nicht verbunden</b></td><td>Ein Anschluss hängt in der Luft</td><td>Verbinden oder ausdrücklich als „nicht angeschlossen“ markieren — nie einfach ignorieren</td></tr>
+<tr><td><b>Zwei Ausgänge verbunden</b></td><td>Zwei Treiber am selben Netz</td><td>Ist meist ein echter Fehler. Bei Open-Drain den Pin-Typ im Symbol korrigieren</td></tr>
+<tr><td><b>Netz ohne treibenden Anschluss</b></td><td>Ein Netz hat nur Eingänge</td><td>Fehlende Versorgung oder vergessener Anschluss</td></tr>
+<tr><td><b>Versorgungsnetz nicht getrieben</b></td><td>Kein Stromversorgungssymbol am Netz</td><td>PWR_FLAG setzen, wo die Versorgung von außen kommt</td></tr>
+<tr><td><b>Doppelte Bezeichner</b></td><td>Zwei Bauteile heißen gleich</td><td>Neu annotieren</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die ERC auf null Meldungen bringen — auch die harmlosen.</b> Wer sich an eine Liste mit zwanzig „bekannten“ Warnungen gewöhnt, übersieht die einundzwanzigste, die ein echter Fehler ist. Bewusste Ausnahmen im Werkzeug als solche markieren, statt sie zu ignorieren.</div>
+
+<h2>Stückliste (BOM)</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Spalte</th><th>Inhalt</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Bezeichner</b></td><td>R101, C205, …</td><td>Zuordnung zur Platine</td></tr>
+<tr><td><b>Wert</b></td><td>10k, 100n, STM32G431CBT6</td><td>—</td></tr>
+<tr><td><b>Bauform</b></td><td>0603, SOT-23, LQFP-48</td><td>Muss zum Footprint passen</td></tr>
+<tr><td><b>Spezifikation</b></td><td>50 V, X7R, 1 %</td><td>Ohne diese Angabe wird das falsche Bauteil bestellt</td></tr>
+<tr><td><b>Hersteller und Teilenummer</b></td><td>MPN</td><td>Der einzige eindeutige Bezug. Wer nur „100n 0603“ schreibt, bekommt irgendetwas</td></tr>
+<tr><td><b>Bezugsquelle und Bestellnummer</b></td><td>Mouser, Digi-Key, LCSC</td><td>Für die Nachbestellung in zwei Jahren</td></tr>
+<tr><td><b>Nicht bestücken (DNP)</b></td><td>Kennzeichnung</td><td>Reserveplätze müssen als solche erkennbar sein</td></tr>
+</tbody>
+</table></div>
+<p class="note">Für Bestückungsdienstleister zusätzlich nötig: die <b>Positionsdatei</b> (Centroid/Pick-and-Place) mit Koordinaten, Drehung und Lage jedes Bauteils. KiCad erzeugt sie unter Datei → Fertigungsdaten. Die Drehwinkel folgen nicht immer der Erwartung des Fertigers — hier lohnt ein Blick in dessen Vorgaben.</p>
+
+<h2>Typische Schaltplanfehler</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Was regelmäßig passiert</h4><ul>
+    <li>Pin 1 im Footprint anders als im Datenblatt</li>
+    <li>Netzlabel verschrieben — zwei Netze, die verbunden sein sollten, sind es nicht</li>
+    <li>Kondensator mit zu geringer Spannungsfestigkeit</li>
+    <li>Enable- oder Reset-Pin offen gelassen</li>
+    <li>Massepin des ICs vergessen (bei Bausteinen mit Kühlpad unter dem Gehäuse üblich)</li>
+    <li>Spannungsregler ohne die im Datenblatt geforderten Kondensatoren</li>
+    <li>LED ohne Vorwiderstand</li>
+    <li>Kristall ohne Lastkondensatoren oder mit falschen Werten</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Was zuverlässig hilft</h4><ul>
+    <li>Vor dem Layout jeden Baustein noch einmal gegen sein Datenblatt durchgehen</li>
+    <li>Die Referenzschaltung aus dem Datenblatt als Ausgangspunkt nehmen</li>
+    <li>Den Plan ausdrucken und mit dem Stift durchgehen — Fehler fallen auf Papier anders auf</li>
+    <li>Jemanden drübersehen lassen, auch fachfremd: „Warum steht das hier?“ deckt viel auf</li>
+    <li>Prüfliste anlegen und nach jedem Projekt ergänzen</li>
+  </ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>IEC 60617 — Grafische Symbole für Schaltpläne; DIN EN 81346 für Betriebsmittelkennzeichnung.</li>
+    <li><a href="https://docs.kicad.org/">KiCad Schematic Editor Manual</a> — ERC, Hierarchien, Stücklistenerzeugung.</li>
+    <li>Datenblätter mit Referenzschaltungen — bei Spannungsreglern und Funkmodulen sind sie verbindlich, nicht optional.</li>
+    <li>Ergänzend zum Lesen von Schaltplänen: <a href="elektronik-grundlagen.html#schaltplan">Elektronik 101 → Schaltplan lesen</a>.</li>
+  </ul>
+</div>

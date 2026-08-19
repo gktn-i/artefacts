@@ -1,0 +1,134 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Formeln, die man im Hub tatsächlich braucht — nach Fachgebiet sortiert.</b> Jede mit Einheiten und einer kurzen Einordnung, wofür sie gut ist. Die interaktiven Rechner liegen jeweils im zugehörigen Fachabschnitt.</div>
+
+<h2>Gleichstrom</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">Ohmsches Gesetz</span><span class="fe">U = R · I</span><span class="fx">Das Fundament. U in V, I in A, R in Ω</span></div>
+  <div class="frow"><span class="fn">Leistung</span><span class="fe">P = U·I = I²·R = U²/R</span><span class="fx">Bestimmt die Erwärmung eines Bauteils</span></div>
+  <div class="frow"><span class="fn">Energie</span><span class="fe">W = P · t</span><span class="fx">1 Wh = 3600 J</span></div>
+  <div class="frow"><span class="fn">Reihenschaltung R</span><span class="fe">R = R₁ + R₂ + …</span><span class="fx">Immer größer als der größte Einzelwert</span></div>
+  <div class="frow"><span class="fn">Parallelschaltung R</span><span class="fe">1/R = 1/R₁ + 1/R₂ + …</span><span class="fx">Zwei Werte: R = R₁·R₂/(R₁+R₂)</span></div>
+  <div class="frow"><span class="fn">Spannungsteiler</span><span class="fe">U_aus = U_ein · R₂/(R₁+R₂)</span><span class="fx">Nur unbelastet exakt</span></div>
+  <div class="frow"><span class="fn">Stromteiler</span><span class="fe">I₁ = I_ges · R₂/(R₁+R₂)</span><span class="fx">Durch den kleineren Widerstand fließt mehr</span></div>
+  <div class="frow"><span class="fn">Innenwiderstand</span><span class="fe">R_i = (U₀ − U_last)/I_last</span><span class="fx">Aus zwei Messungen bestimmbar</span></div>
+  <div class="frow"><span class="fn">Leiterwiderstand</span><span class="fe">R = ρ · l/A</span><span class="fx">ρ_Cu = 0,0175 Ω·mm²/m bei 20 °C</span></div>
+  <div class="frow"><span class="fn">Temperaturgang</span><span class="fe">R(ϑ) = R₂₀ · [1 + α·(ϑ−20 °C)]</span><span class="fx">α_Cu ≈ 0,0039 /K</span></div>
+  <div class="frow"><span class="fn">Wirkungsgrad</span><span class="fe">η = P_ab / P_zu</span><span class="fx">Verlust = P_zu · (1 − η)</span></div>
+</div>
+
+<h2>Kondensator, Spule, Zeitverhalten</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">Kapazität</span><span class="fe">C = Q/U = ε₀·ε_r·A/d</span><span class="fx">Plattenkondensator</span></div>
+  <div class="frow"><span class="fn">Kondensatorstrom</span><span class="fe">i = C · du/dt</span><span class="fx">Spannung kann nicht springen</span></div>
+  <div class="frow"><span class="fn">Energie im C</span><span class="fe">W = ½·C·U²</span><span class="fx">—</span></div>
+  <div class="frow"><span class="fn">Spulenspannung</span><span class="fe">u = L · di/dt</span><span class="fx">Strom kann nicht springen — Freilaufdiode!</span></div>
+  <div class="frow"><span class="fn">Energie in L</span><span class="fe">W = ½·L·I²</span><span class="fx">—</span></div>
+  <div class="frow"><span class="fn">RC-Zeitkonstante</span><span class="fe">τ = R·C</span><span class="fx">63 % nach τ, 99 % nach 5τ</span></div>
+  <div class="frow"><span class="fn">RL-Zeitkonstante</span><span class="fe">τ = L/R</span><span class="fx">—</span></div>
+  <div class="frow"><span class="fn">Ladekurve</span><span class="fe">u(t) = U₀·(1 − e^(−t/τ))</span><span class="fx">Entladen: U₀·e^(−t/τ)</span></div>
+  <div class="frow"><span class="fn">Grenzfrequenz RC</span><span class="fe">f_g = 1/(2π·R·C)</span><span class="fx">−3 dB, 45° Phasendrehung</span></div>
+  <div class="frow"><span class="fn">Resonanzfrequenz</span><span class="fe">f₀ = 1/(2π·√(L·C))</span><span class="fx">Reihen- und Parallelschwingkreis</span></div>
+  <div class="frow"><span class="fn">Dämpfungsgrad RLC</span><span class="fe">D = (R/2)·√(C/L)</span><span class="fx">D = 1 ist der aperiodische Grenzfall</span></div>
+  <div class="frow"><span class="fn">Güte</span><span class="fe">Q = 1/(2D) = f₀/B</span><span class="fx">—</span></div>
+</div>
+
+<h2>Wechselstrom</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">Effektivwert (Sinus)</span><span class="fe">U_eff = û/√2</span><span class="fx">230 V entsprechen 325 V Scheitelwert</span></div>
+  <div class="frow"><span class="fn">Kreisfrequenz</span><span class="fe">ω = 2π·f</span><span class="fx">—</span></div>
+  <div class="frow"><span class="fn">Blindwiderstand C</span><span class="fe">X_C = 1/(ω·C)</span><span class="fx">Strom eilt 90° vor</span></div>
+  <div class="frow"><span class="fn">Blindwiderstand L</span><span class="fe">X_L = ω·L</span><span class="fx">Strom eilt 90° nach</span></div>
+  <div class="frow"><span class="fn">Impedanz (Reihe)</span><span class="fe">|Z| = √(R² + (X_L − X_C)²)</span><span class="fx">φ = arctan((X_L − X_C)/R)</span></div>
+  <div class="frow"><span class="fn">Wirkleistung</span><span class="fe">P = U·I·cos φ</span><span class="fx">In Watt</span></div>
+  <div class="frow"><span class="fn">Blindleistung</span><span class="fe">Q = U·I·sin φ</span><span class="fx">In var</span></div>
+  <div class="frow"><span class="fn">Scheinleistung</span><span class="fe">S = U·I = √(P² + Q²)</span><span class="fx">In VA — danach werden Leitungen ausgelegt</span></div>
+  <div class="frow"><span class="fn">Drehstromleistung</span><span class="fe">P = √3 · U_Leiter · I_Leiter · cos φ</span><span class="fx">Gilt für Stern und Dreieck</span></div>
+  <div class="frow"><span class="fn">Trafo</span><span class="fe">U₁/U₂ = N₁/N₂ = ü, Z₁ = ü²·Z₂</span><span class="fx">Impedanzen transformieren quadratisch</span></div>
+  <div class="frow"><span class="fn">Dezibel Spannung</span><span class="fe">a = 20·log₁₀(U₂/U₁)</span><span class="fx">6 dB = Faktor 2</span></div>
+  <div class="frow"><span class="fn">Dezibel Leistung</span><span class="fe">a = 10·log₁₀(P₂/P₁)</span><span class="fx">3 dB = Faktor 2</span></div>
+</div>
+
+<h2>Halbleiter und Schaltungstechnik</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">LED-Vorwiderstand</span><span class="fe">R = (U_V − U_F)/I_F</span><span class="fx">Danach auf E12-Wert aufrunden</span></div>
+  <div class="frow"><span class="fn">Diodengleichung</span><span class="fe">I = I_S·(e^(U/(n·U_T)) − 1)</span><span class="fx">U_T ≈ 25,85 mV bei 300 K</span></div>
+  <div class="frow"><span class="fn">Basisvorwiderstand</span><span class="fe">R_B = (U_st − 0,7 V)·B_min/(I_C·ü)</span><span class="fx">Übersteuerungsfaktor ü = 3…10</span></div>
+  <div class="frow"><span class="fn">MOSFET-Leitverlust</span><span class="fe">P = I²·R_DS(on)·k_T</span><span class="fx">k_T ≈ 1,5 bei 100 °C</span></div>
+  <div class="frow"><span class="fn">MOSFET-Schaltverlust</span><span class="fe">P ≈ ½·U·I·(t_on + t_off)·f</span><span class="fx">Dominiert ab einigen 10 kHz</span></div>
+  <div class="frow"><span class="fn">OPV nicht invertierend</span><span class="fe">v = 1 + R₂/R₁</span><span class="fx">Verstärkung nie unter 1</span></div>
+  <div class="frow"><span class="fn">OPV invertierend</span><span class="fe">v = −R₂/R₁</span><span class="fx">Eingangswiderstand = R₁</span></div>
+  <div class="frow"><span class="fn">Bandbreite</span><span class="fe">f_max = GBW / v</span><span class="fx">Verstärkungs-Bandbreite-Produkt</span></div>
+  <div class="frow"><span class="fn">Slew-Rate-Grenze</span><span class="fe">f_max = SR/(2π·û)</span><span class="fx">Begrenzt große Signale unabhängig vom GBW</span></div>
+  <div class="frow"><span class="fn">Thermisches Rauschen</span><span class="fe">u_n = √(4·k·T·R·B)</span><span class="fx">1 kΩ ≈ 4 nV/√Hz</span></div>
+  <div class="frow"><span class="fn">Buck-Tastverhältnis</span><span class="fe">D ≈ U_aus/U_ein</span><span class="fx">Boost: D = 1 − U_ein/U_aus</span></div>
+  <div class="frow"><span class="fn">Drosselwert Buck</span><span class="fe">L = U_aus·(1−D)/(ΔI_L·f)</span><span class="fx">ΔI_L = 20…40 % von I_aus</span></div>
+  <div class="frow"><span class="fn">Wärmewiderstand</span><span class="fe">ΔT = P · R_th</span><span class="fx">R_th in K/W, addiert sich in Reihe</span></div>
+</div>
+
+<h2>Digital und Information</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">ADC-Auflösung</span><span class="fe">1 LSB = U_ref/2ⁿ</span><span class="fx">n = Bitzahl</span></div>
+  <div class="frow"><span class="fn">Ideales SNR</span><span class="fe">SNR = 6,02·n + 1,76 dB</span><span class="fx">Nur Quantisierungsrauschen</span></div>
+  <div class="frow"><span class="fn">ENOB</span><span class="fe">ENOB = (SINAD − 1,76)/6,02</span><span class="fx">Die brauchbare Zahl aus dem Datenblatt</span></div>
+  <div class="frow"><span class="fn">Abtasttheorem</span><span class="fe">f_s &gt; 2·f_max</span><span class="fx">Praktisch 5…10-fach</span></div>
+  <div class="frow"><span class="fn">FFT-Auflösung</span><span class="fe">Δf = f_s/N</span><span class="fx">Feinere Auflösung nur durch längere Messdauer</span></div>
+  <div class="frow"><span class="fn">Oversampling-Gewinn</span><span class="fe">+1 Bit je Vervierfachung von f_s</span><span class="fx">Bei unkorreliertem Rauschen</span></div>
+  <div class="frow"><span class="fn">Entropie</span><span class="fe">H = −Σ p·log₂ p</span><span class="fx">Untere Grenze verlustfreier Kompression</span></div>
+  <div class="frow"><span class="fn">Kanalkapazität</span><span class="fe">C = B · log₂(1 + S/N)</span><span class="fx">Shannon-Hartley</span></div>
+  <div class="frow"><span class="fn">Hamming-Prüfbits</span><span class="fe">2^k ≥ n + k + 1</span><span class="fx">k Prüfbits für n Datenbits</span></div>
+  <div class="frow"><span class="fn">Setup-Bedingung</span><span class="fe">t_co + t_logik + t_su + t_skew ≤ T</span><span class="fx">Bestimmt die maximale Taktfrequenz</span></div>
+  <div class="frow"><span class="fn">Dynamische Verlustleistung</span><span class="fe">P = C·U²·f</span><span class="fx">Deshalb sinkt der Verbrauch quadratisch mit U</span></div>
+  <div class="frow"><span class="fn">Kritische Leitungslänge</span><span class="fe">l ≈ t_r·v/6</span><span class="fx">v ≈ 15…20 cm/ns auf FR4</span></div>
+</div>
+
+<h2>Regelungstechnik</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">PID (Standardform)</span><span class="fe">u = K_p·[e + (1/T_n)∫e dt + T_v·ė]</span><span class="fx">K_i = K_p/T_n, K_d = K_p·T_v</span></div>
+  <div class="frow"><span class="fn">Geschlossener Kreis</span><span class="fe">G_w = G₀/(1 + G₀)</span><span class="fx">G₀ = Regler × Strecke</span></div>
+  <div class="frow"><span class="fn">Bleibende Abweichung (P-Regler)</span><span class="fe">e(∞) = 1/(1 + G₀(0))</span><span class="fx">Wird mit I-Anteil null</span></div>
+  <div class="frow"><span class="fn">Streckenverstärkung</span><span class="fe">K_S = Δy/Δu</span><span class="fx">Aus dem Sprungversuch</span></div>
+  <div class="frow"><span class="fn">Regelbarkeit</span><span class="fe">T_g/T_u</span><span class="fx">&gt; 10 gut, &lt; 3 schwierig</span></div>
+  <div class="frow"><span class="fn">Ziegler-Nichols (Schwingung), PID</span><span class="fe">K_p = 0,6·K_krit · T_n = 0,5·T_krit · T_v = 0,12·T_krit</span><span class="fx">Schnell, mit Überschwingen</span></div>
+  <div class="frow"><span class="fn">Lambda-Tuning (PI)</span><span class="fe">K_p = T/(K_S·(λ + T_t)), T_n = T</span><span class="fx">λ steuert Robustheit</span></div>
+  <div class="frow"><span class="fn">Phasenreserve und Dämpfung</span><span class="fe">D ≈ φ_R/100°</span><span class="fx">Faustregel; 60° ≈ D 0,6</span></div>
+  <div class="frow"><span class="fn">PT2-Kennwerte</span><span class="fe">ω₀ = 1/T, Überschwingen aus D</span><span class="fx">D = 0,707 → 4,3 % Überschwingen</span></div>
+  <div class="frow"><span class="fn">Ausregelzeit (2 %)</span><span class="fe">t_a ≈ 4/(D·ω₀)</span><span class="fx">Näherung für PT2</span></div>
+  <div class="frow"><span class="fn">Abtastzeit wählen</span><span class="fe">T_a ≈ T₉₅/10 … T₉₅/20</span><span class="fx">Abtastung wirkt wie T_a/2 Totzeit</span></div>
+  <div class="frow"><span class="fn">Phasenverlust durch Totzeit</span><span class="fe">φ = −ω·T_t (rad)</span><span class="fx">Der Hauptgrund für Instabilität</span></div>
+</div>
+
+<h2>Antriebe und Mechanik</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">Drehmoment</span><span class="fe">M = F · r</span><span class="fx">In Nm</span></div>
+  <div class="frow"><span class="fn">Mechanische Leistung</span><span class="fe">P = M · ω = M · 2π·n/60</span><span class="fx">n in min⁻¹</span></div>
+  <div class="frow"><span class="fn">Beschleunigungsmoment</span><span class="fe">M = J · α</span><span class="fx">α in rad/s²</span></div>
+  <div class="frow"><span class="fn">Trägheit Vollzylinder</span><span class="fe">J = ½·m·r²</span><span class="fx">—</span></div>
+  <div class="frow"><span class="fn">Trägheit über Getriebe</span><span class="fe">J_motor = J_last/i²</span><span class="fx">Quadratisch — der Grund für Getriebe</span></div>
+  <div class="frow"><span class="fn">Linearmasse an Spindel</span><span class="fe">J = m·(p/2π)²</span><span class="fx">p = Steigung in m/U</span></div>
+  <div class="frow"><span class="fn">Getriebe</span><span class="fe">M_ab = M_an · i · η, n_ab = n_an/i</span><span class="fx">η bei Schnecke deutlich unter 1</span></div>
+  <div class="frow"><span class="fn">Lorentzkraft</span><span class="fe">F = B · I · l</span><span class="fx">Der Motor in einer Gleichung</span></div>
+  <div class="frow"><span class="fn">Motorkonstanten</span><span class="fe">M = k_M·I, U_ind = k_E·ω</span><span class="fx">k_M und k_E sind gekoppelt</span></div>
+  <div class="frow"><span class="fn">Zylinderkraft</span><span class="fe">F = p · π·d²/4</span><span class="fx">Abzüglich 5–15 % Reibung</span></div>
+  <div class="frow"><span class="fn">Eigenfrequenz</span><span class="fe">f = (1/2π)·√(c/m)</span><span class="fx">Begrenzt die Reglerbandbreite</span></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Interaktive Rechner in diesem Hub</div>
+  <ul>
+    <li>Ohm und Leistung, Spannungsteiler: <a href="elektrotechnik.html#gleichstrom">Elektrotechnik → Gleichstromkreis</a></li>
+    <li>Zeitkonstante und Grenzfrequenz: <a href="elektrotechnik.html#transient">Schaltvorgänge</a> · Impedanz: <a href="elektrotechnik.html#wechselstrom">Wechselstrom</a></li>
+    <li>Einheiten-Vorsätze: <a href="elektrotechnik.html#groessen">Größen &amp; Einheiten</a> · Zahlensysteme: <a href="digitaltechnik.html#zahlen">Digitaltechnik</a></li>
+    <li>ADC: <a href="analogtechnik.html#wandler">ADC &amp; DAC</a> · Leiterbahnbreite: <a href="leiterplatte-kicad.html#leiterbahn">Leiterbahnbreite</a></li>
+    <li>PID-Einstellregeln: <a href="regelungstechnik.html#einstellregeln">Einstellregeln</a> · Antrieb: <a href="sensorik-aktorik.html#auslegung">Antriebsauslegung</a></li>
+    <li>Batterielaufzeit: <a href="embedded-firmware.html#strom">Stromsparen</a> · Regelkreis-Simulation: <a href="regelungstechnik.html#pid">PID</a></li>
+  </ul>
+</div>

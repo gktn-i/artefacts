@@ -1,0 +1,92 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Netzwerke sind geschichtet, damit jede Ebene für sich austauschbar bleibt.</b> Ein HTTP-Aufruf funktioniert über Kupfer, Glasfaser und Funk, ohne davon zu wissen. Wer Netzwerkprobleme sucht, arbeitet die Schichten von unten nach oben ab — das erspart die meiste Ratearbeit.</div>
+
+<h2>Das Schichtenmodell</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>OSI</th><th>TCP/IP</th><th>Aufgabe</th><th>Beispiele</th><th>Adressierung</th></tr></thead>
+<tbody>
+<tr><td><b>7 Anwendung</b><br />6 Darstellung<br />5 Sitzung</td><td>Anwendung</td><td>Was inhaltlich übertragen wird</td><td>HTTP, MQTT, Modbus TCP, DNS, TLS</td><td>URL, Topic</td></tr>
+<tr><td><b>4 Transport</b></td><td>Transport</td><td>Ende-zu-Ende, Zuverlässigkeit, Multiplexen</td><td>TCP, UDP, QUIC</td><td>Portnummer</td></tr>
+<tr><td><b>3 Vermittlung</b></td><td>Internet</td><td>Wegewahl über Netzgrenzen</td><td>IPv4, IPv6, ICMP</td><td>IP-Adresse</td></tr>
+<tr><td><b>2 Sicherung</b></td><td>Netzzugang</td><td>Rahmen, Fehlererkennung, Zugriff auf das Medium</td><td>Ethernet, WLAN, CAN, PPP</td><td>MAC-Adresse</td></tr>
+<tr><td><b>1 Bitübertragung</b></td><td>Netzzugang</td><td>Pegel, Codierung, Stecker</td><td>100BASE-TX, 10BASE-T1S, Funkmodulation</td><td>—</td></tr>
+</tbody>
+</table></div>
+
+<h2>TCP oder UDP</h2>
+<div class="gb">
+  <div class="gb-col"><h4>TCP</h4><ul>
+    <li>Verbindungsorientiert, Reihenfolge garantiert, Wiederholung bei Verlust</li>
+    <li>Flusskontrolle und Staukontrolle</li>
+    <li>Handshake kostet eine Rundlaufzeit vor dem ersten Byte</li>
+    <li>Verzögerung schwankt: Ein verlorenes Paket blockiert alles dahinter (Head-of-Line-Blocking)</li>
+    <li>Für Dateiübertragung, Weboberflächen, MQTT, Modbus TCP</li>
+  </ul></div>
+  <div class="gb-col"><h4>UDP</h4><ul>
+    <li>Verbindungslos, keine Garantie für Ankunft oder Reihenfolge</li>
+    <li>Minimaler Overhead, keine Wartezeit vor dem Senden</li>
+    <li>Anwendung muss selbst entscheiden, was bei Verlust passiert</li>
+    <li>Für Sensordaten mit hoher Rate, Zeitsynchronisation, Sprach- und Videoübertragung, Rundsendungen (Discovery)</li>
+  </ul></div>
+</div>
+<p class="note"><b>Die Faustregel:</b> Wenn ein veralteter Wert schlimmer ist als ein fehlender, nimm UDP. Ein Sensor, der zehnmal pro Sekunde sendet, braucht keine Wiederholung — der nächste Wert ist ohnehin gleich da. Wenn dagegen jedes Byte ankommen muss und Verzögerung zweitrangig ist, nimm TCP.</p>
+
+<h2>Adressen und Ports</h2>
+<div class="flist">
+  <div class="frow hd"><span>Begriff</span><span>Beispiel</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">MAC-Adresse</span><span class="fe">B8:27:EB:1A:2B:3C</span><span class="fx">Fest je Netzwerkschnittstelle, gilt nur im lokalen Segment</span></div>
+  <div class="frow"><span class="fn">IPv4</span><span class="fe">192.168.1.42/24</span><span class="fx">32 Bit; /24 heißt: die ersten 24 Bit sind das Netz</span></div>
+  <div class="frow"><span class="fn">IPv6</span><span class="fe">fd00::1/64</span><span class="fx">128 Bit; fd00::/8 sind lokale Adressen, fe80::/10 Link-Local</span></div>
+  <div class="frow"><span class="fn">Standardgateway</span><span class="fe">192.168.1.1</span><span class="fx">Wohin Pakete gehen, deren Ziel nicht im eigenen Netz liegt</span></div>
+  <div class="frow"><span class="fn">Port</span><span class="fe">443, 1883, 502</span><span class="fx">HTTPS, MQTT, Modbus TCP — identifiziert den Dienst auf dem Host</span></div>
+  <div class="frow"><span class="fn">DNS</span><span class="fe">sensor.local</span><span class="fx">Namensauflösung; mDNS/Bonjour funktioniert ohne Server im lokalen Netz</span></div>
+</div>
+<div class="tip"><b>Für Geräte im eigenen Netz:</b> mDNS (<code>geraet.local</code>) erspart feste IP-Adressen und DHCP-Reservierungen. ESP32 und Raspberry Pi unterstützen das von Haus aus. Für dauerhafte Installationen ist eine DHCP-Reservierung nach MAC-Adresse trotzdem robuster — mDNS scheitert in manchen Netzen an der Multicast-Filterung.</div>
+
+<h2>Ethernet in der Praxis</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Variante</th><th>Rate</th><th>Medium</th><th>Reichweite</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>10BASE-T1S</b></td><td>10 Mbit/s</td><td>ein verdrilltes Paar, Multidrop</td><td>25 m, bis 8 Knoten am Strang</td><td>Fahrzeug- und Sensornetze; ersetzt zunehmend CAN in kostensensiblen Zweigen</td></tr>
+<tr><td><b>10BASE-T1L</b></td><td>10 Mbit/s</td><td>ein Paar</td><td>bis 1000 m</td><td>Prozessindustrie (Ethernet-APL), auch im Ex-Bereich</td></tr>
+<tr><td><b>100BASE-TX</b></td><td>100 Mbit/s</td><td>2 Paare Cat5</td><td>100 m</td><td>Der Standard in der Industrieautomation</td></tr>
+<tr><td><b>1000BASE-T</b></td><td>1 Gbit/s</td><td>4 Paare Cat5e</td><td>100 m</td><td>Bürobereich, Kameras, Server</td></tr>
+<tr><td><b>PoE (802.3af/at/bt)</b></td><td>—</td><td>Strom über dasselbe Kabel</td><td>bis 90 W bei bt</td><td>Kameras, Access Points, Sensoren</td></tr>
+</tbody>
+</table></div>
+<p><b>TSN (Time-Sensitive Networking)</b> ergänzt Ethernet um Zeitsynchronisation (IEEE 802.1AS), Zeitschlitze für garantierte Übertragung (802.1Qbv) und Redundanz. Damit werden auf demselben Kabel harte Echtzeit und normaler Datenverkehr möglich — der Grund, warum PROFINET, EtherCAT und OPC UA zunehmend auf TSN aufsetzen. Mehr dazu in <a href="automatisierung-sps.html#feldbus">Automatisierung → Feldbusse</a>.</p>
+
+<h2>Anwendungsprotokolle für Geräte</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Protokoll</th><th>Modell</th><th>Transport</th><th>Stärke</th><th>Schwäche</th></tr></thead>
+<tbody>
+<tr><td><b>MQTT</b></td><td>Publish/Subscribe über Broker</td><td>TCP, meist mit TLS</td><td>Sehr schlank, gut für viele Geräte, Offline-Pufferung über QoS</td><td>Broker ist ein zentraler Ausfallpunkt</td></tr>
+<tr><td><b>HTTP/REST</b></td><td>Anfrage/Antwort</td><td>TCP</td><td>Überall unterstützt, leicht zu testen</td><td>Viel Overhead, kein Push ohne Zusatztechnik</td></tr>
+<tr><td><b>CoAP</b></td><td>REST-artig</td><td>UDP</td><td>Sehr sparsam, für batteriebetriebene Knoten</td><td>Weniger verbreitet</td></tr>
+<tr><td><b>Modbus TCP</b></td><td>Register lesen/schreiben</td><td>TCP, Port 502</td><td>Extrem einfach, in der Industrie allgegenwärtig</td><td>Keine Sicherheit, keine Selbstbeschreibung</td></tr>
+<tr><td><b>OPC UA</b></td><td>Informationsmodell mit Typen</td><td>TCP oder MQTT</td><td>Selbstbeschreibend, verschlüsselt, herstellerübergreifend</td><td>Anspruchsvoll, für kleine Controller schwer</td></tr>
+<tr><td><b>Matter</b></td><td>Gerätetypen mit Clustern</td><td>IPv6 über Thread, WLAN, Ethernet</td><td>Herstellerübergreifende Hausautomation, lokal ohne Cloud</td><td>Zertifizierung nötig; aktuelle Spezifikation 1.6 (Juni 2026)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Fehlersuche von unten nach oben</h2>
+<div class="steps">
+  <div class="step"><h4>Physik</h4>Link-LED an? Kabel getauscht? Bei Industrienetzen: Abschlusswiderstände vorhanden? Ein Kabeltester spart Stunden.</div>
+  <div class="step"><h4>Schicht 2</h4>Ist die MAC-Adresse im Switch sichtbar? Bei WLAN: Verbindung hergestellt, aber keine IP? Dann liegt es an DHCP oder Authentifizierung.</div>
+  <div class="step"><h4>Schicht 3</h4><code>ping</code> zur Gegenstelle, dann zum Gateway, dann nach draußen. Passen IP-Adresse, Maske und Gateway zusammen? Zwei Geräte mit derselben Adresse erzeugen sporadische Ausfälle.</div>
+  <div class="step"><h4>Schicht 4</h4>Ist der Port offen? <code>nc -vz host port</code> oder <code>ss -tlnp</code> auf dem Zielsystem. Häufigste Ursache: eine Firewall oder ein Dienst, der nur an 127.0.0.1 lauscht.</div>
+  <div class="step"><h4>Anwendung</h4>Mit <a href="https://www.wireshark.org/">Wireshark</a> mitschneiden. Die meisten „unerklärlichen“ Netzwerkprobleme sind nach fünf Minuten Mitschnitt erklärt — sichtbare Neuübertragungen, ein abgelehnter Handshake, ein abgelaufenes Zertifikat.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Tanenbaum &amp; Wetherall, <i>Computernetzwerke</i>, Pearson.</li>
+    <li>Kurose &amp; Ross, <i>Computer Networking: A Top-Down Approach</i>.</li>
+    <li><a href="https://beej.us/guide/bgnet/">Beej's Guide to Network Programming</a>, kostenlos.</li>
+    <li>RFC 793 / RFC 9293 (TCP), RFC 768 (UDP), RFC 8200 (IPv6), MQTT 5.0 (OASIS).</li>
+    <li>IEEE 802.3 für Ethernet-Varianten, IEEE 802.1 für TSN.</li>
+  </ul>
+</div>

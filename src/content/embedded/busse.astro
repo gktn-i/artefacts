@@ -1,0 +1,68 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Vier Busse decken fast alles ab:</b> I²C für viele langsame Sensoren an zwei Leitungen, SPI für hohe Datenraten auf kurzer Strecke, UART für Punkt-zu-Punkt und Debug-Ausgaben, CAN für störfeste Verbindungen über mehrere Meter. Die Wahl folgt aus Distanz, Anzahl der Teilnehmer und Datenrate.</div>
+
+<h2>Der Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Bus</th><th>Leitungen</th><th>Teilnehmer</th><th>Rate</th><th>Distanz</th><th>Stärke</th><th>Schwäche</th></tr></thead>
+<tbody>
+<tr><td><b>I²C</b></td><td>2 (SDA, SCL) + GND</td><td>viele, per Adresse</td><td>100 k / 400 k / 1 M / 3,4 M</td><td>&lt; 1 m</td><td>Wenige Pins, Adressierung eingebaut</td><td>Empfindlich, blockierbar, Adresskonflikte</td></tr>
+<tr><td><b>SPI</b></td><td>4 (MOSI, MISO, SCK, CS)</td><td>je Teilnehmer ein CS</td><td>bis 100 MHz</td><td>&lt; 30 cm</td><td>Sehr schnell, einfach, Vollduplex</td><td>Viele Pins, keine Rückmeldung, keine Adressierung</td></tr>
+<tr><td><b>UART</b></td><td>2 (TX, RX)</td><td>genau 2</td><td>bis ~12 Mbit/s</td><td>&lt; 5 m (mit RS-485 bis 1200 m)</td><td>Denkbar einfach, überall vorhanden</td><td>Nur Punkt zu Punkt, Baudraten müssen passen</td></tr>
+<tr><td><b>CAN / CAN FD</b></td><td>2 differentiell + GND</td><td>bis 110</td><td>1 Mbit/s (FD bis 8 Mbit/s Daten)</td><td>bis 40 m bei 1 Mbit/s</td><td>Sehr störfest, Arbitrierung ohne Kollisionsverlust, Fehlererkennung eingebaut</td><td>Transceiver nötig, Abschlusswiderstände, mehr Einarbeitung</td></tr>
+<tr><td><b>RS-485</b></td><td>2 differentiell</td><td>bis 32 (mehr mit modernen Treibern)</td><td>bis 10 Mbit/s</td><td>bis 1200 m</td><td>Sehr robust, große Reichweite</td><td>Halbduplex, Richtungsumschaltung, Protokoll (meist Modbus) selbst</td></tr>
+<tr><td><b>USB</b></td><td>4 (D+, D−, V_BUS, GND)</td><td>Host zu Geräten</td><td>12 M / 480 M / 5 G</td><td>&lt; 5 m</td><td>Stromversorgung inklusive, am PC überall</td><td>Aufwendiger Protokollstapel, Host nötig</td></tr>
+<tr><td><b>1-Wire</b></td><td>1 (+ GND)</td><td>viele</td><td>15 kbit/s</td><td>bis 100 m</td><td>Minimale Verdrahtung, Speisung über die Datenleitung möglich</td><td>Sehr langsam, striktes Timing</td></tr>
+</tbody>
+</table></div>
+
+<h2>I²C — worauf es ankommt</h2>
+<div class="steps">
+  <div class="step"><h4>Pull-ups richtig dimensionieren</h4>Beide Leitungen brauchen einen Pull-up nach V_CC — <b>einmal</b> im ganzen Bus, nicht je Modul. 4,7 kΩ bei 100 kHz, 2,2 kΩ oder weniger bei 400 kHz. Zu viele Module mit eigenen Pull-ups ergeben zusammen einen zu kleinen Widerstand und überlasten die Ausgänge.</div>
+  <div class="step"><h4>Adresskonflikte prüfen</h4>7-Bit-Adressen, oft nur teilweise einstellbar. Zwei gleiche Sensoren am selben Bus brauchen eine Adressbrücke oder einen I²C-Multiplexer (TCA9548A). Ein Scan-Programm, das alle 128 Adressen durchprobiert, gehört in jedes Projekt.</div>
+  <div class="step"><h4>Kabellänge begrenzen</h4>Die Buskapazität darf 400 pF nicht überschreiten. Bei längeren Strecken wird die Flanke zu flach — dann hilft ein Buspuffer (P82B715) oder ein Wechsel auf einen anderen Bus.</div>
+  <div class="step"><h4>Blockierten Bus lösen</h4>Wenn ein Teilnehmer mitten in einer Übertragung zurückgesetzt wird, kann er SDA dauerhaft auf Low halten. Standardlösung: neun Takte auf SCL erzeugen und dann eine Stopp-Bedingung senden. Diese Routine gehört in die Initialisierung.</div>
+  <div class="step"><h4>Pegel beachten</h4>3,3-V- und 5-V-Geräte am selben Bus brauchen einen Pegelwandler mit MOSFET (BSS138-Schaltung) — normale Pufferbausteine funktionieren bei Open-Drain nicht.</div>
+</div>
+
+<h2>SPI — worauf es ankommt</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Punkt</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td><b>Modus (CPOL/CPHA)</b></td><td>Vier Kombinationen. Steht im Datenblatt des Bausteins; falscher Modus liefert scheinbar zufällige Daten. Modus 0 ist am verbreitetsten</td></tr>
+<tr><td><b>Bitreihenfolge</b></td><td>Meist MSB zuerst, manche Bausteine LSB</td></tr>
+<tr><td><b>Chip Select</b></td><td>Je Teilnehmer eine eigene Leitung, aktiv Low. Manche Bausteine brauchen zwischen zwei Übertragungen zwingend eine steigende Flanke</td></tr>
+<tr><td><b>Taktfrequenz</b></td><td>Datenblattgrenze beachten, bei langen Leitungen deutlich darunter bleiben</td></tr>
+<tr><td><b>Terminierung</b></td><td>22–47 Ω in Reihe zum Takt reduzieren Überschwingen erheblich</td></tr>
+<tr><td><b>Bezeichnungen</b></td><td>MOSI/MISO heißen in neueren Datenblättern SDO/SDI oder COPI/CIPO. Immer prüfen, aus wessen Sicht benannt wurde</td></tr>
+</tbody>
+</table></div>
+
+<h2>CAN — der unterschätzte Bus</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Warum er so robust ist</div><div class="cd">Differentiell übertragen, Arbitrierung ohne Datenverlust (die niedrigere Kennung gewinnt und sendet ohne Wiederholung weiter), CRC-15 in Hardware, automatische Fehlererkennung mit Abschaltung defekter Knoten. Ein CAN-Netz läuft in Umgebungen weiter, in denen I²C längst aufgegeben hat.</div></div>
+  <div class="card"><div class="ct">Was man braucht</div><div class="cd">Einen CAN-Controller (in vielen Controllern eingebaut) plus einen Transceiver (MCP2551, TJA1051, SN65HVD230) und <b>120 Ω an beiden Enden</b> der Leitung — nicht in der Mitte, nicht nur an einem Ende.</div></div>
+  <div class="card"><div class="ct">CAN FD und CAN XL</div><div class="cd">CAN FD erhöht die Nutzdaten von 8 auf 64 Byte und die Datenphase auf bis zu 8 Mbit/s. CAN XL geht weiter auf bis zu 2048 Byte und 20 Mbit/s und ist auf Koexistenz mit Ethernet ausgelegt.</div></div>
+  <div class="card"><div class="ct">Für eigene Projekte</div><div class="cd">Sobald mehrere Baugruppen über Meter verteilt sind — Roboterarm, Fahrzeug, Maschine — ist CAN die deutlich bessere Wahl als ein verlängerter I²C-Bus. Der Mehraufwand ist ein Transceiver je Knoten.</div></div>
+</div>
+
+<h2>Fehlersuche an Bussen</h2>
+<div class="steps">
+  <div class="step"><h4>Logikanalysator anschließen</h4>Ein 8-Kanal-Gerät für unter 20 € mit <a href="https://sigrok.org/wiki/PulseView">PulseView</a> dekodiert I²C, SPI, UART, CAN und 1-Wire fertig. Das ist bei Busproblemen das mit Abstand wirksamste Werkzeug — es zeigt, was wirklich auf der Leitung liegt, statt was man vermutet.</div>
+  <div class="step"><h4>Erst die Pegel messen</h4>Erreicht High wirklich V_CC? Ist die Flanke steil genug? Ein Oszilloskop zeigt zu schwache Pull-ups sofort als abgerundete Anstiege.</div>
+  <div class="step"><h4>Adresse und Modus prüfen</h4>Bei I²C: Scan durchführen. Bei SPI: CPOL/CPHA gegen das Datenblatt prüfen. Zwei Drittel aller Probleme sind hier erledigt.</div>
+  <div class="step"><h4>Masse prüfen</h4>Zwei Baugruppen ohne gemeinsame Masse kommunizieren nicht — oder scheinbar doch, mit sporadischen Fehlern. Die Masseleitung ist keine Nebensache, sie ist der Rückweg jedes Signals.</div>
+  <div class="step"><h4>Auf das Minimum reduzieren</h4>Einen einzigen Teilnehmer, kurze Leitung, niedrigste Geschwindigkeit. Läuft das, schrittweise erweitern — die Stelle, an der es kippt, ist die Antwort.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>NXP, <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">UM10204 — I²C-bus specification and user manual</a>.</li>
+    <li>Bosch, <i>CAN Specification 2.0</i> und ISO 11898; <a href="https://www.can-cia.org/">CiA — CAN in Automation</a> für CAN FD und CAN XL.</li>
+    <li>Texas Instruments, <i>SPI Interface Design Considerations</i> und <i>RS-485 Design Guide</i> (SLLA272).</li>
+    <li><a href="https://sigrok.org/">sigrok / PulseView</a> — quelloffene Logikanalysator-Software mit Protokolldekodern.</li>
+    <li>Praktische Verdrahtung und Fehlerbilder: <a href="elektronik-grundlagen.html#protokolle">Elektronik 101 → Protokolle &amp; Busse</a>.</li>
+  </ul>
+</div>

@@ -1,0 +1,86 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Positionsmessung ist die Voraussetzung jeder Bewegungsregelung.</b> Die Grundentscheidung: inkremental (billig, braucht Referenzfahrt) oder absolut (teurer, kennt die Position sofort nach dem Einschalten). Alles Weitere folgt daraus.</div>
+
+<h2>Inkrementalgeber</h2>
+<svg class="dg l" viewBox="0 0 620 160" role="img" aria-label="Quadratursignale A und B mit Zählrichtung und vierfacher Auswertung">
+  <text class="lbl" x="44" y="44" text-anchor="end">A</text>
+  <path class="acc" d="M60,50 H110 V26 H180 V50 H250 V26 H320 V50 H390 V26 H460 V50 H530 V26 H580" />
+  <text class="lbl" x="44" y="104" text-anchor="end">B</text>
+  <path class="midl" d="M60,110 H145 V86 H215 V110 H285 V86 H355 V110 H425 V86 H495 V110 H565 V86 H580" />
+  <path class="gd" d="M110,16 V130 M145,16 V130 M180,16 V130 M215,16 V130" />
+  <text class="lbla" x="163" y="148" text-anchor="middle">vier Flanken je Periode = vierfache Auflösung</text>
+  <text class="lbl" x="470" y="148" text-anchor="middle">A eilt vor B → Rechtslauf</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Punkt</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td><b>Quadratur</b></td><td>Zwei um 90° versetzte Signale. Aus ihrer Reihenfolge ergibt sich die Drehrichtung, aus der Flankenzahl der Weg</td></tr>
+<tr><td><b>Vierfachauswertung</b></td><td>Ein Geber mit 1024 Strichen liefert 4096 auswertbare Flanken je Umdrehung. Das machen Timer im Encodermodus automatisch</td></tr>
+<tr><td><b>Indexspur (Z)</b></td><td>Ein Impuls je Umdrehung. Erlaubt die Referenzierung ohne Endschalter und erkennt verlorene Schritte</td></tr>
+<tr><td><b>Auswertung</b></td><td><b>Immer</b> den Hardware-Encodermodus des Timers verwenden, nie per Interrupt. Bei hohen Drehzahlen gehen sonst Impulse verloren</td></tr>
+<tr><td><b>Störfestigkeit</b></td><td>Differentielle Signale (RS-422, „A/A quer“) bei Leitungen über etwa einen Meter. Single-Ended fängt in Schaltschränken zuverlässig Störungen ein</td></tr>
+<tr><td><b>Referenzfahrt</b></td><td>Nach jedem Einschalten nötig: bis zum Endschalter fahren, dann bis zum nächsten Indeximpuls. Erst danach ist die Position bekannt</td></tr>
+</tbody>
+</table></div>
+
+<h2>Absolutgeber</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Singleturn</div><div class="cd">Kennt die Position innerhalb einer Umdrehung, typisch mit 12–19 Bit. Beim Einschalten sofort gültig.</div></div>
+  <div class="card"><div class="ct">Multiturn</div><div class="cd">Zählt zusätzlich die Umdrehungen — mechanisch über ein Getriebe oder elektronisch mit Pufferbatterie. Für Achsen mit langem Verfahrweg.</div></div>
+  <div class="card"><div class="ct">Schnittstellen</div><div class="cd">SSI (einfach, verbreitet), BiSS-C (offen, bidirektional), EnDat (Heidenhain), Hiperface (SICK/Sensata). Bei Servoantrieben herstellerabhängig.</div></div>
+  <div class="card"><div class="ct">Magnetisch auf dem Chip</div><div class="cd">AS5600, AS5047, MA732: ein diametral magnetisierter Magnet über dem Baustein. Sehr günstig, kompakt, für Hobby und Kleinserien die naheliegende Lösung.</div></div>
+</div>
+<div class="warn"><b>Gray-Code statt Binärcode:</b> Bei optischen Absolutgebern mit Codescheibe wird Gray-Code verwendet, weil sich zwischen benachbarten Positionen immer nur ein Bit ändert. Bei Binärcode könnte an einer Codegrenze — etwa 0111 nach 1000 — kurzzeitig ein völlig falscher Wert entstehen, wenn die Spuren nicht exakt gleichzeitig umschalten.</div>
+
+<h2>Resolver</h2>
+<p>Ein kleiner Transformator mit einer Rotor- und zwei um 90° versetzten Statorwicklungen. Aus dem Verhältnis der beiden Ausgangsspannungen ergibt sich der Winkel.</p>
+<div class="gb">
+  <div class="gb-col good"><h4>Stärken</h4><ul>
+    <li>Absolut robust: keine Elektronik im Sensor, verträgt Hitze, Vibration und Strahlung</li>
+    <li>Absolutwert innerhalb einer Umdrehung</li>
+    <li>Im Fahrzeugantrieb und in der Luftfahrt Standard</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Schwächen</h4><ul>
+    <li>Braucht eine Trägerfrequenz-Speisung und einen Resolver-zu-Digital-Wandler (AD2S1210 und ähnliche)</li>
+    <li>Geringere Auflösung als optische Geber</li>
+    <li>Teurer im Gesamtsystem</li>
+  </ul></div>
+</div>
+
+<h2>Auflösung, die tatsächlich ankommt</h2>
+<div class="fbox">
+  <span class="f">Auflösung am Abtrieb = Geberauflösung × Getriebeuntersetzung / Spindelsteigung</span>
+  <span class="l">Beispiel: 4096 Impulse/U, 5:1-Getriebe, 5 mm Spindelsteigung → 4096 · 5 / 5 mm = 4096 Schritte je mm, also 0,24 µm rechnerisch.</span>
+</div>
+<div class="stop"><b>Rechnerische Auflösung ist nicht erreichbare Genauigkeit.</b> Zwischen beiden stehen: Spiel im Getriebe, Steigungsfehler der Spindel, Verformung unter Last, Wärmedehnung, Führungstoleranzen. Eine Achse mit 0,24 µm Auflösung, die 50 µm Umkehrspiel hat, positioniert auf 50 µm genau. Wer wirklich genau positionieren will, misst <b>direkt am Abtrieb</b> statt am Motor — das ist der Unterschied zwischen indirekter und direkter Wegmessung.</div>
+
+<h2>Endschalter und Referenzierung</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Typ</th><th>Wiederholgenauigkeit</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Mechanischer Mikroschalter</b></td><td>10–50 µm</td><td>Billig, prellt, verschleißt. Öffner verwenden, damit ein Kabelbruch als Auslösung erkannt wird</td></tr>
+<tr><td><b>Gabellichtschranke</b></td><td>5–20 µm</td><td>Verschleißfrei, aber empfindlich gegen Späne und Staub</td></tr>
+<tr><td><b>Induktiver Näherungsschalter</b></td><td>20–100 µm</td><td>Sehr robust gegen Schmutz und Öl, dafür gröber</td></tr>
+<tr><td><b>Hall-Sensor mit Magnet</b></td><td>50–200 µm</td><td>Berührungslos, funktioniert durch Kunststoff hindurch</td></tr>
+<tr><td><b>Anschlagerkennung über Strom</b></td><td>0,1–1 mm</td><td>Sensorless Homing: Der Treiber erkennt den mechanischen Anschlag am Motorstrom. Spart Bauteile, aber die Genauigkeit hängt von Reibung und Temperatur ab</td></tr>
+</tbody>
+</table></div>
+<div class="steps">
+  <div class="step"><h4>Grob anfahren</h4>Mit höherer Geschwindigkeit in Richtung Endschalter, bis er auslöst.</div>
+  <div class="step"><h4>Freifahren</h4>Ein Stück zurück, bis der Schalter wieder frei ist.</div>
+  <div class="step"><h4>Langsam anfahren</h4>Mit stark reduzierter Geschwindigkeit erneut, bis er auslöst. Die Wiederholgenauigkeit steigt dabei um eine Größenordnung.</div>
+  <div class="step"><h4>Auf den Index setzen</h4>Falls vorhanden, bis zum nächsten Indeximpuls weiterfahren. Erst dieser Punkt ist reproduzierbar auf die Geberauflösung genau.</div>
+  <div class="step"><h4>Nullpunkt setzen und Grenzen aktivieren</h4>Erst nach erfolgreicher Referenzfahrt dürfen Software-Endlagen wirken — vorher sind sie bedeutungslos.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Heidenhain, <i>Messgeräte für elektrische Antriebe</i> und <i>Längenmessgeräte</i> — kostenlose technische Broschüren, sehr fundiert.</li>
+    <li>Analog Devices, <i>Resolver-to-Digital Converter</i> Application Notes (AD2S1210).</li>
+    <li>ams OSRAM, Datenblätter und Application Notes zu AS5600 und AS5047 — inklusive Magnetauswahl und Montagetoleranzen.</li>
+    <li>Referenzhandbücher zu STM32-Timern im Encodermodus.</li>
+  </ul>
+</div>

@@ -1,0 +1,83 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Bei Wechselstrom zerfällt Leistung in drei Teile:</b> Wirkleistung P (wird tatsächlich zu Wärme, Licht, Bewegung), Blindleistung Q (pendelt zwischen Quelle und Bauteil hin und her), Scheinleistung S (was die Leitung aushalten muss). Bezahlt wird beim Haushaltskunden P — belastet wird die Leitung mit S.</div>
+
+<h2>Das Leistungsdreieck</h2>
+<div class="fbox">
+  <span class="f">P = U·I·cos φ&nbsp;&nbsp;·&nbsp;&nbsp;Q = U·I·sin φ&nbsp;&nbsp;·&nbsp;&nbsp;S = U·I = √(P² + Q²)</span>
+  <span class="l">P in Watt (W), Q in Var (var), S in Voltampere (VA). Die Einheiten sind physikalisch identisch, aber bewusst verschieden benannt.</span>
+</div>
+<svg class="dg m" viewBox="0 0 340 180" role="img" aria-label="Leistungsdreieck aus Wirkleistung, Blindleistung und Scheinleistung">
+  <path class="acc" d="M50,150 H250" /><path class="accf" d="M250,150 l-9,-5 v10 z" />
+  <path class="midl" d="M250,150 V50" /><path class="badf" d="M250,50 l-5,9 h10 z" style="fill:var(--mid)" />
+  <path class="badl" d="M50,150 L250,50" /><path class="badf" d="M250,50 l-11,1 l4,10 z" />
+  <path class="wt" d="M85,150 a35,35 0 0 0 6,-17" />
+  <text class="lbl" x="96" y="143">φ</text>
+  <text class="lbla" x="150" y="168" text-anchor="middle">P — Wirkleistung (W)</text>
+  <text class="lbl" x="258" y="104" style="fill:var(--mid)">Q — Blindleistung (var)</text>
+  <text class="lbl" x="128" y="92" style="fill:var(--bad)">S — Scheinleistung (VA)</text>
+  <rect class="wt" x="238" y="138" width="12" height="12" style="fill:none" />
+</svg>
+
+<h2>Was das praktisch bedeutet</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Wirkleistung P</div><div class="cd">Wird im Bauteil in eine andere Energieform umgesetzt und kommt nicht zurück. Nur sie steht auf dem Stromzähler eines Haushalts.</div></div>
+  <div class="card"><div class="ct">Blindleistung Q</div><div class="cd">Fließt zweimal pro Periode zur Last und wieder zurück — Energie zum Aufbau von Feldern in Spulen und Kondensatoren. Sie verrichtet keine Arbeit, erwärmt aber die Leitungen auf dem Weg.</div></div>
+  <div class="card"><div class="ct">Scheinleistung S</div><div class="cd">Das Produkt der Effektivwerte. Danach werden Trafos, Kabel, Sicherungen und Notstromaggregate ausgelegt — deshalb ist ein USV mit „1000 VA“ nicht dasselbe wie 1000 W.</div></div>
+</div>
+
+<div class="tip"><b>Warum ein 1000-VA-Notstromgerät nur 700 W liefert:</b> Die Angabe in VA beschreibt die Belastungsgrenze der Elektronik. Wie viel davon als Wirkleistung ankommt, hängt vom Leistungsfaktor der Last ab. Bei cos φ = 0,7 sind das eben 700 W. Genau dieselbe Rechnung gilt für Trafos und Generatoren.</div>
+
+<h2>Leistungsfaktor und Verzerrungsanteil</h2>
+<p>Bei rein sinusförmigen Größen ist der Leistungsfaktor gleich cos φ. Bei nichtlinearen Verbrauchern — Schaltnetzteilen, Dimmern, Frequenzumrichtern — kommt eine zweite Ursache dazu: der Strom ist gar kein Sinus mehr, sondern besteht aus kurzen Spitzen. Dann gilt</p>
+<div class="fbox"><span class="f">λ = P / S = cos φ · Verzerrungsfaktor</span>
+<span class="l">λ heißt Leistungsfaktor, cos φ nur der Verschiebungsanteil. Bei einem alten PC-Netzteil ohne PFC kann λ bei 0,5–0,6 liegen, obwohl φ klein ist.</span></div>
+<p>Deshalb schreibt die Norm EN IEC 61000-3-2 für Geräte über 75 W Grenzwerte für Netzoberschwingungen vor — der Grund, warum praktisch jedes moderne Netzteil eine <b>aktive PFC-Stufe</b> hat. Sie formt die Stromaufnahme wieder zum Sinus und bringt λ auf über 0,95.</p>
+
+<h2>Blindstromkompensation</h2>
+<p>Induktive Lasten (Motoren, Trafos, Leuchtstofflampen mit konventionellem Vorschaltgerät) ziehen Blindleistung. Ein parallel geschalteter Kondensator liefert genau die entgegengesetzte Blindleistung, sodass sich beide aufheben und die Leitung nur noch den Wirkstrom trägt.</p>
+<div class="fbox"><span class="f">C = P · (tan φ₁ − tan φ₂) / (ω · U²)</span>
+<span class="l">φ₁ vorher, φ₂ das Ziel — meist cos φ₂ = 0,95. In Industriebetrieben rechnet sich das direkt, weil Blindarbeit dort abgerechnet wird.</span></div>
+<div class="warn"><b>Nicht übertreiben:</b> Wird zu stark kompensiert, kippt die Anlage ins Kapazitive, und im Zusammenspiel mit den Netzinduktivitäten können Resonanzen entstehen, die Oberschwingungen verstärken statt dämpfen. In der Praxis regelt eine Kompensationsanlage stufenweise nach.</div>
+
+<h2>Leistung im Gleichstromkreis und bei Impulsen</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Fall</th><th>Rechnung</th><th>Achtung</th></tr></thead>
+<tbody>
+<tr><td><b>Gleichstrom</b></td><td>P = U·I</td><td>Der einfache Fall.</td></tr>
+<tr><td><b>Sinus, ohmsche Last</b></td><td>P = U_eff · I_eff</td><td>Effektivwerte nehmen, nicht Scheitelwerte.</td></tr>
+<tr><td><b>Sinus, gemischte Last</b></td><td>P = U_eff · I_eff · cos φ</td><td>Ohne cos φ rechnet man sich reich.</td></tr>
+<tr><td><b>PWM-Signal</b></td><td>P = P_ein · Tastgrad</td><td>Gilt für ohmsche Lasten. Bei Motoren und LEDs ist der Zusammenhang zur Helligkeit bzw. zum Moment nicht linear.</td></tr>
+<tr><td><b>Rechteck an ohmscher Last</b></td><td>U_eff = û·√Tastgrad</td><td>Bei 50 % Tastgrad ist U_eff = 0,707·û — zufällig derselbe Faktor wie beim Sinus, aber aus anderem Grund.</td></tr>
+<tr><td><b>Impulsbetrieb</b></td><td>P_mittel = P_peak · t_ein/T</td><td>Datenblätter geben oft eine deutlich höhere Impulsbelastbarkeit an — nur gültig innerhalb der angegebenen Impulsdauer und Wiederholrate.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Wirkungsgrad</h2>
+<div class="fbox"><span class="f">η = P_ab / P_zu&nbsp;&nbsp;&nbsp;&nbsp;P_verlust = P_zu · (1 − η)</span></div>
+<p>Zwei Zahlen, die man im Kopf haben sollte: Ein Linearregler, der 12 V auf 5 V bei 1 A herunterregelt, verheizt 7 W — der Wirkungsgrad beträgt 42 %, und das Bauteil braucht einen Kühlkörper. Ein Abwärtswandler für dieselbe Aufgabe kommt auf 90 % und verheizt 0,55 W. Details in <a href="analogtechnik.html#versorgung">Analog &amp; Leistung → Linear- und Schaltregler</a>.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Wandler / Maschine</th><th>Typischer Wirkungsgrad</th></tr></thead>
+<tbody>
+<tr><td>Linearregler</td><td>U_aus/U_ein — bei 5 V aus 12 V also ~42 %</td></tr>
+<tr><td>Abwärtswandler (Buck)</td><td>85–96 %</td></tr>
+<tr><td>Sperrwandler (Flyback) im Netzteil</td><td>80–90 %</td></tr>
+<tr><td>Netztransformator, klein (&lt; 50 VA)</td><td>70–85 %</td></tr>
+<tr><td>Netztransformator, groß</td><td>95–99 %</td></tr>
+<tr><td>Asynchronmotor (IE3, &gt; 1 kW)</td><td>88–95 %</td></tr>
+<tr><td>Bürstenloser Gleichstrommotor (BLDC)</td><td>85–93 %</td></tr>
+<tr><td>Bürstenmotor, klein</td><td>50–75 %</td></tr>
+<tr><td>Li-Ion-Zelle (Lade-/Entladezyklus)</td><td>92–97 %</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Albach, <i>Grundlagen der Elektrotechnik 2</i>, Kapitel Leistung im Wechselstromkreis.</li>
+    <li>EN IEC 61000-3-2 — Grenzwerte für Oberschwingungsströme von Geräten mit Eingangsstrom bis 16 A je Leiter.</li>
+    <li>Wirkungsgradklassen für Motoren: IEC 60034-30-1 (IE1–IE5).</li>
+    <li>Datenblätter von Texas Instruments und Analog Devices zu Buck-Reglern enthalten gemessene Wirkungsgradkurven über den Laststrom — die einzige belastbare Quelle für konkrete Werte.</li>
+  </ul>
+</div>

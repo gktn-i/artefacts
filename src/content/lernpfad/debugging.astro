@@ -1,0 +1,78 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Debuggen ist die Fähigkeit, die den größten Zeitgewinn bringt — und die am wenigsten unterrichtet wird.</b> Der Kern ist simpel: den Suchraum halbieren, messen statt vermuten, und immer nur eine Sache auf einmal ändern.</div>
+
+<h2>Das Vorgehen</h2>
+<div class="steps">
+  <div class="step"><h4>1 · Beobachtung sauber formulieren</h4>Was genau passiert, was sollte passieren? „Geht nicht“ ist keine Beobachtung. „Die LED bleibt dunkel, obwohl am Pin 3,3 V anliegen“ ist eine.</div>
+  <div class="step"><h4>2 · Reproduzieren</h4>Tritt der Fehler immer auf oder nur manchmal? Unter welchen Bedingungen? Ein nicht reproduzierbarer Fehler lässt sich nicht finden — die erste Aufgabe ist also, ihn zuverlässig auszulösen.</div>
+  <div class="step"><h4>3 · Suchraum halbieren</h4>Funktioniert die erste Hälfte der Kette? Dann liegt es in der zweiten. Bei zwanzig Verdächtigen findet man den richtigen in fünf Schritten statt in zwanzig.</div>
+  <div class="step"><h4>4 · Messen, nicht vermuten</h4>Jede Vermutung mit einer Messung prüfen, bevor man etwas ändert. Multimeter, Oszilloskop, Logikanalysator, GPIO-Pin, Diagnoseausgabe.</div>
+  <div class="step"><h4>5 · Eine Sache auf einmal ändern</h4>Zwei gleichzeitige Änderungen machen das Ergebnis wertlos. Und: nach jeder Änderung das Ergebnis notieren.</div>
+  <div class="step"><h4>6 · Ursache verstehen, nicht nur beheben</h4>Ein Fehler, der „auf einmal weg“ ist, kommt zurück. Wer nicht erklären kann, warum es jetzt geht, hat ihn nicht gefunden.</div>
+  <div class="step"><h4>7 · Aufschreiben</h4>Symptom, Ursache, Lösung. Beim nächsten Mal — und beim nächsten Gerät — spart das Stunden.</div>
+</div>
+
+<h2>Die Fragen, die am schnellsten weiterhelfen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Frage</th><th>Warum sie hilft</th></tr></thead>
+<tbody>
+<tr><td><b>Hat es je funktioniert?</b></td><td>Wenn ja: Was hat sich seitdem geändert? Wenn nein: Es ist kein Fehler, sondern ein Entwurfsproblem</td></tr>
+<tr><td><b>Was habe ich zuletzt geändert?</b></td><td>Die Antwort ist überraschend oft die Ursache. Versionsverwaltung macht das beantwortbar</td></tr>
+<tr><td><b>Funktioniert es bei einem zweiten Exemplar?</b></td><td>Trennt Bauteildefekt von Entwurfsfehler</td></tr>
+<tr><td><b>Was ist das Einfachste, das es sein könnte?</b></td><td>Vor der komplizierten Erklärung immer die banale prüfen: Steckverbinder, Masse, Versorgung, Kabelbruch</td></tr>
+<tr><td><b>Ist es Hardware oder Software?</b></td><td>Ein Ausgang, den man von Hand setzt, beantwortet das in Sekunden</td></tr>
+<tr><td><b>Misst mein Messgerät das Problem oder erzeugt es das Problem?</b></td><td>Tastkopfkapazität, Masseschleife, Bürdewiderstand — das Messgerät verändert die Schaltung</td></tr>
+<tr><td><b>Stimmt meine Annahme über das Bauteil?</b></td><td>Ins Datenblatt sehen. Sehr viele Fehler beruhen auf einer Erinnerung statt auf einer Angabe</td></tr>
+</tbody>
+</table></div>
+
+<h2>Fehlerbilder und wo man zuerst sucht</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Symptom</th><th>Häufigste Ursachen</th><th>Erster Griff</th></tr></thead>
+<tbody>
+<tr><td><b>Gar nichts passiert</b></td><td>Versorgung fehlt, Reset hängt, falsches Programm geflasht</td><td>Spannung an den Versorgungspins des ICs messen — nicht am Netzteil</td></tr>
+<tr><td><b>Funktioniert nur manchmal</b></td><td>Kalte Lötstelle, Wackelkontakt, fehlender Pull-Widerstand, Wettlaufsituation in der Software</td><td>Vorsichtig auf die Platine drücken, dabei messen. Bei Software: alles verlangsamen</td></tr>
+<tr><td><b>Funktioniert nur mit Tastkopf dran</b></td><td>Der Tastkopf bedämpft eine Schwingung oder liefert eine Masseverbindung</td><td>Terminierung und Masseführung prüfen — es gibt ein echtes Problem</td></tr>
+<tr><td><b>Werte springen</b></td><td>Masseproblem, fehlende Abblockung, Störeinkopplung, ADC zu hochohmig angeschlossen</td><td>Eingang kurzschließen: bleibt das Springen, kommt es aus der Elektronik</td></tr>
+<tr><td><b>Läuft, stürzt aber nach Stunden ab</b></td><td>Speicherleck, Stacküberlauf, Zählerüberlauf, Wärmeproblem</td><td>Reset-Ursache auslesen, Stack-Füllstand messen, Laufzeit bis zum Absturz protokollieren</td></tr>
+<tr><td><b>Bus antwortet nicht</b></td><td>Adresse falsch, Pull-ups fehlen, Modus falsch, Leitungen vertauscht, keine gemeinsame Masse</td><td>Logikanalysator anschließen — zeigt in Sekunden, ob überhaupt etwas gesendet wird</td></tr>
+<tr><td><b>Motor läuft rau oder heiß</b></td><td>Strom zu hoch eingestellt, PWM-Frequenz im hörbaren Bereich, Resonanz, mechanische Schwergängigkeit</td><td>Motor abkoppeln und im Leerlauf laufen lassen</td></tr>
+<tr><td><b>Regelung schwingt</b></td><td>K_p zu groß, Totzeit unterschätzt, Messrauschen über den D-Anteil</td><td>Schwingungsperiode messen — sie verrät, welcher Anteil zu stark ist</td></tr>
+<tr><td><b>Nach dem Umzug auf die Platine geht es nicht mehr</b></td><td>Layout: Masseführung, Abblockung, Rückstrompfad</td><td>Versorgungsspannung am IC mit dem Oszilloskop ansehen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Werkzeuge und was sie beantworten</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Multimeter</div><div class="cd">Liegt Spannung an? Ist die Verbindung durchgängig? Gibt es einen Kurzschluss? Beantwortet die Hälfte aller Fragen — und ist immer der erste Griff.</div></div>
+  <div class="card"><div class="ct">Labornetzteil mit Strombegrenzung</div><div class="cd">Zeigt die Stromaufnahme in Echtzeit. Ein Sprung beim Aktivieren einer Funktion lokalisiert den Fehler sofort.</div></div>
+  <div class="card"><div class="ct">Logikanalysator</div><div class="cd">Was liegt wirklich auf dem Bus? Dekodiert I²C, SPI, UART, CAN. Bei Kommunikationsproblemen unschlagbar.</div></div>
+  <div class="card"><div class="ct">Oszilloskop</div><div class="cd">Alles Zeitliche: Flanken, Rippel, Störimpulse, Timing, Schwingungen. Das einzige Gerät, das zeigt, was zwischen zwei Messwerten passiert.</div></div>
+  <div class="card"><div class="ct">GPIO-Pin</div><div class="cd">Am Anfang und Ende einer Funktion umschalten und am Oszilloskop messen: Laufzeit, Häufigkeit, Verschachtelung von Interrupts. Zwei Zeilen Code, enorme Aussagekraft.</div></div>
+  <div class="card"><div class="ct">Wärmebild oder Finger</div><div class="cd">Ein zu heißes Bauteil zeigt den Fehler direkt an. Bei kleiner Spannung und Strombegrenzung gefahrlos anwendbar.</div></div>
+  <div class="card"><div class="ct">Debugger</div><div class="cd">Breakpoints, Speicher ansehen, Variablen im Betrieb beobachten, Fault-Register auswerten. Siehe <a href="embedded-firmware.html#debug">Embedded → Debuggen</a>.</div></div>
+  <div class="card"><div class="ct">Diagnoseausgabe</div><div class="cd">Für alles, was zu schnell für Breakpoints ist oder im Feld auftritt. Mit Zeitstempel und Log-Stufen.</div></div>
+</div>
+
+<h2>Wenn nichts mehr hilft</h2>
+<div class="steps">
+  <div class="step"><h4>Jemandem erklären</h4>Das Problem laut und vollständig erklären, auch einer fachfremden Person. Die Lösung fällt beim Formulieren erstaunlich oft von selbst auf.</div>
+  <div class="step"><h4>Pause machen</h4>Nicht als Ausrede — der Effekt ist real. Ein Fehler, der abends unlösbar wirkt, ist morgens oft in zehn Minuten gefunden.</div>
+  <div class="step"><h4>Alles vereinfachen</h4>Auf die kleinste Schaltung reduzieren, die den Fehler noch zeigt. Bauteile entfernen, Code auskommentieren, Geschwindigkeit senken. Was übrig bleibt, enthält die Ursache.</div>
+  <div class="step"><h4>Annahmen umdrehen</h4>Was ist die eine Sache, von der du sicher bist, dass sie stimmt? Genau die prüfen. Die Ursache steckt fast immer dort, wo man nicht sucht.</div>
+  <div class="step"><h4>Fragen — richtig</h4>Mit Schaltplan, Messwerten, Fotos und dem, was du schon ausgeschlossen hast. Gute Anlaufstellen stehen in <a href="mechatronik-nachschlagewerk.html#webseiten">Webseiten &amp; Foren</a>.</div>
+</div>
+
+<div class="tip"><b>Der wertvollste Satz beim Debuggen:</b> „Ich weiß es nicht, ich messe nach.“ Er ersetzt Stunden voller Vermutungen. Die zweitwertvollste Gewohnheit: nach jedem gefundenen Fehler notieren, woran es lag — und die eigene Prüfliste für den nächsten Entwurf ergänzen.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>David Agans, <i>Debugging: The Nine Indispensable Rules for Finding Even the Most Elusive Software and Hardware Problems</i> — kurz, praxisnah, hardwarenah.</li>
+    <li>Bob Pease, <i>Troubleshooting Analog Circuits</i> — der Klassiker zur analogen Fehlersuche.</li>
+    <li><a href="https://interrupt.memfault.com/">Interrupt (Memfault)</a> — Artikel zu Fault-Analyse und Diagnose im Feld.</li>
+    <li>Fehlerbilder an Baugruppen: <a href="elektronik-grundlagen.html#fehlersuche">Elektronik 101 → Fehlersuche</a> und <a href="loeten-referenz.html#fehler">Löten → Fehler &amp; Regeln</a>.</li>
+  </ul>
+</div>

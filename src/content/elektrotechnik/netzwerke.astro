@@ -1,0 +1,110 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Netzwerkanalyse ist die Kunst, aus einer beliebig verschalteten Schaltung ein lösbares Gleichungssystem zu machen.</b> Für den Alltag braucht man genau eine Technik wirklich häufig: das <b>Thévenin-Ersatzbild</b> — „was sieht mein Bauteil, wenn es auf den Rest der Schaltung schaut?“</div>
+
+<h2>Die zwei Grundgesetze</h2>
+<div class="gb">
+  <div class="gb-col">
+    <h4>Knotenregel (1. Kirchhoff'sches Gesetz)</h4>
+    <p>In jedem Knoten ist die Summe der zufließenden gleich der Summe der abfließenden Ströme. Physikalisch: Ladung sammelt sich nirgends an.</p>
+    <svg class="dg m" viewBox="0 0 300 100" role="img" aria-label="Knotenregel: 300 Milliampere hinein, 100 und 200 heraus">
+      <path class="w" d="M20,50 H130 M130,50 L250,22 M130,50 L250,78" />
+      <circle class="f" cx="130" cy="50" r="4" />
+      <path class="accf" d="M85,50 L71,43 L71,57 Z" />
+      <path class="accf" d="M205,33 L191,30 L195,43 Z" />
+      <path class="accf" d="M205,68 L195,58 L191,71 Z" />
+      <text class="lbl" x="48" y="40">300 mA</text>
+      <text class="lbl" x="215" y="21">100 mA</text>
+      <text class="lbl" x="215" y="94">200 mA</text>
+      <text class="lbla" x="150" y="14">Σ rein = Σ raus</text>
+    </svg>
+  </div>
+  <div class="gb-col">
+    <h4>Maschenregel (2. Kirchhoff'sches Gesetz)</h4>
+    <p>In jedem geschlossenen Umlauf ist die Summe aller Spannungen null. Physikalisch: Energieerhaltung — wer einmal herum geht, ist wieder auf demselben Potential.</p>
+    <svg class="dg m" viewBox="0 0 300 100" role="img" aria-label="Maschenregel: 5 Volt Quelle, 2 Volt an der LED, 3 Volt am Widerstand">
+      <path class="w" d="M40,22 H120 M154,22 H250 M250,22 V78 M250,78 H40 M40,78 V50 M40,44 V22" />
+      <rect class="box" x="120" y="14" width="34" height="16" rx="2" />
+      <path class="w" d="M28,44 H52 M34,50 H46" />
+      <path class="accf" d="M196,14 L206,22 L196,30 Z" /><path class="acc" d="M206,12 V32" />
+      <text class="lbl" x="24" y="50" text-anchor="end">5 V</text>
+      <text class="lbl" x="137" y="10" text-anchor="middle">3 V</text>
+      <text class="lbl" x="214" y="44">2 V</text>
+      <text class="lbla" x="145" y="94" text-anchor="middle">5 V − 3 V − 2 V = 0</text>
+    </svg>
+  </div>
+</div>
+
+<h2>Thévenin und Norton: die eine Technik, die man wirklich braucht</h2>
+<p>Jedes lineare Netzwerk lässt sich, von zwei Klemmen aus gesehen, durch <b>eine Spannungsquelle mit einem Reihenwiderstand</b> ersetzen (Thévenin) — oder gleichwertig durch eine Stromquelle mit Parallelwiderstand (Norton). Was hinter den Klemmen steht, ist egal.</p>
+<div class="steps">
+  <div class="step"><h4>U₀ bestimmen (Leerlaufspannung)</h4>Last abklemmen, Spannung zwischen den beiden Klemmen berechnen oder messen. Das ist die Thévenin-Spannung.</div>
+  <div class="step"><h4>R_i bestimmen (Innenwiderstand)</h4>Alle <b>Spannungsquellen kurzschließen</b>, alle <b>Stromquellen auftrennen</b>, dann den Widerstand zwischen den Klemmen zusammenrechnen.</div>
+  <div class="step"><h4>Ersatzbild anwenden</h4>Jetzt ist die Rechnung mit Last eine simple Reihenschaltung: <span class="formula">I = U₀ / (R_i + R_Last)</span>.</div>
+</div>
+
+<div class="card">
+  <h3>Durchgerechnet: belasteter Spannungsteiler</h3>
+  <p>12 V, R1 = 10 kΩ, R2 = 10 kΩ, Last 10 kΩ am Abgriff.</p>
+  <ul>
+    <li><b>U₀</b> = 12 V · 10 k/(10 k + 10 k) = <b>6 V</b></li>
+    <li><b>R_i</b>: Quelle kurzschließen → R1 liegt parallel zu R2 → 10 k ∥ 10 k = <b>5 kΩ</b></li>
+    <li>Mit 10 kΩ Last: U = 6 V · 10 k/(5 k + 10 k) = <b>4,0 V</b></li>
+  </ul>
+  <p class="note">Statt 6 V kommen 4 V an — ein Drittel weniger. Genau das rechnet der Teiler-Rechner im Abschnitt <a href="#gleichstrom">Gleichstromkreis</a> auch aus, aber Thévenin erklärt, <em>warum</em>.</p>
+</div>
+
+<h2>Überlagerungssatz (Superposition)</h2>
+<p>Bei mehreren Quellen in einem <b>linearen</b> Netzwerk darf man die Wirkung jeder Quelle einzeln berechnen und die Ergebnisse addieren. Beim Betrachten einer Quelle werden die anderen deaktiviert — Spannungsquellen kurzgeschlossen, Stromquellen aufgetrennt.</p>
+<div class="warn"><b>Grenze:</b> Superposition gilt nur für lineare Elemente. Sobald eine Diode, ein Transistor oder eine Sättigung im Spiel ist, ist der Satz ungültig. Und: <b>Leistungen dürfen nie überlagert werden</b>, weil P quadratisch von U und I abhängt — nur Ströme und Spannungen.</p></div>
+
+<h2>Knotenpotential- und Maschenstromverfahren</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Verfahren</th><th>Unbekannte</th><th>Anzahl Gleichungen</th><th>Gut, wenn …</th></tr></thead>
+<tbody>
+<tr><td><b>Knotenpotentialverfahren</b></td><td>Potentiale der Knoten gegen einen Bezugsknoten</td><td>k − 1 (k = Knotenzahl)</td><td>viele parallele Zweige, überwiegend Stromquellen; Standard in jedem SPICE-Simulator</td></tr>
+<tr><td><b>Maschenstromverfahren</b></td><td>fiktive Umlaufströme in unabhängigen Maschen</td><td>z − k + 1 (z = Zweige)</td><td>wenige Maschen, überwiegend Spannungsquellen; von Hand oft schneller</td></tr>
+<tr><td><b>Zweigstromanalyse</b></td><td>jeder Zweigstrom einzeln</td><td>z</td><td>nur bei sehr kleinen Netzen sinnvoll — sonst zu viele Gleichungen</td></tr>
+</tbody>
+</table></div>
+<p><b>Praktischer Hinweis:</b> Von Hand rechnet man das ein paar Mal, um es verstanden zu haben. Danach übernimmt ein Simulator. Jeder SPICE-Kern — <a href="https://ngspice.sourceforge.io/">ngspice</a>, LTspice, der Simulator in KiCad — löst intern genau das Knotenpotentialverfahren, ergänzt um Zeitschritte und Newton-Iteration für nichtlineare Bauteile.</p>
+
+<h2>Stern-Dreieck-Umwandlung</h2>
+<p>Manche Netzwerke lassen sich nicht durch Zusammenfassen von Reihen und Parallelen vereinfachen — die Wheatstone-Brücke ist das Standardbeispiel. Dann hilft die Umwandlung dreier Widerstände zwischen Stern- und Dreiecksform.</p>
+<div class="fbox">
+  <span class="f">Dreieck → Stern: R₁ = R₁₂·R₃₁ / (R₁₂ + R₂₃ + R₃₁)</span>
+  <span class="l">Zähler: Produkt der beiden am Knoten anliegenden Dreieckswiderstände. Nenner: Summe aller drei.</span>
+</div>
+<div class="fbox">
+  <span class="f">Stern → Dreieck: R₁₂ = (R₁R₂ + R₂R₃ + R₃R₁) / R₃</span>
+  <span class="l">Nenner ist immer der Sternwiderstand am <em>gegenüberliegenden</em> Knoten.</span>
+</div>
+
+<h2>Die Wheatstone-Brücke</h2>
+<p>Vier Widerstände als zwei Spannungsteiler nebeneinander, Messung der Differenz in der Mitte. Die Brücke ist abgeglichen, wenn</p>
+<div class="fbox"><span class="f">R1/R2 = R3/R4&nbsp;&nbsp;→&nbsp;&nbsp;U_diff = 0</span></div>
+<svg class="dg m" viewBox="0 0 260 150" role="img" aria-label="Wheatstone-Brücke mit vier Widerständen und Differenzmessung in der Mitte">
+  <path class="w" d="M130,14 L60,60 M60,60 L130,106 M130,14 L200,60 M200,60 L130,106" />
+  <rect class="box" x="86" y="24" width="18" height="26" rx="2" transform="rotate(33 95 37)" />
+  <rect class="box" x="86" y="70" width="18" height="26" rx="2" transform="rotate(-33 95 83)" />
+  <rect class="box" x="156" y="24" width="18" height="26" rx="2" transform="rotate(-33 165 37)" />
+  <rect class="box" x="156" y="70" width="18" height="26" rx="2" transform="rotate(33 165 83)" />
+  <path class="acc" d="M60,60 H92 M168,60 H200" />
+  <circle class="accs" cx="130" cy="60" r="16" />
+  <text class="lbla" x="130" y="64" text-anchor="middle" style="font-size:11px">mV</text>
+  <path class="w" d="M130,14 V4 M130,106 V132 M118,132 H142 M123,138 H137" />
+  <text class="lbl" x="86" y="30">R1</text><text class="lbl" x="168" y="30">R3</text>
+  <text class="lbl" x="82" y="98">R2</text><text class="lbl" x="170" y="98">R4</text>
+  <text class="lbl" x="138" y="10">+U</text>
+</svg>
+<p>Der Nutzen liegt nicht im Abgleich selbst, sondern in der <b>Empfindlichkeit um den Nullpunkt</b>: winzige Widerstandsänderungen erzeugen eine messbare Differenzspannung, während sich Temperatur- und Versorgungsschwankungen in beiden Zweigen gleich auswirken und herausfallen. Genau deshalb sitzt sie in jeder Waage, in Drucksensoren und in Dehnungsmessstreifen-Anwendungen — mehr dazu in <a href="sensorik-aktorik.html#messkette">Sensorik &amp; Antriebe → Messkette</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Albach, <i>Grundlagen der Elektrotechnik 1</i>, Kapitel Netzwerkanalyse.</li>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 1 — Thévenin in der praktischen Anwendung.</li>
+    <li><a href="https://ngspice.sourceforge.io/docs.html">ngspice-Dokumentation</a>: beschreibt das Modified Nodal Analysis-Verfahren, das jeder SPICE-Simulator verwendet.</li>
+  </ul>
+</div>

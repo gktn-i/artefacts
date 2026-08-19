@@ -1,0 +1,97 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Kondensator und Spule sind keine Bauteile, sondern gespeicherte Felder.</b> Der Kondensator speichert Energie im <b>elektrischen</b> Feld zwischen zwei Flächen, die Spule im <b>magnetischen</b> Feld um einen Leiter. Daraus folgt alles: warum sich Spannung am Kondensator nicht springend ändern kann und Strom durch eine Spule ebenso wenig.</div>
+
+<h2>Das elektrische Feld</h2>
+<p>Zwischen zwei Punkten unterschiedlichen Potentials herrscht ein elektrisches Feld. Im Plattenkondensator ist es homogen:</p>
+<div class="fbox"><span class="f">E = U / d&nbsp;&nbsp;&nbsp;&nbsp;C = ε₀ · ε_r · A / d&nbsp;&nbsp;&nbsp;&nbsp;W = ½ · C · U²</span>
+<span class="l">E in V/m, A die Plattenfläche, d der Abstand, ε_r die Dielektrizitätszahl des Materials dazwischen.</span></div>
+
+<div class="grid">
+  <div class="card"><div class="ct">Was ε_r macht</div><div class="cd">Luft ≈ 1, Papier ≈ 3, Keramik X7R ≈ 2000–4000, Elektrolyt (Al₂O₃) ≈ 8. Je höher ε_r, desto mehr Kapazität auf gleicher Fläche — aber Keramiken mit hohem ε_r sind stark spannungs- und temperaturabhängig.</div></div>
+  <div class="card"><div class="ct">Durchschlagsfestigkeit</div><div class="cd">Luft ≈ 3 kV/mm, FR4 ≈ 20 kV/mm, Polypropylen ≈ 200 kV/mm. Daraus ergeben sich Luft- und Kriechstrecken auf der Leiterplatte — siehe <a href="leiterplatte-kicad.html#layout">Leiterplatte → Layout-Regeln</a>.</div></div>
+  <div class="card"><div class="ct">Warum U am C nicht springt</div><div class="cd">i = C · du/dt. Ein Spannungssprung (du/dt → ∞) bräuchte unendlichen Strom. Deshalb glättet ein Kondensator und deshalb erzeugt das Einschalten eines großen Elkos einen heftigen Einschaltstrom.</div></div>
+</div>
+
+<div class="stop"><b>Der DC-Bias-Effekt, den fast jeder übersieht:</b> Ein Keramikkondensator der Klasse 2 (X7R, X5R, Y5V) verliert bei anliegender Gleichspannung dramatisch an Kapazität — ein 10-µF-X5R-Kondensator im Gehäuse 0603 für 6,3 V kann bei 5 V Betriebsspannung real nur noch 2–3 µF haben. Wer eine Versorgung damit stützt, hat ein Drittel dessen, was er glaubt. Klasse-1-Typen (C0G/NP0) haben diesen Effekt nicht, gibt es aber nur bis wenige Nanofarad. Immer die Kurve „Capacitance vs. DC Bias“ im Datenblatt ansehen.</div>
+
+<h2>Das magnetische Feld</h2>
+<p>Jeder stromdurchflossene Leiter erzeugt ein Magnetfeld. In einer Spule addieren sich die Beiträge der Windungen:</p>
+<div class="fbox">
+  <span class="f">Θ = N · I&nbsp;&nbsp;&nbsp;&nbsp;H = Θ / l&nbsp;&nbsp;&nbsp;&nbsp;B = µ₀ · µ_r · H&nbsp;&nbsp;&nbsp;&nbsp;Φ = B · A</span>
+  <span class="l">Θ Durchflutung (A), H Feldstärke (A/m), B Flussdichte (T), Φ magnetischer Fluss (Wb).</span>
+</div>
+<div class="fbox">
+  <span class="f">L = N² / R_m = N² · µ₀µ_r · A / l&nbsp;&nbsp;&nbsp;&nbsp;W = ½ · L · I²</span>
+  <span class="l">R_m ist der magnetische Widerstand des Kreises. Die Analogie: Θ ↔ U, Φ ↔ I, R_m ↔ R.</span>
+</div>
+
+<h3>Induktion — die Regel, die Motoren und Trafos erklärt</h3>
+<div class="fbox"><span class="f">u_ind = −N · dΦ/dt</span><span class="l">Faraday'sches Induktionsgesetz. Das Minuszeichen ist die Lenz'sche Regel.</span></div>
+<p><b>Lenz'sche Regel in einem Satz:</b> Die induzierte Spannung wirkt ihrer Ursache entgegen. Praktische Folgen, denen man ständig begegnet:</p>
+<ul>
+  <li>Ein Generator wird beim Belasten <b>schwerer zu drehen</b> — deshalb bremst Rekuperation.</li>
+  <li>Beim Abschalten eines Relais entsteht eine Spannungsspitze, die den Schalttransistor zerstört. Gegenmittel: <b>Freilaufdiode</b> antiparallel zur Spule.</li>
+  <li>Ein Aluminiumring über einem Elektromagneten wird beim Einschalten weggeschleudert (Thomson-Ringversuch) — Wirbelströme wirken dem Feld entgegen.</li>
+  <li>Wirbelströme sind der Grund, warum Trafokerne aus <b>geblechtem</b> Material bestehen und nicht aus einem massiven Klotz.</li>
+</ul>
+
+<svg class="dg l" viewBox="0 0 620 150" role="img" aria-label="Vergleich: Kondensator speichert im elektrischen Feld, Spule im magnetischen Feld">
+  <rect class="box" x="18" y="16" width="270" height="118" rx="8" />
+  <rect class="box" x="332" y="16" width="270" height="118" rx="8" />
+  <text class="lblb" x="153" y="38" text-anchor="middle">Kondensator</text>
+  <text class="lblb" x="467" y="38" text-anchor="middle">Spule</text>
+  <path class="w" d="M80,60 V110 M108,60 V110 M56,85 H80 M108,85 H228" />
+  <path class="gd" d="M84,64 H104 M84,72 H104 M84,80 H104 M84,88 H104 M84,96 H104 M84,104 H104" />
+  <text class="lbl" x="153" y="72">E-Feld zwischen den Platten</text>
+  <text class="lbla" x="153" y="126" text-anchor="middle">i = C · du/dt  ·  W = ½CU²</text>
+  <path class="w" d="M370,85 H400 M496,85 H566" />
+  <path class="w" d="M400,85 q8,-22 16,0 q8,-22 16,0 q8,-22 16,0 q8,-22 16,0 q8,-22 16,0 q8,-22 16,0" />
+  <path class="acc" d="M418,58 a30,18 0 0 0 60,0" style="stroke-dasharray:4 3" />
+  <text class="lbl" x="467" y="72" text-anchor="middle">B-Feld um den Draht</text>
+  <text class="lbla" x="467" y="126" text-anchor="middle">u = L · di/dt  ·  W = ½LI²</text>
+</svg>
+
+<h2>Kräfte im Magnetfeld</h2>
+<div class="fbox"><span class="f">F = B · I · l&nbsp;&nbsp;(Lorentzkraft am stromdurchflossenen Leiter)</span>
+<span class="l">Der gesamte Elektromotor steckt in dieser Gleichung. l ist die wirksame Leiterlänge im Feld.</span></div>
+<p>Ein Motor mit 0,8 T Luftspaltinduktion, 40 mm wirksamer Leiterlänge und 5 A Strom erzeugt pro Leiter F = 0,8 · 5 · 0,04 = 0,16 N. Bei 200 wirksamen Leitern und 25 mm Radius ergibt das M = 200 · 0,16 N · 0,025 m = <b>0,8 Nm</b>. Das ist die ganze Motorauslegung im Kern — Details in <a href="sensorik-aktorik.html#auslegung">Sensorik &amp; Antriebe → Antriebsauslegung</a>.</p>
+
+<h3>Sättigung: die Grenze jedes Kerns</h3>
+<p>Ferromagnetische Materialien verstärken das Feld um µ_r (Ferrit 100–15 000, Eisenpulver 10–100, Elektroblech bis 10 000) — aber nur bis zur <b>Sättigungsflussdichte</b>. Darüber verhält sich der Kern wie Luft, die Induktivität bricht zusammen und der Strom schießt hoch.</p>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Kernmaterial</th><th>B_sat</th><th>Typische Frequenz</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Elektroblech (SiFe)</b></td><td>1,5–2,0 T</td><td>50–400 Hz</td><td>Netztrafos, Motoren</td></tr>
+<tr><td><b>Ferrit MnZn</b></td><td>0,35–0,5 T</td><td>20 kHz – 1 MHz</td><td>Schaltnetzteile, Speicherdrosseln</td></tr>
+<tr><td><b>Ferrit NiZn</b></td><td>0,2–0,35 T</td><td>1 MHz – 300 MHz</td><td>Entstördrosseln, Klappferrite</td></tr>
+<tr><td><b>Eisenpulver</b></td><td>1,0–1,4 T</td><td>bis ~1 MHz</td><td>weiche Sättigung, tolerant gegen Überstrom</td></tr>
+<tr><td><b>Nanokristallin</b></td><td>1,2 T</td><td>bis ~200 kHz</td><td>stromkompensierte Drosseln, hohe Permeabilität</td></tr>
+</tbody>
+</table></div>
+<p class="note">Im Datenblatt einer Speicherdrossel stehen deshalb <b>zwei</b> Stromangaben: I_rms (thermische Grenze, Erwärmung durch Kupferverluste) und I_sat (Sättigungsgrenze, meist als der Strom, bei dem L um 20 oder 30 % gefallen ist). Für Schaltregler ist der Spitzenstrom entscheidend, nicht der Mittelwert.</p>
+
+<h2>Kapazitäten und Induktivitäten, die man nicht gekauft hat</h2>
+<p>Jede Leitung hat beides — das ist der Grund, warum Layout ab wenigen Megahertz über Funktion oder Nichtfunktion entscheidet.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Parasit</th><th>Größenordnung</th><th>Folge</th></tr></thead>
+<tbody>
+<tr><td><b>Leiterbahn über Massefläche</b></td><td>≈ 1 pF/cm</td><td>Belastet schnelle Signale, koppelt Störungen ein</td></tr>
+<tr><td><b>Leiterbahn-Induktivität</b></td><td>≈ 1 nH/mm</td><td>Bei di/dt von 1 A/ns ergeben 5 mm Leitung 5 V Spannungsspitze</td></tr>
+<tr><td><b>Bauteilbein THT</b></td><td>≈ 5–10 nH</td><td>Warum SMD bei hohen Frequenzen zwingend ist</td></tr>
+<tr><td><b>Durchkontaktierung (Via)</b></td><td>≈ 0,3–1,5 nH</td><td>Mehrere Vias parallel für Masseanbindung</td></tr>
+<tr><td><b>Elko-ESL</b></td><td>≈ 5–20 nH</td><td>Deshalb immer ein kleiner Keramik parallel zum Elko</td></tr>
+<tr><td><b>Steckverbinder</b></td><td>2–10 nH je Kontakt</td><td>Masse-Pins nicht sparen, gleichmäßig verteilen</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Albach, <i>Grundlagen der Elektrotechnik 2</i>, Kapitel elektrisches und magnetisches Feld.</li>
+    <li>Würth Elektronik, <i>Trilogie der induktiven Bauelemente</i> — sehr praxisnahe Darstellung von Kernmaterialien und Sättigung, als PDF frei verfügbar.</li>
+    <li>Murata und TDK: Application Notes zu <i>DC Bias Characteristics of MLCC</i> — mit Messkurven zur Kapazitätsabnahme.</li>
+    <li>Henry W. Ott, <i>Electromagnetic Compatibility Engineering</i>, Wiley — Standardwerk zu parasitären Effekten.</li>
+  </ul>
+</div>

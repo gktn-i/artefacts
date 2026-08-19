@@ -1,0 +1,84 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Treiber ist die Stufe zwischen Logik und Leistung — und die häufigste Fehlerquelle im Antriebsstrang.</b> Drei Dinge entscheiden über Erfolg: Strombegrenzung, Totzeit und ein Layout, das Störungen nicht in die Steuerung zurückkoppelt.</div>
+
+<h2>Die Treiberklassen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Klasse</th><th>Für</th><th>Beispiele</th><th>Merkmale</th></tr></thead>
+<tbody>
+<tr><td><b>Einfache H-Brücke</b></td><td>Bürsten-Gleichstrommotoren</td><td>DRV8871, TB6612FNG, BTS7960</td><td>PWM plus Richtung. Auf Strombegrenzung und Übertemperaturschutz achten</td></tr>
+<tr><td><b>Schrittmotortreiber</b></td><td>Schrittmotoren</td><td>A4988, DRV8825, TMC2209, TMC5160</td><td>Chopper mit Stromregelung, Mikroschritt, Step/Dir-Schnittstelle</td></tr>
+<tr><td><b>Dreiphasen-Gatetreiber</b></td><td>BLDC und PMSM</td><td>DRV8313, DRV8323, L6234</td><td>Sechs Gate-Ausgänge mit Bootstrap, Totzeit, Überstromschutz</td></tr>
+<tr><td><b>Frequenzumrichter</b></td><td>Asynchron- und Synchronmotoren am Netz</td><td>Industriegeräte</td><td>Gleichrichter, Zwischenkreis, Wechselrichter; Regelverfahren U/f oder vektoriell</td></tr>
+<tr><td><b>Servoverstärker</b></td><td>PMSM mit Geber</td><td>Industriegeräte</td><td>Kaskade Strom-Drehzahl-Position, Feldbusanbindung, Sicherheitsfunktionen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Strombegrenzung — der wichtigste Parameter</h2>
+<div class="steps">
+  <div class="step"><h4>Warum sie nötig ist</h4>Ein Motor im Stillstand ist elektrisch fast ein Kurzschluss: Nur der Wicklungswiderstand begrenzt den Strom. Ein Motor mit 1 Ω an 24 V zieht 24 A, wenn er sich nicht dreht — weit über dem Nennstrom.</div>
+  <div class="step"><h4>Wie sie funktioniert</h4>Der Treiber misst den Strom über einen Shunt und schaltet ab, sobald der Sollwert erreicht ist. Nach einer festen Zeit wird wieder eingeschaltet — das ist das Chopper-Verfahren.</div>
+  <div class="step"><h4>Einstellen beim Schrittmotortreiber</h4>Bei A4988 und DRV8825 über ein Potentiometer und die Referenzspannung V_ref. Die Formel steht im Datenblatt und unterscheidet sich je Modul — den Wert immer nachmessen, nicht raten. Typisch: 70–85 % des Motornennstroms als Startwert.</div>
+  <div class="step"><h4>Erwärmung prüfen</h4>Nach zehn Minuten Betrieb: Motor über 80 °C oder Treiber zu heiß zum Anfassen heißt zu viel Strom. Motoren dürfen warm werden, aber ein Kunststoffgehäuse in der Nähe setzt die Grenze.</div>
+  <div class="step"><h4>Beim eigenen Treiber</h4>Überstromabschaltung <b>in Hardware</b> vorsehen: Komparator auf den Shunt, direkt auf den Break-Eingang des Timers. Software allein reagiert zu langsam, wenn ein Kurzschluss auftritt.</div>
+</div>
+
+<h2>Schrittmotortreiber im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Treiber</th><th>Strom</th><th>Mikroschritt</th><th>Besonderheit</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>A4988</b></td><td>1 A (2 A mit Kühlung)</td><td>bis 1/16</td><td>—</td><td>Der Klassiker, billig, laut. Bei 35 V Grenze wenig Reserve</td></tr>
+<tr><td><b>DRV8825</b></td><td>1,5 A (2,2 A mit Kühlung)</td><td>bis 1/32</td><td>bis 45 V</td><td>Etwas kräftiger als A4988, ähnliches Verhalten</td></tr>
+<tr><td><b>TMC2208 / TMC2209</b></td><td>1,4 A (2 A Spitze)</td><td>bis 1/256 interpoliert</td><td>StealthChop (leise), StallGuard (TMC2209)</td><td>Deutlich leiser, sensorlose Anschlagerkennung möglich. UART-Konfiguration</td></tr>
+<tr><td><b>TMC5160</b></td><td>bis 3 A intern, mehr mit externen MOSFETs</td><td>bis 1/256</td><td>Rampengenerator eingebaut, SPI</td><td>Für größere Achsen; der Treiber übernimmt die Bewegungsplanung</td></tr>
+<tr><td><b>Closed-Loop-Module</b></td><td>je nach Typ</td><td>—</td><td>Encoder am Motor, Schrittverluste werden nachgeregelt</td><td>Kombiniert die Einfachheit des Schrittmotors mit der Sicherheit eines Servoantriebs</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Nie einen Motor bei eingeschaltetem Treiber abstecken.</b> Die Induktivität der Wicklung erzeugt beim Trennen eine Spannungsspitze, die den Treiber zerstört. Das ist die mit Abstand häufigste Todesursache von Schrittmotortreibern. Ebenso: Treiber niemals ohne angeschlossenen Motor bestromen und beim Aufstecken auf die Richtung achten — ein verkehrt herum eingesetzter Treiber überlebt das Einschalten selten.</div>
+
+<h2>PWM richtig einstellen</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Frequenz</th><th>Wirkung</th><th>Bewertung</th></tr></thead>
+<tbody>
+<tr><td><b>&lt; 1 kHz</b></td><td>Hörbares Brummen, sichtbare Drehmomentwelligkeit</td><td>Nur bei Lüftern und unkritischen Anwendungen</td></tr>
+<tr><td><b>1–15 kHz</b></td><td>Im Hörbereich — es pfeift</td><td>Der ungünstigste Bereich; wenn möglich meiden</td></tr>
+<tr><td><b>16–25 kHz</b></td><td>Knapp über der Hörgrenze</td><td>Der übliche Kompromiss bei Motoren</td></tr>
+<tr><td><b>&gt; 30 kHz</b></td><td>Sicher unhörbar, aber deutlich mehr Schaltverluste</td><td>Bei kleinen Strömen und guten MOSFETs sinnvoll</td></tr>
+</tbody>
+</table></div>
+<div class="grid2">
+  <div class="card"><div class="ct">Auflösung gegen Frequenz</div><div class="cd">Beide teilen sich denselben Timer-Zähler. Bei 100 MHz Timertakt und 20 kHz PWM bleiben 5000 Schritte, also knapp 12 Bit. Wer 16 Bit Auflösung bei 20 kHz will, braucht einen schnelleren Timer oder einen hochauflösenden Timer-Block (HRTIM bei STM32G4).</div></div>
+  <div class="card"><div class="ct">Gleich- oder Gegentakt</div><div class="cd">Bei Halbbrücken erzeugt der zentrierte Zählmodus (Center-Aligned) ein symmetrisches Signal mit weniger Oberwellen — und liefert einen sauberen Triggerzeitpunkt in der Mitte für die Strommessung.</div></div>
+</div>
+
+<h2>Feldorientierte Regelung — der Ablauf</h2>
+<div class="steps">
+  <div class="step"><h4>Ströme messen</h4>Zwei der drei Phasenströme genügen; der dritte ergibt sich, weil die Summe null ist. Gemessen wird per Shunt, synchron zur PWM-Mitte.</div>
+  <div class="step"><h4>Clarke-Transformation</h4>Aus drei Phasenströmen werden zwei orthogonale Komponenten (α, β) im statorfesten System.</div>
+  <div class="step"><h4>Park-Transformation</h4>Mit dem gemessenen Rotorwinkel werden daraus die Komponenten im rotorfesten System: <b>i_d</b> (feldbildend) und <b>i_q</b> (momentbildend). Ab hier sind es aus Sicht des Reglers Gleichgrößen.</div>
+  <div class="step"><h4>Zwei PI-Regler</h4>Einer regelt i_d auf null (kein unnötiger Feldstrom), einer i_q auf den Momentsollwert. Weil es Gleichgrößen sind, funktioniert ein einfacher PI-Regler perfekt.</div>
+  <div class="step"><h4>Rücktransformation und Modulation</h4>Inverse Park, dann Raumzeigermodulation (SVPWM) auf die drei Halbbrücken. SVPWM nutzt die Zwischenkreisspannung um etwa 15 % besser aus als reine Sinusmodulation.</div>
+  <div class="step"><h4>Alles in einem Regeltakt</h4>Typisch 10–20 kHz, synchron zur PWM. Der ganze Ablauf muss in unter 50 µs fertig sein — auf einem Cortex-M4 mit FPU gut machbar.</div>
+</div>
+
+<h2>Layout und Störungen</h2>
+<ul>
+  <li><b>Leistungs- und Signalmasse getrennt führen</b>, an genau einem Punkt verbinden — am besten am Shunt.</li>
+  <li><b>Motorleitungen verdrillen</b> und, wenn möglich, schirmen. Sie führen steile Flanken und strahlen kräftig ab.</li>
+  <li><b>Zwischenkreiskondensator direkt an der Brücke</b>, nicht am Netzteil. Der pulsförmige Strom muss auf kürzestem Weg fließen.</li>
+  <li><b>Gate-Widerstände</b> nicht weglassen: 10–47 Ω dämpfen die Schwingung und senken die Störabstrahlung deutlich.</li>
+  <li><b>Encoderleitung getrennt von der Motorleitung führen.</b> Eine gestörte Encoderleitung erzeugt Positionssprünge, die wie Software-Fehler aussehen.</li>
+  <li><b>Bremswiderstand vorsehen</b>, wenn ein Antrieb Massen abbremsen soll. Sonst treibt die zurückgespeiste Energie die Zwischenkreisspannung hoch, bis der Treiber abschaltet oder stirbt.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Trinamic/Analog Devices, Datenblätter TMC2209 und TMC5160 — mit ausführlicher Beschreibung von StealthChop, SpreadCycle und StallGuard.</li>
+    <li>Texas Instruments, <i>Motor Drive Fundamentals</i> und die DRV83xx-Anwendungsberichte.</li>
+    <li>ST, <i>AN5397 — FOC with STM32</i> und die Motor Control SDK-Dokumentation.</li>
+    <li><a href="https://simplefoc.com/">SimpleFOC</a> — quelloffene Umsetzung mit erklärten Schritten.</li>
+    <li><a href="https://vesc-project.com/">VESC Project</a> — offener Motorregler für BLDC und PMSM, sehr lehrreicher Quelltext.</li>
+  </ul>
+</div>

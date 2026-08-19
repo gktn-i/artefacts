@@ -594,6 +594,1226 @@
    ]
   },
   {
+   "id": "mechatronik",
+   "name": "Mechatronik",
+   "icon": "⚙️",
+   "file": "hub-mechatronik.html",
+   "tagline": "Elektrotechnik · Elektronik · Informationstechnik · Regelung",
+   "desc": "Das Fach, das Mechanik, Elektronik und Software zu einem Gerät zusammenzieht. Vom ohmschen Gesetz über den Operationsverstärker, den Mikrocontroller und den Regelkreis bis zur fertigen Leiterplatte — mit Lernpfad, Glossar und geprüften Quellen.",
+   "accent": {
+    "l": "#1e5bb8",
+    "d": "#63a9f5"
+   },
+   "areas": [
+    {
+     "id": "et-elektronik",
+     "name": "Elektrotechnik & Elektronik",
+     "desc": "Das Fundament: Ströme und Felder, Bauelemente, Schaltungen — analog wie digital.",
+     "modules": [
+      {
+       "id": "elektrotechnik",
+       "file": "elektrotechnik.html",
+       "name": "Elektrotechnik",
+       "icon": "⚡",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Die Theorie, auf der alles andere steht: Größen und Einheiten, Netzwerkanalyse, Felder, Wechselstrom mit komplexer Rechnung, Drehstrom, Schaltvorgänge, Leitungen und die Schutzmaßnahmen, die Leben retten.",
+       "tags": [
+        "ohmsches gesetz",
+        "kirchhoff",
+        "netzwerkanalyse",
+        "thevenin",
+        "wechselstrom",
+        "zeigerdiagramm",
+        "komplexe rechnung",
+        "drehstrom",
+        "transformator",
+        "rc-glied",
+        "schutzmassnahmen",
+        "vde"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "groessen",
+         "t": "Größen & Einheiten"
+        },
+        {
+         "h": "gleichstrom",
+         "t": "Gleichstromkreis"
+        },
+        {
+         "h": "netzwerke",
+         "t": "Netzwerkanalyse"
+        },
+        {
+         "h": "felder",
+         "t": "Elektrische & magnetische Felder"
+        },
+        {
+         "h": "wechselstrom",
+         "t": "Wechselstrom & Zeiger"
+        },
+        {
+         "h": "komplexe",
+         "t": "Komplexe Rechnung & Ortskurven"
+        },
+        {
+         "h": "leistung",
+         "t": "Leistung & Blindleistung"
+        },
+        {
+         "h": "drehstrom",
+         "t": "Drehstrom & Transformator"
+        },
+        {
+         "h": "transient",
+         "t": "Schaltvorgänge: RC, RL, RLC"
+        },
+        {
+         "h": "leitungen",
+         "t": "Leitungen & Kabel"
+        },
+        {
+         "h": "sicherheit",
+         "t": "Elektrische Sicherheit"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "groessen"
+         ]
+        },
+        {
+         "l": "Gleichstrom",
+         "sections": [
+          "gleichstrom",
+          "netzwerke",
+          "felder"
+         ]
+        },
+        {
+         "l": "Wechselstrom",
+         "sections": [
+          "wechselstrom",
+          "komplexe",
+          "leistung",
+          "drehstrom",
+          "transient"
+         ]
+        },
+        {
+         "l": "Praxis",
+         "sections": [
+          "leitungen",
+          "sicherheit"
+         ]
+        }
+       ],
+       "related": [
+        "elektronik-101"
+       ]
+      },
+      {
+       "id": "analogtechnik",
+       "file": "analogtechnik.html",
+       "name": "Analog & Leistung",
+       "icon": "🎛️",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Bauelemente und Schaltungstechnik in Kleinsignal und Leistung: pn-Übergang, Dioden, BJT, MOSFET, Operationsverstärker, Filter, Rauschen, ADC/DAC, Linear- und Schaltregler, Magnetik und EMV.",
+       "tags": [
+        "halbleiter",
+        "diode",
+        "transistor",
+        "mosfet",
+        "opv",
+        "operationsverstärker",
+        "filter",
+        "rauschen",
+        "adc",
+        "dac",
+        "buck",
+        "boost",
+        "schaltregler",
+        "emv",
+        "gate-treiber"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "halbleiter",
+         "t": "Halbleiter & pn-Übergang"
+        },
+        {
+         "h": "dioden",
+         "t": "Dioden & Schutzbeschaltung"
+        },
+        {
+         "h": "bjt",
+         "t": "Bipolartransistor"
+        },
+        {
+         "h": "mosfet",
+         "t": "MOSFET & Gate-Treiber"
+        },
+        {
+         "h": "opv",
+         "t": "Operationsverstärker"
+        },
+        {
+         "h": "filter",
+         "t": "Filter & Frequenzgang"
+        },
+        {
+         "h": "rauschen",
+         "t": "Rauschen & Präzision"
+        },
+        {
+         "h": "wandler",
+         "t": "ADC & DAC"
+        },
+        {
+         "h": "versorgung",
+         "t": "Linear- & Schaltregler"
+        },
+        {
+         "h": "magnetik",
+         "t": "Spulen, Kerne & Trafos"
+        },
+        {
+         "h": "emv",
+         "t": "EMV, Masse & Entkopplung"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "halbleiter"
+         ]
+        },
+        {
+         "l": "Bauelemente",
+         "sections": [
+          "dioden",
+          "bjt",
+          "mosfet"
+         ]
+        },
+        {
+         "l": "Schaltungstechnik",
+         "sections": [
+          "opv",
+          "filter",
+          "rauschen",
+          "wandler"
+         ]
+        },
+        {
+         "l": "Leistung & Störungen",
+         "sections": [
+          "versorgung",
+          "magnetik",
+          "emv"
+         ]
+        }
+       ],
+       "related": [
+        "elektronik-101",
+        "loeten"
+       ]
+      },
+      {
+       "id": "digitaltechnik",
+       "file": "digitaltechnik.html",
+       "name": "Digitaltechnik",
+       "icon": "🔲",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Von der Wahrheitstabelle zum Zustandsautomaten: Zahlensysteme, boolesche Algebra, KV-Diagramme, Schaltnetze und Schaltwerke, Timing und Metastabilität, Logikfamilien, Speicher und der Einstieg in FPGA und HDL.",
+       "tags": [
+        "zahlensysteme",
+        "zweierkomplement",
+        "boolesche algebra",
+        "kv-diagramm",
+        "flipflop",
+        "automat",
+        "fsm",
+        "setup",
+        "hold",
+        "metastabilität",
+        "cmos",
+        "lvds",
+        "sram",
+        "dram",
+        "flash",
+        "fpga",
+        "vhdl",
+        "verilog"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "zahlen",
+         "t": "Zahlensysteme & Codes"
+        },
+        {
+         "h": "boole",
+         "t": "Boolesche Algebra & KV"
+        },
+        {
+         "h": "schaltnetze",
+         "t": "Schaltnetze"
+        },
+        {
+         "h": "flipflops",
+         "t": "Flipflops & Schaltwerke"
+        },
+        {
+         "h": "automaten",
+         "t": "Zustandsautomaten"
+        },
+        {
+         "h": "timing",
+         "t": "Timing & Metastabilität"
+        },
+        {
+         "h": "logikfamilien",
+         "t": "Logikfamilien & Pegel"
+        },
+        {
+         "h": "speicher",
+         "t": "Speichertechnologien"
+        },
+        {
+         "h": "fpga",
+         "t": "FPGA, HDL & Toolchain"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "zahlen",
+          "boole"
+         ]
+        },
+        {
+         "l": "Schaltungen",
+         "sections": [
+          "schaltnetze",
+          "flipflops",
+          "automaten"
+         ]
+        },
+        {
+         "l": "Physik & Praxis",
+         "sections": [
+          "timing",
+          "logikfamilien",
+          "speicher",
+          "fpga"
+         ]
+        }
+       ],
+       "related": [
+        "elektronik-101"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "informationstechnik",
+     "name": "Informations- & Rechnertechnik",
+     "desc": "Wie aus Spannungspegeln Information wird — und wie man sie rechnet, überträgt und schützt.",
+     "modules": [
+      {
+       "id": "informationstechnik",
+       "file": "informationstechnik.html",
+       "name": "Informationstechnik",
+       "icon": "💾",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Der IT-Teil der Mechatronik: Information und Entropie, Fehlererkennung, Zahlendarstellung, Rechnerarchitektur, Befehlssätze, Betriebssysteme und Echtzeit, Netzwerke, Funk, Signalverarbeitung, Security und Werkzeuge.",
+       "tags": [
+        "entropie",
+        "huffman",
+        "crc",
+        "hamming",
+        "fließkomma",
+        "ieee 754",
+        "pipeline",
+        "cache",
+        "risc-v",
+        "arm",
+        "echtzeit",
+        "osi",
+        "tcp/ip",
+        "ethernet",
+        "wlan",
+        "dsp",
+        "fft",
+        "abtasttheorem",
+        "kryptografie",
+        "git"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "information",
+         "t": "Information & Entropie"
+        },
+        {
+         "h": "fehlerschutz",
+         "t": "Fehlererkennung & Korrektur"
+        },
+        {
+         "h": "zahlen",
+         "t": "Zahlendarstellung & Fließkomma"
+        },
+        {
+         "h": "architektur",
+         "t": "Rechnerarchitektur"
+        },
+        {
+         "h": "befehlssatz",
+         "t": "Befehlssätze: ARM, RISC-V, x86"
+        },
+        {
+         "h": "os",
+         "t": "Betriebssysteme & Echtzeit"
+        },
+        {
+         "h": "netzwerke",
+         "t": "Netzwerke & TCP/IP"
+        },
+        {
+         "h": "funk",
+         "t": "Funk & Wireless"
+        },
+        {
+         "h": "dsp",
+         "t": "Signalverarbeitung & DSP"
+        },
+        {
+         "h": "security",
+         "t": "Security & Kryptografie"
+        },
+        {
+         "h": "werkzeuge",
+         "t": "Softwaretechnik & Werkzeuge"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "information",
+          "fehlerschutz",
+          "zahlen"
+         ]
+        },
+        {
+         "l": "Rechner",
+         "sections": [
+          "architektur",
+          "befehlssatz",
+          "os"
+         ]
+        },
+        {
+         "l": "Übertragung",
+         "sections": [
+          "netzwerke",
+          "funk",
+          "dsp"
+         ]
+        },
+        {
+         "l": "Praxis",
+         "sections": [
+          "security",
+          "werkzeuge"
+         ]
+        }
+       ],
+       "related": [
+        "homeserver"
+       ]
+      },
+      {
+       "id": "embedded",
+       "file": "embedded-firmware.html",
+       "name": "Embedded & Firmware",
+       "icon": "🧩",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Der Mikrocontroller in der Praxis: aktuelle MCU-Landschaft, Toolchains, Peripherie, Interrupts und DMA, Bussysteme, FreeRTOS und Zephyr, Linker und Bootloader, Debugging, Stromsparen und die C-Fallstricke, die jeden einmal erwischen.",
+       "tags": [
+        "esp32",
+        "stm32",
+        "rp2350",
+        "nrf54",
+        "avr",
+        "freertos",
+        "zephyr",
+        "dma",
+        "interrupt",
+        "i2c",
+        "spi",
+        "uart",
+        "can",
+        "swd",
+        "jtag",
+        "bootloader",
+        "ota",
+        "low power",
+        "c"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "mcus",
+         "t": "MCU-Landschaft 2026"
+        },
+        {
+         "h": "toolchain",
+         "t": "Toolchain & Build"
+        },
+        {
+         "h": "peripherie",
+         "t": "Peripherie: GPIO, Timer, DMA"
+        },
+        {
+         "h": "interrupts",
+         "t": "Interrupts & Nebenläufigkeit"
+        },
+        {
+         "h": "busse",
+         "t": "Bussysteme auf dem Board"
+        },
+        {
+         "h": "rtos",
+         "t": "RTOS: FreeRTOS & Zephyr"
+        },
+        {
+         "h": "speicherbild",
+         "t": "Speicherbild, Linker & Bootloader"
+        },
+        {
+         "h": "debug",
+         "t": "Debuggen & Messen"
+        },
+        {
+         "h": "strom",
+         "t": "Stromsparen & Batteriebetrieb"
+        },
+        {
+         "h": "cpraxis",
+         "t": "C-Praxis & Fallstricke"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "mcus",
+          "toolchain"
+         ]
+        },
+        {
+         "l": "Hardware-nah",
+         "sections": [
+          "peripherie",
+          "interrupts",
+          "busse"
+         ]
+        },
+        {
+         "l": "Software",
+         "sections": [
+          "rtos",
+          "speicherbild",
+          "cpraxis"
+         ]
+        },
+        {
+         "l": "Betrieb",
+         "sections": [
+          "debug",
+          "strom"
+         ]
+        }
+       ],
+       "related": [
+        "elektronik-101",
+        "robotik"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "systeme",
+     "name": "Mechatronische Systeme",
+     "desc": "Messen, regeln, bewegen — und das Ganze sicher automatisieren.",
+     "modules": [
+      {
+       "id": "regelungstechnik",
+       "file": "regelungstechnik.html",
+       "name": "Regelungstechnik",
+       "icon": "🎚️",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Vom Modell zum stabilen Regelkreis: Übertragungsfunktion und Laplace, die Standardglieder, PID im Detail, Einstellregeln nach Ziegler-Nichols und Chien-Hrones-Reswick, Stabilität im Bode- und Nyquist-Diagramm, digitale Regelung und Zustandsraum.",
+       "tags": [
+        "regelkreis",
+        "übertragungsfunktion",
+        "laplace",
+        "pt1",
+        "pt2",
+        "totzeit",
+        "pid",
+        "ziegler-nichols",
+        "chien",
+        "bode",
+        "nyquist",
+        "wurzelortskurve",
+        "anti-windup",
+        "kaskadenregelung",
+        "kalman",
+        "zustandsraum"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "modell",
+         "t": "Modellbildung & Systeme"
+        },
+        {
+         "h": "laplace",
+         "t": "Laplace & Übertragungsfunktion"
+        },
+        {
+         "h": "glieder",
+         "t": "Übertragungsglieder"
+        },
+        {
+         "h": "regelkreis",
+         "t": "Regelkreis & Güte"
+        },
+        {
+         "h": "pid",
+         "t": "PID-Regler verstehen"
+        },
+        {
+         "h": "einstellregeln",
+         "t": "Einstellregeln & Tuning"
+        },
+        {
+         "h": "stabilitaet",
+         "t": "Stabilität: Bode & Nyquist"
+        },
+        {
+         "h": "digital",
+         "t": "Digitale Regelung & Abtastung"
+        },
+        {
+         "h": "praxis",
+         "t": "Praxis: Windup, Filter, Kaskade"
+        },
+        {
+         "h": "zustandsraum",
+         "t": "Zustandsraum & Beobachter"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "modell",
+          "laplace"
+         ]
+        },
+        {
+         "l": "Bausteine",
+         "sections": [
+          "glieder",
+          "regelkreis"
+         ]
+        },
+        {
+         "l": "Regler",
+         "sections": [
+          "pid",
+          "einstellregeln",
+          "praxis"
+         ]
+        },
+        {
+         "l": "Analyse & mehr",
+         "sections": [
+          "stabilitaet",
+          "digital",
+          "zustandsraum"
+         ]
+        }
+       ],
+       "related": [
+        "robotik"
+       ]
+      },
+      {
+       "id": "sensorik-aktorik",
+       "file": "sensorik-aktorik.html",
+       "name": "Sensorik & Antriebe",
+       "icon": "🛞",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Die Schnittstelle zur physischen Welt: Messkette und Signalkonditionierung, Messabweichung und Kalibrierung, Sensorprinzipien mit Datenbank, Positionsmessung, alle Motortypen im Vergleich, Treiberstufen, Antriebsauslegung, Pneumatik und Mechanik.",
+       "tags": [
+        "sensor",
+        "messkette",
+        "kalibrierung",
+        "dehnungsmessstreifen",
+        "hall",
+        "imu",
+        "tof",
+        "encoder",
+        "resolver",
+        "dc-motor",
+        "bldc",
+        "pmsm",
+        "schrittmotor",
+        "servo",
+        "h-brücke",
+        "foc",
+        "getriebe",
+        "pneumatik"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "messkette",
+         "t": "Messkette & Konditionierung"
+        },
+        {
+         "h": "messfehler",
+         "t": "Messabweichung & Kalibrierung"
+        },
+        {
+         "h": "prinzipien",
+         "t": "Sensorprinzipien"
+        },
+        {
+         "h": "katalog",
+         "t": "Sensor-Katalog"
+        },
+        {
+         "h": "position",
+         "t": "Encoder & Positionsmessung"
+        },
+        {
+         "h": "motoren",
+         "t": "Motortypen im Vergleich"
+        },
+        {
+         "h": "treiber",
+         "t": "Motortreiber & Ansteuerung"
+        },
+        {
+         "h": "auslegung",
+         "t": "Antriebsauslegung & Getriebe"
+        },
+        {
+         "h": "fluid",
+         "t": "Pneumatik & Hydraulik"
+        },
+        {
+         "h": "mechanik",
+         "t": "Mechanik-Schnittstelle"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "messkette",
+          "messfehler"
+         ]
+        },
+        {
+         "l": "Sensorik",
+         "sections": [
+          "prinzipien",
+          "katalog",
+          "position"
+         ]
+        },
+        {
+         "l": "Aktorik",
+         "sections": [
+          "motoren",
+          "treiber",
+          "auslegung",
+          "fluid"
+         ]
+        },
+        {
+         "l": "Aufbau",
+         "sections": [
+          "mechanik"
+         ]
+        }
+       ],
+       "related": [
+        "robotik",
+        "maker-komponenten",
+        "maschinenbau"
+       ]
+      },
+      {
+       "id": "automatisierung",
+       "file": "automatisierung-sps.html",
+       "name": "Automatisierung & SPS",
+       "icon": "🏭",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Industrieseite der Mechatronik: SPS-Aufbau und Zykluszeit, die Sprachen der IEC 61131-3 in der Fassung von 2025, Programmierpraxis, Feldbusse und Industrial Ethernet, Schaltschrankbau, funktionale Sicherheit nach PL und SIL, HMI, OPC UA und IIoT.",
+       "tags": [
+        "sps",
+        "plc",
+        "iec 61131-3",
+        "strukturierter text",
+        "kop",
+        "fup",
+        "ablaufsprache",
+        "profinet",
+        "ethercat",
+        "modbus",
+        "io-link",
+        "schaltschrank",
+        "performance level",
+        "iso 13849",
+        "sil",
+        "opc ua",
+        "industrie 4.0"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "sps",
+         "t": "SPS: Aufbau & Zyklus"
+        },
+        {
+         "h": "iec61131",
+         "t": "IEC 61131-3: die Sprachen"
+        },
+        {
+         "h": "programmierung",
+         "t": "Programmierpraxis"
+        },
+        {
+         "h": "feldbus",
+         "t": "Feldbusse & Industrial Ethernet"
+        },
+        {
+         "h": "schaltschrank",
+         "t": "Schaltschrank & Verdrahtung"
+        },
+        {
+         "h": "sicherheit",
+         "t": "Funktionale Sicherheit"
+        },
+        {
+         "h": "hmi",
+         "t": "HMI, SCADA & OPC UA"
+        },
+        {
+         "h": "iiot",
+         "t": "Industrie 4.0 & IIoT"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "sps"
+         ]
+        },
+        {
+         "l": "Software",
+         "sections": [
+          "iec61131",
+          "programmierung"
+         ]
+        },
+        {
+         "l": "Anlage",
+         "sections": [
+          "feldbus",
+          "schaltschrank",
+          "sicherheit"
+         ]
+        },
+        {
+         "l": "Vernetzung",
+         "sections": [
+          "hmi",
+          "iiot"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "praxis",
+     "name": "Praxis & Weg dorthin",
+     "desc": "Von der Idee zur Leiterplatte — und der Lernpfad, der dich dahin bringt.",
+     "modules": [
+      {
+       "id": "pcb-design",
+       "file": "leiterplatte-kicad.html",
+       "name": "Leiterplatte & KiCad",
+       "icon": "🧿",
+       "kind": "Anleitung",
+       "updated": "2026-08-19",
+       "desc": "Der komplette Weg vom Schaltplan zur bestückten Platine mit KiCad 10: Bibliotheken und Footprints, Lagenaufbau, Leiterbahnbreite nach IPC, Masseführung, Signalintegrität, Fertigungsdaten und Bestellung.",
+       "tags": [
+        "kicad",
+        "pcb",
+        "layout",
+        "footprint",
+        "stackup",
+        "ipc-2221",
+        "ipc-2152",
+        "gerber",
+        "drc",
+        "impedanz",
+        "via",
+        "jlcpcb",
+        "dfm"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Workflow"
+        },
+        {
+         "h": "kicad",
+         "t": "KiCad 10 im Überblick"
+        },
+        {
+         "h": "schaltplan",
+         "t": "Schaltplan sauber zeichnen"
+        },
+        {
+         "h": "bauform",
+         "t": "Bauformen & Footprints"
+        },
+        {
+         "h": "stackup",
+         "t": "Lagenaufbau & Material"
+        },
+        {
+         "h": "leiterbahn",
+         "t": "Leiterbahnbreite & Strom"
+        },
+        {
+         "h": "layout",
+         "t": "Layout-Regeln & Masse"
+        },
+        {
+         "h": "signal",
+         "t": "Signalintegrität & Impedanz"
+        },
+        {
+         "h": "fertigung",
+         "t": "Fertigungsdaten & Bestellung"
+        },
+        {
+         "h": "bestueckung",
+         "t": "Bestückung & Erstinbetriebnahme"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "kicad"
+         ]
+        },
+        {
+         "l": "Entwurf",
+         "sections": [
+          "schaltplan",
+          "bauform",
+          "stackup"
+         ]
+        },
+        {
+         "l": "Layout",
+         "sections": [
+          "leiterbahn",
+          "layout",
+          "signal"
+         ]
+        },
+        {
+         "l": "Fertigung",
+         "sections": [
+          "fertigung",
+          "bestueckung"
+         ]
+        }
+       ],
+       "related": [
+        "loeten",
+        "elektronik-101"
+       ]
+      },
+      {
+       "id": "lernpfad",
+       "file": "mechatronik-lernpfad.html",
+       "name": "Lernpfad & Projekte",
+       "icon": "🎯",
+       "kind": "Anleitung",
+       "updated": "2026-08-19",
+       "desc": "Wie man sich das Fach tatsächlich aneignet: ein Pfad in sechs Stufen, Lernmethodik mit Belegen, Projektlisten je Niveau, Grundausstattung für den Arbeitsplatz, Vorgehen vom Einfall zum Gerät und eine Debugging-Strategie.",
+       "tags": [
+        "lernpfad",
+        "roadmap",
+        "projekte",
+        "arbeitsplatz",
+        "ausstattung",
+        "methodik",
+        "spaced repetition",
+        "debugging"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Wie du das hier benutzt"
+        },
+        {
+         "h": "pfad",
+         "t": "Lernpfad in 6 Stufen"
+        },
+        {
+         "h": "methodik",
+         "t": "Lernmethodik mit Belegen"
+        },
+        {
+         "h": "einstieg",
+         "t": "Projekte: Einstieg"
+        },
+        {
+         "h": "aufbau",
+         "t": "Projekte: Aufbau"
+        },
+        {
+         "h": "fortgeschritten",
+         "t": "Projekte: Fortgeschritten"
+        },
+        {
+         "h": "arbeitsplatz",
+         "t": "Arbeitsplatz & Ausstattung"
+        },
+        {
+         "h": "vorgehen",
+         "t": "Vom Einfall zum Gerät"
+        },
+        {
+         "h": "debugging",
+         "t": "Debugging-Strategie"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "pfad",
+          "methodik"
+         ]
+        },
+        {
+         "l": "Projekte",
+         "sections": [
+          "einstieg",
+          "aufbau",
+          "fortgeschritten"
+         ]
+        },
+        {
+         "l": "Werkbank",
+         "sections": [
+          "arbeitsplatz",
+          "vorgehen",
+          "debugging"
+         ]
+        }
+       ],
+       "related": [
+        "elektronik-101",
+        "loeten",
+        "robotik"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "nachschlagen",
+     "name": "Nachschlagen",
+     "desc": "Ein Ort für Formeln, Fachwörter, Bauteile, Werkzeuge und geprüfte Quellen.",
+     "modules": [
+      {
+       "id": "mecha-referenz",
+       "file": "mechatronik-nachschlagewerk.html",
+       "name": "Nachschlagewerk",
+       "icon": "📚",
+       "kind": "Nachschlagewerk",
+       "updated": "2026-08-19",
+       "desc": "Der Sammelband des Hubs: Formelsammlung, Einheiten und Konstanten, Glossar A–Z mit Suche, Abkürzungsverzeichnis, Komponenten-Katalog, Software und Tools, Webseiten und Foren, Bücher und Kurse, Normen — und die Kriterien, nach denen diese Quellen ausgewählt wurden.",
+       "tags": [
+        "formelsammlung",
+        "einheiten",
+        "si",
+        "konstanten",
+        "glossar",
+        "fachbegriffe",
+        "abkürzungen",
+        "komponenten",
+        "tools",
+        "software",
+        "webseiten",
+        "foren",
+        "bücher",
+        "kurse",
+        "normen",
+        "quellen"
+       ],
+       "sections": [
+        {
+         "h": "formeln",
+         "t": "Formelsammlung"
+        },
+        {
+         "h": "einheiten",
+         "t": "Einheiten & Konstanten"
+        },
+        {
+         "h": "glossar",
+         "t": "Glossar A–Z"
+        },
+        {
+         "h": "abkuerzungen",
+         "t": "Abkürzungen"
+        },
+        {
+         "h": "komponenten",
+         "t": "Komponenten-Katalog"
+        },
+        {
+         "h": "tools",
+         "t": "Software & Tools"
+        },
+        {
+         "h": "webseiten",
+         "t": "Webseiten & Foren"
+        },
+        {
+         "h": "buecher",
+         "t": "Bücher & Kurse"
+        },
+        {
+         "h": "normen",
+         "t": "Normen & Standards"
+        },
+        {
+         "h": "quellen",
+         "t": "Quellen & Prüfkriterien"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Rechnen",
+         "sections": [
+          "formeln",
+          "einheiten"
+         ]
+        },
+        {
+         "l": "Sprache",
+         "sections": [
+          "glossar",
+          "abkuerzungen"
+         ]
+        },
+        {
+         "l": "Material",
+         "sections": [
+          "komponenten",
+          "tools"
+         ]
+        },
+        {
+         "l": "Quellen",
+         "sections": [
+          "webseiten",
+          "buecher",
+          "normen",
+          "quellen"
+         ]
+        }
+       ],
+       "related": [
+        "elektronik-101",
+        "maker-komponenten",
+        "maschinenbau"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "kueche",
    "name": "Küche",
    "icon": "🍳",

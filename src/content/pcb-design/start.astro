@@ -1,0 +1,56 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Weg vom Schaltplan zur bestückten Platine ist heute in wenigen Tagen und für zweistellige Eurobeträge machbar.</b> Was ihn scheitern lässt, sind selten die Werkzeuge — es sind vergessene Fußabdrücke, falsche Bauformen und ein Layout, das erst beim Einschalten auffällt.</div>
+
+<h2>Der Ablauf</h2>
+<div class="steps">
+  <div class="step"><h4>Anforderungen festhalten</h4>Versorgungsspannungen, Ströme, Schnittstellen, Umgebungsbedingungen, mechanische Randbedingungen. Eine halbe Seite reicht — aber sie muss vor dem ersten Bauteil stehen.</div>
+  <div class="step"><h4>Blockschaltbild</h4>Welche Baugruppen gibt es, was fließt zwischen ihnen? Erst danach die Bauteile auswählen.</div>
+  <div class="step"><h4>Bauteile auswählen und Verfügbarkeit prüfen</h4><b>Vor</b> dem Zeichnen. Ein Bauteil, das erst in 40 Wochen lieferbar ist, macht das schönste Layout wertlos.</div>
+  <div class="step"><h4>Schaltplan zeichnen</h4>Lesbar gegliedert, mit Werten, Toleranzen und Bauformen. Der Schaltplan ist die Dokumentation, die man in fünf Jahren noch versteht.</div>
+  <div class="step"><h4>Elektrische Regelprüfung (ERC)</h4>Unverbundene Pins, doppelte Bezeichner, Ausgänge gegeneinander — der Prüflauf findet in Sekunden, was sonst Stunden kostet.</div>
+  <div class="step"><h4>Footprints zuordnen und prüfen</h4>Jedes Bauteil gegen das Datenblatt kontrollieren. Der häufigste teure Fehler ist ein falscher oder gespiegelter Fußabdruck.</div>
+  <div class="step"><h4>Platzieren</h4>Nach Funktionsgruppen und Signalfluss. Das Platzieren entscheidet über 80 % der Layoutqualität, das Routen nur über den Rest.</div>
+  <div class="step"><h4>Routen</h4>Erst Versorgung und kritische Signale, dann der Rest. Massefläche durchgehend halten.</div>
+  <div class="step"><h4>Entwurfsregelprüfung (DRC)</h4>Gegen die Fertigungsvorgaben des gewählten Herstellers, nicht gegen die Voreinstellung.</div>
+  <div class="step"><h4>Fertigungsdaten erzeugen und bestellen</h4>Gerber oder das native Format des Herstellers, Bohrdaten, Bestückungsdaten, Stückliste.</div>
+  <div class="step"><h4>Bestücken, prüfen, in Betrieb nehmen</h4>Mit Strombegrenzung, Baugruppe für Baugruppe.</div>
+</div>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#kicad"><div class="mt"><span class="i">🧿</span>KiCad 10</div><div class="md">Aufbau, Projektstruktur, Bibliotheken, die wichtigsten Werkzeuge.</div></a>
+  <a href="#schaltplan"><div class="mt"><span class="i">📐</span>Schaltplan</div><div class="md">Gliederung, Bezeichner, Netzlabels, ERC, typische Fehler.</div></a>
+  <a href="#bauform"><div class="mt"><span class="i">📦</span>Bauformen</div><div class="md">SMD-Größen, Gehäuse, Footprints prüfen, Handbestückbarkeit.</div></a>
+  <a href="#stackup"><div class="mt"><span class="i">🥞</span>Lagenaufbau</div><div class="md">Zwei, vier oder sechs Lagen; Material, Kupferdicke, Kosten.</div></a>
+  <a href="#leiterbahn"><div class="mt"><span class="i">📏</span>Leiterbahnbreite</div><div class="md">Strombelastbarkeit nach IPC-2221 und IPC-2152, mit Rechner.</div></a>
+  <a href="#layout"><div class="mt"><span class="i">🗺️</span>Layout-Regeln</div><div class="md">Masseführung, Abblockung, Abstände, Wärme, mechanische Randbedingungen.</div></a>
+  <a href="#signal"><div class="mt"><span class="i">📶</span>Signalintegrität</div><div class="md">Wellenwiderstand, Terminierung, Längenausgleich, differentielle Paare.</div></a>
+  <a href="#fertigung"><div class="mt"><span class="i">🏭</span>Fertigung</div><div class="md">Gerber, Bohrdaten, Oberflächen, DFM, Bestellablauf.</div></a>
+  <a href="#bestueckung"><div class="mt"><span class="i">🔬</span>Bestückung</div><div class="md">Von Hand oder maschinell, Erstinbetriebnahme, Fehlersuche.</div></a>
+</div>
+
+<h2>Was eine Platine kostet</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Variante</th><th>Größenordnung</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>2 Lagen, 100 × 100 mm, 5 Stück</b></td><td>2–10 €</td><td>Standard-Sammelfertigung; Versand ist oft teurer als die Platinen</td></tr>
+<tr><td><b>4 Lagen, 100 × 100 mm, 5 Stück</b></td><td>10–30 €</td><td>Der Aufpreis ist so gering, dass sich vier Lagen fast immer lohnen</td></tr>
+<tr><td><b>Bestückung einseitig, 5 Stück</b></td><td>30–100 € plus Bauteile</td><td>Einrichtekosten je Bauteiltyp dominieren bei kleinen Stückzahlen</td></tr>
+<tr><td><b>Schablone für Lotpaste</b></td><td>5–20 €</td><td>Lohnt ab drei Platinen, wenn selbst mit Heißluft oder Heizplatte bestückt wird</td></tr>
+<tr><td><b>Expressfertigung</b></td><td>Faktor 2–4</td><td>Selten nötig — der Zeitgewinn liegt meist bei zwei bis drei Tagen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Realistische Planung:</b> Von der Bestellung bis zur Platine im Briefkasten vergehen bei Standardfertigung typisch 7–14 Tage. Wer eine zweite Runde einplant — und die braucht praktisch jeder erste Entwurf —, sollte mit vier bis sechs Wochen bis zur funktionierenden Baugruppe rechnen. Deshalb lohnt es sich, an kritischen Stellen Prüfpunkte, Reservewiderstände und Trennmöglichkeiten vorzusehen.</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li><a href="https://docs.kicad.org/">KiCad Dokumentation</a> — Handbücher zu Schaltplan, Layout und den Rechnerwerkzeugen, auch auf Deutsch.</li>
+    <li>IPC-2221B (Generic Standard on Printed Board Design) und IPC-2152 (Standard for Determining Current Carrying Capacity).</li>
+    <li>Henry W. Ott, <i>Electromagnetic Compatibility Engineering</i>, Kapitel zu Leiterplattenlayout.</li>
+    <li>Rick Hartley, Vorträge zu Masseführung und Rückstrompfaden — frei auf YouTube, für Layoutfragen die klarste verfügbare Darstellung.</li>
+    <li>Löten und Nacharbeit im Detail: <a href="loeten-referenz.html">Löten</a>.</li>
+  </ul>
+</div>
