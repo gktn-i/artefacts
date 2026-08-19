@@ -1,9 +1,10 @@
 /* ============================================================================
    MECHATRONIK-HUB · gemeinsames Modul-Skript
-   Alle elf Module des Hubs laden diese Datei. Jeder Baustein prueft zuerst,
-   ob seine Elemente auf der Seite ueberhaupt vorkommen — was fehlt, kostet
-   nichts. Inhalte stehen im HTML (Pagefind-Volltext, Betrieb ohne JS);
-   hier liegt nur Verhalten: Falten, Filtern, Sortieren, Rechnen, Simulieren.
+   Alle Module des Mechatronik-Hubs und die Technik-Module der Werkstatt laden
+   diese Datei. Jeder Baustein prueft zuerst, ob seine Elemente auf der Seite
+   ueberhaupt vorkommen — was fehlt, kostet nichts. Inhalte stehen im HTML
+   (Pagefind-Volltext, Betrieb ohne JS); hier liegt nur Verhalten: Falten,
+   Filtern, Sortieren, Rechnen, Simulieren.
    ========================================================================== */
 (function () {
 "use strict";
@@ -462,6 +463,127 @@ var CALC = {
       hint: "Der Abschlag von " + Math.round((1 - nutz) * 100) + " % deckt Selbstentladung, Wandlerverluste, "
         + "Kälte und die Tatsache ab, dass eine Zelle unter Last nicht bis zur letzten Milliamperestunde nutzbar ist. "
         + "Bei Funkgeräten zählt der Mittelwert aus Schlafstrom und Sendespitzen, nicht der Spitzenwert."
+    };
+  },
+  /* --- FPV: Schub-Gewicht-Verhaeltnis und Schwebegas --- */
+  fpvschub: function (v) {
+    var m = v.awg, f = v.f, n = isFinite(v.n) && v.n > 0 ? v.n : 4;
+    if (!isFinite(m) || m <= 0 || !isFinite(f)) return { out: "Abfluggewicht und Standschub je Motor eintragen." };
+    var total = f * n;
+    var twr = total / m;
+    var hoverThrust = m / n;
+    /* Schub steigt naeherungsweise mit dem Quadrat der Drehzahl: der Knueppelweg
+       liegt daher zwischen dem reinen Schubanteil und dessen Wurzel. */
+    var lo = 100 / twr, hi = 100 * Math.sqrt(1 / twr);
+    var lvl = twr < 2 ? "zu wenig — das Quad hängt am Gas und lässt sich kaum kontrollieren"
+      : twr < 3 ? "reicht zum Schweben und für ruhige Kamerafahrten, nicht für Acro"
+      : twr < 5 ? "solide für Cinematic und ruhiges Freestyle"
+      : twr < 9 ? "klassischer 5-Zoll-Freestyle-Bereich"
+      : "Rennklasse — bei so wenig Schwebegas wird die Gasauflösung am Knüppel grob";
+    return {
+      out: "Gesamtschub = " + sig(total, 4) + " g  ·  T/W = " + sig(twr, 3) + " : 1  ·  Schwebeschub je Motor = "
+        + sig(hoverThrust, 3) + " g  ·  Schwebegas ≈ " + sig(lo, 2) + "–" + sig(hi, 2) + " %",
+      hint: "Einordnung: " + lvl + ". Der Standschub aus der Herstellertabelle gilt am Boden mit frischem Akku und "
+        + "ohne Fahrtwind — im Flug bleiben davon erfahrungsgemäß 10–20 % weniger. Die Spanne beim Schwebegas kommt "
+        + "daher, dass der Schub etwa mit dem Quadrat der Drehzahl steigt: der reine Schubanteil ist die Untergrenze, "
+        + "die Knüppelstellung liegt in der Praxis darüber."
+    };
+  },
+  /* --- FPV: Flugzeit --- */
+  fpvflug: function (v) {
+    var cap = v.cap, s = v.s, m = v.awg, eff = v.eff, amp = v.i;
+    var use = isFinite(v.use) ? v.use / 100 : 0.8;
+    if (!isFinite(cap) || !isFinite(s) || cap <= 0 || s <= 0) return { out: "Kapazität (mAh) und Zellenzahl eintragen." };
+    var wh = cap / 1000 * 3.7 * s;
+    var out = "Energie = " + sig(wh, 3) + " Wh";
+    var hint = "Gerechnet mit 3,7 V Nennspannung je Zelle. Nutzbar sind hier " + Math.round(use * 100) + " % — der Rest "
+      + "ist Reserve, damit die Zellen nicht unter etwa 3,5 V unter Last einbrechen. ";
+    if (!isFinite(amp) && isFinite(m) && isFinite(eff) && eff > 0) {
+      var p = m / eff;
+      amp = p / (3.7 * s);
+      hint = "Schwebeleistung = " + sig(p, 3) + " W bei " + eff + " g/W, daraus " + sig(amp, 3) + " A mittlerer Strom. " + hint;
+    }
+    if (isFinite(amp) && amp > 0) {
+      var t = 60 * (cap / 1000) * use / amp;
+      out += "  ·  mittlerer Strom = " + sig(amp, 3) + " A  ·  Flugzeit ≈ " + sig(t, 3) + " min";
+      hint += "Das ist eine Schweberechnung. Freestyle zieht das Zwei- bis Dreifache, ein Renn-Pack ist nach der Hälfte "
+        + "der rechnerischen Zeit leer. Für die Flugreise zählt die Energie: " + sig(wh, 3) + " Wh je Pack.";
+    } else {
+      out += "  ·  für die Flugzeit zusätzlich Gewicht und Effizienz oder den mittleren Strom eintragen";
+    }
+    return { out: out, hint: hint };
+  },
+  /* --- FPV: Drehzahl und Blattspitzengeschwindigkeit --- */
+  fpvprop: function (v) {
+    var kv = v.kv, s = v.s, d = v.d, p = v.p;
+    if (!isFinite(kv) || !isFinite(s) || !isFinite(d) || d <= 0) {
+      return { out: "kV, Zellenzahl und Propellerdurchmesser (Zoll) eintragen." };
+    }
+    var uFull = 4.2 * s, uNom = 3.7 * s;
+    var nIdle = kv * uFull;
+    /* Unter Propellerlast bleiben je nach Blattzahl und Steigung rund 65–85 %
+       der Leerlaufdrehzahl uebrig — deshalb hier bewusst eine Spanne. */
+    var nLo = nIdle * 0.65, nHi = nIdle * 0.85;
+    var vLo = Math.PI * (d * 0.0254) * nLo / 60, vHi = Math.PI * (d * 0.0254) * nHi / 60;
+    var out = "Leerlauf (voller Akku) ≈ " + sig(nIdle, 5) + " min⁻¹  ·  unter Last ≈ " + sig(nLo, 4) + "–" + sig(nHi, 4)
+      + " min⁻¹  ·  Blattspitze ≈ " + sig(vLo, 3) + "–" + sig(vHi, 3) + " m/s (bis Mach " + sig(vHi / 343, 2) + ")";
+    var hint = "kV mal Akkuspannung ergibt die Leerlaufdrehzahl ohne Propeller. Unter Last bleiben davon je nach Blattzahl, "
+      + "Steigung und Zuladung rund 65–85 % übrig — ein schwer belasteter Dreiblatt-Propeller liegt am unteren Ende, ein "
+      + "leichter Zweiblatt-Propeller am oberen. Bei " + sig(uNom, 3) + " V Nennspannung wären es " + sig(kv * uNom, 5)
+      + " min⁻¹ Leerlauf. Ab etwa Mach 0,6 (rund 200 m/s) fällt der Wirkungsgrad an der Blattspitze merklich ab und der "
+      + "Propeller wird laut — das ist der Grund, warum große Propeller niedrige kV brauchen.";
+    if (isFinite(p) && p > 0) {
+      var vP = p * 0.0254 * nHi / 60;
+      out += "  ·  Steigungsgeschwindigkeit ≈ bis " + sig(vP, 3) + " m/s (" + sig(vP * 3.6, 3) + " km/h)";
+      hint += " Die Steigungsgeschwindigkeit ist eine theoretische Obergrenze ohne Schlupf; real erreicht ein Quad davon "
+        + "etwa 60–70 %.";
+    }
+    return { out: out, hint: hint };
+  },
+  /* --- FPV: LiPo-Kennwerte --- */
+  fpvlipo: function (v) {
+    var s = v.s, cap = v.cap, c = v.c, u = v.u;
+    if (!isFinite(s) || s <= 0) return { out: "Zellenzahl eintragen." };
+    var out = "voll " + sig(4.2 * s, 3) + " V  ·  Lager " + sig(3.8 * s, 3) + " V  ·  nominal " + sig(3.7 * s, 3)
+      + " V  ·  landen " + sig(3.5 * s, 3) + " V  ·  Untergrenze " + sig(3.3 * s, 3) + " V";
+    var hint = "Die 3,5 V je Zelle sind der Wert unter Last im Flug — nach der Landung erholt sich die Zelle auf etwa "
+      + "3,7 V. Wer regelmäßig unter 3,3 V in Ruhe geht, verliert spürbar Zyklen. ";
+    if (isFinite(cap) && cap > 0) {
+      out += "  ·  " + sig(cap / 1000 * 3.7 * s, 3) + " Wh";
+      hint += "Ladestrom 1C = " + sig(cap / 1000, 3) + " A; mehr als 2C verkürzt die Lebensdauer spürbar. ";
+      if (isFinite(c) && c > 0) {
+        out += "  ·  Dauerstrom laut Aufdruck " + sig(c * cap / 1000, 4) + " A";
+        hint += "Die C-Angabe auf dem Schrumpfschlauch ist unnormiert und praktisch nie gemessen — der Innenwiderstand "
+          + "sagt deutlich mehr über den Pack aus. ";
+      }
+    }
+    if (isFinite(u) && u > 0) {
+      var per = u / s;
+      var soc = Math.max(0, Math.min(100, (per - 3.5) / (4.2 - 3.5) * 100));
+      out += "  ·  gemessen " + sig(per, 3) + " V/Zelle";
+      hint += "Bei " + sig(per, 3) + " V je Zelle in Ruhe sind grob " + Math.round(soc) + " % der nutzbaren Ladung übrig. "
+        + "Die Schätzung ist bewusst grob: die LiPo-Entladekurve ist in der Mitte sehr flach.";
+    }
+    return { out: out, hint: hint };
+  },
+  /* --- FPV: Link-Budget nach Friis --- */
+  fpvfunk: function (v) {
+    var pmw = v.p, sens = v.s, f = v.f;
+    var gt = isFinite(v.gt) ? v.gt : 0, gr = isFinite(v.gr) ? v.gr : 0;
+    var marg = isFinite(v.m) ? v.m : 10;
+    if (!isFinite(pmw) || pmw <= 0 || !isFinite(sens) || !isFinite(f) || f <= 0) {
+      return { out: "Sendeleistung, Empfängerempfindlichkeit und Frequenz eintragen." };
+    }
+    var pdbm = 10 * Math.log10(pmw);
+    var budget = pdbm + gt + gr - sens - marg;
+    var dkm = Math.pow(10, (budget - 32.45 - 20 * Math.log10(f)) / 20);
+    return {
+      out: "Sendeleistung = " + sig(pdbm, 3) + " dBm  ·  Streckenbudget = " + sig(budget, 4) + " dB  ·  Reichweite im "
+        + "Freiraum ≈ " + (dkm < 1 ? sig(dkm * 1000, 3) + " m" : sig(dkm, 3) + " km"),
+      hint: "Freiraumdämpfung nach Friis, mit " + marg + " dB Reserve. Das ist eine Obergrenze für ideale "
+        + "Sichtverbindung — Vegetation, Gebäude, der eigene Körper vor der Antenne und Mehrwegeausbreitung kosten "
+        + "schnell 10–20 dB, also einen Faktor 3 bis 10 in der Reichweite. Verdoppelte Sendeleistung bringt 3 dB und "
+        + "damit rund 40 % mehr Reichweite; dieselben 3 dB gibt es über die Antenne geschenkt, ohne Strom und ohne Wärme."
     };
   },
   /* --- Einheiten-Vorsatz --- */

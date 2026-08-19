@@ -1,0 +1,91 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Reihenfolge jeder Fehlersuche: mechanisch, elektrisch, Konfiguration.</b> Die überwiegende Mehrheit der Probleme sind lose Schrauben, gebrochene Lötstellen und falsch zugewiesene Ports — nicht defekte Bauteile. Wer mit dem Tausch von Hardware anfängt, tauscht meistens funktionierende Teile.</div>
+
+<h2>Quad armiert nicht</h2>
+<p>Betaflight sagt selbst, warum: Im Setup-Tab und im OSD steht ein Grund. Diese Liste deckt die üblichen ab.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Meldung / Symptom</th><th>Ursache</th><th>Lösung</th></tr></thead>
+<tbody>
+<tr><td><b>THROTTLE</b></td><td>Gasknüppel nicht ganz unten</td><td>Endpunkte auf der Funke prüfen; im Receiver-Tab muss Gas auf 1000 stehen</td></tr>
+<tr><td><b>ANGLE</b></td><td>Quad steht zu schief</td><td>Eben hinstellen oder die zulässige Schräglage erhöhen. Bei dauerhaft schiefer Anzeige: Accelerometer kalibrieren</td></tr>
+<tr><td><b>NO RX / RXLOSS</b></td><td>Kein Empfängersignal</td><td>Bindung, Port-Zuweisung, Protokoll, Verkabelung — in dieser Reihenfolge</td></tr>
+<tr><td><b>ARM SWITCH</b></td><td>Schalter stand beim Einschalten schon auf „scharf“</td><td>Schalter aus- und wieder einschalten. Sicherheitsfunktion, kein Fehler</td></tr>
+<tr><td><b>BOOT GRACE</b></td><td>Startverzögerung läuft noch</td><td>Ein paar Sekunden warten</td></tr>
+<tr><td><b>MSP</b></td><td>USB ist angeschlossen</td><td>USB trennen. Armieren mit angeschlossenem Konfigurator ist gesperrt</td></tr>
+<tr><td><b>CLI</b></td><td>Die Kommandozeile ist noch offen</td><td>CLI verlassen oder FC neu starten</td></tr>
+<tr><td><b>CRASH / GYRO</b></td><td>Gyro-Selbsttest nicht bestanden</td><td>Quad beim Einschalten völlig still stehen lassen; wenn es bleibt: Gyro defekt oder falsch angebunden</td></tr>
+<tr><td><b>RPMFILTER</b></td><td>Nicht alle Motoren liefern Drehzahl zurück</td><td>Bidirektionales DShot in der ESC-Firmware prüfen; eine gebrochene Signalleitung ist die häufigste Ursache</td></tr>
+</tbody>
+</table></div>
+
+<h2>Motoren und Antrieb</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Symptom</th><th>Wahrscheinliche Ursache</th><th>Vorgehen</th></tr></thead>
+<tbody>
+<tr><td><b>Ein Motor dreht nicht</b></td><td>Signalleitung, Motorleitung oder ESC-Kanal</td><td>Im Motorentab einzeln testen. Motor an einen anderen Kanal hängen: dreht er dort, liegt es am ESC; dreht er nirgends, am Motor</td></tr>
+<tr><td><b>Motor zuckt beim Anlaufen</b></td><td>Kalte Lötstelle an einer Phase</td><td>Alle drei Phasenlötstellen nachlöten; Widerstand zwischen den Phasen sollte gleich sein</td></tr>
+<tr><td><b>Motor stoppt bei Vollgas</b></td><td>Desync</td><td>ESC-Timing zurücknehmen, Demag-Kompensation erhöhen, Kondensator prüfen, Propeller eine Nummer kleiner</td></tr>
+<tr><td><b>Alle Motoren heiß</b></td><td>Filter- oder D-Problem, zu viel Propeller</td><td>Erst Filterkette und D prüfen, dann die Propellerwahl. Siehe <a href="#tuning">Tuning</a></td></tr>
+<tr><td><b>Ein Motor heißer als die anderen</b></td><td>Mechanik: Lager, verbogene Welle, verzogener Arm</td><td>Glocke von Hand drehen, Motor auf Taumeln prüfen, Armschrauben nachziehen</td></tr>
+<tr><td><b>Quad kippt beim Armieren sofort um</b></td><td>Falsche Motorreihenfolge oder falsche Drehrichtung</td><td>Propeller ab, Motorentab durchgehen — das ist praktisch immer die Ursache</td></tr>
+<tr><td><b>Vibration im Bild</b></td><td>Propellerunwucht, Lagerschaden</td><td>Propeller einzeln tauschen, bis es verschwindet. Der billigste Test überhaupt</td></tr>
+</tbody>
+</table></div>
+
+<h2>Video</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Symptom</th><th>Wahrscheinliche Ursache</th><th>Vorgehen</th></tr></thead>
+<tbody>
+<tr><td><b>Kein Bild, nur Rauschen</b></td><td>Falscher Kanal, Pit Mode aktiv, VTX ohne Strom</td><td>Kanal in Brille und VTX vergleichen, Pit Mode deaktivieren, Versorgungsspannung am VTX messen</td></tr>
+<tr><td><b>Bild schwarz, Ton der Brille meldet Signal</b></td><td>Kamera ohne Strom oder falsches Videoformat (PAL/NTSC)</td><td>Kameraspannung messen, Videonorm in Kamera und Brille angleichen</td></tr>
+<tr><td><b>Reichweite viel zu gering</b></td><td>Polarisation vertauscht, Antenne beschädigt, Antenne im Carbon</td><td>RHCP/LHCP prüfen, Antennen sichtprüfen, freie Position sicherstellen. Siehe <a href="#antennen">Antennen</a></td></tr>
+<tr><td><b>Streifen und Linien im Bild</b></td><td>Störungen aus der Stromversorgung</td><td>Kondensator prüfen, Video- und Motorleitungen trennen, VTX an eine saubere gefilterte Spannung hängen</td></tr>
+<tr><td><b>Bild bricht bei Vollgas ein</b></td><td>Spannungseinbruch oder elektrische Störung durch die ESC</td><td>Kondensator ergänzen, VTX-Versorgung prüfen, Akkuzustand prüfen</td></tr>
+<tr><td><b>VTX wird sehr heiß</b></td><td>Volle Leistung ohne Luftstrom</td><td>Am Boden Leistung reduzieren oder Pit Mode nutzen. Auf Kühlkörper und Luftführung achten</td></tr>
+<tr><td><b>Digitalbild friert ein</b></td><td>Reichweitengrenze erreicht</td><td>Umkehren. Digitale Systeme warnen kaum — den Link vorher beobachten, nicht erst beim Standbild</td></tr>
+</tbody>
+</table></div>
+
+<h2>Funkstrecke</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Symptom</th><th>Wahrscheinliche Ursache</th><th>Vorgehen</th></tr></thead>
+<tbody>
+<tr><td><b>Bindet nicht</b></td><td>Unterschiedliche Firmware-Hauptversionen, falsche Bindephrase</td><td>Beide Seiten auf denselben Stand bringen; bei ELRS ist die Bindephrase in der Firmware verankert</td></tr>
+<tr><td><b>LQ bricht in bestimmten Richtungen ein</b></td><td>Abschattung durch den eigenen Körper oder das Quad selbst</td><td>Mitdrehen, Antennenposition am Quad ändern, zweite Antenne prüfen</td></tr>
+<tr><td><b>Zucken der Steuerung</b></td><td>Paketverluste oder Störer in der Nähe</td><td>Paketrate senken, Sendeleistung erhöhen, Kanäle prüfen</td></tr>
+<tr><td><b>Failsafe im Nahbereich</b></td><td>Empfänger unterversorgt oder Antenne gequetscht</td><td>Spannung am Empfänger unter Last messen; ein einbrechendes BEC ist eine typische Ursache</td></tr>
+<tr><td><b>Reichweite sinkt über die Zeit</b></td><td>Beschädigte Antenne, angerissenes Koaxkabel</td><td>Antennen sind Verschleißteile. Nach härteren Crashes ersetzen, nicht prüfen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Nach dem Absturz</h2>
+<div class="steps">
+  <div class="step"><h4>Akku abziehen, bevor man das Quad aufhebt</h4>Ein armierbares Quad in der Hand ist die häufigste Verletzungsursache in diesem Hobby.</div>
+  <div class="step"><h4>Riechen und fühlen</h4>Verbrannter Geruch heißt Motorwicklung oder ESC. Warme Stellen an der Elektronik zeigen, wo es gebrannt hat. Das geht vor jeder Sichtprüfung.</div>
+  <div class="step"><h4>Rahmen und Arme prüfen</h4>Haarrisse in Carbon sind schwer zu sehen. Arme leicht biegen und auf Knacken hören — ein angerissener Arm bricht im nächsten Flug vollständig.</div>
+  <div class="step"><h4>Motoren von Hand drehen</h4>Rau, schwergängig oder taumelnd heißt: tauschen. Gras und Erde aus der Glocke entfernen.</div>
+  <div class="step"><h4>Kabel und Lötstellen kontrollieren</h4>Besonders die Motorleitungen am Austritt und die Antennen. Zug an jedem Kabel prüfen — vorsichtig.</div>
+  <div class="step"><h4>Propeller wegwerfen</h4>Alle vier, nicht nur die sichtbar beschädigten. Sie kosten weniger als ein Flug mit Unwucht.</div>
+  <div class="step"><h4>Erst dann Strom</h4>Am besten über den Smoke Stopper. Danach im Konfigurator alle Sensoren und Motoren prüfen, bevor Propeller wieder draufkommen.</div>
+</div>
+
+<h2>Systematisch statt raten</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Eine Änderung nach der anderen</div><div class="cd">Zwei gleichzeitig geänderte Dinge machen jedes Ergebnis wertlos. Das gilt beim Tuning wie bei der Fehlersuche.</div></div>
+  <div class="card"><div class="ct">Halbieren</div><div class="cd">Peripherie abklemmen, bis der Fehler weg ist, dann Stück für Stück wieder dazu. Bei elektrischen Störungen die schnellste Methode.</div></div>
+  <div class="card"><div class="ct">Tauschen statt messen</div><div class="cd">Bei baugleichen Teilen — Motoren, Propeller, Antennen — ist Tauschen schneller als jede Messung. Wandert der Fehler mit, ist das Teil schuld.</div></div>
+  <div class="card"><div class="ct">DVR ansehen</div><div class="cd">Die Aufzeichnung der Brille zeigt, was unmittelbar vor dem Absturz passiert ist: Warnung im OSD, Bildverlust, Steuerreaktion. Meist steht die Antwort dort.</div></div>
+  <div class="card"><div class="ct">Blackbox ansehen</div><div class="cd">Zeigt Motorwerte und Gyrodaten bis zur letzten Millisekunde. Ein Motor, der vor dem Absturz auf 100 % geht, während die Gyroachse wegläuft, ist ein eindeutiger Befund. Siehe <a href="#tuning">Tuning</a>.</div></div>
+  <div class="card"><div class="ct">Fragen richtig stellen</div><div class="cd">Im Forum gehören dazu: Version, Hardware, <code>diff all</code>, DVR oder Log und eine präzise Beschreibung, wann es auftritt. Ohne diese Angaben bekommt man Raten statt Antworten.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://betaflight.com/docs/wiki">Betaflight-Wiki</a> — vollständige Liste der Arming-Sperren und ihrer Bedeutung.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Fehlersuchvideos zu Desync, Video-Störungen und Motorproblemen, jeweils mit nachvollziehbarem Vorgehen.</li>
+    <li><a href="https://intofpv.com/">IntoFPV</a> und <a href="https://www.reddit.com/r/fpv/">r/fpv</a> — aktive Gemeinschaften mit hoher Trefferquote bei Suchanfragen zu konkreten Fehlerbildern.</li>
+  </ul>
+</div>

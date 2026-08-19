@@ -1,0 +1,121 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Quadrocopter ist von sich aus instabil.</b> Er hat vier Motoren, aber sechs Freiheitsgrade — ohne Regelung würde er sofort kippen. Fliegbar wird er erst dadurch, dass ein Gyroskop die Drehraten misst und ein PID-Regler achttausendmal je Sekunde nachkorrigiert. Was der Pilot am Knüppel vorgibt, ist nicht die Lage, sondern die <em>gewünschte Drehrate</em>.</div>
+
+<h2>Wie vier Propeller sechs Bewegungen erzeugen</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 320 300" role="img" aria-label="Draufsicht eines Quadrocopters mit Motornummern, Drehrichtungen und Achsen">
+  <path class="w" d="M78,78 L242,222 M242,78 L78,222" />
+  <rect class="box" x="132" y="126" width="56" height="48" rx="6" />
+  <text class="lblb" x="160" y="147" text-anchor="middle">FC</text>
+  <text class="lbl" x="160" y="163" text-anchor="middle">Gyro</text>
+  <path class="accs" d="M78,78 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0" />
+  <path class="accs" d="M242,78 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0" />
+  <path class="accs" d="M78,222 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0" />
+  <path class="accs" d="M242,222 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0" />
+  <path class="acc" d="M78,56 A22,22 0 0,0 56,78" /><path class="accf" d="M56,78 l6,-8 l4,9 z" />
+  <path class="acc" d="M242,56 A22,22 0 0,1 264,78" /><path class="accf" d="M264,78 l-10,-1 l6,-8 z" />
+  <path class="acc" d="M78,200 A22,22 0 0,1 100,222" /><path class="accf" d="M100,222 l-10,-1 l6,-8 z" />
+  <path class="acc" d="M242,200 A22,22 0 0,0 220,222" /><path class="accf" d="M220,222 l6,-8 l4,9 z" />
+  <text class="lblb" x="78" y="83" text-anchor="middle">4</text>
+  <text class="lblb" x="242" y="83" text-anchor="middle">2</text>
+  <text class="lblb" x="78" y="227" text-anchor="middle">3</text>
+  <text class="lblb" x="242" y="227" text-anchor="middle">1</text>
+  <text class="lbl" x="78" y="34" text-anchor="middle">vorne links</text>
+  <text class="lbl" x="242" y="34" text-anchor="middle">vorne rechts</text>
+  <text class="lbl" x="78" y="278" text-anchor="middle">hinten links</text>
+  <text class="lbl" x="242" y="278" text-anchor="middle">hinten rechts</text>
+  <path class="gd" d="M160,120 V40 M160,180 V262 M126,150 H40 M194,150 H280" />
+  <text class="lbla" x="160" y="34" text-anchor="middle">Nick +</text>
+  <text class="lbla" x="286" y="153" text-anchor="end">Roll +</text>
+</svg>
+<figcaption>Draufsicht, Motornummern wie in Betaflight. Dargestellt ist „Props out“ — die vorderen Propeller drehen nach außen. Diagonal gegenüberliegende Motoren drehen immer gleichsinnig.</figcaption>
+</figure>
+
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Bewegung</th><th>Wie sie entsteht</th><th>Was der Regler tut</th></tr></thead>
+<tbody>
+<tr><td><b>Steigen / Sinken</b></td><td>Alle vier Motoren gleich mehr oder weniger</td><td>Gas wird direkt durchgereicht (im Acro-Modus ungeregelt)</td></tr>
+<tr><td><b>Rollen</b> (Längsachse)</td><td>Die beiden Motoren einer Seite schneller als die andere Seite</td><td>Differenz auf die linke/rechte Motorenpaarung</td></tr>
+<tr><td><b>Nicken</b> (Querachse)</td><td>Vordere gegen hintere Motoren</td><td>Differenz auf die vordere/hintere Paarung</td></tr>
+<tr><td><b>Gieren</b> (Hochachse)</td><td><b>Nicht</b> durch Schub, sondern durch Reaktionsdrehmoment: ein Diagonalpaar dreht schneller als das andere. Die Summe der Motordrehmomente ist dann nicht mehr null, und die Zelle dreht sich dagegen</td><td>Differenz zwischen den beiden Diagonalpaaren</td></tr>
+<tr><td><b>Vorwärts / seitwärts</b></td><td>Gar nicht direkt — der Copter neigt sich und nutzt die geneigte Schubachse</td><td>Fällt als Nebenwirkung von Roll und Nick an; deshalb kostet schnelles Fliegen immer Höhe oder Gas</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Warum Gieren immer der schwächste Kanal ist.</b> Roll und Nick nutzen den vollen Schub der Motoren, Gieren nur deren Drehmoment — eine Größenordnung weniger. Deshalb reagiert jedes Quad auf Yaw träger, und deshalb ist der Yaw-D-Anteil in Betaflight standardmäßig sehr klein.</div>
+
+<h2>Der Regelkreis</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 190" role="img" aria-label="Blockschaltbild des Flugreglers vom Knüppel bis zum Motor und zurück über das Gyroskop">
+  <rect class="box" x="14" y="46" width="88" height="42" rx="6" />
+  <text class="lblb" x="58" y="64" text-anchor="middle">Knüppel</text>
+  <text class="lbl" x="58" y="79" text-anchor="middle">Sollrate °/s</text>
+  <circle class="box" cx="140" cy="67" r="15" /><text class="lblb" x="140" y="72" text-anchor="middle">−</text>
+  <rect class="box" x="180" y="46" width="92" height="42" rx="6" />
+  <text class="lblb" x="226" y="64" text-anchor="middle">PID + FF</text>
+  <text class="lbl" x="226" y="79" text-anchor="middle">je Achse</text>
+  <rect class="box" x="300" y="46" width="80" height="42" rx="6" />
+  <text class="lblb" x="340" y="64" text-anchor="middle">Mixer</text>
+  <text class="lbl" x="340" y="79" text-anchor="middle">4 Werte</text>
+  <rect class="box" x="408" y="46" width="92" height="42" rx="6" />
+  <text class="lblb" x="454" y="64" text-anchor="middle">ESC</text>
+  <text class="lbl" x="454" y="79" text-anchor="middle">DShot</text>
+  <rect class="box" x="528" y="46" width="118" height="42" rx="6" />
+  <text class="lblb" x="587" y="64" text-anchor="middle">Motor + Prop</text>
+  <text class="lbl" x="587" y="79" text-anchor="middle">Drehmoment</text>
+  <path class="acc" d="M102,67 H123 M155,67 H176 M272,67 H296 M380,67 H404 M500,67 H524" />
+  <path class="accf" d="M123,67 l-8,-4 v8 z M176,67 l-8,-4 v8 z M296,67 l-8,-4 v8 z M404,67 l-8,-4 v8 z M524,67 l-8,-4 v8 z" />
+  <rect class="box" x="270" y="132" width="140" height="40" rx="6" />
+  <text class="lblb" x="340" y="150" text-anchor="middle">Gyro + Filterkette</text>
+  <text class="lbl" x="340" y="164" text-anchor="middle">Istrate °/s · 3,2–8 kHz</text>
+  <path class="acc" d="M587,88 V152 H414" /><path class="accf" d="M414,152 l8,-4 v8 z" />
+  <path class="acc" d="M266,152 H140 V84" /><path class="accf" d="M140,84 l-4,8 h8 z" />
+  <text class="lbl" x="470" y="128" text-anchor="middle">gemessene Drehrate der Zelle</text>
+</svg>
+<figcaption>Der innere Regelkreis. Er läuft ohne Lagesensor, ohne GPS und ohne Kamera — nur auf Drehraten. Genau deshalb funktioniert Acro auch kopfüber.</figcaption>
+</figure>
+<p>Im Acro-Modus regelt Betaflight <b>Drehraten, keine Lagen</b>. Der Knüppel gibt vor, wie schnell sich das Quad drehen soll; steht er in der Mitte, lautet der Sollwert „null Grad je Sekunde“ — also „halte, was du gerade hast“, nicht „richte dich waagerecht aus“. Das ist der ganze Unterschied zu einer Kameradrohne und der Grund, warum man Acro üben muss.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Anteil</th><th>Wirkung am Quad</th><th>Symptom bei zu viel</th><th>Symptom bei zu wenig</th></tr></thead>
+<tbody>
+<tr><td><b>P</b></td><td>Wie hart das Quad auf eine Abweichung von der Sollrate reagiert</td><td>Schnelle Schwingung, hörbares Zwitschern, heiße Motoren</td><td>Schwammig, „wattig“, langsames Nachziehen</td></tr>
+<tr><td><b>I</b></td><td>Hält die Rate gegen Dauerstörungen — Wind, schiefer Akku, ungleiche Motoren</td><td>Träges Nachschwingen nach schnellen Manövern, Bounce-Back</td><td>Wegdriften im Wind, Quad hält die Neigung nicht</td></tr>
+<tr><td><b>D</b></td><td>Dämpft, bremst die Bewegung ab, wirkt auf Änderungsgeschwindigkeit</td><td>Verstärkt Rauschen massiv, Motoren werden heiß, „Gummiband“-Gefühl</td><td>Überschwingen, Nachwippen nach jedem Stopp</td></tr>
+<tr><td><b>Feedforward</b></td><td>Rechnet die Knüppelbewegung direkt auf die Motoren, ohne auf einen Fehler zu warten</td><td>Ruckelt bei grober Knüppelauflösung</td><td>Verzögertes Ansprechen, das Quad „hinkt“ dem Knüppel hinterher</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Theorie dahinter — Regelkreis, Stabilität, Filter und ihre Phasenverzögerung — steht ausführlich im Modul <a href="regelungstechnik.html">Regelungstechnik</a>. Die praktische Anwendung am Quad unter <a href="#tuning">PID-Tuning &amp; Filter</a>.</p>
+
+<h2>Schub, Gewicht, Drehzahl</h2>
+<div class="fbox">
+  <span class="f">F ∝ n²  ·  P ∝ n³  ·  T/W = n_Motoren · F_max / m</span>
+  <span class="l">Der Schub eines Propellers wächst mit dem Quadrat der Drehzahl, die nötige Leistung mit der dritten Potenz. Doppelte Drehzahl heißt vierfacher Schub — und achtfache Leistung.</span>
+</div>
+<p>Aus diesem Zusammenhang folgt fast alles Praktische:</p>
+<ul>
+  <li><b>Große Propeller sind effizienter.</b> Sie bewegen viel Luft langsam statt wenig Luft schnell. Ein 7-Zöller braucht für dasselbe Gewicht deutlich weniger Leistung als ein 5-Zöller — deshalb fliegt Long Range mit großen Propellern und niedrigen kV.</li>
+  <li><b>Der letzte Gasbereich kostet unverhältnismäßig viel.</b> Von 80 auf 100 % Drehzahl steigt der Schub um 56 %, die Leistung aber um 95 %. Deshalb bricht die Akkuspannung im Vollgas so stark ein.</li>
+  <li><b>Schub-Gewicht bestimmt das Fluggefühl.</b> Unter 2:1 ist ein Quad kaum steuerbar, 3–5:1 fliegt sich ruhig und filmtauglich, 8–12:1 ist Freestyle- und Rennbereich. Rechnen: <a href="#rechner">Rechner</a>.</li>
+  <li><b>Schwebegas verrät die Auslegung.</b> Wer bei 50 % Gas schwebt, hat zu wenig Reserve; bei 15 % ist die Gasauflösung am Knüppel unangenehm grob. 20–30 % gelten als angenehmer Bereich.</li>
+</ul>
+
+<h2>Prop Wash und andere unangenehme Physik</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Prop Wash</div><div class="cd">Beim schnellen Sinkflug fliegt das Quad in seinen eigenen, verwirbelten Abwind. Der Schub bricht unregelmäßig ein, der Regler kämpft dagegen an — sichtbar als Zittern im Bild. Vollständig vermeidbar ist das nicht; gute Filterung, ausreichend D und ein sauberer Rahmen mildern es.</div></div>
+  <div class="card"><div class="ct">Vibration</div><div class="cd">Unwuchtige Propeller und harte Motorlager erzeugen Schwingungen genau in dem Frequenzbereich, in dem der Gyro misst. Die Filterkette muss sie entfernen, ohne zu viel Phase zu verlieren — der zentrale Zielkonflikt jedes Tunings.</div></div>
+  <div class="card"><div class="ct">Desync</div><div class="cd">Bei sehr schnellen Lastwechseln verliert der ESC die Synchronisation zum Rotor: der Motor stoppt oder kreischt, das Quad fällt seitlich weg. Ursachen sind meist zu aggressives Timing, zu wenig Kapazität am Eingang oder überforderte Firmware.</div></div>
+  <div class="card"><div class="ct">Spannungseinbruch (Sag)</div><div class="cd">Unter Last fällt die Akkuspannung um den Innenwiderstand mal Strom. Bei 100 A und 5 mΩ je Zelle sind das 0,5 V je Zelle — der Grund, warum ein „voller“ Akku im Vollgas plötzlich am Warnwert steht und danach wieder aussieht wie neu.</div></div>
+  <div class="card"><div class="ct">Bodeneffekt</div><div class="cd">Unterhalb etwa eines Propellerdurchmessers Bodenabstand staut sich die Luft, der Schub steigt und das Quad wird nervös. Deshalb ist Starten und Landen unruhiger als Schweben in Hüfthöhe.</div></div>
+  <div class="card"><div class="ct">Blattspitzengeschwindigkeit</div><div class="cd">Ab etwa Mach 0,6 an der Blattspitze fällt der Wirkungsgrad ab und der Lärm steigt stark. Das begrenzt, wie viel kV ein großer Propeller verträgt — nachrechnen im <a href="#rechner">Rechner</a>.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Quan Quan, <i>Introduction to Multicopter Design and Control</i>, Springer 2017 — Modellbildung, Mixer, Regelung; das derzeit vollständigste Lehrbuch zum Thema.</li>
+    <li>Randal Beard, Timothy McLain, <i>Small Unmanned Aircraft: Theory and Practice</i>, Princeton University Press — Zustandsschätzung und Flugregelung, mit frei verfügbaren Begleitmaterialien.</li>
+    <li>Mahony, Kumar, Corke, <i>Multirotor Aerial Vehicles: Modeling, Estimation, and Control of Quadrotor</i>, IEEE Robotics &amp; Automation Magazine 19(3), 2012 — kompakte Herleitung der Quadrotor-Dynamik.</li>
+    <li><a href="https://betaflight.com/docs/wiki">Betaflight-Wiki</a> — was die Firmware tatsächlich rechnet, inklusive Mixer und Regelschleifenraten.</li>
+  </ul>
+</div>

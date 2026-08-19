@@ -1,0 +1,100 @@
+---
+import "./_style.css";
+---
+<div class="kurz z"><b>Fünf Rechnungen decken fast alle Auslegungsfragen ab.</b> Sie laufen direkt im Browser, ohne dass Daten irgendwohin gehen. Alle Ergebnisse sind Näherungen für die Vorauswahl — die Entscheidung fällt an der Schubtabelle des Herstellers und am gewogenen Quad.</div>
+
+<h2>Schub-Gewicht-Verhältnis</h2>
+<div class="calc" data-calc="fpvschub">
+  <h4>Wie viel Reserve hat das Quad?</h4>
+  <div class="row">
+    <div><label>Abfluggewicht mit Akku (g)</label><input type="number" data-k="awg" value="620" /></div>
+    <div><label>Standschub je Motor (g)</label><input type="number" data-k="f" value="1400" /></div>
+    <div><label>Anzahl Motoren</label><input type="number" data-k="n" value="4" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">Den Standschub je Motor aus der Herstellertabelle nehmen — und zwar für die Zellenzahl und den Propeller, die tatsächlich geflogen werden. Der Wert bei Vollgas, nicht der bei 50 %.</p>
+
+<h2>Flugzeit und Effizienz</h2>
+<div class="calc" data-calc="fpvflug">
+  <h4>Wie lange bleibt es oben?</h4>
+  <div class="row">
+    <div><label>Kapazität (mAh)</label><input type="number" data-k="cap" value="1300" /></div>
+    <div><label>Zellen (S)</label><input type="number" data-k="s" value="6" /></div>
+    <div><label>nutzbar (%)</label><input type="number" data-k="use" value="80" /></div>
+    <div><label>Abfluggewicht (g)</label><input type="number" data-k="awg" value="620" /></div>
+    <div><label>Effizienz (g/W)</label><input type="number" data-k="eff" value="5" step="0.5" /></div>
+    <div><label>oder Strom direkt (A)</label><input type="number" data-k="i" placeholder="optional" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">Anhaltswerte für die Effizienz im Schwebeflug: 5-Zoll-Freestyle 4–6 g/W, Cinewhoop 3–4 g/W, effizienter 7-Zöller 8–10 g/W. Wer den mittleren Strom aus dem OSD kennt, trägt ihn direkt ein — das ist genauer als jede Schätzung.</p>
+
+<h2>Drehzahl und Blattspitzengeschwindigkeit</h2>
+<div class="calc" data-calc="fpvprop">
+  <h4>Passt die kV zum Propeller?</h4>
+  <div class="row">
+    <div><label>Motor-kV</label><input type="number" data-k="kv" value="1800" /></div>
+    <div><label>Zellen (S)</label><input type="number" data-k="s" value="6" /></div>
+    <div><label>Durchmesser (Zoll)</label><input type="number" data-k="d" value="5" step="0.5" /></div>
+    <div><label>Steigung (Zoll)</label><input type="number" data-k="p" value="4.3" step="0.1" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+
+<h2>LiPo-Werte</h2>
+<div class="calc" data-calc="fpvlipo">
+  <h4>Spannungen, Energie, Ströme</h4>
+  <div class="row">
+    <div><label>Zellen (S)</label><input type="number" data-k="s" value="6" /></div>
+    <div><label>Kapazität (mAh)</label><input type="number" data-k="cap" value="1300" /></div>
+    <div><label>C-Rate laut Aufdruck</label><input type="number" data-k="c" value="100" /></div>
+    <div><label>gemessene Spannung (V)</label><input type="number" data-k="u" placeholder="optional" step="0.01" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+
+<h2>Link-Budget und Reichweite</h2>
+<div class="calc" data-calc="fpvfunk">
+  <h4>Wie weit trägt die Funkstrecke?</h4>
+  <div class="row">
+    <div><label>Sendeleistung (mW)</label><input type="number" data-k="p" value="250" /></div>
+    <div><label>Antennengewinn Sender (dBi)</label><input type="number" data-k="gt" value="2" step="0.5" /></div>
+    <div><label>Antennengewinn Empfänger (dBi)</label><input type="number" data-k="gr" value="2" step="0.5" /></div>
+    <div><label>Empfindlichkeit (dBm)</label><input type="number" data-k="s" value="-108" /></div>
+    <div><label>Frequenz (MHz)</label><input type="number" data-k="f" value="2400" /></div>
+    <div><label>Reserve (dB)</label><input type="number" data-k="m" value="10" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<div class="warn"><b>Die Zahl ist eine Obergrenze, kein Versprechen.</b> Sie gilt für ideale Sichtverbindung ohne Hindernisse, ohne Reflexionen und mit optimal ausgerichteten Antennen. In der Praxis gehen durch Körperabschattung, Vegetation, Mehrwegeausbreitung und Antennenhaltung leicht 10–20 dB verloren — das ist ein Faktor 3 bis 10 in der Reichweite. Wer die Rechnung als Planungsgrundlage benutzt, plant mit reichlich Reserve.</div>
+
+<h2>Anhaltswerte zum Gegenrechnen</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Größe</th><th>Typischer Wert</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Empfindlichkeit ELRS 2,4 GHz</b></td><td>ca. −105 dBm bei 500 Hz, ca. −112 dBm bei 50 Hz</td><td>Je niedriger die Paketrate, desto empfindlicher. Siehe <a href="#funk">Funkstrecke</a></td></tr>
+<tr><td><b>Empfindlichkeit Analogvideo 5,8 GHz</b></td><td>ca. −90 dBm</td><td>Deutlich unempfindlicher als der RC-Link — deshalb geht das Bild immer zuerst</td></tr>
+<tr><td><b>Antennengewinn Rundstrahler</b></td><td>2–3 dBi</td><td>Dipol oder zirkulare Antenne am Quad</td></tr>
+<tr><td><b>Antennengewinn Patch</b></td><td>8–14 dBic</td><td>Nur in Blickrichtung; siehe <a href="#antennen">Antennen &amp; HF</a></td></tr>
+<tr><td><b>Sendeleistung ELRS</b></td><td>25–1000 mW</td><td>Rechtliche Grenzen beachten — siehe <a href="#recht">Recht</a></td></tr>
+<tr><td><b>Innenwiderstand LiPo</b></td><td>3–6 mΩ je Zelle (neu)</td><td>Verdopplung heißt: Pack ist am Ende</td></tr>
+<tr><td><b>Schwebegas</b></td><td>20–30 %</td><td>Deutlich darüber heißt zu wenig Reserve, deutlich darunter grobe Gasauflösung</td></tr>
+<tr><td><b>Motortemperatur</b></td><td>handwarm bis ca. 60 °C</td><td>Über 80 °C nach einem Akku: Filter, D-Anteil und Propellerwahl prüfen</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Grundlagen der Rechnungen</div>
+  <ul>
+    <li>Schub-Gewicht und Schwebegas: Schub steigt näherungsweise mit dem Quadrat der Drehzahl — die angegebene Spanne für das Schwebegas ergibt sich aus dieser Nichtlinearität. Herleitung unter <a href="#physik">Flugphysik</a>.</li>
+    <li>Freiraumdämpfung nach der Friis-Gleichung: <span class="formula">FSPL[dB] = 20·log₁₀(d) + 20·log₁₀(f) + 32,45</span> mit d in km und f in MHz.</li>
+    <li>LiPo-Kennwerte nach den üblichen Zellspezifikationen; die Ladezustandsschätzung ist wegen der flachen Entladekurve bewusst grob gehalten.</li>
+    <li>Motorkonstante und Leerlaufdrehzahl: kV ist der Kehrwert der Spannungskonstante. Grundlagen im Modul <a href="sensorik-aktorik.html">Sensorik &amp; Aktorik</a>.</li>
+  </ul>
+</div>

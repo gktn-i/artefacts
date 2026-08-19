@@ -2095,6 +2095,209 @@
      ]
     },
     {
+     "id": "luftfahrt",
+     "name": "Drohnen & FPV",
+     "desc": "Der Multicopter als mechatronisches System — Antrieb, Funkstrecke, Regelkreis, Recht.",
+     "modules": [
+      {
+       "id": "fpv-drohnen",
+       "file": "fpv-drohnen.html",
+       "name": "Drohnen & FPV",
+       "icon": "🚁",
+       "kind": "Referenz",
+       "updated": "2026-08-19",
+       "desc": "Der Multicopter von der Schraube bis zum Gesetz: Bauformen, Rahmen, Motoren, Propeller, ESC und Flight Controller, LiPo, Funkstrecke und Videoübertragung, Antennen, Kameras, Betaflight-Einrichtung und PID-Tuning, Bauanleitung, Fliegen lernen, Fehlersuche, EU-Recht — dazu Rechner, Glossar und die Quellen, auf die in dieser Szene Verlass ist.",
+       "tags": [
+        "fpv",
+        "drohne",
+        "quadrocopter",
+        "multicopter",
+        "betaflight",
+        "expresslrs",
+        "elrs",
+        "crossfire",
+        "lipo",
+        "propeller",
+        "brushless",
+        "esc",
+        "dshot",
+        "vtx",
+        "goggles",
+        "pid",
+        "tuning",
+        "filter",
+        "antenne",
+        "polarisation",
+        "dji",
+        "hdzero",
+        "walksnail",
+        "freestyle",
+        "racing",
+        "cinewhoop",
+        "tinywhoop",
+        "long range",
+        "drohnenverordnung",
+        "eu 2019/947",
+        "a1 a3",
+        "kompetenznachweis",
+        "bardwell",
+        "oscar liang"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "klassen",
+         "t": "Bauformen & Klassen"
+        },
+        {
+         "h": "physik",
+         "t": "Flugphysik & Regelkreis"
+        },
+        {
+         "h": "frame",
+         "t": "Rahmen & Mechanik"
+        },
+        {
+         "h": "motoren",
+         "t": "Motoren"
+        },
+        {
+         "h": "props",
+         "t": "Propeller"
+        },
+        {
+         "h": "esc",
+         "t": "ESC & Flight Controller"
+        },
+        {
+         "h": "akku",
+         "t": "LiPo & Stromversorgung"
+        },
+        {
+         "h": "funk",
+         "t": "Funkstrecke (RC-Link)"
+        },
+        {
+         "h": "video",
+         "t": "Videoübertragung"
+        },
+        {
+         "h": "antennen",
+         "t": "Antennen & HF"
+        },
+        {
+         "h": "kamera",
+         "t": "Kameras & Aufnahme"
+        },
+        {
+         "h": "bodenstation",
+         "t": "Goggles, Funke & Bodenstation"
+        },
+        {
+         "h": "betaflight",
+         "t": "Betaflight einrichten"
+        },
+        {
+         "h": "tuning",
+         "t": "PID-Tuning & Filter"
+        },
+        {
+         "h": "bauen",
+         "t": "Bauen, Löten, Erstflug"
+        },
+        {
+         "h": "fliegen",
+         "t": "Fliegen lernen"
+        },
+        {
+         "h": "fehlersuche",
+         "t": "Fehlersuche"
+        },
+        {
+         "h": "recht",
+         "t": "Recht & Sicherheit"
+        },
+        {
+         "h": "rechner",
+         "t": "Rechner"
+        },
+        {
+         "h": "glossar",
+         "t": "Glossar A–Z"
+        },
+        {
+         "h": "quellen",
+         "t": "Quellen & Kanäle"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "klassen",
+          "physik"
+         ]
+        },
+        {
+         "l": "Komponenten",
+         "sections": [
+          "frame",
+          "motoren",
+          "props",
+          "esc",
+          "akku"
+         ]
+        },
+        {
+         "l": "Funk & Video",
+         "sections": [
+          "funk",
+          "video",
+          "antennen",
+          "kamera",
+          "bodenstation"
+         ]
+        },
+        {
+         "l": "Firmware",
+         "sections": [
+          "betaflight",
+          "tuning"
+         ]
+        },
+        {
+         "l": "Praxis",
+         "sections": [
+          "bauen",
+          "fliegen",
+          "fehlersuche",
+          "recht"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "rechner",
+          "glossar",
+          "quellen"
+         ]
+        }
+       ],
+       "related": [
+        "regelungstechnik",
+        "sensorik-aktorik",
+        "embedded",
+        "elektronik-101",
+        "loeten"
+       ]
+      }
+     ]
+    },
+    {
      "id": "praxis",
      "name": "Praxis & Weg dorthin",
      "desc": "Von der Idee zur Leiterplatte — und der Lernpfad, der dich dahin bringt.",

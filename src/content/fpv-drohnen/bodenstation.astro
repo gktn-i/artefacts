@@ -1,0 +1,73 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Funke und Brille bleiben, das Quad wird ersetzt.</b> Wer beim Einstieg Geld sinnvoll verteilen will, investiert es hier: Eine gute Fernsteuerung hält zehn Jahre und passt zu jedem Modell, ein Quad überlebt vielleicht eine Saison. Bei Brillen gilt dasselbe, allerdings mit der Einschränkung, dass die Wahl des Videosystems sie an ein Ökosystem bindet.</div>
+
+<h2>Fernsteuerung</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Merkmal</th><th>Worauf achten</th></tr></thead>
+<tbody>
+<tr><td><b>Gimbals</b></td><td>Hall-Sensoren statt Potentiometer — verschleißfrei und ohne Drift. Das mit Abstand wichtigste Qualitätsmerkmal einer Funke</td></tr>
+<tr><td><b>Firmware</b></td><td>EdgeTX (Nachfolger von OpenTX) ist der offene Standard mit Skripten, Ansagen, Modellverwaltung und ELRS-Unterstützung. Herstellerfirmware ist meist eingeschränkter</td></tr>
+<tr><td><b>Funkmodul</b></td><td>Intern verbaut oder als externes Modul im Schacht. Ein Schacht macht die Funke zukunftsfähig, ein internes Modul ist kompakter</td></tr>
+<tr><td><b>Gasknüppel</b></td><td>Selbstzentrierend oder rastend/frei. FPV braucht einen <b>freien</b> Gasknüppel ohne Rückstellfeder</td></tr>
+<tr><td><b>Schalter</b></td><td>Mindestens vier: Armieren, Flugmodus, Turtle-Modus, Buzzer. Ein Momentschalter (federnd) ist für Armieren beliebt</td></tr>
+<tr><td><b>Bauform</b></td><td>Vollgröße mit Daumen- oder Pinch-Griff, oder Kompaktfunke für die Tasche. Ergonomie ist persönlich — wenn möglich anfassen, bevor man kauft</td></tr>
+<tr><td><b>Akku</b></td><td>18650-Zellen oder fest verbaut. Ladung über USB-C ist heute Standard</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Mode 2 ist die Standardbelegung</b> (Gas links, Nick rechts) und die Belegung, in der jede Anleitung und jedes Simulator-Tutorial geschrieben ist. Es gibt keinen guten Grund, als Anfänger davon abzuweichen — Mode 1, 3 und 4 existieren, machen aber jede fremde Hilfe komplizierter.</div>
+
+<h2>Was auf der Funke eingerichtet werden muss</h2>
+<div class="steps">
+  <div class="step"><h4>Modell anlegen und benennen</h4>Jedes Quad bekommt einen eigenen Speicherplatz. Modellnamen sind kein Ordnungsfimmel: Ein an das falsche Modell gebundener Sender kann eine falsche Kanalbelegung schicken.</div>
+  <div class="step"><h4>Kanäle zuordnen</h4>Kanal 1–4 sind Roll, Nick, Gas, Gier. Ab Kanal 5 kommen die Schalter: Armieren, Flugmodus, Turtle, Buzzer, VTX-Leistung.</div>
+  <div class="step"><h4>Armierschalter belegen</h4>Am besten ein Schalter, den man nicht versehentlich trifft. Betaflight ist ab Version 4 nicht mehr auf Kanal 5 festgelegt — die Zuordnung erfolgt über die Modi-Seite.</div>
+  <div class="step"><h4>Failsafe auf Senderseite prüfen</h4>Beim Ausschalten der Funke muss der Empfänger den Verbindungsverlust melden. Test mit abgenommenen Propellern — siehe <a href="#funk">Funkstrecke</a>.</div>
+  <div class="step"><h4>Warnungen und Ansagen einrichten</h4>Akkuwarnung des Senders, Ansage von Flugzeit und LQ. In der Brille sieht man die Funke nicht — alles, was gesprochen wird, muss man nicht ablesen.</div>
+  <div class="step"><h4>Rates einstellen</h4>Wie schnell das Quad auf vollen Knüppelausschlag dreht. Die Kurve wird in Betaflight gesetzt, nicht auf der Funke — mehr unter <a href="#betaflight">Betaflight einrichten</a>.</div>
+</div>
+
+<h2>Brillen</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Bauform</th><th>Vorteile</th><th>Nachteile</th></tr></thead>
+<tbody>
+<tr><td><b>Box-Goggles</b></td><td>Günstig, großes Sichtfeld, passen über die Brille, ein Bildschirm für alle Augen</td><td>Groß und schwer, geringere wahrgenommene Bildschärfe, kein Feineinstellen des Augenabstands</td></tr>
+<tr><td><b>Low-Profile mit zwei Displays</b></td><td>Kompakt, scharfes Bild, einstellbarer Augenabstand (IPD), oft Dioptrienlinsen erhältlich</td><td>Teuer, kleineres Sichtfeld, empfindlicher gegen falsche IPD-Einstellung (Kopfschmerzen)</td></tr>
+<tr><td><b>Systemgebundene Digitalbrillen</b></td><td>Beste Bildqualität im jeweiligen System, integriertes Aufnehmen und Menü</td><td>Nur mit dem eigenen Sendesystem nutzbar; ein Systemwechsel bedeutet neue Brille</td></tr>
+<tr><td><b>Monitor</b></td><td>Billigster Einstieg, kein Schwindel, gut für Beobachter und Zuschauer</td><td>Kein Immersionsgefühl; als Pilotenlösung nur bedingt tauglich, bei Sonne kaum ablesbar</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Für den Spotter ist ein Monitor Pflichtausstattung, nicht Zubehör.</b> Wer in der EU in der offenen Kategorie mit Brille fliegt, braucht einen Beobachter, der das Quad ununterbrochen sieht. Ein zweiter Bildschirm hilft diesem Beobachter, die Lage einzuschätzen — nimmt ihm aber nicht die Aufgabe ab, hochzuschauen. Siehe <a href="#recht">Recht &amp; Sicherheit</a>.</div>
+
+<h2>Simulatoren</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Simulator</th><th>Stärke</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Liftoff</b></td><td>Große Auswahl an Karten, gutes Freestyle-Gefühl</td><td>Der verbreitetste Einstieg; umfangreiche Gemeinschaftsinhalte</td></tr>
+<tr><td><b>Velocidrone</b></td><td>Sehr realistische Physik, Rennstrecken, Bestenlisten</td><td>Die Wahl der Racer; weniger hübsch, dafür präzise</td></tr>
+<tr><td><b>Uncrashed</b></td><td>Zugängliches Flugmodell, schöne Umgebungen</td><td>Guter Kompromiss aus Realismus und Spaß</td></tr>
+<tr><td><b>DRL Simulator</b></td><td>Rennen, Ligabetrieb</td><td>Regelmäßig verschenkte Aktionen; für Freestyle weniger geeignet</td></tr>
+<tr><td><b>FPV Freerider</b></td><td>Sehr klein, läuft auf allem</td><td>Grafisch veraltet, für die ersten Stunden Orientierungstraining aber völlig ausreichend</td></tr>
+</tbody>
+</table></div>
+<p class="note">Alle gängigen Simulatoren nehmen die echte Fernsteuerung per USB entgegen — genau das ist der Punkt. Wer mit dem Gamepad übt, trainiert die falschen Bewegungen. Die eigene Funke anschließen, Mode 2, Rates ähnlich wie am echten Quad.</p>
+
+<h2>Der Rest der Bodenstation</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Ladegerät</div><div class="cd">Mit Balancer, Speicherlade-Programm und Innenwiderstandsmessung. Ein Mehrkanalgerät spart am Flugtag viel Zeit. Netzteil nicht vergessen — viele Geräte kommen ohne.</div></div>
+  <div class="card"><div class="ct">LiPo-Tasche oder Kiste</div><div class="cd">Zum Laden und Transportieren. Eine Munitionskiste mit Sandschicht ist die pragmatische Variante, eine LiPo-Tasche das Minimum.</div></div>
+  <div class="card"><div class="ct">Akkuchecker</div><div class="cd">Kleiner Zellenspannungsprüfer mit Piepser. Am Flugfeld schneller als jede App und die einfachste Methode, einen leeren Pack nicht anzustecken.</div></div>
+  <div class="card"><div class="ct">Werkzeug im Feld</div><div class="cd">Sechskantschlüssel 1,5/2/2,5 mm, Propellermutternschlüssel, Kabelbinder, Ersatzpropeller, Schraubensicherung, kleiner Seitenschneider. Mehr braucht es am Platz selten.</div></div>
+  <div class="card"><div class="ct">Rucksack</div><div class="cd">Ein Fach für Akkus getrennt von allem anderen. Ein beschädigter Pack neben der Brille ist ein teurer Fehler.</div></div>
+  <div class="card"><div class="ct">Feuerlöscher</div><div class="cd">Klingt übertrieben, bis es einmal nötig ist. Sand oder eine Löschdecke im Auto reichen für den Anfang.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://edgetx.org/">EdgeTX</a> — Handbuch zur Senderfirmware, Modellanlage, Mischer, Skripte.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Einrichtungsvideos für EdgeTX-Funken und Brillenvergleiche.</li>
+    <li><a href="https://oscarliang.com/">oscarliang.com</a> — Kaufübersichten zu Funken, Brillen und Ladegeräten, laufend aktualisiert.</li>
+  </ul>
+</div>

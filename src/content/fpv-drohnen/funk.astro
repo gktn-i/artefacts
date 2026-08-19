@@ -1,0 +1,75 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Steuerfunk und Videofunk sind zwei getrennte Systeme.</b> Der RC-Link überträgt die Knüppelstellungen zum Quad und Telemetrie zurück — schmalbandig, fehlergesichert, auf maximale Reichweite ausgelegt. Er ist die kritischste Verbindung am ganzen Gerät: Wenn das Videobild ausfällt, fliegt man blind; wenn der RC-Link ausfällt, fliegt gar niemand mehr.</div>
+
+<h2>Die Systeme</h2>
+<div class="tbl-wrap"><table style="min-width:1000px">
+<thead><tr><th data-s="text">System</th><th>Frequenz</th><th>Protokoll zum FC</th><th>Offen</th><th>Einordnung</th></tr></thead>
+<tbody>
+<tr><td><b>ExpressLRS (ELRS)</b></td><td>2,4 GHz und 868/915 MHz</td><td>CRSF</td><td>quelloffen</td><td>Der De-facto-Standard. Sehr hohe Paketraten, große Reichweite, günstige Hardware, aktive Entwicklung</td></tr>
+<tr><td><b>TBS Crossfire</b></td><td>868/915 MHz</td><td>CRSF</td><td>proprietär</td><td>Der Long-Range-Klassiker. Sehr robust und ausgereift, teurer, geringere Paketrate als ELRS</td></tr>
+<tr><td><b>TBS Tracer</b></td><td>2,4 GHz</td><td>CRSF</td><td>proprietär</td><td>Die schnelle Variante von Crossfire, auf niedrige Latenz ausgelegt</td></tr>
+<tr><td><b>ImmersionRC Ghost</b></td><td>2,4 GHz</td><td>GHST</td><td>proprietär</td><td>Sehr niedrige Latenz, kleine Nutzerbasis</td></tr>
+<tr><td><b>FrSky ACCST / ACCESS</b></td><td>2,4 GHz</td><td>SBUS / F.Port</td><td>proprietär</td><td>Früher Standard, heute vor allem im Bestand. Firmware-Fragmentierung war ein Dauerthema</td></tr>
+<tr><td><b>Spektrum DSMX</b></td><td>2,4 GHz</td><td>SRXL2</td><td>proprietär</td><td>Im Modellflug verbreitet, in der FPV-Szene eher selten</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Für einen Neubau gibt es faktisch eine Antwort: ExpressLRS.</b> Empfänger kosten wenig, laufen auf 2,4 GHz wie auf 868 MHz, die Dokumentation ist gut, und praktisch jede Funke lässt sich damit nachrüsten. Der einzige Stolperstein: Sender und Empfänger müssen dieselbe Hauptversion tragen — ein 4.x-Sender bindet nicht an einen 3.x-Empfänger. Vor dem Erstflug beide auf denselben Stand bringen.</div>
+
+<h2>Paketrate, Reichweite, Latenz</h2>
+<p>Jedes moderne System lässt die Paketrate wählen. Dahinter steht ein physikalischer Zusammenhang, der nicht verhandelbar ist: <b>Je schneller gesendet wird, desto kürzer ist jedes Symbol — und desto mehr Rauschen sieht der Empfänger.</b> Reichweite und Reaktionszeit sind also direkt gegeneinander eingetauscht.</p>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Paketrate</th><th>Latenz Größenordnung</th><th>Empfindlichkeit</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>25–50 Hz</b></td><td>20–40 ms</td><td>am besten</td><td>Long Range, Flächenflug, alles über 5 km</td></tr>
+<tr><td><b>100–150 Hz</b></td><td>7–10 ms</td><td>gut</td><td>Der Allrounder für Freestyle. Wenn unklar: hier anfangen</td></tr>
+<tr><td><b>250–500 Hz</b></td><td>2–4 ms</td><td>mäßig</td><td>Racing, kurze Distanzen, maximale Direktheit</td></tr>
+<tr><td><b>1000 Hz</b></td><td>&lt; 2 ms</td><td>gering</td><td>Nur Nahbereich; jenseits weniger hundert Meter sinnlos</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Zahlen sind Größenordnungen; die genauen Werte hängen von System, Version und Modulation ab. Der Punkt ist das Verhältnis: Zwischen 50 Hz und 500 Hz liegen rund 10–12 dB Empfängerempfindlichkeit — das ist ein Faktor 3 bis 4 in der Reichweite.</p>
+
+<h2>RSSI, LQ und SNR richtig lesen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Wert</span><span>Einheit</span><span>Was er bedeutet</span></div>
+  <div class="frow"><span class="fn">RSSI (dBm)</span><span class="fe">−30 bis −110 dBm</span><span class="fx">Empfangspegel. Absolut vergleichbar. Je näher an null, desto stärker. Der Rauschboden liegt je nach System bei −100 bis −115 dBm</span></div>
+  <div class="frow"><span class="fn">LQ (Link Quality)</span><span class="fe">0–100 %</span><span class="fx">Anteil tatsächlich angekommener Pakete. <b>Der wichtigere Wert:</b> Solange LQ bei 100 % steht, ist die Verbindung intakt, egal wie schwach das Signal ist</span></div>
+  <div class="frow"><span class="fn">SNR</span><span class="fe">dB</span><span class="fx">Abstand des Signals zum Rauschen. Bei LoRa-Systemen aussagekräftiger als RSSI allein, weil LoRa auch unter dem Rauschboden noch dekodiert</span></div>
+  <div class="frow"><span class="fn">RSSI in Prozent</span><span class="fe">0–100 %</span><span class="fx">Eine umgerechnete Hilfsgröße. Für Warnschwellen brauchbar, für Vergleiche zwischen Systemen wertlos</span></div>
+  <div class="frow"><span class="fn">Sendeleistung</span><span class="fe">mW / dBm</span><span class="fx">Verdopplung sind 3 dB und damit rund 40 % mehr Reichweite. Von 25 auf 250 mW sind es 10 dB — Faktor gut 3</span></div>
+</div>
+<div class="warn"><b>Der Alarm gilt LQ, nicht RSSI.</b> Ein Link mit −95 dBm und 100 % LQ ist völlig in Ordnung. Ein Link mit −70 dBm und 80 % LQ hat ein Problem — meist Abschattung durch den eigenen Körper, eine Antenne im Carbon oder eine Störquelle in der Nähe. Wer nur auf RSSI schaut, dreht an der falschen Schraube.</div>
+
+<h2>Failsafe — die wichtigste Einstellung überhaupt</h2>
+<p>Failsafe ist das Verhalten des Quads, wenn keine gültigen Steuerdaten mehr ankommen. Es muss auf beiden Seiten stimmen: Der Empfänger muss dem Flight Controller melden, dass die Verbindung weg ist (statt die letzten Werte weiterzugeben), und Betaflight muss darauf reagieren.</p>
+<div class="steps">
+  <div class="step"><h4>Empfänger auf „no pulses“ stellen</h4>Der Empfänger darf im Failsafe keine Kanäle mehr ausgeben. Bei CRSF-Systemen ist das der Normalfall; bei älteren SBUS-Empfängern muss es eingestellt werden. Ein Empfänger, der die letzte Gasstellung hält, schickt das Quad geradeaus weiter.</div>
+  <div class="step"><h4>Betaflight-Stage-2 auf „Drop“</h4>Standard ist sofortiges Abschalten der Motoren. Für Freestyle über bewohntem Gebiet ist das richtig: ein herunterfallendes Quad ist berechenbar, ein wegfliegendes nicht.</div>
+  <div class="step"><h4>GPS Rescue nur mit Vorbereitung</h4>Auf Strecke kann automatische Rückkehr sinnvoll sein — aber nur mit sauber gesetztem Home-Punkt, ausreichender Satellitenzahl, geprüfter Rückkehrhöhe und einem Test in sicherer Umgebung. Schlecht eingerichtet ist GPS Rescue gefährlicher als der Absturz, den es verhindern soll.</div>
+  <div class="step"><h4>Am Boden testen</h4>Propeller ab, Quad armieren, Funke ausschalten. Die Motoren müssen stoppen und Betaflight muss den Failsafe-Zustand anzeigen. Dieser Test dauert dreißig Sekunden und gehört zu jedem Neubau.</div>
+</div>
+
+<h2>Antennen, Diversity, Sendeleistung</h2>
+<ul>
+  <li><b>Empfängerantennen frei stellen.</b> Zwei Antennen im 90-Grad-Winkel zueinander sind Standard — dann ist immer eine günstig zum Sender polarisiert. Beide müssen aus dem Carbon herausragen; Carbon schirmt ab.</li>
+  <li><b>Nicht abschneiden, nicht knicken.</b> Die Antennenlänge ist auf die Frequenz abgestimmt. Ein gekürzter Draht ist keine Antenne mehr, sondern eine Fehlanpassung.</li>
+  <li><b>Am Sender zählt die Haltung.</b> Eine Stabantenne strahlt seitlich ab und hat in ihrer Verlängerung eine Nullstelle. Die Antenne direkt auf das Quad zu richten ist der zuverlässigste Weg, den Link zu verlieren.</li>
+  <li><b>Dynamische Sendeleistung</b> regelt automatisch hoch, wenn der Link schwächer wird. Spart Strom und Störungen im Nahbereich; bei Long Range dennoch eine sinnvolle Untergrenze setzen.</li>
+  <li><b>Rechtlich</b> gilt in der EU für 2,4 GHz allgemein 100 mW EIRP; im 868-MHz-Band gelten zusätzlich Sendezeitbeschränkungen. Details unter <a href="#recht">Recht &amp; Sicherheit</a>.</li>
+</ul>
+<p class="note">Was Sendeleistung, Antennengewinn und Empfindlichkeit gemeinsam für die Reichweite bedeuten, lässt sich im <a href="#rechner">Link-Budget-Rechner</a> durchspielen. Die HF-Grundlagen dazu stehen unter <a href="#antennen">Antennen &amp; HF</a>.</p>
+
+<h2>Telemetrie</h2>
+<p>CRSF überträgt in beide Richtungen. Zurück zur Funke kommen typischerweise Akkuspannung und verbrauchte Kapazität, RSSI/LQ/SNR beider Richtungen, GPS-Position und Höhe, Fluglage und Warnungen. Der praktische Nutzen: Ein Ansageskript auf der Funke, das Spannung und LQ vorliest, ersetzt einen Blick aufs OSD — und in der Brille ist jeder Blick, den man nicht auf die Zahlen wirft, ein Blick auf die Umgebung.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://www.expresslrs.org/">ExpressLRS-Dokumentation</a> — Paketraten, Bindeverfahren, Firmware-Kompatibilität, Konfigurator. Primärquelle.</li>
+    <li><a href="https://github.com/ExpressLRS/ExpressLRS/releases">ExpressLRS-Releases</a> — verbindlich für Versionsstände und Kompatibilitätsbrüche zwischen Hauptversionen.</li>
+    <li><a href="https://www.team-blacksheep.com/">Team BlackSheep</a> — Handbücher zu Crossfire und Tracer.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Reichweitentests, Failsafe-Einrichtung und die Erklärung von LQ gegenüber RSSI.</li>
+    <li>Grundlagen zu Modulation, Link-Budget und Rauschen: Modul <a href="informationstechnik.html">Informations- &amp; Rechnertechnik</a>.</li>
+  </ul>
+</div>
