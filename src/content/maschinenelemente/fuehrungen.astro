@@ -1,0 +1,63 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Eine Linearführung soll fünf Freiheitsgrade sperren und einen freigeben.</b> Wie gut das gelingt, entscheidet über Positioniergenauigkeit und Oberflächengüte. Der Preisunterschied zwischen den Bauarten ist groß — der Steifigkeitsunterschied ist noch größer.</div>
+
+<h2>Die Bauarten</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Bauart</th><th data-s="num">Steifigkeit</th><th data-s="num">Genauigkeit</th><th data-s="text">Preis</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Profilschienenführung</b> (HIWIN HG/MG, THK SHS)</td><td>sehr hoch</td><td>sehr hoch</td><td>hoch</td><td>Der Standard im Maschinenbau. Nimmt Momente in alle Richtungen auf, ein Wagen kann bereits genügen. Braucht eine plane, steife Montagefläche.</td></tr>
+<tr><td><b>Rundwelle mit Kugelbuchse</b> (LM/SC8UU u. ä.)</td><td>gering</td><td>mittel</td><td>niedrig</td><td>Verbreitet im 3D-Druck. Die Welle biegt sich durch; ab etwa 400 mm freier Länge nur noch mit unterstützter Welle brauchbar.</td></tr>
+<tr><td><b>Unterstützte Rundwelle</b> (SBR)</td><td>mittel</td><td>mittel</td><td>mittel</td><td>Deutlich steifer als frei tragend, weil die Welle auf einem Profil aufliegt. Guter Kompromiss für Hobby-CNC.</td></tr>
+<tr><td><b>Gleitführung</b> (PTFE, POM, Bronze auf Stahl)</td><td>mittel</td><td>mittel</td><td>niedrig</td><td>Dämpfend, unempfindlich gegen Schmutz und Stoß, kein Stick-Slip bei richtiger Paarung. Höhere Reibung, Losbrechmoment.</td></tr>
+<tr><td><b>Schwalbenschwanzführung</b></td><td>hoch</td><td>hoch</td><td>mittel</td><td>Klassische Werkzeugmaschinenführung, nachstellbar über Keilleiste. Sehr dämpfend, hohe Reibung, aufwendig zu fertigen.</td></tr>
+<tr><td><b>V-Rollen auf Profil</b> (OpenBuilds u. ä.)</td><td>gering</td><td>mittel</td><td>sehr niedrig</td><td>Einfach zu montieren und einzustellen. Punktkontakt begrenzt Last und Lebensdauer, Kunststoffrollen verschleißen.</td></tr>
+<tr><td><b>Luftlager</b></td><td>hoch</td><td>höchste</td><td>sehr hoch</td><td>Reibungsfrei, nanometergenau. Messtechnik und Halbleiterfertigung.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Anordnung: das Verhältnis entscheidet</h2>
+<p>Zwei Wagen auf einer Schiene sperren Nicken und Gieren nur so gut, wie ihr Abstand es hergibt. Faustregel für den Wagenabstand zur Kraglänge:</p>
+<div class="kpis">
+  <div class="kpi"><div class="kv">≥ 1 : 1</div><div class="kl">Wagenabstand zu Auskraglänge — Minimum</div></div>
+  <div class="kpi"><div class="kv">2 : 1</div><div class="kl">gute Praxis</div></div>
+  <div class="kpi"><div class="kv">3 : 1</div><div class="kl">für Präzisionsachsen</div></div>
+</div>
+<p>Der Grund ist der Hebel: Bei 100 mm Wagenabstand und 200 mm Auskraglänge sieht der vordere Wagen die doppelte Kraft plus die Nutzlast — und der hintere wird nach oben gezogen. Bei knappem Bauraum ist ein längerer Wagen (Baulänge, nicht Baugröße) oft die bessere Antwort als ein zweiter.</p>
+
+<div class="tip"><b>Vorspannung richtig wählen:</b> Profilschienenwagen gibt es in mehreren Vorspannklassen. Leichte Vorspannung (Z0/ZF) läuft leicht und verzeiht Montagefehler, mittlere bis hohe (Z1/Z2) ist steifer, verlangt aber eine ebene Montagefläche. Wer einen hoch vorgespannten Wagen auf eine unebene Fläche schraubt, erzeugt Zwangskräfte, die die Lebensdauer drastisch verkürzen.</div>
+
+<h2>Montage — wo es schiefgeht</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4>
+    <ul>
+      <li>Anschlagkante für mindestens eine Schiene vorsehen; die zweite gegen die erste ausrichten</li>
+      <li>Montagefläche fräsen oder schleifen, Ebenheit im Bereich der Herstellervorgabe (oft 20–50 µm/m)</li>
+      <li>Schienen von der Mitte nach außen anziehen, mit Drehmoment</li>
+      <li>Beide Schienen parallel messen, nicht nach Gefühl</li>
+      <li>Schmiernippel oder Schmieranschluss zugänglich lassen</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Falsch</h4>
+    <ul>
+      <li>Schienen auf ein rohes Strangpressprofil schrauben und Parallelität erzwingen</li>
+      <li>Wagen ohne Montagehilfe von der Schiene ziehen — die Kugeln fallen heraus</li>
+      <li>Beide Schienen starr befestigen, obwohl die Fertigung das nicht hergibt (eine als „Führungsschiene“, die andere mit etwas Nachgiebigkeit)</li>
+      <li>Schmierung vergessen: ein trocken laufender Wagen hält Wochen statt Jahre</li>
+      <li>Späne und Kühlmittel ohne Abdeckung auf die Laufbahn lassen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="warn"><b>Statische Überbestimmung ist bei Führungen die Regel, nicht die Ausnahme.</b> Zwei parallele Schienen mit je zwei Wagen sperren rechnerisch mehr Freiheitsgrade als vorhanden. Das funktioniert nur, weil die Bauteile etwas nachgeben. Je steifer und höher vorgespannt die Führung, desto genauer muss die Fertigung sein — deshalb ist eine billige Führung auf einer schlechten Fläche manchmal die praktischere Lösung als eine teure.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li><a href="https://www.hiwin.de/de/Produkte/Linearf%C3%BChrungen">HIWIN Linearführungen — Katalog</a>: Tragzahlen, Vorspannklassen, Genauigkeitsklassen, Montagevorschriften; Primärquelle für Zahlenwerte.</li>
+    <li><a href="https://www.thk.com/">THK Technischer Katalog</a> — Berechnung der äquivalenten Last bei Momentenbelastung.</li>
+    <li><a href="https://www.igus.de/drylin/linear-guides">igus drylin</a> — Kennwerte und Auslegung für Gleitführungen.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — Kapitel Führungen; Grundlagen zur Anordnung und Überbestimmung.</li>
+  </ul>
+</div>

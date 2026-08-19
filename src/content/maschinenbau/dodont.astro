@@ -1,3 +1,43 @@
-<div class="sec-title">Do's & Don'ts der Konstruktion</div>
-<div class="sub">Praxisregeln nach Themengebiet. Was sich in echten Projekten bewaehrt und welche Fehler immer wieder teuer werden.</div>
-<div id="dodont-body"></div>
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Regeln, die im Alltag den Unterschied machen.</b> Nach Themen sortiert, jeweils gegenübergestellt: was sich bewährt hat und was regelmäßig schiefgeht.</div>
+
+<h2>Festigkeit &amp; Auslegung</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>So macht man es</h4><ul><li>Mit Sicherheitsfaktor rechnen (statisch 1,5–2, unsicher/stoßartig 3–4, über Personen deutlich mehr)</li><li>Innenecken ausrunden, das senkt Spannungsspitzen am billigsten</li><li>Material an den Rand bringen (Rohr, I-Profil, Rippen) statt Vollmaterial</li><li>Bei Wechsellast deutlich niedriger auslegen als bei statischer (Ermüdung)</li><li>Lange Druckstäbe auf Knicken prüfen, nicht nur auf Druckspannung</li></ul></div>
+  <div class="gb-col bad"><h4>Das geht schief</h4><ul><li>Nur die Kraft betrachten, ohne die Spannung (Kraft/Fläche)</li><li>Scharfe Innenecken in belastete Teile legen, dort starten Risse</li><li>Festigkeit mit Steifigkeit verwechseln (E-Modul sagt nichts über Bruch)</li><li>Bei schwingender Last mit statischen Werten rechnen</li><li>Auf die Rechnung allein vertrauen, ohne kritische Teile zu testen</li></ul></div>
+</div>
+
+<h2>3D-Druck (FDM) Konstruktion</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>So macht man es</h4><ul><li>Last in die Schichtebene legen, nicht quer zur Schichtung ziehen</li><li>Belastete Achsen liegend statt stehend drucken</li><li>Festigkeit über mehr Perimeter (Außenwände) statt über Infill holen</li><li>Überhänge flacher als 45 Grad halten oder fasen, spart Stützen</li><li>Löcher etwas größer modellieren oder nachbohren (drucken untermaßig)</li><li>Für belastbare Gewinde Heat-Set-Inserts setzen statt direkt ins Plastik schrauben</li></ul></div>
+  <div class="gb-col bad"><h4>Das geht schief</h4><ul><li>Sicherheitskritisch tragende Teile ohne große Reserve und Test drucken</li><li>Scharfe Innenecken einplanen, sie reißen an der Schichtgrenze</li><li>PLA für Hitze/Außen verwenden (verformt ab 50–60 Grad, nicht UV-fest)</li><li>Nylon ungetrocknet drucken (Blasen, Festigkeitsverlust)</li><li>Auf Infill als Hauptfestigkeit setzen, die Wand trägt</li></ul></div>
+</div>
+
+<h2>Schraubverbindungen</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>So macht man es</h4><ul><li>Auf Vorspannung zielen, mit Drehmomenttabelle kalibriert anziehen</li><li>Gegen Vibration mit blauem Threadlocker oder selbstsichernder Mutter sichern</li><li>Edelstahlgewinde leicht fetten gegen Kaltverschweißen (Fressen)</li><li>Festigkeitsklasse passend wählen (8.8 reicht fast immer)</li><li>In Alu/Kunststoff Gewindeeinsatz statt Direktgewinde für Dauerlast</li></ul></div>
+  <div class="gb-col bad"><h4>Das geht schief</h4><ul><li>Federring/Zahnscheibe als Vibrationssicherung vertrauen (kaum wirksam)</li><li>Madenschraube auf runder Welle ohne Anflächung nutzen (rutscht)</li><li>M3-Heat-Set-Inserts überdrehen (reißen aus, ca. 0,4–1 Nm)</li><li>Alu-Direktgewinde dauerbelasten, es leiert aus</li><li>Roten (hochfesten) Threadlocker nehmen, wo später gelöst werden muss</li></ul></div>
+</div>
+
+<h2>Fertigung &amp; DfM</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>So macht man es</h4><ul><li>Verfahren vor dem Konstruieren festlegen und dessen Regeln einhalten</li><li>Innenradien an den Fräserdurchmesser anpassen</li><li>Wandstärken gleichmäßig halten (vermeidet Verzug)</li><li>Rotationssymmetrisch gestalten was gedreht wird</li><li>Toleranzen nur dort eng fordern, wo es Funktion hat</li></ul></div>
+  <div class="gb-col bad"><h4>Das geht schief</h4><ul><li>Scharfe Innenecken fürs Fräsen zeichnen (kein Werkzeug schafft das)</li><li>Alles überspezifizieren, jede enge Toleranz kostet Geld</li><li>Glatte Oberfläche überall fordern, nur wo Funktion (Dichtung, Gleitlauf)</li><li>Ungleiche Wandstärken (verziehen sich bei Guss und Druck)</li><li>Verfahren erst nach dem Design wählen</li></ul></div>
+</div>
+
+<h2>Toleranzen &amp; Passungen</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>So macht man es</h4><ul><li>Funktion festlegen (gleiten/fest/ausrichten), dann Passung wählen</li><li>Bezug (Datum) zuerst definieren, alles bezieht sich darauf</li><li>Lochbilder über Positionstoleranz statt Einzelmaße</li><li>Im 3D-Druck Passung empirisch am Probeteil ermitteln (~0,2 mm Spiel beweglich)</li><li>Presssitz im Druck eher knapp ansetzen, das Material gibt nach</li></ul></div>
+  <div class="gb-col bad"><h4>Das geht schief</h4><ul><li>Maßhaltigkeit mit Form gleichsetzen (maßhaltig kann krumm sein)</li><li>Presspassung dort, wo später zerlegt werden muss</li><li>3D-Druck-Passung ohne Test auf Maß vertrauen</li><li>Welle und Bohrung beide eng tolerieren ohne Grund</li><li>Spiel und Presssitz im selben Teil ohne klare Zuordnung mischen</li></ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Woher die Werte stammen</div>
+  <ul>
+    <li>Herbert Wittel u. a., <i>Roloff/Matek Maschinenelemente</i> mit Tabellenbuch, Springer Vieweg — Formeln, Kennwerte und Richtwerte.</li>
+    <li>Dietmar Gross u. a., <i>Technische Mechanik 1–3</i>, Springer Vieweg — die Herleitungen hinter den Formeln.</li>
+    <li>Die Theorie ausführlich im Mechatronik-Hub: <a href="technische-mechanik.html">Technische Mechanik</a>, <a href="maschinenelemente.html">Maschinenelemente</a>, <a href="werkstoffkunde.html">Werkstoffkunde</a> und <a href="konstruktion.html">Konstruktion &amp; Fertigung</a>.</li>
+  </ul>
+</div>

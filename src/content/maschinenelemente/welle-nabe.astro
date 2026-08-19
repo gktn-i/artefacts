@@ -1,0 +1,67 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Eine Welle-Nabe-Verbindung überträgt Drehmoment von der Welle ins Bauteil.</b> Die Wahl zwischen Passfeder, Presssitz und Spannsatz entscheidet über Zentriergenauigkeit, Montierbarkeit und Wechsellastfestigkeit — und ist bei drehrichtungswechselnden Antrieben kritischer als bei gleichbleibender Last.</div>
+
+<h2>Die Bauarten im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Verbindung</th><th>Prinzip</th><th data-s="text">Stärken</th><th data-s="text">Schwächen</th></tr></thead>
+<tbody>
+<tr><td><b>Passfeder</b> (DIN 6885)</td><td>Formschluss über einen eingelegten Keil</td><td>Billig, lösbar, Standard, gut verfügbar; Nabe axial verschiebbar</td><td>Kerbwirkung in der Welle (K_t ≈ 2–3), Spiel in Umfangsrichtung, bei Lastwechsel schlägt sie aus, zentriert nicht</td></tr>
+<tr><td><b>Presssitz / Schrumpfsitz</b></td><td>Reibschluss durch Übermaß</td><td>Höchste Momentdichte, spielfrei, zentriert perfekt, keine Kerbe</td><td>Montage nur mit Presse oder Temperaturunterschied; Demontage oft zerstörend; Toleranzen kritisch</td></tr>
+<tr><td><b>Spannsatz / Schrumpfscheibe</b></td><td>Reibschluss über Kegelflächen, per Schrauben aufgebaut</td><td>Lösbar, spielfrei, kein Übermaß nötig, axial und winklig einstellbar</td><td>Braucht Bauraum, teurer, Anziehreihenfolge muss stimmen</td></tr>
+<tr><td><b>Klemmnabe (geschlitzt)</b></td><td>Reibschluss durch Zusammenklemmen</td><td>Sehr einfach, lösbar, keine Wellenbearbeitung nötig</td><td>Begrenztes Moment, Nabe muss nachgiebig sein, bei dünnen Wellen Verformungsgefahr</td></tr>
+<tr><td><b>Polygonprofil</b> (DIN 32711/32712)</td><td>Formschluss über unrunde Kontur</td><td>Kaum Kerbwirkung, hohe Momentdichte, zentriert</td><td>Teure Fertigung (Unrunddrehen oder Erodieren)</td></tr>
+<tr><td><b>Zahnwelle / Keilwelle</b> (DIN 5480)</td><td>Formschluss über viele Zähne</td><td>Sehr hohes Moment, axial verschiebbar unter Last</td><td>Teuer, Spiel vorhanden, braucht Wälzfräser oder Räumnadel</td></tr>
+<tr><td><b>Stiftverbindung</b></td><td>Formschluss über Quer- oder Kerbstift</td><td>Sehr billig, definierte Position</td><td>Starke Schwächung der Welle, kleines Moment, für Prototypen und leichte Antriebe</td></tr>
+</tbody>
+</table></div>
+
+<h2>Passfeder — der Standardfall</h2>
+<p>Die Passfeder überträgt das Moment über Flächenpressung an ihren Flanken. Maßgeblich ist deshalb nicht die Scherfestigkeit, sondern die zulässige Pressung am schwächeren Partner.</p>
+<div class="fbox">
+  <span class="f">p = 2 · T / (d · h_tr · l_tr · n · φ)&nbsp;&nbsp;≤&nbsp;p_zul</span>
+  <span class="l">T Drehmoment, d Wellendurchmesser, h_tr tragende Höhe (etwa 0,45 · h), l_tr tragende Länge, n Anzahl der Federn, φ Traganteil (0,75 bei zwei Federn).</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th data-s="num">Wellen-Ø [mm]</th><th>Passfeder b × h [mm]</th><th data-s="num">Nuttiefe Welle t₁</th></tr></thead>
+<tbody>
+<tr><td>über 6 bis 8</td><td>2 × 2</td><td>1,2</td></tr>
+<tr><td>über 8 bis 10</td><td>3 × 3</td><td>1,8</td></tr>
+<tr><td>über 10 bis 12</td><td>4 × 4</td><td>2,5</td></tr>
+<tr><td>über 12 bis 17</td><td>5 × 5</td><td>3,0</td></tr>
+<tr><td>über 17 bis 22</td><td>6 × 6</td><td>3,5</td></tr>
+<tr><td>über 22 bis 30</td><td>8 × 7</td><td>4,0</td></tr>
+<tr><td>über 30 bis 38</td><td>10 × 8</td><td>5,0</td></tr>
+<tr><td>über 38 bis 44</td><td>12 × 8</td><td>5,0</td></tr>
+<tr><td>über 44 bis 50</td><td>14 × 9</td><td>5,5</td></tr>
+</tbody>
+</table></div>
+
+<div class="warn"><b>Passfeder und Wechsellast vertragen sich schlecht.</b> Durch das unvermeidliche Spiel in Umfangsrichtung schlägt die Nut bei jedem Drehrichtungswechsel — die Verbindung wird mit der Zeit lose und die Kerbwirkung in der Nut wird zum Dauerbruchausgang. Bei reversierenden Antrieben, Servoachsen und allem mit Lastspielen ist ein Spannsatz oder Presssitz die richtige Wahl.</div>
+
+<h2>Presssitz auslegen</h2>
+<p>Das übertragbare Moment kommt aus der Reibung an der Fügefläche: <span class="formula">T = µ · p · π · d² · l / 2</span>. Der Fugendruck p folgt aus dem Übermaß, den Durchmessern und den E-Moduln — die vollständige Rechnung steht in DIN 7190. Für die Praxis reichen die genormten Passungen:</p>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Passung</th><th>Charakter</th><th>Fügen</th></tr></thead>
+<tbody>
+<tr><td>H7 / k6</td><td>Übergangssitz, leichter Festsitz</td><td>Von Hand mit leichtem Schlag oder kleiner Presse</td></tr>
+<tr><td>H7 / m6</td><td>Fester Übergangssitz</td><td>Presse; zusätzliche Sicherung gegen Verdrehen ratsam</td></tr>
+<tr><td>H7 / n6</td><td>Fester Sitz</td><td>Presse; überträgt bereits nennenswertes Moment</td></tr>
+<tr><td>H7 / p6</td><td>Presssitz</td><td>Presse oder Temperaturunterschied</td></tr>
+<tr><td>H7 / s6</td><td>Starker Presssitz</td><td>Schrumpfen: Nabe erwärmen oder Welle mit Trockeneis/Stickstoff kühlen</td></tr>
+</tbody>
+</table></div>
+<p>Der Passungsrechner im Abschnitt <a href="konstruktion.html#toleranzen">Toleranzen &amp; Passungen</a> gibt Grenzmaße und Übermaß direkt aus.</p>
+
+<div class="tip"><b>Schrumpfen statt Pressen:</b> Eine Temperaturdifferenz von 100 K ergibt bei Stahl rund 1,2 ‰ Durchmesseränderung — bei Ø50 mm sind das 60 µm, deutlich mehr als jedes übliche Übermaß. Nabe auf 150 °C erwärmen oder Welle in flüssigem Stickstoff kühlen, dann fügt sich das Teil kraftlos. Der Vorteil gegenüber dem Einpressen: die Oberflächen werden nicht abgerissen, der Sitz hält damit deutlich mehr aus.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN 6885-1 — Passfedern, Nuten, hohe Form; Quelle der Maßtabelle.</li>
+    <li>DIN 7190-1 — Pressverbände, Berechnungsgrundlagen und Gestaltungsregeln.</li>
+    <li>DIN 5480 (Zahnwellenverbindungen) und DIN 32711/32712 (Polygonprofile P3G und P4C).</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — Kapitel Welle-Nabe-Verbindungen mit dem vollständigen Pressungsnachweis.</li>
+  </ul>
+</div>

@@ -1,0 +1,80 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Riemen, Ketten und Spindeln lösen dieselbe Aufgabe mit gegensätzlichen Eigenschaften.</b> Riemen sind schnell und leise, aber elastisch; Spindeln sind steif und präzise, aber langsam. Die Wahl bestimmt, wie steif die Achse regelbar ist.</div>
+
+<h2>Die Antriebe im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Antrieb</th><th data-s="num">Geschwindigkeit</th><th data-s="num">Steifigkeit</th><th data-s="num">Wirkungsgrad</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Zahnriemen</b> (GT2, GT3, HTD, AT)</td><td>sehr hoch</td><td>gering–mittel</td><td>95 – 98 %</td><td>Schnell, leise, günstig, wartungsarm. Die Riemendehnung begrenzt die Positioniersteifigkeit und damit die Reglerbandbreite.</td></tr>
+<tr><td><b>Keilriemen / Flachriemen</b></td><td>hoch</td><td>gering</td><td>92 – 96 %</td><td>Reibschlüssig, also Schlupf möglich. Für Drehzahlübertragung, nicht für Positionierung.</td></tr>
+<tr><td><b>Kette</b> (Rollenkette)</td><td>mittel</td><td>mittel</td><td>95 – 98 %</td><td>Hohe Last, unempfindlich gegen Hitze und Schmutz. Braucht Schmierung, längt sich, Polygoneffekt bei kleinen Rädern.</td></tr>
+<tr><td><b>Trapezgewindespindel</b></td><td>niedrig</td><td>hoch</td><td>25 – 50 %</td><td>Meist selbsthemmend — hält die Z-Achse ohne Strom. Wirkungsgrad und Verschleiß sind die Nachteile.</td></tr>
+<tr><td><b>Kugelgewindetrieb</b></td><td>mittel</td><td>sehr hoch</td><td>90 – 95 %</td><td>Präzise, spielfrei vorspannbar, langlebig. Nicht selbsthemmend, senkrechte Achsen brauchen eine Bremse.</td></tr>
+<tr><td><b>Zahnstange &amp; Ritzel</b></td><td>hoch</td><td>hoch</td><td>90 – 97 %</td><td>Beliebig lange Achsen ohne Steifigkeitsverlust. Spiel nur mit vorgespanntem Doppelritzel oder Schrägverzahnung im Griff.</td></tr>
+<tr><td><b>Linearmotor</b></td><td>sehr hoch</td><td>—</td><td>—</td><td>Kein mechanisches Zwischenglied, kein Spiel, höchste Dynamik. Teuer, braucht Kühlung, hält bei Stromausfall nicht.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Zahnriemenprofile</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Profil</th><th data-s="num">Teilung</th><th>Zahnform</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>GT2 / 2GT</b></td><td>2 mm</td><td>rund</td><td>3D-Drucker, leichte Positionierachsen. Sehr geringes Spiel im Eingriff.</td></tr>
+<tr><td><b>GT3 / 3GT</b></td><td>3 mm</td><td>rund</td><td>Wie GT2, höhere Last</td></tr>
+<tr><td><b>HTD 5M / 8M</b></td><td>5 / 8 mm</td><td>rund</td><td>Leistungsübertragung, CNC-Achsen</td></tr>
+<tr><td><b>AT5 / AT10</b></td><td>5 / 10 mm</td><td>trapezförmig, breiter Zahn</td><td>Positionierantriebe mit hoher Steifigkeitsanforderung</td></tr>
+<tr><td><b>T5 / T10</b></td><td>5 / 10 mm</td><td>trapezförmig</td><td>Ältere Norm, mehr Spiel als AT; für Positionierung weniger geeignet</td></tr>
+<tr><td><b>MXL / XL</b></td><td>2,032 / 5,08 mm</td><td>trapezförmig (Zoll)</td><td>Ältere Geräte, Ersatzteilbedarf</td></tr>
+</tbody>
+</table></div>
+
+<div class="tip"><b>Riemenspannung richtig einstellen:</b> Zu locker heißt Zahnüberspringen und Spiel, zu straff heißt Lagerbelastung und Riemenverschleiß. Praktisch prüft man über die Eigenfrequenz des freien Trums — mit einer Handy-App zur Frequenzmessung anzupfen. Für GT2 mit 6 mm Breite liegt der übliche Bereich bei 80–110 Hz auf 200 mm freier Länge. Der Riemenhersteller gibt für sein Profil die Sollfrequenz je Länge und Breite an.</div>
+
+<h2>Kugelgewindetrieb — die Kennzahlen</h2>
+<p>Die Bezeichnung <b>1605</b> heißt: 16 mm Nenndurchmesser, 5 mm Steigung. Daraus folgt der Vorschub je Umdrehung und mit der Motordrehzahl die Verfahrgeschwindigkeit.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Typ</th><th data-s="num">Ø × Steigung</th><th data-s="num">Vorschub bei 1500 min⁻¹</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td>1204</td><td>12 × 4 mm</td><td>6 000 mm/min</td><td>Kleine Achsen, leichte Fräsen</td></tr>
+<tr><td>1605</td><td>16 × 5 mm</td><td>7 500 mm/min</td><td>Der Standard im Hobby- und Kleinmaschinenbau</td></tr>
+<tr><td>1610</td><td>16 × 10 mm</td><td>15 000 mm/min</td><td>Schnellere Achsen bei halbem Moment</td></tr>
+<tr><td>2005</td><td>20 × 5 mm</td><td>7 500 mm/min</td><td>Höhere Last und Knicksteifigkeit</td></tr>
+<tr><td>2510</td><td>25 × 10 mm</td><td>15 000 mm/min</td><td>Portalfräsen, längere Achsen</td></tr>
+</tbody>
+</table></div>
+
+<div class="warn"><b>Die kritische Drehzahl begrenzt lange Spindeln.</b> Eine Spindel Ø16 mm mit 1000 mm freier Länge wird ab wenigen hundert Umdrehungen pro Minute instabil und fängt an zu peitschen — unabhängig davon, wie stark der Motor ist. Abhilfe: größerer Durchmesser, kürzere freie Länge, bessere Lagerung (beidseitig fest statt fest-los) oder ein Antrieb mit rotierender Mutter, bei dem die Spindel stillsteht. Die Rechnung dazu unter <a href="technische-mechanik.html#schwingungen">Schwingungen &amp; Resonanz</a>.</div>
+
+<h2>Was die Wahl entscheidet</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Riemen nehmen, wenn …</h4>
+    <ul>
+      <li>lange Wege schnell zurückgelegt werden sollen</li>
+      <li>die Positionsgenauigkeit im Zehntelmillimeterbereich reicht</li>
+      <li>geringe Masse wichtig ist (bewegter Riemen statt rotierender Spindel)</li>
+      <li>es leise und wartungsarm sein soll</li>
+      <li>das Budget begrenzt ist</li>
+    </ul>
+  </div>
+  <div class="gb-col"><h4>Spindel nehmen, wenn …</h4>
+    <ul>
+      <li>Prozesskräfte auftreten (Fräsen, Pressen, Bohren)</li>
+      <li>Wiederholgenauigkeit im Hundertstelbereich gefordert ist</li>
+      <li>eine senkrechte Achse gehalten werden muss</li>
+      <li>die Achse steif genug für einen straffen Regelkreis sein soll</li>
+      <li>die Wege kurz sind (unter etwa 800 mm)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN ISO 5296 / DIN 7721 — Synchronriemen, Profile und Maße.</li>
+    <li>DIN ISO 3408 — Kugelgewindetriebe: Nenndurchmesser, Steigungen, Genauigkeitsklassen und kritische Drehzahl.</li>
+    <li><a href="https://www.gates.com/de/de/power-transmission">Gates — Antriebsriemen-Auslegung</a> und <a href="https://www.contitech.de/">ContiTech Synchroflex</a>: Sollspannungen, Leistungsdiagramme, Auslegungsprogramme.</li>
+    <li><a href="https://www.hiwin.de/de/Produkte/Kugelgewindetriebe">HIWIN Kugelgewindetriebe</a> — Tragzahlen, Vorspannung, kritische Drehzahl und Knicklast in Diagrammform.</li>
+  </ul>
+</div>

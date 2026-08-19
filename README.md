@@ -4,7 +4,9 @@ Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab und Fotografie —
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 25 Module sind native Astro-Module — es gibt keine HTML-Monolithen mehr.
+Alle 29 Module sind native Astro-Module — es gibt keine HTML-Monolithen mehr,
+und alle Inhalte werden server-gerendert, damit die Volltextsuche sie findet
+und die Seiten auch ohne JavaScript vollständig lesbar sind.
 
 ## Struktur
 
@@ -25,7 +27,7 @@ public/assets/chrome.css   Kopfleiste + Palette (gemeinsames Chrome)
 
 Drei Ebenen: **Index → Hub → Modul.**
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video —
-zusammen 25 Module mit 223 Abschnitten.
+zusammen 29 Module mit 276 Abschnitten.
 
 ## Wie ein Modul funktioniert
 
@@ -41,12 +43,19 @@ zusammen 25 Module mit 223 Abschnitten.
   `src/pages/[slug].astro` eingebunden.
 - **Modul-Design:** `_style.css` im Content-Ordner, alles unter `.mx-<id>` gescoped —
   kollidiert mit nichts. Kleine Module kommen ganz ohne aus (Content-System in site.css).
-- **Gemeinsame Stylesheets für einen ganzen Hub** sind möglich: `[slug].astro` hängt
-  bei Bedarf eine zweite Klasse an den Content-Container (`mx-sys` für die Küche,
-  `mx-mecha` für den Mechatronik-Hub). Das zugehörige Stylesheet liegt als
-  `src/content/_mecha.css` und wird von jedem `_style.css` des Hubs nur importiert.
-  Genauso teilen sich alle elf Mechatronik-Module ein einziges
-  `public/assets/mod-mecha.js` (Rechner, Filter, Glossar, PID-Simulation).
+- **Gemeinsame Stylesheets über Modulgrenzen hinweg** sind möglich: `[slug].astro`
+  hängt bei Bedarf eine zweite Klasse an den Content-Container (`mx-sys` für die
+  Küche, `mx-mecha` für den Mechatronik-Hub und die Technik-Module der Werkstatt,
+  siehe `MECHA_MODULES`). Das Stylesheet liegt einmal als `src/content/_mecha.css`
+  und wird von jedem `_style.css` nur importiert; ein Modul kann darüber hinaus
+  eigene Regeln ergänzen (so macht es `dremel` für seine Drehzahlskala).
+- **Ein Skript für viele Module:** `public/assets/mod-mecha.js` bedient alle 15
+  Mechatronik-Module und die vier Technik-Module der Werkstatt — Faltabschnitte,
+  sortierbare Tabellen, Katalog- und Glossarfilter, 19 Rechner und die
+  PID-Simulation. Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
+- **Inhalte gehören ins HTML, nicht ins JavaScript.** Tabellen und Kataloge werden
+  server-gerendert und im JS nur gefiltert und sortiert. Nur so landen sie im
+  Pagefind-Index und funktionieren ohne JavaScript.
 
 Neues Modul: Registry-Eintrag + Content-Ordner. Index, Hub-Seite, Breadcrumb, Suche
 und Verwandt-Links ziehen automatisch nach.

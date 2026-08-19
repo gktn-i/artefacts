@@ -1,0 +1,65 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Werkstoffauswahl beginnt nicht mit einer Werkstoffliste, sondern mit der Frage, welche Eigenschaft das Bauteil eigentlich begrenzt.</b> Ist es Steifigkeit, Festigkeit, Temperatur, Korrosion, Verschleiß oder schlicht der Preis? Erst danach lohnt der Blick in die Tabelle.</div>
+
+<h2>Vorgehen in fünf Schritten</h2>
+<div class="steps">
+  <div class="step"><h4>Funktion und begrenzende Eigenschaft benennen</h4>„Der Ausleger darf sich unter 200 N um höchstens 0,5 mm durchbiegen“ ist eine Anforderung, aus der sich rechnen lässt. „Muss stabil sein“ ist keine.</div>
+  <div class="step"><h4>Ausschlusskriterien setzen</h4>Dauertemperatur, Medienkontakt, Lebensmittelzulassung, elektrische Leitfähigkeit, Magnetismus, maximale Masse, Brandschutz. Diese Liste streicht meist drei Viertel der Kandidaten.</div>
+  <div class="step"><h4>Zielgröße festlegen und maximieren</h4>Bei gegebener Steifigkeit und minimaler Masse ist es E^(1/3)/ρ, bei gegebener Festigkeit R_p0,2^(2/3)/ρ, bei minimalen Kosten die Eigenschaft je Euro. Die Systematik dahinter stammt von Michael Ashby.</div>
+  <div class="step"><h4>Fertigbarkeit und Verfügbarkeit prüfen</h4>Der theoretisch beste Werkstoff nützt nichts, wenn er in der gewünschten Abmessung nicht lieferbar ist, die Werkstatt ihn nicht bearbeiten kann oder die Mindestbestellmenge bei 500 kg liegt.</div>
+  <div class="step"><h4>Gegenrechnen und absichern</h4>Mit den konkreten Kennwerten des Lieferanten nachrechnen, nicht mit dem Katalogmittelwert. Bei kritischen Teilen ein Abnahmeprüfzeugnis 3.1 nach EN 10204 verlangen.</div>
+</div>
+
+<h2>Entscheidungshilfen für häufige Fälle</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Anforderung</th><th>Erste Wahl</th><th>Alternative</th><th>Begründung</th></tr></thead>
+<tbody>
+<tr><td><b>Steifer Rahmen, Kosten zählen</b></td><td>Stahl S235/S355, geschweißt</td><td>Aluprofil 6060 mit Verbindern</td><td>Stahl hat den dreifachen E-Modul; das Profilsystem ist dafür schneller montiert und änderbar</td></tr>
+<tr><td><b>Leichtes, steifes Bauteil</b></td><td>Aluminium 6082 T651</td><td>CFK-Sandwich</td><td>Bei gleicher Biegesteifigkeit spart Alu durch größere Wandabstände Gewicht; CFK ist besser, aber teuer und aufwendig</td></tr>
+<tr><td><b>Hoch belastete Welle</b></td><td>42CrMo4 vergütet</td><td>C45 vergütet</td><td>Deutlich höhere Streckgrenze bei gleichem E-Modul und gleichem Bauraum</td></tr>
+<tr><td><b>Gleitlager, wartungsfrei</b></td><td>Kunststoff (iglidur, PTFE-Verbund)</td><td>Zinnbronze CuSn8</td><td>Kunststoff braucht keine Schmierung; Bronze trägt mehr und verträgt höhere Temperatur</td></tr>
+<tr><td><b>Frästeil, viele Bohrungen und Gewinde</b></td><td>Aluminium 6082 oder POM-C</td><td>Automatenstahl 11SMn30</td><td>Beste Zerspanbarkeit, kurze Bearbeitungszeit</td></tr>
+<tr><td><b>Außenanwendung, Feuchte</b></td><td>Edelstahl 1.4301, feuerverzinkter Stahl</td><td>Eloxiertes Aluminium</td><td>Bei Salzwasser 1.4404 statt 1.4301</td></tr>
+<tr><td><b>Maschinenbett, dämpfend</b></td><td>Mineralguss</td><td>Grauguss EN-GJL-250</td><td>Dämpfung schlägt hier Festigkeit; beide sind Stahl darin klar überlegen</td></tr>
+<tr><td><b>Transparente Abdeckung</b></td><td>PMMA (Acrylglas)</td><td>PC (Polycarbonat)</td><td>PMMA ist klarer, kratzfester und billiger; PC ist schlagzäh und damit die Wahl für Schutzscheiben</td></tr>
+<tr><td><b>Funktionsteil aus dem Drucker</b></td><td>PETG oder ASA</td><td>PA-CF</td><td>PLA ist für Funktionsteile zu temperaturempfindlich und zu spröde</td></tr>
+<tr><td><b>Hohe Temperatur, chemisch aggressiv</b></td><td>PEEK oder 1.4404</td><td>PTFE (drucklos)</td><td>PEEK bis 250 °C mechanisch belastbar; PTFE ist inert, kriecht aber</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die typischen Fehlgriffe</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Häufige Fehler</h4>
+    <ul>
+      <li><b>Festeren Stahl gegen zu weiche Konstruktion:</b> ändert nichts, weil E gleich bleibt.</li>
+      <li><b>Aluminium ohne Steifigkeitsrechnung als Stahlersatz:</b> gleiche Geometrie heißt dreifache Durchbiegung.</li>
+      <li><b>PLA für Funktionsteile mit Wärme- oder Dauerlast.</b></li>
+      <li><b>Edelstahl als Universallösung:</b> teuer, schlecht zerspanbar, geringe Wärmeleitung, fresst beim Verschrauben.</li>
+      <li><b>Nur den Werkstoffpreis vergleichen:</b> bei Frästeilen dominiert oft die Bearbeitungszeit, nicht das Rohmaterial.</li>
+      <li><b>Kunststoffkennwerte aus dem Kurzzeitversuch für Dauerlast.</b></li>
+    </ul>
+  </div>
+  <div class="gb-col good"><h4>Was sich bewährt</h4>
+    <ul>
+      <li>Erst die Form optimieren, dann den Werkstoff — Geometrie hat meist den größeren Hebel.</li>
+      <li>Lagerhaltige Standardwerkstoffe und -abmessungen wählen.</li>
+      <li>Bei Unsicherheit den zäheren Werkstoff nehmen: er kündigt Versagen an.</li>
+      <li>Prototyp im Zielwerkstoff bauen, nicht nur im Druckwerkstoff.</li>
+      <li>Beim Lieferanten nach Restposten und Zuschnitten fragen — bei Einzelteilen oft die halben Kosten.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="tip"><b>Der Trick mit der Steifigkeit:</b> Bei freier Wahl der Wandstärke ist nicht E/ρ die richtige Kennzahl, sondern E^(1/3)/ρ — weil die Biegesteifigkeit mit der dritten Potenz der Höhe wächst. Mit E in N/mm² und ρ in g/cm³ ergibt das für Fichte rund 49, für Multiplex 29, für CFK 34, für Aluminium 15 und für Stahl nur 7,6. Genau deshalb sind Flugzeugflügel, Fahrradrahmen und Segelflugzeuge so gebaut, wie sie gebaut sind — nicht weil das Material fester wäre, sondern weil man mit gleichem Gewicht dickere Querschnitte bekommt.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Michael F. Ashby, <i>Materials Selection in Mechanical Design</i>, 5. Auflage, Butterworth-Heinemann — die Methodik mit Werkstoffdiagrammen und Materialindizes; Grundlage dieses Abschnitts.</li>
+    <li><a href="https://www.ansys.com/products/materials/granta-edupack">Granta EduPack</a> — die Software zu Ashbys Methode, an vielen Hochschulen verfügbar.</li>
+    <li>DIN EN 10204 — Arten von Prüfbescheinigungen.</li>
+    <li>VDI 2225 — Konstruktionsmethodik: technisch-wirtschaftliches Konstruieren; systematische Bewertung von Alternativen.</li>
+  </ul>
+</div>
