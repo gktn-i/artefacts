@@ -55,16 +55,14 @@ const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
 /* Zusatz-Skript des Moduls (Rechner, Tabellen-Builder, Folds …). */
 /* Werkstatt-Module, die das gemeinsame Technik-Design und -Skript mitbenutzen.
    Sie bleiben im Werkstatt-Hub, sehen aber aus wie der Mechatronik-Hub. */
-const MECHA_MODULES = new Set(["maschinenbau", "maker-komponenten", "dremel", "schmiermittel"]);
+const MECHA_MODULES = new Set(["mechanik-robotik", "dremel", "schmiermittel"]);
 
 const PAGE_SCRIPTS: Record<string, string> = {
   loeten: "/assets/mod-loeten.js",
   "elektronik-101": "/assets/mod-elektronik.js",
   dremel: "/assets/mod-mecha.js",
   homeserver: "/assets/mod-homeserver.js",
-  maschinenbau: "/assets/mod-mecha.js",
-  "maker-komponenten": "/assets/mod-mecha.js",
-  robotik: "/assets/mod-robotik.js",
+  "mechanik-robotik": "/assets/mod-mecha.js",
   filament: "/assets/mod-filament.js",
   rentabilitaet: "/assets/mod-rentabilitaet.js",
   schmiermittel: "/assets/mod-mecha.js",
