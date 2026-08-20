@@ -23,8 +23,8 @@
        "name": "Elektronik 101",
        "icon": "⚡",
        "kind": "Referenz",
-       "updated": "2026-08-11",
-       "desc": "Die große Referenz: Grundgrößen, Schaltpläne, Signale, Leistungselektronik, Protokolle, Messtechnik und Fehlersuche — plus eigene Tabs für Multimeter, Oszilloskop und Netzteil.",
+       "updated": "2026-08-20",
+       "desc": "Die große Referenz als Lernpfad: Grundlagen, Schaltungstechnik, Schaltplan und Leistungselektronik — dazu Bauteil-Datenbank, Module & Boards, Protokolle und Datenblatt-Wissen, Sicherheits- und Messpraxis mit eigenen Geräte-Tabs und eine gestraffte Fehlersuche.",
        "tags": [
         "grundlagen",
         "schaltplan",
@@ -46,6 +46,10 @@
          "t": "Basics"
         },
         {
+         "h": "signale",
+         "t": "Signale & Schaltungstechnik"
+        },
+        {
          "h": "schaltplan",
          "t": "Schaltplan lesen"
         },
@@ -54,56 +58,32 @@
          "t": "Leistung & PWM"
         },
         {
-         "h": "signale",
-         "t": "Signale & Schaltungstechnik"
-        },
-        {
-         "h": "rechner",
-         "t": "Rechner"
-        },
-        {
          "h": "komponenten",
          "t": "Bauteil-Datenbank"
         },
         {
-         "h": "displays",
-         "t": "Displays"
-        },
-        {
-         "h": "motoren",
-         "t": "Motoren"
-        },
-        {
-         "h": "mcu",
-         "t": "Mikrocontroller"
+         "h": "module",
+         "t": "Module & Boards"
         },
         {
          "h": "protokolle",
          "t": "Protokolle & Busse"
         },
         {
-         "h": "begriffe",
-         "t": "Fachbegriffe"
-        },
-        {
          "h": "datenblatt",
          "t": "Datenblatt lesen"
         },
         {
-         "h": "messgeraete",
-         "t": "Messgeräte im Überblick"
+         "h": "begriffe",
+         "t": "Fachbegriffe"
+        },
+        {
+         "h": "sicherheit",
+         "t": "Sicherheit"
         },
         {
          "h": "messen",
-         "t": "Messen & Werte"
-        },
-        {
-         "h": "fehlersuche",
-         "t": "Fehlersuche"
-        },
-        {
-         "h": "dmm-hand",
-         "t": "Handmultimeter"
+         "t": "Messen & Multimeter"
         },
         {
          "h": "dmm-tisch",
@@ -122,49 +102,43 @@
          "t": "Labornetzteil"
         },
         {
-         "h": "sicherheit",
-         "t": "Sicherheit"
+         "h": "fehlersuche",
+         "t": "Fehlersuche"
         },
         {
          "h": "praxis",
          "t": "Praxis & Aufbau"
+        },
+        {
+         "h": "rechner",
+         "t": "Rechner"
         }
        ],
        "groups": [
         {
-         "l": "Grundlagen",
+         "l": "Fundament",
          "sections": [
           "grundlagen",
-          "schaltplan",
-          "leistung",
           "signale",
-          "rechner"
+          "schaltplan",
+          "leistung"
          ]
         },
         {
          "l": "Bauteile & Systeme",
          "sections": [
           "komponenten",
-          "displays",
-          "motoren",
-          "mcu",
+          "module",
           "protokolle",
-          "begriffe",
-          "datenblatt"
+          "datenblatt",
+          "begriffe"
          ]
         },
         {
-         "l": "Messen & Fehlersuche",
+         "l": "Messen",
          "sections": [
-          "messgeraete",
+          "sicherheit",
           "messen",
-          "fehlersuche"
-         ]
-        },
-        {
-         "l": "Meine Geräte",
-         "sections": [
-          "dmm-hand",
           "dmm-tisch",
           "oszilloskop",
           "lcrp1",
@@ -172,10 +146,11 @@
          ]
         },
         {
-         "l": "Sicherheit & Praxis",
+         "l": "Anwenden",
          "sections": [
-          "sicherheit",
-          "praxis"
+          "fehlersuche",
+          "praxis",
+          "rechner"
          ]
         }
        ],
@@ -183,7 +158,12 @@
         "steckbrett": "praxis",
         "regeln": "praxis",
         "boarddiagnose": "fehlersuche",
-        "messgeraet": "dmm-hand"
+        "messgeraet": "messen",
+        "displays": "module",
+        "motoren": "module",
+        "mcu": "module",
+        "messgeraete": "messen",
+        "dmm-hand": "messen"
        }
       },
       {

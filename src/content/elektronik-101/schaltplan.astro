@@ -77,13 +77,22 @@
 </div>
 <p class="note">Kürzel-Logik: R = Widerstand, C = Kondensator, D = Diode, Q = Transistor, U = IC, L = Spule, Y = Quarz, SW = Schalter, J = Stecker, F = Sicherung, K = Relais, T = Trafo, TH = Thermistor, M = Motor, LS = Lautsprecher. Vollständige Tabelle: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</p>
 
-<h2>Die Lese-Regeln (Konventionen)</h2>
+<h2>Die eine Checkliste: lesen und zeichnen</h2>
+<p>Erst die Lese-Konventionen, dann die Technik-Regeln — dieselbe Liste gilt in beide Richtungen: beim Lesen erkennst du die Muster, beim Zeichnen hältst du sie ein.</p>
 <div class="card">
-<div class="rule"><span class="ico">🧭</span><div><b>Plus oben, GND unten.</b> Versorgungsspannung wird oben gezeichnet, Masse unten — Strom „fällt" im Plan von oben nach unten. Signale laufen von links (Eingang) nach rechts (Ausgang).</div></div>
+<div class="rule"><span class="ico">🧭</span><div><b>Plus oben, GND unten.</b> Versorgungsspannung wird oben gezeichnet, Masse unten — Strom „fällt" im Plan von oben nach unten. Signale laufen von links (Eingang) nach rechts (Ausgang). Beim Zeichnen: GND-Symbole nach unten, Versorgungspfeile nach oben, nie seitlich.</div></div>
 <div class="rule"><span class="ico">⚫</span><div><b>Punkt = verbunden. Kreuzung ohne Punkt = nicht verbunden.</b> Die wichtigste Regel überhaupt — siehe Grafik unten.</div></div>
-<div class="rule"><span class="ico">🏷️</span><div><b>Gleicher Netzname = verbunden, auch ohne Linie.</b> Steht an zwei Leitungsenden dasselbe Label (<span class="kbd">VCC</span>, <span class="kbd">GND</span>, <span class="kbd">SDA</span> …), sind sie verbunden. Versorgungssymbole sind „Teleporter": jeder VCC-Pfeil hängt am selben Netz.</div></div>
+<div class="rule"><span class="ico">🏷️</span><div><b>Gleicher Netzname = verbunden, auch ohne Linie.</b> Steht an zwei Leitungsenden dasselbe Label (<span class="kbd">VCC</span>, <span class="kbd">GND</span>, <span class="kbd">SDA</span> …), sind sie verbunden. Versorgungssymbole sind „Teleporter": jeder VCC-Pfeil hängt am selben Netz. Lesbar schlägt kompakt: lieber Netznamen als gekreuzte Leitungen.</div></div>
 <div class="rule"><span class="ico">1️⃣</span><div><b>Pin 1 finden:</b> Punkt oder Kerbe am IC-Symbol und am echten Chip. Zählung ab Pin 1 <b>gegen</b> den Uhrzeigersinn (von oben gesehen).</div></div>
 <div class="rule"><span class="ico">🔢</span><div><b>Kürzel + Nummer = eindeutiges Bauteil.</b> R5 im Plan ist R5 auf der Platine und R5 in der Stückliste. Der Wert steht direkt daneben.</div></div>
+<div class="rule"><span class="ico">🧊</span><div><b>100 nF an jeden IC</b> — beim Platzieren des IC-Symbols sofort mitzeichnen, auf „mach ich am Ende" verschoben wird er erfahrungsgemäß vergessen. Was er tut: Block „Abblockkondensator" unten.</div></div>
+<div class="rule"><span class="ico">🔀</span><div><b>Pegel prüfen:</b> Ein 5-V-Signal darf <b>nie</b> direkt an einen 3,3-V-Pin — andersrum funktioniert meist. Wandlung: Tab <a href="#signale">Signale &amp; Schaltungstechnik</a>.</div></div>
+<div class="rule"><span class="ico">🧮</span><div><b>Strombudget rechnen:</b> Alle Verbraucher addieren + Reserve. GPIO-Pins mit ~20 mA planen (40 mA absolutes Maximum) — alles Größere schaltet ein Transistor/MOSFET, nie der Pin selbst.</div></div>
+<div class="rule"><span class="ico">📉</span><div><b>Nicht am Limit betreiben (Derating):</b> Bauteile nur zu ~50–70 % ihrer Nennwerte ausnutzen. Elko-Spannungsfestigkeit mindestens 1,5–2× der Betriebsspannung.</div></div>
+<div class="rule"><span class="ico">🛡️</span><div><b>Schutz am Eingang:</b> Verpolungsschutz (Diode in Serie oder P-MOSFET) und Sicherung direkt hinter den Versorgungseingang; Leitungen nach draußen bekommen 100 Ω–1 kΩ in Serie gegen ESD und Störspitzen.</div></div>
+<div class="rule"><span class="ico">🌀</span><div><b>Freilaufdiode an jede Spule</b> (Relais, Motor, Magnetventil) — Auswahl und Einbau: Tab <a href="#signale">Signale &amp; Schaltungstechnik</a>.</div></div>
+<div class="rule"><span class="ico">📍</span><div><b>Keine offenen Eingänge:</b> Unbenutzte IC-Eingänge und Reset-/Enable-Pins definiert beschalten (Pull-up/Pull-down, Tab <a href="#signale">Signale</a>) — offene CMOS-Eingänge machen Zufallsverhalten.</div></div>
+<div class="rule"><span class="ico">📦</span><div><b>Standardwerte nehmen</b> (E-Reihe, Tab <a href="#grundlagen">Basics</a>) und <b>Testpunkte einplanen</b>: GND und die wichtigsten Spannungen als Messpunkte — die Minute beim Zeichnen spart Stunden beim Fehlersuchen.</div></div>
 </div>
 
 <div class="grid2">
@@ -112,14 +121,14 @@
 <tr><td><span class="kbd">3V3</span> / <span class="kbd">5V0</span></td><td>3,3 V / 5,0 V</td><td>V ersetzt das Komma bei Spannungen</td></tr>
 </tbody>
 </table></div>
-<p class="note">Diese Schreibweise steht im <b>Schaltplan</b>. Die aufgedruckten Zahlencodes auf den Bauteilen selbst (z. B. „104" = 100 nF, „4702" = 47 kΩ) stehen im Abschnitt „Aufdruck entschlüsseln" im Tab <a href="#rechner">Rechner</a>.</p>
+<p class="note">Diese Schreibweise steht im <b>Schaltplan</b>. Die aufgedruckten Zahlencodes auf den Bauteilen selbst (z. B. „104" = 100 nF, „4702" = 47 kΩ) stehen im Abschnitt „Aufdruck entschlüsseln" im Tab <a href="#grundlagen">Basics</a>.</p>
 
 <h2>Schaltplan lesen — Schritt für Schritt</h2>
 <div class="card">
 <div class="rule"><span class="ico">①</span><div><b>Versorgung finden.</b> Wo kommt Energie rein — USB, Hohlbuchse, Batterie? Von dort zum Spannungsregler folgen. Notiere, welche Spannungen es gibt (z. B. 5 V rein → 3,3 V für den Chip).</div></div>
 <div class="rule"><span class="ico">②</span><div><b>GND finden.</b> Alle GND-Symbole sind ein Netz — das ist der Bezugspunkt für jede Messung und jedes Signal.</div></div>
 <div class="rule"><span class="ico">③</span><div><b>Das „Gehirn" finden.</b> Das größte IC (meist U1) ist fast immer der Mikrocontroller oder Haupt-Chip. Alles andere hängt drumherum.</div></div>
-<div class="rule"><span class="ico">④</span><div><b>Standard-Blöcke erkennen.</b> Schaltpläne bestehen zu ~80 % aus immer gleichen Mustern (nächste Sektion). Wer die Blöcke kennt, liest nicht mehr Bauteil für Bauteil, sondern Block für Block.</div></div>
+<div class="rule"><span class="ico">④</span><div><b>Standard-Blöcke erkennen</b> (nächste Sektion). Wer die Blöcke kennt, liest nicht mehr Bauteil für Bauteil, sondern Block für Block.</div></div>
 <div class="rule"><span class="ico">⑤</span><div><b>Signalweg verfolgen.</b> Von links nach rechts: Eingang (Sensor, Taster, Stecker) → Verarbeitung (IC) → Ausgang (LED, Motor, Display).</div></div>
 <div class="rule"><span class="ico">⑥</span><div><b>Unbekanntes IC? Datenblatt.</b> Aufdruck ablesen → Datenblatt suchen → Kapitel „Typical Application" ansehen. Praxis-Fakt: Die meiste Beschaltung in echten Geräten <b>ist</b> exakt diese Referenzschaltung aus dem Datenblatt.</div></div>
 </div>
@@ -138,15 +147,15 @@
 
 <div class="card"><h3>Pull-up am Taster / Bus</h3>
 <svg class="sy sy-mid" style="max-width:170px" viewBox="0 0 200 130" role="img" aria-label="Widerstand von Versorgung zum Pin, Taster vom Pin nach Masse"><path class="f" d="M70,6 L63,20 L77,20 Z"/><path class="w" d="M70,20 V30"/><rect class="w" x="62" y="30" width="16" height="24"/><path class="w" d="M70,54 V64 M70,64 H150"/><circle class="f" cx="70" cy="64" r="3.4"/><path class="w" d="M70,64 V76"/><circle class="f" cx="70" cy="80" r="2.6"/><circle class="f" cx="70" cy="104" r="2.6"/><path class="w" d="M70,80 L84,100"/><path class="w" d="M70,104 V112 M58,112 H82 M63,118 H77"/><text class="lbl" x="54" y="14" text-anchor="end">3V3</text><text class="lbl" x="84" y="46">10k</text><text class="lbl" x="148" y="58" text-anchor="end">zum MCU-Pin</text><text class="lbl" x="92" y="96">Taster</text></svg>
-<ul><li>Pin liegt über 10 kΩ auf HIGH; Taster gedrückt zieht ihn auf LOW — nie „floatend"</li><li>Gleicher Block bei I²C (2-Draht-Bus für Sensoren/Displays, erklärt im Tab <a href="#displays">Displays</a>): 4,7 kΩ von den Datenleitungen SDA/SCL nach VCC</li><li>Pull-down = gespiegelt (R nach GND, Taster nach VCC)</li></ul></div>
+<ul><li>Pin liegt über 10 kΩ auf HIGH; Taster gedrückt zieht ihn auf LOW — nie „floatend"</li><li>Gleicher Block bei I²C (2-Draht-Bus für Sensoren/Displays, erklärt im Tab <a href="#protokolle">Protokolle &amp; Busse</a>): 4,7 kΩ von den Datenleitungen SDA/SCL nach VCC</li><li>Pull-down = gespiegelt (R nach GND, Taster nach VCC)</li></ul></div>
 
 <div class="card"><h3>Abblockkondensator (100 nF)</h3>
 <svg class="sy sy-mid" style="max-width:170px" viewBox="0 0 200 130" role="img" aria-label="100-Nanofarad-Kondensator zwischen VCC-Pin des ICs und Masse"><path class="f" d="M60,12 L53,26 L67,26 Z"/><path class="w" d="M60,26 V40 M60,40 H122"/><circle class="f" cx="88" cy="40" r="3.4"/><rect class="w" x="122" y="30" width="58" height="70" rx="2"/><text class="lbl" x="151" y="70" text-anchor="middle">U1</text><text class="pin" x="126" y="44">VCC</text><path class="w" d="M88,40 V56 M78,56 H98 M78,64 H98 M88,64 V84"/><path class="w" d="M76,84 H100 M81,90 H95 M86,96 H90"/><path class="w" d="M151,100 V112 M139,112 H163 M144,118 H158"/><text class="lbl" x="74" y="62" text-anchor="end">100n</text><text class="lbl" x="44" y="20" text-anchor="end">5V</text></svg>
-<ul><li>100 nF direkt an <b>jedem</b> VCC-Pin jedes ICs — fängt Stromspitzen ab</li><li>Sieht im Plan „unverbunden" aus, ist aber Pflicht; so nah wie möglich am Pin platziert</li></ul></div>
+<ul><li>100 nF direkt an <b>jedem</b> VCC-Pin jedes ICs — fängt Stromspitzen ab (warum genau: Tab <a href="#signale">Signale</a>)</li><li>Sieht im Plan „unverbunden" aus, ist aber Pflicht; so nah wie möglich am Pin platziert</li></ul></div>
 
 <div class="card"><h3>Transistor als Schalter</h3>
 <svg class="sy sy-mid" style="max-width:190px" viewBox="0 0 205 130" role="img" aria-label="NPN-Transistor schaltet Relais, Basiswiderstand 1 Kiloohm, Freilaufdiode parallel zur Last"><path class="f" d="M118,4 L111,16 L125,16 Z"/><path class="w" d="M118,16 V20"/><rect class="w" x="108" y="20" width="20" height="24"/><path class="w" d="M118,44 V50"/><path class="w" d="M10,70 H36"/><rect class="w" x="36" y="62" width="28" height="16"/><path class="w" d="M64,70 H92 M92,52 V88 M92,62 L118,50 M92,78 L118,96"/><path class="f" d="M118,96 L106,93 L112,86 Z"/><path class="w" d="M118,96 V106 M106,106 H130 M111,112 H125"/><circle class="f" cx="118" cy="18" r="3"/><circle class="f" cx="118" cy="47" r="3"/><path class="w" d="M118,18 H150 M118,47 H150 M150,18 V24 M150,38 V47"/><path class="f" d="M142,38 L158,38 L150,24 Z"/><path class="w" d="M142,24 H158"/><text class="lbl" x="50" y="56" text-anchor="middle">1k</text><text class="lbl" x="8" y="86">MCU-Pin</text><text class="lbl" x="104" y="34" text-anchor="end">Relais</text><text class="lbl" x="162" y="34">1N4148</text></svg>
-<ul><li>MCU-Pin → 1 kΩ → Basis: kleiner Strom schaltet großen Strom (Relais, Motor, LED-Kette)</li><li>Freilaufdiode <b>immer</b> parallel zu Spule/Relais — schluckt die Abschaltspitze. 1N4148 reicht fürs Relais; bei Motoren 1N4007 oder Schottky (SS14)</li><li>Gleiche Rolle übernimmt oft ein N-MOSFET (Gate statt Basis, ohne 1k)</li></ul></div>
+<ul><li>MCU-Pin → 1 kΩ → Basis: kleiner Strom schaltet großen Strom (Relais, Motor, LED-Kette)</li><li>Freilaufdiode <b>immer</b> parallel zu Spule/Relais — schluckt die Abschaltspitze (Auswahl und Einbau: Tab <a href="#signale">Signale</a>)</li><li>Gleiche Rolle übernimmt oft ein N-MOSFET — die komplette Beschaltung (Gate-Widerstand, Pull-down, Logic-Level) steht im Tab <a href="#signale">Signale</a></li></ul></div>
 
 <div class="card"><h3>Spannungsregler (AMS1117)</h3>
 <svg class="sy sy-mid" style="max-width:190px" viewBox="0 0 200 130" role="img" aria-label="Linearregler mit Eingangs- und Ausgangskondensator"><rect class="w" x="70" y="30" width="60" height="34" rx="2"/><text class="lbl" x="100" y="44" text-anchor="middle">AMS1117</text><text class="lbl" x="100" y="57" text-anchor="middle">3V3</text><path class="w" d="M14,40 H70 M130,40 H186"/><circle class="f" cx="40" cy="40" r="3.4"/><circle class="f" cx="160" cy="40" r="3.4"/><path class="w" d="M40,40 V56 M32,56 H48 M32,64 H48 M40,64 V96"/><path class="w" d="M160,40 V56 M152,56 H168 M152,64 H168 M160,64 V96"/><path class="w" d="M100,64 V96 M30,96 H170"/><circle class="f" cx="100" cy="96" r="3.4"/><path class="w" d="M100,96 V104 M88,104 H112 M93,110 H107 M98,116 H102"/><text class="lbl" x="16" y="32">5V →</text><text class="lbl" x="184" y="32" text-anchor="end">→ 3,3V</text><text class="lbl" x="26" y="62" text-anchor="end">10µ</text><text class="lbl" x="174" y="62">22µ</text></svg>
@@ -201,35 +210,7 @@
 <li><b>ERC laufen lassen</b> (Electrical Rules Check): findet unverbundene Pins und vergessene Netze, bevor du sie auf der Platine suchst.</li>
 <li><b>Erst danach Layout:</b> Das Board wird aus dem fertigen, geprüften Schaltplan erzeugt.</li>
 </ul></div>
-
-<h3>Technik-Checkliste: daran beim Entwerfen denken</h3>
-<p>Das sind die Standard-Regeln, die erfahrene Entwickler bei jedem Entwurf automatisch prüfen — sortiert nach Thema:</p>
-<div class="grid2">
-<div class="card"><h3>⚡ Spannung &amp; Strom</h3>
-<div class="rule"><span class="ico">🔀</span><div><b>Pegel prüfen:</b> Ein 5-V-Signal darf <b>nie</b> direkt an einen 3,3-V-Pin (Spannungsteiler oder Levelshifter dazwischen). Andersrum — 3,3 V an einen 5-V-Eingang — funktioniert meist.</div></div>
-<div class="rule"><span class="ico">🧮</span><div><b>Strombudget rechnen:</b> Alle Verbraucher addieren + Reserve. Und: GPIO-Pins mit ~20 mA planen (40 mA ist absolutes Maximum) — alles Größere (Motor, Relais, LED-Kette) schaltet ein Transistor/MOSFET, nie der Pin selbst.</div></div>
-<div class="rule"><span class="ico">📉</span><div><b>Nicht am Limit betreiben (Derating):</b> Bauteile nur zu ~50–70 % ihrer Nennwerte ausnutzen. Elko-Spannungsfestigkeit mindestens 1,5–2× der Betriebsspannung (16-V-Elko an 5 V, nicht 6,3-V-Elko an 5 V).</div></div>
-</div>
-<div class="card"><h3>🛡️ Schutz</h3>
-<div class="rule"><span class="ico">🔌</span><div><b>Verpolungsschutz am Eingang:</b> Diode in Serie (einfach, kostet ~0,7 V) oder P-MOSFET (fast verlustfrei) — für den Moment, in dem jemand den Stecker falsch herum anschließt.</div></div>
-<div class="rule"><span class="ico">🧯</span><div><b>Sicherung direkt hinter den Versorgungseingang</b> — vor allem bei Akku-Betrieb.</div></div>
-<div class="rule"><span class="ico">🌀</span><div><b>Freilaufdiode an jede Spule</b> (Relais, Motor, Magnetventil) — ohne sie stirbt der schaltende Transistor an der Abschaltspitze.</div></div>
-<div class="rule"><span class="ico">🖐️</span><div><b>Leitungen nach draußen schützen:</b> Alles, was an Stecker, Taster oder lange Kabel geht, bekommt einen Serienwiderstand (100 Ω–1 kΩ) gegen ESD und Störspitzen.</div></div>
-</div>
-<div class="card"><h3>🔧 Praxis &amp; Beschaffung</h3>
-<div class="rule"><span class="ico">📦</span><div><b>Standardwerte nehmen (E-Reihe):</b> 10 kΩ statt 9,76 kΩ — was jeder Shop führt, ist billig und sofort ersetzbar.</div></div>
-<div class="rule"><span class="ico">📍</span><div><b>Keine offenen Eingänge:</b> Unbenutzte IC-Eingänge und Reset-/Enable-Pins definiert beschalten (Pull-up/Pull-down) — offene CMOS-Eingänge machen Zufallsverhalten.</div></div>
-<div class="rule"><span class="ico">🎯</span><div><b>Testpunkte einplanen:</b> GND und die wichtigsten Spannungen als Messpunkte vorsehen — die Minute beim Zeichnen spart Stunden beim Fehlersuchen.</div></div>
-</div>
-</div>
-
-<h3>Goldene Zeichen-Regeln</h3>
-<div class="card">
-<div class="rule"><span class="ico">➡️</span><div>Links Eingänge, rechts Ausgänge — der Plan erzählt eine Geschichte von links nach rechts.</div></div>
-<div class="rule"><span class="ico">⬇️</span><div>GND-Symbole zeigen nach unten, Versorgungspfeile nach oben. Nie seitlich.</div></div>
-<div class="rule"><span class="ico">🧊</span><div><b>100 nF an jeden IC:</b> Sobald du ein IC-Symbol platzierst, zeichne im selben Moment auch seinen Abblockkondensator daneben. Auf „mach ich am Ende" verschoben wird er erfahrungsgemäß vergessen — und fehlt er, spinnt die Schaltung später auf schwer findbare Weise.</div></div>
-<div class="rule"><span class="ico">📖</span><div>Lesbar schlägt kompakt: lieber mehr Platz und Netznamen als gekreuzte Leitungen.</div></div>
-</div>
+<p class="note">Die Technik-Regeln fürs Entwerfen (Pegel, Strombudget, Derating, Schutz, 100 nF …) stehen oben in der <b>einen Checkliste</b> — sie gelten beim Zeichnen genauso wie beim Lesen.</p>
 
 <div class="grid2">
 <div class="card"><h3>✗ So nicht</h3>

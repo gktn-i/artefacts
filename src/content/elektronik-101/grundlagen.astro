@@ -68,13 +68,13 @@ import "./_style.css";
 <tr><td><b>Wärme</b> (Verlustleistung)</td><td>der <b>größte</b> Widerstand wird am heißesten (P = I²·R, gleicher Strom)</td><td>der <b>kleinste</b> Widerstand wird am heißesten (P = U²/R, gleiche Spannung)</td></tr>
 </tbody>
 </table></div>
-<p class="note"><b>Merkhilfe für die Vertauschung:</b> Widerstand und Kondensator verhalten sich genau umgekehrt. Stell dir den Kondensator als <b>Fläche</b> vor — zwei nebeneinander ergeben eine größere Fläche, also mehr Kapazität. Und den Widerstand als <b>Engstelle im Rohr</b> — zwei Rohre nebeneinander lassen mehr durch, also weniger Widerstand.</p>
+<p class="note"><b>Merkhilfe für die Vertauschung:</b> Widerstand und Kondensator verhalten sich genau umgekehrt — der Kondensator ist eine <b>Fläche</b> (zwei nebeneinander = mehr Kapazität), der Widerstand eine <b>Engstelle</b> (zwei nebeneinander = weniger Widerstand).</p>
 
 <h3>Formeln für den Alltag</h3>
 <div class="card">
 <p><b>Zwei Widerstände parallel</b> (der Fall, den man ständig braucht): <span class="formula">R = (R1 × R2) / (R1 + R2)</span></p>
 <p><b>N gleiche Widerstände parallel:</b> <span class="formula">R = R<sub>einzeln</sub> / N</span> — zwei gleiche parallel sind immer die Hälfte.</p>
-<p><b>Spannungsteiler</b> (zwei Widerstände in Reihe, in der Mitte abgegriffen): <span class="formula">U<sub>aus</sub> = U<sub>ein</sub> × R2 / (R1 + R2)</span></p>
+<p><b>Spannungsteiler</b> (zwei Widerstände in Reihe, in der Mitte abgegriffen): <span class="formula">U<sub>aus</sub> = U<sub>ein</sub> × R2 / (R1 + R2)</span> — Dimensionierung und Belastung: Tab <a href="#signale">Signale &amp; Schaltungstechnik</a></p>
 <p style="margin-bottom:0"><b>Stromteiler</b> (zwei Widerstände parallel): durch den <b>kleineren</b> Widerstand fließt der <b>größere</b> Strom — <span class="formula">I<sub>1</sub> = I<sub>ges</sub> × R2 / (R1 + R2)</span></p>
 </div>
 
@@ -93,27 +93,50 @@ import "./_style.css";
 <h3>τ = R × C</h3>
 <p>Lädt man einen Kondensator über einen Widerstand, bestimmt die Zeitkonstante <span class="formula">τ = R × C</span> das Tempo: Nach τ ist er zu ~63 % geladen, nach 5·τ praktisch voll (&gt;99 %). Entladen läuft spiegelbildlich (nach τ sind noch ~37 % da).</p>
 <svg class="sy sy-mid" style="max-width:380px" viewBox="-24 0 364 155" role="img" aria-label="Ladekurve eines Kondensators: nach einer Zeitkonstante 63 Prozent, nach fünf praktisch 100 Prozent"><path class="w" d="M30,18 V130 H312"/><path class="w" style="stroke-dasharray:4 4;stroke-width:1" d="M30,30 H310"/><path class="acc" d="M30,130 L43.5,108 L57,90.7 L70.5,77.3 L84,67 L111,52.3 L138,43.5 L165,38.2 L192,35 L219,33 L246,31.8 L273,31.1 L300,30.7"/><path class="w" style="stroke-dasharray:4 4;stroke-width:1" d="M84,130 V67 M30,67 H84 M300,130 V32"/><text class="lbl" x="26" y="71" text-anchor="end">63 %</text><text class="lbl" x="26" y="34" text-anchor="end">100 %</text><text class="lbl" x="84" y="145" text-anchor="middle">τ</text><text class="lbl" x="300" y="145" text-anchor="middle">5τ</text><text class="lbl" x="312" y="127">Zeit</text></svg>
-<p class="note">Beispiel: 10 kΩ × 100 µF → τ = 1 s, voll nach ~5 s. Dieses Prinzip nutzt z. B. der <a href="#schaltplan">555-Timer</a>: sein RC-Glied bestimmt Blinktakt und Zeitintervalle.</p>
+<p class="note">Beispiel: 10 kΩ × 100 µF → τ = 1 s, voll nach ~5 s. Dieses Prinzip nutzt z. B. der <a href="#schaltplan">555-Timer</a>: sein RC-Glied bestimmt Blinktakt und Zeitintervalle. Die Filter-Praxis (Tiefpass, Hochpass, Grenzfrequenz) steht im Tab <a href="#signale">Signale &amp; Schaltungstechnik</a>.</p>
 </div>
 
-<h2>Die Grundbegriffe</h2>
-<p>Die Wörter, die in jeder Anleitung vorausgesetzt werden. Fachbegriffe aus Datenblättern und Reparaturvideos stehen im Tab <a class="goto" href="#begriffe">Fachbegriffe</a>, Schaltungstechnik im Tab <a class="goto" href="#signale">Signale &amp; Schaltungstechnik</a>.</p>
-<div class="tbl-wrap"><table style="min-width:800px">
-<thead><tr><th>Begriff</th><th>Bedeutung</th><th>Warum es zählt</th></tr></thead>
+<h2>Werte, Reihen &amp; Aufdruck</h2>
+<h3>Normwerte: E-Reihen</h3>
+<p>Widerstände und Kondensatoren gibt es nicht in beliebigen Werten, sondern in <b>Normreihen</b>. Der gerechnete Wert wird auf den nächsten Wert der Reihe gelegt — meist nach oben, wenn der Widerstand einen Strom begrenzen soll.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Reihe</th><th>Toleranz</th><th>Werte je Dekade</th></tr></thead>
 <tbody>
-<tr><td><b>GND / Masse</b></td><td>Der gemeinsame Bezugspunkt (0 V), auf den sich alle Spannungen beziehen</td><td>Ohne <b>gemeinsame</b> Masse funktioniert zwischen zwei Baugruppen kein einziges Signal</td></tr>
-<tr><td><b>DC / Gleichstrom</b></td><td>Strom fließt immer in dieselbe Richtung</td><td>Batterie, USB, Netzteil — der Normalfall im Hobby</td></tr>
-<tr><td><b>AC / Wechselstrom</b></td><td>Strom wechselt ständig die Richtung</td><td>Steckdose. Im Projekt meist nur als Eingang des Netzteils</td></tr>
-<tr><td><b>Frequenz (Hz)</b></td><td>Wie oft sich etwas pro Sekunde wiederholt</td><td>Takt, PWM, Funk, Ton</td></tr>
-<tr><td><b>Kurzschluss</b></td><td>Plus und Minus direkt verbunden, ohne Bauteil dazwischen</td><td>Sehr großer Strom → Hitze, Rauch, Defekt</td></tr>
-<tr><td><b>Polarität</b></td><td>Bauteile mit Plus und Minus müssen richtig herum eingebaut werden</td><td>LED, Elko, Diode, Akku, Modul — falsch herum oft sofort zerstört</td></tr>
-<tr><td><b>Logikpegel HIGH / LOW</b></td><td>Digitale Bauteile kennen nur zwei Zustände mit definierten Schwellen</td><td>Dazwischen liegt ein <b>verbotener Bereich</b> — Details im Tab <a href="#signale">Signale</a></td></tr>
-<tr><td><b>Analog / Digital</b></td><td>Analog = stufenloser Wert · digital = nur an oder aus</td><td>Ein Lichtsensor liefert analog, ein Taster digital</td></tr>
-<tr><td><b>Kapazität (F)</b></td><td>Wie viel Ladung ein Kondensator speichert</td><td>In der Praxis µF, nF, pF — Farad selbst ist riesig</td></tr>
-<tr><td><b>Induktivität (H)</b></td><td>Eine Spule wehrt sich gegen Stromänderungen</td><td>In Wandlern, Filtern, Funk — praktisch mH und µH</td></tr>
-<tr><td><b>Spannungsabfall</b></td><td>Jedes Bauteil „verbraucht" ein Stück Spannung</td><td>An einer Diode ~0,7 V, an einem Widerstand je nach Strom</td></tr>
-<tr><td><b>Wirkungsgrad</b></td><td>Anteil der Energie, der nützlich ankommt — der Rest wird Wärme</td><td>Schaltregler ~90 %, Linearregler oft deutlich weniger</td></tr>
-<tr><td><b>Datenblatt</b></td><td>Das offizielle Herstellerdokument zum Bauteil</td><td>Die einzige verlässliche Quelle — Anleitung im Tab <a href="#datenblatt">Datenblatt lesen</a></td></tr>
+<tr><td><b>E6</b></td><td>±20 %</td><td>10 · 15 · 22 · 33 · 47 · 68</td></tr>
+<tr><td><b>E12</b></td><td>±10 %</td><td>10 · 12 · 15 · 18 · 22 · 27 · 33 · 39 · 47 · 56 · 68 · 82</td></tr>
+<tr><td><b>E24</b></td><td>±5 %</td><td>zusätzlich 11 · 13 · 16 · 20 · 24 · 30 · 36 · 43 · 51 · 62 · 75 · 91</td></tr>
+<tr><td><b>E96</b></td><td>±1 %</td><td>96 Werte je Dekade — die üblichen Präzisions-SMD-Widerstände</td></tr>
 </tbody>
 </table></div>
-<div class="note">Normwerte, Einheiten-Vorsätze und wie du den Aufdruck von Widerständen und Kondensatoren entschlüsselst, stehen gesammelt im Tab <a class="goto" href="#rechner">Rechner</a> — dort auch als Rechner statt als Tabelle.</div>
+<div class="note">„Je Dekade" heißt: Die Werte wiederholen sich mit jedem Faktor 10 — aus 47 werden 470, 4,7 k, 47 k und so weiter.</div>
+
+<h3>Aufdruck entschlüsseln</h3>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Aufdruck</th><th>Bauteil</th><th>Bedeutung</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td><b>4702</b> oder <b>472</b></td><td>SMD-Widerstand</td><td>Erste Ziffern = Wert, letzte = Anzahl Nullen</td><td>4702 = 470 × 10² = <b>47 kΩ</b> · 472 = 47 × 10² = <b>4,7 kΩ</b></td></tr>
+<tr><td><b>4R7</b></td><td>SMD-Widerstand</td><td>R steht an der Stelle des Kommas</td><td><b>4,7 Ω</b></td></tr>
+<tr><td><b>000</b> / <b>0</b></td><td>SMD-Widerstand</td><td>Null-Ohm-Brücke</td><td>Drahtbrücke im Widerstandsgehäuse</td></tr>
+<tr><td><b>104</b></td><td>Keramik-Kondensator</td><td>Wert in <b>pF</b>, letzte Ziffer = Nullen</td><td>10 × 10⁴ pF = <b>100 nF</b></td></tr>
+<tr><td><b>223</b></td><td>Keramik-Kondensator</td><td>wie oben</td><td>22 × 10³ pF = <b>22 nF</b></td></tr>
+<tr><td><b>4n7</b> / <b>n47</b></td><td>Kondensator</td><td>Einheitenbuchstabe an der Kommastelle</td><td><b>4,7 nF</b> · <b>0,47 nF</b></td></tr>
+<tr><td><b>100 µF 25 V</b></td><td>Elko</td><td>Kapazität und <b>maximale</b> Spannung</td><td>Spannungsklasse immer mit Reserve wählen</td></tr>
+<tr><td><b>101</b></td><td>Induktivität</td><td>Wert in <b>µH</b></td><td>10 × 10¹ = <b>100 µH</b></td></tr>
+</tbody>
+</table></div>
+
+<h3>Einheiten und Vorsätze</h3>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Vorsatz</th><th>Zeichen</th><th>Faktor</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td>Mega</td><td><b>M</b></td><td>× 1 000 000</td><td>1 MΩ = 1 000 000 Ω</td></tr>
+<tr><td>Kilo</td><td><b>k</b></td><td>× 1 000</td><td>4,7 kΩ = 4 700 Ω</td></tr>
+<tr><td>—</td><td>—</td><td>× 1</td><td>1 V, 1 A, 1 Ω</td></tr>
+<tr><td>Milli</td><td><b>m</b></td><td>÷ 1 000</td><td>470 mA = 0,47 A</td></tr>
+<tr><td>Mikro</td><td><b>µ</b></td><td>÷ 1 000 000</td><td>100 µF = 0,0001 F</td></tr>
+<tr><td>Nano</td><td><b>n</b></td><td>÷ 1 000 000 000</td><td>100 nF = 0,1 µF</td></tr>
+<tr><td>Piko</td><td><b>p</b></td><td>÷ 1 000 000 000 000</td><td>22 pF = 0,022 nF</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Die häufigste Umrechnung im Alltag:</b> <b>1 000 nF = 1 µF</b> und <b>1 000 pF = 1 nF</b>. Ein „100n" ist derselbe Kondensator wie ein „0,1 µF" — beide Schreibweisen stehen in Schaltplänen nebeneinander.</div>
+<p class="note">Interaktiv rechnen statt nachschlagen: Tab <a class="goto" href="#rechner">Rechner</a>. Die Grundbegriffe (GND, AC/DC, Polarität, Logikpegel …) stehen gesammelt im Tab <a class="goto" href="#begriffe">Fachbegriffe</a>.</p>

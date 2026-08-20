@@ -34,7 +34,7 @@
 <div class="note">Startet das Gerät mit chinesischem Menü: <b>Utility → Language/语言 → English</b>. Vokabeln bis dahin: 量程 = Bereich · 功能 = Funktion · 速率 = Messrate · 自动 = Auto · 相对值 = Relativwert · 关 = Aus · 退出 = Exit/Zurück · 触发 = Trigger · 切换 = Umschalten · 交流电压 = Wechselspannung · 直流电压 = Gleichspannung.</div>
 
 <h3>Counts: was die 55 000 bedeuten</h3>
-<p>„Counts" ist die Zahl der Schritte, die die Anzeige darstellen kann — also die <b>Auflösung</b>, nicht die Genauigkeit. 55 000 Counts heißt: die Anzeige läuft bis 55 000 Schritte, bevor der Bereich wechselt.</p>
+<p>Was Counts sind — und warum <b>Auflösung ≠ Genauigkeit</b> — steht einmal zentral im Tab <a class="goto" href="#messen">Messen</a>. Hier nur, was die 55 000 Counts <b>dieses Geräts</b> je Bereich konkret heißen:</p>
 <div class="tbl-wrap"><table style="min-width:740px">
 <thead><tr><th>Bereich</th><th>Anzeige bis</th><th>Kleinste Stufe</th><th>Damit findest du</th></tr></thead>
 <tbody>
@@ -46,7 +46,7 @@
 <tr><td>5 kΩ</td><td>5,5000 kΩ</td><td>0,1 Ω</td><td>Widerstände genau gegen den Aufdruck prüfen</td></tr>
 </tbody>
 </table></div>
-<div class="kurz"><b>Auflösung ≠ Genauigkeit.</b> Das Gerät kann 0,1 mV <b>anzeigen</b> und trotzdem einige mV danebenliegen — die Genauigkeit steht im Datenblatt als <b>±(x % vom Messwert + y Digits)</b>. Für <b>Vergleiche und Änderungen</b> ist die feine Auflösung trotzdem exakt: ein Abfall von 3,3012 auf 3,2860 V ist real, auch wenn der Absolutwert leicht verschoben ist.</div>
+<p class="note">Für <b>Vergleiche und Änderungen</b> ist die feine Auflösung exakt: ein Abfall von 3,3012 auf 3,2860 V ist real, auch wenn der Absolutwert leicht verschoben ist.</p>
 
 <h3>Werte ablesen und bewerten</h3>
 <div class="tbl-wrap"><table style="min-width:800px">
@@ -58,7 +58,6 @@
 <tr><td>Wert steht auffällig still</td><td>Eventuell <b>Run/Stop</b> aktiv</td><td>Statuszeile prüfen, bevor du dem Wert glaubst</td></tr>
 <tr><td>Ergebnis ist ein kleiner Differenzwert</td><td><b>Rel</b> ist noch an</td><td>Rel ausschalten — die häufigste Verwechslung am Tischgerät</td></tr>
 <tr><td>Widerstand zeigt 0,32 Ω an einer Leiterbahn</td><td>Das sind die <b>Messleitungen</b></td><td>Spitzen zusammenhalten, Rel drücken, neu messen</td></tr>
-<tr><td>Ω-Wert läuft langsam hoch und bleibt stehen</td><td>Messstrom lädt Stützkondensatoren</td><td>Endwert nehmen</td></tr>
 <tr><td>µA-Wert schwankt stark</td><td>Die Schaltung wacht periodisch auf</td><td>Math → Max/Min oder Record über mehrere Minuten</td></tr>
 </tbody>
 </table></div>
@@ -85,13 +84,10 @@
 </div>
 
 <h4>③ Kurzschluss auf einer Rail orten (Milliohm-Methode)</h4>
+<p>Die Methode selbst — Referenzwert, Abtasten entlang der Rail, Eingrenzen, Gegenprobe mit dem Labornetzteil — steht ausführlich im Tab <a class="goto" href="#fehlersuche">Fehlersuche</a>. Dieses Gerät liefert die Voraussetzung dafür:</p>
 <div class="steps">
-<div class="step"><b>Board stromlos</b>, Ω-Funktion, 500-Ω-Bereich fest wählen.</div>
-<div class="step"><b>Spitzen zusammenhalten, Rel drücken</b> — der Leitungswiderstand ist damit raus.</div>
-<div class="step"><b>Referenzwert nehmen:</b> Widerstand der Rail gegen Masse an einem beliebigen Punkt merken (typisch wenige Ω oder weniger).</div>
-<div class="step"><b>Punkte entlang der Rail abtasten</b> und die Werte notieren. Der Wert sinkt, je näher du an den Kurzschluss kommst — es geht um <b>Milliohm-Unterschiede</b>.</div>
-<div class="step"><b>Der niedrigste Wert ist der Bereich.</b> Dort weiter eingrenzen, Bauteil für Bauteil.</div>
-<div class="step"><b>Gegenprobe mit dem Labornetzteil:</b> Spannung niedrig, Strom begrenzt einspeisen — das defekte Bauteil wird warm. Details im Tab <a class="goto" href="#fehlersuche">Fehlersuche</a>.</div>
+<div class="step"><b>Board stromlos</b>, Ω-Funktion, <b>500-Ω-Bereich fest</b> wählen — das ergibt die nötigen 10 mΩ Auflösung.</div>
+<div class="step"><b>Spitzen zusammenhalten, Rel drücken</b> — der Leitungswiderstand ist damit raus. Es geht um <b>Milliohm-Unterschiede</b>.</div>
 </div>
 
 <h4>④ Bauteilwerte gegen den Aufdruck prüfen</h4>
@@ -124,8 +120,6 @@
 <thead><tr><th>Problem</th><th>Ursache</th><th>Lösung</th></tr></thead>
 <tbody>
 <tr><td>Anzeige springt zwischen zwei Bereichen</td><td>Messwert liegt genau an der Bereichsgrenze</td><td>Mit <b>Range</b> fest einstellen</td></tr>
-<tr><td>Werte unerklärlich klein</td><td><b>Rel</b> aus einer früheren Messung noch aktiv</td><td>Statuszeile prüfen, Rel aus</td></tr>
-<tr><td>Messung reagiert nicht auf Änderungen</td><td><b>Run/Stop</b> steht auf Stop</td><td>Run drücken</td></tr>
 <tr><td>Widerstandswerte zu hoch und unruhig</td><td>Schlechte Klemmen, oxidierte Kontakte</td><td>Kontakte reinigen, Kelvin-Klemmen für kleine Werte</td></tr>
 <tr><td>Strombereich zeigt nichts</td><td>Sicherung der µA/mA- oder 10-A-Buchse defekt</td><td>Nur mit identischem Typ ersetzen (Strom, Spannung, Abschaltvermögen)</td></tr>
 <tr><td>Gerät misst stundenlang im A-Bereich weiter</td><td><b>Keine Abschaltautomatik</b> — Netzbetrieb</td><td>Bewusst zurückstellen; die A-Buchse nie „vergessen"</td></tr>
@@ -133,5 +127,5 @@
 <tr><td>Brummen im mV-Bereich</td><td>Einstreuung über lange, offene Messleitungen</td><td>Leitungen kurz und nebeneinander führen, Rate langsam</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Die drei harten Grenzen dieses Geräts:</b> ① <b>Messkategorie</b> — mit „CAT I 1000 V / CAT II 600 V" gehört es an Elektronik und Steckdosen-Stromkreise, <b>nicht</b> in Verteilung oder Sicherungskasten. ② <b>Ortsfest</b> — für alles außerhalb der Werkbank ist das <a class="goto" href="#dmm-hand">Handmultimeter</a> zuständig. ③ <b>Keine Signalform</b> — auch 55 000 Counts zeigen keinen Ripple, keine Flanke und keinen Störimpuls; dafür das <a class="goto" href="#oszilloskop">Oszilloskop</a>.</div>
+<div class="warn"><b>Die drei harten Grenzen dieses Geräts:</b> ① <b>Messkategorie</b> — mit „CAT I 1000 V / CAT II 600 V" gehört es an Elektronik und Steckdosen-Stromkreise, <b>nicht</b> in Verteilung oder Sicherungskasten. ② <b>Ortsfest</b> — für alles außerhalb der Werkbank ist das <a class="goto" href="#messen">Handmultimeter</a> zuständig. ③ <b>Keine Signalform</b> — auch 55 000 Counts zeigen keinen Ripple, keine Flanke und keinen Störimpuls; dafür das <a class="goto" href="#oszilloskop">Oszilloskop</a>.</div>
 <div class="note">Auch beim netzbetriebenen Tischgerät ist COM ein <b>schwebender</b> Eingang, keine Schutzerde. Zwei Multimeter gleichzeitig an verschiedenen Punkten sind deshalb unproblematisch — anders als beim Oszilloskop, dessen Masseklemme fest auf Erdpotential liegt.</div>

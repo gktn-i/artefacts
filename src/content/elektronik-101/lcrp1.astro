@@ -49,24 +49,21 @@
 <tr><td><b>„kein Bauteil erkannt"</b></td><td>—</td><td>Kontakt schlecht, Bauteil unterbrochen, oder Typ wird nicht unterstützt</td></tr>
 </tbody>
 </table></div>
-<div class="kurz"><b>ESR ist der eigentliche Grund, dieses Gerät zu besitzen.</b> Der Innenwiderstand eines Elkos <b>steigt</b>, wenn er altert — oft lange bevor die Kapazität sichtbar nachlässt. Ein Elko mit fast korrekter Kapazität, aber hohem ESR, ist der klassische versteckte Fehler auf alten Platinen. Das Multimeter sieht davon nichts.</div>
+<div class="kurz"><b>ESR ist der eigentliche Grund, dieses Gerät zu besitzen:</b> Der Innenwiderstand eines Elkos <b>steigt</b>, wenn er altert — oft lange bevor die Kapazität sichtbar nachlässt. Das Multimeter sieht davon nichts. Was ESR physikalisch ist und warum er den „Netzteil-Elko-Tod" ausmacht: Tab <a class="goto" href="#leistung">Leistung &amp; PWM</a>.</div>
 
 <h3>Workflows</h3>
 <h4>① Standard-Bauteiltest</h4>
 <div class="steps">
-<div class="step"><b>Bauteil ausgebaut und stromlos.</b> Nie an einer laufenden Schaltung testen — das Gerät legt eine eigene Prüfspannung an.</div>
-<div class="step"><b>Kondensatoren vorher entladen.</b> Es gibt zwar eine Schutzschaltung, aber ein geladener Elko kann beim Einstecken funken.</div>
+<div class="step"><b>Bauteil ausgebaut und stromlos, Kondensatoren vorher entladen.</b> Nie an einer laufenden Schaltung testen — das Gerät legt eine eigene Prüfspannung an; ein geladener Elko kann trotz Schutzschaltung beim Einstecken funken.</div>
 <div class="step"><b>Beinchen in die Klemmen 1, 2, 3</b> — jedes Bein in eine <b>eigene</b> Klemme. Bei zwei Beinchen zwei beliebige verschiedene Klemmen. Hebel schließen.</div>
 <div class="step"><b>Test drücken</b> und rund fünf Sekunden warten.</div>
-<div class="step"><b>Ablesen:</b> Bauteiltyp, kleines Schaltbild mit der Pinzuordnung, Messwerte.</div>
-<div class="step"><b>Bei Zweifel wiederholen</b> — schlechter Kontakt ist die häufigste Ursache für ein unplausibles Ergebnis.</div>
+<div class="step"><b>Ablesen:</b> Bauteiltyp, kleines Schaltbild mit der Pinzuordnung, Messwerte. Bei Zweifel wiederholen — schlechter Kontakt ist die häufigste Ursache für ein unplausibles Ergebnis.</div>
 </div>
 
 <h4>② SMD-Bauteil testen</h4>
 <div class="steps">
 <div class="step"><b>Testboard aufstecken</b> statt den Klemmsockel zu benutzen.</div>
-<div class="step"><b>Bauteil auf die Kontaktflächen legen</b> und mit einer Pinzette oder dem Finger andrücken — bei winzigen Teilen die Messhaken benutzen.</div>
-<div class="step"><b>Kontakt sicherstellen:</b> Oxidierte oder mit Flussmittel verklebte Anschlüsse mit IPA reinigen.</div>
+<div class="step"><b>Bauteil auf die Kontaktflächen legen</b> und mit einer Pinzette oder dem Finger andrücken — bei winzigen Teilen die Messhaken benutzen. Oxidierte oder mit Flussmittel verklebte Anschlüsse vorher mit IPA reinigen.</div>
 <div class="step"><b>Test drücken</b> und den Druck während der gesamten Messung halten.</div>
 </div>
 
@@ -102,7 +99,7 @@
 <tr><td><b>Pinerkennung kann irren</b></td><td>Bei manchen Dioden und Transistoren liegt die Zuordnung daneben</td><td>Als Hinweis nehmen, für die endgültige Belegung ins Datenblatt sehen</td></tr>
 <tr><td><b>Werte sind Vergleichswerte</b></td><td>Die Testbedingungen (Frequenz, Strom) werden nicht angezeigt</td><td>Bauteile <b>gegeneinander</b> vergleichen, nicht als Laborwerte verwenden</td></tr>
 <tr><td><b>Keine Fremdspannung</b></td><td>Das Gerät speist selbst ein; äußere Spannung stört oder beschädigt</td><td>Immer stromlos messen, Kondensatoren entladen</td></tr>
-<tr><td><b>Batterie nicht in den 1-2-3-Sockel</b></td><td>Der Sockel ist außerhalb einer laufenden Messung leitend — das ist ein Kurzschluss</td><td>Batteriespannung mit dem <a class="goto" href="#dmm-hand">Multimeter</a> messen</td></tr>
+<tr><td><b>Batterie nicht in den 1-2-3-Sockel</b></td><td>Der Sockel ist außerhalb einer laufenden Messung leitend — das ist ein Kurzschluss</td><td>Batteriespannung mit dem <a class="goto" href="#messen">Multimeter</a> messen</td></tr>
 <tr><td><b>Kein Verhalten unter Last</b></td><td>Leckströme, Spannungsfestigkeit und Verhalten bei Betriebsspannung werden nicht geprüft</td><td>Ein Bauteil kann hier „gut" sein und im Betrieb trotzdem versagen</td></tr>
 <tr><td><b>Keine ICs</b></td><td>Nur diskrete Bauteile werden erkannt</td><td>ICs über ihre Funktion und Versorgungspins prüfen (Tab <a class="goto" href="#fehlersuche">Fehlersuche</a>)</td></tr>
 <tr><td><b>Akku und Pflege</b></td><td>Tiefentladung schadet dem eingebauten Akku</td><td>Trocken lagern, gelegentlich nachladen, Firmware bei Bedarf aktualisieren</td></tr>

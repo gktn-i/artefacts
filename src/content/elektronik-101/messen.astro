@@ -1,17 +1,111 @@
-<div class="kurz"><div><b>Jeder Modus gehört zu einer von zwei Familien.</b> <b>Horchende Modi</b> (V, mV, A, Hz, °C) messen, was ohnehin da ist — die Schaltung bleibt an. <b>Einspeisende Modi</b> (Ω, CONT, DIODE, CAP) legen selbst eine Prüfspannung an — die Schaltung muss <b>stromlos</b> sein. Wer das weiß, macht die zwei häufigsten Anfängerfehler nicht mehr.</div></div>
-<h2>Die Modi am Drehrad — was jede Beschriftung tut</h2>
-<p>Je nach Gerät stehen Symbole, englische Kürzel oder beides auf dem Drehrad. Diese Tabelle übersetzt sie einmal komplett — <b>was der Modus macht, was im Display steht, wofür du ihn nimmst</b> und die Falle, in die man dabei tappt.</p>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th>Beschriftung</th><th>Was der Modus macht</th><th>Was im Display steht</th><th>Wofür</th><th>Typische Falle</th></tr></thead>
+<div class="kurz"><div><b>Jedes Gerät beantwortet genau eine Art Frage.</b> <b>Multimeter:</b> „Wie groß ist der Wert <i>jetzt</i>?" · <b>Oszilloskop:</b> „Wie sieht das Signal <i>über die Zeit</i> aus?" · <b>Komponententester:</b> „Was ist das für ein Bauteil und ist es heil?" · <b>Labornetzteil:</b> „Wie verhält sich die Schaltung bei <i>dieser</i> Spannung und <i>diesem</i> Strom?" — Und jeder Messmodus gehört zu einer von zwei Familien: <b>horchende Modi</b> (V, mV, A, Hz, °C) messen, was ohnehin da ist — die Schaltung bleibt an. <b>Einspeisende Modi</b> (Ω, CONT, DIODE, CAP) legen selbst eine Prüfspannung an — die Schaltung muss <b>stromlos</b> sein.</div></div>
+
+<h2>Welches Gerät für welche Frage</h2>
+<p>Erst das Gerät, dann der Messpunkt: was jede Geräteklasse kann, was sie <b>nicht</b> kann und welche Kennzahlen auf dem Datenblatt wirklich zählen. Die Bedienung der eigenen Geräte steht in dieser Gruppe („Messen") in der Seitenleiste — das Handmultimeter kommt weiter unten in diesem Tab.</p>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Deine Frage</th><th>Gerät</th><th>Warum</th></tr></thead>
 <tbody>
-<tr><td><b>V⎓ · DCV · V=</b><br><span class="cd">Gleichspannung</span></td><td>Misst die Spannungs<b>differenz</b> zwischen den beiden Spitzen, hochohmig (10 MΩ)</td><td>Volt, mit Vorzeichen</td><td><b>Der 90-%-Modus.</b> Rails, Batterien, Netzteile, Signale im Ruhezustand</td><td>Kein Bezugspunkt gewählt — Schwarz muss an <b>der</b> Masse liegen, auf die sich der Wert beziehen soll</td></tr>
-<tr><td><b>V~ · ACV</b><br><span class="cd">Wechselspannung</span></td><td>Misst nur den <b>Wechselanteil</b>; der Gleichanteil wird ausgeblendet (AC-gekoppelt)</td><td>Effektivwert in Volt</td><td>Steckdose, Trafo-Ausgang, Brumm auf einer Versorgung</td><td>An PWM und Schaltnetzteilen ohne <b>True RMS</b> deutlich falsch — und Geisterspannungen bei offenen Spitzen</td></tr>
+<tr><td>Kommt hier überhaupt Spannung an?</td><td><b>Handmultimeter</b></td><td>Schnell, überall, kein Aufbau nötig</td></tr>
+<tr><td>Ist die 3,3-V-Rail auf ±5 mV genau?</td><td><b>Tischmultimeter</b></td><td>Auflösung und ruhige Anzeige</td></tr>
+<tr><td>Ist das Kabel durchgängig?</td><td><b>Multimeter</b>, Durchgangston</td><td>Ja/Nein ohne Hinsehen</td></tr>
+<tr><td>Wie viel Strom zieht die Schaltung im Schlaf?</td><td><b>Tischmultimeter</b> (µA) oder Netzteil-Anzeige</td><td>µA-Bereich mit eigener Auflösung</td></tr>
+<tr><td>Warum flackert das Signal? Wie sieht die Flanke aus?</td><td><b>Oszilloskop</b></td><td>Einziges Gerät, das den <b>Verlauf</b> zeigt</td></tr>
+<tr><td>Kommt ein PWM-Signal an und mit welchem Tastgrad?</td><td><b>Oszilloskop</b></td><td>Multimeter zeigt nur den Mittelwert</td></tr>
+<tr><td>Was ist das für ein SMD-Bauteil ohne Aufdruck?</td><td><b>Komponententester</b></td><td>Erkennt Typ, Pinbelegung und Wert automatisch</td></tr>
+<tr><td>Ist der Elko noch gut?</td><td><b>Komponententester</b> (Kapazität + ESR)</td><td>Multimeter misst keinen ESR</td></tr>
+<tr><td>Wie verhält sich das Board bei 3,0 statt 3,3 V?</td><td><b>Labornetzteil</b></td><td>Spannung fein einstellbar</td></tr>
+<tr><td>Wo sitzt der Kurzschluss auf der Rail?</td><td><b>Netzteil</b> (Strombegrenzung) + <b>Tisch-DMM</b> (mΩ)</td><td>Netzteil speist kontrolliert ein, DMM ortet</td></tr>
+<tr><td>Welches Bauteil wird heiß?</td><td><b>Finger, IR-Thermometer, Wärmebild</b></td><td>Schnellster Weg zum defekten Bauteil</td></tr>
+<tr><td>Ist an der Steckdose Spannung?</td><td><b>Handmultimeter</b> mit passender CAT-Klasse</td><td>Sicherheit — siehe CAT-Kategorien unten</td></tr>
+</tbody>
+</table></div>
+
+<h3>Die Geräteklassen kompakt</h3>
+<div class="grid">
+<div class="card"><div class="ct">Multimeter (Hand)</div><div class="cd">Das Universalwerkzeug: Spannung, Strom, Widerstand, Durchgang, Diode, oft Kapazität und Frequenz.</div><ul><li><b>Stärke:</b> mobil, robust, hohe Messkategorie</li><li><b>Grenze:</b> nur ein Zahlenwert, keine Kurvenform · typisch 2 000–6 000 Counts</li></ul></div>
+<div class="card"><div class="ct">Multimeter (Tisch / Bench)</div><div class="cd">Dasselbe Prinzip, aber präzise: mehr Stellen, stabile Anzeige, Netzbetrieb.</div><ul><li><b>Stärke:</b> Auflösung, Messreihen, beide Hände frei</li><li><b>Grenze:</b> ortsfest, oft nur CAT II · 20 000–2 000 000 Counts</li></ul></div>
+<div class="card"><div class="ct">Oszilloskop</div><div class="cd">Zeichnet Spannung <b>über der Zeit</b> — das einzige Gerät, das zeigt, <i>wie</i> ein Signal aussieht.</div><ul><li><b>Stärke:</b> Flanken, Störungen, Timing, Ripple</li><li><b>Grenze:</b> ungenauer als ein DMM (typ. 2–3 %), Masse meist geerdet · Kennzahlen: Bandbreite, Abtastrate, Kanäle</li></ul></div>
+<div class="card"><div class="ct">Komponententester (LCR)</div><div class="cd">Erkennt ein angeschlossenes Bauteil selbstständig und misst seine Kennwerte.</div><ul><li><b>Stärke:</b> Typ, Pinbelegung, Wert, ESR — in zwei Sekunden</li><li><b>Grenze:</b> nur <b>ausgelötete</b> Bauteile zuverlässig</li></ul></div>
+<div class="card"><div class="ct">Labornetzteil</div><div class="cd">Einstellbare Quelle mit Strombegrenzung — und dadurch auch ein Messgerät.</div><ul><li><b>Stärke:</b> begrenzt den Schaden bei Fehlern, zeigt Stromaufnahme live</li><li><b>Grenze:</b> eingebaute Anzeigen sind grob (±1 % oder schlechter)</li></ul></div>
+<div class="card"><div class="ct">Strommesszange</div><div class="cd">Misst Strom über das Magnetfeld — <b>ohne</b> den Kreis aufzutrennen.</div><ul><li><b>Stärke:</b> große Ströme, im laufenden Betrieb</li><li><b>Grenze:</b> unter ~100 mA meist unbrauchbar; DC nur mit Hall-Typen</li></ul></div>
+<div class="card"><div class="ct">Logikanalysator</div><div class="cd">Zeichnet viele digitale Leitungen gleichzeitig auf und dekodiert Protokolle im Klartext.</div><ul><li><b>Stärke:</b> Busse mitlesen (I²C, SPI, UART)</li><li><b>Grenze:</b> nur High/Low, keine Analogform · viele Oszilloskope dekodieren ebenfalls</li></ul></div>
+<div class="card"><div class="ct">Signalgenerator</div><div class="cd">Erzeugt definierte Signale (Sinus, Rechteck, PWM) zum Testen.</div><ul><li><b>Stärke:</b> Schaltung gezielt anregen statt auf Zufall warten</li><li><b>Ersatz:</b> ein Mikrocontroller mit PWM reicht für viele Fälle</li></ul></div>
+<div class="card"><div class="ct">Temperatur: IR und Wärmebild</div><div class="cd">Berührungslose Temperaturmessung.</div><ul><li><b>IR-Thermometer:</b> Punktmessung, billig, ungenau auf glänzenden Flächen</li><li><b>Wärmebild:</b> findet den heißen Punkt sofort · Fühler am Multimeter für Kontaktmessung</li></ul></div>
+</div>
+<div class="note">Nicht jedes Gerät muss vorhanden sein. Die häufigste sinnvolle Reihenfolge beim Aufrüsten: Handmultimeter → Labornetzteil → Komponententester → Oszilloskop → Tischmultimeter.</div>
+
+<h3>Was die Geräte <i>nicht</i> können</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Gerät</th><th>Kann es nicht</th><th>Was man stattdessen tut</th></tr></thead>
+<tbody>
+<tr><td><b>Multimeter</b></td><td>Kurze Einbrüche, Störimpulse, Signalform erkennen</td><td>Oszilloskop, oder wenigstens Min/Max-Funktion nutzen</td></tr>
+<tr><td><b>Multimeter</b></td><td>Bauteile <b>in</b> der Schaltung sauber messen</td><td>Einseitig auslöten, oder Vergleichsmessung mit einem intakten Board</td></tr>
+<tr><td><b>Multimeter</b></td><td>ESR eines Elkos</td><td>Komponententester oder ESR-Meter</td></tr>
+<tr><td><b>Oszilloskop</b></td><td>Genau messen (typ. ±2–3 %)</td><td>Absolutwerte mit dem DMM prüfen, Form mit dem Skop</td></tr>
+<tr><td><b>Oszilloskop</b></td><td>Zwei Punkte mit unterschiedlichem Bezug gleichzeitig messen</td><td>Differenztastkopf oder Trenntrafo — <b>nie</b> den Schutzleiter abkleben</td></tr>
+<tr><td><b>Komponententester</b></td><td>Bauteile in der Schaltung, Hochspannungsverhalten, Leckströme</td><td>Auslöten; für Elkos zusätzlich unter Betriebsspannung prüfen</td></tr>
+<tr><td><b>Labornetzteil-Anzeige</b></td><td>Präzise messen</td><td>Multimeter direkt an der Last, nicht an den Netzteilklemmen</td></tr>
+<tr><td><b>Strommesszange</b></td><td>Kleine Ströme, mehrere Leiter gleichzeitig</td><td>In Reihe messen; nur <b>einen</b> Leiter umfassen</td></tr>
+</tbody>
+</table></div>
+
+<h3>Die Kennzahlen, auf die es ankommt</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>Auflösung</b> (Counts / Digits)</td><td>Wie fein die Anzeige unterteilt ist. 6 000 Counts = bis 6 000 Schritte pro Bereich</td><td>Sagt nichts über Richtigkeit — nur über die kleinste <b>ablesbare</b> Stufe</td></tr>
+<tr><td><b>Genauigkeit</b></td><td>Angabe als <b>± (x % vom Messwert + y Digits)</b></td><td>Bei 5,000 V und „±0,5 % + 3": 25 mV + 3 Stellen ≈ <b>±28 mV</b></td></tr>
+<tr><td><b>Digits</b> in der Fehlerangabe</td><td>Schritte der <b>letzten</b> Stelle</td><td>Dominieren den Fehler bei kleinen Messwerten</td></tr>
+<tr><td><b>True RMS</b></td><td>Echter Effektivwert auch bei verzerrten Signalen</td><td>Ohne True RMS sind PWM, Dimmer und Schaltnetzteile deutlich falsch</td></tr>
+<tr><td><b>Eingangswiderstand</b></td><td>Typisch 10 MΩ beim DMM, 1 MΩ am Oszilloskop</td><td>Bei hochohmigen Quellen misst das Gerät die Schaltung „herunter"</td></tr>
+<tr><td><b>Bürdenspannung</b></td><td>Spannungsabfall über dem Strom-Shunt im Gerät</td><td>Kann im mA-Bereich mehrere hundert mV betragen — die Schaltung läuft dann nicht mehr</td></tr>
+<tr><td><b>Bandbreite</b> (Oszilloskop)</td><td>Frequenz, bei der die Anzeige schon 30 % zu klein ist (−3 dB)</td><td>Regel: Bandbreite ≥ <b>5×</b> der höchsten interessierenden Frequenz</td></tr>
+<tr><td><b>Abtastrate</b></td><td>Messpunkte pro Sekunde</td><td>Mindestens <b>10×</b> die Signalfrequenz, sonst sieht die Kurve falsch aus</td></tr>
+<tr><td><b>Messrate / Integrationszeit</b></td><td>Wie lange pro Messwert gemittelt wird</td><td>Langsam = ruhig und genau · schnell = zappelig, zeigt aber Änderungen</td></tr>
+<tr><td><b>Kalibrierung</b></td><td>Abgleich gegen ein Normal, typisch jährlich</td><td>Im Hobby unkritisch — aber zwei Geräte gegeneinander vergleichen lohnt sich</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Auflösung ≠ Genauigkeit.</b> Ein Gerät kann 0,1 mV <b>anzeigen</b> und trotzdem 30 mV danebenliegen. Die feine Anzeige ist trotzdem nützlich: für <b>Vergleiche</b> und <b>Änderungen</b> ist sie exakt, auch wenn der Absolutwert leicht verschoben ist.</div>
+
+<h3>Messkategorien: CAT I bis CAT IV</h3>
+<p>Die CAT-Klasse sagt, wie große <b>Spannungsspitzen</b> das Gerät im Fehlerfall verkraftet. Sie ist kein Komfortmerkmal, sondern der Unterschied zwischen einem defekten Gerät und einer Verletzung.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Kategorie</th><th>Wo</th><th>Beispiele</th></tr></thead>
+<tbody>
+<tr><td><b>CAT I</b></td><td>Geräteinterne Elektronik, nicht direkt am Netz</td><td>Batterieschaltungen, Boards hinter dem Netzteil</td></tr>
+<tr><td><b>CAT II</b></td><td>Verbraucher am Steckdosen-Stromkreis</td><td>Steckernetzteile, Haushaltsgeräte mit Stecker</td></tr>
+<tr><td><b>CAT III</b></td><td>Feste Installation, Verteilung</td><td>Unterverteilung, fest angeschlossene Motoren, Steckdosen-Installation</td></tr>
+<tr><td><b>CAT IV</b></td><td>Hausanschluss, Zähler, Freileitung</td><td>Alles vor der Hauptsicherung</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Ein Gerät mit „CAT I 1000 V / CAT II 600 V" darf nicht in den Sicherungskasten</b> — auch dann nicht, wenn dort nur 230 V anliegen. Entscheidend ist die mögliche Störspitze, nicht die Nennspannung. Die Regel gilt auch für die <b>Messleitungen</b>: Sie tragen eine eigene CAT-Angabe, und die schwächste Komponente bestimmt die Klasse des Aufbaus. Alle Regeln zum Arbeiten unter Spannung stehen im Tab <a class="goto" href="#sicherheit">Sicherheit</a> — er kommt nicht zufällig <b>vor</b> diesem Tab.</div>
+
+<h3>Zubehör, das den Unterschied macht</h3>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Zubehör</th><th>Wofür</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Feine Prüfspitzen</b></td><td>SMD-Pins, IC-Beinchen</td><td>Standardspitzen sind für 0,5-mm-Pitch zu stumpf</td></tr>
+<tr><td><b>Krokodilklemmen / Mikro-Greifer</b></td><td>Freihändig messen</td><td><b>Wichtigstes Zubehör überhaupt</b> — zwei Hände frei für Messobjekt und Werkzeug</td></tr>
+<tr><td><b>Kelvin-Klemmen (4-Leiter)</b></td><td>Sehr kleine Widerstände</td><td>Trennt Strom- und Messpfad, blendet den Leitungswiderstand aus</td></tr>
+<tr><td><b>Rückseitige Bananenstecker-Adapter</b></td><td>Feste Verkabelung zum Netzteil</td><td>Verhindert wackelnde Verbindungen bei Dauermessungen</td></tr>
+<tr><td><b>Ersatzsicherungen</b></td><td>Strommessbereich</td><td>Nur mit gleichem Typ und gleichem Abschaltvermögen ersetzen</td></tr>
+<tr><td><b>Tastkopf-Zubehör</b> (10:1, Massefeder)</td><td>Oszilloskop</td><td>Steht beim Gerät selbst: Tab <a class="goto" href="#oszilloskop">Oszilloskop</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Messmodi</h2>
+<p>Je nach Gerät stehen Symbole, englische Kürzel oder beides auf dem Drehrad. Diese Tabelle übersetzt sie einmal komplett — <b>was das Gerät dabei von innen tut</b> (daraus folgt die Regel „stromlos oder nicht" von allein), was im Display steht, wofür du den Modus nimmst und die Falle, in die man dabei tappt.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Beschriftung</th><th>Was das Gerät tut</th><th>Was im Display steht</th><th>Wofür</th><th>Typische Falle</th></tr></thead>
+<tbody>
+<tr><td><b>V⎓ · DCV · V=</b><br><span class="cd">Gleichspannung</span></td><td>Nur <b>zuhören</b>: misst die Spannungs<b>differenz</b> zwischen den Spitzen, hochohmig (10 MΩ) — Schaltung bleibt <b>an</b>, parallel messen</td><td>Volt, mit Vorzeichen</td><td><b>Der 90-%-Modus.</b> Rails, Batterien, Netzteile, Signale im Ruhezustand</td><td>Kein Bezugspunkt gewählt — Schwarz muss an <b>der</b> Masse liegen, auf die sich der Wert beziehen soll</td></tr>
+<tr><td><b>V~ · ACV</b><br><span class="cd">Wechselspannung</span></td><td>Misst nur den <b>Wechselanteil</b>; der Gleichanteil wird ausgeblendet (AC-gekoppelt)</td><td>Effektivwert in Volt</td><td>Steckdose, Trafo-Ausgang, Brumm auf einer Versorgung</td><td>An PWM und Schaltnetzteilen ohne <b>True RMS</b> (Kennzahlen oben) deutlich falsch</td></tr>
 <tr><td><b>mV⎓ · mV</b></td><td>Wie V⎓, nur mit feinstem Bereich (oft 1 µV Auflösung)</td><td>Millivolt</td><td>Shunt-Messungen, Thermospannungen, Spannungsabfall über einer Leiterbahn</td><td>Sehr empfindlich für Einstreuung — Leitungen kurz halten</td></tr>
-<tr><td><b>A⎓ · mA · µA</b><br><span class="cd">Strom</span></td><td>Leitet den Strom <b>durch</b> einen Shunt im Gerät und misst dessen Spannungsabfall</td><td>Ampere/Milliampere</td><td>Stromaufnahme, Ruhestrom, Verbrauch je Baugruppe</td><td>Gerät muss <b>in Reihe</b>. Spitzen im A-Modus an eine Spannungsquelle = Kurzschluss</td></tr>
-<tr><td><b>Ω · RES · OHM</b><br><span class="cd">Widerstand</span></td><td><b>Speist selbst</b> einen kleinen bekannten Strom ein und rechnet aus der entstehenden Spannung den Widerstand — Prüfspannung bleibt <b>unter ~1 V</b>, damit Halbleiter nicht öffnen</td><td>Ohm, oder <b>OL</b> = zu groß / unterbrochen</td><td>Bauteilwerte, Leitungswiderstand, Wicklungen, Sicherungen</td><td>Nur <b>stromlos</b>. Eingelötet misst du alles Parallele mit — Wert immer <b>kleiner</b> als der echte</td></tr>
-<tr><td><b>CONT · ))) · 🔊</b><br><span class="cd">Durchgang</span></td><td>Technisch dasselbe wie Ω — nur wird unterhalb einer Schwelle (typ. <b>30–50 Ω</b>) gepiept statt eine Zahl gezeigt</td><td>Ton + Zahl (je nach Gerät)</td><td>Ja/Nein ohne hinzusehen: Kabelbruch, Lötbrücke, Sicherung, Steckerbelegung</td><td>„Piept" heißt <b>nicht</b> „gut" — 20 Ω in einer Masseleitung piepen und sind trotzdem ein Fehler</td></tr>
-<tr><td><b>DIODE · ▷⊢</b><br><span class="cd">Diodentest</span></td><td>Speist ~0,5–1 mA bei <b>2–3 V Leerlaufspannung</b> ein — genug, um Halbleiter-Übergänge zu <b>öffnen</b> — und zeigt den Spannungsabfall</td><td>Volt (die Durchlassspannung)</td><td>Dioden, LEDs, Transistorstrecken — und der <b>Board-Schnelltest</b>: jeden IC-Pin gegen Masse abklopfen</td><td>Blaue/weiße LEDs zeigen oft OL, weil 3 V Prüfspannung nicht reichen — <b>kein</b> Defekt</td></tr>
-<tr><td><b>CAP · ⊣⊢ · F</b><br><span class="cd">Kapazität</span></td><td><b>Lädt und entlädt</b> den Kondensator mit definiertem Strom und misst die Zeit daraus</td><td>µF / nF / pF</td><td>Elkos und Keramik-Cs prüfen, unbeschriftete Bauteile bestimmen</td><td>Vorher <b>entladen</b>. Eingelötet verfälschen Parallelbauteile — und ESR sieht dieser Modus <b>nicht</b></td></tr>
+<tr><td><b>A⎓ · mA · µA</b><br><span class="cd">Strom</span></td><td>Der Strom fließt <b>durch</b> einen Shunt im Gerät, gemessen wird dessen Spannungsabfall — Kreis <b>auftrennen</b>, Gerät <b>in Reihe</b> einschleifen</td><td>Ampere/Milliampere</td><td>Stromaufnahme, Ruhestrom, Verbrauch je Baugruppe</td><td>Spitzen im A-Modus an eine Spannungsquelle = Kurzschluss über den Shunt — Warnung im Buchsen-Abschnitt unten</td></tr>
+<tr><td><b>Ω · RES · OHM</b><br><span class="cd">Widerstand</span></td><td><b>Speist selbst</b> einen kleinen bekannten Strom ein und rechnet aus der entstehenden Spannung den Widerstand — Prüfspannung bleibt <b>unter ~1 V</b>, damit Halbleiter zubleiben</td><td>Ohm, oder <b>OL</b> = zu groß / unterbrochen</td><td>Bauteilwerte, Leitungswiderstand, Wicklungen, Sicherungen</td><td>Nur <b>stromlos</b> — Fremdspannung verfälscht oder beschädigt</td></tr>
+<tr><td><b>CONT · ))) · 🔊</b><br><span class="cd">Durchgang</span></td><td>Technisch dasselbe wie Ω — nur wird unterhalb einer Schwelle (typ. <b>30–50 Ω</b>) gepiept statt eine Zahl gezeigt</td><td>Ton + Zahl (je nach Gerät)</td><td>Ja/Nein ohne Hinsehen: Kabelbruch, Lötbrücke, Sicherung, Steckerbelegung</td><td>„Piept" heißt <b>nicht</b> „gut" — 20 Ω in einer Masseleitung piepen und sind trotzdem ein Fehler</td></tr>
+<tr><td><b>DIODE · ▷⊢</b><br><span class="cd">Diodentest</span></td><td>Speist ~0,5–1 mA bei <b>2–3 V Leerlaufspannung</b> ein — genug, um Halbleiter-Übergänge zu <b>öffnen</b> — und zeigt den Spannungsabfall</td><td>Volt (die Durchlassspannung)</td><td>Dioden, LEDs, Transistorstrecken — und der <b>Board-Schnelltest</b> (Karte unten)</td><td><b>OL</b> ist bei blauen/weißen LEDs oft kein Defekt → Referenztabelle unten</td></tr>
+<tr><td><b>CAP · ⊣⊢ · F</b><br><span class="cd">Kapazität</span></td><td><b>Lädt und entlädt</b> den Kondensator mit definiertem Strom und misst die Zeit daraus</td><td>µF / nF / pF</td><td>Elkos und Keramik-Cs prüfen, unbeschriftete Bauteile bestimmen</td><td>Vorher <b>entladen</b> — und ESR sieht dieser Modus <b>nicht</b></td></tr>
 <tr><td><b>Hz · % · DUTY</b><br><span class="cd">Frequenz</span></td><td><b>Zählt Nulldurchgänge</b> pro Sekunde bzw. das Verhältnis High zu Periode. Keine Formanalyse</td><td>Hertz bzw. Prozent</td><td>Takt prüfen, PWM-Frequenz und Tastgrad ablesen</td><td>Sagt „wie oft", nie „wie es aussieht". Verrauschte Signale ergeben Fantasiewerte → <a class="goto" href="#oszilloskop">Oszilloskop</a></td></tr>
 <tr><td><b>°C · TEMP</b></td><td>Misst die winzige <b>Thermospannung</b> eines angeschlossenen Typ-K-Fühlers und rechnet sie in Grad um</td><td>°C oder °F</td><td>Kühlkörper, heiß werdende Bauteile, Lötspitzen grob gegenprüfen</td><td>Ohne Fühler zeigt es Raumtemperatur oder Unsinn; Fühler braucht guten Kontakt und 10–20 s Zeit</td></tr>
 <tr><td><b>hFE</b></td><td>Legt Basisstrom an einen in den Sockel gesteckten Transistor und misst den Kollektorstrom</td><td>Verstärkungsfaktor (Zahl ohne Einheit)</td><td>Bedrahtete Transistoren grob sortieren</td><td>Nur bedrahtet, nur bei passender Sockelbelegung. Der <a class="goto" href="#lcrp1">Komponententester</a> kann das besser und automatisch</td></tr>
@@ -19,62 +113,47 @@
 <tr><td><b>LoZ · LowZ</b><br><span class="cd">nicht auf jedem Gerät</span></td><td>Schaltet einen <b>niederohmigen</b> Eingang (einige kΩ) parallel — belastet die Messstelle absichtlich</td><td>Volt, aber ohne Geisterspannung</td><td>Installationstechnik: unterscheidet echte Spannung von eingekoppelter Phantomspannung</td><td><b>Niemals</b> an Elektronik oder Signalleitungen — die Belastung bringt empfindliche Schaltungen aus dem Tritt</td></tr>
 </tbody>
 </table></div>
+<div class="tip"><b>Eingelötet misst du nie das Bauteil allein.</b> Bei Ω, CAP und den anderen einspeisenden Modi liegen alle Parallelpfade der Schaltung mit im Messkreis: Widerstände erscheinen <b>kleiner</b> als der echte Wert, Kapazitäten werden verfälscht. Für belastbare Werte mindestens <b>einseitig auslöten</b> — oder mit einem intakten Board vergleichen. Richtwerte für Messungen <b>in</b> der Schaltung: Tab <a class="goto" href="#fehlersuche">Fehlersuche</a>.</div>
 
 <h3>Die vier Modi, die am meisten verwechselt werden</h3>
 <div class="grid2">
 <div class="card"><h3>CONT vs. Ω</h3><p>Beide messen dasselbe. Der Unterschied ist nur die <b>Ausgabe</b>: CONT vergleicht gegen eine feste Schwelle und piept, Ω zeigt die Zahl.</p><ul>
 <li><b>CONT nehmen,</b> wenn du beim Messen auf die Spitzen schaust (feine Pins, Steckerbelegung)</li>
 <li><b>Ω nehmen,</b> sobald der Wert selbst zählt — Übergangswiderstände, Wicklungen, Leitungen</li>
-<li>Bei „piept, aber Gerät geht trotzdem nicht": in Ω wechseln und den echten Wert ansehen</li>
 </ul></div>
 <div class="card"><h3>DIODE vs. Ω</h3><p>Der entscheidende Unterschied ist die <b>Prüfspannung</b>: Ω bleibt unter ~1 V und lässt Halbleiter zu, DIODE geht auf 2–3 V und <b>öffnet</b> sie.</p><ul>
 <li>Deshalb misst Ω an einem IC-Pin oft „unendlich", DIODE aber 0,5 V</li>
-<li>Genau darum ist DIODE der <b>Standard-Schnelltest</b> auf Boards: Schwarz an Masse, mit Rot die Pins abfahren</li>
-<li><b>0,000 V</b> an einem Pin = Kurzschluss nach Masse — der schnellste Weg zum toten Bauteil</li>
+<li>Genau darum ist DIODE der <b>Standard-Schnelltest</b> auf Boards: Schwarz an Masse, mit Rot die Pins abfahren — <b>0,000 V</b> an einem Pin = Kurzschluss nach Masse</li>
+<li>Ausführlich mit Sollwerten je Rail: Tab <a class="goto" href="#fehlersuche">Fehlersuche</a></li>
 </ul></div>
 <div class="card"><h3>CAP — und was er nicht sieht</h3><p>Der Modus misst die <b>Kapazität</b> über Laden und Entladen. Was ein alternder Elko wirklich verliert, ist aber sein <b>ESR</b>.</p><ul>
-<li>Ein müder Elko kann fast korrekte µF zeigen und trotzdem defekt sein</li>
-<li>Für ESR: <a class="goto" href="#lcrp1">Komponententester</a></li>
+<li>Ein müder Elko kann fast korrekte µF zeigen und trotzdem defekt sein — für ESR: <a class="goto" href="#lcrp1">Komponententester</a></li>
 <li>Große Elkos brauchen im CAP-Modus mehrere Sekunden bis zum Endwert — nicht vorher ablesen</li>
 </ul></div>
 <div class="card"><h3>AC-Kopplung im V~-Modus</h3><p>V~ blendet den Gleichanteil aus. Ein Signal mit Offset muss deshalb <b>in beiden Modi</b> gemessen werden.</p><ul>
 <li>Beispiel 12-V-Versorgung mit Brumm: V⎓ zeigt 12 V, V~ zeigt die Welligkeit</li>
 <li>Ohne True RMS gilt die V~-Anzeige nur für saubere Sinuskurven</li>
-<li>Offene Spitzen im V~-Modus zeigen fast immer etwas — das ist normal, siehe unten</li>
 </ul></div>
 </div>
 
-<h3>Die Tasten — und woran du merkst, dass sie noch aktiv sind</h3>
-<div class="tbl-wrap"><table style="min-width:820px">
-<thead><tr><th>Taste</th><th>Was passiert</th><th>Wofür</th><th>Aktiv erkennst du an</th></tr></thead>
-<tbody>
-<tr><td><b>SELECT · MODE · FUNC</b></td><td>Schaltet zwischen mehreren Funktionen <b>derselben</b> Drehrad-Stellung</td><td>Ω → CONT → DIODE, oder V⎓ → V~</td><td>Symbol im Display — nicht der Beschriftung am Rad vertrauen</td></tr>
-<tr><td><b>RANGE</b></td><td>Auto-Range aus, fester Bereich; langes Drücken zurück auf Auto</td><td>Wenn die Anzeige zwischen zwei Bereichen springt oder du feste Stellenzahl brauchst</td><td>„AUTO" verschwindet, Bereichsangabe steht fest</td></tr>
-<tr><td><b>REL · ZERO · Δ</b></td><td>Nimmt den aktuellen Wert als neue Null; angezeigt wird ab da die <b>Abweichung</b></td><td>Leitungswiderstand wegrechnen (Spitzen zusammen → REL), Abweichung von einem Sollwert ablesen</td><td><b>Δ</b> oder „REL" im Display — <b>die häufigste Verwechslungsquelle</b></td></tr>
-<tr><td><b>HOLD</b></td><td>Friert die Anzeige ein, misst aber nicht weiter</td><td>Messpunkt schlecht einsehbar: antasten, dann ablesen</td><td>„H"/„HOLD" — ein Wert, der auffällig still steht, ist verdächtig</td></tr>
-<tr><td><b>MIN/MAX · PEAK</b></td><td>Merkt sich Extremwerte über die Messdauer</td><td>Einschaltstromspitze, kurzer Spannungseinbruch, Wackelkontakt suchen</td><td>„MAX"/„MIN" im Display, Wert ändert sich nur noch nach oben bzw. unten</td></tr>
-</tbody>
-</table></div>
-<div class="warn"><b>Die drei Modi-Fehler, die alle einmal machen:</b> ① Im <b>A-Modus</b> die Spitzen an eine Spannungsquelle halten — Kurzschluss über den Shunt. ② <b>Ω/CONT/DIODE/CAP</b> an einer eingeschalteten Schaltung — falsche Werte, im schlimmsten Fall Schaden. ③ <b>REL</b> aus einer alten Messung noch aktiv und sich über „unmögliche" Werte wundern.</div>
-
-<h2>Warum manche Modi Strom brauchen und andere nicht</h2>
-<p>Dieselben Modi noch einmal — aber von innen betrachtet. Wenn du weißt, <b>was das Gerät selbst tut</b>, ergibt sich die Regel „stromlos oder nicht" von allein:</p>
+<h3>Anzeigen, die irritieren — und was sie bedeuten</h3>
 <div class="tbl-wrap"><table style="min-width:800px">
-<thead><tr><th>Modus</th><th>Was das Gerät macht</th><th>Folge für dich</th></tr></thead>
+<thead><tr><th>Anzeige</th><th>Bedeutung</th><th>Was du tust</th></tr></thead>
 <tbody>
-<tr><td><b>V (Spannung)</b></td><td>Nur <b>zuhören</b>. Der Eingang ist hochohmig (10 MΩ) und entnimmt fast keinen Strom.</td><td>Schaltung bleibt <b>an</b>, parallel messen. Beeinflusst die Schaltung praktisch nicht.</td></tr>
-<tr><td><b>A (Strom)</b></td><td>Der Strom fließt <b>durch</b> einen Shunt-Widerstand im Gerät; gemessen wird der Spannungsabfall daran.</td><td>Kreis <b>auftrennen</b>, in Reihe einschleifen. Der Shunt klaut Spannung (Bürdenspannung).</td></tr>
-<tr><td><b>Ω (Widerstand)</b></td><td>Das Gerät <b>speist selbst</b> einen kleinen, bekannten Strom ein und misst die entstehende Spannung.</td><td>Nur <b>stromlos</b> — Fremdspannung verfälscht oder beschädigt. Prüfspannung bleibt unter ~1 V, damit Halbleiter zubleiben.</td></tr>
-<tr><td><b>))) (Durchgang)</b></td><td>Dasselbe wie Ω, nur mit Piepton unterhalb einer Schwelle (typ. 30–50 Ω) statt Zahl.</td><td>Schnelles Ja/Nein ohne Hinsehen — aber „niederohmig" ist nicht „gut".</td></tr>
-<tr><td><b>▷⊢ (Diode)</b></td><td>Speist ~0,5–1 mA bei <b>2–3 V</b> Leerlaufspannung ein und zeigt den Spannungsabfall in Volt.</td><td>Öffnet Halbleiter-Übergänge → verrät den Zustand von Dioden, Transistoren und IC-Pins.</td></tr>
-<tr><td><b>⊣⊢ (Kapazität)</b></td><td><b>Lädt und entlädt</b> den Kondensator und misst, wie lange das dauert.</td><td>Vorher entladen, sonst stört die Restladung. In der Schaltung verfälschen Parallelbauteile.</td></tr>
-<tr><td><b>Hz (Frequenz)</b></td><td><b>Zählt Nulldurchgänge</b> pro Sekunde — keine Formanalyse.</td><td>Sagt „wie oft", nicht „wie es aussieht". Dafür das <a href="#oszilloskop">Oszilloskop</a>.</td></tr>
-<tr><td><b>°C (Temperatur)</b></td><td>Misst die winzige <b>Thermospannung</b> des angeschlossenen Fühlers (Typ K).</td><td>Nur mit passendem Fühler; ohne Fühler zeigt es Raumtemperatur oder Unsinn.</td></tr>
+<tr><td><b>OL</b> oder <b>1</b> ganz links</td><td>Over Limit: Wert größer als der Bereich — bei Ω/))) heißt das <b>keine Verbindung</b></td><td>Bereich hochschalten; im Ω-Modus ist OL oft die richtige Antwort</td></tr>
+<tr><td><b>Minuszeichen</b></td><td>Spitzen vertauscht</td><td>Wert stimmt, nur die Polung ist umgekehrt</td></tr>
+<tr><td><b>Wert läuft langsam hoch</b></td><td>Beim Ω- oder Diodentest lädt dein Messstrom die Stützkondensatoren der Schaltung</td><td>Warten — der <b>Endwert</b> zählt, nicht der Startwert</td></tr>
+<tr><td><b>Letzte Stelle zappelt ±2–3</b></td><td>Normales Rauschen</td><td>Ignorieren oder Bereich manuell festhalten</td></tr>
+<tr><td><b>0,05–1 V im V~-Modus bei offenen Spitzen</b></td><td><b>Geisterspannung:</b> eingekoppeltes Netzbrummen (50 Hz), das der hohe 10-MΩ-Eingang sichtbar macht — auch bei nicht angeschlossenen Kabeln</td><td><b>Kein Defekt.</b> Verschwindet, sobald eine echte, niederohmige Quelle dranhängt</td></tr>
+<tr><td><b>Schaltung läuft nicht mehr, sobald du Strom misst</b></td><td><b>Bürdenspannung:</b> der Spannungsabfall am internen Shunt kann im mA-Bereich mehrere hundert mV betragen</td><td>Nächstgrößeren Strombereich (kleinerer Shunt) wählen oder mit Shunt-Widerstand + Spannungsmessung arbeiten</td></tr>
+<tr><td><b>Batteriesymbol</b></td><td>Batterie im Messgerät schwach</td><td>Sofort tauschen — schwache Batterie verfälscht besonders Ω und Diode</td></tr>
+<tr><td><b>REL / Δ im Display</b></td><td>Anzeige ist ein <b>Differenzwert</b> zu einem alten Bezug</td><td>Ausschalten, sonst wunderst du dich über „unmögliche" Werte</td></tr>
+<tr><td><b>HOLD im Display</b></td><td>Der Wert ist eingefroren, nicht konstant</td><td>Erst lösen, dann Werte glauben</td></tr>
+<tr><td><b>Einheiten-Präfix</b></td><td>m = Milli (÷1000) · k = Kilo (×1000) · M = Mega · µ = Mikro · n = Nano</td><td><b>Immer mitlesen</b> — mV und V unterscheiden sich um Faktor 1000</td></tr>
 </tbody>
 </table></div>
-<div class="kurz"><div><b>Kurz:</b> Bei <b>V</b> und <b>Hz</b> horcht das Gerät nur. Bei <b>Ω, ))), Diode und Kapazität</b> speist es selbst etwas ein — deshalb müssen diese vier <b>immer stromlos</b> gemessen werden. Bei <b>A</b> wird das Gerät Teil des Stromkreises.</div></div>
 
-<h2>Was ist ein guter Wert? Referenztabelle</h2>
+<h3>Was ist ein guter Wert? Referenztabelle</h3>
 <p>Ein Messwert allein sagt nichts — er braucht einen Sollwert. Die wichtigsten Erwartungswerte auf einen Blick. Richtwerte für <b>eingelötete</b> Bauteile, Rails gegen Masse und die Messreihenfolge stehen im Tab <a href="#fehlersuche">Fehlersuche</a>.</p>
 <div class="tbl-wrap"><table style="min-width:860px">
 <thead><tr><th>Was du misst</th><th>Modus</th><th>Soll (in Ordnung)</th><th>Auffällig</th></tr></thead>
@@ -86,7 +165,7 @@
 <tr><td>Silizium-Diode vorwärts</td><td>Diode ▷⊢</td><td>0,55–0,75 V</td><td>0,00 V = durchlegiert · OL = unterbrochen</td></tr>
 <tr><td>Schottky-Diode vorwärts</td><td>Diode ▷⊢</td><td>0,15–0,45 V</td><td>wie oben</td></tr>
 <tr><td>LED rot/gelb/grün</td><td>Diode ▷⊢</td><td>1,6–2,2 V, leuchtet oft schwach</td><td>OL in beide Richtungen = defekt</td></tr>
-<tr><td>LED blau/weiß</td><td>Diode ▷⊢</td><td>2,6–3,4 V</td><td>OL kann auch heißen: Prüfspannung reicht nicht → kein Defekt</td></tr>
+<tr><td>LED blau/weiß</td><td>Diode ▷⊢</td><td>2,6–3,4 V, leuchtet dabei oft nicht</td><td><b>OL kann auch heißen: die 2–3 V Prüfspannung reichen nicht → kein Defekt</b></td></tr>
 <tr><td>Widerstand, gemessen vs. Aufdruck</td><td>Ω</td><td>innerhalb der Toleranz (±1 % / ±5 %)</td><td>deutlich zu hoch oder OL = durchgebrannt</td></tr>
 <tr><td>Messleitungen zusammengehalten</td><td>Ω</td><td>0,1–0,5 Ω (das ist der Leitungswiderstand)</td><td>über 1 Ω oder springend = Leitung/Stecker schlecht</td></tr>
 <tr><td>Leiterbahn / Kabel, kurz</td><td>Ω</td><td>unter 0,5 Ω (nach Rel-Abgleich fast 0)</td><td>einige Ω = korrodiert, angerissen, kalte Lötstelle</td></tr>
@@ -96,17 +175,55 @@
 </tbody>
 </table></div>
 
-<h3>Drei Anzeigen, die irritieren — und normal sind</h3>
-<div class="card">
-<div class="rule"><span class="ico">👻</span><div><b>Geisterspannung im V~-Modus.</b> Mit offenen Prüfspitzen zeigt ein Multimeter oft 0,05–1 V bei 50 Hz an. Das ist eingekoppeltes Netzbrummen, das der hohe Eingangswiderstand (10 MΩ) sichtbar macht — <b>kein Defekt</b>. Sobald eine echte, niederohmige Quelle dranhängt, verschwindet es. Gleiches gilt für nicht angeschlossene Kabel.</div></div>
-<div class="rule"><span class="ico">📉</span><div><b>Der Wert läuft langsam hoch.</b> Beim Ω- oder Diodentest an einer Schaltung lädt dein Messstrom die Stützkondensatoren auf. Die Anzeige wandert nach oben und bleibt dann stehen — der <b>Endwert</b> zählt, nicht der Startwert.</div></div>
-<div class="rule"><span class="ico">🔻</span><div><b>Die Schaltung läuft plötzlich nicht mehr</b>, sobald du Strom misst. Das Messgerät hat im A-Bereich einen eigenen Widerstand (Shunt); der <b>Bürdenspannungsabfall</b> kann im mA-Bereich mehrere hundert mV betragen. Lösung: den nächstgrößeren Strombereich (kleinerer Shunt) wählen oder mit einem Shunt-Widerstand + Spannungsmessung arbeiten.</div></div>
-</div>
+<h2>Das Handmultimeter konkret</h2>
+<p>Die Modi oben gelten für jedes Multimeter — hier kommt das eigene Handgerät: Bedienelemente, Buchsen, Tasten und das, was am Drehrad vom Standard abweicht.</p>
 
-<h3>Wechselspannung: True RMS oder nicht</h3>
-<div class="card"><p style="margin:0">Einfache Multimeter messen den Mittelwert und rechnen ihn auf eine <b>saubere Sinuskurve</b> um. An verzerrten Signalen (PWM, Dimmer, Schaltnetzteile) liegen sie deutlich daneben. <b>True-RMS</b>-Geräte messen den echten Effektivwert und stimmen auch dort. Zusätzlich gilt bei fast allen Geräten: der V~-Modus ist <b>wechselspannungsgekoppelt</b> — ein Gleichanteil wird nicht mitgemessen. Ein Signal mit DC-Offset musst du in beiden Modi messen.</p></div>
+<h3>Bedienelemente</h3>
+<svg class="sy sy-mid" style="max-width:330px" viewBox="0 0 360 322" role="img" aria-label="Multimeter von vorn: Display, Drehrad, drei Buchsen und Messleitungen, nummeriert eins bis vier"><rect class="w" x="90" y="14" width="180" height="272" rx="14"/><rect class="w" x="112" y="34" width="136" height="46" rx="4"/><text class="lbl" x="240" y="66" text-anchor="end" style="font-size:19px">5.03</text><circle class="con" cx="52" cy="57" r="11"/><text class="cot" x="52" y="62" text-anchor="middle">1</text><circle class="w" cx="180" cy="152" r="42"/><path class="w" style="stroke-width:3.2" d="M180,152 L156,124"/><circle class="f" cx="180" cy="152" r="4"/><text class="lbl" x="136" y="102" text-anchor="end">OFF</text><text class="lbl" x="180" y="96" text-anchor="middle">V⎓</text><text class="lbl" x="234" y="112">V~</text><text class="lbl" x="238" y="156">Ω</text><text class="lbl" x="228" y="198">)))</text><text class="lbl" x="126" y="156" text-anchor="end">A⎓</text><circle class="con" cx="52" cy="152" r="11"/><text class="cot" x="52" y="157" text-anchor="middle">2</text><circle class="w" cx="125" cy="248" r="9"/><circle class="w" cx="180" cy="248" r="9"/><circle class="w" cx="235" cy="248" r="9"/><text class="pin" x="125" y="232" text-anchor="middle">10A</text><text class="pin" x="180" y="232" text-anchor="middle">COM</text><text class="pin" x="235" y="232" text-anchor="middle">VΩmA</text><circle class="con" cx="52" cy="248" r="11"/><text class="cot" x="52" y="253" text-anchor="middle">3</text><path style="stroke:var(--text);stroke-width:3;fill:none;stroke-linecap:round" d="M180,257 C180,296 150,308 118,312"/><path style="stroke:var(--rate-bad);stroke-width:3;fill:none;stroke-linecap:round" d="M235,257 C235,296 265,308 296,312"/><text class="lbl" x="110" y="316" text-anchor="end">schwarz</text><text class="lbl" x="304" y="316">rot</text><circle class="con" cx="330" cy="282" r="11"/><text class="cot" x="330" y="287" text-anchor="middle">4</text></svg>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>#</th><th>Element</th><th>Was es tut</th><th>Wann du es anfasst</th></tr></thead>
+<tbody>
+<tr><td>①</td><td><b>Display</b></td><td>Messwert, Einheit und kleine Statussymbole (Auto, HOLD, REL, Batterie)</td><td>Immer mitlesen — die Symbole sagen, <b>wie</b> der Wert entsteht</td></tr>
+<tr><td>②</td><td><b>Drehrad</b></td><td>Wählt die Messfunktion und schaltet das Gerät ein</td><td><b>Vor</b> jedem Anlegen der Spitzen. Nie unter Spannung drehen</td></tr>
+<tr><td>③</td><td><b>Buchsen</b></td><td>COM (schwarz) · VΩmA (rot, fast alles) · 10 A (rot, große Ströme)</td><td>Nur beim Wechsel auf Strommessung</td></tr>
+<tr><td>④</td><td><b>Prüfspitzen</b></td><td>Rot = Plus/Messpunkt, Schwarz = Bezug/Masse</td><td>Nur am isolierten Griff anfassen</td></tr>
+<tr><td>⑤</td><td><b>Tasten</b> (HOLD, REL, RANGE, SELECT)</td><td>Zusatzfunktionen zur gewählten Drehrad-Stellung</td><td>Siehe Tabelle „Tasten" unten</td></tr>
+</tbody>
+</table></div>
+<div class="card"><ul>
+<li><b>OFF</b> am Drehrad schaltet aus — nach dem Messen zurückdrehen: spart Batterie, entlastet den Eingang.</li>
+<li><b>Mehrfach belegte Stellungen:</b> Ω → ))) → Diode (und V⎓ → V~) teilen sich eine Raststellung, <b>SELECT</b> schaltet weiter. Es gilt das Symbol im <b>Display</b>, nicht die Beschriftung am Rad. <b>⎓</b> bedeutet dabei überall Gleich (DC), die Wellenlinie <b>~</b> Wechsel (AC).</li>
+<li><b>mV⎓</b> ist ein fester Bereich (kein Auto-Range) · <b>A~</b> brauchst du im Hobby selten · <b>hFE</b> nutzt den Sockel am Gerät.</li>
+</ul></div>
 
-<h2>Schritt für Schritt: die wichtigsten Messungen</h2>
+<h3>Die Buchsen — die einzige Stelle, an der ein Fehler teuer wird</h3>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Buchse</th><th>Leitung</th><th>Wofür</th><th>Achtung</th></tr></thead>
+<tbody>
+<tr><td><b>COM</b></td><td><b>Schwarz</b> — steckt immer hier</td><td>Gemeinsamer Bezugspunkt für jede Messung</td><td>Wird nie umgesteckt</td></tr>
+<tr><td><b>VΩmA</b> (auch V/Ω/Hz beschriftet)</td><td>Rot</td><td>Spannung, Widerstand, Durchgang, Diode, Kapazität, Frequenz, kleine Ströme</td><td><b>Die Grundstellung.</b> Hierhin geht Rot nach jeder Strommessung zurück</td></tr>
+<tr><td><b>10 A</b> (oder 20 A)</td><td>Rot</td><td>Ströme über etwa 200 mA</td><td><b>Oft ungesichert oder nur grob gesichert.</b> In dieser Buchse an Spannung gehalten = Kurzschluss</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Der eine Fehler, der Geräte zerstört:</b> Rote Leitung steckt noch in der A-Buchse, das Drehrad steht auf V — und man hält die Spitzen an eine Spannungsquelle. Die A-Buchse ist innen fast ein Kurzschluss. Ergebnis: Sicherung, Leiterbahn oder Gerät. <b>Deshalb: Nach jeder Strommessung die rote Leitung sofort zurück in VΩ</b>, noch bevor du das Gerät weglegst. Das ist der häufigste teure Fehler überhaupt.</div>
+
+<h3>Die Tasten — und woran du merkst, dass sie noch aktiv sind</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Taste</th><th>Was passiert</th><th>Wofür</th><th>Aktiv erkennst du an</th></tr></thead>
+<tbody>
+<tr><td><b>SELECT · MODE · FUNC</b></td><td>Schaltet zwischen mehreren Funktionen <b>derselben</b> Drehrad-Stellung</td><td>Ω → CONT → DIODE, oder V⎓ → V~</td><td>Symbol im Display — nicht der Beschriftung am Rad vertrauen</td></tr>
+<tr><td><b>RANGE</b></td><td>Auto-Range aus, fester Bereich; erneut drücken schaltet weiter, langes Drücken zurück auf Auto</td><td>Wenn die Anzeige zwischen zwei Bereichen springt oder du feste Stellenzahl brauchst</td><td>„AUTO" verschwindet, Bereichsangabe steht fest</td></tr>
+<tr><td><b>REL · ZERO · Δ</b></td><td>Nimmt den aktuellen Wert als neue Null; angezeigt wird ab da die <b>Abweichung</b></td><td>Leitungswiderstand wegrechnen (Spitzen zusammen → REL), Abweichung von einem Sollwert ablesen</td><td><b>Δ</b> oder „REL" im Display — <b>die häufigste Verwechslungsquelle</b></td></tr>
+<tr><td><b>HOLD</b></td><td>Friert die Anzeige ein, misst aber nicht weiter</td><td>Messpunkt schlecht einsehbar: antasten, dann ablesen</td><td>„H"/„HOLD" — ein Wert, der auffällig still steht, ist verdächtig</td></tr>
+<tr><td><b>MIN/MAX · PEAK</b></td><td>Merkt sich Extremwerte über die Messdauer</td><td>Einschaltstromspitze, kurzer Spannungseinbruch, Wackelkontakt suchen</td><td>„MAX"/„MIN" im Display, Wert ändert sich nur noch nach oben bzw. unten</td></tr>
+<tr><td><b>Hz / %</b> (Zweitfunktion)</td><td>Zeigt Frequenz statt Spannung</td><td>PWM prüfen, ohne das Drehrad zu drehen</td><td>Einheit im Display</td></tr>
+<tr><td><b>Backlight</b></td><td>Displaybeleuchtung, schaltet sich selbst wieder ab</td><td>Im Gehäuse, unter dem Tisch</td><td>—</td></tr>
+<tr><td><b>Taste beim Einschalten halten</b></td><td>Deaktiviert je nach Gerät die <b>Abschaltautomatik</b> (Auto Power Off)</td><td>Bei Langzeitmessungen — welche Taste, sagt das Handbuch</td><td>—</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Beim Handgerät gilt: die letzten ein bis zwei Stellen sind Orientierung, kein Beweis.</b> Bei 6 000 Counts und ±0,5 % liegt eine Anzeige von 5,00 V real irgendwo zwischen 4,97 und 5,03 V. Für „ist die Rail da?" reicht das völlig; für „ist die Rail exakt?" ist das <a class="goto" href="#dmm-tisch">Tischmultimeter</a> zuständig.</div>
+
+<h2>Rezepte: die wichtigsten Messungen</h2>
 <p><b>Grundstellung für fast alles: Schwarz in COM, Rot in VΩ.</b> Die Rezepte erwähnen die Buchsen nur noch, wenn es davon abweicht (Strommessung). Und das wichtigste Prinzip vorab als Bild:</p>
 <div class="grid2">
 <div class="card"><h3>Spannung: parallel (nebendran)</h3>
@@ -117,54 +234,71 @@
 <p class="note">Der ganze Strom muss <b>durch</b> das Messgerät. Im A-Modus nie einfach an Plus und Minus halten — das ist ein Kurzschluss.</p></div>
 </div>
 
-<h3>① Gleichspannung messen (Batterie, Netzteil, Schaltung)</h3>
-<div class="card"><ul>
-<li>Drehrad auf <b>V⎓ / DCV</b> (bei manuell: einen Bereich über dem erwarteten Wert).</li>
-<li>Schaltung darf <b>an</b> bleiben. Spitzen <b>parallel</b> anlegen: Rot an Plus, Schwarz an Masse.</li>
-<li>Wert ablesen. Minus-Zeichen = Spitzen vertauscht, sonst egal.</li>
-</ul></div>
+<h3>① Gerät startklar machen (30 Sekunden, vor jeder Session)</h3>
+<div class="steps">
+<div class="step"><b>Sichtprüfung der Leitungen.</b> Kein blankes Kupfer, keine Risse an der Knickstelle, Stecker sitzen fest.</div>
+<div class="step"><b>Drehrad auf ))) und Spitzen zusammenhalten.</b> Es muss piepen und nahe 0 Ω zeigen. Piept es nicht, ist eine Leitung gebrochen.</div>
+<div class="step"><b>Leitungswiderstand merken</b> (typisch 0,1–0,5 Ω) — oder gleich mit <b>REL</b> auf null setzen.</div>
+<div class="step"><b>Buchsen kontrollieren:</b> Schwarz in COM, Rot in VΩ. Nicht darauf verlassen, dass es noch so ist wie gestern.</div>
+</div>
 
-<h3>② Durchgang prüfen (Verbindung / Kabelbruch)</h3>
-<div class="card"><ul>
-<li>Drehrad auf das ))) -Symbol.</li>
-<li>Schaltung <b>stromlos</b> machen (ausschalten / Strom trennen).</li>
-<li>Spitzen an die zwei Punkte. <b>Piepton</b> = verbunden. Kein Ton / OL = unterbrochen.</li>
-<li>Kurzer Test zu Beginn: beide Spitzen zusammenhalten → muss piepen (Funktionscheck).</li>
-</ul></div>
+<h3>② Gleichspannung messen (Batterie, Netzteil, Rail)</h3>
+<div class="steps">
+<div class="step"><b>Drehrad auf V⎓.</b> Auto-Range genügt (bei manueller Wahl: einen Bereich über dem erwarteten Wert).</div>
+<div class="step"><b>Schwarz an Masse</b> — am besten festklemmen. Damit ist der Bezugspunkt fest und nur noch eine Hand nötig.</div>
+<div class="step"><b>Rot an den Messpunkt.</b> Die Schaltung bleibt eingeschaltet, gemessen wird <b>parallel</b>. Eine Sekunde warten, bis Auto-Range den Bereich gefunden hat, dann ablesen.</div>
+<div class="step"><b>Wert einordnen</b> (Referenztabelle oben). Weicht er ab, ist der nächste Schritt die Messung <b>unter Last</b>.</div>
+</div>
 
-<h3>③ Widerstand messen (Ω)</h3>
-<div class="card"><ul>
-<li>Drehrad auf <b>Ω</b>.</li>
-<li>Bauteil <b>stromlos</b> und am besten <b>einseitig ausgelötet</b> messen, sonst messen umliegende Bauteile mit und der Wert stimmt nicht.</li>
-<li>OL = Widerstand zu groß für den Bereich oder unterbrochen.</li>
-</ul></div>
+<h3>③ Durchgang prüfen (Verbindung / Kabelbruch)</h3>
+<div class="steps">
+<div class="step"><b>Schaltung stromlos machen</b> und Elkos entladen lassen.</div>
+<div class="step"><b>Drehrad auf ))) </b>, Funktionstest durch Zusammenhalten der Spitzen.</div>
+<div class="step"><b>Beide Punkte antasten.</b> Piepton = verbunden. Kein Ton / OL = unterbrochen.</div>
+<div class="step"><b>Vorsicht bei „piept trotzdem":</b> Über Bauteile hinweg piept es oft, ohne dass eine echte Verbindung besteht. Bei Zweifeln in den Ω-Modus wechseln und den <b>Zahlenwert</b> ansehen.</div>
+</div>
 
-<h3>④ Strom messen (mit Vorsicht!)</h3>
-<div class="card"><ul>
-<li>Rot in die <b>mA</b>- oder <b>10A</b>-Buchse stecken (je nach erwartetem Strom), Schwarz bleibt in COM.</li>
-<li>Drehrad auf <b>A⎓ / mA</b>.</li>
-<li>Den Stromkreis <b>auftrennen</b> und das Messgerät <b>in Reihe dazwischen</b> hängen: der Strom muss durch das Gerät fließen.</li>
-<li class="warn"><b>Nie</b> die Spitzen in dieser Stellung einfach an Plus und Minus halten → das ist ein Kurzschluss durch das Gerät, die Sicherung fliegt (oder das Gerät stirbt).</li>
-</ul></div>
+<h3>④ Widerstand messen</h3>
+<div class="steps">
+<div class="step"><b>Stromlos</b> — sonst falscher Wert oder Schaden.</div>
+<div class="step"><b>Drehrad auf Ω.</b> Bei kleinen Werten: Spitzen zusammenhalten und <b>REL</b> drücken.</div>
+<div class="step"><b>Bauteil möglichst einseitig auslöten</b> (Kasten „Eingelötet" oben). OL = zu groß für den Bereich oder unterbrochen.</div>
+<div class="step"><b>Nicht beide Spitzen mit den Fingern halten</b> — dein Körper liegt sonst mit einigen hundert kΩ parallel und verfälscht hohe Widerstände.</div>
+</div>
 
-<h3>⑤ Diode / LED prüfen</h3>
-<div class="card"><ul>
-<li>Drehrad auf das Dioden-Symbol ▷⊢.</li>
-<li>Rot an Anode (Plus), Schwarz an Kathode (Ring/Minus): zeigt die Durchlassspannung (z. B. 0,6 V bei Diode, ~1,8 V bei roter LED, LED leuchtet schwach).</li>
-<li>Blaue/weiße LEDs (Durchlassspannung ~3 V) leuchten dabei oft nicht und zeigen <b>OL</b>, weil die Prüfspannung vieler Multimeter nicht ausreicht — das ist <b>kein</b> Defekt.</li>
-<li>Spitzen umdrehen: muss <b>OL</b> zeigen. Zeigt es in beide Richtungen 0 oder OL → Diode defekt.</li>
-</ul></div>
+<h3>⑤ Strom messen (mit Vorsicht!)</h3>
+<div class="steps">
+<div class="step"><b>Größenordnung abschätzen.</b> Über 200 mA erwartet → rote Leitung in die <b>10-A-Buchse</b>. Sonst mA/µA-Buchse.</div>
+<div class="step"><b>Schaltung ausschalten</b> und den Stromkreis an <b>einer</b> Stelle auftrennen.</div>
+<div class="step"><b>Gerät in Reihe einschleifen:</b> Der gesamte Strom muss durch das Multimeter fließen — nie die Spitzen einfach an Plus und Minus halten.</div>
+<div class="step"><b>Drehrad auf A⎓ / mA</b>, dann erst einschalten und ablesen. Läuft die Schaltung plötzlich nicht mehr: Bürdenspannung (Anzeigen-Tabelle oben).</div>
+<div class="step"><b>Rote Leitung zurück in VΩ.</b> Sofort, immer, ohne Ausnahme (Warnung im Buchsen-Abschnitt).</div>
+</div>
 
-<h3>⑥ Kondensator messen (Kapazität)</h3>
-<div class="card"><ul>
-<li>Kondensator <b>vorher entladen</b> (über einen Widerstand, Anleitung im Tab <a href="#sicherheit">Sicherheit</a>), sonst kann die Restladung das Gerät stören.</li>
-<li>Drehrad auf das Kondensator-Symbol ⊣⊢ / CAP. Spitzen anlegen (bei Elko Polung beachten).</li>
-<li>Wert in µF/nF ablesen und mit Aufdruck vergleichen.</li>
-</ul></div>
+<h3>⑥ Diode und LED prüfen</h3>
+<div class="steps">
+<div class="step"><b>Stromlos.</b> Drehrad auf ▷⊢.</div>
+<div class="step"><b>Rot an Anode, Schwarz an Kathode</b> (Ring/abgeflachte Seite): Silizium 0,55–0,75 V, Schottky 0,15–0,45 V, LED 1,6–3,4 V — LED leuchtet dabei oft schwach.</div>
+<div class="step"><b>Spitzen tauschen:</b> Jetzt muss <b>OL</b> stehen. Wert in beide Richtungen ≈ 0 = durchlegiert; OL in beide Richtungen = unterbrochen — Ausnahme blaue/weiße LEDs, siehe Referenztabelle.</div>
+</div>
 
-<h3>⑦ Batterie-Schnelltest</h3>
-<div class="card"><ul>
-<li>V⎓, Rot an Plus, Schwarz an Minus. Spannung ablesen.</li>
-<li>Faustwerte: AA/AAA frisch ~1,5 V, leer unter ~1,2 V · 9-V-Block frisch ~9 V · Li-Ion-Zelle voll 4,2 V, leer ~3,0 V.</li>
-<li>Besser unter Last messen (im Gerät eingebaut), denn leere Batterien zeigen ohne Last oft noch fast volle Spannung.</li>
-</ul></div>
+<h3>⑦ Kondensator messen (Kapazität)</h3>
+<div class="steps">
+<div class="step"><b>Kondensator vorher entladen</b> (über einen Widerstand, Anleitung im Tab <a href="#sicherheit">Sicherheit</a>), sonst kann die Restladung das Gerät stören.</div>
+<div class="step"><b>Drehrad auf ⊣⊢ / CAP.</b> Spitzen anlegen, bei Elko Polung beachten. Wert in µF/nF ablesen und mit dem Aufdruck vergleichen (Toleranzen: Referenztabelle oben).</div>
+</div>
+
+<h3>⑧ Batterie-Schnelltest</h3>
+<div class="steps">
+<div class="step"><b>V⎓, Rot an Plus, Schwarz an Minus.</b> Spannung ablesen und einordnen: AA/AAA und Li-Ion stehen in der Referenztabelle, ein 9-V-Block zeigt frisch ~9 V.</div>
+<div class="step"><b>Besser unter Last messen</b> (im Gerät eingebaut), denn leere Batterien zeigen ohne Last oft noch fast volle Spannung.</div>
+</div>
+
+<h3>⑨ Sicherung im Multimeter prüfen und wechseln</h3>
+<div class="steps">
+<div class="step"><b>Verdacht:</b> Spannungsmessung geht, aber im Strombereich zeigt das Gerät immer 0,00.</div>
+<div class="step"><b>Prüfen ohne Öffnen:</b> Drehrad auf Ω, rote Leitung in die mA-Buchse und die beiden Buchsen VΩ und mA über einen Widerstand messen — OL bedeutet Sicherung defekt.</div>
+<div class="step"><b>Leitungen abziehen</b>, Gehäuse öffnen, Batterie zuerst entnehmen.</div>
+<div class="step"><b>Nur mit gleichem Typ ersetzen:</b> gleicher Strom, gleiche Spannung, gleiches Abschaltvermögen (typisch schnell, keramisch, sandgefüllt). Eine Glassicherung als Ersatz ist ein Sicherheitsrisiko.</div>
+</div>
+<div class="kurz"><b>Weiterlesen:</b> Systematisch eingrenzen, Board-Diagnose und Sollwerte in der Schaltung → <a class="goto" href="#fehlersuche">Fehlersuche</a>. Präzision, Signalform und Bauteiltests → die Geräte-Tabs (<a class="goto" href="#dmm-tisch">Tischmultimeter</a>, <a class="goto" href="#oszilloskop">Oszilloskop</a>, <a class="goto" href="#lcrp1">Komponententester</a>, <a class="goto" href="#netzteil">Labornetzteil</a>).</div>

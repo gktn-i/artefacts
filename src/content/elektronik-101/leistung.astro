@@ -1,6 +1,6 @@
 <div class="kurz"><b>Kern:</b> PWM schaltet schnell an/aus statt zu drosseln — der MOSFET ist der Schalter, Gate-Treiber und Totzeit entscheiden über die Verluste. VRM = viele Buck-Phasen parallel.</div>
 <h2>PWM: an und aus statt halb</h2>
-<p>Um eine LED zu dimmen oder einen Motor langsamer laufen zu lassen, könnte man einen Widerstand davorsetzen — der verheizt die Differenz. <b>Pulsweiten-Modulation</b> macht es anders: der Schalter ist entweder <b>ganz an</b> oder <b>ganz aus</b> und wechselt so schnell, dass die Last nur den Mittelwert merkt.</p>
+<p>Um eine LED zu dimmen oder einen Motor langsamer laufen zu lassen, schaltet <b>Pulsweiten-Modulation</b> den Strom, statt ihn zu drosseln: der Schalter ist entweder <b>ganz an</b> oder <b>ganz aus</b> und wechselt so schnell, dass die Last nur den Mittelwert merkt.</p>
 <svg class="sy sy-mid" style="max-width:420px" viewBox="-34 8 410 160" role="img" aria-label="Drei PWM-Signale mit 25, 50 und 75 Prozent Tastgrad und dem jeweiligen Mittelwert"><path class="w" style="stroke-width:1.5" d="M20,40 V22 H35 V40 H80 V22 H95 V40 H140 V22 H155 V40 H200 V22 H215 V40 H260 V22 H275 V40 H320"/><path class="acc" style="stroke-dasharray:5 4" d="M20,35.5 H320"/><text class="lbl" x="14" y="35" text-anchor="end">25 %</text><text class="lbl" x="326" y="39">Ø 3 V</text><path class="w" style="stroke-width:1.5" d="M20,90 V72 H50 V90 H80 V72 H110 V90 H140 V72 H170 V90 H200 V72 H230 V90 H260 V72 H290 V90 H320"/><path class="acc" style="stroke-dasharray:5 4" d="M20,81 H320"/><text class="lbl" x="14" y="85" text-anchor="end">50 %</text><text class="lbl" x="326" y="89">Ø 6 V</text><path class="w" style="stroke-width:1.5" d="M20,140 V122 H65 V140 H80 V122 H125 V140 H140 V122 H185 V140 H200 V122 H245 V140 H260 V122 H305 V140 H320"/><path class="acc" style="stroke-dasharray:5 4" d="M20,126.5 H320"/><text class="lbl" x="14" y="135" text-anchor="end">75 %</text><text class="lbl" x="326" y="139">Ø 9 V</text><text class="lbl" x="20" y="160">Versorgung 12 V · gestrichelt = Mittelwert</text></svg>
 <div class="card">
 <p><b>Tastgrad (Duty Cycle)</b> ist der Anteil der Zeit, in der eingeschaltet ist: <span class="formula">D = t<sub>an</sub> / (t<sub>an</sub> + t<sub>aus</sub>)</span></p>
@@ -23,33 +23,16 @@
 </table></div>
 <p class="note">Faustregel für die Frequenzwahl: so niedrig wie möglich (weniger Schaltverluste, weniger Störstrahlung), aber hoch genug, dass die Last die einzelnen Pulse nicht mehr auflöst — und außerhalb des Hörbereichs, wenn eine Spule im Spiel ist.</p>
 
-<h2>Der Schalter: MOSFET verstehen</h2>
-<div class="note">Die <b>Grunddimensionierung</b> eines Schalttransistors (Gate-Widerstand, Pull-down, Logic-Level, bipolar vs. MOSFET) steht im Tab <a href="#signale">Signale &amp; Schaltungstechnik</a>. Hier geht es um die Leistungsseite: Verluste, Brücken, Wandler.</div>
-<p>PWM braucht etwas, das schnell und verlustarm schaltet. Das ist praktisch immer ein <b>MOSFET</b>: gesteuert wird er durch eine <b>Spannung</b> am Gate, nicht durch einen Strom.</p>
-<div class="grid2">
-<div class="card"><h3>Die drei Anschlüsse</h3>
-<ul>
-<li><b>Gate (G)</b> — die Steuerelektrode. Isoliert, zieht im Ruhezustand <b>keinen</b> Strom. Sie wirkt wie ein kleiner Kondensator, der beim Umschalten geladen und entladen werden muss.</li>
-<li><b>Drain (D)</b> und <b>Source (S)</b> — dazwischen fließt der Laststrom.</li>
-<li>Eingebaut ist immer eine <b>Body-Diode</b> von Source nach Drain. Sie leitet in der Gegenrichtung — mal Schutz, mal Störung.</li>
-</ul></div>
-<div class="card"><h3>Die vier Zahlen aus dem Datenblatt</h3>
-<ul>
-<li><b>V<sub>GS(th)</sub></b> — Schwellspannung, ab der er anfängt zu leiten. Nicht die Spannung, bei der er <i>voll</i> durchsteuert.</li>
-<li><b>R<sub>DS(on)</sub></b> — Durchlasswiderstand, <b>immer</b> mit der Angabe „bei V<sub>GS</sub> = x V" lesen.</li>
-<li><b>I<sub>D</sub></b> — Dauerstrom, meist bei unrealistischer Kühlung angegeben.</li>
-<li><b>Q<sub>g</sub></b> — Gate-Ladung. Bestimmt, wie viel Strom der Treiber liefern muss und wie hoch die Schaltverluste sind.</li>
-</ul></div>
-</div>
-<div class="danger-box"><p style="margin:0"><b>Der häufigste Anfängerfehler:</b> Ein Standard-MOSFET (z. B. IRF540N) braucht <b>10 V</b> am Gate, um voll durchzusteuern. An 3,3 V oder 5 V vom Mikrocontroller leitet er nur teilweise, hat statt Milliohm mehrere Ohm und wird glühend heiß. Für den direkten Anschluss an einen MCU-Pin brauchst du einen <b>Logic-Level-Typ</b> (z. B. AO3400, IRLZ44N, IRLB8721) — erkennbar daran, dass R<sub>DS(on)</sub> bei V<sub>GS</sub> = 2,5 V oder 4,5 V spezifiziert ist.</p></div>
+<h2>Der Schalter: MOSFET</h2>
+<p>PWM braucht etwas, das schnell und verlustarm schaltet — das ist praktisch immer ein <b>MOSFET</b>, gesteuert durch eine Spannung am Gate. Was er ist und wie er beschaltet wird (Gate-Widerstand, Pull-down, Logic-Level-Typ, bipolar vs. MOSFET), steht im Tab <a class="goto" href="#signale">Signale &amp; Schaltungstechnik</a> — hier zählt nur die Leistungsseite:</p>
 <div class="card">
-<div class="rule"><span class="ico">🔗</span><div><b>Gate-Widerstand</b> 22–100 Ω in Reihe: bremst das Umschalten leicht ab, dämpft Schwingungen und begrenzt den Stromstoß, den der MCU-Pin liefern muss.</div></div>
-<div class="rule"><span class="ico">⬇️</span><div><b>Pulldown</b> 10–100 kΩ vom Gate nach Source: solange der Mikrocontroller bootet, ist sein Pin hochohmig. Ohne Pulldown schwebt das Gate und der MOSFET schaltet zufällig ein.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Gate-Ladung Q<sub>g</sub>:</b> Das Gate ist isoliert und wirkt wie ein kleiner Kondensator, der bei jedem Umschalten geladen und entladen werden muss. Q<sub>g</sub> bestimmt, wie viel Strom der Treiber liefern muss und wie hoch die Schaltverluste sind.</div></div>
 <div class="rule"><span class="ico">🔥</span><div><b>Wärme kommt aus zwei Quellen:</b> Durchlassverluste <span class="formula">P = I² × R<sub>DS(on)</sub></span> und Schaltverluste, die mit der Frequenz steigen. Wird ein MOSFET bei niedriger Frequenz heiß, ist es fast immer der Durchlasswiderstand — also zu wenig Gate-Spannung.</div></div>
+<div class="rule"><span class="ico">↩️</span><div><b>Body-Diode:</b> Eingebaut ist immer eine Diode von Source nach Drain. Sie leitet in der Gegenrichtung — mal Schutz, mal Störung; ihre Rolle bei Totzeit und Synchrongleichrichtung siehst du weiter unten.</div></div>
 </div>
 
 <h2>High-Side oder Low-Side?</h2>
-<p>Die Last hat zwei Anschlüsse — Plus und Masse. Der Schalter kann in beiden Leitungen sitzen, und das macht einen erheblichen Unterschied.</p>
+<p>Der Schalter kann in der Plus- oder in der Masseleitung der Last sitzen — und das macht einen erheblichen Unterschied.</p>
 <svg class="sy sy-mid" style="max-width:420px" viewBox="0 0 420 200" role="img" aria-label="Vergleich: Low-Side-Schalter in der Masseleitung, High-Side-Schalter in der Plusleitung"><path class="w" d="M40,30 H160"/><text class="pin" x="40" y="24">+12 V</text><path class="w" d="M100,30 V46 M100,80 V96"/><rect class="w" x="82" y="46" width="36" height="34" rx="3"/><text class="lbl" x="100" y="68" text-anchor="middle">Last</text><rect class="w" x="82" y="96" width="36" height="30" rx="3"/><text class="lbl" x="100" y="116" text-anchor="middle">Q</text><path class="w" d="M100,126 V150 M86,150 H114 M91,156 H109 M96,161 H104"/><path class="w" d="M60,111 H82"/><text class="pin" x="56" y="114" text-anchor="end">MCU</text><text class="pin" x="122" y="94">D</text><text class="pin" x="122" y="132">S</text><text class="lbl" x="100" y="182" text-anchor="middle">Low-Side</text><text class="pin" x="100" y="194" text-anchor="middle">schaltet die Masse</text><path class="w" d="M260,30 H380"/><text class="pin" x="260" y="24">+12 V</text><path class="w" d="M320,30 V46 M320,80 V96"/><rect class="w" x="302" y="46" width="36" height="34" rx="3"/><text class="lbl" x="320" y="68" text-anchor="middle">Q</text><rect class="w" x="302" y="96" width="36" height="30" rx="3"/><text class="lbl" x="320" y="116" text-anchor="middle">Last</text><path class="w" d="M320,126 V150 M306,150 H334 M311,156 H329 M316,161 H324"/><path class="w" d="M280,61 H302"/><text class="pin" x="276" y="64" text-anchor="end">Treiber</text><text class="pin" x="342" y="50">D</text><text class="pin" x="342" y="88">S</text><text class="lbl" x="320" y="182" text-anchor="middle">High-Side</text><text class="pin" x="320" y="194" text-anchor="middle">schaltet das Plus</text></svg>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th></th><th>Low-Side (schaltet GND)</th><th>High-Side (schaltet +)</th></tr></thead>
@@ -70,7 +53,7 @@
 <h2>Halbbrücke, H-Brücke und Totzeit</h2>
 <div class="grid2">
 <div class="card"><h3>Halbbrücke</h3><p>Ein High-Side- und ein Low-Side-MOSFET übereinander. Ihr Verbindungspunkt heißt <b>Schaltknoten</b> und wird abwechselnd auf Plus und auf Masse gelegt. Das ist der Grundbaustein <b>jedes</b> Abwärtswandlers und jeder Motorbrücke.</p></div>
-<div class="card"><h3>H-Brücke (Vollbrücke)</h3><p>Zwei Halbbrücken nebeneinander, die Last hängt dazwischen. Damit lässt sich die Stromrichtung <b>umkehren</b> → Motor vorwärts und rückwärts. Details und fertige Treiber im Tab <a href="#motoren">Motoren</a>.</p></div>
+<div class="card"><h3>H-Brücke (Vollbrücke)</h3><p>Zwei Halbbrücken nebeneinander, die Last hängt dazwischen. Damit lässt sich die Stromrichtung <b>umkehren</b> → Motor vorwärts und rückwärts. Details und fertige Treiber im Tab <a href="#module">Module</a>.</p></div>
 </div>
 <div class="danger-box"><p style="margin:0"><b>Shoot-Through — der Klassiker, der Brücken killt:</b> Wären beide MOSFETs gleichzeitig leitend, läge die Versorgung direkt auf Masse. Der Kurzschlussstrom zerstört beide innerhalb von Mikrosekunden. Deshalb schaltet der Treiber den einen erst <b>aus</b> und wartet eine <b>Totzeit (Dead Time)</b> von typisch 10–100 ns, bevor der andere <b>ein</b>schaltet. Diese Totzeit ist keine Feinheit, sondern überlebenswichtig — beim Selbstbau nie zwei Gates aus einem Signal ableiten, ohne sie zu verriegeln.</p></div>
 <div class="card">
@@ -99,22 +82,10 @@
 <li><b>Wärme verteilen:</b> zwölf warme Bauteile statt eines glühenden.</li>
 <li><b>Weniger Restwelligkeit:</b> weil die Phasen versetzt arbeiten, überlappen sich ihre Stromwellen und heben sich teilweise auf — die Ausgangsspannung wird glatter bei kleineren Kondensatoren.</li>
 </ul>
-<p style="margin-bottom:0">Die Angabe „12+2" heißt: 12 Phasen für den Kern (V<sub>core</sub>), 2 für die Nebenspannungen (SoC, Speichercontroller). Achtung beim Marketing: manche Boards verdoppeln nur die MOSFETs pro Phase und zählen das als eigene Phase.</p>
+<p style="margin-bottom:0">Das „+2" steht für die Nebenspannungen (SoC, Speichercontroller). Achtung beim Marketing: manche Boards verdoppeln nur die MOSFETs pro Phase und zählen das als eigene Phase.</p>
 </div>
 
-<h3>VRM-Fehler finden</h3>
-<p>Für die Reparatur ist das direkt verwertbar — jeder Fehlermodus hat ein eigenes Messbild:</p>
-<div class="tbl-wrap"><table style="min-width:860px">
-<thead><tr><th>Symptom</th><th>Wo messen</th><th>Anzeige</th><th>Bedeutung</th></tr></thead>
-<tbody>
-<tr><td>Board tot, 12-V-Rail kurzgeschlossen</td><td>Ω, stromlos: Schaltknoten (Spulen-Anschluss zum FET) gegen GND</td><td>nahe 0 Ω</td><td><b>Low-Side-FET durchlegiert</b> — der häufigste VRM-Tod</td></tr>
-<tr><td>CPU sofort defekt / Board raucht beim Start</td><td>Ω, stromlos: Schaltknoten gegen +12 V</td><td>nahe 0 Ω</td><td><b>High-Side-FET durchlegiert</b> → die vollen 12 V liegen am Kern an</td></tr>
-<tr><td>Eine Phase bleibt kalt, andere überhitzen</td><td>Wärmebild oder Finger im Betrieb</td><td>eine Spule deutlich kühler</td><td>Treiber oder MOSFET dieser Phase tot — die übrigen tragen die Last mit</td></tr>
-<tr><td>Kernspannung zu niedrig, Rechner instabil</td><td>V⎓, Board an: Spulen-Ausgang gegen GND</td><td>unter Sollwert, schwankend</td><td>Phase ausgefallen, Regelkreis am Limit oder Rückkopplung defekt</td></tr>
-<tr><td>Alles misst plausibel, aber keine Ausgangsspannung</td><td>V⎓ am Enable/PGOOD-Pin des Controllers</td><td>kein Freigabesignal</td><td>Der Controller wird gar nicht erst gestartet — Fehler liegt vor dem VRM</td></tr>
-</tbody>
-</table></div>
-<p class="note">Vorgehen und Grundlagen dazu im Tab <a href="#dmm-tisch">Tischmultimeter</a> — insbesondere die Milliohm-Methode zum Einkreisen und der Abschnitt zum Diodentest. Alle Phasen liegen parallel: eine einzelne durchlegierte Phase zieht die ganze Rail auf 0 Ω, deshalb misst man <b>Phase für Phase</b> und vergleicht.</p>
+<p class="note">Jeder VRM-Fehlermodus hat ein eigenes Messbild — die Messbilder der VRM-Fehler stehen im Tab <a href="#fehlersuche">Fehlersuche</a>.</p>
 
 <h2>Wandler-Typen im Vergleich</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
@@ -134,7 +105,7 @@
 <p>Der Kondensator wehrt sich gegen <b>Spannungs</b>änderungen, die Spule gegen <b>Strom</b>änderungen. Genau das macht sie zum Herzstück jedes Schaltreglers: sie sorgt dafür, dass der Strom weiterfließt, auch wenn der Schalter längst offen ist.</p>
 <div class="card">
 <p><b>Das Grundgesetz:</b> <span class="formula">U = L × ΔI/Δt</span> — versucht man, den Strom durch eine Spule schnell zu ändern, entsteht eine Gegenspannung. Je abrupter die Änderung, desto höher die Spannung.</p>
-<p style="margin-bottom:0">Deshalb erzeugt jede abgeschaltete Spule (Relais, Motor, Magnetventil) eine Spannungsspitze, die den schaltenden Transistor zerstört — und deshalb gehört an jede Spule eine <b>Freilaufdiode</b>. Im Schaltregler ist genau derselbe Effekt der Nutzeffekt.</p>
+<p style="margin-bottom:0">Deshalb gehört an jede geschaltete Spule eine <b>Freilaufdiode</b> (warum und wie: Tab <a href="#signale">Signale &amp; Schaltungstechnik</a>) — im Schaltregler ist genau derselbe Effekt der Nutzeffekt.</p>
 </div>
 <h3>Die Kennwerte, auf die es ankommt</h3>
 <div class="tbl-wrap"><table style="min-width:840px">
@@ -160,6 +131,6 @@
 <div class="card">
 <div class="rule"><span class="ico">🔵</span><div><b>Eingangskondensator:</b> puffert die harten Stromimpulse, die der High-Side-FET aus der Zuleitung reißt. Fehlt er oder ist er zu weit weg, schwingt die Versorgung und der ganze Aufbau stört.</div></div>
 <div class="rule"><span class="ico">🟢</span><div><b>Ausgangskondensator:</b> glättet die Restwelligkeit und fängt Lastsprünge ab, bis die Regelung nachzieht.</div></div>
-<div class="rule"><span class="ico">📉</span><div><b>ESR</b> (Ersatz-Serienwiderstand): der unvermeidliche Innenwiderstand. Er bestimmt, wie viel Welligkeit übrig bleibt und wie warm der Kondensator wird. Ein alternder Elko verliert kaum Kapazität, aber sein ESR steigt — genau das ist der typische „Netzteil-Elko-Tod". Deshalb misst ein <a href="#lcrp1">ESR-Tester</a> mehr aus als ein Kapazitätsmessgerät.</div></div>
+<div class="rule"><span class="ico">📉</span><div><b>ESR</b> (Ersatz-Serienwiderstand): der unvermeidliche Innenwiderstand — er bestimmt, wie viel Welligkeit übrig bleibt und wie warm der Kondensator wird. Warum alternde Elkos genau daran sterben und wie man ESR misst: Tab <a href="#lcrp1">Komponententester</a>.</div></div>
 <div class="rule"><span class="ico">⚠️</span><div><b>Der DC-Bias-Effekt bei Keramikkondensatoren:</b> Ein MLCC mit X5R/X7R verliert unter Gleichspannung dramatisch an Kapazität. Ein 10-µF-Typ für 6,3 V hat an 5 V real oft nur noch 2–4 µF. Wer nach Aufdruck rechnet, baut Wandler, die unter Last instabil werden. Gegenmittel: höhere Spannungsfestigkeit oder größere Bauform wählen — <b>C0G/NP0</b> ist frei davon, gibt es aber nur in kleinen Werten.</div></div>
 </div>

@@ -1,4 +1,4 @@
-<div class="kurz"><b>Zwei Tabellen entscheiden alles:</b> <b>Absolute Maximum Ratings</b> = was das Bauteil <b>überlebt</b> (nie ausnutzen!). <b>Recommended Operating Conditions</b> = wo es <b>funktioniert</b> (danach auslegen). Wer die beiden verwechselt, baut Schaltungen, die auf dem Tisch laufen und im Einsatz sterben.</div>
+<div class="kurz"><b>Zwei Tabellen entscheiden alles:</b> „Absolute Maximum Ratings" und „Recommended Operating Conditions" — wer die beiden verwechselt, baut Schaltungen, die auf dem Tisch laufen und im Einsatz sterben. Der Unterschied: unten im Abschnitt „Die zwei Tabellen".</div>
 
 <h2>Ein Datenblatt ist ein Nachschlagewerk</h2>
 <p>Ein Datenblatt ist kein Fließtext, sondern ein Nachschlagewerk. Man liest es nie von vorn bis hinten, sondern springt gezielt zu der Zahl, die man braucht. Dieser Tab zeigt den immer gleichen Aufbau und wo die Fallen liegen.</p>
@@ -105,7 +105,7 @@
 <tr><td><b>Suffix für Bleifrei</b></td><td>G, LF, Pb-free, RoHS</td><td>Heute Standard</td></tr>
 </tbody>
 </table></div>
-<div class="note">Bei passiven Bauteilen steckt der Wert in der Nummer: Widerstände als drei bis vier Ziffern (<b>4702</b> = 470 × 10² = 47 kΩ), Kondensatoren genauso (<b>104</b> = 10 × 10⁴ pF = 100 nF). Codes auf dem Bauteil selbst stehen im Tab <a class="goto" href="#komponenten">Bauteil-Datenbank</a>.</div>
+<div class="note">Bei passiven Bauteilen steckt der Wert in der Nummer: Widerstände als drei bis vier Ziffern (<b>4702</b> = 470 × 10² = 47 kΩ), Kondensatoren genauso (<b>104</b> = 10 × 10⁴ pF = 100 nF). Codes auf dem Bauteil selbst stehen <a class="goto" href="#grundlagen">im Tab Basics (Aufdruck entschlüsseln)</a>.</div>
 
 <h3>Wie du ein unbekanntes Bauteil identifizierst</h3>
 <div class="steps">
@@ -129,6 +129,30 @@
 <tr><td><b>„Not recommended for new designs"</b></td><td>Auf Seite 1 oder im Kopf</td><td>Bauteil ist abgekündigt — für Neubauten Nachfolger nehmen</td></tr>
 <tr><td><b>Fälschungen / Nachbauten</b></td><td>Werte weit neben dem Datenblatt, Aufdruck unsauber</td><td>Bei kritischen Teilen aus seriöser Quelle kaufen</td></tr>
 <tr><td><b>Lötprofil ignoriert</b></td><td>Im Package-Abschnitt: „Peak 260 °C, 10 s"</td><td>Beim Heißluftlöten einhalten — Tab <a class="goto" href="loeten-referenz.html#temp">Temperaturen</a></td></tr>
+</tbody>
+</table></div>
+
+<h3>Die wichtigsten Kürzel je Bauteil</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Bauteil</th><th>Kürzel</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><b>Diode</b></td><td>V<sub>F</sub> / I<sub>F</sub></td><td>Durchlassspannung und -strom (Silizium ~0,7 V, Schottky ~0,3 V)</td></tr>
+<tr><td>V<sub>R</sub></td><td>Sperrspannung, die sie in Gegenrichtung aushält</td></tr>
+<tr><td>t<sub>rr</sub></td><td>Sperrverzögerungszeit — wie schnell sie beim Umpolen wirklich sperrt. Für Schaltregler entscheidend.</td></tr>
+<tr><td rowspan="4"><b>MOSFET</b></td><td>V<sub>GS(th)</sub></td><td>Schwellspannung, ab der er zu leiten <i>beginnt</i></td></tr>
+<tr><td>R<sub>DS(on)</sub></td><td>Durchlasswiderstand — immer zusammen mit der zugehörigen V<sub>GS</sub> lesen</td></tr>
+<tr><td>Q<sub>g</sub> / C<sub>iss</sub></td><td>Gate-Ladung bzw. Eingangskapazität → bestimmt Treiberbedarf und Schaltverluste</td></tr>
+<tr><td>V<sub>DS</sub> / I<sub>D</sub></td><td>Maximale Spannung Drain–Source und Dauerstrom</td></tr>
+<tr><td rowspan="3"><b>Bipolar&shy;transistor</b></td><td>h<sub>FE</sub> (β)</td><td>Stromverstärkung — streut von Exemplar zu Exemplar erheblich</td></tr>
+<tr><td>V<sub>CE(sat)</sub></td><td>Restspannung im durchgeschalteten Zustand (~0,2 V). Bei hohen Strömen die Wärmequelle.</td></tr>
+<tr><td>I<sub>C</sub> / V<sub>CEO</sub></td><td>Maximaler Kollektorstrom und Sperrspannung</td></tr>
+<tr><td rowspan="3"><b>Kondensator</b></td><td>ESR / ESL</td><td>Innerer Serienwiderstand und -induktivität</td></tr>
+<tr><td>Ripple Current</td><td>Wie viel Wechselstrom er dauerhaft aushält, ohne zu überhitzen</td></tr>
+<tr><td>DC-Bias</td><td>Kapazitätsverlust von Keramikkondensatoren unter Gleichspannung — oft 50–80 %</td></tr>
+<tr><td rowspan="2"><b>Spule</b></td><td>I<sub>sat</sub> / I<sub>rms</sub></td><td>Sättigungs- und Dauerstrom</td></tr>
+<tr><td>DCR / SRF</td><td>Drahtwiderstand und Eigenresonanzfrequenz</td></tr>
+<tr><td rowspan="2"><b>Allgemein</b></td><td>T<sub>J</sub> / θ<sub>JA</sub></td><td>Sperrschichttemperatur und Wärmewiderstand zur Umgebung (K/W). Damit rechnet man aus, wie heiß der Chip wirklich wird.</td></tr>
+<tr><td>MSL</td><td>Moisture Sensitivity Level — wie lange ein Bauteil nach dem Öffnen der Verpackung an Luft bleiben darf, bevor es vor dem Reflow getrocknet werden muss. Ignoriert man das, platzt das Gehäuse („Popcorn-Effekt").</td></tr>
 </tbody>
 </table></div>
 

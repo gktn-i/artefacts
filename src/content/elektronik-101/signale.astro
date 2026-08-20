@@ -1,9 +1,9 @@
 <div class="kurz"><b>Die vier Schaltungen, die in fast jedem Aufbau stecken:</b> <b>Pull-up</b> (Eingang darf nie offen sein) · <b>100 nF direkt am IC</b> (Abblockkondensator) · <b>Freilaufdiode</b> an jeder Spule · <b>Basis-/Gate-Widerstand</b> an jedem Transistor. Fehlt eines davon, ist die Schaltung unzuverlässig — nicht kaputt, sondern schlimmer: manchmal falsch.</div>
 
 <h2>Was zwischen Bauteil und Schaltung liegt</h2>
-<p>Zwischen „ich kenne die Bauteile" und „ich baue eine Schaltung" liegt dieses Wissen: welche Standard-Beschaltung ein Bauteil braucht, wie man sie dimensioniert und warum sie da ist. Alle Formeln hier brauchen nur das Ohmsche Gesetz aus dem Tab <a class="goto" href="#grundlagen">Basics</a>.</p>
+<p>Welche Standard-Beschaltung ein Bauteil braucht, wie man sie dimensioniert und warum sie da ist — alle Formeln hier brauchen nur das Ohmsche Gesetz aus dem Tab <a class="goto" href="#grundlagen">Basics</a>.</p>
 
-<h3>Pegel: was ist High, was ist Low</h3>
+<h3>Pegel: High, Low — und die Wandlung 3,3 V ↔ 5 V</h3>
 <p>Ein digitaler Eingang kennt nur zwei Zustände — aber die Grenze liegt nicht bei der halben Betriebsspannung. Dazwischen liegt ein <b>verbotener Bereich</b>, in dem der Eingang unentschlossen ist und anfängt zu flackern.</p>
 <div class="tbl-wrap"><table style="min-width:760px">
 <thead><tr><th>Logikfamilie</th><th>sicher Low</th><th>sicher High</th><th>verbotener Bereich</th><th>Merkmal</th></tr></thead>
@@ -14,13 +14,24 @@
 <tr><td><b>1,8 V</b> (Handy-SoCs, Speicher)</td><td>&lt; 0,6 V</td><td>&gt; 1,2 V</td><td>dazwischen</td><td><b>5 V zerstört diese Pins sofort</b></td></tr>
 </tbody>
 </table></div>
-<div class="kurz"><b>Die wichtigste Zahl:</b> Ein <b>3,3-V-Ausgang</b> treibt einen <b>5-V-CMOS-Eingang</b> nicht sicher an — 3,3 V liegen unter der 3,5-V-Schwelle. Umgekehrt zerstören <b>5 V</b> an einem <b>3,3-V-Eingang</b> oft den Pin. Beide Richtungen brauchen eine Anpassung — Abschnitt <b>Pegelwandlung</b> weiter unten.</div>
+<div class="kurz"><b>Die wichtigste Zahl:</b> Ein <b>3,3-V-Ausgang</b> treibt einen <b>5-V-CMOS-Eingang</b> nicht sicher an — 3,3 V liegen unter der 3,5-V-Schwelle. Umgekehrt zerstören <b>5 V</b> an einem <b>3,3-V-Eingang</b> oft den Pin. Beide Richtungen brauchen eine Anpassung:</div>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Methode</th><th>Richtung</th><th>Aufbau</th><th>Grenzen</th></tr></thead>
+<tbody>
+<tr><td><b>Spannungsteiler</b></td><td>5 V → 3,3 V</td><td>1,8 kΩ / 3,3 kΩ</td><td>Nur <b>eine</b> Richtung, langsam (kapazitive Last bremst)</td></tr>
+<tr><td><b>Serienwiderstand</b> 1–10 kΩ</td><td>5 V → 3,3 V</td><td>Ein Widerstand in die Leitung</td><td>Funktioniert nur, wenn der Eingang <b>5-V-tolerant</b> ist oder Schutzdioden hat — Notlösung</td></tr>
+<tr><td><b>MOSFET-Levelshifter</b> (BSS138 + 2× 10 kΩ)</td><td><b>beide</b></td><td>Fertige Module mit 2/4/8 Kanälen</td><td>Die Standardlösung für <b>I²C</b> — bidirektional und open-drain-fähig</td></tr>
+<tr><td><b>Pegelwandler-IC</b> (Buffer/Transceiver)</td><td>je nach Typ</td><td>Ein IC mit VCC-A und VCC-B</td><td>Schnell und sauber; Richtung muss meist festgelegt werden</td></tr>
+<tr><td><b>Gar nichts</b></td><td>3,3 V → 5 V TTL</td><td>Direkt verbinden</td><td>Geht nur, wenn die 5-V-Seite <b>2,0 V</b> als High akzeptiert — im Datenblatt nachsehen</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Zwei Dinge zuerst prüfen, bevor gewandelt wird:</b> ① Ist der Eingang laut Datenblatt <b>5-V-tolerant</b>? Dann braucht die Richtung 5→3,3 nichts. ② Haben beide Seiten <b>gemeinsame Masse</b>? Ohne die ist jede Pegelbetrachtung sinnlos.</div>
 
 <h3>Pull-up und Pull-down — der offene Eingang</h3>
 <p>Ein Eingang ohne Verbindung ist <b>nicht Low</b>, sondern „floating": er nimmt jede eingekoppelte Störung an und liefert Zufallswerte. Ein Widerstand nach VCC (Pull-up) oder nach Masse (Pull-down) legt den Ruhezustand fest.</p>
 <div class="grid">
-<div class="card"><div class="ct">Pull-up (Standard)</div><div class="cd">Widerstand von Pin nach <b>VCC</b>. Ruhezustand High, der Taster zieht gegen Masse auf Low.</div><ul><li>Wert: <b>10 kΩ</b> als Universalwert</li><li>Störanfällige Umgebung: 4,7 kΩ</li><li>Batteriebetrieb: 47–100 kΩ (weniger Ruhestrom)</li></ul></div>
-<div class="card"><div class="ct">Pull-down</div><div class="cd">Widerstand von Pin nach <b>Masse</b>. Ruhezustand Low, der Taster schaltet VCC auf den Pin.</div><ul><li>Gleiche Werte wie oben</li><li>Nötig bei Enable-Pins, die im Ruhezustand aus sein sollen</li></ul></div>
+<div class="card"><div class="ct">Pull-up (Standard)</div><div class="cd">Widerstand von Pin nach <b>VCC</b>. Ruhezustand High, der Taster zieht gegen Masse auf Low.</div><ul><li>Wert: <b>10 kΩ</b> als Universalwert — Feinabstimmung siehe Tabelle unten</li></ul></div>
+<div class="card"><div class="ct">Pull-down</div><div class="cd">Widerstand von Pin nach <b>Masse</b>. Ruhezustand Low, der Taster schaltet VCC auf den Pin.</div><ul><li>Gleiche Werte wie beim Pull-up</li><li>Nötig bei Enable-Pins, die im Ruhezustand aus sein sollen</li></ul></div>
 <div class="card"><div class="ct">Interner Pull-up</div><div class="cd">Fast jeder Mikrocontroller hat einen zuschaltbaren Pull-up im Chip (typisch <b>20–50 kΩ</b>).</div><ul><li>Spart das Bauteil: <span class="formula">INPUT_PULLUP</span></li><li>Zu schwach für lange Leitungen und für I²C</li></ul></div>
 <div class="card"><div class="ct">Open-Drain / Open-Collector</div><div class="cd">Der Ausgang kann nur nach Low ziehen, für High sorgt der Pull-up. So dürfen mehrere Geräte an <b>derselben</b> Leitung hängen.</div><ul><li>Prinzip von I²C, Interrupt-Sammelleitungen, 1-Wire</li><li>Ohne Pull-up bleibt die Leitung tot</li></ul></div>
 </div>
@@ -47,8 +58,7 @@
 <div class="warn"><b>„Dicht dran" ist keine Floskel.</b> Ein 100-nF-Kondensator zehn Zentimeter entfernt wirkt kaum noch — die Zuleitungsinduktivität macht ihn wirkungslos. Auf dem Steckbrett: direkt in die Reihen neben den Versorgungspins des Chips. Symptome bei fehlender Abblockung: sporadische Resets, springende ADC-Werte, Bus-Aussetzer — Fehler, die nie reproduzierbar sind.</div>
 
 <h3>Spannungsteiler — und warum er unter Last einbricht</h3>
-<p>Zwei Widerstände in Reihe teilen eine Spannung im Verhältnis ihrer Werte:</p>
-<p><span class="formula">U<sub>aus</sub> = U<sub>ein</sub> × R2 / (R1 + R2)</span></p>
+<p>Die Formel <span class="formula">U<sub>aus</sub> = U<sub>ein</sub> × R2 / (R1 + R2)</span> kennst du aus dem Tab <a href="#grundlagen">Basics</a> — hier die Schaltungspraxis:</p>
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th>Aufgabe</th><th>R1</th><th>R2</th><th>Ergebnis</th></tr></thead>
 <tbody>
@@ -60,9 +70,9 @@
 <div class="kurz"><b>Die 1/10-Regel:</b> Der Teiler funktioniert nur, wenn der angeschlossene Verbraucher <b>mindestens zehnmal hochohmiger</b> ist als R2. Sonst liegt er parallel zu R2 und die Ausgangsspannung bricht ein. Deshalb ist ein Spannungsteiler zum <b>Messen und Signale anpassen</b> gedacht — <b>nie</b> als Ersatz für einen Spannungsregler zur Stromversorgung.</div>
 
 <h3>RC-Glied: Zeit, Filter, Grenzfrequenz</h3>
-<p>Widerstand plus Kondensator ergeben ein Zeitverhalten. Dieselbe Schaltung heißt je nach Blickwinkel „Verzögerung" oder „Filter".</p>
+<p>Widerstand plus Kondensator ergeben ein Zeitverhalten — die Ladekurve und τ = R × C stehen im Tab <a href="#grundlagen">Basics</a>. Dieselbe Schaltung heißt je nach Blickwinkel „Verzögerung" oder „Filter":</p>
 <div class="grid">
-<div class="card"><div class="ct">Zeitkonstante τ</div><div class="cd">Nach τ ist der Kondensator auf 63 % geladen, nach <b>5 τ</b> praktisch voll (99 %).</div><p><span class="formula">τ = R × C</span></p><ul><li>10 kΩ × 10 µF = <b>0,1 s</b></li><li>Reset-Verzögerung, Einschaltverzögerung, Entprellung</li></ul></div>
+<div class="card"><div class="ct">Zeitkonstante τ</div><div class="cd">Die Verzögerung nutzen: nach <b>5 τ</b> ist der Kondensator praktisch voll.</div><p><span class="formula">τ = R × C</span></p><ul><li>10 kΩ × 10 µF = <b>0,1 s</b></li><li>Reset-Verzögerung, Einschaltverzögerung, Entprellung</li></ul></div>
 <div class="card"><div class="ct">Tiefpass</div><div class="cd">R in Reihe, C nach Masse. Lässt <b>langsame</b> Signale durch, bügelt schnelle Störungen weg.</div><p><span class="formula">f<sub>g</sub> = 1 / (2 π R C)</span></p><ul><li>Sensor-Glättung, Störfilter vor dem ADC</li><li>Aus PWM wird eine Gleichspannung</li></ul></div>
 <div class="card"><div class="ct">Hochpass</div><div class="cd">C in Reihe, R nach Masse. Lässt <b>schnelle Änderungen</b> durch, blockt Gleichanteil.</div><p><span class="formula">f<sub>g</sub> = 1 / (2 π R C)</span></p><ul><li>Audio-Kopplung zwischen Stufen</li><li>Nur die Flanke eines Signals auswerten</li></ul></div>
 </div>
@@ -78,7 +88,7 @@
 <div class="note">An der Grenzfrequenz ist das Signal auf 70,7 % gedämpft (−3 dB), nicht abgeschnitten. Ein einfaches RC-Glied dämpft danach mit 20 dB pro Dekade — also Faktor 10 Dämpfung pro Faktor 10 Frequenz.</div>
 
 <h3>Taster entprellen</h3>
-<p>Ein mechanischer Kontakt schließt nicht sauber, sondern springt für <b>1–20 ms</b>. Der Mikrocontroller sieht daraus fünf bis fünfzig Tastendrücke. Entprellen heißt: dieses Zappeln unterdrücken.</p>
+<p>Ein mechanischer Kontakt schließt nicht sauber, sondern springt für <b>1–20 ms</b> — der Mikrocontroller sieht daraus fünf bis fünfzig Tastendrücke. Entprellen heißt: dieses Zappeln unterdrücken.</p>
 <div class="gb">
 <div class="gb-col good"><h4>✓ In Software (Standard)</h4><ul>
 <li>Nach der ersten erkannten Flanke <b>20–50 ms</b> lang nicht mehr hinschauen</li>
@@ -104,11 +114,12 @@
 <tr><td><b>Dimensionierung</b></td><td>Basisstrom ≈ Laststrom / 20 · <span class="formula">R<sub>B</sub> = (U<sub>Pin</sub> − 0,7 V) / I<sub>B</sub></span></td><td><b>Logic-Level</b>-Typ wählen: muss bei <b>3,3 V bzw. 5 V am Gate</b> voll durchschalten</td></tr>
 <tr><td><b>Verlust im Ein-Zustand</b></td><td>U<sub>CE(sat)</sub> ≈ 0,2–0,7 V × Strom</td><td>R<sub>DS(on)</sub> × Strom² — bei guten Typen fast nichts</td></tr>
 <tr><td><b>Sinnvoll bis</b></td><td>einige hundert mA</td><td>mehrere Ampere</td></tr>
-<tr><td><b>Häufigster Fehler</b></td><td>Basiswiderstand vergessen</td><td>„Standard"-MOSFET am 3,3-V-Pin — er schaltet nur halb durch und wird heiß</td></tr>
+<tr><td><b>Häufigster Fehler</b></td><td>Basiswiderstand vergessen</td><td>„Standard"-MOSFET statt Logic-Level — siehe Warnung unten</td></tr>
 </tbody>
 </table></div>
 <div class="kurz"><b>Rechenbeispiel NPN:</b> Last zieht 200 mA, Stromverstärkung sicher angenommen 20 → Basisstrom 10 mA. Bei 5 V Pin: <span class="formula">(5 − 0,7) / 0,01 = 430 Ω</span> → <b>390 Ω</b> nehmen. Zu großer Widerstand = Transistor schaltet nicht ganz durch und wird heiß.</div>
-<div class="warn"><b>Low-Side heißt: der Transistor sitzt zwischen Last und Masse.</b> Das ist die einfache, richtige Variante. Sitzt er zwischen Plus und Last (High-Side), braucht ein N-Kanal-MOSFET eine Gate-Spannung <b>über</b> der Versorgung — dafür gibt es P-Kanal-Typen oder Treiber-ICs. Beim Aufbau immer prüfen: <b>Masse von Steuerung und Last muss verbunden sein.</b></div>
+<div class="warn"><b>Der häufigste MOSFET-Fehler:</b> Ein Standard-Typ (z. B. IRF540N) braucht <b>10 V</b> am Gate, um voll durchzusteuern — an 3,3 V oder 5 V vom Mikrocontroller leitet er nur teilweise und wird glühend heiß. Für den MCU-Pin einen <b>Logic-Level-Typ</b> nehmen (AO3400, IRLZ44N, IRLB8721), erkennbar daran, dass R<sub>DS(on)</sub> bei V<sub>GS</sub> = 2,5 V oder 4,5 V spezifiziert ist.</div>
+<div class="warn"><b>Low-Side heißt: der Transistor sitzt zwischen Last und Masse.</b> Das ist die einfache, richtige Variante. Sitzt er zwischen Plus und Last (High-Side), braucht ein N-Kanal-MOSFET eine Gate-Spannung <b>über</b> der Versorgung — dafür gibt es P-Kanal-Typen oder Treiber-ICs, abgewogen im Tab <a href="#leistung">Leistung &amp; PWM</a>. Beim Aufbau immer prüfen: <b>Masse von Steuerung und Last muss verbunden sein.</b></div>
 
 <h3>Induktive Lasten: Freilaufdiode</h3>
 <p>Eine Spule (Relais, Motor, Magnetventil) will ihren Strom weiterfließen lassen. Beim Abschalten erzeugt sie deshalb eine <b>Spannungsspitze mit umgekehrter Polarität</b> von mehreren hundert Volt — die tötet den Transistor.</p>
@@ -143,19 +154,6 @@
 </table></div>
 <div class="tip"><b>Praxis-Regeln:</b> ① Ein Komparator ohne <b>Mitkopplung</b> (Hysterese, z. B. 100 kΩ vom Ausgang an Plus) zappelt an der Schwelle — Hysterese fast immer einbauen. ② Bei einfacher Versorgung (nur +5 V, kein −5 V) kommt der Ausgang nicht bis an die Rails, außer bei <b>Rail-to-Rail</b>-Typen. ③ Der Plus-Eingang braucht immer einen definierten Gleichspannungs-Bezug — sonst driftet der Ausgang an einen Anschlag.</div>
 
-<h3>Pegelwandlung 3,3 V ↔ 5 V</h3>
-<div class="tbl-wrap"><table style="min-width:820px">
-<thead><tr><th>Methode</th><th>Richtung</th><th>Aufbau</th><th>Grenzen</th></tr></thead>
-<tbody>
-<tr><td><b>Spannungsteiler</b></td><td>5 V → 3,3 V</td><td>1,8 kΩ / 3,3 kΩ</td><td>Nur <b>eine</b> Richtung, langsam (kapazitive Last bremst)</td></tr>
-<tr><td><b>Serienwiderstand</b> 1–10 kΩ</td><td>5 V → 3,3 V</td><td>Ein Widerstand in die Leitung</td><td>Funktioniert nur, wenn der Eingang <b>5-V-tolerant</b> ist oder Schutzdioden hat — Notlösung</td></tr>
-<tr><td><b>MOSFET-Levelshifter</b> (BSS138 + 2× 10 kΩ)</td><td><b>beide</b></td><td>Fertige Module mit 2/4/8 Kanälen</td><td>Die Standardlösung für <b>I²C</b> — bidirektional und open-drain-fähig</td></tr>
-<tr><td><b>Pegelwandler-IC</b> (Buffer/Transceiver)</td><td>je nach Typ</td><td>Ein IC mit VCC-A und VCC-B</td><td>Schnell und sauber; Richtung muss meist festgelegt werden</td></tr>
-<tr><td><b>Gar nichts</b></td><td>3,3 V → 5 V TTL</td><td>Direkt verbinden</td><td>Geht nur, wenn die 5-V-Seite <b>2,0 V</b> als High akzeptiert — im Datenblatt nachsehen</td></tr>
-</tbody>
-</table></div>
-<div class="warn"><b>Zwei Dinge zuerst prüfen, bevor gewandelt wird:</b> ① Ist der Eingang laut Datenblatt <b>5-V-tolerant</b>? Dann braucht die Richtung 5→3,3 nichts. ② Haben beide Seiten <b>gemeinsame Masse</b>? Ohne die ist jede Pegelbetrachtung sinnlos.</div>
-
 <h3>Analog messen: was vor den ADC gehört</h3>
 <p>Der Analog-Digital-Wandler im Mikrocontroller vergleicht die Eingangsspannung mit einer <b>Referenz</b> und liefert eine Zahl. Alles, was diesen Vergleich stört, wird zum Messfehler.</p>
 <div class="tbl-wrap"><table style="min-width:800px">
@@ -175,6 +173,5 @@
 <div class="card"><div class="ct">Sternmasse</div><div class="cd">Alle Massen an <b>einem</b> Punkt zusammenführen, statt sie durchzuschleifen.</div><ul><li>Verhindert, dass Motorströme durch die Sensormasse laufen</li><li>Auf dem Steckbrett: kurze, direkte Wege zur Masseschiene</li></ul></div>
 <div class="card"><div class="ct">Masseschleife</div><div class="cd">Zwei Geräte über zwei verschiedene Wege verbunden — dazwischen fließt ein Ausgleichsstrom.</div><ul><li>Symptom: Brummen, springende Messwerte</li><li>Lösung: eine Verbindung auftrennen oder galvanisch trennen</li></ul></div>
 <div class="card"><div class="ct">Leitungen verlegen</div><div class="cd">Signal- und Leistungsleitungen trennen.</div><ul><li>Hin- und Rückleiter <b>nebeneinander</b> führen (kleine Fläche = wenig Einstreuung)</li><li>Motorleitungen verdrillen</li><li>Empfindliches kurz halten</li></ul></div>
-<div class="card"><div class="ct">Wenn es sporadisch spinnt</div><div class="cd">Die vier Verdächtigen in dieser Reihenfolge.</div><ul><li>Abblockkondensator fehlt oder sitzt zu weit weg</li><li>Eingang floatet (Pull-up fehlt)</li><li>Keine gemeinsame Masse</li><li>Freilaufdiode fehlt an einer Spule</li></ul></div>
 </div>
 <div class="kurz"><b>Alles, was hier steht, ist Vorbeugung.</b> Wenn eine Schaltung „meistens" läuft, liegt es fast nie am Programm — sondern an einem dieser fünf Punkte: Masse, Abblockung, Pull-up, Pegel, Freilaufdiode. Systematisches Vorgehen zum Eingrenzen: Tab <a class="goto" href="#fehlersuche">Fehlersuche</a>.</div>

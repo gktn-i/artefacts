@@ -1,0 +1,230 @@
+<div class="kurz"><b>Kurzfassung:</b> Displays: OLED (I²C) für kleine Statusanzeigen · TFT/IPS (SPI) für Farbe · E-Paper für Batteriebetrieb. Motoren: DC-Motor = Drehzahl · Servo = Winkel · Stepper = Position — alle brauchen einen Treiber, nie direkt an den Mikrocontroller-Pin. Boards: Arduino zum Lernen · ESP32 für WLAN/Bluetooth · Pi Pico für günstige Vielseitigkeit — 3,3-V-Logik ist der Standard.</div>
+
+<h2>Displays</h2>
+<p>Welches Display passt, entscheidet sich an wenigen Fragen: <b>Farbe oder einfarbig? Wie viel Strom darf es ziehen? Soll sich das Bild oft ändern? Touch ja oder nein? Wie viele Pins sind frei?</b> Hier die populärsten Typen und wofür sie gemacht sind.</p>
+<div class="grid2">
+<div class="card"><h3>OLED (SSD1306 / SH1106)</h3>
+<p>Kleines Display, bei dem <b>jedes Pixel selbst leuchtet</b>. Dadurch tiefes Schwarz, top Kontrast, gestochen scharf. Typisch 0,96" und 1,3", meist einfarbig (weiß/blau).</p>
+<p class="note">Anschluss: I²C (2 Leitungen) · Strom: sehr gering · <b>Gut für:</b> Messwerte, Statuszeilen, kleine Menüs, Wearables. Sehr günstig und einfach.</p></div>
+<div class="card"><h3>TFT-LCD (ST7735 / ILI9341 / ST7789)</h3>
+<p>Das farbige Standard-Display. Hintergrundbeleuchtet, viele Größen (1,8" bis ~3,5"). Zeigt Bilder, Diagramme, ganze Oberflächen.</p>
+<p class="note">Anschluss: SPI · Strom: mittel (Beleuchtung läuft immer) · <b>Gut für:</b> bunte GUIs, Kurven, Bildanzeige, kleine Spiele. Schwäche: einfache TFT haben magere Blickwinkel.</p></div>
+<div class="card"><h3>IPS (bessere TFT-Variante)</h3>
+<p>Ein TFT mit IPS-Panel: <b>sehr gute Blickwinkel und kräftigere Farben</b> — von der Seite noch klar ablesbar, anders als billige TFT.</p>
+<p class="note">Anschluss: SPI · <b>Gut für:</b> alles, was man aus verschiedenen Winkeln sehen will, hochwertige Anzeigen. Etwas teurer als einfache TFT.</p></div>
+<div class="card"><h3>Rundes Display (GC9A01)</h3>
+<p>Kreisrundes IPS, typisch 1,28". Liegt im Trend für den Smartwatch-Look und runde Zeiger-Anzeigen.</p>
+<p class="note">Anschluss: SPI · <b>Gut für:</b> Tacho/Gauge-Optik, runde Uhren, Drehregler-Anzeigen, Deko-Projekte.</p></div>
+<div class="card"><h3>E-Paper / E-Ink (Waveshare &amp; Co.)</h3>
+<p>Elektronisches Papier. <b>Hält das Bild ganz ohne Strom</b>, Energie braucht nur der Bildwechsel. Bei Tageslicht hervorragend lesbar, leuchtet nicht selbst (augenfreundlich). Meist schwarz/weiß, manche mit Rot/Gelb.</p>
+<p class="note">Anschluss: SPI · Strom: minimal · <b>Gut für:</b> Wetterstation, Namens-/Preisschild, batterie- oder solarbetriebene Anzeigen. Schwäche: sehr langsamer Bildaufbau (Sekunden), kein Video.</p></div>
+<div class="card"><h3>Zeichen-LCD (HD44780, 16x2 / 20x4)</h3>
+<p>Der Klassiker, der nur <b>Text in festen Feldern</b> zeigt (z. B. 16 Zeichen mal 2 Zeilen). Robust und kinderleicht anzusteuern, vor allem mit aufgestecktem I²C-Modul.</p>
+<p class="note">Anschluss: I²C (mit Modul) · <b>Gut für:</b> simple Textausgaben, Retro-Look, Einsteigerprojekte. Keine Grafik.</p></div>
+<div class="card"><h3>7-Segment (TM1637 / MAX7219)</h3>
+<p>Die bekannten Ziffernblöcke wie bei einer Digitaluhr. Auf große Distanz top ablesbar. Ansteuerung über einen kleinen Treiberchip mit wenigen Pins.</p>
+<p class="note">Anschluss: 2-3 Pins · <b>Gut für:</b> reine Zahlen wie Uhr, Zähler, Temperatur. Nichts für Text oder Grafik.</p></div>
+<div class="card"><h3>LED-Matrix (MAX7219 / WS2812)</h3>
+<p>Ein Gitter aus LEDs, oft 8x8 oder als Kette. MAX7219 für einfarbig, WS2812 (Neopixel) für volle RGB-Farben.</p>
+<p class="note">Anschluss: SPI-artig bzw. 1 Datenleitung · <b>Gut für:</b> Lauftext, einfache Animationen, Lichteffekte, Deko und Statusanzeigen.</p></div>
+<div class="card"><h3>Nextion (Smart-Display)</h3>
+<p>Ein TFT mit <b>eigenem Prozessor</b>. Die Oberfläche baust du am PC zusammen und schickst dem Display nur kurze Befehle. Das entlastet deinen Mikrocontroller stark. Touch ist dabei.</p>
+<p class="note">Anschluss: seriell (UART) · <b>Gut für:</b> schöne Bedienoberflächen ohne viel Grafik-Programmierung. Teurer, eigenes Software-Ökosystem.</p></div>
+<div class="card"><h3>Raspberry-Pi-Displays (HDMI / DSI)</h3>
+<p>Echte Monitore oder offizielle Touch-Displays für den Raspberry Pi (ein kleiner Linux-Computer). Hier läuft eine <b>vollwertige grafische Oberfläche</b> wie am PC.</p>
+<p class="note">Anschluss: HDMI oder DSI · <b>Gut für:</b> Dashboards, Mediacenter, Touch-Bedienpanels, alles mit Desktop oder Browser.</p></div>
+</div>
+
+<h3>Touch: resistiv oder kapazitiv?</h3>
+<div class="grid2">
+<div class="card"><h3>Resistiv (druckempfindlich)</h3><p>Reagiert auf <b>Druck</b>, funktioniert daher auch mit Fingernagel, Stift oder Handschuh. Günstig, aber weniger präzise und nur ein Berührpunkt. Oft bei ILI9341-TFT (Touch-Chip XPT2046).</p></div>
+<div class="card"><h3>Kapazitiv (wie am Handy)</h3><p>Reagiert auf die <b>Berührung der Haut</b>. Präziser, mehrere Finger gleichzeitig (Wischen, Zoomen), braucht aber bloßen Finger. Touch-Chip z. B. FT6236 oder GT911.</p></div>
+</div>
+
+<h2>Verdrahtung, Adressen &amp; Auswahlhilfe: welches Display?</h2>
+<p>Zu den Anschluss-Arten in Kürze: <b>I²C</b> braucht nur 2 Datenleitungen, ist aber langsam — ideal für kleine OLED- und Text-Displays. <b>SPI</b> nutzt mehr Leitungen und ist deutlich schneller — der Standard für TFT, IPS, runde und E-Paper-Displays. <b>Parallel</b> ist sehr schnell, frisst aber viele Pins. <b>UART</b> ist die einfache Daten-Leitung für Smart-Displays wie Nextion, <b>HDMI/DSI</b> sind die Monitor-Anschlüsse am Raspberry Pi. Details zu den Bussen im Tab <a href="#protokolle">Protokolle &amp; Busse</a>.</p>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th>Typ</th><th>Anschluss · Leitungen</th><th>Typische Adresse / Besonderheit</th><th>Du willst…</th></tr></thead>
+<tbody>
+<tr><td><b>OLED SSD1306 / SH1106</b></td><td>I²C · VCC · GND · SDA · SCL</td><td><b>0x3C</b> (selten 0x3D — per Lötbrücke umstellbar). Pull-ups meist auf dem Modul</td><td>kleine scharfe Statusanzeige, wenig Strom</td></tr>
+<tr><td><b>Zeichen-LCD mit I²C-Modul</b></td><td>I²C · VCC · GND · SDA · SCL</td><td><b>0x27</b> oder <b>0x3F</b>. Kontrast über das Poti auf der Rückseite einstellen</td><td>nur Text, simpel und billig</td></tr>
+<tr><td><b>TFT ST7735 / ILI9341 / ST7789</b></td><td>SPI · VCC · GND · SCK · MOSI · CS · <b>DC</b> · RST · LED</td><td><b>DC</b> unterscheidet Befehl und Daten — die eine Extraleitung gegenüber normalem SPI</td><td>bunte Oberfläche, Diagramme, Bilder — für gute Blickwinkel <b>IPS</b></td></tr>
+<tr><td><b>Rundes GC9A01</b></td><td>SPI · wie TFT</td><td>240 × 240 Pixel; Rahmen wird oft mitbestellt</td><td>runden Look, Tacho oder Gauge</td></tr>
+<tr><td><b>E-Paper</b></td><td>SPI · VCC · GND · SCK · MOSI · CS · DC · RST · <b>BUSY</b></td><td><b>BUSY</b> meldet, dass der Bildaufbau läuft — nicht früher weiterschreiben</td><td>Batterie/Solar, Bild wechselt selten, Tageslicht</td></tr>
+<tr><td><b>7-Segment TM1637</b></td><td>2 Pins (eigenes Protokoll) · VCC · GND · CLK · DIO</td><td>Sieht aus wie I²C, ist aber keines — eigene Bibliothek nötig</td><td>nur Zahlen, aus Distanz lesbar</td></tr>
+<tr><td><b>MAX7219-Matrix</b></td><td>SPI · VCC · GND · CLK · DIN · CS</td><td>Module lassen sich kaskadieren (DOUT → DIN des nächsten)</td><td>Lauftext, einfarbig</td></tr>
+<tr><td><b>WS2812-Matrix</b></td><td>1 Datenleitung · 5 V · GND · DIN</td><td><b>60 mA je LED</b> bei Weiß — eigene Versorgung, 300–470 Ω in die Datenleitung, 1000 µF am Eingang</td><td>Lauftext oder RGB-Lichteffekte</td></tr>
+<tr><td><b>Nextion</b></td><td>UART · VCC · GND · TX · RX</td><td>TX geht an RX der Gegenseite; Oberfläche wird am PC erstellt</td><td>Touch-Bedienung ohne viel Programmierung</td></tr>
+<tr><td><b>Raspberry Pi</b> mit Monitor/Touch-Display</td><td>HDMI oder DSI</td><td>Mini-Computer statt Mikrocontroller — siehe Karte oben</td><td>volle grafische Oberfläche / Desktop</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Die drei häufigsten Display-Fehler:</b> ① <b>Falsche Logikspannung</b> — viele Module sind reine 3,3-V-Bauteile; das aufgedruckte „5 V" bezieht sich oft nur auf die Versorgung, nicht auf die Datenleitungen. ② <b>Zwei I²C-Geräte mit derselben Adresse</b> — dann antwortet keines sauber; Adressen mit einem I²C-Scanner auslesen (Tab <a class="goto" href="#protokolle">Protokolle</a>). ③ <b>Zu schwache Versorgung</b> — bei Hintergrundbeleuchtung und LED-Matrizen bricht die Spannung ein, das Bild flackert oder das Board startet neu.</div>
+
+<h2>Displays im Vergleich (1 bis 10)</h2>
+<div id="display-rating"></div>
+<p class="note">Höhere Balken bedeuten mehr von der jeweiligen Eigenschaft. "Sparsam" meint geringen Stromverbrauch, "Tempo" die Geschwindigkeit des Bildaufbaus. Grobe Orientierungswerte.</p>
+
+<h2>Motoren &amp; Treiber</h2>
+<p>Die Wahl hängt davon ab, was du brauchst: einfach nur Drehung, kontrollierte <b>Position</b>, viel <b>Kraft</b> oder hohe <b>Drehzahl</b>. Wichtig vorab: Motoren hängen <b>nie direkt</b> am Mikrocontroller-Pin, immer ein Treiber dazwischen (siehe unten).</p>
+<div class="grid2">
+<div class="card"><h3>Gleichstrommotor (Bürstenmotor)</h3>
+<p>Der einfachste Motor: Spannung dran und er dreht. Polung tauschen kehrt die Richtung um, mehr Spannung dreht schneller. Drehzahl regelt man per schnellem An/Aus-Schalten (PWM).</p>
+<p class="note">Ansteuerung: H-Brücke (Richtung) oder MOSFET (nur an/aus) · <b>Gut für:</b> Räder, Lüfter, Pumpen. Schwäche: Bürsten verschleißen, keine Positionskontrolle.</p></div>
+<div class="card"><h3>Getriebemotor</h3>
+<p>Ein Gleichstrommotor mit angebautem Getriebe: <b>langsamer, dafür viel mehr Kraft</b> (Drehmoment).</p>
+<p class="note">Ansteuerung: wie Gleichstrommotor · <b>Gut für:</b> langsame, kräftige Antriebe wie Roboter-Räder, Klappen, Förderbänder.</p></div>
+<div class="card"><h3>Servo</h3>
+<p>Motor, Getriebe und Elektronik in einem Gehäuse. Fährt einen <b>bestimmten Winkel</b> an (meist 0 bis 180°) und hält ihn. Der Winkel wird über die Breite eines Steuerimpulses vorgegeben. Es gibt auch endlos drehende "Continuous"-Servos (dann steuert man Geschwindigkeit statt Winkel).</p>
+<p class="note">Anschluss: 3 Drähte (Plus, Minus, Signal) · <b>Gut für:</b> Lenkung, Greifarme, Kameraschwenk, Klappen. Braucht eine eigene, kräftige Stromversorgung.</p></div>
+<div class="card"><h3>Schrittmotor (Stepper)</h3>
+<p>Dreht in vielen <b>kleinen, exakten Schritten</b> (typisch 200 pro Umdrehung, also 1,8° je Schritt). Damit positioniert er sehr genau und wiederholbar, ganz ohne Rückmeldesensor. Über "Mikroschritte" wird es noch feiner.</p>
+<p class="note">Bauformen: <b>bipolar</b> (4 Drähte, kräftig, am häufigsten), <b>unipolar</b> (5-6 Drähte). Größen nach NEMA, z. B. <b>NEMA17</b> im 3D-Drucker. Der kleine 28BYJ-48 ist günstig, aber schwach.<br><b>Gut für:</b> 3D-Drucker, CNC, Kameraslider, alles mit exakter Position. Schwäche: hält die Position auch im Stillstand und wird dabei warm, kann bei Überlast Schritte verlieren.</p></div>
+<div class="card"><h3>Bürstenloser Motor (BLDC)</h3>
+<p>Kein Bürstenverschleiß, sehr effizient, kräftig und hohe Drehzahl. Dafür braucht er eine aufwändigere Steuerung.</p>
+<p class="note">Ansteuerung: ESC (Motorregler), bekommt ein servoähnliches Steuersignal · <b>Gut für:</b> Drohnen, RC-Modelle, E-Bikes, schnelle effiziente Antriebe. Schwäche: teurer, komplexere Steuerung.</p></div>
+</div>
+
+<h2>Treiber und Steuersignale</h2>
+<p>Ein Mikrocontroller-Pin liefert nur wenige Milliampere, ein Motor will Hunderte bis Tausende. Der Treiber nimmt das schwache Steuersignal und schaltet damit den starken Motorstrom.</p>
+<div class="grid2">
+<div class="card"><h3>H-Brücke (für Gleichstrommotoren)</h3>
+<p>Schaltung, die einen Motor in <b>beide Richtungen</b> drehen lassen kann. Module: <b>L298N</b> (alt, robust, aber ineffizient und wird heiß), <b>TB6612FNG</b> und <b>DRV8833</b> (moderner, effizienter, kühler).</p></div>
+<div class="card"><h3>Schrittmotor-Treiber</h3>
+<p>Bekommt nur zwei Signale: <b>Step</b> (ein Impuls = ein Schritt) und <b>Direction</b> (Richtung). Verbreitet: <b>A4988</b> (Standard, günstig), <b>DRV8825</b> (mehr Strom, feinere Schritte), <b>TMC2209</b> (sehr leise, beliebt in modernen 3D-Druckern). Der Motorstrom wird per kleinem Poti (VREF) eingestellt — siehe Tipp unten.</p></div>
+<div class="card"><h3>ESC (für bürstenlose Motoren)</h3>
+<p>Der Motorregler für BLDC. Bekommt ein servoähnliches Steuersignal und erzeugt daraus die komplexe Ansteuerung. Auf passende Strombelastbarkeit achten.</p></div>
+<div class="card"><h3>Servo (Treiber schon eingebaut)</h3>
+<p>Ein Servo braucht keinen externen Treiber, die Elektronik sitzt schon drin. Es reicht das Steuersignal vom Mikrocontroller plus eine eigene Stromversorgung.</p></div>
+</div>
+
+<h3>Die Steuersignale konkret</h3>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Motorart</th><th>Signal</th><th>Konkrete Werte</th><th>Was das bewirkt</th></tr></thead>
+<tbody>
+<tr><td><b>Gleichstrommotor</b></td><td>PWM + Richtung</td><td>PWM-Frequenz <b>1–20 kHz</b>, Tastgrad 0–100 %</td><td>Tastgrad = Drehzahl. Unter 1 kHz pfeift der Motor hörbar</td></tr>
+<tr><td><b>Servo (Standard)</b></td><td>Impulsbreite</td><td>Periode <b>20 ms</b> (50 Hz) · Impuls <b>1,0 ms</b> = 0° · <b>1,5 ms</b> = Mitte · <b>2,0 ms</b> = 180°</td><td>Nur die <b>Breite</b> zählt, nicht die Amplitude. Viele Servos gehen etwas darüber hinaus (0,5–2,5 ms)</td></tr>
+<tr><td><b>Continuous-Servo</b></td><td>Impulsbreite</td><td>1,5 ms = Stillstand, darunter/darüber = Drehrichtung und Tempo</td><td>Mittelstellung muss oft per Poti getrimmt werden</td></tr>
+<tr><td><b>Schrittmotor</b></td><td>Step + Direction</td><td>Ein Impuls = ein (Mikro-)Schritt · Richtung als High/Low</td><td>Drehzahl = Impulsrate. Zu schnelle Beschleunigung lässt Schritte verlieren</td></tr>
+<tr><td><b>Schrittmotor: Mikroschritte</b></td><td>Jumper am Treiber</td><td>1/1 · 1/2 · 1/4 · 1/8 · 1/16 · 1/32</td><td>Feiner und leiser, aber weniger Haltemoment je Schritt und mehr Impulse nötig</td></tr>
+<tr><td><b>BLDC über ESC</b></td><td>wie Servo</td><td>1,0 ms = Stopp · 2,0 ms = Vollgas</td><td>Vor dem ersten Start muss der ESC oft <b>kalibriert</b> werden (Vollgas–Stopp anlernen)</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Schrittmotorstrom einstellen (VREF):</b> Bei den gängigen Treibern gilt <span class="formula">I<sub>max</sub> = V<sub>REF</sub> / (8 × R<sub>sense</sub>)</span> — der Sense-Widerstand steht auf dem Modul (typisch 0,1 Ω). Vorgehen: Motorstrom aus dem Datenblatt nehmen, <b>70–80 %</b> davon als Ziel setzen, Treiber ohne Motor mit Strom versorgen und die Spannung am Poti gegen Masse messen. Zu hoch eingestellt werden Motor und Treiber heiß, zu niedrig verliert er Schritte unter Last.</div>
+
+<h3>Worauf achten</h3>
+<div class="card">
+<div class="rule"><span class="ico">🚫</span><div><b>Nie direkt am Mikrocontroller-Pin.</b> Immer ein Treiber dazwischen, sonst stirbt der Pin am zu hohen Strom.</div></div>
+<div class="rule"><span class="ico">🔋</span><div><b>Eigene Stromversorgung für den Motor.</b> Motoren ziehen viel und erzeugen Störungen. Die Logik (Mikrocontroller) sollte nicht aus derselben Leitung gespeist werden.</div></div>
+<div class="rule"><span class="ico">🔗</span><div><b>Gemeinsame Masse.</b> Motor-Versorgung und Steuer-Elektronik müssen ihre Masse (Minus) miteinander verbinden, sonst kommt das Steuersignal nicht an.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Anlauf- und Blockierstrom einplanen.</b> Beim Start oder wenn er blockiert, zieht ein Motor ein Vielfaches des normalen Stroms. Treiber und Netzteil danach auslegen, nicht nach dem Nennstrom.</div></div>
+<div class="rule"><span class="ico">🌡️</span><div><b>Treiber kühlen.</b> A4988, DRV8825 und L298N werden warm bis heiß. Kühlkörper aufkleben und für Luft sorgen.</div></div>
+<div class="rule"><span class="ico">⚙️</span><div><b>Freilaufdiode.</b> Bei einfachen Schaltungen mit MOSFET nötig. Fertige Treiber-Module haben den Schutz meist schon eingebaut.</div></div>
+</div>
+
+<h2>Vergleich &amp; Auswahlhilfe: welcher Motor?</h2>
+<div id="motor-rating"></div>
+<p class="note">Höhere Balken bedeuten mehr von der jeweiligen Eigenschaft. "Einfachheit" meint, wie leicht die Ansteuerung ist, "Günstig" wie preiswert. Grobe Orientierungswerte, keine Labormessung.</p>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Du brauchst…</th><th>Empfehlung</th></tr></thead>
+<tbody>
+<tr><td>einfache Drehung, Tempo/Richtung grob</td><td><b>Gleichstrommotor</b> + H-Brücke</td></tr>
+<tr><td>viel Kraft bei wenig Drehzahl</td><td><b>Getriebemotor</b></td></tr>
+<tr><td>einen festen Winkel anfahren und halten</td><td><b>Servo</b></td></tr>
+<tr><td>exakte, wiederholbare Position (3D-Druck, CNC)</td><td><b>Schrittmotor</b> + A4988/TMC2209</td></tr>
+<tr><td>möglichst leisen Schrittmotorbetrieb</td><td>Schrittmotor + <b>TMC2209</b></td></tr>
+<tr><td>hohe Drehzahl, effizient (Drohne, RC)</td><td><b>BLDC</b> + ESC</td></tr>
+</tbody>
+</table></div>
+
+<h2>Mikrocontroller-Boards</h2>
+<p>Ein Mikrocontroller ist ein kompletter Mini-Computer auf einem einzigen Chip: Rechenkern, Speicher und Anschlüsse in einem. Er läuft <b>ohne Betriebssystem</b> und führt direkt dein eines Programm aus, immer und immer wieder. Damit liest er Sensoren, trifft Entscheidungen und steuert Ausgänge — das Herzstück fast jedes Projekts.</p>
+<div class="card">
+<h3>Wichtige Abgrenzung: Mikrocontroller vs. Raspberry Pi</h3>
+<p style="margin-bottom:0">Der große <b>Raspberry Pi</b> (Modell B, Zero usw.) ist <b>kein</b> Mikrocontroller, sondern ein kleiner Linux-Computer mit Betriebssystem, Bildschirmanschluss und vielen Programmen gleichzeitig. Ein Mikrocontroller (Arduino, ESP32, Pico) macht dagegen <b>eine</b> Sache zuverlässig und in Echtzeit, startet sofort und braucht kaum Strom. Für Steuern und Messen nimmt man den Mikrocontroller, für Desktop, Browser oder Kamera-Software den Pi.</p>
+</div>
+<div class="grid2">
+<div class="card"><h3>Arduino Uno / Nano</h3>
+<p>Der Klassiker für den Einstieg. Einfach, extrem gut dokumentiert, riesige Bibliothek- und Zubehör-Welt. Läuft mit <b>5 V</b> Logik (robust gegenüber Störungen). Schwächen: wenig Rechenleistung, kein Funk an Bord.</p>
+<p class="note">Neuer: <b>Uno R4</b> mit deutlich mehr Leistung (32-Bit) und einer WiFi-Variante. <b>Gut für:</b> Lernen, einfache Sensor- und Schaltprojekte.</p></div>
+<div class="card"><h3>ESP32</h3>
+<p>Der Allrounder mit <b>WLAN und Bluetooth an Bord</b>. Zwei Rechenkerne bis 240 MHz, viel Speicher, reiche Anschlüsse. Läuft mit <b>3,3 V</b>. Sehr günstig. Quasi Standard für alles Vernetzte.</p>
+<p class="note">Varianten: <b>S3</b> (mehr Leistung, KI-Beschleunigung), <b>C3</b> (klein, günstig, RISC-V), <b>C6</b> (WiFi 6, Thread/Zigbee). <b>Gut für:</b> smarte Geräte, Sensoren mit App-Anbindung, Heimautomatisierung.</p></div>
+<div class="card"><h3>ESP8266</h3>
+<p>Der ältere, kleinere Bruder des ESP32: nur WLAN, ein Kern, sehr billig. 3,3 V. Für reine WLAN-Aufgaben ohne Bluetooth immer noch beliebt.</p>
+<p class="note"><b>Gut für:</b> günstige WLAN-Schalter und -Sensoren, wenn die volle ESP32-Leistung nicht nötig ist.</p></div>
+<div class="card"><h3>Raspberry Pi Pico / Pico 2</h3>
+<p>Sehr günstig, sparsam und einsteigerfreundlich, besonders mit Python. Der <b>Pico 2</b> (RP2350) hat zwei kräftigere Kerne, doppelt so viel Speicher und rechnet auch mit Kommazahlen schnell. Läuft mit 3,3 V. Die <b>W</b>-Varianten haben WLAN und Bluetooth.</p>
+<p class="note">Besonderheit: programmierbare Ein-/Ausgänge (PIO) für eigene, exakte Signalprotokolle. <b>Gut für:</b> stromsparende Projekte, Python-Einstieg, präzise Signalsteuerung.</p></div>
+<div class="card"><h3>STM32 ("Blue Pill" &amp; Co.)</h3>
+<p>Leistungsstarke ARM-Controller mit sehr präzisen Anschlüssen (Messen, Zeitsteuerung). Skalierbare Familie, lange lieferbar. Kein Funk an Bord, und die Lernkurve ist steiler.</p>
+<p class="note"><b>Gut für:</b> anspruchsvolle Steuerungen, Motorregelung, Robotik, alles wo Präzision und Tempo zählen.</p></div>
+<div class="card"><h3>Spezialisten (gut zu wissen)</h3>
+<p><b>Teensy</b>: sehr schnell, top für Audio. <b>nRF52840</b>: Bluetooth-Spezialist, extrem stromsparend. <b>ATtiny</b>: winziger Chip für ganz kleine Aufgaben. Greift man, wenn ein Standard-Board nicht passt.</p></div>
+</div>
+
+<h2>Pins, Speicher, Programmierung</h2>
+<h3>Pin-Grundlagen</h3>
+<div class="card">
+<div class="rule"><span class="ico">🔲</span><div><b>GPIO (digitale Pins):</b> können HIGH (an) oder LOW (aus) sein. Damit liest du Taster oder schaltest LEDs, Transistoren usw.</div></div>
+<div class="rule"><span class="ico">📈</span><div><b>Analoge Eingänge (ADC):</b> messen eine Spannung als Zahlwert, z. B. von einem Poti oder Sensor. Nicht jeder Pin kann das.</div></div>
+<div class="rule"><span class="ico">〰️</span><div><b>PWM-Ausgänge:</b> schnelles An/Aus, um Helligkeit, Drehzahl oder Servowinkel stufenlos zu steuern.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Logikpegel 3,3 V vs. 5 V:</b> der wichtigste Stolperstein. ESP32 und Pico vertragen an ihren Pins <b>nur 3,3 V</b>. 5 V von einem Arduino oder Sensor direkt drauf kann den Pin zerstören. Dann Pegelwandler oder Spannungsteiler nutzen.</div></div>
+<div class="rule"><span class="ico">🔌</span><div><b>Pin-Strom ist begrenzt:</b> mit ~20 mA pro Pin planen, 40 mA ist das absolute Maximum. Motoren, LED-Streifen oder Relais nie direkt anschließen, immer über Transistor/MOSFET oder Treiber (Schaltung: Tab <a href="#schaltplan">Schaltplan</a>).</div></div>
+<div class="rule"><span class="ico">🔗</span><div><b>I²C, SPI, UART</b> sind die Datenleitungen zu Displays, Sensoren und Modulen — vollständig im Tab <a href="#protokolle">Protokolle &amp; Busse</a>. Gemeinsame Masse nicht vergessen.</div></div>
+</div>
+
+<h3>Sonderpins: die, die dich überraschen</h3>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Pin-Typ</th><th>Besonderheit</th><th>Konsequenz</th></tr></thead>
+<tbody>
+<tr><td><b>Boot-/Strapping-Pins</b></td><td>Ihr Zustand <b>beim Einschalten</b> entscheidet über den Startmodus</td><td>Nichts anhängen, was sie beim Start nach Low oder High zieht — sonst startet das Board nicht oder landet im Flash-Modus</td></tr>
+<tr><td><b>Nur-Eingang-Pins</b></td><td>Können nicht als Ausgang arbeiten, haben oft <b>keinen</b> internen Pull-up</td><td>Externer Pull-up nötig; als Ausgang schlicht wirkungslos</td></tr>
+<tr><td><b>Pins mit ADC 2</b> (ESP32)</td><td>Nicht nutzbar, solange WLAN aktiv ist</td><td>Analoge Messungen auf die erste ADC-Einheit legen</td></tr>
+<tr><td><b>Pins der internen Flash-Anbindung</b></td><td>Fest mit dem Speicherchip verbunden</td><td>Berühren führt zum sofortigen Absturz — im Pinout als „nicht verwenden" markiert</td></tr>
+<tr><td><b>Pins mit LED oder Pull-up on board</b></td><td>Auf dem Board bereits beschaltet</td><td>Der Ruhezustand ist dadurch vorgegeben</td></tr>
+<tr><td><b>Open-Drain-fähige Pins</b></td><td>Können nur nach Low ziehen</td><td>Nötig für I²C und geteilte Interrupt-Leitungen</td></tr>
+<tr><td><b>DAC-Pins</b></td><td>Geben eine echte analoge Spannung aus (nicht PWM)</td><td>Nur wenige Controller haben sie, meist 8 Bit</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Der Pinout-Plan des konkreten Boards ist Pflichtlektüre</b>, bevor du Pins verteilst. „GPIO 12" bedeutet auf zwei Boards mit demselben Chip nicht dasselbe, und die Sonderpins unterscheiden sich je Variante. Ein Board, das nach dem Anschließen eines Sensors nicht mehr startet, hat fast immer ein Strapping-Pin-Problem.</div>
+
+<h3>Board-Begriffe der Mikrocontroller-Welt</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Begriff</th><th>Was es ist</th><th>Wofür du es brauchst</th></tr></thead>
+<tbody>
+<tr><td><b>Interrupt</b></td><td>Ein Ereignis unterbricht das laufende Programm und ruft sofort eine kurze Routine auf</td><td>Für alles, was <b>nicht warten</b> darf: Drehgeber, Zähleingänge, Aufwachen aus dem Schlaf</td></tr>
+<tr><td><b>Timer</b></td><td>Zähler im Chip, der unabhängig vom Programm läuft</td><td>Erzeugt PWM, misst Zeiten, löst regelmäßige Aufgaben aus</td></tr>
+<tr><td><b>Watchdog</b></td><td>Zähler, der das Board zurücksetzt, wenn das Programm ihn nicht regelmäßig zurücksetzt</td><td>Rettet hängende Geräte automatisch — bei Dauerbetrieb einschalten</td></tr>
+<tr><td><b>Brown-out-Reset</b></td><td>Reset, wenn die Versorgungsspannung unter eine Schwelle fällt</td><td>Verhindert undefiniertes Verhalten bei schwacher Versorgung</td></tr>
+<tr><td><b>Bootloader</b></td><td>Kleines Programm im Chip, das neuen Code über USB oder UART entgegennimmt</td><td>Deshalb reicht ein USB-Kabel zum Programmieren — kein Programmiergerät nötig</td></tr>
+<tr><td><b>Deep Sleep</b></td><td>Fast alles wird abgeschaltet, nur ein Weckmechanismus bleibt aktiv</td><td>Batteriebetrieb: statt einigen mA nur noch µA. Aufwecken per Timer oder Pin</td></tr>
+<tr><td><b>Firmware flashen</b></td><td>Programm in den Flash-Speicher schreiben</td><td>Per USB (Bootloader), UART oder Debug-Schnittstelle (<a href="#protokolle">SWD/JTAG</a>)</td></tr>
+<tr><td><b>Pin-Multiplexing</b></td><td>Ein Pin kann mehrere Funktionen haben, aber nur eine gleichzeitig</td><td>Deshalb kollidieren manche Kombinationen aus I²C, SPI und PWM</td></tr>
+</tbody>
+</table></div>
+<p class="note">Allgemeine Speicher- und Elektronik-Begriffe (SRAM, EEPROM, RTOS, DMA &amp; Co.) sammelt der Tab <a href="#begriffe">Fachbegriffe</a>, die ADC-Beschaltung samt Auflösung der Tab <a href="#signale">Signale</a>.</p>
+
+<h3>Speicher &amp; Stromversorgung kurz</h3>
+<div class="card"><p style="margin-bottom:0"><b>Flash vs. RAM:</b> Flash ist der dauerhafte Programmspeicher (dein Code bleibt nach dem Ausschalten), RAM der flüchtige Arbeitsspeicher während des Laufens — mehr von beidem erlaubt größere Programme und mehr Daten. <b>Versorgung:</b> meist über USB, oder über einen <b>VIN</b>-Pin mit etwas höherer Spannung, die ein Regler auf dem Board herunterregelt. Es gibt auch einen 3,3-V- oder 5-V-Pin zur Versorgung von Modulen — Pin-Spannung des Boards beachten.</p></div>
+
+<h3>Womit programmiert man?</h3>
+<div class="card">
+<div class="rule"><span class="ico">🅰️</span><div><b>Arduino IDE</b> (Sprache C/C++): der mit Abstand gängigste Einstieg, läuft für fast alle Boards inklusive ESP32 und Pico. Riesige Bibliotheks-Auswahl.</div></div>
+<div class="rule"><span class="ico">🐍</span><div><b>MicroPython / CircuitPython</b> (Sprache Python): einsteigerfreundlich, schnelles Ausprobieren, besonders beliebt auf Pico und ESP32.</div></div>
+<div class="rule"><span class="ico">🛠️</span><div><b>PlatformIO</b>: komfortable Profi-Umgebung für größere Projekte. <b>ESP-IDF</b>: das tiefe Entwicklerwerkzeug speziell für ESP32.</div></div>
+</div>
+
+<h2>Vergleich &amp; Auswahlhilfe: welches Board?</h2>
+<div id="mcu-rating"></div>
+<p class="note">"Funk" meint WLAN/Bluetooth an Bord, "Sparsam" den Stromverbrauch, "Community" die Menge an Anleitungen und fertigen Bibliotheken. Höher ist mehr. Grobe Orientierung.</p>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Du willst…</th><th>Empfehlung</th></tr></thead>
+<tbody>
+<tr><td>einfach lernen, simple Projekte</td><td><b>Arduino Uno / Nano</b></td></tr>
+<tr><td>WLAN/Bluetooth, App-Anbindung, smart</td><td><b>ESP32</b></td></tr>
+<tr><td>günstiger reiner WLAN-Schalter/-Sensor</td><td><b>ESP8266</b> oder ESP32-C3</td></tr>
+<tr><td>stromsparend, Python, sehr günstig</td><td><b>Raspberry Pi Pico 2 (W)</b></td></tr>
+<tr><td>hohe Präzision, Motorregelung, Tempo</td><td><b>STM32</b></td></tr>
+<tr><td>volle GUI, Linux, Browser, Kamera</td><td><b>Raspberry Pi</b> (Mini-Computer, kein MCU)</td></tr>
+</tbody>
+</table></div>
