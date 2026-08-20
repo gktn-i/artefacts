@@ -14,8 +14,8 @@
   --danger-bg:#fef4f4; --danger-border:#e24b4a; --danger-ink:#791f1f;
   --radius:12px; --radius-sm:8px; --radius-xs:6px;
   --shadow-sm:0 1px 2px rgba(16,24,40,.05);
-  --display:'Fraunces',Georgia,serif;
-  --sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --display:'Archivo','Helvetica Neue',sans-serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   --mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace;
 }
 @media(prefers-color-scheme:dark){
