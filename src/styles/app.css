@@ -277,18 +277,64 @@ kbd {
   font-weight: 600;
 }
 
-/* Abschnitte des aktiven Moduls — direkt im Baum, vom Hash-Router bedient */
-.secnav { margin: 2px 0 6px 11px; padding-left: 9px; border-left: 1px solid var(--border-strong); }
+/* --- Modul-Panel: eigene, abgesetzte Zone unter der Bibliothek ----------- */
+.tree-label.ml { margin-top: 20px; }
+.railmod {
+  margin: 0 1px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.rm-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  background: color-mix(in srgb, var(--c) 6%, var(--surface));
+  border-bottom: 1px solid var(--border);
+}
+.rm-ic {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font-size: 17px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--c) 13%, transparent);
+}
+.rm-tx { min-width: 0; }
+.rm-hub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--faint);
+  text-decoration: none;
+}
+.rm-hub:hover { color: var(--c); }
+.rm-name {
+  font: 600 14.5px/1.25 var(--ui);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Abschnitte des aktiven Moduls — vom Hash-Router bedient */
+.secnav { padding: 5px 7px 9px; }
 .secnav .gl {
   font: 600 10.5px/1 var(--ui);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--faint);
-  margin: 10px 7px 4px;
+  margin: 6px 8px 5px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
 }
+.secnav > .gl:first-child { margin-top: 2px; padding-top: 6px; border-top: 0; }
 .secnav a[data-h] {
   display: block;
-  padding: 5px 9px;
+  padding: 5.5px 9px;
   border-radius: 6px;
   font-size: 13px;
   line-height: 1.45;
@@ -297,25 +343,25 @@ kbd {
 .secnav a[data-h]:hover { background: var(--surface-2); color: var(--text); }
 .secnav a[data-h].on {
   color: var(--text);
-  background: color-mix(in srgb, var(--hx, var(--c)) 14%, transparent);
+  background: color-mix(in srgb, var(--c) 13%, transparent);
   font-weight: 600;
 }
 .secnav .sub {
-  margin: 2px 0 7px 10px;
-  padding-left: 9px;
-  border-left: 1px dashed var(--border-strong);
+  margin: 3px 4px 8px 13px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border);
 }
 .secnav .sub a {
   display: block;
-  padding: 4px 8px;
+  padding: 3.5px 8px;
   border-radius: 5px;
-  font-size: 12.5px;
+  font-size: 12px;
   line-height: 1.45;
-  color: var(--muted);
+  color: var(--faint);
   text-decoration: none;
 }
 .secnav .sub a:hover { color: var(--text); background: var(--surface-2); }
-.secnav .sub a.on { color: var(--text); background: var(--surface-2); font-weight: 600; }
+.secnav .sub a.on { color: var(--c); font-weight: 600; }
 .secnav .sub a.lv3 { padding-left: 17px; }
 .secnav .sub a.lv4 { padding-left: 26px; }
 
