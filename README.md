@@ -4,45 +4,67 @@ Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab und Fotografie —
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 30 Module sind native Astro-Module — es gibt keine HTML-Monolithen mehr,
-und alle Inhalte werden server-gerendert, damit die Volltextsuche sie findet
-und die Seiten auch ohne JavaScript vollständig lesbar sind.
+Alle 30 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
+vollständig lesbar sind.
+
+## Die Werkbank-Shell
+
+Die UI ist als **ein zusammenhängender Hub** gebaut, nicht als Seiten-Stapel:
+
+- **Navigations-Rail** (links, auf jeder Seite identisch): der komplette Baum
+  Hubs → Module → Abschnitte. Der aktive Hub ist aufgeklappt, beim aktiven
+  Modul hängen dessen Abschnitte samt Gruppen und Überschriften-Subnav direkt
+  im Baum. Auf Mobilgeräten wird die Rail zur Schublade.
+- **Topbar**: Brotkrumen (inkl. aktivem Abschnitt) + Suche.
+- **Suchpalette (⌘K oder `/`)**: Registry-Treffer sofort, Pagefind-Volltext
+  nachgeladen.
+- **Startseite** ist ein Schaltpult: Suche, Hub-Kacheln, Modulverzeichnis,
+  letzte Aktualisierungen — kein Blockstapel.
+- Links werden per Hover vorgeladen (`prefetch` in `astro.config.mjs`),
+  Seitenwechsel fühlen sich wie Panelwechsel an.
+
+Design-System: warme Papier-/Kohle-Töne (hell/dunkel folgt dem System),
+Schrift **Fraunces** (Display) · **Instrument Sans** (UI) · **IBM Plex Mono**
+(Daten). Alle Tokens liegen in `src/styles/app.css`.
 
 ## Struktur
 
 ```
 src/data/registry.json     EINZIGE Datenquelle: Hubs → Bereiche → Module → Abschnitte
-                           (inkl. groups für die Sidebar, alias für alte Anker,
-                           related für Quervernetzung)
+                           (inkl. groups für die Abschnitts-Navigation, alias für
+                           alte Anker, related für Quervernetzung)
 src/content/<modul>/       Inhalte: eine .astro-Datei pro Abschnitt
                            + optional _style.css (modulspezifisches, gescopetes CSS)
-src/pages/index.astro      Startseite
-src/pages/[slug].astro     Hub-Seiten + Modulseiten (URL bleibt <name>.html)
-src/layouts/, components/  Base-Layout, Chrome-Leiste, Hub-Karte, CutsSection
-src/styles/site.css        Design-Tokens, Hub-/Modul-Layout, Content-System
+src/pages/index.astro      Startseite (Schaltpult)
+src/pages/[slug].astro     Hub-Panels + Modulseiten (URL bleibt <name>.html)
+src/layouts/Base.astro     Werkbank-Shell (Rail + Topbar + Inhalt)
+src/components/            Rail, Topbar, CutsSection
+src/styles/app.css         Design-Tokens, Shell, Palette, Dashboard, Panels,
+                           Modul-Workspace, Content-System (.mx-sys)
 public/assets/mod-<id>.js  Funktions-JS einzelner Module (Rechner, Tabellen, Folds)
 public/assets/palette.js   globale Suche (⌘K): Registry-Treffer + Pagefind-Volltext
-public/assets/chrome.css   Kopfleiste + Palette (gemeinsames Chrome)
 ```
 
-Drei Ebenen: **Index → Hub → Modul.**
+Drei Ebenen: **Übersicht → Hub → Modul** — aber alle drei sind jederzeit über
+die Rail erreichbar.
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video —
 zusammen 30 Module mit 298 Abschnitten.
 
 ## Wie ein Modul funktioniert
 
-- **Registry-Eintrag** bestimmt Name, Hub, Abschnitte (`sections`), Sidebar-Gruppen
+- **Registry-Eintrag** bestimmt Name, Hub, Abschnitte (`sections`), Gruppen
   (`groups`), Anker-Aliase (`alias`) und Quervernetzung (`related`).
 - **Ein Abschnitt = eine Datei** unter `src/content/<id>/<hash>.astro`. Der Build
   bricht ab, wenn Registry und Dateien auseinanderlaufen.
-- **Layout liefert:** Chrome-Leiste, Abschnitts-Sidebar mit Überschriften-Subnav und
-  Scrollspy, Hash-Router (`<name>.html#<hash>`, auch `#abschnitt--überschrift`),
-  mobile Schublade, Verwandt-/Nachbar-Leisten, Dark/Light.
+- **Shell liefert:** Rail mit Abschnitts-Navigation, Überschriften-Subnav mit
+  Scrollspy, Hash-Router (`<name>.html#<hash>`, auch `#abschnitt--überschrift`
+  und Alt-Anker über `alias`), Abschnitts-Pager, Verwandt-Leisten, Dark/Light.
 - **Modul-Verhalten** (Rechner, sortierbare Tabellen, Filter, Faltabschnitte) liegt in
   `public/assets/mod-<id>.js` und wird über die `PAGE_SCRIPTS`-Map in
   `src/pages/[slug].astro` eingebunden.
 - **Modul-Design:** `_style.css` im Content-Ordner, alles unter `.mx-<id>` gescoped —
-  kollidiert mit nichts. Kleine Module kommen ganz ohne aus (Content-System in site.css).
+  kollidiert mit nichts. Kleine Module kommen ganz ohne aus (Content-System in app.css).
 - **Gemeinsame Stylesheets über Modulgrenzen hinweg** sind möglich: `[slug].astro`
   hängt bei Bedarf eine zweite Klasse an den Content-Container (`mx-sys` für die
   Küche, `mx-mecha` für den Mechatronik-Hub und die Technik-Module der Werkstatt,
@@ -57,8 +79,8 @@ zusammen 30 Module mit 298 Abschnitten.
   server-gerendert und im JS nur gefiltert und sortiert. Nur so landen sie im
   Pagefind-Index und funktionieren ohne JavaScript.
 
-Neues Modul: Registry-Eintrag + Content-Ordner. Index, Hub-Seite, Breadcrumb, Suche
-und Verwandt-Links ziehen automatisch nach.
+Neues Modul: Registry-Eintrag + Content-Ordner. Rail, Verzeichnis, Hub-Panel,
+Brotkrumen, Suche und Verwandt-Links ziehen automatisch nach.
 
 ## Arbeiten
 
@@ -72,6 +94,4 @@ npm run preview
 **Suche (⌘K):** Registry-Treffer (Hubs/Module/Abschnitte) sofort, Volltext aus dem
 Pagefind-Index nachgeladen. Nur `dist` nach `npm run build` enthält den Index.
 
-**Keine externen Abhängigkeiten zur Laufzeit** außer Google Fonts: der frühere
-React/Babel/Tailwind-CDN-Explorer (Cuts Atlas) ist server-gerendert neu gebaut
-(`src/components/CutsSection.astro` + `src/content/cuts-atlas/_data.json`).
+**Keine externen Abhängigkeiten zur Laufzeit** außer Google Fonts.

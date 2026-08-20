@@ -1,7 +1,7 @@
 ---
 /* ============================================================================
    Eine dynamische Route für zwei Seitentypen:
-     · Hub-Seiten   (hub-werkstatt.html, hub-kueche.html, …)
+     · Hub-Panels   (hub-werkstatt.html, hub-kueche.html, …)
      · native Module (koch-basics.html, …) — deren Inhalte liegen als
        src/content/<modul-id>/<abschnitt-hash>.astro
 
@@ -10,7 +10,6 @@
    deckungsgleich sind — läuft etwas auseinander, bricht er ab.
    ========================================================================== */
 import Base from "../layouts/Base.astro";
-import HubCard from "../components/HubCard.astro";
 import { hubs, moduleById, hubById, relatedOf, fmtDate } from "../lib/registry.mjs";
 
 export function getStaticPaths() {
@@ -50,17 +49,8 @@ if (mod) {
 }
 
 const related = relatedOf(id).filter((m) => !mod || m.id !== mod.id);
-const SHOWN = 8;
 const title = mod ? `${mod.name} · ${hub.name} · Artefakte` : `${hub.name} · Artefakte`;
 const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
-
-/* Sidebar-Gliederung: Gruppen aus der Registry oder eine flache Liste. */
-const secTitle = (h: string) => mod.sections.find((s: any) => s.h === h)?.t || h;
-const navGroups = mod
-  ? mod.groups
-    ? mod.groups.map((g: any) => ({ label: g.l, hashes: g.sections }))
-    : [{ label: null, hashes: mod.sections.map((s: any) => s.h) }]
-  : [];
 
 /* Zusatz-Skript des Moduls (Rechner, Tabellen-Builder, Folds …). */
 /* Werkstatt-Module, die das gemeinsame Technik-Design und -Skript mitbenutzen.
@@ -100,199 +90,172 @@ const PAGE_SCRIPTS: Record<string, string> = {
 };
 const pageScript = mod ? PAGE_SCRIPTS[mod.id] : undefined;
 const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
+const pad = (n: number) => String(n + 1).padStart(2, "0");
 ---
 
 <Base title={title} description={desc} hub={hub} mod={mod}>
   {
-    /* ================================ HUB-SEITE ================================ */
+    /* ================================ HUB-PANEL ================================ */
     !mod && (
-      <>
-        <header class="hero">
-          <div class="wrap">
-            <div class="kicker">{hub.tagline}</div>
-            <h1><span class="ic">{hub.icon}</span>{hub.name}</h1>
-            <p class="lead">{hub.desc}</p>
-            <button class="bigsearch" type="button" data-hbx-search>
-              <span aria-hidden="true">🔍</span>
-              <span class="t">In diesem Hub und allen anderen suchen …</span>
-              <span class="k">⌘K</span>
-            </button>
-            <div class="stats">
-              <span><b>{hub.modules.length}</b> Module</span>
-              <span><b>{hub.sectionCount}</b> Abschnitte</span>
-              <span><b>{hub.areas.length}</b> Bereiche</span>
-              <span>zuletzt <b>{fmtDate(hub.updated)}</b></span>
-            </div>
-            <nav class="jump" aria-label="Bereiche">
-              {hub.areas.map((ar) => (
-                <a href={`#a-${ar.id}`}>{ar.name} <span class="ct">{ar.modules.length}</span></a>
-              ))}
-            </nav>
-          </div>
+      <div class="panel">
+        <header class="panel-head">
+          <span class="badge" aria-hidden="true">{hub.icon}</span>
+          <h1>{hub.name}</h1>
+          <div class="tagline">{hub.tagline}</div>
         </header>
+        <p class="desc">{hub.desc}</p>
 
-        <main>
-          <div class="wrap">
-            {hub.areas.map((ar) => (
-              <section class="area" id={`a-${ar.id}`}>
-                <div class="area-head">
-                  <h2>{ar.name}</h2>
-                  <span class="ct">{ar.modules.length} Module</span>
-                </div>
-                <p class="d">{ar.desc}</p>
-                <div class="modgrid">
-                  {ar.modules.map((m) => (
-                    <article class="mod">
-                      <div class="hd">
-                        <span class="ic">{m.icon}</span>
-                        <h3><a href={m.file}>{m.name}</a></h3>
-                        <span class="kind">{m.kind}</span>
-                      </div>
-                      <p>{m.desc}</p>
-                      {m.sections.length > 0 && (
-                        <div class="secs">
-                          {m.sections.slice(0, SHOWN).map((s) => (
-                            <a href={`${m.file}#${s.h}`}>{s.t}</a>
-                          ))}
-                          {m.sections.length > SHOWN && (
-                            <>
-                              <span class="rest" style="display:none">
-                                {m.sections.slice(SHOWN).map((s) => (
-                                  <a href={`${m.file}#${s.h}`}>{s.t}</a>
-                                ))}
-                              </span>
-                              <button type="button" data-more>+{m.sections.length - SHOWN} weitere</button>
-                            </>
-                          )}
-                        </div>
-                      )}
-                      <div class="foot">
-                        <span>{m.sections.length ? `${m.sections.length} Abschnitte` : "Einzelseite"}</span>
-                        <span>{fmtDate(m.updated)}</span>
-                        <a class="open" href={m.file}>öffnen →</a>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
+        <div class="statline">
+          <span><b>{hub.modules.length}</b> Module</span>
+          <span><b>{hub.sectionCount}</b> Abschnitte</span>
+          <span><b>{hub.areas.length}</b> Bereiche</span>
+          <span>zuletzt <b>{fmtDate(hub.updated)}</b></span>
+        </div>
 
-          <section class="blk">
-            <div class="wrap">
-              <div class="eyebrow">Andere Hubs</div>
-              <div class="hubgrid">
-                {hubs.filter((h) => h.id !== hub.id).map((h) => <HubCard hub={h} />)}
-              </div>
+        <nav class="areajump" aria-label="Bereiche">
+          {hub.areas.map((ar) => (
+            <a href={`#a-${ar.id}`}>{ar.name} <span class="ct">{ar.modules.length}</span></a>
+          ))}
+        </nav>
+
+        {hub.areas.map((ar) => (
+          <section class="areasec" id={`a-${ar.id}`}>
+            <div class="ah">
+              <h2>{ar.name}</h2>
+              <span class="ct">{ar.modules.length} Module</span>
+              <span class="ln"></span>
+            </div>
+            <p class="d">{ar.desc}</p>
+            <div class="modrows">
+              {ar.modules.map((m) => (
+                <article class="modrow">
+                  <span class="ic" aria-hidden="true">{m.icon}</span>
+                  <div class="hd">
+                    <a class="name" href={m.file}>{m.name}</a>
+                    <span class="kind">{m.kind}</span>
+                  </div>
+                  <div class="meta">
+                    {m.sections.length ? `${m.sections.length} Abschnitte` : "Einzelseite"}<br />
+                    {fmtDate(m.updated)} <span class="ar">→</span>
+                  </div>
+                  <p class="ds">{m.desc}</p>
+                  {m.sections.length > 0 && (
+                    <details class="secfold">
+                      <summary>
+                        <svg class="chev" width="8" height="8" viewBox="0 0 10 10" aria-hidden="true">
+                          <path d="M3 1.5 7 5l-4 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        Abschnitte zeigen
+                      </summary>
+                      <div class="chips">
+                        {m.sections.map((s) => (
+                          <a href={`${m.file}#${s.h}`}>{s.t}</a>
+                        ))}
+                      </div>
+                    </details>
+                  )}
+                </article>
+              ))}
             </div>
           </section>
-        </main>
+        ))}
 
-        <script is:inline>
-          /* Abschnitts-Chips aufklappen */
-          document.addEventListener("click", function (e) {
-            var b = e.target.closest("[data-more]");
-            if (!b) return;
-            var rest = b.parentElement.querySelector(".rest");
-            if (rest) rest.style.display = "contents";
-            b.remove();
-          });
-        </script>
-      </>
+        <div class="rowlabel" style="margin-top:40px">
+          <h2>Andere Hubs</h2>
+          <span class="ln"></span>
+        </div>
+        <div class="hubstrip">
+          {hubs.filter((h) => h.id !== hub.id).map((h) => (
+            <a class="hx" href={h.file} style={`--hcl:${h.accent.l};--hcd:${h.accent.d}`}>
+              <span aria-hidden="true">{h.icon}</span>
+              <span>{h.name}</span>
+              <span class="ct">{h.modules.length} Module</span>
+            </a>
+          ))}
+        </div>
+      </div>
     )
   }
 
   {
     /* =============================== MODUL-SEITE =============================== */
     mod && (
-      <div class="mlay">
-        <aside class="msd" id="msd">
-          <div class="msd-head">
-            <span class="ic">{mod.icon}</span>
-            <div>
-              <div class="nm">{mod.name}</div>
-              <div class="kd">{mod.kind} · {hub.icon} {hub.name}</div>
-            </div>
+      <div class="work">
+        <header class="work-head">
+          <span class="badge" aria-hidden="true">{mod.icon}</span>
+          <h1>{mod.name}</h1>
+          <div class="sub">
+            <span>{mod.kind}</span>
+            <a href={hub.file}>{hub.icon} {hub.name}</a>
+            <span>{mod.sections.length} Abschnitte</span>
+            <span>Stand {fmtDate(mod.updated)}</span>
           </div>
-          <nav class="msd-nav" id="msdNav" aria-label="Abschnitte">
-            {navGroups.map((g, gi) => (
-              <>
-                {g.label && <div class="msd-gl">{g.label}</div>}
-                {g.hashes.map((h: string, i: number) => (
-                  <a href={`#${h}`} data-h={h} class={gi === 0 && i === 0 ? "on" : undefined}>{secTitle(h)}</a>
+          <p class="desc">{mod.desc}</p>
+        </header>
+
+        <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}${hub.id === "mechatronik" || MECHA_MODULES.has(mod.id) ? " mx-mecha" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
+          {mod.sections.map((s, i) => {
+            const C = secComp(mod.id, s.h);
+            const prev = mod.sections[i - 1];
+            const next = mod.sections[i + 1];
+            return (
+              <section class="msec" id={s.h}>
+                <h2 class="msec-t"><span class="no">{pad(i)} / {pad(mod.sections.length - 1)}</span>{s.t}</h2>
+                <C />
+                <nav class="pager" data-pagefind-ignore aria-label="Abschnitte blättern">
+                  {prev ? (
+                    <a class="prev" href={`#${prev.h}`}><span class="lb">← Vorheriger Abschnitt</span><span class="tt">{prev.t}</span></a>
+                  ) : (
+                    <span class="ghost"></span>
+                  )}
+                  {next ? (
+                    <a class="next" href={`#${next.h}`}><span class="lb">Nächster Abschnitt →</span><span class="tt">{next.t}</span></a>
+                  ) : (
+                    <span class="ghost"></span>
+                  )}
+                </nav>
+              </section>
+            );
+          })}
+        </div>
+        <script is:inline type="application/json" id="mrouterCfg" set:html={routerCfg} />
+        {pageScript && <script is:inline defer src={pageScript} />}
+
+        <div class="modfoot" data-pagefind-ignore>
+          <div class="hd">Weiter im Hub {hub.name}</div>
+          <div class="row">
+            <a class="up" href={hub.file}>
+              <span aria-hidden="true">{hub.icon}</span><span>Alle {hub.modules.length} Module im {hub.name}-Hub</span>
+            </a>
+            {hub.modules.filter((m) => m.id !== mod.id).map((m) => (
+              <a href={m.file}><span aria-hidden="true">{m.icon}</span><span>{m.name}</span></a>
+            ))}
+          </div>
+          {related.filter((m) => m.hub.id !== hub.id).length > 0 && (
+            <>
+              <div class="hd">Verwandt in anderen Hubs</div>
+              <div class="row">
+                {related.filter((m) => m.hub.id !== hub.id).map((m) => (
+                  <a href={m.file}>
+                    <span aria-hidden="true">{m.icon}</span><span>{m.name}</span>
+                    <span class="hx-tag">{m.hub.icon} {m.hub.name}</span>
+                  </a>
                 ))}
-              </>
-            ))}
-          </nav>
-          <div class="msd-foot">
-            <a href={hub.file}>{hub.icon} {hub.name}-Hub</a>
-            {related.map((m) => (
-              <a href={m.file}>{m.icon} {m.name}</a>
-            ))}
-          </div>
-        </aside>
-        <div class="mscrim" id="mscrim"></div>
-
-        <main class="mmain">
-          <div class="mtop" id="mtop">
-            <button id="mburger" type="button" aria-label="Abschnitte öffnen">☰</button>
-            <span class="tt">{mod.name}</span>
-            <button class="ts" type="button" data-hbx-search>🔍 Suchen</button>
-          </div>
-
-          <header class="mhead">
-            <h1>{mod.name}</h1>
-            <p>{mod.desc}</p>
-          </header>
-
-          <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}${hub.id === "mechatronik" || MECHA_MODULES.has(mod.id) ? " mx-mecha" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
-            {mod.sections.map((s) => {
-              const C = secComp(mod.id, s.h);
-              return (
-                <section class="msec" id={s.h}>
-                  <h2 class="msec-t">{s.t}</h2>
-                  <C />
-                </section>
-              );
-            })}
-          </div>
-          <script is:inline type="application/json" id="mrouterCfg" set:html={routerCfg} />
-          {pageScript && <script is:inline defer src={pageScript} />}
-
-          <div class="hbx-foot">
-            <div class="hd">Weiter im Hub {hub.name}</div>
-            <div class="row">
-              <a class="up" href={hub.file}>
-                <span>{hub.icon}</span><span>Alle {hub.modules.length} Module im {hub.name}-Hub</span>
-              </a>
-              {hub.modules.filter((m) => m.id !== mod.id).map((m) => (
-                <a href={m.file}><span>{m.icon}</span><span>{m.name}</span></a>
-              ))}
-            </div>
-            {related.filter((m) => m.hub.id !== hub.id).length > 0 && (
-              <>
-                <div class="hd">Verwandt in anderen Hubs</div>
-                <div class="row">
-                  {related.filter((m) => m.hub.id !== hub.id).map((m) => (
-                    <a href={m.file}>
-                      <span>{m.icon}</span><span>{m.name}</span>
-                      <span class="hx">{m.hub.icon} {m.hub.name}</span>
-                    </a>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        </main>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       <script is:inline>
         /* ---- Abschnitts-Router ----------------------------------------------
-           Ein Abschnitt sichtbar, per #hash adressiert. Dazu: Alias-Hashes
-           alter Anker, Überschriften-Subnav mit Scrollspy unter dem aktiven
-           Eintrag, Sprung öffnet Faltabschnitte (window.__openSection). */
+           Ein Abschnitt sichtbar, per #hash adressiert. Die Abschnitts-Links
+           leben in der Rail (#secNav). Dazu: Alias-Hashes alter Anker,
+           Überschriften-Subnav mit Scrollspy unter dem aktiven Eintrag,
+           Brotkrumen-Update in der Topbar, Sprung öffnet Faltabschnitte
+           (window.__openSection). */
         (function () {
-          var nav = document.getElementById("msdNav");
+          var nav = document.getElementById("secNav");
           if (!nav) return;
           var cfgEl = document.getElementById("mrouterCfg");
           var ALIAS = {};
@@ -301,6 +264,7 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
           var secs = Array.prototype.slice.call(document.querySelectorAll(".msec"));
           var links = Array.prototype.slice.call(nav.querySelectorAll("a[data-h]"));
           var KEYS = secs.map(function (s) { return s.id; });
+          var crumb = document.getElementById("crumbSec");
 
           /* Ein Hash kann Abschnitt, Alias oder Überschriften-Anker sein. */
           function resolve(raw) {
@@ -319,7 +283,7 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
           }
           /* h3/h4 in Karten & Co. sind Beschriftungen, keine Gliederung. */
           var HDECO = ".card, .gb-col, .sym, .grid2 > div, .rule, .calc, .acc, .def-grid, .spec-card, .step, "
-            + ".tip, .warn, .stop, .kpi, .map a, .pstep, .srcs, .gitem, .fbox, figure, .grid > div, .grid3 > div";
+            + ".tip, .warn, .stop, .kpi, .map a, .pstep, .srcs, .gitem, .fbox, figure, .grid > div, .grid3 > div, .pager";
           function headings(sec) {
             var hs = Array.prototype.slice.call(sec.querySelectorAll("h2:not(.msec-t),h3,h4")).filter(function (h) {
               return !h.closest(HDECO);
@@ -333,12 +297,12 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
 
           var spy = null, spyLock = 0;
           function markSub(id) {
-            nav.querySelectorAll(".msd-sub a").forEach(function (a) {
+            nav.querySelectorAll(".sub a").forEach(function (a) {
               a.classList.toggle("on", a.dataset.hh === id);
             });
           }
           function buildSub(h) {
-            nav.querySelectorAll(".msd-sub").forEach(function (b) { b.remove(); });
+            nav.querySelectorAll(".sub").forEach(function (b) { b.remove(); });
             if (spy) { spy.disconnect(); spy = null; }
             var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
             var sec = document.getElementById(h);
@@ -346,7 +310,7 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
             var hs = headings(sec);
             if (!hs.length) return;
             var box = document.createElement("div");
-            box.className = "msd-sub";
+            box.className = "sub";
             hs.forEach(function (hd) {
               var a = document.createElement("a");
               a.href = "#" + hd.id;
@@ -379,9 +343,18 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
             if (opts.push !== false && decodeURIComponent(location.hash.slice(1)) !== h) {
               history.replaceState(null, "", "#" + h);
             }
-            var tt = document.querySelector("#mtop .tt");
             var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
-            if (tt && lk) tt.textContent = lk.textContent;
+            if (crumb && lk) {
+              crumb.innerHTML = "";
+              var sep = document.createElement("span");
+              sep.className = "sep";
+              sep.textContent = "/";
+              var sc = document.createElement("span");
+              sc.className = "sec";
+              sc.textContent = lk.textContent.trim();
+              crumb.appendChild(sep);
+              crumb.appendChild(sc);
+            }
             buildSub(h);
           }
 
@@ -409,28 +382,19 @@ const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
           requestAnimationFrame(settle);
           window.addEventListener("load", function () { requestAnimationFrame(settle); });
 
-          /* ---- Mobile Schublade ---- */
-          var side = document.getElementById("msd");
-          var scrim = document.getElementById("mscrim");
-          function openSide() { side.classList.add("open"); scrim.classList.add("show"); }
-          function closeSide() { side.classList.remove("open"); scrim.classList.remove("show"); }
-          document.getElementById("mburger").addEventListener("click", openSide);
-          scrim.addEventListener("click", closeSide);
-          document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeSide(); });
-
           nav.addEventListener("click", function (e) {
             var a = e.target.closest("a");
             if (!a) return;
-            e.preventDefault();
             if (a.dataset.hh) {
               /* Subnav: innerhalb des Abschnitts springen */
+              e.preventDefault();
               history.replaceState(null, "", "#" + a.dataset.hh);
               jumpTo(a.dataset.hh);
             } else if (a.dataset.h) {
+              e.preventDefault();
               show(a.dataset.h, { push: true });
               window.scrollTo({ top: 0 });
             }
-            closeSide();
           });
         })();
       </script>
