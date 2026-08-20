@@ -1,11 +1,11 @@
 /* ============================================================================
-   ARTEFAKTE · SUCH-PALETTE  (geteilt von Legacy- und Astro-Seiten)
+   ARTEFAKTE · SUCHPALETTE
    ----------------------------------------------------------------------------
    Zwei Ebenen in einem Fenster:
      1. Struktur-Treffer aus der Registry (Hubs, Module, Abschnitte) — sofort.
      2. Volltext-Treffer aus dem Pagefind-Index (/pagefind/…) — nachgeladen.
-   Öffnen über window.HBXPAL.open(); ⌘K und "/" bindet die Palette nur, wenn
-   die Seite keine eigene Suche (#pal) mitbringt.
+   Öffnet sich über jedes Element mit [data-pal], über ⌘K/Strg+K und "/".
+   Styling liegt im Design-System (src/styles/app.css, Block SUCHPALETTE).
    ========================================================================== */
 (function () {
   "use strict";
@@ -18,10 +18,13 @@
   };
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  const pal = el("div", "hbx-pal");
+  const pal = el("div", "pal");
   pal.innerHTML =
     '<div class="box" role="dialog" aria-modal="true" aria-label="Artefakte durchsuchen">' +
+    '<div class="in">' +
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>' +
     '<input type="search" autocomplete="off" spellcheck="false" placeholder="Alles durchsuchen — Module, Abschnitte, Volltext …">' +
+    "</div>" +
     '<div class="out"></div>' +
     '<div class="hint"><span>↑↓ wählen</span><span>⏎ öffnen</span><span>esc schließen</span></div>' +
     "</div>";
@@ -29,8 +32,13 @@
   const palOut = pal.querySelector(".out");
 
   const A = () => window.ARTEFAKTE || null;
+  const isDark = () => {
+    const t = document.documentElement.getAttribute("data-hbx-theme");
+    if (t) return t === "dark";
+    return matchMedia("(prefers-color-scheme: dark)").matches;
+  };
   const hubColors = () => {
-    const dark = document.documentElement.getAttribute("data-hbx-theme") === "dark";
+    const dark = isDark();
     const map = {};
     const a = A();
     if (a) a.hubs.forEach((h) => (map[h.id] = dark ? h.accent.d : h.accent.l));
@@ -196,15 +204,18 @@
   });
   pal.addEventListener("click", (e) => { if (e.target === pal) close(); });
 
+  /* Trigger: jedes [data-pal]-Element öffnet die Palette. */
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest && e.target.closest("[data-pal]");
+    if (b) { e.preventDefault(); open(); }
+  });
+
   document.addEventListener("keydown", (e) => {
-    /* Seiten mit eigener Suche (#pal) behalten ihre Kürzel — dort öffnet nur
-       der Knopf in der Leiste die globale Palette. */
-    const hasLocal = !!document.getElementById("pal");
     const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || "");
-    if (!hasLocal && (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
       e.preventDefault();
       pal.classList.contains("open") ? close() : open();
-    } else if (!hasLocal && e.key === "/" && !typing && !pal.classList.contains("open")) {
+    } else if (e.key === "/" && !typing && !pal.classList.contains("open")) {
       e.preventDefault();
       open();
     } else if (e.key === "Escape" && pal.classList.contains("open")) {
@@ -212,5 +223,6 @@
     }
   });
 
-  window.HBXPAL = { open: open, close: close };
+  window.PAL = { open: open, close: close };
+  window.HBXPAL = window.PAL; /* alte Aufrufer */
 })();

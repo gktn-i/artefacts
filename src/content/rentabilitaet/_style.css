@@ -15,7 +15,7 @@
 .mx-rentabilitaet *{box-sizing:border-box}
 .mx-rentabilitaet{margin:0;font-family:'Archivo',system-ui,sans-serif;color:var(--text);background-image:linear-gradient(var(--borderSoft) 1px,transparent 1px),linear-gradient(90deg,var(--borderSoft) 1px,transparent 1px);
   background-size:34px 34px;min-height:100vh;padding:24px 16px 70px}
-.mx-rentabilitaet .mono{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
+.mx-rentabilitaet .mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
 .mx-rentabilitaet .wrap{max-width:1120px;margin:0 auto}
 .mx-rentabilitaet h1{font-size:21px;font-weight:800;letter-spacing:.02em;margin:0 0 4px}
 .mx-rentabilitaet .sub{color:var(--dim);font-size:13px;line-height:1.55;margin:0 0 18px;max-width:780px}
@@ -25,10 +25,10 @@
 .mx-rentabilitaet .pb{padding:15px}
 .mx-rentabilitaet .grid{display:grid;gap:11px 14px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
 .mx-rentabilitaet label{display:block;font-size:10.5px;font-weight:600;letter-spacing:.03em;color:var(--dim);margin-bottom:5px;text-transform:uppercase}
-.mx-rentabilitaet input{width:100%;background:var(--inset);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 9px;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none}
+.mx-rentabilitaet input{width:100%;background:var(--inset);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 9px;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none}
 .mx-rentabilitaet input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,122,26,.13)}
 .mx-rentabilitaet .field{position:relative}
-.mx-rentabilitaet .suf{position:absolute;right:9px;top:30px;color:var(--faint);font-size:11px;font-family:'JetBrains Mono',monospace;pointer-events:none}
+.mx-rentabilitaet .suf{position:absolute;right:9px;top:30px;color:var(--faint);font-size:11px;font-family:'IBM Plex Mono',monospace;pointer-events:none}
 .mx-rentabilitaet .toggle{display:inline-flex;align-items:center;gap:9px;cursor:pointer;user-select:none;margin-top:13px}
 .mx-rentabilitaet .tg{width:40px;height:23px;border-radius:20px;background:var(--inset);border:1px solid var(--border);position:relative;transition:.15s;flex:0 0 auto}
 .mx-rentabilitaet .tg::after{content:'';position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:var(--faint);transition:.15s}
@@ -47,7 +47,7 @@
 .mx-rentabilitaet .big .v{font-size:25px;font-weight:800;line-height:1;letter-spacing:-.02em}
 .mx-rentabilitaet .kv{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px dashed var(--borderSoft)}
 .mx-rentabilitaet .kv:last-child{border-bottom:none}
-.mx-rentabilitaet .kv .v{font-family:'JetBrains Mono',monospace}
+.mx-rentabilitaet .kv .v{font-family:'IBM Plex Mono',monospace}
 .mx-rentabilitaet .barwrap .lbl{display:flex;justify-content:space-between;font-size:10.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.04em}
 .mx-rentabilitaet .bar{height:9px;border-radius:6px;background:var(--inset);border:1px solid var(--border);overflow:hidden;margin-top:6px}
 .mx-rentabilitaet .bar>span{display:block;height:100%;width:0}

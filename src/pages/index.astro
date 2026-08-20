@@ -1,112 +1,110 @@
 ---
 /* ============================================================================
-   Startseite: Hub-Karten, Zuletzt-aktualisiert, flache Modulliste mit Filter.
+   Startseite: die Kommandozentrale der Bibliothek.
+   Kein Blockstapel — ein Schaltpult: Suche, Hub-Kacheln, daneben das
+   komplette Modulverzeichnis und die letzten Aktualisierungen.
    Alles serverseitig aus src/data/registry.json gerendert.
    ========================================================================== */
 import Base from "../layouts/Base.astro";
-import HubCard from "../components/HubCard.astro";
 import { hubs, modules, sectionCount, lastUpdated, fmtDate } from "../lib/registry.mjs";
 
 const recent = modules
   .slice()
   .sort((a, b) => (b.updated || "").localeCompare(a.updated || ""))
-  .slice(0, 4);
+  .slice(0, 6);
 ---
 
 <Base
-  title="Artefakte · Hubs"
-  description="Nachschlagewerke für Werkstatt, Küche und Homelab — nach Hubs sortiert, mit Volltextsuche über alle Module und Abschnitte."
+  title="Artefakte · Werkbank"
+  description="Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab und Foto — ein Hub für alles, mit Volltextsuche über alle Module und Abschnitte."
 >
-  <header class="hero">
-    <div class="wrap">
-      <div class="kicker">bib.gktn.dev</div>
-      <h1>Artefakte</h1>
-      <p class="lead">
-        Selbstgebaute Nachschlagewerke für die Werkbank, den Herd und den Server im Regal.
-        Alles liegt in <b>Hubs</b> — ein Hub pro Lebensbereich, darin die einzelnen Module.
-        Die Suche kennt jeden Abschnitt und den kompletten Volltext.
-      </p>
+  <div class="dash">
+    <div class="dash-kicker">bib.gktn.dev — selbstgebaute Nachschlagewerke</div>
+    <h1>Die Werkbank für alles, was man zweimal nachschlägt.</h1>
+    <p class="lead">
+      Fünf Hubs — <b>Werkstatt</b>, <b>Mechatronik</b>, <b>Küche</b>, <b>Homelab</b> und
+      <b>Foto&nbsp;&amp;&nbsp;Video</b> — mit {modules.length} Modulen und {sectionCount} Abschnitten.
+      Alles liegt in der Leiste links; die Suche kennt jeden Abschnitt und den kompletten Volltext.
+    </p>
 
-      <button class="bigsearch" type="button" data-hbx-search>
-        <span aria-hidden="true">🔍</span>
-        <span class="t">Alles durchsuchen — Module, Abschnitte, Volltext …</span>
-        <span class="k">⌘K</span>
-      </button>
+    <button class="cmdbar" type="button" data-pal>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+      </svg>
+      <span class="t">Alles durchsuchen — Module, Abschnitte, Volltext …</span>
+      <kbd>⌘K</kbd>
+    </button>
 
-      <div class="stats">
-        <span><b>{hubs.length}</b> Hubs</span>
-        <span><b>{modules.length}</b> Module</span>
-        <span><b>{sectionCount}</b> Abschnitte</span>
-        <span>zuletzt <b>{fmtDate(lastUpdated)}</b></span>
-      </div>
+    <div class="statline">
+      <span><b>{hubs.length}</b> Hubs</span>
+      <span><b>{modules.length}</b> Module</span>
+      <span><b>{sectionCount}</b> Abschnitte</span>
+      <span>zuletzt <b>{fmtDate(lastUpdated)}</b></span>
     </div>
-  </header>
 
-  <main>
-    <section class="blk">
-      <div class="wrap">
-        <div class="eyebrow">Hubs <span class="n">{hubs.length}</span></div>
-        <p class="blk-sub">
-          Jeder Hub bündelt seine Module, zeigt deren Abschnitte und ist der Einstieg für alles, was thematisch dazugehört.
-        </p>
-        <div class="hubgrid">
-          {hubs.map((h, i) => <HubCard hub={h} delay={i * 60} mods={true} />)}
+    <div class="rowlabel">
+      <h2>Hubs</h2>
+      <span class="n">{hubs.length}</span>
+      <span class="ln"></span>
+    </div>
+    <div class="tiles">
+      {hubs.map((h) => (
+        <a class="tile hx" href={h.file} style={`--hcl:${h.accent.l};--hcd:${h.accent.d}`}>
+          <span class="ic" aria-hidden="true">{h.icon}</span>
+          <h3>{h.name}</h3>
+          <span class="tag">{h.tagline}</span>
+          <span class="meta">
+            <span>{h.modules.length} Module</span>
+            <span>{h.sectionCount} Abschn.</span>
+            <span class="go" aria-hidden="true">→</span>
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <div class="board">
+      <section>
+        <div class="rowlabel">
+          <h2>Verzeichnis</h2>
+          <span class="n">{modules.length} Module</span>
+          <span class="ln"></span>
         </div>
-      </div>
-    </section>
+        {hubs.map((h) => (
+          <div class="dirgroup hx" style={`--hcl:${h.accent.l};--hcd:${h.accent.d}`}>
+            <div class="gh">
+              <span class="dot" aria-hidden="true"></span>
+              <a href={h.file}>{h.name}</a>
+              <span class="ct">{h.modules.length} Module · {h.sectionCount} Abschnitte</span>
+            </div>
+            <ul>
+              {h.modules.map((m) => (
+                <li>
+                  <a href={m.file}>
+                    <span>{m.icon} {m.name}</span>
+                    <span class="ct">{m.sections.length || "–"}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
 
-    <section class="blk">
-      <div class="wrap">
-        <div class="eyebrow">Zuletzt aktualisiert</div>
-        <div class="recent">
+      <section>
+        <div class="rowlabel">
+          <h2>Zuletzt aktualisiert</h2>
+          <span class="ln"></span>
+        </div>
+        <div class="recent-list">
           {recent.map((m) => (
-            <a href={m.file} style={`--fcl:${m.hub.accent.l};--fcd:${m.hub.accent.d}`}>
-              <div class="dt">{fmtDate(m.updated)}</div>
-              <div class="nm"><span>{m.icon}</span>{m.name}</div>
-              <div class="hb">{m.hub.icon} {m.hub.name} · {m.area.name}</div>
+            <a class="recent-row hx" href={m.file} style={`--hcl:${m.hub.accent.l};--hcd:${m.hub.accent.d}`}>
+              <span class="dt">{fmtDate(m.updated)}</span>
+              <span class="nm">{m.icon} {m.name}</span>
+              <span class="hb">{m.hub.name} · {m.area.name}</span>
             </a>
           ))}
         </div>
-      </div>
-    </section>
-
-    <section class="blk">
-      <div class="wrap">
-        <div class="eyebrow">Alle Module <span class="n">{modules.length}</span></div>
-        <p class="blk-sub">Die flache Sicht auf den Bestand — nach Hub filterbar, wenn der Weg über die Hub-Seite zu lang ist.</p>
-        <div class="filters" id="filters">
-          <button data-h="alle" aria-pressed="true"><span class="dot"></span>Alle <span>{modules.length}</span></button>
-          {hubs.map((h) => (
-            <button data-h={h.id} aria-pressed="false" style={`--fcl:${h.accent.l};--fcd:${h.accent.d}`}>
-              <span class="dot"></span>{h.icon} {h.name} <span>{h.modules.length}</span>
-            </button>
-          ))}
-        </div>
-        <div class="list" id="list">
-          {modules.map((m) => (
-            <a href={m.file} data-hub={m.hub.id} style={`--fcl:${m.hub.accent.l};--fcd:${m.hub.accent.d}`}>
-              <span class="dot"></span>
-              <span class="nm">{m.icon} <span>{m.name}</span></span>
-              <span class="ds">{m.desc}</span>
-              <span class="mt">{m.kind} · {m.sections.length || "—"} Abschn.</span>
-              <span class="ar">→</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </div>
+  </div>
 </Base>
-
-<script>
-  /* Hub-Filter für die flache Liste. */
-  const filters = document.getElementById("filters")!;
-  const rows = [...document.querySelectorAll<HTMLElement>("#list a")];
-  filters.addEventListener("click", (e) => {
-    const btn = (e.target as HTMLElement).closest("button");
-    if (!btn) return;
-    const h = btn.dataset.h!;
-    filters.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-    rows.forEach((r) => (r.style.display = h === "alle" || r.dataset.hub === h ? "" : "none"));
-  });
-</script>

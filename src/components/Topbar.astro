@@ -1,0 +1,43 @@
+---
+/* ============================================================================
+   Topbar — schmale Kopfzeile über dem Inhalt: Burger (mobil), Brotkrumen,
+   Suche. Auf Modulseiten hängt der Hash-Router den aktiven Abschnitt als
+   letzten Krumen an (#crumbSec).
+   ========================================================================== */
+interface Props {
+  hub?: any;
+  mod?: any;
+}
+const { hub, mod } = Astro.props;
+---
+
+<header class="topbar">
+  <button class="burger" id="burger" type="button" aria-label="Navigation öffnen" aria-controls="rail" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M4 7h16M4 12h16M4 17h16"></path>
+    </svg>
+  </button>
+
+  <nav class="crumbs" aria-label="Pfad">
+    <a href="index.html">Artefakte</a>
+    {!hub && <span class="sep">/</span>}
+    {!hub && <span class="cur">Übersicht</span>}
+    {hub && !mod && <span class="sep">/</span>}
+    {hub && !mod && <span class="cur">{hub.icon} {hub.name}</span>}
+    {hub && mod && <span class="sep">/</span>}
+    {hub && mod && <a href={hub.file}>{hub.icon} {hub.name}</a>}
+    {hub && mod && <span class="sep">/</span>}
+    {hub && mod && <span class="cur">{mod.name}</span>}
+    {hub && mod && <span class="secwrap" id="crumbSec"></span>}
+  </nav>
+
+  <span class="spacer"></span>
+
+  <button class="tb-search" type="button" data-pal title="Über alle Hubs, Module und Volltexte suchen">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+    </svg>
+    <span class="lbl">Suchen</span>
+    <kbd>⌘K</kbd>
+  </button>
+</header>
