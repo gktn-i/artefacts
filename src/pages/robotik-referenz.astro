@@ -1,0 +1,23 @@
+---
+/* Weiterleitung: „Robotik" ist im Modul „Mechanik & Robotik" aufgegangen.
+   Alte Anker werden auf die neuen Abschnitts-Hashes abgebildet. */
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Umgezogen — Mechanik &amp; Robotik</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="/mechanik-robotik.html" />
+    <script is:inline>
+      var MAP = { grund: "robo-grund", hw: "robo-hw", steu: "robo-steuerung", sw: "robo-sw", rl: "robo-lernen", pfad: "robo-lernen", gloss: "glossar" };
+      var h = decodeURIComponent(location.hash.slice(1));
+      location.replace("mechanik-robotik.html" + (h ? "#" + (MAP[h] || h) : ""));
+    </script>
+    <meta http-equiv="refresh" content="0;url=mechanik-robotik.html" />
+  </head>
+  <body>
+    <p>Dieses Modul ist in <a href="mechanik-robotik.html">Mechanik &amp; Robotik</a> aufgegangen.</p>
+  </body>
+</html>

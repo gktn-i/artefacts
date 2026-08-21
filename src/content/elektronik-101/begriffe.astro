@@ -1,28 +1,28 @@
-<div class="kurz"><b>Nachschlagen:</b> Bussysteme, Speicher, Logik, Leistungs- und Signalbegriffe, Gehäuse und Datenblatt-Kürzel — je Tabelle alphabetisch, Suche findet alles per ⌘K.</div>
+<div class="kurz"><b>Nachschlagen:</b> Grundbegriffe, Speicher, Logikgatter, Leistungs-Kürzel, Signal- &amp; Messgrößen, Gehäuse und Fertigung — Suche findet alles per ⌘K.</div>
 <p class="sub" style="margin:0 0 1rem">Die Abkürzungen, über die man in Datenblättern, Schaltplänen und Reparatur-Videos stolpert — jeweils in einem Satz, mit dem Hinweis, warum sie in der Praxis zählt. Suchen geht am schnellsten mit <b>⌘K</b> bzw. <b>Strg+K</b>.</p>
 
-<h2>Bussysteme &amp; Schnittstellen</h2>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th>Begriff</th><th>Was es ist</th><th>Worauf es in der Praxis ankommt</th></tr></thead>
+<h2>Die Grundbegriffe</h2>
+<p>Die Wörter, die in jeder Anleitung vorausgesetzt werden — Schaltungstechnik im Detail steht im Tab <a class="goto" href="#signale">Signale &amp; Schaltungstechnik</a>.</p>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th><th>Warum es zählt</th></tr></thead>
 <tbody>
-<tr><td><b>I²C</b> (IIC, TWI)</td><td>Zweidraht-Bus (SDA = Daten, SCL = Takt) für viele Bauteile an denselben zwei Leitungen</td><td>Braucht <b>Pull-up-Widerstände</b> (typ. 4,7 kΩ) — ohne sie läuft nichts. Jedes Gerät hat eine Adresse; zwei gleiche Adressen am Bus = Konflikt. 100 kHz / 400 kHz / 1 MHz, nur kurze Strecken auf dem Board.</td></tr>
-<tr><td><b>SPI</b></td><td>Vierdraht-Bus: MOSI, MISO, SCK und je Gerät eine eigene CS-Leitung</td><td>Deutlich schneller als I²C (10–100 MHz) und vollduplex, kostet aber pro Gerät einen Pin. Keine Adressen — die Auswahl macht CS.</td></tr>
-<tr><td><b>UART</b> (seriell)</td><td>Zwei Leitungen (TX, RX), <b>ohne</b> Taktleitung, Punkt-zu-Punkt</td><td>Beide Seiten müssen dieselbe <b>Baudrate</b> eingestellt haben (9600, 115200 …), sonst kommt nur Müll an. TX geht immer an RX der Gegenseite.</td></tr>
-<tr><td><b>RS-232</b></td><td>UART mit ±12-V-Pegeln (alter PC-Anschluss)</td><td>Darf <b>nie</b> direkt an einen 3,3-V-Mikrocontroller — dazwischen gehört ein Pegelwandler (MAX3232).</td></tr>
-<tr><td><b>RS-485</b></td><td>Differenzieller Zweidraht-Bus für lange Strecken (bis ~1200 m)</td><td>Industriestandard, meist mit Modbus. Beide Busenden mit <b>120 Ω</b> abschließen, sonst Reflexionen.</td></tr>
-<tr><td><b>CAN</b> (Controller Area Network)</td><td>Differenzieller Zweidraht-Bus aus dem Fahrzeugbau (CAN-H / CAN-L)</td><td><b>Kein Master.</b> Jeder Teilnehmer darf senden; kollidieren zwei, gewinnt die Nachricht mit der niedrigeren ID — ohne dass die andere verloren geht (verlustfreie Arbitrierung). Sehr störfest durch Differenzsignal. Klassisch bis 1 Mbit/s, <b>CAN-FD</b> bis 5–8 Mbit/s. Abschluss: 120 Ω an beiden Enden.</td></tr>
-<tr><td><b>LIN</b></td><td>Einzeldraht-Bus im Auto, langsam (bis 20 kbit/s), ein Master</td><td>Für unkritische Nebensachen wie Fensterheber und Spiegel — dort, wo CAN zu teuer wäre.</td></tr>
-<tr><td><b>1-Wire</b></td><td>Daten und teils Versorgung über eine einzige Leitung</td><td>Klassiker: Temperatursensor DS18B20. Jedes Bauteil hat eine eindeutige Seriennummer ab Werk.</td></tr>
-<tr><td><b>USB</b></td><td>Differenzielles Paar (D+/D−), Host steuert, Gerät antwortet</td><td>12 Mbit/s (Full Speed), 480 Mbit/s (High Speed), 5 Gbit/s+ ab USB 3. Leitungsimpedanz 90 Ω differenziell — beim Layout kein Detail, sondern Bedingung.</td></tr>
-<tr><td><b>USB-PD</b> (Power Delivery)</td><td>Aushandeln der Versorgungsspannung über die CC-Leitungen</td><td>Verhandelt 5 / 9 / 15 / 20 V (mit EPR bis 48 V), bis 5 A — daher bis 240 W. Ohne gültige Aushandlung bleibt es bei 5 V.</td></tr>
-<tr><td><b>I²S</b></td><td>Digitale <b>Audio</b>-Übertragung (Bitclock, Wordselect, Daten)</td><td>Trotz des ähnlichen Namens nichts mit I²C zu tun — reiner Datenstrom ohne Adressen.</td></tr>
-<tr><td><b>PCIe</b></td><td>Serielle Punkt-zu-Punkt-Verbindung in Lanes (x1, x4, x8, x16)</td><td>Jede Lane ist ein eigenes differenzielles Paar je Richtung. Mehr Lanes = mehr Bandbreite, nicht mehr Geräte.</td></tr>
-<tr><td><b>MIPI DSI / CSI</b></td><td>Hochgeschwindigkeits-Schnittstellen für Display (DSI) und Kamera (CSI)</td><td>In jedem Smartphone und auf Einplatinenrechnern. Sehr empfindliche differenzielle Paare — beschädigte Flexkabel sind ein häufiger Fehler.</td></tr>
-<tr><td><b>JTAG</b></td><td>Debug- und Testschnittstelle (TCK, TMS, TDI, TDO)</td><td>Kann Chips programmieren <b>und</b> per Boundary-Scan Lötstellen prüfen, ohne dass die Software läuft.</td></tr>
-<tr><td><b>SWD</b></td><td>Zweidraht-Debug bei ARM-Cortex (SWDIO, SWCLK)</td><td>Die abgespeckte JTAG-Variante — das, was ein ST-Link oder J-Link üblicherweise nutzt.</td></tr>
-<tr><td><b>Ethernet / RMII / RGMII</b></td><td>Netzwerk; RMII/RGMII sind die Verbindungen zwischen Controller (MAC) und Übertrager-Chip (PHY)</td><td>Zwischen PHY und Buchse sitzt immer ein <b>Übertrager</b> (Magnetics) zur galvanischen Trennung — häufig im RJ45 integriert.</td></tr>
+<tr><td><b>GND / Masse</b></td><td>Der gemeinsame Bezugspunkt (0 V), auf den sich alle Spannungen beziehen</td><td>Ohne <b>gemeinsame</b> Masse funktioniert zwischen zwei Baugruppen kein einziges Signal</td></tr>
+<tr><td><b>DC / Gleichstrom</b></td><td>Strom fließt immer in dieselbe Richtung</td><td>Batterie, USB, Netzteil — der Normalfall im Hobby</td></tr>
+<tr><td><b>AC / Wechselstrom</b></td><td>Strom wechselt ständig die Richtung</td><td>Steckdose. Im Projekt meist nur als Eingang des Netzteils</td></tr>
+<tr><td><b>Frequenz (Hz)</b></td><td>Wie oft sich etwas pro Sekunde wiederholt</td><td>Takt, PWM, Funk, Ton</td></tr>
+<tr><td><b>Kurzschluss</b></td><td>Plus und Minus direkt verbunden, ohne Bauteil dazwischen</td><td>Sehr großer Strom → Hitze, Rauch, Defekt</td></tr>
+<tr><td><b>Polarität</b></td><td>Bauteile mit Plus und Minus müssen richtig herum eingebaut werden</td><td>LED, Elko, Diode, Akku, Modul — falsch herum oft sofort zerstört</td></tr>
+<tr><td><b>Logikpegel HIGH / LOW</b></td><td>Digitale Bauteile kennen nur zwei Zustände mit definierten Schwellen</td><td>Dazwischen liegt ein <b>verbotener Bereich</b> — Details im Tab <a href="#signale">Signale</a></td></tr>
+<tr><td><b>Analog / Digital</b></td><td>Analog = stufenloser Wert · digital = nur an oder aus</td><td>Ein Lichtsensor liefert analog, ein Taster digital</td></tr>
+<tr><td><b>Kapazität (F)</b></td><td>Wie viel Ladung ein Kondensator speichert</td><td>In der Praxis µF, nF, pF — Farad selbst ist riesig</td></tr>
+<tr><td><b>Induktivität (H)</b></td><td>Eine Spule wehrt sich gegen Stromänderungen</td><td>In Wandlern, Filtern, Funk — praktisch mH und µH</td></tr>
+<tr><td><b>Spannungsabfall</b></td><td>Jedes Bauteil „verbraucht" ein Stück Spannung</td><td>An einer Diode ~0,7 V, an einem Widerstand je nach Strom</td></tr>
+<tr><td><b>Wirkungsgrad</b></td><td>Anteil der Energie, der nützlich ankommt — der Rest wird Wärme</td><td>Schaltregler ~90 %, Linearregler oft deutlich weniger</td></tr>
+<tr><td><b>Datenblatt</b></td><td>Das offizielle Herstellerdokument zum Bauteil</td><td>Die einzige verlässliche Quelle — Anleitung im Tab <a href="#datenblatt">Datenblatt lesen</a></td></tr>
 </tbody>
 </table></div>
+<div class="note">Normwerte, Einheiten-Vorsätze und wie du den Aufdruck von Widerständen und Kondensatoren entschlüsselst, stehen gesammelt im Tab <a class="goto" href="#grundlagen">Basics</a>.</div>
+<p class="note"><b>Bussysteme &amp; Schnittstellen</b> (I²C, SPI, UART, RS-485, CAN, USB, LIN, PCIe &amp; Co.) stehen mit Verdrahtung und Fehlersuche komplett im Tab <a class="goto" href="#protokolle">Protokolle &amp; Busse</a>.</p>
 
 <h2>Speicher</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
@@ -60,29 +60,18 @@
 <p class="note">Ein kleiner Kreis (Bubble) am Ausgang eines Symbols bedeutet immer <b>invertiert</b>. Dasselbe Prinzip bei Signalnamen im Schaltplan: <b>RESET</b> ist aktiv bei HIGH, <b>/RESET</b> oder <b>RESET#</b> ist aktiv bei LOW — deshalb sitzt an solchen Pins fast immer ein Pull-up.</p>
 
 <h2>Leistung &amp; Regelung</h2>
+<p>PWM, MOSFET, Brücken, VRM, Bootstrap, Totzeit, Synchrongleichrichtung, ESR und die Wandler-Typen erklärt ausführlich der Tab <a href="#leistung">Leistung &amp; PWM</a>; die Schutzschaltungen OVP, OCP und OTP der Tab <a href="#netzteil">Labornetzteil</a>. Hier nur die Kürzel, die dort nicht erklärt werden:</p>
 <div class="tbl-wrap"><table style="min-width:880px">
 <thead><tr><th>Begriff</th><th>Bedeutung</th></tr></thead>
 <tbody>
-<tr><td><b>VRM</b></td><td>Voltage Regulator Module — die mehrphasige Schaltregler-Baugruppe, die aus 12 V die Kernspannung eines Prozessors macht. Ausführlich im Tab <a href="#leistung">Leistung &amp; PWM</a>.</td></tr>
-<tr><td><b>PWM</b></td><td>Pulsweiten-Modulation: schnelles Ein/Aus, wobei der Ein-Anteil (Tastgrad) die abgegebene Leistung bestimmt.</td></tr>
 <tr><td><b>PFM</b></td><td>Pulsfrequenz-Modulation: bei sehr kleiner Last schaltet der Regler nur noch gelegentlich einen Puls. Spart Ruhestrom, erzeugt dafür unregelmäßiges Rauschen.</td></tr>
-<tr><td><b>LDO</b></td><td>Low-Dropout-Regler: Linearregler, der schon mit geringer Differenz zwischen Ein- und Ausgang auskommt (oft 0,1–0,5 V). Sehr rauscharm, verheizt aber die Differenz.</td></tr>
 <tr><td><b>SMPS</b></td><td>Switched-Mode Power Supply — Sammelbegriff für alle schaltenden Netzteile und Wandler.</td></tr>
 <tr><td><b>Dropout</b></td><td>Die Mindestdifferenz, die ein Linearregler braucht. Ein 5-V-Regler mit 2 V Dropout liefert an 6 V Eingang keine sauberen 5 V mehr.</td></tr>
 <tr><td><b>I<sub>q</sub></b> (Ruhestrom)</td><td>Was der Regler selbst verbraucht, auch ohne Last. Bei Batteriebetrieb entscheidend — Unterschiede zwischen 1 µA und 5 mA bestimmen die Laufzeit.</td></tr>
-<tr><td><b>ESR / ESL</b></td><td>Ersatz-Serienwiderstand bzw. -induktivität eines Kondensators. Bestimmen, wie gut er schnelle Stromspitzen liefern kann. Steigender ESR ist das typische Alterungsmerkmal von Elkos.</td></tr>
-<tr><td><b>Ripple</b> (Restwelligkeit)</td><td>Der Rest an Wechselspannung, den der Wandler nicht wegglättet. Sichtbar nur mit dem <a href="#oszilloskop">Oszilloskop</a>, im AC-Modus gemessen.</td></tr>
-<tr><td><b>OCP</b></td><td>Over Current Protection — Abschalten oder Begrenzen bei zu hohem Strom. Genau das macht die Strombegrenzung am <a href="#netzteil">Labornetzteil</a>.</td></tr>
-<tr><td><b>OVP / UVP</b></td><td>Über- bzw. Unterspannungsschutz.</td></tr>
-<tr><td><b>OTP</b></td><td>Over Temperature Protection — thermische Abschaltung. (In anderem Zusammenhang auch „One Time Programmable" für einmalig beschreibbaren Speicher.)</td></tr>
-<tr><td><b>SCP</b></td><td>Short Circuit Protection — reagiert schneller und härter als OCP.</td></tr>
 <tr><td><b>UVLO</b></td><td>Under Voltage Lock-Out: Der Chip startet erst über einer Mindestspannung und bleibt darunter definiert aus, statt undefiniert zu zucken.</td></tr>
 <tr><td><b>Soft-Start</b></td><td>Die Ausgangsspannung fährt langsam hoch, damit der Einschaltstrom in die Kondensatoren nicht die Schutzschaltung auslöst.</td></tr>
 <tr><td><b>PGOOD</b></td><td>„Power Good" — Meldeleitung, die HIGH wird, sobald die Spannung stabil im Fenster liegt. Löst oft den nächsten Regler in der Startkette aus. Bei toten Boards ein sehr nützlicher Messpunkt.</td></tr>
 <tr><td><b>Enable (EN)</b></td><td>Freigabe-Eingang. Liegt er nicht auf HIGH, startet der Regler nicht — bei einer Diagnose immer als Erstes prüfen.</td></tr>
-<tr><td><b>Bootstrap</b></td><td>Kondensator, der die Gate-Spannung für einen High-Side-N-Kanal-MOSFET über die Versorgung hebt.</td></tr>
-<tr><td><b>Dead Time</b> (Totzeit)</td><td>Die Pause, in der beide MOSFETs einer Halbbrücke aus sind. Verhindert Shoot-Through.</td></tr>
-<tr><td><b>Synchrongleichrichtung</b></td><td>Ein aktiv geschalteter MOSFET ersetzt die Freilaufdiode → statt 0,7 V fallen nur Millivolt ab.</td></tr>
 <tr><td><b>Line / Load Regulation</b></td><td>Wie stark der Ausgang schwankt, wenn sich die <b>Eingangsspannung</b> bzw. die <b>Last</b> ändert.</td></tr>
 <tr><td><b>Transient Response</b></td><td>Wie schnell der Regler auf einen Lastsprung reagiert. Zeigt sich als kurzer Einbruch — nur im Oszilloskop sichtbar.</td></tr>
 </tbody>
@@ -135,30 +124,4 @@
 <tr><td><b>ICT / Flying Probe</b></td><td>Automatischer Test der bestückten Platine — über ein Nadelbett oder mit beweglichen Prüfnadeln.</td></tr>
 </tbody>
 </table></div>
-
-<h2>Kürzel im Datenblatt</h2>
-<div class="tbl-wrap"><table style="min-width:840px">
-<thead><tr><th>Bauteil</th><th>Kürzel</th><th>Bedeutung</th></tr></thead>
-<tbody>
-<tr><td rowspan="3"><b>Diode</b></td><td>V<sub>F</sub> / I<sub>F</sub></td><td>Durchlassspannung und -strom (Silizium ~0,7 V, Schottky ~0,3 V)</td></tr>
-<tr><td>V<sub>R</sub></td><td>Sperrspannung, die sie in Gegenrichtung aushält</td></tr>
-<tr><td>t<sub>rr</sub></td><td>Sperrverzögerungszeit — wie schnell sie beim Umpolen wirklich sperrt. Für Schaltregler entscheidend.</td></tr>
-<tr><td rowspan="4"><b>MOSFET</b></td><td>V<sub>GS(th)</sub></td><td>Schwellspannung, ab der er zu leiten <i>beginnt</i></td></tr>
-<tr><td>R<sub>DS(on)</sub></td><td>Durchlasswiderstand — immer zusammen mit der zugehörigen V<sub>GS</sub> lesen</td></tr>
-<tr><td>Q<sub>g</sub> / C<sub>iss</sub></td><td>Gate-Ladung bzw. Eingangskapazität → bestimmt Treiberbedarf und Schaltverluste</td></tr>
-<tr><td>V<sub>DS</sub> / I<sub>D</sub></td><td>Maximale Spannung Drain–Source und Dauerstrom</td></tr>
-<tr><td rowspan="3"><b>Bipolar&shy;transistor</b></td><td>h<sub>FE</sub> (β)</td><td>Stromverstärkung — streut von Exemplar zu Exemplar erheblich</td></tr>
-<tr><td>V<sub>CE(sat)</sub></td><td>Restspannung im durchgeschalteten Zustand (~0,2 V). Bei hohen Strömen die Wärmequelle.</td></tr>
-<tr><td>I<sub>C</sub> / V<sub>CEO</sub></td><td>Maximaler Kollektorstrom und Sperrspannung</td></tr>
-<tr><td rowspan="3"><b>Kondensator</b></td><td>ESR / ESL</td><td>Innerer Serienwiderstand und -induktivität</td></tr>
-<tr><td>Ripple Current</td><td>Wie viel Wechselstrom er dauerhaft aushält, ohne zu überhitzen</td></tr>
-<tr><td>DC-Bias</td><td>Kapazitätsverlust von Keramikkondensatoren unter Gleichspannung — oft 50–80 %</td></tr>
-<tr><td rowspan="2"><b>Spule</b></td><td>I<sub>sat</sub> / I<sub>rms</sub></td><td>Sättigungs- und Dauerstrom</td></tr>
-<tr><td>DCR / SRF</td><td>Drahtwiderstand und Eigenresonanzfrequenz</td></tr>
-<tr><td rowspan="4"><b>Allgemein</b></td><td>Absolute Maximum Ratings</td><td><b>Zerstörungsgrenzen</b>, keine Betriebswerte. Dauerbetrieb dort ist immer falsch.</td></tr>
-<tr><td>Recommended Operating Conditions</td><td>Der Bereich, für den die garantierten Daten gelten — <b>das</b> ist die Auslegungsgrundlage.</td></tr>
-<tr><td>T<sub>J</sub> / θ<sub>JA</sub></td><td>Sperrschichttemperatur und Wärmewiderstand zur Umgebung (K/W). Damit rechnet man aus, wie heiß der Chip wirklich wird.</td></tr>
-<tr><td>MSL</td><td>Moisture Sensitivity Level — wie lange ein Bauteil nach dem Öffnen der Verpackung an Luft bleiben darf, bevor es vor dem Reflow getrocknet werden muss. Ignoriert man das, platzt das Gehäuse („Popcorn-Effekt").</td></tr>
-</tbody>
-</table></div>
-<div class="kurz"><div><b>Die wichtigste Datenblatt-Regel:</b> „Absolute Maximum Ratings" und „Recommended Operating Conditions" sind zwei verschiedene Tabellen. Die erste sagt, ab wann das Bauteil kaputtgeht, die zweite, wo es die versprochenen Eigenschaften hat. Ausgelegt wird <b>immer</b> nach der zweiten — mit Abstand zur ersten. Wie man ein Datenblatt vollständig liest: Tab <a class="goto" href="#datenblatt">Datenblatt lesen</a>.</div></div>
+<p class="note">Die <b>Kürzel im Datenblatt</b> (V<sub>F</sub>, R<sub>DS(on)</sub>, h<sub>FE</sub>, ESR, MSL …) stehen jetzt direkt beim Lese-Leitfaden im Tab <a class="goto" href="#datenblatt">Datenblatt lesen</a>.</p>

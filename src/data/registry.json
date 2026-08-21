@@ -23,8 +23,8 @@
        "name": "Elektronik 101",
        "icon": "⚡",
        "kind": "Referenz",
-       "updated": "2026-08-11",
-       "desc": "Die große Referenz: Grundgrößen, Schaltpläne, Signale, Leistungselektronik, Protokolle, Messtechnik und Fehlersuche — plus eigene Tabs für Multimeter, Oszilloskop und Netzteil.",
+       "updated": "2026-08-20",
+       "desc": "Die große Referenz als Lernpfad: Grundlagen, Schaltungstechnik, Schaltplan und Leistungselektronik — dazu Bauteil-Datenbank, Module & Boards, Protokolle und Datenblatt-Wissen, Sicherheits- und Messpraxis mit eigenen Geräte-Tabs und eine gestraffte Fehlersuche.",
        "tags": [
         "grundlagen",
         "schaltplan",
@@ -46,6 +46,10 @@
          "t": "Basics"
         },
         {
+         "h": "signale",
+         "t": "Signale & Schaltungstechnik"
+        },
+        {
          "h": "schaltplan",
          "t": "Schaltplan lesen"
         },
@@ -54,56 +58,32 @@
          "t": "Leistung & PWM"
         },
         {
-         "h": "signale",
-         "t": "Signale & Schaltungstechnik"
-        },
-        {
-         "h": "rechner",
-         "t": "Rechner"
-        },
-        {
          "h": "komponenten",
          "t": "Bauteil-Datenbank"
         },
         {
-         "h": "displays",
-         "t": "Displays"
-        },
-        {
-         "h": "motoren",
-         "t": "Motoren"
-        },
-        {
-         "h": "mcu",
-         "t": "Mikrocontroller"
+         "h": "module",
+         "t": "Module & Boards"
         },
         {
          "h": "protokolle",
          "t": "Protokolle & Busse"
         },
         {
-         "h": "begriffe",
-         "t": "Fachbegriffe"
-        },
-        {
          "h": "datenblatt",
          "t": "Datenblatt lesen"
         },
         {
-         "h": "messgeraete",
-         "t": "Messgeräte im Überblick"
+         "h": "begriffe",
+         "t": "Fachbegriffe"
+        },
+        {
+         "h": "sicherheit",
+         "t": "Sicherheit"
         },
         {
          "h": "messen",
-         "t": "Messen & Werte"
-        },
-        {
-         "h": "fehlersuche",
-         "t": "Fehlersuche"
-        },
-        {
-         "h": "dmm-hand",
-         "t": "Handmultimeter"
+         "t": "Messen & Multimeter"
         },
         {
          "h": "dmm-tisch",
@@ -122,49 +102,43 @@
          "t": "Labornetzteil"
         },
         {
-         "h": "sicherheit",
-         "t": "Sicherheit"
+         "h": "fehlersuche",
+         "t": "Fehlersuche"
         },
         {
          "h": "praxis",
          "t": "Praxis & Aufbau"
+        },
+        {
+         "h": "rechner",
+         "t": "Rechner"
         }
        ],
        "groups": [
         {
-         "l": "Grundlagen",
+         "l": "Fundament",
          "sections": [
           "grundlagen",
-          "schaltplan",
-          "leistung",
           "signale",
-          "rechner"
+          "schaltplan",
+          "leistung"
          ]
         },
         {
          "l": "Bauteile & Systeme",
          "sections": [
           "komponenten",
-          "displays",
-          "motoren",
-          "mcu",
+          "module",
           "protokolle",
-          "begriffe",
-          "datenblatt"
+          "datenblatt",
+          "begriffe"
          ]
         },
         {
-         "l": "Messen & Fehlersuche",
+         "l": "Messen",
          "sections": [
-          "messgeraete",
+          "sicherheit",
           "messen",
-          "fehlersuche"
-         ]
-        },
-        {
-         "l": "Meine Geräte",
-         "sections": [
-          "dmm-hand",
           "dmm-tisch",
           "oszilloskop",
           "lcrp1",
@@ -172,10 +146,11 @@
          ]
         },
         {
-         "l": "Sicherheit & Praxis",
+         "l": "Anwenden",
          "sections": [
-          "sicherheit",
-          "praxis"
+          "fehlersuche",
+          "praxis",
+          "rechner"
          ]
         }
        ],
@@ -183,7 +158,12 @@
         "steckbrett": "praxis",
         "regeln": "praxis",
         "boarddiagnose": "fehlersuche",
-        "messgeraet": "dmm-hand"
+        "messgeraet": "messen",
+        "displays": "module",
+        "motoren": "module",
+        "mcu": "module",
+        "messgeraete": "messen",
+        "dmm-hand": "messen"
        }
       },
       {
@@ -334,56 +314,6 @@
         "workflow": "start",
         "equipment": "werkzeug"
        }
-      },
-      {
-       "id": "robotik",
-       "file": "robotik-referenz.html",
-       "name": "Robotik",
-       "icon": "🤖",
-       "kind": "Referenz",
-       "updated": "2026-03-14",
-       "desc": "Aktorik, Sensorik, Steuerung und Software-Stack — plus Lernpfad vom ersten Servo bis zum Robot Learning.",
-       "tags": [
-        "motoren",
-        "sensoren",
-        "steuerung",
-        "ros",
-        "lernpfad"
-       ],
-       "sections": [
-        {
-         "h": "grund",
-         "t": "Grundlagen"
-        },
-        {
-         "h": "hw",
-         "t": "Hardware"
-        },
-        {
-         "h": "steu",
-         "t": "Steuerung"
-        },
-        {
-         "h": "sw",
-         "t": "Software"
-        },
-        {
-         "h": "rl",
-         "t": "Robot Learning"
-        },
-        {
-         "h": "pfad",
-         "t": "Lernpfad"
-        },
-        {
-         "h": "gloss",
-         "t": "Glossar"
-        }
-       ],
-       "related": [
-        "elektronik-101",
-        "maker-komponenten"
-       ]
       }
      ]
     },
@@ -393,56 +323,30 @@
      "desc": "Was zusammenhält, sich dreht und geschmiert werden will.",
      "modules": [
       {
-       "id": "maker-komponenten",
-       "file": "maker-komponenten.html",
-       "name": "Maker-Komponenten",
-       "icon": "🔩",
-       "kind": "Datenbank",
-       "updated": "2026-08-19",
-       "desc": "Schrauben, Muttern, Lager, Profile, Federn, Magnete und Klebstoffe mit Normen, Größen und Auswahlhilfe — dazu Anziehdrehmomente sowie Kernloch- und Durchgangsbohrungen.",
-       "tags": [
-        "schrauben",
-        "normteile",
-        "lager",
-        "gewinde",
-        "drehmoment"
-       ],
-       "sections": [
-        {
-         "h": "komp",
-         "t": "Komponenten"
-        },
-        {
-         "h": "torque",
-         "t": "Drehmoment"
-        },
-        {
-         "h": "thread",
-         "t": "Gewinde & Bohren"
-        },
-        {
-         "h": "glossar",
-         "t": "Glossar"
-        }
-       ],
-       "related": [
-        "maschinenelemente",
-        "konstruktion"
-       ]
-      },
-      {
-       "id": "maschinenbau",
-       "file": "mechanical-engineering-cheatsheet.html",
-       "name": "Maschinenbau",
-       "icon": "📐",
-       "kind": "Cheatsheet",
-       "updated": "2026-08-19",
-       "desc": "Kernkonzepte, Formelsammlung, Werkstoffkennwerte und Do's & Don'ts für Festigkeit, Statik, Bewegung, Toleranzen, Fertigung und Antriebe — als schnelles Nachschlagewerk für die Werkstatt.",
+       "id": "mechanik-robotik",
+       "file": "mechanik-robotik.html",
+       "name": "Mechanik & Robotik",
+       "icon": "🦾",
+       "kind": "Referenz",
+       "updated": "2026-08-20",
+       "desc": "Maschinenbau und Robotik in einem Modul: Kernkonzepte, Formeln, Werkstoffe und Do's & Don'ts, die Komponenten-Datenbank mit Drehmoment- und Gewindetabellen — und der Robotik-Stack von Aktorik über Steuerung und ROS2 bis Robot Learning.",
        "tags": [
         "formeln",
         "festigkeit",
         "werkstoffe",
-        "toleranzen"
+        "toleranzen",
+        "schrauben",
+        "normteile",
+        "lager",
+        "gewinde",
+        "drehmoment",
+        "motoren",
+        "sensoren",
+        "steuerung",
+        "regelung",
+        "ros2",
+        "robotik",
+        "lernpfad"
        ],
        "sections": [
         {
@@ -462,15 +366,88 @@
          "t": "Do's & Don'ts"
         },
         {
+         "h": "komp",
+         "t": "Komponenten"
+        },
+        {
+         "h": "torque",
+         "t": "Drehmoment"
+        },
+        {
+         "h": "thread",
+         "t": "Gewinde & Bohren"
+        },
+        {
+         "h": "robo-grund",
+         "t": "Robotik-Grundlagen"
+        },
+        {
+         "h": "robo-hw",
+         "t": "Roboter-Hardware"
+        },
+        {
+         "h": "robo-steuerung",
+         "t": "Steuerung & Regelung"
+        },
+        {
+         "h": "robo-sw",
+         "t": "Software & ROS2"
+        },
+        {
+         "h": "robo-lernen",
+         "t": "Robot Learning & Lernpfad"
+        },
+        {
          "h": "glossar",
          "t": "Glossar"
         }
        ],
+       "groups": [
+        {
+         "l": "Mechanik",
+         "sections": [
+          "konzepte",
+          "formeln",
+          "material",
+          "dodont"
+         ]
+        },
+        {
+         "l": "Komponenten",
+         "sections": [
+          "komp",
+          "torque",
+          "thread"
+         ]
+        },
+        {
+         "l": "Robotik",
+         "sections": [
+          "robo-grund",
+          "robo-hw",
+          "robo-steuerung",
+          "robo-sw",
+          "robo-lernen"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "glossar"
+         ]
+        }
+       ],
+       "alias": {
+        "grund": "robo-grund",
+        "hw": "robo-hw",
+        "steu": "robo-steuerung",
+        "sw": "robo-sw",
+        "rl": "robo-lernen",
+        "pfad": "robo-lernen",
+        "gloss": "glossar"
+       },
        "related": [
-        "maker-komponenten",
-        "technische-mechanik",
-        "werkstoffkunde",
-        "konstruktion"
+        "elektronik-101"
        ]
       },
       {
@@ -546,7 +523,7 @@
         }
        ],
        "related": [
-        "maker-komponenten",
+        "mechanik-robotik",
         "schmiermittel",
         "konstruktion"
        ]
@@ -675,7 +652,7 @@
        ],
        "related": [
         "rentabilitaet",
-        "maschinenbau"
+        "mechanik-robotik"
        ]
       },
       {
@@ -835,7 +812,7 @@
         }
        ],
        "related": [
-        "maschinenbau",
+        "mechanik-robotik",
         "sensorik-aktorik",
         "regelungstechnik"
        ]
@@ -962,7 +939,7 @@
         }
        ],
        "related": [
-        "maker-komponenten",
+        "mechanik-robotik",
         "schmiermittel",
         "sensorik-aktorik"
        ]
@@ -1074,7 +1051,7 @@
        ],
        "related": [
         "filament",
-        "maschinenbau",
+        "mechanik-robotik",
         "loeten"
        ]
       },
@@ -1193,7 +1170,7 @@
         "pcb-design",
         "filament",
         "dremel",
-        "maker-komponenten"
+        "mechanik-robotik"
        ]
       }
      ]
@@ -1763,7 +1740,7 @@
        ],
        "related": [
         "elektronik-101",
-        "robotik"
+        "mechanik-robotik"
        ]
       }
      ]
@@ -1879,7 +1856,7 @@
         }
        ],
        "related": [
-        "robotik"
+        "mechanik-robotik"
        ]
       },
       {
@@ -1990,9 +1967,7 @@
         }
        ],
        "related": [
-        "robotik",
-        "maker-komponenten",
-        "maschinenbau"
+        "mechanik-robotik"
        ]
       },
       {
@@ -2489,7 +2464,7 @@
        "related": [
         "elektronik-101",
         "loeten",
-        "robotik"
+        "mechanik-robotik"
        ]
       }
      ]
@@ -2601,8 +2576,7 @@
        ],
        "related": [
         "elektronik-101",
-        "maker-komponenten",
-        "maschinenbau"
+        "mechanik-robotik"
        ]
       }
      ]

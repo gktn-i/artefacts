@@ -99,13 +99,16 @@
 <thead><tr><th>Schnittstelle</th><th>Prinzip</th><th>Worauf es ankommt</th></tr></thead>
 <tbody>
 <tr><td><b>1-Wire</b></td><td>Daten (und teils Versorgung) über eine Leitung; jedes Gerät hat eine eindeutige 64-Bit-Seriennummer</td><td>Pull-up <b>4,7 kΩ</b>. Bei langen Strecken oder vielen Sensoren echte Versorgung statt Parasitärspeisung</td></tr>
+<tr><td><b>LIN</b></td><td>Einzeldraht-Bus im Auto, langsam (bis 20 kbit/s), ein Master</td><td>Für unkritische Nebensachen wie Fensterheber und Spiegel — dort, wo CAN zu teuer wäre</td></tr>
 <tr><td><b>I²S</b></td><td>Reiner Audio-Datenstrom: Bitclock, Wordselect (links/rechts), Daten</td><td>Trotz Namensähnlichkeit <b>nichts</b> mit I²C zu tun. Keine Adressen, kein Rückkanal</td></tr>
 <tr><td><b>USB</b></td><td>Differenzielles Paar D+/D−, Host steuert, Gerät antwortet</td><td>Leitungsimpedanz 90 Ω, Paar gleich lang führen. Ohne gemeinsame Masse geht nichts</td></tr>
 <tr><td><b>USB-PD</b></td><td>Aushandeln der Spannung über die CC-Leitungen</td><td>5/9/15/20 V bis 5 A. <b>Ohne</b> CC-Widerstände bleibt es bei 5 V — häufigste Ursache für „Kabel lädt nicht"</td></tr>
+<tr><td><b>PCIe</b></td><td>Serielle Punkt-zu-Punkt-Verbindung in Lanes (x1, x4, x8, x16)</td><td>Jede Lane ist ein eigenes differenzielles Paar je Richtung. Mehr Lanes = mehr Bandbreite, nicht mehr Geräte</td></tr>
+<tr><td><b>MIPI DSI / CSI</b></td><td>Hochgeschwindigkeits-Schnittstellen für Display (DSI) und Kamera (CSI)</td><td>In jedem Smartphone und auf Einplatinenrechnern. Sehr empfindliche differenzielle Paare — beschädigte Flexkabel sind ein häufiger Fehler</td></tr>
 <tr><td><b>JTAG</b></td><td>TCK, TMS, TDI, TDO (+ optional TRST) als Kette durch mehrere Chips</td><td>Kann auch Lötstellen prüfen (Boundary-Scan), ohne dass Software läuft</td></tr>
 <tr><td><b>SWD</b></td><td>Zweidraht-Debug bei ARM: SWDIO, SWCLK</td><td>Die abgespeckte JTAG-Variante. Das, was Debug-Adapter üblicherweise nutzen</td></tr>
-<tr><td><b>Ethernet</b></td><td>Differenzielle Paare; MAC im Controller, PHY als Übertrager-Chip</td><td>Zwischen PHY und Buchse sitzen Übertrager (Magnetics) — oft in der Buchse integriert</td></tr>
-<tr><td><b>PWM als Signal</b></td><td>Pulsbreite codiert einen Wert, nicht Leistung</td><td>Servo: 50 Hz, 1,0 ms = links, 1,5 ms = Mitte, 2,0 ms = rechts. Tastgrad ist bedeutungslos</td></tr>
+<tr><td><b>Ethernet</b></td><td>Differenzielle Paare; MAC im Controller, PHY als Übertrager-Chip (Anbindung MAC ↔ PHY: RMII/RGMII)</td><td>Zwischen PHY und Buchse sitzen Übertrager (Magnetics) zur galvanischen Trennung — oft in der Buchse integriert</td></tr>
+<tr><td><b>PWM als Signal</b></td><td>Pulsbreite codiert einen Wert, nicht Leistung</td><td>Erklärung samt Servo-Werten im Tab <a class="goto" href="#leistung">Leistung &amp; PWM</a></td></tr>
 </tbody>
 </table></div>
 

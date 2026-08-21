@@ -1,24 +1,35 @@
 <div class="kurz"><b>Vier Handgriffe, bevor du irgendetwas glaubst:</b> ① Tastkopf steht auf <b>10×</b> — und das Gerät auch · ② Masseklemme an eine <b>echte Masse derselben Schaltung</b> · ③ <b>Kopplung DC</b>, außer du suchst Ripple · ④ <b>Trigger</b> so einstellen, dass das Bild <b>steht</b>. Ein zappelndes Bild ist kein Messergebnis.</div>
 
 <h2>Mein Oszilloskop im Griff</h2>
-<p>Das Multimeter zeigt <b>eine Zahl</b>, das Oszilloskop den <b>zeitlichen Verlauf</b>: Form, Frequenz, Störungen, Timing. Dieser Tab beschreibt Bedienung, alle Einstellungen und die Standard-Abläufe. Wann welches Gerät sinnvoll ist, steht im Tab <a class="goto" href="#messgeraete">Messgeräte im Überblick</a>.</p>
+<p>Das Multimeter zeigt <b>eine Zahl</b>, das Oszilloskop den <b>zeitlichen Verlauf</b>: Form, Frequenz, Störungen, Timing. Dieser Tab beschreibt Bedienung, alle Einstellungen und die Standard-Abläufe. Wann welches Gerät sinnvoll ist, steht im Tab <a class="goto" href="#messen">Messen</a>.</p>
 
 <h3>Das Bild verstehen</h3>
 <p>Der Schirm ist ein Raster aus Kästchen („Divisions"). Zwei Knöpfe legen fest, was ein Kästchen bedeutet — einer waagerecht (Zeit), einer senkrecht (Spannung).</p>
 <svg class="sy sy-mid" style="max-width:430px" viewBox="-46 0 486 250" role="img" aria-label="Oszilloskop-Schirm mit Raster, Rechtecksignal, Triggerlinie und Beschriftung der Achsen"><rect class="w" x="30" y="14" width="336" height="196" rx="4"/><g style="stroke:var(--border);stroke-width:1;fill:none"><path d="M72,14 V210 M114,14 V210 M156,14 V210 M198,14 V210 M240,14 V210 M282,14 V210 M324,14 V210"/><path d="M30,42 H366 M30,70 H366 M30,98 H366 M30,126 H366 M30,154 H366 M30,182 H366"/></g><path class="acc" style="stroke-width:2.4" d="M30,168 H72 V70 H156 V168 H240 V70 H324 V168 H366"/><path style="stroke:var(--rate-bad);stroke-width:1.4;stroke-dasharray:5 4;fill:none" d="M30,112 H366"/><text class="lbl" x="372" y="116" style="fill:var(--rate-bad)">Trigger</text><path style="stroke:var(--rate-bad);stroke-width:1.4;fill:none" d="M366,112 l-7,-5 M366,112 l-7,5"/><text class="lbl" x="198" y="234" text-anchor="middle">Zeit → &nbsp;·&nbsp; ein Kästchen = Zeitbasis (s/div)</text><text class="lbl" x="22" y="60" text-anchor="end">Spannung</text><text class="lbl" x="22" y="74" text-anchor="end">↑ V/div</text></svg>
 
-<h3>Bedienelemente</h3>
-<div class="tbl-wrap"><table style="min-width:800px">
-<thead><tr><th>Bereich</th><th>Element</th><th>Was es tut</th><th>Wann du es anfasst</th></tr></thead>
+<h3>Bedienelemente und Einstellungen</h3>
+<p>Ein Knopf oder ein Menüpunkt — dieselbe Tabelle. Was direkt auf der Frontplatte sitzt, steht als Knopf/Taste; alles andere erreichst du über die Kanaltaste bzw. das Trigger-Menü.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Bereich</th><th>Element / Einstellung</th><th>Was es tut · Werte</th><th>Standard · Wann du es anfasst</th></tr></thead>
 <tbody>
-<tr><td rowspan="3"><b>Vertikal</b><br><span class="cd">je Kanal</span></td><td>Großer Drehknopf <b>V/div</b></td><td>Spannung pro Kästchen</td><td>Bis das Signal etwa <b>4–6 Kästchen</b> hoch ist</td></tr>
+<tr><td rowspan="7"><b>Vertikal</b><br><span class="cd">je Kanal</span></td><td>Großer Drehknopf <b>V/div</b></td><td>Spannung pro Kästchen, 1 mV … 10 V</td><td>Bis das Signal etwa <b>4–6 Kästchen</b> hoch ist. Kleiner = mehr Auflösung, aber Gefahr, dass das Signal aus dem Bild läuft</td></tr>
 <tr><td>Kleiner Knopf <b>Position</b></td><td>Verschiebt die Kurve nach oben/unten</td><td>Nulllinie sauber platzieren, Kanäle trennen</td></tr>
-<tr><td>Kanaltaste (CH1/CH2 …)</td><td>Kanal ein/aus und öffnet dessen Menü</td><td>Kopplung, Tastkopf-Faktor, Bandbreitenlimit einstellen</td></tr>
-<tr><td rowspan="2"><b>Horizontal</b></td><td>Drehknopf <b>s/div</b></td><td>Zeit pro Kästchen</td><td>Bis <b>2–5 Perioden</b> sichtbar sind</td></tr>
+<tr><td>Kanaltaste (CH1/CH2 …)</td><td>Kanal ein/aus und öffnet dessen Menü — dort stehen die vier folgenden Punkte</td><td>Bei jedem Kanalwechsel gegenprüfen</td></tr>
+<tr><td>↳ <b>Kopplung</b></td><td><b>DC</b> · AC · GND</td><td><b>DC.</b> <b>AC</b> blendet den Gleichanteil aus → Ripple auf 12 V sichtbar machen. <b>GND</b> zeigt, wo die Nulllinie liegt</td></tr>
+<tr><td>↳ <b>Tastkopf-Faktor</b></td><td>1× · 10× · 100×</td><td><b>10×</b> — muss mit der Stellung <b>am Tastkopf</b> übereinstimmen, siehe Abschnitt Tastkopf</td></tr>
+<tr><td>↳ <b>Bandbreitenbegrenzung</b></td><td>aus · 20 MHz</td><td>aus. <b>20 MHz an</b> macht verrauschte Bilder ruhig — verfälscht aber schnelle Flanken</td></tr>
+<tr><td>↳ <b>Invertieren</b></td><td>an/aus</td><td>aus. Für Differenzbetrachtungen und negative Versorgungen</td></tr>
+<tr><td rowspan="2"><b>Horizontal</b></td><td>Drehknopf <b>s/div</b> (Zeitbasis)</td><td>Zeit pro Kästchen, ns … s</td><td>Bis <b>2–5 Perioden</b> sichtbar sind. Langsamer für den Gesamtablauf, schneller für die einzelne Flanke</td></tr>
 <tr><td>Knopf <b>Position</b></td><td>Verschiebt den Triggerpunkt im Speicher</td><td>Vorgeschichte vor dem Ereignis ansehen</td></tr>
-<tr><td rowspan="3"><b>Trigger</b></td><td>Drehknopf <b>Level</b></td><td>Auf welcher Spannung ausgelöst wird</td><td><b>Der wichtigste Knopf</b> — bis das Bild steht</td></tr>
-<tr><td>Taste <b>Mode</b></td><td>Auto · Normal · Single</td><td>Siehe Tabelle „Trigger" weiter unten</td></tr>
-<tr><td>Taste <b>Menu/Setup</b></td><td>Quelle, Flanke, Kopplung, Holdoff</td><td>Bei unruhigen oder seltenen Signalen</td></tr>
+<tr><td rowspan="6"><b>Trigger</b></td><td>Drehknopf <b>Level</b> (Pegel)</td><td>Auf welcher Spannung ausgelöst wird</td><td><b>Der wichtigste Knopf</b> — bis das Bild steht. Standard: Mitte des Signalhubs; bei verrauschten Signalen weg von der Rauschzone</td></tr>
+<tr><td>Taste <b>Mode</b></td><td><b>Auto</b> · Normal · Single</td><td>Auto zum Suchen, <b>Normal</b> zum Messen — siehe eigene Tabelle unten</td></tr>
+<tr><td>↳ <b>Quelle</b></td><td>CH1 · CH2 · extern · Netz</td><td>Der Kanal mit dem <b>saubersten</b> Signal; bei zwei Signalen immer auf das <b>Taktsignal</b> triggern</td></tr>
+<tr><td>↳ <b>Flanke</b></td><td>steigend · fallend · beide</td><td>steigend. Fallend, wenn dich das Ende eines Impulses interessiert</td></tr>
+<tr><td>↳ <b>Trigger-Kopplung / Reject</b></td><td>DC · AC · HF-Reject · Rausch-Reject</td><td>DC. Wenn hochfrequentes Rauschen den Trigger unruhig macht</td></tr>
+<tr><td>↳ <b>Holdoff</b></td><td>Zeit nach dem Trigger, in der nicht neu getriggert wird</td><td>minimal. Bei Signalen mit mehreren Flanken pro Periode (Bursts, Pakete)</td></tr>
+<tr><td rowspan="3"><b>Erfassung</b></td><td><b>Erfassungsart</b></td><td><b>Normal</b> · Peak Detect · Average · High-Res</td><td><b>Peak Detect</b> findet kurze Störspitzen · <b>Average</b> beruhigt wiederkehrende Signale · <b>High-Res</b> mittelt für mehr Auflösung</td></tr>
+<tr><td><b>Speichertiefe</b></td><td>k … M Punkte</td><td>Auto. Groß, wenn du lange Zeiträume mit feiner Auflösung aufzeichnen willst</td></tr>
+<tr><td><b>Darstellung</b></td><td>Vektor (verbunden) · Punkte · Nachleuchten</td><td>Vektor. <b>Nachleuchten</b> macht seltene Ausreißer sichtbar</td></tr>
 <tr><td rowspan="4"><b>Bedienung</b></td><td><b>Auto / Auto-Set</b></td><td>Stellt Zeitbasis, V/div und Trigger automatisch</td><td>Als Startpunkt, danach <b>immer</b> von Hand nachziehen</td></tr>
 <tr><td><b>Run / Stop</b></td><td>Erfassung läuft bzw. friert ein</td><td>Bild festhalten zum Auswerten</td></tr>
 <tr><td><b>Single</b></td><td>Wartet auf <b>ein</b> Triggerereignis und stoppt</td><td>Einmalige Vorgänge fangen — Einschaltmoment, Glitch</td></tr>
@@ -27,28 +38,6 @@
 <tr><td><b>Cursor</b></td><td>Zwei Linien, deren Abstand angezeigt wird</td><td>Wenn du einen <b>bestimmten</b> Abschnitt ausmessen willst</td></tr>
 <tr><td><b>Math</b></td><td>CH1−CH2, FFT, Integral</td><td>Differenzmessung, Frequenzanalyse</td></tr>
 <tr><td><b>Save / Utility</b></td><td>Bildschirmfoto, Kurvendaten, Grundeinstellungen</td><td>Dokumentation, Sprache, Kalibrierung</td></tr>
-</tbody>
-</table></div>
-
-<h3>Alle Einstellungen</h3>
-<div class="tbl-wrap"><table style="min-width:860px">
-<thead><tr><th>Einstellung</th><th>Werte</th><th>Standard</th><th>Wofür ändern</th></tr></thead>
-<tbody>
-<tr><td><b>Tastkopf-Faktor</b></td><td>1× · 10× · 100×</td><td><b>10×</b></td><td>Muss mit der Stellung <b>am Tastkopf</b> übereinstimmen — sonst ist der Wert um Faktor 10 falsch</td></tr>
-<tr><td><b>V/div</b></td><td>1 mV … 10 V pro Kästchen</td><td>so, dass das Signal 4–6 Kästchen hoch ist</td><td>Kleiner = mehr Auflösung, aber Gefahr, dass das Signal aus dem Bild läuft</td></tr>
-<tr><td><b>Kopplung</b></td><td><b>DC</b> · AC · GND</td><td><b>DC</b></td><td><b>AC</b> blendet den Gleichanteil aus → Ripple auf 12 V sichtbar machen. <b>GND</b> zeigt, wo die Nulllinie liegt</td></tr>
-<tr><td><b>Bandbreitenbegrenzung</b></td><td>aus · 20 MHz</td><td>aus</td><td><b>20 MHz an</b> macht verrauschte Bilder ruhig — verfälscht aber schnelle Flanken</td></tr>
-<tr><td><b>Invertieren</b></td><td>an/aus</td><td>aus</td><td>Für Differenzbetrachtungen und negative Versorgungen</td></tr>
-<tr><td><b>Zeitbasis (s/div)</b></td><td>ns … s pro Kästchen</td><td>2–5 Perioden im Bild</td><td>Langsamer für den Gesamtablauf, schneller für die einzelne Flanke</td></tr>
-<tr><td><b>Trigger-Quelle</b></td><td>CH1 · CH2 · extern · Netz</td><td>der Kanal mit dem <b>saubersten</b> Signal</td><td>Bei zwei Signalen immer auf das <b>Taktsignal</b> triggern</td></tr>
-<tr><td><b>Trigger-Flanke</b></td><td>steigend · fallend · beide</td><td>steigend</td><td>Fallend, wenn dich das Ende eines Impulses interessiert</td></tr>
-<tr><td><b>Trigger-Pegel</b></td><td>Spannung</td><td>Mitte des Signalhubs</td><td>Bei verrauschten Signalen weg von der Rauschzone legen</td></tr>
-<tr><td><b>Trigger-Modus</b></td><td><b>Auto</b> · Normal · Single</td><td>Auto zum Suchen, <b>Normal</b> zum Messen</td><td>Siehe eigene Tabelle unten</td></tr>
-<tr><td><b>Trigger-Kopplung / Reject</b></td><td>DC · AC · HF-Reject · Rausch-Reject</td><td>DC</td><td>Wenn hochfrequentes Rauschen den Trigger unruhig macht</td></tr>
-<tr><td><b>Holdoff</b></td><td>Zeit nach dem Trigger, in der nicht neu getriggert wird</td><td>minimal</td><td>Bei Signalen mit mehreren Flanken pro Periode (Bursts, Pakete)</td></tr>
-<tr><td><b>Erfassungsart</b></td><td><b>Normal</b> · Peak Detect · Average · High-Res</td><td>Normal</td><td><b>Peak Detect</b> findet kurze Störspitzen · <b>Average</b> beruhigt wiederkehrende Signale · <b>High-Res</b> mittelt für mehr Auflösung</td></tr>
-<tr><td><b>Speichertiefe</b></td><td>k … M Punkte</td><td>Auto</td><td>Groß, wenn du lange Zeiträume mit feiner Auflösung aufzeichnen willst</td></tr>
-<tr><td><b>Darstellung</b></td><td>Vektor (verbunden) · Punkte · Nachleuchten</td><td>Vektor</td><td><b>Nachleuchten</b> macht seltene Ausreißer sichtbar</td></tr>
 </tbody>
 </table></div>
 
@@ -64,13 +53,7 @@
 <div class="tip"><b>Bleibt der Schirm im Normal-Modus leer</b>, ist das eine <b>Information</b>: Der eingestellte Pegel wird nie gekreuzt. Entweder liegt das Signal woanders, ist kleiner als gedacht — oder es kommt gar nicht. In Auto umschalten und den Pegel in den tatsächlichen Signalbereich legen.</div>
 
 <h3>Tastkopf — richtig einstellen und abgleichen</h3>
-<div class="tbl-wrap"><table style="min-width:700px">
-<thead><tr><th>Stellung</th><th>Was passiert</th><th>Wann</th></tr></thead>
-<tbody>
-<tr><td><b>10×</b></td><td>Teilt durch 10, belastet die Schaltung kaum (ca. 10 MΩ), volle Bandbreite</td><td><b>Standard</b> — hier bleibt er</td></tr>
-<tr><td>1×</td><td>Leitet direkt durch (1 MΩ), aber stark reduzierte Bandbreite und mehr Rauschen</td><td>Nur für sehr kleine, langsame Signale</td></tr>
-</tbody>
-</table></div>
+<p><b>10×</b> ist der Standard — hier bleibt er: teilt durch 10, belastet die Schaltung kaum (ca. 10 MΩ), volle Bandbreite. <b>1×</b> leitet direkt durch (1 MΩ), hat aber stark reduzierte Bandbreite und mehr Rauschen — nur für sehr kleine, langsame Signale.</p>
 <div class="warn"><b>Der häufigste Anfängerfehler:</b> Tastkopf steht auf 10×, das Gerät auf 1× — angezeigt wird dann <b>ein Zehntel</b> der echten Spannung. Aus 5 V werden 0,5 V. Bei jedem Kanalwechsel den Faktor im Kanalmenü gegenprüfen.</div>
 <div class="steps">
 <div class="step"><b>Abgleich (einmal pro Tastkopf und Kanal):</b> Spitze an den Kalibrier-Ausgang des Geräts (meist 1 kHz Rechteck), Masseklemme an den Masseanschluss daneben.</div>
@@ -106,7 +89,6 @@
 <tr><td>Alles rauscht, keine Struktur</td><td>V/div zu klein, Masseklemme nicht angeschlossen</td><td>Masse prüfen, 20-MHz-Limit einschalten</td></tr>
 <tr><td>50-Hz-Welle über allem</td><td>Netzeinstreuung, offene oder schlechte Masse</td><td>Masse fest anklemmen, Leitungen kurz</td></tr>
 <tr><td>Bild zappelt trotz Trigger</td><td>Falsche Quelle, Pegel im Rauschen oder mehrere Flanken pro Periode</td><td>Auf das Taktsignal triggern, Pegel verschieben, Holdoff erhöhen</td></tr>
-<tr><td>Amplitude exakt 10× falsch</td><td>Tastkopf-Faktor stimmt nicht mit dem Gerät überein</td><td>Kanalmenü prüfen</td></tr>
 <tr><td>Signal bricht ein, sobald du antastest</td><td>Der Tastkopf belastet die Schaltung (Kapazität)</td><td>10× benutzen; empfindliche Oszillatoren nur kurz antasten</td></tr>
 </tbody>
 </table></div>
@@ -127,7 +109,7 @@
 <div class="step"><b>Von Hand nachziehen:</b> V/div so, dass das Signal 4–6 Kästchen füllt; s/div so, dass 2–5 Perioden sichtbar sind.</div>
 <div class="step"><b>Nulllinie prüfen:</b> Kopplung kurz auf <b>GND</b> stellen — dort liegt die Null. Danach zurück auf DC.</div>
 <div class="step"><b>Auf Normal umschalten</b> und den Trigger-Pegel in die Mitte des Signalhubs legen. Steht das Bild, ist es echt.</div>
-<div class="step"><b>Wenn nichts kommt:</b> Masse falsch? Falscher Pin? Signal existiert nicht? Zuerst mit dem <a class="goto" href="#dmm-hand">Multimeter</a> prüfen, ob überhaupt Spannung anliegt.</div>
+<div class="step"><b>Wenn nichts kommt:</b> Masse falsch? Falscher Pin? Signal existiert nicht? Zuerst mit dem <a class="goto" href="#messen">Multimeter</a> prüfen, ob überhaupt Spannung anliegt.</div>
 </div>
 
 <h4>③ PWM messen</h4>

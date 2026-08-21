@@ -85,11 +85,9 @@
 </div>
 
 <h4>③ Kurzschluss auf einer Platine finden</h4>
+<p>Das vollständige Vorgehen samt Alternativen (Milliohm-Methode, Spannungsabfall verfolgen, Sektionieren) steht im Tab <a class="goto" href="#fehlersuche">Fehlersuche</a> — hier nur die Netzteil-Einstellung dafür:</p>
 <div class="steps">
-<div class="step"><b>Spannung sehr niedrig einstellen</b> (0,5–2 V), Strom-Limit auf einige hundert mA bis 1 A.</div>
-<div class="step"><b>An die kurzgeschlossene Rail anschließen.</b> Das Gerät geht sofort in CC und speist einen definierten Strom ein.</div>
-<div class="step"><b>Das defekte Bauteil wird warm</b> — mit Finger, IR-Thermometer oder Wärmebild suchen.</div>
-<div class="step"><b>Alternativ die Milliohm-Methode</b> mit dem <a class="goto" href="#dmm-tisch">Tischmultimeter</a> — beide Verfahren ergänzen sich.</div>
+<div class="step"><b>Spannung sehr niedrig</b> (0,5–2 V), <b>Strom-Limit auf einige hundert mA bis 1 A</b>, dann an die kurzgeschlossene Rail. Das Gerät geht sofort in CC und speist einen definierten Strom ein — das defekte Bauteil wird warm (Finger, IR-Thermometer, Wärmebild).</div>
 <div class="step"><b>Nicht zu lange einspeisen:</b> Die niedrige Spannung schützt die Umgebung, aber das defekte Bauteil kann durchbrennen.</div>
 </div>
 
@@ -130,12 +128,10 @@
 <h3>Begriffe</h3>
 <div class="grid">
 <div class="card"><div class="ct">CC vs. OCP</div><div class="cd"><b>CC</b> regelt den Strom auf das Limit herunter und lässt den Ausgang an. <b>OCP</b> schaltet den Ausgang hart ab und muss quittiert werden.</div><ul><li>CC zum Schützen beim Experimentieren</li><li>OCP, wenn ein Fehler sofort <b>komplett</b> trennen soll</li></ul></div>
-<div class="card"><div class="ct">Ripple / Restwelligkeit</div><div class="cd">Reste von Wechselanteil auf der Gleichspannung. Sichtbar nur mit dem Oszilloskop bei AC-Kopplung.</div><ul><li>Wichtig bei Analog- und Funktechnik</li><li>Messen: Tab <a class="goto" href="#oszilloskop">Oszilloskop</a>, Workflow ④</li></ul></div>
-<div class="card"><div class="ct">Linear vs. Schaltnetzteil</div><div class="cd"><b>Linear:</b> sehr sauber, aber schwer und warm. <b>Schaltend:</b> leicht und effizient, dafür etwas mehr Ripple.</div><ul><li>Für Elektronik-Hobby reicht ein gutes Schaltnetzteil</li></ul></div>
 <div class="card"><div class="ct">Sense-Leitungen (4-Draht)</div><div class="cd">Zwei dünne Extraleitungen messen die Spannung direkt am Verbraucher und gleichen den Leitungsabfall aus.</div><ul><li>Erst bei hohen Strömen oder langen Kabeln relevant</li></ul></div>
-<div class="card"><div class="ct">Tracking</div><div class="cd">Koppelt zwei Ausgänge, typisch für symmetrische Versorgung (+12 V / −12 V für Operationsverstärker).</div><ul><li>Der gemeinsame Punkt wird zur Masse</li></ul></div>
-<div class="card"><div class="ct">Serie und parallel</div><div class="cd">Zwei Ausgänge in Reihe = mehr Spannung, parallel = mehr Strom.</div><ul><li>Nur bei Geräten, die das ausdrücklich erlauben</li></ul></div>
+<div class="card"><div class="ct">Mehrkanal: Serie · Parallel · Tracking</div><div class="cd">Zwei Ausgänge in Reihe = mehr Spannung, parallel = mehr Strom. <b>Tracking</b> koppelt zwei Ausgänge für symmetrische Versorgung (+12 V / −12 V für Operationsverstärker).</div><ul><li>Nur bei Geräten, die das ausdrücklich erlauben</li><li>Beim Tracking wird der gemeinsame Punkt zur Masse</li></ul></div>
 </div>
+<p class="note"><b>Ripple/Restwelligkeit</b> und <b>Linear vs. Schaltnetzteil</b> sind im Tab <a class="goto" href="#leistung">Leistung &amp; PWM</a> erklärt — Ripple sichtbar machen: Tab <a class="goto" href="#oszilloskop">Oszilloskop</a>, Workflow ④.</p>
 
 <h3>Fehler und Grenzen</h3>
 <div class="tbl-wrap"><table style="min-width:800px">
@@ -146,7 +142,6 @@
 <tr><td>Beim Anklemmen funkt es</td><td>Output war an</td><td>Reihenfolge einhalten: verkabeln, dann einschalten</td></tr>
 <tr><td>Verpolt angeschlossen</td><td>Rot/Schwarz vertauscht</td><td>Das Strom-Limit begrenzt den Schaden — deshalb wird es <b>vorher</b> gesetzt</td></tr>
 <tr><td>Gerät schaltet unter Last ab</td><td>OTP/OPP: Übertemperatur oder Leistungsgrenze</td><td>Abkühlen lassen, Lüftungsschlitze frei halten, Dauerlast reduzieren</td></tr>
-<tr><td>Messwerte weichen ab</td><td>Eingebaute Anzeigen sind grob</td><td>Mit dem Multimeter am Verbraucher gegenmessen</td></tr>
 <tr><td>Empfindliche Analogschaltung stört</td><td>Ripple des Schaltnetzteils</td><td>Zusätzliche Filterung, oder linear geregelte Quelle</td></tr>
 </tbody>
 </table></div>

@@ -12,10 +12,12 @@ vollständig lesbar sind.
 
 Die UI ist als **ein zusammenhängender Hub** gebaut, nicht als Seiten-Stapel:
 
-- **Navigations-Rail** (links, auf jeder Seite identisch): der komplette Baum
-  Hubs → Module → Abschnitte. Der aktive Hub ist aufgeklappt, beim aktiven
-  Modul hängen dessen Abschnitte samt Gruppen und Überschriften-Subnav direkt
-  im Baum. Auf Mobilgeräten wird die Rail zur Schublade.
+- **Navigations-Rail** (links, auf jeder Seite identisch), in zwei Zonen:
+  *Bibliothek* — alle Hubs kompakt, Modullisten klappen auf Wunsch auf
+  (auf Index- und Hub-Seiten ist der aktive Hub offen); *Modul* — auf
+  Modulseiten ein abgesetztes Panel mit den Abschnitten des aktiven Moduls
+  samt Gruppen und Überschriften-Subnav. Auf Mobilgeräten wird die Rail
+  zur Schublade.
 - **Topbar**: Brotkrumen (inkl. aktivem Abschnitt) + Suche.
 - **Suchpalette (⌘K oder `/`)**: Registry-Treffer sofort, Pagefind-Volltext
   nachgeladen.

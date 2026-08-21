@@ -1,42 +1,26 @@
 <div class="kurz"><b>Aufbau-Regeln:</b> Erst Schaltplan, dann Steckbrett, dann Lochraster. Versorgung zuerst verdrahten und messen, Verbraucher zuletzt. Farben konsequent: rot = Plus, schwarz = Masse.</div>
-<h2>Goldene Regeln: immer beachten</h2>
-<div class="card">
-<div class="rule"><span class="ico">💡</span><div><b>LED nie ohne Vorwiderstand.</b> Eine LED begrenzt ihren Strom nicht selbst. Ohne Widerstand zieht sie zu viel und brennt durch. (<a href="#rechner">Rechner</a>.)</div></div>
-<div class="rule"><span class="ico">🔌</span><div><b>Polarität prüfen, bevor du Strom gibst.</b> Elko, LED, Diode, Akku, Modul-Versorgung: falsch herum kann sofort zerstören.</div></div>
-<div class="rule"><span class="ico">⚡</span><div><b>3,3 V und 5 V nicht blind mischen.</b> 5 V an einen 3,3-V-Eingang (z. B. ESP32) kann den Pin zerstören. Pegelwandler oder Spannungsteiler nutzen.</div></div>
-<div class="rule"><span class="ico">🔥</span><div><b>Leistung/Strombelastbarkeit im Blick.</b> Jeder Widerstand, jede Leiterbahn, jeder Regler hat ein Limit. Heiße Bauteile = zu viel Strom.</div></div>
-<div class="rule"><span class="ico">🚫</span><div><b>Nie Plus und Minus direkt verbinden.</b> Kurzschluss. Vor dem Einschalten Verdrahtung kontrollieren.</div></div>
-<div class="rule"><span class="ico">🔗</span><div><b>Gemeinsame Masse.</b> Sobald mehrere Baugruppen zusammenarbeiten, müssen alle GND/Minus verbunden sein, sonst funktionieren Signale nicht.</div></div>
-<div class="rule"><span class="ico">⚙️</span><div><b>Motor/Relais/Spule braucht Freilaufdiode.</b> Beim Abschalten erzeugt eine Spule eine Spannungsspitze, die Transistoren killt. Diode parallel schützt.</div></div>
-<div class="rule"><span class="ico">🧲</span><div><b>ESD beachten (statische Aufladung).</b> Empfindliche Chips vorher entladen: kurz geerdetes Metall anfassen. Details im Abschnitt <b>ESD</b> weiter unten.</div></div>
-<div class="rule"><span class="ico">📄</span><div><b>Im Zweifel ins Datenblatt.</b> Grenzwerte ("Absolute Maximum Ratings") nie überschreiten.</div></div>
-<div class="rule"><span class="ico">🔋</span><div><b>Li-Ion / LiPo mit Respekt.</b> Nie tiefentladen, nie über 4,2 V/Zelle laden, nie mechanisch beschädigen. Schutzschaltung (BMS) verwenden.</div></div>
-</div>
 
-<h2>Standard-Vorgänge</h2>
-
-<h3>Mit dem Multimeter messen</h3>
+<h2>Merkliste: Regeln &amp; Praxiswissen</h2>
+<p>Die Kurzfassung von allem, was in den anderen Tabs ausführlich steht — je ein Satz, mit Verweis auf die volle Erklärung.</p>
 <div class="card">
-<p><b>Merksatz: Spannung misst man nebendran (parallel), Strom misst man mittendrin (in Reihe).</b> Durchgang und Widerstand immer stromlos. Alle Rezepte Schritt für Schritt — mit Buchsen, Modus und Spitzen-Position: Tab <a href="#messen">Messen &amp; Werte</a>, Gerätebedienung im Tab <a href="#dmm-hand">Handmultimeter</a>.</p>
-</div>
-
-<h3>Löten: die Basics</h3>
-<div class="card">
-<ul>
-<li><b>Reihenfolge:</b> erst die <b>Lötstelle</b> mit der Spitze erwärmen, dann den Draht (Lot) an die Stelle führen, nicht an die Spitze. Lot fließt zur Wärme.</li>
-<li><b>Gute Lötstelle:</b> konkave, geschlossene Kehle, sauber benetzt. Kugelig und schlecht benetzt = kalt: Flussmittel dazu und neu aufschmelzen.</li>
-<li>Alles Weitere — Temperaturen, Material, THT/SMD, Heißluft, Fehlerbilder: eigenes Artefakt <a href="loeten-referenz.html">Löten-Referenz</a>.</li>
-</ul>
-</div>
-
-<h2>Good to know: Praxis-Wissen</h2>
-<div class="card">
-<div class="rule"><span class="ico">🎨</span><div><b>Widerstands-Farbcode</b> liest man von der Seite, wo die Ringe näher am Rand sitzen. (Decoder im Tab <a href="#rechner">Rechner</a>.)</div></div>
-<div class="rule"><span class="ico">🔢</span><div><b>SMD-Beschriftung:</b> „103" heißt 10 + 3 Nullen = 10 kΩ. Alle Code-Varianten für Widerstände, Kondensatoren und Spulen: Tab <a href="#rechner">Rechner</a>. EIA-96 und gepolte Bauformen: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</div></div>
-<div class="rule"><span class="ico">📐</span><div><b>E-Reihen:</b> Widerstände gibt es nur in genormten Stufen (E12: 10, 12, 15, 18, 22…). Krumme Wunschwerte gibt es selten — nächsten Normwert nehmen, alle Reihen im Tab <a href="#rechner">Rechner</a>.</div></div>
-<div class="rule"><span class="ico">🟦</span><div><b>Transistor als Schalter:</b> kleiner Strom (Basis/Gate) schaltet großen Strom — Standard, um mit einem MCU-Pin Motor/Relais zu schalten. MOSFET (Spannung am Gate) für hohe Ströme, Bipolar (Strom in die Basis) für kleine Signale. Dimensionierung und Beschaltung: Tab <a href="#signale">Signale &amp; Schaltungstechnik</a>.</div></div>
-<div class="rule"><span class="ico">📉</span><div><b>Linearregler (7805) verheizt die Differenz</b> als Wärme: 12 V → 5 V bei 1 A = 7 W Hitze. Bei großem Abstand lieber Schaltregler (Buck) nehmen.</div></div>
-<div class="rule"><span class="ico">🧮</span><div><b>Kondensator glättet, Spule filtert.</b> Großer Elko am Reglereingang/-ausgang stabilisiert die Versorgung. 100 nF Keramik neben jedem IC.</div></div>
+<div class="rule"><span class="ico">💡</span><div><b>LED nie ohne Vorwiderstand</b> — sie begrenzt ihren Strom nicht selbst (<a href="#rechner">Rechner</a>).</div></div>
+<div class="rule"><span class="ico">🔌</span><div><b>Polarität prüfen, bevor du Strom gibst</b> — Elko, LED, Diode, Akku, Modul falsch herum zerstört sofort.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>3,3 V und 5 V nicht blind mischen</b> — 5 V an einem 3,3-V-Eingang (z. B. ESP32) kann den Pin zerstören: Pegelwandler oder Spannungsteiler.</div></div>
+<div class="rule"><span class="ico">🔥</span><div><b>Leistung im Blick</b> — jeder Widerstand, jede Leiterbahn, jeder Regler hat ein Limit; heiße Bauteile = zu viel Strom.</div></div>
+<div class="rule"><span class="ico">🚫</span><div><b>Nie Plus und Minus direkt verbinden</b> — vor dem Einschalten die Verdrahtung kontrollieren.</div></div>
+<div class="rule"><span class="ico">🔗</span><div><b>Gemeinsame Masse</b> — sobald mehrere Baugruppen zusammenarbeiten, alle GND/Minus verbinden, sonst funktionieren Signale nicht.</div></div>
+<div class="rule"><span class="ico">⚙️</span><div><b>Motor, Relais und Spule nur mit Freilaufdiode parallel</b> — die Abschalt-Spannungsspitze killt sonst den Transistor.</div></div>
+<div class="rule"><span class="ico">🧲</span><div><b>ESD beachten</b> — vor dem Anfassen empfindlicher Chips kurz geerdetes Metall berühren; Details im Abschnitt <b>ESD</b> unten.</div></div>
+<div class="rule"><span class="ico">📄</span><div><b>Im Zweifel ins <a href="#datenblatt">Datenblatt</a></b> — „Absolute Maximum Ratings" nie überschreiten.</div></div>
+<div class="rule"><span class="ico">🔋</span><div><b>Li-Ion / LiPo mit Respekt</b> — nie tiefentladen, nie über 4,2 V/Zelle laden, nie beschädigen, immer mit Schutzschaltung (BMS).</div></div>
+<div class="rule"><span class="ico">📏</span><div><b>Spannung misst man nebendran (parallel), Strom mittendrin (in Reihe)</b> — Ω und Durchgang stromlos; alle Rezepte im Tab <a href="#messen">Messen &amp; Werte</a>.</div></div>
+<div class="rule"><span class="ico">🔩</span><div><b>Lot fließt zur Wärme</b> — erst die Lötstelle erwärmen, dann den Draht zuführen; gut = konkave benetzte Kehle, kugelig = kalt (<a href="loeten-referenz.html">Löten-Referenz</a>).</div></div>
+<div class="rule"><span class="ico">🎨</span><div><b>Widerstands-Farbcode</b> von der Seite lesen, wo die Ringe näher am Rand sitzen — Decoder im Tab <a href="#rechner">Rechner</a>.</div></div>
+<div class="rule"><span class="ico">🔢</span><div><b>SMD-Code</b> „103" = 10 + 3 Nullen = 10 kΩ — alle Varianten im Tab <a href="#rechner">Rechner</a>, EIA-96 und gepolte Bauformen: <a href="loeten-referenz.html#bauteile">Löten-Referenz → Bauteile</a>.</div></div>
+<div class="rule"><span class="ico">📐</span><div><b>E-Reihen:</b> Widerstände gibt es nur in genormten Stufen (E12: 10, 12, 15, 18, 22 …) — den nächsten Normwert nehmen (<a href="#rechner">Rechner</a>).</div></div>
+<div class="rule"><span class="ico">🟦</span><div><b>Transistor als Schalter</b> — kleiner Strom (Basis/Gate) schaltet großen Strom; MOSFET für hohe Ströme, Bipolar für kleine Signale (<a href="#signale">Signale &amp; Schaltungstechnik</a>).</div></div>
+<div class="rule"><span class="ico">📉</span><div><b>Linearregler (7805) verheizen die Differenz</b> (12 V → 5 V bei 1 A = 7 W) — bei großem Abstand Schaltregler (Buck) nehmen.</div></div>
+<div class="rule"><span class="ico">🧮</span><div><b>Kondensator glättet, Spule filtert</b> — großer Elko am Regler, 100 nF Keramik neben jedes IC.</div></div>
 </div>
 
 <h2>ESD: die Gefahr, die man nicht bemerkt</h2>
@@ -64,7 +48,7 @@
 <h2>Steckbrett (Breadboard)</h2>
 <p>Die schnellste Art, eine Schaltung aufzubauen, <b>ohne zu löten</b>. Du steckst Bauteile und Drähte einfach in die Löcher, kannst alles wieder umstecken und mehrfach verwenden. Perfekt zum Ausprobieren, bevor etwas fest verlötet wird.</p>
 
-<h2>Wie es innen verdrahtet ist</h2>
+<h3>Wie es innen verdrahtet ist</h3>
 <svg class="sy sy-mid" style="max-width:460px" viewBox="0 0 478 270" role="img" aria-label="Steckbrett von oben: waagerechte Versorgungsschienen, senkrechte 5er-Gruppen im Mittelfeld, Mittelrille mit IC darüber"><rect class="w" x="20" y="12" width="280" height="246" rx="8"/><path style="stroke:var(--rate-bad);stroke-width:1.6;fill:none" d="M40,34 H280"/><path style="stroke:#4d82c4;stroke-width:1.6;fill:none" d="M40,52 H280"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,34 H278 M46,52 H278"/><text class="lbl" x="34" y="39" text-anchor="end" style="fill:var(--rate-bad)">+</text><text class="lbl" x="34" y="57" text-anchor="end" style="fill:#4d82c4">−</text><path class="acc" style="stroke-width:3" d="M110,84 V148"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,84 H278 M46,100 H278 M46,116 H278 M46,132 H278 M46,148 H278"/><path class="w" style="stroke-width:1" d="M20,160 H300 M20,172 H300"/><path class="w" style="stroke-width:4.5;stroke-dasharray:0 16;stroke-linecap:round" d="M46,184 H278 M46,200 H278 M46,216 H278 M46,232 H278 M46,248 H278"/><rect class="w" x="196" y="146" width="72" height="40" rx="3" style="fill:var(--surface)"/><path class="w" d="M196,160 a8,8 0 0 1 0,12"/><text class="lbl" x="232" y="170" text-anchor="middle">IC</text><text class="lbl" x="310" y="38">Schienen: waagerecht</text><text class="lbl" x="310" y="51">durchgehend (+/−)</text><text class="lbl" x="310" y="112">5er-Gruppe: senkrecht</text><text class="lbl" x="310" y="125">verbunden, jede Spalte</text><text class="lbl" x="310" y="138">für sich</text><text class="lbl" x="310" y="170">Mittelrille trennt</text><text class="lbl" x="310" y="183">oben und unten</text><text class="lbl" x="310" y="210">IC sitzt über der Rille</text><path class="w" style="stroke-dasharray:4 4;stroke-width:1" d="M306,205 L272,182 M306,108 L116,112"/></svg>
 <div class="grid2">
 <div class="card"><h3>Versorgungsschienen (am Rand)</h3><p>Die langen Reihen außen, meist mit rotem (+) und blauem (−) Strich markiert. Sie sind <b>waagerecht durchgehend</b> verbunden. Hier legst du Plus und Masse an, sodass du sie überall abgreifen kannst.</p></div>
@@ -73,7 +57,7 @@
 <div class="card"><h3>Jumper-Kabel</h3><p>Zum Verbinden der Punkte. Drei Sorten: Stecker-Stecker (Board zu Board), Stecker-Buchse (zu Modulen/Pins) und Buchse-Buchse. Alle drei lohnen sich im Vorrat.</p></div>
 </div>
 
-<h2>Aufbau in der Praxis</h2>
+<h3>Aufbau in der Praxis</h3>
 <div class="card"><ul>
 <li>Zuerst Plus und Masse von der Quelle auf die beiden Versorgungsschienen legen.</li>
 <li>ICs mittig über die Rille setzen, Kerbe/Punkt am Chip zeigt Pin 1.</li>
@@ -81,7 +65,7 @@
 <li>Kurze, flach liegende Drähte halten den Aufbau übersichtlich und die Fehlersuche einfach.</li>
 </ul></div>
 
-<h2>Worauf achten</h2>
+<h3>Worauf achten</h3>
 <div class="card">
 <div class="rule"><span class="ico">➗</span><div><b>Versorgungsschienen sind bei langen Boards oft in der Mitte unterbrochen.</b> Dann mit einem kurzen Draht durchbrücken, sonst hat die zweite Hälfte keinen Strom.</div></div>
 <div class="rule"><span class="ico">🔌</span><div><b>Nur für kleine Ströme.</b> Die Kontakte vertragen keine hohen Leistungen. Für Motoren oder viel Strom ungeeignet.</div></div>

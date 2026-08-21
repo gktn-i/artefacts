@@ -1,9 +1,13 @@
 ---
 /* ============================================================================
    Navigations-Rail — das Rückgrat der Werkbank.
-   Kennt auf jeder Seite alle Hubs und Module; der aktive Hub ist aufgeklappt,
-   beim aktiven Modul hängen dessen Abschnitte (samt Gruppen) direkt im Baum.
-   Der Hash-Router der Modulseite bedient #secNav.
+   Zwei klar getrennte Zonen:
+     · BIBLIOTHEK — alle Hubs; auf Index- und Hub-Seiten klappt der aktive
+       Hub seine Modulliste auf. Auf Modulseiten bleibt hier alles kompakt
+       eingeklappt (aufklappen geht jederzeit).
+     · MODUL — nur auf Modulseiten: ein abgesetztes Panel mit dem aktiven
+       Modul und seinen Abschnitten (samt Gruppen). Der Hash-Router der
+       Modulseite bedient #secNav, das Überschriften-Subnav hängt er darunter.
    Auf Mobilgeräten wird die Rail zur Schublade (Burger in der Topbar).
    ========================================================================== */
 import { hubs, modules, sectionCount, lastUpdated, fmtDate } from "../lib/registry.mjs";
@@ -41,7 +45,7 @@ const navGroups = (m: any) =>
       hubs.map((h: any) => {
         const isHubHere = hub && hub.id === h.id;
         return (
-          <details class={`hubnode hx${isHubHere ? " here" : ""}`} open={isHubHere} style={`--hcl:${h.accent.l};--hcd:${h.accent.d}`}>
+          <details class={`hubnode hx${isHubHere ? " here" : ""}`} open={isHubHere && !mod} style={`--hcl:${h.accent.l};--hcd:${h.accent.d}`}>
             <summary>
               <span class="dot" aria-hidden="true"></span>
               <span>{h.name}</span>
@@ -52,31 +56,42 @@ const navGroups = (m: any) =>
             </summary>
             <div class="mods">
               <a class={`modlink${isHubHere && !mod ? " on" : ""}`} href={h.file}>Übersicht<span class="ct">{h.sectionCount}</span></a>
-              {h.modules.map((m: any) =>
-                mod && mod.id === m.id ? (
-                  <div class="modnode">
-                    <a class="modlink on" href={m.file}>{m.name}</a>
-                    <nav class="secnav" id="secNav" aria-label="Abschnitte">
-                      {navGroups(mod).map((g: any) => (
-                        <>
-                          {g.label && <div class="gl">{g.label}</div>}
-                          {g.hashes.map((sh: string, i: number) => (
-                            <a href={`#${sh}`} data-h={sh} class={!g.label && i === 0 ? "on" : undefined}>
-                              {secTitle(mod, sh)}
-                            </a>
-                          ))}
-                        </>
-                      ))}
-                    </nav>
-                  </div>
-                ) : (
-                  <a class="modlink" href={m.file}>{m.name}<span class="ct">{m.sections.length || "–"}</span></a>
-                )
-              )}
+              {h.modules.map((m: any) => (
+                <a class={`modlink${mod && mod.id === m.id ? " on" : ""}`} href={m.file}>{m.name}<span class="ct">{m.sections.length || "–"}</span></a>
+              ))}
             </div>
           </details>
         );
       })
+    }
+
+    {
+      mod && (
+        <>
+          <div class="tree-label ml">Modul</div>
+          <section class="railmod" aria-label={`Abschnitte von ${mod.name}`}>
+            <header class="rm-head">
+              <span class="rm-ic" aria-hidden="true">{mod.icon}</span>
+              <div class="rm-tx">
+                <a class="rm-hub" href={hub.file}>{hub.name}</a>
+                <div class="rm-name">{mod.name}</div>
+              </div>
+            </header>
+            <nav class="secnav" id="secNav" aria-label="Abschnitte">
+              {navGroups(mod).map((g: any) => (
+                <>
+                  {g.label && <div class="gl">{g.label}</div>}
+                  {g.hashes.map((sh: string, i: number) => (
+                    <a href={`#${sh}`} data-h={sh} class={!g.label && i === 0 ? "on" : undefined}>
+                      {secTitle(mod, sh)}
+                    </a>
+                  ))}
+                </>
+              ))}
+            </nav>
+          </section>
+        </>
+      )
     }
   </nav>
 
