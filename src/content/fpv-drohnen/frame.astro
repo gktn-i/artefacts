@@ -4,40 +4,67 @@ import "./_style.css";
 <div class="kurz"><b>Der Rahmen ist ein Filter.</b> Er hält nicht nur die Teile zusammen, er entscheidet auch, welche Vibrationen beim Gyro ankommen. Ein steifer Rahmen mit sauber entkoppeltem Stack lässt sich mit Standardwerten fliegen; ein weicher zwingt zu aggressiver Filterung — und die kostet Regelgüte.</div>
 
 <h2>Geometrien</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 180" role="img" aria-label="Drei Rahmengeometrien in der Draufsicht: True X, Stretched X und Deadcat">
+  <!-- True X -->
+  <path class="w" d="M60,40 L160,140 M160,40 L60,140" />
+  <circle class="accs" cx="60" cy="40" r="17" /><circle class="accs" cx="160" cy="40" r="17" />
+  <circle class="accs" cx="60" cy="140" r="17" /><circle class="accs" cx="160" cy="140" r="17" />
+  <rect class="box" x="98" y="78" width="24" height="24" rx="4" />
+  <text class="lblb" x="110" y="166" text-anchor="middle">True X</text>
+  <!-- Stretched X -->
+  <path class="w" d="M270,32 L360,148 M360,32 L270,148" />
+  <circle class="accs" cx="270" cy="32" r="17" /><circle class="accs" cx="360" cy="32" r="17" />
+  <circle class="accs" cx="270" cy="148" r="17" /><circle class="accs" cx="360" cy="148" r="17" />
+  <rect class="box" x="303" y="78" width="24" height="24" rx="4" />
+  <path class="gd" d="M250,32 V148" /><text class="lbl" x="244" y="94" text-anchor="end">länger</text>
+  <text class="lblb" x="315" y="166" text-anchor="middle">Stretched X</text>
+  <!-- Deadcat -->
+  <path class="w" d="M480,40 L565,140 M600,40 L515,140" />
+  <circle class="accs" cx="480" cy="40" r="17" /><circle class="accs" cx="600" cy="40" r="17" />
+  <circle class="accs" cx="515" cy="140" r="17" /><circle class="accs" cx="565" cy="140" r="17" />
+  <rect class="box" x="528" y="78" width="24" height="24" rx="4" />
+  <path class="gd" d="M492,22 H588" /><text class="lbl" x="540" y="16" text-anchor="middle">vordere Motoren weiter außen und vorn</text>
+  <text class="lblb" x="540" y="166" text-anchor="middle">Deadcat / DC</text>
+  <path class="accf" d="M106,12 l4,-7 l4,7 z M311,4 l4,-7 l4,7 z" opacity="0"/>
+</svg>
+<figcaption>Draufsicht, vorn ist oben. True X fliegt auf Roll und Nick identisch; Stretched X beruhigt die Nickachse bei hohem Tempo (Race); Deadcat schiebt die vorderen Propeller aus dem Kamerabild (Cinematic).</figcaption>
+</figure>
 <div class="tbl-wrap"><table style="min-width:880px">
 <thead><tr><th>Bauart</th><th>Motoranordnung</th><th>Eigenschaft</th><th>Typisch für</th></tr></thead>
 <tbody>
-<tr><td><b>True X</b></td><td>Alle vier Arme gleich lang, symmetrisch</td><td>Gleiches Verhalten auf Roll und Nick, gutmütig</td><td>Freestyle, Einsteiger</td></tr>
-<tr><td><b>Stretched X</b></td><td>Vorn/hinten weiter auseinander als seitlich</td><td>Stabiler in der Nickachse, schnellere Rollrate; typisches Rennverhalten</td><td>Racing</td></tr>
-<tr><td><b>Squashed X</b></td><td>Seitlich weiter als längs</td><td>Umgekehrter Effekt, selten</td><td>Sonderbauten</td></tr>
-<tr><td><b>Deadcat / Hybrid X</b></td><td>Vordere Arme nach vorn gezogen</td><td>Propeller aus dem Kamerabild</td><td>Cinematic, Langbrennweite</td></tr>
-<tr><td><b>Ducted / Cinewhoop</b></td><td>Propeller in Kanälen</td><td>Sicher an Menschen, mehr Schub im Stand, deutlich lauter und ineffizienter bei Fahrt</td><td>Innenaufnahmen, nahe Kamerafahrten</td></tr>
+<tr><td><b>True X</b></td><td>Alle vier Arme gleich lang, symmetrisch</td><td>Gleiches Verhalten auf Roll und Nick — das neutralste Handling für Acro</td><td>Freestyle, Race, Einsteiger</td></tr>
+<tr><td><b>Stretched X</b></td><td>Vorn/hinten weiter auseinander als seitlich</td><td>Stabiler in der Nickachse bei Tempo, die Hinterprops laufen freier vom Abwind der vorderen</td><td>Racing</td></tr>
+<tr><td><b>Squashed X</b></td><td>Seitlich weiter als längs</td><td>Kompakter in der Länge, umgekehrter Effekt</td><td>Sonderbauten</td></tr>
+<tr><td><b>Deadcat / DC</b></td><td>Vordere Arme nach vorn-außen gezogen</td><td>Propeller aus dem Kamerabild; Handling minimal asymmetrisch</td><td>Cinematic, HD-Aufnahme</td></tr>
+<tr><td><b>Ducted / Cinewhoop</b></td><td>Propeller in Kanälen</td><td>Sicher an Menschen, mehr Standschub, deutlich lauter und ineffizienter bei Fahrt</td><td>Innenaufnahmen, nahe Kamerafahrten</td></tr>
 <tr><td><b>Toothpick</b></td><td>Sehr dünne Arme, minimaler Materialeinsatz</td><td>Leicht und billig zu reparieren, weniger steif</td><td>Micro-Klassen</td></tr>
 </tbody>
 </table></div>
+<p class="note">Bardwells Shopping-Lists weisen bei 5-Zoll-Rahmen ausdrücklich darauf hin, ob eine „DC“- oder „X“-Variante im Warenkorb liegt — viele beliebte Rahmen gibt es in beiden Geometrien, und der Unterschied ist im Flug spürbar.</p>
 
 <h2>Carbon: worauf es ankommt</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Armstärke</div><div class="cd">5 mm ist heute Standard bei 5-Zoll-Freestyle, 4 mm bei leichteren Bauten, 6 mm bei 7 Zoll und Aufbauten mit schwerer Kamera. Dickere Arme sind steifer und brechen seltener, kosten aber Gewicht und stehen mehr im Luftstrom.</div></div>
-  <div class="card"><div class="ct">Faser statt Füllstoff</div><div class="cd">Günstiges „Carbon“ hat oft einen hohen Harzanteil und wenige echte Lagen. Erkennbar an ausgefransten Fräskanten und daran, dass sich der Arm mit der Hand hörbar biegen lässt. Solche Rahmen bringen Vibrationen ins Gyro, bevor sie brechen.</div></div>
-  <div class="card"><div class="ct">Armbefestigung</div><div class="cd">Einzeln tauschbare Arme sind Gold wert — ein Crash kostet dann einen Arm statt einer Unterplatte. Wichtig: Schrauben mit Schraubensicherung mittelfest sichern, sonst arbeiten sich die Arme lose und erzeugen ein Vibrationsbild, das nach Motorschaden aussieht.</div></div>
-  <div class="card"><div class="ct">Kanten brechen</div><div class="cd">Carbonstaub ist gesundheitsschädlich und leitfähig. Beim Nachschleifen Maske und Absaugung, danach die Werkbank feucht abwischen — Späne in einem Stack sind eine schöne Kurzschlussquelle.</div></div>
-  <div class="card"><div class="ct">Carbon schirmt HF ab</div><div class="cd">Kohlefaser ist leitfähig. Antennen dürfen deshalb nicht am oder unter dem Rahmen liegen, sondern müssen frei stehen — sonst sinkt die Reichweite dramatisch, ohne dass etwas defekt ist.</div></div>
-  <div class="card"><div class="ct">Gewicht</div><div class="cd">Ein 5-Zoll-Rahmen wiegt je nach Bauart 90–130 g. Die Differenz klingt klein, macht bei 600 g Abfluggewicht aber gut 5 % aus — und wirkt sich direkt auf Flugzeit und Schubreserve aus.</div></div>
+  <div class="card"><div class="ct">Armstärke</div><div class="cd">5 mm ist Standard bei 5-Zoll-Freestyle, 4 mm bei Leichtbauten, 6 mm bei 7 Zoll und schweren Aufbauten. Dickere Arme sind steifer und brechen seltener, kosten aber Gewicht und stehen mehr im Luftstrom.</div></div>
+  <div class="card"><div class="ct">Faserqualität</div><div class="cd">Gutes Rahmencarbon (z. B. aus T300- oder T700-Fasern) hat viele echte Gewebelagen und saubere Fräskanten. Billiges „Carbon“ mit hohem Harzanteil erkennt man an ausgefransten Kanten und daran, dass sich der Arm hörbar biegen lässt — solche Rahmen bringen Vibration ins Gyro, bevor sie brechen.</div></div>
+  <div class="card"><div class="ct">Resonanz ist konstruierbar</div><div class="cd">Wie stark ein Rahmen bei welchen Frequenzen mitschwingt, ist eine Designeigenschaft — Chris Rosser hat mit Modalanalysen gezeigt, wie unterschiedlich sich äußerlich ähnliche Rahmen verhalten. Im Blackbox-Spektrum sichtbar als feste Rauschberge, die nicht mit der Drehzahl wandern.</div></div>
+  <div class="card"><div class="ct">Armbefestigung</div><div class="cd">Einzeln tauschbare Arme sind Gold wert — ein Crash kostet dann einen Arm statt einer Unterplatte. Schrauben mit Schraubensicherung mittelfest sichern, sonst arbeiten sich die Arme lose und erzeugen ein Vibrationsbild, das nach Motorschaden aussieht.</div></div>
+  <div class="card"><div class="ct">Carbon schirmt HF ab</div><div class="cd">Kohlefaser ist leitfähig. Antennen dürfen nicht am oder unter dem Rahmen liegen, sondern müssen frei stehen — sonst sinkt die Reichweite dramatisch, ohne dass etwas defekt ist.</div></div>
+  <div class="card"><div class="ct">Kanten und Staub</div><div class="cd">Carbonstaub ist gesundheitsschädlich und leitfähig. Beim Nachschleifen Maske und Absaugung, danach die Werkbank feucht abwischen — Späne im Stack sind eine schöne Kurzschlussquelle.</div></div>
 </div>
 
 <h2>Stack-Montage und Lochbilder</h2>
-<div class="tbl-wrap"><table style="min-width:760px">
+<div class="tbl-wrap"><table style="min-width:800px">
 <thead><tr><th>Lochbild</th><th>Maß</th><th>Schraube</th><th>Wo es vorkommt</th></tr></thead>
 <tbody>
 <tr><td><b>30,5 × 30,5 mm</b></td><td>Standard-Stack</td><td>M3</td><td>5 Zoll und größer, die überwiegende Mehrheit</td></tr>
-<tr><td><b>25,5 × 25,5 mm</b></td><td>Zwischengröße</td><td>M2</td><td>3–4 Zoll, kompakte Bauten</td></tr>
-<tr><td><b>20 × 20 mm</b></td><td>Micro-Stack</td><td>M2 oder M3</td><td>Toothpicks, kleine Cinewhoops</td></tr>
+<tr><td><b>25,5 × 25,5 mm</b></td><td>Zwischengröße / AIO</td><td>M2</td><td>3–4 Zoll, Sub-250-Bauten, viele Alles-auf-einer-Platine-Boards</td></tr>
+<tr><td><b>20 × 20 mm</b></td><td>Micro-Stack</td><td>M2 oder M3</td><td>Toothpicks, kleine Cinewhoops — auch viele HD-Air-Units nutzen dieses Raster</td></tr>
 <tr><td><b>16 × 16 mm</b></td><td>Whoop-Stack</td><td>M2</td><td>Tinywhoops</td></tr>
-<tr><td><b>25,5 × 25,5 mm „AIO“</b></td><td>Alles auf einer Platine</td><td>M2</td><td>FC, ESC, oft VTX und Empfänger in einem</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Weich montieren, aber nicht wackelig.</b> Gummitüllen (Grommets) in den Montagelöchern entkoppeln den Stack vom Rahmen und nehmen genau die hochfrequenten Vibrationen weg, die die Filterkette sonst wegrechnen müsste. Zu weich ist auch falsch: Wenn der Stack schwingen kann, entsteht eine niederfrequente Eigenresonanz, die schlimmer ist als das Ausgangsproblem. Die Schraube wird angezogen, bis die Tülle leicht vorgespannt ist — nicht bis zum Anschlag.</div>
+<div class="tip"><b>Weich montieren, aber nicht wackelig.</b> Gummitüllen (Grommets) entkoppeln den Stack vom Rahmen und nehmen genau die hochfrequenten Vibrationen weg, die die Filterkette sonst wegrechnen müsste. Zu weich ist auch falsch: Ein schwingender Stack erzeugt eine niederfrequente Eigenresonanz, die schlimmer ist als das Ausgangsproblem. Schraube anziehen, bis die Tülle leicht vorgespannt ist — nicht bis zum Anschlag.</div>
+<div class="warn"><b>HD-tauglich heißt: Platz und Befestigung für die Air Unit.</b> Aktuelle Rahmen weisen aus, für welche Videosysteme sie vorbereitet sind — 20×20-Montage für die Air Unit, Kameraausschnitt in passender Breite (Nano/Micro/Full-Size), Kanal für das Koaxkabel und ein geschützter Platz für die zwei Videoantennen. Ein „O3/O4-ready“-Rahmen erspart Dremel-Arbeit am Neuteil.</div>
 
 <h2>Schrauben und Kleinteile</h2>
 <div class="flist">
@@ -45,28 +72,29 @@ import "./_style.css";
   <div class="frow"><span class="fn">Motorschrauben</span><span class="fe">M3 × 6–8 mm</span><span class="fx">Zu lang heißt: Schraube berührt die Wicklung und tötet den Motor. Länge immer gegen die Armdicke prüfen</span></div>
   <div class="frow"><span class="fn">Stack-Schrauben</span><span class="fe">M3 × 25–35 mm</span><span class="fx">Mit Tüllen und Abstandshaltern; Titan spart Gewicht, Stahl hält besser</span></div>
   <div class="frow"><span class="fn">Standoffs</span><span class="fe">M3, 20–35 mm</span><span class="fx">Aluminium ist Standard; Nylon bricht bewusst und schützt die Platten</span></div>
-  <div class="frow"><span class="fn">Propellermuttern</span><span class="fe">M5 selbstsichernd</span><span class="fx">Nylonring nutzt sich ab — nach etwa zehn Wechseln ersetzen. Farbcodierung nach Drehrichtung ist bei manchen Herstellern üblich</span></div>
+  <div class="frow"><span class="fn">Propellermuttern</span><span class="fe">M5 selbstsichernd</span><span class="fx">Nylonring nutzt sich ab — nach etwa zehn Wechseln ersetzen</span></div>
   <div class="frow"><span class="fn">Schraubensicherung</span><span class="fe">mittelfest (blau)</span><span class="fx">An Motor- und Armschrauben. Hochfest niemals — die Schraube ist danach nur noch mit Hitze zu lösen</span></div>
   <div class="frow"><span class="fn">Akkuriemen</span><span class="fe">15–20 × 200–250 mm</span><span class="fx">Mit Gummipad darunter; ein rutschender Akku verschiebt den Schwerpunkt im Flug</span></div>
 </div>
 
 <h2>TPU: die halbe Miete</h2>
-<p>Gedruckte Teile aus TPU sind bei FPV kein Zubehör, sondern Bauteil. Typisch sind Kamerahalterung und Kamerakäfig, Antennenhalter, Empfängerhalterung, Akkupad, Kabelführungen und Aufprallschutz. TPU mit Shore 95A ist ein guter Allrounder; weicheres Material dämpft besser, hält aber Schrauben schlechter. Druckhinweise stehen im Modul <a href="3d-filament-vergleich.html">Filament-Vergleich</a>.</p>
-<div class="warn"><b>Antennenhalter sind Verschleißteile.</b> Sie sollen brechen — das ist billiger als eine abgerissene Antenne oder ein ausgerissener SMA-Anschluss am VTX. Wer sie zu massiv druckt, verlagert den Schaden auf die Elektronik.</div>
+<p>Gedruckte Teile aus TPU sind bei FPV kein Zubehör, sondern Bauteil: Kamerahalterung und -käfig, Antennenhalter, Air-Unit-Halterung, Akkupad, Kabelführungen, Aufprallschutz. TPU mit Shore 95A ist ein guter Allrounder; weicheres Material dämpft besser, hält aber Schrauben schlechter. Druckhinweise im Modul <a href="3d-filament-vergleich.html">Filament-Vergleich</a>.</p>
+<div class="warn"><b>Antennenhalter sind Verschleißteile.</b> Sie sollen brechen — das ist billiger als eine abgerissene Antenne oder ein ausgerissener Anschluss an der Air Unit. Wer sie zu massiv druckt, verlagert den Schaden auf die Elektronik.</div>
 
 <h2>Schwerpunkt und Aufbau</h2>
 <ul>
   <li><b>Schwerpunkt in die Mitte.</b> Ein hecklastiges Quad hebt beim Beschleunigen die Nase und braucht dauerhaft I-Anteil zum Gegenhalten. Der Akku ist das schwerste Einzelteil — seine Position ist das wirksamste Trimmwerkzeug.</li>
-  <li><b>Masse nach innen.</b> Je näher die Masse an der Drehachse liegt, desto kleiner das Trägheitsmoment und desto agiler das Quad. Deshalb sitzt der Akku mittig oben und nicht am Heck.</li>
-  <li><b>Kabel kurz und fixiert.</b> Alles, was schwingen kann, schwingt — und bringt Vibration oder scheuert sich an Carbon durch. Kabelbinder, Heißkleber an Zugentlastungen, Schrumpfschlauch über Lötstellen.</li>
-  <li><b>Kamerawinkel als Auslegungsentscheidung.</b> 15–25° für ruhiges Fliegen, 30–45° für schnelles Freestyle, über 45° nur für Rennen. Der Winkel bestimmt, wie stark das Quad nach vorn kippen muss, um geradeaus zu fliegen.</li>
+  <li><b>Masse nach innen.</b> Je näher die Masse an der Drehachse, desto kleiner das Trägheitsmoment und desto agiler das Quad. Deshalb sitzt der Akku mittig und nicht am Heck.</li>
+  <li><b>Kabel kurz und fixiert.</b> Alles, was schwingen kann, schwingt — und bringt Vibration oder scheuert an Carbon durch. Kabelbinder, Zugentlastungen, Schrumpfschlauch über Lötstellen.</li>
+  <li><b>Kamerawinkel als Auslegungsentscheidung.</b> 15–25° für ruhiges Fliegen, 30–45° für schnelles Freestyle, über 45° nur für Rennen — Details und Skizze unter <a href="#kamera">Kameras &amp; Aufnahme</a>.</li>
 </ul>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
+    <li><a href="https://www.fpvknowitall.com/fpv-shopping-list-five-inch-freestyle/">fpvknowitall.com — 5″ Freestyle Shopping List</a>: aktuelle Rahmenempfehlungen samt DC/X-Hinweisen.</li>
     <li><a href="https://oscarliang.com/">oscarliang.com</a> — Rahmenvergleiche, Lochbilder und Aufbauhinweise, laufend aktualisiert.</li>
-    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — ausführliche Videos zu Soft-Mounting, Vibrationsquellen und deren Nachweis im Blackbox-Log.</li>
-    <li><a href="https://intofpv.com/">IntoFPV</a> und <a href="https://www.rcgroups.com/multirotor-drone-talk-579/">RCGroups Multirotor</a> — Bauberichte und Erfahrungswerte zu einzelnen Rahmen.</li>
+    <li><a href="https://www.youtube.com/@ChrisRosser">Chris Rosser</a> — Steifigkeits- und Resonanzanalysen von Rahmen; die messbare Seite dessen, was hier als Faustregel steht.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Soft-Mounting, Vibrationsquellen und deren Nachweis im Blackbox-Log.</li>
   </ul>
 </div>

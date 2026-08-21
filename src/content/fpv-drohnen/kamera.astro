@@ -14,18 +14,42 @@ import "./_style.css";
   <div class="frow"><span class="fn">Seitenverhältnis</span><span class="fe">4:3 oder 16:9</span><span class="fx">Muss zur Brille passen — sonst gestauchtes Bild oder abgeschnittene Ränder</span></div>
   <div class="frow"><span class="fn">Netzspannung</span><span class="fe">5 V oder 5–36 V</span><span class="fx">Weitbereichskameras lassen sich direkt am Akku betreiben; 5-V-Typen brauchen ein sauberes BEC</span></div>
 </div>
+<figure>
+<svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Kamerawinkel: Im Schwebeflug zeigt eine angestellte Kamera in den Himmel, bei Vorwärtsfahrt mit geneigtem Quad liegt ihr Blick auf dem Horizont">
+  <path class="gd" d="M20,150 H300" />
+  <rect class="box" x="120" y="110" width="90" height="18" rx="5" />
+  <circle class="accf" cx="132" cy="106" r="5" />
+  <path class="acc" d="M132,106 L262,42" />
+  <path class="accf" d="M262,42 l-10,1 l4,9 z" />
+  <text class="lbl" x="160" y="172" text-anchor="middle">Schweben: Rahmen waagerecht</text>
+  <text class="lbla" x="238" y="30">Kamera schaut in den Himmel</text>
+  <text class="lbl" x="20" y="142">Horizont</text>
+  <path class="gd" d="M360,150 H645" />
+  <g transform="rotate(-30 500 120)">
+    <rect class="box" x="455" y="111" width="90" height="18" rx="5" />
+    <circle class="accf" cx="467" cy="107" r="5" />
+  </g>
+  <path class="acc" d="M468,96 L640,96" />
+  <path class="accf" d="M640,96 l-10,-4 v8 z" />
+  <text class="lbl" x="500" y="176" text-anchor="middle">Fahrt: Rahmen um den Kamerawinkel geneigt</text>
+  <text class="lbla" x="560" y="86" text-anchor="middle">Blick liegt auf dem Horizont</text>
+  <path class="wt" d="M528,132 A34,34 0 0 0 522,113" />
+  <text class="lbl" x="538" y="128">30°</text>
+</svg>
+<figcaption>Der Kamerawinkel legt die Reisegeschwindigkeit fest: Das Quad muss sich um genau diesen Winkel nach vorn neigen, damit der Blick waagerecht liegt. Mehr Winkel heißt schneller unterwegs — und unangenehmer im Schwebeflug.</figcaption>
+</figure>
 <div class="tip"><b>Der Kamerawinkel ist eine Fahrwerkseinstellung.</b> Je stärker die Kamera nach oben zeigt, desto schneller kann man fliegen, ohne den Horizont zu verlieren — und desto unnatürlicher fühlt sich langsames Fliegen an. 15–25° für ruhige Flüge und Kamerafahrten, 30–40° für Freestyle, 45° und mehr nur auf der Rennstrecke. Wer das Gefühl hat, das Quad „zieht nach unten“, hat meist zu wenig Winkel.</div>
 
 <h2>Aufnahme: die drei Wege</h2>
 <div class="grid">
   <div class="card"><div class="ch">DVR in der Brille<span class="n">dokumentation</span></div><div class="cd">Zeichnet exakt das übertragene Bild auf, inklusive OSD und Störungen. Bildqualität ist schlecht, der Nutzen für die Fehlersuche nach einem Absturz sehr hoch. Immer eingeschaltet lassen.</div></div>
-  <div class="card"><div class="ch">Digitale Onboard-Aufnahme<span class="n">komfort</span></div><div class="cd">Bei DJI und Walksnail zeichnet die Lufteinheit selbst auf, teils in 4K. Kein Zusatzgewicht, ordentliche Qualität, aber weniger Kontrolle über Belichtung und Bildlook als bei einer eigenen Kamera.</div></div>
+  <div class="card"><div class="ch">Digitale Onboard-Aufnahme<span class="n">komfort</span></div><div class="cd">Bei DJI und Walksnail zeichnet die Air Unit selbst auf — bei der O4 Pro bis 4K/120 mit D-Log-M-Profil, bei Walksnail je nach Kamera bis 4K. Kein Zusatzgewicht und inzwischen für viele Cinematic-Piloten der Ersatz für die Actioncam; weniger Kontrolle über Belichtung und Look bleibt der Preis.</div></div>
   <div class="card"><div class="ch">Separate Actioncam<span class="n">qualität</span></div><div class="cd">GoPro, Insta360, DJI Action — oder als „Naked“-Umbau ohne Gehäuse, um Gewicht zu sparen. Die einzige Variante, die wirklich vorzeigbares Material liefert. Kostet 30–120 g und damit spürbar Flugzeit.</div></div>
 </div>
 
 <h2>Was gutes Videomaterial ausmacht</h2>
 <ul>
-  <li><b>Bildstabilisierung nachträglich statt in der Kamera.</b> Gyroflow und die Herstellerlösungen (ReelSteady, RockSteady, HorizonSteady) rechnen die Bewegung anhand der Gyrodaten heraus. Aufnahme mit weitem Bildwinkel und ohne kamerainterne Stabilisierung gibt dabei den größten Spielraum.</li>
+  <li><b>Bildstabilisierung nachträglich statt in der Kamera.</b> Gyroflow und die Herstellerlösungen (ReelSteady, RockSteady, HorizonSteady) rechnen die Bewegung anhand der Gyrodaten heraus. Die aktuellen Air Units zeichnen die Gyrodaten gleich mit auf — O4-Material lässt sich direkt in Gyroflow stabilisieren. Aufnahme mit weitem Bildwinkel und ohne kamerainterne Stabilisierung gibt den größten Spielraum.</li>
   <li><b>Verschlusszeit doppelt zur Bildrate.</b> 1/50 s bei 25 fps, 1/120 s bei 60 fps. Kürzere Zeiten wirken hart und stroboskopartig — bei schnellen Bewegungen besonders auffällig.</li>
   <li><b>ND-Filter, um dorthin zu kommen.</b> Bei Tageslicht ist die richtige Verschlusszeit ohne Graufilter nicht erreichbar. ND8 bis ND16 sind die üblichen Werte, und der Filter muss sicher sitzen — ein im Flug verlorener Filter ist teurer als der Filter.</li>
   <li><b>Flaches Farbprofil nur, wenn nachbearbeitet wird.</b> Sonst sieht das Material einfach nur blass aus. Grundlagen dazu im Modul <a href="lumix-s1ii.html">Foto &amp; Video</a>.</li>

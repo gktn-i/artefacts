@@ -4,73 +4,75 @@ import "./_style.css";
 <div class="kurz"><b>Der ESC macht aus Gleichspannung ein Drehfeld, der Flight Controller entscheidet, wie schnell.</b> Beide sitzen meist als „Stack“ übereinander in der Rahmenmitte. Der ESC ist das Bauteil mit den höchsten Strömen im ganzen Gerät — und dasjenige, das bei Fehlern raucht.</div>
 
 <h2>ESC: was drinsteckt</h2>
-<p>Ein ESC (Electronic Speed Controller) kommutiert einen bürstenlosen Motor elektronisch: sechs MOSFETs bilden drei Halbbrücken, ein kleiner Mikrocontroller schaltet sie in der richtigen Reihenfolge. Die Rotorlage misst er nicht — er liest die Gegen-EMK der gerade unbestromten Phase. Das funktioniert gut bei Drehzahl und schlecht im Stillstand; deshalb ruckelt jeder BLDC beim Anlaufen kurz.</p>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th>Kennwert</th><th>Bedeutung</th><th>Worauf achten</th></tr></thead>
+<p>Ein ESC (Electronic Speed Controller) kommutiert einen bürstenlosen Motor elektronisch: Sechs MOSFETs bilden drei Halbbrücken, ein Mikrocontroller schaltet sie in der richtigen Reihenfolge. Die Rotorlage misst er nicht — er liest die Gegen-EMK der gerade unbestromten Phase. Das funktioniert gut bei Drehzahl und schlecht im Stillstand; deshalb ruckelt jeder BLDC beim Anlaufen kurz.</p>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th>Kennwert</th><th>Üblich (Stand 2026)</th><th>Worauf achten</th></tr></thead>
 <tbody>
-<tr><td><b>Dauerstrom je Kanal</b></td><td>z. B. 45 A</td><td>Mindestens 25 % über dem höchsten Motorstrom aus der Schubtabelle. Der Wert gilt bei guter Kühlung — im geschlossenen Rahmen weniger</td></tr>
-<tr><td><b>Spitzenstrom</b></td><td>oft „Burst 55 A / 10 s“</td><td>Marketingnah. Auslegen nach Dauerstrom, nicht nach Burst</td></tr>
-<tr><td><b>Spannungsbereich</b></td><td>z. B. 3–6S</td><td>Ein 4S-ESC an 6S stirbt sofort. Der Bereich gilt immer für den gesamten Stack</td></tr>
-<tr><td><b>Firmware</b></td><td>BLHeli_S, Bluejay, BLHeli_32, AM32</td><td>Bestimmt, ob bidirektionales DShot und damit RPM-Filterung möglich ist</td></tr>
-<tr><td><b>Protokoll</b></td><td>DShot300/600/1200</td><td>DShot600 ist Standard bei 8 kHz Schleifenrate; höher bringt praktisch nichts</td></tr>
-<tr><td><b>Kondensator</b></td><td>Low-ESR, z. B. 35 V / 470–1000 µF</td><td>Gehört an die Akkuleitungen. Nicht optional — siehe unten</td></tr>
-<tr><td><b>Bauform</b></td><td>4-in-1 oder vier Einzelregler</td><td>4-in-1 ist Standard: weniger Kabel, saubere Stromführung. Einzelregler sind reparaturfreundlicher</td></tr>
+<tr><td><b>Dauerstrom je Kanal</b></td><td>45–65 A bei 5″, 13–35 A bei Micros</td><td>Mindestens 25 % über dem höchsten Motorstrom aus der Schubtabelle. Der Wert gilt bei guter Kühlung — im geschlossenen Rahmen weniger</td></tr>
+<tr><td><b>Spitzenstrom</b></td><td>„Burst“, z. B. 55 A / 10 s</td><td>Marketingnah. Auslegen nach Dauerstrom, nicht nach Burst</td></tr>
+<tr><td><b>Spannungsbereich</b></td><td>3–6S, große Bauten bis 8S</td><td>Ein 4S-ESC an 6S stirbt sofort. Der Bereich gilt für den gesamten Stack</td></tr>
+<tr><td><b>Firmware</b></td><td>Bluejay (8 Bit) oder AM32 (32 Bit)</td><td>Bestimmt, ob bidirektionales DShot und damit der RPM-Filter möglich ist — heute ein Muss</td></tr>
+<tr><td><b>Protokoll</b></td><td>DShot300/600</td><td>DShot600 ist Standard bei 8 kHz Schleifenrate; höher bringt praktisch nichts</td></tr>
+<tr><td><b>PWM-Frequenz</b></td><td>24/48/96 kHz wählbar</td><td>Höher = leiserer, weicherer Lauf, aber mehr Schaltverluste. 48 kHz ist ein üblicher Kompromiss</td></tr>
+<tr><td><b>Kondensator</b></td><td>Low-ESR, 35 V / 470–1000 µF</td><td>Gehört an die Akkulötpads. Nicht optional — siehe unten</td></tr>
+<tr><td><b>Bauform</b></td><td>4-in-1; AIO bei Micros; Einzelregler selten</td><td>4-in-1 heißt: ein Defekt, ein Tausch. Einzelregler sind reparaturfreundlicher, aber Verkabelungsaufwand</td></tr>
+<tr><td><b>Stromsensor</b></td><td>auf dem 4-in-1 integriert</td><td>Liefert Strom und verbrauchte mAh ins OSD — nach dem ersten Flug kalibrieren</td></tr>
 </tbody>
 </table></div>
 
 <h2>ESC-Firmware</h2>
-<div class="tbl-wrap"><table style="min-width:920px">
-<thead><tr><th data-s="text">Firmware</th><th>Lizenz</th><th>Hardware</th><th>Bidir. DShot</th><th>Einordnung</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Firmware</th><th>Lizenz</th><th>Hardware</th><th>Bidir. DShot</th><th>Einordnung (Stand 2026)</th></tr></thead>
 <tbody>
-<tr><td><b>BLHeli_S</b></td><td>quelloffen, nicht mehr gepflegt</td><td>8-Bit-EFM8</td><td>nein</td><td>Werksfirmware vieler günstiger ESCs. Funktioniert, kann aber kein RPM-Telemetrie-Signal</td></tr>
-<tr><td><b>Bluejay</b></td><td>quelloffen</td><td>dieselbe 8-Bit-Hardware</td><td><b>ja</b></td><td>Aufsatz auf BLHeli_S: bringt bidirektionales DShot und wählbare PWM-Frequenz auf vorhandene Hardware. Der übliche erste Schritt bei günstigen Stacks</td></tr>
-<tr><td><b>BLHeli_32</b></td><td>proprietär, eingestellt</td><td>32-Bit-ARM</td><td>ja</td><td>Lange der Standard für gehobene ESCs. Wird nicht mehr weiterentwickelt</td></tr>
-<tr><td><b>AM32</b></td><td>quelloffen</td><td>32-Bit-ARM</td><td>ja</td><td>Der aktive Nachfolger auf 32-Bit-Hardware; ordentliche Dokumentation, aktive Entwicklung</td></tr>
+<tr><td><b>Bluejay</b></td><td>quelloffen</td><td>8-Bit-EFM8</td><td><b>ja</b></td><td>Der Standard auf günstiger 8-Bit-Hardware: bringt bidirektionales DShot und wählbare PWM-Frequenz. Werks-BLHeli_S-ESCs werden üblicherweise sofort auf Bluejay geflasht</td></tr>
+<tr><td><b>AM32</b></td><td>quelloffen</td><td>32-Bit-ARM</td><td>ja</td><td>Der aktive 32-Bit-Standard; die meisten neuen 32-Bit-ESCs kommen ab Werk mit AM32</td></tr>
+<tr><td><b>BLHeli_32</b></td><td>proprietär, <b>eingestellt</b></td><td>32-Bit-ARM</td><td>ja</td><td>Entwicklung 2023 beendet. Bestand funktioniert weiter, bekommt aber keine Updates; Neukauf vermeiden</td></tr>
+<tr><td><b>BLHeli_S</b></td><td>quelloffen, nicht mehr gepflegt</td><td>8-Bit-EFM8</td><td>nein</td><td>Nur noch als Auslieferungszustand relevant — kann keinen RPM-Filter</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Warum bidirektionales DShot wichtig ist.</b> Der ESC meldet die tatsächliche Motordrehzahl an den Flight Controller zurück. Betaflight kann daraus für jeden Motor ein Kerbfilter genau auf dessen Drehfrequenz legen — der RPM-Filter. Das ist die wirksamste Einzelmaßnahme gegen Gyro-Rauschen und der Grund, warum moderne Quads mit weniger Tiefpassfilterung auskommen und dadurch direkter reagieren.</div>
+<div class="tip"><b>Warum bidirektionales DShot wichtig ist.</b> Der ESC meldet die tatsächliche Motordrehzahl an den Flight Controller zurück. Betaflight legt daraus für jeden Motor Kerbfilter genau auf dessen Drehfrequenz — den RPM-Filter, seit Jahren die wirksamste Einzelmaßnahme gegen Gyro-Rauschen. Geflasht wird bequem im Browser über <a href="https://esc-configurator.com/">esc-configurator.com</a> (Bluejay/BLHeli_S) bzw. mit dem AM32-Konfigurator — siehe <a href="#software">Software &amp; Apps</a>.</div>
 
 <h2>ESC-Einstellungen, die etwas bewirken</h2>
 <div class="flist">
   <div class="frow hd"><span>Einstellung</span><span>Übliche Wahl</span><span>Wirkung</span></div>
   <div class="frow"><span class="fn">Motor Timing</span><span class="fe">Auto / mittel</span><span class="fx">Zu hoch: mehr Leistung, mehr Wärme, Desync-Gefahr. Zu niedrig: Leistungsverlust. Im Zweifel Werkseinstellung</span></div>
-  <div class="frow"><span class="fn">PWM-Frequenz</span><span class="fe">24–48 kHz</span><span class="fx">Höher heißt leiserer Lauf und feinere Auflösung, aber mehr Schaltverluste und Wärme</span></div>
+  <div class="frow"><span class="fn">PWM-Frequenz</span><span class="fe">24–96 kHz</span><span class="fx">Höher heißt leiserer Lauf und feinere Auflösung, aber mehr Schaltverluste und Wärme</span></div>
   <div class="frow"><span class="fn">Demag Compensation</span><span class="fe">niedrig bis mittel</span><span class="fx">Gegenmittel gegen Desync bei schnellen Lastwechseln; hohe Werte kosten etwas Leistung</span></div>
-  <div class="frow"><span class="fn">Motor Direction</span><span class="fe">nach Propellerwahl</span><span class="fx">Bequemer als zwei Motorkabel zu tauschen. In Betaflight oder im ESC-Konfigurator einstellbar</span></div>
-  <div class="frow"><span class="fn">Bidirectional DShot</span><span class="fe">ein</span><span class="fx">Voraussetzung für den RPM-Filter. Muss in ESC-Firmware <em>und</em> Betaflight aktiviert sein</span></div>
+  <div class="frow"><span class="fn">Motor Direction</span><span class="fe">nach Propellerwahl</span><span class="fx">Bequemer als Kabel umlöten — in Betaflight per DShot-Befehl oder im ESC-Konfigurator</span></div>
+  <div class="frow"><span class="fn">Bidirectional DShot</span><span class="fe">ein</span><span class="fx">Voraussetzung für den RPM-Filter. Muss in ESC-Firmware <em>und</em> Betaflight aktiv sein</span></div>
   <div class="frow"><span class="fn">Startup Power</span><span class="fe">Standard</span><span class="fx">Zu niedrig: Motoren laufen bei sehr niedrigem Gas nicht sauber an</span></div>
   <div class="frow"><span class="fn">Brake on Stop</span><span class="fe">aus</span><span class="fx">Bremst die Propeller beim Disarmieren. Für Whoops sinnvoll, sonst unnötige Belastung</span></div>
 </div>
-<div class="stop"><b>Der Kondensator ist kein Zubehör.</b> Die Motorschaltvorgänge erzeugen Spannungsspitzen auf der Akkuleitung. Ohne einen Low-ESR-Elko direkt an den Akkulötpads sieht der ESC Spitzen, die ihn zerstören können, und der VTX zeigt Streifen im Bild. Wer ihn nach einem Crash abreißt, lötet ihn wieder an — nicht „später mal“.</div>
+<div class="stop"><b>Der Kondensator ist kein Zubehör.</b> Die Motorschaltvorgänge erzeugen Spannungsspitzen auf der Akkuleitung. Ohne einen Low-ESR-Elko direkt an den Akkulötpads sieht der ESC Spitzen, die ihn zerstören können, und die Videoübertragung zeigt Störungen. Wer ihn nach einem Crash abreißt, lötet ihn wieder an — nicht „später mal“.</div>
 
 <h2>Flight Controller</h2>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th data-s="text">Bauteil</th><th>Typisch</th><th>Warum es zählt</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Bauteil</th><th>Üblich (Stand 2026)</th><th>Warum es zählt</th></tr></thead>
 <tbody>
-<tr><td><b>MCU</b></td><td>STM32 F4, F7, H7 — neuerdings auch H5 und weitere Familien</td><td>F4 reicht für den Alltag, H7 hat Reserven für hohe Schleifenraten, viele UARTs und aufwendige Filter</td></tr>
-<tr><td><b>Gyro</b></td><td>MPU6000, BMI270, ICM-42688-P</td><td>Bestimmt Rauschverhalten und mögliche Abtastrate. MPU6000 gilt als sehr rauscharm, ICM-42688-P als aktueller Bestwert</td></tr>
-<tr><td><b>UARTs</b></td><td>4–8 serielle Schnittstellen</td><td>Empfänger, VTX-Steuerung, GPS, Kameracontrol, ESC-Telemetrie — die Zahl der UARTs begrenzt den Ausbau</td></tr>
-<tr><td><b>Blackbox</b></td><td>Flash-Chip oder microSD</td><td>Ohne Logaufzeichnung ist Tuning Raten. SD-Karte schreibt schneller und mehr</td></tr>
-<tr><td><b>OSD</b></td><td>Analog-Chip (MAX7456) oder digitales OSD über MSP</td><td>Blendet Akku, Timer, Modi ins Bild ein. Bei digitalen Systemen läuft das über MSP-DisplayPort</td></tr>
-<tr><td><b>BEC</b></td><td>5 V, oft zusätzlich 9 V oder 10 V</td><td>Versorgt Empfänger, Kamera und VTX. Auf Strombelastbarkeit achten, ein hungriger VTX zieht mehr, als manche BEC liefern</td></tr>
-<tr><td><b>Barometer</b></td><td>optional</td><td>Für Höhenhaltung und GPS-Rescue nützlich, aber empfindlich gegen Luftzug — im Rahmen abdecken</td></tr>
+<tr><td><b>MCU</b></td><td>STM32 F4, F7, H7 — Betaflight unterstützt inzwischen auch H5/N6 und erste ESP32-Ziele</td><td>F4 reicht für den Alltag; H7 hat Reserven für hohe Schleifenraten, viele UARTs und aufwendige Filter. AT32-Klone sind verbreitet und werden unterstützt</td></tr>
+<tr><td><b>Gyro</b></td><td>ICM-42688-P, BMI270; MPU6000 im Bestand</td><td>Bestimmt Rauschverhalten und Abtastrate. Der ICM-42688-P ist der aktuelle Standard, der alte MPU6000 gilt weiter als sehr gutmütig</td></tr>
+<tr><td><b>UARTs</b></td><td>4–8 serielle Schnittstellen</td><td>Empfänger, Air-Unit/VTX-Steuerung, GPS, ESC-Telemetrie — die Zahl der UARTs begrenzt den Ausbau</td></tr>
+<tr><td><b>Blackbox</b></td><td>Flash-Chip oder microSD</td><td>Ohne Logaufzeichnung ist Tuning Raten. SD schreibt mehr und schneller</td></tr>
+<tr><td><b>OSD</b></td><td>Analog-Chip (AT7456E) und/oder MSP-DisplayPort</td><td>Digitale Systeme bekommen ihr OSD als Text über MSP-DisplayPort — deshalb ist es dort gestochen scharf</td></tr>
+<tr><td><b>BEC</b></td><td>5 V plus 9–10 V</td><td>5 V für Empfänger und GPS, 9–10 V für Air Unit oder analoge VTX. Strombelastbarkeit prüfen — eine Air Unit zieht mehr, als manche BEC liefern</td></tr>
+<tr><td><b>Barometer</b></td><td>verbreitet</td><td>Für Höhenhaltung, GPS-Rescue und die neue Positionshaltung nützlich; gegen Luftzug abdecken (Schaumstoff)</td></tr>
 </tbody>
 </table></div>
 
 <h2>Was in der Praxis kaputtgeht</h2>
 <div class="grid2">
   <div class="card"><div class="ct">Verpolung</div><div class="cd">Akku falsch herum angeschlossen — einmal reicht. Ein XT60 lässt sich nicht verpolen, ein aufgelötetes Kabelpaar schon. Deshalb: erst löten, dann prüfen, dann erst Akku.</div></div>
-  <div class="card"><div class="ct">Einschaltstrom</div><div class="cd">Beim Anstecken lädt der Kondensator schlagartig auf — der Funke ist normal, der Spannungseinbruch nicht. Ein „Smoke Stopper“ (Strombegrenzer mit Glühlampe) beim ersten Anstecken nach dem Löten verhindert das teure Ende eines Kurzschlusses.</div></div>
+  <div class="card"><div class="ct">Einschaltstrom</div><div class="cd">Beim Anstecken lädt der Kondensator schlagartig — der Funke ist normal. Ein Smoke Stopper beim ersten Anstecken nach dem Löten verhindert das teure Ende eines Kurzschlusses.</div></div>
   <div class="card"><div class="ct">Signalleitungen</div><div class="cd">Abgerissene Motorsignalleitungen nach Crashes sind häufig. Symptom: ein Motor dreht nicht oder zuckt. Vor der Fehlersuche in der Software immer erst die Lötstellen prüfen.</div></div>
-  <div class="card"><div class="ct">Wasser</div><div class="cd">Feuchtigkeit plus Spannung heißt Elektrokorrosion. Nach einer Landung im Nassen: Akku sofort ab, alles trocknen, erst danach wieder Strom. Konformbeschichtung hilft, ist aber kein Freibrief.</div></div>
+  <div class="card"><div class="ct">Wasser</div><div class="cd">Feuchtigkeit plus Spannung heißt Elektrokorrosion. Nach einer Landung im Nassen: Akku sofort ab, trocknen, erst dann wieder Strom. Konformbeschichtung hilft, ist aber kein Freibrief.</div></div>
 </div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li><a href="https://github.com/am32-firmware/AM32">AM32-Firmware</a> und <a href="https://github.com/bird-sanctuary/bluejay">Bluejay</a> — Quelltext und Dokumentation der offenen ESC-Firmware.</li>
+    <li><a href="https://github.com/am32-firmware/AM32">AM32</a> und <a href="https://github.com/bird-sanctuary/bluejay">Bluejay</a> — Quelltext und Dokumentation der offenen ESC-Firmware; <a href="https://esc-configurator.com/">esc-configurator.com</a> zum Flashen im Browser.</li>
     <li><a href="https://betaflight.com/docs/wiki">Betaflight-Wiki</a> — DShot, bidirektionales DShot, RPM-Filter und die Voraussetzungen dafür.</li>
-    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — ausführliche Erklärungen zu Desync, ESC-Timing und Kondensatoren, jeweils mit Messungen.</li>
-    <li>Grundlagen zu Halbbrücken, MOSFET-Ansteuerung und Kommutierung: Modul <a href="analogtechnik.html">Analogtechnik</a> sowie <a href="sensorik-aktorik.html">Sensorik &amp; Aktorik</a>.</li>
+    <li><a href="https://www.fpvknowitall.com/">fpvknowitall.com</a> / <a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Erklärvideos zu Desync, ESC-Timing und Kondensatoren, jeweils mit Messungen.</li>
+    <li>Halbbrücken, MOSFET-Ansteuerung, Kommutierung: Module <a href="analogtechnik.html">Analogtechnik</a> und <a href="sensorik-aktorik.html">Sensorik &amp; Aktorik</a>.</li>
   </ul>
 </div>

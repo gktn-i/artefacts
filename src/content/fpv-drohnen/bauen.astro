@@ -13,6 +13,47 @@ import "./_style.css";
   <div class="card"><div class="ct">Kleinteile</div><div class="cd">Schrumpfschlauch in mehreren Größen, Kabelbinder, Schraubensicherung mittelfest, doppelseitiges Klebeband, Isolierband für Akkupads, TPU-Teile.</div></div>
 </div>
 
+<h2>Der Verdrahtungsplan</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 260" role="img" aria-label="Verdrahtung eines FPV-Quads: Akku über XT60 und Kondensator zum 4-in-1-ESC, davon zwölf Motorleitungen zu vier Motoren und ein Verbindungskabel zum Flight Controller, der Empfänger, Air Unit und GPS über UARTs versorgt">
+  <rect class="box" x="14" y="96" width="84" height="52" rx="6" />
+  <text class="lblb" x="56" y="118" text-anchor="middle">LiPo</text>
+  <text class="lbl" x="56" y="134" text-anchor="middle">XT60</text>
+  <rect class="accs" x="128" y="96" width="60" height="52" rx="6" />
+  <text class="lblb" x="158" y="118" text-anchor="middle">Elko</text>
+  <text class="lbl" x="158" y="134" text-anchor="middle">Low-ESR</text>
+  <rect class="box" x="220" y="84" width="130" height="76" rx="6" />
+  <text class="lblb" x="285" y="112" text-anchor="middle">4-in-1-ESC</text>
+  <text class="lbl" x="285" y="128" text-anchor="middle">Stromsensor</text>
+  <text class="lbl" x="285" y="142" text-anchor="middle">unten im Stack</text>
+  <rect class="box" x="220" y="14" width="130" height="42" rx="6" />
+  <text class="lblb" x="285" y="32" text-anchor="middle">Flight Controller</text>
+  <text class="lbl" x="285" y="47" text-anchor="middle">oben im Stack</text>
+  <path class="acc" d="M98,122 H124 M188,122 H216" />
+  <path class="accf" d="M124,122 l-8,-4 v8 z M216,122 l-8,-4 v8 z" />
+  <path class="acc" d="M285,80 V60" />
+  <path class="accf" d="M285,60 l-4,8 h8 z" />
+  <text class="lbl" x="212" y="74" text-anchor="end">8-Pin: VBAT · Strom · 4× Signal</text>
+  <!-- Motoren oben rechts -->
+  <circle class="accs" cx="426" cy="38" r="17" /><circle class="accs" cx="490" cy="38" r="17" />
+  <circle class="accs" cx="426" cy="96" r="17" /><circle class="accs" cx="490" cy="96" r="17" />
+  <path class="wt" d="M350,92 L408,42 M350,100 L472,40 M350,116 L408,94 M350,124 L472,98" />
+  <text class="lbl" x="518" y="62">4 Motoren,</text>
+  <text class="lbl" x="518" y="76">je 3 Phasen</text>
+  <!-- Peripherie unten rechts -->
+  <rect class="box" x="396" y="128" width="250" height="112" rx="6" style="fill:none" />
+  <text class="lbl" x="521" y="146" text-anchor="middle">am Flight Controller</text>
+  <rect class="accs" x="410" y="156" width="106" height="32" rx="5" /><text class="lblb" x="463" y="176" text-anchor="middle">Empfänger</text>
+  <rect class="accs" x="528" y="156" width="106" height="32" rx="5" /><text class="lblb" x="581" y="176" text-anchor="middle">Air Unit/VTX</text>
+  <rect class="accs" x="410" y="198" width="106" height="32" rx="5" /><text class="lblb" x="463" y="218" text-anchor="middle">GPS</text>
+  <rect class="accs" x="528" y="198" width="106" height="32" rx="5" /><text class="lblb" x="581" y="218" text-anchor="middle">Buzzer/LED</text>
+  <path class="gd" d="M350,44 H372 V184 H392" />
+  <path class="accf" d="M392,184 l-8,-4 v8 z" />
+  <text class="lbl" x="252" y="252">UARTs, dazu 5 V (Empfänger, GPS) und 9 V/VBAT (Air Unit)</text>
+</svg>
+<figcaption>Die Stromführung: Akku → Kondensator → ESC; der FC wird vom ESC über das Stack-Kabel mitversorgt und verteilt geregelte Spannungen an die Peripherie. Digitale Air Units hängen je nach Modell am 9–10-V-BEC oder direkt an der Akkuspannung — das Handbuch der Einheit entscheidet, nicht die Gewohnheit.</figcaption>
+</figure>
+
 <h2>Bauablauf</h2>
 <div class="steps">
   <div class="step"><h4>Trocken aufbauen</h4>Alles einmal ohne Löten zusammenstecken. Passt der Stack? Reichen die Motorkabel? Wo liegt der Empfänger, wo die Antennen? Diese zehn Minuten verhindern das spätere Auslöten.</div>
@@ -68,7 +109,7 @@ import "./_style.css";
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li><a href="https://oscarliang.com/how-to-build-fpv-drone/">Oscar Liang — How to Build an FPV Drone</a>: bebilderte Bauanleitung, laufend auf aktuelle Hardware aktualisiert.</li>
+    <li><a href="https://oscarliang.com/how-to-build-fpv-drone/">Oscar Liang — How to Build an FPV Drone</a>: bebilderte Bauanleitung auf Stand der aktuellen O4-Hardware, laufend aktualisiert.</li>
     <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — mehrteilige Build-Serien, in denen jeder Schritt begründet wird; besonders wertvoll für die Prüfschritte vor dem ersten Anstecken.</li>
     <li>Löttechnik, Flussmittel, Spitzenwahl und Fehlerbilder ausführlich im Modul <a href="loeten-referenz.html">Löten</a>.</li>
   </ul>

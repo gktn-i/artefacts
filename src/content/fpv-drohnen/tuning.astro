@@ -3,28 +3,70 @@ import "./_style.css";
 ---
 <div class="kurz"><b>Tuning heißt: so wenig filtern wie möglich und so viel wie nötig.</b> Jeder Filter entfernt Rauschen und kostet dafür Phase — also Reaktionszeit. Der Regler wird dadurch träger und darf weniger hart eingestellt werden. Das ganze Tuning ist ein Handel zwischen diesen beiden Größen, und der beste Weg, ihn zu gewinnen, ist, das Rauschen gar nicht erst entstehen zu lassen.</div>
 
+<h2>Der Signalpfad</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 250" role="img" aria-label="Signalpfad des Reglers: Gyro, Tiefpass, RPM-Kerbfilter, dynamisches Kerbfilter, dann PID mit eigenem D-Tiefpass, Mixer und DShot zu den Motoren">
+  <rect class="box" x="14" y="30" width="86" height="44" rx="6" />
+  <text class="lblb" x="57" y="49" text-anchor="middle">Gyro</text>
+  <text class="lbl" x="57" y="64" text-anchor="middle">bis 8 kHz</text>
+  <rect class="accs" x="128" y="30" width="96" height="44" rx="6" />
+  <text class="lblb" x="176" y="49" text-anchor="middle">Tiefpass</text>
+  <text class="lbl" x="176" y="64" text-anchor="middle">Gyro-LPF</text>
+  <rect class="accs" x="252" y="30" width="112" height="44" rx="6" />
+  <text class="lblb" x="308" y="49" text-anchor="middle">RPM-Filter</text>
+  <text class="lbl" x="308" y="64" text-anchor="middle">Kerben je Motor</text>
+  <rect class="accs" x="392" y="30" width="112" height="44" rx="6" />
+  <text class="lblb" x="448" y="49" text-anchor="middle">Dyn. Kerbfilter</text>
+  <text class="lbl" x="448" y="64" text-anchor="middle">sucht Restspitzen</text>
+  <rect class="box" x="532" y="30" width="114" height="44" rx="6" />
+  <text class="lblb" x="589" y="49" text-anchor="middle">sauberes Signal</text>
+  <text class="lbl" x="589" y="64" text-anchor="middle">Istrate</text>
+  <path class="acc" d="M100,52 H124 M224,52 H248 M364,52 H388 M504,52 H528" />
+  <path class="accf" d="M124,52 l-8,-4 v8 z M248,52 l-8,-4 v8 z M388,52 l-8,-4 v8 z M528,52 l-8,-4 v8 z" />
+  <!-- PID-Zweige -->
+  <path class="acc" d="M589,74 V104 H90 V132" />
+  <path class="accf" d="M90,132 l-4,-8 h8 z" />
+  <rect class="box" x="40" y="136" width="100" height="40" rx="6" /><text class="lblb" x="90" y="160" text-anchor="middle">P</text>
+  <rect class="box" x="168" y="136" width="100" height="40" rx="6" /><text class="lblb" x="218" y="160" text-anchor="middle">I</text>
+  <rect class="accs" x="296" y="136" width="130" height="40" rx="6" />
+  <text class="lblb" x="361" y="153" text-anchor="middle">D + D-Tiefpass</text>
+  <text class="lbl" x="361" y="167" text-anchor="middle">rauschkritischster Pfad</text>
+  <rect class="box" x="454" y="136" width="100" height="40" rx="6" /><text class="lblb" x="504" y="153" text-anchor="middle">Feedforward</text>
+  <text class="lbl" x="504" y="167" text-anchor="middle">vom Knüppel</text>
+  <path class="gd" d="M218,104 V132 M361,104 V132" />
+  <path class="acc" d="M90,176 V204 H300 M218,176 V204 M361,176 V204 M504,176 V204 H340" />
+  <rect class="box" x="300" y="192" width="80" height="40" rx="6" />
+  <text class="lblb" x="340" y="216" text-anchor="middle">Σ · Mixer</text>
+  <path class="acc" d="M380,218 H560" />
+  <path class="accf" d="M560,218 l-8,-4 v8 z" />
+  <text class="lbla" x="568" y="222">DShot → ESC</text>
+</svg>
+<figcaption>Erst wird das Gyrosignal gefiltert, dann geregelt. Jeder Filterblock kostet Phase; der D-Anteil bekommt einen eigenen Tiefpass, weil er Rauschen am stärksten verstärkt. Der Feedforward-Pfad umgeht die Messung komplett — er rechnet direkt vom Knüppel.</figcaption>
+</figure>
+
 <h2>Die Reihenfolge</h2>
 <div class="steps">
-  <div class="step"><h4>Mechanik zuerst</h4>Feste Schrauben, heile Propeller, ungebogene Wellen, gute Lager, Stack weich montiert, Kabel fixiert. Jede Minute hier spart eine Stunde am Filter. Ein Quad mit mechanischem Problem lässt sich nicht sauber tunen — man kann es nur zudecken.</div>
-  <div class="step"><h4>RPM-Filter aktivieren</h4>Wenn die ESC-Firmware bidirektionales DShot beherrscht, ist das der größte Einzelgewinn: gezielte Kerbfilter auf die tatsächliche Motordrehfrequenz statt breitbandiger Tiefpässe. Erst danach ergeben alle weiteren Schritte Sinn.</div>
-  <div class="step"><h4>Mit Standardwerten fliegen</h4>Die Betaflight-Voreinstellungen sind für ein durchschnittliches 5-Zoll-Quad gut brauchbar. Erst fliegen, dann beurteilen — nicht am Schreibtisch entscheiden, dass etwas falsch sein muss.</div>
-  <div class="step"><h4>Blackbox aufzeichnen</h4>Ein Flug mit ruhigem Schweben, ein paar schnellen Stopps, einem Sinkflug und Vollgas. Das Log zeigt Rauschspektren und Sprungantworten — ohne das ist Tuning Raten.</div>
-  <div class="step"><h4>Filter so weit wie möglich zurücknehmen</h4>Weniger Filterung heißt weniger Verzögerung und direkteres Fliegen. Die Grenze ist erreicht, wenn Motoren heiß werden oder das Rauschbild im Log in den Regelbereich hineinreicht.</div>
-  <div class="step"><h4>Erst dann an die PID-Werte</h4>Und immer nur eine Größe auf einmal, mit einem Flug dazwischen. Wer drei Werte gleichzeitig ändert, weiß hinterher nicht, welcher gewirkt hat.</div>
+  <div class="step"><h4>Mechanik zuerst</h4>Feste Schrauben, heile Propeller, ungebogene Wellen, gute Lager, Stack weich montiert, Kabel fixiert. Jede Minute hier spart eine Stunde am Filter. Ein Quad mit mechanischem Problem lässt sich nicht sauber tunen — nur zudecken.</div>
+  <div class="step"><h4>RPM-Filter aktivieren</h4>Mit Bluejay oder AM32 auf dem ESC ist das der größte Einzelgewinn: gezielte Kerben auf die tatsächliche Motordrehfrequenz statt breitbandiger Tiefpässe. Seit Jahren Standard — erst danach ergeben weitere Schritte Sinn.</div>
+  <div class="step"><h4>Mit Standardwerten fliegen</h4>Die Voreinstellungen der aktuellen Kalenderversionen sind für ein durchschnittliches 5-Zoll-Quad gut. Erst fliegen, dann beurteilen — nicht am Schreibtisch entscheiden, dass etwas falsch sein muss.</div>
+  <div class="step"><h4>Mit den Slidern arbeiten, nicht mit Einzelwerten</h4>Der Configurator stellt Filter- und PID-Tuning als Schieberegler dar, die intern viele Parameter konsistent mitführen. Für fast alle Piloten sind die Slider der richtige Hebel; Einzelparameter sind für Sonderfälle.</div>
+  <div class="step"><h4>Blackbox aufzeichnen</h4>Ein Flug mit ruhigem Schweben, schnellen Stopps, einem Sinkflug, Vollgas. Das Log zeigt Rauschspektren und Sprungantworten — ohne das ist Tuning Raten.</div>
+  <div class="step"><h4>Filter so weit wie möglich zurücknehmen</h4>Weniger Filterung heißt weniger Verzögerung. Die Grenze ist erreicht, wenn Motoren heiß werden oder das Rauschen im Log in den Regelbereich hineinreicht.</div>
+  <div class="step"><h4>Erst dann an die PID-Werte</h4>Immer eine Größe auf einmal, mit einem Flug dazwischen. Wer drei Werte gleichzeitig ändert, weiß hinterher nicht, welcher gewirkt hat.</div>
 </div>
 
-<h2>Die Filterkette</h2>
+<h2>Die Filterkette im Detail</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th>Filter</th><th>Was er entfernt</th><th>Kosten</th><th>Praxis</th></tr></thead>
 <tbody>
-<tr><td><b>Gyro-Tiefpass</b></td><td>Hochfrequentes Rauschen direkt am Sensor</td><td>Phase im gesamten Band</td><td>So hoch wie möglich ansetzen. Moderne Firmware regelt ihn dynamisch mit</td></tr>
-<tr><td><b>Dynamisches Kerbfilter</b></td><td>Findet Rauschspitzen selbst und legt schmale Kerben darauf</td><td>wenig Phase, dafür Rechenzeit</td><td>Der Rettungsanker, wenn kein RPM-Filter verfügbar ist</td></tr>
-<tr><td><b>RPM-Filter</b></td><td>Motordrehfrequenz und deren Oberwellen, für jeden Motor einzeln</td><td>sehr wenig Phase</td><td>Die beste Lösung. Braucht bidirektionales DShot</td></tr>
-<tr><td><b>D-Term-Tiefpass</b></td><td>Rauschen im Differenzierpfad</td><td>Phase genau dort, wo sie am meisten schadet</td><td>Der D-Anteil verstärkt Rauschen am stärksten — dieser Filter ist der kritischste im ganzen System</td></tr>
-<tr><td><b>Filter auf die Knüppelsignale</b></td><td>Stufen aus der begrenzten Auflösung der Funkstrecke</td><td>Verzögerung im Feedforward</td><td>Bei hohen Paketraten kaum nötig, bei 50 Hz schon</td></tr>
+<tr><td><b>Gyro-Tiefpass</b></td><td>Hochfrequentes Rauschen direkt am Sensor</td><td>Phase im gesamten Band</td><td>So hoch wie möglich ansetzen; die Firmware führt ihn dynamisch mit dem Gas mit</td></tr>
+<tr><td><b>RPM-Filter</b></td><td>Motordrehfrequenz und Oberwellen, je Motor einzeln</td><td>sehr wenig Phase</td><td>Die beste Lösung. Braucht bidirektionales DShot</td></tr>
+<tr><td><b>Dynamisches Kerbfilter</b></td><td>Findet verbleibende Rauschspitzen selbst (z. B. Rahmenresonanzen)</td><td>wenig Phase, Rechenzeit</td><td>Ergänzung zum RPM-Filter; Rettungsanker, wo keiner verfügbar ist</td></tr>
+<tr><td><b>D-Term-Tiefpass</b></td><td>Rauschen im Differenzierpfad</td><td>Phase genau dort, wo sie am meisten schadet</td><td>Der kritischste Filter im System — der D-Anteil verstärkt Rauschen am stärksten</td></tr>
+<tr><td><b>Feedforward-Glättung</b></td><td>Stufen aus der begrenzten Auflösung der Funkstrecke</td><td>Verzögerung im FF-Pfad</td><td>Bei hohen Paketraten kaum nötig, bei 50 Hz schon</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Motortemperatur ist das ehrlichste Messgerät.</b> Handwarm nach einem Akku ist gut. Deutlich heiß heißt: Der Regler arbeitet gegen Rauschen an und schickt hochfrequente Stellbefehle an die Motoren. Das ist fast immer zu wenig Filterung oder zu viel D — und es ist der schnellste Weg, ein schlechtes Tuning zu erkennen, ganz ohne Log.</div>
+<div class="tip"><b>Motortemperatur ist das ehrlichste Messgerät.</b> Handwarm nach einem Akku ist gut. Deutlich heiß heißt: Der Regler arbeitet gegen Rauschen an und schickt hochfrequente Stellbefehle an die Motoren. Fast immer zu wenig Filterung oder zu viel D — die schnellste kostenlose Diagnose, ganz ohne Log.</div>
 
 <h2>Symptome und ihre Ursachen</h2>
 <div class="tbl-wrap"><table style="min-width:1000px">
@@ -35,35 +77,35 @@ import "./_style.css";
 <tr><td><b>Nachwippen nach dem Stopp</b></td><td>am Ende schneller Manöver</td><td>D zu niedrig oder Feedforward zu hoch</td><td>D anheben</td></tr>
 <tr><td><b>Zurückfedern (Bounce Back)</b></td><td>nach schnellen Rollen</td><td>I-Anteil zu hoch</td><td>I senken</td></tr>
 <tr><td><b>Wegdriften im Wind</b></td><td>im Schwebeflug</td><td>I-Anteil zu niedrig</td><td>I anheben</td></tr>
-<tr><td><b>Zittern im Sinkflug</b></td><td>nur beim Sinken</td><td>Prop Wash — Regler kämpft gegen verwirbelte Luft</td><td>D anheben, Filter enger führen, D_min-Bereich prüfen</td></tr>
+<tr><td><b>Zittern im Sinkflug</b></td><td>nur beim Sinken</td><td>Prop Wash — Regler kämpft gegen verwirbelte Luft</td><td>D anheben, Filter enger führen; vollständig verschwindet es nie</td></tr>
 <tr><td><b>Heiße Motoren</b></td><td>nach jedem Akku</td><td>zu wenig Filterung, zu viel D, zu viel Propeller</td><td>Filter und D prüfen, dann Propellerwahl</td></tr>
 <tr><td><b>Schwammiges Gefühl</b></td><td>überall</td><td>zu viel Filterung, zu wenig P, zu viel Expo</td><td>Filterung zurücknehmen, dann P anheben</td></tr>
-<tr><td><b>Verzögertes Ansprechen</b></td><td>bei Knüppelbewegung</td><td>Feedforward zu niedrig oder zu stark gefiltert</td><td>Feedforward anheben</td></tr>
-<tr><td><b>Ruckeln bei langsamen Knüppelbewegungen</b></td><td>bei Kamerafahrten</td><td>Feedforward zu hoch bei niedriger Paketrate</td><td>Paketrate erhöhen oder Feedforward-Glättung anheben</td></tr>
+<tr><td><b>Verzögertes Ansprechen</b></td><td>bei Knüppelbewegung</td><td>Feedforward zu niedrig oder zu stark geglättet</td><td>Feedforward anheben</td></tr>
+<tr><td><b>Ruckeln bei langsamen Schwenks</b></td><td>bei Kamerafahrten</td><td>Feedforward zu hoch bei niedriger Paketrate</td><td>Paketrate erhöhen oder FF-Glättung anheben</td></tr>
 </tbody>
 </table></div>
-<p class="note">Die Tabelle gibt die jeweils häufigste Ursache an, nicht die einzige. Fast alle diese Symptome können auch mechanisch entstehen — ein taumelnder Motor sieht im Log aus wie ein Filterproblem. Deshalb steht Mechanik in der Reihenfolge oben ganz vorn.</p>
+<p class="note">Die Tabelle nennt die jeweils häufigste Ursache, nicht die einzige. Fast alle Symptome können auch mechanisch entstehen — ein taumelnder Motor sieht im Log aus wie ein Filterproblem. Deshalb steht Mechanik in der Reihenfolge ganz vorn.</p>
 
 <h2>Blackbox lesen</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Was aufgezeichnet wird</div><div class="cd">Gyro roh und gefiltert, Sollwerte, PID-Anteile je Achse, Motorausgänge, Akkuspannung und Strom, Empfängerdaten. Aufzeichnungsrate mindestens 1 kHz, sonst fehlt der interessante Teil.</div></div>
-  <div class="card"><div class="ct">Rauschspektrum</div><div class="cd">Zeigt, bei welchen Frequenzen Störungen sitzen. Ein schmaler Berg, der mit dem Gas wandert, ist die Motordrehfrequenz. Ein fester Berg ist eine Resonanz im Rahmen. Breites Rauschen über alles heißt: mechanisches Problem.</div></div>
-  <div class="card"><div class="ct">Sprungantwort</div><div class="cd">Aus dem Log berechnet: Wie folgt das Quad einem Knüppelsprung? Ziel ist ein schneller Anstieg mit wenig Überschwingen und ohne Nachschwingen. Die Theorie dazu steht im Modul <a href="regelungstechnik.html">Regelungstechnik</a>.</div></div>
-  <div class="card"><div class="ct">Motorausgänge</div><div class="cd">Wenn ein Motor dauerhaft deutlich mehr arbeitet als die anderen, stimmt etwas mechanisch nicht — verzogener Arm, schwacher Motor, schiefe Kamera. Erreichen alle vier regelmäßig 100 %, fehlt schlicht Schub.</div></div>
-  <div class="card"><div class="ct">Werkzeuge</div><div class="cd">Der Betaflight Blackbox Explorer für den Überblick, PIDtoolbox für Spektren und Sprungantworten. Beide kostenlos, beide mit deutlicher Lernkurve — und beide der Grund, warum Tuning kein Ratespiel bleiben muss.</div></div>
-  <div class="card"><div class="ct">Wann es sich lohnt</div><div class="cd">Nicht bei jedem Quad. Ein 5-Zöller mit Standardteilen fliegt mit Voreinstellungen und aktivem RPM-Filter für die meisten Piloten schon sehr gut. Blackbox ist das Werkzeug für die letzten zwanzig Prozent — und für echte Probleme.</div></div>
+  <div class="card"><div class="ct">Was aufgezeichnet wird</div><div class="cd">Gyro roh und gefiltert, Sollwerte, PID-Anteile je Achse, Motorausgänge, Spannung und Strom, Empfängerdaten. Aufzeichnungsrate mindestens 1 kHz, sonst fehlt der interessante Teil.</div></div>
+  <div class="card"><div class="ct">Rauschspektrum</div><div class="cd">Zeigt, bei welchen Frequenzen Störungen sitzen. Ein schmaler Berg, der mit dem Gas wandert, ist die Motordrehfrequenz. Ein fester Berg ist eine Rahmenresonanz. Breites Rauschen über alles heißt: mechanisches Problem.</div></div>
+  <div class="card"><div class="ct">Sprungantwort</div><div class="cd">Aus dem Log berechnet: Wie folgt das Quad einem Knüppelsprung? Ziel ist schneller Anstieg, wenig Überschwingen, kein Nachschwingen. Theorie im Modul <a href="regelungstechnik.html">Regelungstechnik</a>.</div></div>
+  <div class="card"><div class="ct">Motorausgänge</div><div class="cd">Arbeitet ein Motor dauerhaft deutlich mehr als die anderen, stimmt etwas mechanisch nicht — verzogener Arm, schwacher Motor, Schwerpunkt. Erreichen alle vier regelmäßig 100 %, fehlt schlicht Schub.</div></div>
+  <div class="card"><div class="ct">Werkzeuge</div><div class="cd">Blackbox Explorer für den Überblick, PIDtoolbox für Spektren und Sprungantworten, die SpeedyBee-App für den schnellen Blick am Flugfeld — alle unter <a href="#software">Software &amp; Apps</a>.</div></div>
+  <div class="card"><div class="ct">Wann es sich lohnt</div><div class="cd">Nicht bei jedem Quad. Ein 5-Zöller mit Standardteilen fliegt mit Voreinstellungen plus RPM-Filter für die meisten schon sehr gut. Blackbox ist das Werkzeug für die letzten zwanzig Prozent — und für echte Probleme.</div></div>
 </div>
 
-<h2>Presets und automatisches Tuning</h2>
-<p>Betaflight bringt eine Preset-Verwaltung mit: fertige Parametersätze für bestimmte Quadgrößen, Flugstile oder bekannte Probleme, direkt im Konfigurator anwendbar. Für einen Neubau ist das ein guter Ausgangspunkt — deutlich besser, als CLI-Blöcke aus einem Forum zu übernehmen, weil die Presets zur installierten Version passen und dokumentiert sind.</p>
+<h2>Presets</h2>
+<p>Das Preset-System im Configurator liefert geprüfte Parametersätze für Quadgrößen, Flugstile und bekannte Probleme — versionsgeprüft und dokumentiert, im Gegensatz zu kopierten CLI-Blöcken aus Foren. Für einen Neubau: passendes Klassen-Preset anwenden, fliegen, dann bei Bedarf mit den Slidern nacharbeiten.</p>
 <div class="warn"><b>Kein Preset ersetzt einen Testflug.</b> Ein Parametersatz, der auf einem baugleichen Quad hervorragend fliegt, kann auf deinem Rahmen mit anderem Stack und anderen Propellern schwingen. Nach jedem Preset: kurzer Schwebeflug, Motoren anfassen, dann erst richtig fliegen.</div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li><a href="https://betaflight.com/docs/wiki">Betaflight-Wiki</a> — Filterkette, PID-Parameter und deren Bedeutung; die Primärquelle für alles Firmwareseitige.</li>
-    <li><a href="https://github.com/betaflight/betaflight-configurator">Betaflight Blackbox Explorer</a> und PIDtoolbox — Auswertewerkzeuge für Logs.</li>
-    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — die ausführlichste frei verfügbare Darstellung von Betaflight-Tuning und Blackbox-Analyse; besonders die Serien zu Filtern und zur Sprungantwort.</li>
-    <li>Åström &amp; Hägglund, <i>Advanced PID Control</i> — die Theorie hinter D-Term-Filterung, Anti-Windup und Sprungantwort. Anwendung im Modul <a href="regelungstechnik.html">Regelungstechnik</a>.</li>
+    <li><a href="https://betaflight.com/docs/wiki">Betaflight-Wiki</a> — Filterkette, PID- und Slider-Dokumentation; die Primärquelle für alles Firmwareseitige.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — die ausführlichste frei verfügbare Darstellung von Tuning und Blackbox-Analyse; besonders die Serien zu Filtern und zur Sprungantwort.</li>
+    <li>PIDtoolbox (<a href="https://github.com/bw1129/PIDtoolbox">GitHub</a>) und der zugehörige YouTube-Kanal von Brian White — Werkzeug und Methodik für die Log-Auswertung.</li>
+    <li>Åström &amp; Hägglund, <i>Advanced PID Control</i> — die Theorie hinter D-Term-Filterung und Sprungantwort; Anwendung im Modul <a href="regelungstechnik.html">Regelungstechnik</a>.</li>
   </ul>
 </div>

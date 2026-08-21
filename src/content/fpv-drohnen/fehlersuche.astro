@@ -44,7 +44,9 @@ import "./_style.css";
 <tr><td><b>Streifen und Linien im Bild</b></td><td>Störungen aus der Stromversorgung</td><td>Kondensator prüfen, Video- und Motorleitungen trennen, VTX an eine saubere gefilterte Spannung hängen</td></tr>
 <tr><td><b>Bild bricht bei Vollgas ein</b></td><td>Spannungseinbruch oder elektrische Störung durch die ESC</td><td>Kondensator ergänzen, VTX-Versorgung prüfen, Akkuzustand prüfen</td></tr>
 <tr><td><b>VTX wird sehr heiß</b></td><td>Volle Leistung ohne Luftstrom</td><td>Am Boden Leistung reduzieren oder Pit Mode nutzen. Auf Kühlkörper und Luftführung achten</td></tr>
-<tr><td><b>Digitalbild friert ein</b></td><td>Reichweitengrenze erreicht</td><td>Umkehren. Digitale Systeme warnen kaum — den Link vorher beobachten, nicht erst beim Standbild</td></tr>
+<tr><td><b>Digitalbild friert ein</b></td><td>Reichweitengrenze erreicht</td><td>Umkehren. DJI und Walksnail warnen kaum — die Link-Anzeige in der Brille beobachten, nicht erst beim Standbild reagieren</td></tr>
+<tr><td><b>Air Unit bindet nicht an die Brille</b></td><td>Firmwarestände passen nicht zusammen</td><td>Brille und Air Unit über die Hersteller-App bzw. den Aktivierungsdialog auf denselben Stand bringen; bei Walksnail müssen beide Seiten dieselbe Hauptversion tragen</td></tr>
+<tr><td><b>Kein OSD im Digitalbild</b></td><td>MSP-DisplayPort nicht eingerichtet</td><td>UART der Air Unit auf MSP stellen und die DisplayPort-Option in Betaflight aktivieren; Elemente im OSD-Tab neu platzieren</td></tr>
 </tbody>
 </table></div>
 
@@ -52,7 +54,7 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th data-s="text">Symptom</th><th>Wahrscheinliche Ursache</th><th>Vorgehen</th></tr></thead>
 <tbody>
-<tr><td><b>Bindet nicht</b></td><td>Unterschiedliche Firmware-Hauptversionen, falsche Bindephrase</td><td>Beide Seiten auf denselben Stand bringen; bei ELRS ist die Bindephrase in der Firmware verankert</td></tr>
+<tr><td><b>Bindet nicht</b></td><td>Unterschiedliche Firmware-Hauptversionen, falsche Bindephrase</td><td>Beide Seiten auf denselben Stand bringen — ein ELRS-4.x-Sender bindet grundsätzlich nicht an einen 3.x-Empfänger. Die Bindephrase ist in der Firmware verankert</td></tr>
 <tr><td><b>LQ bricht in bestimmten Richtungen ein</b></td><td>Abschattung durch den eigenen Körper oder das Quad selbst</td><td>Mitdrehen, Antennenposition am Quad ändern, zweite Antenne prüfen</td></tr>
 <tr><td><b>Zucken der Steuerung</b></td><td>Paketverluste oder Störer in der Nähe</td><td>Paketrate senken, Sendeleistung erhöhen, Kanäle prüfen</td></tr>
 <tr><td><b>Failsafe im Nahbereich</b></td><td>Empfänger unterversorgt oder Antenne gequetscht</td><td>Spannung am Empfänger unter Last messen; ein einbrechendes BEC ist eine typische Ursache</td></tr>
