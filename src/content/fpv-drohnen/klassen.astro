@@ -31,7 +31,7 @@ import "./_style.css";
 </figure>
 
 <h2>Kennzahlen je Klasse</h2>
-<p>Die Spannen folgen der Nachschlagetabelle von Oscar Liang und den nach Klassen getrennten Shopping-Lists von fpvknowitall.com — beide werden laufend gepflegt und sind die Referenz, wenn eine Zahl hier nicht mehr passt.</p>
+<p>Die Kurzfassung je Klasse — mit Radstand, Abfluggewicht und Flugzeit, die die große Tabelle unten nicht führt. Die Spannen folgen der Nachschlagetabelle von Oscar Liang und den Shopping-Lists von fpvknowitall.com; die vollständige, filterbare Zuordnung Propeller → Motor → kV → Akku steht direkt darunter.</p>
 <div class="tbl-wrap"><table style="min-width:1120px">
 <thead><tr><th data-s="text">Klasse</th><th>Propeller</th><th>Radstand</th><th>Abfluggewicht</th><th>Motor</th><th>kV (Zellen)</th><th>Akku</th><th>Flugzeit</th><th>Wofür</th></tr></thead>
 <tbody>
@@ -47,6 +47,88 @@ import "./_style.css";
 </tbody>
 </table></div>
 <p class="note">Die Motorbezeichnung 2207 heißt: Stator 22 mm Durchmesser, 7 mm Höhe — mehr unter <a href="#motoren">Motoren</a>. Faustregel für den Spannungswechsel: kV bei 4S ÷ 1,5 ≈ kV bei 6S bei gleicher Drehzahl.</p>
+
+
+<h2>Die große Nachschlagetabelle</h2>
+<p>Welcher Motor, welche kV, welcher Akku zu welchem Propeller — die vollständige Zuordnung, übernommen aus der laufend gepflegten Lookup-Table von Oscar Liang (Stand August 2026). Filtern nach Klasse, sortieren per Klick auf die Spaltenköpfe. <b>Trockengewicht</b> heißt: ohne Akku.</p>
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Propellergröße, Klasse oder Motorgröße suchen …" aria-label="Nachschlagetabelle durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="whoop">Tiny Whoop</button>
+    <button type="button" data-filter="ultralight">Ultraleicht</button>
+    <button type="button" data-filter="cinewhoop">Cinewhoop</button>
+    <button type="button" data-filter="freestyle">Freestyle</button>
+    <button type="button" data-filter="racing">Racing</button>
+    <button type="button" data-filter="longrange">Long Range</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="tbl-wrap"><table style="min-width:960px">
+    <thead><tr><th data-s="text">Propeller</th><th data-s="text">Klasse</th><th data-s="num">Zellen</th><th>Statorgrößen</th><th data-s="num">Motor-kV</th><th>Akku (mAh)</th><th data-s="num">Trockengewicht</th></tr></thead>
+    <tbody data-list="Kombinationen">
+      <tr data-item data-cat="whoop" data-k="31 mm (1,2") 3-blatt tiny whoop 65 mm 1s"><td><b>31 mm (1,2″)</b> · 3-Blatt</td><td>Tiny Whoop 65 mm</td><td>1S</td><td>0702, 0802</td><td>23000–30000</td><td>260–450</td><td>16–22 g</td></tr>
+      <tr data-item data-cat="whoop" data-k="31 mm (1,2") 2-blatt tiny whoop 65 mm 1s"><td><b>31 mm (1,2″)</b> · 2-Blatt</td><td>Tiny Whoop 65 mm</td><td>1S</td><td>0702, 0802</td><td>30000+</td><td>300</td><td>16–22 g</td></tr>
+      <tr data-item data-cat="whoop" data-k="40 mm (1,6") 3-blatt tiny whoop 75 mm 1s"><td><b>40 mm (1,6″)</b> · 3-Blatt</td><td>Tiny Whoop 75 mm</td><td>1S</td><td>0802, 1002</td><td>20000–23000</td><td>450–550</td><td>20–30 g</td></tr>
+      <tr data-item data-cat="whoop" data-k="40 mm (1,6") 3-blatt tiny whoop 75 mm 2s"><td><b>40 mm (1,6″)</b> · 3-Blatt</td><td>Tiny Whoop 75 mm</td><td>2S</td><td>0802, 1002, 1102</td><td>12000–14000</td><td>450–650</td><td>30–50 g</td></tr>
+      <tr data-item data-cat="whoop" data-k="40 mm (1,6") 3-blatt tiny whoop 75 mm 3s"><td><b>40 mm (1,6″)</b> · 3-Blatt</td><td>Tiny Whoop 75 mm</td><td>3S</td><td>1102, 1103</td><td>8000–11000</td><td>300–650</td><td>40–70 g</td></tr>
+      <tr data-item data-cat="whoop" data-k="40 mm (1,6") 2-blatt tiny whoop 75 mm 1s"><td><b>40 mm (1,6″)</b> · 2-Blatt</td><td>Tiny Whoop 75 mm</td><td>1S</td><td>0802, 1002</td><td>23000–25000</td><td>450–550</td><td>20–30 g</td></tr>
+      <tr data-item data-cat="whoop" data-k="40 mm (1,6") 2-blatt tiny whoop 75 mm 2s"><td><b>40 mm (1,6″)</b> · 2-Blatt</td><td>Tiny Whoop 75 mm</td><td>2S</td><td>0802, 1002</td><td>14000+</td><td>450–550</td><td>30–50 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="40 mm (1,6") 3-blatt ultraleicht 1s"><td><b>40 mm (1,6″)</b> · 3-Blatt</td><td>Ultraleicht</td><td>1S</td><td>1002</td><td>21000–23000</td><td>450–650</td><td>≈30 g</td></tr>
+      <tr data-item data-cat="cinewhoop" data-k="2" 3-blatt cinewhoop 2s"><td><b>2″</b> · 3-Blatt</td><td>Cinewhoop</td><td>2S</td><td>1003, 1103</td><td>11000–15000</td><td>450–650</td><td>70–90 g</td></tr>
+      <tr data-item data-cat="cinewhoop" data-k="2" 3-blatt cinewhoop 3s"><td><b>2″</b> · 3-Blatt</td><td>Cinewhoop</td><td>3S</td><td>1103, 1104, 1203, 1303</td><td>6000–7500</td><td>450–650</td><td>80–100 g</td></tr>
+      <tr data-item data-cat="cinewhoop" data-k="2" 3-blatt cinewhoop 4s"><td><b>2″</b> · 3-Blatt</td><td>Cinewhoop</td><td>4S</td><td>1303, 1304</td><td>5000–6000</td><td>450–720</td><td>120–140 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2" 3-blatt ultraleicht 1s"><td><b>2″</b> · 3-Blatt</td><td>Ultraleicht</td><td>1S</td><td>1002, 1003, 1102</td><td>20000–23000</td><td>450–650</td><td>30–40 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2" 3-blatt ultraleicht 2s"><td><b>2″</b> · 3-Blatt</td><td>Ultraleicht</td><td>2S</td><td>1002, 1003, 1103</td><td>10000–14000</td><td>450–650</td><td>30–50 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2" 3-blatt ultraleicht 3s"><td><b>2″</b> · 3-Blatt</td><td>Ultraleicht</td><td>3S</td><td>1103, 1105</td><td>6000–8000</td><td>300–450</td><td>60–100 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2" 3-blatt ultraleicht 4s"><td><b>2″</b> · 3-Blatt</td><td>Ultraleicht</td><td>4S</td><td>1105, 1106</td><td>5000–6000</td><td>450–650</td><td>70–130 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2,5" 3-blatt ultraleicht 2s"><td><b>2,5″</b> · 3-Blatt</td><td>Ultraleicht</td><td>2S</td><td>1203, 1204, 1303</td><td>≈7500</td><td>450–650</td><td>55–70 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2,5" 3-blatt ultraleicht 3s"><td><b>2,5″</b> · 3-Blatt</td><td>Ultraleicht</td><td>3S</td><td>1203, 1204, 1303</td><td>≈6000</td><td>450–650</td><td>120–140 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2,5" 3-blatt ultraleicht 4s"><td><b>2,5″</b> · 3-Blatt</td><td>Ultraleicht</td><td>4S</td><td>1404</td><td>≈4500</td><td>450–850</td><td>140–180 g</td></tr>
+      <tr data-item data-cat="cinewhoop" data-k="2,5" 3-blatt cinewhoop 4s"><td><b>2,5″</b> · 3-Blatt</td><td>Cinewhoop</td><td>4S</td><td>1404</td><td>4500–5000</td><td>650–850</td><td>140–180 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2,5" 2-blatt ultraleicht 1s"><td><b>2,5″</b> · 2-Blatt</td><td>Ultraleicht</td><td>1S</td><td>1102, 1103</td><td>13000–15000</td><td>300–450</td><td>25–35 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2,5" 2-blatt ultraleicht 2s"><td><b>2,5″</b> · 2-Blatt</td><td>Ultraleicht</td><td>2S</td><td>1203, 1204, 1303</td><td>7500–10000</td><td>450–550</td><td>40–60 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2,5" 2-blatt ultraleicht 3s"><td><b>2,5″</b> · 2-Blatt</td><td>Ultraleicht</td><td>3S</td><td>1203, 1204, 1303</td><td>6000–8000</td><td>450–550</td><td>45–65 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="2,5" 2-blatt ultraleicht 4s"><td><b>2,5″</b> · 2-Blatt</td><td>Ultraleicht</td><td>4S</td><td>1303, 1404</td><td>4500–6000</td><td>450–650</td><td>55–90 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="3" 3-blatt freestyle 2s"><td><b>3″</b> · 3-Blatt</td><td>Freestyle</td><td>2S</td><td>1303, 1404</td><td>4500–5500</td><td>550–650</td><td>70–100 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="3" 3-blatt freestyle 3s"><td><b>3″</b> · 3-Blatt</td><td>Freestyle</td><td>3S</td><td>1303, 1404, 1407</td><td>4000–5000</td><td>550–850</td><td>90–200 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="3" 3-blatt freestyle 4s"><td><b>3″</b> · 3-Blatt</td><td>Freestyle</td><td>4S</td><td>1404, 1407, 1506</td><td>3000–4200</td><td>450–850</td><td>140–260 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="3" 3-blatt freestyle 6s"><td><b>3″</b> · 3-Blatt</td><td>Freestyle</td><td>6S</td><td>1506, 1507</td><td>2700–3000</td><td>550–850</td><td>150–280 g</td></tr>
+      <tr data-item data-cat="longrange" data-k="3" 2-blatt long range 1s"><td><b>3″</b> · 2-Blatt</td><td>Long Range</td><td>1S</td><td>1103, 1202, 1203</td><td>10000–12000</td><td>Li-Ion 2500–3000</td><td>60–80 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="3" 2-blatt ultraleicht 1s"><td><b>3″</b> · 2-Blatt</td><td>Ultraleicht</td><td>1S</td><td>1202.5, 1203, 1303</td><td>11000–14000</td><td>≈450</td><td>30–50 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="3" 2-blatt ultraleicht 2s"><td><b>3″</b> · 2-Blatt</td><td>Ultraleicht</td><td>2S</td><td>1203, 1204, 1303</td><td>6000–8000</td><td>≈450</td><td>40–60 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="3" 2-blatt ultraleicht 3s"><td><b>3″</b> · 2-Blatt</td><td>Ultraleicht</td><td>3S</td><td>1203, 1204, 1303, 1304</td><td>4500–6500</td><td>300–450</td><td>55–75 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="3" 2-blatt ultraleicht 4s"><td><b>3″</b> · 2-Blatt</td><td>Ultraleicht</td><td>4S</td><td>1303, 1304, 1404</td><td>3500–5000</td><td>450–550</td><td>60–80 g</td></tr>
+      <tr data-item data-cat="cinewhoop" data-k="3" — cinewhoop 4s"><td><b>3″</b></td><td>Cinewhoop</td><td>4S</td><td>1404, 2004</td><td>3000–4000</td><td>850–1300</td><td>180–300 g</td></tr>
+      <tr data-item data-cat="cinewhoop" data-k="3" — cinewhoop 6s"><td><b>3″</b></td><td>Cinewhoop</td><td>6S</td><td>1404, 2004</td><td>2500–3000</td><td>850–1300</td><td>180–300 g</td></tr>
+      <tr data-item data-cat="cinewhoop" data-k="3,5" — cinewhoop 4s"><td><b>3,5″</b></td><td>Cinewhoop</td><td>4S</td><td>2004, 2006, 2106</td><td>2500–3500</td><td>1300–1500</td><td>250–350 g</td></tr>
+      <tr data-item data-cat="cinewhoop" data-k="3,5" — cinewhoop 6s"><td><b>3,5″</b></td><td>Cinewhoop</td><td>6S</td><td>2004, 2006, 2106</td><td>1800–2500</td><td>1000–1300</td><td>250–350 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="3,5" 3-blatt freestyle 4s"><td><b>3,5″</b> · 3-Blatt</td><td>Freestyle</td><td>4S</td><td>1404, 1504, 1604, 2004</td><td>3500–4000</td><td>850–1000</td><td>150–200 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="3,5" 3-blatt freestyle 6s"><td><b>3,5″</b> · 3-Blatt</td><td>Freestyle</td><td>6S</td><td>1504, 1604, 2004, 2006</td><td>2500–3000</td><td>850–1000</td><td>150–200 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="4" 3-blatt freestyle 4s"><td><b>4″</b> · 3-Blatt</td><td>Freestyle</td><td>4S</td><td>2004</td><td>2400–3000</td><td>850–1000</td><td>120–200 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="4" 3-blatt freestyle 6s"><td><b>4″</b> · 3-Blatt</td><td>Freestyle</td><td>6S</td><td>2004, 2106</td><td>1800–2500</td><td>650–850</td><td>120–180 g</td></tr>
+      <tr data-item data-cat="longrange" data-k="4" 2-blatt long range 3s"><td><b>4″</b> · 2-Blatt</td><td>Long Range</td><td>3S</td><td>1404, 1504, 1604</td><td>3000–4000</td><td>Li-Ion 2500–3000</td><td>120–150 g</td></tr>
+      <tr data-item data-cat="longrange" data-k="4" 2-blatt long range 4s"><td><b>4″</b> · 2-Blatt</td><td>Long Range</td><td>4S</td><td>1404, 1504, 1604</td><td>2500–3000</td><td>Li-Ion 2500–3000</td><td>150–200 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="5" 3-blatt freestyle 4s"><td><b>5″</b> · 3-Blatt</td><td>Freestyle</td><td>4S</td><td>2207, 2306, 2208, 2308</td><td>2300–2700</td><td>1300–1500</td><td>300–450 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="5" 3-blatt freestyle 6s"><td><b>5″</b> · 3-Blatt</td><td>Freestyle</td><td>6S</td><td>2207, 2306, 2208, 2308</td><td>1500–1700</td><td>1000–1100</td><td>300–450 g</td></tr>
+      <tr data-item data-cat="racing" data-k="5" 3-blatt racing 4s"><td><b>5″</b> · 3-Blatt</td><td>Racing</td><td>4S</td><td>2207, 2306, 2208, 2308</td><td>2500–3000</td><td>1300–1500</td><td>250–300 g</td></tr>
+      <tr data-item data-cat="racing" data-k="5" 3-blatt racing 6s"><td><b>5″</b> · 3-Blatt</td><td>Racing</td><td>6S</td><td>2207, 2306, 2208, 2308</td><td>1900–2300</td><td>1000–1300</td><td>250–300 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="5" 2-blatt ultraleicht 4s"><td><b>5″</b> · 2-Blatt</td><td>Ultraleicht</td><td>4S</td><td>2004, 2204, 2205</td><td>2300–3000</td><td>850–1000</td><td>150–250 g</td></tr>
+      <tr data-item data-cat="ultralight" data-k="5" 2-blatt ultraleicht 6s"><td><b>5″</b> · 2-Blatt</td><td>Ultraleicht</td><td>6S</td><td>2004, 2204, 2205</td><td>1600–2300</td><td>650–850</td><td>150–250 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="6" — freestyle 4s"><td><b>6″</b></td><td>Freestyle</td><td>4S</td><td>2207, 2208, 2308, 2407</td><td>2100–2500</td><td>1300–1800</td><td>300–450 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="6" — freestyle 6s"><td><b>6″</b></td><td>Freestyle</td><td>6S</td><td>2207, 2208, 2308, 2407</td><td>1500–1900</td><td>1000–1500</td><td>300–450 g</td></tr>
+      <tr data-item data-cat="freestyle" data-k="7" — freestyle 6s"><td><b>7″</b></td><td>Freestyle</td><td>6S</td><td>2806, 2807, 2808, 3106</td><td>1200–1400</td><td>2200–3000</td><td>400–500 g</td></tr>
+      <tr data-item data-cat="longrange" data-k="7" — long range 4s"><td><b>7″</b></td><td>Long Range</td><td>4S</td><td>2806, 2807, 2808, 3106</td><td>1600–1900</td><td>Li-Ion 2500–4000</td><td>350–500 g</td></tr>
+      <tr data-item data-cat="longrange" data-k="7" — long range 6s"><td><b>7″</b></td><td>Long Range</td><td>6S</td><td>2806, 2807, 2808, 3106</td><td>980–1300</td><td>Li-Ion 2500–4000</td><td>350–500 g</td></tr>
+      <tr data-item data-cat="longrange" data-k="8" — long range 6s"><td><b>8″</b></td><td>Long Range</td><td>6S</td><td>2808, 2810, 2814</td><td>900–1200</td><td>—</td><td>—</td></tr>
+      <tr data-item data-cat="longrange" data-k="10" — long range 6s"><td><b>10″</b></td><td>Long Range</td><td>6S</td><td>2814, 3110, 3115, 3214</td><td>≈900</td><td>—</td><td>—</td></tr>
+      <tr data-item data-cat="longrange" data-k="10" — long range 12s"><td><b>10″</b></td><td>Long Range</td><td>12S</td><td>2814, 3110, 3115, 3214</td><td>≈450</td><td>—</td><td>—</td></tr>
+      <tr data-item data-cat="longrange" data-k="13" — long range 12s"><td><b>13″</b></td><td>Long Range</td><td>12S</td><td>—</td><td>330–360</td><td>—</td><td>—</td></tr>
+      <tr data-item data-cat="longrange" data-k="15" — long range 12s"><td><b>15″</b></td><td>Long Range</td><td>12S</td><td>—</td><td>≈250</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Kein Treffer. Filter zurücksetzen oder anderen Begriff versuchen.</div>
+</div>
+<p class="note">Die Spannen stammen 1:1 aus der Quelle; „Ultraleicht“ ist dort die Toothpick-/Leichtbau-Klasse. Bei 5″-Freestyle an 6S listet die Tabelle 1500–1700 kV — aktuelle Serienmotoren liegen oft etwas darüber (1700–1950 kV, siehe Kennzahlen oben); beides fliegt, höhere kV heißt mehr Drehzahl und Strom. 12S-Angaben betreffen große Nutzlast-Aufbauten weit jenseits des Hobby-Rahmens. Zellenzahl und kV gehören immer paarweise gelesen: halbe kV bei doppelter Spannung ergibt dieselbe Drehzahl.</p>
 
 <h2>Freestyle, Race, Cinematic — der Unterschied liegt im Kompromiss</h2>
 <div class="grid">
