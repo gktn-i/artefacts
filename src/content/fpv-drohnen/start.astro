@@ -3,6 +3,54 @@ import "./_style.css";
 ---
 <div class="kurz"><b>Eine FPV-Drohne ist ein Regelkreis mit Propellern.</b> Ein Gyroskop misst tausendfach je Sekunde, wie sich das Gerät dreht, ein PID-Regler vergleicht das mit dem Knüppelausschlag und verteilt die Differenz auf vier Motoren. Alles andere — Rahmen, Akku, Funk, Kamera — hängt an dieser einen Schleife. Wer das Prinzip verstanden hat, kann jedes Problem einordnen.</div>
 
+
+<figure>
+<svg class="dg l" viewBox="0 0 660 420" role="img" aria-label="Komponenten-Übersicht eines FPV-Quads in der Draufsicht: Propeller, Motoren, Rahmen, Stack aus Flight Controller und ESC, LiPo, Kamera, Empfängerantennen und Videoantenne — jede Beschriftung führt zum passenden Abschnitt">
+  <!-- Propellerscheiben -->
+  <circle class="accs" cx="200" cy="100" r="54" />
+  <circle class="accs" cx="460" cy="100" r="54" />
+  <circle class="accs" cx="200" cy="330" r="54" />
+  <circle class="accs" cx="460" cy="330" r="54" />
+  <!-- Arme -->
+  <path class="w" style="stroke-width:7" d="M292,178 L204,104 M368,178 L456,104 M292,252 L204,326 M368,252 L456,326" />
+  <!-- Motoren -->
+  <circle class="box" cx="200" cy="100" r="13" /><circle class="accf" cx="200" cy="100" r="3.5" />
+  <circle class="box" cx="460" cy="100" r="13" /><circle class="accf" cx="460" cy="100" r="3.5" />
+  <circle class="box" cx="200" cy="330" r="13" /><circle class="accf" cx="200" cy="330" r="3.5" />
+  <circle class="box" cx="460" cy="330" r="13" /><circle class="accf" cx="460" cy="330" r="3.5" />
+  <!-- Zentralplatte + Akku obenauf -->
+  <rect class="box" x="286" y="171" width="88" height="88" rx="10" />
+  <rect class="accs" x="308" y="150" width="44" height="136" rx="9" />
+  <path class="wt" d="M308,188 H352 M308,244 H352" />
+  <!-- Kamera vorn -->
+  <rect class="box" x="318" y="98" width="24" height="22" rx="4" />
+  <circle class="accf" cx="330" cy="98" r="6" />
+  <!-- Empfaenger-Antennen hinten links, Videoantenne hinten rechts -->
+  <path class="wt" d="M304,268 L268,332 M312,272 L286,336" />
+  <circle class="accf" cx="268" cy="334" r="3.5" /><circle class="accf" cx="286" cy="338" r="3.5" />
+  <path class="acc" d="M352,272 L390,334" /><circle class="accf" cx="390" cy="336" r="5" />
+  <!-- Beschriftungen: klickbar, fuehren in die Abschnitte -->
+  <a href="#kamera"><text class="lbla" x="330" y="24" text-anchor="middle">Kamera &amp; Aufnahme</text></a>
+  <path class="gd" d="M330,32 V90" />
+  <a href="#props"><text class="lbla" x="118" y="60" text-anchor="end">Propeller</text></a>
+  <path class="gd" d="M124,58 L162,64" />
+  <a href="#motoren"><text class="lbla" x="118" y="106" text-anchor="end">Motoren</text></a>
+  <path class="gd" d="M124,103 L185,101" />
+  <a href="#frame"><text class="lbla" x="118" y="212" text-anchor="end">Rahmen &amp; Mechanik</text></a>
+  <path class="gd" d="M124,209 L282,213" />
+  <a href="#esc"><text class="lbla" x="520" y="206" text-anchor="start">Stack: FC + 4-in-1-ESC</text></a>
+  <a href="#esc"><text class="lbla" x="520" y="221" text-anchor="start">(unter dem Akku)</text></a>
+  <path class="gd" d="M516,212 L378,214" />
+  <a href="#funk"><text class="lbla" x="240" y="404" text-anchor="end">Empfänger-Antennen (RC-Link)</text></a>
+  <path class="gd" d="M236,396 L272,342" />
+  <a href="#video"><text class="lbla" x="420" y="404" text-anchor="start">Videoantenne (Air Unit/VTX)</text></a>
+  <path class="gd" d="M424,396 L392,344" />
+  <a href="#akku"><text class="lbla" x="330" y="388" text-anchor="middle">LiPo (oben auf dem Rahmen)</text></a>
+  <path class="gd" d="M330,376 V290" />
+</svg>
+<figcaption>Die Anatomie in der Draufsicht, vorn ist oben — jede Beschriftung führt zum passenden Abschnitt. Nicht im Bild: GPS und Buzzer (hinten am Rahmen, siehe <a href="#bauen">Bauen</a>) sowie Funke und Goggles (<a href="#bodenstation">Bodenstation</a>).</figcaption>
+</figure>
+
 <h2>Wofür dieses Modul da ist</h2>
 <p>Dies ist ein Nachschlagewerk mit zwei Sorten von Inhalt. Die <b>Zusammenhänge</b> — warum ein 5-Zoll-Quad an 6S um 1800 kV fliegt, was ein Kerbfilter kostet, weshalb ein Videobild verrauscht, obwohl die Reichweite stimmen müsste — veralten nicht. Die <b>Kennzahlen und Produktgenerationen</b> — welche Air Unit, welche Brille, welche Firmware-Version — tragen ein Stand-Datum und sind bewusst als solche gekennzeichnet: <b>Stand August 2026.</b> Für alles danach stehen die Anlaufstellen unter <a href="#quellen">Quellen &amp; Kanäle</a> — allen voran <a href="https://oscarliang.com/">oscarliang.com</a> und Joshua Bardwells <a href="https://www.fpvknowitall.com/">fpvknowitall.com</a>, deren laufend gepflegte Kauflisten dieses Modul absichtlich nicht dupliziert.</p>
 
