@@ -1,80 +1,99 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Beim Videofunk zählt eine Eigenschaft mehr als Bildqualität: wie das Bild <em>stirbt</em>.</b> Analoges Video wird verrauscht, bleibt aber sichtbar und steuerbar — man sieht das Ende kommen. Digitale Systeme bleiben scharf und schalten dann ohne Vorwarnung ab. Deshalb ist Reichweite bei Analog eine Kurve und bei Digital eine Kante.</div>
+<div class="kurz"><b>Beim Videofunk zählt eine Eigenschaft mehr als Bildqualität: wie das Bild <em>stirbt</em>.</b> Analoges Video wird verrauscht, bleibt aber sichtbar und steuerbar — man sieht das Ende kommen. HDZero bricht in Blöcke auf, bleibt aber lange fliegbar. DJI und Walksnail bleiben scharf und frieren dann ohne Vorwarnung ein. Deshalb ist Reichweite bei Analog eine Kurve und bei den geschlossenen Digitalsystemen eine Kante.</div>
 
-<h2>Analog oder digital</h2>
-<div class="tbl-wrap"><table style="min-width:1000px">
-<thead><tr><th data-s="text">System</th><th>Auflösung</th><th>Latenz (Größenordnung)</th><th>Verhalten am Rand</th><th>Gewicht</th><th>Einordnung</th></tr></thead>
+<h2>Die vier Ökosysteme (Stand August 2026)</h2>
+<div class="tbl-wrap"><table style="min-width:1080px">
+<thead><tr><th data-s="text">System</th><th>Übertragung</th><th>Latenz (Herstellerangabe)</th><th>Verhalten am Rand</th><th>Aktuelle Hardware</th><th>Einordnung</th></tr></thead>
 <tbody>
-<tr><td><b>Analog 5,8 GHz</b></td><td>ca. 480–600 TVL</td><td>&lt; 20 ms</td><td>rauscht langsam zu, bleibt nutzbar</td><td>sehr leicht</td><td>Billig, robust, unbegrenzt viele Zuschauer. Bildqualität nach heutigen Maßstäben schwach</td></tr>
-<tr><td><b>HDZero</b></td><td>720p</td><td>am niedrigsten unter den digitalen</td><td>bricht in Blöcke auf, bleibt lange fliegbar</td><td>leicht</td><td>Digitalsystem mit analog-ähnlichem Ausfallverhalten; bei Racern beliebt</td></tr>
-<tr><td><b>Walksnail Avatar</b></td><td>1080p</td><td>gering</td><td>friert ein, dann schwarz</td><td>mittel</td><td>Gutes Bild zu moderatem Preis, offener für Fremdhardware als DJI</td></tr>
-<tr><td><b>DJI (O3 / O4)</b></td><td>1080p, Aufnahme bis 4K</td><td>gering</td><td>friert ein, dann schwarz</td><td>mittel bis schwer</td><td>Bestes Bild und beste Aufnahme, geschlossenes Ökosystem, höchster Preis</td></tr>
-<tr><td><b>OpenIPC</b></td><td>720p/1080p</td><td>je nach Aufbau</td><td>konfigurierbar</td><td>mittel</td><td>Quelloffener Ansatz auf Standard-WLAN-Hardware. Für Bastler interessant, mehr Eigenarbeit</td></tr>
+<tr><td><b>Analog 5,8 GHz</b></td><td>PAL/NTSC, ~480–600 TVL</td><td>&lt; 20 ms, konstant</td><td>rauscht langsam zu, bleibt nutzbar</td><td>VTX ab wenigen Gramm und Euro; Brillen: Skyzone 04X Pro als Referenz, Box-Brillen als Budget</td><td>Billig, robust, beliebig viele Mitschauer. Bildqualität nach heutigen Maßstäben schwach — aber ein Crash kostet einen 20-Euro-Sender</td></tr>
+<tr><td><b>HDZero</b></td><td>540p/90 fps (Race) bis 1080p; feste Datenrate ohne Nachregelung</td><td>~4 ms, fest</td><td>bricht in Blöcke auf, bleibt lange fliegbar</td><td>Eco- und Freestyle-VTX, Goggles-2- und BoxPro-Brillen — teils mit eingebautem Analogempfänger</td><td>Das Digitalsystem mit analogem Charakter: fixe Latenz, kein Einfrieren. Bei Racern gesetzt, quelloffene Anteile</td></tr>
+<tr><td><b>Walksnail Avatar</b></td><td>1080p bis 100 fps</td><td>~22 ms (Race-Modus)</td><td>friert ein, dann schwarz</td><td>Kit V2 / Pro / GT2 (bis 2 W, Sony-Sensor) / Moonlight (Nachtsensor, 4K-Aufnahme) / Mini-1S für Whoops; Goggles X (2×1080p-OLED, 100 Hz), Goggles L als Einstieg</td><td>Gutes Bild zu moderatem Preis, breite Kamerapalette, offener für Fremdhardware als DJI</td></tr>
+<tr><td><b>DJI O4</b></td><td>1080p/100 fps</td><td>ab ~15 ms (O4 Pro mit Goggles 3, Race-Modus)</td><td>friert ein, dann schwarz</td><td>O4 Air Unit (~8 g, 1/2″-Sensor, 4K/60-Aufnahme) und O4 Air Unit Pro (~32 g, 1/1,3″, 4K/120, D-Log M); Goggles 3 (2×Micro-OLED, 100 Hz, IPD + Dioptrien) und Goggles N3 (1×LCD, günstig)</td><td>Bestes Bild und beste Onboard-Aufnahme, Consumer-Politur — geschlossenes Ökosystem, höchster Preis</td></tr>
+<tr><td><b>OpenIPC</b></td><td>720p/1080p über WLAN-Hardware</td><td>je nach Aufbau</td><td>konfigurierbar</td><td>Standard-WLAN-Module mit offener Firmware</td><td>Der quelloffene Bastelansatz. Beeindruckende Reichweiten möglich, deutlich mehr Eigenarbeit</td></tr>
 </tbody>
 </table></div>
-<p class="note">Latenzangaben der Hersteller sind „glass to glass“ gemessen und je nach Modus unterschiedlich; unabhängige Messungen streuen deutlich. Verlässlich ist nur die Rangfolge, nicht die zweite Nachkommastelle. Vor einer Kaufentscheidung: aktuelle Messungen bei den unter <a href="#quellen">Quellen</a> genannten Stellen nachlesen.</p>
+<p class="note">Latenzangaben sind Herstellerwerte im jeweils schnellsten Modus und je nach Messmethode („glass to glass“) verschieden; unabhängige Messungen liegen meist etwas höher. Verlässlich ist die Rangfolge: HDZero am schnellsten und konstant, DJI und Walksnail dicht beieinander, Analog konkurrenzfähig schnell. Vor der Kaufentscheidung: aktuelle Vergleiche bei <a href="https://oscarliang.com/fpv-system/">oscarliang.com</a> und fpvknowitall.com lesen.</p>
 
 <div class="gb">
-  <div class="gb-col good"><h4>Für Analog spricht</h4>
+  <div class="gb-col good"><h4>Wann Analog oder HDZero</h4>
     <ul>
-      <li>Sanfter Ausfall — man erkennt rechtzeitig, dass die Reichweite endet</li>
-      <li>Sehr leicht und sehr billig, ideal für Micros und Whoops</li>
-      <li>Beliebig viele Zuschauer können auf denselben Kanal gehen</li>
-      <li>Ein Crash kostet einen 15-Euro-VTX, keine 200-Euro-Einheit</li>
+      <li>Racing: feste, minimale Latenz zählt mehr als Auflösung</li>
+      <li>Whoops und Micros: jedes Gramm und jeder Euro zählt</li>
+      <li>Gruppenfliegen: beliebig viele Zuschauer je Kanal (Analog) bzw. Race-taugliche Kanalpläne (HDZero)</li>
+      <li>Wer das Reichweitenende <em>sehen</em> will, statt es im Standbild zu erraten</li>
     </ul>
   </div>
-  <div class="gb-col"><h4>Für Digital spricht</h4>
+  <div class="gb-col"><h4>Wann DJI oder Walksnail</h4>
     <ul>
-      <li>Deutlich mehr erkennbare Details — Äste, Drähte, Untergrund</li>
-      <li>Aufnahme in Sendequalität oder besser, ohne zweite Kamera</li>
-      <li>Kein Kanalgeschiebe unter mehreren Piloten</li>
-      <li>Weniger Ermüdung auf langen Flugtagen</li>
+      <li>Cinematic und Reisen: Onboard-4K ersetzt die Actioncam, bei DJI bis 4K/120 mit Log-Profil</li>
+      <li>Freestyle mit Anspruch ans Bild: Äste, Drähte und Untergrund sind schlicht erkennbar</li>
+      <li>Sub-250-Bauten: die leichte O4-Einheit (~8 g) hat HD unter 250 g alltagstauglich gemacht</li>
+      <li>Komfort: Kanalmanagement, Aufnahme und OSD wirken aus einem Guss</li>
     </ul>
   </div>
 </div>
 
-<h2>Analoges 5,8-GHz-Band</h2>
-<p>Das 5,8-GHz-Band ist in Bänder zu je acht Kanälen aufgeteilt. Praktisch relevant sind zwei Dinge: Kanäle müssen weit genug auseinanderliegen, und nicht jeder Kanal ist überall zulässig.</p>
-<div class="tbl-wrap"><table style="min-width:820px">
-<thead><tr><th>Band</th><th>Kürzel</th><th>Bereich</th><th>Anmerkung</th></tr></thead>
-<tbody>
-<tr><td><b>Band A</b></td><td>A / Boscam</td><td>5865–5945 MHz</td><td>Älteste Belegung, teils außerhalb der in der EU nutzbaren Bereiche</td></tr>
-<tr><td><b>Band B</b></td><td>B</td><td>5733–5866 MHz</td><td>Ergänzung zu A</td></tr>
-<tr><td><b>Band E</b></td><td>E</td><td>5645–5945 MHz</td><td>Sehr breit gestreut, viele Kanäle rechtlich problematisch</td></tr>
-<tr><td><b>Band F</b></td><td>F / Fatshark / ImmersionRC</td><td>5740–5880 MHz</td><td>Lange der De-facto-Standard in Europa</td></tr>
-<tr><td><b>Raceband</b></td><td>R</td><td>5658–5917 MHz</td><td>Gleichmäßige Abstände, für mehrere Piloten gleichzeitig ausgelegt</td></tr>
-</tbody>
-</table></div>
-<div class="warn"><b>Zulässigkeit prüfen, nicht raten.</b> In Deutschland ist für 5,8 GHz nicht das ganze Band frei nutzbar, und die zulässige Strahlungsleistung ist deutlich geringer, als viele VTX liefern können. Die maßgebliche Quelle ist die jeweils gültige Allgemeinzuteilung der Bundesnetzagentur — nicht das Handbuch eines Importeurs. Mehr unter <a href="#recht">Recht &amp; Sicherheit</a>.</div>
-<div class="tip"><b>Mehrere Piloten am selben Platz.</b> Faustregel: mindestens 40 MHz Kanalabstand, besser mehr, und die Sendeleistung so weit reduzieren, wie es der Platz erlaubt. Ein Pilot mit 800 mW auf dem Nachbarkanal legt vier andere lahm. Vor dem Einschalten fragen, welcher Kanal frei ist — der Umgangston auf Flugplätzen entscheidet sich meist an genau dieser Stelle.</div>
+<h2>Das analoge 5,8-GHz-Band</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 250" role="img" aria-label="Kanalkarte des 5,8-Gigahertz-Bands: Bänder A, B, E, F und Raceband mit ihren Kanalfrequenzen, dazu der in Deutschland allgemein zugeteilte Bereich 5725 bis 5875 Megahertz">
+  <!-- x: 5640..5960 MHz -> 60..640 px (1.8125 px/MHz) -->
+  <rect class="accs" x="214" y="28" width="272" height="180" rx="6" />
+  <text class="lbla" x="350" y="22" text-anchor="middle">Allgemeinzuteilung DE: 5725–5875 MHz (25 mW EIRP)</text>
+  <path class="wt" d="M60,208 H640" />
+  <path class="gd" d="M168,208 V40 M350,208 V40 M531,208 V40" />
+  <text class="lbl" x="168" y="232" text-anchor="middle">5700</text>
+  <text class="lbl" x="350" y="232" text-anchor="middle">5800</text>
+  <text class="lbl" x="531" y="232" text-anchor="middle">5900 MHz</text>
+  <!-- Band A: 5865 5845 5825 5805 5785 5765 5745 5725 -->
+  <text class="lbl" x="52" y="64" text-anchor="end">A</text>
+  <g><circle class="accf" cx="468" cy="60" r="4"/><circle class="accf" cx="432" cy="60" r="4"/><circle class="accf" cx="395" cy="60" r="4"/><circle class="accf" cx="359" cy="60" r="4"/><circle class="accf" cx="323" cy="60" r="4"/><circle class="accf" cx="287" cy="60" r="4"/><circle class="accf" cx="250" cy="60" r="4"/><circle class="accf" cx="214" cy="60" r="4"/></g>
+  <!-- Band B: 5733..5866 (19 MHz) -->
+  <text class="lbl" x="52" y="99" text-anchor="end">B</text>
+  <g><circle class="accf" cx="229" cy="95" r="4"/><circle class="accf" cx="263" cy="95" r="4"/><circle class="accf" cx="297" cy="95" r="4"/><circle class="accf" cx="332" cy="95" r="4"/><circle class="accf" cx="366" cy="95" r="4"/><circle class="accf" cx="401" cy="95" r="4"/><circle class="accf" cx="435" cy="95" r="4"/><circle class="accf" cx="470" cy="95" r="4"/></g>
+  <!-- Band E: 5705 5685 5665 5645 5885 5905 5925 5945 -->
+  <text class="lbl" x="52" y="134" text-anchor="end">E</text>
+  <g><circle class="accf" cx="178" cy="130" r="4"/><circle class="accf" cx="142" cy="130" r="4"/><circle class="accf" cx="105" cy="130" r="4"/><circle class="accf" cx="69" cy="130" r="4"/><circle class="accf" cx="504" cy="130" r="4"/><circle class="accf" cx="540" cy="130" r="4"/><circle class="accf" cx="577" cy="130" r="4"/><circle class="accf" cx="613" cy="130" r="4"/></g>
+  <!-- Band F: 5740..5880 (20 MHz) -->
+  <text class="lbl" x="52" y="169" text-anchor="end">F</text>
+  <g><circle class="accf" cx="241" cy="165" r="4"/><circle class="accf" cx="277" cy="165" r="4"/><circle class="accf" cx="314" cy="165" r="4"/><circle class="accf" cx="350" cy="165" r="4"/><circle class="accf" cx="386" cy="165" r="4"/><circle class="accf" cx="422" cy="165" r="4"/><circle class="accf" cx="459" cy="165" r="4"/><circle class="accf" cx="495" cy="165" r="4"/></g>
+  <!-- Raceband: 5658..5917 (37 MHz) -->
+  <text class="lblb" x="52" y="204" text-anchor="end">R</text>
+  <g>
+    <circle class="accf" cx="93" cy="196" r="5"/><circle class="accf" cx="160" cy="196" r="5"/><circle class="accf" cx="227" cy="196" r="5"/><circle class="accf" cx="294" cy="196" r="5"/><circle class="accf" cx="361" cy="196" r="5"/><circle class="accf" cx="428" cy="196" r="5"/><circle class="accf" cx="495" cy="196" r="5"/><circle class="accf" cx="562" cy="196" r="5"/>
+    <text class="lbl" x="93" y="186" text-anchor="middle">R1</text><text class="lbl" x="227" y="186" text-anchor="middle">R3</text><text class="lbl" x="361" y="186" text-anchor="middle">R5</text><text class="lbl" x="495" y="186" text-anchor="middle">R7</text>
+  </g>
+</svg>
+<figcaption>Die fünf gebräuchlichen Bänder mit je acht Kanälen. Raceband (unten) ist mit 37 MHz Abstand für den Parallelbetrieb mehrerer Piloten ausgelegt. Wichtig: Etliche Kanäle — vor allem der Bänder A und E — liegen <em>außerhalb</em> des in Deutschland allgemein zugeteilten Bereichs; verbindlich ist die jeweils gültige Allgemeinzuteilung der Bundesnetzagentur.</figcaption>
+</figure>
+<div class="tip"><b>Mehrere Piloten am selben Platz.</b> Faustregel: mindestens 40 MHz Kanalabstand, besser mehr, und die Sendeleistung so weit runter, wie es der Platz erlaubt. Ein Pilot mit 800 mW auf dem Nachbarkanal legt vier andere lahm. Vor dem Einschalten fragen, welcher Kanal frei ist — der Umgangston auf Flugplätzen entscheidet sich an genau dieser Stelle. Digitale Systeme managen ihre Kanäle selbst, brauchen aber ebenfalls Absprache: Auch dort ist das Spektrum endlich (DJI: max. 2–4 Piloten parallel, HDZero: eigene Race-Kanalpläne).</div>
 
-<h2>VTX-Einstellungen</h2>
+<h2>VTX- und Air-Unit-Einstellungen</h2>
 <div class="flist">
-  <div class="frow hd"><span>Begriff</span><span>Typischer Wert</span><span>Bedeutung</span></div>
-  <div class="frow"><span class="fn">Sendeleistung</span><span class="fe">25 / 200 / 400 / 800 mW</span><span class="fx">25 mW reicht für Sichtweite und stört niemanden. Mehr Leistung heißt mehr Wärme und mehr Störung für andere</span></div>
-  <div class="frow"><span class="fn">Pit Mode</span><span class="fe">an beim Einschalten</span><span class="fx">Sehr geringe Leistung zum Einrichten am Boden. Muss vor dem Start deaktiviert werden — sonst reicht das Bild zwanzig Meter weit</span></div>
-  <div class="frow"><span class="fn">SmartAudio / Tramp</span><span class="fe">UART</span><span class="fx">Steuerprotokolle, mit denen Kanal und Leistung aus dem OSD heraus geändert werden. Erspart das Fummeln am Knopf im Rahmen</span></div>
-  <div class="frow"><span class="fn">VTX-Tabelle</span><span class="fe">in Betaflight</span><span class="fx">Legt fest, welche Bänder und Leistungen die Firmware anbietet. Ohne passende Tabelle keine Kanalwahl im OSD</span></div>
-  <div class="frow"><span class="fn">Kühlung</span><span class="fe">Luftstrom nötig</span><span class="fx">Ein VTX auf voller Leistung ohne Fahrtwind wird sehr heiß. Nie längere Zeit am Boden mit voller Leistung senden — und nie ohne Antenne</span></div>
-  <div class="frow"><span class="fn">MSP-DisplayPort</span><span class="fe">bei digitalen Systemen</span><span class="fx">Überträgt das OSD als Text statt als überlagertes Analogbild — deshalb ist das OSD dort scharf</span></div>
+  <div class="frow hd"><span>Begriff</span><span>Typisch</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">Sendeleistung</span><span class="fe">25 mW … 2 W je nach System</span><span class="fx">25 mW reicht für Sichtweite. Mehr Leistung heißt mehr Wärme und mehr Störung für andere — und rechtliche Grenzen, siehe <a href="#recht">Recht</a></span></div>
+  <div class="frow"><span class="fn">Pit Mode</span><span class="fe">an beim Einschalten</span><span class="fx">Minimalleistung zum Einrichten am Boden. Vor dem Start deaktivieren — sonst reicht das Bild zwanzig Meter</span></div>
+  <div class="frow"><span class="fn">SmartAudio / Tramp</span><span class="fe">UART (analog)</span><span class="fx">Steuerprotokolle, mit denen Kanal und Leistung aus dem OSD geändert werden — kein Fummeln am Taster im Rahmen</span></div>
+  <div class="frow"><span class="fn">MSP-DisplayPort</span><span class="fe">UART (digital)</span><span class="fx">Das OSD läuft als Text zur Brille — deshalb ist es bei digitalen Systemen gestochen scharf. In Betaflight Standard für O4, Avatar und HDZero</span></div>
+  <div class="frow"><span class="fn">VTX-Tabelle</span><span class="fe">in Betaflight (analog)</span><span class="fx">Legt fest, welche Bänder und Leistungen die Firmware anbietet. Ohne passende Tabelle keine Kanalwahl im OSD</span></div>
+  <div class="frow"><span class="fn">Kühlung</span><span class="fe">Fahrtwind nötig</span><span class="fx">VTX und Air Units auf hoher Leistung werden am Boden sehr heiß. Nie länger im Stand senden — und nie ohne Antenne</span></div>
 </div>
-<div class="stop"><b>Niemals ohne Antenne senden.</b> Ohne angeschlossene Antenne wird die Sendeleistung reflektiert und in der Endstufe in Wärme umgesetzt. Viele VTX überleben das nur Sekunden. Deshalb gilt die Reihenfolge: Antenne prüfen, dann Akku anstecken — immer, auch bei „nur kurz testen“.</div>
+<div class="stop"><b>Niemals ohne Antenne senden.</b> Ohne Antenne wird die Sendeleistung reflektiert und in der Endstufe verheizt. Viele Sender überleben das nur Sekunden. Reihenfolge deshalb immer: Antenne prüfen, dann Akku anstecken — auch bei „nur kurz testen“.</div>
 
 <h2>Aufzeichnung</h2>
 <ul>
-  <li><b>DVR in der Brille</b> zeichnet genau das auf, was der Pilot gesehen hat — inklusive Störungen. Als Erinnerungsstütze nach einem Absturz ist das oft wertvoller als schönes Material: Man sieht, wann das Bild wegging und ob das OSD vorher gewarnt hat.</li>
-  <li><b>Onboard-Aufnahme</b> bei digitalen Systemen liefert die eigentliche Bildqualität, hilft aber bei der Fehlersuche wenig, weil sie nicht zeigt, was übertragen wurde.</li>
-  <li><b>Separate Actioncam</b> ist der Weg zu wirklich guter Bildqualität — mit dem Preis von 30–120 g Zusatzgewicht. Details unter <a href="#kamera">Kameras &amp; Aufnahme</a>.</li>
+  <li><b>DVR in der Brille</b> zeichnet auf, was der Pilot gesehen hat — inklusive Störungen und OSD. Nach einem Absturz oft wertvoller als schönes Material: Man sieht, wann das Bild wegging und ob vorher gewarnt wurde. Immer mitlaufen lassen.</li>
+  <li><b>Onboard-Aufnahme der Air Unit</b> liefert bei O4 und Walksnail die eigentliche Bildqualität (bis 4K, bei O4 Pro mit Log-Profil und Gyrodaten für die Stabilisierung). Für viele Cinematic-Piloten hat sie die separate Actioncam ersetzt.</li>
+  <li><b>Separate Actioncam</b> bleibt der Weg zur besten Qualität und zu freier Kamerawahl — um den Preis von 30–120 g. Details unter <a href="#kamera">Kameras &amp; Aufnahme</a>.</li>
 </ul>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Vergleichstests der digitalen Systeme, inklusive systematischer Reichweiten- und Ausfallmessungen.</li>
-    <li><a href="https://oscarliang.com/fpv-system/">Oscar Liang — Which FPV System Should You Buy</a>: laufend aktualisierter Vergleich analoger und digitaler Systeme.</li>
-    <li><a href="https://github.com/hd-zero">HDZero</a> und die Herstellerdokumentationen von DJI und Caddx/Walksnail — verbindlich für Kanäle, Leistungsstufen und Firmware.</li>
-    <li>Bundesnetzagentur, Allgemeinzuteilungen für nichtöffentliche Funkanwendungen — maßgeblich für zulässige Frequenzen und Strahlungsleistungen in Deutschland.</li>
+    <li><a href="https://oscarliang.com/fpv-system/">Oscar Liang — Which FPV System Should You Buy</a>: der laufend aktualisierte Systemvergleich; dazu die Einzeltests der <a href="https://oscarliang.com/dji-o4-air-unit-pro/">O4 Pro</a> und <a href="https://oscarliang.com/dji-o4-air-unit-lite/">O4</a>.</li>
+    <li><a href="https://www.fpvknowitall.com/fpv-shopping-list-hd-fpv-drones-and-parts/">fpvknowitall.com — HD Digital FPV Shopping List</a> und die Vergleichsvideos von <a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> mit systematischen Reichweiten- und Ausfallmessungen.</li>
+    <li>Herstellerdokumentation: DJI (O4/Goggles), Caddx/Walksnail (Avatar), <a href="https://github.com/hd-zero">HDZero (quelloffen)</a> — verbindlich für Kanäle, Leistungsstufen, Firmware.</li>
+    <li>Bundesnetzagentur, Allgemeinzuteilungen — maßgeblich für zulässige Frequenzen und Strahlungsleistungen in Deutschland.</li>
   </ul>
 </div>

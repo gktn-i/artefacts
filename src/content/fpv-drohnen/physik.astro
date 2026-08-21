@@ -85,7 +85,7 @@ import "./_style.css";
 <tr><td><b>Feedforward</b></td><td>Rechnet die Knüppelbewegung direkt auf die Motoren, ohne auf einen Fehler zu warten</td><td>Ruckelt bei grober Knüppelauflösung</td><td>Verzögertes Ansprechen, das Quad „hinkt“ dem Knüppel hinterher</td></tr>
 </tbody>
 </table></div>
-<p class="note">Die Theorie dahinter — Regelkreis, Stabilität, Filter und ihre Phasenverzögerung — steht ausführlich im Modul <a href="regelungstechnik.html">Regelungstechnik</a>. Die praktische Anwendung am Quad unter <a href="#tuning">PID-Tuning &amp; Filter</a>.</p>
+<p class="note">Die Schleife läuft in Betaflight typisch mit 4–8 kHz — der Gyro wird noch schneller abgetastet, und die Filterkette dazwischen ist der Gegenstand des ganzen Tunings (als Schaubild unter <a href="#tuning">PID-Tuning &amp; Filter</a>). Die Theorie dahinter — Regelkreis, Stabilität, Filter und ihre Phasenverzögerung — steht ausführlich im Modul <a href="regelungstechnik.html">Regelungstechnik</a>.</p>
 
 <h2>Schub, Gewicht, Drehzahl</h2>
 <div class="fbox">
@@ -97,7 +97,7 @@ import "./_style.css";
   <li><b>Große Propeller sind effizienter.</b> Sie bewegen viel Luft langsam statt wenig Luft schnell. Ein 7-Zöller braucht für dasselbe Gewicht deutlich weniger Leistung als ein 5-Zöller — deshalb fliegt Long Range mit großen Propellern und niedrigen kV.</li>
   <li><b>Der letzte Gasbereich kostet unverhältnismäßig viel.</b> Von 80 auf 100 % Drehzahl steigt der Schub um 56 %, die Leistung aber um 95 %. Deshalb bricht die Akkuspannung im Vollgas so stark ein.</li>
   <li><b>Schub-Gewicht bestimmt das Fluggefühl.</b> Unter 2:1 ist ein Quad kaum steuerbar, 3–5:1 fliegt sich ruhig und filmtauglich, 8–12:1 ist Freestyle- und Rennbereich. Rechnen: <a href="#rechner">Rechner</a>.</li>
-  <li><b>Schwebegas verrät die Auslegung.</b> Wer bei 50 % Gas schwebt, hat zu wenig Reserve; bei 15 % ist die Gasauflösung am Knüppel unangenehm grob. 20–30 % gelten als angenehmer Bereich.</li>
+  <li><b>Schwebegas verrät die Auslegung.</b> Wer bei 50 % Gas schwebt, hat zu wenig Reserve; bei 15 % ist die Gasauflösung am Knüppel unangenehm grob. 20–30 % gelten als angenehmer Bereich — nachrechnen im <a href="#rechner">Rechner</a>.</li>
 </ul>
 
 <h2>Prop Wash und andere unangenehme Physik</h2>

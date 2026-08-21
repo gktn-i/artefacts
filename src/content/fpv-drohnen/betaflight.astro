@@ -3,47 +3,59 @@ import "./_style.css";
 ---
 <div class="kurz"><b>Die Reihenfolge ist entscheidend.</b> Wer im Konfigurator von oben nach unten geht, landet zwangsläufig bei einem armierenden Quad mit falscher Motorreihenfolge. Die Reihenfolge unten baut aufeinander auf: erst Erkennen, dann Kommunizieren, dann Bewegen, dann Fliegen. Propeller bleiben dabei bis zum letzten Schritt ab.</div>
 
+<h2>Versionen verstehen: Kalender statt 4.x</h2>
+<p>Betaflight hat sein Versionsschema umgestellt: Auf 4.5 folgte nicht 4.6, sondern <b>2025.12</b> — seither erscheinen planmäßig zwei Hauptversionen je Jahr (Juni und Dezember), benannt nach Jahr und Monat, mit Patch-Nummern dahinter. <b>Aktuell ist die 2026.6-Linie (Stand August 2026).</b> Das macht auf einen Blick sichtbar, wie alt eine Anleitung ist: Ein Tutorial zu 4.3 beschreibt eine Firmware von 2022.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Version</th><th>Erschienen</th><th>Wichtigste Neuerungen</th></tr></thead>
+<tbody>
+<tr><td><b>4.4 / 4.5</b></td><td>2023 / 2024</td><td>Der lange gültige Stand vieler Anleitungen; Preset-System, ausgereifter RPM-Filter</td></tr>
+<tr><td><b>2025.12</b> („4.6“)</td><td>Dezember 2025</td><td>Umstellung auf Kalenderversionen; Configurator als installierbare Web-App (PWA)</td></tr>
+<tr><td><b>2026.6</b></td><td>Juni 2026</td><td>Umschaltbare Akkuprofile, Positionshaltung mit optischem Fluss, grundlegend überarbeitetes GPS Rescue, Blackbox-Viewer in der App, neue Chip-Ziele (u. a. STM32H5, ESP32), erweiterte MAVLink-Telemetrie, DroneCAN-GPS</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Drei Wege zur Konfiguration.</b> Der klassische <b>Betaflight Configurator</b> (Desktop/PWA), die <b>Betaflight App</b> (Browser/Handy, verbindet sich auch drahtlos per Bluetooth) und die <b>SpeedyBee-App</b> (Bluetooth/WLAN, konfiguriert auch INAV und analysiert Blackbox-Logs am Handy). Für die Ersteinrichtung ist der Desktop-Configurator am übersichtlichsten; am Flugfeld sind die Apps Gold wert — alle drei im Überblick unter <a href="#software">Software &amp; Apps</a>.</div>
+
 <h2>In dieser Reihenfolge einrichten</h2>
 <div class="steps">
   <div class="step"><h4>Firmware flashen und Grundzustand herstellen</h4>Passendes Target wählen (steht auf der FC-Platine oder im Handbuch), volle Löschung aktivieren, flashen. Danach ist alles auf Werkseinstellung — genau das ist gewollt. Eine übernommene Konfiguration von einem anderen Quad ist eine der häufigsten Ursachen für unerklärliches Verhalten.</div>
-  <div class="step"><h4>Ports zuweisen</h4>Für jeden UART festlegen, was dranhängt: Empfänger auf Serial RX, VTX-Steuerung auf SmartAudio oder Tramp, GPS, ESC-Telemetrie. Ein falsch zugewiesener Port ist der Grund Nummer eins, warum der Empfänger „nicht funktioniert“.</div>
-  <div class="step"><h4>Ausrichtung prüfen</h4>Im Setup-Tab das Quad kippen und schauen, ob sich das Modell mitbewegt. Stimmt die Richtung nicht, ist der Gyro verdreht eingebaut — das über Board Alignment korrigieren, nicht später über das Tuning.</div>
-  <div class="step"><h4>Empfänger einrichten</h4>Protokoll wählen (bei ELRS und Crossfire: CRSF), binden, dann im Receiver-Tab jeden Knüppel einzeln bewegen und prüfen, dass sich der richtige Balken bewegt und in die richtige Richtung. Mittelstellung sollte bei 1500 liegen, die Endpunkte bei 1000 und 2000.</div>
-  <div class="step"><h4>Modi festlegen</h4>Armieren auf einen Schalter legen. Dazu je nach Bedarf Turtle-Modus (Umdrehen nach einem Crash), Buzzer, Blackbox-Aufzeichnung, VTX-Leistungsstufen. Angle- und Horizon-Modus braucht man nur, wenn man sie wirklich nutzen will.</div>
-  <div class="step"><h4>Failsafe einrichten und testen</h4>Stage-2-Verhalten auf Drop, dann mit abgenommenen Propellern armieren und die Funke ausschalten. Die Motoren müssen sofort stoppen. Details unter <a href="#funk">Funkstrecke</a>.</div>
-  <div class="step"><h4>Motorreihenfolge und Drehrichtung — <b>ohne Propeller</b></h4>Im Motoren-Tab jeden Motor einzeln anlaufen lassen und prüfen: Läuft der richtige Motor? Dreht er in die gewünschte Richtung? Korrigiert wird über die Motor-Reihenfolge im Konfigurator oder über die ESC-Einstellung — nicht durch Umlöten.</div>
-  <div class="step"><h4>Bidirektionales DShot und RPM-Filter aktivieren</h4>Nur wenn die ESC-Firmware es kann (Bluejay, BLHeli_32, AM32). Danach im Motoren-Tab prüfen, dass für alle vier Motoren eine plausible Drehzahl angezeigt wird. Fehlt die Rückmeldung eines Motors, darf der RPM-Filter nicht aktiv bleiben.</div>
-  <div class="step"><h4>Akkuwerte kalibrieren</h4>Spannung im Konfigurator mit einem Multimeter vergleichen und den Skalierungsfaktor anpassen. Dasselbe für den Stromsensor nach dem ersten Flug anhand der geladenen Kapazität. Ein falsch skalierter Sensor macht jede Akkuwarnung wertlos.</div>
-  <div class="step"><h4>OSD einrichten</h4>Weniger ist mehr: Akkuspannung, verbrauchte mAh, Flugzeit, LQ/RSSI, Flugmodus, Warnungen. Alles andere lenkt ab. Bei digitalen Systemen läuft das über MSP-DisplayPort.</div>
-  <div class="step"><h4>Rates einstellen</h4>Legt fest, wie schnell das Quad bei vollem Ausschlag dreht. Typisch sind 650–800 °/s für Freestyle. Wer aus dem Simulator kommt, überträgt seine dortigen Rates — dann fühlt sich das echte Quad sofort vertraut an.</div>
-  <div class="step"><h4>Sichern</h4><code>diff all</code> in die CLI eingeben, Ausgabe in eine Textdatei kopieren, Datei benennen und aufheben. Nach jeder Änderung, die sich bewährt hat, wiederholen. Das ist die einzige Sicherung, die nach einem Firmware-Update noch etwas wert ist.</div>
+  <div class="step"><h4>Ports zuweisen</h4>Für jeden UART festlegen, was dranhängt: Empfänger auf Serial RX, VTX-Steuerung (SmartAudio/Tramp) oder MSP-DisplayPort für die Air Unit, GPS, ESC-Telemetrie. Ein falsch zugewiesener Port ist der Grund Nummer eins, warum der Empfänger „nicht funktioniert“.</div>
+  <div class="step"><h4>Ausrichtung prüfen</h4>Im Setup-Tab das Quad kippen: Das 3D-Modell muss mitkippen. Stimmt die Richtung nicht, ist der FC verdreht eingebaut — über Board Alignment korrigieren, nicht später über das Tuning.</div>
+  <div class="step"><h4>Empfänger einrichten</h4>Protokoll wählen (ELRS/Crossfire: CRSF), binden, dann im Receiver-Tab jeden Knüppel prüfen: richtiger Balken, richtige Richtung, Mitte 1500, Endpunkte 1000/2000.</div>
+  <div class="step"><h4>Modi festlegen</h4>Armieren auf einen Schalter. Dazu nach Bedarf Turtle-Modus, Buzzer, Blackbox, VTX-Leistungsstufen, GPS Rescue. Angle/Horizon nur, wenn man sie wirklich nutzen will.</div>
+  <div class="step"><h4>Failsafe einrichten und testen</h4>Stage 2 auf Drop, dann ohne Propeller armieren und die Funke ausschalten — Motoren müssen sofort stoppen. Details unter <a href="#funk">Funkstrecke</a>.</div>
+  <div class="step"><h4>Motorreihenfolge und Drehrichtung — <b>ohne Propeller</b></h4>Im Motoren-Tab jeden Motor einzeln anlaufen lassen: Läuft der richtige? Dreht er richtig herum? Korrigiert wird per Motor-Remap oder im ESC-Konfigurator — nicht durch Umlöten.</div>
+  <div class="step"><h4>Bidirektionales DShot und RPM-Filter</h4>Voraussetzung: Bluejay oder AM32 auf dem ESC. Danach im Motoren-Tab prüfen, dass alle vier Motoren eine plausible Drehzahl melden. Fehlt die Rückmeldung eines Motors, darf der RPM-Filter nicht aktiv bleiben.</div>
+  <div class="step"><h4>Akkuwerte kalibrieren</h4>Spannung gegen ein Multimeter abgleichen; den Stromsensor nach dem ersten Flug anhand der nachgeladenen Kapazität. Ein falsch skalierter Sensor macht die mAh-Anzeige — den wichtigsten Tankanzeiger — wertlos.</div>
+  <div class="step"><h4>OSD einrichten</h4>Weniger ist mehr: Spannung, verbrauchte mAh, Flugzeit, LQ/RSSI, Flugmodus, Warnungen. Bei digitalen Systemen läuft das über MSP-DisplayPort und ist gestochen scharf.</div>
+  <div class="step"><h4>Rates einstellen</h4>Typisch 650–800 °/s für Freestyle. Wer aus dem Simulator kommt, überträgt seine dortigen Rates — dann fühlt sich das echte Quad sofort vertraut an.</div>
+  <div class="step"><h4>Sichern</h4><code>diff all</code> in der CLI, Ausgabe in eine Textdatei, benennen, aufheben. Nach jeder bewährten Änderung wiederholen. Das ist die einzige Sicherung, die nach einem Firmware-Update noch etwas wert ist.</div>
 </div>
 
 <h2>Flugmodi</h2>
-<div class="tbl-wrap"><table style="min-width:880px">
+<div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th>Modus</th><th>Was der Knüppel bedeutet</th><th>Einschätzung</th></tr></thead>
 <tbody>
 <tr><td><b>Acro (Rate)</b></td><td>Drehgeschwindigkeit. Mitte = aktuelle Lage halten</td><td>Der einzige Modus, in dem Freestyle möglich ist. Von Anfang an üben — der Umstieg von Angle auf Acro ist schwerer als der direkte Einstieg</td></tr>
-<tr><td><b>Angle</b></td><td>Neigungswinkel. Mitte = waagerecht</td><td>Selbstaufrichtend, begrenzter Neigungswinkel. Bequem, aber eine Sackgasse: Die dabei erlernten Reflexe sind in Acro falsch</td></tr>
-<tr><td><b>Horizon</b></td><td>Mischung: klein wie Angle, voll ausgeschlagen wie Acro</td><td>Klingt nach dem besten aus beiden Welten, verhält sich aber unvorhersehbar. Wird selten empfohlen</td></tr>
-<tr><td><b>Turtle</b></td><td>Umdrehen nach einem Crash</td><td>Sehr nützlich: Kehrt die Motordrehrichtung um, damit sich das Quad auf dem Rücken selbst umdreht. Braucht DShot</td></tr>
-<tr><td><b>Air Mode</b></td><td>Regelung bleibt auch bei Nullgas aktiv</td><td>Heute Standard und praktisch immer an. Ohne Air Mode verliert das Quad im Sturzflug jede Steuerbarkeit</td></tr>
-<tr><td><b>GPS Rescue</b></td><td>Automatische Rückkehr</td><td>Nur mit sorgfältiger Einrichtung und getestet in sicherer Umgebung — sonst gefährlicher als hilfreich</td></tr>
+<tr><td><b>Angle</b></td><td>Neigungswinkel. Mitte = waagerecht</td><td>Selbstaufrichtend, begrenzter Winkel. Bequem, aber eine Sackgasse: Die erlernten Reflexe sind in Acro falsch</td></tr>
+<tr><td><b>Horizon</b></td><td>Mischung: klein wie Angle, voll ausgeschlagen wie Acro</td><td>Verhält sich unvorhersehbar; wird selten empfohlen</td></tr>
+<tr><td><b>Turtle</b></td><td>Umdrehen nach einem Crash</td><td>Kehrt die Motordrehrichtung um, damit sich das Quad auf dem Rücken selbst umdreht. Braucht DShot</td></tr>
+<tr><td><b>Air Mode</b></td><td>Regelung bleibt auch bei Nullgas aktiv</td><td>Standard und praktisch immer an. Ohne Air Mode verliert das Quad im Sturzflug jede Steuerbarkeit</td></tr>
+<tr><td><b>GPS Rescue</b></td><td>Automatische Rückkehr</td><td>In den letzten Versionen grundlegend überarbeitet und deutlich zuverlässiger — aber weiterhin nur mit sorgfältiger Einrichtung und Test in sicherer Umgebung</td></tr>
+<tr><td><b>Position Hold</b></td><td>Position halten (GPS bzw. optischer Fluss)</td><td>Neu in der 2026.6-Linie; mit Optical-Flow-Sensor auch ohne GPS in Bodennähe. Für Kameraeinsätze nützlich, kein Ersatz für Flugkönnen</td></tr>
 </tbody>
 </table></div>
 
 <h2>Rates verstehen</h2>
 <div class="fbox">
-  <span class="f">RC Rate · Super Rate · RC Expo</span>
-  <span class="l">Betaflight bietet mehrere Ratenmodelle an; „Actual Rates“ ist das anschaulichste, weil dort die maximale Drehrate direkt in °/s steht.</span>
+  <span class="f">Actual Rates: Center Sensitivity · Max Rate · Expo</span>
+  <span class="l">Betaflight bietet mehrere Ratenmodelle; „Actual Rates“ ist das anschaulichste, weil die maximale Drehrate direkt in °/s dasteht.</span>
 </div>
 <div class="flist">
   <div class="frow hd"><span>Parameter</span><span>Wirkung</span><span>Praxis</span></div>
-  <div class="frow"><span class="fn">Center Sensitivity</span><span class="fe">°/s um die Mitte</span><span class="fx">Bestimmt, wie fein sich kleine Korrekturen dosieren lassen. Niedrig = ruhiger, gut für Kameraflüge</span></div>
-  <div class="frow"><span class="fn">Max Rate</span><span class="fe">°/s bei Vollausschlag</span><span class="fx">650–800 °/s ist Freestyle-Standard. Über 1000 °/s wird die Orientierung im Bild schwierig</span></div>
+  <div class="frow"><span class="fn">Center Sensitivity</span><span class="fe">°/s um die Mitte</span><span class="fx">Wie fein sich kleine Korrekturen dosieren lassen. Niedrig = ruhig, gut für Kameraflüge</span></div>
+  <div class="frow"><span class="fn">Max Rate</span><span class="fe">°/s bei Vollausschlag</span><span class="fx">650–800 °/s ist Freestyle-Standard. Über 1000 °/s wird die Orientierung schwierig</span></div>
   <div class="frow"><span class="fn">Expo</span><span class="fe">Kurvenform</span><span class="fx">Verflacht die Mitte, ohne den Endausschlag zu ändern. Zu viel Expo macht die Mitte schwammig</span></div>
-  <div class="frow"><span class="fn">Yaw getrennt</span><span class="fe">meist niedriger</span><span class="fx">Gieren ist physikalisch der schwächste Kanal — dieselbe Rate wie bei Roll fühlt sich träge an</span></div>
-  <div class="frow"><span class="fn">Throttle Expo / Mid</span><span class="fe">Gaskurve</span><span class="fx">Nur sinnvoll, wenn das Schwebegas sehr niedrig liegt. Sonst unangetastet lassen</span></div>
+  <div class="frow"><span class="fn">Yaw getrennt</span><span class="fe">meist niedriger</span><span class="fx">Gieren ist physikalisch der schwächste Kanal — dieselbe Rate wie Roll fühlt sich träge an</span></div>
 </div>
 
 <h2>CLI: die fünf Befehle, die man braucht</h2>
@@ -51,28 +63,29 @@ import "./_style.css";
 <thead><tr><th>Befehl</th><th>Was er tut</th></tr></thead>
 <tbody>
 <tr><td><code>diff all</code></td><td>Zeigt alle Abweichungen von der Werkseinstellung. Die Sicherungskopie schlechthin</td></tr>
-<tr><td><code>dump</code></td><td>Zeigt die vollständige Konfiguration, auch die unveränderten Werte</td></tr>
+<tr><td><code>dump</code></td><td>Vollständige Konfiguration, auch unveränderte Werte</td></tr>
 <tr><td><code>get &lt;name&gt;</code></td><td>Sucht Parameter nach Namensteil, z. B. <code>get rpm</code></td></tr>
 <tr><td><code>set &lt;name&gt; = &lt;wert&gt;</code></td><td>Setzt einen Parameter. Wirksam erst nach <code>save</code></td></tr>
 <tr><td><code>save</code></td><td>Speichert und startet neu. Ohne <code>save</code> ist jede Änderung nach dem Trennen weg</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Vorsicht mit fremden CLI-Blöcken.</b> Ein aus dem Netz kopierter <code>diff</code> enthält auch Ports, Motorreihenfolge, Empfängerprotokoll und Akkukalibrierung — Dinge, die zu einer <em>anderen</em> Hardware gehören. Übernimm einzelne Zeilen, nicht ganze Blöcke, und niemals ohne zu verstehen, was sie tun.</div>
+<div class="warn"><b>Vorsicht mit fremden CLI-Blöcken.</b> Ein kopierter <code>diff</code> enthält auch Ports, Motorreihenfolge, Empfängerprotokoll und Akkukalibrierung — Dinge, die zu einer <em>anderen</em> Hardware gehören. Einzelne Zeilen übernehmen, nie ganze Blöcke, und zwischen Kalenderversionen ändern sich Parameternamen. Das Preset-System im Configurator ist der sichere Weg: versionsgeprüft und dokumentiert.</div>
 
 <h2>Vor jedem Update</h2>
 <ul>
-  <li><b><code>diff all</code> sichern.</b> Nach dem Update kann man daraus gezielt einzelne Einstellungen zurückholen.</li>
-  <li><b>Nicht blind zurückspielen.</b> Zwischen Hauptversionen ändern sich Standardwerte und Parameternamen; ein alter Block kann eine neue Firmware in einen schlechteren Zustand versetzen als die Werkseinstellung.</li>
-  <li><b>Neue Standardwerte sind meist besser.</b> Die Betaflight-Voreinstellungen entstehen aus umfangreichen Tests. Wer nicht genau weiß, warum er abweicht, fliegt mit Standard besser.</li>
+  <li><b><code>diff all</code> sichern.</b> Danach lassen sich einzelne Einstellungen gezielt zurückholen.</li>
+  <li><b>Nicht blind zurückspielen.</b> Zwischen Hauptversionen ändern sich Standardwerte und Parameternamen; ein alter Block kann eine neue Firmware schlechter machen als die Werkseinstellung.</li>
+  <li><b>Neue Standardwerte sind meist besser.</b> Die Voreinstellungen entstehen aus breitem Testbetrieb. Wer nicht genau weiß, warum er abweicht, fliegt mit Standard besser.</li>
+  <li><b>Release Notes lesen.</b> Bei zwei planbaren Releases im Jahr ist das überschaubar geworden — und die Notes nennen Umsteiger-Stolperstellen explizit.</li>
   <li><b>Nach dem Update alles erneut prüfen:</b> Motorreihenfolge, Drehrichtung, Modi, Failsafe. Ein Update ist eine Inbetriebnahme, kein Klick.</li>
 </ul>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li><a href="https://betaflight.com/docs/wiki">Betaflight-Dokumentation und Wiki</a> — verbindlich für Parameter, Modi und Neuerungen je Version.</li>
-    <li><a href="https://github.com/betaflight/betaflight/releases">Betaflight-Releases</a> — Versionsstände und die jeweiligen Änderungshinweise. Diese lesen, bevor man aktualisiert.</li>
+    <li><a href="https://betaflight.com/docs/wiki">Betaflight-Dokumentation</a> und der <a href="https://betaflight.com/blog/2025/09/01/Calendar%20Versioning%20Change">Blogeintrag zur Kalenderversionierung</a> — Primärquellen.</li>
+    <li><a href="https://github.com/betaflight/betaflight/releases">Betaflight-Releases</a> — Versionsstände und Änderungshinweise; vor jedem Update lesen.</li>
+    <li><a href="https://oscarliang.com/betaflight-2026-6/">Oscar Liang — Betaflight 2026.6</a> und <a href="https://oscarliang.com/betaflight-4-6/">Betaflight 2025.12</a> — die Neuerungen verständlich aufbereitet.</li>
     <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — vollständige Einrichtungsserien, die genau diese Reihenfolge durchgehen, jeweils zur aktuellen Version.</li>
-    <li><a href="https://intofpv.com/">IntoFPV</a> — Forum mit Betaflight-Unterbereich; gute Anlaufstelle für versionsspezifische Eigenheiten.</li>
   </ul>
 </div>

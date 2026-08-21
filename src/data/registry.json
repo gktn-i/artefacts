@@ -2080,8 +2080,8 @@
        "name": "Drohnen & FPV",
        "icon": "🚁",
        "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Der Multicopter von der Schraube bis zum Gesetz: Bauformen, Rahmen, Motoren, Propeller, ESC und Flight Controller, LiPo, Funkstrecke und Videoübertragung, Antennen, Kameras, Betaflight-Einrichtung und PID-Tuning, Bauanleitung, Fliegen lernen, Fehlersuche, EU-Recht — dazu Rechner, Glossar und die Quellen, auf die in dieser Szene Verlass ist.",
+       "updated": "2026-08-21",
+       "desc": "Der Multicopter von der Schraube bis zum Gesetz: Bauformen, Rahmen, Motoren, Propeller, ESC und Flight Controller, LiPo, Funkstrecke und Videoübertragung — analog, HDZero, Walksnail, DJI O4 —, Antennen, Kameras, Betaflight und PID-Tuning, Bauanleitung, Fliegen lernen, Fehlersuche, EU-Recht. Dazu Rechner, Software-Katalog, Glossar und die Quellen, auf die in dieser Szene Verlass ist.",
        "tags": [
         "fpv",
         "drohne",
@@ -2116,7 +2116,15 @@
         "a1 a3",
         "kompetenznachweis",
         "bardwell",
-        "oscar liang"
+        "oscar liang",
+        "software",
+        "inav",
+        "speedybee",
+        "o4",
+        "edgetx",
+        "gyroflow",
+        "blackbox",
+        "simulator"
        ],
        "sections": [
         {
@@ -2200,6 +2208,10 @@
          "t": "Rechner"
         },
         {
+         "h": "software",
+         "t": "Software & Apps"
+        },
+        {
          "h": "glossar",
          "t": "Glossar A–Z"
         },
@@ -2257,6 +2269,7 @@
          "l": "Nachschlagen",
          "sections": [
           "rechner",
+          "software",
           "glossar",
           "quellen"
          ]

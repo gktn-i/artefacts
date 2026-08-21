@@ -1,0 +1,63 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>FPV ist ein Software-Hobby mit Propellern.</b> Zwischen Auspacken und erstem Flug liegen mindestens vier Programme: eines für den Flight Controller, eines für die ESCs, eines für die Funkstrecke, eines für die Funke. Dieser Katalog ordnet, was wofür da ist — filterbar, mit Stand August 2026.</div>
+
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Programm, Zweck oder Stichwort suchen …" aria-label="Software durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="fc">FC-Firmware</button>
+    <button type="button" data-filter="esc">ESC & Funk</button>
+    <button type="button" data-filter="conf">Konfiguration & Apps</button>
+    <button type="button" data-filter="analyse">Tuning & Analyse</button>
+    <button type="button" data-filter="videosw">Video-Nachbearbeitung</button>
+    <button type="button" data-filter="sim">Simulatoren</button>
+    <button type="button" data-filter="helfer">Treiber & Helfer</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="tbl-wrap"><table style="min-width:1020px">
+    <thead><tr><th data-s="text">Software</th><th>Kategorie</th><th>Plattform</th><th>Was sie tut</th><th>Einordnung</th></tr></thead>
+    <tbody data-list="Einträgen">
+      <tr data-item data-cat="fc" data-k="betaflight firmware flugsteuerung calver"><td><b><a href="https://betaflight.com/">Betaflight</a></b></td><td>FC-Firmware</td><td>STM32, AT32, u. a.</td><td>Die Flugsteuerungs-Firmware für Freestyle und Racing</td><td>Der Standard. Seit 2025 Kalenderversionen mit zwei Releases je Jahr (Juni/Dezember); aktuell die 2026.6-Linie — siehe <a href="#betaflight">Betaflight einrichten</a></td></tr>
+      <tr data-item data-cat="fc" data-k="inav gps navigation flaeche wegpunkte"><td><b><a href="https://github.com/iNavFlight/inav">INAV</a></b></td><td>FC-Firmware</td><td>STM32 u. a.</td><td>Flugsteuerung mit Schwerpunkt GPS-Navigation: Wegpunkte, Rückkehr, Flächenflug</td><td>Die Wahl für Wings und autonome Missionen; 2026 in der 8er/9er-Linie. Für Acro-Quads bleibt Betaflight erste Wahl</td></tr>
+      <tr data-item data-cat="fc" data-k="emuflight kiss fettec ardupilot px4 alternativen"><td><b>EmuFlight · KISS/FETtec · ArduPilot</b></td><td>FC-Firmware</td><td>je nach System</td><td>Alternative Flugsteuerungen</td><td>EmuFlight: Betaflight-Abkömmling mit eigener Filterphilosophie, kleine Gemeinde. KISS/FETtec: geschlossenes Renn-Ökosystem. ArduPilot/PX4: große Copter, Nutzlast, Forschung — eine andere Welt als FPV</td></tr>
+      <tr data-item data-cat="esc" data-k="bluejay esc firmware 8bit rpm"><td><b><a href="https://github.com/bird-sanctuary/bluejay">Bluejay</a></b></td><td>ESC-Firmware</td><td>8-Bit-EFM8-ESCs</td><td>Quelloffene ESC-Firmware mit bidirektionalem DShot und wählbarer PWM-Frequenz</td><td>Erster Schritt bei jedem günstigen Stack: BLHeli_S runter, Bluejay drauf — dann läuft der RPM-Filter</td></tr>
+      <tr data-item data-cat="esc" data-k="am32 esc firmware 32bit"><td><b><a href="https://github.com/am32-firmware/AM32">AM32</a></b></td><td>ESC-Firmware</td><td>32-Bit-ARM-ESCs</td><td>Quelloffene 32-Bit-ESC-Firmware</td><td>Der aktive Nachfolger des eingestellten BLHeli_32; neue 32-Bit-ESCs kommen meist damit</td></tr>
+      <tr data-item data-cat="esc helfer" data-k="esc-configurator browser flashen"><td><b><a href="https://esc-configurator.com/">ESC-Configurator</a></b></td><td>ESC &amp; Funk</td><td>Browser (WebSerial)</td><td>Flasht und konfiguriert Bluejay/BLHeli_S direkt im Browser</td><td>Kein Installieren, kein Treiberzirkus — über den FC als Durchgang (Passthrough)</td></tr>
+      <tr data-item data-cat="esc" data-k="expresslrs configurator elrs flashen binden"><td><b><a href="https://www.expresslrs.org/quick-start/installing-configurator/">ExpressLRS Configurator</a></b></td><td>ESC &amp; Funk</td><td>Win/mac/Linux</td><td>Baut und flasht ELRS-Firmware für Sender und Empfänger, verankert die Bindephrase</td><td>Pflichtwerkzeug im ELRS-Ökosystem — besonders beim 3.x→4.x-Umstieg, bei dem beide Seiten zusammen aktualisiert werden müssen</td></tr>
+      <tr data-item data-cat="conf" data-k="betaflight configurator pwa desktop"><td><b><a href="https://app.betaflight.com/">Betaflight Configurator</a></b></td><td>Konfiguration</td><td>Desktop / PWA im Browser</td><td>Die vollständige Betaflight-Oberfläche: Ports, Modi, OSD, Presets, CLI, Blackbox</td><td>Seit der 2025.12-Linie als installierbare Web-App — Updates entfallen, läuft überall mit WebSerial</td></tr>
+      <tr data-item data-cat="conf" data-k="betaflight app mobil bluetooth handy"><td><b><a href="https://betaflight.com/docs/wiki/app">Betaflight App</a></b></td><td>Konfiguration</td><td>Handy / Browser</td><td>Mobile Konfiguration, auch drahtlos über Bluetooth-fähige FCs; integrierter Blackbox-Viewer</td><td>Das offizielle Gegenstück zur SpeedyBee-App, seit der 2026.6-Linie mit eigener iOS-App</td></tr>
+      <tr data-item data-cat="conf" data-k="speedybee app mobil bluetooth feld"><td><b><a href="https://www.speedybee.com/speedy-bee-app/">SpeedyBee App</a></b></td><td>Konfiguration</td><td>Android / iOS</td><td>Mobiler Vollkonfigurator für Betaflight, INAV und EmuFlight über Bluetooth/WLAN/OTG; Motorrichtungs-Assistent, Blackbox-Analyse am Handy</td><td>Der Klassiker fürs Flugfeld — braucht einen FC mit Funkmodul oder den passenden USB-Adapter</td></tr>
+      <tr data-item data-cat="conf" data-k="inav configurator missionsplanung"><td><b><a href="https://github.com/iNavFlight/inav-configurator">INAV Configurator</a></b></td><td>Konfiguration</td><td>Win/mac/Linux</td><td>Oberfläche zu INAV inklusive Missions- und Wegpunktplanung auf der Karte</td><td>Gehört zu INAV wie der Betaflight Configurator zu Betaflight</td></tr>
+      <tr data-item data-cat="conf" data-k="edgetx companion buddy funke modelle"><td><b><a href="https://edgetx.org/">EdgeTX Companion &amp; Buddy</a></b></td><td>Konfiguration</td><td>Desktop / Browser</td><td>Modellverwaltung, Firmware und Einstellungs-Sicherung für EdgeTX-Funken; Buddy flasht im Browser</td><td>Companion für die Verwaltung, Buddy für das schnelle Update — beide offiziell</td></tr>
+      <tr data-item data-cat="analyse" data-k="blackbox explorer log viewer"><td><b><a href="https://github.com/betaflight/blackbox-log-viewer">Betaflight Blackbox Explorer</a></b></td><td>Tuning &amp; Analyse</td><td>Desktop / Browser</td><td>Spielt Blackbox-Logs ab: alle Größen als Kurven über der Zeit, synchron zum DVR legbar</td><td>Der erste Blick in jedes Log — was passierte wann?</td></tr>
+      <tr data-item data-cat="analyse" data-k="pidtoolbox spektrum sprungantwort"><td><b><a href="https://github.com/bw1129/PIDtoolbox">PIDtoolbox</a></b></td><td>Tuning &amp; Analyse</td><td>Win/mac (Matlab-Runtime)</td><td>Rauschspektren, Sprungantworten, Vergleiche zweier Logs</td><td>Das Werkzeug für methodisches Tuning; deutliche Lernkurve, sehr gute Video-Anleitungen des Autors</td></tr>
+      <tr data-item data-cat="videosw" data-k="gyroflow stabilisierung gyrodaten"><td><b><a href="https://gyroflow.xyz/">Gyroflow</a></b></td><td>Video</td><td>Win/mac/Linux</td><td>Stabilisiert Material anhand aufgezeichneter Gyrodaten — von O4, Walksnail, GoPro und Blackbox</td><td>Quelloffen und Referenzklasse; ersetzt für die meisten die kommerziellen Stabilisierer</td></tr>
+      <tr data-item data-cat="videosw" data-k="schnitt davinci resolve editing"><td><b>Schnitt: DaVinci Resolve u. a.</b></td><td>Video</td><td>Win/mac/Linux</td><td>Schnitt, Farbkorrektur (auch für D-Log-M-Material der O4 Pro)</td><td>Resolve ist in der kostenlosen Version für FPV-Zwecke vollständig genug; Grundlagen im Hub <a href="hub-foto.html">Foto &amp; Video</a></td></tr>
+      <tr data-item data-cat="sim" data-k="liftoff velocidrone uncrashed tryp drl freerider simulator"><td><b>Liftoff · Velocidrone · Uncrashed · TRYP · DRL · FPV Freerider</b></td><td>Simulator</td><td>PC, teils Konsole</td><td>Flugtraining mit der echten Funke am USB-Port</td><td>Einordnung unter <a href="#bodenstation">Bodenstation</a>: Velocidrone für Präzision und Racing, Liftoff und TRYP für Freestyle, Freerider als Minimal-Einstieg</td></tr>
+      <tr data-item data-cat="helfer" data-k="impulserc driver fixer dfu treiber windows"><td><b><a href="https://impulserc.com/pages/downloads">ImpulseRC Driver Fixer</a></b></td><td>Treiber &amp; Helfer</td><td>Windows</td><td>Repariert die DFU-Treiberzuordnung, wenn Windows den FC im Bootloader nicht erkennt</td><td>Löst das mit Abstand häufigste „Configurator sieht mein Board nicht“-Problem mit einem Klick</td></tr>
+      <tr data-item data-cat="helfer" data-k="dvr vlc ffmpeg schnittwerkzeug"><td><b>VLC / ffmpeg</b></td><td>Treiber &amp; Helfer</td><td>alle</td><td>DVR-Dateien abspielen, wandeln, zusammenfügen</td><td>Brillen-DVRs schreiben teils eigenwillige Container — ffmpeg repariert, was der Schnittplatz nicht öffnet</td></tr>
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Kein Treffer. Filter zurücksetzen oder anderen Begriff versuchen.</div>
+</div>
+
+<h2>Welche Software in welcher Reihenfolge</h2>
+<div class="steps">
+  <div class="step"><h4>Funke: EdgeTX aktuell halten</h4>Einmal mit Buddy oder Companion aktualisieren, Modelle sichern. Danach selten anfassen.</div>
+  <div class="step"><h4>Funkstrecke: ExpressLRS Configurator</h4>Sender-Modul und alle Empfänger auf denselben Hauptstand bringen, Bindephrase setzen. Bei 4.x zwingend beide Seiten zusammen.</div>
+  <div class="step"><h4>ESC: einmalig flashen</h4>8-Bit-Stacks auf Bluejay bringen (esc-configurator.com), 32-Bit-Stacks laufen mit AM32. Danach nur noch bei Bedarf.</div>
+  <div class="step"><h4>FC: Betaflight Configurator</h4>Die Einrichtung aus <a href="#betaflight">Betaflight einrichten</a>. Den <code>diff all</code> als Textdatei neben die Firmware-Version legen.</div>
+  <div class="step"><h4>Fürs Feld: eine der Apps</h4>SpeedyBee- oder Betaflight-App einrichten und <em>vorher zu Hause testen</em> — am Flugfeld ist der falsche Moment, Bluetooth-Kopplungen zu debuggen.</div>
+</div>
+<div class="tip"><b>Versionen gehören ins Baubuch.</b> Ein Quad ist ein Software-Stack: Betaflight-Version, ESC-Firmware, ELRS-Stand auf beiden Seiten, Brillen- und Air-Unit-Firmware. Wer diese fünf Stände notiert (eine Zeile je Quad genügt), erspart sich bei jeder Fehlersuche die halbe Arbeit — „was wurde zuletzt aktualisiert?“ ist die häufigste Antwort auf „es ging gestern noch“.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Die verlinkten Projektseiten selbst — bei Software ist die Projektdokumentation immer die Primärquelle.</li>
+    <li><a href="https://oscarliang.com/">oscarliang.com</a> — Einrichtungs-Anleitungen zu praktisch jedem Werkzeug dieser Liste.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Video-Walkthroughs, besonders zu Configurator, ELRS-Flashing und Blackbox-Werkzeugen.</li>
+  </ul>
+</div>

@@ -1,14 +1,34 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Propeller sind das billigste Bauteil mit dem größten Einfluss.</b> Ein Wechsel von 5×4,3×3 auf 5×4,8×3 verändert Stromaufnahme, Flugzeit, Motortemperatur und Fluggefühl stärker als die meisten PID-Änderungen. Und sie sind Verbrauchsmaterial: ein angeschlagener Propeller gehört in den Müll, nicht zurück auf den Motor.</div>
+<div class="kurz"><b>Propeller sind das billigste Bauteil mit dem größten Einfluss.</b> Ein Wechsel von 5×4,3×3 auf 5×4,8×3 verändert Stromaufnahme, Flugzeit, Motortemperatur und Fluggefühl stärker als die meisten PID-Änderungen. Und sie sind Verbrauchsmaterial: Ein angeschlagener Propeller gehört in den Müll, nicht zurück auf den Motor.</div>
 
 <h2>Die Bezeichnung lesen</h2>
 <div class="fbox">
   <span class="f">5 × 4,3 × 3</span>
   <span class="l">5 Zoll Durchmesser · 4,3 Zoll Steigung · 3 Blätter</span>
 </div>
-<p>Die <b>Steigung</b> (Pitch) ist der Weg, den der Propeller in einer Umdrehung theoretisch zurücklegen würde, wenn er sich in einen Festkörper schrauben würde. Sie ist damit das Getriebe des Antriebs: viel Steigung heißt hohe Endgeschwindigkeit und hohe Stromaufnahme, wenig Steigung heißt besseres Ansprechen und mehr Flugzeit.</p>
+<figure>
+<svg class="dg l" viewBox="0 0 620 200" role="img" aria-label="Geometrie der Propellersteigung: Blattschnitt mit Anstellwinkel und abgerolltes Steigungsdreieck">
+  <path class="gd" d="M20,120 H200" />
+  <path class="accs" d="M60,138 Q100,96 160,104 Q116,124 60,138 Z" />
+  <path class="acc" d="M60,138 L160,104" />
+  <text class="lbl" x="110" y="158" text-anchor="middle">Blattschnitt</text>
+  <path class="wt" d="M148,120 A26,26 0 0 0 141,110" />
+  <text class="lbla" x="164" y="122">θ</text>
+  <text class="lbl" x="30" y="112">Drehebene</text>
+  <path class="w" d="M270,160 H430 L430,84 Z" />
+  <path class="acc" d="M430,84 V160" />
+  <path class="accf" d="M430,84 l-4,8 h8 z" />
+  <text class="lbl" x="350" y="180" text-anchor="middle">ein Umlauf: Umfang π·d</text>
+  <text class="lbla" x="440" y="120">Steigung</text>
+  <text class="lbla" x="440" y="134">je Umdrehung</text>
+  <path class="wt" d="M300,160 A30,30 0 0 0 296,147" />
+  <text class="lbl" x="306" y="148">θ</text>
+  <text class="lbl" x="350" y="66" text-anchor="middle">die Schraubenlinie der Blattspitze, abgerollt</text>
+</svg>
+<figcaption>Die Steigung (Pitch) ist der Weg, den der Propeller je Umdrehung theoretisch zurücklegt — der Anstellwinkel θ des Blatts, abgerollt zu einem Dreieck aus Umfang und Steigung. Sie ist das „Getriebe“ des Antriebs.</figcaption>
+</figure>
 <div class="tbl-wrap"><table style="min-width:860px">
 <thead><tr><th>Änderung</th><th>Schub im Stand</th><th>Endgeschwindigkeit</th><th>Strom</th><th>Ansprechen</th><th>Flugzeit</th></tr></thead>
 <tbody>
@@ -23,11 +43,21 @@ import "./_style.css";
 <div class="grid3">
   <div class="card"><div class="ct">2 Blätter</div><div class="cd">Der beste Wirkungsgrad. Leiser, längere Flugzeit, weniger Griff bei schnellen Manövern. Standard bei Long Range und Flächenflug.</div></div>
   <div class="card"><div class="ct">3 Blätter</div><div class="cd">Der Kompromiss und die klare Mehrheit bei 5 Zoll: gutes Ansprechen, gute Kontrolle im Prop Wash, akzeptabler Verbrauch.</div></div>
-  <div class="card"><div class="ct">4–5 Blätter</div><div class="cd">Sehr viel Griff und Schub bei geringem Wirkungsgrad. Ducted-Bauten und Rennen auf engen Kursen; sonst selten sinnvoll.</div></div>
+  <div class="card"><div class="ct">4–5 Blätter</div><div class="cd">Sehr viel Griff und Schub bei geringem Wirkungsgrad. Ducted-Bauten und enge Rennkurse; sonst selten sinnvoll.</div></div>
 </div>
 
+<h2>Befestigung</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>System</th><th>Wie</th><th>Wo</th></tr></thead>
+<tbody>
+<tr><td><b>M5-Welle mit Mutter</b></td><td>Propeller auf die Welle, selbstsichernde M5-Mutter</td><td>Standard ab 5″; Muttern nach ~10 Wechseln ersetzen</td></tr>
+<tr><td><b>T-Mount</b></td><td>Zwei M2-Schrauben durch die Nabe auf 1,5-mm-Welle</td><td>Toothpicks, 2–3,5″-Klassen</td></tr>
+<tr><td><b>Steckpropeller</b></td><td>Presssitz auf 1–1,5-mm-Welle</td><td>Whoops (31–40 mm); zum Abziehen Werkzeug benutzen, nicht die Lager belasten</td></tr>
+</tbody>
+</table></div>
+
 <h2>Drehrichtung und Montage</h2>
-<p>Diagonal gegenüberliegende Propeller drehen gleichsinnig, benachbarte gegensinnig. Welches Paar in welche Richtung dreht, ist eine Entscheidung — sie muss nur zur eingestellten Motordrehrichtung in Betaflight passen:</p>
+<p>Diagonal gegenüberliegende Propeller drehen gleichsinnig, benachbarte gegensinnig. Welches Paar in welche Richtung dreht, muss nur zur eingestellten Motordrehrichtung passen:</p>
 <div class="gb">
   <div class="gb-col good"><h4>Props out</h4>
     <ul>
@@ -46,16 +76,16 @@ import "./_style.css";
     </ul>
   </div>
 </div>
-<div class="stop"><b>Ein falsch montierter Propeller ist der häufigste Erstflug-Fehler.</b> Das Quad kippt beim Armieren sofort um oder springt hoch und schlägt ein. Vor jedem Erstflug: Motordrehrichtung im Betaflight-Motorentab prüfen (ohne Propeller!), danach Propeller passend zur Drehrichtung aufsetzen. Auf den Propellern selbst steht die Drehrichtung meist als winzige Prägung oder als Farbe.</div>
+<div class="stop"><b>Ein falsch montierter Propeller ist der häufigste Erstflug-Fehler.</b> Das Quad kippt beim Armieren sofort um oder springt hoch und schlägt ein. Vor jedem Erstflug: Motordrehrichtung im Konfigurator prüfen (ohne Propeller!), danach Propeller passend zur Drehrichtung aufsetzen. Die Drehrichtung steht als Prägung auf dem Blatt.</div>
 
 <h2>Material und Zustand</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Polycarbonat</div><div class="cd">Der Standard. Zäh, biegt sich eher als zu brechen, gutes Verhältnis von Steifigkeit zu Gewicht.</div></div>
+  <div class="card"><div class="ct">Polycarbonat</div><div class="cd">Der Standard. Zäh, biegt sich eher als zu brechen, gutes Verhältnis von Steifigkeit zu Gewicht. HQProp, Gemfan und Dalprop decken damit fast den ganzen Markt ab.</div></div>
   <div class="card"><div class="ct">Weiche Mischungen</div><div class="cd">Für Cinewhoops und Innenflug: verzeihen Berührungen, sind aber weniger präzise und erzeugen mehr Blattflattern.</div></div>
   <div class="card"><div class="ct">Carbonverstärkt</div><div class="cd">Sehr steif und präzise, splittert aber und ist gefährlicher. Für Rennen üblich, für den Alltag zweifelhaft.</div></div>
   <div class="card"><div class="ct">Wann er in den Müll gehört</div><div class="cd">Jede Kerbe an der Vorderkante, jeder Riss an der Nabe, jedes sichtbare Weißbrechen. Ein angeschlagenes Blatt erzeugt Unwucht — und Unwucht ist genau die Vibration, die das Gyro nicht wegfiltern kann.</div></div>
-  <div class="card"><div class="ct">Unwucht prüfen</div><div class="cd">Am Quad: einzelnen Motor im Betaflight-Motorentab auf mittlere Drehzahl bringen und den Rahmen fühlen. Deutlich spürbares Kribbeln bei einem Motor und nicht bei den anderen heißt: Propeller oder Motor tauschen.</div></div>
-  <div class="card"><div class="ct">Vorrat</div><div class="cd">Zehn Sätze sind kein Luxus, sondern die Voraussetzung dafür, dass ein Flugtag nicht nach zwanzig Minuten endet. Propeller sind das einzige Bauteil, von dem man mehr braucht, als man denkt.</div></div>
+  <div class="card"><div class="ct">Unwucht prüfen</div><div class="cd">Einzelnen Motor im Motorentab auf mittlere Drehzahl bringen und den Rahmen fühlen. Deutliches Kribbeln bei einem Motor und nicht bei den anderen heißt: Propeller oder Motor tauschen.</div></div>
+  <div class="card"><div class="ct">Vorrat</div><div class="cd">Zehn Sätze sind kein Luxus, sondern die Voraussetzung dafür, dass ein Flugtag nicht nach zwanzig Minuten endet.</div></div>
 </div>
 
 <h2>Blattspitzengeschwindigkeit</h2>
@@ -63,14 +93,14 @@ import "./_style.css";
   <span class="f">v_Spitze = π · d · n / 60</span>
   <span class="l">d in Metern, n in min⁻¹. Ab etwa 200 m/s (Mach 0,6) fällt der Wirkungsgrad merklich, der Lärm steigt stark.</span>
 </div>
-<p>Diese Grenze ist der eigentliche Grund für die kV-Tabellen aus dem Abschnitt <a href="#motoren">Motoren</a>: ein 7-Zöller mit 2400 kV an 6S würde die Blattspitzen in den unwirtschaftlichen Bereich treiben, lange bevor der Motor thermisch am Limit ist. Nachrechnen im <a href="#rechner">Rechner</a>.</p>
+<p>Diese Grenze ist der eigentliche Grund für die kV-Tabellen unter <a href="#motoren">Motoren</a>: Ein 7-Zöller mit 2400 kV an 6S würde die Blattspitzen weit in den unwirtschaftlichen Bereich treiben, lange bevor der Motor thermisch am Limit ist. Nachrechnen im <a href="#rechner">Rechner</a>.</p>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li>Herstellerdaten von HQProp, Gemfan, T-Motor, Azure Power — Geometrie, Gewicht und teilweise Schubmessungen.</li>
-    <li><a href="https://oscarliang.com/">oscarliang.com</a> — Vergleichsartikel zu Propellergrößen, Steigung und Blattzahl.</li>
-    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Messreihen zu Propellerwechsel und dessen Wirkung auf Strom und Flugzeit.</li>
-    <li>Grundlagen der Propellertheorie (Blattelement- und Strahltheorie): Quan Quan, <i>Introduction to Multicopter Design and Control</i>, Kapitel Propulsion System.</li>
+    <li><a href="https://oscarliang.com/propellers/">Oscar Liang — How to Choose the Best Propellers</a>: Bezeichnungen, Blattzahl, Materialien, Empfehlungen je Klasse.</li>
+    <li><a href="https://www.youtube.com/@ChrisRosser">Chris Rosser</a> — Propeller-Prüfstandsmessungen (auch zu Sonderformen wie Toroid-Propellern: messbar leiser, messbar ineffizienter).</li>
+    <li>Herstellerdaten von HQProp, Gemfan, Dalprop, Azure Power — Geometrie, Gewicht, teils Schubmessungen.</li>
+    <li>Blattelement- und Strahltheorie: Quan Quan, <i>Introduction to Multicopter Design and Control</i>, Kapitel Propulsion System.</li>
   </ul>
 </div>

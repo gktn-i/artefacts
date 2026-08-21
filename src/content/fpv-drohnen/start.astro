@@ -4,17 +4,19 @@ import "./_style.css";
 <div class="kurz"><b>Eine FPV-Drohne ist ein Regelkreis mit Propellern.</b> Ein Gyroskop misst tausendfach je Sekunde, wie sich das Gerät dreht, ein PID-Regler vergleicht das mit dem Knüppelausschlag und verteilt die Differenz auf vier Motoren. Alles andere — Rahmen, Akku, Funk, Kamera — hängt an dieser einen Schleife. Wer das Prinzip verstanden hat, kann jedes Problem einordnen.</div>
 
 <h2>Wofür dieses Modul da ist</h2>
-<p>Dies ist ein Nachschlagewerk, kein Kaufratgeber. Konkrete Produktnamen veralten in dieser Szene innerhalb eines Jahres — die Zusammenhänge nicht. Deshalb steht hier, <em>warum</em> ein 5-Zoll-Freestyle-Quad rund 2400 kV an 6S fliegt und nicht 2700, was ein Motor-Timing bewirkt und weshalb ein Videobild verrauscht, obwohl die Reichweite eigentlich stimmen müsste. Für tagesaktuelle Empfehlungen stehen die Anlaufstellen unter <a href="#quellen">Quellen &amp; Kanäle</a>.</p>
+<p>Dies ist ein Nachschlagewerk mit zwei Sorten von Inhalt. Die <b>Zusammenhänge</b> — warum ein 5-Zoll-Quad an 6S um 1800 kV fliegt, was ein Kerbfilter kostet, weshalb ein Videobild verrauscht, obwohl die Reichweite stimmen müsste — veralten nicht. Die <b>Kennzahlen und Produktgenerationen</b> — welche Air Unit, welche Brille, welche Firmware-Version — tragen ein Stand-Datum und sind bewusst als solche gekennzeichnet: <b>Stand August 2026.</b> Für alles danach stehen die Anlaufstellen unter <a href="#quellen">Quellen &amp; Kanäle</a> — allen voran <a href="https://oscarliang.com/">oscarliang.com</a> und Joshua Bardwells <a href="https://www.fpvknowitall.com/">fpvknowitall.com</a>, deren laufend gepflegte Kauflisten dieses Modul absichtlich nicht dupliziert.</p>
 
 <div class="map">
-  <a href="#klassen"><div class="mt"><span class="i">🧭</span>Ich weiß noch nicht, was ich bauen will</div><div class="md">Bauformen von Tinywhoop bis Long Range, mit Einordnung nach Ziel, Aufwand und Ort</div></a>
-  <a href="#bauen"><div class="mt"><span class="i">🔩</span>Ich will bauen</div><div class="md">Reihenfolge, Lötstellen, Prüfschritte, Erstflug — inklusive der Fehler, die alle einmal machen</div></a>
-  <a href="#betaflight"><div class="mt"><span class="i">⚙️</span>Es ist gebaut, aber nicht eingerichtet</div><div class="md">Betaflight von Ports über Modi und Failsafe bis OSD, in der Reihenfolge, die funktioniert</div></a>
-  <a href="#tuning"><div class="mt"><span class="i">📈</span>Es fliegt, aber schlecht</div><div class="md">Filterkette, PID-Anteile, Symptome und ihre Ursachen</div></a>
-  <a href="#fehlersuche"><div class="mt"><span class="i">🔍</span>Etwas geht nicht</div><div class="md">Symptomtabelle vom Motorzucken bis zum schwarzen Videobild</div></a>
+  <a href="#klassen"><div class="mt"><span class="i">🧭</span>Ich weiß noch nicht, was ich bauen will</div><div class="md">Bauformen von Tinywhoop bis Long Range, mit Kennzahlen je Klasse und Größenvergleich</div></a>
+  <a href="#bauen"><div class="mt"><span class="i">🔩</span>Ich will bauen</div><div class="md">Verdrahtungsplan, Reihenfolge, Lötstellen, Prüfschritte, Erstflug</div></a>
+  <a href="#betaflight"><div class="mt"><span class="i">⚙️</span>Es ist gebaut, aber nicht eingerichtet</div><div class="md">Betaflight von Ports über Modi und Failsafe bis OSD — inklusive der neuen Kalenderversionen</div></a>
+  <a href="#tuning"><div class="mt"><span class="i">📈</span>Es fliegt, aber schlecht</div><div class="md">Filterkette als Schaubild, Slider, Symptome und ihre Ursachen</div></a>
+  <a href="#video"><div class="mt"><span class="i">📺</span>Welches Videosystem?</div><div class="md">Analog, HDZero, Walksnail, DJI O4 — mit konkreten Kennzahlen der aktuellen Generation</div></a>
+  <a href="#fehlersuche"><div class="mt"><span class="i">🔍</span>Etwas geht nicht</div><div class="md">Symptomtabellen vom Motorzucken bis zum schwarzen Videobild</div></a>
   <a href="#fliegen"><div class="mt"><span class="i">🕹️</span>Ich will fliegen lernen</div><div class="md">Simulator, Modi, Fortschrittsplan — und warum Angle-Mode eine Sackgasse ist</div></a>
   <a href="#recht"><div class="mt"><span class="i">⚖️</span>Darf ich das überhaupt?</div><div class="md">EU-Drohnenverordnung, Kompetenznachweis, Registrierung, Versicherung, Spotterpflicht</div></a>
   <a href="#rechner"><div class="mt"><span class="i">🧮</span>Ich brauche eine Zahl</div><div class="md">Schub-Gewicht, Flugzeit, Drehzahl, LiPo, Link-Budget</div></a>
+  <a href="#software"><div class="mt"><span class="i">💾</span>Welches Programm wofür?</div><div class="md">Firmware, Konfiguratoren, Apps, Analyse, Simulatoren — der Software-Katalog</div></a>
 </div>
 
 <h2>Die sieben Baugruppen</h2>
@@ -27,7 +29,7 @@ import "./_style.css";
 <tr><td><b>Leistungselektronik</b></td><td>Akkuleistung in Motorströme umsetzen</td><td>ESC (meist 4-in-1), Kondensator, Kabel</td><td>Desync, Rauch, plötzlicher Absturz bei Vollgas</td></tr>
 <tr><td><b>Regelung</b></td><td>Messen, rechnen, stellen</td><td>Flight Controller mit Gyro und Firmware</td><td>Oszillationen, Wegdriften, Nichtarmieren</td></tr>
 <tr><td><b>Steuerfunk</b></td><td>Knüppelbefehle übertragen, Telemetrie zurück</td><td>Sender, Empfänger, Antennen</td><td>Failsafe, Zucken, Reichweitenabriss</td></tr>
-<tr><td><b>Videofunk</b></td><td>Bild vom Quad zum Kopf bringen</td><td>Kamera, VTX, Antennen, Goggles</td><td>Rauschen, Bildaussetzer — der häufigste Grund für Abstürze bei Anfängern</td></tr>
+<tr><td><b>Videofunk</b></td><td>Bild vom Quad zum Kopf bringen</td><td>Kamera, VTX bzw. Air Unit, Antennen, Goggles</td><td>Rauschen, Standbild, Bildaussetzer — der häufigste Grund für Abstürze bei Anfängern</td></tr>
 <tr><td><b>Energie</b></td><td>Leistung liefern, ohne einzubrechen</td><td>LiPo, Stecker, Verkabelung</td><td>Spannungseinbruch, Brownout, Neustart im Flug</td></tr>
 </tbody>
 </table></div>
@@ -37,8 +39,8 @@ import "./_style.css";
   <div class="card"><div class="ct">Flugzeit ist kurz</div><div class="cd">Ein 5-Zoll-Freestyle-Quad fliegt 3 bis 5 Minuten, ein Renn-Quad zwei. Nur effiziente 7-Zöller mit Li-Ion-Pack kommen auf 20 Minuten und mehr. Wer Stunden erwartet, sucht eine Kameradrohne, keine FPV-Drohne.</div></div>
   <div class="card"><div class="ct">Es geht kaputt</div><div class="cd">Propeller sind Verschleißteil, Arme brechen, Kameras verstellen sich. Ein Satz Ersatzteile gehört zum Erstkauf, nicht zur späteren Nachbestellung. Reparaturfähigkeit ist der Grund, warum die Szene selbst lötet.</div></div>
   <div class="card"><div class="ct">Fliegen lernt man im Simulator</div><div class="cd">Zehn bis zwanzig Stunden Simulator vor dem ersten echten Flug sind normal und sparen das Vielfache an Ersatzteilen. Der Simulator ist der billigste Teil der ganzen Ausrüstung.</div></div>
-  <div class="card"><div class="ct">Der Einstieg kostet Zeit, nicht nur Geld</div><div class="cd">Funke, Goggles und Simulator sind die Investition, die bleibt; das Quad selbst ist der billigere und austauschbare Teil. Ein fertiges Bind-and-Fly-Set nimmt den Bau ab, nicht das Einrichten.</div></div>
-  <div class="card"><div class="ct">Der Rahmen ist kein Ort zum Sparen</div><div class="cd">Ein billiger Rahmen bricht nicht nur öfter, sein weiches Carbon überträgt auch mehr Vibration in den Gyro. Der Unterschied zeigt sich im Tuning, lange bevor etwas bricht.</div></div>
+  <div class="card"><div class="ct">Funke und Brille bleiben, das Quad ist austauschbar</div><div class="cd">Die Investition, die über Jahre trägt, sind Fernsteuerung, Goggles und Simulator-Übungsstunden. Das Quad selbst ist der billigere, ersetzbare Teil — ein BNF-Set nimmt den Bau ab, nicht das Einrichten.</div></div>
+  <div class="card"><div class="ct">Das Videosystem ist eine Ökosystem-Entscheidung</div><div class="cd">Wer sich für DJI, Walksnail oder HDZero entscheidet, kauft Brille und Air Units im selben System. Ein Wechsel später heißt: neue Brille. Deshalb steht die Entscheidung unter <a href="#video">Videoübertragung</a> so weit vorn.</div></div>
   <div class="card"><div class="ct">Recht ist kein Randthema</div><div class="cd">FPV bedeutet in der EU: Fliegen ohne direkten Sichtkontakt. Das ist in der offenen Kategorie nur mit Beobachter zulässig. Registrierung und Haftpflicht sind Pflicht, nicht Empfehlung — siehe <a href="#recht">Recht &amp; Sicherheit</a>.</div></div>
 </div>
 
@@ -55,8 +57,8 @@ import "./_style.css";
   <div class="sh">Grundlage dieses Moduls</div>
   <ul>
     <li><a href="https://betaflight.com/docs/wiki">Betaflight-Dokumentation</a> und <a href="https://www.expresslrs.org/">ExpressLRS-Dokumentation</a> — die maßgeblichen Primärquellen für Firmware und Funkstrecke.</li>
-    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell (YouTube)</a> — der ausführlichste didaktische Kanal der Szene, besonders zu Betaflight, Tuning und Fehlersuche.</li>
-    <li><a href="https://oscarliang.com/">oscarliang.com</a> — die am besten gepflegte schriftliche Referenz zu Bau, Bauteilen und Einrichtung.</li>
+    <li><a href="https://www.fpvknowitall.com/">fpvknowitall.com</a> und der <a href="https://www.youtube.com/@JoshuaBardwell">YouTube-Kanal von Joshua Bardwell</a> — Artikelbibliothek, die laufend gepflegten FPV-Shopping-Lists je Bauklasse und der didaktisch gründlichste Videokanal der Szene.</li>
+    <li><a href="https://oscarliang.com/">oscarliang.com</a> — die am besten gepflegte schriftliche Referenz zu Bau, Bauteilen und Einrichtung, inklusive der Nachschlagetabelle zu Motor-, Propeller- und Akkugrößen.</li>
     <li>Quan Quan, <i>Introduction to Multicopter Design and Control</i>, Springer 2017 — die theoretische Grundlage hinter dem, was Betaflight praktisch tut.</li>
     <li>Vollständige Liste mit Auswahlkriterien: <a href="#quellen">Quellen &amp; Kanäle</a>.</li>
   </ul>

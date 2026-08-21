@@ -3,6 +3,30 @@ import "./_style.css";
 ---
 <div class="kurz"><b>Der LiPo ist das gefährlichste und das am schnellsten verschlissene Teil am Quad.</b> Er bestimmt Flugzeit, Leistung und Gewicht — und er ist das einzige Bauteil, das bei falscher Behandlung brennt. Zwei Zahlen zählen wirklich: Zellenzahl und Innenwiderstand. Die aufgedruckte C-Rate zählt am wenigsten.</div>
 
+<h2>Die Entladekurve — warum Spannung ein schlechter Tankanzeiger ist</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 250" role="img" aria-label="Entladekurve einer LiPo-Zelle: Zellenspannung über der entnommenen Kapazität, in Ruhe und unter Last">
+  <path class="gd" d="M60,52 H630 M60,96 H630 M60,140 H630 M60,184 H630" />
+  <path class="wt" d="M60,20 V210 M60,210 H630" />
+  <text class="lbl" x="52" y="56" text-anchor="end">4,2 V</text>
+  <text class="lbl" x="52" y="100" text-anchor="end">3,9 V</text>
+  <text class="lbl" x="52" y="144" text-anchor="end">3,6 V</text>
+  <text class="lbl" x="52" y="188" text-anchor="end">3,3 V</text>
+  <text class="lbl" x="60" y="226">0 %</text>
+  <text class="lbl" x="330" y="226" text-anchor="middle">entnommene Kapazität</text>
+  <text class="lbl" x="628" y="226" text-anchor="end">100 %</text>
+  <path class="acc" d="M60,52 C90,74 120,92 180,102 C280,116 380,124 480,132 C520,136 545,140 565,152 C585,166 600,190 612,208" />
+  <path class="acc" style="stroke-dasharray:5 4;opacity:.65" d="M60,80 C90,102 120,120 180,130 C280,144 380,152 480,160 C520,164 545,168 565,180 C585,194 598,206 606,210" />
+  <path class="gd" d="M516,20 V210" />
+  <text class="lbla" x="522" y="34">80 % — hier landen</text>
+  <path class="wt" d="M300,121 V149" />
+  <text class="lbl" x="308" y="140">Einbruch unter Last: I · R_i</text>
+  <text class="lbla" x="180" y="92">in Ruhe</text>
+  <text class="lbl" x="180" y="146">unter Last</text>
+</svg>
+<figcaption>Typische LiPo-Entladung: In der langen flachen Mitte sagt die Spannung fast nichts über die Restkapazität. Unter Last liegt die Kurve um I·R<sub>i</sub> tiefer — deshalb löst ein voller Pack im Vollgas den Spannungsalarm aus und „erholt“ sich danach. Verlässlich ist der mAh-Zähler im OSD, nicht die Voltzahl.</figcaption>
+</figure>
+
 <h2>Spannungen, die man auswendig kennt</h2>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Zustand</th><th>je Zelle</th><th>4S</th><th>6S</th><th>Bedeutung</th></tr></thead>
@@ -15,17 +39,17 @@ import "./_style.css";
 <tr><td><b>Tiefentladen</b></td><td>&lt; 3,0 V</td><td>—</td><td>—</td><td>Schaden. Unter 2,5 V ist der Akku Sondermüll, nicht Ladegut</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Die 80-Prozent-Regel.</b> Nutze rund 80 % der Nennkapazität, also 1000 mAh aus einem 1300er. Das ist kein Geiz, sondern die Bedingung dafür, dass ein Pack 200 statt 50 Zyklen hält. Im OSD kontrolliert man das am einfachsten über die verbrauchte Kapazität (mAh), nicht über die Spannung — die schwankt unter Last viel zu stark.</div>
+<div class="tip"><b>Die 80-Prozent-Regel.</b> Nutze rund 80 % der Nennkapazität, also 1000 mAh aus einem 1300er. Das ist kein Geiz, sondern die Bedingung dafür, dass ein Pack 200 statt 50 Zyklen hält. Kontrolliert wird über die verbrauchte Kapazität (mAh) im OSD — dafür muss der Stromsensor kalibriert sein, siehe <a href="#betaflight">Betaflight einrichten</a>.</div>
 
 <h2>Was auf dem Schrumpfschlauch steht</h2>
 <div class="flist">
   <div class="frow hd"><span>Angabe</span><span>Beispiel</span><span>Wie ernst zu nehmen</span></div>
   <div class="frow"><span class="fn">Zellenzahl</span><span class="fe">6S1P</span><span class="fx">Sechs Zellen in Reihe, ein Strang parallel. Verbindlich und wichtig</span></div>
   <div class="frow"><span class="fn">Kapazität</span><span class="fe">1300 mAh</span><span class="fx">Meist ungefähr korrekt, gelegentlich optimistisch. Prüfbar über die zugeführte Ladung beim Vollladen</span></div>
-  <div class="frow"><span class="fn">C-Rate</span><span class="fe">120C</span><span class="fx">Praktisch bedeutungslos, weil unnormiert und ungemessen. 120C × 1,3 Ah wären 156 A je Pack — das liefert kein 1300er-Pack</span></div>
-  <div class="frow"><span class="fn">Innenwiderstand</span><span class="fe">3–6 mΩ je Zelle</span><span class="fx">Der ehrliche Wert. Viele Ladegeräte messen ihn. Steigender Innenwiderstand ist das Verschleißmaß schlechthin</span></div>
+  <div class="frow"><span class="fn">C-Rate</span><span class="fe">120C</span><span class="fx">Praktisch bedeutungslos, weil unnormiert und ungemessen. 120C × 1,3 Ah wären 156 A dauerhaft — das liefert kein 1300er-Pack</span></div>
+  <div class="frow"><span class="fn">Innenwiderstand</span><span class="fe">3–6 mΩ je Zelle (neu)</span><span class="fx">Der ehrliche Wert. Viele Ladegeräte messen ihn. Verdoppelung gegenüber neu = Pack ist am Ende</span></div>
   <div class="frow"><span class="fn">Chemie</span><span class="fe">LiPo / LiHV / Li-Ion</span><span class="fx">Bestimmt Ladeschlussspannung und Strombelastbarkeit. Falsch geladen ist gefährlich</span></div>
-  <div class="frow"><span class="fn">Stecker</span><span class="fe">XT30 / XT60 / XT90</span><span class="fx">Muss zur Strombelastung passen — siehe unten</span></div>
+  <div class="frow"><span class="fn">Stecker</span><span class="fe">BT2.0 / XT30 / XT60 / XT90</span><span class="fx">Muss zur Strombelastung passen — siehe unten</span></div>
 </div>
 
 <h2>Innenwiderstand und Spannungseinbruch</h2>
@@ -33,24 +57,24 @@ import "./_style.css";
   <span class="f">U_Last = U_Leerlauf − I · R_i</span>
   <span class="l">Bei 6 Zellen à 4 mΩ und 80 A Strom: 6 · 0,004 Ω · 80 A = 1,9 V Einbruch — aus 25,2 V werden im Vollgas 23,3 V.</span>
 </div>
-<p>Das erklärt drei Alltagsbeobachtungen auf einmal: warum ein voller Akku im Vollgas den Warnton auslöst, warum das Quad bei Kälte kraftlos wirkt (der Innenwiderstand steigt), und warum ein alter Pack „weich“ fliegt, obwohl seine Kapazität kaum gefallen ist. Ein Pack, dessen Innenwiderstand sich gegenüber dem Neuzustand verdoppelt hat, ist am Ende seines nutzbaren Lebens.</p>
+<p>Das erklärt drei Alltagsbeobachtungen auf einmal: warum ein voller Akku im Vollgas den Warnton auslöst, warum das Quad bei Kälte kraftlos wirkt (der Innenwiderstand steigt), und warum ein alter Pack „weich“ fliegt, obwohl seine Kapazität kaum gefallen ist.</p>
 
 <h2>Li-Ion für Long Range</h2>
 <div class="gb">
-  <div class="gb-col good"><h4>Li-Ion (z. B. 21700-Zellen)</h4>
+  <div class="gb-col good"><h4>Li-Ion (18650/21700-Rundzellen)</h4>
     <ul>
-      <li>Zwei- bis dreifache Energiedichte gegenüber LiPo</li>
-      <li>Flugzeiten von 20–40 Minuten realistisch</li>
+      <li>Deutlich höhere Energiedichte als LiPo — Flugzeiten von 20–40 Minuten realistisch</li>
       <li>Sehr viele Zyklen bei schonender Nutzung</li>
-      <li>Zellspannung bis 4,2 V, entladbar bis 3,0 V</li>
+      <li>Hochstromzellen (z. B. Molicel-P-Serie) vertragen je Zelle 15–30 A Dauer</li>
+      <li>Entladbar bis ~3,0 V je Zelle, Kurve fällt gleichmäßiger als bei LiPo</li>
     </ul>
   </div>
   <div class="gb-col bad"><h4>Wo es nicht passt</h4>
     <ul>
-      <li>Geringe Strombelastbarkeit — für 5-Zoll-Freestyle ungeeignet</li>
-      <li>Deutlich schwerer je Pack, schlechter Schub-Gewicht-Wert</li>
-      <li>Hoher Innenwiderstand, starker Spannungseinbruch bei Lastspitzen</li>
-      <li>Nur sinnvoll bei effizienten 7-Zöllern mit sanftem Flugstil</li>
+      <li>Für 5-Zoll-Freestyle ungeeignet — Lastspitzen jenseits der Zellgrenzen</li>
+      <li>Deutlich schwerer je Pack, schlechteres Schub-Gewicht-Verhältnis</li>
+      <li>Höherer Innenwiderstand, starker Einbruch bei Lastspitzen</li>
+      <li>Sinnvoll nur bei effizienten 7-Zöllern und Flächen mit sanftem Gasverlauf</li>
     </ul>
   </div>
 </div>
@@ -58,32 +82,32 @@ import "./_style.css";
 <h2>Laden, lagern, entsorgen</h2>
 <div class="steps">
   <div class="step"><h4>Immer mit Balancer laden</h4>Der Balanceranschluss ist keine Option. Ohne ihn driften die Zellen auseinander, und eine überladene Zelle in einem sonst gesunden Pack ist die klassische Brandursache.</div>
-  <div class="step"><h4>1C ist der Normalfall</h4>Ein 1300-mAh-Pack lädt man mit 1,3 A. 2C geht bei modernen Packs, kostet aber Lebensdauer. Schnellladen ist eine Notlösung, kein Standard.</div>
-  <div class="step"><h4>Nie unbeaufsichtigt, nie über Nacht</h4>Auf nicht brennbarem Untergrund, in einer LiPo-Tasche oder Munitionskiste, mit Rauchmelder in der Nähe. Ein LiPo-Brand lässt sich nicht ersticken — er bringt seinen Sauerstoff mit.</div>
+  <div class="step"><h4>1C ist der Normalfall</h4>Ein 1300-mAh-Pack lädt mit 1,3 A. 2C geht bei modernen Packs, kostet aber Lebensdauer. Schnellladen ist eine Notlösung, kein Standard.</div>
+  <div class="step"><h4>Nie unbeaufsichtigt, nie über Nacht</h4>Auf nicht brennbarem Untergrund, in LiPo-Tasche oder Munitionskiste, Rauchmelder in der Nähe. Ein LiPo-Brand lässt sich nicht ersticken — er bringt seinen Sauerstoff mit.</div>
   <div class="step"><h4>Storage nach dem Flugtag</h4>Volle Packs altern schnell. Wer nicht am nächsten Tag fliegt, fährt sie auf 3,8 V je Zelle — jedes brauchbare Ladegerät hat dafür ein Storage-Programm.</div>
   <div class="step"><h4>Aufgeblähte Packs sofort aussortieren</h4>Ein „Puffy“ ist Gasbildung durch Zersetzung des Elektrolyts. Er wird nicht wieder flach. Nicht mehr laden, nicht mehr fliegen, kontrolliert entladen und entsorgen.</div>
-  <div class="step"><h4>Entsorgung</h4>Vollständig entladen (Salzwasser ist der bekannteste, aber umstrittene Weg; ein Entladewiderstand ist sauberer), Pole abkleben, in die Batteriesammlung — nicht in den Hausmüll.</div>
+  <div class="step"><h4>Entsorgung</h4>Vollständig entladen (ein Entladewiderstand ist sauberer als das oft zitierte Salzwasserbad), Pole abkleben, Batteriesammlung — nicht Hausmüll.</div>
 </div>
-<div class="warn"><b>Transport und Flugreise.</b> Lithiumakkus gehören ins Handgepäck, nie ins aufgegebene Gepäck. Fluggesellschaften begrenzen die Energie je Pack (üblich: bis 100 Wh frei, 100–160 Wh mit Genehmigung, darüber verboten) und verlangen einzeln isolierte Pole. Ein 6S-1300-Pack liegt bei rund 29 Wh — die Zahl steht im <a href="#rechner">Rechner</a> und sollte vor der Reise bekannt sein.</div>
+<div class="warn"><b>Transport und Flugreise.</b> Lithiumakkus gehören ins Handgepäck, nie ins aufgegebene Gepäck. Es gelten Energiegrenzen je Pack (üblich: bis 100 Wh frei, 100–160 Wh mit Genehmigung der Airline, darüber verboten) und einzeln isolierte Pole. Ein 6S-1300er liegt bei rund 29 Wh — die Zahl liefert der <a href="#rechner">Rechner</a>.</div>
 
 <h2>Stecker und Kabel</h2>
-<div class="tbl-wrap"><table style="min-width:760px">
+<div class="tbl-wrap"><table style="min-width:780px">
 <thead><tr><th>Stecker</th><th>Dauerstrom</th><th>Typisch für</th></tr></thead>
 <tbody>
-<tr><td><b>PH2.0 / BT2.0 / A30</b></td><td>5–20 A</td><td>1S-Whoops. BT2.0 hat den geringsten Widerstand der drei</td></tr>
-<tr><td><b>XT30</b></td><td>bis ca. 30 A</td><td>2–4S Micros, Toothpicks, kleine Cinewhoops</td></tr>
+<tr><td><b>BT2.0 / A30 / GNB27</b></td><td>bis ~15–20 A</td><td>1S-Whoops. Deutlich weniger Übergangswiderstand als der ältere PH2.0 — spürbar mehr Leistung am selben Akku</td></tr>
+<tr><td><b>XT30</b></td><td>bis ca. 30 A</td><td>2–4S Micros, Toothpicks, Sub-250-Bauten</td></tr>
 <tr><td><b>XT60</b></td><td>bis ca. 60 A</td><td>Der Standard für 5 Zoll und 6S</td></tr>
 <tr><td><b>XT90</b></td><td>bis ca. 90 A</td><td>Große Bauten, hohe Kapazitäten, Ladegeräte</td></tr>
 </tbody>
 </table></div>
-<p class="note">Kabelquerschnitt am Quad: 16 AWG ist bei 5-Zoll-6S-Bauten üblich, 14 AWG bei sehr stromhungrigen Setups, 20 AWG bei Micros. Zu dünn heißt Spannungsverlust und Wärme genau dort, wo man es nicht sieht. Die Zusammenhänge zu Querschnitt, Strom und Erwärmung stehen im Modul <a href="elektronik-grundlagen.html">Elektronik 101</a>.</p>
+<p class="note">Kabelquerschnitt am Quad: 16 AWG bei 5-Zoll-6S, 14 AWG bei sehr stromhungrigen Setups, 20 AWG bei Micros. Die Zusammenhänge zu Querschnitt, Strom und Erwärmung stehen im Modul <a href="elektronik-grundlagen.html">Elektronik 101</a>.</p>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li>Datenblätter der Zellhersteller (Molicel, Samsung, LG) für Li-Ion-Zellen — die einzige belastbare Quelle für Strombelastbarkeit.</li>
-    <li><a href="https://oscarliang.com/">oscarliang.com</a> — LiPo-Grundlagen, Ladepraxis und Vergleichstests.</li>
-    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Messungen zu Spannungseinbruch, Innenwiderstand und dem realen Wert von C-Angaben.</li>
-    <li>IATA-Gefahrgutvorschriften (Lithium Battery Guidance Document) für Transport und Flugreise — die verbindlichen Grenzwerte stehen dort, nicht im Forum.</li>
+    <li><a href="https://oscarliang.com/">oscarliang.com</a> — LiPo-Grundlagen, Ladepraxis, Steckervergleiche (u. a. BT2.0 gegen PH2.0 mit Messwerten).</li>
+    <li><a href="https://www.fpvknowitall.com/">fpvknowitall.com</a> / Joshua Bardwell — Messungen zu Spannungseinbruch, Innenwiderstand und dem realen Wert von C-Angaben.</li>
+    <li>Zellendatenblätter (Molicel, Samsung, LG) — die einzige belastbare Quelle für die Strombelastbarkeit von Li-Ion-Zellen.</li>
+    <li>IATA Lithium Battery Guidance Document — verbindliche Grenzwerte für Transport und Flugreise.</li>
   </ul>
 </div>

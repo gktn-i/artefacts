@@ -29,6 +29,27 @@ import "./_style.css";
 </table></div>
 <p class="note">Gewinn ist kein Verstärker, sondern eine Umverteilung: Was eine Richtantenne nach vorn gewinnt, fehlt zur Seite und nach hinten. Deshalb ist eine 14-dBi-Patch am Kopf nur so lange gut, wie das Quad tatsächlich vorn ist — und deshalb betreibt man sie in einer Brille mit Diversity zusammen mit einer Rundstrahlantenne.</p>
 
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Abstrahldiagramme im Schnitt: Rundstrahler mit Donut-Form und Nullstellen in Achsrichtung, Richtantenne mit einer Keule nach vorn">
+  <!-- links: Dipol -->
+  <path class="wt" d="M160,40 V190" />
+  <path class="accs" d="M160,115 C160,70 60,70 60,115 C60,160 160,160 160,115 Z" />
+  <path class="accs" d="M160,115 C160,70 260,70 260,115 C260,160 160,160 160,115 Z" />
+  <text class="lblb" x="160" y="214" text-anchor="middle">Rundstrahler (Dipol)</text>
+  <text class="lbl" x="160" y="30" text-anchor="middle">Nullstelle in Achsrichtung</text>
+  <path class="accf" d="M160,36 l-4,8 h8 z" transform="rotate(180 160 40)" />
+  <text class="lbl" x="60" y="188">seitlich überall gleich stark</text>
+  <!-- rechts: Patch -->
+  <rect class="box" x="400" y="85" width="16" height="60" rx="3" />
+  <path class="accs" d="M416,115 C420,60 560,50 606,115 C560,180 420,170 416,115 Z" />
+  <path class="accs" d="M400,115 C398,98 352,98 352,115 C352,132 398,132 400,115 Z" />
+  <text class="lblb" x="480" y="214" text-anchor="middle">Richtantenne (Patch)</text>
+  <text class="lbl" x="510" y="112" >Hauptkeule nach vorn</text>
+  <text class="lbl" x="368" y="88" text-anchor="middle">kleine Rückkeule</text>
+  <text class="lbl" x="480" y="30" text-anchor="middle">Gewinn ist Umverteilung: vorn mehr, hinten weniger</text>
+</svg>
+<figcaption>Abstrahlung im Schnitt. Der Dipol strahlt als Donut rund um seine Achse — mit Nullstellen genau in Achsrichtung: Wer die Senderantenne aufs Quad <em>richtet</em>, zielt mit der schwächsten Stelle. Die Patch bündelt in eine Keule von 60–120°.</figcaption>
+</figure>
 <h2>Diversity</h2>
 <p>Zwei Empfänger, zwei Antennen, ein Bild: Die Brille wählt fortlaufend die bessere Quelle aus. Die sinnvolle Kombination ist fast immer <b>eine Rundstrahlantenne plus eine Richtantenne</b> — die eine deckt alles nahe und seitlich ab, die andere die Distanz nach vorn. Zwei Richtantennen nebeneinander bringen wenig, zwei Rundstrahler auch.</p>
 <div class="fbox">
@@ -60,7 +81,7 @@ import "./_style.css";
   <div class="sh">Quellen</div>
   <ul>
     <li>ARRL Antenna Book bzw. Rothammels Antennenbuch — die Standardwerke zur Antennentechnik; alles hier Gesagte steht dort ausführlich hergeleitet.</li>
-    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — Messungen zu Polarisationsverlust, Patch-Antennen und Diversity-Kombinationen.</li>
+    <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> / <a href="https://www.fpvknowitall.com/">fpvknowitall.com</a> — Messungen zu Polarisationsverlust, Patch-Antennen und Diversity-Kombinationen.</li>
     <li>Herstellerdiagramme von TrueRC, Lumenier, VAS und Menace — Abstrahldiagramme und Anpassungsmessungen einzelner Modelle.</li>
     <li>Grundlagen zu Wellenausbreitung, Dezibel und Link-Budget: Modul <a href="informationstechnik.html">Informations- &amp; Rechnertechnik</a>.</li>
   </ul>
