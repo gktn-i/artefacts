@@ -1,10 +1,10 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Der ESC macht aus Gleichspannung ein Drehfeld, der Flight Controller entscheidet, wie schnell.</b> Beide sitzen meist als „Stack“ übereinander in der Rahmenmitte. Der ESC ist das Bauteil mit den höchsten Strömen im ganzen Gerät — und dasjenige, das bei Fehlern raucht.</div>
+<div class="kurz"><b>Der ESC macht aus Gleichspannung ein Drehfeld, der FC entscheidet, wie schnell.</b> Beide bilden den „Stack“ in der Rahmenmitte. Der ESC führt die höchsten Ströme — und raucht bei Fehlern zuerst.</div>
 
 <h2>ESC: was drinsteckt</h2>
-<p>Ein ESC (Electronic Speed Controller) kommutiert einen bürstenlosen Motor elektronisch: Sechs MOSFETs bilden drei Halbbrücken, ein Mikrocontroller schaltet sie in der richtigen Reihenfolge. Die Rotorlage misst er nicht — er liest die Gegen-EMK der gerade unbestromten Phase. Das funktioniert gut bei Drehzahl und schlecht im Stillstand; deshalb ruckelt jeder BLDC beim Anlaufen kurz.</p>
+<p>Sechs MOSFETs bilden drei Halbbrücken, ein Mikrocontroller schaltet sie der Reihe nach. Die Rotorlage liest der ESC aus der Gegen-EMK der unbestromten Phase — bei Drehzahl gut, im Stillstand schlecht. Deshalb ruckelt jeder BLDC beim Anlaufen kurz.</p>
 <div class="tbl-wrap"><table style="min-width:920px">
 <thead><tr><th>Kennwert</th><th>Üblich (Stand 2026)</th><th>Worauf achten</th></tr></thead>
 <tbody>
@@ -30,7 +30,7 @@ import "./_style.css";
 <tr><td><b>BLHeli_S</b></td><td>quelloffen, nicht mehr gepflegt</td><td>8-Bit-EFM8</td><td>nein</td><td>Nur noch als Auslieferungszustand relevant — kann keinen RPM-Filter</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Warum bidirektionales DShot wichtig ist.</b> Der ESC meldet die tatsächliche Motordrehzahl an den Flight Controller zurück. Betaflight legt daraus für jeden Motor Kerbfilter genau auf dessen Drehfrequenz — den RPM-Filter, seit Jahren die wirksamste Einzelmaßnahme gegen Gyro-Rauschen. Geflasht wird bequem im Browser über <a href="https://esc-configurator.com/">esc-configurator.com</a> (Bluejay/BLHeli_S) bzw. mit dem AM32-Konfigurator — siehe <a href="#software">Software &amp; Apps</a>.</div>
+<div class="tip"><b>Bidirektionales DShot = RPM-Filter.</b> Der ESC meldet die Drehzahl zurück, Betaflight legt Kerbfilter exakt auf die Motorfrequenz — die wirksamste Einzelmaßnahme gegen Gyro-Rauschen. Flashen im Browser: <a href="https://esc-configurator.com/">esc-configurator.com</a> (Bluejay) bzw. AM32-Konfigurator — <a href="#software">Software &amp; Apps</a>.</div>
 
 <h2>ESC-Einstellungen, die etwas bewirken</h2>
 <div class="flist">
@@ -43,7 +43,7 @@ import "./_style.css";
   <div class="frow"><span class="fn">Startup Power</span><span class="fe">Standard</span><span class="fx">Zu niedrig: Motoren laufen bei sehr niedrigem Gas nicht sauber an</span></div>
   <div class="frow"><span class="fn">Brake on Stop</span><span class="fe">aus</span><span class="fx">Bremst die Propeller beim Disarmieren. Für Whoops sinnvoll, sonst unnötige Belastung</span></div>
 </div>
-<div class="stop"><b>Der Kondensator ist kein Zubehör.</b> Die Motorschaltvorgänge erzeugen Spannungsspitzen auf der Akkuleitung. Ohne einen Low-ESR-Elko direkt an den Akkulötpads sieht der ESC Spitzen, die ihn zerstören können, und die Videoübertragung zeigt Störungen. Wer ihn nach einem Crash abreißt, lötet ihn wieder an — nicht „später mal“.</div>
+<div class="stop"><b>Der Kondensator ist kein Zubehör:</b> Ohne Low-ESR-Elko an den Akkupads sieht der ESC zerstörerische Spannungsspitzen und das Video Störstreifen. Nach dem Crash abgerissen? Sofort wieder anlöten.</div>
 
 <h2>Flight Controller</h2>
 <div class="tbl-wrap"><table style="min-width:920px">
@@ -61,10 +61,10 @@ import "./_style.css";
 
 <h2>Was in der Praxis kaputtgeht</h2>
 <div class="grid2">
-  <div class="card"><div class="ct">Verpolung</div><div class="cd">Akku falsch herum angeschlossen — einmal reicht. Ein XT60 lässt sich nicht verpolen, ein aufgelötetes Kabelpaar schon. Deshalb: erst löten, dann prüfen, dann erst Akku.</div></div>
-  <div class="card"><div class="ct">Einschaltstrom</div><div class="cd">Beim Anstecken lädt der Kondensator schlagartig — der Funke ist normal. Ein Smoke Stopper beim ersten Anstecken nach dem Löten verhindert das teure Ende eines Kurzschlusses.</div></div>
-  <div class="card"><div class="ct">Signalleitungen</div><div class="cd">Abgerissene Motorsignalleitungen nach Crashes sind häufig. Symptom: ein Motor dreht nicht oder zuckt. Vor der Fehlersuche in der Software immer erst die Lötstellen prüfen.</div></div>
-  <div class="card"><div class="ct">Wasser</div><div class="cd">Feuchtigkeit plus Spannung heißt Elektrokorrosion. Nach einer Landung im Nassen: Akku sofort ab, trocknen, erst dann wieder Strom. Konformbeschichtung hilft, ist aber kein Freibrief.</div></div>
+  <div class="card"><div class="ct">Verpolung</div><div class="cd">Einmal reicht. XT60 ist verpolsicher, ein aufgelötetes Kabelpaar nicht — erst löten, dann prüfen, dann Akku.</div></div>
+  <div class="card"><div class="ct">Einschaltstrom</div><div class="cd">Der Funke beim Anstecken ist normal (Kondensator lädt). Nach dem Löten: erstes Anstecken nur über Smoke Stopper.</div></div>
+  <div class="card"><div class="ct">Signalleitungen</div><div class="cd">Ein Motor dreht nicht oder zuckt? Erst Lötstellen prüfen, dann Software — abgerissene Signalleitungen sind der Klassiker nach Crashes.</div></div>
+  <div class="card"><div class="ct">Wasser</div><div class="cd">Nass gelandet: Akku sofort ab, trocknen, erst dann Strom. Feuchtigkeit plus Spannung = Elektrokorrosion.</div></div>
 </div>
 
 <div class="srcs">

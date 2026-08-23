@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Beim Videofunk zählt eine Eigenschaft mehr als Bildqualität: wie das Bild <em>stirbt</em>.</b> Analoges Video wird verrauscht, bleibt aber sichtbar und steuerbar — man sieht das Ende kommen. HDZero bricht in Blöcke auf, bleibt aber lange fliegbar. DJI und Walksnail bleiben scharf und frieren dann ohne Vorwarnung ein. Deshalb ist Reichweite bei Analog eine Kurve und bei den geschlossenen Digitalsystemen eine Kante.</div>
+<div class="kurz"><b>Wichtiger als Bildqualität ist, wie das Bild <em>stirbt</em>:</b> Analog rauscht langsam zu (man sieht das Ende kommen), HDZero bricht in Blöcke, DJI und Walksnail frieren ohne Vorwarnung ein — Reichweite ist dort eine Kante, keine Kurve.</div>
 
 <h2>Die vier Ökosysteme (Stand August 2026)</h2>
 <div class="tbl-wrap"><table style="min-width:1080px">
@@ -14,7 +14,7 @@ import "./_style.css";
 <tr><td><b>OpenIPC</b></td><td>720p/1080p über WLAN-Hardware</td><td>je nach Aufbau</td><td>konfigurierbar</td><td>Standard-WLAN-Module mit offener Firmware</td><td>Der quelloffene Bastelansatz. Beeindruckende Reichweiten möglich, deutlich mehr Eigenarbeit</td></tr>
 </tbody>
 </table></div>
-<p class="note">Latenzangaben sind Herstellerwerte im jeweils schnellsten Modus und je nach Messmethode („glass to glass“) verschieden; unabhängige Messungen liegen meist etwas höher. Verlässlich ist die Rangfolge: HDZero am schnellsten und konstant, DJI und Walksnail dicht beieinander, Analog konkurrenzfähig schnell. Vor der Kaufentscheidung: aktuelle Vergleiche bei <a href="https://oscarliang.com/fpv-system/">oscarliang.com</a> und fpvknowitall.com lesen.</p>
+<p class="note">Latenzen sind Herstellerwerte im schnellsten Modus; verlässlich ist die Rangfolge: HDZero am schnellsten und konstant, DJI/Walksnail dicht dahinter, Analog konkurrenzfähig. Vor dem Kauf: <a href="https://oscarliang.com/fpv-system/">oscarliang.com</a> und fpvknowitall.com.</p>
 
 <div class="gb">
   <div class="gb-col good"><h4>Wann Analog oder HDZero</h4>
@@ -67,7 +67,7 @@ import "./_style.css";
 </svg>
 <figcaption>Die fünf gebräuchlichen Bänder mit je acht Kanälen. Raceband (unten) ist mit 37 MHz Abstand für den Parallelbetrieb mehrerer Piloten ausgelegt. Wichtig: Etliche Kanäle — vor allem der Bänder A und E — liegen <em>außerhalb</em> des in Deutschland allgemein zugeteilten Bereichs; verbindlich ist die jeweils gültige Allgemeinzuteilung der Bundesnetzagentur.</figcaption>
 </figure>
-<div class="tip"><b>Mehrere Piloten am selben Platz.</b> Faustregel: mindestens 40 MHz Kanalabstand, besser mehr, und die Sendeleistung so weit runter, wie es der Platz erlaubt. Ein Pilot mit 800 mW auf dem Nachbarkanal legt vier andere lahm. Vor dem Einschalten fragen, welcher Kanal frei ist — der Umgangston auf Flugplätzen entscheidet sich an genau dieser Stelle. Digitale Systeme managen ihre Kanäle selbst, brauchen aber ebenfalls Absprache: Auch dort ist das Spektrum endlich (DJI: max. 2–4 Piloten parallel, HDZero: eigene Race-Kanalpläne).</div>
+<div class="tip"><b>Mehrere Piloten:</b> mindestens 40 MHz Kanalabstand, Leistung runter, <em>vor dem Einschalten</em> fragen, welcher Kanal frei ist — ein 800-mW-Sender auf dem Nachbarkanal legt vier andere lahm. Digital braucht ebenfalls Absprache (DJI: 2–4 Piloten parallel, HDZero: Race-Kanalpläne).</div>
 
 <h2>VTX- und Air-Unit-Einstellungen</h2>
 <div class="flist">
@@ -79,13 +79,13 @@ import "./_style.css";
   <div class="frow"><span class="fn">VTX-Tabelle</span><span class="fe">in Betaflight (analog)</span><span class="fx">Legt fest, welche Bänder und Leistungen die Firmware anbietet. Ohne passende Tabelle keine Kanalwahl im OSD</span></div>
   <div class="frow"><span class="fn">Kühlung</span><span class="fe">Fahrtwind nötig</span><span class="fx">VTX und Air Units auf hoher Leistung werden am Boden sehr heiß. Nie länger im Stand senden — und nie ohne Antenne</span></div>
 </div>
-<div class="stop"><b>Niemals ohne Antenne senden.</b> Ohne Antenne wird die Sendeleistung reflektiert und in der Endstufe verheizt. Viele Sender überleben das nur Sekunden. Reihenfolge deshalb immer: Antenne prüfen, dann Akku anstecken — auch bei „nur kurz testen“.</div>
+<div class="stop"><b>Niemals ohne Antenne senden</b> — die Leistung wird in der Endstufe verheizt, viele Sender überleben das nur Sekunden. Immer: erst Antenne prüfen, dann Akku.</div>
 
 <h2>Aufzeichnung</h2>
 <ul>
-  <li><b>DVR in der Brille</b> zeichnet auf, was der Pilot gesehen hat — inklusive Störungen und OSD. Nach einem Absturz oft wertvoller als schönes Material: Man sieht, wann das Bild wegging und ob vorher gewarnt wurde. Immer mitlaufen lassen.</li>
-  <li><b>Onboard-Aufnahme der Air Unit</b> liefert bei O4 und Walksnail die eigentliche Bildqualität (bis 4K, bei O4 Pro mit Log-Profil und Gyrodaten für die Stabilisierung). Für viele Cinematic-Piloten hat sie die separate Actioncam ersetzt.</li>
-  <li><b>Separate Actioncam</b> bleibt der Weg zur besten Qualität und zu freier Kamerawahl — um den Preis von 30–120 g. Details unter <a href="#kamera">Kameras &amp; Aufnahme</a>.</li>
+  <li><b>DVR in der Brille:</b> zeichnet auf, was der Pilot sah — nach einem Absturz die wichtigste Quelle. Immer mitlaufen lassen.</li>
+  <li><b>Onboard-Aufnahme:</b> bei O4/Walksnail bis 4K, bei der O4 Pro mit Log-Profil und Gyrodaten — hat für viele die Actioncam ersetzt.</li>
+  <li><b>Separate Actioncam:</b> beste Qualität, freie Wahl — kostet 30–120 g. Details: <a href="#kamera">Kameras &amp; Aufnahme</a>.</li>
 </ul>
 
 <div class="srcs">

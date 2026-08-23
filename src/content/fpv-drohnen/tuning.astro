@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Tuning heißt: so wenig filtern wie möglich und so viel wie nötig.</b> Jeder Filter entfernt Rauschen und kostet dafür Phase — also Reaktionszeit. Der Regler wird dadurch träger und darf weniger hart eingestellt werden. Das ganze Tuning ist ein Handel zwischen diesen beiden Größen, und der beste Weg, ihn zu gewinnen, ist, das Rauschen gar nicht erst entstehen zu lassen.</div>
+<div class="kurz"><b>Tuning heißt: so wenig filtern wie möglich, so viel wie nötig.</b> Jeder Filter kostet Phase, also Reaktionszeit. Der beste Weg, den Handel zu gewinnen: Rauschen gar nicht erst entstehen lassen.</div>
 
 <h2>Der Signalpfad</h2>
 <figure>
@@ -46,13 +46,13 @@ import "./_style.css";
 
 <h2>Die Reihenfolge</h2>
 <div class="steps">
-  <div class="step"><h4>Mechanik zuerst</h4>Feste Schrauben, heile Propeller, ungebogene Wellen, gute Lager, Stack weich montiert, Kabel fixiert. Jede Minute hier spart eine Stunde am Filter. Ein Quad mit mechanischem Problem lässt sich nicht sauber tunen — nur zudecken.</div>
-  <div class="step"><h4>RPM-Filter aktivieren</h4>Mit Bluejay oder AM32 auf dem ESC ist das der größte Einzelgewinn: gezielte Kerben auf die tatsächliche Motordrehfrequenz statt breitbandiger Tiefpässe. Seit Jahren Standard — erst danach ergeben weitere Schritte Sinn.</div>
-  <div class="step"><h4>Mit Standardwerten fliegen</h4>Die Voreinstellungen der aktuellen Kalenderversionen sind für ein durchschnittliches 5-Zoll-Quad gut. Erst fliegen, dann beurteilen — nicht am Schreibtisch entscheiden, dass etwas falsch sein muss.</div>
-  <div class="step"><h4>Mit den Slidern arbeiten, nicht mit Einzelwerten</h4>Der Configurator stellt Filter- und PID-Tuning als Schieberegler dar, die intern viele Parameter konsistent mitführen. Für fast alle Piloten sind die Slider der richtige Hebel; Einzelparameter sind für Sonderfälle.</div>
-  <div class="step"><h4>Blackbox aufzeichnen</h4>Ein Flug mit ruhigem Schweben, schnellen Stopps, einem Sinkflug, Vollgas. Das Log zeigt Rauschspektren und Sprungantworten — ohne das ist Tuning Raten.</div>
-  <div class="step"><h4>Filter so weit wie möglich zurücknehmen</h4>Weniger Filterung heißt weniger Verzögerung. Die Grenze ist erreicht, wenn Motoren heiß werden oder das Rauschen im Log in den Regelbereich hineinreicht.</div>
-  <div class="step"><h4>Erst dann an die PID-Werte</h4>Immer eine Größe auf einmal, mit einem Flug dazwischen. Wer drei Werte gleichzeitig ändert, weiß hinterher nicht, welcher gewirkt hat.</div>
+  <div class="step"><h4>Mechanik zuerst</h4>Feste Schrauben, heile Propeller, gute Lager, Stack weich montiert. Jede Minute hier spart eine Stunde am Filter — mechanische Probleme lassen sich nicht wegtunen, nur zudecken.</div>
+  <div class="step"><h4>RPM-Filter aktivieren</h4>Der größte Einzelgewinn: Kerben exakt auf der Motordrehfrequenz statt breiter Tiefpässe. Erst danach ergeben weitere Schritte Sinn.</div>
+  <div class="step"><h4>Mit Standardwerten fliegen</h4>Die Voreinstellungen sind für ein 5-Zoll-Quad gut. Erst fliegen, dann beurteilen.</div>
+  <div class="step"><h4>Slider statt Einzelwerte</h4>Die Schieberegler führen viele Parameter konsistent mit — für fast alle der richtige Hebel; Einzelparameter sind für Sonderfälle.</div>
+  <div class="step"><h4>Blackbox aufzeichnen</h4>Schweben, schnelle Stopps, Sinkflug, Vollgas — das Log zeigt Spektren und Sprungantworten. Ohne Log ist Tuning Raten.</div>
+  <div class="step"><h4>Filter zurücknehmen</h4>Weniger Filter = weniger Verzögerung. Grenze: heiße Motoren oder Rauschen im Regelbereich.</div>
+  <div class="step"><h4>Erst dann PID</h4>Eine Größe auf einmal, ein Flug dazwischen — sonst weiß man nicht, was gewirkt hat.</div>
 </div>
 
 <h2>Die Filterkette im Detail</h2>
@@ -66,7 +66,7 @@ import "./_style.css";
 <tr><td><b>Feedforward-Glättung</b></td><td>Stufen aus der begrenzten Auflösung der Funkstrecke</td><td>Verzögerung im FF-Pfad</td><td>Bei hohen Paketraten kaum nötig, bei 50 Hz schon</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Motortemperatur ist das ehrlichste Messgerät.</b> Handwarm nach einem Akku ist gut. Deutlich heiß heißt: Der Regler arbeitet gegen Rauschen an und schickt hochfrequente Stellbefehle an die Motoren. Fast immer zu wenig Filterung oder zu viel D — die schnellste kostenlose Diagnose, ganz ohne Log.</div>
+<div class="tip"><b>Motortemperatur ist das ehrlichste Messgerät:</b> handwarm = gut, heiß = Regler kämpft gegen Rauschen (zu wenig Filter oder zu viel D). Die schnellste Diagnose ganz ohne Log.</div>
 
 <h2>Symptome und ihre Ursachen</h2>
 <div class="tbl-wrap"><table style="min-width:1000px">
@@ -84,7 +84,7 @@ import "./_style.css";
 <tr><td><b>Ruckeln bei langsamen Schwenks</b></td><td>bei Kamerafahrten</td><td>Feedforward zu hoch bei niedriger Paketrate</td><td>Paketrate erhöhen oder FF-Glättung anheben</td></tr>
 </tbody>
 </table></div>
-<p class="note">Die Tabelle nennt die jeweils häufigste Ursache, nicht die einzige. Fast alle Symptome können auch mechanisch entstehen — ein taumelnder Motor sieht im Log aus wie ein Filterproblem. Deshalb steht Mechanik in der Reihenfolge ganz vorn.</p>
+<p class="note">Genannt ist die häufigste Ursache, nicht die einzige — fast alles kann auch mechanisch sein. Deshalb steht Mechanik ganz vorn.</p>
 
 <h2>Blackbox lesen</h2>
 <div class="grid">
@@ -97,8 +97,8 @@ import "./_style.css";
 </div>
 
 <h2>Presets</h2>
-<p>Das Preset-System im Configurator liefert geprüfte Parametersätze für Quadgrößen, Flugstile und bekannte Probleme — versionsgeprüft und dokumentiert, im Gegensatz zu kopierten CLI-Blöcken aus Foren. Für einen Neubau: passendes Klassen-Preset anwenden, fliegen, dann bei Bedarf mit den Slidern nacharbeiten.</p>
-<div class="warn"><b>Kein Preset ersetzt einen Testflug.</b> Ein Parametersatz, der auf einem baugleichen Quad hervorragend fliegt, kann auf deinem Rahmen mit anderem Stack und anderen Propellern schwingen. Nach jedem Preset: kurzer Schwebeflug, Motoren anfassen, dann erst richtig fliegen.</div>
+<p>Presets liefern geprüfte Parametersätze je Quadgröße und Flugstil — versionsgeprüft, anders als Forum-CLI-Blöcke. Neubau: Klassen-Preset anwenden, fliegen, mit Slidern nacharbeiten.</p>
+<div class="warn"><b>Kein Preset ersetzt den Testflug:</b> Was auf dem baugleichen Quad fliegt, kann auf deinem schwingen. Nach jedem Preset: kurz schweben, Motoren anfassen, dann erst richtig fliegen.</div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>

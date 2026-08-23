@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Ein Quad wird von innen nach außen gebaut.</b> Erst alles, was später schwer zugänglich ist, dann die Peripherie, zuletzt die Propeller. Wer diese Reihenfolge umdreht, lötet am Ende über einem fertigen Aufbau — und genau dann fallen Lotperlen zwischen die Platinen.</div>
+<div class="kurz"><b>Ein Quad wird von innen nach außen gebaut:</b> erst das schwer Zugängliche, dann die Peripherie, zuletzt die Propeller. Umgekehrt lötet man über dem fertigen Aufbau — und dann fallen Lotperlen zwischen die Platinen.</div>
 
 <h2>Werkzeug</h2>
 <div class="grid">
@@ -56,16 +56,16 @@ import "./_style.css";
 
 <h2>Bauablauf</h2>
 <div class="steps">
-  <div class="step"><h4>Trocken aufbauen</h4>Alles einmal ohne Löten zusammenstecken. Passt der Stack? Reichen die Motorkabel? Wo liegt der Empfänger, wo die Antennen? Diese zehn Minuten verhindern das spätere Auslöten.</div>
-  <div class="step"><h4>Motoren montieren und Kabel ablängen</h4>Schrauben auf die richtige Länge prüfen — zu lange Motorschrauben zerstören die Wicklung. Kabel so ablängen, dass sie ohne Zug am Pad ankommen, aber nicht in den Propellerkreis ragen.</div>
-  <div class="step"><h4>ESC verlöten</h4>Erst die Akkuleitung mit Kondensator, dann die zwölf Motorleitungen. Pads verzinnen, Kabel verzinnen, dann zusammenführen. Die Phasenreihenfolge ist egal — die Drehrichtung wird später in der Software gesetzt.</div>
-  <div class="step"><h4>Durchgang prüfen</h4>Multimeter auf Durchgangsprüfung, zwischen Plus und Minus der Akkuleitung messen. Ein Piepton heißt Kurzschluss — jetzt suchen, nicht nach dem Anstecken. Ein kurzer Widerstandsaufbau durch den Kondensator ist normal, dauerhafter Durchgang nicht.</div>
-  <div class="step"><h4>Stack aufbauen</h4>FC auf den ESC, Verbindungskabel stecken, Gummitüllen einsetzen, Schrauben mit leichter Vorspannung. Die Ausrichtung des FC-Pfeils nach vorn nicht vergessen — sonst fliegt das Quad um 90° verdreht.</div>
-  <div class="step"><h4>Erstes Anstecken über Smoke Stopper</h4>Ohne Propeller, ohne Empfänger, ohne VTX. Kein Rauch, keine Hitze, LED leuchtet: gut. Dann USB anschließen und prüfen, ob der FC erkannt wird.</div>
-  <div class="step"><h4>Peripherie anlöten</h4>Empfänger, VTX, Kamera, Buzzer, GPS. Jeweils Spannung prüfen, bevor das Bauteil drankommt: 5 V dürfen keine 9 V sein. Ein an 9 V gehängter Empfänger ist sofort tot.</div>
-  <div class="step"><h4>Antennen befestigen</h4>Frei stehend, aus dem Carbon heraus, im 90-Grad-Winkel zueinander, in einem TPU-Halter, der bei einem Aufprall nachgibt. Der VTX bekommt seine Antenne <b>vor</b> dem ersten Einschalten.</div>
-  <div class="step"><h4>Betaflight einrichten</h4>In der Reihenfolge unter <a href="#betaflight">Betaflight einrichten</a>. Propeller bleiben ab, bis Motorreihenfolge, Drehrichtung und Failsafe geprüft sind.</div>
-  <div class="step"><h4>Wiegen</h4>Abfluggewicht mit Akku notieren. Für die rechtliche Einordnung nötig und für die Schub-Gewicht-Rechnung im <a href="#rechner">Rechner</a>.</div>
+  <div class="step"><h4>Trocken aufbauen</h4>Alles einmal ohne Löten zusammenlegen: Passt der Stack, reichen die Kabel, wo sitzen die Antennen? Zehn Minuten, die das spätere Auslöten verhindern.</div>
+  <div class="step"><h4>Motoren montieren, Kabel ablängen</h4>Schraubenlänge prüfen (zu lang = Wicklung tot). Kabel ohne Zug ans Pad, aber raus aus dem Propellerkreis.</div>
+  <div class="step"><h4>ESC verlöten</h4>Erst Akkuleitung + Kondensator, dann die zwölf Motorleitungen (verzinnen, zusammenführen). Phasenreihenfolge egal — Drehrichtung setzt die Software.</div>
+  <div class="step"><h4>Durchgang prüfen</h4>Multimeter zwischen Akku-Plus und -Minus: Dauerpiepen = Kurzschluss, jetzt suchen. (Kurzes Ansprechen durch den ladenden Kondensator ist normal.)</div>
+  <div class="step"><h4>Stack aufbauen</h4>FC auf den ESC, Tüllen rein, leicht vorspannen. FC-Pfeil nach vorn — sonst fliegt das Quad verdreht.</div>
+  <div class="step"><h4>Erstes Anstecken: Smoke Stopper</h4>Ohne Propeller und Peripherie. Kein Rauch, keine Hitze, LED an — dann USB und FC-Erkennung prüfen.</div>
+  <div class="step"><h4>Peripherie anlöten</h4>Empfänger, Air Unit/VTX, GPS, Buzzer — vorher jeweils die Padspannung messen: Ein Empfänger an 9 V ist sofort tot.</div>
+  <div class="step"><h4>Antennen befestigen</h4>Frei, raus aus dem Carbon, im 90°-Winkel, im nachgiebigen TPU-Halter. Die Videoantenne kommt <b>vor</b> dem ersten Einschalten dran.</div>
+  <div class="step"><h4>Betaflight einrichten</h4>Reihenfolge: <a href="#betaflight">Betaflight einrichten</a>. Propeller bleiben ab, bis Motoren und Failsafe geprüft sind.</div>
+  <div class="step"><h4>Wiegen</h4>Abfluggewicht mit Akku notieren — für Recht und <a href="#rechner">Rechner</a>.</div>
 </div>
 
 <h2>Prüfliste vor dem Erstflug</h2>
@@ -88,13 +88,13 @@ import "./_style.css";
 
 <h2>Der erste Flug</h2>
 <div class="steps">
-  <div class="step"><h4>Ort wählen</h4>Große freie Fläche, kein Publikum, keine Straße, keine Tiere, kein Wind. Rechtliche Voraussetzungen vorher klären — siehe <a href="#recht">Recht &amp; Sicherheit</a>.</div>
-  <div class="step"><h4>Ohne Brille schweben</h4>Zwanzig Zentimeter hoch, in Sichtweite, ein paar Sekunden. Es geht nur um eine Frage: Bleibt das Quad ruhig oder kippt es? Dann sofort landen und alle vier Motoren anfassen.</div>
-  <div class="step"><h4>Motoren prüfen</h4>Handwarm ist in Ordnung. Ein deutlich heißerer Motor als die anderen heißt: sofort aufhören und suchen. Alle vier heiß heißt Tuning- oder Filterproblem.</div>
-  <div class="step"><h4>Mit Brille schweben</h4>Erst dann. Die Umstellung auf die Brille ist selbst schon eine Übung — sie sollte nicht mit dem Erstflug eines unbekannten Quads zusammenfallen.</div>
-  <div class="step"><h4>Nach dem ersten Akku alles nachziehen</h4>Vibration löst Schrauben. Nach dem ersten Flug jede Schraube prüfen, Lötstellen ansehen, Propeller kontrollieren. Danach ist das Quad eingefahren.</div>
+  <div class="step"><h4>Ort wählen</h4>Große freie Fläche, kein Publikum, kein Wind. Rechtliches vorher: <a href="#recht">Recht &amp; Sicherheit</a>.</div>
+  <div class="step"><h4>Ohne Brille schweben</h4>20 cm hoch, wenige Sekunden: Bleibt es ruhig? Landen, alle vier Motoren anfassen.</div>
+  <div class="step"><h4>Motoren prüfen</h4>Handwarm ok. Einer heißer als die anderen = Mechanik suchen; alle vier heiß = Filter/Tuning.</div>
+  <div class="step"><h4>Mit Brille schweben</h4>Erst jetzt — die Brillenumstellung ist selbst eine Übung und gehört nicht in den Erstflug.</div>
+  <div class="step"><h4>Nach dem ersten Akku nachziehen</h4>Vibration löst Schrauben — einmal alles prüfen, dann ist das Quad eingefahren.</div>
 </div>
-<div class="stop"><b>Vier Regeln, die nicht verhandelbar sind.</b> Erstens: Propeller ab, sobald der Akku steckt und man am Quad arbeitet. Zweitens: Akku ab, bevor man das Quad aufhebt. Drittens: Nie über Menschen. Viertens: Nie mit beschädigtem Propeller starten. Die meisten ernsthaften Verletzungen in diesem Hobby entstehen am Boden, nicht in der Luft.</div>
+<div class="stop"><b>Vier nicht verhandelbare Regeln:</b> ① Propeller ab, wenn am Quad gearbeitet wird. ② Akku ab, bevor man es aufhebt. ③ Nie über Menschen. ④ Nie mit beschädigtem Propeller. Die meisten Verletzungen passieren am Boden.</div>
 
 <h2>Feldkiste</h2>
 <div class="grid3">
