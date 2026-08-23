@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Steuerfunk und Videofunk sind zwei getrennte Systeme.</b> Der RC-Link überträgt die Knüppelstellungen zum Quad und Telemetrie zurück — schmalbandig, fehlergesichert, auf maximale Reichweite ausgelegt. Er ist die kritischste Verbindung am ganzen Gerät: Wenn das Videobild ausfällt, fliegt man blind; wenn der RC-Link ausfällt, fliegt gar niemand mehr.</div>
+<div class="kurz"><b>Der RC-Link ist die kritischste Verbindung am Gerät:</b> Fällt das Video aus, fliegt man blind — fällt der RC-Link aus, fliegt gar niemand mehr. Er ist schmalbandig, fehlergesichert und auf Reichweite ausgelegt.</div>
 
 <h2>Die Systeme</h2>
 <div class="tbl-wrap"><table style="min-width:1000px">
@@ -15,10 +15,10 @@ import "./_style.css";
 <tr><td><b>FrSky / Spektrum</b></td><td>2,4 GHz</td><td>SBUS/F.Port · SRXL2</td><td>proprietär</td><td>Vor allem im Bestand und im klassischen Modellflug; im FPV-Neubau kaum noch</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Für einen Neubau gibt es faktisch eine Antwort: ExpressLRS.</b> Empfänger kosten wenig, laufen auf 2,4 GHz wie auf 868 MHz, die Dokumentation ist gut, und praktisch jede Funke lässt sich nachrüsten. Der große Stolperstein der 4er-Linie: <b>ein 4.x-Sender bindet nicht an einen 3.x-Empfänger</b> — das neue Bindeverfahren ist der größte Kompatibilitätsbruch der Projektgeschichte. Vor dem Erstflug beide Seiten auf denselben Hauptstand bringen (ExpressLRS-Configurator, siehe <a href="#software">Software &amp; Apps</a>). Neu in 4.x außerdem: Armieren auf beliebigem Kanal statt fest auf Kanal 5 und eine überarbeitete dynamische Sendeleistung.</div>
+<div class="tip"><b>Für einen Neubau gibt es faktisch eine Antwort: ExpressLRS.</b> Günstig, 2,4 GHz und 868 MHz, jede Funke nachrüstbar. Der Stolperstein der 4er-Linie: <b>4.x-Sender binden nicht an 3.x-Empfänger</b> — vor dem Erstflug beide Seiten auf denselben Stand bringen (<a href="#software">Configurator</a>). Neu in 4.x: Armieren auf beliebigem Kanal, glattere dynamische Sendeleistung.</div>
 
 <h2>Paketrate, Empfindlichkeit, Reichweite</h2>
-<p>Jedes moderne System lässt die Paketrate wählen. Dahinter steht ein physikalischer Zusammenhang, der nicht verhandelbar ist: <b>Je schneller gesendet wird, desto kürzer ist jedes Symbol — und desto mehr Rauschen sieht der Empfänger.</b> Reichweite und Reaktionszeit sind direkt gegeneinander eingetauscht.</p>
+<p><b>Je schneller gesendet wird, desto mehr Rauschen sieht der Empfänger</b> — Reichweite und Reaktionszeit sind direkt gegeneinander eingetauscht:</p>
 <figure>
 <svg class="dg l" viewBox="0 0 660 240" role="img" aria-label="Empfängerempfindlichkeit in dBm je Paketrate bei ExpressLRS, 2,4 Gigahertz und 868 Megahertz">
   <path class="gd" d="M150,36 H640 M150,72 H640 M150,108 H640 M150,144 H640 M150,180 H640" />
@@ -56,28 +56,28 @@ import "./_style.css";
   <div class="frow"><span class="fn">RSSI in Prozent</span><span class="fe">0–100 %</span><span class="fx">Umgerechnete Hilfsgröße. Für Warnschwellen brauchbar, für Vergleiche zwischen Systemen wertlos</span></div>
   <div class="frow"><span class="fn">Sendeleistung</span><span class="fe">mW / dBm</span><span class="fx">Verdopplung = 3 dB ≈ 40 % mehr Reichweite. Von 25 auf 250 mW sind es 10 dB — Faktor gut 3</span></div>
 </div>
-<div class="warn"><b>Der Alarm gilt LQ, nicht RSSI.</b> Ein Link mit −95 dBm und 100 % LQ ist in Ordnung. Ein Link mit −70 dBm und 80 % LQ hat ein Problem — meist Abschattung durch den eigenen Körper, eine Antenne im Carbon oder ein Störer in der Nähe. Wer nur auf RSSI schaut, dreht an der falschen Schraube.</div>
+<div class="warn"><b>Der Alarm gilt LQ, nicht RSSI:</b> −95 dBm bei 100 % LQ ist in Ordnung; −70 dBm bei 80 % LQ ist ein Problem (Körperabschattung, Antenne im Carbon, Störer).</div>
 
 <h2>Failsafe — die wichtigste Einstellung überhaupt</h2>
 <div class="steps">
-  <div class="step"><h4>Empfänger auf „no pulses“</h4>Der Empfänger darf im Failsafe keine Kanäle mehr ausgeben. Bei CRSF-Systemen ist das der Normalfall; ältere SBUS-Empfänger müssen darauf eingestellt werden. Ein Empfänger, der die letzte Gasstellung hält, schickt das Quad geradeaus weiter.</div>
-  <div class="step"><h4>Betaflight-Stage-2 auf „Drop“</h4>Standard ist sofortiges Abschalten der Motoren. Für Freestyle über bewohntem Gebiet ist das richtig: Ein herunterfallendes Quad ist berechenbar, ein wegfliegendes nicht.</div>
-  <div class="step"><h4>GPS Rescue nur mit Vorbereitung</h4>Auf Strecke kann automatische Rückkehr sinnvoll sein — Betaflight hat die Funktion in den letzten Versionen grundlegend überarbeitet. Aber nur mit sauber gesetztem Home-Punkt, ausreichender Satellitenzahl, geprüfter Rückkehrhöhe und einem Test in sicherer Umgebung. Schlecht eingerichtet ist GPS Rescue gefährlicher als der Absturz, den es verhindern soll.</div>
-  <div class="step"><h4>Am Boden testen</h4>Propeller ab, armieren, Funke ausschalten. Die Motoren müssen stoppen und Betaflight muss den Failsafe-Zustand anzeigen. Dreißig Sekunden, die zu jedem Neubau gehören.</div>
+  <div class="step"><h4>Empfänger auf „no pulses“</h4>Im Failsafe keine Kanäle mehr ausgeben (bei CRSF Standard, bei altem SBUS einstellen) — ein Empfänger, der das letzte Gas hält, schickt das Quad geradeaus weiter.</div>
+  <div class="step"><h4>Betaflight-Stage-2 auf „Drop“</h4>Motoren sofort aus. Ein fallendes Quad ist berechenbar, ein wegfliegendes nicht.</div>
+  <div class="step"><h4>GPS Rescue nur mit Vorbereitung</h4>Home-Punkt, Satellitenzahl, Rückkehrhöhe prüfen und in sicherer Umgebung testen. Schlecht eingerichtet ist Rescue gefährlicher als der Absturz, den es verhindern soll.</div>
+  <div class="step"><h4>Am Boden testen</h4>Propeller ab, armieren, Funke aus — Motoren müssen stoppen. Dreißig Sekunden, die zu jedem Neubau gehören.</div>
 </div>
 
 <h2>Antennen, Diversity, Sendeleistung</h2>
 <ul>
-  <li><b>Empfängerantennen frei stellen.</b> Zwei Antennen im 90-Grad-Winkel zueinander sind Standard — dann ist immer eine günstig zum Sender polarisiert. Beide müssen aus dem Carbon herausragen.</li>
-  <li><b>Echte Diversity gibt es auch senderseitig:</b> Im Gemini-Modus senden ELRS-Module über zwei Frequenzen gleichzeitig, passende Empfänger werten beide aus — spürbar weniger Aussetzer in zerklüftetem Gelände.</li>
-  <li><b>Nicht kürzen, nicht knicken.</b> Die Antennenlänge ist auf die Frequenz abgestimmt. Ein gekürzter Draht ist keine Antenne mehr, sondern eine Fehlanpassung.</li>
-  <li><b>Dynamische Sendeleistung</b> regelt automatisch hoch, wenn der Link schwächer wird — in ELRS 4.x mit deutlich glatterem Regelverhalten. Bei Long Range trotzdem eine sinnvolle Untergrenze setzen.</li>
+  <li><b>Empfängerantennen frei und im 90°-Winkel</b> — dann ist immer eine günstig polarisiert. Beide raus aus dem Carbon.</li>
+  <li><b>Gemini:</b> ELRS sendet auf zwei Frequenzen gleichzeitig — spürbar weniger Aussetzer in zerklüftetem Gelände.</li>
+  <li><b>Nicht kürzen, nicht knicken</b> — ein gekürzter Draht ist keine Antenne mehr, sondern eine Fehlanpassung.</li>
+  <li><b>Dynamische Sendeleistung</b> regelt automatisch hoch; bei Long Range eine sinnvolle Untergrenze setzen.</li>
   <li><b>Rechtlich</b> gilt in der EU für 2,4 GHz allgemein 100 mW EIRP; im 868-MHz-Band gelten zusätzlich Sendezeitbeschränkungen. Details unter <a href="#recht">Recht &amp; Sicherheit</a>.</li>
 </ul>
 <p class="note">Was Sendeleistung, Antennengewinn und Empfindlichkeit gemeinsam für die Reichweite bedeuten, rechnet der <a href="#rechner">Link-Budget-Rechner</a> durch. HF-Grundlagen unter <a href="#antennen">Antennen &amp; HF</a>.</p>
 
 <h2>Telemetrie</h2>
-<p>CRSF überträgt in beide Richtungen. Zurück zur Funke kommen typischerweise Akkuspannung und verbrauchte Kapazität, RSSI/LQ/SNR beider Richtungen, GPS-Position und Höhe, Fluglage und Warnungen. Der praktische Nutzen: Ein Ansageskript auf der EdgeTX-Funke, das Spannung und LQ vorliest, ersetzt den Blick aufs OSD — und in der Brille ist jeder Blick, den man nicht auf Zahlen wirft, ein Blick auf die Umgebung.</p>
+<p>CRSF liefert zurück: Spannung, verbrauchte mAh, RSSI/LQ/SNR, GPS, Warnungen. Der Nutzen: Ein EdgeTX-Ansageskript liest Spannung und LQ vor — jeder Blick, der nicht auf Zahlen geht, geht auf die Umgebung.</p>
 
 <div class="srcs">
   <div class="sh">Quellen</div>

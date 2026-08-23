@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Eine FPV-Drohne ist ein Regelkreis mit Propellern.</b> Ein Gyroskop misst tausendfach je Sekunde, wie sich das Gerät dreht, ein PID-Regler vergleicht das mit dem Knüppelausschlag und verteilt die Differenz auf vier Motoren. Alles andere — Rahmen, Akku, Funk, Kamera — hängt an dieser einen Schleife. Wer das Prinzip verstanden hat, kann jedes Problem einordnen.</div>
+<div class="kurz"><b>Eine FPV-Drohne ist ein Regelkreis mit Propellern.</b> Ein Gyro misst tausendfach je Sekunde die Drehung, ein PID-Regler vergleicht sie mit dem Knüppel und verteilt die Differenz auf vier Motoren — alles andere hängt an dieser einen Schleife.</div>
 
 
 <figure>
@@ -52,7 +52,7 @@ import "./_style.css";
 </figure>
 
 <h2>Wofür dieses Modul da ist</h2>
-<p>Dies ist ein Nachschlagewerk mit zwei Sorten von Inhalt. Die <b>Zusammenhänge</b> — warum ein 5-Zoll-Quad an 6S um 1800 kV fliegt, was ein Kerbfilter kostet, weshalb ein Videobild verrauscht, obwohl die Reichweite stimmen müsste — veralten nicht. Die <b>Kennzahlen und Produktgenerationen</b> — welche Air Unit, welche Brille, welche Firmware-Version — tragen ein Stand-Datum und sind bewusst als solche gekennzeichnet: <b>Stand August 2026.</b> Für alles danach stehen die Anlaufstellen unter <a href="#quellen">Quellen &amp; Kanäle</a> — allen voran <a href="https://oscarliang.com/">oscarliang.com</a> und Joshua Bardwells <a href="https://www.fpvknowitall.com/">fpvknowitall.com</a>, deren laufend gepflegte Kauflisten dieses Modul absichtlich nicht dupliziert.</p>
+<p>Zwei Sorten Inhalt: <b>Zusammenhänge</b>, die nicht veralten — und <b>Kennzahlen mit Stand-Datum (August 2026)</b>. Für alles danach: <a href="#quellen">Quellen &amp; Kanäle</a>, allen voran <a href="https://oscarliang.com/">oscarliang.com</a> und <a href="https://www.fpvknowitall.com/">fpvknowitall.com</a> — deren gepflegte Kauflisten dieses Modul bewusst nicht dupliziert.</p>
 
 <div class="map">
   <a href="#klassen"><div class="mt"><span class="i">🧭</span>Ich weiß noch nicht, was ich bauen will</div><div class="md">Bauformen von Tinywhoop bis Long Range, mit Kennzahlen je Klasse und Größenvergleich</div></a>
@@ -68,7 +68,7 @@ import "./_style.css";
 </div>
 
 <h2>Die sieben Baugruppen</h2>
-<p>Jede FPV-Drohne besteht aus denselben sieben Blöcken. Wer eine Fehlfunktion einem Block zuordnen kann, hat die Suche schon halbiert.</p>
+<p>Wer eine Fehlfunktion einem der sieben Blöcke zuordnen kann, hat die Suche halbiert.</p>
 <div class="tbl-wrap"><table style="min-width:880px">
 <thead><tr><th>Block</th><th>Aufgabe</th><th>Typische Teile</th><th>Was passiert, wenn er versagt</th></tr></thead>
 <tbody>
@@ -84,21 +84,21 @@ import "./_style.css";
 
 <h2>Realistische Erwartungen</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Flugzeit ist kurz</div><div class="cd">Ein 5-Zoll-Freestyle-Quad fliegt 3 bis 5 Minuten, ein Renn-Quad zwei. Nur effiziente 7-Zöller mit Li-Ion-Pack kommen auf 20 Minuten und mehr. Wer Stunden erwartet, sucht eine Kameradrohne, keine FPV-Drohne.</div></div>
-  <div class="card"><div class="ct">Es geht kaputt</div><div class="cd">Propeller sind Verschleißteil, Arme brechen, Kameras verstellen sich. Ein Satz Ersatzteile gehört zum Erstkauf, nicht zur späteren Nachbestellung. Reparaturfähigkeit ist der Grund, warum die Szene selbst lötet.</div></div>
-  <div class="card"><div class="ct">Fliegen lernt man im Simulator</div><div class="cd">Zehn bis zwanzig Stunden Simulator vor dem ersten echten Flug sind normal und sparen das Vielfache an Ersatzteilen. Der Simulator ist der billigste Teil der ganzen Ausrüstung.</div></div>
-  <div class="card"><div class="ct">Funke und Brille bleiben, das Quad ist austauschbar</div><div class="cd">Die Investition, die über Jahre trägt, sind Fernsteuerung, Goggles und Simulator-Übungsstunden. Das Quad selbst ist der billigere, ersetzbare Teil — ein BNF-Set nimmt den Bau ab, nicht das Einrichten.</div></div>
-  <div class="card"><div class="ct">Das Videosystem ist eine Ökosystem-Entscheidung</div><div class="cd">Wer sich für DJI, Walksnail oder HDZero entscheidet, kauft Brille und Air Units im selben System. Ein Wechsel später heißt: neue Brille. Deshalb steht die Entscheidung unter <a href="#video">Videoübertragung</a> so weit vorn.</div></div>
-  <div class="card"><div class="ct">Recht ist kein Randthema</div><div class="cd">FPV bedeutet in der EU: Fliegen ohne direkten Sichtkontakt. Das ist in der offenen Kategorie nur mit Beobachter zulässig. Registrierung und Haftpflicht sind Pflicht, nicht Empfehlung — siehe <a href="#recht">Recht &amp; Sicherheit</a>.</div></div>
+  <div class="card"><div class="ct">Flugzeit ist kurz</div><div class="cd">5″ Freestyle: 3–5 min, Race: ~2 min. Nur effiziente 7-Zöller mit Li-Ion schaffen 20+. Wer Stunden erwartet, sucht eine Kameradrohne.</div></div>
+  <div class="card"><div class="ct">Es geht kaputt</div><div class="cd">Propeller sind Verschleißteil, Arme brechen. Ersatzteile gehören zum Erstkauf — Reparaturfähigkeit ist der Grund, warum die Szene selbst lötet.</div></div>
+  <div class="card"><div class="ct">Fliegen lernt man im Simulator</div><div class="cd">10–20 Stunden vor dem ersten echten Flug sind normal — der billigste Teil der ganzen Ausrüstung.</div></div>
+  <div class="card"><div class="ct">Funke und Brille bleiben</div><div class="cd">Fernsteuerung, Goggles und Übungsstunden tragen über Jahre. Das Quad ist der ersetzbare Teil — BNF nimmt den Bau ab, nicht das Einrichten.</div></div>
+  <div class="card"><div class="ct">Videosystem = Ökosystem</div><div class="cd">DJI, Walksnail oder HDZero bindet Brille und Air Units aneinander; ein Wechsel heißt neue Brille. Entscheidung: <a href="#video">Videoübertragung</a>.</div></div>
+  <div class="card"><div class="ct">Recht ist kein Randthema</div><div class="cd">FPV heißt in der EU: nur mit Beobachter. Registrierung und Haftpflicht sind Pflicht — <a href="#recht">Recht &amp; Sicherheit</a>.</div></div>
 </div>
 
 <h2>Wie man dieses Modul liest</h2>
 <div class="steps">
-  <div class="step"><h4>Erst Klasse wählen, dann Teile</h4>Die Bauform legt fast alle anderen Entscheidungen fest: Propellergröße bestimmt Motorgröße, die bestimmt kV und Zellenzahl, die bestimmt ESC-Strom und Akku. Rückwärts funktioniert das nicht. Anfang: <a href="#klassen">Bauformen &amp; Klassen</a>.</div>
-  <div class="step"><h4>Die Physik einmal lesen, danach nie wieder raten</h4>Warum vier Motoren und nicht drei, wie Gieren ohne Heckrotor funktioniert, was Schub-Gewicht bedeutet: <a href="#physik">Flugphysik &amp; Regelkreis</a>. Danach ergibt jede Tuning-Anleitung Sinn.</div>
-  <div class="step"><h4>Komponentenabschnitte als Nachschlagewerk benutzen</h4>Die Abschnitte zu Rahmen, Motoren, Propellern, ESC und Akku sind zum Blättern gedacht, nicht zum Durchlesen. Jeder endet mit den Werten, die man beim Kauf wirklich vergleicht.</div>
-  <div class="step"><h4>Funk und Video trennen</h4>Steuerfunk und Videofunk sind zwei völlig getrennte Systeme mit eigenen Frequenzen, Antennen und Fehlerbildern. Sie zu verwechseln ist die häufigste Ursache für falsche Diagnosen.</div>
-  <div class="step"><h4>Recht vor dem ersten Flug klären</h4>Nicht danach. Registrierung und Kompetenznachweis dauern zusammen einen Nachmittag.</div>
+  <div class="step"><h4>Erst Klasse wählen, dann Teile</h4>Propellergröße → Motorgröße → kV und Zellenzahl → ESC und Akku. Rückwärts funktioniert das nicht. Anfang: <a href="#klassen">Bauformen &amp; Klassen</a>.</div>
+  <div class="step"><h4>Die Physik einmal lesen</h4>Wie vier Propeller sechs Bewegungen erzeugen und was Schub-Gewicht heißt: <a href="#physik">Flugphysik &amp; Regelkreis</a>. Danach ergibt jede Tuning-Anleitung Sinn.</div>
+  <div class="step"><h4>Komponenten: blättern, nicht durchlesen</h4>Rahmen bis Akku sind zum Nachschlagen gebaut — mit den Werten, die man beim Kauf wirklich vergleicht.</div>
+  <div class="step"><h4>Funk und Video trennen</h4>Zwei getrennte Systeme mit eigenen Frequenzen, Antennen und Fehlerbildern — sie zu verwechseln ist die häufigste Fehldiagnose.</div>
+  <div class="step"><h4>Recht vor dem ersten Flug</h4>Registrierung und Kompetenznachweis dauern zusammen einen Nachmittag.</div>
 </div>
 
 <div class="srcs">

@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Ein Quadrocopter ist von sich aus instabil.</b> Er hat vier Motoren, aber sechs Freiheitsgrade — ohne Regelung würde er sofort kippen. Fliegbar wird er erst dadurch, dass ein Gyroskop die Drehraten misst und ein PID-Regler achttausendmal je Sekunde nachkorrigiert. Was der Pilot am Knüppel vorgibt, ist nicht die Lage, sondern die <em>gewünschte Drehrate</em>.</div>
+<div class="kurz"><b>Ein Quadrocopter ist von sich aus instabil</b> — fliegbar wird er erst durch die Regelung: Gyro misst, PID korrigiert, tausende Male je Sekunde. Der Knüppel gibt dabei nicht die Lage vor, sondern die <em>gewünschte Drehrate</em>.</div>
 
 <h2>Wie vier Propeller sechs Bewegungen erzeugen</h2>
 <figure>
@@ -75,7 +75,7 @@ import "./_style.css";
 </svg>
 <figcaption>Der innere Regelkreis. Er läuft ohne Lagesensor, ohne GPS und ohne Kamera — nur auf Drehraten. Genau deshalb funktioniert Acro auch kopfüber.</figcaption>
 </figure>
-<p>Im Acro-Modus regelt Betaflight <b>Drehraten, keine Lagen</b>. Der Knüppel gibt vor, wie schnell sich das Quad drehen soll; steht er in der Mitte, lautet der Sollwert „null Grad je Sekunde“ — also „halte, was du gerade hast“, nicht „richte dich waagerecht aus“. Das ist der ganze Unterschied zu einer Kameradrohne und der Grund, warum man Acro üben muss.</p>
+<p>Acro regelt <b>Drehraten, keine Lagen</b>: Knüppelmitte heißt „null Grad je Sekunde — halte, was du hast“, nicht „richte dich auf“. Das ist der ganze Unterschied zur Kameradrohne und der Grund, warum man Acro üben muss.</p>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Anteil</th><th>Wirkung am Quad</th><th>Symptom bei zu viel</th><th>Symptom bei zu wenig</th></tr></thead>
 <tbody>
@@ -92,12 +92,12 @@ import "./_style.css";
   <span class="f">F ∝ n²  ·  P ∝ n³  ·  T/W = n_Motoren · F_max / m</span>
   <span class="l">Der Schub eines Propellers wächst mit dem Quadrat der Drehzahl, die nötige Leistung mit der dritten Potenz. Doppelte Drehzahl heißt vierfacher Schub — und achtfache Leistung.</span>
 </div>
-<p>Aus diesem Zusammenhang folgt fast alles Praktische:</p>
+<p>Daraus folgt fast alles Praktische:</p>
 <ul>
-  <li><b>Große Propeller sind effizienter.</b> Sie bewegen viel Luft langsam statt wenig Luft schnell. Ein 7-Zöller braucht für dasselbe Gewicht deutlich weniger Leistung als ein 5-Zöller — deshalb fliegt Long Range mit großen Propellern und niedrigen kV.</li>
-  <li><b>Der letzte Gasbereich kostet unverhältnismäßig viel.</b> Von 80 auf 100 % Drehzahl steigt der Schub um 56 %, die Leistung aber um 95 %. Deshalb bricht die Akkuspannung im Vollgas so stark ein.</li>
-  <li><b>Schub-Gewicht bestimmt das Fluggefühl.</b> Unter 2:1 ist ein Quad kaum steuerbar, 3–5:1 fliegt sich ruhig und filmtauglich, 8–12:1 ist Freestyle- und Rennbereich. Rechnen: <a href="#rechner">Rechner</a>.</li>
-  <li><b>Schwebegas verrät die Auslegung.</b> Wer bei 50 % Gas schwebt, hat zu wenig Reserve; bei 15 % ist die Gasauflösung am Knüppel unangenehm grob. 20–30 % gelten als angenehmer Bereich — nachrechnen im <a href="#rechner">Rechner</a>.</li>
+  <li><b>Große Propeller sind effizienter</b> — viel Luft langsam statt wenig Luft schnell. Deshalb fliegt Long Range mit großen Propellern und niedrigen kV.</li>
+  <li><b>Der letzte Gasbereich ist teuer:</b> Von 80 auf 100 % Drehzahl bringt +56 % Schub für +95 % Leistung — deshalb sackt die Akkuspannung im Vollgas so stark.</li>
+  <li><b>Schub-Gewicht = Fluggefühl:</b> unter 2:1 kaum steuerbar, 3–5:1 ruhig und filmtauglich, 8–12:1 Freestyle/Race. Rechnen: <a href="#rechner">Rechner</a>.</li>
+  <li><b>Schwebegas verrät die Auslegung:</b> 50 % = zu wenig Reserve, 15 % = zu grobe Gasauflösung, 20–30 % = angenehm.</li>
 </ul>
 
 <h2>Prop Wash und andere unangenehme Physik</h2>

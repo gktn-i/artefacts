@@ -1,10 +1,10 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Die Reihenfolge ist entscheidend.</b> Wer im Konfigurator von oben nach unten geht, landet zwangsläufig bei einem armierenden Quad mit falscher Motorreihenfolge. Die Reihenfolge unten baut aufeinander auf: erst Erkennen, dann Kommunizieren, dann Bewegen, dann Fliegen. Propeller bleiben dabei bis zum letzten Schritt ab.</div>
+<div class="kurz"><b>Die Reihenfolge ist entscheidend:</b> erst Erkennen, dann Kommunizieren, dann Bewegen, dann Fliegen. Propeller bleiben bis zum letzten Schritt ab.</div>
 
 <h2>Versionen verstehen: Kalender statt 4.x</h2>
-<p>Betaflight hat sein Versionsschema umgestellt: Auf 4.5 folgte nicht 4.6, sondern <b>2025.12</b> — seither erscheinen planmäßig zwei Hauptversionen je Jahr (Juni und Dezember), benannt nach Jahr und Monat, mit Patch-Nummern dahinter. <b>Aktuell ist die 2026.6-Linie (Stand August 2026).</b> Das macht auf einen Blick sichtbar, wie alt eine Anleitung ist: Ein Tutorial zu 4.3 beschreibt eine Firmware von 2022.</p>
+<p>Auf 4.5 folgte nicht 4.6, sondern <b>2025.12</b>: Kalenderversionen, zwei Releases je Jahr (Juni/Dezember). <b>Aktuell: 2026.6-Linie (Stand August 2026).</b> Praktisch: Man sieht jeder Anleitung sofort ihr Alter an.</p>
 <div class="tbl-wrap"><table style="min-width:860px">
 <thead><tr><th>Version</th><th>Erschienen</th><th>Wichtigste Neuerungen</th></tr></thead>
 <tbody>
@@ -13,22 +13,22 @@ import "./_style.css";
 <tr><td><b>2026.6</b></td><td>Juni 2026</td><td>Umschaltbare Akkuprofile, Positionshaltung mit optischem Fluss, grundlegend überarbeitetes GPS Rescue, Blackbox-Viewer in der App, neue Chip-Ziele (u. a. STM32H5, ESP32), erweiterte MAVLink-Telemetrie, DroneCAN-GPS</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Drei Wege zur Konfiguration.</b> Der klassische <b>Betaflight Configurator</b> (Desktop/PWA), die <b>Betaflight App</b> (Browser/Handy, verbindet sich auch drahtlos per Bluetooth) und die <b>SpeedyBee-App</b> (Bluetooth/WLAN, konfiguriert auch INAV und analysiert Blackbox-Logs am Handy). Für die Ersteinrichtung ist der Desktop-Configurator am übersichtlichsten; am Flugfeld sind die Apps Gold wert — alle drei im Überblick unter <a href="#software">Software &amp; Apps</a>.</div>
+<div class="tip"><b>Drei Wege zur Konfiguration:</b> Betaflight Configurator (Desktop/PWA — für die Ersteinrichtung), Betaflight App und SpeedyBee-App (Bluetooth, fürs Feld). Überblick: <a href="#software">Software &amp; Apps</a>.</div>
 
 <h2>In dieser Reihenfolge einrichten</h2>
 <div class="steps">
-  <div class="step"><h4>Firmware flashen und Grundzustand herstellen</h4>Passendes Target wählen (steht auf der FC-Platine oder im Handbuch), volle Löschung aktivieren, flashen. Danach ist alles auf Werkseinstellung — genau das ist gewollt. Eine übernommene Konfiguration von einem anderen Quad ist eine der häufigsten Ursachen für unerklärliches Verhalten.</div>
-  <div class="step"><h4>Ports zuweisen</h4>Für jeden UART festlegen, was dranhängt: Empfänger auf Serial RX, VTX-Steuerung (SmartAudio/Tramp) oder MSP-DisplayPort für die Air Unit, GPS, ESC-Telemetrie. Ein falsch zugewiesener Port ist der Grund Nummer eins, warum der Empfänger „nicht funktioniert“.</div>
-  <div class="step"><h4>Ausrichtung prüfen</h4>Im Setup-Tab das Quad kippen: Das 3D-Modell muss mitkippen. Stimmt die Richtung nicht, ist der FC verdreht eingebaut — über Board Alignment korrigieren, nicht später über das Tuning.</div>
-  <div class="step"><h4>Empfänger einrichten</h4>Protokoll wählen (ELRS/Crossfire: CRSF), binden, dann im Receiver-Tab jeden Knüppel prüfen: richtiger Balken, richtige Richtung, Mitte 1500, Endpunkte 1000/2000.</div>
-  <div class="step"><h4>Modi festlegen</h4>Armieren auf einen Schalter. Dazu nach Bedarf Turtle-Modus, Buzzer, Blackbox, VTX-Leistungsstufen, GPS Rescue. Angle/Horizon nur, wenn man sie wirklich nutzen will.</div>
-  <div class="step"><h4>Failsafe einrichten und testen</h4>Stage 2 auf Drop, dann ohne Propeller armieren und die Funke ausschalten — Motoren müssen sofort stoppen. Details unter <a href="#funk">Funkstrecke</a>.</div>
-  <div class="step"><h4>Motorreihenfolge und Drehrichtung — <b>ohne Propeller</b></h4>Im Motoren-Tab jeden Motor einzeln anlaufen lassen: Läuft der richtige? Dreht er richtig herum? Korrigiert wird per Motor-Remap oder im ESC-Konfigurator — nicht durch Umlöten.</div>
-  <div class="step"><h4>Bidirektionales DShot und RPM-Filter</h4>Voraussetzung: Bluejay oder AM32 auf dem ESC. Danach im Motoren-Tab prüfen, dass alle vier Motoren eine plausible Drehzahl melden. Fehlt die Rückmeldung eines Motors, darf der RPM-Filter nicht aktiv bleiben.</div>
-  <div class="step"><h4>Akkuwerte kalibrieren</h4>Spannung gegen ein Multimeter abgleichen; den Stromsensor nach dem ersten Flug anhand der nachgeladenen Kapazität. Ein falsch skalierter Sensor macht die mAh-Anzeige — den wichtigsten Tankanzeiger — wertlos.</div>
-  <div class="step"><h4>OSD einrichten</h4>Weniger ist mehr: Spannung, verbrauchte mAh, Flugzeit, LQ/RSSI, Flugmodus, Warnungen. Bei digitalen Systemen läuft das über MSP-DisplayPort und ist gestochen scharf.</div>
-  <div class="step"><h4>Rates einstellen</h4>Typisch 650–800 °/s für Freestyle. Wer aus dem Simulator kommt, überträgt seine dortigen Rates — dann fühlt sich das echte Quad sofort vertraut an.</div>
-  <div class="step"><h4>Sichern</h4><code>diff all</code> in der CLI, Ausgabe in eine Textdatei, benennen, aufheben. Nach jeder bewährten Änderung wiederholen. Das ist die einzige Sicherung, die nach einem Firmware-Update noch etwas wert ist.</div>
+  <div class="step"><h4>Firmware flashen</h4>Target wählen (steht auf der FC-Platine), volle Löschung, flashen. Werkseinstellung ist gewollt — übernommene Fremdkonfigurationen sind eine Hauptquelle unerklärlichen Verhaltens.</div>
+  <div class="step"><h4>Ports zuweisen</h4>Je UART: Empfänger (Serial RX), Air Unit (MSP-DisplayPort) bzw. VTX (SmartAudio/Tramp), GPS, ESC-Telemetrie. Falsche Ports sind Grund Nr. 1 für „Empfänger geht nicht“.</div>
+  <div class="step"><h4>Ausrichtung prüfen</h4>Quad kippen — das 3D-Modell muss mitkippen. Sonst: Board Alignment korrigieren, nicht später das Tuning.</div>
+  <div class="step"><h4>Empfänger einrichten</h4>CRSF wählen, binden, jeden Knüppel prüfen: richtiger Balken, richtige Richtung, 1000–1500–2000.</div>
+  <div class="step"><h4>Modi festlegen</h4>Armieren auf einen Schalter; dazu Turtle, Buzzer, Blackbox, VTX-Leistung nach Bedarf.</div>
+  <div class="step"><h4>Failsafe einrichten und testen</h4>Stage 2 auf Drop; ohne Propeller armieren, Funke aus — Motoren müssen stoppen. Details: <a href="#funk">Funkstrecke</a>.</div>
+  <div class="step"><h4>Motorreihenfolge und Drehrichtung — <b>ohne Propeller</b></h4>Jeden Motor einzeln anlaufen lassen: richtiger Motor, richtige Richtung? Korrektur per Motor-Remap oder ESC-Konfigurator, nicht per Lötkolben.</div>
+  <div class="step"><h4>Bidirektionales DShot + RPM-Filter</h4>Braucht Bluejay/AM32. Prüfen: Alle vier Motoren melden plausible Drehzahl — sonst RPM-Filter aus.</div>
+  <div class="step"><h4>Akkuwerte kalibrieren</h4>Spannung gegen Multimeter, Stromsensor nach dem ersten Flug gegen die nachgeladene Kapazität — sonst ist der mAh-Tankanzeiger wertlos.</div>
+  <div class="step"><h4>OSD einrichten</h4>Weniger ist mehr: Spannung, mAh, Flugzeit, LQ, Modus, Warnungen.</div>
+  <div class="step"><h4>Rates einstellen</h4>650–800 °/s für Freestyle; wer aus dem Simulator kommt, übernimmt seine dortigen Rates.</div>
+  <div class="step"><h4>Sichern</h4><code>diff all</code> in eine Textdatei — nach jeder bewährten Änderung wiederholen. Die einzige Sicherung, die ein Update überlebt.</div>
 </div>
 
 <h2>Flugmodi</h2>
@@ -69,15 +69,15 @@ import "./_style.css";
 <tr><td><code>save</code></td><td>Speichert und startet neu. Ohne <code>save</code> ist jede Änderung nach dem Trennen weg</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Vorsicht mit fremden CLI-Blöcken.</b> Ein kopierter <code>diff</code> enthält auch Ports, Motorreihenfolge, Empfängerprotokoll und Akkukalibrierung — Dinge, die zu einer <em>anderen</em> Hardware gehören. Einzelne Zeilen übernehmen, nie ganze Blöcke, und zwischen Kalenderversionen ändern sich Parameternamen. Das Preset-System im Configurator ist der sichere Weg: versionsgeprüft und dokumentiert.</div>
+<div class="warn"><b>Vorsicht mit fremden CLI-Blöcken:</b> Ein kopierter <code>diff</code> enthält Ports und Motorreihenfolge <em>fremder</em> Hardware. Einzelne Zeilen übernehmen, nie Blöcke — der sichere Weg sind die versionsgeprüften Presets im Configurator.</div>
 
 <h2>Vor jedem Update</h2>
 <ul>
-  <li><b><code>diff all</code> sichern.</b> Danach lassen sich einzelne Einstellungen gezielt zurückholen.</li>
-  <li><b>Nicht blind zurückspielen.</b> Zwischen Hauptversionen ändern sich Standardwerte und Parameternamen; ein alter Block kann eine neue Firmware schlechter machen als die Werkseinstellung.</li>
-  <li><b>Neue Standardwerte sind meist besser.</b> Die Voreinstellungen entstehen aus breitem Testbetrieb. Wer nicht genau weiß, warum er abweicht, fliegt mit Standard besser.</li>
-  <li><b>Release Notes lesen.</b> Bei zwei planbaren Releases im Jahr ist das überschaubar geworden — und die Notes nennen Umsteiger-Stolperstellen explizit.</li>
-  <li><b>Nach dem Update alles erneut prüfen:</b> Motorreihenfolge, Drehrichtung, Modi, Failsafe. Ein Update ist eine Inbetriebnahme, kein Klick.</li>
+  <li><b><code>diff all</code> sichern</b> — danach lassen sich einzelne Einstellungen gezielt zurückholen.</li>
+  <li><b>Nicht blind zurückspielen:</b> Parameternamen und Standardwerte ändern sich zwischen Versionen.</li>
+  <li><b>Neue Standardwerte sind meist besser</b> — wer nicht weiß, warum er abweicht, fliegt mit Standard besser.</li>
+  <li><b>Release Notes lesen</b> — sie nennen die Umsteiger-Stolperstellen explizit.</li>
+  <li><b>Danach alles neu prüfen:</b> Motorreihenfolge, Drehrichtung, Modi, Failsafe. Ein Update ist eine Inbetriebnahme, kein Klick.</li>
 </ul>
 
 <div class="srcs">
