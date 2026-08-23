@@ -3,6 +3,62 @@ import "./_style.css";
 ---
 <div class="kurz"><b>Der LiPo ist das gefährlichste und das am schnellsten verschlissene Teil am Quad.</b> Er bestimmt Flugzeit, Leistung und Gewicht — und er ist das einzige Bauteil, das bei falscher Behandlung brennt. Zwei Zahlen zählen wirklich: Zellenzahl und Innenwiderstand. Die aufgedruckte C-Rate zählt am wenigsten.</div>
 
+<h2>Das Betriebsfenster: 3,0 bis 4,2 V je Zelle</h2>
+<p>Alles, was mit einem LiPo passiert — laden, fliegen, lagern — spielt sich in einem Fenster von <b>3,0 bis 4,2 V je Zelle</b> ab. Das ist der grüne Bereich: Innerhalb davon ist die Zelle in ihrem zulässigen Arbeitsbereich, außerhalb beginnt in beide Richtungen Schaden. Nach oben ist die Grenze hart (Überladung ist die klassische Brandursache), nach unten schleichend (Tiefentladung zerstört Kapazität und Innenwiderstand).</p>
+<figure>
+<svg class="dg l" viewBox="0 0 660 235" role="img" aria-label="Spannungsfenster einer Lithium-Zelle: grüner Betriebsbereich von 3,0 bis 4,2 Volt mit Markierungen für Landen, Lagerung und Voll, darunter gelbe Notreserve bis 3,0 Volt, darüber roter Überladungsbereich; unter 2,5 Volt entsorgen">
+  <!-- Skala: 2,4 V -> x=60 · 4,5 V -> x=640 (276,2 px/V) -->
+  <rect x="60"  y="90" width="166" height="44" rx="4" style="fill:var(--bad-bg);stroke:var(--bad-border)" />
+  <rect x="226" y="90" width="331" height="44" rx="4" style="fill:var(--ok-bg);stroke:var(--ok-border)" />
+  <rect x="557" y="90" width="41"  height="44" rx="4" style="fill:var(--mid-bg);stroke:var(--mid-border)" />
+  <rect x="598" y="90" width="42"  height="44" rx="4" style="fill:var(--bad-bg);stroke:var(--bad-border)" />
+  <text x="143" y="116" text-anchor="middle" style="fill:var(--bad-ink);font:600 11px var(--mono)">Tiefentladung</text>
+  <text x="391" y="110" text-anchor="middle" style="fill:var(--ok-ink);font:700 12px var(--mono)">Betriebsfenster</text>
+  <text x="391" y="126" text-anchor="middle" style="fill:var(--ok-ink);font:500 10px var(--mono)">3,0–4,2 V</text>
+  <text x="577" y="112" text-anchor="middle" style="fill:var(--mid-ink);font:600 9.5px var(--mono)">nur</text>
+  <text x="577" y="124" text-anchor="middle" style="fill:var(--mid-ink);font:600 9.5px var(--mono)">LiHV</text>
+  <text x="619" y="116" text-anchor="middle" style="fill:var(--bad-ink);font:700 11px var(--mono)">!</text>
+  <!-- Skalenticks -->
+  <path class="wt" d="M60,140 V148 M88,140 V148 M226,140 V148 M364,140 V148 M446,140 V148 M557,140 V148 M598,140 V148" />
+  <text class="lbl" x="88"  y="162" text-anchor="middle">2,5</text>
+  <text class="lbl" x="226" y="162" text-anchor="middle">3,0</text>
+  <text class="lbl" x="364" y="162" text-anchor="middle">3,5</text>
+  <text class="lbl" x="446" y="162" text-anchor="middle">3,8</text>
+  <text class="lbl" x="557" y="162" text-anchor="middle">4,2</text>
+  <text class="lbl" x="598" y="162" text-anchor="middle">4,35 V</text>
+  <!-- Marker oben -->
+  <path class="gd" d="M364,52 V90 M446,30 V90 M557,52 V90" />
+  <text class="lbla" x="364" y="46" text-anchor="middle">landen (unter Last)</text>
+  <text class="lbla" x="446" y="24" text-anchor="middle">Lagerung 3,80–3,85</text>
+  <text class="lbla" x="557" y="46" text-anchor="middle">voll</text>
+  <!-- Anmerkungen unten -->
+  <text class="lbl" x="88"  y="186" text-anchor="middle">unter 2,5 V:</text>
+  <text class="lbl" x="88"  y="200" text-anchor="middle">entsorgen</text>
+  <text class="lbl" x="291" y="186" text-anchor="middle">3,0–3,3 in Ruhe:</text>
+  <text class="lbl" x="291" y="200" text-anchor="middle">Notreserve, kostet Zyklen</text>
+  <text class="lbl" x="619" y="186" text-anchor="middle">über 4,2 (LiPo):</text>
+  <text class="lbl" x="619" y="200" text-anchor="middle">Brandgefahr</text>
+  <text class="lbl" x="330" y="226" text-anchor="middle">Werte je Zelle — bei 6S alles mal sechs. LiHV-Zellen verschieben nur die Obergrenze auf 4,35 V.</text>
+</svg>
+<figcaption>Das Spannungsfenster einer Lithium-Zelle. Der grüne Bereich 3,0–4,2 V ist der zulässige Arbeitsbereich; im Alltag bewegt man sich in der oberen Hälfte davon (landen bei ~3,5 V unter Last, lagern bei 3,8 V). Die 4,35-V-Zone gilt <em>ausschließlich</em> für LiHV-Zellen — eine normale LiPo-Zelle dorthin zu laden ist Überladung.</figcaption>
+</figure>
+
+<h2>Die drei Chemien im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th>je Zelle</th><th>LiPo</th><th>LiHV</th><th>Li-Ion (18650/21700)</th></tr></thead>
+<tbody>
+<tr><td><b>Ladeschluss (voll)</b></td><td>4,20 V</td><td>4,35 V</td><td>4,20 V</td></tr>
+<tr><td><b>Nominal</b></td><td>3,70 V</td><td>3,80 V</td><td>3,60 V</td></tr>
+<tr><td><b>Lagerung</b></td><td>3,80–3,85 V</td><td>3,80–3,85 V</td><td>3,60–3,70 V (40–60 %)</td></tr>
+<tr><td><b>Landen (unter Last)</b></td><td>~3,50 V</td><td>~3,50 V; 1S-Whoops sacken stärker, dort ~3,30 V</td><td>2,80–3,00 V</td></tr>
+<tr><td><b>Untergrenze (Datenblatt)</b></td><td>3,00 V</td><td>3,00 V</td><td>2,50 V — praktisch nicht ausreizen</td></tr>
+<tr><td><b>Lademodus am Ladegerät</b></td><td>„LiPo“</td><td>„LiHV“</td><td>„Li-Ion“ (lädt auf 4,20 V, aber mit passender Kennlinie)</td></tr>
+<tr><td><b>Übliche Laderate</b></td><td>1C</td><td>1C</td><td>0,5–1C laut Zellendatenblatt</td></tr>
+<tr><td><b>Typischer Einsatz</b></td><td>alles von 2S bis 8S</td><td>1S-Whoops; vereinzelt Renn-Packs</td><td>Long Range, Flächen — hohe Energie, wenig Spitzenstrom</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Der Lademodus ist eine Sicherheitseinstellung, keine Formalie.</b> Eine LiPo-Zelle im LiHV-Modus geladen landet bei 4,35 V — das ist Überladung mit Brandgefahr. Umgekehrt ist harmlos, kostet nur Kapazität: eine LiHV-Zelle im LiPo-Modus wird schlicht nicht ganz voll. Und Li-Ion-Rundzellen gehören in den Li-Ion-Modus, nicht in den LiPo-Modus — gleiche 4,2 V Ladeschluss, aber andere Lade-Kennlinie. Vor jedem Ladevorgang: Modus, Zellenzahl, Strom — in dieser Reihenfolge prüfen.</div>
+
 <h2>Die Entladekurve — warum Spannung ein schlechter Tankanzeiger ist</h2>
 <figure>
 <svg class="dg l" viewBox="0 0 660 250" role="img" aria-label="Entladekurve einer LiPo-Zelle: Zellenspannung über der entnommenen Kapazität, in Ruhe und unter Last">
@@ -79,15 +135,58 @@ import "./_style.css";
   </div>
 </div>
 
-<h2>Laden, lagern, entsorgen</h2>
+<h2>Laden: der Ablauf, der nicht schiefgeht</h2>
 <div class="steps">
-  <div class="step"><h4>Immer mit Balancer laden</h4>Der Balanceranschluss ist keine Option. Ohne ihn driften die Zellen auseinander, und eine überladene Zelle in einem sonst gesunden Pack ist die klassische Brandursache.</div>
-  <div class="step"><h4>1C ist der Normalfall</h4>Ein 1300-mAh-Pack lädt mit 1,3 A. 2C geht bei modernen Packs, kostet aber Lebensdauer. Schnellladen ist eine Notlösung, kein Standard.</div>
-  <div class="step"><h4>Nie unbeaufsichtigt, nie über Nacht</h4>Auf nicht brennbarem Untergrund, in LiPo-Tasche oder Munitionskiste, Rauchmelder in der Nähe. Ein LiPo-Brand lässt sich nicht ersticken — er bringt seinen Sauerstoff mit.</div>
-  <div class="step"><h4>Storage nach dem Flugtag</h4>Volle Packs altern schnell. Wer nicht am nächsten Tag fliegt, fährt sie auf 3,8 V je Zelle — jedes brauchbare Ladegerät hat dafür ein Storage-Programm.</div>
-  <div class="step"><h4>Aufgeblähte Packs sofort aussortieren</h4>Ein „Puffy“ ist Gasbildung durch Zersetzung des Elektrolyts. Er wird nicht wieder flach. Nicht mehr laden, nicht mehr fliegen, kontrolliert entladen und entsorgen.</div>
-  <div class="step"><h4>Entsorgung</h4>Vollständig entladen (ein Entladewiderstand ist sauberer als das oft zitierte Salzwasserbad), Pole abkleben, Batteriesammlung — nicht Hausmüll.</div>
+  <div class="step"><h4>Sichtprüfung vor jedem Laden</h4>Aufgebläht, Dellen bis auf die Zelle, angerissene Balancerkabel, verschmorter Stecker — dann wird nicht geladen. Nach einem harten Crash den Akku erst 20–30 Minuten an sicherer Stelle beobachten: Beschädigte Zellen reagieren oft mit Verzögerung, nicht im Moment des Einschlags.</div>
+  <div class="step"><h4>Temperatur prüfen</h4>Nie flugwarm laden — erst auf Handwärme abkühlen lassen. Das Ladefenster der Zellchemie liegt bei etwa 0–45 °C: <b>Unter 0 °C darf ein Lithium-Akku grundsätzlich nicht geladen werden</b> (Lithium ablagert sich metallisch an der Anode und kann später einen internen Kurzschluss auslösen). Im Winter heißt das: Akkus erst im Warmen auf Zimmertemperatur bringen, dann laden.</div>
+  <div class="step"><h4>Modus → Zellenzahl → Strom, in dieser Reihenfolge</h4>Erst die Chemie wählen (LiPo / LiHV / Li-Ion — siehe Warnkasten oben), dann die vom Ladegerät erkannte Zellenzahl <em>bestätigen statt blind wegklicken</em> (ein als 5S erkannter 6S wird tiefentladen gelagert falsch behandelt, ein als 6S erkannter defekter Pack überladen), dann den Strom: 1C ist der Normalfall — ein 1300er lädt mit 1,3 A, ein 450er mit 0,45 A. 2C können moderne Packs, es kostet Lebensdauer; Schnellladen bleibt die Ausnahme für den Flugtag, nicht der Standard.</div>
+  <div class="step"><h4>Immer über den Balance-Anschluss</h4>Der Balancer gleicht die Zellen während des Ladens einzeln an und ist gleichzeitig die Überwachung: Ohne ihn sieht das Ladegerät nur die Summenspannung, und eine einzelne überladene Zelle in einem sonst gesunden Pack ist die klassische Brandursache.</div>
+  <div class="step"><h4>Beaufsichtigt und feuerfest</h4>Auf nicht brennbarem Untergrund, in LiPo-Tasche oder Munitionskiste, Rauchmelder in der Nähe, nie über Nacht. Ein Lithium-Brand lässt sich nicht ersticken — er bringt seinen Sauerstoff mit. Sand oder eine Löschdecke daneben kostet nichts.</div>
+  <div class="step"><h4>Nach dem Laden: Balance-Blick</h4>Alle Zellen sollten nach dem Vollladen innerhalb von etwa 0,01–0,02 V beieinander liegen — jedes brauchbare Ladegerät zeigt die Einzelspannungen an. Läuft eine Zelle wiederholt weiter auseinander, altert sie schneller als der Rest: Der Pack ist auf dem Weg nach draußen, auch wenn er noch fliegt.</div>
+  <div class="step"><h4>Parallel-Ladeboard nur mit Verstand</h4>Ein Paraboard lädt mehrere Packs gleichzeitig — aber nur <b>gleiche Zellenzahl</b> und <b>ähnlicher Ladezustand</b> (grob: unter 0,1 V Unterschied je Zelle) gehören zusammen ans Board. Beim Anstecken fließen sonst hohe Ausgleichsströme zwischen den Packs, bevor das Ladegerät überhaupt etwas tut. Reihenfolge: erst alle Hauptstecker, dann alle Balancer.</div>
+  <div class="step"><h4>Voll geladen wird geflogen, nicht gelagert</h4>Am Vorabend des Flugtags laden ist in Ordnung. Tagelang voll herumliegen altert die Zellen messbar — wer den Flugtag absagt, fährt die Packs zurück auf Storage.</div>
 </div>
+
+<h2>Lagern und aussortieren</h2>
+<div class="steps">
+  <div class="step"><h4>Storage nach dem Flugtag</h4>Wer nicht innerhalb der nächsten zwei, drei Tage wieder fliegt, fährt die Packs auf <b>3,80–3,85 V je Zelle</b> (≈ 40–50 % Ladung) — das Storage-Programm des Ladegeräts lädt oder entlädt automatisch dorthin. Das ist der stabilste Zustand der Zelle; volle wie leere Lagerung kostet Kapazität.</div>
+  <div class="step"><h4>Kühl, trocken, feuerfest</h4>Zimmertemperatur oder kühler, nicht im Sommerauto, nicht auf der Fensterbank. LiPo-Tasche oder Metallkiste, Stecker so, dass nichts kurzschließen kann.</div>
+  <div class="step"><h4>Langzeitlagerung: gelegentlich nachsehen</h4>Selbstentladung ist klein, aber nicht null. Bei Packs, die Monate liegen, alle vier bis acht Wochen die Spannung prüfen — fällt eine Zelle Richtung 3,3 V, nachladen auf Storage. Ein Pack, der auffallend schneller Spannung verliert als seine Geschwister, hat einen internen Defekt: aussortieren.</div>
+  <div class="step"><h4>Aufgeblähte Packs sofort aussortieren</h4>Ein „Puffy“ ist Gasbildung durch Zersetzung des Elektrolyts. Er wird nicht wieder flach, auch nicht im Kühlschrank (hartnäckiger Mythos). Nicht mehr laden, nicht mehr fliegen — kontrolliert entladen und entsorgen.</div>
+  <div class="step"><h4>Entsorgung</h4>Vollständig entladen (ein Entladewiderstand oder die Entladefunktion des Ladegeräts ist sauberer als das oft zitierte Salzwasserbad), Pole abkleben, Batteriesammlung — nicht Hausmüll. Beschädigte Packs bis zur Abgabe in Sand oder Metallkiste.</div>
+</div>
+
+<h2>Drei Prozessbeispiele: ein kompletter Zyklus je Akkutyp</h2>
+<p>Dieselbe Logik — prüfen, laden, nutzen, lagern — einmal konkret durchgespielt, mit den Zahlen, die man am Gerät tatsächlich einstellt.</p>
+<div class="grid2">
+  <div class="card"><div class="ch">6S-LiPo 1300 mAh<span class="n">5″ freestyle</span></div>
+    <ol>
+      <li><b>Prüfen:</b> Sichtprüfung, Pack handwarm oder kühler, Ruhespannung plausibel (nicht unter 19,8 V = 3,3 V je Zelle).</li>
+      <li><b>Laden:</b> Modus „LiPo“, 6S bestätigen, 1,3 A (1C), Balance-Stecker dran. Ziel 25,2 V; danach Einzelzellen ≤ 0,02 V auseinander.</li>
+      <li><b>Fliegen:</b> Landen beim OSD-Alarm 21,0 V unter Last <em>oder</em> bei ~1040 mAh verbraucht (80 % von 1300) — der mAh-Zähler ist der verlässlichere der beiden. Nach der Landung erholt sich der Pack auf ~22,2–22,8 V.</li>
+      <li><b>Danach:</b> Abstecken, abkühlen lassen. Nächster Flug am selben Tag: wieder ab Schritt 2.</li>
+      <li><b>Abends:</b> Kein Flug in den nächsten Tagen geplant → Storage-Programm auf 22,8 V (3,8 V je Zelle), ab in die LiPo-Tasche.</li>
+    </ol>
+  </div>
+  <div class="card"><div class="ch">1S-LiHV 300 mAh<span class="n">tinywhoop</span></div>
+    <ol>
+      <li><b>Prüfen:</b> Steckkontakt (BT2.0/A30) sauber und stramm — bei 1S ist der Übergangswiderstand des Steckers spürbare Leistung.</li>
+      <li><b>Laden:</b> Am 1S-Mehrfachlader Endspannung <b>4,35 V (LiHV)</b> wählen, 1C = 0,3 A. Im LiPo-Modus (4,20 V) passiert nichts Schlimmes — die Zelle wird nur nicht ganz voll. Andersherum gilt das nicht: normale 1S-LiPo nie auf 4,35 V laden.</li>
+      <li><b>Fliegen:</b> 1S sackt unter Last stark — landen bei ~3,3 V unter Last, nicht bis zum bitteren Ende „durchpiepen“. Tiefentladene Whoop-Zellen sind der häufigste Whoop-Verschleiß.</li>
+      <li><b>Danach/Abends:</b> Whoop-Lader mit Storage-Funktion auf 3,80–3,85 V — gute 1S-Lader können auch <em>entladen</em>, nicht nur laden.</li>
+    </ol>
+  </div>
+  <div class="card"><div class="ch">6S2P-Li-Ion ≈8400 mAh<span class="n">7″ long range</span></div>
+    <ol>
+      <li><b>Prüfen:</b> Zellenpaare im Pack gleichmäßig? Bei selbst konfektionierten Packs auf saubere Zellverbinder und Isolierung achten.</li>
+      <li><b>Laden:</b> Modus <b>„Li-Ion“</b> (Ladeschluss 4,20 V, Li-Ion-Kennlinie), Strom nach Zellendatenblatt: Hochstromzellen der P42A-Klasse laden standardmäßig mit ~1C je Zelle — bei 2P also z. B. 4–8 A; konservativ 0,5C schont die Zyklen.</li>
+      <li><b>Fliegen:</b> Sanfter Gasverlauf — Li-Ion verträgt keine LiPo-Lastspitzen. Landen bei ~3,0 V je Zelle in Ruhe (18,0 V); das Datenblatt erlaubt 2,5 V, aber wer dort regelmäßig ankommt, verschenkt Zyklen und riskiert im Sag den Brownout.</li>
+      <li><b>Lagern:</b> 3,60–3,70 V je Zelle (≈ 40–60 %) — Li-Ion lagert tiefer als LiPo. Monatelange Lagerung verträgt die Chemie gut, Kontrolle alle paar Wochen trotzdem.</li>
+    </ol>
+  </div>
+</div>
+<p class="note">Die Beispiel-Laderaten gelten für gesunde Packs bei Zimmertemperatur. Im Zweifel gilt immer das Datenblatt des Zellenherstellers — bei Li-Ion-Rundzellen (Molicel, Samsung, LG) ist es öffentlich und präzise, bei LiPo-Packs ersetzt die 1C-Faustregel das meist fehlende Datenblatt.</p>
+
 <div class="warn"><b>Transport und Flugreise.</b> Lithiumakkus gehören ins Handgepäck, nie ins aufgegebene Gepäck. Es gelten Energiegrenzen je Pack (üblich: bis 100 Wh frei, 100–160 Wh mit Genehmigung der Airline, darüber verboten) und einzeln isolierte Pole. Ein 6S-1300er liegt bei rund 29 Wh — die Zahl liefert der <a href="#rechner">Rechner</a>.</div>
 
 <h2>Stecker und Kabel</h2>
@@ -105,9 +204,9 @@ import "./_style.css";
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li><a href="https://oscarliang.com/">oscarliang.com</a> — LiPo-Grundlagen, Ladepraxis, Steckervergleiche (u. a. BT2.0 gegen PH2.0 mit Messwerten).</li>
+    <li><a href="https://oscarliang.com/lipo-battery-guide/">Oscar Liang — LiPo Battery Guide</a> — Grundlagen, Ladepraxis, Storage-Empfehlung (3,80–3,85 V), Steckervergleiche; die Referenz hinter den Spannungswerten dieses Abschnitts.</li>
     <li><a href="https://www.fpvknowitall.com/">fpvknowitall.com</a> / Joshua Bardwell — Messungen zu Spannungseinbruch, Innenwiderstand und dem realen Wert von C-Angaben.</li>
-    <li>Zellendatenblätter (Molicel, Samsung, LG) — die einzige belastbare Quelle für die Strombelastbarkeit von Li-Ion-Zellen.</li>
+    <li>Zellendatenblätter (Molicel, Samsung, LG) — die einzige belastbare Quelle für Laderaten, Entladeschluss und Strombelastbarkeit von Li-Ion-Zellen. Beispiel Molicel INR21700-P42A: Standardladung 4,2 A, Ladeschluss 4,20 V, Entladeschluss 2,50 V, 45 A Dauerentladung.</li>
     <li>IATA Lithium Battery Guidance Document — verbindliche Grenzwerte für Transport und Flugreise.</li>
   </ul>
 </div>
