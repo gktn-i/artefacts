@@ -54,7 +54,7 @@ import "./_style.css";
 <tr><td><b>Untergrenze (Datenblatt)</b></td><td>3,00 V</td><td>3,00 V</td><td>2,50 V — praktisch nicht ausreizen</td></tr>
 <tr><td><b>Lademodus am Ladegerät</b></td><td>„LiPo“</td><td>„LiHV“</td><td>„Li-Ion“ (lädt auf 4,20 V, aber mit passender Kennlinie)</td></tr>
 <tr><td><b>Übliche Laderate</b></td><td>1C</td><td>1C</td><td>0,5–1C laut Zellendatenblatt</td></tr>
-<tr><td><b>Typischer Einsatz</b></td><td>alles von 2S bis 8S</td><td>1S-Whoops; vereinzelt Renn-Packs</td><td>Long Range, Flächen — hohe Energie, wenig Spitzenstrom</td></tr>
+<tr><td><b>Typischer Einsatz</b></td><td>alles von 2S bis 8S</td><td>1S-Whoops; vereinzelt Renn-Packs</td><td>Long Range, Flächen — und abseits des Quads: Brille, Funke</td></tr>
 </tbody>
 </table></div>
 <div class="stop"><b>Der Lademodus ist eine Sicherheitseinstellung, keine Formalie.</b> Eine LiPo-Zelle im LiHV-Modus geladen landet bei 4,35 V — das ist Überladung mit Brandgefahr. Umgekehrt ist harmlos, kostet nur Kapazität: eine LiHV-Zelle im LiPo-Modus wird schlicht nicht ganz voll. Und Li-Ion-Rundzellen gehören in den Li-Ion-Modus, nicht in den LiPo-Modus — gleiche 4,2 V Ladeschluss, aber andere Lade-Kennlinie. Vor jedem Ladevorgang: Modus, Zellenzahl, Strom — in dieser Reihenfolge prüfen.</div>
@@ -133,6 +133,23 @@ import "./_style.css";
       <li>Sinnvoll nur bei effizienten 7-Zöllern und Flächen mit sanftem Gasverlauf</li>
     </ul>
   </div>
+</div>
+
+<h2>Li-Ion abseits des Quads: Brille, Funke, lose Zellen</h2>
+<p>Dieselben Rundzellen stecken im halben Hobby: als Paar in der Funke, als Pack oder Case an der Brille, als Verbund unterm Long-Range-Quad. Das Spannungsfenster von oben gilt überall — voll 4,20 V, Lagerung 3,6–3,7 V, Untergrenze praktisch 3,0 V.</p>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Format</th><th>Maße · Gewicht</th><th>Reale Kapazität</th><th>Typisch im FPV-Hobby</th></tr></thead>
+<tbody>
+<tr><td><b>18650</b></td><td>18 × 65 mm · ~45 g</td><td>2500–3600 mAh</td><td>Funke (2 Stück), Brillen-Case, Long-Range-Packs</td></tr>
+<tr><td><b>21700</b></td><td>21 × 70 mm · ~70 g</td><td>4000–5000 mAh</td><td>Long-Range-Packs mit mehr Energie je Zelle</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Mehr steht nicht drin.</b> Über ~3600 mAh (18650) bzw. ~5000 mAh (21700) ist physikalisch Schluss — Zellen mit „6800“ oder „9900 mAh“ sind Fälschungen. Schnelltest: Eine echte 18650 wiegt um 45 g, Fälschungen oft nur ~25 g. Markenzellen (Molicel, Samsung, LG, Murata, Panasonic) beim Fachhändler kaufen, nicht am Marktplatz.</div>
+<div class="grid2">
+  <div class="card"><div class="ct">Brille</div><div class="cd">Digitale Brillen ziehen grob 8–12 W. Der DC-Eingang verträgt meist 2–6S (Walksnail Goggles X: 7–26 V) — üblich ist ein 2S/3S-Li-Ion-Pack oder ein 18650-Case: 2S mit 3000er-Zellen ≈ 21,6 Wh ≈ 2–3 h. DJI-Brillen laufen am eigenen 2S-Pack (Goggles 3: 3000 mAh, bis ~3 h). LiPo geht auch — Li-Ion hält länger durch und lagert unkritischer.</div></div>
+  <div class="card"><div class="ct">Funke</div><div class="cd">Die RadioMaster-Klasse (TX16S, Boxer, Pocket, Zorro) läuft auf 2 × 18650, intern per USB-C geladen — Laufzeit viele Stunden. Die Zellen sitzen in Reihe ohne Balancer: als Paar kaufen, als Paar nutzen, als Paar ersetzen — nie alt und neu mischen.</div></div>
+  <div class="card"><div class="ct">Lose Zellen transportieren</div><div class="cd">Hochstromzellen sind ungeschützt — ein Kurzschluss über Schlüssel oder Münzen in der Tasche liefert dreistellige Ampere. Transport nur in der Plastikbox; beschädigter Schrumpfschlauch → neu schrumpfen oder entsorgen.</div></div>
+  <div class="card"><div class="ct">Passform &amp; Laden</div><div class="cd">Vor dem Kauf prüfen: Zellen mit Schutzschaltung sind ein paar Millimeter länger, Button- und Flat-Top nicht überall austauschbar. Geladen wird im Gerät (USB-C), im Rundzellen-Lader oder am Hobby-Lader im <b>Li-Ion-Modus</b> mit 0,5–1C — nie im LiPo-Modus.</div></div>
 </div>
 
 <h2>Laden: der Ablauf, der nicht schiefgeht</h2>
@@ -222,6 +239,8 @@ import "./_style.css";
     <li><a href="https://oscarliang.com/lipo-battery-guide/">Oscar Liang — LiPo Battery Guide</a> — Grundlagen, Ladepraxis, Storage-Empfehlung (3,80–3,85 V), Steckervergleiche; die Referenz hinter den Spannungswerten dieses Abschnitts.</li>
     <li><a href="https://www.fpvknowitall.com/">fpvknowitall.com</a> / Joshua Bardwell — Messungen zu Spannungseinbruch, Innenwiderstand und dem realen Wert von C-Angaben.</li>
     <li>Zellendatenblätter (Molicel, Samsung, LG) — die einzige belastbare Quelle für Laderaten, Entladeschluss und Strombelastbarkeit von Li-Ion-Zellen. Beispiel Molicel INR21700-P42A: Standardladung 4,2 A, Ladeschluss 4,20 V, Entladeschluss 2,50 V, 45 A Dauerentladung.</li>
+    <li><a href="https://oscarliang.com/power-fpv-goggles/">Oscar Liang — The Best Way to Power FPV Goggles</a> — Eingangsspannungen und Akku-Optionen für DJI, Walksnail, HDZero und Skyzone.</li>
+    <li><a href="https://lygte-info.dk/">lygte-info.dk</a> — unabhängige Messreihen zu praktisch allen 18650/21700-Markenzellen; die Referenz für reale Kapazitäten und Strombelastbarkeit.</li>
     <li>IATA Lithium Battery Guidance Document — verbindliche Grenzwerte für Transport und Flugreise.</li>
   </ul>
 </div>
