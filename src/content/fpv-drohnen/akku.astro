@@ -187,32 +187,39 @@ import "./_style.css";
   <div class="step"><h4>Entsorgung</h4>Vollständig entladen (ein Entladewiderstand oder die Entladefunktion des Ladegeräts ist sauberer als das oft zitierte Salzwasserbad), Pole abkleben, Batteriesammlung — nicht Hausmüll. Beschädigte Packs bis zur Abgabe in Sand oder Metallkiste.</div>
 </div>
 
-<h2>Drei Prozessbeispiele: ein kompletter Zyklus je Akkutyp</h2>
-<p>Dieselbe Logik — prüfen, laden, nutzen, lagern — einmal konkret durchgespielt, mit den Zahlen, die man am Gerät tatsächlich einstellt.</p>
+<h2>Vier Prozessbeispiele: ein Zyklus je Situation</h2>
+<p>Dieselbe Logik — prüfen, laden, nutzen, lagern — mit den Zahlen, die man am Gerät wirklich einstellt.</p>
 <div class="grid2">
   <div class="card"><div class="ch">6S-LiPo 1300 mAh<span class="n">5″ freestyle</span></div>
     <ol>
-      <li><b>Prüfen:</b> Sichtprüfung, Pack handwarm oder kühler, Ruhespannung plausibel (nicht unter 19,8 V = 3,3 V je Zelle).</li>
-      <li><b>Laden:</b> Modus „LiPo“, 6S bestätigen, 1,3 A (1C), Balance-Stecker dran. Ziel 25,2 V; danach Einzelzellen ≤ 0,02 V auseinander.</li>
-      <li><b>Fliegen:</b> Landen beim OSD-Alarm 21,0 V unter Last <em>oder</em> bei ~1040 mAh verbraucht (80 % von 1300) — der mAh-Zähler ist der verlässlichere der beiden. Nach der Landung erholt sich der Pack auf ~22,2–22,8 V.</li>
-      <li><b>Danach:</b> Abstecken, abkühlen lassen. Nächster Flug am selben Tag: wieder ab Schritt 2.</li>
-      <li><b>Abends:</b> Kein Flug in den nächsten Tagen geplant → Storage-Programm auf 22,8 V (3,8 V je Zelle), ab in die LiPo-Tasche.</li>
+      <li><b>Prüfen:</b> Sichtprüfung · handwarm oder kühler · Ruhespannung mind. 19,8 V.</li>
+      <li><b>Laden:</b> Modus „LiPo“ · 6S bestätigen · 1,3 A (1C) · Balancer dran. Voll = 25,2 V, Zellen ≤ 0,02 V auseinander.</li>
+      <li><b>Fliegen:</b> Landen bei 21,0 V unter Last <em>oder</em> ~1040 mAh verbraucht (80 %) — der mAh-Zähler ist der verlässlichere.</li>
+      <li><b>Lagern:</b> Kein Flug in den nächsten Tagen → Storage-Programm auf 22,8 V (3,8 V je Zelle), LiPo-Tasche.</li>
     </ol>
   </div>
   <div class="card"><div class="ch">1S-LiHV 300 mAh<span class="n">tinywhoop</span></div>
     <ol>
-      <li><b>Prüfen:</b> Steckkontakt (BT2.0/A30) sauber und stramm — bei 1S ist der Übergangswiderstand des Steckers spürbare Leistung.</li>
-      <li><b>Laden:</b> Am 1S-Mehrfachlader Endspannung <b>4,35 V (LiHV)</b> wählen, 1C = 0,3 A. Im LiPo-Modus (4,20 V) passiert nichts Schlimmes — die Zelle wird nur nicht ganz voll. Andersherum gilt das nicht: normale 1S-LiPo nie auf 4,35 V laden.</li>
-      <li><b>Fliegen:</b> 1S sackt unter Last stark — landen bei ~3,3 V unter Last, nicht bis zum bitteren Ende „durchpiepen“. Tiefentladene Whoop-Zellen sind der häufigste Whoop-Verschleiß.</li>
-      <li><b>Danach/Abends:</b> Whoop-Lader mit Storage-Funktion auf 3,80–3,85 V — gute 1S-Lader können auch <em>entladen</em>, nicht nur laden.</li>
+      <li><b>Prüfen:</b> Stecker (BT2.0/A30) sauber und stramm — bei 1S kostet der Steckerwiderstand spürbar Leistung.</li>
+      <li><b>Laden:</b> Endspannung <b>4,35 V (LiHV)</b> · 0,3 A (1C). LiPo-Modus schadet nicht, die Zelle wird nur nicht voll — umgekehrt nie: LiPo-Zellen nie auf 4,35 V.</li>
+      <li><b>Fliegen:</b> Landen bei ~3,3 V unter Last, nicht leerpiepen — Tiefentladung ist der häufigste Whoop-Verschleiß.</li>
+      <li><b>Lagern:</b> 3,80–3,85 V — gute 1S-Lader können dafür auch entladen.</li>
     </ol>
   </div>
   <div class="card"><div class="ch">6S2P-Li-Ion ≈8400 mAh<span class="n">7″ long range</span></div>
     <ol>
-      <li><b>Prüfen:</b> Zellenpaare im Pack gleichmäßig? Bei selbst konfektionierten Packs auf saubere Zellverbinder und Isolierung achten.</li>
-      <li><b>Laden:</b> Modus <b>„Li-Ion“</b> (Ladeschluss 4,20 V, Li-Ion-Kennlinie), Strom nach Zellendatenblatt: Hochstromzellen der P42A-Klasse laden standardmäßig mit ~1C je Zelle — bei 2P also z. B. 4–8 A; konservativ 0,5C schont die Zyklen.</li>
-      <li><b>Fliegen:</b> Sanfter Gasverlauf — Li-Ion verträgt keine LiPo-Lastspitzen. Landen bei ~3,0 V je Zelle in Ruhe (18,0 V); das Datenblatt erlaubt 2,5 V, aber wer dort regelmäßig ankommt, verschenkt Zyklen und riskiert im Sag den Brownout.</li>
-      <li><b>Lagern:</b> 3,60–3,70 V je Zelle (≈ 40–60 %) — Li-Ion lagert tiefer als LiPo. Monatelange Lagerung verträgt die Chemie gut, Kontrolle alle paar Wochen trotzdem.</li>
+      <li><b>Prüfen:</b> Zellverbinder und Isolierung intakt (bei konfektionierten Packs).</li>
+      <li><b>Laden:</b> Modus <b>„Li-Ion“</b> · 4–8 A (0,5–1C laut Zellendatenblatt).</li>
+      <li><b>Fliegen:</b> Sanfter Gasverlauf, keine LiPo-Lastspitzen. Landen bei ~3,0 V je Zelle in Ruhe (18,0 V).</li>
+      <li><b>Lagern:</b> 3,6–3,7 V je Zelle — tiefer als LiPo. Monate sind okay, alle paar Wochen kontrollieren.</li>
+    </ol>
+  </div>
+  <div class="card"><div class="ch">4 × 6S-LiPo 1300 mAh<span class="n">flugtag, paraboard</span></div>
+    <ol>
+      <li><b>Prüfen:</b> Alle gleiche Zellenzahl und Chemie · Zellspannungen max. 0,1 V auseinander — leere zu leeren, volle zu vollen.</li>
+      <li><b>Anstecken:</b> Erst alle Hauptstecker einzeln, dann alle Balancer.</li>
+      <li><b>Laden:</b> Modus „LiPo 6S“ · Strom = 1C der Summe: 4 × 1300 mAh → 5,2 A. Die ersten Minuten dabeibleiben.</li>
+      <li><b>Abstecken:</b> Umgekehrt — erst Balancer, dann Hauptstecker. Abends fährt das Storage-Programm alle vier gemeinsam auf 3,8 V. Regeln im Detail: <a href="#akku--parallel-laden-aber-sicher">Parallel laden — aber sicher</a>.</li>
     </ol>
   </div>
 </div>
