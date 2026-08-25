@@ -83,7 +83,7 @@ import "./_style.css";
 <figcaption>Typische LiPo-Entladung: In der langen flachen Mitte sagt die Spannung fast nichts über die Restkapazität. Unter Last liegt die Kurve um I·R<sub>i</sub> tiefer — deshalb löst ein voller Pack im Vollgas den Spannungsalarm aus und „erholt“ sich danach. Verlässlich ist der mAh-Zähler im OSD, nicht die Voltzahl.</figcaption>
 </figure>
 
-<h2>Spannungen, die man auswendig kennt</h2>
+<h2>Spannungen, die man auswendig kennt (LiPo)</h2>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Zustand</th><th>je Zelle</th><th>4S</th><th>6S</th><th>Bedeutung</th></tr></thead>
 <tbody>
@@ -95,6 +95,7 @@ import "./_style.css";
 <tr><td><b>Tiefentladen</b></td><td>&lt; 3,0 V</td><td>—</td><td>—</td><td>Schaden. Unter 2,5 V ist der Akku Sondermüll, nicht Ladegut</td></tr>
 </tbody>
 </table></div>
+<p class="note">Diese Tabelle gilt für <b>LiPo</b>. LiHV: nur „Voll“ ändert sich auf 4,35 V. <b>Li-Ion weicht ab:</b> voll ebenfalls 4,20 V, aber nominal 3,60 V, Lagerung 3,6–3,7 V und entladen bis ~3,0 V (Datenblatt 2,5 V) — die Werte stehen im Chemie-Vergleich oben.</p>
 <div class="tip"><b>Die 80-Prozent-Regel.</b> Nutze rund 80 % der Nennkapazität, also 1000 mAh aus einem 1300er. Das ist kein Geiz, sondern die Bedingung dafür, dass ein Pack 200 statt 50 Zyklen hält. Kontrolliert wird über die verbrauchte Kapazität (mAh) im OSD — dafür muss der Stromsensor kalibriert sein, siehe <a href="#betaflight">Betaflight einrichten</a>.</div>
 
 <h2>Was auf dem Schrumpfschlauch steht</h2>
