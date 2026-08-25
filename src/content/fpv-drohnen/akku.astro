@@ -4,7 +4,11 @@ import "./_style.css";
 <div class="kurz"><b>Der LiPo ist das gefährlichste und das am schnellsten verschlissene Teil am Quad.</b> Er bestimmt Flugzeit, Leistung und Gewicht — und er ist das einzige Bauteil, das bei falscher Behandlung brennt. Zwei Zahlen zählen wirklich: Zellenzahl und Innenwiderstand. Die aufgedruckte C-Rate zählt am wenigsten.</div>
 
 <h2>Das Betriebsfenster: 3,0 bis 4,2 V je Zelle</h2>
-<p>Alles, was mit einem LiPo passiert — laden, fliegen, lagern — spielt sich in einem Fenster von <b>3,0 bis 4,2 V je Zelle</b> ab. Das ist der grüne Bereich: Innerhalb davon ist die Zelle in ihrem zulässigen Arbeitsbereich, außerhalb beginnt in beide Richtungen Schaden. Nach oben ist die Grenze hart (Überladung ist die klassische Brandursache), nach unten schleichend (Tiefentladung zerstört Kapazität und Innenwiderstand).</p>
+<ul>
+  <li>Alles — laden, fliegen, lagern — spielt sich zwischen <b>3,0 und 4,2 V je Zelle</b> ab: dem grünen Bereich</li>
+  <li><b>Nach oben hart:</b> Überladung ist die klassische Brandursache</li>
+  <li><b>Nach unten schleichend:</b> Tiefentladung zerstört Kapazität und Innenwiderstand</li>
+</ul>
 <figure>
 <svg class="dg l" viewBox="0 0 660 235" role="img" aria-label="Spannungsfenster einer Lithium-Zelle: grüner Betriebsbereich von 3,0 bis 4,2 Volt mit Markierungen für Landen, Lagerung und Voll, darunter gelbe Notreserve bis 3,0 Volt, darüber roter Überladungsbereich; unter 2,5 Volt entsorgen">
   <!-- Skala: 2,4 V -> x=60 · 4,5 V -> x=640 (276,2 px/V) -->
@@ -122,7 +126,12 @@ import "./_style.css";
   <span class="f">U_Last = U_Leerlauf − I · R_i</span>
   <span class="l">Bei 6 Zellen à 4 mΩ und 80 A Strom: 6 · 0,004 Ω · 80 A = 1,9 V Einbruch — aus 25,2 V werden im Vollgas 23,3 V.</span>
 </div>
-<p>Das erklärt drei Alltagsbeobachtungen auf einmal: warum ein voller Akku im Vollgas den Warnton auslöst, warum das Quad bei Kälte kraftlos wirkt (der Innenwiderstand steigt), und warum ein alter Pack „weich“ fliegt, obwohl seine Kapazität kaum gefallen ist.</p>
+<p>Das erklärt drei Alltagsbeobachtungen:</p>
+<ul>
+  <li>Ein voller Akku löst im Vollgas den Warnton aus</li>
+  <li>Bei Kälte wirkt das Quad kraftlos — der Innenwiderstand steigt</li>
+  <li>Ein alter Pack fliegt „weich“, obwohl die Kapazität kaum gefallen ist</li>
+</ul>
 
 <h2>Li-Ion für Long Range</h2>
 <div class="gb">
@@ -145,7 +154,7 @@ import "./_style.css";
 </div>
 
 <h2>Li-Ion abseits des Quads: Brille, Funke, lose Zellen</h2>
-<p>Dieselben Rundzellen stecken im halben Hobby: als Paar in der Funke, als Pack oder Case an der Brille, als Verbund unterm Long-Range-Quad. Das Spannungsfenster von oben gilt überall — voll 4,20 V, Lagerung 3,6–3,7 V, Untergrenze praktisch 3,0 V.</p>
+<p>Dieselben Rundzellen stecken im halben Hobby — Funke, Brille, Long-Range-Pack. Überall gilt: voll 4,20 V · Lagerung 3,6–3,7 V · Untergrenze praktisch 3,0 V.</p>
 <div class="tbl-wrap"><table style="min-width:780px">
 <thead><tr><th>Format</th><th>Maße · Gewicht</th><th>Reale Kapazität</th><th>Typisch im FPV-Hobby</th></tr></thead>
 <tbody>
@@ -155,7 +164,7 @@ import "./_style.css";
 </table></div>
 <div class="warn"><b>Mehr steht nicht drin.</b> Über ~3600 mAh (18650) bzw. ~5000 mAh (21700) ist physikalisch Schluss — Zellen mit „6800“ oder „9900 mAh“ sind Fälschungen. Schnelltest: Eine echte 18650 wiegt um 45 g, Fälschungen oft nur ~25 g. Markenzellen (Molicel, Samsung, LG, Murata, Panasonic) beim Fachhändler kaufen, nicht am Marktplatz.</div>
 <div class="grid2">
-  <div class="card"><div class="ct">Brille</div><div class="cd">Digitale Brillen ziehen grob 8–12 W. Der DC-Eingang verträgt meist 2–6S (Walksnail Goggles X: 7–26 V) — üblich ist ein 2S/3S-Li-Ion-Pack oder ein 18650-Case: 2S mit 3000er-Zellen ≈ 21,6 Wh ≈ 2–3 h. DJI-Brillen laufen am eigenen 2S-Pack (Goggles 3: 3000 mAh, bis ~3 h). LiPo geht auch — Li-Ion hält länger durch und lagert unkritischer.</div></div>
+  <div class="card"><div class="ct">Brille</div><div class="cd">Digitale Brillen ziehen ~8–12 W · DC-Eingang meist 2–6S (Goggles X: 7–26 V) · üblich: 2S/3S-Li-Ion-Pack oder 18650-Case, 2S mit 3000er-Zellen ≈ 21,6 Wh ≈ 2–3 h · DJI: eigener 2S-Pack (Goggles 3: 3000 mAh, bis ~3 h) · LiPo geht, Li-Ion hält länger und lagert unkritischer.</div></div>
   <div class="card"><div class="ct">Funke</div><div class="cd">Die RadioMaster-Klasse (TX16S, Boxer, Pocket, Zorro) läuft auf 2 × 18650, intern per USB-C geladen — Laufzeit viele Stunden. Die Zellen sitzen in Reihe ohne Balancer: als Paar kaufen, als Paar nutzen, als Paar ersetzen — nie alt und neu mischen.</div></div>
   <div class="card"><div class="ct">Lose Zellen transportieren</div><div class="cd">Hochstromzellen sind ungeschützt — ein Kurzschluss über Schlüssel oder Münzen in der Tasche liefert dreistellige Ampere. Transport nur in der Plastikbox; beschädigter Schrumpfschlauch → neu schrumpfen oder entsorgen.</div></div>
   <div class="card"><div class="ct">Passform &amp; Laden</div><div class="cd">Vor dem Kauf prüfen: Zellen mit Schutzschaltung sind ein paar Millimeter länger, Button- und Flat-Top nicht überall austauschbar. Geladen wird im Gerät (USB-C), im Rundzellen-Lader oder am Hobby-Lader im <b>Li-Ion-Modus</b> mit 0,5–1C — nie im LiPo-Modus.</div></div>
@@ -164,34 +173,38 @@ import "./_style.css";
 <h2>Laden: der Ablauf, der nicht schiefgeht</h2>
 <div class="steps">
   <div class="step"><h4>Sichtprüfung vor jedem Laden</h4>Aufgebläht, Dellen bis auf die Zelle, angerissene Balancerkabel, verschmorter Stecker — dann wird nicht geladen. Nach einem harten Crash den Akku erst 20–30 Minuten an sicherer Stelle beobachten: Beschädigte Zellen reagieren oft mit Verzögerung, nicht im Moment des Einschlags.</div>
-  <div class="step"><h4>Temperatur prüfen</h4>Nie flugwarm laden — erst auf Handwärme abkühlen lassen. Das Ladefenster der Zellchemie liegt bei etwa 0–45 °C: <b>Unter 0 °C darf ein Lithium-Akku grundsätzlich nicht geladen werden</b> (Lithium ablagert sich metallisch an der Anode und kann später einen internen Kurzschluss auslösen). Im Winter heißt das: Akkus erst im Warmen auf Zimmertemperatur bringen, dann laden.</div>
-  <div class="step"><h4>Modus → Zellenzahl → Strom, in dieser Reihenfolge</h4>Erst die Chemie wählen (LiPo / LiHV / Li-Ion — siehe Warnkasten oben), dann die vom Ladegerät erkannte Zellenzahl <em>bestätigen statt blind wegklicken</em> (ein als 5S erkannter 6S wird tiefentladen gelagert falsch behandelt, ein als 6S erkannter defekter Pack überladen), dann den Strom: 1C ist der Normalfall — ein 1300er lädt mit 1,3 A, ein 450er mit 0,45 A. 2C können moderne Packs, es kostet Lebensdauer; Schnellladen bleibt die Ausnahme für den Flugtag, nicht der Standard.</div>
+  <div class="step"><h4>Temperatur prüfen</h4>Nie flugwarm laden — erst auf Handwärme abkühlen. Ladefenster ~0–45 °C. <b>Unter 0 °C nie laden:</b> Lithium lagert sich metallisch an der Anode ab → interner Kurzschluss möglich. Im Winter: erst auf Zimmertemperatur bringen.</div>
+  <div class="step"><h4>Modus → Zellenzahl → Strom, in dieser Reihenfolge</h4>Chemie wählen (LiPo/LiHV/Li-Ion, siehe Tabelle oben) · erkannte Zellenzahl <em>bestätigen statt wegklicken</em> (falsch erkannt heißt tiefentladen oder überladen) · Strom 1C: 1300er → 1,3 A, 450er → 0,45 A. 2C geht, kostet Lebensdauer — Ausnahme für den Flugtag, kein Standard.</div>
   <div class="step"><h4>Immer über den Balance-Anschluss</h4>Der Balancer gleicht die Zellen während des Ladens einzeln an und ist gleichzeitig die Überwachung: Ohne ihn sieht das Ladegerät nur die Summenspannung, und eine einzelne überladene Zelle in einem sonst gesunden Pack ist die klassische Brandursache.</div>
   <div class="step"><h4>Beaufsichtigt und feuerfest</h4>Auf nicht brennbarem Untergrund, in LiPo-Tasche oder Munitionskiste, Rauchmelder in der Nähe, nie über Nacht. Ein Lithium-Brand lässt sich nicht ersticken — er bringt seinen Sauerstoff mit. Sand oder eine Löschdecke daneben kostet nichts.</div>
-  <div class="step"><h4>Nach dem Laden: Balance-Blick</h4>Alle Zellen sollten nach dem Vollladen innerhalb von etwa 0,01–0,02 V beieinander liegen — jedes brauchbare Ladegerät zeigt die Einzelspannungen an. Läuft eine Zelle wiederholt weiter auseinander, altert sie schneller als der Rest: Der Pack ist auf dem Weg nach draußen, auch wenn er noch fliegt.</div>
+  <div class="step"><h4>Nach dem Laden: Balance-Blick</h4>Zellen nach dem Vollladen ≤ 0,01–0,02 V auseinander (Einzelspannungen zeigt jedes brauchbare Ladegerät). Läuft eine Zelle wiederholt davon: Der Pack altert ungleich und ist auf dem Weg nach draußen.</div>
   <div class="step"><h4>Mehrere Packs? Parallel-Board — mit eigenen Regeln</h4>Ein Paraboard lädt mehrere Packs in einem Durchgang und ist am Flugtag kaum verzichtbar. Es hat aber eigene Sicherheitsregeln, die vor dem ersten Anstecken sitzen müssen — der komplette Ablauf steht im nächsten Unterpunkt <a href="#akku--parallel-laden-aber-sicher">Parallel laden — aber sicher</a>.</div>
   <div class="step"><h4>Voll geladen wird geflogen, nicht gelagert</h4>Am Vorabend des Flugtags laden ist in Ordnung. Tagelang voll herumliegen altert die Zellen messbar — wer den Flugtag absagt, fährt die Packs zurück auf Storage.</div>
 </div>
 
 
 <h2>Parallel laden — aber sicher</h2>
-<p>Ein Parallel-Ladeboard verbindet mehrere Packs zu <b>einem einzigen großen Akku</b>: Alle Pluspole zusammen, alle Minuspole zusammen, alle Balancer-Adern Zelle für Zelle zusammen. Das Ladegerät sieht danach nur noch einen Pack mit der Summe der Kapazitäten. Genau darin steckt die Gefahr: <b>In dem Moment, in dem der zweite Pack eingesteckt wird, fließen Ausgleichsströme zwischen den Packs — ungeregelt, nur begrenzt durch die Innenwiderstände.</b> Das Ladegerät hat darauf keinen Einfluss; es ist zu diesem Zeitpunkt noch gar nicht beteiligt. Alle Regeln unten dienen dazu, diese Ausgleichsströme klein zu halten.</p>
-<div class="stop"><b>Die eine unverzeihliche Regel: nur gleiche Zellenzahl auf ein Board.</b> Ein 4S neben einem 6S auf demselben Board verbindet 16,8 V hart mit 25,2 V — die Ausgleichsströme sind sofort zerstörerisch, und über den Balancer-Bus werden einzelne Zellen gegeneinander kurzgeschlossen. Das ist die häufigste Ursache für Ladebrände mit Paraboard. Gleiche Chemie ist ebenso Pflicht (kein LiPo neben LiHV — unterschiedliche Ladeschlussspannung).</div>
+<ul>
+  <li>Ein Paraboard verbindet mehrere Packs zu <b>einem großen Akku</b>: alle Pluspole, Minuspole und Balancer-Adern zusammen — das Ladegerät sieht einen Pack mit der Summe der Kapazitäten</li>
+  <li><b>Die Gefahr:</b> Beim Einstecken des zweiten Packs fließen Ausgleichsströme — ungeregelt, nur durch die Innenwiderstände begrenzt; das Ladegerät ist daran unbeteiligt</li>
+  <li>Alle Regeln unten halten diese Ausgleichsströme klein</li>
+</ul>
+<div class="stop"><b>Die eine unverzeihliche Regel: nur gleiche Zellenzahl auf ein Board.</b> 4S neben 6S verbindet 16,8 V hart mit 25,2 V — zerstörerische Ausgleichsströme, Zellen-Kurzschluss über den Balancer-Bus, die häufigste Ursache für Paraboard-Brände. Gleiche Chemie ebenso Pflicht (kein LiPo neben LiHV).</div>
 <div class="steps">
-  <div class="step"><h4>Vorher jeden Pack messen</h4>Mit dem Akkuchecker: gleiche Zellenzahl, und die Zellspannungen aller Packs höchstens <b>0,1 V je Zelle</b> auseinander (bei 6S also maximal ~0,6 V Differenz der Gesamtspannung). Praktisch heißt das: leere zu leeren, volle zu vollen — einen frisch geflogenen Pack neben einen vollen zu stecken ist genau der Fehler, den die Regel verhindert. Ausreißer werden einzeln geladen.</div>
+  <div class="step"><h4>Vorher jeden Pack messen</h4>Mit dem Akkuchecker: gleiche Zellenzahl · Zellspannungen max. <b>0,1 V je Zelle</b> auseinander (6S: ~0,6 V gesamt). Praktisch: leere zu leeren, volle zu vollen — frisch geflogen neben voll ist genau der Fehler. Ausreißer einzeln laden.</div>
   <div class="step"><h4>Board prüfen</h4>Nur Boards mit Sicherungen je Anschluss verwenden (Haupt- <em>und</em> idealerweise Balancerpfad); Buchsen auf Schmorspuren und lockere Kontakte ansehen. Billige Boards ohne Sicherungen sind der falsche Ort zum Sparen.</div>
   <div class="step"><h4>Anstecken: erst alle Hauptstecker, dann alle Balancer</h4>Hauptstecker einzeln anstecken, nach jedem kurz innehalten (kein Funke außer dem normalen kleinen Kontaktfunken, nichts wird warm). Erst wenn alle Hauptleitungen stecken, die Balancerstecker — der Hauptpfad verkraftet die Ausgleichsströme, die dünnen Balancer-Adern nicht. Deshalb diese Reihenfolge.</div>
   <div class="step"><h4>Ladegerät einstellen wie für einen großen Pack</h4>Modus und Zellenzahl wie bei <em>einem</em> der Packs (alle sind ja gleich), Strom = 1C der <b>Summe</b> der Kapazitäten. Danach zeigt das Ladegerät ganz normal sechs Zellspannungen an — es sind jetzt die Mittelwerte über alle Packs.</div>
   <div class="step"><h4>Die ersten Minuten dabeibleiben</h4>Board und Stecker anfassen: handwarm ist normal, eine heiße Stelle heißt sofort abbrechen. Danach gelten die üblichen Regeln — beaufsichtigt, feuerfest, Rauchmelder.</div>
   <div class="step"><h4>Abstecken in umgekehrter Reihenfolge</h4>Erst alle Balancer, dann die Hauptstecker. Anschließend stichprobenartig Einzelzellen prüfen — nach einem sauberen Parallel-Ladevorgang sind alle Packs auf identischem Stand, das ist der angenehme Nebeneffekt der Methode.</div>
 </div>
-<div class="tip"><b>Rechenbeispiel:</b> Vier 6S-Packs mit je 1300 mAh → Summe 5200 mAh → Ladestrom 5,2 A, Modus „LiPo 6S“. Das Ladegerät behandelt das Gespann wie einen einzelnen 6S-5200er. Auch Storage funktioniert so: Das Storage-Programm fährt alle vier Packs gemeinsam auf 3,8 V je Zelle. Unterschiedliche <em>Kapazitäten</em> auf einem Board sind übrigens erlaubt — der Strom teilt sich von selbst im Verhältnis der Kapazitäten auf; nur Zellenzahl, Chemie und Ladezustand müssen zusammenpassen.</div>
+<div class="tip"><b>Rechenbeispiel:</b> 4 × 6S-1300 → 5200 mAh → 5,2 A, Modus „LiPo 6S“ — wie ein einzelner 6S-5200er. Storage funktioniert genauso (alle gemeinsam auf 3,8 V). Unterschiedliche <em>Kapazitäten</em> sind erlaubt — der Strom teilt sich im Verhältnis auf; nur Zellenzahl, Chemie und Ladezustand müssen passen.</div>
 
 <h2>Lagern und aussortieren</h2>
 <div class="steps">
-  <div class="step"><h4>Storage nach dem Flugtag</h4>Wer nicht innerhalb der nächsten zwei, drei Tage wieder fliegt, fährt die Packs auf <b>3,80–3,85 V je Zelle</b> (≈ 40–50 % Ladung) — das Storage-Programm des Ladegeräts lädt oder entlädt automatisch dorthin. Das ist der stabilste Zustand der Zelle; volle wie leere Lagerung kostet Kapazität.</div>
+  <div class="step"><h4>Storage nach dem Flugtag</h4>Kein Flug in den nächsten zwei, drei Tagen → Storage-Programm auf <b>3,80–3,85 V je Zelle</b> (≈ 40–50 %); es lädt oder entlädt automatisch dorthin. Der stabilste Zustand — volle wie leere Lagerung kostet Kapazität.</div>
   <div class="step"><h4>Kühl, trocken, feuerfest</h4>Zimmertemperatur oder kühler, nicht im Sommerauto, nicht auf der Fensterbank. LiPo-Tasche oder Metallkiste, Stecker so, dass nichts kurzschließen kann.</div>
-  <div class="step"><h4>Langzeitlagerung: gelegentlich nachsehen</h4>Selbstentladung ist klein, aber nicht null. Bei Packs, die Monate liegen, alle vier bis acht Wochen die Spannung prüfen — fällt eine Zelle Richtung 3,3 V, nachladen auf Storage. Ein Pack, der auffallend schneller Spannung verliert als seine Geschwister, hat einen internen Defekt: aussortieren.</div>
+  <div class="step"><h4>Langzeitlagerung: gelegentlich nachsehen</h4>Alle vier bis acht Wochen Spannung prüfen; fällt eine Zelle Richtung 3,3 V → auf Storage nachladen. Verliert ein Pack auffallend schneller als seine Geschwister: interner Defekt, aussortieren.</div>
   <div class="step"><h4>Aufgeblähte Packs sofort aussortieren</h4>Ein „Puffy“ ist Gasbildung durch Zersetzung des Elektrolyts. Er wird nicht wieder flach, auch nicht im Kühlschrank (hartnäckiger Mythos). Nicht mehr laden, nicht mehr fliegen — kontrolliert entladen und entsorgen.</div>
   <div class="step"><h4>Entsorgung</h4>Vollständig entladen (ein Entladewiderstand oder die Entladefunktion des Ladegeräts ist sauberer als das oft zitierte Salzwasserbad), Pole abkleben, Batteriesammlung — nicht Hausmüll. Beschädigte Packs bis zur Abgabe in Sand oder Metallkiste.</div>
 </div>
