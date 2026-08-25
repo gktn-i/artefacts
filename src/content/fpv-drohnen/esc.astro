@@ -4,7 +4,11 @@ import "./_style.css";
 <div class="kurz"><b>Der ESC macht aus Gleichspannung ein Drehfeld, der FC entscheidet, wie schnell.</b> Beide bilden den „Stack“ in der Rahmenmitte. Der ESC führt die höchsten Ströme — und raucht bei Fehlern zuerst.</div>
 
 <h2>ESC: was drinsteckt</h2>
-<p>Sechs MOSFETs bilden drei Halbbrücken, ein Mikrocontroller schaltet sie der Reihe nach. Die Rotorlage liest der ESC aus der Gegen-EMK der unbestromten Phase — bei Drehzahl gut, im Stillstand schlecht. Deshalb ruckelt jeder BLDC beim Anlaufen kurz.</p>
+<ul>
+  <li>Sechs MOSFETs = drei Halbbrücken; ein Mikrocontroller schaltet sie reihum</li>
+  <li>Die Rotorlage liest der ESC aus der Gegen-EMK der unbestromten Phase</li>
+  <li>Bei Drehzahl zuverlässig, im Stillstand nicht — deshalb ruckelt jeder BLDC beim Anlaufen kurz</li>
+</ul>
 <div class="tbl-wrap"><table style="min-width:920px">
 <thead><tr><th>Kennwert</th><th>Üblich (Stand 2026)</th><th>Worauf achten</th></tr></thead>
 <tbody>
