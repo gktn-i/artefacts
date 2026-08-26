@@ -1,0 +1,99 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Wärmebehandlung ändert die Festigkeit eines Stahls um den Faktor fünf — ohne den E-Modul anzurühren.</b> Korrosion wiederum ist ein elektrochemischer Vorgang, der Metall, Elektrolyt und ein Potenzialgefälle braucht. Beides entscheidet sich meist in der Konstruktion, nicht am Werkstoffregal.</div>
+
+<h2>Wärmebehandlungsverfahren für Stahl</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Verfahren</th><th>Ablauf</th><th>Ergebnis</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>Härten</b></td><td>Austenitisieren (800–900 °C), abschrecken in Wasser, Öl oder Luft</td><td>Martensit: bis 65 HRC, sehr spröde, mit Eigenspannungen</td><td>C &gt; 0,3 %: C45, 42CrMo4, Werkzeugstahl</td></tr>
+<tr><td><b>Anlassen</b></td><td>Nach dem Härten auf 150–650 °C erwärmen</td><td>Baut Eigenspannungen ab, senkt Härte, erhöht Zähigkeit</td><td>Immer nach dem Härten</td></tr>
+<tr><td><b>Vergüten</b></td><td>Härten + Anlassen bei 500–650 °C</td><td>Beste Kombination aus Festigkeit und Zähigkeit</td><td>Wellen, Achsen, Schrauben 8.8–12.9</td></tr>
+<tr><td><b>Einsatzhärten</b></td><td>Rand aufkohlen (900–950 °C), dann härten</td><td>Harte Randschicht 0,3–2 mm, zäher Kern</td><td>C &lt; 0,25 %: 16MnCr5 — Zahnräder, Bolzen</td></tr>
+<tr><td><b>Nitrieren</b></td><td>Stickstoff bei 500–570 °C eindiffundieren</td><td>Sehr harte dünne Schicht (0,1–0,5 mm), <b>kaum Verzug</b></td><td>Nitrierstähle, Spindeln, Formen</td></tr>
+<tr><td><b>Induktionshärten</b></td><td>Örtlich mit Spule erwärmen und abschrecken</td><td>Selektiv gehärtete Zonen</td><td>Laufflächen, Zahnflanken, Nockenwellen</td></tr>
+<tr><td><b>Normalglühen</b></td><td>30–50 K über A₃, Luftabkühlung</td><td>Gleichmäßiges feinkörniges Gefüge</td><td>Nach Schweißen oder Schmieden</td></tr>
+<tr><td><b>Weichglühen</b></td><td>Lange bei 680–720 °C, langsam abkühlen</td><td>Weichstes Gefüge, beste Zerspanbarkeit</td><td>Vor der Bearbeitung hochlegierter Stähle</td></tr>
+<tr><td><b>Spannungsarmglühen</b></td><td>550–650 °C, sehr langsam abkühlen</td><td>Eigenspannungen weg, Gefüge bleibt</td><td>Nach dem Schweißen, vor der Feinbearbeitung</td></tr>
+</tbody>
+</table></div>
+
+<div class="stop"><b>Nach dem Härten immer anlassen — sofort.</b> Frisch gehärteter Martensit steht unter enormen Eigenspannungen und kann über Nacht von selbst reißen. Anlassen gehört zum Härten dazu; Anlasstemperatur und Haltezeit bestimmen die Endhärte (Anlassschaubild im Werkstoffdatenblatt).</div>
+
+<h2>Reihenfolge in der Fertigung</h2>
+<div class="steps">
+  <div class="step"><h4>Weichbearbeitung</h4>Drehen, Fräsen, Bohren im weichen Zustand; 0,2–0,5 mm Zugabe für das spätere Schleifen stehen lassen.</div>
+  <div class="step"><h4>Spannungsarmglühen</h4>Bei stark zerspanten oder geschweißten Teilen vor dem Härten — sonst verzieht sich das Teil unkontrolliert.</div>
+  <div class="step"><h4>Härten und Anlassen</h4>Gleichmäßige Querschnitte gestalten; Sprünge und scharfe Kanten sind Härterissausgänge. Bohrungen und Nuten vorher fertigstellen — gehärtet lässt sich nur noch schleifen oder erodieren.</div>
+  <div class="step"><h4>Hartbearbeitung</h4>Schleifen oder Hartdrehen auf Endmaß nimmt den Härteverzug weg.</div>
+  <div class="step"><h4>Oberflächenbehandlung</h4>Brünieren, Beschichten als Abschluss. Bei galvanischen Verfahren an hochfesten Teilen: Wasserstoffversprödung — danach tempern.</div>
+</div>
+<div class="tip"><b>Für Einzelteile:</b> Ein gewerblicher Härter kostet oft unter zwanzig Euro je Teil und liefert ein Prüfprotokoll. Noch einfacher: bereits vergütet gekauftes Material (C45 vergütet, 42CrMo4 QT) verwenden und die Wärmebehandlung ganz vermeiden.</div>
+
+<h2>Aushärten bei Aluminium</h2>
+<p>6000er- (AlMgSi) und 7000er-Legierungen (AlZn) werden durch Lösungsglühen (ca. 500 °C), Abschrecken und Auslagern fest: Kaltauslagern ergibt T4, Warmauslagern bei 150–190 °C den Standardzustand <b>T6</b>.</p>
+<div class="warn"><b>Aluminium verliert seine Festigkeit beim Schweißen.</b> Die Wärmeeinflusszone überaltert und fällt nahe auf den weichgeglühten Zustand zurück — bei 6082-T6 von 290 auf rund 150 N/mm². Das ist physikalisch unvermeidlich: geschweißte Alukonstruktionen werden mit den Werten der Wärmeeinflusszone gerechnet (Eurocode 9).</div>
+
+<h2>Korrosionsarten erkennen</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Art</th><th>Mechanismus</th><th>Gegenmaßnahme</th></tr></thead>
+<tbody>
+<tr><td><b>Flächenkorrosion</b></td><td>Gleichmäßiger Abtrag durch Feuchte und Sauerstoff</td><td>Beschichtung, Verzinkung, Wandstärkenzugabe</td></tr>
+<tr><td><b>Kontaktkorrosion</b></td><td>Zwei Metalle mit Potenzialdifferenz im Elektrolyten; das unedlere löst sich auf</td><td>Elektrisch trennen, verträgliche Paarung, Flächenverhältnis beachten</td></tr>
+<tr><td><b>Spaltkorrosion</b></td><td>Sauerstoffmangel im engen Spalt, Passivschicht bricht zusammen</td><td>Spalte vermeiden oder vollständig abdichten</td></tr>
+<tr><td><b>Lochfraß (Pitting)</b></td><td>Chlorid durchbricht die Passivschicht punktuell</td><td>Molybdänhaltiger Edelstahl (1.4404), Chlorid fernhalten</td></tr>
+<tr><td><b>Spannungsrisskorrosion</b></td><td>Zugspannung plus spezifisches Medium — feine Risse, plötzlicher Bruch</td><td>Eigenspannungen abbauen, Werkstoff-Medium-Paarung prüfen</td></tr>
+<tr><td><b>Interkristalline Korrosion</b></td><td>Chromkarbide an Korngrenzen nach dem Schweißen</td><td>Niedriggekohlte oder stabilisierte Sorten (1.4404, 1.4571)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Spannungsreihe: wer opfert sich für wen</h2>
+<p>Praktische Potenziale in Seewasser, von unedel nach edel — bei Kontakt wird das unedlere Metall angegriffen: <b>Magnesium (−1,6 V) → Zink (−1,0) → Aluminium (−0,8) → Baustahl (−0,6) → Blei/Zinn, Messing, Bronze (−0,3) → Kupfer (−0,2) → Edelstahl passiv (−0,1) → Titan, Graphit/Kohlefaser (+0,1)</b>.</p>
+<div class="stop"><b>Das Flächenverhältnis entscheidet über die Geschwindigkeit.</b> Eine kleine Edelstahlschraube im großen Aluteil ist wenig kritisch; eine kleine Aluminiumniete im großen Edelstahlblech ist in kurzer Zeit weg. Merksatz: <b>kleine Kathode, große Anode</b> ist unkritisch — umgekehrt fatal.</div>
+
+<h2>Schutzverfahren</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Verfahren</th><th data-s="num">Schichtdicke</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Galvanisch verzinken</b></td><td>5–25 µm</td><td>Kathodischer Schutz, Standard bei Normteilen. Hochfeste Teile (12.9): Wasserstoffversprödung — tempern</td></tr>
+<tr><td><b>Feuerverzinken</b></td><td>50–150 µm</td><td>Jahrzehnte im Freien; Verzug durchs Tauchbad, Maße ändern sich</td></tr>
+<tr><td><b>Eloxieren (Alu)</b></td><td>5–25 µm (Hartcoat bis 60)</td><td>Harte, isolierende, einfärbbare Oxidschicht; Maße wachsen um etwa die halbe Schichtdicke</td></tr>
+<tr><td><b>Pulverbeschichten</b></td><td>60–120 µm</td><td>Robuster Barriereschutz; unterrostet bei Beschädigung (kein kathodischer Schutz)</td></tr>
+<tr><td><b>Brünieren</b></td><td>&lt; 1 µm</td><td>Nur mit Öl wirksam; maßneutral — Werkzeuge und Lehren</td></tr>
+<tr><td><b>Chemisch Nickel</b></td><td>10–50 µm</td><td>Sehr gleichmäßig, auch in Bohrungen; hart, teurer</td></tr>
+<tr><td><b>Opferanode</b></td><td>—</td><td>Kathodischer Schutz durch unedleres Metall; Boote, Boiler — regelmäßig tauschen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Konstruktiver Korrosionsschutz</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4>
+    <ul>
+      <li>Wasser ablaufen lassen: geneigte Flächen, Ablauflöcher an den tiefsten Stellen</li>
+      <li>Spalte vermeiden oder verschließen (durchgehende Naht statt Heftpunkte)</li>
+      <li>Metalle mit Kunststoffscheibe, Klebstoff oder Beschichtung trennen</li>
+      <li>Kanten brechen — Beschichtungen reißen an scharfen Kanten auf</li>
+      <li>Edelstahl nach dem Schweißen beizen und passivieren</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Falsch</h4>
+    <ul>
+      <li>Nach unten offene Hohlprofile ohne Ablauf</li>
+      <li>Edelstahl mit einer Bürste bearbeiten, die vorher an normalem Stahl war (Fremdrost)</li>
+      <li>Aluminium direkt gegen Kohlefaser oder Edelstahl im Freien</li>
+      <li>Beschichtung als einzige Maßnahme bei bekannter Beschädigungsgefahr</li>
+      <li>Hochfeste Schrauben galvanisch verzinken ohne anschließendes Tempern</li>
+    </ul>
+  </div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN ISO 4885 — Wärmebehandlung von Eisenwerkstoffen: Begriffe und Verfahren; DIN EN 10083 — Vergütungsstähle mit Anlassschaubildern.</li>
+    <li>DIN EN 515 — Aluminium-Zustandsbezeichnungen; DIN EN 1999-1-1 (Eurocode 9) — Abminderung in der Wärmeeinflusszone.</li>
+    <li>DIN EN ISO 8044 (Korrosionsbegriffe), DIN EN ISO 12944 (Beschichtungssysteme, Korrosivitätskategorien C1–C5), DIN EN ISO 1461 (Feuerverzinken), DIN EN ISO 4042 (galvanische Überzüge, Wasserstoffversprödung), DIN EN ISO 7599 (Eloxal).</li>
+    <li>Berns/Theisen, <i>Eisenwerkstoffe — Stahl und Gusseisen</i>, Springer; Wendler-Kalsch/Gräfen, <i>Korrosionsschadenkunde</i>, Springer.</li>
+  </ul>
+</div>

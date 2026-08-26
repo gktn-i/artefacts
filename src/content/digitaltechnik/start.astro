@@ -1,44 +1,50 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Digitaltechnik ist Analogtechnik mit nur zwei erlaubten Zuständen.</b> Der Gewinn: Störungen werden bei jeder Stufe wieder ausgebügelt, solange der Pegel im richtigen Bereich bleibt. Der Preis: Zeit wird zur kritischen Größe — Setup, Hold, Laufzeit und Metastabilität sind die eigentlichen Themen jenseits der Wahrheitstabelle.</div>
+<div class="kurz"><b>Digitaltechnik ist Analogtechnik mit nur zwei erlaubten Zuständen — Informationstechnik die Frage, wie aus diesen Zuständen Bedeutung wird.</b> Der Gewinn des Digitalen: Störungen werden in jeder Stufe ausgebügelt, Kopien sind bitgenau. Der Preis: Zeit, Codierung und Kommunikation werden zu eigenen Disziplinen — von der Taktflanke bis zum Netzwerkprotokoll.</div>
 
 <h2>Landkarte</h2>
 <div class="map">
-  <a href="#zahlen"><div class="mt"><span class="i">🔢</span>Zahlensysteme</div><div class="md">Binär, hex, Zweierkomplement, BCD, Gray — und warum negative Zahlen so aussehen, wie sie aussehen.</div></a>
-  <a href="#boole"><div class="mt"><span class="i">∧</span>Boolesche Algebra</div><div class="md">Gesetze, De Morgan, KV-Diagramm, Minimierung von Hand.</div></a>
-  <a href="#schaltnetze"><div class="mt"><span class="i">🔗</span>Schaltnetze</div><div class="md">Gatter, Multiplexer, Decoder, Addierer, ALU — Logik ohne Gedächtnis.</div></a>
-  <a href="#flipflops"><div class="mt"><span class="i">💾</span>Flipflops</div><div class="md">Latch gegen Flipflop, D, JK, T, Register, Zähler, Schieberegister.</div></a>
-  <a href="#automaten"><div class="mt"><span class="i">🔁</span>Zustandsautomaten</div><div class="md">Moore und Mealy, Zustandsdiagramm, Codierung, Umsetzung in Hardware und Software.</div></a>
-  <a href="#timing"><div class="mt"><span class="i">⏱️</span>Timing</div><div class="md">Setup, Hold, Clock Skew, Metastabilität, Taktdomänenübergänge.</div></a>
-  <a href="#logikfamilien"><div class="mt"><span class="i">🔌</span>Logikfamilien</div><div class="md">TTL, CMOS, LVCMOS, LVDS; Pegel, Fan-out, Pegelwandler.</div></a>
-  <a href="#speicher"><div class="mt"><span class="i">🗄️</span>Speicher</div><div class="md">SRAM, DRAM, Flash, EEPROM, FRAM — Aufbau, Lebensdauer, Auswahl.</div></a>
-  <a href="#fpga"><div class="mt"><span class="i">🧱</span>FPGA &amp; HDL</div><div class="md">LUT, Flipflop, Blockram; VHDL und Verilog; Toolchains und der Einstieg.</div></a>
+  <a href="#zahlen"><div class="mt"><span class="i">🔢</span>Zahlensysteme &amp; Codes</div><div class="md">Binär, Hex, Zweierkomplement, Gray — dazu IEEE 754, Festkomma und die Ganzzahl-Fallen in C.</div></a>
+  <a href="#logik"><div class="mt"><span class="i">∧</span>Boolesche Algebra &amp; Schaltnetze</div><div class="md">Gesetze, De Morgan, KV-Diagramm; Gatter, Multiplexer, Addierer, Tri-State.</div></a>
+  <a href="#schaltwerke"><div class="mt"><span class="i">💾</span>Flipflops &amp; Automaten</div><div class="md">Latch gegen Flipflop, Register, Zähler; Moore/Mealy und der Zustandsautomat in C.</div></a>
+  <a href="#timing"><div class="mt"><span class="i">⏱️</span>Timing, Pegel &amp; Logikfamilien</div><div class="md">Setup, Hold, Metastabilität, Taktdomänen; TTL/CMOS-Pegel und Pegelwandler.</div></a>
+  <a href="#speicher"><div class="mt"><span class="i">🗄️</span>Speicher &amp; FPGA</div><div class="md">SRAM, DRAM, Flash, FRAM — und was in einem FPGA steckt, samt HDL-Grundregeln.</div></a>
+  <a href="#information"><div class="mt"><span class="i">📐</span>Information &amp; Codierung</div><div class="md">Entropie, Kompression, Kanalkapazität; CRC, Hamming, Reed-Solomon.</div></a>
+  <a href="#architektur"><div class="mt"><span class="i">🏛️</span>Rechnerarchitektur &amp; Befehlssätze</div><div class="md">Pipeline, Cache, Speicherhierarchie; ARM, RISC-V, x86 im Vergleich.</div></a>
+  <a href="#os"><div class="mt"><span class="i">🧵</span>Betriebssysteme &amp; Echtzeit</div><div class="md">Prozesse, Scheduling, Nebenläufigkeit — und was „hart echtzeitfähig“ wirklich heißt.</div></a>
+  <a href="#software"><div class="mt"><span class="i">🧰</span>Softwaretechnik &amp; Werkzeuge</div><div class="md">Git, Build-Systeme, Tests, statische Analyse — das Handwerkszeug.</div></a>
+  <a href="#netzwerke"><div class="mt"><span class="i">🌐</span>Netzwerke &amp; TCP/IP</div><div class="md">Schichtenmodell, TCP/UDP, Ethernet-Varianten, MQTT und Fehlersuche von unten nach oben.</div></a>
+  <a href="#funk"><div class="mt"><span class="i">📡</span>Funk &amp; Wireless</div><div class="md">WLAN, BLE, Thread, LoRa; Linkbudget, Antennenfehler, EU-Regeln.</div></a>
+  <a href="#dsp"><div class="mt"><span class="i">📊</span>Signalverarbeitung &amp; DSP</div><div class="md">Abtastung, Aliasing, FFT, Fenster, digitale Filter, praktische Rezepte.</div></a>
+  <a href="#security"><div class="mt"><span class="i">🔐</span>Security &amp; Kryptografie</div><div class="md">Bedrohungsmodell, Krypto-Bausteine, Secure Boot, sichere Updates, EU-Recht.</div></a>
 </div>
 
-<h2>Warum digital überhaupt gewonnen hat</h2>
+<h2>Warum digital gewonnen hat — und wo nicht</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Regeneration</div><div class="cd">Jede Logikstufe erzeugt saubere Pegel neu. Nach hundert Stufen ist das Signal genauso gut wie am Anfang — bei analoger Verarbeitung addieren sich Rauschen und Verzerrung.</div></div>
-  <div class="card"><div class="ct">Exakte Reproduzierbarkeit</div><div class="cd">Eine Kopie ist bitgenau identisch. Speichern, übertragen, wiederherstellen — beliebig oft.</div></div>
-  <div class="card"><div class="ct">Skalierung</div><div class="cd">Ein Transistor mehr kostet praktisch nichts, sobald der Chip einmal existiert. Genau darauf beruht die gesamte Rechnerentwicklung der letzten sechzig Jahre.</div></div>
+  <div class="card"><div class="ct">Regeneration</div><div class="cd">Jede Logikstufe erzeugt saubere Pegel neu. Nach hundert Stufen ist das Signal so gut wie am Anfang — analog addieren sich Rauschen und Verzerrung.</div></div>
+  <div class="card"><div class="ct">Exakte Kopien</div><div class="cd">Speichern, übertragen, wiederherstellen — beliebig oft, bitgenau identisch.</div></div>
+  <div class="card"><div class="ct">Skalierung</div><div class="cd">Ein Transistor mehr kostet praktisch nichts, sobald der Chip existiert. Darauf beruht die gesamte Rechnerentwicklung.</div></div>
   <div class="card"><div class="ct">Programmierbarkeit</div><div class="cd">Dieselbe Hardware macht etwas völlig anderes, wenn man den Speicherinhalt ändert. Das gibt es analog nicht.</div></div>
 </div>
-<div class="warn"><b>Und wo digital verliert:</b> Jede Umsetzung in beide Richtungen kostet Zeit, Strom und Genauigkeit. Ein einfacher analoger Tiefpass mit zwei Bauteilen braucht digital einen Wandler, einen Rechenkern, eine Taktversorgung und eine Rekonstruktion. Für die kleinsten Signale und für die schnellsten Reaktionen bleibt analog überlegen. Deshalb steht in jedem mechatronischen Gerät beides nebeneinander.</div>
+<div class="warn"><b>Wo digital verliert:</b> Jede Wandlung kostet Zeit, Strom und Genauigkeit. Ein analoger Tiefpass aus zwei Bauteilen braucht digital Wandler, Rechenkern, Takt und Rekonstruktion. Für die kleinsten Signale und schnellsten Reaktionen bleibt analog überlegen — deshalb steht in jedem mechatronischen Gerät beides nebeneinander.</div>
 
-<h2>Was hier nicht steht</h2>
-<p>Dieses Modul behandelt Digitaltechnik als Hardwaredisziplin. Angrenzend:</p>
-<ul>
-  <li><a href="informationstechnik.html">Informationstechnik</a> — Codierung, Rechnerarchitektur, Netzwerke, Signalverarbeitung.</li>
-  <li><a href="embedded-firmware.html">Embedded &amp; Firmware</a> — der Mikrocontroller in der Praxis, Peripherie, Toolchain, RTOS.</li>
-  <li><a href="elektronik-grundlagen.html#protokolle">Elektronik 101 → Protokolle</a> — I²C, SPI, UART aus der Anwendersicht mit Verdrahtungsdetails.</li>
-</ul>
+<h2>Die drei Fragen an jedes System</h2>
+<div class="steps">
+  <div class="step"><h4>Wie viel Information entsteht, und wie oft?</h4>Ein Temperatursensor liefert 2 Byte pro Minute, eine Kamera 30 MB pro Sekunde. Daraus folgen Bandbreite, Speicher, Energiebedarf und Übertragungstechnik — nicht umgekehrt.</div>
+  <div class="step"><h4>Was passiert, wenn ein Bit kippt?</h4>Bei einem Temperaturwert nichts Schlimmes, bei einem Firmware-Update das Ende des Geräts. Der nötige Fehlerschutz folgt aus dieser Antwort — siehe <a href="#information">Information &amp; Codierung</a>.</div>
+  <div class="step"><h4>Wie schnell muss reagiert werden — und was passiert bei Verspätung?</h4>Die Trennlinie zwischen harter und weicher Echtzeit — siehe <a href="#os">Betriebssysteme &amp; Echtzeit</a>.</div>
+</div>
+
+<div class="tip"><b>Angrenzende Module:</b> Der Mikrocontroller in der Praxis (Peripherie, Toolchain, RTOS-Einsatz) steht in <a href="embedded-firmware.html">Embedded &amp; Firmware</a>, I²C/SPI/UART aus Anwendersicht in <a href="elektronik-grundlagen.html#protokolle">Elektronik 101 → Protokolle</a>, Server und Heimnetz in <a href="homeserver-101.html">Homeserver 101</a>.</div>
 
 <div class="srcs">
   <div class="sh">Grundlage dieses Moduls</div>
   <ul>
-    <li>Klaus Fricke, <i>Digitaltechnik — Lehr- und Übungsbuch für Elektrotechniker und Informatiker</i>, Springer Vieweg.</li>
-    <li>M. Morris Mano, Michael Ciletti, <i>Digital Design</i>, Pearson — international der Standard.</li>
+    <li>Klaus Fricke, <i>Digitaltechnik</i>, Springer Vieweg.</li>
     <li>Harris &amp; Harris, <i>Digital Design and Computer Architecture</i>, Morgan Kaufmann — verbindet Digitaltechnik und Rechnerbau, mit RISC-V-Ausgabe.</li>
-    <li><a href="https://nandgame.com/">nandgame.com</a> und <a href="https://www.nand2tetris.org/">nand2tetris</a> — vom NAND-Gatter zum funktionierenden Rechner, kostenlos und ausgezeichnet zum Selbststudium.</li>
+    <li>Andrew S. Tanenbaum, <i>Computerarchitektur</i> und <i>Computernetzwerke</i>, Pearson.</li>
+    <li>Bryant &amp; O'Hallaron, <i>Computer Systems: A Programmer's Perspective</i>, Pearson.</li>
+    <li><a href="https://www.nand2tetris.org/">nand2tetris</a> und <a href="https://nandgame.com/">nandgame.com</a> — vom NAND-Gatter zum funktionierenden Rechner, kostenlos.</li>
   </ul>
 </div>

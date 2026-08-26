@@ -6,7 +6,7 @@ import "./_style.css";
 <h2>Der Ablauf</h2>
 <div class="steps">
   <div class="step"><h4>Ereignis tritt auf</h4>Peripherie setzt ein Flag und meldet es dem Interrupt-Controller (NVIC bei Cortex-M).</div>
-  <div class="step"><h4>Prozessor sichert den Kontext</h4>Bei Cortex-M werden acht Register automatisch auf den Stack gelegt — deshalb ist die Latenz mit 12 Takten deterministisch und es braucht keinen Assembler-Vorspann.</div>
+  <div class="step"><h4>Prozessor sichert den Kontext</h4>Bei Cortex-M werden acht Register automatisch auf den Stack gelegt — deshalb ist die Latenz deterministisch (12 Takte bei M3/M4/M7, 15 beim M0+) und es braucht keinen Assembler-Vorspann.</div>
   <div class="step"><h4>Handler läuft</h4>Der Vektor zeigt auf die Funktion. Sie sollte kurz sein und keine blockierenden Aufrufe enthalten.</div>
   <div class="step"><h4>Flag löschen</h4>Sonst wird die Routine sofort erneut aufgerufen. Bei manchen Controllern muss nach dem Löschen zurückgelesen werden, damit der Schreibvorgang die Peripherie erreicht hat, bevor der Handler endet.</div>
   <div class="step"><h4>Kontext wiederherstellen</h4>Rücksprung ins unterbrochene Programm. Bei Tail-Chaining wird direkt der nächste anstehende Interrupt bedient, ohne zwischendurch zurückzukehren.</div>

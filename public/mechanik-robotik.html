@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Umgezogen — Artefakte</title>
+<script>
+(function () {
+  var h = location.hash.replace("#", "");
+  var url;
+  if (/^robo-hw/.test(h)) url = "automatisierung-robotik.html#robo-hw";
+  else if (/^robo-sw/.test(h)) url = "automatisierung-robotik.html#ros";
+  else if (/^robo-lernen/.test(h)) url = "automatisierung-robotik.html#lernen";
+  else if (/^robo/.test(h)) url = "automatisierung-robotik.html#robotik";
+  else if (/^glossar/.test(h)) url = "mechatronik-nachschlagewerk.html#glossar";
+  else url = "mechanik.html" + (h ? "#" + h : "");
+  location.replace(url);
+})();
+</script>
+<meta http-equiv="refresh" content="0;url=mechanik.html">
+<p>Dieses Modul wurde aufgeteilt: Mechanik in <a href="mechanik.html">Mechanik &amp; Konstruktion</a>,
+Robotik in <a href="automatisierung-robotik.html">Automatisierung &amp; Robotik</a>.</p>
+</html>

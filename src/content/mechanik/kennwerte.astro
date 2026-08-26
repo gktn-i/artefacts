@@ -1,0 +1,72 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Werkstoffdatenblatt liest sich anders, wenn man weiß, was die Zahlen bedeuten und wie sie gemessen wurden.</b> Der häufigste Fehler ist, Festigkeit und Steifigkeit zu verwechseln — sie sind völlig unabhängig voneinander.</div>
+
+<h2>Die mechanischen Kennwerte</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Kennwert</th><th>Einheit</th><th>Sagt aus</th><th>Woher</th></tr></thead>
+<tbody>
+<tr><td><b>E-Modul (E)</b></td><td>N/mm²</td><td><b>Steifigkeit.</b> Elastische Verformung, Durchbiegung, Eigenfrequenz</td><td>Steigung der Geraden im Zugversuch</td></tr>
+<tr><td><b>Streckgrenze (R_p0,2 / R_eH)</b></td><td>N/mm²</td><td><b>Festigkeit.</b> Ab hier bleibt Verformung zurück — die Grenze, gegen die man auslegt</td><td>Zugversuch, 0,2 % bleibende Dehnung</td></tr>
+<tr><td><b>Zugfestigkeit (R_m)</b></td><td>N/mm²</td><td>Höchstwert vor dem Einschnüren; als Auslegungsgrenze ungeeignet, aber Basis vieler Faustformeln</td><td>Zugversuch, Maximum</td></tr>
+<tr><td><b>Bruchdehnung (A)</b></td><td>%</td><td><b>Zähigkeit.</b> Über 10 % kündigt sich Versagen an, unter 5 % bricht es schlagartig</td><td>Zugversuch, Reststreckung</td></tr>
+<tr><td><b>Kerbschlagarbeit (KV)</b></td><td>J</td><td>Zähigkeit unter Stoß, besonders bei tiefer Temperatur</td><td>Charpy-Pendelschlagversuch</td></tr>
+<tr><td><b>Härte (HB, HV, HRC)</b></td><td>—</td><td>Widerstand gegen Eindringen; korreliert grob mit Verschleißfestigkeit und R_m</td><td>Brinell, Vickers, Rockwell</td></tr>
+<tr><td><b>Dichte (ρ)</b></td><td>g/cm³</td><td>Für Leichtbau die Bezugsgröße der spezifischen Kennwerte</td><td>—</td></tr>
+<tr><td><b>Ausdehnungskoeffizient (α)</b></td><td>10⁻⁶/K</td><td>Dehnung bei Erwärmung; bei Mischbau zählt die Differenz</td><td>Dilatometer</td></tr>
+<tr><td><b>Wärmeleitfähigkeit (λ)</b></td><td>W/(m·K)</td><td>Kühlkörper, Heizelemente, alles Thermische</td><td>—</td></tr>
+</tbody>
+</table></div>
+
+<div class="stop"><b>Steifigkeit ≠ Festigkeit.</b> Ein Federstahl mit R_p0,2 = 1400 N/mm² ist viermal so fest wie Baustahl — aber exakt genauso steif (E = 210 000 N/mm²). Er hält mehr aus, bevor er bleibend verformt, biegt sich unter derselben Last aber genau gleich weit durch. Wer eine „steifere“ Achse will, braucht mehr Querschnitt oder eine bessere Form, nicht besseren Stahl.</div>
+
+<h2>Härteskalen umrechnen</h2>
+<p>Die Skalen sind nicht exakt ineinander umrechenbar, aber die Zuordnung nach DIN EN ISO 18265 ist für die Praxis brauchbar. Faustformel für un- und niedriglegierte Stähle: <span class="formula">R_m ≈ 3,3 · HB</span>.</p>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th data-s="num">HRC</th><th data-s="num">HV</th><th data-s="num">HB</th><th data-s="num">R_m ≈ [N/mm²]</th><th>Typisch</th></tr></thead>
+<tbody>
+<tr><td>—</td><td>120</td><td>114</td><td>385</td><td>S235 Baustahl, weichgeglüht</td></tr>
+<tr><td>20</td><td>240</td><td>228</td><td>770</td><td>Vergütungsstahl C45V</td></tr>
+<tr><td>30</td><td>302</td><td>287</td><td>970</td><td>42CrMo4 vergütet</td></tr>
+<tr><td>40</td><td>392</td><td>371</td><td>1 250</td><td>Werkzeugstahl, angelassen</td></tr>
+<tr><td>50</td><td>513</td><td>—</td><td>1 740</td><td>Einsatzgehärtete Randschicht</td></tr>
+<tr><td>60</td><td>697</td><td>—</td><td>—</td><td>Wälzlagerstahl 100Cr6, HSS-Fräser</td></tr>
+<tr><td>65+</td><td>&gt; 800</td><td>—</td><td>—</td><td>Hartmetall, Keramik</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was Datenblätter verschweigen</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Vorsicht bei</h4>
+    <ul>
+      <li><b>Kunststoff-Zugfestigkeiten:</b> gemessen bei 23 °C, kurzzeitig, an spritzgegossener Normprobe. Ein gedrucktes Teil bei 50 °C unter Dauerlast erreicht oft weniger als ein Drittel davon</li>
+      <li><b>Werten „bis zu“:</b> meist der Bestwert einer Legierungsgruppe im optimalen Zustand</li>
+      <li><b>Fehlender Prüfnorm:</b> ISO- und ASTM-Prüfungen liefern für Kunststoffe unterschiedliche Zahlen</li>
+      <li><b>Kriechen:</b> Kunststoffe verformen sich unter konstanter Last monatelang weiter — steht selten im Datenblatt</li>
+      <li><b>Dickenabhängigkeit:</b> dicke Querschnitte härten schlechter durch und haben niedrigere Kennwerte</li>
+    </ul>
+  </div>
+  <div class="gb-col good"><h4>Verlässlich</h4>
+    <ul>
+      <li><b>E-Modul von Metallen</b> — praktisch unabhängig von Legierung und Wärmebehandlung</li>
+      <li><b>Dichte</b> — ändert sich kaum</li>
+      <li><b>Genormte Werkstoffe mit Werkstoffnummer</b> — Mindestwerte der Norm sind garantiert</li>
+      <li><b>Werte mit Prüfnorm, Temperatur und Probengeometrie</b></li>
+      <li><b>Abnahmeprüfzeugnis 3.1</b> nach EN 10204 — misst das konkrete Los, nicht den Katalogwert</li>
+    </ul>
+  </div>
+</div>
+
+<div class="tip"><b>Für Leichtbau zählen spezifische Kennwerte</b> wie E/ρ — und bei freier Wandstärke E^(1/3)/ρ. Die Systematik nach Ashby samt Zahlenbeispielen steht unter <a href="#auswahl">Werkstoffwahl &amp; Tabellen</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN ISO 6892-1 — Zugversuch an metallischen Werkstoffen; Definition von R_p0,2, R_m und A.</li>
+    <li>DIN EN ISO 148-1 — Kerbschlagbiegeversuch nach Charpy.</li>
+    <li>DIN EN ISO 18265 — Umwertung von Härtewerten; Grundlage der Umrechnungstabelle.</li>
+    <li>DIN EN 10204 — Arten von Prüfbescheinigungen (2.1, 2.2, 3.1, 3.2).</li>
+    <li>Michael F. Ashby, <i>Materials Selection in Mechanical Design</i> — spezifische Kennzahlen und Werkstoffdiagramme.</li>
+  </ul>
+</div>

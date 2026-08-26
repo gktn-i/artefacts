@@ -1,0 +1,84 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Kunststoffe und Verbunde sind kein Metallersatz, sondern eigene Werkstoffklassen mit eigenen Regeln.</b> Kunststoffe kriechen unter Dauerlast und ändern sich mit Temperatur und Feuchte; Faserverbunde sind nur in Faserrichtung stark. Wer damit rechnet, bekommt sehr gute Bauteile.</div>
+
+<h2>Die drei Kunststofffamilien</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Thermoplaste</div><div class="cd">Schmelzen wieder auf: spritzgießbar, schweißbar, recyclingfähig. PE, PP, PA, POM, PC, PEEK — die technisch wichtigste Gruppe.</div></div>
+  <div class="card"><div class="ct">Duroplaste</div><div class="cd">Vernetzen irreversibel: hart, formstabil bis zur Zersetzung, nicht schweißbar. Epoxid, Phenolharz — als Matrix in Faserverbunden.</div></div>
+  <div class="card"><div class="ct">Elastomere</div><div class="cd">Weitmaschig vernetzt, gummielastisch, große reversible Dehnung. NBR, EPDM, FKM, Silikon — Dichtungen, Puffer, Schläuche.</div></div>
+</div>
+
+<h2>Technische Thermoplaste</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Kunststoff</th><th data-s="num">E-Modul [N/mm²]</th><th data-s="num">Dauertemperatur</th><th>Stärken und Schwächen</th></tr></thead>
+<tbody>
+<tr><td><b>PE-HD</b></td><td>1 000</td><td>80 °C</td><td>Chemisch sehr beständig, gleitfreudig, billig; weich, schlecht klebbar</td></tr>
+<tr><td><b>PP</b></td><td>1 400</td><td>100 °C</td><td>Chemikalienbeständig, Filmscharniere möglich; UV-empfindlich ohne Additive</td></tr>
+<tr><td><b>POM (Delrin, Ertacetal)</b></td><td>2 800</td><td>100 °C</td><td><b>Der Konstruktionswerkstoff:</b> steif, maßhaltig, hervorragend zerspanbar, gleitfreudig. Schlecht klebbar</td></tr>
+<tr><td><b>PA6 / PA66 (Nylon)</b></td><td>1 700–3 000</td><td>100 °C</td><td>Zäh, abriebfest, gut für Zahnräder. <b>Hygroskopisch:</b> nimmt bis 3 % Wasser auf, wird weicher und wächst bis 0,6 %</td></tr>
+<tr><td><b>PC (Polycarbonat)</b></td><td>2 300</td><td>115 °C</td><td>Transparent, extrem schlagzäh; Spannungsrisse durch Lösemittel</td></tr>
+<tr><td><b>PMMA (Acrylglas)</b></td><td>3 300</td><td>80 °C</td><td>Klarer als Glas, gut lasercuttbar und polierbar; spröde, kratzempfindlich</td></tr>
+<tr><td><b>PTFE (Teflon)</b></td><td>500</td><td>260 °C</td><td>Geringster Reibwert aller Feststoffe (0,04), chemisch inert; kriecht stark, nicht klebbar</td></tr>
+<tr><td><b>PEEK</b></td><td>3 600</td><td>250 °C</td><td>Hochleistungskunststoff: fest, chemisch inert, sterilisierbar. Sehr teuer</td></tr>
+<tr><td><b>ABS</b></td><td>2 200</td><td>85 °C</td><td>Gut zerspanbar und klebbar, schlagzäh; UV-empfindlich, quillt in Aceton (nutzbar zum Glätten)</td></tr>
+</tbody>
+</table></div>
+<p>3D-Druckwerkstoffe (PLA, PETG, ASA, PA-CF, TPU) mit Druckparametern und Düsenempfehlungen stehen gesammelt unter <a href="3d-druck.html#filamente">3D-Druck → Filamente</a>; Konstruktionsregeln für Druckteile unter <a href="#druck3d">Konstruieren für den 3D-Druck</a>.</p>
+
+<div class="stop"><b>Kriechen ist die Falle bei Kunststoffen.</b> Ein Teil, das eine Last kurzzeitig mühelos trägt, verformt sich unter derselben Last über Wochen weiter — bei Wärme beschleunigt. Für Dauerlast gilt der Kriechmodul, der nach 1000 h oft nur noch die Hälfte des Kurzzeitwerts beträgt. Praktisch: bei Dauerlast höchstens ein Viertel bis ein Drittel der zulässigen Kurzzeitspannung ansetzen.</div>
+
+<h2>Konstruktionsregeln für Kunststoff</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Beachten</h4>
+    <ul>
+      <li>Große Auflageflächen unter Schraubenköpfen — zulässige Flächenpressung nur 10–30 N/mm²</li>
+      <li>Gewindeeinsätze statt geschnittener Gewinde bei mehrfacher Montage</li>
+      <li>Wärmedehnung fünf- bis achtmal so hoch wie Stahl — Langlöcher vorsehen</li>
+      <li>Radien an allen Innenecken; Kunststoffe sind kerbempfindlich</li>
+      <li>Beim Spritzguss gleichmäßige Wandstärken, Rippen höchstens 60 % der Wandstärke</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Vermeiden</h4>
+    <ul>
+      <li>Kunststoff als Zugelement unter Dauerlast</li>
+      <li>Nylon ohne Trocknung verarbeiten oder vermessen</li>
+      <li>PC mit lösemittelhaltigen Reinigern behandeln</li>
+      <li>PLA in Außenanwendung, im Auto oder in Motornähe</li>
+      <li>Metallkennwerte direkt auf Kunststoff übertragen</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Faserverbunde</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Werkstoff</th><th data-s="num">E-Modul längs [N/mm²]</th><th data-s="num">Dichte [g/cm³]</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>CFK, unidirektional</b></td><td>130 000–180 000</td><td>1,5</td><td>Bezogen aufs Gewicht steifer als Stahl; quer zur Faser nur rund 10 000 N/mm²</td></tr>
+<tr><td><b>CFK, Gewebe (0/90)</b></td><td>60 000–70 000</td><td>1,5</td><td>In beide Hauptrichtungen brauchbar, in keiner optimal</td></tr>
+<tr><td><b>GFK (Glasfaser)</b></td><td>20 000–45 000</td><td>1,9</td><td>Deutlich billiger, elektrisch isolierend, zäher als CFK</td></tr>
+<tr><td><b>Aramid (Kevlar)</b></td><td>60 000–80 000</td><td>1,4</td><td>Sehr schlagzäh und schnittfest; schlecht auf Druck, schwer zu bearbeiten</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>CFK-Rohre aus dem Modellbau sind nicht das, wonach sie aussehen.</b> Gewickelte Rohre mit Fasern überwiegend in Umfangsrichtung sind biegeweich, obwohl das Material CFK ist. Für Biegesteifigkeit müssen die Fasern <em>längs</em> liegen (pultrudiert oder unidirektional) — den Lagenaufbau erfragen, nicht nur „Carbon“ lesen.</div>
+<div class="stop"><b>Kohlefaser leitet elektrisch und ist gegenüber Aluminium edler.</b> Ein CFK-Rohr in einer Aluklemme korrodiert die Klemme in feuchter Umgebung weg — Zwischenlage aus GFK, Kunststoff oder Klebstoff einplanen. Kohlestaub vom Schleifen ist leitfähig und legt Elektronik lahm: räumlich trennen und absaugen.</div>
+
+<h2>Holz, Keramik, Mineralguss</h2>
+<p>Holz arbeitet: quer zur Faser schwindet und quillt es um bis zu 0,3 % je Prozent Holzfeuchteänderung, längs praktisch gar nicht — starr verschraubte Vollholzplatten reißen. Kennwerte für Fichte, Buche, Multiplex und MDF stehen in der <a href="#auswahl">Werkstofftabelle</a>.</p>
+<div class="grid2">
+  <div class="card"><div class="ct">Technische Keramik (Al₂O₃, ZrO₂, Si₃N₄)</div><div class="cd">E-Modul 300 000–400 000 N/mm², extrem hart, temperaturbeständig über 1000 °C, chemisch inert, isolierend. Aber: praktisch keine Bruchdehnung, empfindlich gegen Zug und Stoß, nur schleifend bearbeitbar. Lagerkugeln, Schneidstoffe, Isolatoren.</div></div>
+  <div class="card"><div class="ct">Mineralguss / Polymerbeton</div><div class="cd">Mineralische Körnung in Epoxidmatrix: E ≈ 40 000 N/mm², Dämpfung sechs- bis zehnmal besser als Grauguss, geringe Wärmeleitung und -dehnung. Gießbar mit eingelegten Gewinden ab Stückzahl eins — der moderne Werkstoff für Maschinenbetten.</div></div>
+</div>
+
+<div class="tip"><b>Sandwich schlägt Vollmaterial.</b> Zwei dünne, feste Decklagen auf leichtem Kern (Schaum, Wabe, Holz) nutzen das Prinzip aus <a href="#balken">Balken &amp; Biegung</a>: Material weit weg von der neutralen Faser. 20 mm Kern mit 1-mm-Decklagen erreicht bei einem Bruchteil des Gewichts die Biegesteifigkeit einer 10-mm-Vollplatte. Kritisch ist nur die Verklebung — sie überträgt den Schub.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN ISO 527 — Zugversuch an Kunststoffen; DIN EN ISO 75 — Wärmeformbeständigkeit (HDT); DIN EN ISO 899-1 — Kriechverhalten.</li>
+    <li>DIN EN ISO 14125 — Biegeversuch an Faserverbundkunststoffen; DIN EN 1995-1-1 (Eurocode 5) — Kennwerte für Konstruktionsholz.</li>
+    <li>Herstellerdatenblätter: <a href="https://www.ensingerplastics.com/">Ensinger</a>, <a href="https://www.mitsubishi-chemical-advanced-materials.com/">Mitsubishi Chemical</a>, <a href="https://www.igus.de/">igus</a>; <a href="https://www.r-g.de/">R&amp;G Faserverbundwerkstoffe — Handbuch</a>.</li>
+    <li>Baur/Osswald/Rudolph, <i>Saechtling Kunststoff-Taschenbuch</i>, Hanser; Flemming/Ziegmann/Roth, <i>Faserverbundbauweisen</i>, Springer.</li>
+  </ul>
+</div>

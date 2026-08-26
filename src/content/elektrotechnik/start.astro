@@ -1,54 +1,55 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Elektrotechnik ist die Lehre davon, was Ladung tut.</b> Alles in diesem Modul lässt sich auf drei Aussagen zurückführen: Ladung geht nicht verloren (Knotenregel), Energie geht nicht verloren (Maschenregel), und jedes Bauteil hat eine feste Beziehung zwischen Spannung und Strom (U = R·I, i = C·du/dt, u = L·di/dt). Der Rest ist Buchhaltung.</div>
+<div class="kurz"><b>Elektrotechnik ist die Lehre davon, was Ladung tut — Analogtechnik der Teil, in dem die Zwischenwerte zählen.</b> Drei Aussagen tragen alles: Ladung geht nicht verloren (Knotenregel), Energie geht nicht verloren (Maschenregel), jedes Bauteil hat eine feste U-I-Beziehung. Sobald reale Halbleiter dazukommen, wird daraus ein Abwägen: Verstärkung gegen Bandbreite, Genauigkeit gegen Stromverbrauch, Wirkungsgrad gegen Störabstrahlung.</div>
 
-<p class="lede">Dieses Modul ist der theoretische Unterbau des ganzen Hubs. Wer Analogtechnik, Regelungstechnik oder Leiterplattenentwurf verstehen will, kommt hier vorbei — und zwar genau einmal, danach nur noch zum Nachschlagen.</p>
+<p class="lede">Dieses Modul ist der theoretische Unterbau des ganzen Hubs: von den Grundgesetzen über Wechselstrom und Felder bis zu Transistor, Operationsverstärker und Schaltregler. Wer Regelungstechnik oder Leiterplattenentwurf verstehen will, kommt hier vorbei — danach nur noch zum Nachschlagen.</p>
 
 <h2>Landkarte</h2>
 <div class="map">
-  <a href="#groessen"><div class="mt"><span class="i">📏</span>Größen &amp; Einheiten</div><div class="md">SI-Basis, abgeleitete Größen, Vorsätze, Formelzeichen — die Sprache, in der alles Weitere geschrieben ist.</div></a>
-  <a href="#gleichstrom"><div class="mt"><span class="i">🔋</span>Gleichstromkreis</div><div class="md">Ohmsches Gesetz, Reihe und Parallel, Spannungsteiler, Innenwiderstand, Leistungsanpassung.</div></a>
-  <a href="#netzwerke"><div class="mt"><span class="i">🕸️</span>Netzwerkanalyse</div><div class="md">Knoten- und Maschenverfahren, Überlagerung, Ersatzquellen nach Thévenin und Norton.</div></a>
-  <a href="#felder"><div class="mt"><span class="i">🧲</span>Felder</div><div class="md">E-Feld, Kondensator, Kapazität, B-Feld, Induktion, Lenz'sche Regel, Kräfte.</div></a>
-  <a href="#wechselstrom"><div class="mt"><span class="i">〰️</span>Wechselstrom</div><div class="md">Effektivwert, Scheitelwert, Phasenverschiebung, Zeigerbild, Blindwiderstand.</div></a>
-  <a href="#komplexe"><div class="mt"><span class="i">🔢</span>Komplexe Rechnung</div><div class="md">Warum j·ω alles vereinfacht, Impedanz, Admittanz, Ortskurven.</div></a>
-  <a href="#leistung"><div class="mt"><span class="i">⚡</span>Leistung</div><div class="md">Wirk-, Blind- und Scheinleistung, Leistungsfaktor, Blindstromkompensation.</div></a>
-  <a href="#drehstrom"><div class="mt"><span class="i">🔺</span>Drehstrom &amp; Trafo</div><div class="md">Stern und Dreieck, 400 V aus 230 V, Übersetzungsverhältnis, Verluste.</div></a>
-  <a href="#transient"><div class="mt"><span class="i">📉</span>Schaltvorgänge</div><div class="md">RC- und RL-Glied im Zeitbereich, Zeitkonstante, Schwingkreis, Dämpfung.</div></a>
-  <a href="#leitungen"><div class="mt"><span class="i">🧵</span>Leitungen</div><div class="md">Querschnitt, Spannungsfall, Strombelastbarkeit, Skin-Effekt, Wellenwiderstand.</div></a>
-  <a href="#sicherheit"><div class="mt"><span class="i">⚠️</span>Sicherheit</div><div class="md">Wirkung auf den Menschen, Schutzklassen, SELV/PELV, FI, Netztrennung.</div></a>
-  <a href="#groessen"><div class="mt"><span class="i">🧮</span>Rechner</div><div class="md">Ohm, Spannungsteiler, Zeitkonstante, Impedanz und Dezibel liegen jeweils im passenden Abschnitt.</div></a>
+  <a href="#gleichstrom"><div class="mt"><span class="i">🔋</span>Größen, Gleichstrom &amp; Netzwerke</div><div class="md">Einheiten, Vorsätze, E-Reihen · Ohm, Reihe/Parallel, Spannungsteiler · Kirchhoff, Thévenin, Brücke.</div></a>
+  <a href="#felder"><div class="mt"><span class="i">🧲</span>Felder, Spulen &amp; Trafos</div><div class="md">E- und B-Feld, Induktion, Sättigung, Kernmaterialien, Drosseln, Transformatoren, Ferritperlen.</div></a>
+  <a href="#wechselstrom"><div class="mt"><span class="i">〰️</span>Wechselstrom &amp; komplexe Rechnung</div><div class="md">Effektivwert, Zeigerbild, Impedanz, jω, Ortskurven — Trigonometrie wird Algebra.</div></a>
+  <a href="#leistung"><div class="mt"><span class="i">⚡</span>Leistung &amp; Drehstrom</div><div class="md">Wirk-, Blind-, Scheinleistung, PFC, Kompensation · Stern und Dreieck, 400 V aus 230 V.</div></a>
+  <a href="#transient"><div class="mt"><span class="i">📉</span>Schaltvorgänge &amp; Leitungen</div><div class="md">Zeitkonstante, Schwingkreis, Dämpfung · Querschnitt, Spannungsfall, Skin-Effekt, Wellenwiderstand.</div></a>
+  <a href="#sicherheit"><div class="mt"><span class="i">⚠️</span>Elektrische Sicherheit</div><div class="md">Wirkung auf den Menschen, Schutzklassen, SELV/PELV, RCD, Trenntrafo, Erste Hilfe.</div></a>
+  <a href="#halbleiter"><div class="mt"><span class="i">🔬</span>Halbleiter &amp; Dioden</div><div class="md">Dotierung, pn-Übergang, Diodengleichung, Typen von Schottky bis TVS, SiC und GaN.</div></a>
+  <a href="#transistoren"><div class="mt"><span class="i">🔀</span>Transistor &amp; MOSFET</div><div class="md">BJT-Grundschaltungen, Arbeitspunkt · R_DS(on), Gate-Ladung, Halbbrücke, IGBT.</div></a>
+  <a href="#opv"><div class="mt"><span class="i">🔺</span>Operationsverstärker</div><div class="md">Zwei goldene Regeln, alle Grundschaltungen, reale Grenzen, Auswahl, Komparator.</div></a>
+  <a href="#filter"><div class="mt"><span class="i">📶</span>Filter, Frequenzgang &amp; Rauschen</div><div class="md">Bode-Diagramm, Butterworth gegen Bessel, Antialiasing · Rauschquellen, Offset, Drift.</div></a>
+  <a href="#wandler"><div class="mt"><span class="i">🔢</span>ADC &amp; DAC</div><div class="md">SAR, Delta-Sigma, Referenzen, ENOB — und was man beim Anschließen falsch macht.</div></a>
+  <a href="#versorgung"><div class="mt"><span class="i">🔌</span>Linear- &amp; Schaltregler</div><div class="md">LDO gegen Buck, Topologien, Auslegung, heiße Schleife, Schutzbeschaltung.</div></a>
+  <a href="#emv"><div class="mt"><span class="i">📡</span>EMV, Masse &amp; Entkopplung</div><div class="md">Kopplungspfade, die zehn wirksamsten Layout-Regeln, Normen, ESD, Fehlersuche.</div></a>
 </div>
 
 <h2>Wie dieses Modul zum Rest des Hubs steht</h2>
-<p>Elektrotechnik beschreibt <b>ideale Bauelemente in Netzwerken</b>. Sobald reale Bauteile mit Datenblattgrenzen ins Spiel kommen, geht es in den Nachbarmodulen weiter:</p>
 <div class="grid">
-  <div class="card"><div class="ct">→ <a href="analogtechnik.html">Analog &amp; Leistung</a></div><div class="cd">Was passiert, wenn aus dem idealen Widerstand ein realer wird und Halbleiter dazukommen: Dioden, Transistoren, Operationsverstärker, Schaltregler.</div></div>
-  <div class="card"><div class="ct">→ <a href="digitaltechnik.html">Digitaltechnik</a></div><div class="cd">Wenn nur noch zwei Spannungspegel zählen und aus der Schaltung Logik wird.</div></div>
-  <div class="card"><div class="ct">→ <a href="regelungstechnik.html">Regelungstechnik</a></div><div class="cd">Die Differentialgleichungen aus dem Abschnitt Schaltvorgänge — nur allgemeiner, für jedes dynamische System.</div></div>
-  <div class="card"><div class="ct">→ <a href="elektronik-grundlagen.html">Elektronik 101</a></div><div class="cd">Der praktische Zwilling dieses Moduls: Messen, Bauteile erkennen, Fehler suchen, Steckbrett aufbauen.</div></div>
+  <div class="card"><div class="ct">→ <a href="digitaltechnik.html">Digital- &amp; Informationstechnik</a></div><div class="cd">Wenn nur noch zwei Spannungspegel zählen und aus der Schaltung Logik wird.</div></div>
+  <div class="card"><div class="ct">→ <a href="regelung-antriebe.html">Regelung, Sensorik &amp; Antriebe</a></div><div class="cd">Die Differentialgleichungen aus den Schaltvorgängen — allgemeiner, für jedes dynamische System. Dazu Messkette, Motoren, Treiber.</div></div>
+  <div class="card"><div class="ct">→ <a href="leiterplatte-kicad.html">Leiterplatte &amp; KiCad</a></div><div class="cd">Wo aus Schaltplänen Layouts werden: Stackup, Impedanzen, EMV-gerechtes Routing.</div></div>
+  <div class="card"><div class="ct">→ <a href="elektronik-grundlagen.html">Elektronik 101 (Werkstatt)</a></div><div class="cd">Der praktische Zwilling: Multimeter und Oszilloskop bedienen, Bauteile erkennen, Steckbrett, Fehlersuche. Hier steht das Warum, dort das Wie.</div></div>
 </div>
 
 <h2>Wenn du bei null anfängst</h2>
-<p>Die Reihenfolge, die sich in praktisch jedem Studiengang durchgesetzt hat und aus gutem Grund selten variiert wird:</p>
 <div class="steps">
-  <div class="step"><h4>Größen und Einheiten sitzen lassen</h4>Ohne saubere Vorsätze (µ, m, k, M) rechnet man sich in jedem zweiten Beispiel um Faktor tausend. Das ist kein Anfängerfehler, das passiert Profis unter Zeitdruck.</div>
-  <div class="step"><h4>Gleichstromkreis bis zur Langeweile</h4>Spannungsteiler, Innenwiderstand und Leistung im Widerstand sind 80 % der Elektronik im Alltag. Erst wenn du einen belasteten Teiler im Kopf abschätzen kannst, lohnt der nächste Schritt.</div>
-  <div class="step"><h4>Netzwerkanalyse als Werkzeug, nicht als Selbstzweck</h4>Thévenin ist die eine Technik, die man wirklich ständig braucht: „Was sieht mein Bauteil von der Schaltung aus?“ Knoten- und Maschenverfahren reichen auf dem Niveau, jede Aufgabe lösen zu <em>können</em>.</div>
-  <div class="step"><h4>Wechselstrom mit Zeigern, nicht mit Sinusformeln</h4>Wer versucht, RLC-Netzwerke mit Additionstheoremen zu rechnen, gibt auf. Das Zeigerbild und danach die komplexe Rechnung machen aus Trigonometrie einfache Algebra.</div>
-  <div class="step"><h4>Felder, wenn Bauteile nicht mehr reichen</h4>Solange man Kondensatoren kauft statt baut, kommt man mit C und L als Zahlen weit. Sobald Spulen gewickelt, Störungen bekämpft oder Motoren verstanden werden sollen, führt kein Weg an den Feldern vorbei.</div>
+  <div class="step"><h4>Größen und Vorsätze sitzen lassen</h4>Ohne sichere Vorsätze (µ, m, k, M) rechnet man sich in jedem zweiten Beispiel um Faktor tausend daneben — das passiert auch Profis unter Zeitdruck.</div>
+  <div class="step"><h4>Gleichstromkreis bis zur Langeweile</h4>Spannungsteiler, Innenwiderstand und Leistung im Widerstand sind 80 % der Elektronik im Alltag. Thévenin ist die eine Technik, die man wirklich ständig braucht.</div>
+  <div class="step"><h4>Wechselstrom mit Zeigern, nicht mit Sinusformeln</h4>Wer RLC-Netzwerke mit Additionstheoremen rechnet, gibt auf. Zeigerbild, dann komplexe Rechnung — aus Trigonometrie wird Algebra.</div>
+  <div class="step"><h4>Felder, wenn Bauteile nicht mehr reichen</h4>Solange man Kondensatoren kauft statt baut, reichen C und L als Zahlen. Für Spulen, Störungen und Motoren führt kein Weg an den Feldern vorbei.</div>
+  <div class="step"><h4>Halbleiter zuletzt — aber mit den Grenzen zuerst</h4>Diode, Transistor und OPV erschließen sich schnell, wenn die Netzwerkgesetze sitzen. Der Unterschied zwischen Lehrbuch und Praxis sind die Datenblattgrenzen: Offset, Sättigung, Slew Rate, R_DS(on).</div>
 </div>
 
-<div class="tip"><b>Realistische Zeitrechnung:</b> Ein Semester Grundlagen der Elektrotechnik entspricht rund 150–180 Zeitstunden inklusive Übungen. Neben dem Beruf, mit zwei bis drei Stunden pro Woche, sind das etwa neun bis zwölf Monate für Gleich- <em>und</em> Wechselstrom. Wer schneller vorankommen will, rechnet Aufgaben statt Videos zu schauen — der Unterschied ist gewaltig.</div>
+<div class="tip"><b>Realistische Zeitrechnung:</b> Ein Semester Grundlagen der Elektrotechnik entspricht rund 150–180 Zeitstunden inklusive Übungen. Neben dem Beruf sind das für Gleich- und Wechselstrom etwa neun bis zwölf Monate. Wer schneller vorankommen will, rechnet Aufgaben, statt Videos zu schauen.</div>
 
 <div class="srcs">
   <div class="sh">Grundlage dieses Moduls</div>
   <ul>
     <li>Manfred Albach, <i>Grundlagen der Elektrotechnik 1 &amp; 2</i>, Pearson Studium — der Standard im deutschsprachigen Raum, sehr aufgabenlastig.</li>
-    <li>Paul Horowitz, Winfield Hill, <i>The Art of Electronics</i>, 3. Auflage, Cambridge University Press — die praxisnächste Referenz überhaupt, englisch.</li>
-    <li>Ulrich Tietze, Christoph Schenk, Eberhard Gamm, <i>Halbleiter-Schaltungstechnik</i>, Springer Vieweg — Nachschlagewerk für alles, was über die Grundlagen hinausgeht.</li>
+    <li>Paul Horowitz, Winfield Hill, <i>The Art of Electronics</i>, 3. Auflage, Cambridge University Press — die praxisnächste Referenz überhaupt; dazu <i>The x-Chapters</i> zur Vertiefung.</li>
+    <li>Ulrich Tietze, Christoph Schenk, Eberhard Gamm, <i>Halbleiter-Schaltungstechnik</i>, Springer Vieweg.</li>
+    <li>Adel Sedra, Kenneth Smith, <i>Microelectronic Circuits</i>, Oxford University Press.</li>
     <li><a href="https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/">MIT OpenCourseWare 6.002 — Circuits and Electronics</a>: vollständige Vorlesung mit Aufgaben, frei zugänglich.</li>
-    <li><a href="https://www.allaboutcircuits.com/textbook/">All About Circuits — Textbook</a>: gut lesbares, kostenloses Online-Lehrbuch (DC, AC, Halbleiter, Digital).</li>
+    <li><a href="https://www.allaboutcircuits.com/textbook/">All About Circuits — Textbook</a>: kostenloses Online-Lehrbuch (DC, AC, Halbleiter).</li>
+    <li>Application Notes von <a href="https://www.ti.com/analog-circuit/circuit-cookbook.html">Texas Instruments</a> und <a href="https://www.analog.com/en/resources/technical-articles.html">Analog Devices</a> — mit gerechneten Beispielen.</li>
   </ul>
 </div>

@@ -64,7 +64,7 @@ import "./_style.css";
   <div class="step"><h4>Großzügig anfangen</h4>1–2 kB je Task als Startwert. Zu klein ist der häufigste Grund für unerklärliche Abstürze.</div>
   <div class="step"><h4>Muster hineinschreiben</h4>FreeRTOS füllt neue Stacks mit einem Füllwert. <code>uxTaskGetStackHighWaterMark()</code> liefert, wie viel nie benutzt wurde.</div>
   <div class="step"><h4>Nach realer Last messen</h4>Nicht im Leerlauf, sondern unter Volllast mit allen Fehlerpfaden — gerade Fehlerbehandlung mit <code>printf</code> braucht überraschend viel.</div>
-  <div class="step"><h4>Reserve lassen</h4>Auf den gemessenen Spitzenwert 30–50 % aufschlagen. Interrupts nutzen bei Cortex-M teils denselben Stack.</div>
+  <div class="step"><h4>Reserve lassen</h4>Auf den gemessenen Spitzenwert 30–50 % aufschlagen. Bei FreeRTOS auf Cortex-M laufen ISRs auf einem eigenen Stack (MSP) — dessen Größe getrennt festlegen und prüfen.</div>
   <div class="step"><h4>Überlauf erkennbar machen</h4><code>configCHECK_FOR_STACK_OVERFLOW = 2</code> und einen Hook implementieren, der den Task-Namen ausgibt. Ohne das sucht man den Fehler blind. Wo eine MPU vorhanden ist, schützt sie den Stack in Hardware.</div>
 </div>
 <div class="stop"><b>Vorsicht mit <code>printf</code> und Fließkomma in Tasks:</b> Eine <code>printf</code>-Implementierung mit Fließkomma-Unterstützung braucht schnell 1–2 kB Stack. Wer in fünf Tasks je 512 Byte veranschlagt hat, bekommt einen Absturz, der erst unter bestimmten Bedingungen auftritt. Für Diagnoseausgaben lohnt sich eine schlanke Alternative wie <code>tinyprintf</code> oder ein binäres Protokoll.</div>

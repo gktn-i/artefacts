@@ -24,7 +24,7 @@ import "./_style.css";
   <div class="card"><div class="ct">Leistungsmasse gezielt führen</div><div class="cd">Der Rückstrom einer H-Brücke oder eines Schaltreglers gehört nicht durch den Massebereich unter dem Analogeingang. Platzieren, nicht schlitzen.</div></div>
   <div class="card"><div class="ct">Kupferflächen anbinden</div><div class="cd">Nicht angeschlossene Kupferinseln wirken als Antennen. Entweder sauber mit Masse verbinden oder entfernen.</div></div>
 </div>
-<div class="stop"><b>Der Klassiker: „Analog- und Digitalmasse trennen“.</b> Diese Empfehlung stammt aus einer Zeit mit langsamen Signalen und ohne durchgehende Masselagen. Bei heutigen Flankensteilheiten richtet ein Schlitz in der Massefläche fast immer mehr Schaden an als Nutzen. Die Ausnahme sind Wandler mit ausdrücklich getrennten AGND- und DGND-Pins <b>und</b> einer klaren Vorgabe im Datenblatt. Im Zweifel: eine Fläche, sorgfältig platzieren.</div>
+<div class="stop"><b>Der Klassiker: „Analog- und Digitalmasse trennen“.</b> Bei heutigen Flankensteilheiten richtet ein Schlitz in der Massefläche fast immer mehr Schaden an als Nutzen. Ausnahme: Wandler mit getrennten AGND-/DGND-Pins <b>und</b> klarer Datenblatt-Vorgabe. Im Zweifel: eine Fläche, sorgfältig platzieren.</div>
 
 <h2>Abblockung</h2>
 <div class="tbl-wrap"><table style="min-width:880px">
@@ -42,7 +42,7 @@ import "./_style.css";
 <h2>Wärme im Layout</h2>
 <div class="steps">
   <div class="step"><h4>Kupferfläche als Kühlkörper</h4>Bei SMD-Leistungsbauteilen ist die angeschlossene Kupferfläche der Kühlkörper. Das Datenblatt gibt an, welche Fläche welchem Wärmewiderstand entspricht — der Unterschied zwischen minimalem Pad und 6 cm² Fläche kann Faktor drei betragen.</div>
-  <div class="step"><h4>Thermische Vias</h4>Unter Kühlpads mehrere Vias mit 0,3 mm im Raster von etwa 1 mm. Sie führen die Wärme auf die Rückseite, wo eine weitere Kupferfläche sitzt.</div>
+  <div class="step"><h4>Thermische Vias</h4>Unter Kühlpads zur Kupferfläche auf der Rückseite — Raster und Größe: <a href="#stackup">Lagenaufbau → Durchkontaktierungen</a>.</div>
   <div class="step"><h4>Wärmequellen verteilen</h4>Nicht alle Leistungsbauteile in eine Ecke. Und temperaturempfindliche Bauteile — Referenzen, Quarze, Sensoren — davon fernhalten.</div>
   <div class="step"><h4>Thermal Relief bei Lötpads</h4>Ein Pad, das direkt an einer großen Kupferfläche hängt, lässt sich kaum von Hand löten, weil die Wärme sofort abfließt. Für Handbestückung Wärmefallen (Speichen) verwenden, für maschinelle Bestückung direkte Anbindung.</div>
   <div class="step"><h4>Temperatur messen</h4>Bei der ersten Inbetriebnahme mit Wärmebildkamera oder Kontaktthermometer. Ein Bauteil, das über 100 °C geht, altert erheblich schneller.</div>
@@ -88,5 +88,6 @@ import "./_style.css";
     <li>Rick Hartley, <i>How to Achieve Proper Grounding</i> — Vortrag, frei verfügbar; die klarste Darstellung des Rückstrompfad-Arguments.</li>
     <li>Texas Instruments, <i>PCB Design Guidelines For Reduced EMI</i> (SZZA009) und die Layoutabschnitte der Regler-Datenblätter.</li>
     <li>IPC-2221B, Abschnitte zu Abständen und thermischen Anforderungen.</li>
+    <li>EMV-Grundlagen (Kopplungswege, Filter, Schirmung): <a href="elektrotechnik.html#emv">Elektrotechnik → EMV</a>.</li>
   </ul>
 </div>

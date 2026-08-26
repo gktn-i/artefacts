@@ -1,44 +1,105 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Dieser Hub ist ein Nachschlagewerk, kein Kurs.</b> Wer ihn von vorne nach hinten liest, hat viel gelesen und wenig gelernt. Der Weg, der funktioniert: ein Projekt anfangen, das man wirklich haben will — und die Abschnitte lesen, die dabei im Weg stehen.</div>
+<div class="kurz"><b>Dieser Hub ist ein Nachschlagewerk, kein Kurs.</b> Der Weg, der funktioniert: ein Projekt anfangen, das man wirklich haben will — und die Abschnitte lesen, die dabei im Weg stehen. Die sechs Stufen unten geben die Reihenfolge vor, die Module liefern die Tiefe.</div>
 
 <h2>Wie du diesen Hub benutzt</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Als Nachschlagewerk</div><div class="cd">Suche mit ⌘K oder Strg+K findet jeden Abschnitt und den Volltext. Wenn ein Begriff im Datenblatt unklar ist, steht er meist im <a href="mechatronik-nachschlagewerk.html#glossar">Glossar</a>.</div></div>
-  <div class="card"><div class="ct">Als Landkarte</div><div class="cd">Jedes Modul hat einen Start-Abschnitt mit Übersicht. Der zeigt in zwei Minuten, was drinsteckt — nützlich, um zu wissen, was man <em>nicht</em> weiß.</div></div>
-  <div class="card"><div class="ct">Als Rechner-Sammlung</div><div class="cd">Ohm, Spannungsteiler, Zeitkonstante, Impedanz, ADC, Leiterbahnbreite, PID-Einstellregeln, Antriebsauslegung, Batterielaufzeit — jeweils im passenden Abschnitt.</div></div>
-  <div class="card"><div class="ct">Als Quellenverzeichnis</div><div class="cd">Am Ende jedes Abschnitts stehen die Quellen, auf denen er beruht. Wer tiefer will, geht dorthin — dieser Hub ersetzt kein Lehrbuch, er sortiert.</div></div>
+  <div class="card"><div class="ct">Als Nachschlagewerk</div><div class="cd">Suche mit ⌘K / Strg+K findet jeden Abschnitt und den Volltext. Unklare Begriffe stehen im <a href="mechatronik-nachschlagewerk.html#glossar">Glossar</a>.</div></div>
+  <div class="card"><div class="ct">Als Landkarte</div><div class="cd">Jedes Modul hat einen Start-Abschnitt mit Übersicht — nützlich, um zu wissen, was man <em>nicht</em> weiß.</div></div>
+  <div class="card"><div class="ct">Als Rechner-Sammlung</div><div class="cd">Ohm, Spannungsteiler, Zeitkonstante, ADC, Leiterbahnbreite, PID-Einstellregeln, Antriebsauslegung — jeweils im passenden Abschnitt.</div></div>
+  <div class="card"><div class="ct">Als Quellenverzeichnis</div><div class="cd">Am Ende jedes Abschnitts stehen die Quellen. Dieser Hub ersetzt kein Lehrbuch — er sortiert.</div></div>
+</div>
+<ul>
+  <li><b>Ein Projekt, das du wirklich willst:</b> Ausdauer ist der begrenzende Faktor, nicht Intelligenz.</li>
+  <li><b>Klein genug, um fertig zu werden:</b> ein fertiges kleines Gerät schlägt drei angefangene große.</li>
+  <li><b>Messen statt raten:</b> Elektronik ist eine Erfahrungswissenschaft — Multimeter und Oszilloskop lehren mehr als Videos.</li>
+  <li><b>Rechnen, nicht nur lesen:</b> der Unterschied zwischen „verstanden“ und „können“ ist eine durchgerechnete Aufgabe.</li>
+</ul>
+
+<h2>Der Lernpfad in 6 Stufen</h2>
+<p>Zeitangaben gelten für zwei bis vier Stunden pro Woche neben Beruf oder Studium. Von null bis zur eigenen Platine mit eigener Firmware vergehen so etwa ein bis zwei Jahre — der Fortschritt kommt in Sprüngen, meist direkt nach einem gelösten Problem.</p>
+<div class="path">
+  <div class="pstep">
+    <div class="ph"><span class="pn">Stufe 0 · Orientierung</span><span class="pw">1–2 Wochen</span></div>
+    <div class="pb"><ul>
+      <li><b>Lesen:</b> <a href="elektrotechnik.html#start">Elektrotechnik → Start</a>, <a href="elektrotechnik.html#gleichstrom">Gleichstromkreis</a>, <a href="elektronik-grundlagen.html#grundlagen">Elektronik 101 → Basics</a></li>
+      <li><b>Tun:</b> Multimeter kaufen und alles messen, was im Haushalt eine Batterie hat</li>
+      <li><b>Erreicht, wenn:</b> du weißt, warum man Spannung parallel und Strom in Reihe misst</li>
+    </ul></div>
+  </div>
+  <div class="pstep">
+    <div class="ph"><span class="pn">Stufe 1 · Erste Schaltungen</span><span class="pw">1–2 Monate</span></div>
+    <div class="pb"><ul>
+      <li><b>Lesen:</b> <a href="elektrotechnik.html#gleichstrom">Spannungsteiler &amp; Innenwiderstand</a>, <a href="elektrotechnik.html#halbleiter">Dioden</a>, <a href="elektronik-grundlagen.html#praxis">Praxis &amp; Aufbau</a></li>
+      <li><b>Tun:</b> Pico 2 oder ESP32 — LED blinken, Taster entprellen, Sensor auf ein Display bringen</li>
+      <li><b>Erreicht, wenn:</b> du einen LED-Vorwiderstand ohne Nachschlagen berechnest und weißt, wozu ein Pull-Widerstand da ist</li>
+    </ul></div>
+  </div>
+  <div class="pstep">
+    <div class="ph"><span class="pn">Stufe 2 · Löten und eigene Aufbauten</span><span class="pw">2–3 Monate</span></div>
+    <div class="pb"><ul>
+      <li><b>Lesen:</b> <a href="loeten-referenz.html">Löten</a> vollständig, <a href="elektronik-grundlagen.html#datenblatt">Datenblatt lesen</a>, <a href="elektrotechnik.html#transistoren">MOSFET</a></li>
+      <li><b>Tun:</b> Schaltung vom Steckbrett auf Lochraster und ins Gehäuse; Motor über MOSFET schalten</li>
+      <li><b>Erreicht, wenn:</b> deine Lötstellen glänzen und du weißt, warum es ein Logic-Level-MOSFET sein muss</li>
+    </ul></div>
+  </div>
+  <div class="pstep">
+    <div class="ph"><span class="pn">Stufe 3 · Systeme statt Schaltungen</span><span class="pw">4–6 Monate</span></div>
+    <div class="pb"><ul>
+      <li><b>Lesen:</b> <a href="embedded-firmware.html#busse">Bussysteme</a>, <a href="embedded-firmware.html#peripherie">Peripherie</a>, <a href="elektrotechnik.html#versorgung">Spannungsversorgung</a>, <a href="regelung-antriebe.html#pid">PID</a></li>
+      <li><b>Tun:</b> ein Gerät mit Sensor, Aktor, Anzeige, Bedienung — und eine Regelung, die wirklich regelt</li>
+      <li><b>Erreicht, wenn:</b> du Zustandsautomaten schreibst statt verschachtelter Wartezeiten und einen PI-Regler von Hand einstellst</li>
+    </ul></div>
+  </div>
+  <div class="pstep">
+    <div class="ph"><span class="pn">Stufe 4 · Eigene Leiterplatte</span><span class="pw">3–6 Monate</span></div>
+    <div class="pb"><ul>
+      <li><b>Lesen:</b> <a href="leiterplatte-kicad.html">Leiterplatte &amp; KiCad</a> vollständig, <a href="elektrotechnik.html#emv">EMV</a></li>
+      <li><b>Tun:</b> ein kleines Breakout-Board als Erstversuch, danach die Baugruppe aus Stufe 3 als Platine</li>
+      <li><b>Erreicht, wenn:</b> die erste eigene Platine beim ersten Einschalten die richtigen Spannungen liefert</li>
+    </ul></div>
+  </div>
+  <div class="pstep">
+    <div class="ph"><span class="pn">Stufe 5 · Vertiefung nach Interesse</span><span class="pw">fortlaufend</span></div>
+    <div class="pb"><ul>
+      <li><b>Leistung &amp; Analog:</b> Schaltregler, Messtechnik → <a href="elektrotechnik.html#wandler">Elektrotechnik → Wandler</a></li>
+      <li><b>Regelung &amp; Robotik:</b> Antriebe, Sensorfusion → <a href="regelung-antriebe.html#start">Regelung &amp; Antriebe</a>, <a href="automatisierung-robotik.html#robotik">Robotik</a></li>
+      <li><b>Digital &amp; Vernetzung:</b> FPGA, Funk, Security → <a href="digitaltechnik.html#start">Digitaltechnik</a></li>
+      <li><b>Automatisierung:</b> SPS, Feldbusse, Sicherheit → <a href="automatisierung-robotik.html#sps">SPS</a></li>
+    </ul></div>
+  </div>
 </div>
 
-<h2>Landkarte dieses Moduls</h2>
-<div class="map">
-  <a href="#pfad"><div class="mt"><span class="i">🪜</span>Lernpfad in 6 Stufen</div><div class="md">Von der ersten LED bis zum eigenen geregelten Gerät, mit realistischen Zeitangaben.</div></a>
-  <a href="#methodik"><div class="mt"><span class="i">🧠</span>Lernmethodik</div><div class="md">Was nachweislich funktioniert — und was sich nur gut anfühlt.</div></a>
-  <a href="#einstieg"><div class="mt"><span class="i">🌱</span>Projekte: Einstieg</div><div class="md">Zehn Projekte, die in einem Abend bis einem Wochenende fertig werden.</div></a>
-  <a href="#aufbau"><div class="mt"><span class="i">🔨</span>Projekte: Aufbau</div><div class="md">Zehn Projekte für die Zeit, in der man Grundlagen hat und Systeme bauen will.</div></a>
-  <a href="#fortgeschritten"><div class="mt"><span class="i">🚀</span>Projekte: Fortgeschritten</div><div class="md">Projekte, an denen man ernsthaft wächst — mit ehrlicher Aufwandsschätzung.</div></a>
-  <a href="#arbeitsplatz"><div class="mt"><span class="i">🧰</span>Arbeitsplatz</div><div class="md">Was man wirklich braucht, in welcher Reihenfolge, mit Preisrahmen.</div></a>
-  <a href="#vorgehen"><div class="mt"><span class="i">📋</span>Vom Einfall zum Gerät</div><div class="md">Der Ablauf eines Projekts, damit es nicht in der Schublade endet.</div></a>
-  <a href="#debugging"><div class="mt"><span class="i">🔍</span>Debugging-Strategie</div><div class="md">Systematisch suchen statt raten — die Fähigkeit, die am meisten Zeit spart.</div></a>
-</div>
+<h2>Woran man Fortschritt tatsächlich merkt</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Vorher</th><th>Nachher</th></tr></thead>
+<tbody>
+<tr><td>Anleitung nachbauen und hoffen</td><td>Schaltung verstehen und anpassen</td></tr>
+<tr><td>„Es funktioniert nicht“</td><td>„An Pin 7 liegen 1,8 V statt 3,3 V, also …“</td></tr>
+<tr><td>Bauteil aus dem Sortiment nehmen</td><td>Bauteil nach Datenblattkennwerten auswählen</td></tr>
+<tr><td>Fehler durch Tauschen suchen</td><td>Fehler durch Messen eingrenzen</td></tr>
+<tr><td>Firmware als eine lange Schleife</td><td>Module mit klaren Schnittstellen</td></tr>
+<tr><td>Regler nach Gefühl einstellen</td><td>Sprungantwort aufnehmen und daraus rechnen</td></tr>
+</tbody>
+</table></div>
 
-<h2>Die vier Dinge, die den Unterschied machen</h2>
-<div class="steps">
-  <div class="step"><h4>Ein Projekt, das du wirklich willst</h4>Nicht „ein Projekt zum Lernen“, sondern etwas, das du danach benutzt. Der Unterschied in der Ausdauer ist enorm — und Ausdauer ist der begrenzende Faktor, nicht Intelligenz.</div>
-  <div class="step"><h4>Klein genug, um fertig zu werden</h4>Ein fertiges kleines Gerät bringt mehr als drei angefangene große. Fertigwerden ist eine eigene Fähigkeit, die man üben muss.</div>
-  <div class="step"><h4>Messen statt raten</h4>Wer ein Multimeter und ein Oszilloskop benutzt, lernt in einem Monat mehr als jemand, der ein Jahr lang Videos schaut. Elektronik ist eine Erfahrungswissenschaft.</div>
-  <div class="step"><h4>Rechnen, nicht nur lesen</h4>Der Unterschied zwischen „ich habe das verstanden“ und „ich kann das“ ist eine durchgerechnete Aufgabe. Das gilt für Spannungsteiler genauso wie für Reglerauslegung.</div>
+<h2>Kostenrahmen je Stufe</h2>
+<div class="kpis">
+  <div class="kpi"><div class="k">Stufe 0–1</div><div class="v">60–120 €</div><div class="s">Multimeter, Controller-Board, Steckbrett, Bauteilsortiment</div></div>
+  <div class="kpi"><div class="k">Stufe 2</div><div class="v">100–250 €</div><div class="s">Lötstation, Zubehör, Lochraster, Werkzeug</div></div>
+  <div class="kpi"><div class="k">Stufe 3</div><div class="v">150–400 €</div><div class="s">Labornetzteil, Logikanalysator, Sensorik, Motoren</div></div>
+  <div class="kpi"><div class="k">Stufe 4</div><div class="v">50–200 €</div><div class="s">Platinen, Schablone, Heizplatte, Mikroskop</div></div>
+  <div class="kpi"><div class="k">Optional</div><div class="v">200–600 €</div><div class="s">Oszilloskop — größte Einzelinvestition, größter Sprung</div></div>
 </div>
-
-<div class="tip"><b>Eine ehrliche Erwartungshaltung:</b> Von null bis zu dem Punkt, an dem man eine eigene Platine entwirft, bestückt und mit selbstgeschriebener Firmware in Betrieb nimmt, vergehen bei zwei bis vier Stunden pro Woche etwa <b>ein bis zwei Jahre</b>. Das klingt lang — aber nach drei Monaten macht man schon Dinge, die vorher unmöglich schienen. Der Fortschritt ist nicht linear, sondern kommt in Sprüngen, meist direkt nach einem gelösten Problem.</div>
+<p class="note">Alles lässt sich strecken: 40 € Multimeter reichen am Anfang, gebrauchte Oszilloskope kosten die Hälfte. Details unter <a href="#arbeitsplatz">Arbeitsplatz &amp; Ausstattung</a>.</p>
 
 <div class="srcs">
-  <div class="sh">Grundlage dieses Moduls</div>
+  <div class="sh">Quellen zu diesem Abschnitt</div>
   <ul>
-    <li>John Dunlosky u. a., <i>Improving Students' Learning With Effective Learning Techniques</i>, Psychological Science in the Public Interest 14(1), 2013 — die Übersichtsarbeit zur Wirksamkeit von Lerntechniken.</li>
-    <li>Robert und Elizabeth Bjork, Arbeiten zu <i>desirable difficulties</i>.</li>
-    <li>Paul Horowitz, Winfield Hill, <i>The Art of Electronics</i> — und das begleitende <i>Learning the Art of Electronics</i> mit Laborübungen.</li>
-    <li>Praktische Ergänzung in diesem Hub: <a href="elektronik-grundlagen.html">Elektronik 101</a> und <a href="loeten-referenz.html">Löten</a>.</li>
+    <li>John Dunlosky u. a., <i>Improving Students' Learning With Effective Learning Techniques</i>, Psychological Science in the Public Interest 14(1), 2013.</li>
+    <li>Paul Horowitz, Winfield Hill, <i>The Art of Electronics</i>; Thomas Hayes, Paul Horowitz, <i>Learning the Art of Electronics: A Hands-On Lab Course</i>.</li>
+    <li>Charles Platt, <i>Make: Electronics</i> — projektorientierter Einstieg.</li>
+    <li>Öffentliche Modulhandbücher der Mechatronik-Bachelorstudiengänge (z. B. Hochschule Kempten, Hochschule Reutlingen, FH Aachen) als Orientierung für die Themenreihenfolge.</li>
   </ul>
 </div>

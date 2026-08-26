@@ -14,7 +14,7 @@ import "./_style.css";
   <a href="#speicherbild"><div class="mt"><span class="i">🗺️</span>Speicherbild</div><div class="md">Linker-Skript, Sektionen, Startup, Bootloader, OTA-Updates.</div></a>
   <a href="#debug"><div class="mt"><span class="i">🐞</span>Debuggen</div><div class="md">SWD, Breakpoints, Hard Fault analysieren, Logging, Logikanalysator.</div></a>
   <a href="#strom"><div class="mt"><span class="i">🔋</span>Stromsparen</div><div class="md">Schlafmodi, Aufwachquellen, Messung, realistische Laufzeitrechnung.</div></a>
-  <a href="#cpraxis"><div class="mt"><span class="i">📝</span>C-Praxis</div><div class="md">volatile, static, Fixpunkt, Ringpuffer, die Fallen im Detail.</div></a>
+  <a href="#cpraxis"><div class="mt"><span class="i">📝</span>C-Praxis</div><div class="md">volatile, static, Registerzugriffe, die Fallen im Detail.</div></a>
 </div>
 
 <h2>Die drei Ebenen, auf denen man arbeiten kann</h2>
@@ -26,7 +26,7 @@ import "./_style.css";
 <tr><td><b>Register direkt</b></td><td>Zugriff über die CMSIS-Header</td><td>Volle Kontrolle, minimaler Code, exaktes Timing</td><td>Jedes Detail selbst; nur sinnvoll für kritische Stellen</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Ein pragmatischer Weg:</b> Mit dem Ökosystem anfangen, um die Idee zu prüfen. Sobald es funktioniert, auf das Hersteller-SDK wechseln — dort ist alles erreichbar, was für ein fertiges Gerät gebraucht wird. Register direkt nur dort, wo es wirklich nötig ist: enge Interruptroutinen, exaktes Timing, Peripherie, die die HAL nicht abdeckt. Und in jedem Fall lohnt es sich, einmal das Referenzhandbuch des eigenen Controllers durchzublättern — nicht zu lesen, nur durchzublättern, um zu wissen, was drinsteckt.</div>
+<div class="tip"><b>Ein pragmatischer Weg:</b> Idee im Ökosystem prüfen, fürs fertige Gerät auf das Hersteller-SDK wechseln, Register nur dort direkt, wo es nötig ist (enge ISRs, exaktes Timing). Das Referenzhandbuch des eigenen Controllers einmal durchblättern — nicht lesen, nur wissen, was drinsteckt.</div>
 
 <h2>Wie ein Projekt typischerweise verläuft</h2>
 <div class="steps">

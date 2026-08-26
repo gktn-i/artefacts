@@ -1,0 +1,87 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Statik ist Buchhaltung mit Pfeilen.</b> Ein Körper in Ruhe erfüllt ΣF = 0 und ΣM = 0 — daraus folgt jede Lagerkraft. Die Schnittgrößen sagen anschließend, wo im Bauteil die Belastung sitzt: dort, wo das Biegemoment am größten ist, versagt es.</div>
+
+<h2>Freikörperbild und Gleichgewicht</h2>
+<p>Das Freikörperbild ist der Schritt, an dem sich entscheidet, ob die Rechnung stimmt: Bauteil gedanklich freischneiden, jede entfernte Verbindung durch ihre Kräfte ersetzen.</p>
+<div class="steps">
+  <div class="step"><h4>Freischneiden</h4>Ein geschlossener Schnitt um genau das Bauteil, das interessiert. Alles außerhalb verschwindet.</div>
+  <div class="step"><h4>Äußere Kräfte eintragen</h4>Betriebslast, Eigengewicht im Schwerpunkt, Vorspannkräfte — Richtung und Angriffspunkt zählen.</div>
+  <div class="step"><h4>Lager durch Reaktionen ersetzen</h4>Jedes Lager gibt genau die Kräfte ab, die es sperrt: Loslager 1, Festlager 2, Einspannung 3 (in der Ebene).</div>
+  <div class="step"><h4>Koordinatensystem festlegen</h4>Richtungen einmal definieren, konsequent mit Vorzeichen rechnen. Negativ heißt nur: der Pfeil zeigt andersherum.</div>
+  <div class="step"><h4>Gleichgewicht auflösen</h4>Momentenbezugspunkt so wählen, dass möglichst viele Unbekannte herausfallen.</div>
+</div>
+<div class="fbox">
+  <span class="f">ΣF_x = 0&nbsp;&nbsp;&nbsp;&nbsp;ΣF_y = 0&nbsp;&nbsp;&nbsp;&nbsp;ΣM_A = 0&nbsp;&nbsp;&nbsp;&nbsp;M = F · r_⊥</span>
+  <span class="l">In der Ebene drei Gleichungen, also maximal drei Unbekannte; im Raum sechs. Ein Moment ist Kraft mal <b>senkrechtem</b> Abstand zur Wirklinie — der häufigste Fehler ist die schräge Strecke statt des Lotes.</span>
+</div>
+
+<h2>Lagerarten und was sie sperren</h2>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th data-s="text">Lager</th><th data-s="num">Reaktionen (eben)</th><th>Typisch als</th></tr></thead>
+<tbody>
+<tr><td><b>Loslager</b></td><td>1 (senkrecht zur Bahn)</td><td>Rillenkugellager mit Schiebesitz, Gleitschuh, Rolle</td></tr>
+<tr><td><b>Festlager</b></td><td>2 (zwei Kraftrichtungen)</td><td>Lager mit axialer Festlegung, Bolzenverbindung</td></tr>
+<tr><td><b>Einspannung</b></td><td>3 (zwei Kräfte + Moment)</td><td>Angeschraubter Flansch, eingegossene Säule, Kragarm</td></tr>
+<tr><td><b>Seil / Zugstab</b></td><td>1 (nur Zug)</td><td>Seil, Kette, Zuganker — nimmt keinen Druck auf</td></tr>
+<tr><td><b>Kontakt ohne Reibung</b></td><td>1 (nur Druck, normal)</td><td>Auflage, Anschlag — nimmt keinen Zug auf</td></tr>
+</tbody>
+</table></div>
+<div class="gb">
+  <div class="gb-col good"><h4>Statisch bestimmt</h4>
+    <ul><li>Lagerreaktionen = Gleichgewichtsbedingungen; Kräfte folgen allein aus dem Gleichgewicht</li><li>Träger auf zwei Stützen (Fest + Los), Kragarm</li><li>Von Hand rechenbar, unempfindlich gegen Toleranzen und Temperatur</li></ul>
+  </div>
+  <div class="gb-col bad"><h4>Statisch überbestimmt</h4>
+    <ul><li>Mehr Lager als nötig — die Lastverteilung hängt von Steifigkeiten, Toleranzen und Temperatur ab</li><li>Welle in drei Lagern, Platte auf vier Füßen, beidseitige Einspannung</li><li>Braucht Verformungsbedingungen oder FEM</li></ul>
+  </div>
+</div>
+<div class="tip"><b>Faustregel für die Lagerwahl:</b> ein Festlager, alle weiteren als Loslager. Zwei Festlager auf einer Welle verspannen sich bei jeder Temperaturänderung — konstruktiv gelöst wird das unter <a href="#lager">Lager &amp; Führungen</a>.</div>
+
+<h2>Die drei Schnittgrößen</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Normalkraft N</div><div class="cd">Längs zur Stabachse, Zug oder Druck. Gleichmäßige Spannung <span class="formula">σ = N/A</span> über den Querschnitt.</div></div>
+  <div class="card"><div class="ct">Querkraft Q</div><div class="cd">Quer zur Achse, erzeugt Schub. Bei schlanken Trägern meist unkritisch, bei kurzen Teilen und Bolzen entscheidend.</div></div>
+  <div class="card"><div class="ct">Biegemoment M</div><div class="cd">Zug auf der einen, Druck auf der anderen Seite. Fast immer die maßgebende Größe.</div></div>
+</div>
+<div class="fbox">
+  <span class="f">q(x) = −dQ/dx&nbsp;&nbsp;&nbsp;&nbsp;Q(x) = dM/dx</span>
+  <span class="l">Wo Q durch null geht, hat M ein Extremum — dort liegt die kritische Stelle. Einzellast: Sprung in Q, Knick in M. Gleichlast: Q linear, M parabelförmig.</span>
+</div>
+
+<h2>Standardfälle zum Nachschlagen</h2>
+<p><b>F</b> ist die Gesamtlast in N, <b>L</b> die Stützweite in mm, <b>E·I</b> die Biegesteifigkeit — damit deckt die Tabelle den Alltag ohne Integrieren ab.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Lastfall</th><th>M_max</th><th>Ort von M_max</th><th>Durchbiegung f_max</th><th>Lagerkräfte</th></tr></thead>
+<tbody>
+<tr><td><b>Kragarm, Einzellast am Ende</b></td><td>F · L</td><td>an der Einspannung</td><td>F·L³ / (3·E·I)</td><td>A = F, M_A = F·L</td></tr>
+<tr><td><b>Kragarm, Gleichlast</b></td><td>F · L / 2</td><td>an der Einspannung</td><td>F·L³ / (8·E·I)</td><td>A = F, M_A = F·L/2</td></tr>
+<tr><td><b>Zwei Stützen, Last mittig</b></td><td>F · L / 4</td><td>in der Mitte</td><td>F·L³ / (48·E·I)</td><td>A = B = F/2</td></tr>
+<tr><td><b>Zwei Stützen, Gleichlast</b></td><td>F · L / 8</td><td>in der Mitte</td><td>5·F·L³ / (384·E·I)</td><td>A = B = F/2</td></tr>
+<tr><td><b>Zwei Stützen, Last bei a / b</b></td><td>F·a·b / L</td><td>am Lastangriff</td><td>≈ F·a²·b² / (3·E·I·L)</td><td>A = F·b/L, B = F·a/L</td></tr>
+<tr><td><b>Beidseitig eingespannt, Gleichlast</b></td><td>F · L / 12</td><td>an den Einspannungen</td><td>F·L³ / (384·E·I)</td><td>A = B = F/2</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Zwei Zahlen für den Kopf:</b> Ein Kragarm biegt sich unter gleicher Last <b>16-mal</b> so stark durch wie ein Träger auf zwei Stützen (L³/3 gegen L³/48) und trägt das <b>vierfache</b> Biegemoment. Zweiseitig lagern statt auskragen ist die billigste Steifigkeit, die es gibt. Zahlen einsetzen: Rechner unter <a href="#balken">Biegung, Torsion &amp; Knicken</a>.</div>
+
+<h2>Schwerpunkt und Standsicherheit</h2>
+<div class="fbox">
+  <span class="f">x_s = Σ(m_i · x_i) / Σm_i</span>
+  <span class="l">Bohrungen und Ausschnitte gehen mit negativer Masse ein. Ein Körper kippt, sobald die Wirklinie der Gewichtskraft die Standfläche verlässt.</span>
+</div>
+<ul>
+  <li><b>Schwere Bauteile nach unten,</b> breite Basis — und bei beweglichen Achsen den wandernden Schwerpunkt mitdenken: ein Roboterarm ist ausgefahren kritisch, nicht eingefahren.</li>
+  <li><b>Superposition nutzen:</b> mehrere Lastfälle einzeln rechnen und addieren — im linearen Bereich immer erlaubt. Gleichlast durch Einzellast in der Mitte ersetzen liefert eine sichere obere Schranke (Faktor 2 beim Moment).</li>
+  <li><b>Einspannung kritisch prüfen:</b> zwei kurze Schrauben sind eher ein Gelenk als eine Einspannung. Im Zweifel beide Grenzfälle rechnen und den schlechteren nehmen.</li>
+</ul>
+<div class="stop"><b>Der teuerste Anfängerfehler:</b> das Eigengewicht vergessen. Ein 2-m-Aluprofil 40×40 wiegt rund 3 kg — bei 5 kg Nutzlast über ein Drittel obendrauf, und es greift in der Mitte an, wo das Biegemoment am größten ist.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 1: Statik</i> und <i>2: Elastostatik</i>, Springer Vieweg — Freikörperbild, Lagerreaktionen, Schnittgrößen, Standardfälle der Balkenbiegung.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente — Tabellenbuch</i>, Springer Vieweg — Tafeln zu Biegelinien und Lagerkräften für weitere Lastfälle.</li>
+    <li><a href="https://engineeringstatics.org/">Engineering Statics: Open and Interactive</a> (CC BY-NC-SA) — Kapitel 5 (Rigid Body Equilibrium) und 8 (Internal Forces), interaktiv.</li>
+    <li><a href="https://ocw.mit.edu/courses/2-001-mechanics-materials-i-fall-2006/">MIT OCW 2.001</a> — Gleichgewicht und statische Bestimmtheit.</li>
+  </ul>
+</div>

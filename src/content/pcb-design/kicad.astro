@@ -17,7 +17,7 @@ import "./_style.css";
 <tr><td><b>Rechnerwerkzeuge</b></td><td>Leiterbahnbreite, Wellenwiderstand, Spannungsteiler, E-Reihen, Farbcode</td><td>—</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Alle KiCad-Dateien sind Textdateien.</b> Damit lassen sich Projekte sinnvoll in Git verwalten: Änderungen sind als Diff sichtbar, Zweige und Zusammenführungen funktionieren. Das ist ein handfester Vorteil gegenüber Werkzeugen mit Binärformaten — und der Grund, warum in einem Hardwareprojekt Schaltplan, Layout, Stückliste und Firmware im selben Repository liegen sollten.</div>
+<div class="tip"><b>Alle KiCad-Dateien sind Textdateien</b> — Projekte gehören deshalb in Git: Änderungen als Diff, Schaltplan, Layout, Stückliste und Firmware im selben Repository.</div>
 
 <h2>Bibliotheken verstehen</h2>
 <div class="grid">
@@ -26,7 +26,7 @@ import "./_style.css";
   <div class="card"><div class="ct">3D-Modell</div><div class="cd">Nur für die visuelle und mechanische Prüfung. Wichtig, wenn ein Gehäuse dazukommt.</div></div>
   <div class="card"><div class="ct">Eigene Bibliothek anlegen</div><div class="cd">Projektspezifische oder eigene Bauteile in eine eigene Bibliothek, die mit dem Projekt versioniert wird. Sonst fehlt bei einem Rechnerwechsel plötzlich ein Symbol.</div></div>
 </div>
-<div class="stop"><b>Jeden Footprint gegen das Datenblatt prüfen.</b> Auch die mitgelieferten Bibliotheken sind nicht unfehlbar, und Bauteile mit gleichem Namen gibt es in mehreren Ausführungen. Der Ablauf: Maßzeichnung des Datenblatts öffnen, Pad-Abstände, Pad-Größen und Pin-1-Markierung im Footprinteditor nachmessen. Fünf Minuten je kritischem Bauteil — gegen zwei Wochen Wartezeit auf eine neue Platine.</div>
+<div class="stop"><b>Jeden Footprint gegen das Datenblatt prüfen.</b> Auch die mitgelieferten Bibliotheken sind nicht unfehlbar. Fünf Minuten je kritischem Bauteil — gegen zwei Wochen Wartezeit auf eine neue Platine. Prüfablauf: <a href="#bauform">Bauformen → Footprints prüfen</a>.</div>
 
 <h2>Werkzeuge, die man kennen sollte</h2>
 <div class="tbl-wrap"><table style="min-width:880px">

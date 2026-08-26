@@ -1,14 +1,74 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Der Gleichstromkreis ist 80 % der Elektronik im Alltag.</b> Reihe: ein Weg, Strom überall gleich, Spannungen addieren sich. Parallel: mehrere Wege, Spannung überall gleich, Ströme addieren sich. Alles Weitere folgt daraus.</div>
+<div class="kurz"><b>Der Gleichstromkreis ist 80 % der Elektronik im Alltag.</b> Sieben Basisgrößen, zwei Kirchhoff-Gesetze und das Ohmsche Gesetz reichen für fast jede Schaltung — der Rest ist Buchhaltung. Wer Vorsätze und Thévenin sicher beherrscht, spart sich die Hälfte aller Rechen- und Denkfehler.</div>
 
-<h2>Ohmsches Gesetz und Leistung</h2>
+<h2>Größen, Einheiten, Vorsätze</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Größe</th><th>Zeichen</th><th>Einheit</th><th>Definition</th><th>Anschauung</th></tr></thead>
+<tbody>
+<tr><td><b>Ladung</b></td><td>Q</td><td>Coulomb (C) = A·s</td><td>1 C = 6,241·10<sup>18</sup> Elementarladungen</td><td>Die Wassermenge</td></tr>
+<tr><td><b>Strom</b></td><td>I</td><td>Ampere (A)</td><td>I = dQ/dt</td><td>Der Durchfluss</td></tr>
+<tr><td><b>Spannung</b></td><td>U</td><td>Volt (V) = W/A</td><td>Energie pro Ladung zwischen zwei Punkten</td><td>Der Druckunterschied</td></tr>
+<tr><td><b>Widerstand</b></td><td>R</td><td>Ohm (Ω) = V/A</td><td>R = U/I; Leitwert G = 1/R in Siemens (S)</td><td>Die Engstelle</td></tr>
+<tr><td><b>Kapazität</b></td><td>C</td><td>Farad (F) = C/V</td><td>C = Q/U; i = C·du/dt</td><td>Der Eimer</td></tr>
+<tr><td><b>Induktivität</b></td><td>L</td><td>Henry (H) = V·s/A</td><td>u = L·di/dt</td><td>Die Schwungmasse</td></tr>
+<tr><td><b>Leistung / Energie</b></td><td>P / W</td><td>Watt (W) / Joule (J)</td><td>P = U·I; W = P·t; 1 Wh = 3600 J</td><td>Tempo / Rechnung am Monatsende</td></tr>
+<tr><td><b>Frequenz</b></td><td>f / ω</td><td>Hertz (Hz) / 1/s</td><td>f = 1/T; ω = 2π·f</td><td>Wiederholungen pro Sekunde</td></tr>
+<tr><td><b>Magn. Fluss / Flussdichte</b></td><td>Φ / B</td><td>Weber (Wb) / Tesla (T)</td><td>u = −dΦ/dt; B = Φ/A</td><td>Was durch die Spule geht</td></tr>
+<tr><td><b>Elektrische Feldstärke</b></td><td>E</td><td>V/m</td><td>E = U/d im Plattenfeld</td><td>Steilheit des Spannungsgefälles</td></tr>
+</tbody>
+</table></div>
+<ul>
+  <li><b>Vorsätze:</b> T 10¹² · G 10⁹ · M 10⁶ · k 10³ · m 10⁻³ · µ 10⁻⁶ (im Datenblatt oft „u“) · n 10⁻⁹ · p 10⁻¹². Die häufigste Fehlerquelle überhaupt.</li>
+  <li><b>Großbuchstabe U, I:</b> Gleichgröße oder Effektivwert · <b>klein u(t), i(t):</b> Momentanwert · <b>Dach û:</b> Scheitelwert · <b>Unterstrich:</b> komplexer Zeiger.</li>
+</ul>
+<div class="calc" data-calc="vorsatz">
+  <h4>Vorsatz umrechnen</h4>
+  <div class="row">
+    <div><label>Wert</label><input data-k="wert" type="text" placeholder="4700" /></div>
+    <div><label>von</label><select data-k="von">
+      <option value="1000000">Mega</option><option value="1000">kilo</option>
+      <option value="1" selected>—</option><option value="0.001">milli</option>
+      <option value="0.000001">mikro</option><option value="0.000000001">nano</option>
+      <option value="0.000000000001">piko</option></select></div>
+    <div><label>nach</label><select data-k="nach">
+      <option value="1000000">Mega</option><option value="1000">kilo</option>
+      <option value="1">—</option><option value="0.001">milli</option>
+      <option value="0.000001" selected>mikro</option><option value="0.000000001">nano</option>
+      <option value="0.000000000001">piko</option></select></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Normreihen und Konstanten</h2>
+<p>Widerstände und Kondensatoren gibt es nur in <b>E-Reihen</b> nach IEC 60063: logarithmisch gestufte Werte, deren Toleranzbänder lückenlos aneinanderstoßen.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Reihe</th><th>Toleranz</th><th>Werte pro Dekade</th></tr></thead>
+<tbody>
+<tr><td><b>E6</b></td><td>±20 %</td><td>1,0 · 1,5 · 2,2 · 3,3 · 4,7 · 6,8</td></tr>
+<tr><td><b>E12</b></td><td>±10 %</td><td>zusätzlich 1,2 · 1,8 · 2,7 · 3,9 · 5,6 · 8,2</td></tr>
+<tr><td><b>E24</b></td><td>±5 %</td><td>zusätzlich 1,1 · 1,3 · 1,6 · 2,0 · 2,4 · 3,0 · 3,6 · 4,3 · 5,1 · 6,2 · 7,5 · 9,1</td></tr>
+<tr><td><b>E96</b></td><td>±1 %</td><td>dreistellige Werte, z. B. 4,99 kΩ statt 4,7 kΩ</td></tr>
+</tbody>
+</table></div>
+<div class="flist">
+  <div class="frow hd"><span>Konstante</span><span>Wert</span><span>Wo sie auftaucht</span></div>
+  <div class="frow"><span class="fn">Elementarladung e</span><span class="fe">1,602176634·10⁻¹⁹ C</span><span class="fx">Halbleiterphysik, Schrotrauschen</span></div>
+  <div class="frow"><span class="fn">Feldkonstante ε₀</span><span class="fe">8,8541878·10⁻¹² F/m</span><span class="fx">Plattenkondensator, Leitungskapazität</span></div>
+  <div class="frow"><span class="fn">Feldkonstante µ₀</span><span class="fe">1,25663706·10⁻⁶ H/m</span><span class="fx">Spulen, Wellenwiderstand</span></div>
+  <div class="frow"><span class="fn">Boltzmann-Konstante k</span><span class="fe">1,380649·10⁻²³ J/K</span><span class="fx">Thermisches Rauschen, Diodengleichung</span></div>
+  <div class="frow"><span class="fn">Temperaturspannung U_T</span><span class="fe">≈ 25,85 mV bei 300 K</span><span class="fx">Diodenkennlinie, Bipolartransistor</span></div>
+  <div class="frow"><span class="fn">Spez. Widerstand Kupfer</span><span class="fe">0,0175 Ω·mm²/m (20 °C)</span><span class="fx">Leitungsauslegung, Spulenwiderstand</span></div>
+</div>
+<p class="note">Seit der SI-Revision 2019 sind e, k und c₀ exakt definiert; ε₀ und µ₀ sind seither Messgrößen mit winziger Unsicherheit. Formelsammlung und Einheiten hubweit: <a href="mechatronik-nachschlagewerk.html#formeln">Nachschlagewerk → Formeln</a>.</p>
+
+<h2>Ohmsches Gesetz, Leistung, Temperatur</h2>
 <div class="fbox">
   <span class="f">U = R · I&nbsp;&nbsp;&nbsp;&nbsp;P = U · I = I²·R = U²/R</span>
   <span class="l">Vier Größen, zwei Gleichungen — zwei bekannte Werte reichen immer.</span>
 </div>
-
 <div class="calc" data-calc="ohm">
   <h4>Ohm-Rechner — zwei beliebige Werte genügen</h4>
   <div class="row">
@@ -20,6 +80,18 @@ import "./_style.css";
   <div class="out" data-out></div>
   <div class="hint" data-hint hidden></div>
 </div>
+<div class="fbox"><span class="f">R(ϑ) = R₂₀ · [1 + α · (ϑ − 20 °C)]&nbsp;&nbsp;mit α_Cu ≈ 0,0039 / K</span>
+<span class="l">Metalle werden warm hochohmiger, Halbleiter meist niederohmiger. Eine Cu-Wicklung bei 100 °C hat ~31 % mehr Widerstand — so misst man Wicklungstemperaturen ohne Sensor.</span></div>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Material</th><th>ρ bei 20 °C in Ω·mm²/m</th><th>α in 1/K</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Silber</b></td><td>0,0159</td><td>0,0038</td><td>bester Leiter, zu teuer für Leitungen</td></tr>
+<tr><td><b>Kupfer</b></td><td>0,0175</td><td>0,0039</td><td>der Standard</td></tr>
+<tr><td><b>Aluminium</b></td><td>0,0282</td><td>0,0039</td><td>leichter; Freileitungen, Motoren</td></tr>
+<tr><td><b>Konstantan</b></td><td>0,49</td><td>≈ 0,00004</td><td>praktisch temperaturunabhängig → Präzisionswiderstände, DMS</td></tr>
+<tr><td><b>Nickel-Chrom</b></td><td>1,1</td><td>0,0002</td><td>Heizwendeln</td></tr>
+</tbody>
+</table></div>
 
 <h2>Reihe und Parallel</h2>
 <div class="gb">
@@ -37,10 +109,9 @@ import "./_style.css";
       <text class="lbla" x="118" y="122">I überall gleich</text>
     </svg>
     <ul>
-      <li><span class="formula">R = R1 + R2 + …</span> — immer größer als der größte Einzelwert</li>
-      <li>Strom identisch, Spannungen teilen sich im Verhältnis der Widerstände auf</li>
+      <li><span class="formula">R = R1 + R2 + …</span> — größer als der größte Einzelwert</li>
+      <li>Spannungen teilen sich im Verhältnis der Widerstände</li>
       <li>Ein Bauteil fällt aus → der ganze Zweig ist tot</li>
-      <li>Kondensatoren verhalten sich umgekehrt: <span class="formula">1/C = 1/C1 + 1/C2</span></li>
     </ul>
   </div>
   <div class="gb-col">
@@ -56,34 +127,27 @@ import "./_style.css";
       <text class="lbla" x="115" y="122" text-anchor="middle">U überall gleich</text>
     </svg>
     <ul>
-      <li><span class="formula">1/R = 1/R1 + 1/R2 + …</span> — immer kleiner als der kleinste Einzelwert</li>
-      <li>Zwei Widerstände: <span class="formula">R = R1·R2/(R1+R2)</span></li>
-      <li>N gleiche parallel: <span class="formula">R = R_einzeln / N</span></li>
+      <li><span class="formula">1/R = 1/R1 + 1/R2 + …</span> — kleiner als der kleinste Einzelwert</li>
+      <li>Zwei Widerstände: <span class="formula">R = R1·R2/(R1+R2)</span>; N gleiche: R/N</li>
       <li>Ein Zweig fällt aus → die anderen laufen weiter</li>
     </ul>
   </div>
 </div>
-
-<h3>Was sich wie verhält — die Übersicht</h3>
 <div class="tbl-wrap"><table style="min-width:760px">
 <thead><tr><th>Größe</th><th>In Reihe</th><th>Parallel</th></tr></thead>
 <tbody>
-<tr><td><b>Strom I</b></td><td>überall gleich</td><td>teilt sich auf</td></tr>
-<tr><td><b>Spannung U</b></td><td>teilt sich auf</td><td>überall gleich</td></tr>
-<tr><td><b>Widerstand R</b></td><td>addiert sich → größer</td><td>Kehrwerte addieren → kleiner</td></tr>
+<tr><td><b>Strom / Spannung</b></td><td>I gleich, U teilt sich</td><td>U gleich, I teilt sich</td></tr>
 <tr><td><b>Kondensator C</b></td><td>Kehrwerte addieren → kleiner</td><td>addiert sich → größer</td></tr>
 <tr><td><b>Spule L</b></td><td>addiert sich → größer</td><td>Kehrwerte addieren → kleiner</td></tr>
 <tr><td><b>Spannungsfestigkeit von C</b></td><td>addiert sich (2 × 25 V = 50 V)</td><td>die des schwächsten Bauteils</td></tr>
-<tr><td><b>Verlustleistung</b></td><td>der größte Widerstand wird am heißesten (P = I²R)</td><td>der kleinste Widerstand wird am heißesten (P = U²/R)</td></tr>
-<tr><td><b>Akkuzellen</b></td><td>Spannung addiert sich, Kapazität bleibt</td><td>Kapazität addiert sich, Spannung bleibt</td></tr>
+<tr><td><b>Verlustleistung</b></td><td>größter R wird am heißesten (I²R)</td><td>kleinster R wird am heißesten (U²/R)</td></tr>
+<tr><td><b>Akkuzellen</b></td><td>Spannung addiert sich</td><td>Kapazität addiert sich</td></tr>
 </tbody>
 </table></div>
 
-<h2>Spannungsteiler — und warum er unter Last zusammenbricht</h2>
-<p>Zwei Widerstände in Reihe, in der Mitte abgegriffen. Unbelastet gilt schlicht:</p>
-<div class="fbox"><span class="f">U_aus = U_ein · R2 / (R1 + R2)</span><span class="l">Nur solange nichts nennenswert Strom aus der Mitte zieht.</span></div>
-<p>Sobald ein Verbraucher am Abgriff hängt, liegt dessen Widerstand <b>parallel zu R2</b> — der Teiler liefert weniger Spannung als gerechnet. Faustregel: Der Querstrom durch den Teiler soll mindestens das Zehnfache des Laststroms betragen, sonst wird aus dem Teiler eine Zufallsschaltung.</p>
-
+<h2>Spannungsteiler und Innenwiderstand</h2>
+<div class="fbox"><span class="f">U_aus = U_ein · R2 / (R1 + R2)&nbsp;&nbsp;·&nbsp;&nbsp;U_klemme = U₀ − I · R_i</span>
+<span class="l">Der Teiler gilt nur unbelastet — eine Last liegt parallel zu R2. Faustregel: Querstrom ≥ 10 × Laststrom. Jede reale Quelle hat einen Innenwiderstand R_i (Alkaline AA ≈ 150–300 mΩ, Li-Ion 18650 ≈ 20–80 mΩ) — deshalb bricht die Batterie unter Last ein.</span></div>
 <div class="calc" data-calc="teiler">
   <h4>Spannungsteiler mit und ohne Last</h4>
   <div class="row">
@@ -95,54 +159,86 @@ import "./_style.css";
   <div class="out" data-out></div>
   <div class="hint" data-hint hidden></div>
 </div>
-
-<div class="stop"><b>Der Klassiker:</b> Ein Spannungsteiler ist keine Spannungsversorgung. Wer aus 12 V mit zwei Widerständen 5 V für einen Mikrocontroller machen will, bekommt beim ersten Lastwechsel Reset-Schleifen. Für Versorgungen gehört ein Linear- oder Schaltregler hin — siehe <a href="analogtechnik.html#versorgung">Analog &amp; Leistung → Linear- und Schaltregler</a>. Spannungsteiler sind für <b>Messsignale</b> und <b>Referenzen</b> da.</div>
-
-<h2>Innenwiderstand: warum die Batterie unter Last einbricht</h2>
-<p>Jede reale Quelle hat einen Innenwiderstand R_i. Das Ersatzschaltbild ist eine ideale Quelle mit Leerlaufspannung U₀ in Reihe zu R_i. Unter Last fällt an R_i Spannung ab:</p>
-<div class="fbox"><span class="f">U_klemme = U₀ − I · R_i</span><span class="l">Deshalb misst eine leere AA-Zelle im Leerlauf noch 1,4 V und bricht unter 500 mA auf 1,0 V ein.</span></div>
-<div class="grid3">
-  <div class="card"><div class="ct">Alkaline AA</div><div class="cd">R_i ≈ 150–300 mΩ frisch, steigt beim Entladen deutlich an</div></div>
-  <div class="card"><div class="ct">Li-Ion 18650</div><div class="cd">R_i ≈ 20–80 mΩ — deshalb liefern sie hohe Ströme ohne Einbruch</div></div>
-  <div class="card"><div class="ct">Labornetzteil</div><div class="cd">R_i praktisch null, dafür begrenzt es aktiv den Strom</div></div>
-</div>
-<p class="note">Praktische Messung: Leerlaufspannung messen, dann einen bekannten Lastwiderstand anschließen und erneut messen. R_i = (U₀ − U_last) / I_last. Das funktioniert an Batterien, Netzteilen und Signalquellen gleichermaßen.</p>
-
-<h2>Leistungsanpassung — und wann sie falsch ist</h2>
-<p>Die maximale <em>Leistung</em> überträgt eine Quelle an eine Last, wenn R_Last = R_i. Das ist ein Klassiker in Prüfungen — und in der Energietechnik ein Fehler, denn der Wirkungsgrad beträgt dann genau 50 %: die Hälfte der Energie verheizt die Quelle.</p>
+<div class="stop"><b>Der Klassiker:</b> Ein Spannungsteiler ist keine Spannungsversorgung. Wer aus 12 V mit zwei Widerständen 5 V für einen Mikrocontroller macht, bekommt beim ersten Lastwechsel Reset-Schleifen — dafür gehört ein Regler hin, siehe <a href="#versorgung">Linear- &amp; Schaltregler</a>. Teiler sind für <b>Messsignale</b> und <b>Referenzen</b> da.</div>
 <div class="gb">
-  <div class="gb-col good"><h4>Leistungsanpassung sinnvoll</h4><ul>
-    <li>Hochfrequenz und Antennen: 50 Ω überall, weil Reflexionen vermieden werden müssen</li>
-    <li>Audio-Signalübertragung im Kleinsignalbereich</li>
-    <li>Sensoren mit winzigen Signalen, bei denen es auf jedes Mikrowatt ankommt</li>
+  <div class="gb-col good"><h4>Leistungsanpassung (R_Last = R_i) sinnvoll</h4><ul>
+    <li>HF und Antennen: 50 Ω überall, Reflexionen vermeiden</li>
+    <li>Kleinsignalübertragung, bei der jedes Mikrowatt zählt</li>
   </ul></div>
   <div class="gb-col bad"><h4>Leistungsanpassung falsch</h4><ul>
-    <li>Jede Energieversorgung: dort will man R_Last ≫ R_i, also Spannungsanpassung</li>
-    <li>Motoren, Netzteile, Akkus — Ziel ist Wirkungsgrad, nicht Maximalleistung</li>
-    <li>Digitale Signale auf kurzen Leitungen: dort zählt der Pegel, nicht die Leistung</li>
+    <li>Jede Energieversorgung: Wirkungsgrad wäre nur 50 % — dort will man R_Last ≫ R_i</li>
+    <li>Digitale Signale auf kurzen Leitungen: der Pegel zählt, nicht die Leistung</li>
   </ul></div>
 </div>
 
-<h2>Temperaturabhängigkeit</h2>
-<p>Metalle werden bei Erwärmung <b>hochohmiger</b>, Halbleiter meist <b>niederohmiger</b>. Für Kupfer gilt näherungsweise:</p>
-<div class="fbox"><span class="f">R(ϑ) = R₂₀ · [1 + α · (ϑ − 20 °C)]&nbsp;&nbsp;mit α_Cu ≈ 0,0039 / K</span></div>
-<p>Eine Kupferwicklung, die sich von 20 °C auf 100 °C erwärmt, hat rund 31 % mehr Widerstand. Genau daraus bestimmt man in der Praxis die Wicklungstemperatur eines Motors oder Trafos, ohne einen Sensor hineinzubauen — man misst den Widerstand kalt und warm.</p>
-<div class="tbl-wrap"><table style="min-width:640px">
-<thead><tr><th>Material</th><th>ρ bei 20 °C in Ω·mm²/m</th><th>α in 1/K</th><th>Bemerkung</th></tr></thead>
-<tbody>
-<tr><td><b>Silber</b></td><td>0,0159</td><td>0,0038</td><td>bester Leiter, zu teuer für Leitungen</td></tr>
-<tr><td><b>Kupfer</b></td><td>0,0175</td><td>0,0039</td><td>der Standard</td></tr>
-<tr><td><b>Aluminium</b></td><td>0,0282</td><td>0,0038</td><td>leichter, in Freileitungen und Motoren</td></tr>
-<tr><td><b>Konstantan</b></td><td>0,49</td><td>≈ 0,00002</td><td>praktisch temperaturunabhängig → Präzisionswiderstände, DMS</td></tr>
-<tr><td><b>Nickel-Chrom</b></td><td>1,1</td><td>0,0002</td><td>Heizwendeln</td></tr>
-</tbody>
-</table></div>
+<h2>Kirchhoff und Netzwerkanalyse</h2>
+<div class="gb">
+  <div class="gb-col">
+    <h4>Knotenregel (1. Kirchhoff)</h4>
+    <p>Σ zufließende = Σ abfließende Ströme — Ladung sammelt sich nirgends an.</p>
+    <svg class="dg m" viewBox="0 0 300 100" role="img" aria-label="Knotenregel: 300 Milliampere hinein, 100 und 200 heraus">
+      <path class="w" d="M20,50 H130 M130,50 L250,22 M130,50 L250,78" />
+      <circle class="f" cx="130" cy="50" r="4" />
+      <path class="accf" d="M85,50 L71,43 L71,57 Z" />
+      <path class="accf" d="M205,33 L191,30 L195,43 Z" />
+      <path class="accf" d="M205,68 L195,58 L191,71 Z" />
+      <text class="lbl" x="48" y="40">300 mA</text>
+      <text class="lbl" x="215" y="21">100 mA</text>
+      <text class="lbl" x="215" y="94">200 mA</text>
+      <text class="lbla" x="150" y="14">Σ rein = Σ raus</text>
+    </svg>
+  </div>
+  <div class="gb-col">
+    <h4>Maschenregel (2. Kirchhoff)</h4>
+    <p>Σ aller Spannungen im Umlauf ist null — Energieerhaltung.</p>
+    <svg class="dg m" viewBox="0 0 300 100" role="img" aria-label="Maschenregel: 5 Volt Quelle, 2 Volt an der LED, 3 Volt am Widerstand">
+      <path class="w" d="M40,22 H120 M154,22 H250 M250,22 V78 M250,78 H40 M40,78 V50 M40,44 V22" />
+      <rect class="box" x="120" y="14" width="34" height="16" rx="2" />
+      <path class="w" d="M28,44 H52 M34,50 H46" />
+      <path class="accf" d="M196,14 L206,22 L196,30 Z" /><path class="acc" d="M206,12 V32" />
+      <text class="lbl" x="24" y="50" text-anchor="end">5 V</text>
+      <text class="lbl" x="137" y="10" text-anchor="middle">3 V</text>
+      <text class="lbl" x="214" y="44">2 V</text>
+      <text class="lbla" x="145" y="94" text-anchor="middle">5 V − 3 V − 2 V = 0</text>
+    </svg>
+  </div>
+</div>
+<ul>
+  <li><b>Knotenpotentialverfahren:</b> k − 1 Gleichungen; Standard in jedem SPICE-Simulator (ngspice, LTspice, KiCad).</li>
+  <li><b>Maschenstromverfahren:</b> z − k + 1 Gleichungen; von Hand oft schneller bei wenigen Maschen und Spannungsquellen.</li>
+  <li><b>Überlagerungssatz:</b> Quellen einzeln rechnen, Ergebnisse addieren (Spannungsquellen kurzschließen, Stromquellen auftrennen). Gilt nur linear — und <b>nie für Leistungen</b>, weil P quadratisch ist.</li>
+  <li><b>Stern-Dreieck-Umwandlung:</b> für Netze, die sich nicht in Reihe/Parallel zerlegen lassen: R₁ = R₁₂·R₃₁/(R₁₂+R₂₃+R₃₁) bzw. R₁₂ = (R₁R₂+R₂R₃+R₃R₁)/R₃.</li>
+</ul>
+
+<h2>Thévenin und die Brücke</h2>
+<div class="steps">
+  <div class="step"><h4>U₀ bestimmen (Leerlaufspannung)</h4>Last abklemmen, Spannung zwischen den Klemmen berechnen oder messen.</div>
+  <div class="step"><h4>R_i bestimmen</h4>Spannungsquellen kurzschließen, Stromquellen auftrennen, Widerstand zwischen den Klemmen zusammenrechnen.</div>
+  <div class="step"><h4>Ersatzbild anwenden</h4>Mit Last wird alles zur Reihenschaltung: <span class="formula">I = U₀ / (R_i + R_Last)</span>. Beispiel belasteter Teiler (12 V, 2 × 10 kΩ, Last 10 kΩ): U₀ = 6 V, R_i = 5 kΩ → nur noch 4,0 V am Abgriff.</div>
+</div>
+<svg class="dg m" viewBox="0 0 260 150" role="img" aria-label="Wheatstone-Brücke mit vier Widerständen und Differenzmessung in der Mitte">
+  <path class="w" d="M130,14 L60,60 M60,60 L130,106 M130,14 L200,60 M200,60 L130,106" />
+  <rect class="box" x="86" y="24" width="18" height="26" rx="2" transform="rotate(33 95 37)" />
+  <rect class="box" x="86" y="70" width="18" height="26" rx="2" transform="rotate(-33 95 83)" />
+  <rect class="box" x="156" y="24" width="18" height="26" rx="2" transform="rotate(-33 165 37)" />
+  <rect class="box" x="156" y="70" width="18" height="26" rx="2" transform="rotate(33 165 83)" />
+  <path class="acc" d="M60,60 H92 M168,60 H200" />
+  <circle class="accs" cx="130" cy="60" r="16" />
+  <text class="lbla" x="130" y="64" text-anchor="middle" style="font-size:11px">mV</text>
+  <path class="w" d="M130,14 V4 M130,106 V132 M118,132 H142 M123,138 H137" />
+  <text class="lbl" x="86" y="30">R1</text><text class="lbl" x="168" y="30">R3</text>
+  <text class="lbl" x="82" y="98">R2</text><text class="lbl" x="170" y="98">R4</text>
+  <text class="lbl" x="138" y="10">+U</text>
+</svg>
+<p><b>Wheatstone-Brücke:</b> abgeglichen bei R1/R2 = R3/R4 → U_diff = 0. Ihr Wert liegt in der Empfindlichkeit um den Nullpunkt: winzige Widerstandsänderungen werden messbar, Temperatur- und Versorgungsschwankungen fallen heraus. Anwendung in Waagen und DMS-Sensorik: <a href="regelung-antriebe.html#messkette">Regelung &amp; Sensorik → Messkette</a>.</p>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li>Albach, <i>Grundlagen der Elektrotechnik 1</i>, Kapitel Gleichstromnetzwerke.</li>
-    <li><a href="https://www.allaboutcircuits.com/textbook/direct-current/">All About Circuits — DC Circuits</a>, frei zugänglich.</li>
-    <li>Datenblätter Energizer/Panasonic zu Innenwiderstand und Entladekurven von Primärzellen.</li>
+    <li>Albach, <i>Grundlagen der Elektrotechnik 1</i>, Kapitel Gleichstromnetzwerke und Netzwerkanalyse.</li>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 1 — Thévenin in der praktischen Anwendung.</li>
+    <li><a href="https://www.bipm.org/en/publications/si-brochure">BIPM — SI Brochure, 9. Auflage</a> und <a href="https://physics.nist.gov/cuu/Constants/">NIST CODATA</a> — Einheiten und Konstanten.</li>
+    <li>IEC 60063 — Vorzugszahlenreihen für Widerstände und Kondensatoren (E-Reihen).</li>
+    <li><a href="https://www.allaboutcircuits.com/textbook/direct-current/">All About Circuits — DC Circuits</a>; <a href="https://ngspice.sourceforge.io/docs.html">ngspice-Dokumentation</a> (Modified Nodal Analysis).</li>
   </ul>
 </div>

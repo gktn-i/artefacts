@@ -25,7 +25,7 @@ import "./_style.css";
 <tr><td><b>FB</b></td><td>Ferritperle</td><td><b>MH</b></td><td>Bohrung, Befestigung</td></tr>
 </tbody>
 </table></div>
-<p class="note">Nummerierung nach Blatt und Position, nicht durcheinander: R101–R199 auf Blatt 1, R201–R299 auf Blatt 2. In KiCad erledigt das die automatische Annotation, wenn man sie blattweise einstellt.</p>
+<p class="note">Nummerierung blattweise: R101–R199 auf Blatt 1, R201–R299 auf Blatt 2 — in KiCad per blattweiser Annotation. Die Kürzel folgen der in EDA-Werkzeugen üblichen Konvention (IEEE 315 / ASME Y14.44).</p>
 
 <h2>Was in jeden Schaltplan gehört</h2>
 <div class="grid">
@@ -65,7 +65,7 @@ import "./_style.css";
 <tr><td><b>Nicht bestücken (DNP)</b></td><td>Kennzeichnung</td><td>Reserveplätze müssen als solche erkennbar sein</td></tr>
 </tbody>
 </table></div>
-<p class="note">Für Bestückungsdienstleister zusätzlich nötig: die <b>Positionsdatei</b> (Centroid/Pick-and-Place) mit Koordinaten, Drehung und Lage jedes Bauteils. KiCad erzeugt sie unter Datei → Fertigungsdaten. Die Drehwinkel folgen nicht immer der Erwartung des Fertigers — hier lohnt ein Blick in dessen Vorgaben.</p>
+<p class="note">Für Bestückungsdienstleister zusätzlich nötig: die <b>Positionsdatei</b> (Centroid/Pick-and-Place, KiCad: Datei → Fertigungsdaten). Zu Drehwinkeln und Polarität: <a href="#fertigung">Fertigung → Bestückung durch den Fertiger</a>.</p>
 
 <h2>Typische Schaltplanfehler</h2>
 <div class="gb">
@@ -91,7 +91,7 @@ import "./_style.css";
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li>IEC 60617 — Grafische Symbole für Schaltpläne; DIN EN 81346 für Betriebsmittelkennzeichnung.</li>
+    <li>IEC 60617 — Grafische Symbole für Schaltpläne; IEEE 315 / ASME Y14.44 — Referenzbezeichner (R, C, U, …); DIN EN IEC 81346 für Anlagen-Betriebsmittelkennzeichnung.</li>
     <li><a href="https://docs.kicad.org/">KiCad Schematic Editor Manual</a> — ERC, Hierarchien, Stücklistenerzeugung.</li>
     <li>Datenblätter mit Referenzschaltungen — bei Spannungsreglern und Funkmodulen sind sie verbindlich, nicht optional.</li>
     <li>Ergänzend zum Lesen von Schaltplänen: <a href="elektronik-grundlagen.html#schaltplan">Elektronik 101 → Schaltplan lesen</a>.</li>
