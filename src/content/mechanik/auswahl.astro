@@ -1,0 +1,141 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Werkstoffauswahl beginnt nicht mit einer Werkstoffliste, sondern mit der Frage, welche Eigenschaft das Bauteil begrenzt.</b> Steifigkeit, Festigkeit, Temperatur, Korrosion, Verschleiß oder Preis — erst danach lohnt der Blick in die Tabelle unten: alle Kennwerte in denselben Einheiten, sortier- und filterbar.</div>
+
+<h2>Vorgehen in fünf Schritten</h2>
+<div class="steps">
+  <div class="step"><h4>Begrenzende Eigenschaft benennen</h4>„Der Ausleger darf sich unter 200 N um höchstens 0,5 mm durchbiegen“ ist eine rechenbare Anforderung. „Muss stabil sein“ ist keine.</div>
+  <div class="step"><h4>Ausschlusskriterien setzen</h4>Dauertemperatur, Medien, Lebensmittelzulassung, Leitfähigkeit, Magnetismus, Masse, Brandschutz — diese Liste streicht meist drei Viertel der Kandidaten.</div>
+  <div class="step"><h4>Zielgröße maximieren</h4>Bei gegebener Steifigkeit und minimaler Masse E^(1/3)/ρ, bei gegebener Festigkeit R_p0,2^(2/3)/ρ, bei minimalen Kosten die Eigenschaft je Euro (Systematik nach Ashby).</div>
+  <div class="step"><h4>Fertigbarkeit und Verfügbarkeit prüfen</h4>Der beste Werkstoff nützt nichts, wenn er nicht lieferbar ist, die Werkstatt ihn nicht bearbeiten kann oder die Mindestmenge bei 500 kg liegt.</div>
+  <div class="step"><h4>Gegenrechnen und absichern</h4>Mit den Kennwerten des Lieferanten rechnen, nicht mit dem Katalogmittelwert; bei kritischen Teilen Abnahmeprüfzeugnis 3.1 nach EN 10204 verlangen.</div>
+</div>
+
+<h2>Entscheidungshilfen für häufige Fälle</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Anforderung</th><th>Erste Wahl</th><th>Alternative</th><th>Begründung</th></tr></thead>
+<tbody>
+<tr><td><b>Steifer Rahmen, Kosten zählen</b></td><td>Stahl S235/S355, geschweißt</td><td>Aluprofil 6060 mit Verbindern</td><td>Stahl hat den dreifachen E-Modul; das Profilsystem ist schneller montiert und änderbar</td></tr>
+<tr><td><b>Leichtes, steifes Bauteil</b></td><td>Aluminium 6082 T651</td><td>CFK-Sandwich</td><td>Bei gleicher Biegesteifigkeit spart Alu über größere Wandabstände; CFK ist besser, aber teuer</td></tr>
+<tr><td><b>Hoch belastete Welle</b></td><td>42CrMo4 vergütet</td><td>C45 vergütet</td><td>Höhere Streckgrenze bei gleichem E-Modul und Bauraum</td></tr>
+<tr><td><b>Gleitlager, wartungsfrei</b></td><td>Kunststoff (iglidur, PTFE-Verbund)</td><td>Zinnbronze CuSn8</td><td>Kunststoff braucht keine Schmierung; Bronze trägt mehr und verträgt mehr Temperatur</td></tr>
+<tr><td><b>Frästeil, viele Bohrungen</b></td><td>Aluminium 6082 oder POM-C</td><td>Automatenstahl 11SMn30</td><td>Beste Zerspanbarkeit, kurze Bearbeitungszeit</td></tr>
+<tr><td><b>Außenanwendung, Feuchte</b></td><td>Edelstahl 1.4301, feuerverzinkter Stahl</td><td>Eloxiertes Aluminium</td><td>Bei Salzwasser 1.4404 statt 1.4301</td></tr>
+<tr><td><b>Maschinenbett, dämpfend</b></td><td>Mineralguss</td><td>Grauguss EN-GJL-250</td><td>Dämpfung schlägt hier Festigkeit</td></tr>
+<tr><td><b>Transparente Abdeckung</b></td><td>PMMA (Acrylglas)</td><td>PC (Polycarbonat)</td><td>PMMA ist klarer und kratzfester; PC ist schlagzäh — die Wahl für Schutzscheiben</td></tr>
+<tr><td><b>Funktionsteil aus dem Drucker</b></td><td>PETG oder ASA</td><td>PA-CF</td><td>PLA ist zu temperaturempfindlich und zu spröde</td></tr>
+<tr><td><b>Heiß und chemisch aggressiv</b></td><td>PEEK oder 1.4404</td><td>PTFE (drucklos)</td><td>PEEK bis 250 °C mechanisch belastbar; PTFE ist inert, kriecht aber</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Werkstofftabelle</h2>
+<p>E-Modul und R_p0,2 in N/mm², Dichte in g/cm³, α in 10⁻⁶/K, λ in W/(m·K).</p>
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Suchen: Werkstoff, Norm, Anwendung …" aria-label="Werkstoffe durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="stahl">Stahl &amp; Guss</button>
+    <button type="button" data-filter="ne">Aluminium &amp; Buntmetall</button>
+    <button type="button" data-filter="kunst">Kunststoffe</button>
+    <button type="button" data-filter="sonst">Verbund &amp; Sonstige</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="tbl-wrap"><table style="min-width:1020px">
+    <thead><tr><th data-s="text">Werkstoff</th><th>Gruppe</th><th data-s="num">E-Modul</th><th data-s="num">R_p0,2</th><th data-s="num">Dichte</th><th data-s="num">α</th><th data-s="num">λ</th><th>Hinweis</th></tr></thead>
+    <tbody data-list="Werkstoffen">
+      <tr data-item data-cat="stahl" data-k="baustahl st37 s235"><td><b>S235JR (1.0038)</b></td><td><span class="cb">Stahl</span></td><td>210 000</td><td>235</td><td>7,85</td><td>12</td><td>50</td><td>Der Baustahl. Gut schweißbar, überall verfügbar, nicht härtbar.</td></tr>
+      <tr data-item data-cat="stahl" data-k="st52 s355 baustahl"><td><b>S355J2 (1.0577)</b></td><td><span class="cb">Stahl</span></td><td>210 000</td><td>355</td><td>7,85</td><td>12</td><td>45</td><td>Höherfester Baustahl, gleiche Verarbeitung wie S235 bei 50 % mehr Streckgrenze.</td></tr>
+      <tr data-item data-cat="stahl" data-k="c45 vergütungsstahl welle"><td><b>C45 vergütet (1.0503)</b></td><td><span class="cb">Stahl</span></td><td>210 000</td><td>490</td><td>7,85</td><td>11</td><td>45</td><td>Der Wellenwerkstoff (490 N/mm² bis Ø 16, größere Abmessungen weniger). Induktionshärtbar.</td></tr>
+      <tr data-item data-cat="stahl" data-k="42crmo4 vergütungsstahl"><td><b>42CrMo4 vergütet (1.7225)</b></td><td><span class="cb">Stahl</span></td><td>210 000</td><td>750</td><td>7,85</td><td>11</td><td>42</td><td>Hochbelastete Wellen und Schrauben. Schweißen nur mit Vorwärmen.</td></tr>
+      <tr data-item data-cat="stahl" data-k="einsatzstahl zahnrad aufkohlen"><td><b>16MnCr5 (1.7131)</b></td><td><span class="cb">Stahl</span></td><td>210 000</td><td>590 (Kern)</td><td>7,85</td><td>11</td><td>44</td><td>Einsatzstahl für Zahnräder: harte Randschicht, zäher Kern.</td></tr>
+      <tr data-item data-cat="stahl" data-k="federstahl feder"><td><b>51CrV4 (1.8159)</b></td><td><span class="cb">Stahl</span></td><td>206 000</td><td>1 200</td><td>7,85</td><td>12</td><td>45</td><td>Federstahl. Hohe Streckgrenze bei guter Zähigkeit.</td></tr>
+      <tr data-item data-cat="stahl" data-k="wälzlager lagerstahl kugel"><td><b>100Cr6 (1.3505)</b></td><td><span class="cb">Stahl</span></td><td>210 000</td><td>gehärtet 60–64 HRC</td><td>7,85</td><td>11,5</td><td>45</td><td>Wälzlagerstahl, sehr reine Schmelze. Durchhärtend.</td></tr>
+      <tr data-item data-cat="stahl" data-k="automatenstahl drehteil"><td><b>11SMn30 (1.0715)</b></td><td><span class="cb">Stahl</span></td><td>210 000</td><td>≈ 300</td><td>7,85</td><td>11</td><td>50</td><td>Automatenstahl: beste Zerspanbarkeit, kurze Späne. Nicht schweißbar.</td></tr>
+      <tr data-item data-cat="stahl" data-k="v2a 304 edelstahl nichtrostend"><td><b>X5CrNi18-10 (1.4301, V2A)</b></td><td><span class="cb">Stahl</span></td><td>200 000</td><td>210</td><td>7,90</td><td>16</td><td>15</td><td>Der Edelstahl-Standard. Nicht chloridbeständig, nicht härtbar, magnetfrei.</td></tr>
+      <tr data-item data-cat="stahl" data-k="v4a 316l edelstahl seewasser"><td><b>X2CrNiMo17-12-2 (1.4404, V4A)</b></td><td><span class="cb">Stahl</span></td><td>200 000</td><td>220</td><td>8,00</td><td>16,5</td><td>15</td><td>Mit Molybdän: salzwasser- und chloridbeständig.</td></tr>
+      <tr data-item data-cat="stahl" data-k="martensitisch messer härtbar"><td><b>X20Cr13 (1.4021)</b></td><td><span class="cb">Stahl</span></td><td>215 000</td><td>500 (vergütet)</td><td>7,70</td><td>10,5</td><td>30</td><td>Härtbarer nichtrostender Stahl. Messer, Wellen mit Korrosionsanforderung.</td></tr>
+      <tr data-item data-cat="stahl" data-k="grauguss gusseisen bett dämpfung"><td><b>EN-GJL-250 (Grauguss)</b></td><td><span class="cb">Stahl</span></td><td>110 000</td><td>R_m 250</td><td>7,20</td><td>10</td><td>48</td><td>Lamellengraphit: spröde, aber hervorragend dämpfend. Maschinenbetten.</td></tr>
+      <tr data-item data-cat="stahl" data-k="sphäroguss duktil gusseisen"><td><b>EN-GJS-400-15 (Sphäroguss)</b></td><td><span class="cb">Stahl</span></td><td>169 000</td><td>250</td><td>7,10</td><td>12,5</td><td>36</td><td>Kugelgraphit: 15 % Bruchdehnung, fast wie Stahl belastbar.</td></tr>
+      <tr data-item data-cat="ne" data-k="aluminium rein blech leitfähig"><td><b>EN AW-1050A (Al 99,5)</b></td><td><span class="cb">NE-Metall</span></td><td>69 000</td><td>35</td><td>2,70</td><td>23,5</td><td>229</td><td>Rein-Aluminium: sehr gut leitend und umformbar, schlecht zerspanbar.</td></tr>
+      <tr data-item data-cat="ne" data-k="almg blech schweißen"><td><b>EN AW-5754 (AlMg3)</b></td><td><span class="cb">NE-Metall</span></td><td>70 000</td><td>80</td><td>2,67</td><td>23,8</td><td>147</td><td>Blechlegierung, gut umformbar und schweißbar, seewasserfest.</td></tr>
+      <tr data-item data-cat="ne" data-k="profil strangpress kühlkörper 6060"><td><b>EN AW-6060 T6</b></td><td><span class="cb">NE-Metall</span></td><td>69 000</td><td>150</td><td>2,70</td><td>23,4</td><td>200</td><td>Der Strangpress-Standard: Konstruktionsprofile, Kühlkörper, gut eloxierbar.</td></tr>
+      <tr data-item data-cat="ne" data-k="6082 platte frästeil almgsi"><td><b>EN AW-6082 T6</b></td><td><span class="cb">NE-Metall</span></td><td>70 000</td><td>260</td><td>2,70</td><td>23,4</td><td>170</td><td>Der Konstruktionswerkstoff: Platten und Frästeile, schweißbar.</td></tr>
+      <tr data-item data-cat="ne" data-k="7075 hochfest flugzeug"><td><b>EN AW-7075 T6</b></td><td><span class="cb">NE-Metall</span></td><td>72 000</td><td>460</td><td>2,80</td><td>23,6</td><td>130</td><td>Höchste Festigkeit, fast Stahlniveau. Nicht schweißbar, teuer.</td></tr>
+      <tr data-item data-cat="ne" data-k="kupfer leiter kühlkörper wärme"><td><b>Kupfer Cu-ETP</b></td><td><span class="cb">NE-Metall</span></td><td>125 000</td><td>60 (weich)</td><td>8,90</td><td>16,5</td><td>390</td><td>Bester bezahlbarer Wärme- und Stromleiter. Zäh, schlecht zerspanbar.</td></tr>
+      <tr data-item data-cat="ne" data-k="messing drehteil fitting ms58"><td><b>Messing CuZn39Pb3 (MS58)</b></td><td><span class="cb">NE-Metall</span></td><td>96 000</td><td>250</td><td>8,40</td><td>20,9</td><td>113</td><td>Der Drehteilwerkstoff. Nicht für Ammoniak (Spannungsrisskorrosion).</td></tr>
+      <tr data-item data-cat="ne" data-k="bronze gleitlager buchse schnecke"><td><b>Zinnbronze CuSn8</b></td><td><span class="cb">NE-Metall</span></td><td>115 000</td><td>300</td><td>8,80</td><td>18,5</td><td>62</td><td>Klassischer Gleitpartner zu Stahl: Buchsen, Schneckenräder.</td></tr>
+      <tr data-item data-cat="ne" data-k="titan ti6al4v leichtbau implantat"><td><b>Titan Grade 5 (Ti6Al4V)</b></td><td><span class="cb">NE-Metall</span></td><td>110 000</td><td>830</td><td>4,43</td><td>8,6</td><td>6,7</td><td>Beste Festigkeit je Gewicht unter den Metallen, sehr korrosionsbeständig, schwer zerspanbar.</td></tr>
+      <tr data-item data-cat="ne" data-k="magnesium leicht druckguss"><td><b>Magnesium AZ91</b></td><td><span class="cb">NE-Metall</span></td><td>45 000</td><td>160</td><td>1,81</td><td>26</td><td>72</td><td>Leichtestes Konstruktionsmetall, gut dämpfend. Späne brennbar.</td></tr>
+      <tr data-item data-cat="kunst" data-k="pom delrin acetal zahnrad"><td><b>POM-C</b></td><td><span class="cb">Kunststoff</span></td><td>2 800</td><td>65</td><td>1,41</td><td>110</td><td>0,31</td><td>Der Konstruktionskunststoff: steif, maßhaltig, hervorragend zerspanbar.</td></tr>
+      <tr data-item data-cat="kunst" data-k="nylon pa6 polyamid zahnrad"><td><b>PA6</b></td><td><span class="cb">Kunststoff</span></td><td>3 000 (trocken)</td><td>80</td><td>1,14</td><td>80</td><td>0,29</td><td>Zäh und abriebfest. Nimmt bis 3 % Wasser auf und wird dabei weicher.</td></tr>
+      <tr data-item data-cat="kunst" data-k="pe hdpe polyethylen tank"><td><b>PE-HD</b></td><td><span class="cb">Kunststoff</span></td><td>1 000</td><td>25</td><td>0,95</td><td>200</td><td>0,43</td><td>Chemisch sehr beständig, gleitfreudig, billig. Weich, schlecht klebbar.</td></tr>
+      <tr data-item data-cat="kunst" data-k="pp polypropylen scharnier"><td><b>PP</b></td><td><span class="cb">Kunststoff</span></td><td>1 400</td><td>32</td><td>0,91</td><td>150</td><td>0,22</td><td>Filmscharniere möglich, chemisch beständig. UV-empfindlich.</td></tr>
+      <tr data-item data-cat="kunst" data-k="teflon ptfe gleiten dichtung"><td><b>PTFE</b></td><td><span class="cb">Kunststoff</span></td><td>500</td><td>12</td><td>2,17</td><td>130</td><td>0,25</td><td>Geringster Reibwert aller Feststoffe (0,04). Kriecht stark, nicht klebbar.</td></tr>
+      <tr data-item data-cat="kunst" data-k="polycarbonat makrolon schutzscheibe"><td><b>PC (Polycarbonat)</b></td><td><span class="cb">Kunststoff</span></td><td>2 300</td><td>65</td><td>1,20</td><td>65</td><td>0,21</td><td>Transparent und extrem schlagzäh. Spannungsrisse durch Lösemittel.</td></tr>
+      <tr data-item data-cat="kunst" data-k="acryl plexiglas pmma laser"><td><b>PMMA (Acrylglas)</b></td><td><span class="cb">Kunststoff</span></td><td>3 300</td><td>72</td><td>1,19</td><td>70</td><td>0,19</td><td>Klarer als Glas, gut lasercuttbar und polierbar. Spröde.</td></tr>
+      <tr data-item data-cat="kunst" data-k="peek hochtemperatur medizin"><td><b>PEEK</b></td><td><span class="cb">Kunststoff</span></td><td>3 600</td><td>100</td><td>1,30</td><td>47</td><td>0,25</td><td>Hochleistungskunststoff: 250 °C dauerhaft, chemisch inert. Sehr teuer.</td></tr>
+      <tr data-item data-cat="kunst" data-k="abs gehäuse aceton"><td><b>ABS</b></td><td><span class="cb">Kunststoff</span></td><td>2 200</td><td>45</td><td>1,05</td><td>90</td><td>0,17</td><td>Gut zerspanbar und klebbar, schlagzäh. UV-empfindlich.</td></tr>
+      <tr data-item data-cat="kunst" data-k="pla filament 3d-druck"><td><b>PLA (Druck)</b></td><td><span class="cb">Kunststoff</span></td><td>3 500</td><td>R_m 50</td><td>1,24</td><td>68</td><td>0,13</td><td>Steif und einfach zu drucken, aber ab 55 °C weich. Mehr im Modul <a href="3d-druck.html#filamente">3D-Druck</a>.</td></tr>
+      <tr data-item data-cat="kunst" data-k="petg filament 3d-druck"><td><b>PETG (Druck)</b></td><td><span class="cb">Kunststoff</span></td><td>2 100</td><td>R_m 50</td><td>1,27</td><td>60</td><td>0,20</td><td>Zäher und chemisch beständiger als PLA, gute Schichthaftung.</td></tr>
+      <tr data-item data-cat="kunst" data-k="asa abs filament außen uv"><td><b>ASA (Druck)</b></td><td><span class="cb">Kunststoff</span></td><td>2 200</td><td>R_m 45</td><td>1,07</td><td>90</td><td>0,17</td><td>UV- und temperaturbeständig, für Außenteile. Braucht geschlossenen Bauraum.</td></tr>
+      <tr data-item data-cat="kunst" data-k="tpu flexibel gummi filament"><td><b>TPU 95A (Druck)</b></td><td><span class="cb">Kunststoff</span></td><td>30</td><td>R_m 30</td><td>1,20</td><td>150</td><td>0,20</td><td>Flexibel und abriebfest. Direktextruder und langsamer Druck nötig.</td></tr>
+      <tr data-item data-cat="sonst" data-k="carbon cfk kohlefaser ud"><td><b>CFK unidirektional, längs</b></td><td><span class="cb">Sonstige</span></td><td>150 000</td><td>R_m 1 500</td><td>1,55</td><td>≈ 0</td><td>10</td><td>Steifer als Stahl bei einem Fünftel der Dichte — aber nur längs zur Faser.</td></tr>
+      <tr data-item data-cat="sonst" data-k="carbon gewebe platte"><td><b>CFK Gewebe (0/90)</b></td><td><span class="cb">Sonstige</span></td><td>65 000</td><td>R_m 600</td><td>1,55</td><td>2</td><td>5</td><td>In beiden Hauptrichtungen brauchbar, in keiner optimal.</td></tr>
+      <tr data-item data-cat="sonst" data-k="gfk glasfaser epoxid"><td><b>GFK Gewebe</b></td><td><span class="cb">Sonstige</span></td><td>25 000</td><td>R_m 400</td><td>1,90</td><td>10</td><td>0,3</td><td>Deutlich billiger als CFK, elektrisch isolierend, zäher.</td></tr>
+      <tr data-item data-cat="sonst" data-k="holz fichte nadelholz"><td><b>Fichte, längs zur Faser</b></td><td><span class="cb">Sonstige</span></td><td>11 000</td><td>R_m 40</td><td>0,45</td><td>4 (längs)</td><td>0,13</td><td>Hervorragendes Verhältnis von Steifigkeit zu Gewicht, quer deutlich schwächer.</td></tr>
+      <tr data-item data-cat="sonst" data-k="buche hartholz werkbank"><td><b>Buche</b></td><td><span class="cb">Sonstige</span></td><td>15 000</td><td>—</td><td>0,70</td><td>—</td><td>0,16</td><td>Werkbänke, Führungen, Hämmer.</td></tr>
+      <tr data-item data-cat="sonst" data-k="sperrholz multiplex birke siebdruck"><td><b>Multiplex Birke</b></td><td><span class="cb">Sonstige</span></td><td>8 000</td><td>R_m 60</td><td>0,68</td><td>—</td><td>0,15</td><td>Kreuzweise verleimt, in beiden Richtungen tragfähig; als Siebdruckplatte feuchtebeständig.</td></tr>
+      <tr data-item data-cat="sonst" data-k="mdf platte gehäuse"><td><b>MDF</b></td><td><span class="cb">Sonstige</span></td><td>3 000</td><td>—</td><td>0,75</td><td>—</td><td>0,10</td><td>Isotrop, glatte Oberfläche, billig; quillt bei Feuchte stark.</td></tr>
+      <tr data-item data-cat="sonst" data-k="keramik aluminiumoxid isolator"><td><b>Aluminiumoxid Al₂O₃ 99,7</b></td><td><span class="cb">Sonstige</span></td><td>380 000</td><td>R_m (Biegung) 350</td><td>3,90</td><td>8</td><td>30</td><td>Extrem hart und verschleißfest, elektrisch isolierend. Spröde.</td></tr>
+      <tr data-item data-cat="sonst" data-k="keramik zirkonoxid zro2"><td><b>Zirkonoxid ZrO₂</b></td><td><span class="cb">Sonstige</span></td><td>210 000</td><td>R_m (Biegung) 1 000</td><td>6,05</td><td>10,5</td><td>2,5</td><td>Die zäheste technische Keramik. Lagerkugeln, Schneiden, Implantate.</td></tr>
+      <tr data-item data-cat="sonst" data-k="glas borosilikat druckbett"><td><b>Borosilikatglas</b></td><td><span class="cb">Sonstige</span></td><td>64 000</td><td>R_m 60</td><td>2,23</td><td>3,3</td><td>1,2</td><td>Geringe Wärmedehnung, daher temperaturwechselbeständig.</td></tr>
+      <tr data-item data-cat="sonst" data-k="mineralguss polymerbeton maschinenbett"><td><b>Mineralguss (Polymerbeton)</b></td><td><span class="cb">Sonstige</span></td><td>40 000</td><td>R_m (Druck) 130</td><td>2,40</td><td>12</td><td>1,5</td><td>Dämpft sechs- bis zehnmal besser als Grauguss. Gießbar mit eingelegten Gewinden.</td></tr>
+      <tr data-item data-cat="sonst" data-k="beton fundament"><td><b>Beton C25/30</b></td><td><span class="cb">Sonstige</span></td><td>30 000</td><td>R_m (Druck) 25</td><td>2,40</td><td>10</td><td>2,1</td><td>Für schwere, dämpfende Maschinenfundamente.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Kein Werkstoff passt zu dieser Auswahl.</div>
+</div>
+<div class="warn"><b>Alle Werte sind Richtwerte für den Vergleich, keine Auslegungsgrundlage.</b> Sie hängen von Zustand, Abmessung, Temperatur und Charge ab — bei Kunststoffen zusätzlich von Feuchte und Belastungsdauer. Für die Berechnung gilt das Datenblatt des Lieferanten, bei genormten Werkstoffen der Mindestwert der Norm.</div>
+
+<h2>Wie sich die Gruppen unterscheiden</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Steifigkeit je Gewicht</div><div class="cd">E/ρ ist bei Stahl, Aluminium und Titan fast gleich (rund 26 · 10⁶ m²/s²). Gewicht spart daher nicht der Werkstoffwechsel allein, sondern die Form: größere Wandabstände bei dünnerer Wand.</div></div>
+  <div class="card"><div class="ct">Wärmedehnung</div><div class="cd">Kunststoffe dehnen sich fünf- bis achtmal so stark wie Stahl, Aluminium doppelt so stark. Bei Mischbau zählt die Differenz; Langlöcher und Loslager sind die Antwort.</div></div>
+  <div class="card"><div class="ct">Wärmeleitfähigkeit</div><div class="cd">Kupfer leitet 26-mal besser als Edelstahl und 3 000-mal besser als PLA. Für Kühlkörper zählt λ, für Isolierung das Gegenteil — Edelstahl ist ein erstaunlich schlechter Wärmeleiter.</div></div>
+</div>
+
+<h2>Die typischen Fehlgriffe</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Häufige Fehler</h4>
+    <ul>
+      <li><b>Festeren Stahl gegen zu weiche Konstruktion:</b> ändert nichts, weil E gleich bleibt</li>
+      <li><b>Aluminium ohne Steifigkeitsrechnung als Stahlersatz:</b> gleiche Geometrie heißt dreifache Durchbiegung</li>
+      <li><b>PLA für Funktionsteile mit Wärme- oder Dauerlast</b></li>
+      <li><b>Edelstahl als Universallösung:</b> teuer, schlecht zerspanbar, frisst beim Verschrauben</li>
+      <li><b>Nur den Werkstoffpreis vergleichen:</b> bei Frästeilen dominiert oft die Bearbeitungszeit</li>
+      <li><b>Kunststoff-Kurzzeitkennwerte für Dauerlast</b></li>
+    </ul>
+  </div>
+  <div class="gb-col good"><h4>Was sich bewährt</h4>
+    <ul>
+      <li>Erst die Form optimieren, dann den Werkstoff — Geometrie hat den größeren Hebel</li>
+      <li>Lagerhaltige Standardwerkstoffe und -abmessungen wählen</li>
+      <li>Bei Unsicherheit den zäheren Werkstoff: er kündigt Versagen an</li>
+      <li>Prototyp im Zielwerkstoff bauen, nicht nur im Druckwerkstoff</li>
+      <li>Beim Lieferanten nach Restposten und Zuschnitten fragen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="tip"><b>Der Trick mit der Steifigkeit:</b> Bei freier Wandstärke ist nicht E/ρ die richtige Kennzahl, sondern E^(1/3)/ρ, weil die Biegesteifigkeit mit der dritten Potenz der Höhe wächst. Mit E in N/mm² und ρ in g/cm³: Fichte ≈ 49, CFK (UD) ≈ 34, Multiplex ≈ 29, Aluminium ≈ 15, Stahl ≈ 7,6. Genau deshalb sind Flugzeugflügel und Fahrradrahmen so gebaut, wie sie gebaut sind — mit gleichem Gewicht bekommt man dickere Querschnitte.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Michael F. Ashby, <i>Materials Selection in Mechanical Design</i>, Butterworth-Heinemann — Materialindizes und Werkstoffdiagramme; dazu <a href="https://www.ansys.com/products/materials/granta-edupack">Granta EduPack</a>.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente — Tabellenbuch</i>, Springer Vieweg — Kennwerte für Stähle, Guss und NE-Metalle.</li>
+    <li>Normblätter: DIN EN 10025, 10083, 10084, 10088 (Stahl), DIN EN 1561/1563 (Guss), DIN EN 573-3/755-2 (Aluminium), DIN EN 12164/1652 (Kupfer); DIN EN 10204 (Prüfbescheinigungen); VDI 2225 (technisch-wirtschaftliches Konstruieren).</li>
+    <li>Kunststoffkennwerte nach DIN EN ISO 527 und ISO 75 aus Datenblättern von <a href="https://www.ensingerplastics.com/">Ensinger</a> und Mitsubishi Chemical; <a href="https://www.matweb.com/">MatWeb</a> und <a href="https://www.makeitfrom.com/">MakeItFrom</a> für Verbund- und Keramikwerte.</li>
+  </ul>
+</div>

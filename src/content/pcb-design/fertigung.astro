@@ -17,7 +17,7 @@ import "./_style.css";
 <tr><td><b>Stückliste</b></td><td>BOM (.csv)</td><td>Mit Herstellerteilenummern und Bestellnummern</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Viele Fertiger nehmen inzwischen direkt die KiCad-Datei</b> (.kicad_pcb) oder bieten ein Zusatzmodul, das die Daten in ihrem gewünschten Format erzeugt. Das reduziert Fehlerquellen, koppelt das Projekt aber an einen Anbieter. Für die eigene Archivierung sollte man die Gerber-Dateien trotzdem erzeugen und mit dem Projekt ablegen — sie sind das herstellerunabhängige Austauschformat.</div>
+<div class="tip"><b>Viele Fertiger nehmen direkt die KiCad-Datei</b> (.kicad_pcb) — bequem, aber anbietergebunden. Gerber-Dateien trotzdem erzeugen und mit dem Projekt archivieren: Sie sind das herstellerunabhängige Austauschformat.</div>
 
 <h2>Prüfen, bevor bestellt wird</h2>
 <div class="steps">
@@ -35,10 +35,10 @@ import "./_style.css";
 <tbody>
 <tr><td><b>Minimale Leiterbahnbreite</b></td><td>0,127 mm (5 mil)</td><td>Darunter steigen Kosten und Ausschussrate deutlich</td></tr>
 <tr><td><b>Minimaler Abstand</b></td><td>0,127 mm</td><td>Ätzprozessgrenze</td></tr>
-<tr><td><b>Kleinste Bohrung</b></td><td>0,3 mm mechanisch</td><td>Kleiner nur mit Laser (Micro Via), deutlich teurer</td></tr>
+<tr><td><b>Kleinste Bohrung</b></td><td>0,3 mm (Standardklasse)</td><td>Mechanisch bis ≈ 0,15 mm gegen Aufpreis; darunter Laser (Micro Via, HDI)</td></tr>
 <tr><td><b>Restring</b></td><td>0,15 mm</td><td>Das Kupfer rund um die Bohrung. Zu klein heißt Ausbrüche bei Bohrtoleranzen</td></tr>
 <tr><td><b>Kupfer zum Rand</b></td><td>0,3 mm</td><td>Fräser hat Toleranz; Grate erzeugen Kurzschlüsse</td></tr>
-<tr><td><b>Kleinste Beschriftung</b></td><td>0,8 mm Höhe, 0,15 mm Strichstärke</td><td>Kleiner wird unleserlich oder verschwindet ganz</td></tr>
+<tr><td><b>Kleinste Beschriftung</b></td><td>0,8–1 mm Höhe, 0,15 mm Strichstärke</td><td>Kleiner wird unleserlich oder verschwindet ganz</td></tr>
 <tr><td><b>Lötstoppsteg</b></td><td>0,1 mm</td><td>Zwischen zwei Pads. Darunter läuft die Maske zusammen</td></tr>
 <tr><td><b>Nutzen und Ritzung</b></td><td>Panel mit V-Cut oder Fräsung</td><td>Bei kleinen Platinen spart ein Nutzen Geld; Bauteile 0,5 mm von der Trennlinie fernhalten</td></tr>
 </tbody>
@@ -57,7 +57,7 @@ import "./_style.css";
 <tr><td><b>Würth Elektronik</b></td><td>Deutschland</td><td>hoch</td><td>Für Serien und anspruchsvolle Aufbauten</td></tr>
 </tbody>
 </table></div>
-<p class="note"><b>Bei Bestellungen außerhalb der EU</b> kommen Einfuhrumsatzsteuer und gegebenenfalls Zoll dazu; ab bestimmten Werten wird eine Zollanmeldung nötig. Bei kleinen Platinenmengen ist der Preisunterschied trotzdem oft erheblich. Für Produkte, die in Verkehr gebracht werden, spielt zusätzlich die Rückverfolgbarkeit der Fertigung eine Rolle.</p>
+<p class="note"><b>Außerhalb der EU bestellt:</b> Einfuhrumsatzsteuer und ggf. Zoll einrechnen — bei kleinen Mengen bleibt der Preisvorteil trotzdem meist erheblich. Für in Verkehr gebrachte Produkte zählt zusätzlich die Rückverfolgbarkeit der Fertigung.</p>
 
 <h2>Bestückung durch den Fertiger</h2>
 <div class="steps">
