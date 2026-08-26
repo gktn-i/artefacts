@@ -1,0 +1,130 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Kinematik beschreibt Bewegung, Dynamik verbindet sie mit Kräften, und jede Maschine ist eine Masse an einer Feder.</b> Translatorisch gilt F = m·a, rotatorisch M = J·α — und kommt eine Erregung in die Nähe der Eigenfrequenz, wachsen die Amplituden um ein Vielfaches.</div>
+
+<h2>Bewegungsgrößen</h2>
+<div class="fbox">
+  <span class="f">v = ds/dt&nbsp;&nbsp;&nbsp;&nbsp;a = dv/dt&nbsp;&nbsp;&nbsp;&nbsp;j = da/dt&nbsp;&nbsp;&nbsp;&nbsp;ω = 2π·n / 60</span>
+  <span class="l">Weg, Geschwindigkeit, Beschleunigung, Ruck — jeweils die Ableitung des Vorhergehenden. Die Umrechnung mit n in min⁻¹ ist die meistgebrauchte Zeile der Antriebstechnik: 3000 min⁻¹ = 314 rad/s.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Bewegung</th><th>Weg</th><th>Geschwindigkeit</th><th>Nützlich</th></tr></thead>
+<tbody>
+<tr><td><b>Gleichförmig</b></td><td>s = v · t</td><td>v = konstant</td><td>—</td></tr>
+<tr><td><b>Gleichmäßig beschleunigt</b></td><td>s = v₀·t + a·t²/2</td><td>v = v₀ + a·t</td><td>v² = v₀² + 2·a·s</td></tr>
+<tr><td><b>Rotation, beschleunigt</b></td><td>φ = ω₀·t + α·t²/2</td><td>ω = ω₀ + α·t</td><td>v = ω · r, a_t = α · r</td></tr>
+</tbody>
+</table></div>
+
+<h2>Drehung in Vorschub umrechnen</h2>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Antrieb</th><th>Vorschub je Umdrehung</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Gewinde-/Kugelgewindetrieb</b></td><td>= Steigung P</td><td>KGT 1605: 5 mm/U → bei 600 min⁻¹ 3000 mm/min</td></tr>
+<tr><td><b>Zahnriemen</b></td><td>= z_Scheibe · Teilung</td><td>GT2, 20 Zähne: 40 mm/U</td></tr>
+<tr><td><b>Zahnstange</b></td><td>= π · m · z</td><td>Modul 2, 20 Zähne: 125,7 mm/U</td></tr>
+<tr><td><b>Seiltrieb / Riemenscheibe</b></td><td>= π · d</td><td>Ø50 mm: 157 mm/U</td></tr>
+</tbody>
+</table></div>
+<p>Für Schrittmotoren folgt direkt <span class="formula">steps/mm = (Schritte je U · Mikroschritte) / Vorschub je U</span> — 1,8°-Motor (200 Schritte), 16 Mikroschritte, GT2 mit 20 Zähnen: 3200 / 40 = 80 steps/mm.</p>
+
+<h2>Verfahrprofile</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Trapezprofil</h4>
+    <ul><li>Beschleunigen — konstant — bremsen; die Beschleunigung springt, der Ruck ist theoretisch unendlich</li><li>Einfach zu rechnen, regt aber Schwingungen an</li><li>Bei steifen, langsamen Achsen ausreichend</li></ul>
+  </div>
+  <div class="gb-col good"><h4>S-Kurve (ruckbegrenzt)</h4>
+    <ul><li>Beschleunigung wird selbst rampenförmig gefahren, Ruck bleibt endlich</li><li>Deutlich weniger Schwingungsanregung, schont Mechanik und Riemen</li><li>≈ 10–15 % längere Fahrzeit; Standard in CNC- und Robotersteuerungen</li></ul>
+  </div>
+</div>
+<div class="tip"><b>Dreiecksprofil erkennen:</b> Unterhalb von <span class="formula">s_min = v_max² / a</span> wird die Zielgeschwindigkeit nie erreicht — dann bestimmt allein die Beschleunigung die Taktzeit, mehr v_max bringt nichts. Bei Pick-and-Place mit kurzen Wegen fast immer der Fall.</div>
+
+<h2>Translation und Rotation</h2>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Größe</th><th>Translation</th><th>Rotation</th></tr></thead>
+<tbody>
+<tr><td>Trägheit</td><td>Masse m [kg]</td><td>Massenträgheitsmoment J [kg·m²]</td></tr>
+<tr><td>Grundgesetz</td><td>F = m · a</td><td>M = J · α</td></tr>
+<tr><td>Kinetische Energie</td><td>E = ½ · m · v²</td><td>E = ½ · J · ω²</td></tr>
+<tr><td>Leistung</td><td>P = F · v</td><td>P = M · ω&nbsp;&nbsp;bzw.&nbsp;&nbsp;P [W] = M [Nm] · n [min⁻¹] / 9,55</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Körper</th><th>J um die Symmetrieachse</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Vollzylinder / Scheibe</b></td><td>½ · m · r²</td><td>Riemenscheibe, Schwungrad, Rotor</td></tr>
+<tr><td><b>Hohlzylinder</b> (r_a, r_i)</td><td>½ · m · (r_a² + r_i²)</td><td>Dünner Ring → m·r² (maximale Trägheit pro Masse)</td></tr>
+<tr><td><b>Kugel</b></td><td>⅖ · m · r²</td><td>—</td></tr>
+<tr><td><b>Stab</b> (Länge L, um Mitte)</td><td>1/12 · m · L²</td><td>Um das Ende: ⅓ · m · L²; Steiner gilt auch hier: J = J_s + m·a²</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Der Radius zählt quadratisch, die Masse gleich mit:</b> Eine Riemenscheibe mit doppeltem Durchmesser hat bei gleicher Dicke das <b>sechzehnfache</b> Trägheitsmoment. Wer eine Achse dynamischer machen will, sucht zuerst dort — nicht beim Motor.</div>
+
+<h2>Trägheit, Getriebe und Motormoment</h2>
+<div class="fbox">
+  <span class="f">J_reduziert = J_Last / i²&nbsp;&nbsp;&nbsp;&nbsp;J_translatorisch = m · (s_U / 2π)²</span>
+  <span class="l">Ein Getriebe reduziert die auf den Motor wirkende Trägheit <b>quadratisch</b> — der eigentliche Grund für Getriebe an dynamischen Achsen. Zielbereich für Servos: J_Last/J_Motor ≈ 1–5; über 10 wird der Regler schwer stabil.</span>
+</div>
+<div class="grid3">
+  <div class="card"><div class="ct">Lastmoment</div><div class="cd">Gewichtskraft, Schnittkraft, Reibung — bestimmt das Dauermoment.</div></div>
+  <div class="card"><div class="ct">Beschleunigungsmoment</div><div class="cd"><span class="formula">M_a = J_ges · α</span> — bestimmt das Spitzenmoment, bei dynamischen Achsen der größte Anteil.</div></div>
+  <div class="card"><div class="ct">Reibmoment</div><div class="cd">Lager, Dichtungen, Getriebeverluste — oft unterschätzt, besonders bei Trapezspindel und Schnecke.</div></div>
+</div>
+<div class="tip"><b>Effektivwert statt Spitzenwert:</b> <span class="formula">M_eff = √(Σ(M_i²·t_i) / Σt_i)</span> muss unter dem Dauermoment liegen, das Spitzenmoment unter dem Maximalmoment. Den kompletten Auslegungsrechner gibt es unter <a href="regelung-antriebe.html#auslegung">Antriebe auslegen</a>.</div>
+
+<h2>Eigenfrequenz und Resonanz</h2>
+<div class="fbox">
+  <span class="f">f₀ = (1 / 2π) · √(c / m)&nbsp;&nbsp;&nbsp;&nbsp;f₀ = (1 / 2π) · √(c_t / J)  (Torsion)</span>
+  <span class="l">c Steifigkeit in N/m, m Masse in kg. Vierfache Steifigkeit verdoppelt f₀ — genau wie ein Viertel der Masse. Beispiel: Ausleger mit c = 200 N/mm und 5 kg am Ende → rund 32 Hz.</span>
+</div>
+<div class="grid2">
+  <div>
+    <svg class="dg" viewBox="0 0 320 200" role="img" aria-label="Vergrößerungsfunktion über dem Frequenzverhältnis für drei Dämpfungsgrade">
+      <path class="wt" d="M40,170 H300 M40,170 V20" />
+      <path class="gd" d="M40,140 H300 M130,20 V170" />
+      <path class="acc" d="M40,140 C70,142 100,150 118,160 C126,166 128,168 130,30 C132,60 140,110 160,130 C200,152 250,160 300,163" />
+      <path class="midl" d="M40,140 C70,142 100,148 118,152 C126,155 130,60 134,80 C150,120 200,150 300,161" />
+      <path class="good" d="M40,140 C80,141 110,143 130,132 C170,140 230,155 300,160" />
+      <text class="lbla" x="300" y="188" text-anchor="end">Erregerfrequenz / f₀</text>
+      <text class="lbl" x="126" y="184" text-anchor="middle">1</text>
+      <text class="lbl" x="34" y="145" text-anchor="end">1</text>
+      <text class="lbl" x="140" y="34">D = 0,02</text>
+      <text class="lbl" x="196" y="96">D = 0,1</text>
+      <text class="lbl" x="214" y="130">D = 0,5</text>
+    </svg>
+  </div>
+  <div>
+    <ul>
+      <li><b>Weit unter f₀:</b> Struktur folgt der Erregung, Verhältnis ≈ 1.</li>
+      <li><b>Bei f₀:</b> Resonanz, Überhöhung ≈ 1/(2·D) — bei D = 0,02 rund 25-fach, bei D = 0,1 noch 5-fach.</li>
+      <li><b>Ab dem 1,41-fachen von f₀:</b> echte Isolation beginnt. Schwingungsisolierung heißt: so <em>weich</em> aufstellen, dass f₀ mindestens Faktor 3 unter der Störfrequenz liegt.</li>
+      <li><b>Dämpfungsgrade:</b> geschweißter Stahl 0,005–0,02 · verschraubt 0,02–0,05 · Grauguss 0,02–0,04 · Mineralguss 0,03–0,08 · Elastomerlager 0,05–0,15.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Kritische Drehzahl und Abhilfen</h2>
+<div class="fbox">
+  <span class="f">n_krit ≈ 946 / √f&nbsp;&nbsp;[min⁻¹]</span>
+  <span class="l">Näherung (Dunkerley) mit der statischen Durchbiegung f in mm unter Eigengewicht. Betriebsdrehzahl unter 0,7 · n_krit oder über 1,3 · n_krit halten, den Bereich dazwischen zügig durchfahren — der Grund, warum lange Spindeln peitschen.</span>
+</div>
+<div class="gb">
+  <div class="gb-col good"><h4>Gegen Resonanz</h4>
+    <ul><li><b>Verstimmen:</b> Steifigkeit oder Masse ändern, bis f₀ weit genug weg ist</li><li><b>Steifer bauen:</b> kürzere Spannweiten, geschlossene Profile, Rippen</li><li><b>Dämpfen:</b> Elastomerlager, Sandfüllung in Hohlprofilen</li><li><b>Ruckbegrenzte Profile</b> und gesperrte Drehzahlbereiche in der Steuerung</li></ul>
+  </div>
+  <div class="gb-col bad"><h4>Was nicht hilft</h4>
+    <ul><li><b>Mehr Masse ohne mehr Steifigkeit</b> — senkt f₀ oft näher an die Erregung</li><li><b>Festerer Stahl</b> — E bleibt gleich, f₀ auch</li><li><b>Härter anziehen</b> — verschiebt f₀ kaum</li><li><b>Erregung ignorieren</b> — Unwucht, Zahneingriff und Riemenzähne haben berechenbare Frequenzen</li></ul>
+  </div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 3: Kinetik</i>, Springer Vieweg — Kinematik, Kinetik des starren Körpers, Schwingungen und Vergrößerungsfunktion.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — Antriebsauslegung mit effektivem Moment; kritische Drehzahlen nach Dunkerley.</li>
+    <li>DIN ISO 20816 (vormals 10816) — Bewertung von Maschinenschwingungen.</li>
+    <li><a href="https://linuxcnc.org/docs/html/motion/tweaking-steppers.html">LinuxCNC Trajectory Planning</a> und <a href="https://reprap.org/wiki/Step_rate">RepRap-Wiki steps/mm</a> — praktische Umsetzung von Profilen und Schrittwerten.</li>
+    <li>Eigenfrequenz und Reglerbandbreite: <a href="regelung-antriebe.html#stabilitaet">Regelung — Stabilität</a>.</li>
+  </ul>
+</div>

@@ -1,0 +1,145 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Katalog von Einstieg bis Monatsprojekt.</b> Jedes Projekt hat ein prüfbares Erfolgskriterium, genau einen neuen Baustein und wird später als Modul wiederverwendet. Der Ablauf dahinter steht unter <a href="#vorgehen">Vom Einfall zum Gerät</a>.</div>
+
+<h2>Einstieg — ein Abend bis ein Wochenende</h2>
+<div class="grid2">
+  <div class="card"><div class="ch"><span>Blinklicht mit Taster</span><span class="n">2 h</span></div>
+    <div class="cd"><b>Ziel:</b> Ein Tastendruck löst genau einen Zustandswechsel aus — nicht drei.</div>
+    <div class="cd"><b>Material:</b> Controller-Board, LED, 220 Ω, Taster, Steckbrett.</div>
+    <div class="cd"><b>Lernt:</b> GPIO, Pull-Widerstand, Entprellung, Vorwiderstand rechnen → <a href="elektronik-grundlagen.html#grundlagen">Elektronik 101</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Temperaturanzeige</span><span class="n">3 h</span></div>
+    <div class="cd"><b>Ziel:</b> Wert ist plausibel und ändert sich beim Anhauchen.</div>
+    <div class="cd"><b>Material:</b> BME280 oder DS18B20, OLED 128×64, Board.</div>
+    <div class="cd"><b>Lernt:</b> I²C, Sensorbibliothek, Display → <a href="elektronik-grundlagen.html#protokolle">Protokolle &amp; Busse</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Lastschalter mit MOSFET</span><span class="n">3 h</span></div>
+    <div class="cd"><b>Ziel:</b> MOSFET bleibt bei Volllast kalt, Controller stürzt beim Abschalten nicht ab.</div>
+    <div class="cd"><b>Material:</b> IRLZ44N oder AO3400, Motor oder LED-Streifen, Freilaufdiode, separate Versorgung.</div>
+    <div class="cd"><b>Lernt:</b> Warum ein GPIO keine Last treibt, Logic-Level-MOSFET, Freilaufdiode → <a href="elektrotechnik.html#transistoren">Transistoren</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Spannungsteiler als Messeingang</span><span class="n">2 h</span></div>
+    <div class="cd"><b>Ziel:</b> ADC-Messung stimmt mit dem Multimeter auf 2 % überein — und du kannst die Abweichung erklären.</div>
+    <div class="cd"><b>Material:</b> Zwei Widerstände, Board, Multimeter.</div>
+    <div class="cd"><b>Lernt:</b> ADC, Referenz, Teiler dimensionieren, Messfehler → <a href="elektrotechnik.html#gleichstrom">Gleichstromkreis</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>PWM-Dimmer</span><span class="n">3 h</span></div>
+    <div class="cd"><b>Ziel:</b> Dimmung ist auch im unteren Bereich fein — dafür braucht es eine Gamma-Kurve.</div>
+    <div class="cd"><b>Material:</b> LED-Streifen, MOSFET, Potentiometer oder Drehgeber (EC11).</div>
+    <div class="cd"><b>Lernt:</b> Timer, PWM, Tastverhältnis vs. Helligkeit → <a href="embedded-firmware.html#peripherie">Peripherie</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Lochraster-Aufbau</span><span class="n">4 h</span></div>
+    <div class="cd"><b>Ziel:</b> Der Aufbau übersteht einen Sturz vom Tisch, alle Lötstellen glänzen.</div>
+    <div class="cd"><b>Material:</b> Lochrasterplatine, Buchsenleisten, Draht, eine bestehende Schaltung.</div>
+    <div class="cd"><b>Lernt:</b> Löten, Verdrahtung planen, Zugentlastung → <a href="loeten-referenz.html#tht">THT löten</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Batteriebetrieb</span><span class="n">4 h</span></div>
+    <div class="cd"><b>Ziel:</b> Gemessener Mittelstrom stimmt mit der Laufzeitrechnung auf 20 % überein.</div>
+    <div class="cd"><b>Material:</b> Board mit Deep-Sleep, Batteriehalter, Multimeter mit µA-Bereich.</div>
+    <div class="cd"><b>Lernt:</b> Schlafmodi, Aufwachquellen, Strom messen → <a href="embedded-firmware.html#strom">Stromsparen</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Messwerte ins Netz</span><span class="n">5 h</span></div>
+    <div class="cd"><b>Ziel:</b> Der Wert erscheint nach einem Geräteneustart automatisch wieder.</div>
+    <div class="cd"><b>Material:</b> ESP32, MQTT-Broker, Node-RED oder Home Assistant.</div>
+    <div class="cd"><b>Lernt:</b> WLAN, MQTT, JSON, Visualisierung → <a href="digitaltechnik.html#netzwerke">Netzwerke</a></div>
+  </div>
+</div>
+<div class="tip"><b>Ab dem zweiten Projekt:</b> strukturierte UART-Diagnoseausgabe mit Zeitstempel und Log-Stufen einbauen — zwei Stunden Aufwand, zahlt sich bei jeder Fehlersuche aus. Und nach jedem Projekt fünf Zeilen notieren: Ziel, was länger dauerte, was du anders machen würdest.</div>
+
+<h2>Aufbau — mehrere Wochenenden, ganze Geräte</h2>
+<div class="grid2">
+  <div class="card"><div class="ch"><span>Temperaturregelung mit PID</span><span class="n">2–3 WE</span></div>
+    <div class="cd"><b>Ziel:</b> Sollwertsprung um 30 K ohne Überschwingen, bleibende Abweichung unter 1 K.</div>
+    <div class="cd"><b>Material:</b> Heizelement, Temperatursensor, MOSFET oder SSR, Display, Drehgeber.</div>
+    <div class="cd"><b>Lernt:</b> Sprungversuch, Streckenparameter, Anti-Windup, Sensorausfall-Verhalten → <a href="regelung-antriebe.html#pid">PID</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Labornetzteil mit Strombegrenzung</span><span class="n">3–4 WE</span></div>
+    <div class="cd"><b>Ziel:</b> Kurzschluss am Ausgang wird sauber begrenzt — nichts wird heiß, nichts schwingt.</div>
+    <div class="cd"><b>Material:</b> Schaltregler-Vorstufe, Linearendstufe, Shunt, Anzeige.</div>
+    <div class="cd"><b>Lernt:</b> OPV in der Praxis, zwei Regelschleifen, Verlustleistung, Kühlung → <a href="elektrotechnik.html#opv">Operationsverstärker</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Schrittmotor-Achse</span><span class="n">2–3 WE</span></div>
+    <div class="cd"><b>Ziel:</b> Nach 100 Fahrten hin und zurück stimmt die Position auf einen Schritt genau.</div>
+    <div class="cd"><b>Material:</b> NEMA-17, TMC2209, Linearführung, Endschalter.</div>
+    <div class="cd"><b>Lernt:</b> Rampen, Referenzfahrt, Schrittverlust, Stromeinstellung → <a href="regelung-antriebe.html#treiber">Motortreiber</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Datenlogger im Langzeitbetrieb</span><span class="n">2 WE</span></div>
+    <div class="cd"><b>Ziel:</b> Läuft vier Wochen ohne Eingriff und übersteht einen Spannungsausfall beim Schreiben.</div>
+    <div class="cd"><b>Material:</b> Sensoren, Echtzeituhr, SD-Karte oder Flash, Batterie mit Ladeschaltung, Gehäuse.</div>
+    <div class="cd"><b>Lernt:</b> Stromsparen, ausfallsicheres Dateisystem, Zeitstempel → <a href="embedded-firmware.html#strom">Stromsparen</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Selbstbalancierender Roboter</span><span class="n">3–5 WE</span></div>
+    <div class="cd"><b>Ziel:</b> Steht drei Minuten frei und fängt sich nach einem leichten Stoß.</div>
+    <div class="cd"><b>Material:</b> Zwei Motoren mit Encoder, IMU, Treiber, Akku, Rahmen.</div>
+    <div class="cd"><b>Lernt:</b> Instabile Strecke, Sensorfusion, Kaskadenregelung → <a href="regelung-antriebe.html#messkette">Messkette</a>, <a href="regelung-antriebe.html#pid">PID</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>CAN-Bus zwischen zwei Baugruppen</span><span class="n">2 WE</span></div>
+    <div class="cd"><b>Ziel:</b> Ein abgezogenes Kabel wird binnen 200 ms erkannt und führt in einen definierten sicheren Zustand.</div>
+    <div class="cd"><b>Material:</b> Zwei Controller mit CAN-Transceiver, Abschlusswiderstände.</div>
+    <div class="cd"><b>Lernt:</b> Differentielle Übertragung, Arbitrierung, Protokollentwurf → <a href="embedded-firmware.html#busse">Bussysteme</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Eigenes Messgerät</span><span class="n">3 WE</span></div>
+    <div class="cd"><b>Ziel:</b> Übereinstimmung mit einem Referenzgerät auf 0,1 % über den ganzen Bereich.</div>
+    <div class="cd"><b>Material:</b> Präzisionsreferenz, Instrumentenverstärker, Delta-Sigma-Wandler.</div>
+    <div class="cd"><b>Lernt:</b> Fehlerbudget, Rauschen, Drift, Kalibrieren → <a href="regelung-antriebe.html#messkette">Messkette</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>SPS-Steuerung nachbauen</span><span class="n">2 WE</span></div>
+    <div class="cd"><b>Ziel:</b> Jeder Schritt hat eine Zeitüberwachung, die Anlage meldet im Klartext, worauf sie wartet.</div>
+    <div class="cd"><b>Material:</b> CODESYS auf Raspberry Pi, 24-V-E/A-Module.</div>
+    <div class="cd"><b>Lernt:</b> Prozessabbild, Zykluszeit, Schrittketten, Diagnose → <a href="automatisierung-robotik.html#sps">SPS</a></div>
+  </div>
+</div>
+<p class="note">Neu auf dieser Stufe: mehrere Baugruppen, Fehlerfälle als Teil der Aufgabe, Mechanik als begrenzender Faktor. Realistisch: die Hälfte der Zeit ist Fehlersuche, mindestens ein Bauteil stirbt (zwei kaufen), und erst die zweite Version ist die gute.</p>
+
+<h2>Fortgeschritten — Monatsprojekte, an denen man wächst</h2>
+<p>Zerlegen in lauffähige Zwischenstände, das Risiko zuerst prüfen, fertige Bausteine nutzen, wo sie nicht das Lernziel sind — der Rest steht unter <a href="#vorgehen">Vom Einfall zum Gerät</a>.</p>
+<div class="grid2">
+  <div class="card"><div class="ch"><span>Eigener Abwärtswandler</span><span class="n">1–2 Monate</span></div>
+    <div class="cd"><b>Ziel:</b> Buck-Regler mit externem Schalter, eigenem Layout und gemessenem Regelverhalten.</div>
+    <div class="cd"><b>Material:</b> Controller-IC, Spule, eigene Platine — ohne Oszilloskop nicht sinnvoll.</div>
+    <div class="cd"><b>Lernt:</b> Magnetik, heiße Schleife im Layout, Kompensation → <a href="elektrotechnik.html#wandler">Wandler</a>, <a href="leiterplatte-kicad.html#layout">Layout</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>BLDC-Regelung mit FOC</span><span class="n">2–3 Monate</span></div>
+    <div class="cd"><b>Ziel:</b> Dreiphasige Endstufe mit feldorientierter Regelung bei 10–20 kHz Regeltakt.</div>
+    <div class="cd"><b>Material:</b> BLDC-Motor, Endstufe oder fertiges Treiberboard, Encoder, Strommessung; Einstieg über SimpleFOC.</div>
+    <div class="cd"><b>Lernt:</b> Leistungselektronik, PWM-synchrone Strommessung, Koordinatentransformation → <a href="regelung-antriebe.html#motoren">Motoren</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>CNC-Portalachse oder Fräse</span><span class="n">3–6 Monate</span></div>
+    <div class="cd"><b>Ziel:</b> Drei Achsen unter GRBL oder LinuxCNC, mit Endschaltern und Not-Halt.</div>
+    <div class="cd"><b>Material:</b> Schrittmotoren, Führungen, Spindel, stabiler Rahmen.</div>
+    <div class="cd"><b>Lernt:</b> Steifigkeit, Spiel, Resonanzen — Mechanik wird zum bestimmenden Faktor → <a href="mechanik.html#lager">Lager &amp; Führungen</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>FPGA-Projekt mit eigenem Protokoll</span><span class="n">1–2 Monate</span></div>
+    <div class="cd"><b>Ziel:</b> Eine Schnittstelle, die es als fertige Peripherie nicht gibt, auf iCE40 oder ECP5.</div>
+    <div class="cd"><b>Material:</b> FPGA-Board, quelloffene Toolchain (Yosys).</div>
+    <div class="cd"><b>Lernt:</b> Paralleles Denken, Timing-Constraints, Taktdomänen → <a href="digitaltechnik.html#timing">Timing</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Batteriemanagement</span><span class="n">2 Monate</span></div>
+    <div class="cd"><b>Ziel:</b> Mehrzelliger Li-Ion-Pack mit Balancing, Überwachung und Schutzabschaltung.</div>
+    <div class="cd"><b>Material:</b> Zellen, Messfrontend, fertiger Schutzbaustein als zweite Ebene — nie allein auf eigene Software verlassen.</div>
+    <div class="cd"><b>Lernt:</b> Präzisionsmessung, Ladezustandsschätzung, Sicherheit → <a href="elektrotechnik.html#versorgung">Versorgung</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Vernetztes Gerät mit sicheren Updates</span><span class="n">2 Monate</span></div>
+    <div class="cd"><b>Ziel:</b> Signaturprüfung, A/B-Verfahren, Rollback-Schutz — auch bei abgebrochenem Update.</div>
+    <div class="cd"><b>Material:</b> Zephyr + MCUboot, Update-Infrastruktur.</div>
+    <div class="cd"><b>Lernt:</b> Bootloader, Schlüsselverwaltung, der Schritt vom Bastelprojekt zum Produkt → <a href="embedded-firmware.html#speicherbild">Speicherbild</a>, <a href="digitaltechnik.html#security">Security</a></div>
+  </div>
+  <div class="card"><div class="ch"><span>Roboterarm mit mehreren Achsen</span><span class="n">4–6 Monate</span></div>
+    <div class="cd"><b>Ziel:</b> Drei bis sechs Achsen mit Positionsregelung, Kinematik und Bahnplanung.</div>
+    <div class="cd"><b>Material:</b> Motoren mit Encodern, Treiber, steifer Aufbau — Getriebespiel begrenzt alles.</div>
+    <div class="cd"><b>Lernt:</b> Antriebe, Regelung, Kinematik, Software als System → <a href="automatisierung-robotik.html#robotik">Robotik</a></div>
+  </div>
+</div>
+<div class="stop"><b>Wo Vorsicht angebracht ist:</b> Netzspannung, Lithium-Akkus in Serie, bewegte Achsen mit Kraft, Laser, hohe Zwischenkreisspannungen. Nicht als erstes Projekt, nicht ohne Schutzmaßnahmen. Bei Netzspannung: Trenntrafo, Differenztastkopf, FI — im Zweifel eine zertifizierte Baugruppe kaufen. Siehe <a href="elektrotechnik.html#sicherheit">Elektrotechnik → Sicherheit</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Bibliotheken und Beispiele: <a href="https://github.com/adafruit">Adafruit</a>, <a href="https://github.com/sparkfun">SparkFun</a>, <a href="https://docs.espressif.com/projects/esp-idf/">ESP-IDF</a>, <a href="https://www.raspberrypi.com/documentation/microcontrollers/">Pico SDK</a>.</li>
+    <li>Charles Platt, <i>Make: Electronics</i> — projektbasierter Einstieg; Christophe Basso, <i>Switch-Mode Power Supplies</i> — für den eigenen Wandler.</li>
+    <li>Quelloffene Vorbilder: <a href="https://simplefoc.com/">SimpleFOC</a>, <a href="https://vesc-project.com/">VESC</a>, <a href="https://github.com/gnea/grbl">GRBL</a>, <a href="https://linuxcnc.org/">LinuxCNC</a>, <a href="https://github.com/YosysHQ">YosysHQ</a>, <a href="https://docs.mcuboot.com/">MCUboot</a>.</li>
+    <li>Bezugsquellen: <a href="https://www.reichelt.de/">Reichelt</a>, <a href="https://www.mouser.de/">Mouser</a>, <a href="https://www.tme.eu/de/">TME</a>, <a href="https://www.berrybase.de/">BerryBase</a>.</li>
+  </ul>
+</div>
