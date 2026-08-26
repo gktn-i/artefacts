@@ -1,0 +1,81 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Reibkraft ist Normalkraft mal Reibwert — die Größe der Kontaktfläche geht nicht ein.</b> Das ist der Kern des Coulombschen Gesetzes und überrascht die meisten. Haftreibung ist höher als Gleitreibung; daraus folgen Losbrechmoment, Ruckgleiten und Selbsthemmung.</div>
+
+<h2>Das Coulombsche Reibungsgesetz</h2>
+<div class="fbox">
+  <span class="f">F_R = µ · F_N&nbsp;&nbsp;&nbsp;&nbsp;µ_Haft &gt; µ_Gleit&nbsp;&nbsp;&nbsp;&nbsp;ρ = arctan µ</span>
+  <span class="l">F_N ist die Normalkraft senkrecht zur Kontaktfläche. Bei doppelter Fläche halbiert sich die Pressung, die Reibkraft bleibt gleich. ρ ist der Reibungswinkel: Solange die resultierende Kraft innerhalb des Reibkegels liegt, bleibt der Körper haften.</span>
+</div>
+<svg class="dg m" viewBox="0 0 320 170" role="img" aria-label="Körper auf schiefer Ebene mit Reibkegel um die Flächennormale">
+  <path class="accs" d="M25,140 L295,140 L295,58 Z" />
+  <path class="w" d="M25,140 H295" />
+  <path class="gd" d="M155,100 L137,41" />
+  <path class="acc" d="M155,100 L164,39" />
+  <path class="acc" d="M155,100 L114,54" />
+  <polygon class="box" points="134,106.4 176,93.6 169,70.6 127,83.4" />
+  <path class="w" d="M151.5,88.5 V128" />
+  <polygon class="f" points="147.5,126 155.5,126 151.5,136" />
+  <text class="lbl" x="52" y="134">α</text>
+  <text class="lbl" x="159" y="124">F_G</text>
+  <text class="lbla" x="196" y="44">Reibkegel 2ρ</text>
+  <text class="lbl" x="112" y="36" text-anchor="middle">Normale</text>
+</svg>
+<div class="note">Ein Körper auf der schiefen Ebene rutscht genau dann, wenn der Neigungswinkel α größer wird als der Reibungswinkel ρ — unabhängig von seiner Masse.</div>
+
+<h2>Reibwerte</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th data-s="text">Paarung</th><th data-s="num">µ trocken (Haft)</th><th data-s="num">µ trocken (Gleit)</th><th data-s="num">µ geschmiert</th></tr></thead>
+<tbody>
+<tr><td>Stahl auf Stahl</td><td>0,15 – 0,25</td><td>0,10 – 0,20</td><td>0,05 – 0,10</td></tr>
+<tr><td>Stahl auf Grauguss</td><td>0,18 – 0,25</td><td>0,15 – 0,20</td><td>0,05 – 0,10</td></tr>
+<tr><td>Stahl auf Bronze</td><td>0,15 – 0,20</td><td>0,12 – 0,18</td><td>0,04 – 0,08</td></tr>
+<tr><td>Stahl auf PTFE</td><td>0,04 – 0,10</td><td>0,04 – 0,08</td><td>0,04</td></tr>
+<tr><td>Stahl auf POM</td><td>0,15 – 0,25</td><td>0,15 – 0,20</td><td>0,05 – 0,10</td></tr>
+<tr><td>Stahl auf PA (Nylon)</td><td>0,20 – 0,35</td><td>0,15 – 0,30</td><td>0,08 – 0,15</td></tr>
+<tr><td>Holz auf Holz</td><td>0,4 – 0,6</td><td>0,2 – 0,4</td><td>0,1 – 0,2</td></tr>
+<tr><td>Gummi auf Asphalt</td><td>0,7 – 1,0</td><td>0,6 – 0,85</td><td>0,25 – 0,5 (nass)</td></tr>
+<tr><td>Wälzlager, auf die Bohrung bezogen</td><td>—</td><td>0,001 – 0,004</td><td>—</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Reibwerte streuen um den Faktor zwei und mehr</b> — Rauheit, Pressung, Geschwindigkeit, Temperatur und Verunreinigung ändern sie. Wer eine Klemmung auslegt, rechnet mit dem <b>kleinsten</b> plausiblen Wert; wer Verluste abschätzt, mit dem größten. Die Tabelle taugt zur Abschätzung, nicht als Nachweis.</div>
+
+<h2>Selbsthemmung</h2>
+<p>Ein Schraub- oder Keiltrieb bewegt sich nicht von allein zurück, solange sein Steigungswinkel kleiner ist als der Reibungswinkel ρ. Bei µ = 0,15 sind das 8,5° — mehr als jedes gängige Bewegungsgewinde hat.</p>
+<div class="grid2">
+  <div class="card"><div class="ct">Trapezgewindespindel</div><div class="cd">Steigungswinkel meist 3–5°, also selbsthemmend: die Z-Achse fällt nicht herunter, wenn der Motor stromlos wird. Der Preis ist der Wirkungsgrad von 25–50 %.</div></div>
+  <div class="card"><div class="ct">Kugelgewindetrieb</div><div class="cd">Wälzkontakt, µ um 0,003 — <b>nicht</b> selbsthemmend. Über 90 % Wirkungsgrad, dafür braucht eine senkrechte Achse eine Bremse oder ein Gegengewicht.</div></div>
+  <div class="card"><div class="ct">Schneckengetriebe</div><div class="cd">Bei kleinem Steigungswinkel selbsthemmend, deshalb beliebt als Hubantrieb. Zahlen unter <a href="#getriebe">Zahnräder, Riemen &amp; Spindeln</a>.</div></div>
+  <div class="card"><div class="ct">Metrisches Gewinde</div><div class="cd">Steigungswinkel rund 2,5–3,5° und damit deutlich selbsthemmend. Schrauben lösen sich nicht durch Aufdrehen, sondern durch Setzen und Querbewegung — siehe <a href="#schrauben">Schrauben &amp; Gewinde</a>.</div></div>
+</div>
+<div class="stop"><b>Selbsthemmung ist keine Sicherheitseinrichtung.</b> Sie gilt für ruhende Last. Sobald Vibration dazukommt, bricht die Haftreibung periodisch zusammen und die Last wandert. Lasten über Personen dürfen nie allein durch Selbsthemmung gehalten werden — dafür gibt es formschlüssige Sicherungen oder Bremsen nach dem Ruhestromprinzip.</div>
+
+<h2>Seilreibung und Rollwiderstand</h2>
+<div class="fbox">
+  <span class="f">F₁ / F₂ = e^(µ·α)&nbsp;&nbsp;&nbsp;&nbsp;F_Roll = f_R · F_N</span>
+  <span class="l">α ist der Umschlingungswinkel im Bogenmaß — die Kraft wächst <b>exponentiell</b> mit ihm (Eytelwein). f_R ist der Hebelarm der Rollreibung bezogen auf den Radradius.</span>
+</div>
+<p>Bei µ = 0,3 ergibt eine volle Umschlingung (α = 2π) das Kraftverhältnis 6,6, drei Windungen um einen Poller bereits 285 — deshalb hält ein Mensch ein Schiff. Dasselbe Gesetz begrenzt bei Riementrieben die übertragbare Leistung: maßgebend ist der Umschlingungswinkel an der <em>kleinen</em> Scheibe, nicht die Riemenfestigkeit.</p>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th data-s="text">Paarung</th><th data-s="num">f_R</th></tr></thead>
+<tbody>
+<tr><td>Stahlrad auf Stahlschiene</td><td>0,001 – 0,002</td></tr>
+<tr><td>Wälzlager, gesamt auf die Welle bezogen</td><td>0,001 – 0,004</td></tr>
+<tr><td>Kunststoffrolle auf Stahl</td><td>0,005 – 0,02</td></tr>
+<tr><td>Autoreifen auf Asphalt</td><td>0,010 – 0,015</td></tr>
+<tr><td>Luftreifen auf Schotter</td><td>0,02 – 0,05</td></tr>
+<tr><td>Rad auf weichem Boden</td><td>0,1 – 0,3</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Reibung ist nicht nur Feind:</b> Klemmverbindungen, Presssitze, Riementriebe, Bremsen und Kupplungen leben von ihr. Bei einer Klemmung rechnet man mit dem <em>niedrigsten</em> Reibwert, legt die Anpresskraft danach aus — und schmiert die Fläche auf keinen Fall. Bei einer Führung ist es genau umgekehrt.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 1: Statik</i>, Springer Vieweg — Haftung, Reibung, Reibkegel und Seilreibung nach Eytelwein.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente — Tabellenbuch</i>, Springer Vieweg — Reibwerte für Werkstoffpaarungen und Rollwiderstandszahlen; Grundlage der Tabellen oben.</li>
+    <li>Valentin L. Popov, <i>Kontaktmechanik und Reibung</i>, Springer — die physikalische Vertiefung, warum die Fläche nicht eingeht.</li>
+    <li>Schmierstoffauswahl und ihre Wirkung auf µ: <a href="schmiermittel-vergleich.html">Schmiermittel-Vergleich</a> in der Werkstatt.</li>
+  </ul>
+</div>
