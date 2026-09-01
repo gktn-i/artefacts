@@ -170,6 +170,22 @@ import "./_style.css";
   <div class="card"><div class="ct">Passform &amp; Laden</div><div class="cd">Vor dem Kauf prüfen: Zellen mit Schutzschaltung sind ein paar Millimeter länger, Button- und Flat-Top nicht überall austauschbar. Geladen wird im Gerät (USB-C), im Rundzellen-Lader oder am Hobby-Lader im <b>Li-Ion-Modus</b> mit 0,5–1C — nie im LiPo-Modus.</div></div>
 </div>
 
+<h2>Lade-Assistent: Werte je Pack</h2>
+<div class="calc" data-calc="fpvladen">
+  <h4>Pack eintragen → Ladegerät-Einstellungen, Grenzwerte, Ablauf</h4>
+  <div class="row">
+    <div><label>Chemie</label><select data-k="chem"><option value="lipo">LiPo</option><option value="lihv">LiHV</option><option value="liion">Li-Ion (18650/21700)</option></select></div>
+    <div><label>Zellen (S)</label><input type="number" data-k="s" value="6" min="1" max="12" /></div>
+    <div><label>Kapazität je Pack (mAh)</label><input type="number" data-k="cap" value="1300" min="50" step="50" /></div>
+    <div><label>Packs am Paraboard</label><input type="number" data-k="n" value="1" min="1" max="8" /></div>
+    <div><label>Laderate</label><select data-k="rate"><option value="0.5">0,5C — schonend</option><option value="1" selected>1C — Standard</option><option value="2">2C — Flugtag-Ausnahme</option></select></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="plan" data-plan hidden></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">Der Assistent liefert die Zahlen für <em>deinen</em> Pack — der Ablauf darunter sagt, in welcher Reihenfolge man sie am Gerät einstellt.</p>
+
 <h2>Laden: Schritt für Schritt</h2>
 <p>Der komplette Ablauf für <b>einen</b> Pack am Ladegerät. Mehrere Packs gleichzeitig: <a href="#akku--parallel-laden-aber-sicher">Parallel laden</a>.</p>
 
