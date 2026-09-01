@@ -41,23 +41,14 @@ import "./_style.css";
 <h2>Störungen fernhalten und 4–20 mA</h2>
 <div class="steps">
   <div class="step"><h4>Differentiell übertragen</h4>Zwei Leitungen, die Störung wirkt auf beide gleich, der Instrumentenverstärker zieht sie ab. Die wirksamste Einzelmaßnahme bei kleinen Signalen.</div>
-  <div class="step"><h4>Verdrillen und schirmen</h4>Verdrillen gegen magnetische, Schirm gegen elektrische Einkopplung. Bei niederfrequenten Analogsignalen den Schirm <b>einseitig</b> auflegen.</div>
-  <div class="step"><h4>Analog- und Leistungsleitungen trennen</h4>Nicht im selben Kanal, nicht parallel über längere Strecken; Kreuzungen im rechten Winkel.</div>
-  <div class="step"><h4>Nur einen Massebezugspunkt</h4>Zwei Erdungen erzeugen eine Brummschleife. Müssen getrennte Systeme verbunden werden: galvanisch trennen (Optokoppler, digitaler Isolator, Trennverstärker).</div>
+  <div class="step"><h4>Verdrillen, schirmen, trennen</h4>Verdrillen gegen magnetische, Schirm gegen elektrische Einkopplung — bei niederfrequenten Analogsignalen den Schirm <b>einseitig</b> auflegen. Analog- und Leistungsleitungen nie parallel führen, Kreuzungen im rechten Winkel. Nur ein Massebezugspunkt, sonst Brummschleife; getrennte Systeme galvanisch trennen. Vertiefung: <a href="elektrotechnik.html#emv">Elektrotechnik → EMV</a>.</div>
   <div class="step"><h4>50 Hz gezielt eliminieren</h4>Über ein ganzzahliges Vielfaches der Netzperiode mitteln (20 ms). Genau das steckt hinter der NPLC-Einstellung von Tischmultimetern.</div>
 </div>
-<div class="gb">
-  <div class="gb-col good"><h4>Warum 4–20 mA sich gehalten hat</h4><ul>
-    <li>Der Leitungswiderstand ist egal — ein Strom bleibt ein Strom</li>
-    <li>Drahtbruch ist erkennbar: 0 mA sind ein Fehler, nicht der Messbereichsanfang</li>
-    <li>Sehr störfest über hunderte Meter</li>
-    <li>Zweileitertechnik: Der Sensor speist sich aus dem Messstrom selbst</li>
-  </ul></div>
-  <div class="gb-col"><h4>Umsetzung</h4><ul>
-    <li>Bürdewiderstand beim Empfänger, meist 250 Ω → 1–5 V</li>
-    <li>HART überlagert dem Strom ein digitales Signal für Konfiguration und Diagnose</li>
-    <li>Im Gerät, über kurze Strecken, ist ein digitaler Bus einfacher und billiger</li>
-  </ul></div>
+<ul>
+  <li><b>Warum der Standard hält:</b> Der Leitungswiderstand ist egal, ein Drahtbruch ist erkennbar (0 mA sind ein Fehler, nicht der Bereichsanfang), und die Übertragung ist über hunderte Meter störfest.</li>
+  <li><b>Zweileitertechnik:</b> Der Sensor speist sich aus dem Messstrom selbst.</li>
+  <li><b>Empfängerseite:</b> Bürdewiderstand, meist 250 Ω → 1–5 V. HART überlagert dem Strom ein digitales Signal für Konfiguration und Diagnose.</li>
+  <li><b>Im Gerät</b>, über kurze Strecken, ist ein digitaler Bus einfacher und billiger.</li>
 </div>
 
 <h2>Auflösung, Richtigkeit, Wiederholbarkeit</h2>
@@ -67,11 +58,9 @@ import "./_style.css";
 <tr><td><b>Auflösung</b></td><td>Kleinste unterscheidbare Änderung</td><td>16-Bit-ADC an 3,3 V: 50 µV</td></tr>
 <tr><td><b>Richtigkeit (Genauigkeit)</b></td><td>Abweichung vom wahren Wert</td><td>Thermoelement Typ K, Klasse 1: ±1,5 K</td></tr>
 <tr><td><b>Wiederholbarkeit (Präzision)</b></td><td>Streuung bei mehrfacher Messung derselben Größe</td><td>±0,05 mm bei einem Positionsantrieb</td></tr>
-<tr><td><b>Linearität</b></td><td>Abweichung von der idealen Geraden</td><td>±0,2 % vom Endwert</td></tr>
 <tr><td><b>Hysterese</b></td><td>Unterschied zwischen steigender und fallender Messung</td><td>Bei mechanischen Sensoren und Ferromagnetika typisch</td></tr>
 <tr><td><b>Drift</b></td><td>Änderung über Zeit oder Temperatur</td><td>±50 ppm/K bei einer einfachen Referenzspannung</td></tr>
 <tr><td><b>Ansprechzeit</b></td><td>Bis 63 % (τ) bzw. 90 % des Endwerts erreicht sind</td><td>Temperaturfühler im Schutzrohr: mehrere Sekunden</td></tr>
-<tr><td><b>Totband</b></td><td>Bereich ohne Reaktion</td><td>Mechanisches Spiel, Reibung, Quantisierung</td></tr>
 </tbody>
 </table></div>
 <svg class="dg l" viewBox="0 0 620 170" role="img" aria-label="Vier Zielscheiben: richtig und präzise, nur präzise, nur richtig, weder noch">
@@ -121,9 +110,7 @@ import "./_style.css";
 <tr><td><b>Selbsterwärmung</b></td><td>Pt100 mit 1 mA: 0,1–1 K je nach Einbau</td><td>Messstrom senken oder gepulst messen</td></tr>
 <tr><td><b>Thermospannungen</b></td><td>einige µV je Kelvin Gefälle über die Platine</td><td>Symmetrischer Aufbau, gleiche Materialien, Zugluft vermeiden</td></tr>
 <tr><td><b>Leitungswiderstand</b></td><td>Pt100 im Zweileiteranschluss: 2,6 K je Ohm</td><td>Drei- oder Vierleiteranschluss</td></tr>
-<tr><td><b>Alterung</b></td><td>Referenzen driften im ersten Jahr am stärksten</td><td>Nachkalibrieren; gealterte Bauteile verwenden</td></tr>
-<tr><td><b>Einbaulage</b></td><td>Beschleunigungssensoren messen 1 g Erdbeschleunigung mit</td><td>Im Einbauzustand kalibrieren</td></tr>
-<tr><td><b>Mechanische Vorspannung</b></td><td>Verschraubte Druck- und Kraftsensoren zeigen Offset</td><td>Nach dem Einbau nullen</td></tr>
+<tr><td><b>Alterung und Einbau</b></td><td>Referenzen driften im ersten Jahr am stärksten; verschraubte Druck- und Kraftsensoren zeigen Offset</td><td>Nachkalibrieren, im Einbauzustand nullen</td></tr>
 </tbody>
 </table></div>
 
