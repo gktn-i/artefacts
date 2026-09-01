@@ -1,68 +1,70 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Der teuerste Fehler in der Werkstatt ist ein Öl auf dem falschen Kunststoff.</b> Manche Kombinationen führen innerhalb von Stunden zu Spannungsrissen, andere lassen Dichtungen um ein Drittel quellen. Beides ist nicht reparabel.</div>
+<div class="kurz"><b>Der teuerste Fehler in der Werkstatt ist das falsche Medium auf dem falschen Polymer.</b> Manche Kombinationen erzeugen binnen Stunden Spannungsrisse, andere lassen Dichtungen um ein Drittel quellen. Beides ist nicht reparabel.</div>
 
-<h2>Kunststoffverträglichkeit</h2>
+<h2>Thermoplaste</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th data-s="text">Kunststoff</th><th>Mineralöl</th><th>Silikonöl</th><th>Kriechöl mit Lösemittel</th><th>Anmerkung</th></tr></thead>
 <tbody>
-<tr><td><b>POM (Delrin)</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b mid">bedingt</span></td><td>Robust; empfindlich gegen starke Säuren</td></tr>
-<tr><td><b>PA (Nylon)</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td>Nimmt eher Wasser auf als Öl</td></tr>
+<tr><td><b>POM</b> (Delrin)</td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b mid">bedingt</span></td><td>Robust gegen Öle; empfindlich gegen starke Säuren</td></tr>
+<tr><td><b>PA</b> (Nylon)</td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td>Nimmt eher Wasser auf als Öl</td></tr>
 <tr><td><b>PE, PP</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td>Sehr beständig, dafür schlecht klebbar</td></tr>
 <tr><td><b>PTFE</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td>Praktisch inert</td></tr>
-<tr><td><b>PC (Polycarbonat)</b></td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td><b>Spannungsrisse</b> unter Last; Lösemittel meiden</td></tr>
+<tr><td><b>PC</b> (Polycarbonat)</td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td>Spannungsrisse unter Last; WD-40 nennt PC ausdrücklich als Ausschluss</td></tr>
+<tr><td><b>PS klar</b> (Polystyrol)</td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td>Trübt und reißt; ebenfalls Ausschluss laut WD-40</td></tr>
 <tr><td><b>ABS, ASA</b></td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td>Aceton und Ketone lösen ABS regelrecht auf</td></tr>
-<tr><td><b>PMMA (Acrylglas)</b></td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td>Sehr anfällig für Spannungsrisse</td></tr>
-<tr><td><b>PLA, PETG (Druck)</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b mid">bedingt</span></td><td>Temperatur ist hier das größere Problem als Chemie</td></tr>
+<tr><td><b>PMMA</b> (Acrylglas)</td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td>Sehr anfällig für Spannungsrisse</td></tr>
+<tr><td><b>PLA, PETG</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b mid">bedingt</span></td><td>Temperatur ist hier kritischer als Chemie — siehe <a href="3d-druck.html#filamente">Filamente</a></td></tr>
 </tbody>
 </table></div>
 
 <h2>Elastomere und Dichtungen</h2>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th data-s="text">Werkstoff</th><th>Mineralöl</th><th>Bremsflüssigkeit</th><th>Wasser, Dampf</th><th data-s="num">Temperatur</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Werkstoff</th><th>Mineralöl</th><th>Silikonöl, -fett</th><th>Bremsflüssigkeit (Glykol)</th><th>Wasser, Dampf</th><th data-s="num">Temperatur</th></tr></thead>
 <tbody>
-<tr><td><b>NBR</b> (Nitril)</td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td><span class="b mid">bedingt</span></td><td>−30 … +100 °C</td></tr>
-<tr><td><b>FKM</b> (Viton)</td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td><span class="b mid">bedingt</span></td><td>−20 … +200 °C</td></tr>
-<tr><td><b>EPDM</b></td><td><span class="b bad">schlecht</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td>−45 … +150 °C</td></tr>
-<tr><td><b>Silikon (VMQ)</b></td><td><span class="b mid">bedingt</span></td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td>−60 … +200 °C</td></tr>
-<tr><td><b>PTFE</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td>−200 … +260 °C</td></tr>
+<tr><td><b>NBR</b> (Nitril)</td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td><span class="b mid">bedingt</span></td><td>-30 … +100 °C</td></tr>
+<tr><td><b>FKM</b> (Viton)</td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">schlecht</span></td><td><span class="b mid">bedingt</span></td><td>-20 … +200 °C</td></tr>
+<tr><td><b>EPDM</b></td><td><span class="b bad">schlecht</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td>-45 … +150 °C</td></tr>
+<tr><td><b>VMQ</b> (Silikon)</td><td><span class="b mid">bedingt</span></td><td><span class="b bad">schlecht</span></td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td>-55 … +200 °C</td></tr>
+<tr><td><b>PTFE</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td>-200 … +260 °C</td></tr>
 </tbody>
 </table></div>
 
-<div class="stop"><b>EPDM und Mineralöl ist die klassische Fehlpaarung.</b> EPDM quillt in Mineralöl stark auf — ein O-Ring wächst sichtbar und verliert seine Dichtwirkung vollständig. Umgekehrt versagt NBR in Bremsflüssigkeit. Wer eine Dichtung ersetzt, muss den Werkstoff kennen, nicht nur die Abmessung. Im Zweifel FKM nehmen: es ist teurer, aber gegen fast alles beständig außer polare Lösemittel und Bremsflüssigkeit.</div>
+<div class="stop"><b>Silikonfett gehört nicht auf eine Silikondichtung.</b> Das ist die unauffälligste Fehlpaarung überhaupt, weil sie logisch klingt: VMQ nimmt Silikonöl auf, der Ring quillt, verliert Härte und Dichtkraft — teils schon Stunden nach der Montage. Für VMQ nimmt man ein Montagemittel auf Mineralölbasis oder ein Fluorsilikon- bzw. PFPE-Fett. Die zweite klassische Fehlpaarung ist EPDM in Mineralöl: der O-Ring wächst sichtbar und dichtet nicht mehr. Umgekehrt versagt NBR in Glykol-Bremsflüssigkeit.</div>
 
-<h2>Spannungsrisskorrosion bei Kunststoff</h2>
-<p>Das gefährlichste Versagen ist nicht das offensichtliche Auflösen, sondern die Kombination aus <b>mechanischer Zugspannung und Medium</b>. Ein Polycarbonatteil, das unter Vorspannung steht und mit einem lösemittelhaltigen Reiniger in Berührung kommt, bekommt feine Risse und bricht — manchmal erst Wochen später.</p>
+<h2>Spannungsrisse</h2>
+<p>Das gefährlichste Versagen ist nicht das offensichtliche Anlösen, sondern die Kombination aus <b>Zugspannung und Medium</b>: ein vorgespanntes PC-Teil, das mit lösemittelhaltigem Reiniger in Kontakt kommt, bekommt feine Risse und bricht — manchmal erst Wochen später.</p>
 <div class="gb">
   <div class="gb-col good"><h4>So verhindert man es</h4>
     <ul>
-      <li>Vor dem Kontakt mit Reinigern die Verträglichkeit prüfen, nicht danach</li>
+      <li>Verträglichkeit vor dem Kontakt prüfen, nicht danach</li>
+      <li>An verdeckter Stelle testen, wenn der Werkstoff unbekannt ist</li>
       <li>Spritzgussteile spannungsarm tempern lassen</li>
       <li>Verschraubungen nicht überziehen — jede Vorspannung erhöht das Risiko</li>
       <li>Radien statt scharfer Innenecken; dort sitzen die Spannungsspitzen</li>
-      <li>Silikonöl als Standard nehmen, wo der Kunststoff unbekannt ist</li>
     </ul>
   </div>
   <div class="gb-col bad"><h4>Typische Auslöser</h4>
     <ul>
       <li>Bremsenreiniger auf Polycarbonat oder ABS</li>
-      <li>Isopropanol auf verspanntem PC — reicht bereits</li>
+      <li>Isopropanol auf verspanntem PC — das reicht bereits</li>
       <li>Kriechöl auf Acrylglas-Sichtscheiben</li>
       <li>Aceton in der Nähe von ABS-Bauteilen</li>
-      <li>Weichmacherhaltige Kabelisolierung dauerhaft auf Kunststoffgehäuse gepresst</li>
+      <li>Weichmacherhaltige Kabelisolierung dauerhaft aufs Gehäuse gepresst</li>
     </ul>
   </div>
 </div>
 
-<div class="tip"><b>Silikonöl ist der sichere Standardgriff bei unbekanntem Kunststoff.</b> Es ist mit fast allen Kunststoffen und Elastomeren verträglich, temperaturbeständig und geruchsneutral. Der Preis: geringe Tragfähigkeit unter Last, und es lässt sich anschließend kaum noch lackieren oder kleben — Silikonspuren sind der klassische Grund für Lackbenetzungsstörungen.</div>
+<div class="tip"><b>Silikonöl ist der sichere Griff bei unbekanntem <i>Thermoplast</i> — nicht bei unbekanntem Elastomer.</b> Mit PC, ABS, PMMA und PS verträgt es sich, mit Silikonkautschuk nicht. Und es macht Flächen dauerhaft unbenetzbar: Silikonspuren sind der klassische Grund für Lackbenetzungsstörungen.</div>
 
 <div class="srcs">
   <div class="sh">Quellen zu diesem Abschnitt</div>
   <ul>
-    <li>ISO 1817 — Elastomere: Bestimmung der Beständigkeit gegen Flüssigkeiten (Quellungsverhalten).</li>
-    <li><a href="https://www.tss.trelleborg.com/">Trelleborg Sealing Solutions — Werkstoffbeständigkeitsliste</a> und <a href="https://www.fst.com/">Freudenberg — Technisches Handbuch</a>: die maßgeblichen Beständigkeitstabellen.</li>
-    <li>DIN EN ISO 22088 — Kunststoffe: Bestimmung der Beständigkeit gegen umgebungsbedingte Spannungsrissbildung.</li>
-    <li>Werkstoffkennwerte und Temperaturgrenzen: <a href="mechanik.html#kunststoffe">Kunststoffe</a> im Mechatronik-Hub.</li>
+    <li>ISO 1817 — Elastomere: Bestimmung der Beständigkeit gegen Flüssigkeiten (Quellungsverhalten); DIN EN ISO 22088 — Beständigkeit gegen umgebungsbedingte Spannungsrissbildung.</li>
+    <li><a href="https://www.tss.trelleborg.com/">Trelleborg Sealing Solutions</a> und <a href="https://www.fst.com/">Freudenberg Sealing Technologies</a>: Werkstoff- und Beständigkeitstabellen, Temperaturgrenzen der Elastomere.</li>
+    <li>Werkstoffhinweise der Dichtungshersteller zur Unverträglichkeit von Silikonschmierstoffen mit VMQ-, MQ- und FVMQ-Dichtungen.</li>
+    <li><a href="https://www.wd40.de/">WD-40</a> — Herstellerhinweis: nicht auf Polycarbonat und klarem Polystyrol anwenden.</li>
+    <li>Werkstoffkennwerte und Temperaturgrenzen der Kunststoffe: <a href="mechanik.html#kunststoffe">Kunststoffe</a>.</li>
   </ul>
 </div>
