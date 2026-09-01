@@ -102,12 +102,12 @@ import "./_style.css";
 
 <h2>Prop Wash und andere unangenehme Physik</h2>
 <div class="grid2">
-  <div class="card"><div class="ct">Prop Wash</div><div class="cd">Beim schnellen Sinkflug fliegt das Quad in seinen eigenen, verwirbelten Abwind. Der Schub bricht unregelmäßig ein, der Regler kämpft dagegen an — sichtbar als Zittern im Bild. Vollständig vermeidbar ist das nicht; gute Filterung, ausreichend D und ein sauberer Rahmen mildern es.</div></div>
-  <div class="card"><div class="ct">Vibration</div><div class="cd">Unwuchtige Propeller und harte Motorlager erzeugen Schwingungen genau in dem Frequenzbereich, in dem der Gyro misst. Die Filterkette muss sie entfernen, ohne zu viel Phase zu verlieren — der zentrale Zielkonflikt jedes Tunings.</div></div>
-  <div class="card"><div class="ct">Desync</div><div class="cd">Bei sehr schnellen Lastwechseln verliert der ESC die Synchronisation zum Rotor: der Motor stoppt oder kreischt, das Quad fällt seitlich weg. Ursachen sind meist zu aggressives Timing, zu wenig Kapazität am Eingang oder überforderte Firmware.</div></div>
-  <div class="card"><div class="ct">Spannungseinbruch (Sag)</div><div class="cd">Unter Last fällt die Akkuspannung um den Innenwiderstand mal Strom. Bei 100 A und 5 mΩ je Zelle sind das 0,5 V je Zelle — der Grund, warum ein „voller“ Akku im Vollgas plötzlich am Warnwert steht und danach wieder aussieht wie neu.</div></div>
+  <div class="card"><div class="ct">Prop Wash</div><div class="cd">Beim schnellen Sinkflug fliegt das Quad in seinen eigenen, verwirbelten Abwind: Der Schub bricht unregelmäßig ein, sichtbar als Zittern im Bild. Ganz vermeidbar ist es nicht — Gegenmittel unter <a href="#tuning">PID-Tuning</a>.</div></div>
+  <div class="card"><div class="ct">Vibration</div><div class="cd">Unwuchtige Propeller und raue Lager schwingen genau dort, wo der Gyro misst. Filtern kostet Phase — der zentrale Zielkonflikt, ausgeführt unter <a href="#tuning">PID-Tuning</a>.</div></div>
+  <div class="card"><div class="ct">Desync</div><div class="cd">Bei schnellen Lastwechseln verliert der ESC die Synchronisation zum Rotor: Der Motor stoppt oder kreischt, das Quad fällt seitlich weg. Ursachen und Abhilfe unter <a href="#esc">ESC</a>.</div></div>
+  <div class="card"><div class="ct">Spannungseinbruch (Sag)</div><div class="cd">Unter Last fällt die Spannung um Innenwiderstand × Strom — deshalb steht ein voller Akku im Vollgas am Warnwert und erholt sich danach. Formel und Zahlen unter <a href="#akku">LiPo</a>.</div></div>
   <div class="card"><div class="ct">Bodeneffekt</div><div class="cd">Unterhalb etwa eines Propellerdurchmessers Bodenabstand staut sich die Luft, der Schub steigt und das Quad wird nervös. Deshalb ist Starten und Landen unruhiger als Schweben in Hüfthöhe.</div></div>
-  <div class="card"><div class="ct">Blattspitzengeschwindigkeit</div><div class="cd">Ab etwa Mach 0,6 an der Blattspitze fällt der Wirkungsgrad ab und der Lärm steigt stark. Das begrenzt, wie viel kV ein großer Propeller verträgt — nachrechnen im <a href="#rechner">Rechner</a>.</div></div>
+  <div class="card"><div class="ct">Blattspitzengeschwindigkeit</div><div class="cd">Ab ~Mach 0,6 an der Spitze fällt der Wirkungsgrad, der Lärm steigt — die Obergrenze für kV bei großen Propellern. Formel unter <a href="#props">Propeller</a>.</div></div>
 </div>
 
 <div class="srcs">
