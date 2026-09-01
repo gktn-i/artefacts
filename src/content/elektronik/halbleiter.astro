@@ -93,7 +93,7 @@ import "./_style.css";
 
 <h2>Die vier Schaltungen, die man ständig braucht</h2>
 <div class="grid2">
-  <div class="card"><div class="ct">Freilaufdiode</div><div class="cd">Antiparallel über jede induktive Last. Standard-Silizium reicht bei Relais; bei PWM-Ansteuerung von Motoren muss sie schnell sein, sonst verheizt sie beim Umschalten Leistung. Rechnung dazu: <a href="#transient">Schaltvorgänge</a>.</div></div>
+  <div class="card"><div class="ct">Freilaufdiode</div><div class="cd">Antiparallel über jede induktive Last. Standard-Silizium reicht bei Relais; bei PWM-Ansteuerung von Motoren muss sie schnell sein, sonst verheizt sie beim Umschalten Leistung. Rechnung dazu: <a href="elektrotechnik.html#transient">Schaltvorgänge</a>.</div></div>
   <div class="card"><div class="ct">Verpolschutz</div><div class="cd">Diode in Reihe kostet U_F. Eleganter: p-Kanal-MOSFET in der Plusleitung, Source zur Quelle — nur R_DS(on) statt 0,7 V. Ab etwa 500 mA lohnt sich das fast immer.</div></div>
   <div class="card"><div class="ct">Klemmschaltung</div><div class="cd">Zwei Dioden von der Signalleitung nach V_CC und Masse begrenzen auf V_CC + 0,7 V und −0,7 V. Der Strom <b>muss</b> durch einen Reihenwiderstand begrenzt werden, sonst zieht die Klemmung die Versorgung hoch (Latch-up).</div></div>
   <div class="card"><div class="ct">Gleichrichtung</div><div class="cd">Einweg: eine Diode, halbe Ausbeute. Brücke: vier Dioden, doppelte Brummfrequenz, zwei Flussspannungen Verlust. Glättung abschätzen: C ≈ I · t / ΔU — für 1 A, 10 ms und 1 V Welligkeit rund 10 000 µF. Bei Kleinspannung ist Synchrongleichrichtung mit MOSFETs deutlich effizienter.</div></div>

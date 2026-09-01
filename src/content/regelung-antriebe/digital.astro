@@ -70,7 +70,7 @@ float pid_step(pid_t *p, float w, float y)
   <div class="step"><h4>Rechenzeit und verpasste Takte überwachen</h4>GPIO-Pin am Anfang und Ende der Regelroutine setzen und am Oszilloskop messen. Mehr als ein Drittel der Abtastperiode wird eng; ein Zähler für verpasste Zyklen gehört in jede ernsthafte Umsetzung.</div>
   <div class="step"><h4>Stoßfrei umschalten</h4>Beim Wechsel von Hand- auf Automatikbetrieb den Integralanteil so setzen, dass die Stellgröße unverändert bleibt — sonst springt der Antrieb.</div>
 </div>
-<div class="tip"><b>Ohne FPU:</b> Auf Controllern ohne Fließkommaeinheit kostet jede Fließkommaoperation ein Vielfaches — bei hohen Regeltakten Festkomma verwenden, den Integralanteil breiter rechnen als den Rest und sättigende statt überlaufender Arithmetik nutzen. Ein Überlauf im Regler bedeutet Vorzeichenwechsel der Stellgröße. Zahlenformate: <a href="digitaltechnik.html#zahlen">Digitaltechnik → Zahlendarstellung</a>.</div>
+<div class="tip"><b>Ohne FPU:</b> Auf Controllern ohne Fließkommaeinheit kostet jede Fließkommaoperation ein Vielfaches — bei hohen Regeltakten Festkomma verwenden, den Integralanteil breiter rechnen als den Rest und sättigende statt überlaufender Arithmetik nutzen. Ein Überlauf im Regler bedeutet Vorzeichenwechsel der Stellgröße. Zahlenformate: <a href="elektronik.html#zahlen">Digitaltechnik → Zahlendarstellung</a>.</div>
 
 <h2>Anti-Windup</h2>
 <p>Steht die Stellgröße an ihrer Grenze, wirkt keine Änderung mehr — der Kreis ist offen, der I-Anteil summiert aber weiter. Beim Erreichen des Sollwerts muss dieser Berg erst abgebaut werden, und die Regelgröße schießt weit über.</p>

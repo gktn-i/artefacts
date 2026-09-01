@@ -571,9 +571,9 @@
    },
    "areas": [
     {
-     "id": "grundlagen",
-     "name": "Grundlagen",
-     "desc": "Mechanik, Elektrotechnik und Digitales — das Fundament, auf dem alles andere steht.",
+     "id": "mechanik",
+     "name": "Mechanik & Konstruktion",
+     "desc": "Statik, Festigkeit, Maschinenelemente, Werkstoffe und Konstruktion — alles, was trägt, dreht und hält.",
      "modules": [
       {
        "id": "mechanik",
@@ -776,29 +776,35 @@
         "druck",
         "schmiermittel"
        ]
-      },
+      }
+     ]
+    },
+    {
+     "id": "elektro",
+     "name": "Elektrotechnik & Elektronik",
+     "desc": "Das Fundament: Ströme und Felder, dann Bauelemente und Schaltungen — analog wie digital.",
+     "modules": [
       {
        "id": "elektrotechnik",
        "file": "elektrotechnik.html",
-       "name": "Elektrotechnik & Analog",
+       "name": "Elektrotechnik",
        "icon": "⚡",
        "kind": "Referenz",
-       "updated": "2026-08-26",
-       "desc": "Vom ohmschen Gesetz bis zum Schaltregler: Gleich- und Wechselstrom, Felder und Leistung, dann die Bauelemente — Diode, Transistor, OPV — und die Analog- und Leistungselektronik bis zu EMV und sauberer Masseführung. Mit Rechnern für die tägliche Auslegung.",
+       "updated": "2026-09-01",
+       "desc": "Die Gesetze, die alles Weitere voraussetzt: Gleich- und Wechselstrom, Netzwerkanalyse, Felder und Magnetik, Leistung und Drehstrom, Schaltvorgänge und Leitungen — und die elektrische Sicherheit. Mit Rechnern für die tägliche Auslegung.",
        "tags": [
         "gleichstrom",
         "wechselstrom",
-        "drehstrom",
         "netzwerkanalyse",
-        "halbleiter",
-        "transistor",
-        "mosfet",
-        "opv",
-        "filter",
-        "adc",
-        "dac",
-        "schaltregler",
-        "emv",
+        "thévenin",
+        "felder",
+        "induktion",
+        "transformator",
+        "leistung",
+        "blindleistung",
+        "drehstrom",
+        "schaltvorgänge",
+        "leitungen",
         "sicherheit"
        ],
        "sections": [
@@ -829,6 +835,69 @@
         {
          "h": "sicherheit",
          "t": "Elektrische Sicherheit"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "gleichstrom",
+          "felder",
+          "wechselstrom"
+         ]
+        },
+        {
+         "l": "Leistung & Sicherheit",
+         "sections": [
+          "leistung",
+          "transient",
+          "sicherheit"
+         ]
+        }
+       ],
+       "alias": {
+        "groessen": "gleichstrom",
+        "netzwerke": "gleichstrom",
+        "komplexe": "wechselstrom",
+        "drehstrom": "leistung",
+        "leitungen": "transient",
+        "magnetik": "felder"
+       },
+       "related": [
+        "elektronik-101"
+       ]
+      },
+      {
+       "id": "elektronik",
+       "file": "elektronik.html",
+       "name": "Elektronik",
+       "icon": "🎛️",
+       "kind": "Referenz",
+       "updated": "2026-09-01",
+       "desc": "Bauelemente und Schaltungen — analog wie digital. Diode, Transistor und Operationsverstärker, Filter, Wandler, Regler und EMV; dann Zahlensysteme, Logik, Flipflops, Timing, Speicher und FPGA. Wo Elektrotechnik zur Schaltung wird.",
+       "tags": [
+        "halbleiter",
+        "diode",
+        "transistor",
+        "mosfet",
+        "opv",
+        "filter",
+        "adc",
+        "dac",
+        "schaltregler",
+        "emv",
+        "zahlensysteme",
+        "boolesche algebra",
+        "flipflops",
+        "timing",
+        "speicher",
+        "fpga"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
         },
         {
          "h": "halbleiter",
@@ -857,83 +926,6 @@
         {
          "h": "emv",
          "t": "EMV, Masse & Entkopplung"
-        }
-       ],
-       "groups": [
-        {
-         "l": "Grundlagen",
-         "sections": [
-          "start",
-          "gleichstrom",
-          "felder",
-          "wechselstrom",
-          "leistung",
-          "transient",
-          "sicherheit"
-         ]
-        },
-        {
-         "l": "Bauelemente",
-         "sections": [
-          "halbleiter",
-          "transistoren",
-          "opv"
-         ]
-        },
-        {
-         "l": "Analog & Leistung",
-         "sections": [
-          "filter",
-          "wandler",
-          "versorgung",
-          "emv"
-         ]
-        }
-       ],
-       "alias": {
-        "groessen": "gleichstrom",
-        "netzwerke": "gleichstrom",
-        "komplexe": "wechselstrom",
-        "drehstrom": "leistung",
-        "leitungen": "transient",
-        "dioden": "halbleiter",
-        "bjt": "transistoren",
-        "mosfet": "transistoren",
-        "rauschen": "filter",
-        "magnetik": "felder"
-       },
-       "related": [
-        "elektronik-101",
-        "loeten"
-       ]
-      },
-      {
-       "id": "digitaltechnik",
-       "file": "digitaltechnik.html",
-       "name": "Digital- & Informationstechnik",
-       "icon": "🔲",
-       "kind": "Referenz",
-       "updated": "2026-08-26",
-       "desc": "Von der Wahrheitstabelle bis zum Netzwerkpaket: Zahlensysteme, Logik und Schaltwerke, dann Rechnerarchitektur, Betriebssysteme und Software — und schließlich Netzwerke, Funk, Signalverarbeitung und Kryptografie.",
-       "tags": [
-        "zahlensysteme",
-        "boolesche algebra",
-        "flipflops",
-        "automaten",
-        "fpga",
-        "rechnerarchitektur",
-        "betriebssysteme",
-        "netzwerke",
-        "tcp/ip",
-        "funk",
-        "dsp",
-        "security",
-        "kryptografie"
-       ],
-       "sections": [
-        {
-         "h": "start",
-         "t": "Start & Landkarte"
         },
         {
          "h": "zahlen",
@@ -954,6 +946,88 @@
         {
          "h": "speicher",
          "t": "Speicher & FPGA"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Analog",
+         "sections": [
+          "start",
+          "halbleiter",
+          "transistoren",
+          "opv",
+          "filter",
+          "wandler",
+          "versorgung",
+          "emv"
+         ]
+        },
+        {
+         "l": "Digital",
+         "sections": [
+          "zahlen",
+          "logik",
+          "schaltwerke",
+          "timing",
+          "speicher"
+         ]
+        }
+       ],
+       "alias": {
+        "dioden": "halbleiter",
+        "bjt": "transistoren",
+        "mosfet": "transistoren",
+        "rauschen": "filter",
+        "boole": "logik",
+        "schaltnetze": "logik",
+        "flipflops": "schaltwerke",
+        "automaten": "schaltwerke",
+        "logikfamilien": "timing",
+        "fpga": "speicher"
+       },
+       "related": [
+        "elektronik-101",
+        "loeten"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "informatik",
+     "name": "Informations- & Rechnertechnik",
+     "desc": "Wie aus Spannungspegeln Information wird — und wie man sie rechnet, überträgt und schützt.",
+     "modules": [
+      {
+       "id": "informationstechnik",
+       "file": "informationstechnik.html",
+       "name": "Informationstechnik",
+       "icon": "💾",
+       "kind": "Referenz",
+       "updated": "2026-09-01",
+       "desc": "Wie aus Pegeln Information wird — und wie man sie rechnet, überträgt und schützt: Codierung und Fehlerschutz, Rechnerarchitektur und Befehlssätze, Betriebssysteme und Echtzeit, Softwaretechnik, Netzwerke, Funk, Signalverarbeitung und Security.",
+       "tags": [
+        "entropie",
+        "codierung",
+        "crc",
+        "rechnerarchitektur",
+        "risc-v",
+        "betriebssysteme",
+        "echtzeit",
+        "git",
+        "netzwerke",
+        "tcp/ip",
+        "wlan",
+        "ble",
+        "lora",
+        "dsp",
+        "fft",
+        "security",
+        "kryptografie"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
         },
         {
          "h": "information",
@@ -990,19 +1064,9 @@
        ],
        "groups": [
         {
-         "l": "Digitale Logik",
-         "sections": [
-          "start",
-          "zahlen",
-          "logik",
-          "schaltwerke",
-          "timing",
-          "speicher"
-         ]
-        },
-        {
          "l": "Rechner & Software",
          "sections": [
+          "start",
           "information",
           "architektur",
           "os",
@@ -1020,29 +1084,15 @@
         }
        ],
        "alias": {
-        "boole": "logik",
-        "schaltnetze": "logik",
-        "flipflops": "schaltwerke",
-        "automaten": "schaltwerke",
-        "logikfamilien": "timing",
-        "fpga": "speicher",
         "fehlerschutz": "information",
         "befehlssatz": "architektur",
-        "werkzeuge": "software",
-        "architektur-alt": "architektur"
+        "werkzeuge": "software"
        },
        "related": [
-        "elektronik-101",
-        "homeserver"
+        "homeserver",
+        "elektronik-101"
        ]
-      }
-     ]
-    },
-    {
-     "id": "systeme",
-     "name": "Systeme & Software",
-     "desc": "Messen, regeln, bewegen, automatisieren — vom Mikrocontroller bis zur Fertigungszelle.",
-     "modules": [
+      },
       {
        "id": "embedded",
        "file": "embedded-firmware.html",
@@ -1155,7 +1205,14 @@
         "elektronik-101",
         "pcb-design"
        ]
-      },
+      }
+     ]
+    },
+    {
+     "id": "systeme",
+     "name": "Mechatronische Systeme",
+     "desc": "Messen, regeln, bewegen — und das Ganze sicher automatisieren.",
+     "modules": [
       {
        "id": "regelung-antriebe",
        "file": "regelung-antriebe.html",

@@ -3,7 +3,13 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <title>Umgezogen — Artefakte</title>
-<script>location.replace("elektrotechnik.html" + (location.hash || ""));</script>
-<meta http-equiv="refresh" content="0;url=elektrotechnik.html">
-<p>Diese Seite ist umgezogen: <a href="elektrotechnik.html">elektrotechnik.html</a></p>
+<script>
+(function () {
+  var h = location.hash.replace("#", "");
+  if (h === "magnetik") location.replace("elektrotechnik.html#felder");
+  else location.replace("elektronik.html" + (h && h !== "start" ? "#" + h : ""));
+})();
+</script>
+<meta http-equiv="refresh" content="0;url=elektronik.html">
+<p>Diese Seite ist umgezogen: <a href="elektronik.html">Elektronik</a></p>
 </html>

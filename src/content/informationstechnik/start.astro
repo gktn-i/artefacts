@@ -1,0 +1,40 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Informationstechnik fragt, wie aus Spannungspegeln Bedeutung wird — und wie man sie rechnet, speichert, überträgt und schützt.</b> Die Logik dahinter steht im Modul Elektronik; hier beginnt es dort, wo aus Gattern ein Rechner wird und aus Bits ein Protokoll.</div>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#information"><div class="mt"><span class="i">📐</span>Information &amp; Codierung</div><div class="md">Entropie, Kompression, Kanalkapazität; CRC, Hamming, Reed-Solomon.</div></a>
+  <a href="#architektur"><div class="mt"><span class="i">🏛️</span>Rechnerarchitektur &amp; Befehlssätze</div><div class="md">Pipeline, Cache, Speicherhierarchie; ARM, RISC-V, x86 im Vergleich.</div></a>
+  <a href="#os"><div class="mt"><span class="i">🧵</span>Betriebssysteme &amp; Echtzeit</div><div class="md">Prozesse, Scheduling, Nebenläufigkeit — und was „hart echtzeitfähig“ wirklich heißt.</div></a>
+  <a href="#software"><div class="mt"><span class="i">🧰</span>Softwaretechnik &amp; Werkzeuge</div><div class="md">Git, Build-Systeme, Tests, statische Analyse — das Handwerkszeug.</div></a>
+  <a href="elektrotechnik.html#netzwerke"><div class="mt"><span class="i">🌐</span>Netzwerke &amp; TCP/IP</div><div class="md">Schichtenmodell, TCP/UDP, Ethernet-Varianten, MQTT und Fehlersuche von unten nach oben.</div></a>
+  <a href="#funk"><div class="mt"><span class="i">📡</span>Funk &amp; Wireless</div><div class="md">WLAN, BLE, Thread, LoRa; Linkbudget, Antennenfehler, EU-Regeln.</div></a>
+  <a href="#dsp"><div class="mt"><span class="i">📊</span>Signalverarbeitung &amp; DSP</div><div class="md">Abtastung, Aliasing, FFT, Fenster, digitale Filter, praktische Rezepte.</div></a>
+  <a href="#security"><div class="mt"><span class="i">🔐</span>Security &amp; Kryptografie</div><div class="md">Bedrohungsmodell, Krypto-Bausteine, Secure Boot, sichere Updates, EU-Recht.</div></a>
+</div>
+
+<h2>Die drei Fragen an jedes System</h2>
+<div class="steps">
+  <div class="step"><h4>Wie viel Information entsteht, und wie oft?</h4>Ein Temperatursensor liefert 2 Byte pro Minute, eine Kamera 30 MB pro Sekunde. Daraus folgen Bandbreite, Speicher, Energiebedarf und Übertragungstechnik — nicht umgekehrt.</div>
+  <div class="step"><h4>Was passiert, wenn ein Bit kippt?</h4>Bei einem Temperaturwert nichts Schlimmes, bei einem Firmware-Update das Ende des Geräts. Der nötige Fehlerschutz folgt aus dieser Antwort — siehe <a href="#information">Information &amp; Codierung</a>.</div>
+  <div class="step"><h4>Wie schnell muss reagiert werden — und was passiert bei Verspätung?</h4>Die Trennlinie zwischen harter und weicher Echtzeit — siehe <a href="#os">Betriebssysteme &amp; Echtzeit</a>.</div>
+</div>
+
+<h2>Wie dieses Modul zum Rest des Hubs steht</h2>
+<div class="grid">
+  <div class="card"><div class="ct">→ <a href="elektronik.html#zahlen">Elektronik: Digitalteil</a></div><div class="cd">Zahlensysteme, Logik, Flipflops, Timing, Speicher — die Hardware, auf der alles hier läuft.</div></div>
+  <div class="card"><div class="ct">→ <a href="embedded-firmware.html">Embedded &amp; Firmware</a></div><div class="cd">Der Mikrocontroller in der Praxis: Peripherie, Toolchain, RTOS-Einsatz, Debuggen.</div></div>
+  <div class="card"><div class="ct">→ <a href="elektronik-grundlagen.html#protokolle">Elektronik 101: Protokolle</a></div><div class="cd">I²C, SPI, UART aus Anwendersicht — anschließen, ansprechen, mit dem Logikanalysator prüfen.</div></div>
+  <div class="card"><div class="ct">→ <a href="homeserver-101.html">Homeserver 101</a></div><div class="cd">Netzwerke und Betriebssysteme in echt: Heimnetz, Dienste, Sicherung.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Andrew S. Tanenbaum, <i>Computerarchitektur</i> und <i>Computernetzwerke</i>, Pearson.</li>
+    <li>Bryant &amp; O'Hallaron, <i>Computer Systems: A Programmer's Perspective</i>, Pearson.</li>
+    <li>Harris &amp; Harris, <i>Digital Design and Computer Architecture</i>, Morgan Kaufmann — der Übergang von der Logik zum Rechner.</li>
+  </ul>
+</div>

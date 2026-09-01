@@ -43,7 +43,7 @@ import "./_style.css";
 <h2>Sicherer Betrieb eines Geräts</h2>
 <div class="grid">
   <div class="card"><div class="ct">Secure Boot</div><div class="cd">Das ROM prüft die Signatur des Bootloaders, dieser die der Anwendung — nur signierte Firmware startet. Verfügbar bei ESP32 (Secure Boot v2), STM32 mit TrustZone, RP2350 mit signierten Boot-Images.</div></div>
-  <div class="card"><div class="ct">Signierte Updates</div><div class="cd">Die Signatur wird <b>vor</b> dem Schreiben geprüft, nicht danach. Zwei Speicherbereiche im Wechsel plus Rückfalloption verhindern, dass ein fehlgeschlagenes Update das Gerät unbrauchbar macht (<a href="#speicher">Speicher</a>).</div></div>
+  <div class="card"><div class="ct">Signierte Updates</div><div class="cd">Die Signatur wird <b>vor</b> dem Schreiben geprüft, nicht danach. Zwei Speicherbereiche im Wechsel plus Rückfalloption verhindern, dass ein fehlgeschlagenes Update das Gerät unbrauchbar macht (<a href="elektronik.html#speicher">Speicher</a>).</div></div>
   <div class="card"><div class="ct">Rollback-Schutz</div><div class="cd">Ein monotoner Zähler verhindert, dass eine alte, korrekt signierte Firmware mit bekannter Lücke wieder eingespielt wird.</div></div>
   <div class="card"><div class="ct">Debug-Schnittstelle</div><div class="cd">SWD und JTAG erlauben vollen Speicherzugriff. In der Serienfertigung dauerhaft per Fuse sperren — bis dahin sind sie der bequemste Angriffsweg überhaupt.</div></div>
   <div class="card"><div class="ct">Schlüsselspeicher</div><div class="cd">Schlüssel im normalen Flash sind auslesbar. Besser: eFuses, ein Secure Element (ATECC608, SE050) oder ein TPM. Ein Schlüssel, der den Chip nie verlässt, kann nicht kopiert werden.</div></div>

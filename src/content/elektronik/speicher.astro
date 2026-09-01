@@ -60,7 +60,7 @@ import "./_style.css";
 <ul>
   <li><b>Parität:</b> erkennt einen Bitfehler, korrigiert nichts.</li>
   <li><b>SECDED (Hamming + Gesamtparität):</b> korrigiert 1 Bit, erkennt 2 — der Code in ECC-RAM und in vielen MCU-Flash-Controllern (STM32, RP2350). Nebeneffekt: Nachschreiben in eine bereits programmierte Zelle ist gesperrt, weil die ECC-Bits mitgeschrieben werden.</li>
-  <li><b>BCH und LDPC:</b> in NAND-Controllern; korrigieren Dutzende Bitfehler je Seite — ohne sie wäre TLC-Flash unbrauchbar. Wie das rechnerisch funktioniert: <a href="#information">Information &amp; Codierung</a>.</li>
+  <li><b>BCH und LDPC:</b> in NAND-Controllern; korrigieren Dutzende Bitfehler je Seite — ohne sie wäre TLC-Flash unbrauchbar. Wie das rechnerisch funktioniert: <a href="informationstechnik.html#information">Information &amp; Codierung</a>.</li>
 </ul>
 
 <h2>Was in einem FPGA steckt</h2>
