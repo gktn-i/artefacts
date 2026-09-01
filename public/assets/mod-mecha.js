@@ -541,6 +541,81 @@ var CALC = {
     return { out: out, hint: hint };
   },
   /* --- FPV: LiPo-Kennwerte --- */
+  fpvladen: function (v) {
+    var de = function (x, d) { return x.toFixed(d).replace(".", ","); };
+    var chem = typeof v.chem === "string" ? v.chem : "lipo";
+    var s = v.s, cap = v.cap;
+    var n = isFinite(v.n) && v.n >= 1 ? Math.round(v.n) : 1;
+    var rate = isFinite(v.rate) && v.rate > 0 ? v.rate : 1;
+    if (!isFinite(s) || s < 1 || s > 12) return { out: "Zellenzahl 1–12 eintragen." };
+    if (!isFinite(cap) || cap <= 0) return { out: "Kapazität in mAh eintragen." };
+    var K = {
+      lipo:  { name: "LiPo",   mode: "LiPo",   full: 4.20, sto: [3.80, 3.85], nom: 3.70, land: 3.50, landN: "unter Last — der OSD-Alarm", low: 3.30, lowN: "in Ruhe; regelmäßig darunter kostet Zyklen", nc: 3.00, ncN: "darunter nur mit kleinem Strom und Aufsicht", disp: 2.50, ir: "3–6 mΩ je Zelle (neu)", rmax: 1 },
+      lihv:  { name: "LiHV",   mode: "LiHV",   full: 4.35, sto: [3.80, 3.85], nom: 3.80, land: 3.50, landN: "unter Last; 1S-Whoops sacken stärker: ~3,30 V", low: 3.30, lowN: "in Ruhe", nc: 3.00, ncN: "darunter nur mit kleinem Strom und Aufsicht", disp: 2.50, ir: "3–6 mΩ je Zelle (neu)", rmax: 1 },
+      liion: { name: "Li-Ion", mode: "Li-Ion", full: 4.20, sto: [3.60, 3.70], nom: 3.60, land: 3.00, landN: "in Ruhe (unter Last 2,8–3,0 V) — sanfter Gasverlauf", low: 2.80, lowN: "unter Last — nicht regelmäßig", nc: 2.50, ncN: "Datenblatt-Untergrenze: darunter nicht mehr laden, aussortieren", disp: null, ir: "laut Zellendatenblatt", rmax: 1 }
+    };
+    var k = K[chem] || K.lipo;
+    var tidy = function (x) { var t = x.toFixed(2); if (t.slice(-1) === "0") t = t.slice(0, -1); return t.replace(".", ","); };
+    var S = function (pc) { return tidy(pc * s) + " V"; };
+    var iPack = rate * cap / 1000, iSum = iPack * n;
+    var dur = rate >= 2 ? "~35–45 min" : rate >= 1 ? "~60–75 min" : "~2–2,5 h";
+    var wh = cap / 1000 * k.nom * s;
+    var whN = wh <= 100 ? "Flugreise: bis 100 Wh frei im Handgepäck" : wh <= 160 ? "Flugreise: 100–160 Wh nur mit Airline-Genehmigung" : "Flugreise: über 160 Wh nicht erlaubt";
+    var modeLbl = k.mode + " " + s + "S";
+
+    var out = s + "S " + k.name + " " + cap + " mAh" + (n > 1 ? " · " + n + " Packs parallel" : "")
+      + "  →  Balance Charge · Modus „" + modeLbl + "“ · " + tidy(iSum) + " A · voll " + S(k.full);
+
+    var tr = function (a, b, c) { return "<tr><td><b>" + a + "</b></td><td>" + b + "</td><td>" + (c || "") + "</td></tr>"; };
+    var tbl = function (h, rows) {
+      return '<div class="tbl-wrap"><table><thead><tr><th>' + h[0] + '</th><th>' + h[1] + '</th><th>' + h[2] + '</th></tr></thead><tbody>' + rows.join("") + '</tbody></table></div>';
+    };
+
+    var html = "<h4>Am Ladegerät einstellen</h4>" + tbl(["Einstellung", "Wert", "Hinweis"], [
+      tr("Programm", "Balance Charge", "nie „Charge“ ohne Balance — sonst ist eine einzelne überladene Zelle unsichtbar"),
+      tr("Chemie / Modus", k.mode + " (" + de(k.full, 2) + " V je Zelle)", "genau wie auf dem Pack aufgedruckt"),
+      tr("Zellenzahl", s + "S — erkannten Wert bestätigen", "erkannte Zahl ≠ Aufdruck → abbrechen, Zelle tiefentladen?"),
+      tr("Ladestrom", tidy(iSum) + " A (" + de(rate, 1).replace(",0", "") + "C" + (n > 1 ? " der Summe " + n * cap + " mAh" : "") + ")", "hängt an der Kapazität, nie an der Zellenzahl"),
+      tr("Dauer bei " + de(rate, 1).replace(",0", "") + "C", dur + " von leer auf voll", "deutlich schneller = Strom stimmt nicht"),
+      tr("Storage-Programm", S(k.sto[0]) + "–" + S(k.sto[1]) + " (" + de(k.sto[0], 2) + "–" + de(k.sto[1], 2) + " je Zelle)", "Ziel, wenn 2–3 Tage kein Flug")
+    ]);
+
+    var vrows = [
+      tr("Voll (Ladeschluss)", S(k.full), de(k.full, 2) + " V je Zelle — Zellen danach ≤ 0,02 V auseinander"),
+      tr("Lagerung", S(k.sto[0]) + "–" + S(k.sto[1]), "alle 4–8 Wochen prüfen, unter " + S(k.low) + " nachladen"),
+      tr("Nominal", S(k.nom), "Rechenwert für Energie"),
+      tr("Landen", S(k.land), k.landN),
+      tr("Untergrenze", S(k.low), k.lowN),
+      tr("Nicht mehr normal laden", "unter " + S(k.nc), k.ncN)
+    ];
+    if (k.disp) vrows.push(tr("Entsorgen", "unter " + S(k.disp), "Sondermüll, kein Ladegut — Pole abkleben, Batteriesammlung"));
+    html += "<h4>Spannungen für diesen Pack</h4>" + tbl(["Zustand", "Gesamt", "Hinweis"], vrows);
+
+    html += "<h4>Nutzen und lagern</h4>" + tbl(["Was", "Wert", "Hinweis"], [
+      tr("80 %-Regel", "≈ " + Math.round(cap * 0.8) + " mAh nutzbar", "OSD-Warnung auf verbrauchte mAh setzen — der mAh-Zähler ist verlässlicher als die Spannung"),
+      tr("Energie je Pack", de(wh, 1) + " Wh", whN),
+      tr("Innenwiderstand", k.ir, "Verdopplung gegenüber neu = Pack am Ende"),
+      tr("Vor dem Flug", "voll laden am Vorabend ist okay", "tagelang voll liegen altert messbar → zurück auf Storage"),
+      tr("Nach dem Flug", "abkühlen auf handwarm, dann laden", "nie flugwarm; Ladefenster 0–45 °C, unter 0 °C nie"),
+      tr("Nach einem Crash", "20–30 min beobachten, dann erst laden", "beschädigte Zellen reagieren verzögert")
+    ]);
+
+    if (n > 1) {
+      html += "<h4>" + n + " Packs am Paraboard</h4>" + tbl(["Was", "Wert", "Hinweis"], [
+        tr("Vorher prüfen", "alle " + s + "S " + k.name + "; Zellspannungen max. 0,1 V je Zelle auseinander", "gesamt max. " + de(0.1 * s, 1) + " V Unterschied — leere zu leeren, volle zu vollen"),
+        tr("Anstecken", "erst alle Hauptstecker, dann alle Balancer", "abziehen genau umgekehrt"),
+        tr("Einstellen", "Modus „" + modeLbl + "“ · " + tidy(iSum) + " A", "1C der Summe " + n * cap + " mAh — wie ein einzelner " + s + "S-" + n * cap + "er"),
+        tr("Erste Minuten", "Board und Stecker anfassen", "handwarm normal, heiß = sofort abbrechen")
+      ]);
+    }
+
+    var hint = "";
+    if (rate > k.rmax) hint += (chem === "liion" ? "Li-Ion: Standardladung laut Datenblatt ≈ 1C (Molicel P42A: 4,2 A) — 2C nur, wenn das Zellendatenblatt es ausweist. " : "2C kostet Lebensdauer — Ausnahme für den Flugtag, kein Standard. ");
+    if (chem === "lihv") hint += "LiHV im LiPo-Modus ist harmlos (wird nur nicht ganz voll); umgekehrt nie: LiPo-Zellen nie auf 4,35 V. ";
+    if (chem === "liion") hint += "Li-Ion gehört in den Li-Ion-Modus: gleicher Ladeschluss wie LiPo, andere Kennlinie. ";
+    hint += "Reihenfolge und Abbruchkriterien stehen im Ablauf darunter.";
+    return { out: out, plan: html, hint: hint };
+  },
   fpvlipo: function (v) {
     var s = v.s, cap = v.cap, c = v.c, u = v.u;
     if (!isFinite(s) || s <= 0) return { out: "Zellenzahl eintragen." };
@@ -853,6 +928,7 @@ $$("[data-calc]").forEach(function (el) {
   if (!fn) return;
   var fields = $$("[data-k]", el);
   var out = $("[data-out]", el);
+  var plan = $("[data-plan]", el);
   var hint = $("[data-hint]", el);
   function run() {
     var v = {};
@@ -863,6 +939,11 @@ $$("[data-calc]").forEach(function (el) {
     });
     var r = fn(v, el) || {};
     if (out) out.textContent = r.out || "";
+    if (plan) {
+      plan.innerHTML = r.plan || "";
+      plan.hidden = !r.plan;
+      if (r.plan && window.__prepTables) window.__prepTables(plan);
+    }
     if (hint) { hint.textContent = r.hint || ""; hint.hidden = !r.hint; }
   }
   fields.forEach(function (f) {
