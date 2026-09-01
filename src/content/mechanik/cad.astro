@@ -1,0 +1,106 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein CAD-Modell ist nur so gut wie sein Aufbau, und eine FEM-Rechnung nur so gut wie ihre Randbedingungen.</b> Beide sehen immer plausibel aus — auch wenn sie falsch sind. Die Regeln dagegen sind programmübergreifend dieselben.</div>
+
+<h2>Programme im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Programm</th><th>Art</th><th data-s="text">Kosten</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>FreeCAD</b></td><td>parametrisch, Historie</td><td>frei, Open Source</td><td>Seit 1.0 deutlich stabiler; Baugruppen, FEM-Workbench, CAM. Kein Cloud-Zwang, Dateien bleiben lokal</td></tr>
+<tr><td><b>Onshape</b></td><td>parametrisch, Cloud</td><td>frei für öffentliche Dokumente</td><td>Läuft im Browser, sehr gute Versionierung und Zusammenarbeit. In der Gratisversion sind alle Modelle öffentlich</td></tr>
+<tr><td><b>Autodesk Fusion</b></td><td>parametrisch + direkt</td><td>eingeschränkt frei für privat</td><td>CAD, CAM und Simulation in einem; die Gratisversion wurde mehrfach beschnitten</td></tr>
+<tr><td><b>SolidWorks / Inventor / Creo</b></td><td>parametrisch</td><td>kommerziell</td><td>Industriestandard, Studentenlizenzen verfügbar</td></tr>
+<tr><td><b>OpenSCAD</b></td><td>Skript (CSG)</td><td>frei, Open Source</td><td>Modell als Programmcode: perfekt versionier- und parametrierbar. Ungeeignet für Freiformflächen</td></tr>
+<tr><td><b>Blender</b></td><td>Polygonmodellierung</td><td>frei, Open Source</td><td>Stark für Optik und Visualisierung, nicht für maßhaltige Technik gedacht</td></tr>
+</tbody>
+</table></div>
+
+<h2>Regeln für robuste Modelle</h2>
+<div class="steps">
+  <div class="step"><h4>Skizzen vollständig bestimmen</h4>Eine Skizze mit Freiheitsgraden verschiebt sich bei jeder Änderung. Die farbliche Warnung der meisten Programme ist ernst gemeint.</div>
+  <div class="step"><h4>Auf Ursprungsebenen referenzieren, nicht auf Flächen</h4>Die topologische Namensproblematik: Eine Skizze auf einer Fläche verliert ihren Bezug, sobald diese Fläche durch eine frühere Änderung eine andere interne Kennung bekommt. Ursprungs- und Hilfsebenen bleiben stabil.</div>
+  <div class="step"><h4>Parameter zentral pflegen</h4>Wandstärke, Lochabstand, Materialstärke als benannte Variablen. Dann ändert sich das ganze Modell konsistent statt an achtzehn Stellen von Hand.</div>
+  <div class="step"><h4>Wenige große Features statt vieler kleiner</h4>Eine Skizze mit sechs Bohrungen schlägt sechs Skizzen mit je einer: schnellere Neuberechnung, weniger Bruchstellen.</div>
+  <div class="step"><h4>Fasen und Radien zuletzt</h4>Sie sind die empfindlichsten Features. Am Ende des Baums stören sie keine spätere Änderung und sind leicht zu reparieren.</div>
+  <div class="step"><h4>Baugruppen von unten nach oben</h4>Ein festes Basisteil, alles andere daran ausrichten. Verknüpfungen sparsam setzen — überbestimmte Baugruppen sind so unangenehm wie überbestimmte Skizzen.</div>
+</div>
+<div class="stop"><b>Der teuerste CAD-Fehler:</b> ein Modell, das nur der Ersteller ändern kann. Versteht nach drei Monaten niemand mehr, warum eine Bohrung dort sitzt, wird sie beim nächsten Mal neu gezeichnet — samt Fehler. Sprechende Namen für Features und Parameter, ein flacher Baum und eine kurze Notiz im Modell sind billiger als jede Nacharbeit.</div>
+
+<h2>Datenformate</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Format</th><th>Art</th><th>Wofür</th><th>Grenzen</th></tr></thead>
+<tbody>
+<tr><td><b>STEP (.stp, .step)</b></td><td>exakte Geometrie (BREP)</td><td><b>Der Austauschstandard</b> — an Fertiger, an andere CAD-Programme, in die Simulation</td><td>Ohne Historie und Parametrik; AP242 kann zusätzlich Toleranzen (PMI) tragen</td></tr>
+<tr><td><b>IGES (.igs)</b></td><td>exakte Geometrie</td><td>Ältere Systeme, Flächenmodelle</td><td>Veraltet, oft mit Lücken in den Flächen — wo möglich STEP nehmen</td></tr>
+<tr><td><b>STL</b></td><td>Dreiecksnetz</td><td>3D-Druck, schnelle Visualisierung</td><td>Nur Facetten: keine exakten Radien, keine Einheiten, keine Farben</td></tr>
+<tr><td><b>3MF</b></td><td>Netz + Metadaten</td><td>Moderner STL-Ersatz für den Druck</td><td>Trägt Einheiten, Farben und Druckeinstellungen mit</td></tr>
+<tr><td><b>DXF</b></td><td>2D-Kontur</td><td>Laserschneiden, Wasserstrahl, Blechzuschnitt</td><td>Splines vorher in Polylinien wandeln; Einheiten und Layer prüfen</td></tr>
+<tr><td><b>PDF (2D)</b></td><td>Zeichnung</td><td>Fertigungsunterlage mit Toleranzen</td><td>Bleibt neben dem STEP nötig — das 3D-Modell allein ist kein Vertrag</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>An den Fertiger gehören immer beide Dateien:</b> STEP für die Geometrie, PDF für Toleranzen, Oberflächen, Werkstoff und Kantenangaben (siehe <a href="#methodik">Methodik &amp; Zeichnung</a>). Ein STEP allein ist maßlich exakt, sagt aber nicht, welche Maße wichtig sind — dann wird alles mit Allgemeintoleranz gefertigt oder nachgefragt.</div>
+<div class="tip"><b>Versionierung:</b> CAD-Dateien sind Binärdateien und lassen sich in Git nicht zusammenführen. Praktikabel sind Onshapes eingebaute Versionierung, ein PDM-System oder bei kleinen Projekten ein sauberes Namensschema mit Datum, Index und Änderungsnotiz. OpenSCAD ist die Ausnahme — als Textdatei funktioniert es in Git perfekt.</div>
+
+<h2>FEM: was es leistet und was nicht</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Gut geeignet für</h4>
+    <ul>
+      <li>Komplexe Geometrien ohne geschlossene Formel</li>
+      <li>Spannungsverteilung finden: <em>wo</em> ist es kritisch?</li>
+      <li>Varianten vergleichen (Rippe hier oder dort?)</li>
+      <li>Verformung und Steifigkeit ermitteln</li>
+      <li>Eigenfrequenzen und Schwingungsformen (Modalanalyse)</li>
+      <li>Topologieoptimierung: Material weglassen, wo keine Last fließt</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Heikel oder ungeeignet</h4>
+    <ul>
+      <li>Absolute Spannungswerte an Kerben — stark netzabhängig</li>
+      <li>Kontakt, Reibung, Schraubenvorspannung — aufwendig und fehleranfällig</li>
+      <li>Plastisches Verhalten und Bruch ohne passendes Werkstoffmodell</li>
+      <li>Ermüdung — braucht ein separates Nachweisverfahren, siehe <a href="#festigkeit">Festigkeit</a></li>
+      <li>Alles, wo die Randbedingungen unbekannt sind</li>
+      <li>Als Ersatz für die Überschlagsrechnung</li>
+    </ul>
+  </div>
+</div>
+
+<h2>FEM-Vorgehen</h2>
+<div class="steps">
+  <div class="step"><h4>Zuerst von Hand überschlagen</h4>Ein Balkenmodell mit σ = M/W liefert die Größenordnung (siehe <a href="#balken">Biegung &amp; Torsion</a>). Weicht FEM um mehr als Faktor zwei ab, stimmt meist das FEM-Modell nicht.</div>
+  <div class="step"><h4>Geometrie vereinfachen</h4>Kleine Fasen, Gewinde und Schriftzüge raus. Sie erzeugen winzige Elemente, vervielfachen die Rechenzeit und verbessern nichts.</div>
+  <div class="step"><h4>Randbedingungen realistisch setzen</h4>Der häufigste Fehler. Eine Fläche vollständig einzuspannen ist fast nie realistisch — reale Verschraubungen sind nachgiebig, zu starre Einspannung erzeugt künstliche Spannungsspitzen am Rand.</div>
+  <div class="step"><h4>Netzkonvergenz prüfen</h4>Einmal mit grobem, einmal mit halb so großem Netz rechnen. Ändert sich das Ergebnis um weniger als 5 %, ist es konvergiert; ändert es sich weiter, ist der Wert nicht belastbar.</div>
+  <div class="step"><h4>Ergebnisse hinterfragen</h4>Fließt die Last plausibel? Verformt sich das Teil in eine sinnvolle Richtung? Passt die Größenordnung zum Überschlag? Ist die Spitze real oder eine Singularität?</div>
+</div>
+<div class="stop"><b>Singularitäten sind die Falle jeder FEM-Rechnung.</b> An einer scharfen Innenecke geht die Spannung mathematisch gegen unendlich — je feiner das Netz, desto höher der Wert. Der Rechner zeigt einen roten Fleck mit 900 N/mm², und das Bauteil hält trotzdem. Erkennungsmerkmal: der Wert wächst mit jeder Netzverfeinerung weiter, statt zu konvergieren. Abhilfe: einen realen Radius modellieren, dann konvergiert es.</div>
+
+<h2>Elemente und freie Werkzeuge</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Element</th><th>Wofür</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Tetraeder linear (TET4)</b></td><td>—</td><td>Zu steif, unterschätzt Verformungen deutlich. Für Spannungsanalysen ungeeignet</td></tr>
+<tr><td><b>Tetraeder quadratisch (TET10)</b></td><td>Allgemeine Volumenkörper</td><td><b>Der Standard.</b> Vernetzt beliebige Geometrie automatisch, ausreichend genau</td></tr>
+<tr><td><b>Hexaeder (HEX8/HEX20)</b></td><td>Regelmäßige Geometrie</td><td>Genauer und schneller bei gleicher Elementzahl, aber schwer automatisch zu vernetzen</td></tr>
+<tr><td><b>Schalenelemente</b></td><td>Bleche, dünnwandige Teile</td><td>Deutlich effizienter als Volumen, solange die Wand dünn gegenüber der Fläche ist</td></tr>
+<tr><td><b>Balkenelemente</b></td><td>Rahmen, Fachwerke, Profile</td><td>Sehr schnell, ideal für Gestellrechnungen mit vielen Profilen</td></tr>
+</tbody>
+</table></div>
+<ul>
+  <li><b>FreeCAD FEM</b> — nutzt CalculiX als Löser und Gmsh als Vernetzer; Statik, Modalanalyse, Thermik, direkt mit dem CAD-Modell verbunden.</li>
+  <li><b>CalculiX</b> — der Löser dahinter, mit Abaqus-kompatibler Eingabedatei; auch eigenständig nutzbar, steile Lernkurve.</li>
+  <li><b>Code_Aster / Salome-Meca</b> — von EDF entwickelt, industriell validiert, sehr umfangreich und entsprechend anspruchsvoll.</li>
+</ul>
+<div class="tip"><b>Der beste Nutzen von FEM im Prototypenbau ist der Vergleich, nicht der Absolutwert.</b> „Variante B verformt sich 40 % weniger als Variante A“ ist robust, auch wenn beide Absolutwerte um 20 % danebenliegen — die Fehler wirken in beiden Modellen gleich. „Die Spannung beträgt 187 N/mm²“ darf man erst nach Netzkonvergenz und geprüften Randbedingungen sagen.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>ISO 10303 (STEP), insbesondere AP242 für Geometrie mit Produkt- und Fertigungsinformationen.</li>
+    <li><a href="https://wiki.freecad.org/Feature_editing">FreeCAD-Wiki — Topological Naming Problem</a> und <a href="https://wiki.freecad.org/FEM_Workbench">FEM Workbench</a>; <a href="http://www.calculix.de/">CalculiX</a>.</li>
+    <li>Klaus-Jürgen Bathe, <i>Finite Element Procedures</i> — Standardwerk zur Methode; Bernd Klein, <i>FEM</i>, Springer Vieweg — praxisnah, mit Fehlerquellen.</li>
+    <li>NAFEMS-Leitfäden — Fachgesellschaft für Berechnungsqualität; Quelle der Konvergenz- und Validierungsempfehlungen.</li>
+    <li><a href="https://www.protolabs.de/ressourcen/design-tipps/">Protolabs Design-Tipps</a> — welche Dateien Fertiger tatsächlich brauchen.</li>
+  </ul>
+</div>

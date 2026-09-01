@@ -1,90 +1,55 @@
 ---
 import "./_style.css";
 ---
-<h2>Max. Drehzahl je Aufsatztyp</h2>
-<p>Manche Aufsätze haben harte Obergrenzen, unabhängig vom Material. Diese zuerst beachten.</p>
-<div class="grid">
-<div class="card">
-<div class="ct"><span class="b acc">Bürsten</span></div>
-<div class="cd">Draht-, Messing-, Nylonbürsten</div>
-<ul>
-<li><b>Max. 15.000 RPM</b></li>
-<li>Höher → Drähte lösen sich, Verletzungsgefahr</li>
-<li>Wenig Druck, sonst brechen Borsten</li>
-</ul>
+<div class="kurz"><b>Diese Grenzen stehen über jeder Materialangabe.</b> Sie kommen nicht aus der Bearbeitungsqualität, sondern aus der zulässigen Umfangsgeschwindigkeit des Aufsatzes — wer sie überschreitet, zerlegt das Zubehör.</div>
+
+<h2>Obergrenzen je Aufsatztyp</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Aufsatz</th><th data-s="num">Drehzahl</th><th>Wofür</th><th>Warum diese Grenze</th></tr></thead>
+<tbody>
+<tr><td><b>Bürsten</b> (Draht, Messing, Nylon)</td><td><span class="sp s-low">max. 15k</span></td><td>Rost, Zunder, Reinigen</td><td>Oberhalb lösen sich einzelne Drähte aus dem Besatz und fliegen ab</td></tr>
+<tr><td><b>Polierfilz, Stoffscheibe</b></td><td><span class="sp s-low">max. 15k</span></td><td>Metall, Lack, Kunststoff</td><td>Paste wird weggeschleudert statt aufgetragen; Wärme greift Lack an</td></tr>
+<tr><td><b>Trennscheibe Kunststoff</b> (EZ476)</td><td><span class="sp s-mid">10–15k</span></td><td>Acryl, PVC, ABS</td><td>Höher schmilzt der Schnitt hinter der Scheibe wieder zu</td></tr>
+<tr><td><b>Schleifband auf Kunststoff</b></td><td><span class="sp s-mid">10–15k</span></td><td>Entgraten, Formen</td><td>Reibungswärme, das Korn setzt sich mit Schmelze zu</td></tr>
+<tr><td><b>Gravierspitzen</b> (Diamant, Hartmetall)</td><td><span class="sp s-mid">10–20k</span></td><td>Glas, Metall, Stein</td><td>Zu schnell bricht die Kante der Linie aus, besonders an Glas</td></tr>
+<tr><td><b>Diamant- und SiC-Schleifkörper</b></td><td><span class="sp s-mid">15–25k</span></td><td>Glas, Keramik, Stein</td><td>Ohne Kühlung verbrennt die Bindung, der Belag löst sich</td></tr>
+<tr><td><b>HSS-Fräser</b></td><td><span class="sp s-mid">15–25k</span></td><td>Holz, Weichmetall</td><td>Zu langsam rattert es, zu schnell verliert die Schneide ihre Härte</td></tr>
+<tr><td><b>Schleiftrommel, Fächerscheibe</b></td><td><span class="sp s-high">20–30k</span></td><td>Holz, Metall</td><td>Auf Holz und Metall unkritisch, siehe Kunststoffzeile oben</td></tr>
+<tr><td><b>Korund-Schleifsteine</b></td><td><span class="sp s-high">20–30k</span></td><td>Stahl, Werkzeug schärfen</td><td>Große Steine niedriger fahren — die Umfangsgeschwindigkeit steigt mit dem Durchmesser</td></tr>
+<tr><td><b>Hartmetallfräser</b> (9901, 9931)</td><td><span class="sp s-high">25–30k</span></td><td>Stahl, Hartholz, GFK</td><td>Herstellerangabe: nicht über 30 000 min⁻¹ betreiben</td></tr>
+<tr><td><b>Trennscheibe Metall</b> (426, EZ456, EZ409)</td><td><span class="sp s-high">25–30k</span></td><td>Stahl, Edelstahl</td><td>Braucht Schnittgeschwindigkeit; niedrig schneidet sie nicht, sondern reibt</td></tr>
+<tr><td><b>Diamant-Trennscheibe</b> (EZ545)</td><td><span class="sp s-high">25–30k</span></td><td>Fliese, Stein, Porzellan</td><td>Hohe Drehzahl, aber nur mit Kühlung und ohne Seitendruck</td></tr>
+<tr><td><b>Bohrer</b></td><td><span class="sp s-high">25–30k</span></td><td>Holz, Kunststoff, Weichmetall</td><td>Kleine Durchmesser schneiden erst bei hoher Drehzahl — Vorschub gering halten</td></tr>
+</tbody>
+</table></div>
+
+<div class="stop"><b>Die 15-000-Regel für Bürsten und Polierer ist keine Empfehlung.</b> Ein gelöster Stahldraht bei 30 000 min⁻¹ durchschlägt Kleidung. Dremel gibt diese Grenze für alle Bürsten- und Polieraufsätze verbindlich an — unabhängig davon, was das Material erlauben würde.</div>
+
+<div class="gb">
+  <div class="gb-col good"><h4>So wählt man</h4>
+    <ul>
+      <li>Erst die Aufsatzgrenze nachsehen, dann die <a href="#material">Materialtabelle</a></li>
+      <li>Bei zwei Angaben immer die kleinere Zahl nehmen</li>
+      <li>Große Schleifkörper langsamer als kleine — gleiche Umfangsgeschwindigkeit</li>
+      <li>Kühlung mitplanen, wo der Aufsatz sie braucht</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Typische Fehlgriffe</h4>
+    <ul>
+      <li>Kunststoff mit der Metall-Trennscheibe bei voller Drehzahl trennen</li>
+      <li>Drahtbürste „nur kurz“ auf voller Stufe laufen lassen</li>
+      <li>Diamantbit trocken auf Glas — der Belag ist danach blank</li>
+      <li>Korundstein ohne Abrichten einsetzen und die Vibration hinnehmen</li>
+      <li>Polierpaste auf hoher Drehzahl auftragen und sich über die Sauerei wundern</li>
+    </ul>
+  </div>
 </div>
-<div class="card">
-<div class="ct"><span class="b acc">Polierfilz / -scheiben</span></div>
-<div class="cd">Mit Polierpaste</div>
-<ul>
-<li><b>10.000–15.000 RPM</b></li>
-<li>Niedrig hält Hitze und Materialabtrag im Griff</li>
-</ul>
-</div>
-<div class="card">
-<div class="ct"><span class="b acc">Trennscheiben (EZ Lock)</span></div>
-<div class="cd">Metall, Kunststoff, Glasfaser</div>
-<ul>
-<li><b>Metall: 25.000–30.000 RPM</b></li>
-<li>Kunststoff: 10.000–15.000 (sonst schmilzt es)</li>
-<li>Nur seitlich führen, nicht verkanten</li>
-</ul>
-</div>
-<div class="card">
-<div class="ct"><span class="b acc">Schleifsteine (Korund)</span></div>
-<div class="cd">Stahl, Werkzeug schärfen</div>
-<ul>
-<li><b>20.000–30.000 RPM</b></li>
-<li>Vor Erstgebrauch abrichten</li>
-</ul>
-</div>
-<div class="card">
-<div class="ct"><span class="b acc">Diamant- / SiC-Bits</span></div>
-<div class="cd">Glas, Keramik, Stein, Hartmetall</div>
-<ul>
-<li><b>15.000–25.000 RPM</b></li>
-<li>Kühlen (Wasser), nicht trockenlaufen lassen</li>
-</ul>
-</div>
-<div class="card">
-<div class="ct"><span class="b acc">HSS-Fräser</span></div>
-<div class="cd">Holz, Weichmetall, Kunststoff</div>
-<ul>
-<li><b>Holz: 20.000–30.000</b> · Weichmetall: 15.000–20.000</li>
-<li>Kunststoff niedrig, sonst zugeschmolzen</li>
-<li>Bei Rattern → zu langsam, höher drehen</li>
-</ul>
-</div>
-<div class="card">
-<div class="ct"><span class="b acc">Hartmetall-Fräser (Tungsten)</span></div>
-<div class="cd">Stahl, Hartholz, GFK, Fliese</div>
-<ul>
-<li><b>Stahl: volle Drehzahl (28–30k)</b></li>
-<li>Standfester als HSS bei harten Stoffen</li>
-</ul>
-</div>
-<div class="card">
-<div class="ct"><span class="b acc">Schleifbänder / -trommeln</span></div>
-<div class="cd">Holz, Kunststoff, Metall</div>
-<ul>
-<li><b>Holz/Metall: 20.000–30.000</b></li>
-<li>Kunststoff: 10.000–15.000</li>
-</ul>
-</div>
-<div class="card">
-<div class="ct"><span class="b acc">Bohrer</span></div>
-<div class="cd">Holz, Kunststoff, PCB, Weichmetall</div>
-<ul>
-<li><b>Hohe Drehzahl, geringer Vorschub</b></li>
-<li>Kleine Bohrer → schneller; große → etwas langsamer</li>
-</ul>
-</div>
-<div class="card">
-<div class="ct"><span class="b acc">Gravierspitzen (Diamant/HM)</span></div>
-<div class="cd">Glas, Metall, Stein</div>
-<ul>
-<li><b>10.000–20.000 RPM</b></li>
-<li>Leichte Hand, mehrere Durchgänge</li>
-</ul>
-</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li><a href="https://www.dremel.com/us/en/service-and-support/speed-safety-accessories">Dremel — Speed &amp; Safety, Accessories</a>: 15 000 min⁻¹ als Obergrenze für Bürsten und Polieraufsätze, 30 000 min⁻¹ für Hartmetallfräser.</li>
+    <li>Angaben auf den Zubehörverpackungen; bei Abweichung gilt die niedrigere Zahl.</li>
+    <li>DGUV Information 209-002 — Schleifen: zulässige Umfangsgeschwindigkeit rotierender Schleifwerkzeuge.</li>
+  </ul>
 </div>

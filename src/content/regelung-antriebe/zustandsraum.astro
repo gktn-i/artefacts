@@ -1,0 +1,116 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Zustandsraum beschreibt ein System durch seine inneren Größen statt nur durch Ein- und Ausgang.</b> Der Gewinn: Mehrgrößensysteme, gezielte Polplatzierung und Beobachter für Größen, die man nicht messen kann. Der Preis: mehr Mathematik und ein Modell, das stimmen muss.</div>
+
+<h2>Die Zustandsdarstellung</h2>
+<div class="fbox">
+  <span class="f">ẋ = A·x + B·u&nbsp;&nbsp;&nbsp;&nbsp;y = C·x + D·u</span>
+  <span class="l">x Zustandsvektor, u Eingang, y Ausgang. A beschreibt die Eigendynamik, B den Einfluss der Stellgröße, C die Messung.</span>
+</div>
+<div class="grid">
+  <div class="card"><div class="ct">Was ein Zustand ist</div><div class="cd">Die kleinste Menge an Größen, aus denen sich mit dem künftigen Eingang die gesamte Zukunft berechnen lässt. Anschaulich: alles, was Energie speichert — Position, Geschwindigkeit, Spulenstrom, Kondensatorspannung, Temperatur.</div></div>
+  <div class="card"><div class="ct">Ordnung</div><div class="cd">So viele Zustände wie die Ordnung der Differentialgleichung. Feder-Masse-System: zwei (Position, Geschwindigkeit). RLC-Kreis: ebenfalls zwei.</div></div>
+  <div class="card"><div class="ct">Eigenwerte von A</div><div class="cd">Sind genau die Pole der Übertragungsfunktion. Alle Realteile negativ heißt stabil — dieselbe Aussage wie im Bildbereich, andere Rechnung.</div></div>
+  <div class="card"><div class="ct">Mehrgrößensysteme</div><div class="cd">Der eigentliche Vorteil: Bei mehreren gekoppelten Ein- und Ausgängen wird die Übertragungsfunktionsdarstellung unhandlich, die Matrixform bleibt kompakt.</div></div>
+</div>
+
+<h2>Zustandsrückführung und Polvorgabe</h2>
+<div class="fbox">
+  <span class="f">u = −K·x + V·w</span>
+  <span class="l">Statt nur den Ausgang zurückzuführen, wird der ganze Zustandsvektor verwendet. V sorgt dafür, dass der Sollwert stationär erreicht wird.</span>
+</div>
+<div class="steps">
+  <div class="step"><h4>Steuerbarkeit prüfen</h4>Nur ein steuerbares System erlaubt beliebige Pollagen. Rechnerisch über den Rang der Steuerbarkeitsmatrix.</div>
+  <div class="step"><h4>Wunschpole festlegen</h4>Aus Überschwingen und Ausregelzeit — dieselben Zusammenhänge wie beim PT2-Glied (<a href="#glieder">Glieder</a>).</div>
+  <div class="step"><h4>K berechnen</h4>Nach Ackermann oder mit Werkzeug (<code>place()</code> in python-control). Von Hand nur bis zur dritten Ordnung sinnvoll.</div>
+  <div class="step"><h4>Realistisch bleiben</h4>Sehr schnelle Wunschpole ergeben sehr große Stellgrößen. Zehnmal schneller als die Strecke heißt: Der Regler steht ständig in der Begrenzung.</div>
+  <div class="step"><h4>Integralanteil ergänzen</h4>Die reine Zustandsrückführung hat bei Modellfehlern eine bleibende Abweichung. Ein zusätzlicher Integrator über den Ausgangsfehler behebt das (erweiterter Zustandsvektor).</div>
+</div>
+<p class="note"><b>LQR als Alternative:</b> Statt Pole vorzugeben, gewichtet ein Gütefunktional Regelabweichung gegen Stellaufwand; das Ergebnis ist eine optimale Rückführmatrix mit guten Robustheitseigenschaften. Praktisch ist es oft leichter, zwei Gewichtungsmatrizen zu justieren als Pollagen zu erraten.</p>
+
+<h2>Beobachter</h2>
+<p>Meist lassen sich nicht alle Zustände messen — Geschwindigkeit ohne Tachogenerator, Lastmoment, Temperatur im Bauteilinneren. Ein Beobachter rechnet sie aus Modell und messbaren Größen.</p>
+<svg class="dg l" viewBox="0 0 620 170" role="img" aria-label="Luenberger-Beobachter: Modell parallel zur Strecke mit Korrektur über den Ausgangsfehler">
+  <rect class="box" x="60" y="24" width="90" height="34" rx="4" />
+  <text class="lbl" x="105" y="46" text-anchor="middle">Strecke</text>
+  <path class="w" d="M20,41 H56" /><path class="f" d="M58,41 l-8,-4 v8 z" />
+  <path class="w" d="M150,41 H240" /><path class="f" d="M244,41 l-8,-4 v8 z" />
+  <circle class="accs" cx="256" cy="41" r="12" /><text class="lbl" x="256" y="45" text-anchor="middle">−</text>
+  <rect class="box" x="60" y="100" width="90" height="34" rx="4" />
+  <text class="lbl" x="105" y="122" text-anchor="middle">Modell</text>
+  <path class="w" d="M38,41 V117 H56" /><path class="f" d="M58,117 l-8,-4 v8 z" />
+  <path class="w" d="M150,117 H240 V54" /><path class="f" d="M240,54 l-4,8 h8 z" />
+  <path class="w" d="M268,41 H320" /><path class="f" d="M324,41 l-8,-4 v8 z" />
+  <rect class="box" x="326" y="24" width="50" height="34" rx="4" />
+  <text class="lbl" x="351" y="46" text-anchor="middle">L</text>
+  <path class="acc" d="M376,41 H430 V117 H154" /><path class="accf" d="M152,117 l8,-4 v8 z" />
+  <text class="lbla" x="292" y="34" text-anchor="middle">Fehler</text>
+  <text class="lbl" x="470" y="46">Korrektur des Modells</text>
+  <text class="lbl" x="200" y="34">y</text>
+  <text class="lbl" x="200" y="110">ŷ</text>
+  <text class="lbl" x="16" y="45" text-anchor="end">u</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th data-s="text">Beobachtertyp</th><th>Prinzip</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Luenberger</b></td><td>Modell parallel zur Strecke, Korrektur proportional zum Ausgangsfehler</td><td>Deterministische Systeme, Geschwindigkeit aus Position</td></tr>
+<tr><td><b>Reduzierter Beobachter</b></td><td>Schätzt nur die nicht gemessenen Zustände</td><td>Spart Rechenzeit</td></tr>
+<tr><td><b>Störgrößenbeobachter</b></td><td>Erweitert den Zustand um die unbekannte Störung</td><td>Lastmomentschätzung bei Antrieben — sehr wirkungsvoll</td></tr>
+<tr><td><b>Kalman-Filter</b></td><td>Optimaler Beobachter unter der Annahme normalverteilten Rauschens</td><td>Sensorfusion, Navigation, Lageschätzung</td></tr>
+<tr><td><b>Erweitertes Kalman-Filter (EKF)</b></td><td>Linearisiert das Modell in jedem Schritt</td><td>Nichtlineare Systeme; Standard in der Robotik (<a href="automatisierung-robotik.html#robotik">Robotik</a>)</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Das Trennungsprinzip:</b> Regler und Beobachter dürfen unabhängig entworfen werden — die Pole des Gesamtsystems sind die Vereinigung beider Polsätze. Praktische Regel: Der Beobachter sollte zwei- bis fünfmal schneller sein als der Regler. Langsamer bremst er den Regler aus, deutlich schneller reicht er Messrauschen durch.</div>
+
+<h2>Kalman-Filter und Sensorfusion</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Schritt bzw. Größe</th><th>Was passiert</th></tr></thead>
+<tbody>
+<tr><td><b>Vorhersage</b></td><td>Aus Modell und letzter Stellgröße wird der neue Zustand geschätzt — samt gewachsener Unsicherheit</td></tr>
+<tr><td><b>Korrektur</b></td><td>Trifft eine Messung ein, wird zwischen Vorhersage und Messung gewichtet: Je verlässlicher die Messung, desto stärker zählt sie</td></tr>
+<tr><td><b>Q (Modellrauschen)</b></td><td>Wie sehr man dem Modell misstraut. Größeres Q: Der Filter folgt der Messung schneller</td></tr>
+<tr><td><b>R (Messrauschen)</b></td><td>Wie sehr man der Messung misstraut. Größeres R: Der Filter glättet stärker</td></tr>
+</tbody>
+</table></div>
+<div class="gb">
+  <div class="gb-col good"><h4>Der klassische Anwendungsfall</h4><ul>
+    <li>Lageschätzung aus Beschleunigungs- und Drehratensensor</li>
+    <li>Drehratensensor: kurzfristig genau, driftet langfristig</li>
+    <li>Beschleunigungssensor: langfristig richtig, kurzfristig verrauscht und bewegungsempfindlich</li>
+    <li>Der Filter kombiniert genau die jeweiligen Stärken</li>
+  </ul></div>
+  <div class="gb-col"><h4>Wann es einfacher geht</h4><ul>
+    <li><b>Komplementärfilter:</b> Hochpass auf die integrierte Drehrate, Tiefpass auf die Beschleunigung, addieren</li>
+    <li>Drei Zeilen Code, kaum Rechenaufwand, für viele Anwendungen gleichwertig</li>
+    <li>Kalman lohnt bei mehreren Sensoren mit unterschiedlichen Raten und bekannten Unsicherheiten</li>
+  </ul></div>
+</div>
+
+<h2>Wann Zustandsraum wirklich lohnt</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Ja</h4><ul>
+    <li>Mehrere gekoppelte Ein- und Ausgänge</li>
+    <li>Instabile Strecken (Balancieren, Magnetlager)</li>
+    <li>Wichtige Größen sind nicht messbar</li>
+    <li>Sensorfusion aus mehreren Quellen</li>
+    <li>Optimierung nach einem Gütekriterium</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Eher nicht</h4><ul>
+    <li>Ein Eingang, ein Ausgang, gutmütige Strecke — <a href="#pid">PID</a> reicht</li>
+    <li>Kein verlässliches Modell verfügbar</li>
+    <li>Starke Nichtlinearitäten, die das Modell nicht abbildet</li>
+    <li>Rechenleistung sehr knapp</li>
+  </ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Lunze, <i>Regelungstechnik 2</i> — Zustandsraum, Beobachter, Mehrgrößensysteme.</li>
+    <li>Åström &amp; Murray, <a href="https://fbswiki.org/">Feedback Systems</a>, Kapitel 6 bis 8.</li>
+    <li>Roger Labbe, <a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python">Kalman and Bayesian Filters in Python</a> — kostenloses, interaktives Buch; der beste Einstieg.</li>
+    <li>Dan Simon, <i>Optimal State Estimation</i>, Wiley — die Theorie dahinter.</li>
+    <li>Werkzeuge: <a href="https://python-control.readthedocs.io/">python-control</a> (<code>place</code>, <code>lqr</code>, <code>lqe</code>) und <a href="https://www.scilab.org/">Scilab</a>.</li>
+  </ul>
+</div>

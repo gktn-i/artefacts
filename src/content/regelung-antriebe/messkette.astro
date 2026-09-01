@@ -1,0 +1,143 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Zwischen dem physikalischen Effekt und der Zahl im Rechner liegen mehrere Umwandlungen — und jede kostet Genauigkeit.</b> Zwei Regeln tragen den ganzen Abschnitt: <b>Verstärken, bevor gestört wird</b> — und: Auflösung, Richtigkeit und Wiederholbarkeit sind drei verschiedene Dinge.</div>
+
+<h2>Signalkonditionierung</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Stufe</th><th>Aufgabe</th><th>Typische Umsetzung</th></tr></thead>
+<tbody>
+<tr><td><b>Anregung</b></td><td>Der Sensor braucht eine Speisung: Strom durch einen Widerstandssensor, Spannung an einer Brücke</td><td>Konstantstromquelle, geregelte Referenz; möglichst gepulst gegen Selbsterwärmung</td></tr>
+<tr><td><b>Schutz</b></td><td>Überspannung, ESD, Verpolung abfangen</td><td>Reihenwiderstand plus Klemmdioden, TVS am Steckverbinder</td></tr>
+<tr><td><b>Verstärkung</b></td><td>Signal auf den Eingangsbereich des Wandlers bringen</td><td>Instrumentenverstärker bei Differenzsignalen, OPV bei Einzelsignalen</td></tr>
+<tr><td><b>Filterung</b></td><td>Alles oberhalb der Nutzbandbreite entfernen</td><td>RC oder aktives Filter — <b>vor</b> dem ADC, analog</td></tr>
+<tr><td><b>Pegelanpassung</b></td><td>Nullpunkt verschieben, damit auch negative Werte messbar sind</td><td>Bezug auf halbe Versorgung, oder Wandler mit Differenzeingang</td></tr>
+<tr><td><b>Wandlung</b></td><td>Analog zu digital</td><td>SAR für schnelle Messungen, Delta-Sigma für hochauflösende langsame</td></tr>
+<tr><td><b>Linearisierung</b></td><td>Kennlinie in physikalische Einheiten umrechnen</td><td>Polynom oder Tabelle mit Interpolation — in Software</td></tr>
+</tbody>
+</table></div>
+<p class="note">Verstärker-, Filter- und Wandlerauswahl im Detail: <a href="elektrotechnik.html#wandler">Elektrotechnik &amp; Analog → Wandler</a>.</p>
+
+<h2>Brücke und Anschlussart</h2>
+<div class="fbox">
+  <span class="f">U_diff = U_speisung · (R2/(R1+R2) − R4/(R3+R4))</span>
+  <span class="l">Vollbrücke mit vier aktiven Elementen: U_diff = U_speisung · ΔR/R — viermal empfindlicher als die Viertelbrücke und temperaturkompensiert.</span>
+</div>
+<div class="grid">
+  <div class="card"><div class="ct">Viertel-, Halb-, Vollbrücke</div><div class="cd">Ein, zwei oder vier aktive Elemente. Mit jeder Stufe steigen Empfindlichkeit und Temperaturkompensation; Wägezellen sind praktisch immer Vollbrücken.</div></div>
+  <div class="card"><div class="ct">Ratiometrisch messen</div><div class="cd">Brücke <b>und</b> ADC-Referenz aus derselben Spannung speisen. Dann kürzt sich die Speisespannung heraus — der wichtigste Trick bei Brückensensoren.</div></div>
+  <div class="card"><div class="ct">Fertige Bausteine nehmen</div><div class="cd">HX711 (24 Bit für Wägezellen), ADS1220/ADS1256 (Delta-Sigma mit Verstärker) enthalten Anregung, Verstärkung und Wandlung. Fast immer besser als ein selbstgebauter Verstärkerzug.</div></div>
+  <div class="card"><div class="ct">Kelvin auch beim Shunt</div><div class="cd">Die Spannungsabgriffe gehören <b>innerhalb</b> der Stromanschlüsse. Sonst misst man den Übergangswiderstand der Lötstellen mit — bei Milliohm-Shunts liegt der in derselben Größenordnung wie der Shunt selbst.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Anschluss</th><th>Prinzip</th><th>Fehler durch Leitungswiderstand</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>Zweileiter</b></td><td>Strom und Messung über dieselben Leitungen</td><td>Voll wirksam: 1 Ω Leitung sind beim Pt100 rund 2,6 K</td><td>Kurze Strecken, unkritische Messungen</td></tr>
+<tr><td><b>Dreileiter</b></td><td>Eine zusätzliche Leitung erlaubt Kompensation, wenn alle drei gleich sind</td><td>Weitgehend kompensiert</td><td>Der Industriestandard beim Pt100</td></tr>
+<tr><td><b>Vierleiter (Kelvin)</b></td><td>Getrennte Strom- und Messleitungen; über die Messleitungen fließt kein Strom</td><td>Vollständig eliminiert</td><td>Präzisionsmessung, Shunts, Labormessgeräte</td></tr>
+</tbody>
+</table></div>
+
+<h2>Störungen fernhalten und 4–20 mA</h2>
+<div class="steps">
+  <div class="step"><h4>Differentiell übertragen</h4>Zwei Leitungen, die Störung wirkt auf beide gleich, der Instrumentenverstärker zieht sie ab. Die wirksamste Einzelmaßnahme bei kleinen Signalen.</div>
+  <div class="step"><h4>Verdrillen, schirmen, trennen</h4>Verdrillen gegen magnetische, Schirm gegen elektrische Einkopplung — bei niederfrequenten Analogsignalen den Schirm <b>einseitig</b> auflegen. Analog- und Leistungsleitungen nie parallel führen, Kreuzungen im rechten Winkel. Nur ein Massebezugspunkt, sonst Brummschleife; getrennte Systeme galvanisch trennen. Vertiefung: <a href="elektrotechnik.html#emv">Elektrotechnik → EMV</a>.</div>
+  <div class="step"><h4>50 Hz gezielt eliminieren</h4>Über ein ganzzahliges Vielfaches der Netzperiode mitteln (20 ms). Genau das steckt hinter der NPLC-Einstellung von Tischmultimetern.</div>
+</div>
+<ul>
+  <li><b>Warum der Standard hält:</b> Der Leitungswiderstand ist egal, ein Drahtbruch ist erkennbar (0 mA sind ein Fehler, nicht der Bereichsanfang), und die Übertragung ist über hunderte Meter störfest.</li>
+  <li><b>Zweileitertechnik:</b> Der Sensor speist sich aus dem Messstrom selbst.</li>
+  <li><b>Empfängerseite:</b> Bürdewiderstand, meist 250 Ω → 1–5 V. HART überlagert dem Strom ein digitales Signal für Konfiguration und Diagnose.</li>
+  <li><b>Im Gerät</b>, über kurze Strecken, ist ein digitaler Bus einfacher und billiger.</li>
+</div>
+
+<h2>Auflösung, Richtigkeit, Wiederholbarkeit</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Auflösung</b></td><td>Kleinste unterscheidbare Änderung</td><td>16-Bit-ADC an 3,3 V: 50 µV</td></tr>
+<tr><td><b>Richtigkeit (Genauigkeit)</b></td><td>Abweichung vom wahren Wert</td><td>Thermoelement Typ K, Klasse 1: ±1,5 K</td></tr>
+<tr><td><b>Wiederholbarkeit (Präzision)</b></td><td>Streuung bei mehrfacher Messung derselben Größe</td><td>±0,05 mm bei einem Positionsantrieb</td></tr>
+<tr><td><b>Hysterese</b></td><td>Unterschied zwischen steigender und fallender Messung</td><td>Bei mechanischen Sensoren und Ferromagnetika typisch</td></tr>
+<tr><td><b>Drift</b></td><td>Änderung über Zeit oder Temperatur</td><td>±50 ppm/K bei einer einfachen Referenzspannung</td></tr>
+<tr><td><b>Ansprechzeit</b></td><td>Bis 63 % (τ) bzw. 90 % des Endwerts erreicht sind</td><td>Temperaturfühler im Schutzrohr: mehrere Sekunden</td></tr>
+</tbody>
+</table></div>
+<svg class="dg l" viewBox="0 0 620 170" role="img" aria-label="Vier Zielscheiben: richtig und präzise, nur präzise, nur richtig, weder noch">
+  <g>
+    <circle class="w" cx="80" cy="80" r="46" style="fill:none" /><circle class="w" cx="80" cy="80" r="28" style="fill:none" /><circle class="w" cx="80" cy="80" r="10" style="fill:none" />
+    <circle class="accf" cx="76" cy="78" r="4" /><circle class="accf" cx="83" cy="82" r="4" /><circle class="accf" cx="80" cy="74" r="4" />
+    <text class="lbl" x="80" y="146" text-anchor="middle">richtig + präzise</text>
+  </g>
+  <g>
+    <circle class="w" cx="230" cy="80" r="46" style="fill:none" /><circle class="w" cx="230" cy="80" r="28" style="fill:none" /><circle class="w" cx="230" cy="80" r="10" style="fill:none" />
+    <circle class="accf" cx="252" cy="56" r="4" /><circle class="accf" cx="258" cy="62" r="4" /><circle class="accf" cx="250" cy="64" r="4" />
+    <text class="lbl" x="230" y="146" text-anchor="middle">präzise, nicht richtig</text>
+  </g>
+  <g>
+    <circle class="w" cx="380" cy="80" r="46" style="fill:none" /><circle class="w" cx="380" cy="80" r="28" style="fill:none" /><circle class="w" cx="380" cy="80" r="10" style="fill:none" />
+    <circle class="accf" cx="356" cy="66" r="4" /><circle class="accf" cx="402" cy="90" r="4" /><circle class="accf" cx="378" cy="102" r="4" />
+    <text class="lbl" x="380" y="146" text-anchor="middle">richtig, nicht präzise</text>
+  </g>
+  <g>
+    <circle class="w" cx="530" cy="80" r="46" style="fill:none" /><circle class="w" cx="530" cy="80" r="28" style="fill:none" /><circle class="w" cx="530" cy="80" r="10" style="fill:none" />
+    <circle class="accf" cx="498" cy="52" r="4" /><circle class="accf" cx="556" cy="106" r="4" /><circle class="accf" cx="546" cy="54" r="4" />
+    <text class="lbl" x="530" y="146" text-anchor="middle">weder noch</text>
+  </g>
+</svg>
+<p class="note"><b>Warum die Unterscheidung praktisch zählt:</b> Für eine <em>Regelung</em> ist Wiederholbarkeit meist wichtiger als absolute Richtigkeit — ein systematischer Offset wird vom Integralanteil ausgeglichen. Für eine <em>Anzeige</em> oder eine Abnahme ist es umgekehrt. Für eine <em>Differenzmessung</em> zählt nur die Auflösung.</p>
+
+<h2>Fehlerarten und Unsicherheit</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Systematisch</h4><ul>
+    <li>Immer in dieselbe Richtung, reproduzierbar</li>
+    <li>Offset, Verstärkungsfehler, Nichtlinearität, falsche Referenz</li>
+    <li><b>Durch Kalibrierung zu beseitigen</b> — das ist ihr ganzer Sinn</li>
+  </ul></div>
+  <div class="gb-col"><h4>Zufällig</h4><ul>
+    <li>Streut um den Mittelwert: Rauschen, Quantisierung, Einstreuung</li>
+    <li><b>Durch Mitteln zu reduzieren</b> — um √N bei N unabhängigen Messungen</li>
+    <li>Mitteln hilft nicht gegen einen Offset</li>
+  </ul></div>
+</div>
+<div class="fbox">
+  <span class="f">u_gesamt ≈ √(u₁² + u₂² + u₃² + …)</span>
+  <span class="l">Unabhängige Beiträge addieren sich quadratisch. Deshalb dominiert der größte Einzelbeitrag: Wer den zweitgrößten halbiert, gewinnt fast nichts.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Typische Fehlerquelle</th><th>Größenordnung</th><th>Gegenmaßnahme</th></tr></thead>
+<tbody>
+<tr><td><b>Selbsterwärmung</b></td><td>Pt100 mit 1 mA: 0,1–1 K je nach Einbau</td><td>Messstrom senken oder gepulst messen</td></tr>
+<tr><td><b>Thermospannungen</b></td><td>einige µV je Kelvin Gefälle über die Platine</td><td>Symmetrischer Aufbau, gleiche Materialien, Zugluft vermeiden</td></tr>
+<tr><td><b>Leitungswiderstand</b></td><td>Pt100 im Zweileiteranschluss: 2,6 K je Ohm</td><td>Drei- oder Vierleiteranschluss</td></tr>
+<tr><td><b>Alterung und Einbau</b></td><td>Referenzen driften im ersten Jahr am stärksten; verschraubte Druck- und Kraftsensoren zeigen Offset</td><td>Nachkalibrieren, im Einbauzustand nullen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kalibrieren und plausibilisieren</h2>
+<div class="steps">
+  <div class="step"><h4>Einpunkt: Offset</h4>Genügt, wenn die Steigung stimmt — etwa beim Tarieren einer Waage.</div>
+  <div class="step"><h4>Zweipunkt: Offset und Verstärkung</h4>Zwei bekannte Punkte, möglichst weit auseinander, aber innerhalb des Nutzbereichs. Für die meisten Sensoren ausreichend.</div>
+  <div class="step"><h4>Mehrpunkt: nichtlineare Kennlinien</h4>Stützstellen aufnehmen und interpolieren, oder ein Polynom anpassen. Vorsicht bei hoher Ordnung — sie schwingt zwischen den Stützstellen.</div>
+  <div class="step"><h4>Rückführbarkeit sicherstellen</h4>Ein Referenzgerät, das selbst nicht kalibriert ist, überträgt seinen Fehler. Für ernsthafte Messungen braucht es eine Kette bis zu einem nationalen Normal.</div>
+  <div class="step"><h4>Kalibrierdaten dauerhaft speichern</h4>In EEPROM oder Flash, mit Datum und Prüfsumme — sonst gehen sie beim nächsten Firmware-Update verloren.</div>
+</div>
+<ul>
+  <li><b>Bereichsprüfung:</b> Liegt der Wert im physikalisch Möglichen? −273 °C oder 900 °C am Raumfühler heißt: Sensor defekt oder abgerissen.</li>
+  <li><b>Änderungsrate prüfen:</b> Kann sich die Größe so schnell ändern? 20 K Raumtemperatursprung in einer Sekunde ist ein Fehler, kein Messwert.</li>
+  <li><b>Stillstand erkennen:</b> Ein über Minuten <b>exakt</b> konstanter Wert ist verdächtig — vermutlich hängt die Kommunikation.</li>
+  <li><b>Redundanz:</b> Zwei Sensoren vergleichen; bei drei lässt sich der Ausreißer sogar identifizieren.</li>
+  <li><b>Statusregister auslesen:</b> Viele digitale Sensoren melden ungültige Werte oder Übertemperatur selbst — das kostet nichts.</li>
+  <li><b>Definiertes Verhalten bei Ausfall:</b> Nicht der letzte gültige Wert, sondern ein festgelegter sicherer Zustand (<a href="#digital">Digitale Regelung</a>).</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Analog Devices, <i>Practical Design Techniques for Sensor Signal Conditioning</i> — kostenloses Handbuch, sehr gründlich.</li>
+    <li>Texas Instruments, <i>Analog Engineer's Circuit Cookbook: Sensors</i> und die Precision-Labs-Serie zu Brückensensoren.</li>
+    <li>HBM, <i>Grundlagen der Dehnungsmessstreifen-Technik</i> — frei verfügbar, sehr praxisnah.</li>
+    <li>JCGM 100:2008 (GUM) beim BIPM — Ermittlung der Messunsicherheit; DIN 1319 — Begriffe der Messtechnik.</li>
+    <li>DIN EN 60751 — Platin-Widerstandsthermometer (Pt100/Pt1000) mit Toleranzklassen; Hoffmann, <i>Handbuch der Messtechnik</i>.</li>
+  </ul>
+</div>

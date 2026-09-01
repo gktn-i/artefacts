@@ -1,0 +1,121 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Fast alle Sensoren nutzen eine Handvoll physikalischer Effekte.</b> Wer die Prinzipien kennt, liest aus einem unbekannten Datenblatt sofort die zu erwartenden Störungen heraus: resistive Sensoren driften mit der Temperatur, kapazitive reagieren auf Feuchte, optische auf Verschmutzung. Darunter der Katalog konkreter, im Handel verfügbarer Bauteile — filterbar.</div>
+
+<h2>Die Prinzipien</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Prinzip</th><th>Effekt</th><th>Misst</th><th>Stärke</th><th>Schwäche</th></tr></thead>
+<tbody>
+<tr><td><b>Resistiv</b></td><td>Widerstand ändert sich mit der Messgröße</td><td>Temperatur, Dehnung, Position, Gas, Licht</td><td>Einfach, billig, breit einsetzbar</td><td>Temperaturdrift, Selbsterwärmung, Alterung</td></tr>
+<tr><td><b>Kapazitiv</b></td><td>Abstand, Fläche oder Dielektrikum ändern die Kapazität</td><td>Abstand, Füllstand, Feuchte, Berührung, Beschleunigung</td><td>Sehr empfindlich, berührungslos, verschleißfrei</td><td>Streukapazitäten, Feuchte, aufwendige Auswertung</td></tr>
+<tr><td><b>Induktiv</b></td><td>Metall im Feld ändert die Induktivität</td><td>Näherung, Position, Drehzahl</td><td>Robust, unempfindlich gegen Schmutz und Öl</td><td>Nur metallische Ziele, begrenzte Reichweite</td></tr>
+<tr><td><b>Hall / magnetoresistiv</b></td><td>Magnetfeld erzeugt Querspannung bzw. ändert den Widerstand</td><td>Position, Drehzahl, Strom, Winkel</td><td>Berührungslos, robust, auch durch Kunststoff</td><td>Fremdfelder, Temperaturdrift, Offset</td></tr>
+<tr><td><b>Optisch</b></td><td>Licht wird unterbrochen, reflektiert oder gebeugt</td><td>Position, Drehwinkel, Anwesenheit, Farbe, Entfernung</td><td>Sehr hohe Auflösung, berührungslos</td><td>Verschmutzung, Fremdlicht, Nebel</td></tr>
+<tr><td><b>Piezoelektrisch</b></td><td>Kraft erzeugt Ladung</td><td>Dynamische Kraft, Beschleunigung, Schall, Druck</td><td>Sehr hohe Bandbreite, keine Speisung nötig</td><td>Nur dynamisch — statisch nur mit Ladungsverstärker und Drift</td></tr>
+<tr><td><b>Thermoelektrisch</b></td><td>Seebeck-Effekt an der Verbindung zweier Metalle</td><td>Temperatur</td><td>Sehr großer Bereich, robust, schnell</td><td>Kleine Spannungen (µV/K), Vergleichsstelle nötig</td></tr>
+<tr><td><b>Elektrochemisch</b></td><td>Reaktion erzeugt Strom oder ändert die Leitfähigkeit</td><td>Gas, pH, Sauerstoff</td><td>Sehr spezifisch</td><td>Begrenzte Lebensdauer, Querempfindlichkeit, Drift</td></tr>
+<tr><td><b>Ultraschall</b></td><td>Laufzeit einer Schallwelle</td><td>Entfernung, Füllstand, Durchfluss</td><td>Unempfindlich gegen Farbe und Transparenz</td><td>Schallgeschwindigkeit ist temperaturabhängig, breite Keule, weiche Ziele</td></tr>
+<tr><td><b>MEMS</b></td><td>Mikromechanik auf dem Chip, meist kapazitiv ausgewertet</td><td>Beschleunigung, Drehrate, Druck, Schall</td><td>Winzig, billig, digital angebunden</td><td>Nullpunktdrift, empfindlich gegen Vibration und Löthitze</td></tr>
+</tbody>
+</table></div>
+
+<h2>Temperatur — die vier Wege</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Typ</th><th>Bereich</th><th>Genauigkeit</th><th>Kennlinie</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>NTC-Thermistor</b></td><td>−40 … 150 °C (Glasperle bis 300 °C)</td><td>±0,5 … 2 K</td><td>stark nichtlinear (Steinhart-Hart)</td><td>Sehr billig, empfindlich, schnell. Der Standard im 3D-Drucker</td></tr>
+<tr><td><b>Pt100 / Pt1000</b></td><td>−200 … 850 °C (Dünnschicht enger)</td><td>Klasse A: ±(0,15 + 0,002·|t|) K</td><td>nahezu linear</td><td>Industriestandard nach DIN EN 60751. Pt1000 ist im Zweileiteranschluss unkritischer</td></tr>
+<tr><td><b>Thermoelement</b></td><td>−200 … 1800 °C je nach Typ</td><td>Typ K Klasse 1: ±1,5 K</td><td>nichtlinear, Polynome nach IEC 60584</td><td>Braucht Vergleichsstellenkompensation. Typ K ist der Allrounder</td></tr>
+<tr><td><b>Halbleitersensor (I²C)</b></td><td>−40 … 125 °C</td><td>±0,1 … 1 K</td><td>digital, bereits linearisiert</td><td>Am einfachsten anzubinden: TMP117, SHT4x, BME280</td></tr>
+<tr><td><b>Infrarot (berührungslos)</b></td><td>−70 … 1000 °C</td><td>±1 … 2 K</td><td>abhängig vom Emissionsgrad</td><td>Misst die Oberfläche. Blankes Metall täuscht viel zu niedrige Werte vor</td></tr>
+</tbody>
+</table></div>
+
+<h2>Inertialsensorik und Abstand</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Beschleunigungssensor</div><div class="cd">Misst Beschleunigung <b>inklusive Erdbeschleunigung</b> — im Stillstand also die Neigung. Langfristig richtig, aber verrauscht und bewegungsempfindlich.</div></div>
+  <div class="card"><div class="ct">Drehratensensor</div><div class="cd">Misst Winkelgeschwindigkeit; integriert ergibt das den Winkel — kurzfristig sehr genau, aber der Nullpunktfehler summiert sich zur Drift.</div></div>
+  <div class="card"><div class="ct">Magnetometer</div><div class="cd">Erdmagnetfeld als Kompass. Wird von Motoren, Lautsprechern und Eisen massiv gestört — Kalibrierung im Einbauzustand ist Pflicht.</div></div>
+  <div class="card"><div class="ct">Sensorfusion</div><div class="cd">Die drei ergänzen sich genau in ihren Schwächen. Komplementär- oder Kalman-Filter: <a href="#zustandsraum">Zustandsraum &amp; Beobachter</a>.</div></div>
+</div>
+<div class="warn"><b>Was MEMS-Sensoren stört, steht selten deutlich im Datenblatt:</b> Vibration im Kilohertzbereich kann durch Aliasing als scheinbar konstanter Offset erscheinen. Mechanische Spannungen durch Löten oder Verschrauben verschieben den Nullpunkt dauerhaft — deshalb geben Hersteller Layoutvorschriften mit Entkopplungsschlitzen an. Und Ultraschall-Reinigungsbäder zerstören MEMS-Strukturen zuverlässig.</div>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Abstandsverfahren</th><th>Reichweite</th><th>Auflösung</th><th>Blind bei</th><th>Kosten</th></tr></thead>
+<tbody>
+<tr><td><b>Induktiver Näherungsschalter</b></td><td>1–20 mm</td><td>Schalter</td><td>nichtmetallischen Zielen</td><td>gering</td></tr>
+<tr><td><b>Kapazitiver Näherungsschalter</b></td><td>1–30 mm</td><td>Schalter</td><td>—</td><td>gering</td></tr>
+<tr><td><b>Reflexlichtschranke</b></td><td>1–100 mm</td><td>Schalter oder analog</td><td>schwarzen und spiegelnden Oberflächen</td><td>sehr gering</td></tr>
+<tr><td><b>Ultraschall</b></td><td>2 cm – 6 m</td><td>±1 cm</td><td>weichen, schallschluckenden Zielen</td><td>gering</td></tr>
+<tr><td><b>Time-of-Flight (VL53L1x)</b></td><td>4 cm – 4 m</td><td>±3 mm</td><td>direkter Sonneneinstrahlung</td><td>mittel</td></tr>
+<tr><td><b>LiDAR</b></td><td>0,1–100 m</td><td>±1–30 mm</td><td>Nebel, Regen, sehr dunklen Oberflächen</td><td>hoch</td></tr>
+<tr><td><b>Radar (60/77 GHz)</b></td><td>0,1–50 m</td><td>±1 cm</td><td>—</td><td>mittel bis hoch</td></tr>
+<tr><td><b>Kamera mit Bildauswertung</b></td><td>beliebig</td><td>je nach Auflösung</td><td>schlechten Lichtverhältnissen</td><td>mittel, hoher Rechenaufwand</td></tr>
+</tbody>
+</table></div>
+
+<h2>Katalog verfügbarer Sensoren</h2>
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Suchen: Name, Messgröße, Schnittstelle, Stichwort …" aria-label="Sensoren durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="temp">Temperatur</button>
+    <button type="button" data-filter="klima">Klima</button>
+    <button type="button" data-filter="mech">Mechanik</button>
+    <button type="button" data-filter="pos">Position</button>
+    <button type="button" data-filter="elek">Elektrisch</button>
+    <button type="button" data-filter="opt">Optisch</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="tbl-wrap"><table style="min-width:940px">
+    <thead><tr><th data-s="text">Sensor</th><th>Kategorie</th><th>Messgröße</th><th>Bereich</th><th>Genauigkeit</th><th>Schnittstelle</th><th>Hinweis aus der Praxis</th></tr></thead>
+    <tbody data-list="Sensoren">
+      <tr data-item data-cat="temp" data-k="dallas onewire wasserdicht" class="c-sensor"><td><b>DS18B20</b></td><td><span class="cb">Temperatur</span></td><td>Temperatur</td><td>−55 … +125 °C</td><td>±0,5 K (−10…85 °C)</td><td>1-Wire</td><td>Mehrere Sensoren an einer Leitung, jeder mit eigener 64-Bit-Kennung. Ideal für verteilte Messstellen. Parasitäre Speisung möglich, aber störanfällig.</td></tr>
+      <tr data-item data-cat="temp" data-k="präzision referenz" class="c-sensor"><td><b>TMP117</b></td><td><span class="cb">Temperatur</span></td><td>Temperatur</td><td>−55 … +150 °C</td><td>±0,1 K (−20…50 °C)</td><td>I²C</td><td>Präzisionsklasse, ersetzt oft ein Pt100 samt Auswertung. Vier Adressen wählbar.</td></tr>
+      <tr data-item data-cat="temp" data-k="rtd platin dreileiter" class="c-sensor"><td><b>Pt1000 (Klasse A)</b></td><td><span class="cb">Temperatur</span></td><td>Temperatur</td><td>−50 … +500 °C (Dünnschicht)</td><td>±(0,15 + 0,002·|t|) K</td><td>analog / Widerstand</td><td>Industriestandard nach DIN EN 60751. Als Pt1000 auch im Zweileiteranschluss brauchbar, weil der Leitungsfehler zehnmal weniger wiegt als beim Pt100.</td></tr>
+      <tr data-item data-cat="temp" data-k="tc thermoelement lötstation" class="c-sensor"><td><b>Thermoelement Typ K + MAX31855</b></td><td><span class="cb">Temperatur</span></td><td>Temperatur</td><td>−200 … +1350 °C</td><td>±2 K (−200…700 °C)</td><td>SPI</td><td>Für Lötspitze, Ofen, Schmelze. Vergleichsstellenkompensation im Wandler eingebaut. Auf geerdete gegen isolierte Messspitze achten.</td></tr>
+      <tr data-item data-cat="temp" data-k="thermistor hotend 3d-druck" class="c-sensor"><td><b>NTC 100 kΩ B3950</b></td><td><span class="cb">Temperatur</span></td><td>Temperatur</td><td>−40 … +300 °C (Glasperle)</td><td>±1 … 2 K</td><td>analog</td><td>Der Standard im 3D-Drucker-Hotend. Kennlinie über Steinhart-Hart oder Tabelle linearisieren.</td></tr>
+      <tr data-item data-cat="temp" data-k="infrarot wärmebild pyrometer" class="c-sensor"><td><b>MLX90614 / MLX90640</b></td><td><span class="cb">Temperatur</span></td><td>Temperatur berührungslos</td><td>−70 … +380 °C</td><td>±0,5 K (um Raumtemperatur)</td><td>I²C</td><td>Infrarot. Der Emissionsgrad der Oberfläche ist die dominierende Fehlerquelle. MLX90640 liefert ein 32×24-Wärmebild.</td></tr>
+      <tr data-item data-cat="klima" data-k="wetter luftdruck feuchte voc" class="c-sensor"><td><b>BME280 / BME680</b></td><td><span class="cb">Klima</span></td><td>Temperatur, Feuchte, Druck (BME680 zusätzlich Gas)</td><td>300–1100 hPa, 0–100 % rF</td><td>±1 hPa, ±3 % rF</td><td>I²C / SPI</td><td>Der Allrounder für Wetter- und Raumklima. Eigenerwärmung beachten: Sensor thermisch vom Board entkoppeln.</td></tr>
+      <tr data-item data-cat="klima" data-k="sensirion feuchte taupunkt" class="c-sensor"><td><b>SHT4x</b></td><td><span class="cb">Klima</span></td><td>Temperatur und Feuchte</td><td>−40 … +125 °C, 0–100 % rF</td><td>±0,2 K, ±1,8 % rF</td><td>I²C</td><td>Sehr genau, mit Heizelement gegen Kondensation. Nachfolger der weit verbreiteten SHT2x-Reihe.</td></tr>
+      <tr data-item data-cat="klima" data-k="co2 luftqualität lüften" class="c-sensor"><td><b>SCD41 (SCD4x)</b></td><td><span class="cb">Klima</span></td><td>CO₂ (photoakustisch)</td><td>400–5000 ppm</td><td>±(40 ppm + 5 %)</td><td>I²C</td><td>Echte CO₂-Messung, nicht nur VOC-Schätzung. SCD40: bis 2000 ppm, ±(50 ppm + 5 %). Braucht regelmäßig Frischluft für die Selbstkalibrierung.</td></tr>
+      <tr data-item data-cat="klima" data-k="feinstaub partikel luftqualität" class="c-sensor"><td><b>SPS30 / PMS5003</b></td><td><span class="cb">Klima</span></td><td>Feinstaub PM1/PM2.5/PM10</td><td>0–1000 µg/m³</td><td>±10 µg/m³</td><td>UART / I²C</td><td>Optische Streulichtmessung mit Lüfter. Lebensdauer begrenzt, Lüfter verschmutzt.</td></tr>
+      <tr data-item data-cat="mech" data-k="waage dms wägezelle kraft" class="c-mech"><td><b>HX711 + Wägezelle</b></td><td><span class="cb">Mechanik</span></td><td>Kraft, Masse</td><td>je nach Zelle (1 kg … 200 kg)</td><td>0,05 % vom Endwert</td><td>seriell (2 Pin)</td><td>24-Bit-Wandler speziell für Brückensensoren. Sehr langsam (10/80 Hz), dafür extrem einfach. Wägezelle mechanisch spannungsfrei montieren.</td></tr>
+      <tr data-item data-cat="mech" data-k="strain gauge dehnung kraftmessung" class="c-mech"><td><b>DMS (Dehnungsmessstreifen)</b></td><td><span class="cb">Mechanik</span></td><td>Dehnung, Kraft, Moment</td><td>±3000 µm/m</td><td>0,1 %</td><td>Brücke, analog</td><td>Die Klebung entscheidet über die Qualität. Immer als Halb- oder Vollbrücke, sonst dominiert die Temperaturdrift.</td></tr>
+      <tr data-item data-cat="mech" data-k="imu gyro beschleunigung lage" class="c-mech"><td><b>MPU-6050 / ICM-42688</b></td><td><span class="cb">Mechanik</span></td><td>Beschleunigung und Drehrate</td><td>±2…16 g, ±250…2000 °/s</td><td>0,5–2 % nach Kalibrierung</td><td>I²C / SPI</td><td>MPU-6050 ist billig und überall dokumentiert, aber alt. ICM-42688 oder LSM6DSO sind deutlich rausch- und driftärmer.</td></tr>
+      <tr data-item data-cat="mech" data-k="imu wearable low power" class="c-mech"><td><b>BMI270 / LSM6DSV</b></td><td><span class="cb">Mechanik</span></td><td>6-Achsen-IMU</td><td>±16 g, ±2000 °/s</td><td>—</td><td>I²C / SPI</td><td>Aktuelle Generation mit sehr niedrigem Stromverbrauch und eingebauter Bewegungserkennung.</td></tr>
+      <tr data-item data-cat="mech" data-k="druck pneumatik differenzdruck" class="c-mech"><td><b>MPX5700 / ABP-Serie</b></td><td><span class="cb">Mechanik</span></td><td>Druck</td><td>0–700 kPa (= 0–7 bar)</td><td>±1 … 2,5 %</td><td>analog / I²C</td><td>Absolut-, Relativ- und Differenzdruck unterscheiden. Für Pneumatik und Füllstandsmessung.</td></tr>
+      <tr data-item data-cat="mech" data-k="vibration condition monitoring" class="c-mech"><td><b>Piezo-Beschleunigungssensor</b></td><td><span class="cb">Mechanik</span></td><td>Schwingung</td><td>bis 10 kHz</td><td>1–5 %</td><td>analog (IEPE)</td><td>Für Zustandsüberwachung an Maschinen. Misst nur dynamisch, keine statische Beschleunigung.</td></tr>
+      <tr data-item data-cat="pos" data-k="encoder quadratur drehgeber" class="c-digital"><td><b>Inkrementalgeber (AB, 1024 Imp.)</b></td><td><span class="cb">Position</span></td><td>Drehwinkel relativ</td><td>unbegrenzt</td><td>Quadratur → 4096 Flanken/U</td><td>2 Digitalsignale</td><td>Braucht Referenzfahrt nach jedem Einschalten. Auswertung im Timer-Encodermodus des Controllers, nicht per Interrupt.</td></tr>
+      <tr data-item data-cat="pos" data-k="magnetisch absolut winkel" class="c-digital"><td><b>AS5600 / AS5047</b></td><td><span class="cb">Position</span></td><td>Absoluter Drehwinkel</td><td>0–360°</td><td>12 bzw. 14 Bit, ±0,3 … 1°</td><td>I²C / SPI / PWM</td><td>Magnetischer Winkelsensor mit diametral magnetisiertem Magneten über dem Chip. Kein Referenzieren nötig.</td></tr>
+      <tr data-item data-cat="pos" data-k="poti weg linear" class="c-digital"><td><b>Linearpotentiometer</b></td><td><span class="cb">Position</span></td><td>Weg absolut</td><td>10 mm … 1 m</td><td>0,1–1 %</td><td>analog</td><td>Billig und einfach, aber Verschleiß am Schleifer. Für langsame und wenig zyklische Anwendungen.</td></tr>
+      <tr data-item data-cat="pos" data-k="induktiv weg präzision" class="c-digital"><td><b>LVDT</b></td><td><span class="cb">Position</span></td><td>Weg absolut</td><td>±0,5 … ±500 mm</td><td>0,1 %</td><td>analog (Trägerfrequenz)</td><td>Berührungslos, sehr langlebig, hochauflösend. Braucht eine Auswerteelektronik mit Trägerfrequenz.</td></tr>
+      <tr data-item data-cat="pos" data-k="maßstab cnc dro" class="c-digital"><td><b>Glasmaßstab / Linearencoder</b></td><td><span class="cb">Position</span></td><td>Weg absolut oder inkremental</td><td>bis mehrere Meter</td><td>1 µm und feiner</td><td>AB / BiSS / EnDat</td><td>Der Standard an Werkzeugmaschinen. Empfindlich gegen Späne und Kühlmittel.</td></tr>
+      <tr data-item data-cat="pos" data-k="tof laser abstand" class="c-digital"><td><b>VL53L1x</b></td><td><span class="cb">Position</span></td><td>Entfernung (Time-of-Flight)</td><td>4 cm … 4 m</td><td>±3 mm bis ±5 %</td><td>I²C</td><td>Sehr klein, sehr genau für die Baugröße. Bei Sonnenlicht reduzierte Reichweite.</td></tr>
+      <tr data-item data-cat="pos" data-k="ultraschall abstand billig" class="c-digital"><td><b>HC-SR04</b></td><td><span class="cb">Position</span></td><td>Entfernung (Ultraschall)</td><td>2 cm … 4 m</td><td>±1 cm</td><td>Trigger/Echo</td><td>Sehr billig, aber temperaturabhängig (Schallgeschwindigkeit) und mit breiter Keule. Für Näherung ausreichend, für Messtechnik nicht.</td></tr>
+      <tr data-item data-cat="elek" data-k="strom hall isoliert" class="c-power"><td><b>ACS712 / ACS724</b></td><td><span class="cb">Elektrisch</span></td><td>Strom (Hall, isoliert)</td><td>±5 … ±30 A</td><td>1,5–3 %</td><td>analog</td><td>Galvanisch getrennt, misst AC und DC. Offsetdrift und Rauschen begrenzen die Auflösung.</td></tr>
+      <tr data-item data-cat="elek" data-k="shunt leistungsmessung strom" class="c-power"><td><b>INA219 / INA226</b></td><td><span class="cb">Elektrisch</span></td><td>Strom über Shunt</td><td>je nach Shunt</td><td>0,5 %</td><td>I²C</td><td>Misst Strom, Spannung und Leistung. Der Standard für Verbrauchsmessung an Baugruppen.</td></tr>
+      <tr data-item data-cat="elek" data-k="energiemessung netzstrom klemme" class="c-power"><td><b>Stromwandler (SCT-013)</b></td><td><span class="cb">Elektrisch</span></td><td>Wechselstrom</td><td>10–100 A</td><td>1–3 %</td><td>analog</td><td>Klemmbar, ohne Auftrennen der Leitung. Sekundär niemals offen lassen. Nur für AC.</td></tr>
+      <tr data-item data-cat="elek" data-k="netzspannung nulldurchgang" class="c-power"><td><b>Spannungsteiler + Optokoppler</b></td><td><span class="cb">Elektrisch</span></td><td>Netzspannung erkennen</td><td>230 V AC</td><td>—</td><td>digital</td><td>Für Nulldurchgangserkennung und Phasenanschnitt. Isolationsabstände einhalten.</td></tr>
+      <tr data-item data-cat="opt" data-k="ldr helligkeit dämmerung" class="c-analog"><td><b>Fotowiderstand (LDR)</b></td><td><span class="cb">Optisch</span></td><td>Helligkeit</td><td>1 – 100 kΩ</td><td>grob</td><td>analog</td><td>Sehr billig, träge, stark exemplarstreuend. Für Hell/Dunkel-Entscheidungen ausreichend.</td></tr>
+      <tr data-item data-cat="opt" data-k="lux helligkeit umgebungslicht" class="c-analog"><td><b>BH1750 / VEML7700</b></td><td><span class="cb">Optisch</span></td><td>Beleuchtungsstärke</td><td>1 – 65 000 lx</td><td>±20 %</td><td>I²C</td><td>Mit an das menschliche Auge angepasster Spektralkurve — im Gegensatz zum LDR ein echter Lux-Wert.</td></tr>
+      <tr data-item data-cat="opt" data-k="farbe spektrum sortieren" class="c-analog"><td><b>TCS34725 / AS7341</b></td><td><span class="cb">Optisch</span></td><td>Farbe / Spektrum</td><td>—</td><td>—</td><td>I²C</td><td>Farbmessung mit eigener Beleuchtung. AS7341 liefert elf Spektralkanäle.</td></tr>
+      <tr data-item data-cat="opt" data-k="endschalter lichtschranke referenz" class="c-analog"><td><b>Gabellichtschranke</b></td><td><span class="cb">Optisch</span></td><td>Anwesenheit, Endlage</td><td>wenige mm</td><td>Schalter</td><td>digital</td><td>Der Standard für Endschalter an Achsen. Verschmutzung ist die Hauptausfallursache.</td></tr>
+      <tr data-item data-cat="opt" data-k="kamera bildverarbeitung esp32-cam" class="c-analog"><td><b>Kamera (OV2640, OV5640)</b></td><td><span class="cb">Optisch</span></td><td>Bild</td><td>—</td><td>—</td><td>DVP / MIPI</td><td>Ab hier beginnt Bildverarbeitung. Rechenleistung und Speicher werden zum bestimmenden Faktor.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Kein Sensor passt zu dieser Auswahl.</div>
+</div>
+<div class="tip"><b>Auswahl in vier Schritten:</b> Messbereich mit Reserve nach oben wählen — ein Sensor am Anschlag liefert keine Information. Schnittstelle zum Aufbau passend wählen: I²C unter einem Meter halten, darüber RS-485, CAN oder 4–20 mA. Im Datenblatt zuerst absolute Grenzwerte, Versorgung, Ruhestrom, Ansprechzeit und Temperaturbereich lesen. Und prüfen, ob es eine gepflegte Bibliothek gibt — ein exotischer Sensor ohne Treiber kostet mehr Zeit, als er an Genauigkeit bringt.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen und Bezug</div>
+  <ul>
+    <li>Jacob Fraden, <i>Handbook of Modern Sensors</i>, Springer; Tränkler &amp; Reindl (Hrsg.), <i>Sensortechnik</i>, Springer.</li>
+    <li>DIN EN 60751 (Pt100/Pt1000) und IEC 60584 (Thermoelemente) — die verbindlichen Kennlinien und Toleranzklassen.</li>
+    <li>Datenblätter der Hersteller: Bosch Sensortec, Sensirion, TDK InvenSense, ams OSRAM, STMicroelectronics, Texas Instruments, Analog Devices — MEMS-Datenblätter mit Layout- und Montagehinweisen.</li>
+    <li>Bezugsquellen mit belastbaren Datenblättern: <a href="https://www.mouser.de/">Mouser</a>, <a href="https://www.digikey.de/">Digi-Key</a>, <a href="https://www.reichelt.de/">Reichelt</a>, <a href="https://www.tme.eu/de/">TME</a>, <a href="https://www.lcsc.com/">LCSC</a>.</li>
+    <li>Bibliotheken: <a href="https://github.com/adafruit">Adafruit</a> und <a href="https://github.com/sparkfun">SparkFun</a> auf GitHub, dazu die Hersteller-Treiber (Bosch BSEC, Sensirion Embedded Drivers).</li>
+    <li>Weitere Bauteile jenseits der Sensorik: <a href="mechatronik-nachschlagewerk.html#komponenten">Nachschlagewerk → Komponenten-Katalog</a>.</li>
+  </ul>
+</div>

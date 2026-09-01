@@ -42,7 +42,7 @@ GPIOA_ODR &amp;= ~(1u &lt;&lt; 5);
 #define MODE_OUT   (1u &lt;&lt; 10)
 GPIOA_MODER = (GPIOA_MODER &amp; ~MODE_MASK) | MODE_OUT;</code></pre>
 </div>
-<div class="warn"><b>Read-Modify-Write ist nicht atomar.</b> <code>reg |= bit;</code> besteht aus drei Schritten. Unterbricht ein Interrupt dazwischen und ändert dasselbe Register, geht die Änderung verloren. Viele Controller bieten dafür <b>Set/Reset-Register</b> (BSRR bei STM32) oder Bit-Banding — beides erledigt die Operation in einem einzigen Schreibzugriff und ist damit unterbrechungsfest.</div>
+<div class="warn"><b>Read-Modify-Write ist nicht atomar.</b> <code>reg |= bit;</code> besteht aus drei Schritten. Unterbricht ein Interrupt dazwischen und ändert dasselbe Register, geht die Änderung verloren. Viele Controller bieten dafür <b>Set/Reset-Register</b> (BSRR bei STM32) oder Bit-Banding (nur Cortex-M3/M4) — beides erledigt die Operation in einem einzigen Schreibzugriff und ist damit unterbrechungsfest.</div>
 
 <h2>Fallen, die immer wieder zuschlagen</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
@@ -66,7 +66,7 @@ GPIOA_MODER = (GPIOA_MODER &amp; ~MODE_MASK) | MODE_OUT;</code></pre>
   <div class="card"><div class="ct">Modul mit klarer Schnittstelle</div><div class="cd">Eine <code>.h</code>-Datei mit den öffentlichen Funktionen, alles andere <code>static</code> in der <code>.c</code>-Datei. Kein Zugriff auf interne Variablen von außen.</div></div>
   <div class="card"><div class="ct">Init, Tick, Handler</div><div class="cd">Jedes Modul bekommt dieselbe Struktur: <code>xyz_init()</code>, <code>xyz_tick()</code> (zyklisch, kehrt sofort zurück) und gegebenenfalls einen ISR-Anteil. Sehr leicht zu verstehen und zu testen.</div></div>
   <div class="card"><div class="ct">Fehlercodes statt stiller Fehler</div><div class="cd">Ein einheitlicher Aufzählungstyp als Rückgabewert. Ein zentraler Fehlerzähler mit letztem Code erleichtert die Diagnose erheblich.</div></div>
-  <div class="card"><div class="ct">Hardware hinter einer dünnen Schicht</div><div class="cd">Nicht wegen Portabilität, sondern damit sich Logik ohne Hardware testen lässt — siehe <a href="informationstechnik.html#werkzeuge">Informationstechnik → Werkzeuge</a>.</div></div>
+  <div class="card"><div class="ct">Hardware hinter einer dünnen Schicht</div><div class="cd">Nicht wegen Portabilität, sondern damit sich Logik ohne Hardware testen lässt — siehe <a href="digitaltechnik.html#software">Digitaltechnik → Software</a>.</div></div>
   <div class="card"><div class="ct">Konfiguration an einer Stelle</div><div class="cd">Pinbelegung, Zeitkonstanten und Grenzwerte in einer <code>config.h</code>. Spart Suchen und macht Hardwarevarianten beherrschbar.</div></div>
   <div class="card"><div class="ct">Statische Zusicherungen</div><div class="cd"><code>_Static_assert(sizeof(frame_t) == 16, "Rahmengröße");</code> — prüft Annahmen zur Übersetzungszeit statt im Feld.</div></div>
 </div>

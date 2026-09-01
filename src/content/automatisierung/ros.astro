@@ -1,0 +1,95 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>ROS 2 ist kein Betriebssystem, sondern ein Baukasten aus Bibliotheken und Konventionen.</b> Sein eigentlicher Wert liegt darin, dass Navigation, Armplanung, Treiber und Visualisierung von unterschiedlichen Gruppen entwickelt wurden und trotzdem zusammenspielen — weil sie dieselben Datentypen und dasselbe Kommunikationsmuster benutzen.</div>
+
+<h2>Die Bausteine des Graphen</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Baustein</th><th>Muster</th><th>Wofür</th><th>Falle</th></tr></thead>
+<tbody>
+<tr><td><b>Node</b></td><td>Prozess mit Namen</td><td>Eine Aufgabe je Knoten: Treiber, Filter, Planer</td><td>Alles in einen Knoten zu packen macht den Vorteil zunichte</td></tr>
+<tr><td><b>Topic</b></td><td>Publish/Subscribe, gerichtet, ohne Antwort</td><td>Kontinuierliche Datenströme: Sensorwerte, Odometrie, Stellbefehle</td><td>Empfänger unbekannt — niemand merkt, wenn keiner zuhört</td></tr>
+<tr><td><b>Service</b></td><td>Anfrage/Antwort, blockierend</td><td>Kurze Abfragen und Umschaltungen: Parameter setzen, Karte speichern</td><td>Nichts Langlaufendes hier abwickeln</td></tr>
+<tr><td><b>Action</b></td><td>Ziel, Zwischenstand, Ergebnis, abbrechbar</td><td>Alles mit Dauer: „Fahre nach A“, „Plane und führe Bewegung aus“</td><td>Der Abbruchpfad wird gern vergessen und dann nie getestet</td></tr>
+<tr><td><b>Parameter</b></td><td>benannte Werte je Knoten</td><td>Konfiguration aus YAML statt fest verdrahtet</td><td>Zur Laufzeit änderbar — Änderungen müssen abgefangen werden</td></tr>
+<tr><td><b>TF2</b></td><td>Baum aus Koordinatensystemen über der Zeit</td><td>„Wo ist der Punkt aus der Kamera im Basis-Frame — vor 0,2 s?“</td><td>Ein einziger fehlender Frame legt halbe Stacks lahm</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>QoS ist der häufigste Grund für „es kommt nichts an“.</b> Jedes Topic hat ein Dienstgüteprofil — Reliability (zuverlässig oder best effort), Durability (flüchtig oder transient local), History-Tiefe. Passen die Profile von Sender und Empfänger nicht zusammen, kommt <b>gar keine</b> Verbindung zustande, ohne Fehlermeldung. Sensordaten laufen üblicherweise best effort, Karten und statische Transformationen transient local.</div>
+
+<h2>Distributionen und Support</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Distribution</th><th data-s="text">Freigabe</th><th>Art</th><th>Ubuntu</th><th>Unterstützt bis</th><th>Gazebo-Paarung</th></tr></thead>
+<tbody>
+<tr><td><b>Humble Hawksbill</b></td><td>Mai 2022</td><td>LTS</td><td>22.04</td><td>Mai 2027</td><td>Fortress</td></tr>
+<tr><td><b>Jazzy Jalisco</b></td><td>Mai 2024</td><td>LTS</td><td>24.04</td><td>Mai 2029</td><td>Harmonic (LTS)</td></tr>
+<tr><td><b>Kilted Kaiju</b></td><td>Mai 2025</td><td>kein LTS</td><td>24.04</td><td>Dez. 2026</td><td>Ionic</td></tr>
+<tr><td><b>Lyrical Luth</b></td><td>Mai 2026</td><td><b>LTS</b></td><td>26.04</td><td>Mai 2031</td><td>Jetty</td></tr>
+<tr><td><b>Rolling Ridley</b></td><td>fortlaufend</td><td>Entwicklungszweig</td><td>jeweils neueste</td><td>—</td><td>jeweils neueste</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Welche Version im Jahr 2026?</b> <b>Jazzy</b>, wenn die größte Zahl fertiger Pakete und Tutorials zählt — es ist die reifste aktuelle LTS und läuft noch bis 2029. <b>Lyrical Luth</b> für Projekte, die über 2029 hinaus laufen sollen; als frische Freigabe hinkt das Paketökosystem der Community aber noch hinterher. <b>Kilted</b> ist bereits am Ende seines Lebenszyklus und für Neuprojekte keine Wahl. Distributionen lassen sich nicht mischen — die Entscheidung fällt zu Projektbeginn.</div>
+
+<h2>Der Baukasten</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Paket</th><th>Aufgabe</th><th>Kernstück</th></tr></thead>
+<tbody>
+<tr><td colspan="3">Beschreibung und Hardware</td></tr>
+<tr><td><b>URDF / xacro</b></td><td>Aufbau des Roboters beschreiben: Links, Joints, Grenzen, Massen, Kollisionskörper</td><td>Die Grundlage, auf der Simulation, RViz, MoveIt 2 und ros2_control aufsetzen. xacro macht daraus wiederverwendbare Makros statt XML-Wüsten</td></tr>
+<tr><td><b>ros2_control</b></td><td>Hardware und Regler trennen</td><td>Hardware-Interface (Treiber) auf der einen, Controller (joint_trajectory_controller, diff_drive_controller) auf der anderen Seite. Hardwaretausch lässt die Reglerlogik unberührt</td></tr>
+<tr><td><b>micro-ROS</b></td><td>ROS-2-Knoten auf dem Mikrocontroller</td><td>Ein ESP32 oder STM32 publiziert selbst Topics, statt über eine selbstgebaute serielle Brücke zu sprechen — die saubere Naht zwischen Echtzeit- und Planungsebene</td></tr>
+<tr><td colspan="3">Bewegung</td></tr>
+<tr><td><b>MoveIt 2</b></td><td>Bewegungsplanung für Arme</td><td>Löst die IK (KDL, TRAC-IK, IKFast), plant kollisionsfrei (OMPL, Pilz Industrial Motion Planner) und führt aus. MoveIt Servo für kontinuierliche kartesische Vorgaben</td></tr>
+<tr><td><b>Nav2</b></td><td>Navigation fahrender Roboter</td><td>Behavior Trees über Planern (Smac, NavFn) und Reglern (MPPI, Regulated Pure Pursuit); Lokalisierung mit AMCL, Kartierung mit slam_toolbox</td></tr>
+<tr><td colspan="3">Werkzeuge</td></tr>
+<tr><td><b>RViz 2</b></td><td>Anzeigen, was der Roboter „denkt“</td><td>Frames, Sensordaten, geplante Bahnen, Karten. Kein Simulator — ein leeres RViz heißt fast immer fehlende TF oder falsches QoS</td></tr>
+<tr><td><b>rosbag2</b></td><td>Datenströme aufzeichnen und wiedergeben</td><td>Das wichtigste Debugging-Werkzeug: einen Fehlerfall einmal aufzeichnen und danach beliebig oft ohne Hardware nachstellen</td></tr>
+<tr><td><b>colcon</b></td><td>Arbeitsbereich bauen</td><td>Baut alle Pakete im workspace; zusammen mit rosdep für Abhängigkeiten. Nach jedem Bauen das Overlay neu einlesen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Kommunikation läuft über DDS; die Implementierung ist über die RMW-Schicht austauschbar (Fast DDS, Cyclone DDS, alternativ Zenoh). Für den Anfang genügt die Voreinstellung — relevant wird die Wahl erst bei großen Graphen, WLAN-Strecken oder mehreren Robotern im selben Netz.</p>
+
+<h2>Simulation</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Simulator</th><th>Stärke</th><th>Einordnung</th></tr></thead>
+<tbody>
+<tr><td><b>Gazebo</b></td><td>Physik plus Sensormodelle, eng mit ROS 2 verzahnt (ros_gz)</td><td>Die Standardwahl für klassische Robotik. Achtung: „Gazebo Classic“ ist ausgelaufen und nicht dasselbe wie das heutige Gazebo (früher Ignition)</td></tr>
+<tr><td><b>Webots</b></td><td>Viele fertige Modelle, geringer Einrichtungsaufwand</td><td>Zugänglicher Einstieg, quelloffen; für ROS-2-Workflows ist Gazebo am Ende meist natürlicher</td></tr>
+<tr><td><b>MuJoCo</b></td><td>Sehr schnelle und genaue Kontaktsimulation</td><td>Quasi-Standard in der RL-Forschung an Greif- und Laufrobotern, quelloffen — kein Bau-Simulator</td></tr>
+<tr><td><b>NVIDIA Isaac Sim</b></td><td>Fotorealistik, GPU-Physik, synthetische Trainingsdaten</td><td>Für großangelegtes RL-Training und Sim-to-Real. Braucht eine kräftige NVIDIA-GPU</td></tr>
+<tr><td><b>Genesis</b></td><td>Sehr hoher Durchsatz durch massiv parallele Umgebungen</td><td>Jung und schnelllebig; interessant für RL-Training, nicht für den Hardwareaufbau</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Simulation beweist nichts über die Hardware.</b> Sie findet Logik-, Frame- und Planungsfehler zuverlässig — Reibung, Getriebespiel, Latenz und Sensorrauschen bildet sie nur so gut ab, wie man sie parametriert hat. Was in Gazebo sauber läuft, kann auf der echten Achse schwingen.</div>
+
+<h2>Erste Hürden</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Wo Einsteiger hängenbleiben</h4><ul>
+    <li><b>TF-Baum unvollständig oder doppelt:</b> zwei Knoten publizieren denselben Frame, der Baum zerfällt</li>
+    <li><b>QoS-Profile passen nicht:</b> Verbindung kommt stumm gar nicht zustande</li>
+    <li><b>Overlay nicht eingelesen:</b> nach dem Bauen wird weiter die alte Version ausgeführt</li>
+    <li><b>Zeitstempel aus verschiedenen Quellen:</b> Sensordaten und TF driften auseinander</li>
+    <li><b>Alles auf dem SBC:</b> die Regelschleife bekommt Jitter, die Achse schwingt</li>
+    <li><b>Distributionen gemischt:</b> Pakete aus Jazzy in einem Lyrical-Workspace</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Was hilft</h4><ul>
+    <li><code>ros2 topic hz</code>, <code>ros2 topic info --verbose</code> und <code>tf2_echo</code> als erste Griffe bei jedem Problem</li>
+    <li>URDF früh in RViz prüfen — verbogene Darstellung heißt Fehler in der Gelenkkette</li>
+    <li>Jeden Fehlerfall mit rosbag2 aufzeichnen, dann offline analysieren</li>
+    <li>Simulierte Zeit konsequent nutzen: <code>use_sim_time</code> überall gleich setzen</li>
+    <li>Schnelle Regelung auf den MCU auslagern, über micro-ROS anbinden</li>
+    <li>Launch-Dateien und Parameter-YAML von Anfang an versionieren</li>
+  </ul></div>
+</div>
+<p class="note">Regelfrequenzen und die Aufteilung zwischen MCU und Linux-Rechner sind unter <a href="#robo-hw">Roboter-Hardware</a> beschrieben, Reglerentwurf und Abtastzeit unter <a href="regelung-antriebe.html#digital">Digitale Regelung</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li><a href="https://docs.ros.org/">ROS 2 Documentation</a> — Tutorials, Distributionsliste und Support-Zeiträume (REP 2000).</li>
+    <li><a href="https://control.ros.org/">ros2_control</a>, <a href="https://moveit.ai/">MoveIt 2</a>, <a href="https://docs.nav2.org/">Nav2</a> — jeweils eigene Dokumentation mit Beispielprojekten.</li>
+    <li><a href="https://gazebosim.org/docs">Gazebo Documentation</a> — inklusive der Zuordnung von Gazebo- zu ROS-2-Versionen.</li>
+    <li><a href="https://micro.ros.org/">micro-ROS</a> — unterstützte Mikrocontroller und Transportvarianten.</li>
+    <li>ROS Enhancement Proposals (REP), insbesondere REP 103 (Einheiten und Konventionen) und REP 105 (Frames für mobile Roboter).</li>
+  </ul>
+</div>

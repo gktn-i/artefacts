@@ -1,30 +1,69 @@
 ---
 import "./_style.css";
 ---
-<h2>Grundlagen & Sicherheit</h2>
-<h3>Spannzangen (Collets)</h3>
-<p>Der 8250 nimmt Schäfte von 0,8 mm (1/32") bis 3,2 mm (1/8"). Passende Spannzange zum Schaft verwenden, nicht den Schaft in eine zu große Zange klemmen.</p>
+<div class="kurz"><b>Zwei Entscheidungen fallen, bevor die Maschine läuft: die passende Spannzange und die passende Drehzahl.</b> Der Rest ist Handhabung — plus Schutzausrüstung, die nicht verhandelbar ist.</div>
+
+<h2>Spannzangen und Wechsel</h2>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th data-s="text">Nummer</th><th data-s="num">Schaft</th><th>Zoll</th><th>Typische Aufsätze</th></tr></thead>
+<tbody>
+<tr><td><b>480</b></td><td>3,2 mm</td><td>1/8"</td><td>Standard — Trennscheiben, Fräser, Schleiftrommeln, Bürsten</td></tr>
+<tr><td><b>481</b></td><td>2,4 mm</td><td>3/32"</td><td>Kleinere Fräser und Schleifkörper</td></tr>
+<tr><td><b>482</b></td><td>1,6 mm</td><td>1/16"</td><td>Feine Bohrer, kleine Diamantspitzen</td></tr>
+<tr><td><b>483</b></td><td>0,8 mm</td><td>1/32"</td><td>Feinste Bohrer und Gravierer</td></tr>
+</tbody>
+</table></div>
 <ul>
-<li><b>480</b> – 3,2 mm (1/8") · Standard für die meisten Bits</li>
-<li><b>481</b> – 2,4 mm (3/32")</li>
-<li><b>482</b> – 1,6 mm (1/16")</li>
-<li><b>483</b> – 0,8 mm (1/32") · feine Bohrer/Gravierer</li>
-</ul>
-<div class="tip"><b>EZ Twist Nose Cap:</b> integrierter Schlüssel im Kappendeckel, kein extra Werkzeug zum Wechseln nötig. Für EZ-Lock-Scheiben gar kein Schlüssel.</div>
-
-<h3>Optimale Drehzahl finden</h3>
-<ul>
-<li>Immer erst an einem Reststück testen.</li>
-<li>Bei Kunststoff: langsam starten, hochdrehen bis es schmilzt, dann leicht zurück.</li>
-<li>HSS-Fräser rattert → zu langsam, höher drehen.</li>
-<li>Material/Bit zu heiß → Drehzahl runter oder Pausen.</li>
+  <li><b>EZ Twist:</b> Der Spannzangenschlüssel steckt im Kappendeckel des 8250 — kein Zusatzwerkzeug nötig.</li>
+  <li><b>EZ Lock:</b> Scheiben mit EZ-Lock-Nabe sitzen auf dem EZ402-Mandrell und werden ohne Schlüssel geklemmt; klassische Scheiben brauchen das Schraubmandrell 402.</li>
+  <li><b>Schaft passend zur Zange:</b> Ein 1,6-mm-Schaft in der 3,2-mm-Zange wird nicht gefasst, läuft unrund und schlägt aus.</li>
+  <li><b>Einstecktiefe:</b> Schaft so weit einführen, dass die Zange ihn auf ganzer Länge greift, erst dann die Mutter anziehen.</li>
 </ul>
 
-<h3>Druck & Vorschub</h3>
-<p>Nicht drücken, die Drehzahl macht die Arbeit. Zu viel Druck bremst den Motor, frisst Bits und gibt unsaubere Ergebnisse.</p>
+<h2>Drehzahl finden — Symptom und Abhilfe</h2>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th data-s="text">Beobachtung</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Fräser rattert, springt weg</b></td><td>Drehzahl zu niedrig</td><td>Höher drehen, Vorschub gleichmäßig halten</td></tr>
+<tr><td><b>Kunststoff schmilzt hinter dem Schnitt zu</b></td><td>Drehzahl zu hoch, Wärmestau</td><td>Niedriger, in kurzen Zügen arbeiten</td></tr>
+<tr><td><b>Bit glüht an, Werkstück verfärbt sich</b></td><td>Zu hohe Drehzahl oder zu viel Druck</td><td>Drehzahl runter, Pausen, drucklos führen</td></tr>
+<tr><td><b>Brandspuren im Holz</b></td><td>Vorschub zu langsam oder Schneide stumpf</td><td>Zügiger führen, Bit prüfen</td></tr>
+<tr><td><b>Motor bricht hörbar ein</b></td><td>Anpressdruck zu hoch</td><td>Druck weg — die Drehzahl schneidet, nicht die Kraft</td></tr>
+<tr><td><b>Trennscheibe schneidet schlechter als am Anfang</b></td><td>Scheibe ist kleiner geworden, Umfangsgeschwindigkeit sinkt</td><td>Drehzahl anheben oder Scheibe wechseln</td></tr>
+<tr><td><b>Schleifstein vibriert</b></td><td>Stein läuft unrund, nicht abgerichtet</td><td>Mit dem Abrichtstein 415 planziehen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Unbekanntes Material:</b> niedrig anfangen, an einem Reststück hochdrehen bis es gerade noch sauber schneidet — und dort bleiben.</div>
 
-<div class="warn"><b>Sicherheit:</b> Schutzbrille immer. Bürsten nie über 15k. Funken bei Metall von Gesicht/Brennbarem weg. Bei Glas/Stein/Fliese Staubmaske, da Quarzstaub. Werkstück fest einspannen.</div>
+<h2>Schutz und Absicherung</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Immer</h4>
+    <ul>
+      <li><b>Schutzbrille</b> nach EN 166 — auch für zwei Sekunden Arbeit</li>
+      <li><b>FFP2-Maske</b> bei Stein, Fliese, Glas, Beton (Quarzstaub) und bei Platinen (Glasfaser)</li>
+      <li><b>Werkstück einspannen</b> — beide Hände gehören ans Werkzeug</li>
+      <li><b>Aufsatz vor dem Einschalten prüfen</b>: Risse, ausgebrochene Zähne, verbogener Schaft → aussortieren</li>
+      <li><b>Freie Anlaufphase</b>: neue Scheiben kurz frei drehen lassen, bevor sie ans Werkstück gehen</li>
+      <li><b>Lange Haare, Ärmel, Ketten</b> sichern — der Kopf zieht ein</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Nie</h4>
+    <ul>
+      <li><b>Bürsten oder Polierer über 15 000 min⁻¹</b> — Drähte lösen sich aus dem Besatz</li>
+      <li>Werkstück in der Hand halten und gleichzeitig trennen</li>
+      <li>Funkenstrahl Richtung Gesicht, Akku oder Brennbarem</li>
+      <li>Trennscheibe seitlich zum Schleifen benutzen</li>
+      <li>Trocken arbeiten, wo der Aufsatz Kühlung braucht (Diamant, Siliziumkarbid)</li>
+      <li>Bei blockiertem Bit den Auslöser gedrückt halten</li>
+    </ul>
+  </div>
+</div>
 
-<h3>Schmierung beim Metalltrennen</h3>
-<p>Bei Alu, Kupfer, Blei, Zink: Paraffin oder Schneidwachs auf den Fräser, damit sich das Material nicht in den Zähnen festsetzt.</p>
-
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li><a href="https://www.dremel.com/de/de/">Dremel — Bedienungsanleitung 8250 und Zubehörkatalog</a>: Spannzangengrößen 0,8/1,6/2,4/3,2 mm, EZ-Twist-Kappe, EZ402-Mandrell.</li>
+    <li><a href="https://www.dremel.com/us/en/service-and-support/speed-safety-accessories">Dremel — Speed &amp; Safety</a>: Bürsten und Polieraufsätze höchstens 15 000 min⁻¹.</li>
+    <li>DGUV Information 209-002 (Schleifen), DGUV Regel 112-192 (Augenschutz), TRGS 559 (mineralischer Staub).</li>
+  </ul>
+</div>

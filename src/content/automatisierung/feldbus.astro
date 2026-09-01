@@ -1,77 +1,78 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Ein Feldbus ersetzt Kabelbäume durch eine Leitung.</b> Statt jeden Sensor einzeln in den Schaltschrank zu ziehen, hängen dezentrale Module an einem Strang. Die Wahl des Busses bestimmt Zykluszeit, Verkabelungsaufwand, Diagnosemöglichkeiten und Herstellerbindung.</div>
+<div class="kurz"><b>Ein Feldbus ersetzt Kabelbäume durch eine Leitung.</b> Statt jeden Sensor einzeln in den Schaltschrank zu ziehen, hängen dezentrale Module an einem Strang. Die Wahl bestimmt Zykluszeit, Verdrahtungsaufwand, Diagnose und Herstellerbindung.</div>
 
 <h2>Die Systeme im Vergleich</h2>
-<div class="tbl-wrap"><table style="min-width:960px">
-<thead><tr><th data-s="text">System</th><th>Physik</th><th>Zykluszeit</th><th>Teilnehmer</th><th>Offen</th><th>Verbreitung</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th data-s="text">System</th><th>Physik</th><th data-s="text">Zykluszeit</th><th>Teilnehmer</th><th>Träger</th><th>Wo es steht</th></tr></thead>
 <tbody>
-<tr><td><b>PROFINET RT / IRT</b></td><td>Ethernet 100 Mbit/s</td><td>1–10 ms (IRT bis 31,25 µs)</td><td>viele</td><td>PI-Organisation</td><td>Sehr hoch im deutschsprachigen Raum, Siemens-nah</td></tr>
-<tr><td><b>EtherCAT</b></td><td>Ethernet, Durchlaufprinzip</td><td><b>&lt; 100 µs</b> möglich</td><td>bis 65 535</td><td>ETG</td><td>Sehr hoch bei Antriebstechnik und schneller Regelung</td></tr>
+<tr><td><b>PROFINET RT / IRT</b></td><td>Ethernet 100 Mbit/s</td><td>1–10 ms typisch; IRT bis 31,25 µs</td><td>viele</td><td>PI</td><td>Sehr hoch im deutschsprachigen Raum, Siemens-nah</td></tr>
+<tr><td><b>EtherCAT</b></td><td>Ethernet, Durchlaufprinzip</td><td><b>&lt; 100 µs</b> möglich</td><td>65 535 je Segment</td><td>ETG</td><td>Antriebstechnik, schnelle Mehrachsregelung</td></tr>
 <tr><td><b>EtherNet/IP</b></td><td>Ethernet</td><td>1–10 ms</td><td>viele</td><td>ODVA</td><td>Nordamerika, Rockwell-nah</td></tr>
-<tr><td><b>Modbus RTU</b></td><td>RS-485</td><td>10–100 ms</td><td>bis 247</td><td><b>vollständig offen</b></td><td>Sehr hoch bei Sensorik, Wechselrichtern, Zählern. Simpel und überall implementiert</td></tr>
-<tr><td><b>Modbus TCP</b></td><td>Ethernet</td><td>1–10 ms</td><td>viele</td><td>offen</td><td>Der einfachste Weg, Fremdgeräte anzubinden</td></tr>
-<tr><td><b>CANopen</b></td><td>CAN, 2 Adern</td><td>1–10 ms</td><td>bis 127</td><td>CiA</td><td>Antriebe, Mobilmaschinen, Medizintechnik</td></tr>
-<tr><td><b>IO-Link</b></td><td>3 Adern, ungeschirmt, Punkt zu Punkt</td><td>2–20 ms</td><td>1 je Port</td><td>IO-Link-Konsortium</td><td>Der Standard für Sensoren <b>unterhalb</b> des Feldbusses. Parameter und Diagnose über dieselbe Leitung</td></tr>
-<tr><td><b>PROFIBUS DP</b></td><td>RS-485</td><td>5–20 ms</td><td>bis 126</td><td>PI</td><td>Altanlagen; in Neuanlagen durch PROFINET abgelöst</td></tr>
-<tr><td><b>AS-Interface</b></td><td>2 Adern, Daten und Energie</td><td>5 ms</td><td>bis 62</td><td>offen</td><td>Einfachste Sensor-Aktor-Ebene, sehr montagefreundlich</td></tr>
+<tr><td><b>Modbus RTU</b></td><td>RS-485, 2 Adern</td><td>10–100 ms</td><td>Adressen 1–247</td><td><b>vollständig offen</b></td><td>Wechselrichter, Zähler, Sensorik. Simpel, überall implementiert</td></tr>
+<tr><td><b>Modbus TCP</b></td><td>Ethernet</td><td>1–10 ms</td><td>viele</td><td>offen</td><td>Der einfachste Weg, ein Fremdgerät anzubinden</td></tr>
+<tr><td><b>CANopen</b></td><td>CAN, 2 Adern</td><td>1–10 ms</td><td>bis 127 Knoten</td><td>CiA</td><td>Antriebe, Mobilmaschinen, Medizintechnik</td></tr>
+<tr><td><b>IO-Link</b></td><td>3 Adern, ungeschirmt, Punkt zu Punkt</td><td>ab 0,4 ms (COM3), typisch 2–5 ms</td><td>1 Gerät je Port</td><td>IO-Link-Konsortium</td><td>Standard für Sensorik <b>unterhalb</b> des Feldbusses</td></tr>
+<tr><td><b>PROFIBUS DP</b></td><td>RS-485</td><td>5–20 ms</td><td>bis 126 Adressen</td><td>PI</td><td>Altanlagen; in Neuanlagen durch PROFINET ersetzt</td></tr>
+<tr><td><b>AS-Interface</b></td><td>2 Adern, Daten <b>und</b> Energie</td><td>5 ms bei 31 Slaves, 10 ms bei 62 A/B-Slaves</td><td>31 bzw. 62</td><td>offen</td><td>Einfachste Sensor-Aktor-Ebene, sehr montagefreundlich</td></tr>
 </tbody>
 </table></div>
+<p class="note">Die Zykluszeiten sind erreichbare Werte bei sinnvoller Projektierung, keine Garantien — sie hängen an Teilnehmerzahl, Datenmenge und Topologie. Deterministisch heißt: die Zeit ist nach oben begrenzt, nicht: sie ist immer gleich kurz.</p>
 
 <h2>Warum EtherCAT so schnell ist</h2>
 <div class="grid2">
-  <div class="card"><div class="ct">Durchlaufprinzip („processing on the fly“)</div><div class="cd">Ein einziger Ethernet-Rahmen läuft durch alle Teilnehmer. Jeder liest im Vorbeifahren seine Daten heraus und schreibt seine hinein, ohne den Rahmen anzuhalten. Es gibt keine Paketverarbeitung je Knoten.</div></div>
-  <div class="card"><div class="ct">Verteilte Uhren</div><div class="cd">Alle Teilnehmer synchronisieren ihre Uhren auf unter 100 ns genau. Damit lassen sich Messungen und Stellvorgänge über die ganze Anlage hinweg zeitgleich ausführen — Voraussetzung für koordinierte Mehrachsbewegungen.</div></div>
-  <div class="card"><div class="ct">Standard-Ethernet-Hardware</div><div class="cd">Auf der Master-Seite genügt eine gewöhnliche Netzwerkkarte plus Software. Die Slaves brauchen einen speziellen Baustein — dort steckt die Besonderheit.</div></div>
-  <div class="card"><div class="ct">Der Preis</div><div class="cd">Linien- oder Ringtopologie, kein beliebiges Netzwerk. Ein unterbrochenes Kabel trennt alles dahinter ab — dafür gibt es die Ringredundanz.</div></div>
+  <div class="card"><div class="ct">Durchlaufprinzip</div><div class="cd">Ein einziger Ethernet-Rahmen läuft durch alle Teilnehmer. Jeder liest im Vorbeifahren seine Daten heraus und schreibt seine hinein, ohne den Rahmen anzuhalten — keine Paketverarbeitung je Knoten.</div></div>
+  <div class="card"><div class="ct">Verteilte Uhren (Distributed Clocks)</div><div class="cd">Alle Teilnehmer laufen auf einer gemeinsamen Zeitbasis mit Jitter deutlich unter 1 µs. Voraussetzung für koordinierte Mehrachsbewegung und zeitgleiches Abtasten.</div></div>
+  <div class="card"><div class="ct">Standard-Hardware am Master</div><div class="cd">Master-seitig genügt eine gewöhnliche Netzwerkkarte plus Software. Die Besonderheit steckt im Slave-Baustein.</div></div>
+  <div class="card"><div class="ct">Der Preis</div><div class="cd">Linie oder Ring, kein beliebiges Netzwerk. Ein unterbrochenes Kabel trennt alles dahinter ab — dagegen hilft die Ringredundanz.</div></div>
 </div>
 
 <h2>IO-Link — unterschätzt und sehr nützlich</h2>
-<div class="steps">
-  <div class="step"><h4>Was es ist</h4>Eine digitale Punkt-zu-Punkt-Verbindung auf der bestehenden dreiadrigen Sensorleitung. Kein neuer Kabeltyp, keine Schirmung, kein Abschlusswiderstand.</div>
-  <div class="step"><h4>Was es bringt</h4>Messwerte digital statt als Analogsignal (keine Wandlungsfehler), Parametrierung aus der Steuerung heraus, Diagnosedaten und Identifikation des Geräts.</div>
-  <div class="step"><h4>Der praktische Hauptgewinn</h4>Gerätetausch ohne Einstellarbeit: Der IO-Link-Master schreibt die gespeicherten Parameter automatisch in den neuen Sensor. Das spart bei Wartungseinsätzen erheblich Zeit.</div>
-  <div class="step"><h4>Wo es an Grenzen kommt</h4>20 m Leitungslänge, ein Gerät je Port, Zykluszeiten ab etwa 2 ms. Für schnelle Regelkreise ungeeignet.</div>
-</div>
-
-<h2>Time-Sensitive Networking (TSN)</h2>
-<p>Eine Erweiterung von Standard-Ethernet um Echtzeitfähigkeit — definiert in der IEEE-802.1-Reihe, nicht als eigener Feldbus.</p>
-<div class="tbl-wrap"><table style="min-width:860px">
-<thead><tr><th>Baustein</th><th>Norm</th><th>Leistet</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Punkt</th><th>Konkret</th></tr></thead>
 <tbody>
-<tr><td><b>Zeitsynchronisation</b></td><td>IEEE 802.1AS (gPTP)</td><td>Gemeinsame Uhr über das ganze Netz, im Sub-Mikrosekundenbereich</td></tr>
-<tr><td><b>Zeitgesteuerte Übertragung</b></td><td>IEEE 802.1Qbv</td><td>Reservierte Zeitfenster für kritische Daten — sie können nicht von anderem Verkehr verzögert werden</td></tr>
-<tr><td><b>Rahmenunterbrechung</b></td><td>IEEE 802.1Qbu / 802.3br</td><td>Ein laufender großer Rahmen wird für einen dringenden unterbrochen</td></tr>
-<tr><td><b>Redundanz</b></td><td>IEEE 802.1CB</td><td>Doppelte Übertragung auf getrennten Wegen, Duplikate werden verworfen</td></tr>
+<tr><td><b>Was es ist</b></td><td>Digitale Punkt-zu-Punkt-Verbindung auf der bestehenden 3-adrigen Sensorleitung. Kein neuer Kabeltyp, keine Schirmung, kein Abschlusswiderstand</td></tr>
+<tr><td><b>Was es bringt</b></td><td>Messwert digital statt analog (keine Wandlungs- und Leitungsfehler), Parametrierung aus der Steuerung, Diagnose- und Identifikationsdaten</td></tr>
+<tr><td><b>Der Hauptgewinn</b></td><td><b>Gerätetausch ohne Einstellarbeit:</b> Der Master schreibt die gespeicherten Parameter automatisch in den neuen Sensor</td></tr>
+<tr><td><b>Grenzen</b></td><td>max. 20 m Leitung, ≥ 0,34 mm² Aderquerschnitt, ein Gerät je Port. Für schnelle Regelkreise ungeeignet</td></tr>
+<tr><td><b>Übertragungsraten</b></td><td>COM1 4,8 kBit/s · COM2 38,4 kBit/s · COM3 230,4 kBit/s. Das Gerät gibt vor, welche es kann</td></tr>
+<tr><td><b>IODD</b></td><td>Gerätebeschreibungsdatei je Typ — sie macht Parameter im Engineering-Werkzeug im Klartext sichtbar</td></tr>
 </tbody>
 </table></div>
-<p class="note"><b>Was das praktisch ändert:</b> Steuerungsdaten, Kameradaten und Bürodatenverkehr können dasselbe Netz nutzen, ohne dass die Regelung darunter leidet. PROFINET und EtherNet/IP haben TSN-Profile definiert; EtherCAT bleibt bei seinem eigenen Verfahren, das für kurze Linien effizienter ist. In der Praxis ist TSN in Neuanlagen angekommen, verdrängt die etablierten Feldbusse aber langsamer als vor Jahren erwartet.</p>
 
-<h2>Single Pair Ethernet</h2>
-<div class="grid">
-  <div class="card"><div class="ct">10BASE-T1L</div><div class="cd">10 Mbit/s über <b>bis zu 1000 m</b> auf einem Adernpaar, mit Speisung über dieselbe Leitung (Ethernet-APL). Löst in der Prozessindustrie die 4–20-mA-Technik ab und ist für explosionsgefährdete Bereiche zugelassen.</div></div>
-  <div class="card"><div class="ct">10BASE-T1S</div><div class="cd">10 Mbit/s über bis zu 25 m, als <b>Multidrop</b> mit bis zu acht Teilnehmern an einem Strang — also wie ein Bus, nicht sternförmig. Ursprünglich für Fahrzeuge, zunehmend auch für kostensensible Sensornetze in der Automatisierung.</div></div>
-  <div class="card"><div class="ct">Warum das relevant ist</div><div class="cd">Ein durchgängiges IP-Netz von der Leitebene bis zum einzelnen Sensor, ohne Protokollumsetzer. Genau das war das Versprechen von Industrie 4.0 — SPE liefert die physikalische Grundlage dafür.</div></div>
-  <div class="card"><div class="ct">Stand</div><div class="cd">Bausteine und Module sind verfügbar, Interoperabilität wird in regelmäßigen Plugfests geprüft. Im Feld noch nicht flächendeckend, aber wachsend.</div></div>
-</div>
+<h2>TSN und Single Pair Ethernet</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Baustein</th><th>Norm</th><th>Leistet</th></tr></thead>
+<tbody>
+<tr><td colspan="3">Time-Sensitive Networking — Echtzeit-Erweiterungen für Standard-Ethernet, kein eigener Feldbus</td></tr>
+<tr><td><b>Zeitsynchronisation</b></td><td>IEEE 802.1AS (gPTP)</td><td>Gemeinsame Uhr über das ganze Netz im Sub-Mikrosekundenbereich</td></tr>
+<tr><td><b>Zeitgesteuerte Übertragung</b></td><td>IEEE 802.1Qbv</td><td>Reservierte Zeitfenster für kritische Daten — anderer Verkehr kann sie nicht verzögern</td></tr>
+<tr><td><b>Rahmenunterbrechung</b></td><td>IEEE 802.1Qbu / 802.3br</td><td>Ein laufender großer Rahmen wird für einen dringenden unterbrochen</td></tr>
+<tr><td><b>Nahtlose Redundanz</b></td><td>IEEE 802.1CB</td><td>Doppelte Übertragung auf getrennten Wegen, Duplikate werden verworfen</td></tr>
+<tr><td colspan="3">Single Pair Ethernet — Ethernet auf einem Adernpaar, IEEE 802.3cg</td></tr>
+<tr><td><b>10BASE-T1L</b></td><td>IEEE 802.3cg</td><td>10 Mbit/s über <b>bis zu 1000 m</b>, Speisung über dieselbe Leitung (Ethernet-APL), auch für explosionsgefährdete Bereiche. Löst in der Prozessindustrie 4–20 mA ab</td></tr>
+<tr><td><b>10BASE-T1S</b></td><td>IEEE 802.3cg</td><td>10 Mbit/s über bis zu 25 m als <b>Multidrop</b> — mehrere Teilnehmer an einem Strang statt sternförmig. Ursprünglich Fahrzeugtechnik</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Einordnung:</b> TSN erlaubt Steuerungs-, Kamera- und Bürodatenverkehr im selben Netz, ohne dass die Regelung leidet. PROFINET und EtherNet/IP haben TSN-Profile definiert; EtherCAT bleibt beim eigenen Verfahren, das für kurze Linien effizienter ist. Beides ist in Neuanlagen angekommen, verdrängt die etablierten Feldbusse aber langsamer als lange erwartet.</p>
 
 <h2>Auswahl und Inbetriebnahme</h2>
 <div class="steps">
-  <div class="step"><h4>Zykluszeit realistisch bestimmen</h4>Was braucht die Anwendung wirklich? Für Ventile und Endschalter genügen 10 ms; nur koordinierte Achsbewegungen brauchen unter 1 ms.</div>
-  <div class="step"><h4>Bestehende Landschaft berücksichtigen</h4>Wenn die Instandhaltung PROFINET kennt und alle Ersatzteile dafür da sind, ist ein technisch überlegener anderer Bus oft die schlechtere Entscheidung.</div>
+  <div class="step"><h4>Zykluszeit realistisch bestimmen</h4>Für Ventile und Endschalter genügen 10 ms. Unter 1 ms braucht nur koordinierte Achsbewegung. Zu schnell projektiert kostet Geld ohne Nutzen.</div>
+  <div class="step"><h4>Bestehende Landschaft berücksichtigen</h4>Kennt die Instandhaltung PROFINET und liegen alle Ersatzteile dafür bereit, ist ein technisch überlegener anderer Bus oft die schlechtere Entscheidung.</div>
   <div class="step"><h4>Topologie und Leitungslängen planen</h4>Linie, Stern, Ring — mit den jeweiligen Grenzen. Bei RS-485-basierten Bussen: Abschlusswiderstände an <b>beiden</b> Enden, nirgends sonst.</div>
-  <div class="step"><h4>Schirmung konsequent auflegen</h4>Bei industriellen Bussen beidseitig und großflächig, nicht über ein dünnes Beidraht-„Schwänzchen“. Das ist die häufigste Ursache sporadischer Busfehler.</div>
-  <div class="step"><h4>Diagnose nutzen</h4>Jeder moderne Feldbus zählt Telegrammfehler und Wiederholungen. Ein Netz mit steigender Fehlerrate meldet sich, bevor es ausfällt — vorausgesetzt, jemand schaut hin.</div>
+  <div class="step"><h4>Schirmung großflächig auflegen</h4>Über Schirmklemmen, nicht über ein dünnes Beidraht-Schwänzchen. Das ist die häufigste Ursache sporadischer Busfehler — mehr dazu unter <a href="#schaltschrank">Schaltschrank</a> und <a href="elektrotechnik.html#emv">EMV</a>.</div>
+  <div class="step"><h4>Diagnosezähler auslesen</h4>Jeder moderne Feldbus zählt Telegrammfehler und Wiederholungen. Ein Netz mit steigender Fehlerrate meldet sich, bevor es ausfällt — vorausgesetzt, jemand schaut hin.</div>
 </div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
     <li><a href="https://www.ethercat.org/">EtherCAT Technology Group</a> und <a href="https://www.profibus.com/">PI (PROFIBUS &amp; PROFINET International)</a> — Spezifikationen und Einführungsschriften.</li>
-    <li><a href="https://io-link.com/">IO-Link Konsortium</a> — Systembeschreibung, frei verfügbar.</li>
+    <li><a href="https://io-link.com/">IO-Link-Konsortium</a> — Systembeschreibung und Spezifikation IEC 61131-9 (SDCI), frei verfügbar.</li>
     <li><a href="https://modbus.org/specs.php">Modbus Application Protocol Specification</a> — kurz, offen, vollständig.</li>
-    <li>IEEE 802.1 TSN Task Group; IEEE 802.3cg (10BASE-T1S/T1L).</li>
-    <li><a href="https://www.can-cia.org/">CiA — CAN in Automation</a> für CANopen und CAN FD.</li>
+    <li>IEEE 802.1 TSN Task Group; IEEE 802.3cg (10BASE-T1S / 10BASE-T1L).</li>
+    <li><a href="https://www.can-cia.org/">CiA — CAN in Automation</a> für CANopen und CAN FD; <a href="https://www.as-interface.net/">AS-International Association</a>.</li>
   </ul>
 </div>

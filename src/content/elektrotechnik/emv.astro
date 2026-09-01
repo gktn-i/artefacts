@@ -1,0 +1,89 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>EMV ist kein Zusatz am Ende, sondern eine Layout-Entscheidung am Anfang.</b> Jede Störung braucht drei Dinge: eine Quelle, einen Kopplungspfad und eine Senke. Am Kopplungspfad anzusetzen ist fast immer am billigsten — und der Pfad ist bei hohen Frequenzen die <b>Fläche der Stromschleife</b>.</div>
+
+<h2>Die vier Kopplungsarten</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th data-s="text">Kopplung</th><th>Mechanismus</th><th>Typisch bei</th><th>Gegenmaßnahme</th></tr></thead>
+<tbody>
+<tr><td><b>Galvanisch</b></td><td>Gemeinsame Leitungsimpedanz: Der Laststrom erzeugt einen Spannungsabfall im gemeinsamen Rückleiter</td><td>fehlender Sternpunkt, Masse als „Sammelschiene“</td><td>getrennte Rückleiter, Sternpunkt, Kelvin-Anschluss am Shunt</td></tr>
+<tr><td><b>Kapazitiv</b></td><td>Spannungsänderung koppelt über Streukapazität</td><td>hohes du/dt: Schaltknoten, Taktleitungen</td><td>Abstand, Schirmfläche dazwischen, Impedanz senken</td></tr>
+<tr><td><b>Induktiv</b></td><td>Stromänderung koppelt über das Magnetfeld in benachbarte Schleifen</td><td>hohes di/dt: Schaltregler, Motorleitungen</td><td>Schleifenfläche verkleinern, verdrillen, Abstand</td></tr>
+<tr><td><b>Strahlung</b></td><td>Ab Leitungslängen um λ/10 wirkt die Leitung als Antenne</td><td>Kabel, lange Leiterbahnen, Schlitze in der Massefläche</td><td>Filter am Gehäusedurchtritt, geschlossene Massefläche, Schirmung</td></tr>
+</tbody>
+</table></div>
+<div class="fbox">
+  <span class="f">u_stör = M · di/dt&nbsp;&nbsp;·&nbsp;&nbsp;i_stör = C · du/dt</span>
+  <span class="l">M ist proportional zur eingeschlossenen Fläche. Halbierte Schleifenfläche bedeutet halbierte Einkopplung — ohne ein einziges zusätzliches Bauteil.</span>
+</div>
+
+<h2>Die zehn Regeln, die am meisten bringen</h2>
+<div class="steps">
+  <div class="step"><h4>Durchgehende Massefläche</h4>Eine ununterbrochene Kupferlage direkt unter den Signallagen. Der Rückstrom sucht sich bei hohen Frequenzen von selbst den Weg direkt unter der Leiterbahn — kleinste Fläche, ganz automatisch.</div>
+  <div class="step"><h4>Massefläche nicht aufschlitzen</h4>Ein Schlitz zwingt den Rückstrom auf einen Umweg und macht daraus eine Antenne. Getrennte Analog- und Digitalmassen sind meist ein Fehler — außer bei einem klar definierten, einzigen Verbindungspunkt.</div>
+  <div class="step"><h4>Abblockkondensator direkt am Pin</h4>100 nF in 0402 oder 0603 unmittelbar am Versorgungspin, mit kurzen Vias zur Massefläche. Die Zuleitungsinduktivität macht die Wirkung zunichte, nicht der Kapazitätswert.</div>
+  <div class="step"><h4>Heiße Schleifen minimieren</h4>Beim Schaltregler bilden Eingangskondensator, High-Side- und Low-Side-Schalter die Schleife mit dem höchsten di/dt — sie gehört in wenige Quadratmillimeter, siehe <a href="#versorgung">Schaltregler</a>.</div>
+  <div class="step"><h4>Flanken nur so schnell wie nötig</h4>22–47 Ω in Reihe zu einer Taktleitung senken die Störabstrahlung deutlich und kosten nichts. Nicht jede Leitung braucht 1 ns Anstiegszeit.</div>
+  <div class="step"><h4>Filter an die Gehäusedurchführung</h4>Störungen abfangen, bevor das Kabel sie nach außen trägt. Ein Filter mitten auf der Platine hilft nichts, wenn die Störung danach wieder einkoppelt.</div>
+  <div class="step"><h4>Signal und Rückleiter beieinander</h4>Bei Flachbandkabeln jede zweite Ader auf Masse legen. Bei Steckern die Masse-Pins gleichmäßig verteilen, nicht alle an einem Ende.</div>
+  <div class="step"><h4>Quarze und Oszillatoren isolieren</h4>Kurze Leitungen, eigene Massefläche darunter, nichts darüber routen. Der Takt ist die stärkste Schmalbandquelle auf der Platine.</div>
+  <div class="step"><h4>Schnittstellen schützen</h4>TVS-Dioden und Gleichtaktdrosseln an jeder Leitung, die das Gehäuse verlässt — zugleich ESD-Schutz und EMV-Maßnahme.</div>
+  <div class="step"><h4>Früh messen</h4>Eine Nahfeldsonde am Spektrumanalysator oder Oszilloskop zeigt Problemstellen, lange bevor ein akkreditiertes Labor sie teuer bestätigt. Für den Hobbybereich genügt eine selbstgebaute Schleifensonde aus Koaxialkabel.</div>
+</div>
+
+<h2>Störaussendung und Störfestigkeit</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Aussendung (Emission)</h4><ul>
+    <li><b>Leitungsgebunden</b> 150 kHz – 30 MHz, gemessen mit Netznachbildung (LISN)</li>
+    <li><b>Abgestrahlt</b> 30 MHz – 1 GHz, bei hohen internen Takten bis 6 GHz; Absorberhalle oder Freifeld</li>
+    <li>Typische Quellen: Schaltregler-Grundfrequenz und ihre Oberwellen, Takte, schnelle Datenbusse</li>
+  </ul></div>
+  <div class="gb-col"><h4>Störfestigkeit (Immunität)</h4><ul>
+    <li><b>ESD</b> nach IEC 61000-4-2: üblich ±4 kV Kontakt, ±8 kV Luft</li>
+    <li><b>Burst</b> nach IEC 61000-4-4: schnelle Transienten auf Versorgungs- und Signalleitungen</li>
+    <li><b>Surge</b> nach IEC 61000-4-5: energiereiche Impulse, etwa aus Blitzeinschlag in der Nähe</li>
+    <li><b>Eingestrahltes HF-Feld</b> nach IEC 61000-4-3: typisch 3–10 V/m</li>
+  </ul></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Norm</th><th>Was sie regelt</th><th>Wo sie greift</th></tr></thead>
+<tbody>
+<tr><td><b>EN 55032</b> (CISPR 32)</td><td>Störaussendung von Multimediageräten</td><td>Klasse B für den Wohnbereich (strengere Grenzwerte), Klasse A für Industrie</td></tr>
+<tr><td><b>EN 55035</b> (CISPR 35)</td><td>Störfestigkeit von Multimediageräten</td><td>löste EN 55024 und EN 55020 ab</td></tr>
+<tr><td><b>EN IEC 61000-6-3 / -6-1</b></td><td>Fachgrundnormen Aussendung / Festigkeit, Wohnbereich</td><td>wenn keine Produktnorm passt</td></tr>
+<tr><td><b>EN IEC 61000-6-4 / -6-2</b></td><td>dieselben für Industrieumgebung</td><td>höhere Aussendungsgrenzwerte, dafür strengere Festigkeitsanforderungen</td></tr>
+<tr><td><b>EN IEC 61000-3-2 / -3-3</b></td><td>Netzoberschwingungen und Spannungsschwankungen</td><td>Geräte über 75 W brauchen praktisch eine PFC — siehe <a href="#leistung">Leistungsfaktor</a></td></tr>
+<tr><td><b>EMV-Richtlinie 2014/30/EU</b></td><td>Rechtsrahmen für die CE-Kennzeichnung in der EU</td><td>gilt für praktisch jedes elektrische Gerät, das in Verkehr gebracht wird</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Für private Projekte:</b> Solange ein Gerät nicht in Verkehr gebracht wird, greift die CE-Pflicht nicht — das Funkstörungsverbot gilt trotzdem. Wer sein Projekt später verkaufen oder verschenken will, kommt um die Konformitätsbewertung nicht herum. Ein Layout nach den zehn Regeln oben kostet nichts und macht den Unterschied zwischen „besteht knapp“ und „durchgefallen“.</p>
+
+<h2>ESD verstehen</h2>
+<p>Eine elektrostatische Entladung erreicht 2–15 kV bei Anstiegszeiten unter einer Nanosekunde. Der Strom von bis zu etwa 30 A fließt nur wenige Nanosekunden — energetisch wenig, aber schnell genug, um Gate-Oxide zu durchschlagen und Halbleiter latent zu schädigen.</p>
+<div class="grid">
+  <div class="card"><div class="ct">Beim Bestücken</div><div class="cd">ESD-Matte, Handgelenkband über 1 MΩ, leitfähige Beutel. Besonders empfindlich: MOSFETs, CMOS-Logik, HF-Bauteile, unverpackte MEMS-Sensoren.</div></div>
+  <div class="card"><div class="ct">Im Gerät</div><div class="cd">TVS-Dioden mit niedriger Kapazität direkt am Steckverbinder, kurze Ableitung zur Massefläche. Die Leitungslänge zum Schutzelement bestimmt, wie viel Spannung dahinter noch ankommt.</div></div>
+  <div class="card"><div class="ct">Bedienelemente</div><div class="cd">Taster und Drehgeber sind die häufigsten Eintrittspfade. Serienwiderstand plus Klemmung, Abstand der Leiterbahnen zur Bedienöffnung einhalten.</div></div>
+  <div class="card"><div class="ct">Latente Schäden</div><div class="cd">Ein ESD-Ereignis zerstört nicht immer sofort. Geräte, die nach Wochen ausfallen, hatten oft eine Vorschädigung — deshalb wird ESD-Schutz auch dann ernst genommen, wenn „bisher nichts passiert ist“.</div></div>
+</div>
+
+<h2>Fehlersuche bei Störungen</h2>
+<div class="steps">
+  <div class="step"><h4>Reproduzieren</h4>Tritt der Fehler auf, wenn ein bestimmtes Gerät einschaltet? Wenn ein Motor anläuft? Beim Anfassen? Jede Korrelation ist ein Hinweis auf den Pfad.</div>
+  <div class="step"><h4>Trennen</h4>Baugruppen einzeln versorgen und nacheinander zuschalten — so findet man Quelle und Senke.</div>
+  <div class="step"><h4>Kabel prüfen</h4>Testweise einen Klappferrit über ein Kabel setzen. Ändert sich das Verhalten, ist der Kopplungspfad gefunden; die endgültige Lösung ist dann ein Filter auf der Platine.</div>
+  <div class="step"><h4>Masse nachmessen</h4>Mit dem Oszilloskop die Spannung zwischen zwei Massepunkten messen — kurze Federklemme statt Krokodilklemme, sonst misst man die Tastkopfschleife. Zehn Millivolt Differenz zwischen zwei „Massen“ sind üblich und erklären erstaunlich viele Fehler.</div>
+  <div class="step"><h4>Software ausschließen</h4>Nicht jedes sporadische Fehlverhalten ist EMV. Watchdog-Resets protokollieren und die Reset-Ursache auslesen — die meisten Mikrocontroller speichern sie in einem Register.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Henry W. Ott, <i>Electromagnetic Compatibility Engineering</i>, Wiley — das Standardwerk, sehr gut lesbar.</li>
+    <li>Mark Montrose, <i>EMC and the Printed Circuit Board</i>, IEEE Press.</li>
+    <li>Würth Elektronik, <i>ANP105 — EMV-Konformität für CE von Elektro- und Elektronikprodukten</i>, kostenloses PDF mit Normenübersicht.</li>
+    <li>Texas Instruments, <i>System-Level ESD Protection Guide</i> (SLYY064).</li>
+    <li>EMV-Richtlinie 2014/30/EU und die harmonisierten Normen EN 55032 / EN 55035.</li>
+  </ul>
+</div>

@@ -1,0 +1,102 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Regelung heißt: messen, vergleichen, nachstellen — dauernd.</b> Dieses Modul spannt den ganzen Bogen: vom Regelkreis über Sensorik und Messkette bis zu Motoren, Treibern und Antriebsauslegung. Ein Regler kann nicht besser sein als sein Messwert — und kein Antrieb schneller als seine Auslegung erlaubt.</div>
+
+<h2>Steuerung und Regelung</h2>
+<svg class="dg l" viewBox="0 0 620 200" role="img" aria-label="Steuerkette ohne Rückführung und Regelkreis mit Rückführung">
+  <text class="lblb" x="150" y="20" text-anchor="middle">Steuerung (offene Kette)</text>
+  <path class="w" d="M30,52 H70" /><path class="f" d="M74,52 l-8,-4 v8 z" />
+  <rect class="box" x="76" y="36" width="70" height="32" rx="4" />
+  <text class="lbl" x="111" y="56" text-anchor="middle">Stellglied</text>
+  <path class="w" d="M146,52 H186" /><path class="f" d="M190,52 l-8,-4 v8 z" />
+  <rect class="box" x="192" y="36" width="70" height="32" rx="4" />
+  <text class="lbl" x="227" y="56" text-anchor="middle">Strecke</text>
+  <path class="w" d="M262,52 H300" /><path class="f" d="M304,52 l-8,-4 v8 z" />
+  <text class="lbl" x="20" y="56" text-anchor="end">w</text>
+  <text class="lbl" x="316" y="56">y</text>
+  <text class="lbl" x="150" y="86" text-anchor="middle">keine Rückmeldung — Störungen wirken ungebremst</text>
+
+  <text class="lblb" x="420" y="20" text-anchor="middle">Regelung (geschlossener Kreis)</text>
+  <path class="w" d="M330,52 H358" /><path class="f" d="M362,52 l-8,-4 v8 z" />
+  <circle class="accs" cx="374" cy="52" r="12" />
+  <text class="lbl" x="374" y="56" text-anchor="middle">−</text>
+  <path class="w" d="M386,52 H408" /><path class="f" d="M412,52 l-8,-4 v8 z" />
+  <rect class="box" x="414" y="36" width="60" height="32" rx="4" />
+  <text class="lbl" x="444" y="56" text-anchor="middle">Regler</text>
+  <path class="w" d="M474,52 H500" /><path class="f" d="M504,52 l-8,-4 v8 z" />
+  <rect class="box" x="506" y="36" width="66" height="32" rx="4" />
+  <text class="lbl" x="539" y="56" text-anchor="middle">Strecke</text>
+  <path class="w" d="M572,52 H600 V126 H374 V64" /><path class="f" d="M374,64 l-4,8 h8 z" />
+  <path class="acc" d="M539,20 V32" /><path class="accf" d="M539,36 l-4,-8 h8 z" />
+  <text class="lbla" x="545" y="18">Störung z</text>
+  <text class="lbl" x="320" y="56" text-anchor="end">w</text>
+  <text class="lbl" x="608" y="56">y</text>
+  <text class="lbl" x="440" y="146" text-anchor="middle">Rückführung: y wird gemessen und abgezogen</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Größe</th><th>Zeichen</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Führungsgröße</b></td><td>w</td><td>Was erreicht werden soll — der Sollwert</td></tr>
+<tr><td><b>Regelgröße</b></td><td>y</td><td>Was tatsächlich herauskommt — der Istwert</td></tr>
+<tr><td><b>Regelabweichung</b></td><td>e = w − y</td><td>Die Differenz; sie treibt den Regler an</td></tr>
+<tr><td><b>Stellgröße</b></td><td>u</td><td>Was der Regler an die Strecke gibt</td></tr>
+<tr><td><b>Störgröße</b></td><td>z</td><td>Alles, was von außen auf die Strecke wirkt</td></tr>
+</tbody>
+</table></div>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#modell"><div class="mt"><span class="i">🧮</span>Modell &amp; Übertragungsfunktion</div><div class="md">Sprungversuch, Streckenarten, Laplace, Pole und Nullstellen.</div></a>
+  <a href="#glieder"><div class="mt"><span class="i">🧩</span>Glieder &amp; Regelkreis</div><div class="md">P, I, PT1, PT2, Totzeit — und woran man Regelgüte misst.</div></a>
+  <a href="#pid"><div class="mt"><span class="i">🎚️</span>PID</div><div class="md">Verstehen mit Simulation, einstellen mit Rechner: Ziegler-Nichols, CHR, Lambda.</div></a>
+  <a href="#stabilitaet"><div class="mt"><span class="i">📈</span>Stabilität</div><div class="md">Bode, Nyquist, Amplituden- und Phasenreserve.</div></a>
+  <a href="#digital"><div class="mt"><span class="i">💻</span>Digitale Regelung &amp; Praxis</div><div class="md">Abtastzeit, Code, Anti-Windup, Filter, Kaskade, Vorsteuerung.</div></a>
+  <a href="#zustandsraum"><div class="mt"><span class="i">🗂️</span>Zustandsraum</div><div class="md">Polvorgabe, Beobachter, Kalman-Filter, Sensorfusion.</div></a>
+  <a href="#messkette"><div class="mt"><span class="i">🔗</span>Messkette &amp; Kalibrierung</div><div class="md">Signalkonditionierung, Brücken, Messabweichung, Kalibrieren.</div></a>
+  <a href="#sensoren"><div class="mt"><span class="i">🔬</span>Sensorprinzipien &amp; Katalog</div><div class="md">Die physikalischen Effekte — und konkrete Bauteile, filterbar.</div></a>
+  <a href="#position"><div class="mt"><span class="i">🎯</span>Encoder &amp; Position</div><div class="md">Inkremental, absolut, Resolver, Referenzfahrt, Auflösung.</div></a>
+  <a href="#motoren"><div class="mt"><span class="i">⚙️</span>Motortypen</div><div class="md">DC, Schrittmotor, BLDC, PMSM, Asynchron — Vergleich und Auswahl.</div></a>
+  <a href="#treiber"><div class="mt"><span class="i">🔀</span>Motortreiber</div><div class="md">H-Brücke, Chopper, PWM, feldorientierte Regelung.</div></a>
+  <a href="#auslegung"><div class="mt"><span class="i">📐</span>Antriebsauslegung</div><div class="md">Moment, Trägheit, Getriebe, Rampen — mit Rechner.</div></a>
+  <a href="#fluid"><div class="mt"><span class="i">💨</span>Pneumatik, Hydraulik &amp; Mechanik</div><div class="md">Fluidantriebe — und die Mechanik, die jede Regelung begrenzt.</div></a>
+</div>
+
+<h2>Die Kette, um die es geht</h2>
+<svg class="dg l" viewBox="0 0 620 130" role="img" aria-label="Signalkette von der physikalischen Größe über Sensor, Verstärker, Wandler, Rechner, Treiber bis zum Aktor">
+  <rect class="box" x="14" y="40" width="72" height="34" rx="4" /><text class="lbl" x="50" y="61" text-anchor="middle">Physik</text>
+  <rect class="box" x="100" y="40" width="72" height="34" rx="4" /><text class="lbl" x="136" y="61" text-anchor="middle">Sensor</text>
+  <rect class="box" x="186" y="40" width="82" height="34" rx="4" /><text class="lbl" x="227" y="61" text-anchor="middle">Verstärker</text>
+  <rect class="box" x="282" y="40" width="60" height="34" rx="4" /><text class="lbl" x="312" y="61" text-anchor="middle">ADC</text>
+  <rect class="box" x="356" y="40" width="76" height="34" rx="4" /><text class="lbl" x="394" y="61" text-anchor="middle">Rechner</text>
+  <rect class="box" x="446" y="40" width="72" height="34" rx="4" /><text class="lbl" x="482" y="61" text-anchor="middle">Treiber</text>
+  <rect class="box" x="532" y="40" width="72" height="34" rx="4" /><text class="lbl" x="568" y="61" text-anchor="middle">Aktor</text>
+  <path class="acc" d="M86,57 H96 M172,57 H182 M268,57 H278 M342,57 H352 M432,57 H442 M518,57 H528" />
+  <path class="accf" d="M100,57 l-8,-4 v8 z" /><path class="accf" d="M186,57 l-8,-4 v8 z" /><path class="accf" d="M282,57 l-8,-4 v8 z" />
+  <path class="accf" d="M356,57 l-8,-4 v8 z" /><path class="accf" d="M446,57 l-8,-4 v8 z" /><path class="accf" d="M532,57 l-8,-4 v8 z" />
+  <path class="w" d="M568,74 V102 H50 V78" style="stroke-dasharray:5 4" /><path class="f" d="M50,76 l-4,8 h8 z" />
+  <text class="lbl" x="310" y="118" text-anchor="middle">die Welt schließt den Kreis</text>
+</svg>
+<p class="note">Jedes Glied dieser Kette fügt Fehler, Verzögerung und Rauschen hinzu. Wer eine Regelung verbessern will, prüft zuerst, welches Glied wirklich begrenzt — oft ist es nicht der Regler, sondern ein grob auflösender Sensor oder ein Getriebe mit Spiel.</p>
+
+<div class="tip"><b>Der ehrlichste Satz über Regelungstechnik:</b> Die meisten Aufgaben löst ein PI-Regler mit sinnvollen Parametern. Der aufwendige Teil ist selten der Reglerentwurf, sondern die Strecke zu verstehen, sauber zu messen und mit Begrenzung, Rauschen und Totzeit umzugehen.</div>
+
+<h2>Verwandte Module</h2>
+<div class="grid">
+  <div class="card"><div class="ct">→ <a href="elektrotechnik.html#wandler">Elektrotechnik &amp; Analog</a></div><div class="cd">Signalkonditionierung, Instrumentenverstärker, ADC-Auswahl, EMV.</div></div>
+  <div class="card"><div class="ct">→ <a href="embedded-firmware.html">Embedded &amp; Firmware</a></div><div class="cd">Timer, Interrupts und Busse — dort läuft der Regler als Code.</div></div>
+  <div class="card"><div class="ct">→ <a href="automatisierung-robotik.html">Automatisierung &amp; Robotik</a></div><div class="cd">SPS, Sicherheit, Kinematik und ROS — Regelung im Anlagenkontext.</div></div>
+  <div class="card"><div class="ct">→ <a href="fpv-drohnen.html">Drohnen &amp; FPV</a></div><div class="cd">PID-Tuning am Flugregler — der Spezialfall in der Praxis.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Jan Lunze, <i>Regelungstechnik 1 und 2</i>, Springer Vieweg — das Standardwerk im deutschsprachigen Raum.</li>
+    <li>Karl Johan Åström, Richard Murray, <a href="https://fbswiki.org/">Feedback Systems</a> — vollständig kostenlos, modern, sehr gut lesbar.</li>
+    <li>Åström &amp; Hägglund, <i>Advanced PID Control</i>, ISA — die Referenz zu allem, was PID betrifft.</li>
+    <li>Jörg Hoffmann (Hrsg.), <i>Handbuch der Messtechnik</i>, Hanser; Tränkler &amp; Reindl (Hrsg.), <i>Sensortechnik</i>, Springer.</li>
+    <li>Rolf Fischer, <i>Elektrische Maschinen</i>, Hanser — der Standard zu Motoren.</li>
+    <li>Brian Douglas, <a href="https://www.youtube.com/@BrianBDouglas">Control System Lectures</a> — die anschaulichste kostenlose Erklärung von Bode, Nyquist und Zustandsraum.</li>
+  </ul>
+</div>

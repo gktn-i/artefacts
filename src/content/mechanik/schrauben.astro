@@ -1,0 +1,137 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Eine Schraube hält nicht durch ihren Schaft, sondern durch die Klemmkraft, die sie erzeugt.</b> Die Bauteile werden zusammengepresst und übertragen die Last per Reibung in der Trennfuge. Wer das verstanden hat, zieht anders an und konstruiert andere Verbindungen. Alle Drehmoment-, Kernloch- und Gewindewerte des Projekts stehen hier.</div>
+
+<h2>Das Prinzip: Vorspannung</h2>
+<p>Beim Anziehen wird die Schraube gedehnt und die Bauteile werden gestaucht — die Schraube wirkt als sehr steife Zugfeder. Eine <b>Querkraft</b> läuft über die Reibung in der Trennfuge, nicht über den Schaft.</p>
+<div class="fbox">
+  <span class="f">F_quer,übertragbar = µ_T · F_V · n / S_R</span>
+  <span class="l">µ_T Reibwert in der Trennfuge (0,1–0,2 bei Stahl), F_V Vorspannkraft je Schraube, n Anzahl der Schrauben, S_R Rutschsicherheit (≥ 1,2).</span>
+</div>
+<div class="stop"><b>Der häufigste Konstruktionsfehler:</b> die Schraube als Bolzen zu benutzen. Im Durchgangsloch mit Spiel überträgt sie Querkraft nur durch Reibung. Rutscht die Verbindung, schlägt die Schraube im Loch und geht auf Abscherung — die hält deutlich weniger aus als die Reibung, für die die Verbindung gedacht war. Muss Querkraft formschlüssig aufgenommen werden: Passschrauben, Passstifte oder eine Verzahnung vorsehen.</div>
+
+<h2>Festigkeitsklassen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Klasse</th><th data-s="num">R_m min [N/mm²]</th><th data-s="num">R_p0,2 min [N/mm²]</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>4.6</b></td><td>400</td><td>240</td><td>Baumarktqualität, unbelastete Verbindungen</td></tr>
+<tr><td><b>8.8</b></td><td>800 (d ≤ 16) · 830 (d &gt; 16)</td><td>640 · 660</td><td>Der Standard im Maschinenbau; galvanisch verzinkt oder blank</td></tr>
+<tr><td><b>10.9</b></td><td>1040</td><td>940</td><td>Höhere Vorspannung auf gleichem Bauraum; empfindlich gegen Wasserstoffversprödung</td></tr>
+<tr><td><b>12.9</b></td><td>1220</td><td>1100</td><td>Innensechskantschrauben ISO 4762; hochbelastet, aber spröder</td></tr>
+<tr><td><b>A2-70 (V2A)</b></td><td>700</td><td>450</td><td>Edelstahl für innen und feuchte Umgebung; neigt zum Fressen</td></tr>
+<tr><td><b>A4-70 (V4A)</b></td><td>700</td><td>450</td><td>Edelstahl für Salzwasser und Chlor</td></tr>
+</tbody>
+</table></div>
+<p>Die Zahl vor dem Punkt ist die Nenn-Zugfestigkeit in Hundert N/mm², die Zahl danach das Zehnfache des Verhältnisses R_p0,2/R_m. Aus <b>8.8</b> folgt also R_m = 800 und R_p0,2 = 0,8 · 800 = 640 N/mm². Die Mindestwerte nach ISO 898-1 liegen bei 10.9 und 12.9 etwas über diesen Nennwerten — der Rechner unten rechnet mit den Mindestwerten.</p>
+
+<div class="calc" data-calc="schraube">
+  <h4>Anziehdrehmoment und Vorspannkraft</h4>
+  <div class="row">
+    <div><label>Größe</label><select data-k="groesse"><option>M3</option><option>M4</option><option>M5</option><option>M6</option><option selected>M8</option><option>M10</option><option>M12</option><option>M14</option><option>M16</option><option>M20</option></select></div>
+    <div><label>Festigkeitsklasse</label><select data-k="klasse"><option value="8.8" selected>8.8</option><option value="10.9">10.9</option><option value="12.9">12.9</option><option value="A2-70">A2-70 / A4-70</option></select></div>
+    <div><label>Reibungszahl µ</label><input data-k="mu" type="number" step="any" value="0.14" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Gewinde, Bohrung, Drehmoment</h2>
+<p>Metrisches Regelgewinde, alle Maße in Millimeter. Anziehdrehmomente in Nm für µ_ges = 0,14 und 90 % Ausnutzung der Streckgrenze — der Normalfall „verzinkt, leicht geölt“. Faustregel fürs Kernloch: <span class="formula">d_Kern ≈ d − P</span>.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Gewinde</th><th data-s="num">Steigung P</th><th data-s="num">Kernloch</th><th data-s="num">Durchgang mittel</th><th data-s="num">Senkung Ø</th><th data-s="num">M_A 8.8</th><th data-s="num">M_A 10.9</th><th data-s="num">M_A 12.9</th></tr></thead>
+<tbody>
+<tr><td><b>M2</b></td><td>0,40</td><td>1,6</td><td>2,4</td><td>4,0</td><td>0,4</td><td>0,55</td><td>0,65</td></tr>
+<tr><td><b>M2,5</b></td><td>0,45</td><td>2,05</td><td>2,9</td><td>5,0</td><td>0,8</td><td>1,1</td><td>1,3</td></tr>
+<tr><td><b>M3</b></td><td>0,50</td><td>2,5</td><td>3,4</td><td>6,3</td><td>1,3</td><td>1,8</td><td>2,1</td></tr>
+<tr><td><b>M4</b></td><td>0,70</td><td>3,3</td><td>4,5</td><td>8,3</td><td>3,0</td><td>4,1</td><td>4,9</td></tr>
+<tr><td><b>M5</b></td><td>0,80</td><td>4,2</td><td>5,5</td><td>10,4</td><td>5,9</td><td>8,1</td><td>9,7</td></tr>
+<tr><td><b>M6</b></td><td>1,00</td><td>5,0</td><td>6,6</td><td>12,4</td><td>10</td><td>14</td><td>17</td></tr>
+<tr><td><b>M8</b></td><td>1,25</td><td>6,8</td><td>9,0</td><td>16,4</td><td>25</td><td>35</td><td>41</td></tr>
+<tr><td><b>M10</b></td><td>1,50</td><td>8,5</td><td>11,0</td><td>20,4</td><td>49</td><td>69</td><td>83</td></tr>
+<tr><td><b>M12</b></td><td>1,75</td><td>10,2</td><td>13,5</td><td>24,4</td><td>86</td><td>120</td><td>145</td></tr>
+<tr><td><b>M14</b></td><td>2,00</td><td>12,0</td><td>15,5</td><td>27,4</td><td>135</td><td>190</td><td>230</td></tr>
+<tr><td><b>M16</b></td><td>2,00</td><td>14,0</td><td>17,5</td><td>30,4</td><td>210</td><td>295</td><td>355</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Gewindefurcher statt Gewindebohrer</b> lohnt sich bei Aluminium, Kupfer und weichem Stahl: keine Späne im Sackloch, höhere Gewindefestigkeit durch die verfestigte Randzone, längere Standzeit. Das Kernloch wird dabei größer gebohrt, etwa d − 0,55 · P. Bei Grauguss und gehärtetem Stahl funktioniert das Verfahren nicht. Feingewinde, Rohr-, Zoll- und Trapezgewinde stehen unter <a href="#normteile">Gewinde &amp; Normteile</a>.</div>
+
+<h2>Reibungszahl und Anziehverfahren</h2>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th data-s="text">Zustand</th><th data-s="num">µ_ges</th><th>Wirkung auf die Vorspannung bei gleichem Moment</th></tr></thead>
+<tbody>
+<tr><td>Geölt oder gefettet, blank</td><td>0,08 – 0,12</td><td>Deutlich höher — Gefahr, die Schraube zu überdehnen</td></tr>
+<tr><td>Verzinkt, leicht geölt (Lieferzustand)</td><td>0,12 – 0,16</td><td>Der Standardfall, auf den sich alle Tabellen beziehen (µ = 0,14)</td></tr>
+<tr><td>Trocken, entfettet, verzinkt</td><td>0,16 – 0,22</td><td>Spürbar geringer</td></tr>
+<tr><td>Edelstahl auf Edelstahl, trocken</td><td>0,23 – 0,40</td><td>Stark streuend, Fressgefahr — immer mit Montagepaste</td></tr>
+<tr><td>Mit Schraubensicherungsklebstoff</td><td>0,12 – 0,18</td><td>Wirkt beim Anziehen zugleich als Schmierstoff</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Warum Drehmomentschlüssel weniger genau sind, als man denkt:</b> Nur etwa 10 % des aufgebrachten Moments werden zu Vorspannung, der Rest überwindet Reibung unter dem Kopf und im Gewinde. Die Streuung der Vorspannkraft liegt beim Drehmomentanziehen bei ±20–25 %. Genauer wird es nur drehwinkelgesteuert (±10 %) oder über Längenmessung an der Schraube (±5 %).</div>
+
+<h2>Einschraubtiefe im Sacklochgewinde</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th data-s="text">Mutterwerkstoff</th><th data-s="num">Mindest-Einschraubtiefe</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td>Stahl, Guss</td><td>1,0 × d</td><td>Bei 12.9-Schrauben eher 1,25 × d</td></tr>
+<tr><td>Aluminium</td><td>1,5 – 2,0 × d</td><td>Weichere Legierungen ans obere Ende</td></tr>
+<tr><td>Magnesium, Zinkdruckguss</td><td>2,0 – 2,5 × d</td><td>—</td></tr>
+<tr><td>Technische Kunststoffe</td><td>2,0 – 2,5 × d</td><td>Besser Gewindeeinsatz oder Einpressmutter</td></tr>
+<tr><td>FDM-Druckteil</td><td>Gewindeeinsatz verwenden</td><td>Heat-Set-Insert mit dem Lötkolben einschmelzen; direkt geschnittene Gewinde halten wenige Zyklen</td></tr>
+</tbody>
+</table></div>
+<p>Ziel ist immer, dass die <b>Schraube</b> versagt und nicht das Gewinde im Bauteil — ein abgerissener Bolzen ist ärgerlich, ein ausgerissenes Gewinde im teuren Gehäuse ist ein Schaden.</p>
+
+<h2>Warum Schrauben sich lösen</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Setzen — Vorspannungsverlust ohne Drehung</h4>
+    <ul>
+      <li>Rauheitsspitzen in Trennfuge, unter dem Kopf und im Gewinde werden plattgedrückt</li>
+      <li>Typisch 3–10 µm je Trennfuge, überwiegend in den ersten Betriebsstunden</li>
+      <li><b>Gegenmittel:</b> lange Klemmlänge, wenige Trennfugen, glatte Auflageflächen, Nachziehen nach der Einlaufzeit</li>
+    </ul>
+  </div>
+  <div class="gb-col"><h4>Losdrehen — die Schraube dreht zurück</h4>
+    <ul>
+      <li>Querbewegung in der Trennfuge hebt kurzzeitig die Reibung auf; dann reicht das Rückdrehmoment aus der Steigung</li>
+      <li>Reine Zugschwellbelastung dreht Schrauben <b>nicht</b> auf — der Junker-Test von 1969 hat die Querbewegung als Ursache nachgewiesen</li>
+      <li><b>Gegenmittel:</b> Querbewegung verhindern (hohe Vorspannung, Formschluss) oder formschlüssig sichern</li>
+    </ul>
+  </div>
+</div>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th data-s="text">Sicherungsmaßnahme</th><th>Wirkprinzip</th><th data-s="text">Bewertung</th></tr></thead>
+<tbody>
+<tr><td><b>Hohe Vorspannung</b></td><td>Verhindert die Querbewegung, die zum Losdrehen führt</td><td>Die mit Abstand wirksamste Maßnahme. Alles andere ist Ergänzung.</td></tr>
+<tr><td><b>Klebstoff</b> (mittelfest, Loctite 243 u. ä.)</td><td>Formschluss durch aushärtenden Kunststoff im Gewindespiel</td><td>Wirkt zuverlässig; für M5–M12 die richtige Wahl. Entfettete Flächen nötig, bei Edelstahl Aktivator.</td></tr>
+<tr><td><b>Keilsicherungsscheiben</b> (Nord-Lock u. ä.)</td><td>Keilflächen zwischen zwei Scheiben; Losdrehen erzeugt Klemmung statt Lockerung</td><td>Im Junker-Test durchgehend wirksam, auch bei starker Vibration. Teuer, aber begründbar.</td></tr>
+<tr><td><b>Sperrzahnschraube / Rippscheibe</b></td><td>Zähne graben sich formschlüssig in die Auflage</td><td>Wirksam, beschädigt aber die Oberfläche — nicht auf eloxiertem oder lackiertem Alu.</td></tr>
+<tr><td><b>Selbstsichernde Mutter</b> (DIN 985)</td><td>Reibung im verformten Nylonring oder Metallklemmteil</td><td>Wirksam gegen Verlieren. Nylon nur bis ca. 120 °C, nach zwei bis drei Montagen erschöpft.</td></tr>
+<tr><td><b>Kontermutter</b></td><td>Zwei Muttern verspannen sich gegeneinander</td><td>Wirkt nur bei richtiger Reihenfolge: dünne Mutter zuerst, dicke dagegen kontern.</td></tr>
+<tr><td><b>Splint, Kronenmutter, Drahtsicherung</b></td><td>Vollständiger Formschluss</td><td>Sichert gegen Verlieren, nicht gegen Vorspannungsverlust. Klassiker in Luftfahrt und Kranbau.</td></tr>
+<tr><td><b>Federring (DIN 127), Zahnscheibe (DIN 6797)</b></td><td>Federkraft soll die Vorspannung erhalten</td><td><b>Unwirksam</b> bei hochfesten Schrauben; in DIN 25201-4 ausdrücklich als ungeeignet eingestuft. Für Kleinteile und Erdungsanschlüsse in Ordnung.</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Der Federring ist die verbreitetste unwirksame Sicherung.</b> DIN 127 stammt aus der Zeit der Klasse-4.6-Schrauben. Bei einer 8.8-Schraube ist die Vorspannkraft um eine Größenordnung höher als die Federkraft des Rings — im angezogenen Zustand ist er plattgedrückt und wirkt wie eine gewöhnliche Scheibe. „Hat bei mir immer gehalten“ stimmt oft; die Ursache war die Vorspannung, nicht der Ring.</div>
+
+<h2>Montage</h2>
+<div class="steps">
+  <div class="step"><h4>Auflageflächen prüfen</h4>Grat, Farbe und Rost unter dem Kopf kosten Vorspannung. Bei Kunststoff- und Aluteilen große Scheiben verwenden, sonst gräbt sich der Kopf ein.</div>
+  <div class="step"><h4>Über Kreuz und in Stufen anziehen</h4>Bei Flanschen und Deckeln erst alle Schrauben auf 30 %, dann 60 %, dann 100 %. Sonst verzieht sich das Bauteil und die zuerst angezogenen Schrauben verlieren wieder Vorspannung.</div>
+  <div class="step"><h4>Reibungszustand einheitlich halten</h4>Entweder alle Schrauben einer Verbindung trocken oder alle geölt. Gemischt ergibt bei gleichem Moment völlig unterschiedliche Vorspannkräfte.</div>
+  <div class="step"><h4>Nach der Einlaufzeit nachziehen</h4>Bei Verbindungen mit vielen Trennfugen nach einigen Betriebsstunden kontrollieren; danach ist das Setzen weitgehend abgeschlossen.</div>
+  <div class="step"><h4>Edelstahl mit Montagepaste</h4>A2 und A4 fressen bei trockener Montage: Gewinde und Mutter verschweißen kalt und sind nicht mehr zu trennen. Keramik- oder MoS₂-Paste verhindert das zuverlässig.</div>
+</div>
+<div class="tip"><b>Klemmlänge ist Ihr Freund.</b> Je länger der gedehnte Schaftbereich, desto elastischer die Verbindung und desto weniger stört das Setzen. Eine kurze, dicke Schraube verliert durch denselben Setzbetrag einen viel größeren Anteil ihrer Vorspannung als eine lange — Dehnschrauben mit verjüngtem Schaft treiben das auf die Spitze. Schrauben der Klasse 8.8 sind wiederverwendbar, solange sie unverformt sind; drehwinkelgesteuert angezogene und Dehnschrauben sind Einwegteile.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>VDI 2230 Blatt 1 — Systematische Berechnung hochbeanspruchter Schraubenverbindungen; Grundlage von Rechner, Anziehdrehmomenten, Reibungszahlen und Setzbeträgen.</li>
+    <li>DIN EN ISO 898-1 (Festigkeitsklassen Stahl) und DIN EN ISO 3506-1 (nichtrostende Stähle A2, A4).</li>
+    <li>DIN 13-1 (metrisches ISO-Gewinde), DIN 336 (Kernlochbohrer), DIN EN 20273 / ISO 273 (Durchgangslöcher), DIN 74 und DIN EN ISO 15065 (Senkungen).</li>
+    <li>DIN 25201-4 — Konstruktionsrichtlinie Schraubensicherungen; enthält die Bewertung der Maßnahmen und stuft Federringe als ungeeignet ein. Prüfverfahren: DIN 65151 (Junker-Test).</li>
+    <li>Gerhard H. Junker, <i>New Criteria for Self-Loosening of Fasteners Under Vibration</i>, SAE Technical Paper 690055 (1969) — die Originalarbeit zum Losdrehmechanismus.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — Kapitel Schraubenverbindungen mit Einschraubtiefen und Tragfähigkeitsnachweis.</li>
+  </ul>
+</div>

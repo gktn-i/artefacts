@@ -12,7 +12,7 @@ import "./_style.css";
 <tr><td><b>DIN VDE 0298-4</b></td><td>Strombelastbarkeit von Leitungen</td><td>Die maßgeblichen Tabellen mit Häufungs- und Temperaturfaktoren</td></tr>
 <tr><td><b>IEC/TS 60479-1</b></td><td>Wirkung des elektrischen Stroms auf Menschen</td><td>Grundlage aller Grenzwerte zu Loslassschwelle und Herzkammerflimmern</td></tr>
 <tr><td><b>EN IEC 62368-1</b></td><td>Sicherheit von Audio-, Video-, Informations- und Kommunikationsgeräten</td><td>Löste EN 60950 und EN 60065 ab. Regelt Isolationsabstände, Brandschutz und Energiequellenklassen</td></tr>
-<tr><td><b>EN 61010-1</b></td><td>Sicherheit von Mess-, Steuer- und Laborgeräten</td><td>Definiert die Messkategorien CAT I bis CAT IV</td></tr>
+<tr><td><b>EN 61010-1</b></td><td>Sicherheit von Mess-, Steuer- und Laborgeräten</td><td>Grundlage der Messkategorien CAT II bis CAT IV; Einzelheiten für Messkreise in IEC 61010-2-030</td></tr>
 <tr><td><b>DGUV Vorschrift 3</b></td><td>Elektrische Anlagen und Betriebsmittel</td><td>Prüfpflichten im gewerblichen Bereich</td></tr>
 </tbody>
 </table></div>
@@ -50,12 +50,12 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th data-s="text">Norm</th><th>Inhalt</th></tr></thead>
 <tbody>
-<tr><td><b>IPC-2221B</b></td><td>Allgemeiner Standard für Leiterplattenentwurf: Leiterbahnbreite, Abstände, Bohrungen</td></tr>
+<tr><td><b>IPC-2221C</b></td><td>Allgemeiner Standard für Leiterplattenentwurf: Leiterbahnbreite, Abstände, Bohrungen (Fassung 2023, löst 2221B ab)</td></tr>
 <tr><td><b>IPC-2152</b></td><td>Strombelastbarkeit von Leiterbahnen auf Basis moderner Messdaten</td></tr>
-<tr><td><b>IPC-7351B</b></td><td>Landmuster für SMD-Bauteile, mit drei Dichteklassen</td></tr>
+<tr><td><b>IPC-7351B</b></td><td>Landmuster für SMD-Bauteile, mit drei Dichteklassen. Weiterhin gültige Fassung; ergänzend IPC-7352 (2023) als Leitfaden</td></tr>
 <tr><td><b>IPC-A-600</b></td><td>Abnahmekriterien für Leiterplatten</td></tr>
-<tr><td><b>IPC-A-610</b></td><td>Abnahmekriterien für elektronische Baugruppen — die Bildreferenz für gute und schlechte Lötstellen</td></tr>
-<tr><td><b>IPC-J-STD-001</b></td><td>Anforderungen an gelötete Verbindungen</td></tr>
+<tr><td><b>IPC-A-610J</b></td><td>Abnahmekriterien für elektronische Baugruppen — die Bildreferenz für gute und schlechte Lötstellen (Fassung 2024)</td></tr>
+<tr><td><b>IPC-J-STD-001J</b></td><td>Anforderungen an gelötete Verbindungen (Fassung 2024, gemeinsam mit IPC-A-610J revidiert)</td></tr>
 <tr><td><b>IPC-7711/7721</b></td><td>Nacharbeit und Reparatur von Baugruppen</td></tr>
 <tr><td><b>Gerber X2 / X3</b></td><td>Datenformat für die Fertigung, definiert von Ucamco</td></tr>
 </tbody>
@@ -77,11 +77,40 @@ import "./_style.css";
 </tbody>
 </table></div>
 
+<h2>Mechanik, Toleranzen und Normteile</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Norm</th><th>Inhalt</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>ISO 286-1 / -2</b></td><td>ISO-Toleranzsystem für Längenmaße</td><td>Die Grundabmaße und Toleranzgrade hinter H7, g6, p6</td></tr>
+<tr><td><b>ISO 2768-1</b></td><td>Allgemeintoleranzen für Längen- und Winkelmaße</td><td>Klassen f/m/c/v. Teil 2 (Form und Lage) ist durch ISO 22081:2021 ersetzt</td></tr>
+<tr><td><b>ISO 1101</b></td><td>Form- und Lagetoleranzen (GPS)</td><td>Die Symbolsprache für GD&amp;T, mit ISO 5459 für Bezüge</td></tr>
+<tr><td><b>ISO 21920-1 bis -3</b></td><td>Oberflächenbeschaffenheit, Profilverfahren</td><td>Löste 2021 die Reihe ISO 4287/4288 ab; Kennwerte Ra und Rz</td></tr>
+<tr><td><b>ISO 898-1 / -2</b></td><td>Mechanische Eigenschaften von Schrauben und Muttern</td><td>Definiert die Festigkeitsklassen 8.8, 10.9, 12.9</td></tr>
+<tr><td><b>ISO 3506</b></td><td>Verbindungselemente aus nichtrostendem Stahl</td><td>A2 und A4 mit Festigkeitsstufen 50/70/80</td></tr>
+<tr><td><b>ISO 4762 / ISO 10642 / ISO 7380</b></td><td>Zylinder-, Senk- und Flachrundkopfschraube mit Innensechskant</td><td>Ersetzen DIN 912, DIN 7991 und die alte Linsenkopfform</td></tr>
+<tr><td><b>DIN 471 / 472 · DIN 6885 · DIN 7</b></td><td>Sicherungsringe, Passfedern, Zylinderstifte</td><td>Klassische DIN-Normteile, weiter in Gebrauch</td></tr>
+<tr><td><b>ISO 15 / ISO 492</b></td><td>Wälzlager: Maßpläne und Genauigkeit</td><td>Grundlage der Bezeichnungen 608, 6000, 6800</td></tr>
+<tr><td><b>ISO 128 / ISO 5456</b></td><td>Technische Zeichnungen: Darstellung und Projektion</td><td>In Europa Projektionsmethode 1, in Nordamerika Methode 3</td></tr>
+</tbody>
+</table></div>
+
+<h2>Roboter und kollaborierende Anwendungen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Norm</th><th>Inhalt</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>EN ISO 10218-1 / -2</b></td><td>Sicherheitsanforderungen an Industrieroboter (Teil 1) und an Roboteranwendungen (Teil 2)</td><td>Neufassung 2025, erste große Überarbeitung seit 2011: zwei Roboterklassen, explizite Anforderungen zu funktionaler Sicherheit und Cybersicherheit</td></tr>
+<tr><td><b>ISO/TS 15066</b></td><td>Kollaborierender Betrieb: Kraft- und Druckgrenzwerte je Körperbereich</td><td>Die Zahlenbasis jeder MRK-Beurteilung; die Anforderungen sind inzwischen weitgehend in ISO 10218-1:2025 aufgegangen</td></tr>
+<tr><td><b>EN ISO 3691-4</b></td><td>Fahrerlose Flurförderzeuge (AGV/AMR)</td><td>Sicherheitsanforderungen für fahrende Systeme</td></tr>
+<tr><td><b>EN ISO 13850</b></td><td>Not-Halt</td><td>Gestaltung und Funktion der Not-Halt-Einrichtung</td></tr>
+<tr><td><b>EN ISO 13857</b></td><td>Sicherheitsabstände gegen das Erreichen von Gefahrstellen</td><td>Die Tabellen für Zaunhöhe und Öffnungsweite</td></tr>
+</tbody>
+</table></div>
+
 <h2>Kommunikation und Automatisierung</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th data-s="text">Norm</th><th>Inhalt</th></tr></thead>
 <tbody>
-<tr><td><b>IEC 61131-1 / -2 / -3</b></td><td>SPS: Grundlagen, Betriebsmittelanforderungen, Programmiersprachen. Teil 3 in der Fassung von 2025</td></tr>
+<tr><td><b>IEC 61131-1 / -2 / -3</b></td><td>SPS: Grundlagen, Betriebsmittelanforderungen, Programmiersprachen. Teil 3 in der 4. Ausgabe (2025) — Anweisungsliste (AWL/IL) ist entfallen, UTF-8 und OOP-Eigenschaften kamen dazu</td></tr>
 <tr><td><b>IEC 61158 / 61784</b></td><td>Feldbusse: Spezifikationen und Kommunikationsprofile</td></tr>
 <tr><td><b>ISO 11898</b></td><td>CAN und CAN FD</td></tr>
 <tr><td><b>IEEE 802.3</b></td><td>Ethernet einschließlich 10BASE-T1S und 10BASE-T1L</td></tr>
@@ -122,6 +151,6 @@ import "./_style.css";
     <li><a href="https://eur-lex.europa.eu/">EUR-Lex</a> — alle EU-Richtlinien und -Verordnungen im Volltext, kostenlos.</li>
     <li><a href="https://www.electropedia.org/">Electropedia (IEC 60050)</a> — Begriffsdefinitionen, kostenlos.</li>
     <li><a href="https://www.dguv.de/ifa/">IFA der DGUV</a> — Reports und das Werkzeug SISTEMA zur funktionalen Sicherheit, kostenlos.</li>
-    <li>Anwendung im Zusammenhang: <a href="automatisierung-sps.html#sicherheit">Automatisierung → Funktionale Sicherheit</a>, <a href="analogtechnik.html#emv">Analog &amp; Leistung → EMV</a>, <a href="elektrotechnik.html#sicherheit">Elektrotechnik → Sicherheit</a>.</li>
+    <li>Anwendung im Zusammenhang: <a href="automatisierung-robotik.html#sicherheit">Automatisierung → Funktionale Sicherheit</a> · <a href="elektrotechnik.html#emv">Elektrotechnik → EMV</a> und <a href="elektrotechnik.html#sicherheit">Sicherheit</a> · <a href="mechanik.html#toleranzen">Mechanik → Toleranzen</a> · <a href="leiterplatte-kicad.html#fertigung">Leiterplatte → Fertigungsdaten</a>.</li>
   </ul>
 </div>

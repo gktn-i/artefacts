@@ -1,0 +1,144 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>IEC 61131-3 normt Sprachen, Datentypen und Bausteinarten der SPS-Programmierung.</b> Die vierte Fassung von 2025 kennt vier Sprachen — die Anweisungsliste ist entfallen. Und weil ein SPS-Programm über Jahrzehnte gelesen wird, zählt beim Schreiben vor allem eins: Kann ein Instandhalter um drei Uhr nachts erkennen, warum die Anlage steht?</div>
+
+<h2>Die Sprachen</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Sprache</th><th>Kürzel</th><th>Art</th><th>Stärke</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Kontaktplan</b></td><td>KOP / LD</td><td>grafisch</td><td>Sieht aus wie ein Stromlaufplan — jeder Elektriker liest es sofort</td><td>Verriegelungen, Verknüpfungen, Betriebsartenlogik</td></tr>
+<tr><td><b>Funktionsplan</b></td><td>FUP / FBD</td><td>grafisch</td><td>Datenfluss von links nach rechts</td><td>Analogwertverarbeitung, Regelung</td></tr>
+<tr><td><b>Strukturierter Text</b></td><td>ST</td><td>textuell</td><td>Mächtig wie eine Hochsprache, versionierbar, diffbar</td><td>Berechnungen, Algorithmen, alles Komplexe</td></tr>
+<tr><td><b>Ablaufsprache</b></td><td>AS / SFC</td><td>grafisch</td><td>Schritte und Transitionen in Normnotation</td><td>Prozessabläufe, Rezepturen, Rüstvorgänge</td></tr>
+<tr><td><b>Anweisungsliste</b></td><td>AWL / IL</td><td>textuell</td><td>—</td><td>Assemblerähnlich; seit 2013 abgekündigt, in der Fassung von 2025 entfallen. Nur noch in Altanlagen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Praxisregel:</b> Verriegelungen und Sicherheitslogik in <b>KOP</b> (muss jeder Instandhalter lesen können), Berechnungen und Algorithmen in <b>ST</b>, Abläufe in <b>AS</b>. Die Norm erlaubt das Mischen ausdrücklich — genau das ist der sinnvolle Weg.</div>
+
+<h2>Strukturierter Text: Syntax</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Element</th><th>Syntax</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Zuweisung / Vergleich</b></td><td><code>a := b;</code> · <code>= &lt;&gt; &lt; &gt; &lt;= &gt;=</code></td><td><code>:=</code> weist zu, <code>=</code> vergleicht; <code>&lt;&gt;</code> statt <code>!=</code></td></tr>
+<tr><td><b>Logik</b></td><td><code>AND OR XOR NOT</code></td><td>ausgeschrieben</td></tr>
+<tr><td><b>Verzweigung</b></td><td><code>IF … THEN … ELSIF … ELSE … END_IF;</code></td><td>immer mit END_IF abschließen</td></tr>
+<tr><td><b>Auswahl</b></td><td><code>CASE x OF 1: … ELSE … END_CASE;</code></td><td>die Grundlage jeder Schrittkette in ST</td></tr>
+<tr><td><b>Schleifen</b></td><td><code>FOR WHILE REPEAT</code></td><td>Zykluszeit im Auge behalten</td></tr>
+<tr><td><b>Zeitliteral</b></td><td><code>T#500MS</code>, <code>T#1H30M</code></td><td>eigener Datentyp TIME</td></tr>
+<tr><td><b>Kommentar</b></td><td><code>(* … *)</code> oder <code>// …</code></td><td>Zeilenkommentar seit der 3. Fassung</td></tr>
+</tbody>
+</table></div>
+
+<h2>Bausteine und Tasks</h2>
+<div class="fbox">
+  <span class="f">Funktion = zustandslos&nbsp;&nbsp;·&nbsp;&nbsp;Funktionsbaustein = mit Instanzdaten&nbsp;&nbsp;·&nbsp;&nbsp;Programm = Einstiegspunkt</span>
+  <span class="l">Dazu eigene Datentypen (STRUCT): Eine Struktur „Antrieb“ mit Soll-, Istwert, Status und Fehlercode macht Schnittstellen lesbar.</span>
+</div>
+<div class="flist">
+  <div class="frow hd"><span>Standardbaustein</span><span>Funktion</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">TON / TOF / TP</span><span class="fe">Einschalt-, Ausschaltverzögerung, Impuls</span><span class="fx">Die drei IEC-Timer</span></div>
+  <div class="frow"><span class="fn">CTU / CTD / CTUD</span><span class="fe">Zähler</span><span class="fx">Vorwärts, rückwärts, beides</span></div>
+  <div class="frow"><span class="fn">R_TRIG / F_TRIG</span><span class="fe">Flankenerkennung</span><span class="fx">Der wichtigste Baustein — ohne Flankenauswertung feuert jede Aktion in jedem Zyklus erneut</span></div>
+  <div class="frow"><span class="fn">RS / SR</span><span class="fe">Speicherglied</span><span class="fx">RS: Rücksetzen hat Vorrang, SR: Setzen</span></div>
+  <div class="frow"><span class="fn">LIMIT / SEL / MUX</span><span class="fe">Begrenzen, auswählen, umschalten</span><span class="fx">Ersparen viele IF-Verzweigungen</span></div>
+  <div class="frow"><span class="fn">SCALE / NORM_X</span><span class="fe">Analogwert umrechnen</span><span class="fx">Rohwert des Wandlers in physikalische Einheiten</span></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Task-Typ</th><th>Auslösung</th><th>Verwendung</th></tr></thead>
+<tbody>
+<tr><td><b>Zyklisch (frei laufend)</b></td><td>so schnell wie möglich</td><td>Hauptprogramm, Verknüpfungslogik</td></tr>
+<tr><td><b>Weckalarm</b></td><td>feste Periode, z. B. 10 ms</td><td>Regelungen — nur hier ist die Abtastzeit konstant</td></tr>
+<tr><td><b>Prozessalarm</b></td><td>Flanke an einem Eingang</td><td>schnelle Reaktionen, Zählimpulse</td></tr>
+<tr><td><b>Anlauf / Fehler-OBs</b></td><td>Start bzw. Diagnoseereignis</td><td>Initialisierung; Baugruppenausfall abfangen, sonst STOP</td></tr>
+</tbody>
+</table></div>
+
+<h2>Programmstruktur</h2>
+<div class="steps">
+  <div class="step"><h4>Nach Anlagenteilen gliedern</h4>Ein Baustein je Station, Achse, Aggregat — nicht „alle Timer“ oder „alle Ventile“.</div>
+  <div class="step"><h4>Schichten trennen</h4>Signalaufbereitung — Betriebsartenlogik — Ablauf — Aktoransteuerung. Jede Schicht spricht nur mit ihren Nachbarn.</div>
+  <div class="step"><h4>Betriebsarten sauber führen</h4>Hand, Automatik, Einrichten, Störung — mit definierten Übergängen. Der häufigste Fehlerort in gewachsenen Programmen.</div>
+  <div class="step"><h4>Aktoren an genau einer Stelle setzen</h4>Jede Stelle stellt nur eine Anforderung; ein einziger Baustein entscheidet. Sonst ist nicht nachvollziehbar, wer das Ventil geschaltet hat.</div>
+  <div class="step"><h4>Diagnose einbauen, nicht nachrüsten</h4>Zu jeder Wartebedingung eine Klartextmeldung („Warte auf Endlage Zylinder 3“), Erstmeldung erfassen, Zeitstempel synchronisieren (NTP).</div>
+</div>
+
+<h2>Schrittketten</h2>
+<div class="card">
+<pre style="font-family:var(--mono);font-size:12.2px;line-height:1.6;overflow-x:auto;margin:0"><code>CASE iSchritt OF
+  0: // Grundstellung
+     IF bGrundstellung AND bStart THEN iSchritt := 10; END_IF
+ 10: // Werkstueck spannen
+     bSpannen := TRUE;
+     IF bGespannt THEN iSchritt := 20;
+     ELSIF fbSchrittTimer.Q THEN iSchritt := 900; END_IF   // Zeitueberschreitung
+ 20: // Bearbeiten
+     bVorschub := TRUE;
+     IF bEndlageErreicht THEN iSchritt := 30; END_IF
+ 30: // Zurueck und freigeben
+     bVorschub := FALSE; bSpannen := FALSE;
+     IF bGrundstellung THEN iSchritt := 0; END_IF
+900: // Stoerung
+     bSpannen := FALSE; bVorschub := FALSE; bStoerung := TRUE;
+     IF bQuittieren THEN iSchritt := 0; bStoerung := FALSE; END_IF
+END_CASE
+
+// Ueberwachungszeit: laeuft in jedem Schritt neu an
+fbSchrittTimer(IN := (iSchritt &lt;&gt; iSchrittAlt), PT := T#10S);
+iSchrittAlt := iSchritt;</code></pre>
+</div>
+<ul>
+  <li><b>Schrittnummern in Zehnerschritten:</b> lässt Platz zum Einfügen ohne Umnummerieren.</li>
+  <li><b>Aktuellen Schritt anzeigen:</b> auf HMI und in der Diagnose — die wichtigste Information bei jeder Störung.</li>
+  <li><b>Zeitüberwachung je Schritt:</b> sonst steht die Anlage irgendwann ohne Meldung.</li>
+  <li><b>Aktoren im Schritt setzen und zurücknehmen:</b> der Zustand ergibt sich direkt aus der Schrittnummer.</li>
+  <li><b>Störschritt mit Quittierung und Weg zur Grundstellung:</b> definierter Ausstieg statt Spannung abschalten.</li>
+</ul>
+
+<h2>Fallen, die jeder einmal erlebt</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Typische Fehler</h4><ul>
+    <li><b>Fehlende Flankenauswertung:</b> Zählung läuft in jedem Zyklus weiter</li>
+    <li><b>Doppelte Zuweisung:</b> derselbe Ausgang an zwei Stellen — die letzte gewinnt unbemerkt</li>
+    <li><b>Timer im Zyklus neu gestartet:</b> IN jeden Zyklus kurz zurückgesetzt — der Timer läuft nie ab</li>
+    <li><b>REAL-Vergleich auf Gleichheit:</b> funktioniert bei Fließkomma praktisch nie</li>
+    <li><b>Analogwert ungefiltert in der Logik:</b> jede Störung schaltet um</li>
+    <li><b>Kein Verhalten bei Kommunikationsausfall:</b> die Anlage läuft mit alten Werten weiter</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Was hilft</h4><ul>
+    <li>R_TRIG bei allem, was einmalig passieren soll</li>
+    <li>Jeden Ausgang genau einmal beschreiben</li>
+    <li>Symbolische Namen mit Typ-Präfix (b, r, i, fb); Strukturen statt loser Merker</li>
+    <li>Analogwerte mit Grenzwertprüfung und Filter</li>
+    <li>Lebenszeichenüberwachung je Kommunikationsverbindung</li>
+    <li>Programm in Versionsverwaltung — ST lässt sich diffen</li>
+  </ul></div>
+</div>
+
+<h2>Inbetriebnahme und Herstellerwelten</h2>
+<div class="steps">
+  <div class="step"><h4>Erst die Verdrahtung prüfen</h4>Jeden Eingang einzeln betätigen, jeden Ausgang bei abgeklemmter Mechanik einzeln ansteuern. Fehler hier zu finden ist zehnmal billiger als später.</div>
+  <div class="step"><h4>Hand vor Automatik, Grenzen zuerst</h4>Jede Bewegung erst im Handbetrieb mit reduzierter Geschwindigkeit; Endschalter und Software-Grenzen vor der ersten schnellen Fahrt.</div>
+  <div class="step"><h4>Schrittkette einzeln durchfahren, Störfälle provozieren</h4>Not-Halt drücken, Schutztür öffnen, Sensor abziehen — was dann passiert, ist die eigentliche Prüfung.</div>
+  <div class="step"><h4>Stand sichern</h4>Programm archivieren, Parameter notieren, Pläne nachführen. Ein Plan, der nicht dem Ist-Zustand entspricht, ist schlimmer als keiner.</div>
+</div>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>System</th><th>Software</th><th>Charakter</th></tr></thead>
+<tbody>
+<tr><td><b>Siemens SIMATIC</b></td><td>TIA Portal</td><td>Marktführer im deutschsprachigen Raum; eigene Begriffe (OB, FB, FC, DB), teils abweichend von der Norm</td></tr>
+<tr><td><b>Beckhoff TwinCAT</b></td><td>TwinCAT 3</td><td>PC-basiert, EtherCAT-nah, objektorientierte Erweiterungen</td></tr>
+<tr><td><b>CODESYS</b></td><td>CODESYS Development System</td><td>Herstellerunabhängige Laufzeit, von vielen lizenziert (Wago, Phoenix, Lenze u. a.); läuft auch auf dem Raspberry Pi — der günstigste Einstieg</td></tr>
+<tr><td><b>Rockwell / Allen-Bradley</b></td><td>Studio 5000</td><td>Dominant in Nordamerika</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Norm sichert Konzepte, keine vollständige Portierbarkeit — Bibliotheken, Hardwarekonfiguration und Kommunikationsbausteine unterscheiden sich erheblich. Wer portabel bleiben will, kapselt Herstellerspezifisches in eigenen Bausteinen — dieselbe Idee wie eine Hardware-Abstraktionsschicht in der <a href="embedded-firmware.html">Firmware</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>IEC 61131-3:2025 (vierte Ausgabe, Mai 2025 — AWL entfernt, u. a. UTF-8-Strings und OOP-Erweiterungen ergänzt).</li>
+    <li>John &amp; Tiegelkamp, <i>SPS-Programmierung mit IEC 61131-3</i>; Wellenreuther &amp; Zastrow, <i>Automatisieren mit SPS</i>.</li>
+    <li>PLCopen Coding Guidelines; Siemens, <i>Programmierleitfaden für S7-1200/S7-1500</i>.</li>
+    <li><a href="https://content.helpme-codesys.com/">CODESYS Online Help</a>, <a href="https://infosys.beckhoff.com/">Beckhoff Information System</a>.</li>
+  </ul>
+</div>

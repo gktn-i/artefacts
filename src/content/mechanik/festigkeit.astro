@@ -1,0 +1,133 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Spannung ist Kraft pro Fläche, Dehnung ist relative Längenänderung — elastisch sind beide proportional (E-Modul).</b> Und: Bauteile brechen fast nie dort, wo die Spannung im Mittel am höchsten ist, sondern an der schärfsten Kerbe. Ein Radius von zwei Millimetern ist oft wirksamer als ein besserer Werkstoff.</div>
+
+<h2>Die Grundgleichungen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">Spannung</span><span class="fx">σ = F / A</span><span class="fe">1 N/mm² = 1 MPa; in N und mm rechnen</span></div>
+  <div class="frow"><span class="fn">Dehnung / Hooke</span><span class="fx">ε = ΔL / L&nbsp;&nbsp;σ = E · ε</span><span class="fe">gilt im elastischen Bereich</span></div>
+  <div class="frow"><span class="fn">Längenänderung Zugstab</span><span class="fx">ΔL = F·L / (E·A)</span><span class="fe">E·A/L ist die Steifigkeit in N/mm — wie eine Federrate</span></div>
+  <div class="frow"><span class="fn">Querkontraktion</span><span class="fx">ν = −ε_quer / ε_längs</span><span class="fe">Stahl 0,3 · Alu 0,33 · Gummi ≈ 0,5</span></div>
+  <div class="frow"><span class="fn">Schubmodul</span><span class="fx">G = E / (2·(1 + ν))</span><span class="fe">Stahl: G ≈ 81 000 N/mm² bei E = 210 000</span></div>
+</div>
+<div class="warn"><b>Steifigkeit ist nicht Festigkeit:</b> Manche Aluminiumlegierung erreicht die Streckgrenze von Baustahl — aber der E-Modul ist mit 70 000 gegen 210 000 N/mm² nur ein Drittel. Ein Aluteil gleicher Geometrie biegt sich <b>dreimal so stark</b> durch; dagegen hilft nur mehr Querschnitt oder eine bessere Form.</div>
+
+<h2>Das Spannungs-Dehnungs-Diagramm</h2>
+<div class="grid2">
+  <div>
+    <svg class="dg" viewBox="0 0 320 210" role="img" aria-label="Spannungs-Dehnungs-Diagramm mit Streckgrenze und Zugfestigkeit">
+      <path class="wt" d="M40,180 H300 M40,180 V20" />
+      <text class="lbla" x="300" y="196" text-anchor="end">Dehnung ε</text>
+      <text class="lbla" x="34" y="26" text-anchor="end">σ</text>
+      <path class="acc" d="M40,180 L110,70" />
+      <path class="acc" d="M110,70 C140,52 160,50 185,48 C215,45 245,58 275,105" />
+      <path class="gd" d="M40,70 H110 M110,70 V180" />
+      <path class="gd" d="M40,48 H185 M185,48 V180" />
+      <circle class="accs" cx="110" cy="70" r="4" />
+      <circle class="accs" cx="185" cy="48" r="4" />
+      <circle class="accs" cx="275" cy="105" r="4" />
+      <text class="lbl" x="34" y="74" text-anchor="end">R_p0,2</text>
+      <text class="lbl" x="34" y="52" text-anchor="end">R_m</text>
+      <text class="lbl" x="118" y="64">Streckgrenze</text>
+      <text class="lbl" x="192" y="42">Zugfestigkeit</text>
+      <text class="lbl" x="271" y="122" text-anchor="middle">Bruch</text>
+      <text class="lblb" x="62" y="140">elastisch</text>
+    </svg>
+  </div>
+  <div>
+    <ul>
+      <li><b>Elastischer Bereich</b> — Gerade mit Steigung E; nach Entlastung ist das Teil wie vorher. Hier findet jede normale Auslegung statt.</li>
+      <li><b>R_p0,2 (Streckgrenze)</b> — 0,2 % bleibende Dehnung. Die Grenze, gegen die man rechnet.</li>
+      <li><b>R_m (Zugfestigkeit)</b> — der Höchstwert; als Auslegungsgrenze ungeeignet, das Teil ist längst unbrauchbar verformt.</li>
+      <li><b>Bruchdehnung A</b> — Maß für Zähigkeit: über 10 % kündigt sich Versagen an, unter 5 % bricht es schlagartig.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Sicherheitsfaktor</h2>
+<div class="fbox">
+  <span class="f">σ_zul = R_p0,2 / S</span>
+  <span class="l">Gegen die Streckgrenze rechnen, nicht gegen die Zugfestigkeit — außer bei spröden Werkstoffen ohne Streckgrenze (Grauguss, Keramik).</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th data-s="text">Situation</th><th data-s="num">S</th><th>Begründung</th></tr></thead>
+<tbody>
+<tr><td>Statisch, bekanntes Material und Last</td><td>1,5 – 2</td><td>Deckt Werkstoffstreuung und Toleranzen ab</td></tr>
+<tr><td>Schwellend oder wechselnd belastet</td><td>2 – 3</td><td>Dauerfestigkeit liegt deutlich unter der statischen Grenze</td></tr>
+<tr><td>Stoßlast, unklare Lastannahme</td><td>3 – 4</td><td>Lastspitzen sind schwer abzuschätzen</td></tr>
+<tr><td>Knickgefährdete Druckstäbe</td><td>3 – 5</td><td>Versagen ohne Vorwarnung — siehe <a href="#balken">Knicken</a></td></tr>
+<tr><td>FDM-3D-Druck</td><td>3 – 5</td><td>Anisotrop, Schichtbindung streut stark</td></tr>
+<tr><td>Über Kopf, Personen darunter</td><td>≥ 4 und Norm</td><td>Hier gilt Regelwerk, nicht Faustregel</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kerbwirkung</h2>
+<div class="fbox">
+  <span class="f">σ_max = K_t · σ_nenn</span>
+  <span class="l">Die Kerbformzahl K_t hängt nur von der Geometrie ab, nicht vom Werkstoff.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th data-s="text">Kerbe</th><th data-s="num">K_t (Richtwert)</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td>Querbohrung im Zugstab</td><td>2 – 3</td><td>K_t ≈ 3 für ein kleines Loch in einer breiten Platte</td></tr>
+<tr><td>Wellenabsatz, gut ausgerundet (r/d ≈ 0,2)</td><td>1,2 – 1,5</td><td>So sollte es aussehen</td></tr>
+<tr><td>Wellenabsatz, scharfkantig (r/d &lt; 0,02)</td><td>2,5 – 4</td><td>Vermeidbar — kostet nur einen Radius</td></tr>
+<tr><td>Passfedernut</td><td>2 – 3</td><td>Bei hoch belasteten Wellen Polygon oder Presssitz</td></tr>
+<tr><td>Gewindegrund</td><td>3 – 5</td><td>Deshalb brechen Schrauben im ersten tragenden Gang</td></tr>
+<tr><td>Scharfe Innenecke (r → 0)</td><td>theoretisch unendlich</td><td>Die Sollbruchstelle schlechthin</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die billigste Festigkeitsmaßnahme</b> ist der Ausrundungsradius: von scharfkantig auf r = 0,1 · d halbiert die Spannungsspitze meist. Beim Fräsen entsteht er ohnehin durch den Werkzeugdurchmesser. Beim FDM-Druck ist eine scharfe Innenecke zusätzlich eine Schichtgrenze unter Zug — doppelt kritisch.</div>
+
+<h2>Vergleichsspannung</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Gestaltänderungsenergie (von Mises)</h4>
+    <p><span class="formula">σ_v = √(σ² + 3·τ²)</span> — für <b>zähe</b> Werkstoffe: Stahl, Aluminium, technische Kunststoffe. Das ist die „von Mises stress“, die jede FEM-Software standardmäßig ausgibt.</p>
+  </div>
+  <div class="gb-col"><h4>Normalspannungshypothese</h4>
+    <p><span class="formula">σ_v = σ_max</span> (größte Hauptspannung) — für <b>spröde</b> Werkstoffe: Grauguss, Keramik, Glas, gehärteter Stahl. Sie versagen durch Trennbruch senkrecht zur größten Zugspannung.</p>
+  </div>
+</div>
+
+<h2>Dauerfestigkeit: Versagen ohne Überlast</h2>
+<p>Eine statisch unkritische Last bricht ein Bauteil nach Millionen Wiederholungen: Der Riss startet an einer Kerbe, wächst je Lastwechsel und reißt zuletzt den Restquerschnitt durch. Die Bruchfläche zeigt es — glatter Bereich mit Rastlinien neben rauem Restbruch.</p>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Bereich</th><th data-s="num">Lastwechsel N</th><th>Verhalten</th></tr></thead>
+<tbody>
+<tr><td>Statisch</td><td>&lt; 10³</td><td>Es zählt die Streckgrenze</td></tr>
+<tr><td>Zeitfestigkeit</td><td>10³ – 10⁶ … 10⁷</td><td>Ertragbare Spannung fällt in der Wöhlerkurve stetig ab</td></tr>
+<tr><td>Dauerfestigkeit</td><td>&gt; 10⁶ … 10⁷</td><td>Stahl erreicht eine Grenze, unterhalb derer er beliebig oft hält</td></tr>
+</tbody>
+</table></div>
+<ul>
+  <li><b>Wechselfestigkeit der polierten Probe</b> (bezogen auf R_m): Zug/Druck ≈ 0,40 · R_m, Biegung ≈ 0,45 · R_m, Torsion ≈ 0,30 · R_m. Am realen Bauteil kommen Abminderungen für Kerben, Größe und Oberfläche dazu — vollständiger Nachweis nach DIN 743 (Wellen) bzw. FKM-Richtlinie.</li>
+  <li><b>Oberfläche:</b> poliert 1,0 · geschliffen ≈ 0,9 · gedreht ≈ 0,8 · geschruppt/gegossen ≤ 0,6. Eine Drehriefe quer zur Zugrichtung ist eine Mikrokerbe.</li>
+  <li><b>Druckeigenspannung hilft:</b> Kugelstrahlen oder Festwalzen steigert die Dauerfestigkeit um 20–50 % — deshalb werden Federn und Zahnräder gestrahlt (siehe <a href="#behandlung">Wärme- &amp; Oberflächenbehandlung</a>).</li>
+</ul>
+<div class="warn"><b>Aluminium hat keine echte Dauerfestigkeitsgrenze.</b> Die Wöhlerkurve fällt immer weiter — man legt auf eine Zielzyklenzahl aus (üblich 5 · 10⁸) und begrenzt die Lebensdauer bewusst. Deshalb haben Aluflugzeuge feste Austauschintervalle und Stahlbrücken nicht.</div>
+
+<h2>Flächenpressung — der vergessene Nachweis</h2>
+<p>Neben der Spannung im Bauteil zählt die Pressung in der Kontaktfläche <span class="formula">p = F / A_proj</span>: Sie entscheidet, ob sich ein Schraubenkopf eingräbt oder eine Passfedernut nachgibt.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th data-s="text">Paarung</th><th data-s="num">p_zul</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td>Stahl auf Stahl, ruhend</td><td>ca. 0,9 · R_p0,2</td><td>Bei S235 rund 210 N/mm²</td></tr>
+<tr><td>Stahl auf Aluminium</td><td>60 – 120 N/mm²</td><td>Meist der begrenzende Partner</td></tr>
+<tr><td>Bolzen in Kunststoff (PA, POM)</td><td>10 – 30 N/mm²</td><td>Kriecht unter Dauerlast — konservativ ansetzen</td></tr>
+<tr><td>Schraubenkopf auf FDM-Druckteil</td><td>10 – 20 N/mm²</td><td>Große Unterlegscheibe ist kein Luxus</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Deshalb die Unterlegscheibe:</b> Ein M5-Zylinderkopf hat rund 30 mm² Auflagefläche — mit 5 kN Vorspannung über 160 N/mm², genug, um sich in Aluminium und erst recht in ein Druckteil einzugraben. Eine Scheibe mit 15 mm Außendurchmesser bringt rund 150 mm² und damit nur noch gut 30 N/mm².</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN ISO 6892-1 — Zugversuch bei Raumtemperatur: definiert R_p0,2, R_m und Bruchdehnung A.</li>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 2: Elastostatik</i> — Zug/Druck, Hooke, Querkontraktion.</li>
+    <li>DIN 743-1 bis -4 und FKM-Richtlinie <i>Rechnerischer Festigkeitsnachweis für Maschinenbauteile</i> — der vollständige Ermüdungsnachweis.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — zulässige Spannungen, Flächenpressungen, Gestaltfestigkeit; Pilkey/Pilkey, <i>Peterson's Stress Concentration Factors</i>, Wiley — Kerbformzahlen.</li>
+    <li>Werkstoffkennwerte: Abschnitt <a href="#auswahl">Werkstoffauswahl</a>.</li>
+  </ul>
+</div>

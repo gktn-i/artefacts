@@ -1,0 +1,84 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Antriebsauslegung heißt: das benötigte Moment ehrlich ausrechnen — inklusive Beschleunigung, Reibung und Wirkungsgrad — und dann Reserve einplanen.</b> Der häufigste Fehler ist, nur das Haltemoment zu betrachten und die Beschleunigung zu vergessen.</div>
+
+<h2>Die Grundgleichungen</h2>
+<div class="fbox">
+  <span class="f">M = F · r&nbsp;&nbsp;·&nbsp;&nbsp;P = M · ω&nbsp;&nbsp;·&nbsp;&nbsp;ω = 2π·n/60&nbsp;&nbsp;·&nbsp;&nbsp;M_besch = J · α</span>
+  <span class="l">M in Nm, F in N, r in m, ω in rad/s, n in min⁻¹, J in kg·m², α in rad/s².</span>
+</div>
+<div class="calc" data-calc="antrieb">
+  <h4>Momenten- und Leistungsrechner</h4>
+  <div class="row">
+    <div><label>Kraft in N</label><input data-k="f" type="number" step="any" value="100" /></div>
+    <div><label>Radius in mm</label><input data-k="r" type="number" step="any" value="25" /></div>
+    <div><label>Drehzahl Abtrieb (min⁻¹)</label><input data-k="n" type="number" step="any" value="60" /></div>
+    <div><label>Getriebe i:1</label><input data-k="ig" type="number" step="any" value="10" /></div>
+    <div><label>Wirkungsgrad in %</label><input data-k="eta" type="number" step="any" value="80" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Das Gesamtmoment zusammensetzen</h2>
+<div class="steps">
+  <div class="step"><h4>Lastmoment</h4>Was die Anwendung selbst braucht: Gewicht mal Hebelarm beim Heben, Vorschubkraft mal Spindelradius beim Fräsen, Prozesskraft beim Umformen.</div>
+  <div class="step"><h4>Reibmoment</h4>Lager, Führungen, Dichtungen — in der Praxis meist unterschätzt. Ein Trapezgewindetrieb hat 25–50 % Wirkungsgrad, eine Kugelumlaufspindel rund 90 %. Beim Losbrechen liegt die Haftreibung deutlich über der Gleitreibung.</div>
+  <div class="step"><h4>Beschleunigungsmoment</h4><span class="formula">M_besch = J_gesamt · α</span>. J_gesamt umfasst Rotor, Kupplung, Getriebe und die auf die Motorwelle umgerechnete Last. Bei schnellen Achsen ist das oft der größte Anteil.</div>
+  <div class="step"><h4>Reserve</h4>20–50 % auf die Summe. Motoren altern, Reibung steigt, Spannungen brechen ein, und irgendwann kommt eine unvorhergesehene Last.</div>
+  <div class="step"><h4>Betriebsart prüfen</h4>Ein Motor darf kurzzeitig das Zwei- bis Dreifache seines Nennmoments abgeben. Bei zyklischem Betrieb zählt der Effektivwert über den Zyklus — Betriebsarten S1 bis S10 nach IEC 60034-1.</div>
+</div>
+
+<h2>Trägheit umrechnen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Element</span><span>Trägheitsmoment J</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">Vollzylinder (Welle, Scheibe)</span><span class="fe">J = ½·m·r²</span><span class="fx">Bezogen auf die Drehachse</span></div>
+  <div class="frow"><span class="fn">Hohlzylinder</span><span class="fe">J = ½·m·(r_a² + r_i²)</span><span class="fx">Riemenscheiben, Rohre</span></div>
+  <div class="frow"><span class="fn">Linear bewegte Masse</span><span class="fe">J = m·(p/(2π))²</span><span class="fx">p = Spindelsteigung in m je Umdrehung</span></div>
+  <div class="frow"><span class="fn">Riementrieb</span><span class="fe">J = m·r²</span><span class="fx">m bewegte Masse, r Radius der Antriebsscheibe</span></div>
+  <div class="frow"><span class="fn">Über ein Getriebe</span><span class="fe">J_motorseitig = J_last / i²</span><span class="fx">Ein Getriebe reduziert die reflektierte Trägheit <b>quadratisch</b> — der Hauptgrund für seinen Einsatz</span></div>
+</div>
+<div class="tip"><b>Trägheitsanpassung:</b> Das Verhältnis J_last (auf die Motorwelle bezogen) zu J_Rotor sollte zwischen etwa 1:1 und 10:1 liegen. Zu schwere Last macht die Regelung schwingfreudig und schwer einstellbar, zu leichte verschenkt Motorleistung. Weil das Getriebe quadratisch wirkt, ändert schon 5:1 das Verhältnis um den Faktor 25.</div>
+
+<h2>Getriebe</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Bauart</th><th>Untersetzung je Stufe</th><th>Wirkungsgrad</th><th>Spiel</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Stirnradgetriebe</b></td><td>1:1 … 1:8</td><td>96–98 %</td><td>mittel</td><td>Einfach, robust, laut bei hoher Drehzahl</td></tr>
+<tr><td><b>Planetengetriebe</b></td><td>1:3 … 1:10</td><td>je Stufe 96–97 %, mehrstufig 90–94 %</td><td>gering (5–20′)</td><td>Kompakt, koaxial, hohe Momentdichte — der Standard bei Servoantrieben</td></tr>
+<tr><td><b>Schneckengetriebe</b></td><td>1:5 … 1:100</td><td>40–90 %</td><td>gering</td><td>Große Untersetzung in einer Stufe. Der Wirkungsgrad sinkt stark mit der Untersetzung; unter etwa 50 % wird es selbsthemmend</td></tr>
+<tr><td><b>Harmonic Drive</b></td><td>1:30 … 1:320</td><td>70–90 %</td><td><b>praktisch spielfrei</b></td><td>In Robotergelenken. Teuer, begrenzte Torsionssteifigkeit bei kleinen Momenten</td></tr>
+<tr><td><b>Zykloidgetriebe</b></td><td>1:10 … 1:200</td><td>85–93 %</td><td>gering</td><td>Sehr stoßfest, hohe Momentdichte</td></tr>
+<tr><td><b>Zahnriemen</b></td><td>1:1 … 1:6</td><td>95–98 %</td><td>gering, aber elastisch</td><td>Leise, günstig, dämpfend. Die Riemendehnung begrenzt die Steifigkeit — bei Positionsregelung spürbar</td></tr>
+<tr><td><b>Kugelumlaufspindel</b></td><td>—</td><td>90–95 %</td><td>vorspannbar auf null</td><td>Wandelt Drehung in Vorschub; nicht selbsthemmend, Haltebremse einplanen</td></tr>
+<tr><td><b>Trapezgewindespindel</b></td><td>—</td><td>25–50 %</td><td>abhängig von der Mutter</td><td>Billig, oft selbsthemmend, hoher Verschleiß im Dauerbetrieb</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zahnräder, Wellen, Lager und Passungen im Detail: <a href="mechanik.html#getriebe">Mechanik → Getriebe</a> und <a href="mechanik.html#lager">Lager</a>.</p>
+
+<h2>Rampen fahren</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Warum keine Sprünge</div><div class="cd">Ein Drehzahlsprung verlangt unendliches Moment. Der Motor kann nicht folgen: Ein Schrittmotor verliert Schritte, ein Servoantrieb geht in die Strombegrenzung.</div></div>
+  <div class="card"><div class="ct">Trapezprofil</div><div class="cd">Konstante Beschleunigung, konstante Fahrt, konstante Verzögerung. Einfach zu rechnen und zeitoptimal — aber der Ruck ist an den Ecken theoretisch unendlich.</div></div>
+  <div class="card"><div class="ct">S-Kurve (ruckbegrenzt)</div><div class="cd">Die Beschleunigung wird selbst rampenförmig aufgebaut. Schonender für Mechanik und Last, regt weniger Schwingungen an, kostet etwas Zeit.</div></div>
+  <div class="card"><div class="ct">Praktische Auslegung</div><div class="cd">Maximale Beschleunigung aus dem verfügbaren Moment: <span class="formula">α_max = (M_motor − M_last) / J_gesamt</span>. Davon 70–80 % ansetzen.</div></div>
+</div>
+
+<h2>Thermik nicht vergessen</h2>
+<ul>
+  <li><b>Nennmoment gilt bei der angegebenen Kühlung.</b> Ein Motor in einem geschlossenen Gehäuse ohne Luftbewegung verträgt deutlich weniger.</li>
+  <li><b>Ein Schrittmotor zieht im Stillstand vollen Strom.</b> Bei Wartezeiten Stromabsenkung aktivieren, sonst wird er ohne jede mechanische Arbeit heiß.</li>
+  <li><b>Der Effektivwert zählt, nicht der Spitzenwert:</b> Bei 3 s Beschleunigung mit 2 Nm und 27 s Stillstand ist M_eff = √((2²·3 + 0²·27)/30) = 0,63 Nm.</li>
+  <li><b>Motoren dürfen heiß werden</b> — 80–100 °C Gehäusetemperatur sind bei Industriemotoren normal. Die Grenze setzen meist benachbarte Kunststoffteile oder Kabel.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Fischer, <i>Elektrische Maschinen</i> — Betriebsarten und Erwärmung.</li>
+    <li>IEC 60034-1 — Betriebsarten S1 bis S10 für elektrische Maschinen.</li>
+    <li>Auslegungshandbücher der Hersteller: SEW-Eurodrive, Nanotec, Faulhaber, maxon motor — frei verfügbar und sehr brauchbar.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — Getriebe- und Spindelberechnung; Kennwerte und Normteile: <a href="mechanik.html#auswahl">Mechanik → Werkstoffauswahl</a>, <a href="mechatronik-nachschlagewerk.html#komponenten">Nachschlagewerk → Komponenten</a>.</li>
+  </ul>
+</div>

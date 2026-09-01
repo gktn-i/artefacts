@@ -1,0 +1,170 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Methodik schützt vor der ersten Idee, die Zeichnung vor dem Missverständnis.</b> Wer sofort zeichnet, was ihm einfällt, verliebt sich in eine Lösung, bevor er die Aufgabe verstanden hat. Und was am Ende nicht in der Zeichnung steht, ist nicht gefordert — Weglassen ist dort so wichtig wie Eintragen.</div>
+
+<h2>Vom Auftrag zur Fertigungsunterlage</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Phase</th><th>Ergebnis</th><th>Werkzeuge</th></tr></thead>
+<tbody>
+<tr><td><b>1 · Klären der Aufgabe</b></td><td>Anforderungsliste</td><td>Fragenkatalog, Gespräch mit dem Nutzer, Wettbewerbsanalyse</td></tr>
+<tr><td><b>2 · Konzipieren</b></td><td>Prinziplösung</td><td>Funktionsstruktur, morphologischer Kasten, Handskizze</td></tr>
+<tr><td><b>3 · Entwerfen</b></td><td>Maßstäblicher Entwurf</td><td>CAD, Überschlagsrechnung, Bewertung nach VDI 2225</td></tr>
+<tr><td><b>4 · Ausarbeiten</b></td><td>Fertigungsunterlagen</td><td>Zeichnung, Stückliste, Toleranzen, FEM</td></tr>
+</tbody>
+</table></div>
+<p>Die Vier-Phasen-Gliederung stammt aus der Konstruktionslehre nach Pahl/Beitz; VDI 2221 beschreibt denselben Ablauf als iteratives Modell — die Phasen laufen in der Praxis nie streng nacheinander.</p>
+
+<h2>Die Anforderungsliste</h2>
+<p>Jede Zeile wird als <b>Forderung</b> (muss erfüllt sein) oder <b>Wunsch</b> (mit Gewichtung) eingestuft und, wo möglich, mit einer Zahl versehen. Eine Anforderung ohne Zahl lässt sich nicht prüfen.</p>
+<ul>
+  <li><b>Funktion:</b> welche Kraft, welcher Weg, welche Geschwindigkeit, welche Genauigkeit, wie oft?</li>
+  <li><b>Geometrie:</b> Bauraum, Anschlussmaße, Masse, Lochbilder</li>
+  <li><b>Umgebung:</b> Temperatur, Feuchte, Medien, Staub, Vibration, EMV</li>
+  <li><b>Sicherheit:</b> wer kann verletzt werden, welche Norm greift, was passiert beim Ausfall?</li>
+  <li><b>Fertigung:</b> Stückzahl, verfügbare Verfahren, Lieferzeit, erreichbare Toleranzen</li>
+  <li><b>Montage und Wartung:</b> wer baut es zusammen, mit welchem Werkzeug, wie oft muss man heran?</li>
+  <li><b>Kosten und Recht:</b> Zielpreis je Stück, Werkzeugkosten, CE, RoHS, Lebensmittelkontakt</li>
+</ul>
+<div class="tip"><b>Der wirksamste einzelne Handgriff</b> ist die Frage nach der <em>Funktion</em> statt nach dem Bauteil. „Ich brauche eine Halterung für den Motor“ engt sofort ein. „Das Motormoment muss ins Gestell abgeleitet werden, die Welle muss auf 0,1 mm fluchten“ öffnet Lösungen, die man sonst nicht sieht — etwa den Motor direkt anzuflanschen und die Halterung ganz zu sparen.</div>
+
+<h2>Varianten erzeugen und bewerten</h2>
+<p>Der <b>morphologische Kasten</b> ist das einfachste Werkzeug: Teilfunktionen in die Zeilen, mögliche Lösungen in die Spalten, dann Kombinationen bilden. Drei Teilfunktionen mit je drei Lösungen ergeben 27 Varianten — die meisten unsinnig, zwei oder drei überraschend gut.</p>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Teilfunktion</th><th>Lösung A</th><th>Lösung B</th><th>Lösung C</th></tr></thead>
+<tbody>
+<tr><td>Drehmoment übertragen</td><td>Passfeder</td><td>Spannsatz</td><td>Presssitz</td></tr>
+<tr><td>Axial festlegen</td><td>Wellenmutter</td><td>Sicherungsring</td><td>Anschlagschulter</td></tr>
+<tr><td>Position messen</td><td>Inkrementalgeber</td><td>Absolutgeber</td><td>Endschalter + Schrittzählung</td></tr>
+</tbody>
+</table></div>
+<p>Bewertet wird nach VDI 2225 zweidimensional: technische Wertigkeit gegen wirtschaftliche. Eine Variante, die technisch führt und wirtschaftlich abfällt, ist selten die richtige.</p>
+
+<h2>Gestaltungsgrundregeln</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Eindeutig</div><div class="cd">Jede Funktion hat genau ein zuständiges Element. Kein Bauteil, das gleichzeitig zentriert, dichtet und Kraft überträgt — sonst verhindert eine Anforderung die andere.</div></div>
+  <div class="card"><div class="ct">Einfach</div><div class="cd">Wenige Teile, wenige Fertigungsschritte, symmetrische Formen. Jedes eingesparte Teil spart Kosten, eine Toleranzkette und eine Fehlerquelle.</div></div>
+  <div class="card"><div class="ct">Sicher</div><div class="cd">Sicheres Bestehen (überdimensioniert), beschränktes Versagen (Sollbruchstelle) oder Redundanz — bewusst entscheiden, nicht dem Zufall überlassen.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Prinzip</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Kraftfluss kurz halten</b></td><td>Der direkteste Weg von der Last zum Lager ist der steifste und leichteste. Umwege bedeuten Biegemomente.</td></tr>
+<tr><td><b>Abgestimmte Verformung</b></td><td>Zusammenwirkende Bauteile sollen sich gleichsinnig verformen — sonst entstehen Zwangskräfte.</td></tr>
+<tr><td><b>Kerbwirkung mindern</b></td><td>Radien statt Ecken, sanfte Querschnittsübergänge, Entlastungskerben (siehe <a href="#festigkeit">Festigkeit &amp; Dauerfestigkeit</a>).</td></tr>
+<tr><td><b>Ausdehnung zulassen</b></td><td>Ein Festpunkt, alles andere beweglich — bei Temperatur, Feuchte und Setzen.</td></tr>
+<tr><td><b>Fehlmontage ausschließen</b></td><td>Poka Yoke: asymmetrische Lochbilder, Passstifte, unterschiedliche Steckerformen. Was falsch montiert werden kann, wird es irgendwann.</td></tr>
+<tr><td><b>Normteile bevorzugen</b></td><td>Verfügbar, geprüft, billig, austauschbar — und die Auslegung hat jemand anderes schon gemacht.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Zeichnung ist ein Vertrag</h2>
+<p>Beide Projektionsmethoden sind genormt und sehen auf den ersten Blick gleich aus. Ohne Symbol im Schriftfeld entsteht bei jedem unsymmetrischen Teil das Spiegelbild.</p>
+<svg class="dg l" viewBox="0 0 620 210" role="img" aria-label="Anordnung der Ansichten bei Projektionsmethode 1 und Methode 3">
+  <text class="lblb" x="145" y="16" text-anchor="middle">Methode 1 · Europa (ISO-E)</text>
+  <rect class="box" x="110" y="34" width="72" height="56" rx="3" />
+  <rect class="accs" x="196" y="34" width="56" height="56" rx="3" />
+  <rect class="accs" x="110" y="104" width="72" height="56" rx="3" />
+  <text class="lblb" x="146" y="66" text-anchor="middle">Vorne</text>
+  <text class="lbla" x="224" y="58" text-anchor="middle">von</text>
+  <text class="lbla" x="224" y="70" text-anchor="middle">links</text>
+  <text class="lbla" x="146" y="128" text-anchor="middle">von</text>
+  <text class="lbla" x="146" y="140" text-anchor="middle">oben</text>
+  <text class="lbl" x="145" y="182" text-anchor="middle">Ansicht von links steht rechts,</text>
+  <text class="lbl" x="145" y="196" text-anchor="middle">Ansicht von oben steht unten</text>
+  <path class="gd" d="M310,20 V180" />
+  <text class="lblb" x="452" y="16" text-anchor="middle">Methode 3 · USA (ISO-A)</text>
+  <rect class="box" x="416" y="104" width="72" height="56" rx="3" />
+  <rect class="accs" x="346" y="104" width="56" height="56" rx="3" />
+  <rect class="accs" x="416" y="34" width="72" height="56" rx="3" />
+  <text class="lblb" x="452" y="136" text-anchor="middle">Vorne</text>
+  <text class="lbla" x="374" y="128" text-anchor="middle">von</text>
+  <text class="lbla" x="374" y="140" text-anchor="middle">links</text>
+  <text class="lbla" x="452" y="58" text-anchor="middle">von</text>
+  <text class="lbla" x="452" y="70" text-anchor="middle">oben</text>
+  <text class="lbl" x="452" y="182" text-anchor="middle">Ansicht von links steht links,</text>
+  <text class="lbl" x="452" y="196" text-anchor="middle">Ansicht von oben steht oben</text>
+</svg>
+<div class="warn"><b>Projektionssymbol immer ins Schriftfeld.</b> Bei einem rotationssymmetrischen Teil ist die Methode egal — bei einem Winkelstück kommt ohne Symbol das Spiegelbild zurück. Das ist einer der teuersten Zeichnungsfehler in internationaler Zusammenarbeit.</div>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th data-s="text">Linie</th><th>Breite</th><th>Verwendung</th></tr></thead>
+<tbody>
+<tr><td>Breite Volllinie</td><td>b (z. B. 0,7 mm)</td><td>Sichtbare Kanten und Umrisse</td></tr>
+<tr><td>Schmale Volllinie</td><td>b/2</td><td>Maßlinien, Maßhilfslinien, Schraffur, Hinweislinien</td></tr>
+<tr><td>Schmale Strichlinie</td><td>b/2</td><td>Verdeckte Kanten</td></tr>
+<tr><td>Schmale Strichpunktlinie</td><td>b/2</td><td>Mittellinien, Symmetrieachsen, Teilkreise</td></tr>
+<tr><td>Breite Strichpunktlinie</td><td>b</td><td>Bereiche mit besonderer Behandlung, z. B. gehärtet</td></tr>
+<tr><td>Schmale Strich-Zweipunktlinie</td><td>b/2</td><td>Nachbarteile, Endstellungen, Rohteilumriss</td></tr>
+<tr><td>Freihandlinie</td><td>b/2</td><td>Bruchkanten, Ausbruchgrenzen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Bemaßen</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4>
+    <ul>
+      <li>Von <b>Funktionsflächen</b> aus bemaßen, nicht von beliebigen Kanten</li>
+      <li>Maßketten vermeiden — sie addieren Toleranzen</li>
+      <li>Jedes Maß genau einmal; keine überbestimmte Bemaßung</li>
+      <li>Bezugskante wählen, die in der Fertigung auch als Anschlag dient</li>
+      <li>Maße außerhalb der Ansicht, kleine innen, große außen</li>
+      <li>Bohrungen über Bezug und Durchmesser, nicht über Abstände zueinander</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Falsch</h4>
+    <ul>
+      <li>Maße in die Ansicht legen, wo sie Kanten kreuzen</li>
+      <li>Von verdeckten Kanten aus bemaßen</li>
+      <li>Rechenmaße eintragen, die der Fertiger erst addieren muss</li>
+      <li>Alles eng tolerieren „zur Sicherheit“</li>
+      <li>So bemaßen, wie in CAD modelliert wurde, statt wie gemessen wird</li>
+      <li>Maßstab eintragen und dann aus der Zeichnung abmessen lassen</li>
+    </ul>
+  </div>
+</div>
+<div class="stop"><b>Toleranzketten sind der häufigste Grund, warum Teile trotz korrekter Fertigung nicht passen.</b> Vier Maße mit je ±0,1 mm ergeben in der Kette ±0,4 mm im ungünstigsten Fall. Müssen drei Bohrungen zueinander stimmen, wird von einer gemeinsamen Bezugskante aus bemaßt, nicht von Loch zu Loch — besser noch mit einer Positionstoleranz nach ISO 1101, siehe <a href="#toleranzen">Toleranzen, Passungen &amp; Oberflächen</a>.</div>
+
+<h2>Allgemeintoleranzen nach ISO 2768</h2>
+<p>Alle Maße ohne eigene Toleranzangabe fallen unter die Allgemeintoleranz aus dem Schriftfeld, angegeben zum Beispiel als <b>ISO 2768-mK</b>: Kleinbuchstabe für Längenmaße (Teil 1), Großbuchstabe für Form und Lage (Teil 2).</p>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Nennmaßbereich</th><th data-s="num">f (fein)</th><th data-s="num">m (mittel)</th><th data-s="num">c (grob)</th><th data-s="num">v (sehr grob)</th></tr></thead>
+<tbody>
+<tr><td>0,5 – 3 mm</td><td>±0,05</td><td>±0,1</td><td>±0,2</td><td>—</td></tr>
+<tr><td>über 3 – 6 mm</td><td>±0,05</td><td>±0,1</td><td>±0,3</td><td>±0,5</td></tr>
+<tr><td>über 6 – 30 mm</td><td>±0,1</td><td>±0,2</td><td>±0,5</td><td>±1,0</td></tr>
+<tr><td>über 30 – 120 mm</td><td>±0,15</td><td>±0,3</td><td>±0,8</td><td>±1,5</td></tr>
+<tr><td>über 120 – 400 mm</td><td>±0,2</td><td>±0,5</td><td>±1,2</td><td>±2,5</td></tr>
+<tr><td>über 400 – 1000 mm</td><td>±0,3</td><td>±0,8</td><td>±2,0</td><td>±4,0</td></tr>
+<tr><td>über 1000 – 2000 mm</td><td>±0,5</td><td>±1,2</td><td>±3,0</td><td>±6,0</td></tr>
+</tbody>
+</table></div>
+<ul>
+  <li><b>Winkelmaße</b> (nach der Länge des kürzeren Schenkels): bis 10 mm ±1° für f und m, 10–50 mm ±30′, 50–120 mm ±20′, 120–400 mm ±10′; c und v jeweils eine bis zwei Stufen gröber.</li>
+  <li><b>Form und Lage</b> (Teil 2, Klassen H / K / L): Geradheit und Ebenheit bei 30–100 mm Länge 0,1 / 0,2 / 0,4 mm, bei 100–300 mm 0,2 / 0,4 / 0,8 mm. Rechtwinkligkeit bis 100 mm Schenkel 0,2 / 0,4 / 0,6 mm. Rundlauf 0,1 / 0,2 / 0,5 mm unabhängig vom Nennmaß.</li>
+  <li><b>m</b> ist für Frästeile der übliche Standard und ohne Zusatzaufwand herstellbar, <b>f</b> verlangt bereits sorgfältige Arbeit, <b>c</b> reicht für Schweiß- und Brennteile.</li>
+</ul>
+
+<h2>Was auf jede Zeichnung gehört</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th data-s="text">Element</th><th>Inhalt</th></tr></thead>
+<tbody>
+<tr><td><b>Schriftfeld</b></td><td>Benennung, Zeichnungsnummer, Maßstab, Werkstoff, Projektionssymbol, Ersteller, Datum, Blattnummer (ISO 7200)</td></tr>
+<tr><td><b>Werkstoffangabe</b></td><td>Kurzname <em>und</em> Werkstoffnummer, plus Zustand — z. B. EN AW-6082 T651 (siehe <a href="#auswahl">Werkstoffwahl</a>)</td></tr>
+<tr><td><b>Oberflächenangaben</b></td><td>Allgemeine Rauheit plus abweichende Werte an Funktionsflächen</td></tr>
+<tr><td><b>Kantenzustand</b></td><td>„Kanten gebrochen 0,3 × 45° soweit nicht anders angegeben“ nach ISO 13715</td></tr>
+<tr><td><b>Oberflächenbehandlung</b></td><td>Eloxieren, Verzinken, Lackieren — mit Schichtdicke und der Angabe, ob die Maße vor oder nach der Behandlung gelten</td></tr>
+<tr><td><b>Änderungsstand</b></td><td>Index, Datum und was geändert wurde</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Bei beschichteten Teilen vermerken, ob die Maße vor oder nach der Beschichtung gelten.</b> Harteloxal wächst etwa zur Hälfte der Schichtdicke nach außen — bei 40 µm Schicht sind das rund 20 µm je Fläche, also 40 µm im Durchmesser einer Bohrung. Eine H7-Passung ist damit weg.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>VDI 2221 Blatt 1 und 2 — Entwicklung technischer Produkte und Systeme; VDI 2225 Blatt 1–4 — technisch-wirtschaftliches Konstruieren, Quelle des Bewertungsverfahrens.</li>
+    <li>Pahl/Beitz/Feldhusen/Grote, <i>Konstruktionslehre</i>, Springer Vieweg — Phasenmodell, Gestaltungsgrundregeln und Gestaltungsprinzipien.</li>
+    <li>DIN EN ISO 128 (Darstellung, Linienarten), DIN EN ISO 5456-2 (Projektionsmethoden), DIN EN ISO 5457 (Formate), DIN EN ISO 7200 (Schriftfeld), DIN ISO 13715 (Kanten).</li>
+    <li>DIN ISO 2768-1 und -2 — Allgemeintoleranzen für Längen-, Winkel-, Form- und Lagemaße; Quelle der Tabellen. DIN EN ISO 22081 als moderner Nachfolger.</li>
+    <li>Hoischen/Fritz, <i>Technisches Zeichnen</i>, Cornelsen — das Standardwerk mit allen Eintragungsbeispielen.</li>
+  </ul>
+</div>

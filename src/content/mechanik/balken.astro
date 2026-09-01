@@ -1,0 +1,133 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Biegung, Torsion und Knicken sind die drei Belastungen, bei denen die Form mehr ausmacht als das Material.</b> Beim Biegen und Verdrehen arbeitet nur das Material weit außen — deshalb sind Rohre und I-Profile so effizient. Und ein schlanker Druckstab knickt schlagartig, lange bevor die Druckspannung kritisch wird.</div>
+
+<h2>Biegung: die zwei Größen</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Flächenträgheitsmoment I [mm⁴]</div><div class="cd">Bestimmt die <b>Steifigkeit</b>: je größer I, desto weniger Durchbiegung. Geht als E·I in jede Durchbiegungsformel ein.</div></div>
+  <div class="card"><div class="ct">Widerstandsmoment W [mm³]</div><div class="cd">Bestimmt die <b>Festigkeit</b>: <span class="formula">σ_b = M / W</span>. Für symmetrische Querschnitte W = I / e (Randfaserabstand e). Wer nur eines prüft, hat die halbe Auslegung gemacht.</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Querschnitt</th><th>Fläche A</th><th>I</th><th>W</th></tr></thead>
+<tbody>
+<tr><td><b>Rechteck</b> (b × h)</td><td>b · h</td><td>b · h³ / 12</td><td>b · h² / 6</td></tr>
+<tr><td><b>Kreis</b> (Ø d)</td><td>π·d² / 4</td><td>π·d⁴ / 64</td><td>π·d³ / 32</td></tr>
+<tr><td><b>Rohr</b> (D / d)</td><td>π·(D²−d²) / 4</td><td>π·(D⁴−d⁴) / 64</td><td>2·I / D</td></tr>
+<tr><td><b>Quadratrohr</b> (a, Wand t)</td><td>a² − (a−2t)²</td><td>(a⁴ − (a−2t)⁴) / 12</td><td>2·I / a</td></tr>
+<tr><td><b>Dreieck</b> (b, h, Schwerachse)</td><td>b·h / 2</td><td>b · h³ / 36</td><td>b · h² / 24</td></tr>
+</tbody>
+</table></div>
+<p>Zusammengesetzte Querschnitte rechnet der Satz von Steiner: <span class="formula">I_ges = Σ (I_i + A_i · a_i²)</span> — der Steiner-Anteil A·a² dominiert fast immer. Bei einem I-Profil steckt über 90 % des I im Steiner-Anteil der Flansche: „Material nach außen“ ist genau dieser Term.</p>
+
+<div class="calc" data-calc="balken">
+  <h4>Balken: Querschnittswerte, Biegespannung und Durchbiegung</h4>
+  <div class="row">
+    <div><label>Querschnitt</label><select data-k="form"><option value="rechteck" selected>Rechteck (b × h)</option><option value="rund">Rundstab (d)</option><option value="rohr">Rohr (D außen / d innen)</option><option value="quadratrohr">Quadratrohr (a / Wand t)</option></select></div>
+    <div><label>Erste Abmessung in mm</label><input data-k="a" type="number" step="any" value="20" /></div>
+    <div><label>Zweite Abmessung in mm</label><input data-k="b" type="number" step="any" value="40" /></div>
+    <div><label>Lastfall</label><select data-k="fall"><option value="kragarm-f" selected>Kragarm, Last am Ende</option><option value="kragarm-q">Kragarm, Gleichlast</option><option value="traeger-f">Zwei Stützen, Last mittig</option><option value="traeger-q">Zwei Stützen, Gleichlast</option></select></div>
+    <div><label>Gesamtlast F in N</label><input data-k="f" type="number" step="any" value="500" /></div>
+    <div><label>Länge L in mm</label><input data-k="laenge" type="number" step="any" value="300" /></div>
+    <div><label>E-Modul in N/mm²</label><input data-k="e" type="number" step="any" value="210000" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Form schlägt Masse</h2>
+<p>Beim Rechteck geht die Höhe in der <b>dritten Potenz</b> ein, die Breite nur linear. Ein Brett 20 × 100 mm hochkant statt flach:</p>
+<div class="kpis">
+  <div class="kpi"><div class="kv">25×</div><div class="kl">Flächenträgheitsmoment I</div></div>
+  <div class="kpi"><div class="kv">5×</div><div class="kl">Widerstandsmoment W</div></div>
+  <div class="kpi"><div class="kv">1×</div><div class="kl">Material und Gewicht</div></div>
+</div>
+<ul>
+  <li><b>Rohr statt Vollstab:</b> Ein Rohr 30 × 2 mm wiegt ein Viertel eines Vollstabs Ø30, behält aber rund 43 % von dessen I — pro Gewicht deutlich überlegen.</li>
+  <li><b>Zu weich?</b> Höher bauen, Rippen anbringen oder auf ein geschlossenes Profil wechseln — in dieser Reihenfolge. Mehr Material in der Mitte bringt fast nichts; bei Druckteilen schlägt eine 3-mm-Rippe das Verdoppeln der Wandstärke.</li>
+</ul>
+
+<h2>Durchbiegung: meist das eigentliche Kriterium</h2>
+<p>Ein Bauteil hält oft mühelos und ist trotzdem unbrauchbar, weil es sich zu stark verformt. Übliche Grenzwerte:</p>
+<div class="tbl-wrap"><table style="min-width:620px">
+<thead><tr><th data-s="text">Anwendung</th><th data-s="num">zulässige Durchbiegung</th></tr></thead>
+<tbody>
+<tr><td>Maschinenrahmen, Werkzeugmaschine</td><td>L / 1000 und feiner</td></tr>
+<tr><td>Führungen, 3D-Drucker-Portal, CNC-Achse</td><td>L / 500 … L / 1000</td></tr>
+<tr><td>Allgemeiner Maschinenbau</td><td>L / 300</td></tr>
+<tr><td>Regale, Konsolen, Gehäuse</td><td>L / 200 … L / 300</td></tr>
+<tr><td>Rein optisch, ohne Funktion</td><td>L / 100</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Die Länge ist der Hebel, nicht die Last.</b> Die Durchbiegung wächst mit L³ — ein 20 % längerer Ausleger biegt sich 73 % mehr durch. Bevor man ein dickeres Profil kauft: Spannweite kürzen oder Zwischenabstützung prüfen.</div>
+
+<h2>Torsion</h2>
+<div class="fbox">
+  <span class="f">τ_t = T / W_t&nbsp;&nbsp;&nbsp;&nbsp;φ = T · L / (G · I_p)</span>
+  <span class="l">T Torsionsmoment [Nmm], W_t polares Widerstandsmoment, I_p polares Flächenträgheitsmoment, G Schubmodul (Stahl ≈ 81 000 N/mm²).</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Querschnitt</th><th>I_p</th><th>W_t</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Vollkreis</b> Ø d</td><td>π·d⁴ / 32</td><td>π·d³ / 16</td><td>Der Standardfall für Wellen</td></tr>
+<tr><td><b>Kreisring</b> D / d</td><td>π·(D⁴−d⁴) / 32</td><td>2·I_p / D</td><td>Die effizienteste Torsionsform: Rohr 30×5 statt Vollwelle Ø30 = 56 % Gewicht bei 80 % Tragfähigkeit und Steifigkeit</td></tr>
+<tr><td><b>Geschlossenes Rechteckrohr</b></td><td>—</td><td>2·A_m·t (Bredt)</td><td>A_m = von der Profilmittellinie umschlossene Fläche</td></tr>
+<tr><td><b>Offenes Profil</b> (U, L, geschlitztes Rohr)</td><td>—</td><td>≈ Σ(b·t²)/3</td><td><b>Um Größenordnungen weicher</b></td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Offen gegen geschlossen ist der drastischste Effekt der ganzen Festigkeitslehre.</b> Ein längs aufgeschlitztes Rundrohr verliert über 99 % seiner Torsionssteifigkeit (die Biegesteifigkeit bleibt fast erhalten). Verwindungssteife Gehäuse brauchen geschlossene Kästen — offene Winkel und U-Profile helfen dort nicht.</div>
+<ul>
+  <li><b>Biegung + Torsion gleichzeitig</b> (Welle mit Riemenscheibe): Vergleichsspannung <span class="formula">σ_v = √(σ_b² + 3·(α₀·τ_t)²)</span> mit α₀ ≈ 0,7 bei ruhender Torsion und wechselnder Biegung. Vollständiger Nachweis rotierender Wellen: DIN 743.</li>
+  <li><b>Verdrehwinkel als Kriterium:</b> Präzisionsantrieb ≤ 0,25°/m, allgemeiner Maschinenbau 0,25–0,5°/m, unkritisch bis 1°/m. Die Verdrehung geht direkt in den Positionsfehler ein.</li>
+  <li><b>Torsionsschwinger:</b> lange weiche Welle plus schwere Masse — Erregerfrequenzen prüfen, siehe <a href="#dynamik">Schwingungen</a>.</li>
+</ul>
+
+<h2>Knicken: die Eulersche Knicklast</h2>
+<div class="fbox">
+  <span class="f">F_krit = π² · E · I / L_k²&nbsp;&nbsp;&nbsp;&nbsp;L_k = β · L</span>
+  <span class="l">Es zählt das <b>kleinste</b> I des Querschnitts — der Stab knickt immer um die weichste Achse. Sicherheitsfaktor 3–5, denn Knicken kommt ohne Vorwarnung.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th data-s="num">Eulerfall</th><th>Lagerung</th><th data-s="num">β</th><th data-s="num">Knicklast relativ</th><th>Typisch</th></tr></thead>
+<tbody>
+<tr><td><b>1</b></td><td>eingespannt / frei</td><td>2,0</td><td>0,25×</td><td>Freistehende Säule, ausgefahrener Zylinder</td></tr>
+<tr><td><b>2</b></td><td>beidseitig gelenkig</td><td>1,0</td><td>1×</td><td>Pendelstütze, Schubstange — der Referenzfall</td></tr>
+<tr><td><b>3</b></td><td>eingespannt / gelenkig</td><td>0,699</td><td>2,05×</td><td>Stütze mit geführtem Kopf</td></tr>
+<tr><td><b>4</b></td><td>beidseitig eingespannt</td><td>0,5</td><td>4×</td><td>Beidseitig fest verschraubte Strebe</td></tr>
+</tbody>
+</table></div>
+
+<div class="calc" data-calc="knick">
+  <h4>Euler-Knicklast</h4>
+  <div class="row">
+    <div><label>Eulerfall</label><select data-k="fall"><option value="1">1 — eingespannt / frei (β = 2)</option><option value="2" selected>2 — beidseitig gelenkig (β = 1)</option><option value="3">3 — eingespannt / gelenkig (β = 0,7)</option><option value="4">4 — beidseitig eingespannt (β = 0,5)</option></select></div>
+    <div><label>E-Modul in N/mm²</label><input data-k="e" type="number" step="any" value="210000" /></div>
+    <div><label>kleinstes I in mm⁴</label><input data-k="i" type="number" step="any" value="491" /></div>
+    <div><label>Stablänge L in mm</label><input data-k="laenge" type="number" step="any" value="500" /></div>
+    <div><label>Fläche A in mm² (optional)</label><input data-k="a" type="number" step="any" value="78.5" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Knicken: Gültigkeit und Praxis</h2>
+<p>Euler gilt nur elastisch, also oberhalb des Grenzschlankheitsgrads <span class="formula">λ_g</span> mit <span class="formula">λ = L_k / i</span>, <span class="formula">i = √(I/A)</span>. Darunter fließt der Werkstoff vorher — dann Tetmajer oder ω-Verfahren: Baustahl S235 λ_g ≈ 104, Vergütungsstahl ≈ 89, Grauguss ≈ 80, Aluminium ≈ 60–75, Nadelholz ≈ 100.</p>
+<div class="gb">
+  <div class="gb-col good"><h4>Wirksam</h4>
+    <ul><li><b>Länge reduzieren</b> — halbe Knicklänge = vierfache Knicklast</li><li><b>Zwischenabstützung</b> — eine Führung in der Mitte vervierfacht die Knicklast</li><li><b>Rohr statt Stab</b>, runder oder quadratischer Querschnitt statt flach</li><li><b>Bessere Einspannung</b> — Fall 2 auf Fall 4 ist Faktor 4, wenn die Verschraubung das hergibt</li></ul>
+  </div>
+  <div class="gb-col bad"><h4>Wirkungslos oder gefährlich</h4>
+    <ul><li><b>Festerer Stahl</b> — E ist bei allen Stählen ≈ 210 000 N/mm², vergütet knickt bei derselben Last</li><li><b>Nur die Druckspannung prüfen</b> — sagt beim schlanken Stab nichts aus</li><li><b>Einspannung annehmen, die keine ist</b> — zwei Schrauben im dünnen Blech sind ein Gelenk</li><li><b>Vorkrümmung ignorieren</b> — reale Stäbe sind nie ideal gerade</li></ul>
+  </div>
+</div>
+<div class="warn"><b>Der Klassiker:</b> die Z-Spindel eines 3D-Druckers, Ø8 mm, 400 mm, unten im Motor eingespannt, oben frei (Fall 1) trägt rechnerisch nur wenige hundert Newton. Ein oberes Loslager wechselt auf Fall 3 und verdoppelt die Knicklast — und verhindert nebenbei das Peitschen bei hoher Drehzahl.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 2: Elastostatik</i> — Balkenbiegung, Steiner, Torsion (inkl. Bredt), Knickung mit den vier Eulerfällen.</li>
+    <li>DIN 743-1 bis -4 — Tragfähigkeitsberechnung von Wellen und Achsen; DIN EN 1993-1-1 (Eurocode 3) — Knicknachweis im nicht-elastischen Bereich.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> mit Tabellenbuch — Querschnittswerte, Verdrehwinkel-Anhaltswerte, Tetmajer-Gleichungen.</li>
+    <li>DIN 1025 (I-Träger), EN 755-9 (Aluprofile) — genormte Profilkennwerte. Die Lastfälle des Rechners stehen unter <a href="#statik">Statik &amp; Schnittgrößen</a>.</li>
+  </ul>
+</div>

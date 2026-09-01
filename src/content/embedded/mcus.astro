@@ -9,11 +9,11 @@ import "./_style.css";
 <tbody>
 <tr><td><b>AVR (ATmega, ATtiny)</b></td><td>8 Bit, eigener Kern</td><td>bis 20 MHz</td><td>2–256 kB Flash</td><td>—</td><td>Sehr einfach zu verstehen, tolerant, Arduino-Ursprung. Für Neuentwürfe meist zu schwach</td></tr>
 <tr><td><b>RP2040 / RP2350</b></td><td>2× Cortex-M0+ bzw. 2× M33 <b>oder</b> 2× RISC-V (Hazard3)</td><td>133 / 150 MHz</td><td>264 / 520 kB SRAM, externer QSPI-Flash</td><td>W-Varianten mit WLAN/BLE</td><td>PIO-Blöcke für frei programmierbare Schnittstellen, exzellente Dokumentation, sehr günstig</td></tr>
-<tr><td><b>STM32</b></td><td>Cortex-M0+ bis M7, M33, M55</td><td>48–800 MHz</td><td>16 kB – 4 MB</td><td>bei WB/WBA-Serie</td><td>Riesige Auswahl, sehr viel Peripherie, industrielle Verfügbarkeit. STM32N6 mit 800 MHz Cortex-M55 und NPU als Spitze</td></tr>
-<tr><td><b>ESP32-Familie</b></td><td>Xtensa oder RISC-V</td><td>80–400 MHz</td><td>bis 512 kB SRAM, PSRAM möglich</td><td><b>immer</b></td><td>Funk eingebaut, sehr preiswert, riesige Community. ESP32-P4 (400 MHz RISC-V) für Multimedia, C5 mit 5-GHz-WLAN, C6 mit Wi-Fi 6 und Thread</td></tr>
+<tr><td><b>STM32</b></td><td>Cortex-M0+ bis M7, M33, M55</td><td>32–800 MHz</td><td>16 kB – 4 MB</td><td>bei WB/WBA-Serie</td><td>Riesige Auswahl, sehr viel Peripherie, industrielle Verfügbarkeit. STM32N6 mit 800 MHz Cortex-M55 und NPU als Spitze</td></tr>
+<tr><td><b>ESP32-Familie</b></td><td>Xtensa oder RISC-V</td><td>80–400 MHz</td><td>bis 768 kB SRAM, PSRAM möglich</td><td><b>immer</b></td><td>Funk eingebaut, sehr preiswert, riesige Community. ESP32-P4 (400 MHz RISC-V) für Multimedia, C5 mit 5-GHz-WLAN, C6 mit Wi-Fi 6 und Thread</td></tr>
 <tr><td><b>nRF52 / nRF54</b></td><td>Cortex-M4F / M33 (nRF54H20 zusätzlich mit RISC-V-Koprozessoren)</td><td>64–320 MHz</td><td>bis 2 MB Flash, 1 MB RAM</td><td>BLE, Thread, Matter, Zigbee</td><td>Der Maßstab bei Funk mit sehr geringem Stromverbrauch; nRF54L15 mit 128 MHz M33, 1,5 MB NVM</td></tr>
 <tr><td><b>SAM / PIC / AVR-DA (Microchip)</b></td><td>Cortex-M0+ bis M7, PIC-Kerne</td><td>32–300 MHz</td><td>breit gefächert</td><td>teils</td><td>Sehr lange Verfügbarkeit, gute Analogperipherie</td></tr>
-<tr><td><b>CH32V / GD32V</b></td><td>RISC-V</td><td>48–144 MHz</td><td>16–128 kB</td><td>teils</td><td>Extrem günstig (unter 20 Cent), wachsende Werkzeugunterstützung</td></tr>
+<tr><td><b>CH32V / GD32V</b></td><td>RISC-V</td><td>48–144 MHz</td><td>16–256 kB</td><td>teils</td><td>Extrem günstig (unter 20 Cent), wachsende Werkzeugunterstützung</td></tr>
 <tr><td><b>i.MX RT (NXP)</b></td><td>Cortex-M7 / M33</td><td>bis 1 GHz</td><td>externer Speicher</td><td>—</td><td>„Crossover“ — Rechenleistung wie ein Anwendungsprozessor bei Mikrocontroller-Determinismus</td></tr>
 </tbody>
 </table></div>
@@ -49,7 +49,7 @@ import "./_style.css";
 <tr><td><b>Arduino Uno R4 / Nano ESP32</b></td><td>≈ 20–25 €</td><td>Für den Einstieg mit vertrauter Umgebung, aber moderner Hardware</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Ein Board mit eingebautem Debugger ist die beste Investition am Anfang.</b> Wer nur über die serielle Schnittstelle Meldungen ausgibt, verbringt bei jedem echten Fehler Stunden mit Raten. Ein Nucleo-Board oder ein separater Debug-Adapter (ST-Link, J-Link EDU, CMSIS-DAP) kostet wenig und macht Breakpoints, Speicheransicht und Fault-Analyse möglich — siehe <a href="#debug">Debuggen &amp; Messen</a>.</div>
+<div class="warn"><b>Ein Board mit eingebautem Debugger ist die beste Investition am Anfang.</b> Ein Nucleo-Board oder ein Debug-Adapter (ST-Link, J-Link EDU, CMSIS-DAP) kostet wenig und macht Breakpoints, Speicheransicht und Fault-Analyse möglich — siehe <a href="#debug">Debuggen &amp; Messen</a>.</div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>

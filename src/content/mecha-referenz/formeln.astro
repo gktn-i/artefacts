@@ -96,7 +96,7 @@ import "./_style.css";
   <div class="frow"><span class="fn">Bleibende Abweichung (P-Regler)</span><span class="fe">e(∞) = 1/(1 + G₀(0))</span><span class="fx">Wird mit I-Anteil null</span></div>
   <div class="frow"><span class="fn">Streckenverstärkung</span><span class="fe">K_S = Δy/Δu</span><span class="fx">Aus dem Sprungversuch</span></div>
   <div class="frow"><span class="fn">Regelbarkeit</span><span class="fe">T_g/T_u</span><span class="fx">&gt; 10 gut, &lt; 3 schwierig</span></div>
-  <div class="frow"><span class="fn">Ziegler-Nichols (Schwingung), PID</span><span class="fe">K_p = 0,6·K_krit · T_n = 0,5·T_krit · T_v = 0,12·T_krit</span><span class="fx">Schnell, mit Überschwingen</span></div>
+  <div class="frow"><span class="fn">Ziegler-Nichols (Schwingung), PID</span><span class="fe">K_p = 0,6·K_krit · T_n = 0,5·T_krit · T_v = 0,125·T_krit</span><span class="fx">Schnell, mit Überschwingen</span></div>
   <div class="frow"><span class="fn">Lambda-Tuning (PI)</span><span class="fe">K_p = T/(K_S·(λ + T_t)), T_n = T</span><span class="fx">λ steuert Robustheit</span></div>
   <div class="frow"><span class="fn">Phasenreserve und Dämpfung</span><span class="fe">D ≈ φ_R/100°</span><span class="fx">Faustregel; 60° ≈ D 0,6</span></div>
   <div class="frow"><span class="fn">PT2-Kennwerte</span><span class="fe">ω₀ = 1/T, Überschwingen aus D</span><span class="fx">D = 0,707 → 4,3 % Überschwingen</span></div>
@@ -105,16 +105,37 @@ import "./_style.css";
   <div class="frow"><span class="fn">Phasenverlust durch Totzeit</span><span class="fe">φ = −ω·T_t (rad)</span><span class="fx">Der Hauptgrund für Instabilität</span></div>
 </div>
 
+<h2>Festigkeit und Mechanik</h2>
+<div class="flist">
+  <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">Gleichgewicht (Statik)</span><span class="fe">ΣF = 0, ΣM = 0</span><span class="fx">Basis jeder Lager- und Schnittkraftrechnung — mit Freikörperbild starten</span></div>
+  <div class="frow"><span class="fn">Zug-/Druckspannung</span><span class="fe">σ = F/A</span><span class="fx">In N/mm² = MPa; gegen σ_zul prüfen</span></div>
+  <div class="frow"><span class="fn">Zulässige Spannung</span><span class="fe">σ_zul = R_e / SF</span><span class="fx">SF statisch 1,5–2, stoßartig 3–4</span></div>
+  <div class="frow"><span class="fn">Hookesches Gesetz</span><span class="fe">σ = E·ε, ε = ΔL/L</span><span class="fx">Elastischer Bereich; E: Stahl ≈ 210, Alu ≈ 70 GPa</span></div>
+  <div class="frow"><span class="fn">Biegespannung</span><span class="fe">σ_b = M_b / W</span><span class="fx">W Rechteck = b·h²/6, Kreis = π·d³/32</span></div>
+  <div class="frow"><span class="fn">Torsionsspannung</span><span class="fe">τ_t = T / W_t</span><span class="fx">W_t Vollkreis = π·d³/16; Hohlwelle spart Masse bei fast gleicher Steifigkeit</span></div>
+  <div class="frow"><span class="fn">Flächenträgheitsmoment</span><span class="fe">I = b·h³/12 (Rechteck)</span><span class="fx">h³ — hochkant ist enorm viel steifer</span></div>
+  <div class="frow"><span class="fn">Durchbiegung Kragarm</span><span class="fe">f = F·L³/(3·E·I)</span><span class="fx">Last am Ende; doppelte Länge = achtfache Durchbiegung</span></div>
+  <div class="frow"><span class="fn">Knicklast (Euler)</span><span class="fe">F_krit = π²·E·I / L_k²</span><span class="fx">Schlanke Druckstäbe knicken vor dem Quetschen</span></div>
+  <div class="frow"><span class="fn">Reibungskraft</span><span class="fe">F_R = µ·F_N</span><span class="fx">Flächenunabhängig; Haftreibung &gt; Gleitreibung</span></div>
+  <div class="frow"><span class="fn">Wärmeausdehnung</span><span class="fe">ΔL = α·L·ΔT</span><span class="fx">α: Alu ≈ 23·10⁻⁶/K, Stahl ≈ 12·10⁻⁶/K — Fest-/Loslager planen</span></div>
+  <div class="frow"><span class="fn">Wärmemenge</span><span class="fe">Q = m·c·ΔT</span><span class="fx">Energie zum Aufheizen, z. B. Heizbett-Abschätzung</span></div>
+  <div class="frow"><span class="fn">Masse aus Volumen</span><span class="fe">m = V·ρ</span><span class="fx">Stahl 7,85; Alu 2,70; PLA 1,24 g/cm³</span></div>
+  <div class="frow"><span class="fn">Gewindekernloch</span><span class="fe">d_Kern ≈ d_Nenn − Steigung</span><span class="fx">Regelgewinde: M6 (Steigung 1,0) → 5,0 mm</span></div>
+</div>
+
 <h2>Antriebe und Mechanik</h2>
 <div class="flist">
   <div class="frow hd"><span>Größe</span><span>Formel</span><span>Anmerkung</span></div>
-  <div class="frow"><span class="fn">Drehmoment</span><span class="fe">M = F · r</span><span class="fx">In Nm</span></div>
+  <div class="frow"><span class="fn">Drehmoment</span><span class="fe">M = F · r</span><span class="fx">In Nm; nur der senkrechte Hebelarm zählt</span></div>
   <div class="frow"><span class="fn">Mechanische Leistung</span><span class="fe">P = M · ω = M · 2π·n/60</span><span class="fx">n in min⁻¹</span></div>
   <div class="frow"><span class="fn">Beschleunigungsmoment</span><span class="fe">M = J · α</span><span class="fx">α in rad/s²</span></div>
   <div class="frow"><span class="fn">Trägheit Vollzylinder</span><span class="fe">J = ½·m·r²</span><span class="fx">—</span></div>
   <div class="frow"><span class="fn">Trägheit über Getriebe</span><span class="fe">J_motor = J_last/i²</span><span class="fx">Quadratisch — der Grund für Getriebe</span></div>
   <div class="frow"><span class="fn">Linearmasse an Spindel</span><span class="fe">J = m·(p/2π)²</span><span class="fx">p = Steigung in m/U</span></div>
-  <div class="frow"><span class="fn">Getriebe</span><span class="fe">M_ab = M_an · i · η, n_ab = n_an/i</span><span class="fx">η bei Schnecke deutlich unter 1</span></div>
+  <div class="frow"><span class="fn">Getriebe</span><span class="fe">M_ab = M_an · i · η, n_ab = n_an/i</span><span class="fx">i = z_ab/z_an; η bei Schnecke deutlich unter 1</span></div>
+  <div class="frow"><span class="fn">Spindelvorschub</span><span class="fe">v = n · P_steig</span><span class="fx">v in mm/min bei n in U/min; Riemen: v = n·z·Teilung</span></div>
+  <div class="frow"><span class="fn">Schritte je mm (Stepper)</span><span class="fe">steps/mm = Vollschritte·Mikroschritt / Weg je U</span><span class="fx">Ganzzahliger Wert vermeidet Maßfehler der Achse</span></div>
   <div class="frow"><span class="fn">Lorentzkraft</span><span class="fe">F = B · I · l</span><span class="fx">Der Motor in einer Gleichung</span></div>
   <div class="frow"><span class="fn">Motorkonstanten</span><span class="fe">M = k_M·I, U_ind = k_E·ω</span><span class="fx">k_M und k_E sind gekoppelt</span></div>
   <div class="frow"><span class="fn">Zylinderkraft</span><span class="fe">F = p · π·d²/4</span><span class="fx">Abzüglich 5–15 % Reibung</span></div>
@@ -126,9 +147,11 @@ import "./_style.css";
   <ul>
     <li>Ohm und Leistung, Spannungsteiler: <a href="elektrotechnik.html#gleichstrom">Elektrotechnik → Gleichstromkreis</a></li>
     <li>Zeitkonstante und Grenzfrequenz: <a href="elektrotechnik.html#transient">Schaltvorgänge</a> · Impedanz: <a href="elektrotechnik.html#wechselstrom">Wechselstrom</a></li>
-    <li>Einheiten-Vorsätze: <a href="elektrotechnik.html#groessen">Größen &amp; Einheiten</a> · Zahlensysteme: <a href="digitaltechnik.html#zahlen">Digitaltechnik</a></li>
-    <li>ADC: <a href="analogtechnik.html#wandler">ADC &amp; DAC</a> · Leiterbahnbreite: <a href="leiterplatte-kicad.html#leiterbahn">Leiterbahnbreite</a></li>
-    <li>PID-Einstellregeln: <a href="regelungstechnik.html#einstellregeln">Einstellregeln</a> · Antrieb: <a href="sensorik-aktorik.html#auslegung">Antriebsauslegung</a></li>
-    <li>Batterielaufzeit: <a href="embedded-firmware.html#strom">Stromsparen</a> · Regelkreis-Simulation: <a href="regelungstechnik.html#pid">PID</a></li>
+    <li>Einheiten und Vorsätze: <a href="#einheiten">Einheiten &amp; Konstanten</a> · Zahlensysteme: <a href="digitaltechnik.html#zahlen">Digitaltechnik</a></li>
+    <li>ADC: <a href="elektrotechnik.html#wandler">ADC &amp; DAC</a> · Leiterbahnbreite: <a href="leiterplatte-kicad.html#leiterbahn">Leiterbahnbreite</a></li>
+    <li>PID und Einstellregeln: <a href="regelung-antriebe.html#pid">Regelung → PID</a> · Antrieb: <a href="regelung-antriebe.html#auslegung">Antriebsauslegung</a></li>
+    <li>Balken und Durchbiegung: <a href="mechanik.html#balken">Mechanik → Balken</a> · Schrauben: <a href="mechanik.html#schrauben">Schraubverbindungen</a> · Passungen: <a href="mechanik.html#toleranzen">Toleranzen</a></li>
+    <li>Batterielaufzeit: <a href="embedded-firmware.html#strom">Stromsparen</a></li>
+    <li>Mechanik-Formeln nach Roloff/Matek (<i>Maschinenelemente</i>) und Gross u. a. (<i>Technische Mechanik</i>) — siehe <a href="#buecher">Bücher &amp; Kurse</a>.</li>
   </ul>
 </div>

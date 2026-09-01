@@ -1,0 +1,155 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Boolesche Algebra ist die Rechenregel für Wahrheitswerte — und zugleich die Bauanleitung für Schaltungen.</b> Ein Schaltnetz hat kein Gedächtnis: Der Ausgang hängt nur von den aktuellen Eingängen ab. Zwei Sätze tragen erstaunlich weit: De Morgan, und dass NAND allein für jede beliebige Funktion genügt.</div>
+
+<h2>Die Grundverknüpfungen</h2>
+<div class="symgrid">
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="UND-Gatter"><path class="w" d="M30,12 H62 a18,18 0 0 1 0,36 H30 Z M10,22 H30 M10,38 H30 M80,30 H100" /><text class="lbl" x="46" y="34" text-anchor="middle">&amp;</text></svg>
+    <div class="sn">UND (AND)</div><div class="sd">1, wenn alle Eingänge 1</div><div class="sr">Y = A · B</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="ODER-Gatter"><path class="w" d="M28,12 q22,18 0,36 q34,0 52,-18 q-18,-18 -52,-18 Z M8,22 H30 M8,38 H30 M80,30 H100" /><text class="lbl" x="48" y="34" text-anchor="middle">≥1</text></svg>
+    <div class="sn">ODER (OR)</div><div class="sd">1, wenn mindestens ein Eingang 1</div><div class="sr">Y = A + B</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="NICHT-Gatter"><path class="w" d="M32,14 L32,46 L66,30 Z M10,30 H32 M74,30 H100" /><circle class="w" cx="70" cy="30" r="4" /></svg>
+    <div class="sn">NICHT (NOT)</div><div class="sd">Kehrt den Eingang um</div><div class="sr">Y = Ā</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="NAND-Gatter"><path class="w" d="M28,12 H58 a18,18 0 0 1 0,36 H28 Z M8,22 H28 M8,38 H28 M84,30 H100" /><circle class="w" cx="80" cy="30" r="4" /><text class="lbl" x="44" y="34" text-anchor="middle">&amp;</text></svg>
+    <div class="sn">NAND</div><div class="sd">Negiertes UND — universell</div><div class="sr">Y = ¬(A · B)</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="NOR-Gatter"><path class="w" d="M26,12 q22,18 0,36 q34,0 52,-18 q-18,-18 -52,-18 Z M6,22 H28 M6,38 H28 M84,30 H100" /><circle class="w" cx="80" cy="30" r="4" /><text class="lbl" x="46" y="34" text-anchor="middle">≥1</text></svg>
+    <div class="sn">NOR</div><div class="sd">Negiertes ODER — ebenfalls universell</div><div class="sr">Y = ¬(A + B)</div>
+  </div>
+  <div class="sym">
+    <svg class="dg" viewBox="0 0 110 60" role="img" aria-label="XOR-Gatter"><path class="w" d="M30,12 q22,18 0,36 q34,0 52,-18 q-18,-18 -52,-18 Z M22,12 q22,18 0,36 M6,22 H26 M6,38 H26 M82,30 H100" /><text class="lbl" x="50" y="34" text-anchor="middle">=1</text></svg>
+    <div class="sn">XOR</div><div class="sd">1, wenn genau ein Eingang 1</div><div class="sr">Y = A ⊕ B</div>
+  </div>
+</div>
+<div class="tbl-wrap"><table style="min-width:520px">
+<thead><tr><th>A</th><th>B</th><th>UND</th><th>ODER</th><th>NAND</th><th>NOR</th><th>XOR</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Gesetze</h2>
+<div class="flist">
+  <div class="frow hd"><span>Gesetz</span><span>Form</span><span>Merkhilfe</span></div>
+  <div class="frow"><span class="fn">Neutrale Elemente</span><span class="fe">A · 1 = A;&nbsp; A + 0 = A</span><span class="fx">Wie in der Arithmetik</span></div>
+  <div class="frow"><span class="fn">Extremalgesetze</span><span class="fe">A · 0 = 0;&nbsp; A + 1 = 1</span><span class="fx">Das ODER mit 1 „gewinnt“ immer</span></div>
+  <div class="frow"><span class="fn">Idempotenz</span><span class="fe">A · A = A;&nbsp; A + A = A</span><span class="fx">Doppelt hilft nicht doppelt</span></div>
+  <div class="frow"><span class="fn">Komplement</span><span class="fe">A · Ā = 0;&nbsp; A + Ā = 1</span><span class="fx">Entweder oder</span></div>
+  <div class="frow"><span class="fn">Distributiv</span><span class="fe">A·(B+C) = A·B + A·C</span><span class="fx">Ausmultiplizieren — gilt hier in beide Richtungen</span></div>
+  <div class="frow"><span class="fn">Absorption</span><span class="fe">A + A·B = A</span><span class="fx">Der wichtigste Vereinfachungsschritt</span></div>
+  <div class="frow"><span class="fn">De Morgan</span><span class="fe">¬(A·B) = Ā + B̄;&nbsp; ¬(A+B) = Ā · B̄</span><span class="fx">Negation wandert nach innen, Operator kippt</span></div>
+</div>
+<div class="tip"><b>De Morgan in der Praxis:</b> Mit NAND allein baut man alles — NOT = NAND mit verbundenen Eingängen, AND = NAND + NOT, OR = NAND mit invertierten Eingängen. CMOS-Chips bestehen fast ausschließlich aus NAND-/NOR-Strukturen, weil sie in dieser Technologie am einfachsten und schnellsten sind.</div>
+
+<h2>Von der Wahrheitstabelle zur minimierten Gleichung</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Disjunktive Normalform (DNF)</div><div class="cd">Je Zeile mit Ausgang 1 einen UND-Term, alle mit ODER verknüpfen („Summe von Produkten“). Der übliche Weg.</div></div>
+  <div class="card"><div class="ct">Konjunktive Normalform (KNF)</div><div class="cd">Je Zeile mit Ausgang 0 einen ODER-Term (Eingänge invertiert), alle mit UND. Lohnt bei wenigen Nullen.</div></div>
+</div>
+<svg class="dg m" viewBox="0 0 340 210" role="img" aria-label="KV-Diagramm mit vier Variablen und zwei zusammengefassten Blöcken">
+  <rect class="box" x="80" y="40" width="240" height="160" />
+  <path class="w" d="M140,40 V200 M200,40 V200 M260,40 V200 M80,80 H320 M80,120 H320 M80,160 H320" />
+  <text class="lbl" x="110" y="34" text-anchor="middle">00</text>
+  <text class="lbl" x="170" y="34" text-anchor="middle">01</text>
+  <text class="lbl" x="230" y="34" text-anchor="middle">11</text>
+  <text class="lbl" x="290" y="34" text-anchor="middle">10</text>
+  <text class="lbl" x="74" y="64" text-anchor="end">00</text>
+  <text class="lbl" x="74" y="104" text-anchor="end">01</text>
+  <text class="lbl" x="74" y="144" text-anchor="end">11</text>
+  <text class="lbl" x="74" y="184" text-anchor="end">10</text>
+  <text class="lbl" x="112" y="20" text-anchor="middle">AB</text>
+  <text class="lbl" x="60" y="34" text-anchor="end">CD</text>
+  <text class="lblb" x="110" y="66" text-anchor="middle">0</text><text class="lblb" x="170" y="66" text-anchor="middle">1</text>
+  <text class="lblb" x="230" y="66" text-anchor="middle">1</text><text class="lblb" x="290" y="66" text-anchor="middle">0</text>
+  <text class="lblb" x="110" y="106" text-anchor="middle">0</text><text class="lblb" x="170" y="106" text-anchor="middle">1</text>
+  <text class="lblb" x="230" y="106" text-anchor="middle">1</text><text class="lblb" x="290" y="106" text-anchor="middle">0</text>
+  <text class="lblb" x="110" y="146" text-anchor="middle">1</text><text class="lblb" x="170" y="146" text-anchor="middle">1</text>
+  <text class="lblb" x="230" y="146" text-anchor="middle">0</text><text class="lblb" x="290" y="146" text-anchor="middle">0</text>
+  <text class="lblb" x="110" y="186" text-anchor="middle">1</text><text class="lblb" x="170" y="186" text-anchor="middle">1</text>
+  <text class="lblb" x="230" y="186" text-anchor="middle">0</text><text class="lblb" x="290" y="186" text-anchor="middle">0</text>
+  <rect class="acc" x="146" y="46" width="108" height="68" rx="10" style="fill:none" />
+  <rect class="acc" x="86" y="126" width="108" height="68" rx="10" style="fill:none;stroke:var(--mid)" />
+</svg>
+<div class="steps">
+  <div class="step"><h4>KV-Diagramm aufstellen</h4>Wahrheitstabelle so umsortieren, dass sich zwischen Nachbarfeldern genau ein Eingang ändert (Gray-Code an den Rändern).</div>
+  <div class="step"><h4>Blöcke bilden, so groß wie möglich</h4>Nur Einsen, in Zweierpotenzgrößen (1, 2, 4, 8, 16), Rechtecke. Jede Verdopplung spart eine Variable; Überlappung ist erlaubt und meist nötig. Das Diagramm ist ein Torus: Ränder und die vier Ecken grenzen aneinander.</div>
+  <div class="step"><h4>Don't-Care nutzen</h4>Nie auftretende Kombinationen mit X markieren und als 1 oder 0 werten — je nachdem, was größere Blöcke ergibt. Oft der größte Gewinn.</div>
+  <div class="step"><h4>Terme ablesen</h4>Pro Block ein UND-Term aus den Variablen, die sich im Block <b>nicht</b> ändern; alle Terme mit ODER verbinden.</div>
+</div>
+<p class="note">Ab fünf Variablen übernimmt der Rechner: Quine-McCluskey exakt, Espresso als Heuristik — beides steckt in jeder Synthesesoftware. Von Hand rechnet man KV-Diagramme trotzdem, weil sie das Gefühl dafür geben, wo Aufwand entsteht.</p>
+
+<h2>Hazards</h2>
+<p>Gatter haben Laufzeiten: Ändern sich zwei Eingänge scheinbar gleichzeitig, kann der Ausgang für Nanosekunden falsch sein, obwohl die Gleichung stimmt (statischer Hazard: kurzer Ausreißer; dynamischer: mehrfacher Wechsel).</p>
+<div class="warn"><b>Wann das zählt:</b> In <b>synchronen</b> Schaltungen übernimmt das Register erst mit der Taktflanke — bis dahin sind Ausreißer abgeklungen. Kritisch wird es nur, wo ein kombinatorisches Signal direkt einen Takt-, Reset- oder Enable-Eingang treibt. Grundregel: <b>niemals kombinatorische Logik als Takt verwenden.</b></div>
+
+<h2>Die Standardbausteine der Schaltnetze</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Baustein</th><th>Funktion</th><th>Beispiel</th><th>Wo man ihn wiederfindet</th></tr></thead>
+<tbody>
+<tr><td><b>Multiplexer (MUX)</b></td><td>Wählt einen von 2ⁿ Eingängen</td><td>2:1 … 16:1</td><td>Datenpfade in CPUs; in HDL jedes <code>if</code> in kombinatorischer Logik</td></tr>
+<tr><td><b>Demultiplexer</b></td><td>Ein Eingang auf einen von 2ⁿ Ausgängen</td><td>1:4, 1:8</td><td>Adressdecodierung, mehrere Chip-Selects</td></tr>
+<tr><td><b>Decoder</b></td><td>n Bit → einer von 2ⁿ Ausgängen aktiv</td><td>3:8 (74HC138)</td><td>Speicherbank-Auswahl, Tastaturmatrix</td></tr>
+<tr><td><b>Prioritätsencoder</b></td><td>Aktiver Eingang → Binärzahl, höchster gewinnt</td><td>8:3 (74HC148)</td><td>Interrupt-Controller</td></tr>
+<tr><td><b>Komparator</b></td><td>Vergleicht zwei Zahlen: &lt;, =, &gt;</td><td>4 Bit (74HC85)</td><td>Grenzwertüberwachung, Adressvergleich</td></tr>
+<tr><td><b>Barrel Shifter</b></td><td>Verschiebt beliebig viele Stellen in einem Takt</td><td>aus MUX-Stufen</td><td>Schiebebefehle in Prozessoren</td></tr>
+</tbody>
+</table></div>
+<div class="flist">
+  <div class="frow hd"><span>Hardware</span><span>Entsprechung in C</span><span>Gemeinsamkeit</span></div>
+  <div class="frow"><span class="fn">Multiplexer</span><span class="fe">switch / Nachschlagetabelle</span><span class="fx">Auswahl aus mehreren Quellen anhand eines Index</span></div>
+  <div class="frow"><span class="fn">Decoder</span><span class="fe">1 &lt;&lt; n</span><span class="fx">Aus einer Zahl wird ein einzelnes gesetztes Bit</span></div>
+  <div class="frow"><span class="fn">Prioritätsencoder</span><span class="fe">__builtin_clz()</span><span class="fx">Höchstes gesetztes Bit finden — als CLZ-Befehl in einem Takt</span></div>
+  <div class="frow"><span class="fn">Maskieren</span><span class="fe">x &amp; maske</span><span class="fx">UND-Verknüpfung Bit für Bit</span></div>
+  <div class="frow"><span class="fn">Wired-AND</span><span class="fe">Open-Drain im GPIO-Register</span><span class="fx">Mehrere Teilnehmer an einer Leitung</span></div>
+</div>
+
+<h2>Addierer: vom Halbaddierer zur ALU</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Halbaddierer / Volladdierer</div><div class="cd">Halbaddierer: Summe = A ⊕ B, Übertrag = A·B — kein eingehender Übertrag, nur für die unterste Stelle. Volladdierer: Summe = A ⊕ B ⊕ C_in, Übertrag = A·B + C_in·(A ⊕ B).</div></div>
+  <div class="card"><div class="ct">Ripple-Carry gegen Carry-Lookahead</div><div class="cd">In Reihe geschaltete Volladdierer sind einfach, aber der Übertrag läuft durch alle Stufen (Verzögerung linear). Carry-Lookahead berechnet Überträge vorab aus Generate/Propagate — logarithmisch, deshalb wird ein 64-Bit-Addierer in einem Takt fertig.</div></div>
+</div>
+<p class="note"><b>Subtraktion braucht keine eigene Hardware:</b> A − B = A + (¬B) + 1 — B invertieren, Übertrag auf 1. Genau das leistet das Zweierkomplement (<a href="#zahlen">Zahlensysteme</a>); ein Addierer mit XOR-Reihe davor kann beides.</p>
+
+<h2>74er-Familie und Ausgangsstufen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Typ</th><th>Funktion</th><th>Praktischer Nutzen heute</th></tr></thead>
+<tbody>
+<tr><td><b>74HC00 / 74HC02</b></td><td>4× NAND / 4× NOR</td><td>Glue Logic, Invertierung, Notlösungen beim Debuggen</td></tr>
+<tr><td><b>74HC14</b></td><td>6× Inverter mit Schmitt-Trigger</td><td>Signalaufbereitung, Entprellung, einfache Oszillatoren</td></tr>
+<tr><td><b>74HC125 / 74HC245</b></td><td>Bustreiber mit Tri-State</td><td>Pegelanpassung, Richtungsumschaltung auf Bussen</td></tr>
+<tr><td><b>74HC138</b></td><td>3:8-Decoder</td><td>Chip-Select-Erzeugung, Matrixansteuerung</td></tr>
+<tr><td><b>74HC165 / 74HC595</b></td><td>Schieberegister Ein-/Ausgang</td><td>Portexpander über SPI — verbreitet und billig</td></tr>
+<tr><td><b>74HC4051</b></td><td>Analogmultiplexer 8:1</td><td>Mehrere Analogsignale auf einen ADC-Eingang</td></tr>
+</tbody>
+</table></div>
+<div class="gb">
+  <div class="gb-col"><h4>Tri-State</h4>
+    <p>High, Low oder hochohmig — mehrere Treiber dürfen an einer Leitung hängen, solange <b>genau einer</b> aktiv ist. Zwei aktive Treiber (Bus Contention) sind ein Kurzschluss zwischen den Versorgungsschienen.</p>
+  </div>
+  <div class="gb-col"><h4>Open-Drain / Open-Collector</h4>
+    <p>Der Ausgang zieht nur nach Masse, den High-Pegel liefert ein Pull-up — mehrere Teilnehmer ergeben eine <b>Wired-AND</b>-Verknüpfung. Darauf beruhen I²C, 1-Wire und Interrupt-Sammelleitungen; der Pull-up bestimmt die Anstiegszeit (<a href="#timing">Timing &amp; Pegel</a>).</p>
+  </div>
+</div>
+<div class="tip"><b>Familienwahl:</b> 74HC (CMOS, 2–6 V) statt der alten 74LS-TTL-Typen; 74HCT für 5-V-Systeme mit 3,3-V-Eingangssignalen, 74LVC für 3,3 V mit oft 5-V-toleranten Eingängen. Die Buchstaben sind wichtiger als die Zahl — Pegel im Detail unter <a href="#timing">Timing, Pegel &amp; Logikfamilien</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Fricke, <i>Digitaltechnik</i>, Kapitel Schaltalgebra, Minimierung und Schaltnetze.</li>
+    <li>Mano &amp; Ciletti, <i>Digital Design</i>, Kapitel 2–4; Harris &amp; Harris, <i>Digital Design and Computer Architecture</i>, Kapitel 2 und 5.</li>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/sg/scyt129e/scyt129e.pdf">Logic Guide</a> — Familien und Bausteinnummern.</li>
+    <li>NXP, <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">UM10204 — I²C-bus specification</a> — Wired-AND und Pull-up-Auslegung.</li>
+  </ul>
+</div>

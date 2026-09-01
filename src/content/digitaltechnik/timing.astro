@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Timing ist der Grund, warum Digitaltechnik schwer ist.</b> Die Logik stimmt — und trotzdem funktioniert es nicht, weil ein Signal 200 Pikosekunden zu spät kommt. Drei Größen entscheiden: Setup-Zeit, Hold-Zeit und Taktversatz. Wer sie beachtet, baut Schaltungen, die auch beim zehnten Exemplar bei 85 °C laufen.</div>
+<div class="kurz"><b>Timing ist der Grund, warum Digitaltechnik schwer ist — und ein High-Pegel ist kein Wert, sondern ein Bereich.</b> Die Logik stimmt, und trotzdem fällt die Schaltung aus: weil ein Signal 200 ps zu spät kommt oder weil 3,3 V für einen 5-V-CMOS-Eingang nicht sicher als High gelten. Setup, Hold, Metastabilität und die vier Pegelgrenzen entscheiden, ob das zehnte Exemplar auch bei 85 °C läuft.</div>
 
 <h2>Setup und Hold</h2>
 <svg class="dg l" viewBox="0 0 620 180" role="img" aria-label="Setup- und Hold-Fenster um die Taktflanke">
@@ -22,71 +22,108 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:780px">
 <thead><tr><th>Größe</th><th>Bedeutung</th><th>Verletzung führt zu</th><th>Abhilfe</th></tr></thead>
 <tbody>
-<tr><td><b>Setup-Zeit t_su</b></td><td>Die Daten müssen schon <em>vor</em> der Taktflanke stabil anliegen</td><td>Das Flipflop übernimmt einen alten oder undefinierten Wert</td><td>Takt verlangsamen, Logik zwischen den Registern aufteilen (Pipelining)</td></tr>
-<tr><td><b>Hold-Zeit t_h</b></td><td>Die Daten müssen <em>nach</em> der Flanke noch kurz stabil bleiben</td><td>Neue Daten überholen die Flanke — der Wert kommt einen Takt zu früh an</td><td>Verzögerung einfügen; lässt sich <b>nicht</b> durch einen langsameren Takt beheben</td></tr>
-<tr><td><b>Clock-to-Q t_co</b></td><td>Zeit von der Flanke bis zum gültigen Ausgang</td><td>—</td><td>Gehört in jede Pfadrechnung</td></tr>
-<tr><td><b>Clock Skew</b></td><td>Zeitversatz des Takts zwischen zwei Flipflops</td><td>Verschlechtert entweder Setup oder Hold, je nach Richtung</td><td>Balancierter Taktbaum; im FPGA übernimmt das die Toolchain</td></tr>
-<tr><td><b>Jitter</b></td><td>Zufällige Schwankung der Taktflanke</td><td>Schmälert das nutzbare Zeitfenster</td><td>Saubere Taktquelle, gute Versorgung, kurze Leitungen</td></tr>
+<tr><td><b>Setup-Zeit t_su</b></td><td>Daten müssen <em>vor</em> der Flanke stabil anliegen</td><td>Altes oder undefiniertes Übernahmeergebnis</td><td>Takt verlangsamen, Logik aufteilen (Pipelining)</td></tr>
+<tr><td><b>Hold-Zeit t_h</b></td><td>Daten müssen <em>nach</em> der Flanke kurz stabil bleiben</td><td>Neue Daten überholen die Flanke</td><td>Verzögerung einfügen; <b>nicht</b> durch langsameren Takt behebbar</td></tr>
+<tr><td><b>Clock-to-Q t_co</b></td><td>Flanke bis gültiger Ausgang</td><td>—</td><td>Gehört in jede Pfadrechnung</td></tr>
+<tr><td><b>Clock Skew</b></td><td>Taktversatz zwischen zwei Flipflops</td><td>Verschlechtert Setup oder Hold, je nach Richtung</td><td>Balancierter Taktbaum; im FPGA macht das die Toolchain</td></tr>
+<tr><td><b>Jitter</b></td><td>Zufällige Schwankung der Flanke</td><td>Schmälert das nutzbare Fenster</td><td>Saubere Taktquelle, gute Versorgung</td></tr>
 </tbody>
 </table></div>
 <div class="fbox">
   <span class="f">t_co + t_logik + t_leitung + t_su + t_skew ≤ T_takt</span>
-  <span class="l">Die Setup-Gleichung. Sie definiert die maximale Taktfrequenz einer Schaltung.</span>
+  <span class="l">Die Setup-Gleichung — sie definiert die maximale Taktfrequenz. Der langsamste Pfad zwischen zwei Registern („kritischer Pfad“) bestimmt das ganze System.</span>
 </div>
-<p class="note"><b>Der wichtige Unterschied:</b> Eine Setup-Verletzung behebt man durch einen langsameren Takt. Eine <b>Hold-Verletzung nicht</b> — sie hängt nicht von der Periodendauer ab, sondern nur von den Laufzeiten zwischen zwei Registern. Ein Entwurf mit Hold-Verletzung funktioniert bei keiner Frequenz.</p>
+<p class="note"><b>Der wichtige Unterschied:</b> Eine Setup-Verletzung behebt ein langsamerer Takt. Eine <b>Hold-Verletzung nicht</b> — sie hängt nur von Laufzeiten ab, nicht von der Periodendauer. Ein Entwurf mit Hold-Verletzung funktioniert bei keiner Frequenz.</p>
 
-<h2>Kritischer Pfad und Pipelining</h2>
-<p>Der langsamste Weg zwischen zwei Registern bestimmt die maximale Taktfrequenz der ganzen Schaltung. Ihn zu finden ist die Aufgabe der statischen Timing-Analyse; ihn zu verkürzen die Aufgabe des Entwerfers.</p>
+<h2>Den kritischen Pfad verkürzen</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Pipelining</div><div class="cd">Zusätzliche Register in die Logik einfügen. Der kritische Pfad halbiert sich, die Taktfrequenz verdoppelt sich — der Preis ist ein Takt mehr Latenz. Der Durchsatz steigt, die Reaktionszeit sinkt nicht.</div></div>
-  <div class="card"><div class="ct">Retiming</div><div class="cd">Register über Logikgrenzen verschieben, ohne das Verhalten zu ändern. Machen moderne Synthesewerkzeuge automatisch, wenn man es erlaubt.</div></div>
-  <div class="card"><div class="ct">Parallelisieren</div><div class="cd">Zwei Rechenwerke nebeneinander statt eines schnellen. Kostet Fläche, spart Frequenz — und damit Strom, weil die dynamische Leistung mit f und U² geht.</div></div>
-  <div class="card"><div class="ct">Logikreduktion</div><div class="cd">Weniger Gatterebenen zwischen den Registern. Oft der einfachste Gewinn: Ein Vergleich auf Gleichheit ist schneller als ein Vergleich auf „kleiner“, eine Zweierpotenz-Division ist ein Shift.</div></div>
+  <div class="card"><div class="ct">Pipelining</div><div class="cd">Zusätzliche Register in die Logik: kritischer Pfad halbiert, Taktfrequenz verdoppelt — Preis ist ein Takt mehr Latenz. Durchsatz steigt, Reaktionszeit nicht.</div></div>
+  <div class="card"><div class="ct">Retiming</div><div class="cd">Register über Logikgrenzen verschieben, Verhalten unverändert — machen Synthesewerkzeuge automatisch, wenn erlaubt.</div></div>
+  <div class="card"><div class="ct">Parallelisieren</div><div class="cd">Zwei Rechenwerke statt eines schnellen: kostet Fläche, spart Frequenz — und Strom, weil die dynamische Leistung mit <span class="formula">P = C · U² · f</span> geht.</div></div>
+  <div class="card"><div class="ct">Logikreduktion</div><div class="cd">Weniger Gatterebenen: Gleichheitsvergleich statt „kleiner“, Shift statt Zweierpotenz-Division.</div></div>
 </div>
 
-<h2>Metastabilität</h2>
-<p>Wird die Setup- oder Hold-Bedingung verletzt, kann ein Flipflop in einen Zwischenzustand geraten: Der Ausgang liegt weder auf High noch auf Low und braucht unbestimmte Zeit, bis er sich entscheidet. Das ist kein hypothetischer Fall — es passiert, sobald ein asynchrones Signal (Taster, Signal aus einer anderen Taktdomäne) direkt in ein Register läuft.</p>
+<h2>Metastabilität und Taktdomänenübergänge (CDC)</h2>
+<p>Wird Setup oder Hold verletzt — etwa durch einen Taster oder ein Signal aus einer anderen Taktdomäne — kann ein Flipflop in einen Zwischenzustand geraten: weder High noch Low, unbestimmte Einschwingzeit.</p>
 <div class="fbox">
   <span class="f">MTBF = e^(t/τ) / (T₀ · f_clk · f_daten)</span>
-  <span class="l">Die mittlere Zeit zwischen zwei Ausfällen wächst <b>exponentiell</b> mit der Zeit t, die man dem Flipflop zum Einschwingen lässt. Genau darauf beruht der Zwei-Flipflop-Synchronisierer.</span>
+  <span class="l">Die mittlere Zeit zwischen Ausfällen wächst <b>exponentiell</b> mit der Einschwingzeit t — darauf beruht der Zwei-Flipflop-Synchronisierer: Das erste FF bekommt einen vollen Takt zum Entscheiden, bevor das zweite übernimmt. MTBF steigt von Sekunden auf Jahrtausende. Gilt nur für <b>einzelne Bits</b>.</span>
 </div>
-<div class="card">
-  <h3>Der Zwei-Flipflop-Synchronisierer</h3>
-  <p>Das asynchrone Signal läuft durch zwei hintereinandergeschaltete D-Flipflops im Zieltakt. Wird das erste metastabil, hat es einen vollen Taktzyklus Zeit, sich zu entscheiden, bevor das zweite übernimmt. Damit steigt die MTBF von Sekunden auf Jahre bis Jahrtausende.</p>
-  <ul>
-    <li>Zwei Stufen sind Standard, drei bei sehr hohen Frequenzen</li>
-    <li>Beide Flipflops müssen im selben Takt laufen und dicht beieinander liegen</li>
-    <li>Gilt nur für <b>einzelne Bits</b> — mehrere Bits gleichzeitig zu synchronisieren ist damit <em>nicht</em> sicher</li>
-  </ul>
-</div>
-
-<h2>Taktdomänenübergänge (CDC)</h2>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Was übertragen wird</th><th>Richtige Technik</th><th>Warum</th></tr></thead>
 <tbody>
-<tr><td><b>Einzelnes Bit, Pegel</b></td><td>Zwei-Flipflop-Synchronisierer</td><td>Reicht aus, sofern das Signal lange genug stabil bleibt</td></tr>
-<tr><td><b>Kurzer Impuls</b></td><td>Toggle-Synchronisierer (Pegelwechsel statt Impuls) plus Flankenerkennung</td><td>Ein Impuls, der kürzer ist als die Zielperiode, geht sonst verloren</td></tr>
-<tr><td><b>Mehrere Bits, zusammengehörig</b></td><td>Handshake oder asynchrone FIFO mit Gray-codierten Zeigern</td><td>Einzeln synchronisierte Bits kommen zu unterschiedlichen Takten an — es entstehen Werte, die es nie gab</td></tr>
-<tr><td><b>Datenstrom</b></td><td>Asynchrone FIFO (Dual-Port-RAM mit Gray-Zeigern)</td><td>Entkoppelt Schreib- und Leserate vollständig</td></tr>
-<tr><td><b>Reset</b></td><td>Asynchron aktivieren, synchron freigeben</td><td>Das Loslassen eines asynchronen Resets kann sonst Recovery-Zeiten verletzen</td></tr>
+<tr><td><b>Einzelnes Bit, Pegel</b></td><td>Zwei-Flipflop-Synchronisierer (drei bei sehr hohen Frequenzen)</td><td>Reicht, sofern das Signal lange genug stabil bleibt</td></tr>
+<tr><td><b>Kurzer Impuls</b></td><td>Toggle-Synchronisierer plus Flankenerkennung</td><td>Ein Impuls kürzer als die Zielperiode geht sonst verloren</td></tr>
+<tr><td><b>Mehrere Bits zusammengehörig</b></td><td>Handshake oder asynchrone FIFO mit Gray-Zeigern</td><td>Einzeln synchronisierte Bits kommen zu verschiedenen Takten an — es entstehen Werte, die es nie gab</td></tr>
+<tr><td><b>Datenstrom</b></td><td>Asynchrone FIFO (Dual-Port-RAM, Gray-Zeiger)</td><td>Entkoppelt Schreib- und Leserate vollständig</td></tr>
+<tr><td><b>Reset</b></td><td>Asynchron aktivieren, synchron freigeben</td><td>Das Loslassen kann sonst Recovery-Zeiten verletzen</td></tr>
 </tbody>
 </table></div>
-<div class="stop"><b>Der Fehler, der monatelang unentdeckt bleibt:</b> Ein 8-Bit-Zähler wird bitweise mit je einem Synchronisierer in eine andere Taktdomäne übertragen. Beim Übergang von 0111 1111 auf 1000 0000 ändern sich alle acht Bits. Kommen sie nicht exakt gleichzeitig an, liest die andere Seite kurz einen völlig falschen Wert — etwa 1111 1111. Das passiert selten, aber es passiert. Lösung: Gray-Code oder ein Handshake.</div>
+<div class="stop"><b>Der Fehler, der monatelang unentdeckt bleibt:</b> Ein 8-Bit-Zähler wird bitweise synchronisiert. Beim Übergang 0111&nbsp;1111 → 1000&nbsp;0000 ändern sich alle acht Bits; kommen sie nicht exakt gleichzeitig an, liest die andere Seite kurz z. B. 1111&nbsp;1111. Selten, aber real. Lösung: Gray-Code oder Handshake. Dasselbe gilt in Software für Variablen zwischen ISR und Hauptprogramm — <code>volatile</code> plus atomare Übergabe.</div>
 
-<h2>Praktische Konsequenzen für Mikrocontroller-Entwürfe</h2>
-<ul>
-  <li><b>Externe Signale immer synchronisieren</b> — auch Tastereingänge, die per Interrupt ausgewertet werden. Viele Peripherieblöcke tun das intern; im Referenzhandbuch steht, ob.</li>
-  <li><b>Register, die von einem Interrupt und vom Hauptprogramm angefasst werden</b>, brauchen dieselbe Sorgfalt: <code>volatile</code> und eine atomare Übergabe (Sperren, Doppelpufferung oder ein einzelnes Wort).</li>
-  <li><b>Signale zwischen zwei Mikrocontrollern</b> laufen zwischen unabhängigen Takten — hier gelten dieselben Regeln, nur in Software. Ein Handshake oder ein Protokoll mit Prüfsumme ersetzt die FIFO.</li>
-  <li><b>Timer-Werte über 16 Bit auslesen</b> hat dasselbe Problem: Zwischen dem Lesen von High- und Low-Byte kann der Zähler überlaufen. Viele Controller bieten dafür ein Schattenregister, das beim Lesen des ersten Bytes den Rest einfriert.</li>
-</ul>
+<h2>Pegel und Logikfamilien</h2>
+<svg class="dg m" viewBox="0 0 400 210" role="img" aria-label="Pegelbereiche und Störabstände zwischen Sender und Empfänger">
+  <rect class="box" x="60" y="20" width="110" height="170" />
+  <rect class="box" x="240" y="20" width="110" height="170" />
+  <rect class="accs" x="60" y="20" width="110" height="42" />
+  <rect class="accs" x="60" y="150" width="110" height="40" style="fill:var(--mid-bg);stroke:var(--mid-border)" />
+  <rect class="accs" x="240" y="20" width="110" height="66" />
+  <rect class="accs" x="240" y="128" width="110" height="62" style="fill:var(--mid-bg);stroke:var(--mid-border)" />
+  <text class="lblb" x="115" y="14" text-anchor="middle">Sender</text>
+  <text class="lblb" x="295" y="14" text-anchor="middle">Empfänger</text>
+  <text class="lbl" x="115" y="45" text-anchor="middle">V_OH …</text>
+  <text class="lbl" x="115" y="175" text-anchor="middle">… V_OL</text>
+  <text class="lbl" x="295" y="58" text-anchor="middle">gilt als HIGH</text>
+  <text class="lbl" x="295" y="165" text-anchor="middle">gilt als LOW</text>
+  <text class="lbl" x="295" y="110" text-anchor="middle">verboten</text>
+  <path class="acc" d="M176,50 H234" /><path class="accf" d="M238,50 l-9,-4 v8 z" />
+  <path class="acc" d="M176,166 H234" /><path class="accf" d="M238,166 l-9,-4 v8 z" />
+  <text class="lbla" x="205" y="42" text-anchor="middle">Reserve</text>
+  <text class="lbla" x="205" y="204" text-anchor="middle">Störabstand = Reserve oben wie unten</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Familie</th><th>Versorgung</th><th>V_IL max / V_IH min</th><th>V_OL max / V_OH min</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td><b>TTL / 74LS</b></td><td>5 V</td><td>0,8 V / 2,0 V</td><td>0,5 V / 2,7 V</td><td>Historisch; hoher Stromverbrauch, Eingang zieht Strom</td></tr>
+<tr><td><b>74HC</b> (CMOS)</td><td>2–6 V</td><td>0,3·V_CC / 0,7·V_CC</td><td>≈ 0 V / ≈ V_CC</td><td>Bei 5 V braucht HIGH mindestens 3,5 V — <b>3,3-V-Signale reichen nicht sicher</b></td></tr>
+<tr><td><b>74HCT</b></td><td>5 V</td><td>0,8 V / 2,0 V</td><td>≈ 0 V / ≈ V_CC</td><td>CMOS-Ausgang, TTL-Schwellen — der klassische 3,3-V-nach-5-V-Übersetzer</td></tr>
+<tr><td><b>74LVC</b></td><td>1,65–3,6 V</td><td>0,8 V / 2,0 V</td><td>0,55 V / V_CC−0,45 V</td><td>Viele Typen 5-V-tolerant am Eingang; der heutige Standard</td></tr>
+<tr><td><b>LVCMOS 3,3 V</b></td><td>3,3 V</td><td>0,8 V / 2,0 V</td><td>0,4 V / 2,4 V</td><td>Der verbreitetste Pegel bei Mikrocontrollern</td></tr>
+<tr><td><b>LVCMOS 1,8 V</b></td><td>1,8 V</td><td>0,63 V / 1,17 V</td><td>0,45 V / 1,35 V</td><td>Moderne SoCs und Speicher</td></tr>
+<tr><td><b>LVDS</b></td><td>differentiell, ±350 mV</td><td>—</td><td>—</td><td>Sehr schnell, störfest, strahlungsarm; Displays, Hochgeschwindigkeit</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Die häufigste Pegelfalle:</b> Ein 3,3-V-Mikrocontroller treibt einen 74HC-Baustein an 5 V — 3,3 V Ausgang gegen 3,5 V geforderte Schwelle. Funktioniert am Schreibtisch, fällt bei Kälte oder beim nächsten Exemplar aus. Richtig: 74HCT, 74LVC oder ein echter Pegelwandler.</div>
+
+<h2>Pegelanpassung in der Praxis</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Richtung</th><th>Lösung</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>5 V → 3,3 V, langsam</b></td><td>Spannungsteiler (z. B. 10 k / 20 k)</td><td>Billig; Leitungskapazität begrenzt die Geschwindigkeit</td></tr>
+<tr><td><b>5 V → 3,3 V, schnell</b></td><td>74LVC-Puffer mit 5-V-toleranten Eingängen</td><td>Der saubere Weg</td></tr>
+<tr><td><b>3,3 V → 5 V</b></td><td>74HCT-Puffer</td><td>Ein einzelner 74HCT14 löst sehr viele Probleme</td></tr>
+<tr><td><b>Bidirektional, Open-Drain (I²C)</b></td><td>MOSFET-Wandler (BSS138) oder IC (TXS0102, PCA9306)</td><td>Nur für Open-Drain-Busse, nicht für Push-Pull</td></tr>
+<tr><td><b>Bidirektional, Push-Pull</b></td><td>Wandler mit Richtungspin (TXB-Serie, 74LVC245)</td><td>Richtung muss die Schaltung vorgeben</td></tr>
+<tr><td><b>5-V-Signal an 3,3-V-MCU</b></td><td>Prüfen, ob der Pin 5-V-tolerant ist („FT“ bei STM32)</td><td>Sonst Teiler oder Puffer</td></tr>
+</tbody>
+</table></div>
+
+<h2>Fan-out, Flanken, Pull-Widerstände</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Fan-out = Kapazität</div><div class="cd">Bei CMOS statisch fast unbegrenzt — begrenzend ist die Kapazität: 3–10 pF je Eingang, ~1 pF/cm Leiterbahn. Mehr Kapazität heißt flachere Flanken und mehr dynamischer Verbrauch.</div></div>
+  <div class="card"><div class="ct">Serienterminierung</div><div class="cd">22–47 Ω direkt am Ausgang verhindern Reflexionen und Überschwinger — sinnvoll bei jeder Leitung über ein paar Zentimeter.</div></div>
+  <div class="card"><div class="ct">Schmitt-Trigger</div><div class="cd">Zwei Schaltschwellen machen aus langsamen oder verrauschten Signalen saubere Flanken. Bei MCU-Pins meist eingebaut, bei 74HC nur „14“ und „132“.</div></div>
+  <div class="card"><div class="ct">Offene CMOS-Eingänge</div><div class="cd">Nie offen lassen: Der Eingang schwebt, beide Transistoren leiten teilweise — Dauerstrom, mögliches Schwingen. Auf V_CC oder Masse legen, direkt oder über 10 kΩ.</div></div>
+</div>
+<div class="tip"><b>Pull-up-Wert bewusst wählen:</b> Für I²C bestimmt er die Anstiegszeit — R_max ≈ t_r/(0,847·C_bus); bei 400 pF und 300 ns sind das rund 900 Ω. Zu große Pull-ups sind die häufigste Ursache für einen I²C-Bus, der bei 400 kHz aussteigt. Interne MCU-Pull-ups (20–50 kΩ) reichen für Taster, nicht für I²C. Und: Boot-Pins (ESP32, STM32) beim Beschalten beachten — hängt dort eine Last, startet das Gerät nicht.</div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li>Clifford E. Cummings, <i>Clock Domain Crossing (CDC) Design &amp; Verification Techniques Using SystemVerilog</i> — SNUG-Paper, frei verfügbar, der Standardtext zum Thema.</li>
+    <li>Clifford E. Cummings, <i>Clock Domain Crossing (CDC) Design &amp; Verification Techniques Using SystemVerilog</i> (SNUG) — der Standardtext.</li>
     <li>Ran Ginosar, <i>Metastability and Synchronizers: A Tutorial</i>, IEEE Design &amp; Test, 2011.</li>
-    <li>Harris &amp; Harris, <i>Digital Design and Computer Architecture</i>, Kapitel 3.5 — Timing und Metastabilität.</li>
-    <li>Xilinx UG949 und Intel/Altera Timing-Analyzer-Handbücher — praktische Anwendung der statischen Timing-Analyse.</li>
+    <li>Harris &amp; Harris, <i>Digital Design and Computer Architecture</i>, Kapitel 3 — Timing und Metastabilität.</li>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/sg/scyt129e/scyt129e.pdf">Logic Guide</a>, <i>Voltage Level Translation</i> (SCEA083) und <i>I²C Bus Pullup Resistor Calculation</i> (SLVA689).</li>
+    <li>NXP, <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">UM10204 — I²C-bus specification</a>, Kapitel Anstiegszeit.</li>
   </ul>
 </div>

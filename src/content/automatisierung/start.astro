@@ -1,50 +1,55 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Automatisierungstechnik ist Mechatronik im Industriemaßstab</b> — mit anderen Prioritäten: Verfügbarkeit über Jahrzehnte, Wartbarkeit durch Dritte, nachvollziehbare Sicherheit. Deshalb sieht eine SPS-Steuerung anders aus als ein Mikrocontroller-Projekt, obwohl sie dasselbe leistet.</div>
+<div class="kurz"><b>Automatisierung und Robotik sind Mechatronik im Systemmaßstab.</b> Die SPS-Welt optimiert auf Verfügbarkeit über Jahrzehnte, Wartbarkeit durch Dritte und nachweisbare Sicherheit; die Robotik verbindet dieselbe Antriebs- und Sensortechnik mit Kinematik, Wahrnehmung und zunehmend gelerntem Verhalten.</div>
 
-<h2>Landkarte</h2>
+<h2>Landkarte: SPS &amp; Industrie</h2>
 <div class="map">
-  <a href="#sps"><div class="mt"><span class="i">🖥️</span>SPS-Grundlagen</div><div class="md">Aufbau, Zyklus, Prozessabbild, Adressierung, Baugruppen.</div></a>
-  <a href="#iec61131"><div class="mt"><span class="i">📜</span>IEC 61131-3</div><div class="md">Die genormten Sprachen und was sich mit der Fassung von 2025 geändert hat.</div></a>
-  <a href="#programmierung"><div class="mt"><span class="i">⌨️</span>Programmierpraxis</div><div class="md">Struktur, Bausteine, Schrittketten, Diagnose, typische Fehler.</div></a>
-  <a href="#feldbus"><div class="mt"><span class="i">🔌</span>Feldbusse</div><div class="md">PROFINET, EtherCAT, Modbus, IO-Link, CANopen, TSN.</div></a>
-  <a href="#schaltschrank"><div class="mt"><span class="i">🗄️</span>Schaltschrank</div><div class="md">Aufbau, Verdrahtung, Schutzorgane, Kennzeichnung, Dokumentation.</div></a>
-  <a href="#sicherheit"><div class="mt"><span class="i">🛑</span>Funktionale Sicherheit</div><div class="md">Risikobeurteilung, Performance Level, SIL, Not-Halt, Schutztüren.</div></a>
-  <a href="#hmi"><div class="mt"><span class="i">📊</span>HMI, SCADA &amp; OPC UA</div><div class="md">Bedienung, Visualisierung, Datenanbindung.</div></a>
-  <a href="#iiot"><div class="mt"><span class="i">☁️</span>Industrie 4.0</div><div class="md">Datenerfassung, Verwaltungsschale, Edge, was davon trägt.</div></a>
+  <a href="#sps"><div class="mt"><span class="i">🖥️</span>SPS: Aufbau &amp; Zyklus</div><div class="md">Zyklus, Prozessabbild, Baugruppen, Adressierung.</div></a>
+  <a href="#sprachen"><div class="mt"><span class="i">📜</span>IEC 61131-3 &amp; Praxis</div><div class="md">Sprachen, Bausteine, Schrittketten, typische Fehler, Inbetriebnahme.</div></a>
+  <a href="#feldbus"><div class="mt"><span class="i">🔌</span>Feldbusse</div><div class="md">PROFINET, EtherCAT, Modbus, IO-Link, TSN, Single Pair Ethernet.</div></a>
+  <a href="#schaltschrank"><div class="mt"><span class="i">🗄️</span>Schaltschrank</div><div class="md">Aufbau, Schutzorgane, Verdrahtung, Kennzeichnung, Klima.</div></a>
+  <a href="#sicherheit"><div class="mt"><span class="i">🛑</span>Funktionale Sicherheit</div><div class="md">Risikobeurteilung, Performance Level, Not-Halt, Validierung.</div></a>
+  <a href="#leitsystem"><div class="mt"><span class="i">📊</span>HMI, SCADA &amp; Industrie 4.0</div><div class="md">Bedienbilder, Alarme, OPC UA, MQTT, Datenauswertung, Security.</div></a>
 </div>
 
+<h2>Landkarte: Robotik</h2>
+<div class="map">
+  <a href="#robotik"><div class="mt"><span class="i">🦾</span>Grundlagen &amp; Kinematik</div><div class="md">Aufbau, Freiheitsgrade, Vorwärts-/inverse Kinematik, DH-Parameter, SLAM.</div></a>
+  <a href="#robo-hw"><div class="mt"><span class="i">⚙️</span>Roboter-Hardware</div><div class="md">Aktuatoren, Sensoren, Mechanik, Compute — die Robotik-Sicht.</div></a>
+  <a href="#ros"><div class="mt"><span class="i">🤖</span>ROS 2 &amp; Software-Stack</div><div class="md">Distributionen, ros2_control, MoveIt 2, Nav2, Simulation.</div></a>
+  <a href="#lernen"><div class="mt"><span class="i">🧠</span>Robot Learning</div><div class="md">Reinforcement Learning, Imitation Learning, Sim-to-Real, LeRobot.</div></a>
+</div>
+<p class="note">Regelungstheorie, Motoren, Encoder und Treiber wohnen im Modul <a href="regelung-antriebe.html">Regelung, Sensorik &amp; Antriebe</a> — hier wird nur darauf verwiesen, nichts doppelt erklärt.</p>
+
 <h2>SPS oder Mikrocontroller?</h2>
-<div class="tbl-wrap"><table style="min-width:900px">
+<div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Kriterium</th><th>SPS</th><th>Mikrocontroller</th></tr></thead>
 <tbody>
-<tr><td><b>Einstiegskosten</b></td><td>hoch (Hardware und Software ab einigen hundert Euro)</td><td>sehr gering</td></tr>
 <tr><td><b>Robustheit im Schaltschrank</b></td><td>ausgelegt für 24 V, EMV, Temperatur, Vibration</td><td>muss selbst dafür ausgelegt werden</td></tr>
-<tr><td><b>Wartbarkeit durch Dritte</b></td><td><b>sehr gut</b> — jeder Elektriker findet sich in einem KOP-Programm zurecht</td><td>abhängig vom Entwickler und der Dokumentation</td></tr>
-<tr><td><b>Verfügbarkeit von Ersatzteilen</b></td><td>10–20 Jahre garantiert</td><td>Bauteile werden abgekündigt</td></tr>
+<tr><td><b>Wartbarkeit durch Dritte</b></td><td><b>sehr gut</b> — KOP liest jeder Instandhalter</td><td>abhängig von Entwickler und Doku</td></tr>
+<tr><td><b>Ersatzteil-Verfügbarkeit</b></td><td>10–20 Jahre zugesichert</td><td>Bauteile werden abgekündigt</td></tr>
 <tr><td><b>Funktionale Sicherheit</b></td><td>zertifizierte Sicherheits-SPS verfügbar</td><td>eigene Zertifizierung sehr aufwendig</td></tr>
 <tr><td><b>Rechenleistung je Euro</b></td><td>gering</td><td><b>sehr hoch</b></td></tr>
-<tr><td><b>Flexibilität</b></td><td>begrenzt auf das, was das System vorsieht</td><td>praktisch unbegrenzt</td></tr>
 <tr><td><b>Zykluszeit</b></td><td>1–10 ms typisch, deterministisch</td><td>Mikrosekunden möglich</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Die ehrliche Einordnung für private Projekte:</b> Eine SPS lohnt sich, wenn eine Anlage über Jahre laufen und von anderen gewartet werden soll, oder wenn Sicherheitsfunktionen zertifiziert sein müssen. Für alles andere ist ein Mikrocontroller billiger und flexibler. Wer die SPS-Welt kennenlernen will, kommt mit gebrauchter Hardware (Siemens S7-1200, Beckhoff CX) oder einer Software-SPS (CODESYS auf einem Raspberry Pi) für unter hundert Euro hinein — und lernt dabei Denkweisen, die auch in der Mikrocontroller-Welt nützlich sind.</div>
+<div class="tip"><b>Einordnung für eigene Projekte:</b> Eine SPS lohnt sich, wenn eine Anlage über Jahre laufen, von anderen gewartet werden oder zertifizierte Sicherheitsfunktionen tragen soll. Sonst ist ein Mikrocontroller billiger und flexibler. Der günstigste Einstieg in die SPS-Welt: gebrauchte Hardware (S7-1200, Beckhoff CX) oder CODESYS auf einem Raspberry Pi.</div>
 
-<h2>Was man aus der Automatisierungstechnik mitnehmen kann</h2>
+<h2>Was beide Welten verbindet</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Prozessabbild statt direkter Zugriff</div><div class="cd">Eingänge einmal zu Beginn des Zyklus lesen, Ausgänge am Ende schreiben. Dazwischen arbeitet das Programm mit einem konsistenten Abbild — keine Wettlaufsituationen, kein flackernder Zustand.</div></div>
-  <div class="card"><div class="ct">Schrittketten</div><div class="cd">Ablauf als klar benannte Schritte mit Weiterschaltbedingungen und Zeitüberwachung. Genau das ist ein Zustandsautomat — nur mit einer Notation, die auch ohne Programmierkenntnisse lesbar ist.</div></div>
-  <div class="card"><div class="ct">Definierter sicherer Zustand</div><div class="cd">Was passiert bei Spannungsausfall, Sensordefekt, Kommunikationsabbruch? In der Automatisierung ist diese Frage Pflicht, nicht Kür.</div></div>
-  <div class="card"><div class="ct">Vollständige Dokumentation</div><div class="cd">Stromlaufplan, Klemmenplan, Betriebsmittelkennzeichnung. Ein Schaltschrank ohne Plan ist wertlos — dasselbe gilt für eine Platine ohne Schaltplan.</div></div>
+  <div class="card"><div class="ct">Prozessabbild statt direkter Zugriff</div><div class="cd">Eingänge einmal je Zyklus lesen, Ausgänge am Ende schreiben — konsistenter Zustand, keine Wettlaufsituationen. Dasselbe Muster nutzt jede saubere Regelschleife.</div></div>
+  <div class="card"><div class="ct">Schrittketten = Zustandsautomaten</div><div class="cd">Abläufe als benannte Schritte mit Weiterschaltbedingung und Zeitüberwachung — in der SPS wie im Roboter-Verhalten.</div></div>
+  <div class="card"><div class="ct">Definierter sicherer Zustand</div><div class="cd">Was passiert bei Spannungsausfall, Sensordefekt, Kommunikationsabbruch? In beiden Welten Pflichtfrage, nicht Kür.</div></div>
+  <div class="card"><div class="ct">Dokumentation als Teil des Produkts</div><div class="cd">Stromlaufplan und Klemmenplan hier, URDF und Parameterdatei dort — ein System ohne aktuellen Plan ist nicht wartbar.</div></div>
 </div>
 
 <div class="srcs">
   <div class="sh">Grundlage dieses Moduls</div>
   <ul>
-    <li>Karl Heinz John, Michael Tiegelkamp, <i>SPS-Programmierung mit IEC 61131-3</i>, Springer Vieweg — das Standardwerk, an die aktuelle Normfassung angepasst.</li>
-    <li>Günter Wellenreuther, Dieter Zastrow, <i>Automatisieren mit SPS</i>, Springer Vieweg — sehr aufgabenorientiert.</li>
-    <li>IEC 61131-3:2025 — die Norm selbst (kostenpflichtig über DIN oder IEC).</li>
-    <li>Herstellerunterlagen: Siemens TIA-Portal-Handbücher, Beckhoff Infosys, CODESYS Online Help — alle frei zugänglich und sehr umfangreich.</li>
+    <li>John &amp; Tiegelkamp, <i>SPS-Programmierung mit IEC 61131-3</i>, Springer Vieweg; Wellenreuther &amp; Zastrow, <i>Automatisieren mit SPS</i>, Springer Vieweg.</li>
+    <li>Lynch &amp; Park, <i>Modern Robotics</i>, Cambridge University Press — frei verfügbar.</li>
+    <li>IEC 61131-3:2025; Herstellerunterlagen von Siemens (TIA Portal), Beckhoff Infosys, CODESYS Online Help.</li>
+    <li><a href="https://docs.ros.org/">ROS 2 Documentation</a>.</li>
   </ul>
 </div>

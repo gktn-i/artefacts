@@ -5,8 +5,8 @@
    "name": "Werkstatt",
    "icon": "🔧",
    "file": "hub-werkstatt.html",
-   "tagline": "Elektronik · Löten · Mechanik · 3D-Druck",
-   "desc": "Alles, was an der Werkbank passiert. Von der Grundlagenformel über die Lötspitze und das richtige Fett bis zum Filament auf der Rolle.",
+   "tagline": "Elektronik · Löten · Werkzeug · 3D-Druck",
+   "desc": "Alles, was an der Werkbank passiert — von der Schaltung über die Lötspitze und das richtige Fett bis zum Filament auf der Rolle.",
    "accent": {
     "l": "#0e7c8c",
     "d": "#38c6d9"
@@ -318,145 +318,17 @@
      ]
     },
     {
-     "id": "mechanik",
-     "name": "Mechanik & Werkzeug",
-     "desc": "Was zusammenhält, sich dreht und geschmiert werden will.",
+     "id": "werkzeug",
+     "name": "Werkzeug & Pflege",
+     "desc": "Was rotiert, schneidet und geschmiert werden will.",
      "modules": [
-      {
-       "id": "mechanik-robotik",
-       "file": "mechanik-robotik.html",
-       "name": "Mechanik & Robotik",
-       "icon": "🦾",
-       "kind": "Referenz",
-       "updated": "2026-08-20",
-       "desc": "Maschinenbau und Robotik in einem Modul: Kernkonzepte, Formeln, Werkstoffe und Do's & Don'ts, die Komponenten-Datenbank mit Drehmoment- und Gewindetabellen — und der Robotik-Stack von Aktorik über Steuerung und ROS2 bis Robot Learning.",
-       "tags": [
-        "formeln",
-        "festigkeit",
-        "werkstoffe",
-        "toleranzen",
-        "schrauben",
-        "normteile",
-        "lager",
-        "gewinde",
-        "drehmoment",
-        "motoren",
-        "sensoren",
-        "steuerung",
-        "regelung",
-        "ros2",
-        "robotik",
-        "lernpfad"
-       ],
-       "sections": [
-        {
-         "h": "konzepte",
-         "t": "Konzepte"
-        },
-        {
-         "h": "formeln",
-         "t": "Formeln"
-        },
-        {
-         "h": "material",
-         "t": "Werkstoffe"
-        },
-        {
-         "h": "dodont",
-         "t": "Do's & Don'ts"
-        },
-        {
-         "h": "komp",
-         "t": "Komponenten"
-        },
-        {
-         "h": "torque",
-         "t": "Drehmoment"
-        },
-        {
-         "h": "thread",
-         "t": "Gewinde & Bohren"
-        },
-        {
-         "h": "robo-grund",
-         "t": "Robotik-Grundlagen"
-        },
-        {
-         "h": "robo-hw",
-         "t": "Roboter-Hardware"
-        },
-        {
-         "h": "robo-steuerung",
-         "t": "Steuerung & Regelung"
-        },
-        {
-         "h": "robo-sw",
-         "t": "Software & ROS2"
-        },
-        {
-         "h": "robo-lernen",
-         "t": "Robot Learning & Lernpfad"
-        },
-        {
-         "h": "glossar",
-         "t": "Glossar"
-        }
-       ],
-       "groups": [
-        {
-         "l": "Mechanik",
-         "sections": [
-          "konzepte",
-          "formeln",
-          "material",
-          "dodont"
-         ]
-        },
-        {
-         "l": "Komponenten",
-         "sections": [
-          "komp",
-          "torque",
-          "thread"
-         ]
-        },
-        {
-         "l": "Robotik",
-         "sections": [
-          "robo-grund",
-          "robo-hw",
-          "robo-steuerung",
-          "robo-sw",
-          "robo-lernen"
-         ]
-        },
-        {
-         "l": "Nachschlagen",
-         "sections": [
-          "glossar"
-         ]
-        }
-       ],
-       "alias": {
-        "grund": "robo-grund",
-        "hw": "robo-hw",
-        "steu": "robo-steuerung",
-        "sw": "robo-sw",
-        "rl": "robo-lernen",
-        "pfad": "robo-lernen",
-        "gloss": "glossar"
-       },
-       "related": [
-        "elektronik-101"
-       ]
-      },
       {
        "id": "dremel",
        "file": "dremel-8250-cheatsheet.html",
        "name": "Dremel 8250",
        "icon": "🌀",
        "kind": "Cheatsheet",
-       "updated": "2026-08-19",
+       "updated": "2026-08-26",
        "desc": "Drehzahl nach Material und Aufsatz, der Zubehörkatalog mit Erkennungsmerkmalen, Arbeitstechniken für Trennen, Schleifen, Gravieren, Polieren und Bohren — und die Grenzen, die man nicht überschreitet.",
        "tags": [
         "dremel",
@@ -523,9 +395,8 @@
         }
        ],
        "related": [
-        "mechanik-robotik",
         "schmiermittel",
-        "konstruktion"
+        "mechanik"
        ]
       },
       {
@@ -534,7 +405,7 @@
        "name": "Schmiermittel",
        "icon": "🛢️",
        "kind": "Referenz",
-       "updated": "2026-08-19",
+       "updated": "2026-08-26",
        "desc": "Öl, Fett, Spray, Paste und Trockenschmierstoff: was sie unterscheidet, welches Mittel an welche Stelle gehört, die Verträglichkeit mit Kunststoffen und Dichtungen — plus eine bewertete Vergleichstabelle über 21 gängige Produkte.",
        "tags": [
         "schmiermittel",
@@ -584,8 +455,7 @@
         }
        ],
        "related": [
-        "maschinenelemente",
-        "technische-mechanik",
+        "mechanik",
         "dremel"
        ],
        "groups": [
@@ -621,59 +491,67 @@
      "desc": "Material wählen, Düse wählen, Preis kennen.",
      "modules": [
       {
-       "id": "filament",
-       "file": "3d-filament-vergleich.html",
-       "name": "Filament & Düsen",
+       "id": "druck",
+       "file": "3d-druck.html",
+       "name": "3D-Druck",
        "icon": "🧵",
-       "kind": "Vergleich",
-       "updated": "2026-03-09",
-       "desc": "Filamente nach Festigkeit, Hitzebeständigkeit, Preis und Einsatzgebiet — dazu Düsendurchmesser und Infill-Muster im Vergleich.",
+       "kind": "Referenz",
+       "updated": "2026-08-26",
+       "desc": "Material, Düse und Wirtschaftlichkeit des FDM-Drucks: der Filament-Vergleich von PLA bis Carbon-Nylon, Düsengrößen und -materialien, Infill-Muster — und der Rentabilitäts-Simulator für den Druck als Nebenerwerb.",
        "tags": [
+        "filament",
         "pla",
         "petg",
-        "asa",
+        "abs",
+        "tpu",
         "nylon",
         "düse",
-        "infill"
+        "nozzle",
+        "infill",
+        "rentabilität",
+        "preise"
        ],
        "sections": [
         {
-         "h": "filament",
+         "h": "filamente",
          "t": "Filamente"
         },
         {
-         "h": "nozzle",
-         "t": "Düsen / Nozzles"
+         "h": "duesen",
+         "t": "Düsen & Nozzles"
         },
         {
          "h": "infill",
          "t": "Infill-Muster"
-        }
-       ],
-       "related": [
-        "rentabilitaet",
-        "mechanik-robotik"
-       ]
-      },
-      {
-       "id": "rentabilitaet",
-       "file": "rentabilitaets-simulator.html",
-       "name": "Rentabilität",
-       "icon": "📈",
-       "kind": "Rechner",
-       "updated": "2026-06-05",
-       "desc": "Stückkosten, Deckungsbeitrag und drei Szenarien für den Fall, dass aus dem Drucker ein Geschäft werden soll.",
-       "tags": [
-        "kalkulation",
-        "marge",
-        "kosten",
-        "business"
-       ],
-       "sections": [
+        },
         {
-         "h": "simulator",
-         "t": "Simulator"
+         "h": "rechner",
+         "t": "Rentabilitäts-Rechner"
         }
+       ],
+       "groups": [
+        {
+         "l": "Material",
+         "sections": [
+          "filamente",
+          "duesen",
+          "infill"
+         ]
+        },
+        {
+         "l": "Kalkulation",
+         "sections": [
+          "rechner"
+         ]
+        }
+       ],
+       "alias": {
+        "filament": "filamente",
+        "nozzle": "duesen",
+        "simulator": "rechner"
+       },
+       "related": [
+        "mechanik"
        ]
       }
      ]
@@ -686,46 +564,43 @@
    "icon": "⚙️",
    "file": "hub-mechatronik.html",
    "tagline": "Mechanik · Elektronik · Informationstechnik · Regelung",
-   "desc": "Das Fach, das Mechanik, Elektronik und Software zu einem Gerät zusammenzieht. Vom ohmschen Gesetz über den Operationsverstärker, den Mikrocontroller und den Regelkreis bis zur fertigen Leiterplatte — mit Lernpfad, Glossar und geprüften Quellen.",
+   "desc": "Das Fach, das Mechanik, Elektronik und Software zu einem Gerät zusammenzieht. Vom ohmschen Gesetz über den Operationsverstärker, den Mikrocontroller und den Regelkreis bis zur fertigen Leiterplatte — mit Robotik, Lernpfad, Glossar und geprüften Quellen.",
    "accent": {
     "l": "#1e5bb8",
     "d": "#63a9f5"
    },
    "areas": [
     {
-     "name": "Mechanik & Konstruktion",
+     "id": "grundlagen",
+     "name": "Grundlagen",
+     "desc": "Mechanik, Elektrotechnik und Digitales — das Fundament, auf dem alles andere steht.",
      "modules": [
       {
-       "id": "technische-mechanik",
-       "file": "technische-mechanik.html",
-       "name": "Technische Mechanik",
+       "id": "mechanik",
+       "file": "mechanik.html",
+       "name": "Mechanik & Konstruktion",
        "icon": "📐",
        "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Die Rechenbasis jeder Konstruktion: Freikörperbild und Gleichgewicht, Schnittgrößen, Spannung und Dehnung, Biegung mit Flächenmomenten, Torsion, Knicken, Kerbwirkung und Dauerfestigkeit, dazu Kinematik, Dynamik, Schwingungen und Reibung.",
+       "updated": "2026-08-26",
+       "desc": "Der ganze Maschinenbau-Unterbau in einem Modul: Statik, Festigkeit und Dynamik, die Maschinenelemente von der Schraube bis zur Kupplung, Werkstoffe mit Kennwerten und Tabellen — und die Konstruktionspraxis von der Zeichnung über Toleranzen bis zum 3D-Druck.",
        "tags": [
         "statik",
-        "freikörperbild",
-        "schnittgrößen",
-        "spannung",
-        "dehnung",
-        "hooke",
-        "biegung",
-        "flächenträgheitsmoment",
-        "widerstandsmoment",
-        "torsion",
-        "knicken",
-        "euler",
-        "kerbwirkung",
-        "vergleichsspannung",
-        "dauerfestigkeit",
-        "wöhler",
-        "kinematik",
+        "festigkeit",
         "dynamik",
-        "trägheitsmoment",
-        "schwingung",
-        "resonanz",
-        "reibung"
+        "schrauben",
+        "drehmoment",
+        "gewinde",
+        "lager",
+        "getriebe",
+        "werkstoffe",
+        "stahl",
+        "aluminium",
+        "kunststoffe",
+        "toleranzen",
+        "passungen",
+        "cad",
+        "fem",
+        "fertigung"
        ],
        "sections": [
         {
@@ -734,473 +609,197 @@
         },
         {
          "h": "statik",
-         "t": "Statik & Freikörperbild"
+         "t": "Statik & Schnittgrößen"
         },
         {
-         "h": "schnittgroessen",
-         "t": "Schnittgrößen & Lager"
+         "h": "festigkeit",
+         "t": "Spannung & Festigkeit"
         },
         {
-         "h": "spannung",
-         "t": "Spannung, Dehnung, Hooke"
-        },
-        {
-         "h": "biegung",
-         "t": "Biegung & Flächenmomente"
-        },
-        {
-         "h": "torsion",
-         "t": "Torsion & Schub"
-        },
-        {
-         "h": "knicken",
-         "t": "Knicken & Stabilität"
-        },
-        {
-         "h": "kerben",
-         "t": "Kerben & Dauerfestigkeit"
-        },
-        {
-         "h": "kinematik",
-         "t": "Kinematik"
+         "h": "balken",
+         "t": "Biegung, Torsion & Knicken"
         },
         {
          "h": "dynamik",
-         "t": "Dynamik & Trägheit"
-        },
-        {
-         "h": "schwingungen",
-         "t": "Schwingungen & Resonanz"
+         "t": "Kinematik, Dynamik & Schwingungen"
         },
         {
          "h": "reibung",
          "t": "Reibung & Haftung"
-        }
-       ],
-       "groups": [
-        {
-         "l": "Start",
-         "sections": [
-          "start"
-         ]
-        },
-        {
-         "l": "Statik & Festigkeit",
-         "sections": [
-          "statik",
-          "schnittgroessen",
-          "spannung",
-          "biegung",
-          "torsion"
-         ]
-        },
-        {
-         "l": "Versagen",
-         "sections": [
-          "knicken",
-          "kerben"
-         ]
-        },
-        {
-         "l": "Bewegung",
-         "sections": [
-          "kinematik",
-          "dynamik",
-          "schwingungen",
-          "reibung"
-         ]
-        }
-       ],
-       "related": [
-        "mechanik-robotik",
-        "sensorik-aktorik",
-        "regelungstechnik"
-       ]
-      },
-      {
-       "id": "maschinenelemente",
-       "file": "maschinenelemente.html",
-       "name": "Maschinenelemente",
-       "icon": "🔩",
-       "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Die Bauteile, aus denen Mechanik entsteht: Schraubverbindungen mit Vorspannung und Sicherung, Welle-Nabe, Fügeverfahren, Wälz- und Gleitlager mit Passungen, Linearführungen, Zahnräder und Getriebe, Riemen und Spindeln, Federn, Dichtungen und Kupplungen.",
-       "tags": [
-        "schraube",
-        "vorspannung",
-        "anziehdrehmoment",
-        "vdi 2230",
-        "schraubensicherung",
-        "passfeder",
-        "presssitz",
-        "kleben",
-        "nieten",
-        "schweißen",
-        "wälzlager",
-        "gleitlager",
-        "lebensdauer",
-        "linearführung",
-        "zahnrad",
-        "modul",
-        "getriebe",
-        "zahnriemen",
-        "kugelgewindetrieb",
-        "feder",
-        "dichtung",
-        "kupplung"
-       ],
-       "sections": [
-        {
-         "h": "start",
-         "t": "Start & Landkarte"
         },
         {
          "h": "schrauben",
-         "t": "Schraubverbindungen"
+         "t": "Schrauben & Gewinde"
         },
         {
-         "h": "sichern",
-         "t": "Sichern & Montieren"
-        },
-        {
-         "h": "welle-nabe",
-         "t": "Welle-Nabe-Verbindungen"
-        },
-        {
-         "h": "fuegen",
-         "t": "Schweißen, Kleben, Nieten"
+         "h": "verbindungen",
+         "t": "Welle-Nabe, Schweißen & Kleben"
         },
         {
          "h": "lager",
-         "t": "Wälz- & Gleitlager"
-        },
-        {
-         "h": "lagerung",
-         "t": "Lagerung & Lagerpassungen"
-        },
-        {
-         "h": "fuehrungen",
-         "t": "Linearführungen"
+         "t": "Lager & Führungen"
         },
         {
          "h": "getriebe",
-         "t": "Zahnräder & Getriebe"
-        },
-        {
-         "h": "riemen",
-         "t": "Riemen, Ketten, Spindeln"
+         "t": "Zahnräder, Riemen & Spindeln"
         },
         {
          "h": "federn",
-         "t": "Federn & Dämpfung"
-        },
-        {
-         "h": "dichtungen",
-         "t": "Dichtungen & Kupplungen"
-        }
-       ],
-       "groups": [
-        {
-         "l": "Start",
-         "sections": [
-          "start"
-         ]
-        },
-        {
-         "l": "Verbinden",
-         "sections": [
-          "schrauben",
-          "sichern",
-          "welle-nabe",
-          "fuegen"
-         ]
-        },
-        {
-         "l": "Lagern & Führen",
-         "sections": [
-          "lager",
-          "lagerung",
-          "fuehrungen"
-         ]
-        },
-        {
-         "l": "Antreiben",
-         "sections": [
-          "getriebe",
-          "riemen"
-         ]
-        },
-        {
-         "l": "Ergänzen",
-         "sections": [
-          "federn",
-          "dichtungen"
-         ]
-        }
-       ],
-       "related": [
-        "mechanik-robotik",
-        "schmiermittel",
-        "sensorik-aktorik"
-       ]
-      },
-      {
-       "id": "werkstoffkunde",
-       "file": "werkstoffkunde.html",
-       "name": "Werkstoffkunde",
-       "icon": "🧱",
-       "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Woran man einen Werkstoff erkennt und wie man ihn auswählt: Kennwerte richtig lesen, Stahl und Guss, Aluminium und Buntmetalle, Kunststoffe, Verbund- und Sonderwerkstoffe, Wärmebehandlung, Korrosion und Oberflächenschutz — mit Tabellen zum Nachschlagen.",
-       "tags": [
-        "e-modul",
-        "streckgrenze",
-        "zugfestigkeit",
-        "härte",
-        "kerbschlagarbeit",
-        "stahl",
-        "edelstahl",
-        "guss",
-        "aluminium",
-        "messing",
-        "kunststoff",
-        "pom",
-        "peek",
-        "cfk",
-        "wärmebehandlung",
-        "härten",
-        "anlassen",
-        "eloxieren",
-        "korrosion",
-        "kontaktkorrosion",
-        "werkstoffauswahl"
-       ],
-       "sections": [
-        {
-         "h": "start",
-         "t": "Start & Landkarte"
+         "t": "Federn, Dichtungen & Kupplungen"
         },
         {
          "h": "kennwerte",
          "t": "Kennwerte richtig lesen"
         },
         {
-         "h": "stahl",
-         "t": "Stahl & Guss"
-        },
-        {
-         "h": "nichteisen",
-         "t": "Aluminium & Buntmetalle"
+         "h": "metalle",
+         "t": "Stahl, Guss & NE-Metalle"
         },
         {
          "h": "kunststoffe",
-         "t": "Kunststoffe"
+         "t": "Kunststoffe & Verbund"
         },
         {
-         "h": "verbund",
-         "t": "Verbund & Sonderwerkstoffe"
-        },
-        {
-         "h": "waerme",
-         "t": "Wärmebehandlung"
-        },
-        {
-         "h": "korrosion",
-         "t": "Korrosion & Oberflächenschutz"
+         "h": "behandlung",
+         "t": "Wärmebehandlung & Korrosion"
         },
         {
          "h": "auswahl",
-         "t": "Werkstoff auswählen"
-        },
-        {
-         "h": "tabellen",
-         "t": "Werkstofftabellen"
-        }
-       ],
-       "groups": [
-        {
-         "l": "Start",
-         "sections": [
-          "start",
-          "kennwerte"
-         ]
-        },
-        {
-         "l": "Werkstoffgruppen",
-         "sections": [
-          "stahl",
-          "nichteisen",
-          "kunststoffe",
-          "verbund"
-         ]
-        },
-        {
-         "l": "Behandeln & Schützen",
-         "sections": [
-          "waerme",
-          "korrosion"
-         ]
-        },
-        {
-         "l": "Entscheiden",
-         "sections": [
-          "auswahl",
-          "tabellen"
-         ]
-        }
-       ],
-       "related": [
-        "filament",
-        "mechanik-robotik",
-        "loeten"
-       ]
-      },
-      {
-       "id": "konstruktion",
-       "file": "konstruktion.html",
-       "name": "Konstruktion & Fertigung",
-       "icon": "📏",
-       "kind": "Anleitung",
-       "updated": "2026-08-19",
-       "desc": "Vom Gedanken zum fertigungsgerechten Teil: Konstruktionsmethodik, technische Zeichnung, Toleranzen und Passungen nach ISO 286, Form- und Lagetoleranzen, Oberflächen, Gewinde und Normteile, CAD-Praxis, FEM-Grundlagen, Fertigungsverfahren und Konstruieren für den 3D-Druck.",
-       "tags": [
-        "konstruktionsmethodik",
-        "technische zeichnung",
-        "schnitt",
-        "bemaßung",
-        "toleranz",
-        "passung",
-        "iso 286",
-        "h7",
-        "gps",
-        "form- und lagetoleranz",
-        "rauheit",
-        "ra",
-        "gewinde",
-        "normteile",
-        "cad",
-        "parametrik",
-        "fem",
-        "dfm",
-        "zerspanen",
-        "umformen",
-        "3d-druck",
-        "toleranzkette"
-       ],
-       "sections": [
-        {
-         "h": "start",
-         "t": "Start & Landkarte"
+         "t": "Werkstoffwahl & Tabellen"
         },
         {
          "h": "methodik",
-         "t": "Konstruktionsmethodik"
-        },
-        {
-         "h": "zeichnung",
-         "t": "Technische Zeichnung"
+         "t": "Methodik & Zeichnung"
         },
         {
          "h": "toleranzen",
-         "t": "Toleranzen & Passungen"
+         "t": "Toleranzen, Passungen & Oberflächen"
         },
         {
-         "h": "gps",
-         "t": "Form- & Lagetoleranzen"
-        },
-        {
-         "h": "oberflaeche",
-         "t": "Oberflächen & Rauheit"
-        },
-        {
-         "h": "gewinde",
+         "h": "normteile",
          "t": "Gewinde & Normteile"
         },
         {
          "h": "cad",
-         "t": "CAD-Praxis"
-        },
-        {
-         "h": "fem",
-         "t": "FEM verstehen"
+         "t": "CAD & FEM"
         },
         {
          "h": "fertigung",
-         "t": "Fertigungsverfahren & DFM"
+         "t": "Fertigung & DFM"
         },
         {
-         "h": "druck",
+         "h": "druck3d",
          "t": "Konstruieren für den 3D-Druck"
         }
        ],
        "groups": [
         {
-         "l": "Start",
+         "l": "Mechanik",
          "sections": [
           "start",
-          "methodik"
+          "statik",
+          "festigkeit",
+          "balken",
+          "dynamik",
+          "reibung"
          ]
         },
         {
-         "l": "Dokumentieren",
+         "l": "Maschinenelemente",
          "sections": [
-          "zeichnung",
+          "schrauben",
+          "verbindungen",
+          "lager",
+          "getriebe",
+          "federn"
+         ]
+        },
+        {
+         "l": "Werkstoffe",
+         "sections": [
+          "kennwerte",
+          "metalle",
+          "kunststoffe",
+          "behandlung",
+          "auswahl"
+         ]
+        },
+        {
+         "l": "Konstruktion",
+         "sections": [
+          "methodik",
           "toleranzen",
-          "gps",
-          "oberflaeche",
-          "gewinde"
-         ]
-        },
-        {
-         "l": "Werkzeuge",
-         "sections": [
+          "normteile",
           "cad",
-          "fem"
-         ]
-        },
-        {
-         "l": "Fertigen",
-         "sections": [
           "fertigung",
-          "druck"
+          "druck3d"
          ]
         }
        ],
+       "alias": {
+        "schnittgroessen": "statik",
+        "spannung": "festigkeit",
+        "kerben": "festigkeit",
+        "biegung": "balken",
+        "torsion": "balken",
+        "knicken": "balken",
+        "kinematik": "dynamik",
+        "schwingungen": "dynamik",
+        "sichern": "schrauben",
+        "torque": "schrauben",
+        "thread": "schrauben",
+        "komp": "schrauben",
+        "welle-nabe": "verbindungen",
+        "fuegen": "verbindungen",
+        "lagerung": "lager",
+        "fuehrungen": "lager",
+        "riemen": "getriebe",
+        "dichtungen": "federn",
+        "stahl": "metalle",
+        "nichteisen": "metalle",
+        "verbund": "kunststoffe",
+        "waerme": "behandlung",
+        "korrosion": "behandlung",
+        "tabellen": "auswahl",
+        "material": "auswahl",
+        "zeichnung": "methodik",
+        "gps": "toleranzen",
+        "oberflaeche": "toleranzen",
+        "gewinde": "normteile",
+        "fem": "cad",
+        "druck": "druck3d",
+        "konzepte": "start",
+        "formeln": "start",
+        "dodont": "start"
+       },
        "related": [
-        "pcb-design",
-        "filament",
-        "dremel",
-        "mechanik-robotik"
+        "druck",
+        "schmiermittel"
        ]
-      }
-     ]
-    },
-    {
-     "id": "et-elektronik",
-     "name": "Elektrotechnik & Elektronik",
-     "desc": "Das Fundament: Ströme und Felder, Bauelemente, Schaltungen — analog wie digital.",
-     "modules": [
+      },
       {
        "id": "elektrotechnik",
        "file": "elektrotechnik.html",
-       "name": "Elektrotechnik",
+       "name": "Elektrotechnik & Analog",
        "icon": "⚡",
        "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Die Theorie, auf der alles andere steht: Größen und Einheiten, Netzwerkanalyse, Felder, Wechselstrom mit komplexer Rechnung, Drehstrom, Schaltvorgänge, Leitungen und die Schutzmaßnahmen, die Leben retten.",
+       "updated": "2026-08-26",
+       "desc": "Vom ohmschen Gesetz bis zum Schaltregler: Gleich- und Wechselstrom, Felder und Leistung, dann die Bauelemente — Diode, Transistor, OPV — und die Analog- und Leistungselektronik bis zu EMV und sauberer Masseführung. Mit Rechnern für die tägliche Auslegung.",
        "tags": [
-        "ohmsches gesetz",
-        "kirchhoff",
-        "netzwerkanalyse",
-        "thevenin",
+        "gleichstrom",
         "wechselstrom",
-        "zeigerdiagramm",
-        "komplexe rechnung",
         "drehstrom",
-        "transformator",
-        "rc-glied",
-        "schutzmassnahmen",
-        "vde"
+        "netzwerkanalyse",
+        "halbleiter",
+        "transistor",
+        "mosfet",
+        "opv",
+        "filter",
+        "adc",
+        "dac",
+        "schaltregler",
+        "emv",
+        "sicherheit"
        ],
        "sections": [
         {
@@ -1208,133 +807,36 @@
          "t": "Start & Landkarte"
         },
         {
-         "h": "groessen",
-         "t": "Größen & Einheiten"
-        },
-        {
          "h": "gleichstrom",
-         "t": "Gleichstromkreis"
-        },
-        {
-         "h": "netzwerke",
-         "t": "Netzwerkanalyse"
+         "t": "Größen, Gleichstrom & Netzwerke"
         },
         {
          "h": "felder",
-         "t": "Elektrische & magnetische Felder"
+         "t": "Felder, Spulen & Trafos"
         },
         {
          "h": "wechselstrom",
-         "t": "Wechselstrom & Zeiger"
-        },
-        {
-         "h": "komplexe",
-         "t": "Komplexe Rechnung & Ortskurven"
+         "t": "Wechselstrom & komplexe Rechnung"
         },
         {
          "h": "leistung",
-         "t": "Leistung & Blindleistung"
-        },
-        {
-         "h": "drehstrom",
-         "t": "Drehstrom & Transformator"
+         "t": "Leistung & Drehstrom"
         },
         {
          "h": "transient",
-         "t": "Schaltvorgänge: RC, RL, RLC"
-        },
-        {
-         "h": "leitungen",
-         "t": "Leitungen & Kabel"
+         "t": "Schaltvorgänge & Leitungen"
         },
         {
          "h": "sicherheit",
          "t": "Elektrische Sicherheit"
-        }
-       ],
-       "groups": [
-        {
-         "l": "Start",
-         "sections": [
-          "start",
-          "groessen"
-         ]
-        },
-        {
-         "l": "Gleichstrom",
-         "sections": [
-          "gleichstrom",
-          "netzwerke",
-          "felder"
-         ]
-        },
-        {
-         "l": "Wechselstrom",
-         "sections": [
-          "wechselstrom",
-          "komplexe",
-          "leistung",
-          "drehstrom",
-          "transient"
-         ]
-        },
-        {
-         "l": "Praxis",
-         "sections": [
-          "leitungen",
-          "sicherheit"
-         ]
-        }
-       ],
-       "related": [
-        "elektronik-101"
-       ]
-      },
-      {
-       "id": "analogtechnik",
-       "file": "analogtechnik.html",
-       "name": "Analog & Leistung",
-       "icon": "🎛️",
-       "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Bauelemente und Schaltungstechnik in Kleinsignal und Leistung: pn-Übergang, Dioden, BJT, MOSFET, Operationsverstärker, Filter, Rauschen, ADC/DAC, Linear- und Schaltregler, Magnetik und EMV.",
-       "tags": [
-        "halbleiter",
-        "diode",
-        "transistor",
-        "mosfet",
-        "opv",
-        "operationsverstärker",
-        "filter",
-        "rauschen",
-        "adc",
-        "dac",
-        "buck",
-        "boost",
-        "schaltregler",
-        "emv",
-        "gate-treiber"
-       ],
-       "sections": [
-        {
-         "h": "start",
-         "t": "Start & Landkarte"
         },
         {
          "h": "halbleiter",
-         "t": "Halbleiter & pn-Übergang"
+         "t": "Halbleiter & Dioden"
         },
         {
-         "h": "dioden",
-         "t": "Dioden & Schutzbeschaltung"
-        },
-        {
-         "h": "bjt",
-         "t": "Bipolartransistor"
-        },
-        {
-         "h": "mosfet",
-         "t": "MOSFET & Gate-Treiber"
+         "h": "transistoren",
+         "t": "Transistor & MOSFET"
         },
         {
          "h": "opv",
@@ -1342,11 +844,7 @@
         },
         {
          "h": "filter",
-         "t": "Filter & Frequenzgang"
-        },
-        {
-         "h": "rauschen",
-         "t": "Rauschen & Präzision"
+         "t": "Filter, Frequenzgang & Rauschen"
         },
         {
          "h": "wandler",
@@ -1357,48 +855,53 @@
          "t": "Linear- & Schaltregler"
         },
         {
-         "h": "magnetik",
-         "t": "Spulen, Kerne & Trafos"
-        },
-        {
          "h": "emv",
          "t": "EMV, Masse & Entkopplung"
         }
        ],
        "groups": [
         {
-         "l": "Start",
+         "l": "Grundlagen",
          "sections": [
           "start",
-          "halbleiter"
+          "gleichstrom",
+          "felder",
+          "wechselstrom",
+          "leistung",
+          "transient",
+          "sicherheit"
          ]
         },
         {
          "l": "Bauelemente",
          "sections": [
-          "dioden",
-          "bjt",
-          "mosfet"
+          "halbleiter",
+          "transistoren",
+          "opv"
          ]
         },
         {
-         "l": "Schaltungstechnik",
+         "l": "Analog & Leistung",
          "sections": [
-          "opv",
           "filter",
-          "rauschen",
-          "wandler"
-         ]
-        },
-        {
-         "l": "Leistung & Störungen",
-         "sections": [
+          "wandler",
           "versorgung",
-          "magnetik",
           "emv"
          ]
         }
        ],
+       "alias": {
+        "groessen": "gleichstrom",
+        "netzwerke": "gleichstrom",
+        "komplexe": "wechselstrom",
+        "drehstrom": "leistung",
+        "leitungen": "transient",
+        "dioden": "halbleiter",
+        "bjt": "transistoren",
+        "mosfet": "transistoren",
+        "rauschen": "filter",
+        "magnetik": "felder"
+       },
        "related": [
         "elektronik-101",
         "loeten"
@@ -1407,30 +910,25 @@
       {
        "id": "digitaltechnik",
        "file": "digitaltechnik.html",
-       "name": "Digitaltechnik",
+       "name": "Digital- & Informationstechnik",
        "icon": "🔲",
        "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Von der Wahrheitstabelle zum Zustandsautomaten: Zahlensysteme, boolesche Algebra, KV-Diagramme, Schaltnetze und Schaltwerke, Timing und Metastabilität, Logikfamilien, Speicher und der Einstieg in FPGA und HDL.",
+       "updated": "2026-08-26",
+       "desc": "Von der Wahrheitstabelle bis zum Netzwerkpaket: Zahlensysteme, Logik und Schaltwerke, dann Rechnerarchitektur, Betriebssysteme und Software — und schließlich Netzwerke, Funk, Signalverarbeitung und Kryptografie.",
        "tags": [
         "zahlensysteme",
-        "zweierkomplement",
         "boolesche algebra",
-        "kv-diagramm",
-        "flipflop",
-        "automat",
-        "fsm",
-        "setup",
-        "hold",
-        "metastabilität",
-        "cmos",
-        "lvds",
-        "sram",
-        "dram",
-        "flash",
+        "flipflops",
+        "automaten",
         "fpga",
-        "vhdl",
-        "verilog"
+        "rechnerarchitektur",
+        "betriebssysteme",
+        "netzwerke",
+        "tcp/ip",
+        "funk",
+        "dsp",
+        "security",
+        "kryptografie"
        ],
        "sections": [
         {
@@ -1442,134 +940,36 @@
          "t": "Zahlensysteme & Codes"
         },
         {
-         "h": "boole",
-         "t": "Boolesche Algebra & KV"
+         "h": "logik",
+         "t": "Boolesche Algebra & Schaltnetze"
         },
         {
-         "h": "schaltnetze",
-         "t": "Schaltnetze"
-        },
-        {
-         "h": "flipflops",
-         "t": "Flipflops & Schaltwerke"
-        },
-        {
-         "h": "automaten",
-         "t": "Zustandsautomaten"
+         "h": "schaltwerke",
+         "t": "Flipflops & Automaten"
         },
         {
          "h": "timing",
-         "t": "Timing & Metastabilität"
-        },
-        {
-         "h": "logikfamilien",
-         "t": "Logikfamilien & Pegel"
+         "t": "Timing, Pegel & Logikfamilien"
         },
         {
          "h": "speicher",
-         "t": "Speichertechnologien"
-        },
-        {
-         "h": "fpga",
-         "t": "FPGA, HDL & Toolchain"
-        }
-       ],
-       "groups": [
-        {
-         "l": "Start",
-         "sections": [
-          "start",
-          "zahlen",
-          "boole"
-         ]
-        },
-        {
-         "l": "Schaltungen",
-         "sections": [
-          "schaltnetze",
-          "flipflops",
-          "automaten"
-         ]
-        },
-        {
-         "l": "Physik & Praxis",
-         "sections": [
-          "timing",
-          "logikfamilien",
-          "speicher",
-          "fpga"
-         ]
-        }
-       ],
-       "related": [
-        "elektronik-101"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "informationstechnik",
-     "name": "Informations- & Rechnertechnik",
-     "desc": "Wie aus Spannungspegeln Information wird — und wie man sie rechnet, überträgt und schützt.",
-     "modules": [
-      {
-       "id": "informationstechnik",
-       "file": "informationstechnik.html",
-       "name": "Informationstechnik",
-       "icon": "💾",
-       "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Der IT-Teil der Mechatronik: Information und Entropie, Fehlererkennung, Zahlendarstellung, Rechnerarchitektur, Befehlssätze, Betriebssysteme und Echtzeit, Netzwerke, Funk, Signalverarbeitung, Security und Werkzeuge.",
-       "tags": [
-        "entropie",
-        "huffman",
-        "crc",
-        "hamming",
-        "fließkomma",
-        "ieee 754",
-        "pipeline",
-        "cache",
-        "risc-v",
-        "arm",
-        "echtzeit",
-        "osi",
-        "tcp/ip",
-        "ethernet",
-        "wlan",
-        "dsp",
-        "fft",
-        "abtasttheorem",
-        "kryptografie",
-        "git"
-       ],
-       "sections": [
-        {
-         "h": "start",
-         "t": "Start & Landkarte"
+         "t": "Speicher & FPGA"
         },
         {
          "h": "information",
-         "t": "Information & Entropie"
-        },
-        {
-         "h": "fehlerschutz",
-         "t": "Fehlererkennung & Korrektur"
-        },
-        {
-         "h": "zahlen",
-         "t": "Zahlendarstellung & Fließkomma"
+         "t": "Information & Codierung"
         },
         {
          "h": "architektur",
-         "t": "Rechnerarchitektur"
-        },
-        {
-         "h": "befehlssatz",
-         "t": "Befehlssätze: ARM, RISC-V, x86"
+         "t": "Rechnerarchitektur & Befehlssätze"
         },
         {
          "h": "os",
          "t": "Betriebssysteme & Echtzeit"
+        },
+        {
+         "h": "software",
+         "t": "Softwaretechnik & Werkzeuge"
         },
         {
          "h": "netzwerke",
@@ -1586,57 +986,70 @@
         {
          "h": "security",
          "t": "Security & Kryptografie"
-        },
-        {
-         "h": "werkzeuge",
-         "t": "Softwaretechnik & Werkzeuge"
         }
        ],
        "groups": [
         {
-         "l": "Start",
+         "l": "Digitale Logik",
          "sections": [
           "start",
-          "information",
-          "fehlerschutz",
-          "zahlen"
+          "zahlen",
+          "logik",
+          "schaltwerke",
+          "timing",
+          "speicher"
          ]
         },
         {
-         "l": "Rechner",
+         "l": "Rechner & Software",
          "sections": [
+          "information",
           "architektur",
-          "befehlssatz",
-          "os"
+          "os",
+          "software"
          ]
         },
         {
-         "l": "Übertragung",
+         "l": "Kommunikation & Signale",
          "sections": [
           "netzwerke",
           "funk",
-          "dsp"
-         ]
-        },
-        {
-         "l": "Praxis",
-         "sections": [
-          "security",
-          "werkzeuge"
+          "dsp",
+          "security"
          ]
         }
        ],
+       "alias": {
+        "boole": "logik",
+        "schaltnetze": "logik",
+        "flipflops": "schaltwerke",
+        "automaten": "schaltwerke",
+        "logikfamilien": "timing",
+        "fpga": "speicher",
+        "fehlerschutz": "information",
+        "befehlssatz": "architektur",
+        "werkzeuge": "software",
+        "architektur-alt": "architektur"
+       },
        "related": [
+        "elektronik-101",
         "homeserver"
        ]
-      },
+      }
+     ]
+    },
+    {
+     "id": "systeme",
+     "name": "Systeme & Software",
+     "desc": "Messen, regeln, bewegen, automatisieren — vom Mikrocontroller bis zur Fertigungszelle.",
+     "modules": [
       {
        "id": "embedded",
        "file": "embedded-firmware.html",
        "name": "Embedded & Firmware",
        "icon": "🧩",
        "kind": "Referenz",
-       "updated": "2026-08-19",
+       "updated": "2026-08-26",
        "desc": "Der Mikrocontroller in der Praxis: aktuelle MCU-Landschaft, Toolchains, Peripherie, Interrupts und DMA, Bussysteme, FreeRTOS und Zephyr, Linker und Bootloader, Debugging, Stromsparen und die C-Fallstricke, die jeden einmal erwischen.",
        "tags": [
         "esp32",
@@ -1740,150 +1153,30 @@
        ],
        "related": [
         "elektronik-101",
-        "mechanik-robotik"
-       ]
-      }
-     ]
-    },
-    {
-     "id": "systeme",
-     "name": "Mechatronische Systeme",
-     "desc": "Messen, regeln, bewegen — und das Ganze sicher automatisieren.",
-     "modules": [
-      {
-       "id": "regelungstechnik",
-       "file": "regelungstechnik.html",
-       "name": "Regelungstechnik",
-       "icon": "🎚️",
-       "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Vom Modell zum stabilen Regelkreis: Übertragungsfunktion und Laplace, die Standardglieder, PID im Detail, Einstellregeln nach Ziegler-Nichols und Chien-Hrones-Reswick, Stabilität im Bode- und Nyquist-Diagramm, digitale Regelung und Zustandsraum.",
-       "tags": [
-        "regelkreis",
-        "übertragungsfunktion",
-        "laplace",
-        "pt1",
-        "pt2",
-        "totzeit",
-        "pid",
-        "ziegler-nichols",
-        "chien",
-        "bode",
-        "nyquist",
-        "wurzelortskurve",
-        "anti-windup",
-        "kaskadenregelung",
-        "kalman",
-        "zustandsraum"
-       ],
-       "sections": [
-        {
-         "h": "start",
-         "t": "Start & Landkarte"
-        },
-        {
-         "h": "modell",
-         "t": "Modellbildung & Systeme"
-        },
-        {
-         "h": "laplace",
-         "t": "Laplace & Übertragungsfunktion"
-        },
-        {
-         "h": "glieder",
-         "t": "Übertragungsglieder"
-        },
-        {
-         "h": "regelkreis",
-         "t": "Regelkreis & Güte"
-        },
-        {
-         "h": "pid",
-         "t": "PID-Regler verstehen"
-        },
-        {
-         "h": "einstellregeln",
-         "t": "Einstellregeln & Tuning"
-        },
-        {
-         "h": "stabilitaet",
-         "t": "Stabilität: Bode & Nyquist"
-        },
-        {
-         "h": "digital",
-         "t": "Digitale Regelung & Abtastung"
-        },
-        {
-         "h": "praxis",
-         "t": "Praxis: Windup, Filter, Kaskade"
-        },
-        {
-         "h": "zustandsraum",
-         "t": "Zustandsraum & Beobachter"
-        }
-       ],
-       "groups": [
-        {
-         "l": "Start",
-         "sections": [
-          "start",
-          "modell",
-          "laplace"
-         ]
-        },
-        {
-         "l": "Bausteine",
-         "sections": [
-          "glieder",
-          "regelkreis"
-         ]
-        },
-        {
-         "l": "Regler",
-         "sections": [
-          "pid",
-          "einstellregeln",
-          "praxis"
-         ]
-        },
-        {
-         "l": "Analyse & mehr",
-         "sections": [
-          "stabilitaet",
-          "digital",
-          "zustandsraum"
-         ]
-        }
-       ],
-       "related": [
-        "mechanik-robotik"
+        "pcb-design"
        ]
       },
       {
-       "id": "sensorik-aktorik",
-       "file": "sensorik-aktorik.html",
-       "name": "Sensorik & Antriebe",
-       "icon": "🛞",
+       "id": "regelung-antriebe",
+       "file": "regelung-antriebe.html",
+       "name": "Regelung, Sensorik & Antriebe",
+       "icon": "🎚️",
        "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Die Schnittstelle zur physischen Welt: Messkette und Signalkonditionierung, Messabweichung und Kalibrierung, Sensorprinzipien mit Datenbank, Positionsmessung, alle Motortypen im Vergleich, Treiberstufen, Antriebsauslegung, Pneumatik und Mechanik.",
+       "updated": "2026-08-26",
+       "desc": "Der Signalweg eines mechatronischen Systems: messen, regeln, bewegen. Regelungstechnik von der Übertragungsfunktion bis zum Zustandsraum, die Messkette mit Sensor-Katalog — und die Antriebe vom Motortyp über den Treiber bis zur Auslegung mit Getriebe.",
        "tags": [
-        "sensor",
+        "pid",
+        "regelkreis",
+        "stabilität",
+        "bode",
+        "sensorik",
         "messkette",
-        "kalibrierung",
-        "dehnungsmessstreifen",
-        "hall",
-        "imu",
-        "tof",
         "encoder",
-        "resolver",
-        "dc-motor",
-        "bldc",
-        "pmsm",
+        "motoren",
         "schrittmotor",
+        "bldc",
         "servo",
-        "h-brücke",
-        "foc",
+        "treiber",
         "getriebe",
         "pneumatik"
        ],
@@ -1893,20 +1186,36 @@
          "t": "Start & Landkarte"
         },
         {
+         "h": "modell",
+         "t": "Modellbildung & Übertragungsfunktion"
+        },
+        {
+         "h": "glieder",
+         "t": "Übertragungsglieder & Regelkreis"
+        },
+        {
+         "h": "pid",
+         "t": "PID: verstehen & einstellen"
+        },
+        {
+         "h": "stabilitaet",
+         "t": "Stabilität: Bode & Nyquist"
+        },
+        {
+         "h": "digital",
+         "t": "Digitale Regelung & Praxis"
+        },
+        {
+         "h": "zustandsraum",
+         "t": "Zustandsraum & Beobachter"
+        },
+        {
          "h": "messkette",
-         "t": "Messkette & Konditionierung"
+         "t": "Messkette & Kalibrierung"
         },
         {
-         "h": "messfehler",
-         "t": "Messabweichung & Kalibrierung"
-        },
-        {
-         "h": "prinzipien",
-         "t": "Sensorprinzipien"
-        },
-        {
-         "h": "katalog",
-         "t": "Sensor-Katalog"
+         "h": "sensoren",
+         "t": "Sensorprinzipien & Katalog"
         },
         {
          "h": "position",
@@ -1926,76 +1235,76 @@
         },
         {
          "h": "fluid",
-         "t": "Pneumatik & Hydraulik"
-        },
-        {
-         "h": "mechanik",
-         "t": "Mechanik-Schnittstelle"
+         "t": "Pneumatik, Hydraulik & Mechanik"
         }
        ],
        "groups": [
         {
-         "l": "Start",
+         "l": "Regelung",
          "sections": [
           "start",
-          "messkette",
-          "messfehler"
+          "modell",
+          "glieder",
+          "pid",
+          "stabilitaet",
+          "digital",
+          "zustandsraum"
          ]
         },
         {
          "l": "Sensorik",
          "sections": [
-          "prinzipien",
-          "katalog",
+          "messkette",
+          "sensoren",
           "position"
          ]
         },
         {
-         "l": "Aktorik",
+         "l": "Antriebe",
          "sections": [
           "motoren",
           "treiber",
           "auslegung",
           "fluid"
          ]
-        },
-        {
-         "l": "Aufbau",
-         "sections": [
-          "mechanik"
-         ]
         }
        ],
+       "alias": {
+        "laplace": "modell",
+        "regelkreis": "glieder",
+        "einstellregeln": "pid",
+        "praxis": "digital",
+        "messfehler": "messkette",
+        "prinzipien": "sensoren",
+        "katalog": "sensoren",
+        "mechanik": "fluid"
+       },
        "related": [
-        "mechanik-robotik"
+        "elektronik-101"
        ]
       },
       {
        "id": "automatisierung",
-       "file": "automatisierung-sps.html",
-       "name": "Automatisierung & SPS",
+       "file": "automatisierung-robotik.html",
+       "name": "Automatisierung & Robotik",
        "icon": "🏭",
        "kind": "Referenz",
-       "updated": "2026-08-19",
-       "desc": "Industrieseite der Mechatronik: SPS-Aufbau und Zykluszeit, die Sprachen der IEC 61131-3 in der Fassung von 2025, Programmierpraxis, Feldbusse und Industrial Ethernet, Schaltschrankbau, funktionale Sicherheit nach PL und SIL, HMI, OPC UA und IIoT.",
+       "updated": "2026-08-26",
+       "desc": "Vom SPS-Zyklus bis zum lernenden Roboter: IEC-61131-Programmierung, Feldbusse, Schaltschrank und funktionale Sicherheit — und der Robotik-Stack von der Kinematik über die Hardware bis zu ROS 2 und Robot Learning.",
        "tags": [
         "sps",
-        "plc",
-        "iec 61131-3",
-        "strukturierter text",
-        "kop",
-        "fup",
-        "ablaufsprache",
+        "iec 61131",
+        "feldbus",
         "profinet",
         "ethercat",
-        "modbus",
-        "io-link",
         "schaltschrank",
-        "performance level",
-        "iso 13849",
-        "sil",
+        "sicherheit",
+        "scada",
         "opc ua",
-        "industrie 4.0"
+        "robotik",
+        "kinematik",
+        "ros2",
+        "robot learning"
        ],
        "sections": [
         {
@@ -2007,12 +1316,8 @@
          "t": "SPS: Aufbau & Zyklus"
         },
         {
-         "h": "iec61131",
-         "t": "IEC 61131-3: die Sprachen"
-        },
-        {
-         "h": "programmierung",
-         "t": "Programmierpraxis"
+         "h": "sprachen",
+         "t": "IEC 61131-3 & Programmierpraxis"
         },
         {
          "h": "feldbus",
@@ -2027,45 +1332,59 @@
          "t": "Funktionale Sicherheit"
         },
         {
-         "h": "hmi",
-         "t": "HMI, SCADA & OPC UA"
+         "h": "leitsystem",
+         "t": "HMI, SCADA & Industrie 4.0"
         },
         {
-         "h": "iiot",
-         "t": "Industrie 4.0 & IIoT"
+         "h": "robotik",
+         "t": "Robotik-Grundlagen & Kinematik"
+        },
+        {
+         "h": "robo-hw",
+         "t": "Roboter-Hardware"
+        },
+        {
+         "h": "ros",
+         "t": "ROS 2 & Software-Stack"
+        },
+        {
+         "h": "lernen",
+         "t": "Robot Learning"
         }
        ],
        "groups": [
         {
-         "l": "Start",
+         "l": "SPS & Industrie",
          "sections": [
           "start",
-          "sps"
-         ]
-        },
-        {
-         "l": "Software",
-         "sections": [
-          "iec61131",
-          "programmierung"
-         ]
-        },
-        {
-         "l": "Anlage",
-         "sections": [
+          "sps",
+          "sprachen",
           "feldbus",
           "schaltschrank",
-          "sicherheit"
+          "sicherheit",
+          "leitsystem"
          ]
         },
         {
-         "l": "Vernetzung",
+         "l": "Robotik",
          "sections": [
-          "hmi",
-          "iiot"
+          "robotik",
+          "robo-hw",
+          "ros",
+          "lernen"
          ]
         }
-       ]
+       ],
+       "alias": {
+        "iec61131": "sprachen",
+        "programmierung": "sprachen",
+        "hmi": "leitsystem",
+        "iiot": "leitsystem",
+        "robo-grund": "robotik",
+        "robo-steuerung": "robotik",
+        "robo-sw": "ros",
+        "robo-lernen": "lernen"
+       }
       }
      ]
     },
@@ -2276,8 +1595,7 @@
         }
        ],
        "related": [
-        "regelungstechnik",
-        "sensorik-aktorik",
+        "regelung-antriebe",
         "embedded",
         "elektronik-101",
         "loeten"
@@ -2296,7 +1614,7 @@
        "name": "Leiterplatte & KiCad",
        "icon": "🧿",
        "kind": "Anleitung",
-       "updated": "2026-08-19",
+       "updated": "2026-08-26",
        "desc": "Der komplette Weg vom Schaltplan zur bestückten Platine mit KiCad 10: Bibliotheken und Footprints, Lagenaufbau, Leiterbahnbreite nach IPC, Masseführung, Signalintegrität, Fertigungsdaten und Bestellung.",
        "tags": [
         "kicad",
@@ -2398,8 +1716,8 @@
        "name": "Lernpfad & Projekte",
        "icon": "🎯",
        "kind": "Anleitung",
-       "updated": "2026-08-19",
-       "desc": "Wie man sich das Fach tatsächlich aneignet: ein Pfad in sechs Stufen, Lernmethodik mit Belegen, Projektlisten je Niveau, Grundausstattung für den Arbeitsplatz, Vorgehen vom Einfall zum Gerät und eine Debugging-Strategie.",
+       "updated": "2026-08-26",
+       "desc": "Wie man Mechatronik wirklich lernt: der Stufenpfad durch die Module, Lernmethodik mit Belegen, ein Projektkatalog vom ersten Blinken bis zum Roboterarm — und die Praxis vom Arbeitsplatz bis zur Debugging-Strategie.",
        "tags": [
         "lernpfad",
         "roadmap",
@@ -2413,27 +1731,15 @@
        "sections": [
         {
          "h": "start",
-         "t": "Wie du das hier benutzt"
-        },
-        {
-         "h": "pfad",
-         "t": "Lernpfad in 6 Stufen"
+         "t": "Start & Lernpfad"
         },
         {
          "h": "methodik",
          "t": "Lernmethodik mit Belegen"
         },
         {
-         "h": "einstieg",
-         "t": "Projekte: Einstieg"
-        },
-        {
-         "h": "aufbau",
-         "t": "Projekte: Aufbau"
-        },
-        {
-         "h": "fortgeschritten",
-         "t": "Projekte: Fortgeschritten"
+         "h": "projekte",
+         "t": "Projekte: Einstieg bis Gerät"
         },
         {
          "h": "arbeitsplatz",
@@ -2450,24 +1756,16 @@
        ],
        "groups": [
         {
-         "l": "Start",
+         "l": "Lernen",
          "sections": [
           "start",
-          "pfad",
           "methodik"
          ]
         },
         {
-         "l": "Projekte",
+         "l": "Machen",
          "sections": [
-          "einstieg",
-          "aufbau",
-          "fortgeschritten"
-         ]
-        },
-        {
-         "l": "Werkbank",
-         "sections": [
+          "projekte",
           "arbeitsplatz",
           "vorgehen",
           "debugging"
@@ -2476,9 +1774,14 @@
        ],
        "related": [
         "elektronik-101",
-        "loeten",
-        "mechanik-robotik"
-       ]
+        "loeten"
+       ],
+       "alias": {
+        "pfad": "start",
+        "einstieg": "projekte",
+        "aufbau": "projekte",
+        "fortgeschritten": "projekte"
+       }
       }
      ]
     },
@@ -2493,7 +1796,7 @@
        "name": "Nachschlagewerk",
        "icon": "📚",
        "kind": "Nachschlagewerk",
-       "updated": "2026-08-19",
+       "updated": "2026-08-26",
        "desc": "Der Sammelband des Hubs: Formelsammlung, Einheiten und Konstanten, Glossar A–Z mit Suche, Abkürzungsverzeichnis, Komponenten-Katalog, Software und Tools, Webseiten und Foren, Bücher und Kurse, Normen — und die Kriterien, nach denen diese Quellen ausgewählt wurden.",
        "tags": [
         "formelsammlung",
@@ -2588,8 +1891,7 @@
         }
        ],
        "related": [
-        "elektronik-101",
-        "mechanik-robotik"
+        "elektronik-101"
        ]
       }
      ]

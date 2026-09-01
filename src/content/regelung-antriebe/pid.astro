@@ -1,0 +1,157 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der PID-Regler beantwortet drei Fragen:</b> Wie groß ist der Fehler <em>jetzt</em> (P), wie lange besteht er <em>schon</em> (I), wie schnell <em>ändert</em> er sich (D). Über 90 % aller industriellen Regelkreise arbeiten mit dieser Struktur — und Einstellregeln liefern den Startwert, nicht den Endwert.</div>
+
+<h2>Die Gleichung</h2>
+<div class="fbox">
+  <span class="f">u(t) = K_p · [ e(t) + (1/T_n)·∫e dt + T_v · de/dt ]</span>
+  <span class="l">Standardform: K_p wirkt auf alle drei Anteile. T_n heißt Nachstellzeit, T_v Vorhaltzeit — beide in Sekunden.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Anteil</th><th>Reagiert auf</th><th>Bewirkt</th><th>Nachteil</th></tr></thead>
+<tbody>
+<tr><td><b>P</b></td><td>die aktuelle Abweichung</td><td>Sofortige Reaktion, Grundgeschwindigkeit</td><td>Bleibende Abweichung; zu groß → Schwingen</td></tr>
+<tr><td><b>I</b></td><td>die Summe aller Abweichungen</td><td>Beseitigt die bleibende Abweichung vollständig</td><td>Macht träger, kostet Phasenreserve, neigt zu Windup</td></tr>
+<tr><td><b>D</b></td><td>die Änderungsgeschwindigkeit</td><td>Wirkt vorausschauend, dämpft Überschwingen, erlaubt höheres K_p</td><td>Verstärkt Messrauschen massiv; ohne Filter unbrauchbar</td></tr>
+</tbody>
+</table></div>
+
+<h2>Ausprobieren</h2>
+<div class="sim" data-sim="pid">
+  <h4>Regelkreis-Spielwiese</h4>
+  <p class="note" style="margin-top:0">Strecke: zwei hintereinandergeschaltete PT1-Glieder mit einstellbarer Zeitkonstante und Totzeit. Die Stellgröße ist auf ±3 begrenzt, mit Anti-Windup. Sollwertsprung bei t = 1 s.</p>
+  <div class="plot">
+    <svg viewBox="0 0 620 240" role="img" aria-label="Simulierte Sprungantwort des Regelkreises">
+      <path class="gl" d="M40,56 H608 M40,143 H608 M40,187 H608" />
+      <path class="pl-w" d="M40,100 H608" />
+      <path class="ax" d="M40,12 V214 M40,187 H608" />
+      <text class="tx" x="34" y="104" text-anchor="end">Soll</text>
+      <text class="tx" x="34" y="191" text-anchor="end">0</text>
+      <text class="tx" x="34" y="60" text-anchor="end">+50 %</text>
+      <text class="tx" x="600" y="206" text-anchor="end">24 s</text>
+      <path class="pl-u" d="" />
+      <path class="pl-y" d="" />
+    </svg>
+  </div>
+  <div class="legend"><span class="ly">Regelgröße y</span><span class="lu">Stellgröße u</span><span class="lw">Sollwert w</span></div>
+  <div class="sliders">
+    <div class="sl"><label>K_p <b data-pv="kp">1.5</b></label><input type="range" data-p="kp" min="0" max="8" step="0.1" value="1.5" /></div>
+    <div class="sl"><label>T_n (s) <b data-pv="tn">3</b></label><input type="range" data-p="tn" min="0" max="20" step="0.5" value="3" /></div>
+    <div class="sl"><label>T_v (s) <b data-pv="tv">0</b></label><input type="range" data-p="tv" min="0" max="3" step="0.05" value="0" /></div>
+    <div class="sl"><label>Strecke T₁ (s) <b data-pv="t1">1.5</b></label><input type="range" data-p="t1" min="0.3" max="4" step="0.1" value="1.5" /></div>
+    <div class="sl"><label>Totzeit (s) <b data-pv="tt">0</b></label><input type="range" data-p="tt" min="0" max="2" step="0.1" value="0" /></div>
+  </div>
+  <div class="pills" style="margin-top:.7rem">
+    <button type="button" class="b acc" data-preset="1.5,0,0">nur P</button>
+    <button type="button" class="b acc" data-preset="1.5,3,0">PI</button>
+    <button type="button" class="b acc" data-preset="2.5,3,0.6">PID</button>
+    <button type="button" class="b acc" data-preset="6,1.5,0">zu aggressiv</button>
+    <button type="button" class="b acc" data-preset="0.4,8,0">zu zahm</button>
+  </div>
+  <div class="readout" data-sim-out></div>
+  <p class="note"><b>Was man ausprobieren sollte:</b> T_n auf 0 stellen (kein I-Anteil) — die Kurve bleibt unter dem Sollwert stehen, das ist die bleibende Regelabweichung. Dann T_n schrittweise verkleinern: Der Fehler verschwindet, aber es beginnt zu schwingen. Zuletzt Totzeit hinzufügen: Dieselben Parameter, die vorher gut waren, führen jetzt zu Dauerschwingen — ein guter Beleg dafür, warum Totzeit das eigentliche Problem ist.</p>
+</div>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Änderung</th><th>Anstiegszeit</th><th>Überschwingen</th><th>Ausregelzeit</th><th>Bleibende Abweichung</th><th>Stabilität</th></tr></thead>
+<tbody>
+<tr><td><b>K_p größer</b></td><td>kürzer</td><td>größer</td><td>kaum verändert</td><td>kleiner</td><td>schlechter</td></tr>
+<tr><td><b>T_n kleiner</b> (I stärker)</td><td>etwas kürzer</td><td>größer</td><td>länger</td><td><b>null</b></td><td>schlechter</td></tr>
+<tr><td><b>T_v größer</b> (D stärker)</td><td>kaum verändert</td><td>kleiner</td><td>kürzer</td><td>unverändert</td><td>besser (bis zu einem Punkt)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Der Rechner</h2>
+<div class="calc" data-calc="pid">
+  <h4>Reglerparameter aus Streckendaten</h4>
+  <div class="row">
+    <div><label>Verfahren</label><select data-k="verfahren">
+      <option value="zn-schwing" selected>Ziegler-Nichols (Schwingversuch)</option>
+      <option value="zn-sprung">Ziegler-Nichols (Sprungantwort)</option>
+      <option value="chr-fuehrung">Chien-Hrones-Reswick (Führung, 0 % Überschwingen)</option>
+      <option value="chr-stoerung">Chien-Hrones-Reswick (Störung, 0 % Überschwingen)</option>
+    </select></div>
+    <div><label>Reglertyp</label><select data-k="typ"><option value="p">P</option><option value="pi">PI</option><option value="pid" selected>PID</option></select></div>
+    <div><label>K_krit</label><input data-k="ku" type="number" step="any" value="4" /></div>
+    <div><label>T_krit in s</label><input data-k="tu" type="number" step="any" value="6" /></div>
+    <div><label>T_u in s</label><input data-k="tvz" type="number" step="any" /></div>
+    <div><label>T_g in s</label><input data-k="tg" type="number" step="any" /></div>
+    <div><label>K_S</label><input data-k="ks" type="number" step="any" value="1" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+  <p class="note" style="margin-bottom:0">Beim Schwingversuch werden K_krit und T_krit gebraucht, bei den Sprungantwort-Verfahren T_u, T_g und die Streckenverstärkung K_S.</p>
+</div>
+
+<h2>Ziegler-Nichols</h2>
+<p><b>Schwingversuch:</b> I- und D-Anteil abschalten, K_p erhöhen, bis der Kreis eine gleichbleibende Dauerschwingung zeigt. K_krit = eingestellter Beiwert, T_krit = Periodendauer.</p>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Regler</th><th>K_p</th><th>T_n</th><th>T_v</th></tr></thead>
+<tbody>
+<tr><td><b>P</b></td><td>0,5 · K_krit</td><td>—</td><td>—</td></tr>
+<tr><td><b>PI</b></td><td>0,45 · K_krit</td><td>0,85 · T_krit</td><td>—</td></tr>
+<tr><td><b>PID</b></td><td>0,6 · K_krit</td><td>0,5 · T_krit</td><td>0,12 · T_krit</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Der Schwingversuch fährt die Anlage an die Stabilitätsgrenze</b> — an Motor, Heizung oder Achse mit Endanschlag riskant bis unzulässig. Alternative: <b>Relaisversuch nach Åström-Hägglund</b> — ein Zweipunktschalter mit kleiner Amplitude erzeugt eine kontrollierte Schwingung, aus Amplitude und Periode folgen K_krit und T_krit. Genau das steckt hinter der Selbstoptimierung industrieller Regler.</div>
+<p><b>Aus der Sprungantwort</b> (T_u, T_g, K_S aus dem <a href="#modell">Sprungversuch</a>), bewusst schnell mit ~20 % Überschwingen:</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Regler</th><th>K_p</th><th>T_n</th><th>T_v</th></tr></thead>
+<tbody>
+<tr><td><b>P</b></td><td>T_g/(K_S·T_u)</td><td>—</td><td>—</td></tr>
+<tr><td><b>PI</b></td><td>0,9 · T_g/(K_S·T_u)</td><td>3,33 · T_u</td><td>—</td></tr>
+<tr><td><b>PID</b></td><td>1,2 · T_g/(K_S·T_u)</td><td>2,0 · T_u</td><td>0,5 · T_u</td></tr>
+</tbody>
+</table></div>
+
+<h2>Chien, Hrones und Reswick (aperiodisch, 0 % Überschwingen)</h2>
+<p>1952 mit zwei Verbesserungen gegenüber Ziegler-Nichols: getrennte Werte für <b>Führungs-</b> und <b>Störverhalten</b>, jeweils ohne und mit 20 % Überschwingen. Für Mechatronik ist die aperiodische Variante meist die richtige — Überschwingen ist dort mechanisch teuer.</p>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Fall</th><th>Regler</th><th>K_p</th><th>T_n</th><th>T_v</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><b>Führung</b></td><td>P</td><td>0,3 · T_g/(K_S·T_u)</td><td>—</td><td>—</td></tr>
+<tr><td>PI</td><td>0,35 · T_g/(K_S·T_u)</td><td>1,2 · T_g</td><td>—</td></tr>
+<tr><td>PID</td><td>0,6 · T_g/(K_S·T_u)</td><td>1,0 · T_g</td><td>0,5 · T_u</td></tr>
+<tr><td rowspan="3"><b>Störung</b></td><td>P</td><td>0,3 · T_g/(K_S·T_u)</td><td>—</td><td>—</td></tr>
+<tr><td>PI</td><td>0,6 · T_g/(K_S·T_u)</td><td>4,0 · T_u</td><td>—</td></tr>
+<tr><td>PID</td><td>0,95 · T_g/(K_S·T_u)</td><td>2,4 · T_u</td><td>0,42 · T_u</td></tr>
+</tbody>
+</table></div>
+
+<h2>Lambda-Tuning (IMC)</h2>
+<div class="fbox">
+  <span class="f">K_p = T / (K_S · (λ + T_t))&nbsp;&nbsp;·&nbsp;&nbsp;T_n = T</span>
+  <span class="l">Für PT1-Strecke mit Totzeit und PI-Regler. Man gibt die Wunsch-Zeitkonstante λ des geschlossenen Kreises vor: λ groß = ruhig und robust, λ klein = schnell und empfindlich. Startwert: λ = T bzw. λ = 3·T_t, je nachdem, was größer ist.</span>
+</div>
+<p class="note">Ein einziger Parameter mit klarer physikalischer Bedeutung — Standard in der Verfahrenstechnik. Grenzen: braucht ein brauchbares Streckenmodell, für instabile Strecken nicht direkt anwendbar.</p>
+
+<h2>Reglerformen — Vorsicht bei fremden Parametern</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Form</th><th>Gleichung</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Standard (ISA)</b></td><td>K_p·[e + (1/T_n)∫e + T_v·ė]</td><td>K_p wirkt auf alles — der verbreitetste Fall, auch hier verwendet</td></tr>
+<tr><td><b>Parallel</b></td><td>K_p·e + K_i·∫e + K_d·ė</td><td>In Bibliotheken üblich. Umrechnung: K_i = K_p/T_n, K_d = K_p·T_v</td></tr>
+<tr><td><b>Serie (interagierend)</b></td><td>K_p'·(1 + 1/(T_n's))·(1 + T_v's)</td><td>Historisch (pneumatische Regler); manche Altgeräte</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Deshalb passen fremde Parameter oft nicht:</b> Form klären — und ob T_n in Sekunden oder Minuten gemeint ist (Verfahrenstechnik oft Minuten). Der Faktor 60 ist eine erstaunlich häufige Fehlerquelle. FPV-spezifisches PID-Tuning am Flugregler: <a href="fpv-drohnen.html">Drohnen &amp; FPV</a>.</div>
+
+<h2>Von Hand nachjustieren</h2>
+<div class="steps">
+  <div class="step"><h4>Einen Parameter auf einmal, spürbar ändern</h4>Faktor 1,5–2, nicht 5 % — und immer denselben Test fahren (gleicher Sprung oder gleiche Laststörung).</div>
+  <div class="step"><h4>Schwingt es? K_p verkleinern oder T_n vergrößern</h4>Die Periode verrät die Ursache: nahe T_n → I-Anteil zu stark; deutlich kürzer → K_p zu groß.</div>
+  <div class="step"><h4>Zu träge? Erst K_p vergrößern</h4>Dann erst den I-Anteil. Zu starker I bei zu kleinem K_p erzeugt langsame, hartnäckige Schwingungen.</div>
+  <div class="step"><h4>Überschwingen: T_n vergrößern, dann K_p senken, zuletzt D</h4>Ein D-Anteil ohne Filter macht nur das Rauschen sichtbar — Umsetzung unter <a href="#digital">Digitale Regelung &amp; Praxis</a>.</div>
+  <div class="step"><h4>Ergebnis dokumentieren</h4>Parameter, Streckenzustand, Datum, Sprungantwort. Spart beim nächsten Gerät die halbe Arbeit.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>J. G. Ziegler, N. B. Nichols, <i>Optimum Settings for Automatic Controllers</i>, Transactions of the ASME, 1942.</li>
+    <li>K. L. Chien, J. A. Hrones, J. B. Reswick, <i>On the Automatic Control of Generalized Passive Systems</i>, Transactions of the ASME, 1952.</li>
+    <li>Åström &amp; Hägglund, <i>Advanced PID Control</i>, ISA 2006 — Reglerformen, Relaisversuch, Lambda-Tuning.</li>
+    <li>Brett Beauregard, <a href="http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/">Improving the Beginner's PID</a> — praktische Umsetzung auf Mikrocontrollern.</li>
+    <li>Deutschsprachige Tabellen: <a href="https://de.wikipedia.org/wiki/Faustformelverfahren_(Automatisierungstechnik)">Faustformelverfahren (Automatisierungstechnik)</a>.</li>
+  </ul>
+</div>

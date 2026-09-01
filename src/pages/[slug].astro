@@ -52,41 +52,34 @@ const related = relatedOf(id).filter((m) => !mod || m.id !== mod.id);
 const title = mod ? `${mod.name} · ${hub.name} · Artefakte` : `${hub.name} · Artefakte`;
 const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
 
-/* Zusatz-Skript des Moduls (Rechner, Tabellen-Builder, Folds …). */
+/* Zusatz-Skripte des Moduls (Rechner, Tabellen-Builder, Folds …). */
 /* Werkstatt-Module, die das gemeinsame Technik-Design und -Skript mitbenutzen.
    Sie bleiben im Werkstatt-Hub, sehen aber aus wie der Mechatronik-Hub. */
-const MECHA_MODULES = new Set(["mechanik-robotik", "dremel", "schmiermittel"]);
+const MECHA_MODULES = new Set(["dremel", "schmiermittel", "druck"]);
 
-const PAGE_SCRIPTS: Record<string, string> = {
+const PAGE_SCRIPTS: Record<string, string | string[]> = {
   loeten: "/assets/mod-loeten.js",
   "elektronik-101": "/assets/mod-elektronik.js",
   dremel: "/assets/mod-mecha.js",
   homeserver: "/assets/mod-homeserver.js",
-  "mechanik-robotik": "/assets/mod-mecha.js",
-  filament: "/assets/mod-filament.js",
-  rentabilitaet: "/assets/mod-rentabilitaet.js",
   schmiermittel: "/assets/mod-mecha.js",
+  /* 3D-Druck: gemeinsames Technik-Skript + Rentabilitäts-Simulator. */
+  druck: ["/assets/mod-mecha.js", "/assets/mod-druck.js"],
   "lumix-s1ii": "/assets/mod-lumix-s1ii.js",
   /* Der Mechatronik-Hub teilt sich ein Modul-Skript — es initialisiert
      nur die Bausteine, die auf der jeweiligen Seite auch vorkommen. */
-  "technische-mechanik": "/assets/mod-mecha.js",
-  maschinenelemente: "/assets/mod-mecha.js",
-  werkstoffkunde: "/assets/mod-mecha.js",
-  konstruktion: "/assets/mod-mecha.js",
+  mechanik: "/assets/mod-mecha.js",
   elektrotechnik: "/assets/mod-mecha.js",
-  analogtechnik: "/assets/mod-mecha.js",
   digitaltechnik: "/assets/mod-mecha.js",
-  informationstechnik: "/assets/mod-mecha.js",
   embedded: "/assets/mod-mecha.js",
-  regelungstechnik: "/assets/mod-mecha.js",
-  "sensorik-aktorik": "/assets/mod-mecha.js",
+  "regelung-antriebe": "/assets/mod-mecha.js",
   automatisierung: "/assets/mod-mecha.js",
   "pcb-design": "/assets/mod-mecha.js",
   lernpfad: "/assets/mod-mecha.js",
   "mecha-referenz": "/assets/mod-mecha.js",
   "fpv-drohnen": "/assets/mod-mecha.js",
 };
-const pageScript = mod ? PAGE_SCRIPTS[mod.id] : undefined;
+const pageScripts = mod ? [PAGE_SCRIPTS[mod.id] || []].flat() : [];
 const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
 const pad = (n: number) => String(n + 1).padStart(2, "0");
 ---
@@ -217,7 +210,9 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           })}
         </div>
         <script is:inline type="application/json" id="mrouterCfg" set:html={routerCfg} />
-        {pageScript && <script is:inline defer src={pageScript} />}
+        {pageScripts.map((src) => (
+          <script is:inline defer src={src} />
+        ))}
 
         <div class="modfoot" data-pagefind-ignore>
           <div class="hd">Weiter im Hub {hub.name}</div>

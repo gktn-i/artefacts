@@ -1,0 +1,167 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Zwei Bauteile, zwei Denkweisen.</b> Der Bipolartransistor ist stromgesteuert: ein kleiner Basisstrom steuert einen großen Kollektorstrom, und die Stromverstärkung B streut zwischen Exemplaren um Faktor 3. Der MOSFET ist spannungsgesteuert und im eingeschalteten Zustand schlicht ein Widerstand — dort bestimmen R_DS(on) und Gate-Ladung Q_g alles.</div>
+
+<h2>Bipolartransistor: Betriebsarten</h2>
+<svg class="dg l" viewBox="0 0 620 170" role="img" aria-label="NPN- und PNP-Transistor mit Stromrichtungen">
+  <text class="lblb" x="150" y="24" text-anchor="middle">NPN</text>
+  <text class="lblb" x="450" y="24" text-anchor="middle">PNP</text>
+  <path class="w" d="M120,50 V130 M90,90 H120 M120,66 L162,44 M120,114 L162,136" />
+  <path class="f" d="M150,120 l14,10 l-4,-13 z" />
+  <text class="lbl" x="82" y="94" text-anchor="end">B</text>
+  <text class="lbl" x="168" y="42">C</text><text class="lbl" x="168" y="142">E</text>
+  <text class="lbla" x="150" y="160" text-anchor="middle">Strom fließt C → E · Pfeil zeigt hinaus</text>
+  <path class="w" d="M420,50 V130 M390,90 H420 M420,66 L462,44 M420,114 L462,136" />
+  <path class="f" d="M432,108 l-14,-10 l4,13 z" />
+  <text class="lbl" x="382" y="94" text-anchor="end">B</text>
+  <text class="lbl" x="468" y="42">C</text><text class="lbl" x="468" y="142">E</text>
+  <text class="lbla" x="450" y="160" text-anchor="middle">Strom fließt E → C · Pfeil zeigt hinein</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Betriebsart</th><th>Bedingung</th><th>U_CE</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Sperrbereich</b></td><td>U_BE &lt; ≈ 0,5 V</td><td>≈ Versorgungsspannung</td><td>Transistor aus</td></tr>
+<tr><td><b>Aktiver Bereich</b></td><td>U_BE ≈ 0,7 V, U_CE &gt; ≈ 1 V</td><td>dazwischen</td><td>Verstärken — I_C = B · I_B</td></tr>
+<tr><td><b>Sättigung</b></td><td>Basisstrom im Überfluss</td><td>0,05–0,3 V (U_CEsat)</td><td>Schalten — minimale Verlustleistung</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Für Schaltanwendungen: übersteuern statt ausrechnen.</b> Basisstrom bewusst drei- bis zehnmal so groß wählen wie rechnerisch nötig. Erst dann ist U_CEsat wirklich klein und der Transistor bleibt kalt: <span class="formula">R_B = (U_steuer − 0,7 V) · B_min / (5 · I_C)</span>.</div>
+<div class="flist">
+  <div class="frow hd"><span>Kennwert</span><span>Beispiel BC547</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">U_CEO</span><span class="fe">45 V</span><span class="fx">Maximale Kollektor-Emitter-Spannung bei offener Basis</span></div>
+  <div class="frow"><span class="fn">I_C max</span><span class="fe">100 mA</span><span class="fx">Dauerstrom; darüber gilt keine Kennlinie mehr</span></div>
+  <div class="frow"><span class="fn">P_tot</span><span class="fe">500 mW</span><span class="fx">Bei 25 °C; mit Temperatur linear fallend (Derating-Kurve)</span></div>
+  <div class="frow"><span class="fn">h_FE (B)</span><span class="fe">110 … 800</span><span class="fx">Riesige Streuung — daher die Gruppen A/B/C im Typennamen</span></div>
+  <div class="frow"><span class="fn">U_CEsat</span><span class="fe">0,25 V bei 100 mA</span><span class="fx">Restspannung im Schalterbetrieb</span></div>
+  <div class="frow"><span class="fn">f_T</span><span class="fe">300 MHz</span><span class="fx">Transitfrequenz — dort ist die Stromverstärkung auf 1 gefallen</span></div>
+  <div class="frow"><span class="fn">U_EBO</span><span class="fe">6 V</span><span class="fx">Die Basis-Emitter-Strecke sperrt rückwärts nur wenige Volt — häufig übersehene Zerstörungsursache</span></div>
+</div>
+
+<h2>Grundschaltungen und Arbeitspunkt</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Schaltung</th><th>Ein / Aus</th><th>Spannungsverstärkung</th><th>Eingangswiderstand</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Emitterschaltung</b></td><td>Basis / Kollektor</td><td>hoch, invertierend; mit unüberbrücktem R_E stabil v ≈ −R_C/R_E</td><td>mittel</td><td>Der Standardverstärker; auch der Schalter</td></tr>
+<tr><td><b>Kollektorschaltung</b> (Emitterfolger)</td><td>Basis / Emitter</td><td>≈ 1, nicht invertierend</td><td>hoch (≈ B · R_E)</td><td>Impedanzwandler, Treiberstufe, Stromverstärkung</td></tr>
+<tr><td><b>Basisschaltung</b></td><td>Emitter / Kollektor</td><td>hoch, nicht invertierend</td><td>niedrig (≈ 1/g_m)</td><td>HF-Stufen, Kaskode, Stromeingänge</td></tr>
+</tbody>
+</table></div>
+<div class="steps">
+  <div class="step"><h4>Emitterspannung festlegen</h4>U_E ≈ 1–2 V, damit die −2 mV/K der Basis-Emitter-Strecke kaum ins Gewicht fallen.</div>
+  <div class="step"><h4>Emitterwiderstand berechnen</h4>R_E = U_E / I_C. Er ist die eigentliche Gegenkopplung: Steigt I_C, steigt U_E, sinkt U_BE, sinkt I_C.</div>
+  <div class="step"><h4>Basisteiler dimensionieren</h4>Querstrom etwa zehnmal so groß wie der Basisstrom, dann ist die Basisspannung lastunabhängig. U_B = U_E + 0,7 V.</div>
+  <div class="step"><h4>Kollektorwiderstand wählen</h4>R_C so, dass U_CE im Ruhezustand etwa mittig zwischen U_E und V_CC liegt — dann ist die Aussteuerung symmetrisch.</div>
+  <div class="step"><h4>Verstärkung einstellen</h4>Ein Kondensator parallel zu einem Teil von R_E erlaubt hohe Wechselspannungsverstärkung bei stabilem Gleichstromarbeitspunkt.</div>
+</div>
+
+<h2>Bausteine, die man wiedererkennt</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Stromspiegel</div><div class="cd">Zwei gleiche Transistoren, Basen verbunden, einer als Diode geschaltet. Der zweite Zweig kopiert den Strom des ersten. Grundbaustein jedes integrierten Verstärkers — auf dem Chip sind beide thermisch gekoppelt und wirklich gleich.</div></div>
+  <div class="card"><div class="ct">Differenzverstärker</div><div class="cd">Zwei Transistoren mit gemeinsamer Stromquelle am Emitter. Verstärkt die Differenz, unterdrückt Gleichtakt — die Eingangsstufe jedes <a href="#opv">Operationsverstärkers</a>.</div></div>
+  <div class="card"><div class="ct">Darlington</div><div class="cd">Zwei Transistoren hintereinander, B multipliziert sich (bis ≈ 10 000). Preis: doppelte Flussspannung (≈ 1,4 V) und langsames Ausschalten. In der Leistungselektronik vom MOSFET verdrängt.</div></div>
+  <div class="card"><div class="ct">Konstantstromquelle</div><div class="cd">Feste Basisspannung (Zener oder Teiler) plus Emitterwiderstand: I ≈ (U_B − 0,7 V)/R_E, weitgehend unabhängig von der Lastspannung. Die einfachste brauchbare LED-Ansteuerung.</div></div>
+  <div class="card"><div class="ct">Kaskode</div><div class="cd">Emitterschaltung plus Basisschaltung darüber. Der obere Transistor hält U_CE des unteren konstant und eliminiert den Miller-Effekt — deutlich höhere Bandbreite.</div></div>
+  <div class="card"><div class="ct">Push-Pull-Endstufe</div><div class="cd">NPN und PNP im Gegentakt. Ohne Vorspannung entsteht Übernahmeverzerrung um den Nullpunkt; zwei Dioden oder ein U_BE-Vervielfacher stellen den Ruhestrom ein (Klasse AB).</div></div>
+</div>
+
+<h2>MOSFET: Typen und Kennwerte</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Typ</th><th>Leitet, wenn</th><th>Schaltung</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>n-Kanal, selbstsperrend</b></td><td>U_GS positiv über der Schwelle</td><td>Low-Side (Last oben, MOSFET nach Masse)</td><td>Der Normalfall: Motoren, LEDs, Heizungen schalten</td></tr>
+<tr><td><b>p-Kanal, selbstsperrend</b></td><td>U_GS negativ (Gate unter Source)</td><td>High-Side (zwischen Plus und Last)</td><td>Verpolschutz, Lastschalter, einfache High-Side-Steuerung</td></tr>
+<tr><td><b>n-Kanal, selbstleitend</b></td><td>bereits bei U_GS = 0</td><td>selten</td><td>Konstantstromquellen, HF, Startschaltungen</td></tr>
+</tbody>
+</table></div>
+<div class="flist">
+  <div class="frow hd"><span>Kennwert</span><span>Bedeutung</span><span>Falle</span></div>
+  <div class="frow"><span class="fn">U_DS</span><span class="fe">Sperrspannung Drain–Source</span><span class="fx">Schaltspitzen einrechnen; an induktiven Lasten leicht das Doppelte der Versorgung</span></div>
+  <div class="frow"><span class="fn">R_DS(on)</span><span class="fe">Widerstand im leitenden Zustand</span><span class="fx">Gilt bei einer bestimmten U_GS; steigt bis 100 °C um Faktor 1,5–2</span></div>
+  <div class="frow"><span class="fn">U_GS(th)</span><span class="fe">Schwellenspannung</span><span class="fx">Nur der Punkt, ab dem ein paar Mikroampere fließen — <b>nicht</b> die Spannung für vollen Durchlass</span></div>
+  <div class="frow"><span class="fn">Q_g</span><span class="fe">Gate-Ladung</span><span class="fx">Bestimmt den Treiberstrom: I = Q_g / t_schalt</span></div>
+  <div class="frow"><span class="fn">C_iss / C_oss / C_rss</span><span class="fe">Eingangs-, Ausgangs-, Rückwirkungskapazität</span><span class="fx">C_rss (Miller) bremst die Flanke am stärksten</span></div>
+  <div class="frow"><span class="fn">U_GS max</span><span class="fe">meist ±20 V</span><span class="fx">Das Gate-Oxid ist dünn — eine statische Entladung reicht zum Durchschlag</span></div>
+  <div class="frow"><span class="fn">SOA</span><span class="fe">sicherer Arbeitsbereich</span><span class="fx">Im Linearbetrieb deutlich enger, als der Datenblattstrom vermuten lässt</span></div>
+</div>
+<p class="note">Jeder Leistungs-MOSFET enthält bauartbedingt eine <b>Body-Diode</b> von Source nach Drain. In Halbbrücken ist sie erwünscht (Freilauf), verhindert aber, dass ein einzelner MOSFET rückwärts sperrt — bidirektionale Lastschalter brauchen zwei MOSFETs Rücken an Rücken.</p>
+<div class="stop"><b>Der häufigste Anfängerfehler:</b> Ein Standard-MOSFET mit U_GS(th) = 2–4 V direkt am 3,3-V- oder 5-V-Logikausgang. Bei 5 V am Gate ist er nur teilweise leitend, R_DS(on) liegt statt bei 20 mΩ bei mehreren Ohm, und das Bauteil wird bei 2 A glühend heiß. Lösung: <b>Logic-Level-MOSFET</b>, dessen R_DS(on) ausdrücklich bei U_GS = 2,5 V oder 4,5 V spezifiziert ist — oder ein Gate-Treiber mit höherer Spannung.</div>
+
+<h2>Verluste und Gate-Ansteuerung</h2>
+<div class="fbox">
+  <span class="f">P_leit = I² · R_DS(on) · k_T&nbsp;&nbsp;+&nbsp;&nbsp;P_schalt ≈ ½ · U_DS · I · (t_on + t_off) · f&nbsp;&nbsp;+&nbsp;&nbsp;P_gate = Q_g · U_GS · f</span>
+  <span class="l">k_T ist der Temperaturfaktor, bei 100 °C rund 1,5.</span>
+</div>
+<div class="card">
+  <h3>Durchgerechnet: 5 A schalten bei 24 V, 20 kHz</h3>
+  <p>R_DS(on) = 25 mΩ bei 25 °C, t_on + t_off = 100 ns, Q_g = 30 nC, Treiber mit 10 V.</p>
+  <ul>
+    <li>Leitverluste bei 100 °C: 5² · 0,025 · 1,5 = <b>0,94 W</b></li>
+    <li>Schaltverluste: 0,5 · 24 V · 5 A · 100 ns · 20 000 /s = <b>0,12 W</b></li>
+    <li>Gate-Treiber: 30 nC · 10 V · 20 kHz = <b>6 mW</b> (vernachlässigbar)</li>
+    <li>Gesamt ≈ 1,1 W → bei R_thJA = 50 K/W im SMD-Gehäuse rund 55 K Übertemperatur. <b>Kühlfläche vorsehen.</b></li>
+  </ul>
+  <p class="note">Bei 20 kHz dominieren hier noch die Leitverluste. Die Schaltverluste wachsen aber linear mit der Frequenz und ziehen bei etwa 150 kHz gleich — ab dort ist ein schneller Gate-Treiber wichtiger als der letzte Milliohm R_DS(on).</p>
+</div>
+<div class="grid2">
+  <div class="card"><div class="ct">Gate-Widerstand</div><div class="cd">10–47 Ω in die Gate-Leitung. Bedämpft die Schwingung aus Gate-Induktivität und C_iss und begrenzt den Treiberspitzenstrom. Größer heißt langsamer und störärmer, aber verlustreicher — ein bewusster Kompromiss.</div></div>
+  <div class="card"><div class="ct">Pull-down am Gate</div><div class="cd">10–100 kΩ vom Gate nach Source. Der MOSFET sperrt dann sicher, solange der Mikrocontroller im Reset ist und seine Pins hochohmig sind. Ohne ihn schaltet die Last beim Einschalten unkontrolliert.</div></div>
+  <div class="card"><div class="ct">Gate-Treiber-IC</div><div class="cd">Ein MCU-Pin liefert 20 mA; um 30 nC in 100 ns umzuladen, braucht es 300 mA. Treiber-ICs liefern 1–4 A und haben definierte Verzögerungszeiten.</div></div>
+  <div class="card"><div class="ct">High-Side und Bootstrap</div><div class="cd">Ein n-Kanal-MOSFET in der Plusleitung braucht am Gate eine Spannung <b>über</b> der Versorgung — Bootstrap-Kondensator, der bei jedem Low-Zustand nachgeladen wird, oder isolierte Hilfsversorgung. Deshalb braucht eine Halbbrücke eine Mindest-Schaltfrequenz.</div></div>
+</div>
+
+<h2>Halbbrücke und H-Brücke</h2>
+<svg class="dg m" viewBox="0 0 380 200" role="img" aria-label="H-Brücke aus vier MOSFETs mit Motor in der Mitte">
+  <path class="w" d="M40,30 H340 M40,170 H340 M60,30 V70 M60,120 V170 M320,30 V70 M320,120 V170" />
+  <rect class="box" x="46" y="70" width="28" height="50" rx="3" />
+  <rect class="box" x="306" y="70" width="28" height="50" rx="3" />
+  <path class="w" d="M180,30 V70 M180,120 V170 M240,30 V70 M240,120 V170" />
+  <text class="lbl" x="60" y="100" text-anchor="middle">Q1</text>
+  <text class="lbl" x="320" y="100" text-anchor="middle">Q3</text>
+  <path class="acc" d="M60,95 H150 M230,95 H320" />
+  <circle class="accs" cx="190" cy="95" r="30" />
+  <text class="lbla" x="190" y="100" text-anchor="middle" style="font-size:12px">M</text>
+  <text class="lbl" x="46" y="24">+U</text>
+  <text class="lbl" x="46" y="186">GND</text>
+  <rect class="box" x="46" y="122" width="28" height="46" rx="3" style="opacity:.55" />
+  <rect class="box" x="306" y="122" width="28" height="46" rx="3" style="opacity:.55" />
+  <text class="lbl" x="60" y="150" text-anchor="middle">Q2</text>
+  <text class="lbl" x="320" y="150" text-anchor="middle">Q4</text>
+</svg>
+<ul>
+  <li><b>Totzeit (Dead Time):</b> Oberer und unterer Schalter dürfen nie gleichzeitig leiten. Zwischen Aus und Ein liegen typisch 100 ns bis 2 µs. Fehlt die Pause, entsteht ein Querstrom (Shoot-Through), der die Brücke in Millisekunden zerstört.</li>
+  <li><b>Freilaufpfad:</b> Der Motorstrom muss beim Umschalten weiterfließen können. Die Body-Dioden übernehmen das, sind aber langsam — bei hohen Frequenzen parallele Schottky-Dioden oder Synchrongleichrichtung vorsehen.</li>
+  <li><b>Fertige Treiber</b> (DRV8871, BTS7960, TB6612FNG, DRV8323) nehmen Totzeit, Bootstrap und Schutzfunktionen ab. Motorseitig geht es weiter unter <a href="regelung-antriebe.html#treiber">Regelung &amp; Antriebe → Motortreiber</a>.</li>
+</ul>
+
+<h2>BJT, MOSFET oder IGBT?</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Kriterium</th><th>Bipolartransistor</th><th>MOSFET</th></tr></thead>
+<tbody>
+<tr><td><b>Steuerung</b></td><td>Strom — kostet dauerhaft Leistung</td><td>Spannung — statisch praktisch leistungslos</td></tr>
+<tr><td><b>Restspannung</b></td><td>U_CEsat ≈ 0,1–0,3 V, stromunabhängig</td><td>I · R_DS(on) — bei kleinen Strömen weit unter 1 mV</td></tr>
+<tr><td><b>Große Ströme</b></td><td>schlecht, Verluste steigen linear</td><td>klar besser, R_DS(on) bis in den Milliohm-Bereich</td></tr>
+<tr><td><b>Parallelschalten</b></td><td>thermisch instabil</td><td>gut — R_DS(on) steigt mit der Temperatur, das gleicht sich aus</td></tr>
+<tr><td><b>Analoge Präzision</b></td><td>besser: exponentiell exakt, niedriges 1/f-Rauschen</td><td>höheres 1/f-Rauschen, größere Offsets</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Spannungs-/Frequenzbereich</th><th>Beste Wahl</th><th>Grund</th></tr></thead>
+<tbody>
+<tr><td>bis 100 V, beliebige Frequenz</td><td>Silizium-MOSFET</td><td>R_DS(on) im Milliohm-Bereich, sehr schnell</td></tr>
+<tr><td>100–650 V, hohe Frequenz</td><td>GaN oder SiC-MOSFET</td><td>geringste Schaltverluste, kompakte Magnetik</td></tr>
+<tr><td>600–1700 V, bis ~20 kHz</td><td>IGBT</td><td>Feste Sättigungsspannung (1,5–2,5 V) schlägt R_DS(on) bei großen Chipflächen</td></tr>
+<tr><td>ab 1200 V, hohe Frequenz</td><td>SiC-MOSFET</td><td>verdrängt IGBTs zunehmend in Wechselrichtern</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 2 und 3 — Grundschaltungen mit gerechneten Beispielen.</li>
+    <li>Sedra &amp; Smith, <i>Microelectronic Circuits</i>, Kapitel Bipolar Junction Transistors und MOS Field-Effect Transistors.</li>
+    <li>Infineon, <i>MOSFET Power Losses Calculation Using the Data-Sheet Parameters</i> — die Referenz für die Verlustrechnung.</li>
+    <li>Texas Instruments, <i>Fundamentals of MOSFET and IGBT Gate Driver Circuits</i> (SLUA618) — Bootstrap, Totzeit, Miller-Plateau.</li>
+    <li>Datenblätter BC547/BC557, 2N3904/2N3906, BD139/BD140 sowie IRLZ44N, IRF3205, BSS138, AO3400 — jeweils die Derating- bzw. R_DS(on)-über-U_GS-Kurve ansehen.</li>
+  </ul>
+</div>

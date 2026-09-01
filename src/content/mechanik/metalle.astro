@@ -1,0 +1,96 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Stahl ist Eisen mit weniger als 2,06 % Kohlenstoff — darüber heißt es Gusseisen; Aluminium ist eine Familie mit Streckgrenzen von 30 bis 500 N/mm².</b> Der E-Modul bleibt innerhalb jeder Familie praktisch konstant: Stahl 210 000, Aluminium 70 000 N/mm². Die Legierung ändert die Festigkeit, nie die Steifigkeit.</div>
+
+<h2>Stahlbezeichnungen entschlüsseln</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Beispiel</th><th>System</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>S235JR</b></td><td>Nach Verwendung</td><td>S = Stahlbau, 235 = Mindeststreckgrenze in N/mm², JR = 27 J Kerbschlagarbeit bei +20 °C</td></tr>
+<tr><td><b>C45</b></td><td>Unlegiert</td><td>0,45 % Kohlenstoff — der Klassiker für Wellen und Achsen</td></tr>
+<tr><td><b>42CrMo4</b></td><td>Niedriglegiert (&lt; 5 % je Element)</td><td>0,42 % C; Legierungsanteile mit Faktor: Cr, Co, Mn, Ni, Si, W ·4 — Mo, Ti, V, Al ·10. Die 4 heißt also 4/4 = 1 % Cr</td></tr>
+<tr><td><b>X5CrNi18-10</b></td><td>Hochlegiert (X, ≥ 5 %)</td><td>0,05 % C, 18 % Cr, 10 % Ni — der bekannte V2A / 1.4301</td></tr>
+<tr><td><b>1.4301</b></td><td>Werkstoffnummer</td><td>1 = Stahl, 43 = nichtrostend mit Ni, 01 = laufende Nummer. Eindeutiger als der Kurzname</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Stahlgruppen</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Gruppe</th><th>Typische Vertreter</th><th data-s="num">R_p0,2 [N/mm²]</th><th>Einsatz und Eigenschaften</th></tr></thead>
+<tbody>
+<tr><td><b>Baustahl</b></td><td>S235JR (1.0038), S355J2 (1.0577)</td><td>235 / 355</td><td>Der Brot-und-Butter-Stahl: gut schweißbar, billig, überall verfügbar; nicht härtbar (zu wenig C)</td></tr>
+<tr><td><b>Vergütungsstahl</b></td><td>C45 (1.0503), 42CrMo4 (1.7225)</td><td>490 / 750–900</td><td>Durchhärtend und anlassbar; Wellen, Achsen, hochbelastete Teile. Schweißen nur mit Vorwärmen</td></tr>
+<tr><td><b>Einsatzstahl</b></td><td>16MnCr5 (1.7131), 20MnCr5</td><td>Kern 590–780</td><td>Wenig C im Kern, randaufgekohlt: harte Oberfläche, zäher Kern — Zahnräder, Bolzen</td></tr>
+<tr><td><b>Nitrierstahl</b></td><td>31CrMoV9 (1.8519)</td><td>800–1000</td><td>Sehr harte, dünne Randschicht ohne Verzug; Spindeln, Führungsbahnen</td></tr>
+<tr><td><b>Automatenstahl</b></td><td>11SMn30 (1.0715)</td><td>≈ 300</td><td>Schwefelzusatz für kurze Späne: beste Zerspanbarkeit, schlecht schweißbar</td></tr>
+<tr><td><b>Werkzeugstahl</b></td><td>C105W1, X155CrVMo12-1, HSS</td><td>—</td><td>Hoher C-Gehalt und Karbidbildner: hart und verschleißfest, spröde</td></tr>
+<tr><td><b>Federstahl</b></td><td>51CrV4 (1.8159), 1.4310</td><td>1200–1500</td><td>Hohe Streckgrenze bei guter Zähigkeit</td></tr>
+<tr><td><b>Wälzlagerstahl</b></td><td>100Cr6 (1.3505)</td><td>—</td><td>Durchhärtend auf 60–64 HRC, sehr reine Schmelze</td></tr>
+</tbody>
+</table></div>
+
+<h2>Nichtrostende Stähle</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Typ</th><th>Gefüge</th><th data-s="text">Magnetisch</th><th>Eigenschaften</th></tr></thead>
+<tbody>
+<tr><td><b>1.4301 (V2A, AISI 304)</b></td><td>austenitisch</td><td>nein</td><td>Der Standard. Beständig gegen Wasser und viele Chemikalien, nicht gegen Chlorid; zäh, schlecht zerspanbar, nicht härtbar</td></tr>
+<tr><td><b>1.4404 (V4A, AISI 316L)</b></td><td>austenitisch</td><td>nein</td><td>Mit Molybdän: beständig gegen Salzwasser und Chlorid; niedriger C-Gehalt für Schweißbarkeit</td></tr>
+<tr><td><b>1.4021 / 1.4034</b></td><td>martensitisch</td><td>ja</td><td>Härtbar auf 50–56 HRC; Messer, Wellen mit Korrosionsanforderung</td></tr>
+<tr><td><b>1.4016 (AISI 430)</b></td><td>ferritisch</td><td>ja</td><td>Billiger, weniger beständig; Blenden, Haushaltsgeräte</td></tr>
+<tr><td><b>1.4462 (Duplex)</b></td><td>austenitisch-ferritisch</td><td>teilweise</td><td>Doppelte Festigkeit gegenüber 1.4301, sehr beständig; teuer</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>„Rostfrei“ ist irreführend.</b> Nichtrostende Stähle schützen sich durch eine Chromoxid-Passivschicht. Wird sie durch Schleifstaub von normalem Stahl, durch Chlorid oder durch Sauerstoffmangel im Spalt verletzt, rosten sie sehr wohl. Deshalb: getrennte Bürsten und Schleifmittel für Edelstahl, nach dem Schweißen beizen und passivieren, Spalte vermeiden — Details unter <a href="#behandlung">Wärmebehandlung &amp; Korrosion</a>.</div>
+
+<h2>Gusseisen</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th data-s="text">Sorte</th><th data-s="num">E-Modul [N/mm²]</th><th data-s="num">R_m [N/mm²]</th><th>Eigenschaften</th></tr></thead>
+<tbody>
+<tr><td><b>Grauguss EN-GJL-250</b></td><td>≈ 110 000</td><td>250</td><td>Lamellengraphit: spröde, aber hervorragend dämpfend und gut gleitend. Maschinenbetten, Gehäuse</td></tr>
+<tr><td><b>Sphäroguss EN-GJS-400-15</b></td><td>≈ 170 000</td><td>400</td><td>Kugelgraphit: deutlich zäher (15 % Bruchdehnung), fast wie Stahl belastbar</td></tr>
+<tr><td><b>Temperguss EN-GJMB-350</b></td><td>≈ 175 000</td><td>350</td><td>Dünnwandige, komplexe Teile; Fittings, Beschläge</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Warum Maschinenbetten aus Grauguss sind:</b> Der Lamellengraphit wirkt wie Millionen kleiner Kerben und senkt die Festigkeit — dämpft Schwingungen aber zwei- bis dreimal so gut wie Stahl. Für ein Maschinenbett zählt Dämpfung mehr als Festigkeit; der moderne Nachfolger ist Mineralguss (siehe <a href="#kunststoffe">Kunststoffe &amp; Verbund</a>).</div>
+
+<h2>Aluminium-Knetlegierungen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Legierung</th><th data-s="num">R_p0,2 [N/mm²]</th><th data-s="text">Zerspanbarkeit</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>EN AW-1050A (Al99,5)</b></td><td>20–100</td><td>schlecht (schmiert)</td><td>Rein-Aluminium: Bleche, Elektrotechnik, chemische Beständigkeit</td></tr>
+<tr><td><b>EN AW-5754 (AlMg3)</b></td><td>80–185</td><td>mittel</td><td>Bleche, gut umformbar und schweißbar, seewasserfest</td></tr>
+<tr><td><b>EN AW-6060 / 6063</b></td><td>140–180</td><td>gut</td><td>Der Strangpress-Standard: Konstruktionsprofile, Kühlkörper, gut eloxierbar</td></tr>
+<tr><td><b>EN AW-6082 (AlMgSi1)</b></td><td>250–290</td><td>gut</td><td>Der Konstruktionswerkstoff schlechthin: Platten, Wellen, Frästeile. Schweißbar</td></tr>
+<tr><td><b>EN AW-7075 (AlZnMgCu)</b></td><td>450–500</td><td>sehr gut</td><td>Höchste Festigkeit, fast Stahlniveau. Nicht schweißbar, spannungsrisskorrosionsanfällig, teuer</td></tr>
+<tr><td><b>Al-Guss (AlSi9Cu3 u. ä.)</b></td><td>140–200</td><td>gut</td><td>Druckguss für Gehäuse; komplexe Formen, weniger fest als Knetlegierungen</td></tr>
+</tbody>
+</table></div>
+<p>Der Zustand steht hinter der Legierung: <b>T6</b> = lösungsgeglüht und warmausgelagert (der übliche Festigkeitszustand), <b>T651</b> zusätzlich spannungsarm gereckt, <b>O</b> = weichgeglüht, <b>H</b> = kaltverfestigt.</p>
+<div class="stop"><b>Für Frästeile aus Platte immer den gereckten Zustand nehmen.</b> Gewalzte Aluplatte ohne Spannungsarmglühen enthält Eigenspannungen — einseitig ausgefräst verzieht sich das Teil bei 300 mm Länge um mehrere Zehntel. Plattenqualität wie <b>6082 T651</b> oder <b>5083 H111</b> (Alumec, Certal u. ä.) löst das.</div>
+
+<h2>Kupfer, Titan, Magnesium</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Werkstoff</th><th>Charakter</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Kupfer Cu-ETP</b></td><td>λ = 390 W/(m·K), zäh, schlecht zerspanbar</td><td>Elektrische Leiter, Kühlkörper, Wärmetauscher</td></tr>
+<tr><td><b>Messing CuZn39Pb3 (MS58)</b></td><td>Hervorragend zerspanbar</td><td>Der Drehteilwerkstoff: Fittings, Inserts. Nicht für Ammoniak (Spannungsrisskorrosion)</td></tr>
+<tr><td><b>Rotguss / Zinnbronze CuSn8</b></td><td>Gleitfreudig, seewasserbeständig</td><td>Lagerbuchsen, Schneckenräder — der klassische Gleitpartner zu Stahl</td></tr>
+<tr><td><b>Beryllium-Kupfer CuBe2</b></td><td>Aushärtbar auf 1300 N/mm²; Staub giftig</td><td>Federkontakte, funkenfreie Werkzeuge</td></tr>
+<tr><td><b>Titan Grade 5 (Ti6Al4V)</b></td><td>R_p0,2 bis 900 N/mm² bei 4,4 g/cm³, E nur 110 000; schwer zerspanbar, Späne brennbar, teuer</td><td>Leichtbau, Implantate, korrosive Medien</td></tr>
+<tr><td><b>Magnesium (AZ91, AZ31)</b></td><td>1,8 g/cm³, gut dämpfend; wenig fest, Späne leicht entzündlich — nie mit Wasser löschen</td><td>Druckgussgehäuse, extremer Leichtbau</td></tr>
+</tbody>
+</table></div>
+
+<div class="warn"><b>Kontaktkorrosion beim Mischbau:</b> Aluminium ist gegenüber Edelstahl, Kupfer und Kohlefaser das unedlere Metall und korrodiert bei Feuchtigkeit. Abhilfe und Spannungsreihe unter <a href="#behandlung">Wärmebehandlung &amp; Korrosion</a>; alle Zahlenwerte in der <a href="#auswahl">Werkstofftabelle</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN 10027-1/-2 — Bezeichnungssysteme für Stähle: Kurznamen und Werkstoffnummern.</li>
+    <li>DIN EN 10025 (Baustähle), 10083 (Vergütungsstähle), 10084 (Einsatzstähle), 10088 (nichtrostende Stähle), DIN EN 1561/1563 (Gusseisen).</li>
+    <li>DIN EN 573-3 und DIN EN 515 — Aluminium: Legierungs- und Zustandsbezeichnungen; DIN EN 755-2 — Strangpressprofile.</li>
+    <li>DIN EN 1652 / EN 12164 — Kupfer und Kupferlegierungen.</li>
+    <li>Roloff/Matek Tabellenbuch — Kennwerte und Zuordnung Kurzname/Werkstoffnummer; <a href="https://www.dew-stahl.com/">Deutsche Edelstahlwerke</a> und <a href="https://www.kupferinstitut.de/">Deutsches Kupferinstitut</a> — frei zugängliche Datenblätter.</li>
+  </ul>
+</div>

@@ -4,7 +4,7 @@ Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab und Fotografie —
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 28 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle 20 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -51,7 +51,13 @@ public/assets/palette.js   globale Suche (⌘K): Registry-Treffer + Pagefind-Vol
 Drei Ebenen: **Übersicht → Hub → Modul** — aber alle drei sind jederzeit über
 die Rail erreichbar.
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video —
-zusammen 28 Module mit 292 Abschnitten.
+zusammen 20 Module mit 229 Abschnitten.
+
+Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
+Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion
+nebeneinander standen, gibt es heute *Mechanik & Konstruktion* mit vier
+Abschnittsgruppen. `public/*.html` enthält Weiterleitungs-Stubs, damit die
+URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
 
 ## Wie ein Modul funktioniert
 
@@ -73,10 +79,12 @@ zusammen 28 Module mit 292 Abschnitten.
   siehe `MECHA_MODULES`). Das Stylesheet liegt einmal als `src/content/_mecha.css`
   und wird von jedem `_style.css` nur importiert; ein Modul kann darüber hinaus
   eigene Regeln ergänzen (so macht es `dremel` für seine Drehzahlskala).
-- **Ein Skript für viele Module:** `public/assets/mod-mecha.js` bedient alle 16
-  Mechatronik-Module und die vier Technik-Module der Werkstatt — Faltabschnitte,
-  sortierbare Tabellen, Katalog- und Glossarfilter, 24 Rechner und die
+- **Ein Skript für viele Module:** `public/assets/mod-mecha.js` bedient alle
+  Mechatronik-Module und die Technik-Module der Werkstatt — Faltabschnitte,
+  sortierbare Tabellen, Katalog- und Glossarfilter, die Rechner und die
   PID-Simulation. Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
+  Ein Modul kann mehrere Skripte laden (`PAGE_SCRIPTS` nimmt auch ein Array,
+  so kombiniert *3D-Druck* das Technik-Skript mit seinem Simulator).
 - **Inhalte gehören ins HTML, nicht ins JavaScript.** Tabellen und Kataloge werden
   server-gerendert und im JS nur gefiltert und sortiert. Nur so landen sie im
   Pagefind-Index und funktionieren ohne JavaScript.

@@ -1,0 +1,125 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Halbleiter leitet nur, wenn man es ihm erlaubt.</b> Durch Dotierung entstehen Bereiche mit Elektronen- oder Löcherüberschuss; an ihrer Grenze bildet sich der pn-Übergang — die Grundlage von Diode, Transistor und jedem Chip. Die Diode selbst ist in der Praxis öfter ein Schutzbauteil als ein Gleichrichter.</div>
+
+<h2>Dotierung und pn-Übergang</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">n-Dotierung (Donator)</div><div class="cd">Fünfwertige Atome (Phosphor, Arsen) im Siliziumgitter. Vier Bindungen werden gebraucht, das fünfte Elektron ist frei. Ladungsträger: <b>Elektronen</b>.</div></div>
+  <div class="card"><div class="ct">p-Dotierung (Akzeptor)</div><div class="cd">Dreiwertige Atome (Bor). Es fehlt ein Elektron — das „Loch“ wandert, weil Nachbarelektronen nachrücken. Ladungsträger: <b>Löcher</b>.</div></div>
+</div>
+<svg class="dg l" viewBox="0 0 620 190" role="img" aria-label="pn-Übergang mit p-Gebiet, n-Gebiet und Raumladungszone dazwischen">
+  <rect class="box" x="60" y="40" width="200" height="80" rx="4" style="fill:var(--accent-soft)" />
+  <rect class="box" x="360" y="40" width="200" height="80" rx="4" style="fill:var(--mid-bg)" />
+  <rect class="box" x="260" y="40" width="100" height="80" style="fill:var(--surface-2)" />
+  <text class="lblb" x="160" y="34" text-anchor="middle">p-Gebiet</text>
+  <text class="lblb" x="460" y="34" text-anchor="middle">n-Gebiet</text>
+  <text class="lbl" x="310" y="34" text-anchor="middle">Raumladungszone</text>
+  <text class="lbl" x="120" y="70">⊕ ⊕ ⊕</text><text class="lbl" x="190" y="100">⊕ ⊕ ⊕</text>
+  <text class="lbl" x="410" y="70">⊖ ⊖ ⊖</text><text class="lbl" x="480" y="100">⊖ ⊖ ⊖</text>
+  <text class="lbl" x="275" y="70">− − −</text><text class="lbl" x="325" y="70">+ + +</text>
+  <text class="lbl" x="275" y="104">− − −</text><text class="lbl" x="325" y="104">+ + +</text>
+  <path class="acc" d="M310,130 V158" />
+  <text class="lbla" x="310" y="176" text-anchor="middle">Diffusionsspannung ≈ 0,6–0,7 V (Si) · 0,2–0,4 V (Schottky/Ge)</text>
+</svg>
+<ul>
+  <li><b>Durchlass</b> (p an +): Die Raumladungszone wird schmal, Strom fließt, sobald die Diffusionsspannung überwunden ist.</li>
+  <li><b>Sperrrichtung</b> (p an −): Die Zone wird breiter, es bleibt ein Sperrstrom von nA bis µA — stark temperaturabhängig.</li>
+  <li><b>Sperrschichtkapazität:</b> Die Zone wirkt als Plattenkondensator mit spannungsabhängigem Abstand — begrenzt die Schaltgeschwindigkeit, gezielt genutzt in Kapazitätsdioden.</li>
+  <li><b>Durchbruch:</b> Ab einer Sperrspannung reißt das Feld Ladungsträger los (Zener- bzw. Lawineneffekt). Bei Zenerdioden erwünscht, sonst Bauteiltod, sofern die Leistung nicht begrenzt wird.</li>
+</ul>
+<p class="note">Die Dotierung ist winzig: typisch ein Fremdatom auf 10⁶ bis 10⁸ Siliziumatome. Genau deshalb ist Reinheit in der Halbleiterfertigung so entscheidend.</p>
+
+<h2>Diodengleichung und Temperaturverhalten</h2>
+<div class="fbox">
+  <span class="f">I = I_S · (e^(U/(n·U_T)) − 1)&nbsp;&nbsp;mit&nbsp;&nbsp;U_T = k·T/q ≈ 25,85 mV bei 300 K</span>
+  <span class="l">I_S Sättigungssperrstrom, n Emissionskoeffizient (1 … 2). Exponentiell, nicht linear — daraus folgt: <b>rund 60 mV mehr Spannung ergeben den zehnfachen Strom</b> (n = 1).</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Effekt</th><th>Größenordnung</th><th>Konsequenz</th></tr></thead>
+<tbody>
+<tr><td><b>„0,7 V“ sind kein fester Wert</b></td><td>0,6 V bei 1 mA … 1,0 V bei 1 A</td><td>Verlustleistung immer mit U_F <em>bei diesem Strom</em> rechnen, nicht mit dem Katalogwert</td></tr>
+<tr><td><b>Flussspannung sinkt</b></td><td>≈ −2 mV/K</td><td>Nutzbar als Temperatursensor; Ursache thermischer Instabilität in Endstufen</td></tr>
+<tr><td><b>Sperrstrom verdoppelt sich</b></td><td>alle ≈ 10 K</td><td>Bei 125 °C ist der Leckstrom rund tausendfach höher als bei 25 °C</td></tr>
+<tr><td><b>U_T steigt</b></td><td>∝ absolute Temperatur</td><td>Zusammen mit der fallenden Flussspannung die Grundlage der Bandgap-Referenz</td></tr>
+<tr><td><b>Thermal Runaway</b></td><td>—</td><td>Wärmer → leitfähiger → mehr Strom → wärmer. Ohne Emitterwiderstand oder Temperaturkopplung eskaliert das</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Zwei Folgerungen aus der Exponentialkurve:</b> LEDs parallel ohne eigene Vorwiderstände teilen den Strom nie gleichmäßig — schon 20 mV Unterschied in U_F ergeben Faktor 2 im Strom, eine LED wird heißer, niederohmiger und stirbt zuerst. Und: Die <b>Bandgap-Referenz</b> addiert die fallende Flussspannung gewichtet zur steigenden Differenz zweier U_BE bei unterschiedlicher Stromdichte. Ergebnis ist eine über den Temperaturbereich fast konstante Spannung um 1,25 V — der Bandabstand von Silizium. Steckt in jedem Mikrocontroller, ADC und Spannungsregler.</div>
+
+<h2>Kennwerte einer Diode</h2>
+<svg class="dg m" viewBox="0 0 400 220" role="img" aria-label="Diodenkennlinie mit Durchlassbereich, Sperrbereich und Durchbruch">
+  <path class="w" d="M40,110 H380 M240,20 V210" />
+  <path class="acc" d="M240,110 C270,110 280,104 292,88 C300,76 306,50 312,24" />
+  <path class="acc" d="M40,116 C120,113 180,111 240,110" />
+  <path class="badl" d="M70,110 C66,120 62,150 58,200" />
+  <path class="gd" d="M292,20 V210" />
+  <text class="lbla" x="296" y="18">U_F ≈ 0,7 V</text>
+  <text class="lbl" x="360" y="126">U</text>
+  <text class="lbl" x="248" y="30">I</text>
+  <text class="lbl" x="120" y="104">Sperrbereich (nA)</text>
+  <text class="lbl" x="66" y="214" style="fill:var(--bad)">Durchbruch U_R</text>
+</svg>
+<div class="flist">
+  <div class="frow hd"><span>Kennwert</span><span>Bedeutung</span><span>Worauf man achtet</span></div>
+  <div class="frow"><span class="fn">U_F</span><span class="fe">Flussspannung</span><span class="fx">Bestimmt die Verlustleistung P = U_F · I — bei 3 A und 0,7 V sind das 2,1 W</span></div>
+  <div class="frow"><span class="fn">U_R</span><span class="fe">Sperrspannung</span><span class="fx">Mindestens Faktor 1,5–2 über der höchsten auftretenden Sperrspannung inklusive Schaltspitzen</span></div>
+  <div class="frow"><span class="fn">I_F</span><span class="fe">Dauerstrom</span><span class="fx">Gilt bei angegebener Gehäusetemperatur — im Gerät nie erreicht</span></div>
+  <div class="frow"><span class="fn">I_FSM</span><span class="fe">Stoßstrom, typ. 8,3 ms</span><span class="fx">Zählt beim Laden großer Elkos hinter dem Gleichrichter</span></div>
+  <div class="frow"><span class="fn">t_rr</span><span class="fe">Sperrverzögerung</span><span class="fx">Entscheidend ab einigen kHz; Schottky hat praktisch keine</span></div>
+  <div class="frow"><span class="fn">I_R</span><span class="fe">Sperrstrom</span><span class="fx">Bei Schottky deutlich höher und stark temperaturabhängig</span></div>
+  <div class="frow"><span class="fn">C_j</span><span class="fe">Sperrschichtkapazität</span><span class="fx">Belastet HF-Signale — bei ESD-Schutzdioden an schnellen Leitungen kritisch</span></div>
+</div>
+<div class="warn"><b>Die Sperrverzögerung ist der Grund für unerklärliche Verluste.</b> Eine langsame Diode leitet nach dem Umpolen noch kurz rückwärts. In einem Schaltregler mit 100 kHz passiert das 100 000-mal je Sekunde — eine 1N4007 wird dabei heiß, obwohl der Mittelstrom weit unter dem Nennwert liegt. Symptom: eine Diode, die kocht, obwohl die Rechnung lauwarm sagt.</div>
+
+<h2>Typen und Auswahl</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Typ</th><th>Kennwerte</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Standard-Silizium</b> (1N4001…4007)</td><td>U_F 0,7–1,1 V, t_rr 2–30 µs</td><td>Netzgleichrichtung bei 50 Hz, Freilauf an Relais. Zu langsam für Schaltregler</td></tr>
+<tr><td><b>Schnelle Diode</b> (1N4148, UF4007)</td><td>t_rr ≈ 4 ns bzw. 75 ns</td><td>Signalgleichrichtung, Logikverknüpfung, Freilauf bei schnellen Schaltvorgängen</td></tr>
+<tr><td><b>Schottky</b> (1N5819, SS34, BAT54)</td><td>U_F 0,2–0,45 V, keine nennenswerte t_rr</td><td>Schaltregler, Verpolschutz. Nachteil: höherer Leckstrom, niedrigere Sperrspannung</td></tr>
+<tr><td><b>Zenerdiode</b></td><td>Betrieb in Sperrrichtung, definierte Spannung</td><td>Einfache Referenzen, Begrenzung. Unter 5,6 V dominiert der Zener-Effekt (negativer TK), darüber der Lawineneffekt (positiver) — bei ≈ 5,6 V heben sie sich auf, deshalb der stabilste Wert</td></tr>
+<tr><td><b>TVS / Suppressordiode</b></td><td>kW Impulsleistung für Mikrosekunden</td><td>ESD- und Surge-Schutz an Schnittstellen. Unidirektional für DC-Versorgungen, bidirektional für Signale mit Wechselanteil</td></tr>
+<tr><td><b>LED</b></td><td>U_F rot 1,8–2,2 V · gelb/grün 2,0–2,4 V · blau/weiß 2,8–3,4 V</td><td>Immer mit Strombegrenzung betreiben, nie an Spannung</td></tr>
+</tbody>
+</table></div>
+<div class="steps">
+  <div class="step"><h4>Sperrspannung festlegen</h4>Höchste Sperrspannung inklusive Schaltspitzen ermitteln, dann Faktor 1,5 bis 2 Sicherheit.</div>
+  <div class="step"><h4>Strom und Verlustleistung prüfen</h4>Mittelstrom, Spitzenstrom und U_F bei diesem Strom aus der Kennlinie. P = U_F · I_mittel plus Schaltverluste.</div>
+  <div class="step"><h4>Geschwindigkeit wählen</h4>Bis 1 kHz reicht Standard, darüber Fast-Recovery, ab 20 kHz und bei niedrigen Spannungen Schottky.</div>
+  <div class="step"><h4>Thermik nachrechnen</h4>R_thJA aus dem Datenblatt, Sperrschichttemperatur unter 100 °C halten. Bei SMD zählt vor allem die angeschlossene Kupferfläche.</div>
+</div>
+
+<h2>Die vier Schaltungen, die man ständig braucht</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Freilaufdiode</div><div class="cd">Antiparallel über jede induktive Last. Standard-Silizium reicht bei Relais; bei PWM-Ansteuerung von Motoren muss sie schnell sein, sonst verheizt sie beim Umschalten Leistung. Rechnung dazu: <a href="#transient">Schaltvorgänge</a>.</div></div>
+  <div class="card"><div class="ct">Verpolschutz</div><div class="cd">Diode in Reihe kostet U_F. Eleganter: p-Kanal-MOSFET in der Plusleitung, Source zur Quelle — nur R_DS(on) statt 0,7 V. Ab etwa 500 mA lohnt sich das fast immer.</div></div>
+  <div class="card"><div class="ct">Klemmschaltung</div><div class="cd">Zwei Dioden von der Signalleitung nach V_CC und Masse begrenzen auf V_CC + 0,7 V und −0,7 V. Der Strom <b>muss</b> durch einen Reihenwiderstand begrenzt werden, sonst zieht die Klemmung die Versorgung hoch (Latch-up).</div></div>
+  <div class="card"><div class="ct">Gleichrichtung</div><div class="cd">Einweg: eine Diode, halbe Ausbeute. Brücke: vier Dioden, doppelte Brummfrequenz, zwei Flussspannungen Verlust. Glättung abschätzen: C ≈ I · t / ΔU — für 1 A, 10 ms und 1 V Welligkeit rund 10 000 µF. Bei Kleinspannung ist Synchrongleichrichtung mit MOSFETs deutlich effizienter.</div></div>
+</div>
+
+<h2>Materialien jenseits von Silizium</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Material</th><th data-s="num">Bandabstand</th><th>Stärke</th><th>Wo es eingesetzt wird</th></tr></thead>
+<tbody>
+<tr><td><b>Silizium (Si)</b></td><td>1,12 eV</td><td>billig, ausgereift, beliebig integrierbar</td><td>praktisch alles</td></tr>
+<tr><td><b>Germanium (Ge)</b></td><td>0,66 eV</td><td>niedrige Flussspannung (≈ 0,3 V)</td><td>historisch; heute nur noch HF-Detektoren</td></tr>
+<tr><td><b>Siliziumkarbid (SiC)</b></td><td>3,26 eV</td><td>hohe Sperrspannung und Temperatur, geringe Schaltverluste</td><td>Wechselrichter, Ladetechnik, Traktion ab 600 V</td></tr>
+<tr><td><b>Galliumnitrid (GaN)</b></td><td>3,4 eV</td><td>extrem schnelles Schalten, sehr kleine Bauform</td><td>kompakte Netzteile, Wandler bis wenige hundert Volt</td></tr>
+<tr><td><b>Galliumarsenid (GaAs)</b></td><td>1,42 eV</td><td>hohe Elektronenbeweglichkeit, direkte Bandlücke</td><td>HF-Verstärker, Laserdioden, LEDs</td></tr>
+</tbody>
+</table></div>
+<p class="note">SiC und GaN sind der Grund, warum ein 65-W-Notebooknetzteil in eine Streichholzschachtel passt: höhere Schaltfrequenz bedeutet kleinere Magnetik, und erst die geringeren Schaltverluste erlauben diese Frequenz. Der Preis ist ein anspruchsvolleres Layout — steile Flanken erzeugen mehr Störungen, siehe <a href="#emv">EMV</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Sedra &amp; Smith, <i>Microelectronic Circuits</i>, Kapitel Semiconductors und pn Junctions.</li>
+    <li>Tietze/Schenk/Gamm, <i>Halbleiter-Schaltungstechnik</i>, Kapitel Halbleiterbauelemente.</li>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 1.6 (Dioden) und Kapitel 9 (Spannungsversorgung).</li>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/an/slyt183/slyt183.pdf">Understanding the terms and definitions of the bandgap reference</a>.</li>
+    <li>Littelfuse, <a href="https://www.littelfuse.com/products/tvs-diodes">TVS Diode Application Guides</a> — Auslegung gegen ESD und Surge nach IEC 61000-4-2 und -4-5.</li>
+    <li>Datenblätter 1N4148, 1N400x, 1N5819, SS34, BAT54, SMBJ-Reihe; Application Notes von Infineon und Wolfspeed zu SiC und GaN.</li>
+  </ul>
+</div>

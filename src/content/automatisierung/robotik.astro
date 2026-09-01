@@ -1,0 +1,116 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Roboter ist eine Kette starrer Glieder, verbunden durch angetriebene Gelenke.</b> Die ganze Kinematik beantwortet zwei Fragen: Wo ist die Werkzeugspitze, wenn die Gelenke so stehen? Und wie müssen die Gelenke stehen, damit die Spitze dort ist? Die erste Frage ist Rechnen, die zweite ist das eigentliche Problem.</div>
+
+<h2>Aufbau und Bauformen</h2>
+<ul>
+  <li><b>Link und Joint:</b> starre Glieder, verbunden durch drehende (revolute) oder schiebende (prismatic) Gelenke. Genau diese Struktur beschreibt später die URDF-Datei — siehe <a href="#ros">ROS 2</a>.</li>
+  <li><b>Freiheitsgrade (DOF):</b> Zahl der unabhängigen Bewegungsmöglichkeiten, meist ein Antrieb = 1 DOF. <b>6 DOF</b> sind nötig, um jede Position <i>und</i> Orientierung im Raum zu erreichen; 7 DOF sind redundant und erlauben Ausweichbewegungen bei gleicher Pose.</li>
+  <li><b>TCP (Tool Center Point):</b> der Punkt am Endeffektor, dessen Pose gesteuert wird. Ziele gibt man für den TCP an, nicht für einzelne Gelenke.</li>
+  <li><b>Arbeitsraum:</b> alles, was der TCP erreichen kann — begrenzt durch Gliedlängen und Gelenkgrenzen. Außerhalb gibt es keine Lösung, egal wie man rechnet.</li>
+  <li><b>Nutzlast gilt am Flansch:</b> Greifer und Werkzeug zählen mit, und das Lastmoment wächst mit dem Abstand vom Flansch.</li>
+</ul>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Bauform</th><th>Kinematik</th><th>Stärke</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Knickarm (6R)</b></td><td>seriell, sechs Drehgelenke</td><td>Größter Arbeitsraum je Stellfläche, volle Orientierungsfreiheit</td><td>Schweißen, Handhabung, Montage — der klassische Industrieroboter</td></tr>
+<tr><td><b>SCARA</b></td><td>seriell, 2–3 Drehachsen plus Hubachse</td><td>Sehr schnell und steif in der Ebene</td><td>Bestücken, Fügen von oben</td></tr>
+<tr><td><b>Delta / Parallelkinematik</b></td><td>parallel, drei Arme an gemeinsamer Plattform</td><td>Extrem schnell, geringe bewegte Masse</td><td>Pick-and-Place in der Lebensmittel- und Verpackungstechnik</td></tr>
+<tr><td><b>Kartesisch / Portal</b></td><td>drei Linearachsen</td><td>Einfache Kinematik, beliebig skalierbar, große Lasten</td><td>Palettieren, CNC, 3D-Druck</td></tr>
+<tr><td><b>Cobot</b></td><td>meist 6R, kraft- und momentenüberwacht</td><td>Arbeit ohne trennende Schutzeinrichtung möglich</td><td>Kleinserien — die Zulässigkeit folgt aus der Risikobeurteilung nach ISO/TS 15066, nicht aus dem Typenschild</td></tr>
+<tr><td><b>Mobiler Roboter / AMR</b></td><td>Fahrwerk, oft differentiell</td><td>Ortsveränderlich, Navigation statt Kinematikkette</td><td>Transport, Inspektion, Hobby-Rover</td></tr>
+</tbody>
+</table></div>
+
+<h2>Pose, Frames und Orientierung</h2>
+<div class="fbox">
+  <span class="f">Pose = Position (3 Werte) + Orientierung (3 Werte) = 6 Freiheitsgrade</span>
+  <span class="l">Als homogene 4×4-Transformationsmatrix zusammengefasst: oben links die 3×3-Rotationsmatrix, rechts der Translationsvektor. Verkettung von Frames wird damit zur Matrixmultiplikation.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Darstellung</th><th>Werte</th><th>Vorteil</th><th>Nachteil</th></tr></thead>
+<tbody>
+<tr><td><b>Euler-Winkel (Roll, Pitch, Yaw)</b></td><td>3</td><td>Anschaulich, gut für Anzeige und Handeingabe</td><td><b>Gimbal Lock</b>: bei bestimmten Stellungen fallen zwei Achsen zusammen; außerdem existieren 12 verschiedene Konventionen</td></tr>
+<tr><td><b>Quaternion</b></td><td>4 (x, y, z, w)</td><td>Singularitätsfrei, numerisch stabil, gut interpolierbar (SLERP)</td><td>Unanschaulich; q und −q beschreiben dieselbe Drehung</td></tr>
+<tr><td><b>Rotationsmatrix</b></td><td>9</td><td>Direkt anwendbar auf Vektoren</td><td>Redundant, driftet numerisch (muss reorthonormalisiert werden)</td></tr>
+<tr><td><b>Achse-Winkel / Rotationsvektor</b></td><td>3–4</td><td>Kompakt, physikalisch intuitiv</td><td>Bei kleinen Winkeln schlecht konditioniert</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Frames:</b> Basis, jedes Gelenk, Kamera, Werkzeug — jedes Teil hat sein eigenes Koordinatensystem. Messungen zu vergleichen heißt, zwischen Frames umzurechnen; ROS 2 erledigt das mit TF2. Fehler in der Frame-Kette sind die häufigste Ursache dafür, dass ein Roboter in der Visualisierung verbogen aussieht.</p>
+
+<h2>Vorwärts- und Rückwärtskinematik</h2>
+<svg class="dg m" viewBox="0 0 420 200" role="img" aria-label="Zweigliedriger ebener Arm mit Gliedlängen l1 und l2 sowie den Gelenkwinkeln theta1 und theta2">
+  <path class="wt" d="M40,172 H120" />
+  <rect class="box" x="58" y="160" width="24" height="12" rx="2" />
+  <path class="w" d="M70,160 L210,80" />
+  <path class="w" d="M210,80 L340,120" />
+  <path class="gd" d="M210,80 L276,42" />
+  <path class="gd" d="M70,160 H150" />
+  <path class="acc" d="M110,160 A40,40 0 0 0 104.7,140.2" />
+  <path class="acc" d="M240,63 A35,35 0 0 1 243,90" />
+  <circle class="accs" cx="70" cy="160" r="6" />
+  <circle class="accs" cx="210" cy="80" r="6" />
+  <circle class="accf" cx="340" cy="120" r="5" />
+  <text class="lbla" x="116" y="150">θ₁</text>
+  <text class="lbla" x="252" y="80">θ₂</text>
+  <text class="lblb" x="126" y="108">l₁</text>
+  <text class="lblb" x="272" y="88">l₂</text>
+  <text class="lbl" x="350" y="118">TCP (x, y)</text>
+  <text class="lbl" x="40" y="192">Basis-Frame</text>
+</svg>
+<div class="flist">
+  <div class="frow hd"><span>Richtung</span><span>Formel (ebener 2R-Arm)</span><span>Eigenschaft</span></div>
+  <div class="frow"><span class="fn">Vorwärts (FK)</span><span class="fe">x = l₁·cos θ₁ + l₂·cos(θ₁+θ₂)<br />y = l₁·sin θ₁ + l₂·sin(θ₁+θ₂)</span><span class="fx"><b>Immer genau eine Lösung.</b> Reines Einsetzen — braucht man, um aus Encoderwerten die aktuelle TCP-Lage anzuzeigen</span></div>
+  <div class="frow"><span class="fn">Rückwärts (IK)</span><span class="fe">cos θ₂ = (x² + y² − l₁² − l₂²) / (2·l₁·l₂)<br />θ₁ = atan2(y, x) − atan2(l₂·sin θ₂, l₁ + l₂·cos θ₂)</span><span class="fx"><b>Zwei Lösungen</b> (Ellbogen oben/unten) über das Vorzeichen von θ₂ — oder <b>keine</b>, wenn das Ziel außerhalb des Arbeitsraums liegt</span></div>
+</div>
+<div class="tip"><b>Warum die IK das schwierige Ende ist:</b> Sie ist nichtlinear, mehrdeutig und nicht immer lösbar. Ein 6-Achs-Arm mit <b>zentralem Handgelenk</b> (die letzten drei Achsen schneiden sich in einem Punkt) erfüllt das Pieper-Kriterium und lässt sich geschlossen lösen — typisch mit bis zu acht Lösungen (Schulter × Ellbogen × Handgelenk). Ohne diese Eigenschaft bleibt nur eine numerische Lösung.</div>
+
+<h2>DH-Parameter</h2>
+<p>Die Denavit-Hartenberg-Konvention beschreibt jedes Gliedpaar mit vier Zahlen statt mit einer vollen Matrix — dadurch ist eine beliebig lange Kette durch eine kompakte Tabelle festgelegt.</p>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Parameter</th><th>Bedeutung</th><th>Gemessen</th><th>Variabel bei</th></tr></thead>
+<tbody>
+<tr><td><b>θᵢ</b> — Gelenkwinkel</td><td>Drehung um z<sub>i−1</sub></td><td>von x<sub>i−1</sub> nach x<sub>i</sub></td><td><b>Drehgelenk</b></td></tr>
+<tr><td><b>dᵢ</b> — Gliedversatz</td><td>Verschiebung entlang z<sub>i−1</sub></td><td>von x<sub>i−1</sub> nach x<sub>i</sub></td><td><b>Schubgelenk</b></td></tr>
+<tr><td><b>aᵢ</b> — Gliedlänge</td><td>Verschiebung entlang x<sub>i</sub></td><td>von z<sub>i−1</sub> nach z<sub>i</sub></td><td>fest (Konstruktionsmaß)</td></tr>
+<tr><td><b>αᵢ</b> — Gliedverwindung</td><td>Drehung um x<sub>i</sub></td><td>von z<sub>i−1</sub> nach z<sub>i</sub></td><td>fest (Konstruktionsmaß)</td></tr>
+</tbody>
+</table></div>
+<div class="fbox">
+  <span class="f">ᶦ⁻¹Tᵢ = Rot<sub>z</sub>(θᵢ) · Trans<sub>z</sub>(dᵢ) · Trans<sub>x</sub>(aᵢ) · Rot<sub>x</sub>(αᵢ)</span>
+  <span class="l">Vorwärtskinematik = Produkt aller Gliedmatrizen: ⁰T<sub>n</sub> = ⁰T₁ · ¹T₂ · … · ⁿ⁻¹T<sub>n</sub>. Achtung: Neben dieser klassischen Konvention existiert die <i>modifizierte</i> DH-Notation (Craig) mit anderer Reihenfolge — Parametertabellen sind zwischen beiden nicht austauschbar.</span>
+</div>
+
+<h2>Jacobi-Matrix, Singularitäten, Bahnplanung</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Jacobi-Matrix J(q)</div><div class="cd">Bildet Gelenkgeschwindigkeiten auf die TCP-Geschwindigkeit ab: <span class="formula">v = J(q) · q̇</span>. Umgekehrt liefert sie über die Pseudoinverse den numerischen Weg zur IK (Damped Least Squares, Levenberg-Marquardt) — genau das tun KDL, TRAC-IK und IKFast.</div></div>
+  <div class="card"><div class="ct">Singularität</div><div class="cd">Stellung, in der J den Rang verliert (det J = 0): der Arm büßt kurzzeitig einen Freiheitsgrad ein. Praktisch äußert sich das als plötzliches, sehr schnelles Zucken einzelner Gelenke. Typisch: gestreckter Arm, fluchtende Handgelenkachsen, Achse über der Basis.</div></div>
+  <div class="card"><div class="ct">Konfigurationsraum (C-Space)</div><div class="cd">Raum aller Gelenkstellungen — ein 6-Achs-Arm hat einen 6-dimensionalen C-Space. Bahnplaner (RRT*, PRM) suchen darin einen kollisionsfreien Weg; Hindernisse im Arbeitsraum werden zu Sperrgebieten im C-Space.</div></div>
+  <div class="card"><div class="ct">Pfad ≠ Bahn</div><div class="cd">Ein <b>Pfad</b> ist die reine Geometrie (welche Punkte), eine <b>Bahn</b> (Trajektorie) hat zusätzlich das Timing. Übliche Profile: Trapez (begrenzte Geschwindigkeit und Beschleunigung) und S-Kurve (zusätzlich begrenzter Ruck) — Letztere schont Mechanik und vermeidet Nachschwingen.</div></div>
+</div>
+<div class="warn"><b>Bewegungsarten nicht verwechseln:</b> Eine <b>Gelenkbewegung</b> (PTP) interpoliert im Gelenkraum — schnell, aber der TCP fährt eine unvorhersehbare Bahn im Raum. Eine <b>Linearbewegung</b> (LIN) interpoliert im kartesischen Raum — vorhersehbar, kann aber in Singularitäten oder an Gelenkgrenzen scheitern. Für die Anfahrt zum Werkstück PTP, für den Bearbeitungsweg LIN.</div>
+
+<h2>Wahrnehmung und Navigation</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Begriff</th><th>Was es leistet</th><th>Grenze</th></tr></thead>
+<tbody>
+<tr><td><b>Odometrie</b></td><td>Eigenposition aus Bewegungsdaten schätzen — Raddrehung, Beinschritt, visuell</td><td><b>Driftet</b>: kleine Fehler summieren sich auf (Schlupf, Reifendurchmesser). Allein nie ausreichend</td></tr>
+<tr><td><b>Lokalisierung</b></td><td>„Wo bin ich?“ in einer <b>bekannten</b> Karte, per Abgleich der Sensordaten gegen die Karte</td><td>Braucht unterscheidbare Merkmale — ein leerer, symmetrischer Flur ist der Härtefall</td></tr>
+<tr><td><b>SLAM</b></td><td>Karte bauen und sich gleichzeitig darin lokalisieren. Loop Closure korrigiert die Karte, sobald ein bekannter Ort wiedererkannt wird</td><td>Rechenaufwendig; bewegte Umgebungen und Glasflächen stören erheblich</td></tr>
+<tr><td><b>Sensorfusion</b></td><td>Mehrere Sensoren kombinieren: Radodometrie (kurzfristig genau) + IMU (gut bei Drehung) + Lidar/GNSS (langfristig driftfrei)</td><td>Standardwerkzeug ist der Kalman-Filter bzw. EKF — er braucht realistische Rauschmodelle, sonst wird er überheblich</td></tr>
+<tr><td><b>Sense–Plan–Act</b></td><td>Die Grundschleife: wahrnehmen, entscheiden, handeln — im Code eine Schleife mit fester Frequenz</td><td>Streng sequenziell wird sie träge; reaktive Anteile laufen deshalb in einer schnelleren Schleife darunter</td></tr>
+</tbody>
+</table></div>
+<p class="note">Regelkreis, PID, Feedforward und feldorientierte Regelung sind bewusst nicht hier beschrieben — sie gelten für jede Achse gleich und stehen unter <a href="regelung-antriebe.html#pid">Regelung, Sensorik &amp; Antriebe</a>. Die Robotik setzt darauf auf: Der Bahnplaner erzeugt Sollwerte, die unterlagerte Achsregelung führt sie aus.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Lynch &amp; Park, <i>Modern Robotics: Mechanics, Planning, and Control</i>, Cambridge University Press — frei als PDF, mit begleitender Vorlesungsreihe.</li>
+    <li>Siciliano, Sciavicco, Villani &amp; Oriolo, <i>Robotics: Modelling, Planning and Control</i>, Springer.</li>
+    <li>Craig, <i>Introduction to Robotics: Mechanics and Control</i> — Ursprung der modifizierten DH-Konvention.</li>
+    <li>Denavit &amp; Hartenberg (1955), <i>A kinematic notation for lower-pair mechanisms based on matrices</i>.</li>
+    <li>ISO 8373 (Begriffe der Robotik), ISO 10218-1/-2 und ISO/TS 15066 (kollaborierende Anwendungen).</li>
+  </ul>
+</div>

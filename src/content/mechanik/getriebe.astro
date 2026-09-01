@@ -1,0 +1,137 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Getriebe tauscht Drehzahl gegen Drehmoment — und reduziert die vom Motor gesehene Lastträgheit quadratisch.</b> Der zweite Effekt wird oft übersehen und ist bei dynamischen Achsen der wichtigere. Bei linearen Antrieben entscheidet die Wahl zwischen Riemen und Spindel darüber, wie steif die Achse regelbar ist.</div>
+
+<h2>Zahnradgeometrie</h2>
+<div class="fbox">
+  <span class="f">d = m · z&nbsp;&nbsp;&nbsp;&nbsp;a = m · (z₁ + z₂) / 2&nbsp;&nbsp;&nbsp;&nbsp;i = z₂ / z₁</span>
+  <span class="l">m Modul in mm, z Zähnezahl, d Teilkreisdurchmesser, a Achsabstand. Zwei Zahnräder kämmen nur bei gleichem Modul und gleichem Eingriffswinkel (Standard 20°).</span>
+</div>
+<p>Der Modul ist die genormte Größenangabe: Modul 1 heißt, die Teilung auf dem Teilkreis — Zahn plus Lücke — beträgt π ≈ 3,14 mm. Genormte Reihe nach DIN 780: 0,5 · 0,6 · 0,8 · <b>1</b> · 1,25 · 1,5 · 2 · 2,5 · 3 · 4 · 5 · 6 · 8 · 10.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th data-s="text">Größe</th><th>Formel</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td>Kopfkreisdurchmesser</td><td>d_a = m · (z + 2)</td><td>Der Außendurchmesser, den man messen kann</td></tr>
+<tr><td>Fußkreisdurchmesser</td><td>d_f = m · (z − 2,5)</td><td>Bei Standardverzahnung</td></tr>
+<tr><td>Zahnhöhe</td><td>h = 2,25 · m</td><td>—</td></tr>
+<tr><td>Teilung</td><td>p = π · m</td><td>Zahn plus Lücke auf dem Teilkreis</td></tr>
+<tr><td>Zahnbreite</td><td>b ≈ (6 … 12) · m</td><td>Breiter trägt mehr, verlangt aber bessere Ausrichtung</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Modul eines vorhandenen Zahnrads bestimmen:</b> Zähne zählen, Außendurchmesser messen, dann <span class="formula">m = d_a / (z + 2)</span>. Kommt eine krumme Zahl heraus, ist es vermutlich eine Zollverzahnung (Diametral Pitch): dort gilt <span class="formula">m = 25,4 / DP</span>.</div>
+
+<h2>Zähnezahl, Unterschnitt, Profilverschiebung</h2>
+<p>Unter 17 Zähnen tritt bei Standardverzahnung mit 20° Eingriffswinkel <b>Unterschnitt</b> auf — das Werkzeug schneidet den Zahnfuß an und schwächt ihn.</p>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th data-s="num">Zähnezahl</th><th>Beurteilung</th></tr></thead>
+<tbody>
+<tr><td>≥ 17</td><td>Unbedenklich bei Standardverzahnung</td></tr>
+<tr><td>14 – 16</td><td>Leichter Unterschnitt, mit Profilverschiebung (x &gt; 0) beherrschbar</td></tr>
+<tr><td>10 – 13</td><td>Nur mit deutlicher Profilverschiebung; Tragfähigkeit prüfen</td></tr>
+<tr><td>&lt; 10</td><td>Sonderverzahnung nötig</td></tr>
+</tbody>
+</table></div>
+<p>Profilverschiebung heißt, das Werkzeug beim Wälzfräsen radial zu versetzen. Das vermeidet Unterschnitt, verändert aber den Achsabstand — und erlaubt es umgekehrt, ein Zahnradpaar auf einen vorgegebenen Achsabstand anzupassen.</p>
+
+<h2>Getriebebauarten</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Bauart</th><th data-s="num">i je Stufe</th><th data-s="num">Wirkungsgrad</th><th data-s="num">Spiel</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Stirnradgetriebe</b></td><td>1 : 1 … 1 : 8</td><td>96 – 98 %</td><td>mittel</td><td>Einfach und robust; Geradverzahnung ist laut, Schrägverzahnung leiser, erzeugt aber Axialkraft</td></tr>
+<tr><td><b>Planetengetriebe</b></td><td>1 : 3 … 1 : 10</td><td>90 – 97 %</td><td>gering</td><td>Koaxial, kompakt, hohe Momentdichte — der Standard an Servomotoren</td></tr>
+<tr><td><b>Schneckengetriebe</b></td><td>1 : 5 … 1 : 100</td><td>40 – 90 %</td><td>gering</td><td>Sehr große Untersetzung in einer Stufe, oft selbsthemmend; Wirkungsgrad fällt stark mit der Untersetzung</td></tr>
+<tr><td><b>Kegelradgetriebe</b></td><td>1 : 1 … 1 : 6</td><td>94 – 98 %</td><td>mittel</td><td>Winkelumlenkung, meist 90°; Spiralverzahnung läuft ruhiger als Geradverzahnung</td></tr>
+<tr><td><b>Wellgetriebe</b> (Harmonic Drive)</td><td>1 : 30 … 1 : 320</td><td>70 – 90 %</td><td>praktisch spielfrei</td><td>In Robotergelenken; teuer, begrenzte Torsionssteifigkeit bei kleinen Momenten</td></tr>
+<tr><td><b>Zykloidgetriebe</b></td><td>1 : 10 … 1 : 200</td><td>85 – 93 %</td><td>gering</td><td>Sehr stoßfest, hohe Momentdichte, baut größer als ein Wellgetriebe</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Wirkungsgrade multiplizieren sich, Spiel addiert sich.</b> Drei Stufen mit je 95 % ergeben zusammen 86 %. Beim Spiel ist es umgekehrt: Spiel in einer frühen Stufe wird durch die nachfolgende Untersetzung geteilt und wirkt sich am Abtrieb kaum aus — Spiel in der <b>letzten</b> Stufe geht voll in die Positioniergenauigkeit ein. Wer ein Getriebe optimieren will, fängt hinten an.</div>
+<div class="tip"><b>Trägheitsreduktion nicht vergessen:</b> Eine Untersetzung i reduziert die vom Motor gesehene Lastträgheit um i² — bei i = 10 also um Faktor 100. Genau deshalb bekommen Servoachsen ein Getriebe, auch wenn das Moment ohne reichen würde: erst dadurch wird die Achse sauber regelbar. Zahlen und Zielverhältnis unter <a href="#dynamik">Kinematik, Dynamik &amp; Schwingungen</a>.</div>
+
+<h2>Spiel vermeiden</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Vorgespannte Doppelzahnräder</div><div class="cd">Zwei gegeneinander verdrehte Zahnradhälften mit Feder dazwischen. Nimmt das Spiel vollständig heraus, erhöht aber Reibung und Verschleiß. Verbreitet in Rundachsen von Werkzeugmaschinen.</div></div>
+  <div class="card"><div class="ct">Achsabstand verringern</div><div class="cd">Das Zahnrad enger setzen reduziert das Flankenspiel. Zu eng heißt Klemmen bei Wärme und Schmutz — hier gibt es wenig Reserve.</div></div>
+  <div class="card"><div class="ct">Elektronisch vorspannen</div><div class="cd">Zwei Motoren gegeneinander arbeiten lassen (Master-Slave mit Vorspannmoment). Aufwendig, aber vollständig spielfrei und verschleißarm.</div></div>
+  <div class="card"><div class="ct">Bauart wechseln</div><div class="cd">Wellgetriebe und Zykloidgetriebe sind konstruktiv nahezu spielfrei — meist die einfachste Lösung, wenn das Budget es hergibt.</div></div>
+</div>
+
+<h2>Lineare Antriebe im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Antrieb</th><th data-s="num">Geschwindigkeit</th><th data-s="num">Steifigkeit</th><th data-s="num">Wirkungsgrad</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Zahnriemen</b> (GT2, GT3, HTD, AT)</td><td>sehr hoch</td><td>gering–mittel</td><td>95 – 98 %</td><td>Schnell, leise, günstig. Die Riemendehnung begrenzt Positioniersteifigkeit und Reglerbandbreite.</td></tr>
+<tr><td><b>Keilriemen / Flachriemen</b></td><td>hoch</td><td>gering</td><td>92 – 96 %</td><td>Reibschlüssig, also Schlupf möglich. Für Drehzahlübertragung, nicht für Positionierung.</td></tr>
+<tr><td><b>Kette</b> (Rollenkette)</td><td>mittel</td><td>mittel</td><td>95 – 98 %</td><td>Hohe Last, unempfindlich gegen Hitze und Schmutz. Braucht Schmierung, längt sich, Polygoneffekt bei kleinen Rädern.</td></tr>
+<tr><td><b>Trapezgewindespindel</b></td><td>niedrig</td><td>hoch</td><td>25 – 50 %</td><td>Meist selbsthemmend — hält die Z-Achse ohne Strom. Wirkungsgrad und Verschleiß sind die Nachteile.</td></tr>
+<tr><td><b>Kugelgewindetrieb</b></td><td>mittel</td><td>sehr hoch</td><td>90 – 95 %</td><td>Präzise, spielfrei vorspannbar, langlebig. Nicht selbsthemmend — senkrechte Achsen brauchen eine Bremse.</td></tr>
+<tr><td><b>Zahnstange &amp; Ritzel</b></td><td>hoch</td><td>hoch</td><td>90 – 97 %</td><td>Beliebig lange Achsen ohne Steifigkeitsverlust. Spiel nur mit vorgespanntem Doppelritzel im Griff.</td></tr>
+<tr><td><b>Linearmotor</b></td><td>sehr hoch</td><td>—</td><td>—</td><td>Kein mechanisches Zwischenglied, kein Spiel, höchste Dynamik. Teuer, braucht Kühlung, hält bei Stromausfall nicht.</td></tr>
+</tbody>
+</table></div>
+
+<h2>Zahnriemen und Spindeln</h2>
+<div class="grid2">
+  <div>
+    <div class="tbl-wrap"><table style="min-width:280px">
+    <thead><tr><th data-s="text">Riemenprofil</th><th data-s="num">Teilung</th><th>Einsatz</th></tr></thead>
+    <tbody>
+    <tr><td><b>GT2 / 2GT</b></td><td>2 mm</td><td>3D-Drucker, leichte Positionierachsen; sehr geringes Spiel im Eingriff</td></tr>
+    <tr><td><b>GT3 / 3GT</b></td><td>3 mm</td><td>wie GT2, höhere Last</td></tr>
+    <tr><td><b>HTD 5M / 8M</b></td><td>5 / 8 mm</td><td>Leistungsübertragung, CNC-Achsen</td></tr>
+    <tr><td><b>AT5 / AT10</b></td><td>5 / 10 mm</td><td>Positionierantriebe mit hoher Steifigkeitsanforderung</td></tr>
+    <tr><td><b>T5 / T10</b></td><td>5 / 10 mm</td><td>Ältere Norm, mehr Spiel als AT</td></tr>
+    <tr><td><b>MXL / XL</b></td><td>2,032 / 5,08 mm</td><td>Zollprofile, Ersatzteilbedarf an älteren Geräten</td></tr>
+    </tbody>
+    </table></div>
+  </div>
+  <div>
+    <div class="tbl-wrap"><table style="min-width:280px">
+    <thead><tr><th data-s="text">Spindel</th><th data-s="num">Ø × Steigung</th><th data-s="num">Vorschub bei 1500 min⁻¹</th></tr></thead>
+    <tbody>
+    <tr><td>1204</td><td>12 × 4 mm</td><td>6 000 mm/min</td></tr>
+    <tr><td>1605</td><td>16 × 5 mm</td><td>7 500 mm/min</td></tr>
+    <tr><td>1610</td><td>16 × 10 mm</td><td>15 000 mm/min</td></tr>
+    <tr><td>2005</td><td>20 × 5 mm</td><td>7 500 mm/min</td></tr>
+    <tr><td>2510</td><td>25 × 10 mm</td><td>15 000 mm/min</td></tr>
+    </tbody>
+    </table></div>
+    <div class="note">Die Bezeichnung <b>1605</b> heißt: 16 mm Nenndurchmesser, 5 mm Steigung — und damit 5 mm Vorschub je Umdrehung.</div>
+  </div>
+</div>
+<div class="tip"><b>Riemenspannung richtig einstellen:</b> Zu locker heißt Zahnüberspringen und Spiel, zu straff heißt Lagerbelastung und Riemenverschleiß. Praktisch prüft man über die Eigenfrequenz des freien Trums — anzupfen und mit einer Frequenz-App messen. Die Sollfrequenz je Profil, Breite und freier Länge gibt der Riemenhersteller an.</div>
+<div class="warn"><b>Die kritische Drehzahl begrenzt lange Spindeln.</b> Eine Spindel Ø 16 mm mit 1000 mm freier Länge wird ab wenigen hundert Umdrehungen pro Minute instabil und peitscht — unabhängig davon, wie stark der Motor ist. Abhilfe: größerer Durchmesser, kürzere freie Länge, beidseitig feste Lagerung oder ein Antrieb mit rotierender Mutter bei stillstehender Spindel. Die Rechnung dazu unter <a href="#dynamik">Kinematik, Dynamik &amp; Schwingungen</a>.</div>
+
+<h2>Riemen oder Spindel?</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Riemen nehmen, wenn …</h4>
+    <ul>
+      <li>lange Wege schnell zurückgelegt werden sollen</li>
+      <li>Positioniergenauigkeit im Zehntelmillimeterbereich reicht</li>
+      <li>geringe bewegte Masse wichtig ist</li>
+      <li>es leise und wartungsarm sein soll</li>
+      <li>das Budget begrenzt ist</li>
+    </ul>
+  </div>
+  <div class="gb-col"><h4>Spindel nehmen, wenn …</h4>
+    <ul>
+      <li>Prozesskräfte auftreten (Fräsen, Pressen, Bohren)</li>
+      <li>Wiederholgenauigkeit im Hundertstelbereich gefordert ist</li>
+      <li>eine senkrechte Achse gehalten werden muss</li>
+      <li>die Achse steif genug für einen straffen Regelkreis sein soll</li>
+      <li>die Wege kurz sind (unter etwa 800 mm)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN 780 (Modulreihe), DIN 867 (Bezugsprofil für Evolventenverzahnung), DIN 3990 / ISO 6336 (Tragfähigkeit von Stirnrädern).</li>
+    <li>Gerhard Niemann, Hans Winter, <i>Maschinenelemente Band 2: Getriebe allgemein, Zahnradgetriebe</i>, Springer — das Standardwerk.</li>
+    <li><a href="https://www.khkgears.co.jp/en/gear_technology/">KHK Gear Technical Reference</a> — frei zugängliche, praxisnahe Einführung in Verzahnungsgeometrie und Profilverschiebung.</li>
+    <li>DIN ISO 5296 / DIN 7721 (Synchronriemen) und DIN ISO 3408 (Kugelgewindetriebe: Steigungen, Genauigkeitsklassen, kritische Drehzahl).</li>
+    <li><a href="https://www.gates.com/de/de/power-transmission">Gates — Antriebsriemen</a>, <a href="https://www.contitech.de/">ContiTech Synchroflex</a> und <a href="https://www.hiwin.de/de/Produkte/Kugelgewindetriebe">HIWIN Kugelgewindetriebe</a>: Sollspannungen, Leistungsdiagramme, Tragzahlen und Knicklast.</li>
+  </ul>
+</div>

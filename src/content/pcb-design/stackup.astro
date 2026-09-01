@@ -45,7 +45,7 @@ import "./_style.css";
 <tr><td><b>Polyimid (flexibel)</b></td><td>3,4</td><td>0,004</td><td>—</td><td>Flexleiterplatten, Starrflex-Verbindungen</td></tr>
 </tbody>
 </table></div>
-<p class="note"><b>ε_r von FR4 ist nicht konstant:</b> Es sinkt mit steigender Frequenz und schwankt je nach Glasgewebe und Harzanteil. Für Impedanzberechnungen bis etwa 1 GHz genügt 4,4 als Näherung; darüber sollte man den Fertiger nach seinem konkreten Aufbau fragen — er kann eine <b>Impedanzkontrolle</b> anbieten und liefert dann die passenden Leiterbahnbreiten.</p>
+<p class="note"><b>ε_r von FR4 ist nicht konstant</b> — es sinkt mit der Frequenz und schwankt mit Gewebe und Harzanteil. Bis etwa 1 GHz genügt 4,4 als Näherung; darüber Impedanzkontrolle beim Fertiger bestellen, der die passenden Bahnbreiten für seinen Aufbau liefert.</p>
 
 <h2>Kupferdicke</h2>
 <div class="tbl-wrap"><table style="min-width:820px">
@@ -57,13 +57,13 @@ import "./_style.css";
 <tr><td><b>3–6 oz</b></td><td>105–210 µm</td><td>Wechselrichter, Batteriemanagement</td><td>≈ 0,3 mm und mehr</td></tr>
 </tbody>
 </table></div>
-<p class="note">Dickeres Kupfer bedeutet auch größere minimale Abstände, weil beim Ätzen die Flanken unterschnitten werden. Wer nur an wenigen Stellen hohe Ströme führt, fährt oft besser mit Standardkupfer plus verbreiterten Bahnen, aufgelöteter Kupferschiene oder freigelegten und verzinnten Leiterbahnen.</p>
+<p class="note">Dickeres Kupfer erzwingt größere Mindestabstände (Ätz-Unterschneidung). Für punktuell hohe Ströme meist besser: Standardkupfer plus breite Bahnen, Kupferschiene oder verzinnte freigelegte Bahnen — siehe <a href="#leiterbahn">Leiterbahnbreite</a>.</p>
 
 <h2>Durchkontaktierungen</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th>Typ</th><th>Verbindet</th><th>Kosten</th><th>Anmerkung</th></tr></thead>
 <tbody>
-<tr><td><b>Durchgehendes Via</b></td><td>alle Lagen</td><td>Standard</td><td>Der Normalfall. Typisch 0,3 mm Bohrung, 0,6 mm Restring</td></tr>
+<tr><td><b>Durchgehendes Via</b></td><td>alle Lagen</td><td>Standard</td><td>Der Normalfall. Typisch 0,3 mm Bohrung, 0,6 mm Pad (≈ 0,15 mm Restring)</td></tr>
 <tr><td><b>Blind Via</b></td><td>Außenlage zu einer Innenlage</td><td>deutlich höher</td><td>Nur bei HDI-Entwürfen nötig</td></tr>
 <tr><td><b>Buried Via</b></td><td>zwei Innenlagen</td><td>hoch</td><td>Erfordert sequentielle Fertigung</td></tr>
 <tr><td><b>Micro Via</b></td><td>benachbarte Lagen, lasergebohrt</td><td>hoch</td><td>Ab 0,1 mm; für feine BGA-Raster</td></tr>

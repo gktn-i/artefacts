@@ -1,0 +1,134 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Modell muss nicht richtig sein, sondern nützlich.</b> Für den Reglerentwurf genügen fast immer drei Parameter — Verstärkung, Zeitkonstante, Totzeit — aus einem einzigen Sprungversuch. Die Laplace-Transformation macht daraus Algebra: aus der Differentialgleichung wird die Übertragungsfunktion.</div>
+
+<h2>Zwei Wege zum Modell</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Theoretisch (weiße Box)</h4>
+    <ul><li><b>Weg:</b> Kräfte-, Energie-, Maschenbilanz → Differentialgleichung mit interpretierbaren Parametern</li><li><b>Stärke:</b> Aussagen vor dem Bau möglich</li><li><b>Schwäche:</b> Reibung, Spiel und Nichtlinearitäten fehlen meist</li></ul>
+  </div>
+  <div class="gb-col"><h4>Experimentell (schwarze Box)</h4>
+    <ul><li><b>Weg:</b> Sprungantwort messen, Parameter ablesen</li><li><b>Stärke:</b> schneller und meist genauer — beschreibt das reale System</li><li><b>Schwäche:</b> gilt nur um den gemessenen Arbeitspunkt</li></ul>
+  </div>
+</div>
+<p class="note">In der Praxis mischt man beides („graue Box“): Struktur aus der Physik, Zahlenwerte aus der Messung — fast immer der schnellste Weg zu einem brauchbaren Regler.</p>
+
+<h2>Der Sprungversuch</h2>
+<svg class="dg l" viewBox="-10 0 620 210" role="img" aria-label="Sprungantwort mit Verzugszeit, Ausgleichszeit und Streckenverstärkung">
+  <path class="w" d="M50,20 V180 H580" />
+  <path class="gd" d="M50,46 H580" />
+  <path class="acc" d="M50,180 H130 C160,180 175,170 200,150 C240,118 280,80 340,60 C400,44 470,46 560,46" />
+  <path class="badl" d="M130,180 L300,20" style="stroke-dasharray:5 4" />
+  <path class="gd" d="M130,20 V180 M186,20 V180 M234,20 V180" />
+  <text class="lbl" x="44" y="50" text-anchor="end">K_S·Δu</text>
+  <text class="lbl" x="44" y="184" text-anchor="end">0</text>
+  <path class="acc" d="M130,196 H186" /><path class="accf" d="M130,196 l7,-4 v8 z" /><path class="accf" d="M186,196 l-7,-4 v8 z" />
+  <text class="lbla" x="158" y="208" text-anchor="middle">T_u</text>
+  <path class="midl" d="M186,196 H300" /><path class="badf" d="M186,196 l7,-4 v8 z" style="fill:var(--mid)" /><path class="badf" d="M300,196 l-7,-4 v8 z" style="fill:var(--mid)" />
+  <text class="lbl" x="243" y="208" text-anchor="middle" style="fill:var(--mid)">T_g</text>
+  <text class="lbl" x="88" y="172">Sprung bei t₀</text>
+  <text class="lbl" x="420" y="38">Beharrungswert</text>
+</svg>
+<div class="steps">
+  <div class="step"><h4>Arbeitspunkt einstellen, Sprung fahren</h4>Stellgröße sprunghaft um 10–20 % des Stellbereichs ändern — deutlich, aber unkritisch. In <b>beide</b> Richtungen messen (Heizen ist nicht Kühlen) und mindestens drei Versuche mitteln.</div>
+  <div class="step"><h4>Verstärkung ablesen</h4><span class="formula">K_S = Δy / Δu</span> im eingeschwungenen Zustand.</div>
+  <div class="step"><h4>Wendetangente anlegen</h4>Schnitt mit der Anfangslinie → <b>Verzugszeit T_u</b>; Schnitt mit dem Beharrungswert → <b>Ausgleichszeit T_g</b>.</div>
+  <div class="step"><h4>Regelbarkeit beurteilen</h4><span class="formula">T_g/T_u &gt; 10</span> gut · <span class="formula">3 … 10</span> normal · <span class="formula">&lt; 3</span> schwierig. Bei schlechtem Verhältnis hilft kein besserer Regler, sondern nur eine bessere Strecke oder Vorsteuerung.</div>
+</div>
+
+<h2>Typische Streckenarten</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Art</th><th>Verhalten</th><th>Beispiel</th><th>Reglerwahl</th></tr></thead>
+<tbody>
+<tr><td><b>P-Strecke (mit Ausgleich)</b></td><td>Neuer Beharrungswert nach Sprung</td><td>Heizung, Drehzahl bei konstanter Last</td><td>PI reicht meist</td></tr>
+<tr><td><b>I-Strecke (ohne Ausgleich)</b></td><td>Läuft nach Sprung immer weiter</td><td>Füllstand, Position bei Drehzahlvorgabe</td><td>P oder PD — I-Anteil im Regler oft schädlich</td></tr>
+<tr><td><b>Mit Totzeit</b></td><td>Reagiert erst nach Wartezeit</td><td>Förderband, Rohrleitung</td><td>Vorsichtig; ab T_t/T &gt; 0,5 Smith-Prädiktor erwägen</td></tr>
+<tr><td><b>Nichtminimalphasig</b></td><td>Läuft zuerst in die <b>falsche</b> Richtung</td><td>Kesselfüllstand, Boost-Wandler</td><td>Begrenzt die Bandbreite grundsätzlich — nicht wegregelbar</td></tr>
+<tr><td><b>Instabil</b></td><td>Läuft ohne Regelung weg</td><td>Inverses Pendel, Quadrocopter, Magnetlager</td><td>Regelung zwingend; Sicherheitsabschaltung vorsehen</td></tr>
+<tr><td><b>Nichtlinear</b></td><td>Verstärkung hängt vom Arbeitspunkt ab</td><td>Ventilkennlinie, Reibung, Sättigung</td><td>Linearisieren oder Gain Scheduling</td></tr>
+</tbody>
+</table></div>
+<div class="flist">
+  <div class="frow hd"><span>Wiederkehrendes System</span><span>Gleichung</span><span>Ergibt</span></div>
+  <div class="frow"><span class="fn">Erwärmung / RC-Glied</span><span class="fe">C·dT/dt = P − (T − T_u)/R_th</span><span class="fx">PT1 mit τ = R_th·C bzw. RC</span></div>
+  <div class="frow"><span class="fn">Antrieb, Drehzahl</span><span class="fe">J·dω/dt = M_mot − M_last − b·ω</span><span class="fx">PT1 mit τ = J/b</span></div>
+  <div class="frow"><span class="fn">Feder-Masse-Dämpfer</span><span class="fe">m·ẍ + d·ẋ + c·x = F</span><span class="fx">PT2 mit ω₀ = √(c/m), D = d/(2√(cm))</span></div>
+  <div class="frow"><span class="fn">Füllstand / Position</span><span class="fe">A·dh/dt = q_zu − q_ab</span><span class="fx">Integrator</span></div>
+</div>
+<p class="note">RLC-Kreis, gefedertes Werkzeug und Positionierantrieb gehorchen derselben Gleichung zweiter Ordnung — wer eine versteht, versteht alle. Siehe <a href="elektrotechnik.html#transient">Elektrotechnik → Schaltvorgänge</a>.</p>
+
+<h2>Laplace: Ableiten wird Multiplizieren</h2>
+<div class="flist">
+  <div class="frow hd"><span>Zeitbereich</span><span>Bildbereich</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">df/dt</span><span class="fe">s·F(s) − f(0)</span><span class="fx">Ableiten wird Multiplikation mit s</span></div>
+  <div class="frow"><span class="fn">∫f dt</span><span class="fe">F(s)/s</span><span class="fx">Integrieren wird Division durch s</span></div>
+  <div class="frow"><span class="fn">f(t − T_t)</span><span class="fe">e^(−s·T_t)·F(s)</span><span class="fx">Totzeit wird ein Exponentialfaktor</span></div>
+  <div class="frow"><span class="fn">Sprung σ(t)</span><span class="fe">1/s</span><span class="fx">Das Standard-Testsignal</span></div>
+  <div class="frow"><span class="fn">e^(−at)</span><span class="fe">1/(s + a)</span><span class="fx">Der abklingende Anteil eines PT1-Glieds</span></div>
+</div>
+<div class="fbox">
+  <span class="f">G(s) = Y(s) / U(s)</span>
+  <span class="l">Übertragungsfunktion: Ausgang durch Eingang im Bildbereich bei verschwindenden Anfangsbedingungen. Beschreibt das lineare System vollständig — dieselbe Idee wie das jω der Wechselstromrechnung, nur allgemeiner.</span>
+</div>
+<div class="grid2">
+  <div class="card"><div class="ct">Reihenschaltung</div><div class="cd">G_ges = G₁ · G₂ — <b>multiplizieren</b>. Deshalb addieren sich im Bode-Diagramm Dezibel und Phasen.</div></div>
+  <div class="card"><div class="ct">Parallelschaltung</div><div class="cd">G_ges = G₁ + G₂ — <b>addieren</b>. So setzt sich der PID aus seinen drei Anteilen zusammen.</div></div>
+  <div class="card"><div class="ct">Rückführung (negativ)</div><div class="cd"><span class="formula">G_w = G₀ / (1 + G₀)</span> mit G₀ als offenem Kreis — die wichtigste Formel der Regelungstechnik.</div></div>
+  <div class="card"><div class="ct">Störübertragung</div><div class="cd"><span class="formula">G_z = G_S / (1 + G₀)</span> — hohe Kreisverstärkung unterdrückt Störungen, gefährdet aber die Stabilität.</div></div>
+</div>
+
+<h2>Pole und Nullstellen</h2>
+<svg class="dg m" viewBox="0 0 400 240" role="img" aria-label="s-Ebene mit stabilem und instabilem Bereich, Polen und deren Bedeutung">
+  <rect class="accs" x="20" y="20" width="180" height="200" style="fill:var(--ok-bg);stroke:none" />
+  <rect class="accs" x="200" y="20" width="180" height="200" style="fill:var(--bad-bg);stroke:none" />
+  <path class="w" d="M20,120 H380 M200,20 V220" />
+  <text class="lbl" x="372" y="136">Re</text><text class="lbl" x="208" y="30">Im</text>
+  <text class="lbl" x="100" y="40" text-anchor="middle" style="fill:var(--ok)">stabil (Re &lt; 0)</text>
+  <text class="lbl" x="300" y="40" text-anchor="middle" style="fill:var(--bad)">instabil (Re &gt; 0)</text>
+  <path class="f" d="M96,116 l8,8 M104,116 l-8,8" style="stroke:var(--text);stroke-width:2" />
+  <text class="lbl" x="100" y="140" text-anchor="middle">reeller Pol</text>
+  <path class="f" d="M56,76 l8,8 M64,76 l-8,8" style="stroke:var(--text);stroke-width:2" />
+  <path class="f" d="M56,156 l8,8 M64,156 l-8,8" style="stroke:var(--text);stroke-width:2" />
+  <text class="lbl" x="60" y="70" text-anchor="middle">Polpaar</text>
+  <text class="lbl" x="60" y="182" text-anchor="middle">→ Schwingung</text>
+  <circle class="w" cx="150" cy="120" r="6" style="fill:none" />
+  <text class="lbl" x="150" y="146" text-anchor="middle">Nullstelle</text>
+  <text class="lbl" x="286" y="120" text-anchor="middle">×</text>
+  <text class="lbl" x="290" y="140" text-anchor="middle">wächst</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Pollage</th><th>Zeitverhalten</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Reell, negativ</b></td><td>Abklingende e-Funktion; je weiter links, desto schneller</td><td>PT1-Glied</td></tr>
+<tr><td><b>Konjugiert komplex, links</b></td><td>Gedämpfte Schwingung: Realteil = Abklingen, Imaginärteil = Frequenz</td><td>Schwingfähiges PT2</td></tr>
+<tr><td><b>Auf der imaginären Achse</b></td><td>Ungedämpfte Dauerschwingung</td><td>Stabilitätsgrenze</td></tr>
+<tr><td><b>Im Ursprung</b></td><td>Integrierendes Verhalten</td><td>I-Glied, Position aus Drehzahl</td></tr>
+<tr><td><b>Rechte Halbebene</b></td><td>Aufklingend — instabil</td><td>Inverses Pendel ohne Regelung</td></tr>
+<tr><td><b>Nullstelle rechts</b></td><td>Nichtminimalphasig: erst falsche Richtung</td><td>Boost-Wandler, Kesselfüllstand</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Kurzfassung:</b> Alle Pole links der imaginären Achse — stabil. Wie weit links, bestimmt die Geschwindigkeit; der Abstand zur reellen Achse das Schwingen. Reglerentwurf heißt im Kern: die Pole des <em>geschlossenen</em> Kreises an eine gute Stelle schieben.</div>
+
+<h2>Rechnen ohne Rücktransformation</h2>
+<div class="flist">
+  <div class="frow hd"><span>Satz</span><span>Formel</span><span>Nutzen</span></div>
+  <div class="frow"><span class="fn">Endwertsatz</span><span class="fe">y(∞) = lim(s→0) s·Y(s)</span><span class="fx">Bleibende Regelabweichung ohne Simulation</span></div>
+  <div class="frow"><span class="fn">Anfangswertsatz</span><span class="fe">y(0⁺) = lim(s→∞) s·Y(s)</span><span class="fx">Wert direkt nach dem Sprung — zeigt Durchgriff</span></div>
+  <div class="frow"><span class="fn">Statische Verstärkung</span><span class="fe">K = G(0)</span><span class="fx">Ausgang je Eingang im Beharrungszustand</span></div>
+</div>
+<div class="card">
+  <h3>Beispiel: bleibende Abweichung</h3>
+  <p>Strecke G_S = 2/(1 + 5s), P-Regler mit K_R = 4 → G₀(0) = 8. Bleibende Abweichung beim Sollwertsprung: <span class="formula">e(∞) = 1/(1 + G₀(0)) = 1/9 ≈ 11 %</span>. Ein reiner P-Regler an einer Strecke mit Ausgleich lässt immer einen Rest stehen — erst der I-Anteil bringt G₀(0) auf unendlich und die Abweichung auf null.</p>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Lunze, <i>Regelungstechnik 1</i> — Modellbildung, Laplace-Transformation, Übertragungsfunktion.</li>
+    <li>Åström &amp; Murray, <a href="https://fbswiki.org/">Feedback Systems</a>, Kapitel 2, 3, 8 und 9.</li>
+    <li>Lennart Ljung, <i>System Identification: Theory for the User</i> — experimentelle Modellbildung.</li>
+    <li>Papula, <i>Mathematik für Ingenieure</i>, Band 2 — Laplace mit Korrespondenztabelle.</li>
+    <li>Werkzeuge: <a href="https://python-control.readthedocs.io/">python-control</a> und <code>scipy.signal</code> — kostenlose Alternative zu MATLAB.</li>
+  </ul>
+</div>

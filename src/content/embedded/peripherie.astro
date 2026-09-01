@@ -19,7 +19,7 @@ import "./_style.css";
 <h2>Timer: der vielseitigste Block</h2>
 <div class="grid">
   <div class="card"><div class="ct">Zeitbasis</div><div class="cd">Zähler plus Vorteiler erzeugen einen periodischen Interrupt. Der Systemtick für alles Zeitgesteuerte.</div></div>
-  <div class="card"><div class="ct">PWM (Compare)</div><div class="cd">Der Ausgang wechselt bei einem Vergleichswert. Auflösung und Frequenz teilen sich denselben Zähler: bei 16 Bit und 100 MHz Takt sind 1 kHz PWM mit voller Auflösung möglich, 100 kHz nur noch mit rund 10 Bit.</div></div>
+  <div class="card"><div class="ct">PWM (Compare)</div><div class="cd">Der Ausgang wechselt bei einem Vergleichswert. Auflösung und Frequenz teilen sich denselben Zähler: bei 100 MHz Takt sind volle 16 Bit nur bis ≈1,5 kHz möglich, bei 100 kHz PWM bleiben rund 10 Bit.</div></div>
   <div class="card"><div class="ct">Input Capture</div><div class="cd">Der Zählerstand wird bei einer Flanke am Eingang festgehalten — ohne Interrupt-Jitter. Für Frequenz-, Pulsweiten- und Drehzahlmessung deutlich genauer als Software.</div></div>
   <div class="card"><div class="ct">Encoder-Modus</div><div class="cd">Der Timer wertet zwei Quadratursignale direkt aus und zählt vor und zurück. Kein Interrupt, keine verlorenen Schritte — für Drehgeber die einzige richtige Lösung.</div></div>
   <div class="card"><div class="ct">Komplementäre Ausgänge mit Totzeit</div><div class="cd">Advanced-Timer erzeugen zwei zueinander invertierte PWM-Signale mit einstellbarer Totzeit — Voraussetzung für jede Halbbrücke. Dazu ein Break-Eingang, der bei Überstrom die Ausgänge in Hardware sofort abschaltet.</div></div>

@@ -1,0 +1,157 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Flipflop ist ein Bit Gedächtnis, ein Automat beschreibt Verhalten über die Zeit.</b> Der entscheidende Unterschied zum Latch: Das Flipflop übernimmt nur bei der <b>Taktflanke</b> — die Voraussetzung dafür, dass Timing analysierbar ist. Der Zustandsautomat ist das Entwurfsmuster, das Digitaltechnik und Embedded-Software gemeinsam haben: Ampel, Protokollparser und Ablaufsteuerung sind Automaten, ob man sie so nennt oder nicht.</div>
+
+<h2>Latch gegen Flipflop</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>D-Latch (pegelgesteuert)</h4>
+    <p>Solange EN = 1, folgt Q dem Eingang D („transparent“); bei EN = 0 wird gehalten.</p>
+    <ul>
+      <li>Weniger Transistoren, aber schwer analysierbare Zeitpfade</li>
+      <li>In FPGA-Entwürfen entsteht ein Latch meist <b>versehentlich</b>, wenn ein kombinatorischer Block nicht jeden Fall zuweist — die Synthesewarnung „inferred latch“ ist praktisch immer ein Fehler</li>
+    </ul>
+  </div>
+  <div class="gb-col good"><h4>D-Flipflop (flankengesteuert)</h4>
+    <p>Q übernimmt D genau im Moment der Taktflanke und hält bis zur nächsten.</p>
+    <ul>
+      <li>Der Standardbaustein jeder synchronen Schaltung</li>
+      <li>Timing eindeutig: Setup vor, Hold nach der Flanke</li>
+      <li>Aufgebaut aus zwei Latches in Master-Slave-Anordnung</li>
+    </ul>
+  </div>
+</div>
+<svg class="dg l" viewBox="0 0 620 170" role="img" aria-label="Zeitdiagramm: Latch folgt dem Eingang, Flipflop übernimmt bei der Flanke">
+  <text class="lbl" x="46" y="30" text-anchor="end">CLK</text>
+  <path class="w" d="M60,34 H110 V16 H160 V34 H210 V16 H260 V34 H310 V16 H360 V34 H410 V16 H460 V34 H560" />
+  <text class="lbl" x="46" y="78" text-anchor="end">D</text>
+  <path class="acc" d="M60,82 H135 V60 H235 V82 H385 V60 H460 V82 H560" />
+  <text class="lbl" x="46" y="122" text-anchor="end">Q Latch</text>
+  <path class="midl" d="M60,126 H135 V104 H235 V126 H385 V104 H460 V126 H560" />
+  <text class="lbl" x="46" y="160" text-anchor="end">Q FF</text>
+  <path class="good" d="M60,164 H160 V142 H260 V164 H410 V142 H510 V164 H560" />
+  <path class="gd" d="M160,10 V170 M260,10 V170 M410,10 V170 M510,10 V170" />
+</svg>
+
+<h2>Flipflop-Typen, Register, Zähler</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Baustein</th><th>Verhalten</th><th>Heutige Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>RS-Flipflop</b></td><td>Set und Reset; beide gleichzeitig unzulässig</td><td>Grundbaustein; Entprellung mit zwei NAND-Gattern</td></tr>
+<tr><td><b>D-Flipflop</b></td><td>Q folgt D bei der Flanke</td><td>Der einzige Typ, den man wirklich braucht — Register, Pipelines, Synchronisierer</td></tr>
+<tr><td><b>JK / T</b></td><td>J = K = 1 kippt; T kippt bei jeder Flanke</td><td>JK historisch; T als Frequenzteiler durch 2 (D-FF mit rückgekoppeltem Q̄)</td></tr>
+<tr><td><b>Register</b></td><td>n D-FF an gemeinsamem Takt</td><td>Jedes Peripherieregister eines Mikrocontrollers</td></tr>
+<tr><td><b>Schieberegister</b></td><td>FF-Kette, Ausgang auf nächsten Eingang</td><td>Seriell↔parallel (74HC595/165) — Grundlage jeder seriellen Schnittstelle</td></tr>
+<tr><td><b>LFSR</b></td><td>Schieberegister mit XOR-Rückkopplung</td><td>Pseudozufallsfolge maximaler Länge (2ⁿ − 1); Scrambling, Testmuster, CRC</td></tr>
+<tr><td><b>Ripple-Zähler</b></td><td>FF-Ausgang taktet das nächste FF</td><td>Wenig Logik, aber zeitversetzte Ausgänge → Glitches am Decoder; für synchrone Systeme unbrauchbar</td></tr>
+<tr><td><b>Synchronzähler</b></td><td>Alle FF an einem Takt, Enable-Logik davor</td><td>Der Standard: alle Ausgänge gleichzeitig gültig; Modulo-N über Rücksetzbedingung</td></tr>
+<tr><td><b>Gray-Zähler</b></td><td>Zählt im Gray-Code, ein Bitwechsel je Schritt</td><td>Schreib-/Lesezeiger asynchroner FIFOs über Taktdomänen (<a href="#timing">Timing</a>)</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Set und Reset: synchron oder asynchron?</b> Ein asynchroner Reset wirkt sofort — gut beim Einschalten, aber sein <em>Loslassen</em> muss synchronisiert werden, sonst verletzt es die Recovery-Zeit. Der übliche Kompromiss: asynchron aktivieren, synchron freigeben.</div>
+
+<h2>Entprellen — die Aufgabe, die jeder einmal löst</h2>
+<div class="steps">
+  <div class="step"><h4>Das Problem</h4>Ein mechanischer Kontakt prellt 1–20 ms. Ein flankengesteuerter Eingang zählt statt eines Tastendrucks zehn.</div>
+  <div class="step"><h4>Hardware</h4>RC-Glied mit τ ≈ 10 ms plus Schmitt-Trigger (74HC14). Sauber, aber Bauteile je Taster.</div>
+  <div class="step"><h4>Software, robust</h4>Periodisch abtasten (z. B. alle 5 ms im Timer-Interrupt), Zustand erst übernehmen, wenn er mehrfach gleich war. Blockiert nichts, skaliert auf beliebig viele Taster. Falsch dagegen: auf die Flanke reagieren und 20 ms per Warteschleife blockieren.</div>
+  <div class="step"><h4>Sonderfall Drehgeber</h4>Beide um 90° versetzte Signale als Zustandspaar auswerten und nur gültige Übergänge zulassen — entprellt und erkennt die Richtung in einem Schritt.</div>
+</div>
+
+<h2>Moore und Mealy</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Moore-Automat</h4>
+    <p>Ausgang hängt <b>nur vom Zustand</b> ab — stabil, glitchfrei, wechselt synchron zum Takt.</p>
+    <ul><li>Braucht meist einen Zustand mehr</li><li>Reagiert einen Takt später</li></ul>
+  </div>
+  <div class="gb-col"><h4>Mealy-Automat</h4>
+    <p>Ausgang hängt <b>von Zustand und Eingang</b> ab — reagiert sofort im selben Takt.</p>
+    <ul><li>Weniger Zustände</li><li>Ausgänge können glitchen; registriert man sie, entsteht wieder Moore-Verhalten</li></ul>
+  </div>
+</div>
+
+<h2>Vom Diagramm zur Schaltung</h2>
+<svg class="dg l" viewBox="0 0 620 180" role="img" aria-label="Zustandsdiagramm einer einfachen Ablaufsteuerung mit vier Zuständen">
+  <circle class="accs" cx="80" cy="90" r="34" />
+  <circle class="accs" cx="230" cy="90" r="34" />
+  <circle class="accs" cx="390" cy="90" r="34" />
+  <circle class="accs" cx="540" cy="90" r="34" />
+  <text class="lblb" x="80" y="94" text-anchor="middle">IDLE</text>
+  <text class="lblb" x="230" y="94" text-anchor="middle">START</text>
+  <text class="lblb" x="390" y="94" text-anchor="middle">RUN</text>
+  <text class="lblb" x="540" y="94" text-anchor="middle">STOP</text>
+  <path class="acc" d="M114,90 H190" /><path class="accf" d="M196,90 l-10,-5 v10 z" />
+  <path class="acc" d="M264,90 H350" /><path class="accf" d="M356,90 l-10,-5 v10 z" />
+  <path class="acc" d="M424,90 H500" /><path class="accf" d="M506,90 l-10,-5 v10 z" />
+  <path class="w" d="M540,56 C540,10 80,10 80,56" style="stroke-dasharray:5 4" /><path class="f" d="M80,56 l-5,-10 h10 z" />
+  <text class="lbl" x="152" y="82" text-anchor="middle">Taste</text>
+  <text class="lbl" x="308" y="82" text-anchor="middle">bereit</text>
+  <text class="lbl" x="464" y="82" text-anchor="middle">fertig</text>
+  <text class="lbl" x="310" y="24" text-anchor="middle">Quittung</text>
+  <path class="w" d="M20,90 H44" /><path class="f" d="M46,90 l-8,-4 v8 z" />
+</svg>
+<div class="steps">
+  <div class="step"><h4>Zustände benennen, Übergänge festlegen</h4>Sprechende Namen statt Zahlen. Für jeden Zustand muss klar sein, was bei <b>jeder</b> Eingangskombination passiert — auch wenn die Antwort „bleib“ lautet.</div>
+  <div class="step"><h4>Ausgänge zuordnen</h4>Bei Moore an den Zustand, bei Mealy an die Kante. Jedem Zustand eine maximale Verweildauer geben — Zeitüberschreitung führt in einen Fehlerzustand (verhindert Hängenbleiben, in der Anlagensteuerung Pflicht).</div>
+  <div class="step"><h4>Zustände codieren</h4>Binär (wenige FF), Gray (glitcharm) oder One-Hot (ein FF je Zustand — in FPGAs Standard, weil Flipflops dort im Überfluss sind).</div>
+  <div class="step"><h4>Umsetzen</h4>Ein Register hält den Zustand, ein kombinatorischer Block berechnet den Folgezustand, ein zweiter die Ausgänge. Diese Dreiteilung ist in HDL die empfohlene Struktur. Die grafische SPS-Variante ist die Ablaufsprache nach IEC 61131-3 — siehe <a href="automatisierung-robotik.html#sprachen">Automatisierung → Sprachen</a>.</div>
+</div>
+
+<h2>Zustandsautomaten in C</h2>
+<p>Dieselbe Struktur, andere Sprache — die Umsetzung mit <code>switch</code> ist für die meisten Aufgaben die richtige:</p>
+<div class="card">
+<pre style="font-family:var(--mono);font-size:12.2px;line-height:1.6;overflow-x:auto;margin:0"><code>typedef enum &#123; IDLE, START, RUN, STOP &#125; state_t;
+
+static state_t state = IDLE;
+
+void fsm_tick(void)          /* zyklisch aufgerufen, z. B. alle 10 ms */
+&#123;
+    switch (state) &#123;
+    case IDLE:
+        if (taste_gedrueckt()) &#123; motor_aus(); state = START; &#125;
+        break;
+    case START:
+        if (drehzahl_erreicht()) state = RUN;
+        else if (timeout()) state = STOP;
+        break;
+    case RUN:
+        motor_regeln();
+        if (auftrag_fertig()) state = STOP;
+        break;
+    case STOP:
+        motor_aus();
+        if (quittiert()) state = IDLE;
+        break;
+    &#125;
+&#125;</code></pre>
+</div>
+<div class="tip"><b>Warum das besser ist als verschachtelte Wartezeiten:</b> Die Funktion kehrt sofort zurück — nichts blockiert, mehrere Automaten laufen nebeneinander, und der Zustand ist eine einzige Variable, die man im Debugger jederzeit abliest. Für hierarchische Automaten (Statecharts nach Harel) siehe Miro Samek in den Quellen.</div>
+
+<h2>Typische Fehler</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Was schiefgeht</h4><ul>
+    <li>Nicht alle Eingangskombinationen abgedeckt → in HDL ein Latch, in C ein hängender Zustand</li>
+    <li>Kein Weg aus einem Fehlerzustand heraus</li>
+    <li>Kombinatorischer Ausgang als Takt für andere Baugruppen</li>
+    <li>Asynchrone Eingänge ohne Synchronisierer ausgewertet</li>
+    <li>Zustand an mehreren Codestellen geändert</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Was hilft</h4><ul>
+    <li><code>default</code>-Zweig, der in einen sicheren Zustand führt</li>
+    <li>Zustandswechsel nur an genau einer Stelle</li>
+    <li>Eingänge über zwei Flipflops einsynchronisieren (<a href="#timing">Timing</a>)</li>
+    <li>Zustandsnamen als Aufzählungstyp</li>
+    <li>Zustandsübergänge protokollieren — beim Debuggen unbezahlbar</li>
+  </ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Fricke, <i>Digitaltechnik</i>, Kapitel Schaltwerke und Automaten.</li>
+    <li>Mano &amp; Ciletti, <i>Digital Design</i>, Kapitel 5 — Synchronous Sequential Logic.</li>
+    <li>Jack Ganssle, <a href="http://www.ganssle.com/debouncing.htm">A Guide to Debouncing</a> — mit Oszilloskop-Messungen an realen Tastern.</li>
+    <li>David Harel, <i>Statecharts: A Visual Formalism for Complex Systems</i> (1987); Miro Samek, <i>Practical UML Statecharts in C/C++</i>.</li>
+    <li>Clifford Cummings, <i>Simulation and Synthesis Techniques for Asynchronous FIFO Design</i> (SNUG) — Gray-Zähler über Taktdomänen.</li>
+  </ul>
+</div>

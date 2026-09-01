@@ -18,6 +18,7 @@ import "./_style.css";
     <button type="button" data-filter="industrie">Industrie</button>
     <button type="button" data-filter="normen">Normen</button>
     <button type="button" data-filter="mechanik">Mechanik</button>
+    <button type="button" data-filter="robotik">Robotik</button>
   </div>
   <div class="count" data-count></div>
   <div class="tbl-wrap"><table style="min-width:880px">
@@ -28,6 +29,7 @@ import "./_style.css";
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>ADC</b></td><td>Analog-to-Digital Converter</td><td>Analog-Digital-Wandler</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>AEC-Q</b></td><td>Automotive Electronics Council Qualification</td><td>Qualifikationsstandard für Bauteile im Fahrzeugbereich</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>AGND</b></td><td>Analog Ground</td><td>Analogmasse</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik fahrerloses transportsystem fts"><td><b>AGV / AMR</b></td><td>Automated Guided Vehicle / Autonomous Mobile Robot</td><td>Spurgeführtes bzw. frei navigierendes Fahrzeug (deutsch: FTS)</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>AMP</b></td><td>Asymmetric Multiprocessing</td><td>Mehrkernbetrieb mit unterschiedlichen Betriebssystemen je Kern</td></tr>
       <tr data-item data-cat="industrie" data-k="industrie"><td><b>AS-i</b></td><td>Actuator Sensor Interface</td><td>Zweidraht-Bus für die unterste Sensor-Aktor-Ebene</td></tr>
       <tr data-item data-cat="mechanik" data-k="mechanik"><td><b>AWG</b></td><td>American Wire Gauge</td><td>Amerikanische Drahtstärkenangabe; kleinere Zahl bedeutet dickeren Draht</td></tr>
@@ -35,22 +37,26 @@ import "./_style.css";
       <tr data-item data-cat="antrieb" data-k="antrieb"><td><b>BLDC</b></td><td>Brushless DC</td><td>Bürstenloser Gleichstrommotor</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>BMS</b></td><td>Battery Management System</td><td>Batteriemanagementsystem</td></tr>
       <tr data-item data-cat="pcb" data-k="pcb"><td><b>BOM</b></td><td>Bill of Materials</td><td>Stückliste</td></tr>
+      <tr data-item data-cat="mechanik" data-k="mechanik konstruktion cad"><td><b>CAD / CAM</b></td><td>Computer-Aided Design / Manufacturing</td><td>Rechnergestützte Konstruktion bzw. Fertigungsvorbereitung</td></tr>
       <tr data-item data-cat="bus" data-k="bus"><td><b>CAN</b></td><td>Controller Area Network</td><td>Differentieller Feldbus mit Arbitrierung</td></tr>
       <tr data-item data-cat="bus" data-k="bus"><td><b>CAN FD</b></td><td>CAN Flexible Data-Rate</td><td>CAN mit bis zu 64 Byte Nutzdaten und höherer Datenphase</td></tr>
       <tr data-item data-cat="digital" data-k="digital"><td><b>CDC</b></td><td>Clock Domain Crossing</td><td>Signalübergang zwischen zwei Taktdomänen</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>CMRR</b></td><td>Common-Mode Rejection Ratio</td><td>Gleichtaktunterdrückung</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>CMSIS</b></td><td>Cortex Microcontroller Software Interface Standard</td><td>Einheitliche Softwareschnittstelle für ARM Cortex-M</td></tr>
+      <tr data-item data-cat="mechanik" data-k="mechanik fräsen drehen werkzeugmaschine"><td><b>CNC</b></td><td>Computerized Numerical Control</td><td>Bahngesteuerte Werkzeugmaschine, programmiert in G-Code</td></tr>
       <tr data-item data-cat="bus" data-k="bus"><td><b>CPHA / CPOL</b></td><td>Clock Phase / Clock Polarity</td><td>Die beiden Parameter, die den SPI-Modus festlegen</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>CRA</b></td><td>Cyber Resilience Act</td><td>EU-Verordnung 2024/2847 zu Cybersicherheit von Produkten mit digitalen Elementen</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>CRC</b></td><td>Cyclic Redundancy Check</td><td>Prüfsumme über Polynomdivision</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>DAC</b></td><td>Digital-to-Analog Converter</td><td>Digital-Analog-Wandler</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>DC</b></td><td>Diagnostic Coverage</td><td>Diagnosedeckungsgrad in der funktionalen Sicherheit</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik ros2 middleware"><td><b>DDS</b></td><td>Data Distribution Service</td><td>Publish-Subscribe-Middleware; trägt die Kommunikation von ROS 2</td></tr>
       <tr data-item data-cat="pcb" data-k="pcb"><td><b>DFM / DFA</b></td><td>Design for Manufacturing / Assembly</td><td>Fertigungs- und montagegerechter Entwurf</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>DGND</b></td><td>Digital Ground</td><td>Digitalmasse</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>DMA</b></td><td>Direct Memory Access</td><td>Datentransfer ohne Prozessorbeteiligung</td></tr>
       <tr data-item data-cat="sensor" data-k="sensor"><td><b>DMS</b></td><td>Dehnungsmessstreifen</td><td>Sensor für Dehnung und daraus Kraft</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>DNL / INL</b></td><td>Differential / Integral Non-Linearity</td><td>Kennwerte für die Linearität eines Wandlers</td></tr>
       <tr data-item data-cat="pcb" data-k="pcb"><td><b>DNP</b></td><td>Do Not Populate</td><td>Bauteilplatz, der bewusst nicht bestückt wird</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik freiheitsgrade gelenke"><td><b>DOF</b></td><td>Degrees of Freedom</td><td>Freiheitsgrade; für beliebige Posen im Raum sind sechs nötig</td></tr>
       <tr data-item data-cat="pcb" data-k="pcb"><td><b>DRC / ERC</b></td><td>Design Rule Check / Electrical Rule Check</td><td>Entwurfs- und elektrische Regelprüfung im EDA-Werkzeug</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>DSP</b></td><td>Digital Signal Processor / Processing</td><td>Digitale Signalverarbeitung bzw. der Prozessor dafür</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>EEPROM</b></td><td>Electrically Erasable Programmable ROM</td><td>Byteweise beschreibbarer nichtflüchtiger Speicher</td></tr>
@@ -58,14 +64,18 @@ import "./_style.css";
       <tr data-item data-cat="pcb" data-k="pcb"><td><b>ENIG</b></td><td>Electroless Nickel Immersion Gold</td><td>Chemisch Nickel, Immersionsgold — ebene Leiterplattenoberfläche</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>ENOB</b></td><td>Effective Number of Bits</td><td>Effektive Auflösung eines Wandlers</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>EPR</b></td><td>Extended Power Range</td><td>USB-PD-Erweiterung auf bis zu 240 W</td></tr>
+      <tr data-item data-cat="antrieb" data-k="antrieb brushless regler drohne"><td><b>ESC</b></td><td>Electronic Speed Controller</td><td>Kommutierungs- und Drehzahlsteller für BLDC-Motoren</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>ESD</b></td><td>Electrostatic Discharge</td><td>Elektrostatische Entladung</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>ESL / ESR</b></td><td>Equivalent Series Inductance / Resistance</td><td>Parasitäre Induktivität bzw. Widerstand eines Kondensators</td></tr>
+      <tr data-item data-cat="mechanik" data-k="mechanik 3d-druck schmelzschicht"><td><b>FDM / FFF</b></td><td>Fused Deposition Modeling / Fused Filament Fabrication</td><td>Schmelzschichtung — das verbreitetste 3D-Druckverfahren</td></tr>
+      <tr data-item data-cat="mechanik" data-k="mechanik simulation festigkeit"><td><b>FEM</b></td><td>Finite-Elemente-Methode</td><td>Numerische Spannungs- und Verformungsrechnung an vernetzten Bauteilen</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>FFT</b></td><td>Fast Fourier Transform</td><td>Schnelle Fourier-Transformation</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>FIR / IIR</b></td><td>Finite / Infinite Impulse Response</td><td>Digitale Filtertypen</td></tr>
       <tr data-item data-cat="antrieb" data-k="antrieb"><td><b>FOC</b></td><td>Field-Oriented Control</td><td>Feldorientierte Regelung</td></tr>
       <tr data-item data-cat="digital" data-k="digital"><td><b>FPGA</b></td><td>Field-Programmable Gate Array</td><td>Frei konfigurierbarer Logikbaustein</td></tr>
       <tr data-item data-cat="pcb" data-k="pcb"><td><b>FR4</b></td><td>Flame Retardant 4</td><td>Standardmaterial für Leiterplatten</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>GBW</b></td><td>Gain-Bandwidth Product</td><td>Verstärkungs-Bandbreite-Produkt eines Verstärkers</td></tr>
+      <tr data-item data-cat="mechanik" data-k="mechanik form- und lagetoleranz iso 1101"><td><b>GD&amp;T</b></td><td>Geometric Dimensioning and Tolerancing</td><td>Form- und Lagetoleranzen mit Bezügen nach ISO 1101 / ISO GPS</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>GPIO</b></td><td>General Purpose Input/Output</td><td>Frei konfigurierbarer Ein- und Ausgang</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>HAL</b></td><td>Hardware Abstraction Layer</td><td>Hardware-Abstraktionsschicht</td></tr>
       <tr data-item data-cat="pcb" data-k="pcb"><td><b>HASL</b></td><td>Hot Air Solder Leveling</td><td>Verzinnte Leiterplattenoberfläche</td></tr>
@@ -73,6 +83,7 @@ import "./_style.css";
       <tr data-item data-cat="software" data-k="software"><td><b>HRTIM</b></td><td>High-Resolution Timer</td><td>Timer mit sehr feiner Auflösung für Leistungselektronik</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>IGBT</b></td><td>Insulated Gate Bipolar Transistor</td><td>Leistungshalbleiter für hohe Spannungen</td></tr>
       <tr data-item data-cat="industrie" data-k="industrie"><td><b>IIoT</b></td><td>Industrial Internet of Things</td><td>Vernetzte Industrieanlagen</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik kinematik gelenkwinkel pose"><td><b>IK / FK</b></td><td>Inverse / Forward Kinematics</td><td>Von der Pose zu den Gelenkwinkeln bzw. umgekehrt</td></tr>
       <tr data-item data-cat="sensor" data-k="sensor"><td><b>IMU</b></td><td>Inertial Measurement Unit</td><td>Beschleunigungs- und Drehratensensor in einem Baustein</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>IPC</b></td><td>Association Connecting Electronics Industries</td><td>Normungsorganisation für Leiterplatten und Baugruppen</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>ISR</b></td><td>Interrupt Service Routine</td><td>Unterbrechungsroutine</td></tr>
@@ -80,6 +91,7 @@ import "./_style.css";
       <tr data-item data-cat="software" data-k="software"><td><b>JTAG</b></td><td>Joint Test Action Group</td><td>Debug- und Testschnittstelle</td></tr>
       <tr data-item data-cat="industrie" data-k="industrie"><td><b>KOP / FUP / AS / ST</b></td><td>Kontaktplan / Funktionsplan / Ablaufsprache / Strukturierter Text</td><td>Die Sprachen der IEC 61131-3</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>LDO</b></td><td>Low Dropout Regulator</td><td>Linearregler mit kleiner Mindestdifferenz</td></tr>
+      <tr data-item data-cat="sensor" data-k="sensor laserscanner abstand"><td><b>LiDAR</b></td><td>Light Detection and Ranging</td><td>Abstandsmessung per Laserlaufzeit; Grundlage der meisten SLAM-Systeme</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>LQFP</b></td><td>Low-profile Quad Flat Package</td><td>Gehäuse mit Beinchen an allen vier Seiten</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>LSB / MSB</b></td><td>Least / Most Significant Bit</td><td>Nieder- bzw. höchstwertiges Bit</td></tr>
       <tr data-item data-cat="digital" data-k="digital"><td><b>LVDS</b></td><td>Low-Voltage Differential Signaling</td><td>Schnelle, differentielle Signalübertragung</td></tr>
@@ -87,6 +99,7 @@ import "./_style.css";
       <tr data-item data-cat="sensor" data-k="sensor"><td><b>MEMS</b></td><td>Micro-Electro-Mechanical System</td><td>Mikromechanik auf dem Chip</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>MLCC</b></td><td>Multi-Layer Ceramic Capacitor</td><td>Vielschicht-Keramikkondensator</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>MPU</b></td><td>Memory Protection Unit</td><td>Speicherschutzeinheit im Mikrocontroller</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik kollaboration cobot"><td><b>MRK</b></td><td>Mensch-Roboter-Kollaboration</td><td>Gemeinsamer Arbeitsraum ohne trennenden Schutzzaun; Grenzwerte in ISO/TS 15066</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>MTTF_D</b></td><td>Mean Time To Dangerous Failure</td><td>Mittlere Zeit bis zum gefährlichen Ausfall (EN ISO 13849)</td></tr>
       <tr data-item data-cat="sensor" data-k="sensor"><td><b>NTC / PTC</b></td><td>Negative / Positive Temperature Coefficient</td><td>Widerstand mit fallendem bzw. steigendem Widerstand über der Temperatur</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>NVIC</b></td><td>Nested Vectored Interrupt Controller</td><td>Interrupt-Controller bei ARM Cortex-M</td></tr>
@@ -105,17 +118,22 @@ import "./_style.css";
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>PSRR</b></td><td>Power Supply Rejection Ratio</td><td>Unterdrückung von Versorgungsschwankungen</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>PWM</b></td><td>Pulse Width Modulation</td><td>Pulsweitenmodulation</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>QFN / DFN</b></td><td>Quad / Dual Flat No-lead</td><td>Gehäuse ohne Beinchen, mit Kühlpad</td></tr>
+      <tr data-item data-cat="mechanik" data-k="mechanik oberfläche rauheit"><td><b>Ra / Rz</b></td><td>Mittenrauwert / gemittelte Rautiefe</td><td>Kennwerte der Oberflächenrauheit in µm nach ISO 21920 (früher ISO 4287)</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>RCD</b></td><td>Residual Current Device</td><td>Fehlerstromschutzschalter</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>RED</b></td><td>Radio Equipment Directive</td><td>EU-Funkanlagenrichtlinie 2014/53/EU</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik lernen belohnung"><td><b>RL</b></td><td>Reinforcement Learning</td><td>Lernen einer Strategie über Belohnungssignale statt über gelabelte Daten</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>RoHS</b></td><td>Restriction of Hazardous Substances</td><td>EU-Richtlinie zur Stoffbeschränkung in Elektrogeräten</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik ros2 framework"><td><b>ROS / ROS 2</b></td><td>Robot Operating System</td><td>Kein Betriebssystem, sondern Middleware und Werkzeugkasten für Roboter-Software</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>RTC</b></td><td>Real-Time Clock</td><td>Echtzeituhr</td></tr>
       <tr data-item data-cat="sensor" data-k="sensor"><td><b>RTD</b></td><td>Resistance Temperature Detector</td><td>Widerstandsthermometer, z. B. Pt100</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>RTOS</b></td><td>Real-Time Operating System</td><td>Echtzeitbetriebssystem</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>RTT</b></td><td>Real-Time Transfer</td><td>Schnelle Diagnoseausgabe über den Debug-Adapter (SEGGER)</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>SAR</b></td><td>Successive Approximation Register</td><td>Wandlerprinzip mit binärer Suche</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik raspberry pi linux"><td><b>SBC</b></td><td>Single Board Computer</td><td>Vollwertiger Kleinrechner (z. B. Raspberry Pi) — im Gegensatz zur MCU ohne harte Echtzeit</td></tr>
       <tr data-item data-cat="industrie" data-k="industrie"><td><b>SCADA</b></td><td>Supervisory Control and Data Acquisition</td><td>Leitsystem zur Überwachung und Bedienung</td></tr>
-      <tr data-item data-cat="normen" data-k="normen"><td><b>SELV / PELV</b></td><td>Safety / Protective Extra Low Voltage</td><td>Schutzkleinspannung mit bzw. ohne Erdung</td></tr>
+      <tr data-item data-cat="normen" data-k="normen schutzkleinspannung"><td><b>SELV / PELV</b></td><td>Safety / Protective Extra Low Voltage</td><td>Schutzkleinspannung bis 50 V AC / 120 V DC; SELV ohne, PELV mit Erdverbindung</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>SIL</b></td><td>Safety Integrity Level</td><td>Sicherheitsintegritätslevel nach IEC 61508</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik karte lokalisierung navigation"><td><b>SLAM</b></td><td>Simultaneous Localization and Mapping</td><td>Karte aufbauen und sich gleichzeitig darin verorten</td></tr>
       <tr data-item data-cat="pcb" data-k="pcb"><td><b>SMD / SMT</b></td><td>Surface Mount Device / Technology</td><td>Oberflächenmontage</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>SNR / SINAD</b></td><td>Signal-to-Noise Ratio / Signal-to-Noise and Distortion</td><td>Kennwerte für Wandler und Verstärker</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>SoC</b></td><td>System on Chip</td><td>Prozessor mit Peripherie und oft Funk auf einem Chip</td></tr>
@@ -125,13 +143,18 @@ import "./_style.css";
       <tr data-item data-cat="industrie" data-k="industrie"><td><b>SPS / PLC</b></td><td>Speicherprogrammierbare Steuerung</td><td>Industriesteuerung mit zyklischer Bearbeitung</td></tr>
       <tr data-item data-cat="digital" data-k="digital"><td><b>SRAM / DRAM</b></td><td>Static / Dynamic Random Access Memory</td><td>Flüchtige Speicherarten</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>STO / SS1 / SLS</b></td><td>Safe Torque Off / Safe Stop 1 / Safely Limited Speed</td><td>Sichere Antriebsfunktionen nach EN 61800-5-2</td></tr>
+      <tr data-item data-cat="mechanik" data-k="mechanik schlüsselweite sechskant"><td><b>SW</b></td><td>Schlüsselweite</td><td>Maß über die Schlüsselflächen in mm; M5-Sechskantmutter meist SW8</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>SWD</b></td><td>Serial Wire Debug</td><td>Zweidraht-Debugschnittstelle bei ARM</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>SWO</b></td><td>Serial Wire Output</td><td>Zusätzliche Ausgabeleitung für Trace-Daten</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik werkzeug werkzeugmittelpunkt"><td><b>TCP</b></td><td>Tool Center Point</td><td>Der gesteuerte Punkt am Werkzeug des Roboters — nicht zu verwechseln mit dem Netzwerkprotokoll TCP</td></tr>
+      <tr data-item data-cat="sensor" data-k="sensor laufzeit abstand"><td><b>ToF</b></td><td>Time of Flight</td><td>Abstandsmessung über die Laufzeit eines Licht- oder Schallimpulses</td></tr>
       <tr data-item data-cat="bus" data-k="bus"><td><b>TSN</b></td><td>Time-Sensitive Networking</td><td>Echtzeiterweiterungen für Standard-Ethernet (IEEE 802.1)</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>TVS</b></td><td>Transient Voltage Suppressor</td><td>Suppressordiode gegen Überspannungsimpulse</td></tr>
       <tr data-item data-cat="bus" data-k="bus"><td><b>UART</b></td><td>Universal Asynchronous Receiver Transmitter</td><td>Asynchrone serielle Schnittstelle</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik modell xml ros2"><td><b>URDF</b></td><td>Unified Robot Description Format</td><td>XML-Beschreibung von Gliedern, Gelenken und Geometrie für ROS 2 und Simulatoren</td></tr>
       <tr data-item data-cat="elektronik" data-k="elektronik"><td><b>USB PD</b></td><td>USB Power Delivery</td><td>Aushandlung von Spannung und Strom über USB-C</td></tr>
       <tr data-item data-cat="normen" data-k="normen"><td><b>VDE</b></td><td>Verband der Elektrotechnik</td><td>Deutscher Normungs- und Prüfverband</td></tr>
+      <tr data-item data-cat="robotik" data-k="robotik lernen modell"><td><b>VLA</b></td><td>Vision-Language-Action</td><td>Modelle, die Kamerabild und Sprachanweisung direkt in Roboteraktionen umsetzen</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>VTOR</b></td><td>Vector Table Offset Register</td><td>Register zur Verlagerung der Vektortabelle bei ARM Cortex-M</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>WFI / WFE</b></td><td>Wait For Interrupt / Event</td><td>Befehle, die den Kern bis zum nächsten Ereignis schlafen legen</td></tr>
       <tr data-item data-cat="software" data-k="software"><td><b>XIP</b></td><td>Execute In Place</td><td>Codeausführung direkt aus externem Flash</td></tr>

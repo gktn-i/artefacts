@@ -41,6 +41,11 @@ import "./_style.css";
 <tr><td><b>„Mehr Auflösung bedeutet mehr Genauigkeit“</b></td><td>Auflösung, Genauigkeit und Wiederholbarkeit sind drei verschiedene Größen</td></tr>
 <tr><td><b>„Ein Schrittmotor positioniert exakt“</b></td><td>Nur solange er nicht überlastet wird. Schrittverlust wird ohne Encoder nicht bemerkt</td></tr>
 <tr><td><b>„Mikroschritt erhöht die Genauigkeit“</b></td><td>Er verbessert vor allem die Laufruhe; das Haltemoment zwischen den Vollschritten sinkt stark</td></tr>
+<tr><td><b>„Festigkeitsklasse 12.9 ist immer die bessere Wahl“</b></td><td>Höher fest heißt auch spröder und kerbempfindlicher. Bei Schlag, Wechsellast oder Korrosion ist 8.8 oft die haltbarere Schraube</td></tr>
+<tr><td><b>„Das Anzugsmoment bestimmt die Vorspannung“</b></td><td>Rund 90 % des Moments gehen in Gewinde- und Kopfreibung. Trocken gegen geölt unterscheidet sich um Faktor zwei, die Streuung liegt bei ±25 %</td></tr>
+<tr><td><b>„Ein Kugellager hält, bis es kaputt ist“</b></td><td>Bei sauberer Montage bestimmt meist das Fett die Lebensdauer, nicht die Wälzkörper — Temperatur und Drehzahl gehen direkt ein</td></tr>
+<tr><td><b>„Ein Cobot ist sicher, weil er ein Cobot ist“</b></td><td>Sicher oder unsicher ist die Anwendung, nicht der Roboter: Werkzeug, Werkstück, Geschwindigkeit und Umgebung entscheiden (EN ISO 10218-2)</td></tr>
+<tr><td><b>„In der Simulation läuft es“</b></td><td>Reibung, Spiel, Sensorrauschen und Latenz sind dort idealisiert. Der Übergang auf echte Hardware ist ein eigener Arbeitsschritt</td></tr>
 <tr><td><b>„CRC schützt vor Manipulation“</b></td><td>Ein CRC ist gegen zufällige Fehler stark und gegen absichtliche Änderung wertlos</td></tr>
 <tr><td><b>„volatile macht Zugriffe atomar“</b></td><td>Es verhindert nur Wegoptimierung. Atomarität braucht Sperren oder Atomics</td></tr>
 </tbody>
@@ -49,25 +54,25 @@ import "./_style.css";
 <h2>Was in diesem Hub wie belegt ist</h2>
 <div class="grid">
   <div class="card"><div class="ct">Zahlenwerte und Grenzwerte</div><div class="cd">Wo möglich aus Normen oder Datenblättern. Wo Größenordnungen genannt werden, ist das als Richtwert gekennzeichnet — sie ersetzen keine Auslegung am konkreten Bauteil.</div></div>
-  <div class="card"><div class="ct">Aktualität</div><div class="cd">Normfassungen, Werkzeugversionen und Bauteilfamilien sind auf dem Stand von August 2026 recherchiert. Bei Normen ist die Fassung mit angegeben, weil Übergangsfristen laufen.</div></div>
+  <div class="card"><div class="ct">Aktualität</div><div class="cd">Normfassungen, Werkzeugversionen und Bauteilfamilien sind auf dem Stand von September 2026 recherchiert. Bei Normen ist die Fassung mit angegeben, weil Übergangsfristen laufen.</div></div>
   <div class="card"><div class="ct">Empfehlungen</div><div class="cd">Sind als solche formuliert und begründet. Wo mehrere Wege vertretbar sind, steht das dabei — technische Entscheidungen haben selten genau eine richtige Antwort.</div></div>
   <div class="card"><div class="ct">Grenzen</div><div class="cd">Dieser Hub ersetzt keine Ausbildung, keine Risikobeurteilung und keine Fachplanung. Bei Netzspannung, Maschinen und Produkten, die in Verkehr gebracht werden, gehört eine fachkundige Person dazu.</div></div>
 </div>
 
 <h2>Wenn etwas falsch ist</h2>
-<p>Fehler in einem Nachschlagewerk sind unvermeidlich — Normen ändern sich, Bauteile werden abgekündigt, und beim Schreiben schleichen sich Irrtümer ein. Zwei Dinge helfen:</p>
+<p>Normen ändern sich, Bauteile werden abgekündigt, Irrtümer schleichen sich ein. Zwei Regeln fangen das ab:</p>
 <ul>
   <li><b>Im Zweifel der Primärquelle folgen.</b> Datenblatt und Normtext gehen jeder Zusammenfassung vor — auch dieser hier.</li>
-  <li><b>Widersprüche notieren.</b> Wenn eine Angabe hier nicht zur eigenen Messung passt, ist das ein Anlass nachzuprüfen: Stimmen die Randbedingungen überein? Ist der Text veraltet? Beides kommt vor.</li>
+  <li><b>Widersprüche als Frage behandeln.</b> Passt eine Angabe nicht zur eigenen Messung: Stimmen die Randbedingungen überein, oder ist der Text veraltet? Beides kommt vor.</li>
 </ul>
 
 <div class="srcs">
   <div class="sh">Übergreifend verwendete Quellen</div>
   <ul>
     <li><b>Normen:</b> IEC, DIN, EN und EU-Rechtsakte wie unter <a href="#normen">Normen &amp; Standards</a> aufgeführt.</li>
-    <li><b>Lehrbücher:</b> Albach, Horowitz &amp; Hill, Tietze/Schenk/Gamm, Fricke, Lunze, Åström &amp; Murray, Ott, Fischer, Patterson &amp; Hennessy — Einzelnachweise unter <a href="#buecher">Bücher &amp; Kurse</a>.</li>
-    <li><b>Herstellerdokumentation:</b> Analog Devices, Texas Instruments, STMicroelectronics, Espressif, Nordic Semiconductor, Infineon, Würth Elektronik, Trinamic/ADI, NXP, Raspberry Pi.</li>
+    <li><b>Lehrbücher:</b> Albach, Horowitz &amp; Hill, Tietze/Schenk/Gamm, Fricke, Lunze, Åström &amp; Murray, Ott, Fischer, Patterson &amp; Hennessy, Roloff/Matek, Gross u. a., Craig — Einzelnachweise unter <a href="#buecher">Bücher &amp; Kurse</a>.</li>
+    <li><b>Herstellerdokumentation:</b> Analog Devices, Texas Instruments, STMicroelectronics, Espressif, Nordic Semiconductor, Infineon, Würth Elektronik, Trinamic/ADI, NXP, Raspberry Pi; für die mechanische Seite SKF, igus, Mädler, Festo und Heidenhain.</li>
     <li><b>Frei zugängliche Quellen:</b> <a href="https://www.electropedia.org/">Electropedia</a>, <a href="https://eur-lex.europa.eu/">EUR-Lex</a>, <a href="https://www.bipm.org/">BIPM</a>, <a href="https://physics.nist.gov/cuu/Constants/">NIST CODATA</a>, <a href="https://ocw.mit.edu/">MIT OpenCourseWare</a>, <a href="https://fbswiki.org/">Feedback Systems</a>, <a href="https://www.dspguide.com/">dspguide.com</a>.</li>
-    <li><b>Aktualitätsprüfung:</b> Versions- und Normstände wurden im August 2026 gegen die jeweiligen Herausgeberseiten abgeglichen.</li>
+    <li><b>Aktualitätsprüfung:</b> Versions- und Normstände wurden im September 2026 gegen die Seiten der Herausgeber abgeglichen — zuletzt geprüft: IPC-2221C, IPC-A-610J, IEC 61131-3:2025, EN ISO 10218:2025, ISO 21920, ISO 22081.</li>
   </ul>
 </div>

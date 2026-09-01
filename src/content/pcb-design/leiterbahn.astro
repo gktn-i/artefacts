@@ -21,7 +21,7 @@ import "./_style.css";
 </div>
 
 <h2>Richtwerte für 35 µm Kupfer, Außenlage</h2>
-<p class="kurz">Alle Werte stammen aus derselben IPC-2221-Formel wie der Rechner oben — sie sind also untereinander konsistent und lassen sich dort nachrechnen.</p>
+<p class="note">Alle Werte stammen aus derselben IPC-2221-Formel wie der Rechner oben — sie sind untereinander konsistent und lassen sich dort nachrechnen.</p>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th data-s="num">Strom</th><th>Breite bei ΔT = 10 K</th><th>Breite bei ΔT = 20 K</th><th>Breite bei ΔT = 40 K</th></tr></thead>
 <tbody>
@@ -38,34 +38,33 @@ import "./_style.css";
 <h2>IPC-2221 gegen IPC-2152</h2>
 <div class="gb">
   <div class="gb-col"><h4>IPC-2221</h4>
-    <p>Basiert auf Messungen aus den 1950er-Jahren, die aus militärischen Spezifikationen (MIL-STD-275) stammen. Die Werte wurden 1968 pauschal reduziert, weil die Praxis höhere Erwärmung zeigte.</p>
-    <ul><li>Einfache Formel, überall implementiert</li><li>Bewusst konservativ — für den Hausgebrauch auf der sicheren Seite</li><li>Berücksichtigt weder Platinenmaterial noch benachbarte Kupferflächen</li></ul>
+    <ul><li>Basiert auf konservativen Messungen aus den 1950er-Jahren (Ursprung MIL-STD-275)</li><li>Einfache Formel, überall implementiert — für den Hausgebrauch auf der sicheren Seite</li><li>Berücksichtigt weder Platinenmaterial noch benachbarte Kupferflächen</li></ul>
   </div>
   <div class="gb-col"><h4>IPC-2152</h4>
-    <p>Von 2009, auf Basis systematischer moderner Messungen. Berücksichtigt Platinendicke, Material, Umgebung (Luft oder Vakuum) und vor allem benachbarte Kupferflächen als Kühlkörper.</p>
-    <ul><li>Deutlich genauer, oft weniger Breite nötig</li><li>Arbeitet mit Diagrammen und Korrekturfaktoren statt einer einzigen Formel</li><li>Für Entwürfe mit hohen Strömen die richtige Grundlage</li></ul>
+    <ul><li>Von 2009, auf Basis systematischer moderner Messungen</li><li>Berücksichtigt Platinendicke, Material, Umgebung und benachbarte Kupferflächen als Kühlkörper</li><li>Genauer, oft weniger Breite nötig — arbeitet mit Diagrammen und Korrekturfaktoren statt einer Formel</li><li>Für Entwürfe mit hohen Strömen die richtige Grundlage</li></ul>
   </div>
 </div>
-<p class="note">Ein Effekt, den erst IPC-2152 erfasst: Parallel geführte stromführende Bahnen heizen sich <b>gegenseitig</b> auf. Eine isoliert gerechnete Bahn kann in einem Bündel deutlich heißer werden als vorhergesagt. Wer mehrere Leistungsbahnen nebeneinander führt, sollte Abstand halten oder die Erwärmung messen.</p>
+<p class="note">Ein Effekt, den erst IPC-2152 erfasst: Parallel geführte stromführende Bahnen heizen sich <b>gegenseitig</b> auf — im Bündel wird eine Bahn deutlich heißer als isoliert gerechnet. Leistungsbahnen deshalb mit Abstand führen oder die Erwärmung messen.</p>
 
 <h2>Der andere Grenzwert: Spannungsfall</h2>
 <div class="fbox">
   <span class="f">R = ρ · l / (b · d)&nbsp;&nbsp;mit ρ_Cu = 0,0175 Ω·mm²/m</span>
   <span class="l">Bei 35 µm Kupfer hat eine 1 mm breite Bahn etwa 0,5 mΩ je mm Länge.</span>
 </div>
-<p>Beispiel: 100 mm lange Bahn, 1 mm breit, 35 µm, 2 A. R = 0,0175 · 0,1 / (1 · 0,035) = 50 mΩ, Spannungsfall 100 mV. Bei einer 3,3-V-Versorgung sind das 3 % — für einen Mikrocontroller unkritisch, für eine Referenzspannung schon zu viel. <b>Bei empfindlichen Analogschaltungen begrenzt der Spannungsfall die Bahnbreite, nicht die Erwärmung.</b></p>
+<p class="note">Beispiel: 100 mm Bahn, 1 mm breit, 35 µm, 2 A → R = 50 mΩ, Spannungsfall 100 mV = 3 % von 3,3 V. Für einen Mikrocontroller unkritisch, für eine Referenz zu viel. <b>Bei empfindlicher Analogtechnik begrenzt der Spannungsfall die Bahnbreite, nicht die Erwärmung.</b></p>
 
 <h2>Abstände und Spannungsfestigkeit</h2>
 <div class="tbl-wrap"><table style="min-width:880px">
-<thead><tr><th>Spannung zwischen Leitern</th><th>Mindestabstand unbeschichtet, B4</th><th>Mit Lötstoppmaske, B1</th><th>Anmerkung</th></tr></thead>
+<thead><tr><th>Spannung zwischen Leitern</th><th>Außen, unbeschichtet (B2)</th><th>Außen, mit Schutzlack (B4)</th><th>Anmerkung</th></tr></thead>
 <tbody>
-<tr><td><b>bis 15 V</b></td><td>0,05 mm</td><td>0,05 mm</td><td>Fertigungsgrenze bestimmt</td></tr>
-<tr><td><b>bis 30 V</b></td><td>0,13 mm</td><td>0,13 mm</td><td>—</td></tr>
-<tr><td><b>bis 100 V</b></td><td>0,4 mm</td><td>0,13 mm</td><td>—</td></tr>
+<tr><td><b>bis 30 V</b></td><td>0,1 mm</td><td>0,05 mm</td><td>Hier begrenzt meist die Fertigung, nicht die Norm</td></tr>
+<tr><td><b>bis 100 V</b></td><td>0,6 mm</td><td>0,13 mm</td><td>—</td></tr>
+<tr><td><b>bis 150 V</b></td><td>0,6 mm</td><td>0,4 mm</td><td>—</td></tr>
 <tr><td><b>bis 300 V</b></td><td>1,25 mm</td><td>0,4 mm</td><td>Netzspannung nach Gleichrichtung</td></tr>
 <tr><td><b>bis 500 V</b></td><td>2,5 mm</td><td>0,8 mm</td><td>—</td></tr>
 </tbody>
 </table></div>
+<p class="note">Werte nach IPC-2221B, Tabelle 6-1. Innenlagen (B1) dürfen enger. Ob normaler Lötstopplack als „permanent coating“ im Sinn von B4 zählt, ist umstritten — im Zweifel mit B2 rechnen.</p>
 <div class="stop"><b>Für netzbetriebene Geräte gelten strengere Regeln.</b> Dort unterscheidet man <b>Luftstrecke</b> (kürzester Weg durch die Luft) und <b>Kriechstrecke</b> (entlang der Oberfläche), abhängig von Verschmutzungsgrad, Überspannungskategorie und Isolationsart (Basis-, Zusatz- oder verstärkte Isolierung). Maßgeblich ist EN IEC 62368-1 bzw. EN 61010-1. Für verstärkte Isolierung zwischen Netz und Sekundärseite sind typisch 6–8 mm nötig — deutlich mehr als die IPC-Tabelle oben nahelegt. Zusätzlich hilft ein <b>Isolationsschlitz</b> (durchgefräster Spalt) unter Optokopplern und Übertragern.</div>
 
 <h2>Praktische Layoutregeln für Leistungspfade</h2>

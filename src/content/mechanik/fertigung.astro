@@ -1,0 +1,120 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Jedes Fertigungsverfahren hat Regeln, die nicht verhandelbar sind.</b> Ein Frästeil braucht Innenradien, ein Blechteil Biegeradien und Mindestabstände, ein Gussteil Formschrägen. Wer sie beim Konstruieren beachtet, bekommt dasselbe Teil zum halben Preis.</div>
+
+<h2>Die Verfahren im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th data-s="text">Verfahren</th><th data-s="num">Stückzahl</th><th data-s="num">Toleranz</th><th>Stärken und Grenzen</th></tr></thead>
+<tbody>
+<tr><td><b>Fräsen (3-Achs)</b></td><td>1 – 1 000</td><td>IT7 – IT9</td><td>Sehr flexibel, keine Werkzeugkosten. Innenecken bekommen immer einen Radius, Zugang nur von oben</td></tr>
+<tr><td><b>Fräsen (5-Achs)</b></td><td>1 – 1 000</td><td>IT7</td><td>Komplexe Geometrie in einer Aufspannung, dadurch bessere Lagetoleranzen. Teurer je Stunde</td></tr>
+<tr><td><b>Drehen</b></td><td>1 – 100 000</td><td>IT6 – IT8</td><td>Rotationssymmetrie, sehr schnell und genau. Mit angetriebenen Werkzeugen auch Bohrungen und Flächen</td></tr>
+<tr><td><b>Blech: Laser + Kanten</b></td><td>1 – 10 000</td><td>±0,2 mm Kontur, ±0,5° Winkel</td><td>Sehr günstig für Gehäuse und Halter. Braucht Biegeradien, Mindestschenkel und Freischnitte</td></tr>
+<tr><td><b>Drahterodieren</b></td><td>1 – 100</td><td>IT5 – IT6</td><td>Gehärteter Stahl, scharfe Innenecken, sehr genau. Nur durchgehende Konturen, langsam</td></tr>
+<tr><td><b>Senkerodieren</b></td><td>1 – 100</td><td>IT6 – IT7</td><td>Formen und Taschen mit scharfen Ecken in gehärtetem Material. Elektrode nötig</td></tr>
+<tr><td><b>Spritzguss</b></td><td>ab ca. 1 000</td><td>IT10 – IT12</td><td>Sehr billig je Stück, aber vier- bis fünfstellige Werkzeugkosten. Formschrägen und gleichmäßige Wände zwingend</td></tr>
+<tr><td><b>Druckguss</b></td><td>ab ca. 1 000</td><td>IT11 – IT13</td><td>Wie Spritzguss, für Aluminium und Zink. Gute Oberfläche, poröser Kern — schlecht schweißbar</td></tr>
+<tr><td><b>Sandguss</b></td><td>1 – 500</td><td>IT13 – IT16</td><td>Große Teile, günstiges Modell. Grobe Oberfläche, Bearbeitungszugabe einplanen</td></tr>
+<tr><td><b>FDM-3D-Druck</b></td><td>1 – 100</td><td>±0,3 mm</td><td>Sofort verfügbar, komplexe Geometrie gratis. Anisotrop und temperaturbegrenzt — siehe <a href="#druck3d">Konstruieren für den 3D-Druck</a></td></tr>
+<tr><td><b>SLS / MJF</b></td><td>1 – 1 000</td><td>±0,3 mm</td><td>Keine Stützstrukturen, gute mechanische Werte, isotroper als FDM. Raue Oberfläche</td></tr>
+<tr><td><b>SLM (Metalldruck)</b></td><td>1 – 100</td><td>±0,2 mm</td><td>Komplexe Metallteile mit innenliegenden Kanälen. Teuer, Nachbearbeitung und Wärmebehandlung nötig</td></tr>
+</tbody>
+</table></div>
+
+<h2>Fräsgerecht konstruieren</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4>
+    <ul>
+      <li>Innenradien mindestens 1/3 der Taschentiefe — großzügiger heißt größerer Fräser und kürzere Bearbeitungszeit</li>
+      <li>Taschentiefe höchstens 3–4 × Fräserdurchmesser</li>
+      <li>Wandstärken mindestens 0,8 mm (Metall), 1,5 mm (Kunststoff)</li>
+      <li>Alle Bearbeitungen von möglichst wenigen Seiten</li>
+      <li>Gewinde nicht tiefer als 2 × d</li>
+      <li>Standardwerkzeugdurchmesser vorsehen (3, 4, 6, 8, 10, 12 mm)</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Teuer oder unmöglich</h4>
+    <ul>
+      <li>Scharfe Innenecken — ein Fräser ist rund. Freistich vorsehen oder erodieren lassen</li>
+      <li>Tiefe schmale Taschen: der lange dünne Fräser schwingt, es dauert ewig</li>
+      <li>Bearbeitung von fünf Seiten bei einem Einzelteil</li>
+      <li>Enge Toleranzen an unkritischen Maßen</li>
+      <li>Hinterschnitte ohne Zugang</li>
+      <li>Bohrungen, die schräg auf eine Fläche treffen — der Bohrer verläuft</li>
+    </ul>
+  </div>
+</div>
+
+<div class="calc" data-calc="zerspanung">
+  <h4>Schnittdaten: Drehzahl, Vorschub, Zeitspanvolumen</h4>
+  <div class="row">
+    <div><label>Schnittgeschwindigkeit v_c in m/min</label><input data-k="vc" type="number" step="any" value="80" /></div>
+    <div><label>Werkzeug-Ø in mm</label><input data-k="d" type="number" step="any" value="6" /></div>
+    <div><label>Schneidenzahl z</label><input data-k="z" type="number" step="any" value="2" /></div>
+    <div><label>Zahnvorschub f_z in mm</label><input data-k="fz" type="number" step="any" value="0.03" /></div>
+    <div><label>Schnitttiefe a_p in mm</label><input data-k="ap" type="number" step="any" value="3" /></div>
+    <div><label>Schnittbreite a_e in mm</label><input data-k="ae" type="number" step="any" value="2" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Werkstoff</th><th data-s="num">v_c HSS [m/min]</th><th data-s="num">v_c Hartmetall, beschichtet</th><th data-s="num">f_z bei Ø 6 mm [mm]</th></tr></thead>
+<tbody>
+<tr><td>Baustahl S235, S355</td><td>25 – 35</td><td>120 – 180</td><td>0,03 – 0,06</td></tr>
+<tr><td>Vergütungsstahl 42CrMo4</td><td>15 – 25</td><td>80 – 140</td><td>0,025 – 0,05</td></tr>
+<tr><td>Edelstahl 1.4301 / 1.4404</td><td>10 – 18</td><td>60 – 100</td><td>0,02 – 0,04</td></tr>
+<tr><td>Grauguss EN-GJL</td><td>18 – 25</td><td>80 – 150</td><td>0,04 – 0,07</td></tr>
+<tr><td>Aluminium-Knetlegierung</td><td>60 – 150</td><td>300 – 800</td><td>0,06 – 0,09</td></tr>
+<tr><td>Messing, Bronze</td><td>60 – 100</td><td>150 – 300</td><td>0,04 – 0,07</td></tr>
+<tr><td>Kunststoff (POM, PA, PE)</td><td>100 – 250</td><td>200 – 500</td><td>0,05 – 0,10</td></tr>
+</tbody>
+</table></div>
+<ul>
+  <li><b>Zahnvorschub skaliert mit dem Durchmesser:</b> Richtwert 0,005–0,01 × d bei Stahl, 0,01–0,015 × d bei Aluminium. Beim Bohren gilt der Vorschub je <em>Umdrehung</em>, nicht je Zahn.</li>
+  <li><b>Zu kleiner Vorschub ist gefährlicher als zu großer:</b> die Schneide reibt statt zu schneiden, wird heiß und stumpf.</li>
+  <li><b>Dünne Fräser mögen kleines a_e und großes a_p</b> (Trochoidalfräsen): gleiche Zerspanleistung bei viel kleinerer Querkraft.</li>
+</ul>
+
+<h2>Blechgerecht konstruieren</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th data-s="text">Regel</th><th data-s="num">Richtwert</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td>Mindestbiegeradius innen</td><td>≥ 1 × Blechdicke (Alu: 1,5 – 2 ×)</td><td>Sonst reißt die Außenfaser</td></tr>
+<tr><td>Mindestschenkellänge</td><td>≥ 4 × Blechdicke + Radius</td><td>Kürzer bekommt die Abkantpresse nicht gefasst</td></tr>
+<tr><td>Abstand Bohrung zur Biegekante</td><td>≥ 2,5 × Blechdicke + Radius</td><td>Sonst verzieht sich die Bohrung zum Langloch</td></tr>
+<tr><td>Abstand Bohrung zur Außenkante</td><td>≥ 2 × Blechdicke</td><td>Sonst reißt der Rand aus</td></tr>
+<tr><td>Mindestbohrungsdurchmesser</td><td>≥ 1 × Blechdicke</td><td>Beim Stanzen; der Laser kann kleiner</td></tr>
+<tr><td>Freischnitt an Biegeecken</td><td>Radius ≥ Blechdicke</td><td>Verhindert Einreißen an der Ecke</td></tr>
+<tr><td>Alle Biegungen in derselben Richtung</td><td>—</td><td>Spart Umspannen und damit Zeit und Toleranz</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Biegen verändert die Abwicklungslänge.</b> Das Blech wird an der Biegung gestreckt, die Abwicklung ist deshalb kürzer als die Summe der Schenkel. Der Korrekturwert (K-Faktor, meist 0,33–0,45) hängt von Werkstoff, Dicke und Radius ab und ist im Zweifel beim Blechfertiger zu erfragen. CAD-Blechmodule rechnen das automatisch — aber nur mit dem richtigen Faktor.</div>
+
+<h2>Gussgerecht konstruieren</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Formschrägen</div><div class="cd">Spritzguss 1–2° an glatten, 3–5° an genarbten Flächen; Druckguss 1–3°; Sandguss 2–3°, an tiefen Innenflächen bis 5°. Ohne Schräge lässt sich das Teil nicht entformen — das ist keine Empfehlung, sondern eine Bedingung.</div></div>
+  <div class="card"><div class="ct">Gleichmäßige Wandstärken</div><div class="cd">Materialanhäufungen erstarren langsamer und erzeugen Lunker und Einfallstellen. Rippen höchstens 40–60 % der angrenzenden Wandstärke, Übergänge mit Radien.</div></div>
+  <div class="card"><div class="ct">Bearbeitungszugabe</div><div class="cd">Bei Sandguss 2–5 mm an allen Flächen, die später gefräst werden. Die Rohgussfläche ist zu ungenau und zu rau für Funktionsflächen.</div></div>
+  <div class="card"><div class="ct">Hinterschnitte vermeiden</div><div class="cd">Jeder Hinterschnitt braucht einen Schieber im Werkzeug und kostet vierstellig. Oft lässt er sich durch eine kleine Geometrieänderung ganz vermeiden.</div></div>
+</div>
+
+<h2>Vor dem Bestellen</h2>
+<ul>
+  <li><b>Werkstoff und Halbzeug am Lager wählen</b> — Standardabmessungen und lagerhaltige Legierungen sparen mehr als jede Werkstoffoptimierung (siehe <a href="#auswahl">Werkstoffwahl</a>).</li>
+  <li><b>Nur die Funktionsmaße eng tolerieren</b> — der Rest läuft über die Allgemeintoleranz, siehe <a href="#toleranzen">Toleranzen, Passungen &amp; Oberflächen</a>.</li>
+  <li><b>STEP und PDF zusammen schicken</b>, mit Werkstoff, Oberfläche, Kantenzustand und Stückzahl im Schriftfeld.</li>
+</ul>
+<div class="tip"><b>Fünf Minuten Rückfrage sparen regelmäßig 30 % der Kosten.</b> Die meisten Lohnfertiger prüfen eine STEP-Datei kostenlos auf Fertigbarkeit und melden zurück, welche Details teuer sind — meist ist es ein einziger Radius, eine Toleranz oder eine zusätzliche Aufspannung. Online-Anbieter mit sofortiger Kalkulation zeigen den Preisunterschied direkt beim Ändern.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN 8580 — Fertigungsverfahren: Einteilung in die sechs Hauptgruppen.</li>
+    <li>DIN 6935 — Kaltbiegen von Flacherzeugnissen aus Stahl: Mindestbiegeradien und Ausgleichswerte.</li>
+    <li>DIN EN ISO 8062-3 — Gussteile: Maß- und Bearbeitungszugabetoleranzen.</li>
+    <li><a href="https://www.protolabs.de/ressourcen/design-tipps/">Protolabs Design-Tipps</a> und <a href="https://www.hubs.com/knowledge-base/">Hubs Knowledge Base</a> — verfahrensspezifische DFM-Richtlinien; Quelle vieler Richtwerte oben.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i> — fertigungsgerechte Gestaltung; Schnittwerte nach Werkzeugkatalogen (Sandvik Coromant, Garant Zerspanungshandbuch).</li>
+  </ul>
+</div>
