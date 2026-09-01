@@ -26,7 +26,6 @@ import "./_style.css";
 <tr><td><b>LZ77 / LZ78</b></td><td>Verweise auf frühere Vorkommen</td><td>ja</td><td>DEFLATE (ZIP, gzip, PNG), LZ4, Zstandard</td></tr>
 <tr><td><b>Delta-Codierung</b></td><td>Nur die Änderung zum Vorgänger</td><td>ja</td><td>Zeitreihen, Datenlogger, Firmware-Differenzupdates</td></tr>
 <tr><td><b>Transformation (DCT/Wavelet)</b></td><td>Umrechnen, dann unwichtige Anteile grob quantisieren</td><td>nein</td><td>JPEG, H.264/H.265, AAC</td></tr>
-<tr><td><b>Prädiktiv</b></td><td>Vorhersage aus der Vergangenheit, nur den Fehler übertragen</td><td>beides möglich</td><td>FLAC (verlustfrei), Sprachcodecs</td></tr>
 </tbody>
 </table></div>
 <div class="tip"><b>Für Mikrocontroller:</b> <a href="https://github.com/atomicobject/heatshrink">heatshrink</a> und <b>LZ4</b> laufen mit wenigen Kilobyte RAM und passen zu Firmware-Updates und Logdaten. <b>Zstandard</b> ist stärker, braucht aber mehr Speicher. Für reine Zeitreihen schlägt Delta plus Varint fast jeden Allzweckalgorithmus — bei einem Bruchteil des Aufwands.</div>
@@ -36,15 +35,8 @@ import "./_style.css";
   <span class="f">C = B · log₂(1 + S/N)</span>
   <span class="l">Shannon-Hartley: Die maximale fehlerfreie Datenrate hängt von Bandbreite und Signal-Rausch-Verhältnis ab. Mehr geht physikalisch nicht.</span>
 </div>
-<div class="tbl-wrap"><table style="min-width:720px">
-<thead><tr><th>Beispiel</th><th>Bandbreite</th><th>Rechnerische Kapazität</th></tr></thead>
-<tbody>
-<tr><td>Telefonleitung, SNR 30 dB</td><td>3,1 kHz</td><td>≈ 31 kbit/s — deshalb war bei Analogmodems Schluss</td></tr>
-<tr><td>WLAN-Kanal 2,4 GHz, SNR 25 dB</td><td>20 MHz</td><td>≈ 166 Mbit/s brutto</td></tr>
-<tr><td>LoRa, SNR −20 dB (unter dem Rauschen)</td><td>125 kHz</td><td>wenige hundert bit/s — dafür extreme Reichweite</td></tr>
-</tbody>
-</table></div>
-<p>Weil das SNR nur logarithmisch eingeht, ist Bandbreite der wirksamere Hebel — deshalb ziehen Funkstandards in höhere Bänder und nehmen kürzere Reichweite in Kauf (<a href="#funk">Funk &amp; Wireless</a>). LoRa zeigt die Gegenrichtung: Durch Spreizung lässt sich ein Signal unter dem Rauschpegel demodulieren, der Preis ist eine sehr niedrige Rate.</p>
+<p>Zahlenbeispiele: eine Telefonleitung mit 3,1 kHz und 30 dB SNR trägt rechnerisch ≈ 31 kbit/s — deshalb war bei Analogmodems Schluss; ein 20-MHz-WLAN-Kanal bei 25 dB SNR ≈ 166 Mbit/s brutto; LoRa arbeitet mit 125 kHz bei −20 dB SNR, also unter dem Rauschpegel, und kommt dabei auf wenige hundert bit/s.</p>
+<p class="note">Weil das SNR nur logarithmisch eingeht, ist Bandbreite der wirksamere Hebel — deshalb ziehen Funkstandards in höhere Bänder und nehmen kürzere Reichweite in Kauf (<a href="#funk">Funk &amp; Wireless</a>). Spreizung wie bei LoRa dreht den Handel um: Rate gegen Empfindlichkeit.</p>
 <div class="tbl-wrap"><table style="min-width:800px">
 <thead><tr><th>Ebene</th><th>Ziel</th><th>Beispiel</th></tr></thead>
 <tbody>

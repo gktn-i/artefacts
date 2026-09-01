@@ -5,26 +5,30 @@ import "./_style.css";
 
 <h2>Die Betriebsarten</h2>
 <div class="tbl-wrap"><table style="min-width:880px">
-<thead><tr><th>Modus</th><th>Typischer Strom</th><th>Was bleibt an</th><th>Aufwachzeit</th></tr></thead>
+<thead><tr><th data-s="text">Modus</th><th data-s="num">Typischer Strom</th><th>Was bleibt an</th><th>Aufwachzeit</th></tr></thead>
 <tbody>
 <tr><td><b>Aktiv (Run)</b></td><td>2–100 mA</td><td>alles</td><td>—</td></tr>
 <tr><td><b>Sleep / WFI</b></td><td>0,5–10 mA</td><td>Peripherie und RAM, nur die CPU steht</td><td>wenige Takte</td></tr>
 <tr><td><b>Stop / Deep Sleep</b></td><td>2–50 µA</td><td>RAM erhalten, wenige Aufwachquellen</td><td>10 µs – 1 ms</td></tr>
-<tr><td><b>Standby</b></td><td>0,3–3 µA</td><td>nur RTC und wenige Pins; RAM verloren (außer Backup-Bereich)</td><td>wie ein Neustart</td></tr>
-<tr><td><b>Shutdown</b></td><td>&lt; 100 nA</td><td>fast nichts</td><td>Neustart</td></tr>
+<tr><td><b>Standby</b></td><td>0,3–3 µA</td><td>nur RTC und wenige Pins; RAM verloren außer im Backup-Bereich</td><td>wie ein Neustart</td></tr>
+<tr><td><b>Shutdown</b></td><td>unter 100 nA</td><td>fast nichts</td><td>Neustart</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Die Datenblattwerte gelten unter Laborbedingungen.</b> In der Praxis kommen dazu: der Ruhestrom des Spannungsreglers (ein AMS1117 zieht allein 5 mA!), Pull-up-Widerstände, LEDs, Sensoren im Dauerbetrieb und Leckströme über schlecht konfigurierte Pins. Ein Controller mit 2 µA Standby nützt nichts, wenn der Regler daneben 5 mA verbraucht.</div>
+<div class="warn"><b>Datenblattwerte gelten unter Laborbedingungen.</b> Dazu kommen in der Praxis: Ruhestrom des Reglers, Pull-Widerstände, LEDs, Sensoren im Dauerbetrieb und Leckströme über falsch konfigurierte Pins. Ein Controller mit 2 µA Standby nützt nichts, wenn der Regler daneben 5 mA zieht.</div>
 
 <h2>Wo der Strom tatsächlich hingeht</h2>
-<div class="grid">
-  <div class="card"><div class="ct">Spannungsregler</div><div class="cd">Ruhestrom (I_q) im Datenblatt prüfen. Für Batteriebetrieb Typen mit unter 1 µA wählen (MCP1700: 1,6 µA; TPS7A02: 25 nA). Ein Schaltregler ist bei kleiner Last oft schlechter als ein LDO, weil sein eigener Betrieb Energie kostet.</div></div>
-  <div class="card"><div class="ct">Pull-up-Widerstände</div><div class="cd">Ein 4,7-kΩ-Pull-up an einer dauerhaft auf Low liegenden Leitung zieht bei 3,3 V rund 700 µA — mehr als der schlafende Controller. Im Schlaf abschalten oder hochohmiger auslegen.</div></div>
-  <div class="card"><div class="ct">Floatende Eingänge</div><div class="cd">Ein nicht angeschlossener CMOS-Eingang schwingt und lässt beide Transistoren teilweise leiten. Alle ungenutzten Pins auf Analog oder mit Pull konfigurieren.</div></div>
-  <div class="card"><div class="ct">Sensoren</div><div class="cd">Viele Sensoren haben einen eigenen Schlafmodus, den man aktiv setzen muss. Alternativ die Versorgung des Sensors über einen MOSFET ganz abschalten — dann ist auch der Leckstrom weg.</div></div>
-  <div class="card"><div class="ct">Funk</div><div class="cd">Der Sendevorgang selbst zieht 100–300 mA, dauert aber nur Millisekunden. Entscheidend ist die Gesamtzeit im Funkbetrieb: Verbindungsaufbau, Empfangsfenster, erneute Versuche. Ein fehlgeschlagener WLAN-Aufbau kann mehr Energie kosten als hundert erfolgreiche Sendungen.</div></div>
-  <div class="card"><div class="ct">Status-LEDs</div><div class="cd">Eine LED mit 5 mA verbraucht mehr als alles andere zusammen. Bei Batteriegeräten nur kurz blitzen lassen — 10 ms alle 5 Sekunden sind sichtbar und kosten fast nichts.</div></div>
-</div>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Verbraucher</th><th>Typischer Beitrag</th><th>Gegenmittel</th></tr></thead>
+<tbody>
+<tr><td><b>Spannungsregler</b></td><td>AMS1117 rund 5 mA · MCP1700 1,6 µA · TPS7A02 25 nA</td><td>Ruhestrom I_q im Datenblatt zum Auswahlkriterium machen. Bei sehr kleiner Last ist ein LDO oft sparsamer als ein Schaltregler → <a href="elektrotechnik.html#versorgung">Spannungsversorgung</a></td></tr>
+<tr><td><b>Pull-Widerstände</b></td><td>4,7 kΩ an 3,3 V dauerhaft Low ≈ 700 µA</td><td>Im Schlaf abschalten, hochohmiger auslegen oder den Ruhepegel umdrehen</td></tr>
+<tr><td><b>Floatende Eingänge</b></td><td>einige µA je Pin, stark streuend</td><td>Ein offener CMOS-Eingang lässt beide Transistoren teilweise leiten: ungenutzte Pins auf Analog oder mit Pull konfigurieren</td></tr>
+<tr><td><b>Sensoren</b></td><td>im Betrieb einige hundert µA, im Schlaf unter 1 µA</td><td>Schlafmodus aktiv setzen — oder die Versorgung über einen MOSFET ganz abschalten, dann entfällt auch der Leckstrom</td></tr>
+<tr><td><b>Funk</b></td><td>WLAN-Sendespitze 100–350 mA, BLE 5–15 mA</td><td>Nicht die Spitze zählt, sondern die Gesamtzeit im Funkbetrieb. Ein fehlgeschlagener Verbindungsaufbau kostet mehr als hundert erfolgreiche Sendungen</td></tr>
+<tr><td><b>Status-LED</b></td><td>5 mA dauerhaft</td><td>Mehr als alles andere zusammen: nur blitzen lassen — 10 ms alle 5 s sind sichtbar und kosten fast nichts</td></tr>
+<tr><td><b>Ungenutzte Peripherie</b></td><td>je Block einige zehn µA bis mA</td><td>Takt der nicht benutzten Baugruppen abschalten; ADC, Komparator und Debug-Einheit werden gern vergessen</td></tr>
+</tbody>
+</table></div>
 
 <h2>Laufzeit rechnen</h2>
 <div class="calc" data-calc="akku">
@@ -43,38 +47,40 @@ import "./_style.css";
 </div>
 
 <h2>Messen, nicht schätzen</h2>
-<div class="tbl-wrap"><table style="min-width:840px">
-<thead><tr><th>Methode</th><th>Bereich</th><th>Bewertung</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Methode</th><th>Bereich</th><th>Bewertung</th></tr></thead>
 <tbody>
-<tr><td><b>Multimeter in Reihe</b></td><td>mA</td><td>Für Mikroampere zu ungenau; der Bürdenwiderstand verfälscht zusätzlich und kann beim Aufwachen sogar zum Reset führen</td></tr>
+<tr><td><b>Multimeter in Reihe</b></td><td>mA</td><td>Für Mikroampere zu ungenau; der Bürdenwiderstand verfälscht und kann beim Aufwachen sogar einen Reset auslösen</td></tr>
 <tr><td><b>Shunt plus Oszilloskop</b></td><td>µA bis A</td><td>Zeigt den zeitlichen Verlauf — genau das, was man braucht. 1 Ω und ein Differenztastkopf reichen oft</td></tr>
-<tr><td><b>Strommesszange am Netzteil</b></td><td>—</td><td>Für kleine Ströme unbrauchbar</td></tr>
 <tr><td><b>Spezialgerät (Nordic PPK2, Joulescope, Otii)</b></td><td>nA bis A, dynamisch</td><td>Der richtige Weg: löst nA bis hunderte mA in einem Durchgang auf und integriert die Energie automatisch</td></tr>
-<tr><td><b>Langzeittest mit Kondensator</b></td><td>—</td><td>Bekannte Kapazität laden, Spannungsabfall über Stunden messen. Billig und für Mittelwerte erstaunlich brauchbar</td></tr>
+<tr><td><b>Langzeittest mit Kondensator</b></td><td>Mittelwerte</td><td>Bekannte Kapazität laden, Spannungsabfall über Stunden messen. Billig und erstaunlich brauchbar</td></tr>
+<tr><td><b>Strommesszange</b></td><td>ab einigen mA</td><td>Für die kleinen Ströme im Schlafbetrieb unbrauchbar</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Der typische Befund beim ersten Messen:</b> Das Gerät wacht viel häufiger auf als geplant — durch einen Timer, der nicht abgeschaltet wurde, durch einen Sensor-Interrupt, der ständig auslöst, oder durch einen RTOS-Tick, der den Controller tausendmal pro Sekunde weckt. Genau deshalb heißt der wichtigste Schalter bei FreeRTOS <code>configUSE_TICKLESS_IDLE</code>.</div>
+<div class="tip"><b>Der typische Befund beim ersten Messen:</b> Das Gerät wacht viel häufiger auf als geplant — ein nicht abgeschalteter Timer, ein ständig auslösender Sensor-Interrupt oder der RTOS-Tick, der den Controller tausendmal pro Sekunde weckt. Genau dagegen gibt es <code>configUSE_TICKLESS_IDLE</code> → <a href="#rtos">RTOS</a>.</div>
 
 <h2>Batterietypen</h2>
-<div class="tbl-wrap"><table style="min-width:860px">
-<thead><tr><th>Typ</th><th>Spannung</th><th>Kapazität</th><th>Spitzenstrom</th><th>Anmerkung</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Typ</th><th data-s="num">Spannung</th><th data-s="num">Kapazität</th><th>Spitzenstrom</th><th>Selbstentladung</th><th>Anmerkung</th></tr></thead>
 <tbody>
-<tr><td><b>CR2032 (Lithium-Knopfzelle)</b></td><td>3,0 V</td><td>210–240 mAh</td><td>nur wenige mA</td><td>Bei Funkspitzen bricht die Spannung ein — Pufferkondensator (10–100 µF) zwingend</td></tr>
-<tr><td><b>AA Alkaline</b></td><td>1,5 V</td><td>2000–2800 mAh</td><td>einige hundert mA</td><td>Spannung fällt kontinuierlich; Boost-Wandler nötig</td></tr>
-<tr><td><b>AA Lithium (LiFeS₂)</b></td><td>1,5 V</td><td>3000 mAh</td><td>hoch</td><td>Kältefest bis −40 °C, sehr geringe Selbstentladung</td></tr>
-<tr><td><b>Li-Ion 18650</b></td><td>3,0–4,2 V</td><td>2500–3500 mAh</td><td>mehrere A</td><td>Braucht Schutzschaltung und Ladeelektronik; nicht unter 0 °C laden</td></tr>
-<tr><td><b>LiFePO₄</b></td><td>2,5–3,6 V</td><td>—</td><td>hoch</td><td>Sehr viele Zyklen, thermisch gutmütig, geringere Energiedichte</td></tr>
-<tr><td><b>Supercap</b></td><td>2,5–5,5 V</td><td>gering</td><td>sehr hoch</td><td>Für Überbrückung und Spitzen, nicht für Dauerbetrieb</td></tr>
+<tr><td><b>CR2032 (Lithium-Knopfzelle)</b></td><td>3,0 V</td><td>210–240 mAh</td><td>nur wenige mA</td><td>rund 1 % pro Jahr</td><td>Bei Funkspitzen bricht die Spannung ein — Pufferkondensator (10–100 µF) zwingend</td></tr>
+<tr><td><b>AA Alkaline</b></td><td>1,5 V</td><td>2000–2800 mAh</td><td>einige hundert mA</td><td>2–3 % pro Jahr</td><td>Spannung fällt kontinuierlich; Aufwärtswandler nötig</td></tr>
+<tr><td><b>AA Lithium (LiFeS₂)</b></td><td>1,5 V</td><td>3000 mAh</td><td>hoch</td><td>unter 1 % pro Jahr</td><td>Kältefest bis −40 °C, erste Wahl für Langzeitgeräte</td></tr>
+<tr><td><b>Li-Ion 18650</b></td><td>3,0–4,2 V</td><td>2500–3500 mAh</td><td>mehrere A</td><td>2–3 % pro Monat</td><td>Braucht Schutzschaltung und Ladeelektronik; nicht unter 0 °C laden</td></tr>
+<tr><td><b>LiFePO₄</b></td><td>2,5–3,6 V</td><td>je nach Bauform</td><td>hoch</td><td>wenige % pro Monat</td><td>Sehr viele Zyklen, thermisch gutmütig, geringere Energiedichte</td></tr>
+<tr><td><b>NiMH (LSD-Typ)</b></td><td>1,2 V</td><td>1900–2500 mAh</td><td>hoch</td><td>klassisch bis 20 % pro Monat, LSD rund 1 %</td><td>Nur Low-Self-Discharge-Zellen taugen für Geräte, die lange liegen</td></tr>
+<tr><td><b>Supercap</b></td><td>2,5–5,5 V</td><td>gering</td><td>sehr hoch</td><td>Tage bis Wochen</td><td>Für Überbrückung und Stromspitzen, nicht für Dauerbetrieb</td></tr>
 </tbody>
 </table></div>
-<p class="note"><b>Selbstentladung nicht vergessen:</b> Eine Lithium-Knopfzelle verliert etwa 1 % pro Jahr, eine Alkaline-Zelle 2–3 %, eine NiMH-Zelle ohne Low-Self-Discharge-Technik bis zu 20 % pro Monat. Bei Geräten, die auf zehn Jahre Laufzeit ausgelegt sind, wird die Selbstentladung zum bestimmenden Faktor — die Schaltung ist dann nicht mehr der Engpass.</p>
+<div class="tip"><b>Bei zweistelligen Laufzeiten in Jahren rechnet man gegen die Chemie, nicht gegen die Schaltung:</b> Eine Zelle mit 1 % Selbstentladung pro Jahr ist nach zehn Jahren rechnerisch bei 90 % — jede weitere Optimierung des Schlafstroms bringt dann nichts mehr. Ebenso wichtig: Kapazitätsangaben gelten für kleine Entladeströme und Raumtemperatur; bei Kälte und Stromspitzen bleibt deutlich weniger übrig.</div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li>Nordic Semiconductor, <a href="https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2">Power Profiler Kit II</a> — Messgerät und sehr lesenswerte Anwendungshinweise.</li>
+    <li>Nordic Semiconductor, <a href="https://www.nordicsemi.com/Products/Development-hardware/Power-Profiler-Kit-2">Power Profiler Kit II</a> — Messgerät und lesenswerte Anwendungshinweise.</li>
     <li>Texas Instruments, <i>Achieving Ultra-Low Power in MCU Applications</i> und die MSP430-Anwendungsberichte.</li>
     <li>STMicroelectronics AN4991 und AN5001 — Low-Power-Modi bei STM32.</li>
     <li>Datenblätter von Energizer, Panasonic und Varta mit Entladekurven und Innenwiderstand über Temperatur.</li>
+    <li>Regler, Wandler und ihre Ruheströme: <a href="elektrotechnik.html#versorgung">Elektrotechnik → Spannungsversorgung</a>.</li>
   </ul>
 </div>

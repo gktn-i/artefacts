@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Ein Gewinde ist eine schiefe Ebene, die um einen Zylinder gewickelt ist — und je nach Flankenwinkel und Steigung entweder eine Verbindung, eine Abdichtung oder ein Antrieb.</b> Wer die Bauart richtig wählt, spart sich die halbe Konstruktion; wer Norm und Bauart verwechselt, bekommt Leckagen und ausgerissene Gewinde. Maßtabellen mit Kernloch, Durchgang und Anziehmoment stehen unter <a href="#schrauben">Schrauben &amp; Anziehen</a>.</div>
+<div class="kurz"><b>Ein Gewinde ist eine schiefe Ebene, die um einen Zylinder gewickelt ist — und je nach Flankenwinkel und Steigung entweder eine Verbindung, eine Abdichtung oder ein Antrieb.</b> Wer die Bauart richtig wählt, spart sich die halbe Konstruktion; wer Norm und Bauart verwechselt, bekommt Leckagen und ausgerissene Gewinde. Das metrische Regelgewinde mit Kernloch, Durchgang und Anziehmoment steht kanonisch unter <a href="#schrauben">Schrauben &amp; Anziehen</a> — hier stehen alle übrigen Gewinde.</div>
 
 <h2>Gewindearten im Überblick</h2>
 <div class="tbl-wrap"><table style="min-width:920px">
@@ -19,6 +19,43 @@ import "./_style.css";
 </tbody>
 </table></div>
 <div class="tip"><b>Regel- oder Feingewinde?</b> Feingewinde trägt bei gleichem Außendurchmesser mehr (größerer Spannungsquerschnitt), stellt feiner ein und hält Vibration etwas besser stand. Dafür ist es empfindlicher gegen Beschädigung und Schmutz, verträgt weniger Montagezyklen und braucht ein exakteres Kernloch. Im Zweifel Regelgewinde — es ist überall verfügbar und verzeiht mehr.</div>
+
+<h2>Maße jenseits des Regelgewindes</h2>
+<p>Kernloch für rund 75 % Tragtiefe, Durchgang in mittlerer Reihe nach ISO 273, Spannungsquerschnitt A_s nach DIN 13-28 bzw. ASME B1.1.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Gewinde</th><th data-s="num">Steigung</th><th data-s="num">Kernloch</th><th data-s="num">Durchgang mittel</th><th data-s="num">A_s</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td colspan="6"><b>Metrisches Feingewinde</b> — DIN 13-2 bis -11</td></tr>
+<tr><td><b>M8 × 1</b></td><td>1,0 mm</td><td>7,0 mm</td><td>9,0 mm</td><td>39,2 mm²</td><td>7 % mehr Querschnitt als M8 Regelgewinde</td></tr>
+<tr><td><b>M10 × 1</b></td><td>1,0 mm</td><td>9,0 mm</td><td>11,0 mm</td><td>64,5 mm²</td><td>Sensor- und Verschraubungsgewinde</td></tr>
+<tr><td><b>M10 × 1,25</b></td><td>1,25 mm</td><td>8,8 mm</td><td>11,0 mm</td><td>61,2 mm²</td><td>—</td></tr>
+<tr><td><b>M12 × 1,25</b></td><td>1,25 mm</td><td>10,8 mm</td><td>13,5 mm</td><td>92,1 mm²</td><td>Fahrzeugtechnik</td></tr>
+<tr><td><b>M12 × 1,5</b></td><td>1,5 mm</td><td>10,5 mm</td><td>13,5 mm</td><td>88,1 mm²</td><td>—</td></tr>
+<tr><td><b>M16 × 1,5</b></td><td>1,5 mm</td><td>14,5 mm</td><td>17,5 mm</td><td>167 mm²</td><td>Hydraulikverschraubungen</td></tr>
+<tr><td><b>M20 × 1,5</b></td><td>1,5 mm</td><td>18,5 mm</td><td>22,0 mm</td><td>272 mm²</td><td>—</td></tr>
+<tr><td colspan="6"><b>Rohrgewinde</b> — Zollangabe = lichter Rohrquerschnitt, nicht Gewindedurchmesser</td></tr>
+<tr><td><b>G 1/8″</b></td><td>28 Gänge/Zoll</td><td>8,8 mm</td><td>—</td><td>—</td><td>Zylindrisch ISO 228, dichtet an der Stirnfläche</td></tr>
+<tr><td><b>G 1/4″</b></td><td>19 Gänge/Zoll</td><td>11,8 mm</td><td>—</td><td>—</td><td>Manometer, Pneumatik</td></tr>
+<tr><td><b>G 3/8″</b></td><td>19 Gänge/Zoll</td><td>15,25 mm</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><b>G 1/2″</b></td><td>14 Gänge/Zoll</td><td>19,0 mm</td><td>—</td><td>—</td><td>Sanitär, Hydraulik</td></tr>
+<tr><td><b>R 1/4″</b></td><td>19 Gänge/Zoll</td><td>11,4 mm</td><td>—</td><td>—</td><td>Kegelig ISO 7, dichtet im Gewinde</td></tr>
+<tr><td><b>NPT 1/4″</b></td><td>18 Gänge/Zoll</td><td>11,1 mm</td><td>—</td><td>—</td><td>60° Flankenwinkel, passt <b>nicht</b> zu G oder R</td></tr>
+<tr><td colspan="6"><b>Zoll UNC</b> — ASME B1.1</td></tr>
+<tr><td><b>#4-40 UNC</b></td><td>40 TPI</td><td>2,26 mm</td><td>3,1 mm</td><td>3,90 mm²</td><td>US-Elektronik, etwas schwächer als M3</td></tr>
+<tr><td><b>#6-32 UNC</b></td><td>32 TPI</td><td>2,70 mm</td><td>3,6 mm</td><td>5,86 mm²</td><td>Computergehäuse, 19-Zoll-Technik</td></tr>
+<tr><td><b>#8-32 UNC</b></td><td>32 TPI</td><td>3,45 mm</td><td>4,3 mm</td><td>9,04 mm²</td><td>—</td></tr>
+<tr><td><b>#10-24 UNC</b></td><td>24 TPI</td><td>3,80 mm</td><td>5,1 mm</td><td>11,3 mm²</td><td>—</td></tr>
+<tr><td><b>1/4″-20 UNC</b></td><td>20 TPI</td><td>5,10 mm</td><td>6,6 mm</td><td>20,5 mm²</td><td>Stativgewinde, entspricht etwa M6</td></tr>
+<tr><td><b>5/16″-18 UNC</b></td><td>18 TPI</td><td>6,50 mm</td><td>8,4 mm</td><td>33,8 mm²</td><td>—</td></tr>
+<tr><td><b>3/8″-16 UNC</b></td><td>16 TPI</td><td>7,90 mm</td><td>10,0 mm</td><td>50,0 mm²</td><td>Großes Stativgewinde, Mikrofonstative</td></tr>
+<tr><td colspan="6"><b>Trapezgewinde</b> — DIN 103, Kernloch der Mutter = d − P</td></tr>
+<tr><td><b>Tr 8 × 1,5</b></td><td>1,5 mm</td><td>6,5 mm</td><td>—</td><td>—</td><td>Z-Achsen im 3D-Druck, selbsthemmend</td></tr>
+<tr><td><b>Tr 8 × 8 (P2, 4-gängig)</b></td><td>P 2 mm, Vorschub 8 mm</td><td>6,0 mm</td><td>—</td><td>—</td><td>Schnellhub, nicht selbsthemmend</td></tr>
+<tr><td><b>Tr 10 × 2</b></td><td>2 mm</td><td>8,0 mm</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><b>Tr 12 × 3</b></td><td>3 mm</td><td>9,0 mm</td><td>—</td><td>—</td><td>Werkbank- und Schraubstockspindeln</td></tr>
+<tr><td><b>Tr 16 × 4</b></td><td>4 mm</td><td>12,0 mm</td><td>—</td><td>—</td><td>Größere Hubachsen</td></tr>
+</tbody>
+</table></div>
 
 <h2>Rohrgewinde: die häufigste Verwechslung</h2>
 <div class="warn"><b>G, R und NPT sind nicht austauschbar.</b> <b>G</b> (zylindrisch, ISO 228) dichtet <em>nicht</em> im Gewinde, sondern über einen Dichtring oder eine Dichtkante an der Stirnfläche. <b>R</b> (kegelig, ISO 7) dichtet im Gewinde selbst und braucht Hanf oder PTFE-Band. <b>NPT</b> ist ebenfalls kegelig, hat aber 60° statt 55° Flankenwinkel und eine andere Gewindeform — es lässt sich einige Gänge weit einschrauben und leckt danach zuverlässig. Ein R-Außengewinde passt dagegen in ein zylindrisches Rp-Innengewinde: die übliche Kombination in der Pneumatik.</div>
@@ -44,7 +81,7 @@ import "./_style.css";
 <h2>Gewinde herstellen</h2>
 <div class="fbox">
   <span class="f">d_Kern ≈ d − P</span>
-  <span class="l">Kernlochdurchmesser für rund 75 % Gewindetragtiefe, den Normalfall. M8 mit P = 1,25 mm ergibt 6,75 mm — der genormte Bohrer ist 6,8 mm. Fertige Maße für alle Größen: <a href="#schrauben">Schrauben &amp; Anziehen</a>.</span>
+  <span class="l">Kernlochdurchmesser für rund 75 % Gewindetragtiefe, den Normalfall. M8 mit P = 1,25 mm ergibt 6,75 mm — der genormte Bohrer ist 6,8 mm. Fertige Maße: Regelgewinde unter <a href="#schrauben">Schrauben &amp; Anziehen</a>, alle übrigen in der Tabelle oben.</span>
 </div>
 <div class="tbl-wrap"><table style="min-width:720px">
 <thead><tr><th data-s="text">Situation</th><th data-s="num">Tragtiefe</th><th>Kernloch</th><th>Warum</th></tr></thead>

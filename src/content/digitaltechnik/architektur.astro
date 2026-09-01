@@ -122,8 +122,7 @@ import "./_style.css";
 </div>
 <div class="steps">
   <div class="step"><h4>Erst messen, dann optimieren</h4>Ein Zeitzähler um verdächtige Abschnitte oder ein GPIO-Pin am Oszilloskop ist auf Mikrocontrollern das direkteste Werkzeug (<a href="embedded-firmware.html#debug">Embedded → Debug</a>).</div>
-  <div class="step"><h4>Die üblichen Bremsen kennen</h4>Fließkomma ohne FPU (Faktor 50–200), <code>printf</code> mit Formatierung, Division ohne Hardware-Divider, blockierende Wartezeiten, Zugriffe auf externes RAM.</div>
-  <div class="step"><h4>Compiler arbeiten lassen</h4><code>-O2</code> statt <code>-O0</code> bringt oft Faktor 3 bis 10; zum Debuggen optimierten Codes <code>-Og</code>.</div>
+  <div class="step"><h4>Die üblichen Bremsen kennen</h4>Fließkomma ohne FPU (Faktor 50–200), <code>printf</code> mit Formatierung, Division ohne Hardware-Divider, blockierende Wartezeiten, Zugriffe auf externes RAM. Und: <code>-O2</code> statt <code>-O0</code> bringt oft Faktor 3 bis 10.</div>
   <div class="step"><h4>Algorithmus vor Mikrooptimierung</h4>Nachschlagetabelle statt Winkelfunktion, bessere Komplexität, weniger Neuberechnung — das bringt Größenordnungen, Assembler-Tricks bringen Prozente.</div>
 </div>
 <div class="tip"><b>Nützlicher als Assembler schreiben ist Assembler lesen.</b> <code>arm-none-eabi-objdump -d</code> oder der Disassembler im Debugger zeigt, was der Compiler wirklich erzeugt hat: ob eine Optimierung greift, ob eine Variable wegoptimiert wurde (fehlendes <code>volatile</code>), warum eine ISR zu lange braucht. <a href="https://godbolt.org/">Compiler Explorer</a> macht dasselbe im Browser für beliebige Zielarchitekturen.</div>

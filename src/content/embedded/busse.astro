@@ -12,8 +12,8 @@ import "./_style.css";
 <tr><td><b>UART</b></td><td>2 (TX, RX)</td><td>genau 2</td><td>bis ~12 Mbit/s</td><td>&lt; 5 m (mit RS-485 bis 1200 m)</td><td>Denkbar einfach, überall vorhanden</td><td>Nur Punkt zu Punkt, Baudraten müssen passen</td></tr>
 <tr><td><b>CAN / CAN FD</b></td><td>2 differentiell + GND</td><td>bis 110</td><td>1 Mbit/s (FD bis 8 Mbit/s Daten)</td><td>bis 40 m bei 1 Mbit/s</td><td>Sehr störfest, Arbitrierung ohne Kollisionsverlust, Fehlererkennung eingebaut</td><td>Transceiver nötig, Abschlusswiderstände, mehr Einarbeitung</td></tr>
 <tr><td><b>RS-485</b></td><td>2 differentiell</td><td>bis 32 (mehr mit modernen Treibern)</td><td>bis 10 Mbit/s</td><td>bis 1200 m</td><td>Sehr robust, große Reichweite</td><td>Halbduplex, Richtungsumschaltung, Protokoll (meist Modbus) selbst</td></tr>
-<tr><td><b>USB</b></td><td>4 (D+, D−, V_BUS, GND)</td><td>Host zu Geräten</td><td>12 M / 480 M / 5 G</td><td>&lt; 5 m</td><td>Stromversorgung inklusive, am PC überall</td><td>Aufwendiger Protokollstapel, Host nötig</td></tr>
-<tr><td><b>1-Wire</b></td><td>1 (+ GND)</td><td>viele</td><td>15 kbit/s</td><td>bis 100 m</td><td>Minimale Verdrahtung, Speisung über die Datenleitung möglich</td><td>Sehr langsam, striktes Timing</td></tr>
+<tr><td><b>USB</b></td><td>4 (D+, D−, V_BUS, GND); SuperSpeed zusätzlich zwei Paare</td><td>Host zu Geräten</td><td>12 M / 480 M / 5 G</td><td>&lt; 5 m</td><td>Stromversorgung inklusive, am PC überall</td><td>Aufwendiger Protokollstapel, Host nötig</td></tr>
+<tr><td><b>1-Wire</b></td><td>1 (+ GND)</td><td>viele</td><td>15 kbit/s (Overdrive 125 k)</td><td>bis 100 m</td><td>Minimale Verdrahtung, Speisung über die Datenleitung möglich</td><td>Sehr langsam, striktes Timing</td></tr>
 </tbody>
 </table></div>
 

@@ -15,6 +15,27 @@ import "./_style.css";
 </tbody>
 </table></div>
 
+<svg class="dg m" viewBox="0 0 620 200" role="img" aria-label="H-Brücke: vier Schalter, Motor in der Mitte, Stromweg über Q1 und Q4">
+  <path class="w" d="M120,30 H440 M120,170 H440" />
+  <text class="lbl" x="114" y="34" text-anchor="end">+U_B</text>
+  <text class="lbl" x="114" y="174" text-anchor="end">GND</text>
+  <path class="w" d="M180,30 V55 M380,30 V55 M180,155 V170 M380,155 V170 M180,105 V125 M380,105 V125" />
+  <rect class="box" x="150" y="55" width="60" height="30" rx="4" /><text class="lbl" x="180" y="74" text-anchor="middle">Q1</text>
+  <rect class="box" x="350" y="55" width="60" height="30" rx="4" /><text class="lbl" x="380" y="74" text-anchor="middle">Q2</text>
+  <rect class="box" x="150" y="125" width="60" height="30" rx="4" /><text class="lbl" x="180" y="144" text-anchor="middle">Q3</text>
+  <rect class="box" x="350" y="125" width="60" height="30" rx="4" /><text class="lbl" x="380" y="144" text-anchor="middle">Q4</text>
+  <circle class="box" cx="280" cy="105" r="24" /><text class="lbl" x="280" y="110" text-anchor="middle">M</text>
+  <path class="acc" d="M180,85 V105 H252" /><path class="accf" d="M256,105 l-8,-4 v8 z" />
+  <path class="acc" d="M304,105 H380 V125" /><path class="accf" d="M380,129 l-4,-8 h8 z" />
+  <text class="lbla" x="460" y="64">Q1 + Q4 ein → Rechtslauf</text>
+  <text class="lbl" x="460" y="88">Q2 + Q3 ein → Linkslauf</text>
+  <text class="lbl" x="460" y="112">Q1 + Q3 zugleich =</text>
+  <text class="lbl" x="460" y="128" style="fill:var(--bad)">Brückenkurzschluss</text>
+  <text class="lbl" x="460" y="152">→ Totzeit zwischen</text>
+  <text class="lbl" x="460" y="168">den Flanken nötig</text>
+</svg>
+<p class="note">Die <b>Totzeit</b> (Dead Time) zwischen dem Ausschalten des einen und dem Einschalten des anderen Schalters eines Brückenzweigs ist Pflicht — sonst leiten beide für Nanosekunden gleichzeitig. Integrierte Treiber erzeugen sie selbst, bei diskretem Aufbau muss der Timer sie liefern.</p>
+
 <h2>Strombegrenzung — der wichtigste Parameter</h2>
 <div class="steps">
   <div class="step"><h4>Warum sie nötig ist</h4>Ein stehender Motor ist elektrisch fast ein Kurzschluss: Nur der Wicklungswiderstand begrenzt. 1 Ω an 24 V bedeutet 24 A — weit über dem Nennstrom.</div>
