@@ -170,18 +170,79 @@ import "./_style.css";
   <div class="card"><div class="ct">Passform &amp; Laden</div><div class="cd">Vor dem Kauf prüfen: Zellen mit Schutzschaltung sind ein paar Millimeter länger, Button- und Flat-Top nicht überall austauschbar. Geladen wird im Gerät (USB-C), im Rundzellen-Lader oder am Hobby-Lader im <b>Li-Ion-Modus</b> mit 0,5–1C — nie im LiPo-Modus.</div></div>
 </div>
 
-<h2>Laden: der Ablauf, der nicht schiefgeht</h2>
+<h2>Laden: Schritt für Schritt</h2>
+<p>Der komplette Ablauf für <b>einen</b> Pack am Ladegerät. Mehrere Packs gleichzeitig: <a href="#akku--parallel-laden-aber-sicher">Parallel laden</a>.</p>
+
+<h3>1 · Ladeplatz vorbereiten</h3>
+<ul>
+  <li>Nicht brennbarer Untergrund (Fliesen, Blech, Stein) — kein Teppich, kein Sofa, keine Werkbank aus Holz</li>
+  <li>Pack in LiPo-Tasche, Blumentopf oder Munitionskiste — <b>offen, nicht luftdicht verschlossen</b></li>
+  <li>Nichts Brennbares im Umkreis von einem Meter; Rauchmelder im Raum</li>
+  <li>Sand oder Löschdecke daneben: Ein Lithium-Brand lässt sich <b>nicht ersticken</b> — er bringt seinen Sauerstoff selbst mit. Wasser löscht ihn nicht, kühlt aber die Umgebung</li>
+</ul>
+
+<h3>2 · Pack prüfen — 20 Sekunden</h3>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Prüfen</th><th>In Ordnung</th><th>Nicht laden, wenn</th></tr></thead>
+<tbody>
+<tr><td><b>Form</b></td><td>flach, straff gewickelt</td><td>aufgebläht, weiche Stellen, Dellen bis auf die Zelle</td></tr>
+<tr><td><b>Kabel &amp; Stecker</b></td><td>fest, unbeschädigt</td><td>angerissene Balancerkabel, verschmorter oder wackliger Stecker</td></tr>
+<tr><td><b>Temperatur</b></td><td>handwarm oder kühler<br /><span class="mono">Ladefenster 0–45 °C</span></td><td>flugwarm (erst abkühlen) oder unter 0 °C (erst ins Warme — sonst lagert sich Lithium metallisch ab)</td></tr>
+<tr><td><b>Ruhespannung</b></td><td>über 3,3 V je Zelle<br /><span class="mono">4S &gt; 13,2 V · 6S &gt; 19,8 V</span></td><td>unter 3,0 V je Zelle → nur mit Vorsicht und kleinem Strom; unter 2,5 V → entsorgen</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Nach einem Crash: 20–30 Minuten warten und beobachten</b>, bevor der Pack an den Lader kommt. Beschädigte Zellen reagieren oft verzögert, nicht im Moment des Einschlags.</div>
+
+<h3>3 · Anstecken — Reihenfolge einhalten</h3>
 <div class="steps">
-  <div class="step"><h4>Sichtprüfung vor jedem Laden</h4>Aufgebläht, Dellen bis auf die Zelle, angerissene Balancerkabel, verschmorter Stecker — dann wird nicht geladen. Nach einem harten Crash den Akku erst 20–30 Minuten an sicherer Stelle beobachten: Beschädigte Zellen reagieren oft mit Verzögerung, nicht im Moment des Einschlags.</div>
-  <div class="step"><h4>Temperatur prüfen</h4>Nie flugwarm laden — erst auf Handwärme abkühlen. Ladefenster ~0–45 °C. <b>Unter 0 °C nie laden:</b> Lithium lagert sich metallisch an der Anode ab → interner Kurzschluss möglich. Im Winter: erst auf Zimmertemperatur bringen.</div>
-  <div class="step"><h4>Modus → Zellenzahl → Strom, in dieser Reihenfolge</h4>Chemie wählen (LiPo/LiHV/Li-Ion, siehe Tabelle oben) · erkannte Zellenzahl <em>bestätigen statt wegklicken</em> (falsch erkannt heißt tiefentladen oder überladen) · Strom 1C: 1300er → 1,3 A, 450er → 0,45 A. 2C geht, kostet Lebensdauer — Ausnahme für den Flugtag, kein Standard.</div>
-  <div class="step"><h4>Immer über den Balance-Anschluss</h4>Der Balancer gleicht die Zellen während des Ladens einzeln an und ist gleichzeitig die Überwachung: Ohne ihn sieht das Ladegerät nur die Summenspannung, und eine einzelne überladene Zelle in einem sonst gesunden Pack ist die klassische Brandursache.</div>
-  <div class="step"><h4>Beaufsichtigt und feuerfest</h4>Auf nicht brennbarem Untergrund, in LiPo-Tasche oder Munitionskiste, Rauchmelder in der Nähe, nie über Nacht. Ein Lithium-Brand lässt sich nicht ersticken — er bringt seinen Sauerstoff mit. Sand oder eine Löschdecke daneben kostet nichts.</div>
-  <div class="step"><h4>Nach dem Laden: Balance-Blick</h4>Zellen nach dem Vollladen ≤ 0,01–0,02 V auseinander (Einzelspannungen zeigt jedes brauchbare Ladegerät). Läuft eine Zelle wiederholt davon: Der Pack altert ungleich und ist auf dem Weg nach draußen.</div>
-  <div class="step"><h4>Mehrere Packs? Parallel-Board — mit eigenen Regeln</h4>Ein Paraboard lädt mehrere Packs in einem Durchgang und ist am Flugtag kaum verzichtbar. Es hat aber eigene Sicherheitsregeln, die vor dem ersten Anstecken sitzen müssen — der komplette Ablauf steht im nächsten Unterpunkt <a href="#akku--parallel-laden-aber-sicher">Parallel laden — aber sicher</a>.</div>
-  <div class="step"><h4>Voll geladen wird geflogen, nicht gelagert</h4>Am Vorabend des Flugtags laden ist in Ordnung. Tagelang voll herumliegen altert die Zellen messbar — wer den Flugtag absagt, fährt die Packs zurück auf Storage.</div>
+  <div class="step"><h4>Erst der Hauptstecker (XT60/XT30) ans Ladekabel</h4>Ein kleiner Funke ist normal — das ist der Ladeelko des Geräts.</div>
+  <div class="step"><h4>Dann der Balancerstecker</h4>Auf die Nut achten, nie mit Gewalt. Er passt nur in eine Richtung; verpolt eingesteckt zerstört er die Zelle.</div>
+  <div class="step"><h4>Abziehen später genau umgekehrt</h4>Erst Balancer, dann Hauptstecker. Die dünnen Balancer-Adern vertragen keine Ausgleichsströme.</div>
 </div>
 
+<h3>4 · Einstellen — Modus, Zellenzahl, Strom</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Einstellung</th><th>Was wählen</th><th>Typischer Fehler</th></tr></thead>
+<tbody>
+<tr><td><b>1. Programm</b></td><td><span class="mono">Balance Charge</span> — nicht „Fast“, nicht „Storage“, nicht „Charge“ ohne Balance</td><td>„Charge“ ohne Balance sieht nur die Summenspannung — eine einzelne überladene Zelle im sonst gesunden Pack ist die klassische Brandursache</td></tr>
+<tr><td><b>2. Chemie</b></td><td>LiPo · LiHV · Li-Ion — genau das, was auf dem Pack steht</td><td>LiPo im LiHV-Modus = Überladung auf 4,35 V</td></tr>
+<tr><td><b>3. Zellenzahl</b></td><td>Erkannten Wert <b>bestätigen</b>: Stimmt er mit dem Aufdruck überein?</td><td>Blind wegklicken — ein als 5S erkannter 6S wird nie voll, ein als 6S erkannter 5S überladen</td></tr>
+<tr><td><b>4. Strom</b></td><td><b>1C</b> = Kapazität in Ah. 1300 mAh → 1,3 A · 450 mAh → 0,45 A · 6S-1300 → 1,3 A (nicht × 6!)</td><td>Strom mit der Zellenzahl multiplizieren</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>1C ist der Standard.</b> 2C können moderne Packs, kostet aber Lebensdauer — Ausnahme für den Flugtag. Der Ladestrom hängt nur an der <em>Kapazität</em>, nie an der Zellenzahl.</div>
+
+<h3>5 · Starten und die erste Minute dabeibleiben</h3>
+<ul>
+  <li><b>Start gedrückt halten</b>, bis das Gerät die Zellspannungen anzeigt — jetzt prüfen: Zeigt es die richtige Zellenzahl?</li>
+  <li><b>Erste Minute:</b> Pack und Stecker anfassen. Handwarm ist normal, heiß nicht</li>
+  <li><b>Danach:</b> im Raum bleiben, nie über Nacht, nie unbeaufsichtigt aus dem Haus</li>
+  <li><b>Dauer bei 1C:</b> etwa 60–75 Minuten von leer auf voll — deutlich schneller heißt, der Strom stimmt nicht</li>
+</ul>
+<div class="stop"><b>Sofort abbrechen und Pack nach draußen bringen, wenn:</b> der Pack sich sichtbar bläht · irgendetwas heiß wird oder süßlich riecht · das Ladegerät eine Zelle mit stark abweichender Spannung meldet · Rauch austritt. Nicht mit Wasser löschen, nicht in geschlossene Behälter werfen.</div>
+
+<h3>6 · Fertig — der Balance-Blick</h3>
+<ul>
+  <li>Das Gerät meldet <span class="mono">Full</span> / <span class="mono">Done</span> bei 4,20 V je Zelle (LiHV 4,35 V)</li>
+  <li><b>Einzelspannungen ansehen:</b> alle Zellen ≤ 0,01–0,02 V auseinander</li>
+  <li>Läuft eine Zelle wiederholt weiter davon → der Pack altert ungleich und geht seinem Ende entgegen</li>
+  <li>Abziehen: erst Balancer, dann Hauptstecker</li>
+  <li><b>Voll geladen wird geflogen, nicht gelagert.</b> Fällt der Flugtag aus: zurück auf Storage (3,80–3,85 V)</li>
+</ul>
+
+<h3>Wenn das Ladegerät meckert</h3>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Meldung</th><th>Bedeutet</th><th>Was tun</th></tr></thead>
+<tbody>
+<tr><td><b>Connection Break</b></td><td>Ladepfad unterbrochen</td><td>Beide Stecker nachsetzen, Ladekabel auf Bruch prüfen, Netzteil-Leistung prüfen</td></tr>
+<tr><td><b>Balance Connect Error</b><br />Cell Connect Error</td><td>Balancerstecker liest nicht alle Zellen</td><td>Stecker abziehen und gerade neu einstecken; Kontakte im Stecker auf verbogene Pins ansehen</td></tr>
+<tr><td><b>Cell Voltage Invalid</b><br />Abnormal Cell Voltage</td><td>Eine Zelle liegt außerhalb des Fensters</td><td><b>Nicht überbrücken.</b> Zellspannungen einzeln messen — tiefentladene oder defekte Zelle aussortieren</td></tr>
+<tr><td><b>Cell Count Error</b></td><td>Erkannte Zellenzahl passt nicht zur Einstellung</td><td>Aufdruck gegen Einstellung prüfen; bei Abweichung ist meist eine Zelle tiefentladen</td></tr>
+<tr><td><b>Input Voltage Error</b></td><td>Versorgung zu schwach oder bricht ein</td><td>Stärkeres Netzteil; am Auto-Akku: Motor läuft oder Ladestrom senken</td></tr>
+<tr><td><b>Temperature / Over Temp</b></td><td>Pack oder Gerät zu warm</td><td>Abbrechen, abkühlen lassen, Lüftung des Geräts freiräumen</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Eine Fehlermeldung ist ein Befund, kein Hindernis.</b> Wer sie durch Neustarten, Wackeln am Stecker oder Wechsel in den Nicht-Balance-Modus umgeht, lädt an einer Warnung vorbei — genau daraus entstehen Ladebrände.</div>
 
 <h2>Parallel laden — aber sicher</h2>
 <ul>
