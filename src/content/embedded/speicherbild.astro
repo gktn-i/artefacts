@@ -4,7 +4,7 @@ import "./_style.css";
 <div class="kurz"><b>Zwischen dem Einschalten und der ersten Zeile in <code>main()</code> passiert mehr, als die meisten vermuten:</b> Vektortabelle, Takt, Kopieren initialisierter Variablen, Nullen des BSS-Bereichs, Konstruktoren. Wer diesen Weg kennt, versteht Linker-Fehler, Bootloader und Updates ohne Zauberei.</div>
 
 <h2>Der Speicher beim Start</h2>
-<svg class="dg l" viewBox="0 0 600 220" role="img" aria-label="Speicherbild: Flash mit Vektortabelle, Code, Konstanten und den Anfangswerten der Variablen; RAM mit data, bss, Heap, freiem Bereich und Stack">
+<svg class="dg l" viewBox="0 0 640 220" role="img" aria-label="Speicherbild: Flash mit Vektortabelle, Code, Konstanten und den Anfangswerten der Variablen; RAM mit data, bss, Heap, freiem Bereich und Stack">
   <text class="lblb" x="125" y="18" text-anchor="middle">FLASH — bleibt erhalten</text>
   <text class="lblb" x="445" y="18" text-anchor="middle">RAM — beim Reset undefiniert</text>
   <rect class="box" x="55" y="28" width="140" height="26" rx="3" /><text class="lbl" x="125" y="45" text-anchor="middle">.isr_vector</text>
@@ -18,7 +18,8 @@ import "./_style.css";
   <rect class="box" x="375" y="162" width="140" height="26" rx="3" /><text class="lbl" x="445" y="180" text-anchor="middle">Stack</text>
   <path class="acc" d="M195,170 H285 V43 H367" />
   <path class="accf" d="M375,43 l-9,-5 v10 z" />
-  <text class="lbla" x="291" y="110">Startup kopiert</text>
+  <text class="lbla" x="291" y="104">Startup</text>
+  <text class="lbla" x="291" y="116">kopiert</text>
   <path class="w" d="M445,120 V132" /><path class="f" d="M445,140 l-5,-9 h10 z" />
   <path class="w" d="M445,162 V150" /><path class="f" d="M445,142 l-5,9 h10 z" />
   <text class="lbl" x="369" y="36" text-anchor="end">niedrig</text>
