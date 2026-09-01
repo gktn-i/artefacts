@@ -37,7 +37,7 @@ import "./_style.css";
 <tr><td><b>Ladungspumpe</b></td><td>Vielfache / negativ</td><td>nein</td><td>70–90 %</td><td>kleine Ströme ohne Spule, z. B. −5 V für ein Display</td></tr>
 </tbody>
 </table></div>
-<p class="note">Die Übertrager dazu — Flyback mit Luftspalt, Forward ohne, stromkompensierte Drossel im Eingangsfilter — stehen bei <a href="#felder">Felder, Spulen &amp; Trafos</a>; die Schalter selbst bei <a href="#transistoren">Transistor &amp; MOSFET</a>.</p>
+<p class="note">Die Übertrager dazu — Flyback mit Luftspalt, Forward ohne, stromkompensierte Drossel im Eingangsfilter — stehen bei <a href="elektrotechnik.html#felder">Felder, Spulen &amp; Trafos</a>; die Schalter selbst bei <a href="#transistoren">Transistor &amp; MOSFET</a>.</p>
 
 <h2>Buck-Wandler auslegen</h2>
 <div class="steps">
@@ -82,7 +82,7 @@ import "./_style.css";
   <div class="card"><div class="ct">Verpolschutz</div><div class="cd">p-Kanal-MOSFET in der Plusleitung oder Schottky in Reihe; bei größeren Strömen ein Ideal-Dioden-Controller.</div></div>
   <div class="card"><div class="ct">Überspannung</div><div class="cd">TVS-Diode am Eingang, ausgelegt auf die Impulsform nach IEC 61000-4-5. Im Fahrzeug zusätzlich auf Load Dump nach ISO 7637-2.</div></div>
   <div class="card"><div class="ct">Überstrom</div><div class="cd">Polyfuse (PTC) für rücksetzbare Begrenzung, Schmelzsicherung wo eine harte Trennung nötig ist. Elektronische Lastschalter (eFuse) können beides plus Einschaltstrombegrenzung.</div></div>
-  <div class="card"><div class="ct">Einschaltstrom</div><div class="cd">NTC oder Soft-Start im Regler. Ohne beides verschweißen Schaltkontakte und Sicherungen lösen sporadisch aus — Rechnung dazu in <a href="#transient">Schaltvorgänge</a>.</div></div>
+  <div class="card"><div class="ct">Einschaltstrom</div><div class="cd">NTC oder Soft-Start im Regler. Ohne beides verschweißen Schaltkontakte und Sicherungen lösen sporadisch aus — Rechnung dazu in <a href="elektrotechnik.html#transient">Schaltvorgänge</a>.</div></div>
   <div class="card"><div class="ct">Brownout</div><div class="cd">Sinkt die Versorgung langsam, arbeitet ein Mikrocontroller undefiniert und kann Flash korrumpieren. Brownout-Detektor aktivieren — bei den meisten MCUs per Fuse oder Register.</div></div>
   <div class="card"><div class="ct">Entladepfad</div><div class="cd">Ein Widerstand über dem Eingangselko entlädt ihn nach dem Abziehen des Netzsteckers. Bei Netzgeräten in EN IEC 62368-1 gefordert und für die Wartung schlicht sinnvoll.</div></div>
 </div>

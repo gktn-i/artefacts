@@ -20,7 +20,7 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:920px">
 <thead><tr><th data-s="text">Verbraucher</th><th>Typischer Beitrag</th><th>Gegenmittel</th></tr></thead>
 <tbody>
-<tr><td><b>Spannungsregler</b></td><td>AMS1117 rund 5 mA · MCP1700 1,6 µA · TPS7A02 25 nA</td><td>Ruhestrom I_q im Datenblatt zum Auswahlkriterium machen. Bei sehr kleiner Last ist ein LDO oft sparsamer als ein Schaltregler → <a href="elektrotechnik.html#versorgung">Spannungsversorgung</a></td></tr>
+<tr><td><b>Spannungsregler</b></td><td>AMS1117 rund 5 mA · MCP1700 1,6 µA · TPS7A02 25 nA</td><td>Ruhestrom I_q im Datenblatt zum Auswahlkriterium machen. Bei sehr kleiner Last ist ein LDO oft sparsamer als ein Schaltregler → <a href="elektronik.html#versorgung">Spannungsversorgung</a></td></tr>
 <tr><td><b>Pull-Widerstände</b></td><td>4,7 kΩ an 3,3 V dauerhaft Low ≈ 700 µA</td><td>Im Schlaf abschalten, hochohmiger auslegen oder den Ruhepegel umdrehen</td></tr>
 <tr><td><b>Floatende Eingänge</b></td><td>einige µA je Pin, stark streuend</td><td>Ein offener CMOS-Eingang lässt beide Transistoren teilweise leiten: ungenutzte Pins auf Analog oder mit Pull konfigurieren</td></tr>
 <tr><td><b>Sensoren</b></td><td>im Betrieb einige hundert µA, im Schlaf unter 1 µA</td><td>Schlafmodus aktiv setzen — oder die Versorgung über einen MOSFET ganz abschalten, dann entfällt auch der Leckstrom</td></tr>
@@ -81,6 +81,6 @@ import "./_style.css";
     <li>Texas Instruments, <i>Achieving Ultra-Low Power in MCU Applications</i> und die MSP430-Anwendungsberichte.</li>
     <li>STMicroelectronics AN4991 und AN5001 — Low-Power-Modi bei STM32.</li>
     <li>Datenblätter von Energizer, Panasonic und Varta mit Entladekurven und Innenwiderstand über Temperatur.</li>
-    <li>Regler, Wandler und ihre Ruheströme: <a href="elektrotechnik.html#versorgung">Elektrotechnik → Spannungsversorgung</a>.</li>
+    <li>Regler, Wandler und ihre Ruheströme: <a href="elektronik.html#versorgung">Elektrotechnik → Spannungsversorgung</a>.</li>
   </ul>
 </div>

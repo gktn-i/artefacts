@@ -102,7 +102,7 @@ import "./_style.css";
 </table></div>
 <div class="grid2">
   <div class="card"><div class="ct">RISC-V ist modular</div><div class="cd">Basis RV32I oder RV64I plus Erweiterungen: M (Multiplikation), A (Atomics), F/D (Fließkomma), C (komprimiert), V (Vektor), B (Bitmanipulation). Gegen die Fragmentierung definiert RISC-V International <b>Profile</b> — RVA23 (2024 ratifiziert) legt fest, was ein Linux-fähiger Anwendungsprozessor mindestens können muss.</div></div>
-  <div class="card"><div class="ct">Wo es heute steckt</div><div class="cd">In Mikrocontrollern (ESP32-C3/C5/C6/P4, CH32V, GD32V), als Hilfskerne in größeren Chips (Hazard3 im RP2350, Low-Power-Kerne bei Espressif), als Softcore im FPGA (<a href="#speicher">Speicher &amp; FPGA</a>). Der Umstieg von ARM ist auf C-Ebene unspektakulär; Aufwand entsteht bei Assembler, Startup-Code und Debug-Werkzeugen.</div></div>
+  <div class="card"><div class="ct">Wo es heute steckt</div><div class="cd">In Mikrocontrollern (ESP32-C3/C5/C6/P4, CH32V, GD32V), als Hilfskerne in größeren Chips (Hazard3 im RP2350, Low-Power-Kerne bei Espressif), als Softcore im FPGA (<a href="elektronik.html#speicher">Speicher &amp; FPGA</a>). Der Umstieg von ARM ist auf C-Ebene unspektakulär; Aufwand entsteht bei Assembler, Startup-Code und Debug-Werkzeugen.</div></div>
 </div>
 <p class="note">Für die Mechatronik bleibt <b>Cortex-M</b> der Standard — STM32, nRF52/54, RP2350, SAM, LPC. Der Vorteil ist weniger der Kern selbst als die Tatsache, dass Debugger, RTOS und Compiler über alle Hersteller hinweg gleich funktionieren. Die Interruptlatenz ist dort fest zugesichert: 12 Takte bei M3/M4/M7, 15–16 bei M0/M0+.</p>
 
