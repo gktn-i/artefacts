@@ -1,0 +1,159 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Filter lässt bestimmte Frequenzen durch und dämpft andere — Rauschen ist das, was danach übrig bleibt.</b> Die Ordnung bestimmt die Steilheit (20 dB je Dekade und Ordnung), die Approximation den Charakter. Rauschen lässt sich nicht wegfiltern, nur die Bandbreite begrenzen und die Quelle vermeiden.</div>
+
+<h2>Bode-Diagramm und Dezibel</h2>
+<svg class="dg l" viewBox="-40 0 660 230" role="img" aria-label="Bode-Diagramm eines Tiefpasses erster Ordnung mit Amplituden- und Phasengang">
+  <path class="w" d="M50,20 V120 H580" />
+  <path class="gd" d="M50,40 H580 M50,60 H580 M50,80 H580 M50,100 H580 M170,20 V210 M290,20 V210 M410,20 V210 M500,20 V210" />
+  <path class="acc" d="M50,40 H262 C286,40 300,52 312,66 L580,110" />
+  <text class="lbl" x="44" y="44" text-anchor="end">0 dB</text>
+  <text class="lbl" x="44" y="64" text-anchor="end">−3</text>
+  <text class="lbl" x="44" y="84" text-anchor="end">−20</text>
+  <text class="lbl" x="44" y="104" text-anchor="end">−40</text>
+  <text class="lbla" x="290" y="16" text-anchor="middle">f_g</text>
+  <path class="gd" d="M290,20 V220" />
+  <text class="lbla" x="450" y="82">−20 dB / Dekade</text>
+  <path class="w" d="M50,140 V210 H580" />
+  <path class="midl" d="M50,148 H200 C250,148 260,175 290,178 C320,181 340,200 400,202 H580" />
+  <text class="lbl" x="44" y="152" text-anchor="end">0°</text>
+  <text class="lbl" x="44" y="182" text-anchor="end">−45°</text>
+  <text class="lbl" x="44" y="206" text-anchor="end">−90°</text>
+  <text class="lbl" x="588" y="124">f</text>
+  <text class="lbl" x="588" y="214">f</text>
+</svg>
+<ul>
+  <li><b>Beide Achsen logarithmisch</b>, Amplitude in Dezibel; eine Dekade ist Faktor 10 in der Frequenz.</li>
+  <li><b>Erste Ordnung:</b> −20 dB/Dekade (= −6 dB/Oktave), Phasendrehung insgesamt 90°, an f_g genau −3 dB und −45°.</li>
+  <li><b>Zweite Ordnung:</b> −40 dB/Dekade, 180° Phasendrehung. Genau diese Phasendrehung kostet in Regelkreisen Stabilität — siehe <a href="regelung-antriebe.html#stabilitaet">Regelung → Stabilität</a>.</li>
+</ul>
+<div class="calc" data-calc="db">
+  <h4>Dezibel umrechnen</h4>
+  <div class="row">
+    <div><label>Wert in dB</label><input data-k="db" type="number" step="any" placeholder="-3" /></div>
+    <div><label>oder Faktor</label><input data-k="f" type="number" step="any" placeholder="0.707" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Passive und aktive Filter</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Typ</th><th>Aufbau</th><th>Grenzfrequenz</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>RC-Tiefpass</b></td><td>R längs, C nach Masse</td><td>f_g = 1/(2πRC)</td><td>Das Arbeitspferd. Ausgangswiderstand frequenzabhängig — die nächste Stufe belastet ihn</td></tr>
+<tr><td><b>RC-Hochpass</b></td><td>C längs, R nach Masse</td><td>f_g = 1/(2πRC)</td><td>Koppelkondensator: blockt den Gleichanteil</td></tr>
+<tr><td><b>LC-Tiefpass</b></td><td>L längs, C nach Masse</td><td>f_g = 1/(2π√(LC))</td><td>−40 dB/Dekade, sehr verlustarm — Standard am Ausgang von Schaltreglern</td></tr>
+<tr><td><b>LC-Bandpass</b></td><td>Reihenschwingkreis quer oder Parallelschwingkreis längs</td><td>f₀ = 1/(2π√(LC))</td><td>Güte Q = f₀/B bestimmt die Schmalbandigkeit</td></tr>
+<tr><td><b>Pi-Filter</b></td><td>C – L – C</td><td>—</td><td>Dritte Ordnung, −60 dB/Dekade; Netzfilter und EMV-Entstörung</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Kaskadieren ist nicht Multiplizieren.</b> Zwei RC-Tiefpässe hintereinander ergeben nicht einfach −40 dB/Dekade bei derselben Grenzfrequenz — die zweite Stufe belastet die erste. Entweder die Stufenimpedanzen um Faktor 10 staffeln oder mit einem Impedanzwandler entkoppeln. Genau dafür gibt es aktive Filter.</div>
+<div class="grid2">
+  <div class="card"><div class="ct">Sallen-Key</div><div class="cd">Zwei R, zwei C, ein OPV als Folger — zweite Ordnung. Einfach und unkritisch, bei hoher Güte aber empfindlich gegen Bauteiltoleranzen. Der Standard für Antialiasing bis einige hundert Kilohertz.</div></div>
+  <div class="card"><div class="ct">Multiple Feedback (MFB)</div><div class="cd">Invertierend, unempfindlicher gegen die OPV-Grenzen bei höheren Frequenzen, gut für Bandpässe.</div></div>
+  <div class="card"><div class="ct">Zustandsvariablenfilter</div><div class="cd">Drei OPVs, liefert Tief-, Hoch- und Bandpass gleichzeitig; Güte und Frequenz getrennt einstellbar. Aufwendig, aber sehr robust.</div></div>
+  <div class="card"><div class="ct">Switched-Capacitor</div><div class="cd">Fertige ICs, Grenzfrequenz per Takt einstellbar. Preis: Taktreste im Signal und begrenzte Dynamik.</div></div>
+</div>
+
+<h2>Die Approximationen im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Charakteristik</th><th>Durchlassbereich</th><th>Flankensteilheit</th><th>Sprungantwort</th><th>Nimmt man für</th></tr></thead>
+<tbody>
+<tr><td><b>Butterworth</b></td><td>maximal flach, keine Welligkeit</td><td>mittel</td><td>leichtes Überschwingen</td><td>Der vernünftige Standard, wenn nichts dagegen spricht</td></tr>
+<tr><td><b>Bessel (Thomson)</b></td><td>flach</td><td>am flachsten</td><td>kein Überschwingen, konstante Gruppenlaufzeit</td><td>Impulse, Rechtecksignale, Regelkreise, Sensorsignale mit Sprüngen</td></tr>
+<tr><td><b>Tschebyscheff Typ I</b></td><td>definierte Welligkeit (0,1–3 dB)</td><td>steil</td><td>deutliches Über- und Nachschwingen</td><td>Wenn Trennschärfe zählt und die Zeitform egal ist</td></tr>
+<tr><td><b>Cauer / elliptisch</b></td><td>Welligkeit im Durchlass <em>und</em> im Sperrbereich</td><td>am steilsten</td><td>schlechteste Zeitantwort</td><td>Antialiasing mit knappem Frequenzabstand</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die Regel dahinter:</b> Steilheit im Frequenzbereich wird immer mit Verhalten im Zeitbereich bezahlt. Ein sehr steiles Filter klingelt bei jedem Sprung nach. Wer Sensorsignale filtert und damit eine Regelung füttert, nimmt Bessel — dort ist die Gruppenlaufzeit über die Frequenz konstant, das Signal wird nur verzögert, nicht verformt.</div>
+
+<h2>Antialiasing und digitale Filter</h2>
+<div class="steps">
+  <div class="step"><h4>Nutzbandbreite festlegen</h4>Höchste Frequenz, die wirklich interessiert — beim Temperatursensor 1 Hz, bei Audio 20 kHz.</div>
+  <div class="step"><h4>Abtastrate wählen</h4>Mindestens das Doppelte, praktisch das 5- bis 10-Fache der Nutzbandbreite. Damit wird das Analogfilter deutlich einfacher.</div>
+  <div class="step"><h4>Filterordnung bestimmen</h4>Erforderliche Dämpfung bei f_s/2: rund 6 dB je Bit Auflösung — ein 12-Bit-ADC braucht also etwa 72 dB.</div>
+  <div class="step"><h4>Oversampling prüfen</h4>Oft billiger als ein hochordriges Filter: schneller abtasten, digital mitteln und dezimieren. Jede <b>Vervierfachung</b> der Abtastrate bringt 6 dB, also <b>1 Bit</b> effektive Auflösung — für 2 Bit braucht es Faktor 16.</div>
+</div>
+<div class="gb">
+  <div class="gb-col"><h4>FIR</h4><ul>
+    <li>Immer stabil, exakt lineare Phase möglich</li>
+    <li>Braucht viele Koeffizienten für steile Flanken</li>
+    <li>Einfachster Fall: gleitender Mittelwert</li>
+  </ul></div>
+  <div class="gb-col"><h4>IIR</h4><ul>
+    <li>Sehr wenige Koeffizienten für dieselbe Steilheit</li>
+    <li>Kann instabil werden, Phase nicht linear</li>
+    <li>Der Ein-Zeilen-Klassiker: <span class="formula">y += α·(x − y)</span> — ein digitaler RC-Tiefpass mit α = dt/(dt + RC)</li>
+  </ul></div>
+</div>
+<p class="note">Für Sensorwerte im Mikrocontroller ist der exponentiell gleitende Mittelwert meist die richtige Antwort: eine Zeile, keine Historie. Wo Ausreißer stören, wirkt ein <b>Medianfilter</b> über 3 oder 5 Werte besser als jeder Tiefpass. Delta-Sigma-Wandler machen das Oversampling intern — vor ihnen genügt oft ein simples RC-Glied, siehe <a href="#wandler">ADC &amp; DAC</a>. Mehr zur digitalen Seite: <a href="digitaltechnik.html#dsp">Digitaltechnik → Signalverarbeitung</a>.</p>
+
+<h2>Die drei physikalischen Rauschquellen</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Thermisches Rauschen</div><div class="cd">Johnson-Nyquist: Jeder Widerstand rauscht allein wegen der Wärmebewegung. Unvermeidbar.</div><div class="fbox" style="margin:.4rem 0"><span class="f">u_n = √(4·k·T·R·B)</span></div><div class="cd">1 kΩ bei 300 K: 4 nV/√Hz — über 10 kHz Bandbreite 0,4 µV.</div></div>
+  <div class="card"><div class="ct">Schrotrauschen</div><div class="cd">Strom besteht aus einzelnen Ladungen, die zufällig eintreffen. Tritt an pn-Übergängen auf, nicht am reinen Widerstand.</div><div class="fbox" style="margin:.4rem 0"><span class="f">i_n = √(2·q·I·B)</span></div><div class="cd">Bei 1 mA und 10 kHz Bandbreite: 1,8 nA.</div></div>
+  <div class="card"><div class="ct">1/f-Rauschen</div><div class="cd">Funkelrauschen, nimmt zu niedrigen Frequenzen hin zu; dominiert unterhalb der Eckfrequenz (10 Hz bis einige kHz). Der Grund, warum langsame Präzisionsmessungen schwerer sind als schnelle. Gegenmittel: Chopper- bzw. Auto-Zero-Verstärker.</div></div>
+</div>
+<div class="fbox">
+  <span class="f">Rauschen addiert sich quadratisch: u_ges = √(u₁² + u₂² + …)</span>
+  <span class="l">Zwei gleich große Quellen ergeben nur Faktor √2. Eine dreimal kleinere Quelle trägt nur rund 5 % bei — es lohnt sich also ausschließlich, an der größten zu arbeiten.</span>
+</div>
+
+<h2>Rauschen kleinbekommen</h2>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th>Maßnahme</th><th>Wirkung</th><th>Kosten</th></tr></thead>
+<tbody>
+<tr><td><b>Bandbreite begrenzen</b></td><td>∝ 1/√B — der stärkste Hebel; halbe Bandbreite bringt 29 % weniger Rauschen</td><td>langsamere Reaktion</td></tr>
+<tr><td><b>Über N Werte mitteln</b></td><td>Rauschen sinkt um √N (nur bei unkorreliertem Rauschen)</td><td>Zeit; bei 1/f-Rauschen ab einem Punkt wirkungslos</td></tr>
+<tr><td><b>Quellwiderstand senken</b></td><td>thermisches Rauschen ∝ √R</td><td>nicht immer möglich</td></tr>
+<tr><td><b>Verstärkung nach vorn ziehen</b></td><td>Die erste Stufe bestimmt das Gesamtrauschen (Friis)</td><td>die erste Stufe muss die beste sein</td></tr>
+<tr><td><b>Kühlen</b></td><td>∝ √T — von 300 K auf 77 K bringt Faktor 2</td><td>nur in Messtechnik und Astronomie praktikabel</td></tr>
+<tr><td><b>Differentiell übertragen</b></td><td>wirkt gegen eingekoppelte Störungen, <em>nicht</em> gegen thermisches Rauschen</td><td>doppelte Leitungen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Störung ist nicht Rauschen.</b> 50-Hz-Brumm, Schaltreglerpfeifen bei 500 kHz oder Digitalgeklingel sind <b>deterministische Störungen</b> mit einer Quelle — behebbar durch Layout, Filter und Schirmung. Echtes Rauschen ist zufällig und breitbandig. Vor jeder Rauschoptimierung lohnt der Blick ins Spektrum: Wer dort Spitzen sieht, hat ein <a href="#emv">EMV-Problem</a>, kein Rauschproblem.</div>
+
+<h2>Offset, Drift und systematische Fehler</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th data-s="text">Fehler</th><th>Ursache</th><th>Erkennbar an</th><th>Gegenmaßnahme</th></tr></thead>
+<tbody>
+<tr><td><b>Offsetspannung</b></td><td>Unsymmetrie der Eingangsstufe</td><td>konstante Abweichung bei 0 V Eingang</td><td>Nullpunktkalibrierung, Auto-Zero-OPV</td></tr>
+<tr><td><b>Temperaturdrift</b></td><td>Bauteilkoeffizienten</td><td>Messwert wandert beim Aufwärmen</td><td>Low-Drift-Bauteile, thermisch symmetrisches Layout, Referenz mitmessen</td></tr>
+<tr><td><b>Langzeitdrift</b></td><td>Alterung von Referenzen und Widerständen</td><td>Kalibrierung hält nicht</td><td>Nachkalibrieren, gealterte Präzisionsbauteile</td></tr>
+<tr><td><b>Thermospannungen</b></td><td>Übergänge zwischen verschiedenen Metallen</td><td>10–50 µV Fehler bei Temperaturgefälle über die Platine</td><td>symmetrische Leiterführung, gleiche Materialien, Zugluft vermeiden</td></tr>
+<tr><td><b>Leckströme</b></td><td>Feuchtigkeit, Flussmittelreste, Oberfläche</td><td>Fehler steigt bei hoher Luftfeuchte</td><td>Reinigen, Schutzlack, <b>Guard-Ring</b> um hochohmige Knoten</td></tr>
+<tr><td><b>Selbsterwärmung</b></td><td>Messstrom heizt den Sensor</td><td>Messwert driftet nach dem Einschalten</td><td>Messstrom senken, gepulst messen</td></tr>
+<tr><td><b>Nichtlinearität</b></td><td>Kennlinie von Sensor oder Wandler</td><td>Abweichung nur am Rand des Bereichs</td><td>Mehrpunktkalibrierung, Linearisierung in Software</td></tr>
+</tbody>
+</table></div>
+
+<h2>Wenn die Messung zappelt</h2>
+<div class="kpis">
+  <div class="kpi"><div class="k">1 kΩ, 10 kHz</div><div class="v">0,4 µV</div><div class="s">Thermisches Rauschen — die absolute Untergrenze</div></div>
+  <div class="kpi"><div class="k">Guter OPV</div><div class="v">1–3 nV/√Hz</div><div class="s">z. B. OPA1656, AD797</div></div>
+  <div class="kpi"><div class="k">Standard-OPV</div><div class="v">10–40 nV/√Hz</div><div class="s">LM358, TL072</div></div>
+  <div class="kpi"><div class="k">12-Bit-ADC, 3,3 V</div><div class="v">0,8 mV</div><div class="s">1 LSB — Rauschen darunter ist irrelevant</div></div>
+  <div class="kpi"><div class="k">24-Bit-ADC, 5 V</div><div class="v">0,3 µV</div><div class="s">1 LSB — hier zählt jedes Detail</div></div>
+  <div class="kpi"><div class="k">MCU-ADC</div><div class="v">≈ 9–10 ENOB</div><div class="s">trotz 12 Bit nominal, wegen Digitalstörungen auf dem Chip</div></div>
+</div>
+<div class="steps">
+  <div class="step"><h4>Spektrum ansehen, nicht raten</h4>Oszilloskop im FFT-Modus. Spitzen bei 50/100 Hz, bei der Schaltreglerfrequenz oder bei Taktfrequenzen zeigen die Quelle sofort.</div>
+  <div class="step"><h4>Quelle abklemmen</h4>Eingang kurzschließen. Bleibt das Zappeln, kommt es aus der Elektronik; verschwindet es, aus Zuleitung oder Sensor.</div>
+  <div class="step"><h4>Versorgung prüfen</h4>Rippel AC-gekoppelt messen. 50 mV Rippel und ein OPV mit 60 dB PSRR ergeben 50 µV Störung am Ausgang.</div>
+  <div class="step"><h4>Bandbreite zumachen</h4>Ein RC-Glied an der richtigen Stelle beseitigt oft mehr als jeder Bauteiltausch — und zeigt zugleich, ob das Problem breit- oder schmalbandig ist.</div>
+  <div class="step"><h4>Masseführung überprüfen</h4>Fließt ein Laststrom über denselben Leiter wie der Massebezug des Messsignals? Dann ist das die Ursache.</div>
+</div>
+<div class="warn"><b>Auflösung ist nicht Genauigkeit.</b> Ein 24-Bit-Wandler mit 0,3 µV Auflösung liefert keine 0,3-µV-Genauigkeit — dazwischen stehen Offset, Verstärkungsfehler, Linearität, Referenzdrift und Rauschen. Die brauchbare Zahl im Datenblatt heißt <b>ENOB</b> oder „noise-free resolution“, nicht die nominale Bitzahl.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 6 (Filter) und Kapitel 8 (Low-Noise Techniques), dazu <i>The x-Chapters</i> 8x.</li>
+    <li>Texas Instruments, <a href="https://www.ti.com/lit/an/sloa088/sloa088.pdf">Analysis of the Sallen-Key Architecture</a> und <i>Active Filter Design Techniques</i> (SLOA093).</li>
+    <li>Analog Devices, <i>MT-085 bis MT-088</i> (Filterentwurf) sowie <i>MT-047 / MT-048</i> (Op Amp Noise).</li>
+    <li><a href="http://sim.okawa-denshi.jp/en/Fkeisan.htm">Okawa Electric Filter Design Tools</a> — kostenlose Rechner für Sallen-Key und MFB mit Bode-Plot.</li>
+    <li>Filterentwurf in Python: <code>scipy.signal.butter</code>, <code>bessel</code>, <code>cheby1</code> samt Frequenzgangplot.</li>
+  </ul>
+</div>

@@ -1,0 +1,101 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Roboterhardware ist eine Kette, die genau so gut ist wie ihr schwächstes Glied.</b> Ein präziser Motor an einem spielbehafteten Getriebe ergibt eine ungenaue Achse. Deshalb wird nicht Bauteil für Bauteil ausgesucht, sondern von der geforderten Bewegung rückwärts gerechnet.</div>
+
+<h2>Der Aufbau in Schichten</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Schicht</th><th>Aufgabe</th><th>Typische Hardware</th><th data-s="text">Taktrate</th></tr></thead>
+<tbody>
+<tr><td><b>Leistung</b></td><td>Energie bereitstellen und schalten</td><td>Akku oder Netzteil, BMS, Buck-Wandler, Treiberendstufen</td><td>—</td></tr>
+<tr><td><b>Achsregelung</b></td><td>Strom, Drehzahl, Position einer Achse führen</td><td>MCU oder integrierter Treiber, Encoder</td><td>1–20 kHz</td></tr>
+<tr><td><b>Koordination</b></td><td>Achsen synchronisieren, Bahn abfahren</td><td>MCU oder Echtzeitkern des SBC</td><td>100–1000 Hz</td></tr>
+<tr><td><b>Planung</b></td><td>Bahnen, Navigation, Verhalten</td><td>SBC (Raspberry Pi, IPC)</td><td>10–50 Hz</td></tr>
+<tr><td><b>Wahrnehmung</b></td><td>Bild, Tiefe, Karte, gelernte Policy</td><td>SBC oder Edge-AI-Board mit GPU</td><td>5–30 Hz</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Die wichtigste Aufteilungsregel:</b> Alles mit hartem Timing gehört auf den Mikrocontroller, alles Rechenintensive auf den Linux-Rechner. Ein normales Linux ist nicht hart echtzeitfähig — eine Stromregelung dort laufen zu lassen, erzeugt Jitter, den keine Reglerauslegung mehr auffängt.</div>
+
+<h2>Aktuatoren: die Robotik-Sicht</h2>
+<p>Wie Motortypen funktionieren, welcher Treiber wozu passt und wie ausgelegt wird, steht in <a href="regelung-antriebe.html#motoren">Motortypen im Vergleich</a> und <a href="regelung-antriebe.html#treiber">Treiber</a>. Hier zählt nur: Was bedeutet die Wahl für ein Gelenk?</p>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Antrieb</th><th>Rückmeldung</th><th>Stärke am Roboter</th><th>Schwäche am Roboter</th></tr></thead>
+<tbody>
+<tr><td><b>Hobby-Servo (RC)</b></td><td>intern geschlossen, nach außen keine</td><td>Ein Signalpin, sofort Bewegung. Schnellster Weg zum ersten Gelenk</td><td>Meist ≤ 180°, kein Positions- oder Lastwert nach außen, billige Typen zittern</td></tr>
+<tr><td><b>Smart-Servo (Bus)</b></td><td>Position, Last, Temperatur, Spannung</td><td>Mehrere Gelenke an <b>einem</b> Bus, Drehmomentgrenze einstellbar, Handführung möglich</td><td>Teurer; IDs müssen vergeben werden, sonst Buskonflikt</td></tr>
+<tr><td><b>Schrittmotor</b></td><td>keine (offen), außer mit Encoder</td><td>Exakt wiederholbare Position ohne Sensor, hält im Stillstand</td><td>Verliert bei Überlast <b>unbemerkt</b> Schritte; Haltestrom heizt dauerhaft</td></tr>
+<tr><td><b>BLDC mit FOC</b></td><td>Encoder zwingend</td><td>Drehmoment direkt regelbar → nachgiebige, kollisionsfähige Gelenke; Direktantrieb ohne Getriebespiel</td><td>Kalibrierung je Motor, deutlich mehr Einarbeitung</td></tr>
+<tr><td><b>DC-Getriebemotor</b></td><td>optional Quadratur-Encoder</td><td>Billigster Fahrantrieb, robust</td><td>Ohne Encoder keine Position; Anlaufstrom ein Vielfaches des Dauerstroms</td></tr>
+<tr><td><b>Linearaktuator</b></td><td>meist nur Endschalter</td><td>Hohe Schubkraft, oft selbsthemmend (hält Last stromlos)</td><td>Langsam; ohne Wegmessung nur Endlagenbetrieb</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Drehmoment ist die Größe, an der Eigenbauten scheitern.</b> Das Haltemoment eines Gelenks wächst mit Armlänge und Nutzlast und muss <i>im ungünstigsten Fall</i> — Arm waagerecht ausgestreckt — noch mit Reserve gedeckt sein. Auslegung mit Getriebe und Wirkungsgrad unter <a href="regelung-antriebe.html#auslegung">Antriebsauslegung</a>.</div>
+
+<h2>Mechanik: Übertragung und Endeffektor</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Element</th><th>Kennzeichen</th><th>Einsatz im Roboter</th></tr></thead>
+<tbody>
+<tr><td colspan="3">Untersetzung — bestimmt, ob eine Achse schnell oder kräftig ist</td></tr>
+<tr><td><b>Planetengetriebe</b></td><td>kompakt, hohe Momente, spürbares Spiel</td><td>Standard an Getriebemotoren, Fahrantriebe</td></tr>
+<tr><td><b>Wellgetriebe (Harmonic Drive)</b></td><td>praktisch spielfrei, hohe Untersetzung (50:1 bis 160:1) in einer Stufe, teuer</td><td>Gelenke von Industrie- und Kollaborationsrobotern</td></tr>
+<tr><td><b>Zykloidgetriebe</b></td><td>sehr steif und stoßfest, spielarm</td><td>Basisnahe Achsen großer Roboter</td></tr>
+<tr><td><b>Zahnriemen (GT2)</b></td><td>formschlüssig, schlupffrei, leise; Spannung entscheidet</td><td>Antrieb entfernter Gelenke, Motor sitzt basisnah → weniger bewegte Masse</td></tr>
+<tr><td colspan="3">Linearachsen — Führen und Antreiben immer trennen</td></tr>
+<tr><td><b>Trapezspindel (T8)</b></td><td>günstig, <b>selbsthemmend</b>, geringer Wirkungsgrad</td><td>Senkrechte Achsen — die Last bleibt stromlos oben</td></tr>
+<tr><td><b>Kugelumlaufspindel</b></td><td>leichtgängig, spielarm, nicht selbsthemmend</td><td>Präzise und schnelle Vorschübe</td></tr>
+<tr><td><b>Profilschiene (MGN)</b></td><td>steif, präzise, nimmt Querkräfte auf</td><td>Jede Linearachse mit Genauigkeitsanspruch</td></tr>
+<tr><td colspan="3">Endeffektor und Fahrwerk</td></tr>
+<tr><td><b>Parallelgreifer</b></td><td>zwei Backen, ein Antrieb, definierte Backenlage</td><td>Der einfachste Eigenbau; gut druckbar, Gummibelag erhöht den Halt</td></tr>
+<tr><td><b>Adaptiver Greifer</b></td><td>Finger legen sich um die Form (unteraktuiert)</td><td>Unterschiedliche, unbekannte Objekte</td></tr>
+<tr><td><b>Sauggreifer</b></td><td>Unterdruck, sehr schnell</td><td>Glatte, dichte Flächen — Kartons, Bleche, Folien</td></tr>
+<tr><td><b>Differentialfahrwerk</b></td><td>zwei angetriebene Räder plus Stützrad</td><td>Der Einstieg: einfache Odometrie-Mathematik, robust</td></tr>
+<tr><td><b>Mecanum / Omni</b></td><td>seitliches Fahren und Drehen auf der Stelle</td><td>Enge Umgebungen — braucht vier präzise geregelte Antriebe</td></tr>
+</tbody>
+</table></div>
+<p class="note">Lager, Wellen, Passungen und Schraubverbindungen sind allgemeine Maschinenelemente und stehen unter <a href="mechanik.html#lager">Mechanik → Lager</a> bzw. <a href="mechanik.html#schrauben">Schraubverbindungen</a>.</p>
+
+<h2>Sensorik am Roboter</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Sensor</th><th>Misst</th><th>Typische Bauteile</th><th>Stolperstein</th></tr></thead>
+<tbody>
+<tr><td><b>Encoder</b></td><td>Gelenkwinkel und Drehrichtung</td><td>Quadratur am Motor; magnetisch-absolut (AS5600, 12 bit)</td><td>Inkrementell braucht eine Referenzfahrt, absolut nicht. Details unter <a href="regelung-antriebe.html#position">Positionsmessung</a></td></tr>
+<tr><td><b>IMU</b></td><td>Drehrate und Beschleunigung, optional Magnetfeld</td><td>MPU-6050 (Rohdaten), BNO055 (rechnet Lage intern)</td><td>Gyro driftet, Beschleunigungssensor rauscht — nur fusioniert brauchbar; Magnetometer stört jeder Motor</td></tr>
+<tr><td><b>Endschalter</b></td><td>eine definierte Referenzlage</td><td>mechanisch, optisch, Hall</td><td>Entprellen; zusätzlich zum Software-Grenzwert setzen, nicht statt</td></tr>
+<tr><td><b>ToF-Distanz</b></td><td>Abstand über Lichtlaufzeit</td><td>VL53L0X (~2 m), VL53L1X (~4 m), I²C</td><td>Schmaler Messkegel — ein Punkt, keine Fläche; Glanz und dunkle Flächen stören</td></tr>
+<tr><td><b>Ultraschall</b></td><td>Abstand über Echolaufzeit</td><td>HC-SR04, 2–400 cm</td><td>Breiter Kegel, langsam; mehrere Sensoren stören sich, weiche Stoffe liefern kein Echo</td></tr>
+<tr><td><b>2D-Lidar</b></td><td>Abstände rundum in einer Ebene</td><td>RPLidar A1/C1, ~12 m</td><td>Glas und Spiegel sind unsichtbar; erfasst nur die Scanebene — der Tischrand darüber fehlt</td></tr>
+<tr><td><b>Tiefenkamera (RGB-D)</b></td><td>Farbbild plus Entfernung je Pixel</td><td>RealSense D-Serie, Luxonis OAK-D, Orbbec</td><td>Tiefe bricht bei Sonnenlicht ein; Hand-Auge-Kalibrierung ist Pflicht, sonst greift der Arm daneben</td></tr>
+<tr><td><b>Kraft / Drehmoment</b></td><td>Kontaktkraft am Werkzeug oder Gelenk</td><td>Wägezelle mit HX711, FSR; echte 6-Achs-F/T-Sensoren</td><td>Der Motorstrom ist der günstige Ersatz — gut für Schwellen (Blockieren), zu grob für Feinkraft</td></tr>
+</tbody>
+</table></div>
+
+<h2>Compute und Energie</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Mikrocontroller</div><div class="cd">ESP32 (Funk an Bord), RP2350/Pico (günstig, zwei Kerne), STM32 (industrienah, viele Timer und Hardware-Encoderzähler). Trägt Achsregelung, Sensoreinlesen und Sicherheitsabschaltung — und spricht über micro-ROS direkt mit dem ROS-2-Graphen.</div></div>
+  <div class="card"><div class="ct">Single-Board-Computer</div><div class="cd">Raspberry Pi 5 als Standard: reicht für ROS 2, 2D-Navigation und Bahnplanung. Ubuntu ist die saubere Basis. Für schwere neuronale Netze reicht die CPU nicht.</div></div>
+  <div class="card"><div class="ct">Edge-AI-Board</div><div class="cd">Jetson Orin Nano (Super) als Einstieg in Bildverarbeitung und gelernte Policies am Gerät, Jetson AGX Thor für große Modelle. Erst nötig, wenn die KI wirklich <b>auf</b> dem Roboter laufen soll — trainiert wird ohnehin auf einem PC mit GPU.</div></div>
+  <div class="card"><div class="ct">Energie</div><div class="cd">Li-Ion/LiPo: 3,6–3,7 V je Zelle, 3S ≈ 11,1 V; LiFePO4 3,2 V, sicherer und langlebiger, dafür schwerer. Immer mit BMS und Balancer laden, nie unbeaufsichtigt. Für stationäre Versuche ist ein Netzteil bequemer und sicherer.</div></div>
+  <div class="card"><div class="ct">Spannungsaufbereitung</div><div class="cd">Buck-Wandler für die Logik, <b>getrennt</b> von der Motorschiene abgegriffen. Motoren erzeugen beim Abschalten Spannungsspitzen und beim Anlauf Einbrüche — beides bringt sonst den SBC zum Neustart. Stützkondensatoren an der Motorschiene helfen.</div></div>
+  <div class="card"><div class="ct">Verkabelung</div><div class="cd">Sternförmige Masse, Signalleitungen von Motorleitungen fernhalten, bewegte Leitungen als Schleppkette oder mit definierter Biegeschlaufe führen. Gebrochene Adern in Gelenken sind der häufigste Hardwarefehler nach einigen Betriebswochen.</div></div>
+</div>
+
+<h2>Auslegung: rückwärts rechnen</h2>
+<div class="steps">
+  <div class="step"><h4>Anforderung an den TCP festlegen</h4>Nutzlast, Reichweite, geforderte Wiederholgenauigkeit, Zykluszeit. Ohne diese vier Zahlen ist jede Bauteilwahl geraten.</div>
+  <div class="step"><h4>Statisches Moment je Gelenk bestimmen</h4>Ungünstigster Fall: Arm waagerecht, volle Nutzlast, Eigengewicht der nachfolgenden Glieder eingerechnet.</div>
+  <div class="step"><h4>Dynamik aufschlagen</h4>Beschleunigungsmoment aus Massenträgheit und gewünschter Rampe addieren, dann Reserve — Faktor 2 ist im Eigenbau realistisch, nicht großzügig.</div>
+  <div class="step"><h4>Getriebe wählen, Spiel prüfen</h4>Untersetzung ergibt sich aus Moment und Drehzahl. Das Spiel des Getriebes begrenzt die erreichbare Genauigkeit unabhängig von der Encoderauflösung.</div>
+  <div class="step"><h4>Sensorauflösung gegenprüfen</h4>Encoderauflösung mal Untersetzung muss die geforderte Winkelgenauigkeit mit Reserve schlagen — sonst regelt die Achse gegen ihre eigene Quantisierung.</div>
+  <div class="step"><h4>Energiebilanz und Wärme</h4>Dauerstrom aller Achsen zusammen, Spitzenstrom beim gleichzeitigen Anfahren. Treiber und Akku danach dimensionieren, nicht nach dem Motorschild.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Datenblätter und Applikationsschriften der genannten Bauteile (STMicroelectronics VL53L0X/L1X, Trinamic/ADI TMC-Reihe, Bosch Sensortec BNO055, ams AS5600).</li>
+    <li>Herstellerdokumentation Robotis Dynamixel und Feetech STS/SCS — Busprotokoll und Rückmeldewerte.</li>
+    <li><a href="https://www.raspberrypi.com/documentation/">Raspberry Pi Documentation</a>; <a href="https://developer.nvidia.com/embedded/jetson-modules">NVIDIA Jetson Modules</a>.</li>
+    <li>Lynch &amp; Park, <i>Modern Robotics</i> — Kapitel zu Aktuierung und Getrieben.</li>
+    <li>Antriebsauslegung, Motorkennlinien und Treibertopologien: <a href="regelung-antriebe.html#auslegung">Regelung, Sensorik &amp; Antriebe</a>.</li>
+  </ul>
+</div>

@@ -1,0 +1,70 @@
+/* 3D-Druck — Design kommt aus dem gemeinsamen Hub-Stylesheet. Dazu die Bausteine
+   des Rentabilitaets-Rechners, uebernommen aus rentabilitaet/_style.css und von
+   .mx-rentabilitaet auf .mx-druck umgeschrieben. Nur was der Rechner wirklich
+   braucht — Tabellen, Karten, Filter und Hinweise kommen aus _mecha.css. */
+@import "../_mecha.css";
+
+/* Token-Bruecke: der Simulator kennt eigene Namen, gefuellt aus dem Hub-Design.
+   Damit traegt der Rechner die Hub-Akzentfarbe und folgt dem Dunkelmodus. */
+.mx-druck{
+  --panel:var(--surface); --panel2:var(--surface-2); --inset:var(--surface-2);
+  --borderSoft:var(--border); --dim:var(--muted);
+  --green:var(--ok); --red:var(--bad); --yellow:var(--mid);
+}
+
+/* Panel — setzt zusaetzlich die globale .panel-Regel des Seitenlayouts zurueck. */
+.mx-druck .panel{max-width:none;padding:0;background:var(--panel);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;margin:.6rem 0 1rem;box-shadow:var(--shadow-sm)}
+.mx-druck .ph{padding:12px 15px;border-bottom:1px solid var(--borderSoft);font-weight:700;
+  font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+.mx-druck .ph .ic{color:var(--accent)}
+.mx-druck .pb{padding:15px}
+.mx-druck .pb .grid{display:grid;gap:11px 14px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:0}
+
+/* Eingabefelder */
+.mx-druck .field{position:relative}
+.mx-druck .field label{display:block;font-size:10.5px;font-weight:600;letter-spacing:.03em;
+  color:var(--dim);margin-bottom:5px;text-transform:uppercase}
+.mx-druck .field input{width:100%;background:var(--inset);border:1px solid var(--border);color:var(--text);
+  border-radius:var(--radius-sm);padding:8px 9px;font-family:var(--mono);font-size:13px;outline:none}
+.mx-druck .field input:focus{border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.mx-druck .suf{position:absolute;right:9px;top:30px;color:var(--faint);font-size:11px;
+  font-family:var(--mono);pointer-events:none}
+
+/* Schalter Kleinunternehmerregelung */
+.mx-druck .toggle{display:inline-flex;align-items:center;gap:9px;cursor:pointer;user-select:none;margin-top:13px}
+.mx-druck .tg{width:40px;height:23px;border-radius:20px;background:var(--inset);border:1px solid var(--border);
+  position:relative;transition:.15s;flex:0 0 auto}
+.mx-druck .tg::after{content:'';position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;
+  background:var(--faint);transition:.15s}
+.mx-druck .tg.on{background:var(--accent-soft);border-color:var(--accent-border)}
+.mx-druck .tg.on::after{transform:translateX(17px);background:var(--accent)}
+
+/* Szenario-Karten (von mod-druck.js erzeugt) */
+.mx-druck .scn{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:.6rem 0 1rem}
+@media(max-width:880px){.mx-druck .scn{grid-template-columns:1fr}}
+.mx-druck .scn .card{padding:0;margin:0;overflow:hidden;display:flex;flex-direction:column}
+.mx-druck .card-h{padding:13px 15px;border-bottom:1px solid var(--borderSoft)}
+.mx-druck .card-h .nm{font-family:var(--display);font-weight:700;font-size:15px}
+.mx-druck .card-h .ds{font-size:11.5px;color:var(--dim);margin-top:2px;line-height:1.4}
+.mx-druck .card-b{padding:14px 15px;display:flex;flex-direction:column;gap:12px;flex:1}
+.mx-druck .in2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.mx-druck .big{padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);
+  background:var(--panel2);display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mx-druck .big .l{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:5px}
+.mx-druck .big .v{font-family:var(--display);font-size:25px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.mx-druck .kv{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:4px 0;
+  border-bottom:1px dashed var(--borderSoft)}
+.mx-druck .kv:last-child{border-bottom:none}
+.mx-druck .kv .v{font-family:var(--mono)}
+.mx-druck .barwrap .lbl{display:flex;justify-content:space-between;font-size:10.5px;color:var(--faint);
+  text-transform:uppercase;letter-spacing:.04em}
+.mx-druck .barwrap .bar{height:9px;border-radius:6px;background:var(--inset);border:1px solid var(--border);
+  overflow:hidden;margin-top:6px}
+.mx-druck .barwrap .bar > span{display:block;height:100%;width:0}
+.mx-druck .badge{padding:9px 11px;border-radius:var(--radius-sm);font-size:12px;font-weight:700;
+  line-height:1.35;text-align:center}
+.mx-druck .card-b .note{font-size:11px;line-height:1.4;padding:7px 9px;border-radius:var(--radius-sm);
+  display:flex;gap:6px;margin-top:2px;color:var(--text)}

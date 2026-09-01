@@ -1,0 +1,68 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Düse bestimmt zwei Dinge: wie fein der Druck wird und wie lange er fein bleibt.</b> Der Durchmesser regelt den Kompromiss aus Detail und Durchsatz, das Material entscheidet, ob abrasive Filamente die Öffnung nach zwei Spulen aufweiten.</div>
+
+<h2>Düsengrößen</h2>
+<p>Sinnvolle Schichthöhe liegt bei 25–75 % des Düsendurchmessers, die dünnste vernünftige Wand bei zwei Extrusionsbahnen. Beides skaliert direkt mit dem Durchmesser — die Druckzeit dagegen sinkt überproportional, weil mit dem Querschnitt auch die Schichthöhe wächst.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+  <thead><tr><th data-s="text">Größe</th><th data-s="num">Detail</th><th data-s="num">Tempo</th><th data-s="num">Festigkeit</th><th data-s="num">Durchsatz</th><th>Schichthöhe</th><th>Wand (2 Bahnen)</th><th>Wofür</th></tr></thead>
+  <tbody>
+    <tr><td><b>0,2 mm</b></td><td>8</td><td>2</td><td>3</td><td>2</td><td>0,05–0,15 mm</td><td>0,4 mm</td><td>Miniaturen, feine Schriftzüge, Schmuckmodelle. Drei- bis fünfmal längere Druckzeit, sehr verstopfungsanfällig, nichts für gefüllte Filamente.</td></tr>
+    <tr><td><b>0,4 mm</b> <span class="b acc">Standard</span></td><td>6</td><td>6</td><td>6</td><td>6</td><td>0,10–0,30 mm</td><td>0,8 mm</td><td>Werksdüse fast aller Drucker und die richtige Wahl für den Großteil aller Drucke. Beste Profil- und Software-Unterstützung.</td></tr>
+    <tr><td><b>0,6 mm</b></td><td>4</td><td>8</td><td>8</td><td>8</td><td>0,15–0,45 mm</td><td>1,2 mm</td><td>Funktionsteile, große Strukturteile und stark gefüllte Composites. Breitere Bahnen haften besser aneinander, Bohrungen werden ungenauer.</td></tr>
+    <tr><td><b>0,8 mm</b></td><td>2</td><td>9</td><td>9</td><td>9</td><td>0,20–0,60 mm</td><td>1,6 mm</td><td>Vasenmodus, Kisten, Werkstatt-Halter. Sehr schnell und sehr stabil, Oberfläche deutlich gerippt.</td></tr>
+    <tr><td><b>1,0 mm</b></td><td>1</td><td>10</td><td>10</td><td>10</td><td>0,25–0,75 mm</td><td>2,0 mm</td><td>Maximaler Durchsatz für XXL-Teile. Nur mit High-Flow-Hotend sinnvoll, sonst reicht die Heizleistung nicht.</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Düsenmaterialien</h2>
+<p>Wärmeleitfähigkeit und Härte laufen gegeneinander: Messing leitet rund 110 W/(m·K), gehärteter Stahl nur etwa 45, Kupfer dagegen rund 400 — deshalb braucht eine Stahldüse meist 5–10 °C mehr Düsentemperatur für denselben Durchfluss.</p>
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Suchen: Material, Marke, Anwendung …" aria-label="Düsenmaterialien durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="std">Standard</button>
+    <button type="button" data-filter="hf">High-Flow</button>
+    <button type="button" data-filter="premium">Premium</button>
+    <button type="button" data-filter="special">Spezialisiert</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="tbl-wrap"><table style="min-width:1080px">
+    <thead><tr><th data-s="text">Düsentyp</th><th>Kategorie</th><th data-s="num">€ / Stück</th><th data-s="num">Wärme&shy;leitung</th><th data-s="num">Verschleiß&shy;fest.</th><th data-s="num">Durchfluss</th><th data-s="num">max °C</th><th>Größen</th><th>Marken &amp; Einordnung</th></tr></thead>
+    <tbody data-list="Düsentypen">
+      <tr data-item data-cat="std" data-k="messing brass standard pla petg abs asa einsteiger guenstig"><td><b>Messing</b></td><td><span class="cb">Standard</span></td><td>1–5</td><td>10</td><td>2</td><td>7</td><td>300</td><td>0,2 / 0,4 / 0,6 / 0,8 / 1,0</td><td>E3D, Creality, Prusa, MK8-Standard. Beste Wärmeleitung, glatte Innenwand, sehr günstig — bei Carbon oder Glasfaser aber nach ein bis drei Spulen ausgeweitet. Messing kann Blei enthalten, also nichts für Lebensmittelkontakt.</td></tr>
+      <tr data-item data-cat="std" data-k="gehaertet hardened steel carbon glasfaser abrasiv allrounder glow in the dark"><td><b>Gehärteter Stahl</b></td><td><span class="cb">Standard</span></td><td>8–25</td><td>5</td><td>8</td><td>6</td><td>450</td><td>0,2 / 0,4 / 0,6 / 0,8</td><td>E3D, Bambu Lab (Serienausstattung X1C), Micro Swiss, Slice Engineering, Brozzl. Der Allrounder für alles Abrasive: Carbon, Glasfaser, Metall-, Holz- und Keramik-Fill sowie Nachleuchtpigment. Kostet Wärmeleitung und meist 5–10 °C Aufschlag.</td></tr>
+      <tr data-item data-cat="hf" data-k="cht bondtech high flow durchfluss speed vasemodus geteilter kanal"><td><b>Gehärteter Stahl High-Flow (CHT)</b></td><td><span class="cb">High-Flow</span></td><td>10–30</td><td>5</td><td>8</td><td>9</td><td>450</td><td>0,4 / 0,6 / 0,8</td><td>Bondtech CHT, Bambu Lab High-Flow, Trianglelab, diverse CHT-Klone. Der geteilte Innenkanal erwärmt das Filament von drei Seiten und bringt bis zu 30 % mehr Durchfluss. Bei feinen Details eher mehr Fäden, Klonqualität schwankt.</td></tr>
+      <tr data-item data-cat="std" data-k="edelstahl stainless lebensmittel bleifrei korrosion medizin"><td><b>Edelstahl</b></td><td><span class="cb">Standard</span></td><td>5–15</td><td>4</td><td>6</td><td>5</td><td>350</td><td>0,4 / 0,6</td><td>Bambu Lab (Serienausstattung P1S und A1), E3D, Prusa. Bleifrei und korrosionsbeständig, damit die Wahl für Lebensmittelkontakt — aber die schlechteste Wärmeleitung im Feld und weniger standfest als gehärteter Stahl.</td></tr>
+      <tr data-item data-cat="std" data-k="bimetall kupferkern stahlspitze kompromiss ams multimaterial"><td><b>Bimetall (Kupferkern, Stahlspitze)</b></td><td><span class="cb">Standard</span></td><td>12–35</td><td>8</td><td>7</td><td>7</td><td>450</td><td>0,4 / 0,6 / 0,8</td><td>Micro Swiss, TH3D, Kingroon und viele Fernost-Anbieter. Kupferkörper für die Wärme, gehärtete Spitze für den Verschleiß: kaum Temperaturaufschlag beim Wechsel zwischen PLA und CF. Die Fügestelle ist die Schwachstelle billiger Ware.</td></tr>
+      <tr data-item data-cat="premium" data-k="rubin saphir olsson ruby printfarm dauerbetrieb nylon cf"><td><b>Rubin / Saphir</b></td><td><span class="cb">Premium</span></td><td>80–120</td><td>8</td><td>9</td><td>7</td><td>400</td><td>0,4 / 0,6</td><td>E3D Olsson Ruby, DUROZZLE, 3DMakerEngineering. Messingkörper mit eingepresstem synthetischem Rubin (Mohs 9): sehr lange Standzeit bei guter Wärmeleitung. Hart, aber spröde — ein Aufsetzer auf dem Bett kostet die Spitze.</td></tr>
+      <tr data-item data-cat="premium" data-k="wolframkarbid tungsten carbide industrie endgame crash"><td><b>Wolframkarbid</b></td><td><span class="cb">Premium</span></td><td>50–90</td><td>7</td><td>10</td><td>7</td><td>450</td><td>0,4 / 0,6</td><td>3DMakerEngineering, Dyze Design. Fast so hart wie Diamant, aber deutlich weniger spröde als Rubin und damit crashfester. Praktisch die letzte Düse, die man kauft — sofern es sie für das eigene Hotend gibt.</td></tr>
+      <tr data-item data-cat="premium" data-k="diamant diamondback ndj hoechste haerte 24/7 produktion"><td><b>Diamant</b></td><td><span class="cb">Premium</span></td><td>100–180</td><td>9</td><td>10</td><td>8</td><td>400</td><td>0,4 / 0,6</td><td>DiamondBack, NDJ. Synthetischer Diamant (Mohs 10) mit der besten Wärmeleitung aller Spitzen, deshalb ohne Temperaturaufschlag. Teuer, schlagempfindlich und für Hobbybetrieb klar überdimensioniert.</td></tr>
+      <tr data-item data-cat="hf" data-k="obxidian e3d bambu lab e3dlc beschichtung high flow revo antihaft"><td><b>ObXidian (E3D × Bambu Lab)</b></td><td><span class="cb">High-Flow</span></td><td>25–45</td><td>7</td><td>9</td><td>10</td><td>450</td><td>0,4 / 0,6</td><td>ObXidian-gehärtete Spitze mit E3DLC-Antihaftbeschichtung; als High-Flow-Hotend rund 60 % mehr Durchfluss. Erhältlich für Bambu X1/P1 sowie als ObXidian 500 für die H2-, P2-, X2- und A2-Serie, die Düsen auch für E3D Revo und V6.</td></tr>
+      <tr data-item data-cat="special" data-k="kupfer copper vernickelt high speed benchy flow pla petg"><td><b>Kupfer / plattiertes Kupfer</b></td><td><span class="cb">Spezialisiert</span></td><td>15–40</td><td>10</td><td>3</td><td>8</td><td>350</td><td>0,4 / 0,6 / 0,8</td><td>Trianglelab, Mellow, Slice Engineering. Beste Wärmeleitung überhaupt und damit die Speed-Düse für Standardfilamente. Ohne Beschichtung so weich wie Messing, die Vernickelung nutzt sich ab.</td></tr>
+      <tr data-item data-cat="special" data-k="beschichtung siliziumkarbid sic vanadium twinclad kompromiss kein offset"><td><b>Beschichtet (SiC, Vanadium)</b></td><td><span class="cb">Spezialisiert</span></td><td>20–45</td><td>8</td><td>8</td><td>8</td><td>400</td><td>0,4 / 0,6</td><td>Slice Engineering Vanadium, Micro Swiss TwinClad. Messing- oder Kupferkörper mit harter Beschichtung: gute Wärmeleitung ohne Temperaturaufschlag, glatter als gehärteter Stahl. Die Schicht trägt sich mit der Zeit ab.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Kein Düsentyp passt zu dieser Auswahl.</div>
+</div>
+<div class="note">Preise für einzelne Düsen, Stand Mitte 2026. Komplette Hotend-Baugruppen mit integrierter Düse (Revo, Bambu, Prusa Nextruder) kosten ein Vielfaches.</div>
+
+<h2>Wechseln, prüfen, entstopfen</h2>
+<div class="steps">
+  <div class="step"><h4>Heiß wechseln</h4>Hotend auf Drucktemperatur bringen, dann die Düse lösen und die neue heiß nachziehen — sonst kriecht Kunststoff durch das Gewinde und das Hotend leckt. Heizblock gegenhalten, nicht das Heatbreak verdrehen.</div>
+  <div class="step"><h4>Nach dem Wechsel neu kalibrieren</h4>Z-Offset und Durchmesser im Slicer setzen, danach Fluss- und Druckvorlauf-Kalibrierung. Bei gehärtetem Stahl 5–10 °C aufschlagen.</div>
+  <div class="step"><h4>Verschleiß erkennen</h4>Unterextrusion trotz gutem Filament, plötzlich zu breite erste Schicht, fransige Kanten: die Öffnung ist aufgeweitet. Eine Messingdüse hält bei Carbonfilament oft keine 500 g.</div>
+  <div class="step"><h4>Verstopfung lösen</h4>Kaltzug (Cold Pull) bei 90–100 °C mit PLA oder Nylon, sonst Nadel im heißen Zustand. Ausbrennen mit der Flamme zerstört Beschichtungen und ist bei Rubin und Diamant tabu.</div>
+</div>
+<div class="tip"><b>Praktische Aufteilung:</b> eine 0,4er Messingdüse für Standardmaterial, eine 0,6er gehärtete für alles Abrasive. Das deckt fast alles ab und kostet zusammen weniger als eine Premium-Düse — welche Filamente abrasiv sind, steht unter <a href="3d-druck.html#filamente">Filamente</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li><a href="https://wiki.bambulab.com/en/filament-acc/acc/nozzles">Bambu Lab Wiki — Introduction to Bambu Nozzles</a>: Serienausstattung, Materialien, Temperaturgrenzen.</li>
+    <li><a href="https://e3d-online.com/blogs/news/introducing-e3d-bambu-hf-obxidian_hotend">E3D — High Flow ObXidian HotEnds für Bambu Lab</a> und <a href="https://e3d-online.com/products/revo-obxidian-nozzles">E3D Revo ObXidian Nozzles</a>: Durchflusssteigerung, E3DLC-Beschichtung, Kompatibilität.</li>
+    <li><a href="https://www.bondtech.se/">Bondtech</a> — CHT-Düsen: Aufbau des geteilten Innenkanals und Durchflussangaben.</li>
+    <li><a href="https://help.prusa3d.com/">Prusa Knowledge Base</a> — Düsenwechsel, Kaltzug und Verschleißbilder.</li>
+  </ul>
+</div>

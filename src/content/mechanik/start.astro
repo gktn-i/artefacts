@@ -1,0 +1,88 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Dieses Modul ist der komplette Maschinenbau-Unterbau in 22 Abschnitten.</b> Vier Gruppen bauen aufeinander auf: erst die <b>Mechanik</b> als Rechenverfahren, dann die <b>Maschinenelemente</b> als Bauteile, darunter die <b>Werkstoffe</b> mit ihren Kennwerten — und zuletzt die <b>Konstruktionspraxis</b>, die aus alldem eine fertigbare Zeichnung macht.</div>
+
+<p class="lede">Alle Abschnitte liegen auf dieser Seite. Rechner gibt es zu Biegung und Knickung, Schraubenvorspannung, Lagerlebensdauer, Wärmedehnung, Passungen und Zerspanung; die großen Nachschlagetabellen zu Drehmoment und Kernloch stehen unter <a href="#schrauben">Schrauben &amp; Gewinde</a>, die Werkstoffkennwerte unter <a href="#auswahl">Werkstoffwahl &amp; Tabellen</a>.</p>
+
+<h2>Landkarte</h2>
+<div class="pills"><span class="b acc">Mechanik — die Rechenverfahren</span></div>
+<div class="map">
+  <a href="#start"><div class="mt"><span class="i">🧭</span>Start &amp; Landkarte</div><div class="md">Diese Seite: Übersicht, Lesereihenfolge und der schnelle Weg zum passenden Abschnitt.</div></a>
+  <a href="#statik"><div class="mt"><span class="i">⚖️</span>Statik &amp; Schnittgrößen</div><div class="md">Freikörperbild, Lagerarten, Normalkraft, Querkraft, Biegemoment — plus Standardfälle zum Nachschlagen.</div></a>
+  <a href="#festigkeit"><div class="mt"><span class="i">📉</span>Spannung &amp; Festigkeit</div><div class="md">Spannungs-Dehnungs-Diagramm, Sicherheitsfaktor, Kerbwirkung, Vergleichsspannung, Dauerfestigkeit.</div></a>
+  <a href="#balken"><div class="mt"><span class="i">〰️</span>Biegung, Torsion &amp; Knicken</div><div class="md">Flächenmoment, Widerstandsmoment, Durchbiegung, Eulersche Knicklast — mit Rechnern.</div></a>
+  <a href="#dynamik"><div class="mt"><span class="i">🎢</span>Kinematik, Dynamik &amp; Schwingungen</div><div class="md">Verfahrprofile, Trägheitsmoment, Motormoment, Eigenfrequenz, Resonanz und kritische Drehzahl.</div></a>
+  <a href="#reibung"><div class="mt"><span class="i">🛞</span>Reibung &amp; Haftung</div><div class="md">Coulomb, Reibwerte, Selbsthemmung, Seilreibung, Rollwiderstand — die Basis für Klemmen und Bremsen.</div></a>
+</div>
+
+<div class="pills"><span class="b acc">Maschinenelemente — die Bauteile</span></div>
+<div class="map">
+  <a href="#schrauben"><div class="mt"><span class="i">🔩</span>Schrauben &amp; Gewinde</div><div class="md">Vorspannung, Festigkeitsklassen, Sichern und Montieren — mit der kanonischen Tabelle für Drehmoment, Kernloch und Durchgang.</div></a>
+  <a href="#verbindungen"><div class="mt"><span class="i">🔗</span>Welle-Nabe, Schweißen &amp; Kleben</div><div class="md">Passfeder, Presssitz, Spannsatz; Schweißen, Löten, Kleben, Nieten und Gewindeeinsätze.</div></a>
+  <a href="#lager"><div class="mt"><span class="i">⭕</span>Lager &amp; Führungen</div><div class="md">Bauformen, Lebensdauer, Fest-Los-Lagerung, Passungen, Schmierung — und Linearführungen im Vergleich.</div></a>
+  <a href="#getriebe"><div class="mt"><span class="i">⚙️</span>Zahnräder, Riemen &amp; Spindeln</div><div class="md">Modul und Zähnezahl, Getriebebauarten, Spiel; Zahnriemenprofile und Kugelgewindetriebe.</div></a>
+  <a href="#federn"><div class="mt"><span class="i">🌀</span>Federn, Dichtungen &amp; Kupplungen</div><div class="md">Federrate und Bauformen, O-Ring-Einbau, Wellendichtring, Versatzausgleich durch Kupplungen.</div></a>
+</div>
+
+<div class="pills"><span class="b acc">Werkstoffe — was das Bauteil aushält</span></div>
+<div class="map">
+  <a href="#kennwerte"><div class="mt"><span class="i">📋</span>Kennwerte richtig lesen</div><div class="md">E-Modul, R_p0,2, R_m, Härteskalen — und was Datenblätter verschweigen.</div></a>
+  <a href="#metalle"><div class="mt"><span class="i">🧲</span>Stahl, Guss &amp; NE-Metalle</div><div class="md">Werkstoffbezeichnungen entschlüsseln, Stahlgruppen, nichtrostende Stähle, Gusseisen, Aluminium.</div></a>
+  <a href="#kunststoffe"><div class="mt"><span class="i">🧪</span>Kunststoffe &amp; Verbund</div><div class="md">Thermoplaste im Vergleich, Konstruktionsregeln für Kunststoff, Faserverbunde, Holz und Keramik.</div></a>
+  <a href="#behandlung"><div class="mt"><span class="i">🔥</span>Wärmebehandlung &amp; Korrosion</div><div class="md">Härten, Vergüten, Einsatzhärten, Aushärten; Korrosionsarten, Spannungsreihe, Schutzverfahren.</div></a>
+  <a href="#auswahl"><div class="mt"><span class="i">🗂️</span>Werkstoffwahl &amp; Tabellen</div><div class="md">Vorgehen nach Ashby, Entscheidungshilfen — und die große filterbare Werkstofftabelle.</div></a>
+</div>
+
+<div class="pills"><span class="b acc">Konstruktion — von der Idee zur Zeichnung</span></div>
+<div class="map">
+  <a href="#methodik"><div class="mt"><span class="i">✏️</span>Methodik &amp; Zeichnung</div><div class="md">Anforderungsliste, Varianten, Gestaltungsregeln, technische Zeichnung und Ansichten.</div></a>
+  <a href="#toleranzen"><div class="mt"><span class="i">📏</span>Toleranzen, Passungen &amp; Oberflächen</div><div class="md">ISO 286 mit Passungsrechner, Form- und Lagetoleranzen, Rauheitsangaben.</div></a>
+  <a href="#normteile"><div class="mt"><span class="i">🔧</span>Gewinde &amp; Normteile</div><div class="md">Gewindearten im Überblick, Scheiben, Stifte, Sicherungsringe, Profile und Halbzeuge.</div></a>
+  <a href="#cad"><div class="mt"><span class="i">🖥️</span>CAD &amp; FEM</div><div class="md">Parametrisch modellieren, Baugruppen, Zeichnungsableitung — und wann eine FEM-Rechnung trägt.</div></a>
+  <a href="#fertigung"><div class="mt"><span class="i">🏭</span>Fertigung &amp; DFM</div><div class="md">Drehen, Fräsen, Blech, Guss; fertigungsgerecht konstruieren und Kosten treiben oder sparen.</div></a>
+  <a href="#druck3d"><div class="mt"><span class="i">🖨️</span>Konstruieren für den 3D-Druck</div><div class="md">Anisotropie, Überhänge, Toleranzen im Druck, Gewinde und Einsätze im Druckteil.</div></a>
+</div>
+
+<h2>Lesereihenfolge</h2>
+<div class="steps">
+  <div class="step"><h4>Kräfte verstehen</h4><a href="#statik">Statik</a> und <a href="#festigkeit">Festigkeit</a> zuerst: ohne Freikörperbild und Sicherheitsfaktor ist jede spätere Bauteilwahl geraten.</div>
+  <div class="step"><h4>Querschnitt und Bewegung</h4><a href="#balken">Biegung und Knicken</a> liefern die Wandstärke, <a href="#dynamik">Dynamik</a> die Beschleunigung, die Motorgröße und die Resonanzen. <a href="#reibung">Reibung</a> erklärt, was klemmt und was hält.</div>
+  <div class="step"><h4>Bauteile wählen statt erfinden</h4>Die fünf Abschnitte der Maschinenelemente durchgehen — vom <a href="#schrauben">Schraubenmoment</a> bis zur <a href="#federn">Kupplung</a>. Was genormt und kaufbar ist, wird nicht konstruiert.</div>
+  <div class="step"><h4>Werkstoff festlegen</h4><a href="#auswahl">Werkstoffwahl</a> mit der begrenzenden Eigenschaft beginnen, Kennwerte aus der Tabelle nehmen, <a href="#behandlung">Wärmebehandlung und Korrosionsschutz</a> gleich mitdenken.</div>
+  <div class="step"><h4>Fertigbar zeichnen</h4><a href="#toleranzen">Toleranzen</a> nur dort eng, wo sie eine Funktion haben; <a href="#fertigung">Fertigung</a> und gegebenenfalls <a href="#druck3d">3D-Druck</a> bestimmen Radien, Wandstärken und Kosten.</div>
+</div>
+
+<h2>Wann brauche ich was</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th data-s="text">Frage aus der Werkstatt</th><th>Abschnitt</th></tr></thead>
+<tbody>
+<tr><td>Hält das Bauteil die Last — und mit welcher Sicherheit?</td><td><a href="#statik">Statik</a> → <a href="#festigkeit">Festigkeit</a></td></tr>
+<tr><td>Wie dick muss das Profil sein, damit es sich nicht durchbiegt?</td><td><a href="#balken">Biegung, Torsion &amp; Knicken</a></td></tr>
+<tr><td>Welcher Motor, wie schnell, wo liegt die Resonanz?</td><td><a href="#dynamik">Kinematik, Dynamik &amp; Schwingungen</a></td></tr>
+<tr><td>Warum rutscht die Klemmung — oder warum klemmt die Führung?</td><td><a href="#reibung">Reibung &amp; Haftung</a></td></tr>
+<tr><td>Welches Anziehdrehmoment, welches Kernloch, welche Sicherung?</td><td><a href="#schrauben">Schrauben &amp; Gewinde</a></td></tr>
+<tr><td>Wie kommt das Zahnrad drehfest auf die Welle?</td><td><a href="#verbindungen">Welle-Nabe, Schweißen &amp; Kleben</a></td></tr>
+<tr><td>Welches Lager, welche Passung, wie lange hält es?</td><td><a href="#lager">Lager &amp; Führungen</a></td></tr>
+<tr><td>Riemen oder Spindel, welche Untersetzung?</td><td><a href="#getriebe">Zahnräder, Riemen &amp; Spindeln</a></td></tr>
+<tr><td>Wie dichte ich ab, wie kupple ich zwei Wellen?</td><td><a href="#federn">Federn, Dichtungen &amp; Kupplungen</a></td></tr>
+<tr><td>Welcher Werkstoff — und was bedeuten die Zahlen im Datenblatt?</td><td><a href="#auswahl">Werkstoffwahl</a> → <a href="#kennwerte">Kennwerte</a></td></tr>
+<tr><td>Rostet das? Muss das gehärtet werden?</td><td><a href="#behandlung">Wärmebehandlung &amp; Korrosion</a></td></tr>
+<tr><td>Welche Toleranz gehört auf die Zeichnung?</td><td><a href="#toleranzen">Toleranzen, Passungen &amp; Oberflächen</a></td></tr>
+<tr><td>Lässt sich das so fertigen — und was kostet es?</td><td><a href="#fertigung">Fertigung &amp; DFM</a>, <a href="#druck3d">3D-Druck</a></td></tr>
+</tbody>
+</table></div>
+
+<div class="tip"><b>Die Grundregel der Konstruktion:</b> Erst nachsehen, ob es das Element genormt und kaufbar gibt. Ein Rillenkugellager 6000 kostet zwei Euro und hält Jahrzehnte; eine selbstgebaute Gleitlagerung ist in einer Stunde konstruiert und in einem Monat ausgeschlagen. Eigenkonstruktion lohnt erst, wenn das Katalogteil nachweislich nicht passt.</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Gross/Hauger/Schröder/Wall, <i>Technische Mechanik 1–3</i>, Springer Vieweg — Statik, Elastostatik, Kinetik.</li>
+    <li>Herbert Wittel, Dieter Jannasch u. a., <i>Roloff/Matek Maschinenelemente</i> mit Tabellenbuch, Springer Vieweg — die Standardreferenz im deutschsprachigen Raum.</li>
+    <li>Gerhard Niemann, Hans Winter, Bernd-Robert Höhn, <i>Maschinenelemente Band 1–3</i>, Springer — das ausführliche Werk, besonders für Zahnräder.</li>
+    <li>Michael F. Ashby, <i>Materials Selection in Mechanical Design</i>, Butterworth-Heinemann — Systematik der Werkstoffauswahl.</li>
+    <li>Herstellerkataloge als Primärquelle für Zahlenwerte: <a href="https://www.skf.com/group/products/rolling-bearings">SKF</a>, <a href="https://medias.schaeffler.de/">Schaeffler medias</a>, <a href="https://www.igus.de/">igus</a>, <a href="https://www.hiwin.de/">HIWIN</a>.</li>
+    <li>Normen und Richtlinien im Überblick: <a href="mechatronik-nachschlagewerk.html#normen">Nachschlagewerk — Normen</a>.</li>
+  </ul>
+</div>

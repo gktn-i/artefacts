@@ -1,62 +1,88 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Zwischen dem Einschalten und der ersten Zeile in <code>main()</code> passiert mehr, als die meisten vermuten:</b> Vektortabelle, Takt, Kopieren initialisierter Variablen, Nullen des BSS-Bereichs, Konstruktoren. Wer diesen Weg kennt, versteht Linker-Fehler, Bootloader und OTA-Updates ohne Zauberei.</div>
+<div class="kurz"><b>Zwischen dem Einschalten und der ersten Zeile in <code>main()</code> passiert mehr, als die meisten vermuten:</b> Vektortabelle, Takt, Kopieren initialisierter Variablen, Nullen des BSS-Bereichs, Konstruktoren. Wer diesen Weg kennt, versteht Linker-Fehler, Bootloader und Updates ohne Zauberei.</div>
 
-<h2>Die Sektionen</h2>
-<div class="tbl-wrap"><table style="min-width:860px">
-<thead><tr><th>Sektion</th><th>Inhalt</th><th>Liegt im</th><th>Beim Start</th></tr></thead>
+<h2>Der Speicher beim Start</h2>
+<svg class="dg l" viewBox="0 0 600 220" role="img" aria-label="Speicherbild: Flash mit Vektortabelle, Code, Konstanten und den Anfangswerten der Variablen; RAM mit data, bss, Heap, freiem Bereich und Stack">
+  <text class="lblb" x="125" y="18" text-anchor="middle">FLASH — bleibt erhalten</text>
+  <text class="lblb" x="445" y="18" text-anchor="middle">RAM — beim Reset undefiniert</text>
+  <rect class="box" x="55" y="28" width="140" height="26" rx="3" /><text class="lbl" x="125" y="45" text-anchor="middle">.isr_vector</text>
+  <rect class="box" x="55" y="54" width="140" height="60" rx="3" /><text class="lbl" x="125" y="88" text-anchor="middle">.text — Code</text>
+  <rect class="box" x="55" y="114" width="140" height="38" rx="3" /><text class="lbl" x="125" y="137" text-anchor="middle">.rodata — const</text>
+  <rect class="accs" x="55" y="152" width="140" height="36" rx="3" /><text class="lbla" x="125" y="174" text-anchor="middle">Anfangswerte .data</text>
+  <rect class="accs" x="375" y="28" width="140" height="30" rx="3" /><text class="lbla" x="445" y="48" text-anchor="middle">.data — kopiert</text>
+  <rect class="box" x="375" y="58" width="140" height="34" rx="3" /><text class="lbl" x="445" y="80" text-anchor="middle">.bss — genullt</text>
+  <rect class="box" x="375" y="92" width="140" height="28" rx="3" /><text class="lbl" x="445" y="111" text-anchor="middle">Heap</text>
+  <rect class="box" x="375" y="120" width="140" height="42" rx="3" style="fill:none;stroke-dasharray:3 4" /><text class="lbl" x="445" y="146" text-anchor="middle">frei</text>
+  <rect class="box" x="375" y="162" width="140" height="26" rx="3" /><text class="lbl" x="445" y="180" text-anchor="middle">Stack</text>
+  <path class="acc" d="M195,170 H285 V43 H367" />
+  <path class="accf" d="M375,43 l-9,-5 v10 z" />
+  <text class="lbla" x="291" y="110">Startup kopiert</text>
+  <path class="w" d="M445,120 V132" /><path class="f" d="M445,140 l-5,-9 h10 z" />
+  <path class="w" d="M445,162 V150" /><path class="f" d="M445,142 l-5,9 h10 z" />
+  <text class="lbl" x="369" y="36" text-anchor="end">niedrig</text>
+  <text class="lbl" x="369" y="186" text-anchor="end">hoch</text>
+  <text class="lbl" x="527" y="140">wachsen</text>
+  <text class="lbl" x="527" y="152">aufeinander zu</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Sektion</th><th>Inhalt</th><th>Liegt im</th><th>Beim Start</th></tr></thead>
 <tbody>
-<tr><td><b>.isr_vector</b></td><td>Vektortabelle: Anfangs-Stackzeiger und Adressen aller Handler</td><td>Flash, ganz vorn</td><td>Der Prozessor liest daraus die erste Adresse</td></tr>
+<tr><td><b>.isr_vector</b></td><td>Vektortabelle: Anfangs-Stackzeiger und Adressen aller Handler</td><td>Flash, ganz vorn</td><td>Der Prozessor liest daraus die ersten beiden Worte</td></tr>
 <tr><td><b>.text</b></td><td>Programmcode</td><td>Flash</td><td>Wird direkt von dort ausgeführt</td></tr>
 <tr><td><b>.rodata</b></td><td>Konstanten, Zeichenketten, Tabellen</td><td>Flash</td><td>Bleibt dort</td></tr>
 <tr><td><b>.data</b></td><td>Initialisierte globale Variablen</td><td>Werte im Flash, Variablen im RAM</td><td>Startup-Code <b>kopiert</b> vom Flash ins RAM</td></tr>
 <tr><td><b>.bss</b></td><td>Globale Variablen ohne Anfangswert</td><td>RAM</td><td>Startup-Code <b>nullt</b> den Bereich</td></tr>
-<tr><td><b>Heap</b></td><td>Dynamisch angeforderter Speicher</td><td>RAM</td><td>Wächst nach oben</td></tr>
-<tr><td><b>Stack</b></td><td>Lokale Variablen, Rücksprungadressen, ISR-Kontext</td><td>RAM</td><td>Wächst nach unten</td></tr>
+<tr><td><b>Heap</b></td><td>Dynamisch angeforderter Speicher</td><td>RAM</td><td>Wächst zu höheren Adressen</td></tr>
+<tr><td><b>Stack</b></td><td>Lokale Variablen, Rücksprungadressen, ISR-Kontext</td><td>RAM</td><td>Wächst zu niedrigeren Adressen</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Stack und Heap wachsen aufeinander zu.</b> Treffen sie sich, überschreibt der eine den anderen — ohne Fehlermeldung, mit beliebig verzögerten Folgen. Deshalb gilt in eingebetteten Systemen die Regel: <b>kein <code>malloc</code> nach der Initialisierung</b>, besser gar keins. Statische Puffer fester Größe sind vorhersagbar, und der Linker meldet schon beim Bauen, wenn der Speicher nicht reicht.</div>
+<div class="warn"><b>Stack und Heap wachsen aufeinander zu.</b> Treffen sie sich, überschreibt der eine den anderen — ohne Fehlermeldung, mit beliebig verzögerten Folgen. Deshalb gilt: <b>kein <code>malloc</code> nach der Initialisierung</b>, besser gar keins. Statische Puffer fester Größe sind vorhersagbar, und der Linker meldet schon beim Bauen, wenn der Speicher nicht reicht.</div>
 
 <h2>Der Startup-Ablauf</h2>
 <div class="steps">
-  <div class="step"><h4>Reset</h4>Der Prozessor liest den Stackzeiger aus der ersten Adresse der Vektortabelle und springt zur zweiten (Reset-Handler).</div>
-  <div class="step"><h4>Takt einstellen</h4>Interner Oszillator, PLL, externer Quarz. Danach läuft der Controller mit der Zielfrequenz. Bei ESP32 und ähnlichen SoCs erledigt das ein ROM-Bootloader vorab.</div>
-  <div class="step"><h4>.data kopieren, .bss nullen</h4>Zwei einfache Schleifen im Startup-Code. Ab hier stimmen die Anfangswerte globaler Variablen.</div>
+  <div class="step"><h4>Reset</h4>Der Prozessor lädt den Stackzeiger aus dem ersten Wort der Vektortabelle und springt an die Adresse im zweiten (Reset-Handler).</div>
+  <div class="step"><h4>Takt einstellen</h4>Interner Oszillator, PLL, externer Quarz. Bei ESP32 und ähnlichen SoCs erledigt das ein ROM-Bootloader vorab.</div>
+  <div class="step"><h4>.data kopieren, .bss nullen</h4>Zwei Schleifen im Startup-Code. Ab hier stimmen die Anfangswerte globaler Variablen.</div>
   <div class="step"><h4>Laufzeitumgebung starten</h4>Bei C++ die Konstruktoren globaler Objekte, bei C die newlib-Initialisierung.</div>
   <div class="step"><h4><code>main()</code> aufrufen</h4>Ab hier läuft der eigene Code. <code>main()</code> darf nie zurückkehren — der Startup-Code endet in einer Endlosschleife.</div>
 </div>
-<p class="note">Genau deshalb ist eine globale Variable mit Anfangswert „teuer“: Ihr Wert belegt Flash <em>und</em> RAM. Eine große Nachschlagetabelle gehört deshalb nach <code>const</code>, damit sie in .rodata bleibt und nicht ins RAM kopiert wird.</p>
+<p class="note">Deshalb ist eine globale Variable mit Anfangswert „teuer“: Ihr Wert belegt Flash <em>und</em> RAM. Eine große Nachschlagetabelle gehört nach <code>const</code>, damit sie in .rodata bleibt und gar nicht erst kopiert wird.</p>
 
 <h2>Das Linker-Skript</h2>
 <div class="grid2">
-  <div class="card"><div class="ct">MEMORY</div><div class="cd">Beschreibt die physischen Bereiche: Flash-Anfang und -Größe, RAM-Anfang und -Größe, gegebenenfalls weitere Bereiche wie CCM-RAM oder externes SDRAM.</div></div>
-  <div class="card"><div class="ct">SECTIONS</div><div class="cd">Legt fest, welche Sektion in welchen Bereich kommt und welche Symbole der Startup-Code dafür braucht (Anfang und Ende von .data, .bss, Stack-Obergrenze).</div></div>
+  <div class="card"><div class="ct">MEMORY</div><div class="cd">Beschreibt die physischen Bereiche: Flash-Anfang und -Größe, RAM-Anfang und -Größe, gegebenenfalls weitere wie CCM-RAM oder externes SDRAM.</div></div>
+  <div class="card"><div class="ct">SECTIONS</div><div class="cd">Legt fest, welche Sektion in welchen Bereich kommt und welche Symbole der Startup-Code dafür braucht — Anfang und Ende von .data und .bss, Obergrenze des Stacks.</div></div>
 </div>
-<p>Anpassen muss man es in drei Fällen:</p>
-<ul>
-  <li><b>Bootloader vorhanden:</b> Die Anwendung beginnt dann nicht bei Flash-Anfang, sondern mit Versatz. Zusätzlich muss die Vektortabelle zur Laufzeit umgesetzt werden (VTOR-Register bei Cortex-M).</li>
-  <li><b>Speicherbereich reservieren:</b> Ein Abschnitt, der über einen Reset hinweg erhalten bleibt (etwa für einen Absturzbericht) darf nicht in .bss liegen, sonst wird er beim Start genullt.</li>
-  <li><b>Code ins RAM verlagern:</b> Zeitkritische Funktionen laufen aus dem RAM schneller — und beim Schreiben in den Flash darf ohnehin kein Code aus dem Flash ausgeführt werden.</li>
-</ul>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Anpassen, wenn …</th><th>Was zu tun ist</th></tr></thead>
+<tbody>
+<tr><td><b>ein Bootloader davor liegt</b></td><td>Die Anwendung beginnt mit Versatz statt bei Flash-Anfang, und die Vektortabelle muss zur Laufzeit umgesetzt werden: bei Cortex-M3/M4/M7/M33 über das VTOR-Register. Cortex-M0 hat kein VTOR — dort spiegelt man die Tabelle ins RAM oder nutzt ein herstellereigenes Remap-Register</td></tr>
+<tr><td><b>ein Bereich den Reset überleben soll</b></td><td>Etwa für einen Absturzbericht: eigene Sektion anlegen, die der Startup-Code weder kopiert noch nullt — in .bss wird sie gelöscht</td></tr>
+<tr><td><b>Code aus dem RAM laufen soll</b></td><td>Zeitkritische Funktionen sind dort schneller; beim Schreiben in den Flash darf ohnehin kein Code aus dem Flash ausgeführt werden</td></tr>
+</tbody>
+</table></div>
 
 <h2>Bootloader und Updates</h2>
-<div class="tbl-wrap"><table style="min-width:860px">
-<thead><tr><th>Variante</th><th>Prinzip</th><th>Bewertung</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Variante</th><th>Prinzip</th><th>Bewertung</th></tr></thead>
 <tbody>
-<tr><td><b>ROM-Bootloader</b></td><td>Im Chip fest eingebrannt, meist über UART, USB-DFU oder I²C erreichbar</td><td>Kostet nichts, kann aber nicht angepasst werden. Als Rettungsanker immer verfügbar</td></tr>
-<tr><td><b>Eigener Bootloader, ein Bereich</b></td><td>Löscht die Anwendung und schreibt die neue</td><td>Einfach, aber ein Abbruch macht das Gerät unbrauchbar</td></tr>
+<tr><td><b>ROM-Bootloader</b></td><td>Fest im Chip, meist über UART, USB-DFU oder I²C erreichbar</td><td>Kostet nichts, ist nicht anpassbar, aber als Rettungsanker immer da</td></tr>
+<tr><td><b>Eigener Bootloader, ein Bereich</b></td><td>Löscht die Anwendung und schreibt die neue</td><td>Einfach — ein Abbruch macht das Gerät unbrauchbar</td></tr>
 <tr><td><b>A/B-Verfahren</b></td><td>Zwei vollständige Anwendungsbereiche im Wechsel</td><td>Der sichere Standard: Bei Fehlschlag wird der alte Stand wieder aktiviert. Kostet doppelten Flash</td></tr>
 <tr><td><b>Externer Flash als Zwischenspeicher</b></td><td>Update wird dorthin geladen und dann kopiert</td><td>Spart internen Flash, braucht einen zusätzlichen Baustein</td></tr>
 <tr><td><b>MCUboot</b></td><td>Fertiger, quelloffener Bootloader mit Signaturprüfung und A/B</td><td>In Zephyr und im nRF Connect SDK integriert; für ernsthafte Projekte die naheliegende Wahl</td></tr>
 </tbody>
 </table></div>
+
+<h2>Ein Update, das nicht scheitert</h2>
 <div class="steps">
-  <div class="step"><h4>Vollständig übertragen, dann prüfen</h4>Erst das ganze Abbild in den inaktiven Bereich schreiben, dann Prüfsumme und Signatur verifizieren. Nie während der Übertragung aktivieren.</div>
-  <div class="step"><h4>Umschalten atomar gestalten</h4>Ein einziges Flag oder ein Metadatenblock entscheidet, welcher Bereich startet. Der Schreibvorgang dieses Flags muss so klein sein, dass er nicht halb passieren kann.</div>
-  <div class="step"><h4>Bestätigung durch die Anwendung</h4>Die neue Firmware muss sich nach dem ersten erfolgreichen Start selbst bestätigen. Bleibt die Bestätigung aus, fällt der Bootloader beim nächsten Reset auf den alten Stand zurück.</div>
-  <div class="step"><h4>Rollback-Schutz</h4>Ein Zähler in geschütztem Speicher verhindert, dass eine alte Version mit bekannter Lücke eingespielt wird.</div>
-  <div class="step"><h4>Versorgung absichern</h4>Beim Schreiben in den Flash braucht der Controller stabile Spannung. Brownout-Erkennung aktivieren, bei Batteriebetrieb den Ladezustand vorher prüfen.</div>
+  <div class="step"><h4>Vollständig übertragen, dann prüfen</h4>Erst das ganze Abbild in den inaktiven Bereich schreiben, danach Prüfsumme und Signatur verifizieren. Nie während der Übertragung aktivieren.</div>
+  <div class="step"><h4>Umschalten atomar gestalten</h4>Ein einziges Flag oder ein Metadatenblock entscheidet, welcher Bereich startet. Dieser Schreibvorgang muss so klein sein, dass er nicht halb passieren kann.</div>
+  <div class="step"><h4>Bestätigung durch die Anwendung</h4>Die neue Firmware bestätigt sich nach dem ersten erfolgreichen Start selbst. Bleibt die Bestätigung aus, fällt der Bootloader beim nächsten Reset auf den alten Stand zurück.</div>
+  <div class="step"><h4>Rollback-Schutz</h4>Ein Zähler in geschütztem Speicher verhindert, dass eine alte Version mit bekannter Lücke eingespielt wird → <a href="digitaltechnik.html#security">Security &amp; Kryptografie</a>.</div>
+  <div class="step"><h4>Versorgung absichern</h4>Beim Schreiben in den Flash braucht der Controller stabile Spannung: Brownout-Erkennung aktivieren, bei Batteriebetrieb vorher den Ladezustand prüfen → <a href="#strom">Stromsparen</a>.</div>
 </div>
 
 <div class="srcs">
@@ -64,7 +90,7 @@ import "./_style.css";
   <ul>
     <li><a href="https://interrupt.memfault.com/blog/how-to-write-linker-scripts-for-firmware">Interrupt: How to Write a Linker Script for Firmware</a> und die Artikelserie zu Bootloadern.</li>
     <li><a href="https://docs.mcuboot.com/">MCUboot Documentation</a> — Aufbau, Signaturformate, Swap-Verfahren.</li>
-    <li>GNU ld-Handbuch, Kapitel Scripts.</li>
-    <li>ARM, <i>Cortex-M Vector Table Relocation</i> — VTOR-Register in den jeweiligen Programming Guides.</li>
+    <li>GNU ld-Handbuch, Kapitel <i>Scripts</i>; ARM, <i>Cortex-M Generic User Guide</i> — Vektortabelle und VTOR.</li>
+    <li>Joseph Yiu, <i>The Definitive Guide to Arm Cortex-M</i> — Startup, Speichermodell, Ausnahmebehandlung.</li>
   </ul>
 </div>

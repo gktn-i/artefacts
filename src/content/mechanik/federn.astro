@@ -1,0 +1,115 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Federn, Dichtungen und Kupplungen sind die Bauteile, an denen Konstruktionen im Betrieb scheitern.</b> Eine Feder definiert eine Kraft über einen Weg — die Federrate ist fast immer wichtiger als die Maximalkraft. Eine Dichtung ist nur so gut wie die Nut, in der sie liegt, und eine Kupplung nur so gut, wie sie Versatz ausgleicht, ohne ihn in Lagerkräfte zu verwandeln.</div>
+
+<h2>Federrate</h2>
+<div class="fbox">
+  <span class="f">c = F / s&nbsp;&nbsp;&nbsp;&nbsp;E = ½ · c · s²&nbsp;&nbsp;&nbsp;&nbsp;c = G · d⁴ / (8 · D_m³ · n)</span>
+  <span class="l">c in N/mm, s in mm. Für die zylindrische Schraubendruckfeder: d Drahtdurchmesser, D_m mittlerer Windungsdurchmesser, n federnde Windungen, G Schubmodul (Federstahl ≈ 81 500 N/mm²). In Reihe addieren sich die Kehrwerte (weicher), parallel die Raten (steifer) — genau umgekehrt zu Widerständen.</span>
+</div>
+<div class="stop"><b>Der Drahtdurchmesser geht in der vierten Potenz ein.</b> 10 % dickerer Draht ergibt eine 46 % steifere Feder. Der Windungsdurchmesser geht kubisch und umgekehrt ein: 10 % größerer Durchmesser macht die Feder 25 % weicher. Wer eine Feder anpassen will, dreht zuerst an der Windungszahl — der einzige Parameter mit linearem Einfluss.</div>
+
+<h2>Federbauformen und Dämpfung</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Bauform</th><th>Belastung</th><th>Kennlinie</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Schraubendruckfeder</b></td><td>Druck</td><td>linear</td><td>Der Standardfall: Ventile, Rückstellungen, Andruck</td></tr>
+<tr><td><b>Schraubenzugfeder</b></td><td>Zug</td><td>linear mit Vorspannung</td><td>Rückholung, Klappen; die Ösen sind die Schwachstelle</td></tr>
+<tr><td><b>Schenkelfeder</b> (Torsionsfeder)</td><td>Drehmoment</td><td>linear</td><td>Scharniere, Klemmen, Wäscheklammerprinzip</td></tr>
+<tr><td><b>Tellerfeder</b> (DIN 2093)</td><td>Druck</td><td>je nach h/t degressiv oder progressiv</td><td>Sehr hohe Kraft auf kurzem Weg; stapelbar zu beliebigen Kennlinien</td></tr>
+<tr><td><b>Blattfeder</b></td><td>Biegung</td><td>linear</td><td>Festkörpergelenke, Klemmen, Fahrzeugfederung</td></tr>
+<tr><td><b>Gasdruckfeder</b></td><td>Druck</td><td>nahezu konstant</td><td>Klappen und Deckel: die Kraft bleibt über den Weg fast gleich</td></tr>
+<tr><td><b>Elastomerpuffer</b></td><td>Druck / Schub</td><td>progressiv</td><td>Anschläge und Endlagen; Feder und Dämpfer in einem Bauteil</td></tr>
+</tbody>
+</table></div>
+<p>Eine Feder allein speichert Energie und gibt sie zurück — sie schwingt. Erst ein Dämpfer entzieht dem System Energie:</p>
+<ul>
+  <li><b>Elastomerpuffer:</b> innere Reibung im Werkstoff — die einfachste Lösung für Anschläge.</li>
+  <li><b>Hydraulikdämpfer:</b> Drosselung einer Flüssigkeit, Kraft steigt mit der Geschwindigkeit, einstellbar.</li>
+  <li><b>Reibungsdämpfer:</b> Coulombsche Reibung, Kraft geschwindigkeitsunabhängig — einfach, aber Stick-Slip.</li>
+  <li><b>Wirbelstromdämpfer:</b> induzierte Ströme im Leiter, verschleißfrei und berührungslos; in Messgeräten und Waagen.</li>
+</ul>
+<div class="tip"><b>Dämpfung wirkt nur in der Nähe der Resonanz.</b> Wie stark, zeigt die Vergrößerungsfunktion unter <a href="#dynamik">Kinematik, Dynamik &amp; Schwingungen</a> — bei einem Dämpfungsgrad von 0,02 überhöht die Resonanz noch 25-fach, bei 0,1 nur noch 5-fach.</div>
+
+<h2>Tellerfedern stapeln</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Gleichsinnig (parallel)</div><div class="cd">Alle Federn in dieselbe Richtung: die <b>Kraft</b> addiert sich, der Weg bleibt der einer Einzelfeder. Die Reibung zwischen den Tellern erzeugt Dämpfung.</div></div>
+  <div class="card"><div class="ct">Wechselsinnig (Reihe)</div><div class="cd">Abwechselnd gedreht: der <b>Weg</b> addiert sich, die Kraft bleibt die einer Einzelfeder.</div></div>
+  <div class="card"><div class="ct">Kombination</div><div class="cd">Pakete zu je zwei oder drei gleichsinnig, diese wechselsinnig gestapelt — damit lässt sich fast jede Kennlinie in wenig Bauraum bauen.</div></div>
+</div>
+<div class="tip"><b>Tellerfedern unter Schraubenköpfen</b> wirken dort, wo Setzen unvermeidlich ist — bei Kunststoffbauteilen oder vielen Trennfugen. Anders als der Federring bringen sie eine relevante Kraft über einen nennenswerten Weg auf. Eine Sicherung gegen Losdrehen ersetzen sie nicht, siehe <a href="#schrauben">Schrauben &amp; Gewinde</a>.</div>
+
+<h2>Federn auslegen</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4>
+    <ul>
+      <li>Feder im mittleren Drittel ihres Weges arbeiten lassen — nicht nahe Blocklänge, nicht nahe null</li>
+      <li>Knicksicherheit prüfen, sobald L₀/D_m &gt; 4 wird; frei aufliegende Enden knicken schon ab etwa 2,6, fest geführte erst ab 5,2</li>
+      <li>Führung über Dorn oder in einer Bohrung vorsehen</li>
+      <li>Bei dynamischer Belastung kugelgestrahlte Federn wählen</li>
+      <li>Katalogfedern nehmen: verfügbar, geprüft, mit Kennlinie im Datenblatt</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Falsch</h4>
+    <ul>
+      <li>Feder auf Block fahren lassen — die Spannung steigt schlagartig, der häufigste Bruchgrund</li>
+      <li>Zugfeder über die Ösen hinaus belasten; dort sitzt die Kerbspannung</li>
+      <li>Federstahl in korrosiver Umgebung ohne Schutz: Rostnarben sind Rissausgänge</li>
+      <li>Zugfedern für Dauerschwinglast — deutlich geringere Dauerfestigkeit als Druckfedern</li>
+      <li>Kaltverformte Federn dauerhaft über 120 °C einsetzen; sie erschlaffen</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Dichtungsarten</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Art</th><th>Bewegung</th><th data-s="num">Druck</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>O-Ring</b> (ISO 3601)</td><td>statisch, langsam bewegt</td><td>bis 400 bar mit Stützring</td><td>Billigste und verbreitetste Dichtung; die Nutgeometrie entscheidet alles</td></tr>
+<tr><td><b>Wellendichtring</b> (DIN 3760, „Simmerring“)</td><td>rotierend</td><td>drucklos bis ca. 0,5 bar</td><td>Dichtlippe mit Feder; Welle gehärtet und drallfrei geschliffen, Ra 0,2–0,8 µm</td></tr>
+<tr><td><b>Nutring / Stangendichtung</b></td><td>translatorisch</td><td>bis 400 bar</td><td>Hydraulikzylinder; asymmetrisches Profil, Einbaurichtung beachten</td></tr>
+<tr><td><b>Flachdichtung</b></td><td>statisch</td><td>flanschabhängig</td><td>Braucht ausreichende Flächenpressung — Schraubenabstand und Flanschsteifigkeit prüfen</td></tr>
+<tr><td><b>Flüssigdichtung</b> (anaerob, Silikon)</td><td>statisch</td><td>mittel</td><td>Passt sich jeder Form an; Aushärtezeit und Chemikalienbeständigkeit beachten</td></tr>
+<tr><td><b>Labyrinth / Spaltdichtung</b></td><td>rotierend</td><td>drucklos</td><td>Berührungslos und verschleißfrei, für hohe Drehzahlen; hält nur Spritzwasser und Staub ab</td></tr>
+<tr><td><b>Gleitringdichtung</b></td><td>rotierend</td><td>hoch</td><td>Pumpen: zwei geläppte Ringe gleiten aufeinander. Teuer, aber sehr dicht und langlebig</td></tr>
+</tbody>
+</table></div>
+
+<h2>O-Ring richtig einbauen</h2>
+<div class="steps">
+  <div class="step"><h4>Verpressung einstellen</h4>Statisch 18–25 %, dynamisch 10–18 %. Zu wenig heißt undicht, zu viel heißt bleibende Verformung und frühes Versagen.</div>
+  <div class="step"><h4>Füllgrad der Nut 70–90 %</h4>Der Ring braucht Platz, um bei Wärmedehnung und Quellung auszuweichen. Eine randvolle Nut sprengt bei Erwärmung das Bauteil.</div>
+  <div class="step"><h4>Einführfase 15–20° vorsehen</h4>Ohne Fase wird der Ring an der Kante angeschnitten. Alle Kanten, über die er läuft, gebrochen und gratfrei.</div>
+  <div class="step"><h4>Werkstoff nach Medium wählen</h4>NBR für Öl und Kraftstoff bis 100 °C, FKM (Viton) für Chemie und bis 200 °C, EPDM für Wasser, Dampf und Bremsflüssigkeit — <b>nicht</b> für Mineralöl, dort quillt es stark. Silikon für Lebensmittel und tiefe Temperaturen.</div>
+  <div class="step"><h4>Ab ca. 100 bar Stützring einsetzen</h4>Sonst wird der Ring in den Spalt gedrückt (Spaltextrusion). Ein PTFE-Stützring auf der druckabgewandten Seite verhindert das.</div>
+</div>
+<div class="warn"><b>Die häufigsten Dichtungsfehler sind selten der Ring selbst:</b> zu große Spaltmaße, scharfe Kanten bei der Montage, falscher Werkstoff für das Medium, zu raue oder zu glatte Dichtfläche — und bei Wellendichtringen ein Drall aus dem Drehen, der wie eine Förderschnecke wirkt. Deshalb Wellensitze <em>einstechschleifen</em>, nicht drehen.</div>
+
+<h2>Kupplungen</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Bauart</th><th data-s="num">Versatzausgleich</th><th data-s="num">Torsionssteifigkeit</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Starre Kupplung / Klemmnabe</b></td><td>keiner</td><td>sehr hoch</td><td>Nur bei exakt fluchtenden, gemeinsam gelagerten Wellen</td></tr>
+<tr><td><b>Balgkupplung</b> (Metallbalg)</td><td>axial und winklig, wenig radial</td><td>sehr hoch</td><td>Servoachsen, Messtechnik; spielfrei und steif, aber empfindlich gegen Überlast</td></tr>
+<tr><td><b>Klauenkupplung mit Elastomerstern</b></td><td>alle Richtungen, moderat</td><td>mittel</td><td>Der robuste Standard; dämpft Stöße, verschiedene Härtegrade wählbar</td></tr>
+<tr><td><b>Oldham-Kupplung</b></td><td>hoher Radialversatz</td><td>mittel</td><td>Für parallel versetzte Wellen; die Kunststoffscheibe ist Verschleißteil</td></tr>
+<tr><td><b>Wellfederkupplung</b> (Beam)</td><td>alle Richtungen, gering</td><td>gering–mittel</td><td>Billig, für Encoder und leichte Antriebe</td></tr>
+<tr><td><b>Kreuzgelenk</b> (Kardan)</td><td>großer Winkel</td><td>hoch</td><td>Einfaches Gelenk überträgt ungleichförmig — nur paarweise sinnvoll</td></tr>
+<tr><td><b>Sicherheitskupplung</b></td><td>je nach Typ</td><td>hoch</td><td>Rutscht oder rastet bei Überlast aus; schützt Getriebe und Werkzeug</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Eine Kupplung gleicht Versatz aus — sie beseitigt ihn nicht.</b> Jeder Versatz erzeugt Rückstellkräfte, die als zusätzliche Radial- und Axiallast in den Lagern landen und deren Lebensdauer verkürzen (siehe <a href="#lager">Lager &amp; Führungen</a>). Ausrichten bleibt Pflicht; die Kupplung fängt nur den Rest ab.</div>
+<div class="tip"><b>Kupplung als bewusste Sollbruchstelle:</b> Ein Elastomerstern kostet wenige Euro und ist in Minuten getauscht. Wer ihn so auslegt, dass er vor dem Getriebe versagt, hat eine billige Überlastsicherung. Bei Servoantrieben tut das ohnehin die Strombegrenzung — aber nur, solange die Software läuft.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN 13906-1 bis -3 — Zylindrische Schraubenfedern aus runden Drähten: Berechnung und Knicksicherheit von Druck-, Zug- und Drehfedern; DIN 2093 — Tellerfedern mit Kennlinien und Stapelvorschriften.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i>, Springer Vieweg — Kapitel Federn mit Auslegungsbeispielen und Dauerfestigkeitsdiagrammen für Federstahl.</li>
+    <li>Katalogdaten der Federhersteller als Primärquelle, etwa <a href="https://www.gutekunst-federn.de/">Gutekunst Federn</a> mit frei nutzbarem Auslegungsprogramm.</li>
+    <li>ISO 3601-1 bis -5 (O-Ringe: Maße, Toleranzen, Einbauräume) und DIN 3760 / DIN 3761 (Radial-Wellendichtringe, Anforderungen an Gegenlauffläche und Drallfreiheit).</li>
+    <li><a href="https://www.fst.com/">Freudenberg Sealing Technologies — Technisches Handbuch</a> und <a href="https://www.tss.trelleborg.com/">Trelleborg Sealing Solutions</a>: Einbauraumtabellen und Werkstoffbeständigkeitslisten.</li>
+    <li>DIN 740 — Nachgiebige Wellenkupplungen: Kennwerte und Auslegung.</li>
+  </ul>
+</div>
