@@ -1,0 +1,65 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Das Infill-Muster entscheidet, wofür das Material im Inneren überhaupt gut ist.</b> 2D-Muster wiederholen sich Schicht für Schicht und tragen nur in der Ebene; 3D-Muster verschränken sich über die Schichten hinweg und tragen in alle Richtungen. Fünf Muster decken den Alltag ab — der Rest ist Sonderfall.</div>
+
+<h2>Alle Muster im Vergleich</h2>
+<p>Namen und Kategorien folgen Bambu Studio; PrusaSlicer, OrcaSlicer und Cura kennen dieselben Muster meist unter gleichem oder sehr ähnlichem Namen. <span class="b acc">Top</span> markiert die fünf Muster, mit denen sich praktisch jeder Druck erschlagen lässt.</p>
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Suchen: Muster, Eigenschaft, Anwendung …" aria-label="Infill-Muster durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="allround">Allrounder</button>
+    <button type="button" data-filter="stark">Stark</button>
+    <button type="button" data-filter="schnell">Schnell</button>
+    <button type="button" data-filter="spezial">Spezialisiert</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="tbl-wrap"><table style="min-width:1080px">
+    <thead><tr><th data-s="text">Muster</th><th>Kategorie</th><th data-s="num">Dichte</th><th>Dim.</th><th data-s="num">Festigkeit</th><th data-s="num">Tempo</th><th data-s="num">Material&shy;effizienz</th><th data-s="num">Isotropie</th><th>Charakter &amp; Einsatz</th></tr></thead>
+    <tbody data-list="Mustern">
+      <tr data-item data-cat="allround" data-k="gyroid isotrop standard funktionsteil cf gf outdoor allround"><td><b>Gyroid</b></td><td><span class="cb">Allrounder</span> <span class="b acc">Top</span></td><td>10–30 %</td><td>3D</td><td>9</td><td>7</td><td>8</td><td>10</td><td>Geschwungene Flächen, die sich innerhalb einer Schicht nie kreuzen: gleich stark in alle Richtungen, wenig Vibration. Die Standardempfehlung von Bambu Lab und Prusa und die richtige Antwort, wenn man nicht nachdenken will.</td></tr>
+      <tr data-item data-cat="schnell" data-k="grid gitter kreuzgitter schnell prototyp gehaeuse box standard"><td><b>Grid (Gitter)</b></td><td><span class="cb">Schnell</span> <span class="b acc">Top</span></td><td>10–30 %</td><td>2D</td><td>6</td><td>9</td><td>5</td><td>4</td><td>Einfaches Kreuzgitter, sehr schnell und zuverlässig, gute Stützung der Deckschichten. Tragfähig in X und Y, schwach diagonal; die Linien kreuzen sich auf derselben Schicht und der Kopf rumpelt darüber.</td></tr>
+      <tr data-item data-cat="schnell" data-k="lightning baumfoermig minimal deko figur vase cosplay materialsparen"><td><b>Lightning</b></td><td><span class="cb">Schnell</span> <span class="b acc">Top</span></td><td>5–15 %</td><td>adaptiv</td><td>2</td><td>10</td><td>10</td><td>1</td><td>Baumartige Verästelungen, die nur dort wachsen, wo Deckschichten Auflage brauchen. Spart bis zu zwei Drittel Material und Zeit — trägt dafür praktisch nichts. Für Figuren, Vasen und reine Optik.</td></tr>
+      <tr data-item data-cat="stark" data-k="cubic wuerfel 3d druckfest zahnrad halterung funktionsteil"><td><b>Cubic (Würfel)</b></td><td><span class="cb">Stark</span> <span class="b acc">Top</span></td><td>15–30 %</td><td>3D</td><td>8</td><td>6</td><td>7</td><td>8</td><td>Um 45° gekippte Würfel mit geschlossenen Lufttaschen: gute Festigkeit in alle Richtungen und spürbar schneller als Waben. Die Wahl, wenn Gyroid zu lange braucht.</td></tr>
+      <tr data-item data-cat="schnell" data-k="crosshatch bambu studio speed schnell funktionsprototyp leise"><td><b>CrossHatch</b></td><td><span class="cb">Schnell</span> <span class="b acc">Top</span></td><td>10–25 %</td><td>2D</td><td>5</td><td>9</td><td>6</td><td>4</td><td>Neueres Bambu-Muster für hohe Geschwindigkeit: keine Kreuzungen innerhalb einer Schicht, dadurch ruhiger Lauf. Stabiler als Lines, schwächer als Gyroid oder Cubic.</td></tr>
+      <tr data-item data-cat="stark" data-k="honeycomb waben lastverteilung leichtbau drohne sandwich"><td><b>Honeycomb (Waben)</b></td><td><span class="cb">Stark</span></td><td>15–30 %</td><td>2D</td><td>8</td><td>4</td><td>7</td><td>6</td><td>Das klassische Wabenmuster mit exzellenter Lastverteilung je Gramm. Bezahlt wird das mit vielen scharfen Richtungswechseln und entsprechend langer Druckzeit.</td></tr>
+      <tr data-item data-cat="stark" data-k="adaptive cubic dichte anpassung materialsparen grosse teile"><td><b>Adaptive Cubic</b></td><td><span class="cb">Stark</span></td><td>10–25 %</td><td>3D</td><td>7</td><td>7</td><td>9</td><td>7</td><td>Cubic mit automatisch variabler Dichte: dicht an Wänden und unter Deckschichten, dünn im Kern. Spart bei großen Teilen viel Material, die Festigkeit wird dafür schlechter vorhersagbar.</td></tr>
+      <tr data-item data-cat="stark" data-k="3d honeycomb waben dreidimensional maximal belastet industrie"><td><b>3D Honeycomb</b></td><td><span class="cb">Stark</span></td><td>15–30 %</td><td>3D</td><td>9</td><td>3</td><td>6</td><td>7</td><td>Waben mit Z-Verstrebung und damit eines der stärksten Muster überhaupt. Sehr lange Druckzeit durch komplexe Pfade — nur für Teile, die es wirklich brauchen.</td></tr>
+      <tr data-item data-cat="schnell" data-k="lines linien rectilinear schnell visuell miniatur"><td><b>Lines (Linien)</b></td><td><span class="cb">Schnell</span></td><td>10–20 %</td><td>2D</td><td>3</td><td>9</td><td>7</td><td>2</td><td>Parallele Bahnen, je Schicht um 90° gedreht. Schnell und leise, aber innerhalb einer Schicht nur in einer Richtung tragfähig. Für schnelle Sichtprototypen und Miniaturen.</td></tr>
+      <tr data-item data-cat="stark" data-k="triangles dreiecke scherfestigkeit platte flaeche"><td><b>Triangles (Dreiecke)</b></td><td><span class="cb">Stark</span></td><td>15–30 %</td><td>2D</td><td>8</td><td>6</td><td>6</td><td>5</td><td>Dreiecksnetz mit sehr guter Scherfestigkeit in der Ebene, ohne Verstrebung in Z. Gut für Platten und flächige Bauteile, die seitlich belastet werden.</td></tr>
+      <tr data-item data-cat="spezial" data-k="concentric konzentrisch flexibel tpu duennwandig feder"><td><b>Concentric (Konzentrisch)</b></td><td><span class="cb">Spezialisiert</span></td><td>15–40 %</td><td>2D</td><td>4</td><td>7</td><td>6</td><td>3</td><td>Folgt der Außenkontur nach innen und lässt das Teil federn statt tragen. Für flexible Teile und dünnwandige Behälter; als Auflage für Deckschichten ungeeignet.</td></tr>
+      <tr data-item data-cat="schnell" data-k="zigzag zick zack durchgehend keine retraction schnell testdruck"><td><b>Zig-Zag</b></td><td><span class="cb">Schnell</span></td><td>10–20 %</td><td>2D</td><td>3</td><td>9</td><td>7</td><td>2</td><td>Wie Lines, aber als durchgehender Pfad ohne Rückzüge. Gleiche Festigkeit, weniger Retraction-Probleme — praktisch bei Materialien, die beim Rückzug zicken.</td></tr>
+      <tr data-item data-cat="stark" data-k="trihexagon dreieck sechseck platte struktur abdeckung"><td><b>Tri-Hexagon</b></td><td><span class="cb">Stark</span></td><td>15–30 %</td><td>2D</td><td>8</td><td>5</td><td>6</td><td>6</td><td>Dreiecke und Sechsecke kombiniert: sehr tragfähig in der Ebene bei guter Lastverteilung. Viele Richtungswechsel, entsprechend langsam.</td></tr>
+      <tr data-item data-cat="spezial" data-k="cross kreuz flexibel tpu tpe daempfer polster"><td><b>Cross (Kreuz)</b></td><td><span class="cb">Spezialisiert</span></td><td>10–25 %</td><td>2D</td><td>3</td><td>6</td><td>7</td><td>3</td><td>Kreuzmuster, das dem Teil gezielt Nachgiebigkeit gibt. Sinnvoll fast nur in Kombination mit TPU oder TPE für Dämpfer und Polster.</td></tr>
+      <tr data-item data-cat="spezial" data-k="locked zag bambu skin skeleton seitenflaeche optik duennwandig"><td><b>Locked Zag</b></td><td><span class="cb">Spezialisiert</span></td><td>15–30 %</td><td>2D</td><td>6</td><td>7</td><td>6</td><td>4</td><td>Bambu-Muster aus zwei Lagen: eine Cross-Zag-Haut für die Seitenflächen und ein Zig-Zag-Skelett für die Festigkeit, beide getrennt einstellbar. Für Teile, bei denen das Muster durchscheinen soll.</td></tr>
+      <tr data-item data-cat="schnell" data-k="support cubic sparsam deckschicht deko materialsparen"><td><b>Support Cubic</b></td><td><span class="cb">Schnell</span></td><td>5–15 %</td><td>3D</td><td>4</td><td>8</td><td>9</td><td>5</td><td>Auf Deckschicht-Stützung reduziertes Cubic — dasselbe Ziel wie Lightning, aber als räumliche Struktur und damit etwas tragfähiger. Für leichte Sichtteile mit sauberer Oberseite.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Kein Muster passt zu dieser Auswahl.</div>
+</div>
+<div class="note">Kennwerte 1–10, relativ zueinander. Isotropie = wie gleichmäßig die Festigkeit über alle Richtungen verteilt ist. Einzustellen in Bambu Studio unter Process → Strength → Sparse Infill Pattern, in PrusaSlicer unter Druckeinstellungen → Füllung.</div>
+
+<h2>Dichte richtig wählen</h2>
+<p>Mehr Füllung ist selten die richtige Antwort: oberhalb von rund 40–50 % bringt eine zusätzliche Wand mehr Festigkeit je Gramm als noch mehr Infill, weil die Last überwiegend über die Außenkontur läuft.</p>
+<div class="tbl-wrap"><table style="min-width:720px">
+  <thead><tr><th data-s="text">Anwendung</th><th data-s="num">Dichte</th><th>Wände</th><th>Muster</th></tr></thead>
+  <tbody>
+    <tr><td><b>Deko, Figuren, Sichtmodelle</b></td><td>5–10 %</td><td>2</td><td>Lightning oder Support Cubic</td></tr>
+    <tr><td><b>Alltagsteile ohne echte Last</b></td><td>15 %</td><td>2–3</td><td>Grid oder CrossHatch</td></tr>
+    <tr><td><b>Funktionsteile mit Belastung</b></td><td>20–30 %</td><td>3–4</td><td>Gyroid oder Cubic</td></tr>
+    <tr><td><b>Hoch belastet, Zahnräder, Halter</b></td><td>30–40 %</td><td>4–6</td><td>Gyroid, Cubic, 3D Honeycomb</td></tr>
+    <tr><td><b>Flexteile aus TPU</b></td><td>5–15 %</td><td>2</td><td>Concentric, Cross, Gyroid</td></tr>
+    <tr><td><b>Dicht, wasserführend</b></td><td>100 %</td><td>4+</td><td>Concentric oder Lines, Überextrusion prüfen</td></tr>
+  </tbody>
+</table></div>
+<div class="tip"><b>Reihenfolge beim Verstärken:</b> erst Wandanzahl erhöhen, dann Deckschichten, erst zuletzt die Füllung. Und die Belastungsrichtung beachten — gedruckte Teile versagen fast immer entlang der Schichtebene, kein Infill-Muster gleicht eine falsche Bauteilorientierung aus.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li><a href="https://wiki.bambulab.com/en/software/bambu-studio/manual/locked-zag">Bambu Lab Wiki — Locked Zag</a> und die <a href="https://wiki.bambulab.com/en/software/bambu-studio/release/release-note-2-1-0">Bambu-Studio-Release-Notes</a>: Aufbau und Einordnung der neueren Muster.</li>
+    <li><a href="https://help.prusa3d.com/article/infill-patterns_177130">Prusa Knowledge Base — Infill patterns</a>: Mustertypen, empfohlene Dichten und Einsatzzwecke.</li>
+    <li><a href="https://www.cnckitchen.com/">CNC Kitchen</a> — Belastungsversuche zu Füllgrad, Wandanzahl und Mustern: Grundlage für die Reihenfolge Wände vor Füllung.</li>
+  </ul>
+</div>

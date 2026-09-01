@@ -1,0 +1,71 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der ehrliche Maßstab ist nicht die Stückmarge, sondern der effektive Stundenlohn: Gewinn geteilt durch alle Stunden, die wirklich hineingehen.</b> Drei Szenarien vom Anlauf bis zum etablierten Katalog, alle Annahmen frei einstellbar. Schätzmodell, keine Garantie.</div>
+
+<h2>Annahmen und Szenarien</h2>
+<p>Oben stehen die Werte, die für alle drei Szenarien gelten; in den Karten stellst du Auftragsmenge, Anzahl neuer Designs und Verkaufspreis ein. Alles rechnet sofort neu.</p>
+
+<div class="panel">
+  <div class="ph"><span class="ic">◆</span>&nbsp; Globale Annahmen</div>
+  <div class="pb">
+    <div class="grid">
+      <div class="field"><label>Verfügbar / Woche</label><input type="number" step="any" id="stundenWoche" value="10"><span class="suf">h</span></div>
+      <div class="field"><label>Ø-Material / Teil</label><input type="number" step="any" id="materialTeil" value="2"><span class="suf">€</span></div>
+      <div class="field"><label>Druckzeit / Teil</label><input type="number" step="any" id="druckzeitTeil" value="2.5"><span class="suf">h</span></div>
+      <div class="field"><label>CAD / neues Design</label><input type="number" step="any" id="cadDesign" value="3"><span class="suf">h</span></div>
+      <div class="field"><label>Komm. / Auftrag</label><input type="number" step="any" id="commsAuftrag" value="0.3"><span class="suf">h</span></div>
+      <div class="field"><label>Nacharbeit / Teil</label><input type="number" step="any" id="postTeil" value="0.25"><span class="suf">h</span></div>
+      <div class="field"><label>Admin / Monat</label><input type="number" step="any" id="adminMonat" value="4"><span class="suf">h</span></div>
+      <div class="field"><label>Verpackung / Teil</label><input type="number" step="any" id="verpackTeil" value="0.5"><span class="suf">€</span></div>
+      <div class="field"><label>Plattformgebühr</label><input type="number" step="any" id="platformPct" value="10"><span class="suf">%</span></div>
+      <div class="field"><label>Ausschuss</label><input type="number" step="any" id="ausschuss" value="8"><span class="suf">%</span></div>
+      <div class="field"><label>Strompreis</label><input type="number" step="any" id="stromPreis" value="0.35"><span class="suf">€/kWh</span></div>
+      <div class="field"><label>Drucker-Watt</label><input type="number" step="any" id="watt" value="120"><span class="suf">W</span></div>
+      <div class="field"><label>Druckerpreis</label><input type="number" step="any" id="druckerPreis" value="700"><span class="suf">€</span></div>
+      <div class="field"><label>Lebensdauer</label><input type="number" step="any" id="lebensdauer" value="4000"><span class="suf">h</span></div>
+      <div class="field"><label>Druckerkapazität</label><input type="number" step="any" id="kapazitaet" value="250"><span class="suf">h/M</span></div>
+    </div>
+    <div class="toggle" id="kleinToggle"><div class="tg on" id="kleinTg"></div><span style="font-size:12px;color:var(--dim)">Kleinunternehmer §19 (Plattformgebühr ×1,19, da Vorsteuer nicht abziehbar)</span></div>
+  </div>
+</div>
+
+<div class="scn" id="scn"></div>
+
+<div class="warn"><b>Zur Kleinunternehmerregelung:</b> Seit 2025 gilt sie, wenn der Umsatz im Vorjahr 25 000 € nicht überstieg und im laufenden Jahr 100 000 € nicht übersteigt (§ 19 UStG). Du weist dann keine Umsatzsteuer aus — kannst aber auch keine Vorsteuer ziehen, weshalb Plattformgebühren, Filament und Drucker brutto zu Buche schlagen. Der Schalter oben bildet genau das ab.</div>
+
+<h2>Wie die Zahlen zu lesen sind</h2>
+<p>Der Engpass ist die eigene Zeit, nicht die Stückmarge — und der größte Hebel ist der Anteil an Wiederholdrucken aus bereits fertigen Designs.</p>
+<div class="steps">
+  <div class="step"><h4>CAD-Zeit frisst den Stundenlohn</h4>Solange fast jeder Auftrag ein neues Design bedeutet, dominiert die Konstruktionszeit. Deshalb ist das Anlauf-Szenario pro Stunde am schwächsten, obwohl die Stückmarge gleich aussieht.</div>
+  <div class="step"><h4>Wiederholdrucke heben den Stundenlohn</h4>Je mehr Umsatz aus vorhandenen Designs kommt, desto weniger neue CAD-Stunden je Euro. Das ist der einzige Weg von „trägt sich" zu „lohnt sich".</div>
+  <div class="step"><h4>Erst rot, dann zweiter Drucker</h4>Eine Farm ergibt erst Sinn, wenn die Auslastung ins Rote läuft <em>und</em> überwiegend Wiederholdrucke anstehen. Vorher fehlt nicht Druckkapazität, sondern Nachfrage.</div>
+  <div class="step"><h4>Die Zeitwarnung ernst nehmen</h4>Rot markierte Arbeitsstunden heißen: dieses Volumen passt nicht in deine Woche. Dann ist das Szenario keine Prognose, sondern eine Rechenübung.</div>
+</div>
+<div class="gb">
+  <div class="gb-col good"><h4>Was die Rechnung belastbar macht</h4>
+    <ul>
+      <li>Eigene Stundenzahl ehrlich eintragen, inklusive Kommunikation und Nacharbeit</li>
+      <li>Ausschuss nicht auf null setzen — 5–10 % sind realistisch</li>
+      <li>Druckerabschreibung über die tatsächliche Lebensdauer, nicht über die Garantie</li>
+      <li>Verkaufspreis am Markt prüfen, bevor er hier eingetragen wird</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Was die Rechnung nicht abbildet</h4>
+    <ul>
+      <li>Steuern und Sozialabgaben auf den Gewinn</li>
+      <li>Versicherung, Buchhaltung, Rücksendungen und Gewährleistung</li>
+      <li>Produkthaftung und CE-Fragen bei verkauften Bauteilen</li>
+      <li>Ersatzteile und Wartung über die Abschreibung hinaus</li>
+    </ul>
+  </div>
+</div>
+<div class="tip"><b>Materialkosten gegenprüfen:</b> Der Vorgabewert von 2 € Material je Teil passt für ein mittleres PLA- oder PETG-Teil. Bei Composites, Nylon oder Hochleistungspolymeren liegt allein das Filament um ein Vielfaches höher — Preisspannen stehen unter <a href="3d-druck.html#filamente">Filamente</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li><a href="https://www.gesetze-im-internet.de/ustg_1980/__19.html">§ 19 UStG — Besteuerung der Kleinunternehmer</a>: Umsatzgrenzen 25 000 € / 100 000 € seit dem Jahressteuergesetz 2024, gültig ab 2025.</li>
+    <li>Preisniveau für Strom und Filament aus dem Modul selbst — Filamentpreise unter <a href="3d-druck.html#filamente">Filamente</a>, Stand Mitte 2026.</li>
+  </ul>
+</div>

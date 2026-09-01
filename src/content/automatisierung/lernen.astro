@@ -1,0 +1,95 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Robot Learning ersetzt nicht die Regelungstechnik, sondern die oberste Schicht.</b> Statt jede Bewegung zu programmieren, wird eine Strategie aus Daten oder aus Belohnung gelernt. Darunter läuft weiterhin eine gewöhnliche Achsregelung — und darüber steht die Frage, ob das Problem den Aufwand überhaupt rechtfertigt.</div>
+
+<h2>Wann sich Lernen lohnt</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Gute Kandidaten</h4><ul>
+    <li>Aufgaben mit <b>Kontakt und Variation</b>: Stecken, Falten, Wischen, Greifen unbekannter Objekte</li>
+    <li>Wahrnehmungsgetriebene Aufgaben, bei denen die Zielpose aus dem Bild kommt</li>
+    <li>Aufgaben, die sich leicht <b>vorführen</b>, aber schwer beschreiben lassen</li>
+    <li>Laufen und Balancieren — hochdimensionale Kontaktdynamik, für die kein Modell reicht</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Schlechte Kandidaten</h4><ul>
+    <li>Feste Posen in bekannter Umgebung — eine klassische Bahn ist schneller, genauer und prüfbar</li>
+    <li>Alles mit Sicherheitsanforderung: eine gelernte Policy ist nicht zertifizierbar</li>
+    <li>Aufgaben mit harter Genauigkeitsvorgabe im Zehntelmillimeterbereich</li>
+    <li>Projekte ohne belastbare Datenerfassung — ohne Demonstrationen oder Simulator kein Training</li>
+  </ul></div>
+</div>
+
+<h2>Die Lernparadigmen</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Ansatz</th><th>Lernsignal</th><th>Braucht</th><th>Stärke / Schwäche</th></tr></thead>
+<tbody>
+<tr><td><b>Reinforcement Learning</b></td><td>Belohnung aus Versuch und Irrtum</td><td>Simulator und sehr viele Durchläufe</td><td>Findet Lösungen, die niemand vorgemacht hat — scheitert an schlecht gewähltem Reward und braucht Millionen Schritte</td></tr>
+<tr><td><b>Imitation Learning / Behavior Cloning</b></td><td>Menschliche Demonstrationen</td><td>Teleoperation und ein paar Dutzend bis Hundert Vorführungen</td><td>Der praktikabelste Einstieg — aber nie besser als die Demonstrationen, und Fehler summieren sich außerhalb der gezeigten Zustände auf</td></tr>
+<tr><td><b>Offline RL</b></td><td>Belohnung aus einem festen Datensatz</td><td>Aufgezeichnete Daten mit Bewertung</td><td>Kein riskantes Ausprobieren nötig; leidet darunter, dass sich Aktionen außerhalb der Daten nicht bewerten lassen</td></tr>
+<tr><td><b>Vision-Language-Action (VLA)</b></td><td>Große vortrainierte Modelle plus Robotikdaten</td><td>Vortrainiertes Modell, Feinabstimmung auf die eigene Hardware</td><td>Sprachbefehl statt Programm, gute Generalisierung — hoher Rechenbedarf und schwer vorhersagbares Verhalten</td></tr>
+<tr><td><b>Klassische Planung</b></td><td>Modell und Kostenfunktion</td><td>Kinematik, Karte, Kollisionsmodell</td><td>Vorhersagbar, erklärbar, prüfbar. In der Praxis bleibt sie die Grundlage — gelernt wird nur, was sich nicht modellieren lässt</td></tr>
+</tbody>
+</table></div>
+<div class="fbox">
+  <span class="f">Policy π(a | o) — Beobachtung hinein, Aktion heraus</span>
+  <span class="l">Das Endprodukt jedes Lernverfahrens: meist ein neuronales Netz, das auf dem Roboter mit fester Frequenz ausgewertet wird. Alles andere — Reward, Datensatz, Simulator — ist Mittel zum Zweck.</span>
+</div>
+
+<h2>Aktuelle Verfahren</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Verfahren</th><th>Idee</th><th>Einordnung</th></tr></thead>
+<tbody>
+<tr><td><b>ACT</b> (Action Chunking with Transformers)</td><td>Sagt statt einer einzelnen Aktion eine ganze Sequenz voraus</td><td>Aus dem ALOHA-Projekt. Action Chunking dämpft das Aufschaukeln von Fehlern beim Behavior Cloning — der Grund, warum wenige Demonstrationen genügen</td></tr>
+<tr><td><b>Diffusion Policy</b></td><td>Erzeugt die Aktionssequenz wie ein Bildgenerator, durch schrittweises Entrauschen</td><td>Kommt mit mehrdeutigen Demonstrationen zurecht (zwei gleich gute Wege) — dort versagt einfaches Regressionslernen</td></tr>
+<tr><td><b>Flow-Matching-VLA</b> (π₀, π₀.₅)</td><td>Bild-Sprach-Modell als Rumpf, daran ein Aktionskopf für kontinuierliche Stellgrößen</td><td>Von Physical Intelligence; π₀.₅ zielt auf Generalisierung in unbekannten Umgebungen. Gewichte teils offen verfügbar</td></tr>
+<tr><td><b>OpenVLA</b></td><td>Offenes VLA-Modell, auf robotertypübergreifenden Daten trainiert</td><td>Der zugänglichste Startpunkt für eigene Feinabstimmung, weil Gewichte und Trainingscode offen sind</td></tr>
+<tr><td><b>Gemini Robotics</b></td><td>Ein einziges Modell für Wahrnehmung, Schlussfolgern und Aktion</td><td>Von Google DeepMind; zeigt, wie weit Sprachverständnis in die Ausführung hineinreicht. Nicht frei nachbaubar</td></tr>
+<tr><td><b>Open X-Embodiment</b></td><td>Zusammengelegter Datensatz vieler Labore und Robotertypen</td><td>Kein Verfahren, sondern die Datengrundlage, auf der die meisten der obigen Modelle vortrainiert sind</td></tr>
+</tbody>
+</table></div>
+<p class="note">Das Feld bewegt sich schnell und die Namen wechseln jährlich. Stabil bleibt das Muster: ein großes vortrainiertes Modell für die Wahrnehmung, ein spezialisierter Kopf für kontinuierliche Aktionen, Feinabstimmung auf der eigenen Hardware.</p>
+
+<h2>Von der Demonstration zur Policy</h2>
+<div class="steps">
+  <div class="step"><h4>Aufgabe eng fassen</h4>Eine Aufgabe, eine Umgebung, ein Objektsatz. „Räum den Tisch auf“ ist kein Lernproblem, „stecke den Stift in den Becher“ schon.</div>
+  <div class="step"><h4>Teleoperation aufbauen</h4>Üblich ist ein baugleicher Leader-Arm: Der Mensch führt ihn, der Follower ahmt nach und zeichnet dabei Bilder, Gelenkwinkel und Kommandos synchron auf.</div>
+  <div class="step"><h4>Demonstrationen sammeln</h4>Größenordnung 50–200 Durchläufe je Aufgabe, bewusst mit Variation in Startlage, Beleuchtung und Objektposition. <b>Auch misslungene Versuche mit Korrektur</b> aufzeichnen — sonst weiß die Policy nie, wie man sich fängt.</div>
+  <div class="step"><h4>Trainieren</h4>Auf einem PC mit GPU, nicht auf dem Roboter. Zuerst eine bewährte Architektur (ACT oder Diffusion Policy) nehmen, nicht eine eigene entwerfen.</div>
+  <div class="step"><h4>Auf der Hardware auswerten</h4>Erfolgsquote über viele Versuche zählen, nicht das beste Video. Die Zahl, die zählt, ist die Trefferquote bei <b>neuen</b> Startlagen.</div>
+  <div class="step"><h4>Gezielt nachsammeln</h4>Dort zusätzliche Demonstrationen aufnehmen, wo die Policy scheitert. Das bringt fast immer mehr als ein größeres Modell.</div>
+</div>
+
+<h2>Sim-to-Real</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Die Lücke</div><div class="cd">Eine in Simulation gelernte Policy versagt auf echter Hardware, weil Reibung, Spiel, Latenz und Sensorrauschen anders sind. Das ist die zentrale Hürde — und der Grund, warum Demovideos leichter aussehen als die Umsetzung.</div></div>
+  <div class="card"><div class="ct">Domain Randomization</div><div class="cd">Massen, Reibwerte, Verzögerungen, Texturen und Licht in der Simulation absichtlich streuen. Die Policy lernt, robust statt exakt zu sein, und überträgt besser.</div></div>
+  <div class="card"><div class="ct">Systemidentifikation</div><div class="cd">Der andere Weg: die Simulation an die reale Achse anpassen, indem Reibung, Trägheit und Totzeit gemessen und eingesetzt werden. Weniger populär, oft wirksamer.</div></div>
+  <div class="card"><div class="ct">Latenz mitmodellieren</div><div class="cd">Zwischen Bild und Stellbefehl liegen Verarbeitungs- und Buszeiten. Wird die Totzeit im Simulator nicht nachgebildet, lernt die Policy ein Zeitverhalten, das es real nicht gibt.</div></div>
+  <div class="card"><div class="ct">Reward Hacking</div><div class="cd">Der Agent maximiert, was belohnt wird — nicht, was gemeint war. Ein Roboter, der Objekte aus der Kamera schiebt, statt sie einzusortieren, hat den Reward korrekt gelöst.</div></div>
+  <div class="card"><div class="ct">Sicherheit beim Erproben</div><div class="cd">Software-Grenzen für Gelenkwinkel und Geschwindigkeit, Strombegrenzung, ein erreichbarer Hauptschalter. Eine gelernte Policy hat keinen Begriff von Schaden — Grenzen gehören <b>unter</b> sie, in die Achsregelung.</div></div>
+</div>
+
+<h2>Werkzeuge und Einstieg</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Werkzeug</th><th>Rolle</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Hugging Face LeRobot</b></td><td>Plattform für Imitation Learning auf günstiger Hardware</td><td>Code, Datensätze, vortrainierte Policies und nachbaubare Armpläne mit Feetech-Bus-Servos. Der realistischste Weg von eigener Hardware zu einer gelernten Policy</td></tr>
+<tr><td><b>Gymnasium</b></td><td>Standardschnittstelle für RL-Umgebungen</td><td>Nachfolger von OpenAI Gym, gepflegt von der Farama Foundation. Eine Schnittstelle, kein Simulator</td></tr>
+<tr><td><b>Stable-Baselines3</b></td><td>Fertige RL-Algorithmen (PPO, SAC, TD3)</td><td>Gut dokumentiert; der praktische Weg, RL anzuwenden, ohne Algorithmen selbst zu implementieren</td></tr>
+<tr><td><b>MuJoCo</b></td><td>Schnelle, kontaktgenaue Physik</td><td>Quelloffen; Standard für RL-Experimente an Greif- und Laufrobotern</td></tr>
+<tr><td><b>NVIDIA Isaac Lab</b></td><td>GPU-parallelisiertes RL-Training</td><td>Nachfolger von Isaac Gym; tausende Umgebungen gleichzeitig auf einer GPU. Setzt Isaac Sim voraus</td></tr>
+<tr><td><b>Sutton &amp; Barto</b></td><td><i>Reinforcement Learning: An Introduction</i></td><td>Das Standardwerk, frei als PDF. Theorie ohne Hardwarebezug — sinnvoll erst, wenn RL tatsächlich ansteht</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Reihenfolge:</b> Erst Hardware bauen und mit klassischer Regelung zum Laufen bringen (<a href="#robo-hw">Roboter-Hardware</a>), dann den Software-Stack beherrschen (<a href="#ros">ROS 2</a>), dann Imitation Learning mit LeRobot — Reinforcement Learning zuletzt. Der allgemeine Lernpfad durch die Module steht im <a href="mechatronik-lernpfad.html">Lernpfad &amp; Projekte</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Sutton &amp; Barto, <i>Reinforcement Learning: An Introduction</i>, 2. Auflage — frei verfügbar.</li>
+    <li>Zhao et al., <i>Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware</i> (ACT/ALOHA); Chi et al., <i>Diffusion Policy</i>.</li>
+    <li>Open X-Embodiment Collaboration — robotertypübergreifender Datensatz und RT-X-Modelle.</li>
+    <li><a href="https://huggingface.co/lerobot">Hugging Face LeRobot</a>; <a href="https://gymnasium.farama.org/">Gymnasium</a>; <a href="https://stable-baselines3.readthedocs.io/">Stable-Baselines3</a>.</li>
+    <li><a href="https://mujoco.org/">MuJoCo</a> (Google DeepMind); <a href="https://developer.nvidia.com/isaac/lab">NVIDIA Isaac Lab</a>.</li>
+  </ul>
+</div>

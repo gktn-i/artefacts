@@ -106,6 +106,14 @@ import "./_style.css";
 <tr><td><b>Barrel Shifter</b></td><td>Verschiebt beliebig viele Stellen in einem Takt</td><td>aus MUX-Stufen</td><td>Schiebebefehle in Prozessoren</td></tr>
 </tbody>
 </table></div>
+<div class="flist">
+  <div class="frow hd"><span>Hardware</span><span>Entsprechung in C</span><span>Gemeinsamkeit</span></div>
+  <div class="frow"><span class="fn">Multiplexer</span><span class="fe">switch / Nachschlagetabelle</span><span class="fx">Auswahl aus mehreren Quellen anhand eines Index</span></div>
+  <div class="frow"><span class="fn">Decoder</span><span class="fe">1 &lt;&lt; n</span><span class="fx">Aus einer Zahl wird ein einzelnes gesetztes Bit</span></div>
+  <div class="frow"><span class="fn">Prioritätsencoder</span><span class="fe">__builtin_clz()</span><span class="fx">Höchstes gesetztes Bit finden — als CLZ-Befehl in einem Takt</span></div>
+  <div class="frow"><span class="fn">Maskieren</span><span class="fe">x &amp; maske</span><span class="fx">UND-Verknüpfung Bit für Bit</span></div>
+  <div class="frow"><span class="fn">Wired-AND</span><span class="fe">Open-Drain im GPIO-Register</span><span class="fx">Mehrere Teilnehmer an einer Leitung</span></div>
+</div>
 
 <h2>Addierer: vom Halbaddierer zur ALU</h2>
 <div class="grid2">

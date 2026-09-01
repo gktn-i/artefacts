@@ -1,0 +1,103 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Fluidantriebe gewinnen dort, wo Kraft, Robustheit und Einfachheit zählen — und die Mechanik entscheidet am Ende über jede Regelgüte.</b> Pneumatik ist billig, schnell und schmutzunempfindlich, wegen der Kompressibilität der Luft aber schlecht regelbar. Hydraulik liefert enorme Kräfte auf kleinstem Raum, ist dafür teuer und leckageanfällig.</div>
+
+<h2>Elektrisch, pneumatisch oder hydraulisch</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Kriterium</th><th>Elektrisch</th><th>Pneumatisch</th><th>Hydraulisch</th></tr></thead>
+<tbody>
+<tr><td><b>Arbeitsdruck</b></td><td>—</td><td>6–8 bar Netz, meist 6 bar am Zylinder</td><td>150–350 bar, mobil bis 420 bar</td></tr>
+<tr><td><b>Kraftdichte</b></td><td>mittel</td><td>gering</td><td><b>sehr hoch</b></td></tr>
+<tr><td><b>Positionierbarkeit</b></td><td><b>sehr gut</b></td><td>schlecht — ohne Aufwand nur Endlagen</td><td>gut (Servoventile)</td></tr>
+<tr><td><b>Geschwindigkeit</b></td><td>gut</td><td><b>sehr hoch</b></td><td>mittel</td></tr>
+<tr><td><b>Wirkungsgrad gesamt</b></td><td>85–95 %</td><td><b>10–25 %</b> (Kompressor, Leckage, Entspannung)</td><td>50–70 %</td></tr>
+<tr><td><b>Fehlerfall</b></td><td>bleibt stehen oder fällt</td><td>lässt sich definiert entlüften</td><td>hält die Last, kann aber schlagartig absacken</td></tr>
+<tr><td><b>Umgebung</b></td><td>empfindlich gegen Nässe und Staub</td><td><b>sehr robust</b>, auch nass und in Ex-Zonen</td><td>robust, aber Öl im Umfeld</td></tr>
+<tr><td><b>Steifigkeit</b></td><td>hoch</td><td><b>gering</b> — Luft federt</td><td>sehr hoch</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Druckluft ist die teuerste Energieform im Betrieb.</b> Vom eingesetzten Strom kommt am Zylinder oft weniger als ein Fünftel an, der Rest geht in Kompressorverluste, Wärme und Leckage; 10 % Leckage im Netz sind keine Seltenheit. Wo eine Achse ohnehin geregelt werden muss, ist ein elektrischer Antrieb fast immer die bessere Wahl.</div>
+
+<h2>Pneumatik-Bausteine</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Baustein</th><th>Funktion</th><th>Auswahlhinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Wartungseinheit</b></td><td>Filter, Druckregler, optional Öler</td><td>Filter 5 µm für Standard, feiner für Sensorik und Lackieren. Kondensatablass nicht vergessen</td></tr>
+<tr><td><b>Zylinder, einfachwirkend</b></td><td>Druck in eine Richtung, Feder zurück</td><td>Für Klemmen und Auswerfen; definierte Ruhelage bei Druckausfall</td></tr>
+<tr><td><b>Zylinder, doppeltwirkend</b></td><td>Druck in beide Richtungen</td><td>Kraft beim Ausfahren größer als beim Einfahren — die Kolbenstange verkleinert die Fläche</td></tr>
+<tr><td><b>Wegeventil (5/2, 5/3)</b></td><td>Verteilt die Luft auf die Zylinderkammern</td><td>Erste Zahl = Anschlüsse, zweite = Schaltstellungen. 5/3 mit Mittelstellung zum Halten oder Entlüften</td></tr>
+<tr><td><b>Drosselrückschlagventil</b></td><td>Geschwindigkeit einstellen</td><td><b>Abluftdrosselung</b> ist der Regelfall — sie läuft ruhiger als Zuluftdrosselung</td></tr>
+<tr><td><b>Endlagendämpfung</b></td><td>Bremst kurz vor dem Anschlag</td><td>An jedem Zylinder einstellen, sonst schlägt er und die Mechanik leidet</td></tr>
+<tr><td><b>Näherungsschalter am Zylinder</b></td><td>Endlagenabfrage über den Kolbenmagneten</td><td>Der Standard für die Rückmeldung an die Steuerung</td></tr>
+<tr><td><b>Vakuumerzeuger (Ejektor)</b></td><td>Erzeugt Unterdruck aus Druckluft</td><td>Für Sauggreifer. Energiehungrig — mit Luftsparfunktion ausstatten</td></tr>
+</tbody>
+</table></div>
+<div class="fbox">
+  <span class="f">F_aus = p · π·d²/4&nbsp;&nbsp;·&nbsp;&nbsp;F_ein = p · π·(d² − d_st²)/4</span>
+  <span class="l">p in Pa (1 bar = 100 000 Pa), d Kolbendurchmesser, d_st Kolbenstangendurchmesser. Davon gehen 5–15 % Reibung ab.</span>
+</div>
+<div class="kpis">
+  <div class="kpi"><div class="k">Ø 20 mm bei 6 bar</div><div class="v">188 N</div><div class="s">theoretisch beim Ausfahren</div></div>
+  <div class="kpi"><div class="k">Ø 32 mm bei 6 bar</div><div class="v">483 N</div><div class="s">der verbreitetste Zylinder</div></div>
+  <div class="kpi"><div class="k">Ø 50 mm bei 6 bar</div><div class="v">1178 N</div><div class="s">bereits eine kräftige Achse</div></div>
+  <div class="kpi"><div class="k">Ø 32 mm bei 200 bar</div><div class="v">16 085 N</div><div class="s">hydraulisch — der Unterschied in einer Zahl</div></div>
+</div>
+<p class="note">Für die Auslegung 30–50 % Reserve einplanen: Der Netzdruck schwankt, die Dichtungsreibung steigt mit dem Alter, und beim Einfahren steht weniger Fläche zur Verfügung.</p>
+
+<h2>Praxis und Sicherheit</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Typische Fehler</h4><ul>
+    <li>Schlauchquerschnitt zu klein — der Zylinder wird spürbar langsamer als berechnet</li>
+    <li>Kein Wasserabscheider: Kondensat zerstört Ventile und friert im Winter ein</li>
+    <li>Zuluft- statt Abluftdrosselung — die Bewegung ruckelt</li>
+    <li>Endlagendämpfung nicht eingestellt: Der Zylinder schlägt, die Halterung reißt aus</li>
+    <li>Ventilinsel weit vom Zylinder entfernt: Das Totvolumen verlängert jede Bewegung</li>
+    <li>Kein definierter Zustand bei Druckluftausfall</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Was hilft</h4><ul>
+    <li>Ventile möglichst nah am Zylinder</li>
+    <li>Abluftdrosseln, für beide Richtungen getrennt einstellbar</li>
+    <li>Wartungseinheit mit automatischem Kondensatablass</li>
+    <li>Sicherheitsventil zum Entlüften vor Wartungsarbeiten</li>
+    <li>Leckagesuche mit Ultraschallmessgerät — spart im Dauerbetrieb bares Geld</li>
+    <li>Bei Not-Halt: definiert entlüften oder klemmen, nicht einfach den Druck wegnehmen</li>
+  </ul></div>
+</div>
+<div class="stop"><b>Gespeicherte Energie ist die Gefahr.</b> Ein Zylinder unter Druck bewegt sich beim Lösen einer Verschraubung schlagartig. In der Hydraulik kommt hinzu: Ein feiner Ölstrahl bei 200 bar durchdringt Haut und verursacht schwere Verletzungen, die zunächst harmlos aussehen. Grundregeln: vor jedem Eingriff drucklos machen und gegen Wiedereinschalten sichern, Leckagen nie mit der Hand suchen (Karton oder Papier verwenden), Schläuche nach Herstellerangabe wechseln — auch wenn sie äußerlich in Ordnung sind. Anforderungen an die Anlage: <a href="automatisierung-robotik.html#sicherheit">Automatisierung → Funktionale Sicherheit</a>.</div>
+
+<h2>Was die Mechanik der Regelung vorgibt</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Effekt</th><th>Woran man ihn erkennt</th><th>Auswirkung auf die Regelung</th><th>Gegenmaßnahme</th></tr></thead>
+<tbody>
+<tr><td><b>Umkehrspiel</b></td><td>Beim Richtungswechsel passiert erst nichts</td><td>Regler übersteuert, dann schlägt es durch; Grenzzyklen</td><td>Vorgespannte Mutter, spielarmes Getriebe, am Abtrieb messen, immer aus derselben Richtung anfahren</td></tr>
+<tr><td><b>Haftreibung</b></td><td>Antrieb bleibt kurz vor dem Ziel stehen und ruckt dann</td><td>Bleibende Abweichung, Grenzzyklen mit dem I-Anteil</td><td>Wälz- statt Gleitführung, Losbrechmoment vorsteuern, Dither aufschalten</td></tr>
+<tr><td><b>Geringe Steifigkeit</b></td><td>Achse schwingt sichtbar nach</td><td>Begrenzt die erreichbare Reglerbandbreite hart</td><td>Kürzere Hebel, größere Querschnitte, steifere Kupplung, zusätzliche Abstützung</td></tr>
+<tr><td><b>Riemendehnung</b></td><td>Position stimmt statisch, nicht dynamisch</td><td>Zusätzliche Feder im Regelkreis, Resonanz</td><td>Riemen vorspannen, breiter wählen, Trumlängen kurz halten</td></tr>
+<tr><td><b>Unwucht</b></td><td>Vibration proportional zur Drehzahl</td><td>Periodische Störung, Lagerverschleiß</td><td>Auswuchten, symmetrisch aufbauen</td></tr>
+<tr><td><b>Wärmedehnung</b></td><td>Position driftet über die Betriebszeit</td><td>Ohne Messung am Werkstück nicht wegregelbar</td><td>Symmetrischer Aufbau, Warmlaufphase, Kompensation über Temperaturmessung</td></tr>
+</tbody>
+</table></div>
+<div class="fbox">
+  <span class="f">f_res = (1/2π)·√(c/m)</span>
+  <span class="l">Die erste mechanische Eigenfrequenz begrenzt die Reglerbandbreite auf etwa ein Drittel bis ein Fünftel ihres Werts. Wer schneller regeln will, muss die Mechanik steifer oder leichter machen — nicht den Regler mutiger einstellen.</span>
+</div>
+<ul>
+  <li><b>Kraftfluss kurz halten:</b> Jeder zusätzliche Übergang bringt Nachgiebigkeit und Spiel.</li>
+  <li><b>Messen, wo es zählt:</b> Ein Geber am Motor sieht das Getriebespiel nicht (<a href="#position">Positionsmessung</a>).</li>
+  <li><b>Kupplung nach Torsionssteifigkeit wählen:</b> Balgkupplung für Servoachsen; Elastomer- und Schlitzkupplungen sind torsionsweich und verschlechtern die Positionsregelung. Klemmnabe statt Madenschraube.</li>
+  <li><b>Bewegte Masse reduzieren</b> — ein mitbewegter Motor zählt doppelt.</li>
+  <li><b>Mechanische Anschläge hinter den Endschaltern</b> als letzte Sicherung, wenn Software oder Sensorik versagen.</li>
+  <li>Lager, Führungen, Kupplungen und Festigkeitsnachweise im Detail: <a href="mechanik.html#lager">Mechanik → Lager</a> und <a href="mechanik.html#verbindungen">Verbindungen</a>; Schmierstoffauswahl: <a href="schmiermittel-vergleich.html">Schmiermittel-Vergleich</a>.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Festo Didactic, <i>Grundlagen der Pneumatik</i> und <i>Grundlagen der Hydraulik</i> — Lehrunterlagen, teilweise frei verfügbar.</li>
+    <li>SMC und Festo: Auslegungshandbücher und Online-Rechner für Zylinderkraft und Luftverbrauch.</li>
+    <li>ISO 1219-1 — Schaltzeichen für fluidtechnische Anlagen.</li>
+    <li>DGUV-Informationen zu Druckluftanlagen und zur Gefährdung durch Fluidstrahlen.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i>; SKF und Schaeffler — technische Handbücher zu Lagerung, Passungen und Steifigkeit.</li>
+  </ul>
+</div>

@@ -1,0 +1,98 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein FDM-Teil ist kein Vollmaterial, sondern ein Stapel verschweißter Fäden.</b> Es ist in der Schichtebene deutlich fester als quer dazu, und die Druckorientierung entscheidet über die Belastbarkeit oft mehr als das Material. Wer das mitkonstruiert, bekommt brauchbare Funktionsteile. Filamente, Düsen und Druckparameter stehen im Modul <a href="3d-druck.html#filamente">3D-Druck</a>.</div>
+
+<h2>Anisotropie: die zentrale Eigenschaft</h2>
+<p>Zwischen den Schichten hält nur die Verschweißung der Fäden. Quer zur Schichtebene erreicht ein FDM-Teil typischerweise <b>40 bis 70 %</b> der Festigkeit, die es in der Schichtebene hat — bei kühlem Druck und dünnen Schichten auch weniger.</p>
+<svg class="dg l" viewBox="0 0 620 210" role="img" aria-label="Ein Winkel stehend und liegend gedruckt: Lage der Schichten zur Zugspannung">
+  <text class="lblb" x="145" y="16" text-anchor="middle">stehend gedruckt</text>
+  <path class="w" d="M70,34 H105 V114 H200 V144 H70 Z" />
+  <path class="gd" d="M71,46 H104 M71,58 H104 M71,70 H104 M71,82 H104 M71,94 H104 M71,106 H104 M71,126 H199 M71,138 H199" />
+  <path class="badl" d="M62,114 H113" />
+  <path class="acc" d="M185,72 V104" /><path class="accf" d="M185,112 l-5,-9 h10 z" />
+  <text class="lbla" x="192" y="90">Last</text>
+  <text class="lbl" x="120" y="176" text-anchor="middle">Zugspannung steht senkrecht auf der</text>
+  <text class="lbl" x="120" y="190" text-anchor="middle">Schichtgrenze — dort bricht es</text>
+  <path class="gd" d="M310,20 V196" />
+  <text class="lblb" x="445" y="16" text-anchor="middle">liegend gedruckt</text>
+  <path class="w" d="M370,34 H405 V114 H500 V144 H370 Z" />
+  <path class="gd" d="M378,35 V143 M388,35 V143 M398,35 V143 M414,115 V143 M426,115 V143 M438,115 V143 M450,115 V143 M462,115 V143 M474,115 V143 M486,115 V143" />
+  <path class="acc" d="M485,72 V104" /><path class="accf" d="M485,112 l-5,-9 h10 z" />
+  <text class="lbla" x="492" y="90">Last</text>
+  <text class="lbl" x="420" y="176" text-anchor="middle">Zugspannung liegt in der Schichtebene —</text>
+  <text class="lbl" x="420" y="190" text-anchor="middle">dieselbe Geometrie hält ein Vielfaches</text>
+</svg>
+<div class="grid3">
+  <div class="card"><div class="ct">Last in die Schichtebene legen</div><div class="cd">Die Orientierung auf dem Druckbett ist eine Konstruktionsentscheidung, keine Slicer-Einstellung. Im Zweifel das Teil so drehen, dass die größte Zugspannung längs der Fäden läuft.</div></div>
+  <div class="card"><div class="ct">Perimeter statt Infill</div><div class="cd">Für Festigkeit bringen mehr Außenwände (4–6 statt 2) deutlich mehr als ein höherer Füllgrad. Infill über 40 % lohnt sich fast nie.</div></div>
+  <div class="card"><div class="ct">Heißer drucken</div><div class="cd">10–15 K mehr Düsentemperatur und weniger Bauteilkühlung verbessern die Schichthaftung spürbar — der einfachste Hebel für Z-Festigkeit, solange die Optik es zulässt.</div></div>
+</div>
+
+<h2>Geometrieregeln</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Merkmal</th><th data-s="num">Richtwert</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td>Überhangwinkel ohne Stützen</td><td>≤ 45° von der Senkrechten</td><td>Darüber braucht es Stützstrukturen oder eine Fase</td></tr>
+<tr><td>Brücken über Freiraum</td><td>bis ca. 30 mm</td><td>Nur mit guter Kühlung; darüber hängt der Faden durch</td></tr>
+<tr><td>Minimale Wandstärke</td><td>2 × Düsendurchmesser</td><td>Bei 0,4 mm Düse also 0,8 mm; besser ein ganzzahliges Vielfaches der Linienbreite</td></tr>
+<tr><td>Minimale Bohrung</td><td>≥ 2 mm</td><td>Kleinere Löcher besser bohren als drucken</td></tr>
+<tr><td>Erste Schicht (Elefantenfuß)</td><td>0,1 – 0,3 mm breiter</td><td>Eine Fase von 0,5 mm an der Unterkante kompensiert das</td></tr>
+<tr><td>Innenradien</td><td>≥ 1 mm</td><td>Scharfe Innenecken sind Sollbruchstellen an der Schichtgrenze</td></tr>
+<tr><td>Vertikale Bohrungen</td><td>0,1 – 0,4 mm zu klein</td><td>Der Kreis wird durch die Fadenbreite verengt; im Zweifel Toleranztest drucken</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Gedruckte Löcher werden zu eng.</b> Ursache ist der Kurvenradius: der extrudierte Faden wird nach innen gedrückt. Praktisch heißt das, eine Bohrung 0,2–0,4 mm größer zu zeichnen als das Sollmaß — oder sie nachzubohren. Für Passungen ist Nachbohren mit einem Standardbohrer die zuverlässigste Methode, denn dann kommt die Toleranz vom Bohrer und nicht vom Drucker.</div>
+
+<h2>Passungen und Spiel</h2>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th data-s="text">Verbindung</th><th data-s="num">Spiel je Seite</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td>Presssitz (einpressen)</td><td>−0,05 … 0 mm</td><td>Braucht Kraft; bei zu viel Übermaß reißt die Wand auf</td></tr>
+<tr><td>Übergangssitz (mit Kraft von Hand)</td><td>0,1 mm</td><td>Der übliche Fall für Steckverbindungen</td></tr>
+<tr><td>Spielpassung (leicht beweglich)</td><td>0,2 mm</td><td>Scharniere und Drehachsen</td></tr>
+<tr><td>Gleitführung</td><td>0,3 – 0,4 mm</td><td>Schubladen, Deckel, große Flächen</td></tr>
+<tr><td>Gedrucktes Gewinde M3 – M8</td><td>0,2 – 0,3 mm</td><td>Hält wenige Zyklen; besser Insert oder eingelegte Mutter</td></tr>
+</tbody>
+</table></div>
+<p>Diese Werte sind druckerabhängig. Ein Toleranztest — ein Testkörper mit gestaffelten Spaltmaßen — kostet zwanzig Minuten und macht alle folgenden Teile passgenau. Die Passungssystematik nach ISO 286 lässt sich auf FDM nicht anwenden: die erreichbare Genauigkeit liegt bei IT13 und gröber, siehe <a href="#toleranzen">Toleranzen, Passungen &amp; Oberflächen</a>.</p>
+
+<h2>Gewinde, Einsätze und konstruktive Kniffe</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Heat-Set-Inserts</div><div class="cd">Messingeinsätze mit dem Lötkolben einschmelzen — die haltbarste Gewindelösung im Druckteil: mehrfach montierbar, hohe Auszugskraft. Das Loch auf den kleineren Einführdurchmesser des Inserts zeichnen, typisch 0,3–0,5 mm unter dem Außendurchmesser (M3-Insert mit Ø 4,6 mm → Loch Ø 4,0–4,2 mm); Herstellerangabe schlägt die Faustregel.</div></div>
+  <div class="card"><div class="ct">Sechskanttaschen</div><div class="cd">Eine normale Mutter in einer passenden Tasche versenken, bei Bedarf im laufenden Druck einlegen. Billigste Lösung mit voller Metallfestigkeit — Übersicht der Normteile unter <a href="#normteile">Gewinde &amp; Normteile</a>.</div></div>
+  <div class="card"><div class="ct">Kanten brechen</div><div class="cd">Eine 0,5-mm-Fase an der Unterkante gleicht den Elefantenfuß aus, eine Fase an Steckverbindungen erleichtert das Fügen — genau wie bei Metallteilen.</div></div>
+  <div class="card"><div class="ct">Teilen und verkleben</div><div class="cd">Ein Teil in zwei Hälften mit jeweils optimaler Orientierung drucken und verkleben ist oft fester und schneller als ein Stück mit Stützstrukturen — und die Oberfläche wird besser.</div></div>
+</div>
+
+<h2>Wann nicht gedruckt wird</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Der Drucker glänzt bei</h4>
+    <ul>
+      <li>Komplexer Geometrie, die spanend teuer wäre</li>
+      <li>Anpassungs- und Adapterteilen, Einzelstücken</li>
+      <li>Gehäusen, Halterungen, Vorrichtungen und Bohrschablonen</li>
+      <li>Schnellen Iterationen: Form am Objekt prüfen statt am Bildschirm</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Besser gekauft oder gefertigt</h4>
+    <ul>
+      <li>Lagerstellen und Führungen — Buchse oder Wälzlager einsetzen</li>
+      <li>Wellen und Achsen — Rundstahl ist billiger und genauer</li>
+      <li>Hoch belastete Verbindungen und tragende Gewinde</li>
+      <li>Alles über 50 °C Dauertemperatur bei PLA und PETG</li>
+      <li>Dichtflächen und Druckbehälter — Schichtgrenzen sind Leckagepfade</li>
+    </ul>
+  </div>
+</div>
+<div class="tip"><b>Die Kombination ist meist die beste Konstruktion.</b> Ein Winkel aus Aluminium, eine Welle aus Rundstahl, eine gekaufte Lagerbuchse und drumherum ein gedrucktes Gehäuse kosten wenig und sind jedem reinen Druckteil überlegen. Werkstoffkennwerte für den Vergleich stehen unter <a href="#auswahl">Werkstoffwahl</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN ISO/ASTM 52900 — Additive Fertigung: Grundlagen, Begriffe und Verfahrenseinteilung.</li>
+    <li>VDI 3405 Blatt 1 bis 3 — Additive Fertigungsverfahren: Grundlagen, Verfahrensbeschreibung, Gestaltungsempfehlungen.</li>
+    <li><a href="https://www.hubs.com/knowledge-base/how-design-parts-fdm-3d-printing/">Hubs — Design für FDM</a> und die <a href="https://help.prusa3d.com/">Prusa Knowledge Base</a>: Richtwerte für Überhänge, Wandstärken und Spiel.</li>
+    <li>Datenblätter von Heat-Set-Inserts (z. B. Ruthex, Böllhoff Quickmelt) — Lochdurchmesser und Auszugskräfte.</li>
+  </ul>
+</div>
