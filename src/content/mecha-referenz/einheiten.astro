@@ -37,6 +37,21 @@ import "./_style.css";
 </tbody>
 </table></div>
 
+<h2>Abgeleitete Einheiten in der Mechanik</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Größe</th><th>Einheit</th><th>In Basiseinheiten</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Drehmoment</b></td><td>Nm</td><td>kg·m²/s²</td><td>Zahlenwert wie Joule, aber andere Größenart — nie „J“ schreiben</td></tr>
+<tr><td><b>Mechanische Spannung</b></td><td>N/mm² = MPa</td><td>kg/(m·s²)</td><td>Die Einheit jeder Festigkeitsrechnung</td></tr>
+<tr><td><b>Elastizitätsmodul</b></td><td>GPa (= kN/mm²)</td><td>kg/(m·s²)</td><td>Stahl ≈ 210 GPa, Alu ≈ 70 GPa</td></tr>
+<tr><td><b>Flächenträgheitsmoment</b></td><td>mm⁴</td><td>m⁴</td><td>Geht mit h³ in die Steifigkeit ein</td></tr>
+<tr><td><b>Massenträgheitsmoment</b></td><td>kg·m²</td><td>kg·m²</td><td>Datenblätter nennen oft g·cm² (1 kg·m² = 10⁷ g·cm²)</td></tr>
+<tr><td><b>Winkel / Raumwinkel</b></td><td>rad / sr</td><td>1 (dimensionslos)</td><td>Ergänzende Einheiten; 1 rad = 57,296°</td></tr>
+<tr><td><b>Drehzahl</b></td><td>min⁻¹ (U/min)</td><td>1/s</td><td>ω = 2π·n/60; Hz ist für Drehzahlen unüblich</td></tr>
+<tr><td><b>Dynamische Viskosität</b></td><td>Pa·s</td><td>kg/(m·s)</td><td>1 Pa·s = 1000 cP; Öle werden nach ISO VG kinematisch angegeben</td></tr>
+</tbody>
+</table></div>
+
 <h2>Vorsätze</h2>
 <div class="tbl-wrap"><table style="min-width:860px">
 <thead><tr><th>Vorsatz</th><th>Zeichen</th><th>Faktor</th><th>Vorsatz</th><th>Zeichen</th><th>Faktor</th></tr></thead>
@@ -55,7 +70,7 @@ import "./_style.css";
 <tr><td>Deka</td><td>da</td><td>10¹</td><td>Quecto</td><td>q</td><td>10⁻³⁰</td></tr>
 </tbody>
 </table></div>
-<p class="note">Ronna, Quetta, Ronto und Quecto kamen 2022 dazu. Für die Elektronik relevant sind praktisch nur der Bereich von Tera bis Piko. Schreibweise: Zeichen für Vorsätze über 10³ groß (k ist die Ausnahme — klein), darunter klein. In Datenblättern steht statt µ oft „u“, weil das Zeichen im ASCII-Satz fehlt.</p>
+<p class="note">Ronna, Quetta, Ronto und Quecto kamen 2022 dazu (CGPM). Praktisch gebraucht wird nur der Bereich Tera bis Piko. Schreibweise: Zeichen ab 10⁶ groß (M, G, T …), 10³ und darunter klein (k, h, da, m, µ …). In Datenblättern steht statt µ oft „u“, weil das Zeichen im ASCII-Satz fehlt.</p>
 
 <h2>Naturkonstanten</h2>
 <div class="tbl-wrap"><table style="min-width:880px">
@@ -87,23 +102,26 @@ import "./_style.css";
   <div class="frow"><span class="fn">Newtonmeter</span><span class="fe">kg·cm</span><span class="fx">1 Nm ≈ 10,2 kg·cm (bei g = 9,81)</span></div>
   <div class="frow"><span class="fn">Grad</span><span class="fe">Bogenmaß</span><span class="fx">rad = ° · π/180</span></div>
   <div class="frow"><span class="fn">dBm</span><span class="fe">Milliwatt</span><span class="fx">P = 10^(dBm/10) mW; 0 dBm = 1 mW, 20 dBm = 100 mW</span></div>
-  <div class="frow"><span class="fn">Wellenlänge</span><span class="fe">Frequenz</span><span class="fx">λ = c/f; bei 868 MHz sind λ/4 = 8,2 cm</span></div>
+  <div class="frow"><span class="fn">Wellenlänge</span><span class="fe">Frequenz</span><span class="fx">λ = c/f; bei 868 MHz ist λ/4 = 8,6 cm, bei 2,45 GHz 3,1 cm</span></div>
+  <div class="frow"><span class="fn">Kilopond / kgf</span><span class="fe">Newton</span><span class="fx">1 kp = 9,80665 N — alte Angaben auf Federn und Waagen</span></div>
+  <div class="frow"><span class="fn">N/mm²</span><span class="fe">Megapascal</span><span class="fx">1 N/mm² = 1 MPa — identisch, in der Festigkeitsrechnung die übliche Form</span></div>
+  <div class="frow"><span class="fn">Pound-force inch</span><span class="fe">Newtonmeter</span><span class="fx">1 lbf·in = 0,113 Nm; 1 lbf·ft = 1,356 Nm</span></div>
 </div>
 
 <h2>Schreibweise nach Norm</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Leerzeichen vor der Einheit</div><div class="cd">„10 kΩ“, nicht „10kΩ“. Ausnahme: Gradzeichen bei Winkeln — „45°“. Bei Temperaturen mit Leerzeichen: „25 °C“.</div></div>
-  <div class="card"><div class="ct">Einheitenzeichen aufrecht</div><div class="cd">Formelzeichen kursiv, Einheitenzeichen aufrecht: <i>U</i> = 5 V. In Fließtext meist vernachlässigt, in Fachdokumenten nicht.</div></div>
-  <div class="card"><div class="ct">Dezimaltrennzeichen</div><div class="cd">Im Deutschen das Komma, im Englischen der Punkt. In Programmcode und CSV-Dateien <b>immer</b> der Punkt — eine häufige Fehlerquelle beim Datenaustausch.</div></div>
-  <div class="card"><div class="ct">Ersatzschreibweise in Stücklisten</div><div class="cd">„4k7“ statt „4,7 kΩ“ und „2R2“ statt „2,2 Ω“. Das Komma wird durch den Vorsatz ersetzt, damit es nicht verlorengeht — sehr verbreitet in Schaltplänen.</div></div>
+  <div class="card"><div class="ct">Leerzeichen vor der Einheit</div><div class="cd">„10 kΩ“, nicht „10kΩ“. Auch „25 °C“. Ausnahme: Winkelgrad ohne Leerzeichen — „45°“.</div></div>
+  <div class="card"><div class="ct">Einheitenzeichen aufrecht</div><div class="cd">Formelzeichen kursiv, Einheitenzeichen aufrecht: <i>U</i> = 5 V. Groß geschrieben nur, wenn nach einer Person benannt (V, A, W, Pa).</div></div>
+  <div class="card"><div class="ct">Dezimaltrennzeichen</div><div class="cd">Deutsch Komma, englisch Punkt. In Code, CSV und G-Code <b>immer</b> der Punkt — eine der häufigsten Fehlerquellen beim Datenaustausch.</div></div>
+  <div class="card"><div class="ct">Ersatzschreibweise in Stücklisten</div><div class="cd">„4k7“ statt „4,7 kΩ“, „2R2“ statt „2,2 Ω“. Der Vorsatz ersetzt das Komma, damit es beim Kopieren nicht verlorengeht.</div></div>
 </div>
 
 <div class="srcs">
-  <div class="sh">Quellen</div>
+  <div class="sh">Quellen und Anschluss</div>
   <ul>
     <li><a href="https://www.bipm.org/en/publications/si-brochure">BIPM — SI Brochure, 9. Auflage</a>: die verbindliche Definition aller Einheiten.</li>
-    <li><a href="https://physics.nist.gov/cuu/Constants/">NIST — CODATA Fundamental Physical Constants</a>, laufend aktualisiert.</li>
-    <li>DIN 1301 (Einheiten), DIN 1313 (Größen), DIN 1338 (Formelschreibweise).</li>
-    <li>PTB — Physikalisch-Technische Bundesanstalt: Erläuterungen zur SI-Revision 2019.</li>
+    <li><a href="https://physics.nist.gov/cuu/Constants/">NIST — CODATA Fundamental Physical Constants</a>, laufend aktualisiert; die exakt definierten Werte stammen aus der SI-Revision 2019.</li>
+    <li>DIN 1301 (Einheiten), DIN 1313 (Größen), DIN 1338 (Formelschreibweise); PTB-Erläuterungen zur SI-Revision.</li>
+    <li>Formeln, in denen diese Einheiten vorkommen: <a href="#formeln">Formelsammlung</a> · Zahlensysteme und Bit-Vorsätze: <a href="digitaltechnik.html#zahlen">Digitaltechnik → Zahlensysteme</a>.</li>
   </ul>
 </div>

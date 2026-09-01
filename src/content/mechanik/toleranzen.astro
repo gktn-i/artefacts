@@ -1,0 +1,166 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Kein Teil lässt sich auf ein exaktes Maß fertigen — die Frage ist nur, wie weit es abweichen darf.</b> Drei Angaben beschreiben das vollständig: die Maßtoleranz (ISO 286), die Form- und Lagetoleranz (ISO 1101) und die Rauheit (ISO 21920). Jede davon kostet Geld, sobald sie enger wird als nötig.</div>
+
+<h2>Das ISO-286-System lesen</h2>
+<div class="fbox">
+  <span class="f">Ø 20 H7 / g6</span>
+  <span class="l">Großbuchstabe = Bohrung, Kleinbuchstabe = Welle. Buchstabe = Lage des Toleranzfelds zur Nulllinie, Zahl = Grundtoleranzgrad IT (Breite des Felds).</span>
+</div>
+<svg class="dg l" viewBox="0 0 620 190" role="img" aria-label="Toleranzfelder von Bohrung H7 und Welle g6 bei Nennmaß 20 Millimeter">
+  <path class="wt" d="M60,110 H560" />
+  <text class="lbl" x="56" y="114" text-anchor="end">Nulllinie Ø20</text>
+  <rect class="accs" x="150" y="76" width="150" height="34" rx="2" />
+  <rect class="accs" x="360" y="121" width="150" height="21" rx="2" />
+  <text class="lblb" x="225" y="68" text-anchor="middle">Bohrung H7</text>
+  <text class="lblb" x="435" y="160" text-anchor="middle">Welle g6</text>
+  <text class="lbla" x="308" y="80">+21 µm (ES)</text>
+  <text class="lbla" x="308" y="112">0 (EI)</text>
+  <text class="lbla" x="518" y="125">−7 µm (es)</text>
+  <text class="lbla" x="518" y="146">−20 µm (ei)</text>
+  <path class="gd" d="M150,110 H560 M150,76 H300 M360,121 H510 M360,142 H510" />
+  <text class="lbl" x="225" y="99" text-anchor="middle">Feldbreite 21 µm</text>
+  <text class="lbl" x="435" y="136" text-anchor="middle">Feldbreite 13 µm</text>
+  <text class="lbl" x="310" y="178" text-anchor="middle">Bohrung immer über der Nulllinie, Welle darunter → Spiel 7 … 41 µm</text>
+</svg>
+<div class="grid2">
+  <div class="card"><div class="ct">Der Buchstabe</div><div class="cd">Bei Wellen liegt <b>h</b> genau an der Nulllinie (oberes Abmaß 0), a bis g liegen darunter (Spiel), k bis z darüber (Übermaß). Bei Bohrungen ist <b>H</b> das Gegenstück mit unterem Abmaß 0.</div></div>
+  <div class="card"><div class="ct">Die Zahl (IT-Grad)</div><div class="cd">IT01 bis IT18. Je kleiner, desto enger und teurer. IT7 ist mit einer guten Drehmaschine machbar, IT6 verlangt Schleifen, IT5 Läppen oder Honen.</div></div>
+</div>
+
+<div class="calc" data-calc="passung">
+  <h4>Passung nach ISO 286 (Einheitsbohrung)</h4>
+  <div class="row">
+    <div><label>Nennmaß in mm</label><input data-k="d" type="number" step="any" value="20" /></div>
+    <div><label>Bohrung</label><select data-k="bohrung"><option>H6</option><option selected>H7</option><option>H8</option><option>H9</option><option>H11</option></select></div>
+    <div><label>Welle</label><select data-k="welle"><option value="e8">e8 — weites Spiel</option><option value="f7">f7 — Laufsitz</option><option value="g6" selected>g6 — Gleitsitz</option><option value="h6">h6 — Schiebesitz</option><option value="h7">h7</option><option value="h9">h9</option><option value="h11">h11 — grob</option><option value="k6">k6 — Übergang</option><option value="m6">m6 — fester Übergang</option><option value="n6">n6 — Festsitz</option><option value="p6">p6 — Presssitz</option><option value="r6">r6 — starker Presssitz</option><option value="s6">s6 — Schrumpfsitz</option></select></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Die gebräuchlichen Passungen</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Passung</th><th>Charakter</th><th>Fügen</th><th>Typische Anwendung</th></tr></thead>
+<tbody>
+<tr><td><b>H7 / e8</b></td><td>Weites Spiel</td><td>fällt von selbst</td><td>Gleitlager mit Wärmedehnung, grobe Führungen</td></tr>
+<tr><td><b>H7 / f7</b></td><td>Laufsitz</td><td>von Hand</td><td>Gleitlager, langsam laufende Wellen, Führungsbolzen</td></tr>
+<tr><td><b>H7 / g6</b></td><td>Gleitsitz</td><td>von Hand, spürbar</td><td>Zentrierungen, die sich noch bewegen dürfen; Passschrauben, Kolben</td></tr>
+<tr><td><b>H7 / h6</b></td><td>Schiebesitz</td><td>von Hand mit Widerstand</td><td>Zentrierung von Deckeln und Flanschen, austauschbare Teile</td></tr>
+<tr><td><b>H7 / k6</b></td><td>Übergangssitz</td><td>leichter Hammerschlag</td><td>Wälzlager auf der Welle, Zahnräder, Riemenscheiben mit Passfeder</td></tr>
+<tr><td><b>H7 / m6</b></td><td>Fester Übergang</td><td>Presse</td><td>Höhere Momente, weniger Spiel als k6</td></tr>
+<tr><td><b>H7 / n6</b></td><td>Festsitz</td><td>Presse</td><td>Buchsen, Lagerringe bei Umfangslast am Außenring</td></tr>
+<tr><td><b>H7 / p6</b></td><td>Presssitz</td><td>Presse oder Temperatur</td><td>Drehmomentübertragung ohne Passfeder</td></tr>
+<tr><td><b>H7 / s6</b></td><td>Schrumpfsitz</td><td>Erwärmen oder Kühlen</td><td>Zahnkränze, hoch belastete Nabensitze</td></tr>
+<tr><td><b>H11 / h11</b></td><td>Grobes Spiel</td><td>lose</td><td>Durchgangsbohrungen, unkritische Anschläge</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Einheitsbohrung ist der Normalfall</b> (über 90 % der Fälle): Die Bohrung bleibt H, die Passung wird über die Welle eingestellt — Bohrungen sind teurer zu fertigen und zu messen, und ein Satz Reibahlen genügt für alle Passungen. Einheitswelle (h) lohnt nur bei gezogenem Rundmaterial, das nicht nachgedreht wird, und bei durchgehenden Wellen mit mehreren Sitzen. Für Wälzlager gibt der Lagerhersteller Welle und Gehäuse direkt vor — siehe <a href="#lager">Lager &amp; Führungen</a>.</div>
+
+<h2>Was welcher IT-Grad kostet</h2>
+<div class="tbl-wrap"><table style="min-width:740px">
+<thead><tr><th data-s="num">IT-Grad</th><th data-s="num">Feldbreite bei Ø 20 mm</th><th>Erreichbar mit</th></tr></thead>
+<tbody>
+<tr><td>IT5</td><td>9 µm</td><td>Feinschleifen, Honen, Läppen</td></tr>
+<tr><td>IT6</td><td>13 µm</td><td>Schleifen, sehr gutes Feindrehen</td></tr>
+<tr><td>IT7</td><td>21 µm</td><td>Feindrehen, Reiben, gutes Fräsen — die praktische Grenze der Werkstatt</td></tr>
+<tr><td>IT8</td><td>33 µm</td><td>Drehen, Fräsen, Bohren mit Aufreiben</td></tr>
+<tr><td>IT9 – IT10</td><td>52 – 84 µm</td><td>Normales Drehen und Fräsen</td></tr>
+<tr><td>IT11 – IT12</td><td>130 – 210 µm</td><td>Spiralbohrer, Sägen, Druckguss</td></tr>
+<tr><td>IT13 – IT16</td><td>0,33 – 1,3 mm</td><td>Schmieden, Sandguss, Brennschneiden, FDM-Druck</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Enge Toleranzen kosten überproportional.</b> Von IT9 auf IT7 verdoppelt sich der Aufwand ungefähr, von IT7 auf IT5 vervielfacht er sich, weil ein weiteres Verfahren, temperierte Räume und andere Messmittel dazukommen. Deshalb: Allgemeintoleranz nach ISO 2768 als Grundlage (siehe <a href="#methodik">Methodik &amp; Zeichnung</a>) und nur die echten Funktionsmaße verengen — meist zwei oder drei je Bauteil.</div>
+
+<h2>Form- und Lagetoleranzen nach ISO 1101</h2>
+<p>Eine Welle kann überall den richtigen Durchmesser haben und trotzdem eine Banane sein. Maßtoleranzen und geometrische Toleranzen gelten unabhängig voneinander (Unabhängigkeitsprinzip nach ISO 8015).</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Symbol</th><th data-s="text">Merkmal</th><th>Gruppe</th><th>Bezug</th><th>Typische Anwendung</th></tr></thead>
+<tbody>
+<tr><td><b>⏤</b></td><td>Geradheit</td><td>Form</td><td>nein</td><td>Lange Wellen, Führungsbahnen</td></tr>
+<tr><td><b>⏥</b></td><td>Ebenheit</td><td>Form</td><td>nein</td><td>Auflageflächen für Linearführungen, Dichtflächen, Maschinentische</td></tr>
+<tr><td><b>○</b></td><td>Rundheit</td><td>Form</td><td>nein</td><td>Lagersitze, Gleitflächen</td></tr>
+<tr><td><b>⌭</b></td><td>Zylindrizität</td><td>Form</td><td>nein</td><td>Hydraulikzylinder, Präzisionsbolzen</td></tr>
+<tr><td><b>⌓</b></td><td>Flächenprofil</td><td>Form / Ort</td><td>optional</td><td>Freiformflächen, Kurvenscheiben</td></tr>
+<tr><td><b>∥</b></td><td>Parallelität</td><td>Richtung</td><td>ja</td><td>Gegenüberliegende Führungs- und Auflageflächen</td></tr>
+<tr><td><b>⊥</b></td><td>Rechtwinkligkeit</td><td>Richtung</td><td>ja</td><td>Anschraubflächen, Anschlagkanten, Flansche</td></tr>
+<tr><td><b>∠</b></td><td>Neigung</td><td>Richtung</td><td>ja</td><td>Schrägflächen, Keilflächen</td></tr>
+<tr><td><b>⌖</b></td><td>Position</td><td>Ort</td><td>ja</td><td>Lochbilder — die praktisch wichtigste Ortstoleranz</td></tr>
+<tr><td><b>◎</b></td><td>Koaxialität, Konzentrizität</td><td>Ort</td><td>ja</td><td>Mehrere Lagersitze auf einer Welle</td></tr>
+<tr><td><b>⌯</b></td><td>Symmetrie</td><td>Ort</td><td>ja</td><td>Nuten, Mitnehmerflächen</td></tr>
+<tr><td><b>↗</b></td><td>Rundlauf, Planlauf</td><td>Lauf</td><td>ja</td><td>Wellenabsätze, Anlageflächen, Riemenscheiben</td></tr>
+<tr><td><b>⌰</b></td><td>Gesamtlauf</td><td>Lauf</td><td>ja</td><td>Ganze Mantel- oder Stirnfläche statt einzelner Schnitte</td></tr>
+</tbody>
+</table></div>
+
+<h2>Bezüge und Positionstoleranz</h2>
+<p>Ein Bezugssystem legt das Bauteil im Raum fest — genau wie eine Spannvorrichtung. Die <b>3-2-1-Regel</b>: eine Fläche sperrt drei Freiheitsgrade (A), eine zweite zwei (B), eine dritte einen (C).</p>
+<div class="gb">
+  <div class="gb-col bad"><h4>Klassische Bemaßung ±0,1 in X und Y</h4>
+    <p>Das zulässige Feld ist ein <b>Quadrat</b> mit 0,2 mm Kantenlänge. Diagonal darf die Bohrung um 0,14 mm vom Sollpunkt abweichen, geradeaus nur um 0,10 mm — obwohl für die Funktion nur der Abstand vom Sollpunkt zählt.</p>
+  </div>
+  <div class="gb-col good"><h4>Positionstoleranz ⌖ Ø0,2 A B C</h4>
+    <ul>
+      <li>Zulässiges Feld ist ein <b>Kreis</b> von 0,2 mm Durchmesser — bildet die Funktion korrekt ab</li>
+      <li>Der Umstieg vom ±0,1-Quadrat auf den umschriebenen Kreis Ø0,28 mm bringt rund <b>57 % mehr</b> Toleranzfläche bei identischer Funktion</li>
+      <li>Mit Maximum-Material-Bedingung Ⓜ wächst die Toleranz zusätzlich um genau den Betrag, um den die Bohrung größer als ihr Kleinstmaß ausfällt</li>
+      <li>Sollmaße werden als theoretisch genaue Maße im Kasten eingetragen, ohne eigene Toleranz</li>
+    </ul>
+  </div>
+</div>
+<div class="stop"><b>Bezüge und Fertigungsanschlag sollen übereinstimmen.</b> Liegt das Teil an Fläche A an, die Zeichnung bemaßt aber von Kante D, muss der Fertiger umrechnen und die Toleranzen addieren sich. Bezüge sollen außerdem messbar sein: eine gedachte Mittelebene ist erlaubt, eine reale Fläche aber leichter zu prüfen — am besten dieselbe, an der das Teil später montiert wird.</div>
+<div class="tip"><b>Was realistisch forderbar ist:</b> Ebenheit 0,02 mm auf 100 mm schafft eine gute Fräse, 0,005 mm verlangt Schleifen und spannungsarme Aufspannung. Rechtwinkligkeit 0,05 mm auf 100 mm ist Standard, 0,01 mm Präzisionsarbeit. Positionstoleranz Ø0,2 mm ist für Bohrbilder normal, Ø0,05 mm braucht Maschine und Aufspannkonzept. Und jede eingetragene Toleranz muss geprüft werden — Zylindrizität und Gesamtlauf brauchen eine Koordinatenmessmaschine. Wo eine Lauftoleranz genügt, ist sie der Zylindrizität vorzuziehen.</div>
+
+<h2>Oberflächenrauheit</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Kennwert</th><th>Bedeutung</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Ra</b></td><td>Arithmetischer Mittenrauwert</td><td>Der verbreitetste Wert. Robust, aber unempfindlich gegen einzelne tiefe Riefen</td></tr>
+<tr><td><b>Rz</b></td><td>Gemittelte Rautiefe aus fünf Einzelstrecken</td><td>Reagiert auf Spitzen und Riefen; für Dichtflächen aussagekräftiger. Faustregel Rz ≈ 4 … 7 · Ra</td></tr>
+<tr><td><b>Rz1max</b></td><td>Größte Einzelrautiefe</td><td>Für kritische Dichtflächen — hier zählt die eine tiefe Riefe</td></tr>
+<tr><td><b>Rk, Rpk, Rvk</b></td><td>Kernrautiefe, reduzierte Spitzen- und Riefentiefe (Abbott-Kurve)</td><td>Für Gleitflächen: Rvk beschreibt die Schmiertaschen, Rpk die einlaufenden Spitzen</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Verfahren</th><th data-s="num">Ra üblich [µm]</th><th data-s="num">Ra erreichbar</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td>Brennschneiden</td><td>12,5 – 50</td><td>—</td><td>Rohzustand, Bearbeitungszugabe einplanen</td></tr>
+<tr><td>Sägen, Schruppfräsen</td><td>3,2 – 12,5</td><td>—</td><td>—</td></tr>
+<tr><td>Fräsen und Drehen, schlichten</td><td>0,8 – 3,2</td><td>0,4</td><td>Der Standard; der Vorschub bestimmt die Rauheit stärker als die Drehzahl</td></tr>
+<tr><td>Reiben</td><td>0,4 – 1,6</td><td>0,2</td><td>Für H7-Bohrungen</td></tr>
+<tr><td>Schleifen</td><td>0,2 – 0,8</td><td>0,05</td><td>Lagersitze, Führungsbahnen</td></tr>
+<tr><td>Honen</td><td>0,05 – 0,4</td><td>0,025</td><td>Zylinderlaufbahnen; erzeugt gezielt Kreuzschliff mit Schmiertaschen</td></tr>
+<tr><td>Läppen, Polieren</td><td>0,012 – 0,1</td><td>0,006</td><td>Dicht- und Messflächen, Optik</td></tr>
+<tr><td>Druckguss</td><td>0,8 – 3,2</td><td>—</td><td>Sehr gute Oberfläche direkt aus der Form</td></tr>
+<tr><td>SLS / MJF</td><td>6 – 15</td><td>—</td><td>Gleichmäßig matt, durch Gleitschleifen gut nachbearbeitbar</td></tr>
+<tr><td>FDM-3D-Druck</td><td>6 – 25</td><td>—</td><td>Stark richtungsabhängig; die Schichthöhe dominiert</td></tr>
+</tbody>
+</table></div>
+
+<h2>Wann Rauheit wirklich zählt</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Funktion</th><th data-s="num">Zielwert</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td>Gegenlauffläche Wellendichtring</td><td>Ra 0,2 – 0,8 µm, Rz 1 – 4 µm, <b>drallfrei</b></td><td>Zu glatt heißt kein Schmierfilm, zu rau heißt Verschleiß der Dichtlippe. Drall aus dem Drehen fördert Öl heraus — deshalb einstechschleifen</td></tr>
+<tr><td>O-Ring, statisch</td><td>Ra ≤ 1,6 µm, Rz ≤ 6,3 µm</td><td>Riefen quer zur Dichtlinie sind Leckagepfade</td></tr>
+<tr><td>O-Ring, dynamisch</td><td>Ra 0,1 – 0,4 µm</td><td>Der Ring gleitet darüber</td></tr>
+<tr><td>Wälzlagersitz</td><td>Ra ≤ 0,8 µm Welle, ≤ 1,6 µm Gehäuse</td><td>Sonst setzt sich der Presssitz und verliert Übermaß</td></tr>
+<tr><td>Gleitlagerfläche</td><td>Ra 0,2 – 0,4 µm</td><td>Der Schmierfilm muss tragen können</td></tr>
+<tr><td>Klebefläche</td><td>Ra 1,6 – 6,3 µm</td><td>Hier ist rau <b>besser</b> — größere Fläche, mechanische Verankerung</td></tr>
+<tr><td>Dauerfest belastetes Bauteil</td><td>Ra ≤ 0,8 µm an der kritischen Stelle</td><td>Jede Riefe ist eine Mikrokerbe und ein Rissausgang</td></tr>
+<tr><td>Allgemeine Funktionsfläche</td><td>Ra 3,2 µm</td><td>Fällt beim Schlichtfräsen ohne Zusatzaufwand an</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Zu glatt kann schlechter sein als zu rau.</b> Eine polierte Zylinderlaufbahn hält keinen Ölfilm — deshalb wird gehont statt poliert, mit Kreuzriefen als Schmiertaschen. Dasselbe gilt für Gleitlager und Wellendichtringe. In der Zeichnung genügt praktisch „Ra 3,2 allgemein, Ra 0,8 an den bezeichneten Flächen“; jede Halbierung des Ra-Werts kostet ungefähr das Doppelte.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN ISO 286-1 und -2 — ISO-Toleranzsystem: Grundlagen, Grundtoleranzgrade und Grenzabmaße; Datengrundlage des Rechners (Nennmaße bis 120 mm, darüber gilt das Normblatt).</li>
+    <li>DIN EN ISO 1101 (geometrische Tolerierung), ISO 5459 (Bezüge und Bezugssysteme), ISO 2692 (Maximum-Material-Bedingung), ISO 8015 (GPS-Grundlagen, Unabhängigkeitsprinzip).</li>
+    <li>DIN EN ISO 21920-1 bis -3 — Oberflächenbeschaffenheit, Profilverfahren (löst ISO 4287 und ISO 1302 ab); DIN EN ISO 13565-2 für Rk, Rpk, Rvk.</li>
+    <li><a href="https://www.fst.com/">Freudenberg Sealing Technologies — Technisches Handbuch</a>: Anforderungen an Gegenlaufflächen für Wellendichtringe und O-Ringe.</li>
+    <li>Roloff/Matek Tabellenbuch und Hoischen/Fritz, <i>Technisches Zeichnen</i> — Passungsauswahl, erreichbare Rauheiten je Verfahren, Eintragungsregeln.</li>
+  </ul>
+</div>

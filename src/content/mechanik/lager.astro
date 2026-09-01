@@ -1,0 +1,160 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Wälzlager ist ein Katalogteil mit berechenbarer Lebensdauer — und eine Welle braucht genau eine axiale Festlegung.</b> Aus Tragzahl, Last und Drehzahl folgt L₁₀ direkt; ob dieser Wert erreicht wird, entscheiden Passung, Schmierung und Sauberkeit. Bei Linearführungen ersetzt die Steifigkeit die Lebensdauer als Hauptkriterium.</div>
+
+<h2>Bauformen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Bauform</th><th>Belastung</th><th data-s="num">Drehzahl</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Rillenkugellager</b> (6xxx)</td><td>radial, begrenzt axial</td><td>sehr hoch</td><td>Das Standardlager: billig, überall verfügbar, verträgt nur wenige Winkelminuten Schiefstellung</td></tr>
+<tr><td><b>Schrägkugellager</b> (7xxx)</td><td>radial + axial (einseitig)</td><td>hoch</td><td>Paarweise angestellt; für Spindeln und vorgespannte Lagerungen</td></tr>
+<tr><td><b>Pendelkugellager</b> (12xx)</td><td>radial</td><td>hoch</td><td>Verträgt mehrere Grad Schiefstellung — für lange, durchbiegende Wellen</td></tr>
+<tr><td><b>Zylinderrollenlager</b> (NU, N)</td><td>hoch radial</td><td>hoch</td><td>Hohe Tragzahl, axial verschiebbar — das ideale Loslager</td></tr>
+<tr><td><b>Kegelrollenlager</b> (3xxxx)</td><td>hoch radial + axial</td><td>mittel</td><td>Paarweise, einstellbar vorgespannt; Radnaben, Spindeln, Getriebe</td></tr>
+<tr><td><b>Nadellager</b></td><td>hoch radial</td><td>mittel</td><td>Kleinste Bauhöhe bei hoher Tragzahl; Welle muss gehärtet und geschliffen sein</td></tr>
+<tr><td><b>Axialkugellager</b> (51xxx)</td><td>nur axial</td><td>niedrig</td><td>Verträgt keine Radiallast</td></tr>
+<tr><td><b>Gleitlagerbuchse</b> (Bronze, PTFE-Verbund, Kunststoff)</td><td>radial</td><td>niedrig–mittel</td><td>Wartungsfrei, geräuscharm, unempfindlich gegen Stoß und Schmutz; höhere Reibung</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Gleitlager statt Wälzlager</b> lohnt sich bei langsamen, schwingenden oder stoßbelasteten Bewegungen und dort, wo Schmutz oder Wasser im Spiel sind: Gelenke, Klappen, Achsen mit wenigen Umdrehungen pro Minute. Kunststoffgleitlager sind dann wartungsfrei, leise und billiger — der Preis ist der höhere Reibwert und ein temperaturabhängiges Spiel.</div>
+
+<h2>Lebensdauer berechnen</h2>
+<div class="fbox">
+  <span class="f">L₁₀ = (C / P)^p&nbsp;&nbsp;&nbsp;&nbsp;L₁₀h = 10⁶ · L₁₀ / (60 · n)&nbsp;&nbsp;&nbsp;&nbsp;P = X · F_r + Y · F_a</span>
+  <span class="l">C dynamische Tragzahl aus dem Katalog, P äquivalente Belastung, p = 3 für Kugel- und 10/3 für Rollenlager. L₁₀ heißt: 90 % der Lager erreichen diesen Wert. X und Y stehen im Herstellerkatalog; bei reiner Radiallast ist P = F_r.</span>
+</div>
+<div class="calc" data-calc="lager">
+  <h4>Nominelle Lebensdauer</h4>
+  <div class="row">
+    <div><label>Lagerart</label><select data-k="typ"><option value="kugel" selected>Kugellager (p = 3)</option><option value="rolle">Rollenlager (p = 10/3)</option></select></div>
+    <div><label>dyn. Tragzahl C in N</label><input data-k="c" type="number" step="any" value="13500" /></div>
+    <div><label>Belastung P in N</label><input data-k="p" type="number" step="any" value="1200" /></div>
+    <div><label>Drehzahl n in min⁻¹</label><input data-k="n" type="number" step="any" value="1500" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+<div class="warn"><b>Der Exponent macht den Unterschied.</b> Beim Kugellager geht die Belastung mit der dritten Potenz ein: 25 % mehr Last halbieren die Lebensdauer, doppelte Last bedeutet ein Achtel. Umgekehrt verlängert eine Baugröße mehr die Lebensdauer oft um das Drei- bis Fünffache — meist die billigste Verbesserung an einer Maschine.</div>
+<p>Neben C gibt es <b>C₀</b>, die statische Tragzahl. Sie begrenzt die Last im Stillstand und bei sehr langsamer Drehung, wo die Wälzkörper sich an einer Stelle in die Laufbahn drücken (Brinellieren). Die Kennzahl <span class="formula">S₀ = C₀ / P₀</span> sollte bei 1 bis 2,5 liegen, bei Stoßlast und Präzisionsanspruch höher.</p>
+<div class="stop"><b>Falschbrinellierung durch Stillstandsvibration:</b> Ein stehendes Lager, das dauerhaft vibriert (Transport, benachbarte Maschine), bekommt Riffel in der Laufbahn, ohne je gelaufen zu sein. Deshalb werden Maschinen für den Transport an der Welle festgesetzt und Ersatzlager nicht neben laufenden Anlagen gelagert.</div>
+
+<h2>Fest, los oder angestellt</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Fest-Los-Lagerung</div><div class="cd">Ein Lager nimmt Radial- und Axialkräfte auf, das andere nur radial und darf axial wandern. <b>Der Standardfall</b> — unempfindlich gegen Temperaturdehnung und Toleranzen.</div></div>
+  <div class="card"><div class="ct">Angestellte Lagerung</div><div class="cd">Zwei Schräg- oder Kegelrollenlager gegeneinander vorgespannt (X- oder O-Anordnung). Spielfrei und steif, aber temperaturempfindlich. Für Spindeln und Präzisionsachsen.</div></div>
+  <div class="card"><div class="ct">Schwimmende Lagerung</div><div class="cd">Beide Lager axial lose mit definiertem Gesamtspiel (0,2–0,5 mm). Einfach und billig, dafür hat die Welle Axialspiel. Für unkritische Antriebe.</div></div>
+</div>
+<svg class="dg l" viewBox="0 0 420 145" role="img" aria-label="Welle mit Festlager links, beidseitig angeschlagen, und Loslager rechts mit axialem Spiel">
+  <rect class="box" x="30" y="62" width="360" height="16" />
+  <rect class="box" x="70" y="44" width="10" height="18" /><rect class="box" x="70" y="78" width="10" height="18" />
+  <rect class="accs" x="80" y="44" width="36" height="18" /><rect class="accs" x="80" y="78" width="36" height="18" />
+  <rect class="box" x="116" y="44" width="10" height="18" /><rect class="box" x="116" y="78" width="10" height="18" />
+  <rect class="box" x="272" y="44" width="10" height="18" /><rect class="box" x="272" y="78" width="10" height="18" />
+  <rect class="accs" x="292" y="44" width="36" height="18" /><rect class="accs" x="292" y="78" width="36" height="18" />
+  <rect class="box" x="338" y="44" width="10" height="18" /><rect class="box" x="338" y="78" width="10" height="18" />
+  <path class="acc" d="M296,32 H324" />
+  <polygon class="accf" points="300,28 300,36 291,32" />
+  <polygon class="accf" points="320,28 320,36 329,32" />
+  <text class="lbl" x="200" y="56" text-anchor="middle">Welle</text>
+  <text class="lblb" x="98" y="118" text-anchor="middle">Festlager</text>
+  <text class="lbl" x="98" y="134" text-anchor="middle">beidseitig angeschlagen</text>
+  <text class="lblb" x="310" y="118" text-anchor="middle">Loslager</text>
+  <text class="lbl" x="310" y="134" text-anchor="middle">axial frei im Gehäuse</text>
+</svg>
+<div class="stop"><b>Der Klassiker im Eigenbau:</b> zwei Rillenkugellager, beide innen und außen fest eingepresst und beidseitig angeschlagen. Bei 30 K Temperaturunterschied dehnt sich eine 200 mm lange Stahlwelle um 0,07 mm — die Lager verspannen sich axial, laufen heiß, dehnen sich weiter und fressen. Die Lösung kostet nichts: das zweite Lager im Gehäuse axial frei lassen.</div>
+
+<h2>Passungen an der Lagerstelle</h2>
+<p>Die Grundregel: <b>der umlaufende Ring bekommt Übermaß, der stillstehende Ring Spiel.</b> Sonst wandert der belastete Ring auf seinem Sitz und trägt ihn ab.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Fall</th><th data-s="text">Wellenpassung</th><th data-s="text">Gehäusepassung</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Umfangslast am Innenring</b> (normaler Antrieb)</td><td>k6, m6 bei höherer Last</td><td>H7 oder J7</td><td>Motorwelle, Getriebewelle, Riemenscheibe</td></tr>
+<tr><td><b>Umfangslast am Außenring</b> (Rad auf feststehender Achse)</td><td>g6 oder h6</td><td>N7 oder P7</td><td>Laufrolle, Umlenkrolle, Spannrolle</td></tr>
+<tr><td><b>Loslagerstelle im Gehäuse</b></td><td>k6</td><td>H7 (verschiebbar)</td><td>Zweites Lager der Welle</td></tr>
+<tr><td><b>Kleine Last, einfache Anwendung</b></td><td>j6</td><td>H7</td><td>Hobby, leichte Antriebe</td></tr>
+<tr><td><b>Dünnwandiges Aluminiumgehäuse</b></td><td>k6</td><td>J7 bis K7</td><td>Alu dehnt sich stärker — engere Gehäusepassung wählen</td></tr>
+</tbody>
+</table></div>
+<p>Grenzmaße liefert der Passungsrechner unter <a href="#toleranzen">Toleranzen, Passungen &amp; Oberflächen</a>. Verbindlich ist immer der Lagerkatalog des Herstellers; die Tabelle ist dessen Kurzfassung.</p>
+
+<h2>Einbau, Schmierung, Dichtung</h2>
+<div class="steps">
+  <div class="step"><h4>Anlageschulter und Freistich</h4>Die Schulter muss am Ring anliegen, nicht am Käfig oder an der Dichtung; die Katalogtabelle nennt den zulässigen Durchmesserbereich. Der Übergang braucht einen Radius kleiner als die Kantenfase des Lagers — ein Freistich nach DIN 509 löst beides.</div>
+  <div class="step"><h4>Erwärmen statt schlagen</h4>Lager auf 80–100 °C erwärmen (Heizplatte, Ölbad, Induktionsgerät) und aufschieben. Über 120 °C leiden Wärmebehandlung und Fettfüllung.</div>
+  <div class="step"><h4>Kraft nur über den Ring mit Übermaß</h4>Beim Aufziehen auf die Welle nur auf den Innenring drücken, beim Einpressen ins Gehäuse nur auf den Außenring. Eine Presshülse kostet wenig und rettet viele Lager.</div>
+  <div class="step"><h4>Loslager wirklich frei lassen</h4>Bei H7 im Gehäuse muss der Außenring auch axial Platz haben. Ein zu eng gesetzter Deckel macht aus dem Loslager wieder ein Festlager.</div>
+</div>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th data-s="text">Kennung</th><th>Bedeutung</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>offen</b> (z. B. 6000)</td><td>Keine Abdichtung</td><td>Ölbad- und Umlaufschmierung, saubere Umgebung</td></tr>
+<tr><td><b>Z / 2Z</b></td><td>Deckscheibe aus Blech, berührungsfrei</td><td>Geringe Reibung, hohe Drehzahl; hält groben Schmutz ab</td></tr>
+<tr><td><b>RS / 2RS</b></td><td>Dichtscheibe aus Elastomer, schleifend</td><td>Guter Schmutz- und Feuchteschutz; mehr Reibung, geringere Grenzdrehzahl</td></tr>
+<tr><td><b>C3</b></td><td>Vergrößerte Radialluft</td><td>Bei Temperaturdifferenz zwischen den Ringen, festem Sitz auf beiden Ringen, Elektromotoren</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Rund 80 % aller vorzeitigen Lagerausfälle</b> gehen auf Schmierung, Verschmutzung oder Einbaufehler zurück, nicht auf Werkstoffermüdung. Fettmenge im Standardfall: 30–50 % des freien Lagerraums — zu viel Fett führt zu Walkarbeit und Übertemperatur.</div>
+
+<h2>Wärmedehnung mitrechnen</h2>
+<div class="calc" data-calc="dehnung">
+  <h4>Wärmedehnung und Zwangsspannung</h4>
+  <div class="row">
+    <div><label>Werkstoff</label><select data-k="mat"><option value="stahl" selected>Baustahl</option><option value="edelstahl">Edelstahl A2/A4</option><option value="guss">Grauguss</option><option value="alu">Aluminium</option><option value="messing">Messing</option><option value="kupfer">Kupfer</option><option value="titan">Titan</option><option value="invar">Invar</option><option value="pla">PLA</option><option value="petg">PETG</option><option value="abs">ABS/ASA</option><option value="nylon">Nylon (PA)</option><option value="pc">Polycarbonat</option></select></div>
+    <div><label>Länge in mm</label><input data-k="laenge" type="number" step="any" value="200" /></div>
+    <div><label>Temperaturänderung in K</label><input data-k="dt" type="number" step="any" value="30" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+<div class="tip"><b>Aluminiumgehäuse mit Stahlwelle</b> ist der häufigste Mischbaufall: Aluminium dehnt sich mit 23 · 10⁻⁶/K fast doppelt so stark wie Stahl mit 12 · 10⁻⁶/K. Bei Erwärmung wird der Lagersitz im Gehäuse also weiter — deshalb dort eine engere Passung wählen (J7 statt H7) und den Sitz bei starker Erwärmung zusätzlich sichern.</div>
+
+<h2>Linearführungen</h2>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Bauart</th><th data-s="num">Steifigkeit</th><th data-s="num">Genauigkeit</th><th data-s="text">Preis</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Profilschienenführung</b> (HIWIN HG/MG, THK SHS)</td><td>sehr hoch</td><td>sehr hoch</td><td>hoch</td><td>Der Standard im Maschinenbau; nimmt Momente in alle Richtungen auf. Braucht eine plane, steife Montagefläche.</td></tr>
+<tr><td><b>Rundwelle mit Kugelbuchse</b> (LM/SC..UU)</td><td>gering</td><td>mittel</td><td>niedrig</td><td>Verbreitet im 3D-Druck. Die Welle biegt sich durch; ab etwa 400 mm freier Länge nur noch unterstützt brauchbar.</td></tr>
+<tr><td><b>Unterstützte Rundwelle</b> (SBR)</td><td>mittel</td><td>mittel</td><td>mittel</td><td>Welle liegt auf einem Profil auf — guter Kompromiss für Hobby-CNC.</td></tr>
+<tr><td><b>Gleitführung</b> (PTFE, POM, Bronze auf Stahl)</td><td>mittel</td><td>mittel</td><td>niedrig</td><td>Dämpfend, unempfindlich gegen Schmutz und Stoß. Höhere Reibung, Losbrechmoment.</td></tr>
+<tr><td><b>Schwalbenschwanzführung</b></td><td>hoch</td><td>hoch</td><td>mittel</td><td>Klassische Werkzeugmaschinenführung, über Keilleiste nachstellbar. Sehr dämpfend, aufwendig zu fertigen.</td></tr>
+<tr><td><b>V-Rollen auf Profil</b> (OpenBuilds u. ä.)</td><td>gering</td><td>mittel</td><td>sehr niedrig</td><td>Einfach zu montieren und einzustellen. Punktkontakt begrenzt Last und Lebensdauer.</td></tr>
+<tr><td><b>Luftlager</b></td><td>hoch</td><td>höchste</td><td>sehr hoch</td><td>Reibungsfrei, nanometergenau. Messtechnik und Halbleiterfertigung.</td></tr>
+</tbody>
+</table></div>
+<p>Zwei Wagen sperren Nicken und Gieren nur so gut, wie ihr Abstand es hergibt. Bei 100 mm Wagenabstand und 200 mm Auskraglänge sieht der vordere Wagen die doppelte Kraft plus Nutzlast — und der hintere wird nach oben gezogen.</p>
+<div class="kpis">
+  <div class="kpi"><div class="k">Minimum</div><div class="v">1 : 1</div><div class="s">Wagenabstand zu Auskraglänge</div></div>
+  <div class="kpi"><div class="k">Gute Praxis</div><div class="v">2 : 1</div><div class="s">für normale Achsen</div></div>
+  <div class="kpi"><div class="k">Präzision</div><div class="v">3 : 1</div><div class="s">für steife Positionierachsen</div></div>
+</div>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig montiert</h4>
+    <ul>
+      <li>Anschlagkante für mindestens eine Schiene vorsehen, die zweite dagegen ausrichten</li>
+      <li>Montagefläche fräsen oder schleifen; Ebenheit nach Herstellervorgabe (oft 20–50 µm/m)</li>
+      <li>Schienen von der Mitte nach außen mit Drehmoment anziehen, Parallelität messen</li>
+      <li>Vorspannklasse zur Montagefläche passend wählen: leicht (Z0/ZF) verzeiht mehr als hoch (Z1/Z2)</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Typische Fehler</h4>
+    <ul>
+      <li>Schienen auf ein rohes Strangpressprofil schrauben und Parallelität erzwingen</li>
+      <li>Wagen ohne Montagehilfe von der Schiene ziehen — die Kugeln fallen heraus</li>
+      <li>Schmierung vergessen: ein trocken laufender Wagen hält Wochen statt Jahre</li>
+      <li>Späne und Kühlmittel ohne Abdeckung auf die Laufbahn lassen</li>
+    </ul>
+  </div>
+</div>
+<div class="warn"><b>Statische Überbestimmung ist bei Führungen die Regel.</b> Zwei parallele Schienen mit je zwei Wagen sperren rechnerisch mehr Freiheitsgrade, als vorhanden sind — das funktioniert nur, weil die Bauteile etwas nachgeben. Je steifer und höher vorgespannt die Führung, desto genauer muss die Fertigung sein. Deshalb ist eine einfache Führung auf einer schlechten Fläche manchmal die praktischere Lösung als eine teure.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN ISO 281 (dynamische Tragzahlen und nominelle Lebensdauer), DIN ISO 76 (statische Tragzahlen), DIN 5425-1 (Toleranzen für den Einbau), DIN 509 (Freistiche).</li>
+    <li><a href="https://www.skf.com/group/products/rolling-bearings/principles-of-rolling-bearing-selection">SKF — Grundlagen der Lagerauswahl</a> und <a href="https://medias.schaeffler.de/">Schaeffler medias</a>: Tragzahlen, Beiwerte X und Y, Passungstabellen, Schmierfristen; die maßgeblichen Primärquellen.</li>
+    <li><a href="https://www.igus.de/iglidur/plain-bearing">igus iglidur</a> und <a href="https://www.igus.de/drylin/linear-guides">igus drylin</a> — Kennwerte für Kunststoffgleitlager und Gleitführungen.</li>
+    <li><a href="https://www.hiwin.de/de/Produkte/Linearf%C3%BChrungen">HIWIN Linearführungen</a> und <a href="https://www.thk.com/">THK Technischer Katalog</a> — Tragzahlen, Vorspann- und Genauigkeitsklassen, Momentenbelastung.</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i>, Springer Vieweg — Wälzlagerungen und Führungen mit Gestaltungsbeispielen.</li>
+  </ul>
+</div>

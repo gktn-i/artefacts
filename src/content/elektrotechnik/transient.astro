@@ -1,12 +1,12 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Kondensator und Spule haben ein Gedächtnis.</b> Spannung am Kondensator und Strom durch die Spule können sich nicht sprunghaft ändern — daraus folgt jeder Einschaltvorgang, jede Zeitkonstante und jede Schwingung. Wer diese Kurven im Kopf hat, versteht später die Regelungstechnik ohne Umweg.</div>
+<div class="kurz"><b>Kondensator und Spule haben ein Gedächtnis, Leitungen haben eine Laufzeit.</b> Spannung am C und Strom durch L können nicht springen — daraus folgt jede Zeitkonstante und jede Schwingung. Und ab dem Punkt, an dem die Signallaufzeit gegen die Anstiegszeit zählt, ist ein Draht kein Draht mehr, sondern ein Bauteil mit Wellenwiderstand.</div>
 
 <h2>Das RC-Glied</h2>
 <div class="fbox">
   <span class="f">u_C(t) = U₀ · (1 − e^(−t/τ))&nbsp;&nbsp;mit&nbsp;&nbsp;τ = R · C</span>
-  <span class="l">Beim Entladen spiegelbildlich: u_C(t) = U₀ · e^(−t/τ).</span>
+  <span class="l">Beim Entladen spiegelbildlich: u_C(t) = U₀ · e^(−t/τ). Grenzfrequenz desselben Gliedes: f_g = 1/(2πRC).</span>
 </div>
 <svg class="dg l" viewBox="-30 0 640 200" role="img" aria-label="Ladekurve und Entladekurve eines Kondensators mit Zeitkonstanten">
   <path class="w" d="M40,20 V170 H580" />
@@ -34,7 +34,6 @@ import "./_style.css";
 <tr><td>5 τ</td><td>99,3 % — praktisch fertig</td><td>0,7 %</td></tr>
 </tbody>
 </table></div>
-
 <div class="calc" data-calc="rc">
   <h4>Zeitkonstante und Grenzfrequenz</h4>
   <div class="row">
@@ -45,25 +44,22 @@ import "./_style.css";
   <div class="out" data-out></div>
   <div class="hint" data-hint hidden></div>
 </div>
+<ul>
+  <li><b>Tasterentprellung:</b> Kontakte prellen 1–20 ms. τ ≈ 10 ms plus Schmitt-Trigger-Eingang ergibt eine saubere Flanke; in Software: Zustand erst nach zwei gleichen Abtastungen im Abstand von 10 ms übernehmen.</li>
+  <li><b>Reset-Verzögerung:</b> 10 kΩ mit 100 nF → τ = 1 ms, genug bis die Versorgung stabil steht.</li>
+  <li><b>Antialiasing vor dem ADC:</b> unterdrückt alles oberhalb der Nyquist-Grenze — siehe <a href="#filter">Filter &amp; Frequenzgang</a>.</li>
+  <li><b>Snubber:</b> RC in Reihe, parallel zum Schalter oder zur Diode; bedämpft die Schwingung beim harten Abschalten einer Induktivität und senkt die Störabstrahlung.</li>
+</ul>
 
-<h3>Wo RC-Glieder in der Praxis stecken</h3>
-<div class="grid">
-  <div class="card"><div class="ct">Tasterentprellung</div><div class="cd">Ein mechanischer Kontakt prellt 1–20 ms. Ein RC mit τ ≈ 10 ms plus Schmitt-Trigger-Eingang macht daraus eine saubere Flanke. Alternative in Software: Zustand erst nach zwei gleichen Abtastungen im Abstand von 10 ms übernehmen.</div></div>
-  <div class="card"><div class="ct">Reset-Verzögerung</div><div class="cd">Viele ältere Mikrocontroller brauchen einen definierten Reset beim Einschalten. 10 kΩ mit 100 nF ergibt τ = 1 ms — genug, damit die Versorgung stabil steht.</div></div>
-  <div class="card"><div class="ct">Antialiasing vor dem ADC</div><div class="cd">Ein RC-Tiefpass vor dem Wandlereingang unterdrückt Frequenzen oberhalb der Nyquist-Grenze. Ohne ihn erscheint jede Störung als scheinbar langsames Nutzsignal.</div></div>
-  <div class="card"><div class="ct">Snubber</div><div class="cd">RC in Reihe, parallel zum Schalter oder zur Diode. Bedämpft die Schwingung, die beim harten Abschalten einer Induktivität entsteht, und senkt die Störabstrahlung.</div></div>
-</div>
-
-<h2>Das RL-Glied</h2>
-<div class="fbox"><span class="f">i_L(t) = I₀ · (1 − e^(−t/τ))&nbsp;&nbsp;mit&nbsp;&nbsp;τ = L / R</span></div>
-<p>Der Strom in einer Spule baut sich mit derselben Kurvenform auf wie die Spannung am Kondensator. Der entscheidende Unterschied liegt im <b>Abschalten</b>: Wird der Stromkreis geöffnet, versucht die Spule den Strom aufrechtzuerhalten und erzeugt dafür eine beliebig hohe Gegenspannung.</p>
-<div class="stop"><b>Freilaufdiode ist Pflicht.</b> Beim Abschalten eines Relais mit 100 mA und 100 mH und einem Schaltvorgang in 1 µs entsteht rechnerisch u = L·di/dt = 0,1 H · 100 mA/1 µs = <b>10 kV</b>. In der Realität begrenzt der Lichtbogen oder der durchbrechende Transistor das — nur ist der Transistor danach kaputt. Eine antiparallele Diode über der Spule (1N4148 für kleine, 1N4007 für größere Relais) leitet den Strom sanft ab. Bei schnellen Abschaltvorgängen nimmt man eine Schottky- oder eine Zenerdiode in Reihe, um die Abschaltzeit kurz zu halten.</div>
+<h2>Das RL-Glied und die Abschaltspitze</h2>
+<div class="fbox"><span class="f">i_L(t) = I₀ · (1 − e^(−t/τ))&nbsp;&nbsp;mit&nbsp;&nbsp;τ = L / R</span>
+<span class="l">Gleiche Kurvenform wie am Kondensator. Der Unterschied liegt im Abschalten: Die Spule hält den Strom aufrecht und erzeugt dafür beliebig hohe Gegenspannung.</span></div>
+<div class="stop"><b>Freilaufdiode ist Pflicht.</b> Relais mit 100 mH, Abschaltung von 100 mA in 1 µs: u = L·di/dt = 10 kV rechnerisch. In der Realität begrenzt der durchbrechende Transistor — nur ist der danach kaputt. Eine antiparallele Diode über der Spule (1N4148 für kleine, 1N4007 für größere Relais) leitet den Strom sanft ab. Wo die Abfallzeit kurz bleiben muss, nimmt man eine Zenerdiode in Reihe zur Freilaufdiode und begrenzt bewusst auf einen definierten Wert.</div>
 
 <h2>Der Schwingkreis: RLC in Reihe</h2>
-<p>Kommen L und C zusammen, pendelt Energie zwischen elektrischem und magnetischem Feld hin und her. R bestimmt, wie schnell die Schwingung ausklingt.</p>
 <div class="fbox">
-  <span class="f">ω₀ = 1/√(LC)&nbsp;&nbsp;·&nbsp;&nbsp;D = R/2 · √(C/L)&nbsp;&nbsp;·&nbsp;&nbsp;Q = 1/(2D)</span>
-  <span class="l">D ist der Dämpfungsgrad, Q die Güte. Beides beschreibt dasselbe von zwei Seiten.</span>
+  <span class="f">ω₀ = 1/√(LC)&nbsp;&nbsp;·&nbsp;&nbsp;D = (R/2) · √(C/L)&nbsp;&nbsp;·&nbsp;&nbsp;Q = 1/(2D)</span>
+  <span class="l">D ist der Dämpfungsgrad, Q die Güte — dasselbe von zwei Seiten beschrieben.</span>
 </div>
 <svg class="dg l" viewBox="-10 0 620 200" role="img" aria-label="Drei Sprungantworten: schwingend, aperiodischer Grenzfall und kriechend">
   <path class="w" d="M40,20 V170 H580" />
@@ -80,28 +76,92 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:700px">
 <thead><tr><th>Dämpfungsgrad D</th><th>Verhalten</th><th>Wo man das will</th></tr></thead>
 <tbody>
-<tr><td><b>D = 0</b></td><td>Ungedämpfte Dauerschwingung</td><td>Oszillator, Schwingquarz (nur näherungsweise erreichbar)</td></tr>
-<tr><td><b>0 &lt; D &lt; 1</b></td><td>Gedämpfte Schwingung mit Überschwingen</td><td>Filter mit steiler Flanke; D ≈ 0,7 gilt als guter Kompromiss</td></tr>
-<tr><td><b>D = 1</b></td><td>Aperiodischer Grenzfall — schnellstmöglich ohne Überschwingen</td><td>Messgeräte, Positionierantriebe</td></tr>
+<tr><td><b>D = 0</b></td><td>ungedämpfte Dauerschwingung</td><td>Oszillator, Schwingquarz (nur näherungsweise erreichbar)</td></tr>
+<tr><td><b>0 &lt; D &lt; 1</b></td><td>gedämpfte Schwingung mit Überschwingen</td><td>Filter mit steiler Flanke; D ≈ 0,7 gilt als guter Kompromiss</td></tr>
+<tr><td><b>D = 1</b></td><td>aperiodischer Grenzfall — schnellstmöglich ohne Überschwingen</td><td>Messgeräte, Positionierantriebe</td></tr>
 <tr><td><b>D &gt; 1</b></td><td>Kriechfall — kein Überschwingen, aber langsam</td><td>Wo Überschwingen teuer ist: Fahrstuhl, Werkzeugzustellung</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Dieselbe Mathematik, anderes Fach.</b> Diese drei Kurven tauchen in der <a href="regelungstechnik.html#glieder">Regelungstechnik</a> als PT2-Glied wieder auf — und in der Mechanik als Feder-Masse-Dämpfer-System. Ein RLC-Kreis, ein Stoßdämpfer und ein geregelter Positionierantrieb gehorchen derselben Differentialgleichung zweiter Ordnung. Wer das einmal verstanden hat, spart sich das Lernen dreimal.</div>
+<div class="tip"><b>Dieselbe Mathematik, anderes Fach.</b> Diese drei Kurven sind das PT2-Glied der <a href="regelung-antriebe.html#glieder">Regelungstechnik</a> und das Feder-Masse-Dämpfer-System der Mechanik. Ein RLC-Kreis, ein Stoßdämpfer und ein geregelter Positionierantrieb gehorchen derselben Differentialgleichung zweiter Ordnung.</div>
 
-<h2>Ladungsausgleich und Einschaltströme</h2>
-<p>Ein leerer Kondensator ist im ersten Moment ein Kurzschluss. Beim Einschalten eines Netzteils mit 1000 µF Ausgangselko begrenzt nur der Innenwiderstand der Quelle plus der ESR des Elkos den Strom. Bei 12 V und 50 mΩ Gesamtwiderstand sind das rechnerisch 240 A Spitze — kurz, aber genug, um Schaltkontakte zu verschweißen und Leiterbahnen zu belasten.</p>
+<h2>Einschaltströme</h2>
+<p>Ein leerer Kondensator ist im ersten Moment ein Kurzschluss. Bei 1000 µF Ausgangselko, 12 V und 50 mΩ Gesamtwiderstand aus Quelle und ESR sind das rechnerisch 240 A Spitze — kurz, aber genug, um Schaltkontakte zu verschweißen.</p>
 <ul>
-  <li><b>NTC-Begrenzer</b> in Reihe: kalt hochohmig, warm niederohmig. Billig, aber bei schnellem Wiedereinschalten wirkungslos, weil noch heiß.</li>
-  <li><b>Vorladewiderstand mit Relais-Überbrückung</b>: der saubere Weg bei größeren Anlagen und in der Antriebstechnik.</li>
-  <li><b>Soft-Start im Regler</b>: der Wandler fährt die Ausgangsspannung in Millisekunden hoch, statt sie zuzuschalten. Bei modernen Schaltreglern eingebaut.</li>
+  <li><b>NTC-Begrenzer</b> in Reihe: kalt hochohmig, warm niederohmig. Billig, aber beim schnellen Wiedereinschalten wirkungslos, weil noch heiß.</li>
+  <li><b>Vorladewiderstand mit Relais-Überbrückung:</b> der saubere Weg bei größeren Anlagen und in der Antriebstechnik.</li>
+  <li><b>Soft-Start im Regler:</b> Der Wandler fährt die Ausgangsspannung in Millisekunden hoch, statt sie zuzuschalten — bei modernen Schaltreglern eingebaut.</li>
+  <li><b>Trafo-Einschaltstoß:</b> eigene Ursache (Remanenz + Sättigung), 10–40 × Nennstrom — siehe <a href="#felder">Felder, Spulen &amp; Trafos</a>.</li>
 </ul>
+
+<h2>Leitungswiderstand und Spannungsfall</h2>
+<div class="fbox">
+  <span class="f">R = ρ · l / A&nbsp;&nbsp;&nbsp;&nbsp;ΔU = 2 · l · I · ρ / A&nbsp;&nbsp;(Hin- und Rückleiter)</span>
+  <span class="l">ρ_Cu = 0,0175 Ω·mm²/m bei 20 °C. Der Faktor 2 wird gern vergessen — der Strom muss auch zurück. Beispiel: 5 m, 2 × 0,75 mm², 6 A → R = 0,233 Ω, ΔU = 1,4 V, also 12 % Verlust an 12 V und 8,4 W in Wärme.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="num">Querschnitt</th><th data-s="num">Widerstand je m (Cu)</th><th>Richtwert frei in Luft</th><th>Typische Verwendung</th></tr></thead>
+<tbody>
+<tr><td><b>0,14 mm²</b></td><td>0,125 Ω</td><td>~2 A</td><td>Signal- und Sensorleitungen</td></tr>
+<tr><td><b>0,25 mm²</b></td><td>0,070 Ω</td><td>~4 A</td><td>Kleinsignale, Servokabel</td></tr>
+<tr><td><b>0,5 mm²</b></td><td>0,035 Ω</td><td>~7 A</td><td>Fahrzeuginnenraum, kleine Verbraucher</td></tr>
+<tr><td><b>0,75 mm²</b></td><td>0,023 Ω</td><td>~10 A</td><td>Geräteanschlussleitungen</td></tr>
+<tr><td><b>1,5 mm²</b></td><td>0,0117 Ω</td><td>~16 A</td><td>Lichtstromkreise im Haus</td></tr>
+<tr><td><b>2,5 mm²</b></td><td>0,0070 Ω</td><td>~20 A</td><td>Steckdosenstromkreise</td></tr>
+<tr><td><b>4 mm²</b></td><td>0,0044 Ω</td><td>~25 A</td><td>Herdanschluss, Zuleitungen</td></tr>
+<tr><td><b>6 mm²</b></td><td>0,0029 Ω</td><td>~35 A</td><td>Unterverteilungen</td></tr>
+<tr><td><b>10 mm²</b></td><td>0,0018 Ω</td><td>~50 A</td><td>Wechselrichter, Batteriekabel</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Diese Ströme sind Richtwerte, keine Bemessung.</b> Verbindlich ist DIN VDE 0298-4 mit Tabellen nach Verlegeart, Umgebungstemperatur und Häufung; für die feste Installation zusätzlich DIN VDE 0100-520. Nicht der Spannungsfall begrenzt eine Leitung, sondern die zulässige Leitertemperatur der Isolierung: PVC 70 °C, XLPE 90 °C, Silikon 180 °C. Sechs Adern im selben Rohr tragen je nur noch rund 57 %; bei 50 °C Umgebung statt 30 °C bleiben von 16 A rund 12 A.</div>
+
+<h2>Skin- und Proximity-Effekt</h2>
+<div class="fbox"><span class="f">δ ≈ 66 mm / √(f in Hz)</span><span class="l">Eindringtiefe in Kupfer — dort ist die Stromdichte auf 37 % gefallen.</span></div>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Frequenz</th><th>δ in Kupfer</th><th>Konsequenz</th></tr></thead>
+<tbody>
+<tr><td>50 Hz</td><td>9,3 mm</td><td>nur bei Sammelschienen und dicken Kabeln relevant</td></tr>
+<tr><td>1 kHz</td><td>2,1 mm</td><td>bei üblichen Querschnitten kaum spürbar</td></tr>
+<tr><td>100 kHz</td><td>0,21 mm</td><td>Schaltnetzteil-Drosseln: HF-Litze statt Volldraht</td></tr>
+<tr><td>1 MHz</td><td>0,066 mm</td><td>Leiterbahndicke reicht bei Weitem — die Breite zählt</td></tr>
+<tr><td>1 GHz</td><td>2,1 µm</td><td>Oberflächenrauheit der Kupferfolie beeinflusst die Dämpfung</td></tr>
+</tbody>
+</table></div>
+<p class="note">Dazu kommt der Proximity-Effekt: Benachbarte Leiter mit Wechselstrom verdrängen den Strom zusätzlich. In dicht gewickelten Spulen erhöht er den Wechselstromwiderstand oft stärker als der Skin-Effekt allein — deshalb HF-Litze aus vielen dünnen, gegeneinander isolierten und verdrillten Einzeldrähten.</p>
+
+<h2>Wellenwiderstand und Schirmung</h2>
+<div class="fbox"><span class="f">kritische Länge ≈ t_r · v / 6</span>
+<span class="l">t_r = Anstiegszeit, v ≈ 15 cm/ns auf FR4-Innenlagen, ≈ 18–20 cm/ns auf Außenlagen. 1 ns Anstiegszeit ergibt rund 2,5 cm — nicht die Taktfrequenz entscheidet, sondern die Flankensteilheit.</span></div>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Leitungstyp</th><th>Wellenwiderstand</th><th>Wo</th></tr></thead>
+<tbody>
+<tr><td><b>Koaxial RG-58</b></td><td>50 Ω</td><td>Messtechnik, HF, Tastkopfzuleitungen</td></tr>
+<tr><td><b>Koaxial RG-59 / RG-6</b></td><td>75 Ω</td><td>Video, Antennentechnik</td></tr>
+<tr><td><b>Twisted Pair (Cat 5e/6)</b></td><td>100 Ω differentiell</td><td>Ethernet, RS-485; USB 90 Ω</td></tr>
+<tr><td><b>Microstrip auf FR4</b></td><td>50 Ω bei passender Breite</td><td>Leiterplatten-Signalleitungen</td></tr>
+<tr><td><b>CAN-Bus</b></td><td>120 Ω, an beiden Enden abgeschlossen</td><td>Fahrzeug- und Industriebus</td></tr>
+</tbody>
+</table></div>
+<div class="gb">
+  <div class="gb-col"><h4>Verdrillen</h4><ul>
+    <li>Wirkt gegen <b>magnetische</b> Einkopplung: Die in aufeinanderfolgenden Schlaufen induzierten Spannungen haben abwechselndes Vorzeichen und heben sich auf</li>
+    <li>Kostet nichts, hilft auch bei simplen Sensorleitungen</li>
+  </ul></div>
+  <div class="gb-col"><h4>Schirmen</h4><ul>
+    <li>Wirkt gegen <b>elektrische</b> Einkopplung, ab höheren Frequenzen auch magnetisch</li>
+    <li>Niederfrequente Analogsignale: Schirm <b>einseitig</b> auflegen (sonst Brummschleife)</li>
+    <li>HF und digitale Busse: <b>beidseitig</b> auflegen</li>
+  </ul></div>
+</div>
+<div class="tip"><b>Die wirksamste Einzelmaßnahme:</b> Hin- und Rückleiter dicht beieinander führen. Die eingeschlossene Schleifenfläche bestimmt, wie gut eine Leitung Störungen aufnimmt und abstrahlt. Eine durchgehende Massefläche unter jeder Signalleitung erledigt das automatisch — mehr dazu unter <a href="#emv">EMV, Masse &amp; Entkopplung</a> und <a href="leiterplatte-kicad.html#signal">Leiterplatte → Signalintegrität</a>.</div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
     <li>Albach, <i>Grundlagen der Elektrotechnik 2</i>, Kapitel Ausgleichsvorgänge.</li>
-    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Abschnitte zu RC-Zeitkonstanten und Snubbern.</li>
-    <li>Vishay und TDK: Application Notes zu NTC-Einschaltstrombegrenzern mit Auslegungsbeispielen.</li>
-    <li><a href="https://www.falstad.com/circuit/">Falstad Circuit Simulator</a>: die drei Dämpfungsfälle lassen sich dort in einer Minute selbst erzeugen.</li>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed. — RC-Zeitkonstanten, Snubber, Leitungsreflexionen.</li>
+    <li>DIN VDE 0298-4 (Strombelastbarkeit nach Verlegeart) und DIN VDE 0100-520 (Kabel- und Leitungsanlagen).</li>
+    <li>Howard Johnson, Martin Graham, <i>High-Speed Digital Design</i> — kritische Länge und Reflexionen.</li>
+    <li>Henry W. Ott, <i>Electromagnetic Compatibility Engineering</i>, Wiley — Schirmung, Verdrillung, Rückstrompfade.</li>
+    <li><a href="https://www.falstad.com/circuit/">Falstad Circuit Simulator</a>: die drei Dämpfungsfälle in einer Minute selbst erzeugt.</li>
   </ul>
 </div>

@@ -5,65 +5,86 @@ import "./_style.css";
 
 <h2>Bestücken in der richtigen Reihenfolge</h2>
 <div class="steps">
-  <div class="step"><h4>Flach vor hoch</h4>Erst SMD, dann Durchsteckbauteile, dann große Bauteile wie Elkos und Steckverbinder. Sonst liegt die Platine nicht mehr plan auf.</div>
-  <div class="step"><h4>Nur die Spannungsversorgung zuerst</h4>Regler, Kondensatoren, Schutzbeschaltung. Alles andere bleibt zunächst unbestückt.</div>
-  <div class="step"><h4>Versorgung prüfen, bevor der Rest kommt</h4>Ein defekter Regler, der 12 V statt 3,3 V liefert, zerstört sonst jeden Baustein auf der Platine gleichzeitig.</div>
-  <div class="step"><h4>Controller und Debug-Anschluss</h4>Erst wenn die Versorgung stimmt. Danach prüfen, ob sich der Baustein über SWD melden lässt.</div>
-  <div class="step"><h4>Peripherie einzeln</h4>Eine Baugruppe nach der anderen, mit jeweils einem kurzen Test. Der Aufwand wirkt übertrieben — bis der erste Fehler in zehn Sekunden statt in drei Stunden gefunden ist.</div>
+  <div class="step"><h4>Flach vor hoch</h4>Erst SMD, dann Durchsteckbauteile, zuletzt hohe Teile wie Elkos und Steckverbinder — sonst liegt die Platine nicht mehr plan auf.</div>
+  <div class="step"><h4>Nur die Spannungsversorgung zuerst</h4>Regler, Kondensatoren, Schutzbeschaltung. Alles andere bleibt vorerst unbestückt.</div>
+  <div class="step"><h4>Versorgung prüfen, bevor der Rest kommt</h4>Ein Regler, der 12 V statt 3,3 V liefert, zerstört sonst jeden Baustein der Platine gleichzeitig.</div>
+  <div class="step"><h4>Controller und Debug-Anschluss</h4>Erst wenn die Versorgung stimmt. Danach prüfen, ob sich der Baustein über SWD meldet → <a href="embedded-firmware.html#debug">Embedded → Debuggen</a>.</div>
+  <div class="step"><h4>Peripherie einzeln</h4>Eine Baugruppe nach der anderen mit jeweils einem kurzen Test. Der Aufwand wirkt übertrieben — bis der erste Fehler in zehn Sekunden statt in drei Stunden gefunden ist.</div>
 </div>
 
+<h2>Lotpaste und Reflow — die Eckwerte</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Phase</th><th>Temperatur</th><th>Dauer</th><th>Was dabei passiert</th></tr></thead>
+<tbody>
+<tr><td><b>1 · Vorheizen (Ramp)</b></td><td>25 → 150 °C, höchstens 3 K/s</td><td>60–90 s</td><td>Lösungsmittel dampfen aus der Paste ab. Zu schnell erzeugt Spritzer und Lotperlen</td></tr>
+<tr><td><b>2 · Soak</b></td><td>150–180 °C</td><td>60–120 s</td><td>Flussmittel wird aktiv, Temperatur gleicht sich über die Platine an</td></tr>
+<tr><td><b>3 · Peak (Reflow)</b></td><td>bleifrei <b>240–250 °C</b> · bleihaltig <b>205–215 °C</b></td><td>30–60 s über Schmelzpunkt</td><td>Lot wird flüssig, Bauteile ziehen sich mittig (Self-Alignment)</td></tr>
+<tr><td><b>4 · Abkühlen</b></td><td>Peak → unter 100 °C, höchstens 6 K/s</td><td>—</td><td>Schockkühlen macht Lötstellen spröde und verzieht das Board</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Peak-Regel:</b> 20–30 K über dem Schmelzpunkt des Lots, so kurz wie möglich. SAC305 schmilzt bei 217–220 °C, Sn63Pb37 bei 183 °C. Das Datenblatt der Paste schlägt jede Ofenvoreinstellung — vollständiges Profil samt Heizplattenpraxis unter <a href="loeten-referenz.html#heizplatte">Löten → Heizplatte</a> und <a href="loeten-referenz.html#heissluft">Heißluft &amp; Reflow</a>.</div>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th data-s="text">Material</th><th>Kennwert</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Lotpaste Typ 3</b></td><td>Korngröße 25–45 µm</td><td>Standard bis etwa 0,5 mm Raster</td></tr>
+<tr><td><b>Lotpaste Typ 4</b></td><td>Korngröße 20–38 µm</td><td>Für QFN, 0402 und feinere Raster; teurer und kürzer haltbar</td></tr>
+<tr><td><b>Lagerung</b></td><td>kühl, 0–10 °C</td><td>Vor dem Öffnen <b>verschlossen</b> auf Raumtemperatur bringen (zwei bis vier Stunden), sonst schlägt sich Wasser nieder</td></tr>
+<tr><td><b>Schablonendicke</b></td><td>0,10–0,12 mm</td><td>Dünner nur bei sehr feinem Raster; Öffnungsverhältnis (Fläche zu Wandfläche) über 0,66 halten, sonst bleibt die Paste in der Öffnung</td></tr>
+</tbody>
+</table></div>
+
 <h2>Sichtprüfung vor dem Einschalten</h2>
-<div class="tbl-wrap"><table style="min-width:860px">
-<thead><tr><th>Prüfung</th><th>Werkzeug</th><th>Wonach man sucht</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Prüfung</th><th>Werkzeug</th><th>Wonach man sucht</th></tr></thead>
 <tbody>
 <tr><td><b>Polarität</b></td><td>Auge, Lupe</td><td>Dioden, Elkos, ICs, Tantalkondensatoren — der häufigste Bestückungsfehler</td></tr>
-<tr><td><b>Lötbrücken</b></td><td>Mikroskop oder Lupe, gegen Licht</td><td>Besonders an feinen Rastern und an QFN-Kanten</td></tr>
-<tr><td><b>Kalte Stellen</b></td><td>Mikroskop</td><td>Matte, kugelige Lötstellen ohne Benetzung</td></tr>
+<tr><td><b>Lötbrücken</b></td><td>Mikroskop, gegen Licht</td><td>Besonders an feinen Rastern und QFN-Kanten</td></tr>
+<tr><td><b>Kalte Stellen</b></td><td>Mikroskop</td><td>Matte, kugelige Lötstellen ohne Benetzung → <a href="loeten-referenz.html#fehler">Löten → Fehler &amp; Regeln</a></td></tr>
 <tr><td><b>Verrutschte Bauteile</b></td><td>Auge</td><td>Grabsteineffekt bei Passiven, verdrehte ICs</td></tr>
-<tr><td><b>Kurzschluss Versorgung zu Masse</b></td><td>Multimeter, Widerstandsmessung</td><td>Vor dem ersten Einschalten. Ein Wert unter etwa 10 Ω ist verdächtig; wenige hundert Ohm bis Kilo-Ohm sind normal (Abblockkondensatoren und Verbraucher)</td></tr>
-<tr><td><b>Durchgang wichtiger Netze</b></td><td>Multimeter, Durchgangsprüfer</td><td>Masse an allen Massepins, Versorgung an allen Versorgungspins</td></tr>
+<tr><td><b>Kurzschluss Versorgung–Masse</b></td><td>Multimeter, Widerstandsmessung</td><td>Unter 1 Ω ist praktisch sicher ein Kurzschluss, unter etwa 10 Ω verdächtig. Der Wert steigt beim Messen langsam an, weil das Messgerät die Abblockkondensatoren erst lädt</td></tr>
+<tr><td><b>Durchgang wichtiger Netze</b></td><td>Durchgangsprüfer</td><td>Masse an allen Massepins, Versorgung an allen Versorgungspins</td></tr>
 </tbody>
 </table></div>
 
 <h2>Erstinbetriebnahme</h2>
 <div class="steps">
-  <div class="step"><h4>Labornetzteil mit Strombegrenzung</h4>Spannung einstellen, Strombegrenzung auf einen Wert knapp über der Erwartung — bei einer kleinen Baugruppe 50–150 mA. Dann erst anschließen.</div>
-  <div class="step"><h4>Stromaufnahme beobachten</h4>Geht das Netzteil sofort in die Begrenzung, liegt ein Kurzschluss vor. Abschalten, suchen.</div>
-  <div class="step"><h4>Spannungen messen</h4>An jedem Prüfpunkt, gegen Masse. Stimmen alle Werte? Auch die, die man nicht erwartet hat?</div>
-  <div class="step"><h4>Temperatur fühlen</h4>Vorsichtig mit dem Finger über die Bauteile — oder besser mit einer Wärmebildkamera. Ein heißes Bauteil zeigt den Fehler direkt an.</div>
-  <div class="step"><h4>Rippel und Rauschen ansehen</h4>Oszilloskop, AC-Kopplung, direkt am Versorgungspin. Ein Schaltregler mit 200 mV Rippel ist ein Problem, das später schwer zu finden ist.</div>
-  <div class="step"><h4>Erst dann Signale prüfen</h4>Takt vorhanden? Reset auf High? Debug-Schnittstelle antwortet? Danach Firmware aufspielen.</div>
+  <div class="step"><h4>1 · Netzteil vorbereiten</h4>Spannung im Leerlauf einstellen, Strombegrenzung knapp über die Erwartung setzen — bei einer kleinen Baugruppe 50–150 mA. <b>Danach</b> anschließen.</div>
+  <div class="step"><h4>2 · Stromaufnahme beobachten</h4>Geht das Netzteil sofort in die Begrenzung, liegt ein Kurzschluss vor: abschalten, suchen.</div>
+  <div class="step"><h4>3 · Spannungen messen</h4>An jedem Prüfpunkt gegen Masse. Stimmen alle Werte — auch die, die man nicht erwartet hat?</div>
+  <div class="step"><h4>4 · Temperatur prüfen</h4>Vorsichtig mit dem Finger oder mit der Wärmebildkamera. Ein heißes Bauteil zeigt den Fehler direkt an.</div>
+  <div class="step"><h4>5 · Rippel ansehen</h4>Oszilloskop, AC-Kopplung, direkt am Versorgungspin. Ein Schaltregler mit 200 mV Rippel ist ein Problem, das später schwer zu finden ist.</div>
+  <div class="step"><h4>6 · Erst dann Signale und Firmware</h4>Takt vorhanden? Reset auf dem inaktiven Pegel (bei nRST: High)? Meldet sich die Debug-Schnittstelle? Danach flashen.</div>
 </div>
-<div class="stop"><b>Rauchentwicklung ist ein Diagnosewerkzeug, aber ein teures.</b> Wer ohne Strombegrenzung einschaltet, verliert bei einem Bestückungsfehler nicht nur ein Bauteil, sondern oft die ganze Baugruppe — und mit ihr die Information, welcher Fehler ursprünglich vorlag. Ein Labornetzteil mit einstellbarer Strombegrenzung ist die lohnendste Anschaffung für alle, die eigene Platinen bauen.</div>
+<div class="stop"><b>Rauchentwicklung ist ein Diagnosewerkzeug, aber ein teures.</b> Wer ohne Strombegrenzung einschaltet, verliert bei einem Bestückungsfehler oft die ganze Baugruppe — und mit ihr die Information, welcher Fehler ursprünglich vorlag.</div>
 
 <h2>Fehlersuche auf einer neuen Platine</h2>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th>Symptom</th><th>Wahrscheinliche Ursachen</th><th>Vorgehen</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Symptom</th><th>Wahrscheinliche Ursachen</th><th>Vorgehen</th></tr></thead>
 <tbody>
-<tr><td><b>Sofortiger Kurzschluss</b></td><td>Lötbrücke, verpolter Elko, falsch bestücktes Bauteil, Kupferrest am Rand</td><td>Widerstand von Versorgung zu Masse messen, Baugruppen einzeln auftrennen, Wärmebild bei kleiner Spannung</td></tr>
-<tr><td><b>Regler liefert keine Spannung</b></td><td>Enable-Pin offen, fehlender Kondensator, falsche Rückkopplungswiderstände, Baustein verdreht</td><td>Eingangsspannung prüfen, Enable messen, Referenzschaltung im Datenblatt vergleichen</td></tr>
+<tr><td><b>Sofortiger Kurzschluss</b></td><td>Lötbrücke, verpolter Elko, falsch bestücktes Bauteil, Kupferrest am Rand</td><td>Widerstand Versorgung–Masse messen, Baugruppen auftrennen, Wärmebild bei kleiner Spannung</td></tr>
+<tr><td><b>Regler liefert keine Spannung</b></td><td>Enable-Pin offen, fehlender Kondensator, falsche Rückkopplungswiderstände, Baustein verdreht</td><td>Eingangsspannung prüfen, Enable messen, mit der Referenzschaltung im Datenblatt vergleichen</td></tr>
 <tr><td><b>Controller meldet sich nicht</b></td><td>Kein Takt, Reset hängt, Boot-Pins falsch, Versorgungspin nicht angeschlossen, SWD-Pins umkonfiguriert</td><td>Alle Versorgungspins messen, Reset-Pegel prüfen, Quarz am Oszilloskop ansehen</td></tr>
 <tr><td><b>Funktioniert nur manchmal</b></td><td>Kalte Lötstelle, Haarriss, fehlender Pull-Widerstand, Versorgungseinbruch</td><td>Vorsichtig biegen und dabei messen, Versorgung im Betrieb am Oszilloskop beobachten</td></tr>
-<tr><td><b>Bus antwortet nicht</b></td><td>Adressfehler, fehlende Pull-ups, SPI-Modus falsch, Leitungen vertauscht</td><td>Logikanalysator anschließen — er zeigt in Sekunden, ob überhaupt etwas gesendet wird</td></tr>
-<tr><td><b>Störungen im Analogteil</b></td><td>Schaltregler-Einkopplung, Masseschleife, fehlende Abblockung</td><td>Spektrum ansehen: Spitzen bei der Schaltfrequenz zeigen die Quelle direkt</td></tr>
+<tr><td><b>Bus antwortet nicht</b></td><td>Adressfehler, fehlende Pull-ups, SPI-Modus falsch, Leitungen vertauscht</td><td>Logikanalysator anschließen → <a href="embedded-firmware.html#busse">Bussysteme</a></td></tr>
+<tr><td><b>Störungen im Analogteil</b></td><td>Schaltregler-Einkopplung, Masseschleife, fehlende Abblockung</td><td>Spektrum ansehen: Spitzen bei der Schaltfrequenz zeigen die Quelle → <a href="#layout">Layout-Regeln</a></td></tr>
 </tbody>
 </table></div>
 
-<h2>Änderungen an der Platine</h2>
-<div class="grid">
-  <div class="card"><div class="ct">Fädeldraht</div><div class="cd">Dünner lackisolierter Draht (0,1–0,2 mm) für Korrekturen. Mit Heißkleber oder Lack fixieren, damit er nicht abreißt.</div></div>
-  <div class="card"><div class="ct">Leiterbahn auftrennen</div><div class="cd">Mit einem Skalpell zweimal einritzen und das Stück dazwischen abheben. Danach mit dem Durchgangsprüfer kontrollieren.</div></div>
-  <div class="card"><div class="ct">Bauteil huckepack</div><div class="cd">Ein zusätzlicher Widerstand oder Kondensator direkt auf ein bestehendes Bauteil gelötet. Funktioniert, sieht schlecht aus, ist für einen Prototyp völlig in Ordnung.</div></div>
-  <div class="card"><div class="ct">Alles dokumentieren</div><div class="cd">Jede Änderung sofort in den Schaltplan eintragen, mit Foto. Nach der dritten Änderung weiß niemand mehr, was auf der Platine wirklich verbaut ist — und die nächste Fertigung übernimmt den alten Fehler.</div></div>
-</div>
-
-<h2>Vom Prototyp zur zweiten Runde</h2>
-<div class="steps">
-  <div class="step"><h4>Alle Änderungen sammeln</h4>Fädeldrähte, getauschte Werte, entfernte Bauteile, Fehler im Bestückungsdruck.</div>
-  <div class="step"><h4>Erkenntnisse notieren</h4>Was war zu eng, was zu schwer erreichbar, welcher Testpunkt fehlte, welches Bauteil war nicht lieferbar.</div>
-  <div class="step"><h4>Beides ins Layout übernehmen</h4>Zusammen, in einem Durchgang. Nicht einzeln über Wochen — dabei geht etwas verloren.</div>
-  <div class="step"><h4>Versionsnummer erhöhen</h4>Auf der Platine sichtbar. Zwei Versionen einer Baugruppe ohne unterscheidbare Kennzeichnung sind eine sichere Quelle für Verwechslungen.</div>
-  <div class="step"><h4>Prototyp aufheben</h4>Beschriftet, mit den dokumentierten Änderungen. Er ist die Referenz, wenn die neue Version sich anders verhält.</div>
+<h2>Nacharbeit und zweite Runde</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Erlaubte Korrekturen am Prototyp</h4><ul>
+    <li><b>Fädeldraht:</b> lackisolierter Draht 0,1–0,2 mm, mit Heißkleber oder Lack gegen Abreißen fixieren</li>
+    <li><b>Leiterbahn auftrennen:</b> zweimal mit dem Skalpell einritzen, Stück abheben, mit dem Durchgangsprüfer kontrollieren</li>
+    <li><b>Bauteil huckepack:</b> zusätzlicher Widerstand oder Kondensator direkt auf ein bestehendes Bauteil — sieht schlecht aus, ist für einen Prototyp in Ordnung</li>
+    <li><b>Jede Änderung sofort in den Schaltplan</b> eintragen, mit Foto</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Was die zweite Runde ruiniert</h4><ul>
+    <li>Änderungen nur auf der Platine, nicht im Projekt — die nächste Fertigung übernimmt den alten Fehler</li>
+    <li>Korrekturen einzeln über Wochen ins Layout tragen: dabei geht etwas verloren</li>
+    <li>Keine sichtbare Versionsnummer auf der Platine — zwei Stände werden sicher verwechselt</li>
+    <li>Den Prototyp wegwerfen, statt ihn beschriftet als Referenz zu behalten</li>
+    <li>Nur Fehler sammeln: auch notieren, was zu eng saß, welcher Prüfpunkt fehlte, welches Bauteil nicht lieferbar war</li>
+  </ul></div>
 </div>
 
 <div class="srcs">
@@ -71,7 +92,8 @@ import "./_style.css";
   <ul>
     <li>IPC-A-610 — Abnahmekriterien für elektronische Baugruppen; die Bildreferenz für gute und schlechte Lötstellen.</li>
     <li>IPC-7711/7721 — Nacharbeit und Reparatur von Leiterplatten (Fädeldrähte, Padreparatur).</li>
-    <li>Praktische Löttechnik und Fehlerbilder: <a href="loeten-referenz.html#fehler">Löten → Fehler &amp; Regeln</a>.</li>
+    <li>IPC/JEDEC J-STD-020 — Reflow-Profil und zulässige Höchsttemperaturen für Bauteile; IPC J-STD-005 für die Korngrößen der Lotpaste.</li>
+    <li>Löttechnik, Profile und Fehlerbilder: <a href="loeten-referenz.html#smd">Löten → SMD</a> und <a href="loeten-referenz.html#fehler">Fehler &amp; Regeln</a>.</li>
     <li>Messgerätebedienung und systematische Fehlersuche: <a href="elektronik-grundlagen.html#fehlersuche">Elektronik 101 → Fehlersuche</a>.</li>
   </ul>
 </div>

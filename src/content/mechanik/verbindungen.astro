@@ -1,0 +1,141 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Drehmoment kommt über Form- oder Reibschluss von der Welle ins Bauteil — Bleche und Profile werden geschweißt, geklebt oder genietet.</b> Unlösbare Verbindungen sind leichter, steifer und billiger als geschraubte, solange man nie wieder heran muss. Bei Lastwechsel entscheidet, ob Spiel in der Verbindung sitzt.</div>
+
+<h2>Welle-Nabe-Verbindungen im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Verbindung</th><th>Prinzip</th><th data-s="text">Stärken</th><th data-s="text">Schwächen</th></tr></thead>
+<tbody>
+<tr><td><b>Passfeder</b> (DIN 6885)</td><td>Formschluss über einen eingelegten Keil</td><td>Billig, lösbar, überall verfügbar; Nabe axial verschiebbar</td><td>Kerbwirkung in der Welle, Spiel in Umfangsrichtung, schlägt bei Lastwechsel aus, zentriert nicht</td></tr>
+<tr><td><b>Presssitz / Schrumpfsitz</b></td><td>Reibschluss durch Übermaß</td><td>Höchste Momentdichte, spielfrei, zentriert perfekt, keine Kerbe</td><td>Montage nur mit Presse oder Temperaturunterschied, Demontage oft zerstörend, Toleranzen kritisch</td></tr>
+<tr><td><b>Spannsatz / Schrumpfscheibe</b></td><td>Reibschluss über Kegelflächen, per Schrauben aufgebaut</td><td>Lösbar, spielfrei, kein Übermaß nötig, axial und winklig einstellbar</td><td>Braucht Bauraum, teurer, Anziehreihenfolge muss stimmen</td></tr>
+<tr><td><b>Klemmnabe (geschlitzt)</b></td><td>Reibschluss durch Zusammenklemmen</td><td>Sehr einfach, lösbar, keine Wellenbearbeitung nötig</td><td>Begrenztes Moment, Nabe muss nachgiebig sein, Verformungsgefahr bei dünnen Wellen</td></tr>
+<tr><td><b>Polygonprofil</b> (DIN 32711/32712)</td><td>Formschluss über unrunde Kontur</td><td>Kaum Kerbwirkung, hohe Momentdichte, zentriert</td><td>Teure Fertigung — Unrunddrehen oder Erodieren</td></tr>
+<tr><td><b>Zahnwelle / Keilwelle</b> (DIN 5480)</td><td>Formschluss über viele Zähne</td><td>Sehr hohes Moment, axial unter Last verschiebbar</td><td>Teuer, Spiel vorhanden, braucht Wälzfräser oder Räumnadel</td></tr>
+<tr><td><b>Stiftverbindung</b></td><td>Formschluss über Quer- oder Kerbstift</td><td>Sehr billig, definierte Position</td><td>Schwächt die Welle stark, kleines Moment; für Prototypen und leichte Antriebe</td></tr>
+</tbody>
+</table></div>
+
+<h2>Passfeder und Presssitz auslegen</h2>
+<div class="fbox">
+  <span class="f">p = 2 · T / (d · h_tr · l_tr · n · φ) ≤ p_zul&nbsp;&nbsp;&nbsp;&nbsp;T_Presssitz = µ · p_Fuge · π · d² · l / 2</span>
+  <span class="l">Die Passfeder überträgt über Flächenpressung an den Flanken, nicht über Abscherung: h_tr tragende Höhe (≈ 0,45 · h), l_tr tragende Länge, n Anzahl, φ Traganteil (0,75 bei zwei Federn). Der Fugendruck des Presssitzes folgt aus Übermaß, Durchmessern und E-Moduln nach DIN 7190.</span>
+</div>
+<div class="grid2">
+  <div>
+    <div class="tbl-wrap"><table style="min-width:280px">
+    <thead><tr><th data-s="num">Wellen-Ø [mm]</th><th>b × h</th><th data-s="num">Nuttiefe t₁</th></tr></thead>
+    <tbody>
+    <tr><td>über 6 bis 8</td><td>2 × 2</td><td>1,2</td></tr>
+    <tr><td>über 8 bis 10</td><td>3 × 3</td><td>1,8</td></tr>
+    <tr><td>über 10 bis 12</td><td>4 × 4</td><td>2,5</td></tr>
+    <tr><td>über 12 bis 17</td><td>5 × 5</td><td>3,0</td></tr>
+    <tr><td>über 17 bis 22</td><td>6 × 6</td><td>3,5</td></tr>
+    <tr><td>über 22 bis 30</td><td>8 × 7</td><td>4,0</td></tr>
+    <tr><td>über 30 bis 38</td><td>10 × 8</td><td>5,0</td></tr>
+    <tr><td>über 38 bis 44</td><td>12 × 8</td><td>5,0</td></tr>
+    <tr><td>über 44 bis 50</td><td>14 × 9</td><td>5,5</td></tr>
+    </tbody>
+    </table></div>
+  </div>
+  <div>
+    <div class="tbl-wrap"><table style="min-width:280px">
+    <thead><tr><th data-s="text">Passung</th><th>Charakter</th><th>Fügen</th></tr></thead>
+    <tbody>
+    <tr><td>H7 / k6</td><td>Übergangssitz</td><td>Leichter Schlag oder kleine Presse</td></tr>
+    <tr><td>H7 / m6</td><td>Fester Übergangssitz</td><td>Presse; Verdrehsicherung ratsam</td></tr>
+    <tr><td>H7 / n6</td><td>Fester Sitz</td><td>Presse; überträgt bereits Moment</td></tr>
+    <tr><td>H7 / p6</td><td>Presssitz</td><td>Presse oder Temperaturunterschied</td></tr>
+    <tr><td>H7 / s6</td><td>Starker Presssitz</td><td>Schrumpfen: Nabe erwärmen oder Welle kühlen</td></tr>
+    </tbody>
+    </table></div>
+  </div>
+</div>
+<div class="warn"><b>Passfeder und Wechsellast vertragen sich schlecht.</b> Durch das Spiel in Umfangsrichtung schlägt die Nut bei jedem Drehrichtungswechsel aus, und die Kerbe in der Nut wird zum Dauerbruchausgang. Bei reversierenden Antrieben, Servoachsen und allem mit Lastspielen ist ein Spannsatz oder Presssitz die richtige Wahl. Grenzmaße und Übermaß liefert der Rechner unter <a href="#toleranzen">Toleranzen, Passungen &amp; Oberflächen</a>.</div>
+<div class="tip"><b>Schrumpfen statt Pressen:</b> 100 K Temperaturdifferenz ergeben bei Stahl rund 1,2 ‰ Durchmesseränderung — bei Ø 50 mm sind das 60 µm, deutlich mehr als jedes übliche Übermaß. Nabe auf 150 °C erwärmen oder Welle mit Trockeneis kühlen, dann fügt sich das Teil kraftlos. Der Vorteil: die Oberflächen werden nicht abgerissen, der Sitz hält deutlich mehr aus.</div>
+
+<h2>Unlösbare Verbindungen im Überblick</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Verfahren</th><th>Werkstoffe</th><th data-s="text">Stärken</th><th data-s="text">Grenzen</th></tr></thead>
+<tbody>
+<tr><td><b>MAG-Schweißen (135)</b></td><td>Un- und niedriglegierter Stahl</td><td>Schnell, günstig, automatisierbar, hohe Festigkeit</td><td>Verzug, Wärmeeinflusszone, Schutzgas nötig</td></tr>
+<tr><td><b>WIG-Schweißen (141)</b></td><td>Edelstahl, Aluminium, Titan, dünne Bleche</td><td>Sauberste Nähte, volle Kontrolle, alle Werkstoffe</td><td>Langsam, hoher Übungsaufwand, teureres Gerät</td></tr>
+<tr><td><b>Hartlöten</b></td><td>Stahl, Kupfer, Messing, Hartmetall</td><td>Geringer Verzug, verbindet ungleiche Metalle, dichtet</td><td>Deutlich geringere Festigkeit als Schweißen; Spaltmaß 0,05–0,2 mm entscheidend</td></tr>
+<tr><td><b>Strukturkleben</b></td><td>Fast alles, auch Mischbau</td><td>Flächige Lasteinleitung, keine Kerbwirkung, dichtet, isoliert galvanisch</td><td>Oberflächenvorbereitung ist alles; Alterung, Temperatur und Medien prüfen; kein Schälen</td></tr>
+<tr><td><b>Blindniet</b></td><td>Blech, Kunststoff, Mischbau</td><td>Einseitig zugänglich, schnell, kein Wärmeeintrag</td><td>Begrenzte Festigkeit, Loch schwächt, nur durch Ausbohren lösbar</td></tr>
+<tr><td><b>Stanznieten / Clinchen</b></td><td>Bleche, auch Mischbau</td><td>Kein Vorloch, kein Zusatzwerkstoff, sehr schnell</td><td>Braucht Zange oder Presse mit Zugang von beiden Seiten</td></tr>
+<tr><td><b>Einpressmutter / Gewindeeinsatz</b></td><td>Blech, Kunststoff, Druckteile</td><td>Macht dünnes Material schraubbar, wiederverwendbar</td><td>Braucht Vorbereitung; im Druckteil Heat-Set-Insert mit dem Lötkolben</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kleben</h2>
+<p>Klebeverbindungen versagen fast nie im Klebstoff, sondern an der Grenzfläche — und an der Kante, sobald geschält statt geschert wird.</p>
+<svg class="dg l" viewBox="0 0 420 122" role="img" aria-label="Überlappungsklebung auf Scherung im Vergleich zur Schälbeanspruchung an der Kante">
+  <rect class="box" x="25" y="38" width="110" height="13" />
+  <rect class="box" x="90" y="51" width="110" height="13" />
+  <path class="acc" d="M90,51 H135" />
+  <path class="w" d="M25,44.5 H10" />
+  <polygon class="f" points="12,40.5 12,48.5 3,44.5" />
+  <path class="w" d="M200,57.5 H215" />
+  <polygon class="f" points="213,53.5 213,61.5 222,57.5" />
+  <text class="lblb" x="112" y="86" text-anchor="middle">Überlappung: Scherung</text>
+  <text class="lbl" x="112" y="102" text-anchor="middle">flächig belastet, trägt viel</text>
+  <rect class="box" x="250" y="51" width="145" height="13" />
+  <path class="w" d="M250,48 H340 C362,48 372,38 378,24" />
+  <path class="acc" d="M250,48 H340" />
+  <polygon class="f" points="371,26 381,30 382,15" />
+  <text class="lblb" x="322" y="86" text-anchor="middle">Schälen an der Kante</text>
+  <text class="lbl" x="322" y="102" text-anchor="middle">Last auf einer Linie, reißt auf</text>
+</svg>
+<div class="steps">
+  <div class="step"><h4>Entfetten, aufrauen, nochmals entfetten</h4>Isopropanol oder Aceton mit fusselfreiem Tuch in eine Richtung; Schleifpapier 120–240 oder Strahlen entfernt Oxidschichten und vergrößert die Fläche. Fingerabdrücke sind Trennmittel.</div>
+  <div class="step"><h4>Primer bei kritischen Werkstoffen</h4>PP, PE und PTFE haben so geringe Oberflächenenergie, dass ohne Primer oder Plasmavorbehandlung nichts hält.</div>
+  <div class="step"><h4>Auf Scherung konstruieren</h4>Eine überlappte Klebung hält ein Vielfaches einer stumpf gestoßenen. Schälbeanspruchung an der Kante ist der häufigste Versagensbeginn.</div>
+  <div class="step"><h4>Schichtdicke 0,1–0,3 mm einhalten</h4>Zu dünn heißt Klebstoffmangel, zu dick heißt geringere Festigkeit. Glaskugeln im Klebstoff oder Abstandsdrähte halten das Maß.</div>
+</div>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Klebstofftyp</th><th data-s="num">Scherfestigkeit</th><th data-s="num">Temperatur</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Cyanacrylat</b> (Sekundenkleber)</td><td>10–20 N/mm²</td><td>−30 … +80 °C</td><td>Kleine Flächen, schnelle Fixierung; spröde, feuchtigkeitsempfindlich</td></tr>
+<tr><td><b>Epoxid, 2K</b></td><td>20–40 N/mm²</td><td>−40 … +120 °C</td><td>Der Strukturklebstoff: hohe Festigkeit, spaltfüllend, chemisch beständig</td></tr>
+<tr><td><b>Methacrylat, 2K</b></td><td>20–35 N/mm²</td><td>−40 … +120 °C</td><td>Zäher als Epoxid, verzeiht schlechtere Oberflächenvorbereitung</td></tr>
+<tr><td><b>Polyurethan, 1K/2K</b></td><td>8–20 N/mm²</td><td>−40 … +90 °C</td><td>Elastisch — für große Flächen und unterschiedliche Wärmedehnung</td></tr>
+<tr><td><b>Anaerob</b> (Loctite-Typen)</td><td>10–30 N/mm²</td><td>−55 … +150 °C</td><td>Nur im engen Spalt zwischen Metallen: Gewinde, Buchsen, Wellensitze</td></tr>
+<tr><td><b>Silikon</b></td><td>1–3 N/mm²</td><td>−60 … +200 °C</td><td>Dichten, nicht tragen; sehr dehnbar</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Kontaktkorrosion bei Mischbau:</b> Aluminium in direktem Kontakt mit Edelstahl oder Kohlefaser korrodiert in feuchter Umgebung, weil es der unedlere Partner ist. Eine Klebeschicht oder eine Kunststoffscheibe trennt die Metalle elektrisch und löst das Problem gleich mit — Spannungsreihe und Schutzverfahren unter <a href="#behandlung">Wärmebehandlung &amp; Korrosion</a>.</div>
+
+<h2>Schweißnähte gestalten</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Gut</h4>
+    <ul>
+      <li>Nähte aus hoch beanspruchten Zonen heraushalten</li>
+      <li>Symmetrisch schweißen, um Verzug auszugleichen</li>
+      <li>Heftpunkte großzügig setzen und über Kreuz durchschweißen</li>
+      <li>Kehlnahtdicke a ≈ 0,7 · kleinste Blechdicke</li>
+      <li>Zugänglichkeit für Brenner und Prüfung einplanen</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Schlecht</h4>
+    <ul>
+      <li>Nähte kreuzen sich oder häufen sich an einem Punkt</li>
+      <li>Naht quer zur Hauptzugrichtung an der Stelle des größten Moments</li>
+      <li>Umlaufende Naht an einer Welle — eine Kerbe rundherum</li>
+      <li>Vergüteten Stahl ohne Vor- und Nachwärmen schweißen</li>
+      <li>Verzinkte Teile ohne Absaugung schweißen (Zinkdämpfe)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN 6885-1 (Passfedern und Nuten, hohe Form) — Quelle der Maßtabelle; DIN 7190-1 (Pressverbände); DIN 5480 (Zahnwellen); DIN 32711/32712 (Polygonprofile P3G und P4C).</li>
+    <li>Roloff/Matek, <i>Maschinenelemente</i>, Springer Vieweg — Welle-Nabe-Verbindungen mit vollständigem Pressungsnachweis.</li>
+    <li>DIN EN ISO 4063 — Ordnungsnummern der Schweißverfahren (135, 141); DIN EN 1090-2 — Ausführung von Stahltragwerken.</li>
+    <li>DIN 2304-1 — Klebtechnische Fertigung: Anforderungen an den Prozess; die Norm hinter „Oberflächenvorbereitung ist alles“.</li>
+    <li>Technische Datenblätter der Hersteller als Primärquelle für Festigkeits- und Temperaturwerte: <a href="https://www.henkel-adhesives.com/">Henkel/Loctite</a>, <a href="https://www.3m.com/">3M</a>, <a href="https://www.weicon.de/">Weicon</a>.</li>
+  </ul>
+</div>

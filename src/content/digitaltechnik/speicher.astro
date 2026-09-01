@@ -1,48 +1,42 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Speicher unterscheiden sich in vier Dimensionen:</b> flüchtig oder nicht, wahlfrei oder blockweise, wie oft beschreibbar, wie schnell. Aus diesen vier Fragen ergibt sich in fast jedem Fall eindeutig, welche Technologie passt.</div>
+<div class="kurz"><b>Speicher wählt man über vier Fragen: flüchtig oder nicht, wahlfrei oder blockweise, wie oft beschreibbar, wie schnell.</b> Ein FPGA ist der Gegenentwurf zum Prozessor: Man beschreibt keine Befehlsfolge, sondern Hardware, die parallel existiert — aufgebaut aus genau denselben Bausteinen, Lookup-Tabellen und Flipflops.</div>
 
-<h2>Die Übersicht</h2>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th data-s="text">Typ</th><th>Flüchtig</th><th>Zugriff</th><th>Schreibzyklen</th><th>Geschwindigkeit</th><th>Typischer Einsatz</th></tr></thead>
+<h2>Speichertypen im Überblick</h2>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Typ</th><th>Flüchtig</th><th>Zugriff</th><th>Schreibzyklen</th><th>Tempo</th><th>Typischer Einsatz</th></tr></thead>
 <tbody>
 <tr><td><b>SRAM</b></td><td>ja</td><td>byteweise, wahlfrei</td><td>unbegrenzt</td><td>ns</td><td>Cache, Arbeitsspeicher im Mikrocontroller</td></tr>
 <tr><td><b>DRAM</b></td><td>ja (Refresh nötig)</td><td>zeilenweise</td><td>unbegrenzt</td><td>10–100 ns</td><td>Hauptspeicher in Rechnern und großen SoCs</td></tr>
-<tr><td><b>NOR-Flash</b></td><td>nein</td><td>lesen byteweise, löschen blockweise</td><td>10 000 – 100 000</td><td>lesen schnell, schreiben langsam</td><td>Programmspeicher im Mikrocontroller, Boot-ROM</td></tr>
-<tr><td><b>NAND-Flash</b></td><td>nein</td><td>seitenweise</td><td>1 000 – 100 000 (je nach SLC/MLC/TLC)</td><td>hoher Durchsatz, hohe Latenz</td><td>SSD, SD-Karte, eMMC</td></tr>
+<tr><td><b>NOR-Flash</b></td><td>nein</td><td>lesen wahlfrei, löschen sektorweise</td><td>10 000 – 100 000</td><td>lesen schnell, schreiben langsam</td><td>Programmspeicher, Boot-ROM, Code-Ausführung direkt aus dem Flash</td></tr>
+<tr><td><b>NAND-Flash</b></td><td>nein</td><td>seitenweise</td><td>100 – 100 000 (je nach SLC/MLC/TLC/QLC)</td><td>hoher Durchsatz, hohe Latenz</td><td>SSD, SD-Karte, eMMC</td></tr>
 <tr><td><b>EEPROM</b></td><td>nein</td><td>byteweise schreib- und löschbar</td><td>100 000 – 1 Mio.</td><td>Schreiben 3–10 ms je Seite</td><td>Kalibrierdaten, Konfiguration, Betriebsstundenzähler</td></tr>
-<tr><td><b>FRAM</b></td><td>nein</td><td>byteweise, wie RAM</td><td>10¹⁰ – 10¹⁴</td><td>ns, kein Schreibdelay</td><td>Datenlogger mit hoher Schreibrate, Zustandssicherung bei Spannungsausfall</td></tr>
-<tr><td><b>MRAM</b></td><td>nein</td><td>byteweise</td><td>praktisch unbegrenzt</td><td>ns</td><td>Industrie, Luftfahrt; teuer, aber sehr robust</td></tr>
+<tr><td><b>FRAM</b></td><td>nein</td><td>byteweise, wie RAM</td><td>10¹² – 10¹⁴</td><td>ns, kein Schreibdelay</td><td>Datenlogger mit hoher Schreibrate, Zustandssicherung bei Spannungsausfall</td></tr>
+<tr><td><b>MRAM</b></td><td>nein</td><td>byteweise</td><td>praktisch unbegrenzt</td><td>ns</td><td>Industrie, Luft- und Raumfahrt; teuer, sehr robust</td></tr>
 </tbody>
 </table></div>
-
-<h2>SRAM gegen DRAM</h2>
 <div class="gb">
   <div class="gb-col"><h4>SRAM — 6 Transistoren je Bit</h4>
-    <p>Zwei kreuzgekoppelte Inverter halten das Bit, solange Spannung anliegt. Kein Refresh, sehr schnell, sehr einfach anzusteuern.</p>
-    <ul><li>Groß und teuer je Bit</li><li>Deshalb nur wenige hundert Kilobyte im Mikrocontroller</li><li>Statischer Leckstrom bestimmt den Ruhestromverbrauch moderner Chips</li></ul>
+    <p>Zwei kreuzgekoppelte Inverter halten das Bit, solange Spannung anliegt.</p>
+    <ul><li>Kein Refresh, keine Wartezyklen, trivial anzusteuern</li><li>Groß und teuer je Bit — daher nur einige hundert Kilobyte im Mikrocontroller</li><li>Der Leckstrom bestimmt den Ruheverbrauch moderner Chips</li></ul>
   </div>
-  <div class="gb-col"><h4>DRAM — 1 Transistor plus 1 Kondensator</h4>
-    <p>Das Bit steckt als Ladung in einem winzigen Kondensator und muss alle paar Millisekunden aufgefrischt werden.</p>
-    <ul><li>Sehr hohe Dichte, billig je Gigabyte</li><li>Braucht einen Controller für Refresh, Zeilen- und Spaltenadressierung</li><li>Latenz durch Zeilenaktivierung — deshalb sind sequentielle Zugriffe viel schneller als wahlfreie</li></ul>
+  <div class="gb-col"><h4>DRAM — 1 Transistor + 1 Kondensator</h4>
+    <p>Das Bit steckt als Ladung in einem winzigen Kondensator und läuft aus.</p>
+    <ul><li>Jede Zeile muss innerhalb von 64 ms aufgefrischt werden (über 85 °C: 32 ms)</li><li>Sehr hohe Dichte, billig je Gigabyte, aber Controller-pflichtig</li><li>Zeilenaktivierung kostet Latenz — sequentielle Zugriffe sind weit schneller als wahlfreie</li></ul>
   </div>
 </div>
-<p class="note">Mikrocontroller mit externem Speicher (ESP32 mit PSRAM, STM32 mit FMC/SDRAM) haben dafür einen eigenen Controller an Bord. Der Zugriff ist dann deutlich langsamer als auf internes SRAM — bei zeitkritischem Code lohnt es sich, ihn ausdrücklich ins interne RAM zu legen.</p>
+<p class="note">Externer Speicher am Mikrocontroller (ESP32 mit PSRAM, STM32 mit FMC/SDRAM) hat einen eigenen Controller an Bord, ist aber deutlich langsamer als internes SRAM. Zeitkritischen Code deshalb ausdrücklich ins interne RAM legen — siehe <a href="embedded-firmware.html#speicherbild">Embedded &amp; Firmware → Speicherbild</a>.</p>
 
-<h2>Flash verstehen: warum Löschen blockweise geht</h2>
+<h2>Flash: warum Löschen blockweise geht</h2>
 <div class="steps">
-  <div class="step"><h4>Programmieren heißt: Bits von 1 auf 0 setzen</h4>Ein gelöschter Flash-Sektor besteht aus lauter Einsen. Beim Schreiben werden gezielt Nullen gesetzt — einzelne Bits von 0 zurück auf 1 geht nicht.</div>
-  <div class="step"><h4>Löschen setzt einen ganzen Block auf 1</h4>Blockgrößen liegen bei 4 kB (NOR-Sektoren) bis 256 kB. Deshalb muss man vor dem Ändern eines einzelnen Bytes den ganzen Block sichern, löschen und neu schreiben.</div>
-  <div class="step"><h4>Verschleiß ist real</h4>Jeder Löschzyklus schädigt das Oxid. 10 000 Zyklen klingen viel — bei einem Zähler, der jede Sekunde geschrieben wird, sind sie in unter drei Stunden verbraucht.</div>
-  <div class="step"><h4>Wear Leveling</h4>Schreibvorgänge über den ganzen Speicher verteilen, statt immer dieselbe Stelle zu benutzen. SD-Karten und SSDs machen das intern; im Mikrocontroller-Flash muss man es selbst tun oder ein Dateisystem wie LittleFS verwenden.</div>
-  <div class="step"><h4>Spannungsausfall beim Schreiben</h4>Der gefährlichste Moment. Ohne Vorkehrung entsteht ein halb geschriebener Block. Gegenmittel: Doppelpufferung mit Prüfsumme, ein Journal oder FRAM für Daten, die jederzeit konsistent sein müssen.</div>
+  <div class="step"><h4>Schreiben setzt Bits von 1 auf 0</h4>Ein gelöschter Sektor besteht aus lauter Einsen; einzelne Bits von 0 zurück auf 1 geht nicht. Deshalb kann man ein Byte nur „weiter beschreiben“, nie zurücknehmen.</div>
+  <div class="step"><h4>Löschen setzt einen ganzen Block auf 1</h4>NOR-Sektoren ab 4 kB, NAND-Blöcke 128 kB bis mehrere Megabyte. Ein einzelnes Byte zu ändern heißt: Block sichern, löschen, neu schreiben.</div>
+  <div class="step"><h4>Verschleiß ist real</h4>10 000 Zyklen klingen viel — ein Zähler, der jede Sekunde in dieselbe Zelle schreibt, verbraucht sie in unter drei Stunden. Wear Leveling verteilt die Schreibvorgänge; SD-Karten und SSDs tun das intern, im MCU-Flash übernimmt es ein Dateisystem wie LittleFS oder man selbst.</div>
+  <div class="step"><h4>Spannungsausfall beim Schreiben</h4>Der gefährlichste Moment: ein halb geschriebener Block. Gegenmittel: zwei Kopien im Wechsel mit Sequenznummer und CRC, ein Journal — oder FRAM für Daten, die jederzeit konsistent sein müssen.</div>
 </div>
-<div class="tip"><b>Praxisregel für Konfigurationsdaten:</b> Nie bei jeder Änderung schreiben, sondern gesammelt beim Herunterfahren oder nach einer Wartezeit ohne weitere Änderung. Und immer zwei Kopien im Wechsel mit Sequenznummer und CRC — dann existiert nach jedem Abbruch mindestens eine gültige Version.</div>
-
-<h2>Zellentypen im NAND-Flash</h2>
-<div class="tbl-wrap"><table style="min-width:740px">
-<thead><tr><th>Typ</th><th>Bit je Zelle</th><th>Zyklen (Größenordnung)</th><th>Anmerkung</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>NAND-Zelltyp</th><th data-s="num">Bit je Zelle</th><th>Zyklen (Größenordnung)</th><th>Anmerkung</th></tr></thead>
 <tbody>
 <tr><td><b>SLC</b></td><td>1</td><td>50 000 – 100 000</td><td>Industrie, teuer, sehr robust</td></tr>
 <tr><td><b>MLC</b></td><td>2</td><td>3 000 – 10 000</td><td>Kompromiss</td></tr>
@@ -50,36 +44,79 @@ import "./_style.css";
 <tr><td><b>QLC</b></td><td>4</td><td>100 – 1 000</td><td>Hohe Kapazität, geringe Ausdauer</td></tr>
 </tbody>
 </table></div>
-<p class="note">Billige SD-Karten sind eine der häufigsten Ausfallursachen in Dauerbetrieb-Projekten. Für Datenlogger und Raspberry-Pi-Systeme lohnen Karten mit Angabe zur Ausdauer (Endurance-Klassen) oder gleich ein Verzicht auf häufige Schreibvorgänge. Siehe auch <a href="homeserver-101.html#storage">Homeserver 101 → Storage</a>.</p>
+<div class="tip"><b>Praxisregel für Konfigurationsdaten:</b> Nie bei jeder Änderung schreiben, sondern gesammelt beim Herunterfahren oder nach einer Ruhezeit. Billige SD-Karten ohne Endurance-Angabe sind eine der häufigsten Ausfallursachen im Dauerbetrieb — siehe <a href="homeserver-101.html#storage">Homeserver 101 → Storage</a>.</div>
 
-<h2>Speicher am Mikrocontroller anschließen</h2>
-<div class="tbl-wrap"><table style="min-width:800px">
+<h2>Anbindung und Fehlerkorrektur</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Schnittstelle</th><th>Typische Bausteine</th><th>Geschwindigkeit</th><th>Anmerkung</th></tr></thead>
 <tbody>
 <tr><td><b>I²C</b></td><td>24Cxx-EEPROM, FM24-FRAM</td><td>100–400 kHz, selten 1 MHz</td><td>Zwei Leitungen, viele Teilnehmer, langsam</td></tr>
-<tr><td><b>SPI</b></td><td>25Qxx-NOR-Flash, 23LCxx-SRAM</td><td>bis 100 MHz</td><td>Der Standard für externen Flash</td></tr>
-<tr><td><b>Quad-SPI / OctoSPI</b></td><td>W25Q-Serie, PSRAM</td><td>bis 400 MB/s</td><td>Erlaubt Ausführen direkt aus dem externen Flash (XIP)</td></tr>
-<tr><td><b>SDIO</b></td><td>SD-Karten, eMMC</td><td>bis 200 MB/s</td><td>Braucht Dateisystem und Treiber</td></tr>
+<tr><td><b>SPI</b></td><td>25Qxx-NOR-Flash, 23LCxx-SRAM</td><td>bis ~100 MHz</td><td>Der Standard für externen Flash</td></tr>
+<tr><td><b>Quad-/OctoSPI</b></td><td>W25Q-Serie, PSRAM</td><td>~65 MB/s (QSPI) bis ~400 MB/s (Octal DDR)</td><td>Erlaubt Ausführen direkt aus dem externen Flash (XIP)</td></tr>
+<tr><td><b>SDIO / eMMC</b></td><td>SD-Karten, eMMC</td><td>SD UHS-I bis ~104 MB/s, eMMC HS400 bis ~400 MB/s</td><td>Braucht Dateisystem und Treiber</td></tr>
 <tr><td><b>Paralleler Bus (FMC)</b></td><td>SRAM, SDRAM, Displays</td><td>hoch</td><td>Viele Pins, dafür schnell und wahlfrei</td></tr>
 </tbody>
 </table></div>
-
-<h2>Fehlerkorrektur im Speicher</h2>
-<p>Bitfehler entstehen durch kosmische Strahlung, Alterung und Grenzwertbetrieb. Bei großen Speichern sind sie statistisch unvermeidlich.</p>
 <ul>
-  <li><b>Parität:</b> Erkennt einen einzelnen Bitfehler, kann ihn nicht korrigieren.</li>
-  <li><b>SECDED (Hamming + Parität):</b> Korrigiert ein Bit, erkennt zwei. Der Standard bei ECC-RAM.</li>
-  <li><b>BCH- und LDPC-Codes:</b> In NAND-Flash-Controllern; korrigieren Dutzende Bitfehler je Seite — ohne sie wäre TLC-Flash gar nicht nutzbar.</li>
-  <li><b>ECC im Mikrocontroller-Flash:</b> Viele moderne Controller (STM32, RP2350, automotive-taugliche Typen) haben ECC eingebaut. Ein Nebeneffekt: Man kann nicht beliebig oft in dieselbe Zelle nachschreiben, weil die ECC-Bits mitgeschrieben werden.</li>
+  <li><b>Parität:</b> erkennt einen Bitfehler, korrigiert nichts.</li>
+  <li><b>SECDED (Hamming + Gesamtparität):</b> korrigiert 1 Bit, erkennt 2 — der Code in ECC-RAM und in vielen MCU-Flash-Controllern (STM32, RP2350). Nebeneffekt: Nachschreiben in eine bereits programmierte Zelle ist gesperrt, weil die ECC-Bits mitgeschrieben werden.</li>
+  <li><b>BCH und LDPC:</b> in NAND-Controllern; korrigieren Dutzende Bitfehler je Seite — ohne sie wäre TLC-Flash unbrauchbar. Wie das rechnerisch funktioniert: <a href="#information">Information &amp; Codierung</a>.</li>
 </ul>
-<p>Wie Hamming-Codes funktionieren, steht in <a href="informationstechnik.html#fehlerschutz">Informationstechnik → Fehlererkennung und Korrektur</a>.</p>
+
+<h2>Was in einem FPGA steckt</h2>
+<div class="grid">
+  <div class="card"><div class="ct">LUT (Lookup-Tabelle)</div><div class="cd">Ein winziger Speicher mit 4 oder 6 Adresseingängen, der jede boolesche Funktion dieser Eingänge realisiert. Statt Gatter zu verdrahten, schreibt man die Wahrheitstabelle hinein.</div></div>
+  <div class="card"><div class="ct">Flipflop</div><div class="cd">Direkt hinter jeder LUT. Register sind im FPGA praktisch kostenlos — deshalb ist Pipelining dort die naheliegendste Optimierung (<a href="#timing">Timing</a>).</div></div>
+  <div class="card"><div class="ct">Block-RAM</div><div class="cd">Fest eingebaute SRAM-Blöcke, meist 9–36 kBit, dual-port. Für FIFOs, Puffer, Tabellen.</div></div>
+  <div class="card"><div class="ct">DSP-Block</div><div class="cd">Fest verdrahteter Multiplizierer mit Akkumulator. Der Grund, warum FPGAs bei Filtern und Matrixoperationen so stark sind.</div></div>
+  <div class="card"><div class="ct">Taktnetz und PLL</div><div class="cd">Laufzeitarme Sonderleitungen für Takte plus PLLs zur Frequenzerzeugung. Takte gehören ausschließlich dorthin, nie in normale Logikleitungen.</div></div>
+  <div class="card"><div class="ct">I/O-Blöcke</div><div class="cd">Konfigurierbare Pegel (LVCMOS, LVDS), Terminierung, Verzögerungsketten. Pinbelegung frei — mit Einschränkung durch Bänke gemeinsamer Versorgungsspannung.</div></div>
+</div>
+
+<h2>FPGA, Mikrocontroller oder ASIC?</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th>Kriterium</th><th>Mikrocontroller</th><th>FPGA</th><th>ASIC</th></tr></thead>
+<tbody>
+<tr><td><b>Entwicklungsaufwand</b></td><td>gering</td><td>mittel bis hoch</td><td>sehr hoch</td></tr>
+<tr><td><b>Stückkosten</b></td><td>0,5 – 15 €</td><td>5 – 5000 €</td><td>ab großen Stückzahlen am billigsten</td></tr>
+<tr><td><b>Parallelität</b></td><td>gering (Kerne, DMA)</td><td>sehr hoch</td><td>sehr hoch</td></tr>
+<tr><td><b>Reaktionszeit</b></td><td>µs, mit Aufwand</td><td>ns, systembedingt</td><td>ns</td></tr>
+<tr><td><b>Änderbar im Feld</b></td><td>Firmware-Update</td><td>Bitstream-Update</td><td>nein</td></tr>
+<tr><td><b>Wofür</b></td><td>Steuerung, Kommunikation, Regelung bis einige kHz</td><td>Viele parallele Kanäle, sehr schnelle Regelung, Signalverarbeitung, eigene Schnittstellen</td><td>Große Stückzahlen, extreme Effizienz</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Der ehrliche Rat:</b> In der Mechatronik löst ein Mikrocontroller 95 % der Aufgaben. Ein FPGA lohnt, wenn viele Kanäle gleichzeitig und mit harter Zeitanforderung bedient werden müssen — mehrere hochauflösende Encoder, ein eigenes Kamerasensor-Interface, ein Regeltakt von 100 kHz — oder wenn eine Schnittstelle gebraucht wird, die es als Peripherie nicht gibt.</div>
+
+<h2>HDL: die Regeln, die den Unterschied machen</h2>
+<div class="stop"><b>HDL ist keine Programmiersprache.</b> <code>a &lt;= b;</code> beschreibt eine dauerhaft existierende Verbindung, keine Zuweisung, die „passiert“. Zwei Zeilen nacheinander laufen nicht nacheinander — sie existieren gleichzeitig. Wer HDL wie C liest, baut Schaltungen, die in der Simulation funktionieren und in der Hardware nicht. <b>VHDL</b> ist streng typisiert und in Europa verbreitet, <b>SystemVerilog</b> kompakter und in der Chipentwicklung dominant; die Entwurfsregeln sind identisch.</div>
+<div class="steps">
+  <div class="step"><h4>Synchron entwerfen</h4>Ein Takt, alle Register an derselben Flanke. Mehrere Taktdomänen nur mit Synchronisierern und FIFOs aus <a href="#timing">Timing</a>.</div>
+  <div class="step"><h4>Kein Takt aus Logik</h4>Ein aus Gattern erzeugter Takt landet nicht im Taktnetz und ruiniert die Zeitanalyse. Stattdessen: Enable-Eingang am Register.</div>
+  <div class="step"><h4>Vollständige Zuweisungen</h4>In kombinatorischen Blöcken jeden Fall abdecken, sonst entsteht ein ungewolltes Latch. Die Synthesewarnung ist praktisch immer ein Fehler.</div>
+  <div class="step"><h4>Constraints schreiben</h4>Ohne Zeitvorgaben (<code>create_clock</code>) prüft das Werkzeug nichts und meldet Erfolg, obwohl der Entwurf zu langsam ist. Constraints sind Teil des Entwurfs, kein Zusatz.</div>
+  <div class="step"><h4>Erst simulieren, dann synthetisieren</h4>Eine Testbench mit erwarteten Werten findet in Sekunden, was auf der Hardware Stunden kostet.</div>
+</div>
+
+<h2>Einstieg 2026: Boards und Toolchains</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Plattform</th><th>Board (Beispiel)</th><th>Toolchain</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Lattice iCE40</b></td><td>iCEBreaker, TinyFPGA, iCESugar</td><td><b>vollständig quelloffen</b>: Yosys + nextpnr + Project IceStorm</td><td>Der beste Einstieg: kleine Bitstreams, Synthese in Sekunden, keine Registrierung</td></tr>
+<tr><td><b>Lattice ECP5</b></td><td>ULX3S, Colorlight-Boards</td><td>quelloffen: Yosys + nextpnr + Project Trellis</td><td>Deutlich größer, DDR-RAM möglich, RISC-V-Softcores laufen bequem</td></tr>
+<tr><td><b>AMD Artix-7</b></td><td>Arty A7, Nexys A7, Basys 3</td><td>Vivado, kostenlose Einstiegsstufe (seit Version 2026.1 gestuftes Lizenzmodell)</td><td>Industriestandard, viel Lehrmaterial, sehr große Installation</td></tr>
+<tr><td><b>Altera Cyclone / MAX 10</b></td><td>DE0-Nano, DE10-Lite</td><td>Quartus Prime Lite (kostenlos, ohne Lizenzdatei)</td><td>An Hochschulen verbreitet; Altera ist seit 2025 wieder eigenständig</td></tr>
+<tr><td><b>Gowin</b></td><td>Tang Nano 9K/20K</td><td>Gowin EDA; quelloffen über Yosys + Project Apicula</td><td>Sehr günstig, wachsende Community</td></tr>
+</tbody>
+</table></div>
+<p class="note"><b>Die ersten fünf Entwürfe, in dieser Reihenfolge:</b> LED aus einem Zähler blinken (klärt Toolchain, Constraints, Bitstream-Upload) · PWM mit einstellbarem Tastverhältnis · UART-Sender und -Empfänger (Automat, Baudratengenerator, Schieberegister, Eingangssynchronisierung) · Quadraturdecoder für mehrere Encoder gleichzeitig · RISC-V-Softcore (VexRiscv, PicoRV32, NEORV32) einbinden und Steuerlogik in Software auslagern.</p>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
     <li>Bruce Jacob, Spencer Ng, David Wang, <i>Memory Systems: Cache, DRAM, Disk</i>, Morgan Kaufmann.</li>
-    <li>Micron und Winbond Datenblätter — Endurance-Angaben und Löschblockgrößen stehen dort konkret.</li>
-    <li>ARM/STMicroelectronics Referenzhandbücher zum Flash-Interface (Zykluszahlen, ECC, Programmierprozedur).</li>
+    <li>JEDEC JESD79 (DDR-SDRAM) sowie Datenblätter von Micron und Winbond — Refresh-Intervalle, Löschblockgrößen und Endurance stehen dort konkret.</li>
     <li><a href="https://github.com/littlefs-project/littlefs">LittleFS</a> — ausfallsicheres Dateisystem für Mikrocontroller-Flash, mit lesenswerter Designbeschreibung.</li>
+    <li>Pong P. Chu, <i>FPGA Prototyping by VHDL Examples</i> bzw. die Verilog-Ausgabe; Harris &amp; Harris, <i>Digital Design and Computer Architecture</i> — HDL-Stilregeln.</li>
+    <li><a href="https://github.com/YosysHQ">YosysHQ</a> — quelloffene Synthese und Place-and-Route; <a href="https://hdlbits.01xz.net/">HDLBits</a> — interaktive Verilog-Übungen, kostenlos.</li>
   </ul>
 </div>

@@ -1,77 +1,80 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Ein Schaltschrank wird gebaut, um zwanzig Jahre gewartet zu werden.</b> Deshalb zählen Ordnung, Kennzeichnung und Dokumentation genauso viel wie die Funktion. Wer einen Schrank öffnet und sofort weiß, welche Klemme wozu gehört, hat die halbe Reparatur schon geschafft.</div>
+<div class="kurz"><b>Ein Schaltschrank wird gebaut, um zwanzig Jahre gewartet zu werden.</b> Ordnung, Kennzeichnung und Dokumentation zählen deshalb genauso viel wie die Funktion. Wer den Schrank öffnet und sofort weiß, welche Klemme wozu gehört, hat die halbe Reparatur schon geschafft.</div>
 
 <h2>Aufbau von oben nach unten</h2>
-<div class="tbl-wrap"><table style="min-width:880px">
+<div class="tbl-wrap"><table style="min-width:860px">
 <thead><tr><th>Ebene</th><th>Inhalt</th><th>Grund</th></tr></thead>
 <tbody>
-<tr><td><b>Oben</b></td><td>Einspeisung, Hauptschalter, Sicherungen, Leistungsschütze</td><td>Wärme steigt nach oben; Leistungsteile mögen es kühl, sind hier aber am kürzesten an der Einspeisung</td></tr>
+<tr><td><b>Oben</b></td><td>Einspeisung, Hauptschalter, Sicherungen, Leistungsschütze</td><td>Kürzester Weg zur Einspeisung; Wärme steigt ohnehin nach oben</td></tr>
 <tr><td><b>Mitte</b></td><td>Netzteile, Frequenzumrichter, Motorstarter</td><td>Wärmequellen mit Abstand zueinander, Lüftungswege freihalten</td></tr>
 <tr><td><b>Unten</b></td><td>Steuerung, E/A-Module, Sicherheitsrelais</td><td>Kühlster Bereich, gut erreichbar, weit weg von Störquellen</td></tr>
 <tr><td><b>Ganz unten</b></td><td>Klemmenleisten, Kabeleinführung</td><td>Kabel kommen von unten; Zugentlastung und Schirmauflage direkt an der Einführung</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Trennung von Leistung und Steuerung:</b> Motorleitungen und Signalleitungen in getrennten Kabelkanälen, mit möglichst großem Abstand. Wo sie sich kreuzen müssen, im rechten Winkel. Ein Frequenzumrichter erzeugt steile Schaltflanken, die in parallel geführte Signalleitungen einkoppeln — das ist die häufigste Ursache für sporadische Fehlfunktionen in Schaltschränken.</div>
+<div class="tip"><b>Leistung und Steuerung trennen:</b> Motor- und Signalleitungen in getrennten Kanälen, mit Abstand; wo sie sich kreuzen müssen, im rechten Winkel. Ein Frequenzumrichter erzeugt steile Schaltflanken, die in parallel geführte Signalleitungen einkoppeln — die häufigste Ursache sporadischer Fehlfunktionen. Grundlagen dazu unter <a href="elektrotechnik.html#emv">Elektrotechnik → EMV</a>.</div>
 
 <h2>Schutzorgane</h2>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th>Bauteil</th><th>Schützt</th><th>Auswahlkriterium</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:920px">
+<thead><tr><th data-s="text">Bauteil</th><th>Schützt</th><th>Auswahlkriterium</th></tr></thead>
 <tbody>
-<tr><td><b>Leitungsschutzschalter (LS)</b></td><td>die Leitung vor Überlast und Kurzschluss</td><td>Charakteristik B für ohmsche Lasten, C für Motoren und Trafos (Einschaltstrom), D für sehr hohe Einschaltströme</td></tr>
-<tr><td><b>Motorschutzschalter</b></td><td>den Motor vor Überlast und Phasenausfall</td><td>Einstellbar auf den Motornennstrom; erkennt auch asymmetrische Belastung</td></tr>
-<tr><td><b>Fehlerstromschutzschalter (RCD)</b></td><td>Personen und gegen Brand</td><td>30 mA für Personenschutz. Bei Frequenzumrichtern <b>Typ B</b> nötig — Typ A erkennt glatte Gleichfehlerströme nicht</td></tr>
-<tr><td><b>Sicherung (gG, aM)</b></td><td>Halbleiter und Leitungen</td><td>gG allgemein, aM für Motorstromkreise, gR/aR für Halbleiter (sehr schnell)</td></tr>
-<tr><td><b>Überspannungsableiter</b></td><td>gegen Blitz- und Schalteinwirkungen</td><td>Typ 1 am Gebäudeeintritt, Typ 2 in der Verteilung, Typ 3 am Gerät</td></tr>
-<tr><td><b>Elektronischer Schutzschalter (24 V)</b></td><td>einzelne 24-V-Stromkreise</td><td>Ein Kurzschluss in einem Sensorkreis darf nicht die ganze Steuerung lahmlegen. Ein Netzteil mit 10 A und ein LS mit 6 A lösen bei einem Kurzschluss oft <b>nicht</b> aus, weil das Netzteil vorher in die Strombegrenzung geht</td></tr>
+<tr><td><b>Leitungsschutzschalter (LS)</b></td><td>die Leitung vor Überlast und Kurzschluss</td><td>Auslösecharakteristik: <b>B</b> = 3–5·I<sub>n</sub> (ohmsche Lasten), <b>C</b> = 5–10·I<sub>n</sub> (Motoren, Trafos), <b>D</b> = 10–20·I<sub>n</sub> (hohe Einschaltströme)</td></tr>
+<tr><td><b>Motorschutzschalter</b></td><td>den Motor vor Überlast und Phasenausfall</td><td>Auf den Motornennstrom einstellbar; erkennt auch asymmetrische Belastung</td></tr>
+<tr><td><b>Fehlerstromschutzschalter (RCD)</b></td><td>Personen und gegen Brand</td><td>30 mA für Personenschutz. Hinter Frequenzumrichtern <b>Typ B</b> (allstromsensitiv) — Typ A erkennt glatte Gleichfehlerströme nicht; Typ F für einphasige Umrichter</td></tr>
+<tr><td><b>Sicherung (gG, aM, gR/aR)</b></td><td>Leitungen und Halbleiter</td><td>gG allgemein, aM für Motorstromkreise (nur Kurzschlussschutz), gR/aR für Halbleiter (sehr schnell)</td></tr>
+<tr><td><b>Überspannungsableiter</b></td><td>gegen Blitz- und Schaltüberspannungen</td><td>Typ 1 am Gebäudeeintritt, Typ 2 in der Verteilung, Typ 3 direkt am Gerät</td></tr>
+<tr><td><b>Elektronischer Schutzschalter (24 V)</b></td><td>einzelne 24-V-Stromkreise</td><td>Schaltet selektiv ab, bevor das Netzteil in die Strombegrenzung geht — siehe Warnung</td></tr>
 </tbody>
 </table></div>
-<div class="stop"><b>Die 24-V-Falle:</b> Ein Netzteil mit elektronischer Strombegrenzung liefert im Kurzschlussfall nicht genug Strom, um eine Sicherung auszulösen — es geht in die Begrenzung, und die gesamte Steuerung fällt aus, ohne dass klar ist, wo. Deshalb gehören in jeden 24-V-Verteiler <b>elektronische Schutzschalter</b>, die selektiv abschalten. Alternativ ein Netzteil mit ausreichender Kurzschlussstromreserve wählen.</div>
+<div class="stop"><b>Die 24-V-Falle:</b> Ein Netzteil mit elektronischer Strombegrenzung liefert im Kurzschlussfall nicht genug Strom, um einen LS auszulösen. Es geht in die Begrenzung, und die <b>gesamte</b> Steuerung fällt aus, ohne dass klar wird, wo der Fehler sitzt. Ein 10-A-Netzteil und ein 6-A-LS sind deshalb keine funktionierende Kombination. Abhilfe: elektronische Schutzschalter je Abgang oder ein Netzteil mit ausreichender Kurzschlussstromreserve.</div>
 
 <h2>Verdrahtung</h2>
-<div class="grid">
-  <div class="card"><div class="ct">Aderfarben</div><div class="cd">Nach EN 60204-1: schwarz für Leistung AC, rot für Steuerung AC, blau für Steuerung DC, orange für Fremdspannung (bleibt bei ausgeschaltetem Hauptschalter unter Spannung!), grün-gelb für Schutzleiter, hellblau für Neutralleiter.</div></div>
-  <div class="card"><div class="ct">Aderendhülsen</div><div class="cd">Auf jeder feindrähtigen Ader, mit dem passenden Vierkant- oder Sechskantwerkzeug gepresst. Verzinnte Litze in Schraubklemmen ist unzulässig — das Lot fließt unter Druck und die Verbindung wird lose.</div></div>
-  <div class="card"><div class="ct">Klemmen</div><div class="cd">Push-in oder Federkraft statt Schrauben: schneller, rüttelfest, kein Nachziehen nötig. Bei Schraubklemmen das Drehmoment einhalten und nach der Inbetriebnahme nachziehen.</div></div>
-  <div class="card"><div class="ct">Reserve einplanen</div><div class="cd">20 % freie Klemmen, 20 % freie E/A, Platz auf der Montageplatte. Jede Anlage wird erweitert.</div></div>
-  <div class="card"><div class="ct">Schirmauflage</div><div class="cd">Großflächig über Schirmklemmen direkt an der Kabeleinführung, nicht über einen dünnen Beidraht. Die Wirksamkeit hängt an der Fläche des Kontakts.</div></div>
-  <div class="card"><div class="ct">Potentialausgleich</div><div class="cd">Montageplatte, Türe und Gehäuse leitend verbinden — mit Erdungsbändern, nicht über Scharniere. Lackierte Flächen an den Kontaktstellen freikratzen oder Kontaktscheiben verwenden.</div></div>
-</div>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Punkt</th><th>Regel</th></tr></thead>
+<tbody>
+<tr><td><b>Aderfarben (EN 60204-1)</b></td><td>schwarz = Leistung · rot = Steuerung AC · blau = Steuerung DC · <b>orange = Fremdspannung</b> (steht bei ausgeschaltetem Hauptschalter weiter unter Spannung) · grün-gelb = Schutzleiter · hellblau = Neutralleiter</td></tr>
+<tr><td><b>Aderendhülsen</b></td><td>Auf jede feindrähtige Ader, mit Vierkant- oder Sechskantpressung. Verzinnte Litze in Schraubklemmen ist unzulässig — das Lot fließt unter Druck, die Verbindung wird lose</td></tr>
+<tr><td><b>Klemmen</b></td><td>Push-in oder Federkraft: schneller, rüttelfest, kein Nachziehen. Bei Schraubklemmen Drehmoment einhalten und nach der Inbetriebnahme nachziehen</td></tr>
+<tr><td><b>Schirmauflage</b></td><td>Großflächig über Schirmklemmen direkt an der Kabeleinführung. Die Wirksamkeit hängt an der Kontaktfläche, nicht am Beidraht</td></tr>
+<tr><td><b>Potentialausgleich</b></td><td>Montageplatte, Tür und Gehäuse mit Erdungsbändern verbinden, nicht über Scharniere. Lack an den Kontaktstellen entfernen oder Kontaktscheiben verwenden</td></tr>
+<tr><td><b>Reserve</b></td><td>20 % freie Klemmen, 20 % freie E/A, freier Platz auf der Montageplatte. Jede Anlage wird erweitert</td></tr>
+</tbody>
+</table></div>
 
 <h2>Kennzeichnung und Dokumentation</h2>
 <div class="steps">
-  <div class="step"><h4>Betriebsmittelkennzeichnung nach IEC 81346</h4>Jedes Bauteil bekommt eine eindeutige Kennung (−Q1 für Schaltgeräte, −K1 für Relais, −F1 für Sicherungen, −X1 für Klemmenleisten). Diese Kennung steht am Bauteil <b>und</b> im Plan.</div>
-  <div class="step"><h4>Jede Ader beschriften</h4>An beiden Enden, mit Ziel und Klemmennummer. Nachträglich eine Ader in einem fertigen Schrank zu identifizieren kostet erheblich Zeit.</div>
-  <div class="step"><h4>Stromlaufplan aktuell halten</h4>Jede Änderung im Feld sofort eintragen. Ein Plan, der nicht dem Ist-Zustand entspricht, führt bei der nächsten Störung in die Irre.</div>
-  <div class="step"><h4>Klemmenplan und Kabelliste</h4>Welches Kabel geht wohin, welcher Querschnitt, welche Adernbelegung. Bei Erweiterungen unverzichtbar.</div>
-  <div class="step"><h4>Plan im Schrank</h4>Eine Plantasche mit dem aktuellen Stand. Digital ist gut, aber im Störungsfall um drei Uhr nachts ist Papier verfügbar.</div>
+  <div class="step"><h4>Betriebsmittelkennzeichnung nach IEC 81346</h4>Eindeutige Kennung je Bauteil (−Q1 Schaltgeräte, −K1 Relais/Schütze, −F1 Schutzeinrichtungen, −X1 Klemmenleisten) — am Bauteil <b>und</b> im Plan, identisch.</div>
+  <div class="step"><h4>Jede Ader an beiden Enden beschriften</h4>Mit Ziel und Klemmennummer. Eine Ader nachträglich im fertigen Schrank zu identifizieren kostet ein Vielfaches der Beschriftungszeit.</div>
+  <div class="step"><h4>Stromlaufplan sofort nachführen</h4>Jede Änderung im Feld direkt eintragen. Ein Plan, der nicht dem Ist-Zustand entspricht, führt bei der nächsten Störung aktiv in die Irre.</div>
+  <div class="step"><h4>Klemmenplan und Kabelliste pflegen</h4>Welches Kabel geht wohin, welcher Querschnitt, welche Adernbelegung — bei Erweiterungen unverzichtbar.</div>
+  <div class="step"><h4>Plan im Schrank hinterlegen</h4>Eine Plantasche mit dem aktuellen Stand. Digital ist gut, aber um drei Uhr nachts ist Papier verfügbar.</div>
 </div>
 
 <h2>Wärme und Klima</h2>
 <div class="fbox">
-  <span class="f">P_verlust ≈ Σ (P_Gerät · (1 − η))&nbsp;&nbsp;·&nbsp;&nbsp;ΔT = P_verlust / (k · A)</span>
-  <span class="l">k ≈ 5,5 W/(m²·K) für lackiertes Stahlblech. A ist die wirksame Oberfläche nach IEC 60890 — anliegende Wände zählen nicht mit.</span>
+  <span class="f">P<sub>V</sub> ≈ Σ P<sub>Gerät</sub> · (1 − η)&nbsp;&nbsp;·&nbsp;&nbsp;ΔT = P<sub>V</sub> / (k · A)</span>
+  <span class="l">k ≈ 5,5 W/(m²·K) für lackiertes Stahlblech. A ist die <i>wirksame</i> Oberfläche nach IEC 60890 — an eine Wand gestellte Flächen zählen nur anteilig mit.</span>
 </div>
 <div class="tbl-wrap"><table style="min-width:800px">
-<thead><tr><th>Maßnahme</th><th>Wann</th><th>Anmerkung</th></tr></thead>
+<thead><tr><th>Maßnahme</th><th data-s="text">Wann</th><th>Anmerkung</th></tr></thead>
 <tbody>
-<tr><td><b>Passive Kühlung</b></td><td>bis ~100 W Verlustleistung</td><td>Ausreichende Oberfläche, Abstand zur Wand, freie Konvektion im Schrank</td></tr>
-<tr><td><b>Filterlüfter</b></td><td>100–800 W</td><td>Filtermatten regelmäßig wechseln — verstopfte Filter sind die häufigste Ursache für Übertemperatur</td></tr>
+<tr><td><b>Passive Kühlung</b></td><td>bis ~100 W</td><td>Ausreichende Oberfläche, Wandabstand, freie Konvektion im Schrank</td></tr>
+<tr><td><b>Filterlüfter</b></td><td>100–800 W</td><td>Filtermatten regelmäßig wechseln — verstopfte Filter sind die häufigste Übertemperatur-Ursache</td></tr>
 <tr><td><b>Luft-Wasser-Wärmetauscher</b></td><td>ab ~500 W</td><td>In staubiger Umgebung, weil der Schrank geschlossen bleibt</td></tr>
-<tr><td><b>Kühlgerät</b></td><td>wenn die Innentemperatur unter der Umgebungstemperatur liegen muss</td><td>Kondensatablauf vorsehen</td></tr>
-<tr><td><b>Heizung</b></td><td>bei Außenaufstellung</td><td>Verhindert Kondensation beim Abkühlen — oft wichtiger als die Kälte selbst</td></tr>
+<tr><td><b>Kühlgerät</b></td><td>wenn innen kälter als außen sein muss</td><td>Kondensatablauf vorsehen</td></tr>
+<tr><td><b>Heizung mit Hygrostat</b></td><td>bei Außenaufstellung</td><td>Verhindert Kondensation beim Abkühlen — oft wichtiger als die Kälte selbst</td></tr>
 </tbody>
 </table></div>
-<p class="note">Elektronik altert exponentiell mit der Temperatur: Als Faustregel halbiert sich die Lebensdauer von Elektrolytkondensatoren je 10 K Übertemperatur. Ein Schrank, der dauerhaft bei 55 °C statt 35 °C läuft, halbiert die Lebensdauer seiner Netzteile mehrfach.</p>
+<p class="note">Elektronik altert mit der Temperatur: Als Faustregel halbiert sich die Lebensdauer von Elektrolytkondensatoren je 10 K Übertemperatur. Ein Schrank, der dauerhaft bei 55 °C statt 35 °C läuft, verkürzt die Netzteillebensdauer um ein Vielfaches.</p>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li>DIN EN 60204-1 — Elektrische Ausrüstung von Maschinen; regelt Aderfarben, Not-Halt, Kennzeichnung und Prüfungen.</li>
+    <li>DIN EN 60204-1 — Elektrische Ausrüstung von Maschinen: Aderfarben, Not-Halt, Kennzeichnung, Prüfungen.</li>
     <li>DIN EN 61439 — Niederspannungs-Schaltgerätekombinationen, inklusive Bauartnachweis und Erwärmungsberechnung.</li>
     <li>DIN EN IEC 81346 — Referenzkennzeichnung von Betriebsmitteln.</li>
     <li>IEC 60890 — Verfahren zur Ermittlung der Erwärmung in Schaltgerätekombinationen.</li>
-    <li>Rittal und Phoenix Contact: technische Handbücher zu Schrankklimatisierung und Verdrahtung, frei verfügbar.</li>
+    <li>Technische Handbücher zu Schrankklimatisierung und Verdrahtung von Rittal und Phoenix Contact, frei verfügbar.</li>
   </ul>
 </div>

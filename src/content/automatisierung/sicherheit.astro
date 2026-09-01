@@ -1,105 +1,115 @@
 ---
 import "./_style.css";
 ---
-<div class="stop"><b>Funktionale Sicherheit ist ein rechtlich geregeltes Gebiet.</b> Was hier steht, erklärt die Systematik und die Begriffe — es ersetzt weder eine Risikobeurteilung noch die Beauftragung einer fachkundigen Person. Für Maschinen, die in Verkehr gebracht oder betrieblich genutzt werden, gelten verbindliche Pflichten.</div>
+<div class="stop"><b>Funktionale Sicherheit ist ein rechtlich geregeltes Gebiet.</b> Dieser Abschnitt erklärt Systematik und Begriffe — er ersetzt weder eine Risikobeurteilung noch eine fachkundige Person. Für Maschinen, die in Verkehr gebracht oder betrieblich genutzt werden, gelten verbindliche Pflichten.</div>
 
 <h2>Der rechtliche Rahmen</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th>Regelwerk</th><th>Regelt</th><th>Stand</th></tr></thead>
+<thead><tr><th data-s="text">Regelwerk</th><th>Regelt</th><th>Stand 2026</th></tr></thead>
 <tbody>
-<tr><td><b>Maschinenrichtlinie 2006/42/EG</b></td><td>Anforderungen an Maschinen beim Inverkehrbringen in der EU</td><td>Wird am <b>20. Januar 2027</b> durch die Maschinenverordnung (EU) 2023/1230 abgelöst</td></tr>
-<tr><td><b>Maschinenverordnung (EU) 2023/1230</b></td><td>Nachfolgerin; ergänzt unter anderem Anforderungen zu Cybersicherheit und lernfähigen Systemen</td><td>Gilt ab 20. Januar 2027</td></tr>
+<tr><td><b>Maschinenrichtlinie 2006/42/EG</b></td><td>Anforderungen an Maschinen beim Inverkehrbringen in der EU</td><td>Gilt noch; wird am <b>20. Januar 2027</b> abgelöst</td></tr>
+<tr><td><b>Maschinenverordnung (EU) 2023/1230</b></td><td>Nachfolgerin; ergänzt u. a. Cybersicherheit und lernfähige Systeme</td><td>Anwendbar ab 20. Januar 2027</td></tr>
 <tr><td><b>EN ISO 12100</b></td><td>Risikobeurteilung und Risikominderung — die methodische Grundlage</td><td>gültig</td></tr>
-<tr><td><b>EN ISO 13849-1</b></td><td>Sicherheitsbezogene Teile von Steuerungen, Performance Level</td><td>Fassung <b>2023</b>; im EU-Amtsblatt seit Mai 2024, die Fassung von 2015 wird nach einer Übergangsfrist bis <b>15. Mai 2027</b> zurückgezogen</td></tr>
-<tr><td><b>EN IEC 62061</b></td><td>Alternativer Weg über SIL, aus der IEC-61508-Familie</td><td>gültig</td></tr>
-<tr><td><b>EN IEC 60204-1</b></td><td>Elektrische Ausrüstung von Maschinen, Not-Halt-Kategorien</td><td>gültig</td></tr>
+<tr><td><b>EN ISO 13849-1</b></td><td>Sicherheitsbezogene Teile von Steuerungen, Performance Level</td><td>Fassung <b>2023</b>, seit 15. Mai 2024 im EU-Amtsblatt; die Fassung 2015 verliert die Konformitätsvermutung am <b>15. Mai 2027</b></td></tr>
+<tr><td><b>EN IEC 62061:2021</b></td><td>Alternativer Weg über SIL, aus der IEC-61508-Familie</td><td>gültig; gleichwertig anwendbar</td></tr>
+<tr><td><b>EN IEC 60204-1</b></td><td>Elektrische Ausrüstung von Maschinen, Stopp-Kategorien</td><td>gültig</td></tr>
 <tr><td><b>Betriebssicherheitsverordnung</b></td><td>Pflichten des <b>Betreibers</b> in Deutschland</td><td>gültig</td></tr>
 </tbody>
 </table></div>
+<p class="note">13849-1 und 62061 sind zwei Wege zum selben Ziel: 13849-1 rechnet mit Kategorie, MTTF<sub>D</sub> und DC auf einen <b>PL</b>, 62061 mit Architektur und PFH<sub>D</sub> auf einen <b>SIL</b>. Im Maschinenbau ist 13849-1 der übliche Weg; 62061 passt besser zu komplexer programmierbarer Elektronik.</p>
 
 <h2>Risikobeurteilung nach EN ISO 12100</h2>
 <div class="steps">
-  <div class="step"><h4>Grenzen der Maschine festlegen</h4>Räumlich, zeitlich, bestimmungsgemäße Verwendung und vernünftigerweise vorhersehbare Fehlanwendung.</div>
-  <div class="step"><h4>Gefährdungen identifizieren</h4>Über alle Lebensphasen: Transport, Montage, Inbetriebnahme, Betrieb, Rüsten, Reinigen, Wartung, Störungsbeseitigung, Entsorgung. Die meisten Unfälle passieren beim <b>Rüsten und Stören beseitigen</b>, nicht im Normalbetrieb.</div>
-  <div class="step"><h4>Risiko einschätzen</h4>Schwere des möglichen Schadens (S), Häufigkeit und Dauer der Gefährdungsexposition (F), Möglichkeit zur Vermeidung (P).</div>
-  <div class="step"><h4>Risiko mindern — in dieser Reihenfolge</h4><b>1.</b> Inhärent sichere Konstruktion (Gefährdung beseitigen). <b>2.</b> Technische Schutzmaßnahmen (Verkleidung, Lichtvorhang, Sicherheitssteuerung). <b>3.</b> Benutzerinformation (Warnhinweise, Anleitung). Nur in dieser Reihenfolge — eine Warntafel ersetzt keine Abdeckung.</div>
-  <div class="step"><h4>Erneut bewerten</h4>Jede Maßnahme kann neue Gefährdungen erzeugen. Der Vorgang ist iterativ, bis das Restrisiko vertretbar ist.</div>
-  <div class="step"><h4>Dokumentieren</h4>Die Risikobeurteilung ist Teil der technischen Unterlagen und muss nachvollziehbar sein.</div>
+  <div class="step"><h4>Grenzen der Maschine festlegen</h4>Räumlich, zeitlich, bestimmungsgemäße Verwendung <b>und</b> vernünftigerweise vorhersehbare Fehlanwendung.</div>
+  <div class="step"><h4>Gefährdungen über alle Lebensphasen identifizieren</h4>Transport, Montage, Inbetriebnahme, Betrieb, Rüsten, Reinigen, Wartung, Störungsbeseitigung, Entsorgung. Die meisten Unfälle passieren beim <b>Rüsten und Störungsbeseitigen</b>, nicht im Normalbetrieb.</div>
+  <div class="step"><h4>Risiko einschätzen</h4>Schwere des Schadens (S), Häufigkeit und Dauer der Exposition (F), Möglichkeit zur Vermeidung (P).</div>
+  <div class="step"><h4>Risiko mindern — in dieser Reihenfolge</h4><b>1.</b> Inhärent sichere Konstruktion (Gefährdung beseitigen). <b>2.</b> Technische Schutzmaßnahmen (Verkleidung, Lichtvorhang, Sicherheitssteuerung). <b>3.</b> Benutzerinformation. Nur in dieser Reihenfolge — eine Warntafel ersetzt keine Abdeckung.</div>
+  <div class="step"><h4>Erneut bewerten und dokumentieren</h4>Jede Maßnahme kann neue Gefährdungen erzeugen; der Vorgang ist iterativ. Die Risikobeurteilung ist Teil der technischen Unterlagen und muss nachvollziehbar sein.</div>
 </div>
 
 <h2>Performance Level bestimmen</h2>
-<svg class="dg l" viewBox="0 0 620 240" role="img" aria-label="Risikograph nach EN ISO 13849-1 mit den Parametern S, F und P und den resultierenden Performance Leveln">
-  <path class="w" d="M40,120 H110" />
-  <text class="lbl" x="34" y="124" text-anchor="end">Start</text>
-  <path class="w" d="M110,120 V56 H170 M110,120 V184 H170" />
-  <text class="lbla" x="120" y="50">S1 leichte Verletzung</text>
-  <text class="lbla" x="120" y="204">S2 schwere Verletzung</text>
-  <path class="w" d="M170,56 V32 H230 M170,56 V80 H230" />
-  <path class="w" d="M170,184 V152 H230 M170,184 V216 H230" />
-  <text class="lbl" x="176" y="28">F1</text><text class="lbl" x="176" y="94">F2</text>
-  <text class="lbl" x="176" y="148">F1</text><text class="lbl" x="176" y="230">F2</text>
-  <path class="w" d="M230,32 H300 M230,80 H300 M230,152 H300 M230,216 H300" />
-  <text class="lbl" x="240" y="26">P1/P2</text>
-  <rect class="accs" x="304" y="20" width="46" height="24" rx="4" /><text class="lblb" x="327" y="37" text-anchor="middle">a</text>
-  <rect class="accs" x="304" y="68" width="46" height="24" rx="4" /><text class="lblb" x="327" y="85" text-anchor="middle">b</text>
-  <rect class="accs" x="304" y="140" width="46" height="24" rx="4" /><text class="lblb" x="327" y="157" text-anchor="middle">c/d</text>
-  <rect class="accs" x="304" y="204" width="46" height="24" rx="4" /><text class="lblb" x="327" y="221" text-anchor="middle">d/e</text>
-  <text class="lbl" x="380" y="40">S — Schwere der Verletzung</text>
-  <text class="lbl" x="380" y="72">F — Häufigkeit und Dauer</text>
-  <text class="lbl" x="380" y="104">P — Vermeidbarkeit</text>
-  <text class="lbl" x="380" y="150">PL a = geringste Anforderung</text>
-  <text class="lbl" x="380" y="182">PL e = höchste Anforderung</text>
-  <text class="lbl" x="380" y="214">Vereinfachte Darstellung des Risikographen</text>
+<svg class="dg l" viewBox="0 0 620 264" role="img" aria-label="Risikograph nach ISO 13849-1: die Parameter S, F und P führen auf die Performance Level a bis e">
+  <path class="w" d="M18,132 H60" />
+  <path class="w" d="M60,132 V68 H110 M60,132 V196 H110" />
+  <text class="lbla" x="64" y="64">S1</text><text class="lbla" x="64" y="210">S2</text>
+  <path class="w" d="M110,68 V36 H170 M110,68 V100 H170 M110,196 V164 H170 M110,196 V228 H170" />
+  <text class="lbl" x="114" y="32">F1</text><text class="lbl" x="114" y="114">F2</text>
+  <text class="lbl" x="114" y="160">F1</text><text class="lbl" x="114" y="242">F2</text>
+  <path class="w" d="M170,36 V20 H230 M170,36 V52 H230 M170,100 V84 H230 M170,100 V116 H230 M170,164 V148 H230 M170,164 V180 H230 M170,228 V212 H230 M170,228 V244 H230" />
+  <text class="lbl" x="192" y="16">P1</text><text class="lbl" x="192" y="48">P2</text>
+  <text class="lbl" x="192" y="80">P1</text><text class="lbl" x="192" y="112">P2</text>
+  <text class="lbl" x="192" y="144">P1</text><text class="lbl" x="192" y="176">P2</text>
+  <text class="lbl" x="192" y="208">P1</text><text class="lbl" x="192" y="240">P2</text>
+  <rect class="accs" x="232" y="9" width="34" height="22" rx="4" /><text class="lblb" x="249" y="24" text-anchor="middle">a</text>
+  <rect class="accs" x="232" y="41" width="34" height="22" rx="4" /><text class="lblb" x="249" y="56" text-anchor="middle">b</text>
+  <rect class="accs" x="232" y="73" width="34" height="22" rx="4" /><text class="lblb" x="249" y="88" text-anchor="middle">b</text>
+  <rect class="accs" x="232" y="105" width="34" height="22" rx="4" /><text class="lblb" x="249" y="120" text-anchor="middle">c</text>
+  <rect class="accs" x="232" y="137" width="34" height="22" rx="4" /><text class="lblb" x="249" y="152" text-anchor="middle">c</text>
+  <rect class="accs" x="232" y="169" width="34" height="22" rx="4" /><text class="lblb" x="249" y="184" text-anchor="middle">d</text>
+  <rect class="accs" x="232" y="201" width="34" height="22" rx="4" /><text class="lblb" x="249" y="216" text-anchor="middle">d</text>
+  <rect class="accs" x="232" y="233" width="34" height="22" rx="4" /><text class="lblb" x="249" y="248" text-anchor="middle">e</text>
+  <text class="lbla" x="292" y="26">S — Schwere der Verletzung</text>
+  <text class="lbl" x="292" y="42">S1 leicht, üblicherweise reversibel</text>
+  <text class="lbl" x="292" y="58">S2 schwer, üblicherweise irreversibel</text>
+  <text class="lbla" x="292" y="90">F — Häufigkeit und Dauer der Exposition</text>
+  <text class="lbl" x="292" y="106">F1 selten bis öfter, kurze Dauer</text>
+  <text class="lbl" x="292" y="122">F2 häufig bis dauernd</text>
+  <text class="lbla" x="292" y="154">P — Möglichkeit zur Vermeidung</text>
+  <text class="lbl" x="292" y="170">P1 unter bestimmten Bedingungen möglich</text>
+  <text class="lbl" x="292" y="186">P2 kaum möglich</text>
+  <text class="lbl" x="292" y="222">PL a = geringste, PL e = höchste Anforderung</text>
+  <text class="lbl" x="292" y="240">Anhang A der EN ISO 13849-1, vereinfacht</text>
 </svg>
 <div class="tbl-wrap"><table style="min-width:880px">
-<thead><tr><th>PL</th><th>Mittlere Wahrscheinlichkeit gefährlichen Ausfalls je Stunde (PFH_D)</th><th>Entspricht etwa SIL</th><th>Typische Umsetzung</th></tr></thead>
+<thead><tr><th data-s="text">PL</th><th>PFH<sub>D</sub> — gefährlicher Ausfall je Stunde</th><th>entspricht SIL</th><th>Typische Umsetzung</th></tr></thead>
 <tbody>
-<tr><td><b>a</b></td><td>10⁻⁵ … &lt; 10⁻⁴</td><td>—</td><td>Einkanalig, ohne Diagnose</td></tr>
-<tr><td><b>b</b></td><td>3·10⁻⁶ … &lt; 10⁻⁵</td><td>SIL 1</td><td>Einkanalig mit Diagnose</td></tr>
-<tr><td><b>c</b></td><td>10⁻⁶ … &lt; 3·10⁻⁶</td><td>SIL 1</td><td>Einkanalig mit guter Diagnose</td></tr>
-<tr><td><b>d</b></td><td>10⁻⁷ … &lt; 10⁻⁶</td><td>SIL 2</td><td><b>Zweikanalig mit Diagnose</b> — der häufigste Fall an Maschinen</td></tr>
-<tr><td><b>e</b></td><td>10⁻⁸ … &lt; 10⁻⁷</td><td>SIL 3</td><td>Zweikanalig, hohe Diagnosedeckung, Fehlerausschluss geprüft</td></tr>
+<tr><td><b>a</b></td><td class="numcell">≥ 10⁻⁵ … &lt; 10⁻⁴</td><td>—</td><td>Einkanalig, ohne Diagnose</td></tr>
+<tr><td><b>b</b></td><td class="numcell">≥ 3·10⁻⁶ … &lt; 10⁻⁵</td><td>SIL 1</td><td>Einkanalig mit Diagnose</td></tr>
+<tr><td><b>c</b></td><td class="numcell">≥ 10⁻⁶ … &lt; 3·10⁻⁶</td><td>SIL 1</td><td>Einkanalig mit guter Diagnose</td></tr>
+<tr><td><b>d</b></td><td class="numcell">≥ 10⁻⁷ … &lt; 10⁻⁶</td><td>SIL 2</td><td><b>Zweikanalig mit Diagnose</b> — der häufigste Fall an Maschinen</td></tr>
+<tr><td><b>e</b></td><td class="numcell">≥ 10⁻⁸ … &lt; 10⁻⁷</td><td>SIL 3</td><td>Zweikanalig, hohe Diagnosedeckung, Fehlerausschlüsse geprüft</td></tr>
 </tbody>
 </table></div>
 
-<h2>Die Größen, aus denen sich der PL ergibt</h2>
+<h2>Die Größen hinter dem PL</h2>
 <div class="flist">
-  <div class="frow hd"><span>Größe</span><span>Bedeutung</span><span>Anmerkung</span></div>
-  <div class="frow"><span class="fn">Kategorie (B, 1–4)</span><span class="fe">Struktur der Sicherheitsfunktion</span><span class="fx">Ein- oder zweikanalig, mit oder ohne Selbstüberwachung</span></div>
-  <div class="frow"><span class="fn">MTTF_D</span><span class="fe">Mittlere Zeit bis zum gefährlichen Ausfall</span><span class="fx">Aus Herstellerangaben oder B10d-Werten; gedeckelt auf 100 Jahre je Kanal</span></div>
-  <div class="frow"><span class="fn">DC (Diagnosedeckungsgrad)</span><span class="fe">Anteil erkannter gefährlicher Ausfälle</span><span class="fx">none / low (60 %) / medium (90 %) / high (99 %)</span></div>
-  <div class="frow"><span class="fn">CCF</span><span class="fe">Ausfälle gemeinsamer Ursache</span><span class="fx">Über eine Punktebewertung nachzuweisen; mindestens 65 Punkte</span></div>
-  <div class="frow"><span class="fn">B10d</span><span class="fe">Schaltspiele, bis 10 % gefährlich ausgefallen sind</span><span class="fx">Bei mechanischen Bauteilen die maßgebliche Größe; zusammen mit der Schalthäufigkeit ergibt sich daraus MTTF_D</span></div>
+  <div class="frow hd"><span>Größe</span><span>Wertebereiche</span><span>Anmerkung</span></div>
+  <div class="frow"><span class="fn">Kategorie</span><span class="fe">B, 1, 2, 3, 4</span><span class="fx">Struktur der Sicherheitsfunktion: ein- oder zweikanalig, mit oder ohne Selbstüberwachung. Kategorie 4 verlangt DC ≥ 99 % in beiden Kanälen</span></div>
+  <div class="frow"><span class="fn">MTTF_D</span><span class="fe">low 3–10 a · medium 10–30 a · high 30–100 a</span><span class="fx">Mittlere Zeit bis zum gefährlichen Ausfall, je Kanal auf 100 Jahre gedeckelt — Sicherheit soll nicht allein auf Bauteilzuverlässigkeit beruhen</span></div>
+  <div class="frow"><span class="fn">DC</span><span class="fe">none &lt; 60 % · low 60–&lt;90 % · medium 90–&lt;99 % · high ≥ 99 %</span><span class="fx">Diagnosedeckungsgrad: Anteil der erkannten gefährlichen Ausfälle</span></div>
+  <div class="frow"><span class="fn">CCF</span><span class="fe">mindestens 65 von 100 Punkten</span><span class="fx">Ausfälle gemeinsamer Ursache — über eine Punktebewertung (Trennung, Diversität, Umgebung) nachzuweisen</span></div>
+  <div class="frow"><span class="fn">B10d</span><span class="fe">Schaltspiele bis 10 % gefährlich ausgefallen</span><span class="fx">Bei mechanischen Bauteilen maßgeblich; zusammen mit der Schalthäufigkeit ergibt sich daraus MTTF_D</span></div>
+  <div class="frow"><span class="fn">T_M</span><span class="fe">Gebrauchsdauer, i. d. R. 20 Jahre</span><span class="fx">Danach ist das Bauteil zu tauschen — auch wenn es noch funktioniert</span></div>
 </div>
-<div class="tip"><b>Nicht von Hand rechnen.</b> Für die Berechnung gibt es das kostenlose Werkzeug <b>SISTEMA</b> der Institut für Arbeitsschutz der DGUV, mit gepflegten Bauteilbibliotheken der Hersteller. Es bildet die Norm vollständig ab und erzeugt einen prüffähigen Nachweis. Wer PL bestimmen muss, sollte damit arbeiten — und die Ergebnisse von einer fachkundigen Person prüfen lassen.</div>
+<div class="tip"><b>Nicht von Hand rechnen.</b> Für die Berechnung gibt es <b>SISTEMA</b>, das kostenlose Werkzeug des Instituts für Arbeitsschutz der DGUV (IFA), mit gepflegten Herstellerbibliotheken. Es bildet die Norm vollständig ab und erzeugt einen prüffähigen Nachweis — die Ergebnisse gehören trotzdem von einer fachkundigen Person geprüft.</div>
 
 <h2>Typische Sicherheitsfunktionen</h2>
 <div class="grid">
-  <div class="card"><div class="ct">Not-Halt</div><div class="cd">Nach EN IEC 60204-1: <b>Stopp-Kategorie 0</b> = sofortiges Abschalten der Energie. <b>Kategorie 1</b> = gesteuertes Stillsetzen, dann Energie weg. <b>Kategorie 2</b> = gesteuertes Stillsetzen, Energie bleibt (kein Not-Halt im Sinne der Norm). Not-Halt ist eine <b>ergänzende</b> Maßnahme, kein Ersatz für Schutzeinrichtungen.</div></div>
-  <div class="card"><div class="ct">Schutztürüberwachung</div><div class="cd">Zwangsöffnende Positionsschalter oder Sicherheitsschalter mit Zuhaltung. Bei Nachlaufzeiten über der Zugriffszeit ist eine Zuhaltung zwingend.</div></div>
-  <div class="card"><div class="ct">Lichtvorhang</div><div class="cd">Auflösung bestimmt den Sicherheitsabstand: 14 mm für Finger, 30 mm für Hände, 90 mm für Körper. Der Abstand folgt aus EN ISO 13855 unter Berücksichtigung von Nachlaufzeit und Annäherungsgeschwindigkeit (typisch 1,6 m/s bzw. 2 m/s).</div></div>
-  <div class="card"><div class="ct">Sichere Antriebsfunktionen</div><div class="cd">STO (Safe Torque Off), SS1 (sicherer Stopp 1), SLS (sicher begrenzte Geschwindigkeit), SOS (sicherer Betriebshalt). In modernen Umrichtern integriert und nach EN 61800-5-2 zertifiziert.</div></div>
-  <div class="card"><div class="ct">Zweihandschaltung</div><div class="cd">Beide Hände am Bedienelement, gleichzeitig (innerhalb von 0,5 s) und dauerhaft. Nach EN 574 Typ III C.</div></div>
-  <div class="card"><div class="ct">Zustimmtaster</div><div class="cd">Drei Stellungen: aus — zustimmend — Panik (durchgedrückt, wieder aus). Für Einrichtbetrieb bei geöffneter Schutzeinrichtung.</div></div>
+  <div class="card"><div class="ct">Not-Halt</div><div class="cd">Stopp-Kategorien nach EN IEC 60204-1: <b>0</b> = sofortiges Abschalten der Energie, <b>1</b> = gesteuertes Stillsetzen, dann Energie weg, <b>2</b> = gesteuertes Stillsetzen, Energie bleibt (kein Not-Halt im Sinne der Norm). Not-Halt ist eine <b>ergänzende</b> Maßnahme, kein Ersatz für Schutzeinrichtungen.</div></div>
+  <div class="card"><div class="ct">Schutztürüberwachung</div><div class="cd">Zwangsöffnende Positionsschalter oder Sicherheitsschalter mit Zuhaltung. Liegt die Nachlaufzeit über der Zugriffszeit, ist eine Zuhaltung zwingend.</div></div>
+  <div class="card"><div class="ct">Lichtvorhang</div><div class="cd">Auflösung: 14 mm Finger, 30 mm Hand, ≥ 40 mm Körperteile. Sicherheitsabstand nach EN ISO 13855: <span class="formula">S = K·T + C</span> mit K = 2000 mm/s (bzw. 1600 mm/s ab S &gt; 500 mm), T = Nachlauf- plus Ansprechzeit, C = 8·(d − 14) mm für d ≤ 40 mm.</div></div>
+  <div class="card"><div class="ct">Sichere Antriebsfunktionen</div><div class="cd">STO (Safe Torque Off), SS1 (sicherer Stopp 1), SLS (sicher begrenzte Geschwindigkeit), SOS (sicherer Betriebshalt) — in modernen Umrichtern integriert und nach EN 61800-5-2 zertifiziert.</div></div>
+  <div class="card"><div class="ct">Zweihandschaltung</div><div class="cd">Beide Hände am Bedienelement, Betätigung innerhalb von 0,5 s und dauerhaft. Nach <b>EN ISO 13851:2019</b> (ersetzt die zurückgezogene EN 574), Typ III C für die höchste Stufe.</div></div>
+  <div class="card"><div class="ct">Zustimmeinrichtung</div><div class="cd">Drei Stellungen: aus — zustimmend — Panik (durchgedrückt, wieder aus). Für Einrichtbetrieb bei aufgehobener Schutzwirkung, zusammen mit reduzierter Geschwindigkeit.</div></div>
 </div>
 
-<h2>Umsetzung in der Steuerung</h2>
+<h2>Umsetzung und Validierung</h2>
 <div class="steps">
-  <div class="step"><h4>Sicherheitsgerichtete Hardware verwenden</h4>Eine Standard-SPS darf keine Sicherheitsfunktion übernehmen. Entweder ein Sicherheitsrelais oder eine zertifizierte Sicherheits-SPS mit F-Modulen.</div>
-  <div class="step"><h4>Zweikanalig verdrahten</h4>Zwei getrennte Kanäle mit Querschlusserkennung. Bei Sicherheits-SPS erzeugen die F-Module dafür Testimpulse — der Grund, warum ein Oszilloskop dort kurze Lücken im 24-V-Signal zeigt.</div>
-  <div class="step"><h4>Sicherheitsprogramm trennen</h4>Eigener Programmteil, geschützt gegen unbeabsichtigte Änderung, mit Prüfsumme. Änderungen erfordern eine erneute Abnahme.</div>
-  <div class="step"><h4>Manueller Wiederanlauf</h4>Nach dem Beheben der Ursache darf die Maschine nicht selbsttätig anlaufen — eine bewusste Quittierung mit fallender Flanke ist vorgeschrieben.</div>
-  <div class="step"><h4>Validieren</h4>Jede Sicherheitsfunktion einzeln auslösen und die Wirkung prüfen, auch bei simulierten Einzelfehlern (ein Kanal unterbrochen). Ergebnisse dokumentieren — das ist die Validierung nach EN ISO 13849-2.</div>
-  <div class="step"><h4>Wiederkehrend prüfen</h4>Sicherheitsfunktionen altern. Prüfintervalle festlegen und einhalten; bei mechanischen Bauteilen ist die Anzahl der Schaltspiele die begrenzende Größe.</div>
+  <div class="step"><h4>Sicherheitsgerichtete Hardware verwenden</h4>Eine Standard-SPS darf keine Sicherheitsfunktion tragen. Entweder ein Sicherheitsrelais oder eine zertifizierte Sicherheits-SPS mit F-Modulen.</div>
+  <div class="step"><h4>Zweikanalig mit Querschlusserkennung verdrahten</h4>F-Module erzeugen dafür Testimpulse — der Grund, warum ein Oszilloskop dort kurze Lücken im 24-V-Signal zeigt. Ein Standard-Eingang würde davon flattern.</div>
+  <div class="step"><h4>Sicherheitsprogramm trennen und versiegeln</h4>Eigener Programmteil, gegen unbeabsichtigte Änderung geschützt, mit Prüfsumme. Jede Änderung erfordert eine erneute Abnahme.</div>
+  <div class="step"><h4>Manueller Wiederanlauf</h4>Nach Beheben der Ursache darf die Maschine nicht selbsttätig anlaufen — eine bewusste Quittierung mit fallender Flanke ist vorgeschrieben.</div>
+  <div class="step"><h4>Validieren mit simulierten Einzelfehlern</h4>Jede Sicherheitsfunktion einzeln auslösen und die Wirkung prüfen, auch mit unterbrochenem Kanal. Ergebnisse dokumentieren — das ist die Validierung nach EN ISO 13849-2.</div>
+  <div class="step"><h4>Wiederkehrend prüfen, Gebrauchsdauer beachten</h4>Prüfintervalle festlegen und einhalten. Bei mechanischen Bauteilen begrenzt die Zahl der Schaltspiele, bei allen anderen die Gebrauchsdauer T<sub>M</sub>.</div>
 </div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
   <ul>
-    <li>EN ISO 12100, EN ISO 13849-1:2023 und -2, EN IEC 62061, EN IEC 60204-1, EN ISO 13855.</li>
-    <li>Verordnung (EU) 2023/1230 — Maschinenverordnung, gültig ab 20. Januar 2027.</li>
+    <li>EN ISO 12100; EN ISO 13849-1:2023 und -2; EN IEC 62061:2021; EN IEC 60204-1; EN ISO 13855; EN ISO 13851:2019.</li>
+    <li>Verordnung (EU) 2023/1230 — Maschinenverordnung, anwendbar ab 20. Januar 2027.</li>
     <li><a href="https://www.dguv.de/ifa/praxishilfen/practical-solutions-machine-safety/software-sistema/index.jsp">IFA/DGUV — SISTEMA</a>: kostenloses Berechnungswerkzeug mit Herstellerbibliotheken.</li>
     <li>IFA-Report 2/2017 — <i>Funktionale Sicherheit von Maschinensteuerungen</i>, frei verfügbar und sehr praxisnah.</li>
-    <li>Pilz, Sick und Schmersal: Leitfäden zur Normanwendung, jeweils kostenlos.</li>
+    <li>Normenleitfäden von Pilz, Sick und Schmersal, jeweils kostenlos.</li>
   </ul>
 </div>

@@ -1,0 +1,75 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Betriebssystem verteilt Rechenzeit, Speicher und Geräte auf mehrere Aufgaben.</b> Für die Mechatronik ist die entscheidende Frage nicht „welches OS“, sondern: Gibt es harte Fristen? Wenn ja, zählt nicht die durchschnittliche Reaktionszeit, sondern die schlechteste — und die muss belegbar eingehalten werden.</div>
+
+<h2>Harte, feste und weiche Echtzeit</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Art</th><th>Bei Fristverletzung</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Hart</b></td><td>Systemversagen, möglicherweise Personenschaden</td><td>Airbagauslösung, Motorsteuerung, Not-Halt, Flugsteuerung</td></tr>
+<tr><td><b>Fest</b></td><td>Das Ergebnis ist wertlos, aber ungefährlich</td><td>Ein verspäteter Videoframe wird verworfen</td></tr>
+<tr><td><b>Weich</b></td><td>Qualitätsverlust, das Ergebnis zählt noch</td><td>Bedienoberfläche reagiert träge, Messwert kommt spät</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Echtzeit heißt nicht schnell, sondern pünktlich.</b> Ein System, das garantiert in 10 ms reagiert, ist echtzeitfähig. Eines, das meistens 100 µs braucht und gelegentlich 50 ms, ist es nicht — egal wie schnell der Prozessor ist. Deshalb sind Linux und Windows in Standardform nicht echtzeitfähig, ein 16-MHz-AVR mit sauberer Interruptstruktur dagegen schon.</div>
+
+<h2>Prozesse, Threads, Tasks</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Prozess</div><div class="cd">Eigener Adressraum, durch die MMU geschützt. Ein Absturz reißt nichts anderes mit; dafür kostet der Wechsel Zeit.</div></div>
+  <div class="card"><div class="ct">Thread</div><div class="cd">Teilt den Adressraum mit den anderen Threads des Prozesses. Schneller umzuschalten, aber ein Fehler kann alles beschädigen.</div></div>
+  <div class="card"><div class="ct">Task im RTOS</div><div class="cd">Praktisch ein Thread mit eigenem Stack und eigener Priorität. Kein Speicherschutz, solange keine MPU konfiguriert ist.</div></div>
+  <div class="card"><div class="ct">Koroutine / Zustandsautomat</div><div class="cd">Kein eigener Stack, kooperativ, ressourcensparend — und für viele Mikrocontroller-Aufgaben völlig ausreichend (<a href="#schaltwerke">Automaten</a>).</div></div>
+</div>
+
+<h2>Scheduling</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Verfahren</th><th>Prinzip</th><th>Echtzeitfähig</th><th>Wo</th></tr></thead>
+<tbody>
+<tr><td><b>Kooperativ</b></td><td>Jede Task gibt freiwillig ab</td><td>nur bei diszipliniertem Code</td><td>Kleine Systeme, Arduino-artige Schleifen</td></tr>
+<tr><td><b>Round Robin</b></td><td>Jede Task bekommt reihum eine Zeitscheibe</td><td>nein</td><td>Gleichrangige Hintergrundaufgaben</td></tr>
+<tr><td><b>Prioritätsbasiert, verdrängend</b></td><td>Die höchstpriore lauffähige Task läuft — sofort</td><td><b>ja</b></td><td>FreeRTOS, Zephyr, alle klassischen RTOS</td></tr>
+<tr><td><b>Rate Monotonic (RMS)</b></td><td>Kürzere Periode bekommt höhere Priorität</td><td>ja, mit beweisbarer Schranke</td><td>Klassische Auslegung periodischer Tasks</td></tr>
+<tr><td><b>Earliest Deadline First</b></td><td>Nächste Frist zuerst</td><td>ja, theoretisch optimal</td><td>Selten implementiert, hoher Verwaltungsaufwand</td></tr>
+<tr><td><b>CFS/EEVDF (Linux-Standard)</b></td><td>Fairness über Rechenzeitanteile</td><td>nein</td><td>Allzweckbetrieb</td></tr>
+<tr><td><b>SCHED_FIFO mit PREEMPT_RT</b></td><td>Prioritätsbasiert unter Linux</td><td>weich bis fest</td><td>Industrie-PCs, Roboterrahmenwerke</td></tr>
+</tbody>
+</table></div>
+<div class="fbox"><span class="f">U = Σ (C_i / T_i) ≤ n · (2^(1/n) − 1)</span>
+<span class="l">Die hinreichende Schranke für Rate Monotonic (Liu &amp; Layland 1973): C_i Rechenzeit, T_i Periode. Für viele Tasks konvergiert sie gegen ln 2 ≈ 69 % — wer periodische Tasks auslegt, plant also mit höchstens zwei Dritteln Auslastung.</span></div>
+
+<h2>Die vier klassischen Nebenläufigkeitsprobleme</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Wettlaufsituation (Race Condition)</div><div class="cd">Zwei Ausführungsstränge greifen ungeschützt auf dieselbe Variable zu; das Ergebnis hängt vom Zufall der Zeitverhältnisse ab und zeigt sich oft erst nach Tagen.<br /><b>Lösung:</b> kritischen Abschnitt schützen (Mutex, Interrupt sperren) — oder gar keine geteilten Daten.</div></div>
+  <div class="card"><div class="ct">Verklemmung (Deadlock)</div><div class="cd">Zwei Tasks warten wechselseitig auf Ressourcen, die die jeweils andere hält.<br /><b>Lösung:</b> feste Reihenfolge beim Anfordern mehrerer Ressourcen, Zeitüberwachung beim Warten.</div></div>
+  <div class="card"><div class="ct">Prioritätsinversion</div><div class="cd">Eine niederpriore Task hält einen Mutex, den eine hochpriore braucht, und wird selbst von einer mittelprioren verdrängt — die hochpriore wartet beliebig lange. Bekanntester Fall: Mars Pathfinder 1997.<br /><b>Lösung:</b> Prioritätsvererbung im Mutex aktivieren (FreeRTOS und Zephyr können das).</div></div>
+  <div class="card"><div class="ct">Aushungern (Starvation)</div><div class="cd">Eine niederpriore Task kommt nie an die Reihe.<br /><b>Lösung:</b> Auslastung begrenzen, hochpriore Tasks kurz halten, notfalls Prioritäten altern lassen.</div></div>
+</div>
+<div class="tip"><b>Die Regel dahinter:</b> Geteilter Zustand ist die Fehlerquelle, nicht die Nebenläufigkeit selbst. Übergaben laufen am robustesten über eine Queue mit genau einem Schreiber und einem Leser statt über gemeinsame Variablen. Das Hardware-Gegenstück ist der Taktdomänenübergang — dieselbe Logik, andere Ebene (<a href="#timing">Timing &amp; CDC</a>).</div>
+
+<h2>Betriebssysteme in der Mechatronik</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">System</th><th>Speicherbedarf</th><th>Charakter</th><th>Wann sinnvoll</th></tr></thead>
+<tbody>
+<tr><td><b>Kein OS („Bare Metal“)</b></td><td>—</td><td>Hauptschleife plus Interrupts</td><td>Bis etwa drei nebenläufige Aufgaben oft die beste Wahl</td></tr>
+<tr><td><b>FreeRTOS</b></td><td>5–10 kB Flash</td><td>Scheduler, Queues, Semaphore, Timer</td><td>Der verbreitetste Einstieg; in ESP-IDF und vielen Hersteller-SDKs enthalten</td></tr>
+<tr><td><b>Zephyr</b></td><td>10–50 kB</td><td>Vollständiges RTOS mit Treibermodell, Netzwerkstack, Devicetree</td><td>Wenn Portabilität, Konnektivität und langfristige Pflege zählen. Halbjährliche Releases, aktuell 4.4 (April 2026)</td></tr>
+<tr><td><b>RIOT / NuttX / ThreadX</b></td><td>10–60 kB</td><td>Alternativen mit eigenen Schwerpunkten (IoT, POSIX-Nähe, Zertifizierbarkeit)</td><td>Bei speziellen Anforderungen</td></tr>
+<tr><td><b>Embedded Linux</b></td><td>ab ~16 MB RAM</td><td>Vollwertiges OS mit MMU, Netzwerk, Dateisystem</td><td>Bedienoberflächen, Kameras, komplexe Kommunikation — Echtzeit nur mit PREEMPT_RT und dann nur weich bis fest</td></tr>
+<tr><td><b>Linux + PREEMPT_RT</b></td><td>—</td><td>Verdrängbarer Kernel, Latenzen im zweistelligen Mikrosekundenbereich</td><td>Roboterrahmenwerke, Industrie-PCs. Seit Kernel 6.12 (2024) vollständig im Hauptkernel</td></tr>
+<tr><td><b>Asymmetrisch (AMP)</b></td><td>—</td><td>Ein Kern Linux, ein Kern RTOS oder Bare Metal</td><td>Der übliche Aufbau moderner Antriebs- und Robotersteuerungen</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Wann ein RTOS mehr schadet als nützt:</b> Bei zwei periodischen Aufgaben und einer Interruptquelle ist eine saubere Hauptschleife mit Zeitscheiben einfacher zu verstehen, leichter zu debuggen und braucht weniger RAM. Ein RTOS lohnt ab dem Punkt, an dem mehrere Aufgaben <em>blockierend</em> warten müssen — auf Netzwerk, auf Benutzer, auf langsame Peripherie.</div>
+<p class="note"><b>Die Praxis steht nebenan:</b> Tasks anlegen, Stacks dimensionieren, Queues und Semaphore benutzen, Interruptroutinen schreiben und Prioritäten vergeben — das behandelt <a href="embedded-firmware.html#rtos">Embedded &amp; Firmware → RTOS</a> und <a href="embedded-firmware.html#interrupts">→ Interrupts</a> am konkreten Controller. Hier steht nur, warum die Verfahren so aussehen, wie sie aussehen.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Tanenbaum, <i>Moderne Betriebssysteme</i>, Pearson.</li>
+    <li>Liu &amp; Layland, <i>Scheduling Algorithms for Multiprogramming in a Hard-Real-Time Environment</i>, JACM 1973 — die Rate-Monotonic-Schranke.</li>
+    <li><a href="https://www.freertos.org/Documentation/RTOS_book.html">Mastering the FreeRTOS Real Time Kernel</a> — kostenloses offizielles Handbuch.</li>
+    <li><a href="https://docs.zephyrproject.org/">Zephyr Project Documentation</a>; <a href="https://wiki.linuxfoundation.org/realtime/start">Linux Foundation Real-Time Linux Project</a>.</li>
+    <li>Glenn Reeves, <i>What Really Happened on Mars</i> — Originalbericht zur Prioritätsinversion beim Mars Pathfinder.</li>
+  </ul>
+</div>
