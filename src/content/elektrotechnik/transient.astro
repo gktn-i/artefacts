@@ -47,7 +47,7 @@ import "./_style.css";
 <ul>
   <li><b>Tasterentprellung:</b> Kontakte prellen 1–20 ms. τ ≈ 10 ms plus Schmitt-Trigger-Eingang ergibt eine saubere Flanke; in Software: Zustand erst nach zwei gleichen Abtastungen im Abstand von 10 ms übernehmen.</li>
   <li><b>Reset-Verzögerung:</b> 10 kΩ mit 100 nF → τ = 1 ms, genug bis die Versorgung stabil steht.</li>
-  <li><b>Antialiasing vor dem ADC:</b> unterdrückt alles oberhalb der Nyquist-Grenze — siehe <a href="elektronik.html#filter">Filter &amp; Frequenzgang</a>.</li>
+  <li><b>Antialiasing vor dem ADC:</b> unterdrückt alles oberhalb der Nyquist-Grenze — siehe <a href="analogtechnik.html#filter">Filter &amp; Frequenzgang</a>.</li>
   <li><b>Snubber:</b> RC in Reihe, parallel zum Schalter oder zur Diode; bedämpft die Schwingung beim harten Abschalten einer Induktivität und senkt die Störabstrahlung.</li>
 </ul>
 
@@ -152,7 +152,7 @@ import "./_style.css";
     <li>HF und digitale Busse: <b>beidseitig</b> auflegen</li>
   </ul></div>
 </div>
-<div class="tip"><b>Die wirksamste Einzelmaßnahme:</b> Hin- und Rückleiter dicht beieinander führen. Die eingeschlossene Schleifenfläche bestimmt, wie gut eine Leitung Störungen aufnimmt und abstrahlt. Eine durchgehende Massefläche unter jeder Signalleitung erledigt das automatisch — mehr dazu unter <a href="elektronik.html#emv">EMV, Masse &amp; Entkopplung</a> und <a href="leiterplatte-kicad.html#signal">Leiterplatte → Signalintegrität</a>.</div>
+<div class="tip"><b>Die wirksamste Einzelmaßnahme:</b> Hin- und Rückleiter dicht beieinander führen. Die eingeschlossene Schleifenfläche bestimmt, wie gut eine Leitung Störungen aufnimmt und abstrahlt. Eine durchgehende Massefläche unter jeder Signalleitung erledigt das automatisch — mehr dazu unter <a href="analogtechnik.html#emv">EMV, Masse &amp; Entkopplung</a> und <a href="leiterplatte-kicad.html#signal">Leiterplatte → Signalintegrität</a>.</div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>

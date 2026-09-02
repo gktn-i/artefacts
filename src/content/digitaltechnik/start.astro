@@ -1,0 +1,39 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Digitaltechnik ist Analogtechnik mit nur zwei erlaubten Zuständen.</b> Der Gewinn: Störungen werden in jeder Stufe ausgebügelt, Kopien sind bitgenau, dieselbe Hardware tut mit anderem Speicherinhalt etwas völlig anderes. Der Preis: Zeit und Takt werden zur eigenen Disziplin — Setup, Hold, Metastabilität.</div>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#zahlen"><div class="mt"><span class="i">🔢</span>Zahlensysteme &amp; Codes</div><div class="md">Binär, Hex, Zweierkomplement, Gray — dazu IEEE 754, Festkomma und die Ganzzahl-Fallen in C.</div></a>
+  <a href="#logik"><div class="mt"><span class="i">∧</span>Boolesche Algebra &amp; Schaltnetze</div><div class="md">Gesetze, De Morgan, KV-Diagramm; Gatter, Multiplexer, Addierer, Tri-State.</div></a>
+  <a href="#schaltwerke"><div class="mt"><span class="i">💾</span>Flipflops &amp; Automaten</div><div class="md">Latch gegen Flipflop, Register, Zähler; Moore/Mealy und der Zustandsautomat in C.</div></a>
+  <a href="#timing"><div class="mt"><span class="i">⏱️</span>Timing, Pegel &amp; Logikfamilien</div><div class="md">Setup, Hold, Metastabilität, Taktdomänen; TTL/CMOS-Pegel und Pegelwandler.</div></a>
+  <a href="#speicher"><div class="mt"><span class="i">🗄️</span>Speicher &amp; FPGA</div><div class="md">SRAM, DRAM, Flash, FRAM — und was in einem FPGA steckt, samt HDL-Grundregeln.</div></a>
+</div>
+
+<h2>Warum digital gewonnen hat — und wo nicht</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Regeneration</div><div class="cd">Jede Logikstufe erzeugt saubere Pegel neu. Nach hundert Stufen ist das Signal so gut wie am Anfang — analog addieren sich Rauschen und Verzerrung.</div></div>
+  <div class="card"><div class="ct">Exakte Kopien</div><div class="cd">Speichern, übertragen, wiederherstellen — beliebig oft, bitgenau identisch.</div></div>
+  <div class="card"><div class="ct">Skalierung</div><div class="cd">Ein Transistor mehr kostet praktisch nichts, sobald der Chip existiert. Darauf beruht die gesamte Rechnerentwicklung.</div></div>
+  <div class="card"><div class="ct">Programmierbarkeit</div><div class="cd">Dieselbe Hardware macht etwas völlig anderes, wenn man den Speicherinhalt ändert. Das gibt es analog nicht.</div></div>
+</div>
+<div class="warn"><b>Wo digital verliert:</b> Jede Wandlung kostet Zeit, Strom und Genauigkeit. Ein analoger Tiefpass aus zwei Bauteilen braucht digital Wandler, Rechenkern, Takt und Rekonstruktion. Für die kleinsten Signale und schnellsten Reaktionen bleibt <a href="analogtechnik.html">analog</a> überlegen — deshalb steht in jedem mechatronischen Gerät beides nebeneinander.</div>
+
+<h2>Wie dieses Modul zum Rest des Hubs steht</h2>
+<div class="grid">
+  <div class="card"><div class="ct">→ <a href="analogtechnik.html">Analogtechnik</a></div><div class="cd">Die Bauteile, aus denen Gatter bestehen — und die Wandler an der Grenze zwischen beiden Welten.</div></div>
+  <div class="card"><div class="ct">→ <a href="informationstechnik.html">Informationstechnik</a></div><div class="cd">Was aus Logik und Speicher wird: Rechnerarchitektur, Betriebssysteme, Netze, Signalverarbeitung.</div></div>
+  <div class="card"><div class="ct">→ <a href="embedded-firmware.html">Embedded &amp; Firmware</a></div><div class="cd">Der Mikrocontroller in der Praxis: Peripherie, Interrupts, Toolchain, Debuggen.</div></div>
+  <div class="card"><div class="ct">→ <a href="elektronik-grundlagen.html#protokolle">Elektronik 101: Protokolle</a></div><div class="cd">I²C, SPI, UART aus Anwendersicht — anschließen, ansprechen, mit dem Logikanalysator prüfen.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Klaus Fricke, <i>Digitaltechnik</i>, Springer Vieweg.</li>
+    <li>Harris &amp; Harris, <i>Digital Design and Computer Architecture</i>, Morgan Kaufmann — verbindet Digitaltechnik und Rechnerbau, mit RISC-V-Ausgabe.</li>
+    <li><a href="https://www.nand2tetris.org/">nand2tetris</a> und <a href="https://nandgame.com/">nandgame.com</a> — vom NAND-Gatter zum funktionierenden Rechner, kostenlos.</li>
+  </ul>
+</div>

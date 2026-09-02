@@ -1,0 +1,44 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Analogtechnik ist Elektrotechnik mit Halbleitern — und jeder Zwischenwert zählt.</b> Diode, Transistor und Operationsverstärker machen aus Netzwerkgesetzen Schaltungen, die verstärken, filtern, wandeln und versorgen. Der Preis: alles ist ein Abwägen — Verstärkung gegen Bandbreite, Genauigkeit gegen Stromverbrauch, Wirkungsgrad gegen Störabstrahlung.</div>
+
+<p class="lede">Voraussetzung sind die Netzwerkgesetze aus der <a href="elektrotechnik.html">Elektrotechnik</a>. Was hier steht, braucht man beim Schaltungsentwurf, beim Lesen von Datenblättern und beim <a href="leiterplatte-kicad.html">Leiterplattenentwurf</a>.</p>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#halbleiter"><div class="mt"><span class="i">🔬</span>Halbleiter &amp; Dioden</div><div class="md">Dotierung, pn-Übergang, Diodengleichung, Typen von Schottky bis TVS, SiC und GaN.</div></a>
+  <a href="#transistoren"><div class="mt"><span class="i">🔀</span>Transistor &amp; MOSFET</div><div class="md">BJT-Grundschaltungen, Arbeitspunkt · R_DS(on), Gate-Ladung, Halbbrücke, IGBT.</div></a>
+  <a href="#opv"><div class="mt"><span class="i">🔺</span>Operationsverstärker</div><div class="md">Zwei goldene Regeln, alle Grundschaltungen, reale Grenzen, Auswahl, Komparator.</div></a>
+  <a href="#filter"><div class="mt"><span class="i">📶</span>Filter, Frequenzgang &amp; Rauschen</div><div class="md">Bode-Diagramm, Butterworth gegen Bessel, Antialiasing · Rauschquellen, Offset, Drift.</div></a>
+  <a href="#wandler"><div class="mt"><span class="i">🔢</span>ADC &amp; DAC</div><div class="md">SAR, Delta-Sigma, Referenzen, ENOB — und was man beim Anschließen falsch macht.</div></a>
+  <a href="#versorgung"><div class="mt"><span class="i">🔌</span>Linear- &amp; Schaltregler</div><div class="md">LDO gegen Buck, Topologien, Auslegung, heiße Schleife, Schutzbeschaltung.</div></a>
+  <a href="#emv"><div class="mt"><span class="i">📡</span>EMV, Masse &amp; Entkopplung</div><div class="md">Kopplungspfade, die zehn wirksamsten Layout-Regeln, Normen, ESD, Fehlersuche.</div></a>
+</div>
+
+<h2>Wo analog bleibt — und wo digital übernimmt</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Am Sensor</div><div class="cd">Die ersten Millivolt eines Sensors sind immer analog: verstärken, filtern, dann wandeln. Fehler hier lassen sich später nicht mehr wegrechnen.</div></div>
+  <div class="card"><div class="ct">Am Aktor</div><div class="cd">Motortreiber, Leistungsstufen, Regler — Halbleiter, die Ampere schalten. Wirkungsgrad und Wärme entscheiden das Design.</div></div>
+  <div class="card"><div class="ct">Bei der Versorgung</div><div class="cd">Jedes Gerät braucht saubere Spannungen. Ob LDO oder Schaltregler, ist eine analoge Entscheidung mit digitalen Folgen (Rauschen, Störungen).</div></div>
+  <div class="card"><div class="ct">Dazwischen: digital</div><div class="cd">Sobald das Signal gewandelt ist, übernimmt die <a href="digitaltechnik.html">Digitaltechnik</a> — mit regenerierten Pegeln, exakten Kopien und Programmierbarkeit.</div></div>
+</div>
+<div class="tip"><b>Die Grenze und ihre Fallen</b> — Auflösung, Aliasing, Referenzen, Masseführung am Wandler — stehen unter <a href="#wandler">ADC &amp; DAC</a>.</div>
+
+<h2>Wie dieses Modul zum Rest des Hubs steht</h2>
+<div class="grid">
+  <div class="card"><div class="ct">→ <a href="elektrotechnik.html">Elektrotechnik</a></div><div class="cd">Die Gesetze, die hier vorausgesetzt werden: Netzwerke, Wechselstrom, Felder, Leistung.</div></div>
+  <div class="card"><div class="ct">→ <a href="digitaltechnik.html">Digitaltechnik</a></div><div class="cd">Zahlen, Logik, Flipflops, Timing, Speicher — die andere Hälfte der Elektronik.</div></div>
+  <div class="card"><div class="ct">→ <a href="leiterplatte-kicad.html">Leiterplatte &amp; KiCad</a></div><div class="cd">Wo aus Schaltplänen Layouts werden: Stackup, Impedanzen, EMV-gerechtes Routing.</div></div>
+  <div class="card"><div class="ct">→ <a href="elektronik-grundlagen.html">Elektronik 101 (Werkstatt)</a></div><div class="cd">Bauteile erkennen, Steckbrett, Messgeräte, Fehlersuche — die Praxis zu diesem Modul.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Paul Horowitz, Winfield Hill, <i>The Art of Electronics</i>, 3. Auflage, Cambridge University Press — die praxisnächste Referenz überhaupt; dazu <i>The x-Chapters</i> zur Vertiefung.</li>
+    <li>Ulrich Tietze, Christoph Schenk, Eberhard Gamm, <i>Halbleiter-Schaltungstechnik</i>, Springer Vieweg.</li>
+    <li>Adel Sedra, Kenneth Smith, <i>Microelectronic Circuits</i>, Oxford University Press.</li>
+    <li>Application Notes von <a href="https://www.ti.com/analog-circuit/circuit-cookbook.html">Texas Instruments</a> und <a href="https://www.analog.com/en/resources/technical-articles.html">Analog Devices</a> — mit gerechneten Beispielen.</li>
+  </ul>
+</div>

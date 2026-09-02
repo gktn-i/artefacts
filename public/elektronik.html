@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Umgezogen — Artefakte</title>
+<script>
+(function () {
+  var h = location.hash.replace("#", "");
+  var digital = /^(zahlen|logik|schaltwerke|timing|speicher|boole|schaltnetze|flipflops|automaten|logikfamilien|fpga)$/;
+  location.replace((digital.test(h) ? "digitaltechnik.html" : "analogtechnik.html") + (h && h !== "start" ? "#" + h : ""));
+})();
+</script>
+<meta http-equiv="refresh" content="0;url=analogtechnik.html">
+<p>Dieses Modul wurde aufgeteilt: <a href="analogtechnik.html">Analogtechnik</a> und <a href="digitaltechnik.html">Digitaltechnik</a>.</p>
+</html>

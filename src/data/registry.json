@@ -782,7 +782,7 @@
     {
      "id": "elektro",
      "name": "Elektrotechnik & Elektronik",
-     "desc": "Das Fundament: Ströme und Felder, dann Bauelemente und Schaltungen — analog wie digital.",
+     "desc": "Das Fundament: erst die Gesetze der Ströme und Felder, dann Bauelemente und Schaltungen — analog wie digital.",
      "modules": [
       {
        "id": "elektrotechnik",
@@ -869,13 +869,13 @@
        ]
       },
       {
-       "id": "elektronik",
-       "file": "elektronik.html",
-       "name": "Elektronik",
+       "id": "analogtechnik",
+       "file": "analogtechnik.html",
+       "name": "Analogtechnik",
        "icon": "🎛️",
        "kind": "Referenz",
-       "updated": "2026-09-01",
-       "desc": "Bauelemente und Schaltungen — analog wie digital. Diode, Transistor und Operationsverstärker, Filter, Wandler, Regler und EMV; dann Zahlensysteme, Logik, Flipflops, Timing, Speicher und FPGA. Wo Elektrotechnik zur Schaltung wird.",
+       "updated": "2026-09-02",
+       "desc": "Bauelemente und Schaltungen, in denen jeder Zwischenwert zählt: Diode, Transistor und Operationsverstärker, Filter und Rauschen, ADC und DAC, Linear- und Schaltregler — und EMV mit sauberer Masseführung.",
        "tags": [
         "halbleiter",
         "diode",
@@ -883,16 +883,13 @@
         "mosfet",
         "opv",
         "filter",
+        "rauschen",
         "adc",
         "dac",
         "schaltregler",
+        "ldo",
         "emv",
-        "zahlensysteme",
-        "boolesche algebra",
-        "flipflops",
-        "timing",
-        "speicher",
-        "fpga"
+        "entkopplung"
        ],
        "sections": [
         {
@@ -926,6 +923,68 @@
         {
          "h": "emv",
          "t": "EMV, Masse & Entkopplung"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Bauelemente",
+         "sections": [
+          "start",
+          "halbleiter",
+          "transistoren",
+          "opv"
+         ]
+        },
+        {
+         "l": "Schaltungen",
+         "sections": [
+          "filter",
+          "wandler",
+          "versorgung",
+          "emv"
+         ]
+        }
+       ],
+       "alias": {
+        "dioden": "halbleiter",
+        "bjt": "transistoren",
+        "mosfet": "transistoren",
+        "rauschen": "filter"
+       },
+       "related": [
+        "elektronik-101",
+        "loeten"
+       ]
+      },
+      {
+       "id": "digitaltechnik",
+       "file": "digitaltechnik.html",
+       "name": "Digitaltechnik",
+       "icon": "🔲",
+       "kind": "Referenz",
+       "updated": "2026-09-02",
+       "desc": "Schaltungen mit nur zwei Zuständen: Zahlensysteme und Codes, Boolesche Algebra und Schaltnetze, Flipflops und Automaten, Timing und Logikfamilien, Speicher und FPGA.",
+       "tags": [
+        "zahlensysteme",
+        "zweierkomplement",
+        "ieee 754",
+        "boolesche algebra",
+        "kv-diagramm",
+        "flipflops",
+        "automaten",
+        "timing",
+        "metastabilität",
+        "logikfamilien",
+        "sram",
+        "dram",
+        "flash",
+        "fpga",
+        "hdl"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
         },
         {
          "h": "zahlen",
@@ -950,34 +1009,23 @@
        ],
        "groups": [
         {
-         "l": "Analog",
+         "l": "Logik",
          "sections": [
           "start",
-          "halbleiter",
-          "transistoren",
-          "opv",
-          "filter",
-          "wandler",
-          "versorgung",
-          "emv"
+          "zahlen",
+          "logik",
+          "schaltwerke"
          ]
         },
         {
-         "l": "Digital",
+         "l": "Zeit & Speicher",
          "sections": [
-          "zahlen",
-          "logik",
-          "schaltwerke",
           "timing",
           "speicher"
          ]
         }
        ],
        "alias": {
-        "dioden": "halbleiter",
-        "bjt": "transistoren",
-        "mosfet": "transistoren",
-        "rauschen": "filter",
         "boole": "logik",
         "schaltnetze": "logik",
         "flipflops": "schaltwerke",
@@ -987,7 +1035,7 @@
        },
        "related": [
         "elektronik-101",
-        "loeten"
+        "embedded"
        ]
       }
      ]
