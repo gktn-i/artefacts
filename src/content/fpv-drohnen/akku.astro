@@ -47,18 +47,39 @@ import "./_style.css";
 <figcaption>Grün = Arbeitsbereich 3,0–4,2 V; im Alltag obere Hälfte: landen ~3,5 V unter Last, lagern 3,8 V. Die 4,35-V-Zone gilt <em>nur</em> für LiHV — LiPo dorthin zu laden ist Überladung.</figcaption>
 </figure>
 
-<h2>Die drei Chemien im Vergleich</h2>
-<div class="tbl-wrap"><table style="min-width:920px">
-<thead><tr><th>je Zelle</th><th>LiPo</th><th>LiHV</th><th>Li-Ion (18650/21700)</th></tr></thead>
+<h2>Spannungen: die Werte, die zählen</h2>
+<p>Eine Tabelle für alle drei Chemien — je Zelle. Gesamtspannung = Wert × Zellenzahl; der <a href="#akku--lade-assistent-werte-je-pack">Lade-Assistent</a> rechnet sie für deinen Pack aus.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Zustand</th><th>LiPo</th><th>LiHV</th><th>Li-Ion</th><th>Bedeutung</th></tr></thead>
 <tbody>
-<tr><td><b>Ladeschluss (voll)</b></td><td>4,20 V</td><td>4,35 V</td><td>4,20 V</td></tr>
-<tr><td><b>Nominal</b></td><td>3,70 V</td><td>3,80 V</td><td>3,60 V</td></tr>
-<tr><td><b>Lagerung</b></td><td>3,80–3,85 V</td><td>3,80–3,85 V</td><td>3,60–3,70 V (40–60 %)</td></tr>
-<tr><td><b>Landen (unter Last)</b></td><td>~3,50 V</td><td>~3,50 V; 1S-Whoops sacken stärker, dort ~3,30 V</td><td>2,80–3,00 V</td></tr>
-<tr><td><b>Untergrenze (Datenblatt)</b></td><td>3,00 V</td><td>3,00 V</td><td>2,50 V — praktisch nicht ausreizen</td></tr>
-<tr><td><b>Lademodus am Ladegerät</b></td><td>„LiPo“</td><td>„LiHV“</td><td>„Li-Ion“ (lädt auf 4,20 V, aber mit passender Kennlinie)</td></tr>
-<tr><td><b>Übliche Laderate</b></td><td>1C</td><td>1C</td><td>0,5–1C laut Zellendatenblatt</td></tr>
-<tr><td><b>Typischer Einsatz</b></td><td>alles von 2S bis 8S</td><td>1S-Whoops; vereinzelt Renn-Packs</td><td>Long Range, Flächen — und abseits des Quads: Brille, Funke</td></tr>
+<tr><td><b>Voll</b></td><td>4,20 V</td><td>4,35 V</td><td>4,20 V</td><td>Ladeschluss. Zellen danach ≤ 0,02 V auseinander</td></tr>
+<tr><td><b>Lagerung</b></td><td>3,80–3,85 V</td><td>3,80–3,85 V</td><td>3,60–3,70 V</td><td>Ziel ab 2–3 Tagen Standzeit — Li-Ion lagert tiefer</td></tr>
+<tr><td><b>Nominal</b></td><td>3,70 V</td><td>3,80 V</td><td>3,60 V</td><td>Rechenwert für Energie und Kapazität</td></tr>
+<tr><td><b>Landen</b></td><td>3,50 V unter Last</td><td>3,50 V; 1S-Whoop ~3,30 V</td><td>~3,00 V in Ruhe</td><td>Der OSD-Warnwert. LiPo erholt sich danach auf 3,7–3,8 V</td></tr>
+<tr><td><b>Untergrenze</b></td><td>3,30 V in Ruhe</td><td>3,30 V in Ruhe</td><td>2,80 V unter Last</td><td>Regelmäßig darunter kostet spürbar Zyklen</td></tr>
+<tr><td><b>Nicht mehr laden</b></td><td>&lt; 3,00 V</td><td>&lt; 3,00 V</td><td>&lt; 2,50 V</td><td>Schaden. Sondermüll, kein Ladegut</td></tr>
+</tbody>
+</table></div>
+
+<h3>Gesamtspannung der gängigen Packs</h3>
+<p class="note">Nominal für Wh-Rechnungen: 4S LiPo 14,8 V · 6S LiPo 22,2 V · 6S Li-Ion 21,6 V.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Pack</th><th>Voll</th><th>Lagerung</th><th>Landen (unter Last)</th><th>Untergrenze (in Ruhe)</th></tr></thead>
+<tbody>
+<tr><td><b>4S LiPo</b></td><td>16,8 V</td><td>15,2 V</td><td>14,0 V</td><td>13,2 V</td></tr>
+<tr><td><b>6S LiPo</b></td><td>25,2 V</td><td>22,8 V</td><td>21,0 V</td><td>19,8 V</td></tr>
+<tr><td><b>1S LiHV</b></td><td>4,35 V</td><td>3,80 V</td><td>3,30 V</td><td>3,30 V</td></tr>
+<tr><td><b>6S Li-Ion</b></td><td>25,2 V</td><td>21,6–22,2 V</td><td>18,0 V</td><td>16,8 V</td></tr>
+</tbody>
+</table></div>
+
+<h3>Was sich sonst je Chemie unterscheidet</h3>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Chemie</th><th>Lademodus am Gerät</th><th>Laderate</th><th>Typischer Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>LiPo</b></td><td>„LiPo“</td><td>1C</td><td>alles von 2S bis 8S — der Normalfall am Quad</td></tr>
+<tr><td><b>LiHV</b></td><td>„LiHV“</td><td>1C</td><td>1S-Whoops; vereinzelt Renn-Packs</td></tr>
+<tr><td><b>Li-Ion</b> (18650/21700)</td><td>„Li-Ion“ — 4,20 V, aber eigene Kennlinie</td><td>0,5–1C laut Zellendatenblatt</td><td>Long Range, Flächen — und abseits des Quads: Brille, Funke</td></tr>
 </tbody>
 </table></div>
 <div class="stop"><b>Der Lademodus ist eine Sicherheitseinstellung, keine Formalie.</b> Vor jedem Ladevorgang in dieser Reihenfolge prüfen: Modus → Zellenzahl → Strom.</div>
@@ -70,6 +91,8 @@ import "./_style.css";
 <tr><td><b>Li-Ion im LiPo-Modus</b></td><td>Gleicher Ladeschluss 4,20 V, aber falsche Kennlinie — Li-Ion-Modus wählen</td></tr>
 </tbody>
 </table></div>
+<div class="tip"><b>Die 80-Prozent-Regel.</b> Rund 80 % der Nennkapazität nutzen — 1000 mAh aus einem 1300er. So hält ein Pack 200 statt 50 Zyklen. Kontrolle über verbrauchte mAh im OSD; dafür den Stromsensor kalibrieren (<a href="#betaflight">Betaflight einrichten</a>).</div>
+
 
 <h2>Die Entladekurve — warum Spannung ein schlechter Tankanzeiger ist</h2>
 <figure>
@@ -94,21 +117,6 @@ import "./_style.css";
 </svg>
 <figcaption>In der flachen Mitte sagt die Spannung fast nichts über die Restkapazität. Unter Last liegt die Kurve um I·R<sub>i</sub> tiefer — deshalb Spannungsalarm im Vollgas und „Erholung“ danach. Verlässlich: der mAh-Zähler im OSD.</figcaption>
 </figure>
-
-<h2>Spannungen, die man auswendig kennt</h2>
-<div class="tbl-wrap"><table style="min-width:960px">
-<thead><tr><th>Zustand</th><th>LiPo je Zelle</th><th>LiPo 4S</th><th>LiPo 6S</th><th>Li-Ion je Zelle</th><th>Bedeutung</th></tr></thead>
-<tbody>
-<tr><td><b>Voll</b></td><td>4,20 V</td><td>16,8 V</td><td>25,2 V</td><td>4,20 V — identisch</td><td>Ladeschlussspannung. LiHV-Zellen gehen auf 4,35 V</td></tr>
-<tr><td><b>Lagerung</b></td><td>3,80–3,85 V</td><td>15,2 V</td><td>22,8 V</td><td>3,60–3,70 V — tiefer!</td><td>Zielwert für alles über zwei bis drei Tage Standzeit</td></tr>
-<tr><td><b>Nominal</b></td><td>3,70 V</td><td>14,8 V</td><td>22,2 V</td><td>3,60 V</td><td>Rechenwert für Energie und Kapazität</td></tr>
-<tr><td><b>Landen</b></td><td>3,50 V unter Last</td><td>14,0 V</td><td>21,0 V</td><td>~3,0 V in Ruhe</td><td>Der übliche Warnwert im OSD. LiPo erholt sich nach der Landung auf etwa 3,7–3,8 V</td></tr>
-<tr><td><b>Untergrenze</b></td><td>3,30 V in Ruhe</td><td>13,2 V</td><td>19,8 V</td><td>2,50 V (Datenblatt)</td><td>Wer regelmäßig darunter geht, verliert spürbar Zyklen</td></tr>
-<tr><td><b>Tiefentladen</b></td><td>&lt; 3,0 V</td><td>—</td><td>—</td><td>&lt; 2,5 V</td><td>Schaden. Darunter ist der Akku Sondermüll, nicht Ladegut</td></tr>
-</tbody>
-</table></div>
-<p class="note">LiHV ändert nur „Voll“ auf 4,35 V. Die 4S/6S-Summen gelten für LiPo — bei Li-Ion entsprechend multiplizieren (6S: voll ebenfalls 25,2 V, leer ~18 V).</p>
-<div class="tip"><b>Die 80-Prozent-Regel.</b> Rund 80 % der Nennkapazität nutzen — 1000 mAh aus einem 1300er. So hält ein Pack 200 statt 50 Zyklen. Kontrolle über verbrauchte mAh im OSD; dafür den Stromsensor kalibrieren (<a href="#betaflight">Betaflight einrichten</a>).</div>
 
 <h2>Was auf dem Schrumpfschlauch steht</h2>
 <div class="flist">
