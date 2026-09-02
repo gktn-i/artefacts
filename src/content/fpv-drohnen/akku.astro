@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Der LiPo ist das gefährlichste und das am schnellsten verschlissene Teil am Quad.</b> Er bestimmt Flugzeit, Leistung und Gewicht — und er ist das einzige Bauteil, das bei falscher Behandlung brennt. Zwei Zahlen zählen wirklich: Zellenzahl und Innenwiderstand. Die aufgedruckte C-Rate zählt am wenigsten.</div>
+<div class="kurz"><b>Der LiPo ist das gefährlichste und am schnellsten verschlissene Teil am Quad:</b> Er bestimmt Flugzeit, Leistung und Gewicht — und brennt bei falscher Behandlung. Zählen tun Zellenzahl und Innenwiderstand, nicht die aufgedruckte C-Rate.</div>
 
 <h2>Das Betriebsfenster: 3,0 bis 4,2 V je Zelle</h2>
 <ul>
@@ -44,7 +44,7 @@ import "./_style.css";
   <text class="lbl" x="619" y="200" text-anchor="middle">Brandgefahr</text>
   <text class="lbl" x="330" y="226" text-anchor="middle">Werte je Zelle — bei 6S alles mal sechs. LiHV-Zellen verschieben nur die Obergrenze auf 4,35 V.</text>
 </svg>
-<figcaption>Das Spannungsfenster einer Lithium-Zelle. Der grüne Bereich 3,0–4,2 V ist der zulässige Arbeitsbereich; im Alltag bewegt man sich in der oberen Hälfte davon (landen bei ~3,5 V unter Last, lagern bei 3,8 V). Die 4,35-V-Zone gilt <em>ausschließlich</em> für LiHV-Zellen — eine normale LiPo-Zelle dorthin zu laden ist Überladung.</figcaption>
+<figcaption>Grün = Arbeitsbereich 3,0–4,2 V; im Alltag obere Hälfte: landen ~3,5 V unter Last, lagern 3,8 V. Die 4,35-V-Zone gilt <em>nur</em> für LiHV — LiPo dorthin zu laden ist Überladung.</figcaption>
 </figure>
 
 <h2>Die drei Chemien im Vergleich</h2>
@@ -92,7 +92,7 @@ import "./_style.css";
   <text class="lbla" x="180" y="92">in Ruhe</text>
   <text class="lbl" x="180" y="146">unter Last</text>
 </svg>
-<figcaption>Typische LiPo-Entladung: In der langen flachen Mitte sagt die Spannung fast nichts über die Restkapazität. Unter Last liegt die Kurve um I·R<sub>i</sub> tiefer — deshalb löst ein voller Pack im Vollgas den Spannungsalarm aus und „erholt“ sich danach. Verlässlich ist der mAh-Zähler im OSD, nicht die Voltzahl.</figcaption>
+<figcaption>In der flachen Mitte sagt die Spannung fast nichts über die Restkapazität. Unter Last liegt die Kurve um I·R<sub>i</sub> tiefer — deshalb Spannungsalarm im Vollgas und „Erholung“ danach. Verlässlich: der mAh-Zähler im OSD.</figcaption>
 </figure>
 
 <h2>Spannungen, die man auswendig kennt</h2>
@@ -108,7 +108,7 @@ import "./_style.css";
 </tbody>
 </table></div>
 <p class="note">LiHV ändert nur „Voll“ auf 4,35 V. Die 4S/6S-Summen gelten für LiPo — bei Li-Ion entsprechend multiplizieren (6S: voll ebenfalls 25,2 V, leer ~18 V).</p>
-<div class="tip"><b>Die 80-Prozent-Regel.</b> Nutze rund 80 % der Nennkapazität, also 1000 mAh aus einem 1300er. Das ist kein Geiz, sondern die Bedingung dafür, dass ein Pack 200 statt 50 Zyklen hält. Kontrolliert wird über die verbrauchte Kapazität (mAh) im OSD — dafür muss der Stromsensor kalibriert sein, siehe <a href="#betaflight">Betaflight einrichten</a>.</div>
+<div class="tip"><b>Die 80-Prozent-Regel.</b> Rund 80 % der Nennkapazität nutzen — 1000 mAh aus einem 1300er. So hält ein Pack 200 statt 50 Zyklen. Kontrolle über verbrauchte mAh im OSD; dafür den Stromsensor kalibrieren (<a href="#betaflight">Betaflight einrichten</a>).</div>
 
 <h2>Was auf dem Schrumpfschlauch steht</h2>
 <div class="flist">
@@ -162,10 +162,10 @@ import "./_style.css";
 <tr><td><b>21700</b></td><td>21 × 70 mm · ~70 g</td><td>4000–5000 mAh</td><td>Long-Range-Packs mit mehr Energie je Zelle</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Mehr steht nicht drin.</b> Über ~3600 mAh (18650) bzw. ~5000 mAh (21700) ist physikalisch Schluss — Zellen mit „6800“ oder „9900 mAh“ sind Fälschungen. Schnelltest: Eine echte 18650 wiegt um 45 g, Fälschungen oft nur ~25 g. Markenzellen (Molicel, Samsung, LG, Murata, Panasonic) beim Fachhändler kaufen, nicht am Marktplatz.</div>
+<div class="warn"><b>Mehr steht nicht drin.</b> 18650 max. ~3600 mAh · 21700 max. ~5000 mAh — „6800“ oder „9900 mAh“ = Fälschung<br />Schnelltest: echte 18650 ≈ 45 g, Fake oft ~25 g<br />Markenzellen (Molicel, Samsung, LG, Murata, Panasonic) beim Fachhändler, nicht am Marktplatz</div>
 <div class="grid2">
-  <div class="card"><div class="ct">Brille</div><div class="cd">Digitale Brillen ziehen ~8–12 W · DC-Eingang meist 2–6S (Goggles X: 7–26 V) · üblich: 2S/3S-Li-Ion-Pack oder 18650-Case, 2S mit 3000er-Zellen ≈ 21,6 Wh ≈ 2–3 h · DJI: eigener 2S-Pack (Goggles 3: 3000 mAh, bis ~3 h) · LiPo geht, Li-Ion hält länger und lagert unkritischer.</div></div>
-  <div class="card"><div class="ct">Funke</div><div class="cd">Die RadioMaster-Klasse (TX16S, Boxer, Pocket, Zorro) läuft auf 2 × 18650, intern per USB-C geladen — Laufzeit viele Stunden. Die Zellen sitzen in Reihe ohne Balancer: als Paar kaufen, als Paar nutzen, als Paar ersetzen — nie alt und neu mischen.</div></div>
+  <div class="card"><div class="ct">Brille</div><div class="cd">Verbrauch ~8–12 W · DC-Eingang meist 2–6S (Goggles X: 7–26 V)<br />Üblich: 2S/3S-Li-Ion-Pack oder 18650-Case — 2S × 3000 mAh ≈ 21,6 Wh ≈ 2–3 h<br />DJI: eigener 2S-Pack (Goggles 3: 3000 mAh, ~3 h)<br />LiPo geht auch — Li-Ion hält länger, lagert unkritischer</div></div>
+  <div class="card"><div class="ct">Funke</div><div class="cd">RadioMaster-Klasse (TX16S, Boxer, Pocket, Zorro): 2 × 18650, intern per USB-C geladen, Laufzeit viele Stunden. Zellen in Reihe ohne Balancer → als Paar kaufen, nutzen, ersetzen; nie alt und neu mischen.</div></div>
   <div class="card"><div class="ct">Lose Zellen transportieren</div><div class="cd">Hochstromzellen sind ungeschützt — ein Kurzschluss über Schlüssel oder Münzen in der Tasche liefert dreistellige Ampere. Transport nur in der Plastikbox; beschädigter Schrumpfschlauch → neu schrumpfen oder entsorgen.</div></div>
   <div class="card"><div class="ct">Passform &amp; Laden</div><div class="cd">Vor dem Kauf prüfen: Zellen mit Schutzschaltung sind ein paar Millimeter länger, Button- und Flat-Top nicht überall austauschbar. Geladen wird im Gerät (USB-C), im Rundzellen-Lader oder am Hobby-Lader im <b>Li-Ion-Modus</b> mit 0,5–1C — nie im LiPo-Modus.</div></div>
 </div>
@@ -235,7 +235,7 @@ import "./_style.css";
   <li><b>Danach:</b> im Raum bleiben, nie über Nacht, nie unbeaufsichtigt aus dem Haus</li>
   <li><b>Dauer bei 1C:</b> etwa 60–75 Minuten von leer auf voll — deutlich schneller heißt, der Strom stimmt nicht</li>
 </ul>
-<div class="stop"><b>Sofort abbrechen und Pack nach draußen bringen, wenn:</b> der Pack sich sichtbar bläht · irgendetwas heiß wird oder süßlich riecht · das Ladegerät eine Zelle mit stark abweichender Spannung meldet · Rauch austritt. Nicht mit Wasser löschen, nicht in geschlossene Behälter werfen.</div>
+<div class="stop"><b>Sofort abbrechen, Pack nach draußen:</b> Pack bläht sich · etwas wird heiß oder riecht süßlich · Ladegerät meldet eine stark abweichende Zelle · Rauch. Nicht mit Wasser löschen, nicht in geschlossene Behälter.</div>
 
 <h3>6 · Fertig — der Balance-Blick</h3>
 <ul>
@@ -266,20 +266,20 @@ import "./_style.css";
   <li><b>Die Gefahr:</b> Beim Einstecken des zweiten Packs fließen Ausgleichsströme — ungeregelt, nur durch die Innenwiderstände begrenzt; das Ladegerät ist daran unbeteiligt</li>
   <li>Alle Regeln unten halten diese Ausgleichsströme klein</li>
 </ul>
-<div class="stop"><b>Die eine unverzeihliche Regel: nur gleiche Zellenzahl auf ein Board.</b> 4S neben 6S verbindet 16,8 V hart mit 25,2 V — zerstörerische Ausgleichsströme, Zellen-Kurzschluss über den Balancer-Bus, die häufigste Ursache für Paraboard-Brände. Gleiche Chemie ebenso Pflicht (kein LiPo neben LiHV).</div>
+<div class="stop"><b>Nur gleiche Zellenzahl auf ein Board.</b> 4S neben 6S = 16,8 V hart an 25,2 V → zerstörerische Ausgleichsströme, Zellen-Kurzschluss über den Balancer-Bus — die häufigste Ursache für Paraboard-Brände. Gleiche Chemie ebenso Pflicht (kein LiPo neben LiHV).</div>
 <div class="steps">
-  <div class="step"><h4>Vorher jeden Pack messen</h4>Mit dem Akkuchecker: gleiche Zellenzahl · Zellspannungen max. <b>0,1 V je Zelle</b> auseinander (6S: ~0,6 V gesamt). Praktisch: leere zu leeren, volle zu vollen — frisch geflogen neben voll ist genau der Fehler. Ausreißer einzeln laden.</div>
+  <div class="step"><h4>Vorher jeden Pack messen</h4>Akkuchecker: gleiche Zellenzahl · Zellspannungen max. <b>0,1 V je Zelle</b> auseinander (6S: ~0,6 V gesamt) · leere zu leeren, volle zu vollen — nie frisch geflogen neben voll · Ausreißer einzeln laden.</div>
   <div class="step"><h4>Board prüfen</h4>Nur Boards mit Sicherungen je Anschluss verwenden (Haupt- <em>und</em> idealerweise Balancerpfad); Buchsen auf Schmorspuren und lockere Kontakte ansehen. Billige Boards ohne Sicherungen sind der falsche Ort zum Sparen.</div>
-  <div class="step"><h4>Anstecken: erst alle Hauptstecker, dann alle Balancer</h4>Hauptstecker einzeln anstecken, nach jedem kurz innehalten (kein Funke außer dem normalen kleinen Kontaktfunken, nichts wird warm). Erst wenn alle Hauptleitungen stecken, die Balancerstecker — der Hauptpfad verkraftet die Ausgleichsströme, die dünnen Balancer-Adern nicht. Deshalb diese Reihenfolge.</div>
-  <div class="step"><h4>Ladegerät einstellen wie für einen großen Pack</h4>Modus und Zellenzahl wie bei <em>einem</em> der Packs (alle sind ja gleich), Strom = 1C der <b>Summe</b> der Kapazitäten. Danach zeigt das Ladegerät ganz normal sechs Zellspannungen an — es sind jetzt die Mittelwerte über alle Packs.</div>
+  <div class="step"><h4>Anstecken: erst alle Hauptstecker, dann alle Balancer</h4>Hauptstecker einzeln anstecken, nach jedem kurz innehalten: nur der normale kleine Kontaktfunke, nichts wird warm. Erst dann alle Balancer — der Hauptpfad verkraftet Ausgleichsströme, die dünnen Balancer-Adern nicht.</div>
+  <div class="step"><h4>Ladegerät einstellen wie für einen großen Pack</h4>Modus und Zellenzahl wie bei <em>einem</em> Pack (alle sind gleich) · Strom = 1C der <b>Summe</b> der Kapazitäten. Die angezeigten Zellspannungen sind jetzt Mittelwerte über alle Packs.</div>
   <div class="step"><h4>Die ersten Minuten dabeibleiben</h4>Board und Stecker anfassen: handwarm ist normal, eine heiße Stelle heißt sofort abbrechen. Danach gelten die üblichen Regeln — beaufsichtigt, feuerfest, Rauchmelder.</div>
   <div class="step"><h4>Abstecken in umgekehrter Reihenfolge</h4>Erst alle Balancer, dann die Hauptstecker. Anschließend stichprobenartig Einzelzellen prüfen — nach einem sauberen Parallel-Ladevorgang sind alle Packs auf identischem Stand, das ist der angenehme Nebeneffekt der Methode.</div>
 </div>
-<div class="tip"><b>Rechenbeispiel:</b> 4 × 6S-1300 → 5200 mAh → 5,2 A, Modus „LiPo 6S“ — wie ein einzelner 6S-5200er. Storage funktioniert genauso (alle gemeinsam auf 3,8 V). Unterschiedliche <em>Kapazitäten</em> sind erlaubt — der Strom teilt sich im Verhältnis auf; nur Zellenzahl, Chemie und Ladezustand müssen passen.</div>
+<div class="tip"><b>Rechenbeispiel:</b> 4 × 6S-1300 → 5200 mAh → 5,2 A, Modus „LiPo 6S“ — wie ein einzelner 6S-5200er<br />Storage genauso: alle gemeinsam auf 3,8 V<br />Unterschiedliche <em>Kapazitäten</em> erlaubt (Strom teilt sich im Verhältnis) — nur Zellenzahl, Chemie, Ladezustand müssen passen</div>
 
 <h2>Lagern und aussortieren</h2>
 <div class="steps">
-  <div class="step"><h4>Storage nach dem Flugtag</h4>Kein Flug in den nächsten zwei, drei Tagen → Storage-Programm auf <b>3,80–3,85 V je Zelle</b> (≈ 40–50 %); es lädt oder entlädt automatisch dorthin. Der stabilste Zustand — volle wie leere Lagerung kostet Kapazität.</div>
+  <div class="step"><h4>Storage nach dem Flugtag</h4>Kein Flug in 2–3 Tagen → Storage-Programm auf <b>3,80–3,85 V je Zelle</b> (≈ 40–50 %), es lädt oder entlädt automatisch dorthin. Der stabilste Zustand — voll wie leer lagern kostet Kapazität.</div>
   <div class="step"><h4>Kühl, trocken, feuerfest</h4>Zimmertemperatur oder kühler, nicht im Sommerauto, nicht auf der Fensterbank. LiPo-Tasche oder Metallkiste, Stecker so, dass nichts kurzschließen kann.</div>
   <div class="step"><h4>Langzeitlagerung: gelegentlich nachsehen</h4>Alle vier bis acht Wochen Spannung prüfen; fällt eine Zelle Richtung 3,3 V → auf Storage nachladen. Verliert ein Pack auffallend schneller als seine Geschwister: interner Defekt, aussortieren.</div>
   <div class="step"><h4>Aufgeblähte Packs sofort aussortieren</h4>Ein „Puffy“ ist Gasbildung durch Zersetzung des Elektrolyts. Er wird nicht wieder flach, auch nicht im Kühlschrank (hartnäckiger Mythos). Nicht mehr laden, nicht mehr fliegen — kontrolliert entladen und entsorgen.</div>
@@ -322,9 +322,9 @@ import "./_style.css";
     </ol>
   </div>
 </div>
-<p class="note">Die Beispiel-Laderaten gelten für gesunde Packs bei Zimmertemperatur. Im Zweifel gilt immer das Datenblatt des Zellenherstellers — bei Li-Ion-Rundzellen (Molicel, Samsung, LG) ist es öffentlich und präzise, bei LiPo-Packs ersetzt die 1C-Faustregel das meist fehlende Datenblatt.</p>
+<p class="note">Laderaten gelten für gesunde Packs bei Zimmertemperatur. Im Zweifel zählt das Zellendatenblatt — bei Li-Ion (Molicel, Samsung, LG) öffentlich und präzise; bei LiPo ersetzt die 1C-Faustregel das meist fehlende Datenblatt.</p>
 
-<div class="warn"><b>Transport und Flugreise.</b> Lithiumakkus gehören ins Handgepäck, nie ins aufgegebene Gepäck. Es gelten Energiegrenzen je Pack (üblich: bis 100 Wh frei, 100–160 Wh mit Genehmigung der Airline, darüber verboten) und einzeln isolierte Pole. Ein 6S-1300er liegt bei rund 29 Wh — die Zahl liefert der <a href="#rechner">Rechner</a>.</div>
+<div class="warn"><b>Transport und Flugreise:</b> nur Handgepäck, nie aufgegebenes Gepäck · Pole einzeln isolieren · je Pack bis 100 Wh frei, 100–160 Wh mit Airline-Genehmigung, darüber verboten. Ein 6S-1300er hat ≈ 29 Wh — die Zahl liefert der <a href="#rechner">Rechner</a>.</div>
 
 <h2>Stecker und Kabel</h2>
 <div class="tbl-wrap"><table style="min-width:780px">
