@@ -18,7 +18,7 @@ import "./_style.css";
   <div class="card"><div class="ch"><span>Lastschalter mit MOSFET</span><span class="n">3 h</span></div>
     <div class="cd"><b>Ziel:</b> MOSFET bleibt bei Volllast kalt, Controller stürzt beim Abschalten nicht ab.</div>
     <div class="cd"><b>Material:</b> IRLZ44N oder AO3400, Motor oder LED-Streifen, Freilaufdiode, separate Versorgung.</div>
-    <div class="cd"><b>Lernt:</b> Warum ein GPIO keine Last treibt, Logic-Level-MOSFET, Freilaufdiode → <a href="elektronik.html#transistoren">Transistoren</a></div>
+    <div class="cd"><b>Lernt:</b> Warum ein GPIO keine Last treibt, Logic-Level-MOSFET, Freilaufdiode → <a href="analogtechnik.html#transistoren">Transistoren</a></div>
   </div>
   <div class="card"><div class="ch"><span>Spannungsteiler als Messeingang</span><span class="n">2 h</span></div>
     <div class="cd"><b>Ziel:</b> ADC-Messung stimmt mit dem Multimeter auf 2 % überein — und du kannst die Abweichung erklären.</div>
@@ -58,7 +58,7 @@ import "./_style.css";
   <div class="card"><div class="ch"><span>Labornetzteil mit Strombegrenzung</span><span class="n">3–4 WE</span></div>
     <div class="cd"><b>Ziel:</b> Kurzschluss am Ausgang wird sauber begrenzt — nichts wird heiß, nichts schwingt.</div>
     <div class="cd"><b>Material:</b> Schaltregler-Vorstufe, Linearendstufe, Shunt, Anzeige.</div>
-    <div class="cd"><b>Lernt:</b> OPV in der Praxis, zwei Regelschleifen, Verlustleistung, Kühlung → <a href="elektronik.html#opv">Operationsverstärker</a></div>
+    <div class="cd"><b>Lernt:</b> OPV in der Praxis, zwei Regelschleifen, Verlustleistung, Kühlung → <a href="analogtechnik.html#opv">Operationsverstärker</a></div>
   </div>
   <div class="card"><div class="ch"><span>Schrittmotor-Achse</span><span class="n">2–3 WE</span></div>
     <div class="cd"><b>Ziel:</b> Nach 100 Fahrten hin und zurück stimmt die Position auf einen Schritt genau.</div>
@@ -99,7 +99,7 @@ import "./_style.css";
   <div class="card"><div class="ch"><span>Eigener Abwärtswandler</span><span class="n">1–2 Monate</span></div>
     <div class="cd"><b>Ziel:</b> Buck-Regler mit externem Schalter, eigenem Layout und gemessenem Regelverhalten.</div>
     <div class="cd"><b>Material:</b> Controller-IC, Spule, eigene Platine — ohne Oszilloskop nicht sinnvoll.</div>
-    <div class="cd"><b>Lernt:</b> Magnetik, heiße Schleife im Layout, Kompensation → <a href="elektronik.html#wandler">Wandler</a>, <a href="leiterplatte-kicad.html#layout">Layout</a></div>
+    <div class="cd"><b>Lernt:</b> Magnetik, heiße Schleife im Layout, Kompensation → <a href="analogtechnik.html#wandler">Wandler</a>, <a href="leiterplatte-kicad.html#layout">Layout</a></div>
   </div>
   <div class="card"><div class="ch"><span>BLDC-Regelung mit FOC</span><span class="n">2–3 Monate</span></div>
     <div class="cd"><b>Ziel:</b> Dreiphasige Endstufe mit feldorientierter Regelung bei 10–20 kHz Regeltakt.</div>
@@ -114,12 +114,12 @@ import "./_style.css";
   <div class="card"><div class="ch"><span>FPGA-Projekt mit eigenem Protokoll</span><span class="n">1–2 Monate</span></div>
     <div class="cd"><b>Ziel:</b> Eine Schnittstelle, die es als fertige Peripherie nicht gibt, auf iCE40 oder ECP5.</div>
     <div class="cd"><b>Material:</b> FPGA-Board, quelloffene Toolchain (Yosys).</div>
-    <div class="cd"><b>Lernt:</b> Paralleles Denken, Timing-Constraints, Taktdomänen → <a href="elektronik.html#timing">Timing</a></div>
+    <div class="cd"><b>Lernt:</b> Paralleles Denken, Timing-Constraints, Taktdomänen → <a href="digitaltechnik.html#timing">Timing</a></div>
   </div>
   <div class="card"><div class="ch"><span>Batteriemanagement</span><span class="n">2 Monate</span></div>
     <div class="cd"><b>Ziel:</b> Mehrzelliger Li-Ion-Pack mit Balancing, Überwachung und Schutzabschaltung.</div>
     <div class="cd"><b>Material:</b> Zellen, Messfrontend, fertiger Schutzbaustein als zweite Ebene — nie allein auf eigene Software verlassen.</div>
-    <div class="cd"><b>Lernt:</b> Präzisionsmessung, Ladezustandsschätzung, Sicherheit → <a href="elektronik.html#versorgung">Versorgung</a></div>
+    <div class="cd"><b>Lernt:</b> Präzisionsmessung, Ladezustandsschätzung, Sicherheit → <a href="analogtechnik.html#versorgung">Versorgung</a></div>
   </div>
   <div class="card"><div class="ch"><span>Vernetztes Gerät mit sicheren Updates</span><span class="n">2 Monate</span></div>
     <div class="cd"><b>Ziel:</b> Signaturprüfung, A/B-Verfahren, Rollback-Schutz — auch bei abgebrochenem Update.</div>

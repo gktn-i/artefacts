@@ -19,7 +19,7 @@ import "./_style.css";
   <div class="card"><div class="ct">Prozess</div><div class="cd">Eigener Adressraum, durch die MMU geschützt. Ein Absturz reißt nichts anderes mit; dafür kostet der Wechsel Zeit.</div></div>
   <div class="card"><div class="ct">Thread</div><div class="cd">Teilt den Adressraum mit den anderen Threads des Prozesses. Schneller umzuschalten, aber ein Fehler kann alles beschädigen.</div></div>
   <div class="card"><div class="ct">Task im RTOS</div><div class="cd">Praktisch ein Thread mit eigenem Stack und eigener Priorität. Kein Speicherschutz, solange keine MPU konfiguriert ist.</div></div>
-  <div class="card"><div class="ct">Koroutine / Zustandsautomat</div><div class="cd">Kein eigener Stack, kooperativ, ressourcensparend — und für viele Mikrocontroller-Aufgaben völlig ausreichend (<a href="elektronik.html#schaltwerke">Automaten</a>).</div></div>
+  <div class="card"><div class="ct">Koroutine / Zustandsautomat</div><div class="cd">Kein eigener Stack, kooperativ, ressourcensparend — und für viele Mikrocontroller-Aufgaben völlig ausreichend (<a href="digitaltechnik.html#schaltwerke">Automaten</a>).</div></div>
 </div>
 
 <h2>Scheduling</h2>
@@ -45,7 +45,7 @@ import "./_style.css";
   <div class="card"><div class="ct">Prioritätsinversion</div><div class="cd">Eine niederpriore Task hält einen Mutex, den eine hochpriore braucht, und wird selbst von einer mittelprioren verdrängt — die hochpriore wartet beliebig lange. Bekanntester Fall: Mars Pathfinder 1997.<br /><b>Lösung:</b> Prioritätsvererbung im Mutex aktivieren (FreeRTOS und Zephyr können das).</div></div>
   <div class="card"><div class="ct">Aushungern (Starvation)</div><div class="cd">Eine niederpriore Task kommt nie an die Reihe.<br /><b>Lösung:</b> Auslastung begrenzen, hochpriore Tasks kurz halten, notfalls Prioritäten altern lassen.</div></div>
 </div>
-<div class="tip"><b>Die Regel dahinter:</b> Geteilter Zustand ist die Fehlerquelle, nicht die Nebenläufigkeit selbst. Übergaben laufen am robustesten über eine Queue mit genau einem Schreiber und einem Leser statt über gemeinsame Variablen. Das Hardware-Gegenstück ist der Taktdomänenübergang — dieselbe Logik, andere Ebene (<a href="elektronik.html#timing">Timing &amp; CDC</a>).</div>
+<div class="tip"><b>Die Regel dahinter:</b> Geteilter Zustand ist die Fehlerquelle, nicht die Nebenläufigkeit selbst. Übergaben laufen am robustesten über eine Queue mit genau einem Schreiber und einem Leser statt über gemeinsame Variablen. Das Hardware-Gegenstück ist der Taktdomänenübergang — dieselbe Logik, andere Ebene (<a href="digitaltechnik.html#timing">Timing &amp; CDC</a>).</div>
 
 <h2>Betriebssysteme in der Mechatronik</h2>
 <div class="tbl-wrap"><table style="min-width:860px">
