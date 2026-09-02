@@ -43,7 +43,7 @@ import "./_style.css";
 <tr><td><b>Vorwärts / seitwärts</b></td><td>Gar nicht direkt — der Copter neigt sich und nutzt die geneigte Schubachse</td><td>Fällt als Nebenwirkung von Roll und Nick an; deshalb kostet schnelles Fliegen immer Höhe oder Gas</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Warum Gieren immer der schwächste Kanal ist.</b> Roll und Nick nutzen den vollen Schub der Motoren, Gieren nur deren Drehmoment — eine Größenordnung weniger. Deshalb reagiert jedes Quad auf Yaw träger, und deshalb ist der Yaw-D-Anteil in Betaflight standardmäßig sehr klein.</div>
+<div class="tip"><b>Warum Gieren der schwächste Kanal ist:</b> Roll und Nick nutzen den vollen Motorschub, Gieren nur das Drehmoment — eine Größenordnung weniger. Deshalb reagiert jedes Quad auf Yaw träger, und der Yaw-D-Anteil ist in Betaflight standardmäßig sehr klein.</div>
 
 <h2>Der Regelkreis</h2>
 <figure>
@@ -75,7 +75,7 @@ import "./_style.css";
 </svg>
 <figcaption>Der innere Regelkreis. Er läuft ohne Lagesensor, ohne GPS und ohne Kamera — nur auf Drehraten. Genau deshalb funktioniert Acro auch kopfüber.</figcaption>
 </figure>
-<p>Acro regelt <b>Drehraten, keine Lagen</b>: Knüppelmitte heißt „null Grad je Sekunde — halte, was du hast“, nicht „richte dich auf“. Das ist der ganze Unterschied zur Kameradrohne und der Grund, warum man Acro üben muss.</p>
+<p>Acro regelt <b>Drehraten, keine Lagen</b>: Knüppelmitte heißt „null Grad je Sekunde — halte, was du hast“, nicht „richte dich auf“. Der Unterschied zur Kameradrohne — und der Grund zum Üben.</p>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th>Anteil</th><th>Wirkung am Quad</th><th>Symptom bei zu viel</th><th>Symptom bei zu wenig</th></tr></thead>
 <tbody>
@@ -85,7 +85,7 @@ import "./_style.css";
 <tr><td><b>Feedforward</b></td><td>Rechnet die Knüppelbewegung direkt auf die Motoren, ohne auf einen Fehler zu warten</td><td>Ruckelt bei grober Knüppelauflösung</td><td>Verzögertes Ansprechen, das Quad „hinkt“ dem Knüppel hinterher</td></tr>
 </tbody>
 </table></div>
-<p class="note">Die Schleife läuft in Betaflight typisch mit 3,2–8 kHz (je nach Gyro) — der Gyro wird noch schneller abgetastet, und die Filterkette dazwischen ist der Gegenstand des ganzen Tunings (als Schaubild unter <a href="#tuning">PID-Tuning &amp; Filter</a>). Die Theorie dahinter — Regelkreis, Stabilität, Filter und ihre Phasenverzögerung — steht ausführlich im Modul <a href="regelung-antriebe.html">Regelung, Sensorik &amp; Antriebe</a>.</p>
+<p class="note">Schleifenrate 3,2–8 kHz je nach Gyro, Gyro-Abtastung noch schneller. Die Filterkette dazwischen ist der Kern des Tunings (<a href="#tuning">PID-Tuning &amp; Filter</a>). Theorie dazu im Modul <a href="regelung-antriebe.html">Regelung, Sensorik &amp; Antriebe</a>.</p>
 
 <h2>Schub, Gewicht, Drehzahl</h2>
 <div class="fbox">
