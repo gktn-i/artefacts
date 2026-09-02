@@ -23,7 +23,7 @@
        "name": "Elektronik 101",
        "icon": "⚡",
        "kind": "Referenz",
-       "updated": "2026-08-20",
+       "updated": "2026-09-02",
        "desc": "Die große Referenz als Lernpfad: Grundlagen, Schaltungstechnik, Schaltplan und Leistungselektronik — dazu Bauteil-Datenbank, Module & Boards, Protokolle und Datenblatt-Wissen, Sicherheits- und Messpraxis mit eigenen Geräte-Tabs und eine gestraffte Fehlersuche.",
        "tags": [
         "grundlagen",
@@ -157,6 +157,7 @@
        "alias": {
         "steckbrett": "praxis",
         "regeln": "praxis",
+        "design": "praxis",
         "boarddiagnose": "fehlersuche",
         "messgeraet": "messen",
         "displays": "module",

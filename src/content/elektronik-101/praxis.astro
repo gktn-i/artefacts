@@ -1,4 +1,4 @@
-<div class="kurz"><b>Aufbau-Regeln:</b> Erst Schaltplan, dann Steckbrett, dann Lochraster. Versorgung zuerst verdrahten und messen, Verbraucher zuletzt. Farben konsequent: rot = Plus, schwarz = Masse.</div>
+<div class="kurz"><b>Aufbau-Regeln:</b> Erst Schaltplan, dann Steckbrett, dann Lochraster, dann Platine. Versorgung zuerst verdrahten und messen, Verbraucher zuletzt. Farben konsequent: rot = Plus, schwarz = Masse. Die verdichteten Design-Regeln stehen weiter unten unter <b>Design-Grundregeln</b>.</div>
 
 <h2>Merkliste: Regeln &amp; Praxiswissen</h2>
 <p>Die Kurzfassung von allem, was in den anderen Tabs ausführlich steht — je ein Satz, mit Verweis auf die volle Erklärung.</p>
@@ -22,6 +22,41 @@
 <div class="rule"><span class="ico">📉</span><div><b>Linearregler (7805) verheizen die Differenz</b> (12 V → 5 V bei 1 A = 7 W) — bei großem Abstand Schaltregler (Buck) nehmen.</div></div>
 <div class="rule"><span class="ico">🧮</span><div><b>Kondensator glättet, Spule filtert</b> — großer Elko am Regler, 100 nF Keramik neben jedes IC.</div></div>
 </div>
+
+<h2>Design-Grundregeln: Schaltung</h2>
+<p>Die Regeln, die in fast jedem Projekt gleich sind. Wer sie einhält, hat die meisten Anfängerfehler schon vermieden.</p>
+<div class="card">
+<div class="rule"><span class="ico">🧊</span><div><b>100 nF direkt an jeden Versorgungspin jedes ICs</b> (Abblockkondensator), dazu 1 bis 10 µF pro Versorgungsschiene. Fehlt das, resetten Mikrocontroller scheinbar grundlos.</div></div>
+<div class="rule"><span class="ico">💡</span><div><b>LED nur mit Vorwiderstand:</b> R = (U<sub>Versorgung</sub> − U<sub>LED</sub>) / I. Beispiel 3,3 V, rote LED 2 V, 5 mA: (3,3 − 2) / 0,005 = 260 Ω, genommen wird 270 Ω. Statusanzeigen brauchen 1 bis 5 mA, 20 mA blenden nur.</div></div>
+<div class="rule"><span class="ico">⚙️</span><div><b>Nichts über ca. 10 mA direkt an einen MCU-Pin.</b> Motor, Relais, LED-Streifen über Transistor oder MOSFET schalten, bei Spulen immer Freilaufdiode antiparallel, sonst stirbt der Schalttransistor.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Spannungswelten nie unabsichtlich verbinden.</b> 5 V an einen 3,3-V-Pin beschädigt oder tötet den Chip. Dazwischen gehört ein Spannungsteiler (langsame Signale) oder ein Pegelwandler.</div></div>
+<div class="rule"><span class="ico">🔀</span><div><b>Eingänge nie floaten lassen.</b> Taster brauchen Pull-up oder Pull-down (Standard 10 kΩ), I²C braucht Pull-ups auf SDA und SCL (typisch 4,7 kΩ), sonst passiert gar nichts.</div></div>
+<div class="rule"><span class="ico">🔁</span><div><b>Reset- und Boot-Pins exakt nach Datenblatt beschalten.</b> Beim ESP32 zusätzlich 10 kΩ Pull-up an EN plus 1 µF nach GND. Strapping-Pins (beim ESP32 z. B. GPIO0, 2, 12, 15) beim Booten nicht durch externe Beschaltung nach der falschen Seite ziehen.</div></div>
+<div class="rule"><span class="ico">📄</span><div><b>Das „Typical Application" bzw. „Reference Design" aus dem Datenblatt übernehmen.</b> Das ist keine Schummelei, das machen Profis genauso. Bauteilwerte dort nicht „optimieren" (<a href="#datenblatt">Datenblatt lesen</a>).</div></div>
+<div class="rule"><span class="ico">🛡️</span><div><b>Verpolungsschutz und Sicherung am Eingang</b>, sobald extern Strom hereinkommt: P-MOSFET (verlustarm) oder notfalls Schottky-Diode, dazu Polyfuse oder Feinsicherung, bei empfindlichen Eingängen eine TVS-Diode.</div></div>
+<div class="rule"><span class="ico">🔋</span><div><b>Versorgung rechnen, nicht schätzen:</b> alle Verbraucher addieren, Regler mit 30 bis 50 % Reserve wählen. LDO ist einfach, verheizt die Differenz aber als Wärme (P = (U<sub>ein</sub> − U<sub>aus</sub>) · I). Bei großem Spannungsabstand oder über ca. 300 mA Schaltregler nehmen und dessen Reference Design exakt kopieren.</div></div>
+<div class="rule"><span class="ico">🔌</span><div><b>USB-C als Stromquelle braucht zwei 5,1 kΩ nach GND</b>, je einen an CC1 und CC2. Ohne sie liefert das Netzteil keinen Strom.</div></div>
+<div class="rule"><span class="ico">📐</span><div><b>Bauteile mit Reserve auslegen:</b> Widerstände höchstens auf halbe Nennleistung belasten, Kondensatoren mit 1,5- bis 2-facher Betriebsspannung wählen. Keramik-Cs verlieren unter Gleichspannung stark an Kapazität, Elkos altern mit der Temperatur.</div></div>
+<div class="rule"><span class="ico">🚪</span><div><b>Unbenutzte Eingänge beschalten.</b> Offene CMOS-Eingänge und ungenutzte Logikgatter fest auf GND oder VCC legen, unbenutzte OpAmps als Spannungsfolger verschalten. Sonst schwingt oder heizt es.</div></div>
+<div class="rule"><span class="ico">🧯</span><div><b>Serienwiderstand an Signalen nach außen.</b> 22 bis 330 Ω in Leitungen zu Steckern und Tastern begrenzen Strom im Fehlerfall und dämpfen Überschwinger. Taster zusätzlich entprellen (100 nF parallel oder in Software).</div></div>
+<div class="rule"><span class="ico">🧭</span><div><b>Stecker eindeutig machen.</b> Versorgungs- und Signalstecker unterschiedlich bepolen oder unterschiedliche Pinzahl wählen, Pin 1 markieren. Ein verpolt gesteckter Stecker ist der häufigste Totalschaden.</div></div>
+<div class="rule"><span class="ico">🛒</span><div><b>Erst prüfen, ob es das Bauteil gibt</b>, dann damit designen. Lieferbarkeit, Preis und Footprint vor dem Zeichnen klären, sonst wird die Platine fertig und unbestückbar.</div></div>
+</div>
+
+<h3>Standardwerte, die fast immer stimmen</h3>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Zweck</th><th>Wert</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td>Abblockkondensator am IC</td><td><b>100 nF</b> Keramik</td><td>je Versorgungspin, so nah wie möglich</td></tr>
+<tr><td>Stützkondensator pro Schiene</td><td><b>1 bis 10 µF</b></td><td>puffert längere Stromspitzen</td></tr>
+<tr><td>Pull-up / Pull-down am Taster oder Pin</td><td><b>10 kΩ</b></td><td>viele MCUs haben interne, Datenblatt prüfen</td></tr>
+<tr><td>I²C-Pull-up auf SDA und SCL</td><td><b>4,7 kΩ</b></td><td>2,2 kΩ bei langen Leitungen oder 400 kHz</td></tr>
+<tr><td>USB-C CC1 und CC2 nach GND</td><td><b>2 × 5,1 kΩ</b></td><td>Pflicht, sonst kein Strom</td></tr>
+<tr><td>Status-LED an 3,3 V</td><td><b>270 Ω bis 1 kΩ</b></td><td>1 bis 5 mA reichen völlig</td></tr>
+<tr><td>ESP32 EN-Pin</td><td><b>10 kΩ Pull-up + 1 µF nach GND</b></td><td>sonst startet das Modul unzuverlässig</td></tr>
+<tr><td>Serienwiderstand an Signalleitungen</td><td><b>22 bis 330 Ω</b></td><td>Schutz und Flankendämpfung</td></tr>
+</tbody>
+</table></div>
 
 <h2>ESD: die Gefahr, die man nicht bemerkt</h2>
 <p>Beim Laufen über Teppich lädst du dich auf mehrere <b>tausend Volt</b> auf. Spürbar ist ein Schlag erst ab etwa 3 000 V — Halbleiter nehmen aber schon ab wenigen hundert Volt Schaden. Deshalb ist der gefährlichste ESD-Schaden der, den du nicht bemerkst.</p>
@@ -81,3 +116,31 @@
 <div class="card"><h3>Streifenraster (Stripboard)</h3><p>Ganze Reihen sind als Kupferstreifen schon verbunden. Praktisch, aber du musst Streifen dort, wo keine Verbindung sein soll, gezielt <b>auftrennen</b> (z. B. mit einem Bohrer von Hand).</p></div>
 </div>
 <p class="note">Tipp: das Steckbrett-Layout möglichst 1:1 auf die Lochrasterplatine übertragen, dann übernimmst du die schon getestete Anordnung und machst weniger Fehler.</p>
+
+<h2>Design-Grundregeln: eigene Platine</h2>
+<p>Wenn der Aufbau auf Steckbrett oder Lochraster läuft, folgt die eigene Leiterplatte. Diese Regeln decken den Großteil der Layout-Fehler ab, ausführlich steht das im Modul <a href="leiterplatte-kicad.html">Leiterplatte &amp; KiCad</a>.</p>
+<div class="card">
+<div class="rule"><span class="ico">🟩</span><div><b>Zwei Lagen, Unterseite komplett Massefläche.</b> Das löst rund 80 % aller Störprobleme. Die Massefläche nie mit Leiterbahnen zerschneiden, sonst laufen Rückströme Umwege.</div></div>
+<div class="rule"><span class="ico">🧊</span><div><b>Abblockkondensator so nah an den IC-Pin wie physisch möglich</b>, Massepfad kurz. Reihenfolge: Versorgung zuerst auf den Kondensator, dann zum Pin.</div></div>
+<div class="rule"><span class="ico">⚡</span><div><b>Schaltregler-Layout exakt wie im Datenblatt.</b> Die heiße Schleife aus Eingangskondensator, Schalter und Diode bzw. Ausgangskondensator muss winzig sein. Hier ist Abweichen vom Reference Design der teuerste Fehler.</div></div>
+<div class="rule"><span class="ico">📡</span><div><b>Antennen freihalten.</b> Der Antennenbereich von ESP32-Modulen ragt über den Platinenrand, darunter und daneben kein Kupfer, kein Bauteil, kein Metall im Gehäuse.</div></div>
+<div class="rule"><span class="ico">📏</span><div><b>Leiterbahnbreiten:</b> 0,25 mm für Signale, für Strom rechnen. Faustregel bei 35 µm Kupfer (1 oz): etwa 1 mm Breite pro 1 A, lieber breiter. Bei Versorgung mehrere Vias statt eines einzelnen (<a href="leiterplatte-kicad.html#leiterbahn">Leiterbahnbreite &amp; Strom</a>).</div></div>
+<div class="rule"><span class="ico">📐</span><div><b>Keine 90-Grad-Ecken, keine Bahnen unter Quarzen.</b> Differenzielle Paare wie USB eng nebeneinander und gleich lang führen.</div></div>
+<div class="rule"><span class="ico">🧩</span><div><b>Erst platzieren, dann routen.</b> Versorgung in eine Ecke, Mikrocontroller in die Mitte, Stecker an den Rand. Ein gutes Placement macht das Routing fast von allein.</div></div>
+<div class="rule"><span class="ico">🔍</span><div><b>Programmierschnittstelle und Testpunkte</b> an jede wichtige Spannung und jeden Bus, beim ersten Board grundsätzlich. Dazu ein Jumper oder eine Lötbrücke in der Versorgung, um den Strom messen zu können.</div></div>
+<div class="rule"><span class="ico">🏷️</span><div><b>Bedruckung nutzen:</b> Pin-1-Markierung, Polarität, Steckerbelegung, Projektname und Versionsnummer aufs Board. Beim dritten Prototyp weißt du sonst nicht mehr, welcher welcher ist.</div></div>
+<div class="rule"><span class="ico">🔩</span><div><b>Mechanik früh festlegen:</b> Befestigungslöcher, Platinenumriss, Steckerpositionen und Bauteilhöhen. Gehäuse und Platine zusammen planen, nicht nacheinander.</div></div>
+<div class="rule"><span class="ico">💶</span><div><b>Bauteile aus der Basic-Bibliothek des Bestückers wählen</b> (z. B. JLCPCB Basic Parts). Das spart pro Board deutlich Geld und vermeidet Nachbestückung von Hand.</div></div>
+<div class="rule"><span class="ico">✅</span><div><b>Vor dem Bestellen:</b> DRC laufen lassen, 3D-Ansicht prüfen, Footprints gegen das Datenblatt nachmessen, Steckerbelegung doppelt prüfen. Die häufigsten Fehler sind gespiegelte Stecker und falsche Footprints (<a href="leiterplatte-kicad.html#fertigung">Fertigungsdaten</a>).</div></div>
+</div>
+
+<h3>Vorgehen und erste Version</h3>
+<div class="steps">
+<div class="step"><b>Erst Breadboard oder Fertigmodule</b>, dann Platine. Was auf dem Steckbrett nie lief, läuft auch geätzt nicht.</div>
+<div class="step"><b>Erste Version bewusst großzügig:</b> 0805 statt 0402, viel Platz zwischen den Bauteilen, viele Testpunkte, lieber ein paar Pads zu viel.</div>
+<div class="step"><b>Optionen offen halten:</b> Platz für Pull-ups, 0-Ω-Brücken und nicht bestückte Bauteile (DNP) vorsehen. Nachträglich einlöten ist einfach, nachträglich Platz schaffen nicht.</div>
+<div class="step"><b>Beim Bestücken in Blöcken vorgehen:</b> zuerst nur die Spannungsversorgung, dann messen, dann den Rest (<a href="leiterplatte-kicad.html#bestueckung">Bestückung &amp; Erstinbetriebnahme</a>).</div>
+<div class="step"><b>Erstes Einschalten am Labornetzteil mit Strombegrenzung</b>, Wert auf den erwarteten Verbrauch plus etwas Reserve. Läuft das Netzteil sofort in die Begrenzung, ist irgendwo ein Kurzschluss (<a href="#netzteil">Labornetzteil</a>).</div>
+<div class="step"><b>Änderungen am fertigen Board dokumentieren</b> (Fädeldraht, aufgetrennte Bahn, getauschter Wert) und sofort in den Schaltplan zurückschreiben. Sonst wiederholt die zweite Auflage denselben Fehler.</div>
+</div>
+<p class="note">Faustregel für den Zeitplan: die erste eigene Platine hat fast immer einen Fehler. Zwei Bestellrunden von vornherein einplanen, dann ist die zweite Runde der Erfolg und nicht die Enttäuschung.</p>
