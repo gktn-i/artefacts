@@ -1504,7 +1504,7 @@
        "name": "Drohnen & FPV",
        "icon": "🚁",
        "kind": "Referenz",
-       "updated": "2026-09-02",
+       "updated": "2026-09-03",
        "desc": "Der Multicopter von der Schraube bis zum Gesetz: Bauformen, Rahmen, Motoren, Propeller, ESC und Flight Controller, LiPo, Funkstrecke und Videoübertragung — analog, HDZero, Walksnail, DJI O4 —, Antennen, Kameras, Betaflight und PID-Tuning, Bauanleitung, Fliegen lernen, Fehlersuche, EU-Recht. Dazu Rechner, Software-Katalog, Glossar und die Quellen, auf die in dieser Szene Verlass ist.",
        "tags": [
         "fpv",
