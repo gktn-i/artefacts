@@ -40,12 +40,15 @@ import "./_style.css";
   <span class="f">2207 — 1800 KV</span>
   <span class="l">22 mm Statordurchmesser · 7 mm Statorhöhe · 1800 min⁻¹ je Volt im Leerlauf</span>
 </div>
-<ul>
-  <li>Mehr Stator = mehr Drehmoment bei weniger Wärme</li>
-  <li>Mehr <b>Durchmesser</b> (2306): wirkt über den Hebelarm — sanfter, effizient untenherum</li>
-  <li>Mehr <b>Höhe</b> (2207): wirkt über die Wicklung — durchzugsstärker obenheraus</li>
-  <li>Der Unterschied ist klein: Race fast immer 2207, Freestyle beides</li>
-</ul>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Mehr wovon</th><th>Wirkt über</th><th>Charakter</th><th>Typisch</th></tr></thead>
+<tbody>
+<tr><td><b>Stator gesamt</b></td><td>Eisenmasse</td><td>Mehr Drehmoment bei weniger Wärme</td><td>größere Klassen</td></tr>
+<tr><td><b>Durchmesser</b> (2306)</td><td>Hebelarm</td><td>Sanfter, effizient untenherum</td><td>Freestyle</td></tr>
+<tr><td><b>Höhe</b> (2207)</td><td>Wicklung</td><td>Durchzugsstärker obenheraus</td><td>Race, Freestyle</td></tr>
+</tbody>
+</table></div>
+<p class="note">Der Unterschied ist klein: Race fast immer 2207, Freestyle beides.</p>
 <div class="warn"><b>kV ist eine Leerlaufangabe, keine Leistungsangabe.</b> Gleiche kV heißt nicht gleicher Schub — und doppelte kV heißt bei gleichem Stator halbes Drehmoment je Ampere.</div>
 
 <h2>Übliche Kombinationen</h2>
@@ -65,35 +68,44 @@ import "./_style.css";
 <p class="note">Spannen nach Oscars Lookup-Tabelle (Stand 08/2026). 6S ist ab 5″ Standard: gleiche Leistung, anderthalbfach weniger Strom. Umrechnung: kV bei 4S ÷ 1,5 ≈ kV bei 6S.</p>
 
 <h2>Was daran verschleißt</h2>
-<div class="grid">
-  <div class="card"><div class="ct">Lager</div><div class="cd">Das erste Verschleißteil (Sand, Crashes). Erkennbar am rauen Lauf von Hand und an plötzlich schlechterem Tuning. Tauschbar — oft ist der ganze Motor billiger.</div></div>
-  <div class="card"><div class="ct">Magnete</div><div class="cd">Sie entmagnetisieren bei Überhitzung schleichend — deshalb ist ein dauerhaft über 90 °C heißer Motor kein Betriebszustand, sondern eine Vorstufe zum Ausfall.</div></div>
-  <div class="card"><div class="ct">Welle</div><div class="cd">Nach harten Crashes oft verbogen. Test: Propeller ab, langsam drehen, von der Seite auf Taumeln schauen.</div></div>
-  <div class="card"><div class="ct">Wicklung</div><div class="cd">Durchgebrannt riecht unverwechselbar; Windungsschluss = ungleicher Widerstand zwischen den Phasen. Anschlussreihenfolge ist egal — Drehrichtung setzt die Software.</div></div>
-  <div class="card"><div class="ct">Sicherungsring / Schraube</div><div class="cd">Ein C-Clip oder eine Wellenschraube hält die Glocke. Verlorene Clips sind der Grund, warum ein Motor nach dem Crash „von selbst“ auseinanderfällt. Ersatz kostet Cent, gehört in die Feldkiste.</div></div>
-  <div class="card"><div class="ct">Kabel</div><div class="cd">Die Phasenleitungen brechen bevorzugt direkt am Motoraustritt. Zugentlastung mit Schrumpfschlauch oder TPU verlängert die Lebensdauer erheblich.</div></div>
-</div>
+<div class="tbl-wrap"><table style="min-width:940px">
+<thead><tr><th data-s="text">Teil</th><th>Woran man es merkt</th><th>Was zu tun ist</th></tr></thead>
+<tbody>
+<tr><td><b>Lager</b></td><td>Rauer Lauf von Hand, plötzlich schlechteres Tuning</td><td>Das erste Verschleißteil (Sand, Crashes). Tauschbar — oft ist der ganze Motor billiger</td></tr>
+<tr><td><b>Magnete</b></td><td>Leistung lässt schleichend nach</td><td>Entmagnetisieren bei Überhitzung: dauerhaft über 90 °C ist kein Betriebszustand, sondern die Vorstufe zum Ausfall</td></tr>
+<tr><td><b>Welle</b></td><td>Glocke taumelt beim langsamen Drehen</td><td>Nach harten Crashes oft verbogen. Test: Propeller ab, langsam drehen, von der Seite schauen</td></tr>
+<tr><td><b>Wicklung</b></td><td>Verbrannter Geruch; ungleicher Widerstand zwischen den Phasen (Windungsschluss)</td><td>Motor tauschen. Anschlussreihenfolge ist egal — die Drehrichtung setzt die Software</td></tr>
+<tr><td><b>Sicherungsring / Wellenschraube</b></td><td>Motor fällt nach dem Crash „von selbst“ auseinander</td><td>C-Clip hält die Glocke. Ersatz kostet Cent — gehört in die Feldkiste</td></tr>
+<tr><td><b>Kabel</b></td><td>Bruch direkt am Motoraustritt</td><td>Zugentlastung mit Schrumpfschlauch oder TPU verlängert die Lebensdauer erheblich</td></tr>
+</tbody>
+</table></div>
 
 <h2>Schubtabellen lesen</h2>
 <p>Herstellermessungen je Propeller und Zellenzahl sind die einzigen wirklich vergleichbaren Zahlen:</p>
-<div class="flist">
-  <div class="frow hd"><span>Spalte</span><span>Einheit</span><span>Was sie sagt</span></div>
-  <div class="frow"><span class="fn">Thrust</span><span class="fe">g</span><span class="fx">Standschub. Mal vier gerechnet und durch das Abfluggewicht geteilt ergibt das Schub-Gewicht-Verhältnis</span></div>
-  <div class="frow"><span class="fn">Current</span><span class="fe">A</span><span class="fx">Muss zum ESC passen — der Wert bei Vollgas, nicht der bei 50 %</span></div>
-  <div class="frow"><span class="fn">Power</span><span class="fe">W</span><span class="fx">Elektrische Leistung. Grundlage für Flugzeitabschätzungen</span></div>
-  <div class="frow"><span class="fn">Efficiency</span><span class="fe">g/W</span><span class="fx">Der wichtigste Wert für Long Range. 5″ liegt bei Schwebegas um 4–6 g/W, effiziente 7-Zöller bei 8–10</span></div>
-  <div class="frow"><span class="fn">RPM</span><span class="fe">min⁻¹</span><span class="fx">Zusammen mit dem Propellerdurchmesser die Blattspitzengeschwindigkeit</span></div>
-  <div class="frow"><span class="fn">Temperature</span><span class="fe">°C</span><span class="fx">Selten angegeben, aber aussagekräftig. Über 80 °C nach einem 60-Sekunden-Vollgastest ist grenzwertig</span></div>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Spalte</th><th>Einheit</th><th>Was sie sagt</th></tr></thead>
+<tbody>
+<tr><td><b>Thrust</b></td><td>g</td><td>Standschub. Mal vier und durch das Abfluggewicht geteilt = Schub-Gewicht-Verhältnis</td></tr>
+<tr><td><b>Current</b></td><td>A</td><td>Muss zum ESC passen — der Wert bei Vollgas, nicht der bei 50 %</td></tr>
+<tr><td><b>Power</b></td><td>W</td><td>Elektrische Leistung. Grundlage für Flugzeitabschätzungen</td></tr>
+<tr><td><b>Efficiency</b></td><td>g/W</td><td>Der wichtigste Wert für Long Range. 5″ bei Schwebegas 4–6 g/W, effiziente 7-Zöller 8–10</td></tr>
+<tr><td><b>RPM</b></td><td>min⁻¹</td><td>Mit dem Propellerdurchmesser die Blattspitzengeschwindigkeit</td></tr>
+<tr><td><b>Temperature</b></td><td>°C</td><td>Selten angegeben, aber aussagekräftig. Über 80 °C nach 60 s Vollgas ist grenzwertig</td></tr>
+</tbody>
+</table></div>
 </div>
 <div class="tip"><b>Der Praxistest schlägt jede Tabelle:</b> Nach dem ersten Akku Motor anfassen. Handwarm = gut; heiß = zu viel Propeller, zu viel D oder Filterproblem — die schnellste kostenlose Diagnose.</div>
 
 <h2>Motor und Propeller aufeinander abstimmen</h2>
-<ul>
-  <li><b>Zu viel Propeller</b> auf zu kleinem Stator: heiße Motoren, kurze Flugzeit, träges Ansprechen, im Extremfall Desync.</li>
-  <li><b>Zu wenig Propeller</b> auf großem Stator: viel Reserve, unnötiges Gewicht, mittelmäßiger Wirkungsgrad.</li>
-  <li><b>Zu hohe kV</b> für den Durchmesser: hohe Blattspitzengeschwindigkeit, laut, ineffizient, hohe Ströme — nachrechnen im <a href="#rechner">Rechner</a>.</li>
-  <li><b>Zu niedrige kV:</b> das Quad wirkt kraftlos, obwohl der Motor kühl bleibt — Drehzahl fehlt.</li>
-</ul>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Fehlpaarung</th><th>Symptom</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Zu viel Propeller</b> auf zu kleinem Stator</td><td>Heiße Motoren, kurze Flugzeit, träges Ansprechen, im Extremfall Desync</td><td>Propeller eine Nummer kleiner oder größerer Stator</td></tr>
+<tr><td><b>Zu wenig Propeller</b> auf großem Stator</td><td>Viel Reserve, unnötiges Gewicht, mittelmäßiger Wirkungsgrad</td><td>Größerer Propeller oder leichterer Motor</td></tr>
+<tr><td><b>Zu hohe kV</b> für den Durchmesser</td><td>Hohe Blattspitzengeschwindigkeit, laut, ineffizient, hohe Ströme</td><td>Niedrigere kV — nachrechnen im <a href="#rechner">Rechner</a></td></tr>
+<tr><td><b>Zu niedrige kV</b></td><td>Quad wirkt kraftlos, obwohl der Motor kühl bleibt</td><td>Höhere kV oder mehr Zellen — es fehlt Drehzahl</td></tr>
+</tbody>
+</table></div>
 
 <div class="srcs">
   <div class="sh">Quellen</div>
