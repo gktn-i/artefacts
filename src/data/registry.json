@@ -2380,6 +2380,594 @@
      ]
     }
    ]
+  },
+  {
+   "id": "messer",
+   "name": "Messer",
+   "icon": "🔪",
+   "file": "hub-messer.html",
+   "tagline": "Bauarten · Stahl · Recht · Schärfen",
+   "desc": "Vom Klappmesser bis zur feststehenden Klinge: Bauarten und Verriegelungen, Klingenstähle mit echten Legierungsdaten, das deutsche Messerrecht mit § 42a und den Verboten seit 2024 — und wie man eine Klinge schärft und pflegt, damit sie Jahrzehnte hält.",
+   "accent": {
+    "l": "#4b6a86",
+    "d": "#93b6d4"
+   },
+   "areas": [
+    {
+     "id": "messerkunde",
+     "name": "Messerkunde",
+     "desc": "Was ein Messer ausmacht: Bauart, Verriegelung, Öffnungsmechanik, Klingenform, Schliff und Griff.",
+     "modules": [
+      {
+       "id": "messerkunde",
+       "file": "messerkunde.html",
+       "name": "Messerkunde",
+       "icon": "🔪",
+       "kind": "Referenz",
+       "updated": "2026-09-04",
+       "desc": "Klappmesser, feststehende Messer und Sonderformen; 32 Messerarten von Küche bis Kukri mit Silhouetten; alle gängigen Verriegelungen und Öffnungsmechanismen mit ihrer rechtlichen Bedeutung; Klingenformen, Schliffe und Klingengeometrie mit echten Maßen; Griffmaterialien; Auswahl nach Einsatz mit konkreten Modellen; Hersteller und Herkunft; Begriffe nach Bereich und Glossar A–Z.",
+       "tags": [
+        "klappmesser",
+        "feststehend",
+        "folder",
+        "fixed blade",
+        "liner lock",
+        "frame lock",
+        "back lock",
+        "axis lock",
+        "slipjoint",
+        "flipper",
+        "daumenpin",
+        "drop point",
+        "tanto",
+        "wharncliffe",
+        "flachschliff",
+        "hohlschliff",
+        "scandi",
+        "ballig",
+        "g10",
+        "micarta",
+        "titan",
+        "edc",
+        "bushcraft",
+        "solingen",
+        "spyderco",
+        "benchmade",
+        "victorinox",
+        "opinel",
+        "mora",
+        "messerarten",
+        "gyuto",
+        "santoku",
+        "nakiri",
+        "puukko",
+        "kukri",
+        "bowie",
+        "navaja",
+        "laguiole",
+        "begriffe",
+        "fachbegriffe"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Anatomie"
+        },
+        {
+         "h": "bauarten",
+         "t": "Klappmesser, feststehend & Sonderformen"
+        },
+        {
+         "h": "arten",
+         "t": "Messerarten von Küche bis Kukri"
+        },
+        {
+         "h": "verriegelung",
+         "t": "Verriegelungen"
+        },
+        {
+         "h": "oeffnen",
+         "t": "Öffnungsmechanismen"
+        },
+        {
+         "h": "klingenformen",
+         "t": "Klingenformen"
+        },
+        {
+         "h": "schliffe",
+         "t": "Schliffe & Klingengeometrie"
+        },
+        {
+         "h": "griff",
+         "t": "Griff, Erl & Clip"
+        },
+        {
+         "h": "auswahl",
+         "t": "Auswahl nach Einsatz"
+        },
+        {
+         "h": "hersteller",
+         "t": "Hersteller & Herkunft"
+        },
+        {
+         "h": "begriffe",
+         "t": "Begriffe nach Bereich"
+        },
+        {
+         "h": "glossar",
+         "t": "Glossar A–Z"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "bauarten",
+          "arten"
+         ]
+        },
+        {
+         "l": "Mechanik",
+         "sections": [
+          "verriegelung",
+          "oeffnen"
+         ]
+        },
+        {
+         "l": "Klinge & Griff",
+         "sections": [
+          "klingenformen",
+          "schliffe",
+          "griff"
+         ]
+        },
+        {
+         "l": "Kaufen",
+         "sections": [
+          "auswahl",
+          "hersteller"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "begriffe",
+          "glossar"
+         ]
+        }
+       ],
+       "alias": {
+        "anatomie": "start",
+        "locks": "verriegelung",
+        "lock": "verriegelung",
+        "flipper": "oeffnen",
+        "formen": "klingenformen",
+        "schliff": "schliffe",
+        "geometrie": "schliffe",
+        "griffe": "griff",
+        "marken": "hersteller",
+        "messerarten": "arten",
+        "typen": "arten",
+        "kueche": "arten",
+        "begriffe": "begriffe",
+        "abkuerzungen": "begriffe"
+       },
+       "related": [
+        "klingenstahl",
+        "messerrecht",
+        "messer-pflege",
+        "koch-basics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "stahl",
+     "name": "Klingenstahl",
+     "desc": "Härte, Zähigkeit, Schnitthaltigkeit und Rost: die vier Größen, die Legierungselemente dahinter und eine Datenbank der gängigen Stähle.",
+     "modules": [
+      {
+       "id": "klingenstahl",
+       "file": "klingenstahl.html",
+       "name": "Klingenstahl",
+       "icon": "🔬",
+       "kind": "Referenz",
+       "updated": "2026-09-04",
+       "desc": "Was einen Klingenstahl ausmacht: Härte, Zähigkeit, Schnitthaltigkeit und Korrosionsbeständigkeit als Zielkonflikt; Legierungselemente und Karbide; Wärmebehandlung und Pulvermetallurgie; die Datenbank mit über 50 Stählen samt Legierungsanteilen, Härtebereich und Hersteller; Vergleich und Stahlfamilien; Rost, Patina, Beschichtungen und Damast; Auswahl nach Einsatz.",
+       "tags": [
+        "stahl",
+        "klingenstahl",
+        "hrc",
+        "härte",
+        "zähigkeit",
+        "schnitthaltigkeit",
+        "karbide",
+        "vanadium",
+        "chrom",
+        "pulvermetallurgie",
+        "cpm",
+        "magnacut",
+        "s30v",
+        "s35vn",
+        "m390",
+        "20cv",
+        "elmax",
+        "vanax",
+        "lc200n",
+        "d2",
+        "1095",
+        "52100",
+        "80crv2",
+        "14c28n",
+        "aeb-l",
+        "vg-10",
+        "aogami",
+        "shirogami",
+        "x50crmov15",
+        "1.4116",
+        "rost",
+        "patina",
+        "damast",
+        "san mai",
+        "dlc",
+        "cerakote"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & das Dreieck"
+        },
+        {
+         "h": "eigenschaften",
+         "t": "Härte, Zähigkeit, Schnitthaltigkeit, Rost"
+        },
+        {
+         "h": "elemente",
+         "t": "Legierungselemente"
+        },
+        {
+         "h": "gefuege",
+         "t": "Gefüge, Karbide & Wärmebehandlung"
+        },
+        {
+         "h": "datenbank",
+         "t": "Stahl-Datenbank"
+        },
+        {
+         "h": "vergleich",
+         "t": "Vergleich & Einordnung"
+        },
+        {
+         "h": "familien",
+         "t": "Familien & Äquivalente"
+        },
+        {
+         "h": "rost",
+         "t": "Rost, Patina, Beschichtung & Damast"
+        },
+        {
+         "h": "auswahl",
+         "t": "Welcher Stahl wofür"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Verstehen",
+         "sections": [
+          "start",
+          "eigenschaften",
+          "elemente",
+          "gefuege"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "datenbank",
+          "vergleich",
+          "familien"
+         ]
+        },
+        {
+         "l": "Anwenden",
+         "sections": [
+          "rost",
+          "auswahl"
+         ]
+        }
+       ],
+       "alias": {
+        "haerte": "eigenschaften",
+        "hrc": "eigenschaften",
+        "legierung": "elemente",
+        "karbide": "gefuege",
+        "waermebehandlung": "gefuege",
+        "pm": "gefuege",
+        "tabelle": "datenbank",
+        "staehle": "datenbank",
+        "rating": "vergleich",
+        "aequivalente": "familien",
+        "damast": "rost",
+        "beschichtung": "rost",
+        "patina": "rost"
+       },
+       "related": [
+        "messerkunde",
+        "messer-pflege",
+        "mechanik"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "recht",
+     "name": "Recht",
+     "desc": "Was man besitzen und was man führen darf: § 42a, die Verbote seit 2024, Verbotszonen, Transport, Reisen.",
+     "modules": [
+      {
+       "id": "messerrecht",
+       "file": "messerrecht.html",
+       "name": "Messerrecht",
+       "icon": "⚖️",
+       "kind": "Referenz",
+       "updated": "2026-09-04",
+       "desc": "Das deutsche Waffengesetz aus Sicht des Messers: Besitz gegen Führen, § 42a mit Einhandmesser und 12-cm-Grenze, die verbotenen Bauarten samt Springmesserverbot seit Oktober 2024, Messerverbote bei Veranstaltungen, im Fernverkehr und im Nahverkehr der Länder, Waffenverbotszonen, Klingenlänge messen, Transport und Kontrolle, bekannte Modelle eingeordnet, Österreich, Schweiz und Reisen — mit dem § 42a-Check zum Durchklicken.",
+       "tags": [
+        "waffengesetz",
+        "waffg",
+        "§ 42a",
+        "42a",
+        "einhandmesser",
+        "12 cm",
+        "klingenlänge",
+        "führen",
+        "besitz",
+        "springmesser",
+        "butterfly",
+        "balisong",
+        "fallmesser",
+        "faustmesser",
+        "otf",
+        "verbotszone",
+        "waffenverbotszone",
+        "messerverbot",
+        "öpnv",
+        "fernverkehr",
+        "volksfest",
+        "transport",
+        "berechtigtes interesse",
+        "bka",
+        "feststellungsbescheid",
+        "bußgeld",
+        "österreich",
+        "schweiz",
+        "reisen"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & § 42a-Check"
+        },
+        {
+         "h": "begriffe",
+         "t": "Waffe, Messer, Führen, Klingenlänge"
+        },
+        {
+         "h": "p42a",
+         "t": "§ 42a im Detail"
+        },
+        {
+         "h": "verboten",
+         "t": "Verbotene Messer"
+        },
+        {
+         "h": "zonen",
+         "t": "Veranstaltungen, Verkehr & Verbotszonen"
+        },
+        {
+         "h": "praxis",
+         "t": "Transport, Alltag & Kontrolle"
+        },
+        {
+         "h": "modelle",
+         "t": "Bekannte Modelle eingeordnet"
+        },
+        {
+         "h": "ausland",
+         "t": "Österreich, Schweiz & Reisen"
+        },
+        {
+         "h": "quellen",
+         "t": "Gesetze, Behörden & Quellen"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "begriffe"
+         ]
+        },
+        {
+         "l": "Die Regeln",
+         "sections": [
+          "p42a",
+          "verboten",
+          "zonen"
+         ]
+        },
+        {
+         "l": "Praxis",
+         "sections": [
+          "praxis",
+          "modelle",
+          "ausland",
+          "quellen"
+         ]
+        }
+       ],
+       "alias": {
+        "check": "start",
+        "rechner": "start",
+        "42a": "p42a",
+        "einhandmesser": "p42a",
+        "springmesser": "verboten",
+        "butterfly": "verboten",
+        "verbotszonen": "zonen",
+        "oepnv": "zonen",
+        "veranstaltungen": "zonen",
+        "transport": "praxis",
+        "kontrolle": "praxis",
+        "schweiz": "ausland",
+        "oesterreich": "ausland",
+        "reisen": "ausland"
+       },
+       "related": [
+        "messerkunde",
+        "fpv-drohnen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "pflege",
+     "name": "Schärfen & Pflege",
+     "desc": "Winkel, Steine, Abziehen, Öl und Lagerung — und die Fehler, die Klingen und Mechaniken ruinieren.",
+     "modules": [
+      {
+       "id": "messer-pflege",
+       "file": "messer-schaerfen-pflege.html",
+       "name": "Schärfen & Pflege",
+       "icon": "🪒",
+       "kind": "Anleitung",
+       "updated": "2026-09-04",
+       "desc": "Was Schärfe physikalisch ist und woran man sie misst; Schärfwinkel je Einsatz mit Winkelrechner; Schleifmittel und Körnungen im Vergleich der Normen; Freihandschärfen Schritt für Schritt; geführte Systeme, Wetzstahl und Maschinen; Abziehen und Polieren; Reinigung, Öl, Pivot, Schrauben und Lagerung; Fehlersuche vom Grat bis zum Lock-Stick.",
+       "tags": [
+        "schärfen",
+        "schleifen",
+        "wetzstein",
+        "wasserstein",
+        "körnung",
+        "jis",
+        "fepa",
+        "grit",
+        "winkel",
+        "grat",
+        "burr",
+        "abziehen",
+        "strop",
+        "lederriemen",
+        "chromoxid",
+        "diamant",
+        "sharpmaker",
+        "lansky",
+        "tormek",
+        "work sharp",
+        "wicked edge",
+        "wetzstahl",
+        "keramikstab",
+        "bess",
+        "pflege",
+        "öl",
+        "ballistol",
+        "kamelienöl",
+        "pivot",
+        "loctite",
+        "torx",
+        "rost",
+        "lagerung"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "physik",
+         "t": "Was Schärfe ist"
+        },
+        {
+         "h": "winkel",
+         "t": "Winkel & Geometrie"
+        },
+        {
+         "h": "steine",
+         "t": "Schleifmittel & Körnungen"
+        },
+        {
+         "h": "technik",
+         "t": "Freihand schärfen"
+        },
+        {
+         "h": "systeme",
+         "t": "Systeme, Wetzstahl & Maschinen"
+        },
+        {
+         "h": "abziehen",
+         "t": "Abziehen & Polieren"
+        },
+        {
+         "h": "pflege",
+         "t": "Reinigung, Öl & Lagerung"
+        },
+        {
+         "h": "fehler",
+         "t": "Fehler & Fehlersuche"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "physik",
+          "winkel"
+         ]
+        },
+        {
+         "l": "Schärfen",
+         "sections": [
+          "steine",
+          "technik",
+          "systeme",
+          "abziehen"
+         ]
+        },
+        {
+         "l": "Pflegen",
+         "sections": [
+          "pflege",
+          "fehler"
+         ]
+        }
+       ],
+       "alias": {
+        "schaerfe": "physik",
+        "bess": "physik",
+        "koernung": "steine",
+        "grit": "steine",
+        "wassersteine": "steine",
+        "freihand": "technik",
+        "sharpmaker": "systeme",
+        "wetzstahl": "systeme",
+        "strop": "abziehen",
+        "oel": "pflege",
+        "lagerung": "pflege",
+        "pivot": "pflege",
+        "fehlersuche": "fehler"
+       },
+       "related": [
+        "klingenstahl",
+        "messerkunde",
+        "schmiermittel",
+        "koch-basics"
+       ]
+      }
+     ]
+    }
+   ]
   }
  ]
 }

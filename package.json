@@ -2,7 +2,7 @@
   "name": "artefakte",
   "private": true,
   "type": "module",
-  "description": "Nachschlagewerke für Werkstatt, Küche und Homelab — bib.gktn.dev",
+  "description": "Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Foto und Messer — bib.gktn.dev",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",

@@ -1,0 +1,94 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Geometrie hinter der Schneide entscheidet über die Schneidleistung — nicht der Stahl.</b> Eine Klinge, die 0,3 mm hinter der Schneide misst, gleitet durch einen Apfel; eine mit 1,0 mm spaltet ihn. Der Stahl bestimmt nur, wie lange die Geometrie erhalten bleibt.</div>
+
+<h2>Die Schliffarten</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Querschnitte von sechs Schliffarten: Flachschliff, Hohlschliff, balliger Schliff, Scandi, Sabre und Meißelschliff — jeweils Rücken oben, Schneide unten">
+  <!-- Flach (voll) -->
+  <path class="box" d="M40,20 L64,20 L52,170 Z" />
+  <text class="lblb" x="52" y="190" text-anchor="middle">Flach</text>
+  <!-- Hohl -->
+  <path class="box" d="M140,20 L164,20 C150,80 150,120 152,170 C154,120 154,80 140,20 Z" />
+  <text class="lblb" x="152" y="190" text-anchor="middle">Hohl</text>
+  <!-- Ballig -->
+  <path class="box" d="M240,20 L264,20 C266,80 258,140 252,170 C246,140 238,80 240,20 Z" />
+  <text class="lblb" x="252" y="190" text-anchor="middle">Ballig</text>
+  <!-- Scandi -->
+  <path class="box" d="M340,20 L364,20 L364,110 L352,170 L340,110 Z" />
+  <text class="lblb" x="352" y="190" text-anchor="middle">Scandi</text>
+  <!-- Sabre mit Fase -->
+  <path class="box" d="M440,20 L464,20 L464,70 L455,160 L452,170 L449,160 L440,70 Z" />
+  <text class="lblb" x="452" y="190" text-anchor="middle">Sabre + Fase</text>
+  <!-- Meissel -->
+  <path class="box" d="M540,20 L564,20 L564,170 L552,170 L540,80 Z" />
+  <text class="lblb" x="552" y="190" text-anchor="middle">Meißel</text>
+  <!-- Sekundaerfase Beispiel beim Flachschliff -->
+  <path class="acc" d="M46,150 L52,170 L58,150" />
+  <text class="lbl" x="70" y="160">Sekundärfase</text>
+  <text class="lbl" x="70" y="172">(Schneidfase)</text>
+</svg>
+<figcaption>Querschnitte, stark überhöht. Fast jede Klinge trägt zusätzlich eine kleine Sekundärfase direkt an der Schneide — außer Scandi und echte „Zero“-Schliffe.</figcaption>
+</figure>
+
+<div class="tbl-wrap"><table style="min-width:1040px">
+<thead><tr><th data-s="text">Schliff</th><th>Geometrie</th><th>Schneidet</th><th>Stabilität</th><th>Nachschärfen</th><th>Typisch für</th></tr></thead>
+<tbody>
+<tr><td><b>Voll-Flachschliff</b> (full flat)</td><td>Gerade Flanken vom Rücken bis zur Schneide, dann Sekundärfase</td><td>Sehr gut, gleichmäßiger Keil, wenig Spaltwirkung</td><td>Gut; dünn nahe der Schneide</td><td>Einfach (nur die Fase)</td><td>Spyderco Paramilitary, Küche, die meisten hochwertigen Folder</td></tr>
+<tr><td><b>Hohlschliff</b> (hollow)</td><td>Konkav ausgeschliffen, meist mit Rad Ø 150–250 mm</td><td>Sehr gut, dünnste Schneide, ideal für ziehende Schnitte</td><td>Gering hinter der Schneide; bei tiefen Schnitten klemmt die Klinge an den Schultern</td><td>Einfach, bleibt lange dünn</td><td>Rasiermesser, Buck 110, Jagdmesser, Spyderco Endura</td></tr>
+<tr><td><b>Balliger Schliff</b> (convex, „Hamaguri“)</td><td>Konvexe Flanken ohne Kante, oft ohne Sekundärfase</td><td>Gut; teilt Material sanft, keine Schulter</td><td>Sehr gut — mehr Stahl hinter der Schneide als jeder andere Schliff bei gleicher Schneidenstärke</td><td>Freihand auf Leder/Sandpapier auf Unterlage; auf geführten Systemen nur als Facetten-Näherung</td><td>Fällkniven, Bark River, Äxte, japanische Kochmesser (subtil)</td></tr>
+<tr><td><b>Scandi</b> (Scandinavian, Zero-Sabre)</td><td>Eine einzige breite Fase (8–12 mm hoch) ohne Sekundärfase</td><td>Hervorragend in Holz: die Fase liegt auf und führt den Schnitt</td><td>Gut; die Schneide ist relativ dick (ca. 22–27° inklusiv)</td><td>Sehr einfach, weil die Fase den Winkel vorgibt — auf dem Stein flach auflegen</td><td>Mora, Helle, Puukko, Bushcraft</td></tr>
+<tr><td><b>Sabre</b> (sabre / high sabre)</td><td>Flanken beginnen erst in Klingenmitte, darüber voller Rücken, dazu Sekundärfase</td><td>Mittel; dicker Keil hinter der Schneide</td><td>Sehr gut</td><td>Einfach</td><td>Ka-Bar USMC, Militärmesser, ESEE (High Sabre)</td></tr>
+<tr><td><b>Meißelschliff</b> (chisel)</td><td>Nur eine Seite geschliffen, andere plan</td><td>Extrem scharf möglich; Schnitt zieht zur ungeschliffenen Seite</td><td>Gut</td><td>Nur eine Seite schärfen, Rückseite nur abziehen</td><td>Japanische Küchenmesser (Yanagiba, Deba, Usuba), Emerson</td></tr>
+<tr><td><b>Zero Grind</b></td><td>Flachschliff bis zur Schneide ohne Sekundärfase</td><td>Maximal</td><td>Empfindlich</td><td>Volle Flanke muss geschliffen werden</td><td>Custom-Küchenmesser, Rasiermesser</td></tr>
+<tr><td><b>Compound / Asymmetrisch</b></td><td>Zwei Flankenwinkel oder 70/30-Verteilung</td><td>Mischung</td><td>Je nach Auslegung</td><td>Anspruchsvoll</td><td>Japanische Doppelschliff-Messer (70/30), Spyderco Sprint Runs</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die entscheidende Zahl: Dicke hinter der Schneide</h2>
+<p>Gemessen mit Messschieber oder Mikrometer direkt oberhalb der Sekundärfase (englisch <i>behind the edge</i>, BTE). Sie sagt mehr über die Schneidleistung als jede andere Angabe.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Dicke hinter der Schneide</th><th>Charakter</th><th>Typisch</th></tr></thead>
+<tbody>
+<tr><td><b>0,1–0,2 mm</b></td><td>Rasiermesser-Klasse; nur bei hoher Härte und ohne Seitenlast</td><td>Japanische Küchenmesser (Gyuto, Petty), Rasiermesser</td></tr>
+<tr><td><b>0,2–0,4 mm</b></td><td>Exzellenter Schneider, für EDC ohne Hebeln</td><td>Gut geschliffene Folder (Spyderco, Benchmade), europäische Kochmesser nach dem Ausdünnen</td></tr>
+<tr><td><b>0,4–0,6 mm</b></td><td>Industrie-Standard vieler Serien-Folder: robust, schneidet ordentlich</td><td>Civivi, Kizer, Böker Plus, Buck</td></tr>
+<tr><td><b>0,6–0,9 mm</b></td><td>Outdoor: übersteht Batoning, spaltet mehr als er schneidet</td><td>ESEE, Ka-Bar, taktische Folder</td></tr>
+<tr><td><b>über 1 mm</b></td><td>Brecheisen mit Schneide</td><td>Chopper, „Überlebensmesser“, billige Importware</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Ausdünnen ist die wirksamste Verbesserung, die man einem Messer geben kann.</b> Wer die Flanken eines 0,7-mm-Messers auf einem groben Stein (120–320) auf 0,4 mm herunterschleift, bekommt ein anderes Messer — ohne einen Cent für Stahl auszugeben. Details: <a href="messer-schaerfen-pflege.html#winkel">Winkel &amp; Geometrie</a>.</div>
+
+<h2>Schneidenwinkel — die zweite Zahl</h2>
+<p>Angaben sind meist <b>je Seite</b>; „inklusiv“ bedeutet die Summe beider Seiten. Ein Hersteller, der „20°“ schreibt, meint fast immer je Seite (40° inklusiv).</p>
+<div class="kpis">
+  <div class="kpi"><div class="k">Rasiermesser</div><div class="v">7–9°</div><div class="s">je Seite; Hohlschliff, kein Seitendruck</div></div>
+  <div class="kpi"><div class="k">Japanische Küche</div><div class="v">10–15°</div><div class="s">bei 60–65 HRC; Brett, kein Knochen</div></div>
+  <div class="kpi"><div class="k">Europäische Küche</div><div class="v">15–20°</div><div class="s">Wüsthof/Zwilling ab Werk ca. 14–15°</div></div>
+  <div class="kpi"><div class="k">EDC-Folder</div><div class="v">15–20°</div><div class="s">Spyderco ab Werk ca. 15°, Benchmade 15–17°</div></div>
+  <div class="kpi"><div class="k">Outdoor / Bushcraft</div><div class="v">20–25°</div><div class="s">Scandi meist 11–13° je Seite, aber ohne Sekundärfase</div></div>
+  <div class="kpi"><div class="k">Axt, Machete</div><div class="v">25–30°</div><div class="s">ballig, Schlaglast</div></div>
+</div>
+<div class="warn"><b>Winkel und Dicke sind zwei verschiedene Dinge.</b> Ein 15°-Winkel auf einer 1 mm dicken Schneide ergibt eine breite, gut sichtbare Fase und ein Messer, das trotzdem spaltet. Ein 20°-Winkel auf 0,3 mm ergibt eine hauchdünne Fase und ein Messer, das hervorragend schneidet. Erst die Dicke hinter der Schneide, dann der Winkel.</div>
+
+<h2>Oberflächen (Finish)</h2>
+<div class="flist">
+  <div class="frow hd"><span>Finish</span><span>Herstellung</span><span>Eigenschaft</span></div>
+  <div class="frow"><span class="fn">Satin</span><span class="fe">Band, Körnung 240–600, längs</span><span class="fx">Standard; Kratzer verschwinden in der Riefung; leicht nachzuarbeiten</span></div>
+  <div class="frow"><span class="fn">Stonewash</span><span class="fe">Trommeln mit Steinen/Keramik</span><span class="fx">Verbirgt Gebrauchsspuren am besten; bei Kohlenstoffstahl oft mit Säure kombiniert („Blackwash“, „Acid Wash“)</span></div>
+  <div class="frow"><span class="fn">Bead Blast / Sandstrahl</span><span class="fe">Glas- oder Korundstrahlen</span><span class="fx">Matt, griffig — aber die rauere Oberfläche rostet <em>schneller</em>, weil sie mehr Angriffsfläche bietet</span></div>
+  <div class="frow"><span class="fn">Poliert / Spiegel</span><span class="fe">bis 2000+ und Politur</span><span class="fx">Beste Korrosionsbeständigkeit (glatt), kratzempfindlich, gleitet gut durch Lebensmittel</span></div>
+  <div class="frow"><span class="fn">DLC / PVD</span><span class="fe">Abscheidung, 1–4 µm</span><span class="fx">Diamantähnlicher Kohlenstoff (DLC) 2000–5000 HV oder Titannitrid-Familie (TiN gold, TiCN grau, TiAlN violett-schwarz). Kratzfest, korrosionsschützend, geht auf Dauer nur an der Fase ab</span></div>
+  <div class="frow"><span class="fn">Cerakote / Pulver</span><span class="fe">Keramik-Polymer 25–50 µm eingebrannt</span><span class="fx">Dick, schützt Kohlenstoffstahl zuverlässig (ESEE-Pulverbeschichtung), erhöht aber die Reibung im Schnitt und verkratzt</span></div>
+  <div class="frow"><span class="fn">Kurouchi / Schmiedehaut</span><span class="fe">Zunder bleibt stehen</span><span class="fx">Japanische Kohlenstoff-Küchenmesser; schützt die Flanken, nicht die Fase</span></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>Larrin Thomas, <i>Knife Engineering</i>, Kap. „Edge Geometry“; Messreihen zu Dicke hinter der Schneide und Schneidleistung auf <a href="https://knifesteelnerds.com/">knifesteelnerds.com</a>.</li>
+    <li>John D. Verhoeven, <i>Experiments on Knife Sharpening</i>, Iowa State University 2004 — Elektronenmikroskopie von Schneiden und Fasen.</li>
+    <li>Herstellerangaben zu Werkswinkeln: Wüsthof (14° je Seite bei PEtec), Zwilling, Spyderco, Benchmade; DLC/PVD-Härten nach Herstellerdaten von Beschichtern (Oerlikon Balzers, Ionbond).</li>
+  </ul>
+</div>
