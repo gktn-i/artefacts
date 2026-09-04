@@ -661,6 +661,116 @@ var CALC = {
         + "damit rund 40 % mehr Reichweite; dieselben 3 dB gibt es über die Antenne geschenkt, ohne Strom und ohne Wärme."
     };
   },
+  /* ------------------------------------------------------------------
+     MESSER
+     ------------------------------------------------------------------ */
+
+  /* --- § 42a-Check: Einordnung eines Messers nach deutschem Waffenrecht.
+     Keine Rechtsberatung — bildet den Gesetzeswortlaut und die verbreitete
+     Auslegung ab (Stand 2026). --- */
+  messer42a: function (v, el) {
+    var art = ($("[data-k='art']", el) || {}).value || "klapp";
+    var mech = ($("[data-k='mech']", el) || {}).value || "manuell";
+    var oeff = ($("[data-k='oeffnen']", el) || {}).value || "zwei";
+    var lock = ($("[data-k='lock']", el) || {}).value || "nein";
+    var L = v.laenge;
+    var zonen = "Unabhängig davon gilt überall: kein Messer bei Volksfesten, Sportveranstaltungen, Messen und ähnlichen "
+      + "Veranstaltungen (§ 42 Abs. 1, 4a), nicht im Fernverkehr (§ 42b) und nicht in Waffen- und Messerverbotszonen "
+      + "der Länder, dazu zählt in vielen Ländern inzwischen der gesamte Nahverkehr (§ 42 Abs. 5). Auf eigenem Grund, "
+      + "in der Wohnung und in der Werkstatt gilt keines dieser Verbote — dort wird nichts „geführt“.";
+    if (mech === "auto" || mech === "otf" || mech === "fall" || mech === "butterfly" || mech === "faust") {
+      var nm = { auto: "Springmesser (seitlich öffnend)", otf: "Springmesser mit frontal austretender Klinge (OTF)",
+        fall: "Fallmesser", butterfly: "Butterflymesser", faust: "Faustmesser" }[mech];
+      var nr = { auto: "1.4.1", otf: "1.4.1", fall: "1.4.2", butterfly: "1.4.4", faust: "1.4.3" }[mech];
+      var hint = nm + " sind nach Anlage 2 Abschnitt 1 Nr. " + nr + " WaffG verbotene Gegenstände: Erwerb, Besitz, Führen, "
+        + "Überlassen und Handel sind verboten und nach § 52 Abs. 3 Nr. 1 WaffG mit Freiheitsstrafe bis zu drei Jahren "
+        + "oder Geldstrafe bedroht. ";
+      if (mech === "auto") {
+        hint += "Einzige Ausnahme seit 31.10.2024: seitlich herausspringende Klinge, höchstens 8,5 cm aus dem Griff ragend, "
+          + "nicht zweiseitig geschliffen — und nur, wenn ein berechtigtes Interesse besteht, das eine einhändige Nutzung "
+          + "erforderlich macht, oder der Umgang im Zusammenhang mit der Berufsausübung erfolgt. Für Privatpersonen ohne "
+          + "solchen Grund gilt das Verbot. Die straffreie Abgabefrist endete am 1. Oktober 2025.";
+      } else if (mech === "butterfly") {
+        hint += "Trainer mit stumpfer Klinge ohne Schneide sind keine Messer und fallen nicht darunter.";
+      } else if (mech === "fall") {
+        hint += "Entscheidend ist, dass die Klinge durch Schwerkraft oder Schleuderbewegung austritt UND festgestellt werden kann.";
+      }
+      return { out: "VERBOTENER GEGENSTAND — Besitz ist strafbar", hint: hint + " " + zonen };
+    }
+    if (mech === "dolch") {
+      return { out: "HIEB- UND STOSSWAFFE — Besitz ab 18 frei, Führen verboten (§ 42a Abs. 1 Nr. 2)",
+        hint: "Zweischneidige, symmetrische Klingen (Dolche) sind als Hieb- und Stoßwaffen Waffen im Sinne des § 1 Abs. 2 Nr. 2a "
+          + "WaffG: Erwerb und Besitz ab 18 Jahren ohne Erlaubnis, Führen nur mit berechtigtem Interesse oder im verschlossenen "
+          + "Behältnis. Bei Veranstaltungen und in Verbotszonen ohnehin untersagt. " + zonen };
+    }
+    if (art === "fest") {
+      if (!isFinite(L) || L <= 0) return { out: "Klingenlänge in cm eintragen (Spitze bis Griffvorderkante, Ricasso mitgemessen)." };
+      if (L > 12) {
+        return { out: "§ 42a: FÜHREN NUR MIT BERECHTIGTEM INTERESSE — Besitz frei, Transport im verschlossenen Behältnis erlaubt",
+          hint: "Feststehendes Messer mit " + sig(L, 3) + " cm Klingenlänge, also über 12 cm (§ 42a Abs. 1 Nr. 3). Führen ist verboten, "
+            + "außer bei berechtigtem Interesse (Beruf, Brauchtum, Sport, allgemein anerkannter Zweck wie Jagd, Angeln, Forstarbeit) "
+            + "oder beim Transport im verschlossenen Behältnis (§ 42a Abs. 2). Verstoß: Ordnungswidrigkeit, Bußgeld bis 10 000 € "
+            + "(§ 53 Abs. 1 Nr. 21a, Abs. 2), das Messer wird in der Regel sichergestellt. Besitz, Kauf und Verkauf sind frei. " + zonen };
+      }
+      return { out: "FREI FÜHRBAR — feststehend bis 12 cm fällt nicht unter § 42a",
+        hint: "Feststehendes Messer mit " + sig(L, 3) + " cm Klingenlänge. § 42a greift erst über 12 cm. Messweise in der Praxis: von der "
+          + "Spitze bis zur Vorderkante des Griffs, das unscharfe Ricasso zählt mit; bei 11,5–12,5 cm lieber nachmessen und im "
+          + "Zweifel nicht führen. " + zonen };
+    }
+    /* Klappmesser, Multitool, Cutter */
+    var ein = oeff === "ein" || mech === "assisted";
+    var lk = lock === "ja";
+    if (ein && lk) {
+      var h2 = "Messer mit einhändig feststellbarer Klinge (Einhandmesser, § 42a Abs. 1 Nr. 3): Beide Merkmale zusammen — einhändig "
+        + "zu öffnen UND feststellbar — lösen das Führungsverbot aus; die Klingenlänge spielt dabei keine Rolle. Führen nur mit "
+        + "berechtigtem Interesse oder im verschlossenen Behältnis (§ 42a Abs. 2 und 3). Verstoß: Ordnungswidrigkeit, Bußgeld bis "
+        + "10 000 € (§ 53 Abs. 1 Nr. 21a). Besitz, Kauf und Verkauf sind frei, es gibt keine gesetzliche Altersgrenze. ";
+      if (mech === "assisted") {
+        h2 += "Federunterstützte Öffnung: Nach der BKA-Auslegung von 2004 kein Springmesser, solange die Klinge von Hand angestoßen "
+          + "werden muss und nicht auf Knopf- oder Hebeldruck aus dem Griff schnellt. Ein Einzelbescheid von 2017 stufte ein Modell, "
+          + "bei dem das Anheben mit dem Finger konstruktiv unmöglich war, als Springmesser ein. Seit dem allgemeinen "
+          + "Springmesserverbot 2024 ist das die riskanteste noch legale Bauart — beim Kauf auf einen Feststellungsbescheid oder "
+          + "eine klare Händleraussage achten. ";
+      }
+      return { out: "EINHANDMESSER (§ 42a) — Besitz frei, Führen nur mit berechtigtem Interesse", hint: h2 + zonen };
+    }
+    var why = !ein ? "Zweihändige Öffnung (Nagelhau o. ä.) — die Klinge ist nicht „einhändig feststellbar“, auch wenn sie verriegelt (Opinel, Buck 110, Otter Mercator). "
+      : "Keine Verriegelung (Slipjoint, Friction Folder) — eine Klinge, die nicht feststellbar ist, fällt nicht unter § 42a, auch wenn sie sich einhändig öffnet (Spyderco UKPK, Victorinox). ";
+    return { out: "FREI FÜHRBAR — kein Einhandmesser im Sinne des § 42a",
+      hint: why + "Vorsicht bei Umbauten: Ein nachträglich entfernter Daumenpin oder Lock macht aus einem als Einhandmesser gebauten "
+        + "Messer nicht sicher ein freies — Gerichte stellen darauf ab, ob es so, wie es ist, einhändig zu öffnen und festzustellen ist. " + zonen };
+  },
+
+  /* --- Schärfwinkel: Höhe des Klingenrückens über dem Stein --- */
+  schaerfwinkel: function (v) {
+    var a = v.winkel, b = v.breite, bte = v.bte;
+    if (!isFinite(a) || a <= 0 || a >= 45) return { out: "Winkel je Seite (1–44°) eintragen." };
+    if (!isFinite(b) || b <= 0) return { out: "Klingenhöhe (Rücken bis Schneide) in mm eintragen." };
+    var rad = a * Math.PI / 180;
+    var h = b * Math.sin(rad);
+    var de = function (x, d) { return x.toFixed(d).replace(".", ","); };
+    var coins = [["2-Euro", 2.20], ["1-Euro", 2.33], ["50-Cent", 2.38], ["20-Cent", 2.14], ["10-Cent", 1.93], ["5-, 2-, 1-Cent", 1.67]];
+    var best = null;
+    coins.forEach(function (c) {
+      var n = Math.round(h / c[1]);
+      if (n < 1) return;
+      var err = Math.abs(n * c[1] - h);
+      if (!best || err < best.err) best = { n: n, name: c[0], err: err, real: n * c[1] };
+    });
+    var out = "Rückenhöhe über dem Stein ≈ " + de(h, 1) + " mm  ·  " + de(2 * a, 0) + "° inklusiv";
+    var hint = "h = Klingenhöhe · sin(α) = " + de(b, 1) + " mm · sin(" + de(a, 1) + "°). Gemessen vom Stein bis zur Oberkante des Rückens, "
+      + "dort, wo die Klinge aufliegt. ";
+    if (best) hint += "Als Lehre: " + best.n + " × " + best.name + "-Münze (" + de(best.real, 1) + " mm) unter den Rücken legen, Winkel merken, Münzen weg. ";
+    if (isFinite(bte) && bte > 0) {
+      var w = (bte / 2) / Math.sin(rad);
+      out += "  ·  Fasenbreite ≈ " + de(w, 2) + " mm";
+      hint += "Bei " + de(bte, 2) + " mm Dicke hinter der Schneide wird die Sekundärfase je Seite etwa " + de(w, 2) + " mm breit — "
+        + "breiter als etwa 1,5 mm heißt: die Klinge ist für diesen Winkel zu dick, Ausdünnen lohnt. ";
+    }
+    hint += "Richtwerte je Seite: japanische Küche 10–15°, europäische Küche und EDC 15–20°, Outdoor 20–25°, Axt 25–30°.";
+    return { out: out, hint: hint };
+  },
+
   /* --- Einheiten-Vorsatz --- */
   vorsatz: function (v, el) {
     var val = num(($("[data-k='wert']", el) || {}).value);

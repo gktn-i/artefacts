@@ -1,0 +1,56 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Dieselbe Marke, verschiedene Einordnungen.</b> Ein Victorinox kann frei oder ein Einhandmesser sein, ein Spyderco ebenso. Die Tabelle ordnet bekannte Modelle nach Bauart ein — nach den Kriterien von § 42a und Anlage 2, Stand 2026. Bei Modellvarianten zählt die tatsächliche Ausführung.</div>
+
+<div data-scope>
+  <input class="search" type="search" data-search placeholder="Modell oder Hersteller suchen …" aria-label="Modelle durchsuchen" />
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle</button>
+    <button type="button" data-filter="frei">frei führbar</button>
+    <button type="button" data-filter="42a">§ 42a (nur mit Grund)</button>
+    <button type="button" data-filter="verboten">verboten</button>
+  </div>
+  <div class="count" data-count></div>
+  <div class="tbl-wrap"><table style="min-width:1000px">
+    <thead><tr><th data-s="text">Modell</th><th>Bauart</th><th>Öffnen</th><th>Lock</th><th data-s="num">Klinge</th><th>Einordnung</th><th>Warum</th></tr></thead>
+    <tbody data-list="Modellen">
+      <tr data-item data-cat="frei" data-k="victorinox spartan huntsman climber classic alox cadet"><td><b>Victorinox Spartan, Huntsman, Climber, Classic, Cadet Alox</b></td><td>Klapp</td><td>Nagelhau, zwei Hände</td><td>keiner (Slipjoint)</td><td>4–7 cm</td><td><span class="b ok">frei</span></td><td>Weder einhändig noch feststellbar</td></tr>
+      <tr data-item data-cat="frei" data-k="victorinox trekker zweihand hunter"><td><b>Victorinox Trekker / Hunter (Zweihand-Version)</b></td><td>Klapp</td><td>Nagelhau</td><td>Liner Lock</td><td>8 cm</td><td><span class="b ok">frei</span></td><td>Verriegelt, aber nicht einhändig — kein Einhandmesser</td></tr>
+      <tr data-item data-cat="42a" data-k="victorinox one hand trekker hunter pro sentinel"><td><b>Victorinox One-Hand Trekker, Hunter Pro, Sentinel One-Hand</b></td><td>Klapp</td><td>Daumenloch</td><td>Liner Lock</td><td>8–10 cm</td><td><span class="b mid">§ 42a</span></td><td>Einhändig und feststellbar</td></tr>
+      <tr data-item data-cat="frei" data-k="opinel virobloc inox carbone"><td><b>Opinel Nr. 6–13</b></td><td>Klapp</td><td>Nagelhau</td><td>Virobloc-Ring</td><td>7–12 cm</td><td><span class="b ok">frei</span></td><td>Zweihand-Öffnung; der Ring ist eine Feststellung, aber nicht einhändig zu öffnen</td></tr>
+      <tr data-item data-cat="frei" data-k="otter mercator k55k katzenmesser"><td><b>Otter Mercator K55K</b></td><td>Klapp</td><td>Nagelhau</td><td>Back Lock</td><td>9 cm</td><td><span class="b ok">frei</span></td><td>Zweihand</td></tr>
+      <tr data-item data-cat="frei" data-k="buck 110 112 folding hunter ranger"><td><b>Buck 110 / 112 (Standard)</b></td><td>Klapp</td><td>Nagelhau</td><td>Back Lock</td><td>7,5–9,5 cm</td><td><span class="b ok">frei</span></td><td>Zweihand; die Auto-Variante (110 Auto) ist ein Springmesser: verboten</td></tr>
+      <tr data-item data-cat="frei" data-k="spyderco uk penknife ukpk roadie slipjoint"><td><b>Spyderco UK Penknife, Roadie, Pingo</b></td><td>Klapp</td><td>Daumenloch / Dent</td><td>keiner (Slipjoint)</td><td>5–7,5 cm</td><td><span class="b ok">frei</span></td><td>Einhändig, aber nicht feststellbar</td></tr>
+      <tr data-item data-cat="42a" data-k="spyderco para 3 paramilitary 2 delica endura native manix dragonfly"><td><b>Spyderco Para 3, PM2, Delica, Endura, Native, Manix, Dragonfly</b></td><td>Klapp</td><td>Daumenloch</td><td>Compression / Back / Ball Bearing</td><td>5,7–9,6 cm</td><td><span class="b mid">§ 42a</span></td><td>Einhändig und feststellbar — auch der 5,7-cm-Dragonfly</td></tr>
+      <tr data-item data-cat="42a" data-k="benchmade bugout griptilian 940 mini"><td><b>Benchmade Bugout, Mini Bugout, Griptilian, 940</b></td><td>Klapp</td><td>Daumenpin</td><td>Axis Lock</td><td>7–8,9 cm</td><td><span class="b mid">§ 42a</span></td><td>Einhändig und feststellbar; die Auto-Versionen (Benchmade Auto Axis) sind Springmesser: verboten</td></tr>
+      <tr data-item data-cat="42a" data-k="civivi elementum kizer qsp bestech we knife flipper"><td><b>Civivi Elementum, Kizer, QSP, Bestech, WE (manuelle Flipper)</b></td><td>Klapp</td><td>Flipper / Pin</td><td>Liner / Frame / Button</td><td>7–9,5 cm</td><td><span class="b mid">§ 42a</span></td><td>Manuell auf Kugellagern ist kein Springmesser, aber ein Einhandmesser</td></tr>
+      <tr data-item data-cat="42a" data-k="kershaw leek blur speedsafe assisted sog"><td><b>Kershaw Leek, Blur, Cryo; SOG Trident (SpeedSafe / assisted)</b></td><td>Klapp</td><td>Flipper mit Federunterstützung</td><td>Frame / Liner</td><td>7–8,5 cm</td><td><span class="b mid">§ 42a</span> — Grauzone</td><td>Nach BKA 2004 kein Springmesser; seit dem allgemeinen Springmesserverbot 2024 nicht mehr risikofrei. Manuelle Versionen bevorzugen</td></tr>
+      <tr data-item data-cat="42a" data-k="emerson wave cqc commander"><td><b>Emerson CQC-7, Commander (Wave)</b></td><td>Klapp</td><td>Wave / Daumenscheibe</td><td>Liner Lock</td><td>8,3–9,8 cm</td><td><span class="b mid">§ 42a</span></td><td>Wave ist Muskelkraft, keine Feder — Einhandmesser, kein Springmesser</td></tr>
+      <tr data-item data-cat="42a" data-k="leatherman wave charge skeletool surge free p4"><td><b>Leatherman Wave+, Charge+, Skeletool, Surge, Free P4</b></td><td>Multitool</td><td>Außenliegende Einhandklinge</td><td>Liner Lock</td><td>6,6–7,4 cm</td><td><span class="b mid">§ 42a</span></td><td>Die Klinge ist einhändig zu öffnen und verriegelt</td></tr>
+      <tr data-item data-cat="frei" data-k="leatherman rebar sidekick victorinox swisstool innen nagelhau"><td><b>Leatherman Rebar, Sidekick (Innenklingen); Victorinox SwissTool</b></td><td>Multitool</td><td>Klinge nur bei geöffneter Zange erreichbar, Nagelhau</td><td>Liner / Slide Lock</td><td>6–7,5 cm</td><td><span class="b ok">frei</span> (überwiegende Auffassung)</td><td>Zwei Hände nötig, um die Zange zu öffnen und die Klinge auszuklappen</td></tr>
+      <tr data-item data-cat="frei" data-k="morakniv mora companion garberg kansbol eldris"><td><b>Morakniv Companion, Garberg, Kansbol, Eldris</b></td><td>Feststehend</td><td>—</td><td>—</td><td>5,9–10,9 cm</td><td><span class="b ok">frei</span></td><td>Unter 12 cm</td></tr>
+      <tr data-item data-cat="frei" data-k="esee 3 4 izula fällkniven f1 helle temagami"><td><b>ESEE-3, ESEE-4, Izula; Fällkniven F1; Helle Temagami</b></td><td>Feststehend</td><td>—</td><td>—</td><td>7–11,4 cm</td><td><span class="b ok">frei</span></td><td>Unter 12 cm — beim ESEE-4 mit 11,4 cm knapp</td></tr>
+      <tr data-item data-cat="42a" data-k="esee 5 6 junglas ka-bar usmc bk2 bk7 becker fällkniven a1"><td><b>ESEE-5, ESEE-6, Junglas; Ka-Bar USMC, Becker BK2/BK7; Fällkniven A1</b></td><td>Feststehend</td><td>—</td><td>—</td><td>13,3–25 cm</td><td><span class="b mid">§ 42a</span></td><td>Über 12 cm — Führen nur mit Grund oder verschlossen</td></tr>
+      <tr data-item data-cat="42a" data-k="küchenmesser kochmesser santoku brotmesser 20 cm"><td><b>Kochmesser 20 cm, Santoku 18 cm, Brotmesser</b></td><td>Feststehend</td><td>—</td><td>—</td><td>14–26 cm</td><td><span class="b mid">§ 42a</span> (Transport)</td><td>Zu Hause frei; unterwegs verpackt und nicht zugriffsbereit</td></tr>
+      <tr data-item data-cat="frei" data-k="petty officemesser schälmesser 9 cm küche"><td><b>Petty, Officemesser, Schälmesser bis 12 cm</b></td><td>Feststehend</td><td>—</td><td>—</td><td>7–12 cm</td><td><span class="b ok">frei</span></td><td>Unter 12 cm — trotzdem nicht bei Veranstaltungen oder im Zug zugriffsbereit</td></tr>
+      <tr data-item data-cat="42a" data-k="fairbairn sykes dolch dagger schwert katana bajonett"><td><b>Fairbairn-Sykes, Dolche, Katana, Bajonette</b></td><td>Hieb- und Stoßwaffe</td><td>—</td><td>—</td><td>—</td><td><span class="b mid">§ 42a Nr. 2</span></td><td>Waffe: Besitz ab 18, Führen verboten (auch unter 12 cm)</td></tr>
+      <tr data-item data-cat="42a" data-k="cuttermesser teppichmesser stanley olfa"><td><b>Cuttermesser mit Arretierung (Stanley, Olfa, Martor)</b></td><td>Cutter</td><td>Schieber, einhändig</td><td>Rastung</td><td>—</td><td><span class="b mid">§ 42a</span> (verbreitete Auslegung)</td><td>Auf Arbeit gedeckt; Sicherheitsmesser mit automatischem Klingenrückzug (Martor) sind nicht feststellbar und damit frei</td></tr>
+      <tr data-item data-cat="verboten" data-k="microtech ultratech otf combat troodon benchmade infidel"><td><b>Microtech Ultratech, Combat Troodon; Benchmade Infidel (OTF)</b></td><td>Springmesser frontal</td><td>Schieber, Feder</td><td>automatisch</td><td>8–10 cm</td><td><span class="b bad">verboten</span></td><td>Springmesser ohne Ausnahme (nicht seitlich)</td></tr>
+      <tr data-item data-cat="verboten" data-k="protech benchmade auto italienisches stiletto springmesser hubertus"><td><b>Protech, Benchmade Auto, italienische Stiletti, Hubertus-Springer</b></td><td>Springmesser seitlich</td><td>Knopf, Feder</td><td>automatisch</td><td>6–11 cm</td><td><span class="b bad">verboten</span></td><td>Seit 31.10.2024 nur noch mit berechtigtem beruflichem Interesse (und ≤ 8,5 cm, einseitig)</td></tr>
+      <tr data-item data-cat="verboten" data-k="balisong butterfly benchmade 42 squid industries"><td><b>Balisongs (Benchmade 42/51, Squid Industries mit Klinge)</b></td><td>Butterfly</td><td>Schwenkgriffe</td><td>—</td><td>—</td><td><span class="b bad">verboten</span></td><td>Anlage 2 Nr. 1.4.4; Trainer ohne Schneide frei</td></tr>
+      <tr data-item data-cat="verboten" data-k="push dagger cold steel safe maker faustmesser"><td><b>Cold Steel Safe Maker, Push Dagger</b></td><td>Faustmesser</td><td>—</td><td>—</td><td>—</td><td><span class="b bad">verboten</span></td><td>Anlage 2 Nr. 1.4.3</td></tr>
+      <tr data-item data-cat="verboten" data-k="fliegermesser fallmesser gravity knife bundeswehr kappmesser"><td><b>Fliegermesser, Gravity Knife, Kappmesser mit Arretierung</b></td><td>Fallmesser</td><td>Schwerkraft</td><td>automatisch</td><td>—</td><td><span class="b bad">verboten</span></td><td>Anlage 2 Nr. 1.4.2</td></tr>
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Kein Treffer.</div>
+</div>
+<p class="note">Einordnung nach Bauart und den Kriterien von § 42a WaffG und Anlage 2; im Einzelfall entscheiden Ausführung, BKA-Bescheid und Gericht. Herstellerangaben zu Modellen Stand 2026. Alle „frei“-Einordnungen gelten außerhalb von Verbotszonen, Veranstaltungen und Fernverkehr.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>§ 42a WaffG, Anlage 1 und 2; Herstellerangaben (Victorinox, Opinel, Otter, Buck, Spyderco, Benchmade, Civivi/WE, Kershaw, Emerson, Leatherman, Morakniv, ESEE, Fällkniven, Helle, Ka-Bar, Microtech, Protech, Cold Steel).</li>
+    <li>BKA-Feststellungsbescheide zu federunterstützten Messern und Cuttermessern; Rechtsforum messerforum.net (Einzelfälle zu Multitools und Cuttern).</li>
+  </ul>
+</div>

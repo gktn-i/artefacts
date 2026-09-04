@@ -1,0 +1,63 @@
+---
+import "./_style.css";
+---
+<div class="kurz q"><b>Besitzen darf man in Deutschland fast jedes Messer. Führen — also außerhalb der eigenen vier Wände dabeihaben — ist die eigentliche Frage.</b> Drei Stufen: verboten (Springmesser, Butterfly, Fallmesser, Faustmesser), eingeschränkt (Einhandmesser, feststehend über 12 cm, Dolche) und frei. Und seit Oktober 2024 gilt für <em>alle</em> Messer: nicht bei Veranstaltungen, nicht im Fernverkehr, nicht in Verbotszonen.</div>
+
+<div class="stop"><b>Keine Rechtsberatung.</b> Dieses Modul ordnet ein und nennt die Fundstellen — es ersetzt weder den Gesetzestext noch die Auskunft der zuständigen Behörde oder einer Anwältin. Rechtsstand: Waffengesetz in der Fassung vom 31. Oktober 2024 (Sicherheitspaket), Landesverordnungen bis September 2026. Gesetze ändern sich; die verbindliche Fassung steht auf <a href="https://www.gesetze-im-internet.de/waffg_2002/">gesetze-im-internet.de</a>.</div>
+
+<h2>Der § 42a-Check</h2>
+<p>Bauart und Mechanik eintragen — das Ergebnis zeigt die Einordnung nach Waffengesetz mit Fundstelle. Läuft im Browser, speichert nichts.</p>
+<div class="calc" data-calc="messer42a">
+  <h4>Darf ich dieses Messer führen?</h4>
+  <div class="row">
+    <div><label>Bauart</label><select data-k="art"><option value="klapp">Klappmesser / Multitool / Cutter</option><option value="fest">Feststehendes Messer</option></select></div>
+    <div><label>Mechanik</label><select data-k="mech"><option value="manuell">manuell (Pin, Loch, Flipper, Nagelhau)</option><option value="assisted">federunterstützt (assisted)</option><option value="auto">Springmesser, seitlich</option><option value="otf">Springmesser, frontal (OTF)</option><option value="fall">Schwerkraft (Fallmesser)</option><option value="butterfly">Butterfly / Balisong</option><option value="faust">Faustmesser / Push Dagger</option><option value="dolch">Dolch, zweischneidig symmetrisch</option></select></div>
+    <div><label>Öffnen (Klappmesser)</label><select data-k="oeffnen"><option value="zwei">mit zwei Händen</option><option value="ein">mit einer Hand</option></select></div>
+    <div><label>Verriegelung (Klappmesser)</label><select data-k="lock"><option value="nein">keine (Slipjoint)</option><option value="ja">ja (Liner, Frame, Back, Axis …)</option></select></div>
+    <div><label>Klingenlänge (cm, feststehend)</label><input type="number" data-k="laenge" value="10" step="0.1" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+
+<h2>Die drei Stufen auf einen Blick</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th>Stufe</th><th>Was</th><th>Besitz</th><th>Führen</th><th>Fundstelle</th><th>Verstoß</th></tr></thead>
+<tbody>
+<tr><td><span class="b bad">verboten</span></td><td>Springmesser (seitlich und OTF), Fallmesser, Faustmesser, Butterflymesser; dazu Wurfsterne</td><td>verboten (Ausnahme: Springmesser seitlich ≤ 8,5 cm, einseitig, nur mit beruflichem bzw. berechtigtem Interesse)</td><td>verboten</td><td>§ 2 Abs. 3, Anlage 2 Abschnitt 1 Nr. 1.3.3, 1.4.1–1.4.4</td><td>Straftat, bis 3 Jahre (§ 52 Abs. 3 Nr. 1)</td></tr>
+<tr><td><span class="b mid">eingeschränkt</span></td><td>Einhandmesser (einhändig öffnen + feststellbar), feststehende Messer über 12 cm, Hieb- und Stoßwaffen (Dolche, Schwerter, Kampfmesser)</td><td>frei (Hieb-/Stoßwaffen ab 18)</td><td>nur mit berechtigtem Interesse, im verschlossenen Behältnis oder für Film/Theater</td><td>§ 42a</td><td>Ordnungswidrigkeit, bis 10 000 € (§ 53 Abs. 1 Nr. 21a)</td></tr>
+<tr><td><span class="b ok">frei</span></td><td>Zweihand-Klappmesser (auch verriegelnd), Slipjoints (auch einhändig), feststehende Messer bis 12 cm, Küchenmesser zu Hause</td><td>frei, keine Altersgrenze im Gesetz</td><td>frei — außer bei Veranstaltungen, im Fernverkehr, in Verbotszonen und im Nahverkehr vieler Länder</td><td>—</td><td>bei Verstößen gegen § 42/§ 42b: Ordnungswidrigkeit bis 10 000 €</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was 2024/2025 neu ist</h2>
+<div class="flist">
+  <div class="frow hd"><span>Änderung</span><span>Seit</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">Springmesser grundsätzlich verboten</span><span class="fe">31.10.2024</span><span class="fx">Die frühere Ausnahme (seitlich, ≤ 8,5 cm, einseitig) gilt nur noch mit berechtigtem oder beruflichem Interesse. Straffreie Abgabe war bis 1.10.2025 möglich</span></div>
+  <div class="frow"><span class="fn">Messerverbot bei Veranstaltungen</span><span class="fe">31.10.2024</span><span class="fx">Volksfeste, Sportveranstaltungen, Messen, Märkte, Kinos, Diskotheken — alle Messer, jede Klingenlänge (§ 42 Abs. 1, 4a), mit Ausnahmen für Gastronomie, Beruf, Brauchtum, nicht zugriffsbereiten Transport</span></div>
+  <div class="frow"><span class="fn">Messerverbot im Fernverkehr</span><span class="fe">31.10.2024</span><span class="fx">ICE, IC, EC, Fernbusse und ihre umschlossenen Anlagen (§ 42b) — auch das Taschenmesser im Rucksack</span></div>
+  <div class="frow"><span class="fn">Länder dürfen Nahverkehr und Zonen mit Messerverbot belegen</span><span class="fe">31.10.2024, Verordnungen 2025/2026</span><span class="fx">Hamburg, Berlin (17.7.2025), Baden-Württemberg, Rheinland-Pfalz (27.11.2025), Hessen, Niedersachsen (1.4.2026), NRW (Verordnung 2025, geändert 22.4.2026), Bremen — Details unter <a href="#zonen">Zonen</a></span></div>
+  <div class="frow"><span class="fn">Anlasslose Kontrollen in Verbotszonen</span><span class="fe">2024/2025</span><span class="fx">Polizeigesetze der Länder erlauben in Verbotszonen Durchsuchungen ohne konkreten Verdacht; Bundespolizei mit befristeten Allgemeinverfügungen an Bahnhöfen</span></div>
+</div>
+
+<h2>Wo im Modul was steht</h2>
+<div class="map">
+  <a href="#begriffe"><div class="mt"><span class="i">📖</span>Was heißt „Führen“?</div><div class="md">Waffe, Messer, Führen, Besitz, Klingenlänge messen</div></a>
+  <a href="#p42a"><div class="mt"><span class="i">§</span>§ 42a im Wortlaut</div><div class="md">Einhandmesser, 12 cm, berechtigtes Interesse, verschlossenes Behältnis</div></a>
+  <a href="#verboten"><div class="mt"><span class="i">⛔</span>Was verboten ist</div><div class="md">Springmesser, Butterfly, Fallmesser, Faustmesser, BKA-Bescheide</div></a>
+  <a href="#zonen"><div class="mt"><span class="i">🚫</span>Wo gar kein Messer erlaubt ist</div><div class="md">Veranstaltungen, Fernverkehr, ÖPNV, Verbotszonen der Länder</div></a>
+  <a href="#praxis"><div class="mt"><span class="i">🎒</span>Transport, Alltag, Kontrolle</div><div class="md">Was zählt als verschlossen, was tun bei einer Kontrolle, Versand und Zoll</div></a>
+  <a href="#modelle"><div class="mt"><span class="i">🔪</span>Konkrete Modelle</div><div class="md">Victorinox bis Microtech eingeordnet</div></a>
+  <a href="#ausland"><div class="mt"><span class="i">🌍</span>Österreich, Schweiz, Reisen</div><div class="md">Andere Länder, Flugzeug, Grenzen</div></a>
+  <a href="#quellen"><div class="mt"><span class="i">📚</span>Gesetze und Behörden</div><div class="md">Die verbindlichen Fundstellen</div></a>
+</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>Waffengesetz (WaffG) mit Anlagen 1 und 2 in der Fassung des Gesetzes zur Verbesserung der inneren Sicherheit und des Asylsystems vom 31.10.2024 (BGBl. 2024 I Nr. 332) — <a href="https://www.gesetze-im-internet.de/waffg_2002/">gesetze-im-internet.de</a>.</li>
+    <li>Bundesministerium des Innern, <i>FAQ Waffenrecht</i>; Bundeskriminalamt, Feststellungsbescheide nach § 2 Abs. 5 WaffG.</li>
+    <li>Landesverordnungen zu Waffen- und Messerverbotszonen (Hamburg, Berlin, Bremen, NRW, Baden-Württemberg, Hessen, Rheinland-Pfalz, Niedersachsen), Stand September 2026.</li>
+    <li>Deutscher Jagdverband, <i>Frage-Antwort-Papier zur Waffengesetzänderung 2024</i>; Verband Deutscher Büchsenmacher und Waffenfachhändler, <i>Der Verbotszonenflickenteppich</i> (11/2025); knife-blog.com und messerforum.net (Rechtsbereich).</li>
+  </ul>
+</div>

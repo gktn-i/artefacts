@@ -1,10 +1,10 @@
 # Artefakte
 
-Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab und Fotografie — <https://bib.gktn.dev>.
+Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Fotografie und Messer — <https://bib.gktn.dev>.
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 22 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle 26 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -50,8 +50,8 @@ public/assets/palette.js   globale Suche (⌘K): Registry-Treffer + Pagefind-Vol
 
 Drei Ebenen: **Übersicht → Hub → Modul** — aber alle drei sind jederzeit über
 die Rail erreichbar.
-Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video —
-zusammen 22 Module mit 231 Abschnitten.
+Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video ·
+🔪 Messer — zusammen 26 Module mit 268 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion
@@ -80,8 +80,9 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
   und wird von jedem `_style.css` nur importiert; ein Modul kann darüber hinaus
   eigene Regeln ergänzen (so macht es `dremel` für seine Drehzahlskala).
 - **Ein Skript für viele Module:** `public/assets/mod-mecha.js` bedient alle
-  Mechatronik-Module und die Technik-Module der Werkstatt — Faltabschnitte,
-  sortierbare Tabellen, Katalog- und Glossarfilter, die Rechner und die
+  Mechatronik-Module, die Technik-Module der Werkstatt und den Messer-Hub —
+  Faltabschnitte, sortierbare Tabellen, Katalog- und Glossarfilter, die Rechner
+  (darunter der § 42a-Check und der Schärfwinkel-Rechner) und die
   PID-Simulation. Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
   Ein Modul kann mehrere Skripte laden (`PAGE_SCRIPTS` nimmt auch ein Array,
   so kombiniert *3D-Druck* das Technik-Skript mit seinem Simulator).

@@ -1,0 +1,71 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Schärfe ist der Radius der Schneidkante.</b> Ein frisch geschärftes Messer hat einen Apex von 0,1–0,5 µm; ein stumpfes von 5–20 µm. Was man als „stumpf“ spürt, ist ein Radius, der die Haut- oder Papierfasern nicht mehr trennt, sondern verdrängt.</div>
+
+<h2>Anatomie einer Schneide</h2>
+<figure>
+<svg class="dg m" viewBox="0 0 440 220" role="img" aria-label="Stark vergrößerter Querschnitt einer Schneide: Flanken, Sekundärfase, Apex mit Radius; daneben ein Grat, der auf eine Seite umgebogen ist">
+  <!-- scharfe Schneide -->
+  <path class="box" d="M60,20 L120,20 L98,150 L90,190 L82,150 Z" />
+  <path class="accs" d="M98,150 L90,190 L82,150 Z" />
+  <circle class="acc" cx="90" cy="188" r="6" />
+  <text class="lbl" x="130" y="120">Sekundärfase</text>
+  <path class="gd" d="M126,116 L100,140" />
+  <text class="lbl" x="130" y="195">Apex, Radius 0,1–0,5 µm</text>
+  <path class="gd" d="M126,191 L97,189" />
+  <text class="lbl" x="130" y="50">Flanke (Primärfase)</text>
+  <path class="gd" d="M126,46 L118,40" />
+  <text class="lblb" x="90" y="212" text-anchor="middle">scharf</text>
+  <!-- Grat -->
+  <path class="box" d="M300,20 L360,20 L338,150 L330,190 L322,150 Z" />
+  <path class="badl" d="M330,190 C334,200 344,198 348,188" />
+  <text class="lbl" x="360" y="195">Grat (burr)</text>
+  <path class="gd" d="M356,191 L346,192" />
+  <text class="lblb" x="330" y="212" text-anchor="middle">mit Grat</text>
+  <!-- stumpf -->
+  <path class="box" d="M180,20 L240,20 L222,150 C216,180 204,180 198,150 Z" />
+  <text class="lbl" x="205" y="120" text-anchor="middle">Radius 5–20 µm</text>
+  <text class="lblb" x="210" y="212" text-anchor="middle">stumpf</text>
+</svg>
+<figcaption>Querschnitte, nicht maßstäblich. Der Grat entsteht, weil der letzte Rest Metall am Apex nicht abgetragen, sondern zur Seite gedrückt wird — er ist das Zeichen, dass beide Fasen sich treffen, und muss danach entfernt werden.</figcaption>
+</figure>
+
+<h2>Wie Messer stumpf werden</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Mechanismus</th><th>Was passiert</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Umlegen (Rollen)</b></td><td>Der Apex biegt seitlich um, die Schneide bleibt intakt, schneidet aber nicht mehr</td><td>Weiche Stähle (unter 58 HRC), Seitenlast, Schneidbrett aus Glas oder Stein, zu dünner Winkel</td><td>Wetzstahl, Keramikstab oder Abziehriemen richten den Apex wieder auf — ohne Materialabtrag</td></tr>
+<tr><td><b>Abrasiver Verschleiß</b></td><td>Der Apex wird durch harte Partikel im Schnittgut gleichmäßig abgerundet</td><td>Karton (Ton- und Kalkfüllstoffe), Erde, Sand, Glasfaser, Papier</td><td>Neu schärfen; Stähle mit harten Karbiden verzögern es</td></tr>
+<tr><td><b>Mikroausbrüche (Chipping)</b></td><td>Kleine Stücke brechen aus der Schneide; unter der Lupe als Scharten sichtbar</td><td>Hohe Härte, grobe Karbide, zu dünner Winkel, Verkanten, Knochen, gefrorenes Schnittgut, Restaustenit</td><td>Winkel um 2–3° erhöhen oder Mikrofase; bei wiederholtem Chipping Stahl oder Wärmebehandlung als Ursache</td></tr>
+<tr><td><b>Korrosion</b></td><td>Der Apex ist die dünnste Stelle — Lochfraß frisst ihn zuerst</td><td>Kohlenstoffstahl feucht gelagert, Säuren in der Küche, Salz</td><td>Trocknen, ölen, Patina; Abziehen entfernt den angegriffenen Apex</td></tr>
+<tr><td><b>Grat-Abbruch</b></td><td>Ein nicht entfernter Grat bricht nach wenigen Schnitten ab und hinterlässt eine stumpfe Kante</td><td>Schärffehler: Grat nicht abgetragen</td><td>Sauber entgraten (siehe <a href="#technik">Technik</a>)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Schärfe messen</h2>
+<div class="flist">
+  <div class="frow hd"><span>Test</span><span>Aussage</span><span>Praxis</span></div>
+  <div class="frow"><span class="fn">Papier (Druckerpapier, quer)</span><span class="fe">Radius ≈ unter 2 µm</span><span class="fx">Hängend gehaltenes Papier ohne Ruck schneiden; Zeitungspapier ist anspruchsvoller als Druckerpapier. Hakt es an einer Stelle: Grat oder Scharte dort</span></div>
+  <div class="frow"><span class="fn">Armhaar</span><span class="fe">Radius ≈ unter 1 µm</span><span class="fx">Rasiert ohne Druck. Ein Grat rasiert auch — deshalb erst nach dem Entgraten testen</span></div>
+  <div class="frow"><span class="fn">Haar frei schneiden (Hair whittling)</span><span class="fe">Radius ≈ 0,1–0,3 µm</span><span class="fx">Ein einzelnes Haar spalten oder frei hängend schneiden — Rasiermesserniveau, für Küchenmesser mit feiner Politur erreichbar</span></div>
+  <div class="frow"><span class="fn">Tomate, Fingernagel</span><span class="fe">grob</span><span class="fx">Tomatenhaut ohne Druck; die Schneide „beißt“ leicht in den Nagel, wenn man sie mit dem Eigengewicht aufsetzt — und gleitet, wenn sie stumpf ist</span></div>
+  <div class="frow"><span class="fn">BESS (Brubacher Edge Sharpness Scale)</span><span class="fe">Gramm Kraft, um einen Prüffaden zu trennen</span><span class="fx">0 = ideal; neue Rasierklinge ≈ 50; sehr scharfes Messer 100–150; werksscharf 200–300; stumpf über 400–500. Messgerät: Edge-On-Up PT50, ab ca. 200 €</span></div>
+  <div class="frow"><span class="fn">Licht</span><span class="fe">Reflexion am Apex</span><span class="fx">Unter einer Lampe die Schneide von oben ansehen: Eine scharfe Kante reflektiert nichts, jede glänzende Stelle ist ein Radius oder eine Scharte. Der schnellste Test von allen</span></div>
+</div>
+
+<h2>Toothy oder poliert?</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Grobe Schneide (400–1000, „toothy“)</h4><ul><li>Mikrozähne reißen faserige Materialien: Seil, Karton, Fleisch, Tomatenhaut</li><li>Bleibt subjektiv länger „schneidend“ beim Ziehschnitt</li><li>Schneller zu erzeugen; ideal für EDC und Jagd</li></ul></div>
+  <div class="gb-col good"><h4>Polierte Schneide (3000+, Abziehen)</h4><ul><li>Drückschnitt ohne Ziehen: Schnitzen, Rasieren, Gemüse, Sashimi</li><li>Stabilerer Apex, weniger Angriffsfläche für Korrosion</li><li>Verliert beim Ziehschnitt durch Seil und Karton schneller ihren Vorteil</li></ul></div>
+</div>
+<p class="note">Praktisch: EDC und Outdoor auf 600–1000 abschließen und kurz abziehen; Küchenmesser auf 3000–6000; Rasiermesser 8000 und Leder. Die „beste“ Körnung ist die, die zur Schnittart passt.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>J. D. Verhoeven, <i>Experiments on Knife Sharpening</i> (2004) — Apex-Radien, Gratbildung, Wirkung von Abziehriemen im REM.</li>
+    <li>Todd Simpson, scienceofsharp.com, u. a. <i>What is a burr?</i>, <i>Sharpness Testing</i>; Edge-On-Up, BESS-Skala (Dokumentation zum PT50).</li>
+    <li>Larrin Thomas, knifesteelnerds.com, <i>Edge Stability</i>, <i>Toothy vs Polished Edges</i> (CATRA-Vergleiche verschiedener Abschlusskörnungen).</li>
+  </ul>
+</div>
