@@ -51,7 +51,7 @@ public/assets/palette.js   globale Suche (⌘K): Registry-Treffer + Pagefind-Vol
 Drei Ebenen: **Übersicht → Hub → Modul** — aber alle drei sind jederzeit über
 die Rail erreichbar.
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video ·
-🔪 Messer — zusammen 26 Module mit 268 Abschnitten.
+🔪 Messer — zusammen 26 Module mit 270 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion

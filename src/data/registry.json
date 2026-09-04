@@ -2405,7 +2405,7 @@
        "icon": "🔪",
        "kind": "Referenz",
        "updated": "2026-09-04",
-       "desc": "Klappmesser, feststehende Messer und Sonderformen; alle gängigen Verriegelungen und Öffnungsmechanismen mit ihrer rechtlichen Bedeutung; Klingenformen, Schliffe und Klingengeometrie mit echten Maßen; Griffmaterialien; Auswahl nach Einsatz mit konkreten Modellen; Hersteller und Herkunft; Glossar.",
+       "desc": "Klappmesser, feststehende Messer und Sonderformen; 32 Messerarten von Küche bis Kukri mit Silhouetten; alle gängigen Verriegelungen und Öffnungsmechanismen mit ihrer rechtlichen Bedeutung; Klingenformen, Schliffe und Klingengeometrie mit echten Maßen; Griffmaterialien; Auswahl nach Einsatz mit konkreten Modellen; Hersteller und Herkunft; Begriffe nach Bereich und Glossar A–Z.",
        "tags": [
         "klappmesser",
         "feststehend",
@@ -2435,7 +2435,18 @@
         "benchmade",
         "victorinox",
         "opinel",
-        "mora"
+        "mora",
+        "messerarten",
+        "gyuto",
+        "santoku",
+        "nakiri",
+        "puukko",
+        "kukri",
+        "bowie",
+        "navaja",
+        "laguiole",
+        "begriffe",
+        "fachbegriffe"
        ],
        "sections": [
         {
@@ -2445,6 +2456,10 @@
         {
          "h": "bauarten",
          "t": "Klappmesser, feststehend & Sonderformen"
+        },
+        {
+         "h": "arten",
+         "t": "Messerarten von Küche bis Kukri"
         },
         {
          "h": "verriegelung",
@@ -2475,6 +2490,10 @@
          "t": "Hersteller & Herkunft"
         },
         {
+         "h": "begriffe",
+         "t": "Begriffe nach Bereich"
+        },
+        {
          "h": "glossar",
          "t": "Glossar A–Z"
         }
@@ -2484,7 +2503,8 @@
          "l": "Grundlagen",
          "sections": [
           "start",
-          "bauarten"
+          "bauarten",
+          "arten"
          ]
         },
         {
@@ -2506,7 +2526,13 @@
          "l": "Kaufen",
          "sections": [
           "auswahl",
-          "hersteller",
+          "hersteller"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "begriffe",
           "glossar"
          ]
         }
@@ -2520,7 +2546,12 @@
         "schliff": "schliffe",
         "geometrie": "schliffe",
         "griffe": "griff",
-        "marken": "hersteller"
+        "marken": "hersteller",
+        "messerarten": "arten",
+        "typen": "arten",
+        "kueche": "arten",
+        "begriffe": "begriffe",
+        "abkuerzungen": "begriffe"
        },
        "related": [
         "klingenstahl",

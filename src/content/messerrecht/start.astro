@@ -20,6 +20,39 @@ import "./_style.css";
   <div class="hint" data-hint></div>
 </div>
 
+<h2>Der Entscheidungsbaum</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 400" role="img" aria-label="Entscheidungsbaum zum deutschen Messerrecht: Erst prüfen, ob eine verbotene Bauart vorliegt, dann ob Klappmesser oder feststehend, dann einhändig und feststellbar bzw. Klingenlänge über 12 cm; danach gilt für alle Messer das Verbot bei Veranstaltungen, im Fernverkehr und in Verbotszonen">
+  <!-- Ebene 1 -->
+  <rect class="box" x="230" y="10" width="200" height="40" rx="8" /><text class="lblb" x="330" y="34" text-anchor="middle">Springmesser, Fall-, Faust-, Butterfly?</text>
+  <path class="acc" d="M330,50 V80" /><text class="lbl" x="336" y="70">nein</text>
+  <path class="badl" d="M430,30 H520" /><text class="lbl" x="440" y="24">ja</text>
+  <rect class="box" x="520" y="10" width="130" height="40" rx="8" style="stroke:var(--bad)" /><text class="lblb" x="585" y="28" text-anchor="middle">VERBOTEN</text><text class="lbl" x="585" y="42" text-anchor="middle">Besitz strafbar</text>
+  <!-- Ebene 2 -->
+  <rect class="box" x="230" y="80" width="200" height="40" rx="8" /><text class="lblb" x="330" y="104" text-anchor="middle">Dolch / Hieb- und Stoßwaffe?</text>
+  <path class="badl" d="M430,100 H520" /><text class="lbl" x="440" y="94">ja</text>
+  <rect class="box" x="520" y="80" width="130" height="40" rx="8" style="stroke:var(--mid)" /><text class="lblb" x="585" y="98" text-anchor="middle">§ 42a Nr. 2</text><text class="lbl" x="585" y="112" text-anchor="middle">Führen nur mit Grund</text>
+  <path class="acc" d="M330,120 V150" /><text class="lbl" x="336" y="140">nein</text>
+  <!-- Ebene 3 -->
+  <rect class="box" x="230" y="150" width="200" height="40" rx="8" /><text class="lblb" x="330" y="174" text-anchor="middle">Klappmesser oder feststehend?</text>
+  <path class="acc" d="M230,170 H150 V220" /><text class="lbl" x="160" y="164">Klapp</text>
+  <path class="acc" d="M430,170 H510 V220" /><text class="lbl" x="440" y="164">feststehend</text>
+  <!-- Klapp -->
+  <rect class="box" x="60" y="220" width="180" height="40" rx="8" /><text class="lblb" x="150" y="238" text-anchor="middle">einhändig zu öffnen</text><text class="lblb" x="150" y="252" text-anchor="middle">UND feststellbar?</text>
+  <path class="midl" d="M150,260 V300" /><text class="lbl" x="156" y="284">ja</text>
+  <rect class="box" x="60" y="300" width="180" height="40" rx="8" style="stroke:var(--mid)" /><text class="lblb" x="150" y="318" text-anchor="middle">EINHANDMESSER § 42a</text><text class="lbl" x="150" y="332" text-anchor="middle">Führen nur mit Grund / verschlossen</text>
+  <path class="good" d="M60,240 H30 V360 H200" /><text class="lbl" x="34" y="234">nein</text>
+  <!-- fest -->
+  <rect class="box" x="420" y="220" width="180" height="40" rx="8" /><text class="lblb" x="510" y="244" text-anchor="middle">Klinge über 12 cm?</text>
+  <path class="midl" d="M510,260 V300" /><text class="lbl" x="516" y="284">ja</text>
+  <rect class="box" x="420" y="300" width="180" height="40" rx="8" style="stroke:var(--mid)" /><text class="lblb" x="510" y="318" text-anchor="middle">§ 42a Nr. 3</text><text class="lbl" x="510" y="332" text-anchor="middle">Führen nur mit Grund / verschlossen</text>
+  <path class="good" d="M600,240 H630 V360 H460" /><text class="lbl" x="606" y="234">nein</text>
+  <!-- frei -->
+  <rect class="box" x="200" y="340" width="260" height="40" rx="8" style="stroke:var(--ok)" /><text class="lblb" x="330" y="358" text-anchor="middle">FREI FÜHRBAR</text><text class="lbl" x="330" y="372" text-anchor="middle">außer: Veranstaltung, Fernverkehr, Zone</text>
+</svg>
+<figcaption>Der Weg durch das Waffengesetz für ein Messer. Die letzte Zeile gilt für alle drei Ausgänge: Bei Volksfesten, in ICE und Fernbus sowie in Verbotszonen und im Nahverkehr vieler Länder ist auch ein „freies“ Messer verboten — es sei denn, es ist verpackt und nicht zugriffsbereit.</figcaption>
+</figure>
+
 <h2>Die drei Stufen auf einen Blick</h2>
 <div class="tbl-wrap"><table style="min-width:980px">
 <thead><tr><th>Stufe</th><th>Was</th><th>Besitz</th><th>Führen</th><th>Fundstelle</th><th>Verstoß</th></tr></thead>
