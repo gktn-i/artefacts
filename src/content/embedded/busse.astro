@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Vier Busse decken fast alles ab:</b> I²C für viele langsame Sensoren an zwei Leitungen, SPI für hohe Datenraten auf kurzer Strecke, UART für Punkt-zu-Punkt und Debug-Ausgaben, CAN für störfeste Verbindungen über mehrere Meter. Die Wahl folgt aus Distanz, Anzahl der Teilnehmer und Datenrate.</div>
 
@@ -16,6 +17,54 @@ import "./_style.css";
 <tr><td><b>1-Wire</b></td><td>1 (+ GND)</td><td>viele</td><td>15 kbit/s (Overdrive 125 k)</td><td>bis 100 m</td><td>Minimale Verdrahtung, Speisung über die Datenleitung möglich</td><td>Sehr langsam, striktes Timing</td></tr>
 </tbody>
 </table></div>
+
+<h3>Welcher Bus wofür</h3>
+<Profiles
+  criteria={["Datenrate", "Reichweite", "Störfestigkeit", "Viele Teilnehmer", "Pinsparsam", "Einfach"]}
+  items={[
+    {
+      name: "I²C",
+      tag: "2 Leitungen, Adressen",
+      scores: [2, 1, 1, 4, 5, 4],
+      pro: "Zwei Leitungen für viele Sensoren, Adressierung eingebaut, jede Bibliothek kann es.",
+      con: "Unter einem Meter, blockierbar, Adresskonflikte; Pull-ups wollen dimensioniert sein.",
+      use: "Sensoren, Displays, EEPROMs auf derselben Platine.",
+    },
+    {
+      name: "SPI",
+      tag: "4 Leitungen, CS je Gerät",
+      scores: [5, 1, 2, 3, 2, 5],
+      pro: "Sehr schnell, Vollduplex, trivial zu implementieren.",
+      con: "Ein Chip Select je Teilnehmer, keine Rückmeldung, nur kurze Leitungen.",
+      use: "Displays, Flash, ADCs, alles mit hoher Datenrate auf dem Board.",
+    },
+    {
+      name: "UART",
+      tag: "TX, RX",
+      scores: [3, 3, 2, 1, 4, 5],
+      pro: "Denkbar einfach, überall vorhanden, mit RS-485-Treiber weit.",
+      con: "Nur Punkt zu Punkt, Baudraten müssen passen, keine Fehlerprüfung.",
+      use: "Debug-Ausgabe, GPS, Funkmodule, zwei Controller miteinander.",
+    },
+    {
+      name: "CAN / CAN FD",
+      tag: "differentiell, Arbitrierung",
+      scores: [3, 4, 5, 5, 4, 2],
+      pro: "Sehr störfest, Arbitrierung ohne Kollisionsverlust, Fehlererkennung in Hardware.",
+      con: "Transceiver und Abschlusswiderstände nötig; das Protokoll darüber entwirft man selbst.",
+      use: "Mehrere Baugruppen über Meter: Roboterarm, Fahrzeug, Maschine.",
+    },
+    {
+      name: "RS-485",
+      tag: "differentiell, halbduplex",
+      scores: [3, 5, 5, 3, 4, 3],
+      pro: "Bis 1200 m, robust, günstige Transceiver.",
+      con: "Halbduplex mit Richtungsumschaltung; Protokoll (meist Modbus) selbst.",
+      use: "Gebäude, Feld, Sensoren über lange Leitungen.",
+    },
+  ]}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
 
 <h2>I²C — worauf es ankommt</h2>
 <div class="steps">

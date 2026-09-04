@@ -277,8 +277,56 @@ kbd {
   font-weight: 600;
 }
 
-/* --- Modul-Panel: eigene, abgesetzte Zone unter der Bibliothek ----------- */
+/* --- Schnellzugriff: Aufgaben des Hubs mit Direktlinks ------------------- */
 .tree-label.ml { margin-top: 20px; }
+.quick { margin: 0 1px 4px; }
+.qtask { margin-bottom: 2px; }
+.qtask > summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 9px;
+  border-radius: 7px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: background 0.12s, color 0.12s;
+}
+.qtask > summary::-webkit-details-marker { display: none; }
+.qtask > summary:hover { background: var(--surface-2); color: var(--text); }
+.qtask[open] > summary { color: var(--text); font-weight: 600; }
+.qtask .qi { flex: 0 0 auto; width: 18px; text-align: center; font-size: 14px; line-height: 1; }
+.qtask .qt { flex: 1 1 auto; }
+.qtask .chev { flex: 0 0 auto; color: var(--faint); transition: transform 0.16s; }
+.qtask[open] > summary .chev { transform: rotate(90deg); }
+.qtask .ql {
+  margin: 1px 0 8px 17px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border-strong);
+}
+.qtask .ql a {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4.5px 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.12s;
+}
+.qtask .ql a:hover { background: var(--surface-2); }
+.qtask .ql a .lb { font-size: 12.8px; line-height: 1.4; color: var(--text); }
+.qtask .ql a:hover .lb { color: var(--c); }
+.qtask .ql a .md { font-size: 11px; line-height: 1.3; color: var(--faint); }
+.qtask .ql a.all {
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--faint);
+}
+.qtask .ql a.all:hover { color: var(--c); }
+
+/* --- Modul-Panel: eigene, abgesetzte Zone unter der Bibliothek ----------- */
 .railmod {
   margin: 0 1px 10px;
   background: var(--surface);
@@ -835,6 +883,51 @@ kbd {
 }
 .areajump a:hover { color: var(--text); border-color: color-mix(in srgb, var(--c) 45%, var(--border)); }
 .areajump .ct { font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
+
+/* Schnellzugriff nach Aufgabe: quer durch die Module des Hubs */
+.tasks { scroll-margin-top: calc(var(--topbar-h) + 12px); }
+.tasks .rowlabel { margin-top: 34px; }
+.taskgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 12px;
+}
+.task {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 17px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  scroll-margin-top: calc(var(--topbar-h) + 12px);
+}
+.task:target { border-color: color-mix(in srgb, var(--c) 55%, var(--border)); }
+.task header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.task header .ic {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font-size: 17px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+.task h3 { font: 700 16.5px/1.2 var(--display); letter-spacing: -0.005em; }
+.task .d { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.task ul { list-style: none; }
+.task li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 0;
+  border-top: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.task li a { text-decoration: none; color: var(--text); font-weight: 500; }
+.task li a:hover { color: var(--c); }
+.task li .md { flex: 0 0 auto; font-size: 11.5px; color: var(--faint); white-space: nowrap; }
 
 .areasec { margin-top: 36px; scroll-margin-top: calc(var(--topbar-h) + 12px); }
 .areasec .ah {

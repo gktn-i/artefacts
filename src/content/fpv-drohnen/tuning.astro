@@ -90,7 +90,7 @@ import "./_style.css";
 <div class="grid">
   <div class="card"><div class="ct">Was aufgezeichnet wird</div><div class="cd">Gyro roh und gefiltert, Sollwerte, PID-Anteile je Achse, Motorausgänge, Spannung und Strom, Empfängerdaten. Aufzeichnungsrate mindestens 1 kHz, sonst fehlt der interessante Teil.</div></div>
   <div class="card"><div class="ct">Rauschspektrum</div><div class="cd">Zeigt, bei welchen Frequenzen Störungen sitzen. Ein schmaler Berg, der mit dem Gas wandert, ist die Motordrehfrequenz. Ein fester Berg ist eine Rahmenresonanz. Breites Rauschen über alles heißt: mechanisches Problem.</div></div>
-  <div class="card"><div class="ct">Sprungantwort</div><div class="cd">Aus dem Log berechnet: Wie folgt das Quad einem Knüppelsprung? Ziel ist schneller Anstieg, wenig Überschwingen, kein Nachschwingen. Theorie im Modul <a href="regelung-antriebe.html">Regelung, Sensorik &amp; Antriebe</a>.</div></div>
+  <div class="card"><div class="ct">Sprungantwort</div><div class="cd">Aus dem Log berechnet: Wie folgt das Quad einem Knüppelsprung? Ziel ist schneller Anstieg, wenig Überschwingen, kein Nachschwingen. Theorie im Modul <a href="regelung-antriebe.html">Regelung, Sensoren &amp; Motoren</a>.</div></div>
   <div class="card"><div class="ct">Motorausgänge</div><div class="cd">Arbeitet ein Motor dauerhaft deutlich mehr als die anderen, stimmt etwas mechanisch nicht — verzogener Arm, schwacher Motor, Schwerpunkt. Erreichen alle vier regelmäßig 100 %, fehlt schlicht Schub.</div></div>
   <div class="card"><div class="ct">Werkzeuge</div><div class="cd">Blackbox Explorer für den Überblick, PIDtoolbox für Spektren und Sprungantworten, die SpeedyBee-App für den schnellen Blick am Flugfeld — alle unter <a href="#software">Software &amp; Apps</a>.</div></div>
   <div class="card"><div class="ct">Wann es sich lohnt</div><div class="cd">Nicht bei jedem Quad. Ein 5-Zöller mit Standardteilen fliegt mit Voreinstellungen plus RPM-Filter für die meisten schon sehr gut. Blackbox ist das Werkzeug für die letzten zwanzig Prozent — und für echte Probleme.</div></div>
@@ -106,6 +106,6 @@ import "./_style.css";
     <li><a href="https://betaflight.com/docs/wiki">Betaflight-Wiki</a> — Filterkette, PID- und Slider-Dokumentation; die Primärquelle für alles Firmwareseitige.</li>
     <li><a href="https://www.youtube.com/@JoshuaBardwell">Joshua Bardwell</a> — die ausführlichste frei verfügbare Darstellung von Tuning und Blackbox-Analyse; besonders die Serien zu Filtern und zur Sprungantwort.</li>
     <li>PIDtoolbox (<a href="https://github.com/bw1129/PIDtoolbox">GitHub</a>) und der zugehörige YouTube-Kanal von Brian White — Werkzeug und Methodik für die Log-Auswertung.</li>
-    <li>Åström &amp; Hägglund, <i>Advanced PID Control</i> — die Theorie hinter D-Term-Filterung und Sprungantwort; Anwendung im Modul <a href="regelung-antriebe.html">Regelung, Sensorik &amp; Antriebe</a>.</li>
+    <li>Åström &amp; Hägglund, <i>Advanced PID Control</i> — die Theorie hinter D-Term-Filterung und Sprungantwort; Anwendung im Modul <a href="regelung-antriebe.html">Regelung, Sensoren &amp; Motoren</a>.</li>
   </ul>
 </div>

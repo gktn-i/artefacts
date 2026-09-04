@@ -230,6 +230,37 @@
 .mx-mecha .rate-fill{height:100%;border-radius:999px;background:var(--accent)}
 .mx-mecha .rate-num{font:600 11px/1 var(--mono);color:var(--muted);width:15px;text-align:right;flex-shrink:0}
 
+/* ================================================================== PROFILE
+   Eignungskarten (src/components/Profiles.astro): Punkte je Kriterium,
+   darunter Stark / Schwach / Nimm es für. Punktefarbe folgt der Stufe wie
+   die Bewertungsbalken: 1–2 rot, 3 gelb, 4–5 grün. */
+.mx-mecha .prof{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:12px;margin:.6rem 0 .5rem}
+.mx-mecha .pcard{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);
+  box-shadow:var(--shadow-sm);padding:0 0 12px;display:flex;flex-direction:column;overflow:hidden}
+.mx-mecha .pch{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:11px 15px 9px;
+  border-bottom:1px solid var(--border);background:var(--surface-2)}
+.mx-mecha .pch .pn{font-family:var(--display);font-size:14.5px;font-weight:700;letter-spacing:-.005em}
+.mx-mecha .pch .ptag{font:500 10.8px/1.4 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.mx-mecha .pscore{margin:0;padding:8px 15px 4px;display:grid;gap:3px}
+.mx-mecha .pscore .pr{display:grid;grid-template-columns:minmax(78px,1fr) auto;align-items:center;gap:10px;margin:0}
+.mx-mecha .pscore dt{font-size:12.4px;color:var(--muted);font-weight:500}
+.mx-mecha .pscore dd{margin:0;display:flex;align-items:center;gap:8px}
+.mx-mecha .dots{display:inline-flex;gap:3px}
+.mx-mecha .dots i{width:10px;height:10px;border-radius:50%;background:var(--track);display:block}
+.mx-mecha .pr.hi .dots i.on{background:var(--rate-good)}
+.mx-mecha .pr.mid .dots i.on{background:var(--rate-mid)}
+.mx-mecha .pr.lo .dots i.on{background:var(--rate-bad)}
+.mx-mecha .pscore .pv{font:600 11px/1 var(--mono);color:var(--muted);width:26px;text-align:right;
+  font-variant-numeric:tabular-nums}
+.mx-mecha .ppc{margin-top:auto;padding:9px 15px 0;border-top:1px dashed var(--border);display:grid;gap:5px}
+.mx-mecha .ppc p{margin:0;font-size:12.6px;line-height:1.55;color:var(--text)}
+.mx-mecha .ppc p b{display:inline-block;min-width:58px;font:700 10.5px/1.2 var(--mono);letter-spacing:.06em;
+  text-transform:uppercase;margin-right:4px}
+.mx-mecha .ppc .pro b{color:var(--ok-ink)}
+.mx-mecha .ppc .con b{color:var(--bad-ink)}
+.mx-mecha .ppc .use b{color:var(--accent-ink)}
+.mx-mecha .pnote{margin-bottom:.9rem}
+
 /* Kennzahlen-Kacheln */
 .mx-mecha .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:.6rem 0 1rem}
 .mx-mecha .kpi{border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;

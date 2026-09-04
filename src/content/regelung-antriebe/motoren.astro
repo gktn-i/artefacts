@@ -1,9 +1,84 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Die Motorwahl entscheidet über den halben Antriebsstrang.</b> Drei Fragen führen fast immer zur Antwort: Braucht es genaue Positionierung? Wie hoch ist die Drehzahl? Darf ein Geber mit ins Spiel? Erst danach zählen Drehmoment und Preis.</div>
 
-<h2>Der Vergleich</h2>
+<h2>Eignungsprofil: Stärken und Schwächen</h2>
+<p class="lede">Wofür jeder Motortyp gebaut ist — und wo er einen ausbremst. Sechs Kriterien, je fünf Punkte, darunter der eine Satz, der die Entscheidung trägt.</p>
+<Profiles
+  criteria={["Präzision", "Kraft im Stand", "Drehzahl & Dynamik", "Kompakt", "Einfach", "Günstig"]}
+  items={[
+    {
+      name: "Bürsten-Gleichstrommotor",
+      tag: "PWM + H-Brücke",
+      scores: [1, 2, 4, 3, 5, 5],
+      pro: "PWM und H-Brücke genügen; billig, überall verfügbar, dreht sofort los.",
+      con: "Bürsten verschleißen und funken; Position nur mit Geber.",
+      use: "Fahrantriebe, Werkzeuge, alles, was einfach drehen soll.",
+    },
+    {
+      name: "Getriebemotor",
+      tag: "DC + Untersetzung",
+      scores: [2, 4, 2, 3, 5, 4],
+      pro: "Hohes Moment bei kleiner Drehzahl, ohne eigene Getriebeauslegung.",
+      con: "Getriebespiel begrenzt die Positionierung; jede Stufe kostet Wirkungsgrad.",
+      use: "Räder, Förderbänder, langsame Achsen.",
+    },
+    {
+      name: "Schrittmotor",
+      tag: "offen, ohne Geber",
+      scores: [4, 5, 2, 2, 4, 4],
+      pro: "Positioniert ohne Geber, volles Haltemoment im Stand, ein Treiber für alles.",
+      con: "Verliert bei Überlast stumm Schritte; Moment fällt mit der Drehzahl; im Stand fließt dauernd Strom.",
+      use: "3D-Drucker, CNC, Positionierachsen mit planbarer Last.",
+    },
+    {
+      name: "Modellbau-Servo",
+      tag: "Regler eingebaut",
+      scores: [3, 3, 1, 5, 5, 4],
+      pro: "Regler, Getriebe und Geber im Gehäuse; ein PWM-Pin genügt.",
+      con: "Nur Stellbereich statt Dauerdrehung, Kunststoffgetriebe verschleißt, zittert um den Sollwert.",
+      use: "Klappen, Greifer, Ruder, kleine Gelenke.",
+    },
+    {
+      name: "BLDC (blockkommutiert)",
+      tag: "Hall oder sensorlos",
+      scores: [3, 2, 5, 5, 2, 3],
+      pro: "Höchste Drehzahl und Leistungsdichte, keine Bürsten, praktisch wartungsfrei.",
+      con: "Braucht einen Kommutierungsregler; sensorlos kein Moment im Stand.",
+      use: "Propeller, Lüfter, Pumpen, Spindeln, E-Bikes.",
+    },
+    {
+      name: "PMSM mit FOC",
+      tag: "Servoantrieb",
+      scores: [5, 5, 5, 4, 1, 1],
+      pro: "Volles Moment ab Stillstand, sehr gleichmäßig, bester Wirkungsgrad, mit Absolutgeber hochgenau.",
+      con: "Regler, Strommessung und Encoder nötig; die teuerste Kette.",
+      use: "Servoachsen, Robotergelenke, Werkzeugmaschinen, Fahrzeugantriebe.",
+    },
+    {
+      name: "Asynchronmotor",
+      tag: "Netz oder Umrichter",
+      scores: [2, 1, 4, 2, 3, 4],
+      pro: "Robust, günstig je Kilowatt, läuft direkt am Netz, keine Magnete.",
+      con: "Schwer; Drehzahl nur mit Frequenzumrichter, Positionierung nur mit Geber und Vektorregelung.",
+      use: "Pumpen, Lüfter, Kompressoren, Spindeln ab einigen hundert Watt.",
+    },
+    {
+      name: "Linearmotor",
+      tag: "Direktantrieb",
+      scores: [5, 4, 5, 3, 1, 1],
+      pro: "Keine Spindel, kein Spiel, höchste Beschleunigung, Messung direkt am Abtrieb.",
+      con: "Teuer, hält ohne Strom nicht, Streufeld zieht Späne an, braucht Kühlung.",
+      use: "Bestückungsautomaten, Messmaschinen, Präzisionsachsen.",
+    },
+  ]}
+  labels={{"use": "Nimm ihn für"}}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
+
+<h2>Der Vergleich in Zahlen</h2>
 <div class="tbl-wrap"><table style="min-width:940px">
 <thead><tr><th data-s="text">Motortyp</th><th>Ansteuerung</th><th>Positionierung</th><th>Drehzahl</th><th>Wirkungsgrad</th><th>Wartung</th><th>Typischer Einsatz</th></tr></thead>
 <tbody>
@@ -17,44 +92,6 @@ import "./_style.css";
 <tr><td><b>Linearmotor</b></td><td>wie PMSM</td><td>direkt, ohne Umsetzung</td><td>sehr hohe Beschleunigung</td><td>hoch</td><td>keine</td><td>Bestückungsautomaten, Präzisionsachsen</td></tr>
 </tbody>
 </table></div>
-
-<h2>Eignungsprofil</h2>
-<div class="tbl-wrap"><table style="min-width:820px">
-<thead><tr><th>Typ</th><th>Präzision</th><th>Moment bei Stillstand</th><th>Drehzahl</th><th>Einfachheit</th><th>Preis (günstig = hoch)</th></tr></thead>
-<tbody>
-<tr><td><b>DC-Motor</b></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:20%;background:var(--rate-bad)"></div></div><span class="rate-num">2</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:30%;background:var(--rate-bad)"></div></div><span class="rate-num">3</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:80%;background:var(--rate-good)"></div></div><span class="rate-num">8</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td></tr>
-<tr><td><b>Schrittmotor</b></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%;background:var(--rate-good)"></div></div><span class="rate-num">10</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:30%;background:var(--rate-bad)"></div></div><span class="rate-num">3</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:70%;background:var(--rate-mid)"></div></div><span class="rate-num">7</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:70%;background:var(--rate-mid)"></div></div><span class="rate-num">7</span></div></td></tr>
-<tr><td><b>Servo (Modellbau)</b></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:60%;background:var(--rate-mid)"></div></div><span class="rate-num">6</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:70%;background:var(--rate-mid)"></div></div><span class="rate-num">7</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:30%;background:var(--rate-bad)"></div></div><span class="rate-num">3</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%;background:var(--rate-good)"></div></div><span class="rate-num">10</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:80%;background:var(--rate-good)"></div></div><span class="rate-num">8</span></div></td></tr>
-<tr><td><b>BLDC</b></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:50%;background:var(--rate-mid)"></div></div><span class="rate-num">5</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:40%;background:var(--rate-mid)"></div></div><span class="rate-num">4</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%;background:var(--rate-good)"></div></div><span class="rate-num">10</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:40%;background:var(--rate-mid)"></div></div><span class="rate-num">4</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:50%;background:var(--rate-mid)"></div></div><span class="rate-num">5</span></div></td></tr>
-<tr><td><b>PMSM mit FOC</b></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%;background:var(--rate-good)"></div></div><span class="rate-num">10</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:90%;background:var(--rate-good)"></div></div><span class="rate-num">9</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:20%;background:var(--rate-bad)"></div></div><span class="rate-num">2</span></div></td>
-  <td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:20%;background:var(--rate-bad)"></div></div><span class="rate-num">2</span></div></td></tr>
-</tbody>
-</table></div>
-<p class="note">Die Zahlen sind Einordnungen für typische Vertreter der Klasse, keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am konkreten Datenblatt.</p>
 
 <h2>Schrittmotor im Detail</h2>
 <div class="grid">

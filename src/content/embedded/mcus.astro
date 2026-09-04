@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Die Wahl des Controllers entscheidet über Monate Arbeit.</b> Nicht die Rechenleistung ist der übliche Engpass, sondern Peripherie, Werkzeuge, Verfügbarkeit und Dokumentation. Ein Controller mit doppelter Taktfrequenz und schlechtem SDK ist die schlechtere Wahl.</div>
 
@@ -17,6 +18,62 @@ import "./_style.css";
 <tr><td><b>i.MX RT (NXP)</b></td><td>Cortex-M7 / M33</td><td>bis 1 GHz</td><td>externer Speicher</td><td>—</td><td>„Crossover“ — Rechenleistung wie ein Anwendungsprozessor bei Mikrocontroller-Determinismus</td></tr>
 </tbody>
 </table></div>
+
+<h3>Welche Familie wofür</h3>
+<Profiles
+  criteria={["Rechenleistung", "Peripherie", "Funk", "Stromsparen", "Einstieg & Doku", "Günstig"]}
+  items={[
+    {
+      name: "AVR",
+      tag: "ATmega, ATtiny",
+      scores: [1, 2, 1, 3, 5, 3],
+      pro: "Einfach zu durchschauen, 5-V-tolerant, Arduino-Ursprung: jede Frage ist schon beantwortet.",
+      con: "8 Bit, wenig Speicher, kein Funk; für Neuentwürfe meist zu schwach.",
+      use: "Kleinstaufgaben, Lernen am Register, 5-V-Umfeld.",
+    },
+    {
+      name: "RP2350",
+      tag: "Raspberry Pi Pico 2",
+      scores: [3, 4, 2, 3, 5, 5],
+      pro: "PIO für beliebige Schnittstellen, das beste Einsteigerhandbuch, sehr günstig, ARM oder RISC-V.",
+      con: "Kein Flash im Chip, Funk nur in der W-Variante, ADC mittelmäßig.",
+      use: "Erstes Projekt, viele parallele Schnittstellen, LED- und Encoder-Aufgaben.",
+    },
+    {
+      name: "STM32",
+      tag: "Cortex-M0+ bis M55",
+      scores: [5, 5, 2, 4, 3, 3],
+      pro: "Riesige Auswahl, hochauflösende Timer, schnelle ADCs, industrielle Verfügbarkeit.",
+      con: "Großes, uneinheitliches Ökosystem; CubeMX und HAL wollen eingearbeitet werden.",
+      use: "Motorsteuerung, Regelung, Messtechnik, Produkte mit langer Laufzeit.",
+    },
+    {
+      name: "ESP32-Familie",
+      tag: "S3, C3, C6, P4",
+      scores: [4, 3, 5, 2, 4, 5],
+      pro: "WLAN und Bluetooth eingebaut, viel RAM, riesige Community, sehr billig.",
+      con: "Aktiv stromhungrig, Deep Sleep braucht Sorgfalt, Analogteil schwach.",
+      use: "Alles mit Netz: Sensoren im WLAN, MQTT, Displays, Home Assistant.",
+    },
+    {
+      name: "nRF52 / nRF54",
+      tag: "Nordic",
+      scores: [3, 3, 5, 5, 3, 2],
+      pro: "Der Maßstab bei BLE, Thread und Matter mit sehr geringem Stromverbrauch.",
+      con: "Zephyr-basiertes SDK mit steiler Lernkurve; teurere Boards.",
+      use: "Batteriegeräte über Monate, Wearables, Funksensoren.",
+    },
+    {
+      name: "CH32V / GD32V",
+      tag: "RISC-V, Cent-Klasse",
+      scores: [2, 2, 1, 3, 2, 5],
+      pro: "Unter 20 Cent, brauchbare Peripherie, wachsende Werkzeugunterstützung.",
+      con: "Dokumentation dünn, Werkzeuge noch im Aufbau, kleine Community.",
+      use: "Kostengetriebene Kleinserie, wenn Zeit für Einarbeitung da ist.",
+    },
+  ]}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
 
 <h2>Auswahl nach Anwendungsfall</h2>
 <div class="grid">

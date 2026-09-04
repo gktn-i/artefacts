@@ -36,12 +36,32 @@ const runtime = `(function () {
   modules.forEach((m) => (rel[m.id] = new Set(m.related || [])));
   modules.forEach((m) => (m.related || []).forEach((r) => { if (rel[r]) rel[r].add(m.id); }));
 
+  /* Schnellzugriff (hub.tasks): Links {m, h, t?} zu Zielen aufloesen. */
+  HUBS.forEach((h) => {
+    h.tasks = (h.tasks || []).map((t) => {
+      const items = (t.links || []).map((l) => {
+        const m = byId[l.m];
+        const s = m && m.sections.find((x) => x.h === l.h);
+        return m && s ? { href: m.file + "#" + s.h, label: l.t || s.t, mod: m } : null;
+      }).filter(Boolean);
+      return Object.assign({}, t, { items: items, href: h.file + "#t-" + t.id, hub: h });
+    });
+  });
+
+  /* Hub der aktuellen Seite (Hub-Panel oder Modulseite), sonst null. */
+  const hereHub = () => {
+    const f = location.pathname.split("/").pop() || "index.html";
+    const m = byFile[f];
+    return m ? m.hub : hubByFile[f] || null;
+  };
+
   window.ARTEFAKTE = {
     hubs: HUBS,
     modules: modules,
     hubById: (id) => HUBS.find((h) => h.id === id) || null,
     moduleByFile: (f) => byFile[f] || null,
     hubByFile: (f) => hubByFile[f] || null,
+    hereHub: hereHub,
     relatedOf: (id) => Array.from(rel[id] || []).map((r) => byId[r]).filter(Boolean),
     sectionCount: modules.reduce((a, m) => a + m.sections.length, 0),
     searchIndex: function () {
@@ -49,6 +69,13 @@ const runtime = `(function () {
       const out = [];
       HUBS.forEach((h) => {
         out.push({ kind: "hub", title: h.name, sub: h.tagline, href: h.file, hub: h, w: 0 });
+        h.tasks.forEach((t) => {
+          out.push({
+            kind: "aufgabe", title: t.t, sub: h.name + " · Schnellzugriff: " + t.d,
+            href: t.href, hub: h, task: t,
+            extra: t.d + " " + (t.k || "") + " " + t.items.map((i) => i.label).join(" "), w: 0.5
+          });
+        });
       });
       modules.forEach((m) => {
         out.push({

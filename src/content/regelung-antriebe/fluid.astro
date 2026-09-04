@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Fluidantriebe gewinnen dort, wo Kraft, Robustheit und Einfachheit zählen — und die Mechanik entscheidet am Ende über jede Regelgüte.</b> Pneumatik ist billig, schnell und schmutzunempfindlich, wegen der Kompressibilität der Luft aber schlecht regelbar. Hydraulik liefert enorme Kräfte auf kleinstem Raum, ist dafür teuer und leckageanfällig.</div>
 
@@ -17,6 +18,36 @@ import "./_style.css";
 <tr><td><b>Steifigkeit</b></td><td>hoch</td><td><b>gering</b> — Luft federt</td><td>sehr hoch</td></tr>
 </tbody>
 </table></div>
+<Profiles
+  criteria={["Kraftdichte", "Präzision", "Geschwindigkeit", "Wirkungsgrad", "Robustheit", "Einfach & günstig"]}
+  items={[
+    {
+      name: "Elektrisch",
+      tag: "Motor, Spindel, Getriebe",
+      scores: [3, 5, 4, 5, 2, 4],
+      pro: "Positioniert exakt, effizient, sauber; Regelung ist Standardware.",
+      con: "Empfindlich gegen Nässe und Staub; hohe Kräfte brauchen Getriebe oder Spindel.",
+      use: "Geregelte Achsen, Roboter, alles, was positionieren muss.",
+    },
+    {
+      name: "Pneumatisch",
+      tag: "6 bar Druckluft",
+      scores: [2, 1, 5, 1, 5, 5],
+      pro: "Billig, schnell, schmutzunempfindlich, entlüftet sich definiert.",
+      con: "Luft federt: ohne Aufwand nur Endlagen; im Betrieb die teuerste Energieform.",
+      use: "Greifen, Klemmen, Auswerfen, Ex-Zonen und nasse Umgebungen.",
+    },
+    {
+      name: "Hydraulisch",
+      tag: "150–350 bar Öl",
+      scores: [5, 4, 3, 3, 4, 2],
+      pro: "Enorme Kräfte auf kleinstem Raum, sehr steif, hält die Last.",
+      con: "Teuer, Leckage, Öl im Umfeld, Aggregat und Filter nötig.",
+      use: "Pressen, Baumaschinen, schwere Lasten.",
+    },
+  ]}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
 <div class="warn"><b>Druckluft ist die teuerste Energieform im Betrieb.</b> Vom eingesetzten Strom kommt am Zylinder oft weniger als ein Fünftel an, der Rest geht in Kompressorverluste, Wärme und Leckage; 10 % Leckage im Netz sind keine Seltenheit. Wo eine Achse ohnehin geregelt werden muss, ist ein elektrischer Antrieb fast immer die bessere Wahl.</div>
 
 <h2>Pneumatik-Bausteine</h2>

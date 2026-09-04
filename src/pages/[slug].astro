@@ -116,6 +116,35 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           ))}
         </nav>
 
+        {hub.tasks.length > 0 && (
+          <section class="tasks" id="schnellzugriff" aria-label="Schnellzugriff nach Aufgabe">
+            <div class="rowlabel">
+              <h2>Schnellzugriff</h2>
+              <span class="n">nach Aufgabe, quer durch die Module</span>
+              <span class="ln"></span>
+            </div>
+            <div class="taskgrid">
+              {hub.tasks.map((t) => (
+                <article class="task" id={`t-${t.id}`}>
+                  <header>
+                    <span class="ic" aria-hidden="true">{t.icon}</span>
+                    <h3>{t.t}</h3>
+                  </header>
+                  <p class="d">{t.d}</p>
+                  <ul>
+                    {t.items.map((it) => (
+                      <li>
+                        <a href={it.href}>{it.label}</a>
+                        <span class="md">{it.cross ? `${it.mod.hub.icon} ` : ""}{it.mod.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
         {hub.areas.map((ar) => (
           <section class="areasec" id={`a-${ar.id}`}>
             <div class="ah">

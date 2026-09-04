@@ -569,10 +569,266 @@
     "l": "#1e5bb8",
     "d": "#63a9f5"
    },
+   "tasks": [
+    {
+     "id": "projekt",
+     "icon": "🚀",
+     "t": "Projekt starten",
+     "d": "Umfang schneiden, Risiko zuerst prüfen, Bauteile wählen, in Stufen aufbauen.",
+     "k": "anfangen beginnen neues projekt idee planen ablauf vorgehen vorgehensweise umfang erfolgskriterium blockschaltbild werkstatt einrichten",
+     "links": [
+      {
+       "m": "lernpfad",
+       "h": "vorgehen"
+      },
+      {
+       "m": "lernpfad",
+       "h": "projekte",
+       "t": "Projektideen mit Erfolgskriterium"
+      },
+      {
+       "m": "mechanik",
+       "h": "methodik",
+       "t": "Anforderungsliste & Methodik"
+      },
+      {
+       "m": "embedded",
+       "h": "start",
+       "t": "Firmware: wie ein Projekt verläuft"
+      },
+      {
+       "m": "pcb-design",
+       "h": "start",
+       "t": "Leiterplatte: der Workflow"
+      },
+      {
+       "m": "lernpfad",
+       "h": "arbeitsplatz"
+      }
+     ]
+    },
+    {
+     "id": "bauteil",
+     "icon": "🔩",
+     "t": "Bauteil finden",
+     "d": "Kataloge mit Kennwerten, Auswahlkriterien und dem Fehler, der am häufigsten passiert.",
+     "k": "komponente komponenten bauteil bauteile teil kaufen auswahl auswählen welcher welche motor sensor mikrocontroller mcu controller widerstand kondensator lager schraube katalog bezugsquelle datenblatt passend",
+     "links": [
+      {
+       "m": "mecha-referenz",
+       "h": "komponenten",
+       "t": "Komponenten-Katalog: 88 Bauteile"
+      },
+      {
+       "m": "regelung-antriebe",
+       "h": "sensoren",
+       "t": "Sensor-Katalog"
+      },
+      {
+       "m": "regelung-antriebe",
+       "h": "motoren"
+      },
+      {
+       "m": "regelung-antriebe",
+       "h": "treiber"
+      },
+      {
+       "m": "embedded",
+       "h": "mcus"
+      },
+      {
+       "m": "mechanik",
+       "h": "auswahl",
+       "t": "Werkstoffwahl & Tabelle"
+      },
+      {
+       "m": "mechanik",
+       "h": "normteile"
+      },
+      {
+       "m": "mechanik",
+       "h": "lager"
+      }
+     ]
+    },
+    {
+     "id": "vorgehen",
+     "icon": "🧭",
+     "t": "Vorgehen nachschlagen",
+     "d": "Mitten im Projekt: Abläufe Schritt für Schritt, vom Einstellen bis zur Fehlersuche.",
+     "k": "wie geht anleitung schritt für schritt vorgehensweise ablauf einstellen kalibrieren inbetriebnahme fehler suchen debugging löten regler referenzfahrt",
+     "links": [
+      {
+       "m": "lernpfad",
+       "h": "debugging"
+      },
+      {
+       "m": "pcb-design",
+       "h": "bestueckung"
+      },
+      {
+       "m": "regelung-antriebe",
+       "h": "pid",
+       "t": "PID einstellen"
+      },
+      {
+       "m": "regelung-antriebe",
+       "h": "messkette",
+       "t": "Messkette kalibrieren"
+      },
+      {
+       "m": "regelung-antriebe",
+       "h": "auslegung"
+      },
+      {
+       "m": "embedded",
+       "h": "debug"
+      },
+      {
+       "m": "loeten",
+       "h": "start",
+       "t": "Löten: Werkzeug bis Technik"
+      },
+      {
+       "m": "elektronik-101",
+       "h": "fehlersuche",
+       "t": "Fehlersuche in Schaltungen"
+      }
+     ]
+    },
+    {
+     "id": "rechnen",
+     "icon": "🧮",
+     "t": "Rechnen",
+     "d": "Die Rechner des Hubs: Vorwiderstand, Teiler, Leiterbahn, PID, Antrieb, Biegung, Passung.",
+     "k": "rechner berechnen ausrechnen formel umrechnen kalkulator dimensionieren auslegen",
+     "links": [
+      {
+       "m": "elektrotechnik",
+       "h": "gleichstrom",
+       "t": "Ohm, Teiler, Vorwiderstand"
+      },
+      {
+       "m": "elektrotechnik",
+       "h": "transient",
+       "t": "RC-Zeitkonstante"
+      },
+      {
+       "m": "analogtechnik",
+       "h": "wandler",
+       "t": "ADC-Auflösung"
+      },
+      {
+       "m": "pcb-design",
+       "h": "leiterbahn",
+       "t": "Leiterbahnbreite"
+      },
+      {
+       "m": "regelung-antriebe",
+       "h": "pid",
+       "t": "PID-Einstellregeln"
+      },
+      {
+       "m": "regelung-antriebe",
+       "h": "auslegung",
+       "t": "Antriebsauslegung"
+      },
+      {
+       "m": "mechanik",
+       "h": "balken",
+       "t": "Biegung & Knicken"
+      },
+      {
+       "m": "mechanik",
+       "h": "schrauben",
+       "t": "Schraubenvorspannung"
+      },
+      {
+       "m": "mechanik",
+       "h": "toleranzen",
+       "t": "Passungen"
+      },
+      {
+       "m": "mechanik",
+       "h": "lager",
+       "t": "Lagerlebensdauer"
+      },
+      {
+       "m": "mecha-referenz",
+       "h": "formeln"
+      }
+     ]
+    },
+    {
+     "id": "begriff",
+     "icon": "📖",
+     "t": "Begriff klären",
+     "d": "Glossar, Abkürzungen, Einheiten und die Formelsammlung.",
+     "k": "was bedeutet was heißt begriff abkürzung glossar definition einheit konstante fachwort",
+     "links": [
+      {
+       "m": "mecha-referenz",
+       "h": "glossar"
+      },
+      {
+       "m": "mecha-referenz",
+       "h": "abkuerzungen"
+      },
+      {
+       "m": "mecha-referenz",
+       "h": "einheiten"
+      },
+      {
+       "m": "mecha-referenz",
+       "h": "formeln"
+      },
+      {
+       "m": "fpv-drohnen",
+       "h": "glossar",
+       "t": "FPV-Glossar"
+      },
+      {
+       "m": "elektronik-101",
+       "h": "begriffe",
+       "t": "Elektronik-Begriffe"
+      }
+     ]
+    },
+    {
+     "id": "lernen",
+     "icon": "🎯",
+     "t": "Lernen",
+     "d": "Der Stufenpfad durch die Module, Lernmethodik mit Belegen, Bücher und Kurse.",
+     "k": "lernen anfänger einsteiger einstieg roadmap kurs buch bücher studium reihenfolge",
+     "links": [
+      {
+       "m": "lernpfad",
+       "h": "start",
+       "t": "Lernpfad in 6 Stufen"
+      },
+      {
+       "m": "lernpfad",
+       "h": "methodik"
+      },
+      {
+       "m": "mecha-referenz",
+       "h": "buecher"
+      },
+      {
+       "m": "mecha-referenz",
+       "h": "webseiten"
+      },
+      {
+       "m": "mecha-referenz",
+       "h": "tools"
+      }
+     ]
+    }
+   ],
    "areas": [
     {
      "id": "mechanik",
-     "name": "Mechanik & Konstruktion",
+     "name": "Maschinenbau",
      "desc": "Statik, Festigkeit, Maschinenelemente, Werkstoffe und Konstruktion — alles, was trägt, dreht und hält.",
      "modules": [
       {
@@ -581,7 +837,7 @@
        "name": "Mechanik & Konstruktion",
        "icon": "📐",
        "kind": "Referenz",
-       "updated": "2026-08-26",
+       "updated": "2026-09-04",
        "desc": "Der ganze Maschinenbau-Unterbau in einem Modul: Statik, Festigkeit und Dynamik, die Maschinenelemente von der Schraube bis zur Kupplung, Werkstoffe mit Kennwerten und Tabellen — und die Konstruktionspraxis von der Zeichnung über Toleranzen bis zum 3D-Druck.",
        "tags": [
         "statik",
@@ -1051,7 +1307,7 @@
        "name": "Informationstechnik",
        "icon": "💾",
        "kind": "Referenz",
-       "updated": "2026-09-01",
+       "updated": "2026-09-04",
        "desc": "Wie aus Pegeln Information wird — und wie man sie rechnet, überträgt und schützt: Codierung und Fehlerschutz, Rechnerarchitektur und Befehlssätze, Betriebssysteme und Echtzeit, Softwaretechnik, Netzwerke, Funk, Signalverarbeitung und Security.",
        "tags": [
         "entropie",
@@ -1144,10 +1400,10 @@
       {
        "id": "embedded",
        "file": "embedded-firmware.html",
-       "name": "Embedded & Firmware",
+       "name": "Mikrocontroller & Firmware",
        "icon": "🧩",
        "kind": "Referenz",
-       "updated": "2026-08-26",
+       "updated": "2026-09-04",
        "desc": "Der Mikrocontroller in der Praxis: aktuelle MCU-Landschaft, Toolchains, Peripherie, Interrupts und DMA, Bussysteme, FreeRTOS und Zephyr, Linker und Bootloader, Debugging, Stromsparen und die C-Fallstricke, die jeden einmal erwischen.",
        "tags": [
         "esp32",
@@ -1177,7 +1433,7 @@
         },
         {
          "h": "mcus",
-         "t": "MCU-Landschaft 2026"
+         "t": "Mikrocontroller: Familien & Auswahl"
         },
         {
          "h": "toolchain",
@@ -1259,15 +1515,15 @@
     {
      "id": "systeme",
      "name": "Mechatronische Systeme",
-     "desc": "Messen, regeln, bewegen — und das Ganze sicher automatisieren.",
+     "desc": "Messen, regeln, bewegen, fliegen — und das Ganze sicher automatisieren.",
      "modules": [
       {
        "id": "regelung-antriebe",
        "file": "regelung-antriebe.html",
-       "name": "Regelung, Sensorik & Antriebe",
+       "name": "Regelung, Sensoren & Motoren",
        "icon": "🎚️",
        "kind": "Referenz",
-       "updated": "2026-08-26",
+       "updated": "2026-09-04",
        "desc": "Der Signalweg eines mechatronischen Systems: messen, regeln, bewegen. Regelungstechnik von der Übertragungsfunktion bis zum Zustandsraum, die Messkette mit Sensor-Katalog — und die Antriebe vom Motortyp über den Treiber bis zur Auslegung mit Getriebe.",
        "tags": [
         "pid",
@@ -1320,7 +1576,7 @@
         },
         {
          "h": "sensoren",
-         "t": "Sensorprinzipien & Katalog"
+         "t": "Sensoren: Prinzipien & Katalog"
         },
         {
          "h": "position",
@@ -1328,7 +1584,7 @@
         },
         {
          "h": "motoren",
-         "t": "Motortypen im Vergleich"
+         "t": "Motoren im Vergleich"
         },
         {
          "h": "treiber",
@@ -1336,7 +1592,7 @@
         },
         {
          "h": "auslegung",
-         "t": "Antriebsauslegung & Getriebe"
+         "t": "Antrieb auslegen & Getriebe"
         },
         {
          "h": "fluid",
@@ -1490,21 +1746,14 @@
         "robo-sw": "ros",
         "robo-lernen": "lernen"
        }
-      }
-     ]
-    },
-    {
-     "id": "luftfahrt",
-     "name": "Drohnen & FPV",
-     "desc": "Der Multicopter als mechatronisches System — Antrieb, Funkstrecke, Regelkreis, Recht.",
-     "modules": [
+      },
       {
        "id": "fpv-drohnen",
        "file": "fpv-drohnen.html",
        "name": "Drohnen & FPV",
        "icon": "🚁",
        "kind": "Referenz",
-       "updated": "2026-09-03",
+       "updated": "2026-09-04",
        "desc": "Der Multicopter von der Schraube bis zum Gesetz: Bauformen, Rahmen, Motoren, Propeller, ESC und Flight Controller, LiPo, Funkstrecke und Videoübertragung — analog, HDZero, Walksnail, DJI O4 —, Antennen, Kameras, Betaflight und PID-Tuning, Bauanleitung, Fliegen lernen, Fehlersuche, EU-Recht. Dazu Rechner, Software-Katalog, Glossar und die Quellen, auf die in dieser Szene Verlass ist.",
        "tags": [
         "fpv",
@@ -1818,10 +2067,10 @@
       {
        "id": "lernpfad",
        "file": "mechatronik-lernpfad.html",
-       "name": "Lernpfad & Projekte",
+       "name": "Projekte, Vorgehen & Lernpfad",
        "icon": "🎯",
        "kind": "Anleitung",
-       "updated": "2026-08-26",
+       "updated": "2026-09-04",
        "desc": "Wie man Mechatronik wirklich lernt: der Stufenpfad durch die Module, Lernmethodik mit Belegen, ein Projektkatalog vom ersten Blinken bis zum Roboterarm — und die Praxis vom Arbeitsplatz bis zur Debugging-Strategie.",
        "tags": [
         "lernpfad",
@@ -1852,11 +2101,11 @@
         },
         {
          "h": "vorgehen",
-         "t": "Vom Einfall zum Gerät"
+         "t": "Vorgehen: vom Einfall zum Gerät"
         },
         {
          "h": "debugging",
-         "t": "Debugging-Strategie"
+         "t": "Debugging & Fehlersuche"
         }
        ],
        "groups": [
@@ -1898,10 +2147,10 @@
       {
        "id": "mecha-referenz",
        "file": "mechatronik-nachschlagewerk.html",
-       "name": "Nachschlagewerk",
+       "name": "Formeln, Glossar & Katalog",
        "icon": "📚",
        "kind": "Nachschlagewerk",
-       "updated": "2026-08-26",
+       "updated": "2026-09-04",
        "desc": "Der Sammelband des Hubs: Formelsammlung, Einheiten und Konstanten, Glossar A–Z mit Suche, Abkürzungsverzeichnis, Komponenten-Katalog, Software und Tools, Webseiten und Foren, Bücher und Kurse, Normen — und die Kriterien, nach denen diese Quellen ausgewählt wurden.",
        "tags": [
         "formelsammlung",
@@ -1940,7 +2189,7 @@
         },
         {
          "h": "komponenten",
-         "t": "Komponenten-Katalog"
+         "t": "Bauteil- & Komponenten-Katalog"
         },
         {
          "h": "tools",

@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Bei Funk gibt es kein „am besten“, nur Kompromisse zwischen drei Größen:</b> Reichweite, Datenrate und Stromverbrauch. Zwei davon bekommt man gut — nie alle drei. Wer das akzeptiert, wählt schnell richtig.</div>
 
@@ -18,6 +19,62 @@ import "./_style.css";
 <tr><td><b>NFC / RFID</b></td><td>13,56 MHz</td><td>106–424 kbit/s</td><td>&lt; 10 cm</td><td>passiv möglich</td><td>Leser zu Tag</td><td>Identifikation, Konfiguration ohne Batterie</td></tr>
 </tbody>
 </table></div>
+
+<h3>Welche Technik wofür</h3>
+<Profiles
+  criteria={["Reichweite", "Datenrate", "Stromsparen", "Einfach", "Günstig"]}
+  items={[
+    {
+      name: "WLAN",
+      tag: "2,4 / 5 GHz",
+      scores: [2, 5, 1, 5, 5],
+      pro: "Vorhandenes Netz, TCP/IP direkt, jede Bibliothek, billigste Module.",
+      con: "Stromhungrig, Verbindungsaufbau dauert, überfülltes 2,4-GHz-Band.",
+      use: "Alles am Netzteil: Anzeigen, Kameras, MQTT-Sensoren im Haus.",
+    },
+    {
+      name: "Bluetooth LE",
+      tag: "2,4 GHz",
+      scores: [2, 3, 5, 3, 4],
+      pro: "Sehr sparsam, das Handy als Bedienoberfläche, Beacons ohne Verbindung.",
+      con: "Kurze Reichweite, kleine Pakete, der Stack braucht Einarbeitung.",
+      use: "Batteriegeräte mit Handy-App, Wearables, Sensoren im Raum.",
+    },
+    {
+      name: "Thread / Zigbee",
+      tag: "802.15.4 Mesh",
+      scores: [3, 2, 4, 2, 3],
+      pro: "Mesh verlängert die Reichweite mit jedem Knoten, Matter-Basis, sparsam.",
+      con: "Border Router nötig, komplexer Stack, wenig Bandbreite.",
+      use: "Hausautomation mit vielen Knoten.",
+    },
+    {
+      name: "LoRa / LoRaWAN",
+      tag: "868 MHz",
+      scores: [5, 1, 5, 3, 3],
+      pro: "Kilometer mit Milliwatt, Jahre aus einer Batterie.",
+      con: "Wenige Bytes je Nachricht, Sendezeitbegrenzung, Gateway nötig.",
+      use: "Sensoren im Feld: Wetter, Zähler, Landwirtschaft.",
+    },
+    {
+      name: "NB-IoT / LTE-M",
+      tag: "Mobilfunk",
+      scores: [5, 3, 3, 2, 1],
+      pro: "Funktioniert überall mit Mobilfunkabdeckung, kein eigenes Netz.",
+      con: "SIM und Vertrag, laufende Kosten, teurere Module.",
+      use: "Verstreute Geräte ohne eigene Infrastruktur, Tracker.",
+    },
+    {
+      name: "Sub-GHz proprietär",
+      tag: "433 / 868 MHz",
+      scores: [4, 2, 4, 4, 5],
+      pro: "Einfaches Punkt-zu-Punkt, günstige Module, gute Gebäudedurchdringung.",
+      con: "Protokoll selbst, keine Interoperabilität, Duty-Cycle-Regeln beachten.",
+      use: "Fernsteuerungen, eigene Sensornetze, Garten und Werkstatt.",
+    },
+  ]}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
 
 <h2>Was die Reichweite wirklich bestimmt</h2>
 <div class="fbox">

@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Ein Getriebe tauscht Drehzahl gegen Drehmoment — und reduziert die vom Motor gesehene Lastträgheit quadratisch.</b> Der zweite Effekt wird oft übersehen und ist bei dynamischen Achsen der wichtigere. Bei linearen Antrieben entscheidet die Wahl zwischen Riemen und Spindel darüber, wie steif die Achse regelbar ist.</div>
 
@@ -48,6 +49,57 @@ import "./_style.css";
 </table></div>
 <div class="warn"><b>Wirkungsgrade multiplizieren sich, Spiel addiert sich.</b> Drei Stufen mit je 95 % ergeben zusammen 86 %. Beim Spiel ist es umgekehrt: Spiel in einer frühen Stufe wird durch die nachfolgende Untersetzung geteilt und wirkt sich am Abtrieb kaum aus — Spiel in der <b>letzten</b> Stufe geht voll in die Positioniergenauigkeit ein. Wer ein Getriebe optimieren will, fängt hinten an.</div>
 <div class="tip"><b>Trägheitsreduktion nicht vergessen:</b> Eine Untersetzung i reduziert die vom Motor gesehene Lastträgheit um i² — bei i = 10 also um Faktor 100. Genau deshalb bekommen Servoachsen ein Getriebe, auch wenn das Moment ohne reichen würde: erst dadurch wird die Achse sauber regelbar. Zahlen und Zielverhältnis unter <a href="#dynamik">Kinematik, Dynamik &amp; Schwingungen</a>.</div>
+
+<h3>Welche Bauart wofür</h3>
+<Profiles
+  criteria={["Untersetzung je Stufe", "Wirkungsgrad", "Spielfrei", "Kompakt", "Günstig"]}
+  items={[
+    {
+      name: "Stirnradgetriebe",
+      scores: [2, 5, 3, 3, 5],
+      pro: "Einfach, robust, hoher Wirkungsgrad, überall zu kaufen.",
+      con: "Wenig Untersetzung je Stufe, mittleres Spiel, Geradverzahnung ist laut.",
+      use: "Allgemeiner Antrieb, Modellbau, Werkzeuge.",
+    },
+    {
+      name: "Planetengetriebe",
+      scores: [3, 4, 4, 5, 3],
+      pro: "Koaxial, kompakt, hohe Momentdichte, geringes Spiel.",
+      con: "Mehrere Stufen summieren Spiel und Verluste; teurer als Stirnrad.",
+      use: "Servomotoren, Getriebemotoren, Roboter-Basisgelenke.",
+    },
+    {
+      name: "Schneckengetriebe",
+      scores: [5, 2, 4, 4, 4],
+      pro: "Bis 1:100 in einer Stufe, oft selbsthemmend, leise.",
+      con: "Wirkungsgrad fällt mit der Untersetzung; Wärme und Verschleiß am Schneckenrad.",
+      use: "Hubachsen, Drehtische, wo die Last ohne Strom halten muss.",
+    },
+    {
+      name: "Kegelradgetriebe",
+      scores: [2, 5, 3, 3, 3],
+      pro: "Winkelumlenkung mit gutem Wirkungsgrad.",
+      con: "Empfindlich gegen Achsversatz, Axialkräfte, mittleres Spiel.",
+      use: "90°-Umlenkung im Antriebsstrang.",
+    },
+    {
+      name: "Wellgetriebe",
+      tag: "Harmonic Drive",
+      scores: [5, 3, 5, 5, 1],
+      pro: "Praktisch spielfrei, hohe Untersetzung, sehr kompakt und leicht.",
+      con: "Teuer, begrenzte Torsionssteifigkeit bei kleinen Momenten, mäßiger Wirkungsgrad.",
+      use: "Robotergelenke, Präzisionsdrehtische.",
+    },
+    {
+      name: "Zykloidgetriebe",
+      scores: [5, 4, 4, 3, 2],
+      pro: "Sehr stoßfest, hohe Momentdichte, geringes Spiel.",
+      con: "Baut größer als ein Wellgetriebe, teurer als ein Planetengetriebe.",
+      use: "Schwere Roboterachsen, stoßbelastete Antriebe.",
+    },
+  ]}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
 
 <h2>Spiel vermeiden</h2>
 <div class="grid2">

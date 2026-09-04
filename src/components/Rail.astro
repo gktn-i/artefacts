@@ -5,6 +5,9 @@
      · BIBLIOTHEK — alle Hubs; auf Index- und Hub-Seiten klappt der aktive
        Hub seine Modulliste auf. Auf Modulseiten bleibt hier alles kompakt
        eingeklappt (aufklappen geht jederzeit).
+     · SCHNELLZUGRIFF — auf Seiten eines Hubs mit `tasks`: Aufgaben
+       („Projekt starten", „Bauteil finden" …) mit ihren Direktlinks quer
+       durch die Module. Man muss nicht wissen, in welchem Modul etwas liegt.
      · MODUL — nur auf Modulseiten: ein abgesetztes Panel mit dem aktiven
        Modul und seinen Abschnitten (samt Gruppen). Der Hash-Router der
        Modulseite bedient #secNav, das Überschriften-Subnav hängt er darunter.
@@ -63,6 +66,36 @@ const navGroups = (m: any) =>
           </details>
         );
       })
+    }
+
+    {
+      hub && hub.tasks.length > 0 && (
+        <>
+          <div class="tree-label ml">Schnellzugriff</div>
+          <nav class="quick" aria-label={`Schnellzugriff ${hub.name}`}>
+            {hub.tasks.map((t: any) => (
+              <details class="qtask">
+                <summary>
+                  <span class="qi" aria-hidden="true">{t.icon}</span>
+                  <span class="qt">{t.t}</span>
+                  <svg class="chev" width="9" height="9" viewBox="0 0 10 10" aria-hidden="true">
+                    <path d="M3 1.5 7 5l-4 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </summary>
+                <div class="ql">
+                  {t.items.map((it: any) => (
+                    <a href={it.href} title={`${it.mod.name}${it.cross ? " · " + it.mod.hub.name : ""}`}>
+                      <span class="lb">{it.label}</span>
+                      <span class="md">{it.cross ? `${it.mod.hub.icon} ` : ""}{it.mod.name}</span>
+                    </a>
+                  ))}
+                  <a class="all" href={`${hub.file}#t-${t.id}`}>Alle Einstiege im Hub →</a>
+                </div>
+              </details>
+            ))}
+          </nav>
+        </>
+      )
     }
 
     {

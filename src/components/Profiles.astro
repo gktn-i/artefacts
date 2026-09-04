@@ -1,0 +1,74 @@
+---
+/* ============================================================================
+   Profile — Eignungskarten für Vergleiche („Welcher Motor? Welcher Bus?").
+   Je Kandidat eine Karte: Punkte je Kriterium (1–5, höher = besser) plus
+   die drei Sätze, die man wirklich braucht — Stark, Schwach, Nimm es für.
+   Alles ist statisches HTML: Pagefind indexiert es, ohne JS bleibt es lesbar.
+   Design in src/content/_mecha.css (Block PROFILE); gilt in allen Modulen,
+   die die Klasse .mx-mecha tragen.
+
+   Verwendung im Abschnitt:
+     import Profiles from "../../components/Profiles.astro";
+     <Profiles
+       criteria={["Präzision", "Kraft", "Drehzahl", "Kompakt", "Einfach", "Günstig"]}
+       items={[{ name, tag?, scores: [5,4,3,2,1,3], pro, con, use }, …]}
+       note="…" />
+   ========================================================================== */
+interface Item {
+  name: string;
+  tag?: string;      /* kurze Einordnung neben dem Namen */
+  scores: number[];  /* 1–5 je Kriterium, in der Reihenfolge von `criteria` */
+  pro: string;       /* Stark */
+  con: string;       /* Schwach */
+  use: string;       /* Nimm es für */
+}
+interface Props {
+  criteria: string[];
+  items: Item[];
+  scale?: number;
+  note?: string;
+  /* Beschriftung der drei Sätze — z. B. „Nimm ihn für" statt „Nimm es für" */
+  labels?: { pro?: string; con?: string; use?: string };
+}
+const { criteria, items, scale = 5, note, labels = {} } = Astro.props;
+const L = { pro: "Stark", con: "Schwach", use: "Nimm es für", ...labels };
+
+for (const it of items) {
+  if (it.scores.length !== criteria.length) {
+    throw new Error(`Profiles: „${it.name}" hat ${it.scores.length} Punkte, aber ${criteria.length} Kriterien`);
+  }
+}
+const level = (n: number) => (n <= 2 ? "lo" : n >= 4 ? "hi" : "mid");
+---
+
+<div class="prof">
+  {items.map((it) => (
+    <article class="pcard">
+      <header class="pch">
+        <span class="pn">{it.name}</span>
+        {it.tag && <span class="ptag">{it.tag}</span>}
+      </header>
+      <dl class="pscore">
+        {criteria.map((c, i) => (
+          <div class={`pr ${level(it.scores[i])}`}>
+            <dt>{c}</dt>
+            <dd>
+              <span class="dots" aria-hidden="true">
+                {Array.from({ length: scale }, (_, k) => (
+                  <i class={k < it.scores[i] ? "on" : undefined}></i>
+                ))}
+              </span>
+              <span class="pv">{it.scores[i]}/{scale}</span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <div class="ppc">
+        <p class="pro"><b>{L.pro}</b> {it.pro}</p>
+        <p class="con"><b>{L.con}</b> {it.con}</p>
+        <p class="use"><b>{L.use}</b> {it.use}</p>
+      </div>
+    </article>
+  ))}
+</div>
+{note && <p class="note pnote">{note}</p>}
