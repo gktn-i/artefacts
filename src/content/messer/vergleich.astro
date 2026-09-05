@@ -1,9 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Fünf Stufen statt Nachkommastellen.</b> Die Einordnung ist aus den Messreihen von Knife Steel Nerds (CATRA-Schnitthaltigkeit, Charpy-Zähigkeit, Salzsprühtests) abgeleitet und bewusst grob gerundet — die Streuung durch Wärmebehandlung und Geometrie ist größer als der Unterschied zwischen zwei Nachbarstählen.</div>
-
-<h2>Einordnung in fünf Stufen</h2>
+<div class="kurz"><b>Fünf Stufen statt Nachkommastellen</b>, abgeleitet aus den Messreihen von Knife Steel Nerds. 1 = niedrig, 5 = sehr hoch.</div>
 <figure>
 <svg class="dg l" viewBox="0 0 660 380" role="img" aria-label="Streudiagramm: Schnitthaltigkeit auf der x-Achse gegen Zähigkeit auf der y-Achse, jeweils in fünf Stufen; rostfreie Stähle als gefüllte, nicht rostfreie als hohle Punkte. Zähe Stähle wie 3V und AEB-L stehen links oben, schnitthaltige wie Maxamet und S110V rechts unten, MagnaCut und CruWear in der Mitte rechts oben">
   <path class="gd" d="M124,20 V320" /><path class="gd" d="M232,20 V320" /><path class="gd" d="M340,20 V320" /><path class="gd" d="M448,20 V320" /><path class="gd" d="M556,20 V320" /><path class="gd" d="M70,290 H610" /><path class="gd" d="M70,230 H610" /><path class="gd" d="M70,170 H610" /><path class="gd" d="M70,110 H610" /><path class="gd" d="M70,50 H610" />
@@ -43,7 +41,6 @@ import "./_style.css";
 </svg>
 <figcaption>Schnitthaltigkeit gegen Zähigkeit, fünfstufig gerundet; gefüllt = rostfrei. Punkte mit gleichen Werten sind ringförmig auseinandergezogen. Die rechte obere Ecke bleibt leer: Es gibt keinen Stahl, der beides maximal kann.</figcaption>
 </figure>
-<p>1 = niedrig, 5 = sehr hoch. Schärfbarkeit ist die Kehrseite von Karbidvolumen und -härte. Sortieren per Klick auf die Spaltenköpfe.</p>
 <div class="tbl-wrap"><table style="min-width:1000px">
 <thead><tr><th data-s="text">Stahl</th><th data-s="num">Schnitthaltigkeit</th><th data-s="num">Zähigkeit</th><th data-s="num">Korrosion</th><th data-s="num">Schärfbarkeit</th><th>HRC üblich</th><th>Kurz</th></tr></thead>
 <tbody>
@@ -83,17 +80,8 @@ import "./_style.css";
 <tr><td><b>H1 / H2</b></td><td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:20%"></div></div><span class="rate-num">1</span></div></td><td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%"></div></div><span class="rate-num">5</span></div></td><td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%"></div></div><span class="rate-num">5</span></div></td><td><div class="rate"><div class="rate-bar"><div class="rate-fill" style="width:100%"></div></div><span class="rate-num">5</span></div></td><td>57–58</td><td>Immun, wenig schnitthaltig</td></tr>
 </tbody>
 </table></div>
-<p class="note">Die Werte gelten bei der jeweils üblichen Härte. Ein Stahl auf 2 HRC mehr gehärtet gewinnt Schnitthaltigkeit und verliert Zähigkeit; die Stufen verschieben sich dann um bis zu eine Stufe.</p>
 
-<h2>Wie man die Tabelle liest</h2>
-<div class="grid">
-  <div class="card"><div class="ct">Summen sagen nichts</div><div class="cd">Ein Stahl mit 3/3/4/3 ist kein „besserer“ Stahl als einer mit 5/1/4/1 — er ist ein anderer. Für ein Küchenmesser zählt Schärfbarkeit und Härte, für ein Chopper Zähigkeit, für ein Segelmesser Korrosion.</div></div>
-  <div class="card"><div class="ct">Die Diagonale</div><div class="cd">Schnitthaltigkeit und Schärfbarkeit laufen fast immer gegenläufig (Karbide). Ausnahmen mit beidem auf mittlerem Niveau: MagnaCut, S35VN, Elmax, CruWear.</div></div>
-  <div class="card"><div class="ct">Zähigkeit ist teuer</div><div class="cd">Hohe Zähigkeit <em>und</em> hohe Schnitthaltigkeit gibt es nur mit Pulvermetallurgie und mäßigem Karbidanteil: CruWear, 4V, MagnaCut. Alles darüber (S90V, K390) kauft Schnitthaltigkeit mit Sprödigkeit.</div></div>
-  <div class="card"><div class="ct">Budget schlägt Prestige</div><div class="cd">14C28N und AEB-L stehen bei Zähigkeit und Korrosion über S30V, bei Schärfbarkeit weit darüber — und kosten ein Viertel. Nur die Schnitthaltigkeit ist niedriger.</div></div>
-</div>
-
-<h2>Direktvergleiche, die oft gefragt werden</h2>
+<h2>Häufige Fragen</h2>
 <div class="flist">
   <div class="frow hd"><span>Frage</span><span>Antwort</span><span>Begründung</span></div>
   <div class="frow"><span class="fn">S30V oder S35VN?</span><span class="fe">S35VN</span><span class="fx">Gleiche Schnitthaltigkeit, spürbar zäher, leichter schleifbar (Niob statt einem Teil des Vanadiums). S45VN legt bei Korrosion nach</span></div>
@@ -105,11 +93,45 @@ import "./_style.css";
   <div class="frow"><span class="fn">Lohnt S90V/S110V?</span><span class="fe">nur mit Diamantsteinen</span><span class="fx">Wer ohne Diamant schärft, macht diese Stähle stumpfer statt schärfer. Mit Diamant: Monate Schärfe bei EDC-Gebrauch</span></div>
 </div>
 
-<div class="srcs">
-  <div class="sh">Quellen</div>
-  <ul>
-    <li>Larrin Thomas, <i>Knife Steels Rated by a Metallurgist</i> (2021, mit Aktualisierungen) — Bewertungen aus CATRA-, Charpy- und Korrosionsmessungen; hier auf fünf Stufen verdichtet.</li>
-    <li>Larrin Thomas, <i>Testing the Edge Retention of 48 Knife Steels</i> (2020) und die Zähigkeitsreihen 2018–2024, knifesteelnerds.com.</li>
-    <li>Herstellerangaben zu Härtebereichen (siehe <a href="#datenbank">Datenbank</a>).</li>
-  </ul>
-</div>
+<h2>Welcher Stahl wofür</h2>
+<div class="tbl-wrap"><table style="min-width:1000px">
+<thead><tr><th>Einsatz</th><th>Was zählt</th><th>Budget</th><th>Mittelklasse</th><th>Premium</th><th>Nicht sinnvoll</th></tr></thead>
+<tbody>
+<tr><td><b>EDC-Folder (Stadt)</b></td><td>Rostfrei (Hosentasche, Schweiß), Schärfbarkeit, mittlere Schnitthaltigkeit</td><td>14C28N, Nitro-V, 8Cr13MoV, 9Cr18MoV</td><td>S35VN, S45VN, VG-10, N690, 154CM</td><td>MagnaCut, M390/20CV, Elmax</td><td>1095 (rostet in der Tasche), Maxamet (bricht an der Spitze)</td></tr>
+<tr><td><b>Karton- und Paketmesser (viel schneiden)</b></td><td>Schnitthaltigkeit gegen abrasives Material</td><td>D2, 9Cr18MoV</td><td>CTS-XHP, S30V</td><td>M390, S90V, K390, Maxamet</td><td>AEB-L, 420HC (nach 50 Kartons stumpf)</td></tr>
+<tr><td><b>Bushcraft, Schnitzen</b></td><td>Zähigkeit, feine Schärfe, leicht im Feld nachschärfbar</td><td>1095, 80CrV2, 12C27 (Mora), SK-5</td><td>A2, 52100, 14C28N, O1</td><td>CPM 3V, CruWear, MagnaCut</td><td>S90V/S110V (spröde, im Feld nicht schärfbar)</td></tr>
+<tr><td><b>Chopper, Batoning, Machete</b></td><td>Zähigkeit über alles</td><td>5160, 1075, SK-5</td><td>1095 (weich gehärtet, 55–57), 80CrV2</td><td>CPM 3V, Z-Tuff</td><td>alles über 62 HRC, alles mit über 4 % V</td></tr>
+<tr><td><b>Jagd (Aufbrechen, Häuten)</b></td><td>Hält Haare und Haut, rostfrei gegen Blut, leicht abziehbar</td><td>420HC (Buck), 14C28N</td><td>S35VN, VG-10, N690</td><td>MagnaCut, S45VN</td><td>Kohlenstoffstahl ohne Pflege; Wechselklingen (Havalon) als Alternative</td></tr>
+<tr><td><b>Küche, europäisch</b></td><td>Zähigkeit gegen Brett und Knochen, wetzstahltauglich</td><td>X50CrMoV15 (1.4116)</td><td>X50CrMoV15 bei 58 HRC (Wüsthof), 14C28N</td><td>AEB-L, Nitro-V, 52100</td><td>Alles über 62 HRC (Wetzstahl schadet)</td></tr>
+<tr><td><b>Küche, japanisch (dünn, hart)</b></td><td>Feinste Schärfe, hohe Härte, dünne Geometrie</td><td>VG-10 (Tojiro), AUS-10</td><td>Aogami #2, Shirogami #2, Gingami 3, SG2</td><td>Aogami Super, HAP40, ZDP-189, SG2</td><td>1.4116 (zu weich für 12°), S90V (schwer zu schärfen auf Wassersteinen)</td></tr>
+<tr><td><b>Angeln, Segeln, Tauchen</b></td><td>Korrosion in Salzwasser</td><td>440A, 420HC (mit Pflege), N680</td><td>LC200N, 14C28N</td><td>H1/H2, Vanax, LC200N, Cronidur 30</td><td>Jeder Kohlenstoffstahl, D2, 3V</td></tr>
+<tr><td><b>Rettungsmesser (Wellenschliff)</b></td><td>Wellenschliff hält lange, Rost egal</td><td>420HC, 8Cr13MoV</td><td>VG-10, N690</td><td>H1 (hält kaltverfestigt Wellenschliff sehr lange)</td><td>Premium-Schnitthaltigkeit — bei Wellenschliff kaum spürbar</td></tr>
+<tr><td><b>Rasiermesser, Feinstarbeit</b></td><td>Feines Gefüge, hohe Härte, kleiner Winkel</td><td>Silberstahl (1.2210), 1095</td><td>AEB-L, 13C26, Shirogami</td><td>52100, AEB-L bei 62 HRC</td><td>Alles mit groben Karbiden</td></tr>
+<tr><td><b>Sammeln, Bewundern</b></td><td>Seltenheit, Politur, Muster</td><td>—</td><td>Damasteel, VG-10-Damast</td><td>ZDP-189 spiegelpoliert, Rex 121, Wootz</td><td>—</td></tr>
+</tbody>
+</table></div>
+
+<h2>Gleicher Stahl, andere Namen</h2>
+<div class="tbl-wrap"><table style="min-width:1000px">
+<thead><tr><th>Familie</th><th>Namen</th><th>Verhältnis</th></tr></thead>
+<tbody>
+<tr><td><b>M390-Klasse</b></td><td>Böhler M390 · Crucible CPM-20CV · Carpenter CTS-204P · (Böhler M398: weiter entwickelt)</td><td>chemisch identisch</td></tr>
+<tr><td><b>154CM-Klasse</b></td><td>Crucible 154CM · Hitachi ATS-34 · Crucible CPM-154 (PM) · Damasteel RWL-34 (PM)</td><td>identisch, PM-Versionen feiner</td></tr>
+<tr><td><b>Sandvik-Familie</b></td><td>12C27 · 12C27M · 13C26 · 14C28N · (Uddeholm AEB-L ≈ 13C26) · Nitro-V (≈ AEB-L + N + V)</td><td>Abstufung über C und N</td></tr>
+<tr><td><b>440-Familie</b></td><td>440A · 440B · 440C · 1.4125 (X105CrMo17) · Böhler N695 · 9Cr18Mo (China) · 7Cr17MoV (≈ 440A)</td><td>440C = 1.4125 = N695; Rest abgestuft</td></tr>
+<tr><td><b>420-Familie</b></td><td>420 · 420J2 · 420HC · 1.4034 (X46Cr13) · 1.4021 (X20Cr13) · 3Cr13 · 4Cr13 · 5Cr15MoV</td><td>abgestuft über C (0,2–0,5 %)</td></tr>
+<tr><td><b>Solinger Küchenstahl</b></td><td>1.4116 (X50CrMoV15) · 1.4110 (X55CrMo14, Victorinox) · 1.4037 (X65Cr13) · 1.4028 (X30Cr13)</td><td>Varianten um 0,5 % C und 14 % Cr</td></tr>
+<tr><td><b>VG-10-Klasse</b></td><td>Takefu VG-10 · VG-1 (ohne Co/V) · 10Cr15CoMoV (China) · Böhler N690 (sehr ähnlich, 17 % Cr)</td><td>10Cr15CoMoV ist der VG-10-Klon; N690 der europäische Vetter</td></tr>
+<tr><td><b>AUS-Familie</b></td><td>AUS-6 · AUS-8 · AUS-10 (Aichi) · 8Cr13MoV ≈ AUS-8 · 9Cr18MoV ≈ 440C/AUS-10-Klasse</td><td>abgestuft über C</td></tr>
+<tr><td><b>D2-Klasse</b></td><td>D2 · 1.2379 (X153CrMoV12) · SKD11 (JIS) · Cr12MoV (China) · CPM D2 · PSF27 (Dörrenberg, PM) · K110 (Böhler) · Sleipner (Uddeholm, abgewandelt)</td><td>D2 = 1.2379 = SKD11 = K110; PM-Versionen feiner; Sleipner ist eine Neuformulierung</td></tr>
+<tr><td><b>52100-Klasse</b></td><td>52100 · 100Cr6 · 1.3505 · SUJ2 (JIS) · GCr15 (China)</td><td>identisch</td></tr>
+<tr><td><b>O1-Klasse</b></td><td>O1 · 1.2510 (100MnCrW4) · SKS3 (JIS)</td><td>nahezu identisch</td></tr>
+<tr><td><b>1095-Klasse</b></td><td>1095 · C100 · SK-4 (JIS) · 1084 ≈ SK-5 ≈ C80 · 1075 ≈ C75 (1.1248) · 1.1274 (Ck101)</td><td>abgestuft über C</td></tr>
+<tr><td><b>CruWear-Klasse</b></td><td>Crucible CruWear (konventionell) · CPM CruWear (PM) · Zapp Z-Wear (PM) · Carpenter PD#1 (Vorläufer)</td><td>PM-Versionen identisch</td></tr>
+<tr><td><b>3V-Klasse</b></td><td>CPM 3V · Zapp Z-Tuff (≈ CD#1) · Carpenter CD#1</td><td>ähnlich, nicht identisch</td></tr>
+<tr><td><b>Vanadis-/4V-Klasse</b></td><td>CPM 4V · Uddeholm Vanadis 4 Extra</td><td>4V ≈ Vanadis 4E</td></tr>
+<tr><td><b>10V-Klasse</b></td><td>CPM 10V · Böhler K390 (verwandt, mit Co und W) · Uddeholm Vanadis 8</td><td>alle um 9–10 % V</td></tr>
+<tr><td><b>Stickstoff-Rostfreie</b></td><td>Zapp Z-FiNit = Spyderco LC200N · Cronidur 30 (1.4108, Energietechnik Essen) · Böhler N360 (sehr ähnlich)</td><td>LC200N = Z-FiNit; Cronidur 30 die Luftfahrt-Version desselben Prinzips</td></tr>
+<tr><td><b>Damaststähle (industriell)</b></td><td>Damasteel DS93X (RWL-34 + PMC27) · Devin Thomas (AEB-L + 304 oder 1080 + 15N20) · VG-10-Damast (VG-10-Kern, 33/67 Lagen) · Böhler-Uddeholm „Damasteel“-Lizenz</td><td>Kern trägt die Schneide, Lagen tragen das Muster</td></tr>
+</tbody>
+</table></div>

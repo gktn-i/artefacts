@@ -1,0 +1,173 @@
+---
+import "./_style.css";
+---
+<div class="kurz z"><b>Grob macht scharf, fein macht schön, der Grat muss weg.</b> Ein Stein, ein Winkel, den man hält, und das Erkennen des Grats reichen für jedes Messer.</div>
+
+<h2>Winkel</h2>
+<figure>
+<svg class="dg m" viewBox="0 0 440 200" role="img" aria-label="Klinge liegt im Winkel alpha auf einem Schleifstein; die Höhe des Rückens über dem Stein ergibt sich aus Klingenhöhe mal Sinus des Winkels; daneben die Definition von Winkel je Seite und inklusivem Winkel an einem Schneidenquerschnitt">
+  <rect class="box" x="20" y="150" width="220" height="30" rx="4" />
+  <text class="lbl" x="130" y="170" text-anchor="middle">Schleifstein</text>
+  <path class="accs" d="M60,150 L200,86 L206,92 L64,152 Z" />
+  <path class="gd" d="M200,86 V150" />
+  <text class="lbl" x="208" y="122">h = b · sin(α)</text>
+  <path class="acc" d="M60,150 A40,40 0 0 0 96,134" /><text class="lbla" x="104" y="140">α</text>
+  <text class="lbl" x="130" y="102" text-anchor="middle" transform="rotate(-25 130 102)">Klingenhöhe b</text>
+  <!-- Querschnitt -->
+  <path class="box" d="M300,30 L360,30 L340,170 L320,170 Z" />
+  <path class="wt" d="M330,170 V60" />
+  <path class="acc" d="M330,130 A40,40 0 0 1 336,131" />
+  <text class="lbla" x="342" y="128">α je Seite</text>
+  <path class="acc" d="M310,140 A45,45 0 0 1 350,140" />
+  <text class="lbla" x="330" y="190" text-anchor="middle">2α inklusiv</text>
+</svg>
+<figcaption>Links: Freihand ist der Winkel die Rückenhöhe über dem Stein. Rechts: „15°“ kann je Seite oder inklusiv gemeint sein — bei Spyderco je Seite, beim Sharpmaker („30°/40°“) inklusiv.</figcaption>
+</figure>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Einsatz</th><th>Je Seite</th><th>Inklusiv</th><th>Beispiele</th></tr></thead>
+<tbody>
+<tr><td><b>Rasiermesser</b></td><td>7–9°</td><td>14–18°</td><td>Klassische Rasiermesser: der Winkel ergibt sich aus Rücken und Klingenbreite</td></tr>
+<tr><td><b>Japanische Küchenmesser</b></td><td>10–15°</td><td>20–30°</td><td>Gyuto, Petty, Nakiri in Aogami, Shirogami, SG2, VG-10 (15°)</td></tr>
+<tr><td><b>Europäische Küchenmesser</b></td><td>14–18°</td><td>28–36°</td><td>Kochmesser, Santoku in X50CrMoV15</td></tr>
+<tr><td><b>EDC-Klappmesser</b></td><td>15–18°</td><td>30–36°</td><td>Alle Folder; bei S90V/M390 eher 17–18° gegen Chipping</td></tr>
+<tr><td><b>Jagd, Häuten</b></td><td>15–20°</td><td>30–40°</td><td>Drop-Point-Jagdmesser</td></tr>
+<tr><td><b>Outdoor, Bushcraft, Batoning</b></td><td>18–25°</td><td>36–50°</td><td>ESEE, Ka-Bar: ab Werk ca. 20°</td></tr>
+<tr><td><b>Scandi (Mora, Puukko)</b></td><td>11–13° (eine Fase)</td><td>22–27°</td><td>Der Winkel ist vorgegeben; nicht verändern, nur die Fase flach nachschleifen</td></tr>
+<tr><td><b>Axt, Beil, Machete</b></td><td>25–30° (ballig)</td><td>50–60°</td><td>Feile plus Puck-Stein</td></tr>
+<tr><td><b>Mikrofase</b></td><td>Hauptwinkel + 3–5°</td><td>—</td><td>Stabilisiert dünne Schneiden, beschleunigt das nächste Nachschärfen; besonders bei spröden Stählen</td></tr>
+</tbody>
+</table></div>
+<div class="calc" data-calc="schaerfwinkel">
+  <h4>Rückenhöhe, Fasenbreite, Münzlehre</h4>
+  <div class="row">
+    <div><label>Winkel je Seite (°)</label><input type="number" data-k="winkel" value="15" step="0.5" /></div>
+    <div><label>Klingenhöhe (mm, Rücken bis Schneide)</label><input type="number" data-k="breite" value="30" step="1" /></div>
+    <div><label>Dicke hinter der Schneide (mm)</label><input type="number" data-k="bte" value="0.5" step="0.05" placeholder="optional" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+
+<h2>Körnungen</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 130" role="img" aria-label="Leiter der Körnungen von grob bis fein mit den Stufen Reparatur, Grobschliff, Arbeitsstein, Feinschliff, Politur und Abziehen, darunter die Korngrößen in Mikrometern und typische JIS-Nummern">
+  <path class="acc" d="M30,50 H630" />
+  <g class="accf"><circle cx="40" cy="50" r="7"/><circle cx="150" cy="50" r="7"/><circle cx="260" cy="50" r="7"/><circle cx="370" cy="50" r="7"/><circle cx="480" cy="50" r="7"/><circle cx="600" cy="50" r="7"/></g>
+  <text class="lblb" x="40" y="30" text-anchor="middle">Reparatur</text><text class="lbl" x="40" y="74" text-anchor="middle">60–120 µm</text><text class="lbl" x="40" y="88" text-anchor="middle">JIS #120–220</text>
+  <text class="lblb" x="150" y="30" text-anchor="middle">Grobschliff</text><text class="lbl" x="150" y="74" text-anchor="middle">30–45 µm</text><text class="lbl" x="150" y="88" text-anchor="middle">#320–400</text>
+  <text class="lblb" x="260" y="30" text-anchor="middle">Arbeitsstein</text><text class="lbl" x="260" y="74" text-anchor="middle">≈ 15 µm</text><text class="lbl" x="260" y="88" text-anchor="middle">#1000</text>
+  <text class="lblb" x="370" y="30" text-anchor="middle">Feinschliff</text><text class="lbl" x="370" y="74" text-anchor="middle">5–9 µm</text><text class="lbl" x="370" y="88" text-anchor="middle">#2000–3000</text>
+  <text class="lblb" x="480" y="30" text-anchor="middle">Politur</text><text class="lbl" x="480" y="74" text-anchor="middle">2–3 µm</text><text class="lbl" x="480" y="88" text-anchor="middle">#5000–8000</text>
+  <text class="lblb" x="600" y="30" text-anchor="middle">Abziehen</text><text class="lbl" x="600" y="74" text-anchor="middle">0,5–1 µm</text><text class="lbl" x="600" y="88" text-anchor="middle">Leder + Paste</text>
+  <path class="good" d="M150,112 H480" /><text class="lbl" x="315" y="126" text-anchor="middle">EDC: bis #1000 und abziehen · Küche: bis #3000–6000 · Rasiermesser: #8000 und Leder</text>
+</svg>
+<figcaption>Von links nach rechts halbiert sich die Korngröße etwa je Stufe. Der grobe Stein erzeugt die Schärfe, die feinen verfeinern sie — wer stumpfe Messer auf #3000 beginnt, poliert eine runde Kante.</figcaption>
+</figure>
+<div class="tbl-wrap"><table style="min-width:1000px">
+<thead><tr><th data-s="num">Korn (µm)</th><th>JIS (Wassersteine)</th><th>FEPA-F (gebundene Steine)</th><th>FEPA-P (Schleifpapier)</th><th>ANSI/CAMI (USA)</th><th>DMT Diamant</th><th>Stufe</th></tr></thead>
+<tbody>
+<tr><td><b>≈ 120</b></td><td>#120</td><td>F120</td><td>P120</td><td>120</td><td>XX-Coarse (120 mesh)</td><td>Reparatur, Ausdünnen, Spitze neu formen</td></tr>
+<tr><td><b>≈ 60</b></td><td>#220–240</td><td>F220</td><td>P220–240</td><td>220</td><td>X-Coarse (220)</td><td>Neue Fase setzen, Scharten entfernen</td></tr>
+<tr><td><b>≈ 45</b></td><td>#320</td><td>F280</td><td>P320</td><td>280</td><td>Coarse (325)</td><td>Grobschliff, erster Grat</td></tr>
+<tr><td><b>≈ 35</b></td><td>#400</td><td>F320</td><td>P400</td><td>320</td><td>—</td><td>Grobschliff, Standard-Einstieg</td></tr>
+<tr><td><b>≈ 25</b></td><td>#600</td><td>F360</td><td>P600</td><td>400</td><td>Fine (600)</td><td>Mittelschliff</td></tr>
+<tr><td><b>≈ 15</b></td><td>#1000</td><td>F400–500</td><td>P1200</td><td>600</td><td>—</td><td>Der Arbeitsstein: scharf und toothy</td></tr>
+<tr><td><b>≈ 9</b></td><td>#1500–2000</td><td>F600</td><td>P2000</td><td>1000</td><td>Extra-Fine (1200)</td><td>Feinschliff EDC</td></tr>
+<tr><td><b>≈ 5</b></td><td>#3000</td><td>F800–1000</td><td>P3000</td><td>—</td><td>—</td><td>Küche, Politur beginnt</td></tr>
+<tr><td><b>≈ 3</b></td><td>#4000–6000</td><td>F1200</td><td>—</td><td>—</td><td>Extra-Extra-Fine (8000)</td><td>Politur, Rasiermesser-Vorstufe</td></tr>
+<tr><td><b>≈ 1,5–2</b></td><td>#8000–10000</td><td>—</td><td>—</td><td>—</td><td>Diamantpaste 1–2 µm</td><td>Spiegel; Rasiermesser</td></tr>
+<tr><td><b>≈ 0,5</b></td><td>#12000+</td><td>—</td><td>—</td><td>—</td><td>Chromoxid, Diamantpaste 0,5 µm</td><td>Abziehen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Steinarten</h2>
+<div class="tbl-wrap"><table style="min-width:1080px">
+<thead><tr><th data-s="text">Art</th><th>Schleifmittel · Bindung</th><th>Schleift</th><th>Vertreter</th><th>Preis (Stein ≈ 20×7 cm)</th></tr></thead>
+<tbody>
+<tr><td><b>Wasserstein, weich („soaking“)</b></td><td>Korund oder SiC in Ton/Magnesia; 5–15 min wässern</td><td>Alles bis ≈ 3 % V; sehr schnell, bildet Schlamm</td><td>King (KDS 1000/6000), Suehiro Cerax, Naniwa Traditional, Imanishi</td><td>25–60 €</td></tr>
+<tr><td><b>Wasserstein, hart („splash and go“)</b></td><td>Korund in Magnesia- oder Harzbindung; nur besprühen</td><td>Wie oben, weniger Schlamm, präziser</td><td>Shapton Pro (Kuromaku), Shapton Glass, Naniwa Chosera/Professional, Suehiro Debado</td><td>40–120 €</td></tr>
+<tr><td><b>Ölstein, künstlich</b></td><td>Korund (India) oder SiC (Crystolon) in Keramikbindung; mit Öl</td><td>Kohlenstoff- und einfache rostfreie Stähle; langsam bei Pulverstahl</td><td>Norton India (Coarse/Medium/Fine), Crystolon, deutsche Ölsteine</td><td>20–50 €</td></tr>
+<tr><td><b>Arkansas (Novaculit)</b></td><td>Naturstein aus Quarz; mit Öl oder trocken</td><td>Kohlenstoffstahl hervorragend, rostfrei langsam; Soft ≈ 600, Hard ≈ 1000, Black/Translucent ≈ 3000–6000</td><td>Dan's Whetstone, Norton</td><td>30–150 €</td></tr>
+<tr><td><b>Diamantplatte</b></td><td>Monokristalliner Diamant in Nickel auf Stahl (galvanisch)</td><td>Alles, auch Maxamet und S110V; aggressiv, kein Schlamm, bleibt plan</td><td>DMT Dia-Sharp, Atoma (140/400/1200), Ultra Sharp, Trend, Eze-Lap</td><td>40–90 €</td></tr>
+<tr><td><b>Diamant gebunden (Harz/Metall)</b></td><td>Diamant in Harz- oder Metallbindung als Stein</td><td>Alles; feineres Finish als Platten möglich</td><td>Venev, Naniwa Diamond, für Schärfsysteme (KME, TSProf)</td><td>50–150 €</td></tr>
+<tr><td><b>CBN</b></td><td>Kubisches Bornitrid, gebunden oder galvanisch</td><td>Alles außer Diamant; weniger aggressiv als Diamant, sehr haltbar</td><td>Steine für Wicked Edge, TSProf; Tormek-CBN-Scheiben</td><td>60–200 €</td></tr>
+<tr><td><b>Keramik (gesintert)</b></td><td>Aluminiumoxid, sehr dicht; trocken</td><td>Fein und sehr fein (≈ 1200–3000); zum Abschließen und Wetzen</td><td>Spyderco Ceramic (Medium/Fine/Ultra Fine), Sharpmaker-Stäbe, Idahone</td><td>30–80 €</td></tr>
+<tr><td><b>Belgischer Brocken (Coticule)</b></td><td>Natürlicher Granat (Spessartin) in Tonschiefer</td><td>Fein (≈ 6000–8000, je nach Schlamm); Rasiermesser, Küche</td><td>Ardennes Coticule</td><td>60–200 €</td></tr>
+<tr><td><b>Japanische Natursteine (Tennen Toishi)</b></td><td>Sedimentgestein, Körnung nur nach Erfahrung</td><td>Fein bis extrem fein; Kasumi-Finish auf Laminaten</td><td>Ohira, Nakayama, Shobudani — Liebhaberei</td><td>100–1000+ €</td></tr>
+</tbody>
+</table></div>
+
+<h2>Freihand: Ablauf</h2>
+<div class="steps">
+  <div class="step"><h4>Marker auf die Fase, Winkel finden</h4>Zwei Züge, Abrieb zeigt: Farbe weg an der Schneide = zu steil, an der Schulter = zu flach.</div>
+  <div class="step"><h4>Grob (220–600): Grat erzeugen</h4>Eine Seite, bis der Grat auf der Gegenseite über die ganze Länge fühlbar ist. Dann die andere Seite.</div>
+  <div class="step"><h4>Grat verkleinern</h4>Wechselzüge 5/5, 3/3, 2/2, 1/1 mit halbem Druck.</div>
+  <div class="step"><h4>Mittel und fein (1000, 3000+)</h4>Gleicher Winkel, wenige leichte Züge je Seite, alternierend enden.</div>
+  <div class="step"><h4>Entgraten und abziehen</h4>3–5 leichte Wechselzüge bei +2°, Schneide voran; dann 5–10 Züge je Seite auf Leder, Schneide nachlaufend.</div>
+  <div class="step"><h4>Prüfen</h4>Papier ohne Haken, Apex reflektiert kein Licht. Hakt es: Grat an der Stelle, zurück zu Schritt 5.</div>
+</div>
+
+<h2>Abziehen</h2>
+<figure>
+<svg class="dg m" viewBox="0 0 440 150" role="img" aria-label="Zwei Zugrichtungen einer Klinge auf dem Abziehriemen: Schneide nachlaufend ist richtig, Schneide voran schneidet ins Leder">
+  <rect class="box" x="20" y="100" width="180" height="20" rx="4" /><text class="lbl" x="110" y="114" text-anchor="middle">Leder</text>
+  <path class="accs" d="M60,100 L150,60 L156,66 L64,102 Z" />
+  <path class="good" d="M120,130 H40" /><path class="goodf" d="M40,124 L28,130 L40,136 Z" />
+  <text class="lblb" x="110" y="30" text-anchor="middle">richtig: Schneide nachlaufend</text>
+  <text class="lbl" x="110" y="44" text-anchor="middle">Rücken zeigt in Zugrichtung</text>
+  <rect class="box" x="240" y="100" width="180" height="20" rx="4" /><text class="lbl" x="330" y="114" text-anchor="middle">Leder</text>
+  <path class="accs" d="M280,100 L370,60 L376,66 L284,102 Z" />
+  <path class="badl" d="M300,130 H400" /><path class="badf" d="M400,124 L412,130 L400,136 Z" />
+  <text class="lblb" x="330" y="30" text-anchor="middle">falsch: Schneide voran</text>
+  <text class="lbl" x="330" y="44" text-anchor="middle">schneidet ins Leder, rollt den Apex</text>
+</svg>
+<figcaption>Auf dem Stein sind beide Richtungen zulässig (Schneide voran entgratet sauberer); auf jeder nachgiebigen Unterlage nur nachlaufend.</figcaption>
+</figure>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Mittel</th><th>Korn</th><th>Härte</th><th>Für</th><th>Anmerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Chromoxid (grün)</b></td><td>≈ 0,5 µm (Herstellerangaben 0,3–1 µm)</td><td>≈ 2900 HV</td><td>Alles bis mittlerer Karbidgehalt; Rasiermesser, Küche, EDC</td><td>Der Klassiker; Stangen sind oft mit Bindemittel gestreckt — dünn auftragen</td></tr>
+<tr><td><b>Diamant-Emulsion / -Paste</b></td><td>6 · 3 · 1 · 0,5 · 0,25 · 0,1 µm</td><td>≈ 8000+ HV</td><td>Pulverstähle, alles; 1 µm ist der Allrounder</td><td>Monokristallin (schärfer, teurer) oder polykristallin (bricht in neue Kanten); Spray gleichmäßiger als Paste</td></tr>
+<tr><td><b>CBN-Emulsion</b></td><td>wie Diamant</td><td>≈ 4500 HV</td><td>Alternative zu Diamant für Stahl</td><td>Weniger aggressiv, gleichmäßiges Finish</td></tr>
+<tr><td><b>Aluminiumoxid (weiß, „Bark River White“)</b></td><td>≈ 0,5–1 µm</td><td>≈ 2000 HV</td><td>Kohlenstoffstahl, einfache Rostfreie</td><td>Feiner Abtrag, gut für Rasiermesser</td></tr>
+<tr><td><b>Autosol, Polierpasten grob (schwarz, braun)</b></td><td>3–15 µm</td><td>Korund/Tripel</td><td>Grobes Abziehen, balliger Schliff</td><td>Metallpolitur (Autosol) ist zum Abziehen brauchbar, aber uneinheitlich</td></tr>
+<tr><td><b>Ohne Paste</b></td><td>—</td><td>Leder selbst</td><td>Letzte Züge, Gratreste, Aufrichten</td><td>Blankes Leder poliert kaum, richtet aber auf — die täglichen 5 Züge für die Küche</td></tr>
+</tbody>
+</table></div>
+
+<h2>Systeme und Maschinen</h2>
+<div class="tbl-wrap"><table style="min-width:1100px">
+<thead><tr><th data-s="text">System</th><th>Prinzip</th><th>Winkel</th><th>Stärken</th><th data-s="num">Preis ca.</th></tr></thead>
+<tbody>
+<tr><td><b>Spyderco Tri-Angle Sharpmaker</b></td><td>Zwei Keramikstäbe im Sockel, Klinge senkrecht daran entlangziehen</td><td>15° und 20° je Seite (30°/40° inklusiv), fest</td><td>Idiotensicher, Wellenschliff und Recurve möglich, kompakt, seit den 1980ern kaum verändert</td><td>90 €</td></tr>
+<tr><td><b>Lansky Standard/Deluxe</b></td><td>Klemme mit Winkelbohrungen, Stein an Führungsstab</td><td>17°, 20°, 25°, 30° je Seite</td><td>Günstig, seit 1979 bewährt, mobil</td><td>40–70 €</td></tr>
+<tr><td><b>Work Sharp Precision Adjust</b></td><td>Klemme, Schwenkarm mit Winkelskala</td><td>15–30° stufenlos (Elite: 15–30° in 0,5°)</td><td>Preis-Leistung, schnell, Diamant serienmäßig</td><td>70–130 €</td></tr>
+<tr><td><b>Edge Pro Apex</b></td><td>Klinge liegt auf einem Tisch, Steinarm an Führungsstange</td><td>stufenlos</td><td>Der Klassiker seit den 1990ern (Ben Dale), keine Klemme (gut für Küchenmesser), riesige Steinauswahl</td><td>200–300 €</td></tr>
+<tr><td><b>KME</b></td><td>Klemme mit Winkelskala, Steinarm mit Kugelgelenk</td><td>17–30° (Skala), stufenlos</td><td>Sehr präzise, robuste Klemme, gute Diamantsteine, Recurve-fähig</td><td>250–350 €</td></tr>
+<tr><td><b>Wicked Edge (WE100, Gen 3)</b></td><td>Schraubstock, zwei Steinarme beidseitig gleichzeitig</td><td>13–35° in 1°- oder 0,5°-Schritten</td><td>Beide Seiten ohne Umspannen, sehr wiederholbar, riesiges Zubehör</td><td>350–900 €</td></tr>
+<tr><td><b>TSProf (K03, Kadet), Hapstone (R2, RS)</b></td><td>Rotierende Klemme, Winkelverstellung mit Feinskala</td><td>stufenlos, Digitalwinkelmesser</td><td>Maschinenbauqualität, präziseste Systeme, beidseitig durch Drehen</td><td>250–800 €</td></tr>
+<tr><td><b>Hapstone/TSProf-Klone (Ruixin Pro, Sy Tools)</b></td><td>Wie oben, einfacher</td><td>stufenlos</td><td>Für 40–100 € erstaunlich brauchbar</td><td>40–120 €</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Maschine</th><th>Prinzip</th><th>Für</th><th>Preis ca.</th></tr></thead>
+<tbody>
+<tr><td><b>Work Sharp Ken Onion Edition</b></td><td>Schmales Schleifband (Körnung 80–6000, Mikromesh) mit Winkelführung 15–30°</td><td>Viele Messer schnell, Küchenmesser, Outdoor; erzeugt leicht balligen Schliff</td><td>150–250 €</td></tr>
+<tr><td><b>Tormek T-4 / T-8</b></td><td>Nass laufender Schleifstein (Ø 200–250 mm, 90 min⁻¹) mit Universalstütze und Messervorrichtung, Leder-Abziehscheibe</td><td>Der Standard für Werkstatt und Profis: kalt, exakt, Werkzeuge aller Art</td><td>500–900 €</td></tr>
+<tr><td><b>Bandschleifer (1×30, 2×42, 2×72)</b></td><td>Wie Messermacher: Klinge freihand am Band</td><td>Ausdünnen, Neuprofilieren, balliger Schliff</td><td>150–2000 €</td></tr>
+<tr><td><b>Doppelschleifer (trocken)</b></td><td>Schleifbock mit Korundscheibe</td><td>Äxte, Rasenmähermesser, Grobarbeit</td><td>60–200 €</td></tr>
+<tr><td><b>Elektrische Durchziehschärfer</b> (Chef'sChoice, Graef)</td><td>Motorisierte Diamantscheiben in festen Winkeln</td><td>Haushaltsküche, wo niemand einen Stein anfassen will</td><td>60–250 €</td></tr>
+</tbody>
+</table></div>
+
+<h2>Stumpf, warum?</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Mechanismus</th><th>Was passiert</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Umlegen (Rollen)</b></td><td>Der Apex biegt seitlich um, die Schneide bleibt intakt, schneidet aber nicht mehr</td><td>Weiche Stähle (unter 58 HRC), Seitenlast, Schneidbrett aus Glas oder Stein, zu dünner Winkel</td><td>Wetzstahl, Keramikstab oder Abziehriemen richten den Apex wieder auf — ohne Materialabtrag</td></tr>
+<tr><td><b>Abrasiver Verschleiß</b></td><td>Der Apex wird durch harte Partikel im Schnittgut gleichmäßig abgerundet</td><td>Karton (Ton- und Kalkfüllstoffe), Erde, Sand, Glasfaser, Papier</td><td>Neu schärfen; Stähle mit harten Karbiden verzögern es</td></tr>
+<tr><td><b>Mikroausbrüche (Chipping)</b></td><td>Kleine Stücke brechen aus der Schneide; unter der Lupe als Scharten sichtbar</td><td>Hohe Härte, grobe Karbide, zu dünner Winkel, Verkanten, Knochen, gefrorenes Schnittgut, Restaustenit</td><td>Winkel um 2–3° erhöhen oder Mikrofase; bei wiederholtem Chipping Stahl oder Wärmebehandlung als Ursache</td></tr>
+<tr><td><b>Korrosion</b></td><td>Der Apex ist die dünnste Stelle — Lochfraß frisst ihn zuerst</td><td>Kohlenstoffstahl feucht gelagert, Säuren in der Küche, Salz</td><td>Trocknen, ölen, Patina; Abziehen entfernt den angegriffenen Apex</td></tr>
+<tr><td><b>Grat-Abbruch</b></td><td>Ein nicht entfernter Grat bricht nach wenigen Schnitten ab und hinterlässt eine stumpfe Kante</td><td>Schärffehler: Grat nicht abgetragen</td><td>Sauber entgraten (siehe <a href="#technik">Technik</a>)</td></tr>
+</tbody>
+</table></div>

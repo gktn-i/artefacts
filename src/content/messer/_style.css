@@ -1,0 +1,9 @@
+/* messer — Design kommt aus dem gemeinsamen Hub-Stylesheet. */
+@import "../_mecha.css";
+
+/* Silhouetten in Symbolkarten (Klingenformen, Messerarten): gleiche
+   Klassen wie in svg.dg, damit Griff, Klinge und Akzente unterscheidbar sind. */
+.mx-messer .sym svg .box{fill:var(--surface-2);stroke:var(--text);stroke-width:1.3;stroke-linejoin:round}
+.mx-messer .sym svg .accs{fill:var(--accent-soft);stroke:var(--accent-border);stroke-width:1.1}
+.mx-messer .sym svg .accf{fill:var(--accent);stroke:none}
+.mx-messer .sym svg .wt{fill:none;stroke:var(--text);stroke-width:1;stroke-linecap:round}
