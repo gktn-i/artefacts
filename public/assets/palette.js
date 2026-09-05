@@ -111,6 +111,15 @@
     const a = A();
     if (!a) return;
     const colors = hubColors();
+    /* Schnellzugriff des Hubs, in dem man gerade steht: erst die Aufgabe,
+       dann das Fach — man muss nicht wissen, in welchem Modul etwas liegt. */
+    const here = a.hereHub && a.hereHub();
+    if (here && here.tasks.length) {
+      group("Schnellzugriff · " + here.name);
+      here.tasks.forEach((t) =>
+        addRow(structRow({ kind: "aufgabe", title: t.icon + " " + t.t, sub: t.d, href: t.href, hub: here }, "", colors))
+      );
+    }
     group("Hubs");
     a.searchIndex().filter((e) => e.kind === "hub").forEach((e) => addRow(structRow(e, "", colors)));
     group("Zuletzt aktualisiert");

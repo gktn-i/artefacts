@@ -1,10 +1,10 @@
 # Artefakte
 
-Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab und Fotografie — <https://bib.gktn.dev>.
+Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Fotografie und Messer — <https://bib.gktn.dev>.
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 22 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle 23 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -35,13 +35,14 @@ Schrift **Fraunces** (Display) · **Instrument Sans** (UI) · **IBM Plex Mono**
 ```
 src/data/registry.json     EINZIGE Datenquelle: Hubs → Bereiche → Module → Abschnitte
                            (inkl. groups für die Abschnitts-Navigation, alias für
-                           alte Anker, related für Quervernetzung)
+                           alte Anker, related für Quervernetzung, tasks je Hub
+                           für den Schnellzugriff nach Aufgabe)
 src/content/<modul>/       Inhalte: eine .astro-Datei pro Abschnitt
                            + optional _style.css (modulspezifisches, gescopetes CSS)
 src/pages/index.astro      Startseite (Schaltpult)
 src/pages/[slug].astro     Hub-Panels + Modulseiten (URL bleibt <name>.html)
 src/layouts/Base.astro     Werkbank-Shell (Rail + Topbar + Inhalt)
-src/components/            Rail, Topbar, CutsSection
+src/components/            Rail, Topbar, CutsSection, Profiles (Eignungstabellen)
 src/styles/app.css         Design-Tokens, Shell, Palette, Dashboard, Panels,
                            Modul-Workspace, Content-System (.mx-sys)
 public/assets/mod-<id>.js  Funktions-JS einzelner Module (Rechner, Tabellen, Folds)
@@ -50,8 +51,18 @@ public/assets/palette.js   globale Suche (⌘K): Registry-Treffer + Pagefind-Vol
 
 Drei Ebenen: **Übersicht → Hub → Modul** — aber alle drei sind jederzeit über
 die Rail erreichbar.
-Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video —
-zusammen 22 Module mit 231 Abschnitten.
+
+**Schnellzugriff nach Aufgabe.** Ein Hub kann in der Registry `tasks` tragen:
+Aufgaben wie *Projekt starten*, *Bauteil finden*, *Vorgehen nachschlagen*,
+*Rechnen*, *Begriff klären*, *Lernen* — jede mit Direktlinks auf die passenden
+Abschnitte quer durch die Module (auch in andere Hubs). Sie erscheinen als
+Karten oben im Hub-Panel (`#t-<id>`), als aufklappbarer Block in der Rail auf
+allen Seiten des Hubs und in der Suchpalette (Startansicht und als Treffer
+vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
+in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
+Abschnitt. Bisher nutzt das der Mechatronik-Hub.
+Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video ·
+🔪 Messer — zusammen 23 Module mit 246 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion
@@ -80,11 +91,21 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
   und wird von jedem `_style.css` nur importiert; ein Modul kann darüber hinaus
   eigene Regeln ergänzen (so macht es `dremel` für seine Drehzahlskala).
 - **Ein Skript für viele Module:** `public/assets/mod-mecha.js` bedient alle
-  Mechatronik-Module und die Technik-Module der Werkstatt — Faltabschnitte,
-  sortierbare Tabellen, Katalog- und Glossarfilter, die Rechner und die
+  Mechatronik-Module, die Technik-Module der Werkstatt und den Messer-Hub —
+  Faltabschnitte, sortierbare Tabellen, Katalog- und Glossarfilter, die Rechner
+  (darunter der § 42a-Check und der Schärfwinkel-Rechner) und die
   PID-Simulation. Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
   Ein Modul kann mehrere Skripte laden (`PAGE_SCRIPTS` nimmt auch ein Array,
   so kombiniert *3D-Druck* das Technik-Skript mit seinem Simulator).
+- **Eignungstabellen für Vergleiche:** `src/components/Profiles.astro` rendert
+  eine Tabelle mit einer Zeile je Kandidat: Punkte je Kriterium (1–5, höher =
+  besser, Spalten sortierbar) und die drei Spalten *Stark / Schwach / Nimm es
+  für*. Im Abschnitt importieren und `label`, `criteria`, `items` (`name`,
+  `tag?`, `scores`, `pro`, `con`, `use`) sowie optional `note`/`labels`
+  übergeben; abweichende Punktzahl bricht den Build.
+  Im Einsatz für Motoren, Schrittmotortreiber, Fluidantriebe, Positionsgeber,
+  Mikrocontroller-Familien, Bussysteme, Getriebebauarten, Funktechniken und
+  FPV-Videosysteme. Design im Block PROFILE von `src/content/_mecha.css`.
 - **Inhalte gehören ins HTML, nicht ins JavaScript.** Tabellen und Kataloge werden
   server-gerendert und im JS nur gefiltert und sortiert. Nur so landen sie im
   Pagefind-Index und funktionieren ohne JavaScript.

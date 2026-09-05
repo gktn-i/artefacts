@@ -55,7 +55,7 @@ const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
 /* Zusatz-Skripte des Moduls (Rechner, Tabellen-Builder, Folds …). */
 /* Werkstatt-Module, die das gemeinsame Technik-Design und -Skript mitbenutzen.
    Sie bleiben im Werkstatt-Hub, sehen aber aus wie der Mechatronik-Hub. */
-const MECHA_MODULES = new Set(["dremel", "schmiermittel", "druck"]);
+const MECHA_MODULES = new Set(["dremel", "schmiermittel", "druck", "messer"]);
 
 const PAGE_SCRIPTS: Record<string, string | string[]> = {
   loeten: "/assets/mod-loeten.js",
@@ -80,6 +80,8 @@ const PAGE_SCRIPTS: Record<string, string | string[]> = {
   lernpfad: "/assets/mod-mecha.js",
   "mecha-referenz": "/assets/mod-mecha.js",
   "fpv-drohnen": "/assets/mod-mecha.js",
+  /* Messer-Hub: gleiches Technik-Design und -Skript. */
+  messer: "/assets/mod-mecha.js",
 };
 const pageScripts = mod ? [PAGE_SCRIPTS[mod.id] || []].flat() : [];
 const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";
@@ -110,6 +112,35 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
             <a href={`#a-${ar.id}`}>{ar.name} <span class="ct">{ar.modules.length}</span></a>
           ))}
         </nav>
+
+        {hub.tasks.length > 0 && (
+          <section class="tasks" id="schnellzugriff" aria-label="Schnellzugriff nach Aufgabe">
+            <div class="rowlabel">
+              <h2>Schnellzugriff</h2>
+              <span class="n">nach Aufgabe, quer durch die Module</span>
+              <span class="ln"></span>
+            </div>
+            <div class="taskgrid">
+              {hub.tasks.map((t) => (
+                <article class="task" id={`t-${t.id}`}>
+                  <header>
+                    <span class="ic" aria-hidden="true">{t.icon}</span>
+                    <h3>{t.t}</h3>
+                  </header>
+                  <p class="d">{t.d}</p>
+                  <ul>
+                    {t.items.map((it) => (
+                      <li>
+                        <a href={it.href}>{it.label}</a>
+                        <span class="md">{it.cross ? `${it.mod.hub.icon} ` : ""}{it.mod.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         {hub.areas.map((ar) => (
           <section class="areasec" id={`a-${ar.id}`}>

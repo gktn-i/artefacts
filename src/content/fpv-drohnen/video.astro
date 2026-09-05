@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Wichtiger als Bildqualität ist, wie das Bild <em>stirbt</em>:</b> Analog rauscht langsam zu (man sieht das Ende kommen), HDZero bricht in Blöcke, DJI und Walksnail frieren ohne Vorwarnung ein — Reichweite ist dort eine Kante, keine Kurve.</div>
 
@@ -16,6 +17,41 @@ import "./_style.css";
 </table></div>
 <p class="note">Latenzen sind Herstellerwerte im schnellsten Modus; verlässlich ist die Rangfolge: HDZero am schnellsten und konstant, DJI/Walksnail dicht dahinter, Analog konkurrenzfähig. Vor dem Kauf: <a href="https://oscarliang.com/fpv-system/">oscarliang.com</a> und fpvknowitall.com.</p>
 
+<Profiles
+  label="System"
+  criteria={["Bildqualität", "Geringe Latenz", "Sanftes Ende", "Leicht & klein", "Günstig"]}
+  items={[
+    {
+      name: "Analog 5,8 GHz",
+      scores: [1, 4, 5, 5, 5],
+      pro: "Billig, robust, beliebig viele Mitschauer, das Reichweitenende ist sichtbar.",
+      con: "Bildqualität nach heutigem Maßstab schwach.",
+      use: "Racing, Whoops, Gruppenfliegen, Budget.",
+    },
+    {
+      name: "HDZero",
+      scores: [3, 5, 4, 4, 3],
+      pro: "Feste ~4 ms Latenz, digital ohne Einfrieren, Race-taugliche Kanalpläne.",
+      con: "Auflösung unter DJI und Walksnail, Onboard-Aufnahme schwach.",
+      use: "Racing mit HD, Freestyle mit Latenzanspruch.",
+    },
+    {
+      name: "Walksnail Avatar",
+      scores: [4, 3, 2, 4, 3],
+      pro: "Gutes Bild zu moderatem Preis, breite Kamerapalette, offener für Fremdhardware.",
+      con: "Friert am Rand ein, Latenz über HDZero.",
+      use: "Freestyle und Cinematic mit Blick aufs Geld.",
+    },
+    {
+      name: "DJI O4",
+      scores: [5, 3, 2, 4, 1],
+      pro: "Bestes Bild, beste Onboard-Aufnahme bis 4K/120, Bedienkomfort aus einem Guss.",
+      con: "Geschlossenes Ökosystem, teuer, friert ohne Vorwarnung ein.",
+      use: "Cinematic, Reisen, Freestyle mit Bildanspruch, Sub-250 mit der leichten Einheit.",
+    },
+  ]}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
 <div class="gb">
   <div class="gb-col good"><h4>Wann Analog oder HDZero</h4>
     <ul>

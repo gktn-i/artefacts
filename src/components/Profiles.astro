@@ -1,0 +1,77 @@
+---
+/* ============================================================================
+   Profile — Eignungstabelle für Vergleiche („Welcher Motor? Welcher Bus?").
+   Eine Zeile je Kandidat: Punkte je Kriterium (1–5, höher = besser) als
+   farbige Punkte, danach die drei Spalten, die man wirklich braucht —
+   Stark, Schwach, Nimm es für. Die Kriterienspalten sind sortierbar
+   (th[data-s="num"], Zahl steckt als Screenreader-Text in der Zelle).
+   Alles ist statisches HTML: Pagefind indexiert es, ohne JS bleibt es
+   lesbar, auf dem Handy klappt die Tabelle wie jede andere zu Karten.
+   Design in src/content/_mecha.css (Block PROFILE); gilt in allen Modulen,
+   die die Klasse .mx-mecha tragen.
+
+   Verwendung im Abschnitt:
+     import Profiles from "../../components/Profiles.astro";
+     <Profiles
+       label="Motortyp"
+       criteria={["Präzision", "Kraft", "Drehzahl", "Kompakt", "Einfach", "Günstig"]}
+       items={[{ name, tag?, scores: [5,4,3,2,1,3], pro, con, use }, …]}
+       note="…" />
+   ========================================================================== */
+interface Item {
+  name: string;
+  tag?: string;      /* kurze Einordnung unter dem Namen */
+  scores: number[];  /* 1–5 je Kriterium, in der Reihenfolge von `criteria` */
+  pro: string;       /* Stark */
+  con: string;       /* Schwach */
+  use: string;       /* Nimm es für */
+}
+interface Props {
+  criteria: string[];
+  items: Item[];
+  label?: string;    /* Überschrift der ersten Spalte */
+  scale?: number;
+  note?: string;
+  /* Beschriftung der drei Textspalten — z. B. „Nimm ihn für" statt „Nimm es für" */
+  labels?: { pro?: string; con?: string; use?: string };
+}
+const { criteria, items, label = "Typ", scale = 5, note, labels = {} } = Astro.props;
+const L = { pro: "Stark", con: "Schwach", use: "Nimm es für", ...labels };
+
+for (const it of items) {
+  if (it.scores.length !== criteria.length) {
+    throw new Error(`Profiles: „${it.name}" hat ${it.scores.length} Punkte, aber ${criteria.length} Kriterien`);
+  }
+}
+const level = (n: number) => (n <= 2 ? "lo" : n >= 4 ? "hi" : "mid");
+/* Namensspalte + Punktespalten + drei Textspalten — passt bei sechs
+   Kriterien noch ohne Querscrollen in den Modul-Workspace (980 px). */
+const minw = 140 + 62 * criteria.length + 3 * 112;
+---
+
+<div class="tbl-wrap prof-t"><table style={`min-width:${minw}px`}>
+<thead><tr>
+  <th data-s="text">{label}</th>
+  {criteria.map((c) => <th data-s="num" class="pch">{c}</th>)}
+  <th class="pro">{L.pro}</th><th class="con">{L.con}</th><th class="use">{L.use}</th>
+</tr></thead>
+<tbody>
+  {items.map((it) => (
+    <tr>
+      <td><b>{it.name}</b>{it.tag && <span class="ptag">{it.tag}</span>}</td>
+      {it.scores.map((n) => (
+        <td class={`pc ${level(n)}`} title={`${n} von ${scale}`}>
+          <span class="dots" aria-hidden="true">
+            {Array.from({ length: scale }, (_, k) => <i class={k < n ? "on" : undefined}></i>)}
+          </span>
+          <span class="sr">{n} von {scale}</span>
+        </td>
+      ))}
+      <td class="pt pro">{it.pro}</td>
+      <td class="pt con">{it.con}</td>
+      <td class="pt use">{it.use}</td>
+    </tr>
+  ))}
+</tbody>
+</table></div>
+{note && <p class="note pnote">{note}</p>}
