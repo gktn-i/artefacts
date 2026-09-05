@@ -49,17 +49,21 @@ import "./_style.css";
 
 <h2>Spannungen: die Werte, die zählen</h2>
 <p>Eine Tabelle für alle drei Chemien — je Zelle. Gesamtspannung = Wert × Zellenzahl; der <a href="#akku--lade-assistent-werte-je-pack">Lade-Assistent</a> rechnet sie für deinen Pack aus.</p>
-<div class="tbl-wrap"><table style="min-width:900px">
-<thead><tr><th>Zustand</th><th>LiPo</th><th>LiHV</th><th>Li-Ion</th><th>Bedeutung</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th>Zustand</th><th>Wann gemessen</th><th>LiPo</th><th>LiHV</th><th>Li-Ion</th><th>Was der Wert bedeutet</th></tr></thead>
 <tbody>
-<tr><td><b>Voll</b></td><td>4,20 V</td><td>4,35 V</td><td>4,20 V</td><td>Ladeschluss. Zellen danach ≤ 0,02 V auseinander</td></tr>
-<tr><td><b>Lagerung</b></td><td>3,80–3,85 V</td><td>3,80–3,85 V</td><td>3,60–3,70 V</td><td>Ziel ab 2–3 Tagen Standzeit — Li-Ion lagert tiefer</td></tr>
-<tr><td><b>Nominal</b></td><td>3,70 V</td><td>3,80 V</td><td>3,60 V</td><td>Rechenwert für Energie und Kapazität</td></tr>
-<tr><td><b>Landen</b></td><td>3,50 V unter Last</td><td>3,50 V; 1S-Whoop ~3,30 V</td><td>~3,00 V in Ruhe</td><td>Der OSD-Warnwert. LiPo erholt sich danach auf 3,7–3,8 V</td></tr>
-<tr><td><b>Untergrenze</b></td><td>3,30 V in Ruhe</td><td>3,30 V in Ruhe</td><td>2,80 V unter Last</td><td>Regelmäßig darunter kostet spürbar Zyklen</td></tr>
-<tr><td><b>Nicht mehr laden</b></td><td>&lt; 3,00 V</td><td>&lt; 3,00 V</td><td>&lt; 2,50 V</td><td>Schaden. Sondermüll, kein Ladegut</td></tr>
+<tr><td><b>Voll</b></td><td>nach dem Laden</td><td>4,20 V</td><td>4,35 V</td><td>4,20 V</td><td>Ladeschluss. Zellen danach ≤ 0,02 V auseinander</td></tr>
+<tr><td><b>Lagerung</b></td><td>in Ruhe</td><td>3,80–3,85 V</td><td>3,80–3,85 V</td><td>3,60–3,70 V</td><td>Ziel ab 2–3 Tagen Standzeit — Li-Ion lagert tiefer</td></tr>
+<tr><td><b>Nominal</b></td><td>Rechenwert</td><td>3,70 V</td><td>3,80 V</td><td>3,60 V</td><td>Nur für Energie- und Kapazitätsrechnungen</td></tr>
+<tr><td><b>Landen</b></td><td><b>im Flug, unter Last</b></td><td>3,50 V</td><td>3,50 V<br />1S-Whoop 3,30 V</td><td>3,00–3,20 V</td><td><b>Handlungssignal:</b> jetzt runterkommen. Das ist der OSD-Alarm</td></tr>
+<tr><td><b>Untergrenze</b></td><td><b>nach dem Flug, in Ruhe</b></td><td>3,30 V</td><td>3,30 V</td><td>3,00 V</td><td><b>Kontrollwert:</b> Wer danach darunter liegt, ist zu tief gegangen — das kostet Zyklen</td></tr>
+<tr><td><b>Nicht mehr laden</b></td><td>in Ruhe</td><td>&lt; 3,00 V</td><td>&lt; 3,00 V</td><td>&lt; 2,50 V</td><td>Schaden. Sondermüll, kein Ladegut</td></tr>
 </tbody>
 </table></div>
+<div class="tip"><b>Landen und Untergrenze sind zwei Momente, nicht zwei Grenzen.</b><br />
+<b>Im Flug</b> zieht der Strom die Spannung um I·R<sub>i</sub> nach unten — das OSD zeigt 3,50 V, während der Pack mehr „hat“<br />
+<b>Nach dem Abstellen</b> erholt sich die Zelle: aus 3,50 V unter Last werden 3,70–3,80 V in Ruhe<br />
+<b>Deshalb:</b> Wer bei 3,50 V landet, liegt danach automatisch über der Untergrenze von 3,30 V. Steht der Pack in Ruhe trotzdem darunter, war der Flug zu lang</div>
 
 <h3>Gesamtspannung der gängigen Packs</h3>
 <p class="note">Nominal für Wh-Rechnungen: 4S LiPo 14,8 V · 6S LiPo 22,2 V · 6S Li-Ion 21,6 V.</p>
@@ -69,7 +73,7 @@ import "./_style.css";
 <tr><td><b>4S LiPo</b></td><td>16,8 V</td><td>15,2 V</td><td>14,0 V</td><td>13,2 V</td></tr>
 <tr><td><b>6S LiPo</b></td><td>25,2 V</td><td>22,8 V</td><td>21,0 V</td><td>19,8 V</td></tr>
 <tr><td><b>1S LiHV</b></td><td>4,35 V</td><td>3,80 V</td><td>3,30 V</td><td>3,30 V</td></tr>
-<tr><td><b>6S Li-Ion</b></td><td>25,2 V</td><td>21,6–22,2 V</td><td>18,0 V</td><td>16,8 V</td></tr>
+<tr><td><b>6S Li-Ion</b></td><td>25,2 V</td><td>21,6–22,2 V</td><td>18,0–19,2 V</td><td>18,0 V</td></tr>
 </tbody>
 </table></div>
 
