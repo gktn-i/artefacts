@@ -41,6 +41,23 @@ for (const m of modules) {
 export const relatedOf = (id) =>
   [...(relSets.get(id) || [])].map((r) => byId.get(r)).filter(Boolean);
 
+/* Schnellzugriff: ein Hub kann `tasks` tragen — Aufgaben („Projekt starten",
+   „Bauteil finden" …), die quer durch die Module auf die passenden Abschnitte
+   zeigen. Jeder Link {m, h, t?} wird hier gegen die Registry geprüft und zu
+   {href, label, mod, cross} aufgelöst; ein Tippfehler bricht den Build. */
+for (const hub of hubs) {
+  hub.tasks = (hub.tasks || []).map((task) => ({
+    ...task,
+    items: task.links.map((l) => {
+      const mod = byId.get(l.m);
+      if (!mod) throw new Error(`registry: tasks/${hub.id}/${task.id} → Modul "${l.m}" existiert nicht`);
+      const sec = mod.sections.find((s) => s.h === l.h);
+      if (!sec) throw new Error(`registry: tasks/${hub.id}/${task.id} → Abschnitt "${l.m}#${l.h}" existiert nicht`);
+      return { href: `${mod.file}#${sec.h}`, label: l.t || sec.t, mod, cross: mod.hub.id !== hub.id };
+    }),
+  }));
+}
+
 export const fmtDate = (s) => {
   const p = (s || "").split("-");
   return p.length === 3 ? `${p[2]}.${p[1]}.${p[0]}` : s || "";

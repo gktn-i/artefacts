@@ -230,6 +230,38 @@
 .mx-mecha .rate-fill{height:100%;border-radius:999px;background:var(--accent)}
 .mx-mecha .rate-num{font:600 11px/1 var(--mono);color:var(--muted);width:15px;text-align:right;flex-shrink:0}
 
+/* ================================================================== PROFILE
+   Eignungstabelle (src/components/Profiles.astro): eine Zeile je Kandidat,
+   Punkte je Kriterium, dann Stark / Schwach / Nimm es für. Punktefarbe
+   folgt der Stufe wie die Bewertungsbalken: 1–2 rot, 3 gelb, 4–5 grün. */
+.mx-mecha .prof-t th.pch{white-space:normal;line-height:1.3;width:1%;padding:11px 6px;text-align:center;hyphens:auto}
+.mx-mecha .prof-t th.pro{color:var(--ok-ink)}
+.mx-mecha .prof-t th.con{color:var(--bad-ink)}
+.mx-mecha .prof-t th.use{color:var(--accent-ink)}
+.mx-mecha .prof-t td:first-child{min-width:140px}
+.mx-mecha .prof-t .ptag{display:block;font:500 10.5px/1.4 var(--mono);color:var(--faint);
+  text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.mx-mecha .prof-t td.pc{padding:12px 6px;white-space:nowrap;text-align:center;font-family:inherit}
+.mx-mecha .dots{display:inline-flex;gap:2px;vertical-align:middle}
+.mx-mecha .dots i{width:8px;height:8px;border-radius:50%;background:var(--track);display:block}
+.mx-mecha .pc.hi .dots i.on{background:var(--rate-good)}
+.mx-mecha .pc.mid .dots i.on{background:var(--rate-mid)}
+.mx-mecha .pc.lo .dots i.on{background:var(--rate-bad)}
+.mx-mecha .prof-t td.pt{font-size:12.4px;line-height:1.5;min-width:112px;padding:12px 10px;color:var(--muted)}
+.mx-mecha .prof-t td.pt.use{color:var(--text)}
+.mx-mecha .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.mx-mecha .pnote{margin-bottom:.9rem}
+@media(max-width:620px){
+  .mx-mecha .prof-t td.pc{white-space:normal;display:flex;align-items:center;justify-content:space-between;
+    padding:5px 14px;text-align:left}
+  .mx-mecha .prof-t td.pt{padding:5px 14px}
+  .mx-mecha .prof-t td.pc::before{margin-bottom:0}
+  .mx-mecha .prof-t td.pt.pro::before{color:var(--ok-ink)}
+  .mx-mecha .prof-t td.pt.con::before{color:var(--bad-ink)}
+  .mx-mecha .prof-t td.pt.use::before{color:var(--accent-ink)}
+}
+
 /* Kennzahlen-Kacheln */
 .mx-mecha .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:.6rem 0 1rem}
 .mx-mecha .kpi{border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;

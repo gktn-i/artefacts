@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Der Treiber ist die Stufe zwischen Logik und Leistung — und die häufigste Fehlerquelle im Antriebsstrang.</b> Drei Dinge entscheiden über Erfolg: Strombegrenzung, Schaltzeitpunkt und ein Layout, das Störungen nicht in die Steuerung zurückkoppelt.</div>
 
@@ -56,6 +57,55 @@ import "./_style.css";
 <tr><td><b>Closed-Loop-Module</b></td><td>je nach Typ</td><td>je nach Typ</td><td>—</td><td>Encoder am Motor, Schrittverluste werden nachgeregelt — Einfachheit des Schrittmotors mit der Sicherheit eines Servoantriebs</td></tr>
 </tbody>
 </table></div>
+<h3>Welcher Treiber wofür</h3>
+<Profiles
+  label="Treiber"
+  criteria={["Strom & Spannung", "Laufruhe", "Einfach", "Funktionen", "Günstig"]}
+  items={[
+    {
+      name: "A4988",
+      tag: "der Klassiker",
+      scores: [2, 1, 5, 1, 5],
+      pro: "Billig, überall erhältlich, Step/Dir und fertig.",
+      con: "Laut, nur 1/16 Mikroschritt, wenig Spannungsreserve, wird schnell heiß.",
+      use: "Erste Versuche, unkritische Achsen, Ersatz im Altgerät.",
+    },
+    {
+      name: "DRV8825",
+      tag: "A4988 mit Reserve",
+      scores: [3, 2, 5, 1, 5],
+      pro: "Etwas mehr Strom und bis 45 V, 1/32 Mikroschritt.",
+      con: "Gleiche Bauart, gleiches Pfeifen; Mikroschrittfehler bei kleinen Strömen.",
+      use: "Wo ein A4988 zu schwach ist und Lautstärke egal.",
+    },
+    {
+      name: "TMC2209",
+      tag: "leise, UART",
+      scores: [3, 5, 4, 4, 4],
+      pro: "StealthChop nahezu lautlos, StallGuard für sensorloses Referenzieren, per UART konfigurierbar.",
+      con: "Bis 29 V; StealthChop kostet Moment bei hoher Drehzahl; die UART-Verdrahtung will sauber gemacht sein.",
+      use: "3D-Drucker, Laborgeräte, alles im Wohnraum.",
+    },
+    {
+      name: "TMC5160",
+      tag: "externe MOSFETs, SPI",
+      scores: [5, 5, 2, 5, 2],
+      pro: "Bis 60 V, Strom nur durch die FETs begrenzt, Rampengenerator im Chip übernimmt die Bewegungsplanung.",
+      con: "SPI-Konfiguration mit vielen Registern; Modulqualität streut stark.",
+      use: "Große Achsen, NEMA 23/34, hohe Zwischenkreisspannung.",
+    },
+    {
+      name: "Closed-Loop-Modul",
+      tag: "Schrittmotor + Encoder",
+      scores: [4, 4, 3, 4, 2],
+      pro: "Encoder am Motor regelt Schrittverluste nach; Alarm statt stiller Fehlposition.",
+      con: "Teurer, größer, Abstimmung nötig; ersetzt keinen echten Servoantrieb.",
+      use: "CNC-Achsen, bei denen ein verlorener Schritt teuer ist.",
+    },
+  ]}
+  labels={{"use": "Nimm ihn für"}}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
 <div class="stop"><b>Nie einen Motor bei eingeschaltetem Treiber abstecken.</b> Die Wicklungsinduktivität erzeugt beim Trennen eine Spannungsspitze, die den Treiber zerstört — die mit Abstand häufigste Todesursache von Schrittmotortreibern. Ebenso: Treiber nicht verkehrt herum aufstecken, das überlebt kaum einer.</div>
 
 <h2>PWM richtig einstellen</h2>

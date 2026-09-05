@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <div class="kurz"><b>Positionsmessung ist die Voraussetzung jeder Bewegungsregelung.</b> Die Grundentscheidung: inkremental (billig, braucht Referenzfahrt) oder absolut (teurer, kennt die Position sofort nach dem Einschalten). Alles Weitere folgt daraus.</div>
 
@@ -35,6 +36,55 @@ import "./_style.css";
   <div class="card"><div class="ct">Resolver — Preis dafür</div><div class="cd">Braucht Trägerfrequenz-Speisung und einen Resolver-Digital-Wandler (AD2S1210 und ähnliche), löst gröber auf als optische Geber und ist im Gesamtsystem teurer.</div></div>
 </div>
 <div class="warn"><b>Gray-Code statt Binärcode:</b> Bei optischen Absolutgebern mit Codescheibe ändert sich zwischen benachbarten Positionen immer nur ein Bit. Bei Binärcode könnte an einer Codegrenze — etwa 0111 nach 1000 — kurzzeitig ein völlig falscher Wert entstehen, wenn die Spuren nicht exakt gleichzeitig umschalten.</div>
+
+<h3>Geber im Vergleich</h3>
+<Profiles
+  label="Geber"
+  criteria={["Auflösung", "Robust", "Einfach", "Kompakt", "Günstig"]}
+  items={[
+    {
+      name: "Inkrementalgeber, optisch",
+      tag: "inkremental",
+      scores: [5, 3, 4, 3, 4],
+      pro: "Hohe Auflösung fürs Geld; der Timer wertet in Hardware aus.",
+      con: "Kennt nach dem Einschalten nichts: Referenzfahrt Pflicht; Störimpulse zählen mit.",
+      use: "Motorwellen, Achsen mit Endschalter, Handräder.",
+    },
+    {
+      name: "Magnetischer Winkelsensor",
+      tag: "absolut · AS5047, MA732",
+      scores: [4, 4, 4, 5, 5],
+      pro: "Winkel sofort nach dem Einschalten; ein Magnet, ein Chip, SPI oder PWM.",
+      con: "Nur Singleturn; Magnetausrichtung und Fremdfelder verschieben den Wert.",
+      use: "BLDC-Kommutierung, Gelenke, Drehknöpfe, Kleinserien.",
+    },
+    {
+      name: "Optischer Absolutgeber",
+      tag: "absolut · Multiturn",
+      scores: [5, 3, 2, 2, 1],
+      pro: "Position über viele Umdrehungen ohne Referenzfahrt, bis 19 Bit.",
+      con: "Teuer, Schnittstellen herstellerabhängig (SSI, BiSS, EnDat), empfindlich gegen Schmutz.",
+      use: "Servoachsen, Werkzeugmaschinen, alles, was nach Stromausfall weiß, wo es steht.",
+    },
+    {
+      name: "Resolver",
+      tag: "absolut · elektromagnetisch",
+      scores: [2, 5, 1, 3, 2],
+      pro: "Keine Elektronik im Sensor: verträgt Hitze, Vibration, Öl und Strahlung.",
+      con: "Braucht Trägerfrequenz und R/D-Wandler, gröbere Auflösung, im System teuer.",
+      use: "Fahrzeug- und Luftfahrtantriebe, heiße Motoren.",
+    },
+    {
+      name: "Potentiometer",
+      tag: "absolut · analog",
+      scores: [2, 2, 5, 4, 5],
+      pro: "Absolut, ein ADC-Pin, kostet fast nichts.",
+      con: "Schleifer verschleißt, rauscht, begrenzter Drehbereich.",
+      use: "Sollwertgeber, Klappenstellung, langsame Achsen mit wenigen Zyklen.",
+    },
+  ]}
+  note="Punkte sind Einordnungen typischer Vertreter (5 = sehr gut), keine Messwerte. Sie helfen bei der Vorauswahl — entschieden wird am Datenblatt."
+/>
 
 <h2>Auflösung, die tatsächlich ankommt</h2>
 <div class="fbox">
