@@ -5,9 +5,10 @@ import Profiles from "../../components/Profiles.astro";
 <div class="kurz"><b>Die Motorwahl entscheidet über den halben Antriebsstrang.</b> Drei Fragen führen fast immer zur Antwort: Braucht es genaue Positionierung? Wie hoch ist die Drehzahl? Darf ein Geber mit ins Spiel? Erst danach zählen Drehmoment und Preis.</div>
 
 <h2>Eignungsprofil: Stärken und Schwächen</h2>
-<p class="lede">Wofür jeder Motortyp gebaut ist — und wo er einen ausbremst. Sechs Kriterien, je fünf Punkte, darunter der eine Satz, der die Entscheidung trägt.</p>
+<p class="lede">Wofür jeder Motortyp gebaut ist — und wo er einen ausbremst. Sechs Kriterien mit je fünf Punkten, daneben die drei Sätze, die die Entscheidung tragen. Spalten sind sortierbar.</p>
 <Profiles
-  criteria={["Präzision", "Kraft im Stand", "Drehzahl & Dynamik", "Kompakt", "Einfach", "Günstig"]}
+  label="Motortyp"
+  criteria={["Präzision", "Kraft im Stand", "Drehzahl", "Kompakt", "Einfach", "Günstig"]}
   items={[
     {
       name: "Bürsten-Gleichstrommotor",

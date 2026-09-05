@@ -42,7 +42,7 @@ src/content/<modul>/       Inhalte: eine .astro-Datei pro Abschnitt
 src/pages/index.astro      Startseite (Schaltpult)
 src/pages/[slug].astro     Hub-Panels + Modulseiten (URL bleibt <name>.html)
 src/layouts/Base.astro     Werkbank-Shell (Rail + Topbar + Inhalt)
-src/components/            Rail, Topbar, CutsSection, Profiles (Eignungskarten)
+src/components/            Rail, Topbar, CutsSection, Profiles (Eignungstabellen)
 src/styles/app.css         Design-Tokens, Shell, Palette, Dashboard, Panels,
                            Modul-Workspace, Content-System (.mx-sys)
 public/assets/mod-<id>.js  Funktions-JS einzelner Module (Rechner, Tabellen, Folds)
@@ -97,11 +97,12 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
   PID-Simulation. Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
   Ein Modul kann mehrere Skripte laden (`PAGE_SCRIPTS` nimmt auch ein Array,
   so kombiniert *3D-Druck* das Technik-Skript mit seinem Simulator).
-- **Eignungskarten für Vergleiche:** `src/components/Profiles.astro` rendert je
-  Kandidat eine Karte mit Punkten je Kriterium (1–5, höher = besser) und den
-  drei Sätzen *Stark / Schwach / Nimm es für*. Im Abschnitt importieren und
-  `criteria`, `items` (`name`, `tag?`, `scores`, `pro`, `con`, `use`) sowie
-  optional `note`/`labels` übergeben; abweichende Punktzahl bricht den Build.
+- **Eignungstabellen für Vergleiche:** `src/components/Profiles.astro` rendert
+  eine Tabelle mit einer Zeile je Kandidat: Punkte je Kriterium (1–5, höher =
+  besser, Spalten sortierbar) und die drei Spalten *Stark / Schwach / Nimm es
+  für*. Im Abschnitt importieren und `label`, `criteria`, `items` (`name`,
+  `tag?`, `scores`, `pro`, `con`, `use`) sowie optional `note`/`labels`
+  übergeben; abweichende Punktzahl bricht den Build.
   Im Einsatz für Motoren, Schrittmotortreiber, Fluidantriebe, Positionsgeber,
   Mikrocontroller-Familien, Bussysteme, Getriebebauarten, Funktechniken und
   FPV-Videosysteme. Design im Block PROFILE von `src/content/_mecha.css`.
