@@ -1,0 +1,135 @@
+---
+import "./_style.css";
+---
+<div class="kurz q"><b>Besitzen darf man fast jedes Messer, Führen ist die Frage.</b> Drei Stufen: verboten, eingeschränkt (§ 42a), frei. Seit Oktober 2024 gilt für alle Messer: nicht bei Veranstaltungen, im Fernverkehr, in Verbotszonen.</div>
+<div class="stop"><b>Keine Rechtsberatung.</b> Dieses Modul ordnet ein und nennt die Fundstellen — es ersetzt weder den Gesetzestext noch die Auskunft der zuständigen Behörde oder einer Anwältin. Rechtsstand: Waffengesetz in der Fassung vom 31. Oktober 2024 (Sicherheitspaket), Landesverordnungen bis September 2026. Gesetze ändern sich; die verbindliche Fassung steht auf <a href="https://www.gesetze-im-internet.de/waffg_2002/">gesetze-im-internet.de</a>.</div>
+
+<h2>Entscheidungsbaum</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 400" role="img" aria-label="Entscheidungsbaum zum deutschen Messerrecht: Erst prüfen, ob eine verbotene Bauart vorliegt, dann ob Klappmesser oder feststehend, dann einhändig und feststellbar bzw. Klingenlänge über 12 cm; danach gilt für alle Messer das Verbot bei Veranstaltungen, im Fernverkehr und in Verbotszonen">
+  <!-- Ebene 1 -->
+  <rect class="box" x="230" y="10" width="200" height="40" rx="8" /><text class="lblb" x="330" y="34" text-anchor="middle">Springmesser, Fall-, Faust-, Butterfly?</text>
+  <path class="acc" d="M330,50 V80" /><text class="lbl" x="336" y="70">nein</text>
+  <path class="badl" d="M430,30 H520" /><text class="lbl" x="440" y="24">ja</text>
+  <rect class="box" x="520" y="10" width="130" height="40" rx="8" style="stroke:var(--bad)" /><text class="lblb" x="585" y="28" text-anchor="middle">VERBOTEN</text><text class="lbl" x="585" y="42" text-anchor="middle">Besitz strafbar</text>
+  <!-- Ebene 2 -->
+  <rect class="box" x="230" y="80" width="200" height="40" rx="8" /><text class="lblb" x="330" y="104" text-anchor="middle">Dolch / Hieb- und Stoßwaffe?</text>
+  <path class="badl" d="M430,100 H520" /><text class="lbl" x="440" y="94">ja</text>
+  <rect class="box" x="520" y="80" width="130" height="40" rx="8" style="stroke:var(--mid)" /><text class="lblb" x="585" y="98" text-anchor="middle">§ 42a Nr. 2</text><text class="lbl" x="585" y="112" text-anchor="middle">Führen nur mit Grund</text>
+  <path class="acc" d="M330,120 V150" /><text class="lbl" x="336" y="140">nein</text>
+  <!-- Ebene 3 -->
+  <rect class="box" x="230" y="150" width="200" height="40" rx="8" /><text class="lblb" x="330" y="174" text-anchor="middle">Klappmesser oder feststehend?</text>
+  <path class="acc" d="M230,170 H150 V220" /><text class="lbl" x="160" y="164">Klapp</text>
+  <path class="acc" d="M430,170 H510 V220" /><text class="lbl" x="440" y="164">feststehend</text>
+  <!-- Klapp -->
+  <rect class="box" x="60" y="220" width="180" height="40" rx="8" /><text class="lblb" x="150" y="238" text-anchor="middle">einhändig zu öffnen</text><text class="lblb" x="150" y="252" text-anchor="middle">UND feststellbar?</text>
+  <path class="midl" d="M150,260 V300" /><text class="lbl" x="156" y="284">ja</text>
+  <rect class="box" x="60" y="300" width="180" height="40" rx="8" style="stroke:var(--mid)" /><text class="lblb" x="150" y="318" text-anchor="middle">EINHANDMESSER § 42a</text><text class="lbl" x="150" y="332" text-anchor="middle">Führen nur mit Grund / verschlossen</text>
+  <path class="good" d="M60,240 H30 V360 H200" /><text class="lbl" x="34" y="234">nein</text>
+  <!-- fest -->
+  <rect class="box" x="420" y="220" width="180" height="40" rx="8" /><text class="lblb" x="510" y="244" text-anchor="middle">Klinge über 12 cm?</text>
+  <path class="midl" d="M510,260 V300" /><text class="lbl" x="516" y="284">ja</text>
+  <rect class="box" x="420" y="300" width="180" height="40" rx="8" style="stroke:var(--mid)" /><text class="lblb" x="510" y="318" text-anchor="middle">§ 42a Nr. 3</text><text class="lbl" x="510" y="332" text-anchor="middle">Führen nur mit Grund / verschlossen</text>
+  <path class="good" d="M600,240 H630 V360 H460" /><text class="lbl" x="606" y="234">nein</text>
+  <!-- frei -->
+  <rect class="box" x="200" y="340" width="260" height="40" rx="8" style="stroke:var(--ok)" /><text class="lblb" x="330" y="358" text-anchor="middle">FREI FÜHRBAR</text><text class="lbl" x="330" y="372" text-anchor="middle">außer: Veranstaltung, Fernverkehr, Zone</text>
+</svg>
+<figcaption>Der Weg durch das Waffengesetz für ein Messer. Die letzte Zeile gilt für alle drei Ausgänge: Bei Volksfesten, in ICE und Fernbus sowie in Verbotszonen und im Nahverkehr vieler Länder ist auch ein „freies“ Messer verboten — es sei denn, es ist verpackt und nicht zugriffsbereit.</figcaption>
+</figure>
+
+<h2>§ 42a-Check</h2>
+<div class="calc" data-calc="messer42a">
+  <h4>Darf ich dieses Messer führen?</h4>
+  <div class="row">
+    <div><label>Bauart</label><select data-k="art"><option value="klapp">Klappmesser / Multitool / Cutter</option><option value="fest">Feststehendes Messer</option></select></div>
+    <div><label>Mechanik</label><select data-k="mech"><option value="manuell">manuell (Pin, Loch, Flipper, Nagelhau)</option><option value="assisted">federunterstützt (assisted)</option><option value="auto">Springmesser, seitlich</option><option value="otf">Springmesser, frontal (OTF)</option><option value="fall">Schwerkraft (Fallmesser)</option><option value="butterfly">Butterfly / Balisong</option><option value="faust">Faustmesser / Push Dagger</option><option value="dolch">Dolch, zweischneidig symmetrisch</option></select></div>
+    <div><label>Öffnen (Klappmesser)</label><select data-k="oeffnen"><option value="zwei">mit zwei Händen</option><option value="ein">mit einer Hand</option></select></div>
+    <div><label>Verriegelung (Klappmesser)</label><select data-k="lock"><option value="nein">keine (Slipjoint)</option><option value="ja">ja (Liner, Frame, Back, Axis …)</option></select></div>
+    <div><label>Klingenlänge (cm, feststehend)</label><input type="number" data-k="laenge" value="10" step="0.1" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+
+<h2>Die drei Stufen</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th>Stufe</th><th>Was</th><th>Besitz</th><th>Führen</th><th>Fundstelle</th><th>Verstoß</th></tr></thead>
+<tbody>
+<tr><td><span class="b bad">verboten</span></td><td>Springmesser (seitlich und OTF), Fallmesser, Faustmesser, Butterflymesser; dazu Wurfsterne</td><td>verboten (Ausnahme: Springmesser seitlich ≤ 8,5 cm, einseitig, nur mit beruflichem bzw. berechtigtem Interesse)</td><td>verboten</td><td>§ 2 Abs. 3, Anlage 2 Abschnitt 1 Nr. 1.3.3, 1.4.1–1.4.4</td><td>Straftat, bis 3 Jahre (§ 52 Abs. 3 Nr. 1)</td></tr>
+<tr><td><span class="b mid">eingeschränkt</span></td><td>Einhandmesser (einhändig öffnen + feststellbar), feststehende Messer über 12 cm, Hieb- und Stoßwaffen (Dolche, Schwerter, Kampfmesser)</td><td>frei (Hieb-/Stoßwaffen ab 18)</td><td>nur mit berechtigtem Interesse, im verschlossenen Behältnis oder für Film/Theater</td><td>§ 42a</td><td>Ordnungswidrigkeit, bis 10 000 € (§ 53 Abs. 1 Nr. 21a)</td></tr>
+<tr><td><span class="b ok">frei</span></td><td>Zweihand-Klappmesser (auch verriegelnd), Slipjoints (auch einhändig), feststehende Messer bis 12 cm, Küchenmesser zu Hause</td><td>frei, keine Altersgrenze im Gesetz</td><td>frei — außer bei Veranstaltungen, im Fernverkehr, in Verbotszonen und im Nahverkehr vieler Länder</td><td>—</td><td>bei Verstößen gegen § 42/§ 42b: Ordnungswidrigkeit bis 10 000 €</td></tr>
+</tbody>
+</table></div>
+
+<h2>Neu seit 2024</h2>
+<div class="flist">
+  <div class="frow hd"><span>Änderung</span><span>Seit</span><span>Bedeutung</span></div>
+  <div class="frow"><span class="fn">Springmesser grundsätzlich verboten</span><span class="fe">31.10.2024</span><span class="fx">Die frühere Ausnahme (seitlich, ≤ 8,5 cm, einseitig) gilt nur noch mit berechtigtem oder beruflichem Interesse. Straffreie Abgabe war bis 1.10.2025 möglich</span></div>
+  <div class="frow"><span class="fn">Messerverbot bei Veranstaltungen</span><span class="fe">31.10.2024</span><span class="fx">Volksfeste, Sportveranstaltungen, Messen, Märkte, Kinos, Diskotheken — alle Messer, jede Klingenlänge (§ 42 Abs. 1, 4a), mit Ausnahmen für Gastronomie, Beruf, Brauchtum, nicht zugriffsbereiten Transport</span></div>
+  <div class="frow"><span class="fn">Messerverbot im Fernverkehr</span><span class="fe">31.10.2024</span><span class="fx">ICE, IC, EC, Fernbusse und ihre umschlossenen Anlagen (§ 42b) — auch das Taschenmesser im Rucksack</span></div>
+  <div class="frow"><span class="fn">Länder dürfen Nahverkehr und Zonen mit Messerverbot belegen</span><span class="fe">31.10.2024, Verordnungen 2025/2026</span><span class="fx">Hamburg, Berlin (17.7.2025), Baden-Württemberg, Rheinland-Pfalz (27.11.2025), Hessen, Niedersachsen (1.4.2026), NRW (Verordnung 2025, geändert 22.4.2026), Bremen — Details unter <a href="#zonen">Zonen</a></span></div>
+  <div class="frow"><span class="fn">Anlasslose Kontrollen in Verbotszonen</span><span class="fe">2024/2025</span><span class="fx">Polizeigesetze der Länder erlauben in Verbotszonen Durchsuchungen ohne konkreten Verdacht; Bundespolizei mit befristeten Allgemeinverfügungen an Bahnhöfen</span></div>
+</div>
+
+<h2>§ 42a im Wortlaut</h2>
+<div class="card">
+  <div class="ct">§ 42a Verbot des Führens von Anscheinswaffen und bestimmten tragbaren Gegenständen</div>
+  <p><b>(1)</b> Es ist verboten<br />1. Anscheinswaffen,<br />2. Hieb- und Stoßwaffen nach Anlage 1 Abschnitt 1 Unterabschnitt 2 Nr. 1.1 oder<br />3. Messer mit einhändig feststellbarer Klinge (Einhandmesser) oder feststehende Messer mit einer Klingenlänge über 12 cm<br />zu führen.</p>
+  <p><b>(2)</b> Absatz 1 gilt nicht<br />1. für die Verwendung bei Foto-, Film- oder Fernsehaufnahmen oder Theateraufführungen,<br />2. für den Transport in einem verschlossenen Behältnis,<br />3. für das Führen der Gegenstände nach Absatz 1 Nr. 2 und 3, sofern ein berechtigtes Interesse vorliegt.<br />Weitergehende Regelungen bleiben unberührt.</p>
+  <p><b>(3)</b> Ein berechtigtes Interesse nach Absatz 2 Nr. 3 liegt insbesondere vor, wenn das Führen der Gegenstände im Zusammenhang mit der Berufsausübung erfolgt, der Brauchtumspflege, dem Sport oder einem allgemein anerkannten Zweck dient.</p>
+  <p class="note">Eingeführt zum 1. April 2008; seither unverändert. Verstoß: Ordnungswidrigkeit nach § 53 Abs. 1 Nr. 21a WaffG, Bußgeld bis 10 000 € (§ 53 Abs. 2).</p>
+</div>
+<div class="gb">
+  <div class="gb-col bad"><h4>Einhandmesser (§ 42a greift)</h4><ul><li>Klinge lässt sich mit <b>einer Hand</b> öffnen: Daumenpin, Daumenloch, Daumenscheibe, Flipper, Wave, Federunterstützung</li><li><b>und</b> die Klinge wird nach dem Öffnen <b>festgestellt</b>: Liner, Frame, Back, Axis, Compression, Button, Ring — jede Verriegelung</li><li>Beispiele: Spyderco Para 3, Benchmade Bugout, Kershaw Leek, Leatherman Wave (Außenklingen), Victorinox One-Hand Trekker, Cuttermesser mit Arretierung</li></ul></div>
+  <div class="gb-col good"><h4>Kein Einhandmesser (frei)</h4><ul><li><b>Zweihand-Öffnung</b> mit Verriegelung: Opinel (Virobloc), Buck 110, Otter Mercator, Victorinox mit Liner Lock aber Nagelhau</li><li><b>Einhand-Öffnung ohne Verriegelung</b>: Spyderco UK Penknife, Victorinox Slipjoints, Böker Slipjoints mit Daumenpin</li><li><b>Friction Folder</b>: Higonokami, Svörd Peasant</li></ul></div>
+</div>
+
+<h2>Die drei Ausnahmen</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Ausnahme</th><th>Was genau</th><th>Sicher</th><th>Umstritten</th><th>Nicht gedeckt</th></tr></thead>
+<tbody>
+<tr><td><b>Verschlossenes Behältnis</b> (Abs. 2 Nr. 2)</td><td>Das Messer ist so verpackt, dass es nicht ohne Weiteres zugriffsbereit ist. Gesetzesbegründung: Es soll „mit wenigen Handgriffen“ nicht erreichbar sein</td><td>Abgeschlossener Koffer, Werkzeugkiste mit Schloss, Tresorbox, Kofferraum in verschlossener Box, Originalverpackung mit Siegel/Folie</td><td>Reißverschluss-Etui in der Rucksacktiefe, zugebundene Tasche, Kartonverpackung ohne Verschluss — viele Polizeidienststellen akzeptieren das, ein Gericht muss nicht</td><td>Gürtelscheide, Clip in der Hosentasche, offener Rucksack, Handschuhfach, Türfach im Auto</td></tr>
+<tr><td><b>Berechtigtes Interesse</b> (Abs. 2 Nr. 3, Abs. 3)</td><td>Beruf, Brauchtum, Sport, allgemein anerkannter Zweck — die Aufzählung ist beispielhaft („insbesondere“)</td><td>Handwerker auf der Arbeit oder auf dem Weg dorthin, Jäger bei der Jagd, Angler am Wasser, Forst- und Gartenarbeit, Segler an Bord, Trachtenträger mit Trachtenmesser, Pfadfinder im Lager, Camping und Wandern mit Zweck (Kochen, Holz)</td><td>Rettungsmesser im Privat-Pkw, EDC „für den Fall der Fälle“, Wandern in der Stadt, Messer als Sammlerstück auf dem Weg zur Börse (hier: verschlossen transportieren)</td><td>Selbstverteidigung (ausdrücklich nicht), Gewohnheit, „ich brauche es täglich“ ohne konkreten Anlass, Party, Disco, Fußballstadion</td></tr>
+<tr><td><b>Film, Theater, Foto</b> (Abs. 2 Nr. 1)</td><td>Verwendung bei Aufnahmen oder Aufführungen</td><td>Requisite am Set, Bühne</td><td>Hobby-Filmdreh im Park ohne erkennbaren Rahmen</td><td>—</td></tr>
+</tbody>
+</table></div>
+
+<h2>Klingenlänge messen</h2>
+<figure>
+<svg class="dg m" viewBox="0 0 440 150" role="img" aria-label="Seitenansicht eines Messers mit eingezeichneter Klingenlänge von der Spitze bis zur Vorderkante des Griffs, das unscharfe Ricasso ist Teil der Klingenlänge">
+  <path class="box" d="M20,45 L120,45 L120,105 L20,105 Z" />
+  <path class="box" d="M120,50 L200,50 L300,55 C360,60 400,70 420,80 C400,92 360,100 300,102 L200,104 L120,104 Z" />
+  <path class="wt" d="M150,50 L150,104" />
+  <path class="accs" d="M150,92 L300,96 C360,100 400,92 420,80 C400,92 360,100 300,102 L150,104 Z" />
+  <path class="acc" d="M120,128 L420,128" />
+  <path class="acc" d="M120,120 L120,136 M420,120 L420,136" />
+  <text class="lbla" x="270" y="145" text-anchor="middle">Klingenlänge: Spitze bis Griffvorderkante</text>
+  <text class="lbl" x="135" y="38" text-anchor="middle">Ricasso</text>
+  <path class="gd" d="M135,41 L135,50" />
+  <text class="lbl" x="70" y="30" text-anchor="middle">Griff</text>
+  <text class="lbl" x="230" y="38" text-anchor="middle">Schneide beginnt erst hier</text>
+  <path class="gd" d="M230,41 L230,50 M230,41 L152,41" />
+</svg>
+<figcaption>Das Gesetz definiert die Messweise nicht. Rechtsprechung und Polizeipraxis messen von der Spitze bis zum Beginn des Griffs — das unscharfe Ricasso zählt mit, der Griff nicht.</figcaption>
+</figure>
+
+<h2>Verbotene Messer (Anlage 2)</h2>
+<div class="tbl-wrap"><table style="min-width:1000px">
+<thead><tr><th>Nr.</th><th>Gegenstand</th><th>Definition (sinngemäß nach Anlage 2)</th><th>Ausnahme</th><th>Typische Beispiele</th></tr></thead>
+<tbody>
+<tr><td><b>1.4.1</b></td><td>Springmesser</td><td>Messer, deren Klinge auf Knopf- oder Hebeldruck aus dem Griff hervorschnellt und hierdurch oder beim Loslassen festgestellt werden kann</td><td>Seit 31.10.2024 nur noch: Klinge springt <em>seitlich</em> heraus, der herausragende Teil ist höchstens 8,5 cm lang und nicht zweiseitig geschliffen — <b>und</b> es besteht ein berechtigtes Interesse, das eine einhändige Nutzung erforderlich macht, oder der Umgang erfolgt im Zusammenhang mit der Berufsausübung</td><td>Italienische Stiletti, Microtech Ultratech (OTF, keine Ausnahme), Benchmade Auto, Protech, „Rettungsmesser“ mit Feder, Hubertus-Springer (früher als Ausnahme frei, jetzt nur mit Grund)</td></tr>
+<tr><td><b>1.4.2</b></td><td>Fallmesser</td><td>Messer, deren Klinge beim Lösen einer Sperrvorrichtung durch ihre Schwerkraft oder durch eine Schleuderbewegung aus dem Griff herausgleitet und festgestellt werden kann</td><td>keine</td><td>Luftwaffen-Fliegermesser (1937), Paratrooper Gravity Knife, Bundeswehr-Kappmesser-Nachbauten mit Arretierung</td></tr>
+<tr><td><b>1.4.3</b></td><td>Faustmesser</td><td>Messer mit quer zur geschlossenen Faust stehender Klinge, die ihrem Wesen nach als Stichwaffe bestimmt sind</td><td>keine</td><td>Push Dagger, T-Griff-Messer (Cold Steel Safe Maker)</td></tr>
+<tr><td><b>1.4.4</b></td><td>Butterflymesser</td><td>Faltmesser mit zweigeteilten, schwenkbaren Griffen</td><td>keine (Trainer ohne Schneide sind keine Messer)</td><td>Balisong aller Art, auch Kinder- und Kammversionen mit Klinge</td></tr>
+<tr><td><b>1.3.3</b></td><td>Wurfsterne</td><td>Sternförmige Scheiben zum Werfen</td><td>keine</td><td>Shuriken</td></tr>
+<tr><td><b>1.3.1–1.3.2</b></td><td>Totschläger, Stahlrute, Schlagring</td><td>Schlagwerkzeuge</td><td>keine</td><td>zur Vollständigkeit</td></tr>
+</tbody>
+</table></div>
+<div class="flist">
+  <div class="frow hd"><span>Punkt</span><span>Regelung</span><span>Praxis</span></div>
+  <div class="frow"><span class="fn">Was sich geändert hat</span><span class="fe">BGBl. 2024 I Nr. 332, in Kraft 31.10.2024</span><span class="fx">Bis dahin waren seitlich öffnende Springmesser mit Klinge bis 8,5 cm und einseitigem Schliff für jedermann frei. Diese Ausnahme gilt jetzt nur noch mit berechtigtem oder beruflichem Interesse — für Privatpersonen sind damit praktisch alle Springmesser verboten</span></div>
+  <div class="frow"><span class="fn">Berechtigtes Interesse</span><span class="fe">Gesetzesbegründung</span><span class="fx">Beispiele: berufliche und jagdliche Nutzung, Segeln, Bergsteigen, körperliche Einschränkung (eine Hand). Einzelfall — kein Freibrief für Jäger oder Rettungskräfte, aber die naheliegendsten Fälle</span></div>
+  <div class="frow"><span class="fn">Altbesitz</span><span class="fe">Übergangsregelung</span><span class="fx">Straffreie Abgabe an Polizei, Waffenbehörde oder berechtigten Händler war bis 1. Oktober 2025 möglich. Seither ist der bloße Besitz ohne Grund strafbar — auch des vor 2024 legal gekauften Messers</span></div>
+  <div class="frow"><span class="fn">Strafe</span><span class="fe">§ 52 Abs. 3 Nr. 1</span><span class="fx">Freiheitsstrafe bis zu drei Jahren oder Geldstrafe; bei Ersttätern meist Geldstrafe und Einziehung, aber ein Eintrag im Bundeszentralregister ist möglich</span></div>
+  <div class="frow"><span class="fn">Import und Zoll</span><span class="fe">§ 29, § 30 WaffG</span><span class="fx">Bestellungen aus dem Ausland werden vom Zoll beschlagnahmt; es folgt eine Strafanzeige. Das gilt auch für OTF-Messer aus den USA und Springer aus Italien — die dort legal sind</span></div>
+</div>

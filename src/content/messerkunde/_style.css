@@ -1,9 +1,0 @@
-/* messerkunde — Design kommt aus dem gemeinsamen Hub-Stylesheet. */
-@import "../_mecha.css";
-
-/* Silhouetten in Symbolkarten (Klingenformen, Messerarten): gleiche
-   Klassen wie in svg.dg, damit Griff, Klinge und Akzente unterscheidbar sind. */
-.mx-messerkunde .sym svg .box{fill:var(--surface-2);stroke:var(--text);stroke-width:1.3;stroke-linejoin:round}
-.mx-messerkunde .sym svg .accs{fill:var(--accent-soft);stroke:var(--accent-border);stroke-width:1.1}
-.mx-messerkunde .sym svg .accf{fill:var(--accent);stroke:none}
-.mx-messerkunde .sym svg .wt{fill:none;stroke:var(--text);stroke-width:1;stroke-linecap:round}
