@@ -22,26 +22,26 @@
 }
 @media(prefers-color-scheme:dark){
   .mx-loeten{
-    --bg:#16181c; --surface:#1f2229; --surface-2:#262a31; --surface-hover:#2a2721;
-    --text:#e7e9ec; --muted:#9aa2ad; --faint:#727a85;
-    --border:#2e333b; --border-strong:#3a404a; --track:#333842;
-    --accent:#f0a830; --accent-ink:#f5c878; --accent-soft:#382a10; --accent-border:#8a6420;
-    --ok-bg:#0c2620; --ok-ink:#9fe1cb;
-    --info-bg:#0e2438; --info-border:#185fa5; --info-ink:#b5d4f4;
-    --danger-bg:#2e1414; --danger-ink:#f7c1c1;
+    --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2b2924;
+    --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
+    --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
+    --accent:#dea44a; --accent-ink:#e6c586; --accent-soft:#2f2a1f; --accent-border:#7a5f2a;
+    --ok-bg:#1d2a26; --ok-border:#3f9a76; --ok-ink:#a3d6bc;
+    --info-bg:#1e2733; --info-border:#3d75b3; --info-ink:#b3cbe6;
+    --danger-bg:#2e2222; --danger-border:#c9605d; --danger-ink:#e8b4b0;
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
-    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.6);
+    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.5);
   }
-  .mx-loeten .b-kolben{background:#042C53;color:#B5D4F4}
-  .mx-loeten .b-luft{background:#4A1B0C;color:#F5C4B3}
-  .mx-loeten .b-platte{background:#412402;color:#FAC775}
-  .mx-loeten .b-mat{background:#04342C;color:#9FE1CB}
-  .mx-loeten .b-all{background:#26215C;color:#CECBF6}
-  .mx-loeten .b-warn{background:#501313;color:#F7C1C1}
-  .mx-loeten .b-ok{background:#04342C;color:#9FE1CB}
-  .mx-loeten .d1{background:#04342C;color:#9FE1CB}
-  .mx-loeten .d2{background:#412402;color:#FAC775}
-  .mx-loeten .d3{background:#501313;color:#F7C1C1}
+  .mx-loeten .b-kolben{background:#1e2e42;color:#b3cbe6}
+  .mx-loeten .b-luft{background:#37251f;color:#e8bfb1}
+  .mx-loeten .b-platte{background:#33291a;color:#e8c58c}
+  .mx-loeten .b-mat{background:#1c3029;color:#a3d6bc}
+  .mx-loeten .b-all{background:#282744;color:#c9c6e8}
+  .mx-loeten .b-warn{background:#38221f;color:#e8b4b0}
+  .mx-loeten .b-ok{background:#1c3029;color:#a3d6bc}
+  .mx-loeten .d1{background:#1c3029;color:#a3d6bc}
+  .mx-loeten .d2{background:#33291a;color:#e8c58c}
+  .mx-loeten .d3{background:#38221f;color:#e8b4b0}
 }
 
 /* ============================================================

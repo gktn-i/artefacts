@@ -34,19 +34,22 @@
 }
 @media(prefers-color-scheme:dark){
   .mx-mecha{
-    --bg:#16181c; --surface:#1f2229; --surface-2:#262a31; --surface-hover:#2a2f37;
-    --text:#e7e9ec; --muted:#9aa2ad; --faint:#727a85;
-    --border:#2e333b; --border-strong:#3a404a; --track:#333842;
+    --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2a3039;
+    --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
+    --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
 
-    --accent-soft: color-mix(in srgb, var(--c,#63a9f5) 17%, #16181c);
-    --accent-border: color-mix(in srgb, var(--c,#63a9f5) 42%, #16181c);
+    --accent-ink: color-mix(in srgb, var(--c,#63a9f5) 72%, #d8dce3);
+    --accent-soft: color-mix(in srgb, var(--c,#63a9f5) 14%, #1e2229);
+    --accent-border: color-mix(in srgb, var(--c,#63a9f5) 38%, #1e2229);
 
-    --ok:#4dbb82; --ok-ink:#8fdcb4; --ok-bg:#0f2e21; --ok-border:#1f5a40;
-    --mid:#eda94e; --mid-ink:#f6cf94; --mid-bg:#33230c; --mid-border:#6b4a15;
-    --bad:#e0604f; --bad-ink:#f2a99c; --bad-bg:#2f1613; --bad-border:#6d2c22;
+    --ok:#5fb98a; --ok-ink:#a3d6bc; --ok-bg:#1d2a26; --ok-border:#34634b;
+    --mid:#dfa85c; --mid-ink:#e8cb99; --mid-bg:#2d2720; --mid-border:#6e5228;
+    --bad:#d9705f; --bad-ink:#e8aa9f; --bad-bg:#2e2222; --bad-border:#6f3a33;
+
+    --rate-bad:#d9705f; --rate-mid:#dfa85c; --rate-good:#5fb98a;
 
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
-    --shadow-md:0 6px 18px -10px rgba(0,0,0,.7);
+    --shadow-md:0 6px 18px -10px rgba(0,0,0,.6);
   }
 }
 
@@ -375,16 +378,16 @@
 .mx-mecha .c-schutz .cb{background:#FAECE7;color:#712B13}
 .mx-mecha .c-verbind .cb{background:#EEF2E3;color:#3F5211}
 @media(prefers-color-scheme:dark){
-  .mx-mecha .c-passiv .cb{background:#042C53;color:#B5D4F4}
-  .mx-mecha .c-halbleiter .cb{background:#26215C;color:#CECBF6}
-  .mx-mecha .c-analog .cb{background:#0A3644;color:#A8DCEE}
-  .mx-mecha .c-digital .cb{background:#33204F;color:#DDC7F8}
-  .mx-mecha .c-power .cb{background:#412402;color:#FAC775}
-  .mx-mecha .c-sensor .cb{background:#04342C;color:#9FE1CB}
-  .mx-mecha .c-aktor .cb{background:#3D2A10;color:#F2CFA0}
-  .mx-mecha .c-mech .cb{background:#2C2C2A;color:#D3D1C7}
-  .mx-mecha .c-schutz .cb{background:#4A1B0C;color:#F5C4B3}
-  .mx-mecha .c-verbind .cb{background:#26330A;color:#CBE596}
+  .mx-mecha .c-passiv .cb{background:#1e2e42;color:#b3cbe6}
+  .mx-mecha .c-halbleiter .cb{background:#282744;color:#c9c6e8}
+  .mx-mecha .c-analog .cb{background:#1c3038;color:#a6d0e0}
+  .mx-mecha .c-digital .cb{background:#2f2740;color:#d3c3ea}
+  .mx-mecha .c-power .cb{background:#33291a;color:#e8c58c}
+  .mx-mecha .c-sensor .cb{background:#1c3029;color:#a3d6bc}
+  .mx-mecha .c-aktor .cb{background:#33291d;color:#e6cba8}
+  .mx-mecha .c-mech .cb{background:#2b2c2e;color:#cfd0c9}
+  .mx-mecha .c-schutz .cb{background:#37251f;color:#e8bfb1}
+  .mx-mecha .c-verbind .cb{background:#282e1c;color:#c8dba0}
 }
 
 /* ================================================================== GLOSSAR */

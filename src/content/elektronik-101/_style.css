@@ -20,32 +20,32 @@
 }
 @media(prefers-color-scheme:dark){
   .mx-elektronik-101{
-    --bg:#16181c; --surface:#1f2229; --surface-2:#262a31; --surface-hover:#262a31;
-    --text:#e7e9ec; --muted:#9aa2ad; --faint:#727a85;
-    --border:#2e333b; --border-strong:#3a404a; --track:#333842;
-    --accent:#38c6d9; --accent-ink:#8adeeb; --accent-soft:#0b3138; --accent-border:#17606d;
-    --rate-bad:#e0604f; --rate-mid:#eda94e; --rate-good:#4dbb82;
-    --warn-bg:#3a1c10; --warn-ink:#f3c3ae;
-    --danger-bg:#2a1512; --danger-border:#6b2418; --danger-accent:#d14836;
+    --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#262b33;
+    --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
+    --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
+    --accent:#4fb9c9; --accent-ink:#8fd0da; --accent-soft:#1a2f34; --accent-border:#2a5d66;
+    --rate-bad:#d9705f; --rate-mid:#dfa85c; --rate-good:#5fb98a;
+    --warn-bg:#2f2420; --warn-ink:#e9c2ae;
+    --danger-bg:#2e2222; --danger-border:#6f3a33; --danger-accent:#d9705f;
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
-    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.6);
+    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.5);
   }
   .mx-elektronik-101 /* Kategorie-Badges (dunkel) */
-  .cat-passiv .cb{background:#042C53;color:#B5D4F4}
-  .mx-elektronik-101 .cat-halbleiter .cb{background:#26215C;color:#CECBF6}
-  .mx-elektronik-101 .cat-ic .cb{background:#501313;color:#F7C1C1}
-  .mx-elektronik-101 .cat-mech .cb{background:#04342C;color:#9FE1CB}
-  .mx-elektronik-101 .cat-power .cb{background:#412402;color:#FAC775}
-  .mx-elektronik-101 .cat-schutz .cb{background:#4A1B0C;color:#F5C4B3}
-  .mx-elektronik-101 .cat-modul .cb{background:#2C2C2A;color:#D3D1C7}
-  .mx-elektronik-101 .cat-board .cb{background:#33204F;color:#DDC7F8}
-  .mx-elektronik-101 .cat-sensor .cb{background:#0A3644;color:#A8DCEE}
-  .mx-elektronik-101 .cat-kabel .cb{background:#3D2A10;color:#F2CFA0}
-  .mx-elektronik-101 .cat-verbrauch .cb{background:#26330A;color:#CBE596}
+  .cat-passiv .cb{background:#1e2e42;color:#b3cbe6}
+  .mx-elektronik-101 .cat-halbleiter .cb{background:#282744;color:#c9c6e8}
+  .mx-elektronik-101 .cat-ic .cb{background:#38221f;color:#e8b4b0}
+  .mx-elektronik-101 .cat-mech .cb{background:#1c3029;color:#a3d6bc}
+  .mx-elektronik-101 .cat-power .cb{background:#33291a;color:#e8c58c}
+  .mx-elektronik-101 .cat-schutz .cb{background:#37251f;color:#e8bfb1}
+  .mx-elektronik-101 .cat-modul .cb{background:#2b2c2e;color:#cfd0c9}
+  .mx-elektronik-101 .cat-board .cb{background:#2f2740;color:#d3c3ea}
+  .mx-elektronik-101 .cat-sensor .cb{background:#1c3038;color:#a6d0e0}
+  .mx-elektronik-101 .cat-kabel .cb{background:#33291d;color:#e6cba8}
+  .mx-elektronik-101 .cat-verbrauch .cb{background:#282e1c;color:#c8dba0}
   .mx-elektronik-101 /* Gefahren-Stufen (dunkel) */
-  .lvl-ok{background:#04342C;color:#9FE1CB}
-  .mx-elektronik-101 .lvl-warn{background:#412402;color:#FAC775}
-  .mx-elektronik-101 .lvl-bad{background:#4A1B0C;color:#F5C4B3}
+  .lvl-ok{background:#1c3029;color:#a3d6bc}
+  .mx-elektronik-101 .lvl-warn{background:#33291a;color:#e8c58c}
+  .mx-elektronik-101 .lvl-bad{background:#37251f;color:#e8bfb1}
   .mx-elektronik-101 .lvl-crit{background:#B0281A;color:#fff}
 }
 

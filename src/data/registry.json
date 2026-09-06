@@ -9,7 +9,7 @@
    "desc": "Alles, was an der Werkbank passiert — von der Schaltung über die Lötspitze und das richtige Fett bis zum Filament auf der Rolle.",
    "accent": {
     "l": "#0e7c8c",
-    "d": "#38c6d9"
+    "d": "#4fb9c9"
    },
    "areas": [
     {
@@ -567,7 +567,7 @@
    "desc": "Das Fach, das Mechanik, Elektronik und Software zu einem Gerät zusammenzieht. Vom ohmschen Gesetz über den Operationsverstärker, den Mikrocontroller und den Regelkreis bis zur fertigen Leiterplatte — mit Robotik, Lernpfad, Glossar und geprüften Quellen.",
    "accent": {
     "l": "#1e5bb8",
-    "d": "#63a9f5"
+    "d": "#7fb3ea"
    },
    "tasks": [
     {
@@ -2261,7 +2261,7 @@
    "desc": "Handwerk am Herd: die Methoden, die Pfanne, das richtige Fett — und alles, was man über ein Stück Fleisch wissen muss, bevor es heiß wird.",
    "accent": {
     "l": "#c0442f",
-    "d": "#ef7361"
+    "d": "#e9846f"
    },
    "areas": [
     {
@@ -2412,7 +2412,7 @@
    "desc": "Die eigene Infrastruktur: Hardware wählen, sauber aufsetzen, absichern und so betreiben, dass sie ohne Aufmerksamkeit läuft.",
    "accent": {
     "l": "#6248c9",
-    "d": "#9a7ff2"
+    "d": "#ab97ea"
    },
    "areas": [
     {
@@ -2504,7 +2504,7 @@
    "desc": "Alles rund um Kamera und Aufnahme: Presets und Codecs, Belichtung nach Zahlen und die Handgriffe, die man am Set nicht raten will.",
    "accent": {
     "l": "#8c6d1f",
-    "d": "#e5b84b"
+    "d": "#d9b45f"
    },
    "areas": [
     {
@@ -2639,7 +2639,7 @@
    "desc": "Messer kompakt: Bauarten, Stahl, deutsches Messerrecht, Schärfen und Pflege. Tabellen, Grafiken und Rechner statt langer Texte.",
    "accent": {
     "l": "#4b6a86",
-    "d": "#93b6d4"
+    "d": "#9fbdd4"
    },
    "areas": [
     {
@@ -2853,7 +2853,7 @@
    "desc": "Kommunikation ohne Netz: Meshtastic als LoRa-Mesh für Textnachrichten und Positionen, die passenden Geräte vom T-Deck bis zum Solar-Knoten, EU-Frequenzen, Presets, Konfiguration und das deutsche Funkrecht. Tabellen, Grafiken und Rechner statt langer Texte.",
    "accent": {
     "l": "#2f7a4d",
-    "d": "#6fd39a"
+    "d": "#7fcba0"
    },
    "areas": [
     {
