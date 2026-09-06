@@ -52,7 +52,7 @@ import "./_style.css";
 <tr><td><b>Integrität</b></td><td>Nein: kein MAC, Manipulation wäre möglich (Issue #4030)</td><td>Ja</td></tr>
 <tr><td><b>Absender-Echtheit</b></td><td>Nein: Wer den PSK hat, kann jede Absenderkennung vortäuschen</td><td>Ja, signiert. Seit 2.7 mit Schlüsselverifizierung, ab 2.8 zusätzlich XEdDSA-Signaturen</td></tr>
 <tr><td><b>Forward Secrecy</b></td><td>Nein: Wer den Schlüssel später bekommt, liest alles Mitgeschnittene</td><td>Nein</td></tr>
-<tr><td><b>Paketkopf</b></td><td colspan="2">Immer unverschlüsselt: Absender, Empfänger, Paket-ID, Hop-Zähler, Kanal-Hash. Wer mithört, sieht wer mit wem, nicht was</td></tr>
+<tr><td><b>Paketkopf</b></td><td colspan="2" class="span" data-l="Kanal · Direktnachricht">Immer unverschlüsselt: Absender, Empfänger, Paket-ID, Hop-Zähler, Kanal-Hash. Wer mithört, sieht wer mit wem, nicht was</td></tr>
 </tbody>
 </table></div>
 <div class="warn"><b>Meshtastic ist kein Signal.</b> Die Dokumentation sagt es selbst: keine Perfect Forward Secrecy, keine Integrität auf Kanälen, keine Authentifizierung auf Kanälen. Für den Hobbyeinsatz und gegen passives Mitlesen reicht das. Für mehr: Schlüssel gelegentlich wechseln, Direktnachrichten statt Kanal nutzen, keine privaten Schlüssel auf Außenknoten.</div>

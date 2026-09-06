@@ -7,16 +7,16 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:980px">
 <thead><tr><th>Merkmal</th><th>T-Deck</th><th>T-Deck Plus</th><th>T-Deck Pro</th></tr></thead>
 <tbody>
-<tr><td><b>MCU</b></td><td colspan="3">ESP32-S3FN16R8, 16 MB Flash, 8 MB PSRAM, WLAN + Bluetooth 5 LE; ein zweiter ESP32-C3 steuert die Tastatur</td></tr>
-<tr><td><b>LoRa</b></td><td colspan="2">SX1262, 433 / 868 / 915 MHz, U.FL/IPEX-Buchse</td><td>SX1262, PCB-Antenne intern (Variante mit externer Antenne im Handel)</td></tr>
-<tr><td><b>Display</b></td><td colspan="2">2,8" IPS-LCD ST7789, 320×240, kapazitiver Touch (GT911)</td><td>3,1" E-Ink GDEQ031T10, 320×240, Touch</td></tr>
-<tr><td><b>Tastatur</b></td><td colspan="2">Beleuchtete T-Keyboard, Trackball mit Druckfunktion</td><td>Mechanische QWERTY über TCA8418</td></tr>
+<tr><td><b>MCU</b></td><td colspan="3" class="span" data-l="alle Varianten">ESP32-S3FN16R8, 16 MB Flash, 8 MB PSRAM, WLAN + Bluetooth 5 LE; ein zweiter ESP32-C3 steuert die Tastatur</td></tr>
+<tr><td><b>LoRa</b></td><td colspan="2" class="span" data-l="T-Deck · T-Deck Plus">SX1262, 433 / 868 / 915 MHz, U.FL/IPEX-Buchse</td><td>SX1262, PCB-Antenne intern (Variante mit externer Antenne im Handel)</td></tr>
+<tr><td><b>Display</b></td><td colspan="2" class="span" data-l="T-Deck · T-Deck Plus">2,8" IPS-LCD ST7789, 320×240, kapazitiver Touch (GT911)</td><td>3,1" E-Ink GDEQ031T10, 320×240, Touch</td></tr>
+<tr><td><b>Tastatur</b></td><td colspan="2" class="span" data-l="T-Deck · T-Deck Plus">Beleuchtete T-Keyboard, Trackball mit Druckfunktion</td><td>Mechanische QWERTY über TCA8418</td></tr>
 <tr><td><b>GPS</b></td><td>nein</td><td>u-blox MIA-M10Q (auch Varianten mit L76K)</td><td>MIA-M10Q</td></tr>
 <tr><td><b>Akku</b></td><td>nicht enthalten</td><td>2000 mAh, im ABS-Gehäuse</td><td>1400 mAh (LilyGo-Doku: 1500 mAh), Gehäuse</td></tr>
-<tr><td><b>Audio</b></td><td colspan="2">Mikrofon (ES7210), I²S-Lautsprecher</td><td>Mikrofon, Lautsprecher, 3,5-mm-Klinke</td></tr>
-<tr><td><b>Sonstiges</b></td><td colspan="2">microSD, USB-C, Grove (beim Plus vom GPS belegt)</td><td>4G-Variante (A7682E) oder Audio-Variante (PCM5102A), IMU, Lichtsensor, Qwiic</td></tr>
-<tr><td><b>Firmware-Ziel</b></td><td colspan="2"><code>t-deck</code> (BaseUI) · <code>t-deck-tft</code> (MUI)</td><td><code>t-deck-pro</code> (BaseUI für E-Ink; kein MUI, kein InkHUD)</td></tr>
-<tr><td><b>Maße</b></td><td colspan="2">ca. 100 × 68 × 11 mm Platine; Plus im Gehäuse ca. 115 × 72 × 20 mm</td><td>120 × 66 × 13,5 mm</td></tr>
+<tr><td><b>Audio</b></td><td colspan="2" class="span" data-l="T-Deck · T-Deck Plus">Mikrofon (ES7210), I²S-Lautsprecher</td><td>Mikrofon, Lautsprecher, 3,5-mm-Klinke</td></tr>
+<tr><td><b>Sonstiges</b></td><td colspan="2" class="span" data-l="T-Deck · T-Deck Plus">microSD, USB-C, Grove (beim Plus vom GPS belegt)</td><td>4G-Variante (A7682E) oder Audio-Variante (PCM5102A), IMU, Lichtsensor, Qwiic</td></tr>
+<tr><td><b>Firmware-Ziel</b></td><td colspan="2" class="span" data-l="T-Deck · T-Deck Plus"><code>t-deck</code> (BaseUI) · <code>t-deck-tft</code> (MUI)</td><td><code>t-deck-pro</code> (BaseUI für E-Ink; kein MUI, kein InkHUD)</td></tr>
+<tr><td><b>Maße</b></td><td colspan="2" class="span" data-l="T-Deck · T-Deck Plus">ca. 100 × 68 × 11 mm Platine; Plus im Gehäuse ca. 115 × 72 × 20 mm</td><td>120 × 66 × 13,5 mm</td></tr>
 </tbody>
 </table></div>
 <p class="note">Zahlen aus der Meshtastic-Hardware-Dokumentation und den LilyGo-Repositories. Die Übersichtstabelle bei Meshtastic nennt den Chip als „ESP32-S3FN8“, Detailseite und LilyGo geben FN16R8 mit 16 MB Flash an. Ein T-Deck mit 2,4-GHz-Funk (SX1280) gibt es nicht; die 2,4-GHz-Option ist das T3-S3.</p>

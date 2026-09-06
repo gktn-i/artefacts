@@ -116,11 +116,16 @@ window.__prepTables = function (root) {
   $$("table", root || document).forEach(function (tb) {
     var th = $$("thead th", tb).map(function (x) { return x.textContent.replace(/\s+/g, " ").trim(); });
     $$("tbody tr", tb).forEach(function (tr) {
+      /* Spaltenindex mitzaehlen: eine Zelle mit colspan verschiebt die
+         Beschriftung der folgenden Zellen um ihre Spannweite. */
+      var col = 0;
       Array.prototype.slice.call(tr.children).forEach(function (td, i) {
-        if (!td.hasAttribute("colspan") && th[i]) td.setAttribute("data-l", th[i]);
+        var span = parseInt(td.getAttribute("colspan") || "1", 10) || 1;
+        if (!td.hasAttribute("colspan") && th[col]) td.setAttribute("data-l", th[col]);
         var t = td.textContent.trim();
         if (i > 0 && t.length <= 26 && /\d/.test(t) && t.split(" ").length <= 5) td.classList.add("numcell");
         else td.classList.remove("numcell");
+        col += span;
       });
     });
   });
