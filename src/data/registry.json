@@ -3203,7 +3203,7 @@
       {
        "id": "weltempfaenger",
        "file": "weltempfaenger.html",
-       "name": "Weltempfänger & Radiowellen",
+       "name": "Weltempfänger",
        "icon": "📻",
        "kind": "Referenz",
        "updated": "2026-09-06",
@@ -3274,7 +3274,13 @@
         "atis",
         "stimme der türkei",
         "radio mi amigo",
-        "bbc radio 5 live"
+        "bbc radio 5 live",
+        "fehlersuche",
+        "rauschen",
+        "störung",
+        "kein empfang",
+        "squelch",
+        "bandbreite"
        ],
        "sections": [
         {
@@ -3389,13 +3395,218 @@
         "planet-radio": "frankfurt",
         "radio-x": "frankfurt",
         "frankfurt-tower": "frankfurt",
-        "atis": "frankfurt"
+        "atis": "frankfurt",
+        "fehlersuche": "hoeren",
+        "rauschen": "hoeren",
+        "stoerung": "hoeren",
+        "problem": "hoeren",
+        "kein-empfang": "hoeren",
+        "fading": "hoeren"
        },
        "related": [
         "meshtastic",
         "informationstechnik",
         "elektronik-101"
        ]
+      }
+     ]
+    }
+   ],
+   "tasks": [
+    {
+     "id": "loslegen",
+     "icon": "🚀",
+     "t": "Zum ersten Mal funken",
+     "d": "Zwei Geräte kaufen, flashen, einstellen, erste Nachricht senden.",
+     "k": "anfangen einstieg erste schritte starten meshtastic einrichten kaufen welches gerät app verbinden region eu_868 flashen erste nachricht",
+     "links": [
+      {
+       "m": "meshtastic",
+       "h": "schnellstart"
+      },
+      {
+       "m": "meshtastic",
+       "h": "geraete",
+       "t": "Welches Gerät kaufen"
+      },
+      {
+       "m": "meshtastic",
+       "h": "szenarien",
+       "t": "Fertige Einstellungen"
+      },
+      {
+       "m": "meshtastic",
+       "h": "firmware",
+       "t": "Flashen und Apps"
+      }
+     ]
+    },
+    {
+     "id": "hoeren",
+     "icon": "📻",
+     "t": "Heute Abend Radio hören",
+     "d": "Gerät einschalten, Band wählen, Sender finden, ohne Vorwissen.",
+     "k": "radio hören weltempfänger einschalten sender finden kurzwelle abends frankfurt ukw frequenz was läuft",
+     "links": [
+      {
+       "m": "weltempfaenger",
+       "h": "start",
+       "t": "Der erste Abend"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "frankfurt",
+       "t": "Sender in Frankfurt"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "hoeren",
+       "t": "Standort und Sendepläne"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "r108",
+       "t": "R108 bedienen"
+      }
+     ]
+    },
+    {
+     "id": "reichweite",
+     "icon": "📡",
+     "t": "Reichweite verbessern",
+     "d": "Antenne, Höhe, Standort. Fast immer bringt das mehr als andere Einstellungen.",
+     "k": "reichweite weiter antenne höher dipol langdraht empfang schlecht kilometer verbindung abriss dachknoten gewinn dbi swr",
+     "links": [
+      {
+       "m": "meshtastic",
+       "h": "antennen",
+       "t": "Antennen und Höhe"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "hoeren",
+       "t": "Antennen und Störer"
+      },
+      {
+       "m": "meshtastic",
+       "h": "presets",
+       "t": "Preset ändern"
+      },
+      {
+       "m": "meshtastic",
+       "h": "rechner",
+       "t": "Antennen-Rechner"
+      }
+     ]
+    },
+    {
+     "id": "frequenz",
+     "icon": "🔢",
+     "t": "Frequenz oder Band nachschlagen",
+     "d": "Welche Frequenz ist wofür, welches Band ist wann offen.",
+     "k": "frequenz band mhz khz nachschlagen wellenlänge meterband 49m 31m eu_868 869 mhz 433 slot umrechnen rechner",
+     "links": [
+      {
+       "m": "meshtastic",
+       "h": "regionen",
+       "t": "EU-Frequenzen und Duty Cycle"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "baender",
+       "t": "Empfangsbereiche"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "frankfurt",
+       "t": "Frankfurter Frequenzen"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "quellen",
+       "t": "Wellenlängen-Rechner"
+      }
+     ]
+    },
+    {
+     "id": "fehler",
+     "icon": "🧰",
+     "t": "Es funktioniert nicht",
+     "d": "Symptom nachschlagen, Ursache eingrenzen, Einstellung prüfen.",
+     "k": "problem fehler geht nicht kein empfang rauschen keine knoten sichtbar keine nachricht bluetooth findet nicht störung fehlersuche hilfe kaputt",
+     "links": [
+      {
+       "m": "meshtastic",
+       "h": "praxis",
+       "t": "Symptome und Ursachen"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "hoeren",
+       "t": "Rauschen und Störer"
+      },
+      {
+       "m": "meshtastic",
+       "h": "config",
+       "t": "Alle Einstellungen"
+      },
+      {
+       "m": "meshtastic",
+       "h": "firmware",
+       "t": "Firmware flashen"
+      }
+     ]
+    },
+    {
+     "id": "notfall",
+     "icon": "🔋",
+     "t": "Ohne Netz vorbereitet sein",
+     "d": "Was ohne Strom und Mobilfunk noch geht, und was es dafür braucht.",
+     "k": "blackout stromausfall notfall krise vorbereitet netz weg kein internet kein handy nachrichten empfangen solar akku laufzeit unabhängig",
+     "links": [
+      {
+       "m": "meshtastic",
+       "h": "szenarien",
+       "t": "Szenario Stromausfall"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "frankfurt",
+       "t": "Notfallsender auf UKW"
+      },
+      {
+       "m": "meshtastic",
+       "h": "strom",
+       "t": "Akku und Solar"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "hoeren",
+       "t": "Empfang ohne Strom"
+      }
+     ]
+    },
+    {
+     "id": "recht",
+     "icon": "⚖️",
+     "t": "Was ist erlaubt",
+     "d": "Senden, empfangen, verschlüsseln: die Regeln in Deutschland.",
+     "k": "recht erlaubt verboten gesetz legal bundesnetzagentur srd allgemeinzuteilung lizenz amateurfunk abhörverbot tdddg flugfunk verschlüsselung erp sendeleistung",
+     "links": [
+      {
+       "m": "meshtastic",
+       "h": "recht",
+       "t": "Senden im SRD-Band"
+      },
+      {
+       "m": "weltempfaenger",
+       "h": "recht",
+       "t": "Was man hören darf"
+      },
+      {
+       "m": "meshtastic",
+       "h": "kanaele",
+       "t": "Verschlüsselung"
       }
      ]
     }

@@ -123,7 +123,10 @@ window.__prepTables = function (root) {
         var span = parseInt(td.getAttribute("colspan") || "1", 10) || 1;
         if (!td.hasAttribute("colspan") && th[col]) td.setAttribute("data-l", th[col]);
         var t = td.textContent.trim();
-        if (i > 0 && t.length <= 26 && /\d/.test(t) && t.split(" ").length <= 5) td.classList.add("numcell");
+        /* class="txt" schaltet die Zahlenerkennung ab: fuer Fliesstext, in dem
+           zufaellig eine Zahl steckt (Typenbezeichnung, Sendername, Bahnnummer). */
+        if (i > 0 && !td.classList.contains("txt") && t.length <= 26 && /\d/.test(t) &&
+            t.split(" ").length <= 5) td.classList.add("numcell");
         else td.classList.remove("numcell");
         col += span;
       });

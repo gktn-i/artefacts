@@ -507,3 +507,24 @@
 .mx-mecha .kmeta{display:flex;flex-wrap:wrap;gap:5px 8px;margin-top:7px}
 .mx-mecha .kmeta span{font:600 10.8px/1 var(--mono);padding:4px 8px;border-radius:var(--radius-xs);
   background:var(--surface-2);color:var(--muted);border:1px solid var(--border)}
+
+/* „Mehr Details“: Vertiefungen, die zum Bedienen nicht nötig sind.
+   Standardmäßig zugeklappt, damit die praktischen Teile oben stehen. */
+.mx-mecha details.deep{border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface-2);margin:.6rem 0 1rem;overflow:hidden}
+.mx-mecha details.deep > summary{cursor:pointer;list-style:none;padding:10px 14px;
+  font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:.5em}
+.mx-mecha details.deep > summary::-webkit-details-marker{display:none}
+.mx-mecha details.deep > summary::before{content:"";flex:0 0 auto;width:0;height:0;
+  border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent;
+  transition:transform .15s}
+.mx-mecha details.deep[open] > summary::before{transform:rotate(90deg) translateX(1px)}
+.mx-mecha details.deep > summary:hover{color:var(--accent-ink)}
+.mx-mecha details.deep > summary .n{font-weight:400;color:var(--faint)}
+.mx-mecha details.deep > :not(summary){margin-left:14px;margin-right:14px}
+.mx-mecha details.deep > :last-child{margin-bottom:12px}
+
+/* Landkarte: Abschnitte, die Hintergrund sind, bekommen eine kleine Marke. */
+.mx-mecha .map a .mt .bg{margin-left:auto;font-size:10px;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--faint);border:1px solid var(--border);border-radius:20px;
+  padding:1px 7px;flex:0 0 auto}
