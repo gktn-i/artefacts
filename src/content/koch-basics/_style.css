@@ -1,0 +1,343 @@
+/* ============================================================================
+   Küchen-Basics · Visualisierungen auf den Site-Tokens (hell wie dunkel).
+   Bausteine: Kennzahl-Kacheln (kb-kpis), Temperaturskalen (kb-scale),
+   Balkendiagramme (kb-bars), Vergleichstabellen (kb-table), Bewertungs-
+   punkte (kb-dots), Zeitleiste (kb-timeline), Stammbaum (kb-tree),
+   Schnittformen-SVG (kb-cuts), Mengenbalken (kb-vol).
+   ========================================================================== */
+.mx-koch-basics {
+  --kb-wet: #2f6fc4;
+  --kb-wet-soft: color-mix(in srgb, #2f6fc4 14%, transparent);
+  --kb-ok: #2e7d55;
+  --kb-ok-soft: color-mix(in srgb, #2e7d55 14%, transparent);
+  --kb-mid: #a76a10;
+  --kb-mid-soft: color-mix(in srgb, #a76a10 16%, transparent);
+  --kb-bad: #bb3a2b;
+  --kb-bad-soft: color-mix(in srgb, #bb3a2b 13%, transparent);
+  --kb-line: #171c24;
+}
+:root[data-hbx-theme="dark"] .mx-koch-basics {
+  --kb-wet: #7fb0f0;
+  --kb-wet-soft: color-mix(in srgb, #7fb0f0 18%, transparent);
+  --kb-ok: #5fb98a;
+  --kb-ok-soft: color-mix(in srgb, #5fb98a 16%, transparent);
+  --kb-mid: #dfa85c;
+  --kb-mid-soft: color-mix(in srgb, #dfa85c 18%, transparent);
+  --kb-bad: #d9705f;
+  --kb-bad-soft: color-mix(in srgb, #d9705f 16%, transparent);
+  --kb-line: #d8dce3;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-hbx-theme="light"]) .mx-koch-basics {
+    --kb-wet: #7fb0f0;
+    --kb-wet-soft: color-mix(in srgb, #7fb0f0 18%, transparent);
+    --kb-ok: #5fb98a;
+    --kb-ok-soft: color-mix(in srgb, #5fb98a 16%, transparent);
+    --kb-mid: #dfa85c;
+    --kb-mid-soft: color-mix(in srgb, #dfa85c 18%, transparent);
+    --kb-bad: #d9705f;
+    --kb-bad-soft: color-mix(in srgb, #d9705f 16%, transparent);
+    --kb-line: #d8dce3;
+  }
+}
+
+/* ------------------------------------------------------------- Kennzahlen */
+.mx-koch-basics .kb-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 0 0 20px;
+}
+.mx-koch-basics .kb-kpi {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 13px;
+  box-shadow: var(--shadow);
+}
+.mx-koch-basics .kb-kpi .v {
+  font: 700 21px/1.15 var(--display);
+  color: var(--c);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.mx-koch-basics .kb-kpi .k { font: 600 12.5px/1.4 var(--ui); margin-top: 3px; }
+.mx-koch-basics .kb-kpi .s { font-size: 12px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+
+/* ----------------------------------------------------------------- Figur */
+.mx-koch-basics figure.kb-fig {
+  margin: 0 0 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px 12px;
+  box-shadow: var(--shadow);
+}
+.mx-koch-basics .kb-fig figcaption {
+  font-size: 12px;
+  color: var(--faint);
+  line-height: 1.5;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.mx-koch-basics .kb-fig .kb-title {
+  font: 600 11px/1 var(--ui);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 12px;
+}
+.mx-koch-basics .kb-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+.mx-koch-basics .kb-legend i {
+  display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 6px;
+}
+.mx-koch-basics .kb-legend i.wet { background: var(--kb-wet); }
+.mx-koch-basics .kb-legend i.dry { background: var(--c); }
+.mx-koch-basics .kb-legend i.ok { background: var(--kb-ok); }
+.mx-koch-basics .kb-legend i.mid { background: var(--kb-mid); }
+.mx-koch-basics .kb-legend i.bad { background: var(--kb-bad); }
+
+/* --------------------------------------------------- Skala (Bänder auf Achse) */
+.mx-koch-basics .kb-scale { position: relative; }
+.mx-koch-basics .kb-axis {
+  position: relative;
+  height: 20px;
+  border-bottom: 1px solid var(--border-strong);
+  margin-bottom: 8px;
+  font: 500 10.5px/1 var(--mono);
+  color: var(--faint);
+}
+.mx-koch-basics .kb-axis span {
+  position: absolute;
+  left: var(--p);
+  transform: translateX(-50%);
+  top: 3px;
+  white-space: nowrap;
+}
+.mx-koch-basics .kb-axis span::after {
+  content: ""; position: absolute; left: 50%; top: 13px; width: 1px; height: 4px; background: var(--border-strong);
+}
+.mx-koch-basics .kb-body { position: relative; }
+.mx-koch-basics .kb-vline {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: var(--p);
+  border-left: 1.5px dashed var(--kb-line);
+  opacity: 0.45;
+  z-index: 1;
+  pointer-events: none;
+}
+.mx-koch-basics .kb-vline b {
+  position: absolute;
+  bottom: -2px;
+  left: 5px;
+  font: 600 10.5px/1.3 var(--mono);
+  color: var(--kb-line);
+  white-space: nowrap;
+  opacity: 1;
+}
+.mx-koch-basics .kb-vline.lft b { left: auto; right: 5px; }
+.mx-koch-basics .kb-row { position: relative; height: 30px; }
+.mx-koch-basics .kb-bar {
+  position: absolute;
+  top: 5px;
+  height: 20px;
+  left: var(--l);
+  width: var(--w);
+  min-width: 4px;
+  border-radius: 4px;
+  background: var(--c);
+  opacity: 0.9;
+}
+.mx-koch-basics .kb-bar.wet { background: var(--kb-wet); }
+.mx-koch-basics .kb-bar.ok { background: var(--kb-ok); }
+.mx-koch-basics .kb-bar.mid { background: var(--kb-mid); }
+.mx-koch-basics .kb-bar.bad { background: var(--kb-bad); }
+.mx-koch-basics .kb-bar span {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  font: 500 12px/1.2 var(--ui);
+  color: var(--text);
+  white-space: nowrap;
+}
+.mx-koch-basics .kb-bar span em { font: 500 10.5px/1 var(--mono); color: var(--faint); font-style: normal; margin-left: 5px; }
+.mx-koch-basics .kb-bar.lft span { left: auto; right: calc(100% + 8px); }
+.mx-koch-basics .kb-scale.pad-b .kb-body { padding-bottom: 18px; }
+
+/* ------------------------------------------------- Balken mit Beschriftung */
+.mx-koch-basics .kb-bars { display: flex; flex-direction: column; gap: 7px; }
+.mx-koch-basics .kb-brow {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  font-size: 13px;
+}
+.mx-koch-basics .kb-brow .nm { font-weight: 600; line-height: 1.3; }
+.mx-koch-basics .kb-brow .nm small { display: block; font: 400 11px/1.3 var(--mono); color: var(--faint); }
+.mx-koch-basics .kb-track { position: relative; height: 22px; background: var(--surface-2); border-radius: 4px; }
+.mx-koch-basics .kb-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: var(--w);
+  border-radius: 4px;
+  background: var(--c);
+}
+.mx-koch-basics .kb-fill.ok { background: var(--kb-ok); }
+.mx-koch-basics .kb-fill.mid { background: var(--kb-mid); }
+.mx-koch-basics .kb-fill.bad { background: var(--kb-bad); }
+.mx-koch-basics .kb-fill.wet { background: var(--kb-wet); }
+.mx-koch-basics .kb-fill b {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  font: 600 11.5px/1 var(--mono);
+  color: var(--text);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.mx-koch-basics .kb-fill.in b { left: auto; right: 8px; color: #fff; }
+.mx-koch-basics .kb-bars .kb-vline { border-left-style: dashed; }
+.mx-koch-basics .kb-bars-wrap { position: relative; --off: 182px; }
+.mx-koch-basics .kb-bars-wrap .kb-vline { left: calc(var(--off) + (100% - var(--off)) * var(--f)); }
+.mx-koch-basics .kb-bars-wrap .kb-vline b { top: -16px; bottom: auto; }
+.mx-koch-basics .kb-bars-wrap.has-top { padding-top: 18px; }
+
+/* ------------------------------------------------------------- Tabellen */
+.mx-koch-basics .kb-tbl-wrap { overflow-x: auto; margin: 0 0 20px; }
+.mx-koch-basics table.kb-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  overflow: hidden;
+}
+.mx-koch-basics .kb-table th,
+.mx-koch-basics .kb-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: middle; }
+.mx-koch-basics .kb-table thead th {
+  font: 600 10.5px/1.4 var(--ui);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--faint);
+  background: var(--surface-2);
+  white-space: nowrap;
+}
+.mx-koch-basics .kb-table tbody tr:last-child td { border-bottom: 0; }
+.mx-koch-basics .kb-table td:first-child { font-weight: 600; white-space: nowrap; }
+.mx-koch-basics .kb-table td.c, .mx-koch-basics .kb-table th.c { text-align: center; }
+.mx-koch-basics .kb-table td.m { font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mx-koch-basics .kb-table small { color: var(--faint); font-size: 11px; display: block; font-weight: 400; }
+
+/* Bewertungspunkte 1 bis 5 */
+.mx-koch-basics .kb-dots { display: inline-flex; gap: 3px; align-items: center; }
+.mx-koch-basics .kb-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--border-strong); }
+.mx-koch-basics .kb-dots i.on { background: var(--c); }
+
+/* Ja / Jein / Nein */
+.mx-koch-basics .y, .mx-koch-basics .n, .mx-koch-basics .p {
+  display: inline-block;
+  min-width: 26px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font: 600 11.5px/1.4 var(--mono);
+  text-align: center;
+}
+.mx-koch-basics .y { color: var(--kb-ok); background: var(--kb-ok-soft); }
+.mx-koch-basics .p { color: var(--kb-mid); background: var(--kb-mid-soft); }
+.mx-koch-basics .n { color: var(--kb-bad); background: var(--kb-bad-soft); }
+
+/* ------------------------------------------------------------ Zeitleiste */
+.mx-koch-basics .kb-timeline { position: relative; padding-bottom: 22px; }
+.mx-koch-basics .kb-tl-track { display: flex; height: 26px; border-radius: 5px; overflow: hidden; }
+.mx-koch-basics .kb-tl-seg {
+  flex: 0 0 var(--w);
+  display: flex; align-items: center; justify-content: center;
+  font: 600 11px/1 var(--ui);
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.mx-koch-basics .kb-tl-seg.ok { background: var(--kb-ok); }
+.mx-koch-basics .kb-tl-seg.bad { background: var(--kb-bad); }
+.mx-koch-basics .kb-tl-seg.mid { background: var(--kb-mid); }
+.mx-koch-basics .kb-tl-ticks { position: relative; height: 18px; font: 500 10.5px/1 var(--mono); color: var(--faint); }
+.mx-koch-basics .kb-tl-ticks span { position: absolute; left: var(--p); transform: translateX(-50%); top: 6px; white-space: nowrap; }
+.mx-koch-basics .kb-tl-ticks span:first-child { transform: none; }
+.mx-koch-basics .kb-tl-ticks span:last-child { transform: translateX(-100%); }
+
+/* ------------------------------------------------------------- Stammbaum */
+.mx-koch-basics .kb-tree {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 0 0 20px;
+}
+.mx-koch-basics .kb-branch { display: flex; flex-direction: column; align-items: stretch; }
+.mx-koch-basics .kb-root {
+  background: color-mix(in srgb, var(--c) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  text-align: center;
+}
+.mx-koch-basics .kb-root b { display: block; font: 600 14px/1.3 var(--display); color: var(--c); }
+.mx-koch-basics .kb-root span { font-size: 12px; color: var(--muted); }
+.mx-koch-basics .kb-branch::after { content: none; }
+.mx-koch-basics .kb-kids { position: relative; padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.mx-koch-basics .kb-kids::before {
+  content: ""; position: absolute; left: 50%; top: 0; width: 1.5px; height: 12px; background: var(--border-strong);
+}
+.mx-koch-basics .kb-kid {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 11px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.mx-koch-basics .kb-kid b { font-weight: 600; }
+.mx-koch-basics .kb-kid .plus { font: 500 11px/1.3 var(--mono); color: var(--c); display: block; }
+.mx-koch-basics .kb-kid .sub { color: var(--faint); font-size: 11.5px; display: block; margin-top: 3px; }
+
+/* ------------------------------------------------------- Schnittformen SVG */
+.mx-koch-basics svg.kb-cuts { width: 100%; height: auto; display: block; }
+.mx-koch-basics svg.kb-cuts .sh { fill: color-mix(in srgb, var(--c) 22%, transparent); stroke: var(--c); stroke-width: 1.2; }
+.mx-koch-basics svg.kb-cuts .lb { font: 600 12px var(--ui); fill: var(--text); }
+.mx-koch-basics svg.kb-cuts .mm { font: 500 10.5px var(--mono); fill: var(--faint); }
+.mx-koch-basics svg.kb-cuts .rl { stroke: var(--border-strong); stroke-width: 1; }
+
+/* -------------------------------------------------------- Mengenbalken */
+.mx-koch-basics .kb-vol { display: flex; flex-direction: column; gap: 8px; }
+.mx-koch-basics .kb-vrow { display: grid; grid-template-columns: minmax(100px, 150px) minmax(0, 1fr); gap: 12px; align-items: center; font-size: 13px; }
+.mx-koch-basics .kb-vrow .nm { font-weight: 600; }
+.mx-koch-basics .kb-vrow .nm small { display: block; font: 400 11px/1.3 var(--mono); color: var(--faint); }
+
+/* Rauchpunkt-Pille in den Öl-Karten */
+.mx-koch-basics .smoke {
+  display: inline-block;
+  font: 600 11px/1 var(--mono);
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+  border-radius: 100px;
+  padding: 5px 9px;
+}
+
+@media (max-width: 760px) {
+  .mx-koch-basics .kb-brow { grid-template-columns: 120px minmax(0, 1fr); }
+  .mx-koch-basics .kb-bars-wrap { --off: 132px; }
+  /* Skalen: Beschriftung über den Balken, Linien-Labels in die Bildunterschrift */
+  .mx-koch-basics .kb-row { height: 42px; }
+  .mx-koch-basics .kb-bar { top: 18px; height: 16px; }
+  .mx-koch-basics .kb-bar span,
+  .mx-koch-basics .kb-bar.lft span { left: 0; right: auto; top: -14px; transform: none; font-size: 11px; }
+  .mx-koch-basics .kb-bar.lft span { left: auto; right: 0; }
+  .mx-koch-basics .kb-vline b { display: none; }
+  .mx-koch-basics .kb-scale.pad-b .kb-body { padding-bottom: 0; }
+  .mx-koch-basics .kb-bars-wrap .kb-vline b { display: block; font-size: 9.5px; }
+}
