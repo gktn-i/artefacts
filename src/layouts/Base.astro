@@ -17,7 +17,7 @@ interface Props {
 }
 const { title, description, hub, mod } = Astro.props;
 
-const accent = hub ? hub.accent : { l: "#0e7c8c", d: "#38c6d9" };
+const accent = hub ? hub.accent : { l: "#0e7c8c", d: "#4fb9c9" };
 const accCss =
   `html[data-acc]{--c:${accent.l}}` +
   `html[data-acc][data-hbx-theme="dark"]{--c:${accent.d}}` +
