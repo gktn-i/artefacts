@@ -13,6 +13,38 @@ import "./_style.css";
   <div class="card"><div class="ct">Community fragen</div><div class="cd">Regionale Gruppen wissen, welches Preset läuft, wo Dachknoten fehlen und wer gerade ROUTER ausprobiert. Links unter <a href="#community">Community</a>.</div></div>
 </div>
 
+<h2>Was die Zahlen in der App bedeuten</h2>
+<p>Alle Werte stehen in der App beim Knoten oder bei der Nachricht. Diese Tabelle sagt, ab wann es gut, normal oder schlecht ist.</p>
+<div class="tbl-wrap"><table style="min-width:1040px">
+<thead><tr><th>Wert</th><th>Was er sagt</th><th>Gut</th><th>Grenzwertig</th><th>Handeln</th></tr></thead>
+<tbody>
+<tr><td><b>SNR</b> (Klarheit)</td><td>Wie klar das Signal aus dem Rauschen kommt. Negativ ist bei LoRa normal</td><td>über 0 dB</td><td>0 bis −10 dB</td><td>Unter −15 dB bei LongFast reißt es ab: Antenne höher, Knoten dazwischen</td></tr>
+<tr><td><b>RSSI</b> (Lautstärke)</td><td>Wie stark das Signal an der Antenne ankommt</td><td>über −90 dBm</td><td>−90 bis −115 dBm</td><td>Guter RSSI mit schlechtem SNR heißt Störquelle in der Nähe: Netzteil, Rechner, LED-Lampe</td></tr>
+<tr><td><b>Signalbalken</b></td><td>Die App rechnet SNR gegen die Grenze des Presets, nicht gegen eine feste Zahl</td><td>3 Balken</td><td>2 Balken</td><td>0 Balken heißt: unter der Grenze, das Paket ging verloren</td></tr>
+<tr><td><b>Hops away</b></td><td>Über wie viele Knoten das Paket kam. 0 heißt direkt gehört</td><td>0 bis 1</td><td>2</td><td>3 ist das Maximum bei Standardeinstellung. Wer immer bei 3 liegt, braucht einen Knoten dazwischen</td></tr>
+<tr><td><b>Channel Utilization</b></td><td>Wie voll der Funkkanal insgesamt ist, gemessen über eine Minute</td><td>unter 25 %</td><td>25 bis 40 %</td><td>Über 40 % sendet der Knoten gar nicht mehr. Ursache: zu viele Knoten oder zu viel Telemetrie</td></tr>
+<tr><td><b>Air Util TX</b></td><td>Wie viel der eigene Knoten in der letzten Stunde gesendet hat</td><td>unter 5 %</td><td>5 bis 10 %</td><td>Ab 10 % greift das Duty-Cycle-Limit und der Knoten schweigt. Intervalle verlängern</td></tr>
+<tr><td><b>Zuletzt gehört</b></td><td>Wann der Knoten das letzte Mal etwas gesendet hat</td><td>Minuten</td><td>bis 2 Stunden</td><td>Nach 2 Stunden gilt er in der App als offline</td></tr>
+<tr><td><b>Akku beim fremden Knoten</b></td><td>Nur sichtbar, wenn dort Telemetrie eingeschaltet ist</td><td>über 40 %</td><td>20 bis 40 %</td><td>Fehlt der Wert, ist Telemetrie aus. Seit Firmware 2.7 ist das die Voreinstellung</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was die Symbole an der Nachricht bedeuten</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Anzeige</th><th>Heißt</th><th>Zu tun</th></tr></thead>
+<tbody>
+<tr><td><b>Sending, Wolke mit Pfeil</b></td><td>Liegt noch beim Handy oder beim Knoten in der Warteschlange</td><td>Warten. Bleibt es hängen: Bluetooth-Verbindung prüfen</td></tr>
+<tr><td><b>Delivered to mesh, Wolke mit Haken</b></td><td>Mindestens ein anderer Knoten hat die Nachricht wiederholt. Bei Kanalnachrichten ist das die beste Bestätigung, die es gibt</td><td>Nichts. Ob der Mensch am anderen Ende sie gelesen hat, sagt das nicht</td></tr>
+<tr><td><b>Delivered to recipient, Person mit Haken</b></td><td>Nur bei Direktnachrichten: Der Empfänger selbst hat bestätigt</td><td>Nichts, das ist die stärkste Bestätigung</td></tr>
+<tr><td><b>Relayed, not confirmed</b> (gelb)</td><td>Jemand hat weitergeleitet, der Empfänger hat nicht bestätigt</td><td>Empfänger ist aus, außer Reichweite oder hat alte Firmware. Später erneut</td></tr>
+<tr><td><b>Max Retransmission Reached</b> (rot)</td><td>Dreimal gesendet, niemand hat wiederholt</td><td>Antenne, Reichweite, Preset und Region prüfen. Traceroute versuchen</td></tr>
+<tr><td><b>No Route</b></td><td>Kein Weg zum Ziel bekannt</td><td>Empfänger offline oder zu weit. Näher rangehen oder später</td></tr>
+<tr><td><b>Duty cycle limit</b></td><td>Das Stundenbudget ist aufgebraucht</td><td>Warten, Intervalle verlängern, Range-Test ausschalten</td></tr>
+<tr><td><b>Channel/key mismatch</b></td><td>Kanalname oder Schlüssel stimmen nicht überein</td><td>QR-Code des Kanals neu einlesen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Bezeichnungen unterscheiden sich leicht zwischen Android und iPhone. Android zeigt Symbole und Text, die Apple-App vor allem Text. Gemeint ist beides Mal dasselbe.</p>
+
 <h2>Symptome und Ursachen</h2>
 <div class="tbl-wrap"><table style="min-width:1040px">
 <thead><tr><th>Symptom</th><th>Wahrscheinliche Ursache</th><th>Prüfen und beheben</th></tr></thead>

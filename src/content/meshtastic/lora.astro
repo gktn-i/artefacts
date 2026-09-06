@@ -47,6 +47,7 @@ import "./_style.css";
 
 <h2>Symboldauer und Datenrate</h2>
 <p>Symboldauer T<sub>s</sub> = 2<sup>SF</sup> / BW. Alles andere folgt daraus: Präambel, Nutzlastdauer, Duty Cycle. Werte für die drei Meshtastic-Bandbreiten:</p>
+<details class="deep"><summary>Symboldauer für jeden Spreading Factor <span class="n">Tabelle, nur zum Nachrechnen</span></summary>
 <div class="tbl-wrap"><table style="min-width:760px">
 <thead><tr><th data-s="num">SF</th><th data-s="num">Chips je Symbol</th><th data-s="num">T<sub>s</sub> bei 125 kHz</th><th data-s="num">T<sub>s</sub> bei 250 kHz</th><th data-s="num">T<sub>s</sub> bei 500 kHz</th><th>Meshtastic-Preset</th></tr></thead>
 <tbody>
@@ -59,6 +60,7 @@ import "./_style.css";
 </tbody>
 </table></div>
 <p class="note">Ab etwa 16 ms Symboldauer schaltet der Chip die „Low Data Rate Optimization“ ein und opfert zwei Bit je Symbol, damit der Takt nicht wegdriftet. Das betrifft SF11 und SF12 bei 125 kHz und SF12 bei 250 kHz. Die exakte Airtime eines Pakets liefert der <a href="#rechner">Airtime-Rechner</a>.</p>
+</details>
 
 <h2>Dezibel ohne Schrecken</h2>
 <div class="gb">
@@ -89,8 +91,10 @@ import "./_style.css";
 </div>
 
 <h2>Link-Budget und Freiraumdämpfung</h2>
+<details class="deep"><summary>Die Formeln dahinter <span class="n">Link-Budget und Freiraumdämpfung</span></summary>
 <div class="fbox"><span class="f">Budget [dB] = P<sub>TX</sub> + G<sub>TX</sub> + G<sub>RX</sub> − Verluste − Empfindlichkeit</span><span class="l">Beispiel LongFast: 22 dBm + 0 + 0 − 0 − (−131 dBm) = 153 dB, so rechnet auch die Meshtastic-Dokumentation</span></div>
 <div class="fbox"><span class="f">FSPL [dB] = 20 · log<sub>10</sub>(d [km]) + 20 · log<sub>10</sub>(f [MHz]) + 32,44</span><span class="l">Freiraumdämpfung bei 869,5 MHz: 1 km ≈ 91 dB · 10 km ≈ 111 dB · 100 km ≈ 131 dB</span></div>
+</details>
 <p>153 dB Budget minus 131 dB für 100 km lässt im Freiraum sogar Reserve. Der Haken: Freiraum gibt es nur zwischen Bergen und zu Ballons. Häuser, Bäume, die Erdkrümmung und der eigene Körper kosten schnell 20 bis 40 dB, und damit einen Faktor 10 bis 100 in der Entfernung. Deshalb zählt die Antenne <em>oben</em> mehr als jedes Watt, siehe <a href="#antennen">Antennen &amp; Reichweite</a>.</p>
 
 <h2>Was LoRa nicht ist</h2>

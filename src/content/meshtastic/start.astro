@@ -93,9 +93,11 @@ import "./_style.css";
 
 <h2>Wo was steht</h2>
 <div class="map">
-  <a href="#lora"><div class="mt"><span class="i">📶</span>LoRa-Grundlagen</div><div class="md">Chirps, SF, Bandbreite, dBm, Link-Budget</div></a>
-  <a href="#mesh"><div class="mt"><span class="i">🕸️</span>Mesh &amp; Rollen</div><div class="md">Fluten, Hops, ACK, CLIENT bis ROUTER</div></a>
-  <a href="#regionen"><div class="mt"><span class="i">🌍</span>Regionen &amp; Frequenzen</div><div class="md">EU_868, EU_433, Slots, Duty Cycle, weltweit</div></a>
+  <a href="#schnellstart"><div class="mt"><span class="i">🚀</span>Schnellstart</div><div class="md">Vom Auspacken bis zur ersten Nachricht in zehn Schritten</div></a>
+  <a href="#szenarien"><div class="mt"><span class="i">🎒</span>Szenarien</div><div class="md">Wandern, Familie, Festival, Nachbarschaft, Stromausfall</div></a>
+  <a href="#lora"><div class="mt"><span class="i">📶</span>LoRa-Grundlagen<span class="bg">Hintergrund</span></div><div class="md">Chirps, SF, Bandbreite, dBm, Link-Budget</div></a>
+  <a href="#mesh"><div class="mt"><span class="i">🕸️</span>Mesh &amp; Rollen<span class="bg">Hintergrund</span></div><div class="md">Fluten, Hops, ACK, CLIENT bis ROUTER</div></a>
+  <a href="#regionen"><div class="mt"><span class="i">🌍</span>Regionen &amp; Frequenzen<span class="bg">Hintergrund</span></div><div class="md">EU_868, EU_433, Slots, Duty Cycle, weltweit</div></a>
   <a href="#presets"><div class="mt"><span class="i">🎚️</span>Modem-Presets</div><div class="md">ShortTurbo bis LongSlow im Vergleich</div></a>
   <a href="#kanaele"><div class="mt"><span class="i">🔐</span>Kanäle &amp; Verschlüsselung</div><div class="md">PSK, AQ==, QR-Code, PKI, Positionsgenauigkeit</div></a>
   <a href="#config"><div class="mt"><span class="i">⚙️</span>Konfiguration</div><div class="md">Alle wichtigen Einstellungen mit Defaults</div></a>
@@ -111,8 +113,10 @@ import "./_style.css";
   <a href="#rechner"><div class="mt"><span class="i">🧮</span>Rechner</div><div class="md">Airtime, Antennenlänge, Link-Budget, Akku</div></a>
   <a href="#glossar"><div class="mt"><span class="i">📖</span>Glossar</div><div class="md">Begriffe von ACK bis UF2</div></a>
 </div>
+<p class="note">Als <b>Hintergrund</b> markierte Abschnitte erklären, warum das Netz funktioniert. Zum Aufbauen und Bedienen braucht man sie nicht. Dort sind die tiefen Tabellen zugeklappt.</p>
 
 <h2>Der Weg zum ersten Netz</h2>
+<p>Kurzfassung. Jeden Schritt mit den Menünamen der App und mit Fehlersuche gibt es im <a href="#schnellstart">Schnellstart</a>.</p>
 <div class="steps">
   <div class="step"><h4>Zwei Knoten kaufen</h4>Ein Mesh braucht mindestens zwei. Für den Einstieg reichen zwei günstige Boards mit SX1262 in der 868-MHz-Ausführung, siehe <a href="#geraete">Geräte</a>. Antenne muss dran sein, bevor eingeschaltet wird.</div>
   <div class="step"><h4>Firmware flashen</h4>ESP32-Boards über den <a href="#firmware">Web-Flasher</a> im Chrome-Browser, nRF52-Boards per Drag-and-drop einer UF2-Datei. Dauert fünf Minuten.</div>
