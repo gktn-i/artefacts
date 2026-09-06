@@ -40,16 +40,34 @@ const accCss =
     />
     <style is:inline set:html={accCss}></style>
     <script is:inline>
-      /* Theme vor dem ersten Paint setzen (folgt dem System) + no-js lösen. */
+      /* Theme vor dem ersten Paint setzen + no-js lösen.
+         Reihenfolge: gespeicherte Wahl (hbx-theme: light | dark) → System.
+         window.__theme() liest/setzt den Modus (light | dark | system);
+         der Schalter in der Topbar hängt daran. */
       (function () {
         var d = document.documentElement;
         d.classList.remove("no-js");
+        var KEY = "hbx-theme";
         var q = matchMedia("(prefers-color-scheme: dark)");
-        function a() {
-          d.setAttribute("data-hbx-theme", q.matches ? "dark" : "light");
+        function stored() {
+          try { var v = localStorage.getItem(KEY); return v === "light" || v === "dark" ? v : null; } catch (e) { return null; }
         }
-        a();
-        if (q.addEventListener) q.addEventListener("change", a);
+        function apply() {
+          var s = stored();
+          d.setAttribute("data-hbx-theme", s || (q.matches ? "dark" : "light"));
+          d.setAttribute("data-hbx-mode", s || "system");
+        }
+        window.__theme = function (mode) {
+          if (mode === undefined) return d.getAttribute("data-hbx-mode") || "system";
+          try {
+            if (mode === "light" || mode === "dark") localStorage.setItem(KEY, mode);
+            else localStorage.removeItem(KEY);
+          } catch (e) {}
+          apply();
+          return mode;
+        };
+        apply();
+        if (q.addEventListener) q.addEventListener("change", apply);
       })();
     </script>
     <script is:inline defer src="/assets/registry.js"></script>
@@ -73,7 +91,55 @@ const accCss =
       </div>
     </div>
 
+    <button class="totop" id="totop" type="button" title="Nach oben" aria-label="Nach oben">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5M5 12l7-7 7 7"></path>
+      </svg>
+    </button>
+
     <script>
+      /* Theme-Schalter: System → Hell → Dunkel → System. */
+      const tbTheme = document.getElementById("tbTheme");
+      const themeTitles: Record<string, string> = {
+        system: "Farbschema: System (klicken für Hell)",
+        light: "Farbschema: Hell (klicken für Dunkel)",
+        dark: "Farbschema: Dunkel (klicken für System)",
+      };
+      const paintTheme = () => {
+        const m = (window as any).__theme();
+        if (!tbTheme) return;
+        tbTheme.setAttribute("data-mode", m);
+        tbTheme.setAttribute("title", themeTitles[m]);
+        tbTheme.setAttribute("aria-label", themeTitles[m]);
+      };
+      paintTheme();
+      tbTheme?.addEventListener("click", () => {
+        const m = (window as any).__theme();
+        (window as any).__theme(m === "system" ? "light" : m === "light" ? "dark" : "system");
+        paintTheme();
+      });
+
+      /* Lesefortschritt in der Topbar + Nach-oben-Knopf (nur auf langen Seiten). */
+      const bar = document.querySelector<HTMLElement>(".readbar i");
+      const totop = document.getElementById("totop")!;
+      let ticking = false;
+      const paintScroll = () => {
+        ticking = false;
+        const de = document.documentElement;
+        const max = de.scrollHeight - de.clientHeight;
+        const long = max > de.clientHeight * 0.6;
+        de.classList.toggle("longpage", long);
+        if (bar) bar.style.width = long && max > 0 ? Math.min(100, (window.scrollY / max) * 100) + "%" : "0";
+        totop.classList.toggle("show", long && window.scrollY > 700);
+      };
+      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(paintScroll); } };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      window.addEventListener("hashchange", () => setTimeout(paintScroll, 350));
+      new MutationObserver(onScroll).observe(document.getElementById("content")!, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+      paintScroll();
+      totop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
       /* Schubladen-Verhalten der Rail auf schmalen Viewports. */
       const rail = document.getElementById("rail")!;
       const scrim = document.getElementById("scrim")!;

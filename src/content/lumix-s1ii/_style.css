@@ -18,25 +18,40 @@
   --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   --mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace;
 }
-@media(prefers-color-scheme:dark){
-  .mx-lumix-s1ii{
-    --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2b2923;
+/* Dunkel: folgt data-hbx-theme (manueller Schalter), ohne JS dem System. */
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii{--bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2b2923;
     --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
     --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
     --accent:#d5b25a; --accent-ink:#e3cb8f; --accent-soft:#2e2a1f; --accent-border:#7a6a2e;
     --ok-bg:#1d2a26; --ok-border:#3f9a76; --ok-ink:#a3d6bc;
     --info-bg:#1e2733; --info-border:#3d75b3; --info-ink:#b3cbe6;
     --danger-bg:#2e2222; --danger-border:#c9605d; --danger-ink:#e8b4b0;
-    --shadow-sm:0 1px 2px rgba(0,0,0,.3);
-  }
-  .mx-lumix-s1ii .b-og{background:#1c3029;color:#a3d6bc}
-  .mx-lumix-s1ii .b-alli{background:#1e2e42;color:#b3cbe6}
-  .mx-lumix-s1ii .b-raw{background:#282744;color:#c9c6e8}
-  .mx-lumix-s1ii .b-fav{background:#33291a;color:#e8c58c}
-  .mx-lumix-s1ii .b-crop{background:#38221f;color:#e8b4b0}
-  .mx-lumix-s1ii .b-warn{background:#38221f;color:#e8b4b0}
-  .mx-lumix-s1ii .b-ok{background:#1c3029;color:#a3d6bc}
-  .mx-lumix-s1ii .b-43{background:#2e2a1f;color:#e3cb8f}
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);}
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii .b-og{background:#1c3029;color:#a3d6bc}
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii .b-alli{background:#1e2e42;color:#b3cbe6}
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii .b-raw{background:#282744;color:#c9c6e8}
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii .b-fav{background:#33291a;color:#e8c58c}
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii .b-crop{background:#38221f;color:#e8b4b0}
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii .b-warn{background:#38221f;color:#e8b4b0}
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii .b-ok{background:#1c3029;color:#a3d6bc}
+:root[data-hbx-theme="dark"] .mx-lumix-s1ii .b-43{background:#2e2a1f;color:#e3cb8f}
+@media (prefers-color-scheme: dark) {
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii{--bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2b2923;
+    --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
+    --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
+    --accent:#d5b25a; --accent-ink:#e3cb8f; --accent-soft:#2e2a1f; --accent-border:#7a6a2e;
+    --ok-bg:#1d2a26; --ok-border:#3f9a76; --ok-ink:#a3d6bc;
+    --info-bg:#1e2733; --info-border:#3d75b3; --info-ink:#b3cbe6;
+    --danger-bg:#2e2222; --danger-border:#c9605d; --danger-ink:#e8b4b0;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);}
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii .b-og{background:#1c3029;color:#a3d6bc}
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii .b-alli{background:#1e2e42;color:#b3cbe6}
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii .b-raw{background:#282744;color:#c9c6e8}
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii .b-fav{background:#33291a;color:#e8c58c}
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii .b-crop{background:#38221f;color:#e8b4b0}
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii .b-warn{background:#38221f;color:#e8b4b0}
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii .b-ok{background:#1c3029;color:#a3d6bc}
+:root:not([data-hbx-theme="light"]) .mx-lumix-s1ii .b-43{background:#2e2a1f;color:#e3cb8f}
 }
 
 /* ============================================================
@@ -120,7 +135,7 @@
 .mx-lumix-s1ii .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
   background:var(--surface);box-shadow:var(--shadow-sm);margin:.5rem 0}
 .mx-lumix-s1ii table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
-.mx-lumix-s1ii th{text-align:left;padding:10px 12px;font-family:var(--mono);font-weight:500;font-size:10.5px;
+.mx-lumix-s1ii th{text-align:left;padding:10px 12px;font-family:var(--mono);font-weight:500;font-size:11.5px;
   text-transform:uppercase;letter-spacing:.05em;color:var(--faint);background:var(--surface-2);
   border-bottom:1px solid var(--border);white-space:nowrap}
 .mx-lumix-s1ii td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}

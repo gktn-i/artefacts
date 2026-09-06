@@ -29,6 +29,7 @@
     '<div class="hint"><span>↑↓ wählen</span><span>⏎ öffnen</span><span>esc schließen</span></div>' +
     "</div>";
   const palIn = pal.querySelector("input");
+  if (window.innerWidth < 560) palIn.placeholder = "Suchen …";
   const palOut = pal.querySelector(".out");
 
   const A = () => window.ARTEFAKTE || null;

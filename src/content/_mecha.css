@@ -32,9 +32,8 @@
   --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
   --display:'Archivo','Helvetica Neue',sans-serif;
 }
-@media(prefers-color-scheme:dark){
-  .mx-mecha{
-    --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2a3039;
+/* Dunkel: folgt data-hbx-theme (manueller Schalter), ohne JS dem System. */
+:root[data-hbx-theme="dark"] .mx-mecha{--bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2a3039;
     --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
     --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
 
@@ -49,8 +48,24 @@
     --rate-bad:#d9705f; --rate-mid:#dfa85c; --rate-good:#5fb98a;
 
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
-    --shadow-md:0 6px 18px -10px rgba(0,0,0,.6);
-  }
+    --shadow-md:0 6px 18px -10px rgba(0,0,0,.6);}
+@media (prefers-color-scheme: dark) {
+:root:not([data-hbx-theme="light"]) .mx-mecha{--bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2a3039;
+    --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
+    --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
+
+    --accent-ink: color-mix(in srgb, var(--c,#63a9f5) 72%, #d8dce3);
+    --accent-soft: color-mix(in srgb, var(--c,#63a9f5) 14%, #1e2229);
+    --accent-border: color-mix(in srgb, var(--c,#63a9f5) 38%, #1e2229);
+
+    --ok:#5fb98a; --ok-ink:#a3d6bc; --ok-bg:#1d2a26; --ok-border:#34634b;
+    --mid:#dfa85c; --mid-ink:#e8cb99; --mid-bg:#2d2720; --mid-border:#6e5228;
+    --bad:#d9705f; --bad-ink:#e8aa9f; --bad-bg:#2e2222; --bad-border:#6f3a33;
+
+    --rate-bad:#d9705f; --rate-mid:#dfa85c; --rate-good:#5fb98a;
+
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+    --shadow-md:0 6px 18px -10px rgba(0,0,0,.6);}
 }
 
 /* ============================================================ BASIS & TYPO */
@@ -146,7 +161,7 @@
 .mx-mecha .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
   background:var(--surface);box-shadow:var(--shadow-sm);margin:.6rem 0 .5rem}
 .mx-mecha table{width:100%;border-collapse:collapse;font-size:13.2px;min-width:640px}
-.mx-mecha th{text-align:left;padding:11px 13px;font-weight:600;font-size:10.5px;text-transform:uppercase;
+.mx-mecha th{text-align:left;padding:11px 13px;font-weight:600;font-size:11.5px;text-transform:uppercase;
   letter-spacing:.045em;color:var(--faint);background:var(--surface-2);
   border-bottom:1px solid var(--border);user-select:none;white-space:nowrap;vertical-align:bottom}
 .mx-mecha th[data-s]{cursor:pointer}
@@ -377,17 +392,28 @@
 .mx-mecha .c-mech .cb{background:#F1EFE8;color:#444441}
 .mx-mecha .c-schutz .cb{background:#FAECE7;color:#712B13}
 .mx-mecha .c-verbind .cb{background:#EEF2E3;color:#3F5211}
-@media(prefers-color-scheme:dark){
-  .mx-mecha .c-passiv .cb{background:#1e2e42;color:#b3cbe6}
-  .mx-mecha .c-halbleiter .cb{background:#282744;color:#c9c6e8}
-  .mx-mecha .c-analog .cb{background:#1c3038;color:#a6d0e0}
-  .mx-mecha .c-digital .cb{background:#2f2740;color:#d3c3ea}
-  .mx-mecha .c-power .cb{background:#33291a;color:#e8c58c}
-  .mx-mecha .c-sensor .cb{background:#1c3029;color:#a3d6bc}
-  .mx-mecha .c-aktor .cb{background:#33291d;color:#e6cba8}
-  .mx-mecha .c-mech .cb{background:#2b2c2e;color:#cfd0c9}
-  .mx-mecha .c-schutz .cb{background:#37251f;color:#e8bfb1}
-  .mx-mecha .c-verbind .cb{background:#282e1c;color:#c8dba0}
+/* Dunkel: folgt data-hbx-theme (manueller Schalter), ohne JS dem System. */
+:root[data-hbx-theme="dark"] .mx-mecha .c-passiv .cb{background:#1e2e42;color:#b3cbe6}
+:root[data-hbx-theme="dark"] .mx-mecha .c-halbleiter .cb{background:#282744;color:#c9c6e8}
+:root[data-hbx-theme="dark"] .mx-mecha .c-analog .cb{background:#1c3038;color:#a6d0e0}
+:root[data-hbx-theme="dark"] .mx-mecha .c-digital .cb{background:#2f2740;color:#d3c3ea}
+:root[data-hbx-theme="dark"] .mx-mecha .c-power .cb{background:#33291a;color:#e8c58c}
+:root[data-hbx-theme="dark"] .mx-mecha .c-sensor .cb{background:#1c3029;color:#a3d6bc}
+:root[data-hbx-theme="dark"] .mx-mecha .c-aktor .cb{background:#33291d;color:#e6cba8}
+:root[data-hbx-theme="dark"] .mx-mecha .c-mech .cb{background:#2b2c2e;color:#cfd0c9}
+:root[data-hbx-theme="dark"] .mx-mecha .c-schutz .cb{background:#37251f;color:#e8bfb1}
+:root[data-hbx-theme="dark"] .mx-mecha .c-verbind .cb{background:#282e1c;color:#c8dba0}
+@media (prefers-color-scheme: dark) {
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-passiv .cb{background:#1e2e42;color:#b3cbe6}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-halbleiter .cb{background:#282744;color:#c9c6e8}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-analog .cb{background:#1c3038;color:#a6d0e0}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-digital .cb{background:#2f2740;color:#d3c3ea}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-power .cb{background:#33291a;color:#e8c58c}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-sensor .cb{background:#1c3029;color:#a3d6bc}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-aktor .cb{background:#33291d;color:#e6cba8}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-mech .cb{background:#2b2c2e;color:#cfd0c9}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-schutz .cb{background:#37251f;color:#e8bfb1}
+:root:not([data-hbx-theme="light"]) .mx-mecha .c-verbind .cb{background:#282e1c;color:#c8dba0}
 }
 
 /* ================================================================== GLOSSAR */

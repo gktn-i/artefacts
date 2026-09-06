@@ -219,6 +219,12 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           <p class="desc">{mod.desc}</p>
         </header>
 
+        <nav class="secbar" id="secBar" aria-label="Abschnitte (mobil)" data-pagefind-ignore>
+          {mod.sections.map((s, i) => (
+            <a href={`#${s.h}`} data-h={s.h} class={i === 0 ? "on" : undefined}><span class="no">{pad(i)}</span>{s.t}</a>
+          ))}
+        </nav>
+
         <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}${hub.id === "mechatronik" || MECHA_MODULES.has(mod.id) ? " mx-mecha" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
           {mod.sections.map((s, i) => {
             const C = secComp(mod.id, s.h);
@@ -290,7 +296,9 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           try { ALIAS = (JSON.parse(cfgEl.textContent) || {}).alias || {}; } catch (e) {}
 
           var secs = Array.prototype.slice.call(document.querySelectorAll(".msec"));
-          var links = Array.prototype.slice.call(nav.querySelectorAll("a[data-h]"));
+          var bar = document.getElementById("secBar");
+          var links = Array.prototype.slice.call(nav.querySelectorAll("a[data-h]"))
+            .concat(bar ? Array.prototype.slice.call(bar.querySelectorAll("a[data-h]")) : []);
           var KEYS = secs.map(function (s) { return s.id; });
           var crumb = document.getElementById("crumbSec");
 
@@ -332,7 +340,7 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           function buildSub(h) {
             nav.querySelectorAll(".sub").forEach(function (b) { b.remove(); });
             if (spy) { spy.disconnect(); spy = null; }
-            var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
+            var lk = links.filter(function (a) { return a.dataset.h === h && nav.contains(a); })[0];
             var sec = document.getElementById(h);
             if (!lk || !sec) return;
             var hs = headings(sec);
@@ -364,6 +372,23 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }
 
+          /* Aktiven Eintrag in der Rail-Liste und in der mobilen Leiste in
+             Sicht holen — ohne die Seite selbst zu scrollen. */
+          function reveal(h) {
+            var tree = nav.closest(".tree");
+            var lk = links.filter(function (a) { return a.dataset.h === h && nav.contains(a); })[0];
+            if (tree && lk) {
+              var top = lk.offsetTop - tree.offsetTop;
+              if (top < tree.scrollTop + 60 || top > tree.scrollTop + tree.clientHeight - 80) {
+                tree.scrollTop = Math.max(0, top - tree.clientHeight * 0.4);
+              }
+            }
+            if (bar) {
+              var ch = links.filter(function (a) { return a.dataset.h === h && bar.contains(a); })[0];
+              if (ch) bar.scrollLeft = Math.max(0, ch.offsetLeft - bar.clientWidth / 2 + ch.offsetWidth / 2);
+            }
+          }
+
           function show(h, opts) {
             opts = opts || {};
             secs.forEach(function (s) { s.classList.toggle("on", s.id === h); });
@@ -371,7 +396,8 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
             if (opts.push !== false && decodeURIComponent(location.hash.slice(1)) !== h) {
               history.replaceState(null, "", "#" + h);
             }
-            var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
+            var lk = links.filter(function (a) { return a.dataset.h === h && nav.contains(a); })[0];
+            reveal(h);
             if (crumb && lk) {
               crumb.innerHTML = "";
               var sep = document.createElement("span");
@@ -410,7 +436,7 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           requestAnimationFrame(settle);
           window.addEventListener("load", function () { requestAnimationFrame(settle); });
 
-          nav.addEventListener("click", function (e) {
+          function onNavClick(e) {
             var a = e.target.closest("a");
             if (!a) return;
             if (a.dataset.hh) {
@@ -423,7 +449,9 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
               show(a.dataset.h, { push: true });
               window.scrollTo({ top: 0 });
             }
-          });
+          }
+          nav.addEventListener("click", onNavClick);
+          if (bar) bar.addEventListener("click", onNavClick);
         })();
       </script>
     )

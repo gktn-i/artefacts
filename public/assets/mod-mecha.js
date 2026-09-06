@@ -43,6 +43,16 @@ function si(x, unit) {
    ========================================================================== */
 (function () {
   var MIN = 5;
+  /* Faltzustand merken: pro Seite und Abschnitt die offenen Kapitel. */
+  function foldKey(sec) { return "hbx-fold:" + location.pathname + "#" + sec.id; }
+  function loadFold(sec) {
+    try { var v = JSON.parse(localStorage.getItem(foldKey(sec))); return Array.isArray(v) ? v : null; } catch (e) { return null; }
+  }
+  function saveFold(sec, hs) {
+    var open = [];
+    hs.forEach(function (h, i) { if (h.classList.contains("open")) open.push(i); });
+    try { localStorage.setItem(foldKey(sec), JSON.stringify(open)); } catch (e) {}
+  }
   function build(sec) {
     if (!sec || sec.dataset.folded) return;
     var TAG = "H2";
@@ -53,17 +63,19 @@ function si(x, unit) {
     }
     if (hs.length < 4) { sec.dataset.folded = "no"; return; }
     sec.dataset.folded = "yes";
+    var saved = loadFold(sec);
+    var isOpen = function (i) { return saved ? saved.indexOf(i) >= 0 : i === 0; };
     hs.forEach(function (h, i) {
       var body = document.createElement("div");
-      body.className = "sec-body" + (i === 0 ? " open" : "");
+      body.className = "sec-body" + (isOpen(i) ? " open" : "");
       var n = h.nextSibling;
       while (n && !(n.nodeType === 1 && n.tagName === TAG)) { var nx = n.nextSibling; body.appendChild(n); n = nx; }
       h.after(body);
       h.classList.add("fold");
-      if (i === 0) h.classList.add("open");
+      if (isOpen(i)) h.classList.add("open");
       h.setAttribute("role", "button");
       h.setAttribute("tabindex", "0");
-      var tog = function () { h.classList.toggle("open"); body.classList.toggle("open"); };
+      var tog = function () { h.classList.toggle("open"); body.classList.toggle("open"); saveFold(sec, hs); syncBtn(); };
       h.addEventListener("click", tog);
       h.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tog(); }
@@ -73,7 +85,11 @@ function si(x, unit) {
     bar.className = "foldbar";
     var btn = document.createElement("button");
     btn.type = "button";
-    btn.textContent = "Alle aufklappen";
+    function syncBtn() {
+      var allOpen = hs.every(function (h) { return h.classList.contains("open"); });
+      btn.textContent = allOpen ? "Alle zuklappen" : "Alle aufklappen";
+    }
+    syncBtn();
     btn.onclick = function () {
       var allOpen = hs.every(function (h) { return h.classList.contains("open"); });
       hs.forEach(function (h) {
@@ -81,7 +97,8 @@ function si(x, unit) {
         var b = h.nextElementSibling;
         if (b && b.classList.contains("sec-body")) b.classList.toggle("open", !allOpen);
       });
-      btn.textContent = allOpen ? "Alle aufklappen" : "Alle zuklappen";
+      saveFold(sec, hs);
+      syncBtn();
     };
     bar.appendChild(btn);
     sec.insertBefore(bar, sec.firstChild);

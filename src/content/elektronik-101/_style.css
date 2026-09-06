@@ -18,9 +18,8 @@
   --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
   --display:'Archivo','Helvetica Neue',sans-serif;
 }
-@media(prefers-color-scheme:dark){
-  .mx-elektronik-101{
-    --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#262b33;
+/* Dunkel: folgt data-hbx-theme (manueller Schalter), ohne JS dem System. */
+:root[data-hbx-theme="dark"] .mx-elektronik-101{--bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#262b33;
     --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
     --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
     --accent:#4fb9c9; --accent-ink:#8fd0da; --accent-soft:#1a2f34; --accent-border:#2a5d66;
@@ -28,25 +27,51 @@
     --warn-bg:#2f2420; --warn-ink:#e9c2ae;
     --danger-bg:#2e2222; --danger-border:#6f3a33; --danger-accent:#d9705f;
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
-    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.5);
-  }
-  .mx-elektronik-101 /* Kategorie-Badges (dunkel) */
+    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.5);}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 
   .cat-passiv .cb{background:#1e2e42;color:#b3cbe6}
-  .mx-elektronik-101 .cat-halbleiter .cb{background:#282744;color:#c9c6e8}
-  .mx-elektronik-101 .cat-ic .cb{background:#38221f;color:#e8b4b0}
-  .mx-elektronik-101 .cat-mech .cb{background:#1c3029;color:#a3d6bc}
-  .mx-elektronik-101 .cat-power .cb{background:#33291a;color:#e8c58c}
-  .mx-elektronik-101 .cat-schutz .cb{background:#37251f;color:#e8bfb1}
-  .mx-elektronik-101 .cat-modul .cb{background:#2b2c2e;color:#cfd0c9}
-  .mx-elektronik-101 .cat-board .cb{background:#2f2740;color:#d3c3ea}
-  .mx-elektronik-101 .cat-sensor .cb{background:#1c3038;color:#a6d0e0}
-  .mx-elektronik-101 .cat-kabel .cb{background:#33291d;color:#e6cba8}
-  .mx-elektronik-101 .cat-verbrauch .cb{background:#282e1c;color:#c8dba0}
-  .mx-elektronik-101 /* Gefahren-Stufen (dunkel) */
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-halbleiter .cb{background:#282744;color:#c9c6e8}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-ic .cb{background:#38221f;color:#e8b4b0}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-mech .cb{background:#1c3029;color:#a3d6bc}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-power .cb{background:#33291a;color:#e8c58c}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-schutz .cb{background:#37251f;color:#e8bfb1}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-modul .cb{background:#2b2c2e;color:#cfd0c9}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-board .cb{background:#2f2740;color:#d3c3ea}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-sensor .cb{background:#1c3038;color:#a6d0e0}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-kabel .cb{background:#33291d;color:#e6cba8}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .cat-verbrauch .cb{background:#282e1c;color:#c8dba0}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 
   .lvl-ok{background:#1c3029;color:#a3d6bc}
-  .mx-elektronik-101 .lvl-warn{background:#33291a;color:#e8c58c}
-  .mx-elektronik-101 .lvl-bad{background:#37251f;color:#e8bfb1}
-  .mx-elektronik-101 .lvl-crit{background:#B0281A;color:#fff}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .lvl-warn{background:#33291a;color:#e8c58c}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .lvl-bad{background:#37251f;color:#e8bfb1}
+:root[data-hbx-theme="dark"] .mx-elektronik-101 .lvl-crit{background:#B0281A;color:#fff}
+@media (prefers-color-scheme: dark) {
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101{--bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#262b33;
+    --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
+    --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
+    --accent:#4fb9c9; --accent-ink:#8fd0da; --accent-soft:#1a2f34; --accent-border:#2a5d66;
+    --rate-bad:#d9705f; --rate-mid:#dfa85c; --rate-good:#5fb98a;
+    --warn-bg:#2f2420; --warn-ink:#e9c2ae;
+    --danger-bg:#2e2222; --danger-border:#6f3a33; --danger-accent:#d9705f;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+    --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.5);}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 
+  .cat-passiv .cb{background:#1e2e42;color:#b3cbe6}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-halbleiter .cb{background:#282744;color:#c9c6e8}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-ic .cb{background:#38221f;color:#e8b4b0}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-mech .cb{background:#1c3029;color:#a3d6bc}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-power .cb{background:#33291a;color:#e8c58c}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-schutz .cb{background:#37251f;color:#e8bfb1}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-modul .cb{background:#2b2c2e;color:#cfd0c9}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-board .cb{background:#2f2740;color:#d3c3ea}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-sensor .cb{background:#1c3038;color:#a6d0e0}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-kabel .cb{background:#33291d;color:#e6cba8}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .cat-verbrauch .cb{background:#282e1c;color:#c8dba0}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 
+  .lvl-ok{background:#1c3029;color:#a3d6bc}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .lvl-warn{background:#33291a;color:#e8c58c}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .lvl-bad{background:#37251f;color:#e8bfb1}
+:root:not([data-hbx-theme="light"]) .mx-elektronik-101 .lvl-crit{background:#B0281A;color:#fff}
 }
 
 /* ============================================================
@@ -98,7 +123,7 @@
 .mx-elektronik-101 .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
   background:var(--surface);box-shadow:var(--shadow-sm);margin-bottom:.4rem}
 .mx-elektronik-101 table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
-.mx-elektronik-101 th{text-align:left;padding:10px 12px;font-weight:600;font-size:11px;text-transform:uppercase;
+.mx-elektronik-101 th{text-align:left;padding:10px 12px;font-weight:600;font-size:11.5px;text-transform:uppercase;
   letter-spacing:.04em;color:var(--faint);background:var(--surface-2);
   border-bottom:1px solid var(--border);cursor:default;user-select:none;white-space:nowrap}
 .mx-elektronik-101 th:has(.ar){cursor:pointer}
@@ -228,7 +253,7 @@
    LESBARKEIT · luftigere Tabellen, Faltabschnitte, Kernaussagen
    ============================================================ */
 .mx-elektronik-101 table{font-size:13.5px}
-.mx-elektronik-101 th{padding:11px 14px;font-size:10.5px}
+.mx-elektronik-101 th{padding:11px 14px;font-size:11.5px}
 .mx-elektronik-101 td{padding:13px 14px;line-height:1.6}
 .mx-elektronik-101 tbody tr+tr td{border-top:1px solid var(--border)}
 .mx-elektronik-101 td:first-child{font-weight:500}
