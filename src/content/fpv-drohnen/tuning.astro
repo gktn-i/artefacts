@@ -86,6 +86,157 @@ import "./_style.css";
 </table></div>
 <p class="note">Genannt ist die häufigste Ursache, nicht die einzige — fast alles kann auch mechanisch sein. Deshalb steht Mechanik ganz vorn.</p>
 
+<h2>Rates: wie direkt der Knüppel wirkt</h2>
+<p>PID und Filter bestimmen, wie <em>sauber</em> das Quad einer Vorgabe folgt. Die Rates bestimmen, <em>welche</em> Vorgabe ein Knüppelweg überhaupt erzeugt — die Kennlinie zwischen Knüppel und Drehrate. Betaflight bietet mehrere Modelle; „Actual Rates“ ist das anschaulichste, weil die maximale Drehrate direkt in °/s dasteht.</p>
+<figure>
+<svg class="dg l" viewBox="0 0 660 250" role="img" aria-label="Kennlinie zwischen Knüppelweg und Drehrate für drei Expo-Werte: ohne Expo verläuft sie fast gerade, mit steigendem Expo wird die Mitte flacher, der Endwert bleibt gleich">
+  <path class="gd" d="M60,157.5 H620 M60,115 H620 M60,72.5 H620 M200,200 V30 M340,200 V30 M480,200 V30" />
+  <path class="wt" d="M60,20 V200 M60,200 H630" />
+  <text class="lbl" x="52" y="34" text-anchor="end">800 °/s</text>
+  <text class="lbl" x="52" y="119" text-anchor="end">400</text>
+  <text class="lbl" x="52" y="204" text-anchor="end">0</text>
+  <text class="lbl" x="60" y="220">Mitte</text>
+  <text class="lbl" x="340" y="220" text-anchor="middle">halber Knüppel</text>
+  <text class="lbl" x="620" y="220" text-anchor="end">Vollausschlag</text>
+  <path class="acc" style="fill:none" d="M60,200.0 L74,198.9 L88,197.6 L102,196.1 L116,194.5 L130,192.7 L144,190.8 L158,188.7 L172,186.4 L186,184.0 L200,181.4 L214,178.7 L228,175.8 L242,172.7 L256,169.5 L270,166.1 L284,162.6 L298,158.9 L312,155.1 L326,151.0 L340,146.9 L354,142.5 L368,138.1 L382,133.4 L396,128.6 L410,123.6 L424,118.5 L438,113.2 L452,107.8 L466,102.2 L480,96.4 L494,90.5 L508,84.4 L522,78.2 L536,71.8 L550,65.2 L564,58.5 L578,51.6 L592,44.6 L606,37.4 L620,30.0" />
+  <path class="acc" style="fill:none;stroke-dasharray:6 4" d="M60,200.0 L74,198.9 L88,197.7 L102,196.3 L116,194.9 L130,193.3 L144,191.6 L158,189.8 L172,187.9 L186,185.9 L200,183.8 L214,181.5 L228,179.2 L242,176.7 L256,174.1 L270,171.4 L284,168.6 L298,165.6 L312,162.5 L326,159.2 L340,155.8 L354,152.3 L368,148.6 L382,144.7 L396,140.6 L410,136.3 L424,131.8 L438,127.0 L452,122.0 L466,116.7 L480,111.1 L494,105.2 L508,98.9 L522,92.1 L536,85.0 L550,77.3 L564,69.1 L578,60.4 L592,51.0 L606,40.9 L620,30.0" />
+  <path class="acc" style="fill:none;stroke-dasharray:2 3;opacity:.75" d="M60,200.0 L74,198.9 L88,197.7 L102,196.5 L116,195.2 L130,193.9 L144,192.5 L158,191.0 L172,189.5 L186,187.8 L200,186.2 L214,184.4 L228,182.6 L242,180.7 L256,178.7 L270,176.7 L284,174.5 L298,172.3 L312,169.9 L326,167.4 L340,164.8 L354,162.0 L368,159.1 L382,155.9 L396,152.6 L410,149.0 L424,145.1 L438,140.8 L452,136.3 L466,131.3 L480,125.8 L494,119.9 L508,113.3 L522,106.1 L536,98.2 L550,89.4 L564,79.8 L578,69.1 L592,57.4 L606,44.4 L620,30.0" />
+  <circle class="accf" cx="340" cy="146.9" r="4" /><circle class="accf" cx="340" cy="164.8" r="4" />
+  <path class="acc" style="stroke-width:1;stroke-dasharray:3 3;opacity:.6" d="M196,66 L330,142" />
+  <text class="lbl"  x="76" y="44">bei halbem Knüppel</text>
+  <text class="lbla" x="76" y="62">Expo 0 → 250 °/s</text>
+  <text class="lbl"  x="76" y="80">Expo 0,6 → 166 °/s</text>
+  <circle class="accf" cx="620" cy="30" r="4" />
+  <text class="lbla" x="612" y="24" text-anchor="end">Endwert bleibt: Max Rate</text>
+  <path class="acc" d="M60,200 L130,192.7" style="stroke-width:3" />
+  <path class="acc" style="stroke-width:1;stroke-dasharray:3 3;opacity:.6" d="M104,132 V194" />
+  <text class="lbla" x="98" y="126">Steigung hier = Center Sensitivity</text>
+</svg>
+<figcaption>Dieselbe Max Rate (800 °/s), dreimal Expo: 0 (durchgezogen), 0,3 (gestrichelt), 0,6 (gepunktet). Expo verflacht nur die Mitte — der Vollausschlag bleibt unverändert. Kurven nach der Betaflight-Formel für „Actual Rates“ gerechnet.</figcaption>
+</figure>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Parameter</th><th>Was er festlegt</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>Center Sensitivity</b></td><td>Drehrate je Knüppelweg <b>um die Mitte</b> (°/s)</td><td>Bestimmt, wie fein kleine Korrekturen dosierbar sind. Niedrig = ruhig, gut für Kameraflüge</td></tr>
+<tr><td><b>Max Rate</b></td><td>Drehrate bei <b>Vollausschlag</b> (°/s)</td><td>650–800 °/s ist Freestyle-Standard; über 1000 °/s wird die Orientierung schwierig</td></tr>
+<tr><td><b>Expo</b></td><td>Krümmung <b>dazwischen</b> (0–1)</td><td>Verflacht die Mitte, ohne den Endausschlag zu ändern. Zu viel macht die Mitte schwammig</td></tr>
+<tr><td><b>Yaw getrennt</b></td><td>eigene Kurve für Gieren</td><td>Meist 50–100 °/s niedriger — Gieren nutzt nur das Motordrehmoment und ist der schwächste Kanal (<a href="#physik">Flugphysik</a>)</td></tr>
+</tbody>
+</table></div>
+
+<h3>Rates ausrechnen</h3>
+<div class="calc" data-calc="fpvrates">
+  <h4>Was der Knüppel an welcher Stelle macht</h4>
+  <div class="row">
+    <div><label>Center Sensitivity (°/s)</label><input type="number" data-k="c" value="200" min="20" step="10" /></div>
+    <div><label>Max Rate (°/s)</label><input type="number" data-k="m" value="800" min="50" step="10" /></div>
+    <div><label>Expo (0–1)</label><input type="number" data-k="e" value="0.3" min="0" max="1" step="0.05" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Startwerte</th><th>Center</th><th>Max Rate</th><th>Expo</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Ruhig / Cinematic</b></td><td>100–150 °/s</td><td>500–650 °/s</td><td>0,2–0,4</td><td>Weiche Mitte, saubere Schwenks</td></tr>
+<tr><td><b>Freestyle</b></td><td>180–220 °/s</td><td>650–850 °/s</td><td>0,3–0,5</td><td>Der übliche Ausgangspunkt</td></tr>
+<tr><td><b>Race</b></td><td>200–260 °/s</td><td>800–1000 °/s</td><td>0,1–0,3</td><td>Direkte Mitte, wenig Verflachung</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Rates sind Geschmack, kein Tuning-Fehler.</b> Wer aus dem Simulator kommt, übernimmt seine dortigen Werte — die Hand ist darauf trainiert. Ändere immer nur eine der drei Größen und fliege einen Akku, sonst weißt du nicht, was gewirkt hat.</div>
+
+<h3>Die Seite „Rate Profile Settings“</h3>
+<p>Dort steht die Kennlinie — und die Gaskurve. Keine Regelung, nur Gefühl.</p>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Feld</th><th>Was es tut</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>Rates Type</b></td><td>Nur die Eingabeform derselben Kurve: „Actual“ in °/s, „Betaflight“ in Faktoren, dazu KISS, Raceflight, QuickRates</td><td>Umschalten setzt die Kurve auf eine Standardkurve zurück — vorher Werte notieren</td></tr>
+<tr><td><b>RC Rate</b></td><td>Steigung der Kurve um die Mitte</td><td>Bestimmt, wie fein kleine Korrekturen dosierbar sind</td></tr>
+<tr><td><b>Rate</b> (Super Rate)</td><td>Zieht das Kurvenende hoch, ohne die Mitte zu verändern</td><td>Der eigentliche Hebel für die Maximaldrehrate</td></tr>
+<tr><td><b>RC Expo</b></td><td>Verflacht die Mitte, Endwert bleibt</td><td>0,2–0,4. Zu viel macht die Mitte schwammig</td></tr>
+<tr><td><b>Spalte ganz rechts</b></td><td>Nur Anzeige: das Ergebnis in °/s — erst die Mitte, dann der Vollausschlag</td><td>Die beiden Zahlen, mit denen man Setups vergleicht</td></tr>
+<tr><td><b>Rateprofile 1–3, Name</b></td><td>Drei Kennlinien je PID-Profil, im Flug per Schalter umschaltbar (Adjustments-Tab)</td><td>Sinnvolle Aufteilung: cine · freestyle · race</td></tr>
+</tbody>
+</table></div>
+<div class="fbox">
+  <span class="f">Max Rate = 200 · RC Rate ÷ (1 − Rate)</span>
+  <span class="f">Mitte = 200 · RC Rate · (1 − Expo)</span>
+  <span class="l">Beispiel: RC Rate 1,10 · Rate 0,74 · Expo 0,30 ergibt 154 – 846 °/s. Genau diese zwei Zahlen zeigt der Configurator an — und genau sie trägt man oben in den Rechner ein.</span>
+</div>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Gas-Einstellung</th><th>Was sie tut</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>Throttle Limit</b> (OFF · SCALE · CLIP)</td><td>SCALE staucht den ganzen Gasweg auf den Prozentwert, CLIP kappt nur oben ab</td><td>Für die ersten Flüge und indoor. Begrenzt den Knüppel — das Motorsignal begrenzt „Motor Output Limit“</td></tr>
+<tr><td><b>Throttle MID</b></td><td>Knüppelstelle, an der der Schwebepunkt liegen soll</td><td>MID, Hover Point und EXPO ergeben zusammen die Gaskurve</td></tr>
+<tr><td><b>Hover Point</b></td><td>Gas, das an dieser Knüppelstelle herauskommen soll (neu seit 2025.12)</td><td>Schwebegas einmal im OSD ablesen und eintragen — dann liegt der Schwebepunkt genau in der Knüppelmitte</td></tr>
+<tr><td><b>Throttle EXPO</b></td><td>Krümmung um diesen Punkt. 0 = zwei Geraden</td><td>0,2–0,3 macht die Höhe rund um den Schwebepunkt feiner dosierbar</td></tr>
+<tr><td><b>Vorschaubilder</b></td><td>Rates Preview mit dem Endwert je Achse, Throttle Curve Preview, Rates Model Preview als mitdrehendes Modell</td><td>Nur Anzeige — aber die schnellste Kontrolle, ob die Kurve so aussieht wie gedacht</td></tr>
+</tbody>
+</table></div>
+
+<h2>Der PID-Tuning-Tab Feld für Feld</h2>
+<p>Links die Slider: sie führen viele Einzelwerte konsistent mit. Rechts die Einzelfunktionen. Reihenfolge: erst Slider, Einzelwerte nur, wenn kein Slider das Problem trifft.</p>
+
+<h3>Links: die Slider</h3>
+<p class="note">Mode <b>RPY</b> führt alle drei Achsen mit, <b>RP</b> nur Roll und Nick (Yaw von Hand), <b>OFF</b> schaltet die Slider ab. Der Wechsel von RP auf RPY überschreibt die Yaw-Werte.</p>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Slider</th><th>Was dahintersteckt</th><th>Nach rechts heißt</th></tr></thead>
+<tbody>
+<tr><td><b>Damping</b> · D Gains</td><td>D auf allen Achsen</td><td>Ruhiger, weniger Prop Wash — aber trägere Knüppelreaktion und wärmere Motoren</td></tr>
+<tr><td><b>Tracking</b> · P &amp; I Gains</td><td>P und I gemeinsam</td><td>Folgt Vorgabe und Störungen schärfer; zu viel trillert oder schwingt</td></tr>
+<tr><td><b>Stick Response</b> · FF Gains</td><td>Feedforward</td><td>Direkteres Ansprechen auf schnelle Knüppel; zu viel überschwingt am Ende einer Rolle</td></tr>
+<tr><td><b>Drift – Wobble</b> · I Gains</td><td>I allein</td><td>Hält die Linie in Kurven, Orbits und bei Nullgas; zu viel wobbelt und federt zurück</td></tr>
+<tr><td><b>Dynamic Damping</b> · D Max</td><td>Obergrenze, bis zu der D bei schnellen Bewegungen steigen darf</td><td>Mehr Reserve gegen Überschwingen, ohne das Grund-D dauerhaft anzuheben</td></tr>
+<tr><td><b>Pitch Damping</b> · Pitch:Roll D</td><td>D nur auf Nick, im Verhältnis zu Roll</td><td>Gegen Überschwingen speziell auf der Nickachse (mehr Trägheit als Roll)</td></tr>
+<tr><td><b>Pitch Tracking</b> · Pitch:Roll P, I &amp; FF</td><td>P, I und FF nur auf Nick</td><td>Gegen Nicken/Bobble bei harten Nickeingaben und Gasstößen</td></tr>
+<tr><td><b>Master Multiplier</b></td><td>Alle PID-Werte gleichzeitig</td><td>Nur anfassen, wenn die anderen Slider am Anschlag sind — X-Class, Cinelifter</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Gelber Hinweis auf der Seite</th><th>Bedeutung</th><th>Was tun</th></tr></thead>
+<tbody>
+<tr><td><i>… restricted because you are not in expert mode</i></td><td>Ohne Expertenmodus sind nur die sicheren Sliderbereiche freigegeben</td><td>Für die meisten Builds nichts. Sonst Expertenmodus einschalten</td></tr>
+<tr><td><i>… disabled because current values are outside the Basic Mode adjustment range</i></td><td>Die gespeicherten Werte liegen außerhalb dieses Bereichs — typisch nach einem Preset oder einem fremden CLI-Block</td><td>Expertenmodus einschalten. „Enable Sliders“ geht auch, wirft aber die vorhandenen Werte weg</td></tr>
+</tbody>
+</table></div>
+
+<h3>Rechts: Feedforward, TPA, I-Term</h3>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Feld</th><th>Was es tut</th><th>Wert</th></tr></thead>
+<tbody>
+<tr><td><b>FF · Jitter Reduction</b></td><td>Senkt Feedforward, solange die Knüppel langsam bewegt werden — ohne schnelle Eingaben zu verzögern</td><td>Standard 7; 10–12 für Kameraflüge. Dann Transition auf 0</td></tr>
+<tr><td><b>FF · Smoothness</b></td><td>Glättet die Feedforward-Spur</td><td>Nach Paketrate: 25 bei 50–150 Hz, 40–50 bei 250 Hz, 60–65 bei 500 Hz</td></tr>
+<tr><td><b>FF · Averaging</b></td><td>Mittelt die letzten 2–4 Feedforward-Schritte; glättet, kostet etwas Zeit</td><td>2 Punkte bei 500 Hz und bei HD/Cine</td></tr>
+<tr><td><b>FF · Boost</b></td><td>Extraschub bei Knüppelbeschleunigung — gleicht die Anlaufträgheit der Motoren aus</td><td>Standard passt fast immer; Racer etwas höher</td></tr>
+<tr><td><b>FF · Max Rate Limit</b></td><td>Nimmt Feedforward zum Vollausschlag hin zurück, gegen Überschwingen am <em>Anfang</em> einer Rolle</td><td>Selten ändern; kleinere Werte greifen früher</td></tr>
+<tr><td><b>FF · Transition</b></td><td>Senkt Feedforward nahe der Knüppelmitte</td><td>Seit 4.3 durch Jitter Reduction ersetzt — auf 0 lassen</td></tr>
+<tr><td><b>TPA Mode</b></td><td>Was ab dem Breakpoint zurückgenommen wird: nur D, oder P und D</td><td>D ist der Normalfall</td></tr>
+<tr><td><b>TPA Rate (%)</b></td><td>Wie stark bei Vollgas zurückgenommen wird</td><td>Nur erhöhen, wenn es bei viel Gas schwingt oder die Motoren heiß werden</td></tr>
+<tr><td><b>TPA Breakpoint (µs)</b></td><td>Ab welchem Gaswert das beginnt — 1000 ist Nullgas, 2000 Vollgas</td><td>Schwingt es ab ¾ Gas: Breakpoint etwas darunter, dann Rate langsam anheben</td></tr>
+<tr><td><b>I Term Relax</b> (Achsen · Typ · Cutoff)</td><td>Bremst den I-Aufbau während schneller Eingaben — dagegen federt das Quad am Ende von Flips und Rollen zurück</td><td>Setpoint, Achsen RP. Cutoff: 15 lebendiger Freestyle, 10 schwerer, 30–40 Race</td></tr>
+<tr><td><b>Anti Gravity</b> (Gain)</td><td>Hebt I (und P) bei schnellen Gasänderungen an, damit die Nase beim Gasstoß nicht wegkippt</td><td>8,0 heißt etwa achtfacher I-Schub. Höher hilft trägen Aufbauten</td></tr>
+<tr><td><b>I Term Rotation</b></td><td>Dreht den aufgebauten I-Anteil mit, wenn das Quad giert</td><td>Für Funnels und Dauergieren im Acro; sonst unnötig</td></tr>
+<tr><td><b>Dynamic Damping · Gain</b></td><td>Wie bereitwillig D bis D Max hochgeht (Gyro und Prop Wash)</td><td>40–50 bei sauberen Freestyle-Aufbauten</td></tr>
+<tr><td><b>Dynamic Damping · Advance</b></td><td>Reagiert schon auf schnelle Knüppel statt auf den Gyro</td><td>Meist 0. Gain <em>oder</em> Advance muss über etwa 20 liegen, sonst steigt D nie</td></tr>
+</tbody>
+</table></div>
+
+<h3>Rechts unten: Gas, Motor, Sonstiges</h3>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Feld</th><th>Was es tut</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>Throttle Boost</b></td><td>Kurzer Gasüberschuss bei schnellen Gasänderungen</td><td>Macht das Gas direkter; auf trägen Aufbauten spürbar</td></tr>
+<tr><td><b>Motor Output Limit (%)</b></td><td>Deckelt das fertige Motorsignal, egal was die Regelung fordert</td><td>Der saubere Weg, indoor Leistung herauszunehmen</td></tr>
+<tr><td><b>Dynamic Idle Value</b> (× 100 min⁻¹)</td><td>Leerlauf als <em>Drehzahl</em> statt als fester Gaswert — 30 bedeutet 3000 min⁻¹</td><td>3000–3500 üblich. Braucht bidirektionales DShot; ohne Telemetrie ist das Feld gesperrt</td></tr>
+<tr><td><b>Vbat Sag Compensation (%)</b></td><td>Hebt das Motorsignal an, wenn die Akkuspannung unter Last einbricht</td><td>100 % empfohlen: gleiches Gefühl vom vollen bis zum leeren Akku (<a href="#akku">Spannungseinbruch</a>)</td></tr>
+<tr><td><b>Thrust Linearization (%)</b></td><td>Mehr Autorität im unteren Gasbereich; oben ohne Wirkung</td><td>Für Whoops und 48-kHz-ESCs, 30–40 % reichen</td></tr>
+<tr><td><b>Cell Count</b> (Auto Profile Switching)</td><td>Legt fest, für wie viele Zellen dieses Profil gilt — beim Anstecken wählt Betaflight das passende</td><td>Nützlich, wenn dasselbe Quad an 4S und 6S fliegt</td></tr>
+<tr><td><b>Acro Trainer Angle Limit</b></td><td>Begrenzt im Acro-Modus den Neigungswinkel, 10–80°</td><td>Muss im Modes-Tab auf einen Schalter gelegt werden. Lernhilfe ohne die falschen Angle-Reflexe (<a href="#fliegen">Fliegen lernen</a>)</td></tr>
+<tr><td><b>Integrated Yaw</b></td><td>Integriert die Yaw-Anteile — Yaw wird dann wie Nick und Roll getunt</td><td>Nur mit Absolute Control und angepassten Yaw-PIDs. Für den Alltag aus lassen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Was man an einem normalen 5-Zöller wirklich anfasst:</b> Vbat Sag Compensation auf 100 %, Dynamic Idle auf 30–35 (sobald bidirektionales DShot läuft), Feedforward Smoothness passend zur Paketrate. Der Rest ist ab Werk sinnvoll gesetzt.</div>
+
 <h2>Blackbox lesen</h2>
 <div class="grid">
   <div class="card"><div class="ct">Was aufgezeichnet wird</div><div class="cd">Gyro roh und gefiltert, Sollwerte, PID-Anteile je Achse, Motorausgänge, Spannung und Strom, Empfängerdaten. Aufzeichnungsrate mindestens 1 kHz, sonst fehlt der interessante Teil.</div></div>

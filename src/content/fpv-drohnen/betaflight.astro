@@ -31,6 +31,42 @@ import "./_style.css";
   <div class="step"><h4>Sichern</h4><code>diff all</code> in eine Textdatei — nach jeder bewährten Änderung wiederholen. Die einzige Sicherung, die ein Update überlebt.</div>
 </div>
 
+<h2>Der Motors-Tab Feld für Feld</h2>
+<div class="stop"><b>Propeller ab, bevor dieser Tab geöffnet wird.</b> Der Motortest bleibt aktiv, auch wenn man auf einen anderen Tab wechselt. Jede Taste stoppt die Motoren nur <em>in</em> diesem Tab. Das Abziehen des USB-Kabels stoppt sie nicht zuverlässig. Der Haken „I understand the risks“ schaltet zusätzlich die Runaway-Takeoff-Absicherung ab.</div>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Mixer-Bereich</th><th>Was es tut</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>Mixer-Typ</b> (QUAD X …)</td><td>Legt Anordnung und Nummerierung der Motoren fest — die Zeichnung daneben ist die Referenz</td><td>Für ein normales Quad: QUAD X, nichts ändern</td></tr>
+<tr><td><b>Motor direction is reversed</b></td><td>Sagt der Firmware, dass „props out“ geflogen wird. <b>Dreht die Motoren nicht um</b></td><td>Umgedreht wird im ESC-Konfigurator oder per Dialog „Motor direction“; die Propeller müssen dazu passen</td></tr>
+<tr><td><b>Reorder motors</b></td><td>Assistent: welcher Motor hängt an welchem Ausgang</td><td>Korrigiert vertauschte Motoren in der Software statt am Lötkolben</td></tr>
+<tr><td><b>Motor direction</b></td><td>Assistent: Drehrichtung je Motor per DShot-Befehl umkehren</td><td>Nur mit DShot-ESCs und angestecktem Akku. Die Motoren drehen dabei sofort</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>ESC/Motor Features</th><th>Was es tut</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>ESC/Motor protocol</b></td><td>Signalprotokoll zum Regler, z. B. DSHOT300 oder DSHOT600</td><td>Muss der ESC können. Nach jeder Änderung Propeller ab: ein unpassendes Protokoll kann Motoren beim Anstecken sofort anlaufen lassen (<a href="#esc">ESC</a>)</td></tr>
+<tr><td><b>MOTOR_STOP</b></td><td>Motoren stehen im armierten Zustand bei Nullgas still</td><td>Ohne Wirkung, sobald Air Mode aktiv ist — also praktisch immer aus</td></tr>
+<tr><td><b>ESC_SENSOR</b></td><td>ESC-Telemetrie über eine <em>separate</em> Leitung: Strom, Temperatur, Drehzahl</td><td>Nur nötig, wenn der ESC diese Leitung hat. Für den RPM-Filter genügt bidirektionales DShot</td></tr>
+<tr><td><b>Bidirectional DShot</b></td><td>Der ESC meldet die Drehzahl über die vorhandene Signalleitung zurück</td><td>Voraussetzung für <a href="#tuning">RPM-Filter</a> und Dynamic Idle. Braucht Bluejay, AM32 oder BLHeli_32</td></tr>
+<tr><td><b>Motor poles</b></td><td>Zahl der Magnete in der Glocke — nicht der Statorzähne</td><td>5 Zoll meist 14, 3 Zoll und kleiner oft 12. Falscher Wert = falsch berechnete Drehzahl = der RPM-Filter filtert daneben</td></tr>
+<tr><td><b>Motor Idle (%)</b></td><td>Leerlaufgas, solange armiert ist und der Gasknüppel unten steht</td><td>Zu wenig: Motoren laufen unsicher an oder desyncen in Rollen. Zu viel: das Quad fühlt sich schwebend-schwammig an</td></tr>
+<tr><td><b>Dynamic Idle Value</b></td><td>Nur die Anzeige des Werts aus dem aktiven PID-Profil</td><td>Eingestellt wird er im <a href="#tuning">PID-Tuning-Tab</a></td></tr>
+<tr><td><b>3D mode</b></td><td>Für umkehrbare ESCs: Schub in beide Richtungen</td><td>Für normales FPV aus</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th>Anzeige im Test</th><th>Was sie bedeutet</th><th>Sollwert</th></tr></thead>
+<tbody>
+<tr><td><b>Regler je Motor + Master</b></td><td>Steuert die Motoren direkt an</td><td>Jeden einzeln antippen: richtiger Motor, richtige Richtung?</td></tr>
+<tr><td><b>RPM</b></td><td>Gemessene Drehzahl aus der DShot-Telemetrie</td><td>Plausibel und bei allen vier ähnlich</td></tr>
+<tr><td><b>Err</b></td><td>Anteil unbrauchbarer Telemetriepakete</td><td>Ohne Akku 100 % — die ESCs sind stromlos, das ist normal. Mit Akku nahe 0, sonst arbeitet der RPM-Filter nicht</td></tr>
+<tr><td><b>Temp</b></td><td>ESC-Temperatur, sofern der Regler sie meldet</td><td>Nach dem Flug interessanter als im Test</td></tr>
+<tr><td><b>Voltage · Amperage</b></td><td>Werte der Sensoren auf dem Board</td><td>Ohne Akku zeigen die meisten Boards nur einen Restwert unter 1 V — erst mit Akku aussagekräftig</td></tr>
+<tr><td><b>Gyro-Diagramm oben rechts</b></td><td>Rohes Gyro-Rauschen</td><td>Ruhig liegend fast flach. Zappelt es im Stillstand, stimmt etwas mit Sensor oder Montage nicht</td></tr>
+</tbody>
+</table></div>
+
 <h2>Flugmodi</h2>
 <div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th>Modus</th><th>Was der Knüppel bedeutet</th><th>Einschätzung</th></tr></thead>
@@ -46,17 +82,7 @@ import "./_style.css";
 </table></div>
 
 <h2>Rates verstehen</h2>
-<div class="fbox">
-  <span class="f">Actual Rates: Center Sensitivity · Max Rate · Expo</span>
-  <span class="l">Betaflight bietet mehrere Ratenmodelle; „Actual Rates“ ist das anschaulichste, weil die maximale Drehrate direkt in °/s dasteht.</span>
-</div>
-<div class="flist">
-  <div class="frow hd"><span>Parameter</span><span>Wirkung</span><span>Praxis</span></div>
-  <div class="frow"><span class="fn">Center Sensitivity</span><span class="fe">°/s um die Mitte</span><span class="fx">Wie fein sich kleine Korrekturen dosieren lassen. Niedrig = ruhig, gut für Kameraflüge</span></div>
-  <div class="frow"><span class="fn">Max Rate</span><span class="fe">°/s bei Vollausschlag</span><span class="fx">650–800 °/s ist Freestyle-Standard. Über 1000 °/s wird die Orientierung schwierig</span></div>
-  <div class="frow"><span class="fn">Expo</span><span class="fe">Kurvenform</span><span class="fx">Verflacht die Mitte, ohne den Endausschlag zu ändern. Zu viel Expo macht die Mitte schwammig</span></div>
-  <div class="frow"><span class="fn">Yaw getrennt</span><span class="fe">meist niedriger</span><span class="fx">Gieren ist physikalisch der schwächste Kanal — dieselbe Rate wie Roll fühlt sich träge an</span></div>
-</div>
+<p>Die Rates legen fest, welche Drehrate ein Knüppelweg erzeugt — Kennlinie, Startwerte je Flugstil und Rechner stehen unter <a href="#tuning">PID-Tuning &amp; Filter</a>. Für die Ersteinrichtung genügt: „Actual Rates“ wählen, 650–800 °/s Max Rate, Expo 0,3.</p>
 
 <h2>CLI: die fünf Befehle, die man braucht</h2>
 <div class="tbl-wrap"><table style="min-width:760px">

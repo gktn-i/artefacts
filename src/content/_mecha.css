@@ -231,14 +231,14 @@
 .mx-mecha .rate-num{font:600 11px/1 var(--mono);color:var(--muted);width:15px;text-align:right;flex-shrink:0}
 
 /* ================================================================== PROFILE
-   Eignungstabelle (src/components/Profiles.astro): eine Zeile je Kandidat,
-   Punkte je Kriterium, dann Stark / Schwach / Nimm es für. Punktefarbe
-   folgt der Stufe wie die Bewertungsbalken: 1–2 rot, 3 gelb, 4–5 grün. */
-.mx-mecha .prof-t th.pch{white-space:normal;line-height:1.3;width:1%;padding:11px 6px;text-align:center;hyphens:auto}
-.mx-mecha .prof-t th.pro{color:var(--ok-ink)}
-.mx-mecha .prof-t th.con{color:var(--bad-ink)}
-.mx-mecha .prof-t th.use{color:var(--accent-ink)}
-.mx-mecha .prof-t td:first-child{min-width:140px}
+   Eignungstabelle (src/components/Profiles.astro): je Kandidat eine
+   Punktezeile (.pmain) und darunter eine Textzeile (.pdet) über die volle
+   Breite mit Stark / Schwach / Nimm es für. Punktefarbe folgt der Stufe
+   wie die Bewertungsbalken: 1–2 rot, 3 gelb, 4–5 grün. */
+.mx-mecha .prof-t th.pch{white-space:normal;line-height:1.25;min-width:66px;padding:11px 7px;
+  text-align:center;hyphens:manual;font-size:10.5px}
+.mx-mecha .prof-t th:first-child,.mx-mecha .prof-t td.pc:first-child,
+.mx-mecha .prof-t tr.pmain td:first-child{width:24%;min-width:150px}
 .mx-mecha .prof-t .ptag{display:block;font:500 10.5px/1.4 var(--mono);color:var(--faint);
   text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
 .mx-mecha .prof-t td.pc{padding:12px 6px;white-space:nowrap;text-align:center;font-family:inherit}
@@ -247,19 +247,29 @@
 .mx-mecha .pc.hi .dots i.on{background:var(--rate-good)}
 .mx-mecha .pc.mid .dots i.on{background:var(--rate-mid)}
 .mx-mecha .pc.lo .dots i.on{background:var(--rate-bad)}
-.mx-mecha .prof-t td.pt{font-size:12.4px;line-height:1.5;min-width:112px;padding:12px 10px;color:var(--muted)}
-.mx-mecha .prof-t td.pt.use{color:var(--text)}
+.mx-mecha .prof-t tbody tr.pmain td{border-bottom:none;padding-bottom:8px}
+.mx-mecha .prof-t tbody tr.pdet td{background:transparent;border-top:none;padding:0 13px 14px;
+  font-size:12.4px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)}
+.mx-mecha .prof-t tbody tr.pdet:hover td{background:transparent}
+.mx-mecha .prof-t .pdg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px 22px;line-height:1.5}
+.mx-mecha .prof-t .pd b{display:block;font:600 9.5px/1.6 var(--mono);text-transform:uppercase;
+  letter-spacing:.05em;color:var(--faint)}
+.mx-mecha .prof-t .pd.pro b{color:var(--ok-ink)}
+.mx-mecha .prof-t .pd.con b{color:var(--bad-ink)}
+.mx-mecha .prof-t .pd.use{color:var(--text)}
+.mx-mecha .prof-t .pd.use b{color:var(--accent-ink)}
 .mx-mecha .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .mx-mecha .pnote{margin-bottom:.9rem}
 @media(max-width:620px){
   .mx-mecha .prof-t td.pc{white-space:normal;display:flex;align-items:center;justify-content:space-between;
     padding:5px 14px;text-align:left}
-  .mx-mecha .prof-t td.pt{padding:5px 14px}
   .mx-mecha .prof-t td.pc::before{margin-bottom:0}
-  .mx-mecha .prof-t td.pt.pro::before{color:var(--ok-ink)}
-  .mx-mecha .prof-t td.pt.con::before{color:var(--bad-ink)}
-  .mx-mecha .prof-t td.pt.use::before{color:var(--accent-ink)}
+  .mx-mecha .prof-t tbody tr.pmain{margin-bottom:0;border-bottom:none;
+    border-radius:var(--radius) var(--radius) 0 0;padding-bottom:2px}
+  .mx-mecha .prof-t tbody tr.pdet{border-top:none;border-radius:0 0 var(--radius) var(--radius);padding-top:0}
+  .mx-mecha .prof-t tbody tr.pdet td[colspan]{border-radius:0;margin:0;padding:2px 14px 7px;background:transparent}
+  .mx-mecha .prof-t .pdg{grid-template-columns:1fr;gap:8px}
 }
 
 /* Kennzahlen-Kacheln */

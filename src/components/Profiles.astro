@@ -1,9 +1,9 @@
 ---
 /* ============================================================================
    Profile — Eignungstabelle für Vergleiche („Welcher Motor? Welcher Bus?").
-   Eine Zeile je Kandidat: Punkte je Kriterium (1–5, höher = besser) als
-   farbige Punkte, danach die drei Spalten, die man wirklich braucht —
-   Stark, Schwach, Nimm es für. Die Kriterienspalten sind sortierbar
+   Je Kandidat zwei Zeilen: oben die Punkte je Kriterium (1–5, höher =
+   besser) als farbige Punkte, darunter über die volle Breite die drei
+   Angaben, die man wirklich braucht — Stark, Schwach, Nimm es für. Die Kriterienspalten sind sortierbar
    (th[data-s="num"], Zahl steckt als Screenreader-Text in der Zelle).
    Alles ist statisches HTML: Pagefind indexiert es, ohne JS bleibt es
    lesbar, auf dem Handy klappt die Tabelle wie jede andere zu Karten.
@@ -44,20 +44,21 @@ for (const it of items) {
   }
 }
 const level = (n: number) => (n <= 2 ? "lo" : n >= 4 ? "hi" : "mid");
-/* Namensspalte + Punktespalten + drei Textspalten — passt bei sechs
-   Kriterien noch ohne Querscrollen in den Modul-Workspace (980 px). */
-const minw = 140 + 62 * criteria.length + 3 * 112;
+/* Nur Namensspalte + Punktespalten: die drei Textspalten stehen in einer
+   eigenen Zeile darunter über die volle Breite. So bleibt die Punktematrix
+   auch mit sechs Kriterien schmal genug für den Modul-Workspace. */
+const minw = 140 + 84 * criteria.length;
 ---
 
 <div class="tbl-wrap prof-t"><table style={`min-width:${minw}px`}>
 <thead><tr>
   <th data-s="text">{label}</th>
   {criteria.map((c) => <th data-s="num" class="pch">{c}</th>)}
-  <th class="pro">{L.pro}</th><th class="con">{L.con}</th><th class="use">{L.use}</th>
 </tr></thead>
 <tbody>
   {items.map((it) => (
-    <tr>
+    <>
+    <tr class="pmain">
       <td><b>{it.name}</b>{it.tag && <span class="ptag">{it.tag}</span>}</td>
       {it.scores.map((n) => (
         <td class={`pc ${level(n)}`} title={`${n} von ${scale}`}>
@@ -67,10 +68,17 @@ const minw = 140 + 62 * criteria.length + 3 * 112;
           <span class="sr">{n} von {scale}</span>
         </td>
       ))}
-      <td class="pt pro">{it.pro}</td>
-      <td class="pt con">{it.con}</td>
-      <td class="pt use">{it.use}</td>
     </tr>
+    <tr class="pdet">
+      <td colspan={criteria.length + 1}>
+        <div class="pdg">
+          <span class="pd pro"><b>{L.pro}</b>{it.pro}</span>
+          <span class="pd con"><b>{L.con}</b>{it.con}</span>
+          <span class="pd use"><b>{L.use}</b>{it.use}</span>
+        </div>
+      </td>
+    </tr>
+    </>
   ))}
 </tbody>
 </table></div>
