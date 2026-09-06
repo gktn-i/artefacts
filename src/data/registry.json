@@ -3164,7 +3164,7 @@
        "icon": "📻",
        "kind": "Referenz",
        "updated": "2026-09-06",
-       "desc": "Radio hören ohne Internet: Wie Radiowellen entstehen und sich ausbreiten, welche Bereiche ein Weltempfänger abdeckt (Langwelle, Mittelwelle, Kurzwelle, UKW, Flugfunkband), warum Kurzwelle nachts anders klingt als tags, der Sihuadon R108 im Detail mit Bedienung und Tipps, Sendepläne und Stationen, Recht in Deutschland, Glossar und Rechner.",
+       "desc": "Radio hören ohne Internet: Wie Radiowellen entstehen und sich ausbreiten, welche Bereiche ein Weltempfänger abdeckt (Langwelle, Mittelwelle, Kurzwelle, UKW, Flugfunkband), warum Kurzwelle nachts anders klingt als tags, der Sihuadon R108 im Detail mit Bedienung und Tipps, Sendepläne und Stationen, Senderliste für Frankfurt (UKW, Kurzwelle, Mittelwelle, Flugfunk), Recht in Deutschland, Glossar und Rechner.",
        "tags": [
         "weltempfänger",
         "radio",
@@ -3212,7 +3212,26 @@
         "abhörverbot",
         "glossar",
         "rechner",
-        "wellenlänge"
+        "wellenlänge",
+        "frankfurt",
+        "rhein-main",
+        "senderliste",
+        "planet radio",
+        "radio x",
+        "you fm",
+        "hr-info",
+        "hr3",
+        "deutschlandfunk",
+        "metropol fm",
+        "notfall",
+        "house",
+        "techno",
+        "sunshine live",
+        "frankfurt tower",
+        "atis",
+        "stimme der türkei",
+        "radio mi amigo",
+        "bbc radio 5 live"
        ],
        "sections": [
         {
@@ -3234,6 +3253,10 @@
         {
          "h": "hoeren",
          "t": "Hören in der Praxis"
+        },
+        {
+         "h": "frankfurt",
+         "t": "Sender in Frankfurt"
         },
         {
          "h": "recht",
@@ -3262,6 +3285,7 @@
          "sections": [
           "r108",
           "hoeren",
+          "frankfurt",
           "recht"
          ]
         },
@@ -3299,7 +3323,7 @@
         "praxis": "hoeren",
         "tipps": "hoeren",
         "sendeplan": "hoeren",
-        "sender": "hoeren",
+        "sender": "frankfurt",
         "stationen": "hoeren",
         "antenne": "hoeren",
         "stoerungen": "hoeren",
@@ -3310,7 +3334,19 @@
         "abkuerzungen": "glossar",
         "links": "quellen",
         "rechner": "quellen",
-        "wellenlaenge": "quellen"
+        "wellenlaenge": "quellen",
+        "rhein-main": "frankfurt",
+        "senderliste": "frankfurt",
+        "ukw-frankfurt": "frankfurt",
+        "notfall": "frankfurt",
+        "house": "frankfurt",
+        "techno": "frankfurt",
+        "dab": "frankfurt",
+        "sunshine-live": "frankfurt",
+        "planet-radio": "frankfurt",
+        "radio-x": "frankfurt",
+        "frankfurt-tower": "frankfurt",
+        "atis": "frankfurt"
        },
        "related": [
         "meshtastic",

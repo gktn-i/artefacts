@@ -62,7 +62,7 @@ vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
 in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
 Abschnitt. Bisher nutzt das der Mechatronik-Hub.
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video ·
-🔪 Messer · 📡 Funk — zusammen 25 Module mit 274 Abschnitten.
+🔪 Messer · 📡 Funk — zusammen 25 Module mit 275 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion
