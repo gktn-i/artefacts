@@ -1,0 +1,131 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Meshtastic routet nicht, es flutet, aber mit Manieren.</b> Jeder Knoten wiederholt ein Paket genau einmal, und nur, wenn er nicht vorher gehört hat, dass es ein anderer schon getan hat. Wer das Paket am schwächsten empfangen hat, darf zuerst: so wandert die Nachricht bevorzugt nach außen. Bei Hop-Limit 0 ist Schluss.</div>
+
+<h2>Der Weg eines Pakets</h2>
+<div class="steps">
+  <div class="step"><h4>Senden</h4>Der Knoten prüft per Channel Activity Detection, ob der Kanal frei ist (CSMA/CA). Ist er belegt, wartet er; danach noch eine zufällige Zahl Zeitschlitze aus dem Contention Window, das mit der Kanalauslastung wächst. Das Paket geht mit Hop-Limit 3 und Hop-Start 3 auf die Reise.</div>
+  <div class="step"><h4>Empfangen und prüfen</h4>Jeder Empfänger schaut in seine Liste kürzlich gesehener Paket-IDs. Schon bekannt: verwerfen. Neu: an die App weitergeben, falls der Kanalschlüssel passt, und zum Wiederholen vormerken.</div>
+  <div class="step"><h4>Warten, gestaffelt nach SNR</h4>Schwacher Empfang (niedriger SNR) heißt weit weg, also kurze Wartezeit. Starker Empfang heißt nah dran, also lange Wartezeit. Hört ein Knoten in seiner Wartezeit die Wiederholung eines anderen, verwirft er seine eigene.</div>
+  <div class="step"><h4>Wiederholen</h4>Hop-Limit um eins verringern, Relay-Byte auf die eigene Adresse setzen, senden. ROUTER-Knoten überspringen das Warten weitgehend und wiederholen immer, auch wenn andere es schon getan haben.</div>
+  <div class="step"><h4>Bestätigen</h4>Bei Broadcasts gilt: hört der Absender irgendeine Wiederholung seines Pakets, ist das die Bestätigung (impliziter ACK). Hört er nichts, sendet er bis zu dreimal neu. Direktnachrichten bekommen zusätzlich einen echten ACK vom Empfänger.</div>
+</div>
+
+<figure>
+<svg class="dg l" viewBox="0 0 660 250" role="img" aria-label="Zeitstrahl der Wiederholung: Knoten 0 sendet, Knoten 2 mit schwachem Empfang wiederholt nach kurzer Wartezeit, Knoten 1 mit starkem Empfang hört das und verwirft seine geplante Wiederholung, Knoten 3 hört das Paket erstmals und wiederholt mit Hop-Limit 1">
+  <!-- Zeitachse -->
+  <path class="w" d="M40,210 H640" /><text class="lbl" x="646" y="214">t</text>
+  <!-- Zeilen -->
+  <text class="lblb" x="40" y="48">Knoten 0</text><text class="lbl" x="40" y="62">Absender</text>
+  <text class="lblb" x="40" y="98">Knoten 1</text><text class="lbl" x="40" y="112">nah, SNR +8 dB</text>
+  <text class="lblb" x="40" y="148">Knoten 2</text><text class="lbl" x="40" y="162">fern, SNR −12 dB</text>
+  <text class="lblb" x="40" y="188">Knoten 3</text><text class="lbl" x="40" y="202">hört nur Knoten 2</text>
+  <path class="gd" d="M150,30 V210 M150,70 H640 M150,120 H640 M150,170 H640" />
+  <!-- Sendung Knoten 0 -->
+  <rect class="accs" x="160" y="34" width="70" height="22" rx="4" /><text class="lbla" x="195" y="49" text-anchor="middle">TX · HL 3</text>
+  <!-- Knoten 1: Wartezeit lang, dann Abbruch -->
+  <path class="gd" d="M232,98 H420" /><text class="lbl" x="326" y="92" text-anchor="middle">lange Wartezeit (starkes Signal)</text>
+  <rect class="box" x="420" y="88" width="70" height="22" rx="4" style="stroke-dasharray:3 3" /><text class="lbl" x="455" y="103" text-anchor="middle">verworfen</text>
+  <!-- Knoten 2: kurze Wartezeit, dann TX -->
+  <path class="gd" d="M232,148 H300" /><text class="lbl" x="266" y="142" text-anchor="middle">kurz</text>
+  <rect class="accs" x="300" y="134" width="70" height="22" rx="4" /><text class="lbla" x="335" y="149" text-anchor="middle">TX · HL 2</text>
+  <!-- Pfeile: Knoten 2 TX gehört von 0 (ACK), 1 (verwirft), 3 (neu) -->
+  <path class="good" d="M335,134 L335,60" /><text class="lbl" x="342" y="72" text-anchor="start">impliziter ACK für Knoten 0</text>
+  <path class="badl" d="M370,145 L418,102" />
+  <path class="acc" d="M335,156 L335,186" />
+  <!-- Knoten 3 -->
+  <rect class="accs" x="380" y="176" width="70" height="22" rx="4" /><text class="lbla" x="415" y="191" text-anchor="middle">TX · HL 1</text>
+  <path class="gd" d="M452,187 H560" /><text class="lbl" x="506" y="181" text-anchor="middle">nächste Empfänger …</text>
+  <!-- Legende -->
+  <rect class="accs" x="480" y="34" width="14" height="10" rx="2" /><text class="lbl" x="500" y="43">Sendung, HL = Hop-Limit</text>
+</svg>
+<figcaption>Das Beispiel aus der Meshtastic-Dokumentation als Zeitstrahl: Knoten 2 hört den Absender schwach und wiederholt deshalb zuerst. Knoten 1 hört diese Wiederholung und schweigt. Knoten 3 hat das Paket erstmals gehört und trägt es mit Hop-Limit 1 weiter.</figcaption>
+</figure>
+
+<h2>Hops richtig verstehen</h2>
+<div class="kpis">
+  <div class="kpi"><div class="k">Standard</div><div class="v">3 Hops</div><div class="s">„Really, 3 is fine“, so die Dokumentation</div></div>
+  <div class="kpi"><div class="k">Maximum</div><div class="v">7 Hops</div><div class="s">3 Bit im Paketkopf, mehr geht technisch nicht</div></div>
+  <div class="kpi"><div class="k">Hops away</div><div class="v">Start − Limit</div><div class="s">Die App rechnet Hop-Start minus Hop-Limit beim Empfang</div></div>
+  <div class="kpi"><div class="k">Wiederholungen</div><div class="v">bis 3</div><div class="s">bei fehlendem ACK, dann NAK an die App</div></div>
+</div>
+<div class="warn"><b>Mehr Hops heißt nicht mehr Reichweite, sondern mehr Kollisionen.</b> Jeder zusätzliche Hop vervielfacht die Sendungen im ganzen Mesh. Wer wirklich 4 oder 5 braucht, setzt sie nur an den Randknoten, nicht in der Mitte. Seit Firmware 2.7.11 wiederholt ein Knoten ein bereits gesehenes Paket noch einmal, wenn eine spätere Kopie mehr Hops übrig hat.</div>
+
+<h2>Rollen</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th data-s="text">Rolle</th><th>Wiederholt</th><th>Sichtbar</th><th>Wofür</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>CLIENT</b></td><td>Ja, wenn kein anderer es getan hat</td><td>Ja</td><td>Der Normalfall: Handgerät, Dachknoten, alles</td><td>Standard. In fast allen Fällen die richtige Wahl</td></tr>
+<tr><td><b>CLIENT_MUTE</b></td><td>Nie</td><td>Ja</td><td>Zweit- und Drittgerät neben einem besser platzierten Knoten, Innenraum</td><td>Spart Airtime, wenn mehrere eigene Knoten dicht beieinander stehen</td></tr>
+<tr><td><b>CLIENT_BASE</b></td><td>Immer für favorisierte Knoten, sonst wie CLIENT</td><td>Ja</td><td>Eigener Dach- oder Dachbodenknoten, der die eigenen schwachen Geräte nach draußen trägt</td><td>Seit 2.7.10. Die eigenen Knoten dort als Favoriten markieren</td></tr>
+<tr><td><b>CLIENT_HIDDEN</b></td><td>Nur lokale Kanäle</td><td>Nein</td><td>Verdeckte oder stromsparende Knoten</td><td>Periodische Sendungen aus</td></tr>
+<tr><td><b>ROUTER</b></td><td>Immer, mit Vorrang, im frühen Zeitfenster</td><td>Ja</td><td>Bergkuppe, Sendemast, exponierte Lage mit Blick über viele Knoten</td><td>Bluetooth und WLAN aus, Stromsparen erzwungen (ESP32). Nicht fürs Wohnhaus</td></tr>
+<tr><td><b>ROUTER_LATE</b></td><td>Immer, aber erst nach allen anderen</td><td>Ja</td><td>Funklöcher lokal schließen, ohne dem großen Mesh Airtime zu nehmen</td><td>Kein Ersatz für einen Dachknoten, dafür gibt es CLIENT_BASE</td></tr>
+<tr><td><b>REPEATER</b></td><td>Immer, mit Vorrang</td><td>Nein</td><td>Reine Infrastruktur ohne Eintrag in der Knotenliste</td><td><b>Seit 2.7.11 abgekündigt</b>, weil unsichtbare Knoten Lücken im Wiederholungsverlauf erzeugen</td></tr>
+<tr><td><b>TRACKER</b></td><td>Nur wach</td><td>Ja</td><td>Positionen mit Vorrang, schläft zwischen den Sendungen</td><td>Fahrzeug, Rucksack, Tier</td></tr>
+<tr><td><b>SENSOR</b></td><td>Nur wach</td><td>Ja</td><td>Telemetrie mit Vorrang, schläft dazwischen</td><td>Wetterstation, Umweltsensor</td></tr>
+<tr><td><b>TAK / TAK_TRACKER</b></td><td>Ja</td><td>Ja</td><td>Anbindung an ATAK, PLI-Positionen</td><td>Reduziert Routine-Sendungen</td></tr>
+<tr><td><b>LOST_AND_FOUND</b></td><td>Ja</td><td>Ja</td><td>Sendet regelmäßig seine Position als Nachricht in den Standardkanal</td><td>Zum Wiederfinden eines verlorenen Geräts</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>ROUTER ist keine Belohnung für einen guten Standort im Wohnzimmer.</b> Die Dokumentation empfiehlt ausdrücklich CLIENT, CLIENT_MUTE oder CLIENT_BASE. Unnötige ROUTER erhöhen Kollisionen, senken die Zustellrate und verbrauchen Hops, weil sie bevorzugt und immer wiederholen. Vor dem Umstellen mit der lokalen Community sprechen.</div>
+
+<h2>Rebroadcast-Modus</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Modus</th><th>Verhalten</th></tr></thead>
+<tbody>
+<tr><td><b>ALL</b> (Standard)</td><td>Wiederholt alles, was mit denselben Modem-Einstellungen ankommt, auch Pakete fremder Kanäle, die der Knoten nicht entschlüsseln kann</td></tr>
+<tr><td><b>ALL_SKIP_DECODING</b></td><td>Wie ALL, ohne Entschlüsselungsversuch. Nur für REPEATER</td></tr>
+<tr><td><b>LOCAL_ONLY</b></td><td>Nur Pakete der eigenen primären und sekundären Kanäle</td></tr>
+<tr><td><b>KNOWN_ONLY</b></td><td>Wie LOCAL_ONLY, zusätzlich nur von Knoten, die in der eigenen Knotenliste stehen</td></tr>
+<tr><td><b>CORE_PORTNUMS_ONLY</b></td><td>Nur NodeInfo, Text, Position, Telemetrie und Routing. Kein Range-Test, kein Paxcounter, kein TAK</td></tr>
+<tr><td><b>NONE</b></td><td>Keine Wiederholung. Nur für SENSOR, TRACKER, TAK_TRACKER</td></tr>
+</tbody>
+</table></div>
+
+<h2>Direktnachrichten: Next-Hop seit 2.6</h2>
+<p>Broadcasts werden geflutet, Direktnachrichten seit Firmware 2.6 nicht mehr durchgehend. Die erste Nachricht flutet noch; kommt die Antwort über denselben Relais-Knoten zurück, merkt sich der Absender dessen Adresse im Feld <em>Next Hop</em>. Danach wiederholt nur noch dieser eine Knoten. Passt das nicht mehr, etwa weil sich jemand bewegt hat, fällt der letzte Sendeversuch auf Fluten zurück. Ältere Firmware im Pfad wird pro Hop automatisch überbrückt.</p>
+
+<h2>Regelmäßiger Verkehr und Kanalauslastung</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Paket</th><th>Intervall (Dokumentation)</th><th>Firmware 2.7.26</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Position</b></td><td>15 min, mit Smart Broadcast bei Bewegung öfter</td><td>Voreinstellung 60 min; auf dem öffentlichen Kanal nie unter 60 min</td><td>Smart Broadcast: frühestens nach 100 m und 5 min</td></tr>
+<tr><td><b>Gerätetelemetrie</b></td><td>30 min</td><td>Senden ins Mesh seit 2.7.0 standardmäßig <b>aus</b>; eingeschaltet 60 min</td><td>An die App geht der Akkustand trotzdem jede Minute</td></tr>
+<tr><td><b>NodeInfo</b></td><td>3 h</td><td>3 h, Minimum 1 h</td><td>Zusätzlich auf Anfrage, wenn ein Knoten einen Unbekannten hört</td></tr>
+</tbody>
+</table></div>
+<p>Ab 40 online gesehenen Knoten verlängert die Firmware diese Intervalle automatisch. Zwei Messwerte zeigen jede App: <b>Channel Utilization</b> (wie voll der Kanal insgesamt ist, Fenster eine Minute) und <b>Air Util TX</b> (eigener Sendeanteil in der letzten Stunde). Die Firmware zieht daraus Konsequenzen:</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Schwelle</th><th>Wirkung in der Firmware</th></tr></thead>
+<tbody>
+<tr><td>Channel Utilization über <b>25 %</b></td><td>Höfliche Sendungen (Telemetrie, NodeInfo, Nachbarinfo) werden zurückgehalten</td></tr>
+<tr><td>Channel Utilization ab <b>40 %</b></td><td>Der Knoten sendet gar nicht mehr, „Ch. util &gt; 40 %, skip send“</td></tr>
+<tr><td>Air Util TX über <b>5 %</b> (EU)</td><td>Ab der Hälfte des Duty-Cycle-Budgets keine Metadaten mehr</td></tr>
+<tr><td>Air Util TX über <b>10 %</b> (EU)</td><td>Duty-Cycle-Grenze erreicht: jede Sendung wird abgewiesen, bis das rollende Stundenfenster wieder Luft hat</td></tr>
+</tbody>
+</table></div>
+<p class="note">Faustregel aus dem Projekt-Blog: Über 60 Knoten auf engem Raum lohnt der Wechsel von LongFast auf MediumSlow oder MediumFast. In Wellington mit mehr als 150 Knoten auf LongFast lag die Kanalauslastung an belebten Standorten über 65 %, und das Mesh war praktisch unbenutzbar.</p>
+
+<h2>Knotenliste (NodeDB)</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Plattform</th><th>Maximale Knoten (Firmware 2.7.26)</th></tr></thead>
+<tbody>
+<tr><td>nRF52840 (T-Echo, RAK4631, T114, T1000-E)</td><td>80</td></tr>
+<tr><td>ESP32-S3 mit 16 MB Flash (T-Deck, Heltec V4-R8)</td><td>250</td></tr>
+<tr><td>ESP32-S3 mit 8 MB Flash (Heltec V3)</td><td>200</td></tr>
+<tr><td>ESP32 klassisch, RP2040</td><td>100</td></tr>
+<tr><td>STM32WL</td><td>10</td></tr>
+</tbody>
+</table></div>
+<p class="note">Ist die Liste voll, fliegt der älteste, uninteressanteste Eintrag heraus; Favoriten bleiben. Firmware 2.8 baut die Speicherung um (120 Knoten „heiß“ auf nRF52 plus eine zweite Stufe).</p>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Mesh Broadcast Algorithm (Layer 0 bis 3, CSMA/CA, Managed Flooding, Next-Hop, Intervall-Skalierung), Device Configuration (Rollen, Rebroadcast-Modi), Configuration Tips.</li>
+    <li>Meshtastic-Blog: „Choosing the Right Device Role“ (2024), „Demystifying Router Late“ (2025), „Why your mesh should switch from LongFast“ (2025).</li>
+    <li>Firmware-Quelltext: <code>RadioInterface.cpp</code> (CWmin 3, CWmax 8, SNR-Fenster), <code>FloodingRouter.cpp</code>, <code>airtime.h</code> (25 % / 40 % / 50 %), <code>mesh-pb-constants.h</code> (MAX_NUM_NODES), Release Notes 2.7.10 und 2.7.11.</li>
+  </ul>
+</div>

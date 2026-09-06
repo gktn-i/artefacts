@@ -1,0 +1,85 @@
+---
+import "./_style.css";
+---
+<div class="kurz z"><b>Vier Rechnungen, die im Mesh-Alltag immer wieder gebraucht werden.</b> Sie laufen im Browser, nichts wird gesendet. Ergebnisse sind Näherungen für die Planung; verbindlich sind Messung und Amtsblatt.</div>
+
+<h2>Airtime und Duty Cycle</h2>
+<div class="calc" data-calc="loraair">
+  <h4>Wie lange belegt ein Paket den Kanal?</h4>
+  <div class="row">
+    <div><label>Preset</label><select data-k="preset">
+      <option value="SHORT_TURBO">ShortTurbo (SF7, 500 kHz)</option>
+      <option value="SHORT_FAST">ShortFast (SF7, 250 kHz)</option>
+      <option value="SHORT_SLOW">ShortSlow (SF8, 250 kHz)</option>
+      <option value="MEDIUM_FAST">MediumFast (SF9, 250 kHz)</option>
+      <option value="MEDIUM_SLOW">MediumSlow (SF10, 250 kHz)</option>
+      <option value="LONG_FAST" selected>LongFast (SF11, 250 kHz)</option>
+      <option value="LONG_MODERATE">LongModerate (SF11, 125 kHz, 4/8)</option>
+      <option value="LONG_SLOW">LongSlow (SF12, 125 kHz, 4/8)</option>
+      <option value="LONG_TURBO">LongTurbo (SF11, 500 kHz, 4/8)</option>
+      <option value="VERY_LONG_SLOW">VeryLongSlow (SF12, 62,5 kHz, 4/8)</option>
+      <option value="CUSTOM">Eigene Werte</option>
+    </select></div>
+    <div><label>Nutzlast (Byte)</label><input type="number" data-k="bytes" value="40" min="0" max="237" /></div>
+    <div><label>SF (nur eigene Werte)</label><input type="number" data-k="sf" placeholder="7–12" min="5" max="12" /></div>
+    <div><label>Bandbreite kHz</label><input type="number" data-k="bw" placeholder="125 / 250 / 500" /></div>
+    <div><label>Coderate 4/x</label><input type="number" data-k="cr" placeholder="5–8" min="5" max="8" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">Nutzlast ist der verschlüsselte Inhalt: Bei einer Textnachricht etwa Textlänge plus 6 Byte Protobuf-Rahmen. Dazu rechnet der Rechner den 16-Byte-Meshtastic-Header und die 16 Präambelsymbole. Eine Position braucht rund 30 Byte, ein NodeInfo 40 bis 60 Byte.</p>
+
+<h2>Antennenlänge</h2>
+<div class="calc" data-calc="antlen">
+  <h4>λ/4, λ/2 und 5/8 λ für eine Frequenz</h4>
+  <div class="row">
+    <div><label>Frequenz (MHz)</label><input type="number" data-k="f" value="869.525" step="0.001" /></div>
+    <div><label>Verkürzungsfaktor</label><input type="number" data-k="k" value="0.95" step="0.01" min="0.8" max="1" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">EU_868 LongFast: 869,525 MHz. EU_433 Slot 4: 433,875 MHz. Für Drahtantennen 0,95 ansetzen, für dicke Stäbe 0,93, danach mit dem VNA nachstimmen.</p>
+
+<h2>Link-Budget und Freiraumreichweite</h2>
+<div class="calc" data-calc="fpvfunk">
+  <h4>Wie weit trägt es bei freier Sicht?</h4>
+  <div class="row">
+    <div><label>Sendeleistung (mW)</label><input type="number" data-k="p" value="158" /></div>
+    <div><label>Empfindlichkeit (dBm)</label><input type="number" data-k="s" value="-131" /></div>
+    <div><label>Frequenz (MHz)</label><input type="number" data-k="f" value="869.525" step="0.001" /></div>
+    <div><label>Gewinn Sender (dBi)</label><input type="number" data-k="gt" value="2" step="0.5" /></div>
+    <div><label>Gewinn Empfänger (dBi)</label><input type="number" data-k="gr" value="2" step="0.5" /></div>
+    <div><label>Reserve (dB)</label><input type="number" data-k="m" value="15" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">Vorbelegt mit SX1262 bei 22 dBm (158 mW), LongFast-Empfindlichkeit rund −131 dBm und zwei Stabantennen. Das Ergebnis ist die Obergrenze bei freier Sicht; Stadt, Wald und Körper kosten 20 bis 40 dB. Empfindlichkeiten je Preset stehen in <a href="#presets">Modem-Presets</a>.</p>
+
+<h2>Akkulaufzeit</h2>
+<div class="calc" data-calc="akku">
+  <h4>Wie lange hält der Knoten?</h4>
+  <div class="row">
+    <div><label>Kapazität (mAh)</label><input type="number" data-k="cap" value="850" /></div>
+    <div><label>mittlerer Strom (mA)</label><input type="number" data-k="i" value="6" /></div>
+    <div><label>nutzbar (%)</label><input type="number" data-k="d" value="80" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">Vorbelegt mit einem T-Echo ohne Dauer-GPS. Anhaltswerte für den mittleren Strom in <a href="#strom">Strom, Akku &amp; Solar</a>.</p>
+
+<h2>Formeln dahinter</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Größe</th><th>Formel</th><th>Quelle</th></tr></thead>
+<tbody>
+<tr><td>Symboldauer</td><td>T<sub>s</sub> = 2<sup>SF</sup> / BW</td><td>Semtech SX1262-Datenblatt</td></tr>
+<tr><td>Präambel</td><td>T<sub>pre</sub> = (n<sub>pre</sub> + 4,25) · T<sub>s</sub>, Meshtastic n<sub>pre</sub> = 16</td><td>Semtech AN1200.13, Firmware RadioInterface.h</td></tr>
+<tr><td>Nutzlastsymbole</td><td>8 + max(⌈(8·PL − 4·SF + 28 + 16) / (4·(SF − 2·DE))⌉ · (CR + 4), 0), DE = 1 bei T<sub>s</sub> &gt; 16 ms</td><td>Semtech AN1200.13 (expliziter Header, CRC an)</td></tr>
+<tr><td>Wellenlänge</td><td>λ = c / f = 299 792 458 m/s ÷ f</td><td></td></tr>
+<tr><td>Freiraumdämpfung</td><td>FSPL = 20·log(d<sub>km</sub>) + 20·log(f<sub>MHz</sub>) + 32,44 dB</td><td>Friis</td></tr>
+<tr><td>ERP</td><td>ERP = P<sub>TX</sub> − Verluste + G<sub>dBi</sub> − 2,15</td><td>Definition ERP/EIRP</td></tr>
+</tbody>
+</table></div>

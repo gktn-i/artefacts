@@ -1,0 +1,65 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der T-Echo ist das Gegenstück zum T-Deck: kein Schreiben, dafür Wochen statt Stunden.</b> nRF52840, SX1262, E-Ink-Display, GPS, 850-mAh-Akku und Gehäuse, alles dabei. Man liest Nachrichten und Positionen auf dem Gerät, schreibt aber über die App. Als Immer-dabei-Knoten im Rucksack ist er kaum zu schlagen.</div>
+
+<h2>Technische Daten</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Merkmal</th><th>T-Echo</th><th>T-Echo Lite (2025)</th><th>T-Echo Plus (2025)</th></tr></thead>
+<tbody>
+<tr><td><b>MCU</b></td><td colspan="3">nRF52840, Bluetooth 5 LE, NFC; externer SPI-Flash</td></tr>
+<tr><td><b>LoRa</b></td><td>SX1262, −17 bis +22 dBm, U.FL</td><td>SX1262-Modul, 400–520 / 830–945 MHz</td><td>SX1262, +22 dBm</td></tr>
+<tr><td><b>Display</b></td><td>1,54" E-Ink GDEH0154D67, 200×200, Schnellrefresh</td><td>1,22" E-Ink GDEM0122T61, 176×192, nur Vollrefresh</td><td>1,54" E-Ink</td></tr>
+<tr><td><b>GPS</b></td><td>Quectel L76K (GPS, BeiDou, GLONASS, QZSS)</td><td>optional als Zusatzmodul</td><td>L76K</td></tr>
+<tr><td><b>Akku</b></td><td>850 mAh, im Gehäuse</td><td>nicht enthalten; Solar-Eingang 5 V an der Base-Platine</td><td>2400 mAh</td></tr>
+<tr><td><b>Bedienung</b></td><td>Reset, Programmtaste, kapazitive Touch-Taste oben</td><td>Tasten; Kit mit Tastatur (TCA8418), Audio, Vibration</td><td>Tasten, Summer, Vibrationsmotor, IMU (BHI260AP)</td></tr>
+<tr><td><b>Sensor</b></td><td>optional BME280 (Druck, Feuchte)</td><td>optional ICM20948 IMU</td><td>IMU</td></tr>
+<tr><td><b>Schlafstrom</b></td><td>keine offizielle Angabe</td><td>2–10 µA laut LilyGo</td><td>keine Angabe</td></tr>
+<tr><td><b>Firmware-Ziel</b></td><td><code>t-echo</code> · <code>t-echo-inkhud</code></td><td><code>t-echo-lite</code> (seit August 2025), kein InkHUD-Build</td><td><code>t-echo-plus</code> (Variante vorhanden, Status im Fluss)</td></tr>
+<tr><td><b>Dokumentiert bei Meshtastic</b></td><td>ja</td><td>nein (nur Firmware)</td><td>nein</td></tr>
+</tbody>
+</table></div>
+<p class="note">Der T-Echo hat keinen Summer, das übernimmt erst der Plus. Dazu gibt es den <b>T-Echo Card</b> im Scheckkartenformat mit 0,42-Zoll-OLED statt E-Ink (Firmware-Ziel <code>t-echo-card</code>). Alle Zahlen aus LilyGo-GitHub und Meshtastic-Dokumentation.</p>
+
+<h2>Bedienung mit drei Tasten</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Taste</th><th>Kurz</th><th>Doppelt</th><th>Dreifach</th><th>Vierfach</th><th>Halten</th></tr></thead>
+<tbody>
+<tr><td><b>Touch</b> (oben)</td><td>Display auffrischen, aufwecken</td><td></td><td></td><td></td><td></td></tr>
+<tr><td><b>PRG</b> (Programm)</td><td>nächste Seite</td><td>Position ad hoc senden</td><td>GPS an/aus</td><td>Hintergrundlicht</td><td>Ausschalten</td></tr>
+<tr><td><b>RST</b></td><td>Neustart</td><td>Bootloader (UF2-Laufwerk)</td><td></td><td></td><td></td></tr>
+</tbody>
+</table></div>
+
+<h2>InkHUD: die E-Ink-Oberfläche</h2>
+<p>InkHUD ist die Standalone-Anzeige für E-Ink-Geräte (seit Firmware 2.6, „in aktiver Entwicklung“). Sie zeigt Nachrichten, Knoten, Position und Telemetrie in umschaltbaren „Applets“ und lässt sich mit einer Taste bedienen: kurz drücken wechselt das Applet, lang drücken öffnet das Menü. Installiert wird sie über den Web-Flasher („Install InkHUD“) oder die Datei mit dem Zusatz <code>-inkhud</code>. Unterstützt sind laut Dokumentation der T-Echo, ThinkNode M1, T3-S3 E-Paper, Heltec MeshPocket, Vision Master E213/E290 und Wireless Paper. Firmware 2.8 bringt Offline-Kartenkacheln mit Zoom. Schreiben geht auch mit InkHUD nur über vorgefertigte Nachrichten oder die App.</p>
+
+<h2>Flashen und Bootloader</h2>
+<div class="steps">
+  <div class="step"><h4>Firmware laden</h4>Datei <code>firmware-t-echo-2.x.x.uf2</code> (oder <code>-inkhud</code>) aus dem Release-Paket <code>firmware-nrf52840-…zip</code>, alternativ direkt über den Web-Flasher.</div>
+  <div class="step"><h4>Bootloader-Modus</h4>USB anschließen, RST doppelt drücken. Ein Laufwerk mit <code>CURRENT.UF2</code>, <code>INDEX.HTM</code> und <code>INFO_UF2.TXT</code> erscheint.</div>
+  <div class="step"><h4>Kopieren</h4>UF2-Datei auf das Laufwerk ziehen. Das Gerät startet nach dem Kopieren neu. Kein Treiber, kein Terminal.</div>
+  <div class="step"><h4>Bei Bootschleifen</h4>Alte Daten können nach großen Updates stören: Factory-Erase-UF2 passend zur SoftDevice-Version in <code>INFO_UF2.TXT</code> aufspielen, dann die Firmware erneut.</div>
+  <div class="step"><h4>Bootloader aktualisieren</h4>Ältere T-Echo-Bootloader können kein OTA über Bluetooth. Update per <code>update-lilygo_techo_bootloader-0.6.1_nosd.uf2</code> oder über die Android-App (Erweitert → Firmware-Update → Bootloader).</div>
+</div>
+
+<h2>Laufzeit herausholen</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Maßnahme</th><th>Wirkung</th></tr></thead>
+<tbody>
+<tr><td>GPS nur bei Bedarf (PRG dreimal drücken)</td><td>Der größte Einzelverbraucher; ohne GPS liefert das Handy die Position</td></tr>
+<tr><td>GPS-Intervall verlängern, Smart Broadcast an lassen</td><td>Weniger Fixversuche, weniger Sendungen</td></tr>
+<tr><td>Rolle CLIENT oder CLIENT_MUTE</td><td>Kein Dauerwiederholen fremder Pakete</td></tr>
+<tr><td>Bluetooth-Verbindung nur bei Gebrauch</td><td>Die BLE-Verbindung zur App kostet dauerhaft Strom</td></tr>
+<tr><td>Hintergrundlicht aus</td><td>E-Ink braucht nur beim Umschalten Energie, die Beleuchtung ständig</td></tr>
+</tbody>
+</table></div>
+<p class="note">ADC-Faktor für die Akkuanzeige: 2,0. Zeigt das Gerät dauerhaft falsche Prozente, wie in <a href="#config">Konfiguration</a> kalibrieren.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: LILYGO T-Echo (Spezifikationen, Tastenfunktionen), Flashing nRF52 (Drag &amp; Drop, Factory Erase, Bootloader-Update, OTA), Device UIs → InkHUD (Geräteliste, Bedienung).</li>
+    <li>LilyGo-GitHub: T-Echo (Display GDEH0154D67, 850 mAh, Buzzer nur Plus), T-Echo-Lite (Display GDEM0122T61, Schlafstrom 2–10 µA), Dokumentations-Repository (T-Echo Plus, T-Echo Card); Firmware <code>variants/nrf52840/t-echo*</code>, Pull Requests #7636 (T-Echo Lite) und #11342 (T-Echo Card).</li>
+  </ul>
+</div>

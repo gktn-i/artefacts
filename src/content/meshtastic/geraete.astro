@@ -1,0 +1,88 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<div class="kurz"><b>Zwei Fragen entscheiden die Gerätewahl: ESP32 oder nRF52, und mit oder ohne Handy.</b> ESP32-Boards sind billig, haben WLAN und tragen große Displays, brauchen aber Strom. nRF52840-Boards laufen wochenlang am Akku und sind die Wahl für Solar, Tracker und alles, was lange unbeaufsichtigt hängt. Auf allen läuft dieselbe Firmware, dasselbe Mesh.</div>
+
+<h2>Die Plattformen</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Plattform</th><th>Funk zum Handy</th><th>Stromhunger</th><th>Flashen</th><th>Besonderheiten</th><th>Typische Boards</th></tr></thead>
+<tbody>
+<tr><td><b>ESP32-S3</b></td><td>Bluetooth <em>oder</em> WLAN (nie beides)</td><td>hoch: rund 100 mA aktiv, mit Light Sleep etwa die Hälfte</td><td>Web-Flasher im Browser (Chrome/Edge), USB-Treiber evtl. nötig</td><td>Einzige Plattform für MUI (Touch-Display), Store &amp; Forward (mit PSRAM), MQTT-Gateway per WLAN, mehr RAM und größere Knotenliste</td><td>Heltec V3/V4, T-Deck, T-Beam Supreme, T3-S3, Wireless Tracker</td></tr>
+<tr><td><b>nRF52840</b></td><td>nur Bluetooth</td><td>niedrig: einige mA aktiv, wenige µA im Schlaf</td><td>UF2 per Drag-and-drop, kein Treiber; OTA über Bluetooth</td><td>Bevorzugt für Solar, Tracker, Handgeräte mit langer Laufzeit; kein WLAN, kein JSON-MQTT, InkHUD für E-Ink</td><td>T-Echo, RAK4631, Heltec T114, T1000-E, Wio Tracker L1</td></tr>
+<tr><td><b>RP2040 / RP2350</b></td><td>keins (Pico W: nur WLAN)</td><td>mittel: ca. 40 mA</td><td>UF2 per Drag-and-drop</td><td>Bastelplattform; kein Bluetooth, deshalb Bedienung nur per USB oder WLAN</td><td>Raspberry Pi Pico + Waveshare-Hat, RAK11310</td></tr>
+<tr><td><b>STM32WL</b></td><td>keins</td><td>sehr niedrig</td><td>UART/SWD</td><td>Kleinster Funktionsumfang, wenig Speicher (10 Knoten)</td><td>Wio-E5-Module</td></tr>
+<tr><td><b>Linux (meshtasticd)</b></td><td>Netzwerk</td><td>je nach Rechner</td><td>Paketinstallation</td><td>Raspberry Pi mit LoRa-Hat oder USB-Funkstick, MUI und Web-Oberfläche</td><td>Pi + RAK-Hat, Meshstick</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Funkchip: SX1262 oder LR11xx nehmen.</b> Das Projekt empfiehlt ausdrücklich die zweite Chipgeneration (SX126x, LR11xx). Die alten SX127x (SX1276/1278) laufen aus, und LR1110-Geräte wie der T1000-E können Pakete von SX127x-Knoten nicht direkt empfangen. Der Chip bestimmt auch die Leistung: SX1276 bis 20 dBm, SX1262 bis 22 dBm, Heltec-Boards mit Verstärker bis 28 dBm, Station G2 bis 37 dBm.</div>
+
+<h2>Übersicht der gängigen Geräte</h2>
+<p>Stand September 2026, alle in der 868-MHz-Ausführung erhältlich. Preisklassen: € unter 30, €€ 30–60, €€€ 60–100, €€€€ über 100 Euro, jeweils grob und ohne Antenne, Akku oder Gehäuse, wenn nicht dabei.</p>
+<div class="tbl-wrap"><table style="min-width:1180px">
+<thead><tr><th data-s="text">Gerät</th><th>MCU</th><th>LoRa</th><th>Display</th><th>GPS</th><th>Akku dabei</th><th>Antenne</th><th data-s="text">Preis</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Heltec LoRa32 V3 / V3.1</b></td><td>ESP32-S3</td><td>SX1262</td><td>0,96" OLED</td><td>nein</td><td>nein</td><td>U.FL</td><td>€</td><td>Der günstigste Einstieg, Bastelboard, Innen-Gateway</td></tr>
+<tr><td><b>Heltec LoRa32 V4 / V4-R8</b></td><td>ESP32-S3</td><td>SX1262, bis 28 dBm</td><td>0,96" OLED (R8 auch TFT)</td><td>optional</td><td>nein, Solar-Eingang</td><td>U.FL</td><td>€€</td><td>Stärkerer Nachfolger mit Solar- und GNSS-Anschluss</td></tr>
+<tr><td><b>Heltec Wireless Tracker V2</b></td><td>ESP32-S3</td><td>SX1262, bis 28 dBm</td><td>0,96" TFT</td><td>UC6580</td><td>nein</td><td>U.FL</td><td>€€</td><td>Günstiger GPS-Tracker</td></tr>
+<tr><td><b>Heltec Wireless Paper</b></td><td>ESP32-S3</td><td>SX1262</td><td>2,13" E-Ink</td><td>nein</td><td>nein</td><td>U.FL</td><td>€</td><td>E-Ink am Netzstrom, InkHUD</td></tr>
+<tr><td><b>Heltec Mesh Node T114</b></td><td>nRF52840</td><td>SX1262</td><td>1,14" TFT (optional)</td><td>optional</td><td>nein, Solar-Eingang</td><td>U.FL</td><td>€€</td><td>Preis-Leistungs-Favorit für Solar und Dauerbetrieb</td></tr>
+<tr><td><b>Heltec MeshPocket</b></td><td>nRF52840</td><td>SX1262</td><td>2,13" E-Ink</td><td>nein</td><td>5000 / 10000 mAh</td><td>intern</td><td>€€€</td><td>Powerbank mit Knoten, Qi2-Laden</td></tr>
+<tr><td><b>LilyGo T3-S3</b></td><td>ESP32-S3</td><td>SX1262 · SX1276 · SX1280 (2,4 GHz) · LR1121</td><td>0,96" OLED</td><td>nein</td><td>nein</td><td>SMA</td><td>€</td><td>Günstig, SMA-Buchse, einzige 2,4-GHz-Option</td></tr>
+<tr><td><b>LilyGo T-Beam Supreme</b></td><td>ESP32-S3</td><td>SX1262</td><td>1,3" OLED</td><td>MAX-M10S oder L76K</td><td>18650-Halter (Flat Top, ungeschützt)</td><td>U.FL</td><td>€€</td><td>Sensorreicher GPS-Knoten mit Drucksensor, IMU, RTC</td></tr>
+<tr><td><b>LilyGo T-Beam 1W</b></td><td>ESP32-S3</td><td>SX1262 + 1-W-Verstärker (32 dBm)</td><td>1,3" OLED</td><td>L76K</td><td>nein</td><td>ja</td><td>€€€</td><td>Leistungsknoten mit Lüfter; in der EU auf 27 dBm ERP drosseln</td></tr>
+<tr><td><b>LilyGo T-Deck / Plus</b></td><td>ESP32-S3</td><td>SX1262</td><td>2,8" IPS-Touch 320×240</td><td>Plus: MIA-M10Q</td><td>Plus: 2000 mAh</td><td>U.FL</td><td>€€€</td><td>Handgerät mit Tastatur, ohne Handy nutzbar (MUI). Siehe <a href="#t-deck">T-Deck</a></td></tr>
+<tr><td><b>LilyGo T-Deck Pro</b></td><td>ESP32-S3</td><td>SX1262</td><td>3,1" E-Ink-Touch 320×240</td><td>MIA-M10Q</td><td>1400 mAh</td><td>PCB intern</td><td>€€€</td><td>Tastaturgerät mit E-Ink, Varianten mit 4G oder Audio</td></tr>
+<tr><td><b>LilyGo T-Echo</b></td><td>nRF52840</td><td>SX1262</td><td>1,54" E-Ink 200×200</td><td>L76K</td><td>850 mAh, Gehäuse</td><td>U.FL</td><td>€€€</td><td>Komplettgerät mit wochenlanger Laufzeit. Siehe <a href="#t-echo">T-Echo</a></td></tr>
+<tr><td><b>LilyGo T-Lora Pager</b></td><td>ESP32-S3</td><td>LR1121</td><td>2,33" TFT 480×222</td><td>MIA-M10Q</td><td>1500 mAh</td><td>klappbar, fest</td><td>€€€</td><td>Pager-Format mit QWERTY, Encoder, NFC, Audio</td></tr>
+<tr><td><b>RAK WisBlock 4631 + 19007</b></td><td>nRF52840</td><td>SX1262</td><td>optional</td><td>optional (RAK12500)</td><td>nein, Solar-Eingang 4,4–5,5 V</td><td>U.FL</td><td>€€</td><td>Der Solar- und Dachknoten-Baukasten, modular</td></tr>
+<tr><td><b>RAK WisMesh Pocket V2</b></td><td>nRF52840</td><td>SX1262</td><td>1,3" OLED</td><td>ja</td><td>3200 mAh</td><td>SMA</td><td>€€€</td><td>Fertiges Handgerät, CE-konform überarbeitet</td></tr>
+<tr><td><b>RAK WisMesh Tag</b></td><td>nRF52840</td><td>SX1262</td><td>nein</td><td>AT6558R</td><td>1000 mAh, IP66</td><td>intern</td><td>€€</td><td>Schlüsselanhänger-Tracker</td></tr>
+<tr><td><b>Seeed SenseCAP T1000-E</b></td><td>nRF52840</td><td>LR1110</td><td>nein</td><td>AG3335</td><td>700 mAh, IP65</td><td>intern</td><td>€€</td><td>Scheckkarten-Tracker, sehr beliebt, kein Display</td></tr>
+<tr><td><b>Seeed Wio Tracker L1 / L1 Pro</b></td><td>nRF52840</td><td>SX1262</td><td>1,3" OLED (Pro mit Gehäuse)</td><td>L76K</td><td>Pro: 2000 mAh</td><td>U.FL</td><td>€€</td><td>Günstiger nRF52-Tracker mit Joystick</td></tr>
+<tr><td><b>Seeed SenseCAP Indicator</b></td><td>ESP32-S3 + RP2040</td><td>SX1262</td><td>3,95" Touch 480×480</td><td>über Grove</td><td>nein</td><td>extern</td><td>€€</td><td>Tisch- oder Autogerät mit MUI</td></tr>
+<tr><td><b>Elecrow ThinkNode M1</b></td><td>nRF52840</td><td>SX1262</td><td>1,54" E-Ink</td><td>L76K</td><td>1200 mAh</td><td>RP-SMA</td><td>€€</td><td>Günstige T-Echo-Alternative, InkHUD</td></tr>
+<tr><td><b>Station G2</b> (B&amp;Q)</td><td>ESP32-S3</td><td>SX1262 + Verstärker, bis 37 dBm</td><td>1,3" OLED</td><td>optional</td><td>nein, 9–19 V / USB-PD</td><td>SMA</td><td>€€€€</td><td>Basisstation für Amateurfunk-Leistungen; in der EU auf 27 dBm ERP begrenzen</td></tr>
+<tr><td><b>Nano G2 Ultra</b> (B&amp;Q)</td><td>nRF52840</td><td>SX1262, TCXO</td><td>1,3" OLED</td><td>ATGM336H</td><td>optional</td><td>intern</td><td>€€€</td><td>Kompaktes nRF52-Handgerät, rund 3,5 Tage Laufzeit</td></tr>
+<tr><td><b>Raspberry Pi Pico + Waveshare SX1262</b></td><td>RP2040</td><td>SX1262</td><td>nein</td><td>nein</td><td>nein</td><td>U.FL</td><td>€€</td><td>Bastelknoten; ohne Bluetooth nur per USB oder WLAN (Pico W)</td></tr>
+</tbody>
+</table></div>
+<p class="note">Quellen: Meshtastic-Hardware-Dokumentation je Gerät, LilyGo-GitHub, Herstellerangaben. Preise schwanken stark, deshalb nur Klassen. Alle Geräte brauchen vor dem ersten Einschalten eine Antenne am LoRa-Anschluss.</p>
+
+<h2>Eignung auf einen Blick</h2>
+<Profiles
+  label="Gerät"
+  criteria={["Laufzeit", "Display", "GPS", "Ohne Handy", "Günstig", "Einstieg"]}
+  labels={{ use: "Nimm es für" }}
+  items={[
+    { name: "Heltec LoRa32 V3", tag: "ESP32-S3", scores: [2, 2, 1, 1, 5, 5], pro: "Billig, überall erhältlich, riesige Nutzerbasis, WLAN für MQTT.", con: "Hungrig am Akku, winziges Display, Ladeprobleme mit USB-C-zu-C-Kabeln.", use: "Ersten Knoten, Innen-Gateway, Bastelprojekte." },
+    { name: "Heltec Mesh Node T114", tag: "nRF52840", scores: [5, 3, 2, 1, 4, 4], pro: "Sehr sparsam, Solar-Eingang, TFT und GPS optional, UF2-Flashen.", con: "Kein WLAN, Display klein, Gehäuse muss man selbst besorgen.", use: "Solarknoten, Dachknoten, Zweitgerät." },
+    { name: "RAK WisBlock 4631", tag: "nRF52840", scores: [5, 1, 2, 1, 3, 3], pro: "Der bewährte Solar-Baukasten, Sensoren und Ethernet als Module, 2 µA Schlafstrom.", con: "Modular heißt zusammenstecken; RAK4631-R braucht Bootloader-Wechsel.", use: "Unbeaufsichtigte Außenknoten, Ethernet-Gateway." },
+    { name: "Seeed T1000-E", tag: "nRF52840 · LR1110", scores: [4, 1, 5, 1, 4, 5], pro: "Scheckkartenformat, IP65, GPS, Summer, fertig aus der Schachtel.", con: "Kein Display, interne Antenne, LR1110 hört keine SX127x-Knoten.", use: "Tracker für Rucksack, Kind, Fahrzeug; Zweitknoten in der Tasche." },
+    { name: "Seeed Wio Tracker L1 Pro", tag: "nRF52840", scores: [4, 3, 5, 2, 4, 4], pro: "Günstiger GPS-Tracker mit Display und Gehäuse, Joystick, Solar-Eingang.", con: "Jung am Markt, wenig Zubehör.", use: "Wandern, Fahrrad, Einstieg mit GPS." },
+    { name: "LilyGo T-Beam Supreme", tag: "ESP32-S3", scores: [2, 3, 5, 1, 3, 3], pro: "Guter GNSS-Empfänger, Sensoren an Bord, 18650-Halter, PSRAM für Store & Forward.", con: "Stromhungrig, sperrig, SoftRF vorinstalliert.", use: "Fahrzeugknoten, Store-and-Forward-Server, Sensorstation am Netz." },
+    { name: "LilyGo T-Deck Plus", tag: "ESP32-S3", scores: [2, 5, 4, 5, 2, 3], pro: "Tastatur, Touchscreen, MUI: Nachrichten ohne Handy schreiben und lesen.", con: "Akku hält einen Tag, kein zweiter Client bei laufendem MUI, GPS-Erkennung zickig.", use: "Eigenständiges Handgerät, Einsatz ohne Smartphone." },
+    { name: "LilyGo T-Echo", tag: "nRF52840", scores: [5, 4, 5, 3, 3, 4], pro: "Komplettgerät mit E-Ink, GPS, Akku und Gehäuse; Wochen statt Tage; InkHUD.", con: "Kleines Display, Bedienung über eine Taste, kein Schreiben ohne Handy.", use: "Immer-dabei-Knoten, Wandern, Notfallgerät im Rucksack." },
+    { name: "LilyGo T-Lora Pager", tag: "ESP32-S3 · LR1121", scores: [2, 5, 5, 5, 2, 3], pro: "Großes Display, QWERTY, Encoder, NFC, Audio; MUI-Build vorhanden.", con: "Teuer, stromhungrig, feste Antenne.", use: "Standalone-Messenger mit Komfort." },
+    { name: "Station G2", tag: "ESP32-S3 · PA", scores: [1, 2, 2, 1, 1, 1], pro: "Bis 37 dBm, rauscharmer Vorverstärker, robuste SMA-Buchse, Netzbetrieb.", con: "Braucht Netz, teuer, Leistung in der EU nur im Amateurfunk nutzbar.", use: "Backbone-Knoten für Lizenzinhaber, Vereinsstation." }
+  ]}
+  note="Punkte 1–5, höher ist besser. Einschätzung nach Dokumentation und Community-Erfahrung, Stand September 2026." />
+
+<h2>Was man beim Kauf prüft</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Frequenzvariante</div><div class="cd">Die 868-MHz-Ausführung („EU868“ oder „863–870 MHz“) bestellen. 915-MHz-Boards funken zwar, aber außerhalb der Zuteilung; 433 nur für 433-Gruppen.</div></div>
+  <div class="card"><div class="ct">Antennenanschluss</div><div class="cd">U.FL/IPEX braucht ein Pigtail auf SMA. SMA direkt am Board ist robuster. Auf die passende Antenne für 868 MHz achten, nicht die aus der Wundertüte.</div></div>
+  <div class="card"><div class="ct">Akku und Laden</div><div class="cd">JST-Stecker sind nicht normiert, Polung prüfen. Heltec V3 lädt mit USB-C-zu-C-Kabeln oft nicht. 18650 im T-Beam nur ungeschützte Flat-Top-Zellen.</div></div>
+  <div class="card"><div class="ct">Gehäuse</div><div class="cd">Die Bastelboards kommen nackt. 3D-Druck-Gehäuse gibt es für alle; für draußen IP65 mit Antenne außen und Kabeldurchführung nach unten.</div></div>
+  <div class="card"><div class="ct">Firmware-Zielname</div><div class="cd">Jedes Board hat einen eigenen Build (t-deck, t-echo, heltec-v3, rak4631, tracker-t1000-e). Der falsche Build läuft scheinbar durch, danach reagiert das Gerät nicht mehr.</div></div>
+  <div class="card"><div class="ct">Community-Support</div><div class="cd">Verbreitete Boards haben Gehäuse, Anleitungen, Erfahrungswerte. Exoten kosten Zeit. Die Dokumentation nennt als Favoriten: RAK Starter Kit, T1000-E, Wio Tracker L1, T114, Nano G2 Ultra, T3-S3.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Supported Hardware (Plattformvergleich, Community-Favoriten, Chip-Empfehlung), Geräteseiten von LilyGo, Heltec, RAK, Seeed, Elecrow, B&amp;Q, Raspberry Pi; Device UIs (MUI, InkHUD).</li>
+    <li>LilyGo-GitHub (T-Deck, T-Deck-Pro, T-Echo, T-Echo-Lite, Dokumentations-Repository), Firmware-Variantenliste <code>variants/</code>.</li>
+    <li>Herstellerdatenblätter zu SX1262 (22 dBm), SX1276 (20 dBm), LR1121; Heltec-Angaben zur 28-dBm-Variante; B&amp;Q zur Station G2.</li>
+  </ul>
+</div>

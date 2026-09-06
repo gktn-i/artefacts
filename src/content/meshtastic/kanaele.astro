@@ -1,0 +1,88 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Kanäle sind Gruppen mit Schlüssel, keine Frequenzen.</b> Alle acht Kanäle eines Knotens funken auf derselben Frequenz mit demselben Preset. Was sie trennt, ist der Name und der Schlüssel (PSK). Wer beides hat, liest mit; alle anderen wiederholen das Paket trotzdem brav weiter.</div>
+
+<h2>Acht Plätze, eine Frequenz</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Index</th><th>Rolle</th><th>Aufgabe</th></tr></thead>
+<tbody>
+<tr><td>0</td><td><b>PRIMARY</b></td><td>Immer vorhanden, nicht abschaltbar. Sein Name bestimmt den Frequenzslot, über ihn gehen Position, Telemetrie und NodeInfo</td></tr>
+<tr><td>1–7</td><td><b>SECONDARY</b> oder DISABLED</td><td>Private Gruppen, jede mit eigenem Schlüssel. Aktive Kanäle müssen lückenlos aufeinander folgen</td></tr>
+</tbody>
+</table></div>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Einstellung je Kanal</th><th>Werte</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><b>Name</b></td><td>bis 11 Zeichen</td><td>Leer auf dem Primärkanal = Standardkanal, angezeigt als „LongFast“. Der Name „admin“ war der alte Fernwartungskanal</td></tr>
+<tr><td><b>PSK</b></td><td>0 · 16 · 32 Byte</td><td>0 = unverschlüsselt, 16 Byte = AES-128, 32 Byte = AES-256. „random“ in den Apps erzeugt einen 256-Bit-Schlüssel</td></tr>
+<tr><td><b>Uplink / Downlink</b></td><td>an / aus</td><td>Ob Pakete dieses Kanals zu einem MQTT-Broker gehen bzw. von dort ins Mesh kommen. Standard: beides aus</td></tr>
+<tr><td><b>Position Precision</b></td><td>0–32 Bit</td><td>Wie genau die eigene Position in diesem Kanal geteilt wird, siehe unten</td></tr>
+<tr><td><b>Mute</b></td><td>an / aus</td><td>Keine Benachrichtigung, kein Summer für diesen Kanal</td></tr>
+</tbody>
+</table></div>
+
+<h2>Der Standardschlüssel AQ==</h2>
+<p>Ab Werk ist der Primärkanal mit dem Ein-Byte-Schlüssel <code>0x01</code> (Base64: <code>AQ==</code>) „verschlüsselt“. Die Firmware expandiert ihn zu einem fest einprogrammierten 128-Bit-Schlüssel, den jeder kennt. Das ist Absicht: So können sich alle Knoten der Welt auf dem Standardkanal unterhalten. Privat ist daran nichts. Für vertrauliche Gruppen einen Zweitkanal mit zufälligem Schlüssel anlegen und den Primärkanal für die Öffentlichkeit lassen.</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Variante</th><th>Wer liest mit</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Standardkanal</b> (leer, AQ==)</td><td>Jeder Meshtastic-Knoten in Reichweite</td><td>Nachbarn finden, öffentliches Mesh, Notfallkontakt</td></tr>
+<tr><td><b>Simple-Schlüssel</b> (simple1 bis simple254)</td><td>Jeder, der den Index errät. Öffentlich bekannte Ableitungen</td><td>Tests, offene Themenkanäle</td></tr>
+<tr><td><b>Zufälliger 256-Bit-Schlüssel</b></td><td>Nur, wer den QR-Code bekommen hat</td><td>Familie, Verein, Einsatzgruppe</td></tr>
+<tr><td><b>Kein Schlüssel</b></td><td>Jeder, auch mit fremder Software</td><td>Amateurfunkbetrieb (dort ist Verschlüsselung verboten)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Teilen per QR-Code oder URL</h2>
+<p>Die Apps erzeugen eine URL der Form <code>https://meshtastic.org/e/#…</code>, die alle Kanäle samt Schlüsseln <em>und</em> die LoRa-Einstellungen (Region, Preset, Slot) enthält. Wer sie einliest, übernimmt die komplette Kanalliste. Deshalb:</p>
+<ul>
+  <li>Den QR-Code eines privaten Kanals nur denen geben, die hineingehören; er ist der Schlüssel</li>
+  <li>„Kanal hinzufügen“ statt „ersetzen“ wählen, wenn man nur einen Zweitkanal ergänzen will</li>
+  <li>Nach dem Einlesen prüfen, ob Region und Preset noch stimmen</li>
+  <li>Auf unbeaufsichtigten Knoten (Dach, Berg) keine privaten Schlüssel hinterlegen: Wer das Gerät in die Hand bekommt, liest sie aus</li>
+</ul>
+
+<h2>Verschlüsselung, ehrlich eingeordnet</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Was</th><th>Kanalnachrichten</th><th>Direktnachrichten (seit 2.5)</th></tr></thead>
+<tbody>
+<tr><td><b>Verfahren</b></td><td>AES-256-CTR mit dem Kanal-PSK, Nonce aus Knotennummer und Paket-ID</td><td>X25519-Schlüsselaustausch, AES-CCM mit Prüfsumme (PKI)</td></tr>
+<tr><td><b>Vertraulichkeit</b></td><td>Ja, solange der PSK geheim bleibt</td><td>Ja, nur der Empfänger kann lesen</td></tr>
+<tr><td><b>Integrität</b></td><td>Nein: kein MAC, Manipulation wäre möglich (Issue #4030)</td><td>Ja</td></tr>
+<tr><td><b>Absender-Echtheit</b></td><td>Nein: Wer den PSK hat, kann jede Absenderkennung vortäuschen</td><td>Ja, signiert. Seit 2.7 mit Schlüsselverifizierung, ab 2.8 zusätzlich XEdDSA-Signaturen</td></tr>
+<tr><td><b>Forward Secrecy</b></td><td>Nein: Wer den Schlüssel später bekommt, liest alles Mitgeschnittene</td><td>Nein</td></tr>
+<tr><td><b>Paketkopf</b></td><td colspan="2">Immer unverschlüsselt: Absender, Empfänger, Paket-ID, Hop-Zähler, Kanal-Hash. Wer mithört, sieht wer mit wem, nicht was</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Meshtastic ist kein Signal.</b> Die Dokumentation sagt es selbst: keine Perfect Forward Secrecy, keine Integrität auf Kanälen, keine Authentifizierung auf Kanälen. Für den Hobbyeinsatz und gegen passives Mitlesen reicht das. Für mehr: Schlüssel gelegentlich wechseln, Direktnachrichten statt Kanal nutzen, keine privaten Schlüssel auf Außenknoten.</div>
+
+<h2>Positionsgenauigkeit je Kanal</h2>
+<p>Statt die Position ganz abzuschalten, kann man sie unscharf teilen. Der Wert gibt an, wie viele Bits der Koordinate gesendet werden:</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th data-s="num">Bits</th><th>Genauigkeit</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>keine Position</td><td>Der Kanal bekommt nie eine Position</td></tr>
+<tr><td>10</td><td>≈ 23 km</td><td>Untere Grenze, die der öffentliche MQTT-Server weiterreicht</td></tr>
+<tr><td>11</td><td>≈ 12 km</td><td></td></tr>
+<tr><td>12</td><td>≈ 6 km</td><td></td></tr>
+<tr><td>13</td><td>≈ 3 km</td><td>Firmware-Vorgabe für neue Kanäle</td></tr>
+<tr><td>14</td><td>≈ 1,5 km</td><td></td></tr>
+<tr><td>15</td><td>≈ 730 m</td><td></td></tr>
+<tr><td>16</td><td>≈ 360 m</td><td>Obere Grenze für den öffentlichen MQTT-Server</td></tr>
+<tr><td>17</td><td>≈ 180 m</td><td></td></tr>
+<tr><td>18</td><td>≈ 90 m</td><td></td></tr>
+<tr><td>19</td><td>≈ 45 m</td><td></td></tr>
+<tr><td>32</td><td>exakt</td><td>Volle GPS-Genauigkeit</td></tr>
+</tbody>
+</table></div>
+<p class="note">Seit 2.7.1 kann die Position auf dem Primärkanal aus und stattdessen auf einem privaten Zweitkanal an sein. Automatisch beliefert wird dann der Zweitkanal mit dem kleinsten Index, der Position erlaubt. Firmware 2.8 lässt auf Kanälen mit bekanntem Schlüssel keine exakte Position mehr zu.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Channel Configuration (Index, Rollen, Name, PSK, Position Precision), Encryption (Verfahren, Grenzen, Änderungen seit 2.5), Configuration Tips (Position auf Zweitkanal).</li>
+    <li>Protobuf <code>channel.proto</code> (Ableitung des Standardschlüssels aus 0x01), <code>channel.options</code> (Name max. 12 Byte), Python-Bibliothek (URL-Format <code>/e/#</code>).</li>
+    <li>Meshtastic-Blog „Introducing new Public Key Cryptography in v2.5“ (2024); Release Notes 2.8.0.</li>
+  </ul>
+</div>

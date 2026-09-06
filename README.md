@@ -1,10 +1,10 @@
 # Artefakte
 
-Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Fotografie und Messer — <https://bib.gktn.dev>.
+Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Fotografie, Messer und Funk — <https://bib.gktn.dev>.
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 23 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle 24 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -62,7 +62,7 @@ vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
 in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
 Abschnitt. Bisher nutzt das der Mechatronik-Hub.
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video ·
-🔪 Messer — zusammen 23 Module mit 246 Abschnitten.
+🔪 Messer · 📡 Funk — zusammen 24 Module mit 266 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion
@@ -94,7 +94,8 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
   Mechatronik-Module, die Technik-Module der Werkstatt und den Messer-Hub —
   Faltabschnitte, sortierbare Tabellen, Katalog- und Glossarfilter, die Rechner
   (darunter der § 42a-Check und der Schärfwinkel-Rechner) und die
-  PID-Simulation. Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
+  PID-Simulation sowie die LoRa-Rechner des Funk-Hubs (Airtime, Antennenlänge).
+  Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
   Ein Modul kann mehrere Skripte laden (`PAGE_SCRIPTS` nimmt auch ein Array,
   so kombiniert *3D-Druck* das Technik-Skript mit seinem Simulator).
 - **Eignungstabellen für Vergleiche:** `src/components/Profiles.astro` rendert

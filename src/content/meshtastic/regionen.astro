@@ -1,0 +1,118 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>In Deutschland heißt die Region EU_868.</b> Sie deckt nur ein 250 kHz schmales Fenster von 869,400 bis 869,650 MHz ab, dafür mit 500 mW ERP und 10 % Duty Cycle, dem großzügigsten Teilband im europäischen SRD-Bereich. Ohne gesetzte Region sendet ein Knoten gar nicht.</div>
+
+<h2>Die beiden EU-Regionen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Region</th><th>Frequenzbereich</th><th>Leistungsgrenze</th><th>Duty Cycle</th><th>Slots mit LongFast</th><th>Voreingestellter Slot</th></tr></thead>
+<tbody>
+<tr><td><b>EU_868</b></td><td>869,400–869,650 MHz</td><td>27 dBm ERP (500 mW)</td><td>10 % je Stunde</td><td>1</td><td>Slot 1 = <b>869,525 MHz</b></td></tr>
+<tr><td><b>EU_433</b></td><td>433,000–434,000 MHz (Firmware)</td><td>10 dBm ERP (10 mW)</td><td>10 % je Stunde</td><td>4</td><td>Slot 4 = <b>433,875 MHz</b></td></tr>
+</tbody>
+</table></div>
+<div class="gb">
+  <div class="gb-col"><h4>EU_868: die Wahl für fast alle</h4><ul>
+    <li>50-mal mehr Sendeleistung als EU_433</li>
+    <li>Der europaweit meistgenutzte Bereich, hier sind die öffentlichen Meshes</li>
+    <li>Kurze Antennen (λ/4 ≈ 8 cm), Boards und Antennen überall erhältlich</li>
+    <li>Nachteil: nur ein Frequenzslot, alle teilen sich 250 kHz</li>
+  </ul></div>
+  <div class="gb-col"><h4>EU_433: das Nischenband</h4><ul>
+    <li>Bessere Ausbreitung durch Vegetation und Gebäude, aber nur 10 mW ERP</li>
+    <li>Längere Antennen (λ/4 ≈ 16 cm), weniger Gerätevarianten</li>
+    <li>Praktisch kein öffentliches Mesh; eher für geschlossene Gruppen</li>
+    <li>Die Firmware nutzt 433,0–434,0 MHz, das offizielle SRD-Band reicht von 433,050 bis 434,790 MHz (offenes Issue #3371)</li>
+  </ul></div>
+</div>
+
+<h2>Wie der Frequenzslot entsteht</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Frequenzachse 863 bis 870 MHz mit den SRD-Teilbändern und dem Meshtastic-Fenster EU_868 von 869,4 bis 869,65 MHz, in dem genau ein 250-kHz-Kanal bei 869,525 MHz liegt">
+  <path class="w" d="M30,120 H640" />
+  <!-- Skala 863..870 -->
+  <g class="lbl">
+    <text x="30" y="142" text-anchor="middle">863</text><text x="117" y="142" text-anchor="middle">864</text><text x="204" y="142" text-anchor="middle">865</text><text x="291" y="142" text-anchor="middle">866</text><text x="378" y="142" text-anchor="middle">867</text><text x="465" y="142" text-anchor="middle">868</text><text x="552" y="142" text-anchor="middle">869</text><text x="639" y="142" text-anchor="middle">870 MHz</text>
+  </g>
+  <path class="wt" d="M30,116 V124 M117,116 V124 M204,116 V124 M291,116 V124 M378,116 V124 M465,116 V124 M552,116 V124 M639,116 V124" />
+  <!-- Teilbaender: 863-870 25 mW 0.1%/LBT (hintergrund) -->
+  <rect class="box" x="30" y="86" width="609" height="30" />
+  <text class="lbl" x="150" y="105" text-anchor="middle">863–870: 25 mW ERP, 0,1 % oder LBT+AFA</text>
+  <!-- 868.0-868.6: 25 mW 1% -->
+  <rect class="accs" x="465" y="86" width="52" height="30" style="opacity:.5" />
+  <text class="lbl" x="491" y="76" text-anchor="middle">868,0–868,6</text><text class="lbl" x="491" y="64" text-anchor="middle">25 mW · 1 %</text>
+  <!-- 868.7-869.2: 25 mW 0.1% -->
+  <rect class="accs" x="526" y="86" width="43" height="30" style="opacity:.5" />
+  <!-- 869.4-869.65: 500 mW 10% -->
+  <rect class="accf" x="587" y="86" width="22" height="30" />
+  <text class="lbla" x="598" y="50" text-anchor="middle">869,400–869,650</text><text class="lbla" x="598" y="36" text-anchor="middle">500 mW ERP · 10 %</text>
+  <path class="acc" d="M598,54 V84" />
+  <!-- 869.7-870: 5 mW / 25 mW 1% -->
+  <rect class="accs" x="613" y="86" width="26" height="30" style="opacity:.5" />
+  <text class="lbl" x="626" y="76" text-anchor="middle">869,7–870</text>
+  <!-- Zoom-Box unten -->
+  <path class="gd" d="M587,120 L200,160 M609,120 L560,160" />
+  <rect class="box" x="200" y="160" width="360" height="30" rx="4" />
+  <rect class="accs" x="214" y="165" width="332" height="20" rx="3" />
+  <text class="lbla" x="380" y="179" text-anchor="middle">1 Slot · 250 kHz · Mitte 869,525 MHz (LongFast)</text>
+  <text class="lbl" x="200" y="156" text-anchor="start">869,400</text><text class="lbl" x="560" y="156" text-anchor="end">869,650</text>
+</svg>
+<figcaption>Das SRD-Band 863–870 MHz und seine Teilbänder. Meshtastic nutzt nur das Fenster mit 500 mW und 10 %: dort passt genau ein 250-kHz-Kanal hinein. Mit 125-kHz-Presets (LongModerate, LongSlow) ergeben sich rechnerisch zwei Slots, 500-kHz-Presets passen nicht und fallen auf LongFast zurück.</figcaption>
+</figure>
+<div class="fbox"><span class="f">Slots = ⌊(f<sub>Ende</sub> − f<sub>Start</sub>) / BW⌋ · Slot = (hash(Kanalname) mod Slots) + 1 · f = f<sub>Start</sub> + BW/2 + (Slot − 1) · BW</span><span class="l">EU_868 mit 250 kHz: ⌊0,25 / 0,25⌋ = 1 Slot bei 869,525 MHz. Hash: djb2 über den Namen des primären Kanals, bei leerem Namen über den Preset-Namen („LongFast“)</span></div>
+<div class="warn"><b>Ein anderer Name für den primären Kanal kann die Frequenz verschieben.</b> In EU_868 mit 250 kHz nicht, da gibt es nur einen Slot. In EU_433 (4 Slots), in den USA (104 Slots) oder mit 125-kHz-Presets aber schon: Dann landet man auf einem anderen Slot als der Rest der Stadt. Abhilfe: den Frequenzslot in der LoRa-Konfiguration fest setzen. Firmware 2.8 rechnet die Slots mit Schutzabständen neu, für EU_868 und EU_433 ändert sich dadurch nichts.</div>
+
+<h2>Duty Cycle: das Stundenbudget</h2>
+<div class="kpis">
+  <div class="kpi"><div class="k">Erlaubt</div><div class="v">10 %</div><div class="s">der Zeit senden, das sind 6 Minuten je Stunde</div></div>
+  <div class="kpi"><div class="k">Fenster</div><div class="v">rollend 1 h</div><div class="s">jede Minute neu bewertet</div></div>
+  <div class="kpi"><div class="k">LongFast-Text</div><div class="v">≈ 0,7 s</div><div class="s">je Paket mit 40 Byte, also gut 500 Pakete je Stunde inklusive Wiederholungen</div></div>
+  <div class="kpi"><div class="k">Bei Überschreitung</div><div class="v">Sendestopp</div><div class="s">Fehler „Duty cycle limit exceeded“, Senden geht weiter, sobald wieder Budget da ist</div></div>
+</div>
+<p>Das Budget zählt alles, was der eigene Knoten sendet: eigene Nachrichten, ACKs, Telemetrie, und jedes wiederholte Paket anderer. Ein fleißiger Dachknoten in einem regen Mesh kommt an die Grenze. Die Option <em>Override Duty Cycle</em> schaltet die Bremse ab und verletzt damit die Zuteilung; sie ist für Europa nicht gedacht. Wer knapp wird: Positions- und Telemetrieintervalle verlängern, Rolle prüfen, Preset wechseln. Die Airtime je Paket rechnet der <a href="#rechner">Rechner</a>.</p>
+
+<h2>Alle Regionen der Firmware</h2>
+<p>Zum Nachschlagen, etwa für Reisen: Frequenzbereich, Leistungsgrenze und Duty Cycle, wie sie in Firmware 2.7.26 und der Dokumentation stehen. Die Firmware hält diese Grenzen ein, egal was man in „TX Power“ einträgt.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Code</th><th>Gebiet</th><th data-s="num">MHz</th><th data-s="num">Leistung (dBm)</th><th data-s="num">Duty Cycle (%)</th></tr></thead>
+<tbody>
+<tr><td><b>EU_868</b></td><td>Europa</td><td>869,4–869,65</td><td>27</td><td>10</td></tr>
+<tr><td><b>EU_433</b></td><td>Europa</td><td>433,0–434,0</td><td>10</td><td>10</td></tr>
+<tr><td>US</td><td>USA, Kanada</td><td>902,0–928,0</td><td>30</td><td>100</td></tr>
+<tr><td>ANZ</td><td>Australien, Neuseeland</td><td>915,0–928,0</td><td>30</td><td>100</td></tr>
+<tr><td>ANZ_433</td><td>Australien, Neuseeland</td><td>433,05–434,79</td><td>14</td><td>100</td></tr>
+<tr><td>CN</td><td>China</td><td>470,0–510,0</td><td>19</td><td>100</td></tr>
+<tr><td>JP</td><td>Japan</td><td>920,5–923,5</td><td>13</td><td>100</td></tr>
+<tr><td>KR</td><td>Korea</td><td>920,0–923,0</td><td>23</td><td>100</td></tr>
+<tr><td>TW</td><td>Taiwan</td><td>920,0–925,0</td><td>27</td><td>100</td></tr>
+<tr><td>RU</td><td>Russland</td><td>868,7–869,2</td><td>20</td><td>100</td></tr>
+<tr><td>IN</td><td>Indien</td><td>865,0–867,0</td><td>30</td><td>100</td></tr>
+<tr><td>NZ_865</td><td>Neuseeland</td><td>864,0–868,0</td><td>36</td><td>100</td></tr>
+<tr><td>TH</td><td>Thailand</td><td>920,0–925,0</td><td>27</td><td>10</td></tr>
+<tr><td>UA_433</td><td>Ukraine</td><td>433,0–434,7</td><td>10</td><td>10</td></tr>
+<tr><td>UA_868</td><td>Ukraine</td><td>868,0–868,6</td><td>14</td><td>1</td></tr>
+<tr><td>MY_433</td><td>Malaysia</td><td>433,0–435,0</td><td>20</td><td>100</td></tr>
+<tr><td>MY_919</td><td>Malaysia</td><td>919,0–924,0</td><td>27</td><td>100</td></tr>
+<tr><td>SG_923</td><td>Singapur</td><td>917,0–925,0</td><td>20</td><td>100</td></tr>
+<tr><td>PH_433</td><td>Philippinen</td><td>433,0–434,7</td><td>10</td><td>100</td></tr>
+<tr><td>PH_868</td><td>Philippinen</td><td>868,0–869,4</td><td>14</td><td>100</td></tr>
+<tr><td>PH_915</td><td>Philippinen</td><td>915,0–918,0</td><td>24</td><td>100</td></tr>
+<tr><td>KZ_433</td><td>Kasachstan</td><td>433,075–434,775</td><td>10</td><td>100</td></tr>
+<tr><td>KZ_863</td><td>Kasachstan</td><td>863,0–868,0</td><td>30</td><td>100</td></tr>
+<tr><td>NP_865</td><td>Nepal</td><td>865,0–868,0</td><td>30</td><td>100</td></tr>
+<tr><td>BR_902</td><td>Brasilien</td><td>902,0–907,5</td><td>30</td><td>100</td></tr>
+<tr><td>LORA_24</td><td>weltweit, nur SX128x</td><td>2400,0–2483,5</td><td>10</td><td>100</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Leistungsgrenzen sind für die EU als ERP hinterlegt, für die USA als EIRP. Reisen: Die Region muss zum Aufenthaltsland passen, und alle Knoten eines Meshes müssen dieselbe Region und dasselbe Preset haben.</p>
+
+<div class="tip"><b>Ausblick Firmware 2.8 (Alpha, September 2026):</b> neue EU-Regionen <b>EU_866</b> (865,6–867,6 MHz, 27 dBm, 2,5 % Duty Cycle, eigene „Lite“-Presets mit 125 kHz) und <b>EU_N_868</b> (dasselbe Fenster wie EU_868, aber schmale 62,5-kHz-„Narrow“-Presets), dazu Amateurfunkregionen für 2 m und 70 cm. In den USA wird LongTurbo statt LongFast Standard für neue Knoten, LongFast und LongTurbo hören sich nicht. Für Deutschland bleibt EU_868 mit LongFast der gemeinsame Nenner.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Radio Settings (Europe Frequency Bands, Frequency Slot Calculator), LoRa Configuration (Regionstabelle, Duty-Cycle-Hinweis), Region by Country (Deutschland, Österreich, Schweiz: EU_868 / EU_433).</li>
+    <li>Firmware <code>RadioInterface.cpp</code>: Regionstabelle mit Quellenkommentaren (EN 300 220-2 V3.2.1 Tabelle B.1, 500 mW / 27 dBm), Slot-Formel, djb2-Hash; Branch <code>develop</code> für die 2.8-Regionen; Issue #3371 zu EU_433.</li>
+    <li>Rechtliche Grundlagen in <a href="#recht">Recht in Deutschland</a>.</li>
+  </ul>
+</div>

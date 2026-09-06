@@ -1,0 +1,95 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Stromverbrauch entscheidet, ob ein Knoten Tage oder Monate durchhält.</b> ESP32-Boards liegen bei rund 100 mA im Betrieb, nRF52840-Boards bei wenigen Milliampere und im Schlaf bei Mikroampere. Der zweitgrößte Verbraucher nach dem Prozessor ist GPS, der drittgrößte das Display mit Beleuchtung.</div>
+
+<h2>Größenordnungen</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Gerät / Plattform</th><th>Betrieb (Empfang)</th><th>Schlaf</th><th>Quelle</th></tr></thead>
+<tbody>
+<tr><td><b>Heltec LoRa32 V3</b> (ESP32-S3)</td><td>≈ 100 mA; ≈ 50 mA mit dynamischem Light Sleep</td><td>unter 10 µA Deep Sleep (Hersteller)</td><td>Firmware-PR #7121, Heltec</td></tr>
+<tr><td><b>Heltec Wireless Paper</b> (ESP32-S3)</td><td>160 mA mit WLAN; 20–30 mA mit Light Sleep und WLAN-Sparmodus</td><td>20 µA</td><td>Firmware-PR #7121, Heltec</td></tr>
+<tr><td><b>ESP32 klassisch</b> (T-Beam v1.x)</td><td>50–60 mA ohne Bluetooth und Display</td><td>abhängig vom Board</td><td>Meshtastic-Discussion #435</td></tr>
+<tr><td><b>Heltec Mesh Node T114</b> (nRF52840)</td><td>einige mA</td><td>11 µA</td><td>Heltec</td></tr>
+<tr><td><b>RAK4631</b> (nRF52840)</td><td>einige mA</td><td>2 µA</td><td>RAK-Datenblatt</td></tr>
+<tr><td><b>Nano G2 Ultra</b> (nRF52840)</td><td>Ø 14 mA bei 4,3 V mit Display und GPS</td><td>–</td><td>Firmware-Issue #2658</td></tr>
+<tr><td><b>LilyGo T-Echo Lite</b> (nRF52840)</td><td>einige mA</td><td>2–10 µA</td><td>LilyGo-GitHub</td></tr>
+<tr><td><b>Raspberry Pi Pico</b> (RP2040)</td><td>≈ 40 mA; ≈ 18 mA mit gedrosseltem Takt</td><td>–</td><td>Meshtastic-Discussion #435</td></tr>
+<tr><td><b>Senden</b> (alle, SX1262 bei 22 dBm)</td><td>zusätzlich 100–150 mA für die Dauer des Pakets</td><td>–</td><td>Semtech-Datenblatt</td></tr>
+</tbody>
+</table></div>
+<p class="note">Es gibt keine offizielle Verbrauchstabelle; die Meshtastic-Dokumentation beschreibt nur die Messmethode (USB-Messgerät oder Labornetzteil, mindestens eine Stunde, besser zwei bis sechs). Die Werte oben sind Hersteller- und Community-Angaben, gerundet.</p>
+
+<h2>Was wie viel kostet</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 210" role="img" aria-label="Balkendiagramm des mittleren Stromverbrauchs: ESP32 mit Display rund 100 Milliampere, ESP32 mit Light Sleep rund 50, nRF52 mit GPS rund 15, nRF52 ohne GPS rund 5, nRF52 im Schlaf praktisch null">
+  <text class="lblb" x="20" y="22">Mittlerer Strom, grob (mA)</text>
+  <g class="lbl">
+    <text x="210" y="52" text-anchor="end">ESP32-S3, Display, Bluetooth</text><rect class="badf" x="220" y="42" width="400" height="14" /><text x="626" y="53">≈ 100</text>
+    <text x="210" y="78" text-anchor="end">ESP32-S3 mit Light Sleep</text><rect class="accs" x="220" y="68" width="200" height="14" /><text x="426" y="79">≈ 50</text>
+    <text x="210" y="104" text-anchor="end">nRF52840 mit GPS, Display</text><rect class="accs" x="220" y="94" width="60" height="14" /><text x="286" y="105">≈ 15</text>
+    <text x="210" y="130" text-anchor="end">nRF52840 ohne GPS</text><rect class="goodf" x="220" y="120" width="20" height="14" /><text x="246" y="131">≈ 5</text>
+    <text x="210" y="156" text-anchor="end">nRF52840 Tiefschlaf</text><rect class="goodf" x="220" y="146" width="2" height="14" /><text x="228" y="157">≈ 0,01</text>
+  </g>
+  <path class="gd" d="M220,36 V166" />
+  <text class="lbl" x="220" y="190" text-anchor="start">Beispiel: 3000 mAh ÷ 100 mA ≈ 30 h · 3000 mAh ÷ 5 mA ≈ 25 Tage (jeweils vor Wandlerverlusten)</text>
+</svg>
+<figcaption>Warum die Dokumentation nRF52 für Solar und Handgeräte empfiehlt: Faktor 10 bis 20 im Verbrauch, ohne dass am Funk etwas anders wäre.</figcaption>
+</figure>
+
+<h2>Laufzeit abschätzen</h2>
+<div class="calc" data-calc="akku">
+  <h4>Wie lange hält der Akku?</h4>
+  <div class="row">
+    <div><label>Kapazität (mAh)</label><input type="number" data-k="cap" value="3000" /></div>
+    <div><label>mittlerer Strom (mA)</label><input type="number" data-k="i" value="12" /></div>
+    <div><label>nutzbar (%)</label><input type="number" data-k="d" value="80" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">Der mittlere Strom ist Schlafstrom plus Sendespitzen, gewichtet über die Zeit. Ein Knoten, der alle 15 Minuten eine Sekunde mit 130 mA sendet, addiert im Mittel nur 0,15 mA. Was zählt, ist der Ruhestrom.</p>
+
+<h2>Akkus</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Typ</th><th>Spannung</th><th>Vorteil</th><th>Nachteil</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>LiPo-Pouch</b> (500–3000 mAh)</td><td>3,7 V nominal, 4,2 V voll</td><td>Passt in jedes Gehäuse, JST-Stecker an den meisten Boards</td><td>Empfindlich gegen Hitze, Kälte, Beschädigung; Stecker-Polung uneinheitlich</td><td>Handgeräte, Zweitknoten</td></tr>
+<tr><td><b>18650 Li-Ion</b> (2500–3500 mAh)</td><td>3,7 V</td><td>Robust, austauschbar, günstig; Halter am T-Beam</td><td>Nur ungeschützte Flat-Top-Zellen passen in den T-Beam-Halter</td><td>Solarknoten, Fahrzeug</td></tr>
+<tr><td><b>LiFePO4</b> (z. B. 32700, 6000 mAh)</td><td>3,2 V nominal, 3,65 V voll</td><td>Kältefest, sehr viele Zyklen, sicher</td><td>Niedrigere Spannung: Board muss damit laufen, Laderegler muss LiFePO4 können</td><td>Winterfeste Solarknoten</td></tr>
+<tr><td><b>Powerbank</b></td><td>5 V USB</td><td>Überall zu haben</td><td>Viele schalten bei kleinen Lasten ab; Wandlerverluste</td><td>Notlösung, Events</td></tr>
+</tbody>
+</table></div>
+
+<h2>Solarknoten auslegen</h2>
+<div class="steps">
+  <div class="step"><h4>Verbrauch messen, nicht schätzen</h4>Den fertig konfigurierten Knoten einen Tag am USB-Messgerät laufen lassen. Ziel für einen nRF52-Knoten: unter 10 mA im Mittel, also unter 240 mAh am Tag.</div>
+  <div class="step"><h4>Akku für fünf dunkle Tage</h4>Tagesverbrauch × 5 ÷ 0,8 (Wandlerverluste, Kälte). Bei 240 mAh am Tag reichen rechnerisch 1500 mAh; in der Praxis nimmt man 3000 mAh (18650) oder 6000 mAh LiFePO4 für den Winter.</div>
+  <div class="step"><h4>Panel für den Dezember</h4>In Deutschland liefert ein Panel im Dezember nur etwa ein Zehntel seiner Nennleistung im Tagesmittel. Ein 5–10-W-Panel (6 V) ist die verbreitete Community-Empfehlung für einen nRF52-Knoten; ESP32-Knoten brauchen ein Mehrfaches.</div>
+  <div class="step"><h4>Laderegler</h4>RAK19007/19003 und Heltec T114/V4 haben Solar-Eingänge (RAK: 4,4–5,5 V, 350 mA Ladestrom). Sonst ein Lademodul mit MPPT oder zumindest Tiefentladeschutz; für LiFePO4 einen passenden Regler.</div>
+  <div class="step"><h4>Firmware sparsam</h4>Rolle CLIENT oder CLIENT_BASE, feste Position statt GPS, Telemetrie selten, Bluetooth per Power Saving aus, Display aus. Admin-Key des Handgeräts eintragen, damit man später ohne Leiter konfigurieren kann.</div>
+  <div class="step"><h4>Gehäuse</h4>IP65, Antenne oben außen, Kabel unten mit Tropfschlaufe, Panel nach Süden mit 30–60° Neigung, Schnee rutscht ab. Alles vorher eine Woche auf dem Balkon testen.</div>
+</div>
+<div class="tip"><b>nRF52 statt ESP32 für alles, was am Akku hängt.</b> Die Dokumentation sagt es klar: nRF52-Geräte verbrauchen weniger und sind für Solar- und Handgeräteanwendungen generell zu bevorzugen. ESP32 lohnt sich am Netz, für WLAN-Gateways, für MUI und für Handgeräte, die nur ein oder zwei Tage durchhalten müssen.</div>
+
+<h2>Power-Einstellungen, die wirklich sparen</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Einstellung</th><th>Spart</th><th>Kostet</th></tr></thead>
+<tbody>
+<tr><td><b>GPS aus oder festes Intervall</b></td><td>am meisten</td><td>Position kommt vom Handy oder ist fest</td></tr>
+<tr><td><b>Power Saving</b> (ROUTER: erzwungen)</td><td>Bluetooth, WLAN, Serial, Display</td><td>Konfigurieren nur nach Tastendruck oder per Fernwartung</td></tr>
+<tr><td><b>Light Sleep</b> (nur ESP32)</td><td>etwa die Hälfte des Betriebsstroms</td><td>Kurze Verzögerung beim Aufwachen</td></tr>
+<tr><td><b>Display-Timeout kurz</b></td><td>OLED/TFT-Strom</td><td>nichts</td></tr>
+<tr><td><b>Telemetrie aus, Position selten</b></td><td>Sendestrom und Airtime</td><td>weniger Sichtbarkeit auf Karten</td></tr>
+<tr><td><b>Rolle CLIENT_MUTE</b></td><td>kein Wiederholen</td><td>hilft dem Mesh nicht</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Supported Hardware (nRF52 gegenüber ESP32), Power Configuration, Solar Powered → Measure Device Power Consumption, RAK WisBlock Base Boards (Solar-Eingang, Ladestrom).</li>
+    <li>Firmware-Pull-Request #7121 (dynamischer Light Sleep, Messwerte Heltec V3 und Wireless Paper), Firmware-Issue #2658 (Nano G2 Ultra), GitHub-Discussion #435 (ESP32, RP2040).</li>
+    <li>Herstellerangaben: Heltec (T114, V4, Vision Master Schlafströme), RAK (RAK4631 2 µA), LilyGo (T-Echo Lite), Semtech SX1262 (Sendestrom).</li>
+  </ul>
+</div>

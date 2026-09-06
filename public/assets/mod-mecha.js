@@ -1029,6 +1029,67 @@ var CALC = {
     hint += "Zu kleiner Zahnvorschub ist gefährlicher als zu großer: die Schneide reibt statt zu schneiden, "
       + "wird heiß und stumpf. Beim Bohren gilt f in mm/Umdrehung statt pro Zahn.";
     return { out: s, hint: hint };
+  },
+  /* ------------------------------------------------------------------
+     MESHTASTIC / LORA
+     ------------------------------------------------------------------ */
+
+  /* --- LoRa-Airtime eines Meshtastic-Pakets nach Semtech AN1200.13:
+     Praeambel (Meshtastic: 16 Symbole) + Header + Nutzlast, dazu die
+     Zahl der Pakete, die das 10-%-Duty-Cycle-Budget der EU je Stunde
+     zulaesst. Presets wie in der Firmware (MeshRadio.h). --- */
+  loraair: function (v, el) {
+    var PRESETS = {
+      SHORT_TURBO: [7, 500, 5], SHORT_FAST: [7, 250, 5], SHORT_SLOW: [8, 250, 5],
+      MEDIUM_FAST: [9, 250, 5], MEDIUM_SLOW: [10, 250, 5], LONG_FAST: [11, 250, 5],
+      LONG_MODERATE: [11, 125, 8], LONG_SLOW: [12, 125, 8], LONG_TURBO: [11, 500, 8],
+      VERY_LONG_SLOW: [12, 62.5, 8]
+    };
+    var name = ($("[data-k='preset']", el) || {}).value || "LONG_FAST";
+    var pr = PRESETS[name] || PRESETS.LONG_FAST;
+    var sf = pr[0], bw = pr[1], crDen = pr[2];
+    if (name === "CUSTOM") {
+      sf = v.sf; bw = v.bw; crDen = v.cr;
+      if (!isFinite(sf) || !isFinite(bw) || !isFinite(crDen)) return { out: "SF, Bandbreite und Coderate eintragen." };
+    }
+    var bytes = isFinite(v.bytes) ? Math.max(0, v.bytes) : 40;
+    var pl = 16 + bytes;                        /* 16 Byte Meshtastic-Header + Nutzlast */
+    var tsym = Math.pow(2, sf) / bw;            /* ms, weil bw in kHz */
+    var de = tsym > 16 ? 1 : 0;                 /* Low Data Rate Optimization */
+    var cr = crDen - 4;
+    var np = Math.ceil(Math.max((8 * pl - 4 * sf + 28 + 16) / (4 * (sf - 2 * de)), 0)) * (cr + 4);
+    var nsym = 8 + Math.max(np, 0);
+    var tpre = (16 + 4.25) * tsym;
+    var tpay = nsym * tsym;
+    var total = tpre + tpay;
+    var perHour = Math.floor(360000 / total);   /* 10 % von 3 600 000 ms */
+    var rate = sf * (4 / crDen) / tsym;         /* kbit/s: sf Bit je Symbol x Coderate / Symbolzeit */
+    return {
+      out: "Symbol = " + sig(tsym, 3) + " ms  ·  Airtime = " + sig(total, 3) + " ms (" + sig(tpre, 3) + " ms Präambel + "
+        + sig(tpay, 3) + " ms Nutzlast, " + nsym + " Symbole)  ·  Rohdatenrate ≈ " + sig(rate, 3) + " kbit/s",
+      hint: "SF" + sf + ", " + bw + " kHz, CR 4/" + crDen + (de ? ", Low-Data-Rate-Optimierung aktiv" : "")
+        + ". Der Duty Cycle in EU_868 erlaubt 10 % Sendezeit je Stunde, also 360 s: das reicht für höchstens "
+        + perHour + " solche Pakete pro Stunde — eigene Nachrichten, ACKs und alles, was der Knoten weiterleitet, "
+        + "zusammengezählt. Eine Textnachricht mit " + bytes + " Byte Nutzlast belegt bei diesem Preset den Kanal "
+        + sig(total / 1000, 3) + " s lang; jeder weitere Hop kostet dieselbe Zeit noch einmal."
+    };
+  },
+  /* --- Antennenlaenge: Wellenlaenge und die ueblichen Bruchteile, mit
+     Verkuerzungsfaktor fuer Draht bzw. Stab (typisch 0,95). --- */
+  antlen: function (v) {
+    var f = v.f, k = isFinite(v.k) && v.k > 0 ? v.k : 0.95;
+    if (!isFinite(f) || f <= 0) return { out: "Frequenz in MHz eintragen." };
+    var lam = 299792.458 / f;                  /* mm */
+    var q = lam / 4 * k, h = lam / 2 * k, fe = lam * 5 / 8 * k;
+    return {
+      out: "λ = " + sig(lam, 4) + " mm  ·  λ/4 = " + sig(q, 3) + " mm  ·  λ/2 = " + sig(h, 3) + " mm  ·  5/8 λ = "
+        + sig(fe, 3) + " mm",
+      hint: "Mit Verkürzungsfaktor " + k + " (Drahtdicke und Endeffekt machen die Antenne elektrisch länger, als sie "
+        + "mechanisch ist). λ/4 braucht eine Massefläche oder Radials — bei einem Handgerät übernimmt das die "
+        + "Platine, deshalb sind kurze Stummelantennen so empfindlich gegen die Hand am Gehäuse. λ/2-Dipole "
+        + "kommen ohne Massefläche aus. Endgültig stimmt man eine Antenne mit einem VNA auf minimales SWR ab, "
+        + "nicht mit dem Lineal."
+    };
   }
 };
 

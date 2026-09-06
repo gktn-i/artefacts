@@ -1,0 +1,102 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Das T-Deck ist der Meshtastic-Kommunikator für die Hosentasche.</b> Ein ESP32-S3 mit 2,8-Zoll-Touchscreen, BlackBerry-artiger Tastatur und Trackball. Mit der Standalone-Oberfläche MUI schreibt und liest man Nachrichten ohne Smartphone. Der Preis dafür ist Strom: der Akku des Plus hält etwa einen Tag, nicht eine Woche.</div>
+
+<h2>Die drei Varianten</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th>Merkmal</th><th>T-Deck</th><th>T-Deck Plus</th><th>T-Deck Pro</th></tr></thead>
+<tbody>
+<tr><td><b>MCU</b></td><td colspan="3">ESP32-S3FN16R8, 16 MB Flash, 8 MB PSRAM, WLAN + Bluetooth 5 LE; ein zweiter ESP32-C3 steuert die Tastatur</td></tr>
+<tr><td><b>LoRa</b></td><td colspan="2">SX1262, 433 / 868 / 915 MHz, U.FL/IPEX-Buchse</td><td>SX1262, PCB-Antenne intern (Variante mit externer Antenne im Handel)</td></tr>
+<tr><td><b>Display</b></td><td colspan="2">2,8" IPS-LCD ST7789, 320×240, kapazitiver Touch (GT911)</td><td>3,1" E-Ink GDEQ031T10, 320×240, Touch</td></tr>
+<tr><td><b>Tastatur</b></td><td colspan="2">Beleuchtete T-Keyboard, Trackball mit Druckfunktion</td><td>Mechanische QWERTY über TCA8418</td></tr>
+<tr><td><b>GPS</b></td><td>nein</td><td>u-blox MIA-M10Q (auch Varianten mit L76K)</td><td>MIA-M10Q</td></tr>
+<tr><td><b>Akku</b></td><td>nicht enthalten</td><td>2000 mAh, im ABS-Gehäuse</td><td>1400 mAh (LilyGo-Doku: 1500 mAh), Gehäuse</td></tr>
+<tr><td><b>Audio</b></td><td colspan="2">Mikrofon (ES7210), I²S-Lautsprecher</td><td>Mikrofon, Lautsprecher, 3,5-mm-Klinke</td></tr>
+<tr><td><b>Sonstiges</b></td><td colspan="2">microSD, USB-C, Grove (beim Plus vom GPS belegt)</td><td>4G-Variante (A7682E) oder Audio-Variante (PCM5102A), IMU, Lichtsensor, Qwiic</td></tr>
+<tr><td><b>Firmware-Ziel</b></td><td colspan="2"><code>t-deck</code> (BaseUI) · <code>t-deck-tft</code> (MUI)</td><td><code>t-deck-pro</code> (BaseUI für E-Ink; kein MUI, kein InkHUD)</td></tr>
+<tr><td><b>Maße</b></td><td colspan="2">ca. 100 × 68 × 11 mm Platine; Plus im Gehäuse ca. 115 × 72 × 20 mm</td><td>120 × 66 × 13,5 mm</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zahlen aus der Meshtastic-Hardware-Dokumentation und den LilyGo-Repositories. Die Übersichtstabelle bei Meshtastic nennt den Chip als „ESP32-S3FN8“, Detailseite und LilyGo geben FN16R8 mit 16 MB Flash an. Ein T-Deck mit 2,4-GHz-Funk (SX1280) gibt es nicht; die 2,4-GHz-Option ist das T3-S3.</p>
+
+<figure>
+<svg class="dg m" viewBox="0 0 420 300" role="img" aria-label="Schema des T-Deck von vorn: oben der 2,8-Zoll-Bildschirm, darunter Trackball und die Tastatur, oben rechts die Antennenbuchse, links der Einschalter">
+  <rect class="box" x="30" y="20" width="360" height="260" rx="18" />
+  <rect class="accs" x="50" y="40" width="320" height="120" rx="6" />
+  <text class="lbla" x="210" y="92" text-anchor="middle">2,8" IPS · 320 × 240 · Touch</text>
+  <text class="lbl" x="210" y="112" text-anchor="middle">MUI: Nachrichten, Knoten, Karte (SD), Einstellungen</text>
+  <circle class="box" cx="210" cy="180" r="10" /><circle class="accf" cx="210" cy="180" r="3" />
+  <text class="lbl" x="228" y="184" text-anchor="start">Trackball</text>
+  <!-- Tastatur -->
+  <g class="box">
+    <rect x="50" y="200" width="26" height="16" rx="3" /><rect x="82" y="200" width="26" height="16" rx="3" /><rect x="114" y="200" width="26" height="16" rx="3" /><rect x="146" y="200" width="26" height="16" rx="3" /><rect x="178" y="200" width="26" height="16" rx="3" /><rect x="210" y="200" width="26" height="16" rx="3" /><rect x="242" y="200" width="26" height="16" rx="3" /><rect x="274" y="200" width="26" height="16" rx="3" /><rect x="306" y="200" width="26" height="16" rx="3" /><rect x="338" y="200" width="32" height="16" rx="3" />
+    <rect x="58" y="222" width="26" height="16" rx="3" /><rect x="90" y="222" width="26" height="16" rx="3" /><rect x="122" y="222" width="26" height="16" rx="3" /><rect x="154" y="222" width="26" height="16" rx="3" /><rect x="186" y="222" width="26" height="16" rx="3" /><rect x="218" y="222" width="26" height="16" rx="3" /><rect x="250" y="222" width="26" height="16" rx="3" /><rect x="282" y="222" width="26" height="16" rx="3" /><rect x="314" y="222" width="48" height="16" rx="3" />
+    <rect x="50" y="244" width="40" height="16" rx="3" /><rect x="96" y="244" width="26" height="16" rx="3" /><rect x="128" y="244" width="26" height="16" rx="3" /><rect x="160" y="244" width="26" height="16" rx="3" /><rect x="192" y="244" width="26" height="16" rx="3" /><rect x="224" y="244" width="26" height="16" rx="3" /><rect x="256" y="244" width="26" height="16" rx="3" /><rect x="288" y="244" width="40" height="16" rx="3" /><rect x="334" y="244" width="36" height="16" rx="3" />
+  </g>
+  <text class="lbl" x="62" y="256" text-anchor="start">alt</text>
+  <text class="lbl" x="350" y="256" text-anchor="middle">⏎</text>
+  <!-- Antenne, Schalter -->
+  <path class="w" d="M372,20 V4" /><circle class="accf" cx="372" cy="2" r="3" />
+  <text class="lbl" x="366" y="14" text-anchor="end">U.FL → SMA-Pigtail</text>
+  <rect class="accs" x="22" y="60" width="8" height="26" rx="2" /><text class="lbl" x="18" y="76" text-anchor="end">Ein/Aus</text>
+</svg>
+<figcaption>Schema des T-Deck. Die Tastatur hängt an einem eigenen ESP32-C3 mit eigener Firmware; Geräte aus verschiedenen Chargen reagieren deshalb teils unterschiedlich auf Tastenkürzel.</figcaption>
+</figure>
+
+<h2>MUI: Meshtastic ohne Handy</h2>
+<p>MUI (Meshtastic UI) ist die Touch-Oberfläche für ESP32-S3-Geräte mit TFT. Sie läuft als eigener Client auf einem Kern des Prozessors, die Funkfirmware auf dem anderen. Seit Firmware 2.7 gibt es „Unified Firmware“: Ein Build enthält MUI und BaseUI, umschalten geht ohne Neuflashen über das Systemmenü.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Eigenschaft</th><th>MUI auf dem T-Deck</th></tr></thead>
+<tbody>
+<tr><td><b>Kann</b></td><td>Nachrichten lesen und schreiben, Kanäle wechseln, Knotenliste, Karte mit Offline-Kacheln von der SD-Karte (256×256-PNG, FAT32/exFAT), Grundeinstellungen, Kanal-QR anzeigen</td></tr>
+<tr><td><b>Einschränkung</b></td><td>Nur eine Client-Verbindung gleichzeitig: Solange MUI läuft, kann sich keine Handy-App verbinden</td></tr>
+<tr><td><b>Ausweg</b></td><td><em>Bluetooth Programming Mode</em>: beim Start das Meshtastic-Logo gedrückt halten oder im Ausschaltmenü das Bluetooth-Symbol wählen; zeigt eine Zufalls-PIN. Oder in BaseUI booten und mit der App konfigurieren</td></tr>
+<tr><td><b>Erststart</b></td><td>Schnellkonfiguration für Region sowie langen und kurzen Namen in einem Schritt</td></tr>
+<tr><td><b>Nachrichtenstatus</b></td><td>Grüner Rahmen = ACK, gelb = gehört oder weitergeleitet ohne Empfänger-ACK, rot = maximale Wiederholungen erreicht</td></tr>
+<tr><td><b>Nicht in MUI</b></td><td>Etliche Detaileinstellungen; dafür App oder CLI benutzen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Tastenkürzel</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Kürzel</th><th>Funktion</th></tr></thead>
+<tbody>
+<tr><td><span class="kbd">alt</span> + <span class="kbd">b</span></td><td>Tastaturbeleuchtung an/aus</td></tr>
+<tr><td><span class="kbd">alt</span> + <span class="kbd">c</span></td><td>Funktionstaste aktivieren, unten rechts erscheint „Fn“</td></tr>
+<tr><td>Fn, dann <span class="kbd">m</span></td><td>Benachrichtigungen an/aus</td></tr>
+<tr><td>Fn, dann <span class="kbd">q</span></td><td>Abbrechen (Nachricht, vorgefertigte Nachricht)</td></tr>
+<tr><td>Fn, dann <span class="kbd">t</span></td><td>Tab: einmal Empfänger der Direktnachricht, zweimal Kanal</td></tr>
+<tr><td>Fn, dann <span class="kbd">i</span> / <span class="kbd">o</span></td><td>Bildschirm dunkler / heller</td></tr>
+<tr><td>Fn, dann <span class="kbd">g</span></td><td>GPS an/aus</td></tr>
+<tr><td>Fn, dann <span class="kbd">Leertaste</span></td><td>Netzwerk-Ping senden</td></tr>
+</tbody>
+</table></div>
+<p class="note">Aus der Meshtastic-Dokumentation zum T-Deck, gültig seit Firmware 2.3.9. Manche Geräte werden mit abweichender Tastatur-Firmware ausgeliefert; dann helfen die LilyGo-Repositories.</p>
+
+<h2>Flashen</h2>
+<div class="steps">
+  <div class="step"><h4>Antenne anschließen</h4>Nie ohne Antenne einschalten; die Endstufe kann Schaden nehmen.</div>
+  <div class="step"><h4>Web-Flasher öffnen</h4><code>flasher.meshtastic.org</code> in Chrome oder Edge, Gerät „T Deck“ wählen, Firmware-Version wählen, bei Wunsch „Meshtastic UI“ ankreuzen.</div>
+  <div class="step"><h4>Download-Modus</h4>Zuerst den Knopf „1200bps Reset“ im Flasher probieren. Klappt es nicht: Gerät aus, Trackball gedrückt halten, einschalten, nach 2–3 s loslassen. Schwarzer Bildschirm ohne Hintergrundbeleuchtung = Download-Modus.</div>
+  <div class="step"><h4>Installieren</h4>„Full Erase and Install“ beim ersten Mal, danach „Update“. Ein voller Löschvorgang erzeugt neue Schlüssel: vorher <code>meshtastic --export-config</code>.</div>
+  <div class="step"><h4>Erststart</h4>Region EU_868, Namen, dann bei Touch-Problemen im MUI-Werkzeugmenü die Bildschirmkalibrierung ausführen (Fix aus 2.7.26).</div>
+</div>
+
+<h2>Eigenheiten im Betrieb</h2>
+<ul>
+  <li><b>Stromverbrauch:</b> ESP32-S3, Hintergrundbeleuchtung, Tastaturbeleuchtung und MUI zusammen ziehen deutlich mehr als ein nRF52-Gerät. Mit 2000 mAh kommt man laut Community durch einen Tag; als ROUTER oder CLIENT_BASE ist der Akku schneller leer.</li>
+  <li><b>GPS-Erkennung:</b> Das Plus wird mit u-blox (38400 Baud) oder L76K (9600 Baud) ausgeliefert; die automatische Erkennung ist bekannt für Aussetzer (Firmware-Issue #4625). Im Zweifel GPS-Modus manuell setzen.</li>
+  <li><b>ADC-Faktor 2,11:</b> Die Firmware korrigiert die Akkuanzeige bereits; zeigt sie Unsinn, kalibrieren wie in <a href="#config">Konfiguration</a> beschrieben.</li>
+  <li><b>Kein Zweitgerät nötig, aber sinnvoll:</b> Ein sparsamer nRF52-Knoten auf dem Dach oder Balkon als CLIENT_BASE trägt das T-Deck aus der Wohnung heraus.</li>
+  <li><b>T-Deck Pro:</b> läuft mit der E-Ink-BaseUI, nicht mit MUI und (Stand Juni 2025) nicht in der InkHUD-Geräteliste. Firmware ab 2.7.10 (v1.0) bzw. 2.7.13 (v1.1).</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: LILYGO T-Deck (Spezifikationen, Tastenkürzel, Flash-Prozedur, T-Deck Pro), Device UIs → Meshtastic UI (unterstützte Geräte, Einschränkungen, Programming Mode), Power Configuration (ADC-Faktor).</li>
+    <li>LilyGo: Repositories T-Deck und T-Deck-Pro sowie das Dokumentations-Repository (Flash, PSRAM, Akku, Maße); Firmware <code>variants/esp32s3/t-deck</code>, Issues #3881 (Fn-Taste) und #4625 (GPS-Erkennung), Release Notes 2.7.26.</li>
+  </ul>
+</div>

@@ -2843,6 +2843,316 @@
      ]
     }
    ]
+  },
+  {
+   "id": "funk",
+   "name": "Funk",
+   "icon": "📡",
+   "file": "hub-funk.html",
+   "tagline": "Meshtastic · LoRa · Geräte · Recht",
+   "desc": "Kommunikation ohne Netz: Meshtastic als LoRa-Mesh für Textnachrichten und Positionen, die passenden Geräte vom T-Deck bis zum Solar-Knoten, EU-Frequenzen, Presets, Konfiguration und das deutsche Funkrecht. Tabellen, Grafiken und Rechner statt langer Texte.",
+   "accent": {
+    "l": "#2f7a4d",
+    "d": "#6fd39a"
+   },
+   "areas": [
+    {
+     "id": "mesh",
+     "name": "Mesh-Funk",
+     "desc": "Ein Modul mit Unterseiten: Grundlagen, Funk-Setup, Geräte, Praxis, Recht, Glossar.",
+     "modules": [
+      {
+       "id": "meshtastic",
+       "file": "meshtastic.html",
+       "name": "Meshtastic",
+       "icon": "📡",
+       "kind": "Referenz",
+       "updated": "2026-09-06",
+       "desc": "Meshtastic von der Chirp-Modulation bis zum Funkrecht: LoRa-Grundlagen, EU-Regionen 868/433 MHz, Modem-Presets von ShortTurbo bis LongSlow, Frequenzslots und Duty Cycle, Mesh-Algorithmus und Rollen, Kanäle und Verschlüsselung, Konfiguration mit allen Defaults, MQTT. Dazu Geräte im Vergleich, LilyGo T-Deck und T-Echo im Detail, Antennen und Reichweite, Strom und Solar, Flashen und Apps, Fehlersuche, Recht in Deutschland, Community, Rechner und Glossar.",
+       "tags": [
+        "meshtastic",
+        "lora",
+        "mesh",
+        "funk",
+        "868",
+        "eu_868",
+        "eu_433",
+        "433",
+        "longfast",
+        "shortslow",
+        "preset",
+        "spreading factor",
+        "bandbreite",
+        "duty cycle",
+        "frequenzslot",
+        "hop",
+        "hop limit",
+        "router",
+        "client",
+        "repeater",
+        "kanal",
+        "psk",
+        "aq==",
+        "verschlüsselung",
+        "pki",
+        "mqtt",
+        "t-deck",
+        "t-echo",
+        "t-beam",
+        "lilygo",
+        "heltec",
+        "rak",
+        "wisblock",
+        "t1000-e",
+        "seeed",
+        "nrf52840",
+        "esp32-s3",
+        "sx1262",
+        "antenne",
+        "sma",
+        "reichweite",
+        "link budget",
+        "dbm",
+        "erp",
+        "bundesnetzagentur",
+        "srd",
+        "allgemeinzuteilung",
+        "solar",
+        "18650",
+        "web flasher",
+        "uf2",
+        "android",
+        "ios",
+        "cli",
+        "meshmap",
+        "glossar",
+        "rechner",
+        "airtime"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "lora",
+         "t": "LoRa-Grundlagen"
+        },
+        {
+         "h": "mesh",
+         "t": "Mesh & Rollen"
+        },
+        {
+         "h": "regionen",
+         "t": "Regionen & Frequenzen"
+        },
+        {
+         "h": "presets",
+         "t": "Modem-Presets"
+        },
+        {
+         "h": "kanaele",
+         "t": "Kanäle & Verschlüsselung"
+        },
+        {
+         "h": "config",
+         "t": "Konfiguration"
+        },
+        {
+         "h": "mqtt",
+         "t": "MQTT & Internet"
+        },
+        {
+         "h": "geraete",
+         "t": "Geräte im Vergleich"
+        },
+        {
+         "h": "t-deck",
+         "t": "LilyGo T-Deck"
+        },
+        {
+         "h": "t-echo",
+         "t": "LilyGo T-Echo"
+        },
+        {
+         "h": "antennen",
+         "t": "Antennen & Reichweite"
+        },
+        {
+         "h": "strom",
+         "t": "Strom, Akku & Solar"
+        },
+        {
+         "h": "firmware",
+         "t": "Flashen & Apps"
+        },
+        {
+         "h": "praxis",
+         "t": "Praxis & Fehlersuche"
+        },
+        {
+         "h": "recht",
+         "t": "Recht in Deutschland"
+        },
+        {
+         "h": "community",
+         "t": "Community & Karten"
+        },
+        {
+         "h": "rechner",
+         "t": "Rechner"
+        },
+        {
+         "h": "glossar",
+         "t": "Glossar A–Z"
+        },
+        {
+         "h": "quellen",
+         "t": "Quellen"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "lora",
+          "mesh"
+         ]
+        },
+        {
+         "l": "Funk-Setup",
+         "sections": [
+          "regionen",
+          "presets",
+          "kanaele",
+          "config",
+          "mqtt"
+         ]
+        },
+        {
+         "l": "Geräte",
+         "sections": [
+          "geraete",
+          "t-deck",
+          "t-echo",
+          "antennen",
+          "strom"
+         ]
+        },
+        {
+         "l": "Praxis",
+         "sections": [
+          "firmware",
+          "praxis",
+          "recht",
+          "community"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "rechner",
+          "glossar",
+          "quellen"
+         ]
+        }
+       ],
+       "alias": {
+        "landkarte": "start",
+        "einstieg": "start",
+        "grundlagen": "lora",
+        "chirp": "lora",
+        "sf": "lora",
+        "spreading": "lora",
+        "algorithmus": "mesh",
+        "rollen": "mesh",
+        "hops": "mesh",
+        "hop-limit": "mesh",
+        "flooding": "mesh",
+        "region": "regionen",
+        "frequenz": "regionen",
+        "frequenzen": "regionen",
+        "eu868": "regionen",
+        "eu_868": "regionen",
+        "eu433": "regionen",
+        "duty": "regionen",
+        "duty-cycle": "regionen",
+        "slot": "regionen",
+        "slots": "regionen",
+        "preset": "presets",
+        "longfast": "presets",
+        "shortslow": "presets",
+        "modem": "presets",
+        "kanal": "kanaele",
+        "channels": "kanaele",
+        "psk": "kanaele",
+        "verschluesselung": "kanaele",
+        "pki": "kanaele",
+        "qr": "kanaele",
+        "konfiguration": "config",
+        "einstellungen": "config",
+        "settings": "config",
+        "position": "config",
+        "telemetrie": "config",
+        "bluetooth": "config",
+        "internet": "mqtt",
+        "gateway": "mqtt",
+        "hardware": "geraete",
+        "boards": "geraete",
+        "vergleich": "geraete",
+        "heltec": "geraete",
+        "rak": "geraete",
+        "t-beam": "geraete",
+        "t1000": "geraete",
+        "tdeck": "t-deck",
+        "deck": "t-deck",
+        "techo": "t-echo",
+        "echo": "t-echo",
+        "antenne": "antennen",
+        "reichweite": "antennen",
+        "sma": "antennen",
+        "linkbudget": "antennen",
+        "akku": "strom",
+        "solar": "strom",
+        "stromverbrauch": "strom",
+        "batterie": "strom",
+        "flashen": "firmware",
+        "apps": "firmware",
+        "app": "firmware",
+        "cli": "firmware",
+        "update": "firmware",
+        "installation": "firmware",
+        "fehlersuche": "praxis",
+        "troubleshooting": "praxis",
+        "etikette": "praxis",
+        "checkliste": "praxis",
+        "gesetz": "recht",
+        "bnetza": "recht",
+        "srd": "recht",
+        "erp": "recht",
+        "amateurfunk": "recht",
+        "karten": "community",
+        "meshmap": "community",
+        "discord": "community",
+        "deutschland": "community",
+        "airtime": "rechner",
+        "calc": "rechner",
+        "begriffe": "glossar",
+        "abkuerzungen": "glossar",
+        "links": "quellen"
+       },
+       "related": [
+        "fpv-drohnen",
+        "informationstechnik",
+        "embedded",
+        "homeserver",
+        "elektronik-101"
+       ]
+      }
+     ]
+    }
+   ]
   }
  ]
 }

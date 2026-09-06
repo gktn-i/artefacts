@@ -1,0 +1,95 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Meshtastic auf 868 MHz ist in Deutschland ohne Lizenz erlaubt.</b> Grundlage ist die Allgemeinzuteilung der Bundesnetzagentur für Funkanwendungen geringer Reichweite (SRD). Sie legt fest, wie viel Leistung und wie viel Sendezeit erlaubt sind. Verschlüsselung ist dort kein Thema, im Amateurfunk dagegen verboten. Zwei Welten, die man nicht mischen darf.</div>
+
+<div class="stop"><b>Keine Rechtsberatung.</b> Dieser Abschnitt ordnet ein und nennt die verbindlichen Stellen. Maßgeblich sind die aktuelle Allgemeinzuteilung im Amtsblatt der Bundesnetzagentur und die dort genannten Normen. Stand: September 2026.</div>
+
+<h2>Der Rahmen</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Ebene</th><th>Dokument</th><th>Was es regelt</th></tr></thead>
+<tbody>
+<tr><td><b>EU</b></td><td>Entscheidung 2006/771/EG, zuletzt geändert durch Durchführungsbeschluss (EU) 2025/105</td><td>Harmonisierte Frequenzbänder für SRD in allen Mitgliedstaaten: Frequenz, Leistung, Zugangsbedingungen</td></tr>
+<tr><td><b>EU</b></td><td>Funkanlagenrichtlinie 2014/53/EU (RED)</td><td>Anforderungen an Geräte: CE-Kennzeichnung, Konformitätserklärung des Herstellers</td></tr>
+<tr><td><b>CEPT / ETSI</b></td><td>ERC/REC 70-03 Anhang 1; EN 300 220-2 (V3.2.1)</td><td>Technische Bedingungen: ERP-Grenzen, Duty Cycle je Teilband, LBT+AFA als Alternative, Messverfahren</td></tr>
+<tr><td><b>Deutschland</b></td><td>Allgemeinzuteilung SRD, <b>Vfg 91/2025</b> (Amtsblatt BNetzA Nr. 21 vom 5. November 2025), ersetzt Vfg 133/2019 mit Änderung 12/2020</td><td>Erlaubt jedermann die Nutzung der Frequenzen ohne Einzelzuteilung, unter den in den Tabellen genannten Bedingungen</td></tr>
+<tr><td><b>Deutschland</b></td><td>Telekommunikationsgesetz (TKG), § 210: Allgemeinzuteilung</td><td>Gesetzliche Grundlage für Allgemeinzuteilungen; kein Schutz vor Störungen, Störungen anderer sind zu unterlassen</td></tr>
+</tbody>
+</table></div>
+<p>Praktisch heißt das: Kein Antrag, keine Gebühr, kein Rufzeichen. Dafür kein Anspruch auf Störungsfreiheit, Pflicht zur Einhaltung der Leistungs- und Duty-Cycle-Grenzen, und das Gerät muss die Norm einhalten.</p>
+
+<h2>Die Teilbänder, die Meshtastic betreffen</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Frequenzbereich</th><th>Max. Strahlungsleistung</th><th>Zugangsbedingung</th><th>Meshtastic</th></tr></thead>
+<tbody>
+<tr><td><b>869,400–869,650 MHz</b></td><td><b>500 mW ERP (27 dBm)</b></td><td><b>Duty Cycle ≤ 10 %</b> oder LBT+AFA</td><td><b>Region EU_868.</b> Die Firmware setzt beides durch</td></tr>
+<tr><td>863,000–870,000 MHz</td><td>25 mW ERP (14 dBm)</td><td>Duty Cycle ≤ 0,1 % oder LBT+AFA</td><td>Nicht genutzt</td></tr>
+<tr><td>868,000–868,600 MHz</td><td>25 mW ERP</td><td>Duty Cycle ≤ 1 % oder LBT+AFA</td><td>Nicht genutzt (LoRaWAN-Standardkanäle liegen hier)</td></tr>
+<tr><td>868,700–869,200 MHz</td><td>25 mW ERP</td><td>Duty Cycle ≤ 0,1 % oder LBT+AFA</td><td>Nicht genutzt</td></tr>
+<tr><td>869,700–870,000 MHz</td><td>5 mW ERP ohne Duty Cycle, 25 mW mit ≤ 1 %</td><td></td><td>Nicht genutzt</td></tr>
+<tr><td><b>433,050–434,790 MHz</b></td><td><b>10 mW ERP (10 dBm)</b></td><td><b>Duty Cycle ≤ 10 %</b></td><td><b>Region EU_433</b> (Firmware nutzt 433,0–434,0 MHz)</td></tr>
+<tr><td>433,050–434,790 MHz</td><td>1 mW ERP, −13 dBm/10 kHz bei Modulation über 250 kHz</td><td>ohne Duty Cycle</td><td>Nicht genutzt</td></tr>
+<tr><td>434,040–434,790 MHz</td><td>10 mW ERP</td><td>ohne Duty Cycle, Kanäle ≤ 25 kHz</td><td>Nicht genutzt (LoRa ist breiter)</td></tr>
+</tbody>
+</table></div>
+<p class="note">Werte nach ERC/REC 70-03 Anhang 1 und EN 300 220-2 Tabelle B.1, in Deutschland umgesetzt durch die SRD-Allgemeinzuteilung. Der Duty Cycle ist der Sendezeitanteil je Stunde. LBT+AFA (Listen Before Talk mit Frequenzwechsel) erlaubt die Norm als Alternative; Meshtastic nutzt den Duty Cycle. Die Firmware kommentiert die EU_868-Grenze im Quelltext selbst mit „500 mW, or 27 dBm“.</p>
+
+<h2>ERP ist nicht die Chipleistung</h2>
+<div class="fbox"><span class="f">ERP [dBm] = P<sub>Sender</sub> − Kabelverlust + Antennengewinn [dBd] · dBd = dBi − 2,15</span><span class="l">Die Grenze gilt für das, was die Antenne abstrahlt, nicht für das, was der Chip liefert</span></div>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Board</th><th>Sender</th><th>Antenne</th><th>ERP</th><th>Bewertung</th></tr></thead>
+<tbody>
+<tr><td>SX1262-Board (Heltec V3, T-Echo, RAK4631, T-Deck)</td><td>22 dBm</td><td>2 dBi Stab</td><td>21,9 dBm</td><td>weit unter 27 dBm</td></tr>
+<tr><td>SX1262-Board</td><td>22 dBm</td><td>6,5 dBi Kollinear, 1 dB Kabel</td><td>25,4 dBm</td><td>in Ordnung</td></tr>
+<tr><td>Heltec V4 High Power, Wireless Tracker V2</td><td>28 dBm</td><td>2 dBi</td><td>27,9 dBm</td><td><b>über der Grenze</b>: TX Power auf 27 dBm oder weniger setzen</td></tr>
+<tr><td>Heltec V4 High Power</td><td>28 dBm</td><td>6,5 dBi</td><td>32,4 dBm</td><td>deutlich drüber: auf etwa 22 dBm drosseln</td></tr>
+<tr><td>T-Beam 1W, Station G2, RAK 1W Booster</td><td>30–37 dBm</td><td>beliebig</td><td>weit drüber</td><td>Im SRD-Band nur stark gedrosselt; volle Leistung nur im Amateurfunk auf Amateurfunkfrequenzen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Firmware begrenzt „TX Power 0“ auf die 27 dBm der Region, rechnet aber keinen Antennengewinn ein. Wer eine Gewinnantenne an ein 28-dBm-Board hängt, muss den Wert selbst senken.</p>
+
+<h2>Verschlüsselung und Amateurfunk</h2>
+<div class="gb">
+  <div class="gb-col"><h4>SRD-Band (868 / 433 MHz, jedermann)</h4><ul>
+    <li>Verschlüsselung erlaubt; die Allgemeinzuteilung regelt Frequenz, Leistung und Zugang, nicht den Inhalt</li>
+    <li>Keine Kennungspflicht, kein Rufzeichen</li>
+    <li>Leistungsgrenze 27 dBm ERP, Duty Cycle 10 %</li>
+    <li>Jeder darf mitmachen, deshalb ist hier das öffentliche Mesh</li>
+  </ul></div>
+  <div class="gb-col"><h4>Amateurfunk (70-cm-Band 430–440 MHz, Lizenz)</h4><ul>
+    <li>Nach § 16 AFuV ist Amateurfunkverkehr in offener Sprache zu führen; Verschlüsselung oder Verschleierung des Inhalts ist verboten (Ausnahmen nur für Steuersignale)</li>
+    <li>Rufzeichen muss übermittelt werden</li>
+    <li>Deutlich höhere Leistungen je Klasse, größere Antennen</li>
+    <li>Meshtastic bietet dafür den „Ham Mode“ (Lizenz-Flag, Rufzeichen als Name, Verschlüsselung aus) und ab 2.8 eigene Regionen wie ITU1_70CM</li>
+  </ul></div>
+</div>
+<div class="warn"><b>Beide Welten sind absichtlich nicht kompatibel.</b> Ein lizenzierter Knoten im Ham-Mode darf keine verschlüsselten Pakete des öffentlichen Meshes weiterleiten, und das SRD-Mesh darf nicht mit Amateurfunkleistung betrieben werden. Die Meshtastic-FAQ nennt Interoperabilität deshalb ausdrücklich kein Ziel. Wer beides will, betreibt zwei getrennte Knoten.</div>
+
+<h2>Geräte: CE und RED</h2>
+<ul>
+  <li>Fertiggeräte für den EU-Markt (RAK WisMesh Pocket V2, viele Heltec- und Seeed-Produkte) tragen CE-Kennzeichen und Konformitätserklärung nach der Funkanlagenrichtlinie. RAK hat den Pocket V2 ausdrücklich für die CE-Anforderungen überarbeitet.</li>
+  <li>Bastelboards aus Fernost kommen oft ohne oder mit zweifelhafter Erklärung. Die Pflicht trifft den Inverkehrbringer; wer importiert, wird selbst dazu.</li>
+  <li>Unabhängig davon gilt für den Betrieb: Leistung, Duty Cycle und Bandbreite der Allgemeinzuteilung einhalten. Die Firmware hilft, ersetzt aber nicht die Prüfung von Antenne und Sendeleistung.</li>
+  <li>Für Österreich und die Schweiz gelten dieselben harmonisierten EU/CEPT-Bänder; die Region in der Firmware ist ebenfalls EU_868 bzw. EU_433. Zuständig sind dort die Fernmeldebehörde bzw. das BAKOM.</li>
+</ul>
+
+<h2>Was die Firmware für die Regeln tut</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Regel</th><th>Umsetzung</th></tr></thead>
+<tbody>
+<tr><td>Frequenzfenster 869,4–869,65 MHz</td><td>Region EU_868 erlaubt nur Slots in diesem Fenster; 500-kHz-Presets fallen auf LongFast zurück</td></tr>
+<tr><td>27 dBm</td><td>„TX Power 0“ wird auf das regionale Maximum begrenzt; höhere Eingaben werden gekappt</td></tr>
+<tr><td>10 % Duty Cycle</td><td>Rollendes Stundenfenster, minütlich geprüft; bei Überschreitung Sendestopp mit Fehlermeldung</td></tr>
+<tr><td>Kein Audio</td><td><code>audio_permitted = false</code> für EU_868: das experimentelle Sprachmodul ist gesperrt</td></tr>
+<tr><td>Override Duty Cycle, Override Frequency</td><td>Vorhanden, aber ausdrücklich als regelwidrig bzw. nur für Lizenzinhaber gekennzeichnet</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Bundesnetzagentur, <a href="https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/Allgemeinzuteilungen/start.html">Allgemeinzuteilungen</a>: Vfg 91/2025 „Allgemeinzuteilung von Frequenzen zur Nutzung durch Funkanwendungen geringer Reichweite (SRD)“, Amtsblatt 21/2025; Vorgänger Vfg 133/2019, geändert durch Vfg 12/2020.</li>
+    <li>ETSI <a href="https://www.etsi.org/deliver/etsi_en/300200_300299/30022002/03.02.01_60/en_30022002v030201p.pdf">EN 300 220-2 V3.2.1</a>, Anhang B Tabelle B.1; CEPT/ERC Recommendation 70-03, Anhang 1; Entscheidung 2006/771/EG in der Fassung von 2025/105.</li>
+    <li><a href="https://www.gesetze-im-internet.de/afuv_2005/">Amateurfunkverordnung (AFuV)</a> § 16; Meshtastic-FAQ „Amateur Radio (ham)“; Firmware <code>RadioInterface.cpp</code> (Regionskommentare, audio_permitted), Dokumentation LoRa Configuration (Override-Optionen).</li>
+  </ul>
+</div>

@@ -1,0 +1,133 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Meshtastic ist Textfunk ohne Netz.</b> Kleine LoRa-Funkmodule bilden von selbst ein Mesh: jeder Knoten wiederholt, was er hört, bis zu drei Sprünge weit. Kein Mobilfunk, kein Internet, keine Gebühr, keine Lizenz. Dafür kleine Nachrichten, kilometerweite Reichweite und ein paar Regeln, die man kennen sollte.</div>
+
+<figure>
+<svg class="dg l" viewBox="0 0 660 300" role="img" aria-label="Aufbau eines Meshtastic-Netzes: Smartphone per Bluetooth am eigenen Knoten, LoRa-Funk zwischen den Knoten, ein Dachknoten als Relais, dahinter weitere Knoten; ein MQTT-Gateway verbindet optional ins Internet">
+  <!-- Telefon -->
+  <rect class="box" x="22" y="112" width="46" height="84" rx="8" />
+  <rect class="accs" x="29" y="122" width="32" height="56" rx="3" />
+  <circle class="accf" cx="45" cy="187" r="3" />
+  <text class="lbl" x="45" y="214" text-anchor="middle">App</text>
+  <!-- BLE -->
+  <path class="gd" d="M72,154 L118,154" />
+  <text class="lbl" x="94" y="124" text-anchor="middle">BLE / USB</text>
+  <!-- Knoten A -->
+  <rect class="box" x="120" y="128" width="54" height="52" rx="7" />
+  <path class="w" d="M147,128 V96" /><circle class="accf" cx="147" cy="94" r="4" />
+  <text class="lblb" x="147" y="160" text-anchor="middle">A</text>
+  <text class="lbl" x="147" y="200" text-anchor="middle">eigener Knoten</text>
+  <text class="lbl" x="147" y="213" text-anchor="middle">Hop-Limit 3</text>
+  <!-- Funkwellen A -> B -->
+  <path class="acc" d="M182,150 Q230,140 278,150" />
+  <path class="acc" d="M186,162 Q230,156 274,162" style="opacity:.55" />
+  <text class="lbla" x="230" y="132" text-anchor="middle">LoRa 869,525 MHz</text>
+  <!-- Knoten B (Dach) -->
+  <path class="box" d="M282,110 L332,70 L382,110 Z" />
+  <rect class="box" x="292" y="110" width="80" height="60" rx="4" />
+  <path class="w" d="M332,70 V34" /><circle class="accf" cx="332" cy="32" r="4" />
+  <text class="lblb" x="332" y="146" text-anchor="middle">B</text>
+  <text class="lbl" x="332" y="190" text-anchor="middle">Dachknoten, ROUTER</text>
+  <text class="lbl" x="332" y="203" text-anchor="middle">wiederholt, Hop-Limit 2</text>
+  <!-- Funkwellen B -> C, D -->
+  <path class="acc" d="M386,120 Q430,100 476,112" />
+  <path class="acc" d="M386,150 Q440,170 476,184" />
+  <!-- Knoten C -->
+  <rect class="box" x="478" y="86" width="54" height="52" rx="7" />
+  <path class="w" d="M505,86 V56" /><circle class="accf" cx="505" cy="54" r="4" />
+  <text class="lblb" x="505" y="118" text-anchor="middle">C</text>
+  <text class="lbl" x="505" y="152" text-anchor="middle">Hop-Limit 1</text>
+  <!-- Knoten D -->
+  <rect class="box" x="478" y="176" width="54" height="52" rx="7" />
+  <path class="w" d="M505,176 V146" /><circle class="accf" cx="505" cy="144" r="4" />
+  <text class="lblb" x="505" y="208" text-anchor="middle">D</text>
+  <text class="lbl" x="505" y="244" text-anchor="middle">Solar-Knoten, Hop-Limit 1</text>
+  <!-- Knoten E, ausser Reichweite von B -->
+  <path class="acc" d="M536,110 Q570,104 598,116" />
+  <rect class="box" x="600" y="96" width="46" height="44" rx="7" />
+  <path class="w" d="M623,96 V70" /><circle class="accf" cx="623" cy="68" r="4" />
+  <text class="lblb" x="623" y="124" text-anchor="middle">E</text>
+  <text class="lbl" x="623" y="156" text-anchor="middle">Hop-Limit 0</text>
+  <text class="lbl" x="623" y="169" text-anchor="middle">Ende</text>
+  <!-- Gateway -->
+  <path class="gd" d="M332,172 V236" />
+  <rect class="accs" x="290" y="238" width="84" height="30" rx="6" />
+  <text class="lbla" x="332" y="257" text-anchor="middle">MQTT-Gateway</text>
+  <text class="lbl" x="332" y="286" text-anchor="middle">optional: WLAN → Internet → andere Meshes</text>
+</svg>
+<figcaption>Ein Paket aus A startet mit Hop-Limit 3. Jeder Knoten, der es weitersendet, zählt eins herunter; bei 0 ist Schluss. Das Telefon ist nur Bedienoberfläche, gefunkt wird ausschließlich zwischen den Knoten. Details in <a href="#mesh">Mesh &amp; Rollen</a>.</figcaption>
+</figure>
+
+<h2>Die Zahlen, die man kennen sollte</h2>
+<div class="kpis">
+  <div class="kpi"><div class="k">EU-Frequenz</div><div class="v">869,525 MHz</div><div class="s">Region EU_868 mit LongFast, ein einziger Frequenzslot</div></div>
+  <div class="kpi"><div class="k">Sendeleistung EU_868</div><div class="v">27 dBm ERP</div><div class="s">500 mW, mehr ist im SRD-Band nicht erlaubt</div></div>
+  <div class="kpi"><div class="k">Duty Cycle EU</div><div class="v">10 %</div><div class="s">Sendezeit je Stunde, die Firmware setzt es durch</div></div>
+  <div class="kpi"><div class="k">Hop-Limit</div><div class="v">3</div><div class="s">Standard, Maximum 7. Drei reichen fast immer</div></div>
+  <div class="kpi"><div class="k">Kanäle</div><div class="v">8</div><div class="s">1 primär + 7 sekundär, alle auf derselben Frequenz</div></div>
+  <div class="kpi"><div class="k">Nachricht</div><div class="v">≈ 200 Byte</div><div class="s">Nutzdaten je Paket, keine Bilder, keine Sprache</div></div>
+  <div class="kpi"><div class="k">Datenrate LongFast</div><div class="v">1,07 kbit/s</div><div class="s">eine Textnachricht braucht rund eine Sekunde Funkzeit</div></div>
+  <div class="kpi"><div class="k">Rekord</div><div class="v">331 km</div><div class="s">Berg zu Berg, 868 MHz, VeryLongSlow, zwei RAK4631</div></div>
+</div>
+
+<h2>Was es kann und was nicht</h2>
+<div class="gb">
+  <div class="gb-col"><h4>Kann</h4><ul>
+    <li>Textnachrichten an alle im Kanal oder direkt an einen Knoten, mit Empfangsbestätigung</li>
+    <li>Positionen teilen und auf der Karte in der App sehen, auch ohne Handynetz</li>
+    <li>Telemetrie: Akku, Spannung, Kanalauslastung, mit Sensoren auch Temperatur, Luftdruck und mehr</li>
+    <li>Verschlüsselte Gruppen (AES-256) und verschlüsselte Direktnachrichten (Public-Key seit 2.5)</li>
+    <li>Reichweite durch Wiederholen: Knoten auf Dächern und Bergen tragen das Netz</li>
+    <li>Brücke ins Internet per MQTT, Karten wie MeshMap, Anbindung an Home Assistant oder ATAK</li>
+  </ul></div>
+  <div class="gb-col"><h4>Kann nicht</h4><ul>
+    <li>Sprache, Bilder, Dateien: LoRa liefert rund ein Kilobit pro Sekunde</li>
+    <li>Garantierte Zustellung: es gibt kein Routing im engeren Sinn, nur kontrolliertes Fluten</li>
+    <li>Viele Knoten auf engem Raum: ab einigen Dutzend aktiven Knoten auf einem Preset wird der Kanal knapp</li>
+    <li>Ersatz für Notruf oder Behördenfunk sein. Es ist ein Hobby- und Community-Netz</li>
+    <li>Unbegrenzt senden: in Europa gelten 10 % Duty Cycle, die Firmware bremst</li>
+    <li>Mit LoRaWAN, TTN oder MeshCore reden. Gleiche Chips, andere Protokolle</li>
+  </ul></div>
+</div>
+
+<h2>Wo was steht</h2>
+<div class="map">
+  <a href="#lora"><div class="mt"><span class="i">📶</span>LoRa-Grundlagen</div><div class="md">Chirps, SF, Bandbreite, dBm, Link-Budget</div></a>
+  <a href="#mesh"><div class="mt"><span class="i">🕸️</span>Mesh &amp; Rollen</div><div class="md">Fluten, Hops, ACK, CLIENT bis ROUTER</div></a>
+  <a href="#regionen"><div class="mt"><span class="i">🌍</span>Regionen &amp; Frequenzen</div><div class="md">EU_868, EU_433, Slots, Duty Cycle, weltweit</div></a>
+  <a href="#presets"><div class="mt"><span class="i">🎚️</span>Modem-Presets</div><div class="md">ShortTurbo bis LongSlow im Vergleich</div></a>
+  <a href="#kanaele"><div class="mt"><span class="i">🔐</span>Kanäle &amp; Verschlüsselung</div><div class="md">PSK, AQ==, QR-Code, PKI, Positionsgenauigkeit</div></a>
+  <a href="#config"><div class="mt"><span class="i">⚙️</span>Konfiguration</div><div class="md">Alle wichtigen Einstellungen mit Defaults</div></a>
+  <a href="#geraete"><div class="mt"><span class="i">📟</span>Geräte im Vergleich</div><div class="md">ESP32 oder nRF52, Tabelle und Eignung</div></a>
+  <a href="#t-deck"><div class="mt"><span class="i">⌨️</span>LilyGo T-Deck</div><div class="md">Tastatur-Handgerät, MUI, Tastenkürzel</div></a>
+  <a href="#t-echo"><div class="mt"><span class="i">🖼️</span>LilyGo T-Echo</div><div class="md">E-Ink, GPS, wochenlange Laufzeit</div></a>
+  <a href="#antennen"><div class="mt"><span class="i">📡</span>Antennen &amp; Reichweite</div><div class="md">λ/4, SMA, Höhe, realistische Kilometer</div></a>
+  <a href="#strom"><div class="mt"><span class="i">🔋</span>Strom, Akku &amp; Solar</div><div class="md">Verbrauch, Laufzeit, Solarknoten</div></a>
+  <a href="#firmware"><div class="mt"><span class="i">💾</span>Flashen &amp; Apps</div><div class="md">Web-Flasher, UF2, Android, iOS, CLI</div></a>
+  <a href="#praxis"><div class="mt"><span class="i">🧰</span>Praxis &amp; Fehlersuche</div><div class="md">Erste Schritte, Etikette, Symptome</div></a>
+  <a href="#recht"><div class="mt"><span class="i">⚖️</span>Recht in Deutschland</div><div class="md">SRD-Allgemeinzuteilung, ERP, Amateurfunk</div></a>
+  <a href="#community"><div class="mt"><span class="i">🗺️</span>Community &amp; Karten</div><div class="md">MeshMap, Discord, deutsche Gruppen</div></a>
+  <a href="#rechner"><div class="mt"><span class="i">🧮</span>Rechner</div><div class="md">Airtime, Antennenlänge, Link-Budget, Akku</div></a>
+  <a href="#glossar"><div class="mt"><span class="i">📖</span>Glossar</div><div class="md">Begriffe von ACK bis UF2</div></a>
+</div>
+
+<h2>Der Weg zum ersten Netz</h2>
+<div class="steps">
+  <div class="step"><h4>Zwei Knoten kaufen</h4>Ein Mesh braucht mindestens zwei. Für den Einstieg reichen zwei günstige Boards mit SX1262 in der 868-MHz-Ausführung, siehe <a href="#geraete">Geräte</a>. Antenne muss dran sein, bevor eingeschaltet wird.</div>
+  <div class="step"><h4>Firmware flashen</h4>ESP32-Boards über den <a href="#firmware">Web-Flasher</a> im Chrome-Browser, nRF52-Boards per Drag-and-drop einer UF2-Datei. Dauert fünf Minuten.</div>
+  <div class="step"><h4>Region setzen</h4>In der App die Region <b>EU_868</b> wählen. Ohne Region sendet der Knoten nichts. Preset auf LongFast lassen, Hop-Limit auf 3.</div>
+  <div class="step"><h4>Namen und Kanal</h4>Langen und kurzen Namen vergeben. Für den Anfang den öffentlichen Standardkanal behalten, so sieht man die Nachbarn. Für private Gruppen später einen Zweitkanal mit zufälligem Schlüssel anlegen und per QR-Code teilen.</div>
+  <div class="step"><h4>Funktest und Etikette</h4>Erste Nachricht senden, auf das Häkchen warten, Kanalauslastung beobachten. Rolle auf CLIENT lassen, Positionsintervall nicht verkürzen, Fragen in der <a href="#community">Community</a> stellen.</div>
+</div>
+
+<div class="warn"><b>Stand der Zahlen: September 2026.</b> Empfohlene Firmware ist die 2.7er-Linie (2.7.26 Beta). Die Alpha 2.8.0 ändert einiges an Regionen, Presets und Defaults; wo es dieses Modul betrifft, steht ein Hinweis. Verbindlich sind immer die <a href="#quellen">Quellen</a>: Meshtastic-Dokumentation, Firmware-Quelltext, Bundesnetzagentur.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Overview, Getting Started, Radio Settings, Range Tests (Stand September 2026).</li>
+    <li>Firmware-Quelltext <code>src/mesh/RadioInterface.cpp</code> und <code>MeshRadio.h</code> (Regionen, Presets), <code>mesh.proto</code> (Paketformat).</li>
+    <li>GitHub-Releases der Firmware: 2.7.26 Beta (Juni 2026), 2.8.0 Alpha (September 2026).</li>
+  </ul>
+</div>
