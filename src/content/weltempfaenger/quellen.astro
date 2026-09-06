@@ -1,0 +1,61 @@
+---
+import "./_style.css";
+---
+<div class="kurz z"><b>Frequenz eingeben, Wellenlänge und Band ablesen.</b> Dazu die Quellen, gegen die dieses Modul geprüft wurde. Sendepläne und Senderlisten ändern sich laufend; die Datenbanken unten sind aktueller als jede Tabelle hier.</div>
+
+<h2>Rechner: Frequenz, Wellenlänge, Band</h2>
+<div class="calc" data-calc="wellen">
+  <h4>Was ist das für eine Frequenz?</h4>
+  <div class="row">
+    <div><label>Frequenz (kHz)</label><input type="number" data-k="f" value="6070" step="1" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint></div>
+</div>
+<p class="note">Beispiele: 6070 (Channel 292, 49 m), 9550 (31 m), 15230 (19 m), 225 (Polskie Radio, LW), 1008 (MW), 100 300 (UKW 100,3 MHz), 121 500 (Flugfunk-Notfrequenz). Für Antennenlängen bei UKW und LoRa siehe den <a href="meshtastic.html#rechner">Antennenrechner</a> im Meshtastic-Modul.</p>
+
+<h2>Sendepläne und Senderlisten</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Quelle</th><th>Wofür</th><th>Adresse</th></tr></thead>
+<tbody>
+<tr><td><b>short-wave.info</b></td><td>Frequenzdatenbank mit „jetzt auf Sendung“, Zielgebieten und Sprachen</td><td><a href="https://www.short-wave.info/">short-wave.info</a></td></tr>
+<tr><td><b>Eibi-Liste</b></td><td>Komplette Kurzwellen-Frequenzliste, halbjährlich</td><td><a href="https://www.eibispace.de/">eibispace.de</a></td></tr>
+<tr><td><b>HFCC</b></td><td>Koordinierte Saisonpläne der großen Rundfunksender</td><td><a href="https://www.hfcc.org/">hfcc.org</a></td></tr>
+<tr><td><b>WRTH</b></td><td>World Radio TV Handbook, Jahrbuch</td><td><a href="https://wrth.info/">wrth.info</a></td></tr>
+<tr><td><b>MWList</b></td><td>Lang- und Mittelwellensender weltweit mit Karte</td><td><a href="https://www.mwlist.org/">mwlist.org</a></td></tr>
+<tr><td><b>FMLIST / fmscan</b></td><td>UKW-Sender nach Standort</td><td><a href="https://www.fmscan.org/">fmscan.org</a></td></tr>
+<tr><td><b>fading.de</b></td><td>Deutschsprachige Einführung: Meterbänder, LW/MW-Sender, Empfangstipps</td><td><a href="https://www.fading.de/">fading.de</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Gerät</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Quelle</th><th>Wofür</th><th>Adresse</th></tr></thead>
+<tbody>
+<tr><td><b>XHDATA / Sihuadon</b></td><td>Produktseite und Handbuch des R-108: Frequenzbereiche, Empfindlichkeit, Bandbreiten, Speicher, Akku, Maße</td><td><a href="https://www.xhdata.com.cn/">xhdata.com.cn</a></td></tr>
+<tr><td><b>The SWLing Post</b></td><td>Testberichte Radiwow R-108 (2018) und Sihuadon R-108 (2025), Kurzwellen-Blog</td><td><a href="https://swling.com/">swling.com</a></td></tr>
+<tr><td><b>radiojayallen.com</b></td><td>Vergleichstests von Weltempfängern, darunter R-108, D-808, PL-330</td><td><a href="https://radiojayallen.com/">radiojayallen.com</a></td></tr>
+<tr><td><b>KM6NHH Operation Guide</b></td><td>Bedienungsleitfaden mit allen Tastenkombinationen des R-108</td><td><a href="https://www.friendlyskies.net/hamradio/radiwow-r-108-operation-guide">friendlyskies.net</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Ausbreitung und Technik</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Quelle</th><th>Wofür</th><th>Adresse</th></tr></thead>
+<tbody>
+<tr><td><b>DARC-Online-Lehrgang</b></td><td>Wellenausbreitung, Ionosphäre, Antennen, verständlich und gründlich</td><td><a href="https://www.darc.de/der-club/referate/ajw/lehrgang-te/">darc.de</a></td></tr>
+<tr><td><b>DARC-Funkwetter</b></td><td>Aktuelle Ausbreitungsbedingungen, Sonnenaktivität</td><td><a href="https://www.darc.de/der-club/referate/hf/funkwetterlexikon/">darc.de Funkwetterlexikon</a></td></tr>
+<tr><td><b>NOAA Space Weather</b></td><td>Sonnenflecken, geomagnetische Stürme, Kurzwellen-Blackouts</td><td><a href="https://www.swpc.noaa.gov/">swpc.noaa.gov</a></td></tr>
+<tr><td><b>ÖVSV-Wiki</b></td><td>Kurzwellenausbreitung, Bandpläne</td><td><a href="https://wiki.oevsv.at/">wiki.oevsv.at</a></td></tr>
+<tr><td><b>Rothammel, ARRL Antenna Book</b></td><td>Antennen von Grund auf</td><td>Buch</td></tr>
+</tbody>
+</table></div>
+
+<h2>Recht</h2>
+<ul>
+  <li><a href="https://www.gesetze-im-internet.de/tdddg/">TDDDG</a>, § 5 Abhörverbot und § 27 Strafvorschriften; Erläuterungen zum Flugfunk bei 12db.de und PwC Legal.</li>
+  <li>Bundesnetzagentur, Allgemeinzuteilungen (CB-Funk, PMR446, Freenet, SRD); Amateurfunkgesetz und -verordnung.</li>
+  <li>Meshtastic und das SRD-Band: <a href="meshtastic.html#recht">Recht in Deutschland</a>.</li>
+</ul>
+
+<div class="warn"><b>Was in diesem Modul bewusst grob bleibt:</b> Preise (Klassen), konkrete Sendefrequenzen der Stationen (nur Bänder, weil sie halbjährlich wechseln), der Bestand an Lang- und Mittelwellensendern (ändert sich laufend, Stand September 2026) und die exakte Tastenbelegung des R108 (variiert je Charge, Funktionen sind gleich).</div>

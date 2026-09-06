@@ -699,6 +699,35 @@ var CALC = {
         + "damit rund 40 % mehr Reichweite; dieselben 3 dB gibt es über die Antenne geschenkt, ohne Strom und ohne Wärme."
     };
   },
+  /* --- Weltempfaenger: Frequenz -> Wellenlaenge, Bereich, Meterband --- */
+  wellen: function (v) {
+    var khz = v.f;
+    if (!isFinite(khz) || khz <= 0) return { out: "Frequenz in kHz eintragen (z. B. 6155 für 6,155 MHz)." };
+    var lam = 299792.458 / khz;
+    var bands = [
+      [2300, 2495, "120-m-Band (Tropenband)"], [3200, 3400, "90-m-Band (Tropenband)"], [3900, 4000, "75-m-Band"],
+      [4750, 5060, "60-m-Band (Tropenband)"], [5900, 6200, "49-m-Band"], [7200, 7450, "41-m-Band"],
+      [9400, 9900, "31-m-Band"], [11600, 12100, "25-m-Band"], [13570, 13870, "22-m-Band"], [15100, 15800, "19-m-Band"],
+      [17480, 17900, "16-m-Band"], [18900, 19020, "15-m-Band"], [21450, 21850, "13-m-Band"], [25670, 26100, "11-m-Band"]
+    ];
+    var ham = [[1810, 2000, "160 m"], [3500, 3800, "80 m"], [7000, 7200, "40 m"], [10100, 10150, "30 m"],
+      [14000, 14350, "20 m"], [18068, 18168, "17 m"], [21000, 21450, "15 m"], [24890, 24990, "12 m"], [28000, 29700, "10 m"]];
+    var range = khz < 30 ? "VLF (Myriameterwellen)" : khz < 300 ? "Langwelle (LF)" : khz < 3000 ? "Mittelwelle (MF), Grenzwelle ab 1,6 MHz"
+      : khz < 30000 ? "Kurzwelle (HF)" : khz < 300000 ? "UKW-Bereich (VHF)" : khz < 3e6 ? "Dezimeterwellen (UHF)" : "Zentimeterwellen (SHF)";
+    var r108 = (khz >= 150 && khz <= 450) ? "LW" : (khz >= 520 && khz <= 1710) ? "MW" : (khz >= 1711 && khz <= 29999) ? "SW"
+      : (khz >= 87500 && khz <= 108000) ? "FM" : (khz >= 118000 && khz <= 137000) ? "AIR" : null;
+    var hit = null, hamHit = null, i;
+    for (i = 0; i < bands.length; i++) if (khz >= bands[i][0] && khz <= bands[i][1]) hit = bands[i][2];
+    for (i = 0; i < ham.length; i++) if (khz >= ham[i][0] && khz <= ham[i][1]) hamHit = ham[i][2];
+    var lamStr = lam >= 1000 ? sig(lam / 1000, 3) + " km" : lam >= 1 ? sig(lam, 3) + " m" : sig(lam * 100, 3) + " cm";
+    var out = "λ = " + lamStr + "  ·  " + range + (hit ? "  ·  Rundfunk: " + hit : "") + (hamHit ? "  ·  Amateurfunk " + hamHit : "");
+    var hint = r108 ? "Am R108 im Bereich " + r108 + " einstellbar" + (r108 === "SW" ? " (Direkteingabe in kHz)" : "") + ". "
+      : "Liegt außerhalb der Bereiche des R108 (LW 150–450 kHz, MW 520–1710 kHz, SW 1711–29999 kHz, FM 87,5–108 MHz, AIR 118–137 MHz). ";
+    if (hit) hint += "Rundfunkband: Sender im 5-kHz-Raster, tags eher die kurzen Bänder (13–19 m), nachts die langen (31–49 m). ";
+    else if (khz >= 1711 && khz < 30000) hint += "Kein Rundfunkband: hier senden Funkamateure (SSB, nicht mit dem R108 lesbar), Zeitzeichen, Wetter- und Nutzfunk. ";
+    hint += "Halbwellendipol dafür: " + sig(lam / 2 * 0.95, 3) + " m Gesamtlänge.";
+    return { out: out, hint: hint };
+  },
   /* ------------------------------------------------------------------
      MESSER
      ------------------------------------------------------------------ */

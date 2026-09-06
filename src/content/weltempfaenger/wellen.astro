@@ -1,0 +1,95 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Radiowellen sind Licht mit sehr großer Wellenlänge.</b> Sie breiten sich mit Lichtgeschwindigkeit aus, und ihre Länge bestimmt, was sie tun: Lange Wellen kriechen am Boden entlang, Kurzwellen spiegeln sich an der Ionosphäre einmal um die Erde, UKW und alles darüber fliegt geradeaus in den Weltraum. Deshalb hört man auf 6 MHz Rumänien und auf 100 MHz nur die eigene Stadt.</div>
+
+<h2>Das Spektrum</h2>
+<div class="fbox"><span class="f">λ [m] = 300 000 / f [kHz] = 300 / f [MHz]</span><span class="l">6 MHz sind 50 m Wellenlänge, 100 MHz sind 3 m, 868 MHz sind 35 cm. Die Bandnamen der Kurzwelle (49 m, 31 m, 19 m) sind genau das: die Wellenlänge</span></div>
+<div class="tbl-wrap"><table style="min-width:1040px">
+<thead><tr><th>Bereich</th><th>Frequenz</th><th>Wellenlänge</th><th>Ausbreitung</th><th>Was dort läuft</th><th>R108</th></tr></thead>
+<tbody>
+<tr><td><b>VLF</b></td><td>3–30 kHz</td><td>100–10 km</td><td>Bodenwelle, durchdringt Wasser</td><td>U-Boot-Funk, Blitzortung</td><td>–</td></tr>
+<tr><td><b>Langwelle (LF)</b></td><td>30–300 kHz</td><td>10–1 km</td><td>Bodenwelle, tags wie nachts stabil über 1000 km</td><td>Zeitzeichen DCF77 (77,5 kHz), wenige Rundfunksender 153–252 kHz, Funknavigation</td><td>150–450 kHz</td></tr>
+<tr><td><b>Mittelwelle (MF)</b></td><td>300–3000 kHz</td><td>1000–100 m</td><td>Tags Bodenwelle bis ~300 km, nachts Raumwelle über 2000 km</td><td>Rundfunk 526,5–1606,5 kHz (Europa im 9-kHz-Raster), Seefunk, 160-m-Amateurband</td><td>520–1710 kHz</td></tr>
+<tr><td><b>Kurzwelle (HF)</b></td><td>3–30 MHz</td><td>100–10 m</td><td>Raumwelle über die Ionosphäre, weltweit, tageszeitabhängig</td><td>Auslandsrundfunk in Meterbändern, Amateurfunk, Zeitzeichen, Flug- und Seefunk über Ozeanen, Wetterfax</td><td>1711–29999 kHz</td></tr>
+<tr><td><b>UKW (VHF)</b></td><td>30–300 MHz</td><td>10–1 m</td><td>Sichtverbindung plus etwas darüber hinaus, 50–150 km</td><td>UKW-Rundfunk 87,5–108 MHz, Flugfunk 118–137 MHz (AM), DAB+ 174–230 MHz, 2-m-Amateurband</td><td>87,5–108 MHz · 118–137 MHz</td></tr>
+<tr><td><b>Dezimeterwellen (UHF)</b></td><td>300–3000 MHz</td><td>1 m–10 cm</td><td>Sichtverbindung, Reflexionen an Gebäuden</td><td>PMR446, DVB-T2, Mobilfunk, <a href="meshtastic.html">Meshtastic</a> (868 MHz), WLAN und Bluetooth (2,4 GHz)</td><td>–</td></tr>
+<tr><td><b>Zentimeterwellen (SHF)</b></td><td>3–30 GHz</td><td>10–1 cm</td><td>Sichtverbindung, Regen dämpft</td><td>WLAN 5 GHz, Satellitenfernsehen, Radar, Richtfunk</td><td>–</td></tr>
+</tbody>
+</table></div>
+
+<h2>Wie Wellen reisen</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 300" role="img" aria-label="Drei Ausbreitungsarten über gekrümmter Erde: die Bodenwelle der Lang- und Mittelwelle folgt der Erdoberfläche, die Raumwelle der Kurzwelle wird an der Ionosphäre in 100 bis 400 km Höhe zurück zur Erde gebrochen und überspringt dabei eine tote Zone, UKW geht geradeaus und endet am Horizont">
+  <!-- Erde -->
+  <path class="box" d="M0,300 Q330,180 660,300 Z" />
+  <path class="w" d="M0,300 Q330,180 660,300" />
+  <text class="lbl" x="330" y="292" text-anchor="middle">Erde</text>
+  <!-- Ionosphaere -->
+  <path class="gd" d="M0,120 Q330,0 660,120" />
+  <path class="gd" d="M0,150 Q330,40 660,150" />
+  <text class="lbl" x="620" y="98" text-anchor="end">F-Schicht 200–400 km</text>
+  <text class="lbl" x="620" y="136" text-anchor="end">D-Schicht 70–90 km (nur tags)</text>
+  <!-- Sender -->
+  <path class="w" d="M120,248 V200" /><circle class="accf" cx="120" cy="196" r="5" />
+  <text class="lblb" x="120" y="270" text-anchor="middle">Sender</text>
+  <!-- Bodenwelle -->
+  <path class="good" d="M124,246 Q220,215 330,212" />
+  <text class="lbl" x="240" y="240" text-anchor="middle">Bodenwelle (LW, MW tags)</text>
+  <!-- Raumwelle -->
+  <path class="acc" d="M124,198 L330,58 L536,212" />
+  <path class="acc" d="M536,212 L620,150" style="opacity:.5;stroke-dasharray:4 4" />
+  <text class="lbla" x="330" y="48" text-anchor="middle">Raumwelle (KW): Brechung an der Ionosphäre</text>
+  <text class="lbl" x="536" y="240" text-anchor="middle">1 Sprung ≈ 1000–3500 km</text>
+  <!-- Tote Zone -->
+  <path class="badl" d="M340,222 H450" />
+  <text class="lbl" x="395" y="262" text-anchor="middle">tote Zone: zu weit für Boden-, zu nah für Raumwelle</text>
+  <!-- UKW -->
+  <path class="midl" d="M124,196 L400,176" style="stroke-dasharray:6 4" />
+  <text class="lbl" x="420" y="172" text-anchor="start">UKW: geradeaus, endet am Horizont</text>
+</svg>
+<figcaption>Die Ionosphäre ist ein durch Sonnenstrahlung ionisierter Bereich der Hochatmosphäre. Ihre F-Schicht bricht Kurzwellen zur Erde zurück und bleibt auch nachts bestehen. Die tiefere D-Schicht dämpft tags die längeren Wellen und verschwindet nach Sonnenuntergang. Daraus folgt alles, was man über Tag- und Nachtbänder wissen muss.</figcaption>
+</figure>
+
+<h2>Tag und Nacht</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Zeit</th><th>Ionosphäre</th><th>Folge für den Empfang</th><th>Was hören</th></tr></thead>
+<tbody>
+<tr><td><b>Tag</b></td><td>D-Schicht stark, F-Schicht hoch ionisiert</td><td>Lange Wellen (MW, 49 m, 41 m) werden verschluckt; kurze Wellen (13–19 m) werden gebrochen und tragen weit</td><td>Kurzwelle 13 m, 16 m, 19 m, 22 m; UKW; MW nur Nahbereich</td></tr>
+<tr><td><b>Dämmerung</b> (Greyline)</td><td>D-Schicht baut sich ab, F-Schicht noch stark</td><td>Beste Stunde: fast alle Bänder offen, Signale entlang der Dämmerungslinie besonders stark</td><td>25 m, 31 m, 41 m, 49 m; erste ferne MW-Sender</td></tr>
+<tr><td><b>Nacht</b></td><td>D-Schicht verschwunden, F-Schicht schwächer, aber vorhanden</td><td>Lange Wellen kommen weit; die kurzen Bänder über 15 MHz schließen, dort bleibt Rauschen</td><td>31 m, 41 m, 49 m, 60 m, 75 m; Mittelwelle aus ganz Europa und Nordafrika</td></tr>
+<tr><td><b>Jahreszeit, Sonnenzyklus</b></td><td>Winter: längere Nächte, stabile Nachtbänder. Sonnenmaximum (zuletzt 2024/2025): hohe Bänder bis 26 MHz offen</td><td>Was heute geht, kann morgen tot sein; ein Sonnensturm legt die Kurzwelle für Stunden lahm</td><td>Funkwetter auf darc.de oder noaa.gov prüfen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Modulation: AM, FM, SSB</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Verfahren</th><th>Prinzip</th><th>Wo</th><th>Klang und Eigenheiten</th><th>R108</th></tr></thead>
+<tbody>
+<tr><td><b>AM</b> (Amplitudenmodulation)</td><td>Die Lautstärke des Signals formt die Stärke des Trägers</td><td>LW, MW, Kurzwellenrundfunk, Flugfunk</td><td>Schmal (bis 10 kHz), störanfällig, Fading hörbar; dafür einfach und weltweit einheitlich</td><td>ja, Bandbreite 1–6 kHz wählbar</td></tr>
+<tr><td><b>FM</b> (Frequenzmodulation)</td><td>Das Signal verschiebt die Frequenz des Trägers</td><td>UKW-Rundfunk 87,5–108 MHz</td><td>Breit (150–200 kHz), rauscharm, Stereo, aber nur Sichtweite; RDS überträgt Sendernamen</td><td>ja, Stereo über Kopfhörer, kein RDS</td></tr>
+<tr><td><b>SSB</b> (Einseitenband)</td><td>AM ohne Träger und ohne zweites Seitenband: halbe Bandbreite, ein Bruchteil der Leistung</td><td>Amateurfunk, Seefunk, Flugfunk über Ozeanen, Militär</td><td>Ohne SSB-Demodulator klingt es wie Donald Duck: unverständlich</td><td>nein (D-808, PL-330 können es)</td></tr>
+<tr><td><b>Digital</b> (DAB+, DRM)</td><td>Datenstrom statt Analogsignal</td><td>DAB+ 174–230 MHz; DRM auf einigen Kurzwellen (Indien, China, Rumänien-Tests)</td><td>Klar oder gar nicht, kein Fading; braucht eigenen Empfänger</td><td>nein</td></tr>
+</tbody>
+</table></div>
+<p class="note">Warum die Bandbreite zählt: Ein AM-Sender belegt seine Trägerfrequenz plus je ein Seitenband, so breit wie der höchste Ton. Der Empfänger schneidet mit dem Bandbreitenfilter aus, was er hört. Breit heißt voller Klang und mehr Rauschen, schmal heißt dumpf und sauber. Bei zwei Sendern im 5-kHz-Abstand rettet oft erst 2 oder 3 kHz das Programm.</p>
+
+<h2>Signalstärke und Rauschen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Begriff</th><th>Bedeutung</th><th>Am R108</th></tr></thead>
+<tbody>
+<tr><td><b>Feldstärke (dBµ)</b></td><td>Wie stark das Signal an der Antenne ankommt, logarithmisch</td><td>Anzeige im Display; über 40 gut, unter 20 kritisch</td></tr>
+<tr><td><b>SNR (dB)</b></td><td>Abstand zwischen Signal und Rauschen. Entscheidet, ob man versteht</td><td>Zweite Zahl im Display; ab etwa 10 dB verständlich, ab 20 dB sauber</td></tr>
+<tr><td><b>Fading</b></td><td>Schwanken der Lautstärke, weil mehrere Wege der Raumwelle sich addieren und auslöschen</td><td>Normal auf Kurzwelle; schmale Bandbreite und Geduld helfen</td></tr>
+<tr><td><b>Rauschen und Störer (QRN, QRM)</b></td><td>Atmosphärisches Rauschen, Gewitter, und von Menschen gemachte Störungen (Netzteile, LED, PLC)</td><td>Standort wechseln, Störer ausschalten, Squelch nur auf Flugfunk</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>DARC-Online-Lehrgang „Wellenausbreitung“ und Funkwetterlexikon (Ionosphäre, D-, E-, F-Schicht, Greyline); ÖVSV-Wiki „Kurzwellenausbreitung“.</li>
+    <li>ITU-Frequenzbereichseinteilung (VLF bis SHF); Wellenlängenformel λ = c/f.</li>
+    <li>Handbuch Sihuadon R-108 (Anzeige von Feldstärke und SNR, Bandbreiten 1–6 kHz).</li>
+  </ul>
+</div>
