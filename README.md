@@ -4,7 +4,7 @@ Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Fotografie, Messe
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 24 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle 25 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -62,7 +62,7 @@ vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
 in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
 Abschnitt. Bisher nutzt das der Mechatronik-Hub.
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video ·
-🔪 Messer · 📡 Funk — zusammen 24 Module mit 266 Abschnitten.
+🔪 Messer · 📡 Funk — zusammen 25 Module mit 274 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion

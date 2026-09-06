@@ -2849,8 +2849,8 @@
    "name": "Funk",
    "icon": "📡",
    "file": "hub-funk.html",
-   "tagline": "Meshtastic · LoRa · Geräte · Recht",
-   "desc": "Kommunikation ohne Netz: Meshtastic als LoRa-Mesh für Textnachrichten und Positionen, die passenden Geräte vom T-Deck bis zum Solar-Knoten, EU-Frequenzen, Presets, Konfiguration und das deutsche Funkrecht. Tabellen, Grafiken und Rechner statt langer Texte.",
+   "tagline": "Meshtastic · Weltempfänger · Geräte · Recht",
+   "desc": "Kommunikation und Empfang ohne Netz: Meshtastic als LoRa-Mesh für Textnachrichten, der Weltempfänger für Kurzwelle, Mittelwelle und UKW aus aller Welt, die passenden Geräte vom T-Deck bis zum Sihuadon R108, EU-Frequenzen, Ausbreitung und das deutsche Funkrecht. Tabellen, Grafiken und Rechner statt langer Texte.",
    "accent": {
     "l": "#2f7a4d",
     "d": "#7fcba0"
@@ -3147,6 +3147,174 @@
         "informationstechnik",
         "embedded",
         "homeserver",
+        "elektronik-101"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "rundfunk",
+     "name": "Rundfunk & Empfang",
+     "desc": "Hören statt senden: Radiowellen, Empfangsbereiche, Kurzwelle bei Tag und Nacht, der Weltempfänger in der Praxis.",
+     "modules": [
+      {
+       "id": "weltempfaenger",
+       "file": "weltempfaenger.html",
+       "name": "Weltempfänger & Radiowellen",
+       "icon": "📻",
+       "kind": "Referenz",
+       "updated": "2026-09-06",
+       "desc": "Radio hören ohne Internet: Wie Radiowellen entstehen und sich ausbreiten, welche Bereiche ein Weltempfänger abdeckt (Langwelle, Mittelwelle, Kurzwelle, UKW, Flugfunkband), warum Kurzwelle nachts anders klingt als tags, der Sihuadon R108 im Detail mit Bedienung und Tipps, Sendepläne und Stationen, Recht in Deutschland, Glossar und Rechner.",
+       "tags": [
+        "weltempfänger",
+        "radio",
+        "kurzwelle",
+        "mittelwelle",
+        "langwelle",
+        "ukw",
+        "fm",
+        "am",
+        "ssb",
+        "sihuadon",
+        "r108",
+        "r-108",
+        "radiwow",
+        "xhdata",
+        "dsp",
+        "si4735",
+        "airband",
+        "flugfunk",
+        "118 mhz",
+        "meterband",
+        "49 m",
+        "31 m",
+        "ionosphäre",
+        "ausbreitung",
+        "greyline",
+        "dx",
+        "fading",
+        "ats",
+        "bandbreite",
+        "squelch",
+        "bl-5c",
+        "antenne",
+        "langdraht",
+        "sendeplan",
+        "short-wave.info",
+        "eibi",
+        "wrth",
+        "bbc world service",
+        "radio romania",
+        "zeitzeichen",
+        "rwm",
+        "dcf77",
+        "tdddg",
+        "abhörverbot",
+        "glossar",
+        "rechner",
+        "wellenlänge"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "wellen",
+         "t": "Radiowellen"
+        },
+        {
+         "h": "baender",
+         "t": "Empfangsbereiche"
+        },
+        {
+         "h": "r108",
+         "t": "Sihuadon R108"
+        },
+        {
+         "h": "hoeren",
+         "t": "Hören in der Praxis"
+        },
+        {
+         "h": "recht",
+         "t": "Recht & Grenzen"
+        },
+        {
+         "h": "glossar",
+         "t": "Glossar A–Z"
+        },
+        {
+         "h": "quellen",
+         "t": "Quellen & Rechner"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "wellen",
+          "baender"
+         ]
+        },
+        {
+         "l": "Gerät & Praxis",
+         "sections": [
+          "r108",
+          "hoeren",
+          "recht"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "glossar",
+          "quellen"
+         ]
+        }
+       ],
+       "alias": {
+        "landkarte": "start",
+        "einstieg": "start",
+        "radiowellen": "wellen",
+        "spektrum": "wellen",
+        "ausbreitung": "wellen",
+        "ionosphaere": "wellen",
+        "modulation": "wellen",
+        "bereiche": "baender",
+        "kurzwelle": "baender",
+        "mittelwelle": "baender",
+        "langwelle": "baender",
+        "ukw": "baender",
+        "meterband": "baender",
+        "meterbaender": "baender",
+        "airband": "baender",
+        "flugfunk": "baender",
+        "sihuadon": "r108",
+        "r-108": "r108",
+        "radiwow": "r108",
+        "geraet": "r108",
+        "bedienung": "r108",
+        "specs": "r108",
+        "praxis": "hoeren",
+        "tipps": "hoeren",
+        "sendeplan": "hoeren",
+        "sender": "hoeren",
+        "stationen": "hoeren",
+        "antenne": "hoeren",
+        "stoerungen": "hoeren",
+        "gesetz": "recht",
+        "abhoerverbot": "recht",
+        "tdddg": "recht",
+        "begriffe": "glossar",
+        "abkuerzungen": "glossar",
+        "links": "quellen",
+        "rechner": "quellen",
+        "wellenlaenge": "quellen"
+       },
+       "related": [
+        "meshtastic",
+        "informationstechnik",
         "elektronik-101"
        ]
       }
