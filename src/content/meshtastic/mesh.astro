@@ -72,6 +72,7 @@ import "./_style.css";
 <div class="stop"><b>ROUTER ist keine Belohnung für einen guten Standort im Wohnzimmer.</b> Die Dokumentation empfiehlt ausdrücklich CLIENT, CLIENT_MUTE oder CLIENT_BASE. Unnötige ROUTER erhöhen Kollisionen, senken die Zustellrate und verbrauchen Hops, weil sie bevorzugt und immer wiederholen. Vor dem Umstellen mit der lokalen Community sprechen.</div>
 
 <h2>Rebroadcast-Modus</h2>
+<details class="deep"><summary>Alle sechs Modi <span class="n">Standard ist ALL, das passt fast immer</span></summary>
 <div class="tbl-wrap"><table style="min-width:760px">
 <thead><tr><th>Modus</th><th>Verhalten</th></tr></thead>
 <tbody>
@@ -83,6 +84,7 @@ import "./_style.css";
 <tr><td><b>NONE</b></td><td>Keine Wiederholung. Nur für SENSOR, TRACKER, TAK_TRACKER</td></tr>
 </tbody>
 </table></div>
+</details>
 
 <h2>Direktnachrichten: Next-Hop seit 2.6</h2>
 <p>Broadcasts werden geflutet, Direktnachrichten seit Firmware 2.6 nicht mehr durchgehend. Die erste Nachricht flutet noch; kommt die Antwort über denselben Relais-Knoten zurück, merkt sich der Absender dessen Adresse im Feld <em>Next Hop</em>. Danach wiederholt nur noch dieser eine Knoten. Passt das nicht mehr, etwa weil sich jemand bewegt hat, fällt der letzte Sendeversuch auf Fluten zurück. Ältere Firmware im Pfad wird pro Hop automatisch überbrückt.</p>
@@ -109,6 +111,7 @@ import "./_style.css";
 <p class="note">Faustregel aus dem Projekt-Blog: Über 60 Knoten auf engem Raum lohnt der Wechsel von LongFast auf MediumSlow oder MediumFast. In Wellington mit mehr als 150 Knoten auf LongFast lag die Kanalauslastung an belebten Standorten über 65 %, und das Mesh war praktisch unbenutzbar.</p>
 
 <h2>Knotenliste (NodeDB)</h2>
+<details class="deep"><summary>Wie viele Knoten ein Gerät speichert <span class="n">je nach Chip 10 bis 250</span></summary>
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th>Plattform</th><th>Maximale Knoten (Firmware 2.7.26)</th></tr></thead>
 <tbody>
@@ -120,6 +123,7 @@ import "./_style.css";
 </tbody>
 </table></div>
 <p class="note">Ist die Liste voll, fliegt der älteste, uninteressanteste Eintrag heraus; Favoriten bleiben. Firmware 2.8 baut die Speicherung um (120 Knoten „heiß“ auf nRF52 plus eine zweite Stufe).</p>
+</details>
 
 <div class="srcs">
   <div class="sh">Quellen dieses Abschnitts</div>

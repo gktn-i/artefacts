@@ -1,0 +1,44 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Fünf Situationen, fertig eingestellt.</b> Für jede: welche Geräte, welcher Kanal, wie genau die Position, wie lange der Strom hält und wo es typischerweise hakt. Überall gilt EU_868 und LongFast, außer es steht anders da. Die Schritte dazu stehen im <a href="#schnellstart">Schnellstart</a>.</div>
+
+<h2>Die Szenarien im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:1180px">
+<thead><tr><th>Szenario</th><th>Geräte</th><th>Kanal</th><th>Position</th><th>Strom</th><th>Stolperfalle</th></tr></thead>
+<tbody>
+<tr><td><b>Wandern zu zweit</b></td><td>Zwei Handgeräte, T-Echo oder T-Deck Plus. Antenne oben am Rucksack, senkrecht</td><td>Privater Kanal mit Zufallsschlüssel; Standardkanal behalten, um Fremde zu erreichen</td><td>Im privaten Kanal exakt, im Standardkanal aus</td><td>T-Echo hält Tage, T-Deck etwa einen Tag; kleine Powerbank mitnehmen</td><td>Tal zu Tal ohne Sicht geht nicht. Auf einer Kuppe warten, bis das Häkchen kommt, dann weiter</td></tr>
+<tr><td><b>Familie im Urlaub</b></td><td>Drei bis vier Geräte. Eins bleibt in der Unterkunft am Fenster als CLIENT_BASE, die anderen als Favoriten eintragen</td><td>Privater Familienkanal; Standardkanal auf stumm</td><td>Exakt im Familienkanal, damit die Karte in der App stimmt</td><td>Fenstergerät am Netzteil, Handgeräte abends laden</td><td>EU_868 gilt in der EU, Schweiz, Norwegen und Großbritannien. USA und Kanada: US mit 915 MHz, dort braucht es andere Antennen. Kinder ohne Handy bekommen ein T-Deck oder T-Echo, beide gehen allein</td></tr>
+<tr><td><b>Festival, Veranstaltung</b></td><td>Handgeräte mit Display, damit man ohne Handy lesen kann</td><td>Privater Gruppenkanal, Standardkanal stumm. Preset bleibt LongFast; wechselt die Gruppe geschlossen auf MediumFast, ist sie schneller, aber vom öffentlichen Mesh getrennt</td><td>Exakt im Gruppenkanal, Smart Broadcast an</td><td>Powerbank je Gerät, Display-Timeout kurz</td><td>Viele Knoten auf engem Raum: Kanalauslastung über 40 % heißt Sendestopp. Nachrichten kurz, Treffpunkt als Canned Message, Range-Test aus</td></tr>
+<tr><td><b>Nachbarschaft in Frankfurt</b></td><td>Ein fester Knoten am Balkon oder Dach (Heltec V3, RAK WisBlock) als CLIENT_BASE plus Handgerät</td><td>Standardkanal LongFast, so sieht man Mesh Hessen; privater Kanal für die Straße oder das Haus</td><td>Fester Knoten: „Feste Position“, Genauigkeit 13 Bit (etwa 3 km) im öffentlichen Kanal</td><td>Netzteil, bei Balkon ohne Steckdose Solar, siehe <a href="#strom">Strom</a></td><td>Nicht ROUTER wählen, das bremst alle. Vorher auf MeshMap schauen, ob Knoten in Reichweite sind; ohne Nachbarn bleibt es ein Zwei-Geräte-Mesh</td></tr>
+<tr><td><b>Stromausfall, Netz weg</b></td><td>Geladene Handgeräte, dazu der feste Knoten mit Solar oder Powerbank</td><td>Standardkanal, um Nachbarn mit Meshtastic zu erreichen; Familienkanal für die eigenen Leute</td><td>Grob im Standardkanal</td><td>Alles auf Akku: Display-Timeout kurz, Bluetooth nur bei Bedarf, Positionsintervall lang</td><td>Kein Notruf, keine Behörden hören mit. Es hört nur, wer auch Meshtastic hat. Für Nachrichten von außen das Radio: <a href="weltempfaenger.html#frankfurt">Sender in Frankfurt</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Welches Gerät wofür</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Gerät</th><th>Passt zu</th><th>Weil</th><th>Aber</th></tr></thead>
+<tbody>
+<tr><td><b>T-Echo</b></td><td>Wandern, Urlaub, Notfall</td><td>E-Ink, GPS, hält mit einer Ladung Tage</td><td>Tippen nur über das Handy; drei Tasten und vorgefertigte Nachrichten</td></tr>
+<tr><td><b>T-Deck Plus</b></td><td>Festival, Urlaub, alles ohne Handy</td><td>Tastatur, Touchscreen, GPS, MUI läuft allein</td><td>Etwa ein Tag Akku; MUI blockiert die App-Verbindung</td></tr>
+<tr><td><b>Heltec V3</b></td><td>Balkon- oder Dachknoten, Einstieg</td><td>Günstig, kleines Display, am Netzteil unkritisch</td><td>Hungrig am Akku; Antenne der Packung tauschen</td></tr>
+<tr><td><b>RAK WisBlock, T1000-E</b></td><td>Solarknoten, Tracker</td><td>nRF52, sehr sparsam, wochenlange Laufzeit</td><td>Kein Display oder nur LED; alles über App oder CLI</td></tr>
+</tbody>
+</table></div>
+
+<h2>Frankfurt konkret</h2>
+<ul>
+  <li><b>Mesh Hessen:</b> meshhessen.de und Telegram t.me/Mesh_Hessen. Dort steht, welches Preset läuft und wo feste Knoten fehlen.</li>
+  <li><b>Vorher schauen:</b> MeshMap und die Karte von Liam Cottle zeigen, welche Knoten rund um Frankfurt per MQTT gemeldet sind. Nicht alle Knoten sind dort sichtbar, aber ein Bild bekommt man.</li>
+  <li><b>Standard bleibt LongFast:</b> Wer sich davon entfernt, sieht die anderen nicht mehr.</li>
+  <li><b>Höhe schlägt Leistung:</b> Ein Knoten am Fenster im vierten Stock erreicht mehr als ein Knoten mit größerer Antenne im Erdgeschoss. Details unter <a href="#antennen">Antennen &amp; Reichweite</a>.</li>
+  <li><b>Recht:</b> 868 MHz ist in Deutschland frei, ohne Anmeldung, mit 500 mW ERP und 10 % Sendezeit. Die Firmware hält beides ein, siehe <a href="#recht">Recht</a>.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Configuration Tips (Rollen, Zweitkanal, Position), Channel Configuration (Position Precision), Device Configuration (CLIENT_BASE, Favoriten), Regions (EU_868 in Europa, US).</li>
+    <li>Meshtastic-Blog „Why your mesh should switch from LongFast“ (2025) zur Kanalauslastung in dichten Meshes; Mesh Hessen (meshhessen.de).</li>
+  </ul>
+</div>

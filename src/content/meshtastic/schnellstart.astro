@@ -1,0 +1,60 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Zwei Geräte, eine App, zehn Minuten.</b> Vom Auspacken bis zur ersten Nachricht, Schritt für Schritt. Menünamen stehen so, wie sie in der Android- und in der iPhone-App heißen; die Apps sind übersetzt, deshalb steht der englische Name in Klammern. Wer das T-Deck ohne Handy nutzen will, findet MUI weiter unten.</div>
+
+<h2>Was du brauchst</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Was</th><th>Warum</th><th>Tipp</th></tr></thead>
+<tbody>
+<tr><td><b>Zwei Knoten für 868 MHz</b></td><td>Ein Mesh braucht mindestens zwei Geräte</td><td>Beim Kauf auf „868“ achten, nicht 915. Zum Beispiel T-Deck Plus und ein Heltec V3 oder T-Echo</td></tr>
+<tr><td><b>Antennen für 868 MHz</b></td><td>Ohne Antenne nie einschalten, die Endstufe kann Schaden nehmen</td><td>Fest anschrauben, beim Funken senkrecht halten</td></tr>
+<tr><td><b>Handy mit Meshtastic-App</b></td><td>Die App ist die Bedienoberfläche, gefunkt wird nur zwischen den Knoten</td><td>Android: Play Store oder F-Droid. iPhone und Mac: App Store</td></tr>
+<tr><td><b>USB-C-Kabel mit Datenleitungen</b></td><td>Flashen und Laden</td><td>Reine Ladekabel reichen zum Flashen nicht</td></tr>
+<tr><td><b>Chrome oder Edge am Rechner</b></td><td>Der Web-Flasher braucht Web Serial</td><td>Firefox und Safari gehen nicht</td></tr>
+</tbody>
+</table></div>
+
+<h2>Zehn Schritte bis zur ersten Nachricht</h2>
+<div class="steps">
+  <div class="step"><h4>Antenne dran</h4>Erst anschrauben, dann einschalten. Gilt bei jedem Neustart.</div>
+  <div class="step"><h4>Firmware prüfen, bei Bedarf flashen</h4>Neue Geräte kommen oft mit alter Firmware. ESP32-Geräte (T-Deck, Heltec): flasher.meshtastic.org in Chrome öffnen, Gerät wählen, neueste 2.7er-Version, beim ersten Mal „Full Erase and Install“. nRF52-Geräte (T-Echo): UF2-Datei per Drag-and-drop, siehe <a href="#firmware">Flashen &amp; Apps</a>.</div>
+  <div class="step"><h4>App installieren, Berechtigungen geben</h4>Bluetooth, Standort und Benachrichtigungen erlauben. Android braucht den Standort, um Bluetooth-Geräte überhaupt zu finden. Das ist eine Android-Regel, keine Meshtastic-Marotte.</div>
+  <div class="step"><h4>Verbinden</h4>Tab „Verbinden“ (Connect), dann „Nach Bluetooth-Geräten suchen“. Gerät antippen, PIN eingeben. Geräte mit Display zeigen die PIN, Geräte ohne Display nutzen 123456. Grüner Punkt = verbunden.</div>
+  <div class="step"><h4>Region setzen</h4>„Einstellungen“ (Settings), Bereich „LoRa“, Region „EU_868“, Speichern. Der Knoten startet neu. Preset bleibt „Long Range - Fast“ (LongFast), Hop-Limit bleibt 3.</div>
+  <div class="step"><h4>Namen vergeben</h4>„Einstellungen“, Bereich „Benutzer“ (User): langer Name und Kurzname mit 4 Zeichen oder einem Emoji. Der Kurzname erscheint bei allen anderen in der Knotenliste.</div>
+  <div class="step"><h4>Zweiten Knoten genauso</h4>Schritte 1 bis 6 wiederholen. Beide auf EU_868 und LongFast, sonst hören sie sich nicht.</div>
+  <div class="step"><h4>Erste Nachricht</h4>Tab „Nachrichten“ (Messages), Kanal „LongFast“, Text tippen, senden. Unter der Nachricht steht erst „Sending“, dann „Delivered to mesh“: ein anderer Knoten hat sie gehört. Am zweiten Gerät kommt sie mit Benachrichtigung an.</div>
+  <div class="step"><h4>Knoten ansehen</h4>Tab „Knoten“ (Nodes): Kurzname, Signalbalken, zuletzt gehört, Entfernung. Grüner Punkt = in den letzten zwei Stunden gehört. Antippen zeigt SNR, RSSI und Akku. Was die Zahlen bedeuten, steht unter <a href="#praxis">Praxis</a>.</div>
+  <div class="step"><h4>Direktnachricht und privater Kanal</h4>Knoten lange drücken, „Direktnachricht“ wählen. Privater Kanal: „Einstellungen“, „Kanäle“ (Channels), „Kanal hinzufügen“, Name vergeben, Schlüssel „Zufällig“, Speichern, QR-Code anzeigen. Am zweiten Gerät den QR-Code scannen und „Hinzufügen“ wählen, nicht „Ersetzen“.</div>
+</div>
+<div class="tip"><b>Wenn nach Schritt 8 kein „Delivered“ kommt:</b> Sind beide Knoten auf EU_868? Beide auf LongFast? Ist die Antenne fest? Steht das zweite Gerät in einem anderen Raum, statt direkt neben dem ersten? Zwei Knoten auf demselben Tisch übersteuern sich manchmal. Mehr unter <a href="#praxis">Symptome und Ursachen</a>.</div>
+
+<h2>T-Deck ohne Handy: MUI</h2>
+<ul>
+  <li><b>Erster Start:</b> Ein Bildschirm fragt Region und beide Namen zusammen ab. Danach ein Neustart, fertig.</li>
+  <li><b>Startseite:</b> Zeigt Knoten, Kanäle, ungelesene Nachrichten und Akku. Kurz tippen öffnet, lang drücken zeigt mehr.</li>
+  <li><b>Kanäle:</b> Gelber Schlüssel = Standardschlüssel, alle lesen mit. Grünes Schloss = eigener Schlüssel. Rotes Schloss = unverschlüsselt.</li>
+  <li><b>Schreiben:</b> Chat-Symbol, Kanal oder Knoten antippen, tippen, Enter. Rahmen um die Nachricht: grün = bestätigt, gelb = weitergeleitet, aber ohne Bestätigung des Empfängers, rot = niemand hat wiederholt.</li>
+  <li><b>App parallel geht nicht:</b> MUI belegt die einzige Verbindung. Für die App beim Einschalten das Meshtastic-Logo gedrückt halten (Bluetooth Programming Mode) oder im Ausschaltmenü das Bluetooth-Symbol wählen.</li>
+  <li><b>Karte:</b> Braucht eine SD-Karte mit Kacheln (256 × 256 PNG). Ohne Karte bleibt der Kartenbildschirm leer, alles andere geht.</li>
+  <li><b>Tastenkürzel</b> und Flash-Ablauf: <a href="#t-deck">LilyGo T-Deck</a>.</li>
+</ul>
+
+<h2>Danach</h2>
+<ul>
+  <li><b>Rolle CLIENT lassen.</b> ROUTER ist für Bergkuppen, nicht für die Wohnung.</li>
+  <li><b>Position entscheiden.</b> Im öffentlichen Kanal grob oder aus, im privaten Kanal exakt. Einstellung „Position Precision“ je Kanal, siehe <a href="#kanaele">Kanäle</a>.</li>
+  <li><b>Intervalle nicht verkürzen.</b> Position und Telemetrie so lassen, wie sie sind. Der Kanal gehört allen.</li>
+  <li><b>Nachbarn finden.</b> MeshMap zeigt, wer in der Nähe funkt. Für Frankfurt: Mesh Hessen, siehe <a href="#community">Community</a>.</li>
+  <li><b>Backup ziehen.</b> Einmal <code>meshtastic --export-config</code> am Rechner, dann ist ein Reset kein Drama.</li>
+  <li><b>Typische Situationen</b> mit fertigen Einstellungen: <a href="#szenarien">Szenarien</a>.</li>
+</ul>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation, Android User Guide: Getting Started, Connections, Settings (Radio &amp; User), Messages &amp; Channels, Nodes (Stand Juli 2026); Apple User Guide: Getting Started.</li>
+    <li>Meshtastic-Dokumentation: Device UIs → Meshtastic UI (Initial Setup, Channels, Chat, Bluetooth Programming Mode); Getting Started → Flashing Firmware.</li>
+  </ul>
+</div>

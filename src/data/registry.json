@@ -2868,7 +2868,7 @@
        "icon": "📡",
        "kind": "Referenz",
        "updated": "2026-09-06",
-       "desc": "Meshtastic von der Chirp-Modulation bis zum Funkrecht: LoRa-Grundlagen, EU-Regionen 868/433 MHz, Modem-Presets von ShortTurbo bis LongSlow, Frequenzslots und Duty Cycle, Mesh-Algorithmus und Rollen, Kanäle und Verschlüsselung, Konfiguration mit allen Defaults, MQTT. Dazu Geräte im Vergleich, LilyGo T-Deck und T-Echo im Detail, Antennen und Reichweite, Strom und Solar, Flashen und Apps, Fehlersuche, Recht in Deutschland, Community, Rechner und Glossar.",
+       "desc": "Vom ersten Einschalten bis zum Dachknoten: Schnellstart mit den Menünamen der App, fertige Szenarien für Wandern, Familie, Festival und Nachbarschaft, dazu die Referenz zu LoRa, Mesh und Rollen, EU-Frequenzen und Duty Cycle, Presets von ShortTurbo bis LongSlow, Kanäle und Verschlüsselung, alle Einstellungen mit Voreinstellung, Geräte wie T-Deck und T-Echo, Antennen, Strom und Solar, Recht in Deutschland, Fehlersuche, Rechner und Glossar.",
        "tags": [
         "meshtastic",
         "lora",
@@ -2927,12 +2927,37 @@
         "meshmap",
         "glossar",
         "rechner",
-        "airtime"
+        "airtime",
+        "schnellstart",
+        "erste schritte",
+        "anleitung",
+        "app",
+        "android",
+        "ios",
+        "szenarien",
+        "wandern",
+        "festival",
+        "blackout",
+        "frankfurt",
+        "signalstärke",
+        "nachrichtenstatus",
+        "snr",
+        "rssi",
+        "hops away",
+        "channel utilization"
        ],
        "sections": [
         {
          "h": "start",
          "t": "Start & Landkarte"
+        },
+        {
+         "h": "schnellstart",
+         "t": "Schnellstart"
+        },
+        {
+         "h": "szenarien",
+         "t": "Szenarien"
         },
         {
          "h": "lora",
@@ -3016,6 +3041,8 @@
          "l": "Grundlagen",
          "sections": [
           "start",
+          "schnellstart",
+          "szenarien",
           "lora",
           "mesh"
          ]
@@ -3119,7 +3146,7 @@
         "batterie": "strom",
         "flashen": "firmware",
         "apps": "firmware",
-        "app": "firmware",
+        "app": "schnellstart",
         "cli": "firmware",
         "update": "firmware",
         "installation": "firmware",
@@ -3140,7 +3167,23 @@
         "calc": "rechner",
         "begriffe": "glossar",
         "abkuerzungen": "glossar",
-        "links": "quellen"
+        "links": "quellen",
+        "erste-schritte": "schnellstart",
+        "einrichten": "schnellstart",
+        "anleitung": "schnellstart",
+        "getting-started": "schnellstart",
+        "erste-nachricht": "schnellstart",
+        "mui": "schnellstart",
+        "verbinden": "schnellstart",
+        "anwendungen": "szenarien",
+        "beispiele": "szenarien",
+        "wandern": "szenarien",
+        "familie": "szenarien",
+        "festival": "szenarien",
+        "nachbarschaft": "szenarien",
+        "blackout": "szenarien",
+        "stromausfall": "szenarien",
+        "frankfurt": "szenarien"
        },
        "related": [
         "fpv-drohnen",

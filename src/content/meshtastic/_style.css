@@ -9,3 +9,24 @@
 @media(max-width:620px){
   .mx-meshtastic .tbl-wrap tbody td[colspan].span{border-radius:0;margin:0}
 }
+
+/* „Mehr Details“: Vertiefungen, die zum Bedienen nicht nötig sind.
+   Standardmäßig zugeklappt, damit die praktischen Teile oben stehen. */
+.mx-meshtastic details.deep{border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface-2);margin:.6rem 0 1rem;overflow:hidden}
+.mx-meshtastic details.deep > summary{cursor:pointer;list-style:none;padding:10px 14px;
+  font-size:13px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:.5em}
+.mx-meshtastic details.deep > summary::-webkit-details-marker{display:none}
+.mx-meshtastic details.deep > summary::before{content:"";flex:0 0 auto;width:0;height:0;
+  border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent;
+  transition:transform .15s}
+.mx-meshtastic details.deep[open] > summary::before{transform:rotate(90deg) translateX(1px)}
+.mx-meshtastic details.deep > summary:hover{color:var(--accent-ink)}
+.mx-meshtastic details.deep > summary .n{font-weight:400;color:var(--faint)}
+.mx-meshtastic details.deep > :not(summary){margin-left:14px;margin-right:14px}
+.mx-meshtastic details.deep > :last-child{margin-bottom:12px}
+
+/* Landkarte: Abschnitte, die Hintergrund sind, bekommen eine kleine Marke. */
+.mx-meshtastic .map a .mt .bg{margin-left:auto;font-size:10px;font-weight:600;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--faint);border:1px solid var(--border);border-radius:20px;
+  padding:1px 7px;flex:0 0 auto}

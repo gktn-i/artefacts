@@ -27,6 +27,7 @@ import "./_style.css";
 </div>
 
 <h2>Wie der Frequenzslot entsteht</h2>
+<details class="deep"><summary>Wie die Frequenz zustande kommt <span class="n">Bandplan und Formel</span></summary>
 <figure>
 <svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Frequenzachse 863 bis 870 MHz mit den SRD-Teilbändern und dem Meshtastic-Fenster EU_868 von 869,4 bis 869,65 MHz, in dem genau ein 250-kHz-Kanal bei 869,525 MHz liegt">
   <path class="w" d="M30,120 H640" />
@@ -60,6 +61,7 @@ import "./_style.css";
 <figcaption>Das SRD-Band 863–870 MHz und seine Teilbänder. Meshtastic nutzt nur das Fenster mit 500 mW und 10 %: dort passt genau ein 250-kHz-Kanal hinein. Mit 125-kHz-Presets (LongModerate, LongSlow) ergeben sich rechnerisch zwei Slots, 500-kHz-Presets passen nicht und fallen auf LongFast zurück.</figcaption>
 </figure>
 <div class="fbox"><span class="f">Slots = ⌊(f<sub>Ende</sub> − f<sub>Start</sub>) / BW⌋ · Slot = (hash(Kanalname) mod Slots) + 1 · f = f<sub>Start</sub> + BW/2 + (Slot − 1) · BW</span><span class="l">EU_868 mit 250 kHz: ⌊0,25 / 0,25⌋ = 1 Slot bei 869,525 MHz. Hash: djb2 über den Namen des primären Kanals, bei leerem Namen über den Preset-Namen („LongFast“)</span></div>
+</details>
 <div class="warn"><b>Ein anderer Name für den primären Kanal kann die Frequenz verschieben.</b> In EU_868 mit 250 kHz nicht, da gibt es nur einen Slot. In EU_433 (4 Slots), in den USA (104 Slots) oder mit 125-kHz-Presets aber schon: Dann landet man auf einem anderen Slot als der Rest der Stadt. Abhilfe: den Frequenzslot in der LoRa-Konfiguration fest setzen. Firmware 2.8 rechnet die Slots mit Schutzabständen neu, für EU_868 und EU_433 ändert sich dadurch nichts.</div>
 
 <h2>Duty Cycle: das Stundenbudget</h2>
@@ -73,6 +75,7 @@ import "./_style.css";
 
 <h2>Alle Regionen der Firmware</h2>
 <p>Zum Nachschlagen, etwa für Reisen: Frequenzbereich, Leistungsgrenze und Duty Cycle, wie sie in Firmware 2.7.26 und der Dokumentation stehen. Die Firmware hält diese Grenzen ein, egal was man in „TX Power“ einträgt.</p>
+<details class="deep"><summary>Alle Regionen weltweit <span class="n">nur für Reisen interessant</span></summary>
 <div class="tbl-wrap"><table style="min-width:820px">
 <thead><tr><th data-s="text">Code</th><th>Gebiet</th><th data-s="num">MHz</th><th data-s="num">Leistung (dBm)</th><th data-s="num">Duty Cycle (%)</th></tr></thead>
 <tbody>
@@ -105,6 +108,7 @@ import "./_style.css";
 </tbody>
 </table></div>
 <p class="note">Die Leistungsgrenzen sind für die EU als ERP hinterlegt, für die USA als EIRP. Reisen: Die Region muss zum Aufenthaltsland passen, und alle Knoten eines Meshes müssen dieselbe Region und dasselbe Preset haben.</p>
+</details>
 
 <div class="tip"><b>Ausblick Firmware 2.8 (Alpha, September 2026):</b> neue EU-Regionen <b>EU_866</b> (865,6–867,6 MHz, 27 dBm, 2,5 % Duty Cycle, eigene „Lite“-Presets mit 125 kHz) und <b>EU_N_868</b> (dasselbe Fenster wie EU_868, aber schmale 62,5-kHz-„Narrow“-Presets), dazu Amateurfunkregionen für 2 m und 70 cm. In den USA wird LongTurbo statt LongFast Standard für neue Knoten, LongFast und LongTurbo hören sich nicht. Für Deutschland bleibt EU_868 mit LongFast der gemeinsame Nenner.</div>
 
