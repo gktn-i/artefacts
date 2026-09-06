@@ -1,68 +1,121 @@
-<p class="lede">Die wichtigsten Garmethoden, was sie bewirken und wofür sie taugen.</p>
+---
+import "./_style.css";
+---
+<p class="lede">Die wichtigsten Garmethoden, was sie bewirken und wofür sie taugen. Alles hängt an der Temperatur: Wasser bleibt bei 100 °C stehen, Bräunung beginnt erst darüber.</p>
+
+<div class="kb-kpis">
+  <div class="kb-kpi"><div class="v">100 °C</div><div class="k">Grenze für alles Nasse</div><div class="s">Wasser und Dampf werden nicht heißer. Darum bräunt nichts, solange es feucht ist.</div></div>
+  <div class="kb-kpi"><div class="v">~140 °C</div><div class="k">Maillard beginnt</div><div class="s">Ab hier entstehen Röstaromen. Richtig kräftig ab 150 bis 180 °C.</div></div>
+  <div class="kb-kpi"><div class="v">~70 °C</div><div class="k">Kollagen wird Gelatine</div><div class="s">Braucht aber Stunden. Deshalb macht Schmoren zähe Stücke zart.</div></div>
+  <div class="kb-kpi"><div class="v">60 bis 65 °C</div><div class="k">Eiweiß gerinnt</div><div class="s">Fleisch wird fest und verliert Saft. Darüber wird es mit jedem Grad trockener.</div></div>
+</div>
+
+<figure class="kb-fig">
+  <div class="kb-title">Gartemperatur je Methode</div>
+  <div class="kb-scale pad-b">
+    <div class="kb-axis">
+      <span style="--p:4.5%">50 °C</span><span style="--p:27.3%">100 °C</span><span style="--p:50%">150 °C</span><span style="--p:72.7%">200 °C</span><span style="--p:95.5%">250 °C</span>
+    </div>
+    <div class="kb-body">
+      <div class="kb-vline" style="--p:27.3%"><b>Wasser-Grenze</b></div>
+      <div class="kb-vline" style="--p:45.5%"><b>Maillard ab ~140 °C</b></div>
+      <div class="kb-row"><div class="kb-bar wet" style="--l:13.6%;--w:6.8%"><span>Pochieren <em>70–85</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar wet" style="--l:18.2%;--w:9.1%"><span>Dünsten <em>80–100</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar wet" style="--l:20.5%;--w:4.5%"><span>Simmern <em>85–95</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar wet" style="--l:27.3%;--w:1.5%"><span>Kochen · Dämpfen <em>100</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar" style="--l:18.2%;--w:18.2%"><span>Konfieren <em>80–120</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar" style="--l:54.5%;--w:9.1%"><span>Frittieren <em>160–180</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar" style="--l:54.5%;--w:27.3%"><span>Ofen <em>160–220</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar" style="--l:63.6%;--w:18.2%"><span>Sautieren <em>180–220</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar lft" style="--l:72.7%;--w:22.7%"><span>Scharf anbraten <em>200–250</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar lft" style="--l:95.5%;--w:4.5%"><span>Wok <em>250+</em></span></div></div>
+    </div>
+  </div>
+  <div class="kb-legend"><span><i class="wet"></i>in Wasser oder Dampf</span><span><i class="dry"></i>in Fett oder trockener Hitze</span></div>
+  <figcaption>Gestrichelt: die 100-°C-Grenze von Wasser und der Beginn der Maillard-Reaktion bei etwa 140 °C. Links der Wasser-Grenze wird nichts braun, das ist schonend. Rechts der Maillard-Linie entstehen Kruste und Röstaromen. Werte sind typische Bereiche.</figcaption>
+</figure>
+
+<div class="block">
+  <div class="section-label">Drei Wege, Hitze ins Essen zu bringen</div>
+  <div class="kb-tbl-wrap">
+    <table class="kb-table">
+      <thead><tr><th>Medium</th><th>Temperatur</th><th>Wärmeübertragung</th><th>Bräunt?</th><th>Typisch</th></tr></thead>
+      <tbody>
+        <tr><td>Wasser / Dampf</td><td class="m">max. 100 °C</td><td>schnell und gleichmäßig</td><td class="c"><span class="n">nein</span></td><td>Kochen, Dämpfen, Pochieren</td></tr>
+        <tr><td>Luft (Ofen)</td><td class="m">120–250 °C</td><td>langsam, trocknet die Oberfläche</td><td class="c"><span class="y">ja</span></td><td>Braten, Backen, Rösten</td></tr>
+        <tr><td>Fett</td><td class="m">80–200 °C</td><td>schnell, rundum Kontakt</td><td class="c"><span class="y">ja</span></td><td>Frittieren, Konfieren</td></tr>
+        <tr><td>Metall (Pfanne)</td><td class="m">180–300 °C</td><td>sehr schnell, nur an der Kontaktfläche</td><td class="c"><span class="y">stark</span></td><td>Anbraten, Sautieren</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div class="def-grid">
   <div class="card def-card">
     <h3>Scharf anbraten</h3>
     <p>Bei sehr hoher Hitze schnell eine braune Kruste bilden. Die Maillard-Reaktion liefert die Röstaromen. Wenig bewegen und erst wenden, wenn sich das Stück von selbst löst.</p>
-    <span class="tag">Steak · Filets · Fleischstücke</span>
+    <span class="tag">200–250 °C · Steak · Filets · Fleischstücke</span>
   </div>
   <div class="card def-card">
     <h3>Sautieren</h3>
     <p>In wenig heißem Fett bei hoher Hitze garen, dabei ständig in Bewegung. Funktioniert nur mit kleinen, gleich großen Stücken.</p>
-    <span class="tag">Gemüse · Streifen · Pilze</span>
+    <span class="tag">180–220 °C · Gemüse · Streifen · Pilze</span>
   </div>
   <div class="card def-card">
     <h3>Velveting</h3>
     <p>Fleisch in Stärke, Eiweiß oder etwas Natron marinieren und kurz in Öl oder Wasser vorgaren, erst dann scharf fertigbraten. Hält mageres Fleisch seidig zart statt trocken.</p>
-    <span class="tag">Hähnchen · Rindstreifen · Wok</span>
+    <span class="tag">1 TL Stärke + 1 EL Wasser je 200 g · Hähnchen · Rindstreifen · Wok</span>
   </div>
   <div class="card def-card">
     <h3>Schmoren</h3>
     <p>Erst scharf anbraten, dann mit wenig Flüssigkeit zugedeckt lange bei niedriger Hitze garen. Macht zähe Stücke butterzart.</p>
-    <span class="tag">Gulasch · Braten · Ochsenbacke</span>
+    <span class="tag">2–4 h bei 150–160 °C · Gulasch · Braten · Ochsenbacke</span>
   </div>
   <div class="card def-card">
     <h3>Dünsten</h3>
     <p>Im eigenen Saft oder wenig Fett und Flüssigkeit bei niedriger Hitze geschlossen garen. Schonend und aromaschonend.</p>
-    <span class="tag">Gemüse · Fisch · Zwiebeln</span>
+    <span class="tag">80–100 °C · Gemüse · Fisch · Zwiebeln</span>
   </div>
   <div class="card def-card">
     <h3>Dämpfen</h3>
     <p>Über kochendem Wasser nur im Dampf garen, ohne Kontakt zur Flüssigkeit. Sehr schonend, hält Nährstoffe und Farbe.</p>
-    <span class="tag">Gemüse · Fisch · Klöße</span>
+    <span class="tag">100 °C · Gemüse · Fisch · Klöße</span>
   </div>
   <div class="card def-card">
     <h3>Kochen / Sieden</h3>
     <p>In sprudelnd kochendem Wasser bei 100 °C. Kräftige Bewegung im Topf.</p>
-    <span class="tag">Pasta · Kartoffeln · Eier</span>
+    <span class="tag">100 °C · Pasta · Kartoffeln · Eier</span>
   </div>
   <div class="card def-card">
     <h3>Köcheln / Simmern</h3>
     <p>Knapp unter dem Siedepunkt, es steigen nur kleine Bläschen auf. Schonender als volles Kochen.</p>
-    <span class="tag">Saucen · Suppen · Fonds</span>
+    <span class="tag">85–95 °C · Saucen · Suppen · Fonds</span>
   </div>
   <div class="card def-card">
     <h3>Pochieren</h3>
-    <p>In Flüssigkeit knapp unter dem Kochpunkt, etwa 70 bis 85 °C, sanft garen. Die Oberfläche bleibt fast ruhig.</p>
-    <span class="tag">Eier · Fisch · Geflügel</span>
+    <p>In Flüssigkeit knapp unter dem Kochpunkt sanft garen. Die Oberfläche bleibt fast ruhig.</p>
+    <span class="tag">70–85 °C · Eier · Fisch · Geflügel</span>
   </div>
   <div class="card def-card">
     <h3>Blanchieren</h3>
     <p>Sehr kurz in kochendes Wasser, dann sofort in Eiswasser abschrecken. Erhält Farbe und Biss, erleichtert das Schälen.</p>
-    <span class="tag">Grünes Gemüse · Tomaten · Mandeln</span>
+    <span class="tag">1–3 min · Grünes Gemüse · Tomaten · Mandeln</span>
   </div>
   <div class="card def-card">
     <h3>Frittieren</h3>
-    <p>In viel heißem Fett, etwa 160 bis 180 °C, schwimmend garen. Gibt eine rundum knusprige Kruste.</p>
-    <span class="tag">Pommes · Schnitzel · Teigwaren</span>
+    <p>In viel heißem Fett schwimmend garen. Gibt eine rundum knusprige Kruste. Nie mehr als ein Drittel des Topfes füllen.</p>
+    <span class="tag">160–180 °C · Pommes · Schnitzel · Teigwaren</span>
   </div>
   <div class="card def-card">
     <h3>Braten im Ofen</h3>
     <p>Mit trockener Hitze rundum garen. Größere Stücke werden außen braun und innen gleichmäßig gar.</p>
-    <span class="tag">Braten · Geflügel · Wurzelgemüse</span>
+    <span class="tag">160–220 °C · Braten · Geflügel · Wurzelgemüse</span>
   </div>
   <div class="card def-card">
     <h3>Konfieren</h3>
     <p>Sehr langsam in reichlich Fett bei niedriger Temperatur garen. Wird butterzart und hält sich lange im eigenen Fett.</p>
-    <span class="tag">Entenkeule · Knoblauch · Tomaten</span>
+    <span class="tag">80–120 °C · 2–3 h · Entenkeule · Knoblauch · Tomaten</span>
   </div>
 </div>
+
+<div class="note">Faustregel: zart und mager (Filet, Fisch, Brust) braucht kurze, heiße oder sehr sanfte Hitze. Zäh und durchwachsen (Schulter, Bäckchen, Beinscheibe) braucht Zeit und Feuchtigkeit, damit das Bindegewebe schmilzt.</div>

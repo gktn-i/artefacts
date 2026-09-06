@@ -1,13 +1,61 @@
-<p class="lede">Kerntemperaturen für Fleisch und Fisch, dazu die Rauchpunkte der Öle im Überblick.</p>
+---
+import "./_style.css";
+---
+<p class="lede">Kerntemperaturen für Fleisch, Fisch und Eier, das Nachgaren nach dem Herausnehmen und die Rauchpunkte der Öle im Überblick. Ein Thermometer für 15 Euro ist das nützlichste Werkzeug in der Küche.</p>
+
+<div class="kb-kpis">
+  <div class="kb-kpi"><div class="v">72 °C</div><div class="k">Geflügel und Hack sicher</div><div class="s">Ab hier sind Salmonellen und Co. abgetötet. Bei Geflügel am dicksten Punkt messen.</div></div>
+  <div class="kb-kpi"><div class="v">+3 bis 5 °C</div><div class="k">Nachgaren beim Steak</div><div class="s">Darum früher aus der Pfanne. Ein großer Braten legt sogar 5 bis 10 °C zu.</div></div>
+  <div class="kb-kpi"><div class="v">5 min</div><div class="k">Ruhezeit Steak</div><div class="s">Etwa halb so lang wie die Bratzeit. Braten 15 bis 20 Minuten.</div></div>
+  <div class="kb-kpi"><div class="v">7 °C</div><div class="k">Fleisch gehört kühl</div><div class="s">Zwischen 7 und 60 °C vermehren sich Keime schnell. Nicht länger als 2 h in dieser Zone.</div></div>
+</div>
+
+<figure class="kb-fig">
+  <div class="kb-title">Kerntemperatur · Fleisch &amp; Fisch</div>
+  <div class="kb-scale pad-b">
+    <div class="kb-axis">
+      <span style="--p:14.3%">50 °C</span><span style="--p:42.9%">60 °C</span><span style="--p:71.4%">70 °C</span><span style="--p:85.7%">75 °C</span>
+    </div>
+    <div class="kb-body">
+      <div class="kb-vline" style="--p:42.9%"><b>ab 60 °C grau statt rosa</b></div>
+      <div class="kb-vline lft" style="--p:77.1%"><b>72 °C sicher</b></div>
+      <div class="kb-row"><div class="kb-bar wet" style="--l:14.3%;--w:14.3%"><span>Fisch <em>50–55</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar" style="--l:14.3%;--w:34.3%"><span>Rind · Lamm <em>50–62</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar" style="--l:37.1%;--w:11.4%"><span>Entenbrust <em>58–62</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar mid" style="--l:51.4%;--w:20%"><span>Schwein <em>63–70</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar bad lft" style="--l:71.4%;--w:5.7%"><span>Hackfleisch <em>70–72</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar bad lft" style="--l:77.1%;--w:5.7%"><span>Geflügel <em>72–74</em></span></div></div>
+    </div>
+  </div>
+  <figcaption>Endtemperatur nach dem Ruhen. Fisch 50 bis 55 °C ist glasig bis gerade gar, Rind 50 bis 62 °C reicht von rare bis medium, Schwein 63 bis 70 °C von rosa bis durch. Gestrichelt: ab 60 °C wird Fleisch grau statt rosa, ab 72 °C gilt es als sicher durch. Rot markiert, was immer ganz durch sein muss. Die feinen Steak-Garstufen samt Pfanne-raus-Punkt stehen bei <a href="perfektes-steak.html#temperatur">Perfektes Steak</a>.</figcaption>
+</figure>
 
 <div class="block">
-  <div class="section-label">Kerntemperatur · Fleisch &amp; Fisch</div>
+  <div class="section-label">Nachgaren und Ruhen</div>
+  <div class="kb-tbl-wrap">
+    <table class="kb-table">
+      <thead><tr><th>Stück</th><th>Nachgaren</th><th>Ruhezeit</th><th>Rausnehmen bei</th></tr></thead>
+      <tbody>
+        <tr><td>Fischfilet</td><td class="m">+1 bis 2 °C</td><td class="m">1–2 min</td><td>ca. 48 °C für glasig</td></tr>
+        <tr><td>Steak 2–3 cm</td><td class="m">+3 bis 5 °C</td><td class="m">5 min</td><td>ca. 52 °C für Medium Rare</td></tr>
+        <tr><td>Hähnchenbrust</td><td class="m">+3 bis 4 °C</td><td class="m">3–5 min</td><td>ca. 68 °C</td></tr>
+        <tr><td>Braten 1–2 kg</td><td class="m">+5 bis 8 °C</td><td class="m">15–20 min</td><td>je nach Ziel 5 bis 8 °C früher</td></tr>
+        <tr><td>Ganzes Hähnchen</td><td class="m">+5 °C</td><td class="m">15 min</td><td>ca. 70 °C in der Keule</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">Warum ruhen: Beim Braten drängt der Saft in die Mitte. In der Ruhe verteilt er sich wieder und bleibt beim Anschneiden im Fleisch statt auf dem Brett. Locker mit Folie abdecken, nicht einpacken.</div>
+</div>
+
+<div class="block">
+  <div class="section-label">Eier · Temperatur und Zeit</div>
   <div class="ratio-grid">
-    <div class="ratio-item heat"><span class="r-label">Rind / Lamm</span><div class="r-value">55–62 °C</div><div class="r-sub">Medium Rare bis Medium</div></div>
-    <div class="ratio-item heat"><span class="r-label">Schwein</span><div class="r-value">63–70 °C</div><div class="r-sub">rosa-saftig bis durch</div></div>
-    <div class="ratio-item heat"><span class="r-label">Geflügel</span><div class="r-value">72–74 °C</div><div class="r-sub">immer ganz durch</div></div>
-    <div class="ratio-item heat"><span class="r-label">Hackfleisch</span><div class="r-value">70–72 °C</div><div class="r-sub">immer ganz durch</div></div>
-    <div class="ratio-item heat"><span class="r-label">Fisch</span><div class="r-value">50–55 °C</div><div class="r-sub">glasig bis gerade gar</div></div>
+    <div class="ratio-item"><span class="r-label">Eiweiß stockt</span><div class="r-value">62 °C</div><div class="r-sub">wird milchig, fest ab 80 °C</div></div>
+    <div class="ratio-item"><span class="r-label">Eigelb stockt</span><div class="r-value">65–70 °C</div><div class="r-sub">cremig bei 65, fest ab 70</div></div>
+    <div class="ratio-item"><span class="r-label">Weich</span><div class="r-value">6 min</div><div class="r-sub">Größe M, in kochendes Wasser</div></div>
+    <div class="ratio-item"><span class="r-label">Wachsweich</span><div class="r-value">8 min</div><div class="r-sub">Kern noch cremig</div></div>
+    <div class="ratio-item"><span class="r-label">Hart</span><div class="r-value">10 min</div><div class="r-sub">länger gibt grünen Rand</div></div>
+    <div class="ratio-item"><span class="r-label">Onsen-Ei</span><div class="r-value">63 °C</div><div class="r-sub">45 min im Wasserbad</div></div>
   </div>
 </div>
 
@@ -22,6 +70,5 @@
     <div class="ref-row"><div class="ref-key">Erdnussöl</div><div class="ref-val">ca. 230 °C · hoch</div></div>
     <div class="ref-row"><div class="ref-key">Butterschmalz / Ghee</div><div class="ref-val"><span class="hot">ca. 250 °C · sehr hoch</span></div></div>
   </div>
+  <div class="note">Das Balkendiagramm mit allen Fetten und dem Fettsäureprofil steht unter <a href="#oele">Öle &amp; Fette</a>.</div>
 </div>
-
-<div class="note">Für die genaue Steak-Garstufe inklusive der Pfanne-raus-Temperaturen (Carryover-Cooking): <a href="perfektes-steak.html#temperatur">Perfektes Steak → Garstufen &amp; Temperaturen</a>. Hier nur die Übersicht, damit sich nichts doppelt.</div>
