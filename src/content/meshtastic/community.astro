@@ -1,0 +1,69 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Meshtastic lebt von Leuten mit Dachzugang.</b> Ob es in einer Stadt funktioniert, hängt davon ab, wer dort Knoten aufgestellt hat. Die Karten zeigen, wo etwas ist; die regionalen Gruppen sagen, welches Preset läuft und wo ein Knoten fehlt. Deutschland hat inzwischen eine der dichtesten Szenen Europas.</div>
+
+<h2>Karten</h2>
+<div class="map">
+  <a href="https://meshmap.net/"><div class="mt"><span class="i">🗺️</span>MeshMap</div><div class="md">Fast live: alle Knoten, die der öffentliche MQTT-Server in den letzten Stunden gesehen hat</div></a>
+  <a href="https://meshtastic.liamcottle.net/"><div class="mt"><span class="i">🌍</span>Meshtastic Map (Liam Cottle)</div><div class="md">Weltkarte mit Knotendetails, Rolle, Firmware, Nachbarn; ebenfalls aus MQTT</div></a>
+  <a href="https://meshmap.de/"><div class="mt"><span class="i">🐻</span>Meshmap Berlin</div><div class="md">Empfangene Knoten in Berlin und Brandenburg nach Frequenz und Preset</div></a>
+  <a href="https://site.meshtastic.org"><div class="mt"><span class="i">📐</span>Site Planner</div><div class="md">Offizielles Werkzeug: Abdeckung eines Standorts auf Geländedaten vorausberechnen</div></a>
+</div>
+<p class="note">Auf den Karten erscheint nur, wer per MQTT hochgeladen wird: über ein Gateway mit Uplink oder mit eigenem Map Reporting. Ein Mesh ohne Gateway ist unsichtbar und trotzdem lebendig. Positionen auf dem öffentlichen Server sind auf 10 bis 16 Bit Genauigkeit begrenzt.</p>
+
+<h2>Offizielle Kanäle</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Kanal</th><th>Wofür</th><th>Adresse</th></tr></thead>
+<tbody>
+<tr><td><b>Dokumentation</b></td><td>Die Referenz, mit guter Suche</td><td>meshtastic.org/docs</td></tr>
+<tr><td><b>Discord</b></td><td>Der Hauptkanal der Entwickler und Nutzer, über 50 000 Mitglieder, Kanäle je Land</td><td>discord.gg/ktMAKGBnBs</td></tr>
+<tr><td><b>GitHub Discussions</b></td><td>Technische Fragen, Ideen, Reichweitenberichte</td><td>github.com/orgs/meshtastic/discussions</td></tr>
+<tr><td><b>Reddit</b></td><td>r/meshtastic: Erfahrungsberichte, Bauten, Rekorde</td><td>reddit.com/r/meshtastic</td></tr>
+<tr><td><b>Blog</b></td><td>Release-Vorschauen, Rollen-Erklärungen, Preset-Diskussion</td><td>meshtastic.org/blog</td></tr>
+<tr><td><b>Local Groups</b></td><td>Offizielle Liste regionaler Gruppen weltweit, auch die deutschen unten</td><td>meshtastic.org/docs/community/local-groups</td></tr>
+</tbody>
+</table></div>
+
+<h2>Deutschsprachige Gruppen</h2>
+<p>Aus der offiziellen Local-Groups-Liste (Stand September 2026), ergänzt um bekannte Karten. Wer eine Gruppe sucht, die hier fehlt: die D-A-CH-Gruppe kennt sie.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Region</th><th>Gruppe</th><th>Kanal</th></tr></thead>
+<tbody>
+<tr><td><b>D-A-CH</b></td><td>Meshtastic Users D-A-CH</td><td>Telegram t.me/meshtasticgermany (Technik), Signal-Gruppe DE-AT-CH, Facebook „Meshtastic Users Germany“</td></tr>
+<tr><td>Berlin, Brandenburg</td><td>Berlin Meshtastic Community · BerlinMesh</td><td>potatomesh.net · Matrix #berlinmesh:c-base.org · Karte meshmap.de</td></tr>
+<tr><td>Hamburg</td><td>HanseMesh</td><td>hansemesh.de</td></tr>
+<tr><td>Hannover</td><td>Meshtastic Users Hannover</td><td>Discord</td></tr>
+<tr><td>Hessen</td><td>Mesh Hessen</td><td>meshhessen.de · Telegram t.me/Mesh_Hessen</td></tr>
+<tr><td>München</td><td>Munich Mesh</td><td>munichmesh.de</td></tr>
+<tr><td>Münsterland</td><td>lora.ms</td><td>lora.ms</td></tr>
+<tr><td>Nordrhein-Westfalen</td><td>Mesh-NRW</td><td>mesh-nrw.de (Website und Telegram)</td></tr>
+<tr><td>Ostwestfalen-Lippe</td><td>Mesh-OWL</td><td>owl-mesh.de</td></tr>
+<tr><td>Rheinland</td><td>Mesh Rheinland</td><td>meshrheinland.de</td></tr>
+<tr><td>Rostock</td><td>Mesh Rostock</td><td>Matrix #meshtastic_hro:matrix.org</td></tr>
+<tr><td>Saarland</td><td>MeshSaar</td><td>meshsaar.de</td></tr>
+<tr><td>Sauerland</td><td>Mesh Sauerland</td><td>linktr.ee/MeshSauerland</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Vor dem ersten Dachknoten mit der Gruppe reden.</b> Sie weiß, ob die Stadt noch LongFast fährt oder auf MediumSlow gewechselt ist, wo Funklöcher sind, wer Erfahrung mit Gehäusen und Solar hat, und wie man mit Vermietern über Antennen spricht.</div>
+
+<h2>Verwandte Projekte</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Projekt</th><th>Was es ist</th><th>Verhältnis zu Meshtastic</th></tr></thead>
+<tbody>
+<tr><td><b>MeshCore</b></td><td>Alternative LoRa-Mesh-Firmware mit Repeater-basiertem Routing statt Fluten</td><td>Gleiche Hardware, inkompatibles Protokoll; in Deutschland ebenfalls verbreitet, oft auf anderen Frequenzen im Band</td></tr>
+<tr><td><b>Reticulum / RNode</b></td><td>Kryptografisches Netzwerkprotokoll mit LoRa als einer Trägerschicht, Apps Sideband und NomadNet</td><td>Inkompatibel; Berliner Chaos-Mesh dokumentiert alle drei nebeneinander</td></tr>
+<tr><td><b>LoRaWAN / TTN</b></td><td>Sensornetz mit Gateways und Servern</td><td>Gleiche Modulation, anderer Zweck; Meshtastic-FAQ: „Meshtastic uses LoRa peer to peer“</td></tr>
+<tr><td><b>LoRa-APRS</b></td><td>Amateurfunk-Positionsbaken auf 433 MHz</td><td>Nur mit Lizenz, unverschlüsselt, inkompatibel</td></tr>
+<tr><td><b>Meshtasticator</b></td><td>Simulator für den Mesh-Algorithmus</td><td>Vom Projekt verlinkt, um Topologien und Presets durchzuspielen</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Community → Local Groups (Abschnitt Germany), FAQ (Discord, Discussions), Software (Site Planner), MQTT Integrations (Kartendaten, Positionsfilter).</li>
+    <li>Kartenbetreiber: meshmap.net, meshtastic.liamcottle.net, meshmap.de (Selbstbeschreibungen der Seiten).</li>
+    <li>Berlin Mesh (Chaos) Community auf Codeberg; MeshCore- und Reticulum-Projektseiten.</li>
+  </ul>
+</div>

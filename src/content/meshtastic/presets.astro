@@ -1,0 +1,70 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Preset ist ein Bündel aus Spreading Factor, Bandbreite und Coderate.</b> Alle Knoten eines Meshes müssen dasselbe Preset fahren, sonst hören sie sich nicht. LongFast ist der Standard und der gemeinsame Nenner der öffentlichen Meshes. Schnellere Presets lohnen sich erst, wenn eine Gruppe geschlossen wechselt.</div>
+
+<h2>Die Presets im Vergleich</h2>
+<div class="tbl-wrap"><table style="min-width:1040px">
+<thead><tr><th data-s="text">Preset</th><th data-s="num">SF</th><th data-s="num">Bandbreite</th><th>Coderate</th><th data-s="num">Datenrate</th><th data-s="num">Link-Budget</th><th data-s="num">Empfindlichkeit ca.</th><th>Einordnung</th></tr></thead>
+<tbody>
+<tr><td><b>ShortTurbo</b></td><td>7</td><td>500 kHz</td><td>4/5</td><td>21,88 kbit/s</td><td>140 dB</td><td>−117 dBm</td><td>Schnellstes Preset. <b>In EU_868 nicht nutzbar</b>: 500 kHz passen nicht ins 250-kHz-Fenster, die Firmware fällt auf LongFast zurück</td></tr>
+<tr><td><b>ShortFast</b></td><td>7</td><td>250 kHz</td><td>4/5</td><td>10,94 kbit/s</td><td>143 dB</td><td>−121 dBm</td><td>Sehr dichte Meshes, Veranstaltungen, Innenstadt mit vielen Knoten auf Sichtweite</td></tr>
+<tr><td><b>ShortSlow</b></td><td>8</td><td>250 kHz</td><td>4/5</td><td>6,25 kbit/s</td><td>145,5 dB</td><td>−124 dBm</td><td>Wie ShortFast mit etwas mehr Reserve</td></tr>
+<tr><td><b>MediumFast</b></td><td>9</td><td>250 kHz</td><td>4/5</td><td>3,52 kbit/s</td><td>148 dB</td><td>−127 dBm</td><td>Beliebter Kompromiss großer Stadtmeshes: dreifache Datenrate von LongFast bei 5 dB weniger Budget</td></tr>
+<tr><td><b>MediumSlow</b></td><td>10</td><td>250 kHz</td><td>4/5</td><td>1,95 kbit/s</td><td>150,5 dB</td><td>−130 dBm</td><td>Empfehlung des Projekts für Meshes ab etwa 60 Knoten, wenn LongFast voll wird</td></tr>
+<tr><td><b>LongFast</b> ★</td><td>11</td><td>250 kHz</td><td>4/5</td><td>1,07 kbit/s</td><td>153 dB</td><td>−133 dBm</td><td><b>Standard.</b> Das öffentliche Mesh in Deutschland läuft hier</td></tr>
+<tr><td><b>LongModerate</b></td><td>11</td><td>125 kHz</td><td>4/8</td><td>0,34 kbit/s</td><td>156 dB</td><td>−136 dBm</td><td>Mehr Reichweite für weite, dünn besetzte Landstriche; dreifache Airtime</td></tr>
+<tr><td><b>LongSlow</b></td><td>12</td><td>125 kHz</td><td>4/8</td><td>0,18 kbit/s</td><td>158,5 dB</td><td>−137 dBm</td><td>Seit 2.7 als veraltet markiert. Maximale Reichweite, Pakete dauern Sekunden</td></tr>
+<tr><td><b>LongTurbo</b></td><td>11</td><td>500 kHz</td><td>4/8</td><td>1,34 kbit/s</td><td>150 dB</td><td>–</td><td>Für breite Bänder (USA). In EU_868 nicht nutzbar. Ab 2.8 US-Standard für neue Knoten</td></tr>
+<tr><td><b>VeryLongSlow</b></td><td>12</td><td>62,5 kHz</td><td>4/8</td><td>–</td><td>–</td><td>–</td><td>Seit 2.5 veraltet, in der Firmware nicht mehr hinterlegt (fällt auf LongFast zurück). Hält trotzdem den Reichweitenrekord von 331 km</td></tr>
+</tbody>
+</table></div>
+<p class="note">Datenrate und Link-Budget aus der Meshtastic-Dokumentation (Semtech-Rechner, 22 dBm Sendeleistung, 0 dBi Antenne). Empfindlichkeiten sind Näherungen aus dem Meshtastic Site Planner. SF, Bandbreite und Coderate entsprechen der Firmware 2.7.26 (<code>MeshRadio.h</code>).</p>
+
+<figure>
+<svg class="dg l" viewBox="0 0 660 260" role="img" aria-label="Balkendiagramm: Airtime einer Textnachricht mit 40 Byte Nutzlast je Preset, von ShortFast mit rund 90 Millisekunden bis LongSlow mit rund 6,7 Sekunden; daneben das Link-Budget in Dezibel">
+  <text class="lblb" x="20" y="22">Airtime je Textnachricht (40 Byte Nutzlast, 16 Byte Header)</text>
+  <!-- Balken: Skala 0..7000 ms auf 470px -> 0.0671 px/ms -->
+  <g class="lbl">
+    <text x="150" y="52" text-anchor="end">ShortFast</text><rect class="accs" x="160" y="42" width="6" height="14" /><text x="172" y="53">0,09 s</text>
+    <text x="150" y="78" text-anchor="end">ShortSlow</text><rect class="accs" x="160" y="68" width="11" height="14" /><text x="177" y="79">0,16 s</text>
+    <text x="150" y="104" text-anchor="end">MediumFast</text><rect class="accs" x="160" y="94" width="20" height="14" /><text x="186" y="105">0,30 s</text>
+    <text x="150" y="130" text-anchor="end">MediumSlow</text><rect class="accs" x="160" y="120" width="37" height="14" /><text x="203" y="131">0,55 s</text>
+    <text x="150" y="156" text-anchor="end">LongFast ★</text><rect class="accf" x="160" y="146" width="46" height="14" /><text x="212" y="157">0,68 s</text>
+    <text x="150" y="182" text-anchor="end">LongModerate</text><rect class="accs" x="160" y="172" width="150" height="14" /><text x="316" y="183">2,2 s</text>
+    <text x="150" y="208" text-anchor="end">LongSlow</text><rect class="accs" x="160" y="198" width="450" height="14" /><text x="616" y="209">6,7 s</text>
+  </g>
+  <path class="gd" d="M160,36 V216" />
+  <text class="lbl" x="160" y="236" text-anchor="start">Bei 10 % Duty Cycle: LongFast ≈ 530 Pakete/h, LongModerate ≈ 160, LongSlow ≈ 50</text>
+  <text class="lbl" x="160" y="252" text-anchor="start">Berechnet nach Semtech AN1200.13 mit 16 Präambelsymbolen, siehe Rechner</text>
+</svg>
+<figcaption>Jede Stufe Spreading Factor verdoppelt die Sendezeit, jede Halbierung der Bandbreite ebenfalls. LongSlow braucht für eine Textnachricht zehnmal so lange wie LongFast und frisst das Duty-Cycle-Budget entsprechend schneller.</figcaption>
+</figure>
+
+<h2>Welches Preset wofür</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Öffentliches Mesh mitmachen</div><div class="cd"><b>LongFast</b>, Region EU_868, Standardkanal. Alles andere trennt vom Rest der Stadt. Ein anderer Name für den primären Kanal ist hier unkritisch, weil EU_868 nur einen Slot hat.</div></div>
+  <div class="card"><div class="ct">Große Stadt, voller Kanal</div><div class="cd"><b>MediumSlow</b> oder <b>MediumFast</b>, aber nur, wenn die Community den Wechsel gemeinsam beschließt. Beispiele aus dem Projekt-Blog: Bay Area mit über 150 Knoten auf MediumSlow.</div></div>
+  <div class="card"><div class="ct">Weites Land, wenige Knoten</div><div class="cd"><b>LongModerate</b> für ein paar dB mehr, wenn die Knoten auf Bergen stehen und Airtime keine Rolle spielt. In der Praxis bringt eine bessere Antenne dasselbe ohne Airtime-Preis.</div></div>
+  <div class="card"><div class="ct">Geschlossene Gruppe, Event</div><div class="cd"><b>ShortFast</b> oder <b>ShortSlow</b> auf einem eigenen Slot, sofern die Region mehrere hat. In EU_868 teilt man sich trotzdem die eine Frequenz mit dem LongFast-Mesh, hört es aber nicht.</div></div>
+</div>
+
+<h2>Eigene Modem-Einstellungen</h2>
+<p>Statt eines Presets lassen sich SF (5–12), Bandbreite (31,25 · 62,5 · 125 · 250 · 500 kHz) und Coderate (4/5 bis 4/8) einzeln setzen. Faustregeln aus der Dokumentation:</p>
+<ul>
+  <li>Eine Stufe SF höher: doppelte Airtime, etwa 2,5 dB mehr Link-Budget</li>
+  <li>Bandbreite verdoppeln: fast 3 dB weniger Link-Budget, doppelte Datenrate</li>
+  <li>Unter 62,5 kHz braucht der Chip einen TCXO, sonst driftet die Frequenz</li>
+  <li>SF5 und SF6 nur auf SX126x, LR11xx, SX128x; alte SX127x klemmen auf SF11</li>
+  <li>Nach dem Ändern startet der Knoten neu und erzeugt einen neuen Kanal-QR-Code, den alle Teilnehmer brauchen</li>
+</ul>
+<div class="tip"><b>Nicht am Preset drehen, um ein Reichweitenproblem zu lösen.</b> LongFast auf LongSlow bringt rund 5 dB. Eine Antenne zwei Meter höher, ein Kabel weniger oder ein zusätzlicher Knoten auf dem Dach bringen mehr, und das ohne die zehnfache Airtime. Details in <a href="#antennen">Antennen &amp; Reichweite</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Radio Settings (Presets-Tabelle, Considerations, Custom Settings), LoRa Configuration (Preset-Reihenfolge, ShortTurbo-Hinweis), Site Planner (Empfindlichkeiten).</li>
+    <li>Firmware <code>MeshRadio.h</code> (modemPresetToParams), <code>config.proto</code> (Deprecation-Hinweise zu LongSlow und VeryLongSlow), <code>RadioInterface.cpp</code> (Rückfall auf LongFast bei zu schmaler Region).</li>
+    <li>Meshtastic-Blog: „Why your mesh should switch from LongFast“ (April 2025).</li>
+  </ul>
+</div>

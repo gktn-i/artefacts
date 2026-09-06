@@ -1,0 +1,100 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Antenne ist der einzige Verstärker, der nichts kostet: keinen Strom, keine Airtime, keine Legalität.</b> 3 dB Antennengewinn wirken wie doppelte Sendeleistung, und zwar in beide Richtungen. Noch mehr bringt Höhe: Ein Knoten zwei Stockwerke höher schlägt jede Sendeleistungserhöhung. Und ohne Antenne wird nie eingeschaltet.</div>
+
+<h2>Länge, Anschluss, Impedanz</h2>
+<div class="kpis">
+  <div class="kpi"><div class="k">λ bei 869,525 MHz</div><div class="v">34,5 cm</div><div class="s">λ/4 ≈ 8,2 cm, λ/2 ≈ 16,4 cm (mit Verkürzungsfaktor 0,95)</div></div>
+  <div class="kpi"><div class="k">λ bei 433,875 MHz</div><div class="v">69,1 cm</div><div class="s">λ/4 ≈ 16,4 cm, λ/2 ≈ 32,8 cm</div></div>
+  <div class="kpi"><div class="k">Impedanz</div><div class="v">50 Ω</div><div class="s">SWR unter 2 auf der Nutzfrequenz, Datenblatt verlangen</div></div>
+  <div class="kpi"><div class="k">Anschluss</div><div class="v">SMA</div><div class="s">Boards meist U.FL mit Pigtail auf SMA-Buchse, Antenne mit SMA-Stecker</div></div>
+</div>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Stecker</th><th>Erkennen</th><th>Wo</th><th>Falle</th></tr></thead>
+<tbody>
+<tr><td><b>SMA</b></td><td>Buchse am Gerät: Außengewinde mit Loch; Stecker an der Antenne: Innengewinde mit Stift</td><td>LoRa-Boards, T3-S3, RAK Pocket V2, Station G2, fast alle 868-MHz-Antennen</td><td>Wird mit RP-SMA verwechselt: sieht gleich aus, Stift und Loch sind vertauscht</td></tr>
+<tr><td><b>RP-SMA</b></td><td>Buchse am Gerät mit Stift, Stecker an der Antenne mit Loch</td><td>WLAN-Router, einige Gehäuse und Geräte wie ThinkNode M1</td><td>Lässt sich auf SMA schrauben, ohne Kontakt: Stift trifft auf Stift oder Loch auf Loch</td></tr>
+<tr><td><b>U.FL / IPEX</b></td><td>Winziger Schnappstecker auf der Platine</td><td>Heltec, LilyGo, RAK-Core-Module</td><td>Nur wenige Steckzyklen, Kabel nicht am Stecker ziehen; über Pigtail auf SMA-Buchse führen</td></tr>
+<tr><td><b>N</b></td><td>Groß, wetterfest</td><td>Außenantennen, Rundstrahler für Dach und Mast</td><td>Adapter N auf SMA nötig, Dichtung nicht vergessen</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Nie ohne Antenne senden.</b> Ohne Last reflektiert die gesamte Leistung in die Endstufe zurück. Das gilt auch beim Flashen und beim ersten Einschalten. Eine schlecht angepasste Antenne (falsche Frequenz, defektes Pigtail) wirkt ähnlich.</div>
+
+<h2>Bauformen und Gewinn</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Bauform</th><th data-s="num">Gewinn</th><th>Abstrahlung</th><th>Massefläche</th><th>Einsatz</th></tr></thead>
+<tbody>
+<tr><td><b>Stummel λ/4</b> (Rubber Duck, 5–9 cm)</td><td>0–2 dBi</td><td>rundum, braucht die Platine als Gegengewicht</td><td>ja, das Gerät selbst</td><td>Handgerät in der Tasche; die Hand am Gehäuse verstimmt sie</td></tr>
+<tr><td><b>Stab λ/2</b> (15–20 cm, z. B. GIZONT 17 cm)</td><td>2–3 dBi</td><td>rundum, flacher als λ/4</td><td>nein</td><td>Der Community-Favorit fürs Handgerät und den Fensterknoten</td></tr>
+<tr><td><b>Kollinear / Rundstrahler</b> (40–100 cm)</td><td>5–8 dBi</td><td>flache Scheibe, wenig nach oben und unten</td><td>nein</td><td>Dach- und Mastknoten; MikroTik 868 Omni 6,5 dBi steht in der Meshtastic-Favoritenliste</td></tr>
+<tr><td><b>Yagi</b></td><td>8–12 dBi</td><td>eine Keule</td><td>nein</td><td>Punkt-zu-Punkt zu einem Bergknoten; für ein Mesh meist falsch, weil man nur eine Richtung hört</td></tr>
+<tr><td><b>PCB-Antenne</b> (T1000-E, T-Deck Pro, Tag)</td><td>um 0 dBi</td><td>rundum, verstimmt durch Körper und Metall</td><td>–</td><td>Bequem, aber die schwächste Option; Gerät nicht in der Hosentasche am Körper tragen, wenn Reichweite zählt</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Gewinn ist Umverteilung, keine Vermehrung.</b> Eine 8-dBi-Kollinearantenne strahlt flach über den Horizont und hört Knoten im Tal darunter schlechter. Für einen Hügelknoten, der ins Tal versorgen soll, ist 3 bis 5 dBi oft besser. Wer mit „12 dBi Rundstrahler“ für 30 Euro wirbt, verkauft Wunschdenken.</div>
+
+<h2>Reichweite, realistisch</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Situation</th><th>Typisch mit LongFast</th><th>Was zählt</th></tr></thead>
+<tbody>
+<tr><td><b>Innenstadt, beide Knoten in der Hand</b></td><td>0,5–2 km</td><td>Gebäude dämpfen 10–30 dB je Wand; Stahlbeton und Metallfassaden sind Sperren</td></tr>
+<tr><td><b>Handgerät zu Dachknoten</b></td><td>2–8 km</td><td>Höhe des Dachknotens und freie Sicht in seine Richtung</td></tr>
+<tr><td><b>Dach zu Dach, Vorstadt</b></td><td>5–15 km</td><td>Beide Antennen über der Dachlandschaft, keine Bäume dazwischen</td></tr>
+<tr><td><b>Berg zu Berg, Sichtverbindung</b></td><td>50–150 km</td><td>Nur noch Freiraumdämpfung und Erdkrümmung; Rekord 331 km mit VeryLongSlow</td></tr>
+<tr><td><b>Wald, Tal, hinter dem Hügel</b></td><td>0,3–3 km</td><td>Vegetation dämpft bei 868 MHz stark; Beugung über nicht zu hohe Hindernisse hilft</td></tr>
+</tbody>
+</table></div>
+<p class="note">Die Dokumentation formuliert es so: Eine abgestimmte λ/4-Stummelantenne kommt „ohne nennenswerte Hindernisse ein paar Kilometer“ weit. Alles darüber ist Höhe und Sicht. Die Freiraumgrenze rechnet der <a href="#rechner">Link-Budget-Rechner</a>.</p>
+
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Seitenansicht: zwei Knoten mit Sichtverbindung, dazwischen die ellipsenförmige Fresnel-Zone, die frei von Hindernissen bleiben muss; ein Baum ragt in die Zone und dämpft; darunter ein tief hängender Knoten, dessen Sichtlinie am Hügel endet">
+  <!-- Boden -->
+  <path class="w" d="M20,190 Q200,150 330,175 T640,190" />
+  <!-- Huegel -->
+  <path class="box" d="M380,175 Q450,110 520,178 Z" />
+  <!-- Knoten A hoch -->
+  <path class="w" d="M80,170 V60" /><circle class="accf" cx="80" cy="56" r="5" />
+  <text class="lbl" x="80" y="46" text-anchor="middle">Knoten A, 12 m Mast</text>
+  <!-- Knoten B hoch -->
+  <path class="w" d="M600,188 V70" /><circle class="accf" cx="600" cy="66" r="5" />
+  <text class="lbl" x="600" y="56" text-anchor="middle">Knoten B, Dach</text>
+  <!-- Sichtlinie -->
+  <path class="acc" d="M80,56 L600,66" />
+  <!-- Fresnel-Ellipse -->
+  <ellipse class="gd" cx="340" cy="61" rx="260" ry="34" />
+  <text class="lbla" x="340" y="30" text-anchor="middle">Fresnel-Zone: bei 10 km und 868 MHz ≈ 29 m Radius in der Mitte</text>
+  <!-- Baum in der Zone -->
+  <path class="wt" d="M300,175 V120" /><circle class="accs" cx="300" cy="105" r="22" />
+  <text class="lbl" x="300" y="200" text-anchor="middle">Baum in der Zone: dämpft, blockt nicht</text>
+  <!-- Knoten C tief -->
+  <path class="w" d="M250,168 V140" /><circle class="badf" cx="250" cy="136" r="5" />
+  <path class="badl" d="M250,136 L430,128" style="stroke-dasharray:4 4" />
+  <text class="lbl" x="250" y="126" text-anchor="middle">Knoten C, 2 m</text>
+  <text class="lbl" x="440" y="100" text-anchor="start">Sicht endet am Hügel:</text>
+  <text class="lbl" x="440" y="113" text-anchor="start">nur über A oder B erreichbar</text>
+</svg>
+<figcaption>Funk braucht mehr als eine freie Linie: Die Fresnel-Zone um die Sichtlinie sollte weitgehend frei sein. Ihr Radius in der Streckenmitte beträgt bei 868 MHz rund 9 m auf 1 km und 29 m auf 10 km. Deshalb gewinnt Höhe.</figcaption>
+</figure>
+
+<h2>Montage: die kleinen Dinge, die 10 dB kosten</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Kabel kurz halten</div><div class="cd">RG174-Pigtails dämpfen bei 868 MHz rund 0,6 dB je Meter, RG58 etwa 0,5 dB, LMR-400 nur 0,13 dB. Besser den Knoten nach draußen zur Antenne bringen als die Antenne per 10 m Kabel zum Knoten.</div></div>
+  <div class="card"><div class="ct">Senkrecht montieren</div><div class="cd">Alle Meshtastic-Antennen sind vertikal polarisiert. Eine waagerecht liegende Stabantenne kostet gegenüber der senkrechten 10 bis 20 dB.</div></div>
+  <div class="card"><div class="ct">Abstand zu Metall</div><div class="cd">Dachrinne, Geländer, Mast direkt neben der Antenne verstimmen sie. Mindestens λ/2, also 20 cm, besser mehr. Die Antenne oben aus dem Gehäuse, nicht innen an der Wand.</div></div>
+  <div class="card"><div class="ct">Frequenz stimmt?</div><div class="cd">Viele Billigantennen sind auf 915 MHz oder gar nichts abgestimmt. Ein NanoVNA für unter 100 Euro zeigt SWR und Resonanz; unter 2 ist gut, unter 1,5 sehr gut.</div></div>
+  <div class="card"><div class="ct">Wasser</div><div class="cd">Außen-SMA mit selbstverschweißendem Band abdichten, Kabel mit Tropfschlaufe nach unten führen. Wasser im Stecker heißt Totalausfall bei Regen.</div></div>
+  <div class="card"><div class="ct">Körper</div><div class="cd">Das Handgerät in der Hosentasche verliert leicht 10 dB. Am Rucksack oben außen tragen, Antenne nach oben.</div></div>
+</div>
+
+<h2>Sendeleistung und ERP</h2>
+<p>Die EU-Grenze gilt für die abgestrahlte Leistung ERP, nicht für den Chip. ERP = Sendeleistung − Kabelverlust + Antennengewinn (in dBd; dBi minus 2,15). Ein SX1262 mit 22 dBm und einer 5-dBi-Antenne liegt bei 24,9 dBm ERP, also unter den erlaubten 27 dBm. Ein 28-dBm-Board mit derselben Antenne liegt darüber und muss in der Software gedrosselt werden. Details in <a href="#recht">Recht</a>.</p>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: LoRa Antennas (Community Favorites, Antenna Selection, Antenna Testing mit Reichweiten-Faustregel, Warnung vor Betrieb ohne Antenne), Range Tests.</li>
+    <li>Antennengrundlagen: ARRL Antenna Book, Rothammels Antennenbuch; Kabeldämpfungen aus Herstellertabellen (Times Microwave, Belden), Fresnel-Radius r = 17,32 · √(d/(4·f)) mit d in km und f in GHz.</li>
+    <li>Wellenlänge und Verkürzungsfaktor: Standardformeln, siehe <a href="#rechner">Rechner</a>.</li>
+  </ul>
+</div>

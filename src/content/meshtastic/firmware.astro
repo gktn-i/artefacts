@@ -1,0 +1,87 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Flashen dauert fünf Minuten, wenn man den richtigen Weg für den Chip nimmt.</b> ESP32-Boards bekommen die Firmware über den Web-Flasher im Chrome- oder Edge-Browser, nRF52- und RP2040-Boards als UF2-Datei per Drag-and-drop auf ein USB-Laufwerk. Bedient wird der Knoten danach mit der Android-, Apple- oder Web-App, per Kommandozeile oder direkt am Gerät.</div>
+
+<h2>Versionen und Kanäle</h2>
+<div class="kpis">
+  <div class="kpi"><div class="k">Empfohlen (Beta = stabil)</div><div class="v">2.7.26</div><div class="s">24. Juni 2026, im Flasher als „Stable“</div></div>
+  <div class="kpi"><div class="k">Alpha</div><div class="v">2.8.0</div><div class="s">1. September 2026, große Umbauten, für Tester</div></div>
+  <div class="kpi"><div class="k">Android-App</div><div class="v">2.8.1</div><div class="s">auch als Desktop-App für Linux, macOS, Windows</div></div>
+  <div class="kpi"><div class="k">Apple-App</div><div class="v">2.7.21</div><div class="s">iOS, iPadOS, macOS, watchOS, visionOS</div></div>
+</div>
+<p>Meshtastic kennt zwei Release-Typen: <b>Beta</b> ist die getestete Version, die die Dokumentation den meisten Nutzern empfiehlt; <b>Alpha</b> bringt neue Funktionen mit Risiko. Versionsnummern lauten Major.Minor.Patch.Commit, etwa 2.7.26.54e0d8d. Über LoRa gibt es keine Updates; ein Gerät muss an USB oder (nRF52) per Bluetooth aktualisiert werden. Die App immer vor oder mit der Firmware aktualisieren.</p>
+<div class="warn"><b>Vor einem Wechsel auf 2.8:</b> Knotennummern leiten sich neu aus dem Schlüssel ab, Position und Telemetrie sind ab Werk aus, US-Knoten starten mit LongTurbo. Nach Bootschleifen empfiehlt das Projekt „Full Erase and Flash“. Wer nur ein stabiles Mesh will, bleibt 2026 bei 2.7.</div>
+
+<h2>Flashen nach Plattform</h2>
+<div class="gb">
+  <div class="gb-col"><h4>ESP32 / ESP32-S3</h4>
+  <div class="steps">
+    <div class="step"><h4>Antenne dran, Datenkabel prüfen</h4>Viele USB-C-Kabel laden nur. Treiber (CP210x oder CH9102) bei Bedarf installieren.</div>
+    <div class="step"><h4>flasher.meshtastic.org</h4>Chrome oder Edge (WebSerial). Gerät wählen, Version wählen („Stable“), Optionen: MUI für TFT-Geräte.</div>
+    <div class="step"><h4>Download-Modus</h4>„1200bps Reset“ klicken; klappt es nicht, BOOT- bzw. USR-Taste (T-Deck: Trackball) gedrückt halten und einstecken.</div>
+    <div class="step"><h4>Full Erase and Install oder Update</h4>Erstinstallation komplett löschen, Updates ohne Löschen behalten die Einstellungen. Vorher Schlüssel und Konfiguration exportieren.</div>
+  </div>
+  <p class="note">Alternative ohne Browser: <code>pip install esptool</code>, dann <code>device-install.sh -f firmware-heltec-v3-2.7.26.bin</code> aus dem Release-Paket.</p></div>
+  <div class="gb-col"><h4>nRF52840 / RP2040 / RP2350</h4>
+  <div class="steps">
+    <div class="step"><h4>Firmware-Paket laden</h4><code>firmware-nrf52840-2.7.26.zip</code> von meshtastic.org/downloads, oder direkt im Web-Flasher „Download UF2“.</div>
+    <div class="step"><h4>Bootloader-Laufwerk</h4>nRF52: RST-Taste doppelt drücken. RP2040: BOOTSEL halten und einstecken. Ein Laufwerk mit INFO_UF2.TXT erscheint.</div>
+    <div class="step"><h4>UF2 kopieren</h4>Die passende <code>firmware-GERÄT-…uf2</code> auf das Laufwerk ziehen. Das Gerät startet selbst neu.</div>
+    <div class="step"><h4>Bei Problemen</h4>Factory-Erase-UF2 passend zur SoftDevice-Version (in INFO_UF2.TXT), danach Firmware erneut. RAK4631-R zuerst auf den Arduino-Bootloader umstellen.</div>
+  </div>
+  <p class="note">OTA über Bluetooth: Android-App (Erweitert → Firmware-Update) und Apple-App (Einstellungen → Firmware-Updates) können nRF52-Geräte drahtlos aktualisieren; ältere T-Echo-Bootloader vorher aktualisieren.</p></div>
+</div>
+
+<h2>Firmware-Zielnamen</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Gerät</th><th>Datei im Release-Paket</th></tr></thead>
+<tbody>
+<tr><td>LilyGo T-Deck / Plus</td><td><code>firmware-t-deck-…bin</code> · MUI: <code>firmware-t-deck-tft-…bin</code></td></tr>
+<tr><td>LilyGo T-Deck Pro</td><td><code>firmware-t-deck-pro-…bin</code></td></tr>
+<tr><td>LilyGo T-Echo</td><td><code>firmware-t-echo-…uf2</code> · <code>firmware-t-echo-inkhud-…uf2</code></td></tr>
+<tr><td>LilyGo T-Beam Supreme</td><td><code>firmware-tbeam-s3-core-…bin</code></td></tr>
+<tr><td>LilyGo T3-S3</td><td><code>firmware-tlora-t3s3-v1-…bin</code></td></tr>
+<tr><td>Heltec LoRa32 V3 / V3.1</td><td><code>firmware-heltec-v3-…bin</code></td></tr>
+<tr><td>Heltec LoRa32 V4 / V4-R8</td><td><code>firmware-heltec-v4-…bin</code> · <code>firmware-heltec-v4-r8-…bin</code> (nicht vertauschen)</td></tr>
+<tr><td>Heltec Mesh Node T114</td><td><code>firmware-heltec-mesh-node-t114-…uf2</code></td></tr>
+<tr><td>RAK WisBlock 4631</td><td><code>firmware-rak4631-…uf2</code></td></tr>
+<tr><td>Seeed T1000-E</td><td><code>firmware-tracker-t1000-e-…uf2</code></td></tr>
+<tr><td>Seeed Wio Tracker L1</td><td><code>firmware-seeed_wio_tracker_L1-…uf2</code></td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Falsches Ziel = totes Gerät (bis zum Neuflashen).</b> Der Flashvorgang läuft scheinbar durch, danach reagiert nichts mehr. Heltec V4 und V4-R8 haben unterschiedliche Pinbelegung und eigene Builds.</div>
+
+<h2>Apps und Clients</h2>
+<div class="tbl-wrap"><table style="min-width:1000px">
+<thead><tr><th>Client</th><th>Verbindung</th><th>Kann</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Android-App</b></td><td>Bluetooth, USB-OTG, TCP/WLAN</td><td>Alles: Chat, Karte, Knoten, Konfiguration, Firmware-Update</td><td>Ab Android 8; Play Store, F-Droid, GitHub-APK (aktuellste). Standort-Berechtigung ist für BLE-Scan nötig</td></tr>
+<tr><td><b>Desktop-App</b> (aus dem Android-Projekt)</td><td>USB, TCP</td><td>Wie Android</td><td>Linux, macOS, Windows; Flatpak, DMG, MSI</td></tr>
+<tr><td><b>Apple-App</b></td><td>Bluetooth, TCP, seriell (macOS)</td><td>Alles inkl. OTA für nRF52</td><td>Letzte zwei iOS-Hauptversionen; auch Watch und Vision Pro</td></tr>
+<tr><td><b>Web-Client</b> client.meshtastic.org</td><td>HTTP(S) zu ESP32 im WLAN, Web-Bluetooth, Web-Serial</td><td>Chat, Knoten, Konfiguration</td><td>Chromium-Browser; HTTPS-Zertifikat des Knotens einmal akzeptieren</td></tr>
+<tr><td><b>Python-CLI</b></td><td>USB, TCP, Bluetooth</td><td>Jede Einstellung, Skripte, Export/Import</td><td><code>pip install "meshtastic[cli]"</code>; siehe <a href="#config">Spickzettel</a></td></tr>
+<tr><td><b>Am Gerät: BaseUI</b></td><td>–</td><td>Anzeigen, mit Taste blättern, vorgefertigte Nachrichten</td><td>Standard auf allen Geräten mit Display</td></tr>
+<tr><td><b>Am Gerät: MUI</b></td><td>–</td><td>Vollwertiger Messenger mit Touch</td><td>ESP32-S3 mit TFT: T-Deck, T-Lora Pager, SenseCAP Indicator, Heltec V4-R8 TFT</td></tr>
+<tr><td><b>Am Gerät: InkHUD</b></td><td>–</td><td>Anzeige-Applets für E-Ink</td><td>T-Echo, ThinkNode M1, MeshPocket, Vision Master E213/E290, Wireless Paper</td></tr>
+<tr><td><b>meshtasticd</b></td><td>Netzwerk</td><td>Knoten als Linux-Dienst mit Web-Oberfläche</td><td>Raspberry Pi mit LoRa-Hat, Debian/Ubuntu/Fedora-Pakete, Docker</td></tr>
+</tbody>
+</table></div>
+
+<h2>Weitere Werkzeuge</h2>
+<div class="map">
+  <a href="https://flasher.meshtastic.org"><div class="mt"><span class="i">💾</span>Web-Flasher</div><div class="md">Firmware installieren, seriell mitlesen, Factory Erase</div></a>
+  <a href="https://client.meshtastic.org"><div class="mt"><span class="i">🌐</span>Web-Client</div><div class="md">Bedienung im Browser, auch selbst hostbar</div></a>
+  <a href="https://site.meshtastic.org"><div class="mt"><span class="i">🗺️</span>Site Planner</div><div class="md">Funkabdeckung eines Standorts auf Geländedaten simulieren</div></a>
+  <a href="https://github.com/GUVWAF/Meshtasticator"><div class="mt"><span class="i">🧪</span>Meshtasticator</div><div class="md">Simulator für den Mesh-Algorithmus</div></a>
+  <a href="https://github.com/meshtastic/firmware/releases"><div class="mt"><span class="i">📦</span>Firmware-Releases</div><div class="md">Alle Versionen mit Release Notes</div></a>
+  <a href="https://github.com/meshtastic/python"><div class="mt"><span class="i">🐍</span>Python-CLI</div><div class="md">Bibliothek und Kommandozeile</div></a>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Getting Started, Flashing Firmware (ESP32 Web Flasher und CLI Script, nRF52 Drag &amp; Drop, Factory Erase, Bootloader Update, OTA), Initial Configuration, Software (Android, Apple, Web Client, Python CLI, meshtasticd, Site Planner), Device UIs, FAQ (Alpha gegenüber Beta).</li>
+    <li>GitHub-Releases: Firmware 2.7.26 und 2.8.0, Meshtastic-Android 2.8.1, Meshtastic-Apple 2.7.21, Python 2.7.11, Web 2.7.5; Web-Flasher-Repository (Browser-Anforderungen, Optionen).</li>
+  </ul>
+</div>

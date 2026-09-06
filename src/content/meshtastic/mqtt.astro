@@ -1,0 +1,77 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>MQTT ist die Brücke zwischen Mesh und Internet.</b> Ein Knoten mit WLAN (oder das Handy als Proxy) schickt Pakete an einen MQTT-Broker und holt welche zurück. So entstehen die Online-Karten, so reden entfernte Meshes miteinander, so landen Sensorwerte in Home Assistant. Und so kommt auch der meiste Ärger ins Mesh, wenn man es falsch einstellt.</div>
+
+<h2>Wie es zusammenhängt</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Datenfluss: Mesh-Knoten funken zu einem Gateway-Knoten, dieser sendet per WLAN an einen MQTT-Broker; vom Broker aus lesen Karten, Home Assistant und andere Gateways die Pakete; Downlink zurück ins Mesh nur bei aktiviertem Downlink und mit Zero-Hop auf dem öffentlichen Server">
+  <rect class="box" x="20" y="70" width="60" height="44" rx="7" /><text class="lblb" x="50" y="97" text-anchor="middle">Knoten</text>
+  <rect class="box" x="20" y="130" width="60" height="44" rx="7" /><text class="lblb" x="50" y="157" text-anchor="middle">Knoten</text>
+  <path class="acc" d="M84,92 L150,100 M84,152 L150,110" />
+  <text class="lbl" x="118" y="82" text-anchor="middle">LoRa</text>
+  <rect class="accs" x="152" y="80" width="90" height="50" rx="7" /><text class="lbla" x="197" y="101" text-anchor="middle">Gateway</text><text class="lbl" x="197" y="116" text-anchor="middle">Knoten + WLAN</text>
+  <path class="w" d="M246,105 H320" /><text class="lbl" x="283" y="96" text-anchor="middle">Uplink</text>
+  <path class="gd" d="M320,115 H246" /><text class="lbl" x="283" y="130" text-anchor="middle">Downlink</text>
+  <rect class="box" x="322" y="70" width="110" height="70" rx="7" /><text class="lblb" x="377" y="98" text-anchor="middle">MQTT-Broker</text><text class="lbl" x="377" y="114" text-anchor="middle">mqtt.meshtastic.org</text><text class="lbl" x="377" y="128" text-anchor="middle">oder eigener</text>
+  <path class="w" d="M436,90 L510,50 M436,105 L510,105 M436,120 L510,160" />
+  <rect class="box" x="512" y="30" width="128" height="36" rx="6" /><text class="lbl" x="576" y="52" text-anchor="middle">Karten (MeshMap …)</text>
+  <rect class="box" x="512" y="87" width="128" height="36" rx="6" /><text class="lbl" x="576" y="109" text-anchor="middle">Home Assistant, Node-RED</text>
+  <rect class="box" x="512" y="144" width="128" height="36" rx="6" /><text class="lbl" x="576" y="166" text-anchor="middle">andere Meshes (Gateways)</text>
+  <text class="lbl" x="377" y="164" text-anchor="middle">Topic: msh/EU_868/2/e/LongFast/!nodeid</text>
+</svg>
+<figcaption>Uplink schickt Mesh-Pakete zum Broker, Downlink holt Broker-Pakete ins Mesh. Beides wird je Kanal einzeln erlaubt und ist ab Werk aus.</figcaption>
+</figure>
+
+<h2>Einstellungen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Einstellung</th><th>Voreinstellung</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td><b>MQTT aktiv</b></td><td>aus</td><td>Braucht WLAN/Ethernet am Knoten (ESP32) oder den Client-Proxy übers Handy</td></tr>
+<tr><td><b>Server</b></td><td>mqtt.meshtastic.org</td><td>Der öffentliche Projektserver; Zugang <code>meshdev</code> / <code>large4cats</code></td></tr>
+<tr><td><b>Root Topic</b></td><td>msh/EU_868 (aus der Region)</td><td>Darunter <code>/2/e/Kanalname/!Knoten-ID</code> für Protobufs, <code>/2/json/…</code> für JSON</td></tr>
+<tr><td><b>Verschlüsselt senden</b></td><td>Doku: aus · Firmware: an</td><td>Aus bedeutet: die Nutzlast liegt im Klartext beim Broker, auch bei privaten Kanälen</td></tr>
+<tr><td><b>JSON</b></td><td>aus</td><td>Praktisch für Home Assistant; nicht auf nRF52</td></tr>
+<tr><td><b>Client Proxy</b></td><td>aus</td><td>Das verbundene Handy übernimmt die Internetverbindung, auch für nRF52-Knoten ohne WLAN</td></tr>
+<tr><td><b>Map Reporting</b></td><td>aus, 1 h, ≈ 1,5 km Unschärfe</td><td>Unverschlüsselter Kartenbericht mit Name, Hardware, Rolle, Firmware, Region, Preset</td></tr>
+<tr><td><b>Uplink / Downlink je Kanal</b></td><td>aus / aus</td><td>In den Kanaleinstellungen; ohne Uplink geht nichts zum Broker</td></tr>
+<tr><td><b>OK to MQTT</b> (LoRa-Konfig)</td><td>aus</td><td>Höfliche Bitte an fremde Gateways, die eigenen Pakete (nur mit Standardschlüssel) hochzuladen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Regeln des öffentlichen Servers</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Zero-Hop</div><div class="cd">Pakete vom öffentlichen Broker gehen nur an direkt verbundene Knoten und werden im lokalen Mesh <em>nicht</em> weitergefunkt.</div></div>
+  <div class="card"><div class="ct">Nur Kernverkehr</div><div class="cd">Auf dem Standardschlüssel kommen nur NodeInfo, Text, Position, Telemetrie, MapReport und Routing durch. Range-Test und Detection Sensor nie.</div></div>
+  <div class="card"><div class="ct">Unscharfe Positionen</div><div class="cd">Nur Positionen mit 10 bis 16 Bit Genauigkeit (23 km bis 360 m) werden weitergereicht. Exakte Koordinaten filtert der Server.</div></div>
+  <div class="card"><div class="ct">Kein Wildcard-Abo</div><div class="cd">Seit August 2024 kann man nicht mehr alles abonnieren, nur regionale Topics wie <code>msh/EU_868/#</code>.</div></div>
+</div>
+<div class="stop"><b>Downlink vom öffentlichen Broker auf den Standardkanal ist der Klassiker der Mesh-Verstopfung.</b> Der LongFast-Kanal des öffentlichen Servers ist sehr voll; ein Gateway mit Downlink zieht den Verkehr ganzer Länder in die eigene Stadt. Downlink nur für private Kanäle mit eigenem Schlüssel, am besten auf einem eigenen Broker. Den Standardschlüssel auf privaten Brokern zu nutzen, rät das Projekt ausdrücklich ab.</div>
+
+<h2>Eigener Broker in drei Schritten</h2>
+<div class="steps">
+  <div class="step"><h4>Mosquitto aufsetzen</h4>Auf dem Homeserver oder Raspberry Pi, mit Benutzer und Passwort. Details im Modul <a href="homeserver-101.html#docker">Homeserver 101</a>.</div>
+  <div class="step"><h4>Gateway-Knoten anbinden</h4>ESP32-Knoten mit WLAN-Zugangsdaten und Broker-Adresse konfigurieren, oder Client-Proxy über das Handy. Ein RAK4631 mit Ethernet-Modul geht auch.</div>
+  <div class="step"><h4>Kanal freigeben</h4>Auf dem privaten Kanal Uplink und Downlink einschalten, JSON aktivieren, wenn Home Assistant mitlesen soll. Root Topic setzen, damit mehrere Meshes getrennt bleiben.</div>
+</div>
+
+<h2>Integrationen</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Ziel</th><th>Weg</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Home Assistant</b></td><td>MQTT-Integration, JSON-Topic</td><td>Sensorwerte, Akkustände, Nachrichten als Entitäten; nRF52-Gateways liefern kein JSON</td></tr>
+<tr><td><b>Node-RED, Adafruit IO</b></td><td>MQTT</td><td>Beispiele in der Dokumentation</td></tr>
+<tr><td><b>Karten</b></td><td>Map Reporting oder Uplink auf den öffentlichen Server</td><td>MeshMap und Liam Cottles Karte lesen den öffentlichen Broker, siehe <a href="#community">Community</a></td></tr>
+<tr><td><b>ATAK</b></td><td>Meshtastic-ATAK-Plugin über die Android-App</td><td>Rolle TAK oder TAK_TRACKER, Plugin-Version muss zur ATAK-Version passen</td></tr>
+<tr><td><b>CalTopo / SARTopo</b></td><td>Serial-Modul im Modus CALTOPO</td><td>Knotenpositionen in der Einsatzkarte</td></tr>
+<tr><td><b>meshtasticd</b></td><td>Native Linux-Firmware auf Raspberry Pi mit LoRa-Hat oder USB-Funkstick</td><td>Pakete für Debian, Ubuntu, Fedora, Docker; mit MUI und Web-Oberfläche</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: MQTT Module Configuration (Einstellungen, Defaults), MQTT Integrations Overview (Topics, Restrictions on the Public MQTT Server, JSON), Integrations (ATAK, CalTopo), meshtasticd.</li>
+    <li>Meshtastic-Blog „Recent Public MQTT Broker Changes“ (August 2024); Firmware <code>MQTT.cpp</code> und <code>Default.h</code> (Verschlüsselungs-Default, OK-to-MQTT-Bit).</li>
+  </ul>
+</div>

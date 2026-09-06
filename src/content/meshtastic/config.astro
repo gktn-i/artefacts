@@ -1,0 +1,118 @@
+---
+import "./_style.css";
+---
+<div class="kurz z"><b>Drei Einstellungen entscheiden, ob es funkt: Region, Preset, Kanal.</b> Alles andere ist Feintuning. Wer in einem großen Mesh unterwegs ist und nicht weiß, was ein Regler tut, lässt ihn stehen. Die Tabellen zeigen die Voreinstellung der Firmware 2.7 und was man sinnvoll ändern kann.</div>
+
+<h2>Reihenfolge beim Einrichten</h2>
+<div class="steps">
+  <div class="step"><h4>Region: EU_868</h4>Pflicht. Ohne Region zeigt das Display eine Warnung und der Knoten sendet nichts. Danach Neustart.</div>
+  <div class="step"><h4>Preset: LongFast, Hop-Limit 3</h4>Beides ist Standard und bleibt so, solange die lokale Community nichts anderes vereinbart hat.</div>
+  <div class="step"><h4>Name</h4>Langer Name bis 24 Zeichen (2.8: 25 Byte), kurzer Name 4 Zeichen oder ein Emoji. Der kurze Name erscheint auf fremden Displays und Karten.</div>
+  <div class="step"><h4>Rolle: CLIENT</h4>Bleibt CLIENT. Zweitgerät neben dem Hauptknoten: CLIENT_MUTE. Eigener Dachknoten für die eigenen Geräte: CLIENT_BASE.</div>
+  <div class="step"><h4>Position und Telemetrie prüfen</h4>Entscheiden, ob und wie genau die Position geteilt wird (Position Precision je Kanal). Intervalle nicht kürzer stellen als voreingestellt.</div>
+  <div class="step"><h4>Bluetooth-PIN</h4>Geräte mit Display zeigen eine Zufalls-PIN. Geräte ohne Display nutzen die feste PIN 123456: ändern.</div>
+</div>
+
+<h2>LoRa</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Einstellung</th><th>Voreinstellung</th><th>Empfehlung</th></tr></thead>
+<tbody>
+<tr><td><b>Region</b></td><td>UNSET (sendet nicht)</td><td>EU_868. EU_433 nur für geschlossene 433-MHz-Gruppen</td></tr>
+<tr><td><b>Modem Preset</b></td><td>LongFast</td><td>Belassen, außer die Community wechselt gemeinsam</td></tr>
+<tr><td><b>Hop Limit</b></td><td>3 (max. 7)</td><td>Belassen. Mehr nur an Randknoten</td></tr>
+<tr><td><b>TX Power</b></td><td>0 = regionales Maximum</td><td>Belassen. Bei Antennen mit hohem Gewinn ggf. senken, damit die ERP-Grenze hält (<a href="#recht">Recht</a>)</td></tr>
+<tr><td><b>Frequency Slot</b></td><td>0 = aus Kanalname berechnet</td><td>In EU_868 egal (1 Slot). Sonst fest setzen, wenn der Primärkanal umbenannt wurde</td></tr>
+<tr><td><b>Override Duty Cycle</b></td><td>aus</td><td>Aus lassen. Ein bedeutet Regelverstoß in der EU</td></tr>
+<tr><td><b>SX126x RX Boosted Gain</b></td><td>aus</td><td>Ein bei SX1262-Boards mit Netzstrom: etwas mehr Empfindlichkeit für etwas mehr Strom</td></tr>
+<tr><td><b>OK to MQTT</b></td><td>aus</td><td>Ein, wenn die eigenen Pakete auf MQTT-Karten erscheinen dürfen</td></tr>
+<tr><td><b>Ignore MQTT</b></td><td>aus</td><td>Ein, wenn man nur Funkpakete sehen will</td></tr>
+<tr><td><b>Override Frequency</b></td><td>0</td><td>Nur Amateurfunk mit Lizenz; nicht für SRD-Betrieb</td></tr>
+</tbody>
+</table></div>
+
+<h2>Gerät, Position, Telemetrie</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Einstellung</th><th>Voreinstellung</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Rolle</b></td><td>CLIENT</td><td>Siehe <a href="#mesh">Rollen</a>. ROUTER schaltet Bluetooth und WLAN ab</td></tr>
+<tr><td><b>Rebroadcast Mode</b></td><td>ALL</td><td>LOCAL_ONLY, wenn fremde Meshes auf derselben Frequenz nicht mitgetragen werden sollen</td></tr>
+<tr><td><b>NodeInfo-Intervall</b></td><td>3 h (min. 1 h)</td><td>Belassen</td></tr>
+<tr><td><b>GPS-Modus</b></td><td>ENABLED bzw. NOT_PRESENT</td><td>Je nach Hardware. Ohne GPS liefert das Handy die Position an den Knoten</td></tr>
+<tr><td><b>GPS-Update</b></td><td>2 min</td><td>Länger spart Strom, GPS ist ein großer Verbraucher</td></tr>
+<tr><td><b>Positions-Intervall</b></td><td>Doku 15 min, Firmware 2.7.26: 60 min</td><td>Auf dem Standardkanal erzwingt die Firmware mindestens 60 min</td></tr>
+<tr><td><b>Smart Broadcast</b></td><td>an, ab 100 m und 5 min</td><td>Sendet bei Bewegung öfter, im Stand seltener. Belassen</td></tr>
+<tr><td><b>Feste Position</b></td><td>aus</td><td>Für Dach- und Solarknoten ohne GPS: einmal Koordinaten setzen, GPS aus</td></tr>
+<tr><td><b>Gerätetelemetrie ins Mesh</b></td><td>seit 2.7.0 aus</td><td>Ein nur, wenn andere den Akkustand des Knotens sehen sollen; Intervall dann 30–60 min</td></tr>
+<tr><td><b>Umweltsensoren</b></td><td>aus, 30 min</td><td>BME280, SHT31, INA219 und viele mehr werden am I²C automatisch erkannt</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Ausblick 2.8:</b> Position und Telemetrie werden „opt-in“, also ab Werk aus. Die Knotennummer leitet sich künftig aus dem öffentlichen Schlüssel ab statt aus der MAC-Adresse, und das Hop-Limit passt sich automatisch an die Mesh-Aktivität an.</div>
+
+<h2>Strom, Bluetooth, Netzwerk, Display</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Einstellung</th><th>Voreinstellung</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td><b>Power Saving</b></td><td>aus (ROUTER: erzwungen an)</td><td>Schaltet Bluetooth, Serial, WLAN und Display ab. Für Solarknoten; Konfigurieren dann nur nach Tastendruck oder per Fernwartung</td></tr>
+<tr><td><b>Light Sleep</b> (nur ESP32)</td><td>5 min</td><td>CPU schläft, LoRa hört weiter, Bluetooth aus. Auf nRF52 wirkungslos</td></tr>
+<tr><td><b>Shutdown on battery</b></td><td>aus</td><td>Abschalten nach x Sekunden ohne externe Versorgung; vorher prüfen, ob das Board den Netzbetrieb erkennt</td></tr>
+<tr><td><b>ADC Multiplier</b></td><td>Board-Wert (T-Deck 2,11 · T-Echo 2 · Heltec V3 5,1205 · RAK4631 1,73)</td><td>Bei falscher Akkuanzeige kalibrieren: voller Akku = 4,2 V = 100 %</td></tr>
+<tr><td><b>Bluetooth</b></td><td>an, RANDOM_PIN (mit Display) bzw. FIXED_PIN 123456 (ohne)</td><td>Feste PIN ändern. Auf ESP32 schaltet WLAN das Bluetooth ab</td></tr>
+<tr><td><b>WLAN</b> (nur ESP32)</td><td>aus</td><td>Für MQTT-Gateway oder Web-Client über <code>http://meshtastic.local</code>; nur 2,4 GHz, kein Access-Point-Modus</td></tr>
+<tr><td><b>Display an</b></td><td>10 min</td><td>Kürzer spart bei OLED und TFT Strom. E-Ink braucht nur zum Umschalten Energie</td></tr>
+<tr><td><b>Einheiten, 12/24 h, Flip</b></td><td>metrisch, 24 h</td><td>Betrifft nur das Gerätedisplay, die Apps folgen der Handy-Einstellung</td></tr>
+</tbody>
+</table></div>
+
+<h2>Sicherheit und Fernwartung</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Einstellung</th><th>Bedeutung</th><th>Praxis</th></tr></thead>
+<tbody>
+<tr><td><b>Public / Private Key</b></td><td>Das X25519-Schlüsselpaar des Knotens für Direktnachrichten und Fernwartung</td><td>Wird bei „Full Erase“ neu erzeugt. Vorher sichern: <code>meshtastic --export-config &gt; backup.yaml</code></td></tr>
+<tr><td><b>Admin Keys</b></td><td>Bis zu drei öffentliche Schlüssel, die den Knoten fernsteuern dürfen</td><td>Den Schlüssel des Handgeräts auf jedem eigenen Dach- und Solarknoten eintragen, dann lassen sich diese aus der Ferne konfigurieren</td></tr>
+<tr><td><b>Managed Mode</b></td><td>Sperrt Änderungen über die verbundene App, nur noch Fernwartung</td><td>Erst aktivieren, wenn die Fernwartung nachweislich funktioniert</td></tr>
+<tr><td><b>Legacy Admin Channel</b></td><td>Alter Fernwartungskanal namens „admin“</td><td>Nur noch für Knoten mit Firmware vor 2.5</td></tr>
+<tr><td><b>Serial Console</b></td><td>USB-Konsole für CLI und Logs</td><td>An lassen; Debug-Log bei Bedarf aktivieren</td></tr>
+</tbody>
+</table></div>
+
+<h2>Nützliche Module</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th>Modul</th><th>Wofür</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Range Test</b></td><td>Ein Knoten sendet alle 15–60 s ein Testpaket, der andere protokolliert Empfang und Position</td><td>Belegt viel Airtime, nur zeitweise einschalten; schaltet sich nach 8 h ab. Auf ESP32 als CSV abrufbar</td></tr>
+<tr><td><b>Store &amp; Forward</b></td><td>Ein Server-Knoten puffert Nachrichten für Clients, die offline waren</td><td>Nur ESP32 mit PSRAM (T-Beam, T3-S3, T-Deck). Apps holen Historie seit 2.4 automatisch</td></tr>
+<tr><td><b>Canned Messages</b></td><td>Vorgefertigte Texte für Geräte mit Taste, Encoder oder Tastatur</td><td>Liste bis 200 Byte, getrennt mit |</td></tr>
+<tr><td><b>External Notification</b></td><td>LED, Vibration oder Summer bei Nachricht</td><td>Bis zu drei Ausgänge; RTTTL-Klingeltöne auf PWM-Summer</td></tr>
+<tr><td><b>Traceroute</b></td><td>Zeigt den Pfad eines Pakets Hop für Hop mit SNR je Strecke (seit 2.5 auch den Rückweg)</td><td>In allen Apps per Knotenmenü; gut zur Fehlersuche</td></tr>
+<tr><td><b>Neighbor Info</b></td><td>Knoten melden ihre direkten Nachbarn</td><td>Standard aus; über LoRa nur auf nicht-öffentlichem Primärkanal, sonst nur via MQTT</td></tr>
+<tr><td><b>Detection Sensor</b></td><td>GPIO überwachen und Zustandswechsel melden</td><td>Türkontakt, Regenmesser, Bewegungsmelder</td></tr>
+<tr><td><b>Serial</b></td><td>Text oder Protobufs über UART, Modi u. a. TEXTMSG, NMEA, CALTOPO</td><td>Für eigene Hardware und Kartenanbindung</td></tr>
+<tr><td><b>Paxcounter</b></td><td>Zählt WLAN- und Bluetooth-Geräte in der Umgebung</td><td>Nur ESP32, WLAN und Bluetooth des Knotens müssen aus sein</td></tr>
+</tbody>
+</table></div>
+
+<h2>CLI-Spickzettel</h2>
+<p>Die Python-CLI (<code>pip install "meshtastic[cli]"</code>) setzt alles, was die Apps können, und einiges mehr. Nach jedem <code>--set</code> startet das Gerät neu, deshalb mehrere Werte in einem Aufruf bündeln:</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Aufgabe</th><th>Befehl</th></tr></thead>
+<tbody>
+<tr><td>Gerät auslesen</td><td><code>meshtastic --info</code> · <code>meshtastic --nodes</code></td></tr>
+<tr><td>Region und Preset</td><td><code>meshtastic --set lora.region EU_868 --set lora.modem_preset LONG_FAST</code></td></tr>
+<tr><td>Namen</td><td><code>meshtastic --set-owner "Dachknoten Nord" --set-owner-short DKN</code></td></tr>
+<tr><td>Privaten Zweitkanal anlegen</td><td><code>meshtastic --ch-add Familie --ch-index 1 --ch-set psk random --ch-index 1</code></td></tr>
+<tr><td>Kanal-URL / QR</td><td><code>meshtastic --qr-all</code> · <code>meshtastic --seturl "https://meshtastic.org/e/#…"</code></td></tr>
+<tr><td>Feste Position</td><td><code>meshtastic --setlat 52.52 --setlon 13.405 --setalt 60 --set position.fixed_position true</code></td></tr>
+<tr><td>Nachricht senden</td><td><code>meshtastic --sendtext "Test" --ch-index 0</code> · <code>--dest '!a1b2c3d4' --ack</code></td></tr>
+<tr><td>Traceroute</td><td><code>meshtastic --traceroute '!a1b2c3d4'</code></td></tr>
+<tr><td>Konfiguration sichern / laden</td><td><code>meshtastic --export-config &gt; backup.yaml</code> · <code>meshtastic --configure backup.yaml</code></td></tr>
+<tr><td>Knotenliste leeren, Werksreset</td><td><code>meshtastic --reset-nodedb</code> · <code>meshtastic --factory-reset</code></td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Configuration → Radio (LoRa, Device, Position, Power, Bluetooth, Network, Display, Security, User) und → Modules (Telemetry, Range Test, Store &amp; Forward, Canned Message, External Notification, Traceroute, Neighbor Info, Detection Sensor, Serial, Paxcounter); Remote Admin; Python CLI.</li>
+    <li>Firmware <code>Default.h</code> und <code>NodeDB.cpp</code> (tatsächliche Voreinstellungen 2.7.26, Mindestintervalle auf dem Standardkanal), Release Notes 2.7.0 (Telemetrie-Beacon aus) und 2.8.0.</li>
+  </ul>
+</div>

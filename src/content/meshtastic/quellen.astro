@@ -1,0 +1,61 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Alles in diesem Modul wurde im September 2026 gegen Primärquellen geprüft:</b> die Meshtastic-Dokumentation und ihr Quell-Repository, den Firmware-Quelltext, die Protobuf-Definitionen, GitHub-Releases, Herstellerunterlagen und die Rechtsgrundlagen. Wo Dokumentation und Firmware auseinanderliegen, steht es im jeweiligen Abschnitt dabei.</div>
+
+<h2>Meshtastic-Projekt</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Quelle</th><th>Wofür</th><th>Adresse</th></tr></thead>
+<tbody>
+<tr><td><b>Dokumentation</b></td><td>Radio Settings, Mesh Algorithm, Encryption, Configuration (Radio, Module, Device UIs), Hardware, Getting Started, FAQ, Local Groups</td><td><a href="https://meshtastic.org/docs/">meshtastic.org/docs</a></td></tr>
+<tr><td><b>Dokumentations-Quelltext</b></td><td>Dieselben Inhalte als Markdown, inklusive Regionstabelle und Positionsgenauigkeits-Tabelle</td><td><a href="https://github.com/meshtastic/meshtastic">github.com/meshtastic/meshtastic</a></td></tr>
+<tr><td><b>Firmware</b></td><td>Regionstabelle, Presets, Slot-Formel, Contention Window, Duty-Cycle-Logik, Knotenlimits: <code>src/mesh/RadioInterface.cpp</code>, <code>MeshRadio.h</code>, <code>Default.h</code>, <code>airtime.h</code>, <code>mesh-pb-constants.h</code></td><td><a href="https://github.com/meshtastic/firmware">github.com/meshtastic/firmware</a></td></tr>
+<tr><td><b>Releases</b></td><td>2.7.26 Beta (24.06.2026), 2.8.0 Alpha (01.09.2026), 2.7.11 (REPEATER abgekündigt), 2.7.10 (CLIENT_BASE), 2.7.0 (Telemetrie-Beacon aus)</td><td><a href="https://github.com/meshtastic/firmware/releases">Firmware Releases</a></td></tr>
+<tr><td><b>Protobufs</b></td><td>Feldgrenzen (Nutzlast 233 Byte, Kanalname 12 Byte), Standardschlüssel, Aufzählungen für Regionen und Presets</td><td><a href="https://github.com/meshtastic/protobufs">github.com/meshtastic/protobufs</a></td></tr>
+<tr><td><b>Apps</b></td><td>Android 2.8.1, Apple 2.7.21, Web 2.7.5, Python 2.7.11</td><td><a href="https://github.com/meshtastic">github.com/meshtastic</a></td></tr>
+<tr><td><b>Blog</b></td><td>„Choosing the Right Device Role“, „Demystifying Router Late“, „Why your mesh should switch from LongFast“, „Recent Public MQTT Broker Changes“, „Introducing new Public Key Cryptography in v2.5“, 2.6- und 2.7-Vorschauen</td><td><a href="https://meshtastic.org/blog/">meshtastic.org/blog</a></td></tr>
+<tr><td><b>Werkzeuge</b></td><td>Web-Flasher, Web-Client, Site Planner</td><td><a href="https://flasher.meshtastic.org">flasher</a> · <a href="https://client.meshtastic.org">client</a> · <a href="https://site.meshtastic.org">site</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Hardware</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Quelle</th><th>Wofür</th><th>Adresse</th></tr></thead>
+<tbody>
+<tr><td><b>LilyGo</b></td><td>T-Deck, T-Deck Pro, T-Echo, T-Echo Lite, T-Echo Plus, T-Lora Pager, T-Beam, T3-S3: Schaltpläne, Spezifikationen, Beispielcode</td><td><a href="https://github.com/Xinyuan-LilyGO">github.com/Xinyuan-LilyGO</a>, <a href="https://lilygo.cc">lilygo.cc</a></td></tr>
+<tr><td><b>Heltec</b></td><td>LoRa32 V3/V4, Wireless Tracker, Wireless Paper, Mesh Node T114, Vision Master, MeshPocket</td><td><a href="https://heltec.org">heltec.org</a>, <a href="https://docs.heltec.org">docs.heltec.org</a></td></tr>
+<tr><td><b>RAKwireless</b></td><td>WisBlock 4631, Basisplatinen, WisMesh Pocket, Tag, Repeater, Meshtastic Designer</td><td><a href="https://docs.rakwireless.com">docs.rakwireless.com</a></td></tr>
+<tr><td><b>Seeed Studio</b></td><td>SenseCAP T1000-E, Indicator, Wio Tracker L1</td><td><a href="https://wiki.seeedstudio.com">wiki.seeedstudio.com</a></td></tr>
+<tr><td><b>B&amp;Q Consulting</b></td><td>Station G2, Nano G2 Ultra</td><td><a href="https://wiki.uniteng.com">wiki.uniteng.com</a></td></tr>
+<tr><td><b>Semtech</b></td><td>SX1262, SX1276, SX1280, LR1121 Datenblätter; Application Note AN1200.13 (Airtime); LoRa-Rechner</td><td><a href="https://www.semtech.com/products/wireless-rf/lora-connect">semtech.com</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Recht und Normen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th>Quelle</th><th>Wofür</th><th>Adresse</th></tr></thead>
+<tbody>
+<tr><td><b>Bundesnetzagentur</b></td><td>Allgemeinzuteilungen: SRD Vfg 91/2025 (Amtsblatt 21/2025), Vorgänger Vfg 133/2019 mit Vfg 12/2020</td><td><a href="https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/Allgemeinzuteilungen/start.html">bundesnetzagentur.de → Allgemeinzuteilungen</a></td></tr>
+<tr><td><b>ETSI</b></td><td>EN 300 220-2 V3.2.1, Anhang B Tabelle B.1 (Teilbänder, ERP, Duty Cycle, LBT+AFA)</td><td><a href="https://www.etsi.org/deliver/etsi_en/300200_300299/30022002/03.02.01_60/en_30022002v030201p.pdf">etsi.org</a></td></tr>
+<tr><td><b>CEPT / ECO</b></td><td>ERC/REC 70-03, Anhang 1 (nichtspezifische SRD)</td><td><a href="https://docdb.cept.org">docdb.cept.org</a></td></tr>
+<tr><td><b>EU</b></td><td>Entscheidung 2006/771/EG (SRD-Harmonisierung), Durchführungsbeschluss (EU) 2025/105; Funkanlagenrichtlinie 2014/53/EU</td><td><a href="https://eur-lex.europa.eu">eur-lex.europa.eu</a></td></tr>
+<tr><td><b>Amateurfunk</b></td><td>Amateurfunkverordnung (AFuV) § 16: offene Sprache, Verschlüsselungsverbot, Rufzeichen</td><td><a href="https://www.gesetze-im-internet.de/afuv_2005/">gesetze-im-internet.de</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Funktechnik</h2>
+<ul>
+  <li>Semtech, <i>LoRa Modem Designer's Guide</i> (AN1200.13) und SX1262-Datenblatt: Symboldauer, Airtime, Low Data Rate Optimization, Empfindlichkeiten.</li>
+  <li>ARRL Antenna Book; Rothammel, <i>Antennenbuch</i>: Wellenlänge, Verkürzungsfaktor, Gewinn, Fresnel-Zone, Speiseleitungen.</li>
+  <li>Andreas Spiess (YouTube), Antennentutorial und VNA-Einführung, von der Meshtastic-Dokumentation empfohlen.</li>
+  <li>Vertiefung im Haus: <a href="informationstechnik.html#funk">Informationstechnik → Funk</a> (Modulation, Link-Budget, Rauschen) und <a href="fpv-drohnen.html#antennen">Drohnen &amp; FPV → Antennen &amp; HF</a>.</li>
+</ul>
+
+<h2>Community</h2>
+<ul>
+  <li>Meshtastic Local Groups (offizielle Liste), Discord, GitHub Discussions, r/meshtastic.</li>
+  <li>Karten: meshmap.net, meshtastic.liamcottle.net, meshmap.de.</li>
+  <li>Deutschsprachige Gruppen und Websites, siehe <a href="#community">Community &amp; Karten</a>.</li>
+</ul>
+
+<div class="warn"><b>Was in diesem Modul bewusst unscharf bleibt:</b> Preise (nur Klassen), Stromverbräuche einzelner Geräte ohne Herstellerangabe (Größenordnungen), die exakten Tabellenwerte der Allgemeinzuteilung außerhalb der von Meshtastic genutzten Teilbänder (nach ERC 70-03 und EN 300 220, im Amtsblatt nachlesen). Firmware 2.8 ist Alpha; ihre Angaben können sich bis zum Beta-Release ändern.</div>

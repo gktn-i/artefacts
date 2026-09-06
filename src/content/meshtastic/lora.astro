@@ -1,0 +1,114 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>LoRa tauscht Geschwindigkeit gegen Reichweite.</b> Statt schnell zu senden, zieht es jedes Bit als Frequenzrampe („Chirp“) über die Zeit. Je länger der Chirp, desto tiefer kann der Empfänger ins Rauschen hineinhören, und desto weniger Daten passen durch. Drei Regler bestimmen alles: Spreading Factor, Bandbreite, Coderate.</div>
+
+<h2>Die drei Regler</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Parameter</th><th>Was er tut</th><th>Wertebereich</th><th>Faustregel</th></tr></thead>
+<tbody>
+<tr><td><b>Spreading Factor (SF)</b></td><td>Wie viele Chips ein Symbol trägt: 2<sup>SF</sup>. Höher = längeres Symbol, empfindlicherer Empfang</td><td>5–12 (SX126x, LR11xx); 7–12 bei alten SX127x</td><td>Jede Stufe hoch: doppelte Airtime, rund 2,5 dB mehr Link-Budget</td></tr>
+<tr><td><b>Bandbreite (BW)</b></td><td>Wie breit der Chirp im Spektrum ist</td><td>125 · 250 · 500 kHz (Meshtastic), dazu 31,25 und 62,5 kHz</td><td>Verdoppeln: doppelte Datenrate, rund 3 dB weniger Link-Budget</td></tr>
+<tr><td><b>Coderate (CR)</b></td><td>Fehlerschutz: 4 Datenbits werden auf 5 bis 8 Bits aufgeblasen</td><td>4/5 · 4/6 · 4/7 · 4/8</td><td>4/8 kostet doppelte Airtime gegenüber unkodiert, hält aber Störer besser aus</td></tr>
+</tbody>
+</table></div>
+
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Zeit-Frequenz-Diagramm eines LoRa-Pakets: Präambel aus Up-Chirps, Sync-Word, Header und Nutzlast aus verschobenen Chirps; darunter der Vergleich eines kurzen Symbols bei SF7 mit einem langen bei SF11">
+  <!-- Achsen -->
+  <path class="w" d="M40,20 V150 H640" />
+  <text class="lbl" x="22" y="30" text-anchor="middle">f</text>
+  <text class="lbl" x="646" y="154" text-anchor="start">t</text>
+  <!-- Praeambel: 6 Up-Chirps -->
+  <path class="acc" d="M44,146 L84,26 M84,146 L124,26 M124,146 L164,26 M164,146 L204,26 M204,146 L244,26 M244,146 L284,26" />
+  <text class="lbl" x="164" y="170" text-anchor="middle">Präambel: 16 Up-Chirps (Meshtastic)</text>
+  <!-- Sync: 2 Down-Chirps -->
+  <path class="midl" d="M288,26 L316,146 M316,26 L344,146" />
+  <text class="lbl" x="316" y="170" text-anchor="middle">Sync 0x2B</text>
+  <!-- Daten: verschobene Chirps -->
+  <path class="good" d="M350,100 L372,26 M372,146 L392,100" />
+  <path class="good" d="M396,60 L420,26 M420,146 L448,60" />
+  <path class="good" d="M452,120 L462,26 M462,146 L498,120" />
+  <path class="good" d="M502,80 L524,26 M524,146 L548,80" />
+  <path class="good" d="M552,40 L560,26 M560,146 L596,40" />
+  <text class="lbl" x="475" y="170" text-anchor="middle">Header + Nutzlast: Startfrequenz = Symbolwert</text>
+  <!-- Bandbreite -->
+  <path class="gd" d="M610,26 H636 M610,146 H636" />
+  <path class="wt" d="M623,30 V142" />
+  <text class="lbl" x="628" y="90" text-anchor="start">BW</text>
+  <!-- Symbolvergleich -->
+  <text class="lblb" x="40" y="200" text-anchor="start">Symboldauer bei 250 kHz:</text>
+  <rect class="accs" x="220" y="190" width="4" height="12" /><text class="lbl" x="230" y="200" text-anchor="start">SF7 = 0,5 ms</text>
+  <rect class="accs" x="330" y="190" width="66" height="12" /><text class="lbl" x="402" y="200" text-anchor="start">SF11 = 8,2 ms</text>
+  <rect class="accs" x="500" y="190" width="131" height="12" /><text class="lbl" x="500" y="222" text-anchor="start">SF12 = 16,4 ms</text>
+</svg>
+<figcaption>Ein LoRa-Paket im Zeit-Frequenz-Bild. Der Wert eines Symbols steckt in der Startfrequenz des Chirps. Meshtastic nutzt 16 Präambel-Symbole statt der üblichen 8, damit schlafende Empfänger genug Zeit zum Aufwachen haben, und das Sync-Word 0x2B, damit fremde LoRa-Netze ignoriert werden.</figcaption>
+</figure>
+
+<h2>Symboldauer und Datenrate</h2>
+<p>Symboldauer T<sub>s</sub> = 2<sup>SF</sup> / BW. Alles andere folgt daraus: Präambel, Nutzlastdauer, Duty Cycle. Werte für die drei Meshtastic-Bandbreiten:</p>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th data-s="num">SF</th><th data-s="num">Chips je Symbol</th><th data-s="num">T<sub>s</sub> bei 125 kHz</th><th data-s="num">T<sub>s</sub> bei 250 kHz</th><th data-s="num">T<sub>s</sub> bei 500 kHz</th><th>Meshtastic-Preset</th></tr></thead>
+<tbody>
+<tr><td>7</td><td>128</td><td>1,02 ms</td><td>0,51 ms</td><td>0,26 ms</td><td>ShortFast (250), ShortTurbo (500)</td></tr>
+<tr><td>8</td><td>256</td><td>2,05 ms</td><td>1,02 ms</td><td>0,51 ms</td><td>ShortSlow (250)</td></tr>
+<tr><td>9</td><td>512</td><td>4,10 ms</td><td>2,05 ms</td><td>1,02 ms</td><td>MediumFast (250)</td></tr>
+<tr><td>10</td><td>1024</td><td>8,19 ms</td><td>4,10 ms</td><td>2,05 ms</td><td>MediumSlow (250)</td></tr>
+<tr><td>11</td><td>2048</td><td>16,4 ms</td><td>8,19 ms</td><td>4,10 ms</td><td>LongFast (250), LongModerate (125), LongTurbo (500)</td></tr>
+<tr><td>12</td><td>4096</td><td>32,8 ms</td><td>16,4 ms</td><td>8,19 ms</td><td>LongSlow (125), VeryLongSlow (62,5 kHz: 65,5 ms)</td></tr>
+</tbody>
+</table></div>
+<p class="note">Ab etwa 16 ms Symboldauer schaltet der Chip die „Low Data Rate Optimization“ ein und opfert zwei Bit je Symbol, damit der Takt nicht wegdriftet. Das betrifft SF11 und SF12 bei 125 kHz und SF12 bei 250 kHz. Die exakte Airtime eines Pakets liefert der <a href="#rechner">Airtime-Rechner</a>.</p>
+
+<h2>Dezibel ohne Schrecken</h2>
+<div class="gb">
+  <div class="gb-col"><h4>dBm ↔ Milliwatt</h4>
+  <div class="tbl-wrap"><table style="min-width:280px">
+  <thead><tr><th>dBm</th><th>mW</th><th>Wo es vorkommt</th></tr></thead>
+  <tbody>
+  <tr><td>0</td><td>1</td><td>Referenz</td></tr>
+  <tr><td>10</td><td>10</td><td>EU_433 Grenze (ERP)</td></tr>
+  <tr><td>14</td><td>25</td><td>868,0–868,6 MHz SRD-Grenze</td></tr>
+  <tr><td>20</td><td>100</td><td>Typische Boards mit SX1276</td></tr>
+  <tr><td>22</td><td>158</td><td>SX1262 maximal</td></tr>
+  <tr><td>27</td><td>500</td><td>EU_868 Grenze (ERP)</td></tr>
+  <tr><td>28</td><td>631</td><td>Heltec V4 mit Verstärker</td></tr>
+  <tr><td>30</td><td>1000</td><td>US-Grenze, 1-W-Boards</td></tr>
+  </tbody></table></div>
+  <p class="note">3 dB = doppelt, 10 dB = zehnfach. Zwei Werte in dBm werden nicht addiert, Gewinne in dB schon.</p></div>
+  <div class="gb-col"><h4>Empfangspegel lesen</h4>
+  <div class="tbl-wrap"><table style="min-width:280px">
+  <thead><tr><th>RSSI</th><th>SNR</th><th>Bedeutung</th></tr></thead>
+  <tbody>
+  <tr><td>über −90 dBm</td><td>über +5 dB</td><td>Sehr gut, Knoten in Sichtweite</td></tr>
+  <tr><td>−90 bis −115 dBm</td><td>0 bis +5 dB</td><td>Normal, stabile Verbindung</td></tr>
+  <tr><td>−115 bis −125 dBm</td><td>−10 bis 0 dB</td><td>Grenzbereich, LoRa dekodiert noch unter dem Rauschen</td></tr>
+  <tr><td>unter −125 dBm</td><td>unter −15 dB</td><td>Abrisskante; LongFast hört bis etwa −20 dB SNR</td></tr>
+  </tbody></table></div>
+  <p class="note">LoRa arbeitet unter dem Rauschteppich: negativer SNR ist normal. Beide Werte zeigt die App je Knoten und je Nachricht.</p></div>
+</div>
+
+<h2>Link-Budget und Freiraumdämpfung</h2>
+<div class="fbox"><span class="f">Budget [dB] = P<sub>TX</sub> + G<sub>TX</sub> + G<sub>RX</sub> − Verluste − Empfindlichkeit</span><span class="l">Beispiel LongFast: 22 dBm + 0 + 0 − 0 − (−131 dBm) = 153 dB, so rechnet auch die Meshtastic-Dokumentation</span></div>
+<div class="fbox"><span class="f">FSPL [dB] = 20 · log<sub>10</sub>(d [km]) + 20 · log<sub>10</sub>(f [MHz]) + 32,44</span><span class="l">Freiraumdämpfung bei 869,5 MHz: 1 km ≈ 91 dB · 10 km ≈ 111 dB · 100 km ≈ 131 dB</span></div>
+<p>153 dB Budget minus 131 dB für 100 km lässt im Freiraum sogar Reserve. Der Haken: Freiraum gibt es nur zwischen Bergen und zu Ballons. Häuser, Bäume, die Erdkrümmung und der eigene Körper kosten schnell 20 bis 40 dB, und damit einen Faktor 10 bis 100 in der Entfernung. Deshalb zählt die Antenne <em>oben</em> mehr als jedes Watt, siehe <a href="#antennen">Antennen &amp; Reichweite</a>.</p>
+
+<h2>Was LoRa nicht ist</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>System</th><th>Gemeinsam</th><th>Unterschied</th><th>Kompatibel mit Meshtastic?</th></tr></thead>
+<tbody>
+<tr><td><b>LoRaWAN / TTN / Helium</b></td><td>Gleiche Modulation, gleiche Chips</td><td>Sternnetz mit Gateways und Servern im Internet, feste Kanalpläne, Sensor-zu-Cloud</td><td>Nein</td></tr>
+<tr><td><b>MeshCore</b></td><td>Gleiche Boards, LoRa-Mesh für Text</td><td>Andere Firmware, Repeater-basiertes Routing statt Fluten, eigenes Paketformat</td><td>Nein, aber dieselbe Hardware lässt sich umflashen</td></tr>
+<tr><td><b>Reticulum / RNode</b></td><td>LoRa als eine von vielen Trägerschichten</td><td>Kryptografisches Routing-Protokoll, eigene Apps (Sideband, NomadNet)</td><td>Nein</td></tr>
+<tr><td><b>LoRa-APRS</b></td><td>LoRa auf 433 MHz</td><td>Amateurfunk-Positionsbaken ins APRS-IS, unverschlüsselt, Lizenz nötig</td><td>Nein</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen dieses Abschnitts</div>
+  <ul>
+    <li>Meshtastic-Dokumentation: Overview („Meshtastic LoRa Chirp“, Paketaufbau), Radio Settings (Data Rates, Link-Budget-Annahmen 22 dBm / 0 dBi).</li>
+    <li>Semtech, SX1276/SX1262-Datenblätter und Application Note AN1200.13 (Symboldauer, Airtime, Low Data Rate Optimization).</li>
+    <li>Firmware <code>RadioInterface.h</code>: Präambellänge 16, Header 16 Byte, maximale LoRa-Nutzlast 255 Byte.</li>
+  </ul>
+</div>
