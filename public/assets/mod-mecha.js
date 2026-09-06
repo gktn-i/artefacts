@@ -154,12 +154,19 @@ window.__prepTables();
         th.dataset.dir = dir === 1 ? "1" : "-1";
         span.textContent = dir === 1 ? "▲" : "▼";
         var body = tb.tBodies[0];
-        var rows = $$("tr", body).filter(function (r) { return !r.querySelector("td[colspan]"); });
-        rows.sort(function (a, b) {
-          var x = keyOf(a, idx, th.dataset.s), y = keyOf(b, idx, th.dataset.s);
+        /* Zeilen mit colspan sind Detailzeilen (Profiles) oder Gruppentitel:
+           sie werden nicht sortiert, sondern bleiben an ihrer Hauptzeile. */
+        var rows = [], det = [];
+        $$("tr", body).forEach(function (r) {
+          if (r.querySelector("td[colspan]")) { if (rows.length) det[rows.length - 1] = r; }
+          else rows.push(r);
+        });
+        var pair = rows.map(function (r, i) { return [r, det[i]]; });
+        pair.sort(function (a, b) {
+          var x = keyOf(a[0], idx, th.dataset.s), y = keyOf(b[0], idx, th.dataset.s);
           return x < y ? -dir : x > y ? dir : 0;
         });
-        rows.forEach(function (r) { body.appendChild(r); });
+        pair.forEach(function (p) { body.appendChild(p[0]); if (p[1]) body.appendChild(p[1]); });
       });
     });
   });
@@ -541,6 +548,32 @@ var CALC = {
     return { out: out, hint: hint };
   },
   /* --- FPV: LiPo-Kennwerte --- */
+  fpvrates: function (v) {
+    var c = v.c, m = v.m, e = v.e;
+    if (!isFinite(c) || c <= 0 || !isFinite(m) || m <= 0) return { out: "Center Sensitivity und Max Rate eintragen." };
+    if (!isFinite(e) || e < 0) e = 0;
+    if (e > 1) e = 1;
+    if (m < c) return { out: "Max Rate muss mindestens so groß sein wie die Center Sensitivity.", hint: "Betaflight begrenzt die Kurve sonst — der Bereich über der Mitte fällt weg." };
+    /* Betaflight applyActualRates: expof = |x|·(x⁵·e + x·(1−e)); rate = x·center + (max−center)·expof */
+    var r = function (x) {
+      var ex = Math.abs(x) * (Math.pow(x, 5) * e + x * (1 - e));
+      return x * c + Math.max(0, m - c) * ex;
+    };
+    var de = function (x) { return String(Math.round(x)).replace(".", ","); };
+    var out = "25 % Knüppel " + de(r(0.25)) + " °/s  ·  50 % " + de(r(0.5)) + " °/s  ·  75 % " + de(r(0.75))
+      + " °/s  ·  Vollausschlag " + de(m) + " °/s";
+    var halbe = r(0.5) / m;
+    var hint = "Eine 360°-Rolle bei Vollausschlag dauert " + (360 / m).toFixed(2).replace(".", ",") + " s. ";
+    hint += "Bei halbem Knüppel liegen " + Math.round(halbe * 100) + " % der Maximalrate an — ";
+    hint += halbe > 0.42 ? "eine direkte Mitte, gut für Präzision und Race. "
+         : halbe < 0.25 ? "eine sehr weiche Mitte; viel Expo macht kleine Korrekturen schwammig. "
+         : "ein ausgewogenes Verhältnis. ";
+    if (m < 500) hint += "Unter 500 °/s wirkt das Quad für Freestyle träge. ";
+    else if (m > 1000) hint += "Über 1000 °/s wird die Orientierung schwierig — erst im Simulator probieren. ";
+    else hint += "650–800 °/s ist der Freestyle-Standard. ";
+    hint += "Yaw fährt man meist 50–100 °/s niedriger, weil Gieren der schwächste Kanal ist.";
+    return { out: out, hint: hint };
+  },
   fpvladen: function (v) {
     var de = function (x, d) { return x.toFixed(d).replace(".", ","); };
     var chem = typeof v.chem === "string" ? v.chem : "lipo";
