@@ -1,10 +1,11 @@
 # Artefakte
 
-Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Fotografie, Messer und Funk — <https://bib.gktn.dev>.
+Nachschlagewerke für Werkstatt, Mechatronik, Küche, Holzwerken, Homelab,
+Fotografie, Messer und Funk — <https://bib.gktn.dev>.
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 25 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle 26 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -60,9 +61,9 @@ Karten oben im Hub-Panel (`#t-<id>`), als aufklappbarer Block in der Rail auf
 allen Seiten des Hubs und in der Suchpalette (Startansicht und als Treffer
 vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
 in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
-Abschnitt. Bisher nutzt das der Mechatronik-Hub.
-Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🖥️ Homelab · 📷 Foto & Video ·
-🔪 Messer · 📡 Funk — zusammen 25 Module mit 277 Abschnitten.
+Abschnitt. Bisher nutzen das der Mechatronik-Hub und der Holzwerken-Hub.
+Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🪵 Holzwerken · 🖥️ Homelab ·
+📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 26 Module mit 295 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion
@@ -86,15 +87,16 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
   kollidiert mit nichts. Kleine Module kommen ganz ohne aus (Content-System in app.css).
 - **Gemeinsame Stylesheets über Modulgrenzen hinweg** sind möglich: `[slug].astro`
   hängt bei Bedarf eine zweite Klasse an den Content-Container (`mx-sys` für die
-  Küche, `mx-mecha` für den Mechatronik-Hub und die Technik-Module der Werkstatt,
-  siehe `MECHA_MODULES`). Das Stylesheet liegt einmal als `src/content/_mecha.css`
-  und wird von jedem `_style.css` nur importiert; ein Modul kann darüber hinaus
-  eigene Regeln ergänzen (so macht es `dremel` für seine Drehzahlskala).
+  Küche, `mx-mecha` für den Mechatronik-Hub, die Technik-Module der Werkstatt und
+  den Holzwerken-Hub, siehe `MECHA_MODULES`). Das Stylesheet liegt einmal als
+  `src/content/_mecha.css` und wird von jedem `_style.css` nur importiert; ein
+  Modul kann darüber hinaus eigene Regeln ergänzen (so macht es `dremel` für seine Drehzahlskala).
 - **Ein Skript für viele Module:** `public/assets/mod-mecha.js` bedient alle
-  Mechatronik-Module, die Technik-Module der Werkstatt und den Messer-Hub —
-  Faltabschnitte, sortierbare Tabellen, Katalog- und Glossarfilter, die Rechner
-  (darunter der § 42a-Check und der Schärfwinkel-Rechner) und die
-  PID-Simulation sowie die LoRa-Rechner des Funk-Hubs (Airtime, Antennenlänge).
+  Mechatronik-Module, die Technik-Module der Werkstatt, den Messer-Hub und den
+  Holzwerken-Hub — Faltabschnitte, sortierbare Tabellen, Katalog-, Glossar- und
+  Projektfilter, die Rechner (darunter der § 42a-Check und der
+  Schärfwinkel-Rechner) und die PID-Simulation sowie die LoRa-Rechner des
+  Funk-Hubs (Airtime, Antennenlänge).
   Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
   Ein Modul kann mehrere Skripte laden (`PAGE_SCRIPTS` nimmt auch ein Array,
   so kombiniert *3D-Druck* das Technik-Skript mit seinem Simulator).
