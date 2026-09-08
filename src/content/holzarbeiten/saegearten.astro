@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <p class="lede">Zehn Sägen, die im Hobbybereich wirklich vorkommen — sortiert danach, welchen Schnitt sie können und welchen nicht.</p>
 
@@ -33,101 +34,99 @@ import "./_style.css";
 </figure>
 
 <h2>Maschinensägen</h2>
-<div class="tbl-wrap"><table style="min-width:940px">
-<thead><tr>
-  <th data-s="txt">Säge</th>
-  <th data-s="num">Genauigkeit</th>
-  <th data-s="num">Schnittfuge</th>
-  <th>Typische Kapazität</th>
-  <th>Ihr Schnitt</th>
-  <th>Achtung</th>
-</tr></thead>
+<Profiles
+  label="Säge"
+  criteria={["Genauigkeit", "Lange Schnitte", "Kurven", "Tempo", "Sicherheit"]}
+  items={[
+    { name: "Handkreissäge", tag: "Blatt 165 bis 190 mm", scores: [2, 3, 1, 4, 3],
+      pro: "Überall verfügbar, günstig, geht bis 65 mm Schnitttiefe",
+      con: "Freihand nie gerade, ohne Schiene nur für Übermaßschnitte",
+      use: "Platten grob auftrennen, Bohlen ablängen" },
+    { name: "Tauchsäge mit Schiene", tag: "Blatt 160 mm", scores: [5, 5, 1, 4, 4],
+      pro: "Gerade Kante ohne Anzeichnen, Splitterschutz, kann mitten in der Fläche eintauchen",
+      con: "Teuer, Schiene braucht Platz und muss zum Schnitt passen",
+      use: "Plattenzuschnitt auf Endmaß, Ausschnitte in Arbeitsplatten" },
+    { name: "Tischkreissäge", tag: "Blatt 250 mm", scores: [4, 5, 1, 5, 2],
+      pro: "Parallelanschlag hält das Maß über beliebig viele Bretter, auch Nuten und Falze",
+      con: "Höchste Rückschlaggefahr, braucht festen Standplatz",
+      use: "Viele gleiche Breiten längs auftrennen" },
+    { name: "Kappsäge", tag: "Blatt 216 bis 305 mm", scores: [5, 2, 1, 5, 4],
+      pro: "Exakte Längen und Gehrungen in Serie, mit Anschlag reproduzierbar",
+      con: "Kann nur kappen, keine langen Schnitte, Winkel driftet mit der Zeit",
+      use: "Ablängen, Gehrungen, Leisten" },
+    { name: "Stichsäge", tag: "Holz bis ca. 80 mm", scores: [1, 2, 5, 3, 4],
+      pro: "Kurven, Ausschnitte und Aussparungen, billig und handlich",
+      con: "Blatt läuft in dickem Material weg, Schnitt wird hinten schräg",
+      use: "Kurven und Ausschnitte mit Übermaß, danach fräsen oder schleifen" },
+    { name: "Bandsäge", tag: "100 bis 160 mm Durchlass", scores: [3, 3, 5, 3, 5],
+      pro: "Kurven in dickem Holz, schmale Fuge, kein Rückschlag",
+      con: "Blattführung und Spannung heikel, große Maschine",
+      use: "Kurven in Massivholz, Bohlen auftrennen, Zapfenwangen" },
+  ]}
+  labels={{ use: "Nimm sie für" }}
+  note="Fünf Punkte sind das Maximum, mehr gefüllte Punkte sind besser. „Lange Schnitte“ meint gerade Schnitte über einen Meter, „Sicherheit“ das Risiko bei normalem, regelkonformem Gebrauch."
+/>
+
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th data-s="txt">Säge</th><th data-s="num">Schnittfuge</th><th>Typische Kapazität</th></tr></thead>
 <tbody>
-<tr>
-  <td><b>Handkreissäge</b></td>
-  <td class="pc lo txt"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="sr">2 von 5</span></td>
-  <td>1,8 bis 2,8 mm</td>
-  <td class="txt">Blatt 165 mm: 55 mm Tiefe · Blatt 190 mm: 65 mm</td>
-  <td class="txt">Platten grob auftrennen, Bohlen ablängen</td>
-  <td class="txt">Freihand nie gerade. Ohne Schiene nur für Übermaßschnitte</td>
-</tr>
-<tr>
-  <td><b>Tauchsäge mit Schiene</b></td>
-  <td class="pc hi txt"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="sr">5 von 5</span></td>
-  <td>2,2 bis 2,6 mm</td>
-  <td class="txt">Blatt 160 mm: 55 mm Tiefe, Schiene bis 3 m koppelbar</td>
-  <td class="txt">Plattenzuschnitt auf Endmaß, Ausschnitte mitten in der Fläche</td>
-  <td class="txt">Splitterschutz der Schiene ist Verschleißteil, nach Blattwechsel neu einschneiden</td>
-</tr>
-<tr>
-  <td><b>Tischkreissäge</b></td>
-  <td class="pc hi txt"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="sr">4 von 5</span></td>
-  <td>2,4 bis 3,2 mm</td>
-  <td class="txt">Blatt 250 mm: ca. 80 mm Schnitthöhe</td>
-  <td class="txt">Viele gleiche Breiten längs auftrennen, Nuten, Falze</td>
-  <td class="txt">Höchste Rückschlaggefahr. Spaltkeil und Schiebestock sind Pflicht</td>
-</tr>
-<tr>
-  <td><b>Kappsäge / Gehrungssäge</b></td>
-  <td class="pc hi txt"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="sr">5 von 5</span></td>
-  <td>2,0 bis 2,8 mm</td>
-  <td class="txt">216 mm ohne Zug: ca. 70 × 130 mm · mit Zug: bis ca. 305 mm breit</td>
-  <td class="txt">Ablängen auf exakte Länge, Gehrungen, Serien mit Anschlag</td>
-  <td class="txt">Kann nur kappen, nicht längs auftrennen. Winkel regelmäßig nachmessen</td>
-</tr>
-<tr>
-  <td><b>Stichsäge</b></td>
-  <td class="pc lo txt"><span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></span><span class="sr">1 von 5</span></td>
-  <td>1,2 bis 2,0 mm</td>
-  <td class="txt">Holz bis ca. 80 mm, praktisch sauber bis ca. 25 mm</td>
-  <td class="txt">Kurven, Ausschnitte, Aussparungen</td>
-  <td class="txt">Blatt läuft in dickem Material weg, Schnitt wird hinten schräg. 2 bis 3 mm stehen lassen</td>
-</tr>
-<tr>
-  <td><b>Bandsäge</b></td>
-  <td class="pc mid txt"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="sr">3 von 5</span></td>
-  <td>0,6 bis 1,0 mm</td>
-  <td class="txt">Hobbygerät: 100 bis 160 mm Durchlasshöhe, 200 bis 320 mm Ausladung</td>
-  <td class="txt">Kurven in dickem Holz, Bohlen auftrennen, Zapfen aussägen</td>
-  <td class="txt">Kein Rückschlag, dafür Blattführung und Spannung heikel</td>
-</tr>
+<tr><td><b>Handkreissäge</b></td><td>1,8 bis 2,8 mm</td><td class="txt">Blatt 165 mm: 55 mm Tiefe · Blatt 190 mm: 65 mm</td></tr>
+<tr><td><b>Tauchsäge</b></td><td>2,2 bis 2,6 mm</td><td class="txt">55 mm Tiefe, Schienen bis 3 m koppelbar</td></tr>
+<tr><td><b>Tischkreissäge</b></td><td>2,4 bis 3,2 mm</td><td class="txt">Blatt 250 mm: ca. 80 mm Schnitthöhe</td></tr>
+<tr><td><b>Kappsäge</b></td><td>2,0 bis 2,8 mm</td><td class="txt">216 mm ohne Zug: 70 × 130 mm · mit Zug: bis 305 mm breit</td></tr>
+<tr><td><b>Stichsäge</b></td><td>1,2 bis 2,0 mm</td><td class="txt">Holz bis ca. 80 mm, sauber bis ca. 25 mm</td></tr>
+<tr><td><b>Bandsäge</b></td><td>0,6 bis 1,0 mm</td><td class="txt">100 bis 160 mm Durchlass, 200 bis 320 mm Ausladung</td></tr>
 </tbody>
 </table></div>
 
-<div class="tip"><b>Mindestradius an der Bandsäge.</b> Je schmaler das Blatt, desto enger die Kurve: 3 mm Blatt schafft rund 6 mm Radius, 6 mm Blatt rund 16 mm, 10 mm Blatt rund 40 mm, 13 mm Blatt rund 65 mm. Wer mit einem breiten Blatt eine enge Kurve erzwingt, verdrillt es und ruiniert die Führung.</div>
-
 <h2>Handsägen</h2>
-<div class="tbl-wrap"><table style="min-width:940px">
-<thead><tr>
-  <th data-s="txt">Säge</th>
-  <th data-s="txt">Arbeitshub</th>
-  <th data-s="num">Zähne</th>
-  <th data-s="num">Schnittfuge</th>
-  <th>Ihr Schnitt</th>
-  <th>Achtung</th>
-</tr></thead>
+<Profiles
+  label="Säge"
+  criteria={["Genauigkeit", "Feine Fuge", "Schnitttiefe", "Tempo", "Leichtgängig"]}
+  items={[
+    { name: "Fuchsschwanz", tag: "Stoßschnitt · 7 bis 11 TPI", scores: [1, 1, 5, 4, 2],
+      pro: "Robust, billig, kommt durch alles, unbegrenzte Schnitttiefe",
+      con: "Dickes Blatt, breite Fuge, viel Kraft, für Möbelbau zu grob",
+      use: "Grobes Ablängen, Baustelle, Brennholz" },
+    { name: "Feinsäge mit Rücken", tag: "Stoßschnitt · 13 bis 17 TPI", scores: [4, 3, 2, 3, 3],
+      pro: "Der Rücken hält das Blatt gerade, passt in die Gehrungslade",
+      con: "Rücken begrenzt die Schnitttiefe auf etwa 60 mm",
+      use: "Gehrungen, Leisten, kleine Verbindungen" },
+    { name: "Ryoba", tag: "Zugschnitt · 9 und 15 TPI", scores: [4, 4, 5, 4, 5],
+      pro: "Zwei Schneiden für Längs- und Querschnitt, dünne Fuge, kaum Kraft nötig",
+      con: "Die zweite Schneide schrammt in engen Schnitten ins Werkstück",
+      use: "Die eine Handsäge, wenn es nur eine sein soll" },
+    { name: "Kataba", tag: "Zugschnitt · 15 bis 18 TPI", scores: [4, 4, 5, 4, 5],
+      pro: "Kein Rücken, also unbegrenzte Schnitttiefe bei dünnem Blatt",
+      con: "Ohne Rücken flexibler, verlangt eine ruhige Führung",
+      use: "Tiefe Schnitte, große Zapfen, Ablängen" },
+    { name: "Dozuki", tag: "Zugschnitt · 19 bis 25 TPI", scores: [5, 5, 2, 3, 5],
+      pro: "Präziseste Handsäge, Fuge von 0,3 mm, schneidet direkt am Anriss",
+      con: "Rücken begrenzt auf etwa 50 mm, sehr empfindliches Blatt",
+      use: "Zinken, Zapfen, Schlitze, alles Sichtbare" },
+    { name: "Bündigsäge", tag: "Zugschnitt · ca. 22 TPI", scores: [3, 5, 1, 3, 5],
+      pro: "Ungeschränkte Zähne, kürzt Dübel bündig ohne die Fläche zu zerkratzen",
+      con: "Kann nur flach auf der Fläche arbeiten, sonst nichts",
+      use: "Dübel und Zapfen bündig abtrennen" },
+    { name: "Azebiki", tag: "Zugschnitt · ca. 18 TPI", scores: [4, 4, 2, 2, 4],
+      pro: "Gebogene Schneide setzt mitten in der Fläche an",
+      con: "Spezialwerkzeug, für gerades Ablängen ungeeignet",
+      use: "Nuten anschneiden, Schnitte in der Fläche beginnen" },
+  ]}
+  labels={{ use: "Nimm sie für" }}
+  note="„Feine Fuge“ heißt wenig Materialverlust und wenig Ausriss, „Leichtgängig“ wenig Kraftaufwand pro Schnitt. Japanische Sägen schneiden beim Ziehen, westliche beim Schieben."
+/>
+
+<div class="tbl-wrap"><table style="min-width:620px">
+<thead><tr><th data-s="txt">Säge</th><th data-s="txt">Arbeitshub</th><th data-s="num">Zähne</th><th data-s="num">Schnittfuge</th></tr></thead>
 <tbody>
-<tr><td><b>Fuchsschwanz</b></td><td>Stoß</td><td>7 bis 11 TPI</td><td>0,8 bis 1,2 mm</td>
-  <td class="txt">Grobes Ablängen, Baustelle, Brennholz</td>
-  <td class="txt">Dickes Blatt, viel Kraft, für Möbelbau zu grob</td></tr>
-<tr><td><b>Feinsäge / Rückensäge</b></td><td>Stoß</td><td>13 bis 17 TPI</td><td>0,7 bis 0,9 mm</td>
-  <td class="txt">Gehrungen in der Lade, Leisten, kleine Verbindungen</td>
-  <td class="txt">Der Rücken begrenzt die Schnitttiefe auf ca. 60 mm</td></tr>
-<tr><td><b>Ryoba</b> (japanisch, zweischneidig)</td><td>Zug</td><td>9 TPI längs · 15 TPI quer</td><td>0,5 mm</td>
-  <td class="txt">Universalsäge: eine Seite Längsschnitt, andere Seite Querschnitt</td>
-  <td class="txt">Beim Ansetzen leicht führen, nie drücken. Die zweite Schneide schrammt gern ins Werkstück</td></tr>
-<tr><td><b>Kataba</b> (einschneidig, ohne Rücken)</td><td>Zug</td><td>15 bis 18 TPI</td><td>0,5 mm</td>
-  <td class="txt">Tiefe Schnitte ohne Begrenzung, große Zapfen, Ablängen</td>
-  <td class="txt">Ohne Rücken flexibler, verlangt saubere Führung</td></tr>
-<tr><td><b>Dozuki</b> (mit Rücken)</td><td>Zug</td><td>19 bis 25 TPI</td><td>0,3 mm</td>
-  <td class="txt">Die Präzisionssäge: Zinken, Zapfen, Schlitze, Anrisse</td>
-  <td class="txt">Rücken begrenzt die Tiefe auf ca. 50 mm. Sehr empfindliches Blatt</td></tr>
-<tr><td><b>Kugihiki / Bündigsäge</b></td><td>Zug</td><td>ca. 22 TPI</td><td>0,3 mm</td>
-  <td class="txt">Dübel und Zapfen bündig zur Fläche kürzen</td>
-  <td class="txt">Zähne ohne Schränkung, damit die Fläche keine Kratzer bekommt. Nur dafür benutzen</td></tr>
-<tr><td><b>Azebiki</b></td><td>Zug</td><td>ca. 18 TPI</td><td>0,4 mm</td>
-  <td class="txt">Schnitte mitten in der Fläche anfangen, Nuten anschneiden</td>
-  <td class="txt">Gebogene Schneide, Spezialwerkzeug für Verbindungen</td></tr>
+<tr><td><b>Fuchsschwanz</b></td><td>Stoß</td><td>7 bis 11 TPI</td><td>0,8 bis 1,2 mm</td></tr>
+<tr><td><b>Feinsäge mit Rücken</b></td><td>Stoß</td><td>13 bis 17 TPI</td><td>0,7 bis 0,9 mm</td></tr>
+<tr><td><b>Ryoba</b></td><td>Zug</td><td>9 längs · 15 quer</td><td>0,5 mm</td></tr>
+<tr><td><b>Kataba</b></td><td>Zug</td><td>15 bis 18 TPI</td><td>0,5 mm</td></tr>
+<tr><td><b>Dozuki</b></td><td>Zug</td><td>19 bis 25 TPI</td><td>0,3 mm</td></tr>
+<tr><td><b>Bündigsäge</b></td><td>Zug</td><td>ca. 22 TPI</td><td>0,3 mm</td></tr>
+<tr><td><b>Azebiki</b></td><td>Zug</td><td>ca. 18 TPI</td><td>0,4 mm</td></tr>
 </tbody>
 </table></div>
 
