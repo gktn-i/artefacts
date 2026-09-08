@@ -21,36 +21,6 @@
   flex: 0 0 auto;
 }
 
-/* Härteskala: ein Balken, über alle Zeilen hinweg gleich skaliert
-   (0–50 N/mm² Brinell deckt alle hier gelisteten Hölzer ab), damit sich
-   die Arten auf einen Blick vergleichen lassen. */
-.mx-holzarbeiten .hb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 96px;
-}
-.mx-holzarbeiten .hb-bar {
-  flex: 1;
-  height: 7px;
-  border-radius: 999px;
-  background: var(--track);
-  overflow: hidden;
-  min-width: 44px;
-}
-.mx-holzarbeiten .hb-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: var(--accent);
-}
-.mx-holzarbeiten .hb-num {
-  font: 600 11px/1 var(--mono);
-  color: var(--muted);
-  width: 20px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
 /* Projektkarten: Kopfzeile mit Level, darunter Kennzahlen und Technikpillen. */
 .mx-holzarbeiten .pj {
   border: 1px solid var(--border);
@@ -148,4 +118,61 @@
   stroke: var(--border-strong);
   stroke-width: 1;
   stroke-dasharray: 3 4;
+}
+.mx-holzarbeiten .sym svg .w {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+.mx-holzarbeiten .sym svg .f { fill: var(--text); stroke: none; }
+.mx-holzarbeiten .sym svg .lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: var(--muted);
+  stroke: none;
+}
+
+/* Spaltentitel dürfen umbrechen. In _mecha.css stehen th auf nowrap, was
+   bei mehrwortigen Titeln wie „Schraubhalt Kante" die ganze Tabelle über den
+   Arbeitsbereich hinausschiebt und die letzte Spalte abschneidet. Der Bundler
+   sortiert _mecha.css hinter dieses Stylesheet, deshalb reicht gleiche
+   Spezifität nicht — der Container trägt beide Klassen. */
+.mx-holzarbeiten.mx-mecha th {
+  white-space: normal;
+  line-height: 1.3;
+  vertical-align: bottom;
+}
+
+/* Punktreihen in gewöhnlichen Tabellen. Die Farbregeln und .dots selbst
+   kommen aus dem Block PROFILE in _mecha.css, dort aber auf .prof-t
+   beschränkt — hier gelten sie für jede Tabelle des Moduls.
+   .neutral ist für Spalten, bei denen mehr nicht besser heißt (Aufwand,
+   Härte): einfarbig, damit die Punkte keine Wertung behaupten. */
+.mx-holzarbeiten td.pc {
+  padding: 11px 10px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: inherit;
+}
+.mx-holzarbeiten td.pc .dots i {
+  width: 9px;
+  height: 9px;
+}
+.mx-holzarbeiten td.pc.neutral .dots i.on { background: var(--accent); }
+.mx-holzarbeiten td.pc .hv {
+  font: 600 11.5px/1 var(--mono);
+  color: var(--muted);
+  margin-left: 9px;
+  vertical-align: middle;
+}
+@media (max-width: 620px) {
+  .mx-holzarbeiten td.pc {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: normal;
+  }
+  .mx-holzarbeiten td.pc .hv { margin-left: 0; }
+  .mx-holzarbeiten td.pc::before { margin-bottom: 0; }
 }
