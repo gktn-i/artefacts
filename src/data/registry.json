@@ -2404,6 +2404,522 @@
    ]
   },
   {
+   "id": "holz",
+   "name": "Holzwerken",
+   "icon": "🪵",
+   "file": "hub-holz.html",
+   "tagline": "Holzarten · Platten · Verbindungen · Projekte",
+   "desc": "Holzarbeiten von der Materialwahl bis zur fertigen Oberfläche: welches Holz wofür taugt, wie stark es arbeitet, welche Verbindung hält, wie man sauber sägt, fräst und schleift — und 16 Projekte nach Level, mit Material, Aufwand und Kosten. Werkzeugsteckbriefe bleiben bewusst draußen.",
+   "accent": {
+    "l": "#8a5522",
+    "d": "#d9a468"
+   },
+   "tasks": [
+    {
+     "id": "material",
+     "icon": "🌳",
+     "t": "Material wählen",
+     "d": "Welches Holz, welche Platte — nach Ziel, Belastung und Einsatzort statt nach Bauchgefühl.",
+     "k": "holz aussuchen welches holz material kaufen brett platte multiplex mdf eiche kiefer outdoor draußen wetterfest hart weich preis",
+     "links": [
+      {
+       "m": "holzarbeiten",
+       "h": "auswahl",
+       "t": "Schnellauswahl nach Ziel"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "holzarten"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "platten"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "feuchte",
+       "t": "Arbeitet das Holz mir kaputt?"
+      }
+     ]
+    },
+    {
+     "id": "verbinden",
+     "icon": "🔗",
+     "t": "Zwei Teile verbinden",
+     "d": "Die passende Verbindung nach Festigkeit, Aufwand und Sichtbarkeit — plus Leim und Schraube richtig einsetzen.",
+     "k": "verbinden verbindung dübel domino zapfen zinken schrauben leimen kleben pocket hole korpus rahmen wackelt hält nicht",
+     "links": [
+      {
+       "m": "holzarbeiten",
+       "h": "verbindungen",
+       "t": "Verbindungen im Vergleich"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "leim"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "schrauben",
+       "t": "Vorbohren: Tabelle"
+      }
+     ]
+    },
+    {
+     "id": "zuschnitt",
+     "icon": "🪚",
+     "t": "Sauber zuschneiden",
+     "d": "Blattwahl, gute Seite, Ausriss vermeiden und exakt anreißen, bevor die Maschine läuft.",
+     "k": "sägen zuschnitt schneiden ausriss splittert franst zähne sägeblatt gerade schnitt anreißen messen winkel",
+     "links": [
+      {
+       "m": "holzarbeiten",
+       "h": "saegen"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "messen",
+       "t": "Referenzkante & Anschläge"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "fehler",
+       "t": "Warum reißt die Kante aus?"
+      }
+     ]
+    },
+    {
+     "id": "finish",
+     "icon": "🎨",
+     "t": "Oberfläche machen",
+     "d": "Vom letzten Korn bis zum Öl oder Lack — inklusive der Reihenfolge, die man nicht abkürzen kann.",
+     "k": "ölen lackieren beizen wachsen schleifen körnung finish oberfläche hartwachsöl klarlack lasur glatt rau",
+     "links": [
+      {
+       "m": "holzarbeiten",
+       "h": "schleifen",
+       "t": "Körnungsfolge"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "oberflaechen"
+      }
+     ]
+    },
+    {
+     "id": "projekt",
+     "icon": "💡",
+     "t": "Projekt starten",
+     "d": "16 Projekte nach Level, mit Material, Aufwand, Kosten und den Techniken, die man dabei lernt.",
+     "k": "projekt bauen idee anfänger erstes projekt regal werkbank tisch kiste schneidebrett was bauen",
+     "links": [
+      {
+       "m": "holzarbeiten",
+       "h": "projekte",
+       "t": "Projektideen nach Level"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "auswahl",
+       "t": "Material dafür wählen"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "sicherheit"
+      }
+     ]
+    },
+    {
+     "id": "begriff",
+     "icon": "📖",
+     "t": "Begriff klären",
+     "d": "Hirnholz, Schüsseln, Gegenlauf, Umleimer — die Wörter, über die man beim Lesen stolpert.",
+     "k": "begriff wort bedeutet glossar hirnholz schüsseln gratleiste umleimer gegenlauf lexikon was ist",
+     "links": [
+      {
+       "m": "holzarbeiten",
+       "h": "glossar"
+      },
+      {
+       "m": "holzarbeiten",
+       "h": "quellen"
+      }
+     ]
+    }
+   ],
+   "areas": [
+    {
+     "id": "holz",
+     "name": "Holzarbeiten",
+     "desc": "Ein Modul mit 18 Unterseiten: Material, Verbinden, Bearbeiten, Praxis, Projekte.",
+     "modules": [
+      {
+       "id": "holzarbeiten",
+       "file": "holzarbeiten.html",
+       "name": "Holzarbeiten",
+       "icon": "🪵",
+       "kind": "Referenz",
+       "updated": "2026-09-07",
+       "desc": "Vom Brett zum Möbel: Holzarten mit Härte, Preis und Außentauglichkeit, Plattenwerkstoffe im Vergleich, Holzfeuchte und wie stark Holz arbeitet, neun Verbindungen mit Festigkeit und Aufwand, Leimklassen, Vorbohrtabelle, Sägeblattwahl und gute Seite, Fräsrichtung und Drehzahlen, Körnungsfolge, Oberflächen im Vergleich, Sicherheit, typische Fehler und 16 Projektideen nach Level. Tabellen, Grafiken und Faustregeln statt langer Texte.",
+       "tags": [
+        "holz",
+        "holzarbeiten",
+        "holzarten",
+        "massivholz",
+        "weichholz",
+        "hartholz",
+        "nadelholz",
+        "laubholz",
+        "fichte",
+        "tanne",
+        "kiefer",
+        "lärche",
+        "douglasie",
+        "buche",
+        "eiche",
+        "ahorn",
+        "nussbaum",
+        "birke",
+        "esche",
+        "robinie",
+        "brinell",
+        "härte",
+        "rohdichte",
+        "dauerhaftigkeit",
+        "kernholz",
+        "splintholz",
+        "platten",
+        "plattenwerkstoffe",
+        "multiplex",
+        "sperrholz",
+        "mdf",
+        "hdf",
+        "spanplatte",
+        "osb",
+        "tischlerplatte",
+        "leimholz",
+        "umleimer",
+        "kantenband",
+        "holzfeuchte",
+        "darrdicht",
+        "quellen",
+        "schwinden",
+        "arbeiten",
+        "langloch",
+        "nutklotz",
+        "schüsseln",
+        "verbindung",
+        "verbindungen",
+        "dübel",
+        "runddübel",
+        "flachdübel",
+        "lamello",
+        "domino",
+        "zapfen",
+        "schlitz und zapfen",
+        "zinken",
+        "schwalbenschwanz",
+        "fingerzinken",
+        "nut und feder",
+        "gratleiste",
+        "pocket hole",
+        "taschenbohrung",
+        "exzenter",
+        "topfband",
+        "leim",
+        "verleimen",
+        "pvac",
+        "weissleim",
+        "d2",
+        "d3",
+        "d4",
+        "pu-leim",
+        "epoxid",
+        "presszeit",
+        "zwinge",
+        "hirnholz",
+        "langholz",
+        "bohren",
+        "vorbohren",
+        "kernloch",
+        "durchgangsloch",
+        "senken",
+        "senker",
+        "spax",
+        "edelstahl",
+        "gerbsäure",
+        "sägen",
+        "sägeblatt",
+        "zähne",
+        "zahnzahl",
+        "längsschnitt",
+        "querschnitt",
+        "ausriss",
+        "opferholz",
+        "handkreissäge",
+        "tauchsäge",
+        "tischkreissäge",
+        "kappsäge",
+        "stichsäge",
+        "führungsschiene",
+        "rückschlag",
+        "spaltkeil",
+        "t101b",
+        "t144d",
+        "fräsen",
+        "oberfräse",
+        "fräser",
+        "gleichlauf",
+        "gegenlauf",
+        "drehzahl",
+        "bündigfräser",
+        "anlaufring",
+        "kopierhülse",
+        "schablone",
+        "abrundfräser",
+        "nutfräser",
+        "schleifen",
+        "körnung",
+        "schleifpapier",
+        "exzenterschleifer",
+        "wässern",
+        "zwischenschliff",
+        "oberfläche",
+        "hartwachsöl",
+        "leinöl",
+        "leinölfirnis",
+        "klarlack",
+        "wasserlack",
+        "beize",
+        "wachs",
+        "lasur",
+        "selbstentzündung",
+        "lebensmittelecht",
+        "messen",
+        "anreißen",
+        "streichmaß",
+        "referenzkante",
+        "anschlag",
+        "diagonale",
+        "rechtwinklig",
+        "sicherheit",
+        "schutzbrille",
+        "gehörschutz",
+        "ffp2",
+        "feinstaub",
+        "absaugung",
+        "zwingen",
+        "projektideen",
+        "projekte",
+        "werkbank",
+        "hobelbank",
+        "schneidebrett",
+        "wandregal",
+        "esstisch",
+        "sideboard",
+        "french cleat",
+        "werkzeugwand",
+        "pflanzkasten",
+        "hochbeet",
+        "schublade",
+        "hocker",
+        "glossar",
+        "begriffe"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "holzarten",
+         "t": "Holzarten"
+        },
+        {
+         "h": "platten",
+         "t": "Plattenwerkstoffe"
+        },
+        {
+         "h": "auswahl",
+         "t": "Material wählen"
+        },
+        {
+         "h": "feuchte",
+         "t": "Holzfeuchte & Arbeiten"
+        },
+        {
+         "h": "verbindungen",
+         "t": "Verbindungen"
+        },
+        {
+         "h": "leim",
+         "t": "Verleimen"
+        },
+        {
+         "h": "schrauben",
+         "t": "Bohren & Schrauben"
+        },
+        {
+         "h": "saegen",
+         "t": "Sägen"
+        },
+        {
+         "h": "fraesen",
+         "t": "Fräsen"
+        },
+        {
+         "h": "schleifen",
+         "t": "Schleifen"
+        },
+        {
+         "h": "oberflaechen",
+         "t": "Oberflächen"
+        },
+        {
+         "h": "messen",
+         "t": "Messen & Anreißen"
+        },
+        {
+         "h": "sicherheit",
+         "t": "Sicherheit"
+        },
+        {
+         "h": "fehler",
+         "t": "Typische Fehler"
+        },
+        {
+         "h": "projekte",
+         "t": "Projektideen"
+        },
+        {
+         "h": "glossar",
+         "t": "Glossar A–Z"
+        },
+        {
+         "h": "quellen",
+         "t": "Quellen"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Material",
+         "sections": [
+          "start",
+          "holzarten",
+          "platten",
+          "auswahl",
+          "feuchte"
+         ]
+        },
+        {
+         "l": "Verbinden",
+         "sections": [
+          "verbindungen",
+          "leim",
+          "schrauben"
+         ]
+        },
+        {
+         "l": "Bearbeiten",
+         "sections": [
+          "saegen",
+          "fraesen",
+          "schleifen",
+          "oberflaechen"
+         ]
+        },
+        {
+         "l": "Praxis & Projekte",
+         "sections": [
+          "messen",
+          "sicherheit",
+          "fehler",
+          "projekte"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "glossar",
+          "quellen"
+         ]
+        }
+       ],
+       "alias": {
+        "landkarte": "start",
+        "einstieg": "start",
+        "uebersicht": "start",
+        "massivholz": "holzarten",
+        "hartholz": "holzarten",
+        "weichholz": "holzarten",
+        "nadelholz": "holzarten",
+        "laubholz": "holzarten",
+        "eiche": "holzarten",
+        "brinell": "holzarten",
+        "haerte": "holzarten",
+        "dauerhaftigkeit": "holzarten",
+        "plattenwerkstoffe": "platten",
+        "multiplex": "platten",
+        "mdf": "platten",
+        "osb": "platten",
+        "sperrholz": "platten",
+        "spanplatte": "platten",
+        "material": "auswahl",
+        "materialwahl": "auswahl",
+        "schnellauswahl": "auswahl",
+        "feuchtigkeit": "feuchte",
+        "schwinden": "feuchte",
+        "quellen-schwinden": "feuchte",
+        "holzfeuchte": "feuchte",
+        "arbeiten": "feuchte",
+        "duebel": "verbindungen",
+        "zinken": "verbindungen",
+        "zapfen": "verbindungen",
+        "domino": "verbindungen",
+        "pocket-hole": "verbindungen",
+        "verleimen": "leim",
+        "kleben": "leim",
+        "kleber": "leim",
+        "zwingen": "leim",
+        "bohren": "schrauben",
+        "vorbohren": "schrauben",
+        "senken": "schrauben",
+        "saege": "saegen",
+        "saegeblatt": "saegen",
+        "kreissaege": "saegen",
+        "stichsaege": "saegen",
+        "kappsaege": "saegen",
+        "ausriss": "saegen",
+        "oberfraese": "fraesen",
+        "fraeser": "fraesen",
+        "gleichlauf": "fraesen",
+        "koernung": "schleifen",
+        "schleifpapier": "schleifen",
+        "oberflaeche": "oberflaechen",
+        "oel": "oberflaechen",
+        "lack": "oberflaechen",
+        "beize": "oberflaechen",
+        "finish": "oberflaechen",
+        "anreissen": "messen",
+        "praezision": "messen",
+        "winkel": "messen",
+        "schutz": "sicherheit",
+        "psa": "sicherheit",
+        "staub": "sicherheit",
+        "fehlersuche": "fehler",
+        "probleme": "fehler",
+        "projektideen": "projekte",
+        "ideen": "projekte",
+        "bauprojekte": "projekte",
+        "begriffe": "glossar",
+        "lexikon": "glossar"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "homelab",
    "name": "Homelab",
    "icon": "🖥️",

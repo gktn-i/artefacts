@@ -1,0 +1,85 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Nicht „welches Holz ist das beste", sondern „was soll das Teil aushalten". Die Antwort steht meistens schon im Einsatzort.</p>
+
+<div class="kurz z"><b>Drei Fragen, dann steht das Material.</b> Wird es nass? Wird es angefasst? Wird es gesehen? Alles andere ist Budget.</div>
+
+<h2>Schnellauswahl nach Ziel</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Ziel</th><th>Erste Wahl</th><th>Alternative</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Erstes Projekt, Übung</b></td><td class="txt">Kiefer, Fichte</td><td class="txt">Sperrholz</td><td class="txt">Fehler kosten fast nichts, Bearbeitung verzeiht viel</td></tr>
+<tr><td><b>Stabiler Möbelkorpus</b></td><td class="txt">Multiplex 18 mm</td><td class="txt">Tischlerplatte, Spanplatte beschichtet</td><td class="txt">Steif in der Fläche, hält Beschläge, arbeitet kaum</td></tr>
+<tr><td><b>Sichtbare Massivfläche</b></td><td class="txt">Eiche oder Buche Leimholz</td><td class="txt">Esche, Kirsche</td><td class="txt">Hart genug für Gebrauchsspuren, Maserung trägt das Möbel</td></tr>
+<tr><td><b>Farbig lackieren</b></td><td class="txt">MDF</td><td class="txt">Grundierte Spanplatte</td><td class="txt">Keine Maserung, die durchschlägt, Kanten fräsbar</td></tr>
+<tr><td><b>Draußen, ungeschützt</b></td><td class="txt">Robinie, Lärche Kern</td><td class="txt">Douglasie Kern, Eiche Kern</td><td class="txt">Dauerhaftigkeitsklasse 1 bis 3 ohne chemischen Schutz</td></tr>
+<tr><td><b>Draußen, überdacht</b></td><td class="txt">Lärche, Douglasie</td><td class="txt">Kiefer mit Lasur</td><td class="txt">Ohne Dauernässe reicht auch mäßig dauerhaft</td></tr>
+<tr><td><b>Werkstatt, Vorrichtungen</b></td><td class="txt">Multiplex, OSB</td><td class="txt">MDF für Schablonen</td><td class="txt">Maßhaltig, planbar, billig genug zum Zersägen</td></tr>
+<tr><td><b>Küche, Kontakt mit Lebensmitteln</b></td><td class="txt">Buche, Ahorn</td><td class="txt">Eiche, Nussbaum</td><td class="txt">Dicht, hart, gut zu reinigen. Kein Weichholz, keine Platte</td></tr>
+<tr><td><b>Edler Akzent, kleines Teil</b></td><td class="txt">Nussbaum</td><td class="txt">Eiche geräuchert, Kirsche</td><td class="txt">Auf kleiner Fläche fällt der Preis kaum ins Gewicht</td></tr>
+<tr><td><b>Biegebeanspruchtes Teil</b></td><td class="txt">Esche</td><td class="txt">Buche, Multiplex</td><td class="txt">Elastisch, bricht nicht spröde</td></tr>
+<tr><td><b>Rückwand, Schubladenboden</b></td><td class="txt">HDF, Sperrholz 5 mm</td><td class="txt">Dünnes Multiplex</td><td class="txt">Dünn, steif, in die Nut schwimmend eingesetzt</td></tr>
+<tr><td><b>Schnitzen, Modellbau</b></td><td class="txt">Linde</td><td class="txt">Pappelsperrholz</td><td class="txt">Weich, gleichmäßig, kaum Faserausriss</td></tr>
+</tbody>
+</table></div>
+
+<h2>Eignungstabelle</h2>
+<Profiles
+  label="Material"
+  criteria={["Stabilität", "Bearbeitbarkeit", "Optik roh", "Outdoor", "Maßhaltig", "Günstig"]}
+  items={[
+    { name: "Fichte / Kiefer", tag: "Weichholz massiv", scores: [2, 5, 2, 1, 2, 5],
+      pro: "Überall zu bekommen, leicht zu sägen und zu schrauben, verzeiht Fehler",
+      con: "Weich, astig, verzieht sich beim Trocknen, vergilbt",
+      use: "Erste Projekte, Unterkonstruktion, Werkstattmöbel, alles zum Üben" },
+    { name: "Eiche", tag: "Hartholz massiv", scores: [5, 3, 5, 4, 3, 2],
+      pro: "Hart, langlebig, Kernholz auch draußen, sehr wertige Optik",
+      con: "Teuer, stumpft Werkzeug, Gerbsäure schwärzt bei Kontakt mit Eisen",
+      use: "Tischplatten, sichtbare Möbel, Gartenmöbel mit Anspruch" },
+    { name: "Buche", tag: "Hartholz massiv", scores: [5, 4, 3, 1, 2, 3],
+      pro: "Hart, dicht, gleichmäßig, gut zu verleimen und zu dampfbiegen",
+      con: "Arbeitet sehr stark mit der Luftfeuchte, draußen völlig ungeeignet",
+      use: "Werkbankplatte, Schneidebrett, Innenmöbel, belastete Teile" },
+    { name: "Lärche", tag: "Weichholz massiv", scores: [3, 4, 4, 4, 3, 3],
+      pro: "Kernholz übersteht Wetter ohne Chemie, schöne warme Farbe",
+      con: "Harzt, splittert, Splintholz ist nicht dauerhaft",
+      use: "Terrasse, Hochbeet, Fassade, überdachte Gartenmöbel" },
+    { name: "Multiplex", tag: "Plattenwerkstoff", scores: [5, 4, 4, 3, 5, 2],
+      pro: "Sehr steif, maßhaltig, hält Schrauben auch in der Kante, Streifenkante als Design",
+      con: "Teuer, schwer, Kanten reißen ohne Vorkehrung aus",
+      use: "Werkbank, Korpusse, Schablonen, alles Tragende in der Werkstatt" },
+    { name: "MDF", tag: "Plattenwerkstoff", scores: [3, 5, 1, 1, 5, 4],
+      pro: "Absolut homogen, perfekt zu fräsen, ideale Basis für Lack",
+      con: "Quillt bei Nässe dauerhaft auf, saugende Kanten, gesundheitskritischer Feinstaub",
+      use: "Lackierte Fronten, gefräste Profile, Schablonen, Lautsprechergehäuse" },
+    { name: "OSB", tag: "Plattenwerkstoff", scores: [4, 3, 2, 3, 4, 5],
+      pro: "Billig, steif, große Formate, verträgt Feuchte in Klasse 3",
+      con: "Raue Oberfläche, schwer zu lackieren, grobe Optik",
+      use: "Werkstattregale, Unterkonstruktion, Verkleidung im Industrial-Look" },
+    { name: "Spanplatte", tag: "Plattenwerkstoff", scores: [2, 4, 1, 1, 4, 5],
+      pro: "Günstigste Fläche, beschichtet sofort fertig",
+      con: "Schrauben halten in der Kante kaum, quillt bei Nässe, bricht unter Last",
+      use: "Unsichtbare Korpusteile, Einbauten, Möbel mit Beschlägen" },
+  ]}
+  labels={{ use: "Nimm es für" }}
+  note="Punkte sind eine Einordnung für den Hausgebrauch, keine Prüfwerte. „Maßhaltig“ heißt: bleibt bei wechselnder Luftfeuchte in Form."
+/>
+
+<h2>Was es kostet, grob</h2>
+<div class="tbl-wrap"><table style="min-width:660px">
+<thead><tr><th>Material</th><th data-s="num">Richtwert pro m²</th><th>Bezug</th></tr></thead>
+<tbody>
+<tr><td><b>Spanplatte beschichtet 19 mm</b></td><td>15 bis 25 €</td><td class="txt">Baumarkt, Zuschnitt inklusive</td></tr>
+<tr><td><b>MDF 19 mm</b></td><td>20 bis 30 €</td><td class="txt">Baumarkt, Holzhandel</td></tr>
+<tr><td><b>OSB/3 18 mm</b></td><td>15 bis 25 €</td><td class="txt">Baumarkt, ganze Platten</td></tr>
+<tr><td><b>Multiplex Birke 18 mm</b></td><td>60 bis 100 €</td><td class="txt">Holzhandel, im Baumarkt deutlich teurer</td></tr>
+<tr><td><b>Leimholz Fichte 18 mm</b></td><td>25 bis 40 €</td><td class="txt">Baumarkt, fertige Zuschnitte</td></tr>
+<tr><td><b>Leimholz Buche 27 mm</b></td><td>70 bis 110 €</td><td class="txt">Baumarkt, Holzhandel</td></tr>
+<tr><td><b>Eiche massiv, sägerau</b></td><td>90 bis 160 €</td><td class="txt">Holzhandel, selbst hobeln nötig</td></tr>
+</tbody>
+</table></div>
+<p class="note">Preisspannen für Deutschland, Stand 2026. Sie schwanken stark mit Qualität, Sortierung und Menge — als Größenordnung für die Planung, nicht als Angebot.</p>
+
+<div class="tip"><b>Zuschnittservice nutzen.</b> Eine ganze Platte passt in kein normales Auto und lässt sich allein kaum sauber auftrennen. Die ersten geraden Schnitte im Markt oder beim Händler machen zu lassen, spart Transport, Zeit und Ungenauigkeit. Immer 3 bis 5 mm Zugabe einplanen und final selbst auf Maß bringen.</div>

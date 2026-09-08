@@ -1,0 +1,151 @@
+/* holzarbeiten — Design kommt aus dem gemeinsamen Hub-Stylesheet. */
+@import "../_mecha.css";
+
+/* Farbtupfer für Holzarten und Platten: grobe Tonlage, damit die Tabelle
+   nicht nur aus Wörtern besteht. Der Ton kommt per --t aus dem Markup.
+   .wn hält Tupfer und Namen zusammen, damit der Punkt nie allein
+   in einer Zeile hängt, wenn die Spalte eng wird. */
+.mx-holzarbeiten .wn {
+  display: inline-flex;
+  align-items: center;
+}
+.mx-holzarbeiten .sw {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  border: 1px solid var(--border-strong);
+  background: var(--t, #c8a173);
+  vertical-align: -2px;
+  margin-right: 7px;
+  flex: 0 0 auto;
+}
+
+/* Härteskala: ein Balken, über alle Zeilen hinweg gleich skaliert
+   (0–50 N/mm² Brinell deckt alle hier gelisteten Hölzer ab), damit sich
+   die Arten auf einen Blick vergleichen lassen. */
+.mx-holzarbeiten .hb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 96px;
+}
+.mx-holzarbeiten .hb-bar {
+  flex: 1;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--track);
+  overflow: hidden;
+  min-width: 44px;
+}
+.mx-holzarbeiten .hb-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.mx-holzarbeiten .hb-num {
+  font: 600 11px/1 var(--mono);
+  color: var(--muted);
+  width: 20px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Projektkarten: Kopfzeile mit Level, darunter Kennzahlen und Technikpillen. */
+.mx-holzarbeiten .pj {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: 0;
+  overflow: hidden;
+}
+.mx-holzarbeiten .pj .ph {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  font-size: 13.6px;
+  font-weight: 650;
+}
+.mx-holzarbeiten .pj .ph .b { margin-left: auto; }
+.mx-holzarbeiten .pj .pb { padding: 11px 14px 13px; }
+.mx-holzarbeiten .pj .pb p { font-size: 12.8px; color: var(--muted); margin: 0 0 8px; }
+.mx-holzarbeiten .pj .kv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font: 500 11.5px/1.5 var(--mono);
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+.mx-holzarbeiten .pj .kv b { color: var(--text); font-weight: 650; }
+
+/* Körnungsleiter: Stufen als Kette, damit die Reihenfolge sichtbar ist. */
+.mx-holzarbeiten .ladder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  margin: 0.6rem 0 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.mx-holzarbeiten .ladder .rung {
+  flex: 1 1 110px;
+  padding: 10px 12px;
+  border-right: 1px solid var(--border);
+}
+.mx-holzarbeiten .ladder .rung:last-child { border-right: none; }
+.mx-holzarbeiten .ladder .rung .g {
+  font: 700 15px/1.2 var(--mono);
+  color: var(--accent-ink);
+}
+.mx-holzarbeiten .ladder .rung .w {
+  font-size: 11.8px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 3px;
+}
+@media (max-width: 620px) {
+  .mx-holzarbeiten .ladder .rung { flex: 1 1 50%; border-bottom: 1px solid var(--border); }
+}
+
+/* Silhouetten in den Symbolkarten (Verbindungsarten): dieselben Klassen wie
+   in svg.dg, damit Holzkörper, Zapfen und Hilfslinien unterscheidbar bleiben.
+   Ohne diese Regeln fällt jedes Element auf die schwarze Standardfüllung. */
+.mx-holzarbeiten .sym svg .box {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.mx-holzarbeiten .sym svg .accs {
+  fill: var(--accent-soft);
+  stroke: var(--accent-border);
+  stroke-width: 1.2;
+}
+.mx-holzarbeiten .sym svg .acc {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.mx-holzarbeiten .sym svg .accf { fill: var(--accent); stroke: none; }
+.mx-holzarbeiten .sym svg .wt {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.mx-holzarbeiten .sym svg .gd {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
