@@ -220,7 +220,7 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           <p class="desc">{mod.desc}</p>
         </header>
 
-        <div class={`mcontent mx-${mod.id}${["koch-basics","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}${hub.id === "mechatronik" || MECHA_MODULES.has(mod.id) ? " mx-mecha" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
+        <div class={`mcontent mx-${mod.id}${["koch-basics","kuechenmesser","steak","cuts-atlas"].includes(mod.id) ? " mx-sys" : ""}${hub.id === "mechatronik" || MECHA_MODULES.has(mod.id) ? " mx-mecha" : ""}`} data-pagefind-body data-pagefind-meta={`title:${mod.name}`}>
           {mod.sections.map((s, i) => {
             const C = secComp(mod.id, s.h);
             const prev = mod.sections[i - 1];
