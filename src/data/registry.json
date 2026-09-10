@@ -2319,7 +2319,73 @@
         }
        ],
        "related": [
-        "cuts-atlas"
+        "cuts-atlas",
+        "kuechenmesser"
+       ]
+      },
+      {
+       "id": "kuechenmesser",
+       "file": "kuechenmesser.html",
+       "name": "Küchenmesser",
+       "icon": "🔪",
+       "kind": "Referenz",
+       "updated": "2026-09-10",
+       "desc": "Japanisch gegen westlich, 20 Formen im Maßstab, was wofür, Stahl und Härte, Schliffwinkel, Schärfen, Pflege und Kaufberatung. Tabellen und Grafiken statt Text.",
+       "tags": [
+        "küchenmesser",
+        "gyuto",
+        "santoku",
+        "nakiri",
+        "petty",
+        "kochmesser",
+        "japanisch",
+        "hrc",
+        "vg10",
+        "aogami",
+        "wasserstein",
+        "schleifen"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Überblick"
+        },
+        {
+         "h": "arten",
+         "t": "Messerarten"
+        },
+        {
+         "h": "japanisch",
+         "t": "Japanisch"
+        },
+        {
+         "h": "westlich",
+         "t": "Westlich"
+        },
+        {
+         "h": "einsatz",
+         "t": "Was wofür"
+        },
+        {
+         "h": "material",
+         "t": "Stahl & Härte"
+        },
+        {
+         "h": "schliff",
+         "t": "Schliff & Winkel"
+        },
+        {
+         "h": "pflege",
+         "t": "Schärfen & Pflege"
+        },
+        {
+         "h": "kauf",
+         "t": "Kaufberatung"
+        }
+       ],
+       "related": [
+        "messer",
+        "koch-basics"
        ]
       }
      ]
@@ -3448,8 +3514,9 @@
        },
        "related": [
         "koch-basics",
-        "schmiermittel",
-        "mechanik"
+        "kuechenmesser",
+        "mechanik",
+        "schmiermittel"
        ]
       }
      ]
