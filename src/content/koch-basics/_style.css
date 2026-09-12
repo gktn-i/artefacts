@@ -231,6 +231,14 @@
 .mx-sys .kb-table td:first-child { font-weight: 600; white-space: nowrap; }
 .mx-sys .kb-table td.c, .mx-sys .kb-table th.c { text-align: center; }
 .mx-sys .kb-table td.m { font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mx-sys .kb-table tr.grp td {
+  background: var(--surface-2);
+  font: 600 10.5px/1.4 var(--ui);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 6px 10px;
+}
 .mx-sys .kb-table small { color: var(--faint); font-size: 11px; display: block; font-weight: 400; }
 
 /* Bewertungspunkte 1 bis 5 */
