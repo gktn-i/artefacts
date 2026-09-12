@@ -1,0 +1,56 @@
+/* ============================================================================
+   Küchenmesser · nutzt die Bausteine der Küchen-Basics (kb-*) und ergänzt
+   maßstäbliche Messer-Silhouetten (km-*). Alles unter .mx-sys, hell wie dunkel.
+   ========================================================================== */
+@import "../koch-basics/_style.css";
+
+.mx-sys .km-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 12px;
+  margin: 0 0 20px;
+}
+.mx-sys .km-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px 12px;
+  box-shadow: var(--shadow);
+}
+.mx-sys .km-card svg { width: 100%; height: auto; display: block; margin-bottom: 8px; }
+.mx-sys .km-card h3 { font: 600 14.5px/1.3 var(--ui); margin: 0; }
+.mx-sys .km-card .jp { font: 400 11px/1.4 var(--mono); color: var(--faint); margin-left: 6px; }
+.mx-sys .km-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin: 4px 0 0; }
+.mx-sys .km-card .meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 9px; }
+.mx-sys .km-card .meta span {
+  font: 500 10.5px/1 var(--mono);
+  color: var(--c);
+  border: 1px solid color-mix(in srgb, var(--c) 30%, transparent);
+  background: color-mix(in srgb, var(--c) 8%, transparent);
+  border-radius: 100px;
+  padding: 4px 8px;
+}
+.mx-sys .km-card .meta span.jpn { color: var(--kb-wet); border-color: color-mix(in srgb, var(--kb-wet) 35%, transparent); background: var(--kb-wet-soft); }
+
+.mx-sys svg.km { width: 100%; height: auto; display: block; }
+.mx-sys svg.km-ruler { max-width: 520px; margin: 0 auto; }
+.mx-sys svg.km .bl { fill: color-mix(in srgb, var(--c) 14%, var(--surface)); stroke: var(--c); stroke-width: 1.3; stroke-linejoin: round; }
+.mx-sys svg.km .bl.jpn { fill: color-mix(in srgb, var(--kb-wet) 14%, var(--surface)); stroke: var(--kb-wet); }
+.mx-sys svg.km .hd { fill: var(--surface-2); stroke: var(--border-strong); stroke-width: 1.2; stroke-linejoin: round; }
+.mx-sys svg.km .hd.wa { fill: color-mix(in srgb, #b98a4a 28%, var(--surface-2)); }
+.mx-sys svg.km .bo { fill: var(--border-strong); stroke: none; }
+.mx-sys svg.km .fe { fill: var(--text); opacity: 0.5; }
+.mx-sys svg.km .rv { fill: var(--border-strong); }
+.mx-sys svg.km .wt { stroke: var(--c); stroke-width: 1; fill: none; }
+.mx-sys svg.km .rl { stroke: var(--border-strong); stroke-width: 1; }
+.mx-sys svg.km .tk { font: 500 9px var(--mono); fill: var(--faint); }
+.mx-sys svg.km .lb { font: 600 12px var(--ui); fill: var(--text); }
+.mx-sys svg.km .mm { font: 500 10.5px var(--mono); fill: var(--faint); }
+.mx-sys svg.km .ln { stroke: var(--text); stroke-width: 1.2; fill: none; stroke-linecap: round; }
+.mx-sys svg.km .dsh { stroke: var(--faint); stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+.mx-sys svg.km .st { fill: color-mix(in srgb, var(--text) 10%, var(--surface)); stroke: var(--text); stroke-width: 1.2; stroke-linejoin: round; }
+.mx-sys svg.km .core { fill: color-mix(in srgb, var(--c) 30%, var(--surface)); stroke: var(--c); stroke-width: 1; }
+.mx-sys svg.km .ang { fill: color-mix(in srgb, var(--kb-mid) 25%, transparent); stroke: none; }
+
+.mx-sys .kb-table td svg.km { width: 118px; height: auto; display: block; }
+.mx-sys .kb-table td.sil { width: 130px; }

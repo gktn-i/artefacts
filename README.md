@@ -5,7 +5,7 @@ Fotografie, Messer und Funk — <https://bib.gktn.dev>.
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 26 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle 27 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -63,7 +63,7 @@ vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
 in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
 Abschnitt. Bisher nutzen das der Mechatronik-Hub und der Holzwerken-Hub.
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🪵 Holzwerken · 🖥️ Homelab ·
-📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 26 Module mit 297 Abschnitten.
+📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 27 Module mit 306 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion

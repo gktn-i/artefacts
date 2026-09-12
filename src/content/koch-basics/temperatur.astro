@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<p class="lede">Kerntemperaturen für Fleisch, Fisch und Eier, das Nachgaren nach dem Herausnehmen und die Rauchpunkte der Öle im Überblick. Ein Thermometer für 15 Euro ist das nützlichste Werkzeug in der Küche.</p>
+<p class="lede">Kerntemperaturen für Fleisch, Fisch und Eier, wann was vom Grill oder aus der Pfanne muss und wo es nach dem Ruhen landet und die Rauchpunkte der Öle im Überblick. Ein Thermometer für 15 Euro ist das nützlichste Werkzeug in der Küche.</p>
 
 <div class="kb-kpis">
   <div class="kb-kpi"><div class="v">72 °C</div><div class="k">Geflügel und Hack sicher</div><div class="s">Ab hier sind Salmonellen und Co. abgetötet. Bei Geflügel am dicksten Punkt messen.</div></div>
@@ -31,20 +31,42 @@ import "./_style.css";
 </figure>
 
 <div class="block">
-  <div class="section-label">Nachgaren und Ruhen</div>
+  <div class="section-label">Grill &amp; Pfanne · Rausnehmen und Zieltemperatur</div>
   <div class="kb-tbl-wrap">
     <table class="kb-table">
-      <thead><tr><th>Stück</th><th>Nachgaren</th><th>Ruhezeit</th><th>Rausnehmen bei</th></tr></thead>
+      <thead><tr><th>Stück</th><th>Rausnehmen bei<small>Kern, vom Grill oder aus der Pfanne</small></th><th>Ziel nach Ruhen<small>Endtemperatur</small></th><th>Ruhezeit</th><th>Hinweis</th></tr></thead>
       <tbody>
-        <tr><td>Fischfilet</td><td class="m">+1 bis 2 °C</td><td class="m">1–2 min</td><td>ca. 48 °C für glasig</td></tr>
-        <tr><td>Steak 2–3 cm</td><td class="m">+3 bis 5 °C</td><td class="m">5 min</td><td>ca. 52 °C für Medium Rare</td></tr>
-        <tr><td>Hähnchenbrust</td><td class="m">+3 bis 4 °C</td><td class="m">3–5 min</td><td>ca. 68 °C</td></tr>
-        <tr><td>Braten 1–2 kg</td><td class="m">+5 bis 8 °C</td><td class="m">15–20 min</td><td>je nach Ziel 5 bis 8 °C früher</td></tr>
-        <tr><td>Ganzes Hähnchen</td><td class="m">+5 °C</td><td class="m">15 min</td><td>ca. 70 °C in der Keule</td></tr>
+        <tr class="grp"><td colspan="5">Rind</td></tr>
+        <tr><td>Steak rare</td><td class="m">46–48 °C</td><td class="m">50–52 °C</td><td class="m">5 min</td><td>innen rot, warm</td></tr>
+        <tr><td>Steak medium rare</td><td class="m">50–52 °C</td><td class="m">54–57 °C</td><td class="m">5 min</td><td>der Klassiker, rosa mit rotem Kern</td></tr>
+        <tr><td>Steak medium</td><td class="m">55–57 °C</td><td class="m">60–62 °C</td><td class="m">5 min</td><td>durchgehend rosa</td></tr>
+        <tr><td>Steak well done</td><td class="m">65 °C</td><td class="m">70 °C+</td><td class="m">5 min</td><td>grau, trocken ab 75</td></tr>
+        <tr><td>Roastbeef, Braten 1–2 kg</td><td class="m">50–52 °C</td><td class="m">56–58 °C</td><td class="m">15–20 min</td><td>große Stücke garen 5 bis 8 °C nach</td></tr>
+        <tr><td>Burger, Hackfleisch</td><td class="m">68 °C</td><td class="m">72 °C</td><td class="m">2–3 min</td><td>immer durch, Keime sitzen im ganzen Fleisch</td></tr>
+        <tr class="grp"><td colspan="5">Schwein</td></tr>
+        <tr><td>Kotelett, Nackensteak</td><td class="m">60 °C</td><td class="m">63–65 °C</td><td class="m">3–5 min</td><td>leicht rosa ist heute sicher und saftig</td></tr>
+        <tr><td>Filet</td><td class="m">58 °C</td><td class="m">62–63 °C</td><td class="m">5 min</td><td>mager, wird über 65 schnell trocken</td></tr>
+        <tr><td>Bratwurst roh</td><td class="m">70 °C</td><td class="m">72–75 °C</td><td class="m">1–2 min</td><td>indirekt vorgaren, dann kurz über die Glut</td></tr>
+        <tr><td>Brühwurst, Wiener</td><td class="m">—</td><td class="m">65–70 °C</td><td class="m">—</td><td>nur erwärmen, ist schon gegart</td></tr>
+        <tr><td>Bauch, Ribs, Pulled Pork</td><td class="m">—</td><td class="m">90–95 °C</td><td class="m">10–15 min</td><td>low &amp; slow, Kollagen muss schmelzen</td></tr>
+        <tr class="grp"><td colspan="5">Geflügel</td></tr>
+        <tr><td>Hähnchenbrust</td><td class="m">68 °C</td><td class="m">72–74 °C</td><td class="m">3–5 min</td><td>am dicksten Punkt messen</td></tr>
+        <tr><td>Schenkel, Flügel</td><td class="m">75 °C</td><td class="m">78–82 °C</td><td class="m">5 min</td><td>dunkles Fleisch wird über 74 zarter, nicht trockener</td></tr>
+        <tr><td>Ganzes Hähnchen</td><td class="m">70 °C in der Keule</td><td class="m">74 °C+</td><td class="m">15 min</td><td>zwischen Brust und Schenkel messen, ohne Knochen</td></tr>
+        <tr><td>Entenbrust</td><td class="m">54 °C</td><td class="m">58–62 °C</td><td class="m">5 min</td><td>rosa, Haut vorher bei kleiner Hitze knusprig</td></tr>
+        <tr class="grp"><td colspan="5">Lamm</td></tr>
+        <tr><td>Kotelett, Rücken</td><td class="m">52–54 °C</td><td class="m">56–60 °C</td><td class="m">5 min</td><td>rosa ist der Punkt</td></tr>
+        <tr><td>Keule</td><td class="m">55 °C</td><td class="m">60–63 °C</td><td class="m">15 min</td><td>rosa bis leicht durch</td></tr>
+        <tr class="grp"><td colspan="5">Fisch &amp; Meeresfrüchte</td></tr>
+        <tr><td>Lachs</td><td class="m">45–48 °C</td><td class="m">50–52 °C</td><td class="m">1–2 min</td><td>glasig, weißes Eiweiß tritt aus ab 55</td></tr>
+        <tr><td>Weißfisch, Kabeljau</td><td class="m">52 °C</td><td class="m">55–58 °C</td><td class="m">1–2 min</td><td>blättert gerade auseinander</td></tr>
+        <tr><td>Thunfisch-Steak</td><td class="m">40 °C</td><td class="m">45 °C</td><td class="m">1 min</td><td>außen Kruste, innen roh</td></tr>
+        <tr><td>Garnelen</td><td class="m">—</td><td class="m">60–65 °C</td><td class="m">—</td><td>sobald undurchsichtig und C-förmig, U ist roh, O ist zu lang</td></tr>
       </tbody>
     </table>
   </div>
-  <div class="note">Warum ruhen: Beim Braten drängt der Saft in die Mitte. In der Ruhe verteilt er sich wieder und bleibt beim Anschneiden im Fleisch statt auf dem Brett. Locker mit Folie abdecken, nicht einpacken.</div>
+  <div class="note">Rausnehmen heißt: Thermometer in die dickste Stelle, ohne Knochen oder Fett zu treffen. Die Differenz zum Ziel ist das Nachgaren: dünne Stücke 2 bis 3 °C, Steaks 4 bis 5 °C, große Braten 5 bis 8 °C. Je heißer die Glut und je dicker das Stück, desto mehr.</div>
+  <div class="note">Warum ruhen: Beim Braten drängt der Saft in die Mitte. In der Ruhe verteilt er sich wieder und bleibt beim Anschneiden im Fleisch statt auf dem Brett. Locker mit Folie abdecken, nicht einpacken, sonst weicht die Kruste auf.</div>
 </div>
 
 <div class="block">

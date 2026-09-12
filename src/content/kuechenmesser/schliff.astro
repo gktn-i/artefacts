@@ -1,0 +1,83 @@
+---
+import "./_style.css";
+---
+<p class="lede">Die Schneide im Querschnitt: beidseitig oder einseitig, welcher Winkel wofür, und warum ein Grad Unterschied spürbar ist.</p>
+
+<figure class="kb-fig">
+  <div class="kb-title">Drei Schneidengeometrien · Querschnitt, stark vergrößert</div>
+  <svg class="km" viewBox="0 0 900 230" role="img" aria-label="Drei Klingenquerschnitte: westlicher Doppelschliff mit 20 Grad je Seite, japanischer Doppelschliff mit 15 Grad je Seite, einseitiger Schliff Kataba mit Hohlkehle Ura auf der Rückseite">
+    <g transform="translate(140,20)">
+      <path class="st" d="M0,0 L44,0 L24,150 L20,150 Z"/>
+      <path class="ang" d="M20,150 L22,116 L24,150 Z"/>
+      <line class="dsh" x1="22" y1="0" x2="22" y2="168"/>
+      <text class="lb" x="22" y="190" text-anchor="middle">Doppelschliff westlich</text>
+      <text class="mm" x="22" y="206" text-anchor="middle">20° je Seite · 40° gesamt · 3 mm Rücken</text>
+    </g>
+    <g transform="translate(450,20)">
+      <path class="st" d="M0,0 L26,0 L14,150 L12,150 Z"/>
+      <path class="core" d="M10,0 L16,0 L14,150 L12,150 Z"/>
+      <path class="ang" d="M12,150 L13,124 L14,150 Z"/>
+      <line class="dsh" x1="13" y1="0" x2="13" y2="168"/>
+      <text class="lb" x="13" y="190" text-anchor="middle">Doppelschliff japanisch</text>
+      <text class="mm" x="13" y="206" text-anchor="middle">12–15° je Seite · 2 mm Rücken · San-Mai-Kern</text>
+    </g>
+    <g transform="translate(740,20)">
+      <path class="st" d="M0,0 L34,0 L34,150 L4,150 C10,120 10,60 0,0 Z"/>
+      <path class="core" d="M26,0 L34,0 L34,150 L30,150 C32,100 32,50 26,0 Z"/>
+      <path class="ang" d="M4,150 L20,150 L34,150 Z"/>
+      <line class="dsh" x1="34" y1="0" x2="34" y2="168"/>
+      <text class="lb" x="20" y="190" text-anchor="middle">Einseitig · Kataba</text>
+      <text class="mm" x="20" y="206" text-anchor="middle">10–15° eine Seite · Ura hinten hohl</text>
+      <text class="mm" x="-14" y="80" text-anchor="end">Ura</text>
+      <text class="mm" x="48" y="80">Fase</text>
+    </g>
+  </svg>
+  <figcaption>Je spitzer der Keil, desto weniger Kraft braucht der Schnitt und desto schneller bricht die Schneide bei Härte. Das einseitige Messer schneidet am saubersten, drückt aber beim Schneiden zur Seite und gibt es für Rechts- und Linkshänder getrennt.</figcaption>
+</figure>
+
+<figure class="kb-fig">
+  <div class="kb-title">Schneidwinkel je Seite · wofür welcher</div>
+  <div class="kb-scale pad-b">
+    <div class="kb-axis">
+      <span style="--p:0%">0°</span><span style="--p:33.3%">10°</span><span style="--p:66.7%">20°</span><span style="--p:100%">30°</span>
+    </div>
+    <div class="kb-body">
+      <div class="kb-vline lft" style="--p:50%"><b>15° · Standard japanisch</b></div>
+      <div class="kb-vline" style="--p:66.7%"><b>20° · Standard westlich</b></div>
+      <div class="kb-row"><div class="kb-bar wet" style="--l:33.3%;--w:16.7%"><span>Yanagiba, Usuba (Kataba) <em>10–15</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar wet" style="--l:40%;--w:10%"><span>Gyuto, Santoku, Petty <em>12–15</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar" style="--l:50%;--w:16.7%"><span>Kochmesser, Office <em>15–20</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar" style="--l:60%;--w:13.3%"><span>Ausbein, Filetier <em>18–22</em></span></div></div>
+      <div class="kb-row"><div class="kb-bar bad lft" style="--l:83.3%;--w:16.7%"><span>Hackbeil <em>25–30</em></span></div></div>
+    </div>
+  </div>
+  <figcaption>Winkel je Seite, also die Hälfte des Gesamtwinkels. Wer ein westliches Messer auf 15° schleift, bekommt es schärfer, muss es aber öfter nachschärfen. Umgekehrt macht ein 20°-Winkel ein Gyuto robuster, aber stumpfer.</figcaption>
+</figure>
+
+<div class="block">
+  <div class="section-label">Schliffarten am Messer</div>
+  <div class="kb-tbl-wrap">
+    <table class="kb-table">
+      <thead><tr><th>Schliff</th><th>Form</th><th>Eigenschaft</th><th>Typisch</th></tr></thead>
+      <tbody>
+        <tr><td>Flachschliff</td><td>gerade Flanken vom Rücken zur Schneide</td><td>dünn, gleitet, Standard bei Japanern</td><td>Gyuto, Nakiri, Petty</td></tr>
+        <tr><td>Balliger Schliff<small>konvex</small></td><td>nach außen gewölbte Flanken</td><td>stabilste Schneide, drückt Scheiben weg</td><td>Solinger Messer, Handgeschmiedetes</td></tr>
+        <tr><td>Hohlschliff</td><td>nach innen gewölbte Flanken</td><td>sehr dünn hinter der Schneide, empfindlich</td><td>selten in der Küche</td></tr>
+        <tr><td>Kataba<small>einseitig</small></td><td>eine Fase, Rückseite hohl (Ura)</td><td>extrem scharf, sauberer Schnitt, zieht zur Seite</td><td>Yanagiba, Deba, Usuba</td></tr>
+        <tr><td>Mikrofase</td><td>zweiter, steilerer Winkel direkt an der Schneide</td><td>stabilisiert dünne Schneiden, schnell nachgeschärft</td><td>viele Werksmesser, Empfehlung für Gyuto</td></tr>
+        <tr><td>Wellenschliff</td><td>gezackte Schneide</td><td>sägt durch Kruste, braucht kaum Pflege, kaum schärfbar</td><td>Brotmesser, Tomatenmesser</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="block">
+  <div class="section-label">Schärfe in Zahlen</div>
+  <div class="ratio-grid">
+    <div class="ratio-item"><span class="r-label">Neue Schneide</span><div class="r-value">~0,5 µm</div><div class="r-sub">Kantenradius frisch vom Stein</div></div>
+    <div class="ratio-item"><span class="r-label">Stumpf</span><div class="r-value">&gt; 5 µm</div><div class="r-sub">quetscht statt schneidet</div></div>
+    <div class="ratio-item"><span class="r-label">Papiertest</span><div class="r-value">ohne Zug</div><div class="r-sub">Zeitungspapier fällt beim Ansetzen</div></div>
+    <div class="ratio-item"><span class="r-label">Tomatentest</span><div class="r-value">Eigengewicht</div><div class="r-sub">Haut öffnet sich ohne Druck</div></div>
+    <div class="ratio-item"><span class="r-label">Grat</span><div class="r-value">fühlbar</div><div class="r-sub">Zeichen, dass die Seite fertig ist</div></div>
+  </div>
+</div>
