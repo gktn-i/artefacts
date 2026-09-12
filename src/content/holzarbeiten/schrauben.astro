@@ -133,7 +133,7 @@ import "./_style.css";
 <h2>Pocket Hole</h2>
 <p>Eine schräg gebohrte Tasche, durch die eine Schraube ins Nachbarteil greift. Schnell, überraschend fest und ohne Leim wieder lösbar — die Bohrung bleibt aber innen sichtbar.</p>
 <figure>
-<svg class="dg l" viewBox="0 0 660 245" role="img" aria-label="Pocket-Hole-Verbindung im Schnitt: eine flach angesetzte Tasche führt die Schraube auf einer Achse von 15 Grad aus dem einen Brett in die Stirnseite des anderen">
+<svg class="dg l" viewBox="0 0 660 245" role="img" aria-label="Pocket-Hole-Verbindung im Schnitt: eine flach angesetzte Tasche führt die Schraube auf einer Achse von 15 Grad aus der Stirnseite des einen Bretts in das Langholz des anderen">
   <rect class="box" x="60" y="120" width="300" height="44"/>
   <rect class="box" x="360" y="56" width="44" height="140"/>
   <path class="gd" d="M250,120 H432"/>
@@ -147,12 +147,67 @@ import "./_style.css";
   <path class="gd" d="M232,104 L262,118"/>
   <text class="lbla" x="240" y="222" text-anchor="middle">Schraube läuft weit im Nachbarteil</text>
   <path class="gd" d="M300,210 L340,168"/>
-  <text class="lbl" x="520" y="112" text-anchor="middle">Deshalb hält sie auch im Hirnholz,</text>
-  <text class="lbl" x="520" y="128" text-anchor="middle">wo eine gerade Schraube versagt</text>
+  <text class="lbl" x="520" y="112" text-anchor="middle">Das Gewinde sitzt im Langholz,</text>
+  <text class="lbl" x="520" y="128" text-anchor="middle">nicht im Hirnholz</text>
 </svg>
-<figcaption>Der flache Winkel ist der Trick: Die Schraube läuft weit im Nachbarteil und hält deshalb auch im Hirnholz, wo eine gerade eingedrehte Schraube fast nichts trägt.</figcaption>
+<figcaption>Der flache Winkel ist der Trick: Die Schraube verlässt das anstoßende Teil durch dessen Stirnseite und greift im durchgehenden Teil ins Langholz. Das anstoßende Teil hält nicht das Gewinde, sondern der Kopf, der sich in der Tasche abstützt.</figcaption>
 </figure>
 
+<h3>Von welcher Seite</h3>
+<figure>
+<svg class="dg l" viewBox="0 0 660 320" role="img" aria-label="Eckverbindung im Schnitt, zweimal. Links richtig: die Tasche sitzt im anstoßenden Brett, die Schraube greift quer zur Faser ins durchgehende Brett. Rechts falsch: die Tasche sitzt im durchgehenden Brett, die Schraube endet im Hirnholz des anstoßenden Bretts">
+  <path class="gd" d="M330,40 V250"/>
+  <!-- RICHTIG: Tasche im anstoßenden Teil, Gewinde quer zur Faser -->
+  <text class="lblb" x="170" y="26" text-anchor="middle">Richtig</text>
+  <rect class="box" x="236" y="46" width="44" height="190"/>
+  <g class="wt"><path d="M245,52 V230 M254,52 V230 M263,52 V230 M272,52 V230"/></g>
+  <rect class="box" x="60" y="118" width="176" height="44"/>
+  <path class="good" d="M236,118 V162"/>
+  <path class="accs" d="M150,162 L188,162 L232,146 L226,138 Z"/>
+  <path class="acc" d="M205,152 L268,135"/>
+  <path class="accf" d="M276,133 L264,132 L267,140 Z"/>
+  <path class="accf" d="M202,143 L208,161 L211,160 L205,142 Z"/>
+  <text class="lbla" x="146" y="200" text-anchor="middle">Tasche</text>
+  <path class="gd" d="M158,194 L172,166"/>
+  <text class="lbla" x="258" y="256" text-anchor="middle">durchgehend</text>
+  <text class="lbla" x="170" y="282" text-anchor="middle">Tasche ins anstoßende Teil</text>
+  <text class="lbl" x="170" y="302" text-anchor="middle">Gewinde greift quer zur Faser — hält</text>
+  <!-- FALSCH: Tasche im durchgehenden Teil, Gewinde ins Hirnholz -->
+  <text class="lblb" x="490" y="26" text-anchor="middle">Falsch</text>
+  <rect class="box" x="556" y="46" width="44" height="190"/>
+  <rect class="box" x="380" y="118" width="176" height="44"/>
+  <g class="wt"><path d="M386,126 H552 M386,134 H552 M386,142 H552 M386,150 H552 M386,158 H552"/></g>
+  <path class="badl" d="M556,118 V162"/>
+  <path class="accs" d="M600,102 L600,140 L558,134 L556,124 Z"/>
+  <path class="acc" d="M588,124 L478,153"/>
+  <path class="accf" d="M470,155 L480,148 L482,156 Z"/>
+  <path class="accf" d="M585,114 L591,134 L588,135 L582,115 Z"/>
+  <text class="lbla" x="620" y="92" text-anchor="end">Tasche</text>
+  <path class="gd" d="M608,98 L601,114"/>
+  <path class="gd" d="M608,150 V206"/>
+  <text class="lbl" x="620" y="218" text-anchor="end">Sichtseite</text>
+  <text class="lbla" x="466" y="256" text-anchor="middle">Fasern laufen parallel zur Schraube</text>
+  <text class="lbla" x="490" y="282" text-anchor="middle">Tasche ins durchgehende Teil</text>
+  <text class="lbl" x="490" y="302" text-anchor="middle">Gewinde endet im Hirnholz — hält kaum</text>
+</svg>
+<figcaption>Die Tasche gehört immer in das Brett, dessen Stirnseite anstößt. Dann greift das Gewinde im durchgehenden Brett quer zur Faser. Dreht man es um, läuft die Schraube längs der Fasern ins Hirnholz und zieht sich unter Last heraus — und die Tasche sitzt außerdem auf der Sichtseite.</figcaption>
+</figure>
+
+<div class="kurz z"><b>Zwei Fragen, dann steht die Seite.</b> Welches Teil stößt mit der Stirnseite an? Dort kommt die Tasche hinein. Welche Fläche sieht später niemand? Dorthin zeigt die Tasche.</div>
+
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="txt">Eckverbindung</th><th>Tasche kommt in</th><th>Gewinde greift in</th><th>Tasche zeigt nach</th></tr></thead>
+<tbody>
+<tr><td><b>Boden oder Regalbrett an Seitenwand</b></td><td class="txt">den Boden</td><td class="txt">die Fläche der Seitenwand</td><td class="txt">unten, ins Fach hinein</td></tr>
+<tr><td><b>Querholz an Stiel</b> (Rahmen)</td><td class="txt">das Querholz</td><td class="txt">die Kante des Stiels</td><td class="txt">nach hinten</td></tr>
+<tr><td><b>Zarge an Tischbein</b></td><td class="txt">die Zarge</td><td class="txt">die Fläche des Beins</td><td class="txt">nach innen, unter die Platte</td></tr>
+<tr><td><b>Leiste an Platte</b></td><td class="txt">die Leiste</td><td class="txt">die Fläche der Platte</td><td class="txt">zur Rückseite</td></tr>
+<tr><td><b>Zwei Bretter in der Breite</b></td><td class="txt">eines der beiden, abwechselnd</td><td class="txt">die Kante des Nachbarbretts</td><td class="txt">auf die Rückseite</td></tr>
+<tr><td><b>Gehrung 45°</b></td><td class="txt">nicht geeignet</td><td class="txt">beide Seiten sind Hirnholz</td><td class="txt">Feder, Domino oder Beschlag nehmen</td></tr>
+</tbody>
+</table></div>
+
+<h3>Maße und Ablauf</h3>
 <div class="tbl-wrap"><table style="min-width:660px">
 <thead><tr><th data-s="num">Materialdicke</th><th data-s="num">Schraubenlänge</th><th>Gewinde</th></tr></thead>
 <tbody>
