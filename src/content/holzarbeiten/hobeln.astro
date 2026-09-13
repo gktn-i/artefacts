@@ -1,0 +1,223 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Hobeln macht eine Fläche gerade, eben und glatt. Schleifen macht sie nur glatt.</p>
+
+<div class="kurz z"><b>Der Hobel folgt der Faser bergab.</b> Wie beim Streicheln eines Katzenfells: In der einen Richtung liegt alles an, in der anderen stellt es sich auf. Reißt es aus, umdrehen.</div>
+
+<h2>Hand oder Maschine</h2>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Aufgabe</th><th>Nimm</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Fläche nach dem Leimen glätten</b></td><td>Putzhobel</td><td class="txt">Feine Späne, keine Schleifspuren, Poren bleiben offen</td></tr>
+<tr><td><b>Kante gerade für die Leimfuge</b></td><td>Raubank oder Abrichte</td><td class="txt">Lange Sohle überbrückt Täler, kurze folgt ihnen</td></tr>
+<tr><td><b>Sägeraues Holz plan bekommen</b></td><td>Abricht- und Dickenhobel</td><td class="txt">Von Hand Stunden, mit Maschine Minuten</td></tr>
+<tr><td><b>Alle Bretter auf gleiche Dicke</b></td><td>Dickenhobel</td><td class="txt">Einzige Methode, die wirklich parallel arbeitet</td></tr>
+<tr><td><b>Tür klemmt, 2 mm müssen weg</b></td><td>Elektrohobel</td><td class="txt">Schnell, am Objekt, Kante danach fasen</td></tr>
+<tr><td><b>Balken oder Bohle grob abtragen</b></td><td>Elektrohobel oder Schrupphobel</td><td class="txt">Viel Abtrag, Oberfläche egal</td></tr>
+<tr><td><b>Fase, Kante brechen, Hirnholz</b></td><td>Einhandhobel</td><td class="txt">Niedriger Schnittwinkel, eine Hand bleibt frei</td></tr>
+<tr><td><b>Zapfen oder Falz anpassen</b></td><td>Simshobel</td><td class="txt">Eisen geht bis in die Ecke</td></tr>
+<tr><td><b>Fläche vor dem Ölen veredeln</b></td><td>Putzhobel oder Japanhobel</td><td class="txt">Gehobelt glänzt mehr als geschliffen, nimmt Öl gleichmäßiger</td></tr>
+</tbody>
+</table></div>
+
+<h2>Handhobel</h2>
+<Profiles
+  label="Hobel"
+  criteria={["Glätten", "Abrichten", "Hirnholz", "Kanten", "Abtrag"]}
+  labels={{ use: "Nimm ihn für" }}
+  items={[
+    { name: "Putzhobel", tag: "Nr. 4, 24 bis 26 cm", scores: [5, 2, 3, 4, 2],
+      pro: "Der Allrounder, feinste Späne, gute Kontrolle",
+      con: "Zu kurz zum Abrichten, folgt jeder Welle",
+      use: "Glätten, Endflächen vor dem Ölen, Leimfugen putzen" },
+    { name: "Raubank", tag: "Nr. 7, 55 bis 60 cm", scores: [4, 5, 2, 5, 3],
+      pro: "Lange Sohle macht wirklich gerade, Fügen von Kanten",
+      con: "Schwer, unhandlich auf kleinen Teilen",
+      use: "Kanten fügen, Flächen abrichten, Tischplatten" },
+    { name: "Doppelhobel", tag: "Nr. 5, 35 cm", scores: [4, 3, 3, 4, 4],
+      pro: "Mittelweg aus beidem, ein Hobel für fast alles",
+      con: "Kann nichts perfekt",
+      use: "Den ersten Hobel, wenn nur einer sein darf" },
+    { name: "Einhandhobel", tag: "Nr. 60½, Flachwinkel", scores: [3, 1, 5, 5, 1],
+      pro: "Schnittwinkel 37°, geht in Hirnholz ohne Ausriss, passt in die Tasche",
+      con: "Zu klein für Flächen",
+      use: "Fasen, Kanten brechen, Hirnholz, Dübel bündig" },
+    { name: "Schrupphobel", tag: "gewölbtes Eisen", scores: [1, 3, 1, 1, 5],
+      pro: "Nimmt Späne bis 1 mm, schnell grob plan",
+      con: "Hinterlässt Rillen, danach Raubank nötig",
+      use: "Sägeraues Holz, Verwindung rausnehmen" },
+    { name: "Simshobel", tag: "Eisen über volle Breite", scores: [3, 2, 4, 5, 2],
+      pro: "Arbeitet bis in die Ecke, auch quer",
+      con: "Verläuft leicht, braucht Anschlag oder Führung",
+      use: "Falze, Zapfenschultern, Nuten säubern" },
+    { name: "Japanhobel", tag: "Kanna, auf Zug", scores: [5, 3, 3, 3, 2],
+      pro: "Hauchdünne Späne, spiegelnde Fläche, leicht",
+      con: "Holzkörper muss abgerichtet werden, Einstellen mit Hammer braucht Übung",
+      use: "Endflächen, Furnierdicke, Fasen an Sichtkanten" },
+  ]}
+  note="Nr. nach Stanley-System, das fast alle Hersteller übernommen haben. Punkte höher = besser." />
+
+<h2>Maschinen</h2>
+<Profiles
+  label="Maschine"
+  criteria={["Abtrag", "Plan", "Parallel", "Oberfläche", "Sicherheit"]}
+  labels={{ use: "Nimm sie für" }}
+  items={[
+    { name: "Elektrohobel", tag: "82 mm, bis 3 mm Span", scores: [4, 2, 1, 3, 3],
+      pro: "Schnell, am Werkstück statt auf der Maschine, Fasenut für Kanten",
+      con: "Macht Flächen nicht plan, Ansatzstufen, Ausriss am Ende",
+      use: "Türen, Balken, Bohlen grob, Kanten fasen" },
+    { name: "Abrichthobel", tag: "stationär, 15 bis 25 cm breit", scores: [3, 5, 1, 4, 2],
+      pro: "Erste Fläche und Kante plan und im Winkel",
+      con: "Macht nichts parallel, offene Messerwelle",
+      use: "Erste Fläche, dann die Kante im 90°" },
+    { name: "Dickenhobel", tag: "stationär, Vorschub automatisch", scores: [4, 3, 5, 4, 4],
+      pro: "Parallel auf ein Zehntel, viele Bretter gleich dick",
+      con: "Kopiert eine krumme Unterseite, Einlaufkerbe an den Enden",
+      use: "Dicke und Breite nach dem Abrichten" },
+    { name: "Abricht-Dickenhobel", tag: "ADH, kombiniert", scores: [4, 4, 5, 4, 3],
+      pro: "Beides in einer Maschine, platzsparend",
+      con: "Umbau bei jedem Wechsel, kurze Tische",
+      use: "Die Hobbywerkstatt, die sägerau kauft" },
+  ]}
+  note="Sicherheit heißt hier: wie viel kann bei normalem Gebrauch passieren. Die Abrichte hat die meisten Unfälle." />
+
+<h2>Faserrichtung</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Zwei Bretter im Schnitt mit schräg laufenden Fasern. Links hobelt der Hobel bergab mit der Faser, der Span löst sich sauber. Rechts hobelt er bergauf gegen die Faser und reißt Fasern heraus">
+  <path class="gd" d="M330,30 V200"/>
+  <!-- links: mit der Faser -->
+  <text class="lblb" x="160" y="24" text-anchor="middle">Mit der Faser</text>
+  <rect class="box" x="40" y="70" width="240" height="90"/>
+  <path class="w" d="M40,160 L280,110 M40,140 L240,98 M40,120 L200,86 M40,100 L160,76 M80,160 L280,120 M120,160 L280,130 M160,160 L280,140 M200,160 L280,150"/>
+  <path class="acc" d="M90,58 H240"/><path class="accf" d="M240,58 l-9,-4 v8 Z"/>
+  <path class="good" d="M40,70 H280"/>
+  <text class="lbla" x="160" y="186" text-anchor="middle">Fasern laufen von der Fläche weg</text>
+  <text class="lbl" x="160" y="206" text-anchor="middle">Span hebt sich sauber ab</text>
+  <!-- rechts: gegen die Faser -->
+  <text class="lblb" x="500" y="24" text-anchor="middle">Gegen die Faser</text>
+  <rect class="box" x="380" y="70" width="240" height="90"/>
+  <path class="w" d="M380,110 L620,160 M420,98 L620,140 M460,86 L620,120 M500,76 L620,100 M380,120 L580,160 M380,130 L540,160 M380,140 L500,160 M380,150 L460,160"/>
+  <path class="acc" d="M430,58 H580"/><path class="accf" d="M580,58 l-9,-4 v8 Z"/>
+  <path class="badl" d="M380,70 H620"/>
+  <path class="badl" d="M470,70 l14,-8 M520,70 l14,-9 M570,70 l12,-7"/>
+  <text class="lbla" x="500" y="186" text-anchor="middle">Fasern laufen in die Fläche hinein</text>
+  <text class="lbl" x="500" y="206" text-anchor="middle">Eisen hebelt Fasern heraus, Ausriss</text>
+</svg>
+<figcaption>Die Fasern an der Kante lesen: Sie sollen vom Hobel weg abfallen. Dreht die Faser im Brett, dreht man das Brett.</figcaption>
+</figure>
+
+<h2>Handhobel einstellen</h2>
+<div class="steps">
+  <div class="step"><h4>Eisen scharf</h4><p>Fase 25°, Mikrofase 30°. Ein stumpfes Eisen drückt statt zu schneiden und reißt aus.</p></div>
+  <div class="step"><h4>Klappe knapp hinter die Schneide</h4><p>Feinschnitt 0,5 bis 1 mm, Grobschnitt 2 mm. Die Klappe bricht den Span, bevor er reißt.</p></div>
+  <div class="step"><h4>Spantiefe von null hochdrehen</h4><p>Eisen zurück, bis nichts mehr kommt, dann vorsichtig vor. Putzspan 0,05 mm, wie Papier durchscheinend.</p></div>
+  <div class="step"><h4>Seitlich ausrichten</h4><p>Die Schneide muss parallel zur Sohle stehen. Über die Kante peilen oder an einem Reststück beide Seiten testen.</p></div>
+  <div class="step"><h4>Sohle wachsen</h4><p>Ein Strich Paraffin oder Kerzenwachs, die Hälfte der Kraft ist weg.</p></div>
+</div>
+
+<h2>Handhobel führen</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4><ul>
+    <li>Am Anfang Druck auf den Knauf vorn, am Ende auf den Griff hinten</li>
+    <li>Hobel leicht schräg zur Faser stellen, schneidet leichter</li>
+    <li>Ganze Länge in einem Zug, nicht absetzen</li>
+    <li>Werkstück gegen einen Anschlag, nicht in die Zwinge quetschen</li>
+    <li>Bei Ausriss sofort Richtung wechseln</li>
+    <li>Im Streiflicht prüfen, Lineal auflegen</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Falsch</h4><ul>
+    <li>Am Ende nach vorn kippen, die Kante wird rund</li>
+    <li>Rückwärts mit Druck zurückziehen, stumpft das Eisen</li>
+    <li>Zu tief einstellen und mit Kraft ausgleichen</li>
+    <li>Am Hirnholz durchhobeln, die hintere Kante platzt aus</li>
+    <li>Hobel auf die Sohle abstellen, seitlich hinlegen</li>
+  </ul></div>
+</div>
+
+<h2>Abrichten von Hand</h2>
+<div class="steps">
+  <div class="step"><h4>1 Bezugsfläche</h4><p>Schrupp- oder Raubank diagonal, dann längs. Mit Lineal und zwei Leisten (Windschnüre) auf Wölbung und Verwindung prüfen. Markieren.</p></div>
+  <div class="step"><h4>2 Bezugskante</h4><p>Raubank längs, mit dem Winkel zur Bezugsfläche prüfen. Erst wenn sie 90° hat, weiter.</p></div>
+  <div class="step"><h4>3 Dicke</h4><p>Mit dem Streichmaß rundum von der Bezugsfläche anreißen, bis zum Riss hobeln.</p></div>
+  <div class="step"><h4>4 Breite</h4><p>Von der Bezugskante anreißen, zweite Kante bis zum Riss hobeln.</p></div>
+</div>
+<p class="note">Die Reihenfolge gilt genauso an der Maschine: Fläche und Kante auf der Abrichte, Dicke und Breite auf dem Dickenhobel.</p>
+
+<h2>Elektrohobel</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Einstellung</th><th data-s="num">Wert</th><th>Wann</th></tr></thead>
+<tbody>
+<tr><td><b>Spantiefe fein</b></td><td>0,3 bis 0,5 mm</td><td class="txt">Letzter Durchgang, Sichtflächen</td></tr>
+<tr><td><b>Spantiefe normal</b></td><td>1 mm</td><td class="txt">Weichholz, mehrere Durchgänge</td></tr>
+<tr><td><b>Spantiefe grob</b></td><td>2 bis 3 mm</td><td class="txt">Nur Weichholz, Balken, Oberfläche egal</td></tr>
+<tr><td><b>Hartholz</b></td><td>max. 1 mm</td><td class="txt">Mehr bremst den Motor und brennt</td></tr>
+<tr><td><b>Fase</b></td><td>V-Nut im vorderen Schuh</td><td class="txt">Kante brechen, 45° ohne Anschlag</td></tr>
+<tr><td><b>Falz</b></td><td>Parallel- und Tiefenanschlag</td><td class="txt">Bis zur Falztiefe der Maschine, meist 9 bis 20 mm</td></tr>
+</tbody>
+</table></div>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4><ul>
+    <li>Ansetzen: vorderer Schuh liegt auf, Maschine läuft schon, dann vorschieben</li>
+    <li>Am Ende Druck auf den hinteren Schuh, sonst Kerbe an der Kante</li>
+    <li>Gleichmäßiger Vorschub, ohne Anhalten</li>
+    <li>Kanten von beiden Seiten zur Mitte oder Reststück hinter dem Werkstück</li>
+    <li>Absaugung oder Spansack, Auswurf zur Seite ohne Person</li>
+    <li>Nach dem Ausschalten auf den Parkfuß stellen, Messer läuft nach</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Falsch</h4><ul>
+    <li>Fläche eben hobeln wollen, das Gerät macht Wellen und Stufen</li>
+    <li>Über Nägel, Schrauben oder beschichtete Platten</li>
+    <li>Stumpfe Messer weiterfahren, Fläche wird faserig</li>
+    <li>Einhändig oder mit dem Kabel im Weg</li>
+    <li>Furnier oder dünne Platten</li>
+  </ul></div>
+</div>
+
+<h2>Abrichte und Dickenhobel</h2>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Regel</th><th>Abrichte</th><th>Dickenhobel</th></tr></thead>
+<tbody>
+<tr><td><b>Abtrag pro Durchgang</b></td><td>1 bis 2 mm</td><td>0,5 bis 1,5 mm, Hartholz weniger</td></tr>
+<tr><td><b>Mindestlänge Werkstück</b></td><td>30 cm, Hände nie über der Welle</td><td>Länger als der Abstand der Walzen, meist 25 cm</td></tr>
+<tr><td><b>Hilfsmittel</b></td><td>Schiebeholz, Schutzhaube bis ans Werkstück</td><td>Auslauftisch stützen, Zulage bei dünnem Holz</td></tr>
+<tr><td><b>Verwundenes Brett</b></td><td>Hohle Seite nach unten, nicht kippeln</td><td>Erst abrichten, sonst kopiert er die Krümmung</td></tr>
+<tr><td><b>Einlaufkerbe</b></td><td>Hinterer Tisch genau auf Messerkreis</td><td>10 cm Zugabe, Enden abschneiden oder Zulage vor und hinter</td></tr>
+<tr><td><b>Rillen in der Fläche</b></td><td>Messerscharte, Messer versetzen</td><td>Messer wechseln oder seitlich versetzen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Hirnholz</h2>
+<div class="grid">
+  <div class="card"><h3>Von beiden Seiten</h3><p>Bis zur Mitte hobeln, dann umdrehen. Die Kante, an der das Eisen austritt, platzt sonst aus.</p></div>
+  <div class="card"><h3>Oder Opferklotz</h3><p>Ein Reststück bündig hinter die Austrittskante spannen. Das Reststück platzt, das Werkstück nicht.</p></div>
+  <div class="card"><h3>Oder Fase vorher</h3><p>Eine kleine Fase an der Austrittskante. Reicht, wenn die Kante später sowieso gebrochen wird.</p></div>
+  <div class="card acc"><h3>Flach und scharf</h3><p>Niedriger Schnittwinkel, frisch abgezogen, Späne hauchdünn, Hobel schräg. Ein Tropfen Wasser oder Spiritus auf dem Hirnholz hilft.</p></div>
+</div>
+
+<h2>Fehler</h2>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Symptom</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Ausriss</b></td><td class="txt">Gegen die Faser, Spanöffnung zu weit, Eisen stumpf</td><td class="txt">Richtung wechseln, Klappe näher, schärfen, dünner einstellen</td></tr>
+<tr><td><b>Hobel rattert</b></td><td class="txt">Eisen zu weit draußen, Klappe lose, Werkstück federt</td><td class="txt">Zurückdrehen, Klappe fest, Werkstück näher an der Auflage</td></tr>
+<tr><td><b>Span klemmt im Maul</b></td><td class="txt">Klappe liegt nicht dicht am Eisen</td><td class="txt">Klappenkante plan schleifen, fest anziehen</td></tr>
+<tr><td><b>Fläche wird hohl</b></td><td class="txt">Druck an den Enden falsch, zu kurzer Hobel</td><td class="txt">Vorn beginnen mit Druck vorn, hinten enden mit Druck hinten, längere Sohle</td></tr>
+<tr><td><b>Fläche wird ballig</b></td><td class="txt">Mitte wird öfter überfahren als die Enden</td><td class="txt">Ganze Züge, mit Lineal prüfen, zuerst nur die hohen Stellen</td></tr>
+<tr><td><b>Kante nicht im Winkel</b></td><td class="txt">Eisen seitlich schief, Hobel gekippt</td><td class="txt">Eisen ausrichten, Daumen als Anschlag unter die Sohle</td></tr>
+<tr><td><b>Elektrohobel: Stufe am Ende</b></td><td class="txt">Vorderer Schuh fällt über die Kante</td><td class="txt">Am Ende Druck nach hinten, Reststück dahinter</td></tr>
+<tr><td><b>Dickenhobel: Kerbe an den Enden</b></td><td class="txt">Nur eine Walze hält das Brett</td><td class="txt">Tische stützen, Brett anheben beim Ein- und Auslauf, Zugabe</td></tr>
+</tbody>
+</table></div>
+
+<div class="stop"><b>Abrichte und Elektrohobel.</b> Kein Werkstück unter 30 cm auf der Abrichte, Schiebeholz statt Finger. Elektrohobel erst ablegen, wenn das Messer steht.</div>
+
+<h2>Quellen zu diesem Abschnitt</h2>
+<ul class="srcs">
+  <li>Christopher Schwarz, <i>Handplane Essentials</i>: Einstellung, Abrichtreihenfolge, Faserrichtung.</li>
+  <li>Dictum und Feine Werkzeuge, Ratgeber Hobel: Typen, Winkel, Einstellung von Klappe und Spanöffnung.</li>
+  <li>Bedienungsanleitungen Bosch GHO, Makita KP, Festool HL: Spantiefen, Falztiefen, Parkfuß, Nachlauf.</li>
+  <li>DGUV, BG Holz und Metall: Sicheres Arbeiten an Abricht- und Dickenhobelmaschinen, Mindestlängen und Schiebeholz.</li>
+</ul>

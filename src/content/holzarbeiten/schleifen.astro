@@ -1,5 +1,23 @@
 ---
 import "./_style.css";
+/* Körnungstabelle: Abtrag und Feinheit als Punkte (1–5), Zahl für Screenreader und Sortierung. */
+const grits = [
+  { g: "P24 bis P36", k: "sehr grob", a: 5, f: 1, w: "Alte Farbe, Rost, grobe Form", n: "Alles, was danach noch schön werden soll" },
+  { g: "P40", k: "sehr grob", a: 5, f: 1, w: "Form geben, Kanten runden, Bandschleifer", n: "Furnier, Platten mit Deckschicht" },
+  { g: "P60", k: "grob", a: 4, f: 1, w: "Sägeraues Holz, Leimnasen, Übermaß weg", n: "Als Endschliff, Riefen bleiben sichtbar" },
+  { g: "P80", k: "grob", a: 4, f: 2, w: "Startkörnung für Massivholz, Hobel- und Sägespuren", n: "Weiche Hölzer, die schnell wellig werden" },
+  { g: "P100", k: "mittel", a: 3, f: 2, w: "Startkörnung für gehobeltes Holz und Multiplex", n: "Zwischenschliff auf Lack" },
+  { g: "P120", k: "mittel", a: 3, f: 3, w: "Die Stufe, die man nie auslässt, Kanten brechen", n: "Endschliff vor Öl, zu grob" },
+  { g: "P150", k: "mittel", a: 2, f: 3, w: "Zwischenstufe bei Hartholz, MDF vor Grundierung", n: "Nichts, kann man auch überspringen" },
+  { g: "P180", k: "fein", a: 2, f: 4, w: "Endschliff vor Öl und Wachs, Weichholz vor Lack", n: "Unter dem Lack bei Hochglanz" },
+  { g: "P220 bis P240", k: "fein", a: 2, f: 4, w: "Endschliff vor Lack und Beize, Hartholz vor Öl", n: "Vor Öl auf Weichholz, Poren schließen sich" },
+  { g: "P280 bis P320", k: "sehr fein", a: 1, f: 4, w: "Zwischenschliff auf Grundierung und Lack, Schleifvlies fein", n: "Rohes Holz, bringt nichts mehr" },
+  { g: "P400", k: "sehr fein", a: 1, f: 5, w: "Letzter Zwischenschliff vor der Endlackierung, Hartwachsöl zwischen den Schichten", n: "Rohes Holz" },
+  { g: "P600 bis P800", k: "sehr fein", a: 1, f: 5, w: "Nassschliff auf Lack, Schellack, Staubeinschlüsse", n: "Alles außer Lackflächen" },
+  { g: "P1000 bis P1500", k: "polieren", a: 1, f: 5, w: "Hochglanzlack vor der Politur, Nassschliff", n: "Öl, Wachs, rohes Holz" },
+  { g: "P2000 bis P3000", k: "polieren", a: 1, f: 5, w: "Polieren, Klavierlack, Epoxid", n: "Alles, was matt bleiben soll" },
+];
+const dots = (n) => Array.from({ length: 5 }, (_, k) => k < n);
 ---
 <p class="lede">Schleifen ist kein Abtragen, sondern ein kontrolliertes Verfeinern von Kratzern. Jede Körnung entfernt genau die Spuren der vorherigen — mehr nicht.</p>
 
@@ -15,6 +33,32 @@ import "./_style.css";
   <div class="rung"><div class="g">320–400</div><div class="w">Zwischenschliff auf der Lackschicht, nicht auf dem Holz</div></div>
 </div>
 
+<h2>Alle Körnungen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr>
+  <th data-s="num">Körnung</th>
+  <th data-s="txt">Klasse</th>
+  <th data-s="num" class="pch">Abtrag</th>
+  <th data-s="num" class="pch">Feinheit</th>
+  <th>Wofür</th>
+  <th>Nicht für</th>
+</tr></thead>
+<tbody>
+{grits.map((r) => (
+  <tr>
+    <td><b>{r.g}</b></td>
+    <td>{r.k}</td>
+    <td class="pc neutral" title={`${r.a} von 5`}><span class="dots" aria-hidden="true">{dots(r.a).map((on) => <i class={on ? "on" : undefined}></i>)}</span><span class="sr">{r.a} von 5</span></td>
+    <td class="pc neutral" title={`${r.f} von 5`}><span class="dots" aria-hidden="true">{dots(r.f).map((on) => <i class={on ? "on" : undefined}></i>)}</span><span class="sr">{r.f} von 5</span></td>
+    <td class="txt">{r.w}</td>
+    <td class="txt">{r.n}</td>
+  </tr>
+))}
+</tbody>
+</table></div>
+<p class="note">P nach FEPA, die Skala auf europäischem Schleifpapier. Schleifvlies: grob ≈ P100, mittel ≈ P180, fein ≈ P320, sehr fein ≈ P500. Vlies folgt Profilen und setzt sich auf Öl kaum zu.</p>
+
+<h2>Welche Folge wofür</h2>
 <div class="tbl-wrap"><table style="min-width:700px">
 <thead><tr><th>Vorhaben</th><th>Folge</th><th>Warum</th></tr></thead>
 <tbody>

@@ -2635,8 +2635,8 @@
        "name": "Holzarbeiten",
        "icon": "🪵",
        "kind": "Referenz",
-       "updated": "2026-09-08",
-       "desc": "Material, Verbindungen, Bearbeitung und Projekte: welches Holz wofür taugt, wie stark es arbeitet, welche Verbindung hält, welche Säge welchen Schnitt macht. Tabellen und Faustregeln statt langer Texte.",
+       "updated": "2026-09-13",
+       "desc": "Material, Verbindungen, Bearbeitung und Projekte: welches Holz wofür taugt, welche Verbindung hält, welche Säge welchen Schnitt macht, wie man hobelt, schleift und welches Öl oder welcher Lack wohin gehört. Tabellen und Faustregeln statt langer Texte.",
        "tags": [
         "holz",
         "holzarbeiten",
@@ -2856,7 +2856,54 @@
         "falzfräsen",
         "nutfräsen",
         "bündigfräsen",
-        "kantenprofil"
+        "kantenprofil",
+        "hobeln",
+        "handhobel",
+        "putzhobel",
+        "raubank",
+        "einhandhobel",
+        "schrupphobel",
+        "simshobel",
+        "japanhobel",
+        "kanna",
+        "elektrohobel",
+        "abrichthobel",
+        "abrichte",
+        "dickenhobel",
+        "adh",
+        "spantiefe",
+        "klappe",
+        "spanöffnung",
+        "faserrichtung",
+        "körnungen",
+        "fepa",
+        "schleifvlies",
+        "öl",
+        "öle",
+        "tungöl",
+        "hartöl",
+        "arbeitsplattenöl",
+        "danish oil",
+        "mineralöl",
+        "paraffinöl",
+        "bienenwachs",
+        "lack",
+        "acryllack",
+        "pu-lack",
+        "2k",
+        "alkydharzlack",
+        "bootslack",
+        "nitrolack",
+        "schellack",
+        "parkettversiegelung",
+        "versiegelung",
+        "dünnschichtlasur",
+        "dickschichtlasur",
+        "holzschutzgrund",
+        "sperrgrund",
+        "terrassenöl",
+        "trockenzeit",
+        "en 71-3"
        ],
        "sections": [
         {
@@ -2908,12 +2955,20 @@
          "t": "Fräsen"
         },
         {
+         "h": "hobeln",
+         "t": "Hobeln"
+        },
+        {
          "h": "schleifen",
          "t": "Schleifen"
         },
         {
          "h": "oberflaechen",
          "t": "Oberflächen"
+        },
+        {
+         "h": "oele",
+         "t": "Öle & Lacke"
         },
         {
          "h": "messen",
@@ -2966,8 +3021,10 @@
           "saegearten",
           "saegen",
           "fraesen",
+          "hobeln",
           "schleifen",
-          "oberflaechen"
+          "oberflaechen",
+          "oele"
          ]
         },
         {
@@ -3006,7 +3063,7 @@
         "einstieg": "start",
         "fehlersuche": "fehler",
         "feuchtigkeit": "feuchte",
-        "finish": "oberflaechen",
+        "finish": "oele",
         "fraeser": "fraesen",
         "fraeserarten": "fraesen",
         "fraestisch": "fraesen",
@@ -3026,7 +3083,7 @@
         "kleber": "leim",
         "koernung": "schleifen",
         "kreissaege": "saegen",
-        "lack": "oberflaechen",
+        "lack": "oele",
         "landkarte": "start",
         "laubholz": "holzarten",
         "lexikon": "glossar",
@@ -3041,7 +3098,7 @@
         "nagler": "nageln",
         "oberflaeche": "oberflaechen",
         "oberfraese": "fraesen",
-        "oel": "oberflaechen",
+        "oel": "oele",
         "osb": "platten",
         "plattenwerkstoffe": "platten",
         "pocket-hole": "verbindungen",
@@ -3074,7 +3131,19 @@
         "winkel": "messen",
         "zapfen": "verbindungen",
         "zinken": "verbindungen",
-        "zwingen": "leim"
+        "zwingen": "leim",
+        "hobel": "hobeln",
+        "handhobel": "hobeln",
+        "elektrohobel": "hobeln",
+        "dickenhobel": "hobeln",
+        "abrichte": "hobeln",
+        "koernungen": "schleifen",
+        "körnung": "schleifen",
+        "öl": "oele",
+        "öle": "oele",
+        "lacke": "oele",
+        "lasur": "oele",
+        "versiegelung": "oele"
        }
       }
      ]

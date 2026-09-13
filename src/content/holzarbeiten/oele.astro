@@ -1,0 +1,183 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Öl zieht ein, Lack legt sich drauf, Lasur macht beides ein bisschen. Welches Mittel wohin gehört, hängt an drei Fragen: Wie nass, wie oft angefasst, wie leicht soll die Reparatur sein.</p>
+
+<div class="kurz z"><b>Drei Fragen, dann steht das Mittel.</b> Kommt Wasser dran? Wird es oft berührt oder gestellt? Muss es später punktuell reparierbar sein?</div>
+
+<h2>Öle und Wachse</h2>
+<Profiles
+  label="Mittel"
+  criteria={["Schutz", "Wasser", "Reparierbar", "Trocknet schnell", "Lebensmittel"]}
+  items={[
+    { name: "Leinöl, roh", tag: "Naturöl ohne Zusatz", scores: [1, 1, 5, 1, 5],
+      pro: "Dringt tief ein, billig, unbedenklich, betont die Maserung",
+      con: "Härtet tagelang, bleibt lange klebrig, gilbt und dunkelt stark",
+      use: "Holzgriffe, Schneidebretter, Spielzeug, Werkbankplatte" },
+    { name: "Leinölfirnis", tag: "Leinöl mit Trockenstoff", scores: [2, 2, 5, 2, 3],
+      pro: "Trocknet über Nacht, warmer Ton, günstig",
+      con: "Wenig Schutz, gilbt, viele Schichten nötig",
+      use: "Werkbank, Gartenbank mit jährlicher Pflege, Innenausbau rustikal" },
+    { name: "Tungöl", tag: "Holzöl, Chinaöl", scores: [3, 4, 5, 2, 4],
+      pro: "Wasserfester als Leinöl, gilbt kaum, rein lebensmittelecht",
+      con: "1 bis 3 Tage je Schicht, 3 bis 5 Schichten, teurer",
+      use: "Tischplatten, Küchenholz, Außenmöbel überdacht" },
+    { name: "Hartöl", tag: "Öl mit Harz", scores: [4, 3, 4, 3, 3],
+      pro: "Guter Kompromiss, 2 Schichten reichen, seidig",
+      con: "Weniger wasserfest als Hartwachsöl",
+      use: "Möbel, Regale, Türen innen" },
+    { name: "Hartwachsöl", tag: "Öl plus Wachs", scores: [4, 4, 5, 3, 4],
+      pro: "Der Standard für Möbel und Böden, wasserabweisend, lokal nachölbar",
+      con: "Bleibt weicher als Lack, Tassenränder bei heißen Tassen",
+      use: "Esstisch, Arbeitsplatte, Parkett, Treppe, Kinderzimmer" },
+    { name: "Arbeitsplattenöl", tag: "Hartöl lebensmittelecht", scores: [4, 4, 5, 3, 5],
+      pro: "Für Küche ausgelegt, EN 71-3 und DIN 53160 auf der Dose",
+      con: "Muss jährlich nachgeölt werden",
+      use: "Küchenarbeitsplatte, Esstisch, Frühstücksbrett" },
+    { name: "Danish Oil", tag: "Öl-Lack-Mischung", scores: [3, 3, 4, 4, 2],
+      pro: "Dünn, schnell, mehrere Schichten am Tag, seidiger Glanz",
+      con: "Wenig Aufbau, empfindlich gegen Wasserflecken",
+      use: "Kleinmöbel, Drechselarbeiten, Kästen" },
+    { name: "Mineralöl", tag: "Paraffinöl, Schneidebrettöl", scores: [1, 2, 5, 5, 5],
+      pro: "Ranzt nicht, geschmacklos, jederzeit nachölbar",
+      con: "Härtet nie aus, kein Schutz gegen Kratzer, wäscht sich raus",
+      use: "Schneidebrett, Kochlöffel, Salatbesteck" },
+    { name: "Wachs", tag: "Bienen-, Carnauba-, Balsamwachs", scores: [2, 1, 5, 4, 4],
+      pro: "Fühlt sich am besten an, sofort fertig, über Öl als Finish",
+      con: "Wasser und Wärme hinterlassen Flecken, darüber haftet nichts mehr",
+      use: "Schubladen, Innenflächen, Drechselarbeiten, über Hartwachsöl" },
+  ]}
+  note="Lebensmittel heißt: nach vollständiger Aushärtung unbedenklich bei Kontakt mit Speisen. Bei Kinderspielzeug zusätzlich EN 71-3 auf der Dose suchen." />
+
+<h2>Lacke, Lasuren und Versiegelungen</h2>
+<Profiles
+  label="Mittel"
+  criteria={["Schutz", "Wasser", "Reparierbar", "Geruch gering", "Außen"]}
+  items={[
+    { name: "Wasserlack 1K", tag: "Acryl, klar oder bunt", scores: [3, 4, 2, 5, 2],
+      pro: "Geruchsarm, in 1 bis 2 Stunden staubtrocken, gilbt nicht",
+      con: "Stellt Fasern auf, wässern nötig, weicher als 2K",
+      use: "Regale, Kinderzimmer, Kiefer und Ahorn hell halten" },
+    { name: "PU-Lack 2K", tag: "Polyurethan mit Härter", scores: [5, 5, 1, 2, 3],
+      pro: "Härtester Film, chemikalien- und wasserfest",
+      con: "Topfzeit, Isocyanat, Atemschutz A2P2, bei Schaden komplett runter",
+      use: "Küchenfronten, Bad, Tischplatten im Dauerbetrieb" },
+    { name: "Alkydharzlack", tag: "Kunstharz, lösemittelhaltig", scores: [4, 4, 2, 1, 4],
+      pro: "Verläuft glatt ohne Pinselspuren, robust, auch außen",
+      con: "12 bis 24 Stunden je Schicht, gilbt, riecht tagelang",
+      use: "Türen, Fenster, Zargen, Buntlack außen" },
+    { name: "Bootslack", tag: "Alkyd oder PU mit UV-Schutz", scores: [4, 5, 2, 1, 5],
+      pro: "Elastisch, bleibt bei Nässe und Sonne intakt",
+      con: "3 bis 5 Schichten, jährlich anschleifen und nachlackieren",
+      use: "Gartenmöbel lackiert, Haustür, Holz am Wasser" },
+    { name: "Nitrolack", tag: "Cellulose, sehr dünn", scores: [2, 2, 5, 1, 1],
+      pro: "In 30 Minuten trocken, Schichten verschmelzen, lokal ausbesserbar",
+      con: "Wenig Chemikalienschutz, starker Geruch, dünne Schichten",
+      use: "Instrumente, Kleinmöbel, Restaurierung" },
+    { name: "Schellack", tag: "Naturharz in Spiritus", scores: [2, 1, 5, 3, 1],
+      pro: "Warmer Ton, in Minuten trocken, sperrt Harz und Gerbsäure",
+      con: "Alkohol und heiße Tassen hinterlassen Ringe",
+      use: "Antiquitäten, Isoliergrund unter hellem Lack, Innenflächen" },
+    { name: "Parkettversiegelung 2K", tag: "Wasserlack mit Härter", scores: [5, 5, 1, 4, 1],
+      pro: "Belastbar wie PU, geruchsarm, vergilbt nicht",
+      con: "Topfzeit, teuer, Ausbesserung nur flächig",
+      use: "Böden, Treppen, Werkstattboden aus Holz" },
+    { name: "Dünnschichtlasur", tag: "zieht ein, kein Film", scores: [2, 3, 5, 2, 5],
+      pro: "Blättert nie ab, Nachstreichen ohne Anschliff, UV-Pigmente",
+      con: "Alle 2 bis 3 Jahre, wenig Schutz gegen Abrieb",
+      use: "Zaun, Carport, sägeraues Holz, Gartenmöbel" },
+    { name: "Dickschichtlasur", tag: "bildet Film", scores: [4, 4, 2, 2, 5],
+      pro: "4 bis 6 Jahre Standzeit, Maserung bleibt sichtbar",
+      con: "Blättert an Schadstellen, dann komplett anschleifen",
+      use: "Fenster, Haustür, maßhaltige Bauteile" },
+    { name: "Holzschutzgrund", tag: "Imprägnierung, Biozid", scores: [1, 2, 3, 1, 5],
+      pro: "Gegen Bläue und Fäulnis, unter jede Außenlasur",
+      con: "Allein kein Wetterschutz, nicht innen",
+      use: "Erste Schicht auf Zaun, Fenster, Gartenhaus" },
+    { name: "Sperrgrund", tag: "Isoliergrund", scores: [1, 2, 3, 3, 3],
+      pro: "Hält Gerbsäure, Harz und Nikotin unter der Deckschicht",
+      con: "Kein Schutz für sich, nur Zwischenschicht",
+      use: "Eiche unter Wasserlack, Kiefernäste unter Weiß" },
+    { name: "Terrassenöl", tag: "pigmentiertes Außenöl", scores: [2, 3, 5, 2, 5],
+      pro: "Verhindert Vergrauen, einfach nachölen",
+      con: "Jährlich, Lappen entzünden sich, dunkelt",
+      use: "Terrasse, Gartenmöbel, Sichtschutz" },
+  ]}
+  note="Reparierbar heißt: Schaden lokal ausbessern ohne die ganze Fläche abzuschleifen. Punkte höher = besser." />
+
+<h2>Wann welches</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Situation</th><th>Nimm</th><th>Alternative</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Esstisch Massivholz</b></td><td>Hartwachsöl</td><td>PU-Lack 2K</td><td class="txt">Wasserränder lokal nachölen statt komplett neu lackieren</td></tr>
+<tr><td><b>Küchenarbeitsplatte</b></td><td>Arbeitsplattenöl</td><td>PU-Lack 2K</td><td class="txt">Lebensmittelecht und nachölbar, Lack ist pflegefrei aber endgültig</td></tr>
+<tr><td><b>Schneidebrett</b></td><td>Mineralöl</td><td>Tungöl rein</td><td class="txt">Ranzt nicht, geschmacklos, sofort wieder nachölbar</td></tr>
+<tr><td><b>Kinderspielzeug</b></td><td>Leinöl oder Hartwachsöl mit EN 71-3</td><td>Wasserlack mit EN 71-3</td><td class="txt">Speichel- und schweißecht muss auf der Dose stehen</td></tr>
+<tr><td><b>Küchenfront MDF</b></td><td>Wasserlack deckend</td><td>PU-Lack 2K</td><td class="txt">Filmbildend, abwischbar, Kanten vorher zweimal füllern</td></tr>
+<tr><td><b>Regal Kiefer hell</b></td><td>Wasserlack klar</td><td>Hartwachsöl weiß pigmentiert</td><td class="txt">Öl und Alkyd lassen Kiefer in Monaten orange werden</td></tr>
+<tr><td><b>Eiche hell halten</b></td><td>Hartwachsöl weiß oder Wasserlack</td><td>Seifenlauge, skandinavisch</td><td class="txt">Jedes klare Öl macht Eiche honigfarben</td></tr>
+<tr><td><b>Werkbankplatte</b></td><td>Leinölfirnis</td><td>Nichts</td><td class="txt">Leim haftet schlecht, Reparatur jederzeit, kein Film der abplatzt</td></tr>
+<tr><td><b>Bad, Waschtisch</b></td><td>PU-Lack 2K</td><td>Hartwachsöl, oft nachölen</td><td class="txt">Stehendes Wasser braucht einen Film</td></tr>
+<tr><td><b>Treppe</b></td><td>Parkettversiegelung 2K</td><td>Hartwachsöl</td><td class="txt">Abrieb an der Stufenkante, Lack hält länger</td></tr>
+<tr><td><b>Fenster, Haustür</b></td><td>Dickschichtlasur</td><td>Alkydlack deckend</td><td class="txt">Maßhaltig, Film hält Wasser aus dem Rahmen</td></tr>
+<tr><td><b>Zaun, Carport</b></td><td>Dünnschichtlasur auf Holzschutzgrund</td><td>Nichts, vergrauen lassen</td><td class="txt">Blättert nie, Nachstreichen ohne Schleifen</td></tr>
+<tr><td><b>Gartenmöbel Lärche, Robinie</b></td><td>Nichts</td><td>Terrassenöl</td><td class="txt">Kernholz hält allein, Öl nur gegen Vergrauen</td></tr>
+<tr><td><b>Gartenmöbel Fichte, Kiefer</b></td><td>Dünnschichtlasur</td><td>Bootslack</td><td class="txt">Ohne Schutz in zwei Jahren morsch</td></tr>
+<tr><td><b>Terrasse</b></td><td>Terrassenöl</td><td>Nichts</td><td class="txt">Nur Öl lässt sich begehbar nachpflegen</td></tr>
+<tr><td><b>Instrument, Restaurierung</b></td><td>Schellack</td><td>Nitrolack</td><td class="txt">Reparierbar, dünn, historisch passend</td></tr>
+<tr><td><b>Schublade innen</b></td><td>Wachs</td><td>Nichts</td><td class="txt">Läuft leichter, riecht nicht, kein Schutz nötig</td></tr>
+</tbody>
+</table></div>
+
+<h2>Aufbau und Trockenzeiten</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Mittel</th><th data-s="num">Schichten</th><th>Zwischen den Schichten</th><th>Zwischenschliff</th><th>Voll belastbar</th></tr></thead>
+<tbody>
+<tr><td><b>Hartwachsöl</b></td><td>2</td><td>8 bis 12 h</td><td>Vlies fein</td><td>7 bis 10 Tage</td></tr>
+<tr><td><b>Hartöl, Arbeitsplattenöl</b></td><td>2 bis 3</td><td>8 bis 12 h</td><td>Vlies fein</td><td>7 Tage</td></tr>
+<tr><td><b>Tungöl</b></td><td>3 bis 5</td><td>24 bis 72 h</td><td>Vlies fein</td><td>2 bis 4 Wochen</td></tr>
+<tr><td><b>Leinölfirnis</b></td><td>3 bis 5</td><td>24 h</td><td>keiner</td><td>2 bis 4 Wochen</td></tr>
+<tr><td><b>Mineralöl</b></td><td>bis satt</td><td>6 bis 12 h</td><td>keiner</td><td>sofort</td></tr>
+<tr><td><b>Wachs</b></td><td>1 bis 2</td><td>30 min, dann polieren</td><td>keiner</td><td>1 Tag</td></tr>
+<tr><td><b>Wasserlack 1K</b></td><td>2 bis 3</td><td>4 bis 6 h</td><td>P320</td><td>7 Tage</td></tr>
+<tr><td><b>PU-Lack 2K</b></td><td>2 bis 3</td><td>6 bis 12 h</td><td>P320 bis P400</td><td>7 Tage</td></tr>
+<tr><td><b>Alkydharzlack</b></td><td>2</td><td>12 bis 24 h</td><td>P320</td><td>7 bis 14 Tage</td></tr>
+<tr><td><b>Bootslack</b></td><td>3 bis 5</td><td>12 bis 24 h</td><td>P320</td><td>14 Tage</td></tr>
+<tr><td><b>Nitrolack</b></td><td>3 bis 6</td><td>30 bis 60 min</td><td>P400 nach jeder dritten</td><td>2 Tage</td></tr>
+<tr><td><b>Schellack</b></td><td>4 bis 8</td><td>30 bis 60 min</td><td>P400 oder Vlies</td><td>1 Tag</td></tr>
+<tr><td><b>Dünnschichtlasur</b></td><td>2</td><td>12 bis 24 h</td><td>keiner</td><td>2 Tage</td></tr>
+<tr><td><b>Dickschichtlasur</b></td><td>2 bis 3</td><td>12 bis 24 h</td><td>P240 bis P320</td><td>7 Tage</td></tr>
+</tbody>
+</table></div>
+<p class="note">Richtwerte bei 20 °C und normaler Luftfeuchte. Unter 10 °C oder über 80 % Luftfeuchte verdoppeln sich die Zeiten. Das Merkblatt der Dose gilt vor dieser Tabelle.</p>
+
+<h2>Was sich verträgt</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Geht</h4><ul>
+    <li>Wachs über Öl oder Lack als letzte Schicht</li>
+    <li>Schellack unter fast allem als Sperrgrund</li>
+    <li>Wasserlack über Alkyd, wenn der Alkyd voll ausgehärtet und angeschliffen ist</li>
+    <li>Hartwachsöl über altes Öl, nach Reinigung und Anschliff</li>
+    <li>Beize unter Öl und Lack, immer erst am Reststück testen</li>
+  </ul></div>
+  <div class="gb-col bad"><h4>Geht nicht</h4><ul>
+    <li>Irgendetwas über Wachs oder Silikonpolitur, es haftet nichts mehr</li>
+    <li>Lack über frisches Öl, es bleibt weich und löst sich</li>
+    <li>Wasserlack direkt auf Eiche, die Gerbsäure verfärbt, Sperrgrund dazwischen</li>
+    <li>Mineralöl unter allem, es härtet nie</li>
+    <li>Lasur auf feinem Schliff über P120, sie zieht nicht mehr ein</li>
+  </ul></div>
+</div>
+
+<div class="warn"><b>Erst Reststück, dann Werkstück.</b> Jedes Mittel sieht auf Fichte, Buche und Eiche anders aus. Probestück aus demselben Brett, gleich geschliffen.</div>
+
+<div class="stop"><b>Zwei Sicherheitsregeln.</b> Öllappen flach trocknen oder in Wasser, sie entzünden sich selbst. Bei 2K-Lack Atemschutz A2P2 und Lüftung, Isocyanate sensibilisieren dauerhaft.</div>
+
+<h2>Quellen zu diesem Abschnitt</h2>
+<ul class="srcs">
+  <li>Bob Flexner, <i>Understanding Wood Finishing</i>: Einteilung in eindringende und filmbildende Mittel, Verträglichkeit.</li>
+  <li>USDA Wood Handbook (FPL-GTR-282), Kapitel 16 Finishing of Wood: Standzeiten außen, Dünnschicht gegen Dickschicht.</li>
+  <li>Technische Merkblätter Osmo, Auro, Clou, Remmers, Bondex: Schichten, Trockenzeiten, Belastbarkeit.</li>
+  <li>DIN EN 71-3 (Spielzeug, Migration von Elementen), DIN 53160 (Speichel- und Schweißechtheit), DIN EN 927 (Beschichtungen für Holz im Außenbereich).</li>
+</ul>
