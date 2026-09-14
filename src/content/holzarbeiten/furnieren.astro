@@ -1,0 +1,175 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Furnier ist 0,6 mm echtes Holz auf einer stabilen Platte. Sieht aus wie Massivholz, arbeitet aber nicht und kostet ein Zehntel.</p>
+
+<div class="kurz z"><b>Drei Regeln.</b> Immer beidseitig furnieren, sonst wölbt sich die Platte. Klebeband nur auf die Sichtseite. Nach dem Pressen nur noch fein schleifen, 0,6 mm sind schnell durch.</div>
+
+<h2>Furnierarten</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Art</th><th data-s="num">Dicke</th><th>Herstellung</th><th>Wofür</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Messerfurnier</b></td><td>0,5 bis 0,6 mm</td><td class="txt">Vom Stamm flach abgemessert</td><td class="txt">Der Standard für Möbelflächen</td><td class="txt">Blume oder Streifer je nach Schnittlage</td></tr>
+<tr><td><b>Sägefurnier</b></td><td>1 bis 3 mm</td><td class="txt">Gesägt, beide Seiten gleich</td><td class="txt">Tischplatten, Böden, Reparaturen</td><td class="txt">Verzeiht Schleifen, teuer, wenig Ausbeute</td></tr>
+<tr><td><b>Schälfurnier</b></td><td>0,5 bis 1,5 mm</td><td class="txt">Rund vom drehenden Stamm geschält</td><td class="txt">Sperrholz, Rückwände, Innenflächen</td><td class="txt">Wilde Maserung, große Blätter</td></tr>
+<tr><td><b>Mikrofurnier auf Vlies</b></td><td>0,3 bis 0,5 mm</td><td class="txt">Messerfurnier auf Papier oder Vlies</td><td class="txt">Rundungen, Kanten, Bügelfurnier</td><td class="txt">Reißt nicht, aber null Reserve zum Schleifen</td></tr>
+<tr><td><b>Furnierkante, Umleimer</b></td><td>0,5 mm</td><td class="txt">Streifen mit Schmelzkleber</td><td class="txt">Plattenkanten bündig zur Fläche</td><td class="txt">Mit Bügeleisen, dann Kantenhobel</td></tr>
+<tr><td><b>Fertigfurnier</b></td><td>0,6 mm, gefügt</td><td class="txt">Blätter fertig zusammengesetzt</td><td class="txt">Große Flächen ohne eigenes Fügen</td><td class="txt">Bild schon festgelegt</td></tr>
+</tbody>
+</table></div>
+
+<h2>Furnierbild</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Zwei Möglichkeiten, Furnierblätter nebeneinander zu legen. Links gestürzt: das zweite Blatt ist gespiegelt, die Maserung läuft wie ein aufgeschlagenes Buch. Rechts geschoben: das zweite Blatt ist gleich gelegt, das Muster wiederholt sich">
+  <path class="gd" d="M330,30 V200"/>
+  <text class="lblb" x="160" y="24" text-anchor="middle">Gestürzt · Buch</text>
+  <rect class="box" x="40" y="46" width="118" height="130"/>
+  <rect class="box" x="162" y="46" width="118" height="130"/>
+  <path class="w" d="M158,60 C120,70 100,110 158,150 M158,80 C130,90 118,110 158,132 M158,100 C142,106 140,116 158,118"/>
+  <path class="w" d="M162,60 C200,70 220,110 162,150 M162,80 C190,90 202,110 162,132 M162,100 C178,106 180,116 162,118"/>
+  <path class="good" d="M160,46 V176"/>
+  <text class="lbla" x="160" y="198" text-anchor="middle">Spiegelbild an der Fuge</text>
+  <text class="lbl" x="160" y="216" text-anchor="middle">ruhig, symmetrisch, Standard für Fronten</text>
+  <text class="lblb" x="500" y="24" text-anchor="middle">Geschoben</text>
+  <rect class="box" x="380" y="46" width="118" height="130"/>
+  <rect class="box" x="502" y="46" width="118" height="130"/>
+  <path class="w" d="M498,60 C460,70 440,110 498,150 M498,80 C470,90 458,110 498,132 M498,100 C482,106 480,116 498,118"/>
+  <path class="w" d="M618,60 C580,70 560,110 618,150 M618,80 C590,90 578,110 618,132 M618,100 C602,106 600,116 618,118"/>
+  <path class="good" d="M500,46 V176"/>
+  <text class="lbla" x="500" y="198" text-anchor="middle">Muster wiederholt sich</text>
+  <text class="lbl" x="500" y="216" text-anchor="middle">lebendig, keine Spiegelachse, gleiche Lichtreflexion</text>
+</svg>
+<figcaption>Gestürzt spiegelt jedes zweite Blatt, deshalb wechselt dort die Faserneigung und die Hälften glänzen im Licht verschieden. Geschoben glänzt gleichmäßig, wirkt aber unruhiger.</figcaption>
+</figure>
+
+<h2>Kleber</h2>
+<Profiles
+  label="Kleber"
+  criteria={["Offene Zeit", "Kein Durchschlag", "Wasserfest", "Rundungen", "Einfach"]}
+  items={[
+    { name: "Weißleim D3", tag: "PVAC, kalt gepresst", scores: [2, 2, 3, 2, 5],
+      pro: "Überall da, günstig, 30 bis 60 Minuten Presszeit",
+      con: "8 bis 10 Minuten offene Zeit, bleibt elastisch, schlägt bei dünnem Furnier durch",
+      use: "Kleine und mittlere Flächen mit Zwingen oder Vakuum" },
+    { name: "Harnstoffharz", tag: "UF, Pulver plus Wasser", scores: [4, 5, 4, 2, 2],
+      pro: "20 bis 30 Minuten offen, härtet glashart, kein Durchschlag, kein Kriechen",
+      con: "Anmischen, 4 bis 6 Stunden Presszeit, Formaldehyd beim Aushärten",
+      use: "Große Flächen, Tischplatten, alles, was plan bleiben muss" },
+    { name: "Bügelfurnier", tag: "Weißleim beidseitig getrocknet", scores: [5, 3, 2, 4, 4],
+      pro: "Keine Presse nötig, Bügeleisen reaktiviert den Leim",
+      con: "Nur kleine Flächen, Wärme hebt Fugen an, Blasen bei zu wenig Druck",
+      use: "Schubladenfronten, Kästen, Reparaturen" },
+    { name: "Kontaktkleber", tag: "beidseitig, ablüften", scores: [5, 4, 3, 5, 3],
+      pro: "Sofort fest, kein Pressen, ideal an Rundungen",
+      con: "Kein Verschieben möglich, bleibt weich, zeichnet sich bei Wärme ab",
+      use: "Vliesfurnier an Rundungen, Kanten, Notfälle" },
+    { name: "Schmelzkleber", tag: "auf Furnierkanten", scores: [1, 5, 2, 4, 5],
+      pro: "Bügeleisen, in Sekunden fest, sauber",
+      con: "Löst sich bei Hitze, nur für Kanten",
+      use: "Umleimer auf Plattenkanten" },
+  ]}
+  note="Offene Zeit heißt: wie lange man nach dem Auftragen noch legen und ausrichten kann. Punkte höher = besser." />
+
+<h2>Trägerplatte</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Träger</th><th>Eignung</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>MDF</b></td><td><span class="b ok">beste</span></td><td class="txt">Homogen, plan, saugt gleichmäßig, keine Struktur schlägt durch</td></tr>
+<tr><td><b>Multiplex</b></td><td><span class="b ok">gut</span></td><td class="txt">Stabil, schraubbar, Deckfurnier vorher anschleifen</td></tr>
+<tr><td><b>Spanplatte</b></td><td><span class="b mid">geht</span></td><td class="txt">Günstig, Späne zeichnen sich bei dünnem Furnier ab, Kanten füllen</td></tr>
+<tr><td><b>Tischlerplatte</b></td><td><span class="b mid">geht</span></td><td class="txt">Leicht, Stäbchen können sich nach Jahren abzeichnen, nur quer zu den Stäben</td></tr>
+<tr><td><b>Massivholz</b></td><td><span class="b bad">kaum</span></td><td class="txt">Arbeitet unter dem Furnier, Risse und Ablösung, nur längs zur Faser und nur schmal</td></tr>
+</tbody>
+</table></div>
+
+<h2>Kante zuerst oder Fläche zuerst</h2>
+<div class="grid2">
+  <div class="card"><h3>Kante zuerst</h3><p><b>Ergebnis</b> Von oben sieht man keine Kantenlinie, die Fläche deckt die Kante.</p><p><b>Wann</b> Tischplatten, Fronten, alles mit sichtbarer Oberseite.</p><p><b>Wie</b> Umleimer oder Anleimer bündig, dann Fläche furnieren.</p></div>
+  <div class="card"><h3>Fläche zuerst</h3><p><b>Ergebnis</b> Kantenband liegt über dem Furnier, eine feine Linie bleibt von oben sichtbar.</p><p><b>Wann</b> Regalböden, Seiten, wenn die Kante belastet wird.</p><p><b>Wie</b> Fläche furnieren, bündig fräsen, dann Kante aufbügeln.</p></div>
+</div>
+
+<h2>Ablauf</h2>
+<div class="steps">
+  <div class="step"><h4>Träger vorbereiten</h4><p>Beide Seiten P120, staubfrei, plan. Kanten füllen oder Anleimer setzen. Holzfeuchte 8 bis 10 %.</p></div>
+  <div class="step"><h4>Blätter sortieren</h4><p>Aus einem Bündel, in Reihenfolge lassen. Bild festlegen (gestürzt oder geschoben), Blätter nummerieren. Rundum 15 bis 20 mm Zugabe.</p></div>
+  <div class="step"><h4>Fügen</h4><p>Blätter stapeln, zwischen zwei gerade Bretter spannen, Kante mit Raubank oder Furniersäge am Lineal gerade machen. Fuge muss ohne Licht schließen.</p></div>
+  <div class="step"><h4>Verbinden</h4><p>Blätter mit Fugen zusammenschieben, quer mit Furnierklebeband heften, dann längs über die Fuge. Klebeband nur auf die Sichtseite.</p></div>
+  <div class="step"><h4>Gegenzug legen</h4><p>Rückseite bekommt Furnier gleicher Dicke und Faserrichtung, günstiges reicht. Ohne Gegenzug wölbt sich die Platte in Wochen.</p></div>
+  <div class="step"><h4>Leim auf den Träger</h4><p>Nie aufs Furnier, es rollt sich. Zahnspachtel oder Walze, 120 bis 150 g/m², dünn und lückenlos. Furnier auflegen, ausrichten.</p></div>
+  <div class="step"><h4>Pressen</h4><p>Beide Seiten gleichzeitig. Zulage aus Multiplex, dazwischen Folie oder Backpapier. Vakuum 0,7 bar oder Zwingen alle 15 cm. Presszeit nach Kleber.</p></div>
+  <div class="step"><h4>Aushärten</h4><p>24 Stunden flach liegend, Gewicht drauf. Erst dann bündig arbeiten.</p></div>
+  <div class="step"><h4>Überstand weg</h4><p>Hirnholzkanten zuerst, dann längs. Bündigfräser mit Anlauflager oder Furniermesser am Lineal, immer von außen nach innen zur Platte hin.</p></div>
+  <div class="step"><h4>Klebeband abnehmen</h4><p>Nassklebeband anfeuchten, mit der Ziehklinge abnehmen. Nie trocken abziehen, es reißt Fasern mit.</p></div>
+  <div class="step"><h4>Schleifen</h4><p>P150, P180, P240. Exzenter ohne Druck, Kanten nur von Hand. An der Fuge und an Kanten ist das Furnier zuerst durch.</p></div>
+  <div class="step"><h4>Oberfläche</h4><p>Öl oder Lack wie Massivholz. Beize nur, wenn kein Leim durchgeschlagen ist, sonst Flecken.</p></div>
+</div>
+
+<h2>Zahlen</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Größe</th><th data-s="num">Wert</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Zugabe rundum</b></td><td>15 bis 20 mm</td><td class="txt">Furnier verschiebt sich beim Pressen</td></tr>
+<tr><td><b>Leimmenge</b></td><td>120 bis 150 g/m²</td><td class="txt">Mehr schlägt durch, weniger gibt Blasen</td></tr>
+<tr><td><b>Pressdruck Zwingen</b></td><td>0,2 bis 0,5 N/mm²</td><td class="txt">Zulage 18 mm, Zwingen alle 15 cm, Wölbung in die Zulage hobeln</td></tr>
+<tr><td><b>Vakuum</b></td><td>mind. 0,7 bar</td><td class="txt">Entspricht 7 t je m², gleichmäßig auch auf Rundungen</td></tr>
+<tr><td><b>Presszeit Weißleim</b></td><td>30 bis 60 min</td><td class="txt">Bei 20 °C, danach 24 h nachhärten</td></tr>
+<tr><td><b>Presszeit Harnstoffharz</b></td><td>4 bis 6 h</td><td class="txt">Unter 15 °C härtet er nicht</td></tr>
+<tr><td><b>Furnierklebeband</b></td><td>20 mm, gelocht</td><td class="txt">Gelocht zeigt, ob die Fuge geschlossen ist</td></tr>
+<tr><td><b>Raumklima</b></td><td>18 bis 22 °C, 50 bis 60 %</td><td class="txt">Trockenes Furnier reißt, nasses wellt sich</td></tr>
+</tbody>
+</table></div>
+
+<h2>Gegenzug</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Links eine Platte, die nur oben furniert ist und sich nach oben wölbt. Rechts eine Platte mit Furnier auf beiden Seiten, die plan bleibt">
+  <path class="gd" d="M330,24 V176"/>
+  <text class="lblb" x="160" y="24" text-anchor="middle">Nur eine Seite</text>
+  <path class="wt" d="M50,110 Q160,60 270,110 L270,128 Q160,78 50,128 Z"/>
+  <path class="w" d="M50,110 Q160,60 270,110 L270,128 Q160,78 50,128 Z"/>
+  <path class="badl" d="M50,110 Q160,60 270,110"/>
+  <text class="lbla" x="160" y="158" text-anchor="middle">Furnier schwindet, zieht die Platte hoch</text>
+  <text class="lbl" x="160" y="178" text-anchor="middle">Wölbung kommt nach Wochen, nicht sofort</text>
+  <text class="lblb" x="500" y="24" text-anchor="middle">Beide Seiten</text>
+  <rect class="wt" x="390" y="86" width="220" height="18"/>
+  <rect class="w" x="390" y="86" width="220" height="18"/>
+  <path class="good" d="M390,86 H610 M390,104 H610"/>
+  <text class="lbla" x="500" y="158" text-anchor="middle">Gleicher Zug oben und unten</text>
+  <text class="lbl" x="500" y="178" text-anchor="middle">Gegenzug darf günstiger sein, gleiche Dicke</text>
+</svg>
+<figcaption>Furnier schwindet beim Trocknen des Leims und zieht die Platte zur furnierten Seite. Zwei gleiche Seiten heben sich auf.</figcaption>
+</figure>
+
+<h2>Bügelfurnier ohne Presse</h2>
+<div class="grid">
+  <div class="card"><h3>Leim beidseitig</h3><p>Weißleim dünn auf Träger und Furnierrückseite, beides vollständig trocknen lassen, mindestens eine Stunde.</p></div>
+  <div class="card"><h3>Aufbügeln</h3><p>Furnier auflegen, Bügeleisen ohne Dampf auf Baumwolle, von der Mitte nach außen. Papier dazwischen gegen Verfärbung.</p></div>
+  <div class="card"><h3>Andrücken</h3><p>Sofort hinter dem Eisen mit Holzklotz oder Furnierhammer fest nachreiben, bis es kalt ist.</p></div>
+  <div class="card acc"><h3>Grenzen</h3><p>Bis etwa 40 × 60 cm. Bei gefügten Bildern die Fuge zuerst bügeln. Nicht für Tischplatten.</p></div>
+</div>
+
+<h2>Fehler</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Symptom</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Blase</b></td><td class="txt">Zu wenig Leim oder Druck, Luft eingeschlossen</td><td class="txt">Mit Messer längs der Faser aufschneiden, Leim einspritzen, mit Bügeleisen und Klotz andrücken</td></tr>
+<tr><td><b>Leimdurchschlag</b></td><td class="txt">Zu viel Leim, zu dünnes Furnier, zu hoher Druck</td><td class="txt">Sichtbar beim Anfeuchten. Nicht beizen, decken mit Lack statt Öl, nächstes Mal Harnstoffharz</td></tr>
+<tr><td><b>Fuge geht auf</b></td><td class="txt">Kante nicht gerade, Furnier zu trocken, Band zu früh ab</td><td class="txt">Fuge mit Leim füllen und pressen, bei breitem Spalt Streifen einsetzen</td></tr>
+<tr><td><b>Platte wölbt sich</b></td><td class="txt">Kein Gegenzug oder anderes Furnier auf der Rückseite</td><td class="txt">Rückseite nachträglich furnieren, oft nur teilweise wirksam</td></tr>
+<tr><td><b>Durchgeschliffen</b></td><td class="txt">Zu grob, zu viel Druck, Exzenter an der Kante</td><td class="txt">Nur mit Flicken oder neuem Furnier zu retten. Deshalb P150 starten und Kanten von Hand</td></tr>
+<tr><td><b>Furnier reißt beim Band abziehen</b></td><td class="txt">Trocken abgezogen, gegen die Faser</td><td class="txt">Anfeuchten, Ziehklinge, in Faserrichtung</td></tr>
+<tr><td><b>Welliges Furnier</b></td><td class="txt">Falsch gelagert, Maser- und Wurzelholz von Natur aus</td><td class="txt">Leicht anfeuchten, zwischen Zulagen mit Zeitungspapier flach trocknen, Papier täglich wechseln</td></tr>
+<tr><td><b>Hirnholzkante bricht aus</b></td><td class="txt">Fräser läuft aus der Platte heraus</td><td class="txt">Von außen nach innen fräsen, Klebeband über die Kante, Hirnholz zuerst</td></tr>
+<tr><td><b>Spanstruktur zeichnet sich ab</b></td><td class="txt">Spanplatte mit dünnem Furnier, Leim zieht ein</td><td class="txt">MDF nehmen oder Sperrfurnier dazwischen</td></tr>
+</tbody>
+</table></div>
+
+<div class="warn"><b>Furnier wie Papier behandeln.</b> Nicht rollen, nicht knicken, Stapel flach mit Brett drauf. Eingerissene Ecken sofort mit Klebeband sichern.</div>
+
+<h2>Quellen zu diesem Abschnitt</h2>
+<ul class="srcs">
+  <li>Initiative Furnier + Natur (IFN), <i>Furnier Handbuch</i>: Herstellung, Arten, Bilder, Verarbeitung.</li>
+  <li>USDA Wood Handbook (FPL-GTR-282), Kapitel 10 Adhesives: Leimmengen, Pressdruck, Harnstoffharz gegen PVAC.</li>
+  <li>Fine Woodworking, Paul Schürch, <i>Veneering Basics</i>: Fügen, Klebeband, Vakuumpresse, Bügelmethode.</li>
+  <li>Technische Merkblätter Ponal, Titebond, Akzo Nobel Casco: offene Zeiten, Presszeiten, Auftragsmengen.</li>
+</ul>
