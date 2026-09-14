@@ -1,0 +1,110 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Laser blenden ohne Schmerz, brennen ohne Vorwarnung und rauchen Gifte, die man nicht riecht. Fräsen werfen Teile, Späne und Staub.</b> Beides ist beherrschbar, wenn man vier Dinge nie tut: ohne passende Brille arbeiten, ohne Absaugung arbeiten, das Gerät allein lassen, unbekanntes Material bearbeiten.</div>
+
+<h2>Laserklassen nach DIN EN 60825-1</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Klasse</th><th>Gefahr</th><th>Typische Geräte</th><th>Pflichten im Betrieb (Arbeitsplatz)</th></tr></thead>
+<tbody>
+<tr><td><b>1</b></td><td>Ungefährlich im bestimmungsgemäßen Betrieb, auch bei langem Blick</td><td>Geschlossene Geräte mit Interlock: xTool S1, P2S, P3, F1/F2 Ultra, Creality Falcon2 Pro, Glowforge, Bambu H2D, LaserPecker LP5 mit Gehäuse, OMTech Polar</td><td>Keine Brille nötig, solange Deckel zu und Interlock aktiv. Deckel-Bypass macht daraus Klasse 4</td></tr>
+<tr><td><b>1M</b></td><td>Wie 1, aber gefährlich mit Lupe oder Fernglas</td><td>Aufgeweitete Strahlen, selten in der Werkstatt</td><td>Keine optischen Instrumente im Strahl</td></tr>
+<tr><td><b>2</b></td><td>Sichtbar, bis 1 mW, Lidschlussreflex schützt</td><td>Laserpointer, Pilotlaser, Kreuzlinienlaser</td><td>Nicht absichtlich hineinschauen</td></tr>
+<tr><td><b>2M</b></td><td>Wie 2, gefährlich mit Optik</td><td>Linienlaser</td><td>–</td></tr>
+<tr><td><b>3R</b></td><td>Bis 5 mW sichtbar, geringes Risiko bei kurzem Blick</td><td>Starke Pointer, Justierlaser</td><td>Arbeitsplatz: Laserschutzbeauftragter, Unterweisung</td></tr>
+<tr><td><b>3B</b></td><td>Bis 500 mW, direkter Strahl gefährlich für Auge, diffuse Reflexion meist nicht</td><td>Gravurlaser unter 0,5 W, Showlaser</td><td>Brille, Laserschutzbeauftragter, Kennzeichnung, Zugangsbeschränkung</td></tr>
+<tr><td><b>4</b></td><td>Über 500 mW: direkter Strahl, Reflexion und Streulicht gefährlich für Auge und Haut, Brandgefahr</td><td>Alle offenen Diodenlaser, offene Galvos (Faser, UV), CO2 mit offenem Deckel, K40 mit überbrücktem Schalter</td><td>Brille nach EN 207 für alle im Raum, Laserbereich abgrenzen, Laserschutzbeauftragter, Kennzeichnung, Gefährdungsbeurteilung</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>„Klasse 1“ gilt nur für das geschlossene Gerät.</b> Geschlossene Laser haben Interlocks am Deckel und Sichtfenster, die die Wellenlänge blocken (orange bei 450 nm, grün-braun bei 1 064 nm, Acryl bei 10,6 µm). Wer den Interlock überbrückt, um mit offenem Deckel zu arbeiten, hat ein Klasse-4-Gerät ohne Brille vor sich. Bei Diodenlasern mit „Klasse 1“-Werbung und offenem Schutzschild (D1 Pro mit Gehäuse-Zubehör) genau prüfen, ob das Gehäuse zertifiziert ist.</div>
+
+<h2>Schutzbrillen nach EN 207</h2>
+<p class="lede">Die Brille muss zur Wellenlänge, zur Betriebsart und zur Leistung passen. Aufdruck lesen: Wellenlängenbereich, Betriebsart (D Dauerstrich, I Impuls, R Riesenimpuls, M modengekoppelt), Schutzstufe LB1 bis LB10.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Laser</th><th>Wellenlänge</th><th>Mindestaufdruck (Beispiel)</th><th>Filterfarbe</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Diode 5 – 40 W</b></td><td>450 nm (445 – 455)</td><td>„400 – 470 D LB4“ oder „445 – 455 DI LB5“</td><td>Orange</td><td>Die beigelegten „Schutzbrillen“ ohne EN-207-Aufdruck und Schutzstufe sind Sonnenbrillen. Bis 40 W mindestens LB4, besser LB5</td></tr>
+<tr><td><b>Diode 70 W</b></td><td>450 nm</td><td>„445 – 455 D LB5“</td><td>Orange</td><td>Streulicht vom Werkstück reicht für Netzhautschäden</td></tr>
+<tr><td><b>Faser 20 – 60 W</b></td><td>1 064 nm</td><td>„1 000 – 1 100 DIR LB5“ oder höher (Puls: I und R müssen dabeistehen)</td><td>Grün oder braun, teils transparent</td><td>Gepulste Faserlaser haben Spitzenleistungen im kW-Bereich, deshalb D allein reicht nicht</td></tr>
+<tr><td><b>UV 3 – 10 W</b></td><td>355 nm</td><td>„315 – 400 DIR LB4“ (oft kombiniert mit 1 064)</td><td>Gelb bis klar</td><td>UV schädigt Hornhaut und Linse (Katarakt), auch Haut</td></tr>
+<tr><td><b>CO2 40 – 150 W</b></td><td>10 600 nm</td><td>„10 600 D LB3“ bis „LB4“</td><td>Klar (Polycarbonat blockt 10,6 µm)</td><td>Jede Polycarbonat-Schutzbrille dämpft, aber nur eine mit EN-207-Aufdruck ist geprüft. Bei Glasröhren mit Deckel zu keine Brille nötig</td></tr>
+<tr><td><b>Kombigerät Diode + Faser</b></td><td>450 + 1 064 nm</td><td>Brille mit beiden Bereichen oder zwei Brillen</td><td>Braun-orange</td><td>Nur bei offenem Betrieb, Klasse-1-Geräte brauchen keine</td></tr>
+</tbody>
+</table></div>
+<p class="note">Schutzstufe LB grob: LB3 hält 10 W/cm² im Dauerstrich zehn Sekunden, LB4 100 W/cm², LB5 1 kW/cm², LB6 10 kW/cm². Die genaue Auswahl folgt aus TROS Laserstrahlung Teil 3 mit Leistung, Strahldurchmesser und Betriebsart. Fachhändler (Laservision, Univet, Laser 2000, Laserfuchs, Picotronic) rechnen das auf Anfrage. Preis 50 bis 250 €.</p>
+
+<h2>Recht in Deutschland</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Regel</th><th>Gilt für</th><th>Kernaussage</th></tr></thead>
+<tbody>
+<tr><td><b>OStrV (Arbeitsschutzverordnung zu künstlicher optischer Strahlung)</b></td><td>Jeden Arbeitgeber mit Laser, auch Vereine mit Beschäftigten, Makerspaces mit Angestellten, Schulen</td><td>Gefährdungsbeurteilung, Unterweisung, Schutzmaßnahmen. § 5: Laserschutzbeauftragter ab Klasse 3R (schriftlich bestellt, Sachkunde nach TROS)</td></tr>
+<tr><td><b>TROS Laserstrahlung</b></td><td>Konkretisiert die OStrV</td><td>Teil 1 Beurteilung, Teil 2 Messung und Berechnung, Teil 3 Maßnahmen (Brillen, Abschirmung, Kennzeichnung). Stand 2018, gilt 2026 weiter</td></tr>
+<tr><td><b>DGUV Vorschrift 11 „Laserstrahlung“</b></td><td>–</td><td>Am 1. April 2023 außer Kraft gesetzt. Inhalte gehen in OStrV/TROS auf. Alte Anzeigepflicht bei der BG entfällt, der Laserschutzbeauftragte bleibt</td></tr>
+<tr><td><b>DGUV Information 203-042</b></td><td>Laserschutzbeauftragte</td><td>Aufgaben, Ausbildung (Kurs 1 bis 2 Tage, 300 – 700 €, Auffrischung alle 5 Jahre empfohlen)</td></tr>
+<tr><td><b>DIN EN 60825-1</b></td><td>Hersteller und Klassifizierung</td><td>Laserklassen, Kennzeichnung, Interlocks. Ein Gerät ohne Klassenangabe ist kein CE-konformes Lasergerät</td></tr>
+<tr><td><b>Maschinenverordnung (EU) 2023/1230</b></td><td>Hersteller, ab 20. Januar 2027 verbindlich (ersetzt Maschinenrichtlinie 2006/42/EG)</td><td>Auch für Eigenbauten, die in Verkehr gebracht werden. Interlock und Not-Halt sind Pflicht</td></tr>
+<tr><td><b>Produktsicherheitsverordnung (EU) 2023/988 (GPSR)</b></td><td>Verkäufer, seit 13. Dezember 2024</td><td>Importware muss einen EU-Verantwortlichen nennen. Marktplatz-Laser ohne CE und EU-Adresse sind seitdem klarer illegal</td></tr>
+<tr><td><b>Privat zu Hause</b></td><td>Hobby ohne Beschäftigte</td><td>OStrV gilt nicht, die Physik schon. Haftung gegenüber Besuchern und Nachbarn bleibt (BGB § 823). Wohngebäudeversicherung fragt bei Brand nach Betreiberpflichten</td></tr>
+</tbody>
+</table></div>
+
+<h2>Brand</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Nie unbeaufsichtigt</div><div class="cd">Die Regel Nummer eins jedes Herstellers und jeder Versicherung. Flammensensoren (xTool, Bambu, Creality) reagieren, löschen aber nicht. Ein Brand in Pappe braucht 20 Sekunden bis zur Flamme über dem Gehäuse.</div></div>
+  <div class="card"><div class="ct">Feuerlöscher griffbereit</div><div class="cd">CO2-Löscher (2 kg) neben dem Laser: löscht ohne Rückstände, Optik bleibt heil. Pulverlöscher ruinieren die Maschine, Wasser nur bei Holz ohne Elektronik. Löschdecke für Kleinbrände.</div></div>
+  <div class="card"><div class="ct">Risikomaterial</div><div class="cd">Pappe, Papier, Balsa, Schaum, Holz mit hoher Leistung und langsamem Vorschub. Air Assist an, Absaugung an. Abfall und Reste nicht im Gerät liegen lassen.</div></div>
+  <div class="card"><div class="ct">Nach dem Job</div><div class="cd">Glimmende Reste unter dem Wabentisch. Wabe regelmäßig leeren, Schnittreste absaugen. Viele Brände entstehen 10 Minuten nach dem Ausschalten.</div></div>
+  <div class="card"><div class="ct">Rauchmelder</div><div class="cd">Im Werkstattraum, nicht direkt über dem Laser (Fehlalarme), plus einer im Flur. Batterie jährlich.</div></div>
+  <div class="card"><div class="ct">Elektrik</div><div class="cd">CO2-Netzteil führt 30 kV, auch Minuten nach dem Ausschalten (Kondensatoren). Deckel des Netzteils bleibt zu. Fräse: Frequenzumrichter erzeugen Ableitströme, FI Typ B oder allstromsensitiv prüfen.</div></div>
+</div>
+
+<h2>Rauch und Staub</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Quelle</th><th>Stoffe</th><th>Schutz</th></tr></thead>
+<tbody>
+<tr><td><b>Holz, MDF lasern</b></td><td>Feinstaub, Formaldehyd, Benzol, PAK, Kohlenmonoxid</td><td>Absaugung nach draußen oder Filter mit HEPA plus Aktivkohle, siehe <a href="#absaugung">Absaugung</a></td></tr>
+<tr><td><b>Acryl lasern</b></td><td>Methylmethacrylat (MMA, stechend), Spuren Blausäure nur bei ABS-Beimischung</td><td>Absaugung, Raum lüften, Geruch heißt Leck</td></tr>
+<tr><td><b>Leder, Textil</b></td><td>Verbrennungsprodukte, Chrom-VI bei Chromleder</td><td>Nur pflanzlich gegerbt, Absaugung</td></tr>
+<tr><td><b>Metall mit Faser</b></td><td>Metalloxid-Feinstaub (Chrom, Nickel, Zink, Blei je Legierung)</td><td>Absaugung direkt am Feld, HEPA, keine verzinkten oder beryllium-haltigen Teile</td></tr>
+<tr><td><b>Fräsen Holz</b></td><td>Holzstaub (Eiche, Buche krebserzeugend)</td><td>Absaugung am Fräser, Sauger Klasse M, FFP2</td></tr>
+<tr><td><b>Fräsen CFK, GFK</b></td><td>Faserstaub, leitfähig</td><td>HEPA, Elektronik schützen, nass fräsen</td></tr>
+<tr><td><b>Fräsen Alu mit Nebel</b></td><td>Aerosol aus Alkohol oder Emulsion</td><td>Lüften, Nebelmenge minimal, keine offene Flamme (Spiritus)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Fräse: mechanische Gefahren</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Immer</h4>
+    <ul>
+      <li>Schutzbrille mit Seitenschutz (Späne, brechende Fräser fliegen mit 50 m/s)</li>
+      <li>Gehörschutz bei Oberfräse (85 – 95 dB), HF-Spindel unter 75 dB</li>
+      <li>Not-Halt in Reichweite, Funktion monatlich prüfen</li>
+      <li>Haare zusammen, keine Handschuhe, kein Schmuck, enge Ärmel an der laufenden Spindel</li>
+      <li>Gehäuse oder Schutzscheibe bei Alu und bei kleinen Werkstücken</li>
+      <li>Werkstück auf festen Sitz prüfen, bevor die Spindel läuft</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Nie</h4>
+    <ul>
+      <li>Späne mit der Hand oder Druckluft ins Gesicht wegblasen bei laufender Spindel</li>
+      <li>Fräserwechsel ohne Spindel-Aus und ohne Warten bis zum Stillstand</li>
+      <li>Handschuhe an rotierenden Teilen (wickeln auf, ziehen die Hand hinein)</li>
+      <li>Werkzeuglänge nach Wechsel „schätzen“</li>
+      <li>Endschalter oder Not-Halt überbrücken, weil sie nerven</li>
+      <li>Frequenzumrichter ohne Erdung und ohne Schutzleiter an der Spindel betreiben</li>
+    </ul>
+  </div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>DIN EN 60825-1:2022 (Sicherheit von Lasereinrichtungen, Klassifizierung), DIN EN 207:2017 (Laserschutzbrillen), DIN EN 208 (Justierbrillen).</li>
+    <li>OStrV (Verordnung zum Schutz der Beschäftigten vor Gefährdungen durch künstliche optische Strahlung), TROS Laserstrahlung Teil 1 bis 3 (BAuA, 2018).</li>
+    <li>BG ETEM: „Rechtliche Anpassung zu künstlicher optischer Strahlung“ (DGUV Vorschrift 11 außer Kraft 1. April 2023, Laserschutzbeauftragter nach OStrV § 5); DGUV Information 203-042.</li>
+    <li>TÜV SÜD, SLV, Luminus: Kursbeschreibungen Laserschutzbeauftragter nach OStrV/TROS (Stand 2026).</li>
+    <li>Verordnung (EU) 2023/1230 (Maschinen, Geltung ab 20.01.2027), Verordnung (EU) 2023/988 (GPSR, seit 13.12.2024).</li>
+    <li>Laser 2000, Laserfuchs, Picotronic, Offenhäuser &amp; Berger: Auswahl von Laserschutzbrillen nach EN 207 (Wellenlänge, Betriebsart, LB-Stufe).</li>
+    <li>TRGS 553, 906, 900; DGUV Information 209-044 (Holzstaub).</li>
+  </ul>
+</div>

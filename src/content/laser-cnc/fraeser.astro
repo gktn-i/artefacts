@@ -1,0 +1,102 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Fräser ist das billigste Teil der Maschine und entscheidet über das Ergebnis.</b> Für neunzig Prozent aller Hobbyarbeiten reichen fünf Werkzeuge: 6-mm-Zweischneider Downcut für Platten, 6-mm-Einschneider für Kunststoff und Alu, 3-mm-Zweischneider für Details, 90°-V-Fräser für Schrift, 3-mm-Kugelfräser für 3D.</div>
+
+<h2>Bauformen</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Typ</th><th>Schneiden</th><th>Spanfluss</th><th>Für</th><th>Nicht für</th></tr></thead>
+<tbody>
+<tr><td><b>Schaftfräser Upcut (Rechtsdrall)</b></td><td>1 – 4</td><td>nach oben</td><td>Taschen, Nuten, tiefe Schnitte, Alu (Span raus)</td><td>Oberseite von Sperrholz und Furnier (reißt aus)</td></tr>
+<tr><td><b>Downcut (Linksdrall)</b></td><td>2</td><td>nach unten</td><td>Saubere Oberkante in Platten, dünnes Material (drückt aufs Bett)</td><td>Tiefe Nuten (Späne bleiben unten, Hitze), Alu</td></tr>
+<tr><td><b>Compression</b></td><td>2 – 3</td><td>unten up, oben down</td><td>Durchschnitte in Sperrholz und Laminat, beide Kanten sauber</td><td>Flache Zustellungen (der Up-Teil muss unter der Oberfläche sein), teuer</td></tr>
+<tr><td><b>Einschneider (Single Flute, O-Flute)</b></td><td>1</td><td>groß</td><td>Acryl, POM, HDPE, Alu auf Hobbymaschinen. Großer Span, keine Verklebung</td><td>Hartholz (rau), Stahl</td></tr>
+<tr><td><b>Zweischneider Alu (polierte Spanräume, ZrN oder DLC)</b></td><td>2</td><td>groß</td><td>Alu, Messing auf steifen Maschinen</td><td>Oberfräse mit 10 000 min⁻¹ minimal und 8 mm Durchmesser</td></tr>
+<tr><td><b>Vierschneider VHM</b></td><td>4</td><td>klein</td><td>Stahl, Edelstahl, Hartholz-Schlichten, Messing</td><td>Alu und Kunststoff (verklebt), Vollnut</td></tr>
+<tr><td><b>Kugelfräser (Ballnose)</b></td><td>2</td><td>–</td><td>3D-Reliefs, Formen, Schlichten gewölbter Flächen</td><td>Ebene Flächen (Rillen)</td></tr>
+<tr><td><b>Radiusfräser (Bullnose)</b></td><td>2 – 4</td><td>–</td><td>3D-Schruppen, saubere Bodenradien</td><td>–</td></tr>
+<tr><td><b>V-Fräser 60° / 90° / 120°</b></td><td>1 – 2</td><td>–</td><td>Schrift (V-Carve), Fasen, Schilder, Gravur, PCB-Isolation (Spitze 0,1 mm)</td><td>Taschen</td></tr>
+<tr><td><b>Gravierstichel</b></td><td>1</td><td>–</td><td>Feine Beschriftung, Frontplatten, PCB</td><td>alles andere</td></tr>
+<tr><td><b>Planfräser (Fly Cutter, Surfacing)</b></td><td>2 – 4 Wendeplatten</td><td>–</td><td>Opferplatte planen, Bretter abrichten, 25 – 50 mm Durchmesser</td><td>Alu ohne steife Maschine</td></tr>
+<tr><td><b>Bohrer (VHM oder HSS)</b></td><td>2</td><td>–</td><td>Löcher unter 3 mm mit Pecking (G83)</td><td>Fräser als Bohrer: nur mit Helix-Eintauchen</td></tr>
+<tr><td><b>Diamantbeschichtet (CVD) oder DLC</b></td><td>1 – 2</td><td>–</td><td>GFK, CFK, Grafit, Keramik grün</td><td>Stahl (Diamant löst sich in Eisen)</td></tr>
+</tbody>
+</table></div>
+
+<h2>Werkstoff, Beschichtung, Schaft</h2>
+<div class="grid">
+  <div class="card"><div class="ct">HSS</div><div class="cd">Zäh, günstig, verträgt Schläge. Für Holz und Kunststoff auf wackligen Maschinen. Stumpft in Alu und MDF schnell.</div></div>
+  <div class="card"><div class="ct">Vollhartmetall (VHM, Carbide)</div><div class="cd">Der Standard. Hart, scharf, spröde: bricht bei Rattern oder Schlag. Für alles ab Sperrholz. Marken: Sorotec, Fraisa, Hoffmann Garant, Amana, Datron, Kyocera. Billig-VHM aus Fernost geht für Holz.</div></div>
+  <div class="card"><div class="ct">Beschichtung</div><div class="cd">Unbeschichtet: Alu, Kunststoff (poliert). TiN, TiAlN, AlTiN: Stahl, Guss, hartes Holz. ZrN: Alu, NE-Metalle. DLC, Diamant: Grafit, GFK, CFK, abrasive Kunststoffe. Beschichtung hilft nur, wenn die Wärme das Problem ist.</div></div>
+  <div class="card"><div class="ct">Schaft</div><div class="cd">3,175 mm (1/8″): Klein, PCB, Details. 6 mm (oder 6,35 = 1/4″): Standard. 8 mm: Oberfräse, steif. 10 – 12 mm: ER20, Planfräser. ER11 bis 7 mm, ER16 bis 10 mm, ER20 bis 13 mm. Jede Zangengröße nur für ±0,5 mm Schaft, sonst Rundlauf.</div></div>
+  <div class="card"><div class="ct">Länge</div><div class="cd">So kurz wie möglich. Schneidenlänge muss die Zustellung plus 1 mm decken, nicht die Materialdicke. Lange Fräser biegen, schwingen, brechen.</div></div>
+  <div class="card"><div class="ct">Verschleiß erkennen</div><div class="cd">Brandspuren am Holz, Grat an Alu, glänzende Schneidkante, mehr Lärm, Fräser zieht in Holz Fasern statt zu schneiden. VHM-Fräser hält in Sperrholz 20 bis 50 Stunden, in MDF weniger (Leim abrasiv).</div></div>
+</div>
+
+<h2>Welcher Fräser wofür</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Material</th><th>Schruppen / Kontur</th><th>Schlichten / Kante</th><th>Details</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Sperrholz, Multiplex</b></td><td>6 mm Compression oder Downcut 2F</td><td>6 mm Compression</td><td>3 mm Downcut 2F</td><td>Upcut nur für Taschen, Leim stumpft</td></tr>
+<tr><td><b>MDF, HDF</b></td><td>6 mm Upcut 2F (Staub raus)</td><td>6 mm Downcut</td><td>3 mm 2F</td><td>Staub überall, Absaugung</td></tr>
+<tr><td><b>Massivholz weich (Kiefer, Linde)</b></td><td>6 mm Upcut 2F</td><td>6 mm Downcut oder Compression</td><td>V 90°, Kugel 3 mm</td><td>Harz verklebt Fräser, reinigen</td></tr>
+<tr><td><b>Massivholz hart (Eiche, Buche, Ahorn)</b></td><td>6 mm Upcut 2F, 8 mm auf Oberfräse</td><td>6 mm Downcut</td><td>Kugel 3 – 6 mm</td><td>Faserrichtung, Brandspuren bei stumpf</td></tr>
+<tr><td><b>Acryl (Guss)</b></td><td>6 mm Einschneider O-Flute</td><td>6 mm Einschneider, Gleichlauf</td><td>3 mm Einschneider</td><td>Kein Zweischneider ohne Kühlung: schmilzt. Wachs oder Luft</td></tr>
+<tr><td><b>POM, HDPE, PP, PA</b></td><td>6 mm Einschneider</td><td>6 mm Einschneider</td><td>3 mm Einschneider</td><td>Scharf, hoher Vorschub, große Späne</td></tr>
+<tr><td><b>Polycarbonat, PETG</b></td><td>6 mm Einschneider oder 2F Alu</td><td>Einschneider</td><td>3 mm</td><td>Zäh, Späne lang, Kühlung mit Luft</td></tr>
+<tr><td><b>Alu (5083, 6082, 6061, 7075)</b></td><td>6 mm Einschneider (Hobby) oder 2F Alu (steif)</td><td>6 mm 2F Alu poliert, Gleichlauf</td><td>3 mm 2F Alu</td><td>Kühlschmierung (Spiritus-Nebel, WD-40, Isopropanol) oder Druckluft. Nie trocken mit 4F</td></tr>
+<tr><td><b>Messing (CuZn39Pb3)</b></td><td>6 mm 2F Alu oder 2F unbeschichtet</td><td>2F</td><td>Gravierstichel</td><td>Fräst sich leichter als Alu, Späne kurz</td></tr>
+<tr><td><b>Kupfer</b></td><td>6 mm Einschneider</td><td>2F poliert</td><td>–</td><td>Zäh, verklebt, Kühlung</td></tr>
+<tr><td><b>Stahl, Edelstahl</b></td><td>6 mm 4F VHM TiAlN (nur steife Maschine)</td><td>4F</td><td>3 mm 4F</td><td>Kleine Zustellung, Kühlmittel, langsam. Auf Portalfräsen selten sinnvoll</td></tr>
+<tr><td><b>GFK, CFK, FR4</b></td><td>3 – 6 mm Diamantverzahnung oder DLC</td><td>–</td><td>V 30° PCB, 0,8 mm Bohrer</td><td>Absaugung mit HEPA, Staub leitet und reizt</td></tr>
+<tr><td><b>Schaum, Modellbauplatte, Wachs</b></td><td>6 – 10 mm Einschneider, hoher Vorschub</td><td>Kugel 6 mm</td><td>Kugel 3 mm</td><td>Trocken, schnell, saugen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Spannen und Rundlauf</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4>
+    <ul>
+      <li>Spannzange sauber, Fräser sauber, Mutter handfest plus 1/4 Umdrehung mit Schlüssel (ER11 etwa 20 Nm, ER16 50 Nm, ER20 80 Nm)</li>
+      <li>Schaft mindestens 2/3 in der Zange, aber nicht bis zur Schneide</li>
+      <li>Zange zur Schaftgröße (6 mm in 6er-Zange, 1/4″ in 6,35er-Zange)</li>
+      <li>Rundlauf mit Messuhr prüfen: unter 0,02 mm an der Schneide</li>
+      <li>Werkzeuglänge nach jedem Wechsel neu messen</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Bricht Fräser</h4>
+    <ul>
+      <li>6,35 mm in 6-mm-Zange: klemmt, Rundlauf 0,1 mm, Zange kaputt</li>
+      <li>Fräser zu lang ausgespannt, Schneide zu lang gewählt</li>
+      <li>Zange überdreht oder zu locker: Fräser rutscht nach unten, frisst sich fest</li>
+      <li>Senkrechtes Eintauchen ohne Helix bei Einschneidern und Alu</li>
+      <li>Zu kleiner Vorschub: Fräser reibt, wird heiß, Kante verrundet</li>
+      <li>Rattern ignoriert: eine Minute Rattern kostet mehr Standzeit als eine Stunde Fräsen</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Startsatz und Preise 2026</h2>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th data-s="text">Werkzeug</th><th data-s="num">Preis Marke</th><th data-s="num">Preis Fernost</th><th>Empfehlung</th></tr></thead>
+<tbody>
+<tr><td>6 mm Zweischneider Downcut VHM</td><td>15 – 30 €</td><td>3 – 8 €</td><td>Marke für Platten in Serie, Fernost für Versuche</td></tr>
+<tr><td>6 mm Compression VHM</td><td>25 – 45 €</td><td>8 – 15 €</td><td>Marke, der Unterschied ist sichtbar</td></tr>
+<tr><td>6 mm Einschneider Alu/Kunststoff</td><td>12 – 25 €</td><td>3 – 6 €</td><td>Fernost reicht für Kunststoff</td></tr>
+<tr><td>3 mm Zweischneider VHM</td><td>8 – 18 €</td><td>2 – 4 €</td><td>10er-Pack Fernost für Details, bricht sowieso</td></tr>
+<tr><td>90° V-Fräser</td><td>15 – 40 €</td><td>5 – 10 €</td><td>Marke für Schrift (Spitze scharf)</td></tr>
+<tr><td>3 mm Kugelfräser</td><td>10 – 20 €</td><td>2 – 5 €</td><td>Fernost</td></tr>
+<tr><td>Planfräser 25 mm Wendeplatte</td><td>40 – 80 €</td><td>15 – 25 €</td><td>Fernost mit Marken-Wendeplatten</td></tr>
+<tr><td>Spannzangensatz ER11 / ER16 (Rundlauf 0,008 mm)</td><td>60 – 120 €</td><td>15 – 30 €</td><td>Marke für Alu, Fernost prüfen mit Messuhr</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Sorotec Werkzeugkatalog und Schnittdatenempfehlungen; Fraisa, Hoffmann Garant, Amana Tool, Datron Werkzeugdaten.</li>
+    <li>Rego-Fix ER-Spannzangen: Anzugsmomente und Toleranzen.</li>
+    <li>Carbide 3D und Sienci Labs: Werkzeugführer für Hobbyportale (Upcut, Downcut, Compression).</li>
+    <li>Zerspanungsbude und CNC-Foren: Standzeiten und Erfahrungswerte je Material (2024 – 2026).</li>
+  </ul>
+</div>

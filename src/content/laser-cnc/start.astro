@@ -1,0 +1,73 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Laser und CNC-Fräse sind die zwei Werkzeuge, die aus einer Zeichnung in einer Stunde ein Teil machen.</b> Der Laser schneidet und graviert flach, schnell und ohne Spannmittel. Die Fräse arbeitet in drei Dimensionen, in Metall und mit echter Maßhaltigkeit. Dieses Modul sagt, welches Verfahren wann passt, mit welchen Parametern man anfängt und was man dabei nicht tun darf.</div>
+
+<h2>In 30 Sekunden entscheiden</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Aufgabe</th><th>Erste Wahl</th><th>Zweite Wahl</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Sperrholz, MDF, Acryl bis 10 mm schneiden</b></td><td>CO2-Laser</td><td>Diodenlaser (dunkles Material)</td><td>Schnell, sauber, kein Spannen. Diode schafft klares Acryl nicht</td></tr>
+<tr><td><b>Holz, Leder, Acryl, Glas gravieren</b></td><td>CO2-Laser</td><td>Diodenlaser</td><td>CO2 graviert alle Nichtmetalle, Diode alles außer klaren und hellen Kunststoffen</td></tr>
+<tr><td><b>Metall dauerhaft beschriften</b></td><td>Faserlaser</td><td>Diode mit Markierspray (nur Oberfläche)</td><td>1064 nm wird von Metall absorbiert, 10,6 µm und 450 nm nicht</td></tr>
+<tr><td><b>Edelstahl farbig, Alu eloxiert weiß oder schwarz</b></td><td>MOPA-Faserlaser</td><td>Q-Switch-Faser (nur schwarz/weiß)</td><td>Farbe entsteht über Oxidschichtdicke, das braucht einstellbare Pulsdauer</td></tr>
+<tr><td><b>Glas, klare Kunststoffe fein markieren</b></td><td>UV-Laser (355 nm)</td><td>CO2 (Glas, matt)</td><td>UV markiert kalt, ohne Mikrorisse und Brandränder</td></tr>
+<tr><td><b>Aluminiumteil mit Taschen, Bohrungen, Passungen</b></td><td>CNC-Fräse</td><td>Lohnfertiger</td><td>Nur Zerspanen liefert 3D-Geometrie und ±0,05 mm</td></tr>
+<tr><td><b>Frontplatte aus Alu mit Beschriftung</b></td><td>CNC-Fräse + Faserlaser</td><td>Laser-Lohnfertiger + Eloxal</td><td>Fräsen für Ausbrüche, Faser für Schrift</td></tr>
+<tr><td><b>Holzschild, Relief, 3D-Oberfläche</b></td><td>CNC-Fräse</td><td>Laser (nur Graustufen-Tiefe)</td><td>Fräse trägt Material in echten Höhen ab</td></tr>
+<tr><td><b>Leiterplatte, ein Stück, heute</b></td><td>CNC-Fräse (Isolationsfräsen)</td><td>Bestellen (5 Tage, 5 Stück, unter 10 €)</td><td>Fräsen für Prototyp ohne Chemie, Bestellen fast immer besser</td></tr>
+<tr><td><b>Dünnblech 0,5 bis 3 mm Stahl</b></td><td>Lohnfertiger (Faser-Flachbett)</td><td>Fräse (langsam) oder 50 W Faser bis 1 mm</td><td>Desktop-Laser schneiden Metall nur im Zehntelbereich</td></tr>
+<tr><td><b>Gehäuse, Halter, komplexe Form</b></td><td>3D-Druck</td><td>Laser (Steckbauweise) oder Fräse</td><td>Siehe <a href="mechanik.html#druck3d">Konstruieren für den 3D-Druck</a></td></tr>
+</tbody>
+</table></div>
+
+<h2>Landkarte</h2>
+<div class="map">
+  <a href="#verfahren"><div class="mt"><span class="i">⚖️</span>Welches Verfahren wofür</div><div class="md">Eignungstabelle mit Punkten für CO2, Diode, Faser, UV, Fräse, 3D-Druck, Plotter.</div></a>
+  <a href="#laserphysik"><div class="mt"><span class="i">🔬</span>Wie ein Laser schneidet</div><div class="md">Wellenlänge, Absorption, Fokus, Spot, Schnittfuge, echte und Marketing-Watt.</div></a>
+  <a href="#co2"><div class="mt"><span class="i">🟥</span>CO2-Laser</div><div class="md">Glasröhre oder RF, Optik, Kühlung, Schnittdicken, Geräte 2026.</div></a>
+  <a href="#diode"><div class="mt"><span class="i">🟦</span>Diodenlaser</div><div class="md">5 bis 70 W, was geht und was nicht, IR-Modul, Geräte 2026.</div></a>
+  <a href="#faser"><div class="mt"><span class="i">⚪</span>Faser- & UV-Laser</div><div class="md">Galvo, Q-Switch gegen MOPA, Farbgravur, Tiefengravur, UV für Glas.</div></a>
+  <a href="#material-laser"><div class="mt"><span class="i">🧱</span>Material-Matrix Laser</div><div class="md">Was welcher Laser schneidet oder graviert. Und die Liste, was nie in den Laser darf.</div></a>
+  <a href="#parameter"><div class="mt"><span class="i">🎚️</span>Laserparameter finden</div><div class="md">Startwerte je Material, Testraster, Fokus, Linienenergie zum Übertragen.</div></a>
+  <a href="#software-laser"><div class="mt"><span class="i">💻</span>Laser-Software</div><div class="md">LightBurn 2.x, xTool Studio, EZCad, LaserGRBL, Steuerungen und Formate.</div></a>
+  <a href="#cnc-grundlagen"><div class="mt"><span class="i">🏗️</span>CNC-Fräse: Aufbau</div><div class="md">Portal, Spindel, Antriebe, Führungen, Steuerung, was Steifigkeit wirklich heißt.</div></a>
+  <a href="#cnc-maschinen"><div class="mt"><span class="i">🏭</span>Maschinenklassen & Katalog</div><div class="md">Von 3018 bis Carvera und Stepcraft M, mit Preisen 2026.</div></a>
+  <a href="#fraeser"><div class="mt"><span class="i">🔩</span>Fräser & Werkzeuge</div><div class="md">Schneidenzahl, Up/Down/Compression, Beschichtung, Spannzangen, Tabelle je Material.</div></a>
+  <a href="#schnittdaten"><div class="mt"><span class="i">🧮</span>Schnittdaten & Chipload</div><div class="md">Drehzahl, Vorschub, Zustellung mit Rechner und Chipload-Tabelle.</div></a>
+  <a href="#cam"><div class="mt"><span class="i">📄</span>CAM, G-Code & Steuerung</div><div class="md">Fusion 360, Carbide Create, Estlcam, VCarve, gSender, die 20 wichtigsten G-Codes.</div></a>
+  <a href="#material-cnc"><div class="mt"><span class="i">🪵</span>Material für die CNC</div><div class="md">Holz, Platten, Kunststoffe, Alu, Messing, was auf einer Hobbymaschine geht.</div></a>
+  <a href="#spannen"><div class="mt"><span class="i">📌</span>Spannen, Nullpunkt & Ablauf</div><div class="md">Opferplatte, Klemmen, Tabs, Nullpunkt setzen, Probelauf.</div></a>
+  <a href="#sicherheit"><div class="mt"><span class="i">🛑</span>Sicherheit & Recht</div><div class="md">Laserklassen, Schutzbrille nach EN 207, OStrV, Brand, Staub, Späne.</div></a>
+  <a href="#absaugung"><div class="mt"><span class="i">🌬️</span>Absaugung, Luft & Kühlung</div><div class="md">Volumenstrom, Filter, Air Assist, Chiller, Wasser.</div></a>
+  <a href="#fehler"><div class="mt"><span class="i">🩺</span>Fehlersuche</div><div class="md">Schneidet nicht durch, Brandränder, Versatz, Rattern, Schrittverlust, Fräserbruch.</div></a>
+  <a href="#kaufen"><div class="mt"><span class="i">🛒</span>Kaufberatung & Preise 2026</div><div class="md">Budgetstufen, Checkliste, was die Preisschilder verschweigen.</div></a>
+  <a href="#glossar"><div class="mt"><span class="i">📖</span>Glossar</div><div class="md">Kerf, Galvo, MOPA, LPI, Chipload, Gleichlauf, Runout und 60 weitere Begriffe.</div></a>
+</div>
+
+<h2>Die Verfahren in Zahlen</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th data-s="text">Verfahren</th><th>Wellenlänge / Werkzeug</th><th data-s="num">Leistung Desktop</th><th>Schneidet</th><th>Graviert</th><th data-s="num">Genauigkeit</th><th data-s="num">Einstieg</th></tr></thead>
+<tbody>
+<tr><td><b>CO2-Laser</b></td><td>10,6 µm, Glas- oder RF-Röhre</td><td>40 – 150 W</td><td>Holz, Acryl, Leder, Pappe, Textil bis ~20 mm</td><td>alle Nichtmetalle, Glas, Stein, beschichtetes Metall</td><td>±0,1 mm</td><td>ab 600 € (K40), 2 000 – 7 000 € geschlossen</td></tr>
+<tr><td><b>Diodenlaser</b></td><td>450 nm, 1 bis 16 Dioden gebündelt</td><td>5 – 70 W optisch</td><td>Holz bis ~15 mm, dunkles Acryl, Leder, Pappe</td><td>Holz, Leder, Stein, eloxiertes Alu, Edelstahl (dunkel)</td><td>±0,1 mm</td><td>300 – 2 500 €</td></tr>
+<tr><td><b>Faserlaser</b></td><td>1064 nm, Galvo-Scanner</td><td>20 – 100 W</td><td>Metallfolie 0,2 – 1 mm</td><td>alle Metalle, viele Kunststoffe, Farbe auf Edelstahl (MOPA)</td><td>±0,02 mm</td><td>1 400 – 5 000 €</td></tr>
+<tr><td><b>UV-Laser</b></td><td>355 nm, Galvo</td><td>3 – 10 W</td><td>Folien, dünnes Glas (Ritzen)</td><td>Glas, klare und weiße Kunststoffe, Silikon, Keramik</td><td>±0,01 mm</td><td>1 000 – 5 000 €</td></tr>
+<tr><td><b>CNC-Fräse (Portal)</b></td><td>Schaftfräser 1 – 12 mm</td><td>0,5 – 2,2 kW Spindel</td><td>Holz, Platten, Kunststoff, Alu, Messing, 3D-Formen</td><td>Relief, V-Carve, alles was tiefer als Farbe ist</td><td>±0,05 – 0,2 mm</td><td>300 € (3018) bis 5 000 €</td></tr>
+<tr><td><b>Desktop-Fräsmaschine (Metall)</b></td><td>Fräser bis 6 mm, oft ATC</td><td>200 – 500 W</td><td>Alu, Messing, Kunststoff, PCB, kleine Stahlteile</td><td>Feingravur, Gehäusefronten</td><td>±0,02 mm</td><td>3 000 – 7 000 €</td></tr>
+</tbody>
+</table></div>
+<p class="note">Preise sind Größenordnungen, Stand September 2026, ohne Zubehör. Aktionspreise liegen bei fast allen Herstellern 20 bis 30 % unter der Liste, siehe <a href="#kaufen">Kaufberatung</a>.</p>
+
+<div class="warn"><b>Drei Regeln, die vor allem anderen gelten.</b> Ein laufender Laser wird nie allein gelassen, ein Brand entsteht in Sekunden. Kein Material in den Laser, dessen Zusammensetzung unbekannt ist, PVC zerstört Lunge und Maschine. An der Fräse keine Handschuhe, keine losen Ärmel, Schutzbrille immer. Details in <a href="#sicherheit">Sicherheit &amp; Recht</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Grundlage dieses Moduls</div>
+  <ul>
+    <li>DIN EN 60825-1 (Laserklassen), OStrV mit TROS Laserstrahlung, DIN EN 207 und 208 (Laserschutzbrillen).</li>
+    <li>Herstellerdokumentation und Datenblätter von xTool, OMTech, Glowforge, Creality Falcon, Atomstack, Bambu Lab, ComMarker, LaserPecker, Raycus, JPT, Carbide 3D, Sienci Labs, Onefinity, Makera, Stepcraft, Sorotec, Genmitsu (Stand September 2026).</li>
+    <li>LightBurn-Dokumentation 2.x, Fusion 360 Manufacturing, Estlcam-Handbuch, grblHAL und FluidNC-Wikis.</li>
+    <li>Schnittwerte: Werkzeugkataloge (Sorotec, Fraisa, Hoffmann Garant), Herstellerangaben zu Chipload, eigene Erfahrungswerte aus Foren wie Zerspanungsbude, Shapeoko und Sienci Community.</li>
+    <li>Zeitplanung, Preise und Vergleiche: Herstellershops und Testberichte (Tom's Hardware, The Crafty Catsman, Atomm, CNC Dad), alle im September 2026 abgerufen. Vollständige Liste in <a href="#quellen">Quellen</a>.</li>
+  </ul>
+</div>

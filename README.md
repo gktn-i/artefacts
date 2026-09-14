@@ -5,7 +5,7 @@ Fotografie, Messer und Funk — <https://bib.gktn.dev>.
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 27 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle 28 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -63,7 +63,7 @@ vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
 in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
 Abschnitt. Bisher nutzen das der Mechatronik-Hub und der Holzwerken-Hub.
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🪵 Holzwerken · 🖥️ Homelab ·
-📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 27 Module mit 308 Abschnitten.
+📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 28 Module mit 330 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion
@@ -96,7 +96,8 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
   Holzwerken-Hub — Faltabschnitte, sortierbare Tabellen, Katalog-, Glossar- und
   Projektfilter, die Rechner (darunter der § 42a-Check und der
   Schärfwinkel-Rechner) und die PID-Simulation sowie die LoRa-Rechner des
-  Funk-Hubs (Airtime, Antennenlänge).
+  Funk-Hubs (Airtime, Antennenlänge) und die Laser- und Fräsrechner des Moduls
+  *Laser & CNC-Fräsen* (Linienenergie, LPI, Vorschub aus Chipload).
   Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
   Ein Modul kann mehrere Skripte laden (`PAGE_SCRIPTS` nimmt auch ein Array,
   so kombiniert *3D-Druck* das Technik-Skript mit seinem Simulator).
@@ -107,8 +108,8 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
   `tag?`, `scores`, `pro`, `con`, `use`) sowie optional `note`/`labels`
   übergeben; abweichende Punktzahl bricht den Build.
   Im Einsatz für Motoren, Schrittmotortreiber, Fluidantriebe, Positionsgeber,
-  Mikrocontroller-Familien, Bussysteme, Getriebebauarten, Funktechniken und
-  FPV-Videosysteme. Design im Block PROFILE von `src/content/_mecha.css`.
+  Mikrocontroller-Familien, Bussysteme, Getriebebauarten, Funktechniken,
+  FPV-Videosysteme und die Fertigungsverfahren (Laser gegen Fräse). Design im Block PROFILE von `src/content/_mecha.css`.
 - **Inhalte gehören ins HTML, nicht ins JavaScript.** Tabellen und Kataloge werden
   server-gerendert und im JS nur gefiltert und sortiert. Nur so landen sie im
   Pagefind-Index und funktionieren ohne JavaScript.

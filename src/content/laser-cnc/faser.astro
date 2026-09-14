@@ -1,0 +1,87 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Faserlaser ist das Metallwerkzeug: Typenschild, Werkzeugkennzeichnung, Schmuck, Tiefengravur, Farbe auf Edelstahl, in Sekunden, dauerhaft.</b> Er arbeitet nicht mit einem Portal, sondern mit zwei Galvo-Spiegeln, die den Strahl mit bis zu 10 000 mm/s über ein kleines Feld werfen. Der UV-Laser ist sein kalter Bruder für Glas und Kunststoff.</div>
+
+<h2>Aufbau eines Galvo-Lasers</h2>
+<div class="steps">
+  <div class="step"><h4>Quelle</h4>Ytterbium-Faserlaser, 1 064 nm, 20 bis 100 W mittlere Leistung. Q-Switch (Raycus RFL, Max) mit fester Pulsdauer ~100 ns, oder MOPA (JPT M7, Raycus MOPA) mit einstellbarer Pulsdauer 2 bis 500 ns. Lebensdauer 50 000 bis 100 000 Stunden, luftgekühlt, praktisch wartungsfrei.</div>
+  <div class="step"><h4>Galvo-Scanner</h4>Zwei Spiegel auf Galvanometer-Motoren lenken den Strahl in X und Y. Geschwindigkeit 5 000 bis 10 000 mm/s, Positionsauflösung unter 1 µm. Kein bewegtes Portal, keine Schrittmotoren, keine Riemen.</div>
+  <div class="step"><h4>F-Theta-Linse</h4>Fokussiert planfeldig über das ganze Feld. Brennweite bestimmt Feld und Spot: F=110 mm für 70 × 70 mm (Spot 0,02 mm), F=160 mm für 110 × 110 mm (0,03 mm), F=254 mm für 175 × 175 mm (0,05 mm), F=420 mm für 300 × 300 mm (0,07 mm). Linsen sind wechselbar, jede braucht eine eigene Kalibrierung.</div>
+  <div class="step"><h4>Fokus</h4>Feste Höhe, mit Z-Säule oder Motor eingestellt. Toleranz ±0,5 bis 1,5 mm. Falscher Fokus ist der häufigste Grund für schwache Markierungen. Zwei rote Pilotlaser kreuzen sich im Fokus (Cloudray, ComMarker) oder LiDAR (xTool F2 Ultra).</div>
+  <div class="step"><h4>Steuerung</h4>EZCad2 (BJJCZ-Karte, kostenlos, Windows), EZCad3 (neuer, 3D-Oberflächen), LightBurn Pro (unterstützt EZCad2-Karten, seit 2.1 auch EZCad3). xTool, LaserPecker und Bambu eigene Software.</div>
+  <div class="step"><h4>Rotary und Erweiterungen</h4>Drehachse für Becher, Ringe, Flaschen. Vorschubachse (Slide) verlängert das Feld (LaserPecker LP5: 120 × 160 auf 160 × 300 mm). 3D-Galvo mit dynamischem Fokus für gewölbte Flächen (xTool F2 Ultra, ComMarker Omni).</div>
+</div>
+
+<h2>Q-Switch gegen MOPA</h2>
+<div class="tbl-wrap"><table style="min-width:840px">
+<thead><tr><th data-s="text">Kriterium</th><th>Q-Switch (Raycus, Max)</th><th>MOPA (JPT M7, Raycus MOPA)</th></tr></thead>
+<tbody>
+<tr><td><b>Pulsdauer</b></td><td>fest, 80 – 150 ns</td><td>2 – 500 ns einstellbar</td></tr>
+<tr><td><b>Frequenz</b></td><td>20 – 80 kHz (manche bis 200)</td><td>1 – 4 000 kHz</td></tr>
+<tr><td><b>Farbe auf Edelstahl</b></td><td>Nein, nur Anlassfarben grob</td><td>Ja, 20 bis 30 reproduzierbare Farbtöne über Oxidschichtdicke</td></tr>
+<tr><td><b>Schwarz auf eloxiertem Alu</b></td><td>Grau bis dunkelgrau</td><td>Tiefschwarz (kurze Pulse, hohe Frequenz)</td></tr>
+<tr><td><b>Kunststoffe</b></td><td>Schmilzt Kanten, gröber</td><td>Fein, kaum Wärmeeinfluss</td></tr>
+<tr><td><b>Tiefengravur</b></td><td>Sehr gut, hohe Pulsenergie (1 mJ bei 20 W)</td><td>Gut, bei langen Pulsen gleichwertig</td></tr>
+<tr><td><b>Preis 20 – 30 W</b></td><td>1 400 – 2 000 €</td><td>1 600 – 3 000 €</td></tr>
+<tr><td><b>Wofür</b></td><td>Beschriftung, Tiefengravur, Schneiden von Folie, Preisfokus</td><td>Farbe, Alu, Kunststoff, Vielfalt</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Wer nur Edelstahl und Werkzeuge beschriftet, braucht kein MOPA.</b> Wer Alu schwarz, Kunststoff sauber oder Farbe will, kauft MOPA. Der Aufpreis liegt 2026 bei 200 bis 800 €, der Unterschied im Ergebnis ist deutlich.</div>
+
+<h2>Was ein Faserlaser kann</h2>
+<div class="tbl-wrap"><table style="min-width:880px">
+<thead><tr><th data-s="text">Aufgabe</th><th data-s="num">20 W</th><th data-s="num">30 W</th><th data-s="num">50 – 60 W</th><th>Parameter-Richtung</th></tr></thead>
+<tbody>
+<tr><td><b>Beschriften (Oberfläche)</b></td><td class="txt">✅ 1 – 3 s je cm²</td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">1 000 – 2 000 mm/s, 30 – 50 %, 20 – 30 kHz</td></tr>
+<tr><td><b>Dunkel anlassen (Edelstahl, Titan)</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">100 – 300 mm/s, 20 – 40 %, hohe Frequenz, defokussiert 1 – 2 mm</td></tr>
+<tr><td><b>Weiß auf Eloxal</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">1 500 mm/s, 40 %, 60 – 80 kHz</td></tr>
+<tr><td><b>Farbe auf Edelstahl (MOPA)</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">100 – 500 mm/s, 20 – 50 %, 100 – 500 kHz, Puls 100 – 350 ns, Linien 0,01 mm</td></tr>
+<tr><td><b>Tiefengravur 0,5 mm Stahl</b></td><td class="txt">⚠️ 30 – 60 min je cm²</td><td class="txt">✅ 15 – 30 min</td><td class="txt">✅ 5 – 10 min</td><td class="txt">500 – 800 mm/s, 100 %, 20 – 30 kHz, viele Durchgänge mit Winkelwechsel</td></tr>
+<tr><td><b>Schneiden Edelstahl</b></td><td>0,2 – 0,3 mm</td><td>0,5 mm</td><td>1 mm</td><td class="txt">langsam (10 – 50 mm/s), viele Durchgänge, Rückseite anlaufen</td></tr>
+<tr><td><b>Schneiden Messing / Kupfer</b></td><td>0,4 mm / 0,2 mm</td><td>0,6 mm</td><td>1 mm</td><td class="txt">Kupfer reflektiert, braucht Leistung</td></tr>
+<tr><td><b>Schneiden Aluminium</b></td><td>0,2 mm</td><td>0,4 mm</td><td>0,8 mm</td><td class="txt">Alu leitet Wärme ab, saubere Kante schwer</td></tr>
+<tr><td><b>Gold, Silber (Schmuck)</b></td><td class="txt">✅ Gravur, Schnitt bis 0,3 mm</td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">Silber reflektiert stark, Fokus exakt</td></tr>
+<tr><td><b>Kunststoff (ABS, PC, POM, PA)</b></td><td class="txt">✅ dunkel oder hell je Additiv</td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">Niedrige Leistung, hohe Frequenz, MOPA kurze Pulse</td></tr>
+<tr><td><b>Holz, Leder</b></td><td class="txt">⚠️ nur dunkel verbrannt</td><td class="txt">⚠️</td><td class="txt">⚠️</td><td class="txt">Dafür ist die Diode im Kombigerät</td></tr>
+<tr><td><b>Glas, klares Acryl</b></td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">UV nehmen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Schnittwerte nach xTool-Angaben für den F1 Ultra (20 W: 0,4 mm Messing, 0,3 mm Edelstahl, 0,2 mm Alu) und ComMarker für B4/B6. Beschriftungszeiten sind Erfahrungswerte bei 0,05 mm Linienabstand.</p>
+
+<h2>UV-Laser: der kalte Markierer</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Was er anders macht</div><div class="cd">355 nm wird von fast allem absorbiert, auch von Glas und klaren Kunststoffen. Die Pulse brechen Bindungen, statt zu heizen: keine Schmelzzone, keine Verfärbung, keine Mikrorisse. Weiße Kunststoffe werden dunkel, Glas weiß und satiniert, Kristall lässt sich innen gravieren (3D-Punktwolke).</div></div>
+  <div class="card"><div class="ct">Was er nicht kann</div><div class="cd">Leistung 3 bis 10 W: schneidet nur Folien und Papier, Tiefengravur in Metall dauert ewig. Metallbeschriftung geht, ist aber Faser-Arbeit. Quelle altert (5 000 bis 10 000 h), Ersatz teuer.</div></div>
+  <div class="card"><div class="ct">Geräte 2026</div><div class="cd">ComMarker Omni 1 (5 W, ab 999 $), Omni X (Klasse 1 geschlossen, ~3 600 $), Omni XE (LiDAR-Autofokus, 3D-Kristall); xTool F2 Ultra UV (Klasse 1, 200 × 200 mm, ab 4 999 $); Cloudray und Monport offene UV-Galvos ab ~2 500 $. Ein 3-W-UV ist für Glas oft besser als ein 5-W, weil feiner.</div></div>
+  <div class="card"><div class="ct">Wofür er sich lohnt</div><div class="cd">Glas und Flaschen in Serie, Kunststoffgehäuse mit weißer oder klarer Oberfläche, Silikon, Keramik, Medizin- und Elektronikkennzeichnung. Für Hobby und Holz nicht.</div></div>
+</div>
+
+<h2>Faserlaser-Geräte 2026</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th data-s="text">Gerät</th><th data-s="num">Quelle</th><th data-s="num">Feld</th><th>Bauart</th><th>Besonderheit</th><th data-s="num">Preis (Liste)</th></tr></thead>
+<tbody>
+<tr><td><b>ComMarker B4</b></td><td>20 / 30 / 50 W Raycus, 20 / 60 W JPT MOPA</td><td>110 – 300 mm wählbar</td><td>offen, Säule</td><td>Klassiker der Bastler, EZCad2 und LightBurn, Rotary im Bundle. 60 W MOPA 3 699 $</td><td>ab 1 400 $</td></tr>
+<tr><td><b>ComMarker B6</b></td><td>20 / 30 / 60 W JPT MOPA</td><td>110 × 110 bis 200 × 200 mm</td><td>offen, 13,5 kg</td><td>Leichtester MOPA, Farbe, 20 W für 1 599 $</td><td>1 600 – 3 500 $</td></tr>
+<tr><td><b>xTool F1 Ultra</b></td><td>20 W Faser + 20 W Diode</td><td>220 × 220 mm</td><td>geschlossen, Klasse 1</td><td>Kombigerät, 10 000 mm/s, Kamera, Förderband optional. Der Ladentisch-Laser</td><td>~2 000 $ · ~2 300 €</td></tr>
+<tr><td><b>xTool F2 Ultra</b></td><td>60 W MOPA + 40 W Diode</td><td>220 × 220 mm</td><td>geschlossen, Klasse 1</td><td>Farbe, 3D-Oberflächen, zwei 48-MP-Kameras, LiDAR. Produktion</td><td>4 499 $</td></tr>
+<tr><td><b>LaserPecker LP5</b></td><td>20 W Faser + 20 W Diode</td><td>120 × 160 mm, mit Slide 160 × 300</td><td>geschlossen, Klasse 1, 6 kg</td><td>Tragbar, App, 8K-Auflösung. Für Märkte und Läden</td><td>~2 500 – 3 500 $</td></tr>
+<tr><td><b>Cloudray / Monport GA / OMTech Galvo</b></td><td>20 – 60 W Raycus, JPT</td><td>110 – 300 mm</td><td>offen, Säule oder Gehäuse</td><td>Klassische Werkstatt-Galvos, EZCad2, Ersatzteile überall, Gehäuse gegen Aufpreis</td><td>1 400 – 4 000 $</td></tr>
+<tr><td><b>EM-Smart Basic / One</b></td><td>20 / 30 W</td><td>110 × 110 mm</td><td>halboffen, kompakt</td><td>Klein, günstig, eigene Software plus EZCad</td><td>1 300 – 2 000 $</td></tr>
+<tr><td><b>Trotec SpeedMarker, Trumpf TruMark</b></td><td>20 – 100 W</td><td>bis 300 mm</td><td>Industrie, Klasse 1</td><td>Service, Sicherheit, Software mit Datenbankanbindung</td><td>ab 15 000 €</td></tr>
+</tbody>
+</table></div>
+<p class="note">Stand September 2026 (Herstellershops, HobbyistLaser, Atomm, The Maker's Chest). ComMarker-Preise sind US-Dollar, im EU-Shop plus Mehrwertsteuer.</p>
+
+<div class="stop"><b>1 064 nm ist unsichtbar und die Netzhaut fokussiert es.</b> Ein Reflex vom Werkstück reicht für einen bleibenden Schaden ohne Schmerz. Offene Galvos sind Klasse 4: Brille EN 207 für 1 064 nm mit LB5 oder höher, keine reflektierenden Werkstücke ohne Abschirmung, kein Betrieb mit Zuschauern. Geschlossene Klasse-1-Geräte (xTool F1/F2, LaserPecker LP5 mit Gehäuse, Omni X) nehmen das Risiko, aber nur mit geschlossenem Deckel.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Raycus RFL-P Datenblätter (Q-Switch), JPT M7 Datenblätter (MOPA, Pulsdauer 2 – 500 ns, bis 4 MHz).</li>
+    <li>Sino-Galvo und JCZ (BJJCZ) Dokumentation zu Galvo-Scannern und EZCad2/3, F-Theta-Linsentabellen (Wavelength Opto-Electronic).</li>
+    <li>Herstellerangaben: ComMarker B4, B6, Omni 1/X/XE; xTool F1 Ultra, F2 Ultra, F2 Ultra UV; LaserPecker LP5; Cloudray, Monport, EM-Smart.</li>
+    <li>LightBurn 2.1 Release Notes (EZCad3-Unterstützung, 16-Bit-Tiefengravur, Split Marking).</li>
+    <li>Testberichte 2026: HobbyistLaser (Fiber Guide), Atomm (Metal Engravers, UV Engravers), The Maker's Chest (Omni 1 vs F2 Ultra UV).</li>
+  </ul>
+</div>

@@ -1,0 +1,147 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Es gibt keine richtigen Parameter, nur richtige für diese Maschine, diese Linse, dieses Brett.</b> Deshalb: Startwert aus der Tabelle, Testraster fahren, Ergebnis notieren, Bibliothek pflegen. Zwanzig Minuten Test sparen jeden Fehlschnitt danach.</div>
+
+<h2>Die fünf Stellgrößen</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Größe</th><th>Einheit</th><th>Wirkung</th><th>Regel</th></tr></thead>
+<tbody>
+<tr><td><b>Leistung</b></td><td>% (PWM), bei Ruida min/max</td><td>Energie je Zeit</td><td>CO2-Glas: 10 – 70 %, nie dauerhaft 100 %. Diode: 100 % zum Schneiden normal. Ruida „min power“ 10 – 15 % unter max, sonst Brandpunkte an Ecken</td></tr>
+<tr><td><b>Vorschub (Speed)</b></td><td>mm/s (Ruida, xTool), mm/min (GRBL, ×60)</td><td>Energie je Strecke: E = P / v</td><td>Schnitt: so schnell wie es gerade noch durchgeht, dann 10 % langsamer. Gravur: so schnell wie die Mechanik sauber läuft</td></tr>
+<tr><td><b>Durchgänge (Passes)</b></td><td>Anzahl</td><td>Mehrfach schneiden, ggf. mit Z-Absenkung</td><td>Ein Durchgang mit richtiger Leistung schlägt drei schwache. Zweiter Durchgang nur, wenn der erste 80 % schafft</td></tr>
+<tr><td><b>Linienabstand (Interval / LPI)</b></td><td>mm oder Linien je Zoll</td><td>Gravurauflösung und Dichte</td><td>Abstand ≈ Spotgröße. CO2: 0,08 – 0,1 mm (254 – 318 LPI). Diode: 0,06 – 0,08 mm. Faser: 0,02 – 0,05 mm</td></tr>
+<tr><td><b>Frequenz (Faser) / PWM (Diode)</b></td><td>kHz</td><td>Pulsenergie je Puls</td><td>Faser: 20 – 30 kHz Gravur, 60 – 200 kHz Anlassen und Kunststoff. Diode: 1 kHz Standard, höher für feine Graustufen</td></tr>
+</tbody>
+</table></div>
+<p class="note">Dazu kommen Fokuslage (Oberfläche für Gravur, 1/3 Materialdicke tief für Schnitt über 6 mm), Air Assist (stark schneiden, schwach gravieren) und Beschleunigung (Ruida: 2 000 – 5 000 mm/s² Gravur, 500 – 1 000 Schnitt).</p>
+
+<h2>Startwerte CO2 60 W (Glasröhre, 2″-Linse)</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Material</th><th>Aufgabe</th><th data-s="num">Speed mm/s</th><th data-s="num">Power %</th><th data-s="num">Durchgänge</th><th>Notiz</th></tr></thead>
+<tbody>
+<tr><td>Pappelsperrholz 3 mm</td><td>Schnitt</td><td>20 – 25</td><td>55 – 65</td><td>1</td><td class="txt">Air Assist 1 bar</td></tr>
+<tr><td>Pappelsperrholz 6 mm</td><td>Schnitt</td><td>10 – 12</td><td>75 – 85</td><td>1</td><td class="txt">Fokus 2 mm tief</td></tr>
+<tr><td>Birkensperrholz 6 mm</td><td>Schnitt</td><td>7 – 9</td><td>80 – 90</td><td>1</td><td class="txt">Leim, Rückseite kontrollieren</td></tr>
+<tr><td>MDF 6 mm</td><td>Schnitt</td><td>8 – 10</td><td>80</td><td>1</td><td class="txt">Absaugung volle Leistung</td></tr>
+<tr><td>Acryl Guss 3 mm</td><td>Schnitt</td><td>12 – 15</td><td>60 – 70</td><td>1</td><td class="txt">Air Assist schwach für klare Kante</td></tr>
+<tr><td>Acryl Guss 5 mm</td><td>Schnitt</td><td>7 – 9</td><td>75 – 85</td><td>1</td><td class="txt">Schutzfolie unten abziehen</td></tr>
+<tr><td>Acryl Guss 10 mm</td><td>Schnitt</td><td>3 – 4</td><td>90</td><td>1</td><td class="txt">Fokus 4 mm tief, Werkstück auf Nadeln oder Wabe</td></tr>
+<tr><td>Leder 3 mm pflanzlich</td><td>Schnitt</td><td>15 – 20</td><td>50 – 60</td><td>1</td><td class="txt">Air Assist mittel</td></tr>
+<tr><td>Pappe 3 mm</td><td>Schnitt</td><td>40 – 60</td><td>30 – 40</td><td>1</td><td class="txt">Flammen beobachten</td></tr>
+<tr><td>Holz</td><td>Gravur Raster</td><td>300 – 400</td><td>15 – 30</td><td>1</td><td class="txt">0,1 mm Linien, Air Assist schwach</td></tr>
+<tr><td>Acryl Guss</td><td>Gravur Raster</td><td>300 – 500</td><td>15 – 25</td><td>1</td><td class="txt">Spiegelverkehrt von der Rückseite für Frostoptik</td></tr>
+<tr><td>Eloxiertes Alu</td><td>Gravur Raster</td><td>300</td><td>25 – 40</td><td>1</td><td class="txt">Ergebnis weiß</td></tr>
+<tr><td>Glas</td><td>Gravur Raster</td><td>200 – 300</td><td>30 – 50</td><td>1</td><td class="txt">Nasses Küchenpapier auflegen, 0,1 mm Linien</td></tr>
+<tr><td>Schiefer</td><td>Gravur Raster</td><td>300</td><td>30 – 40</td><td>1</td><td class="txt">Leicht defokussiert (1 mm) ergibt weicheres Bild</td></tr>
+<tr><td>Leder</td><td>Gravur Raster</td><td>300 – 400</td><td>15 – 25</td><td>1</td><td class="txt">Wenig Leistung, sonst zu tief</td></tr>
+<tr><td>Holz, Acryl</td><td>Linien-Gravur (Vektor)</td><td>100 – 200</td><td>10 – 20</td><td>1</td><td class="txt">Für Beschriftung ohne Fläche</td></tr>
+</tbody>
+</table></div>
+
+<h2>Startwerte Diode 20 W (optisch, Air Assist)</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Material</th><th>Aufgabe</th><th data-s="num">Speed mm/s</th><th data-s="num">Power %</th><th data-s="num">Durchgänge</th><th>Notiz</th></tr></thead>
+<tbody>
+<tr><td>Lindenholz 3 mm</td><td>Schnitt</td><td>12 – 15</td><td>100</td><td>1</td><td class="txt">GRBL: 720 – 900 mm/min</td></tr>
+<tr><td>Pappelsperrholz 3 mm</td><td>Schnitt</td><td>6 – 10</td><td>100</td><td>1</td><td class="txt">Bei 10 W: 3 – 5 mm/s. Bei 40 W: 15 – 20 mm/s</td></tr>
+<tr><td>Pappelsperrholz 6 mm</td><td>Schnitt</td><td>2,5 – 4</td><td>100</td><td>1 – 2</td><td class="txt">Fokus 2 mm tief. 40 W: 8 mm/s</td></tr>
+<tr><td>Birkensperrholz 4 mm</td><td>Schnitt</td><td>3 – 5</td><td>100</td><td>1 – 2</td><td class="txt">Chargen prüfen</td></tr>
+<tr><td>MDF 3 mm</td><td>Schnitt</td><td>4 – 6</td><td>100</td><td>1</td><td class="txt">Dunkle Kante</td></tr>
+<tr><td>Acryl schwarz 3 mm</td><td>Schnitt</td><td>3 – 5</td><td>100</td><td>1</td><td class="txt">Air Assist stark, Fuge klebt sonst</td></tr>
+<tr><td>Leder 2 mm</td><td>Schnitt</td><td>6 – 10</td><td>100</td><td>1</td><td class="txt">Pflanzlich gegerbt</td></tr>
+<tr><td>Pappe 2 mm</td><td>Schnitt</td><td>20 – 30</td><td>60 – 80</td><td>1</td><td class="txt">Flammen</td></tr>
+<tr><td>Holz</td><td>Gravur Raster</td><td>100 – 200</td><td>30 – 60</td><td>1</td><td class="txt">0,06 – 0,08 mm Linien, Air Assist aus</td></tr>
+<tr><td>Schiefer</td><td>Gravur Raster</td><td>100 – 150</td><td>50 – 80</td><td>1</td><td class="txt">Sehr dankbar</td></tr>
+<tr><td>Eloxiertes Alu</td><td>Gravur Raster</td><td>100 – 200</td><td>60 – 100</td><td>1</td><td class="txt">Weiß, hoher Kontrast auf Schwarz</td></tr>
+<tr><td>Edelstahl blank</td><td>Markierung dunkel</td><td>3 – 8</td><td>100</td><td>1</td><td class="txt">Sehr langsam, Oxidschicht, Fokus exakt. Alternative: IR-Modul oder Markierspray</td></tr>
+<tr><td>Glas mit Absorber</td><td>Gravur Raster</td><td>50 – 100</td><td>60 – 100</td><td>1</td><td class="txt">Schwarze Farbe oder Tempera auftragen</td></tr>
+<tr><td>Beschichteter Becher</td><td>Gravur Raster</td><td>100 – 150</td><td>40 – 70</td><td>1</td><td class="txt">Rotary, Beschichtung wird entfernt</td></tr>
+</tbody>
+</table></div>
+<p class="note">Werte für 20 W optisch. Faustregel: bei 10 W Speed halbieren, bei 40 W verdoppeln (Spot wird gröber, Schnittfuge breiter). GRBL-Geräte zeigen mm/min: Wert × 60.</p>
+
+<h2>Startwerte Faser 20 W Q-Switch (F=160 mm, 110 × 110)</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Material</th><th>Aufgabe</th><th data-s="num">Speed mm/s</th><th data-s="num">Power %</th><th data-s="num">Frequenz kHz</th><th data-s="num">Linien mm</th><th>Notiz</th></tr></thead>
+<tbody>
+<tr><td>Edelstahl</td><td>Beschriftung hell</td><td>1 000 – 2 000</td><td>30 – 50</td><td>20 – 30</td><td>0,03 – 0,05</td><td class="txt">Grau, dauerhaft, sekundenschnell</td></tr>
+<tr><td>Edelstahl</td><td>Schwarz anlassen</td><td>100 – 300</td><td>20 – 40</td><td>60 – 200</td><td>0,01 – 0,02</td><td class="txt">Fokus +1 bis +2 mm, Oxidschicht, glatt</td></tr>
+<tr><td>Edelstahl</td><td>Tiefengravur</td><td>500 – 800</td><td>100</td><td>20 – 30</td><td>0,03</td><td class="txt">30 – 100 Durchgänge, Winkel je Durchgang wechseln, Air Assist</td></tr>
+<tr><td>Edelstahl (MOPA)</td><td>Farbe</td><td>100 – 400</td><td>20 – 50</td><td>100 – 500</td><td>0,01</td><td class="txt">Puls 100 – 350 ns. Farbe variiert mit Speed, Frequenz, Fokus. Testraster Pflicht</td></tr>
+<tr><td>Alu eloxiert</td><td>Weiß</td><td>1 500 – 2 500</td><td>40 – 60</td><td>60 – 80</td><td>0,03</td><td class="txt">Bleichen</td></tr>
+<tr><td>Alu eloxiert (MOPA)</td><td>Schwarz</td><td>300 – 600</td><td>60 – 100</td><td>200 – 500</td><td>0,01 – 0,02</td><td class="txt">Puls 2 – 20 ns, Fokus exakt</td></tr>
+<tr><td>Alu blank</td><td>Gravur</td><td>800 – 1 200</td><td>60 – 100</td><td>20 – 40</td><td>0,03</td><td class="txt">Grau, mehrere Durchgänge für Tiefe</td></tr>
+<tr><td>Messing</td><td>Gravur</td><td>800 – 1 000</td><td>70 – 100</td><td>20 – 30</td><td>0,03</td><td class="txt">Dunkel bis gold je Leistung</td></tr>
+<tr><td>Titan</td><td>Anlassfarben</td><td>200 – 500</td><td>20 – 40</td><td>50 – 100</td><td>0,01 – 0,02</td><td class="txt">Blau, gold, violett je Speed</td></tr>
+<tr><td>ABS, PC, POM schwarz</td><td>Markierung hell</td><td>800 – 1 500</td><td>20 – 40</td><td>40 – 80</td><td>0,03</td><td class="txt">Aufschäumen, MOPA feiner</td></tr>
+<tr><td>Kunststoff weiß (mit Additiv)</td><td>Markierung dunkel</td><td>500 – 1 000</td><td>30 – 50</td><td>20 – 40</td><td>0,03</td><td class="txt">Ohne Additiv: kein Kontrast, UV nehmen</td></tr>
+<tr><td>Edelstahl 0,2 mm</td><td>Schnitt</td><td>20 – 50</td><td>100</td><td>20 – 30</td><td>–</td><td class="txt">5 – 20 Durchgänge, Werkstück auf Abstand</td></tr>
+</tbody>
+</table></div>
+
+<h2>Testraster: so findet man die eigenen Werte</h2>
+<div class="steps">
+  <div class="step"><h4>Material-Testraster anlegen</h4>LightBurn: Laser Tools → Material Test. 5 × 5 bis 8 × 8 Felder, Speed auf einer Achse, Power auf der anderen. Für Schnitt: Quadrate 10 mm, für Gravur: gefüllte Felder mit 0,1 mm Linien.</div>
+  <div class="step"><h4>Bereich sinnvoll wählen</h4>Schnitt CO2 60 W: Speed 5 bis 30 mm/s, Power 40 bis 90 %. Diode 20 W: Speed 2 bis 15 mm/s, Power 100 % fest, dafür Durchgänge 1 bis 3. Faser: Speed 200 bis 2 000 mm/s, Power 20 bis 100 %.</div>
+  <div class="step"><h4>Fahren und beurteilen</h4>Schnitt: das Feld fällt von allein heraus, Rückseite kaum verbrannt, Kante senkrecht. Gravur: gewünschte Tiefe und Farbe, keine Brandränder, Holz nicht wellig.</div>
+  <div class="step"><h4>Sicherheit einbauen</h4>Gewählten Schnittwert 10 % langsamer oder 5 % stärker fahren. Sperrholz schwankt, der Leim ist nicht überall gleich.</div>
+  <div class="step"><h4>Bibliothek pflegen</h4>Material, Dicke, Lieferant, Datum, Linse, Fokus, Air Assist. LightBurn Material Library exportieren. Röhren altern, alle 100 Stunden neu testen.</div>
+</div>
+
+<h2>Fokus finden</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Rampentest</div><div class="cd">Brett schräg unterlegen (5 bis 10 mm Höhenunterschied über 100 mm), eine Linie mit Gravurleistung fahren. Die dünnste Stelle ist der Fokus. Abstand Düse zu Material dort messen, Distanzstück anfertigen.</div></div>
+  <div class="card"><div class="ct">Faser: Zweistrahl oder Leistungsgeräusch</div><div class="cd">Zwei rote Pilotlaser treffen sich im Fokus. Ohne: Z langsam verfahren, wo Funken und Geräusch am stärksten sind, ist der Fokus. Bei Metallgravur zählt ±0,5 mm.</div></div>
+  <div class="card"><div class="ct">Autofokus</div><div class="cd">Lichtvorhang, LiDAR, Taststift oder Kamera. Bequem, aber nach jedem Materialwechsel kontrollieren. Spiegelnde und schwarze Flächen täuschen LiDAR.</div></div>
+  <div class="card"><div class="ct">Fokus ins Material</div><div class="cd">Ab 6 mm Dicke Fokus 1/3 der Dicke unter die Oberfläche. Schnitt wird gleichmäßiger, Kante paralleler. Für Gravur immer Oberfläche.</div></div>
+</div>
+
+<h2>Parameter übertragen: Linienenergie</h2>
+<p class="lede">Gleiche Energie je Millimeter Strecke ergibt bei ähnlicher Optik ähnlichen Schnitt. Damit lässt sich ein bekannter Wert auf eine andere Leistung umrechnen, Ausgangspunkt für das Testraster.</p>
+<div class="calc" data-calc="laserlinie">
+  <h4>Linienenergie und Vorschub bei neuer Leistung</h4>
+  <div class="row">
+    <div><label>Bekannt: Leistung P₁ in W (optisch)</label><input data-k="p1" type="number" step="any" value="20" /></div>
+    <div><label>Bekannt: Vorschub v₁ in mm/s</label><input data-k="v1" type="number" step="any" value="8" /></div>
+    <div><label>Bekannt: Leistung in % (Anteil)</label><input data-k="pct1" type="number" step="any" value="100" /></div>
+    <div><label>Neu: Leistung P₂ in W</label><input data-k="p2" type="number" step="any" value="40" /></div>
+    <div><label>Neu: Leistung in % (Anteil)</label><input data-k="pct2" type="number" step="any" value="100" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<div class="calc" data-calc="lpi">
+  <h4>Linienabstand, LPI und DPI</h4>
+  <div class="row">
+    <div><label>Linienabstand in mm</label><input data-k="mm" type="number" step="any" value="0.08" /></div>
+    <div><label>oder LPI (Linien je Zoll)</label><input data-k="lpi" type="number" step="any" placeholder="z. B. 318" /></div>
+    <div><label>Spotgröße in mm (optional)</label><input data-k="spot" type="number" step="any" placeholder="z. B. 0.1" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Gravurmodi</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Modus</th><th>Was passiert</th><th>Wofür</th><th>Fallstrick</th></tr></thead>
+<tbody>
+<tr><td><b>Linie (Vektor)</b></td><td>Laser folgt der Kontur</td><td>Schnitt, Umriss, Schrift als Linie</td><td>Offene Pfade, doppelte Linien schneiden zweimal</td></tr>
+<tr><td><b>Fläche (Raster, Scan)</b></td><td>Zeile für Zeile wie ein Drucker</td><td>Gefüllte Formen, Text, Logos</td><td>Overscan einplanen, sonst Brandpunkte an den Zeilenenden</td></tr>
+<tr><td><b>Bild Graustufen (Dither)</b></td><td>Punktmuster (Jarvis, Stucki, Floyd-Steinberg, Newsprint)</td><td>Fotos auf Holz, Schiefer, Eloxal</td><td>Holz: Jarvis oder Stucki. Metall/Eloxal: Newsprint oder Halftone. Bild vorher schärfen und Kontrast erhöhen</td></tr>
+<tr><td><b>Bild Graustufen (echte Leistung)</b></td><td>Leistung folgt der Helligkeit</td><td>3D-Relief in Holz, Tiefenkarten (16-Bit in LightBurn 2.1)</td><td>Nur mit Inline-Leistung (Diode, RF); Glasröhren zünden unter 10 % nicht</td></tr>
+<tr><td><b>Offset-Fill / Tiefengravur</b></td><td>Fläche in versetzten Konturen oder Kreuzlagen</td><td>Faser-Tiefengravur, Stempel</td><td>Winkel je Durchgang wechseln (0°, 45°, 90°), sonst Rillen</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Ecken brennen, weil die Mechanik bremst.</b> Bei Vektor-Schnitten steht der Kopf in der Ecke kurz still, der Laser brennt weiter. Ruida: min power 10 bis 15 % unter max. GRBL: M4 (dynamische Leistung) statt M3. LightBurn: „Constant Power Mode“ aus.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>LightBurn-Dokumentation: Material Test, Material Library, Cut Settings Editor, Image Mode und Dither-Verfahren.</li>
+    <li>Herstellertabellen: xTool Material Settings (S1, P2S, F1 Ultra), Glowforge Proofgrade, Trotec und Epilog Materialdatenbanken, ComMarker Parameterlisten (Farbe auf Edelstahl).</li>
+    <li>Ruida RDC6445 Handbuch (min/max power, Beschleunigungen); GRBL-Dokumentation (M3/M4).</li>
+    <li>Community-Sammlungen: Sculpfun/xTool/Atomstack-Wikis, LightBurn Forum, Reddit r/lasercutting (Startwerte je Leistungsklasse, 2025/2026).</li>
+  </ul>
+</div>

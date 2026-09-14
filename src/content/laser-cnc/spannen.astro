@@ -1,0 +1,65 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die meisten Fräsfehler passieren vor dem Start: falsch gespannt, Nullpunkt verrutscht, Werkzeuglänge nicht gemessen.</b> Der Ablauf hier ist derselbe für jedes Teil und jede Maschine. Wer ihn zehnmal exakt durchgeht, macht ihn danach in fünf Minuten.</div>
+
+<h2>Spannen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Methode</th><th>Für</th><th>Haltekraft</th><th>Hinweis</th><th data-s="num">Preis</th></tr></thead>
+<tbody>
+<tr><td><b>Schrauben durchs Werkstück in die Opferplatte</b></td><td>Platten, Vollschnitt</td><td>sehr hoch</td><td>Schrauben außerhalb der Werkzeugwege, im CAM als Verbotszonen. Der zuverlässigste Weg</td><td>0 €</td></tr>
+<tr><td><b>Klemmpratzen, Stufenklemmen (T-Nut oder Gewinderaster)</b></td><td>Platten, Blöcke</td><td>hoch</td><td>Kollisionsgefahr mit Spindel, Sicherheitshöhe über Klemmen setzen. Erst planen, dann klemmen</td><td>30 – 80 €</td></tr>
+<tr><td><b>Klebeband + Sekundenkleber</b></td><td>Kleinteile, Alu, Acryl, Durchschnitte ohne Tabs</td><td>hoch (Fläche)</td><td>Malerkrepp auf beide Flächen, Sekundenkleber dazwischen. Hält Alu 5 mm sicher. Lösen mit Isopropanol</td><td>5 €</td></tr>
+<tr><td><b>Doppelseitiges Klebeband (Teppich, Gewebe)</b></td><td>Dünne Platten, Holz, Kunststoff</td><td>mittel</td><td>Günstig, Rückstände. Nicht für Alu-Vollschnitt</td><td>5 – 15 €</td></tr>
+<tr><td><b>Vakuumtisch</b></td><td>Platten in Serie, dünnes Material</td><td>hoch bei großen Flächen, schwach bei Kleinteilen</td><td>MDF-Opferplatte als Diffusor, Pumpe 100 – 300 m³/h. Kleinteile fliegen beim Durchschnitt</td><td>200 – 1 500 €</td></tr>
+<tr><td><b>Maschinenschraubstock (Niederzug)</b></td><td>Blöcke, Alu, Messing, Stahl</td><td>sehr hoch</td><td>Auf Tisch ausrichten (Messuhr), Parallelunterlagen. Für Metall der Standard</td><td>60 – 300 €</td></tr>
+<tr><td><b>Anschläge und Keile (Cam Clamps)</b></td><td>Platten, schnell</td><td>mittel</td><td>Seitlicher Druck, Werkstück kann sich heben, mit Tabs kombinieren</td><td>20 – 60 €</td></tr>
+<tr><td><b>Spannstifte / Passstifte im Raster</b></td><td>Wiederholaufspannung, beidseitig</td><td>Positionierung, keine Haltekraft</td><td>Gefräste Bohrungen in der Opferplatte, Werkstück mit Stiften anlegen. Für Flip-Jobs</td><td>10 €</td></tr>
+</tbody>
+</table></div>
+
+<h2>Opferplatte und Tisch</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Aufbau</div><div class="cd">MDF 16 bis 19 mm auf dem Maschinentisch, mit Gewinderaster (M6-Einschlagmuttern, Raster 50 oder 100 mm) oder T-Nut-Profilen. Alternativ Alu-T-Nut-Tisch mit MDF darauf.</div></div>
+  <div class="card"><div class="ct">Planen</div><div class="cd">Nach Montage und alle paar Wochen mit Planfräser 0,2 bis 0,5 mm abnehmen. Dann ist der Tisch exakt parallel zur Spindel, Durchschnitte gehen 0,1 mm in die Platte, nicht 1 mm.</div></div>
+  <div class="card"><div class="ct">Tabs (Haltestege)</div><div class="cd">Beim Ausschneiden bleiben 3 bis 6 Stege stehen (Holz: 5 mm breit, 1 bis 2 mm hoch; Alu: 3 × 0,5 mm). Danach mit Stechbeitel oder Bündigfräser entfernen. Bei Klebeband-Sekundenkleber unnötig.</div></div>
+  <div class="card"><div class="ct">Verzug</div><div class="cd">Massivholz und dicke Kunststoffe verziehen sich beim Ausfräsen (Spannungen). Vorfräsen mit 1 mm Aufmaß, liegen lassen, dann fertig fräsen. Bei Alu-Platten Aufmaß beidseitig planen.</div></div>
+</div>
+
+<h2>Nullpunkt und Werkzeuglänge</h2>
+<div class="steps">
+  <div class="step"><h4>Referenzfahrt (Homing)</h4>Maschine fährt Endschalter an, kennt danach ihre Maschinenkoordinaten (G53). Nur so bleiben G54-Nullpunkte nach Neustart gültig. Ohne Endschalter: Position nach Einschalten ist Null, alles relativ.</div>
+  <div class="step"><h4>XY-Nullpunkt setzen</h4>Ecke des Werkstücks (vorne links üblich) oder Mitte, wie im CAM definiert. Mit Kantentaster, 3D-Taster, Kamera oder nach Augenmaß mit dem Fräser (±0,2 mm). BitZero, Sienci Touch Plate und Ähnliches messen die Ecke automatisch in 20 Sekunden.</div>
+  <div class="step"><h4>Z-Nullpunkt setzen</h4>Oberkante Werkstück (Standard) oder Tischoberfläche (für Durchschnitte sicherer, Werkstückdicke egal). Werkzeuglängensensor: Fräser antasten (G38.2), Höhe des Sensors wird abgezogen. Ohne Sensor: Papierblatt-Methode, ±0,05 mm.</div>
+  <div class="step"><h4>Werkzeugwechsel im Job</h4>Nach jedem Wechsel Z neu messen (Fräser sind nie gleich lang). gSender, Carbide Motion und Masso führen durch den Dialog; bei GRBL: M0 im G-Code, Wechsel, Z antasten, weiter. Ohne Neu-Messen fräst das nächste Werkzeug 5 mm zu tief oder in der Luft.</div>
+  <div class="step"><h4>Kontrolle</h4>Nach Nullen: G0 X0 Y0 anfahren, Z auf 5 mm, Position stimmt? Dann Sicherheitshöhe aus dem CAM gegen die höchste Klemme prüfen.</div>
+</div>
+
+<h2>Der Ablauf eines Jobs</h2>
+<div class="steps">
+  <div class="step"><h4>CAM prüfen</h4>Material, Fräser, Nullpunkt, Sicherheitshöhe, Tabs, Reihenfolge (Bohrungen, Taschen, Gravur, Kontur zuletzt). Simulation angesehen. Datei mit dem richtigen Postprozessor gespeichert.</div>
+  <div class="step"><h4>Maschine vorbereiten</h4>Späne weg, Opferplatte sauber, Werkstück spannen, Klemmen außerhalb der Wege. Absaugung angeschlossen. Fräser mit Messuhr auf Rundlauf geprüft, wenn neu gespannt.</div>
+  <div class="step"><h4>Nullen</h4>Homing, XY, Z. Werkzeug in der Steuerung passend zum CAM.</div>
+  <div class="step"><h4>Trockenlauf</h4>Z-Null 20 mm nach oben setzen, Job in der Luft fahren oder Eilgänge im Sender bremsen. Sieht man, wo er hinfährt? Stößt er nirgends an? Dann Z zurück.</div>
+  <div class="step"><h4>Start mit Hand am Notaus</h4>Spindel hochlaufen lassen, erste Zustellung beobachten. Geräusch richtig? Späne richtig? Feed-Override 50 bis 150 % im Sender zum Feintunen.</div>
+  <div class="step"><h4>Beobachten, nicht weggehen</h4>Gelöste Werkstücke, verklebte Fräser, Feuer in MDF-Staub, Schrittverlust. Die ersten Minuten und jeder Werkzeugwechsel brauchen Augen.</div>
+  <div class="step"><h4>Nachbereiten</h4>Spindel aus, Z hoch, Teil lösen, Tabs entfernen, Kanten brechen. Werte notieren: Material, Fräser, Vorschub, Drehzahl, Zustellung, Ergebnis. Maschine absaugen, Führungen abwischen.</div>
+</div>
+
+<h2>Beidseitige Bearbeitung</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Mit Passstiften</div><div class="cd">Im ersten Setup zwei Bohrungen (z. B. 6 mm, Passstifte) durch Werkstück und in die Opferplatte fräsen, symmetrisch zur Umschlagachse. Umdrehen, auf die Stifte setzen, zweites Setup mit gespiegeltem Nullpunkt. Genauigkeit ±0,05 mm.</div></div>
+  <div class="card"><div class="ct">Mit Anschlagkante</div><div class="cd">Gerade Anschlagleiste auf der Opferplatte parallel zu X, Werkstück anlegen, Nullpunkt an der Ecke. Umdrehen um die X-Achse, wieder anlegen. Einfacher, ±0,1 mm.</div></div>
+  <div class="card"><div class="ct">Im CAM</div><div class="cd">Fusion: zwei Setups, zweites mit „Flip“ (Z-Achse um X gedreht), gleicher Rohteilkörper. Estlcam: zweites Projekt mit gespiegelter Zeichnung. Werkstückdicke muss stimmen, sonst passen die Seiten nicht.</div></div>
+  <div class="card"><div class="ct">Reihenfolge</div><div class="cd">Erst die Seite mit den Taschen und Bohrungen, dann umdrehen und Kontur ausschneiden. So liegt das Werkstück beim Durchschnitt flach und ganz auf.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Carbide 3D: Workholding Guide, BitZero und BitSetter Dokumentation; Sienci Labs: Workholding und Touch Plate; Onefinity: Probing.</li>
+    <li>gSender Dokumentation (Tool Change, Probing, Surfacing), grblHAL Wiki (G38.2, Tool Length Offsets).</li>
+    <li>Fusion 360: Setups, Flip Operations, Stock, Tabs.</li>
+    <li>Zerspanungsbude und Shapeoko Community: Klebeband-Sekundenkleber-Methode, Passstift-Wechselaufspannung.</li>
+  </ul>
+</div>

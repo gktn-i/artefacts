@@ -1,0 +1,73 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Ein Laser schneidet nicht, weil er stark ist, sondern weil das Material seine Wellenlänge schluckt.</b> Deshalb geht CO2 durch Acryl wie durch Butter und prallt an Metall ab, deshalb kann eine 450-nm-Diode durch klares Acryl hindurchleuchten, ohne es zu wärmen. Wer die vier Größen Wellenlänge, Absorption, Fokus und Linienenergie kennt, versteht jede Parametertabelle.</div>
+
+<h2>Die vier Wellenlängen der Werkstatt</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Quelle</th><th data-s="num">Wellenlänge</th><th>Erzeugung</th><th>Absorbiert gut</th><th>Absorbiert schlecht</th><th>Sichtbar?</th></tr></thead>
+<tbody>
+<tr><td><b>CO2</b></td><td>10 600 nm (10,6 µm)</td><td>Gasentladung in Glasröhre (DC) oder Hochfrequenz-Anregung in Metallröhre (RF)</td><td>Holz, Papier, Kunststoffe, Glas, Wasser, Leder, Stein</td><td>Metalle (Reflexion über 90 %)</td><td>Nein, fernes Infrarot. Roter Pilotlaser zeigt die Stelle</td></tr>
+<tr><td><b>Diode</b></td><td>445 – 455 nm (blau)</td><td>Halbleiterdioden, mehrere Strahlen mit Prismen und Polarisation gebündelt</td><td>Holz, Leder, dunkle und rote Kunststoffe, Stein, Oxidschichten</td><td>Klares, weißes, blaues Material, Metalle blank</td><td>Ja, sehr hell. Direkter Blick gefährlich, Streulicht blendet</td></tr>
+<tr><td><b>Faser</b></td><td>1 064 nm (nahes IR)</td><td>Ytterbium-dotierte Glasfaser, gepumpt mit Dioden</td><td>Metalle, viele Kunststoffe mit Zusatz (Ruß, Pigmente), Keramik</td><td>Holz, Glas, klare Kunststoffe</td><td>Nein. Das gefährlichste Licht der Liste: die Linse des Auges fokussiert es auf die Netzhaut</td></tr>
+<tr><td><b>UV</b></td><td>355 nm</td><td>Frequenzverdreifachter Festkörperlaser (Nd:YVO4)</td><td>Fast alles, auch Glas, klare und weiße Kunststoffe</td><td>Wenig, aber die Leistung ist gering</td><td>Nein, nahes UV, Fluoreszenz sichtbar</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zum Vergleich: ein industrieller Blechlaser ist ein Faserlaser mit 1 bis 30 kW und Schneidgas, ein anderes Gerät als der Galvo-Markierlaser auf dem Tisch.</p>
+
+<h2>Was der Strahl am Material macht</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Verdampfen und Verbrennen (Holz, Papier, Leder)</div><div class="cd">Der Strahl erhitzt das Material über die Zersetzungstemperatur, Kohlenstoff verbrennt, Gase entweichen. Die Kante ist braun bis schwarz. Air Assist bläst die Flamme aus und trägt Rauch aus der Fuge.</div></div>
+  <div class="card"><div class="ct">Schmelzen und Verdampfen (Acryl)</div><div class="cd">PMMA depolymerisiert zu Monomer und verdampft fast rückstandsfrei. Die Kante wird glasklar (Flammpolitur), wenn Air Assist schwach und die Fuge nicht verwirbelt wird.</div></div>
+  <div class="card"><div class="ct">Oxidieren und Anlassen (Metall, Faser)</div><div class="cd">Kurze Pulse heizen eine dünne Schicht. Bei niedriger Leistung entsteht eine Oxidschicht (dunkle Markierung, Anlassfarben), bei hoher Leistung verdampft Metall (Gravur). MOPA steuert die Oxiddicke über Pulsdauer und Frequenz, daraus entstehen Interferenzfarben.</div></div>
+  <div class="card"><div class="ct">Aufschäumen und Bleichen (Kunststoffe, Eloxal)</div><div class="cd">Kunststoffe mit Laseradditiv schäumen auf (heller Kontrast) oder karbonisieren (dunkel). Eloxiertes Alu verliert an der Stelle das Pigment, es entsteht weiß.</div></div>
+  <div class="card"><div class="ct">Kalte Ablation (UV)</div><div class="cd">Photonen bei 355 nm brechen chemische Bindungen direkt. Kaum Wärme, keine Schmelzzone, deshalb feine Kanten in Glas, Silikon und weißen Kunststoffen.</div></div>
+  <div class="card"><div class="ct">Mikrorisse (Glas, CO2)</div><div class="cd">Glas absorbiert 10,6 µm an der Oberfläche, erhitzt punktuell und platzt in winzigen Splittern ab. Das Ergebnis ist matt und rau. Nasses Papier oder Spülmittelfilm auf dem Glas glättet das Ergebnis.</div></div>
+</div>
+
+<h2>Fokus, Spot und Schnittfuge</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Größe</th><th>CO2</th><th>Diode</th><th>Faser (Galvo)</th><th>Was sie bewirkt</th></tr></thead>
+<tbody>
+<tr><td><b>Spotgröße im Fokus</b></td><td>0,1 – 0,25 mm (Linse 2″)</td><td>0,06 × 0,08 mm (10 W) bis 0,1 × 0,15 mm (40 W)</td><td>0,02 – 0,05 mm</td><td>Bestimmt Detailauflösung und Leistungsdichte</td></tr>
+<tr><td><b>Schnittfuge (Kerf)</b></td><td>0,15 – 0,3 mm</td><td>0,1 – 0,2 mm</td><td>0,03 – 0,08 mm</td><td>Muss in Passungen und Steckverbindungen kompensiert werden</td></tr>
+<tr><td><b>Brennweite</b></td><td>1,5″ / 2″ / 2,5″ / 4″ (38 bis 100 mm)</td><td>fest, Modul-abhängig, oft 30 – 50 mm</td><td>F-Theta 160 mm (110 × 110) bis 420 mm (300 × 300)</td><td>Kurz: feiner Spot, kurze Schärfentiefe. Lang: dickes Material, gröber</td></tr>
+<tr><td><b>Schärfentiefe (Rayleigh)</b></td><td>±1 – 3 mm</td><td>±1 – 2 mm</td><td>±0,5 – 1,5 mm</td><td>Warum die Fokuslage bei dickem Material in die Mitte oder ein Drittel tief gelegt wird</td></tr>
+<tr><td><b>Fokussierung</b></td><td>ZnSe-Linse, Spiegel Mo oder Si</td><td>Glaslinse im Modul</td><td>Galvo-Spiegel + F-Theta-Linse</td><td>ZnSe darf nicht angefasst werden, Öl senkt Lebensdauer</td></tr>
+</tbody>
+</table></div>
+<div class="fbox"><span class="f">Leistungsdichte = P / (π · r²)  ·  Linienenergie E = P / v  [J/mm]</span><span class="l">P Laserleistung in W, r Spotradius, v Vorschub in mm/s. Gleiche Linienenergie ergibt bei gleicher Optik ungefähr gleiches Schnittergebnis. Damit lassen sich Parameter zwischen Maschinen übertragen, Rechner in <a href="#parameter">Laserparameter finden</a>.</span></div>
+
+<h2>Leistung: was auf dem Karton steht und was ankommt</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Angabe</th><th>Bedeutet</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Optische Ausgangsleistung</b></td><td>Was am Werkstück ankommt. Die einzige Zahl, die zählt</td><td>xTool S1 „40 W“ = 40 W optisch aus 8 Dioden, Creality Falcon2 „22 W“ = 22 W optisch</td></tr>
+<tr><td><b>Elektrische Leistung</b></td><td>Stromaufnahme des Moduls oder Geräts. Bei Dioden etwa das Dreifache der optischen</td><td>Atomstack „X70 Max 360 W“: 360 W Aufnahme, 70 – 77 W optisch</td></tr>
+<tr><td><b>„Laserleistung“ ohne Zusatz</b></td><td>Bei seriösen Anbietern optisch, bei Marktplatzware oft elektrisch. Zahlen über 80 W bei Dioden sind fast immer elektrisch</td><td>„80 W Diodenlaser“ für 200 € hat 5 – 10 W optisch</td></tr>
+<tr><td><b>CO2-Röhre nominal / Peak</b></td><td>Glasröhren werden nach Länge klassifiziert: 40 W (700 mm), 60 W (1 250 mm), 80 W (1 600 mm). Peak-Werte liegen 20 % darüber, Dauerbetrieb 10 – 20 % darunter</td><td>Eine „60 W“-Röhre liefert 45 – 55 W über die Lebensdauer</td></tr>
+<tr><td><b>Faser: mittlere Leistung</b></td><td>20 W mittlere Leistung bei 1 mJ Pulsenergie und 20 kHz. Spitzenleistung im Puls liegt bei 10 kW</td><td>Gleiche 20 W markieren bei 200 kHz flacher und schneller, bei 20 kHz tiefer</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Watt sind nur die halbe Wahrheit.</b> Ein 40-W-Diodenmodul hat einen dreimal größeren Spot als ein 10-W-Modul und dadurch nicht die vierfache Leistungsdichte. Es schneidet dicker, graviert aber gröber. Wer vor allem graviert, kauft das kleinere Modul mit dem feineren Spot.</div>
+
+<h2>Dauerstrich gegen Puls</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Betriebsart</th><th>Wo</th><th>Parameter</th><th>Wirkung</th></tr></thead>
+<tbody>
+<tr><td><b>CW (Dauerstrich) mit PWM</b></td><td>CO2, Diode</td><td>Leistung in %, Vorschub, Linienabstand</td><td>PWM bei 1 – 20 kHz stellt mittlere Leistung. Unter 10 % zündet eine Glasröhre nicht mehr, Dioden ab etwa 3 %</td></tr>
+<tr><td><b>Q-Switch (gütegeschaltet)</b></td><td>Faser, günstig (Raycus, Max)</td><td>Frequenz 20 – 80 kHz, Pulsdauer fest ~100 ns</td><td>Hohe Pulsenergie, gut für Tiefengravur und Schneiden von Folie. Keine Farbe</td></tr>
+<tr><td><b>MOPA</b></td><td>Faser (JPT M7, Raycus MOPA)</td><td>Frequenz 1 – 4 000 kHz, Pulsdauer 2 – 500 ns einstellbar</td><td>Farbmarkierung auf Edelstahl, tiefes Schwarz auf Alu, feine Kunststoffe, weniger Wärme</td></tr>
+<tr><td><b>Kurzpuls UV</b></td><td>UV-Galvo</td><td>Frequenz 20 – 200 kHz, Pulse < 20 ns</td><td>Kalte Ablation, Glas und Kunststoff</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>William M. Steen, Jyotirmoy Mazumder, <i>Laser Material Processing</i>, Springer. Absorption, Schnittmechanismen, Strahlqualität.</li>
+    <li>Raycus und JPT Datenblätter zu Q-Switch- und MOPA-Quellen (Pulsdauer, Frequenzbereiche, Pulsenergie).</li>
+    <li>Herstellerangaben zu Spotgrößen: xTool (S1, D1 Pro, F1 Ultra), Creality Falcon, OMTech (Polar, RF 0,07 mm), ComMarker.</li>
+    <li>II-VI / Coherent: Eigenschaften von ZnSe-Optiken; Semrock und Thorlabs: Absorptionskurven gängiger Werkstoffe.</li>
+  </ul>
+</div>

@@ -1,0 +1,80 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Eine CNC-Fräse ist ein steifer Rahmen, der einen drehenden Fräser exakt durch Material schiebt. Alles andere ist Zubehör.</b> Steifigkeit entscheidet über Alu oder nicht, die Spindel über Vorschub und Lärm, die Steuerung über Komfort. Wer die fünf Baugruppen kennt, liest jedes Datenblatt richtig.</div>
+
+<h2>Die fünf Baugruppen</h2>
+<div class="steps">
+  <div class="step"><h4>Rahmen und Portal</h4>Aluprofil (3018, LongMill, Shapeoko), Alu-Strangguss (Stepcraft, Sorotec), Stahl (Onefinity Foreman, BZT, Werkstattmaschinen), Guss (Tormach, Werkzeugmaschinen). Steifigkeit wächst mit Querschnitt und Material, sinkt mit Portalbreite und Z-Auskragung. Ein „gut“ am Alurahmen heißt: 0,1 mm Durchbiegung unter 100 N Fräskraft. Alu fräsen fängt bei Stahlrahmen oder massivem Aluguss an.</div>
+  <div class="step"><h4>Linearführungen</h4>V-Rollen auf Aluprofil (günstig, verschleißen, nachstellen), Rundwellen mit Kugelbuchsen (Stepcraft D, mittel), Profilschienen mit Kugelwagen (HGR15/20, MGN12: steif, teuer, Standard ab 2 000 €). Profilschienen sind der größte Unterschied zwischen Hobby und Halbprofi.</div>
+  <div class="step"><h4>Antriebe</h4>Zahnriemen GT2/GT3 (schnell, günstig, dehnt sich, Genauigkeit ±0,1 mm), Trapezspindel Tr8 oder Tr12 (langsam, selbsthemmend, Spiel), Kugelumlaufspindel SFU1204/1605 (genau, teuer, Standard ab Mittelklasse), Zahnstange (lang, schnell, große Maschinen). Riemen reichen für Holz, Kugelumlaufspindel ab Alu.</div>
+  <div class="step"><h4>Motoren</h4>NEMA 17 (3018, Riemen), NEMA 23 (Standard, 1,2 bis 3 Nm), NEMA 23 Closed-Loop (mit Encoder, meldet Schrittverlust, Genmitsu PROVerXL V2, Onefinity Elite), Servomotoren (Werkstattmaschinen). Verfahrgeschwindigkeiten: 2 bis 5 m/min Hobby, 10 bis 30 m/min mit Servos.</div>
+  <div class="step"><h4>Spindel</h4>Die eigentliche Werkzeugmaschine. Siehe Tabelle unten. Regel: Leistung reicht fast immer, Rundlauf und Drehzahlbereich entscheiden über Oberfläche und Werkzeugbruch.</div>
+</div>
+
+<h2>Spindeln</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Typ</th><th data-s="num">Leistung</th><th data-s="num">Drehzahl</th><th>Spannzange</th><th>Rundlauf</th><th>Lärm</th><th data-s="num">Preis</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>DC-Spindel 775 / 500 W</b></td><td>60 – 200 W real</td><td>0 – 10 000</td><td>ER11 (bis 7 mm)</td><td>0,05 mm</td><td>mittel</td><td>30 – 80 €</td><td>3018-Klasse, PCB, Balsa, Gravur</td></tr>
+<tr><td><b>Oberfräse (Makita RT0700C, Carbide Compact Router, DeWalt DWP611)</b></td><td>700 – 900 W</td><td>10 000 – 30 000</td><td>6 / 8 mm, 1/4″ Zange</td><td>0,02 – 0,05 mm</td><td>hoch (80 – 90 dB)</td><td>100 – 150 €</td><td>Standard bei Shapeoko, LongMill, Onefinity. Holz, Kunststoff, Alu mit Geduld. Kohlebürsten alle 200 h</td></tr>
+<tr><td><b>AMB (Kress) 1050 FME-P</b></td><td>1 050 W</td><td>5 000 – 25 000</td><td>ER16 (bis 10 mm)</td><td>0,01 – 0,02 mm</td><td>hoch</td><td>350 – 450 €</td><td>Deutsche Standardspindel für Stepcraft, Sorotec Hobby. Drehzahlregelung, gute Lager</td></tr>
+<tr><td><b>China-HF-Spindel 800 W luftgekühlt</b></td><td>800 W</td><td>6 000 – 24 000</td><td>ER11</td><td>0,01 mm</td><td>niedrig (Lüftergeräusch)</td><td>150 – 250 € mit FU</td><td>Leiser Einstieg mit Frequenzumrichter. Unter 8 000 min⁻¹ wenig Drehmoment</td></tr>
+<tr><td><b>China-HF-Spindel 1,5 / 2,2 kW wassergekühlt</b></td><td>1,5 – 2,2 kW</td><td>6 000 – 24 000</td><td>ER11 / ER16 / ER20</td><td>0,005 – 0,01 mm</td><td>sehr niedrig</td><td>250 – 500 € mit FU</td><td>Standard ab Mittelklasse. Wasserkühlung mit Pumpe und Eimer. Alu, Serie, Dauerbetrieb</td></tr>
+<tr><td><b>Mechatron HFS-8022 / Teknomotor / Jäger</b></td><td>0,8 – 2,2 kW</td><td>5 000 – 24 000</td><td>ER16 / ER20</td><td>0,003 mm</td><td>niedrig</td><td>800 – 2 500 €</td><td>Werkstattqualität, Keramiklager, Service in DE</td></tr>
+<tr><td><b>Spindel mit Werkzeugwechsler (ATC)</b></td><td>0,2 kW (Carvera) bis 2,2 kW</td><td>bis 24 000</td><td>ISO10, ISO20, BT30</td><td>0,005 mm</td><td>niedrig</td><td>ab 3 000 € (Nachrüstung), Carvera integriert</td><td>Mehrere Werkzeuge im Job ohne Eingriff. Erst ab Serienarbeit sinnvoll</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Drehzahl ist die Grenze der Oberfräse.</b> Makita und Co. laufen minimal 10 000 min⁻¹. Für 8-mm-Fräser in Alu wären 5 000 min⁻¹ richtig, geht nicht. Ausweg: kleine Fräser (3 bis 4 mm) mit hoher Drehzahl, oder eine HF-Spindel mit Frequenzumrichter.</div>
+
+<h2>Steuerungen</h2>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Steuerung</th><th>Hardware</th><th>Sender / Oberfläche</th><th>Bei</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>GRBL 1.1</b></td><td>Arduino Uno, 8-Bit</td><td>UGS, Candle, CNCjs, gSender, bCNC, OpenBuilds Control</td><td>3018, ältere Hobbymaschinen</td><td>30 kHz Schrittrate, keine Fräserradiuskorrektur, kein Gewindebohren. Reicht für 3 Achsen</td></tr>
+<tr><td><b>grblHAL</b></td><td>32-Bit (Teensy, STM32, ESP32)</td><td>gSender, ioSender, CNCjs</td><td>Sienci SuperLongBoard, Nachrüstungen</td><td>Bis 5 Achsen, Ethernet, Werkzeugwechsel, Plugins. Der GRBL-Nachfolger</td></tr>
+<tr><td><b>FluidNC</b></td><td>ESP32</td><td>WebUI, gSender</td><td>Umbauten, kleine Maschinen</td><td>WLAN, YAML-Konfiguration, kein Flashen nötig</td></tr>
+<tr><td><b>Carbide Motion</b></td><td>Carbide 3D Board (GRBL)</td><td>Carbide Motion</td><td>Shapeoko, Nomad</td><td>Geführt, BitSetter, BitZero. Auch mit anderen GRBL-Sendern nutzbar</td></tr>
+<tr><td><b>Buildbotics / Onefinity Controller</b></td><td>Raspberry Pi + Treiber</td><td>Touchscreen, Web</td><td>Onefinity</td><td>Eigenständig ohne PC, gute Oberfläche</td></tr>
+<tr><td><b>Masso G3 Touch</b></td><td>Eigenständig</td><td>Touchscreen</td><td>Onefinity Elite, AltMill (optional), Nachrüstung</td><td>Industrie-Feeling, ATC, Messtaster, 1 500 – 2 000 €</td></tr>
+<tr><td><b>Estlcam-Steuerung</b></td><td>Arduino / Estlcam-Board</td><td>Estlcam (CAM und Steuerung in einem)</td><td>Deutsche Hobbyszene, Eigenbauten</td><td>Sehr beliebt: Zeichnen, CAM, Fräsen in einem Programm, 60 € Lizenz</td></tr>
+<tr><td><b>Stepcraft UCCNC / WinPC-NC</b></td><td>Stepcraft-Board</td><td>UCCNC, WinPC-NC</td><td>Stepcraft</td><td>Ausgereift, mit Werkzeuglängensensor</td></tr>
+<tr><td><b>LinuxCNC</b></td><td>PC mit Mesa-Karte</td><td>Axis, QtDragon</td><td>Umbauten, Werkstattmaschinen</td><td>Echtzeit, alles möglich, Einrichtung aufwendig</td></tr>
+<tr><td><b>Mach3 / Mach4</b></td><td>PC + Bewegungscontroller</td><td>eigene</td><td>Ältere Werkstattmaschinen</td><td>Mach3 veraltet (2013), Mach4 kostenpflichtig, in DE weniger verbreitet</td></tr>
+<tr><td><b>Centroid Acorn</b></td><td>Eigenständige Karte</td><td>CNC12</td><td>Nachrüstung Fräsmaschinen</td><td>Werkzeugmaschinen-Feeling, ATC, Rigid Tapping</td></tr>
+</tbody>
+</table></div>
+
+<h2>Genauigkeit lesen</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Begriff</th><th>Bedeutung</th><th>Hobbymaschine</th><th>Werkstattmaschine</th></tr></thead>
+<tbody>
+<tr><td><b>Auflösung</b></td><td>Kleinster Schritt (Mikroschritt × Spindelsteigung)</td><td>0,001 – 0,01 mm (sagt nichts über Genauigkeit)</td><td>0,001 mm</td></tr>
+<tr><td><b>Wiederholgenauigkeit</b></td><td>Gleiche Position mehrmals anfahren</td><td>±0,02 – 0,05 mm</td><td>±0,005 mm</td></tr>
+<tr><td><b>Absolute Genauigkeit</b></td><td>Sollmaß gegen Istmaß über die Achse</td><td>±0,05 – 0,2 mm je 300 mm (Riemen, Winkelfehler)</td><td>±0,01 – 0,03 mm</td></tr>
+<tr><td><b>Umkehrspiel (Backlash)</b></td><td>Verlorene Bewegung bei Richtungswechsel</td><td>0,02 – 0,1 mm (Trapez, Riemen), 0,005 – 0,02 (Kugelumlauf)</td><td>< 0,005 mm</td></tr>
+<tr><td><b>Rundlauf (Runout)</b></td><td>Taumeln des Fräsers an der Spitze</td><td>0,02 – 0,05 mm (Oberfräse), 0,01 (HF-Spindel)</td><td>0,003 – 0,005 mm</td></tr>
+<tr><td><b>Tramming</b></td><td>Spindel senkrecht zum Tisch</td><td>Selbst einstellen, 0,05 mm über 100 mm Ziel</td><td>ab Werk</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>„0,01 mm Präzision“ im Prospekt ist die Auflösung, nicht die Genauigkeit.</b> Ein 3018 mit 0,0025 mm Auflösung fräst Rechtecke mit 0,2 mm Fehler, weil der Rahmen unter Last nachgibt. Genauigkeit misst man mit einem Probeteil (50-mm-Quadrat) und dem Messschieber, nicht im Datenblatt.</div>
+
+<h2>Kinematik: was der Rahmen aushalten muss</h2>
+<div class="fbox"><span class="f">F_c ≈ k_c · a_p · f_z · z · (a_e / d)  ·  Beispiel Alu, 6 mm 1-Schneider, a_p 1 mm, f_z 0,04 mm, a_e 3 mm: F_c ≈ 800 · 1 · 0,04 · 1 · 0,5 ≈ 16 N</span><span class="l">k_c spezifische Schnittkraft (Holz 100 – 300, Alu 700 – 900, Stahl 1 800 – 2 500 N/mm²). Die Kraft ist klein, aber sie wirkt am Hebel der Z-Achse. 16 N bei 100 mm Auskragung an einem Portal mit 20 N/mm Steifigkeit ergeben 0,08 mm Abdrängung, sichtbar als Maßfehler und Rattermarken.</span></div>
+<div class="grid">
+  <div class="card"><div class="ct">Z-Auskragung kurz halten</div><div class="cd">Spindel so hoch wie möglich spannen, Fräser so kurz wie möglich. Jeder Zentimeter kostet Steifigkeit in der dritten Potenz.</div></div>
+  <div class="card"><div class="ct">Trochoidal statt Vollnut</div><div class="cd">Kleine seitliche Zustellung (10 bis 20 % d) mit voller Tiefe: kleinere Kraft, kühlerer Fräser, mehr Zeitspanvolumen auf schwachen Maschinen. CAM: „Adaptive Clearing“ (Fusion), „Trochoidal“ (Estlcam).</div></div>
+  <div class="card"><div class="ct">Gleichlauf oder Gegenlauf</div><div class="cd">Gleichlauf (Climb): Fräser zieht sich ins Material, beste Oberfläche, braucht spielfreie Achsen. Gegenlauf (Conventional): sicherer bei Spiel, raue Oberfläche. Hobbymaschine mit Kugelumlauf: Gleichlauf schruppen, Schlichten je nach Ergebnis.</div></div>
+  <div class="card"><div class="ct">Resonanz</div><div class="cd">Rattern ist eine Eigenfrequenz des Systems. Drehzahl 10 bis 20 % ändern, Fräser kürzer, Werkstück fester spannen. Nicht einfach langsamer fahren, das reibt.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Herstellerangaben zu Führungen, Antrieben und Steifigkeit: Carbide 3D (Shapeoko 5 Pro), Sienci Labs (LongMill MK2.5, AltMill), Onefinity (Elite, Foreman), Stepcraft (D- und M-Serie), Sorotec, BZT, Makera (Carvera, Carvera Air).</li>
+    <li>Hiwin und THK Kataloge (Profilschienen), Bosch Rexroth (Kugelumlaufspindeln), Nanotec und Leadshine (Closed-Loop-Schrittmotoren).</li>
+    <li>Spindeln: Makita RT0700C, AMB 1050 FME-P, Mechatron HFS, Teknomotor Datenblätter; Huanyang FU-Handbuch.</li>
+    <li>grblHAL, FluidNC, gSender, Estlcam, Masso, LinuxCNC Dokumentation (Stand 2026).</li>
+    <li>Schnittkraft: Kienzle-Modell, Werte nach Werkzeugkatalogen (Sandvik Coromant, Garant Zerspanungshandbuch).</li>
+  </ul>
+</div>

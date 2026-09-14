@@ -1,0 +1,99 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der Diodenlaser hat das Lasern in jede Werkstatt gebracht: kein Wasser, keine Spiegel, kein Hochspannungsnetzteil, unter 500 € Einstieg.</b> Seine Grenze ist die Wellenlänge: 450 nm braucht ein Material, das Blau schluckt. Alles Klare, Weiße und Metallische bleibt ihm verschlossen.</div>
+
+<h2>Wie das Modul funktioniert</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Dioden bündeln</div><div class="cd">Eine blaue Laserdiode (Nichia, Osram, NUBM-Serie) liefert 5 bis 7 W. Module bündeln 2, 4, 8 oder 14 Dioden über Polarisationsstrahlteiler und Prismen: 10 W (2), 20 W (4), 40 W (8), 70 W (14). Jede Kombinationsstufe vergrößert den Spot.</div></div>
+  <div class="card"><div class="ct">Spot</div><div class="cd">10 W: etwa 0,06 × 0,08 mm. 20 W: 0,08 × 0,10 mm. 40 W: 0,10 × 0,15 mm. 70 W: 0,15 × 0,2 mm. Der Spot ist elliptisch, deshalb schneiden manche Module in X anders als in Y.</div></div>
+  <div class="card"><div class="ct">Lebensdauer</div><div class="cd">Hersteller nennen 10 000 bis 20 000 Stunden. Dioden sterben an Hitze und Rückreflexion. Lüfter frei halten, Linse sauber, nicht auf Spiegel oder blankes Metall feuern.</div></div>
+  <div class="card"><div class="ct">Fokus</div><div class="cd">Feste Brennweite, Fokusabstand über Distanzstück, Schieber oder Autofokus (LiDAR, Lichtvorhang) eingestellt. Für dickes Material Fokus 1/3 in die Tiefe legen, kostet Gravurfeinheit.</div></div>
+  <div class="card"><div class="ct">Air Assist</div><div class="cd">Beim Schneiden unverzichtbar: 10 bis 30 l/min direkt in die Fuge. Verdoppelt die Schnittleistung und halbiert die Brandränder. Beim Gravieren von Holz schwach oder aus, sonst werden Ränder dunkel.</div></div>
+  <div class="card"><div class="ct">IR-Modul 1 064 nm</div><div class="cd">2-W-Infrarotmodul (xTool, Atomstack, Creality) als Wechselkopf: markiert blankes Metall, Kunststoff, Eloxal. Kein Ersatz für einen Faserlaser (Faktor 10 langsamer), aber gut für Anhänger und Werkzeuge.</div></div>
+</div>
+
+<h2>Was ein Diodenlaser schneidet</h2>
+<p class="lede">Ein Durchgang, Air Assist an, optische Leistung. „Bis 15 mm“ in Werbung heißt: in mehreren Durchgängen bei Lindenholz, mit schwarzer Kante.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Material</th><th data-s="num">5 W</th><th data-s="num">10 W</th><th data-s="num">20 W</th><th data-s="num">40 W</th><th data-s="num">70 W</th></tr></thead>
+<tbody>
+<tr><td><b>Lindenholz (Basswood)</b></td><td>3 mm</td><td>6 – 8 mm</td><td>10 – 12 mm</td><td>15 – 20 mm</td><td>25 mm</td></tr>
+<tr><td><b>Pappelsperrholz</b></td><td>3 mm</td><td>5 – 6 mm</td><td>8 – 10 mm</td><td>12 – 15 mm</td><td>18 mm</td></tr>
+<tr><td><b>Birkensperrholz</b></td><td>2 mm</td><td>3 – 4 mm</td><td>6 mm</td><td>8 – 10 mm</td><td>12 mm</td></tr>
+<tr><td><b>MDF</b></td><td>2 mm</td><td>3 mm</td><td>5 – 6 mm</td><td>8 – 10 mm</td><td>12 mm</td></tr>
+<tr><td><b>Acryl schwarz (Guss)</b></td><td>2 mm</td><td>3 – 5 mm</td><td>6 – 8 mm</td><td>8 – 10 mm</td><td>15 – 25 mm</td></tr>
+<tr><td><b>Acryl klar, weiß, blau</b></td><td class="txt">geht nicht</td><td class="txt">geht nicht</td><td class="txt">geht nicht</td><td class="txt">geht nicht</td><td class="txt">geht nicht</td></tr>
+<tr><td><b>Leder pflanzlich</b></td><td>1,5 mm</td><td>3 mm</td><td>4 mm</td><td>5 mm</td><td>6 mm</td></tr>
+<tr><td><b>Pappe</b></td><td>3 mm</td><td>5 mm</td><td>6 mm</td><td>8 mm</td><td>8 mm</td></tr>
+<tr><td><b>Edelstahlfolie</b></td><td class="txt">nein</td><td class="txt">nein</td><td>0,05 mm</td><td>0,1 – 0,2 mm</td><td>0,3 mm</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zusammengeführt aus Herstellerangaben (xTool S1 20 W: 3 mm Lindenholz in einem Durchgang, 6 mm Birke in zwei bis drei; Creality Falcon2 22 W: 15 mm Holz; Bambu Lab H2D 40 W: 15 mm Sperrholz; Atomstack X70 Max: 25 mm schwarzes Acryl, 30 mm Kiefer) und Erfahrungswerten. Sperrholzqualität schwankt stärker als die Maschine.</p>
+
+<h2>Was gut geht und was nicht</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Stärken</h4>
+    <ul>
+      <li>Holzgravur mit sehr feinem Spot, Fotos auf Holz und Schiefer</li>
+      <li>Schneiden von Sperrholz, Pappe, Leder, Filz, dunklem Acryl</li>
+      <li>Edelstahl direkt dunkel markieren (ab 10 W, langsam, Oxidschicht)</li>
+      <li>Eloxiertes Alu weiß gravieren, beschichtetes Metall (Pulverbeschichtung, Lack)</li>
+      <li>Glas mit dunkler Farbe oder Tempera als Absorber gravieren</li>
+      <li>Kein Verschleißteil außer Linse, transportabel, offene Bauart erlaubt große Werkstücke</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Grenzen</h4>
+    <ul>
+      <li>Klares, weißes, blaues Acryl: der Strahl geht durch oder wird reflektiert</li>
+      <li>Weiße und helle Kunststoffe, PETG, PC, PP: kein Schnitt, oft nicht mal Gravur</li>
+      <li>Blankes Alu, Messing, Kupfer: Reflexion, Diode kann Schaden nehmen</li>
+      <li>Klares Glas ohne Absorber</li>
+      <li>Schneidgeschwindigkeit: 20 W Diode braucht für 3 mm Sperrholz 6 bis 10 mm/s, ein 60-W-CO2 25 mm/s</li>
+      <li>Offene Bauart ist Laserklasse 4: Brille Pflicht, Streulicht bei 450 nm ist gefährlich, keine Zuschauer</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Geräte 2026</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th data-s="text">Gerät</th><th data-s="num">Optisch</th><th data-s="num">Arbeitsfeld</th><th>Bauart</th><th>Besonderheit</th><th data-s="num">Preis (Liste)</th></tr></thead>
+<tbody>
+<tr><td><b>Ortur Laser Master 3</b></td><td>10 W</td><td>400 × 400 mm</td><td>offen</td><td>Klassischer Einsteiger, 20 000 mm/min, Flammen- und Neigungssensor, LightBurn</td><td>400 – 600 €</td></tr>
+<tr><td><b>xTool D1 Pro</b></td><td>10 / 20 W</td><td>430 × 390 mm</td><td>offen, Gehäuse optional</td><td>Solide Mechanik, Rotary und Verlängerung, großes Zubehörprogramm</td><td>500 – 1 200 €</td></tr>
+<tr><td><b>Atomstack A20 Pro</b></td><td>20 W</td><td>400 × 400 mm</td><td>offen</td><td>Integrierte Air-Assist-Pumpe, meiste Schneidleistung je Euro unter den offenen Geräten</td><td>~700 – 900 €</td></tr>
+<tr><td><b>Atomstack X70 Max / A70 Max</b></td><td>70 W (77 W Spitze)</td><td>850 × 800 mm</td><td>offen</td><td>14 Dioden, 360 W elektrisch, schneidet 25 mm schwarzes Acryl. Größtes Feld, gröbster Spot. LightBurn-Lizenz dabei</td><td>~2 000 – 2 500 €</td></tr>
+<tr><td><b>Creality Falcon2 Pro</b></td><td>22 / 40 / 60 W</td><td>400 × 415 mm</td><td>geschlossen, Klasse 1</td><td>Kamera, Air Assist, Rauchfilter eingebaut. Günstigster geschlossener Diodenlaser</td><td>1 000 – 2 000 €</td></tr>
+<tr><td><b>Creality Falcon A1 Pro</b></td><td>20 W</td><td>360 × 270 mm</td><td>geschlossen, Klasse 1</td><td>Kamera-Autofokus, WLAN, IR-Modul optional, kompakt</td><td>~660 $ (US)</td></tr>
+<tr><td><b>xTool S1</b></td><td>20 / 40 W</td><td>498 × 319 mm</td><td>geschlossen, Klasse 1</td><td>Größtes geschlossenes Diodenfeld, Durchlass, Autofokus, xTool Studio. Bestseller der Klasse</td><td>40 W: 2 599 € Liste, 1 779 € Aktion (Sept. 2026)</td></tr>
+<tr><td><b>xTool F2 Ultra (Diode-Teil)</b></td><td>40 W + 60 W MOPA</td><td>220 × 220 mm</td><td>geschlossen, Galvo</td><td>Kombigerät, Diode für Holz, Faser für Metall, 10 000 mm/s</td><td>4 499 $</td></tr>
+<tr><td><b>Bambu Lab H2D Laser Combo</b></td><td>10 / 40 W</td><td>310 × 250 mm</td><td>geschlossen im 3D-Drucker</td><td>Drucker, Laser, Plotter in einem. 40 W schneidet 15 mm Sperrholz, Flammensensoren, Kamera. Lasermodul nachrüstbar</td><td>2 000 – 3 300 € (Combo)</td></tr>
+<tr><td><b>Glowforge Aura</b></td><td>6 W</td><td>305 × 305 mm</td><td>geschlossen</td><td>Craft-Gerät, Cloud-Software, sehr einfach, schneidet 6 mm Holz langsam</td><td>~1 200 $</td></tr>
+<tr><td><b>Snapmaker Artisan (Lasermodul)</b></td><td>40 W</td><td>400 × 400 mm</td><td>geschlossen, 3-in-1</td><td>Drucker, Laser, Fräse mit Modultausch. Laser gut, Fräse schwach</td><td>~3 000 €</td></tr>
+</tbody>
+</table></div>
+<p class="note">Listenpreise und Aktionen Stand September 2026 (xTool Mid-Year Sale, Herstellershops, Testberichte). Diodenlaser werden fast durchgehend mit 20 bis 40 % Rabatt verkauft, die Liste ist ein Anker.</p>
+
+<h2>Firmware und Anschluss</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th data-s="text">Steuerung</th><th>Bei</th><th>Software</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>GRBL 1.1 (32-Bit-Boards)</b></td><td>Ortur, Atomstack, Sculpfun, Longer, Creality Falcon</td><td>LightBurn Core, LaserGRBL (kostenlos)</td><td>$32=1 (Lasermodus) muss gesetzt sein, sonst brennt der Laser in Pausen</td></tr>
+<tr><td><b>xTool eigene</b></td><td>D1 Pro, S1, F-Serie, P-Serie</td><td>xTool Studio (XCS endet bei 2.7), LightBurn über GRBL-Modus (D1 Pro, S1) </td><td>Neue Geräte ab 2025 nur noch Studio</td></tr>
+<tr><td><b>Bambu Lab</b></td><td>H2D</td><td>Bambu Suite</td><td>Kein LightBurn, eigener Workflow mit Kamera-Vorschau</td></tr>
+<tr><td><b>Glowforge Cloud</b></td><td>Aura, Pro</td><td>Browser</td><td>Ohne Internet läuft nichts, Materialdatenbank sehr bequem</td></tr>
+<tr><td><b>Marlin, Smoothie</b></td><td>Umbauten, 3D-Drucker mit Laserkopf</td><td>LightBurn Core</td><td>M3/M4 mit S-Wert, Inline-Leistung wichtig für Graustufen</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Offen heißt Klasse 4.</b> Ein offener Diodenlaser ist nach EN 60825-1 ein Klasse-4-Gerät, auch mit 5 W. Das mitgelieferte Plexiglas-Schild deckt nur den direkten Blick, nicht die Reflexion vom Werkstück. Brille nach EN 207 für 450 nm mit mindestens LB3, alle im Raum. Details in <a href="#sicherheit">Sicherheit &amp; Recht</a>.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Nichia NUBM-Diodendatenblätter (445 – 455 nm, 5 – 7 W je Diode), Herstellerangaben zu Modulaufbau (xTool 40 W: 8 Dioden, Atomstack 70 W: 14 Dioden).</li>
+    <li>Herstellerangaben: xTool S1, D1 Pro, F2 Ultra; Creality Falcon2 Pro, A1 Pro; Atomstack A20 Pro, X70 Max; Bambu Lab H2D (Tech Specs); Ortur LM3; Glowforge Aura; Snapmaker Artisan.</li>
+    <li>xTool Support: „Transition from XCS to xTool Studio“ (XCS final 2.7, Juni 2025).</li>
+    <li>Testberichte 2026: Atomm (Best Diode Laser Engravers), GeekBitz, LaserReviewHQ, Notebookcheck (Atomstack A70 Pro), Tom's Hardware.</li>
+    <li>GRBL-Dokumentation: Laser Mode ($32), M3/M4-Verhalten.</li>
+  </ul>
+</div>

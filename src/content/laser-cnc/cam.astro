@@ -1,0 +1,102 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>CAD zeichnet das Teil, CAM macht daraus Werkzeugwege, der Postprozessor schreibt G-Code für die Maschine, der Sender schickt ihn hin.</b> Vier Stufen, für die es je nach Budget ein Programm oder eines für alles gibt. Wer Fusion 360 oder Estlcam beherrscht, kommt praktisch überall durch.</div>
+
+<h2>Programme</h2>
+<div class="tbl-wrap"><table style="min-width:1000px">
+<thead><tr><th data-s="text">Programm</th><th>Stufe</th><th data-s="num">Preis</th><th>Plattform</th><th>Stärken</th><th>Grenzen</th></tr></thead>
+<tbody>
+<tr><td><b>Fusion 360</b></td><td>CAD + CAM + Sim</td><td>Personal kostenlos (Hobby, eingeschränkt: kein Rapid, 10 Dokumente aktiv, kein 4-/5-Achs), Standard ~600 €/Jahr</td><td>Win, Mac</td><td>Vollständiges 2,5D- und 3D-CAM, Adaptive Clearing, Simulation, Postprozessoren für alles. Der Standard im Hobby und Kleinbetrieb</td><td>Cloud-Pflicht, Personal-Einschränkungen (Eilgänge werden als G1 ausgegeben), Lernkurve</td></tr>
+<tr><td><b>Estlcam</b></td><td>CAM + Steuerung</td><td>60 € einmalig (12 Monate Updates), Test unbegrenzt mit Wartezeit</td><td>Win</td><td>Deutsch, einfach, Trochoidal, Gravur, V-Carve, 3D aus STL, steuert die Maschine direkt mit eigenem Board. Sehr beliebt in DE</td><td>Kein CAD, Oberfläche altmodisch, 3D-CAM einfach</td></tr>
+<tr><td><b>Carbide Create</b></td><td>CAD 2D + CAM</td><td>kostenlos, Pro 120 $/Jahr (3D, Textur)</td><td>Win, Mac</td><td>Für Shapeoko gemacht, läuft mit jedem GRBL. Einsteigerfreundlich, V-Carve, Taschen, Konturen</td><td>2,5D, Design einfach</td></tr>
+<tr><td><b>Vectric VCarve Desktop / Pro, Aspire</b></td><td>CAD 2D + CAM</td><td>350 / 700 / 2 000 $ einmalig</td><td>Win</td><td>Schilder, V-Carve, Inlays, Reliefs (Aspire), beste Ergebnisse für Holzdeko, Nesting</td><td>Teuer, kein 3D-CAD, Windows</td></tr>
+<tr><td><b>Easel (Inventables)</b></td><td>CAD 2D + CAM + Sender</td><td>kostenlos, Pro 240 $/Jahr</td><td>Browser</td><td>Einfachster Einstieg, X-Carve, GRBL</td><td>Cloud, wenig Kontrolle über Wege</td></tr>
+<tr><td><b>Kiri:Moto</b></td><td>CAM + Slicer</td><td>kostenlos, Open Source</td><td>Browser</td><td>2,5D und 3D CAM ohne Installation, auch für Onshape</td><td>Weniger Strategien als Fusion</td></tr>
+<tr><td><b>FreeCAD CAM (Path)</b></td><td>CAD + CAM</td><td>kostenlos, Open Source</td><td>alle</td><td>Vollständig offen, parametrisch, Postprozessoren anpassbar</td><td>Eigenwillig, 3D-CAM begrenzt, Version 1.0 (2024) deutlich besser als früher</td></tr>
+<tr><td><b>Onshape + Kiri:Moto / CAM Studio</b></td><td>CAD (+ CAM)</td><td>Free (öffentliche Dokumente), Standard ab 1 500 $/Jahr</td><td>Browser</td><td>Bestes Browser-CAD, Versionierung</td><td>CAM nur über Zusatz, Free ist öffentlich</td></tr>
+<tr><td><b>Mastercam, hyperMILL, SolidCAM</b></td><td>CAM Industrie</td><td>ab 5 000 €</td><td>Win</td><td>5-Achs, Simulation, Werkzeugdatenbanken</td><td>Preis und Schulung</td></tr>
+</tbody>
+</table></div>
+
+<h2>Sender und Oberflächen</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Sender</th><th data-s="num">Preis</th><th>Für</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>gSender (Sienci)</b></td><td>kostenlos</td><td>GRBL, grblHAL</td><td>Beste Oberfläche für GRBL-Maschinen: Werkzeugwechsel-Dialog, Messtaster, Oberflächenfräsen, Makros. Auch für Nicht-Sienci</td></tr>
+<tr><td><b>Universal Gcode Sender (UGS)</b></td><td>kostenlos</td><td>GRBL, grblHAL, TinyG</td><td>Java, seit Jahren stabil, Plugins</td></tr>
+<tr><td><b>Candle</b></td><td>kostenlos</td><td>GRBL</td><td>Schlank, Höhenkarte für PCB (Autoleveling)</td></tr>
+<tr><td><b>CNCjs</b></td><td>kostenlos</td><td>GRBL, grblHAL, Marlin, Smoothie</td><td>Web-Oberfläche, läuft auf Raspberry Pi am Gerät</td></tr>
+<tr><td><b>bCNC</b></td><td>kostenlos</td><td>GRBL</td><td>Python, Autoleveling, Kamera. Für PCB-Fräsen beliebt</td></tr>
+<tr><td><b>OpenBuilds Control</b></td><td>kostenlos</td><td>GRBL</td><td>Einfach, mit OpenBuilds CAM im Browser</td></tr>
+<tr><td><b>Carbide Motion</b></td><td>kostenlos</td><td>Shapeoko, Nomad</td><td>Geführt: BitSetter, BitZero</td></tr>
+<tr><td><b>Estlcam Steuerung</b></td><td>in Lizenz</td><td>Estlcam-Board, Arduino</td><td>CAM und Steuerung in einem Fenster, Handrad-Unterstützung</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die 25 G-Codes, die man wirklich sieht</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Code</th><th>Bedeutung</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>G0 X Y Z</b></td><td>Eilgang zur Position</td><td>Mit maximaler Geschwindigkeit, nie im Material. Fusion Personal gibt G1 mit hohem F aus</td></tr>
+<tr><td><b>G1 X Y Z F</b></td><td>Gerade mit Vorschub F (mm/min)</td><td>Der Arbeitsbefehl</td></tr>
+<tr><td><b>G2 / G3 X Y I J</b></td><td>Kreisbogen im / gegen Uhrzeigersinn</td><td>I J Mittelpunkt relativ. Postprozessor kann Bögen in Linien wandeln</td></tr>
+<tr><td><b>G4 P</b></td><td>Verweilzeit in Sekunden (GRBL) oder Millisekunden (Marlin)</td><td>Spindelhochlauf</td></tr>
+<tr><td><b>G17 / G18 / G19</b></td><td>Arbeitsebene XY / XZ / YZ</td><td>Fast immer G17</td></tr>
+<tr><td><b>G20 / G21</b></td><td>Zoll / Millimeter</td><td>Falsche Einheit ist der Klassiker für 25-fach zu große Teile</td></tr>
+<tr><td><b>G28 / G30</b></td><td>Zur Referenz- oder Parkposition</td><td>Erst Z hochfahren, sonst Kollision</td></tr>
+<tr><td><b>G38.2 Z F</b></td><td>Antasten bis Kontakt</td><td>Werkzeuglängensensor, Messtaster</td></tr>
+<tr><td><b>G40 / G41 / G42</b></td><td>Fräserradiuskorrektur aus / links / rechts</td><td>GRBL kann es nicht, CAM rechnet den Radius vorher ein</td></tr>
+<tr><td><b>G43 H / G49</b></td><td>Werkzeuglängenkorrektur ein / aus</td><td>Bei Maschinen mit Werkzeugtabelle (grblHAL, LinuxCNC, Masso)</td></tr>
+<tr><td><b>G53</b></td><td>Maschinenkoordinaten (einmalig)</td><td>Für Parkpositionen</td></tr>
+<tr><td><b>G54 – G59</b></td><td>Werkstückkoordinatensysteme</td><td>G54 Standard. Mehrere Aufspannungen auf G55, G56</td></tr>
+<tr><td><b>G80 – G83</b></td><td>Bohrzyklen (G81 einfach, G83 mit Spanbruch)</td><td>G83 Q Rückzugstiefe. GRBL 1.1 kann keine Zyklen, grblHAL schon</td></tr>
+<tr><td><b>G90 / G91</b></td><td>Absolute / relative Koordinaten</td><td>Nach G91 immer G90 zurück</td></tr>
+<tr><td><b>G92</b></td><td>Koordinatenversatz setzen</td><td>Vermeiden, G54 mit G10 L20 ist sauberer</td></tr>
+<tr><td><b>G10 L20 P1 X0 Y0 Z0</b></td><td>Nullpunkt G54 auf aktuelle Position setzen</td><td>Das macht der „Zero“-Knopf im Sender</td></tr>
+<tr><td><b>M3 S / M4 S / M5</b></td><td>Spindel rechts / links mit Drehzahl S / aus</td><td>Laser: M4 für dynamische Leistung</td></tr>
+<tr><td><b>M6 T</b></td><td>Werkzeugwechsel</td><td>GRBL ignoriert oder hält an, grblHAL und gSender zeigen Dialog</td></tr>
+<tr><td><b>M7 / M8 / M9</b></td><td>Nebel / Kühlmittel ein / aus</td><td>Relais für Nebelkühlung oder Absaugung</td></tr>
+<tr><td><b>M0 / M1</b></td><td>Programmhalt / optionaler Halt</td><td>Für manuellen Werkzeugwechsel</td></tr>
+<tr><td><b>M2 / M30</b></td><td>Programmende</td><td>M30 mit Rücksetzen</td></tr>
+<tr><td><b>F / S / T</b></td><td>Vorschub, Drehzahl, Werkzeugnummer</td><td>F gilt bis zur nächsten Angabe</td></tr>
+<tr><td><b>$H</b></td><td>GRBL: Referenzfahrt (Homing)</td><td>Nur mit Endschaltern und $22=1</td></tr>
+<tr><td><b>$$ / $X</b></td><td>GRBL: Einstellungen anzeigen / Alarm quittieren</td><td>$100 – $102 Schritte je mm, $110 – $112 max. Geschwindigkeit, $120 – $122 Beschleunigung, $130 – $132 Verfahrwege</td></tr>
+<tr><td><b>(Kommentar) ; Kommentar</b></td><td>Text ohne Wirkung</td><td>Postprozessor schreibt Werkzeug und Operation hinein</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>G-Code liest man, bevor man ihn fährt.</b> Kopf prüfen: G21 (mm), G90 (absolut), G17, Werkzeug, erste Z-Bewegung nach oben. Sicherheitshöhe (Retract) über allen Spannmitteln. Ein Blick in die ersten 20 Zeilen verhindert die meisten Crashs.</div>
+
+<h2>CAM-Strategien</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Strategie</th><th>Fusion 360</th><th>Estlcam / Carbide Create</th><th>Für</th></tr></thead>
+<tbody>
+<tr><td><b>Kontur (2D Contour)</b></td><td>2D Contour, Tabs, Lead-in</td><td>Teil / Aussparung, Haltestege</td><td>Ausschneiden mit Haltestegen</td></tr>
+<tr><td><b>Tasche (2D Pocket)</b></td><td>2D Pocket</td><td>Aussparung</td><td>Vertiefungen, Nuten</td></tr>
+<tr><td><b>Adaptive Schruppen</b></td><td>2D / 3D Adaptive Clearing</td><td>Trochoidal (Estlcam)</td><td>Alu, viel Material, schwache Maschine</td></tr>
+<tr><td><b>Bohren</b></td><td>Drill (Zyklen)</td><td>Bohrung</td><td>Löcher mit Bohrer oder Helix</td></tr>
+<tr><td><b>Gravur</b></td><td>2D Engrave / Trace</td><td>Gravur</td><td>Beschriftung mit V- oder Stichel</td></tr>
+<tr><td><b>V-Carve</b></td><td>Engrave mit V-Bit (begrenzt)</td><td>Carve (Estlcam), V-Carve (Carbide, Vectric)</td><td>Schrift mit variabler Tiefe, Schilder. Vectric und Estlcam sind hier besser</td></tr>
+<tr><td><b>3D Parallel / Scallop / Contour</b></td><td>3D Parallel, Scallop, Contour, Morphed Spiral</td><td>3D-Fräsen aus STL (Estlcam)</td><td>Reliefs, Formen mit Kugelfräser</td></tr>
+<tr><td><b>Planen</b></td><td>2D Face</td><td>Plan (gSender hat eigene Funktion)</td><td>Opferplatte, Bretter</td></tr>
+<tr><td><b>Beidseitig (Flip)</b></td><td>Zwei Setups, Passstifte</td><td>Zwei Projekte</td><td>Teile mit Bearbeitung von beiden Seiten. Nullpunkt über Passstifte im Opferbrett</td></tr>
+</tbody>
+</table></div>
+
+<h2>Postprozessor</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Was er tut</div><div class="cd">Übersetzt Werkzeugwege in den Dialekt der Steuerung: Kopf, Bögen oder Linien, Werkzeugwechsel als M6 oder M0, Spindelbefehle, Einheiten. Fusion hat Posts für GRBL, grblHAL, Shapeoko (Carbide 3D), Onefinity, Stepcraft, Masso, LinuxCNC, Mach3.</div></div>
+  <div class="card"><div class="ct">Typische Anpassungen</div><div class="cd">GRBL: G28 am Ende entfernen (fährt sonst in den Endschalter). Werkzeugwechsel als M0 mit Kommentar. Bögen ausgeben lassen (kleinere Dateien). Fusion Personal: G0 durch hohes F ersetzt, Sender fährt dann Eilgänge mit Vorschub, das ist nur langsam, nicht gefährlich.</div></div>
+  <div class="card"><div class="ct">Simulation</div><div class="cd">Fusion: Simulate mit Stock zeigt Kollisionen und Restmaterial. Estlcam: Vorschau. Für alles andere: NC Viewer (Browser) oder CAMotics (Open Source). Jede neue Datei einmal simulieren.</div></div>
+  <div class="card"><div class="ct">Werkzeugbibliothek</div><div class="cd">Jeden Fräser mit Durchmesser, Schneidenlänge, Schneidenzahl, Nummer und den erprobten Schnittdaten je Material anlegen. Fusion: Tool Library, Export als JSON. Das ist die wertvollste Datei im CNC-Ordner.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Autodesk Fusion 360: Manufacturing-Dokumentation, Personal-Use-Einschränkungen (Stand 2026), Post Processor Library.</li>
+    <li>Estlcam-Handbuch (Version 12), Carbide Create Dokumentation, Vectric VCarve/Aspire Produktseiten, Kiri:Moto, FreeCAD 1.0 CAM Workbench.</li>
+    <li>gSender, UGS, CNCjs, bCNC Dokumentation; GRBL v1.1 Commands und Settings Wiki; grblHAL Wiki.</li>
+    <li>LinuxCNC G-Code Quick Reference, NIST RS274/NGC (G-Code-Standard).</li>
+  </ul>
+</div>

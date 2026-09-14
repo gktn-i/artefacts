@@ -1,0 +1,99 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Schnittdaten sind drei Zahlen: Drehzahl, Vorschub, Zustellung. Alles hängt am Zahnvorschub (Chipload).</b> Zu klein: der Fräser reibt, wird heiß, verklebt und stumpft. Zu groß: er bricht. Die Tabelle gibt den Bereich, der Rechner macht daraus Vorschub in mm/min, die Maschine sagt mit ihrem Geräusch, ob es stimmt.</div>
+
+<h2>Die Formeln</h2>
+<div class="fbox"><span class="f">n = v_c · 1000 / (π · d)  ·  v_f = n · z · f_z  ·  Q = a_p · a_e · v_f / 1000</span><span class="l">n Drehzahl in min⁻¹, v_c Schnittgeschwindigkeit in m/min, d Fräserdurchmesser in mm, v_f Vorschub in mm/min, z Schneidenzahl, f_z Zahnvorschub (Chipload) in mm, a_p Schnitttiefe, a_e Schnittbreite in mm, Q Zeitspanvolumen in cm³/min.</span></div>
+<p class="lede">Auf Hobbymaschinen läuft es umgekehrt: Die Spindel gibt die Drehzahl vor (Oberfräse: 10 000 bis 30 000, HF-Spindel: 6 000 bis 24 000), der Fräser die Schneidenzahl, die Tabelle den Zahnvorschub. Daraus folgt der Vorschub.</p>
+
+<div class="calc" data-calc="router">
+  <h4>Vorschub aus Drehzahl und Chipload</h4>
+  <div class="row">
+    <div><label>Drehzahl n in min⁻¹</label><input data-k="n" type="number" step="any" value="18000" /></div>
+    <div><label>Fräser-Ø d in mm</label><input data-k="d" type="number" step="any" value="6" /></div>
+    <div><label>Schneidenzahl z</label><input data-k="z" type="number" step="any" value="2" /></div>
+    <div><label>Zahnvorschub f_z in mm</label><input data-k="fz" type="number" step="any" value="0.1" /></div>
+    <div><label>Zustellung a_p in mm</label><input data-k="ap" type="number" step="any" value="3" /></div>
+    <div><label>Schnittbreite a_e in mm</label><input data-k="ae" type="number" step="any" value="6" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Chipload je Material und Fräserdurchmesser</h2>
+<p class="lede">Zahnvorschub f_z in mm je Schneide und Umdrehung. Unterer Wert für Hobbymaschinen mit Oberfräse, oberer für steife Maschinen mit HF-Spindel. Bei Einschneidern gilt der Wert je Umdrehung.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Material</th><th data-s="num">Ø 1 – 2 mm</th><th data-s="num">Ø 3 mm (1/8″)</th><th data-s="num">Ø 6 mm (1/4″)</th><th data-s="num">Ø 8 – 10 mm</th><th data-s="num">Ø 12 mm (1/2″)</th><th>Fräser</th></tr></thead>
+<tbody>
+<tr><td><b>Weichholz (Kiefer, Fichte, Linde)</b></td><td>0,01 – 0,03</td><td>0,04 – 0,08</td><td>0,10 – 0,25</td><td>0,20 – 0,35</td><td>0,30 – 0,45</td><td>2F Up/Down</td></tr>
+<tr><td><b>Hartholz (Eiche, Buche, Ahorn)</b></td><td>0,01 – 0,02</td><td>0,03 – 0,06</td><td>0,08 – 0,18</td><td>0,15 – 0,28</td><td>0,25 – 0,35</td><td>2F Up/Down</td></tr>
+<tr><td><b>Sperrholz, Multiplex</b></td><td>0,01 – 0,02</td><td>0,03 – 0,06</td><td>0,08 – 0,15</td><td>0,12 – 0,25</td><td>0,20 – 0,30</td><td>2F Compression / Down</td></tr>
+<tr><td><b>MDF, HDF, Spanplatte</b></td><td>0,01 – 0,03</td><td>0,04 – 0,08</td><td>0,10 – 0,20</td><td>0,18 – 0,30</td><td>0,25 – 0,38</td><td>2F Up, Compression</td></tr>
+<tr><td><b>Acryl (Guss)</b></td><td>0,01 – 0,02</td><td>0,03 – 0,06</td><td>0,08 – 0,15</td><td>0,12 – 0,20</td><td>0,18 – 0,25</td><td>1F O-Flute</td></tr>
+<tr><td><b>POM, HDPE, PE, PP</b></td><td>0,02 – 0,03</td><td>0,05 – 0,10</td><td>0,10 – 0,20</td><td>0,15 – 0,30</td><td>0,25 – 0,40</td><td>1F</td></tr>
+<tr><td><b>Polycarbonat, PETG, PA</b></td><td>0,01 – 0,02</td><td>0,03 – 0,06</td><td>0,06 – 0,12</td><td>0,10 – 0,18</td><td>0,15 – 0,25</td><td>1F oder 2F Alu</td></tr>
+<tr><td><b>Hartschaum, Modellbauplatte</b></td><td>0,03</td><td>0,08 – 0,15</td><td>0,20 – 0,40</td><td>0,30 – 0,60</td><td>0,50 – 0,80</td><td>1F, hoher Vorschub</td></tr>
+<tr><td><b>Aluminium (Hobby-Portal)</b></td><td>0,005 – 0,01</td><td>0,01 – 0,025</td><td>0,025 – 0,05</td><td>0,04 – 0,06</td><td>–</td><td>1F oder 2F Alu, Kühlung</td></tr>
+<tr><td><b>Aluminium (steife Maschine)</b></td><td>0,008 – 0,015</td><td>0,02 – 0,04</td><td>0,04 – 0,08</td><td>0,06 – 0,10</td><td>0,08 – 0,15</td><td>2F – 3F Alu, Kühlung</td></tr>
+<tr><td><b>Messing, Bronze</b></td><td>0,005 – 0,01</td><td>0,01 – 0,02</td><td>0,02 – 0,04</td><td>0,03 – 0,06</td><td>0,05 – 0,08</td><td>2F unbeschichtet</td></tr>
+<tr><td><b>Kupfer</b></td><td>0,005</td><td>0,01 – 0,02</td><td>0,02 – 0,035</td><td>0,03 – 0,05</td><td>–</td><td>1F, Kühlung</td></tr>
+<tr><td><b>Stahl, Edelstahl (nur steife Maschine)</b></td><td>0,003 – 0,006</td><td>0,008 – 0,015</td><td>0,015 – 0,03</td><td>0,025 – 0,04</td><td>0,04 – 0,06</td><td>4F TiAlN, Kühlmittel</td></tr>
+<tr><td><b>GFK, CFK, FR4</b></td><td>0,005 – 0,01</td><td>0,01 – 0,02</td><td>0,02 – 0,04</td><td>0,03 – 0,05</td><td>–</td><td>Diamantverzahnt, DLC</td></tr>
+</tbody>
+</table></div>
+<p class="note">Zusammengeführt aus Sorotec-, Amana-, Datron- und Garant-Empfehlungen sowie den Werkzeugführern von Carbide 3D und Sienci. Herstellerangaben gelten für steife Maschinen, Hobbymaschinen fahren am unteren Rand.</p>
+
+<h2>Zustellung und Schnittbreite</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Strategie</th><th data-s="num">a_p (Tiefe)</th><th data-s="num">a_e (Breite)</th><th>Wofür</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Vollnut Holz, Hobby</b></td><td>0,5 – 1 × d</td><td>1 × d</td><td>Konturen, Durchschnitte in Platten</td><td>6-mm-Fräser: 3 – 6 mm je Durchgang in Sperrholz</td></tr>
+<tr><td><b>Vollnut Holz, steif</b></td><td>1 – 2 × d</td><td>1 × d</td><td>Schneller schneiden</td><td>Absaugung muss Späne aus der Nut holen</td></tr>
+<tr><td><b>Vollnut Kunststoff</b></td><td>0,5 – 1 × d</td><td>1 × d</td><td>Konturen</td><td>Einschneider, Span muss raus, sonst schmilzt es</td></tr>
+<tr><td><b>Vollnut Alu, Hobby-Portal</b></td><td>0,1 – 0,25 × d (0,5 – 1,5 mm bei 6 mm)</td><td>1 × d</td><td>Notlösung</td><td>Besser Adaptive. Kühlung Pflicht</td></tr>
+<tr><td><b>Adaptive / Trochoidal Alu</b></td><td>1 – 2 × d</td><td>0,1 – 0,2 × d</td><td>Taschen, Schruppen</td><td>Hoher Vorschub, kühle Schneide, wenig Kraft. Fusion 360 Adaptive Clearing, Estlcam Trochoidal</td></tr>
+<tr><td><b>Adaptive Holz, Kunststoff</b></td><td>2 – 3 × d</td><td>0,2 – 0,4 × d</td><td>Taschen</td><td>Schneller als Vollnut, ganze Schneidenlänge genutzt</td></tr>
+<tr><td><b>Schlichten Kontur</b></td><td>volle Tiefe</td><td>0,2 – 0,5 mm</td><td>Endmaß und Oberfläche</td><td>Gleichlauf, letzter Durchgang mit frischer Schneide</td></tr>
+<tr><td><b>Schlichten 3D (Kugel)</b></td><td>–</td><td>Stepover 5 – 10 % d</td><td>Reliefs, Formen</td><td>Kleiner Stepover, weniger Nacharbeit, längere Zeit</td></tr>
+<tr><td><b>Planen (Surfacing)</b></td><td>0,2 – 1 mm</td><td>40 – 70 % d</td><td>Opferplatte, Bretter</td><td>Planfräser 25 – 50 mm, 12 000 – 18 000 min⁻¹</td></tr>
+</tbody>
+</table></div>
+
+<h2>Startwerte für vier typische Maschinen</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Material · Fräser</th><th>3018 (DC 200 W, 8 000 min⁻¹)</th><th>Holz-Portal (Makita, 18 000)</th><th>Steifes Portal (HF 2,2 kW, 18 000)</th><th>Carvera Air (200 W, 13 000)</th></tr></thead>
+<tbody>
+<tr><td><b>Sperrholz 6 mm · 6 mm Compression</b></td><td>400 mm/min, a_p 1,5 mm, 3-mm-Fräser</td><td>2 500 – 3 500 mm/min, a_p 4 mm</td><td>4 000 – 6 000 mm/min, a_p 6 mm</td><td>1 200 mm/min, a_p 3 mm</td></tr>
+<tr><td><b>MDF · 6 mm 2F Up</b></td><td>500 mm/min, a_p 2 mm, 3 mm</td><td>3 000 – 4 000 mm/min, a_p 5 mm</td><td>5 000 – 7 000 mm/min, a_p 8 mm</td><td>1 500 mm/min, a_p 3 mm</td></tr>
+<tr><td><b>Hartholz · 6 mm 2F</b></td><td>300 mm/min, a_p 1 mm, 3 mm</td><td>2 000 – 3 000 mm/min, a_p 3 mm</td><td>3 500 – 5 000 mm/min, a_p 5 mm</td><td>1 000 mm/min, a_p 2 mm</td></tr>
+<tr><td><b>Acryl 5 mm · 6 mm 1F</b></td><td>400 mm/min, a_p 1 mm, 3-mm-1F</td><td>1 500 – 2 500 mm/min, a_p 2,5 mm</td><td>2 500 – 3 500 mm/min, a_p 5 mm</td><td>1 000 mm/min, a_p 2 mm</td></tr>
+<tr><td><b>POM · 6 mm 1F</b></td><td>500 mm/min, a_p 1,5 mm</td><td>2 500 – 3 500 mm/min, a_p 3 mm</td><td>4 000 – 5 000 mm/min, a_p 6 mm</td><td>1 500 mm/min, a_p 3 mm</td></tr>
+<tr><td><b>Alu 6082 · 6 mm 1F, Adaptive</b></td><td class="txt">nicht sinnvoll (3 mm 1F: 150 mm/min, a_p 0,2 mm, Gravur)</td><td>900 – 1 200 mm/min, a_p 6 mm, a_e 0,6 mm, Nebel</td><td>1 800 – 2 500 mm/min, a_p 8 mm, a_e 1 mm, Nebel</td><td>600 – 800 mm/min, a_p 3 mm, a_e 0,5 mm, Luft</td></tr>
+<tr><td><b>Alu · 6 mm 1F, Vollnut</b></td><td class="txt">nein</td><td>500 – 700 mm/min, a_p 0,8 mm</td><td>1 000 – 1 500 mm/min, a_p 2 mm</td><td>400 mm/min, a_p 0,5 mm</td></tr>
+<tr><td><b>Messing · 6 mm 2F</b></td><td class="txt">nein</td><td>700 mm/min, a_p 0,8 mm</td><td>1 500 mm/min, a_p 2 mm</td><td>500 mm/min, a_p 0,5 mm</td></tr>
+<tr><td><b>V-Carve Holz · 90° V</b></td><td>400 mm/min, 8 000</td><td>1 500 – 2 500 mm/min, 18 000</td><td>3 000 mm/min, 18 000</td><td>1 000 mm/min, 13 000</td></tr>
+<tr><td><b>PCB Isolation · V 30° 0,1 mm</b></td><td>300 – 500 mm/min, 0,05 mm tief</td><td>800 mm/min</td><td>1 000 mm/min</td><td>600 mm/min</td></tr>
+</tbody>
+</table></div>
+<div class="tip"><b>Hören statt rechnen.</b> Ein gleichmäßiges tiefes Brummen ist richtig. Kreischen heißt reiben: Vorschub hoch oder Drehzahl runter. Rhythmisches Hämmern ist Rattern: Drehzahl 15 % ändern, Zustellung halbieren, Werkstück prüfen. Späne sollen als kleine Flocken kommen, nicht als Staub (zu wenig Vorschub) und nicht als lange Bänder (Kunststoff zu heiß).</div>
+
+<h2>Sonderfälle</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Chip Thinning</div><div class="cd">Bei a_e unter 50 % d wird der Span dünner als f_z. Vorschub anheben: f_z korrigiert = f_z / √(1 − (1 − 2a_e/d)²). Bei a_e = 10 % d etwa Faktor 1,7. Fusion und Estlcam rechnen das mit, wenn „Chip Thinning“ aktiv ist.</div></div>
+  <div class="card"><div class="ct">Eintauchen</div><div class="cd">Senkrecht nur mit Bohrern oder Fräsern mit Mittenschneide, und nur in Holz. Sonst Rampe (2 bis 5°) oder Helix (Durchmesser 1,2 × d, Steigung 0,5 mm in Alu, 2 mm in Holz). Eintauchvorschub 30 bis 50 % des Vorschubs.</div></div>
+  <div class="card"><div class="ct">Bohren mit Fräser</div><div class="cd">Löcher kleiner als d + 0,5 mm nicht möglich. Löcher ab 1,3 × d als Helix bohren. Für viele kleine Löcher: Bohrer und G83 Pecking (Spanbruch alle 1 × d).</div></div>
+  <div class="card"><div class="ct">Kühlung Alu</div><div class="cd">Hobbymaschine: Nebelkühlung (Spiritus, Isopropanol, WD-40 oder Emulsion 5 %) oder Druckluft. Ohne Kühlung verklebt Alu nach 30 Sekunden. Kein Wasser auf Holzmaschinen, MDF-Tisch quillt.</div></div>
+  <div class="card"><div class="ct">Kleine Fräser (1 – 2 mm)</div><div class="cd">Drehzahl maximal (24 000 und mehr), Vorschub nach Tabelle, Zustellung 0,1 bis 0,3 mm. Brechen bei Rattern sofort. Schneidenlänge kurz wählen.</div></div>
+  <div class="card"><div class="ct">Oberfräse mit 10 000 min⁻¹ minimal</div><div class="cd">Für Alu mit 6 mm wäre v_c = 190 m/min, zu schnell für HSS, hart an der Grenze für VHM. Ausweg: 3- oder 4-mm-Fräser (v_c 95 bis 125 m/min), Nebelkühlung, Adaptive.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Sorotec Schnittdaten-Empfehlungen (2025), Amana Tool Feeds &amp; Speeds Charts, Datron Werkzeughandbuch, Hoffmann Garant Zerspanungshandbuch, Sandvik Coromant Formelsammlung.</li>
+    <li>Carbide 3D „Feeds and Speeds“ (Shapeoko), Sienci Labs Resources (LongMill Feeds &amp; Speeds), Makera Carvera Air Materialprofile.</li>
+    <li>Estlcam-Handbuch (Trochoidal, Chip Thinning), Fusion 360 Manufacturing (Adaptive Clearing).</li>
+    <li>Zerspanungsbude, Shapeoko und Sienci Foren: Praxiswerte für Alu auf Hobbymaschinen (2024 – 2026).</li>
+  </ul>
+</div>

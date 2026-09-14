@@ -1,0 +1,115 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<div class="kurz"><b>Die Frage ist nicht „Laser oder Fräse“, sondern „welches Material, welche Tiefe, welche Genauigkeit“.</b> Flach und Nichtmetall: Laser. Metall beschriften: Faser. Dreidimensional oder maßhaltig: Fräse. Alles andere sind Details, und die stehen hier.</div>
+
+<h2>Eignungsprofil: sieben Verfahren, sieben Kriterien</h2>
+<p class="lede">Punkte von 1 bis 5, höher ist besser. Spalten sind sortierbar. Die drei Sätze darunter tragen die Entscheidung.</p>
+<Profiles
+  label="Verfahren"
+  criteria={["Nichtmetall schneiden", "Metall bearbeiten", "Gravur-Detail", "3D / Tiefe", "Genauigkeit", "Einfach", "Günstig"]}
+  items={[
+    {
+      name: "CO2-Laser",
+      tag: "10,6 µm · 40 bis 150 W",
+      scores: [5, 1, 4, 1, 4, 4, 3],
+      pro: "Schneidet Holz, Acryl, Leder, Pappe schnell und sauber. Graviert praktisch jedes Nichtmetall, auch Glas und Stein.",
+      con: "Kein blankes Metall. Glasröhre altert, braucht Wasserkühlung, Spiegel wollen justiert werden. Groß und schwer.",
+      use: "Werkstatt mit Platz, wenn Schneiden von Platten die Hauptaufgabe ist.",
+    },
+    {
+      name: "Diodenlaser",
+      tag: "450 nm · 5 bis 70 W",
+      scores: [3, 2, 4, 1, 4, 5, 5],
+      pro: "Billig, klein, wartungsarm, lange Lebensdauer. Graviert Holz und Leder hervorragend, mit IR-Modul auch Metall.",
+      con: "Schneidet nur dunkles oder deckendes Material. Klares Acryl, weiße Kunststoffe, Glas gehen nicht. Offene Bauart ist Klasse 4.",
+      use: "Einstieg, Gravur und Sperrholz bis 6 mm. Ab 20 W auch für dünnes Acryl und 10 mm Holz.",
+    },
+    {
+      name: "Faserlaser (Galvo)",
+      tag: "1064 nm · 20 bis 100 W",
+      scores: [1, 5, 5, 2, 5, 3, 3],
+      pro: "Dauerhafte Metallbeschriftung in Sekunden, feinste Auflösung, Tiefengravur, mit MOPA Farben auf Edelstahl.",
+      con: "Kleines Arbeitsfeld (110 bis 300 mm), Holz und klare Kunststoffe kaum, Blech nur dünn. Strahl unsichtbar und gefährlich.",
+      use: "Metallteile markieren, Schmuck, Werkzeuge, Typenschilder, Kleinserien.",
+    },
+    {
+      name: "UV-Laser (Galvo)",
+      tag: "355 nm · 3 bis 10 W",
+      scores: [1, 3, 5, 1, 5, 3, 2],
+      pro: "Markiert kalt: Glas ohne Risse, klare und weiße Kunststoffe, Silikon, Keramik, Innengravur in Kristall.",
+      con: "Wenig Leistung, schneidet nur Folien. Teuer je Watt, Nische.",
+      use: "Glas, Kunststoffgehäuse, Medizintechnik-Optik, alles was CO2 und Faser verbrennen würden.",
+    },
+    {
+      name: "CNC-Portalfräse",
+      tag: "Router · 0,5 bis 2,2 kW",
+      scores: [4, 3, 3, 5, 4, 2, 3],
+      pro: "Echte 3D-Geometrie, Taschen, Passungen, Alu bis 10 mm auf steifen Maschinen, jedes Material das Späne macht.",
+      con: "Spannen, Werkzeugwechsel, Staub, Lärm, Fräserbruch. Die Lernkurve ist die steilste hier.",
+      use: "Alles was Tiefe, Maßhaltigkeit oder Metall braucht: Halter, Gehäuse, Frontplatten, Formen.",
+    },
+    {
+      name: "Desktop-Fräsmaschine",
+      tag: "Carvera, Bantam · geschlossen",
+      scores: [3, 4, 4, 5, 5, 3, 2],
+      pro: "Metallfähig, geschlossen, oft mit Werkzeugwechsler und Messtaster. Präzise und leise genug für den Schreibtisch.",
+      con: "Kleines Arbeitsfeld (etwa 300 × 200 mm), teuer, wenig Leistung für Holzplatten.",
+      use: "Aluteile, Messing, PCB, Prototypen in Serie, wenn Platz fehlt und Genauigkeit zählt.",
+    },
+    {
+      name: "3D-Druck (FDM)",
+      tag: "zum Vergleich",
+      scores: [1, 1, 2, 5, 3, 5, 5],
+      pro: "Komplexe Form gratis, kein Spannen, läuft unbeaufsichtigt. Gehäuse, Halter, Adapter über Nacht.",
+      con: "Anisotrop, Temperaturgrenze, Oberfläche zeigt Schichten, flache Platten verzieht es.",
+      use: "Alles Volumige, das keine Maßhaltigkeit unter 0,2 mm und keine Metallfestigkeit braucht.",
+    },
+  ]}
+  labels={{ use: "Nimm es für" }}
+  note="Punkte sind Einordnungen typischer Desktop-Geräte 2026, keine Messwerte. Ein 150-W-CO2 mit RF-Röhre oder eine 2,2-kW-Fräse auf Stahlrahmen verschieben einzelne Werte um einen Punkt."
+/>
+
+<h2>Material gegen Verfahren</h2>
+<p class="lede">✅ schneidet und graviert · ✂️ nur schneiden · ✏️ nur gravieren oder markieren · ⚠️ eingeschränkt · ❌ geht nicht oder ist verboten.</p>
+<div class="tbl-wrap"><table style="min-width:900px">
+<thead><tr><th data-s="text">Material</th><th>CO2</th><th>Diode</th><th>Faser</th><th>UV</th><th>Fräse</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Sperrholz, Pappel, Birke</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">⚠️ ✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Diode ab 10 W bis 6 mm, ab 40 W bis 12 mm. Leim in Sperrholz ist der Grund für Unterschiede zwischen Chargen</td></tr>
+<tr><td><b>MDF, HDF</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">❌</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Viel Rauch, Formaldehyd, Brandränder. Fräse: Staub ist lungengängig, Absaugung Pflicht</td></tr>
+<tr><td><b>Massivholz</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">⚠️ ✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Laser: Harz und Astlöcher schneiden ungleich. Fräse: Faserrichtung beachten</td></tr>
+<tr><td><b>Acryl (PMMA) klar</b></td><td class="txt">✅</td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">CO2 schneidet mit Flammpolitur. Diode geht durch klares Acryl hindurch. Fräse: Einschneider, Gussacryl statt extrudiert</td></tr>
+<tr><td><b>Acryl schwarz / deckend</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Diode bis 8 mm (20 W), 10 mm (40 W). Nur Farbstoff-pigmentiert, nicht alle „schwarzen“ Sorten absorbieren 450 nm</td></tr>
+<tr><td><b>Polycarbonat (PC)</b></td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Verkohlt, gelb, brennt. Fräsen dagegen gut (zäh, nicht spröde)</td></tr>
+<tr><td><b>PVC, Vinyl, Kunstleder mit PVC</b></td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">⚠️</td><td class="txt">Chlorgas und Salzsäure. Nie lasern. Fräsen mit Absaugung möglich</td></tr>
+<tr><td><b>POM (Delrin)</b></td><td class="txt">⚠️</td><td class="txt">❌</td><td class="txt">✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">CO2 schneidet, setzt Formaldehyd frei, nur mit Absaugung nach draußen. Fräsen: das beste Kunststoff-Frästeil überhaupt</td></tr>
+<tr><td><b>HDPE, PP, PE</b></td><td class="txt">⚠️</td><td class="txt">❌</td><td class="txt">⚠️ ✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Schmilzt und tropft im Laser. Fräsen gut mit scharfem Einschneider</td></tr>
+<tr><td><b>ABS</b></td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Blausäure-Spuren, schmilzt. Faser markiert dunkel. Fräsen problemlos</td></tr>
+<tr><td><b>Leder (pflanzlich gegerbt)</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">❌</td><td class="txt">✏️</td><td class="txt">⚠️</td><td class="txt">Chromgegerbtes Leder setzt Chrom-VI frei. Nur bekannte Gerbung</td></tr>
+<tr><td><b>Pappe, Papier, Karton</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">❌</td><td class="txt">✏️</td><td class="txt">⚠️</td><td class="txt">Brandgefahr am höchsten. Air Assist reduzieren, nie unbeaufsichtigt</td></tr>
+<tr><td><b>Textil, Filz, Baumwolle</b></td><td class="txt">✅</td><td class="txt">✅</td><td class="txt">❌</td><td class="txt">✏️</td><td class="txt">❌</td><td class="txt">Synthetik schmilzt versiegelte Kanten, Naturfaser franst</td></tr>
+<tr><td><b>Glas</b></td><td class="txt">✏️</td><td class="txt">⚠️ ✏️</td><td class="txt">❌</td><td class="txt">✅ ✏️</td><td class="txt">⚠️</td><td class="txt">CO2 mattiert (Mikrorisse), UV markiert sauber und kann innen gravieren. Diode nur mit dunkler Farbe als Absorber</td></tr>
+<tr><td><b>Stein, Schiefer, Keramik glasiert</b></td><td class="txt">✏️</td><td class="txt">✏️</td><td class="txt">✏️</td><td class="txt">✏️</td><td class="txt">⚠️</td><td class="txt">Schiefer ist das dankbarste Gravurmaterial für Diode und CO2</td></tr>
+<tr><td><b>Edelstahl blank</b></td><td class="txt">❌</td><td class="txt">⚠️ ✏️</td><td class="txt">✅ ✏️</td><td class="txt">✏️</td><td class="txt">⚠️</td><td class="txt">Diode ab 20 W markiert dunkel (Oxid), Faser graviert, MOPA färbt. Fräse nur starre Maschine</td></tr>
+<tr><td><b>Aluminium blank</b></td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">✅ ✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Faser graviert, 20 W schneidet 0,2 mm. Fräse: 5083, 6082, 7075 mit Einschneider und Kühlung</td></tr>
+<tr><td><b>Aluminium eloxiert</b></td><td class="txt">✏️</td><td class="txt">✏️</td><td class="txt">✅ ✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">CO2 und Diode bleichen die Eloxalschicht weiß, Faser kann weiß oder schwarz</td></tr>
+<tr><td><b>Messing, Kupfer</b></td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">✅ ✏️</td><td class="txt">✏️</td><td class="txt">✅</td><td class="txt">Faser: Kupfer reflektiert, hohe Leistung. Fräse: Messing CuZn39Pb3 ist das leichteste Metall zum Fräsen</td></tr>
+<tr><td><b>Stahl, Werkzeugstahl</b></td><td class="txt">❌</td><td class="txt">⚠️ ✏️</td><td class="txt">✅ ✏️</td><td class="txt">✏️</td><td class="txt">⚠️</td><td class="txt">Faser markiert und graviert. Fräsen nur auf Maschinen mit Stahl- oder Gussrahmen</td></tr>
+<tr><td><b>Kohlefaser (CFK)</b></td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">⚠️</td><td class="txt">Laser verbrennt Harz, Fasern bleiben. Fräse: Diamant- oder DLC-Fräser, Staub ist leitfähig und lungengängig, nass oder mit HEPA</td></tr>
+<tr><td><b>Fiberglas (GFK, FR4)</b></td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">⚠️</td><td class="txt">✅</td><td class="txt">Laser: Glasfaser bleibt, Epoxid raucht giftig. Fräse: PCB-Isolationsfräsen mit Hartmetall, Absaugung</td></tr>
+<tr><td><b>Schaum (PU, XPS, EVA)</b></td><td class="txt">⚠️</td><td class="txt">⚠️</td><td class="txt">❌</td><td class="txt">❌</td><td class="txt">✅</td><td class="txt">EVA und PE-Schaum lasern gut (Werkzeugeinlagen), PU raucht giftig. Fräse: Heißdraht ist oft besser</td></tr>
+</tbody>
+</table></div>
+<div class="stop"><b>Die vollständige Verbotsliste</b> mit Begründung steht in <a href="#material-laser">Material-Matrix Laser</a>. Kurzfassung: alles mit Chlor (PVC, Vinyl), Polycarbonat, ABS, PTFE, Fiberglas, Kohlefaser, chromgegerbtes Leder, Beryllium-Legierungen, unbekannte Kunststoffe.</div>
+
+<h2>Wann sich welche Anschaffung lohnt</h2>
+<div class="grid">
+  <div class="card"><div class="ct">Erste Maschine, unter 1 000 €</div><div class="cd">Geschlossener Diodenlaser 10 bis 20 W. Graviert alles Organische, schneidet Sperrholz bis 6 mm, braucht keine Kühlung und wenig Platz. Oder eine 3018-Fräse für 250 €, um Fräsen zu lernen (nicht, um damit zu produzieren).</div></div>
+  <div class="card"><div class="ct">Platten schneiden, 2 000 bis 5 000 €</div><div class="cd">CO2 50 bis 60 W geschlossen (xTool P2S, OMTech Polar, Gweike Cloud) oder ein starker Diodenlaser 40 W mit Gehäuse (xTool S1, Creality Falcon2 Pro). CO2 gewinnt bei klarem Acryl und Geschwindigkeit, Diode bei Wartung.</div></div>
+  <div class="card"><div class="ct">Metall beschriften, 1 500 bis 4 500 €</div><div class="cd">Faserlaser 20 bis 30 W Q-Switch für Schwarz-Weiß, MOPA 20 bis 60 W für Farbe und feine Kunststoffe. Kombigeräte (xTool F1 Ultra, LaserPecker LP5) bringen Diode fürs Holz mit.</div></div>
+  <div class="card"><div class="ct">Teile mit Tiefe, 1 000 bis 4 000 €</div><div class="cd">Portalfräse 400 × 400 mm oder größer (LongMill, Shapeoko, Onefinity, Stepcraft D). Holz und Kunststoff sofort, Alu mit Geduld. Absaugung und Gehäuse einplanen, das kostet nochmal die Hälfte.</div></div>
+  <div class="card"><div class="ct">Alu und Präzision, 3 000 bis 7 000 €</div><div class="cd">Geschlossene Desktop-Fräse (Carvera Air, Carvera mit ATC) oder Stepcraft M / Sorotec Compact mit 1,5-kW-Spindel. Erst hier werden ±0,05 mm und 6 mm Alu in einem Arbeitsgang normal.</div></div>
+  <div class="card"><div class="ct">Alles in einem?</div><div class="cd">Kombigeräte (Snapmaker Artisan, Bambu Lab H2D mit Lasermodul) sind gute Laser und schwache Fräsen. Für Holz gravieren und 3D-Drucken sinnvoll, für Alu fräsen nicht.</div></div>
+</div>
+<div class="tip"><b>Lohnfertigung schlägt Kauf, wenn es unter zehn Teile im Jahr sind.</b> Laserschneiden von Blech (Faser-Flachbett, 1 bis 20 mm Stahl) kostet beim Onlinefertiger ab 5 € je Teil, CNC-Frästeile aus Alu ab 30 €. Wer nicht regelmäßig fertigt, spart mit einer STEP-Datei mehr als mit einer Maschine.</div>

@@ -648,6 +648,11 @@
       {
        "m": "mechanik",
        "h": "lager"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "fraeser",
+       "t": "Fräser wählen"
       }
      ]
     },
@@ -693,6 +698,65 @@
        "m": "elektronik-101",
        "h": "fehlersuche",
        "t": "Fehlersuche in Schaltungen"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "parameter",
+       "t": "Laserparameter finden"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "spannen",
+       "t": "CNC: Spannen, Nullpunkt, Ablauf"
+      }
+     ]
+    },
+    {
+     "id": "fertigen",
+     "icon": "🏭",
+     "t": "Teil fertigen",
+     "d": "Laser, CNC-Fräse oder 3D-Drucker? Verfahren wählen, Material prüfen, Parameter finden, sicher fertigen.",
+     "k": "fertigen herstellen bauen laser lasern gravieren schneiden fräsen cnc verfahren material parameter maschine kaufen blech acryl sperrholz aluminium",
+     "links": [
+      {
+       "m": "laser-cnc",
+       "h": "verfahren",
+       "t": "Welches Verfahren wofür"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "material-laser",
+       "t": "Material-Matrix Laser (und was nie)"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "parameter",
+       "t": "Laserparameter finden"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "schnittdaten",
+       "t": "Schnittdaten & Chipload"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "sicherheit",
+       "t": "Laserklassen, Brille, Recht"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "kaufen",
+       "t": "Kaufberatung & Preise 2026"
+      },
+      {
+       "m": "mechanik",
+       "h": "fertigung",
+       "t": "Fertigungsgerecht konstruieren (DFM)"
+      },
+      {
+       "m": "mechanik",
+       "h": "druck3d",
+       "t": "Konstruieren für den 3D-Druck"
       }
      ]
     },
@@ -701,7 +765,7 @@
      "icon": "🧮",
      "t": "Rechnen",
      "d": "Die Rechner des Hubs: Vorwiderstand, Teiler, Leiterbahn, PID, Antrieb, Biegung, Passung.",
-     "k": "rechner berechnen ausrechnen formel umrechnen kalkulator dimensionieren auslegen",
+     "k": "rechner berechnen ausrechnen formel umrechnen kalkulator dimensionieren auslegen fräsen vorschub drehzahl chipload laser",
      "links": [
       {
        "m": "elektrotechnik",
@@ -756,6 +820,11 @@
       {
        "m": "mecha-referenz",
        "h": "formeln"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "schnittdaten",
+       "t": "Schnittdaten fräsen & Laserparameter übertragen"
       }
      ]
     },
@@ -791,6 +860,11 @@
        "m": "elektronik-101",
        "h": "begriffe",
        "t": "Elektronik-Begriffe"
+      },
+      {
+       "m": "laser-cnc",
+       "h": "glossar",
+       "t": "Laser- & CNC-Glossar"
       }
      ]
     },
@@ -2136,6 +2210,231 @@
         "aufbau": "projekte",
         "fortgeschritten": "projekte"
        }
+      }
+     ]
+    },
+    {
+     "id": "fertigung",
+     "name": "Digitale Fertigung",
+     "desc": "Laser schneiden und gravieren, CNC fräsen: welches Verfahren wofür, welche Parameter, welche Maschine, und wie man dabei sicher bleibt.",
+     "modules": [
+      {
+       "id": "laser-cnc",
+       "file": "laser-cnc.html",
+       "name": "Laser & CNC-Fräsen",
+       "icon": "🔆",
+       "kind": "Referenz",
+       "updated": "2026-09-14",
+       "desc": "Digitale Fertigung zum Nachschlagen: CO2-, Dioden-, Faser- und UV-Laser sowie CNC-Fräsen im Vergleich. Welches Verfahren für welches Material, Startparameter, Fräser und Schnittdaten, Maschinenklassen mit Preisen (Stand 2026), Software, Absaugung, Sicherheit und Recht, Fehlersuche und Glossar.",
+       "tags": [
+        "laser",
+        "co2",
+        "diodenlaser",
+        "faserlaser",
+        "mopa",
+        "uv-laser",
+        "gravieren",
+        "laserschneiden",
+        "cnc",
+        "fräsen",
+        "portalfräse",
+        "fräser",
+        "schnittdaten",
+        "chipload",
+        "lightburn",
+        "gcode",
+        "cam",
+        "fusion 360",
+        "laserklasse",
+        "absaugung",
+        "kerf"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "verfahren",
+         "t": "Welches Verfahren wofür"
+        },
+        {
+         "h": "laserphysik",
+         "t": "Wie ein Laser schneidet"
+        },
+        {
+         "h": "co2",
+         "t": "CO2-Laser"
+        },
+        {
+         "h": "diode",
+         "t": "Diodenlaser"
+        },
+        {
+         "h": "faser",
+         "t": "Faser- & UV-Laser"
+        },
+        {
+         "h": "material-laser",
+         "t": "Material-Matrix Laser"
+        },
+        {
+         "h": "parameter",
+         "t": "Laserparameter finden"
+        },
+        {
+         "h": "software-laser",
+         "t": "Laser-Software & Steuerungen"
+        },
+        {
+         "h": "cnc-grundlagen",
+         "t": "CNC-Fräse: Aufbau & Technik"
+        },
+        {
+         "h": "cnc-maschinen",
+         "t": "Maschinenklassen & Katalog"
+        },
+        {
+         "h": "fraeser",
+         "t": "Fräser & Werkzeuge"
+        },
+        {
+         "h": "schnittdaten",
+         "t": "Schnittdaten & Chipload"
+        },
+        {
+         "h": "cam",
+         "t": "CAM, G-Code & Steuerung"
+        },
+        {
+         "h": "material-cnc",
+         "t": "Material für die CNC"
+        },
+        {
+         "h": "spannen",
+         "t": "Spannen, Nullpunkt & Ablauf"
+        },
+        {
+         "h": "sicherheit",
+         "t": "Sicherheit & Recht"
+        },
+        {
+         "h": "absaugung",
+         "t": "Absaugung, Luft & Kühlung"
+        },
+        {
+         "h": "fehler",
+         "t": "Fehlersuche"
+        },
+        {
+         "h": "kaufen",
+         "t": "Kaufberatung & Preise 2026"
+        },
+        {
+         "h": "glossar",
+         "t": "Glossar"
+        },
+        {
+         "h": "quellen",
+         "t": "Quellen"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "verfahren"
+         ]
+        },
+        {
+         "l": "Laser",
+         "sections": [
+          "laserphysik",
+          "co2",
+          "diode",
+          "faser",
+          "material-laser",
+          "parameter",
+          "software-laser"
+         ]
+        },
+        {
+         "l": "CNC-Fräsen",
+         "sections": [
+          "cnc-grundlagen",
+          "cnc-maschinen",
+          "fraeser",
+          "schnittdaten",
+          "cam",
+          "material-cnc",
+          "spannen"
+         ]
+        },
+        {
+         "l": "Betrieb",
+         "sections": [
+          "sicherheit",
+          "absaugung",
+          "fehler",
+          "kaufen"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "glossar",
+          "quellen"
+         ]
+        }
+       ],
+       "alias": {
+        "laser": "laserphysik",
+        "physik": "laserphysik",
+        "co2-laser": "co2",
+        "diodenlaser": "diode",
+        "dioden": "diode",
+        "faserlaser": "faser",
+        "fiber": "faser",
+        "uv": "faser",
+        "galvo": "faser",
+        "mopa": "faser",
+        "materialien": "material-laser",
+        "material": "material-laser",
+        "nie-lasern": "material-laser",
+        "parameter-laser": "parameter",
+        "lightburn": "software-laser",
+        "software": "software-laser",
+        "cnc": "cnc-grundlagen",
+        "fraesen": "cnc-grundlagen",
+        "portalfraese": "cnc-grundlagen",
+        "spindel": "cnc-grundlagen",
+        "maschinen": "cnc-maschinen",
+        "katalog": "cnc-maschinen",
+        "werkzeuge": "fraeser",
+        "feeds": "schnittdaten",
+        "chipload": "schnittdaten",
+        "gcode": "cam",
+        "fusion": "cam",
+        "material-fraesen": "material-cnc",
+        "workflow": "spannen",
+        "ablauf": "spannen",
+        "recht": "sicherheit",
+        "laserklasse": "sicherheit",
+        "brille": "sicherheit",
+        "kuehlung": "absaugung",
+        "luft": "absaugung",
+        "air-assist": "absaugung",
+        "preise": "kaufen",
+        "kauf": "kaufen",
+        "begriffe": "glossar"
+       },
+       "related": [
+        "mechanik",
+        "holzarbeiten",
+        "druck",
+        "dremel"
+       ]
       }
      ]
     },

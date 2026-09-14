@@ -1101,6 +1101,83 @@ var CALC = {
     return { out: s, hint: hint };
   },
   /* ------------------------------------------------------------------
+     LASER & CNC-FRAESEN
+     ------------------------------------------------------------------ */
+
+  /* --- Linienenergie E = P / v und Vorschub bei anderer Leistung.
+     Gleiche Energie je Millimeter ergibt bei aehnlicher Optik ein
+     aehnliches Schnittergebnis; Startwert fuer das Testraster. --- */
+  laserlinie: function (v) {
+    var p1 = v.p1, v1 = v.v1, p2 = v.p2;
+    var f1 = isFinite(v.pct1) ? v.pct1 / 100 : 1;
+    var f2 = isFinite(v.pct2) ? v.pct2 / 100 : 1;
+    if (!isFinite(p1) || !isFinite(v1) || p1 <= 0 || v1 <= 0) return { out: "Bekannte Leistung und Vorschub eintragen." };
+    var e = p1 * f1 / v1;
+    var s = "Linienenergie E = " + sig(e, 3) + " J/mm  (" + sig(p1 * f1, 3) + " W bei " + sig(v1, 3) + " mm/s)";
+    var hint = "E = P · Anteil / v. Werte unter 0,5 J/mm sind Gravur, 1 bis 3 J/mm schneiden 3 mm Sperrholz mit CO2, "
+      + "Dioden brauchen wegen des groesseren Spots und der schlechteren Absorption oft das Doppelte. ";
+    if (isFinite(p2) && p2 > 0) {
+      var v2 = p2 * f2 / e;
+      s += "  ·  neuer Vorschub v₂ ≈ " + sig(v2, 3) + " mm/s (" + sig(v2 * 60, 3) + " mm/min)";
+      hint += "Uebertragung auf " + sig(p2 * f2, 3) + " W: v₂ = P₂ · Anteil / E. Das gilt fuer gleiche Wellenlaenge und aehnliche "
+        + "Spotgroesse; ein 40-W-Diodenmodul hat einen groesseren Spot als ein 10-W-Modul und schneidet je Watt etwas schlechter. "
+        + "Ergebnis 10 % langsamer fahren und im Testraster bestaetigen.";
+    } else {
+      hint += "Zweite Leistung eintragen, um den Vorschub fuer eine andere Maschine zu schaetzen.";
+    }
+    return { out: s, hint: hint };
+  },
+  /* --- Linienabstand, LPI, DPI --- */
+  lpi: function (v) {
+    var mm = v.mm, lpi = v.lpi, spot = v.spot;
+    if (isFinite(lpi) && lpi > 0 && !(isFinite(mm) && mm > 0)) mm = 25.4 / lpi;
+    if (!isFinite(mm) || mm <= 0) return { out: "Linienabstand in mm oder LPI eintragen." };
+    var l = 25.4 / mm;
+    var s = "Abstand " + sig(mm, 3) + " mm  =  " + sig(l, 4) + " LPI (DPI)";
+    var hint = "LPI = 25,4 / Abstand. Richtwert: Abstand ungefaehr gleich Spotgroesse, sonst bleiben Stege (zu grob) "
+      + "oder die Zeilen ueberlappen und brennen doppelt (zu fein). ";
+    if (isFinite(spot) && spot > 0) {
+      var r = mm / spot;
+      hint += "Bei " + sig(spot, 3) + " mm Spot ist das Verhaeltnis " + sig(r, 2) + ": "
+        + (r > 1.3 ? "zu grob, Linien sichtbar. Abstand auf " + sig(spot, 3) + " mm senken."
+          : r < 0.6 ? "stark ueberlappend, Gravur wird dunkel und tief; fuer Holz Abstand auf " + sig(spot * 0.8, 3) + " mm anheben."
+          : "passt.");
+    }
+    return { out: s, hint: hint };
+  },
+  /* --- Vorschub aus Drehzahl, Schneidenzahl und Chipload (Hobby-CNC:
+     die Spindel gibt die Drehzahl vor). --- */
+  router: function (v) {
+    var n = v.n, d = v.d, z = v.z, fz = v.fz, ap = v.ap, ae = v.ae;
+    if (!isFinite(n) || !isFinite(z) || !isFinite(fz) || n <= 0 || z <= 0 || fz <= 0) return { out: "Drehzahl, Schneidenzahl und Zahnvorschub eintragen." };
+    var vf = n * z * fz;
+    var s = "v_f = " + sig(vf, 4) + " mm/min";
+    var hint = "v_f = n · z · f_z. ";
+    if (isFinite(d) && d > 0) {
+      var vc = Math.PI * d * n / 1000;
+      s += "  ·  v_c = " + sig(vc, 3) + " m/min";
+      hint += "Schnittgeschwindigkeit v_c = π · d · n / 1000, hier " + sig(vc, 3) + " m/min: "
+        + (vc > 600 ? "sehr hoch, nur fuer Holz und Kunststoff mit VHM sinnvoll. "
+          : vc > 250 ? "hoch, fuer Holz, Kunststoff und Alu mit VHM in Ordnung. "
+          : vc > 80 ? "mittel, passt fuer Alu, Messing und Hartholz. "
+          : "niedrig, fuer Stahl oder sehr kleine Fraeser. ");
+      if (isFinite(ae) && ae > 0 && ae < d / 2) {
+        var k = 1 / Math.sqrt(1 - Math.pow(1 - 2 * ae / d, 2));
+        s += "  ·  mit Chip Thinning: " + sig(vf * k, 4) + " mm/min";
+        hint += "Schnittbreite unter 50 % des Durchmessers: der Span wird duenner als f_z, Vorschub um Faktor " + sig(k, 3)
+          + " anheben (Chip Thinning). ";
+      }
+      if (isFinite(ap) && ap > 0 && isFinite(ae) && ae > 0) {
+        var Q = ap * ae * vf / 1000;
+        s += "  ·  Q = " + sig(Q, 3) + " cm³/min";
+        hint += "Zeitspanvolumen Q = a_p · a_e · v_f. Hobbyportal mit Oberfraese: bis etwa 10 cm³/min in Holz, 1 bis 2 in Alu; "
+          + "steifes Portal mit 2,2 kW: 30 bis 60 in Holz, 5 bis 15 in Alu. ";
+      }
+    }
+    hint += "Ergebnis mit dem Geraeusch pruefen: Brummen gut, Kreischen zu wenig Vorschub, Haemmern Rattern.";
+    return { out: s, hint: hint };
+  },
+  /* ------------------------------------------------------------------
      MESHTASTIC / LORA
      ------------------------------------------------------------------ */
 

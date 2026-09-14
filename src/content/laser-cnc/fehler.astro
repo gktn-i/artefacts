@@ -1,0 +1,72 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Fast jeder Fehler hat eine von fünf Ursachen: Fokus, Optik, Luft, Mechanik, Parameter.</b> In dieser Reihenfolge prüfen. Wer beim Fokus anfängt und bei den Parametern aufhört, findet neun von zehn Fehlern ohne Werkzeug.</div>
+
+<h2>Laser</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Symptom</th><th>Wahrscheinlich</th><th>Prüfen</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Schneidet nicht mehr durch, gestern ging es</b></td><td>Linse verschmutzt, Fokus verstellt, Röhre schwächer, Wasser zu warm</td><td>Linse gegen Licht, Rampentest, Amperemeter, Wassertemperatur</td><td>Linse reinigen, Fokus neu, Wasser kühlen. Röhre: bei gleichem Strom weniger Leistung heißt Ende naht</td></tr>
+<tr><td><b>Schneidet an einer Ecke schlechter</b></td><td>Spiegel verstellt (CO2), Tisch nicht eben, Portal nicht parallel</td><td>Klebeband-Schuss an Spiegel 2 in allen vier Ecken, Fokusabstand in den Ecken messen</td><td>Spiegel justieren, Tisch nivellieren</td></tr>
+<tr><td><b>Breite, verbrannte Kante</b></td><td>Zu langsam, zu viel Leistung, Fokus falsch, kein Air Assist</td><td>Testraster, Air Assist hören</td><td>Schneller, weniger Leistung, Fokus, Luft an</td></tr>
+<tr><td><b>Unterseite verbrannt, Schmauchspuren</b></td><td>Reflexion vom Tisch, Wabe voller Reste</td><td>Wabentisch</td><td>Werkstück auf Stifte oder Nadeln legen, Wabe reinigen, Maskierband unten</td></tr>
+<tr><td><b>Gravur unscharf, doppelt</b></td><td>Fokus, Riemen locker, Kopf wackelt, Beschleunigung zu hoch</td><td>Riemen mit Finger drücken (5 mm Spiel maximal), Kopf anfassen</td><td>Fokus, Riemen spannen, Rollen prüfen, Beschleunigung senken</td></tr>
+<tr><td><b>Gravur streifig, helle und dunkle Zeilen</b></td><td>PWM-Rate, Leistung zu gering für stabile Entladung (Glasröhre unter 10 %), Overscan fehlt</td><td>Leistung in Testfeld</td><td>Leistung über 12 %, Geschwindigkeit runter, Overscan 2 – 5 %, Bidirektional aus zum Test</td></tr>
+<tr><td><b>Versatz in X oder Y, Muster verschoben</b></td><td>Schrittverlust: zu hohe Beschleunigung, Kollision, Riemen springt, Treiber zu heiß</td><td>Geräusch beim Anfahren, Kopf am Rand angestoßen?</td><td>Beschleunigung senken, Riemen, Lüfter am Treiber, Verfahrbereich in Software begrenzen</td></tr>
+<tr><td><b>Kreise sind Ovale, Quadrate Rauten</b></td><td>Schritte je mm falsch, Portal nicht rechtwinklig</td><td>100-mm-Quadrat schneiden und messen</td><td>$100/$101 anpassen (GRBL), Portal rechtwinklig stellen</td></tr>
+<tr><td><b>Laser feuert nicht (Diode)</b></td><td>$32=0, S-Wert 0, Deckel-Interlock, Flammensensor, Modulkabel</td><td>Console: $$, M3 S500 G1 F100 testen</td><td>$32=1, S-Max ($30) prüfen, Interlock, Kabel am Modul</td></tr>
+<tr><td><b>Laser feuert nicht (CO2)</b></td><td>Wasserflussfehler, Deckel offen, Netzteil, Röhre defekt, Strom auf 0</td><td>LED am Netzteil, Flusssensor überbrücken NUR zum Test mit laufender Pumpe, Test-Taste am Netzteil</td><td>Wasser, Interlock, Netzteil tauschen (50 – 150 €), Röhre</td></tr>
+<tr><td><b>Röhre zündet spät oder flackert</b></td><td>Röhre am Ende, Netzteil schwach, Wasser leitfähig</td><td>Farbe der Entladung (rosa gut, weiß-violett schwach), Amperemeter</td><td>Röhre tauschen</td></tr>
+<tr><td><b>Acrylkante milchig statt klar</b></td><td>Zu viel Air Assist, zu schnell, extrudiertes statt Gussacryl</td><td>Sorte prüfen</td><td>Luft runter, langsamer, GS-Acryl</td></tr>
+<tr><td><b>Holzgravur wellig, verschiedene Tiefen</b></td><td>Jahresringe, Holz uneben, Fokus</td><td>Material</td><td>Homogenes Holz (Linde, Ahorn), planes Brett, Fokus mitten in die Fläche</td></tr>
+<tr><td><b>Faser: Markierung schwach oder ungleich</b></td><td>Fokus, Werkstück schief, Feld nicht kalibriert, Linse verschmutzt</td><td>Fokus in Ecke und Mitte prüfen, Linse gegen Licht</td><td>Fokus, Werkstück ausrichten, F-Theta reinigen (nur mit Optiktuch)</td></tr>
+<tr><td><b>Faser: Bild verzerrt zum Rand</b></td><td>Galvo-Korrektur (Kalibrierdatei) fehlt oder falsche Linse gewählt</td><td>EZCad: Cor-Datei, LightBurn: Lens Correction</td><td>Kalibriergitter fahren und korrigieren</td></tr>
+<tr><td><b>MOPA-Farbe nicht reproduzierbar</b></td><td>Fokus, Oberflächenzustand, Temperatur, Werkstückdicke</td><td>Testraster auf gleichem Blech</td><td>Farbparameter je Werkstück-Charge neu, Oberfläche entfetten, Fokus mit Messuhr</td></tr>
+<tr><td><b>Rauch im Raum trotz Absaugung</b></td><td>Absaugung zu schwach, Air Assist stärker als Absaugung, Leck im Rohr</td><td>Räucherstäbchen-Test</td><td>Gebläse größer, Rohr kürzer, Dichtband, Filter voll</td></tr>
+</tbody>
+</table></div>
+
+<h2>CNC-Fräse</h2>
+<div class="tbl-wrap"><table style="min-width:960px">
+<thead><tr><th data-s="text">Symptom</th><th>Wahrscheinlich</th><th>Prüfen</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Rattern, Hämmern, Rattermarken</b></td><td>Resonanz, Fräser zu lang, Werkstück schwingt, Zustellung zu groß, Spiel in Achsen</td><td>Werkstück drücken, Fräser kürzen, Drehzahl ändern</td><td>Drehzahl ±15 %, Fräser kurz spannen, Zustellung halbieren, Werkstück besser spannen, Rollen/Führungen nachstellen</td></tr>
+<tr><td><b>Kreischen, Brandspuren am Holz</b></td><td>Vorschub zu klein, Fräser stumpf, Drehzahl zu hoch</td><td>Chipload ausrechnen, Späne ansehen (Staub statt Flocken)</td><td>Vorschub hoch, Drehzahl runter, neuer Fräser</td></tr>
+<tr><td><b>Maße falsch, alles zu klein oder zu groß</b></td><td>Schritte je mm, Fräserdurchmesser im CAM falsch, Umkehrspiel</td><td>100-mm-Fahrt messen, Fräser messen (6 mm sind oft 5,95)</td><td>$100 – $102 kalibrieren, Fräser im CAM korrigieren, Backlash-Kompensation (grblHAL) oder Spindel nachstellen</td></tr>
+<tr><td><b>Maß falsch nur in einer Richtung, Kreise oval</b></td><td>Umkehrspiel, lockere Kupplung, Riemen springt</td><td>Messuhr an Achse, hin und her fahren</td><td>Kupplung anziehen (Madenschraube auf Fläche der Welle), Spindelmutter, Riemen spannen</td></tr>
+<tr><td><b>Versatz mitten im Job, danach alles verschoben</b></td><td>Schrittverlust: zu schnell, Kollision mit Klemme, Treiberstrom zu klein, Motor zu heiß, Spindelstörung auf Steuerung (EMV)</td><td>Motor anfassen (über 70 °C zu heiß), Spindelkabel neben Motorkabel?</td><td>Beschleunigung senken, Klemmen prüfen, Treiberstrom, geschirmte Kabel, Ferrit, Erdung des Frequenzumrichters</td></tr>
+<tr><td><b>Fräser bricht sofort beim Eintauchen</b></td><td>Senkrechtes Eintauchen ohne Mittenschneide, Eintauchvorschub zu hoch, Z-Null falsch</td><td>CAM Eintauchstrategie</td><td>Rampe oder Helix, Eintauchvorschub 30 %, Z-Null prüfen</td></tr>
+<tr><td><b>Fräser bricht mitten im Schnitt (Alu)</b></td><td>Verklebt (kein Kühlmittel), Späne stauen sich in der Nut, Zustellung zu groß, Rattern</td><td>Fräser ansehen (Alu-Kleber an Schneide)</td><td>Nebel oder Luft, Adaptive statt Vollnut, Späne ausblasen, kleinere Zustellung</td></tr>
+<tr><td><b>Oberfläche rau, Fräsbahnen sichtbar</b></td><td>Tramming (Spindel nicht senkrecht), stumpf, Gegenlauf beim Schlichten, Stepover zu groß</td><td>Planfräsen: Sichelmuster heißt Tramming</td><td>Spindel ausrichten (Messuhr auf Kreis 100 mm, ±0,02 mm), Gleichlauf, Schlichtzugabe 0,2 mm</td></tr>
+<tr><td><b>Stufen an Taschenwänden bei jeder Zustellung</b></td><td>Fräser biegt sich, Spiel in Z, Werkstück gibt nach</td><td>Fräserlänge</td><td>Kürzer spannen, Schlichtdurchgang mit voller Tiefe und 0,2 mm Aufmaß</td></tr>
+<tr><td><b>Ausrisse an der Oberkante (Sperrholz)</b></td><td>Upcut-Fräser, stumpf, zu großer Vorschub bei Furnier</td><td>Fräsertyp</td><td>Downcut oder Compression, Malerkrepp auf der Oberfläche, erst 1 mm Downcut dann Rest</td></tr>
+<tr><td><b>Grat an Alu und Kunststoff</b></td><td>Stumpf, falsche Drehrichtung, zu wenig Vorschub, Fräser ohne polierten Spanraum</td><td>Fräser</td><td>Scharfer Einschneider, Gleichlauf, Vorschub hoch, Kante brechen mit Fase 0,3 mm im CAM</td></tr>
+<tr><td><b>Kunststoff schmilzt, Späne kleben</b></td><td>Zweischneider, zu wenig Vorschub, Reibung</td><td>Fräser</td><td>Einschneider, Chipload hoch, Druckluft, große Späne</td></tr>
+<tr><td><b>Werkstück löst sich, fliegt weg</b></td><td>Spannung zu schwach, Klebeband auf staubiger Fläche, Tabs zu klein</td><td>–</td><td>Schrauben oder Sekundenkleber-Methode, Flächen entfetten, Tabs 5 × 1,5 mm</td></tr>
+<tr><td><b>Steuerung friert ein, USB trennt</b></td><td>EMV vom Frequenzumrichter oder Oberfräse, USB-Kabel zu lang, Erdschleife</td><td>Tritt nur bei laufender Spindel auf?</td><td>Geschirmtes VFD-Kabel, Erdung an einem Punkt, Ferritkerne, USB-Isolator, Kabel unter 2 m</td></tr>
+<tr><td><b>Z fährt nach Werkzeugwechsel zu tief oder in der Luft</b></td><td>Werkzeuglänge nicht neu gemessen</td><td>–</td><td>Immer antasten nach Wechsel, Sensor nutzen</td></tr>
+<tr><td><b>Homing schlägt fehl, Alarm</b></td><td>Endschalter falsch verdrahtet, Richtung falsch ($23), Störung auf Schalterleitung</td><td>Schalter von Hand drücken, Status in Console (?)</td><td>$23 Homing-Richtung, geschirmte Leitung, Schalter mit Pull-up</td></tr>
+</tbody>
+</table></div>
+
+<h2>Wartung, die Fehler verhindert</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th data-s="text">Intervall</th><th>Laser</th><th>Fräse</th></tr></thead>
+<tbody>
+<tr><td><b>Jeder Job</b></td><td>Fokus, Air Assist läuft, Absaugung läuft, Wasser fließt, Wabe frei</td><td>Späne weg, Werkzeug prüfen, Nullpunkte, Sicherheitshöhe</td></tr>
+<tr><td><b>Wöchentlich (10 – 20 h)</b></td><td>Linse und Spiegel 3 reinigen (Isopropanol, Optiktuch, kein Reiben), Schienen abwischen, Riemen prüfen</td><td>Führungen abwischen und leicht ölen (Profilschienen: Lithiumfett oder Öl nach Hersteller), Rollen prüfen, Kühlwasser</td></tr>
+<tr><td><b>Monatlich</b></td><td>Spiegel 1 und 2, Wasserstand, Filter im Absauggerät, Endschalter, Schrauben am Kopf</td><td>Kugelumlaufspindeln fetten, Spannzangen reinigen, Rundlauf messen, Tramming prüfen, Opferplatte planen bei Bedarf</td></tr>
+<tr><td><b>Halbjährlich</b></td><td>Wasser wechseln, Spiegeljustage prüfen, Röhrenstrom bei gleicher Leistung notieren, Netzteil entstauben</td><td>Riemen tauschen bei Verschleiß, Kohlebürsten der Oberfräse, Frequenzumrichter entstauben, Not-Halt testen</td></tr>
+</tbody>
+</table></div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>LightBurn Dokumentation: Troubleshooting (Streifen, Versatz, Laser feuert nicht), GRBL-Fehlercodes und Alarme.</li>
+    <li>Herstellersupport: xTool, Creality Falcon, OMTech (Spiegeljustage, Röhrentausch), Carbide 3D (Tramming, Chatter), Sienci Labs (Maintenance).</li>
+    <li>Zerspanungsbude, Shapeoko Community, LightBurn Forum, r/hobbycnc: gesammelte Fehlerbilder 2023 – 2026.</li>
+    <li>Kreuzverweis: <a href="mechatronik-lernpfad.html#debugging">Systematische Fehlersuche</a> im Modul Lernpfad.</li>
+  </ul>
+</div>

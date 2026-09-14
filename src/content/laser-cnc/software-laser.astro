@@ -1,0 +1,73 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>LightBurn ist der Standard, alles andere ist Beigabe oder Zwang.</b> Wer eine Maschine kauft, sollte vorher prüfen, ob sie mit LightBurn läuft. Geräte mit geschlossener Software (Glowforge, neue xTool, Bambu) sind bequem, binden aber an Cloud oder Hersteller.</div>
+
+<h2>Programme</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th data-s="text">Programm</th><th>Für</th><th>Steuerungen</th><th data-s="num">Preis</th><th>Stärken</th><th>Grenzen</th></tr></thead>
+<tbody>
+<tr><td><b>LightBurn 2.1</b></td><td>Alle Laser</td><td>GRBL, Marlin, Smoothie (Core); zusätzlich Ruida, Trocen, TopWisdom, EZCad2/3-Galvo (Pro)</td><td>Core 99 $, Pro 199 $, einmalig, 1 Jahr Updates, danach 40 $/Jahr optional, 3 Rechner</td><td>Design, Kamera, Material Test, Bibliothek, Rotary, Nesting (2.1), 16-Bit-Tiefengravur, Dark Mode, Windows/Mac/Linux</td><td>Kein Support für Glowforge, Bambu, neue xTool-Geräte (P3, F2 Ultra) und Cloud-Laser</td></tr>
+<tr><td><b>xTool Studio</b></td><td>xTool-Geräte</td><td>xTool</td><td>kostenlos</td><td>Kamera, Materialdatenbank, Autofokus, ACS-Automatik. Löst XCS ab (letzte XCS 2.7, Juni 2025). Geräte ab August 2025 nur noch Studio</td><td>Nur xTool. Ältere Geräte (D1 Pro, S1, P2) laufen auch mit LightBurn</td></tr>
+<tr><td><b>LaserGRBL</b></td><td>GRBL-Diodenlaser</td><td>GRBL</td><td>kostenlos, Open Source</td><td>Schlank, Bildgravur mit guter Rasterung, Windows</td><td>Kein Vektordesign, kein Mac, keine Kamera</td></tr>
+<tr><td><b>EZCad2 / EZCad3</b></td><td>Galvo (BJJCZ-Karten)</td><td>JCZ-Karten</td><td>mit der Karte dabei</td><td>Alle Galvo-Funktionen, Rotary, Hatch-Muster, Barcode, Seriennummern</td><td>Nur Windows, Oberfläche aus 2008, Lizenz an Karte gebunden</td></tr>
+<tr><td><b>Glowforge App</b></td><td>Glowforge</td><td>Cloud</td><td>Free / Premium 50 $/Monat</td><td>Einfachste Oberfläche, Proofgrade-Materialien, Kamera</td><td>Ohne Internet nichts. Premium für Design-Werkzeuge</td></tr>
+<tr><td><b>Bambu Suite</b></td><td>Bambu H2D</td><td>Bambu</td><td>kostenlos</td><td>Kamera-Vorschau, Materialprofile, Plotter</td><td>Nur Bambu, kein LightBurn</td></tr>
+<tr><td><b>RDWorks</b></td><td>Ruida</td><td>Ruida</td><td>kostenlos</td><td>Kommt mit jedem China-CO2</td><td>Nur Windows, veraltet, LightBurn ist besser</td></tr>
+<tr><td><b>Inkscape + Extension</b></td><td>Design, G-Code</td><td>GRBL</td><td>kostenlos</td><td>Vollwertiges Vektorprogramm, SVG-Standard</td><td>Kein Live-Steuern, Umweg</td></tr>
+<tr><td><b>Ruby (Trotec), JobControl</b></td><td>Trotec</td><td>Trotec</td><td>im Gerät</td><td>Industrieller Workflow, Materialdatenbank</td><td>Nur Trotec</td></tr>
+</tbody>
+</table></div>
+<p class="note">LightBurn-Lizenzmodell seit 1. Oktober 2024: Core (G-Code) und Pro (G-Code + DSP + Galvo). Pro ersetzt die alten DSP- und Galvo-Lizenzen. Upgrade Core zu Pro gegen Aufpreis. Stand September 2026.</p>
+
+<h2>Steuerungen</h2>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Steuerung</th><th>Typ</th><th>Bei</th><th>Verbindung</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>GRBL 1.1 / grblHAL</b></td><td>G-Code, Streaming vom PC</td><td>Fast alle Diodenlaser</td><td>USB seriell, WLAN bei ESP32-Boards (FluidNC)</td><td>$32=1 Lasermodus, $30 = max S-Wert (meist 1000). Neue 32-Bit-Boards (grblHAL, FluidNC) laufen flüssiger</td></tr>
+<tr><td><b>Ruida RDC6442 / 6445 / 6432</b></td><td>DSP, Job im Gerät</td><td>China-CO2 (OMTech, Thunder, Gweike, Monport)</td><td>Ethernet, USB, USB-Stick</td><td>Job wird komplett übertragen, Rechner darf danach aus. LightBurn Pro nötig</td></tr>
+<tr><td><b>Trocen AWC, TopWisdom</b></td><td>DSP</td><td>Ältere China-Maschinen</td><td>USB, Ethernet</td><td>Weniger verbreitet, LightBurn unterstützt sie</td></tr>
+<tr><td><b>BJJCZ (EZCad-Karte)</b></td><td>Galvo</td><td>Fast alle offenen Faser- und UV-Galvos</td><td>USB</td><td>Kartentypen: LMCV4 (EZCad2), DLC2 (EZCad3). LightBurn Pro seit 2.1 auch EZCad3</td></tr>
+<tr><td><b>xTool, Bambu, Glowforge, LaserPecker</b></td><td>proprietär</td><td>Eigene Geräte</td><td>USB, WLAN, Cloud</td><td>Bequem, aber an Hersteller gebunden. xTool D1/S1/P2 mit GRBL-Modus für LightBurn</td></tr>
+<tr><td><b>Marlin, Smoothieware, Klipper</b></td><td>3D-Drucker-Firmware</td><td>Umbauten, Snapmaker, Drucker mit Laserkopf</td><td>USB</td><td>Inline-Leistung (M3 S) prüfen, sonst Gravur streifig</td></tr>
+</tbody>
+</table></div>
+
+<h2>Dateien und Formate</h2>
+<div class="grid">
+  <div class="card"><div class="ct">SVG</div><div class="cd">Standard für Vektoren. Aus Inkscape, Illustrator, Affinity, Fusion 360 (Skizze exportieren), FreeCAD. Fallstricke: Text als Pfad konvertieren, Einheiten prüfen (96 dpi in Inkscape), Strichstärke egal, Farbe bestimmt Ebene.</div></div>
+  <div class="card"><div class="ct">DXF</div><div class="cd">Aus CAD. Splines vorher in Polylinien wandeln, Maßstab kontrollieren (mm oder Zoll), doppelte Linien entfernen. LightBurn: „Auto-close tolerance“ hilft bei offenen Konturen.</div></div>
+  <div class="card"><div class="ct">PNG, JPG, BMP</div><div class="cd">Für Bildgravur. 300 bis 600 dpi in Zielgröße, Kontrast und Schärfe vorher setzen. Transparenz in PNG wird weiß. Graustufen, kein Farbraum.</div></div>
+  <div class="card"><div class="ct">AI, PDF</div><div class="cd">LightBurn importiert beides. PDF aus Cricut, Canva, Word geht meist, Schriften eingebettet.</div></div>
+  <div class="card"><div class="ct">LBRN2, XCS, GF</div><div class="cd">Projektformate von LightBurn, xTool Studio, Glowforge. Enthalten Ebenen mit Parametern. Untereinander nicht austauschbar, SVG als Zwischenformat.</div></div>
+  <div class="card"><div class="ct">G-Code, RD, NC</div><div class="cd">Fertige Maschinendatei. GRBL: .gcode / .nc mit M3/M4, S-Werten, G0/G1. Ruida: .rd binär. Für Hand-Bearbeitung nur GRBL sinnvoll.</div></div>
+</div>
+
+<h2>Workflow in LightBurn</h2>
+<div class="steps">
+  <div class="step"><h4>Gerät einrichten</h4>Devices → Find my laser oder manuell. Arbeitsfeld, Nullpunkt (Diode: vorne links; Ruida: meist hinten rechts), Baudrate. Bei GRBL $32=1 prüfen (Console: $$).</div>
+  <div class="step"><h4>Design importieren oder zeichnen</h4>Ebenen nach Farbe: Schnitt, Gravur, Markierung. Reihenfolge: erst Gravur, dann Innenschnitte, zuletzt Außenkontur. Sonst verschiebt sich das Teil.</div>
+  <div class="step"><h4>Parameter aus Bibliothek</h4>Material Library laden, Ebene zuweisen. Ohne Bibliothek: Material Test fahren, siehe <a href="#parameter">Laserparameter finden</a>.</div>
+  <div class="step"><h4>Vorschau</h4>Preview zeigt Reihenfolge, Zeit, Überfahrten. Rote Linien sind Leerfahrten. Zeit unrealistisch klein: Beschleunigung im Gerät nicht eingestellt.</div>
+  <div class="step"><h4>Rahmen fahren</h4>Frame: Kopf fährt Umriss ab, ohne Laser (Ruida: mit schwachem Laser möglich). Material liegt richtig, Kopf stößt nirgends an.</div>
+  <div class="step"><h4>Start, beobachten, dokumentieren</h4>Start oder Send (Ruida: Job auf Gerät). Nie weggehen. Danach Parameter mit Ergebnis notieren.</div>
+</div>
+
+<h2>Kerf und Passung</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Kerf-Offset</div><div class="cd">Die Schnittfuge frisst Material: 0,1 bis 0,3 mm. Außenteile werden kleiner, Löcher größer. LightBurn: Kerf Offset in der Ebene, halbe Fugenbreite, positiv für Außen, negativ für Löcher. Wert mit Probeschnitt (10-mm-Quadrat messen) bestimmen.</div></div>
+  <div class="card"><div class="ct">Steckverbindungen (Finger Joints)</div><div class="cd">Nut = Materialdicke minus Kerf. Bei 3 mm Sperrholz (real 2,8 bis 3,1 mm) und 0,15 mm Kerf: Nut 2,85 mm. Materialdicke an vier Stellen messen, Sperrholz schwankt. Generatoren: MakerCase, Boxes.py, LightBurn Tab & Slot.</div></div>
+  <div class="card"><div class="ct">Tabs / Haltestege</div><div class="cd">Kleine Unterbrechungen im Schnitt halten Teile im Brett. 0,3 bis 0,5 mm Länge bei Holz, verhindern Herausfallen und Verkanten. LightBurn: Tabs/Bridges.</div></div>
+  <div class="card"><div class="ct">Lead-in, Overcut</div><div class="cd">Bei Acryl Startpunkt auf eine Gerade legen, Anfahren mit Bogen (Lead-in), sonst sichtbarer Einstichpunkt. Overcut 0,2 mm schließt die Kontur sicher.</div></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>LightBurn Software: Lizenztypen und Preise (News, Oktober 2024), „What's New in 2.0“ und „2.1“ (Dokumentation), Produktseiten Core und Pro (Stand September 2026).</li>
+    <li>xTool Support Center: „Transition from XCS to xTool Studio“, „Software Ecosystem Evolution“ (2025/2026).</li>
+    <li>GRBL v1.1 Wiki (Laser Mode, Settings), grblHAL und FluidNC Dokumentation.</li>
+    <li>Ruida RDC6445G Handbuch, BJJCZ EZCad2 und EZCad3 Handbücher.</li>
+    <li>Glowforge (App und Premium), Bambu Lab (Bambu Suite), Trotec (Ruby) Produktseiten.</li>
+  </ul>
+</div>

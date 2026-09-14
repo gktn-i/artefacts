@@ -1,0 +1,100 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Der CO2-Laser ist die Plattenschneidemaschine der Werkstatt.</b> Sperrholz, Acryl, Leder, Pappe in einem Durchgang, Gravur auf allem, was nicht Metall ist. Der Preis dafür: eine Glasröhre mit 30 kV, Wasserkühlung, drei Spiegel und ein Gerät, das einen Tisch für sich beansprucht.</div>
+
+<h2>Aufbau</h2>
+<div class="steps">
+  <div class="step"><h4>Röhre</h4>Glasröhre (DC-angeregt, 40 bis 150 W, 700 bis 1 850 mm lang) oder RF-Metallröhre (Hochfrequenz-angeregt, 30 bis 100 W, kompakt, luftgekühlt bis 60 W). Die Glasröhre kostet 150 bis 600 € und hält 1 500 bis 4 000 Betriebsstunden, die RF-Röhre 3 000 bis 8 000 € und hält 10 000 bis 30 000 Stunden, danach Wiederbefüllung.</div>
+  <div class="step"><h4>Netzteil</h4>Hochspannungsnetzteil 20 bis 40 kV Zündspannung, 10 bis 30 mA Betriebsstrom. Der Strom, nicht die Spannung, bestimmt die Leistung. Ein Amperemeter im Kreis ist die beste Anzeige für den Zustand der Röhre.</div>
+  <div class="step"><h4>Strahlführung</h4>Drei Spiegel (Molybdän oder Silizium, gold- oder kupferbeschichtet) lenken den Strahl von der Röhre über das Portal zum Kopf. Ausrichtung mit Klebeband-Schuss an jedem Spiegel prüfen. Verstellte Spiegel sind die häufigste Ursache für „an einer Ecke schneidet er nicht durch“.</div>
+  <div class="step"><h4>Laserkopf</h4>ZnSe-Linse (Durchmesser 18 oder 20 mm, Brennweite 1,5″ bis 4″) und Düse für Air Assist. 2″ ist der Allrounder, 1,5″ für feine Gravur, 2,5″ bis 4″ für dickes Material und tiefe Schärfe.</div>
+  <div class="step"><h4>Kühlung</h4>Glasröhren brauchen Wasser bei 15 bis 25 °C. Bis 60 W reicht ein Radiator-Kühler (CW-3000, kühlt nicht aktiv), ab 60 W oder in warmen Räumen ein Kompressor-Chiller (CW-5200, 1,4 kW Kälteleistung). Destilliertes Wasser plus 10 bis 20 % Frostschutz auf Propylenglykolbasis. Kein Leitungswasser, keine Algen.</div>
+  <div class="step"><h4>Steuerung</h4>Ruida RDC6442/6445 (Standard in China-Maschinen, LightBurn-kompatibel), Trocen, TopWisdom, oder GRBL bei K40-Umbauten. xTool und Glowforge fahren eigene Steuerungen mit eigener Software.</div>
+  <div class="step"><h4>Absaugung und Air Assist</h4>Gebläse 200 bis 500 m³/h nach draußen oder in einen Filter. Air Assist mit Kompressor 0,5 bis 2 bar zum Schneiden, mit Membranpumpe zum Gravieren. Details in <a href="#absaugung">Absaugung, Luft &amp; Kühlung</a>.</div>
+</div>
+
+<h2>Glas gegen RF</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th data-s="text">Kriterium</th><th>Glasröhre (DC)</th><th>RF-Metallröhre</th></tr></thead>
+<tbody>
+<tr><td><b>Spot / Strahlqualität</b></td><td>0,15 – 0,25 mm, M² ≈ 1,2 – 1,5</td><td>0,07 – 0,1 mm, M² < 1,2, sehr feine Gravur</td></tr>
+<tr><td><b>Modulation</b></td><td>Träge, unter 10 % geht die Entladung aus. Graustufen begrenzt</td><td>Pulse ab 1 µs, saubere Fotogravur, Vektorgravur ohne Brandpunkte an Ecken</td></tr>
+<tr><td><b>Lebensdauer</b></td><td>1 500 – 4 000 h, danach Tausch 150 – 600 €</td><td>10 000 – 30 000 h, danach Wiederbefüllung ab 1 500 €</td></tr>
+<tr><td><b>Kühlung</b></td><td>Wasser, Chiller</td><td>Luft bis ~60 W, darüber Wasser</td></tr>
+<tr><td><b>Leistung je Euro</b></td><td>Sehr gut. 100 W ab 3 000 € komplett</td><td>Teuer. 50 W RF ab 5 000 € (OMTech Polar 2 RF), 60 W Epilog, Trotec, OneLaser ab 8 000 €</td></tr>
+<tr><td><b>Wofür</b></td><td>Schneiden von Platten, Gravur mittlerer Feinheit</td><td>Feine Gravur, Fotos, Serie, Dauerbetrieb</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was ein CO2 schneidet</h2>
+<p class="lede">Richtwerte in einem Durchgang bei sauberer Optik. Mehrere Durchgänge erweitern die Grenze, verschlechtern aber die Kante.</p>
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th data-s="text">Material</th><th data-s="num">40 W (K40)</th><th data-s="num">55 – 60 W</th><th data-s="num">80 W</th><th data-s="num">100 – 130 W</th><th>Kante</th></tr></thead>
+<tbody>
+<tr><td><b>Pappelsperrholz</b></td><td>6 mm</td><td>10 mm</td><td>15 mm</td><td>18 mm</td><td>hellbraun bis dunkel, Leim entscheidet</td></tr>
+<tr><td><b>Birkensperrholz</b></td><td>4 mm</td><td>6 – 8 mm</td><td>12 mm</td><td>15 mm</td><td>dunkler, Harz und Leim schneiden ungleich</td></tr>
+<tr><td><b>MDF</b></td><td>4 mm</td><td>8 mm</td><td>12 mm</td><td>16 mm</td><td>schwarz, viel Rauch</td></tr>
+<tr><td><b>Acryl (Guss)</b></td><td>5 mm</td><td>10 – 12 mm</td><td>15 – 20 mm</td><td>25 mm</td><td>flammpoliert, klar</td></tr>
+<tr><td><b>Leder</b></td><td>3 mm</td><td>5 mm</td><td>6 mm</td><td>8 mm</td><td>dunkle Kante, riecht</td></tr>
+<tr><td><b>Pappe, Karton</b></td><td>5 mm</td><td>8 mm</td><td>10 mm</td><td>10 mm</td><td>Brandgefahr, niedrige Leistung reicht</td></tr>
+<tr><td><b>Filz, Textil</b></td><td>5 mm</td><td>8 mm</td><td>10 mm</td><td>10 mm</td><td>Synthetik versiegelt, Naturfaser franst</td></tr>
+<tr><td><b>Kork, Balsa</b></td><td>8 mm</td><td>12 mm</td><td>15 mm</td><td>20 mm</td><td>brennt leicht</td></tr>
+<tr><td><b>POM, PETG, PP</b></td><td>3 mm</td><td>5 mm</td><td>8 mm</td><td>10 mm</td><td>schmilzt, nur mit starker Absaugung</td></tr>
+</tbody>
+</table></div>
+<p class="note">Werte aus Herstellerangaben (xTool P2S 55 W: 18 mm Acryl, 20 mm Holz als Maximum mit mehreren Durchgängen; xTool P3 80 W: 20 mm Holz, 25 mm Acryl) und Erfahrungswerten aus Foren. Die Tabelle zeigt, was mit brauchbarer Kante in einem Durchgang geht.</p>
+
+<h2>Geräte 2026</h2>
+<div class="tbl-wrap"><table style="min-width:980px">
+<thead><tr><th data-s="text">Gerät</th><th data-s="num">Leistung</th><th data-s="num">Arbeitsfeld</th><th>Besonderheit</th><th data-s="num">Preis (Liste)</th></tr></thead>
+<tbody>
+<tr><td><b>OMTech K40+</b></td><td>40 W Glas</td><td>300 × 200 mm</td><td>Der klassische Einstieg. Ohne Chiller, ohne Air-Assist-Pumpe, ohne Absaugung sinnvoll nutzbar. Umbau auf Ruida und LightBurn üblich</td><td>~660 $ (US), 500 – 700 € (EU-Import)</td></tr>
+<tr><td><b>OMTech Polar Lite / Polar+</b></td><td>55 W Glas</td><td>508 × 305 mm</td><td>Geschlossen, Kamera, Rotary, LightBurn-Lizenz. Beste Leistung je Euro unter den geschlossenen Geräten</td><td>1 800 – 2 800 $</td></tr>
+<tr><td><b>OMTech Polar 2 (Glas)</b></td><td>70 W Glas</td><td>711 × 356 mm</td><td>Neues Modell 2026, Autofokus, Air Assist und Absaugung integriert</td><td>ab ~3 700 $</td></tr>
+<tr><td><b>OMTech Polar 2 RF</b></td><td>50 W RF</td><td>711 × 356 mm</td><td>Luftgekühlt, Spot 0,07 mm, 2 000 mm/s, 30 000 h Röhre. Erster bezahlbarer RF-Desktop</td><td>~5 200 $</td></tr>
+<tr><td><b>xTool P2S</b></td><td>55 W Glas</td><td>600 × 308 mm</td><td>Zwei 16-MP-Kameras, 600 mm/s, Durchlass für lange Bretter, Kühler eingebaut, xTool Studio. Klasse 1 geschlossen</td><td>4 199 $ · ~4 000 € (Aktionen ab ~3 200 €)</td></tr>
+<tr><td><b>xTool P3</b></td><td>80 W Glas</td><td>914 × 457 mm</td><td>Flaggschiff seit 2025: 1 200 mm/s, LiDAR-Autofokus, automatischer Materialwechsel (ACS), 20 mm Holz, 25 mm Acryl</td><td>ab 6 400 – 7 000 $</td></tr>
+<tr><td><b>Glowforge Pro</b></td><td>45 W Glas</td><td>495 × 279 mm, Durchlass</td><td>Einfachste Bedienung, Cloud-Software (kein LightBurn, Internet Pflicht), Autofokus, Kamera</td><td>5 995 $</td></tr>
+<tr><td><b>Gweike Cloud Pro II</b></td><td>55 W Glas</td><td>500 × 300 mm</td><td>Geschlossen, LightBurn, Rotary im Lieferumfang, günstiger als P2S</td><td>~2 900 – 3 500 $</td></tr>
+<tr><td><b>Thunder Laser Nova 24 / 35</b></td><td>60 – 100 W Glas, RF optional</td><td>600 × 400 / 900 × 600 mm</td><td>Werkstattmaschine mit Support in Europa, Ruida, sehr stabil. Für Kleinbetriebe</td><td>8 000 – 15 000 €</td></tr>
+<tr><td><b>Trotec Speedy 100 / 360</b></td><td>30 – 120 W RF</td><td>610 × 305 / 813 × 508 mm</td><td>Industriestandard für Gravur, RF, Service in DE, Ruby-Software</td><td>ab 20 000 €</td></tr>
+<tr><td><b>China-Werkstattlaser 6090 / 1390</b></td><td>80 – 150 W Glas</td><td>600 × 900 / 1 300 × 900 mm</td><td>Reci- oder Yongli-Röhre, Ruida, Chiller CW-5200. Größtes Feld je Euro, Einrichtung und Spiegeljustage in Eigenregie</td><td>3 000 – 7 000 €</td></tr>
+</tbody>
+</table></div>
+<p class="note">Listenpreise Stand September 2026 aus Herstellershops und Testberichten. US-Dollar-Preise gelten für den US-Markt, EU-Preise liegen durch Zoll, Mehrwertsteuer und CE-Ausführung oft 10 bis 20 % über der Umrechnung.</p>
+
+<h2>Betrieb: die Regeln, die eine Röhre alt werden lassen</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>Richtig</h4>
+    <ul>
+      <li>Wasser 15 – 25 °C, nie unter Taupunkt im Sommer (Kondensat auf der Röhre)</li>
+      <li>Strom unter 70 % des Maximums der Röhre (bei 60 W etwa 18 mA statt 25 mA)</li>
+      <li>Linse und Spiegel wöchentlich mit Isopropanol und Optiktuch reinigen</li>
+      <li>Vor jedem Job: Fokus, Air Assist, Absaugung, Wasser läuft</li>
+      <li>Röhre vor dem ersten Schuss 2 Minuten mit Wasser durchspülen lassen</li>
+      <li>Im Winter frostfrei lagern oder Wasser ablassen</li>
+    </ul>
+  </div>
+  <div class="gb-col bad"><h4>Tötet Röhre oder Optik</h4>
+    <ul>
+      <li>Ohne Wasserfluss zünden (Flusssensor deshalb nie überbrücken)</li>
+      <li>100 % Leistung als Standard, halbiert die Lebensdauer</li>
+      <li>Rauch ohne Absaugung: Beläge auf der Linse, dann Sprung beim nächsten Job</li>
+      <li>Finger oder Lösungsmittel auf der ZnSe-Linse</li>
+      <li>Leitungswasser (Kalk, Algen, Leitfähigkeit, Hochspannungsüberschlag)</li>
+      <li>Gehäusedeckel offen mit überbrücktem Schalter: Klasse-4-Strahlung, 10,6 µm ist unsichtbar</li>
+    </ul>
+  </div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Reci und Yongli Datenblätter zu CO2-Glasröhren (Strom, Länge, Lebensdauer), Synrad und Coherent zu RF-Röhren.</li>
+    <li>Thunder Laser USA, „Glass vs Metal CO2 Laser Tubes“, und OneLaser, „RF CO2 vs Glass Tube“ (Lebensdauer- und Strahlvergleich).</li>
+    <li>Herstellerangaben: xTool P2S und P3, OMTech Polar-Reihe und K40+, Glowforge Pro, Gweike Cloud, Thunder Nova, Trotec Speedy (Stand September 2026).</li>
+    <li>Testberichte: Tom's Hardware (xTool P3), The Crafty Catsman (CO2-Vergleiche 2026), Atomm (Best CO2 Laser Cutters 2026).</li>
+    <li>Ruida RDC6445 Handbuch, LightBurn-Dokumentation zu Ruida-Steuerungen.</li>
+  </ul>
+</div>
