@@ -177,6 +177,57 @@ import Profiles from "../../components/Profiles.astro";
 </div>
 
 <h2>Abrichte und Dickenhobel</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Links die Abrichte: das Brett liegt oben auf dem Tisch und wird von Hand über die Messerwelle geschoben, die Unterseite wird plan. Rechts der Dickenhobel: das Brett liegt auf dem Tisch, die Messerwelle sitzt oben, Walzen ziehen es durch, die Oberseite wird parallel zur Unterseite">
+  <path class="gd" d="M330,30 V200"/>
+  <!-- Abrichte -->
+  <text class="lblb" x="160" y="24" text-anchor="middle">Abrichte</text>
+  <rect class="box" x="40" y="120" width="110" height="14"/>
+  <rect class="box" x="170" y="126" width="110" height="14"/>
+  <circle class="accs" cx="160" cy="132" r="14"/>
+  <path class="wt" d="M60,96 L262,108 L262,124 L60,112 Z"/>
+  <path class="w" d="M60,96 L262,108 L262,124 L60,112 Z"/>
+  <path class="acc" d="M70,80 H200"/><path class="accf" d="M200,80 l-9,-4 v8 Z"/>
+  <text class="lbl" x="135" y="70" text-anchor="middle">Hand schiebt</text>
+  <text class="lbl" x="160" y="160" text-anchor="middle">Messerwelle unten</text>
+  <text class="lbla" x="160" y="186" text-anchor="middle">Unterseite wird plan</text>
+  <text class="lbl" x="160" y="206" text-anchor="middle">Bezug: der Tisch</text>
+  <!-- Dickenhobel -->
+  <text class="lblb" x="500" y="24" text-anchor="middle">Dickenhobel</text>
+  <rect class="box" x="380" y="134" width="240" height="14"/>
+  <path class="wt" d="M400,110 H600 V134 H400 Z"/>
+  <path class="good" d="M400,134 H600"/>
+  <circle class="accs" cx="500" cy="96" r="14"/>
+  <circle class="box" cx="440" cy="100" r="9"/>
+  <circle class="box" cx="560" cy="100" r="9"/>
+  <path class="acc" d="M410,70 H540"/><path class="accf" d="M540,70 l-9,-4 v8 Z"/>
+  <text class="lbl" x="475" y="60" text-anchor="middle">Walzen ziehen ein</text>
+  <text class="lbl" x="500" y="162" text-anchor="middle">Messerwelle oben, Tisch unten</text>
+  <text class="lbla" x="500" y="186" text-anchor="middle">Oberseite wird parallel zur Unterseite</text>
+  <text class="lbl" x="500" y="206" text-anchor="middle">Bezug: die Unterseite, muss vorher plan sein</text>
+</svg>
+<figcaption>Abrichte macht gerade, Dickenhobel macht gleich dick. Ein krummes Brett bleibt im Dickenhobel krumm, nur dünner.</figcaption>
+</figure>
+
+<div class="grid2">
+  <div class="card"><h3>Abrichte</h3><p><b>Macht</b> eine Fläche plan, dann die Kante im 90° dazu.</p><p><b>Wann</b> als Erstes an jedem Brett, das krumm, verwunden oder sägerau ist.</p><p><b>Kann nicht</b> zwei Flächen parallel machen. Jeder Durchgang nimmt, was er will.</p></div>
+  <div class="card"><h3>Dickenhobel</h3><p><b>Macht</b> die Oberseite parallel zur Unterseite, auf Maß.</p><p><b>Wann</b> nach dem Abrichten, für die Dicke und für viele gleiche Bretter.</p><p><b>Kann nicht</b> ein krummes Brett gerade machen. Die Walzen drücken es flach, danach federt es zurück.</p></div>
+</div>
+
+<div class="kurz z"><b>Reihenfolge immer gleich.</b> Abrichte Fläche, Abrichte Kante, Dickenhobel Dicke, Säge oder Dickenhobel Breite.</div>
+
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Situation</th><th>Abrichte</th><th>Dickenhobel</th></tr></thead>
+<tbody>
+<tr><td><b>Sägeraue Bohle</b></td><td>zuerst</td><td>danach</td></tr>
+<tr><td><b>Gehobeltes Brett auf 16 mm bringen</b></td><td>nein</td><td>ja</td></tr>
+<tr><td><b>Kante für die Leimfuge</b></td><td>ja</td><td>nein</td></tr>
+<tr><td><b>Zehn Bretter gleich dick</b></td><td>je einmal</td><td>alle auf ein Maß</td></tr>
+<tr><td><b>Verwundenes Brett</b></td><td>ja, hohle Seite unten</td><td>erst danach</td></tr>
+<tr><td><b>Kürzer als 30 cm</b></td><td>nein, Handhobel</td><td>nein, Handhobel</td></tr>
+</tbody>
+</table></div>
+
 <div class="tbl-wrap"><table style="min-width:680px">
 <thead><tr><th>Regel</th><th>Abrichte</th><th>Dickenhobel</th></tr></thead>
 <tbody>
