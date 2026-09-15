@@ -1,5 +1,6 @@
 ---
 import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
 ---
 <p class="lede">Holz stellt sich immer auf die Luft ein, in der es steht. Wer das einplant, baut Möbel, die halten. Wer es ignoriert, baut den Riss gleich mit ein.</p>
 
@@ -25,6 +26,54 @@ import "./_style.css";
 <tr><td>50 %</td><td>ca. 9,5 %</td><td class="txt">Normaler Wohnraum</td></tr>
 <tr><td>65 %</td><td>ca. 12 %</td><td class="txt">Feuchter Sommer, ungeheizter Raum</td></tr>
 <tr><td>80 %</td><td>ca. 16 %</td><td class="txt">Keller, Garage im Herbst</td></tr>
+</tbody>
+</table></div>
+
+<h2>Was die Zahl bedeutet</h2>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th data-s="num">Holzfeuchte</th><th>Bezeichnung</th><th>Zustand</th><th>Verarbeiten</th></tr></thead>
+<tbody>
+<tr><td><b>über 30 %</b></td><td>frisch, waldfrisch</td><td class="txt">Zellwände und Hohlräume voll Wasser. Schwindet noch nicht</td><td class="txt"><span class="b bad">nein</span> nur Grünholz-Arbeiten</td></tr>
+<tr><td><b>28 bis 30 %</b></td><td>Fasersättigung</td><td class="txt">Hohlräume leer, Zellwände voll. Ab hier beginnt das Schwinden</td><td class="txt"><span class="b bad">nein</span></td></tr>
+<tr><td><b>20 bis 28 %</b></td><td>halbtrocken</td><td class="txt">Luftgetrocknet, draußen unter Dach. Pilze wachsen ab 20 % nicht mehr</td><td class="txt"><span class="b mid">außen</span> Zaun, Carport, Gartenbau</td></tr>
+<tr><td><b>12 bis 18 %</b></td><td>lufttrocken</td><td class="txt">Lange gelagert im Freien oder Schuppen</td><td class="txt"><span class="b mid">außen, Werkstatt</span> Fenster, Türen außen</td></tr>
+<tr><td><b>8 bis 12 %</b></td><td>kammergetrocknet</td><td class="txt">Technisch getrocknet, so kommt Schnittholz vom Händler</td><td class="txt"><span class="b ok">ja</span> Möbel nach Akklimatisieren</td></tr>
+<tr><td><b>6 bis 9 %</b></td><td>möbeltrocken</td><td class="txt">Passend für beheizte Räume</td><td class="txt"><span class="b ok">ja</span> Möbel, Innenausbau, Parkett</td></tr>
+<tr><td><b>unter 5 %</b></td><td>übertrocknet</td><td class="txt">Spröde, spaltet, quillt später stark</td><td class="txt"><span class="b bad">warten</span> eine Woche im Zielraum</td></tr>
+</tbody>
+</table></div>
+<p class="note">Holzfeuchte heißt Wasser in Prozent des Darrgewichts. 100 % sind möglich, frisch gefällte Fichte liegt bei 60 bis 140 %.</p>
+
+<h2>Messen</h2>
+<Profiles
+  label="Methode"
+  criteria={["Genau", "Schnell", "Zerstörungsfrei", "Günstig", "Tief"]}
+  labels={{ use: "Nimm sie für" }}
+  items={[
+    { name: "Widerstandsmesser", tag: "Einstechfühler, ab 20 €", scores: [3, 5, 2, 5, 3],
+      pro: "Misst genau dort, wo die Nadeln sitzen, auch am Hirnholz",
+      con: "Nur 6 bis 30 %, Holzart und Temperatur müssen eingestellt werden, Nadellöcher",
+      use: "Werkstatt, Holzkauf, Kontrolle vor dem Leimen" },
+    { name: "Kapazitivmesser", tag: "Auflegen, ab 40 €", scores: [2, 5, 5, 4, 2],
+      pro: "Keine Löcher, große Flächen in Sekunden, auch Parkett",
+      con: "Misst nur 20 bis 30 mm tief, Dichte muss eingestellt sein, Metall und Leim stören",
+      use: "Fertige Flächen, Furnier, Böden" },
+    { name: "Darrprobe", tag: "Ofen und Waage", scores: [5, 1, 1, 5, 5],
+      pro: "Der Bezugswert, jedes Messgerät wird daran geeicht",
+      con: "Probe wird zerstört, 24 Stunden bei 103 °C",
+      use: "Zweifel am Messgerät, eigene Bohlen, Parkett vor dem Verlegen" },
+  ]}
+  note="Darrprobe: nass wiegen, bei 103 °C bis zur Gewichtskonstanz trocknen, trocken wiegen. Feuchte = (nass minus trocken) geteilt durch trocken, mal 100." />
+
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Regel beim Messen</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Nadeln längs zur Faser</b></td><td class="txt">Quer misst der Strom durch mehr Zellwände, Wert zu hoch</td></tr>
+<tr><td><b>Mindestens 30 cm vom Hirnholz</b></td><td class="txt">Die Enden trocknen zuerst und zeigen zu wenig</td></tr>
+<tr><td><b>Holzart einstellen</b></td><td class="txt">Eiche leitet anders als Fichte, ohne Korrektur bis 3 Punkte daneben</td></tr>
+<tr><td><b>Kaltes Holz zeigt zu wenig</b></td><td class="txt">Pro 10 °C unter 20 °C etwa 1 Punkt dazurechnen</td></tr>
+<tr><td><b>Drei Bretter, drei Stellen</b></td><td class="txt">Ein Stapel ist nie gleichmäßig. Der Mittelwert zählt, der Ausreißer fliegt raus</td></tr>
+<tr><td><b>Beide Teile gleich</b></td><td class="txt">Vor dem Leimen dürfen Fügeteile höchstens 2 Punkte auseinanderliegen</td></tr>
 </tbody>
 </table></div>
 
@@ -85,6 +134,75 @@ import "./_style.css";
   <div class="card"><h3>Gratleiste</h3><p>Eine schwalbenschwanzförmige Leiste quer unter die Platte. Hält sie eben, ohne die Breitenbewegung zu blockieren. Nur an einem Ende leimen.</p></div>
   <div class="card"><h3>Schwimmender Boden</h3><p>Rückwände und Schubladenböden in eine Nut einlegen, nie einleimen. Dann kann sich das Feld frei bewegen, ohne den Rahmen zu sprengen.</p></div>
 </div>
+
+<h2>Selbst trocknen</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Holzstapel im Schnitt: Bretter liegen auf Stapelleisten, die senkrecht übereinander stehen, das Hirnholz ist versiegelt, oben liegt eine Abdeckung mit Gewicht, unten steht der Stapel auf Klötzen über dem Boden">
+  <rect class="box" x="90" y="196" width="480" height="10"/>
+  <text class="lbl" x="330" y="222" text-anchor="middle">Boden, nie direkt auflegen</text>
+  <rect class="box" x="150" y="172" width="24" height="24"/><rect class="box" x="318" y="172" width="24" height="24"/><rect class="box" x="486" y="172" width="24" height="24"/>
+  <rect class="wt" x="120" y="156" width="420" height="16"/><rect class="w" x="120" y="156" width="420" height="16"/>
+  <rect class="accs" x="156" y="146" width="12" height="10"/><rect class="accs" x="324" y="146" width="12" height="10"/><rect class="accs" x="492" y="146" width="12" height="10"/>
+  <rect class="wt" x="120" y="130" width="420" height="16"/><rect class="w" x="120" y="130" width="420" height="16"/>
+  <rect class="accs" x="156" y="120" width="12" height="10"/><rect class="accs" x="324" y="120" width="12" height="10"/><rect class="accs" x="492" y="120" width="12" height="10"/>
+  <rect class="wt" x="120" y="104" width="420" height="16"/><rect class="w" x="120" y="104" width="420" height="16"/>
+  <rect class="accs" x="156" y="94" width="12" height="10"/><rect class="accs" x="324" y="94" width="12" height="10"/><rect class="accs" x="492" y="94" width="12" height="10"/>
+  <rect class="wt" x="120" y="78" width="420" height="16"/><rect class="w" x="120" y="78" width="420" height="16"/>
+  <rect class="box" x="110" y="64" width="440" height="8"/>
+  <rect class="accf" x="300" y="48" width="60" height="16"/>
+  <path class="good" d="M120,78 V172 M540,78 V172"/>
+  <path class="gd" d="M162,60 V150 M330,44 V150 M498,60 V150"/>
+  <text class="lbla" x="330" y="34" text-anchor="middle">Abdeckung und Gewicht oben</text>
+  <text class="lbl" x="108" y="120" text-anchor="end">Hirnholz</text>
+  <text class="lbl" x="108" y="136" text-anchor="end">versiegelt</text>
+  <text class="lbl" x="552" y="112" text-anchor="start">Leisten</text>
+  <text class="lbl" x="552" y="128" text-anchor="start">senkrecht</text>
+  <text class="lbl" x="552" y="144" text-anchor="start">übereinander</text>
+</svg>
+<figcaption>Leisten alle 40 bis 60 cm, alle exakt übereinander, sonst biegt sich jedes Brett um die versetzte Leiste. Hirnholz mit Wachs, Leim oder Latexfarbe schließen, sonst reißt es zuerst.</figcaption>
+</figure>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Größe</th><th data-s="num">Wert</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Lufttrocknung</b></td><td>1 Jahr je 25 mm Dicke, plus 1 Jahr</td><td class="txt">Eiche und Buche langsamer, Fichte schneller. Ergebnis 15 bis 18 %, nie möbeltrocken</td></tr>
+<tr><td><b>Stapelleisten</b></td><td>20 bis 25 mm dick, gleiche Dicke</td><td class="txt">Trockenes Holz derselben Art, sonst Druckstellen und Flecken</td></tr>
+<tr><td><b>Abstand der Leisten</b></td><td>40 bis 60 cm</td><td class="txt">Dünne Bretter enger, Bohlen weiter, außen immer eine Leiste am Ende</td></tr>
+<tr><td><b>Abstand zum Boden</b></td><td>mind. 30 cm</td><td class="txt">Bodenfeuchte und Spritzwasser, Luft muss unten durch</td></tr>
+<tr><td><b>Nachtrocknen im Raum</b></td><td>1 bis 2 Punkte pro Woche</td><td class="txt">Von 16 auf 8 % dauert 4 bis 8 Wochen, gestapelt im Zielraum</td></tr>
+<tr><td><b>Zu schnell heißt</b></td><td>über 3 Punkte pro Woche</td><td class="txt">Außen trocken, innen nass. Risse, Verschalung, Verzug</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Nicht auf die Heizung, nicht in die Sonne.</b> Eine Bohle aus dem Schuppen braucht im Wohnzimmer Wochen, nicht Tage. Wer es erzwingt, bekommt Risse vom Hirnholz her.</div>
+
+<h2>Feuchte vor jedem Arbeitsschritt</h2>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Schritt</th><th data-s="num">Holzfeuchte</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Verleimen</b></td><td>8 bis 12 %, beide Teile gleich</td><td class="txt">Nasses Holz nimmt keinen Leim, ungleiche Teile reißen die Fuge auf</td></tr>
+<tr><td><b>Nach dem Verleimen hobeln</b></td><td>24 h warten</td><td class="txt">Leim bringt Wasser an die Fuge, das Holz quillt dort. Sofort gehobelt sinkt die Fuge später ein</td></tr>
+<tr><td><b>Furnieren</b></td><td>8 bis 10 %</td><td class="txt">Furnier und Träger gleich, sonst Risse im Furnier</td></tr>
+<tr><td><b>Ölen, Wachsen</b></td><td>unter 12 %</td><td class="txt">Öl zieht in nasses Holz nicht ein und bleibt klebrig</td></tr>
+<tr><td><b>Lackieren innen</b></td><td>8 bis 12 %</td><td class="txt">Film schließt Feuchte ein, Blasen und Ablösung</td></tr>
+<tr><td><b>Lasur und Lack außen</b></td><td>unter 18 %</td><td class="txt">Darüber schließt der Anstrich Wasser ein und blättert nach einem Winter</td></tr>
+<tr><td><b>Parkett verlegen</b></td><td>7 bis 11 %, Estrich unter 2 % CM</td><td class="txt">Beides messen, der Estrich gibt mehr Wasser ab als die Raumluft</td></tr>
+<tr><td><b>Drechseln, Schnitzen grün</b></td><td>über 30 %</td><td class="txt">Frisches Holz schneidet sich wie Seife, Form trocknet dann oval</td></tr>
+</tbody>
+</table></div>
+
+<h2>Wenn es schiefgeht</h2>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Problem</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Holz zu nass gekauft</b></td><td class="txt">Baumarkt-Stapel bei 14 bis 18 %</td><td class="txt">Gestapelt im Zielraum, wöchentlich messen, bei 9 % Übermaß zuschneiden und nochmal eine Woche warten</td></tr>
+<tr><td><b>Holz zu trocken</b></td><td class="txt">Frisch aus der Trockenkammer, unter 6 %</td><td class="txt">Eine Woche offen im Raum liegen lassen, es holt sich die Feuchte von selbst</td></tr>
+<tr><td><b>Brett geschüsselt</b></td><td class="txt">Eine Seite trockener als die andere</td><td class="txt">Hohle Seite anfeuchten, gewölbte Seite zur Wärme, beschweren, 1 bis 2 Tage. Dann abrichten, es kommt teilweise zurück</td></tr>
+<tr><td><b>Riss vom Hirnholz</b></td><td class="txt">Enden zu schnell getrocknet</td><td class="txt">Riss aufsägen und Streifen einleimen, oder 5 cm abschneiden. Ein Riss läuft immer weiter, nie nur füllen</td></tr>
+<tr><td><b>Brett verdreht</b></td><td class="txt">Drehwuchs oder ungleich gestapelt</td><td class="txt">Abrichten, kürzere Stücke daraus machen. Verdrehung kommt beim Trocknen wieder</td></tr>
+<tr><td><b>Fuge nach Wochen eingesunken</b></td><td class="txt">Zu früh nach dem Leimen gehobelt</td><td class="txt">Nachhobeln oder schleifen, beim nächsten Mal 24 h warten</td></tr>
+<tr><td><b>Schublade klemmt im Sommer</b></td><td class="txt">Zu wenig Luft, Holz gequollen</td><td class="txt">Seiten abhobeln bis 1 mm Luft, Laufflächen wachsen. Nicht im Winter anpassen, dann ist sie zu locker</td></tr>
+<tr><td><b>Massivholzplatte gerissen</b></td><td class="txt">Starr auf den Rahmen geschraubt</td><td class="txt">Riss mit Keil und Leim schließen, Verschraubung auf Langloch oder Nutklotz umbauen</td></tr>
+</tbody>
+</table></div>
 
 <div class="stop"><b>Der klassische Baufehler.</b> Massivholzplatte starr auf den Rahmen geschraubt. Im Winter reißt sie, im Sommer schüsselt sie. Beides erst nach Monaten.</div>
 
