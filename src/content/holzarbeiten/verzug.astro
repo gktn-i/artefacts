@@ -1,0 +1,171 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Kein Brett bleibt gerade, wenn eine Seite anders trocknet als die andere. Fünf Formen von Verzug, und für jede eine andere Antwort.</p>
+
+<div class="kurz z"><b>Erst lesen, dann richten.</b> Schüsseln lässt sich mit Wasser und Hobel richten. Säbel und Knick schneidet man weg. Verdrehung hobelt man raus und rechnet mit Verlust.</div>
+
+<h2>Die Verzugsarten</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Vier Verzugsarten: Schüsseln als quer gewölbter Querschnitt, Bogen als über die Länge gewölbtes Brett von der Seite, Säbel als gebogene Kante von oben, Verdrehung als Brett mit angehobener Ecke">
+  <path class="gd" d="M165,30 V190 M330,30 V190 M495,30 V190"/>
+  <!-- Schüsseln -->
+  <text class="lblb" x="82" y="24" text-anchor="middle">Schüsseln</text>
+  <path class="wt" d="M18,118 Q82,78 146,118 L146,132 Q82,92 18,132 Z"/>
+  <path class="w" d="M18,118 Q82,78 146,118 L146,132 Q82,92 18,132 Z"/>
+  <path class="badl" d="M18,132 Q82,92 146,132"/>
+  <text class="lbl" x="82" y="60" text-anchor="middle">Querschnitt</text>
+  <text class="lbla" x="82" y="166" text-anchor="middle">quer gewölbt</text>
+  <text class="lbl" x="82" y="184" text-anchor="middle">Rindenseite wird hohl</text>
+  <!-- Bogen -->
+  <text class="lblb" x="247" y="24" text-anchor="middle">Bogen</text>
+  <path class="wt" d="M183,122 Q247,86 311,122 L311,130 Q247,94 183,130 Z"/>
+  <path class="w" d="M183,122 Q247,86 311,122 L311,130 Q247,94 183,130 Z"/>
+  <path class="badl" d="M183,130 Q247,94 311,130"/>
+  <text class="lbl" x="247" y="60" text-anchor="middle">von der Seite</text>
+  <text class="lbla" x="247" y="166" text-anchor="middle">längs gewölbt, flach</text>
+  <text class="lbl" x="247" y="184" text-anchor="middle">Banane in der Dicke</text>
+  <!-- Säbel -->
+  <text class="lblb" x="412" y="24" text-anchor="middle">Säbel</text>
+  <path class="wt" d="M348,96 Q412,76 476,96 L476,136 Q412,116 348,136 Z"/>
+  <path class="w" d="M348,96 Q412,76 476,96 L476,136 Q412,116 348,136 Z"/>
+  <path class="badl" d="M348,136 Q412,116 476,136"/>
+  <text class="lbl" x="412" y="60" text-anchor="middle">von oben</text>
+  <text class="lbla" x="412" y="166" text-anchor="middle">Kante gebogen</text>
+  <text class="lbl" x="412" y="184" text-anchor="middle">Banane in der Breite</text>
+  <!-- Verdrehung -->
+  <text class="lblb" x="577" y="24" text-anchor="middle">Verdrehung</text>
+  <path class="wt" d="M516,128 L546,96 L640,120 L610,146 Z"/>
+  <path class="w" d="M516,128 L546,96 L640,120 L610,146 Z"/>
+  <path class="w" d="M516,128 L516,138 L610,156 L610,146 M640,120 L640,130 L610,156"/>
+  <path class="badl" d="M546,96 L640,120"/>
+  <text class="lbl" x="577" y="60" text-anchor="middle">schräg von vorn</text>
+  <text class="lbla" x="577" y="180" text-anchor="middle">Propeller, Ecke hebt sich</text>
+  <text class="lbl" x="577" y="198" text-anchor="middle">Drehwuchs</text>
+</svg>
+<figcaption>Rot ist die hohle Seite. Dort hat das Holz stärker geschwunden, dorthin zieht es sich. Bei Verdrehung heben sich zwei diagonale Ecken.</figcaption>
+</figure>
+
+<div class="tbl-wrap"><table style="min-width:860px">
+<thead><tr><th>Verzug</th><th>So sieht es aus</th><th>Ursache</th><th>Richtbar</th><th>Erste Wahl</th></tr></thead>
+<tbody>
+<tr><td><b>Schüsseln</b></td><td class="txt">Brett ist quer zur Faser gewölbt, Kanten heben sich</td><td class="txt">Tangential schwindet doppelt so stark wie radial. Eine Seite trockener</td><td><span class="b ok">gut</span></td><td class="txt">Wasser und Gewicht, dann abrichten</td></tr>
+<tr><td><b>Bogen</b></td><td class="txt">Brett flach hingelegt liegt nur an den Enden oder in der Mitte auf</td><td class="txt">Versetzte Stapelleisten, Reaktionsholz, eine Seite in der Sonne</td><td><span class="b mid">mittel</span></td><td class="txt">Kürzen, sonst abrichten mit Verlust</td></tr>
+<tr><td><b>Säbel</b></td><td class="txt">Kante ist über die Länge gebogen, Brett liegt flach, aber krumm</td><td class="txt">Wuchsspannung, beim Auftrennen freigesetzt, Reaktionsholz</td><td><span class="b bad">schlecht</span></td><td class="txt">Gerade Kante anreißen und absägen</td></tr>
+<tr><td><b>Verdrehung</b></td><td class="txt">Zwei diagonale Ecken liegen auf, zwei stehen hoch</td><td class="txt">Drehwuchs, Faser läuft spiralig um den Stamm</td><td><span class="b bad">schlecht</span></td><td class="txt">Abrichten mit Windschnüren, kurze Stücke</td></tr>
+<tr><td><b>Knick</b></td><td class="txt">Scharfer Knick an einer Stelle, sonst gerade</td><td class="txt">Ast, Stapelleiste an falscher Stelle</td><td><span class="b bad">nein</span></td><td class="txt">Knick heraussägen</td></tr>
+<tr><td><b>Raute</b></td><td class="txt">Kantholz ist nicht mehr rechtwinklig, sondern rautenförmig</td><td class="txt">Jahrringe laufen diagonal durch den Querschnitt</td><td><span class="b ok">gut</span></td><td class="txt">Nach dem Trocknen nachhobeln</td></tr>
+</tbody>
+</table></div>
+
+<h2>Die Methoden</h2>
+<Profiles
+  label="Methode"
+  criteria={["Dauerhaft", "Wenig Verlust", "Wenig Aufwand", "Ohne Maschine", "Breite Bretter"]}
+  items={[
+    { name: "Abrichten", tag: "Hobel oder Abrichte", scores: [5, 1, 3, 3, 3],
+      pro: "Das Ergebnis ist wirklich plan und bleibt es",
+      con: "Jeder Millimeter Verzug kostet einen Millimeter Dicke, oft mehr",
+      use: "Schüsseln und Verdrehung bei Dickenreserve, immer als letzter Schritt" },
+    { name: "Wasser und Gewicht", tag: "hohle Seite feucht", scores: [2, 5, 4, 5, 5],
+      pro: "Kostet nichts, keine Dicke weg, geht auch bei breiten Platten",
+      con: "Kommt teilweise zurück, sobald die Feuchte wieder wechselt",
+      use: "Geschüsselte Bretter vor dem Abrichten, Reste retten" },
+    { name: "Sonne und Rasen", tag: "der alte Trick", scores: [2, 5, 5, 5, 5],
+      pro: "Feuchte von unten, Wärme von oben, arbeitet von allein",
+      con: "Nur im Sommer, nur ein paar Stunden, sonst kippt es in die andere Richtung",
+      use: "Dünne Bretter und Leisten, schnell und grob" },
+    { name: "Dampf oder Bügeleisen", tag: "feuchtes Tuch, Hitze", scores: [2, 5, 3, 4, 2],
+      pro: "Gezielt an einer Stelle, wirkt in Minuten",
+      con: "Nur bis etwa 15 mm Dicke, Flecken bei Eiche, Leimfugen lösen sich",
+      use: "Leisten, dünne Bretter, Furnier, Schubladenböden" },
+    { name: "Auftrennen und verleimen", tag: "Streifen, Ringe wechseln", scores: [5, 3, 2, 2, 5],
+      pro: "Aus einem krummen Brett wird eine ruhige Platte",
+      con: "Sägeschnitte kosten Breite, Leimfugen sichtbar, braucht Kreissäge",
+      use: "Breite Platten, Tischplatten, Schüsseln über 5 mm" },
+    { name: "Rückseite einsägen", tag: "Kerben bis zwei Drittel", scores: [3, 4, 3, 2, 5],
+      pro: "Brett wird biegsam und lässt sich flach schrauben",
+      con: "Nur für fest verschraubte Teile, Brett verliert Steifigkeit",
+      use: "Bankauflagen, Terrassendielen, Werkbankplatten" },
+    { name: "Konstruktiv festhalten", tag: "Gratleiste, Rahmen, Leiste", scores: [4, 5, 3, 3, 5],
+      pro: "Hält plan, ohne das Holz zu verändern",
+      con: "Verzug bleibt drin und drückt dauerhaft, Verbindung muss stark sein",
+      use: "Tischplatten, Türen, Deckel, leichtes Schüsseln" },
+    { name: "Kürzen und umsortieren", tag: "Verzug wegschneiden", scores: [5, 2, 5, 4, 3],
+      pro: "Schnell, sicher, ein kurzes Stück ist immer gerader",
+      con: "Kostet Länge, aus einem Brett werden zwei kurze",
+      use: "Säbel, Knick, starke Verdrehung, Bogen" },
+  ]}
+  note="Wenig Verlust heißt: Dicke und Breite bleiben erhalten. Punkte höher = besser." />
+
+<h2>Welche Methode für welchen Verzug</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Verzug</th><th>Abrichten</th><th>Wasser, Gewicht</th><th>Auftrennen</th><th>Kürzen</th><th>Konstruktiv</th></tr></thead>
+<tbody>
+<tr><td><b>Schüsseln</b></td><td><span class="b ok">ja</span> bei Reserve</td><td><span class="b ok">ja</span> vorher</td><td><span class="b ok">ja</span> ab 5 mm</td><td><span class="b bad">bringt nichts</span></td><td><span class="b ok">Gratleiste</span></td></tr>
+<tr><td><b>Bogen</b></td><td><span class="b mid">viel Verlust</span></td><td><span class="b mid">teilweise</span></td><td><span class="b bad">bleibt</span></td><td><span class="b ok">ja</span></td><td><span class="b mid">Rahmen hält</span></td></tr>
+<tr><td><b>Säbel</b></td><td><span class="b bad">falsche Richtung</span></td><td><span class="b bad">nein</span></td><td><span class="b mid">schmale Leisten</span></td><td><span class="b ok">Kante absägen</span></td><td><span class="b bad">nein</span></td></tr>
+<tr><td><b>Verdrehung</b></td><td><span class="b mid">Windschnüre</span></td><td><span class="b bad">nein</span></td><td><span class="b mid">schmale Leisten</span></td><td><span class="b ok">kurze Stücke</span></td><td><span class="b mid">nur leicht</span></td></tr>
+<tr><td><b>Knick</b></td><td><span class="b bad">nein</span></td><td><span class="b bad">nein</span></td><td><span class="b bad">nein</span></td><td><span class="b ok">heraussägen</span></td><td><span class="b bad">nein</span></td></tr>
+<tr><td><b>Raute</b></td><td><span class="b ok">nachhobeln</span></td><td><span class="b bad">nein</span></td><td><span class="b bad">nein</span></td><td><span class="b bad">nein</span></td><td><span class="b bad">nein</span></td></tr>
+</tbody>
+</table></div>
+
+<h2>Schüsseln mit Wasser richten</h2>
+<div class="steps">
+  <div class="step"><h4>Hohle Seite anfeuchten</h4><p>Nasses Tuch auf die hohle Seite, 1 bis 2 Stunden. Oder hohle Seite nach unten auf feuchten Rasen.</p></div>
+  <div class="step"><h4>Gewölbte Seite zur Wärme</h4><p>Sonne, Heizung mit Abstand oder Lampe. Die trockene Seite schwindet, die feuchte quillt.</p></div>
+  <div class="step"><h4>Beschweren</h4><p>Zwischen zwei gerade Zulagen spannen oder flach mit Gewicht. Leicht über die Gerade hinaus, es federt zurück.</p></div>
+  <div class="step"><h4>Prüfen und wiederholen</h4><p>Nach 12 bis 24 Stunden Lineal auflegen. Meist braucht es zwei Runden.</p></div>
+  <div class="step"><h4>Beide Seiten angleichen</h4><p>Danach beide Seiten gleich lagern, 24 Stunden mit Leisten, sonst dreht es sich zurück.</p></div>
+  <div class="step"><h4>Sofort verarbeiten</h4><p>Abrichten, verleimen oder konstruktiv festhalten. Ein gerichtetes Brett wartet nicht.</p></div>
+</div>
+<div class="warn"><b>Gilt bis etwa 25 mm Dicke.</b> Dicke Bohlen reagieren nur oberflächlich. Bei Eiche und Nussbaum Wasser sparsam, sonst Flecken.</div>
+
+<h2>Verdrehung abrichten</h2>
+<div class="steps">
+  <div class="step"><h4>Windschnüre auflegen</h4><p>Zwei gleich hohe, gerade Leisten quer an beide Enden. Von vorn über beide peilen: Stehen sie parallel, ist das Brett plan.</p></div>
+  <div class="step"><h4>Verlust rechnen</h4><p>Keil oder Fühlerlehre unter die hohe Ecke. Dicke minus Verzug minus 2 mm ist die Enddicke. Zu wenig? Kürzen oder auftrennen.</p></div>
+  <div class="step"><h4>Hohe Ecken markieren</h4><p>Die beiden diagonalen Ecken, die hoch stehen, schraffieren. Nur dort wird gehobelt.</p></div>
+  <div class="step"><h4>Diagonal schruppen</h4><p>Schrupphobel oder Raubank diagonal von hoher Ecke zu hoher Ecke. Immer wieder peilen.</p></div>
+  <div class="step"><h4>Längs glätten</h4><p>Raubank längs über die ganze Fläche, bis die Windschnüre parallel stehen und das Lineal überall aufliegt.</p></div>
+  <div class="step"><h4>Gegenseite parallel</h4><p>Dickenhobel oder Streichmaß und Raubank. Erst jetzt hat das Brett zwei Bezugsflächen.</p></div>
+</div>
+<p class="note">Verdrehung kommt aus dem Wuchs und kommt mit jedem Feuchtewechsel ein Stück zurück. Verdrehte Bretter in kurze Teile schneiden, nie für lange Zargen oder Türrahmen nehmen.</p>
+
+<h2>Auftrennen und neu verleimen</h2>
+<div class="steps">
+  <div class="step"><h4>In Streifen sägen</h4><p>Längs in 60 bis 100 mm breite Streifen. Je schmaler, desto weniger Schüsseln je Streifen.</p></div>
+  <div class="step"><h4>Jahrringe wechseln</h4><p>Jeden zweiten Streifen umdrehen: Herzseite oben, unten, oben. Die Wölbungen heben sich gegenseitig auf.</p></div>
+  <div class="step"><h4>Kanten fügen</h4><p>Raubank oder Abrichte, Fuge muss ohne Licht schließen. Dreieck über alle Streifen zeichnen.</p></div>
+  <div class="step"><h4>Verleimen</h4><p>Zwingen wechselnd oben und unten, Zulagen quer gegen Versatz. 24 Stunden.</p></div>
+  <div class="step"><h4>Abrichten</h4><p>Leimperlen ab, Fläche plan hobeln oder schleifen. Jetzt ist die Platte ruhiger als jedes breite Brett.</p></div>
+</div>
+
+<h2>Vorbeugen</h2>
+<div class="grid">
+  <div class="card"><h3>Stehende Jahrringe kaufen</h3><p>Riftschnitt schüsselt kaum. Am Hirnholz zu erkennen: Ringe stehen senkrecht zur Fläche.</p></div>
+  <div class="card"><h3>Richtig stapeln</h3><p>Leisten senkrecht übereinander, alle 40 bis 60 cm, Gewicht oben. Versetzte Leisten machen Bogen.</p></div>
+  <div class="card"><h3>Beide Seiten gleich</h3><p>Gleiche Luft, gleiches Öl, gleicher Schliff. Eine Seite auf dem Betonboden reicht für Schüsseln.</p></div>
+  <div class="card"><h3>Schmal statt breit</h3><p>Platten aus Streifen bis 100 mm verleimen. Breite Bretter sehen gut aus und arbeiten am meisten.</p></div>
+  <div class="card"><h3>Reserve lassen</h3><p>Sägerau 3 bis 5 mm dicker kaufen als das Endmaß. Der Verzug kommt beim Auftrennen.</p></div>
+  <div class="card acc"><h3>Zwei Wochen warten</h3><p>Nach dem Auftrennen und Grobhobeln liegen lassen. Was sich dann noch bewegt, bewegt sich vor dem Bau, nicht danach.</p></div>
+</div>
+
+<h2>Tipps aus der Praxis</h2>
+<div class="grid">
+  <div class="card"><h3>Verzug messen</h3><p>Brett auf die Werkbank, Keil unter die hohe Stelle schieben, Keil markieren. Die Zahl entscheidet über Hobeln oder Wegschneiden.</p></div>
+  <div class="card"><h3>Hohle Seite unten auf die Abrichte</h3><p>Das Brett liegt auf zwei Kanten und kippelt nicht. Gewölbte Seite unten wackelt und wird nie plan.</p></div>
+  <div class="card"><h3>Grob, dann warten, dann fein</h3><p>Nach dem ersten Abrichten einen Tag liegen lassen. Das Brett bewegt sich nochmal, dann erst auf Endmaß.</p></div>
+  <div class="card"><h3>Lineal auf der Kante</h3><p>Ein Alulineal oder die Kante der Wasserwaage zeigt Bogen und Säbel, die das Auge übersieht.</p></div>
+  <div class="card"><h3>Säbel nutzen</h3><p>Aus einem säbelförmigen Brett werden gerade Leisten, wenn man am Säbel entlang statt an der Kante sägt.</p></div>
+  <div class="card"><h3>Krumme Reste als Zulagen</h3><p>Verzogenes Holz taugt noch für Keile, Zulagen, Schablonen und Knaggen. Nie für Sichtteile.</p></div>
+</div>
+
+<h2>Quellen zu diesem Abschnitt</h2>
+<ul class="srcs">
+  <li>USDA Wood Handbook (FPL-GTR-282), Kapitel 13 Drying and Control of Moisture Content: Verzugsarten Cup, Bow, Crook, Twist, Kink, Diamonding und ihre Ursachen.</li>
+  <li>R. Bruce Hoadley, <i>Understanding Wood</i>: Schwindmaße, Riftschnitt gegen Schüsseln, Windschnüre.</li>
+  <li>Fine Woodworking, <i>Flattening a cupped board</i> und <i>Taming twisted lumber</i>: Wasser und Gewicht, Abrichtreihenfolge, Verlust rechnen.</li>
+</ul>
