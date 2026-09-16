@@ -61,9 +61,9 @@ Karten oben im Hub-Panel (`#t-<id>`), als aufklappbarer Block in der Rail auf
 allen Seiten des Hubs und in der Suchpalette (Startansicht und als Treffer
 vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
 in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
-Abschnitt. Bisher nutzen das der Mechatronik-Hub und der Holzwerken-Hub.
+Abschnitt. Bisher nutzen das der Mechatronik-Hub und der Holzwerken-Hub (Holzarbeiten und Handarbeit).
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🪵 Holzwerken · 🖥️ Homelab ·
-📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 27 Module mit 311 Abschnitten.
+📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 28 Module mit 325 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion

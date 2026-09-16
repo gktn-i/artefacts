@@ -1,0 +1,123 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Von Hand entstehen Verbindungen am Riss, nicht an der Maschine. Deshalb passen sie besser und halten länger, wenn die Reihenfolge stimmt.</p>
+
+<div class="kurz z"><b>Säge bis zum Riss, Eisen auf den Riss, nie darüber.</b> Eine Verbindung wird nur einmal gepasst: beim ersten Zusammenstecken.</div>
+
+<h2>Handverbindungen im Vergleich</h2>
+<Profiles
+  label="Verbindung"
+  criteria={["Festigkeit", "Wenig Aufwand", "Verzeiht Fehler", "Sichtbar schön", "Wenig Werkzeug"]}
+  items={[
+    { name: "Schwalbenschwanz offen", tag: "Kisten, Schubladen", scores: [5, 2, 2, 5, 3],
+      pro: "Hält auf Zug ohne Leim, das Aushängeschild der Handarbeit",
+      con: "Jeder Fehler sichtbar, Übung an fünf Reststücken nötig",
+      use: "Schubladenfronten, Kisten, Werkzeugkiste" },
+    { name: "Schwalbenschwanz halbverdeckt", tag: "Fronten", scores: [5, 1, 2, 4, 4],
+      pro: "Von vorn unsichtbar, gleiche Festigkeit",
+      con: "Eine Seite nur mit Eisen, keine Säge bis zum Grund",
+      use: "Schubladen mit sichtbarer Front" },
+    { name: "Fingerzinken", tag: "gerade Zinken", scores: [4, 3, 3, 4, 3],
+      pro: "Einfacher anzureißen, große Leimfläche",
+      con: "Hält nicht ohne Leim, auf Zug schwächer",
+      use: "Kisten, Kästen, Schachteln" },
+    { name: "Schlitz und Zapfen", tag: "Rahmen, Gestelle", scores: [5, 3, 3, 3, 3],
+      pro: "Die Rahmenverbindung, hält Jahrhunderte",
+      con: "Schlitz stemmen braucht Lochbeitel und Zeit",
+      use: "Hocker, Tische, Türen, Rahmen" },
+    { name: "Überblattung", tag: "Kreuz oder Ecke", scores: [3, 4, 4, 3, 5],
+      pro: "Nur Säge und Eisen, schnell, verzeiht",
+      con: "Hält nur mit Leim, sieht nach Baustelle aus",
+      use: "Gestelle, Kreuzungen, Rahmen unter Platten" },
+    { name: "Gratnut", tag: "Regalboden in Seite", scores: [5, 2, 3, 4, 2],
+      pro: "Hält den Boden ohne Leim, zieht die Seite gerade",
+      con: "Grundhobel und Gratsäge oder viel Geduld",
+      use: "Regale, Bücherschränke, Gratleisten unter Platten" },
+    { name: "Dübel von Hand", tag: "Bohrwinde, Dübelmarker", scores: [3, 4, 3, 5, 3],
+      pro: "Unsichtbar, schnell, mit Markern genau",
+      con: "Bohrwinkel von Hand ist die Schwachstelle",
+      use: "Korpus, Platten stumpf, Anleimer" },
+    { name: "Nut und Feder", tag: "Böden, Rückwände", scores: [3, 3, 4, 3, 2],
+      pro: "Schwimmende Böden ohne Leim",
+      con: "Nuthobel nötig, sonst Grundhobel und Geduld",
+      use: "Schubladenböden, Rückwände, Tischplatten aus Brettern" },
+  ]}
+  note="Punkte höher = besser. Wenig Werkzeug 5 heißt Säge und ein Eisen reichen." />
+
+<h2>Schwalbenschwanz anreißen</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 230" role="img" aria-label="Links das Schwalbenbrett von der Fläche gesehen: drei Schwalben, am Brettende breit, an der Schulterlinie schmal, dazwischen die Abfallstücke. Rechts das Zinkenbrett auf die Stirnseite gesehen: die Zinken sind außen schmal und innen breit">
+  <path class="gd" d="M330,30 V200"/>
+  <text class="lblb" x="160" y="24" text-anchor="middle">Schwalbenbrett, Fläche</text>
+  <rect class="box" x="60" y="60" width="200" height="120"/>
+  <path class="accs" d="M60,60 H72 L78,96 H60 Z M120,60 H136 L142,96 H114 Z M184,60 H200 L206,96 H178 Z M248,60 H260 V96 H242 Z"/>
+  <path class="wt" d="M72,60 H120 L114,96 H78 Z M136,60 H184 L178,96 H142 Z M200,60 H248 L242,96 H206 Z"/>
+  <path class="w" d="M72,60 H120 L114,96 H78 Z M136,60 H184 L178,96 H142 Z M200,60 H248 L242,96 H206 Z"/>
+  <path class="good" d="M60,96 H260"/>
+  <path class="badl" d="M72,60 L78,96 M120,60 L114,96 M136,60 L142,96 M184,60 L178,96 M200,60 L206,96 M248,60 L242,96"/>
+  <text class="lbl" x="160" y="50" text-anchor="middle">Brettende, Hirnholz</text>
+  <text class="lbl" x="160" y="118" text-anchor="middle">Schulterlinie = Dicke des Zinkenbretts</text>
+  <text class="lbla" x="160" y="156" text-anchor="middle">Schwalben breit am Ende, Schräge 1:6</text>
+  <text class="lbl" x="160" y="174" text-anchor="middle">rot sägen, grau stemmen, halbe Zinken außen</text>
+  <text class="lblb" x="500" y="24" text-anchor="middle">Zinkenbrett, Stirnseite</text>
+  <rect class="box" x="400" y="70" width="200" height="40"/>
+  <path class="accs" d="M412,70 H460 L454,110 H418 Z M476,70 H524 L518,110 H482 Z M540,70 H588 L582,110 H546 Z"/>
+  <path class="wt" d="M400,70 H412 L418,110 H400 Z M460,70 H476 L482,110 H454 Z M524,70 H540 L546,110 H518 Z M588,70 H600 V110 H582 Z"/>
+  <path class="w" d="M400,70 H412 L418,110 H400 Z M460,70 H476 L482,110 H454 Z M524,70 H540 L546,110 H518 Z M588,70 H600 V110 H582 Z"/>
+  <path class="badl" d="M412,70 L418,110 M460,70 L454,110 M476,70 L482,110 M524,70 L518,110 M540,70 L546,110 M588,70 L582,110"/>
+  <text class="lbl" x="500" y="60" text-anchor="middle">Außenseite</text>
+  <text class="lbl" x="500" y="128" text-anchor="middle">Innenseite</text>
+  <text class="lbla" x="500" y="156" text-anchor="middle">Zinken schmal außen, breit innen</text>
+  <text class="lbl" x="500" y="174" text-anchor="middle">Form vom Schwalbenbrett übertragen, grau stemmen</text>
+</svg>
+<figcaption>Schwalben zuerst, dann die Zinken davon abnehmen. Die Zinken sind schmal, die Schwalben breit. Halbe Zinken an den Rändern halten die Ecke zu.</figcaption>
+</figure>
+
+<h2>Schwalbenschwanz von Hand</h2>
+<div class="steps">
+  <div class="step"><h4>Bretter vorbereiten</h4><p>Beide Enden mit Bestoßlade exakt 90°, gleiche Breite. Bezugsflächen nach innen.</p></div>
+  <div class="step"><h4>Schulterlinie</h4><p>Streichmaß auf die Dicke des Gegenstücks, rundum auf beide Bretter. Ein Hauch mehr, dann steht der Zinken über und wird bündig gehobelt.</p></div>
+  <div class="step"><h4>Schwalben einteilen</h4><p>Zirkel: halbe Zinken außen, dann gleichmäßig. Mit Schmiege 1:6 auf die Stirnseite, mit Winkel senkrecht bis zur Schulter.</p></div>
+  <div class="step"><h4>Schwalben sägen</h4><p>Brett in der Vorderzange. Dozuki auf der Abfallseite bis zur Schulterlinie, nie darüber.</p></div>
+  <div class="step"><h4>Abfall raus</h4><p>Laubsäge 1 mm über der Schulter, dann Stemmeisen von beiden Seiten bis auf den Riss. Leicht hohl nach innen.</p></div>
+  <div class="step"><h4>Übertragen</h4><p>Schwalbenbrett auf das Zinkenbrett stellen, Hirnholz bündig. Mit dem Messer die Schwalben nachfahren. Senkrecht bis zur Schulter verlängern.</p></div>
+  <div class="step"><h4>Zinken sägen und stemmen</h4><p>Abfallseite markieren. Säge direkt neben dem Riss, Abfall stemmen. Ecken mit dem Schrägbeitel.</p></div>
+  <div class="step"><h4>Passen</h4><p>Mit Handdruck zu einem Drittel stecken. Drückt es, Graphit zeigt die Stelle, dort einen Span paren. Nie hämmern.</p></div>
+  <div class="step"><h4>Leimen und putzen</h4><p>Leim in die Zinken, zusammenklopfen mit Zulage, Diagonalen prüfen. Nach 24 h Überstand mit Putzhobel von außen nach innen.</p></div>
+</div>
+
+<h2>Schlitz und Zapfen von Hand</h2>
+<div class="steps">
+  <div class="step"><h4>Maße</h4><p>Zapfendicke ein Drittel der Holzdicke, Schlitzbreite gleich Lochbeitel. Zapfenlänge fünfmal die Dicke, höchstens zwei Drittel des Holzes.</p></div>
+  <div class="step"><h4>Anreißen mit einem Streichmaß</h4><p>Beide Wangen mit derselben Einstellung, immer von der Bezugsfläche. Schlitz und Zapfen bekommen denselben Riss.</p></div>
+  <div class="step"><h4>Schlitz zuerst</h4><p>Stemmen wie unter <a href="#stemmen">Stemmen</a>. Der Schlitz gibt das Maß, der Zapfen wird angepasst.</p></div>
+  <div class="step"><h4>Zapfen sägen</h4><p>Wangen in drei Richtungen, Schulter zuletzt auf der Stoppleiste.</p></div>
+  <div class="step"><h4>Anpassen</h4><p>Simshobel oder Pareisen auf den Wangen, nie an der Schulter. Passt mit Handdruck, dann stimmt es.</p></div>
+  <div class="step"><h4>Sichern</h4><p>Leim, oder Holznagel schräg durch, oder Keil im Durchzapfen. Dann hält es auch ohne Leim.</p></div>
+</div>
+
+<h2>Maße, die passen</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Verbindung</th><th>Regel</th><th>Bei 20 mm Holz</th></tr></thead>
+<tbody>
+<tr><td><b>Schwalben, Schräge</b></td><td>1:6 weich, 1:8 hart</td><td>9,5° oder 7°</td></tr>
+<tr><td><b>Zinkenbreite schmalste Stelle</b></td><td>mind. 3 mm, halbe Zinken außen</td><td>4 bis 6 mm</td></tr>
+<tr><td><b>Schwalbenbreite</b></td><td>2 bis 3 mal Zinkenbreite</td><td>15 bis 25 mm</td></tr>
+<tr><td><b>Zapfendicke</b></td><td>ein Drittel der Holzdicke</td><td>6 bis 8 mm</td></tr>
+<tr><td><b>Zapfenlänge</b></td><td>bis zwei Drittel ins Gegenstück</td><td>25 bis 30 mm in 40 mm Bein</td></tr>
+<tr><td><b>Überblattung</b></td><td>halbe Dicke je Teil</td><td>10 mm</td></tr>
+<tr><td><b>Gratnut</b></td><td>Tiefe ein Drittel, Schräge 1:6</td><td>6 mm tief</td></tr>
+</tbody>
+</table></div>
+
+<h2>Tipps aus der Praxis</h2>
+<div class="grid">
+  <div class="card"><h3>Fünf Übungsecken</h3><p>Aus Kiefernresten fünf Ecken zinken, bevor die erste Kiste kommt. Die fünfte passt.</p></div>
+  <div class="card"><h3>Bleistift auf die Zinken</h3><p>Zinkenwangen mit weichem Bleistift schwärzen. Wo es beim Stecken glänzt, drückt es.</p></div>
+  <div class="card"><h3>Weißes Klebeband am Zinkenbrett</h3><p>Kreppband auf die Stirnseite, Schwalben darauf übertragen. Der Riss ist auf jedem Holz sichtbar.</p></div>
+  <div class="card"><h3>Eine Schmiege, ein Winkel</h3><p>Die Schmiege bleibt das ganze Projekt auf 1:6 eingestellt. Nie zwischendurch verstellen.</p></div>
+  <div class="card"><h3>Schlitz vor Zapfen</h3><p>Der Schlitz gibt das Maß, weil das Eisen es vorgibt. Den Zapfen anpassen ist leichter als den Schlitz.</p></div>
+  <div class="card"><h3>Fuge zeigt zum Rücken</h3><p>Sichtbare Zinken auf die Seite, die man sieht, halbverdeckte nach vorn. Vorher entscheiden, nicht danach.</p></div>
+</div>

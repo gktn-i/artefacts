@@ -2474,8 +2474,8 @@
    "name": "Holzwerken",
    "icon": "🪵",
    "file": "hub-holz.html",
-   "tagline": "Holzarten · Platten · Verbindungen · Projekte",
-   "desc": "Holzarbeiten von der Materialwahl bis zur fertigen Oberfläche: welches Holz wofür taugt, wie stark es arbeitet, welche Verbindung hält, welche Säge welchen Schnitt macht, wie man fräst, nagelt und schleift — und 16 Projekte nach Level, mit Material, Aufwand und Kosten. Werkzeugsteckbriefe bleiben bewusst draußen.",
+   "tagline": "Holzarten · Verbindungen · Handarbeit · Projekte",
+   "desc": "Holzarbeiten von der Materialwahl bis zur fertigen Oberfläche: welches Holz wofür taugt, wie stark es arbeitet, welche Verbindung hält, welche Säge welchen Schnitt macht, wie man fräst, nagelt und schleift — und 16 Projekte nach Level, mit Material, Aufwand und Kosten. Dazu ein eigenes Modul Handarbeit: Holz bearbeiten ohne Strom, vom Werkzeugsatz über Schärfen und Zinken bis zum Löffel aus Grünholz.",
    "accent": {
     "l": "#8a5522",
     "d": "#d9a468"
@@ -2621,13 +2621,41 @@
        "h": "quellen"
       }
      ]
+    },
+    {
+     "id": "hand",
+     "icon": "✋",
+     "t": "Ohne Strom arbeiten",
+     "d": "Werkzeugsatz, Schärfen, Sägen und Stemmen von Hand, Zinken und Zapfen am Riss statt an der Maschine.",
+     "k": "handarbeit ohne strom handwerkzeug handsäge handhobel stemmeisen schärfen zinken schwalbenschwanz zapfen von hand werkbank grünholz schnitzen löffel",
+     "links": [
+      {
+       "m": "handarbeit",
+       "h": "werkzeuge",
+       "t": "Werkzeugsatz in drei Stufen"
+      },
+      {
+       "m": "handarbeit",
+       "h": "schaerfen"
+      },
+      {
+       "m": "handarbeit",
+       "h": "verbindungen",
+       "t": "Schwalbenschwanz und Zapfen"
+      },
+      {
+       "m": "handarbeit",
+       "h": "projekte",
+       "t": "Projekte ohne Strom"
+      }
+     ]
     }
    ],
    "areas": [
     {
      "id": "holz",
      "name": "Holzarbeiten",
-     "desc": "Ein Modul mit 20 Unterseiten: Material, Verbinden, Bearbeiten, Praxis, Projekte.",
+     "desc": "Ein Modul mit 25 Unterseiten: Material, Verbinden, Bearbeiten, Praxis, Projekte.",
      "modules": [
       {
        "id": "holzarbeiten",
@@ -3249,8 +3277,197 @@
        }
       }
      ]
+    },
+    {
+     "id": "hand",
+     "name": "Handarbeit",
+     "desc": "Ein Modul mit 14 Unterseiten: Ausstattung, Techniken, Bauen. Alles ohne Strom.",
+     "modules": [
+      {
+       "id": "handarbeit",
+       "file": "handarbeit.html",
+       "name": "Handarbeit",
+       "icon": "✋",
+       "kind": "Referenz",
+       "updated": "2026-09-16",
+       "desc": "Holz bearbeiten ohne Strom: Werkzeugsatz in drei Stufen, Werkbank und Spannen, Schärfen, Anreißen, Sägen, Hobeln, Stemmen, Verbindungen von Hand, Grünholz und zehn Projekte. Tabellen und Abläufe statt langer Texte.",
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
+        },
+        {
+         "h": "werkzeuge",
+         "t": "Werkzeugsatz"
+        },
+        {
+         "h": "werkbank",
+         "t": "Werkbank & Spannen"
+        },
+        {
+         "h": "schaerfen",
+         "t": "Schärfen"
+        },
+        {
+         "h": "anreissen",
+         "t": "Anreißen"
+        },
+        {
+         "h": "saegen",
+         "t": "Sägen von Hand"
+        },
+        {
+         "h": "hobeln",
+         "t": "Hobeln von Hand"
+        },
+        {
+         "h": "stemmen",
+         "t": "Stemmen & Paren"
+        },
+        {
+         "h": "verbindungen",
+         "t": "Verbindungen von Hand"
+        },
+        {
+         "h": "bohren",
+         "t": "Bohren & Schrauben"
+        },
+        {
+         "h": "oberflaeche",
+         "t": "Oberfläche ohne Maschine"
+        },
+        {
+         "h": "gruenholz",
+         "t": "Grünholz & Schnitzen"
+        },
+        {
+         "h": "projekte",
+         "t": "Projekte ohne Strom"
+        },
+        {
+         "h": "quellen",
+         "t": "Quellen"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Ausstattung",
+         "sections": [
+          "start",
+          "werkzeuge",
+          "werkbank",
+          "schaerfen"
+         ]
+        },
+        {
+         "l": "Techniken",
+         "sections": [
+          "anreissen",
+          "saegen",
+          "hobeln",
+          "stemmen",
+          "bohren"
+         ]
+        },
+        {
+         "l": "Bauen",
+         "sections": [
+          "verbindungen",
+          "oberflaeche",
+          "gruenholz",
+          "projekte"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "quellen"
+         ]
+        }
+       ],
+       "tags": [
+        "handarbeit",
+        "handwerkzeug",
+        "ohne strom",
+        "ohne maschine",
+        "handsäge",
+        "ryoba",
+        "dozuki",
+        "fuchsschwanz",
+        "gestellsäge",
+        "handhobel",
+        "raubank",
+        "putzhobel",
+        "stemmeisen",
+        "stechbeitel",
+        "lochbeitel",
+        "klüpfel",
+        "schärfen",
+        "wasserstein",
+        "diamantplatte",
+        "mikrofase",
+        "abziehen",
+        "streichriemen",
+        "anreißmesser",
+        "streichmaß",
+        "anschlagwinkel",
+        "schmiege",
+        "werkbank",
+        "hobelbank",
+        "bankhaken",
+        "vorderzange",
+        "hinterzange",
+        "holdfast",
+        "stoppleiste",
+        "bestoßlade",
+        "schwalbenschwanz",
+        "zinken",
+        "fingerzinken",
+        "schlitz und zapfen",
+        "überblattung",
+        "gratnut",
+        "bohrwinde",
+        "handbohrmaschine",
+        "ahle",
+        "ziehklinge",
+        "grünholz",
+        "schnitzen",
+        "löffel",
+        "schnitzmesser",
+        "ziehmesser",
+        "beil",
+        "schnitzbank",
+        "projekte ohne strom"
+       ],
+       "alias": {
+        "hand": "start",
+        "werkzeug": "werkzeuge",
+        "tools": "werkzeuge",
+        "bank": "werkbank",
+        "spannen": "werkbank",
+        "schaerfen": "schaerfen",
+        "sharpen": "schaerfen",
+        "anreissen": "anreissen",
+        "saege": "saegen",
+        "hobel": "hobeln",
+        "stemmeisen": "stemmen",
+        "beitel": "stemmen",
+        "zinken": "verbindungen",
+        "schwalbenschwanz": "verbindungen",
+        "zapfen": "verbindungen",
+        "bohrwinde": "bohren",
+        "ziehklinge": "oberflaeche",
+        "finish": "oberflaeche",
+        "gruenholz": "gruenholz",
+        "schnitzen": "gruenholz",
+        "loeffel": "gruenholz",
+        "projekt": "projekte"
+       }
+      }
+     ]
     }
-   ]
+   ],
+   "updated": "2026-09-16"
   },
   {
    "id": "homelab",

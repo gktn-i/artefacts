@@ -55,7 +55,7 @@ const desc = mod ? mod.desc : `${hub.name} — ${hub.desc}`;
 /* Zusatz-Skripte des Moduls (Rechner, Tabellen-Builder, Folds …). */
 /* Werkstatt-Module, die das gemeinsame Technik-Design und -Skript mitbenutzen.
    Sie bleiben im Werkstatt-Hub, sehen aber aus wie der Mechatronik-Hub. */
-const MECHA_MODULES = new Set(["dremel", "schmiermittel", "druck", "messer", "meshtastic", "weltempfaenger", "holzarbeiten"]);
+const MECHA_MODULES = new Set(["dremel", "schmiermittel", "druck", "messer", "meshtastic", "weltempfaenger", "holzarbeiten", "handarbeit"]);
 
 const PAGE_SCRIPTS: Record<string, string | string[]> = {
   loeten: "/assets/mod-loeten.js",
@@ -87,6 +87,7 @@ const PAGE_SCRIPTS: Record<string, string | string[]> = {
   weltempfaenger: "/assets/mod-mecha.js",
   /* Holzwerken-Hub: gleiches Technik-Design und -Skript (Tabellen, Falten, Projektfilter). */
   holzarbeiten: "/assets/mod-mecha.js",
+  handarbeit: "/assets/mod-mecha.js",
 };
 const pageScripts = mod ? [PAGE_SCRIPTS[mod.id] || []].flat() : [];
 const routerCfg = mod ? JSON.stringify({ alias: mod.alias || {} }) : "{}";

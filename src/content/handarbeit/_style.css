@@ -1,0 +1,178 @@
+/* holzarbeiten — Design kommt aus dem gemeinsamen Hub-Stylesheet. */
+@import "../_mecha.css";
+
+/* Farbtupfer für Holzarten und Platten: grobe Tonlage, damit die Tabelle
+   nicht nur aus Wörtern besteht. Der Ton kommt per --t aus dem Markup.
+   .wn hält Tupfer und Namen zusammen, damit der Punkt nie allein
+   in einer Zeile hängt, wenn die Spalte eng wird. */
+.mx-handarbeit .wn {
+  display: inline-flex;
+  align-items: center;
+}
+.mx-handarbeit .sw {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  border: 1px solid var(--border-strong);
+  background: var(--t, #c8a173);
+  vertical-align: -2px;
+  margin-right: 7px;
+  flex: 0 0 auto;
+}
+
+/* Projektkarten: Kopfzeile mit Level, darunter Kennzahlen und Technikpillen. */
+.mx-handarbeit .pj {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  padding: 0;
+  overflow: hidden;
+}
+.mx-handarbeit .pj .ph {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  font-size: 13.6px;
+  font-weight: 650;
+}
+.mx-handarbeit .pj .ph .b { margin-left: auto; }
+.mx-handarbeit .pj .pb { padding: 11px 14px 13px; }
+.mx-handarbeit .pj .pb p { font-size: 12.8px; color: var(--muted); margin: 0 0 8px; }
+.mx-handarbeit .pj .kv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font: 500 11.5px/1.5 var(--mono);
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+.mx-handarbeit .pj .kv b { color: var(--text); font-weight: 650; }
+
+/* Körnungsleiter: Stufen als Kette, damit die Reihenfolge sichtbar ist. */
+.mx-handarbeit .ladder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  margin: 0.6rem 0 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.mx-handarbeit .ladder .rung {
+  flex: 1 1 110px;
+  padding: 10px 12px;
+  border-right: 1px solid var(--border);
+}
+.mx-handarbeit .ladder .rung:last-child { border-right: none; }
+.mx-handarbeit .ladder .rung .g {
+  font: 700 15px/1.2 var(--mono);
+  color: var(--accent-ink);
+}
+.mx-handarbeit .ladder .rung .w {
+  font-size: 11.8px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 3px;
+}
+@media (max-width: 620px) {
+  .mx-handarbeit .ladder .rung { flex: 1 1 50%; border-bottom: 1px solid var(--border); }
+}
+
+/* Silhouetten in den Symbolkarten (Verbindungsarten): dieselben Klassen wie
+   in svg.dg, damit Holzkörper, Zapfen und Hilfslinien unterscheidbar bleiben.
+   Ohne diese Regeln fällt jedes Element auf die schwarze Standardfüllung. */
+.mx-handarbeit .sym svg .box {
+  fill: var(--surface-2);
+  stroke: var(--text);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.mx-handarbeit .sym svg .accs {
+  fill: var(--accent-soft);
+  stroke: var(--accent-border);
+  stroke-width: 1.2;
+}
+.mx-handarbeit .sym svg .acc {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.mx-handarbeit .sym svg .accf { fill: var(--accent); stroke: none; }
+.mx-handarbeit .sym svg .wt {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+.mx-handarbeit .sym svg .gd {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+.mx-handarbeit .sym svg .w {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+.mx-handarbeit .sym svg .f { fill: var(--text); stroke: none; }
+.mx-handarbeit .sym svg .lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: var(--muted);
+  stroke: none;
+}
+
+/* Spaltentitel dürfen umbrechen. In _mecha.css stehen th auf nowrap, was
+   bei mehrwortigen Titeln wie „Schraubhalt Kante" die ganze Tabelle über den
+   Arbeitsbereich hinausschiebt und die letzte Spalte abschneidet. Der Bundler
+   sortiert _mecha.css hinter dieses Stylesheet, deshalb reicht gleiche
+   Spezifität nicht — der Container trägt beide Klassen. */
+.mx-handarbeit.mx-mecha th {
+  white-space: normal;
+  line-height: 1.3;
+  vertical-align: bottom;
+}
+
+/* Punktreihen in gewöhnlichen Tabellen. Die Farbregeln und .dots selbst
+   kommen aus dem Block PROFILE in _mecha.css, dort aber auf .prof-t
+   beschränkt — hier gelten sie für jede Tabelle des Moduls.
+   .neutral ist für Spalten, bei denen mehr nicht besser heißt (Aufwand,
+   Härte): einfarbig, damit die Punkte keine Wertung behaupten. */
+.mx-handarbeit td.pc {
+  padding: 11px 10px;
+  white-space: nowrap;
+  text-align: left;
+  font-family: inherit;
+}
+.mx-handarbeit td.pc .dots i {
+  width: 9px;
+  height: 9px;
+}
+.mx-handarbeit td.pc.neutral .dots i.on { background: var(--accent); }
+.mx-handarbeit td.pc .hv {
+  font: 600 11.5px/1 var(--mono);
+  color: var(--muted);
+  margin-left: 9px;
+  vertical-align: middle;
+}
+@media (max-width: 620px) {
+  .mx-handarbeit td.pc {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: normal;
+  }
+  .mx-handarbeit td.pc .hv { margin-left: 0; }
+  .mx-handarbeit td.pc::before { margin-bottom: 0; }
+}

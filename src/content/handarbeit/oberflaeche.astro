@@ -1,0 +1,69 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Ohne Schleifmaschine bleibt die Wahl zwischen Hobel, Ziehklinge und Schleifklotz. Der Hobel gewinnt bei Glanz, die Ziehklinge bei wilder Maserung, der Klotz bei Kanten.</p>
+
+<div class="kurz z"><b>Hobeln statt schleifen, wo es geht.</b> Eine gehobelte Fläche glänzt, bleibt porenoffen und nimmt Öl gleichmäßig. Schleifstaub gibt es nicht.</div>
+
+<h2>Drei Wege zur Fläche</h2>
+<Profiles
+  label="Methode"
+  criteria={["Glatt", "Schnell", "Wilde Maserung", "Ohne Staub", "Leicht zu lernen"]}
+  items={[
+    { name: "Putzhobel", tag: "hauchdünner Span", scores: [5, 4, 2, 5, 2],
+      pro: "Spiegelglatt, Poren offen, kein Papier, kein Staub",
+      con: "Reißt bei wechselnder Faser aus, Eisen muss rasierscharf sein",
+      use: "Gerade Faser, Flächen, Kanten, Endfinish vor Öl" },
+    { name: "Ziehklinge", tag: "Stahlblatt mit Grat", scores: [4, 3, 5, 5, 3],
+      pro: "Kein Ausriss, geht überall hin, kostet 10 €",
+      con: "Grat ziehen braucht Übung, Daumen werden heiß",
+      use: "Wurzelholz, Riegelahorn, Leimfugen, Hobelspuren" },
+    { name: "Schleifklotz", tag: "Kork, Papier P120 bis P240", scores: [3, 2, 4, 1, 5],
+      pro: "Kann jeder, verzeiht alles, Kanten und Profile",
+      con: "Staub, Poren zu, langsam, Ecken rund",
+      use: "Kanten brechen, Profile, letzter Gang nach dem Wässern" },
+  ]}
+  note="Punkte höher = besser." />
+
+<h2>Ziehklinge schärfen</h2>
+<div class="steps">
+  <div class="step"><h4>Kanten feilen</h4><p>Klinge in den Schraubstock, Feile flach über die Kante, exakt 90°. Bis die alte Kante weg ist.</p></div>
+  <div class="step"><h4>Kanten auf den Stein</h4><p>Kante senkrecht auf 1000 und 6000, dann beide Flächen flach. Vier scharfe rechte Winkel.</p></div>
+  <div class="step"><h4>Grat aufziehen</h4><p>Ziehklingenstahl mit einem Tropfen Öl, flach über die Fläche, dann 5 bis 10° gekippt über die Kante. Drei Züge mit Druck.</p></div>
+  <div class="step"><h4>Prüfen</h4><p>Fingernagel über die Kante: der Grat greift. Klinge leicht gebogen, 60° zur Fläche, zieht feine Späne, keinen Staub.</p></div>
+</div>
+<p class="note">Kommt nur Staub, ist der Grat weg. Neu aufziehen geht dreimal, dann wieder feilen.</p>
+
+<h2>Handschliff</h2>
+<div class="steps">
+  <div class="step"><h4>Klotz aus Kork</h4><p>Papier um den Klotz, nie in der Hand. Finger machen Wellen.</p></div>
+  <div class="step"><h4>Längs zur Faser</h4><p>Nur längs, jeder Querstrich bleibt nach dem Öl sichtbar.</p></div>
+  <div class="step"><h4>P120, P180, fertig</h4><p>Vor Öl bei 180 aufhören. Feiner schließt die Poren.</p></div>
+  <div class="step"><h4>Wässern</h4><p>Feuchter Lappen, trocknen lassen, mit der Endkörnung nachschleifen. Sonst stellen sich Fasern nach dem Öl auf.</p></div>
+  <div class="step"><h4>Kanten brechen</h4><p>Ein Zug im 45° mit P180. Scharfe Kanten nehmen kein Öl und splittern.</p></div>
+</div>
+
+<h2>Wann was</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Fläche</th><th>Erste Wahl</th><th>Danach</th></tr></thead>
+<tbody>
+<tr><td><b>Tischplatte gerade Faser</b></td><td>Putzhobel</td><td>Nichts, direkt Öl</td></tr>
+<tr><td><b>Riegelahorn, Wurzel</b></td><td>Ziehklinge</td><td>P240 leicht von Hand</td></tr>
+<tr><td><b>Leimfuge nach dem Pressen</b></td><td>Putzhobel schräg</td><td>Ziehklinge</td></tr>
+<tr><td><b>Furnierte Fläche</b></td><td>Ziehklinge, vorsichtig</td><td>P180 bis P240 von Hand</td></tr>
+<tr><td><b>Hirnholz</b></td><td>Einhandhobel mit Bestoßlade</td><td>P240, saugt sonst dunkel</td></tr>
+<tr><td><b>Profil, Rundung</b></td><td>Schleifschwamm, Vlies</td><td>Wachs</td></tr>
+<tr><td><b>Schnitzerei</b></td><td>Messerfinish, nichts schleifen</td><td>Öl</td></tr>
+</tbody>
+</table></div>
+
+<h2>Tipps aus der Praxis</h2>
+<div class="grid">
+  <div class="card"><h3>Ziehklinge leicht biegen</h3><p>Daumen in der Mitte drücken, so schneidet nur die Mitte und die Ecken kratzen nicht.</p></div>
+  <div class="card"><h3>Klinge anwärmen</h3><p>Wird der Daumen heiß, Klinge kurz in Wasser. Oder einen Ziehklingenhalter nehmen.</p></div>
+  <div class="card"><h3>Hobelspuren als Merkmal</h3><p>Feine, überlappende Hobelbahnen sind kein Fehler. Sie zeigen Handarbeit und glänzen unter Öl.</p></div>
+  <div class="card"><h3>Streiflicht</h3><p>Lampe flach über die Fläche. Jede Welle und jeder Kratzer wirft einen Schatten.</p></div>
+  <div class="card"><h3>Öl direkt auf den Hobelspan</h3><p>Gehobelte Flächen nicht anschleifen. Das Öl zieht gleichmäßiger ein als nach P240.</p></div>
+  <div class="card"><h3>Papier auf der Klinge</h3><p>Ziehklinge mit Papier zwischen die Steine legen, sonst ritzt der Grat den Stein.</p></div>
+</div>

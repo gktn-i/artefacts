@@ -1,0 +1,117 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Scharf heißt: zwei plane Flächen treffen sich in einer Linie ohne Grat. Alles beim Schärfen dient nur dem.</p>
+
+<div class="kurz z"><b>Öfter kurz statt selten lang.</b> Zwei Minuten am feinen Stein nach jeder Stunde Arbeit. Wer wartet, bis es stumpf ist, braucht zwanzig.</div>
+
+<h2>Winkel</h2>
+<figure>
+<svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Querschnitt eines Hobeleisens: die Spiegelseite unten ist plan, die Fase oben hat 25 Grad, an der Spitze sitzt eine kleine Mikrofase mit 30 Grad">
+  <path class="wt" d="M40,120 H500 L560,120 Z"/>
+  <path class="w" d="M40,80 H380 L544,114 L560,120 H40 Z"/>
+  <path class="good" d="M40,120 H560"/>
+  <path class="badl" d="M544,114 L560,120"/>
+  <path class="gd" d="M380,80 V150 M544,114 V150"/>
+  <text class="lbla" x="300" y="66" text-anchor="middle">Fase 25°</text>
+  <text class="lbla" x="552" y="98" text-anchor="middle">Mikrofase 30°</text>
+  <text class="lbl" x="300" y="142" text-anchor="middle">Spiegelseite, plan, einmal im Leben</text>
+  <text class="lbl" x="470" y="172" text-anchor="middle">nur die Mikrofase wird nachgeschärft, 1 mm breit</text>
+</svg>
+<figcaption>Die Mikrofase ist der Trick: Nur ein Millimeter Stahl liegt am Stein, zehn Züge reichen. Die große Fase kommt erst nach zwanzig Schärfgängen wieder dran.</figcaption>
+</figure>
+
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Werkzeug</th><th data-s="num">Fase</th><th data-s="num">Mikrofase</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><b>Hobeleisen</b></td><td>25°</td><td>30°</td><td class="txt">Hartholz und Hirnholz 35°, Einhandhobel 25° gesamt</td></tr>
+<tr><td><b>Stemmeisen</b></td><td>25°</td><td>30°</td><td class="txt">Zum Paren ohne Klüpfel 20 bis 25° ohne Mikrofase</td></tr>
+<tr><td><b>Lochbeitel</b></td><td>30°</td><td>35°</td><td class="txt">Muss Schläge aushalten</td></tr>
+<tr><td><b>Japanische Nomi</b></td><td>28 bis 30°</td><td>keine</td><td class="txt">Harter Stahl bricht bei unter 25°</td></tr>
+<tr><td><b>Schnitzmesser</b></td><td>12° je Seite</td><td>keine</td><td class="txt">Flach, beidseitig, ohne Hohlschliff</td></tr>
+<tr><td><b>Beil</b></td><td>25 bis 30°</td><td>keine</td><td class="txt">Ballig, nie hohl</td></tr>
+<tr><td><b>Ziehklinge</b></td><td>90°</td><td>Grat</td><td class="txt">Kante feilen, dann Grat ziehen, siehe Oberfläche</td></tr>
+<tr><td><b>Japansäge</b></td><td colspan="2">nicht schärfbar</td><td class="txt">Blatt tauschen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Schärfmittel</h2>
+<Profiles
+  label="Mittel"
+  criteria={["Schnell", "Bleibt plan", "Günstig", "Pflegeleicht", "Fein"]}
+  items={[
+    { name: "Wassersteine", tag: "1000 und 6000", scores: [4, 1, 3, 2, 5],
+      pro: "Schneller Abtrag, feinste Polituren, Standard in jeder Tischlerei",
+      con: "Hohlen sich aus, müssen abgerichtet werden, wässern vor dem Schärfen",
+      use: "Wer regelmäßig schärft und den Stein pflegt" },
+    { name: "Diamantplatten", tag: "400, 1000, dazu Leder", scores: [4, 5, 2, 5, 3],
+      pro: "Bleiben immer plan, kein Wässern, richten auch Wassersteine ab",
+      con: "Teuer, nicht feiner als 1200, Politur nur mit Leder",
+      use: "Werkstatt ohne Wasser, Anfänger, Steine abrichten" },
+    { name: "Schleifpapier auf Glas", tag: "P400 bis P2000, Scary Sharp", scores: [3, 5, 5, 4, 4],
+      pro: "Sofort planes Ergebnis, 20 € Einstieg, jede Körnung sofort da",
+      con: "Papier verschleißt schnell, auf Dauer teurer als Steine",
+      use: "Einstieg, Spiegelseiten planen, unterwegs" },
+    { name: "Ölsteine", tag: "Arkansas, India", scores: [2, 4, 3, 3, 4],
+      pro: "Halten Jahrzehnte, bleiben lange plan, kein Wasser",
+      con: "Langsam, Öl schmiert, feinste Stufe fehlt",
+      use: "Messer, Schnitzwerkzeug, Tradition" },
+    { name: "Streichriemen, Leder", tag: "mit Polierpaste", scores: [5, 5, 5, 5, 5],
+      pro: "Zehn Züge und die Schneide ist rasierscharf, hält den Grat weg",
+      con: "Schärft nichts Stumpfes, nur nachziehen",
+      use: "Nach jedem Stein, zwischendurch bei der Arbeit" },
+  ]}
+  note="Fein heißt: wie glatt die Schneide am Ende ist. Punkte höher = besser." />
+
+<h2>Der Ablauf</h2>
+<div class="steps">
+  <div class="step"><h4>Spiegelseite planen</h4><p>Einmal bei neuem Werkzeug. Die letzten 2 cm auf grob, mittel, fein, bis sie spiegelt. Nie mehr anrühren.</p></div>
+  <div class="step"><h4>Fase auf grob, bis der Grat kommt</h4><p>25° halten, mit Schärfhilfe oder frei. Mit dem Fingernagel über die Spiegelseite: der Grat muss über die ganze Breite fühlbar sein.</p></div>
+  <div class="step"><h4>Mittel, dann fein</h4><p>Gleiche Bewegung, weniger Züge. Auf 6000 spiegelt die Fase.</p></div>
+  <div class="step"><h4>Mikrofase</h4><p>Winkel 5° steiler, zehn Züge auf dem feinen Stein. Ein schmaler glänzender Streifen an der Spitze.</p></div>
+  <div class="step"><h4>Grat abziehen</h4><p>Spiegelseite flach auf den feinen Stein, drei Züge. Dann Fase, dann Spiegelseite, bis nichts mehr fühlbar ist.</p></div>
+  <div class="step"><h4>Leder</h4><p>Beide Seiten je zehn Züge vom Rücken zur Schneide, nie hinein. Fertig.</p></div>
+</div>
+
+<h2>Körnungen</h2>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Stufe</th><th>Wasserstein</th><th>Diamant</th><th>Schleifpapier</th><th>Wofür</th></tr></thead>
+<tbody>
+<tr><td><b>Grob</b></td><td>220 bis 400</td><td>300 bis 400</td><td>P120 bis P240</td><td class="txt">Scharten, neuer Winkel, Spiegelseite</td></tr>
+<tr><td><b>Mittel</b></td><td>1000</td><td>1000</td><td>P400 bis P600</td><td class="txt">Normales Schärfen, Grat erzeugen</td></tr>
+<tr><td><b>Fein</b></td><td>3000 bis 6000</td><td>1200 plus Leder</td><td>P1200 bis P2000</td><td class="txt">Mikrofase, Grat weg</td></tr>
+<tr><td><b>Politur</b></td><td>8000 und mehr</td><td>Leder mit Paste</td><td>P3000 oder Leder</td><td class="txt">Paren, Hirnholz, Schnitzen</td></tr>
+</tbody>
+</table></div>
+
+<h2>Schärftest</h2>
+<div class="grid">
+  <div class="card"><h3>Papier</h3><p>Ein Blatt frei in der Hand, Schneide hineinziehen. Schneidet ohne Reißen und ohne Druck.</p></div>
+  <div class="card"><h3>Fingernagel</h3><p>Schneide leicht auf den Nagel setzen, kippen. Greift sofort statt zu rutschen.</p></div>
+  <div class="card"><h3>Hirnholz</h3><p>Kiefernrest quer zur Faser paren. Fläche glänzt, keine Fasern stehen. Der ehrlichste Test.</p></div>
+  <div class="card acc"><h3>Licht</h3><p>Schneide gegen die Lampe halten. Stumpfe Stellen reflektieren als heller Strich, scharfe nicht.</p></div>
+</div>
+
+<h2>Fehler</h2>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Symptom</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td><b>Grat kommt nicht</b></td><td class="txt">Winkel zu flach, Stein hohl, zu wenig Züge</td><td class="txt">Stein abrichten, Winkel steiler, Markerstift auf die Fase zeigt, wo der Stein trifft</td></tr>
+<tr><td><b>Schneide rund</b></td><td class="txt">Winkel wandert beim Freihandschärfen</td><td class="txt">Schärfhilfe, kurze Züge, Handgelenk fest</td></tr>
+<tr><td><b>Schneide schief</b></td><td class="txt">Ungleicher Druck</td><td class="txt">Finger über der Schneide verteilen, Eisen umgekehrt einspannen</td></tr>
+<tr><td><b>Schnell wieder stumpf</b></td><td class="txt">Grat nicht abgezogen, klappt beim ersten Schnitt um</td><td class="txt">Wechselseitig abziehen, Leder</td></tr>
+<tr><td><b>Schneide bricht aus</b></td><td class="txt">Winkel zu flach für den Stahl oder das Holz</td><td class="txt">Mikrofase 5° steiler</td></tr>
+<tr><td><b>Blau angelaufen</b></td><td class="txt">Am Schleifbock zu heiß, Stahl weich</td><td class="txt">Blaues abschleifen, nur mit Wasser und kurz, oder gar nicht an die Maschine</td></tr>
+</tbody>
+</table></div>
+
+<h2>Tipps aus der Praxis</h2>
+<div class="grid">
+  <div class="card"><h3>Marker auf die Fase</h3><p>Fase mit Edding anmalen, zwei Züge. Wo die Farbe bleibt, trifft der Stein nicht.</p></div>
+  <div class="card"><h3>Stein vor jedem Gang abrichten</h3><p>Bleistiftgitter auf den Wasserstein, auf der Diamantplatte reiben, bis das Gitter weg ist.</p></div>
+  <div class="card"><h3>Schärfplatz fest</h3><p>Stein in Halter, Halter an der Bankkante. Ein rutschender Stein macht runde Schneiden.</p></div>
+  <div class="card"><h3>Schärfhilfe für den Anfang</h3><p>Eine Führungsrolle für 20 € nimmt den Winkel ab. Freihand kommt nach hundert Schärfgängen von allein.</p></div>
+  <div class="card"><h3>Ein Winkel für alles</h3><p>Alle Eisen auf 25 plus 30. Weniger Umstellen, weniger Fehler.</p></div>
+  <div class="card"><h3>Vor dem Weglegen ölen</h3><p>Ein Tropfen Kamelienöl oder Ballistol auf die Schneide. Rost frisst zuerst die Kante.</p></div>
+</div>
