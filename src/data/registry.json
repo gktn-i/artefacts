@@ -2956,7 +2956,22 @@
         "drehwuchs",
         "reaktionsholz",
         "riftschnitt",
-        "auftrennen"
+        "auftrennen",
+        "geräte",
+        "gerät",
+        "führen",
+        "bedienung",
+        "schwingschleifer",
+        "bandschleifer",
+        "deltaschleifer",
+        "kantenfräse",
+        "dübelfräse",
+        "akkuschrauber",
+        "bohrmaschine",
+        "ständerbohrmaschine",
+        "nagler",
+        "pocket-hole-lehre",
+        "faserrichtung schleifen"
        ],
        "sections": [
         {
@@ -3032,6 +3047,10 @@
          "t": "Öle & Lacke"
         },
         {
+         "h": "geraete",
+         "t": "Geräte führen"
+        },
+        {
          "h": "messen",
          "t": "Messen & Anreißen"
         },
@@ -3093,6 +3112,7 @@
         {
          "l": "Praxis & Projekte",
          "sections": [
+          "geraete",
           "messen",
           "sicherheit",
           "fehler",
@@ -3160,7 +3180,7 @@
         "nagel": "nageln",
         "nagler": "nageln",
         "oberflaeche": "oberflaechen",
-        "oberfraese": "fraesen",
+        "oberfraese": "geraete",
         "oel": "oele",
         "osb": "platten",
         "plattenwerkstoffe": "platten",
@@ -3220,7 +3240,12 @@
         "verzogen": "verzug",
         "richten": "verzug",
         "schuesseln": "verzug",
-        "verdrehung": "verzug"
+        "verdrehung": "verzug",
+        "geraete": "geraete",
+        "geräte": "geraete",
+        "maschinen": "geraete",
+        "bedienung": "geraete",
+        "exzenter": "geraete"
        }
       }
      ]
