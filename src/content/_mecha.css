@@ -29,10 +29,10 @@
   --shadow-sm:0 1px 2px rgba(16,24,40,.05);
   --shadow-md:0 4px 14px -8px rgba(16,24,40,.28);
   --mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,'Roboto Mono',monospace;
-  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
-  --display:'Archivo','Helvetica Neue',sans-serif;
+  --sans:'IBM Plex Sans Variable','IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  --display:'Archivo Variable','Archivo','Helvetica Neue',sans-serif;
 }
-@media(prefers-color-scheme:dark){
+@media screen and (prefers-color-scheme:dark){
   .mx-mecha{
     --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2a3039;
     --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
@@ -377,7 +377,7 @@
 .mx-mecha .c-mech .cb{background:#F1EFE8;color:#444441}
 .mx-mecha .c-schutz .cb{background:#FAECE7;color:#712B13}
 .mx-mecha .c-verbind .cb{background:#EEF2E3;color:#3F5211}
-@media(prefers-color-scheme:dark){
+@media screen and (prefers-color-scheme:dark){
   .mx-mecha .c-passiv .cb{background:#1e2e42;color:#b3cbe6}
   .mx-mecha .c-halbleiter .cb{background:#282744;color:#c9c6e8}
   .mx-mecha .c-analog .cb{background:#1c3038;color:#a6d0e0}

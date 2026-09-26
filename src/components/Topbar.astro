@@ -7,8 +7,9 @@
 interface Props {
   hub?: any;
   mod?: any;
+  label?: string; /* Krume für Seiten ohne Hub (Standard: „Übersicht") */
 }
-const { hub, mod } = Astro.props;
+const { hub, mod, label = "Übersicht" } = Astro.props;
 ---
 
 <header class="topbar">
@@ -20,14 +21,14 @@ const { hub, mod } = Astro.props;
 
   <nav class="crumbs" aria-label="Pfad">
     <a href="index.html">Artefakte</a>
-    {!hub && <span class="sep">/</span>}
-    {!hub && <span class="cur">Übersicht</span>}
-    {hub && !mod && <span class="sep">/</span>}
-    {hub && !mod && <span class="cur">{hub.icon} {hub.name}</span>}
-    {hub && mod && <span class="sep">/</span>}
+    {!hub && <span class="sep" aria-hidden="true">/</span>}
+    {!hub && <span class="cur" aria-current="page">{label}</span>}
+    {hub && !mod && <span class="sep" aria-hidden="true">/</span>}
+    {hub && !mod && <span class="cur" aria-current="page">{hub.icon} {hub.name}</span>}
+    {hub && mod && <span class="sep" aria-hidden="true">/</span>}
     {hub && mod && <a href={hub.file}>{hub.icon} {hub.name}</a>}
-    {hub && mod && <span class="sep">/</span>}
-    {hub && mod && <span class="cur">{mod.name}</span>}
+    {hub && mod && <span class="sep" aria-hidden="true">/</span>}
+    {hub && mod && <span class="cur" aria-current="page">{mod.name}</span>}
     {hub && mod && <span class="secwrap" id="crumbSec"></span>}
   </nav>
 

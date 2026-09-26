@@ -15,10 +15,10 @@
   --shadow-sm:0 1px 2px rgba(16,24,40,.05);
   --shadow-tabs:0 6px 14px -8px rgba(16,24,40,.22);
   --mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,'Roboto Mono',monospace;
-  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
-  --display:'Archivo','Helvetica Neue',sans-serif;
+  --sans:'IBM Plex Sans Variable','IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;
+  --display:'Archivo Variable','Archivo','Helvetica Neue',sans-serif;
 }
-@media(prefers-color-scheme:dark){
+@media screen and (prefers-color-scheme:dark){
   .mx-elektronik-101{
     --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#262b33;
     --text:#d8dce3; --muted:#a7afba; --faint:#848d99;

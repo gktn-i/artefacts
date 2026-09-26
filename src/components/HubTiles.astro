@@ -1,0 +1,19 @@
+---
+/* Hub-Kacheln (Startseite, 404): je Hub Symbol, Name, Tagline und Umfang. */
+import { hubs } from "../lib/registry.mjs";
+---
+
+<div class="tiles">
+  {hubs.map((h: any) => (
+    <a class="tile hx" href={h.file} style={`--hcl:${h.accent.l};--hcd:${h.accent.d}`}>
+      <span class="ic" aria-hidden="true">{h.icon}</span>
+      <h3>{h.name}</h3>
+      <span class="tag">{h.tagline}</span>
+      <span class="meta">
+        <span>{h.modules.length} Module</span>
+        <span>{h.sectionCount} Abschn.</span>
+        <span class="go" aria-hidden="true">→</span>
+      </span>
+    </a>
+  ))}
+</div>

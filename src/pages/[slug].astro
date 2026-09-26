@@ -10,10 +10,13 @@
    deckungsgleich sind — läuft etwas auseinander, bricht er ab.
    ========================================================================== */
 import Base from "../layouts/Base.astro";
+import SectionBody from "../components/SectionBody.astro";
 import { hubs, moduleById, hubById, relatedOf, fmtDate } from "../lib/registry.mjs";
 
 export function getStaticPaths() {
-  const files = import.meta.glob("../content/*/*.astro");
+  /* eager wie unten beim Rendern: dieselben Module einmal lazy und einmal
+     statisch zu importieren, quittiert Vite mit einer Warnung pro Datei. */
+  const files = import.meta.glob("../content/*/*.astro", { eager: true });
   const nativeIds = [...new Set(Object.keys(files).map((p) => p.split("/")[2]))];
   const paths = [];
   for (const h of hubs) {
@@ -228,10 +231,12 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
             const C = secComp(mod.id, s.h);
             const prev = mod.sections[i - 1];
             const next = mod.sections[i + 1];
+            /* Die ID sitzt auf der Überschrift, nicht auf <section>: nur
+               Überschriften mit ID werden in Pagefind zu Sprungzielen. */
             return (
-              <section class="msec" id={s.h}>
-                <h2 class="msec-t"><span class="no">{pad(i)} / {pad(mod.sections.length - 1)}</span>{s.t}</h2>
-                <C />
+              <section class="msec" data-sec={s.h} aria-labelledby={s.h}>
+                <h2 class="msec-t" id={s.h}><span class="no" data-pagefind-ignore>{pad(i)} / {pad(mod.sections.length - 1)}</span>{s.t}</h2>
+                <SectionBody sec={s.h}><C /></SectionBody>
                 <nav class="pager" data-pagefind-ignore aria-label="Abschnitte blättern">
                   {prev ? (
                     <a class="prev" href={`#${prev.h}`}><span class="lb">← Vorheriger Abschnitt</span><span class="tt">{prev.t}</span></a>
@@ -249,6 +254,7 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           })}
         </div>
         <script is:inline type="application/json" id="mrouterCfg" set:html={routerCfg} />
+        <div class="sr-only" id="secLive" aria-live="polite"></div>
         {pageScripts.map((src) => (
           <script is:inline defer src={src} />
         ))}
@@ -285,7 +291,9 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
            leben in der Rail (#secNav). Dazu: Alias-Hashes alter Anker,
            Überschriften-Subnav mit Scrollspy unter dem aktiven Eintrag,
            Brotkrumen-Update in der Topbar, Sprung öffnet Faltabschnitte
-           (window.__openSection). */
+           (window.__openSection).
+           Jeder Abschnittswechsel ist ein eigener Verlaufseintrag: Zurück
+           führt zum vorigen Abschnitt, Strg/⌘-Klick öffnet einen neuen Tab. */
         (function () {
           var nav = document.getElementById("secNav");
           if (!nav) return;
@@ -295,8 +303,20 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
 
           var secs = Array.prototype.slice.call(document.querySelectorAll(".msec"));
           var links = Array.prototype.slice.call(nav.querySelectorAll("a[data-h]"));
-          var KEYS = secs.map(function (s) { return s.id; });
+          var KEYS = secs.map(function (s) { return s.dataset.sec; });
           var crumb = document.getElementById("crumbSec");
+          var live = document.getElementById("secLive");
+          var tree = nav.closest(".tree");
+          var calm = matchMedia("(prefers-reduced-motion: reduce)");
+          var cur = null;
+
+          /* Kaputte %-Folgen im Hash dürfen den Router nicht umwerfen. */
+          function dec(s) {
+            try { return decodeURIComponent(s); } catch (e) { return s; }
+          }
+          function linkFor(h) {
+            return links.filter(function (a) { return a.dataset.h === h; })[0] || null;
+          }
 
           /* Ein Hash kann Abschnitt, Alias oder Überschriften-Anker sein. */
           function resolve(raw) {
@@ -306,10 +326,12 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
             if (i > 0 && KEYS.indexOf(h.slice(0, i)) >= 0) return { sec: h.slice(0, i), head: h };
             var el = h && document.getElementById(h);
             var host = el && el.closest && el.closest(".msec");
-            if (host) return { sec: host.id, head: h };
+            if (host) return { sec: host.dataset.sec, head: h };
             return { sec: KEYS[0], head: null };
           }
 
+          /* Gleiches Schema wie src/lib/anchors.mjs — die Überschriften haben
+             ihre IDs schon aus dem Build, das hier greift nur für Nachzügler. */
           function slug(s) {
             return s.toLowerCase().replace(/[^a-z0-9äöüß]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
           }
@@ -322,9 +344,35 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
             });
             if (hs.length < 2) return [];
             hs.forEach(function (h, i) {
-              if (!h.id) h.id = sec.id + "--" + (slug(h.textContent) || "h" + i);
+              if (h.id) return;
+              var id = sec.dataset.sec + "--" + (slug(h.textContent) || "h" + i), base = id, k = 2;
+              while (document.getElementById(id)) id = base + "-" + k++;
+              h.id = id;
             });
             return hs;
+          }
+
+          /* Aktiven Eintrag in der Rail sichtbar halten — es scrollt nur die
+             Rail, nie die Seite. */
+          function reveal(el) {
+            if (!tree || !el) return;
+            var t = tree.getBoundingClientRect(), r = el.getBoundingClientRect();
+            if (r.top < t.top + 40 || r.bottom > t.bottom - 16) tree.scrollTop += r.top - t.top - t.height / 3;
+          }
+
+          /* Fokus auf ein Ziel setzen, ohne zu scrollen (Überschriften sind
+             von Haus aus nicht fokussierbar). */
+          function focusOn(el) {
+            if (!el) return;
+            if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+            el.focus({ preventScroll: true });
+          }
+
+          /* Neuer Verlaufseintrag für einen Abschnitt. Vorher merkt sich der
+             alte Eintrag die Scrollposition — Zurück landet wieder dort. */
+          function push(hash) {
+            try { history.replaceState({ y: window.scrollY }, ""); } catch (e) {}
+            history.pushState(null, "", hash);
           }
 
           var spy = null, spyLock = 0;
@@ -336,8 +384,8 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
           function buildSub(h) {
             nav.querySelectorAll(".sub").forEach(function (b) { b.remove(); });
             if (spy) { spy.disconnect(); spy = null; }
-            var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
-            var sec = document.getElementById(h);
+            var lk = linkFor(h);
+            var sec = secs[KEYS.indexOf(h)];
             if (!lk || !sec) return;
             var hs = headings(sec);
             if (!hs.length) return;
@@ -359,27 +407,33 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
             hs.forEach(function (hd) { spy.observe(hd); });
           }
 
-          function jumpTo(id) {
+          function jumpTo(id, instant) {
             spyLock = Date.now() + 1000;
             if (window.__openSection) window.__openSection(id);
             var el = document.getElementById(id);
             if (!el) return;
             markSub(id);
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            el.scrollIntoView({ behavior: instant || calm.matches ? "auto" : "smooth", block: "start" });
           }
 
           function show(h, opts) {
             opts = opts || {};
-            secs.forEach(function (s) { s.classList.toggle("on", s.id === h); });
-            links.forEach(function (a) { a.classList.toggle("on", a.dataset.h === h); });
-            if (opts.push !== false && decodeURIComponent(location.hash.slice(1)) !== h) {
-              history.replaceState(null, "", "#" + h);
-            }
-            var lk = links.filter(function (a) { return a.dataset.h === h; })[0];
+            var prev = cur;
+            cur = h;
+            secs.forEach(function (s) { s.classList.toggle("on", s.dataset.sec === h); });
+            links.forEach(function (a) {
+              var on = a.dataset.h === h;
+              a.classList.toggle("on", on);
+              if (on) a.setAttribute("aria-current", "true");
+              else a.removeAttribute("aria-current");
+            });
+            if (opts.push && dec(location.hash.slice(1)) !== h) push("#" + h);
+            var lk = linkFor(h);
             if (crumb && lk) {
               crumb.innerHTML = "";
               var sep = document.createElement("span");
               sep.className = "sep";
+              sep.setAttribute("aria-hidden", "true");
               sep.textContent = "/";
               var sc = document.createElement("span");
               sc.className = "sec";
@@ -388,27 +442,59 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
               crumb.appendChild(sc);
             }
             buildSub(h);
+            if (opts.reveal !== false) reveal(lk);
+            /* Screenreader erfahren vom Wechsel, auch wenn der Fokus in der Rail bleibt. */
+            if (live && prev && prev !== h && lk) live.textContent = "Abschnitt: " + lk.textContent.trim();
           }
 
-          function go(raw, push) {
-            var r = resolve(decodeURIComponent(raw || ""));
-            show(r.sec, { push: push });
-            if (r.head) requestAnimationFrame(function () { jumpTo(r.head); });
+          function go(raw, y) {
+            var r = resolve(dec(raw || ""));
+            show(r.sec);
+            if (y != null) requestAnimationFrame(function () { window.scrollTo(0, y); });
+            else if (r.head) requestAnimationFrame(function () { jumpTo(r.head); });
             else window.scrollTo({ top: 0 });
           }
 
+          /* Zurück/Vor, Links ohne Router, Adresse von Hand geändert. */
           window.addEventListener("hashchange", function () {
-            go(location.hash.slice(1), false);
+            var st = history.state;
+            go(location.hash.slice(1), st && typeof st.y === "number" ? st.y : null);
           });
 
-          var first = resolve(decodeURIComponent(location.hash.slice(1)));
-          show(first.sec, { push: false });
+          /* Links im Inhalt, die in einen anderen Abschnitt derselben Seite
+             führen (Blätterleiste, Querverweise): Der angeklickte Link
+             verschwindet mit seinem Abschnitt — der Fokus rückt deshalb ans
+             Ziel, statt im Nichts zu landen. */
+          var content = document.querySelector(".mcontent");
+          if (content) content.addEventListener("click", function (e) {
+            var a = e.target.closest && e.target.closest("a[href]");
+            if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+            if (a.origin !== location.origin || a.pathname !== location.pathname || a.hash.length < 2) return;
+            var r = resolve(dec(a.hash.slice(1)));
+            if (r.sec === cur) return; /* Sprung im selben Abschnitt: macht der Browser */
+            e.preventDefault();
+            push(a.hash);
+            go(a.hash.slice(1));
+            focusOn(document.getElementById(r.head || r.sec));
+          });
+
+          var first = resolve(dec(location.hash.slice(1)));
+          show(first.sec);
           /* Browser-Ankersprung beim Laden korrigieren; Ziel ggf. anfahren,
              sobald das Modul-Skript Folds und Tabellen aufgebaut hat. Der
              native Sprung kann nach unserem rAF feuern — deshalb zusätzlich
-             nach load noch einmal geraderücken. */
+             nach load noch einmal geraderücken. Aber nie gegen den Leser:
+             Hat er schon selbst gescrollt, oder stellt der Browser nach
+             Neuladen/Zurück die alte Position wieder her, bleibt sie. */
+          var touched = false;
+          ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (t) {
+            window.addEventListener(t, function () { touched = true; }, { once: true, passive: true, capture: true });
+          });
+          var navEntry = performance.getEntriesByType ? performance.getEntriesByType("navigation")[0] : null;
+          var restored = !!navEntry && (navEntry.type === "back_forward" || navEntry.type === "reload");
           function settle() {
-            if (first.head) jumpTo(first.head);
+            if (touched || restored) return;
+            if (first.head) jumpTo(first.head, true);
             else window.scrollTo(0, 0);
           }
           requestAnimationFrame(settle);
@@ -416,7 +502,8 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
 
           nav.addEventListener("click", function (e) {
             var a = e.target.closest("a");
-            if (!a) return;
+            /* Strg/⌘/Umschalt/Mitte: der Browser öffnet Tab oder Fenster. */
+            if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
             if (a.dataset.hh) {
               /* Subnav: innerhalb des Abschnitts springen */
               e.preventDefault();
@@ -424,7 +511,7 @@ const pad = (n: number) => String(n + 1).padStart(2, "0");
               jumpTo(a.dataset.hh);
             } else if (a.dataset.h) {
               e.preventDefault();
-              show(a.dataset.h, { push: true });
+              show(a.dataset.h, { push: true, reveal: false });
               window.scrollTo({ top: 0 });
             }
           });

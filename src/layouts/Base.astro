@@ -7,40 +7,65 @@
    ========================================================================== */
 import Rail from "../components/Rail.astro";
 import Topbar from "../components/Topbar.astro";
+import { hubNames } from "../lib/registry.mjs";
+/* Schriften liegen auf der eigenen Domain (Fontsource) statt bei Google:
+   keine IP-Weitergabe an Dritte, kein fremder Verbindungsaufbau vor dem
+   ersten Rendern. Archivo und Plex Sans als variable Schnitte, Plex Mono in
+   den drei genutzten Stärken. */
+import "@fontsource-variable/archivo/wght.css";
+import "@fontsource-variable/ibm-plex-sans/wght.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
 import "../styles/app.css";
+import sansLatin from "@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url";
+import displayLatin from "@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url";
 
 interface Props {
   title: string;
   description: string;
   hub?: any; /* Hub-Objekt aus lib/registry — färbt Akzent + Brotkrumen */
   mod?: any; /* Modul-Objekt, wenn die Seite ein Modul ist */
+  notFound?: boolean; /* 404: wird unter beliebigen Pfaden ausgeliefert */
 }
-const { title, description, hub, mod } = Astro.props;
+const { title, description, hub, mod, notFound = false } = Astro.props;
 
 const accent = hub ? hub.accent : { l: "#0e7c8c", d: "#4fb9c9" };
 const accCss =
   `html[data-acc]{--c:${accent.l}}` +
   `html[data-acc][data-hbx-theme="dark"]{--c:${accent.d}}` +
-  `@media (prefers-color-scheme: dark){html[data-acc]:not([data-hbx-theme="light"]){--c:${accent.d}}}`;
+  `@media screen and (prefers-color-scheme: dark){html[data-acc]:not([data-hbx-theme="light"]){--c:${accent.d}}}`;
+const canonical = notFound ? null : new URL(Astro.url.pathname.replace(/^\/index\.html$/, "/"), Astro.site).href;
 ---
 
 <!doctype html>
 <html lang="de" class="no-js" data-acc>
   <head>
     <meta charset="UTF-8" />
+    {/* GitHub Pages zeigt die 404 unter jedem Pfad, auch /alt/x.html — die
+        Basis hält alle relativen Links trotzdem gültig. */}
+    {notFound && <base href="/" />}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    {notFound ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Artefakte" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#171a20" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href={sansLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={displayLatin} as="font" type="font/woff2" crossorigin />
     <style is:inline set:html={accCss}></style>
     <script is:inline>
-      /* Theme vor dem ersten Paint setzen (folgt dem System) + no-js lösen. */
+      /* Theme vor dem ersten Paint setzen (folgt dem System) + no-js lösen.
+         Gedruckt wird immer hell: dunkle Flächen gehören nicht aufs Papier. */
       (function () {
         var d = document.documentElement;
         d.classList.remove("no-js");
@@ -50,6 +75,8 @@ const accCss =
         }
         a();
         if (q.addEventListener) q.addEventListener("change", a);
+        addEventListener("beforeprint", function () { d.setAttribute("data-hbx-theme", "light"); });
+        addEventListener("afterprint", a);
       })();
     </script>
     <script is:inline defer src="/assets/registry.js"></script>
@@ -60,13 +87,13 @@ const accCss =
     <div class="shell">
       <Rail hub={hub} mod={mod} />
       <div class="maincol">
-        <Topbar hub={hub} mod={mod} />
+        <Topbar hub={hub} mod={mod} label={notFound ? "Nicht gefunden" : undefined} />
         <div id="content">
           <slot />
         </div>
         <footer class="site">
           <div class="inner">
-            <span>Artefakte — Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Foto, Messer und Funk.</span>
+            <span>Artefakte — Nachschlagewerke für {hubNames}.</span>
             <span><a href="index.html">Übersicht</a> · Struktur in <code>src/data/registry.json</code></span>
           </div>
         </footer>
@@ -74,25 +101,79 @@ const accCss =
     </div>
 
     <script>
-      /* Schubladen-Verhalten der Rail auf schmalen Viewports. */
+      /* Schubladen-Verhalten der Rail auf schmalen Viewports. Geschlossen ist
+         sie per CSS unsichtbar und nicht fokussierbar; offen sperrt sie den
+         Rest der Seite (inert), holt den Fokus zu sich und gibt ihn beim
+         Schließen zurück. */
       const rail = document.getElementById("rail")!;
       const scrim = document.getElementById("scrim")!;
       const burger = document.getElementById("burger")!;
-      const setOpen = (open: boolean) => {
+      const main = document.querySelector<HTMLElement>(".maincol")!;
+      const tree = rail.querySelector<HTMLElement>(".tree");
+      const narrow = matchMedia("(max-width: 1020px)");
+
+      /* Aktiver Eintrag der Rail (Abschnitt, Modul oder Hub-Übersicht), sofern
+         er gerade gerendert ist — eingeklappte Hubs zählen nicht (deren
+         Inhalt hat per content-visibility trotzdem Boxen, daher checkVisibility). */
+      const shown = (el: HTMLElement) => (el.checkVisibility ? el.checkVisibility() : el.getClientRects().length > 0);
+      const current = () => [...rail.querySelectorAll<HTMLElement>("[aria-current]")].find(shown) || null;
+      /* Ihn sichtbar machen — es scrollt nur die Rail, nie die Seite. */
+      const reveal = (el: HTMLElement | null) => {
+        if (!tree || !el) return;
+        const t = tree.getBoundingClientRect();
+        const r = el.getBoundingClientRect();
+        if (r.top < t.top + 40 || r.bottom > t.bottom - 16) tree.scrollTop += r.top - t.top - t.height / 3;
+      };
+      const focusOn = (el: HTMLElement | null) => {
+        if (!el) return;
+        if (!el.hasAttribute("tabindex") && !el.matches("a[href], button, summary")) el.setAttribute("tabindex", "-1");
+        el.focus({ preventScroll: true });
+      };
+
+      const isOpen = () => rail.classList.contains("open");
+      const setOpen = (open: boolean, restore = true) => {
+        if (isOpen() === open) return;
         rail.classList.toggle("open", open);
         scrim.classList.toggle("show", open);
         burger.setAttribute("aria-expanded", String(open));
+        main.inert = open;
+        document.documentElement.classList.toggle("drawer-open", open);
+        if (open) {
+          const cur = current();
+          reveal(cur);
+          focusOn(cur || rail.querySelector<HTMLElement>("a[href]"));
+        } else if (restore) {
+          burger.focus({ preventScroll: true });
+        }
       };
-      burger.addEventListener("click", () => setOpen(!rail.classList.contains("open")));
+
+      burger.addEventListener("click", () => setOpen(!isOpen()));
       scrim.addEventListener("click", () => setOpen(false));
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && rail.classList.contains("open")) setOpen(false);
+        /* Esc gehört zuerst einem offenen Dialog (Suchpalette). */
+        if (e.key === "Escape" && isOpen() && !document.querySelector("dialog[open]")) setOpen(false);
       });
-      /* Navigieren aus der Schublade schließt sie. */
+      /* Navigieren aus der Schublade schließt sie. Bleibt man auf der Seite
+         (Abschnitt, Überschrift), wandert der Fokus ans Ziel statt zum Burger. */
       rail.addEventListener("click", (e) => {
         const a = (e.target as HTMLElement).closest("a");
-        if (a && window.innerWidth <= 1020) setOpen(false);
+        if (!a || !isOpen()) return;
+        const here = a.pathname === location.pathname && a.hash.length > 1;
+        setOpen(false, !here);
+        if (!here) return;
+        let id = a.hash.slice(1);
+        try {
+          id = decodeURIComponent(id);
+        } catch {}
+        focusOn(document.getElementById(id));
       });
+      /* Wird das Fenster breit, steht die Rail wieder fest: Sperre aufheben. */
+      narrow.addEventListener("change", () => {
+        if (!narrow.matches) setOpen(false, false);
+      });
+      /* Auf Hub-Seiten den aktiven Eintrag zeigen; auf Modulseiten erledigt
+         das der Abschnitts-Router. */
+      if (!document.getElementById("secNav")) reveal(current());
     </script>
   </body>
 </html>

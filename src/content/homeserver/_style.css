@@ -2,12 +2,12 @@
 
 .mx-homeserver *{box-sizing:border-box;margin:0;padding:0}
 .mx-homeserver{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1a1a;background:#fff;padding:1.5rem;line-height:1.55}
-@media(prefers-color-scheme:dark){.mx-homeserver{background:#171a20;color:#d8dce3}}
+@media screen and (prefers-color-scheme:dark){.mx-homeserver{background:#171a20;color:#d8dce3}}
 .mx-homeserver h1{font-size:21px;font-weight:600;margin-bottom:.25rem}
 .mx-homeserver .sub{font-size:12.5px;color:#888;margin-bottom:1rem}
 .mx-homeserver h2{font-size:16px;font-weight:600;margin:1.6rem 0 .7rem}
 .mx-homeserver h3{font-size:13.5px;font-weight:600;margin:1rem 0 .4rem;color:#0C447C}
-@media(prefers-color-scheme:dark){.mx-homeserver h3{color:#8fb9e3}}
+@media screen and (prefers-color-scheme:dark){.mx-homeserver h3{color:#8fb9e3}}
 .mx-homeserver p{font-size:13px;margin-bottom:.5rem}
 .mx-homeserver ul, .mx-homeserver ol{font-size:13px;margin:.3rem 0 .6rem 1.1rem}
 .mx-homeserver li{margin-bottom:.28rem}
@@ -81,13 +81,13 @@
 .mx-homeserver .check{list-style:none;margin-left:0}
 .mx-homeserver .check li{padding-left:22px;position:relative}
 .mx-homeserver .check li::before{content:"☐";position:absolute;left:0;color:#0C447C;font-size:13px}
-@media(prefers-color-scheme:dark){.mx-homeserver .check li::before{color:#8fb9e3}}
+@media screen and (prefers-color-scheme:dark){.mx-homeserver .check li::before{color:#8fb9e3}}
 
 /* glossary */
 .mx-homeserver dl{font-size:12.5px;margin:.4rem 0}
 .mx-homeserver dt{font-weight:600;margin-top:.55rem}
 .mx-homeserver dd{margin-left:0;color:#555}
-@media(prefers-color-scheme:dark){.mx-homeserver dd{color:#a7afba}}
+@media screen and (prefers-color-scheme:dark){.mx-homeserver dd{color:#a7afba}}
 
 /* calculator */
 .mx-homeserver .calc{border:1px solid #e0e0e0;border-radius:10px;padding:14px;background:#fafafa;max-width:520px;margin:.6rem 0}
@@ -98,7 +98,7 @@
 
 .mx-homeserver .legend{font-size:11.5px;color:#999;margin-top:1.2rem;padding-top:.8rem;border-top:1px solid #eee}
 
-@media(prefers-color-scheme:dark){
+@media screen and (prefers-color-scheme:dark){
 .mx-homeserver .sub, .mx-homeserver .card .cd, .mx-homeserver .legend{color:#9aa3ae}
 .mx-homeserver code{background:#262b33;border-color:#3e454f}
 .mx-homeserver pre{background:#1e2229;border-color:#3e454f}

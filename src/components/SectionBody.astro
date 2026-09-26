@@ -1,0 +1,15 @@
+---
+/* ============================================================================
+   Inhalt eines Modulabschnitts. Rendert den Abschnitt und gibt jeder
+   Überschrift schon beim Build eine feste ID (lib/anchors.mjs) — Pagefind
+   braucht sie, damit Volltext-Treffer direkt an die Fundstelle springen.
+   ========================================================================== */
+import { anchorHeadings } from "../lib/anchors.mjs";
+
+interface Props {
+  sec: string;
+}
+const html = await Astro.slots.render("default");
+---
+
+<Fragment set:html={anchorHeadings(html, Astro.props.sec)} />

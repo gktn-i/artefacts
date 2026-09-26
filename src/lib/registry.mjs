@@ -24,6 +24,10 @@ for (const hub of hubs) {
 }
 
 export const sectionCount = modules.reduce((n, m) => n + m.sections.length, 0);
+
+/* „Werkstatt, Mechatronik … und Funk" — für Texte, die alle Hubs aufzählen,
+   damit ein neuer Hub dort nicht vergessen wird. */
+export const hubNames = hubs.map((h) => h.name).join(", ").replace(/, ([^,]*)$/, " und $1");
 export const lastUpdated = modules.map((m) => m.updated).sort().at(-1);
 
 const byId = new Map(modules.map((m) => [m.id, m]));
