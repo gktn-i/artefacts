@@ -1,0 +1,57 @@
+---
+/* ============================================================================
+   404 — GitHub Pages liefert diese Seite für jede unbekannte Adresse aus.
+   Statt einer Sackgasse steht man in der Werkbank: Rail, Suche, Hubs. Aus
+   der verlorenen Adresse wird ein Suchvorschlag (/holzarbeit-alt.html →
+   „holzarbeit alt“), der die Palette gleich damit öffnet.
+   ========================================================================== */
+import Base from "../layouts/Base.astro";
+import HubTiles from "../components/HubTiles.astro";
+---
+
+<Base title="Nicht gefunden · Artefakte" description="Diese Seite gibt es in den Artefakten nicht (mehr)." notFound>
+  <div class="dash">
+    <div class="dash-kicker">404 · Seite nicht gefunden</div>
+    <h1>Diese Seite gibt es hier nicht (mehr).</h1>
+    <p class="lead">
+      Vielleicht wurde sie umbenannt oder ist in einem größeren Modul aufgegangen. Die Suche kennt jeden Abschnitt
+      und den kompletten Volltext, links liegt die ganze Bibliothek.
+    </p>
+
+    <button class="cmdbar" type="button" id="nfSearch" data-pal>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+      </svg>
+      <span class="t">Alles durchsuchen — Module, Abschnitte, Volltext …</span>
+      <kbd>⌘K</kbd>
+    </button>
+
+    <div class="rowlabel">
+      <h2>Hubs</h2>
+      <span class="ln"></span>
+    </div>
+    <HubTiles />
+  </div>
+
+  <script is:inline>
+    (function () {
+      /* <base href="/"> würde #content auf die Startseite umbiegen. */
+      var skip = document.querySelector(".skip");
+      if (skip) skip.href = location.pathname + location.search + "#content";
+      var q = location.pathname.split("/").pop() || "";
+      try { q = decodeURIComponent(q); } catch (e) {}
+      q = q
+        .replace(/\.html?$/, "")
+        .replace(/[-_.]+/g, " ")
+        .trim();
+      var b = document.getElementById("nfSearch");
+      if (!q || !b) return;
+      b.querySelector(".t").textContent = "Nach „" + q + "“ suchen …";
+      b.addEventListener("click", function (e) {
+        if (!window.PAL) return;
+        e.stopPropagation();
+        window.PAL.open(q);
+      });
+    })();
+  </script>
+</Base>

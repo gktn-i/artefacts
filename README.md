@@ -5,7 +5,7 @@ Fotografie, Messer und Funk — <https://bib.gktn.dev>.
 
 Gebaut mit [Astro](https://astro.build), Volltextsuche über [Pagefind](https://pagefind.app).
 Jeder Push auf `main` baut und deployt automatisch (GitHub Actions → Pages).
-Alle 27 Module sind native Astro-Module — alle Inhalte werden server-gerendert,
+Alle Module sind native Astro-Module — alle Inhalte werden server-gerendert,
 damit die Volltextsuche sie findet und die Seiten auch ohne JavaScript
 vollständig lesbar sind.
 
@@ -17,19 +17,33 @@ Die UI ist als **ein zusammenhängender Hub** gebaut, nicht als Seiten-Stapel:
   *Bibliothek* — alle Hubs kompakt, Modullisten klappen auf Wunsch auf
   (auf Index- und Hub-Seiten ist der aktive Hub offen); *Modul* — auf
   Modulseiten ein abgesetztes Panel mit den Abschnitten des aktiven Moduls
-  samt Gruppen und Überschriften-Subnav. Auf Mobilgeräten wird die Rail
-  zur Schublade.
+  samt Gruppen und Überschriften-Subnav. Der aktive Eintrag wird beim Laden
+  in den sichtbaren Bereich der Rail gescrollt. Auf Mobilgeräten wird die Rail
+  zur Schublade: geschlossen unsichtbar und nicht per Tab erreichbar, offen
+  sperrt sie den Rest der Seite (`inert`) und holt den Fokus zum aktiven Eintrag.
 - **Topbar**: Brotkrumen (inkl. aktivem Abschnitt) + Suche.
-- **Suchpalette (⌘K oder `/`)**: Registry-Treffer sofort, Pagefind-Volltext
-  nachgeladen.
+- **Suchpalette (⌘K/Strg K oder `/`)**: Registry-Treffer sofort, Pagefind-Volltext
+  nachgeladen. Ein Volltext-Treffer springt direkt an die Überschrift der
+  Fundstelle (Modul › Abschnitt › Überschrift). Technisch ein natives `<dialog>`
+  mit Combobox-Muster: Fokus bleibt im Fenster, Esc schließt, Screenreader lesen
+  die Auswahl mit.
+- **Verlauf wie bei echten Seiten:** Jeder Abschnittswechsel ist ein eigener
+  Eintrag, Zurück führt zum vorigen Abschnitt an die alte Leseposition,
+  Strg/⌘-Klick öffnet einen Abschnitt im neuen Tab.
+- **404-Seite** in der Shell (`src/pages/404.astro`): GitHub Pages zeigt sie für
+  jede unbekannte Adresse, mit Rail, Hubs und einer Suche nach den Wörtern der
+  verlorenen Adresse.
+- **Druck:** nur der Inhalt, immer hell, Faltkapitel aufgeklappt, Tabellen
+  passen aufs Blatt.
 - **Startseite** ist ein Schaltpult: Suche, Hub-Kacheln, Modulverzeichnis,
   letzte Aktualisierungen — kein Blockstapel.
 - Links werden per Hover vorgeladen (`prefetch` in `astro.config.mjs`),
   Seitenwechsel fühlen sich wie Panelwechsel an.
 
-Design-System: warme Papier-/Kohle-Töne (hell/dunkel folgt dem System),
-Schrift **Fraunces** (Display) · **Instrument Sans** (UI) · **IBM Plex Mono**
-(Daten). Alle Tokens liegen in `src/styles/app.css`.
+Design-System: kühles, neutrales Slate (hell/dunkel folgt dem System),
+Schrift **Archivo** (Display) · **IBM Plex Sans** (UI) · **IBM Plex Mono**
+(Daten), selbst gehostet über Fontsource (eingebunden in `src/layouts/Base.astro`).
+Alle Tokens liegen in `src/styles/app.css`.
 
 ## Struktur
 
@@ -42,8 +56,12 @@ src/content/<modul>/       Inhalte: eine .astro-Datei pro Abschnitt
                            + optional _style.css (modulspezifisches, gescopetes CSS)
 src/pages/index.astro      Startseite (Schaltpult)
 src/pages/[slug].astro     Hub-Panels + Modulseiten (URL bleibt <name>.html)
-src/layouts/Base.astro     Werkbank-Shell (Rail + Topbar + Inhalt)
-src/components/            Rail, Topbar, CutsSection, Profiles (Eignungstabellen)
+src/pages/404.astro        404-Seite in der Shell
+src/layouts/Base.astro     Werkbank-Shell (Rail + Topbar + Inhalt), Schriften, Meta
+src/components/            Rail, Topbar, HubTiles, SectionBody (Überschriften-Anker),
+                           CutsSection, Profiles (Eignungstabellen)
+src/lib/anchors.mjs        vergibt beim Build die IDs aller Überschriften (h2–h4)
+src/content.config.ts      schaltet Astros Auto-Collections für src/content/ ab
 src/styles/app.css         Design-Tokens, Shell, Palette, Dashboard, Panels,
                            Modul-Workspace, Content-System (.mx-sys)
 public/assets/mod-<id>.js  Funktions-JS einzelner Module (Rechner, Tabellen, Folds)
@@ -80,6 +98,9 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
 - **Shell liefert:** Rail mit Abschnitts-Navigation, Überschriften-Subnav mit
   Scrollspy, Hash-Router (`<name>.html#<hash>`, auch `#abschnitt--überschrift`
   und Alt-Anker über `alias`), Abschnitts-Pager, Verwandt-Leisten, Dark/Light.
+- **Anker entstehen beim Build:** Die Abschnittsüberschrift trägt die ID des
+  Abschnitts, jede h2–h4 darin `<abschnitt>--<slug>` (`src/lib/anchors.mjs`,
+  gleiches Schema wie der Router). Nur so kennt Pagefind die Fundstellen.
 - **Modul-Verhalten** (Rechner, sortierbare Tabellen, Filter, Faltabschnitte) liegt in
   `public/assets/mod-<id>.js` und wird über die `PAGE_SCRIPTS`-Map in
   `src/pages/[slug].astro` eingebunden.
@@ -128,4 +149,5 @@ npm run preview
 **Suche (⌘K):** Registry-Treffer (Hubs/Module/Abschnitte) sofort, Volltext aus dem
 Pagefind-Index nachgeladen. Nur `dist` nach `npm run build` enthält den Index.
 
-**Keine externen Abhängigkeiten zur Laufzeit** außer Google Fonts.
+**Keine externen Abhängigkeiten zur Laufzeit.** Auch die Schriften liegen auf
+der eigenen Domain, es geht keine Anfrage an Google.

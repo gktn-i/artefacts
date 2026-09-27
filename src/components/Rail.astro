@@ -58,9 +58,9 @@ const navGroups = (m: any) =>
               </svg>
             </summary>
             <div class="mods">
-              <a class={`modlink${isHubHere && !mod ? " on" : ""}`} href={h.file}>Übersicht<span class="ct">{h.sectionCount}</span></a>
+              <a class={`modlink${isHubHere && !mod ? " on" : ""}`} href={h.file} aria-current={isHubHere && !mod ? "page" : undefined}>Übersicht<span class="ct">{h.sectionCount}</span></a>
               {h.modules.map((m: any) => (
-                <a class={`modlink${mod && mod.id === m.id ? " on" : ""}`} href={m.file}>{m.name}<span class="ct">{m.sections.length || "–"}</span></a>
+                <a class={`modlink${mod && mod.id === m.id ? " on" : ""}`} href={m.file} aria-current={mod && mod.id === m.id ? "page" : undefined}>{m.name}<span class="ct">{m.sections.length || "–"}</span></a>
               ))}
             </div>
           </details>

@@ -6,7 +6,8 @@
    Alles serverseitig aus src/data/registry.json gerendert.
    ========================================================================== */
 import Base from "../layouts/Base.astro";
-import { hubs, modules, sectionCount, lastUpdated, fmtDate } from "../lib/registry.mjs";
+import HubTiles from "../components/HubTiles.astro";
+import { hubs, hubNames, modules, sectionCount, lastUpdated, fmtDate } from "../lib/registry.mjs";
 
 const recent = modules
   .slice()
@@ -16,14 +17,13 @@ const recent = modules
 
 <Base
   title="Artefakte · Werkbank"
-  description="Nachschlagewerke für Werkstatt, Mechatronik, Küche, Homelab, Foto, Messer und Funk — ein Hub für alles, mit Volltextsuche über alle Module und Abschnitte."
+  description={`Nachschlagewerke für ${hubNames} — ein Hub für alles, mit Volltextsuche über alle Module und Abschnitte.`}
 >
   <div class="dash">
     <div class="dash-kicker">bib.gktn.dev — selbstgebaute Nachschlagewerke</div>
     <h1>Die Werkbank für alles, was man zweimal nachschlägt.</h1>
     <p class="lead">
-      Sieben Hubs — <b>Werkstatt</b>, <b>Mechatronik</b>, <b>Küche</b>, <b>Homelab</b>,
-      <b>Foto&nbsp;&amp;&nbsp;Video</b>, <b>Messer</b> und <b>Funk</b> — mit {modules.length} Modulen und {sectionCount} Abschnitten.
+      {hubs.length} Hubs — {hubs.map((h, i) => <>{i === 0 ? "" : i === hubs.length - 1 ? " und " : ", "}<b>{h.name}</b></>)} — mit {modules.length} Modulen und {sectionCount} Abschnitten.
       Alles liegt in der Leiste links; die Suche kennt jeden Abschnitt und den kompletten Volltext.
     </p>
 
@@ -47,20 +47,7 @@ const recent = modules
       <span class="n">{hubs.length}</span>
       <span class="ln"></span>
     </div>
-    <div class="tiles">
-      {hubs.map((h) => (
-        <a class="tile hx" href={h.file} style={`--hcl:${h.accent.l};--hcd:${h.accent.d}`}>
-          <span class="ic" aria-hidden="true">{h.icon}</span>
-          <h3>{h.name}</h3>
-          <span class="tag">{h.tagline}</span>
-          <span class="meta">
-            <span>{h.modules.length} Module</span>
-            <span>{h.sectionCount} Abschn.</span>
-            <span class="go" aria-hidden="true">→</span>
-          </span>
-        </a>
-      ))}
-    </div>
+    <HubTiles />
 
     <div class="board">
       <section>
