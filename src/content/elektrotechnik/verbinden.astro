@@ -1,0 +1,170 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<div class="kurz"><b>Eine Verbindung muss über Jahre halten, bei Wärme, Rütteln und Feuchte.</b> Wird eine Klemme locker, steigt der Übergangswiderstand, die Stelle wird heiß, das Metall oxidiert, der Widerstand steigt weiter. So beginnen viele Schmorschäden, und zwar an der Klemme, nicht in der Leitung.</div>
+
+<h2>Welche Verbindung wofür</h2>
+<Profiles
+  label="Verbindung"
+  criteria={["Hält dauerhaft", "Verträgt Rütteln", "Wieder lösbar", "Ohne Spezialwerkzeug", "Kompakt"]}
+  items={[
+    { name: "Hebelklemme", tag: "z. B. WAGO 221", scores: [5, 4, 5, 5, 3],
+      pro: "Starr und Litze, ohne Aderendhülse, sichtbar, ob der Draht steckt. 0,14 bis 4 mm², bis 32 A.",
+      con: "Größer als eine Steckklemme. Kein Zug auf die Leitung.",
+      use: "Leuchten, Abzweigdosen, Übergang von starr auf Litze." },
+    { name: "Steckklemme", tag: "z. B. WAGO 2273", scores: [4, 3, 2, 5, 5],
+      pro: "Sehr klein, schnell, günstig.",
+      con: "Nur für starre Adern. Lösen nur durch Drehen und Ziehen, oft nur einmal.",
+      use: "Abzweig- und Gerätedosen mit NYM." },
+    { name: "Schraubklemme", tag: "Lüsterklemme, Geräteklemme", scores: [3, 2, 4, 4, 4],
+      pro: "Überall, jeder Querschnitt, in jedem Gerät.",
+      con: "Kann sich bei Temperaturwechseln lockern. Litze nur mit Aderendhülse. Anzugsmoment zählt.",
+      use: "Anschlussklemmen an Schaltern, Steckdosen, Geräten. Lose Lüsterklemmen besser durch Hebelklemmen ersetzen." },
+    { name: "Crimpverbindung", tag: "Kabelschuh, Stoßverbinder", scores: [5, 5, 2, 2, 4],
+      pro: "Gasdicht, rüttelfest, reproduzierbar. Standard in Auto, Flugzeug, Schaltschrank.",
+      con: "Braucht die passende Zange. Falsch gecrimpt hält sie nicht und sieht trotzdem gut aus.",
+      use: "Litze an Schrauben und Bolzen, 12 V, Akkus, alles was sich bewegt." },
+    { name: "Löten mit Schrumpfschlauch", scores: [4, 2, 1, 2, 5],
+      pro: "Sehr klein, guter Kontakt, billig.",
+      con: "Die Litze wird hinter der Lötstelle starr und bricht dort bei Bewegung. Nie in Schraubklemmen.",
+      use: "Platinen, Signalleitungen, Reparaturen ohne Bewegung und mit Zugentlastung." },
+  ]}
+  note="Punkte 1 bis 5, höher ist besser. Verdrillen und mit Isolierband umwickeln ist keine Verbindung, auch nicht provisorisch."
+/>
+
+<h2>Abisolieren</h2>
+<p>Die meisten Klemmfehler entstehen beim Abisolieren. Die Länge steht auf der Klemme oder auf einer Abisolierlehre auf der Rückseite des Geräts. Bei Hebel- und Steckklemmen sind es meist 11 mm.</p>
+<svg class="dg l" viewBox="0 0 680 150" role="img" aria-label="Vier Fälle beim Abisolieren: richtig bis an die Klemme, zu lang mit blankem Kupfer außen, zu kurz mit Isolierung in der Klemme, eingekerbter Draht">
+  <rect class="box" x="90" y="40" width="70" height="50" rx="4" />
+  <rect class="box" x="260" y="40" width="70" height="50" rx="4" />
+  <rect class="box" x="430" y="40" width="70" height="50" rx="4" />
+  <rect class="box" x="600" y="40" width="70" height="50" rx="4" />
+  <rect x="14" y="58" width="76" height="14" rx="3" style="fill:var(--ad-l)" />
+  <rect x="90" y="61" width="36" height="8" style="fill:#c8793c" />
+  <rect x="184" y="58" width="50" height="14" rx="3" style="fill:var(--ad-l)" />
+  <rect x="234" y="61" width="62" height="8" style="fill:#c8793c" />
+  <rect x="354" y="58" width="100" height="14" rx="3" style="fill:var(--ad-l)" />
+  <rect x="454" y="61" width="12" height="8" style="fill:#c8793c" />
+  <rect x="524" y="58" width="76" height="14" rx="3" style="fill:var(--ad-l)" />
+  <path d="M600,61 H612 L616,65 L620,61 H636 V69 H600 Z" style="fill:#c8793c" />
+  <path class="wt" d="M126,52 V78 M296,52 V78 M466,52 V78 M636,52 V78" style="stroke-dasharray:2 2" />
+  <text class="lok" x="90" y="118" text-anchor="middle">✓ richtig</text>
+  <text class="lbl" x="90" y="134" text-anchor="middle">Isolierung bis an die Klemme</text>
+  <text class="lbad" x="260" y="118" text-anchor="middle">✗ zu lang</text>
+  <text class="lbl" x="260" y="134" text-anchor="middle">blankes Kupfer außen</text>
+  <text class="lbad" x="430" y="118" text-anchor="middle">✗ zu kurz</text>
+  <text class="lbl" x="430" y="134" text-anchor="middle">Klemme greift auf Isolierung</text>
+  <text class="lbad" x="600" y="118" text-anchor="middle">✗ eingekerbt</text>
+  <text class="lbl" x="600" y="134" text-anchor="middle">bricht an der Kerbe</text>
+  <text class="lsm" x="125" y="34" text-anchor="middle">Klemme</text>
+</svg>
+<ul>
+  <li><b>Mantel:</b> mit einem Mantelabisolierer rundum anritzen und abziehen. Mit dem Cuttermesser nie längs in den Mantel schneiden: Die Klinge trifft die Aderisolierung, und das sieht man später nicht.</li>
+  <li><b>Ader:</b> mit Abisolierzange, eingestellt auf den Querschnitt. Messer, Zähne und Seitenschneider kerben den Draht, an der Kerbe bricht er beim nächsten Biegen.</li>
+  <li><b>Litze:</b> nach dem Abisolieren leicht in Schlagrichtung verdrillen, damit keine Einzeldrähte abstehen. Abgeschnittene Einzeldrähte fehlen im Querschnitt.</li>
+</ul>
+
+<h2>Aderendhülsen</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Wann</div><div class="cd">Feindrähtige Litze in jeder Schraubklemme. In Federklemmen nur, wenn der Hersteller es verlangt oder erlaubt. Starre Adern bekommen nie eine Hülse.</div></div>
+  <div class="card"><div class="ct">Welche</div><div class="cd">Passend zum Querschnitt, aufgedruckt auf Packung und Kragen. Es gibt zwei verschiedene Farbcodes am Markt, deshalb nach der Zahl gehen, nicht nach der Farbe. Zwei Adern in einer Klemme: Zwillingshülse.</div></div>
+  <div class="card"><div class="ct">Wie lang abisolieren</div><div class="cd">So lang wie der Metallteil der Hülse. Die Isolierung steckt im Kragen, vorne schaut kein Draht heraus und keiner fehlt.</div></div>
+  <div class="card"><div class="ct">Womit pressen</div><div class="cd">Aderendhülsenzange mit Trapez- oder Vierkantprofil. Mit der Flachzange gequetscht hält sie nicht und klemmt schief.</div></div>
+</div>
+
+<h2>Crimpen</h2>
+<svg class="dg l" viewBox="0 0 660 170" role="img" aria-label="Seitenansicht eines Ringkabelschuhs mit Isolierung bis an die Hülse, Litze im Sichtfenster, Crimp in der Mitte der Hülse und Isolationscrimp auf dem Mantel">
+  <rect x="20" y="70" width="170" height="22" rx="5" style="fill:var(--ad-r)" />
+  <rect class="accs" x="170" y="62" width="70" height="38" rx="6" />
+  <rect class="box" x="240" y="70" width="110" height="22" rx="2" style="stroke:var(--text)" />
+  <path class="w" d="M350,64 H420 A17,17 0 0 1 420,98 H350" />
+  <circle class="box" cx="421" cy="81" r="17" style="stroke:var(--text)" />
+  <circle class="sf" cx="421" cy="81" r="7" />
+  <rect x="240" y="75" width="118" height="12" style="fill:#c8793c;opacity:.85" />
+  <path class="acc" d="M275,62 V100 M300,62 V100" style="stroke-width:3" />
+  <path class="acc" d="M188,58 V104 M214,58 V104" style="stroke-width:2;stroke-dasharray:3 2" />
+  <path class="wt" d="M201,56 V28 H198 M288,56 V20 M354,72 V46 H400 M172,96 V130" />
+  <text class="lbl" x="20" y="32">Isolationscrimp hält die Ader</text>
+  <text class="lbl" x="288" y="14" text-anchor="middle">Leitercrimp in der Mitte</text>
+  <text class="lbl" x="404" y="50">Litze 0,5 bis 1 mm sichtbar</text>
+  <text class="lbl" x="172" y="144" text-anchor="middle">Isolierung bis an die Hülse</text>
+  <text class="lsm" x="421" y="126" text-anchor="middle">Ring für M5</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Farbe am Kabelschuh</th><th>Querschnitt</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td><span class="adn"><span class="ad r"></span>rot</span></td><td>etwa 0,5 bis 1,5 mm²</td><td>Aufdruck prüfen, Grenzen je Hersteller leicht verschieden</td></tr>
+<tr><td><span class="adn"><span class="ad n"></span>blau</span></td><td>etwa 1,5 bis 2,5 mm²</td><td>Häufigste Größe im 12-V-Bereich</td></tr>
+<tr><td><span class="adn"><span class="ad" style="--t:var(--ad-y)"></span>gelb</span></td><td>etwa 4 bis 6 mm²</td><td>Braucht eine kräftige Zange</td></tr>
+<tr><td><b>unisoliert, Rohrkabelschuh</b></td><td>ab 6 mm²</td><td>Mit Sechskantpresse, darüber Schrumpfschlauch. Für Batterie und Wechselrichter</td></tr>
+</tbody>
+</table></div>
+<div class="steps">
+  <div class="step"><h4>Kabelschuh und Zange passen zusammen</h4>Isolierte Kabelschuhe mit der Ratschenzange mit farbigen Einsätzen, offene Steckverbinder mit dem passenden Profil. Eine Zange für alles gibt es nicht.</div>
+  <div class="step"><h4>Abisolieren auf Hülsenlänge</h4>Die Litze reicht bis knapp durch die Hülse, die Isolierung stößt hinten an.</div>
+  <div class="step"><h4>Crimpen, bis die Ratsche freigibt</h4>Die Ratsche sorgt für den richtigen Druck. Nicht vorzeitig öffnen, nicht zweimal crimpen.</div>
+  <div class="step"><h4>Zugprobe</h4>Kräftig am Kabel ziehen. Rutscht es, ist die Verbindung Schrott, auch wenn sie leitet. Neu machen, nicht nachdrücken.</div>
+</div>
+
+<h2>Löten von Kabeln</h2>
+<ul>
+  <li><b>Schrumpfschlauch zuerst</b> über die Leitung schieben, dann löten. Wer es vergisst, lötet zweimal.</li>
+  <li><b>Erst mechanisch, dann elektrisch:</b> Adern parallel legen oder ineinanderstecken, dann Lot fließen lassen. Das Lot hält elektrisch, nicht mechanisch.</li>
+  <li><b>Kurz halten:</b> Das Lot zieht in die Litze. Dahinter wird sie steif und bricht an der Grenze. Deshalb Zugentlastung und Schrumpfschlauch, der über die Grenze hinausreicht.</li>
+  <li><b>Nie verzinnte Litze unter eine Schraube.</b> Zinn fließt unter Druck langsam weg, die Klemme lockert sich, die Stelle wird heiß.</li>
+</ul>
+<p class="note">Temperatur, Lot und Technik stehen im Modul <a href="loeten-referenz.html#draht">Löten</a>.</p>
+
+<h2>Stecker und Kupplungen montieren</h2>
+<svg class="dg" viewBox="-60 0 600 250" style="max-width:560px" role="img" aria-label="Innenansicht eines Schutzkontaktsteckers: Zugentlastung klemmt den Mantel, braune und blaue Ader zu den Steckerstiften, grün-gelbe Ader mit Schlaufe länger zum Schutzkontakt">
+  <path class="box" d="M110,20 H310 Q330,20 330,40 V170 Q330,190 300,196 L250,206 V236 H170 V206 L120,196 Q90,190 90,170 V40 Q90,20 110,20 Z" />
+  <rect class="sf" x="160" y="36" width="24" height="30" rx="4" /><rect class="sf" x="236" y="36" width="24" height="30" rx="4" />
+  <rect class="sf" x="190" y="26" width="40" height="14" rx="4" />
+  <rect x="178" y="178" width="64" height="72" style="fill:var(--surface-2);stroke:var(--border-strong)" />
+  <rect class="box" x="160" y="186" width="100" height="14" rx="3" style="stroke:var(--text)" />
+  <path class="aL" d="M196,178 C196,140 172,110 172,66" />
+  <path class="aN" d="M224,178 C224,140 248,110 248,66" />
+  <path class="aG" d="M210,178 C210,150 150,150 150,120 C150,90 210,100 210,40" /><path class="aY" d="M210,178 C210,150 150,150 150,120 C150,90 210,100 210,40" />
+  <path class="wt" d="M262,193 H300 M150,120 H110 M248,90 H300" />
+  <text class="lbl" x="304" y="197">Zugentlastung auf dem Mantel</text>
+  <text class="lbl" x="106" y="116" text-anchor="end">PE mit Schlaufe,</text>
+  <text class="lbl" x="106" y="128" text-anchor="end">reißt als letzter</text>
+  <text class="lbl" x="304" y="94">L und N kürzer</text>
+</svg>
+<div class="steps">
+  <div class="step"><h4>Mantel so weit entfernen, dass die Zugentlastung auf dem Mantel greift</h4>Die Zugentlastung klemmt immer den Mantel, nie die Adern.</div>
+  <div class="step"><h4>Adern ablängen: Schutzleiter länger</h4>L und N auf Länge schneiden, PE mit einer Schlaufe länger lassen. Reißt das Kabel aus dem Stecker, reißen L und N zuerst ab, der Schutzleiter hält am längsten.</div>
+  <div class="step"><h4>Anschließen</h4>Litze mit Aderendhülse, braun und blau an die beiden Stifte (beim Schuko ist die Seite egal), grün-gelb an den Schutzkontakt. Klemmschrauben fest.</div>
+  <div class="step"><h4>Zugentlastung festziehen, Gehäuse schließen, prüfen</h4>Am Kabel ziehen: nichts darf sich bewegen. Mit dem Multimeter Durchgang Schutzkontakt zu Gehäuse beim Gerät, kein Durchgang zwischen den Stiften.</div>
+</div>
+<div class="stop"><b>Nie ein Kabel mit Steckern an beiden Enden.</b> Spannung kommt immer aus einer Buchse (Kupplung, Steckdose), nie aus einem Stecker. Ein Kabel mit zwei Steckern hat nach dem Einstecken blanke, spannungsführende Stifte am anderen Ende. Das gilt auch für „Einspeisekabel“ für Notstrom oder Balkonkraftwerke.</div>
+
+<h2>Was nie geht</h2>
+<div class="gb">
+  <div class="gb-col bad"><h4>Verboten</h4><ul>
+    <li>Adern verdrillen und mit Isolierband umwickeln</li>
+    <li>Klemmen lose in Wand, Decke oder Dämmung, ohne Dose</li>
+    <li>Verzinnte Litze in Schraubklemmen</li>
+    <li>Zwei Adern unter eine Schraube, wenn die Klemme nicht dafür gemacht ist</li>
+    <li>Blankes Kupfer außerhalb der Klemme</li>
+  </ul></div>
+  <div class="gb-col good"><h4>Immer</h4><ul>
+    <li>Zupftest an jeder Ader</li>
+    <li>Klemme nach Querschnitt und Leiterart auswählen</li>
+    <li>Drehmoment laut Aufdruck: zu locker glüht, zu fest quetscht den Draht</li>
+    <li>Schutzleiter mit eigener Schraube und Zahnscheibe auf blankes Metall</li>
+    <li>Mantel bis in die Dose oder das Gehäuse</li>
+    <li>Nach dem Klemmen: Sichtprüfung, ob alle Einzeldrähte drin sind</li>
+  </ul></div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>DIN VDE 0100-520, Abschnitt 526: elektrische Verbindungen, Zugänglichkeit, keine Lötverbindungen in Schraubklemmen.</li>
+    <li>DIN 46228: Aderendhülsen. DIN EN 60352-2: lötfreie Crimpverbindungen, Prüfung und Zugkräfte.</li>
+    <li>WAGO: Datenblätter Serie 221 (0,14 bis 4 mm², 32 A, 450 V, Abisolierlänge 11 mm) und Serie 2273.</li>
+    <li>DIN VDE 0620-1: Stecker und Steckdosen für den Hausgebrauch. EN 60335-1: Befestigung und Länge des Schutzleiters in Geräten.</li>
+  </ul>
+</div>

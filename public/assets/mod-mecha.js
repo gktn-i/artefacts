@@ -271,7 +271,7 @@ var CALC = {
   ohm: function (v) {
     var u = v.u, i = v.i, r = v.r, p = v.p;
     var known = [u, i, r, p].filter(function (x) { return isFinite(x); }).length;
-    if (known < 2) return { out: "Zwei Werte eintragen — der Rest ergibt sich." };
+    if (known < 2) return { out: "Zwei Werte eintragen, der Rest ergibt sich." };
     if (!isFinite(u)) u = isFinite(i) && isFinite(r) ? i * r : isFinite(p) && isFinite(i) ? p / i : Math.sqrt(p * r);
     if (!isFinite(i)) i = isFinite(r) ? u / r : p / u;
     if (!isFinite(r)) r = u / i;
@@ -306,7 +306,7 @@ var CALC = {
       var tau = r * c, fg = 1 / (2 * Math.PI * tau);
       return {
         out: "τ = " + si(tau, "s") + "  ·  f_g = " + si(fg, "Hz") + "  ·  5τ = " + si(5 * tau, "s"),
-        hint: "Nach τ ist der Kondensator auf 63 % geladen, nach 3τ auf 95 %, nach 5τ auf 99,3 % — "
+        hint: "Nach τ ist der Kondensator auf 63 % geladen, nach 3τ auf 95 %, nach 5τ auf 99,3 %, "
           + "praktisch voll. Bei f_g ist die Amplitude auf 70,7 % (−3 dB) gefallen, die Phase um 45° gedreht. "
           + "Als Entprellglied an einem Taster: τ ≈ 10 ms ist ein guter Startwert."
       };
@@ -314,7 +314,7 @@ var CALC = {
     if (isFinite(r) && isFinite(l)) {
       var t2 = l / r, f2 = r / (2 * Math.PI * l);
       return { out: "τ = " + si(t2, "s") + "  ·  f_g = " + si(f2, "Hz"),
-        hint: "Bei einer Spule steigt der Strom mit τ = L/R. Beim Abschalten entsteht eine Spannungsspitze — "
+        hint: "Bei einer Spule steigt der Strom mit τ = L/R. Beim Abschalten entsteht eine Spannungsspitze. "
           + "Freilaufdiode nicht vergessen." };
     }
     return { out: "R und dazu C (µF) oder L (mH) eintragen." };
@@ -337,7 +337,7 @@ var CALC = {
         + "  ·  φ = " + sig(phi, 3) + "°",
       hint: (isFinite(res) ? "Resonanzfrequenz der Reihenschaltung: " + si(res, "Hz") + ". " : "")
         + "Positives φ heißt induktiv (Strom eilt nach), negatives kapazitiv (Strom eilt vor). "
-        + "Bei φ = 0 ist der Zweig rein ohmsch — genau die Resonanz."
+        + "Bei φ = 0 ist der Zweig rein ohmsch, das ist genau die Resonanz."
     };
   },
   /* --- Dezibel --- */
@@ -851,6 +851,52 @@ var CALC = {
     return { out: sig(res, 6) + "  (Basiswert: " + (val * from).toExponential(4) + ")",
       hint: "Vorsätze sind reine Zehnerpotenzen. In Datenblättern ist µ oft als „u“ geschrieben, "
         + "weil das Zeichen im ASCII fehlt." };
+  },
+  /* --- Leitung: Spannungsfall und Mindestquerschnitt (Kupfer, 20 °C) ---
+     Strombelastbarkeit bewusst vorsichtig nach der Tabelle für
+     Geräteanschlussleitungen (EN 60335-1), ab 16 mm² als Richtwert. */
+  leitung: function (v) {
+    var u = v.u, i = v.i, l = v.l;
+    var max = isFinite(v.max) && v.max > 0 ? v.max : 3;
+    var dreh = v.sys === 3;
+    if (!(u > 0) || !(i > 0) || !(l > 0)) return { out: "Spannung, Strom und einfache Länge eintragen." };
+    var RHO = 0.0175, k = dreh ? Math.sqrt(3) : 2;
+    var SIZES = [0.25, 0.5, 0.75, 1, 1.5, 2.5, 4, 6, 10, 16, 25, 35, 50];
+    var IMAX = { 0.25: 1, 0.5: 3, 0.75: 6, 1: 10, 1.5: 16, 2.5: 25, 4: 32, 6: 40, 10: 63, 16: 80, 25: 100, 35: 125, 50: 150 };
+    var du = function (a) { return k * l * i * RHO / a; };
+    var aDrop = NaN, aAmp = NaN, n;
+    for (n = 0; n < SIZES.length; n++) if (100 * du(SIZES[n]) / u <= max) { aDrop = SIZES[n]; break; }
+    for (n = 0; n < SIZES.length; n++) if (IMAX[SIZES[n]] >= i) { aAmp = SIZES[n]; break; }
+    var aRec = Math.max(isFinite(aDrop) ? aDrop : Infinity, isFinite(aAmp) ? aAmp : Infinity);
+    var chosen = typeof v.a === "number" && v.a > 0;
+    var a = chosen ? v.a : aRec;
+    var fmt = function (x) { return String(x).replace(".", ","); };
+    if (!isFinite(a)) {
+      return { out: "Mehr als 50 mm² nötig.",
+        hint: "Bei diesem Strom und dieser Länge wird das Kabel unhandlich dick und teuer. Spannung erhöhen (24 oder 48 V statt 12 V), "
+          + "Weg verkürzen oder den Verbraucher näher an die Quelle setzen." };
+    }
+    var d = du(a), pct = 100 * d / u;
+    var ploss = dreh ? 3 * i * i * l * RHO / a : i * d;
+    var s = "A = " + fmt(a) + " mm²  ·  ΔU = " + sig(d, 3) + " V (" + sig(pct, 2) + " %)  ·  Verlust " + si(ploss, "W");
+    var hint = "";
+    if (!chosen) {
+      hint += "Für höchstens " + sig(max, 2) + " % Verlust reichen " + (isFinite(aDrop) ? fmt(aDrop) + " mm²" : "keine 50 mm²")
+        + ", für " + sig(i, 3) + " A Dauerstrom braucht es mindestens " + (isFinite(aAmp) ? fmt(aAmp) + " mm²" : "mehr als 50 mm²")
+        + ". Der größere Wert gilt. ";
+    } else {
+      if (isFinite(IMAX[a]) && IMAX[a] < i) hint += "Zu dünn: " + fmt(a) + " mm² trägt dauerhaft etwa " + IMAX[a] + " A, nicht "
+        + sig(i, 3) + " A. Die Leitung wird heiß. ";
+      if (pct > max) hint += "Mehr Verlust als erlaubt: Mindestens " + (isFinite(aDrop) ? fmt(aDrop) : "über 50") + " mm² für "
+        + sig(max, 2) + " %. ";
+      if (!hint) hint += "Passt: Der Strom liegt unter der Belastbarkeit, der Verlust unter " + sig(max, 2) + " %. ";
+    }
+    if (dreh && u < 200) hint += "Bei Drehstrom die Spannung zwischen zwei Außenleitern eintragen, im Haus 400 V. ";
+    hint += "Die Sicherung muss zur Leitung passen, nicht zum Gerät: höchstens " + (IMAX[a] || "?") + " A für "
+      + fmt(a) + " mm² als Geräte- oder Projektleitung. Kupfer bei 20 °C gerechnet, warm rund 20 % mehr Verlust. "
+      + "Feste Hausinstallation bemisst der Fachbetrieb nach DIN VDE 0298-4.";
+    var komma = function (t) { return t.replace(/(\d)\.(\d)/g, "$1,$2"); };
+    return { out: komma(s), hint: komma(hint) };
   },
 
   /* ------------------------------------------------------------------

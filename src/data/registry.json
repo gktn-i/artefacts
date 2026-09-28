@@ -697,12 +697,63 @@
      ]
     },
     {
+     "id": "verkabeln",
+     "icon": "🔌",
+     "t": "Verkabeln & Installieren",
+     "d": "Kabel wählen, verlegen, klemmen, absichern und prüfen. Zuhause wie im Projekt, mit den Sicherheitsregeln vorneweg.",
+     "k": "kabel leitung verlegen verkabeln verkabelung klemme wago crimpen aderendhülse querschnitt sicherung absichern steckdose lampe schalter fi rcd sicherungskasten 230 v 12 v batterie installation elektriker",
+     "links": [
+      {
+       "m": "elektrotechnik",
+       "h": "sicherheit",
+       "t": "5 Sicherheitsregeln"
+      },
+      {
+       "m": "elektrotechnik",
+       "h": "recht",
+       "t": "Was darf ich selbst?"
+      },
+      {
+       "m": "elektrotechnik",
+       "h": "leitungen",
+       "t": "Kabel & Querschnitt"
+      },
+      {
+       "m": "elektrotechnik",
+       "h": "verlegen"
+      },
+      {
+       "m": "elektrotechnik",
+       "h": "verbinden"
+      },
+      {
+       "m": "elektrotechnik",
+       "h": "kleinspannung",
+       "t": "12 V & Akkus"
+      },
+      {
+       "m": "elektrotechnik",
+       "h": "projekte"
+      },
+      {
+       "m": "automatisierung",
+       "h": "schaltschrank",
+       "t": "Schaltschrank verdrahten"
+      }
+     ]
+    },
+    {
      "id": "rechnen",
      "icon": "🧮",
      "t": "Rechnen",
      "d": "Die Rechner des Hubs: Vorwiderstand, Teiler, Leiterbahn, PID, Antrieb, Biegung, Passung.",
      "k": "rechner berechnen ausrechnen formel umrechnen kalkulator dimensionieren auslegen",
      "links": [
+      {
+       "m": "elektrotechnik",
+       "h": "leitungen",
+       "t": "Querschnitt & Spannungsfall"
+      },
       {
        "m": "elektrotechnik",
        "h": "gleichstrom",
@@ -1046,31 +1097,104 @@
        "name": "Elektrotechnik",
        "icon": "⚡",
        "kind": "Referenz",
-       "updated": "2026-09-01",
-       "desc": "Die Gesetze, die alles Weitere voraussetzt: Gleich- und Wechselstrom, Netzwerkanalyse, Felder und Magnetik, Leistung und Drehstrom, Schaltvorgänge und Leitungen — und die elektrische Sicherheit. Mit Rechnern für die tägliche Auslegung.",
+       "updated": "2026-09-28",
+       "desc": "Elektrotechnik für zuhause und für Projekte: Sicherheitsregeln, was du selbst darfst, Hausnetz und Sicherungskasten, Kabel und Querschnitt, Leitungen verlegen, Klemmen und Crimpen, Lampen, Steckdosen und Schaltungen, 12 V und Akkus, Projekte sauber verkabeln, Prüfen und Fehlersuche. Dahinter die Theorie: Gleich- und Wechselstrom, Felder, Leistung, Drehstrom, Schaltvorgänge.",
        "tags": [
+        "elektroinstallation",
+        "hausinstallation",
+        "sicherheit",
+        "fünf sicherheitsregeln",
+        "spannungsprüfer",
+        "fi-schalter",
+        "rcd",
+        "leitungsschutzschalter",
+        "sicherungskasten",
+        "aderfarben",
+        "schutzleiter",
+        "nym",
+        "querschnitt",
+        "absicherung",
+        "spannungsfall",
+        "installationszonen",
+        "leitung verlegen",
+        "wago",
+        "klemmen",
+        "aderendhülse",
+        "crimpen",
+        "lampe anschließen",
+        "steckdose",
+        "wechselschaltung",
+        "kreuzschaltung",
+        "12 v",
+        "kleinspannung",
+        "batterie",
+        "sicherung",
+        "led-streifen",
+        "verkabelung",
+        "schutzart",
+        "ip",
+        "fehlersuche",
         "gleichstrom",
         "wechselstrom",
         "netzwerkanalyse",
-        "thévenin",
         "felder",
-        "induktion",
         "transformator",
         "leistung",
-        "blindleistung",
         "drehstrom",
-        "schaltvorgänge",
-        "leitungen",
-        "sicherheit"
+        "schaltvorgänge"
        ],
        "sections": [
         {
          "h": "start",
-         "t": "Start & Landkarte"
+         "t": "Start & Grundregeln"
+        },
+        {
+         "h": "sicherheit",
+         "t": "Sicherheit & 5 Regeln"
+        },
+        {
+         "h": "recht",
+         "t": "Selbst machen oder Fachbetrieb"
+        },
+        {
+         "h": "hausnetz",
+         "t": "Hausnetz & Sicherungskasten"
+        },
+        {
+         "h": "leitungen",
+         "t": "Kabel, Querschnitt & Absicherung"
+        },
+        {
+         "h": "verlegen",
+         "t": "Leitungen verlegen"
+        },
+        {
+         "h": "verbinden",
+         "t": "Verbinden & Klemmen"
+        },
+        {
+         "h": "schaltungen",
+         "t": "Anschließen & Schaltungen"
+        },
+        {
+         "h": "kleinspannung",
+         "t": "12 V, Akkus & Kleinspannung"
+        },
+        {
+         "h": "projekte",
+         "t": "Projekte verkabeln"
+        },
+        {
+         "h": "pruefen",
+         "t": "Prüfen & Fehlersuche"
+        },
+        {
+         "h": "faustregeln",
+         "t": "Faustregeln & Tabellen"
         },
         {
          "h": "gleichstrom",
-         "t": "Größen, Gleichstrom & Netzwerke"
+         "t": "Gleichstrom & Netzwerke"
         },
         {
          "h": "felder",
@@ -1086,42 +1210,105 @@
         },
         {
          "h": "transient",
-         "t": "Schaltvorgänge & Leitungen"
-        },
-        {
-         "h": "sicherheit",
-         "t": "Elektrische Sicherheit"
+         "t": "Schaltvorgänge & Signalleitungen"
         }
        ],
        "groups": [
         {
-         "l": "Grundlagen",
+         "l": "Start & Sicherheit",
          "sections": [
           "start",
-          "gleichstrom",
-          "felder",
-          "wechselstrom"
+          "sicherheit",
+          "recht"
          ]
         },
         {
-         "l": "Leistung & Sicherheit",
+         "l": "Zuhause",
          "sections": [
+          "hausnetz",
+          "leitungen",
+          "verlegen",
+          "verbinden",
+          "schaltungen"
+         ]
+        },
+        {
+         "l": "Projekte",
+         "sections": [
+          "kleinspannung",
+          "projekte"
+         ]
+        },
+        {
+         "l": "Prüfen & Nachschlagen",
+         "sections": [
+          "pruefen",
+          "faustregeln"
+         ]
+        },
+        {
+         "l": "Theorie",
+         "sections": [
+          "gleichstrom",
+          "felder",
+          "wechselstrom",
           "leistung",
-          "transient",
-          "sicherheit"
+          "transient"
          ]
         }
        ],
        "alias": {
+        "regeln": "start",
+        "grundregeln": "start",
+        "sicherheitsregeln": "sicherheit",
+        "erste-hilfe": "sicherheit",
+        "schutzmassnahmen": "sicherheit",
+        "darf-ich": "recht",
+        "fachbetrieb": "recht",
+        "vermieter": "recht",
+        "verteiler": "hausnetz",
+        "sicherungskasten": "hausnetz",
+        "aderfarben": "hausnetz",
+        "fi": "hausnetz",
+        "rcd": "hausnetz",
+        "kabel": "leitungen",
+        "querschnitt": "leitungen",
+        "spannungsfall": "leitungen",
+        "absicherung": "leitungen",
+        "installationszonen": "verlegen",
+        "bad": "verlegen",
+        "erdkabel": "verlegen",
+        "klemmen": "verbinden",
+        "wago": "verbinden",
+        "crimpen": "verbinden",
+        "aderendhuelse": "verbinden",
+        "lampe": "schaltungen",
+        "steckdose": "schaltungen",
+        "wechselschaltung": "schaltungen",
+        "kreuzschaltung": "schaltungen",
+        "12v": "kleinspannung",
+        "batterie": "kleinspannung",
+        "led": "kleinspannung",
+        "akku": "kleinspannung",
+        "verkabelung": "projekte",
+        "schutzart": "projekte",
+        "ip": "projekte",
+        "geraetebau": "projekte",
+        "fehlersuche": "pruefen",
+        "messen": "pruefen",
+        "fi-loest-aus": "pruefen",
+        "tabellen": "faustregeln",
+        "werte": "faustregeln",
         "groessen": "gleichstrom",
         "netzwerke": "gleichstrom",
         "komplexe": "wechselstrom",
         "drehstrom": "leistung",
-        "leitungen": "transient",
+        "schaltvorgaenge": "transient",
         "magnetik": "felder"
        },
        "related": [
-        "elektronik-101"
+        "elektronik-101",
+        "automatisierung"
        ]
       },
       {

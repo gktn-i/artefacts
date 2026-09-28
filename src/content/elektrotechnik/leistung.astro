@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Bei Wechselstrom zerfällt Leistung in drei Teile:</b> Wirkleistung P wird zu Wärme, Licht oder Bewegung, Blindleistung Q pendelt zwischen Quelle und Bauteil hin und her, Scheinleistung S ist das, was die Leitung aushalten muss. Drehstrom hängt drei solche Systeme um 120° versetzt zusammen — dann wird die Momentanleistung konstant und der Neutralleiter stromlos.</div>
+<div class="kurz"><b>Bei Wechselstrom zerfällt Leistung in drei Teile:</b> Wirkleistung P wird zu Wärme, Licht oder Bewegung, Blindleistung Q pendelt zwischen Quelle und Bauteil hin und her, Scheinleistung S ist das, was die Leitung aushalten muss. Drehstrom hängt drei solche Systeme um 120° versetzt zusammen. Dann wird die Momentanleistung konstant und der Neutralleiter stromlos.</div>
 
 <h2>Das Leistungsdreieck</h2>
 <div class="fbox">
@@ -14,30 +14,30 @@ import "./_style.css";
   <path class="badl" d="M50,150 L250,50" /><path class="badf" d="M250,50 l-11,1 l4,10 z" />
   <path class="wt" d="M85,150 a35,35 0 0 0 6,-17" />
   <text class="lbl" x="96" y="143">φ</text>
-  <text class="lbla" x="150" y="168" text-anchor="middle">P — Wirkleistung (W)</text>
-  <text class="lbl" x="258" y="104" style="fill:var(--mid)">Q — Blindleistung (var)</text>
-  <text class="lbl" x="128" y="92" style="fill:var(--bad)">S — Scheinleistung (VA)</text>
+  <text class="lbla" x="150" y="168" text-anchor="middle">P: Wirkleistung (W)</text>
+  <text class="lbl" x="258" y="104" style="fill:var(--mid)">Q: Blindleistung (var)</text>
+  <text class="lbl" x="128" y="92" style="fill:var(--bad)">S: Scheinleistung (VA)</text>
   <rect class="wt" x="238" y="138" width="12" height="12" style="fill:none" />
 </svg>
 <div class="tbl-wrap"><table style="min-width:780px">
 <thead><tr><th>Größe</th><th>Was sie beschreibt</th><th>Praktische Folge</th></tr></thead>
 <tbody>
 <tr><td><b>Wirkleistung P</b></td><td>Wird im Bauteil in eine andere Energieform umgesetzt und kommt nicht zurück</td><td>Nur sie steht auf dem Zähler eines Haushalts</td></tr>
-<tr><td><b>Blindleistung Q</b></td><td>Fließt zweimal je Periode zur Last und zurück — Energie für Felder in L und C</td><td>Verrichtet keine Arbeit, erwärmt aber die Leitung auf dem Weg</td></tr>
-<tr><td><b>Scheinleistung S</b></td><td>Produkt der Effektivwerte</td><td>Danach werden Trafo, Kabel, Sicherung und USV ausgelegt — „1000 VA“ ist nicht 1000 W</td></tr>
+<tr><td><b>Blindleistung Q</b></td><td>Fließt zweimal je Periode zur Last und zurück: Energie für Felder in L und C</td><td>Verrichtet keine Arbeit, erwärmt aber die Leitung auf dem Weg</td></tr>
+<tr><td><b>Scheinleistung S</b></td><td>Produkt der Effektivwerte</td><td>Danach werden Trafo, Kabel, Sicherung und USV ausgelegt. „1000 VA“ ist nicht 1000 W</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Warum ein 1000-VA-Notstromgerät nur 700 W liefert:</b> Die VA-Angabe ist die Belastungsgrenze der Elektronik. Wie viel davon als Wirkleistung ankommt, bestimmt der Leistungsfaktor der Last — bei cos φ = 0,7 eben 700 W. Dieselbe Rechnung gilt für Trafos und Generatoren.</div>
+<div class="tip"><b>Warum ein 1000-VA-Notstromgerät nur 700 W liefert:</b> Die VA-Angabe ist die Belastungsgrenze der Elektronik. Wie viel davon als Wirkleistung ankommt, bestimmt der Leistungsfaktor der Last, bei cos φ = 0,7 eben 700 W. Dieselbe Rechnung gilt für Trafos und Generatoren.</div>
 
 <h2>Leistungsfaktor und Kompensation</h2>
 <div class="fbox"><span class="f">λ = P / S = cos φ · Verzerrungsfaktor</span>
-<span class="l">Bei reinem Sinus ist λ = cos φ. Bei nichtlinearen Verbrauchern (Schaltnetzteil, Dimmer, Frequenzumrichter) ist der Strom kein Sinus mehr — dann liegt λ trotz kleinem φ bei 0,5–0,6.</span></div>
+<span class="l">Bei reinem Sinus ist λ = cos φ. Bei nichtlinearen Verbrauchern (Schaltnetzteil, Dimmer, Frequenzumrichter) ist der Strom kein Sinus mehr. Dann liegt λ trotz kleinem φ bei 0,5 bis 0,6.</span></div>
 <ul>
   <li><b>Aktive PFC:</b> EN IEC 61000-3-2 begrenzt die Netzoberschwingungen; für Geräte der Klasse D über 75 W ist eine PFC-Stufe praktisch unumgänglich. Sie formt die Stromaufnahme zum Sinus und bringt λ über 0,95.</li>
   <li><b>Blindstromkompensation:</b> Ein Kondensator parallel zur induktiven Last (Motor, Trafo, KVG-Leuchte) liefert die entgegengesetzte Blindleistung. <span class="formula">C = P · (tan φ₁ − tan φ₂) / (ω · U²)</span>, Ziel meist cos φ₂ = 0,95.</li>
   <li><b>Warum sich das rechnet:</b> Im Industrietarif wird Blindarbeit abgerechnet; zusätzlich sinkt der Leiterstrom und damit die I²R-Verluste.</li>
 </ul>
-<div class="warn"><b>Nicht überkompensieren:</b> Kippt die Anlage ins Kapazitive, bildet die Kompensationskapazität mit den Netzinduktivitäten einen Schwingkreis — Oberschwingungen werden dann verstärkt statt gedämpft. Deshalb regeln Kompensationsanlagen stufenweise nach, und bei hohem Oberschwingungsanteil werden die Stufen verdrosselt.</div>
+<div class="warn"><b>Nicht überkompensieren:</b> Kippt die Anlage ins Kapazitive, bildet die Kompensationskapazität mit den Netzinduktivitäten einen Schwingkreis. Oberschwingungen werden dann verstärkt statt gedämpft. Deshalb regeln Kompensationsanlagen stufenweise nach, und bei hohem Oberschwingungsanteil werden die Stufen verdrosselt.</div>
 
 <h2>Leistung rechnen: die Fälle</h2>
 <div class="tbl-wrap"><table style="min-width:780px">
@@ -58,21 +58,21 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th data-s="text">Maschine / Wandler</th><th>Typischer Wirkungsgrad</th></tr></thead>
 <tbody>
-<tr><td><b>Netztransformator klein (&lt; 50 VA)</b></td><td>70–85 % — der Leerlaufstrom dominiert</td></tr>
-<tr><td><b>Netztransformator groß</b></td><td>95–99 %</td></tr>
-<tr><td><b>Asynchronmotor (IE3, &gt; 1 kW)</b></td><td>88–95 %</td></tr>
-<tr><td><b>BLDC / PMSM</b></td><td>85–93 %</td></tr>
-<tr><td><b>Bürstenmotor, klein</b></td><td>50–75 %</td></tr>
-<tr><td><b>Li-Ion-Zelle (Lade-/Entladezyklus)</b></td><td>92–97 %</td></tr>
+<tr><td><b>Netztransformator klein (&lt; 50 VA)</b></td><td>70 bis 85 %, der Leerlaufstrom dominiert</td></tr>
+<tr><td><b>Netztransformator groß</b></td><td>95 bis 99 %</td></tr>
+<tr><td><b>Asynchronmotor (IE3, &gt; 1 kW)</b></td><td>88 bis 95 %</td></tr>
+<tr><td><b>BLDC / PMSM</b></td><td>85 bis 93 %</td></tr>
+<tr><td><b>Bürstenmotor, klein</b></td><td>50 bis 75 %</td></tr>
+<tr><td><b>Li-Ion-Zelle (Lade-/Entladezyklus)</b></td><td>92 bis 97 %</td></tr>
 </tbody>
 </table></div>
 <p class="note">Wirkungsgradklassen für Motoren: IEC 60034-30-1, Stufen IE1 bis IE5. Wirkungsgrade von Linear- und Schaltreglern stehen bei <a href="analogtechnik.html#versorgung">Linear- &amp; Schaltregler</a>, Auslegung von Antrieben unter <a href="regelung-antriebe.html#auslegung">Regelung &amp; Antriebe → Auslegung</a>.</p>
 
 <h2>Drehstrom: warum drei Phasen</h2>
 <div class="grid3">
-  <div class="card"><div class="ct">Konstante Leistung</div><div class="cd">Einphasig pulsiert die Momentanleistung mit 100 Hz und geht zweimal je Periode durch null. Symmetrischer Drehstrom summiert sich zu einem konstanten Wert — Motoren laufen ruhig und laufen von selbst an.</div></div>
+  <div class="card"><div class="ct">Konstante Leistung</div><div class="cd">Einphasig pulsiert die Momentanleistung mit 100 Hz und geht zweimal je Periode durch null. Symmetrischer Drehstrom summiert sich zu einem konstanten Wert. Motoren laufen ruhig und laufen von selbst an.</div></div>
   <div class="card"><div class="ct">Weniger Kupfer</div><div class="cd">Bei symmetrischer Last ist die Summe der drei Ströme null, der Neutralleiter führt nichts. Für dieselbe Leistung braucht es deutlich weniger Leitermaterial als bei drei getrennten Wechselstromkreisen.</div></div>
-  <div class="card"><div class="ct">Drehfeld frei Haus</div><div class="cd">Drei um 120° versetzte Wicklungen erzeugen ein umlaufendes Magnetfeld — die Grundlage des Asynchronmotors, des robustesten und billigsten Motors überhaupt.</div></div>
+  <div class="card"><div class="ct">Drehfeld frei Haus</div><div class="cd">Drei um 120° versetzte Wicklungen erzeugen ein umlaufendes Magnetfeld, die Grundlage des Asynchronmotors, des robustesten und billigsten Motors überhaupt.</div></div>
 </div>
 
 <h2>Stern und Dreieck</h2>
@@ -100,23 +100,23 @@ import "./_style.css";
 <tbody>
 <tr><td><b>Strangspannung</b></td><td>U_Strang = U_Leiter/√3 → 230 V</td><td>U_Strang = U_Leiter → 400 V</td></tr>
 <tr><td><b>Strangstrom</b></td><td>I_Strang = I_Leiter</td><td>I_Strang = I_Leiter/√3</td></tr>
-<tr><td><b>Leistung</b></td><td colspan="2">P = √3 · U_Leiter · I_Leiter · cos φ — in beiden Fällen gleich formuliert</td></tr>
-<tr><td><b>Derselbe Motor</b></td><td colspan="2">zieht im Dreieck die <b>dreifache</b> Leistung wie im Stern — darauf beruht der Stern-Dreieck-Anlauf</td></tr>
+<tr><td><b>Leistung</b></td><td colspan="2">P = √3 · U_Leiter · I_Leiter · cos φ, in beiden Fällen gleich formuliert</td></tr>
+<tr><td><b>Derselbe Motor</b></td><td colspan="2">zieht im Dreieck die <b>dreifache</b> Leistung wie im Stern. Darauf beruht der Stern-Dreieck-Anlauf</td></tr>
 <tr><td><b>Neutralleiter</b></td><td>vorhanden, führt bei Unsymmetrie Strom</td><td>gibt es nicht</td></tr>
 </tbody>
 </table></div>
-<p class="note"><b>Woher die √3 kommt:</b> Die Spannung zwischen zwei Außenleitern ist die geometrische Differenz zweier um 120° versetzter Zeiger gleicher Länge — das Ergebnis ist √3 mal so lang. 230 V · 1,732 = 398 V, gerundet die bekannten 400 V.</p>
-<div class="warn"><b>Unterbrochener Neutralleiter:</b> Bei unsymmetrischer Last verschiebt sich der Sternpunkt, sobald N fehlt. An schwach belasteten Zweigen liegen dann bis zu 400 V statt 230 V — angeschlossene Geräte sterben reihenweise. Deshalb darf der Neutralleiter in TN-Systemen nicht einzeln geschaltet oder abgesichert werden (DIN VDE 0100-530).</div>
+<p class="note"><b>Woher die √3 kommt:</b> Die Spannung zwischen zwei Außenleitern ist die geometrische Differenz zweier um 120° versetzter Zeiger gleicher Länge. Das Ergebnis ist √3 mal so lang. 230 V · 1,732 = 398 V, gerundet die bekannten 400 V.</p>
+<div class="warn"><b>Unterbrochener Neutralleiter:</b> Bei unsymmetrischer Last verschiebt sich der Sternpunkt, sobald N fehlt. An schwach belasteten Zweigen liegen dann bis zu 400 V statt 230 V. Angeschlossene Geräte sterben reihenweise. Deshalb darf der Neutralleiter in TN-Systemen nicht einzeln geschaltet oder abgesichert werden (DIN VDE 0100-530).</div>
 
 <h2>Stern-Dreieck-Anlauf</h2>
 <p>Ein Asynchronmotor zieht beim Direkteinschalten das Fünf- bis Achtfache seines Nennstroms. Der Stern-Dreieck-Anlauf startet ihn in Stern und schaltet nach wenigen Sekunden auf Dreieck.</p>
 <div class="gb">
   <div class="gb-col good"><h4>Dafür</h4><ul>
-    <li>Anlaufstrom auf ein Drittel reduziert — schont Netz und Vorsicherung</li>
+    <li>Anlaufstrom auf ein Drittel reduziert, schont Netz und Vorsicherung</li>
     <li>Sehr einfache, billige Schützschaltung; seit Jahrzehnten bewährt</li>
   </ul></div>
   <div class="gb-col bad"><h4>Dagegen</h4><ul>
-    <li>Anlaufmoment sinkt ebenfalls auf ein Drittel — bei schwerem Anlauf unbrauchbar</li>
+    <li>Anlaufmoment sinkt ebenfalls auf ein Drittel, bei schwerem Anlauf unbrauchbar</li>
     <li>Beim Umschalten entsteht eine Stromspitze</li>
     <li>Heute meist durch Sanftanlaufgerät oder Frequenzumrichter ersetzt, der zusätzlich die Drehzahl regelt</li>
   </ul></div>
@@ -127,9 +127,9 @@ import "./_style.css";
   <div class="sh">Quellen</div>
   <ul>
     <li>Albach, <i>Grundlagen der Elektrotechnik 2</i>, Kapitel Leistung im Wechselstromkreis sowie Drehstrom.</li>
-    <li>EN IEC 61000-3-2 — Grenzwerte für Oberschwingungsströme bei Geräten mit Eingangsstrom bis 16 A je Leiter.</li>
-    <li>IEC 60034-30-1 — Wirkungsgradklassen IE1 bis IE5 für Drehstrommotoren.</li>
-    <li>DIN VDE 0100-530 und -540 — Schalt- und Schutzgeräte, Anforderungen an Neutral- und Schutzleiter.</li>
-    <li>Datenblätter von Texas Instruments und Analog Devices zu Buck-Reglern: gemessene Wirkungsgradkurven über den Laststrom — die einzige belastbare Quelle für konkrete Werte.</li>
+    <li>EN IEC 61000-3-2: Grenzwerte für Oberschwingungsströme bei Geräten mit Eingangsstrom bis 16 A je Leiter.</li>
+    <li>IEC 60034-30-1: Wirkungsgradklassen IE1 bis IE5 für Drehstrommotoren.</li>
+    <li>DIN VDE 0100-530 und -540: Schalt- und Schutzgeräte, Anforderungen an Neutral- und Schutzleiter.</li>
+    <li>Datenblätter von Texas Instruments und Analog Devices zu Buck-Reglern: gemessene Wirkungsgradkurven über den Laststrom, die einzige belastbare Quelle für konkrete Werte.</li>
   </ul>
 </div>

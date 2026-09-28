@@ -81,7 +81,7 @@ vom Typ *aufgabe*, gefunden über `k`-Stichwörter). Man muss nicht mehr wissen,
 in welchem Modul etwas liegt. Der Build prüft jeden Link gegen Modul und
 Abschnitt. Bisher nutzen das der Mechatronik-Hub und der Holzwerken-Hub (Holzarbeiten, Handarbeit, Tischlerregeln).
 Hubs: 🔧 Werkstatt · ⚙️ Mechatronik · 🍳 Küche · 🪵 Holzwerken · 🖥️ Homelab ·
-📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 29 Module mit 335 Abschnitten.
+📷 Foto & Video · 🔪 Messer · 📡 Funk — zusammen 29 Module mit 345 Abschnitten.
 
 Module werden bewusst breit geschnitten: ein Thema, ein Modul. Wo früher
 Technische Mechanik, Maschinenelemente, Werkstoffkunde und Konstruktion
@@ -115,8 +115,9 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
 - **Ein Skript für viele Module:** `public/assets/mod-mecha.js` bedient alle
   Mechatronik-Module, die Technik-Module der Werkstatt, den Messer-Hub und den
   Holzwerken-Hub — Faltabschnitte, sortierbare Tabellen, Katalog-, Glossar- und
-  Projektfilter, die Rechner (darunter der § 42a-Check und der
-  Schärfwinkel-Rechner) und die PID-Simulation sowie die LoRa-Rechner des
+  Projektfilter, die Rechner (darunter der § 42a-Check, der
+  Schärfwinkel-Rechner und der Querschnitt- und Spannungsfall-Rechner der
+  Elektrotechnik) und die PID-Simulation sowie die LoRa-Rechner des
   Funk-Hubs (Airtime, Antennenlänge).
   Jeder Baustein prüft zuerst, ob seine Elemente vorkommen.
   Ein Modul kann mehrere Skripte laden (`PAGE_SCRIPTS` nimmt auch ein Array,

@@ -1,0 +1,113 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Die Schutzeinrichtung hat recht.</b> Löst ein FI oder eine Sicherung aus, gibt es einen Grund. Nicht dreimal hintereinander einschalten, nicht größer absichern, sondern den Fehler eingrenzen. Und bei eigenen Aufbauten gilt: erst messen, dann einschalten.</div>
+
+<h2>Vor dem ersten Einschalten</h2>
+<p>Für jedes eigene Projekt und nach jeder Arbeit an Leitungen. Alles ohne Spannung, mit dem Multimeter.</p>
+<ul class="chk">
+  <li><b>Sichtprüfung:</b> Jede Ader ganz in ihrer Klemme, keine abstehenden Einzeldrähte, kein blankes Kupfer außerhalb, Zugentlastung sitzt, Deckel und Abdeckungen vollständig.</li>
+  <li><b>Zupftest</b> an jeder Ader, die du angefasst hast.</li>
+  <li><b>Durchgang:</b> Jede Leitung von Ende zu Ende. Schutzleiter zu jedem berührbaren Metallteil.</li>
+  <li><b>Kein Kurzschluss:</b> Widerstand zwischen Plus und Minus bzw. L und N darf nicht nahe 0 Ω liegen. Mit angeschlossenem Verbraucher zeigt das Messgerät dessen Widerstand, das ist in Ordnung.</li>
+  <li><b>Keine Verbindung zum Schutzleiter:</b> L und N gegen PE zeigen „OL“, also unendlich.</li>
+  <li><b>Polarität:</b> Bei Gleichstrom vor dem Anstecken messen, welcher Pin Plus ist. Verpolung zerstört Elektronik in Millisekunden.</li>
+  <li><b>Sicherungswerte</b> stimmen mit dem Plan überein.</li>
+  <li><b>Erster Start begrenzt:</b> Labornetzteil mit niedriger Strombegrenzung oder kleine Sicherung. Hand am Schalter.</li>
+  <li><b>Nach zehn Minuten Betrieb:</b> Klemmen, Stecker, Netzteil und Leitungen anfassen oder mit dem Infrarotthermometer messen. Handwarm ist normal, heiß ist ein Fehler.</li>
+</ul>
+
+<h2>Die Messungen und ihre Grenzwerte</h2>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Messung</th><th>Wer, womit</th><th>Soll</th></tr></thead>
+<tbody>
+<tr><td><b>Spannung an der Steckdose</b></td><td>jeder, zweipoliger Prüfer oder Multimeter CAT II</td><td>L gegen N und L gegen PE je etwa 230 V (±10 %). N gegen PE höchstens wenige Volt</td></tr>
+<tr><td><b>FI-Prüftaste</b></td><td>jeder</td><td>FI fällt sofort ab. Tut er es nicht: Fachbetrieb, er schützt dann nicht</td></tr>
+<tr><td><b>FI-Auslösestrom und -zeit</b></td><td>Fachbetrieb, Installationstester</td><td>Auslösung spätestens bei 30 mA, schnell genug nach Norm</td></tr>
+<tr><td><b>Isolationswiderstand der Anlage</b></td><td>Fachbetrieb, 500 V Prüfspannung</td><td>mindestens 1 MΩ je Stromkreis (DIN VDE 0100-600)</td></tr>
+<tr><td><b>Schleifenimpedanz</b></td><td>Fachbetrieb</td><td>So klein, dass der LS bei einem Kurzschluss sofort auslöst</td></tr>
+<tr><td><b>Schutzleiterwiderstand eines Geräts</b></td><td>Fachbetrieb, Gerätetester</td><td>höchstens 0,3 Ω bis 5 m Leitung, plus 0,1 Ω je weitere 7,5 m, maximal 1 Ω (DIN VDE 0701-0702)</td></tr>
+<tr><td><b>Isolationswiderstand eines Geräts</b></td><td>Fachbetrieb, Gerätetester</td><td>mindestens 1 MΩ bei Schutzklasse I, 2 MΩ bei Schutzklasse II</td></tr>
+<tr><td><b>Schutzleiterstrom, Berührungsstrom</b></td><td>Fachbetrieb, Gerätetester</td><td>höchstens 3,5 mA über PE, höchstens 0,5 mA über berührbare Teile</td></tr>
+</tbody>
+</table></div>
+<p class="note">Ein Multimeter misst den Schutzleiter nur grob. Die Norm verlangt einen Prüfstrom von mindestens 200 mA, damit eine halb abgerissene Ader auffällt. Deshalb gehören Geräte- und Anlagenprüfungen in die Hand eines Betriebs mit dem passenden Tester.</p>
+
+<h2>Wenn der FI auslöst</h2>
+<svg class="dg l" viewBox="0 0 680 250" role="img" aria-label="Ablauf, wenn der FI auslöst: alle Stecker ziehen, alle Leitungsschutzschalter dahinter aus, FI ein. Fliegt er sofort, liegt der Fehler vor den Leitungsschutzschaltern. Sonst Leitungsschutzschalter einzeln einschalten: Löst er bei einem aus, liegt der Fehler in diesem Stromkreis. Hält alles, Geräte einzeln einstecken, bis das defekte gefunden ist.">
+  <rect class="badz" x="10" y="20" width="110" height="46" rx="8" />
+  <text class="lbad" x="65" y="47" text-anchor="middle">FI löst aus</text>
+  <rect class="box" x="146" y="20" width="200" height="46" rx="8" />
+  <text class="lbl" x="246" y="39" text-anchor="middle">Alle Stecker ziehen,</text>
+  <text class="lbl" x="246" y="53" text-anchor="middle">alle LS dahinter aus</text>
+  <rect class="box" x="372" y="20" width="110" height="46" rx="8" />
+  <text class="lbl" x="427" y="47" text-anchor="middle">FI einschalten</text>
+  <rect class="box" x="508" y="20" width="162" height="46" rx="8" />
+  <text class="lbl" x="589" y="39" text-anchor="middle">hält: LS einzeln</text>
+  <text class="lbl" x="589" y="53" text-anchor="middle">einschalten</text>
+  <path class="acc" d="M120,43 H140 M346,43 H366 M482,43 H502" />
+  <path class="accf" d="M146,43 l-7,-4 v8 z M372,43 l-7,-4 v8 z M508,43 l-7,-4 v8 z" />
+  <path class="acc" d="M427,66 V84 H246 V96 M560,66 V84 H448 V96 M630,66 V96 M448,152 V180 M605,152 V180" />
+  <path class="accf" d="M246,102 l-4,-7 h8 z M448,102 l-4,-7 h8 z M630,102 l-4,-7 h8 z M448,186 l-4,-7 h8 z M605,186 l-4,-7 h8 z" />
+  <rect class="badz" x="146" y="102" width="200" height="50" rx="8" />
+  <text class="lbad" x="246" y="122" text-anchor="middle">fliegt sofort: Fachbetrieb</text>
+  <text class="lbl" x="246" y="138" text-anchor="middle">Fehler vor den LS oder am N</text>
+  <rect class="badz" x="372" y="102" width="152" height="50" rx="8" />
+  <text class="lbad" x="448" y="122" text-anchor="middle">fliegt bei LS x</text>
+  <text class="lbl" x="448" y="138" text-anchor="middle">Fehler in Kreis x</text>
+  <rect class="okz" x="540" y="102" width="130" height="50" rx="8" />
+  <text class="lok" x="605" y="122" text-anchor="middle">alle LS halten:</text>
+  <text class="lbl" x="605" y="138" text-anchor="middle">Geräte einzeln rein</text>
+  <rect class="midz" x="300" y="186" width="224" height="50" rx="8" />
+  <text class="lmid" x="412" y="206" text-anchor="middle">LS x aus lassen, Fachbetrieb</text>
+  <text class="lbl" x="412" y="222" text-anchor="middle">Leitung oder festes Gerät</text>
+  <rect class="badz" x="540" y="186" width="130" height="50" rx="8" />
+  <text class="lbad" x="605" y="206" text-anchor="middle">fliegt bei Gerät y</text>
+  <text class="lbl" x="605" y="222" text-anchor="middle">Gerät defekt</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Was auslöst</th><th>Wann</th><th>Wahrscheinliche Ursache</th></tr></thead>
+<tbody>
+<tr><td><b>LS (Sicherung)</b></td><td>sofort, mit Knall oder Funken</td><td>Kurzschluss: defektes Gerät, eingeklemmtes Kabel, angebohrte Leitung, Wasser in der Dose</td></tr>
+<tr><td><b>LS (Sicherung)</b></td><td>nach Sekunden bis Minuten</td><td>Überlast: zu viele Geräte an einem Stromkreis, Heizlüfter und Wasserkocher zusammen. Oder ein Motor, der schwer anläuft</td></tr>
+<tr><td><b>FI</b></td><td>sofort beim Einschalten eines Geräts</td><td>Isolationsfehler im Gerät, meist Heizstab (Waschmaschine, Spülmaschine, Wasserkocher, Backofen)</td></tr>
+<tr><td><b>FI</b></td><td>bei Regen, Tau oder Frost</td><td>Feuchte in Außensteckdose, Außenleuchte, Gartenleitung, Kellerleitung</td></tr>
+<tr><td><b>FI</b></td><td>sporadisch, ohne Muster</td><td>Viele Geräte mit Netzteilen addieren ihre kleinen Ableitströme. Stromkreise auf mehrere FI verteilen. Auch Überspannung bei Gewitter</td></tr>
+<tr><td><b>FI</b></td><td>nach eigener Arbeit, sobald Last läuft</td><td>N und PE vertauscht oder irgendwo verbunden</td></tr>
+<tr><td><b>Hauptschalter, SLS</b></td><td>bei hoher Gesamtlast</td><td>Summe aller Stromkreise zu hoch: Herd, Durchlauferhitzer und Wallbox gleichzeitig</td></tr>
+</tbody>
+</table></div>
+
+<h2>Symptome und was dahinter steckt</h2>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Symptom</th><th>Wahrscheinliche Ursache</th><th>Was tun</th></tr></thead>
+<tbody>
+<tr><td><b>Steckdose, Stecker oder Schalter warm, braun verfärbt</b></td><td>Lose Klemme, ausgeleierte Kontakte, Übergangswiderstand</td><td>Nicht mehr benutzen, Stromkreis aus, Fachbetrieb. Das ist eine Brandquelle</td></tr>
+<tr><td><b>Kribbeln an einem Metallgehäuse</b></td><td>Isolationsfehler und fehlender oder unterbrochener Schutzleiter</td><td>Sofort vom Netz. Gerät und Steckdose prüfen lassen</td></tr>
+<tr><td><b>Mehrere Steckdosen tot, Sicherung drin</b></td><td>Unterbrechung in der Durchschleifung: lose Klemme in der letzten Steckdose, die noch geht</td><td>Stromkreis aus, dort nachsehen (Instandhaltung) oder Fachbetrieb</td></tr>
+<tr><td><b>LED glimmt im ausgeschalteten Zustand</b></td><td>Kapazitive Einkopplung im Schaltdraht, beleuchteter Schalter, oder der Schalter trennt den N</td><td>Prüfen, ob L geschaltet wird. Sonst Grundlastelement oder andere Leuchte</td></tr>
+<tr><td><b>LED flackert beim Dimmen</b></td><td>Dimmer nicht für LED, Mindestlast unterschritten, Leuchtmittel nicht dimmbar</td><td>Passenden LED-Dimmer, dimmbare Leuchtmittel</td></tr>
+<tr><td><b>Multimeter zeigt 20 bis 100 V auf abgeschalteter Leitung</b></td><td>Phantomspannung durch Kopplung mit Nachbarleitungen</td><td>Mit zweipoligem Spannungsprüfer oder LoZ-Modus gegenprüfen</td></tr>
+<tr><td><b>12 V bricht unter Last ein</b></td><td>Querschnitt zu klein, schlechte Masse, korrodierte Klemme</td><td>Spannungsfall unter Last messen, siehe unten</td></tr>
+<tr><td><b>12-V-Sicherung fliegt</b></td><td>Scheuerstelle an Blech, Anlaufstrom zu hoch, Sicherung zu klein gewählt</td><td>Leitung abgehen, Anlaufstrom prüfen. Nie einfach größer absichern</td></tr>
+</tbody>
+</table></div>
+
+<h2>Spannungsfall messen</h2>
+<p>Die beste Messung für Gleichstromanlagen und Fahrzeuge: nicht Widerstand ohne Strom, sondern Spannung unter Last. Der Verbraucher läuft, das Multimeter misst über jedes Stück Leitung einzeln.</p>
+<div class="steps">
+  <div class="step"><h4>Verbraucher einschalten</h4>Nur unter Last zeigen schlechte Verbindungen ihren Widerstand.</div>
+  <div class="step"><h4>Plusleitung messen</h4>Eine Messspitze am Pluspol der Quelle, die andere am Plus des Verbrauchers. Das Multimeter zeigt, was auf dem Weg verloren geht.</div>
+  <div class="step"><h4>Minusleitung messen</h4>Genauso vom Minus des Verbrauchers zum Minuspol der Quelle. Schlechte Massepunkte fallen hier auf.</div>
+  <div class="step"><h4>Eingrenzen</h4>Wo es viel ist, Stück für Stück weitermessen: über die Sicherung, über jeden Stecker, über jede Klemme. Faustwert: Mehr als etwa 0,2 V über einer einzelnen Verbindung ist zu viel.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>DIN VDE 0100-600: Erstprüfung von Niederspannungsanlagen (Isolationswiderstand, Schleifenimpedanz, FI-Prüfung).</li>
+    <li>DIN VDE 0701-0702: Prüfung von Geräten, Grenzwerte für Schutzleiterwiderstand, Isolationswiderstand, Schutzleiter- und Berührungsstrom.</li>
+    <li>DGUV Vorschrift 3 und DGUV Information 203-070: Wiederholungsprüfungen ortsveränderlicher Geräte.</li>
+    <li>Herstellerunterlagen von Fehlerstromschutzschaltern zu Ableitströmen und Aufteilung der Stromkreise.</li>
+  </ul>
+</div>

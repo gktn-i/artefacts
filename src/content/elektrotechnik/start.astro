@@ -1,45 +1,115 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Elektrotechnik ist die Lehre davon, was Ladung tut.</b> Drei Aussagen tragen alles: Ladung geht nicht verloren (Knotenregel), Energie geht nicht verloren (Maschenregel), jedes Bauteil hat eine feste U-I-Beziehung. Alles Weitere — Wechselstrom, Felder, Leistung, Schaltvorgänge — sind Folgerungen daraus.</div>
+<p class="lede">Elektrotechnik für den Alltag: was hinter der Steckdose passiert, wie Leitungen verlegt, geklemmt und abgesichert werden und wie du eigene Projekte so verkabelst, dass sie sicher laufen. Die Theorie steht hinten im Modul, für wenn du rechnen willst.</p>
 
-<p class="lede">Dieses Modul ist der theoretische Unterbau des ganzen Hubs. Bauteile und Schaltungen kommen erst in <a href="analogtechnik.html">Analogtechnik</a> und <a href="digitaltechnik.html">Digitaltechnik</a> — hier geht es um die Gesetze, die dort stillschweigend vorausgesetzt werden.</p>
+<div class="kurz z"><b>Erst spannungsfrei, dann anfassen.</b> Fast jede Regel in diesem Modul folgt aus drei Sätzen: Strom durch den Körper tötet. Zu viel Strom in einer Leitung brennt. Eine lose Klemme glüht.</div>
 
-<h2>Landkarte</h2>
+<h2>Welche Spannung, welche Regeln</h2>
+<p>Die wichtigste Frage bei jeder Arbeit: Mit welcher Spannung hast du es zu tun? Bis 50 V Wechsel- oder 120 V Gleichspannung (Kleinspannung) kannst du frei bauen, solange Querschnitt und Sicherung stimmen. Ab 230 V gelten andere Regeln, für dich und rechtlich.</p>
+<svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Spannungsleiter von 5 Volt bis 400 Volt mit Beispielen und der Frage, wer daran arbeiten darf">
+  <rect class="okz" x="20" y="78" width="330" height="30" rx="6" />
+  <rect class="midz" x="354" y="78" width="146" height="30" rx="6" />
+  <rect class="badz" x="504" y="78" width="136" height="30" rx="6" />
+  <text class="lok" x="185" y="97" text-anchor="middle">Kleinspannung bis 50 V~ / 120 V=</text>
+  <text class="lmid" x="427" y="97" text-anchor="middle">Netz 230 V</text>
+  <text class="lbad" x="572" y="97" text-anchor="middle">Drehstrom 400 V</text>
+  <path class="wt" d="M55,78 V60 M125,78 V60 M200,78 V60 M290,78 V60 M427,78 V60 M572,78 V60" />
+  <text class="lblb" x="55" y="36" text-anchor="middle">5 V</text>
+  <text class="lbl" x="55" y="52" text-anchor="middle">USB, Arduino</text>
+  <text class="lblb" x="125" y="36" text-anchor="middle">12 V</text>
+  <text class="lbl" x="125" y="52" text-anchor="middle">LED, Auto</text>
+  <text class="lblb" x="200" y="36" text-anchor="middle">24 V</text>
+  <text class="lbl" x="200" y="52" text-anchor="middle">Steuerung</text>
+  <text class="lblb" x="290" y="36" text-anchor="middle">48 V</text>
+  <text class="lbl" x="290" y="52" text-anchor="middle">E-Bike, PoE</text>
+  <text class="lblb" x="427" y="36" text-anchor="middle">230 V</text>
+  <text class="lbl" x="427" y="52" text-anchor="middle">Steckdose, Licht</text>
+  <text class="lblb" x="572" y="36" text-anchor="middle">400 V</text>
+  <text class="lbl" x="572" y="52" text-anchor="middle">Herd, Wallbox</text>
+  <text class="lbl" x="185" y="130" text-anchor="middle">Selbst bauen: ja.</text>
+  <text class="lbl" x="185" y="144" text-anchor="middle">Pflicht: Sicherung an der Quelle,</text>
+  <text class="lbl" x="185" y="158" text-anchor="middle">passender Querschnitt, geprüftes Netzteil</text>
+  <text class="lbl" x="427" y="130" text-anchor="middle">Geräte, Leuchte, Tausch</text>
+  <text class="lbl" x="427" y="144" text-anchor="middle">mit Sachkunde.</text>
+  <text class="lbl" x="427" y="158" text-anchor="middle">Neues: Fachbetrieb</text>
+  <text class="lbl" x="572" y="130" text-anchor="middle">Nur Fachbetrieb.</text>
+  <text class="lbl" x="572" y="144" text-anchor="middle">Wallbox: beim</text>
+  <text class="lbl" x="572" y="158" text-anchor="middle">Netzbetreiber melden</text>
+  <text class="lsm" x="20" y="190">Grenzen nach DIN VDE 0100-410. Im Bad und im Nassen gelten niedrigere Werte (12 V~ / 30 V=).</text>
+</svg>
+
+<h2>Die zwölf Grundregeln</h2>
+<div class="grid rk">
+  <div class="card"><h3>Fünf Regeln vor jedem Griff</h3><p>Freischalten, gegen Wiedereinschalten sichern, Spannungsfreiheit messen, erden wo nötig, Nachbarteile abdecken. Auch für „nur kurz“.</p></div>
+  <div class="card"><h3>Messen, nicht vermuten</h3><p>Spannungsfreiheit prüfst du mit einem zweipoligen Spannungsprüfer an allen Adern. Der Phasenprüfer-Schraubendreher zählt nicht.</p></div>
+  <div class="card"><h3>Farbe ist ein Hinweis, kein Beweis</h3><p>Im Altbau kann Rot der Schutzleiter sein und Grau Neutral- und Schutzleiter zugleich. Vor jeder Annahme messen.</p></div>
+  <div class="card"><h3>Die Sicherung schützt die Leitung</h3><p>Dich schützt der FI-Schalter mit 30 mA. Eine 16-A-Sicherung merkt den Strom durch einen Menschen gar nicht, tödlich sind schon 50 mA.</p></div>
+  <div class="card"><h3>Nie größer absichern</h3><p>Fliegt die Sicherung, ist die Last zu groß oder es gibt einen Fehler. Eine größere Sicherung macht aus der Leitung eine Heizung.</p></div>
+  <div class="card"><h3>Grün-gelb ist nur Schutzleiter</h3><p>Nie als Schaltdraht, nie abgeschnitten. Er wird zuerst angeschlossen und ist im Stecker die längste Ader.</p></div>
+  <div class="card"><h3>Jede Klemme bekommt den Zupftest</h3><p>Jede Ader nach dem Klemmen kräftig ziehen. Litze unter Schrauben nur mit Aderendhülse, nie verzinnt.</p></div>
+  <div class="card"><h3>Verbindungen gehören in Dosen</h3><p>Keine Klemme lose in der Wand, im Putz oder in der Dämmung. Jede Dose bleibt zugänglich.</p></div>
+  <div class="card"><h3>Leitungen laufen gerade</h3><p>Nur senkrecht und waagerecht, in den Installationszonen. Außerhalb davon vor dem Bohren suchen.</p></div>
+  <div class="card"><h3>Sicherung an die Quelle</h3><p>Bei 12 V und Akkus sitzt die Sicherung direkt am Pluspol. Am Verbraucher schützt sie die Leitung nicht.</p></div>
+  <div class="card"><h3>Kein Zug auf Klemmen</h3><p>Mantel bis in die Dose, Kabel im Stecker und am Gehäuse festgeklemmt. Die Klemme hält Strom, nicht Gewicht.</p></div>
+  <div class="card"><h3>Aufschreiben</h3><p>Stromkreise im Verteiler beschriften, Leitungswege vor dem Verputzen fotografieren, für jedes Projekt ein Schaltplan.</p></div>
+</div>
+
+<h2>Wo was steht</h2>
 <div class="map">
-  <a href="#gleichstrom"><div class="mt"><span class="i">🔋</span>Größen, Gleichstrom &amp; Netzwerke</div><div class="md">Einheiten, Vorsätze, E-Reihen · Ohm, Reihe/Parallel, Spannungsteiler · Kirchhoff, Thévenin, Brücke.</div></a>
-  <a href="#felder"><div class="mt"><span class="i">🧲</span>Felder, Spulen &amp; Trafos</div><div class="md">E- und B-Feld, Induktion, Sättigung, Kernmaterialien, Drosseln, Transformatoren, Ferritperlen.</div></a>
-  <a href="#wechselstrom"><div class="mt"><span class="i">〰️</span>Wechselstrom &amp; komplexe Rechnung</div><div class="md">Effektivwert, Zeigerbild, Impedanz, jω, Ortskurven — Trigonometrie wird Algebra.</div></a>
-  <a href="#leistung"><div class="mt"><span class="i">⚡</span>Leistung &amp; Drehstrom</div><div class="md">Wirk-, Blind-, Scheinleistung, PFC, Kompensation · Stern und Dreieck, 400 V aus 230 V.</div></a>
-  <a href="#transient"><div class="mt"><span class="i">📉</span>Schaltvorgänge &amp; Leitungen</div><div class="md">Zeitkonstante, Schwingkreis, Dämpfung · Querschnitt, Spannungsfall, Skin-Effekt, Wellenwiderstand.</div></a>
-  <a href="#sicherheit"><div class="mt"><span class="i">⚠️</span>Elektrische Sicherheit</div><div class="md">Wirkung auf den Menschen, Schutzklassen, SELV/PELV, RCD, Trenntrafo, Erste Hilfe.</div></a>
+  <a href="#sicherheit"><div class="mt"><span class="i">⚠️</span>Sicherheit &amp; 5 Regeln</div><div class="md">Die fünf Regeln, Spannungsprüfer, was Strom im Körper macht, Erste Hilfe</div></a>
+  <a href="#recht"><div class="mt"><span class="i">⚖️</span>Selbst machen oder Fachbetrieb</div><div class="md">Was du in Deutschland selbst darfst, Mietwohnung, Versicherung, AT und CH</div></a>
+  <a href="#hausnetz"><div class="mt"><span class="i">🏠</span>Hausnetz &amp; Sicherungskasten</div><div class="md">Vom Hausanschluss bis zur Steckdose, FI, LS, Aderfarben, Stromkreise</div></a>
+  <a href="#leitungen"><div class="mt"><span class="i">🧵</span>Kabel, Querschnitt &amp; Absicherung</div><div class="md">NYM, H07RN-F und Co., welcher Querschnitt, welche Sicherung, Spannungsfall mit Rechner</div></a>
+  <a href="#verlegen"><div class="mt"><span class="i">📐</span>Leitungen verlegen</div><div class="md">Installationszonen, Dosen, Rohre, Hohlwand, Bad, Außen und Erdkabel</div></a>
+  <a href="#verbinden"><div class="mt"><span class="i">🔗</span>Verbinden &amp; Klemmen</div><div class="md">Hebelklemme, Schraubklemme, Aderendhülse, Crimpen, Löten, Stecker montieren</div></a>
+  <a href="#schaltungen"><div class="mt"><span class="i">💡</span>Anschließen &amp; Schaltungen</div><div class="md">Lampe, Steckdose, Aus-, Wechsel-, Kreuz- und Serienschaltung, Stromstoß, Smart Home</div></a>
+  <a href="#kleinspannung"><div class="mt"><span class="i">🔋</span>12 V, Akkus &amp; Kleinspannung</div><div class="md">Netzteil wählen, Sicherungen, Batterien, LED-Streifen, Bordnetz</div></a>
+  <a href="#projekte"><div class="mt"><span class="i">🧰</span>Projekte verkabeln</div><div class="md">Planen, Farben, Beschriften, Leitungsführung, Stecker, Gehäuse und IP-Schutz</div></a>
+  <a href="#pruefen"><div class="mt"><span class="i">🔎</span>Prüfen &amp; Fehlersuche</div><div class="md">Vor dem Einschalten, FI löst aus, Sicherung fliegt, typische Fehler</div></a>
+  <a href="#faustregeln"><div class="mt"><span class="i">📏</span>Faustregeln &amp; Tabellen</div><div class="md">Alle wichtigen Zahlen auf einer Seite</div></a>
+  <a href="#gleichstrom"><div class="mt"><span class="i">🔋</span>Gleichstrom &amp; Netzwerke<span class="bg">Theorie</span></div><div class="md">Ohm, Reihe und Parallel, Teiler, Kirchhoff, Thévenin, mit Rechnern</div></a>
+  <a href="#felder"><div class="mt"><span class="i">🧲</span>Felder, Spulen &amp; Trafos<span class="bg">Theorie</span></div><div class="md">Induktion, Sättigung, Kerne, Transformator</div></a>
+  <a href="#wechselstrom"><div class="mt"><span class="i">〰️</span>Wechselstrom<span class="bg">Theorie</span></div><div class="md">Effektivwert, Zeiger, Impedanz, komplexe Rechnung</div></a>
+  <a href="#leistung"><div class="mt"><span class="i">⚡</span>Leistung &amp; Drehstrom<span class="bg">Theorie</span></div><div class="md">Wirk-, Blind-, Scheinleistung, Stern und Dreieck</div></a>
+  <a href="#transient"><div class="mt"><span class="i">📉</span>Schaltvorgänge<span class="bg">Theorie</span></div><div class="md">RC, RL, Schwingkreis, Einschaltstrom, Skin-Effekt, Wellenwiderstand</div></a>
 </div>
 
-<h2>Wie dieses Modul zum Rest des Hubs steht</h2>
+<h2>Wo du anfängst</h2>
+<div class="gb">
+  <div class="gb-col"><h4>🏠 Zuhause, 230 V</h4><ol>
+    <li><a href="#recht">Was darfst du selbst?</a></li>
+    <li><a href="#sicherheit">Die fünf Regeln</a> üben, bis sie sitzen</li>
+    <li><a href="#hausnetz">Sicherungskasten lesen</a> und Stromkreise beschriften</li>
+    <li><a href="#schaltungen">Lampe anschließen</a>, Schaltungen verstehen</li>
+    <li><a href="#pruefen">Fehler finden</a>, wenn der FI fliegt</li>
+  </ol></div>
+  <div class="gb-col"><h4>🧰 Projekt, Kleinspannung</h4><ol>
+    <li><a href="#kleinspannung">Netzteil, Akku und Sicherung</a> planen</li>
+    <li><a href="#leitungen">Querschnitt</a> nach Strom und Länge wählen</li>
+    <li><a href="#verbinden">Sauber verbinden</a>: crimpen, klemmen, schrumpfen</li>
+    <li><a href="#projekte">Verkabeln, beschriften, einbauen</a></li>
+    <li><a href="#pruefen">Prüfen vor dem ersten Einschalten</a></li>
+  </ol></div>
+</div>
+
+<div class="stop"><b>Bei 230 V gilt:</b> Planen, verstehen, Fehler eingrenzen und defekte Teile gleichartig ersetzen kannst du lernen. Neue Leitungen, neue Steckdosen, neue Stromkreise und alles im Zählerschrank macht in Deutschland ein eingetragener Elektrofachbetrieb. Die Einzelheiten stehen unter <a href="#recht">Selbst machen oder Fachbetrieb</a>. Dieses Modul ersetzt keine Ausbildung.</div>
+
+<h2>Wie dieses Modul zum Rest steht</h2>
 <div class="grid">
-  <div class="card"><div class="ct">→ <a href="analogtechnik.html">Analogtechnik</a></div><div class="cd">Sobald Halbleiter dazukommen: Diode, Transistor, OPV, Filter, Wandler, Regler, EMV.</div></div>
-  <div class="card"><div class="ct">→ <a href="digitaltechnik.html">Digitaltechnik</a></div><div class="cd">Wenn nur noch zwei Pegel zählen: Zahlen, Logik, Flipflops, Timing, Speicher.</div></div>
-  <div class="card"><div class="ct">→ <a href="regelung-antriebe.html">Regelung, Sensoren &amp; Motoren</a></div><div class="cd">Die Differentialgleichungen aus den Schaltvorgängen — allgemeiner, für jedes dynamische System.</div></div>
-  <div class="card"><div class="ct">→ <a href="mechanik.html#dynamik">Mechanik: Schwingungen</a></div><div class="cd">Der Schwingkreis und der Feder-Masse-Dämpfer sind dieselbe Gleichung mit anderen Buchstaben.</div></div>
-  <div class="card"><div class="ct">→ <a href="elektronik-grundlagen.html">Elektronik 101 (Werkstatt)</a></div><div class="cd">Der praktische Zwilling: Multimeter und Oszilloskop bedienen, messen, Fehler suchen. Hier steht das Warum, dort das Wie.</div></div>
+  <div class="card"><div class="ct">→ <a href="elektronik-grundlagen.html">Elektronik 101</a></div><div class="cd">Multimeter, Oszilloskop, Labornetzteil, Bauteile und Fehlersuche in Schaltungen. Hier Leitungen und Installation, dort Platinen und Messgeräte.</div></div>
+  <div class="card"><div class="ct">→ <a href="loeten-referenz.html">Löten</a></div><div class="cd">Lötstelle, Kolben, Temperatur, Draht. Für Kabel gilt hier: Crimpen schlägt Löten, wo es rüttelt.</div></div>
+  <div class="card"><div class="ct">→ <a href="automatisierung-robotik.html#schaltschrank">Schaltschrank</a></div><div class="cd">Hutschiene, Klemmen, Kennzeichnung nach IEC 81346, Wärme im Schrank.</div></div>
+  <div class="card"><div class="ct">→ <a href="analogtechnik.html">Analogtechnik</a></div><div class="cd">Sobald Halbleiter dazukommen: Diode, Transistor, OPV, Netzteile, EMV.</div></div>
 </div>
-
-<h2>Wenn du bei null anfängst</h2>
-<div class="steps">
-  <div class="step"><h4>Größen und Vorsätze sitzen lassen</h4>Ohne sichere Vorsätze (µ, m, k, M) rechnet man sich in jedem zweiten Beispiel um Faktor tausend daneben — das passiert auch Profis unter Zeitdruck.</div>
-  <div class="step"><h4>Gleichstromkreis bis zur Langeweile</h4>Spannungsteiler, Innenwiderstand und Leistung im Widerstand sind 80 % der Elektronik im Alltag. Thévenin ist die eine Technik, die man wirklich ständig braucht.</div>
-  <div class="step"><h4>Wechselstrom mit Zeigern, nicht mit Sinusformeln</h4>Wer RLC-Netzwerke mit Additionstheoremen rechnet, gibt auf. Zeigerbild, dann komplexe Rechnung — aus Trigonometrie wird Algebra.</div>
-  <div class="step"><h4>Felder, wenn Bauteile nicht mehr reichen</h4>Solange man Kondensatoren kauft statt baut, reichen C und L als Zahlen. Für Spulen, Störungen und Motoren führt kein Weg an den Feldern vorbei.</div>
-  <div class="step"><h4>Dann erst Halbleiter</h4>Diode, Transistor und OPV erschließen sich schnell, wenn die Netzwerkgesetze sitzen — weiter in der <a href="analogtechnik.html">Analogtechnik</a>.</div>
-</div>
-
-<div class="tip"><b>Realistische Zeitrechnung:</b> Ein Semester Grundlagen der Elektrotechnik entspricht rund 150–180 Zeitstunden inklusive Übungen. Neben dem Beruf sind das für Gleich- und Wechselstrom etwa neun bis zwölf Monate. Wer schneller vorankommen will, rechnet Aufgaben, statt Videos zu schauen.</div>
 
 <div class="srcs">
   <div class="sh">Grundlage dieses Moduls</div>
   <ul>
-    <li>Manfred Albach, <i>Grundlagen der Elektrotechnik 1 &amp; 2</i>, Pearson Studium — der Standard im deutschsprachigen Raum, sehr aufgabenlastig.</li>
-    <li><a href="https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/">MIT OpenCourseWare 6.002 — Circuits and Electronics</a>: vollständige Vorlesung mit Aufgaben, frei zugänglich.</li>
-    <li><a href="https://www.allaboutcircuits.com/textbook/">All About Circuits — Textbook</a>: kostenloses Online-Lehrbuch (DC, AC).</li>
+    <li>DIN VDE 0105-100: Betrieb von elektrischen Anlagen, darin die fünf Sicherheitsregeln.</li>
+    <li>DIN VDE 0100 (Errichten von Niederspannungsanlagen), vor allem Teil 410 (Schutz gegen elektrischen Schlag), 520 (Kabel- und Leitungsanlagen), 701 (Bad).</li>
+    <li>DIN 18015-1 bis -3: Elektrische Anlagen in Wohngebäuden, Planung, Ausstattung und Installationszonen.</li>
+    <li>Niederspannungsanschlussverordnung (NAV), § 13: wer an der Anlage hinter dem Hausanschluss arbeiten darf.</li>
+    <li>Manfred Albach, <i>Grundlagen der Elektrotechnik 1 &amp; 2</i>, Pearson Studium, für den Theorieteil.</li>
   </ul>
 </div>

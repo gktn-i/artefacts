@@ -1,2 +1,137 @@
 /* elektrotechnik — Design kommt aus dem gemeinsamen Hub-Stylesheet. */
 @import "../_mecha.css";
+
+/* Aderfarben. Hier sind Farben Information und keine Dekoration, deshalb
+   echte Kabelfarben statt Akzentfarbe: braun L, blau N, grün-gelb PE,
+   schwarz und grau für weitere Außenleiter und Schaltdrähte, rot und
+   schwarz für Plus und Minus bei Gleichstrom. Im Dunkeln etwas heller,
+   schwarz bekommt einen hellen Saum, damit die Linie sichtbar bleibt. */
+.mx-elektrotechnik {
+  --ad-l: #8a5328;
+  --ad-n: #2466c9;
+  --ad-g: #1f9446;
+  --ad-y: #e3c019;
+  --ad-s: #16181c;
+  --ad-gr: #8b929b;
+  --ad-r: #cf2f27;
+}
+@media screen and (prefers-color-scheme: dark) {
+  .mx-elektrotechnik {
+    --ad-l: #c1854f;
+    --ad-n: #6aa0f2;
+    --ad-g: #4fbf6c;
+    --ad-y: #e9d04a;
+    --ad-s: #0b0c0e;
+    --ad-gr: #a3a9b1;
+    --ad-r: #ee6a5f;
+  }
+}
+
+/* Leitungen in Schaltbildern */
+.mx-elektrotechnik svg.dg .aL,
+.mx-elektrotechnik svg.dg .aN,
+.mx-elektrotechnik svg.dg .aG,
+.mx-elektrotechnik svg.dg .aY,
+.mx-elektrotechnik svg.dg .aS,
+.mx-elektrotechnik svg.dg .aGr,
+.mx-elektrotechnik svg.dg .aR {
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mx-elektrotechnik svg.dg .aL { stroke: var(--ad-l); }
+.mx-elektrotechnik svg.dg .aN { stroke: var(--ad-n); }
+.mx-elektrotechnik svg.dg .aG { stroke: var(--ad-g); }
+/* Grün-gelb: grüne Linie, darüber gelbe Striche (.aY auf demselben Pfad). */
+.mx-elektrotechnik svg.dg .aY { stroke: var(--ad-y); stroke-dasharray: 5 5; stroke-linecap: butt; }
+.mx-elektrotechnik svg.dg .aS { stroke: var(--ad-s); }
+.mx-elektrotechnik svg.dg .aGr { stroke: var(--ad-gr); }
+.mx-elektrotechnik svg.dg .aR { stroke: var(--ad-r); }
+@media screen and (prefers-color-scheme: dark) {
+  .mx-elektrotechnik svg.dg .aS { filter: drop-shadow(0 0 1.2px rgba(255, 255, 255, 0.85)); }
+}
+.mx-elektrotechnik svg.dg .fL { fill: var(--ad-l); stroke: none; }
+.mx-elektrotechnik svg.dg .fN { fill: var(--ad-n); stroke: none; }
+.mx-elektrotechnik svg.dg .fR { fill: var(--ad-r); stroke: none; }
+
+/* Flächen: Zonen, Bereiche, Ampel */
+.mx-elektrotechnik svg.dg .zn { fill: var(--accent-soft); stroke: var(--accent-border); stroke-width: 1; }
+.mx-elektrotechnik svg.dg .okz { fill: var(--ok-bg); stroke: var(--ok-border); stroke-width: 1.2; }
+.mx-elektrotechnik svg.dg .midz { fill: var(--mid-bg); stroke: var(--mid-border); stroke-width: 1.2; }
+.mx-elektrotechnik svg.dg .badz { fill: var(--bad-bg); stroke: var(--bad-border); stroke-width: 1.2; }
+.mx-elektrotechnik svg.dg .sf { fill: var(--surface-2); stroke: var(--border-strong); stroke-width: 1.2; }
+.mx-elektrotechnik svg.dg .lok { font-family: var(--mono); font-size: 10px; font-weight: 600; fill: var(--ok-ink); stroke: none; }
+.mx-elektrotechnik svg.dg .lmid { font-family: var(--mono); font-size: 10px; font-weight: 600; fill: var(--mid-ink); stroke: none; }
+.mx-elektrotechnik svg.dg .lbad { font-family: var(--mono); font-size: 10px; font-weight: 600; fill: var(--bad-ink); stroke: none; }
+.mx-elektrotechnik svg.dg .lsm { font-family: var(--mono); font-size: 9px; fill: var(--faint); stroke: none; }
+.mx-elektrotechnik svg.dg .big { font-family: var(--mono); font-size: 22px; font-weight: 700; fill: var(--accent-ink); stroke: none; }
+
+/* Aderfarben als Farbchip im Fließtext und in Tabellen */
+.mx-elektrotechnik .ad {
+  display: inline-block;
+  width: 26px;
+  height: 11px;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  vertical-align: -1px;
+  margin-right: 7px;
+  background: var(--t, #888);
+  flex: 0 0 auto;
+}
+.mx-elektrotechnik .ad.l { --t: var(--ad-l); }
+.mx-elektrotechnik .ad.n { --t: var(--ad-n); }
+.mx-elektrotechnik .ad.s { --t: var(--ad-s); }
+.mx-elektrotechnik .ad.gr { --t: var(--ad-gr); }
+.mx-elektrotechnik .ad.r { --t: var(--ad-r); }
+.mx-elektrotechnik .ad.pe {
+  background: repeating-linear-gradient(90deg, var(--ad-g) 0 6px, var(--ad-y) 6px 12px);
+}
+.mx-elektrotechnik .adn { display: inline-flex; align-items: center; white-space: nowrap; }
+
+/* Regelkarten mit Nummer: die Sicherheitsregeln und Grundregeln */
+.mx-elektrotechnik .rk { counter-reset: rk; }
+.mx-elektrotechnik .rk .card { position: relative; padding-left: 52px; }
+.mx-elektrotechnik .rk .card::before {
+  counter-increment: rk;
+  content: counter(rk);
+  position: absolute;
+  left: 15px;
+  top: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 12px/1 var(--mono);
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+}
+.mx-elektrotechnik .rk .card h3 { margin: 0 0 4px; font-size: 14px; color: var(--text); }
+.mx-elektrotechnik .rk .card p { font-size: 12.9px; color: var(--muted); margin: 0; line-height: 1.56; }
+
+/* Checkliste: Häkchen statt Punkte */
+.mx-elektrotechnik ul.chk { list-style: none; margin-left: 0; }
+.mx-elektrotechnik ul.chk li { position: relative; padding-left: 26px; }
+.mx-elektrotechnik ul.chk li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 4px;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid var(--accent-border);
+  border-radius: 3px;
+  background: var(--surface);
+}
+
+/* Spaltentitel dürfen umbrechen (sonst schiebt „nowrap" aus _mecha.css
+   breite Tabellen über den Arbeitsbereich). Beide Klassen, weil der Bundler
+   _mecha.css hinter dieses Stylesheet sortiert. */
+.mx-elektrotechnik.mx-mecha th {
+  white-space: normal;
+  line-height: 1.3;
+  vertical-align: bottom;
+}

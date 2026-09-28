@@ -1,0 +1,184 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Geschaltet wird immer der Außenleiter L, nie der Neutralleiter.</b> Dann liegt bei ausgeschaltetem Schalter keine Spannung an der Fassung. Der Schutzleiter läuft ungeschaltet zu jeder Leuchte und jeder Steckdose, auch wenn die heutige Leuchte keinen braucht. Vor jedem Handgriff gelten die <a href="#sicherheit">fünf Regeln</a>, denn der N führt unter Umständen trotzdem Spannung.</div>
+
+<h2>Leuchte anschließen</h2>
+<svg class="dg l" viewBox="0 0 640 186" role="img" aria-label="Deckenauslass mit brauner, blauer und grün-gelber Ader, jeweils über eine Hebelklemme zur Leuchtenklemme. Braun und blau gehen zum Leuchtmittel, grün-gelb an das Metallgehäuse.">
+  <path class="w" d="M20,14 H130" />
+  <text class="lblb" x="20" y="30">aus der Decke</text>
+  <path class="aL" d="M40,56 H230" />
+  <path class="aN" d="M40,100 H230" />
+  <path class="aG" d="M40,144 H230" /><path class="aY" d="M40,144 H230" />
+  <text class="lbl" x="44" y="50">L: braun, im Altbau oft schwarz</text>
+  <text class="lbl" x="44" y="94">N: blau</text>
+  <text class="lbl" x="44" y="138">PE: grün-gelb</text>
+  <rect class="box" x="230" y="42" width="50" height="28" rx="4" style="stroke:var(--text)" /><rect class="accs" x="236" y="46" width="38" height="7" rx="2" />
+  <rect class="box" x="230" y="86" width="50" height="28" rx="4" style="stroke:var(--text)" /><rect class="accs" x="236" y="90" width="38" height="7" rx="2" />
+  <rect class="box" x="230" y="130" width="50" height="28" rx="4" style="stroke:var(--text)" /><rect class="accs" x="236" y="134" width="38" height="7" rx="2" />
+  <text class="lbl" x="255" y="180" text-anchor="middle">Hebelklemmen</text>
+  <path class="aL" d="M280,56 H436" />
+  <path class="aN" d="M280,100 H436" />
+  <path class="aG" d="M280,144 H436" /><path class="aY" d="M280,144 H436" />
+  <rect class="box" x="410" y="22" width="220" height="150" rx="12" />
+  <text class="lbl" x="620" y="162" text-anchor="end">Metallgehäuse</text>
+  <rect class="sf" x="436" y="44" width="26" height="112" rx="3" />
+  <text class="lsm" x="449" y="40" text-anchor="middle">Klemme</text>
+  <path class="aL" d="M462,56 H520 L540,70" />
+  <path class="aN" d="M462,100 H520 L540,92" />
+  <circle class="w" cx="555" cy="81" r="20" /><path class="w" d="M541,67 L569,95 M569,67 L541,95" />
+  <path class="aG" d="M462,144 H580" /><path class="aY" d="M462,144 H580" />
+  <circle class="f" cx="584" cy="144" r="5" />
+  <text class="lbl" x="580" y="130" text-anchor="middle">PE ans Gehäuse</text>
+</svg>
+<div class="steps">
+  <div class="step"><h4>Fünf Regeln, dann die Adern bestimmen</h4>Stromkreis abschalten und sichern, alle Adern gegeneinander prüfen. Normal kommen drei Adern aus der Decke: braun oder schwarz (geschalteter L), blau (N), grün-gelb (PE). Kommen mehr, hängt vermutlich eine Serienschaltung dran: zwei Schaltdrähte für zwei Leuchten oder Leuchtengruppen.</div>
+  <div class="step"><h4>Die Leuchte zuerst mechanisch befestigen</h4>Haken oder Montageplatte mit passenden Dübeln. Das Gewicht hängt nie an Klemmen oder Adern. Schwere Leuchten brauchen einen tragfähigen Haken oder Schwerlastdübel in der Rohdecke.</div>
+  <div class="step"><h4>Klemmen</h4>Je Leiter eine Hebelklemme, Adern ganz einstecken, Hebel zu, Zupftest. Schutzleiter an den Schutzleiteranschluss der Leuchte (Symbol Erdungszeichen). Leuchten der Schutzklasse II haben keinen: Dann bekommt der grün-gelbe Leiter eine eigene Klemme und bleibt isoliert in der Dose. Nie abschneiden.</div>
+  <div class="step"><h4>Verstauen, einschalten, prüfen</h4>Klemmen in die Dose oder den Baldachin, keine Ader eingequetscht. Sicherung ein, Schalter aus: Zwischen Fußkontakt der Fassung und PE darf keine Spannung anliegen. Liegt dort bei ausgeschaltetem Schalter Spannung an, schaltet der Schalter den N: Fachbetrieb.</div>
+</div>
+<div class="tip"><b>E27-Fassung:</b> Der Außenleiter gehört an den Fußkontakt in der Mitte, der Neutralleiter an das Gewinde. Dann liegt das Gewinde, das man beim Lampenwechsel berührt, auf N.</div>
+
+<h2>Die Grundschaltungen</h2>
+<p>Stromlaufpläne in aufgelöster Darstellung: oben L, unten N. Der Schutzleiter läuft zu jeder Leuchte mit und ist hier weggelassen.</p>
+<div class="grid2">
+  <div class="card">
+    <div class="ct">Ausschaltung</div>
+    <svg class="dg" viewBox="0 0 300 150" role="img" aria-label="Ausschaltung: L über einen Schalter und den Schaltdraht zur Leuchte, von dort zum N">
+      <path class="aL" d="M24,30 H90" />
+      <circle class="f" cx="90" cy="30" r="3" /><path class="w" d="M90,30 L126,15" /><circle class="f" cx="130" cy="30" r="3" />
+      <path class="aS" d="M130,30 H240 V62" />
+      <circle class="w" cx="240" cy="76" r="14" /><path class="w" d="M230,66 L250,86 M250,66 L230,86" />
+      <path class="aN" d="M240,90 V126 H24" />
+      <text class="lbl" x="14" y="34" text-anchor="middle">L</text>
+      <text class="lbl" x="14" y="130" text-anchor="middle">N</text>
+      <text class="lbl" x="110" y="52" text-anchor="middle">Schalter</text>
+      <text class="lbl" x="185" y="22" text-anchor="middle">Schaltdraht</text>
+      <text class="lbl" x="258" y="100">Leuchte</text>
+    </svg>
+    <div class="cd">Eine Leuchte, ein Schaltort. Zum Schalter gehen L hin und der Schaltdraht zurück.</div>
+  </div>
+  <div class="card">
+    <div class="ct">Serienschaltung</div>
+    <svg class="dg" viewBox="0 0 300 150" role="img" aria-label="Serienschaltung: ein Doppelschalter schaltet über zwei Schaltdrähte zwei Leuchten getrennt">
+      <path class="aL" d="M24,36 H60 V96" />
+      <circle class="f" cx="60" cy="36" r="3" /><path class="w" d="M60,36 L96,22" /><circle class="f" cx="100" cy="36" r="3" />
+      <circle class="f" cx="60" cy="96" r="3" /><path class="w" d="M60,96 H100" /><circle class="f" cx="100" cy="96" r="3" />
+      <path class="aS" d="M100,36 H222" />
+      <path class="aGr" d="M100,96 H182" />
+      <circle class="w" cx="235" cy="36" r="13" /><path class="w" d="M226,27 L244,45 M244,27 L226,45" />
+      <circle class="w" cx="195" cy="96" r="13" /><path class="w" d="M186,87 L204,105 M204,87 L186,105" />
+      <path class="aN" d="M248,36 H272 V132 H24 M208,96 H272" />
+      <text class="lbl" x="14" y="40" text-anchor="middle">L</text>
+      <text class="lbl" x="14" y="136" text-anchor="middle">N</text>
+      <text class="lbl" x="80" y="122" text-anchor="middle">Serienschalter</text>
+      <text class="lbl" x="235" y="16" text-anchor="middle">Leuchte 1</text>
+      <text class="lbl" x="195" y="76" text-anchor="middle">Leuchte 2</text>
+    </svg>
+    <div class="cd">Zwei Leuchten oder Gruppen getrennt von einem Ort, mit einer Doppelwippe. Zur Leuchte gehen zwei Schaltdrähte, N und PE.</div>
+  </div>
+  <div class="card">
+    <div class="ct">Wechselschaltung</div>
+    <svg class="dg" viewBox="0 0 300 150" role="img" aria-label="Wechselschaltung: zwei Wechselschalter, dazwischen zwei korrespondierende Drähte, danach die Leuchte">
+      <path class="aL" d="M24,70 H70" />
+      <circle class="f" cx="70" cy="70" r="3" /><path class="w" d="M70,70 L101,53" />
+      <circle class="f" cx="104" cy="50" r="3" /><circle class="f" cx="104" cy="90" r="3" />
+      <path class="aS" d="M104,50 H190" /><path class="aGr" d="M104,90 H190" />
+      <circle class="f" cx="190" cy="50" r="3" /><circle class="f" cx="190" cy="90" r="3" />
+      <path class="w" d="M224,70 L193,53" /><circle class="f" cx="224" cy="70" r="3" />
+      <path class="aS" d="M224,70 H248" />
+      <circle class="w" cx="262" cy="70" r="14" /><path class="w" d="M252,60 L272,80 M272,60 L252,80" />
+      <path class="aN" d="M276,70 H288 V132 H24" />
+      <text class="lbl" x="14" y="74" text-anchor="middle">L</text>
+      <text class="lbl" x="14" y="136" text-anchor="middle">N</text>
+      <text class="lbl" x="147" y="40" text-anchor="middle">korrespondierende Drähte</text>
+      <text class="lbl" x="87" y="114" text-anchor="middle">Wechsel 1</text>
+      <text class="lbl" x="207" y="114" text-anchor="middle">Wechsel 2</text>
+    </svg>
+    <div class="cd">Eine Leuchte von zwei Orten, etwa Flur oder Treppe. Jeder Schalter kippt um, egal wie der andere steht.</div>
+  </div>
+  <div class="card">
+    <div class="ct">Kreuzschaltung</div>
+    <svg class="dg" viewBox="0 0 340 150" role="img" aria-label="Kreuzschaltung: zwischen zwei Wechselschaltern ein Kreuzschalter, der die beiden korrespondierenden Drähte gerade durch oder über Kreuz verbindet">
+      <path class="aL" d="M20,70 H56" />
+      <circle class="f" cx="56" cy="70" r="3" /><path class="w" d="M56,70 L83,53" />
+      <circle class="f" cx="86" cy="50" r="3" /><circle class="f" cx="86" cy="90" r="3" />
+      <path class="aS" d="M86,50 H130 M190,50 H236" /><path class="aGr" d="M86,90 H130 M190,90 H236" />
+      <rect class="box" x="130" y="38" width="60" height="64" rx="4" />
+      <path class="w" d="M130,50 H190 M130,90 H190" />
+      <path class="wt" d="M130,50 L190,90 M130,90 L190,50" style="stroke-dasharray:3 3" />
+      <circle class="f" cx="236" cy="50" r="3" /><circle class="f" cx="236" cy="90" r="3" />
+      <path class="w" d="M266,70 L239,53" /><circle class="f" cx="266" cy="70" r="3" />
+      <path class="aS" d="M266,70 H286" />
+      <circle class="w" cx="300" cy="70" r="14" /><path class="w" d="M290,60 L310,80 M310,60 L290,80" />
+      <path class="aN" d="M314,70 H326 V132 H20" />
+      <text class="lbl" x="10" y="74" text-anchor="middle">L</text>
+      <text class="lbl" x="10" y="136" text-anchor="middle">N</text>
+      <text class="lbl" x="71" y="114" text-anchor="middle">Wechsel</text>
+      <text class="lbl" x="160" y="118" text-anchor="middle">Kreuz</text>
+      <text class="lbl" x="251" y="114" text-anchor="middle">Wechsel</text>
+      <text class="lsm" x="160" y="28" text-anchor="middle">je weiterer Ort ein Kreuzschalter</text>
+    </svg>
+    <div class="cd">Drei und mehr Schaltorte. Außen je ein Wechselschalter, dazwischen beliebig viele Kreuzschalter.</div>
+  </div>
+  <div class="card">
+    <div class="ct">Taster mit Stromstoßschalter</div>
+    <svg class="dg" viewBox="0 0 320 170" role="img" aria-label="Mehrere Taster parallel steuern die Spule eines Stromstoßschalters. Jeder Tastendruck schaltet dessen Kontakt um, der die Leuchte ein- oder ausschaltet.">
+      <path class="aL" d="M24,30 H290 V50 M80,30 V48 M130,30 V48 M180,30 V48" />
+      <rect class="box" x="70" y="48" width="20" height="20" rx="3" style="stroke:var(--text)" />
+      <rect class="box" x="120" y="48" width="20" height="20" rx="3" style="stroke:var(--text)" />
+      <rect class="box" x="170" y="48" width="20" height="20" rx="3" style="stroke:var(--text)" />
+      <text class="lsm" x="80" y="62" text-anchor="middle">T</text><text class="lsm" x="130" y="62" text-anchor="middle">T</text><text class="lsm" x="180" y="62" text-anchor="middle">T</text>
+      <path class="aS" d="M80,68 V90 H245 M130,68 V90 M180,68 V90" />
+      <rect class="accs" x="235" y="96" width="20" height="26" rx="2" />
+      <path class="aS" d="M245,90 V96" />
+      <path class="aN" d="M245,122 V150" />
+      <circle class="f" cx="290" cy="52" r="3" /><path class="w" d="M290,52 L302,68" /><circle class="f" cx="290" cy="72" r="3" />
+      <path class="wt" d="M255,104 H270 V62 H294" style="stroke-dasharray:3 3" />
+      <path class="aS" d="M290,72 V88" />
+      <circle class="w" cx="290" cy="100" r="12" /><path class="w" d="M282,92 L298,108 M298,92 L282,108" />
+      <path class="aN" d="M290,112 V150 H24" />
+      <text class="lbl" x="14" y="34" text-anchor="middle">L</text>
+      <text class="lbl" x="14" y="154" text-anchor="middle">N</text>
+      <text class="lbl" x="130" y="108" text-anchor="middle">beliebig viele Taster</text>
+      <text class="lbl" x="229" y="134" text-anchor="end">Stromstoßschalter</text>
+    </svg>
+    <div class="cd">Beliebig viele Schaltorte mit einfacher Verdrahtung: Alle Taster liegen parallel. Der Stromstoßschalter sitzt im Verteiler oder in einer Dose und schaltet bei jedem Druck um.</div>
+  </div>
+  <div class="card">
+    <div class="ct">Bewegungsmelder, Zeitschalter, Dimmer</div>
+    <div class="cd">Bewegungsmelder und Präsenzmelder brauchen fast immer einen N am Einbauort. Treppenlicht-Zeitschalter sitzen im Verteiler und werden über Taster gestartet. Dimmer für LED müssen ausdrücklich dafür geeignet sein, sonst flackert oder summt es: Phasenabschnitt, Mindestlast beachten, nur dimmbare Leuchtmittel.</div>
+  </div>
+</div>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Schaltung</th><th>Schalter</th><th>Zwischen Schalter und Schalter</th><th>Zur Leuchte</th></tr></thead>
+<tbody>
+<tr><td><b>Ausschaltung</b></td><td>1 Ausschalter</td><td></td><td>Schaltdraht, N, PE: 3 Adern</td></tr>
+<tr><td><b>Serienschaltung</b></td><td>1 Serienschalter</td><td></td><td>2 Schaltdrähte, N, PE: 4 Adern, meist NYM-J 5 × 1,5</td></tr>
+<tr><td><b>Wechselschaltung</b></td><td>2 Wechselschalter</td><td>2 korrespondierende Drähte</td><td>Schaltdraht, N, PE</td></tr>
+<tr><td><b>Kreuzschaltung</b></td><td>2 Wechsel- und 1 oder mehr Kreuzschalter</td><td>je 2 korrespondierende Drähte</td><td>Schaltdraht, N, PE</td></tr>
+<tr><td><b>Stromstoßschaltung</b></td><td>beliebig viele Taster</td><td>L und Steuerdraht</td><td>vom Stromstoßschalter: Schaltdraht, N, PE</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Welche Ader als Schaltdraht?</b> Am besten schwarz oder grau. Blau darf nur dann Schaltdraht oder korrespondierender Draht sein, wenn in dieser Leitung kein N gebraucht wird, und muss an beiden Enden gekennzeichnet werden, etwa mit braunem oder schwarzem Isolierband. Grün-gelb nie, unter keinen Umständen.</div>
+<div class="tip"><b>Wenn du neu planst:</b> N und PE in jede Schalterdose legen lassen (NYM-J 5 × 1,5 statt 3 × 1,5). Beleuchtete Schalter, Bewegungsmelder und Smart-Home-Aktoren brauchen den N, und nachträglich kommt er nur mit Stemmen in die Dose.</div>
+
+<h2>Steckdose tauschen</h2>
+<p>Ein defekter Einsatz, gleiches Modell, gleiche Stelle: Das ist Instandhaltung und rechtlich nicht dem Fachbetrieb vorbehalten, verlangt aber Sachkunde, siehe <a href="#recht">Selbst machen oder Fachbetrieb</a>. Sind Klemmen verschmort oder ist die Dose braun verfärbt, liegt der Fehler tiefer: Fachbetrieb.</p>
+<div class="steps">
+  <div class="step"><h4>Fünf Regeln</h4>Stromkreis freischalten, sichern, alle Adern gegeneinander prüfen. Auch Adern, die zu anderen Steckdosen weitergehen.</div>
+  <div class="step"><h4>Foto machen, dann abklemmen</h4>Welche Ader in welcher Klemme steckt. Zwei Adern je Klemme sind normal, wenn die Steckdose die nächste mitversorgt (durchgeschleift).</div>
+  <div class="step"><h4>Adern prüfen</h4>Isolierung heil, nicht verfärbt, Kupfer blank und nicht eingekerbt. Ist eine Ader angeschmort, zu kurz oder eingekerbt: nicht weiterbauen.</div>
+  <div class="step"><h4>Neuen Einsatz anschließen</h4>Wie vorher. Abisolierlänge nach der Lehre auf der Rückseite. Schutzleiter an die Klemme mit dem Erdungszeichen. Einsatz mit den Schrauben der Dose befestigen, nicht nur mit den Spreizkrallen.</div>
+  <div class="step"><h4>Messen nach dem Einschalten</h4>L gegen N 230 V, L gegen PE 230 V, N gegen PE fast 0 V. Stimmt eins davon nicht, wieder ausschalten und suchen. Löst der FI aus, sobald ein Gerät läuft, sind N und PE vertauscht oder verbunden. Die Messung allein zeigt das nicht.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen</div>
+  <ul>
+    <li>DIN VDE 0100-510 und -559: Kennzeichnung der Leiter, Leuchten und Beleuchtungsanlagen, Anschluss von E27-Fassungen.</li>
+    <li>DIN EN 60669-1: Schalter für Haushalt und ähnliche Installationen (Ausschalter, Serien-, Wechsel- und Kreuzschalter).</li>
+    <li>DIN 18015-2: Ausstattung, u. a. Anzahl und Anordnung von Schaltern und Steckdosen.</li>
+    <li>Herstellerunterlagen Stromstoßschalter und LED-Dimmer (Eltako, Busch-Jaeger, Gira): Mindestlast, Phasenab- und -anschnitt.</li>
+  </ul>
+</div>

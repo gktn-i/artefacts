@@ -1,7 +1,7 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Der Gleichstromkreis ist 80 % der Elektronik im Alltag.</b> Sieben Basisgrößen, zwei Kirchhoff-Gesetze und das Ohmsche Gesetz reichen für fast jede Schaltung — der Rest ist Buchhaltung. Wer Vorsätze und Thévenin sicher beherrscht, spart sich die Hälfte aller Rechen- und Denkfehler.</div>
+<div class="kurz"><b>Der Gleichstromkreis ist 80 % der Elektronik im Alltag.</b> Sieben Basisgrößen, zwei Kirchhoff-Gesetze und das Ohmsche Gesetz reichen für fast jede Schaltung. Der Rest ist Buchhaltung. Wer Vorsätze und Thévenin sicher beherrscht, spart sich die Hälfte aller Rechen- und Denkfehler.</div>
 
 <h2>Größen, Einheiten, Vorsätze</h2>
 <div class="tbl-wrap"><table style="min-width:820px">
@@ -29,12 +29,12 @@ import "./_style.css";
     <div><label>Wert</label><input data-k="wert" type="text" placeholder="4700" /></div>
     <div><label>von</label><select data-k="von">
       <option value="1000000">Mega</option><option value="1000">kilo</option>
-      <option value="1" selected>—</option><option value="0.001">milli</option>
+      <option value="1" selected>ohne</option><option value="0.001">milli</option>
       <option value="0.000001">mikro</option><option value="0.000000001">nano</option>
       <option value="0.000000000001">piko</option></select></div>
     <div><label>nach</label><select data-k="nach">
       <option value="1000000">Mega</option><option value="1000">kilo</option>
-      <option value="1">—</option><option value="0.001">milli</option>
+      <option value="1">ohne</option><option value="0.001">milli</option>
       <option value="0.000001" selected>mikro</option><option value="0.000000001">nano</option>
       <option value="0.000000000001">piko</option></select></div>
   </div>
@@ -67,10 +67,10 @@ import "./_style.css";
 <h2>Ohmsches Gesetz, Leistung, Temperatur</h2>
 <div class="fbox">
   <span class="f">U = R · I&nbsp;&nbsp;&nbsp;&nbsp;P = U · I = I²·R = U²/R</span>
-  <span class="l">Vier Größen, zwei Gleichungen — zwei bekannte Werte reichen immer.</span>
+  <span class="l">Vier Größen, zwei Gleichungen: Zwei bekannte Werte reichen immer.</span>
 </div>
 <div class="calc" data-calc="ohm">
-  <h4>Ohm-Rechner — zwei beliebige Werte genügen</h4>
+  <h4>Ohm-Rechner: zwei beliebige Werte genügen</h4>
   <div class="row">
     <div><label>U in V</label><input data-k="u" type="number" step="any" placeholder="5" /></div>
     <div><label>I in A</label><input data-k="i" type="number" step="any" placeholder="0.02" /></div>
@@ -81,7 +81,7 @@ import "./_style.css";
   <div class="hint" data-hint hidden></div>
 </div>
 <div class="fbox"><span class="f">R(ϑ) = R₂₀ · [1 + α · (ϑ − 20 °C)]&nbsp;&nbsp;mit α_Cu ≈ 0,0039 / K</span>
-<span class="l">Metalle werden warm hochohmiger, Halbleiter meist niederohmiger. Eine Cu-Wicklung bei 100 °C hat ~31 % mehr Widerstand — so misst man Wicklungstemperaturen ohne Sensor.</span></div>
+<span class="l">Metalle werden warm hochohmiger, Halbleiter meist niederohmiger. Eine Cu-Wicklung bei 100 °C hat ~31 % mehr Widerstand. So misst man Wicklungstemperaturen ohne Sensor.</span></div>
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th>Material</th><th>ρ bei 20 °C in Ω·mm²/m</th><th>α in 1/K</th><th>Bemerkung</th></tr></thead>
 <tbody>
@@ -109,7 +109,7 @@ import "./_style.css";
       <text class="lbla" x="118" y="122">I überall gleich</text>
     </svg>
     <ul>
-      <li><span class="formula">R = R1 + R2 + …</span> — größer als der größte Einzelwert</li>
+      <li><span class="formula">R = R1 + R2 + …</span>, größer als der größte Einzelwert</li>
       <li>Spannungen teilen sich im Verhältnis der Widerstände</li>
       <li>Ein Bauteil fällt aus → der ganze Zweig ist tot</li>
     </ul>
@@ -127,7 +127,7 @@ import "./_style.css";
       <text class="lbla" x="115" y="122" text-anchor="middle">U überall gleich</text>
     </svg>
     <ul>
-      <li><span class="formula">1/R = 1/R1 + 1/R2 + …</span> — kleiner als der kleinste Einzelwert</li>
+      <li><span class="formula">1/R = 1/R1 + 1/R2 + …</span>, kleiner als der kleinste Einzelwert</li>
       <li>Zwei Widerstände: <span class="formula">R = R1·R2/(R1+R2)</span>; N gleiche: R/N</li>
       <li>Ein Zweig fällt aus → die anderen laufen weiter</li>
     </ul>
@@ -147,7 +147,7 @@ import "./_style.css";
 
 <h2>Spannungsteiler und Innenwiderstand</h2>
 <div class="fbox"><span class="f">U_aus = U_ein · R2 / (R1 + R2)&nbsp;&nbsp;·&nbsp;&nbsp;U_klemme = U₀ − I · R_i</span>
-<span class="l">Der Teiler gilt nur unbelastet — eine Last liegt parallel zu R2. Faustregel: Querstrom ≥ 10 × Laststrom. Jede reale Quelle hat einen Innenwiderstand R_i (Alkaline AA ≈ 150–300 mΩ, Li-Ion 18650 ≈ 20–80 mΩ) — deshalb bricht die Batterie unter Last ein.</span></div>
+<span class="l">Der Teiler gilt nur unbelastet, denn eine Last liegt parallel zu R2. Faustregel: Querstrom ≥ 10 × Laststrom. Jede reale Quelle hat einen Innenwiderstand R_i (Alkaline AA ≈ 150 bis 300 mΩ, Li-Ion 18650 ≈ 20 bis 80 mΩ). Deshalb bricht die Batterie unter Last ein.</span></div>
 <div class="calc" data-calc="teiler">
   <h4>Spannungsteiler mit und ohne Last</h4>
   <div class="row">
@@ -159,14 +159,14 @@ import "./_style.css";
   <div class="out" data-out></div>
   <div class="hint" data-hint hidden></div>
 </div>
-<div class="stop"><b>Der Klassiker:</b> Ein Spannungsteiler ist keine Spannungsversorgung. Wer aus 12 V mit zwei Widerständen 5 V für einen Mikrocontroller macht, bekommt beim ersten Lastwechsel Reset-Schleifen — dafür gehört ein Regler hin, siehe <a href="analogtechnik.html#versorgung">Linear- &amp; Schaltregler</a>. Teiler sind für <b>Messsignale</b> und <b>Referenzen</b> da.</div>
+<div class="stop"><b>Der Klassiker:</b> Ein Spannungsteiler ist keine Spannungsversorgung. Wer aus 12 V mit zwei Widerständen 5 V für einen Mikrocontroller macht, bekommt beim ersten Lastwechsel Reset-Schleifen. Dafür gehört ein Regler hin, siehe <a href="analogtechnik.html#versorgung">Linear- &amp; Schaltregler</a>. Teiler sind für <b>Messsignale</b> und <b>Referenzen</b> da.</div>
 <div class="gb">
   <div class="gb-col good"><h4>Leistungsanpassung (R_Last = R_i) sinnvoll</h4><ul>
     <li>HF und Antennen: 50 Ω überall, Reflexionen vermeiden</li>
     <li>Kleinsignalübertragung, bei der jedes Mikrowatt zählt</li>
   </ul></div>
   <div class="gb-col bad"><h4>Leistungsanpassung falsch</h4><ul>
-    <li>Jede Energieversorgung: Wirkungsgrad wäre nur 50 % — dort will man R_Last ≫ R_i</li>
+    <li>Jede Energieversorgung: Wirkungsgrad wäre nur 50 %. Dort will man R_Last ≫ R_i</li>
     <li>Digitale Signale auf kurzen Leitungen: der Pegel zählt, nicht die Leistung</li>
   </ul></div>
 </div>
@@ -175,7 +175,7 @@ import "./_style.css";
 <div class="gb">
   <div class="gb-col">
     <h4>Knotenregel (1. Kirchhoff)</h4>
-    <p>Σ zufließende = Σ abfließende Ströme — Ladung sammelt sich nirgends an.</p>
+    <p>Σ zufließende = Σ abfließende Ströme: Ladung sammelt sich nirgends an.</p>
     <svg class="dg m" viewBox="0 0 300 100" role="img" aria-label="Knotenregel: 300 Milliampere hinein, 100 und 200 heraus">
       <path class="w" d="M20,50 H130 M130,50 L250,22 M130,50 L250,78" />
       <circle class="f" cx="130" cy="50" r="4" />
@@ -190,7 +190,7 @@ import "./_style.css";
   </div>
   <div class="gb-col">
     <h4>Maschenregel (2. Kirchhoff)</h4>
-    <p>Σ aller Spannungen im Umlauf ist null — Energieerhaltung.</p>
+    <p>Σ aller Spannungen im Umlauf ist null. Das ist die Energieerhaltung.</p>
     <svg class="dg m" viewBox="0 0 300 100" role="img" aria-label="Maschenregel: 5 Volt Quelle, 2 Volt an der LED, 3 Volt am Widerstand">
       <path class="w" d="M40,22 H120 M154,22 H250 M250,22 V78 M250,78 H40 M40,78 V50 M40,44 V22" />
       <rect class="box" x="120" y="14" width="34" height="16" rx="2" />
@@ -206,7 +206,7 @@ import "./_style.css";
 <ul>
   <li><b>Knotenpotentialverfahren:</b> k − 1 Gleichungen; Standard in jedem SPICE-Simulator (ngspice, LTspice, KiCad).</li>
   <li><b>Maschenstromverfahren:</b> z − k + 1 Gleichungen; von Hand oft schneller bei wenigen Maschen und Spannungsquellen.</li>
-  <li><b>Überlagerungssatz:</b> Quellen einzeln rechnen, Ergebnisse addieren (Spannungsquellen kurzschließen, Stromquellen auftrennen). Gilt nur linear — und <b>nie für Leistungen</b>, weil P quadratisch ist.</li>
+  <li><b>Überlagerungssatz:</b> Quellen einzeln rechnen, Ergebnisse addieren (Spannungsquellen kurzschließen, Stromquellen auftrennen). Gilt nur linear und <b>nie für Leistungen</b>, weil P quadratisch ist.</li>
   <li><b>Stern-Dreieck-Umwandlung:</b> für Netze, die sich nicht in Reihe/Parallel zerlegen lassen: R₁ = R₁₂·R₃₁/(R₁₂+R₂₃+R₃₁) bzw. R₁₂ = (R₁R₂+R₂R₃+R₃R₁)/R₃.</li>
 </ul>
 
@@ -236,9 +236,9 @@ import "./_style.css";
   <div class="sh">Quellen</div>
   <ul>
     <li>Albach, <i>Grundlagen der Elektrotechnik 1</i>, Kapitel Gleichstromnetzwerke und Netzwerkanalyse.</li>
-    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 1 — Thévenin in der praktischen Anwendung.</li>
-    <li><a href="https://www.bipm.org/en/publications/si-brochure">BIPM — SI Brochure, 9. Auflage</a> und <a href="https://physics.nist.gov/cuu/Constants/">NIST CODATA</a> — Einheiten und Konstanten.</li>
-    <li>IEC 60063 — Vorzugszahlenreihen für Widerstände und Kondensatoren (E-Reihen).</li>
-    <li><a href="https://www.allaboutcircuits.com/textbook/direct-current/">All About Circuits — DC Circuits</a>; <a href="https://ngspice.sourceforge.io/docs.html">ngspice-Dokumentation</a> (Modified Nodal Analysis).</li>
+    <li>Horowitz &amp; Hill, <i>The Art of Electronics</i>, 3rd ed., Kapitel 1: Thévenin in der praktischen Anwendung.</li>
+    <li><a href="https://www.bipm.org/en/publications/si-brochure">BIPM: SI Brochure, 9. Auflage</a> und <a href="https://physics.nist.gov/cuu/Constants/">NIST CODATA</a>: Einheiten und Konstanten.</li>
+    <li>IEC 60063: Vorzugszahlenreihen für Widerstände und Kondensatoren (E-Reihen).</li>
+    <li><a href="https://www.allaboutcircuits.com/textbook/direct-current/">All About Circuits: DC Circuits</a>; <a href="https://ngspice.sourceforge.io/docs.html">ngspice-Dokumentation</a> (Modified Nodal Analysis).</li>
   </ul>
 </div>
