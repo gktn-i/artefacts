@@ -4,18 +4,19 @@ import "./_style.css";
 <div class="kurz"><b>Die Schutzeinrichtung hat recht.</b> Löst ein FI oder eine Sicherung aus, gibt es einen Grund. Nicht dreimal hintereinander einschalten, nicht größer absichern, sondern den Fehler eingrenzen. Und bei eigenen Aufbauten gilt: erst messen, dann einschalten.</div>
 
 <h2>Vor dem ersten Einschalten</h2>
-<p>Für jedes eigene Projekt und nach jeder Arbeit an Leitungen. Alles ohne Spannung, mit dem Multimeter.</p>
+<p>Für eigene Projekte und Geräte, die vom Netz getrennt sind. Alles ohne Spannung, mit dem Multimeter.</p>
 <ul class="chk">
   <li><b>Sichtprüfung:</b> Jede Ader ganz in ihrer Klemme, keine abstehenden Einzeldrähte, kein blankes Kupfer außerhalb, Zugentlastung sitzt, Deckel und Abdeckungen vollständig.</li>
   <li><b>Zupftest</b> an jeder Ader, die du angefasst hast.</li>
   <li><b>Durchgang:</b> Jede Leitung von Ende zu Ende. Schutzleiter zu jedem berührbaren Metallteil.</li>
   <li><b>Kein Kurzschluss:</b> Widerstand zwischen Plus und Minus bzw. L und N darf nicht nahe 0 Ω liegen. Mit angeschlossenem Verbraucher zeigt das Messgerät dessen Widerstand, das ist in Ordnung.</li>
-  <li><b>Keine Verbindung zum Schutzleiter:</b> L und N gegen PE zeigen „OL“, also unendlich.</li>
+  <li><b>Keine Verbindung zum Schutzleiter:</b> Bei einem Gerät oder Aufbau, der vom Netz getrennt ist, zeigen L und N gegen PE „OL“, also unendlich. Ein Multimeter ersetzt dabei keine Isolationsmessung mit 500 V.</li>
   <li><b>Polarität:</b> Bei Gleichstrom vor dem Anstecken messen, welcher Pin Plus ist. Verpolung zerstört Elektronik in Millisekunden.</li>
   <li><b>Sicherungswerte</b> stimmen mit dem Plan überein.</li>
   <li><b>Erster Start begrenzt:</b> Labornetzteil mit niedriger Strombegrenzung oder kleine Sicherung. Hand am Schalter.</li>
   <li><b>Nach zehn Minuten Betrieb:</b> Klemmen, Stecker, Netzteil und Leitungen anfassen oder mit dem Infrarotthermometer messen. Handwarm ist normal, heiß ist ein Fehler.</li>
 </ul>
+<p class="note">In der Hausinstallation funktioniert die Widerstandsmessung gegen PE so nicht: N und PE sind im Verteiler verbunden, L gegen PE zeigt den Widerstand der angeschlossenen Verbraucher. Den Isolationswiderstand misst dort der Fachbetrieb mit 500 V bei abgeklemmten Verbrauchern.</p>
 
 <h2>Die Messungen und ihre Grenzwerte</h2>
 <div class="tbl-wrap"><table style="min-width:800px">
@@ -63,13 +64,14 @@ import "./_style.css";
   <text class="lbl" x="412" y="222" text-anchor="middle">Leitung oder festes Gerät</text>
   <rect class="badz" x="540" y="186" width="130" height="50" rx="8" />
   <text class="lbad" x="605" y="206" text-anchor="middle">fliegt bei Gerät y</text>
-  <text class="lbl" x="605" y="222" text-anchor="middle">Gerät defekt</text>
+  <text class="lbl" x="605" y="222" text-anchor="middle">woanders gegentesten</text>
 </svg>
+<p class="note">Löst ein Gerät den FI aus, an einem anderen Stromkreis gegenprüfen. Fliegt der FI dort auch, ist das Gerät defekt. Fliegt er nur an diesem einen Stromkreis, liegt der Fehler eher in der Anlage, etwa N und PE verbunden oder vertauscht, oder der N gehört zu einem anderen FI: LS aus lassen, Fachbetrieb. Solche Fehler zeigen sich oft erst, wenn Strom fließt.</p>
 <div class="tbl-wrap"><table style="min-width:780px">
 <thead><tr><th>Was auslöst</th><th>Wann</th><th>Wahrscheinliche Ursache</th></tr></thead>
 <tbody>
 <tr><td><b>LS (Sicherung)</b></td><td>sofort, mit Knall oder Funken</td><td>Kurzschluss: defektes Gerät, eingeklemmtes Kabel, angebohrte Leitung, Wasser in der Dose</td></tr>
-<tr><td><b>LS (Sicherung)</b></td><td>nach Sekunden bis Minuten</td><td>Überlast: zu viele Geräte an einem Stromkreis, Heizlüfter und Wasserkocher zusammen. Oder ein Motor, der schwer anläuft</td></tr>
+<tr><td><b>LS (Sicherung)</b></td><td>nach Minuten, bei knapper Überlast erst nach einer Stunde</td><td>Überlast: zu viele Geräte an einem Stromkreis, Heizlüfter und Wasserkocher zusammen. Oder ein Motor, der schwer anläuft</td></tr>
 <tr><td><b>FI</b></td><td>sofort beim Einschalten eines Geräts</td><td>Isolationsfehler im Gerät, meist Heizstab (Waschmaschine, Spülmaschine, Wasserkocher, Backofen)</td></tr>
 <tr><td><b>FI</b></td><td>bei Regen, Tau oder Frost</td><td>Feuchte in Außensteckdose, Außenleuchte, Gartenleitung, Kellerleitung</td></tr>
 <tr><td><b>FI</b></td><td>sporadisch, ohne Muster</td><td>Viele Geräte mit Netzteilen addieren ihre kleinen Ableitströme. Stromkreise auf mehrere FI verteilen. Auch Überspannung bei Gewitter</td></tr>

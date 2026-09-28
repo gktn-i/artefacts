@@ -853,16 +853,24 @@ var CALC = {
         + "weil das Zeichen im ASCII fehlt." };
   },
   /* --- Leitung: Spannungsfall und Mindestquerschnitt (Kupfer, 20 °C) ---
-     Strombelastbarkeit bewusst vorsichtig nach der Tabelle für
-     Geräteanschlussleitungen (EN 60335-1), ab 16 mm² als Richtwert. */
+     Zwei Tabellen für die Strombelastbarkeit, beide bewusst vorsichtig:
+     Kleinspannung nach der Tabelle für Geräteanschlussleitungen
+     (EN 60335-1, 0,5 mm² nur bis 2 m), Netzspannung nach den üblichen
+     Sicherungen für feste Verlegung auf oder im Putz (DIN VDE 0298-4),
+     mindestens 1,5 mm². */
   leitung: function (v) {
     var u = v.u, i = v.i, l = v.l;
     var max = isFinite(v.max) && v.max > 0 ? v.max : 3;
     var dreh = v.sys === 3;
     if (!(u > 0) || !(i > 0) || !(l > 0)) return { out: "Spannung, Strom und einfache Länge eintragen." };
+    var netz = dreh || u > 60;
     var RHO = 0.0175, k = dreh ? Math.sqrt(3) : 2;
-    var SIZES = [0.25, 0.5, 0.75, 1, 1.5, 2.5, 4, 6, 10, 16, 25, 35, 50];
-    var IMAX = { 0.25: 1, 0.5: 3, 0.75: 6, 1: 10, 1.5: 16, 2.5: 25, 4: 32, 6: 40, 10: 63, 16: 80, 25: 100, 35: 125, 50: 150 };
+    var SIZES = netz ? [1.5, 2.5, 4, 6, 10, 16, 25, 35, 50]
+      : [0.25, 0.5, 0.75, 1, 1.5, 2.5, 4, 6, 10, 16, 25, 35, 50];
+    var IMAX = netz
+      ? { 1.5: 16, 2.5: 20, 4: 25, 6: 32, 10: 40, 16: 50, 25: 63, 35: 80, 50: 100 }
+      : { 0.25: 1, 0.5: 3, 0.75: 6, 1: 10, 1.5: 16, 2.5: 25, 4: 32, 6: 40, 10: 63, 16: 80, 25: 100, 35: 125, 50: 150 };
+    if (!netz && l > 2) delete IMAX[0.5];
     var du = function (a) { return k * l * i * RHO / a; };
     var aDrop = NaN, aAmp = NaN, n;
     for (n = 0; n < SIZES.length; n++) if (100 * du(SIZES[n]) / u <= max) { aDrop = SIZES[n]; break; }
@@ -871,6 +879,7 @@ var CALC = {
     var chosen = typeof v.a === "number" && v.a > 0;
     var a = chosen ? v.a : aRec;
     var fmt = function (x) { return String(x).replace(".", ","); };
+    var komma = function (t) { return t.replace(/(\d)\.(\d)/g, "$1,$2"); };
     if (!isFinite(a)) {
       return { out: "Mehr als 50 mm² nötig.",
         hint: "Bei diesem Strom und dieser Länge wird das Kabel unhandlich dick und teuer. Spannung erhöhen (24 oder 48 V statt 12 V), "
@@ -885,17 +894,26 @@ var CALC = {
         + ", für " + sig(i, 3) + " A Dauerstrom braucht es mindestens " + (isFinite(aAmp) ? fmt(aAmp) + " mm²" : "mehr als 50 mm²")
         + ". Der größere Wert gilt. ";
     } else {
-      if (isFinite(IMAX[a]) && IMAX[a] < i) hint += "Zu dünn: " + fmt(a) + " mm² trägt dauerhaft etwa " + IMAX[a] + " A, nicht "
+      if (netz && a < 1.5) hint += "Für feste Installation an Netzspannung mindestens 1,5 mm², Geräteleitungen mindestens 0,75 mm². ";
+      else if (!IMAX[a]) hint += "0,5 mm² nur für Leitungen bis 2 m Länge. ";
+      else if (IMAX[a] < i) hint += "Zu dünn: " + fmt(a) + " mm² trägt dauerhaft etwa " + IMAX[a] + " A, nicht "
         + sig(i, 3) + " A. Die Leitung wird heiß. ";
       if (pct > max) hint += "Mehr Verlust als erlaubt: Mindestens " + (isFinite(aDrop) ? fmt(aDrop) : "über 50") + " mm² für "
         + sig(max, 2) + " %. ";
       if (!hint) hint += "Passt: Der Strom liegt unter der Belastbarkeit, der Verlust unter " + sig(max, 2) + " %. ";
     }
     if (dreh && u < 200) hint += "Bei Drehstrom die Spannung zwischen zwei Außenleitern eintragen, im Haus 400 V. ";
-    hint += "Die Sicherung muss zur Leitung passen, nicht zum Gerät: höchstens " + (IMAX[a] || "?") + " A für "
-      + fmt(a) + " mm² als Geräte- oder Projektleitung. Kupfer bei 20 °C gerechnet, warm rund 20 % mehr Verlust. "
-      + "Feste Hausinstallation bemisst der Fachbetrieb nach DIN VDE 0298-4.";
-    var komma = function (t) { return t.replace(/(\d)\.(\d)/g, "$1,$2"); };
+    if (netz) {
+      if (IMAX[a]) hint += "Richtwert für feste Verlegung auf oder im Putz: " + fmt(a) + " mm² höchstens mit " + IMAX[a] + " A absichern. ";
+      hint += "In Wärmedämmung, gebündelt oder bei Drehstrom in Dämmung eine Stufe kleiner. Die verbindliche Bemessung nach "
+        + "DIN VDE 0298-4 macht der Fachbetrieb. Kupfer bei 20 °C gerechnet, warm rund 20 % mehr Verlust.";
+    } else {
+      if (IMAX[a]) hint += "Sicherung an der Quelle: etwa " + sig(1.25 * i, 2) + " bis " + sig(1.5 * i, 2)
+        + " A (1,25 bis 1,5 × Betriebsstrom), aber nie mehr als " + IMAX[a] + " A für " + fmt(a)
+        + " mm². Das gilt für einzelne Leitungen frei in Luft. ";
+      hint += "Im Bündel oder im warmen Gehäuse eine Stufe dicker. "
+        + "Kupfer bei 20 °C gerechnet, warm rund 20 % mehr Verlust.";
+    }
     return { out: komma(s), hint: komma(hint) };
   },
 
