@@ -1,0 +1,100 @@
+---
+import "./_style.css";
+import Profiles from "../../components/Profiles.astro";
+---
+<p class="lede">Ein Schneidebrett wird nass, trocken, heiß und wieder nass. Es bleibt nur plan, wenn Holz, Aufbau und Pflege stimmen.</p>
+
+<div class="kurz z"><b>Feinporiges Laubholz, schmale Lamellen, wasserfester Leim, beide Seiten gleich behandeln.</b></div>
+
+<h2>Holzart</h2>
+<Profiles
+  label="Holz"
+  criteria={["Messer schonend", "Feinporig", "Formstabil", "Pflegeleicht", "Günstig"]}
+  labels={{ use: "Nimm es für" }}
+  items={[
+    { name: "Ahorn", tag: "der Klassiker", scores: [4, 5, 4, 4, 3],
+      pro: "Hell, dicht, geschmacksneutral, schont Messer",
+      con: "Zeigt Flecken von Roter Bete und Kräutern",
+      use: "Alle Bretter, Stirnholz, Profiküche" },
+    { name: "Buche", tag: "günstig", scores: [4, 5, 2, 3, 5],
+      pro: "Billig, dicht, gut zu verarbeiten",
+      con: "Arbeitet stark, reißt bei Nässe, Lamellen schmal halten",
+      use: "Erstes Brett, Stirnholz mit stehenden Ringen" },
+    { name: "Kirsche", tag: "warm", scores: [4, 5, 4, 4, 2],
+      pro: "Schöne Farbe, dunkelt nach, ruhig",
+      con: "Teurer, etwas weicher",
+      use: "Servierbretter, Frühstücksbretter" },
+    { name: "Nussbaum", tag: "dunkel", scores: [4, 4, 4, 4, 1],
+      pro: "Edel, ruhig, Schnitte fallen wenig auf",
+      con: "Teuer",
+      use: "Servierbretter, Kontraststreifen" },
+    { name: "Eiche", tag: "grobporig", scores: [3, 2, 4, 3, 3],
+      pro: "Robust, formstabil",
+      con: "Große Poren halten Schmutz, Gerbsäure färbt Karbonstahlmesser",
+      use: "Servierbretter, nicht für Fleisch" },
+    { name: "Olive", tag: "sehr dicht", scores: [3, 5, 3, 3, 1],
+      pro: "Dicht, ölig, schöne Maserung",
+      con: "Teuer, reißt beim Trocknen, meist nur kleine Stücke",
+      use: "Kleine Bretter, Käsebretter" },
+    { name: "Bambus", tag: "verpresst", scores: [1, 3, 4, 5, 4],
+      pro: "Günstig, formstabil, pflegeleicht",
+      con: "Hart und kieselig, macht Messer schnell stumpf",
+      use: "Nichts, wenn die Messer gut sind" },
+  ]}
+  note="Punkte höher = besser. Günstig 5 heißt billig. Nadelholz und Tropenholz mit Harz oder Kieselsäure nicht für Schneidebretter." />
+
+<h2>Langholz oder Stirnholz</h2>
+<div class="grid2">
+  <div class="card"><h3>Langholz</h3><p><b>Faser liegt</b>, das Messer schneidet quer über die Fasern.</p><p><b>Dicke</b> ab 20 mm, Lamellen 30 bis 60 mm mit stehenden Jahrringen.</p><p><b>Gut</b> einfach zu bauen, saugt wenig Wasser.</p><p><b>Schwach</b> Schnittspuren bleiben, stumpft Messer schneller.</p></div>
+  <div class="card"><h3>Stirnholz</h3><p><b>Faser steht</b>, das Messer gleitet zwischen die Fasern.</p><p><b>Dicke</b> 35 bis 50 mm, Klötze gleich hoch.</p><p><b>Gut</b> schont Messer, Schnitte schließen sich.</p><p><b>Schwach</b> saugt viel Wasser, muss öfter geölt werden, aufwendiger.</p></div>
+</div>
+
+<h2>Regeln beim Bau</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Regel</th><th>So</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><b>Nie aus einem breiten Brett</b></td><td class="txt">Ab etwa 15 cm Breite aus Lamellen verleimen</td><td class="txt">Ein breites Brett schüsselt beim ersten Abspülen</td></tr>
+<tr><td><b>Jahrringe</b></td><td class="txt">Stehend oder abwechselnd</td><td class="txt">Bleibt plan trotz Wasser</td></tr>
+<tr><td><b>Leim</b></td><td class="txt">D3 nach EN 204, ausgehärtet lebensmittelgeeignet</td><td class="txt">D2 löst sich beim Spülen</td></tr>
+<tr><td><b>Leimfugen</b></td><td class="txt">Immer Langholz auf Langholz, auch beim Stirnholzbrett</td><td class="txt">Hirnholz auf Hirnholz hält nicht</td></tr>
+<tr><td><b>Hirnleisten, Griffe quer</b></td><td class="txt">Nicht über die ganze Breite leimen, siehe <a href="#konstruktion">Holz arbeiten lassen</a></td><td class="txt">Das Brett reißt an der Leiste</td></tr>
+<tr><td><b>Füße oder Luft</b></td><td class="txt">Gummifüße oder umlaufende Fase unten</td><td class="txt">Unterseite trocknet mit, Brett bleibt plan</td></tr>
+<tr><td><b>Kanten</b></td><td class="txt">Rundum 2 bis 3 mm gefast oder gerundet</td><td class="txt">Kanten splittern nicht, liegt besser in der Hand</td></tr>
+<tr><td><b>Saftrille</b></td><td class="txt">Nur auf einer Seite, 10 mm vom Rand</td><td class="txt">Die andere Seite bleibt eben zum Schneiden</td></tr>
+</tbody>
+</table></div>
+
+<h2>Stirnholzbrett bauen</h2>
+<div class="steps">
+  <div class="step"><h4>Streifen verleimen</h4><p>Langholzleisten gleicher Dicke nebeneinander verleimen. Langholz auf Langholz.</p></div>
+  <div class="step"><h4>Quer in Streifen sägen</h4><p>Die Platte quer in gleich breite Streifen sägen. Die Breite wird die Brettdicke, 35 bis 50 mm.</p></div>
+  <div class="step"><h4>Jeden zweiten drehen</h4><p>Streifen hochkant stellen, jeden zweiten umdrehen oder versetzen. Schachbrett oder Streifen.</p></div>
+  <div class="step"><h4>Verleimen</h4><p>Die Seitenflächen der Streifen sind wieder Langholz. Normal leimen, Zulagen quer.</p></div>
+  <div class="step"><h4>Plan machen</h4><p>Oberfräse im Frässchlitten oder Bandschleifer mit P40, dann Exzenter bis P180.</p></div>
+  <div class="step"><h4>Ölen bis satt</h4><p>So lange Öl auftragen, bis nichts mehr einzieht. Am nächsten Tag nochmal.</p></div>
+</div>
+<div class="stop"><b>Stirnholz nie durch den Dickenhobel.</b> Die Messer reißen Klötze aus der Platte und schleudern sie.</div>
+
+<h2>Pflege</h2>
+<div class="tbl-wrap"><table style="min-width:680px">
+<thead><tr><th>Was</th><th>So</th><th>Nie</th></tr></thead>
+<tbody>
+<tr><td><b>Nach Gebrauch</b></td><td class="txt">Warm abspülen, beide Seiten nass machen, abtrocknen</td><td class="txt">Einweichen, nur eine Seite waschen</td></tr>
+<tr><td><b>Trocknen</b></td><td class="txt">Hochkant, beide Seiten an der Luft</td><td class="txt">Flach auf der nassen Seite liegen lassen</td></tr>
+<tr><td><b>Spülmaschine</b></td><td class="txt">Nicht</td><td class="txt">Hitze und Nässe sprengen jede Leimfuge</td></tr>
+<tr><td><b>Ölen</b></td><td class="txt">Mineralöl oder Brettöl, wenn das Holz hell wird, etwa alle 2 bis 4 Wochen</td><td class="txt">Olivenöl, Sonnenblumenöl, sie werden ranzig</td></tr>
+<tr><td><b>Geruch, Flecken</b></td><td class="txt">Grobes Salz und Zitrone einreiben, abspülen, trocknen, ölen</td><td class="txt">Bleiche, Spülmittel pur</td></tr>
+<tr><td><b>Schüsselt</b></td><td class="txt">Hohle Seite anfeuchten, gewölbte nach oben trocknen lassen</td><td class="txt">Auf die Heizung legen</td></tr>
+<tr><td><b>Riefen</b></td><td class="txt">Mit Ziehklinge oder P120 abziehen, dann ölen</td><td class="txt">Warten, bis die Riefen Schmutz halten</td></tr>
+</tbody>
+</table></div>
+
+<h2>Tipps aus der Praxis</h2>
+<div class="grid">
+  <div class="card"><h3>Zwei Bretter</h3><p>Eines für Fleisch und Fisch, eines für Brot und Gemüse. Gleiche Pflege, weniger Geruch.</p></div>
+  <div class="card"><h3>Wasser vor dem Ölen</h3><p>Nach dem Schleifen einmal wässern, trocknen, mit P180 nachschleifen. Sonst steht es nach dem ersten Spülen rau.</p></div>
+  <div class="card"><h3>Wachs zum Schluss</h3><p>Brettbutter aus Mineralöl und Bienenwachs schließt die Oberfläche besser als Öl allein.</p></div>
+  <div class="card"><h3>Stirnholz wenden</h3><p>Beide Seiten abwechselnd benutzen. Dann nutzt es gleich ab und bleibt plan.</p></div>
+  <div class="card"><h3>Mustertest</h3><p>Stirnholz-Schachbrett erst mit Papierstreifen legen. Nach dem Leimen ist jede Drehung endgültig.</p></div>
+  <div class="card"><h3>Kein Lack</h3><p>Lack platzt unter dem Messer ab und landet im Essen. Nur Öl und Wachs.</p></div>
+</div>

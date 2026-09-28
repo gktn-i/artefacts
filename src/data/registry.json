@@ -2474,8 +2474,8 @@
    "name": "Holzwerken",
    "icon": "🪵",
    "file": "hub-holz.html",
-   "tagline": "Holzarten · Verbindungen · Handarbeit · Projekte",
-   "desc": "Holzarbeiten von der Materialwahl bis zur fertigen Oberfläche: welches Holz wofür taugt, wie stark es arbeitet, welche Verbindung hält, welche Säge welchen Schnitt macht, wie man fräst, nagelt und schleift — und 16 Projekte nach Level, mit Material, Aufwand und Kosten. Dazu ein eigenes Modul Handarbeit: Holz bearbeiten ohne Strom, vom Werkzeugsatz über Schärfen und Zinken bis zum Löffel aus Grünholz.",
+   "tagline": "Holzarten · Handarbeit · Tischlerregeln · Projekte",
+   "desc": "Holzarbeiten von der Materialwahl bis zur fertigen Oberfläche: welches Holz wofür taugt, wie stark es arbeitet, welche Verbindung hält, welche Säge welchen Schnitt macht, wie man fräst, nagelt und schleift — und 16 Projekte nach Level, mit Material, Aufwand und Kosten. Dazu ein eigenes Modul Handarbeit: Holz bearbeiten ohne Strom, vom Werkzeugsatz über Schärfen und Zinken bis zum Löffel aus Grünholz. Und die Tischlerregeln: Verleimen ohne Spannung, Holz arbeiten lassen, Schneidebretter, Terrasse, Dielen und die Faustregeln aus der Werkstatt.",
    "accent": {
     "l": "#8a5522",
     "d": "#d9a468"
@@ -2647,6 +2647,32 @@
        "m": "handarbeit",
        "h": "projekte",
        "t": "Projekte ohne Strom"
+      }
+     ]
+    },
+    {
+     "id": "regeln",
+     "icon": "📜",
+     "t": "Spannung vermeiden",
+     "d": "Verleimen, Konstruktion, Terrasse und Schneidebrett so bauen, dass Holz arbeiten darf, ohne zu reißen.",
+     "k": "spannung reißt riss schüsselt verzieht tischplatte leimholz verleimen terrasse dielen schneidebrett regeln tischler schreiner faustregel",
+     "links": [
+      {
+       "m": "tischlerregeln",
+       "h": "leimholz",
+       "t": "Verleimen ohne Spannung"
+      },
+      {
+       "m": "tischlerregeln",
+       "h": "konstruktion"
+      },
+      {
+       "m": "tischlerregeln",
+       "h": "terrasse"
+      },
+      {
+       "m": "tischlerregeln",
+       "h": "schneidebrett"
       }
      ]
     }
@@ -3465,9 +3491,164 @@
        }
       }
      ]
+    },
+    {
+     "id": "regeln",
+     "name": "Tischlerregeln",
+     "desc": "Ein Modul mit 10 Unterseiten: Grundregeln, Verleimen ohne Spannung, Konstruktion, Schneidebretter, Terrasse, Dielen, Faustregeln.",
+     "modules": [
+      {
+       "id": "tischlerregeln",
+       "file": "tischlerregeln.html",
+       "name": "Tischlerregeln",
+       "icon": "📜",
+       "kind": "Referenz",
+       "updated": "2026-09-28",
+       "desc": "Regeln aus Tischlerei und Schreinerei: Brett lesen, Verleimen ohne Spannung, Holz arbeiten lassen, Schneidebretter, Terrasse, Dielen und Parkett, Faustregeln und Werkstattregeln. Kurz, direkt, mit Zahlen.",
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Grundregeln"
+        },
+        {
+         "h": "brett",
+         "t": "Brett lesen"
+        },
+        {
+         "h": "leimholz",
+         "t": "Verleimen ohne Spannung"
+        },
+        {
+         "h": "konstruktion",
+         "t": "Holz arbeiten lassen"
+        },
+        {
+         "h": "schneidebrett",
+         "t": "Schneidebretter"
+        },
+        {
+         "h": "terrasse",
+         "t": "Terrasse & draußen"
+        },
+        {
+         "h": "dielen",
+         "t": "Dielen & Parkett"
+        },
+        {
+         "h": "faustregeln",
+         "t": "Faustregeln & Maße"
+        },
+        {
+         "h": "werkstatt",
+         "t": "Werkstattregeln"
+        },
+        {
+         "h": "quellen",
+         "t": "Quellen"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Grundlagen",
+         "sections": [
+          "start",
+          "brett",
+          "leimholz",
+          "konstruktion"
+         ]
+        },
+        {
+         "l": "Anwendungen",
+         "sections": [
+          "schneidebrett",
+          "terrasse",
+          "dielen"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "faustregeln",
+          "werkstatt",
+          "quellen"
+         ]
+        }
+       ],
+       "tags": [
+        "tischlerregeln",
+        "schreinerregeln",
+        "regeln",
+        "faustregeln",
+        "spannung",
+        "spannungen vermeiden",
+        "verleimen",
+        "leimholz",
+        "lamellen",
+        "gestürzt verleimen",
+        "jahrringe",
+        "rechte seite",
+        "linke seite",
+        "kernseite",
+        "splintseite",
+        "rift",
+        "herz raus",
+        "mark",
+        "schüsseln",
+        "hirnleiste",
+        "gratleiste",
+        "rahmen und füllung",
+        "nutklotz",
+        "langloch",
+        "kreuzverleimung",
+        "schneidebrett",
+        "stirnholz",
+        "hirnholzbrett",
+        "langholz",
+        "terrasse",
+        "terrassendielen",
+        "unterkonstruktion",
+        "fuge",
+        "gefälle",
+        "edelstahl",
+        "dielen",
+        "parkett",
+        "randfuge",
+        "estrich",
+        "cm-messung",
+        "akklimatisieren",
+        "zapfen ein drittel",
+        "dübel",
+        "schraubenlänge",
+        "werkstattregeln",
+        "zweimal messen"
+       ],
+       "alias": {
+        "regeln": "start",
+        "grundregeln": "start",
+        "seite": "brett",
+        "kernseite": "brett",
+        "jahrringe": "brett",
+        "leimholz": "leimholz",
+        "verleimen": "leimholz",
+        "spannung": "leimholz",
+        "hirnleiste": "konstruktion",
+        "tischplatte": "konstruktion",
+        "fuellung": "konstruktion",
+        "schneidebrett": "schneidebrett",
+        "stirnholz": "schneidebrett",
+        "terrasse": "terrasse",
+        "diele": "terrasse",
+        "parkett": "dielen",
+        "randfuge": "dielen",
+        "faustregel": "faustregeln",
+        "masse": "faustregeln",
+        "werkstatt": "werkstatt"
+       }
+      }
+     ]
     }
    ],
-   "updated": "2026-09-16"
+   "updated": "2026-09-28"
   },
   {
    "id": "homelab",
