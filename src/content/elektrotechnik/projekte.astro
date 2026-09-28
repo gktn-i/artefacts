@@ -1,47 +1,32 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Erst der Plan, dann das Kabel.</b> Ein Projekt ist fertig, wenn ein anderer es in einem Jahr versteht: jede Ader beschriftet, jede Leitung abgesichert und zugentlastet, Leistung und Signal getrennt geführt, der Plan liegt im Gehäuse.</div>
+<div class="kurz"><b>Erst der Plan, dann das Kabel.</b> Fertig ist ein Projekt, wenn du es in einem Jahr noch verstehst: jede Ader beschriftet, jede Leitung abgesichert und zugentlastet, der Plan liegt im Gehäuse.</div>
 
-<h2>Vom Plan zum Kabel</h2>
+<h2>In vier Schritten</h2>
 <div class="steps">
-  <div class="step"><h4>Blockschaltbild</h4>Kästen und Pfeile: Wo kommt die Energie her, wo geht sie hin, welche Signale laufen zwischen den Teilen. Eine Seite, von Hand reicht.</div>
-  <div class="step"><h4>Strombilanz</h4>Jeder Verbraucher mit Spannung und Strom in eine Liste, Anlaufströme dazu. Daraus folgen Netzteil, Sicherungen und Querschnitte.</div>
-  <div class="step"><h4>Stromlaufplan</h4>Jede Verbindung als Linie, jedes Bauteil mit Kennzeichen (F1, K1, X1). Programme: KiCad, QElectroTech, draw.io. Im Plan stehen Querschnitt und Sicherungswert.</div>
-  <div class="step"><h4>Kabelliste und Klemmenplan</h4>Je Leitung eine Zeile: Nummer, von, nach, Typ, Querschnitt, Länge. Je Klemme: welche Ader wohin. Mit der Liste schneidet man Kabel zu, ohne nachzudenken.</div>
-  <div class="step"><h4>Aufbauen, beschriften, prüfen</h4>Leitungen nach Liste, beidseitig beschriften, Zugprobe. Vor dem ersten Einschalten die <a href="#pruefen">Prüfliste</a> abarbeiten.</div>
-  <div class="step"><h4>Doku ins Gehäuse</h4>Plan ausgedruckt in den Deckel oder als QR-Code auf das Gehäuse. Änderungen sofort nachtragen, sonst stimmt der Plan nach dem ersten Umbau nicht mehr.</div>
+  <div class="step"><h4>Skizze</h4>Kästen und Pfeile: Wo kommt der Strom her, wo geht er hin. Von Hand reicht.</div>
+  <div class="step"><h4>Strombilanz</h4>Jeder Verbraucher mit Spannung und Strom in eine Liste. Daraus folgen Netzteil, Sicherungen und Kabel.</div>
+  <div class="step"><h4>Schaltplan und Kabelliste</h4>Jede Leitung mit Nummer, von, nach, Querschnitt. Mit der Liste schneidest du Kabel zu, ohne nachzudenken.</div>
+  <div class="step"><h4>Bauen, beschriften, prüfen</h4>Beide Enden gleich beschriften, Zugprobe, dann die <a href="#pruefen">Prüfliste</a> vor dem ersten Einschalten.</div>
 </div>
 
 <h2>Farben</h2>
-<p>Es gibt keine Pflichtfarben für Kleinspannungsprojekte, aber eine feste Regel: ein Schema, durchgehalten und aufgeschrieben. Die zwei verbreitetsten:</p>
 <div class="grid2">
-  <div class="card"><div class="ct">Gleichstrom, Hobby und Fahrzeug</div><div class="cd">
+  <div class="card"><div class="ct">Gleichstrom, Hobby, Auto</div><div class="cd">
     <div><span class="adn"><span class="ad r"></span>rot</span>: Plus</div>
-    <div><span class="adn"><span class="ad s"></span>schwarz</span>: Minus, Masse</div>
-    <div><span class="adn"><span class="ad" style="--t:#e3c019"></span>gelb, weiß, grün</span>: Signale, je nach Schema</div>
-    <div style="margin-top:6px">Im Auto kommen Kennfarben der Hersteller dazu, nachschlagen im Schaltplan des Fahrzeugs.</div>
+    <div><span class="adn"><span class="ad s"></span>schwarz</span>: Minus</div>
+    <div>Signale in anderen Farben, im Plan notiert.</div>
   </div></div>
-  <div class="card"><div class="ct">Schaltschrank nach EN 60204-1</div><div class="cd">
-    <div><span class="adn"><span class="ad s"></span>schwarz</span>: Hauptstromkreise AC und DC</div>
-    <div><span class="adn"><span class="ad r"></span>rot</span>: AC-Steuerstromkreise</div>
-    <div><span class="adn"><span class="ad" style="--t:#1f3f99"></span>dunkelblau</span>: DC-Steuerstromkreise</div>
-    <div><span class="adn"><span class="ad" style="--t:#e8841c"></span>orange</span>: Fremdspannung, bleibt nach dem Hauptschalter an</div>
-    <div><span class="adn"><span class="ad n"></span>hellblau</span>: N &nbsp; <span class="adn"><span class="ad pe"></span>grün-gelb</span>: PE</div>
+  <div class="card"><div class="ct">Schaltschrank (EN 60204-1)</div><div class="cd">
+    <div><span class="adn"><span class="ad s"></span>schwarz</span>: Hauptstrom</div>
+    <div><span class="adn"><span class="ad r"></span>rot</span>: Steuerung mit Wechselstrom</div>
+    <div><span class="adn"><span class="ad" style="--t:#1f3f99"></span>dunkelblau</span>: Steuerung mit Gleichstrom</div>
   </div></div>
 </div>
-<div class="warn"><b>Grün-gelb bleibt auch im Projekt Schutzleiter.</b> Nie als Signal, nie als Minus, auch nicht bei 5 V. Wer später an das Gerät geht, verlässt sich darauf.</div>
+<div class="warn"><b>Grün-gelb bleibt Schutzleiter,</b> auch im 5-V-Projekt. Nie als Minus oder Signal.</div>
 
-<h2>Beschriften</h2>
-<ul class="chk">
-  <li><b>Beide Enden, gleiche Bezeichnung.</b> Kabel W12 heißt an beiden Enden W12. Adern bekommen die Klemme als Ziel, etwa „X1:3“.</li>
-  <li><b>Dauerhaft:</b> bedruckter Schrumpfschlauch, Kabelmarkierer oder Etikettendrucker. Filzstift auf Isolierung verschwindet.</li>
-  <li><b>Klemmen, Sicherungen, Schalter nummerieren</b> und die Nummern in den Plan übernehmen.</li>
-  <li><b>Spannung an Steckern und Buchsen</b> anschreiben, wenn mehrere Spannungen im Spiel sind.</li>
-  <li><b>Fotos</b> von jedem Zwischenstand, bevor Deckel, Kanäle und Kabelbinder zugehen.</li>
-</ul>
-
-<h2>Leitungsführung</h2>
+<h2>Leitungen führen</h2>
 <svg class="dg l" viewBox="0 0 660 176" role="img" aria-label="Links liegen Plus und Minus weit auseinander und schließen eine große Fläche ein, die Störungen einfängt und abstrahlt. Rechts liegen sie dicht beieinander und verdrillt, die Fläche ist fast null.">
   <rect class="box" x="20" y="60" width="44" height="50" rx="4" style="stroke:var(--text)" />
   <rect class="box" x="256" y="60" width="44" height="50" rx="4" style="stroke:var(--text)" />
@@ -59,78 +44,41 @@ import "./_style.css";
   <text class="lsm" x="42" y="124" text-anchor="middle">Quelle</text><text class="lsm" x="278" y="124" text-anchor="middle">Last</text>
   <text class="lsm" x="382" y="124" text-anchor="middle">Quelle</text><text class="lsm" x="618" y="124" text-anchor="middle">Last</text>
 </svg>
-<div class="grid2">
-  <div class="card"><div class="ct">Hin und zurück zusammen</div><div class="cd">Plus und Minus, Signal und seine Masse immer dicht nebeneinander, am besten verdrillt. Die eingeschlossene Fläche bestimmt, wie viel Störung eine Leitung aufnimmt und abgibt.</div></div>
-  <div class="card"><div class="ct">Leistung und Signal getrennt</div><div class="cd">Motor-, Netz- und Schaltnetzteilleitungen mit Abstand zu Sensor- und Busleitungen. Wo sie sich kreuzen müssen, im rechten Winkel.</div></div>
-  <div class="card"><div class="ct">Zugentlastung und Kanten</div><div class="cd">Am Gehäuseeintritt eine Kabelverschraubung oder Zugentlastung. Durch Blech nur mit Tülle oder Kantenschutz. Die Klemme darf nie das Gewicht oder den Zug tragen.</div></div>
-  <div class="card"><div class="ct">Bewegung</div><div class="cd">Bewegte Leitungen: hochflexible Litze, großer Biegeradius, in Schleppkette oder Spirale. Starre Adern brechen nach wenigen hundert Bewegungen.</div></div>
-  <div class="card"><div class="ct">Kabelbinder</div><div class="cd">Fest genug, dass nichts rutscht, locker genug, dass sich der Mantel nicht eindrückt. Bei Daten- und Koaxkabeln verändert ein zu fester Binder die Leitung.</div></div>
-  <div class="card"><div class="ct">Reserve</div><div class="cd">Eine Serviceschlaufe an jedem Anschluss: genug Länge, um die Ader einmal neu abzuisolieren oder das Teil herauszuziehen.</div></div>
-</div>
+<ul>
+  <li><b>Plus und Minus zusammen,</b> am besten verdrillt. Weniger Störungen rein und raus.</li>
+  <li><b>Strom und Signal getrennt.</b> Motor- und Netzleitungen mit Abstand zu Sensorkabeln.</li>
+  <li><b>Zugentlastung</b> am Gehäuse, Tülle durch jedes Blech, Klemmen tragen nie Gewicht.</li>
+  <li><b>Etwas Reserve</b> an jedem Anschluss, damit man einmal neu abisolieren kann.</li>
+</ul>
 
-<h2>Steckverbinder</h2>
-<div class="tbl-wrap"><table style="min-width:760px">
-<thead><tr><th>Stecker</th><th>Typisch für</th><th>Achtung</th></tr></thead>
+<h2>Stecker</h2>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Stecker</th><th>Wofür</th></tr></thead>
 <tbody>
-<tr><td><b>Dupont, Stiftleisten</b></td><td>Prototyp, Breadboard, Signale</td><td>Lockern sich, kein Dauerbetrieb, kaum Strom</td></tr>
-<tr><td><b>JST (PH, XH), Micro-Fit</b></td><td>Signale und kleine Ströme in Geräten</td><td>Nur mit der passenden Crimpzange, Nennstrom je Kontakt beachten</td></tr>
-<tr><td><b>XT30, XT60, XT90, Anderson</b></td><td>Akkus, hohe Ströme im Modellbau und in 12-V-Systemen</td><td>Verpolsicher, aber nur bis zum Nennstrom laut Hersteller. Lötstellen mit Schrumpfschlauch</td></tr>
-<tr><td><b>Hohlstecker 5,5 × 2,1 mm</b></td><td>Steckernetzteile</td><td>Gleiche Stecker für 5, 12 und 24 V: beschriften oder verschiedene Größen nehmen</td></tr>
-<tr><td><b>Steckbare Klemmen (Phoenix, WAGO)</b></td><td>Platinen und Module, die man tauschen will</td><td>Stecker und Buchse als Paar kaufen</td></tr>
-<tr><td><b>M8, M12</b></td><td>Industrie-Sensoren, draußen</td><td>Dicht (IP67), verriegelt, fertig konfektioniert</td></tr>
-<tr><td><b>„Aviation“ GX12, GX16</b></td><td>Kleinspannung in Gehäusen</td><td>Nie für Netzspannung: kein Berührungsschutz, beim Ziehen unter Last Kontaktabbrand</td></tr>
+<tr><td><b>Dupont-Steckbrücken</b></td><td>Nur Prototyp, lockern sich</td></tr>
+<tr><td><b>JST</b></td><td>Signale und kleine Ströme, mit passender Crimpzange</td></tr>
+<tr><td><b>XT60, XT90, Anderson</b></td><td>Akkus und hohe Ströme, verpolsicher</td></tr>
+<tr><td><b>M12</b></td><td>Draußen, dicht und verriegelt</td></tr>
+<tr><td><b>GX16 „Aviation“</b></td><td>Nur Kleinspannung, nie Netzspannung</td></tr>
 </tbody>
 </table></div>
-<ul>
-  <li><b>Die Quelle hat die Buchse.</b> Energie kommt aus der Seite, deren Kontakte man nicht berühren kann. So schließt ein herumliegender Stecker nichts kurz.</li>
-  <li><b>Verschiedene Spannungen, verschiedene Stecker.</b> Passt der 24-V-Stecker in die 5-V-Buchse, passiert es irgendwann.</li>
-  <li><b>Verriegelt,</b> wo es rüttelt oder zieht.</li>
-</ul>
+<p><b>Die Quelle hat die Buchse,</b> damit ein herumliegender Stecker nichts kurzschließt. <b>Verschiedene Spannungen, verschiedene Stecker,</b> damit nichts vertauscht werden kann.</p>
 
 <h2>Gehäuse und Schutzart</h2>
-<svg class="dg m" viewBox="0 0 420 150" role="img" aria-label="Aufbau des IP-Codes: erste Ziffer Schutz gegen Berührung und Fremdkörper von 0 bis 6, zweite Ziffer Schutz gegen Wasser von 0 bis 9">
-  <text class="big" x="150" y="44">IP 6 5</text>
-  <path class="wt" d="M208,52 V78 H120 M234,52 V110 H300" />
-  <text class="lbl" x="116" y="74" text-anchor="end">erste Ziffer:</text>
-  <text class="lbl" x="116" y="88" text-anchor="end">Berührung, Staub</text>
-  <text class="lbl" x="116" y="102" text-anchor="end">0 bis 6</text>
-  <text class="lbl" x="304" y="106">zweite Ziffer:</text>
-  <text class="lbl" x="304" y="120">Wasser</text>
-  <text class="lbl" x="304" y="134">0 bis 9</text>
-</svg>
-<div class="tbl-wrap"><table style="min-width:680px">
-<thead><tr><th>Schutzart</th><th>Bedeutung</th><th>Wo</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Schutzart</th><th>Heißt</th><th>Für</th></tr></thead>
 <tbody>
-<tr><td><b>IP20</b></td><td>fingersicher, kein Wasserschutz</td><td>trockene Innenräume, Verteiler, Netzteile</td></tr>
-<tr><td><b>IP44</b></td><td>Fremdkörper ab 1 mm, Spritzwasser von allen Seiten</td><td>Außensteckdose mit Deckel, Bad Bereich 2</td></tr>
-<tr><td><b>IP54</b></td><td>staubgeschützt, Spritzwasser</td><td>Werkstatt, Keller, Garage</td></tr>
-<tr><td><b>IP65</b></td><td>staubdicht, Strahlwasser</td><td>draußen, abspritzbar</td></tr>
-<tr><td><b>IP67</b></td><td>staubdicht, zeitweiliges Untertauchen</td><td>Bodennähe, Pfützen, Sensoren</td></tr>
-<tr><td><b>IP68</b></td><td>dauerndes Untertauchen nach Herstellerangabe</td><td>Teich, Brunnen, Erdreich</td></tr>
+<tr><td><b>IP20</b></td><td>fingersicher</td><td>trocken innen</td></tr>
+<tr><td><b>IP44</b></td><td>Spritzwasser</td><td>Bad, überdacht außen</td></tr>
+<tr><td><b>IP65</b></td><td>staubdicht, Strahlwasser</td><td>draußen</td></tr>
+<tr><td><b>IP67</b></td><td>kurz untertauchen</td><td>Bodennähe, Pfützen</td></tr>
 </tbody>
 </table></div>
-<ul>
-  <li><b>Die Schutzart gilt nur mit passender Kabelverschraubung.</b> Jede Verschraubung hat einen Dichtbereich für den Kabeldurchmesser. Zu dünnes Kabel dichtet nicht, egal wie fest.</li>
-  <li><b>Kondenswasser:</b> Dichte Gehäuse draußen atmen bei Temperaturwechseln und sammeln Wasser. Ein Druckausgleichselement hilft, Kabel von unten einführen, damit kein Wasser hineinläuft.</li>
-  <li><b>Wärme:</b> Je dichter das Gehäuse, desto wärmer drinnen. Netzteile und Regler mit Verlustleistung brauchen Luft oder ein Metallgehäuse als Kühlkörper.</li>
-</ul>
+<p class="note">Erste Ziffer: Staub und Berührung, zweite: Wasser. Dicht ist das Gehäuse nur mit Kabelverschraubung in passender Größe.</p>
 
 <h2>230 V im eigenen Projekt</h2>
-<div class="kurz q"><b>Brauchst du die 230 V wirklich im Gehäuse?</b> Meist nicht. Ein geprüftes Steckernetzteil oder ein geschlossenes Hutschienennetzteil hält die Netzspannung aus deinem Aufbau heraus. Um 230-V-Geräte zu schalten, sind fertige Zwischenstecker und Schaltaktoren sicherer als jede selbst verdrahtete Relaisplatine.</div>
-<div class="grid2">
-  <div class="card"><div class="ct">Netzeingang</div><div class="cd">Kaltgerätebuchse mit eingebauter Sicherung und zweipoligem Schalter. Dahinter Einzeladern mit Aderendhülse, alle Kontakte mit Schrumpfschlauch oder Kappen abgedeckt.</div></div>
-  <div class="card"><div class="ct">Metallgehäuse an PE</div><div class="cd">Schutzleiter mit eigener Schraube, Mutter und Zahnscheibe auf blankes Metall, nicht über Lack, gekennzeichnet mit dem Erdungszeichen. Deckel mit Scharnier oder Schrauben zusätzlich verbinden.</div></div>
-  <div class="card"><div class="ct">Netz und Kleinspannung trennen</div><div class="cd">Räumlich getrennt, mit Abstand oder Trennwand. Adern der beiden Seiten nie im selben Bündel. Billige Relaismodule haben zwischen 230-V-Seite und Logik oft zu wenig Abstand.</div></div>
-  <div class="card"><div class="ct">Prüfen lassen</div><div class="cd">Ein selbst gebautes Netzgerät gehört vor dem ersten Einsatz geprüft: Schutzleiterwiderstand und Isolationswiderstand nach DIN VDE 0701-0702, mit Gerätetester. Das kann jeder Elektrobetrieb. Verkaufen oder verschenken nur mit CE-Konformität nach Niederspannungsrichtlinie.</div></div>
-</div>
-
-<div class="srcs">
-  <div class="sh">Quellen</div>
-  <ul>
-    <li>EN 60204-1: Elektrische Ausrüstung von Maschinen, Aderfarben und Kennzeichnung.</li>
-    <li>DIN EN 60529: Schutzarten durch Gehäuse (IP-Code).</li>
-    <li>IEC 81346: Referenzkennzeichnung (F1, K1, X1, W12). Mehr unter <a href="automatisierung-robotik.html#schaltschrank">Automatisierung → Schaltschrank</a>.</li>
-    <li>DIN VDE 0701-0702: Prüfung nach Instandsetzung und Wiederholungsprüfung von Geräten. Richtlinie 2014/35/EU (Niederspannungsrichtlinie).</li>
-    <li>Henry W. Ott, <i>Electromagnetic Compatibility Engineering</i>: Schleifenfläche, Verdrillung, Leitungsführung.</li>
-  </ul>
-</div>
+<div class="kurz q"><b>Brauchst du die 230 V wirklich im Gehäuse?</b> Meist nicht. Ein geprüftes Steckernetzteil hält die Netzspannung draußen. Um 230-V-Geräte zu schalten, sind fertige Schaltsteckdosen sicherer als eine selbst verdrahtete Relaisplatine.</div>
+<ul>
+  <li><b>Wenn doch:</b> Kaltgerätebuchse mit Sicherung und Schalter, Metallgehäuse mit eigener Schraube an PE, 230-V-Teil räumlich getrennt vom Rest.</li>
+  <li><b>Prüfen lassen:</b> Ein selbst gebautes 230-V-Gerät misst ein Elektrobetrieb mit dem Gerätetester nach DIN VDE 0701-0702.</li>
+</ul>

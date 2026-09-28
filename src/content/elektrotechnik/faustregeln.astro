@@ -1,121 +1,71 @@
 ---
 import "./_style.css";
 ---
-<p class="lede">Die Zahlen, die man im Kopf haben sollte. Richtwerte zum Planen und Prüfen, keine Bemessung. Wo die Norm genauer ist, steht der Verweis dabei.</p>
+<p class="lede">Die Zahlen, die man im Kopf haben sollte. Richtwerte zum Planen und Prüfen.</p>
 
 <div class="kpis">
-  <div class="kpi"><div class="k">FI</div><div class="v">30 mA</div><div class="s">schützt Menschen, Pflicht für Steckdosen und Licht in Wohnungen</div></div>
+  <div class="kpi"><div class="k">FI</div><div class="v">30 mA</div><div class="s">schützt Menschen</div></div>
   <div class="kpi"><div class="k">B16</div><div class="v">3680 W</div><div class="s">für alle Steckdosen des Stromkreises zusammen</div></div>
-  <div class="kpi"><div class="k">Spannungsfall</div><div class="v">3 %</div><div class="s">im Haus vom Zähler bis zum Gerät</div></div>
-  <div class="kpi"><div class="k">Hebelklemme</div><div class="v">11 mm</div><div class="s">abisolieren, starr und Litze</div></div>
+  <div class="kpi"><div class="k">Hebelklemme</div><div class="v">11 mm</div><div class="s">abisolieren</div></div>
   <div class="kpi"><div class="k">Höhen</div><div class="v">30 · 105 · 115</div><div class="s">cm: Steckdose, Schalter, über Arbeitsplatte</div></div>
-  <div class="kpi"><div class="k">Erdkabel</div><div class="v">60 cm</div><div class="s">tief, unter Einfahrten 80 cm</div></div>
 </div>
 
-<h2>Netz und Leistung</h2>
-<div class="tbl-wrap"><table style="min-width:680px">
-<thead><tr><th>Größe</th><th>Wert</th><th>Merke</th></tr></thead>
+<h2>Die wichtigsten Zahlen</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Regel</th><th>Wert</th></tr></thead>
 <tbody>
-<tr><td><b>Netzspannung</b></td><td>230 V, 50 Hz; zwischen zwei Außenleitern 400 V</td><td>Scheitelwert 325 V, das sieht ein Kondensator hinter dem Gleichrichter</td></tr>
-<tr><td><b>Einphasig 16 A</b></td><td>3,7 kW</td><td>Ein Heizlüfter und ein Wasserkocher sind zusammen schon zu viel, auch wenn der LS nicht gleich auslöst</td></tr>
-<tr><td><b>Drehstrom 3 × 16 A</b></td><td>11 kW</td><td>Kochfeld, Wallbox 11 kW</td></tr>
-<tr><td><b>Drehstrom 3 × 32 A</b></td><td>22 kW</td><td>Durchlauferhitzer, Wallbox 22 kW</td></tr>
-<tr><td><b>Strom aus Leistung</b></td><td>I = P / U</td><td>2000 W an 230 V: 8,7 A. An 12 V: 167 A</td></tr>
-<tr><td><b>Energie und Kosten</b></td><td>kWh = kW × Stunden</td><td>Ein 2-kW-Heizlüfter 5 Stunden: 10 kWh. Mal Preis je kWh laut Vertrag</td></tr>
-</tbody>
-</table></div>
-
-<h2>Leitungen und Sicherungen</h2>
-<div class="tbl-wrap"><table style="min-width:720px">
-<thead><tr><th>Regel</th><th>Wert</th><th>Beispiel</th></tr></thead>
-<tbody>
-<tr><td><b>1,5 mm² im Haus</b></td><td>B16, in Dämmung B13 oder B10</td><td>Licht, Steckdosen</td></tr>
-<tr><td><b>2,5 mm² im Haus</b></td><td>B16</td><td>Küche, Waschmaschine, außen</td></tr>
-<tr><td><b>Länge bei 16 A und 3 %</b></td><td>1,5 mm²: etwa 18 m, 2,5 mm²: etwa 30 m</td><td>Einfache Länge vom Verteiler</td></tr>
-<tr><td><b>Gerätezuleitung</b></td><td>0,75 mm² bis 6 A, 1 mm² bis 10 A, 1,5 mm² bis 16 A</td><td>nach EN 60335-1</td></tr>
-<tr><td><b>Verlängerung</b></td><td>bis 25 m 1,5 mm², länger 2,5 mm²</td><td>Draußen H07RN-F</td></tr>
-<tr><td><b>Kabeltrommel</b></td><td>aufgerollt etwa 1000 W, abgerollt 3500 W</td><td>Aufdruck gilt</td></tr>
-<tr><td><b>Sicherung bei Kleinspannung</b></td><td>1,25 bis 1,5 × Betriebsstrom, höchstens so viel, wie die Leitung trägt</td><td>Pumpe 8 A: 10-A-Sicherung, 1,5 mm²</td></tr>
-<tr><td><b>Hauptsicherung am Akku</b></td><td>so nah wie möglich, höchstens etwa 20 cm</td><td>Streifen- oder ANL-Sicherung</td></tr>
-<tr><td><b>Spannung verdoppeln</b></td><td>halber Strom, ein Viertel des Verlusts</td><td>24 V statt 12 V bei langen Wegen</td></tr>
-</tbody>
-</table></div>
-
-<h2>Maße bei der Installation</h2>
-<div class="tbl-wrap"><table style="min-width:720px">
-<thead><tr><th>Regel</th><th>Wert</th><th>Quelle</th></tr></thead>
-<tbody>
-<tr><td><b>Installationszonen waagerecht</b></td><td>15 bis 45 cm unter der Decke und über dem Boden, Vorzugsmaß 30 cm</td><td>DIN 18015-3</td></tr>
-<tr><td><b>Zone über Arbeitsflächen</b></td><td>100 bis 130 cm, Vorzugsmaß 115 cm</td><td>DIN 18015-3</td></tr>
-<tr><td><b>Zonen senkrecht</b></td><td>10 bis 30 cm neben Türen, Fenstern, Ecken, Vorzugsmaß 15 cm</td><td>DIN 18015-3</td></tr>
-<tr><td><b>Schalter neben der Tür</b></td><td>105 cm hoch</td><td>DIN 18015-3</td></tr>
-<tr><td><b>Gerätedose</b></td><td>60 mm, Bohrkrone 68 mm, Abstand in Kombination 71 mm</td><td>Herstellermaß</td></tr>
-<tr><td><b>In der Dose</b></td><td>Mantel etwa 1 cm hinein, Adern 10 bis 15 cm lang</td><td>Praxis</td></tr>
-<tr><td><b>Biegeradius NYM</b></td><td>mindestens 4 × Außendurchmesser</td><td>Datenblatt</td></tr>
-<tr><td><b>Bad</b></td><td>Bereich 1 bis 2,25 m hoch, Bereich 2 weitere 60 cm, bei bodengleicher Dusche 1,20 m um den Brauseanschluss</td><td>DIN VDE 0100-701</td></tr>
-<tr><td><b>Erdkabel</b></td><td>60 cm tief, unter Fahrflächen 80 cm, Sandbett, Warnband</td><td>DIN VDE 0100-520</td></tr>
-<tr><td><b>Netzwerk</b></td><td>höchstens 90 m Verlegekabel plus 10 m Patchkabel</td><td>ISO/IEC 11801</td></tr>
-</tbody>
-</table></div>
-
-<h2>Sicherheit in Zahlen</h2>
-<div class="tbl-wrap"><table style="min-width:680px">
-<thead><tr><th>Grenze</th><th>Wert</th></tr></thead>
-<tbody>
-<tr><td><b>Wahrnehmung</b></td><td>0,5 mA</td></tr>
-<tr><td><b>Loslassgrenze</b></td><td>etwa 10 mA</td></tr>
-<tr><td><b>FI-Auslösestrom für Personenschutz</b></td><td>30 mA, Auslösung höchstens 300 ms, bei 150 mA höchstens 40 ms</td></tr>
-<tr><td><b>Herzkammerflimmern möglich</b></td><td>ab etwa 50 mA</td></tr>
-<tr><td><b>Kleinspannung</b></td><td>bis 50 V AC / 120 V DC</td></tr>
-<tr><td><b>Ohne Berührungsschutz, trocken</b></td><td>bis 25 V AC / 60 V DC</td></tr>
-<tr><td><b>Bad, Bereich 0 (SELV)</b></td><td>höchstens 12 V AC / 30 V DC, auch dann mit Berührungsschutz</td></tr>
-<tr><td><b>Gerät: Schutzleiterwiderstand</b></td><td>höchstens 0,3 Ω bis 5 m</td></tr>
-<tr><td><b>Gerät: Isolationswiderstand</b></td><td>mindestens 1 MΩ (Schutzklasse I), 2 MΩ (Schutzklasse II)</td></tr>
+<tr><td><b>Strom aus Leistung</b></td><td>Watt ÷ Volt. 2000 W an 230 V sind 8,7 A</td></tr>
+<tr><td><b>1,5 mm² im Haus</b></td><td>B16, in Dämmung B13 oder B10</td></tr>
+<tr><td><b>2,5 mm² im Haus</b></td><td>B16</td></tr>
+<tr><td><b>Verlängerung</b></td><td>bis 25 m 1,5 mm², länger 2,5 mm². Draußen H07RN-F</td></tr>
+<tr><td><b>Kabeltrommel</b></td><td>aufgerollt etwa 1000 W, abgerollt 3500 W</td></tr>
+<tr><td><b>Spannungsfall</b></td><td>im Haus höchstens 3 %</td></tr>
+<tr><td><b>Sicherung bei 12 V</b></td><td>1,25 bis 1,5 × Betriebsstrom, direkt am Pluspol</td></tr>
+<tr><td><b>LED-Streifen</b></td><td>12 V bis 5 m, 24 V bis 10 m je Einspeisung</td></tr>
+<tr><td><b>Netzteil</b></td><td>20 bis 30 % Reserve</td></tr>
+<tr><td><b>Leitungen in der Wand</b></td><td>15 bis 45 cm unter der Decke und über dem Boden, 10 bis 30 cm neben Türen, Fenstern, Ecken</td></tr>
+<tr><td><b>Bad</b></td><td>Bereich 1 bis 2,25 m hoch, Bereich 2 weitere 60 cm. Alles hinter FI</td></tr>
+<tr><td><b>Erdkabel</b></td><td>NYY-J, 60 cm tief, unter Einfahrten 80 cm</td></tr>
+<tr><td><b>Berührbar ohne Schutz</b></td><td>bis 25 V AC / 60 V DC, trocken</td></tr>
 </tbody>
 </table></div>
 
 <h2>Aderfarben</h2>
-<div class="tbl-wrap"><table style="min-width:640px">
-<thead><tr><th>Leiter</th><th>Heute</th><th>Alt (vor 1965)</th></tr></thead>
-<tbody>
-<tr><td><b>Außenleiter L1, L2, L3</b></td><td><span class="adn"><span class="ad l"></span>braun</span> <span class="adn"><span class="ad s"></span>schwarz</span> <span class="adn"><span class="ad gr"></span>grau</span></td><td>schwarz, auch andere Farben</td></tr>
-<tr><td><b>Neutralleiter N</b></td><td><span class="adn"><span class="ad n"></span>blau</span></td><td>grau, oft zugleich Schutzleiter</td></tr>
-<tr><td><b>Schutzleiter PE</b></td><td><span class="adn"><span class="ad pe"></span>grün-gelb</span></td><td>rot</td></tr>
-<tr><td><b>Gleichstrom (Praxis)</b></td><td><span class="adn"><span class="ad r"></span>Plus rot</span> <span class="adn"><span class="ad s"></span>Minus schwarz</span></td><td></td></tr>
-</tbody>
-</table></div>
+<div class="pills">
+  <span class="adn"><span class="ad l"></span>L braun</span>
+  <span class="adn"><span class="ad s"></span>L schwarz</span>
+  <span class="adn"><span class="ad gr"></span>L grau</span>
+  <span class="adn"><span class="ad n"></span>N blau</span>
+  <span class="adn"><span class="ad pe"></span>PE grün-gelb</span>
+  <span class="adn"><span class="ad r"></span>DC Plus rot</span>
+</div>
+<p class="note">Altbau vor 1965: Schutzleiter rot, Neutralleiter grau. Immer messen.</p>
 
 <h2>Werkzeug für den Anfang</h2>
-<div class="grid3">
-  <div class="card"><div class="ct">Zweipoliger Spannungsprüfer</div><div class="cd">Nach DIN EN 61243-3. Das wichtigste Werkzeug überhaupt.</div></div>
-  <div class="card"><div class="ct">Multimeter CAT III</div><div class="cd">Mit Durchgangsprüfer und LoZ-Modus, Prüfspitzen mit Fingerschutz.</div></div>
-  <div class="card"><div class="ct">VDE-Schraubendreher</div><div class="cd">Isoliert bis 1000 V, Schlitz und Pozidriv, dazu ein Drehmomentschraubendreher.</div></div>
-  <div class="card"><div class="ct">Abisolierzange</div><div class="cd">Automatisch, für 0,2 bis 6 mm². Dazu ein Mantelabisolierer für Rundleitungen.</div></div>
-  <div class="card"><div class="ct">Presszangen</div><div class="cd">Aderendhülsenzange und Ratschen-Crimpzange für isolierte Kabelschuhe.</div></div>
-  <div class="card"><div class="ct">Leitungssucher</div><div class="cd">Mit Metall- und Spannungsortung. Vor jedem Bohren.</div></div>
-  <div class="card"><div class="ct">Verbrauchsmaterial</div><div class="cd">Hebelklemmen, Aderendhülsen, Schrumpfschlauch, Kabelbinder, Isolierband nur zum Kennzeichnen.</div></div>
-  <div class="card"><div class="ct">Beschriften</div><div class="cd">Etikettendrucker oder bedruckbarer Schrumpfschlauch.</div></div>
-  <div class="card"><div class="ct">Sperrelement</div><div class="cd">Für Leitungsschutzschalter, damit niemand wieder einschaltet.</div></div>
-</div>
+<ul class="chk">
+  <li><b>Zweipoliger Spannungsprüfer</b>, das wichtigste Werkzeug</li>
+  <li><b>Multimeter CAT III</b> mit Durchgangsprüfer</li>
+  <li><b>VDE-Schraubendreher</b>, isoliert bis 1000 V</li>
+  <li><b>Abisolierzange und Mantelabisolierer</b></li>
+  <li><b>Aderendhülsenzange und Crimpzange</b></li>
+  <li><b>Leitungssucher</b> vor jedem Bohren</li>
+  <li><b>Hebelklemmen, Aderendhülsen, Schrumpfschlauch</b></li>
+</ul>
 
 <h2>Checklisten</h2>
 <div class="gb">
   <div class="gb-col"><h4>Vor der Arbeit</h4><ul class="chk">
     <li>Stromkreis bestimmt, nicht geraten</li>
-    <li>Freigeschaltet und gegen Wiedereinschalten gesichert</li>
+    <li>Abgeschaltet und gegen Einschalten gesichert</li>
     <li>Prüfer an bekannter Spannung getestet</li>
-    <li>Alle Adern gegeneinander spannungsfrei gemessen</li>
-    <li>Prüfer erneut an bekannter Spannung getestet</li>
-    <li>Nachbarteile unter Spannung abgedeckt</li>
+    <li>Alle Adern gegeneinander gemessen</li>
     <li>Foto vom Ist-Zustand</li>
   </ul></div>
   <div class="gb-col"><h4>Nach der Arbeit</h4><ul class="chk">
     <li>Zupftest an jeder Ader</li>
-    <li>Kein Kupfer sichtbar, alle Einzeldrähte drin</li>
-    <li>Schutzleiter angeschlossen und durchgängig</li>
-    <li>Werkzeug aus Dose und Verteiler entfernt</li>
+    <li>Kein Kupfer sichtbar, alle Drähte drin</li>
+    <li>Schutzleiter angeschlossen</li>
     <li>Abdeckungen zu, dann einschalten</li>
-    <li>Funktion und Spannungen gemessen, FI-Prüftaste gedrückt</li>
-    <li>Plan und Beschriftung nachgetragen</li>
+    <li>Gemessen, FI-Prüftaste gedrückt, beschriftet</li>
   </ul></div>
 </div>

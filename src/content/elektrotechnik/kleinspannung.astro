@@ -1,34 +1,28 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Kleinspannung bis 25 V AC oder 60 V DC ist für den Körper in trockener Umgebung ungefährlich, für Leitungen nicht.</b> 12 V brauchen für dieselbe Leistung den zwanzigfachen Strom von 230 V. Ein Akku liefert im Kurzschluss Hunderte bis Tausende Ampere, und keine Haussicherung hilft. Deshalb: Sicherung direkt an die Quelle, Querschnitt nach Strom und Länge.</div>
+<div class="kurz"><b>12 V sind für dich in trockener Umgebung ungefährlich, für Kabel nicht.</b> Für dieselbe Leistung fließt zwanzigmal so viel Strom wie bei 230 V. Ein Akku liefert im Kurzschluss Hunderte bis Tausende Ampere. Deshalb: Sicherung direkt an die Quelle, Kabel dick genug.</div>
 
-<h2>Die Spannung wählen</h2>
-<div class="tbl-wrap"><table style="min-width:720px">
-<thead><tr><th data-s="num">Spannung</th><th>Typisch für</th><th>Worauf achten</th></tr></thead>
+<h2>Welche Spannung</h2>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th data-s="num">Spannung</th><th>Typisch für</th></tr></thead>
 <tbody>
-<tr><td><b>5 V</b></td><td>USB, Mikrocontroller, Sensoren, kleine LED</td><td>USB liefert je nach Standard 0,5 bis 3 A. Mehr als 2 A über dünne USB-Kabel: Spannung bricht ein</td></tr>
-<tr><td><b>12 V</b></td><td>LED-Streifen, Auto, Wohnmobil, Pumpen, Lüfter</td><td>Hohe Ströme, dicke Kabel. Über 5 m wird der Spannungsfall zum Thema</td></tr>
-<tr><td><b>24 V</b></td><td>Steuerungstechnik, 3D-Drucker, LKW, lange LED-Strecken</td><td>Halber Strom gegenüber 12 V, ein Viertel des Verlusts. Industriestandard</td></tr>
-<tr><td><b>48 V</b></td><td>PoE, E-Bike, Batteriespeicher, Server</td><td>Noch Kleinspannung, aber mit Ladeschlussspannung bis knapp 60 V. Darüber braucht es Berührungsschutz</td></tr>
+<tr><td><b>5 V</b></td><td>USB, Mikrocontroller, Sensoren</td></tr>
+<tr><td><b>12 V</b></td><td>LED-Streifen, Auto, Wohnmobil, Pumpen</td></tr>
+<tr><td><b>24 V</b></td><td>Steuerungen, 3D-Drucker, lange LED-Strecken. Halber Strom gegenüber 12 V</td></tr>
+<tr><td><b>48 V</b></td><td>E-Bike, Batteriespeicher, PoE. Geladen fast 60 V, braucht Berührungsschutz</td></tr>
 </tbody>
 </table></div>
 
-<h2>Netzteil wählen</h2>
-<div class="grid2">
-  <div class="card"><div class="ct">Geprüft, geschlossen, SELV</div><div class="cd">CE allein ist eine Selbsterklärung. Achte auf ein Prüfzeichen (GS, ENEC, VDE) und einen Händler in der EU. Billige Netzteile ohne Prüfung sparen an der Trennung zwischen 230 V und Ausgang. Im Fehlerfall liegt Netzspannung am Ausgang.</div></div>
-  <div class="card"><div class="ct">Leistung mit Reserve</div><div class="cd">Summe aller Verbraucher plus 20 bis 30 %. Ein Netzteil an der Grenze wird heiß und altert schnell. Motoren, Pumpen und große Kondensatoren ziehen beim Einschalten ein Vielfaches.</div></div>
-  <div class="card"><div class="ct">Spannung oder Strom konstant</div><div class="cd">LED-Streifen, Elektronik, Motoren: Konstantspannung (CV). Einzelne Hochleistungs-LED ohne eigenen Treiber: Konstantstrom (CC), und die LED hängt direkt am Treiber.</div></div>
-  <div class="card"><div class="ct">Einbaunetzteil</div><div class="cd">Offene Netzteile mit Schraubklemmen für 230 V gehören in ein geschlossenes Gehäuse, der Schutzleiter an die PE-Klemme. Sonst lieber Steckernetzteil oder Hutschienennetzteil mit Abdeckung: Dann bleibt die 230-V-Seite zu.</div></div>
-</div>
+<h2>Netzteil</h2>
 <ul>
-  <li><b>Nie zwei Netzteile einfach parallel</b> an denselben Ausgang, außer sie sind ausdrücklich dafür gebaut. Das stärkere arbeitet gegen das schwächere.</li>
-  <li><b>Mehrere Netzteile, gemeinsame Signale:</b> Die Minuspole (GND) verbinden, sonst sind Signale zwischen den Teilen undefiniert.</li>
-  <li><b>Labornetzteil beim Testen:</b> Strombegrenzung vor dem Einschalten niedrig setzen.</li>
+  <li><b>Geprüft kaufen:</b> mit Prüfzeichen (GS, VDE, ENEC) und von einem Händler in der EU. Billige Netzteile sparen an der Trennung zu 230 V.</li>
+  <li><b>20 bis 30 % Reserve</b> über der Summe aller Verbraucher.</li>
+  <li><b>Konstantspannung</b> für LED-Streifen und Elektronik, Konstantstrom nur für einzelne Power-LEDs.</li>
+  <li><b>Offene Einbaunetzteile</b> mit 230-V-Schraubklemmen nur im geschlossenen Gehäuse. Einfacher: Stecker- oder Hutschienennetzteil.</li>
 </ul>
 
 <h2>Sicherungen richtig setzen</h2>
-<p>Die Sicherung schützt die Leitung, die hinter ihr liegt. Deshalb sitzt sie am Anfang der Leitung, also an der Quelle, und ihr Wert passt zur dünnsten Leitung dahinter.</p>
 <svg class="dg l" viewBox="0 0 680 226" role="img" aria-label="12-Volt-System: Akku, Hauptsicherung direkt am Pluspol, Hauptschalter, Sicherungsverteiler mit einer Sicherung je Abgang, passend zum jeweiligen Querschnitt, Minus auf einer gemeinsamen Schiene">
   <rect class="box" x="20" y="66" width="90" height="90" rx="6" style="stroke:var(--text)" />
   <text class="lblb" x="65" y="108" text-anchor="middle">Akku</text>
@@ -57,41 +51,26 @@ import "./_style.css";
   <path class="aS" d="M110,142 H124 V212 H666 V50 H650 M666,105 H650 M666,160 H650" />
   <text class="lbl" x="400" y="206" text-anchor="middle">Minus: gemeinsame Schiene oder Masse</text>
 </svg>
-<div class="tbl-wrap"><table style="min-width:720px">
-<thead><tr><th>Regel</th><th>Warum</th></tr></thead>
-<tbody>
-<tr><td><b>Hauptsicherung so nah wie möglich am Pluspol</b></td><td>Die Leitung zwischen Akku und Sicherung ist ungeschützt. Faustwert: wenige Zentimeter, höchstens etwa 20 cm</td></tr>
-<tr><td><b>Jeder Abgang bekommt eine eigene Sicherung</b></td><td>Wo der Querschnitt kleiner wird, braucht die dünnere Leitung ihren eigenen Schutz</td></tr>
-<tr><td><b>Wert: über dem Betriebsstrom, unter der Belastbarkeit der Leitung</b></td><td>Etwa 1,25 bis 1,5 × Betriebsstrom, aber nie mehr, als die Leitung trägt. Werte unter <a href="#leitungen">Kabel &amp; Querschnitt</a></td></tr>
-<tr><td><b>Auch Ladeleitungen absichern, an der Akkuseite</b></td><td>Der Akku ist ebenfalls eine Quelle. Die Leitung vom Laderegler oder Ladegerät zum Akku bekommt ihre Sicherung am Akku</td></tr>
-<tr><td><b>Gleichstromtaugliche Sicherungen</b></td><td>Ein Gleichstrom-Lichtbogen erlischt nicht von selbst wie bei 50 Hz. Die DC-Nennspannung und das Schaltvermögen müssen auf der Sicherung stehen. Nicht jeder Sicherungsautomat für 230 V AC taugt dafür</td></tr>
-</tbody>
-</table></div>
-<div class="tbl-wrap"><table style="min-width:640px">
-<thead><tr><th>Bauform</th><th>Bereich</th><th>Wofür</th></tr></thead>
-<tbody>
-<tr><td><b>Flachstecksicherung (Mini, Standard)</b></td><td>1 bis 40 A</td><td>Abgänge, Kfz-Sicherungsverteiler</td></tr>
-<tr><td><b>MIDI, Streifensicherung</b></td><td>30 bis 200 A</td><td>Wechselrichter klein, Hauptsicherung im Auto</td></tr>
-<tr><td><b>ANL, MEGA</b></td><td>bis mehrere 100 A</td><td>Hauptsicherung Bordnetz, Wechselrichter</td></tr>
-<tr><td><b>Class T, NH</b></td><td>bis mehrere 100 A, hohes Schaltvermögen</td><td>Große Lithium-Speicher, deren Kurzschlussstrom eine einfache Streifensicherung nicht sicher trennt</td></tr>
-</tbody>
-</table></div>
+<ul class="chk">
+  <li><b>Hauptsicherung direkt am Pluspol,</b> höchstens etwa 20 cm Kabel davor.</li>
+  <li><b>Jeder Abgang eine eigene Sicherung,</b> passend zum dünnsten Kabel dahinter.</li>
+  <li><b>Wert:</b> etwa 1,25 bis 1,5 × Betriebsstrom, aber nie mehr, als das Kabel trägt.</li>
+  <li><b>Für Gleichstrom gemacht:</b> DC muss auf der Sicherung stehen. Große Lithium-Akkus brauchen Sicherungen mit hohem Schaltvermögen.</li>
+</ul>
 
-<h2>Akkus und Batterien</h2>
-<div class="tbl-wrap"><table style="min-width:780px">
-<thead><tr><th>Typ</th><th>Spannung</th><th>Stärken</th><th>Gefahren und Regeln</th></tr></thead>
+<h2>Akkus</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Typ</th><th>Worauf achten</th></tr></thead>
 <tbody>
-<tr><td><b>Blei, AGM, Gel</b></td><td>12 V (6 Zellen)</td><td>Billig, robust gegen Kälte</td><td>Tiefentladung schadet. Beim Laden entsteht Knallgas: lüften, keine Funken. Säure ätzt</td></tr>
-<tr><td><b>LiFePO4</b></td><td>12,8 V (4 Zellen)</td><td>Viele Zyklen, leicht, chemisch stabil</td><td>Kurzschlussströme von mehreren tausend Ampere. Schutzschaltung (BMS) Pflicht. Unter 0 °C nicht laden</td></tr>
-<tr><td><b>Li-Ion, LiPo</b></td><td>3,6 bis 3,7 V je Zelle</td><td>Sehr hohe Energiedichte</td><td>Brandgefahr bei Beschädigung, Überladung, Tiefentladung. Nie beschädigt oder aufgebläht laden. Laden auf nicht brennbarer Unterlage, nicht unbeaufsichtigt</td></tr>
-<tr><td><b>NiMH</b></td><td>1,2 V je Zelle</td><td>Unkompliziert, ersetzt AA und AAA</td><td>Nur mit passendem Ladegerät</td></tr>
+<tr><td><b>Blei, AGM</b> 12 V</td><td>Nicht tief entladen. Beim Laden entsteht Knallgas: lüften</td></tr>
+<tr><td><b>LiFePO4</b> 12,8 V</td><td>Sehr hohe Kurzschlussströme. Mit BMS, unter 0 °C nicht laden</td></tr>
+<tr><td><b>Li-Ion, LiPo</b> 3,7 V je Zelle</td><td>Brandgefahr. Nie beschädigt oder aufgebläht laden, nicht unbeaufsichtigt</td></tr>
 </tbody>
 </table></div>
 <div class="steps">
-  <div class="step"><h4>Werkzeug und Hände</h4>Ringe, Uhr und Armband ab. Isolierte Schlüssel, Polkappen auf den Pol, an dem du gerade nicht arbeitest.</div>
-  <div class="step"><h4>Abklemmen: erst Minus. Anklemmen: zuletzt Minus.</h4>Im Auto ist die Karosserie Minus. Rutscht der Schlüssel am Pluspol gegen das Blech, gibt es einen Kurzschluss, solange Minus noch dran ist.</div>
-  <div class="step"><h4>Ladegerät zur Chemie</h4>Blei, LiFePO4 und Li-Ion brauchen verschiedene Ladeschlussspannungen. Ein Bleilader mit Desulfatierung kann einem Lithium-Akku schaden.</div>
-  <div class="step"><h4>Kabelschuhe richtig</h4>Rohrkabelschuh, mit Sechskantpresse verpresst, Schrumpfschlauch darüber. Polklemme mit dem Drehmoment des Herstellers, lose Pole werden heiß.</div>
+  <div class="step"><h4>Ringe und Uhr ab</h4>Isoliertes Werkzeug, Kappe auf den Pol, an dem du nicht arbeitest.</div>
+  <div class="step"><h4>Minus zuerst ab, zuletzt dran</h4>Im Auto ist die Karosserie Minus. So gibt ein abrutschender Schlüssel am Pluspol keinen Kurzschluss.</div>
+  <div class="step"><h4>Ladegerät passend zum Akku</h4>Blei, LiFePO4 und Li-Ion brauchen verschiedene Ladegeräte.</div>
 </div>
 
 <h2>LED-Streifen</h2>
@@ -112,35 +91,14 @@ import "./_style.css";
   <text class="lok" x="350" y="148" text-anchor="middle">beidseitig eingespeist: gleichmäßig hell</text>
 </svg>
 <ul>
-  <li><b>Einspeisung:</b> 12-V-Streifen höchstens etwa 5 m je Einspeisung, 24-V-Streifen etwa 10 m. Längere Strecken nicht durchschleifen, sondern von beiden Enden oder alle paar Meter parallel einspeisen.</li>
-  <li><b>Zuleitung:</b> Querschnitt nach Strom und Länge, ein 5-m-Streifen mit 14 W/m zieht an 12 V schon 6 A.</li>
-  <li><b>Wärme:</b> Streifen ab etwa 10 W/m auf ein Aluprofil kleben. Klebeband allein führt die Wärme nicht ab, die LEDs altern schneller.</li>
-  <li><b>Dimmen:</b> auf der Gleichstromseite mit PWM-Dimmer oder mit einem dimmbaren Netzteil. Ein Wanddimmer vor einem normalen Netzteil funktioniert nicht.</li>
-  <li><b>Feuchte:</b> IP20 für innen, IP65 mit Silikonbeschichtung für Bad und Küche, IP67 und IP68 für draußen. Das Netzteil braucht dieselbe Schutzart oder einen trockenen Platz.</li>
+  <li><b>12 V höchstens etwa 5 m</b> je Einspeisung, 24 V etwa 10 m. Länger: von beiden Enden einspeisen.</li>
+  <li><b>Ab etwa 10 W/m</b> auf ein Aluprofil kleben, sonst altern die LEDs schnell.</li>
+  <li><b>Dimmen</b> mit PWM-Dimmer auf der 12-V-Seite oder mit dimmbarem Netzteil.</li>
 </ul>
 
-<h2>Fahrzeug, Wohnmobil, Boot</h2>
-<div class="grid2">
-  <div class="card"><div class="ct">Masse</div><div class="cd">Die Karosserie ist der Rückleiter. Massepunkte blank schleifen, Zahnscheibe, Polfett gegen Korrosion. Große Verbraucher bekommen eine eigene Masseleitung zum Akku.</div></div>
-  <div class="card"><div class="ct">Leitungen</div><div class="cd">Fahrzeugleitung (FLRY) oder Silikonlitze, im Motorraum im Wellrohr. Durch jedes Blech mit Gummitülle. Alle 20 bis 30 cm befestigen, damit nichts scheuert.</div></div>
-  <div class="card"><div class="ct">Große Verbraucher über Relais</div><div class="cd">Scheinwerfer, Kompressor, Lüfter: Der Schalter steuert nur das Relais, der Laststrom fließt über kurzen Weg und eigene Sicherung.</div></div>
-  <div class="card"><div class="ct">230 V an Bord</div><div class="cd">Landstromanschluss und Verteilung mit FI gehören in Fachhand. Der Ausgang eines Wechselrichters ist echte Netzspannung: gleiche Regeln wie im Haus, und nie mit dem Hausnetz verbinden.</div></div>
-</div>
-
-<h2>Kleine Solaranlage</h2>
+<h2>Auto und Solar</h2>
 <ul>
-  <li><b>Module in Reihe addieren die Spannung.</b> Die Leerlaufspannung steigt bei Kälte. Am kältesten Wintermorgen darf sie die Höchstspannung des Ladereglers nicht überschreiten. Mit Reserve rechnen.</li>
-  <li><b>Anschlussreihenfolge:</b> Erst den Akku an den Laderegler, dann die Module. Abklemmen umgekehrt. So steht es in fast jeder Anleitung, weil der Regler sonst seine Systemspannung falsch erkennt.</li>
-  <li><b>Module liefern immer Spannung, sobald Licht fällt.</b> Beim Montieren abdecken. Stecker (MC4) nie unter Last trennen: Gleichstrom zieht einen Lichtbogen.</li>
-  <li><b>Über 120 V DC ist keine Kleinspannung mehr.</b> Größere Strings, Balkon- und Dachanlagen mit Batteriespeicher: Fachbetrieb.</li>
+  <li><b>Auto:</b> Massepunkte blank und fest, Kabel durch Bleche nur mit Tülle, große Verbraucher über Relais mit eigener Sicherung.</li>
+  <li><b>Wechselrichter:</b> Der Ausgang ist echte Netzspannung. Gleiche Regeln wie im Haus und nie mit dem Hausnetz verbinden.</li>
+  <li><b>Solarmodul:</b> Erst Akku an den Laderegler, dann das Modul. Bei Kälte steigt die Modulspannung: Reserve beim Laderegler. MC4-Stecker nie unter Last trennen.</li>
 </ul>
-
-<div class="srcs">
-  <div class="sh">Quellen</div>
-  <ul>
-    <li>DIN VDE 0100-410: Schutzkleinspannung SELV und PELV, Grenzen 50 V AC und 120 V DC.</li>
-    <li>ISO 8820: Sicherungseinsätze für Straßenfahrzeuge. Herstellerdatenblätter für MIDI-, ANL-, MEGA- und Class-T-Sicherungen.</li>
-    <li>Victron Energy, <i>Wiring Unlimited</i>: frei verfügbares Handbuch zu Kabeln, Sicherungen und Batterien im 12- bis 48-V-Bereich.</li>
-    <li>Datenblätter und Anleitungen von LED-Streifen, LED-Netzteilen (Mean Well) und MPPT-Ladereglern.</li>
-  </ul>
-</div>

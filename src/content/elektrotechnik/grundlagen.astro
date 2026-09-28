@@ -1,0 +1,81 @@
+---
+import "./_style.css";
+---
+<div class="kurz"><b>Vier Größen reichen für die Praxis:</b> Spannung U in Volt, Strom I in Ampere, Widerstand R in Ohm, Leistung P in Watt. Zwei Formeln verbinden sie: U = R · I und P = U · I.</div>
+
+<h2>Der Stromkreis</h2>
+<svg class="dg m" viewBox="0 0 480 170" role="img" aria-label="Einfacher Stromkreis: Batterie mit 12 Volt, Strom von 2 Ampere, Lampe mit 6 Ohm, Leistung 24 Watt">
+  <path class="aR" d="M60,74 V30 H400 V70" />
+  <path class="aS" d="M400,100 V140 H60 V84" />
+  <path class="w" d="M42,74 H78 M50,84 H70" />
+  <text class="lbad" x="82" y="70">+</text>
+  <circle class="w" cx="400" cy="85" r="15" /><path class="w" d="M389,74 L411,96 M411,74 L389,96" />
+  <path class="accf" d="M240,30 l-10,-6 v12 z" />
+  <text class="lbla" x="90" y="92">U = 12 V</text>
+  <text class="lbla" x="232" y="20" text-anchor="middle">I = 2 A</text>
+  <text class="lbla" x="424" y="82">R = 6 Ω</text>
+  <text class="lbl" x="424" y="98">P = 24 W</text>
+  <text class="lbl" x="60" y="164">12 V = 6 Ω · 2 A   und   24 W = 12 V · 2 A</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Größe</th><th>Einheit</th><th>Bild mit Wasser</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><b>Spannung U</b></td><td>Volt (V)</td><td>Druck in der Leitung</td><td>Steckdose 230 V, Autobatterie 12 V</td></tr>
+<tr><td><b>Strom I</b></td><td>Ampere (A)</td><td>Wie viel Wasser fließt</td><td>Wasserkocher 9 A, LED 0,02 A</td></tr>
+<tr><td><b>Widerstand R</b></td><td>Ohm (Ω)</td><td>Engstelle im Rohr</td><td>Dünnes Kabel hat mehr als dickes</td></tr>
+<tr><td><b>Leistung P</b></td><td>Watt (W)</td><td>Wie viel Arbeit pro Sekunde</td><td>Heizlüfter 2000 W, Handyladegerät 20 W</td></tr>
+</tbody>
+</table></div>
+<div class="calc" data-calc="ohm">
+  <h4>Ohm-Rechner: zwei Werte eintragen</h4>
+  <div class="row">
+    <div><label>U in V</label><input data-k="u" type="number" step="any" placeholder="230" /></div>
+    <div><label>I in A</label><input data-k="i" type="number" step="any" /></div>
+    <div><label>R in Ω</label><input data-k="r" type="number" step="any" /></div>
+    <div><label>P in W</label><input data-k="p" type="number" step="any" placeholder="2000" /></div>
+  </div>
+  <div class="out" data-out></div>
+  <div class="hint" data-hint hidden></div>
+</div>
+
+<h2>Watt in Ampere</h2>
+<p>Die wichtigste Rechnung im Alltag: <b>Strom = Leistung ÷ Spannung.</b> Die Leistung steht auf dem Typenschild.</p>
+<div class="tbl-wrap"><table style="min-width:560px">
+<thead><tr><th>Gerät</th><th>Rechnung</th><th>Strom</th></tr></thead>
+<tbody>
+<tr><td><b>Heizlüfter an 230 V</b></td><td>2000 W ÷ 230 V</td><td>8,7 A</td></tr>
+<tr><td><b>Kühlbox an 12 V</b></td><td>60 W ÷ 12 V</td><td>5 A</td></tr>
+<tr><td><b>Mikrocontroller an 5 V</b></td><td>2,5 W ÷ 5 V</td><td>0,5 A</td></tr>
+</tbody>
+</table></div>
+<p class="note">Gleiche Leistung bei kleiner Spannung heißt großer Strom. Deshalb brauchen 12-V-Anlagen dicke Kabel.</p>
+
+<h2>Reihe und parallel</h2>
+<div class="gb">
+  <div class="gb-col"><h4>In Reihe</h4><ul>
+    <li>Ein Weg, derselbe Strom durch alles</li>
+    <li>Spannungen addieren sich: zwei 12-V-Akkus ergeben 24 V</li>
+    <li>Fällt ein Teil aus, ist alles aus</li>
+  </ul></div>
+  <div class="gb-col"><h4>Parallel</h4><ul>
+    <li>Alle hängen an derselben Spannung</li>
+    <li>Ströme addieren sich: So hängen alle Steckdosen im Haus</li>
+    <li>Fällt ein Teil aus, laufen die anderen weiter</li>
+  </ul></div>
+</div>
+
+<h2>Gleich- und Wechselstrom</h2>
+<div class="grid2">
+  <div class="card"><div class="ct">Gleichstrom (DC)</div><div class="cd">Fließt immer in eine Richtung, es gibt Plus und Minus. Akkus, Batterien, Netzteil-Ausgänge, Auto. Verpolen kann Elektronik zerstören.</div></div>
+  <div class="card"><div class="ct">Wechselstrom (AC)</div><div class="cd">Das Netz: 230 V, die Richtung wechselt 50-mal pro Sekunde. Die Spitze liegt bei 325 V. Drehstrom sind drei solche Leiter, zwischen zwei davon liegen 400 V, für Herd, Durchlauferhitzer und Wallbox.</div></div>
+</div>
+
+<h2>Kurzschluss, Überlast, Fehlerstrom</h2>
+<p>Drei Fehler, drei Schutzgeräte. Wer das auseinanderhalten kann, versteht jeden Sicherungskasten.</p>
+<div class="grid3">
+  <div class="card"><div class="ct">Kurzschluss</div><div class="cd">L trifft N direkt, ohne Verbraucher dazwischen. Hunderte Ampere, Funken. Die Sicherung (LS) schaltet sofort ab.</div></div>
+  <div class="card"><div class="ct">Überlast</div><div class="cd">Zu viele Geräte an einem Stromkreis. Die Leitung wird langsam warm. Die Sicherung schaltet nach Minuten ab, bei knapper Überlast viel später.</div></div>
+  <div class="card"><div class="ct">Fehlerstrom</div><div class="cd">Strom fließt nicht zurück über N, sondern über den Schutzleiter oder einen Menschen zur Erde. Der FI-Schalter merkt schon 30 mA und schaltet in Sekundenbruchteilen ab.</div></div>
+</div>
+
+<p class="note">Wer tiefer einsteigen will: Netzwerke, Felder, Wechselstromrechnung und Schaltvorgänge stehen im Modul <a href="elektrotechnik-theorie.html">Elektrotechnik-Theorie</a>.</p>

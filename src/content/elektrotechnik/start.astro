@@ -1,12 +1,11 @@
 ---
 import "./_style.css";
 ---
-<p class="lede">Elektrotechnik für den Alltag: was hinter der Steckdose passiert, wie Leitungen verlegt, geklemmt und abgesichert werden und wie du eigene Projekte so verkabelst, dass sie sicher laufen. Die Theorie steht hinten im Modul, für wenn du rechnen willst.</p>
+<p class="lede">Elektrotechnik zum Anwenden: Kabel, Klemmen, Sicherungen, Lampen und Steckdosen, 12-V-Projekte. Kurz, mit Bildern, ohne Formeln, wo keine nötig sind.</p>
 
-<div class="kurz z"><b>Erst spannungsfrei, dann anfassen.</b> Fast jede Regel in diesem Modul folgt aus drei Sätzen: Strom durch den Körper tötet. Zu viel Strom in einer Leitung brennt. Eine lose Klemme glüht.</div>
+<div class="kurz z"><b>Erst spannungsfrei, dann anfassen.</b> Fast alles hier folgt aus drei Sätzen: Strom durch den Körper tötet. Zu viel Strom in einer Leitung brennt. Eine lose Klemme glüht.</div>
 
 <h2>Welche Spannung, welche Regeln</h2>
-<p>Die wichtigste Frage bei jeder Arbeit: Mit welcher Spannung hast du es zu tun? Bis 25 V Wechsel- oder 60 V Gleichspannung aus einer sicheren Quelle ist Berühren in trockener Umgebung ungefährlich. Bis 50 V Wechsel- oder 120 V Gleichspannung reicht die Kleinspannung, dann aber mit Berührungsschutz. In diesem Bereich kannst du selbst bauen, solange Querschnitt und Sicherung stimmen. Ab 230 V gelten andere Regeln, für dich und rechtlich.</p>
 <svg class="dg l" viewBox="0 0 660 200" role="img" aria-label="Spannungsleiter von 5 Volt bis 400 Volt mit Beispielen und der Frage, wer daran arbeiten darf">
   <rect class="okz" x="20" y="78" width="330" height="30" rx="6" />
   <rect class="midz" x="354" y="78" width="146" height="30" rx="6" />
@@ -39,77 +38,89 @@ import "./_style.css";
   <text class="lsm" x="20" y="190">Grenzen nach DIN VDE 0100-410. Berührbar ohne Schutz nur bis 25 V~ / 60 V=, im Bad noch weniger.</text>
 </svg>
 
-<h2>Die zwölf Grundregeln</h2>
+<h2>Die zehn Grundregeln</h2>
 <div class="grid rk">
-  <div class="card"><h3>Fünf Regeln vor jedem Griff</h3><p>Freischalten, gegen Wiedereinschalten sichern, Spannungsfreiheit messen, erden wo nötig, Nachbarteile abdecken. Auch für „nur kurz“.</p></div>
-  <div class="card"><h3>Messen, nicht vermuten</h3><p>Spannungsfreiheit prüfst du mit einem zweipoligen Spannungsprüfer an allen Adern. Der Phasenprüfer-Schraubendreher zählt nicht.</p></div>
-  <div class="card"><h3>Farbe ist ein Hinweis, kein Beweis</h3><p>Im Altbau kann Rot der Schutzleiter sein und Grau Neutral- und Schutzleiter zugleich. Vor jeder Annahme messen.</p></div>
-  <div class="card"><h3>Die Sicherung schützt die Leitung</h3><p>Dich schützt der FI-Schalter mit 30 mA. Eine 16-A-Sicherung merkt den Strom durch einen Menschen gar nicht, tödlich sind schon 50 mA.</p></div>
-  <div class="card"><h3>Nie größer absichern</h3><p>Fliegt die Sicherung, ist die Last zu groß oder es gibt einen Fehler. Eine größere Sicherung macht aus der Leitung eine Heizung.</p></div>
-  <div class="card"><h3>Grün-gelb ist nur Schutzleiter</h3><p>Nie als Schaltdraht, nie abgeschnitten. Er wird zuerst angeschlossen und ist im Stecker die längste Ader.</p></div>
-  <div class="card"><h3>Jede Klemme bekommt den Zupftest</h3><p>Jede Ader nach dem Klemmen kräftig ziehen. Litze unter Schrauben nur mit Aderendhülse, nie verzinnt.</p></div>
-  <div class="card"><h3>Verbindungen gehören in Dosen</h3><p>Keine Klemme lose in der Wand, im Putz oder in der Dämmung. Jede Dose bleibt zugänglich.</p></div>
-  <div class="card"><h3>Leitungen laufen gerade</h3><p>Nur senkrecht und waagerecht, in den Installationszonen. Außerhalb davon vor dem Bohren suchen.</p></div>
-  <div class="card"><h3>Sicherung an die Quelle</h3><p>Bei 12 V und Akkus sitzt die Sicherung direkt am Pluspol. Am Verbraucher schützt sie die Leitung nicht.</p></div>
-  <div class="card"><h3>Kein Zug auf Klemmen</h3><p>Mantel bis in die Dose, Kabel im Stecker und am Gehäuse festgeklemmt. Die Klemme hält Strom, nicht Gewicht.</p></div>
-  <div class="card"><h3>Aufschreiben</h3><p>Stromkreise im Verteiler beschriften, Leitungswege vor dem Verputzen fotografieren, für jedes Projekt ein Schaltplan.</p></div>
+  <div class="card"><h3>Fünf Regeln vor jedem Griff</h3><p>Freischalten, sichern, Spannungsfreiheit messen, erden wo nötig, abdecken. Auch für „nur kurz“.</p></div>
+  <div class="card"><h3>Messen, nicht vermuten</h3><p>Mit einem zweipoligen Spannungsprüfer an allen Adern. Der Phasenprüfer-Schraubendreher zählt nicht.</p></div>
+  <div class="card"><h3>Farbe ist kein Beweis</h3><p>Im Altbau kann Rot der Schutzleiter sein. Vor jeder Annahme messen.</p></div>
+  <div class="card"><h3>FI schützt dich, Sicherung die Leitung</h3><p>Die Sicherung merkt den Strom durch einen Menschen gar nicht. Tödlich sind schon 50 mA.</p></div>
+  <div class="card"><h3>Nie größer absichern</h3><p>Fliegt die Sicherung, gibt es einen Grund. Eine größere macht aus der Leitung eine Heizung.</p></div>
+  <div class="card"><h3>Grün-gelb ist nur Schutzleiter</h3><p>Nie als Schaltdraht, nie abschneiden. Im Stecker ist er die längste Ader.</p></div>
+  <div class="card"><h3>Zupftest an jeder Klemme</h3><p>Jede Ader nach dem Klemmen kräftig ziehen. Litze unter Schrauben nur mit Aderendhülse.</p></div>
+  <div class="card"><h3>Verbindungen gehören in Dosen</h3><p>Keine Klemme lose in Wand, Decke oder Dämmung. Jede Dose bleibt zugänglich.</p></div>
+  <div class="card"><h3>Sicherung an die Quelle</h3><p>Bei 12 V und Akkus sitzt die Sicherung direkt am Pluspol, nicht am Verbraucher.</p></div>
+  <div class="card"><h3>Aufschreiben</h3><p>Stromkreise im Verteiler beschriften, Leitungen vor dem Verputzen fotografieren.</p></div>
 </div>
+
+<h2>Was darfst du selbst?</h2>
+<p>In Deutschland darf an der festen Anlage im Haus nur ein eingetragener Elektrofachbetrieb bauen, erweitern und ändern (NAV § 13). Ein defektes Teil gleichartig ersetzen (Instandhaltung) ist hinter dem Zähler ausgenommen. Dafür brauchst du trotzdem Sachkunde, und die Haftung liegt bei dir.</p>
+<svg class="dg l" viewBox="0 0 680 206" role="img" aria-label="Vom Hausanschlusskasten bis zum Gerät: welche Teile nur der Netzbetreiber, welche nur ein eingetragener Betrieb und welche du selbst anfassen darfst">
+  <rect class="badz" x="10" y="10" width="198" height="42" rx="7" />
+  <text class="lbad" x="109" y="27" text-anchor="middle">Netzbetreiber und</text>
+  <text class="lbad" x="109" y="42" text-anchor="middle">eingetragener Betrieb</text>
+  <rect class="midz" x="226" y="10" width="326" height="42" rx="7" />
+  <text class="lmid" x="389" y="27" text-anchor="middle">Kundenanlage: Neu, Erweitern, Ändern nur</text>
+  <text class="lmid" x="389" y="42" text-anchor="middle">eingetragener Betrieb. Instandhalten frei</text>
+  <rect class="okz" x="570" y="10" width="100" height="42" rx="7" />
+  <text class="lok" x="620" y="27" text-anchor="middle">Gerät, nicht</text>
+  <text class="lok" x="620" y="42" text-anchor="middle">Teil der Anlage</text>
+  <path class="w" d="M100,92 H118 M208,92 H226 M316,92 H334 M434,92 H452 M552,92 H570" />
+  <rect class="box" x="10" y="70" width="90" height="44" rx="6" />
+  <rect class="box" x="118" y="70" width="90" height="44" rx="6" />
+  <rect class="box" x="226" y="70" width="90" height="44" rx="6" />
+  <rect class="box" x="334" y="70" width="100" height="44" rx="6" />
+  <rect class="box" x="452" y="70" width="100" height="44" rx="6" />
+  <rect class="box" x="570" y="70" width="100" height="44" rx="6" />
+  <text class="lblb" x="55" y="89" text-anchor="middle">Hausanschl.-</text>
+  <text class="lblb" x="55" y="104" text-anchor="middle">kasten</text>
+  <text class="lblb" x="163" y="96" text-anchor="middle">Zähler</text>
+  <text class="lblb" x="271" y="96" text-anchor="middle">Verteiler</text>
+  <text class="lblb" x="384" y="89" text-anchor="middle">Leitung in</text>
+  <text class="lblb" x="384" y="104" text-anchor="middle">der Wand</text>
+  <text class="lblb" x="502" y="89" text-anchor="middle">Steckdose,</text>
+  <text class="lblb" x="502" y="104" text-anchor="middle">Schalter</text>
+  <text class="lblb" x="620" y="89" text-anchor="middle">Stecker,</text>
+  <text class="lblb" x="620" y="104" text-anchor="middle">Gerät</text>
+  <text class="lbl" x="109" y="138" text-anchor="middle">Plombe, Hauptsicherung,</text>
+  <text class="lbl" x="109" y="152" text-anchor="middle">Zähler: Finger weg,</text>
+  <text class="lbl" x="109" y="166" text-anchor="middle">auch für Reparaturen</text>
+  <text class="lbl" x="389" y="138" text-anchor="middle">Defekten Schalter gleichartig tauschen:</text>
+  <text class="lbl" x="389" y="152" text-anchor="middle">Instandhaltung. Neue Steckdose, neue</text>
+  <text class="lbl" x="389" y="166" text-anchor="middle">Leitung, Schalter versetzen: Fachbetrieb</text>
+  <text class="lbl" x="620" y="138" text-anchor="middle">Stecker, Kabel,</text>
+  <text class="lbl" x="620" y="152" text-anchor="middle">Verlängerung:</text>
+  <text class="lbl" x="620" y="166" text-anchor="middle">du haftest</text>
+  <text class="lsm" x="10" y="196">Nach NAV § 13 Abs. 2. Die Anlage beginnt hinter der Hausanschlusssicherung.</text>
+</svg>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Arbeit</th><th>Wer</th></tr></thead>
+<tbody>
+<tr><td><b>Sicherung einschalten, FI-Prüftaste drücken, Stromkreise beschriften</b></td><td><span class="b ok">jeder</span></td></tr>
+<tr><td><b>Projekte mit Kleinspannung aus geprüftem Netzteil oder Akku</b></td><td><span class="b ok">jeder</span></td></tr>
+<tr><td><b>Leuchte an vorhandenen Deckenauslass, Stecker an Geräteleitung</b></td><td><span class="b mid">mit Sachkunde</span></td></tr>
+<tr><td><b>Defekten Schalter oder Steckdose gleichartig ersetzen</b></td><td><span class="b mid">mit Sachkunde</span></td></tr>
+<tr><td><b>Neue Steckdose, Leitung verlängern, Smart-Home-Aktor, Arbeiten im Verteiler</b></td><td><span class="b bad">Fachbetrieb</span></td></tr>
+<tr><td><b>Herd, Durchlauferhitzer, Wallbox, Zählerschrank</b></td><td><span class="b bad">Fachbetrieb</span></td></tr>
+<tr><td><b>Balkonkraftwerk bis 800 VA und 2000 Wp einstecken</b></td><td><span class="b ok">selbst</span> Im Marktstammdatenregister anmelden</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>„Mit Sachkunde“ heißt:</b> Du machst die <a href="#sicherheit">fünf Regeln</a>, hast einen zweipoligen Spannungsprüfer, erkennst L, N und PE auch bei falschen Farben und weißt, wie die Klemme richtig sitzt. Fehlt eins davon: Fachbetrieb. In der Mietwohnung gehört die Anlage dem Vermieter, Mängel meldest du ihm schriftlich.</div>
+<p class="note">Österreich: Installationen nur durch befugte Elektrotechniker. Schweiz: Laien dürfen in der eigenen Wohnung Steckdosen und Schalter hinter FI 30 mA setzen, danach ist eine Kontrolle mit Sicherheitsnachweis Pflicht (NIV Art. 16). Viele Betriebe akzeptieren Eigenleistung wie Schlitze und Leerrohre, wenn es vorher abgesprochen ist.</p>
 
 <h2>Wo was steht</h2>
 <div class="map">
-  <a href="#sicherheit"><div class="mt"><span class="i">⚠️</span>Sicherheit &amp; 5 Regeln</div><div class="md">Die fünf Regeln, Spannungsprüfer, was Strom im Körper macht, Erste Hilfe</div></a>
-  <a href="#recht"><div class="mt"><span class="i">⚖️</span>Selbst machen oder Fachbetrieb</div><div class="md">Was du in Deutschland selbst darfst, Mietwohnung, Versicherung, AT und CH</div></a>
-  <a href="#hausnetz"><div class="mt"><span class="i">🏠</span>Hausnetz &amp; Sicherungskasten</div><div class="md">Vom Hausanschluss bis zur Steckdose, FI, LS, Aderfarben, Stromkreise</div></a>
-  <a href="#leitungen"><div class="mt"><span class="i">🧵</span>Kabel, Querschnitt &amp; Absicherung</div><div class="md">NYM, H07RN-F und Co., welcher Querschnitt, welche Sicherung, Spannungsfall mit Rechner</div></a>
-  <a href="#verlegen"><div class="mt"><span class="i">📐</span>Leitungen verlegen</div><div class="md">Installationszonen, Dosen, Rohre, Hohlwand, Bad, Außen und Erdkabel</div></a>
-  <a href="#verbinden"><div class="mt"><span class="i">🔗</span>Verbinden &amp; Klemmen</div><div class="md">Hebelklemme, Schraubklemme, Aderendhülse, Crimpen, Löten, Stecker montieren</div></a>
-  <a href="#schaltungen"><div class="mt"><span class="i">💡</span>Anschließen &amp; Schaltungen</div><div class="md">Lampe, Steckdose, Aus-, Wechsel-, Kreuz- und Serienschaltung, Stromstoß, Smart Home</div></a>
-  <a href="#kleinspannung"><div class="mt"><span class="i">🔋</span>12 V, Akkus &amp; Kleinspannung</div><div class="md">Netzteil wählen, Sicherungen, Batterien, LED-Streifen, Bordnetz</div></a>
-  <a href="#projekte"><div class="mt"><span class="i">🧰</span>Projekte verkabeln</div><div class="md">Planen, Farben, Beschriften, Leitungsführung, Stecker, Gehäuse und IP-Schutz</div></a>
-  <a href="#pruefen"><div class="mt"><span class="i">🔎</span>Prüfen &amp; Fehlersuche</div><div class="md">Vor dem Einschalten, FI löst aus, Sicherung fliegt, typische Fehler</div></a>
-  <a href="#faustregeln"><div class="mt"><span class="i">📏</span>Faustregeln &amp; Tabellen</div><div class="md">Alle wichtigen Zahlen auf einer Seite</div></a>
-  <a href="#gleichstrom"><div class="mt"><span class="i">🔋</span>Gleichstrom &amp; Netzwerke<span class="bg">Theorie</span></div><div class="md">Ohm, Reihe und Parallel, Teiler, Kirchhoff, Thévenin, mit Rechnern</div></a>
-  <a href="#felder"><div class="mt"><span class="i">🧲</span>Felder, Spulen &amp; Trafos<span class="bg">Theorie</span></div><div class="md">Induktion, Sättigung, Kerne, Transformator</div></a>
-  <a href="#wechselstrom"><div class="mt"><span class="i">〰️</span>Wechselstrom<span class="bg">Theorie</span></div><div class="md">Effektivwert, Zeiger, Impedanz, komplexe Rechnung</div></a>
-  <a href="#leistung"><div class="mt"><span class="i">⚡</span>Leistung &amp; Drehstrom<span class="bg">Theorie</span></div><div class="md">Wirk-, Blind-, Scheinleistung, Stern und Dreieck</div></a>
-  <a href="#transient"><div class="mt"><span class="i">📉</span>Schaltvorgänge<span class="bg">Theorie</span></div><div class="md">RC, RL, Schwingkreis, Einschaltstrom, Skin-Effekt, Wellenwiderstand</div></a>
+  <a href="#grundlagen"><div class="mt"><span class="i">🔋</span>Die Basics</div><div class="md">Spannung, Strom, Widerstand, Leistung. Watt in Ampere</div></a>
+  <a href="#sicherheit"><div class="mt"><span class="i">⚠️</span>Sicherheit &amp; 5 Regeln</div><div class="md">Freischalten, prüfen, Erste Hilfe</div></a>
+  <a href="#hausnetz"><div class="mt"><span class="i">🏠</span>Sicherungskasten</div><div class="md">FI, Sicherungen, Aderfarben, was an eine Steckdose passt</div></a>
+  <a href="#leitungen"><div class="mt"><span class="i">🧵</span>Kabel &amp; Querschnitt</div><div class="md">Welches Kabel, wie dick, welche Sicherung. Mit Rechner</div></a>
+  <a href="#verlegen"><div class="mt"><span class="i">📐</span>Leitungen verlegen</div><div class="md">Wo Leitungen liegen, Dosen, Bad, draußen</div></a>
+  <a href="#verbinden"><div class="mt"><span class="i">🔗</span>Verbinden &amp; Klemmen</div><div class="md">Hebelklemme, Aderendhülse, Crimpen, Stecker</div></a>
+  <a href="#schaltungen"><div class="mt"><span class="i">💡</span>Lampe, Steckdose, Schalter</div><div class="md">Anschließen und die Grundschaltungen</div></a>
+  <a href="#kleinspannung"><div class="mt"><span class="i">🔋</span>12 V &amp; Akkus</div><div class="md">Netzteil, Sicherungen, Batterie, LED-Streifen</div></a>
+  <a href="#projekte"><div class="mt"><span class="i">🧰</span>Projekte verkabeln</div><div class="md">Plan, Farben, Beschriften, Stecker, Gehäuse</div></a>
+  <a href="#pruefen"><div class="mt"><span class="i">🔎</span>Prüfen &amp; Fehlersuche</div><div class="md">Vor dem Einschalten, wenn FI oder Sicherung fliegen</div></a>
+  <a href="#faustregeln"><div class="mt"><span class="i">📏</span>Faustregeln</div><div class="md">Alle wichtigen Zahlen auf einer Seite</div></a>
+  <a href="elektrotechnik-theorie.html"><div class="mt"><span class="i">📐</span>Mehr Theorie<span class="bg">optional</span></div><div class="md">Eigenes Modul für alle, die rechnen wollen</div></a>
 </div>
 
-<h2>Wo du anfängst</h2>
-<div class="gb">
-  <div class="gb-col"><h4>🏠 Zuhause, 230 V</h4><ol>
-    <li><a href="#recht">Was darfst du selbst?</a></li>
-    <li><a href="#sicherheit">Die fünf Regeln</a> üben, bis sie sitzen</li>
-    <li><a href="#hausnetz">Sicherungskasten lesen</a> und Stromkreise beschriften</li>
-    <li><a href="#schaltungen">Lampe anschließen</a>, Schaltungen verstehen</li>
-    <li><a href="#pruefen">Fehler finden</a>, wenn der FI fliegt</li>
-  </ol></div>
-  <div class="gb-col"><h4>🧰 Projekt, Kleinspannung</h4><ol>
-    <li><a href="#kleinspannung">Netzteil, Akku und Sicherung</a> planen</li>
-    <li><a href="#leitungen">Querschnitt</a> nach Strom und Länge wählen</li>
-    <li><a href="#verbinden">Sauber verbinden</a>: crimpen, klemmen, schrumpfen</li>
-    <li><a href="#projekte">Verkabeln, beschriften, einbauen</a></li>
-    <li><a href="#pruefen">Prüfen vor dem ersten Einschalten</a></li>
-  </ol></div>
-</div>
-
-<div class="stop"><b>Bei 230 V gilt:</b> Planen, verstehen, Fehler eingrenzen und defekte Teile gleichartig ersetzen kannst du lernen. Neue Leitungen, neue Steckdosen, neue Stromkreise und alles im Zählerschrank macht in Deutschland ein eingetragener Elektrofachbetrieb. Die Einzelheiten stehen unter <a href="#recht">Selbst machen oder Fachbetrieb</a>. Dieses Modul ersetzt keine Ausbildung.</div>
-
-<h2>Wie dieses Modul zum Rest steht</h2>
-<div class="grid">
-  <div class="card"><div class="ct">→ <a href="elektronik-grundlagen.html">Elektronik 101</a></div><div class="cd">Multimeter, Oszilloskop, Labornetzteil, Bauteile und Fehlersuche in Schaltungen. Hier Leitungen und Installation, dort Platinen und Messgeräte.</div></div>
-  <div class="card"><div class="ct">→ <a href="loeten-referenz.html">Löten</a></div><div class="cd">Lötstelle, Kolben, Temperatur, Draht. Für Kabel gilt hier: Crimpen schlägt Löten, wo es rüttelt.</div></div>
-  <div class="card"><div class="ct">→ <a href="automatisierung-robotik.html#schaltschrank">Schaltschrank</a></div><div class="cd">Hutschiene, Klemmen, Kennzeichnung nach IEC 81346, Wärme im Schrank.</div></div>
-  <div class="card"><div class="ct">→ <a href="analogtechnik.html">Analogtechnik</a></div><div class="cd">Sobald Halbleiter dazukommen: Diode, Transistor, OPV, Netzteile, EMV.</div></div>
-</div>
-
-<div class="srcs">
-  <div class="sh">Grundlage dieses Moduls</div>
-  <ul>
-    <li>DIN VDE 0105-100: Betrieb von elektrischen Anlagen, darin die fünf Sicherheitsregeln.</li>
-    <li>DIN VDE 0100 (Errichten von Niederspannungsanlagen), vor allem Teil 410 (Schutz gegen elektrischen Schlag), 520 (Kabel- und Leitungsanlagen), 701 (Bad).</li>
-    <li>DIN 18015-1 bis -3: Elektrische Anlagen in Wohngebäuden, Planung, Ausstattung und Installationszonen.</li>
-    <li>Niederspannungsanschlussverordnung (NAV), § 13: wer an der Anlage hinter dem Hausanschluss arbeiten darf.</li>
-    <li>Manfred Albach, <i>Grundlagen der Elektrotechnik 1 &amp; 2</i>, Pearson Studium, für den Theorieteil.</li>
-  </ul>
-</div>
+<div class="stop"><b>Dieses Modul ersetzt keine Ausbildung.</b> Es zeigt, wie es richtig geht, und wo die Grenze zum Fachbetrieb liegt.</div>

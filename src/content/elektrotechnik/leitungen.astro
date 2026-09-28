@@ -1,9 +1,9 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Die Sicherung wird nach der Leitung gewählt, nie nach dem Gerät.</b> Der Querschnitt entscheidet zwei Dinge: wie viel Strom die Leitung dauerhaft trägt, ohne dass die Isolierung zu heiß wird, und wie viel Spannung unterwegs verloren geht. Das Erste begrenzt die Sicherung, das Zweite die Länge.</div>
+<div class="kurz"><b>Erst das Kabel wählen, dann die passende Sicherung. Nie umgekehrt.</b> Der Querschnitt entscheidet, wie viel Strom das Kabel dauerhaft trägt, ohne heiß zu werden, und wie viel Spannung auf langen Wegen verloren geht.</div>
 
-<h2>Typenbezeichnung lesen</h2>
+<h2>Die Bezeichnung lesen</h2>
 <svg class="dg l" viewBox="0 0 660 190" role="img" aria-label="Querschnitt einer Mantelleitung NYM-J 3 mal 1,5 mit Mantel, Füllmischung und drei Adern in braun, blau und grün-gelb, daneben die Bedeutung der Typenbezeichnung">
   <circle class="sf" cx="110" cy="95" r="70" />
   <circle class="box" cx="110" cy="95" r="58" />
@@ -28,62 +28,43 @@ import "./_style.css";
   <text class="lbl" x="324" y="152">Y: Isolierung aus PVC</text>
   <text class="lbl" x="311" y="168">N: nach VDE genormter Typ</text>
 </svg>
-<div class="tbl-wrap"><table style="min-width:700px">
-<thead><tr><th>Kürzel</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
-<tbody>
-<tr><td><b>H</b> am Anfang</td><td>harmonisierter europäischer Typ</td><td>H07RN-F</td></tr>
-<tr><td><b>03, 05, 07</b></td><td>Nennspannung 300/300 V, 300/500 V, 450/750 V</td><td>H05VV-F: 300/500 V</td></tr>
-<tr><td><b>V</b></td><td>PVC</td><td>H05VV-F: Ader und Mantel aus PVC</td></tr>
-<tr><td><b>R, N</b></td><td>Gummi, Chloroprenkautschuk (robust, öl- und witterungsfest)</td><td>H07RN-F: Gummiader, Neoprenmantel</td></tr>
-<tr><td><b>-F, -K</b></td><td>feindrähtig: -F für bewegliche Leitungen, -K für feste Verlegung</td><td>H07V-K: Einzelader, feindrähtig</td></tr>
-<tr><td><b>-U, -R</b></td><td>eindrähtig (starr), mehrdrähtig</td><td>H07V-U: starre Einzelader</td></tr>
-<tr><td><b>3G1,5 oder 3X1,5</b></td><td>G: mit grün-gelber Ader, X: ohne</td><td>H07RN-F 3G2,5</td></tr>
-</tbody>
-</table></div>
 
-<h2>Die üblichen Leitungen</h2>
-<div class="tbl-wrap"><table style="min-width:820px">
-<thead><tr><th data-s="text">Typ</th><th>Aufbau</th><th>Wofür</th><th>Nicht für</th></tr></thead>
+<h2>Welches Kabel wofür</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Typ</th><th>Wofür</th></tr></thead>
 <tbody>
-<tr><td><b>NYM-J</b></td><td>Mantelleitung, starre Adern, PVC, grau</td><td>Feste Installation im Haus: auf, im und unter Putz, im Rohr, in trockenen und nassen Räumen</td><td>Erde, bewegliche Anschlüsse, direkte Sonne, Rüttelbeton</td></tr>
-<tr><td><b>NYY-J</b></td><td>Kabel, dicker PVC-Mantel, schwarz</td><td>Erdreich, im Freien, Beton, Garten, Garage</td><td>bewegliche Anschlüsse</td></tr>
-<tr><td><b>NHXMH-J</b></td><td>wie NYM, halogenfrei</td><td>Flucht- und Rettungswege, öffentliche Gebäude: im Brandfall keine giftigen, korrosiven Gase</td><td></td></tr>
-<tr><td><b>H07RN-F</b></td><td>Gummischlauchleitung, feindrähtig, schwarz</td><td>Draußen, Baustelle, Werkstatt, Verlängerung für Garten und Werkzeug. Robust, kältefest, UV-fest</td><td>feste Verlegung unter Putz</td></tr>
-<tr><td><b>H05VV-F</b></td><td>PVC-Schlauchleitung, feindrähtig, weiß oder schwarz</td><td>Geräteanschluss innen: Lampe, Kaltgerätekabel, Haushaltsgeräte</td><td>draußen, Kälte unter etwa +5 °C beim Bewegen, Öl, Werkstattbetrieb</td></tr>
-<tr><td><b>H07V-K, H07V-U</b></td><td>Einzelader ohne Mantel</td><td>Verdrahtung in Verteilern, Schaltschränken, Geräten und im Installationsrohr</td><td>ungeschützte Verlegung auf, im oder unter Putz</td></tr>
-<tr><td><b>Silikonlitze</b></td><td>sehr feindrähtig, Silikonisolierung, bis etwa 180 °C</td><td>Akkus, Modellbau, Heizungen, Lampenfassungen</td><td>scharfe Kanten: Silikon schneidet sich leicht auf</td></tr>
-<tr><td><b>LiYY, LiYCY</b></td><td>Steuerleitung, feindrähtig, LiYCY mit Kupferschirm</td><td>Sensoren, Signale, Steuerungen, Busse</td><td>Netzspannung, wenn nicht dafür bemessen</td></tr>
-<tr><td><b>J-Y(St)Y</b></td><td>Fernmeldekabel, starre dünne Adern, mit Schirm</td><td>Klingel, Telefon, Busleitungen (KNX grün), Sensoren</td><td>Netzspannung, nie</td></tr>
-<tr><td><b>H1Z2Z2-K</b></td><td>Solarkabel, doppelt isoliert, UV-fest</td><td>Gleichstrom von PV-Modulen, 4 und 6 mm²</td><td></td></tr>
-<tr><td><b>Cat 6A / Cat 7 Verlegekabel</b></td><td>vier verdrillte Paare, geschirmt, starr</td><td>Netzwerk in der Wand, bis 90 m fest plus 10 m Patchkabel</td><td>als Patchkabel: dafür gibt es flexible Litze</td></tr>
+<tr><td><b>NYM-J</b> grau, starr</td><td>Feste Installation im Haus, auf und unter Putz. Nicht in die Erde, nicht in die Sonne</td></tr>
+<tr><td><b>NYY-J</b> schwarz, starr</td><td>Erdkabel, draußen, Garten, Garage</td></tr>
+<tr><td><b>H07RN-F</b> schwarz, Gummi</td><td>Verlängerung für draußen, Baustelle, Werkstatt. Robust und kältefest</td></tr>
+<tr><td><b>H05VV-F</b> weiß oder schwarz</td><td>Geräteanschluss innen: Lampen, Haushaltsgeräte</td></tr>
+<tr><td><b>H07V-K</b> Einzelader</td><td>Nur im Rohr, im Verteiler oder im Gehäuse, nie offen verlegen</td></tr>
+<tr><td><b>Silikon- oder Fahrzeuglitze</b></td><td>12 V, Akkus, Modellbau, Auto</td></tr>
 </tbody>
 </table></div>
 <div class="gb">
-  <div class="gb-col"><h4>Starr (eindrähtig)</h4><ul>
-    <li>Für feste Verlegung: NYM, Verlegekabel</li>
-    <li>Klemmt ohne Aderendhülse in jeder Klemme</li>
-    <li>Bricht, wenn er dauernd bewegt wird</li>
+  <div class="gb-col"><h4>Starr</h4><ul>
+    <li>Für feste Verlegung (NYM)</li>
+    <li>Klemmt ohne Aderendhülse</li>
+    <li>Bricht, wenn er sich bewegt</li>
   </ul></div>
-  <div class="gb-col"><h4>Litze (feindrähtig)</h4><ul>
-    <li>Für alles, was sich bewegt oder rüttelt: Geräte, Fahrzeuge, Schaltschrank</li>
-    <li>In Schraubklemmen nur mit Aderendhülse, in Federklemmen nach Hersteller</li>
-    <li>Nie verzinnt unter eine Schraube: Das Lot gibt unter Druck nach, die Klemme lockert sich</li>
+  <div class="gb-col"><h4>Litze</h4><ul>
+    <li>Für alles, was sich bewegt oder rüttelt</li>
+    <li>In Schraubklemmen nur mit Aderendhülse</li>
+    <li>Nie verzinnt unter eine Schraube</li>
   </ul></div>
 </div>
 
-<h2>Querschnitt und Absicherung im Haus</h2>
-<p>Richtwerte für Kupferleitungen mit PVC-Isolierung (NYM) bei bis zu 30 °C Raumtemperatur. Die verbindliche Bemessung nach DIN VDE 0298-4 und 0100-430 macht der Fachbetrieb, weil Verlegeart, Häufung und Länge hineinspielen.</p>
-<div class="tbl-wrap"><table style="min-width:760px">
-<thead><tr><th data-s="num">Querschnitt</th><th>Übliche Sicherung</th><th>In Dämmung oder gebündelt</th><th>Typisch für</th></tr></thead>
+<h2>Querschnitt und Sicherung im Haus</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th data-s="num">Querschnitt</th><th>Sicherung</th><th>Typisch</th></tr></thead>
 <tbody>
-<tr><td><b>1,5 mm²</b></td><td>B16</td><td>B13 oder B10</td><td>Licht, Steckdosen im Wohnraum</td></tr>
-<tr><td><b>2,5 mm²</b></td><td>B16, bei guter Kühlung B20</td><td>B16</td><td>Küche, Waschmaschine, Bad, außen, lange Wege</td></tr>
-<tr><td><b>4 mm²</b></td><td>B25, frei verlegt B32</td><td>B20</td><td>Durchlauferhitzer klein, Zuleitung Garage</td></tr>
-<tr><td><b>6 mm²</b></td><td>B32, frei verlegt bis 40 A</td><td>B25</td><td>Durchlauferhitzer, Wallbox, Unterverteilung</td></tr>
-<tr><td><b>10 mm²</b></td><td>B40, frei verlegt B50</td><td>B40</td><td>Zuleitung Unterverteilung, Nebengebäude</td></tr>
+<tr><td><b>1,5 mm²</b></td><td>B16, in Dämmung B13 oder B10</td><td>Licht, Steckdosen</td></tr>
+<tr><td><b>2,5 mm²</b></td><td>B16</td><td>Küche, Waschmaschine, Bad, außen</td></tr>
+<tr><td><b>4 mm²</b></td><td>B25, in Dämmung B20</td><td>Garage, kleiner Durchlauferhitzer</td></tr>
+<tr><td><b>6 mm²</b></td><td>B32, in Dämmung B25</td><td>Durchlauferhitzer, Wallbox</td></tr>
 </tbody>
 </table></div>
-<p>Wie viel eine Leitung trägt, hängt davon ab, wie gut sie ihre Wärme loswird. Dieselbe 1,5-mm²-Leitung trägt in Wärmedämmung ein Drittel weniger als frei in der Luft:</p>
+<p>Warum „in Dämmung“ weniger: Das Kabel wird seine Wärme nicht los. Dieselbe 1,5-mm²-Leitung trägt je nach Verlegung zwischen 15 und 22 A:</p>
 <svg class="dg l" viewBox="0 0 660 176" role="img" aria-label="Strombelastbarkeit einer 1,5-Quadratmillimeter-Leitung je nach Verlegeart: in Wärmedämmung etwa 15 Ampere, im Rohr auf der Wand 16,5, direkt auf oder in der Wand 19,5, frei in Luft etwa 22 Ampere">
   <text class="lblb" x="10" y="36">In Wärmedämmung (A1)</text>
   <text class="lblb" x="10" y="72">Im Rohr auf der Wand (B2)</text>
@@ -101,33 +82,24 @@ import "./_style.css";
   <text class="lbla" x="534" y="166">16 A</text>
   <text class="lsm" x="10" y="170">Zwei belastete Adern, 30 °C.</text>
 </svg>
-<p class="note">Die gestrichelte Linie ist die B16-Sicherung. Liegt die Leitung in Dämmung, trägt sie weniger als 16 A: Dann gehört B13 oder B10 davor. Werte nach DIN VDE 0298-4 und IEC 60364-5-52, gerundet.</p>
-<div class="warn"><b>Was die Belastbarkeit weiter senkt:</b> Mehrere Stromkreise gebündelt (sechs nebeneinander tragen je nur noch rund 57 %), hohe Umgebungstemperatur (bei 50 °C noch rund 70 %), Drehstrom mit drei belasteten Adern (etwa 10 % weniger). Nicht der Spannungsfall begrenzt eine Leitung, sondern die zulässige Leitertemperatur der Isolierung: PVC 70 °C, vernetztes PE (XLPE) 90 °C, Silikon rund 180 °C.</div>
+<p class="note">Richtwerte. Die verbindliche Bemessung nach DIN VDE 0298-4 macht der Fachbetrieb.</p>
 
-<h2>Leitungen für Geräte und Verlängerungen</h2>
-<div class="tbl-wrap"><table style="min-width:780px">
-<thead><tr><th data-s="num">Querschnitt</th><th>≈ AWG</th><th>Widerstand je m (Cu)</th><th>Gerätestrom bis</th><th>Typisch</th></tr></thead>
+<h2>Geräte, Verlängerungen, Projekte</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th data-s="num">Querschnitt</th><th>≈ AWG</th><th>Strom bis</th><th>Typisch</th></tr></thead>
 <tbody>
-<tr><td><b>0,14 mm²</b></td><td>26</td><td>0,125 Ω</td><td>Signal</td><td>Sensoren, Taster, Datenleitungen</td></tr>
-<tr><td><b>0,25 mm²</b></td><td>24</td><td>0,070 Ω</td><td>Signal, bis etwa 1 A</td><td>Servokabel, LED-Signale</td></tr>
-<tr><td><b>0,5 mm²</b></td><td>20</td><td>0,035 Ω</td><td>3 A, höchstens 2 m</td><td>Kleingeräte, Schreibtischlampe</td></tr>
-<tr><td><b>0,75 mm²</b></td><td>18</td><td>0,023 Ω</td><td>6 A</td><td>Lampen, Geräte, 12-V-Verbraucher</td></tr>
-<tr><td><b>1,0 mm²</b></td><td>17</td><td>0,018 Ω</td><td>10 A</td><td>Kaltgerätekabel</td></tr>
-<tr><td><b>1,5 mm²</b></td><td>15 bis 16</td><td>0,012 Ω</td><td>16 A</td><td>Verlängerung bis 25 m, Werkzeug</td></tr>
-<tr><td><b>2,5 mm²</b></td><td>13 bis 14</td><td>0,0070 Ω</td><td>25 A</td><td>Verlängerung ab 25 m, Kabeltrommel 50 m</td></tr>
-<tr><td><b>4 mm²</b></td><td>11 bis 12</td><td>0,0044 Ω</td><td>32 A</td><td>12-V-Hauptleitungen, Wechselrichter klein</td></tr>
-<tr><td><b>6 mm²</b></td><td>9 bis 10</td><td>0,0029 Ω</td><td>40 A</td><td>Batterie, Solar</td></tr>
-<tr><td><b>10 mm²</b></td><td>7 bis 8</td><td>0,0018 Ω</td><td>63 A</td><td>Batteriekabel, Wechselrichter</td></tr>
-<tr><td><b>16 mm²</b></td><td>5 bis 6</td><td>0,0011 Ω</td><td>etwa 80 A</td><td>Batterie zu Wechselrichter, Starterkabel</td></tr>
+<tr><td><b>0,5 mm²</b></td><td>20</td><td>3 A, nur bis 2 m</td><td>Kleingeräte, Sensoren</td></tr>
+<tr><td><b>0,75 mm²</b></td><td>18</td><td>6 A</td><td>Lampen, 12-V-Verbraucher</td></tr>
+<tr><td><b>1,5 mm²</b></td><td>15 bis 16</td><td>16 A</td><td>Verlängerung bis 25 m</td></tr>
+<tr><td><b>2,5 mm²</b></td><td>13 bis 14</td><td>25 A</td><td>Verlängerung über 25 m</td></tr>
+<tr><td><b>6 mm²</b></td><td>9 bis 10</td><td>40 A</td><td>Batterie, Solar</td></tr>
+<tr><td><b>16 mm²</b></td><td>5 bis 6</td><td>etwa 80 A</td><td>Batterie zu Wechselrichter</td></tr>
 </tbody>
 </table></div>
-<p class="note">Gerätestrom nach der Tabelle für Geräteanschlussleitungen in EN 60335-1, 16 mm² als Richtwert. AWG ist die amerikanische Drahtstärke: kleinere Zahl, dickerer Draht. Die AWG-Größe hat oft etwas weniger Kupfer als der metrische Nachbar, im Zweifel die nächstdickere nehmen.</p>
+<p class="note">Nach EN 60335-1 für einzelne Leitungen. AWG: kleinere Zahl, dickerer Draht. Im Zweifel die nächstdickere nehmen.</p>
 
-<h2>Spannungsfall</h2>
-<div class="fbox">
-  <span class="f">ΔU = 2 · l · I · ρ / A&nbsp;&nbsp;&nbsp;&nbsp;mit ρ_Cu = 0,0175 Ω·mm²/m</span>
-  <span class="l">l ist die einfache Leitungslänge, der Faktor 2 steht für Hin- und Rückleiter. Beispiel: 5 m, 0,75 mm², 6 A an 12 V ergibt 1,4 V Verlust, also 12 % und 8,4 W Wärme in der Leitung.</span>
-</div>
+<h2>Spannungsfall und Rechner</h2>
+<p>Auf langen Wegen geht Spannung im Kabel verloren. Im Haus sollen es höchstens 3 % sein, bei 12 V wird das schnell knapp.</p>
 <div class="calc" data-calc="leitung">
   <h4>Querschnitt und Spannungsfall</h4>
   <div class="row">
@@ -147,24 +119,4 @@ import "./_style.css";
   <div class="out" data-out></div>
   <div class="hint" data-hint hidden></div>
 </div>
-<div class="tbl-wrap"><table style="min-width:620px">
-<thead><tr><th>An 230 V, 3 % Verlust</th><th data-s="num">bei 10 A</th><th data-s="num">bei 16 A</th></tr></thead>
-<tbody>
-<tr><td><b>1,5 mm²</b></td><td>bis etwa 29 m</td><td>bis etwa 18 m</td></tr>
-<tr><td><b>2,5 mm²</b></td><td>bis etwa 49 m</td><td>bis etwa 30 m</td></tr>
-<tr><td><b>4 mm²</b></td><td>bis etwa 79 m</td><td>bis etwa 49 m</td></tr>
-</tbody>
-</table></div>
-<p class="note">Einfache Länge vom Verteiler bis zum Verbraucher, Leiter kalt (20 °C). Eine warme Leitung hat rund ein Fünftel mehr Widerstand. DIN 18015-1 empfiehlt im Wohnhaus höchstens 3 % zwischen Zähler und Verbraucher.</p>
-<div class="tip"><b>Bei 12 V wird es eng.</b> Derselbe Strom verliert an 12 V absolut gleich viel Spannung wie an 230 V, prozentual aber das Zwanzigfache. Deshalb brauchen 12-V-Anlagen dicke Kabel, und deshalb nimmt man für längere Wege lieber 24 oder 48 V: doppelte Spannung, halber Strom, ein Viertel der Verluste. Mehr unter <a href="#kleinspannung">12 V, Akkus &amp; Kleinspannung</a>.</div>
-
-<div class="srcs">
-  <div class="sh">Quellen</div>
-  <ul>
-    <li>DIN VDE 0298-4: Strombelastbarkeit von Kabeln und Leitungen in und an Gebäuden, mit Umrechnungsfaktoren für Häufung und Temperatur. IEC 60364-5-52, Anhang B.</li>
-    <li>DIN VDE 0100-430: Schutz bei Überstrom, Zuordnung von Sicherung und Leitung. DIN VDE 0100-520: Kabel- und Leitungsanlagen.</li>
-    <li>EN 60335-1, Tabelle zu Nennquerschnitten von Geräteanschlussleitungen.</li>
-    <li>HD 361 / DIN VDE 0292: System der Typenkurzzeichen für harmonisierte Leitungen. DIN VDE 0250-204: Mantelleitung NYM.</li>
-    <li>Datenblätter NYM-J (Lapp, Faber): Einsatzbereiche, Biegeradius, Temperaturbereich.</li>
-  </ul>
-</div>
+<div class="tip"><b>Bei 12 V wird es eng.</b> Prozentual verliert 12 V zwanzigmal mehr als 230 V. Für längere Wege lieber 24 V: halber Strom, ein Viertel des Verlusts.</div>

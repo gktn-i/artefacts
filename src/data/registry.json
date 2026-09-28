@@ -710,7 +710,7 @@
       },
       {
        "m": "elektrotechnik",
-       "h": "recht",
+       "h": "start",
        "t": "Was darf ich selbst?"
       },
       {
@@ -728,8 +728,7 @@
       },
       {
        "m": "elektrotechnik",
-       "h": "kleinspannung",
-       "t": "12 V & Akkus"
+       "h": "kleinspannung"
       },
       {
        "m": "elektrotechnik",
@@ -755,12 +754,12 @@
        "t": "Querschnitt & Spannungsfall"
       },
       {
-       "m": "elektrotechnik",
+       "m": "et-theorie",
        "h": "gleichstrom",
        "t": "Ohm, Teiler, Vorwiderstand"
       },
       {
-       "m": "elektrotechnik",
+       "m": "et-theorie",
        "h": "transient",
        "t": "RC-Zeitkonstante"
       },
@@ -1098,50 +1097,35 @@
        "icon": "⚡",
        "kind": "Referenz",
        "updated": "2026-09-28",
-       "desc": "Elektrotechnik für zuhause und für Projekte: Sicherheitsregeln, was du selbst darfst, Hausnetz und Sicherungskasten, Kabel und Querschnitt, Leitungen verlegen, Klemmen und Crimpen, Lampen, Steckdosen und Schaltungen, 12 V und Akkus, Projekte sauber verkabeln, Prüfen und Fehlersuche. Dahinter die Theorie: Gleich- und Wechselstrom, Felder, Leistung, Drehstrom, Schaltvorgänge.",
+       "desc": "Elektrotechnik zum Anwenden, zuhause und im Projekt: Sicherheitsregeln und was du selbst darfst, Sicherungskasten, Kabel und Querschnitt, Leitungen verlegen, Klemmen und Crimpen, Lampen, Steckdosen und Schalter, 12 V und Akkus, Projekte verkabeln, Fehlersuche. Kurz, mit Bildern und Faustregeln.",
        "tags": [
         "elektroinstallation",
-        "hausinstallation",
         "sicherheit",
         "fünf sicherheitsregeln",
         "spannungsprüfer",
         "fi-schalter",
-        "rcd",
-        "leitungsschutzschalter",
         "sicherungskasten",
         "aderfarben",
-        "schutzleiter",
-        "nym",
         "querschnitt",
         "absicherung",
         "spannungsfall",
+        "kabel verlegen",
         "installationszonen",
-        "leitung verlegen",
         "wago",
-        "klemmen",
         "aderendhülse",
         "crimpen",
         "lampe anschließen",
         "steckdose",
         "wechselschaltung",
-        "kreuzschaltung",
         "12 v",
-        "kleinspannung",
         "batterie",
         "sicherung",
         "led-streifen",
         "verkabelung",
         "schutzart",
-        "ip",
         "fehlersuche",
-        "gleichstrom",
-        "wechselstrom",
-        "netzwerkanalyse",
-        "felder",
-        "transformator",
-        "leistung",
-        "drehstrom",
-        "schaltvorgänge"
+        "ohmsches gesetz",
+        "watt ampere"
        ],
        "sections": [
         {
@@ -1149,20 +1133,20 @@
          "t": "Start & Grundregeln"
         },
         {
+         "h": "grundlagen",
+         "t": "Die Basics: U, I, R, P"
+        },
+        {
          "h": "sicherheit",
          "t": "Sicherheit & 5 Regeln"
         },
         {
-         "h": "recht",
-         "t": "Selbst machen oder Fachbetrieb"
-        },
-        {
          "h": "hausnetz",
-         "t": "Hausnetz & Sicherungskasten"
+         "t": "Sicherungskasten & Hausnetz"
         },
         {
          "h": "leitungen",
-         "t": "Kabel, Querschnitt & Absicherung"
+         "t": "Kabel & Querschnitt"
         },
         {
          "h": "verlegen",
@@ -1174,11 +1158,11 @@
         },
         {
          "h": "schaltungen",
-         "t": "Anschließen & Schaltungen"
+         "t": "Lampe, Steckdose, Schalter"
         },
         {
          "h": "kleinspannung",
-         "t": "12 V, Akkus & Kleinspannung"
+         "t": "12 V & Akkus"
         },
         {
          "h": "projekte",
@@ -1190,7 +1174,122 @@
         },
         {
          "h": "faustregeln",
-         "t": "Faustregeln & Tabellen"
+         "t": "Faustregeln"
+        }
+       ],
+       "groups": [
+        {
+         "l": "Start",
+         "sections": [
+          "start",
+          "grundlagen",
+          "sicherheit"
+         ]
+        },
+        {
+         "l": "Zuhause",
+         "sections": [
+          "hausnetz",
+          "leitungen",
+          "verlegen",
+          "verbinden",
+          "schaltungen"
+         ]
+        },
+        {
+         "l": "Projekte",
+         "sections": [
+          "kleinspannung",
+          "projekte"
+         ]
+        },
+        {
+         "l": "Nachschlagen",
+         "sections": [
+          "pruefen",
+          "faustregeln"
+         ]
+        }
+       ],
+       "alias": {
+        "regeln": "start",
+        "grundregeln": "start",
+        "recht": "start",
+        "darf-ich": "start",
+        "fachbetrieb": "start",
+        "basics": "grundlagen",
+        "ohm": "grundlagen",
+        "gleichstrom": "grundlagen",
+        "wechselstrom": "grundlagen",
+        "leistung": "grundlagen",
+        "felder": "grundlagen",
+        "transient": "grundlagen",
+        "netzwerke": "grundlagen",
+        "sicherheitsregeln": "sicherheit",
+        "erste-hilfe": "sicherheit",
+        "verteiler": "hausnetz",
+        "sicherungskasten": "hausnetz",
+        "aderfarben": "hausnetz",
+        "fi": "hausnetz",
+        "kabel": "leitungen",
+        "querschnitt": "leitungen",
+        "spannungsfall": "leitungen",
+        "installationszonen": "verlegen",
+        "bad": "verlegen",
+        "erdkabel": "verlegen",
+        "klemmen": "verbinden",
+        "wago": "verbinden",
+        "crimpen": "verbinden",
+        "lampe": "schaltungen",
+        "steckdose": "schaltungen",
+        "wechselschaltung": "schaltungen",
+        "12v": "kleinspannung",
+        "batterie": "kleinspannung",
+        "led": "kleinspannung",
+        "akku": "kleinspannung",
+        "verkabelung": "projekte",
+        "schutzart": "projekte",
+        "ip": "projekte",
+        "fehlersuche": "pruefen",
+        "fi-loest-aus": "pruefen",
+        "tabellen": "faustregeln"
+       },
+       "related": [
+        "elektronik-101",
+        "et-theorie"
+       ]
+      },
+      {
+       "id": "et-theorie",
+       "file": "elektrotechnik-theorie.html",
+       "name": "Elektrotechnik-Theorie",
+       "icon": "📐",
+       "kind": "Referenz",
+       "updated": "2026-09-28",
+       "desc": "Die Gesetze hinter der Praxis: Gleichstrom und Netzwerkanalyse, Felder, Spulen und Trafos, Wechselstrom und komplexe Rechnung, Leistung und Drehstrom, Schaltvorgänge und Signalleitungen. Mit Rechnern für Ohm, Teiler, Impedanz und Zeitkonstante.",
+       "tags": [
+        "gleichstrom",
+        "wechselstrom",
+        "netzwerkanalyse",
+        "thévenin",
+        "kirchhoff",
+        "felder",
+        "induktion",
+        "transformator",
+        "impedanz",
+        "blindleistung",
+        "drehstrom",
+        "stern dreieck",
+        "schaltvorgänge",
+        "zeitkonstante",
+        "schwingkreis",
+        "skin-effekt",
+        "wellenwiderstand"
+       ],
+       "sections": [
+        {
+         "h": "start",
+         "t": "Start & Landkarte"
         },
         {
          "h": "gleichstrom",
@@ -1215,42 +1314,16 @@
        ],
        "groups": [
         {
-         "l": "Start & Sicherheit",
+         "l": "Grundlagen",
          "sections": [
           "start",
-          "sicherheit",
-          "recht"
-         ]
-        },
-        {
-         "l": "Zuhause",
-         "sections": [
-          "hausnetz",
-          "leitungen",
-          "verlegen",
-          "verbinden",
-          "schaltungen"
-         ]
-        },
-        {
-         "l": "Projekte",
-         "sections": [
-          "kleinspannung",
-          "projekte"
-         ]
-        },
-        {
-         "l": "Prüfen & Nachschlagen",
-         "sections": [
-          "pruefen",
-          "faustregeln"
-         ]
-        },
-        {
-         "l": "Theorie",
-         "sections": [
           "gleichstrom",
-          "felder",
+          "felder"
+         ]
+        },
+        {
+         "l": "Wechselstrom & Dynamik",
+         "sections": [
           "wechselstrom",
           "leistung",
           "transient"
@@ -1258,57 +1331,17 @@
         }
        ],
        "alias": {
-        "regeln": "start",
-        "grundregeln": "start",
-        "sicherheitsregeln": "sicherheit",
-        "erste-hilfe": "sicherheit",
-        "schutzmassnahmen": "sicherheit",
-        "darf-ich": "recht",
-        "fachbetrieb": "recht",
-        "vermieter": "recht",
-        "verteiler": "hausnetz",
-        "sicherungskasten": "hausnetz",
-        "aderfarben": "hausnetz",
-        "fi": "hausnetz",
-        "rcd": "hausnetz",
-        "kabel": "leitungen",
-        "querschnitt": "leitungen",
-        "spannungsfall": "leitungen",
-        "absicherung": "leitungen",
-        "installationszonen": "verlegen",
-        "bad": "verlegen",
-        "erdkabel": "verlegen",
-        "klemmen": "verbinden",
-        "wago": "verbinden",
-        "crimpen": "verbinden",
-        "aderendhuelse": "verbinden",
-        "lampe": "schaltungen",
-        "steckdose": "schaltungen",
-        "wechselschaltung": "schaltungen",
-        "kreuzschaltung": "schaltungen",
-        "12v": "kleinspannung",
-        "batterie": "kleinspannung",
-        "led": "kleinspannung",
-        "akku": "kleinspannung",
-        "verkabelung": "projekte",
-        "schutzart": "projekte",
-        "ip": "projekte",
-        "geraetebau": "projekte",
-        "fehlersuche": "pruefen",
-        "messen": "pruefen",
-        "fi-loest-aus": "pruefen",
-        "tabellen": "faustregeln",
-        "werte": "faustregeln",
         "groessen": "gleichstrom",
         "netzwerke": "gleichstrom",
         "komplexe": "wechselstrom",
         "drehstrom": "leistung",
+        "magnetik": "felder",
         "schaltvorgaenge": "transient",
-        "magnetik": "felder"
+        "leitungen": "transient"
        },
        "related": [
-        "elektronik-101",
-        "automatisierung"
+        "elektrotechnik",
+        "analogtechnik"
        ]
       },
       {

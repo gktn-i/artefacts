@@ -1,38 +1,20 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Die Schutzeinrichtung hat recht.</b> Löst ein FI oder eine Sicherung aus, gibt es einen Grund. Nicht dreimal hintereinander einschalten, nicht größer absichern, sondern den Fehler eingrenzen. Und bei eigenen Aufbauten gilt: erst messen, dann einschalten.</div>
+<div class="kurz"><b>Die Schutzeinrichtung hat recht.</b> Fliegt der FI oder die Sicherung, gibt es einen Grund. Nicht dreimal einschalten, nicht größer absichern, sondern den Fehler eingrenzen.</div>
 
 <h2>Vor dem ersten Einschalten</h2>
-<p>Für eigene Projekte und Geräte, die vom Netz getrennt sind. Alles ohne Spannung, mit dem Multimeter.</p>
+<p>Für eigene Projekte und Geräte, ohne Spannung, mit dem Multimeter.</p>
 <ul class="chk">
-  <li><b>Sichtprüfung:</b> Jede Ader ganz in ihrer Klemme, keine abstehenden Einzeldrähte, kein blankes Kupfer außerhalb, Zugentlastung sitzt, Deckel und Abdeckungen vollständig.</li>
-  <li><b>Zupftest</b> an jeder Ader, die du angefasst hast.</li>
-  <li><b>Durchgang:</b> Jede Leitung von Ende zu Ende. Schutzleiter zu jedem berührbaren Metallteil.</li>
-  <li><b>Kein Kurzschluss:</b> Widerstand zwischen Plus und Minus bzw. L und N darf nicht nahe 0 Ω liegen. Mit angeschlossenem Verbraucher zeigt das Messgerät dessen Widerstand, das ist in Ordnung.</li>
-  <li><b>Keine Verbindung zum Schutzleiter:</b> Bei einem Gerät oder Aufbau, der vom Netz getrennt ist, zeigen L und N gegen PE „OL“, also unendlich. Ein Multimeter ersetzt dabei keine Isolationsmessung mit 500 V.</li>
-  <li><b>Polarität:</b> Bei Gleichstrom vor dem Anstecken messen, welcher Pin Plus ist. Verpolung zerstört Elektronik in Millisekunden.</li>
-  <li><b>Sicherungswerte</b> stimmen mit dem Plan überein.</li>
-  <li><b>Erster Start begrenzt:</b> Labornetzteil mit niedriger Strombegrenzung oder kleine Sicherung. Hand am Schalter.</li>
-  <li><b>Nach zehn Minuten Betrieb:</b> Klemmen, Stecker, Netzteil und Leitungen anfassen oder mit dem Infrarotthermometer messen. Handwarm ist normal, heiß ist ein Fehler.</li>
+  <li><b>Hinsehen:</b> jede Ader ganz in der Klemme, kein blankes Kupfer, keine abstehenden Drähte.</li>
+  <li><b>Zupftest</b> an jeder Ader.</li>
+  <li><b>Kein Kurzschluss:</b> zwischen Plus und Minus bzw. L und N nicht nahe 0 Ω.</li>
+  <li><b>Schutzleiter:</b> Durchgang zu jedem Metallteil, kein Durchgang von L oder N zu PE.</li>
+  <li><b>Polarität</b> vor dem Anstecken messen.</li>
+  <li><b>Erster Start begrenzt:</b> Labornetzteil mit niedriger Strombegrenzung oder kleine Sicherung.</li>
+  <li><b>Nach zehn Minuten:</b> Klemmen und Kabel anfassen. Handwarm ist normal, heiß ist ein Fehler.</li>
 </ul>
-<p class="note">In der Hausinstallation funktioniert die Widerstandsmessung gegen PE so nicht: N und PE sind im Verteiler verbunden, L gegen PE zeigt den Widerstand der angeschlossenen Verbraucher. Den Isolationswiderstand misst dort der Fachbetrieb mit 500 V bei abgeklemmten Verbrauchern.</p>
-
-<h2>Die Messungen und ihre Grenzwerte</h2>
-<div class="tbl-wrap"><table style="min-width:800px">
-<thead><tr><th>Messung</th><th>Wer, womit</th><th>Soll</th></tr></thead>
-<tbody>
-<tr><td><b>Spannung an der Steckdose</b></td><td>jeder, zweipoliger Prüfer oder Multimeter CAT II</td><td>L gegen N und L gegen PE je etwa 230 V (±10 %). N gegen PE höchstens wenige Volt</td></tr>
-<tr><td><b>FI-Prüftaste</b></td><td>jeder</td><td>FI fällt sofort ab. Tut er es nicht: Fachbetrieb, er schützt dann nicht</td></tr>
-<tr><td><b>FI-Auslösestrom und -zeit</b></td><td>Fachbetrieb, Installationstester</td><td>Auslösung spätestens bei 30 mA, schnell genug nach Norm</td></tr>
-<tr><td><b>Isolationswiderstand der Anlage</b></td><td>Fachbetrieb, 500 V Prüfspannung</td><td>mindestens 1 MΩ je Stromkreis (DIN VDE 0100-600)</td></tr>
-<tr><td><b>Schleifenimpedanz</b></td><td>Fachbetrieb</td><td>So klein, dass der LS bei einem Kurzschluss sofort auslöst</td></tr>
-<tr><td><b>Schutzleiterwiderstand eines Geräts</b></td><td>Fachbetrieb, Gerätetester</td><td>höchstens 0,3 Ω bis 5 m Leitung, plus 0,1 Ω je weitere 7,5 m, maximal 1 Ω (DIN VDE 0701-0702)</td></tr>
-<tr><td><b>Isolationswiderstand eines Geräts</b></td><td>Fachbetrieb, Gerätetester</td><td>mindestens 1 MΩ bei Schutzklasse I, 2 MΩ bei Schutzklasse II</td></tr>
-<tr><td><b>Schutzleiterstrom, Berührungsstrom</b></td><td>Fachbetrieb, Gerätetester</td><td>höchstens 3,5 mA über PE, höchstens 0,5 mA über berührbare Teile</td></tr>
-</tbody>
-</table></div>
-<p class="note">Ein Multimeter misst den Schutzleiter nur grob. Die Norm verlangt einen Prüfstrom von mindestens 200 mA, damit eine halb abgerissene Ader auffällt. Deshalb gehören Geräte- und Anlagenprüfungen in die Hand eines Betriebs mit dem passenden Tester.</p>
+<p class="note">In der Hausinstallation funktioniert die Messung gegen PE so nicht, weil N und PE im Verteiler verbunden sind. Dort misst der Fachbetrieb mit 500 V.</p>
 
 <h2>Wenn der FI auslöst</h2>
 <svg class="dg l" viewBox="0 0 680 250" role="img" aria-label="Ablauf, wenn der FI auslöst: alle Stecker ziehen, alle Leitungsschutzschalter dahinter aus, FI ein. Fliegt er sofort, liegt der Fehler vor den Leitungsschutzschaltern. Sonst Leitungsschutzschalter einzeln einschalten: Löst er bei einem aus, liegt der Fehler in diesem Stromkreis. Hält alles, Geräte einzeln einstecken, bis das defekte gefunden ist.">
@@ -66,50 +48,35 @@ import "./_style.css";
   <text class="lbad" x="605" y="206" text-anchor="middle">fliegt bei Gerät y</text>
   <text class="lbl" x="605" y="222" text-anchor="middle">woanders gegentesten</text>
 </svg>
-<p class="note">Löst ein Gerät den FI aus, an einem anderen Stromkreis gegenprüfen. Fliegt der FI dort auch, ist das Gerät defekt. Fliegt er nur an diesem einen Stromkreis, liegt der Fehler eher in der Anlage, etwa N und PE verbunden oder vertauscht, oder der N gehört zu einem anderen FI: LS aus lassen, Fachbetrieb. Solche Fehler zeigen sich oft erst, wenn Strom fließt.</p>
-<div class="tbl-wrap"><table style="min-width:780px">
-<thead><tr><th>Was auslöst</th><th>Wann</th><th>Wahrscheinliche Ursache</th></tr></thead>
+<p class="note">Löst ein Gerät den FI aus, an einem anderen Stromkreis gegenprüfen. Fliegt er dort auch, ist das Gerät defekt. Fliegt er nur an diesem Stromkreis, liegt der Fehler eher in der Anlage: LS aus lassen, Fachbetrieb.</p>
+
+<h2>Was auslöst und warum</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Was</th><th>Wann</th><th>Meist</th></tr></thead>
 <tbody>
-<tr><td><b>LS (Sicherung)</b></td><td>sofort, mit Knall oder Funken</td><td>Kurzschluss: defektes Gerät, eingeklemmtes Kabel, angebohrte Leitung, Wasser in der Dose</td></tr>
-<tr><td><b>LS (Sicherung)</b></td><td>nach Minuten, bei knapper Überlast erst nach einer Stunde</td><td>Überlast: zu viele Geräte an einem Stromkreis, Heizlüfter und Wasserkocher zusammen. Oder ein Motor, der schwer anläuft</td></tr>
-<tr><td><b>FI</b></td><td>sofort beim Einschalten eines Geräts</td><td>Isolationsfehler im Gerät, meist Heizstab (Waschmaschine, Spülmaschine, Wasserkocher, Backofen)</td></tr>
-<tr><td><b>FI</b></td><td>bei Regen, Tau oder Frost</td><td>Feuchte in Außensteckdose, Außenleuchte, Gartenleitung, Kellerleitung</td></tr>
-<tr><td><b>FI</b></td><td>sporadisch, ohne Muster</td><td>Viele Geräte mit Netzteilen addieren ihre kleinen Ableitströme. Stromkreise auf mehrere FI verteilen. Auch Überspannung bei Gewitter</td></tr>
-<tr><td><b>FI</b></td><td>nach eigener Arbeit, sobald Last läuft</td><td>N und PE vertauscht oder irgendwo verbunden</td></tr>
-<tr><td><b>Hauptschalter, SLS</b></td><td>bei hoher Gesamtlast</td><td>Summe aller Stromkreise zu hoch: Herd, Durchlauferhitzer und Wallbox gleichzeitig</td></tr>
+<tr><td><b>Sicherung</b></td><td>sofort, mit Knall</td><td>Kurzschluss: Gerät defekt, Kabel eingeklemmt oder angebohrt</td></tr>
+<tr><td><b>Sicherung</b></td><td>nach Minuten</td><td>Überlast: zu viele Geräte an einem Stromkreis</td></tr>
+<tr><td><b>FI</b></td><td>beim Einschalten eines Geräts</td><td>Gerät mit Isolationsfehler, oft der Heizstab</td></tr>
+<tr><td><b>FI</b></td><td>bei Regen oder Frost</td><td>Feuchte in Außensteckdose oder Außenleuchte</td></tr>
+<tr><td><b>FI</b></td><td>nach eigener Arbeit</td><td>N und PE vertauscht oder verbunden</td></tr>
 </tbody>
 </table></div>
 
-<h2>Symptome und was dahinter steckt</h2>
-<div class="tbl-wrap"><table style="min-width:820px">
-<thead><tr><th>Symptom</th><th>Wahrscheinliche Ursache</th><th>Was tun</th></tr></thead>
+<h2>Symptome</h2>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Symptom</th><th>Was tun</th></tr></thead>
 <tbody>
-<tr><td><b>Steckdose, Stecker oder Schalter warm, braun verfärbt</b></td><td>Lose Klemme, ausgeleierte Kontakte, Übergangswiderstand</td><td>Nicht mehr benutzen, Stromkreis aus, Fachbetrieb. Das ist eine Brandquelle</td></tr>
-<tr><td><b>Kribbeln an einem Metallgehäuse</b></td><td>Isolationsfehler und fehlender oder unterbrochener Schutzleiter</td><td>Sofort vom Netz. Gerät und Steckdose prüfen lassen</td></tr>
-<tr><td><b>Mehrere Steckdosen tot, Sicherung drin</b></td><td>Unterbrechung in der Durchschleifung: lose Klemme in der letzten Steckdose, die noch geht</td><td>Stromkreis aus, dort nachsehen (Instandhaltung) oder Fachbetrieb</td></tr>
-<tr><td><b>LED glimmt im ausgeschalteten Zustand</b></td><td>Kapazitive Einkopplung im Schaltdraht, beleuchteter Schalter, oder der Schalter trennt den N</td><td>Prüfen, ob L geschaltet wird. Sonst Grundlastelement oder andere Leuchte</td></tr>
-<tr><td><b>LED flackert beim Dimmen</b></td><td>Dimmer nicht für LED, Mindestlast unterschritten, Leuchtmittel nicht dimmbar</td><td>Passenden LED-Dimmer, dimmbare Leuchtmittel</td></tr>
-<tr><td><b>Multimeter zeigt 20 bis 100 V auf abgeschalteter Leitung</b></td><td>Phantomspannung durch Kopplung mit Nachbarleitungen</td><td>Mit zweipoligem Spannungsprüfer oder LoZ-Modus gegenprüfen</td></tr>
-<tr><td><b>12 V bricht unter Last ein</b></td><td>Querschnitt zu klein, schlechte Masse, korrodierte Klemme</td><td>Spannungsfall unter Last messen, siehe unten</td></tr>
-<tr><td><b>12-V-Sicherung fliegt</b></td><td>Scheuerstelle an Blech, Anlaufstrom zu hoch, Sicherung zu klein gewählt</td><td>Leitung abgehen, Anlaufstrom prüfen. Nie einfach größer absichern</td></tr>
+<tr><td><b>Steckdose oder Stecker warm, braun</b></td><td>Lose Klemme. Nicht mehr benutzen, Fachbetrieb</td></tr>
+<tr><td><b>Kribbeln an einem Metallgehäuse</b></td><td>Sofort vom Netz, Gerät und Steckdose prüfen lassen</td></tr>
+<tr><td><b>Mehrere Steckdosen tot, Sicherung drin</b></td><td>Lose Klemme in der letzten Steckdose, die noch geht</td></tr>
+<tr><td><b>LED glimmt, obwohl aus</b></td><td>Prüfen, ob der Schalter L trennt. Sonst beleuchteter Schalter oder Einkopplung</td></tr>
+<tr><td><b>12 V bricht unter Last ein</b></td><td>Kabel zu dünn oder schlechte Masse. Spannungsfall messen</td></tr>
 </tbody>
 </table></div>
 
 <h2>Spannungsfall messen</h2>
-<p>Die beste Messung für Gleichstromanlagen und Fahrzeuge: nicht Widerstand ohne Strom, sondern Spannung unter Last. Der Verbraucher läuft, das Multimeter misst über jedes Stück Leitung einzeln.</p>
 <div class="steps">
-  <div class="step"><h4>Verbraucher einschalten</h4>Nur unter Last zeigen schlechte Verbindungen ihren Widerstand.</div>
-  <div class="step"><h4>Plusleitung messen</h4>Eine Messspitze am Pluspol der Quelle, die andere am Plus des Verbrauchers. Das Multimeter zeigt, was auf dem Weg verloren geht.</div>
-  <div class="step"><h4>Minusleitung messen</h4>Genauso vom Minus des Verbrauchers zum Minuspol der Quelle. Schlechte Massepunkte fallen hier auf.</div>
-  <div class="step"><h4>Eingrenzen</h4>Wo es viel ist, Stück für Stück weitermessen: über die Sicherung, über jeden Stecker, über jede Klemme. Faustwert: Mehr als etwa 0,2 V über einer einzelnen Verbindung ist zu viel.</div>
-</div>
-
-<div class="srcs">
-  <div class="sh">Quellen</div>
-  <ul>
-    <li>DIN VDE 0100-600: Erstprüfung von Niederspannungsanlagen (Isolationswiderstand, Schleifenimpedanz, FI-Prüfung).</li>
-    <li>DIN VDE 0701-0702: Prüfung von Geräten, Grenzwerte für Schutzleiterwiderstand, Isolationswiderstand, Schutzleiter- und Berührungsstrom.</li>
-    <li>DGUV Vorschrift 3 und DGUV Information 203-070: Wiederholungsprüfungen ortsveränderlicher Geräte.</li>
-    <li>Herstellerunterlagen von Fehlerstromschutzschaltern zu Ableitströmen und Aufteilung der Stromkreise.</li>
-  </ul>
+  <div class="step"><h4>Verbraucher einschalten</h4>Schlechte Verbindungen zeigen sich nur, wenn Strom fließt.</div>
+  <div class="step"><h4>Plus- und Minusleitung einzeln messen</h4>Multimeter von Pol der Quelle zu Anschluss des Verbrauchers. Was es anzeigt, geht im Kabel verloren.</div>
+  <div class="step"><h4>Eingrenzen</h4>Über jede Sicherung, jeden Stecker, jede Klemme. Mehr als etwa 0,2 V über einer Verbindung ist zu viel.</div>
 </div>

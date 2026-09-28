@@ -2,39 +2,29 @@
 import "./_style.css";
 import Profiles from "../../components/Profiles.astro";
 ---
-<div class="kurz"><b>Eine Verbindung muss über Jahre halten, bei Wärme, Rütteln und Feuchte.</b> Wird eine Klemme locker, steigt der Übergangswiderstand, die Stelle wird heiß, das Metall oxidiert, der Widerstand steigt weiter. So beginnen viele Schmorschäden, und zwar an der Klemme, nicht in der Leitung.</div>
+<div class="kurz"><b>Eine Verbindung muss jahrelang halten.</b> Wird eine Klemme locker, wird sie heiß, oxidiert und wird noch heißer. So fangen Schmorschäden an: an der Klemme, nicht im Kabel.</div>
 
 <h2>Welche Verbindung wofür</h2>
 <Profiles
   label="Verbindung"
-  criteria={["Hält dauerhaft", "Verträgt Rütteln", "Wieder lösbar", "Ohne Spezialwerkzeug", "Kompakt"]}
+  criteria={["Hält dauerhaft", "Verträgt Rütteln", "Wieder lösbar", "Ohne Spezialwerkzeug"]}
   items={[
-    { name: "Hebelklemme", tag: "z. B. WAGO 221", scores: [5, 4, 5, 5, 3],
-      pro: "Starr und Litze, ohne Aderendhülse, sichtbar, ob der Draht steckt. 0,14 bis 4 mm², bis 32 A.",
-      con: "Größer als eine Steckklemme. Kein Zug auf die Leitung.",
-      use: "Leuchten, Abzweigdosen, Übergang von starr auf Litze." },
-    { name: "Steckklemme", tag: "z. B. WAGO 2273", scores: [4, 3, 2, 5, 5],
-      pro: "Sehr klein, schnell, günstig.",
-      con: "Nur für starre Adern. Lösen nur durch Drehen und Ziehen, oft nur einmal.",
-      use: "Abzweig- und Gerätedosen mit NYM." },
-    { name: "Schraubklemme", tag: "Lüsterklemme, Geräteklemme", scores: [3, 2, 4, 4, 4],
-      pro: "Überall, jeder Querschnitt, in jedem Gerät.",
-      con: "Kann sich bei Temperaturwechseln lockern. Litze nur mit Aderendhülse. Anzugsmoment zählt.",
-      use: "Anschlussklemmen an Schaltern, Steckdosen, Geräten. Lose Lüsterklemmen besser durch Hebelklemmen ersetzen." },
-    { name: "Crimpverbindung", tag: "Kabelschuh, Stoßverbinder", scores: [5, 5, 2, 2, 4],
-      pro: "Gasdicht, rüttelfest, reproduzierbar. Standard in Auto, Flugzeug, Schaltschrank.",
-      con: "Braucht die passende Zange. Falsch gecrimpt hält sie nicht und sieht trotzdem gut aus.",
-      use: "Litze an Schrauben und Bolzen, 12 V, Akkus, alles was sich bewegt." },
-    { name: "Löten mit Schrumpfschlauch", scores: [4, 2, 1, 2, 5],
-      pro: "Sehr klein, guter Kontakt, billig.",
-      con: "Die Litze wird hinter der Lötstelle starr und bricht dort bei Bewegung. Nie in Schraubklemmen.",
-      use: "Platinen, Signalleitungen, Reparaturen ohne Bewegung und mit Zugentlastung." },
+    { name: "Hebelklemme", tag: "z. B. WAGO 221", scores: [5, 4, 5, 5],
+      pro: "Starr und Litze, ohne Aderendhülse, bis 4 mm².", con: "Etwas groß.", use: "Lampen, Abzweigdosen." },
+    { name: "Steckklemme", tag: "z. B. WAGO 2273", scores: [4, 3, 2, 5],
+      pro: "Klein und schnell.", con: "Nur starre Adern.", use: "Dosen mit NYM." },
+    { name: "Schraubklemme", tag: "Lüsterklemme, Geräteklemme", scores: [3, 2, 4, 4],
+      pro: "Überall vorhanden.", con: "Kann sich lockern. Litze nur mit Aderendhülse.", use: "Anschlüsse an Schaltern, Steckdosen, Geräten." },
+    { name: "Crimpen", tag: "Kabelschuh, Stoßverbinder", scores: [5, 5, 2, 2],
+      pro: "Rüttelfest, Standard im Auto.", con: "Braucht die passende Zange.", use: "12 V, Akkus, alles was sich bewegt." },
+    { name: "Löten", tag: "mit Schrumpfschlauch", scores: [4, 2, 1, 2],
+      pro: "Klein, guter Kontakt.", con: "Bricht bei Bewegung hinter der Lötstelle.", use: "Platinen, Signale, ohne Bewegung." },
   ]}
-  note="Punkte 1 bis 5, höher ist besser. Verdrillen und mit Isolierband umwickeln ist keine Verbindung, auch nicht provisorisch."
+  note="Punkte 1 bis 5, höher ist besser. Verdrillen und Isolierband ist keine Verbindung, auch nicht provisorisch."
 />
 
 <h2>Abisolieren</h2>
-<p>Die meisten Klemmfehler entstehen beim Abisolieren. Die Länge steht auf der Klemme oder auf einer Abisolierlehre auf der Rückseite des Geräts. Bei Hebel- und Steckklemmen sind es meist 11 mm.</p>
+<p>Die Länge steht auf der Klemme oder als Lehre auf der Rückseite des Geräts. Bei Hebelklemmen sind es 11 mm.</p>
 <svg class="dg l" viewBox="0 0 680 150" role="img" aria-label="Vier Fälle beim Abisolieren: richtig bis an die Klemme, zu lang mit blankem Kupfer außen, zu kurz mit Isolierung in der Klemme, eingekerbter Draht">
   <rect class="box" x="90" y="40" width="70" height="50" rx="4" />
   <rect class="box" x="260" y="40" width="70" height="50" rx="4" />
@@ -60,18 +50,16 @@ import Profiles from "../../components/Profiles.astro";
   <text class="lsm" x="125" y="34" text-anchor="middle">Klemme</text>
 </svg>
 <ul>
-  <li><b>Mantel:</b> mit einem Mantelabisolierer rundum anritzen und abziehen. Mit dem Cuttermesser nie längs in den Mantel schneiden: Die Klinge trifft die Aderisolierung, und das sieht man später nicht.</li>
-  <li><b>Ader:</b> mit Abisolierzange, eingestellt auf den Querschnitt. Messer, Zähne und Seitenschneider kerben den Draht, an der Kerbe bricht er beim nächsten Biegen.</li>
-  <li><b>Litze:</b> nach dem Abisolieren leicht in Schlagrichtung verdrillen, damit keine Einzeldrähte abstehen. Abgeschnittene Einzeldrähte fehlen im Querschnitt.</li>
+  <li><b>Mantel</b> mit dem Mantelabisolierer rundum anritzen. Nie mit dem Cutter längs hineinschneiden.</li>
+  <li><b>Ader</b> mit der Abisolierzange. Messer und Seitenschneider kerben den Draht, dort bricht er später.</li>
 </ul>
 
 <h2>Aderendhülsen</h2>
-<div class="grid2">
-  <div class="card"><div class="ct">Wann</div><div class="cd">Feindrähtige Litze in jeder Schraubklemme. In Federklemmen nur, wenn der Hersteller es verlangt oder erlaubt. Starre Adern bekommen nie eine Hülse.</div></div>
-  <div class="card"><div class="ct">Welche</div><div class="cd">Passend zum Querschnitt, aufgedruckt auf Packung und Kragen. Es gibt zwei verschiedene Farbcodes am Markt, deshalb nach der Zahl gehen, nicht nach der Farbe. Zwei Adern in einer Klemme: Zwillingshülse.</div></div>
-  <div class="card"><div class="ct">Wie lang abisolieren</div><div class="cd">So lang wie der Metallteil der Hülse. Die Isolierung steckt im Kragen, vorne schaut kein Draht heraus und keiner fehlt.</div></div>
-  <div class="card"><div class="ct">Womit pressen</div><div class="cd">Aderendhülsenzange mit Trapez- oder Vierkantprofil. Mit der Flachzange gequetscht hält sie nicht und klemmt schief.</div></div>
-</div>
+<ul>
+  <li><b>Wann:</b> Litze in jeder Schraubklemme. Starre Adern bekommen nie eine.</li>
+  <li><b>Welche:</b> nach der Zahl für den Querschnitt, nicht nach der Farbe. Es gibt zwei Farbcodes.</li>
+  <li><b>Wie:</b> so lang abisolieren wie das Metallrohr, mit der Aderendhülsenzange pressen, nicht mit der Flachzange.</li>
+</ul>
 
 <h2>Crimpen</h2>
 <svg class="dg l" viewBox="0 0 660 170" role="img" aria-label="Seitenansicht eines Ringkabelschuhs mit Isolierung bis an die Hülse, Litze im Sichtfenster, Crimp in der Mitte der Hülse und Isolationscrimp auf dem Mantel">
@@ -91,32 +79,13 @@ import Profiles from "../../components/Profiles.astro";
   <text class="lbl" x="172" y="144" text-anchor="middle">Isolierung bis an die Hülse</text>
   <text class="lsm" x="421" y="126" text-anchor="middle">Ring für M5</text>
 </svg>
-<div class="tbl-wrap"><table style="min-width:640px">
-<thead><tr><th>Farbe am Kabelschuh</th><th>Querschnitt</th><th>Hinweis</th></tr></thead>
-<tbody>
-<tr><td><span class="adn"><span class="ad r"></span>rot</span></td><td>etwa 0,5 bis 1,5 mm²</td><td>Aufdruck prüfen, Grenzen je Hersteller leicht verschieden</td></tr>
-<tr><td><span class="adn"><span class="ad n"></span>blau</span></td><td>etwa 1,5 bis 2,5 mm²</td><td>Häufigste Größe im 12-V-Bereich</td></tr>
-<tr><td><span class="adn"><span class="ad" style="--t:var(--ad-y)"></span>gelb</span></td><td>etwa 4 bis 6 mm²</td><td>Braucht eine kräftige Zange</td></tr>
-<tr><td><b>unisoliert, Rohrkabelschuh</b></td><td>ab 6 mm²</td><td>Mit Sechskantpresse, darüber Schrumpfschlauch. Für Batterie und Wechselrichter</td></tr>
-</tbody>
-</table></div>
 <div class="steps">
-  <div class="step"><h4>Kabelschuh und Zange passen zusammen</h4>Isolierte Kabelschuhe mit der Ratschenzange mit farbigen Einsätzen, offene Steckverbinder mit dem passenden Profil. Eine Zange für alles gibt es nicht.</div>
-  <div class="step"><h4>Abisolieren auf Hülsenlänge</h4>Die Litze reicht bis knapp durch die Hülse, die Isolierung stößt hinten an.</div>
-  <div class="step"><h4>Crimpen, bis die Ratsche freigibt</h4>Die Ratsche sorgt für den richtigen Druck. Nicht vorzeitig öffnen, nicht zweimal crimpen.</div>
-  <div class="step"><h4>Zugprobe</h4>Kräftig am Kabel ziehen. Rutscht es, ist die Verbindung Schrott, auch wenn sie leitet. Neu machen, nicht nachdrücken.</div>
+  <div class="step"><h4>Kabelschuh nach Farbe und Querschnitt</h4>Rot etwa 0,5 bis 1,5 mm², blau 1,5 bis 2,5 mm², gelb 4 bis 6 mm². Aufdruck prüfen.</div>
+  <div class="step"><h4>Mit der Ratschenzange crimpen</h4>Die Ratsche gibt erst frei, wenn der Druck stimmt. Nicht zweimal crimpen.</div>
+  <div class="step"><h4>Zugprobe</h4>Kräftig ziehen. Rutscht etwas: abschneiden, neu machen.</div>
 </div>
 
-<h2>Löten von Kabeln</h2>
-<ul>
-  <li><b>Schrumpfschlauch zuerst</b> über die Leitung schieben, dann löten. Wer es vergisst, lötet zweimal.</li>
-  <li><b>Erst mechanisch, dann elektrisch:</b> Adern parallel legen oder ineinanderstecken, dann Lot fließen lassen. Das Lot hält elektrisch, nicht mechanisch.</li>
-  <li><b>Kurz halten:</b> Das Lot zieht in die Litze. Dahinter wird sie steif und bricht an der Grenze. Deshalb Zugentlastung und Schrumpfschlauch, der über die Grenze hinausreicht.</li>
-  <li><b>Nie verzinnte Litze unter eine Schraube.</b> Zinn fließt unter Druck langsam weg, die Klemme lockert sich, die Stelle wird heiß.</li>
-</ul>
-<p class="note">Temperatur, Lot und Technik stehen im Modul <a href="loeten-referenz.html#draht">Löten</a>.</p>
-
-<h2>Stecker und Kupplungen montieren</h2>
+<h2>Stecker montieren</h2>
 <svg class="dg" viewBox="-60 0 600 250" style="max-width:560px" role="img" aria-label="Innenansicht eines Schutzkontaktsteckers: Zugentlastung klemmt den Mantel, braune und blaue Ader zu den Steckerstiften, grün-gelbe Ader mit Schlaufe länger zum Schutzkontakt">
   <path class="box" d="M110,20 H310 Q330,20 330,40 V170 Q330,190 300,196 L250,206 V236 H170 V206 L120,196 Q90,190 90,170 V40 Q90,20 110,20 Z" />
   <rect class="sf" x="160" y="36" width="24" height="30" rx="4" /><rect class="sf" x="236" y="36" width="24" height="30" rx="4" />
@@ -133,38 +102,24 @@ import Profiles from "../../components/Profiles.astro";
   <text class="lbl" x="304" y="94">L und N kürzer</text>
 </svg>
 <div class="steps">
-  <div class="step"><h4>Mantel so weit entfernen, dass die Zugentlastung auf dem Mantel greift</h4>Die Zugentlastung klemmt immer den Mantel, nie die Adern.</div>
-  <div class="step"><h4>Adern ablängen: Schutzleiter länger</h4>L und N auf Länge schneiden, PE mit einer Schlaufe länger lassen. Reißt das Kabel aus dem Stecker, reißen L und N zuerst ab, der Schutzleiter hält am längsten.</div>
-  <div class="step"><h4>Anschließen</h4>Litze mit Aderendhülse, braun und blau an die beiden Stifte (beim Schuko ist die Seite egal), grün-gelb an den Schutzkontakt. Klemmschrauben fest.</div>
-  <div class="step"><h4>Zugentlastung festziehen, Gehäuse schließen, prüfen</h4>Am Kabel ziehen: nichts darf sich bewegen. Dann mit dem Multimeter, Gerät eingeschaltet: Durchgang vom Schutzkontakt zum Metallgehäuse, kein Durchgang von einem der Stifte zum Schutzkontakt. Zwischen den Stiften zeigt das Messgerät den Widerstand des Geräts, das ist normal.</div>
+  <div class="step"><h4>Zugentlastung auf den Mantel</h4>Sie klemmt immer den Mantel, nie die Adern.</div>
+  <div class="step"><h4>Schutzleiter länger lassen</h4>L und N kürzer, grün-gelb mit Schlaufe. Reißt das Kabel aus, reißt der Schutzleiter zuletzt.</div>
+  <div class="step"><h4>Anschließen und prüfen</h4>Aderendhülsen, grün-gelb an den Schutzkontakt. Mit dem Multimeter bei eingeschaltetem Gerät: Schutzkontakt zum Metallgehäuse Durchgang, von keinem Stift zum Schutzkontakt Durchgang.</div>
 </div>
-<div class="stop"><b>Nie ein Kabel mit Steckern an beiden Enden.</b> Spannung kommt immer aus einer Buchse (Kupplung, Steckdose), nie aus einem Stecker. Ein Kabel mit zwei Steckern hat nach dem Einstecken blanke, spannungsführende Stifte am anderen Ende. Das gilt auch für „Einspeisekabel“ für Notstrom oder Balkonkraftwerke.</div>
+<div class="stop"><b>Nie ein Kabel mit Steckern an beiden Enden.</b> Spannung kommt immer aus der Buchse. Ein Kabel mit zwei Steckern hat am anderen Ende blanke Stifte unter Spannung.</div>
 
-<h2>Was nie geht</h2>
+<h2>Nie und immer</h2>
 <div class="gb">
-  <div class="gb-col bad"><h4>Verboten</h4><ul>
-    <li>Adern verdrillen und mit Isolierband umwickeln</li>
-    <li>Klemmen lose in Wand, Decke oder Dämmung, ohne Dose</li>
-    <li>Verzinnte Litze in Schraubklemmen</li>
-    <li>Zwei Adern unter eine Schraube, wenn die Klemme nicht dafür gemacht ist</li>
+  <div class="gb-col bad"><h4>Nie</h4><ul>
+    <li>Verdrillen und Isolierband</li>
+    <li>Klemmen lose in Wand oder Decke</li>
+    <li>Verzinnte Litze unter eine Schraube</li>
     <li>Blankes Kupfer außerhalb der Klemme</li>
   </ul></div>
   <div class="gb-col good"><h4>Immer</h4><ul>
     <li>Zupftest an jeder Ader</li>
-    <li>Klemme nach Querschnitt und Leiterart auswählen</li>
-    <li>Drehmoment laut Aufdruck: zu locker glüht, zu fest quetscht den Draht</li>
-    <li>Schutzleiter mit eigener Schraube und Zahnscheibe auf blankes Metall</li>
-    <li>Mantel bis in die Dose oder das Gehäuse</li>
-    <li>Nach dem Klemmen: Sichtprüfung, ob alle Einzeldrähte drin sind</li>
+    <li>Klemme passend zu Querschnitt und Leiterart</li>
+    <li>Schutzleiter mit eigener Schraube auf blankes Metall</li>
+    <li>Nachsehen, ob alle Einzeldrähte drin sind</li>
   </ul></div>
-</div>
-
-<div class="srcs">
-  <div class="sh">Quellen</div>
-  <ul>
-    <li>DIN VDE 0100-520, Abschnitt 526: elektrische Verbindungen, Zugänglichkeit, keine Lötverbindungen in Schraubklemmen.</li>
-    <li>DIN 46228: Aderendhülsen. DIN EN 60352-2: lötfreie Crimpverbindungen, Prüfung und Zugkräfte.</li>
-    <li>WAGO: Datenblätter Serie 221 (0,14 bis 4 mm², 32 A, 450 V, Abisolierlänge 11 mm) und Serie 2273.</li>
-    <li>DIN VDE 0620-1: Stecker und Steckdosen für den Hausgebrauch. EN 60335-1: Befestigung und Länge des Schutzleiters in Geräten.</li>
-  </ul>
 </div>

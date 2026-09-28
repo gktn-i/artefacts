@@ -1,12 +1,10 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Gefährlich ist der Strom durch den Körper, nicht die Spannung.</b> Die Spannung entscheidet nur, wie viel davon durch dich fließt. Hand zu Hand bei trockener Haut sind das rund 1000 bis 3000 Ω, nass deutlich weniger. Ab 10 mA kannst du nicht mehr loslassen, ab 50 mA kann das Herz ins Flimmern geraten. An 230 V sind das Bruchteile einer Sekunde.</div>
-
-<div class="stop"><b>Dieser Abschnitt ersetzt keine Ausbildung.</b> Er zeigt, wie Elektriker sich schützen, damit du verstehst, was passieren muss, und damit du am Basteltisch und bei Arbeiten im erlaubten Rahmen sicher bleibst. Was du im Haus selbst machen darfst, steht unter <a href="#recht">Selbst machen oder Fachbetrieb</a>.</div>
+<div class="kurz"><b>Gefährlich ist der Strom durch den Körper.</b> Ab 10 mA kannst du nicht mehr loslassen, ab 50 mA kann das Herz ins Flimmern geraten. An 230 V reicht dafür ein Bruchteil einer Sekunde. Nasse Haut macht es viel schlimmer.</div>
 
 <h2>Die fünf Sicherheitsregeln</h2>
-<p>Vor jeder Arbeit an einer elektrischen Anlage, in genau dieser Reihenfolge (DIN VDE 0105-100). Danach ist die Arbeitsstelle sicher. Nach getaner Arbeit rückwärts wieder aufheben.</p>
+<p>Vor jeder Arbeit an einer elektrischen Anlage, genau in dieser Reihenfolge (DIN VDE 0105-100).</p>
 <svg class="dg l" viewBox="0 0 680 128" role="img" aria-label="Die fünf Sicherheitsregeln als Kette: Freischalten, gegen Wiedereinschalten sichern, Spannungsfreiheit feststellen, erden und kurzschließen, benachbarte Teile abdecken">
   <rect class="box" x="10" y="6" width="124" height="116" rx="9" />
   <rect class="box" x="142" y="6" width="124" height="116" rx="9" />
@@ -40,27 +38,26 @@ import "./_style.css";
   <path class="acc" d="M135,58 l4,6 l-4,6 M267,58 l4,6 l-4,6 M399,58 l4,6 l-4,6 M531,58 l4,6 l-4,6" />
 </svg>
 <div class="steps">
-  <div class="step"><h4>Freischalten</h4>Den richtigen Stromkreis abschalten. Welcher es ist, findest du mit einer Last heraus, die du hören oder sehen kannst: Radio oder Lampe einstecken, Sicherung aus, Radio aus. Raten gilt nicht. Weißt du es nicht, schalte den FI der Gruppe oder den Hauptschalter aus. Achtung: In einer Abzweigdose können Adern aus mehreren Stromkreisen liegen.</div>
-  <div class="step"><h4>Gegen Wiedereinschalten sichern</h4>Sperrelement auf den Leitungsschutzschalter, Schraubsicherung herausdrehen und einstecken, Zettel „Nicht einschalten, es wird gearbeitet“ an den Verteiler. Wer allein im Haus ist, sichert trotzdem: Mitbewohner, Handwerker und Kinder wissen nichts von deiner Arbeit.</div>
-  <div class="step"><h4>Spannungsfreiheit feststellen</h4>Mit einem zweipoligen Spannungsprüfer nach DIN EN 61243-3, und zwar jede Ader gegen jede: L gegen N, L gegen PE, N gegen PE. Bei Drehstrom zusätzlich die Außenleiter untereinander. Den Prüfer direkt davor und direkt danach an einer Steckdose testen, die sicher Spannung hat. Nur so weißt du, dass „keine Anzeige“ nicht „Prüfer kaputt“ heißt.</div>
-  <div class="step"><h4>Erden und kurzschließen</h4>In der Hausinstallation entfällt das in der Regel. Pflicht wird es überall, wo Spannung zurückkommen kann: Freileitungen, große Kondensatoren, Photovoltaik, Batteriespeicher und Notstromaggregate.</div>
-  <div class="step"><h4>Benachbarte, unter Spannung stehende Teile abdecken</h4>Im Verteiler bleiben die Zuleitung und die Klemmen vor dem Hauptschalter immer unter Spannung, auch wenn alles ausgeschaltet ist. Abdecken mit isolierenden Tüchern oder Abdeckungen, sonst die Finger davon lassen.</div>
+  <div class="step"><h4>Freischalten</h4>Den richtigen Stromkreis abschalten. Herausfinden mit Radio oder Lampe in der Steckdose: Sicherung aus, Radio aus. Unsicher? FI der Gruppe oder Hauptschalter aus.</div>
+  <div class="step"><h4>Gegen Wiedereinschalten sichern</h4>Sperre auf die Sicherung oder Zettel „Nicht einschalten“ an den Verteiler. Auch wenn du allein bist.</div>
+  <div class="step"><h4>Spannungsfreiheit feststellen</h4>Zweipoliger Spannungsprüfer, jede Ader gegen jede: L gegen N, L gegen PE, N gegen PE. Den Prüfer davor und danach an einer Steckdose testen, die sicher Spannung hat.</div>
+  <div class="step"><h4>Erden und kurzschließen</h4>Im Haus meist nicht nötig. Wichtig, wo Spannung zurückkommen kann: Photovoltaik, Batteriespeicher, Notstrom.</div>
+  <div class="step"><h4>Benachbarte Teile abdecken</h4>Im Verteiler bleibt alles vor dem Hauptschalter immer unter Spannung. Abdecken oder die Finger davon lassen.</div>
 </div>
-<div class="tip"><b>Merksatz für die Reihenfolge:</b> Aus, zu, messen, erden, decken. Das Aufheben läuft genau rückwärts: Abdeckung weg, Erdung weg, Werkzeug raus, Sperre weg, einschalten.</div>
+<div class="tip"><b>Merksatz:</b> Aus, zu, messen, erden, decken. Danach rückwärts wieder einschalten.</div>
 
 <h2>Welcher Prüfer taugt</h2>
-<div class="tbl-wrap"><table style="min-width:760px">
-<thead><tr><th>Gerät</th><th>Taugt für Spannungsfreiheit?</th><th>Warum</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:600px">
+<thead><tr><th>Gerät</th><th>Für Spannungsfreiheit?</th></tr></thead>
 <tbody>
-<tr><td><b>Zweipoliger Spannungsprüfer</b></td><td><span class="b ok">ja</span></td><td>Das Werkzeug für die dritte Regel. Braucht keine Batterie für die Grundanzeige, zeigt Spannung zwischen zwei Punkten, belastet die Leitung leicht und blendet so Phantomspannungen aus.</td></tr>
-<tr><td><b>Multimeter, CAT III</b></td><td><span class="b mid">bedingt</span></td><td>Misst genau, aber hochohmig: Auf abgeschalteten Leitungen neben spannungsführenden zeigt es oft 20 bis 100 V Phantomspannung. Mit LoZ-Modus besser. Falscher Messbereich oder Buchse ist ein Risiko.</td></tr>
-<tr><td><b>Phasenprüfer (Schraubendreher mit Glimmlampe)</b></td><td><span class="b bad">nein</span></td><td>Der Strom fließt über deinen Körper. Mit isolierenden Schuhen, auf Holzboden oder bei Licht bleibt er dunkel, obwohl Spannung anliegt. Zeigt nur L gegen Erde, nie N gegen PE.</td></tr>
-<tr><td><b>Berührungsloser Spannungsprüfer</b></td><td><span class="b bad">nein</span></td><td>Guter Hinweisgeber, um Leitungen zu finden. Schweigt bei geschirmten Leitungen, in Metallrohren, bei leerer Batterie und oft einfach, weil du ihn anders hältst.</td></tr>
+<tr><td><b>Zweipoliger Spannungsprüfer</b></td><td><span class="b ok">ja</span> Das Werkzeug dafür</td></tr>
+<tr><td><b>Multimeter CAT III</b></td><td><span class="b mid">bedingt</span> Zeigt auf abgeschalteten Leitungen oft Phantomspannung</td></tr>
+<tr><td><b>Phasenprüfer-Schraubendreher</b></td><td><span class="b bad">nein</span> Bleibt mit isolierten Schuhen dunkel, obwohl Spannung anliegt</td></tr>
+<tr><td><b>Berührungsloser Prüfer</b></td><td><span class="b bad">nein</span> Gut zum Suchen, aber kein Beweis</td></tr>
 </tbody>
 </table></div>
 
 <h2>Was Strom im Körper macht</h2>
-<p>Die Skala ist logarithmisch: Jeder Teilstrich ist das Zehnfache des vorigen. Sie zeigt, warum die Sicherung dich nicht schützt.</p>
 <svg class="dg l" viewBox="0 0 680 158" role="img" aria-label="Logarithmische Skala des Körperstroms von 0,1 Milliampere bis 100 Ampere. Der FI löst bei 30 Milliampere aus, eine 16-Ampere-Sicherung erst bei 16 bis 80 Ampere.">
   <rect class="okz" x="60" y="70" width="68" height="26" />
   <rect class="midz" x="128" y="70" width="125" height="26" />
@@ -86,81 +83,35 @@ import "./_style.css";
   <text class="lsm" x="60" y="140">FI: Schutz im gefährlichen Bereich. Sicherung: Faktor 500 darüber, sie schützt nur die Leitung.</text>
   <text class="lsm" x="60" y="152">Werte für 50 Hz, Hand zu Hand, nach IEC/TS 60479-1. Die Einwirkdauer zählt mit: je länger, desto gefährlicher.</text>
 </svg>
-<div class="tbl-wrap"><table style="min-width:680px">
-<thead><tr><th data-s="num">Strom (50 Hz, Hand zu Hand)</th><th>Wirkung</th></tr></thead>
-<tbody>
-<tr><td><b>unter 0,5 mA</b></td><td>Wahrnehmungsschwelle, kein Effekt</td></tr>
-<tr><td><b>0,5 bis 10 mA</b></td><td>Kribbeln bis schmerzhaftes Ziehen, Loslassen noch möglich</td></tr>
-<tr><td><b>10 bis 30 mA</b></td><td>Muskelverkrampfung. Ab etwa 10 mA kannst du den Leiter nicht mehr loslassen, der Strom fließt weiter</td></tr>
-<tr><td><b>30 bis 50 mA</b></td><td>Atemlähmung bei längerer Einwirkung. Deshalb löst der FI bei 30 mA aus</td></tr>
-<tr><td><b>über 50 mA</b></td><td>Herzkammerflimmern möglich, ab etwa 100 mA über mehrere Herzschläge sehr wahrscheinlich</td></tr>
-<tr><td><b>über 1 A</b></td><td>Herzstillstand, schwere innere Verbrennungen</td></tr>
-</tbody>
-</table></div>
-<p class="note">Gleichstrom ist bei gleicher Stromstärke für das Herz weniger gefährlich (Grenzwerte etwa Faktor 2 bis 4 höher), wirkt aber stärker elektrolytisch. 50 Hz liegt ausgerechnet im ungünstigsten Bereich für das Herz.</p>
 
-<h2>Die Spannungsgrenzen</h2>
-<div class="tbl-wrap"><table style="min-width:720px">
-<thead><tr><th>Grenze</th><th>Wert</th><th>Was daraus folgt</th></tr></thead>
-<tbody>
-<tr><td><b>Kleinspannung SELV / PELV</b></td><td>bis 50 V AC / 120 V DC</td><td>Obergrenze nach DIN VDE 0100-410. SELV ist von Erde getrennt, PELV geerdet. Nur aus einer sicheren Quelle: Sicherheitstrafo, geprüftes Netzteil, Batterie. Oberhalb von 25 V AC / 60 V DC braucht es trotzdem Berührungsschutz</td></tr>
-<tr><td><b>Ohne Berührungsschutz zulässig</b></td><td>bis 25 V AC / 60 V DC</td><td>In trockener Umgebung. USB, 12-V-Netzteile, Autobatterie</td></tr>
-<tr><td><b>Bad, Nassbereich, Pool</b></td><td>12 V AC / 30 V DC</td><td>Höchstspannung für SELV in Bereich 0 von Wanne und Dusche (DIN VDE 0100-701). Blanke aktive Teile sind in den Bereichen 0 bis 2 bei keiner Spannung erlaubt, auch SELV braucht dort Berührungsschutz</td></tr>
-<tr><td><b>Akkupack ab etwa 15 Li-Ion-Zellen</b></td><td>rund 60 V</td><td>Klingt nach Kleinspannung, liegt aber schon an der Grenze. Berührschutz nötig</td></tr>
-<tr><td><b>Zwischenkreis im Netzteil</b></td><td>325 V DC</td><td>Scheitelwert von 230 V hinter dem Gleichrichter. Der Elko hält die Ladung nach dem Ausstecken oft minutenlang. Vorher messen</td></tr>
-</tbody>
-</table></div>
-
-<h2>Schutzmaßnahmen</h2>
-<div class="tbl-wrap"><table style="min-width:800px">
-<thead><tr><th>Maßnahme</th><th>Prinzip</th><th>Erkennungsmerkmal, Kennwert</th></tr></thead>
-<tbody>
-<tr><td><b>FI-Schalter (RCD)</b></td><td>Vergleicht hin- und zurückfließenden Strom. Fließt ein Teil über dich zur Erde ab, schaltet er ab</td><td>30 mA Bemessungsfehlerstrom für Personenschutz. Auslösung höchstens 300 ms bei 30 mA, 40 ms bei 150 mA, meist deutlich schneller. Typ A im Haushalt, Typ F bei Geräten mit Umrichter, Typ B für glatte Gleichfehlerströme. Typ AC ist in Deutschland nicht zulässig. Prüftaste regelmäßig drücken, Hersteller nennen meist halbjährlich</td></tr>
-<tr><td><b>Leitungsschutzschalter (LS)</b></td><td>Schützt die <b>Leitung</b> vor Überlast und Kurzschluss, nicht dich</td><td>Charakteristik B (schnelle Auslösung bei 3 bis 5 × Nennstrom, Haushalt), C (5 bis 10 ×, Motoren, Trafos)</td></tr>
-<tr><td><b>Schutzklasse I</b></td><td>Gehäuse am Schutzleiter. Bei einem Isolationsfehler fließt Strom über PE, FI oder Sicherung schalten ab</td><td>Stecker mit Schutzkontakt, Symbol Erdungszeichen</td></tr>
-<tr><td><b>Schutzklasse II</b></td><td>Doppelte oder verstärkte Isolierung statt Schutzleiter</td><td>Symbol Quadrat im Quadrat, flacher Eurostecker oder Konturenstecker</td></tr>
-<tr><td><b>Schutzklasse III</b></td><td>Betrieb nur mit Schutzkleinspannung</td><td>Symbol Raute mit römisch III</td></tr>
-<tr><td><b>Trenntransformator</b></td><td>Galvanische Trennung vom Netz. Ein einzelner Kontakt gegen Erde bleibt ungefährlich</td><td>Gehört auf jeden Reparaturplatz für Netzgeräte. Schützt nicht, wenn du beide Pole anfasst</td></tr>
-</tbody>
-</table></div>
-<div class="warn"><b>Was der FI nicht kann:</b> Fasst du L und N gleichzeitig an, fließt der Strom hin und zurück durch dich, ohne Differenz. Der FI bleibt drin. Er schützt auch nicht vor Überlast, und hinter einem Trenntrafo oder an einem Akku sieht er gar nichts.</div>
+<h2>FI und Sicherung</h2>
+<div class="gb">
+  <div class="gb-col good"><h4>FI-Schalter (RCD) schützt dich</h4><ul>
+    <li>Merkt, wenn Strom über dich oder den Schutzleiter zur Erde fließt</li>
+    <li>Löst bei 30 mA aus, in Sekundenbruchteilen</li>
+    <li>Prüftaste regelmäßig drücken, Hersteller nennen meist halbjährlich</li>
+  </ul></div>
+  <div class="gb-col"><h4>Sicherung (LS) schützt die Leitung</h4><ul>
+    <li>Schaltet bei Kurzschluss und Überlast ab</li>
+    <li>B16 heißt: 16 A, Auslösecharakteristik B</li>
+    <li>Gegen Stromschlag hilft sie nicht</li>
+  </ul></div>
+</div>
+<div class="warn"><b>Was der FI nicht kann:</b> Fasst du L und N gleichzeitig an, fließt der Strom hin und zurück durch dich. Der FI merkt keinen Unterschied und bleibt drin.</div>
 
 <h2>Gefahren, die man unterschätzt</h2>
 <div class="grid2">
-  <div class="card"><div class="ct">Mehrere Stromkreise in einer Dose</div><div class="cd">Abzweigdosen und Schalterdosen tragen oft Adern aus zwei Stromkreisen, vor allem im Altbau. Eine Sicherung aus heißt nicht: Dose spannungsfrei. Jede Ader messen.</div></div>
-  <div class="card"><div class="ct">Der Neutralleiter kann Spannung führen</div><div class="cd">Ist N irgendwo unterbrochen, liegt hinter der Unterbrechung über die Last die volle Netzspannung an. Und ein LS trennt nur L, nicht N.</div></div>
-  <div class="card"><div class="ct">Rückspeisung</div><div class="cd">Photovoltaik, Batteriespeicher mit Ersatzstrom und Notstromaggregate speisen von der anderen Seite ein. Vor Arbeiten an einem Stromkreis mit Balkonkraftwerk dessen Stecker ziehen. Der Wechselrichter muss bei Netzausfall zwar abschalten, verlassen solltest du dich darauf nicht.</div></div>
-  <div class="card"><div class="ct">Lichtbogen</div><div class="cd">Ein Kurzschluss an einer Autobatterie, einem Akkupack oder im Verteiler vor dem Hauptschalter setzt Hunderte bis Tausende Ampere frei. Schmuck ablegen, isoliertes Werkzeug, Schutzbrille.</div></div>
-  <div class="card"><div class="ct">Altbau mit klassischer Nullung</div><div class="cd">Bis in die 1970er wurden Steckdosen oft ohne eigenen Schutzleiter angeschlossen, Neutralleiter und Schutzkontakt gebrückt. Reißt diese Ader, liegt das Gehäuse jedes angeschlossenen Geräts auf 230 V. Nicht erweitern, sondern erneuern lassen.</div></div>
-  <div class="card"><div class="ct">Wasser und Metall</div><div class="cd">Nasse Haut senkt den Körperwiderstand um ein Vielfaches. Stehst du in der Wanne, auf nassem Boden oder hältst ein Metallrohr, fließt ein Vielfaches an Strom.</div></div>
-</div>
-
-<h2>Was am Basteltisch passiert</h2>
-<div class="grid2">
-  <div class="card"><div class="ct">Labornetzteil</div><div class="cd">Strombegrenzung <b>vor</b> dem Einschalten setzen. Bei neuen Schaltungen 100 bis 200 mA als Deckel: Ein Bestückungsfehler zeigt sich dann als Spannungseinbruch statt als Rauchwolke.</div></div>
-  <div class="card"><div class="ct">Li-Ion-Zellen</div><div class="cd">Ein Kurzschluss an einer 18650 liefert 20 bis 50 A. Kein Schmuck an den Händen, kein loses Werkzeug daneben, immer mit Schutzschaltung (BMS). Beschädigte oder aufgeblähte Zellen nie laden.</div></div>
-  <div class="card"><div class="ct">Elkos in Netzteilen</div><div class="cd">Auch nach dem Trennen vom Netz geladen. Mit Widerstand entladen (z. B. 1 kΩ, 5 W), nie mit dem Schraubendreher kurzschließen. Das schweißt und schleudert.</div></div>
-  <div class="card"><div class="ct">Messen an Netzspannung</div><div class="cd">Nur mit passender Messkategorie: CAT II für Steckdosenstromkreise, CAT III für Verteiler, dazu intakte Prüfleitungen mit Fingerschutz. Ein Multimeter ohne CAT-Angabe gehört nicht an 230 V.</div></div>
-  <div class="card"><div class="ct">Oszilloskop am Netz</div><div class="cd">Die Tastkopfmasse liegt am Schutzleiter. An einem netzführenden Punkt gibt das einen Kurzschluss. Lösung: Differenztastkopf oder das Messobjekt über einen Trenntrafo speisen. Nie die Erdung des Oszilloskops auftrennen.</div></div>
-  <div class="card"><div class="ct">Lötdämpfe</div><div class="cd">Flussmittel setzt beim Verdampfen Reizstoffe frei. Absaugung oder wenigstens ein Lüfter, der die Fahne wegzieht, siehe <a href="loeten-referenz.html#sicherheit">Löten → Sicherheit</a>.</div></div>
+  <div class="card"><div class="ct">Zwei Stromkreise in einer Dose</div><div class="cd">Kommt oft vor, besonders im Altbau. Eine Sicherung aus heißt nicht, dass die Dose spannungsfrei ist. Jede Ader messen.</div></div>
+  <div class="card"><div class="ct">Der Neutralleiter kann Spannung führen</div><div class="cd">Eine Sicherung trennt nur L, nicht N. Ist N irgendwo unterbrochen, liegt dahinter volle Netzspannung an.</div></div>
+  <div class="card"><div class="ct">Rückspeisung</div><div class="cd">Photovoltaik, Batteriespeicher und Notstrom speisen von der anderen Seite ein. Vor Arbeiten am Stromkreis den Stecker des Balkonkraftwerks ziehen.</div></div>
+  <div class="card"><div class="ct">Altbau ohne Schutzleiter</div><div class="cd">Alte Anlagen haben oft keinen eigenen Schutzleiter, Neutral- und Schutzkontakt sind gebrückt. Nicht erweitern, erneuern lassen.</div></div>
 </div>
 
 <h2>Erste Hilfe bei Stromunfall</h2>
 <div class="steps">
-  <div class="step"><h4>Stromkreis unterbrechen, nicht anfassen</h4>Sicherung raus, Stecker ziehen, Not-Aus. Wer eine Person unter Spannung berührt, wird selbst Teil des Stromkreises. Geht nichts davon: mit trockenem, isolierendem Gegenstand (Holz, Kunststoff) wegdrücken, selbst trocken und isoliert stehen.</div>
-  <div class="step"><h4>Notruf 112</h4>Auch wenn die Person ansprechbar wirkt. Herzrhythmusstörungen können Stunden später auftreten. Jeder Stromunfall mit Netzspannung gehört in ärztliche Kontrolle.</div>
-  <div class="step"><h4>Wiederbeleben, wenn die Atmung fehlt</h4>30-mal Herzdruckmassage, 2-mal beatmen, im Wechsel. Einen Defibrillator (AED) holen lassen, wenn einer in der Nähe ist. Er sagt selbst an, was zu tun ist.</div>
-  <div class="step"><h4>Verbrennungen abdecken</h4>Strommarken sind außen oft klein und innen groß. Steril abdecken, nichts auftragen.</div>
+  <div class="step"><h4>Strom weg, nicht anfassen</h4>Sicherung raus, Stecker ziehen. Wer die Person unter Spannung berührt, bekommt selbst den Schlag.</div>
+  <div class="step"><h4>Notruf 112</h4>Auch wenn die Person ansprechbar ist. Herzrhythmusstörungen können Stunden später kommen.</div>
+  <div class="step"><h4>Wiederbeleben, wenn die Atmung fehlt</h4>30-mal drücken, 2-mal beatmen, im Wechsel. Defibrillator (AED) holen lassen.</div>
+  <div class="step"><h4>Verbrennungen steril abdecken</h4>Nichts auftragen. Innen sind sie oft größer als außen.</div>
 </div>
-
-<div class="srcs">
-  <div class="sh">Quellen</div>
-  <ul>
-    <li>DIN VDE 0105-100: Betrieb von elektrischen Anlagen, die fünf Sicherheitsregeln.</li>
-    <li>DIN EN 61243-3: zweipolige Spannungsprüfer für Niederspannung.</li>
-    <li>IEC/TS 60479-1: Wirkungen des elektrischen Stromes auf Menschen und Nutztiere, Grundlage der Stromgrenzen.</li>
-    <li>DIN VDE 0100-410: Schutz gegen elektrischen Schlag, SELV, PELV, Abschaltbedingungen, FI-Pflicht.</li>
-    <li>IEC 61008-1 / IEC 61009-1: Fehlerstromschutzschalter, Auslösezeiten und Typen.</li>
-    <li>EN IEC 61010-1: Messkategorien CAT I bis IV. DGUV Information 203-001 (Sicherheit bei Arbeiten an elektrischen Anlagen).</li>
-  </ul>
-</div>
+<p class="note">Sicherheit am Basteltisch mit Labornetzteil, Akkus und Kondensatoren steht in <a href="elektronik-grundlagen.html#sicherheit">Elektronik 101 → Sicherheit</a>.</p>
