@@ -2658,10 +2658,13 @@
        "name": "Perfektes Steak",
        "icon": "🔥",
        "kind": "Anleitung",
-       "updated": "2026-05-18",
-       "desc": "Zwei Wege zum Punkt: Butter Basting für dünne Cuts, Reverse Sear für dicke — Schritt für Schritt mit Timing.",
+       "updated": "2026-10-04",
+       "desc": "Zwei Wege zum Punkt: Butter Basting für dünne Cuts, Reverse Sear für dicke — Schritt für Schritt mit Timing. Dazu Pfeffersauce, Béarnaise und dreifach gegarte Pommes.",
        "tags": [
         "steak",
+        "pommes",
+        "sauce",
+        "béarnaise",
         "basting",
         "reverse sear",
         "garstufe"
@@ -2678,6 +2681,14 @@
         {
          "h": "temperatur",
          "t": "Garstufen & Temperaturen"
+        },
+        {
+         "h": "saucen",
+         "t": "Saucen"
+        },
+        {
+         "h": "pommes",
+         "t": "Perfekte Pommes"
         }
        ],
        "related": [
