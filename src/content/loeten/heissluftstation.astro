@@ -1,119 +1,173 @@
-<div class="kurz"><b>Zwei Regler, zwei Bedeutungen:</b> <b>Temperatur</b> = wie heiß die Luft ist · <b>Luftstrom</b> = wie viel Wärme pro Sekunde ankommt. Standard-SMD-Startwerte: bleihaltig <b>310 °C</b> / bleifrei <b>340 °C</b> bei <b>30–35 %</b> Luft, Düse etwa so groß wie das Bauteil, Abstand ~1–2 cm. Nachbarn mit Kapton abdecken.</div>
+<div class="kurz"><b>Vier Stellgrößen, nicht eine:</b> <b>Temperatur</b> = wie heiß die Luft ist · <b>Luftstrom</b> = wie viel Wärme pro Sekunde ankommt · <b>Düse</b> = wie breit · <b>Abstand</b> = wie viel davon ankommt. Startwerte für SMD: bleihaltig <b>320–330 °C</b> / bleifrei <b>350–360 °C</b> bei <b>30–35 %</b> Luft, Düse so groß wie das Bauteil, Abstand 1–2 cm. Nachbarn mit Kapton abdecken.</div>
 
 <h2>Meine Heißluftstation im Griff</h2>
-<p>Die Heißluft erwärmt <b>alle Anschlüsse gleichzeitig</b>. Das macht sie zum Werkzeug der Wahl für alles, was der Kolben nicht erreicht — und zum einzigen schadensfreien Weg, ein bestücktes SMD-Bauteil wieder abzuheben.</p>
+<p>Die Heißluft erwärmt <b>alle Anschlüsse gleichzeitig</b>. Das macht sie zum Werkzeug der Wahl für alles, was der Kolben nicht erreicht, und zum einzigen schadensfreien Weg, ein bestücktes SMD-Bauteil wieder abzuheben.</p>
+
+<svg class="sk sk-wide" viewBox="0 0 460 196" role="img" aria-label="Heißluft-Setup: Düse senkrecht über dem Bauteil, 1 bis 2 Zentimeter Abstand, kleine Kreise, Nachbarbauteile mit Kapton abgedeckt">
+  <defs><marker id="ah-hls" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 Z" style="fill:var(--l-ink)"/></marker></defs>
+  <ellipse class="dim" cx="230" cy="16" rx="42" ry="7"/>
+  <path class="dim" d="M268,19 l6,-1 l-3,5" />
+  <text class="lbl" x="280" y="20">kleine Kreise ziehen</text>
+  <path class="tool" d="M206,24 H254 V60 L246,84 H214 L206,60 Z"/>
+  <text class="lbl" x="262" y="62">Düse ≈ Bauteilgröße</text>
+  <path class="air" d="M220,90 L212,136" marker-end="url(#ah-hls)"/>
+  <path class="air" d="M230,90 L230,136" marker-end="url(#ah-hls)"/>
+  <path class="air" d="M240,90 L248,136" marker-end="url(#ah-hls)"/>
+  <text class="tl" x="262" y="112">Luft 20–35 %</text>
+  <path class="dim" d="M180,84 V144 M176,84 H184 M176,144 H184"/>
+  <text class="lbl" x="172" y="118" text-anchor="end">1–2 cm</text>
+  <rect class="pcb" x="20" y="160" width="420" height="14" rx="2"/>
+  <rect class="pad" x="196" y="157" width="10" height="3"/><rect class="pad" x="254" y="157" width="10" height="3"/>
+  <rect class="body" x="200" y="144" width="60" height="13" rx="2"/>
+  <rect class="lead" x="96" y="150" width="16" height="10" rx="1"/><rect class="lead" x="128" y="150" width="16" height="10" rx="1"/>
+  <rect class="lead" x="318" y="150" width="16" height="10" rx="1"/><rect class="lead" x="348" y="150" width="16" height="10" rx="1"/>
+  <rect class="kapton" x="88" y="145" width="66" height="5" rx="1"/>
+  <rect class="kapton" x="310" y="145" width="62" height="5" rx="1"/>
+  <text class="lbl" x="121" y="138" text-anchor="middle">Kapton</text>
+  <text class="lbl" x="341" y="138" text-anchor="middle">Kapton</text>
+  <text class="lbl" x="230" y="190" text-anchor="middle">Bauteil · Flux rundum · Pinzette bereit</text>
+</svg>
 
 <h3>Bedienelemente</h3>
 <div class="tbl-wrap"><table style="min-width:700px">
 <thead><tr><th>Element</th><th>Was es tut</th><th>Wann du es anfasst</th></tr></thead>
 <tbody>
-<tr><td><b>Temperatur-Regler</b></td><td>Solltemperatur der austretenden Luft</td><td>Nach Lot-Legierung und Bauteilgröße</td></tr>
-<tr><td><b>Luftstrom-Regler</b></td><td>Volumenstrom — bestimmt den Wärmeeintrag pro Sekunde <b>und</b> die mechanische Kraft auf Bauteile</td><td>Bei jedem Wechsel der Bauteilgröße</td></tr>
-<tr><td><b>Düse (Nozzle)</b></td><td>Bündelt den Luftstrom auf die Zielfläche</td><td>Passend zur Bauteilgröße wechseln</td></tr>
-<tr><td><b>Ablage-Sensor / Reed-Schalter</b></td><td>Startet beim Abheben, kühlt beim Ablegen automatisch aus</td><td>Nie überbrücken — der Cooldown schützt das Heizelement</td></tr>
+<tr><td><b>Temperatur-Regler</b></td><td>Solltemperatur am Heizelement bzw. Düsenausgang</td><td>Nach Lot-Legierung und Bauteilgröße</td></tr>
+<tr><td><b>Luftstrom-Regler</b></td><td>Volumenstrom. Bestimmt den Wärmeeintrag pro Sekunde <b>und</b> die mechanische Kraft auf Bauteile</td><td>Bei jedem Wechsel der Bauteilgröße</td></tr>
+<tr><td><b>Düse (Nozzle)</b></td><td>Bündelt den Luftstrom auf die Zielfläche</td><td>Passend zur Bauteilgröße wechseln, nur im kalten Zustand</td></tr>
+<tr><td><b>Ablage-Sensor / Reed-Schalter</b></td><td>Startet beim Abheben, kühlt beim Ablegen automatisch aus</td><td>Nie überbrücken, der Cooldown schützt das Heizelement</td></tr>
 <tr><td><b>Cooldown-Anzeige</b></td><td>Handstück wird mit kalter Luft heruntergekühlt</td><td>Auslaufen lassen, erst dann Netzschalter aus</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Reihenfolge beim Ausschalten:</b> Handstück ablegen → Cooldown komplett durchlaufen lassen → erst dann Netzschalter. Wer sofort abschaltet, lässt die Restwärme im Heizelement stehen; das kostet Lebensdauer.</div>
+<div class="warn"><b>Reihenfolge beim Ausschalten:</b> Handstück ablegen → Cooldown komplett durchlaufen lassen (bis unter ~100 °C) → erst dann Netzschalter. Wer sofort abschaltet, lässt die Restwärme im Heizelement stehen; das kostet Lebensdauer.</div>
 
-<h3>Temperatur × Luftstrom — die Arbeitsmatrix</h3>
-<p><b>Fetter Wert = so einstellen und loslegen.</b> Die Klammer ist der Korridor zum Nachregeln, wenn Board oder Bauteil aus der Reihe fallen. Alle Temperaturen sind Düsenwerte bei 1–2 cm Abstand.</p>
-<div class="tbl-wrap"><table style="min-width:860px">
+<h3>Temperatur × Luftstrom: die Arbeitsmatrix</h3>
+<p><b>Fetter Wert = so einstellen und loslegen.</b> Die Klammer ist der Korridor zum Nachregeln. Temperaturen sind Sollwerte an der Station. Gilt für kleine bis mittlere Boards <b>ohne</b> Vorwärmung; BGA-Zeilen gehen von einem auf <b>~150 °C</b> vorgewärmten Board aus (<a class="goto" href="#heizplatte">Heizplatte</a>).</p>
+<div class="tbl-wrap"><table style="min-width:900px">
 <thead><tr><th>Aufgabe</th><th>Start bleihaltig</th><th>Start bleifrei</th><th>Luftstrom</th><th>Düse</th><th>Abstand · Zeitgefühl</th></tr></thead>
 <tbody>
-<tr><td>Chip 0402 / 0201 setzen oder abheben</td><td><b>290 °C</b> (270–300)</td><td><b>320 °C</b> (300–330)</td><td><b>20 %</b> (15–25)</td><td>klein, 3–4 mm</td><td>1,5–2 cm · 10–20 s</td></tr>
-<tr><td>Chip 0603–1206, SOT, SOD</td><td><b>310 °C</b> (290–320)</td><td><b>340 °C</b> (320–350)</td><td><b>30 %</b> (25–35)</td><td>4–6 mm</td><td>1–2 cm · 15–25 s</td></tr>
-<tr><td>SOIC / TSSOP / QFP</td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>35 %</b> (30–40)</td><td>Bauteilgröße</td><td>1–2 cm · 20–40 s</td></tr>
-<tr><td>QFN / DFN</td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>30 %</b> (30–40)</td><td>Bauteilgröße</td><td>1–2 cm · 20–45 s</td></tr>
-<tr><td>BGA aufschmelzen <span class="b b-platte">+ Vorwärmung</span></td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>30 %</b> (25–35)</td><td>groß / Chipgröße — oder <b>ohne Düse bei 15–25 %</b></td><td>2–3 cm · 30–90 s</td></tr>
-<tr><td>BGA ausbauen <span class="b b-platte">+ Vorwärmung</span></td><td><b>340 °C</b> (320–350)</td><td><b>365 °C</b> (350–380)</td><td><b>30 %</b></td><td>groß / Chipgröße <span class="b b-warn">gerichtet</span></td><td>2–3 cm · 30–120 s</td></tr>
-<tr><td>Große Masseflächen, Abschirmbleche</td><td><b>365 °C</b> (350–380)</td><td><b>390 °C</b> (380–400)</td><td><b>60 %</b> (50–70)</td><td>groß</td><td>1–2 cm · bis es nachgibt</td></tr>
-<tr><td>Schrumpfschlauch</td><td colspan="2"><b>120 °C</b> (100–150)</td><td><b>40 %</b> (30–50)</td><td>Reflektor</td><td>2–3 cm · wenige s je Stelle</td></tr>
-<tr><td>Kleber/Underfill weich machen</td><td colspan="2"><b>190 °C</b> (180–200)</td><td><b>30 %</b></td><td>mittel</td><td>2–3 cm · 20–60 s</td></tr>
+<tr><td>Chip 0402 / 0201 setzen oder abheben</td><td><b>300 °C</b> (280–320)</td><td><b>340 °C</b> (320–360)</td><td><b>20 %</b> (15–25)</td><td>klein, 3–4 mm</td><td>1,5–2 cm · 10–20 s</td></tr>
+<tr><td>Chip 0603–1206, SOT, SOD</td><td><b>320 °C</b> (300–340)</td><td><b>350 °C</b> (330–370)</td><td><b>30 %</b> (25–35)</td><td>4–6 mm</td><td>1–2 cm · 15–25 s</td></tr>
+<tr><td>SOIC / TSSOP / QFP</td><td><b>330 °C</b> (310–350)</td><td><b>360 °C</b> (340–380)</td><td><b>35 %</b> (30–40)</td><td>≈ Bauteilgröße</td><td>1–2 cm · 20–40 s</td></tr>
+<tr><td>QFN / DFN mit Thermal-Pad</td><td><b>330 °C</b> (310–350)</td><td><b>360 °C</b> (340–380)</td><td><b>35 %</b> (30–40)</td><td>≈ Bauteilgröße</td><td>1–2 cm · 20–45 s · großes Pad: vorwärmen</td></tr>
+<tr><td>USB-C / Micro-USB-Buchse</td><td><b>340 °C</b> (320–360)</td><td><b>370 °C</b> (350–390)</td><td><b>35 %</b> (30–40)</td><td>6–10 mm</td><td>1–2 cm · 30–60 s · Schirmlaschen mit dem Kolben nachheizen</td></tr>
+<tr><td>BGA ausbauen <span class="b b-platte">+ Vorwärmung</span></td><td><b>330 °C</b> (320–350)</td><td><b>360 °C</b> (350–380)</td><td><b>30 %</b> (25–35)</td><td>≈ Chipgröße <span class="b b-warn">gerichtet</span></td><td>1–2 cm · 30–120 s</td></tr>
+<tr><td>BGA einlöten <span class="b b-platte">+ Vorwärmung</span></td><td><b>320 °C</b> (310–340)</td><td><b>355 °C</b> (340–370)</td><td><b>20 %</b> (15–25)</td><td><b>ohne Düse</b></td><td>2–3 cm · 30–90 s</td></tr>
+<tr><td>Kugeln auf dem Chip aufschmelzen (Jig)</td><td><b>320 °C</b> (300–330)</td><td><b>350 °C</b> (330–360)</td><td><b>25 %</b> (20–30), lose Kugeln 15–20</td><td>groß oder ohne</td><td>2–3 cm · 20–60 s</td></tr>
+<tr><td>Große Masseflächen, Abschirmbleche</td><td><b>360 °C</b> (340–380)</td><td><b>380 °C</b> (360–400)</td><td><b>50 %</b> (40–60)</td><td>groß</td><td>1–2 cm · bis es nachgibt · besser vorwärmen</td></tr>
+<tr><td>Kleber / Underfill weich machen <span class="b b-platte">+ Vorwärmung</span></td><td colspan="2"><b>190 °C</b> (180–200)</td><td><b>30 %</b> (25–35)</td><td>mittel</td><td>2–3 cm · 20–60 s</td></tr>
+<tr><td>Schrumpfschlauch 2:1</td><td colspan="2"><b>200 °C</b> (180–220)</td><td><b>40 %</b> (35–50)</td><td>groß / Reflektor</td><td>3–5 cm · ständig bewegen</td></tr>
+<tr><td>Schrumpfschlauch mit Kleber 3:1</td><td colspan="2"><b>240 °C</b> (220–260)</td><td><b>45 %</b> (40–50)</td><td>groß / Reflektor</td><td>3–5 cm · bis Kleber an den Enden austritt</td></tr>
 <tr><td>Harten Flux wieder lösen</td><td colspan="2"><b>155 °C</b> (150–160)</td><td><b>35 %</b> (30–40)</td><td>offen / mittel</td><td>2–3 cm · 5–10 s je Stelle</td></tr>
+<tr><td>Wärmetest (BGA-Riss suchen)</td><td colspan="2"><b>115 °C</b> (100–130)</td><td><b>30 %</b></td><td>groß</td><td>3–5 cm · 20–60 s</td></tr>
+<tr><td>Trocknen nach IPA</td><td colspan="2"><b>100 °C</b></td><td><b>50 %</b></td><td>ohne</td><td>~5 cm · IPA vorher ablüften lassen</td></tr>
 </tbody>
 </table></div>
-<div class="kurz"><b>Merksatz zum Luftstrom:</b> <b>Wenig Luft</b>, wenn etwas <i>wegfliegen</i> kann (lose Kugeln, Paste, 0201). <b>Viel Luft</b>, wenn viel <i>Masse</i> zu erwärmen ist (Masseflächen, dicke Bleche). Hoher Luftstrom heizt nicht besser durch — er bläst nur mehr weg und kühlt die Umgebung aus. <b>Sonderfall BGA einlöten:</b> Düse ab und <b>15–25 %</b> — der Chip soll beim Self-Alignment frei schwimmen (<a class="goto" href="#reballing">Reballing</a>).</div>
+<div class="kurz"><b>Merksatz zum Luftstrom:</b> <b>Wenig Luft</b>, wenn etwas <i>wegfliegen</i> kann (lose Kugeln, Paste, 0201). <b>Viel Luft</b>, wenn viel <i>Masse</i> zu erwärmen ist (Masseflächen, dicke Bleche). Hoher Luftstrom heizt nicht besser durch, er bläst nur mehr weg und kühlt die Umgebung aus. <b>Sonderfall BGA einlöten:</b> Düse ab und <b>15–25 %</b>, der Chip soll beim Self-Alignment frei schwimmen (<a class="goto" href="#reballing">Reballing</a>).</div>
+<div class="note"><b>Warum der Schrumpfschlauch 200 °C braucht und nicht 120 °C:</b> Der Schlauch selbst schrumpft ab ~90 °C und ist bei ~120 °C ganz zusammengezogen, Kleberschlauch braucht am Schlauch 120–150 °C. Die Luft verliert auf 3–5 cm Weg aber viel Temperatur. Mit 120 °C an der Station dauert es ewig und der Kleber schmilzt nie. 200 °C mit ständiger Bewegung sind schnell und sicher.</div>
 
-<h4>Die Luftstrom-Stufen — was die Prozente bedeuten</h4>
-<div class="tbl-wrap"><table style="min-width:760px">
-<thead><tr><th>Stufe</th><th>Charakter</th><th>Wofür</th><th>Woran du sie erkennst</th></tr></thead>
+<h4>Die Luftstrom-Stufen: was die Prozente bedeuten</h4>
+<svg class="sk sk-wide" viewBox="0 0 460 128" role="img" aria-label="Luftstrom-Skala von 0 bis 100 Prozent mit vier Zonen: sanft 15 bis 25, Standard 25 bis 40, kräftig 40 bis 55, stark 55 bis 80 Prozent, und wie ein Papierstreifen darauf reagiert">
+  <rect class="pcb" x="20" y="34" width="420" height="16" rx="3"/>
+  <rect class="bo" x="83" y="34" width="42" height="16"/>
+  <rect class="bk" x="125" y="34" width="63" height="16"/>
+  <rect class="bp" x="188" y="34" width="63" height="16"/>
+  <rect class="bw" x="251" y="34" width="105" height="16"/>
+  <g class="tick" text-anchor="middle"><text x="20" y="64">0</text><text x="83" y="64">15</text><text x="125" y="64">25</text><text x="188" y="64">40</text><text x="251" y="64">55</text><text x="356" y="64">80</text><text x="440" y="64">100 %</text></g>
+  <text class="to" x="104" y="26" text-anchor="middle">sanft</text>
+  <text class="tk" x="156" y="26" text-anchor="middle">Standard</text>
+  <text class="tp" x="219" y="26" text-anchor="middle">kräftig</text>
+  <text class="tw" x="303" y="26" text-anchor="middle">stark</text>
+  <rect class="tool" x="98" y="72" width="12" height="3"/><path class="dim" d="M104,75 q3,5 0,9 q-3,5 0,9"/>
+  <rect class="tool" x="150" y="72" width="12" height="3"/><path class="dim" d="M156,75 L163,93"/>
+  <rect class="tool" x="213" y="72" width="12" height="3"/><path class="dim" d="M219,75 L236,83"/>
+  <rect class="tool" x="297" y="72" width="12" height="3"/><path class="dim" d="M303,75 L323,77"/><path class="dim" d="M328,82 h2 M334,78 h2 M330,88 h2"/>
+  <g class="lane-s" text-anchor="middle"><text x="104" y="108">zittert</text><text x="156" y="108">flattert</text><text x="219" y="108">knickt weg</text><text x="303" y="108">bläst Teile weg</text></g>
+  <text class="tick" x="20" y="122">≈ l/min</text>
+  <g class="tick" text-anchor="middle"><text x="104" y="122">18–30</text><text x="156" y="122">30–48</text><text x="219" y="122">48–66</text><text x="303" y="122">66–96</text></g>
+</svg>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Stufe</th><th>≈ l/min (120-l/min-Station)</th><th>Charakter</th><th>Wofür</th><th>Papierstreifen in 2 cm</th></tr></thead>
 <tbody>
-<tr><td><b>15–25 %</b> · sehr sanft</td><td>Luft trägt kaum Kraft</td><td>0201/0402, lose BGA-Kugeln, frische Lötpaste, alles was verrutschen kann</td><td>Ein Papierstreifen in 2 cm Abstand <b>zittert nur</b></td></tr>
-<tr><td><b>25–40 %</b> · Standard</td><td>Der Arbeitsbereich</td><td>Fast alle IC-Arbeiten: SOIC, QFP, QFN, BGA</td><td>Papierstreifen <b>flattert deutlich</b>, knickt aber nicht weg</td></tr>
-<tr><td><b>40–55 %</b> · kräftig</td><td>Schneller Wärmeeintrag in offene Flächen</td><td>Schrumpfschlauch, Flux lösen, Vorwärmen freier Bereiche</td><td>Papierstreifen <b>knickt weg</b></td></tr>
-<tr><td><b>55–80 %</b> · stark</td><td>Maximaler Durchsatz</td><td><b>Nur</b> Masseflächen und Abschirmbleche — bläst alles Kleine davon</td><td>Deutlich hörbar, Kleinteile in der Umgebung bewegen sich</td></tr>
+<tr><td><b>15–25 %</b> · sehr sanft</td><td>18–30 l/min</td><td>Luft trägt kaum Kraft</td><td>0201/0402, lose BGA-Kugeln, frische Lötpaste, BGA einlöten ohne Düse</td><td><b>zittert nur</b></td></tr>
+<tr><td><b>25–40 %</b> · Standard</td><td>30–48 l/min</td><td>Der Arbeitsbereich</td><td>Fast alle IC-Arbeiten: SOIC, QFP, QFN, BGA ausbauen</td><td><b>flattert deutlich</b>, knickt aber nicht weg</td></tr>
+<tr><td><b>40–55 %</b> · kräftig</td><td>48–66 l/min</td><td>Schneller Wärmeeintrag in offene Flächen</td><td>Schrumpfschlauch, Masseflächen, Trocknen</td><td><b>knickt weg</b></td></tr>
+<tr><td><b>55–80 %</b> · stark</td><td>66–96 l/min</td><td>Maximaler Durchsatz</td><td><b>Nur</b> Abschirmbleche und große Flächen ohne Kleinteile drumherum</td><td>steht waagerecht, Kleinteile in der Nähe bewegen sich</td></tr>
 </tbody>
 </table></div>
-<div class="note"><b>Skalen sind gerätespezifisch:</b> Manche Stationen zeigen Prozent, andere Stufen (1–8) oder l/min — die Prozentwerte hier beschreiben eine typische %-Skala. Auf die eigene Station überträgst du sie mit dem <b>Papierstreifen-Test</b> aus der Tabelle: Station auf 200 °C, Streifen Druckerpapier in 2 cm Abstand, und die eigene Skala einmal durchfahren — die drei Reaktionen (zittert / flattert / knickt) markieren sanft, Standard und kräftig. Einmal gemacht, sitzt die Übersetzung.</div>
-<div class="tip"><b>Nachregeln in der richtigen Reihenfolge:</b> Startwert einstellen → 20–30 Sekunden arbeiten und beobachten. <b>Schmilzt nichts:</b> Temperatur in Schritten von <b>+10–20 °C</b> erhöhen, Luft unverändert lassen. <b>Bauteil wandert oder Kleinteile zittern:</b> Luft runter, nicht die Temperatur. <b>Board wird großflächig heiß, aber das Lot bleibt fest:</b> weder noch — das ist der Fall für die <a class="goto" href="#heizplatte">Vorwärmung von unten</a>. Temperatur ist nie der Ersatz für Geduld oder für die richtige Düse.</div>
+<div class="note"><b>Skalen sind gerätespezifisch:</b> Manche Stationen zeigen Prozent, andere Stufen (1–8) oder l/min. Die Prozentwerte hier beschreiben eine Turbinen-Station mit ~120 l/min Maximum (858D-Klasse, Quick 861DW, Atten 862). Kompressor-Stationen schaffen oft nur 20–25 l/min, dort sind 100 % eher „Standard". Übertragen mit dem <b>Papierstreifen-Test</b>: Station auf 200 °C, Streifen Druckerpapier in 2 cm Abstand, die eigene Skala einmal durchfahren. Die drei Reaktionen (zittert / flattert / knickt) markieren sanft, Standard und kräftig.</div>
+<div class="tip"><b>Nachregeln in der richtigen Reihenfolge:</b> Startwert einstellen → 20–30 Sekunden arbeiten und beobachten. <b>Schmilzt nichts:</b> Temperatur in Schritten von <b>+10–20 °C</b> erhöhen, Luft unverändert lassen. <b>Bauteil wandert oder Kleinteile zittern:</b> Luft runter, nicht die Temperatur. <b>Board wird großflächig heiß, aber das Lot bleibt fest:</b> weder noch, das ist der Fall für die <a class="goto" href="#heizplatte">Vorwärmung von unten</a>. Temperatur ist nie der Ersatz für Geduld oder für die richtige Düse.</div>
+<div class="note"><b>Anzeige prüfen:</b> Viele Stationen messen am Heizelement. An der Düse kommen oft 20–50 °C weniger an, bei niedrigem Luftstrom mehr Verlust als bei hohem. Einmal mit Thermoelement in 1 cm Abstand vor der Düse nachmessen (bei 300 °C und 30 %) und die Differenz merken.</div>
 
 <h3>Düsenwahl</h3>
 <div class="tbl-wrap"><table style="min-width:640px">
 <thead><tr><th>Düse</th><th>Wirkung</th><th>Einsatz</th></tr></thead>
 <tbody>
-<tr><td><b>Rund, klein (3–5 mm)</b></td><td>Punktuell, hohe Strömungsgeschwindigkeit</td><td>Einzelne kleine Chips, gezielte Stellen</td></tr>
-<tr><td><b>Rund, mittel (6–10 mm)</b></td><td>Der Allrounder</td><td>SOIC, QFP, mittlere Bauteile</td></tr>
-<tr><td><b>Rund, groß (&gt;10 mm)</b></td><td>Flächig, sanfter</td><td>BGA, große ICs, Masseflächen</td></tr>
-<tr><td><b>Ohne Düse (offen)</b></td><td>Breit, ungerichtet, sehr sanft — <b>kaum mechanische Kraft</b> auf das Bauteil</td><td>BGA <b>einlöten</b> (Self-Alignment, 15–25 % Luft) · Vorwärmen kleiner Bereiche · Flux lösen</td></tr>
+<tr><td><b>Rund, klein (3–5 mm)</b></td><td>Punktuell, hohe Strömungsgeschwindigkeit</td><td>Einzelne kleine Chips, gezielte Stellen. Luft dabei niedrig halten</td></tr>
+<tr><td><b>Rund, mittel (6–10 mm)</b></td><td>Der Allrounder</td><td>SOIC, QFP, QFN, USB-Buchsen</td></tr>
+<tr><td><b>Rund, groß (&gt;10 mm)</b></td><td>Flächig, sanfter</td><td>BGA ausbauen, große ICs, Masseflächen</td></tr>
+<tr><td><b>Ohne Düse (offen)</b></td><td>Breit, ungerichtet, sehr sanft, <b>kaum mechanische Kraft</b> auf das Bauteil</td><td>BGA <b>einlöten</b> (Self-Alignment, 15–25 % Luft) · Vorwärmen kleiner Bereiche · Flux lösen · Trocknen</td></tr>
+<tr><td><b>Kasten-Düse (QFP/BGA-Format)</b></td><td>Luft umströmt genau den Bauteilrand</td><td>Ein Chiptyp in Serie. Fürs Hobby selten nötig</td></tr>
 <tr><td><b>Reflektor / gebogen</b></td><td>Lenkt die Luft um das Bauteil</td><td>Schrumpfschlauch, empfindliche Nachbarn</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Faustregel:</b> Düse so groß wie das Bauteil — oder eine Nummer größer. Zu klein bedeutet punktuelle Überhitzung in der Mitte bei kalten Rändern.</div>
+<div class="tip"><b>Faustregel:</b> Düse so groß wie das Bauteil oder eine Nummer größer. Zu klein bedeutet punktuelle Überhitzung in der Mitte bei kalten Rändern. Kleine Düse = höhere Luftgeschwindigkeit bei gleicher Prozentzahl, deshalb mit kleiner Düse die Luft eine Stufe senken.</div>
 
 <h3>Workflows</h3>
 <h4>① SMD-Bauteil abheben</h4>
 <div class="steps">
 <div class="step"><b>Nachbarn schützen.</b> Kapton-Tape oder Alufolie über alles, was in Reichweite steht. Kunststoffstecker und Folienkabel entfernen.</div>
-<div class="step"><b>Flux rundum.</b> Dünnflüssiges Flux an alle Kanten — es überträgt Wärme und verhindert Oxidation.</div>
+<div class="step"><b>Flux rundum.</b> Dünnflüssiges Flux an alle Kanten, es überträgt Wärme und verhindert Oxidation.</div>
 <div class="step"><b>Vorwärmen</b>, wenn das Board groß ist oder Masseflächen im Spiel sind (<a class="goto" href="#heizplatte">Heizplatte</a>).</div>
-<div class="step"><b>Temperatur und Luft nach Matrix einstellen</b>, Düse passend, Abstand <b>1–2 cm</b>.</div>
-<div class="step"><b>Gleichmäßig kreisen</b> — über das Bauteil und knapp über den Rand hinaus. Nie punktuell stehen bleiben.</div>
-<div class="step"><b>Auf das Nachgeben warten.</b> Mit der Pinzette seitlich <b>leicht antippen</b>. Gibt es wie auf einem Ölfilm nach, ist alles Lot flüssig.</div>
-<div class="step"><b>Senkrecht abheben</b> — nicht schieben, nicht drehen, nie hebeln.</div>
+<div class="step"><b>Werte nach Matrix einstellen.</b> Beispiel SOIC bleifrei: <b>360 °C, 35 %</b>, Düse ≈ Bauteilgröße, Abstand <b>1–2 cm</b>.</div>
+<div class="step"><b>Gleichmäßig kreisen</b> über das Bauteil und knapp über den Rand hinaus. Nie punktuell stehen bleiben.</div>
+<div class="step"><b>Auf das Nachgeben warten.</b> Mit der Pinzette seitlich <b>leicht antippen</b>. Gibt es wie auf einem Ölfilm nach, ist alles Lot flüssig. Nach 60 s noch nichts: nicht heißer, sondern vorwärmen.</div>
+<div class="step"><b>Senkrecht abheben</b>, nicht schieben, nicht drehen, nie hebeln.</div>
 </div>
 
 <h4>② SMD-Bauteil setzen</h4>
 <div class="steps">
-<div class="step"><b>Pads vorbereiten.</b> Altlot mit Litze planziehen, reinigen, dünn Flux auftragen.</div>
-<div class="step"><b>Bauteil platzieren.</b> Tacky-Flux hält es an Ort — Pin 1 / Polung prüfen.</div>
-<div class="step"><b>Luftstrom niedrig</b> (sonst schwimmt das Bauteil weg), Temperatur nach Matrix.</div>
-<div class="step"><b>Aufschmelzen</b> und auf das <b>Self-Alignment</b> achten: das Bauteil ruckt sichtbar mittig — das ist das Signal, dass alles flüssig ist.</div>
+<div class="step"><b>Pads vorbereiten.</b> Altlot mit Litze planziehen, reinigen, dünn Flux oder Lötpaste auftragen.</div>
+<div class="step"><b>Bauteil platzieren.</b> Tacky-Flux hält es an Ort, Pin 1 / Polung prüfen.</div>
+<div class="step"><b>Luftstrom eine Stufe niedriger als beim Abheben</b>, z. B. 20–25 % statt 30–35 %, sonst schwimmt das Bauteil weg. Temperatur nach Matrix.</div>
+<div class="step"><b>Erst aus 3–4 cm anwärmen</b> (Paste trocknet an, Bauteil bleibt liegen), dann auf 1–2 cm heran.</div>
+<div class="step"><b>Aufschmelzen</b> und auf das <b>Self-Alignment</b> achten: Das Bauteil ruckt sichtbar mittig, das ist das Signal, dass alles flüssig ist.</div>
 <div class="step"><b>Hitze weg</b>, ruhig abkühlen lassen. Nicht anpusten, nicht anfassen.</div>
 <div class="step"><b>Prüfen:</b> Sicht auf Brücken, dann Durchgang messen.</div>
 </div>
 
 <h4>③ Schrumpfschlauch</h4>
 <div class="steps">
-<div class="step"><b>100–150 °C</b>, mittlerer Luftstrom, Reflektordüse.</div>
+<div class="step"><b>200 °C, 40 % Luft</b> (mit Kleber 240 °C, 45 %), große Düse oder Reflektor, Abstand 3–5 cm.</div>
 <div class="step"><b>Von der Mitte nach außen</b> arbeiten, damit keine Luft eingeschlossen wird.</div>
-<div class="step"><b>Gleichmäßig drehen</b> — punktuelle Hitze verbrennt den Schlauch, statt ihn zu schrumpfen.</div>
+<div class="step"><b>Gleichmäßig drehen</b>, punktuelle Hitze verbrennt den Schlauch, statt ihn zu schrumpfen. Fertig, wenn er überall glatt anliegt (bei Kleberschlauch: Kleber tritt an beiden Enden aus).</div>
 </div>
 
 <h3>Fehlerbilder</h3>
 <div class="tbl-wrap"><table style="min-width:720px">
 <thead><tr><th>Symptom</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
 <tbody>
-<tr><td>Kleinteile fliegen weg</td><td>Luftstrom zu hoch</td><td>Luft runter, Düse größer, Kapton drumherum</td></tr>
-<tr><td>Bauteil lässt sich nicht lösen, Board wird trotzdem heiß</td><td>Wärme fließt in die Massefläche ab</td><td>Vorwärmen von unten — nicht oben mehr Grad geben</td></tr>
+<tr><td>Kleinteile fliegen weg</td><td>Luftstrom zu hoch oder Düse zu klein</td><td>Luft runter, Düse größer, Kapton drumherum</td></tr>
+<tr><td>Bauteil lässt sich nicht lösen, Board wird trotzdem heiß</td><td>Wärme fließt in die Massefläche ab</td><td>Vorwärmen von unten, nicht oben mehr Grad geben</td></tr>
 <tr><td>Platinen-Beschriftung wird braun, Lot bleibt fest</td><td>Punktuell zu heiß, zu lange auf einer Stelle</td><td>Kreisen, Abstand vergrößern, Düse größer</td></tr>
-<tr><td>Kunststoffteile verformen sich</td><td>Keine Abdeckung, zu breiter Strahl</td><td>Kapton/Alufolie, kleinere Düse</td></tr>
+<tr><td>Kunststoffteile verformen sich</td><td>Keine Abdeckung, zu breiter Strahl</td><td>Kapton/Alufolie, kleinere Düse, Stecker vorher abziehen</td></tr>
 <tr><td>Lötstellen matt und körnig nach dem Abkühlen</td><td>Beim Erstarren bewegt oder angepustet</td><td>Ruhig auskühlen lassen</td></tr>
+<tr><td>Schrumpfschlauch wird braun oder platzt</td><td>Zu nah, zu lange auf einer Stelle</td><td>Abstand 3–5 cm, ständig bewegen</td></tr>
 <tr><td>Handstück heizt nicht mehr</td><td>Heizwendel oder Reed-Schalter defekt</td><td>Ablage-Sensor prüfen, Handstück tauschen</td></tr>
-<tr><td>Pads lösen sich vom Board</td><td>Zu lange zu heiß — Kleber unter dem Pad gibt auf</td><td>Kürzer, mit Vorwärmung, niedrigere Temperatur</td></tr>
+<tr><td>Pads lösen sich vom Board</td><td>Zu lange zu heiß, der Kleber unter dem Pad gibt auf</td><td>Kürzer, mit Vorwärmung, niedrigere Temperatur</td></tr>
 </tbody>
 </table></div>
 
 <h3>Grenzen</h3>
 <div class="gb">
 <div class="gb-col good"><h4>✓ Dafür ist sie da</h4><ul>
-<li>QFN, QFP, BGA — Pads unter dem Gehäuse</li>
+<li>QFN, QFP, BGA: Pads unter dem Gehäuse</li>
 <li>Multipin-Bauteile schadenfrei abheben</li>
 <li>Rework, ohne Nachbarn auszulöten</li>
 <li>Schrumpfschlauch, Kleber, harter Flux</li>
 </ul></div>
 <div class="gb-col bad"><h4>✗ Falsches Werkzeug</h4><ul>
-<li>Einzelne THT-Pins — dafür der Kolben</li>
+<li>Einzelne THT-Pins, dafür der Kolben</li>
 <li>Dicke Kabel und große Masseflächen ohne Vorwärmung</li>
 <li>Ganze Platinen bestücken → <span class="b b-platte">Heizplatte</span></li>
 <li>Alles, was neben Elkos und Kunststoff liegt, ohne Abdeckung</li>

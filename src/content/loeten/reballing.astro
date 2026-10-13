@@ -1,25 +1,25 @@
-<h2>Reballing — was es ist und wann es sich lohnt</h2>
+<h2>Reballing: was es ist und wann es sich lohnt</h2>
 <div class="kurz"><b>Reballing heißt:</b> Chip abnehmen → alte Kugeln <b>restlos</b> entfernen → neue Kugeln in definierter Größe aufsetzen → Chip wieder einlöten. Ein <b>Reflow</b> (den verbauten Chip einfach nochmal heiß machen) ist etwas völlig anderes: Er drückt einen Riss kurzzeitig zu und hält oft nur Wochen.</div>
-<p>BGA-Kugeln unter dem Gehäuse sind elektrische Verbindung, Halt und Wärmebrücke zugleich — reißt eine, ist der Chip tot oder (schlimmer) nur manchmal tot. Chip-Kürzel: Tab <a class="goto" href="#soc">SoC &amp; BGA-Typen</a>.</p>
-<div class="note"><b>Ablauf:</b> 1 Ausbauen · 2 Sauber machen · 3 Stencil · 4 Kugeln/Paste wählen · 5 Reballen · 6 Nacharbeiten · 7 Einlöten — Vorwärmen gilt für alles.</div>
+<p>BGA-Kugeln unter dem Gehäuse sind elektrische Verbindung, Halt und Wärmebrücke zugleich: reißt eine, ist der Chip tot oder (schlimmer) nur manchmal tot. Chip-Kürzel: Tab <a class="goto" href="#soc">SoC &amp; BGA-Typen</a>.</p>
+<div class="note"><b>Ablauf:</b> 1 Ausbauen · 2 Sauber machen · 3 Stencil · 4 Kugeln/Paste wählen · 5 Reballen · 6 Nacharbeiten · 7 Einlöten. Vorwärmen gilt für alles.</div>
 
 <div class="gb">
 <div class="gb-col good"><h4>✓ Reballing ist sinnvoll</h4><ul>
 <li>Kugeln gerissen durch Wärmezyklen (Konsolen-Klassiker) oder Sturz/Verbiegen</li>
-<li>Chip wurde ausgebaut und soll wieder rein — <b>ausgebaut = immer reballen</b>, nie die alten, unregelmäßigen Kugelreste wiederverwenden</li>
+<li>Chip wurde ausgebaut und soll wieder rein: <b>ausgebaut = immer reballen</b>, nie die alten, unregelmäßigen Kugelreste wiederverwenden</li>
 <li>Gebrauchter Chip vom Spenderboard (kommt nie mit brauchbaren Kugeln)</li>
 <li>Bleifreie Kugeln sollen gegen bleihaltige getauscht werden (haltbarer bei Reparaturen)</li>
 <li>NAND/eMMC-Tausch oder -Upgrade</li>
 </ul></div>
 <div class="gb-col bad"><h4>✗ Reballing bringt nichts</h4><ul>
-<li>Der Chip selbst ist defekt (durchgebrannt, Kurzschluss intern) — neue Kugeln an einer Leiche</li>
-<li>Pads auf der Platine sind abgerissen — erst Pads reparieren, sonst hält nichts</li>
+<li>Der Chip selbst ist defekt (durchgebrannt, Kurzschluss intern): neue Kugeln an einer Leiche</li>
+<li>Pads auf der Platine sind abgerissen: erst Pads reparieren, sonst hält nichts</li>
 <li>Korrosion/Flüssigkeitsschaden unter dem Chip ist die eigentliche Ursache</li>
-<li>Nur „mal reflowen&#8220; als Schnellschuss — das ist Symptombekämpfung</li>
+<li>Nur „mal reflowen&#8220; als Schnellschuss: das ist Symptombekämpfung</li>
 <li>Du hast keine Vorwärmung: Bei großen Boards reißt du ohne Preheater eher Pads ab, als dass du etwas reparierst</li>
 </ul></div>
 </div>
-<div class="warn"><b>Realitätscheck:</b> Reballing ist die anspruchsvollste Disziplin auf dieser Seite. Vorher solltest du QFN sicher mit Heißluft setzen und entlöten können. Übe an Schrott-Mainboards — jedes alte Laptop-Board hat Chips zum Verheizen.</div>
+<div class="warn"><b>Realitätscheck:</b> Reballing ist die anspruchsvollste Disziplin auf dieser Seite. Vorher solltest du QFN sicher mit Heißluft setzen und entlöten können. Übe an Schrott-Mainboards: jedes alte Laptop-Board hat Chips zum Verheizen.</div>
 
 <h2>Werkzeug und Material</h2>
 <div class="tbl-wrap"><table style="min-width:720px">
@@ -29,14 +29,14 @@
 <tr><td><b>Heißluftstation</b> mit großer Düse</td><td><span class="b b-warn">Pflicht</span></td><td>Düse etwa so groß wie der Chip oder etwas größer, Luftstrom fein regelbar</td></tr>
 <tr><td><b>Mikroskop</b></td><td><span class="b b-warn">Pflicht</span></td><td>Kugelreihen und Pads sind mit bloßem Auge nicht beurteilbar. Setup: Tab <a class="goto" href="#mikroskop">Mikroskop</a></td></tr>
 <tr><td><b>Reball-Jig / Magnet-Plattform</b></td><td>sehr empfohlen</td><td>Hält Chip und Stencil spielfrei zueinander. Ohne Jig verrutscht dir der Stencil beim Abziehen</td></tr>
-<tr><td><b>Stencils</b> (Schablonen)</td><td><span class="b b-warn">Pflicht</span></td><td>Universal-Set und/oder chipspezifisch — Details unten</td></tr>
+<tr><td><b>Stencils</b> (Schablonen)</td><td><span class="b b-warn">Pflicht</span></td><td>Universal-Set und/oder chipspezifisch: Details unten</td></tr>
 <tr><td><b>Lotkugeln</b></td><td>Pflicht (oder Paste)</td><td>Sortiment 0,25–0,6 mm, bleihaltig Sn63Pb37 für Reparaturen</td></tr>
 <tr><td><b>Tacky-Flux</b> + <b>dünnes Flux</b></td><td><span class="b b-warn">Pflicht</span></td><td>Tacky zum Halten, dünnflüssig zum Kriechen unter den Chip. Tab <a class="goto" href="#material">Material</a></td></tr>
 <tr><td><b>Entlötlitze</b> 1,5–2,0 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Zum Abziehen der alten Kugeln. Technik: <a class="goto" href="#draht">Draht &amp; Litze → Entlötlitze</a></td></tr>
-<tr><td><b>Bleihaltiges Lot</b> Sn63Pb37, 0,5–0,8 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Auch wenn das Board bleifrei ist — zum Aufmischen der alten Kugeln (siehe Schritt 2)</td></tr>
+<tr><td><b>Bleihaltiges Lot</b> Sn63Pb37, 0,5–0,8 mm</td><td><span class="b b-warn">Pflicht</span></td><td>Auch wenn das Board bleifrei ist: zum Aufmischen der alten Kugeln (siehe Schritt 2)</td></tr>
 <tr><td><b>Mini-Spachtel</b> / Rakel</td><td>Pflicht</td><td>Metall- oder Kunststoffklinge, gerade Kante ohne Scharten</td></tr>
 <tr><td><b>Kapton-Tape</b>, Alufolie</td><td>empfohlen</td><td>Nachbarn und Kunststoffteile abdecken</td></tr>
-<tr><td><b>IPA 99 %</b> + <b>fusselfreie Tücher</b></td><td>Pflicht</td><td>Wattestäbchen fusseln — für BGA-Arbeit ungeeignet</td></tr>
+<tr><td><b>IPA 99 %</b> + <b>fusselfreie Tücher</b></td><td>Pflicht</td><td>Wattestäbchen fusseln: für BGA-Arbeit ungeeignet</td></tr>
 <tr><td><b>Vakuum-Pen / Saugheber</b></td><td>empfohlen</td><td>Hebt den Chip senkrecht ab, ohne ihn zu verkippen</td></tr>
 </tbody>
 </table></div>
@@ -45,62 +45,62 @@
 <h2>Schritt 1 · Chip ausbauen</h2>
 <div class="steps">
 <div class="step"><b>Umgebung sichern.</b> Akku ab, Stecker raus, Nachbarn mit <b>Kapton</b> abdecken, Board fest einspannen.</div>
-<div class="step"><b>Flux rundum.</b> Dünnflüssiges Flux an alle vier Kanten — es kriecht unter das Gehäuse.</div>
+<div class="step"><b>Flux rundum.</b> Dünnflüssiges Flux an alle vier Kanten: es kriecht unter das Gehäuse.</div>
 <div class="step"><b>Vorwärmen.</b> Von unten aufheizen (Tabelle unten) und <b>1–3 min halten</b>, bis die Wärme durchs Board durch ist.</div>
-<div class="step"><b>Oben nachheizen.</b> Große Düse, 1–2 cm Abstand, ruhige Kreise. Bleihaltig <b>300–330 °C</b>, bleifrei <b>350–380 °C</b>, Luftstrom <b>niedrig (~30 %)</b>.</div>
-<div class="step"><b>Auf den „Klick" warten.</b> Chip seitlich <b>leicht antippen</b> (nie hebeln) — gibt er wie auf einem Ölfilm nach, sind alle Kugeln flüssig.</div>
-<div class="step"><b>Senkrecht abheben.</b> Vakuum-Pen, gerade nach oben — nicht drehen oder kippen. Auf hitzefeste Unterlage (kein Metall).</div>
+<div class="step"><b>Oben nachheizen.</b> Düse ≈ Chipgröße, 1–2 cm Abstand, ruhige Kreise. Bleihaltig <b>330 °C</b> (320–350), bleifrei <b>360 °C</b> (350–380), Luftstrom <b>30 %</b> (25–35). Diese Werte setzen ein auf ~150 °C vorgewärmtes Board voraus.</div>
+<div class="step"><b>Auf den „Klick" warten.</b> Chip seitlich <b>leicht antippen</b> (nie hebeln): gibt er wie auf einem Ölfilm nach, sind alle Kugeln flüssig.</div>
+<div class="step"><b>Senkrecht abheben.</b> Vakuum-Pen, gerade nach oben: nicht drehen oder kippen. Auf hitzefeste Unterlage (kein Metall).</div>
 <div class="step"><b>Begutachten.</b> Klebt ein Board-Pad am Chip → erst Pad-Reparatur, dann Reballing.</div>
 </div>
-<div class="warn"><b>Underfill (Handy-SoCs):</b> wird erst bei <b>180–200 °C</b> zäh-weich. Board so weit vorwärmen, dann lösen und den weichen Kleber mit der <b>Klinge flach am Board</b> abtragen — nie stechen, nie hasten. Häufigster Grund für gerissene Pads.</div>
-<div class="note"><b>PoP-Chips (RAM huckepack):</b> Zu viel Hitze trennt die Lagen — kurz arbeiten, mit Vorwärmung, den heißen Chip nicht anfassen.</div>
+<div class="warn"><b>Underfill (Handy-SoCs):</b> Das Epoxid wird ab ~150 °C weicher, gut abtragen lässt es sich erst bei <b>180–200 °C</b>. Board auf 150–170 °C vorwärmen (Platte 170–190 °C), Chip ausbauen, dann den Rest lokal mit Heißluft <b>190 °C, 30 %</b> erweichen und mit der <b>Klinge flach am Board</b> abtragen. Nie stechen, nie hasten: häufigster Grund für gerissene Pads.</div>
+<div class="note"><b>PoP-Chips (RAM huckepack):</b> Zu viel Hitze trennt die Lagen, kurz arbeiten, mit Vorwärmung, den heißen Chip nicht anfassen.</div>
 
 <h2>Schritt 2 · Chip und Pads sauber machen</h2>
-<p>Das ist der Schritt, der über das Ergebnis entscheidet — nicht das eigentliche Kugelsetzen. Auf dem Chip muss am Ende eine <b>plane, gleichmäßig verzinnte Padfläche</b> stehen, ohne Hügel, ohne Reste, ohne Kratzer.</p>
+<p>Das ist der Schritt, der über das Ergebnis entscheidet: nicht das eigentliche Kugelsetzen. Auf dem Chip muss am Ende eine <b>plane, gleichmäßig verzinnte Padfläche</b> stehen, ohne Hügel, ohne Reste, ohne Kratzer.</p>
 
 <h3>Der Blei-Trick: bleifrei aufmischen, damit es leichter geht</h3>
-<p>Fast alle Geräte sind bleifrei gelötet (SAC305, Schmelzpunkt 217–220 °C). Bleifreies Restlot zäh abzusaugen kostet viel Hitze und Zeit — genau das, was Pads killt. Der Standardtrick:</p>
+<p>Fast alle Geräte sind bleifrei gelötet (SAC305, Schmelzpunkt 217–220 °C). Bleifreies Restlot zäh abzusaugen kostet viel Hitze und Zeit: genau das, was Pads killt. Der Standardtrick:</p>
 <div class="steps">
 <div class="step"><b>Reichlich Flussmittel</b> über das ganze Kugelfeld geben.</div>
-<div class="step"><b>Bleihaltiges Lot einarbeiten.</b> Mit breiter Meißelspitze <b>Sn63Pb37</b> über die Kugeln streichen, bis alles verschmilzt — die Mischung schmilzt ab ~<b>183–200 °C</b>.</div>
-<div class="step"><b>Jetzt erst absaugen.</b> Statt 380 °C und Kampf: <b>330 °C</b> und ein Zug.</div>
+<div class="step"><b>Bleihaltiges Lot einarbeiten.</b> Mit breiter Meißelspitze <b>Sn63Pb37</b> über die Kugeln streichen, bis alles verschmilzt: die Mischung schmilzt ab ~<b>183–200 °C</b>.</div>
+<div class="step"><b>Jetzt erst absaugen.</b> Statt 370 °C und Kampf: <b>320–340 °C</b> und ein Zug.</div>
 </div>
 
 
 <h3>Kugeln abziehen mit der Entlötlitze</h3>
 <div class="steps">
-<div class="step"><b>Litze kurz abschneiden</b> (1–2 cm) — langer Schwanz zieht Wärme weg. Details: <a class="goto" href="#draht">Draht &amp; Litze</a>.</div>
+<div class="step"><b>Litze kurz abschneiden</b> (1–2 cm): langer Schwanz zieht Wärme weg. Details: <a class="goto" href="#draht">Draht &amp; Litze</a>.</div>
 <div class="step"><b>Flux auf die Litze und auf den Chip.</b> Trockene Litze saugt schlecht und schmiert.</div>
-<div class="step"><b>Flach in eine Richtung ziehen.</b> Spitze auf die Litze, ein Zug — nicht schrubben, nie drücken.</div>
+<div class="step"><b>Flach in eine Richtung ziehen.</b> Spitze auf die Litze, ein Zug: nicht schrubben, nie drücken.</div>
 <div class="step"><b>Litze weiterdrehen, Reste weg.</b> Gesättigte Stellen saugen nicht mehr. Immer ein frisches Stück nachschieben.</div>
-<div class="step"><b>Heiß abheben.</b> Litze und Spitze <b>zusammen</b> weg — kalt abreißen reißt Pads.</div>
-<div class="step"><b>Prüfen.</b> Alle Pads flach, silbrig, ohne Buckel — ein Resthügel macht später eine schiefe Kugel.</div>
+<div class="step"><b>Heiß abheben.</b> Litze und Spitze <b>zusammen</b> weg: kalt abreißen reißt Pads.</div>
+<div class="step"><b>Prüfen.</b> Alle Pads flach, silbrig, ohne Buckel: ein Resthügel macht später eine schiefe Kugel.</div>
 </div>
 <div class="warn"><b>Nie schaben, nie schleifen.</b> Kein Messer, kein Glasfaserstift, kein Schleifpapier auf BGA-Pads. Die Pads sind wenige Mikrometer dünn und die Lötstopplack-Ränder halten sie an Ort und Stelle. Ist ein Pad einmal blank gekratzt, benetzt es nie wieder zuverlässig.</div>
 
 <h3>Reinigen: Flussmittelreste runter</h3>
 <div class="steps">
-<div class="step"><b>Antrocknen lassen? Nein.</b> Direkt nach dem Absaugen reinigen — angebrannter Flux wird zäh wie Harz.</div>
-<div class="step"><b>Hot-Air-Trick:</b> Heißluft <b>150–160 °C</b>, kurz überstreichen — der Rückstand wird wieder flüssig (weit unter jedem Schmelzpunkt).</div>
+<div class="step"><b>Antrocknen lassen? Nein.</b> Direkt nach dem Absaugen reinigen: angebrannter Flux wird zäh wie Harz.</div>
+<div class="step"><b>Hot-Air-Trick:</b> Heißluft <b>150–160 °C</b>, Luft <b>30 %</b>, offene Düse, 2–3 cm Abstand, kurz überstreichen. Der Rückstand wird wieder flüssig, weit unter jedem Schmelzpunkt.</div>
 <div class="step"><b>Warm abwischen.</b> Fusselfreies Tuch + <b>IPA 99 %</b>, in eine Richtung, Tuchseite oft wechseln.</div>
-<div class="step"><b>Nachkontrolle.</b> Unter dem Mikroskop schräg gegen das Licht schauen — Rückstände zeigen sich als matte Schlieren. Bei Bedarf wiederholen.</div>
+<div class="step"><b>Nachkontrolle.</b> Unter dem Mikroskop schräg gegen das Licht schauen: Rückstände zeigen sich als matte Schlieren. Bei Bedarf wiederholen.</div>
 </div>
-<div class="tip"><b>Derselbe Trick funktioniert auf dem Board</b> — überall dort, wo alter, harter Flux zwischen Bauteilen klebt und der Pinsel allein nicht mehr weiterkommt. Details und Grenzen: <a class="goto" href="#finish">Reinigen &amp; Schützen</a>.</div>
+<div class="tip"><b>Derselbe Trick funktioniert auf dem Board</b>: überall dort, wo alter, harter Flux zwischen Bauteilen klebt und der Pinsel allein nicht mehr weiterkommt. Details und Grenzen: <a class="goto" href="#finish">Reinigen &amp; Schützen</a>.</div>
 
 <h2>Schritt 3 · Stencil auswählen</h2>
 <p>Der Stencil (die Schablone) ist ein dünnes Stahlblech mit einem Lochraster. Die Löcher legen fest, wo eine Kugel landet und wie groß sie sein darf.</p>
 <div class="tbl-wrap"><table style="min-width:780px">
 <thead><tr><th>Typ</th><th>Was es ist</th><th>Dicke</th><th>Stark</th><th>Schwach</th></tr></thead>
 <tbody>
-<tr><td><b>Universal-Stencil</b> (Direct-Heat)</td><td>Stahlblech mit mehreren Lochfeldern in Standard-Rastern (0,2 / 0,25 / 0,3 / 0,35 / 0,4 / 0,45 / 0,5 / 0,55 / 0,6 mm), Chip liegt darunter im Jig</td><td>0,10–0,30 mm</td><td>Ein Set deckt „irgendein BGA&#8220; ab, hitzefest — man kann <b>durch den Stencil hindurch</b> heizen</td><td>Das Raster passt nie exakt zum Chip. Bei ungewöhnlichen Rastern oder ausgesparten Feldern (Depopulated Areas) unbrauchbar</td></tr>
+<tr><td><b>Universal-Stencil</b> (Direct-Heat)</td><td>Stahlblech mit mehreren Lochfeldern in Standard-Rastern (0,2 / 0,25 / 0,3 / 0,35 / 0,4 / 0,45 / 0,5 / 0,55 / 0,6 mm), Chip liegt darunter im Jig</td><td>0,10–0,30 mm</td><td>Ein Set deckt „irgendein BGA&#8220; ab, hitzefest: man kann <b>durch den Stencil hindurch</b> heizen</td><td>Das Raster passt nie exakt zum Chip. Bei ungewöhnlichen Rastern oder ausgesparten Feldern (Depopulated Areas) unbrauchbar</td></tr>
 <tr><td><b>Chipspezifischer Stencil</b> (dedicated)</td><td>Genau für einen Chip gefertigt, meist mit Positionierrahmen oder Chip-Umriss</td><td>0,08–0,15 mm</td><td>Jede Kugel sitzt exakt, auch bei unregelmäßigen Feldern. Für Handy-/Konsolen-Arbeit die einzig sinnvolle Wahl</td><td>Pro Chip einer nötig, kostet Geld und Lagerplatz</td></tr>
-<tr><td><b>Magnet-Plattform / Jig</b></td><td>Halterung mit Magneten oder Klemmen, hält Chip und Stencil deckungsgleich</td><td>—</td><td>Kein Verrutschen beim Rakeln und beim Abziehen</td><td>Stencil und Plattform müssen zueinander passen (Herstellersystem)</td></tr>
+<tr><td><b>Magnet-Plattform / Jig</b></td><td>Halterung mit Magneten oder Klemmen, hält Chip und Stencil deckungsgleich</td><td>entfällt</td><td>Kein Verrutschen beim Rakeln und beim Abziehen</td><td>Stencil und Plattform müssen zueinander passen (Herstellersystem)</td></tr>
 <tr><td>Polyimid-/Kapton-Stencil</td><td>Kunststofffolie statt Blech</td><td>~0,1 mm</td><td>Billig, biegt sich an unebene Chips an</td><td>Verzieht sich bei Hitze, nur bedingt wiederverwendbar</td></tr>
 </tbody>
 </table></div>
-<div class="note"><b>Direct-Heat oder nicht?</b> Ein <b>Direct-Heat-Stencil</b> aus Stahl darf beim Aufschmelzen drauf bleiben — du heizt durch die Löcher. Ein einfacher Kunststoff- oder Dünnblech-Stencil wird nur zum <b>Platzieren</b> benutzt und muss <b>vor</b> dem Erhitzen weg. Steht nichts im Datenblatt: im Zweifel abziehen.</div>
-<div class="tip"><b>Stencil-Dicke ist keine Nebensache.</b> Bei Paste bestimmt sie direkt die Lotmenge pro Pad. Faustregel: Für feinen Pitch (0,3–0,4 mm) dünn (0,08–0,10 mm), für 0,5–0,65 mm mittel (0,10–0,12 mm), für Konsolen-/Laptop-BGA mit 0,8–1,0 mm Pitch dicker (0,15–0,20 mm). Bei Kugeln muss die Dicke nur zur <b>Kugelgröße passen</b> — das Loch soll die Kugel halten, aber nicht verschlucken.</div>
-<div class="note"><b>Welche Stencils man konkret kaufen sollte</b> — als Einkaufsliste mit Bezeichnungen: Tab <a class="goto" href="#soc">SoC &amp; BGA-Typen</a>.</div>
+<div class="note"><b>Direct-Heat oder nicht?</b> Ein <b>Direct-Heat-Stencil</b> aus Stahl darf beim Aufschmelzen drauf bleiben: du heizt durch die Löcher. Ein einfacher Kunststoff- oder Dünnblech-Stencil wird nur zum <b>Platzieren</b> benutzt und muss <b>vor</b> dem Erhitzen weg. Steht nichts im Datenblatt: im Zweifel abziehen.</div>
+<div class="tip"><b>Stencil-Dicke ist keine Nebensache.</b> Bei Paste bestimmt sie direkt die Lotmenge pro Pad. Faustregel: Für feinen Pitch (0,3–0,4 mm) dünn (0,08–0,10 mm), für 0,5–0,65 mm mittel (0,10–0,12 mm), für Konsolen-/Laptop-BGA mit 0,8–1,0 mm Pitch dicker (0,15–0,20 mm). Bei Kugeln muss die Dicke nur zur <b>Kugelgröße passen</b>: das Loch soll die Kugel halten, aber nicht verschlucken.</div>
+<div class="note"><b>Welche Stencils man konkret kaufen sollte</b>, als Einkaufsliste mit Bezeichnungen: Tab <a class="goto" href="#soc">SoC &amp; BGA-Typen</a>.</div>
 
 <h2>Schritt 4 · Bälle oder Paste?</h2>
 <p>Beide Wege funktionieren. Sie haben aber unterschiedliche Fehlerbilder.</p>
@@ -121,14 +121,14 @@
 <tr><td>0,30 mm</td><td>0,15–0,18 mm</td><td>WLCSP, feinste Handy-Chips</td></tr>
 <tr><td>0,35 mm</td><td>0,20 mm</td><td>Handy-SoC, PoP-Oberseiten</td></tr>
 <tr><td>0,40 mm</td><td>0,25 mm</td><td>Handy-SoC, Apple T2, viele NAND</td></tr>
-<tr><td><b>0,50 mm</b></td><td><b>0,30 mm</b> (laut Datenblatt teils 0,25)</td><td><b>eMMC BGA153/169</b>, viele CSP — die meistgebrauchte Größe</td></tr>
+<tr><td><b>0,50 mm</b></td><td><b>0,30 mm</b> (laut Datenblatt teils 0,25)</td><td><b>eMMC BGA153/169</b>, viele CSP: die meistgebrauchte Größe</td></tr>
 <tr><td>0,65 mm</td><td>0,35–0,40 mm</td><td>Mittlere BGA, RAM, kleinere SoCs</td></tr>
 <tr><td>0,80 mm</td><td>0,45–0,50 mm</td><td>Laptop-GPU, Konsolen-APU, Chipsätze</td></tr>
 <tr><td>1,00 mm</td><td>0,60 mm</td><td>Ältere große BGA (Xbox 360, PS3-Generation)</td></tr>
 <tr><td>1,27 mm</td><td>0,75–0,76 mm</td><td>Alte Großgehäuse, Industrie</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Die Faustregel ersetzt kein Nachmessen.</b> Wenn du den Chip vorher ausgebaut hast: Miss eine <b>unbeschädigte</b> Originalkugel unter dem Mikroskop mit Messokular oder vergleiche sie neben Kugeln aus dem Sortiment. Der chipspezifische Stencil gibt die Größe ebenfalls vor — steht meist mit drauf. Und: Der Pitch lässt sich am einfachsten bestimmen, indem du 10 Kugelmitten misst und durch 10 teilst.</div>
+<div class="warn"><b>Die Faustregel ersetzt kein Nachmessen.</b> Wenn du den Chip vorher ausgebaut hast: Miss eine <b>unbeschädigte</b> Originalkugel unter dem Mikroskop mit Messokular oder vergleiche sie neben Kugeln aus dem Sortiment. Der chipspezifische Stencil gibt die Größe ebenfalls vor: steht meist mit drauf. Und: Der Pitch lässt sich am einfachsten bestimmen, indem du 10 Kugelmitten misst und durch 10 teilst.</div>
 
 <h3>Welche Legierung?</h3>
 <div class="tbl-wrap"><table style="min-width:680px">
@@ -141,25 +141,25 @@
 </table></div>
 <div class="warn"><b>Nicht halb sauber machen.</b> Wenn auf dem Chip oder auf den Board-Pads noch bleifreie Reste sitzen und du bleihaltige Kugeln draufsetzt, entsteht eine <b>Mischlegierung mit unbekanntem Schmelzpunkt</b>. Die Verbindung sieht gut aus und versagt später. Deshalb: erst restlos absaugen, dann neu aufbauen.</div>
 
-<h2>Schritt 5 · Reballen — die zwei Methoden</h2>
+<h2>Schritt 5 · Reballen: die zwei Methoden</h2>
 <p>Egal welche Methode: Chip planliegend in den Jig, Stencil deckungsgleich drauf, prüfen, dass <b>jedes</b> Pad mittig in seinem Loch sitzt. Ein halbes Loch Versatz und du reballst gegen die Lötstopplack-Kante.</p>
 
 <h3>Methode A · Direct-Heat (Stencil bleibt drauf)</h3>
 <div class="steps">
 <div class="step"><b>Chip einlegen und ausrichten.</b> Pad-Feld exakt unter dem Lochfeld. Jig festziehen.</div>
-<div class="step"><b>Hauchdünn Flux.</b> Sehr dünner Tacky-Film — <b>zu viel Flux ist der häufigste Anfängerfehler</b> (kocht auf, wirft Kugeln raus).</div>
+<div class="step"><b>Hauchdünn Flux.</b> Sehr dünner Tacky-Film: <b>zu viel Flux ist der häufigste Anfängerfehler</b> (kocht auf, wirft Kugeln raus).</div>
 <div class="step"><b>Kugeln aufbringen.</b> Häufchen auf den Stencil, mit dem Spachtel <b>flach</b> verteilen, Überschuss zurück in die Dose.</div>
 <div class="step"><b>Kontrollieren.</b> Jedes Loch genau eine Kugel? Leere einzeln mit feuchter Nadelspitze nachsetzen.</div>
-<div class="step"><b>Aufschmelzen.</b> Große Düse, Luft <b>20–30 %</b>, bleihaltig <b>300–330 °C</b> / bleifrei <b>330–360 °C</b> — die Kugeln kollabieren sichtbar und glänzen.</div>
+<div class="step"><b>Aufschmelzen.</b> Große Düse oder ohne, 2–3 cm Abstand, Luft <b>20–30 %</b>, bleihaltig <b>320 °C</b> (300–330) / bleifrei <b>350 °C</b> (330–360). Die Kugeln kollabieren sichtbar und glänzen. Der Chip im Jig hat kaum Masse, deshalb geht das ohne Vorwärmung.</div>
 <div class="step"><b>Abkühlen lassen.</b> Vollständig. Nicht anpusten, nicht mit der Pinzette anstupsen.</div>
-<div class="step"><b>Stencil lösen</b> — erst wenn kalt. Klemmt er: leicht anwärmen, seitlich schieben.</div>
+<div class="step"><b>Stencil lösen</b>: erst wenn kalt. Klemmt er: leicht anwärmen, seitlich schieben.</div>
 </div>
 
 <h3>Methode B · Stencil ab, dann schmelzen</h3>
 <div class="steps">
 <div class="step"><b>Kugeln wie oben setzen</b>, aber Flux etwas klebriger wählen, damit die Kugeln nach dem Abziehen liegen bleiben.</div>
-<div class="step"><b>Stencil vorsichtig senkrecht abheben.</b> Nicht schieben — sonst kippt die halbe Reihe um.</div>
-<div class="step"><b>Freistehende Kugeln erhitzen.</b> Luftstrom jetzt <b>ganz niedrig (15–25 %)</b>, sonst fliegt dir das Feld weg. Von schräg oben und aus etwas mehr Abstand anfangen.</div>
+<div class="step"><b>Stencil vorsichtig senkrecht abheben.</b> Nicht schieben, sonst kippt die halbe Reihe um.</div>
+<div class="step"><b>Freistehende Kugeln erhitzen.</b> Gleiche Temperatur, aber Luftstrom jetzt <b>ganz niedrig (15–20 %)</b> und ohne Düse, sonst fliegt dir das Feld weg. Aus 4–5 cm anfangen, erst wenn der Flux glänzt auf 2–3 cm heran.</div>
 <div class="step"><b>Aufschmelzen und abkühlen</b> wie bei Methode A.</div>
 </div>
 <div class="tip"><b>Wann welche?</b> Direct-Heat ist die sichere Standardmethode und für Anfänger klar besser: Der Stencil hält alles an Ort und Stelle. Methode B nimmt man, wenn der Stencil nicht hitzefest ist oder das Lochraster so eng ist, dass die geschmolzenen Kugeln am Stencil hängen bleiben würden.</div>
@@ -214,59 +214,59 @@
 <h2>Schritt 6 · Kugeln und Pads nacharbeiten</h2>
 <p>Nach dem Abziehen des Stencils sieht das Feld selten perfekt aus: einzelne Kugeln stehen schief, manche sind noch matt, an den Rändern hängt Flux. Statt neu anzufangen, arbeitet man nach.</p>
 <div class="steps">
-<div class="step"><b>Ansehen — flach von der Seite</b> gegen das Licht: sind alle Kugeln gleich hoch? (Von oben sieht alles gleich aus.)</div>
+<div class="step"><b>Ansehen, flach von der Seite</b> gegen das Licht: sind alle Kugeln gleich hoch? (Von oben sieht alles gleich aus.)</div>
 <div class="step"><b>Frisches Flux drüber.</b> Dünn und flächig, gerne wieder dünnflüssiges Flux.</div>
-<div class="step"><b>Nachschmelzen.</b> ~300 °C, Luft jetzt <b>~50 %</b> (die Kugeln liegen ja fest), kurz übers Feld — die Oberflächenspannung richtet alles mittig und glänzend.</div>
+<div class="step"><b>Nachschmelzen.</b> Bleihaltig <b>~310 °C</b> / bleifrei <b>~340 °C</b>, Luft <b>25–30 %</b>, ohne Düse, kurz übers Feld. Die Oberflächenspannung richtet alles mittig und glänzend. Mehr Luft lohnt nicht: Flüssige Kugeln hält nur die Oberflächenspannung auf dem Pad, starker Luftstrom schiebt sie zu Würsten zusammen.</div>
 <div class="step"><b>Brücke?</b> Flux drauf, mit feiner Spitze/Litze trennen, Stelle kurz nachschmelzen.</div>
 <div class="step"><b>Fehlende Kugel:</b> einzeln mit einer Nadel oder einer angefeuchteten Spitze setzen und punktuell anschmelzen.</div>
-<div class="step"><b>Reinigen.</b> Hot-Air-Trick + IPA — der Chip geht <b>rückstandsfrei</b> in den Einbau.</div>
+<div class="step"><b>Reinigen.</b> Hot-Air-Trick + IPA: der Chip geht <b>rückstandsfrei</b> in den Einbau.</div>
 </div>
 <div class="tip"><b>Abnahme:</b> Alle Kuppen in einer Linie, mittig, glänzend, keine berührt die Nachbarin. Nacharbeiten ist immer billiger als ein zweiter Ausbau.</div>
 
 <h2>Schritt 7 · Chip wieder einlöten</h2>
 <div class="steps">
-<div class="step"><b>Board-Pads vorbereiten.</b> Alte Lotreste mit Litze und Flux restlos abziehen (gleiche Technik wie beim Chip), reinigen, unter dem Mikroskop prüfen. Pads müssen plan und blank sein — nicht verzinnen, nicht aufbauen.</div>
-<div class="step"><b>Flux dünn auf die Board-Pads</b> — bei großen Chips dünnflüssiges an die Kanten (kriecht unter). Herausquellendes Flux = zu viel.</div>
-<div class="step"><b>Ausrichten.</b> <b>Pin 1</b> beachten, am Siebdruck-Umriss orientieren, leicht andrücken — nie fest drücken.</div>
+<div class="step"><b>Board-Pads vorbereiten.</b> Alte Lotreste mit Litze und Flux restlos abziehen (gleiche Technik wie beim Chip), reinigen, unter dem Mikroskop prüfen. Pads müssen plan und blank sein: nicht verzinnen, nicht aufbauen.</div>
+<div class="step"><b>Flux dünn auf die Board-Pads</b>: bei großen Chips dünnflüssiges an die Kanten (kriecht unter). Herausquellendes Flux = zu viel.</div>
+<div class="step"><b>Ausrichten.</b> <b>Pin 1</b> beachten, am Siebdruck-Umriss orientieren, leicht andrücken, nie fest drücken.</div>
 <div class="step"><b>Vorwärmen.</b> Board von unten auf Temperatur bringen und halten (Tabelle unten).</div>
-<div class="step"><b>Reflow von oben — <u>ohne Düse</u>.</b> Düse abnehmen und mit <b>15–25 % Luftstrom</b> arbeiten: Der offene Strahl ist breit und sanft, der Chip wird nicht verschoben und die Kugeln bleiben liegen. Temperatur wie gehabt — bleihaltig <b>300–330 °C</b> / bleifrei <b>340–370 °C</b>, ruhige Kreise über den Chip und knapp darüber hinaus. Ohne Düse dauert es etwas länger; das ist gewollt, nicht ein Grund für mehr Grad.</div>
-<div class="step"><b>Self-Alignment abwarten.</b> Sind alle Kugeln flüssig, ruckt der Chip sichtbar in Position — das ist das Signal, Hitze sofort weg.</div>
+<div class="step"><b>Reflow von oben, <u>ohne Düse</u>.</b> Düse abnehmen und mit <b>15–25 % Luftstrom</b> arbeiten: Der offene Strahl ist breit und sanft, der Chip wird nicht verschoben und die Kugeln bleiben liegen. Bleihaltig <b>320 °C</b> (310–340) / bleifrei <b>355 °C</b> (340–370), Abstand 2–3 cm, ruhige Kreise über den Chip und knapp darüber hinaus. Ohne Düse dauert es etwas länger; das ist gewollt, kein Grund für mehr Grad.</div>
+<div class="step"><b>Self-Alignment abwarten.</b> Sind alle Kugeln flüssig, ruckt der Chip sichtbar in Position: das ist das Signal, Hitze sofort weg.</div>
 <div class="step"><b>Langsam abkühlen.</b> Vorwärmung stufenweise runter, Board erst handwarm bewegen.</div>
-<div class="step"><b>Erst messen, dann Strom.</b> Alle Schienen gegen Masse (Kurzschluss?), dann mit Strombegrenzung anfahren — <a class="goto" href="#fehler">Fehler &amp; Regeln</a>.</div>
+<div class="step"><b>Erst messen, dann Strom.</b> Alle Schienen gegen Masse (Kurzschluss?), dann mit Strombegrenzung anfahren, siehe <a class="goto" href="#fehler">Fehler &amp; Regeln</a>.</div>
 </div>
-<div class="tip"><b>Warum beim Einlöten ohne Düse, beim Ausbau aber mit?</b> Beim <b>Ausbau</b> willst du gerichtete Wärme, die schnell durch den Chip geht — große Düse, ~30 % Luft. Beim <b>Einlöten</b> willst du das Gegenteil: möglichst wenig mechanische Kraft, damit der Chip beim Self-Alignment frei auf den Kugeln schwimmt. Deshalb Düse ab und Luft auf <b>15–25 %</b>. Nur bei sehr großen, <b>nicht vorgewärmten</b> Boards lohnt stattdessen die große Düse — besser ist dort aber die <a class="goto" href="#heizplatte">Vorwärmung von unten</a>.</div>
-<div class="warn"><b>Nicht auf den Chip drücken.</b> Weder beim Auflegen noch beim Reflow. Der Chip muss auf den Kugeln <b>schwimmen</b> — Druck plattet Kugeln zu Brücken und quetscht Lot heraus. Ausrichten ja, drücken nein.</div>
+<div class="tip"><b>Warum beim Einlöten ohne Düse, beim Ausbau aber mit?</b> Beim <b>Ausbau</b> willst du gerichtete Wärme, die schnell durch den Chip geht: Düse ≈ Chipgröße, ~30 % Luft. Beim <b>Einlöten</b> willst du das Gegenteil: möglichst wenig mechanische Kraft, damit der Chip beim Self-Alignment frei auf den Kugeln schwimmt. Deshalb Düse ab und Luft auf <b>15–25 %</b>. Nur bei sehr großen, <b>nicht vorgewärmten</b> Boards lohnt stattdessen die große Düse. Besser ist dort aber die <a class="goto" href="#heizplatte">Vorwärmung von unten</a>.</div>
+<div class="warn"><b>Nicht auf den Chip drücken.</b> Weder beim Auflegen noch beim Reflow. Der Chip muss auf den Kugeln <b>schwimmen</b>: Druck plattet Kugeln zu Brücken und quetscht Lot heraus. Ausrichten ja, drücken nein.</div>
 
-<h2>Vorwärmen — warum, wann, wie heiß</h2>
+<h2>Vorwärmen: warum, wann, wie heiß</h2>
 <p>Vorwärmen ist keine Beschleunigung, sondern <b>Schadensvermeidung</b>. Drei Gründe:</p>
 <div class="grid">
-<div class="card"><div class="ct">1. Delta klein halten</div><div class="cd">Wenn oben 350 °C anliegen und das Board unten 25 °C hat, verbiegt sich die Platine (Warpage) und kann sich in Lagen trennen (Delamination). Der Chip liegt danach nicht mehr plan — genau das erzeugt die nächsten gerissenen Kugeln.</div></div>
+<div class="card"><div class="ct">1. Delta klein halten</div><div class="cd">Wenn oben 350 °C anliegen und das Board unten 25 °C hat, verbiegt sich die Platine (Warpage) und kann sich in Lagen trennen (Delamination). Der Chip liegt danach nicht mehr plan: genau das erzeugt die nächsten gerissenen Kugeln.</div></div>
 <div class="card"><div class="ct">2. Weniger Hitze von oben</div><div class="cd">Vorgewärmt brauchst du oben viel weniger Temperatur und viel weniger Zeit, um dieselbe Lötstelle flüssig zu bekommen. Das schont Kunststoff, Elkos, Displaystecker und den Chip selbst.</div></div>
-<div class="card"><div class="ct">3. Große Masseflächen mitnehmen</div><div class="cd">Konsolen- und Laptop-Boards sind Kupferklötze. Ohne Vorwärmung fließt die Hitze in die Massefläche ab und die Kugeln in der Chipmitte werden nie flüssig — außen brennt es und innen ist es kalt.</div></div>
+<div class="card"><div class="ct">3. Große Masseflächen mitnehmen</div><div class="cd">Konsolen- und Laptop-Boards sind Kupferklötze. Ohne Vorwärmung fließt die Hitze in die Massefläche ab und die Kugeln in der Chipmitte werden nie flüssig: außen brennt es und innen ist es kalt.</div></div>
 </div>
 <div class="tbl-wrap"><table style="min-width:720px">
-<thead><tr><th>Situation</th><th>Vorwärmung von unten</th><th>Halten</th><th>Warum genau so</th></tr></thead>
+<thead><tr><th>Situation</th><th>Board-Ziel (Fühler)</th><th>Platte etwa</th><th>Halten</th><th>Warum genau so</th></tr></thead>
 <tbody>
-<tr><td>Kleine Handy-/Konsolen-Tochterplatine</td><td><b>100–130 °C</b></td><td>1–2 min</td><td>Reicht, um das Delta zu brechen, ohne Kleber und Folien zu belasten</td></tr>
-<tr><td>Handy-Mainboard <b>mit Underfill</b></td><td><b>150–180 °C</b> (kurzzeitig bis ~200 °C)</td><td>2–3 min</td><td>Underfill wird erst hier zäh-weich. Über ~200 °C verändert er sich und wird zum Kampf</td></tr>
-<tr><td>Laptop-Mainboard</td><td><b>130–160 °C</b></td><td>2–4 min</td><td>Große Kupferlagen brauchen Zeit, bis die Wärme wirklich durch ist</td></tr>
-<tr><td>Konsolen-Mainboard (PS4/Xbox)</td><td><b>150–180 °C</b></td><td>3–5 min</td><td>Sehr hohe Wärmemasse, riesige Chips. Ohne das wird die Chipmitte nie flüssig</td></tr>
-<tr><td>Einzelner Chip im Reball-Jig</td><td>ohne, oder <b>80–120 °C</b></td><td>—</td><td>Der Chip allein hat kaum Masse. Etwas Vorwärmung stabilisiert nur das Ergebnis</td></tr>
+<tr><td>Kleine Handy-/Konsolen-Tochterplatine</td><td><b>100–110 °C</b></td><td>120 °C</td><td>1–2 min</td><td>Reicht, um das Delta zu brechen, ohne Kleber und Folien zu belasten</td></tr>
+<tr><td>Handy-Mainboard <b>mit Underfill</b></td><td><b>150–170 °C</b></td><td>170–190 °C</td><td>3–4 min</td><td>Underfill wird erst hier weich genug. Deutlich über 200 °C verändert er sich und wird zum Kampf</td></tr>
+<tr><td>Laptop-Mainboard</td><td><b>130–150 °C</b></td><td>150–170 °C</td><td>3–5 min</td><td>Große Kupferlagen brauchen Zeit, bis die Wärme wirklich durch ist</td></tr>
+<tr><td>Konsolen-Mainboard (PS4/Xbox)</td><td><b>140–160 °C</b></td><td>170–200 °C</td><td>4–6 min</td><td>Sehr hohe Wärmemasse, riesige Chips. Ohne das wird die Chipmitte nie flüssig</td></tr>
+<tr><td>Einzelner Chip im Reball-Jig</td><td><b>80–100 °C</b> oder ohne</td><td>90–120 °C</td><td>unter 1 min</td><td>Der Chip allein hat kaum Masse. Etwas Vorwärmung stabilisiert nur das Ergebnis</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Grenzen der Vorwärmung:</b> Unter dem Schmelzpunkt bleiben — sonst löten sich Nachbarbauteile mit ab. Nicht endlos halten: Boards vertragen Hitze, aber die Gesamtzeit über 150 °C sollte im Minutenbereich bleiben, nicht in der Viertelstunde. Und: <b>Akku immer raus</b>, bevor irgendetwas warm wird.</div>
-<div class="tip"><b>Luftstrom:</b> Temperatur = wie heiß · Luftstrom = wie viel Wärme pro Sekunde. <b>20–30 %</b> bei losen Kugeln/Paste · <b>40–60 %</b> bei verlöteten Feldern und großen Massen · hoch bringt nichts, bläst nur weg.</div>
+<div class="warn"><b>Grenzen der Vorwärmung:</b> Unter dem Schmelzpunkt bleiben, sonst löten sich Nachbarbauteile mit ab. Nicht endlos halten: Boards vertragen Hitze, aber die Gesamtzeit über 150 °C sollte im Minutenbereich bleiben, nicht in der Viertelstunde. Und: <b>Akku immer raus</b>, bevor irgendetwas warm wird.</div>
+<div class="tip"><b>Luftstrom:</b> Temperatur = wie heiß · Luftstrom = wie viel Wärme pro Sekunde. <b>15–20 %</b> bei losen Kugeln und Paste, BGA einlöten ohne Düse · <b>25–35 %</b> beim Ausbau und bei verlöteten Feldern · <b>40–60 %</b> nur bei großen Masseflächen ohne Kleinteile drumherum. Mehr bringt nichts, es bläst nur weg. Was die Prozente bei deiner Station bedeuten: <a class="goto" href="#heissluftstation">Heißluftstation → Luftstrom-Stufen</a>.</div>
 
 <h2>Workflows nach Chip-Typ</h2>
 <div class="tbl-wrap"><table style="min-width:860px">
-<thead><tr><th>Chip-Typ</th><th>Pitch / Kugel</th><th>Vorwärmen</th><th>Heißluft (bleihaltig)</th><th>Besonderheiten im Ablauf</th></tr></thead>
+<thead><tr><th>Chip-Typ</th><th>Pitch / Kugel</th><th>Board-Ziel</th><th>Heißluft Ausbau (bleihaltig · bleifrei · Luft)</th><th>Besonderheiten im Ablauf</th></tr></thead>
 <tbody>
-<tr><td><b>eMMC / NAND</b> (BGA153/169)</td><td>0,5 mm / 0,30 mm</td><td>100–130 °C</td><td>290–320 °C, Luft 20–30 %</td><td>Der beste Einstieg. Kleiner Chip, kein Underfill, chipspezifische Stencils überall erhältlich. Vorher <b>Datenerhalt klären</b> — beim Reballing kann der Inhalt verloren gehen</td></tr>
-<tr><td><b>Handy-SoC</b> (PoP, Apple A-Serie &amp; Co.)</td><td>0,35–0,4 mm / 0,20–0,25 mm</td><td>150–180 °C</td><td>300–330 °C, Luft 20–30 %</td><td>Underfill entfernen, RAM-Lage nicht ablösen, chipspezifischer Stencil zwingend. Königsklasse</td></tr>
-<tr><td><b>Konsolen-APU</b> (PS4, Xbox, Switch)</td><td>0,65–0,8 mm / 0,35–0,5 mm</td><td>150–180 °C</td><td>320–350 °C, Luft 25–35 %</td><td>Riesige Wärmemasse, langer Anlauf. Vorwärmung ist hier <b>nicht optional</b>. Original bleifrei → bleihaltig reballen erhöht die Lebensdauer deutlich</td></tr>
-<tr><td><b>Laptop-GPU / Chipsatz</b></td><td>0,8 mm / 0,45–0,5 mm</td><td>130–160 °C</td><td>320–350 °C, Luft 25–35 %</td><td>Vorsicht mit den umliegenden SMD-Kondensatoren — die fliegen bei zu viel Luft als erstes weg. Kapton drumherum</td></tr>
-<tr><td><b>RAM / LPDDR</b></td><td>0,5–0,65 mm / 0,30–0,40 mm</td><td>120–150 °C</td><td>300–330 °C, Luft 20–30 %</td><td>Dünnes Gehäuse, verzieht sich leicht. Kurz und mit Vorwärmung arbeiten</td></tr>
-<tr><td><b>Kleine CSP / WLCSP</b> (PMIC, WiFi, Audio)</td><td>0,3–0,4 mm / 0,15–0,25 mm</td><td>100–130 °C</td><td>280–310 °C, Luft <b>15–25 %</b></td><td>Fliegt bei jedem Lufthauch weg. Meist ist es günstiger, das Teil zu ersetzen als zu reballen</td></tr>
+<tr><td><b>eMMC / NAND</b> (BGA153/169)</td><td>0,5 mm / 0,30 mm</td><td>100–130 °C</td><td>310–330 · 340–360 °C · 25 %</td><td>Der beste Einstieg. Kleiner Chip, kein Underfill, chipspezifische Stencils überall erhältlich. Vorher <b>Datenerhalt klären</b>: beim Reballing kann der Inhalt verloren gehen</td></tr>
+<tr><td><b>Handy-SoC</b> (PoP, Apple A-Serie &amp; Co.)</td><td>0,35–0,4 mm / 0,20–0,25 mm</td><td>150–170 °C</td><td>320–340 · 350–370 °C · 25–30 %</td><td>Underfill entfernen, RAM-Lage nicht ablösen, chipspezifischer Stencil zwingend. Königsklasse</td></tr>
+<tr><td><b>Konsolen-APU</b> (PS4, Xbox, Switch)</td><td>0,65–0,8 mm / 0,35–0,5 mm</td><td>140–160 °C</td><td>330–350 · 360–380 °C · 30 %</td><td>Riesige Wärmemasse, langer Anlauf. Vorwärmung ist hier <b>nicht optional</b>. Original bleifrei → bleihaltig reballen erhöht die Lebensdauer deutlich</td></tr>
+<tr><td><b>Laptop-GPU / Chipsatz</b></td><td>0,8 mm / 0,45–0,5 mm</td><td>130–150 °C</td><td>330–350 · 360–380 °C · 30 %</td><td>Vorsicht mit den umliegenden SMD-Kondensatoren: die fliegen bei zu viel Luft als erstes weg. Kapton drumherum</td></tr>
+<tr><td><b>RAM / LPDDR</b></td><td>0,5–0,65 mm / 0,30–0,40 mm</td><td>120–150 °C</td><td>310–330 · 340–360 °C · 25 %</td><td>Dünnes Gehäuse, verzieht sich leicht. Kurz und mit Vorwärmung arbeiten</td></tr>
+<tr><td><b>Kleine CSP / WLCSP</b> (PMIC, WiFi, Audio)</td><td>0,3–0,4 mm / 0,15–0,25 mm</td><td>100–130 °C</td><td>290–310 · 320–340 °C · <b>15–20 %</b></td><td>Fliegt bei jedem Lufthauch weg. Meist ist es günstiger, das Teil zu ersetzen als zu reballen</td></tr>
 </tbody>
 </table></div>
 <div class="note">Die Werte sind Startpunkte, keine Rezepte. Jede Station misst anders, jede Düse liefert anders und jedes Board ist anders. Fang <b>niedrig</b> an, gib in 10-°C-Schritten dazu und merke dir, was bei deinem Setup funktioniert hat.</div>
@@ -278,11 +278,11 @@
 <tr><td><b>Ungleiche Kugelhöhe</b></td><td>Von der Seite betrachtet keine gerade Linie; nach dem Einbau einzelne Signale tot</td><td>Alte Lotreste nicht restlos entfernt oder Pads unterschiedlich verzinnt. Chip nochmal komplett abziehen und neu aufbauen</td></tr>
 <tr><td><b>Leere Löcher im Feld</b></td><td>Nach dem Reballing fehlen einzelne Kugeln</td><td>Spachtel zu steil gehalten oder zu wenig Kugeln nachgeschoben. Vor dem Aufschmelzen <b>immer</b> das ganze Feld unter dem Mikroskop absuchen</td></tr>
 <tr><td><b>Kugeln zusammengelaufen</b></td><td>Zwei oder mehr Kugeln bilden eine Wurst</td><td>Zu viel Flux (kocht und zieht Kugeln zusammen) oder Kugeln zu groß für den Pitch. Weniger Flux, Größe prüfen</td></tr>
-<tr><td><b>Chip verrutscht beim Einlöten</b></td><td>Kanten sitzen sichtbar schief, Kurzschlüsse</td><td>Beim Aufsetzen gedrückt oder nachgeschoben, während das Lot flüssig war. Nach dem Auflegen nicht mehr anfassen — das Self-Alignment macht den Rest</td></tr>
+<tr><td><b>Chip verrutscht beim Einlöten</b></td><td>Kanten sitzen sichtbar schief, Kurzschlüsse</td><td>Beim Aufsetzen gedrückt oder nachgeschoben, während das Lot flüssig war. Nach dem Auflegen nicht mehr anfassen: das Self-Alignment macht den Rest</td></tr>
 <tr><td><b>Board verzogen</b></td><td>Nach dem Einbau nur Randkugeln kontaktieren, Mitte offen</td><td>Zu wenig Vorwärmung, zu viel Hitze von oben. Vorwärmung erhöhen, oben zurücknehmen</td></tr>
 <tr><td><b>Pads am Chip abgerissen</b></td><td>Beim Kontrollblick fehlen Pads / hängen an der Litze</td><td>Litze kalt abgerissen, geschabt oder zu lange heiß geblieben. Litze immer <b>mit</b> der Spitze abheben</td></tr>
 <tr><td><b>Chip funktioniert, fällt nach Tagen aus</b></td><td>Zuerst alles gut, dann wieder derselbe Fehler</td><td>Mischlegierung durch Reste, kalte Kugeln in der Mitte oder Underfill fehlt bei mechanisch belasteten Geräten. Sauberer neu aufbauen</td></tr>
-<tr><td><b>Nachbarbauteile weggeflogen</b></td><td>Nach dem Job fehlt ein 0201-Kondensator</td><td>Luftstrom zu hoch. Kapton drumherum und Luft runter — und vorher ein Foto machen, damit du weißt, was wohin gehört</td></tr>
+<tr><td><b>Nachbarbauteile weggeflogen</b></td><td>Nach dem Job fehlt ein 0201-Kondensator</td><td>Luftstrom zu hoch. Kapton drumherum und Luft runter. Und vorher ein Foto machen, damit du weißt, was wohin gehört</td></tr>
 </tbody>
 </table></div>
 <div class="tip"><b>Vor jedem BGA-Job:</b> Fotos machen. Vom Chip mit Beschriftung, von der Orientierung (Pin 1), von den Nachbarbauteilen. Nach zwei Stunden Arbeit weiß niemand mehr, wie herum der Chip lag.</div>

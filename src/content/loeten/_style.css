@@ -32,16 +32,6 @@
     --shadow-sm:0 1px 2px rgba(0,0,0,.3);
     --shadow-tabs:0 8px 16px -8px rgba(0,0,0,.5);
   }
-  .mx-loeten .b-kolben{background:#1e2e42;color:#b3cbe6}
-  .mx-loeten .b-luft{background:#37251f;color:#e8bfb1}
-  .mx-loeten .b-platte{background:#33291a;color:#e8c58c}
-  .mx-loeten .b-mat{background:#1c3029;color:#a3d6bc}
-  .mx-loeten .b-all{background:#282744;color:#c9c6e8}
-  .mx-loeten .b-warn{background:#38221f;color:#e8b4b0}
-  .mx-loeten .b-ok{background:#1c3029;color:#a3d6bc}
-  .mx-loeten .d1{background:#1c3029;color:#a3d6bc}
-  .mx-loeten .d2{background:#33291a;color:#e8c58c}
-  .mx-loeten .d3{background:#38221f;color:#e8b4b0}
 }
 
 /* ============================================================
@@ -103,6 +93,19 @@
 .mx-loeten .d1{background:#E1F5EE;color:#085041}
 .mx-loeten .d2{background:#FAEEDA;color:#633806}
 .mx-loeten .d3{background:#FCEBEB;color:#791F1F}
+/* Dunkel erst nach den hellen Werten, sonst gewinnen die hellen. */
+@media screen and (prefers-color-scheme:dark){
+  .mx-loeten .b-kolben{background:#1e2e42;color:#b3cbe6}
+  .mx-loeten .b-luft{background:#37251f;color:#e8bfb1}
+  .mx-loeten .b-platte{background:#33291a;color:#e8c58c}
+  .mx-loeten .b-mat{background:#1c3029;color:#a3d6bc}
+  .mx-loeten .b-all{background:#282744;color:#c9c6e8}
+  .mx-loeten .b-warn{background:#38221f;color:#e8b4b0}
+  .mx-loeten .b-ok{background:#1c3029;color:#a3d6bc}
+  .mx-loeten .d1{background:#1c3029;color:#a3d6bc}
+  .mx-loeten .d2{background:#33291a;color:#e8c58c}
+  .mx-loeten .d3{background:#38221f;color:#e8b4b0}
+}
 
 /* ============================================================
    TABELLEN, SUCHE, FILTER
@@ -112,8 +115,9 @@
 .mx-loeten table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
 .mx-loeten th{text-align:left;padding:10px 12px;font-family:var(--mono);font-weight:500;font-size:10.5px;text-transform:uppercase;
   letter-spacing:.05em;color:var(--faint);background:var(--surface-2);
-  border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap}
-.mx-loeten th:hover{color:var(--text)}
+  border-bottom:1px solid var(--border);white-space:nowrap}
+.mx-loeten table[data-sort] th{cursor:pointer;user-select:none}
+.mx-loeten table[data-sort] th:hover{color:var(--text)}
 .mx-loeten th .ar{font-size:9px;margin-left:3px;color:var(--accent)}
 .mx-loeten td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
 .mx-loeten tbody tr:last-child td{border-bottom:none}
@@ -126,6 +130,9 @@
   background:transparent;border:1px solid var(--border-strong);border-radius:999px;color:var(--muted);transition:all .15s}
 .mx-loeten .filt button:hover{background:var(--surface-2);color:var(--text)}
 .mx-loeten .filt button.active{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-border);font-weight:600}
+.mx-loeten .cfbar[hidden], .mx-loeten .cq-empty[hidden]{display:none}
+.mx-loeten .cq-empty{font-size:13px;color:var(--muted);margin:.4rem 0}
+.mx-loeten tr[hidden]{display:none!important}
 
 /* ============================================================
    SCHRITT-LISTEN
@@ -175,6 +182,60 @@
 .mx-loeten .sk .dash{stroke:var(--border-strong);stroke-dasharray:4 4;stroke-width:1;fill:none}
 .mx-loeten .sk .melt{stroke:#e24b4a;stroke-dasharray:5 4;stroke-width:1.2;fill:none}
 .mx-loeten .sk .zone{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+
+.mx-loeten .sk .lbl-warn{fill:var(--danger-border)}
+
+/* Diagramme mit Werkzeugfarben (Temperaturleiter, Setups, Profile).
+   Farben als Tokens, damit hell und dunkel aus einer Quelle kommen. */
+.mx-loeten{
+  --k-bg:#E6F1FB; --k-ink:#0C447C;   /* Kolben */
+  --l-bg:#FAECE7; --l-ink:#712B13;   /* Heißluft */
+  --p-bg:#FAEEDA; --p-ink:#633806;   /* Platte */
+  --w-bg:#FCEBEB; --w-ink:#791F1F;   /* Grenze */
+  --o-bg:#E1F5EE; --o-ink:#085041;   /* Lot */
+  --kapton:#d99a2b;
+}
+@media screen and (prefers-color-scheme:dark){
+  .mx-loeten{
+    --k-bg:#1e2e42; --k-ink:#b3cbe6;
+    --l-bg:#37251f; --l-ink:#e8bfb1;
+    --p-bg:#33291a; --p-ink:#e8c58c;
+    --w-bg:#38221f; --w-ink:#e8b4b0;
+    --o-bg:#1c3029; --o-ink:#a3d6bc;
+    --kapton:#b98523;
+  }
+}
+.mx-loeten .sk-hint{display:none;font-size:12px;color:var(--muted);margin:.4rem 0 -.2rem}
+@media(max-width:620px){.mx-loeten .sk-hint{display:block}}
+.mx-loeten .sk-scroll{overflow-x:auto;margin:.6rem 0;-webkit-overflow-scrolling:touch}
+.mx-loeten .sk-scroll .sk-wide{min-width:600px;max-width:720px;margin:0}
+.mx-loeten .sk .sep{stroke:var(--border);stroke-width:1}
+.mx-loeten .sk .grid{stroke:var(--border);stroke-width:1;stroke-dasharray:3 4;fill:none}
+.mx-loeten .sk .tick{font-family:var(--mono);font-size:10px;fill:var(--faint)}
+.mx-loeten .sk .lane{font-family:var(--sans);font-size:11.5px;font-weight:600;fill:var(--text)}
+.mx-loeten .sk .lane-s{font-family:var(--sans);font-size:10px;fill:var(--muted)}
+.mx-loeten .sk .bk{fill:var(--k-bg);stroke:var(--k-ink);stroke-width:1}
+.mx-loeten .sk .bl{fill:var(--l-bg);stroke:var(--l-ink);stroke-width:1}
+.mx-loeten .sk .bp{fill:var(--p-bg);stroke:var(--p-ink);stroke-width:1}
+.mx-loeten .sk .bw{fill:var(--w-bg);stroke:var(--w-ink);stroke-width:1}
+.mx-loeten .sk .bo{fill:var(--o-bg);stroke:var(--o-ink);stroke-width:1}
+.mx-loeten .sk .tk{font-family:var(--mono);font-size:10px;fill:var(--k-ink)}
+.mx-loeten .sk .tl{font-family:var(--mono);font-size:10px;fill:var(--l-ink)}
+.mx-loeten .sk .tp{font-family:var(--mono);font-size:10px;fill:var(--p-ink)}
+.mx-loeten .sk .tw{font-family:var(--mono);font-size:10px;fill:var(--w-ink)}
+.mx-loeten .sk .to{font-family:var(--mono);font-size:10px;fill:var(--o-ink)}
+.mx-loeten .sk .mk-o{stroke:var(--o-ink);stroke-width:2;fill:none}
+.mx-loeten .sk .mk-w{stroke:var(--w-ink);stroke-width:2;fill:none}
+.mx-loeten .sk .air{stroke:var(--l-ink);stroke-width:1.4;fill:none;stroke-dasharray:5 4;stroke-linecap:round}
+.mx-loeten .sk .heat{stroke:var(--danger-border);stroke-width:1.6;fill:none;stroke-linecap:round}
+.mx-loeten .sk .dim{stroke:var(--muted);stroke-width:1;fill:none}
+.mx-loeten .sk .kapton{fill:var(--kapton);opacity:.75}
+.mx-loeten .sk .wire{stroke:var(--k-ink);stroke-width:1.6;fill:none;stroke-linecap:round}
+.mx-loeten .sk .tool{fill:var(--surface);stroke:var(--text);stroke-width:1.5;stroke-linejoin:round}
+.mx-loeten .sk .curve2{stroke:var(--k-ink);stroke-width:2.2;fill:none;stroke-dasharray:6 4;stroke-linejoin:round}
+.mx-loeten .sk .ins{fill:#3d6fb3;stroke:#2a4f82;stroke-width:1}
+.mx-loeten .sk .cu{fill:#d1913f;stroke:#a86e2b;stroke-width:1}
+.mx-loeten .sk-cap{font-size:12.5px;color:var(--muted);margin:-.2rem 0 .8rem;line-height:1.5}
 
 .mx-loeten .legend{font-size:12px;color:var(--faint);margin-top:1.6rem;padding-top:.9rem;border-top:1px solid var(--border)}
 
@@ -261,7 +322,5 @@
   .mx-loeten .tbl-wrap tbody td:first-child{font-weight:600;font-size:14px;padding-top:9px;padding-bottom:8px;
     border-bottom:1px solid var(--border)!important;margin-bottom:3px}
   .mx-loeten .tbl-wrap tbody td:first-child::before{display:none}
-  .mx-loeten .tbl-wrap tbody td[colspan]{background:var(--surface-2);font-weight:600;border-bottom:none!important;
-    margin:0;border-radius:var(--radius) var(--radius) 0 0}
   .mx-loeten .tbl-wrap tbody td.numcell{white-space:normal}
 }

@@ -172,8 +172,8 @@
        "name": "Löten",
        "icon": "🔥",
        "kind": "Referenz",
-       "updated": "2026-08-18",
-       "desc": "Werkzeug, Material und Technik: THT, SMD, Heißluft, Reflow und BGA-Reballing — plus eigene Tabs für Lötstation, Heißluft, Heizplatte und Mikroskop.",
+       "updated": "2026-10-13",
+       "desc": "Werkzeug, Material und Technik: THT, Kabel, SMD, Heißluft, Reflow und BGA-Reballing, mit einheitlichen Temperatur- und Luftstromwerten. Dazu eigene Tabs für Lötstation, Heißluft, Heizplatte und Mikroskop.",
        "tags": [
         "flux",
         "smd",
@@ -184,7 +184,11 @@
         "mikroskop",
         "c245",
         "c210",
-        "heissluft"
+        "heissluft",
+        "luftstrom",
+        "temperatur",
+        "kabel",
+        "schrumpfschlauch"
        ],
        "sections": [
         {
@@ -210,6 +214,10 @@
         {
          "h": "tht",
          "t": "THT löten"
+        },
+        {
+         "h": "kabel",
+         "t": "Kabel & Stecker"
         },
         {
          "h": "smd",
@@ -283,6 +291,7 @@
          "l": "Techniken",
          "sections": [
           "tht",
+          "kabel",
           "smd",
           "heissluft",
           "reballing",

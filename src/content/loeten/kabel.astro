@@ -1,0 +1,113 @@
+<div class="kurz"><b>Kabel löten in vier Regeln:</b> Schrumpfschlauch <b>zuerst</b> aufschieben · Spitze nach Querschnitt wählen, nicht die Temperatur hochdrehen · Litze verzinnen, aber <b>1 mm vor der Isolierung</b> aufhören · verzinnte Litze <b>nie</b> in eine Schraubklemme, dafür gibt es Aderendhülsen.</div>
+<h2>Kabel &amp; Stecker löten</h2>
+<p>Kabel sind der häufigste Lötjob überhaupt: Akku an Regler, Lautsprecher an Verstärker, LED-Streifen an Netzteil, XT60 an den Drohnen-Akku. Die Technik unterscheidet sich vom Platinenlöten in einem Punkt: Litze ist ein Bündel aus vielen dünnen Adern, das Wärme schlecht verteilt und Lot wie ein Docht aufsaugt.</p>
+
+<h3>Spitze und Temperatur nach Querschnitt</h3>
+<p>Werte für Kartuschen-Stationen (C245). An einer klassischen Station rund 20 °C mehr. Je dicker das Kabel, desto wichtiger die <b>breite</b> Spitze: Sie bringt die Wärme, nicht die Gradzahl.</p>
+<div class="tbl-wrap"><table style="min-width:800px">
+<thead><tr><th>Querschnitt</th><th>≈ AWG</th><th>Typisch für</th><th>Spitze</th><th>bleihaltig</th><th>bleifrei</th></tr></thead>
+<tbody>
+<tr><td><b>0,05–0,14 mm²</b></td><td>30–26</td><td>Signal-, Servo-, Sensorkabel</td><td>Meißel 1,6–2,2 mm</td><td>300–320 °C</td><td>330–350 °C</td></tr>
+<tr><td><b>0,25–0,5 mm²</b></td><td>24–20</td><td>LED-Streifen, Lautsprecher, kleine Motoren</td><td>Meißel 2,2–3 mm</td><td>310–330 °C</td><td>340–360 °C</td></tr>
+<tr><td><b>0,75–1,5 mm²</b></td><td>18–16</td><td>Akku-Leitungen, 12-V-Verbraucher</td><td>Meißel 3–4 mm</td><td>330–350 °C</td><td>350–370 °C</td></tr>
+<tr><td><b>2,5–4 mm²</b></td><td>14–12</td><td>XT60/XT90, Motorregler, Ladekabel</td><td>Meißel 4–5 mm</td><td>350–370 °C <span class="b b-warn">kurz</span></td><td>360–380 °C <span class="b b-warn">kurz</span></td></tr>
+<tr><td><b>ab 6 mm²</b></td><td>10 und dicker</td><td>Batterie- und Starterkabel</td><td>Kolben ab ~150 W, Kabelschuh vorwärmen</td><td colspan="2">Besser crimpen</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Isolierung beachten:</b> PVC-Litze verträgt nur 80–105 °C und schmilzt bei langem Kontakt zurück. Silikon-Litze (bis ~200 °C, sehr flexibel, typisch bei Akkukabeln) und PTFE-Litze (bis 200 °C) halten die Lötwärme aus. Welche Litze wofür: Tab <a class="goto" href="#draht">Draht &amp; Litze</a>.</div>
+
+<h3>Litze verzinnen</h3>
+<div class="steps">
+<div class="step"><b>Abisolieren.</b> So lang, wie die Lötstelle braucht, meist 4–8 mm. Abisolierzange statt Messer: Eingeschnittene Adern brechen später genau dort.</div>
+<div class="step"><b>Verdrillen.</b> Die Adern leicht in ihrer Schlagrichtung eindrehen. Abstehende Einzeldrähte nicht abschneiden, sondern mit eindrehen, sonst fehlt Querschnitt.</div>
+<div class="step"><b>Erwärmen und Lot zugeben.</b> Spitze von unten an die Litze, Lot von oben an die Litze, nicht an die Spitze. Das Lot zieht durch das ganze Bündel.</div>
+<div class="step"><b>Sparsam bleiben.</b> Nur so viel Lot, dass alle Adern benetzt sind. Die Struktur der Litze soll noch sichtbar sein. Ein dicker Lotklumpen passt in keinen Kelch und keine Hülse mehr.</div>
+<div class="step"><b>1 mm vor der Isolierung aufhören.</b> Sonst saugt die Litze Lot unter die Isolierung (Dochtwirkung). Die Stelle wird steif und bricht genau am Übergang.</div>
+</div>
+<div class="gb">
+<div class="gb-col good"><h4>✓ Verzinnt mit Abstand</h4>
+<svg class="sk" viewBox="0 0 230 86" role="img" aria-label="Verzinnte Litze, das Lot endet einen Millimeter vor der Isolierung">
+  <rect class="ins" x="10" y="34" width="110" height="20" rx="4"/>
+  <rect class="cu" x="120" y="38" width="96" height="12" rx="2"/>
+  <rect class="sold" x="131" y="37" width="86" height="14" rx="4"/>
+  <path class="dim" d="M120,28 V34 M131,28 V34 M120,30 H131"/>
+  <text class="lbl" x="125" y="22" text-anchor="middle">1 mm frei</text>
+  <text class="lbl" x="174" y="72" text-anchor="middle">Struktur sichtbar</text>
+  <text class="lbl" x="65" y="72" text-anchor="middle">Isolierung</text>
+  <text class="mark-ok" x="12" y="22">✓</text>
+</svg>
+</div>
+<div class="gb-col bad"><h4>✗ Lot unter der Isolierung</h4>
+<svg class="sk" viewBox="0 0 230 86" role="img" aria-label="Lot ist unter die Isolierung gekrochen, die Litze wird steif und bricht am Übergang">
+  <rect class="ins" x="10" y="34" width="110" height="20" rx="4"/>
+  <rect class="cu" x="120" y="38" width="96" height="12" rx="2"/>
+  <rect class="sold" x="120" y="36" width="98" height="16" rx="6"/>
+  <rect x="84" y="38" width="36" height="12" rx="2" style="fill:none;stroke:var(--danger-border);stroke-dasharray:3 2"/>
+  <path class="crack" d="M120,30 L116,36 L123,42 L117,48 L121,56"/>
+  <text class="lbl" x="102" y="22" text-anchor="middle">Lot darunter</text>
+  <text class="lbl lbl-warn" x="140" y="72" text-anchor="middle">bricht am Übergang</text>
+  <text class="mark-bad" x="210" y="22">✗</text>
+</svg>
+</div>
+</div>
+
+<h3>Kabel an Kabel</h3>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Verbindung</th><th>Wie</th><th>Stark</th><th>Nimm es für</th></tr></thead>
+<tbody>
+<tr><td><b>Parallel-Spleiß</b></td><td>Beide verzinnten Enden nebeneinanderlegen, verlöten</td><td>Schnell, schmal, wenig Lot</td><td>Signal- und Kleinspannungsleitungen ohne Zug</td></tr>
+<tr><td><b>Durchsteck-Spleiß</b></td><td>Adern beider Enden aufgefächert ineinanderschieben, glattstreichen, dann löten</td><td>Mechanisch fest schon vor dem Löten, kaum dicker als das Kabel</td><td>Litzen unter Zug oder Vibration, Akku- und Motorleitungen</td></tr>
+<tr><td><b>Western-Union-Spleiß</b></td><td>Massive Drähte kreuzen, je Ende um den anderen wickeln, dann löten</td><td>Hält auch ohne Lot</td><td>Massivdraht, Antennen, Freiluft-Aufbauten</td></tr>
+<tr><td><b>Lötverbinder mit Schrumpfschlauch</b></td><td>Schlauch mit Lotring und Kleberingen, nur mit Heißluft</td><td>Isoliert, abgedichtet, Zugentlastung in einem Schritt</td><td>Außen, Auto, Fahrrad, schnelle Reparaturen</td></tr>
+</tbody>
+</table></div>
+<div class="steps">
+<div class="step"><b>Schrumpfschlauch aufschieben,</b> auf ein Kabel und weit weg von der Lötstelle, damit er nicht vorzeitig schrumpft. Der Klassiker unter den vergessenen Schritten.</div>
+<div class="step"><b>Abisolieren und verzinnen.</b> 6–10 mm, beide Enden wie oben.</div>
+<div class="step"><b>Fixieren.</b> Dritte Hand oder Krokodilklemmen, Enden überlappen lassen. Beide Hände müssen frei sein.</div>
+<div class="step"><b>Löten.</b> Breite Spitze unter die Stelle, Lot von oben zugeben, bis beide Enden zu einem Stück verlaufen. Bei 0,5 mm² rund 2–4 s.</div>
+<div class="step"><b>Abkühlen lassen</b>, nicht bewegen. Dann Sichtprüfung (glatt, glänzend bis satiniert, keine abstehenden Adern) und mit Gefühl am Kabel ziehen.</div>
+<div class="step"><b>Schrumpfen.</b> Schlauch mittig über die Stelle, auf jeder Seite mindestens 5–10 mm Überstand auf der Isolierung. Heißluft <b>200 °C, 40 %</b>, Kleberschlauch <b>240 °C, 45 %</b>, 3–5 cm Abstand, von der Mitte nach außen.</div>
+</div>
+
+<h3>Kabel an Lötkelch und Lötöse</h3>
+<p>XT60, XT90, Klinkenstecker, Sub-D, DC-Hohlstecker: Die Kontakte haben einen Kelch oder eine Lötfahne und sitzen in Kunststoff. Der Kunststoff ist das Problem, nicht das Lot.</p>
+<div class="steps">
+<div class="step"><b>Gegenstecker einstecken.</b> Hält die Kontakte ausgerichtet und nimmt Wärme auf. Ohne ihn wandern die Pins im weich gewordenen Kunststoff.</div>
+<div class="step"><b>Stecker fest einspannen</b>, Kelch nach oben. Schrumpfschlauch schon auf dem Kabel.</div>
+<div class="step"><b>Kelch füllen.</b> Spitze außen an den Kelch, etwas Flux hinein, Lot zugeben, bis er etwa halb voll ist.</div>
+<div class="step"><b>Litze einführen.</b> Verzinnte Litze ins flüssige Lot schieben, kurz halten, bis alles verläuft, Spitze weg, nichts bewegen. Ein XT60 mit 4-mm-Meißel bei 360–380 °C braucht 4–8 s pro Kontakt.</div>
+<div class="step"><b>Schrumpfschlauch</b> über den Kelch bis an den Steckerkörper. Gegenstecker erst abziehen, wenn alles handwarm ist.</div>
+</div>
+<div class="tip"><b>Polung vor dem Löten prüfen.</b> Bei Akku-Steckern ist eine verpolte Lötung teuer. Plus- und Minus-Kontakt am Stecker markieren und jedes Kabel einzeln löten, damit sich die blanken Enden nie berühren können. Bei einem angeschlossenen Akku immer nur ein Kabel gleichzeitig abisolieren.</div>
+
+<h3>Schrumpfschlauch wählen</h3>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Typ</th><th>Schrumpfrate</th><th>Wann</th></tr></thead>
+<tbody>
+<tr><td><b>Polyolefin dünnwandig</b></td><td>2:1</td><td>Standard-Isolierung über Spleiß und Kelch</td></tr>
+<tr><td><b>Polyolefin mit Kleber</b></td><td>3:1</td><td>Wasserdicht und als Zugentlastung, gleicht Durchmessersprünge aus (Kabel auf Stecker)</td></tr>
+<tr><td><b>Polyolefin mit Kleber</b></td><td>4:1</td><td>Große Sprünge, z. B. dünnes Kabel auf dicken Stecker</td></tr>
+<tr><td><b>PTFE / Viton</b></td><td>meist 2:1</td><td>Hitze, Öl, Chemikalien. Spezialfall, braucht deutlich mehr Temperatur</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Größe:</b> Vor dem Schrumpfen mindestens 1,2-mal so weit wie das dickste Teil, nach dem Schrumpfen enger als das dünnste. Beispiel 2:1 mit 6,4 mm schrumpft auf 3,2 mm, passt also über einen Spleiß von 5 mm auf ein Kabel von 3,5 mm.</div>
+
+<h3>Was man nicht löten sollte</h3>
+<div class="warn"><ul>
+<li><b>Verzinnte Litze in Schraubklemmen:</b> Lot fließt unter dem Klemmdruck langsam weg, die Klemme lockert sich, der Übergangswiderstand steigt und die Stelle wird heiß. Dafür gibt es Aderendhülsen.</li>
+<li><b>Lot in Crimpkontakten:</b> macht das Kabel hinter dem Crimp steif, dort bricht es bei Vibration. Entweder crimpen oder löten, nicht beides.</li>
+<li><b>Netzspannung:</b> Eine reine Lötverbindung ohne mechanische Sicherung gehört nicht an 230 V. Arbeiten an der Hausinstallation sind Sache einer Elektrofachkraft, siehe <a href="elektronik-grundlagen.html#sicherheit">Elektronik 101 → Sicherheit</a>.</li>
+</ul></div>
+
+<h3>Fehlerbilder</h3>
+<div class="tbl-wrap"><table style="min-width:720px">
+<thead><tr><th>Symptom</th><th>Ursache</th><th>Abhilfe</th></tr></thead>
+<tbody>
+<tr><td>Grau, körnig, einzelne Adern sichtbar</td><td>Zu wenig Wärme, Spitze zu klein</td><td>Größere Spitze, Litze vorher verzinnen, Flux dazu</td></tr>
+<tr><td>Isolierung zurückgeschmolzen</td><td>Zu lange heiß, PVC verträgt nur 80–105 °C</td><td>Größere Spitze, kürzer arbeiten, Silikon- oder PTFE-Litze</td></tr>
+<tr><td>Bruch direkt hinter der Lötstelle</td><td>Lot unter der Isolierung, keine Zugentlastung</td><td>1 mm frei lassen, Kleberschlauch als Zugentlastung</td></tr>
+<tr><td>Stecker-Pins sitzen schief</td><td>Kunststoff weich geworden</td><td>Gegenstecker stecken, breitere Spitze, kürzer</td></tr>
+<tr><td>Schrumpfschlauch liegt nicht an</td><td>Zu kalt oder zu groß gewählt</td><td>200 °C / 40 % Luft, Kleberschlauch 240 °C / 45 %, kleinere Größe</td></tr>
+</tbody>
+</table></div>

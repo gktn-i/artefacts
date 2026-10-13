@@ -1,86 +1,177 @@
-<div class="kurz"><b>Kolben-Startwerte:</b> bleihaltig 300–330 °C · bleifrei 330–370 °C · Schrumpfschlauch 100–150 °C Luft. Erst größere Spitze, dann mehr Hitze.</div>
-<h2>Temperaturen</h2>
-<div class="tip"><b>Bei Kartuschen-Systemen rund 20–30 °C niedriger einstellen</b> als hier angegeben — Sensor sitzt in der Spitze und regelt sofort nach. Deine konkreten Presets: Tab <a class="goto" href="#station">Lötstation C245/C210</a>.</div>
-<p>Richtwerte für klassische Kolben. Höher heißt nicht besser: Zu viel Hitze beschädigt Pads und Bauteile, zu wenig gibt kalte Stellen. Wenn Spitze und Lot passen, reicht meist die untere Hälfte des Bereichs. Wichtig: Die Werkzeug-Temperatur liegt deutlich <b>über</b> dem Schmelzpunkt des Lots — die Reserve gleicht Wärmeverluste an Pad und Beinchen aus.</p>
-<div class="tbl-wrap">
-<table id="tempTbl"><thead></thead><tbody></tbody></table>
+<div class="kurz"><b>Startwerte:</b> Kolben mit Kartusche (C245/C210, T12) bleihaltig <b>310 °C</b> · bleifrei <b>340 °C</b>, klassische Station rund 20 °C mehr · Heißluft für SMD bleihaltig <b>320–330 °C</b> · bleifrei <b>350–360 °C</b> bei <b>30–35 % Luft</b> · Schrumpfschlauch <b>200 °C, 40 % Luft</b>. Erst größere Spitze, dann mehr Hitze.</div>
+<p>Alle Werte des Moduls an einem Ort. Die Werte in den Geräte-Tabs (<a class="goto" href="#station">Lötstation</a>, <a class="goto" href="#heissluftstation">Heißluftstation</a>, <a class="goto" href="#heizplatte">Heizplatte</a>) sind dieselben, dort nur ausführlicher. Höher heißt nicht besser: Zu viel Hitze beschädigt Pads und Bauteile, zu wenig gibt kalte Stellen. Die Werkzeug-Temperatur liegt immer deutlich <b>über</b> dem Schmelzpunkt, weil Pad, Bein und Board Wärme abziehen.</p>
+
+<h3>Die Temperaturleiter</h3>
+<p>Wo welches Werkzeug arbeitet und wo es kritisch wird. Gleiche Farbe wie die Werkzeug-Badges im ganzen Modul.</p>
+<p class="sk-hint" aria-hidden="true" data-pagefind-ignore>Grafik seitlich wischen →</p>
+<div class="sk-scroll">
+<svg class="sk sk-wide" viewBox="0 0 640 306" role="img" aria-label="Temperaturleiter von 50 bis 400 Grad: Schmelzpunkte der Lote, Bereiche von Heizplatte, Heißluft und Lötkolben sowie Grenzen für Akku, Elko, Kleber, Bauteile und Lötspitze">
+  <g class="tick" text-anchor="middle">
+    <text x="150" y="16">50</text><text x="215" y="16">100</text><text x="280" y="16">150</text><text x="345" y="16">200</text>
+    <text x="410" y="16">250</text><text x="475" y="16">300</text><text x="540" y="16">350</text><text x="605" y="16">400 °C</text>
+  </g>
+  <path class="grid" d="M150,24V304M215,24V304M280,24V304M345,24V304M410,24V304M475,24V304M540,24V304M605,24V304"/>
+  <path class="sep" d="M8,76H632M8,124H632M8,190H632M8,242H632"/>
+
+  <text class="lane" x="10" y="48">Lot schmilzt</text><text class="lane-s" x="10" y="61">Schmelzpunkt</text>
+  <path class="mk-o" d="M264.4,44V58M322.9,44V58M367.1,44V58M380.1,44V58"/>
+  <g text-anchor="middle">
+  <text class="to" x="264.4" y="39">SnBi 138</text>
+  <text class="to" x="322.9" y="70">Sn63 183</text>
+  <text class="to" x="367.1" y="39">SAC305 217</text>
+  <text class="to" x="384" y="70">SnCu 227</text>
+  </g>
+
+  <text class="lane" x="10" y="98">Heizplatte</text><text class="lane-s" x="10" y="111">Board-Temperatur</text>
+  <rect class="bp" x="215" y="86" width="104" height="16" rx="3"/><text class="tp" x="267" y="98" text-anchor="middle">Vorwärmen</text>
+  <rect class="bp" x="351.5" y="86" width="26" height="16" rx="3"/>
+  <rect class="bp" x="390.5" y="86" width="19.5" height="16" rx="3"/>
+  <text class="tp" x="381" y="117" text-anchor="middle">Reflow-Peak mit Blei · bleifrei</text>
+
+  <text class="lane" x="10" y="148">Heißluft</text><text class="lane-s" x="10" y="161">Düsen-Sollwert</text>
+  <rect class="bl" x="215" y="129" width="39" height="13" rx="3"/><text class="tl" x="234.5" y="139" text-anchor="middle">Test</text>
+  <rect class="bl" x="280" y="129" width="13" height="13" rx="3"/><text class="tl" x="286.5" y="156" text-anchor="middle">Flux</text>
+  <rect class="bl" x="319" y="129" width="91" height="13" rx="3"/><text class="tl" x="364.5" y="139" text-anchor="middle">Schrumpfen</text>
+  <rect class="bl" x="475" y="147" width="52" height="13" rx="3"/><text class="tl" x="471" y="157" text-anchor="end">SMD mit Blei</text>
+  <rect class="bl" x="514" y="165" width="65" height="13" rx="3"/><text class="tl" x="510" y="175" text-anchor="end">SMD bleifrei</text>
+
+  <text class="lane" x="10" y="212">Lötkolben</text><text class="lane-s" x="10" y="225">Kartusche, klassisch +20</text>
+  <rect class="bk" x="462" y="196" width="52" height="12" rx="3"/><text class="tk" x="458" y="206" text-anchor="end">mit Blei 290–330</text>
+  <rect class="bk" x="514" y="211" width="39" height="12" rx="3"/><text class="tk" x="510" y="221" text-anchor="end">bleifrei 330–360</text>
+  <rect class="bw" x="553" y="226" width="26" height="12" rx="3"/><text class="tw" x="549" y="236" text-anchor="end">kurz bei Masse bis 380</text>
+
+  <text class="lane" x="10" y="264">Grenzen</text><text class="lane-s" x="10" y="277">hier wird es kritisch</text>
+  <path class="mk-w" d="M163,248V300M221.5,248V300M280,248V300M423,248V300M579,248V300"/>
+  <text class="tw" x="167" y="262">Akku 60</text>
+  <text class="tw" x="225.5" y="284">Elko 105</text>
+  <text class="tw" x="284" y="262">Kleber 150</text>
+  <text class="tw" x="427" y="284">Bauteile 260 / 10 s</text>
+  <text class="tw" x="575" y="262" text-anchor="end">Spitze max.</text>
+</svg>
 </div>
-<div class="note"><b>BGA hat eigene Heißluft-Werte</b> (aufschmelzen 330–360 · einlöten 340–370 · ausbauen 350–380 °C, immer mit Vorwärmung) — Tab <a class="goto" href="#reballing">Reballing</a>.</div>
+<p class="sk-cap">Heißluft-Werte sind Sollwerte an der Station: Auf 1–2 cm Weg verliert die Luft deutlich an Temperatur, deshalb liegen sie weit über dem Schmelzpunkt. Die Platte zeigt die gemessene Board-Temperatur, die Platte selbst steht 10–40 °C höher.</p>
+
+<h3>Lötkolben: klassisch oder Kartusche</h3>
+<p>Wo Heizer und Sensor sitzen, entscheidet, wie heiß du einstellen musst (Bauarten im Tab <a class="goto" href="#werkzeug">Werkzeug-Typen</a>). Bei der Kartusche sitzt beides in der Spitze, die Wärme kommt nach dem Aufsetzen sofort zurück. Deshalb reichen rund <b>20 °C weniger</b>.</p>
+<div class="tbl-wrap"><table style="min-width:640px">
+<thead><tr><th>Lot</th><th>Kartusche (C245/C210, T12)</th><th>Klassische Station</th><th>Obergrenze</th></tr></thead>
+<tbody>
+<tr><td><b>Sn63Pb37 / Sn60Pb40</b> (bleihaltig)</td><td><b>290–330 °C</b> · Start 310</td><td><b>310–350 °C</b> · Start 330</td><td rowspan="3">Dauerhaft nicht über <b>~370–380 °C</b>. JBC selbst rät, 370 °C nicht zu überschreiten, 90 % der Lötstellen gelingen bei 350 °C oder weniger</td></tr>
+<tr><td><b>SAC305 / SnCu</b> (bleifrei)</td><td><b>330–360 °C</b> · Start 340</td><td><b>350–380 °C</b> · Start 360</td></tr>
+<tr><td><b>Sn42Bi58</b> (Low-Temp)</td><td><b>230–260 °C</b></td><td><b>250–280 °C</b></td></tr>
+</tbody>
+</table></div>
+
+<h3>Kolben: welche Temperatur für welche Aufgabe</h3>
+<p>Werte für <b>Kartuschen-Systeme</b>. An einer klassischen Station jeweils rund 20 °C dazu.</p>
+<div class="tbl-wrap"><table style="min-width:780px">
+<thead><tr><th>Aufgabe</th><th>Spitze</th><th>bleihaltig</th><th>bleifrei</th><th>Hinweis</th></tr></thead>
+<tbody>
+<tr><td>THT, normale Pads, Stiftleisten</td><td>Meißel 2–2,4 mm</td><td>300–320 °C</td><td>330–350 °C</td><td>Fließt es in ~2 s, passt es</td></tr>
+<tr><td>SMD-Chips 0603–1206, SOT, SOD</td><td>Meißel 1–2 mm</td><td>290–320 °C</td><td>320–350 °C</td><td>Ein Pad vorverzinnen, Flux dazu</td></tr>
+<tr><td>Fein: 0402/0201, Fine-Pitch-Pins</td><td>C210 Meißel/konisch</td><td>280–300 °C</td><td>310–330 °C</td><td>Kleine Spitze, kurze Kontaktzeit</td></tr>
+<tr><td>Drag-Soldering QFP, TSSOP</td><td>Hufeisen / Bevel</td><td>300–330 °C</td><td>330–360 °C</td><td>Reichlich Flux, langsam ziehen</td></tr>
+<tr><td>Litze verzinnen bis 0,5 mm²</td><td>Meißel 2–2,4 mm</td><td>310–330 °C</td><td>340–360 °C</td><td>Tab <a class="goto" href="#kabel">Kabel &amp; Stecker</a></td></tr>
+<tr><td>Dicke Kabel, Masseflächen, XT60</td><td>Meißel 3–5 mm</td><td>340–370 °C <span class="b b-warn">kurz</span></td><td>360–380 °C <span class="b b-warn">kurz</span></td><td>Zuerst größere Spitze, dann vorwärmen, erst dann mehr Grad</td></tr>
+<tr><td>Entlötlitze auf Pads</td><td>Meißel breit</td><td>320–350 °C</td><td>340–370 °C</td><td>Litze kurz abschneiden, Flux dazu</td></tr>
+<tr><td>Lackdraht (UEW) im Lotklecks abisolieren</td><td>Meißel</td><td colspan="2">360–390 °C, hitzefestere Lacke bis 420 °C</td><td>Der Lack zersetzt sich erst über ~350 °C</td></tr>
+<tr><td>Low-Temp-Lot (SnBi)</td><td>wie Aufgabe</td><td colspan="2">230–260 °C</td><td>Nicht mit Blei mischen</td></tr>
+</tbody>
+</table></div>
+<div class="note"><b>Zeit ist genauso wichtig wie Temperatur.</b> Der Schaden entsteht aus <b>Temperatur × Zeit</b>. 350 °C für zwei Sekunden sind harmloser als 280 °C für zwanzig. Deshalb: lieber die richtige Spitze und schnell fertig als vorsichtig und lange.</div>
+
+<h3>Heißluft: Temperatur, Luft, Düse, Abstand</h3>
+<p>Vier Stellgrößen gehören zusammen. Temperatur allein ist bei Heißluft keine vollständige Angabe. Die Werte gelten für kleine bis mittlere Boards <b>ohne</b> Vorwärmung, BGA immer mit Vorwärmung. Ausführliche Matrix mit Korridoren: Tab <a class="goto" href="#heissluftstation">Heißluftstation</a>.</p>
+<div class="tbl-wrap"><table style="min-width:820px">
+<thead><tr><th>Aufgabe</th><th>bleihaltig</th><th>bleifrei</th><th>Luft</th><th>Düse</th><th>Abstand</th></tr></thead>
+<tbody>
+<tr><td>Chip 0402 / 0201</td><td>300 °C</td><td>340 °C</td><td>20 %</td><td>3–4 mm</td><td>1,5–2 cm</td></tr>
+<tr><td>Chip 0603–1206, SOT, SOD</td><td>320 °C</td><td>350 °C</td><td>30 %</td><td>4–6 mm</td><td>1–2 cm</td></tr>
+<tr><td>SOIC, TSSOP, QFP, QFN</td><td>330 °C</td><td>360 °C</td><td>35 %</td><td>≈ Bauteil</td><td>1–2 cm</td></tr>
+<tr><td>USB-C- / Micro-USB-Buchse</td><td>340 °C</td><td>370 °C</td><td>35 %</td><td>6–10 mm</td><td>1–2 cm</td></tr>
+<tr><td>BGA ausbauen <span class="b b-platte">Board 150 °C</span></td><td>330 °C</td><td>360 °C</td><td>30 %</td><td>≈ Chip</td><td>1–2 cm</td></tr>
+<tr><td>BGA einlöten <span class="b b-platte">Board 150 °C</span></td><td>320 °C</td><td>355 °C</td><td>20 %</td><td>ohne</td><td>2–3 cm</td></tr>
+<tr><td>Masseflächen, Abschirmbleche</td><td>360 °C</td><td>380 °C</td><td>50 %</td><td>groß</td><td>1–2 cm</td></tr>
+<tr><td>Harten Flux lösen</td><td colspan="2">155 °C</td><td>35 %</td><td>offen/mittel</td><td>2–3 cm</td></tr>
+<tr><td>Underfill/Kleber weich machen <span class="b b-platte">Board 150 °C</span></td><td colspan="2">190 °C</td><td>30 %</td><td>mittel</td><td>2–3 cm</td></tr>
+<tr><td>Schrumpfschlauch 2:1</td><td colspan="2">200 °C</td><td>40 %</td><td>groß</td><td>3–5 cm</td></tr>
+<tr><td>Schrumpfschlauch mit Kleber 3:1</td><td colspan="2">240 °C</td><td>45 %</td><td>groß</td><td>3–5 cm</td></tr>
+<tr><td>Wärmetest (BGA-Riss suchen)</td><td colspan="2">100–130 °C</td><td>30 %</td><td>groß</td><td>3–5 cm</td></tr>
+</tbody>
+</table></div>
+<div class="warn"><b>Luft-Prozente sind keine Norm.</b> Die Werte beziehen sich auf eine typische Turbinen-Station mit rund 120 l/min Maximum (858D-Klasse, Quick 861DW): 30 % ≈ 35 l/min. Kompressor-Stationen schaffen oft nur 20–25 l/min, kleine Geräte nur 6 l/min. Die eigene Skala übersetzt du mit dem Papierstreifen-Test im Tab <a class="goto" href="#heissluftstation">Heißluftstation</a>.</div>
 
 <h3>Reflow-Profil (Heizplatte / Ofen)</h3>
-<p>Die Platine durchläuft vier Phasen. Bei der Heizplatte steuerst du das grob über das Hochregeln der Temperatur.</p>
+<p>Die Platine durchläuft vier Phasen. Die Werte sind die <b>Temperatur an der Lötstelle</b>, gemessen mit Thermoelement. Die Platte muss dafür 10–30 °C höher stehen, je nach Board.</p>
 
-<svg class="sk sk-wide" viewBox="0 0 560 250" role="img" aria-label="Reflow-Temperaturkurve mit den Phasen Preheat, Soak, Reflow und Abkühlen">
-  <path class="axis" d="M45,15 L45,220 L545,220"/>
+<svg class="sk sk-wide" viewBox="0 0 560 256" role="img" aria-label="Reflow-Profile für bleifrei und bleihaltig: Vorheizen, Soak, Reflow-Peak und Abkühlen über rund fünf Minuten">
+  <path class="axis" d="M50,16 L50,220 L540,220"/>
   <text class="lbl" x="14" y="20">°C</text>
-  <text class="lbl" x="520" y="236">Zeit</text>
-  <line class="dash" x1="45" y1="104" x2="545" y2="104"/><text class="lbl" x="8" y="108">150</text>
-  <line class="melt" x1="45" y1="53" x2="545" y2="53"/><text class="lbl" x="8" y="57">217</text>
-  <text class="lbl" x="52" y="47" fill="#e24b4a">Schmelzpunkt SAC305 (217 °C)</text>
-  <text class="lbl" x="8" y="35">245</text>
-  <line class="dash" x1="200" y1="15" x2="200" y2="220"/>
-  <line class="dash" x1="330" y1="15" x2="330" y2="220"/>
-  <line class="dash" x1="440" y1="15" x2="440" y2="220"/>
-  <path class="curve" d="M45,201 L200,104 L330,85 C352,79 368,31 388,31 C406,31 420,70 440,88 L545,196"/>
-  <text class="zone" x="90" y="240">Preheat</text>
-  <text class="zone" x="248" y="240">Soak</text>
-  <text class="zone" x="365" y="240">Reflow</text>
-  <text class="zone" x="458" y="240">Abkühlen</text>
+  <g class="lbl" text-anchor="end">
+    <text x="44" y="202">50</text><text x="44" y="160">100</text><text x="44" y="117">150</text><text x="44" y="75">200</text><text x="44" y="32">250</text>
+  </g>
+  <line class="dash" x1="50" y1="156" x2="540" y2="156"/>
+  <line class="dash" x1="50" y1="114" x2="540" y2="114"/>
+  <line class="dash" x1="50" y1="71" x2="540" y2="71"/>
+  <line class="melt" x1="50" y1="57" x2="540" y2="57"/>
+  <line class="dash" x1="50" y1="86" x2="540" y2="86"/>
+  <text class="lbl lbl-warn" x="56" y="53">217 °C · SAC305 schmilzt</text>
+  <text class="lbl" x="56" y="82">183 °C · Sn63Pb37 schmilzt</text>
+  <line class="dash" x1="194" y1="16" x2="194" y2="220"/>
+  <line class="dash" x1="338" y1="16" x2="338" y2="220"/>
+  <line class="dash" x1="440" y1="16" x2="440" y2="220"/>
+  <path class="curve2" d="M50,220 L178,122 L322,101 C344,94 364,58 394,58 C422,58 438,90 462,118 L530,173"/>
+  <path class="curve" d="M50,220 L194,114 L338,80 C360,70 380,33 410,33 C440,33 455,70 480,100 L530,156"/>
+  <line class="curve" x1="280" y1="190" x2="304" y2="190"/><text class="lbl" x="310" y="194">bleifrei SAC305 · Peak 235–250 °C</text>
+  <line class="curve2" x1="280" y1="205" x2="304" y2="205"/><text class="lbl" x="310" y="209">bleihaltig Sn63Pb37 · Peak 205–225 °C</text>
+  <g class="lbl" text-anchor="middle">
+    <text x="50" y="233">0</text><text x="146" y="233">60</text><text x="242" y="233">120</text><text x="338" y="233">180</text><text x="434" y="233">240</text><text x="530" y="233">300 s</text>
+  </g>
+  <text class="zone" x="122" y="250" text-anchor="middle">Vorheizen</text>
+  <text class="zone" x="266" y="250" text-anchor="middle">Soak</text>
+  <text class="zone" x="389" y="250" text-anchor="middle">Reflow</text>
+  <text class="zone" x="485" y="250" text-anchor="middle">Abkühlen</text>
 </svg>
-<p class="cd" style="font-size:12.5px;color:var(--muted)">Kurve beispielhaft für bleifrei (SAC305, Peak 240–250 °C). Bleihaltig läuft identisch ab, nur rund 30–35 °C niedriger (Peak 205–215 °C).</p>
 
-<div class="steps">
-<div class="step"><b>Vorheizen (Preheat).</b> Von Raumtemperatur auf rund 150 °C, langsam mit 1–2 °C pro Sekunde. Schützt Bauteile vor Thermoschock.</div>
-<div class="step"><b>Soak.</b> 150–180 °C für 60–120 Sekunden halten. Flussmittel aktiviert sich, die Temperatur gleicht sich über die Platine aus.</div>
-<div class="step"><b>Reflow (Peak).</b> Kurz über den Schmelzpunkt: bleihaltig 205–215 °C, bleifrei 240–250 °C. Das Lot wird flüssig, Bauteile zentrieren sich selbst.</div>
-<div class="step"><b>Abkühlen.</b> Kontrolliert herunter. Platine in dieser Phase nicht bewegen, sonst entstehen gestörte, rissige Lötstellen.</div>
-</div>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Phase</th><th>bleihaltig Sn63Pb37</th><th>bleifrei SAC305</th><th>Low-Temp SnBi(Ag)</th><th>Dauer · Rampe</th></tr></thead>
+<tbody>
+<tr><td><b>1 · Vorheizen</b></td><td>25 → 130 °C</td><td>25 → 150 °C</td><td>25 → 90 °C</td><td>60–90 s · 1–2 K/s, höchstens 3 K/s</td></tr>
+<tr><td><b>2 · Soak</b></td><td>130–165 °C</td><td>150–190 °C</td><td>90–120 °C</td><td>60–120 s</td></tr>
+<tr><td><b>3 · Peak</b></td><td><b>205–225 °C</b> (Ziel ~215)</td><td><b>235–250 °C</b> (Ziel ~245)</td><td><b>165–185 °C</b> (Ziel ~175)</td><td>Über Schmelzpunkt 45–90 s</td></tr>
+<tr><td><b>4 · Abkühlen</b></td><td colspan="3">Bis unter ~100 °C ruhig abkühlen lassen, nichts bewegen</td><td>2–4 K/s, kein Anpusten</td></tr>
+</tbody>
+</table></div>
+<div class="kurz"><b>Peak-Regel:</b> bleihaltig rund <b>25–40 °C</b> über dem Schmelzpunkt, bleifrei nur <b>20–30 °C</b>, weil Bauteile bei <b>260 °C</b> ihre Grenze haben. Der Peak ist kurz: Sobald alles glänzend zerlaufen ist und sich die Bauteile zentriert haben, Wärme weg.</div>
 <div class="tip"><b>Self-Alignment:</b> Beim Reflow zieht die Oberflächenspannung des flüssigen Lots leicht schief gesetzte Bauteile gerade. Kleine Platzierfehler korrigieren sich von selbst.</div>
 
 <h3>Schmelzpunkte auf einen Blick</h3>
 <p>Der Schmelzpunkt ist die <b>Untergrenze</b>. Werkzeug-Temperaturen liegen darüber, weil Pad und Bauteil Wärme abziehen.</p>
-<div class="tbl-wrap"><table style="min-width:680px">
-<thead><tr><th>Legierung</th><th>Schmelzpunkt</th><th>Peak beim Reflow</th><th>Kolben-Startwert</th></tr></thead>
+<div class="tbl-wrap"><table style="min-width:760px">
+<thead><tr><th>Legierung</th><th>Schmelzpunkt</th><th>Reflow-Peak</th><th>Kolben (Kartusche)</th><th>Heißluft SMD</th></tr></thead>
 <tbody>
-<tr><td><b>Sn42Bi58</b> (Low-Temp)</td><td><b>138 °C</b></td><td>165–180 °C</td><td>210–240 °C</td></tr>
-<tr><td><b>Sn63Pb37</b> (eutektisch)</td><td><b>183 °C</b></td><td>205–215 °C</td><td>300–330 °C</td></tr>
-<tr><td><b>Sn60Pb40</b></td><td>183–190 °C</td><td>205–215 °C</td><td>300–330 °C</td></tr>
-<tr><td><b>SAC305</b> (bleifrei Standard)</td><td><b>217–220 °C</b></td><td>240–250 °C</td><td>330–370 °C</td></tr>
-<tr><td><b>Sn96,5Ag3,5</b></td><td>221 °C</td><td>245–255 °C</td><td>340–370 °C</td></tr>
-<tr><td><b>Sn99,3Cu0,7</b></td><td><b>227 °C</b></td><td>250–260 °C</td><td>350–380 °C</td></tr>
+<tr><td><b>Sn42Bi58</b> (Low-Temp)</td><td><b>138 °C</b></td><td>165–185 °C</td><td>230–260 °C</td><td>260–290 °C</td></tr>
+<tr><td><b>Sn62Pb36Ag2</b></td><td><b>179 °C</b></td><td>205–225 °C</td><td>290–330 °C</td><td>310–330 °C</td></tr>
+<tr><td><b>Sn63Pb37</b> (eutektisch)</td><td><b>183 °C</b></td><td>205–225 °C</td><td>290–330 °C</td><td>310–330 °C</td></tr>
+<tr><td><b>Sn60Pb40</b></td><td>183–190 °C</td><td>210–225 °C</td><td>290–330 °C</td><td>310–330 °C</td></tr>
+<tr><td><b>SAC305</b> (bleifrei Standard)</td><td><b>217–220 °C</b></td><td>235–250 °C</td><td>330–360 °C</td><td>340–370 °C</td></tr>
+<tr><td><b>Sn96,5Ag3,5</b></td><td>221 °C</td><td>240–250 °C</td><td>330–360 °C</td><td>350–370 °C</td></tr>
+<tr><td><b>Sn99,3Cu0,7</b></td><td><b>227 °C</b></td><td>245–255 °C</td><td>340–370 °C</td><td>350–380 °C</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Nie mischen:</b> Bleihaltig + bleifrei oder Bismut + Blei ergeben eine Mischlegierung mit unbekanntem, oft <b>niedrigerem</b> Schmelzpunkt und sprödem Gefüge. Die Stelle sieht gut aus und versagt später. Beim Reparieren: Altlot restlos entfernen, dann sauber neu aufbauen.</div>
+<div class="warn"><b>Nie mischen:</b> Bleihaltig mit Bismut ergibt eine Phase, die schon bei <b>~96 °C</b> schmilzt und spröde ist. Bleihaltig mit bleifrei ergibt eine Mischlegierung mit breitem Schmelzbereich. Die Stelle sieht gut aus und versagt später. Beim Reparieren: Altlot restlos entfernen, dann sauber neu aufbauen. Der gezielte Blei-Trick beim Entlöten ist die Ausnahme, weil danach alles wieder runterkommt (Tab <a class="goto" href="#reballing">Reballing</a>).</div>
 
 <h3>Was Bauteile aushalten</h3>
 <div class="tbl-wrap"><table style="min-width:700px">
 <thead><tr><th>Bauteil</th><th>Grenze</th><th>Praxis</th></tr></thead>
 <tbody>
-<tr><td>Standard-SMD (Widerstand, MLCC)</td><td>260 °C / 10 s</td><td>Unkritisch — hält jedes normale Profil aus</td></tr>
+<tr><td>Standard-SMD (Widerstand, MLCC)</td><td>260 °C / 10 s</td><td>Unkritisch, hält jedes normale Profil aus. MLCC aber nicht mit der Spitze direkt am Keramikkörper heizen: Thermoschock gibt Haarrisse</td></tr>
 <tr><td>Elektrolytkondensator</td><td>260 °C / 10 s, oft weniger</td><td>Zügig arbeiten. Zischen oder Wölben = zu lange heiß</td></tr>
-<tr><td>LED</td><td>240–260 °C / 5 s</td><td>Empfindlich. Kurz und mit ausreichend Flux</td></tr>
-<tr><td>Kunststoff-Steckverbinder</td><td>je nach Material 230–260 °C</td><td>Verformt sich, bevor das Lot merklich leidet</td></tr>
+<tr><td>LED</td><td>240–260 °C / 5 s</td><td>Empfindlich. Kurz und mit ausreichend Flux, Linse nicht anblasen</td></tr>
+<tr><td>Kunststoff-Steckverbinder</td><td>je nach Material 230–260 °C</td><td>Verformt sich, bevor das Lot merklich leidet. Gegenstecker während des Lötens einstecken</td></tr>
 <tr><td>Quarze, Sensoren, Kameramodule</td><td>oft &lt; 240 °C</td><td>Datenblatt lesen. Im Zweifel Low-Temp-Lot</td></tr>
-<tr><td>Platinenmaterial FR-4</td><td>ca. 250–280 °C kurzzeitig</td><td>Darüber: Delamination, braune Verfärbung, Pads lösen sich</td></tr>
+<tr><td>Platinenmaterial FR-4</td><td>ca. 260–290 °C kurzzeitig</td><td>Darüber: Delamination, braune Verfärbung, Pads lösen sich</td></tr>
 <tr><td>Lötstopplack</td><td>ca. 260 °C</td><td>Blasen und Verfärbung sind das erste sichtbare Warnsignal</td></tr>
-</tbody>
-</table></div>
-<div class="kurz"><b>Zeit ist genauso wichtig wie Temperatur.</b> Der Schaden entsteht aus <b>Temperatur × Zeit</b>. 350 °C für zwei Sekunden sind harmloser als 280 °C für zwanzig. Deshalb: lieber die richtige Spitze und schnell fertig als vorsichtig und lange.</div>
-
-<h3>Welche Temperatur für welche Aufgabe</h3>
-<div class="tbl-wrap"><table style="min-width:740px">
-<thead><tr><th>Aufgabe</th><th>Werkzeug</th><th>bleihaltig</th><th>bleifrei</th></tr></thead>
-<tbody>
-<tr><td>THT, normale Pads</td><td><span class="b b-kolben">Kolben</span></td><td>300–320 °C</td><td>330–350 °C</td></tr>
-<tr><td>SMD-Chips 0603–1206</td><td><span class="b b-kolben">Kolben</span></td><td>300–320 °C</td><td>330–350 °C</td></tr>
-<tr><td>Feines SMD 0402/0201</td><td><span class="b b-kolben">Kolben</span></td><td>280–300 °C</td><td>310–330 °C</td></tr>
-<tr><td>Masseflächen, dicke Kabel</td><td><span class="b b-kolben">Kolben</span></td><td>350–380 °C <span class="b b-warn">kurz</span></td><td>380–400 °C <span class="b b-warn">kurz</span></td></tr>
-<tr><td>Entlötlitze auf Pads</td><td><span class="b b-kolben">Kolben</span></td><td>320–350 °C</td><td>350–380 °C</td></tr>
-<tr><td>SMD setzen / abheben</td><td><span class="b b-luft">Heißluft</span></td><td>290–320 °C</td><td>320–360 °C</td></tr>
-<tr><td>Reflow ganze Platine</td><td><span class="b b-platte">Platte</span></td><td>Peak 205–215 °C</td><td>Peak 240–250 °C</td></tr>
-<tr><td>Vorwärmen für Rework</td><td><span class="b b-platte">Platte</span></td><td colspan="2">100–180 °C je nach Boardgröße</td></tr>
-<tr><td>Harten Flux lösen</td><td><span class="b b-luft">Heißluft</span></td><td colspan="2">150–160 °C</td></tr>
-<tr><td>Schrumpfschlauch</td><td><span class="b b-luft">Heißluft</span></td><td colspan="2">100–150 °C</td></tr>
 </tbody>
 </table></div>
 
@@ -89,7 +180,7 @@
 <div class="gb-col bad"><h4>✗ Zu kalt</h4><ul>
 <li>Lot bleibt zäh, verläuft nicht zur Kehle</li>
 <li>Kugelige, aufgesetzte Stellen</li>
-<li>Man muss lange draufbleiben — <b>das</b> schadet dann wirklich</li>
+<li>Man muss lange draufbleiben, <b>das</b> schadet dann wirklich</li>
 <li>Flussmittel wird nicht aktiv, bleibt klebrig</li>
 </ul></div>
 <div class="gb-col bad"><h4>✗ Zu heiß</h4><ul>
@@ -99,4 +190,5 @@
 <li>Pads lösen sich, Kunststoff verformt sich</li>
 </ul></div>
 </div>
-<div class="tip"><b>Der Zwei-Sekunden-Test:</b> Bei richtiger Temperatur fließt das Lot innerhalb von etwa 2 Sekunden nach dem Zugeben sauber in die Kehle. Dauert es länger, ist fast immer die <b>Spitze zu klein</b> — nicht die Temperatur zu niedrig.</div>
+<div class="tip"><b>Der Zwei-Sekunden-Test:</b> Bei richtiger Temperatur fließt das Lot innerhalb von etwa 2 Sekunden nach dem Zugeben sauber in die Kehle. Dauert es länger, ist fast immer die <b>Spitze zu klein</b>, nicht die Temperatur zu niedrig.</div>
+<div class="note"><b>Anzeige ist nicht Wirklichkeit.</b> Günstige Stationen messen am Heizelement, nicht an der Spitze oder Düse. Abweichungen von 20–40 °C sind normal. Einmal nachmessen lohnt: Spitzenthermometer (Hakko FG-100 oder Nachbau) für den Kolben, Thermoelement in 1 cm Abstand vor der Düse für die Heißluft. Die Differenz trägst du als Offset ein oder merkst sie dir.</div>

@@ -1,24 +1,44 @@
 ---
 import "./_style.css";
 ---
-<div class="kurz"><b>Grundausstattung:</b> geregelte Lötstation · Heißluft · Pinzetten · dritte Hand · Messingwolle · Absaugung. <b>Ab feinem SMD dazu:</b> Mikroskop, Heizplatte. — Was <i>deine</i> Geräte konkret können, steht in der Gruppe <b>Meine Geräte</b>.</div>
+<div class="kurz"><b>Grundausstattung:</b> geregelte Lötstation · Heißluft · Pinzetten · dritte Hand · Messingwolle · Absaugung. <b>Ab feinem SMD dazu:</b> Mikroskop, Heizplatte. Was <i>deine</i> Geräte konkret können, steht in der Gruppe <b>Meine Geräte</b>.</div>
 
 <h2>Die Werkzeugklassen und was sie unterscheidet</h2>
-<p>Dieser Tab erklärt die <b>Gattungen</b> — was ein Gerät prinzipbedingt kann und wo seine Grenze liegt. Herstellerunabhängig.</p>
+<p>Dieser Tab erklärt die <b>Gattungen</b>: was ein Gerät prinzipbedingt kann und wo seine Grenze liegt. Herstellerunabhängig.</p>
 
 <h3>Lötstationen: die drei Bauarten</h3>
-<p>Der entscheidende Unterschied ist, <b>wo Heizelement und Temperatursensor sitzen</b>. Davon hängt ab, wie schnell die Wärme nach dem Aufsetzen zurückkommt — und damit, wie heiß du einstellen musst.</p>
+<p>Der entscheidende Unterschied ist, <b>wo Heizelement und Temperatursensor sitzen</b>. Davon hängt ab, wie schnell die Wärme nach dem Aufsetzen zurückkommt, und damit, wie heiß du einstellen musst.</p>
 <div class="tbl-wrap"><table style="min-width:720px">
 <thead><tr><th>Bauart</th><th>Heizer &amp; Sensor</th><th>Verhalten</th><th>Typische Einstellung</th></tr></thead>
 <tbody>
-<tr><td><b>Ungeregelter Kolben</b><br><span class="cd">Baumarkt-Heizstab</span></td><td>Heizdraht, <b>kein</b> Sensor</td><td>Wird immer heißer, bis Wärmeabgabe = Leistung. Beim Aufsetzen bricht die Spitze ein und kommt kaum zurück</td><td><span class="b b-warn">nicht verwenden</span> — verbrennt Flux und Pads</td></tr>
-<tr><td><b>Klassische Station</b><br><span class="cd">Heizelement im Griff</span></td><td>Sensor <b>hinter</b> dem Heizer, Spitze wird aufgesteckt</td><td>Merkt den Temperatureinbruch verzögert. Man kompensiert mit höherer Einstellung</td><td>bleifrei oft <b>350–380 °C</b></td></tr>
-<tr><td><b>Kartuschen-System</b><br><span class="cd">Heizer in der Spitze</span></td><td>Heizelement <b>und</b> Sensor sitzen <b>in</b> der Spitze</td><td>Regelt in Millisekunden nach. Wärme ist sofort wieder da</td><td>bleifrei <b>330–360 °C</b> reicht</td></tr>
+<tr><td><b>Ungeregelter Kolben</b><br><span class="cd">Baumarkt-Heizstab</span></td><td>Heizdraht, <b>kein</b> Sensor</td><td>Wird immer heißer, bis Wärmeabgabe = Leistung. Beim Aufsetzen bricht die Spitze ein und kommt kaum zurück</td><td><span class="b b-warn">nicht verwenden</span>: verbrennt Flux und Pads</td></tr>
+<tr><td><b>Klassische Station</b><br><span class="cd">Heizelement im Griff, z. B. Hakko FX-888D</span></td><td>Sensor <b>hinter</b> dem Heizer, Spitze wird aufgesteckt</td><td>Merkt den Temperatureinbruch verzögert. Man kompensiert mit höherer Einstellung</td><td>bleihaltig <b>310–350 °C</b><br>bleifrei <b>350–380 °C</b></td></tr>
+<tr><td><b>Kartuschen-System</b><br><span class="cd">Heizer in der Spitze: JBC C245/C210, Hakko T12/T15</span></td><td>Heizelement <b>und</b> Sensor sitzen <b>in</b> der Spitze</td><td>Regelt sehr schnell nach. Wärme ist sofort wieder da</td><td>bleihaltig <b>290–330 °C</b><br>bleifrei <b>330–360 °C</b></td></tr>
 </tbody>
 </table></div>
+<svg class="sk sk-wide" viewBox="0 0 520 150" role="img" aria-label="Vergleich im Schnitt: Bei der klassischen Station sitzen Heizer und Sensor im Griff hinter der aufgesteckten Spitze, bei der Kartusche direkt in der Spitze">
+  <defs><marker id="ah-wz" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L8,4 L0,8 Z" style="fill:var(--danger-border)"/></marker></defs>
+  <text class="lane" x="10" y="22">Klassische Station</text>
+  <rect class="tool" x="10" y="34" width="150" height="26" rx="8"/>
+  <rect class="bl" x="160" y="38" width="120" height="18" rx="3"/>
+  <text class="tl" x="220" y="51" text-anchor="middle">Heizer</text>
+  <circle cx="276" cy="47" r="4" style="fill:var(--k-ink)"/>
+  <path class="tool" d="M156,40 H360 L404,47 L360,54 H156 Z" style="fill:none"/>
+  <text class="tk" x="276" y="74" text-anchor="middle">Sensor</text>
+  <path class="heat" d="M290,30 C320,22 360,24 392,38" marker-end="url(#ah-wz)"/>
+  <text class="lbl" x="330" y="20" text-anchor="middle">langer Weg, Sensor merkt spät</text>
+  <text class="lane" x="10" y="100">Kartusche (C245 / T12)</text>
+  <rect class="tool" x="10" y="112" width="150" height="26" rx="8"/>
+  <path class="tool" d="M156,118 H360 L404,125 L360,132 H156 Z"/>
+  <rect class="bl" x="330" y="120" width="34" height="10" rx="2"/>
+  <circle cx="372" cy="125" r="3.5" style="fill:var(--k-ink)"/>
+  <text class="tl" x="347" y="146" text-anchor="middle">Heizer</text>
+  <text class="tk" x="392" y="146">Sensor</text>
+  <text class="lbl" x="330" y="104" text-anchor="middle">kurzer Weg, regelt sofort nach</text>
+</svg>
 <div class="kurz"><b>Deshalb die Regel „so kühl wie möglich":</b> Nicht die eingestellte Zahl löten, sondern die Wärme, die an der Lötstelle ankommt. Ein System mit schneller Nachregelung braucht bei gleicher Arbeit weniger Grad.</div>
 
-<h3>Spitzenformen — was welche Form kann</h3>
+<h3>Spitzenformen: was welche Form kann</h3>
 <p>Die Form bestimmt die <b>Kontaktfläche</b> und damit, wie viel Wärme pro Sekunde übergeht. Die Buchstaben sind bei den meisten Systemen gleich; manche Hersteller codieren die Form als Zahl.</p>
 
 <svg class="sk sk-wide" viewBox="0 0 468 106" role="img" aria-label="Sechs Lötspitzen-Profile im Seitenschnitt: konisch, Hufeisen, Meißel, Messer, Nadel, gebogen">
@@ -43,30 +63,30 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:620px">
 <thead><tr><th>Form</th><th>Wärmeübertragung</th><th>Am besten für</th><th>Schwach bei</th></tr></thead>
 <tbody>
-<tr><td><b>Meißel (D)</b></td><td><span class="b b-ok">hoch</span></td><td><b>Die Immer-drauf-Form.</b> THT, Stiftleisten, SMD-Chips, Masseflächen — flache Kante liegt satt auf</td><td>sehr enge Stellen</td></tr>
-<tr><td><b>Hufeisen / Bevel (BC, C)</b></td><td><span class="b b-ok">hoch</span></td><td>Drag-Soldering über Pinreihen — die Schräge hält einen Lottropfen</td><td>Einzelpads punktgenau</td></tr>
+<tr><td><b>Meißel (D)</b></td><td><span class="b b-ok">hoch</span></td><td><b>Die Immer-drauf-Form.</b> THT, Stiftleisten, SMD-Chips, Masseflächen: flache Kante liegt satt auf</td><td>sehr enge Stellen</td></tr>
+<tr><td><b>Hufeisen / Bevel (BC, C)</b></td><td><span class="b b-ok">hoch</span></td><td>Drag-Soldering über Pinreihen: die Schräge hält einen Lottropfen</td><td>Einzelpads punktgenau</td></tr>
 <tr><td><b>Messer (K)</b></td><td>mittel–hoch</td><td>Drag über breite Reihen, Lötbrücken „aufschneiden", große Pads mit der Fläche</td><td>Feinstarbeit</td></tr>
 <tr><td><b>Konisch / Bleistift (B)</b></td><td>mittel</td><td>Kabel, THT, allround-fein</td><td>alles mit viel Wärmebedarf</td></tr>
-<tr><td><b>Nadel (I, IL, ILS)</b></td><td><span class="b b-warn">niedrig</span></td><td>0402/0201, feine IC-Pins, Fädeldraht — präziseste Form</td><td>Masseflächen, dicke Kabel</td></tr>
+<tr><td><b>Nadel (I, IL, ILS)</b></td><td><span class="b b-warn">niedrig</span></td><td>0402/0201, feine IC-Pins, Fädeldraht: präziseste Form</td><td>Masseflächen, dicke Kabel</td></tr>
 <tr><td><b>Gebogen (J)</b></td><td>mittel</td><td>schwer erreichbare Stellen: unter Bauteilen, hinter Steckverbindern</td><td>freie Flächen (unnötig)</td></tr>
 </tbody>
 </table></div>
-<div class="tip"><b>Faustregel Spitzenwahl:</b> Immer die <b>größte</b> Spitze nehmen, die noch passt. Größer heißt mehr Wärmenachschub — also <i>niedrigere</i> Temperatur, kürzere Kontaktzeit, weniger Stress fürs Bauteil. Klemmt es, ist fast nie die Temperatur zu niedrig, sondern die Spitze zu klein.</div>
+<div class="tip"><b>Faustregel Spitzenwahl:</b> Immer die <b>größte</b> Spitze nehmen, die noch passt. Größer heißt mehr Wärmenachschub: also <i>niedrigere</i> Temperatur, kürzere Kontaktzeit, weniger Stress fürs Bauteil. Klemmt es, ist fast nie die Temperatur zu niedrig, sondern die Spitze zu klein.</div>
 
 <h3>Heißluft, Heizplatte, Vorwärmer</h3>
 <div class="grid">
 <div class="card"><div class="ct"><span class="b b-luft">Heißluft</span> Heißluftstation</div><div class="cd">Heißer Luftstrom erwärmt ein ganzes Bauteil gleichmäßig.</div><ul><li><b>Stark bei:</b> QFN/QFP, kleine Chips, Entlöten von Multipin-Bauteilen</li><li><b>Schwach bei:</b> großen Masseflächen, dicken Kabeln</li><li><b>Pflicht:</b> Temperatur <i>und</i> Luftstrom getrennt regelbar</li></ul></div>
 <div class="card"><div class="ct"><span class="b b-platte">Heizplatte</span> Heizplatte / Preheater</div><div class="cd">Erwärmt die Platine flächig von unten.</div><ul><li><b>Als Reflow:</b> ganze SMD-Bestückung auf einmal</li><li><b>Als Vorwärmer:</b> senkt den nötigen Hitzeeintrag von oben drastisch</li><li>Für BGA-Arbeit nicht optional</li></ul></div>
-<div class="card"><div class="ct">Infrarot-Vorwärmer</div><div class="cd">Strahlungswärme statt Kontakt.</div><ul><li>Erreicht auch unebene und bestückte Unterseiten</li><li>Dunkle Flächen nehmen mehr Wärme auf als helle — ungleichmäßiger als eine Platte</li></ul></div>
+<div class="card"><div class="ct">Infrarot-Vorwärmer</div><div class="cd">Strahlungswärme statt Kontakt.</div><ul><li>Erreicht auch unebene und bestückte Unterseiten</li><li>Dunkle Flächen nehmen mehr Wärme auf als helle, deshalb ungleichmäßiger als eine Platte</li></ul></div>
 <div class="card"><div class="ct">Reflow-Ofen</div><div class="cd">Fährt ein komplettes Temperaturprofil automatisch.</div><ul><li>Reproduzierbar, für Kleinserien</li><li>Kein Eingreifen während des Laufs möglich</li></ul></div>
 </div>
-<div class="note"><b>Warum Vorwärmen so viel bringt:</b> Wärme fließt immer vom Heißen zum Kalten. Ein 25 °C kaltes Board saugt oben eingebrachte Wärme sofort weg — du musst mit sehr hoher Temperatur dagegenhalten. Ein auf 150 °C vorgewärmtes Board braucht oben nur noch die Differenz. Ergebnis: weniger Grad, kürzere Zeit, kein Verzug (Warpage).</div>
+<div class="note"><b>Warum Vorwärmen so viel bringt:</b> Wärme fließt immer vom Heißen zum Kalten. Ein 25 °C kaltes Board saugt oben eingebrachte Wärme sofort weg: du musst mit sehr hoher Temperatur dagegenhalten. Ein auf 150 °C vorgewärmtes Board braucht oben nur noch die Differenz. Ergebnis: weniger Grad, kürzere Zeit, kein Verzug (Warpage).</div>
 
 <h3>Halten, Sehen, Reinigen</h3>
 <div class="grid">
 <div class="card"><div class="ct">Pinzetten (ESD)</div><div class="cd">Gerade und gebogen, feine Spitzen. Für SMD unverzichtbar.</div><ul><li>ESD-Ausführung schützt empfindliche ICs</li><li>Keramikspitzen für heiße Bauteile</li></ul></div>
-<div class="card"><div class="ct">Dritte Hand / PCB-Halter</div><div class="cd">Fixiert Platine und Kabel — beide Hände bleiben frei.</div><ul><li>Ein bewegliches Board macht jede Lötstelle schlechter</li></ul></div>
-<div class="card"><div class="ct">Lupe / Mikroskop</div><div class="cd">Ab feinem SMD entscheidend.</div><ul><li>Lupenlampe: bis ca. 0805</li><li>Stereo-Mikroskop: ab 0603, QFN, BGA</li></ul></div>
+<div class="card"><div class="ct">Dritte Hand / PCB-Halter</div><div class="cd">Fixiert Platine und Kabel: beide Hände bleiben frei.</div><ul><li>Ein bewegliches Board macht jede Lötstelle schlechter</li></ul></div>
+<div class="card"><div class="ct">Lupe / Mikroskop</div><div class="cd">Ab feinem SMD entscheidend.</div><ul><li>Lupenlampe: bis ca. 0805</li><li>Stereo-Mikroskop: ab 0603, QFN, BGA</li><li>Setup: Tab <a class="goto" href="#mikroskop">Mikroskop</a></li></ul></div>
 <div class="card"><div class="ct">Messingwolle + Schwamm</div><div class="cd">Zum Abstreifen der Spitze.</div><ul><li>Messingwolle kühlt die Spitze <b>weniger aus</b> als ein nasser Schwamm</li><li>Schwamm nur feucht, nie nass</li></ul></div>
 <div class="card"><div class="ct">Multimeter</div><div class="cd">Durchgang auf Brücken und Unterbrechungen.</div><ul><li>Bedienung: <a href="elektronik-grundlagen.html#dmm-hand">Elektronik 101 → Handmultimeter</a></li></ul></div>
 <div class="card"><div class="ct">Lötrauchabsaugung <span class="b b-warn">wichtig</span></div><div class="cd">Aktivkohlefilter, direkt neben der Lötstelle.</div><ul><li>Kolophonium-Dämpfe sind atemwegsreizend und sensibilisierend</li></ul></div>
@@ -76,15 +96,15 @@ import "./_style.css";
 <div class="tbl-wrap"><table style="min-width:700px">
 <thead><tr><th>Werkzeug</th><th>Prinzip</th><th>Am besten für</th><th>Grenze</th></tr></thead>
 <tbody>
-<tr><td><b>Entlötlitze (Wick)</b></td><td>Kupfergeflecht saugt flüssiges Lot durch Kapillarwirkung auf</td><td>Pads planziehen, Lötbrücken, BGA-Restlot</td><td>zieht Wärme ab — kurzes Stück nutzen (<a class="goto" href="#draht">Draht &amp; Litze</a>)</td></tr>
+<tr><td><b>Entlötlitze (Wick)</b></td><td>Kupfergeflecht saugt flüssiges Lot durch Kapillarwirkung auf</td><td>Pads planziehen, Lötbrücken, BGA-Restlot</td><td>zieht Wärme ab: kurzes Stück nutzen (<a class="goto" href="#draht">Draht &amp; Litze</a>)</td></tr>
 <tr><td><b>Entlötpumpe</b></td><td>Federkolben saugt geschmolzenes Lot schlagartig weg</td><td>THT-Durchkontaktierungen</td><td>Rückstoß kann Pads lösen; nichts für SMD</td></tr>
 <tr><td><b>Entlötstation (Vakuum)</b></td><td>Beheizte Hohlnadel mit Dauervakuum</td><td>viele THT-Pins in Serie</td><td>teuer, Nadel verstopft</td></tr>
 <tr><td><b>Heißluft</b></td><td>Alle Anschlüsse gleichzeitig flüssig</td><td>SMD-Bauteile schadenfrei abheben</td><td>Nachbarn müssen geschützt werden</td></tr>
-<tr><td><b>Low-Melt-Legierung</b><br><span class="cd">SnBi, ~58–138 °C</span></td><td>Mischt sich mit dem Altlot und senkt den Schmelzpunkt drastisch</td><td>Multipin-ICs ohne Heißluft abheben</td><td>Reste <b>restlos</b> entfernen — sonst spröde Mischphase</td></tr>
+<tr><td><b>Low-Melt-Legierung</b><br><span class="cd">z. B. Chip Quik SMD1, schmilzt bei 58 °C</span></td><td>Bismut-Indium-Legierung, mischt sich mit dem Altlot und hält die Mischung weit unter dem normalen Schmelzpunkt flüssig</td><td>Multipin-ICs ohne Heißluft abheben</td><td>Reste <b>restlos</b> entfernen, sonst bleibt eine spröde Mischphase. SMD1 enthält Blei, es gibt eine bleifreie Variante</td></tr>
 </tbody>
 </table></div>
 
-<h3>Verschleiß und Pflege — was Spitzen tötet</h3>
+<h3>Verschleiß und Pflege: was Spitzen tötet</h3>
 <div class="gb">
 <div class="gb-col good"><h4>✓ Verlängert die Lebensdauer</h4><ul>
 <li>Spitze <b>immer verzinnt</b> lagern und dick verzinnt ausschalten</li>
@@ -94,11 +114,11 @@ import "./_style.css";
 <li>Messingwolle statt nassem Schwamm</li>
 </ul></div>
 <div class="gb-col bad"><h4>✗ Zerstört die Eisenschicht</h4><ul>
-<li>Dauerbetrieb über <b>400 °C</b></li>
+<li>Dauerbetrieb über <b>~380 °C</b></li>
 <li>Trocken heiß stehen lassen (oxidiert sofort)</li>
 <li>Mechanisch schaben, feilen oder Schleifpapier</li>
 <li>Als Hebel oder Schraubendreher benutzen</li>
 <li>Aggressive Flussmittel (Lötwasser/-fett)</li>
 </ul></div>
 </div>
-<div class="warn"><b>Spitze benetzt nicht mehr?</b> Erst Tip Tinner (Aktivator-Paste) probieren, dann bei 250–300 °C frisches Lot anbieten. Hilft das nicht, ist die Eisenschicht durch — die Spitze ist Verbrauchsmaterial und muss getauscht werden. Blankes Kupfer darunter löst sich im Lot auf.</div>
+<div class="warn"><b>Spitze benetzt nicht mehr?</b> Erst Tip Tinner (Aktivator-Paste, z. B. Hakko FS-100) bei Arbeitstemperatur probieren, abstreifen, dann frisches Lot anbieten. Hilft das nicht, ist die Eisenschicht durch: die Spitze ist Verbrauchsmaterial und muss getauscht werden. Blankes Kupfer darunter löst sich im Lot auf.</div>

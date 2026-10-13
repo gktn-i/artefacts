@@ -1,16 +1,46 @@
-<div class="kurz"><b>Schwierigkeit:</b> THT und Chips ab 0805 sind Kolben-Material · 0402/QFN brauchen Heißluft oder Reflow · BGA nur mit Vorwärmung — Einstufung je Bauform in der Tabelle.</div>
+<div class="kurz"><b>Schwierigkeit:</b> THT, Chips bis 0402 und alles mit sichtbaren Pins sind Kolben-Material · QFN, LGA und Buchsen brauchen Heißluft oder Reflow · BGA nur mit Vorwärmung. Einstufung je Bauform in der Tabelle.</div>
 <h2>Bauteile und Bauformen</h2>
 <p class="note">Diese Tabelle sortiert nach <b>Lötbarkeit</b>. Was ein Bauteil <b>tut</b> (Funktion, Kennwerte, Anwendungsbeispiele): <a href="elektronik-grundlagen.html#komponenten">Elektronik 101 → Bauteil-Datenbank</a>.</p>
-<p>Filtere nach Typ und sieh, wie schwer das Teil von Hand zu löten ist und womit.</p>
-<input class="search" id="cq" type="text" placeholder="Bauteil suchen (Name, Typ, Pitch, Werkzeug) …">
-<div class="filt" id="cfilt"></div>
-<div class="tbl-wrap">
-<table id="compTbl"><thead></thead><tbody></tbody></table>
+<p>Wie schwer ein Teil von Hand zu löten ist und womit. Spalten lassen sich sortieren.</p>
+<div class="cfbar" hidden>
+<input class="search" id="cq" type="search" placeholder="Bauteil suchen (Name, Typ, Pitch, Werkzeug) …" aria-label="Bauteile durchsuchen">
+<div class="filt" id="cfilt" role="group" aria-label="Nach Typ filtern"><button type="button" class="active" data-f="all" aria-pressed="true">Alle</button><button type="button" data-f="THT" aria-pressed="false">THT</button><button type="button" data-f="SMD" aria-pressed="false">SMD</button></div>
 </div>
+<div class="tbl-wrap"><table id="compTbl" data-sort style="min-width:880px">
+<thead><tr><th>Bauteil</th><th>Typ</th><th>Gepolt</th><th>Pitch / Raster</th><th>Schwierigkeit</th><th>Empfohlen</th><th>Notiz</th></tr></thead>
+<tbody>
+<tr data-typ="THT"><td>Widerstand / Folien-C (THT)</td><td><span class="b b-kolben">THT</span></td><td>nein</td><td>2,54 mm und größer</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Idealer Einstieg, ungepolt</td></tr>
+<tr data-typ="THT"><td>Elko (THT)</td><td><span class="b b-kolben">THT</span></td><td>ja</td><td>2,0–5,0 mm</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Minusstreifen markiert, kürzeres Bein = Minus, zügig löten</td></tr>
+<tr data-typ="THT"><td>LED / Diode (THT)</td><td><span class="b b-kolben">THT</span></td><td>ja</td><td>2,54 mm</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Kathode markiert (Ring bzw. abgeflachte Seite), bei der LED ist das längere Bein die Anode</td></tr>
+<tr data-typ="THT"><td>Transistor TO-92 / TO-220</td><td><span class="b b-kolben">THT</span></td><td>ja</td><td>1,27–2,54 mm</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Pinbelegung aus dem Datenblatt. TO-220-Fahne zieht Wärme, größere Spitze</td></tr>
+<tr data-typ="THT"><td>DIP-IC (THT)</td><td><span class="b b-kolben">THT</span></td><td>ja</td><td>2,54 mm</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Kerbe oder Punkt = Pin 1, besser einen Sockel einlöten</td></tr>
+<tr data-typ="THT"><td>Stift- / Buchsenleiste</td><td><span class="b b-kolben">THT</span></td><td>nein</td><td>2,54 mm</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Erst Eckpin tacken, dann ausrichten</td></tr>
+<tr data-typ="THT"><td>Schraubklemme, Buchse, Relais</td><td><span class="b b-kolben">THT</span></td><td>teils</td><td>3,5–5,08 mm</td><td data-v="2"><span class="diff d2">mittel</span></td><td>Lötkolben, breite Spitze</td><td>Viel Metall, dicke Pins: Meißel 3 mm, kurz und kräftig</td></tr>
+<tr data-typ="SMD"><td>Chip 1206</td><td><span class="b b-all">SMD</span></td><td>teils</td><td>2 Pads</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Größtes gängiges Chip-Format, sehr gut von Hand</td></tr>
+<tr data-typ="SMD"><td>Chip 0805</td><td><span class="b b-all">SMD</span></td><td>teils</td><td>2 Pads</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Einsteigerfreundlich für SMD</td></tr>
+<tr data-typ="SMD"><td>Chip 0603</td><td><span class="b b-all">SMD</span></td><td>teils</td><td>2 Pads</td><td data-v="2"><span class="diff d2">mittel</span></td><td>Lötkolben, kleine Spitze</td><td>Mit etwas Übung gut machbar</td></tr>
+<tr data-typ="SMD"><td>Chip 0402</td><td><span class="b b-all">SMD</span></td><td>teils</td><td>2 Pads</td><td data-v="2"><span class="diff d2">mittel</span></td><td>Lötkolben (C210) / Heißluft</td><td>Pinzette und Lupe oder Mikroskop nötig</td></tr>
+<tr data-typ="SMD"><td>Chip 0201</td><td><span class="b b-all">SMD</span></td><td>teils</td><td>2 Pads</td><td data-v="3"><span class="diff d3">schwer</span></td><td>Heißluft / Reflow</td><td>Mit dem Kolben nur C210 unterm Mikroskop</td></tr>
+<tr data-typ="SMD"><td>MELF / MiniMELF</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>2 Pads</td><td data-v="2"><span class="diff d2">mittel</span></td><td>Lötkolben</td><td>Rund, rollt weg: Pad vorverzinnen, mit Pinzette halten. Ring = Kathode</td></tr>
+<tr data-typ="SMD"><td>SOD-123 / SOD-323</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>2 Pads</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Diode, Strich = Kathode</td></tr>
+<tr data-typ="SMD"><td>SOT-23</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>0,95 mm</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Kleiner Transistor, einfach</td></tr>
+<tr data-typ="SMD"><td>SOT-223 / DPAK</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>2,3 mm + Kühlfahne</td><td data-v="2"><span class="diff d2">mittel</span></td><td>Lötkolben, breite Spitze / Heißluft</td><td>Fahne hängt an der Massefläche: breite Spitze oder vorwärmen</td></tr>
+<tr data-typ="SMD"><td>Tantal / SMD-Elko</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>2 Pads</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Achtung: Beim Tantal markiert der Strich Plus</td></tr>
+<tr data-typ="SMD"><td>SOIC / SOP</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>1,27 mm</td><td data-v="1"><span class="diff d1">einfach</span></td><td>Lötkolben</td><td>Breite Pins, gut lötbar</td></tr>
+<tr data-typ="SMD"><td>TSSOP / MSOP</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>0,5–0,65 mm</td><td data-v="2"><span class="diff d2">mittel</span></td><td>Lötkolben (Drag)</td><td>Flussmittel und Litze helfen</td></tr>
+<tr data-typ="SMD"><td>QFP / TQFP</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>0,4–0,8 mm</td><td data-v="2"><span class="diff d2">mittel</span></td><td>Lötkolben (Drag) / Heißluft</td><td>Drag-Soldering ideal</td></tr>
+<tr data-typ="SMD"><td>QFN / DFN</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>0,4–0,65 mm</td><td data-v="3"><span class="diff d3">schwer</span></td><td>Heißluft / Reflow</td><td>Pads unter dem Gehäuse, Thermal-Pad in der Mitte. Mit dem Kolben kaum erreichbar</td></tr>
+<tr data-typ="SMD"><td>USB-C-Buchse</td><td><span class="b b-all">SMD</span></td><td>Lage</td><td>0,5 mm + THT-Laschen</td><td data-v="3"><span class="diff d3">schwer</span></td><td>Heißluft + Kolben</td><td>Feine Pins per Heißluft, Schirmlaschen mit breiter Spitze, Kunststoff schützen</td></tr>
+<tr data-typ="SMD"><td>LGA (Sensoren, Funkmodule)</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>0,5–1,0 mm</td><td data-v="3"><span class="diff d3">schwer</span></td><td>Heißluft / Reflow</td><td>Nur flache Pads unten. Mit Paste oder vorverzinnten Pads setzen</td></tr>
+<tr data-typ="SMD"><td>BGA</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>0,3–1,27 mm</td><td data-v="3"><span class="diff d3">schwer</span></td><td>Heißluft + Vorwärmung</td><td>Lötkugeln unter dem Chip. Ausbau und neue Kugeln: Tab Reballing</td></tr>
+<tr data-typ="SMD"><td>WLCSP</td><td><span class="b b-all">SMD</span></td><td>ja</td><td>0,3–0,4 mm</td><td data-v="3"><span class="diff d3">schwer</span></td><td>Heißluft + Vorwärmung</td><td>Nackter Die mit Kugeln, fliegt bei jedem Lufthauch weg. Meist günstiger zu tauschen</td></tr>
+</tbody>
+</table></div>
+<p class="cq-empty" id="cqEmpty" hidden>Kein Bauteil passt zur Suche.</p>
 <div class="note"><b>Pitch</b> ist der Abstand von Pinmitte zu Pinmitte. Je kleiner der Pitch, desto eher brauchst du Flussmittel, Entlötlitze und ein Mikroskop.</div>
 
 <h2>Bauteil-Kürzel lesen (Schaltplan &amp; Platine)</h2>
-<p>Auf der Platine und im Schaltplan hat jedes Bauteil ein <b>Kürzel + eine Nummer</b> (z. B. <b>R1, C13, D2, Q1, U1</b>). Der Buchstabe sagt, <b>was</b> es ist — die Zahl ist nur die laufende Nummer (Position), <b>kein Wert</b>.</p>
+<p>Auf der Platine und im Schaltplan hat jedes Bauteil ein <b>Kürzel + eine Nummer</b> (z. B. <b>R1, C13, D2, Q1, U1</b>). Der Buchstabe sagt, <b>was</b> es ist: die Zahl ist nur die laufende Nummer (Position), <b>kein Wert</b>.</p>
 <div class="tbl-wrap"><table style="min-width:560px">
 <thead><tr><th>Kürzel</th><th>Bauteil</th></tr></thead>
 <tbody>
@@ -19,7 +49,7 @@
 <tr><td><b>L</b></td><td>Spule / Induktivität</td></tr>
 <tr><td><b>D</b> (oft „LED")</td><td>Diode oder LED</td></tr>
 <tr><td><b>Q</b></td><td>Transistor oder MOSFET</td></tr>
-<tr><td><b>U</b> / IC</td><td>integrierter Schaltkreis (IC) — z. B. NE555, CD4017</td></tr>
+<tr><td><b>U</b> / IC</td><td>integrierter Schaltkreis (IC): z. B. NE555, CD4017</td></tr>
 <tr><td><b>Y</b> / X / XTAL</td><td>Quarz / Oszillator</td></tr>
 <tr><td><b>SW</b> / S</td><td>Schalter / Taster</td></tr>
 <tr><td><b>J</b> / P / CN</td><td>Steckverbinder / Stiftleiste</td></tr>
@@ -36,7 +66,7 @@
 <tr><td><b>ANT</b> / E</td><td>Antenne</td></tr>
 </tbody>
 </table></div>
-<div class="note"><b>Wo steht der Wert?</b> Nicht im Kürzel — sondern (a) im <b>Schaltplan</b> neben dem Symbol, (b) in der <b>Stückliste (BOM)</b> oder (c) als <b>Aufdruck</b> auf dem Bauteil. Beispiel aus einer Stückliste: „<b>0805 331</b>" = 330-Ω-Widerstand im 0805-Gehäuse · „<b>SOT-23 J3Y</b>" = NPN-Transistor 8050 (Marking J3Y) · „<b>1206 4148</b>" = Diode 1N4148 im 1206-Gehäuse.</div>
+<div class="note"><b>Wo steht der Wert?</b> Nicht im Kürzel, sondern (a) im <b>Schaltplan</b> neben dem Symbol, (b) in der <b>Stückliste (BOM)</b> oder (c) als <b>Aufdruck</b> auf dem Bauteil. Beispiel aus einer Stückliste: „<b>0805 331</b>" = 330-Ω-Widerstand im 0805-Gehäuse · „<b>SOT-23 J3Y</b>" = NPN-Transistor 8050 (Marking J3Y) · „<b>1206 4148</b>" = Diode 1N4148 im 1206-Gehäuse.</div>
 <div class="tip"><b>So liest du eine Platine:</b> Kürzel + Nummer auf der Platine suchen → in der Stückliste dieselbe Nummer nachschlagen → dort stehen Gehäuse und Wert. Umgekehrt beim Bestücken: Stückliste sagt „R50–R60 = 330 Ω" → alle diese Positionen mit 330-Ω-Widerständen bestücken.</div>
 
 <h2>Welches Gehäuse enthält was?</h2>
@@ -57,31 +87,34 @@
 <tr><td><b>TO-220</b></td><td><span class="b b-kolben">THT</span></td><td>3</td><td>Leistungstransistoren/-MOSFETs, Spannungsregler (z. B. 7805)</td></tr>
 </tbody>
 </table></div>
-<div class="note">Die genaue Funktion und Pinbelegung steht immer im <b>Datenblatt</b> — die Aufschrift auf dem Chip (z. B. „1N4148", „AMS1117") eintippen und danach suchen.</div>
+<div class="note">Die genaue Funktion und Pinbelegung steht immer im <b>Datenblatt</b>: die Aufschrift auf dem Chip (z. B. „1N4148", „AMS1117") eintippen und danach suchen.</div>
 
 <h2>SMD-Chips: Größen erkennen &amp; Werte ablesen</h2>
-<p>Die <b>zweipoligen</b> Chip-Bauteile im gleichen Gehäuse können ein <b>Widerstand (R), Kondensator (C), eine Spule (L) oder LED</b> sein — von außen oft nur schwer zu unterscheiden (siehe unten). Der Name ist das <b>Zoll-Maß</b>: „1206" = 0,12″ × 0,06″ lang×breit. Gleiche Größe gilt für R und C.</p>
-<div class="tbl-wrap"><table style="min-width:620px">
-<thead><tr><th>Bauform</th><th>Maße (L × B)</th><th>Von Hand löten</th></tr></thead>
+<p>Die <b>zweipoligen</b> Chip-Bauteile im gleichen Gehäuse können ein <b>Widerstand (R), Kondensator (C), eine Spule (L) oder LED</b> sein, von außen oft nur schwer zu unterscheiden (siehe unten). Der Name ist das <b>Zoll-Maß</b>: „1206" = 0,12″ × 0,06″ lang × breit. Gleiche Größe gilt für R und C.</p>
+<div class="tbl-wrap"><table style="min-width:700px">
+<thead><tr><th>Bauform (Zoll)</th><th>Metrisch</th><th>Maße (L × B)</th><th>Von Hand löten</th></tr></thead>
 <tbody>
-<tr><td><b>1206</b></td><td>3,2 × 1,6 mm</td><td>sehr gut — größter gängiger Chip, guter Einstieg</td></tr>
-<tr><td><b>0805</b></td><td>2,0 × 1,25 mm</td><td>einsteigerfreundlich</td></tr>
-<tr><td><b>0603</b></td><td>1,6 × 0,8 mm</td><td>mit etwas Übung gut</td></tr>
-<tr><td><b>0402</b></td><td>1,0 × 0,5 mm</td><td>fummelig — Pinzette und Lupe nötig</td></tr>
-<tr><td><b>0201</b></td><td>0,6 × 0,3 mm</td><td>von Hand kaum sinnvoll (Reflow)</td></tr>
+<tr><td><b>2512</b></td><td>6332</td><td>6,3 × 3,2 mm</td><td>sehr gut, typisch für Shunts und Leistungswiderstände (1 W)</td></tr>
+<tr><td><b>1210</b></td><td>3225</td><td>3,2 × 2,5 mm</td><td>sehr gut, große MLCC und Polyfuses</td></tr>
+<tr><td><b>1206</b></td><td>3216</td><td>3,2 × 1,6 mm</td><td>sehr gut, guter Einstieg</td></tr>
+<tr><td><b>0805</b></td><td>2012</td><td>2,0 × 1,25 mm</td><td>einsteigerfreundlich</td></tr>
+<tr><td><b>0603</b></td><td>1608</td><td>1,6 × 0,8 mm</td><td>mit etwas Übung gut</td></tr>
+<tr><td><b>0402</b></td><td>1005</td><td>1,0 × 0,5 mm</td><td>fummelig, Pinzette und Lupe oder Mikroskop nötig</td></tr>
+<tr><td><b>0201</b></td><td>0603</td><td>0,6 × 0,3 mm</td><td>nur unterm Mikroskop, besser Heißluft oder Reflow</td></tr>
+<tr><td><b>01005</b></td><td>0402</td><td>0,4 × 0,2 mm</td><td>Handy-Boards. Von Hand praktisch nur Rework mit Heißluft</td></tr>
 </tbody>
 </table></div>
-<div class="warn"><b>Achtung Zoll vs. Millimeter:</b> Es gibt auch eine <b>metrische</b> Benennung (0603 imperial = „1608" metrisch). Verwirrend: „0603 metrisch" wäre in Zoll ein 0201! Im Hobby und in westlichen Shops ist fast immer die <b>Zoll-Angabe</b> gemeint — im Zweifel die Maße in mm vergleichen.</div>
+<div class="warn"><b>Achtung Zoll vs. Millimeter:</b> Es gibt auch eine <b>metrische</b> Benennung (0603 imperial = „1608" metrisch). Verwirrend: „0603 metrisch" wäre in Zoll ein 0201! Im Hobby und in westlichen Shops ist fast immer die <b>Zoll-Angabe</b> gemeint: im Zweifel die Maße in mm vergleichen.</div>
 
 <h3>Widerstand oder Kondensator? So unterscheidest du sie</h3>
 <div class="gb">
 <div class="gb-col good"><h4>Widerstand (R)</h4><ul>
-<li><b>Beschriftet</b> — trägt fast immer einen Zahlencode</li>
+<li><b>Beschriftet</b>: trägt fast immer einen Zahlencode</li>
 <li>Körper meist <b>schwarz</b> mit heller Schrift, Enden silbrig</li>
-<li>Ungepolt — Richtung egal</li>
+<li>Ungepolt: Richtung egal</li>
 </ul></div>
 <div class="gb-col bad"><h4>Keramik-Kondensator (MLCC)</h4><ul>
-<li><b>Unbeschriftet</b> — praktisch nie ein Aufdruck</li>
+<li><b>Unbeschriftet</b>: praktisch nie ein Aufdruck</li>
 <li>Körperfarbe <b>beige / hellbraun / grau</b></li>
 <li>Ungepolt; Wert nur aus Rolle/Doku oder per Messung (LCR-P1)</li>
 </ul></div>
@@ -101,13 +134,13 @@
 <tr><td><b>000 / 0</b></td><td>Null-Ohm-Brücke</td><td>0 Ω (nur eine Drahtbrücke)</td></tr>
 </tbody>
 </table></div>
-<div class="note">Selten: der <b>EIA-96-Code</b> (zwei Ziffern + ein Buchstabe, z. B. „01C") auf sehr kleinen Präzisionswiderständen — dann brauchst du eine Umrechnungstabelle oder misst einfach nach.</div>
+<div class="note">Selten: der <b>EIA-96-Code</b> (zwei Ziffern + ein Buchstabe, z. B. „01C") auf sehr kleinen Präzisionswiderständen: dann brauchst du eine Umrechnungstabelle oder misst einfach nach.</div>
 
 <h3>Kondensator-Wert ermitteln</h3>
 <p>Kondensatoren sind kniffliger als Widerstände, weil viele keinen Wert aufgedruckt haben. So kommst du dran:</p>
 <div class="card"><ul>
-<li><b>SMD-Keramik (MLCC) — unbeschriftet:</b> kein Aufdruck. Wert nur durch <b>Messen</b> (Bauteiltester/LCR-Meter wie der FNIRSI LCR-P1 oder Multimeter mit Kapazitäts-Bereich „Cx") oder aus <b>Schaltplan / Stückliste (BOM) / Rollenbeschriftung</b>.</li>
-<li><b>Bedrahteter Keramik-C — Code auf dem Körper</b> (in Pikofarad!): kleiner Wert direkt („18" = 18 pF), sonst 3-stellig wie beim Widerstand, aber das Ergebnis ist pF.</li>
+<li><b>SMD-Keramik (MLCC), unbeschriftet:</b> kein Aufdruck. Wert nur durch <b>Messen</b> (Bauteiltester/LCR-Meter wie der FNIRSI LCR-P1 oder Multimeter mit Kapazitäts-Bereich „Cx") oder aus <b>Schaltplan / Stückliste (BOM) / Rollenbeschriftung</b>.</li>
+<li><b>Bedrahteter Keramik-C, Code auf dem Körper</b> (in Pikofarad!): kleiner Wert direkt („18" = 18 pF), sonst 3-stellig wie beim Widerstand, aber das Ergebnis ist pF.</li>
 <li><b>Folien-C:</b> Wert meist im Klartext aufgedruckt (z. B. „100n", „0.1µF").</li>
 <li><b>Elko / Tantal:</b> Wert <b>und Spannung</b> stehen drauf, gepolt (z. B. „470µF 25V").</li>
 </ul></div>
@@ -127,7 +160,7 @@
 
 <h3>Gepolte SMD-Bauteile erkennen</h3>
 <div class="card"><ul>
-<li><b>Tantal-Kondensator:</b> hat einen aufgedruckten <b>Balken = Pluspol (+)</b>. <span class="b b-warn">Achtung</span> Ausnahme! Bei fast allem anderen markiert ein Strich den Minus/die Kathode — beim Tantal ist es Plus.</li>
+<li><b>Tantal-Kondensator:</b> hat einen aufgedruckten <b>Balken = Pluspol (+)</b>. <span class="b b-warn">Achtung</span> Ausnahme! Bei fast allem anderen markiert ein Strich den Minus/die Kathode, beim Tantal ist es Plus.</li>
 <li><b>SMD-Alu-Elko (rund, Metalltopf):</b> die abgeschrägte/dunkle Seite = <b>Minus</b>.</li>
 <li><b>Diode / LED:</b> Strich oder farbige Markierung = <b>Kathode (Minus)</b>.</li>
 </ul></div>

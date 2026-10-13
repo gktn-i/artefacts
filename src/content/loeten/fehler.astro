@@ -1,30 +1,46 @@
 <div class="kurz"><b>Erst sehen, dann messen:</b> Kalte Stelle = matt/rissig, Brücke = Lot zwischen Pins, gerissene BGA-Kugel = Fehler kommt und geht mit Wärme/Druck. Durchgangspiepser schließt einen Riss nicht aus.</div>
 <h2>Typische Fehler und Lösungen</h2>
 <p>Diagnose immer über <b>Form und Benetzung</b>, nicht über den Glanz: Bleifreies Lot ist von Natur aus matter als bleihaltiges.</p>
-<div class="tbl-wrap">
-<table id="errTbl"><thead></thead><tbody></tbody></table>
-</div>
+<div class="tbl-wrap"><table id="errTbl" data-sort style="min-width:720px">
+<thead><tr><th>Problem</th><th>Symptom</th><th>Lösung</th></tr></thead>
+<tbody>
+<tr><td><b>Kalte Lötstelle</b></td><td>Kugelig, körnig-rissig, schlecht benetzt. Lot sitzt auf, statt zu fließen</td><td>Frisches Flussmittel dazu, beide Teile richtig erwärmen, neu aufschmelzen</td></tr>
+<tr><td><b>Lötbrücke</b></td><td>Zwei Pins/Pads ungewollt verbunden</td><td>Flussmittel auftragen, Überschuss mit Entlötlitze abziehen oder mit sauberer Spitze wegziehen</td></tr>
+<tr><td><b>Spitze benetzt nicht</b></td><td>Lot perlt ab, keine Wärmeübertragung</td><td>Spitze oxidiert: Tip Tinner, neu verzinnen, nie trocken heiß stehen lassen</td></tr>
+<tr><td><b>Tombstoning (Grabstein)</b></td><td>Chip stellt sich beim Reflow senkrecht auf</td><td>Pads gleichmäßig erwärmen, Pastenmenge und Pad-Design prüfen</td></tr>
+<tr><td><b>Lifted Pad</b></td><td>Kupferpad reißt von der Platine ab</td><td>Weniger Hitze und Zeit, nicht hebeln, nie zu lange auf einer Stelle bleiben</td></tr>
+<tr><td><b>Kein Durchgang</b></td><td>Verbindung trotz Lötstelle tot</td><td>Kalte Stelle oder Haarriss: mit Flussmittel nachlöten, mit Multimeter prüfen</td></tr>
+<tr><td><b>Bauteil überhitzt</b></td><td>Verfärbung, IC funktioniert nicht mehr</td><td>Niedrigere Temperatur, kürzer arbeiten, empfindliche Teile zuletzt löten</td></tr>
+<tr><td><b>Viel Rauch, Spritzer</b></td><td>Flussmittel verbrennt sofort</td><td>Temperatur zu hoch oder zu lange drauf: niedriger ansetzen, größere Spitze statt mehr Grad</td></tr>
+<tr><td><b>Lotperlen um Bauteile</b></td><td>Kleine Kugeln neben den Pads nach Reflow oder Heißluft</td><td>Paste zu schnell erhitzt oder feucht: langsamer vorheizen, Paste verschlossen auf Raumtemperatur bringen, Kugeln abnehmen</td></tr>
+<tr><td><b>Lötstopplack braun, Blasen</b></td><td>Verfärbung rund um die Stelle</td><td>Punktuell zu heiß oder zu lange: kreisen, Abstand halten, vorwärmen statt mehr Grad</td></tr>
+<tr><td><b>Gerissene BGA-Kugel</b></td><td>Fehler kommt und geht, ändert sich mit Wärme, Druck oder Lage</td><td>Vergleichsmessung im Diodenmodus, Wärme-/Drucktest, dann Chip ausbauen und reballen</td></tr>
+<tr><td><b>Litze saugt nicht</b></td><td>Lot bleibt liegen, Litze wird nur heiß</td><td>Litze zu lang (zieht Wärme ab), Flussmittel verbraucht oder Spitze zu klein: kurzes Stück, Flux dazu, breitere Spitze</td></tr>
+<tr><td><b>Flux klebt und lässt sich nicht abwischen</b></td><td>Zähe, harzige Kruste zwischen Bauteilen</td><td>Heißluft 150–160 °C, 30–40 % Luft, 2–3 cm: wird wieder flüssig, sofort mit IPA und fusselfreiem Tuch abnehmen</td></tr>
+<tr><td><b>Litze hinter der Lötstelle steif und bricht</b></td><td>Lot ist unter die Isolierung gekrochen</td><td>Kürzer verzinnen, weniger Lot, Zugentlastung mit Schrumpfschlauch (<a class="goto" href="#kabel">Kabel &amp; Stecker</a>)</td></tr>
+</tbody>
+</table></div>
 
 <h2>Gerissene BGA-Kugel finden</h2>
-<p>Unter einem BGA-Chip kommst du mit dem Auge nicht hin und mit der Messspitze auch nicht. Trotzdem lässt sich ein gerissener Ball mit Bordmitteln ziemlich weit eingrenzen — man muss nur wissen, wonach man sucht. Der Ausbau- und Reparaturweg steht im Tab <a class="goto" href="#reballing">Reballing</a>.</p>
+<p>Unter einem BGA-Chip kommst du mit dem Auge nicht hin und mit der Messspitze auch nicht. Trotzdem lässt sich ein gerissener Ball mit Bordmitteln ziemlich weit eingrenzen: man muss nur wissen, wonach man sucht. Der Ausbau- und Reparaturweg steht im Tab <a class="goto" href="#reballing">Reballing</a>.</p>
 
 <h3>Wie sich ein Riss überhaupt anfühlt</h3>
-<p>Eine Lötkugel reißt fast nie sauber durch. Sie bekommt einen <b>Haarriss</b> — meist an der Grenzfläche zum Pad, wo die mechanische Spannung am größten ist. Die Bruchflächen berühren sich noch, mal mehr, mal weniger. Daraus folgt das typische Fehlerbild:</p>
+<p>Eine Lötkugel reißt fast nie sauber durch. Sie bekommt einen <b>Haarriss</b>, meist an der Grenzfläche zum Pad, wo die mechanische Spannung am größten ist. Die Bruchflächen berühren sich noch, mal mehr, mal weniger. Daraus folgt das typische Fehlerbild:</p>
 <div class="grid">
-<div class="card"><div class="ct">Sporadisch statt tot</div><div class="cd">Das Gerät läuft, bis es warm wird, oder erst wenn es warm ist. Kalt und warm dehnen sich Board und Chip unterschiedlich — der Riss öffnet und schließt sich.</div></div>
+<div class="card"><div class="ct">Sporadisch statt tot</div><div class="cd">Das Gerät läuft, bis es warm wird, oder erst wenn es warm ist. Kalt und warm dehnen sich Board und Chip unterschiedlich: der Riss öffnet und schließt sich.</div></div>
 <div class="card"><div class="ct">Lageabhängig</div><div class="cd">Fehler kommt beim Aufstellen, Zuklappen, Andrücken oder nach einem Stoß. Board-Biegung öffnet den Riss.</div></div>
 <div class="card"><div class="ct">Nach Sturz oder Druck</div><div class="cd">Klassiker bei Handys und Tablets: kein Wasser, keine Korrosion, plötzlich kein Display/kein WLAN/kein Speicher.</div></div>
-<div class="card"><div class="ct">„Nach dem Föhnen ging's wieder&#8220;</div><div class="cd">Der stärkste Hinweis überhaupt. Wärme dehnt das Lot, der Riss schließt sich kurzzeitig — und danach kommt er zurück.</div></div>
+<div class="card"><div class="ct">„Nach dem Föhnen ging's wieder&#8220;</div><div class="cd">Der stärkste Hinweis überhaupt. Wärme dehnt das Lot, der Riss schließt sich kurzzeitig. Danach kommt er zurück.</div></div>
 <div class="card"><div class="ct">Einzelne Funktion weg</div><div class="cd">Nicht das ganze Gerät, sondern genau ein Block: eine Speicherbank, ein Interface, ein Bus. Weil eben nur ein paar Kugeln betroffen sind.</div></div>
-<div class="card"><div class="ct">Wärmezyklen-Historie</div><div class="cd">Geräte, die viel heiß werden und wieder abkühlen (Konsolen, Gaming-Laptops), reißen bevorzugt — besonders mit dem spröderen bleifreien Lot.</div></div>
+<div class="card"><div class="ct">Wärmezyklen-Historie</div><div class="cd">Geräte, die viel heiß werden und wieder abkühlen (Konsolen, Gaming-Laptops), reißen bevorzugt, besonders mit dem spröderen bleifreien Lot.</div></div>
 </div>
 
 <h3>Messtechnisch eingrenzen</h3>
 <div class="steps">
 <div class="step"><b>Immer stromlos anfangen.</b> Akku ab, Netzteil weg, Restspannungen entladen lassen. Alles Weitere zuerst passiv messen.</div>
-<div class="step"><b>Diodenmodus gegen Masse.</b> Schwarze Spitze an Masse, rote Spitze reihum an die erreichbaren Punkte des betroffenen Signals (Testpunkte, Vias, Bauteilanschlüsse, Steckerpins). Notieren, was jeder Punkt zeigt. Ein <b>gerissener Ball ist ein offener Kontakt</b> — er zeigt „OL&#8220; oder einen viel höheren Wert, wo Nachbarsignale einen normalen Wert liefern.</div>
-<div class="step"><b>Gegen eine Referenz vergleichen.</b> Das ist der eigentliche Trick. Absolute Werte sagen wenig — der Vergleich sagt alles. Referenzen: ein zweites, funktionierendes Gerät desselben Modells, gleichartige Signale auf demselben Board (z. B. die anderen Datenleitungen desselben Busses) oder eine Boardview/Schematic mit Sollwerten.</div>
-<div class="step"><b>Durchgang bis unter den Chip verfolgen.</b> Miss vom Zielbauteil (Stecker, RAM, Flash) zurück Richtung Chip. Kommst du bis zum letzten erreichbaren Via und dort ist das Signal noch da, aber die Funktion fehlt — dann endet die Spur genau an der Kugel.</div>
+<div class="step"><b>Diodenmodus gegen Masse.</b> Schwarze Spitze an Masse, rote Spitze reihum an die erreichbaren Punkte des betroffenen Signals (Testpunkte, Vias, Bauteilanschlüsse, Steckerpins). Notieren, was jeder Punkt zeigt. Ein <b>gerissener Ball ist ein offener Kontakt</b>: er zeigt „OL&#8220; oder einen viel höheren Wert, wo Nachbarsignale einen normalen Wert liefern.</div>
+<div class="step"><b>Gegen eine Referenz vergleichen.</b> Das ist der eigentliche Trick. Absolute Werte sagen wenig: der Vergleich sagt alles. Referenzen: ein zweites, funktionierendes Gerät desselben Modells, gleichartige Signale auf demselben Board (z. B. die anderen Datenleitungen desselben Busses) oder eine Boardview/Schematic mit Sollwerten.</div>
+<div class="step"><b>Durchgang bis unter den Chip verfolgen.</b> Miss vom Zielbauteil (Stecker, RAM, Flash) zurück Richtung Chip. Kommst du bis zum letzten erreichbaren Via und dort ist das Signal noch da, aber die Funktion fehlt: dann endet die Spur genau an der Kugel.</div>
 <div class="step"><b>Versorgungsschienen prüfen.</b> Jede Rail gegen Masse im Widerstands-/Diodenmodus. Ein <b>Kurzschluss</b> ist selten ein gerissener Ball, sondern eher ein defekter Chip oder eine Lotbrücke. Eine <b>offene</b> Rail unter dem Chip dagegen passt zum Rissbild.</div>
 <div class="step"><b>Unter Strom mit Strombegrenzung.</b> Labornetzteil mit begrenztem Strom statt Akku. Stromaufnahme beobachten: Bleibt sie bei 0 mA, kommt der Chip gar nicht erst an. Zieht sie normal an und bricht dann weg, spricht das eher für ein thermisches Problem.</div>
 </div>
@@ -35,10 +51,10 @@
 <thead><tr><th>Methode</th><th>Vorgehen</th><th>Was es bedeutet</th></tr></thead>
 <tbody>
 <tr><td><b>Wärmetest</b></td><td>Heißluft auf niedriger Temperatur (~100–130 °C, weit unter Schmelzpunkt) gezielt auf den Chip. Gerät dabei laufen lassen bzw. Signal messen</td><td>Fehler <b>verschwindet</b> bei Wärme → sehr starker Hinweis auf einen Riss. Fehler <b>kommt</b> bei Wärme → auch möglich (Riss geht durch Ausdehnung auf)</td></tr>
-<tr><td><b>Kältetest</b></td><td>Kältespray punktuell auf einzelne Chips</td><td>Grenzt ein, <b>welcher</b> Chip reagiert. Sparsam einsetzen — Kondenswasser</td></tr>
+<tr><td><b>Kältetest</b></td><td>Kältespray punktuell auf einzelne Chips</td><td>Grenzt ein, <b>welcher</b> Chip reagiert. Sparsam einsetzen (Kondenswasser)</td></tr>
 <tr><td><b>Drucktest</b></td><td>Mit einem Kunststoffwerkzeug <b>ganz leicht</b> mittig auf den Chip drücken, während gemessen wird oder das Gerät läuft</td><td>Fehler ändert sich beim Drücken → mechanischer Kontaktfehler. <b>Sehr vorsichtig</b>: zu viel Druck macht aus einem Riss einen Totalschaden</td></tr>
-<tr><td><b>Biegetest</b></td><td>Board minimal verwinden (nur bei ausgebautem Board, sehr behutsam)</td><td>Reproduzierbarer Aussetzer = Kontaktproblem. Nur als letztes Mittel — Biegen erzeugt neue Risse</td></tr>
-<tr><td><b>Röntgen</b></td><td>Röntgenaufnahme des Kugelfelds</td><td>Der einzige echte Beweis ohne Ausbau. Zeigt Lunker, Brücken und fehlende Kugeln — feine Haarrisse aber nur bedingt</td></tr>
+<tr><td><b>Biegetest</b></td><td>Board minimal verwinden (nur bei ausgebautem Board, sehr behutsam)</td><td>Reproduzierbarer Aussetzer = Kontaktproblem. Nur als letztes Mittel: Biegen erzeugt neue Risse</td></tr>
+<tr><td><b>Röntgen</b></td><td>Röntgenaufnahme des Kugelfelds</td><td>Der einzige echte Beweis ohne Ausbau. Zeigt Lunker, Brücken und fehlende Kugeln: feine Haarrisse aber nur bedingt</td></tr>
 <tr><td><b>Ausbauen und ansehen</b></td><td>Chip abnehmen, Kugelfeld unterm Mikroskop begutachten</td><td>Die endgültige Antwort. Gerissene Kugeln sehen matt, zerklüftet oder abgeschert aus; eine offene zeigt einen sauberen, blanken Padabdruck ohne Lot</td></tr>
 </tbody>
 </table></div>
@@ -79,18 +95,18 @@
 </div>
 </div>
 
-<div class="warn"><b>Der Denkfehler, der die meiste Zeit kostet:</b> „Der Durchgang piept, also ist die Kugel in Ordnung.&#8220; Ein Haarriss, dessen Flächen sich noch berühren, misst im kalten Zustand oft völlig normal — und öffnet sich erst unter Betriebstemperatur oder Last. Ein <b>bestandener</b> Durchgangstest schließt einen Riss nicht aus. Umgekehrt gilt: Ein <b>fehlender</b> Durchgang an einer Stelle, die laut Vergleichsboard Durchgang haben muss, ist ein harter Befund.</div>
-<div class="tip"><b>Bevor du den Chip abnimmst, schließe das Billigere aus:</b> Sind es wirklich die Kugeln — oder ein defekter PMIC, ein gerissenes Passivbauteil daneben, ein korrodierter Stecker, ein durchgescheuertes Flexkabel? Ein BGA-Ausbau ist immer die teuerste Hypothese. Prüfe zuerst Versorgungsspannungen, Takt und Reset am Chip; fehlt schon eine davon, liegt die Ursache nicht unter dem Chip.</div>
-<div class="note"><b>Wenn du den Chip ausbaust, reballe ihn</b> — auch wenn du nur „nachsehen&#8220; wolltest. Die alten Kugelreste sind nach dem Abziehen unregelmäßig hoch und ergeben nie wieder eine zuverlässige Verbindung. Ablauf: Tab <a class="goto" href="#reballing">Reballing</a>.</div>
+<div class="warn"><b>Der Denkfehler, der die meiste Zeit kostet:</b> „Der Durchgang piept, also ist die Kugel in Ordnung.&#8220; Ein Haarriss, dessen Flächen sich noch berühren, misst im kalten Zustand oft völlig normal, und öffnet sich erst unter Betriebstemperatur oder Last. Ein <b>bestandener</b> Durchgangstest schließt einen Riss nicht aus. Umgekehrt gilt: Ein <b>fehlender</b> Durchgang an einer Stelle, die laut Vergleichsboard Durchgang haben muss, ist ein harter Befund.</div>
+<div class="tip"><b>Bevor du den Chip abnimmst, schließe das Billigere aus:</b> Sind es wirklich die Kugeln, oder ein defekter PMIC, ein gerissenes Passivbauteil daneben, ein korrodierter Stecker, ein durchgescheuertes Flexkabel? Ein BGA-Ausbau ist immer die teuerste Hypothese. Prüfe zuerst Versorgungsspannungen, Takt und Reset am Chip; fehlt schon eine davon, liegt die Ursache nicht unter dem Chip.</div>
+<div class="note"><b>Wenn du den Chip ausbaust, reballe ihn</b>, auch wenn du nur „nachsehen&#8220; wolltest. Die alten Kugelreste sind nach dem Abziehen unregelmäßig hoch und ergeben nie wieder eine zuverlässige Verbindung. Ablauf: Tab <a class="goto" href="#reballing">Reballing</a>.</div>
 
 <h2>Verkaufsfertig: Normen &amp; Standards</h2>
-<p>Fürs Hobby und Reparaturen gilt nichts davon. Sobald du etwas Gelötetes aber <b>verkaufst</b>, greifen Regeln. Die wichtigsten zur Orientierung — für echte Zertifizierung immer den Normtext bzw. eine Prüfstelle heranziehen (das hier ist keine Rechtsberatung).</p>
+<p>Fürs Hobby und Reparaturen gilt nichts davon. Sobald du etwas Gelötetes aber <b>verkaufst</b>, greifen Regeln. Die wichtigsten zur Orientierung: für echte Zertifizierung immer den Normtext bzw. eine Prüfstelle heranziehen (das hier ist keine Rechtsberatung).</p>
 
 <p><b>Recht &amp; Pflicht (Verkauf in der EU)</b></p>
 <div class="tbl-wrap"><table style="min-width:660px">
 <thead><tr><th>Norm</th><th>Worum es geht</th><th>Fürs Verkaufen</th></tr></thead>
 <tbody>
-<tr><td><b>RoHS</b> (2011/65/EU, RoHS&nbsp;3: 2015/863)</td><td>verbietet u. a. Blei über 0,1 % in Elektronik</td><td><b>bleifrei löten (SAC305)</b> — bleihaltig nur für Reparatur, Prototyp oder gelistete Ausnahmen</td></tr>
+<tr><td><b>RoHS</b> (2011/65/EU, RoHS&nbsp;3: 2015/863)</td><td>verbietet u. a. Blei über 0,1 % in Elektronik</td><td><b>bleifrei löten (SAC305)</b>: bleihaltig nur für Reparatur, Prototyp oder gelistete Ausnahmen</td></tr>
 <tr><td><b>REACH</b> (EG 1907/2006)</td><td>Beschränkung von Chemikalien (Blei ist SVHC, dazu Flussmittel-Inhaltsstoffe)</td><td>Sicherheitsdatenblätter beachten, gelistete Stoffe meiden</td></tr>
 <tr><td><b>WEEE</b> (2012/19/EU)</td><td>Rücknahme &amp; Recycling von Elektroschrott</td><td>Registrierung + Symbol „durchgestrichene Mülltonne" aufs Produkt</td></tr>
 <tr><td><b>CE-Kennzeichnung</b></td><td>Selbsterklärung, dass alle zutreffenden EU-Richtlinien erfüllt sind (EMV, Niederspannung, RoHS …)</td><td>Konformitätserklärung + technische Doku erstellen, dann CE-Zeichen anbringen</td></tr>
@@ -102,19 +118,19 @@
 <thead><tr><th>Standard</th><th>Worum</th><th>Einordnung</th></tr></thead>
 <tbody>
 <tr><td><b>IPC-Klassen 1 / 2 / 3</b></td><td>Zuverlässigkeitsklassen für Baugruppen</td><td>1 = Consumer · <b>2 = Gebrauchsgüter/Industrie (üblicher Verkaufs-Standard)</b> · 3 = lebenswichtig (Medizin, Luftfahrt, Militär)</td></tr>
-<tr><td><b>IPC-A-610</b></td><td>Abnahmekriterien: wie eine akzeptable Lötstelle/Baugruppe aussehen muss</td><td>die „ist es gut genug?"-Referenz — Bilder für gut/nacharbeiten/Ausschuss je Klasse</td></tr>
+<tr><td><b>IPC-A-610</b></td><td>Abnahmekriterien: wie eine akzeptable Lötstelle/Baugruppe aussehen muss</td><td>die „ist es gut genug?"-Referenz: Bilder für gut/nacharbeiten/Ausschuss je Klasse</td></tr>
 <tr><td><b>J-STD-001</b></td><td>Anforderungen an den Löt<b>prozess</b> (Material, Ablauf, Qualifikation)</td><td>was beim Fertigen einzuhalten ist (Schwester zur A-610)</td></tr>
 <tr><td><b>J-STD-004</b></td><td>Klassifizierung von Flussmitteln (Aktivität/Halogenide, z. B. ROL0)</td><td>sagt, ob ein Flux rückstandsarm/zulässig für dein Produkt ist</td></tr>
 </tbody>
 </table></div>
 
-<div class="tip"><b>Praxis-Fazit für ein verkauftes Standardprodukt (Class&nbsp;2):</b> bleifrei löten (<b>SAC305</b>), No-Clean-Flux nehmen oder Rückstände sauber reinigen, Lötstellen nach <b>IPC-A-610 Class&nbsp;2</b> beurteilen — dazu die Pflichten CE + RoHS + WEEE erledigen.</div>
-<div class="warn"><b>Bleihaltig ≠ verkaufstauglich:</b> Sn63Pb37 ist top zum Üben und Reparieren, für <b>neu verkaufte</b> Elektronik in der EU aber durch RoHS praktisch verboten. Ausnahmen (sehr hohe Schmelzpunkte, teils Medizin/Militär) gibt es — die musst du gezielt prüfen.</div>
+<div class="tip"><b>Praxis-Fazit für ein verkauftes Standardprodukt (Class&nbsp;2):</b> bleifrei löten (<b>SAC305</b>), No-Clean-Flux nehmen oder Rückstände sauber reinigen, Lötstellen nach <b>IPC-A-610 Class&nbsp;2</b> beurteilen, dazu die Pflichten CE + RoHS + WEEE erledigen.</div>
+<div class="warn"><b>Bleihaltig ≠ verkaufstauglich:</b> Sn63Pb37 ist top zum Üben und Reparieren, für <b>neu verkaufte</b> Elektronik in der EU aber durch RoHS praktisch verboten. Ausnahmen (sehr hohe Schmelzpunkte, teils Medizin/Militär) gibt es: die musst du gezielt prüfen.</div>
 
 <h2>Goldene Regeln</h2>
 <div class="grid">
 <div class="card"><div class="ct">1. Beide Teile erwärmen</div><div class="cd">Pad und Bauteil zusammen. Lot fließt nur auf Flächen, die selbst heiß genug sind.</div></div>
-<div class="card"><div class="ct">2. Lot ans Werkstück</div><div class="cd">Nicht an die Spitze. Lot benetzt nur Metall, das heiß genug ist und dessen Oxid das Flussmittel gerade entfernt hat. Schmilzt es an der Spitze, verbrennt das Flussmittel dort — und das Lot klebt ohne echte Verbindung auf.</div></div>
+<div class="card"><div class="ct">2. Lot ans Werkstück</div><div class="cd">Nicht an die Spitze. Lot benetzt nur Metall, das heiß genug ist und dessen Oxid das Flussmittel gerade entfernt hat. Schmilzt es an der Spitze, verbrennt das Flussmittel dort, und das Lot klebt ohne echte Verbindung auf.</div></div>
 <div class="card"><div class="ct">3. Saubere, verzinnte Spitze</div><div class="cd">Regelmäßig abstreifen und frisch verzinnen. Oxid blockiert die Wärmeübertragung.</div></div>
 <div class="card"><div class="ct">4. Flussmittel, Flussmittel</div><div class="cd">Bei SMD löst zusätzliches Flussmittel die meisten Probleme, bevor sie entstehen.</div></div>
 <div class="card"><div class="ct">5. Richtige Temperatur</div><div class="cd">So niedrig, wie es sauber fließt. Zu heiß zerstört Pads und Bauteile.</div></div>
