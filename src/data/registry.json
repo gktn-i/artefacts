@@ -2505,12 +2505,14 @@
        "icon": "🥘",
        "kind": "Referenz",
        "updated": "2026-10-19",
-       "desc": "Garmethoden, Pfannenkunde, Pfannen- und Öltemperaturen, IR-Thermometer, Rauchpunkte, Kerntemperaturen, Saucenbasen, Maße und die Faustregeln, die fast immer gelten. Mit Temperaturskalen, Vergleichstabellen und den Zahlen dahinter.",
+       "desc": "Garmethoden, Pfannenkunde, Pfannen- und Öltemperaturen, IR-Thermometer, Vorgehen für Hack, Hähnchen, Wings und Köfte, Rauchpunkte, Kerntemperaturen, Saucenbasen, Maße und die Faustregeln, die fast immer gelten. Mit Temperaturskalen, Vergleichstabellen und den Zahlen dahinter.",
        "tags": [
         "technik",
         "pfannen",
         "ir-thermometer",
         "frittieren",
+        "hackfleisch",
+        "haehnchen",
         "rauchpunkt",
         "saucen",
         "kerntemperatur"
@@ -2531,6 +2533,10 @@
         {
          "h": "temperatur",
          "t": "Temperaturen"
+        },
+        {
+         "h": "vorgehen",
+         "t": "Vorgehen"
         },
         {
          "h": "regeln",
