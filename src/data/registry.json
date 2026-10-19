@@ -2504,11 +2504,13 @@
        "name": "Küchen-Basics",
        "icon": "🥘",
        "kind": "Referenz",
-       "updated": "2026-09-06",
-       "desc": "Garmethoden, Pfannenkunde, Rauchpunkte, Kerntemperaturen, Saucenbasen, Maße und die Faustregeln, die fast immer gelten. Mit Temperaturskalen, Vergleichstabellen und den Zahlen dahinter.",
+       "updated": "2026-10-19",
+       "desc": "Garmethoden, Pfannenkunde, Pfannen- und Öltemperaturen, IR-Thermometer, Rauchpunkte, Kerntemperaturen, Saucenbasen, Maße und die Faustregeln, die fast immer gelten. Mit Temperaturskalen, Vergleichstabellen und den Zahlen dahinter.",
        "tags": [
         "technik",
         "pfannen",
+        "ir-thermometer",
+        "frittieren",
         "rauchpunkt",
         "saucen",
         "kerntemperatur"
