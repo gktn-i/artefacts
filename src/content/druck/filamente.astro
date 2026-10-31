@@ -1,98 +1,195 @@
 ---
 import "./_style.css";
+
+/* Datenquelle der Vergleichstabelle. Kennwerte r = [Festigkeit, Hitze, Flex,
+   Druckbarkeit, Chemie, UV], jeweils 1–10 und relativ zueinander.
+   nz = [Stufe ok|mid|bad, Düsenhinweis]. */
+const CATS = [
+  { id: "standard", l: "Standard" },
+  { id: "engineering", l: "Engineering" },
+  { id: "cf", l: "Carbon (CF)" },
+  { id: "gf", l: "Glasfaser (GF)" },
+  { id: "flexible", l: "Flexibel" },
+  { id: "highperf", l: "Hochleistung" },
+  { id: "specialty", l: "Spezial" },
+  { id: "support", l: "Support" },
+];
+const CAT_SHORT = { standard: "Standard", engineering: "Engineering", cf: "CF", gf: "GF", flexible: "Flexibel", highperf: "Hochleistung", specialty: "Spezial", support: "Support" };
+
+const F = [
+  /* ---------------------------------------------------------------- Standard */
+  { n:"PLA", cat:"standard", k:"prototyp deko figur vase architekturmodell schule gehaeuse indoor biobasiert", duese:[190,230], bett:[20,60], preis:[12,25], r:[4,2,2,10,2,2], nz:["ok","Messing"], t:"Der Einstieg: biobasiert, geruchsarm, kaum Schrumpfung. Ab etwa 55 °C aber weich." },
+  { n:"PLA+ / PLA Pro", cat:"standard", k:"funktionsprototyp spielzeug halterung clip cosplay zaeh", duese:[200,230], bett:[50,60], preis:[16,30], r:[5,3,3,9,2,2], nz:["ok","Messing"], t:"Zäheres PLA mit besserer Schichthaftung. Clips, Spielzeug, Halter im Innenraum." },
+  { n:"PLA Matte", cat:"standard", k:"matt deko figur modell schichtlinien optik", duese:[200,230], bett:[50,60], preis:[16,28], r:[4,2,2,9,2,2], nz:["ok","Messing"], t:"Matte Oberfläche kaschiert Schichtlinien. Etwas spröder als normales PLA." },
+  { n:"PLA Silk", cat:"standard", k:"silk seide glanz metallic vase deko geschenk optik", duese:[200,230], bett:[50,60], preis:[18,30], r:[3,2,2,8,2,2], nz:["ok","Messing"], t:"Seidenglanz durch Additive, dafür schwächere Schichthaftung. Optik statt Last." },
+  { n:"HT-PLA (temperbar)", cat:"standard", k:"tempern annealing hitzefest pla ht hochtemperatur auto", duese:[200,230], bett:[50,60], preis:[25,45], r:[5,5,2,8,2,2], nz:["ok","Messing"], t:"Nach dem Tempern bei 80 bis 110 °C formstabil bis über 100 °C, schrumpft dabei aber 1 bis 3 %." },
+  { n:"PETG", cat:"standard", k:"kueche behaelter outdoor schild funktionsteil visier aquarium werkzeughalter lebensmittel allrounder", duese:[220,250], bett:[70,80], preis:[16,30], r:[6,5,4,8,6,5], nz:["ok","Messing"], t:"Der Allrounder: zäh, chemisch beständig, wenig Verzug. Neigt zu Fäden, Trocknen hilft." },
+  { n:"PCTG", cat:"standard", k:"transparent klar schlagzaeh petg alternative behaelter lebensmittel", duese:[240,270], bett:[70,90], preis:[25,40], r:[6,5,5,8,7,5], nz:["ok","Messing"], t:"Schlagzähere und klarere PETG-Variante, zieht weniger Fäden. Gut für transparente Teile." },
+
+  /* ------------------------------------------------------------- Engineering */
+  { n:"ABS", cat:"engineering", k:"gehaeuse elektronik kfz schnappverbindung jig aceton lego", duese:[220,260], bett:[95,110], preis:[15,28], r:[6,6,4,4,6,3], nz:["ok","Messing"], t:"Schlagfest und acetonglättbar. Ohne Einhausung reißen große Teile an den Ecken auf." },
+  { n:"ASA", cat:"engineering", k:"outdoor garten auto aussenteil wetterstation kamerahalter briefkasten uv witterung", duese:[235,260], bett:[90,110], preis:[20,35], r:[6,6,4,5,6,8], nz:["ok","Messing"], t:"ABS mit UV-Schutz und damit erste Wahl für alles, was dauerhaft draußen bleibt." },
+  { n:"PA6 / Nylon 6", cat:"engineering", k:"zahnrad getriebe scharnier gleitlager buchse werkzeuggriff sport abriebfest nylon", duese:[240,270], bett:[70,90], preis:[30,65], r:[8,7,6,3,7,4], nz:["mid","Gehärtet"], t:"Zäh und abriebfest. Stark hygroskopisch: ungetrocknet schäumt es und wird spröde." },
+  { n:"PA12 / Nylon 12", cat:"engineering", k:"living hinge scharnier snapfit clip rastnase dichtring outdoor nylon ermuedung", duese:[240,270], bett:[70,90], preis:[35,70], r:[7,6,7,4,7,4], nz:["mid","Gehärtet"], t:"Nimmt deutlich weniger Wasser auf als PA6 und ist ermüdungsfester. Filmscharniere, Snap-Fits." },
+  { n:"PP (Polypropylen)", cat:"engineering", k:"behaelter spuelmaschine labor living hinge klappdeckel batteriefach polypropylen", duese:[220,250], bett:[80,100], preis:[28,55], r:[5,5,7,3,8,4], nz:["ok","Messing · PP-Bett"], t:"Zäh und chemikalienfest, schrumpft aber stark und haftet fast nur auf PP-Klebeband." },
+  { n:"POM (Acetal/Delrin)", cat:"engineering", k:"zahnrad ritzel gleitlager buchse foerderband clip getriebe delrin acetal reibung", duese:[200,220], bett:[100,130], preis:[35,65], r:[7,6,5,3,8,3], nz:["ok","Messing"], t:"Geringste Reibung im Feld, hält aber kaum auf dem Bett. Kleber und Brim einplanen." },
+
+  /* ------------------------------------------------------------- Carbon (CF) */
+  { n:"PLA-CF", cat:"cf", k:"optik prototyp modellbau laptop staender kabelmanagement deko carbonlook carbon", duese:[200,230], bett:[50,60], preis:[25,50], r:[6,3,2,7,2,2], nz:["mid","Gehärtet"], t:"Steifer Carbon-Look, aber die Temperaturgrenze von PLA bleibt. Kein Lastträger." },
+  { n:"PETG-CF", cat:"cf", k:"stativ halterung jig drohne teleskop schiene fuehrung formstabil carbon", duese:[230,260], bett:[70,85], preis:[35,65], r:[7,6,3,5,6,5], nz:["mid","Gehärtet"], t:"Der einfache Einstieg in Composites: formstabil, matt, ohne Trockenschrank-Zwang." },
+  { n:"PET-CF", cat:"cf", k:"motorhalter vorrichtung hitzefest maßhaltig carbon polyester enduse", duese:[260,290], bett:[70,90], preis:[50,90], r:[8,8,2,4,7,6], nz:["mid","Gehärtet · Einhausung"], t:"Steif wie Nylon-CF, aber kaum feuchteempfindlich. Formstabil bis etwa 200 °C nach dem Tempern." },
+  { n:"ABS-CF", cat:"cf", k:"gehaeuse halterung drohne rc kfz carbon verzugsarm", duese:[240,270], bett:[95,110], preis:[35,70], r:[7,7,3,4,6,4], nz:["mid","Gehärtet · Einhausung"], t:"Steifer und verzugsärmer als ABS, weil die Fasern das Schrumpfen bremsen." },
+  { n:"ASA-CF", cat:"cf", k:"outdoor auto halterung verkleidung uv carbon matt", duese:[240,270], bett:[90,110], preis:[35,70], r:[7,7,3,4,6,8], nz:["mid","Gehärtet · Einhausung"], t:"Matt, UV-fest und steif: Halterungen und Verkleidungen, die draußen bleiben." },
+  { n:"PA-CF (Nylon-Carbon)", cat:"cf", k:"drohne rahmen roboter struktur cnc vorrichtung rc gimbal leichtbau carbon steif nylon pa6-cf", duese:[250,280], bett:[80,100], preis:[50,170], r:[9,8,3,3,7,5], nz:["mid","Gehärtet"], t:"Sehr steif und leicht, dafür spröder als reines PA und stark abrasiv." },
+  { n:"PA12-CF", cat:"cf", k:"drohne vibration maßhaltig nylon carbon outdoor struktur", duese:[250,290], bett:[80,100], preis:[60,120], r:[8,7,4,4,8,5], nz:["mid","Gehärtet"], t:"Nimmt weniger Wasser auf als PA6-CF, bleibt maßhaltig und ist zäher bei Vibration." },
+  { n:"PAHT-CF", cat:"cf", k:"hochtemperatur nylon carbon motorraum vorrichtung enduse paht", duese:[260,300], bett:[80,100], preis:[60,130], r:[9,9,3,3,8,6], nz:["mid","Gehärtet · Einhausung"], t:"Hochtemperatur-Nylon mit Carbon: HDT um 190 °C bei ähnlicher Druckbarkeit wie PA-CF." },
+  { n:"PP-CF", cat:"cf", k:"chemie behaelter leicht polypropylen carbon steif labor", duese:[220,250], bett:[80,100], preis:[50,90], r:[7,7,3,4,9,5], nz:["mid","Gehärtet · PP-Bett"], t:"Leichtestes Composite, chemikalienfest. Fasern bändigen den Verzug, die Haftung bleibt heikel." },
+  { n:"PC-CF", cat:"cf", k:"enduse industrie formwerkzeug jig motorsport waermequelle carbon steifste", duese:[260,300], bett:[100,115], preis:[60,130], r:[10,9,2,2,7,6], nz:["mid","0,6 mm gehärtet"], t:"Das steifste bezahlbare Filament und zugleich eines der abrasivsten." },
+  { n:"PPA-CF", cat:"cf", k:"motorraum turbolader automotive hochtemperatur aerospace vorrichtung polyphthalamid carbon", duese:[280,320], bett:[100,120], preis:[80,170], r:[9,9,3,2,8,6], nz:["bad","Gehärtet · >300 °C"], t:"Polyphthalamid mit HDT über 200 °C: hält im Motorraum, was PA-CF nicht mehr hält." },
+  { n:"PPS-CF", cat:"cf", k:"chemie ventil pumpe motorraum hochtemperatur carbon polyphenylensulfid", duese:[300,330], bett:[110,150], preis:[250,450], r:[9,10,1,1,10,7], nz:["bad","Spezial-Hotend"], t:"PPS mit Carbon: steifer und maßhaltiger, chemisch praktisch unangreifbar. Sehr spröde." },
+  { n:"PEEK-CF", cat:"cf", k:"aerospace metallersatz implantat leichtbau carbon industrie", duese:[380,420], bett:[120,160], preis:[500,900], r:[10,10,2,1,10,8], nz:["bad","Spezial-Hotend"], t:"Metallersatz im Leichtbau, aber nur auf Industriedruckern mit Bauraum über 120 °C." },
+
+  /* ---------------------------------------------------------- Glasfaser (GF) */
+  { n:"PETG-GF", cat:"gf", k:"halterung gehaeuse jig glasfaser zaeh guenstig", duese:[230,260], bett:[70,85], preis:[30,55], r:[7,6,4,6,6,5], nz:["mid","Gehärtet"], t:"Zäher und günstiger als PETG-CF, weniger steif. Oberfläche glänzt leicht." },
+  { n:"ABS-GF", cat:"gf", k:"gehaeuse gross verzugsarm glasfaser abs industrie", duese:[240,270], bett:[90,110], preis:[30,55], r:[7,7,3,5,6,4], nz:["mid","Gehärtet · Einhausung"], t:"Glasfaser senkt die Schrumpfung deutlich: ABS für große Gehäuse mit weniger Rissen." },
+  { n:"PA-GF (Nylon-Glas)", cat:"gf", k:"motorhalter gehaeuse lehre automotive maschinen abdeckung glasfaser nylon", duese:[250,280], bett:[80,100], preis:[40,90], r:[8,7,4,3,7,5], nz:["mid","Gehärtet"], t:"Günstiger als CF und weniger spröde, bei gleicher Abrasion an der Düse." },
+  { n:"PA6-GF30", cat:"gf", k:"spritzguss ersatzteil motorhalter industrie gehaeuse automotive enduse glasfaser", duese:[260,290], bett:[90,110], preis:[60,130], r:[9,8,3,2,7,5], nz:["mid","0,6 mm gehärtet"], t:"30 % Glasfaser: der Spritzguss-Ersatz für Kleinserien. Trockenschrank und Einhausung." },
+  { n:"PP-GF", cat:"gf", k:"chemie behaelter labor polypropylen glasfaser zaeh", duese:[220,250], bett:[80,100], preis:[40,75], r:[6,7,4,4,9,5], nz:["mid","Gehärtet · PP-Bett"], t:"Glasfaser zähmt den Verzug von PP. Chemikalienfest, haftet aber weiterhin nur auf PP." },
+  { n:"PPA-GF", cat:"gf", k:"motorraum automotive hochtemperatur polyphthalamid glasfaser", duese:[280,320], bett:[100,120], preis:[60,130], r:[8,9,3,3,8,6], nz:["bad","Gehärtet · >300 °C"], t:"Wie PPA-CF hitzefest bis über 200 °C, dabei zäher und günstiger, aber weniger steif." },
+
+  /* ---------------------------------------------------------------- Flexibel */
+  { n:"TPU 95A", cat:"flexible", k:"huelle bumper daempfer dichtung oring sohle griff flexibel shore", duese:[210,230], bett:[30,60], preis:[22,40], r:[5,4,9,5,5,5], nz:["ok","Messing"], t:"Der beherrschbare Flex-Standard. Direktextruder, kurze Retraction, unter 30 mm/s." },
+  { n:"TPU 85A", cat:"flexible", k:"griff schutzkappe wearable armband polster tierspielzeug weich", duese:[210,230], bett:[30,60], preis:[30,55], r:[4,4,10,3,5,5], nz:["ok","Messing"], t:"Deutlich weicher und entsprechend zickig im Vorschub: knickt gern vor dem Antriebsrad." },
+  { n:"TPU 60A", cat:"flexible", k:"dichtlippe silikon griff wearable band verschlusskappe stossabsorber ultraweich", duese:[200,220], bett:[30,50], preis:[35,65], r:[3,3,10,2,4,4], nz:["ok","Direktextruder"], t:"Nahezu silikonweich und der Grenzfall des FDM-Verfahrens: unter 15 mm/s drucken." },
+  { n:"TPE", cat:"flexible", k:"dichtung faltbar dehnbar einlage verbinder gummi elastomer", duese:[200,230], bett:[30,50], preis:[30,55], r:[3,3,10,3,4,4], nz:["ok","Messing"], t:"Gummiartig. Funktioniert nur mit kurzem, rundum gestütztem Filamentweg." },
+  { n:"TPC (Copolyester-Flex)", cat:"flexible", k:"dichtung outdoor manschette schwingungsdaempfer schlauch adapter copolyester", duese:[210,240], bett:[40,60], preis:[35,65], r:[5,5,8,5,6,6], nz:["ok","Messing"], t:"Flexibel und dabei chemie- und UV-fester als TPU. Für Dichtungen im Freien." },
+  { n:"PEBA", cat:"flexible", k:"sohle sport daempfer rueckfedernd leicht schutz pebax", duese:[210,240], bett:[40,60], preis:[50,90], r:[5,4,9,4,6,5], nz:["ok","Messing"], t:"Leichter und rückfedernder als TPU. Sohlen, Dämpfer, Sportschutz." },
+
+  /* ------------------------------------------------------------ Hochleistung */
+  { n:"PC (Polycarbonat)", cat:"highperf", k:"transparent abdeckung visier helm scheinwerfer isolator hochtemperatur schlagfest", duese:[260,310], bett:[100,120], preis:[35,65], r:[9,9,4,2,6,6], nz:["mid","Gehärtet · Einhausung"], t:"Sehr schlagfest und hitzefest, klar druckbar. Trocknen ist Pflicht, sonst wird es milchig." },
+  { n:"PC-ABS", cat:"highperf", k:"automotive verkleidung elektronikgehaeuse schalttafel industrie blend", duese:[250,280], bett:[100,110], preis:[40,75], r:[8,8,4,3,6,4], nz:["mid","Gehärtet · Einhausung"], t:"Zähigkeit von PC bei der Druckbarkeit von ABS: der praktikable Kompromiss." },
+  { n:"PEI / ULTEM", cat:"highperf", k:"luftfahrt kabine autoklav sterilisierbar isolator raumfahrt testadapter flammschutz ultem", duese:[340,380], bett:[120,160], preis:[150,350], r:[9,10,3,1,9,7], nz:["bad","Spezial-Hotend"], t:"Flammschutz und Dauerwärme weit über 170 °C. Nur auf Hochtemperaturdruckern." },
+  { n:"PEEK", cat:"highperf", k:"implantat aerospace ventil pumpe lagerbuchse oel gas wafer medizin", duese:[370,410], bett:[120,160], preis:[350,700], r:[10,10,3,1,10,8], nz:["bad","Spezial-Hotend"], t:"Das Referenzpolymer für Medizin und Aerospace. Braucht Bauraum über 120 °C." },
+  { n:"PEKK", cat:"highperf", k:"aerospace bracket satellit pruefvorrichtung militaer", duese:[340,360], bett:[120,150], preis:[400,550], r:[9,10,3,1,10,8], nz:["bad","Spezial-Hotend"], t:"Wie PEEK, kristallisiert aber langsamer und verzieht sich dadurch weniger." },
+  { n:"PPS", cat:"highperf", k:"chemie ventil filter isolator abgas pharma polyphenylensulfid", duese:[290,330], bett:[120,150], preis:[200,400], r:[8,9,2,1,10,7], nz:["bad","Spezial-Hotend"], t:"Chemisch praktisch unangreifbar und schwer entflammbar, dafür spröde." },
+
+  /* ----------------------------------------------------------------- Spezial */
+  { n:"PVDF", cat:"specialty", k:"chemie rohr piezo halbleiter ventil ultraschall fluorpolymer", duese:[230,260], bett:[80,100], preis:[150,300], r:[7,7,4,2,10,8], nz:["bad","Spezial · Absaugung"], t:"Fluorpolymer, chemisch inert und piezoelektrisch. Setzt überhitzt Flusssäure frei." },
+  { n:"ESD-PETG / ESD-ABS", cat:"specialty", k:"esd tray leiterplatte chip reinraum antistatisch elektronik ableitend", duese:[230,260], bett:[70,100], preis:[40,80], r:[6,5,3,5,6,4], nz:["mid","Gehärtet"], t:"Ableitend mit 10⁶ bis 10⁹ Ω Oberflächenwiderstand. Carbongefüllt und damit abrasiv." },
+  { n:"Leitfähiges PLA / TPU", cat:"specialty", k:"sensor touch schaltflaeche emi abschirmung elektrode leiterbahn leitfaehig", duese:[200,230], bett:[40,60], preis:[30,60], r:[3,2,5,5,2,2], nz:["mid","0,6 mm gehärtet"], t:"Reicht für Touch, Sensorik und Abschirmung, nicht für Leistungsströme." },
+  { n:"LW-PLA (aufschäumend)", cat:"specialty", k:"leicht rc flugzeug modellflug schaum lightweight cosplay", duese:[200,250], bett:[50,60], preis:[40,60], r:[2,2,2,4,2,2], nz:["ok","Messing"], t:"Schäumt in der Düse auf und wird bis zu 65 % leichter. Die Temperatur steuert die Dichte." },
+  { n:"Glow-PLA (nachleuchtend)", cat:"specialty", k:"leuchtend glow in the dark nacht deko spielzeug markierung", duese:[200,220], bett:[50,60], preis:[20,35], r:[3,2,2,7,2,2], nz:["mid","Gehärtet"], t:"Das Leuchtpigment wirkt wie Sandpapier: Messing ist nach wenigen hundert Gramm hin." },
+  { n:"Metall-Fill", cat:"specialty", k:"schmuck bueste replika requisite griff pokal steampunk metall polierbar", duese:[195,220], bett:[50,60], preis:[30,55], r:[4,3,2,5,3,3], nz:["mid","0,6 mm gehärtet"], t:"PLA mit Metallpulver: schwer, polierbar, optisch überzeugend, mechanisch schwach." },
+  { n:"Holz-Fill", cat:"specialty", k:"holz deko vase bilderrahmen modellbau schild lampenschirm holzoptik", duese:[180,220], bett:[50,60], preis:[25,45], r:[3,2,2,6,1,2], nz:["ok","0,6 mm Messing"], t:"Schleif- und beizbar, die Düsentemperatur steuert den Farbton. Verstopft gern." },
+  { n:"Keramik-Fill", cat:"specialty", k:"keramik sinter stein architekturmodell kunst gruenkoerper", duese:[190,220], bett:[50,60], preis:[35,60], r:[3,3,1,4,4,5], nz:["mid","0,6 mm gehärtet"], t:"Steinoptik. Als Grünkörper mit passendem Binder sinterbar." },
+
+  /* ----------------------------------------------------------------- Support */
+  { n:"HIPS", cat:"support", k:"support abs ueberhang loeslich limonen stuetzmaterial", duese:[220,240], bett:[90,110], preis:[16,28], r:[4,5,3,6,4,3], nz:["ok","Messing"], t:"Stützmaterial für ABS: löst sich in D-Limonen, druckt sich sonst wie leichtes ABS." },
+  { n:"PVA", cat:"support", k:"support wasserloeslich pla hohlraum ueberhang kanal stuetzmaterial", duese:[180,210], bett:[45,60], preis:[30,65], r:[2,2,2,4,1,1], nz:["ok","Messing"], t:"Wasserlöslicher Support. Zieht Feuchte wie ein Schwamm, über 215 °C zersetzt es sich." },
+  { n:"BVOH", cat:"support", k:"support wasserloeslich schnell multimaterial serie stuetzmaterial", duese:[190,220], bett:[50,60], preis:[40,75], r:[2,2,2,5,1,1], nz:["ok","Messing"], t:"Löst schneller als PVA und verträgt mehr Trägermaterialien, ist dafür teurer." },
+];
+
+const METRICS = [
+  { id: "fest", l: "Festigkeit", d: "Zugfestigkeit und Steifigkeit" },
+  { id: "hitze", l: "Hitze", d: "Formbeständigkeit in der Wärme" },
+  { id: "flex", l: "Flex", d: "Dehnbarkeit, Elastizität" },
+  { id: "druck", l: "Druckbar", d: "wie gutmütig es sich drucken lässt" },
+  { id: "chem", l: "Chemie", d: "Beständigkeit gegen Öle, Lösemittel, Säuren" },
+  { id: "uv", l: "UV", d: "Beständigkeit gegen Sonne und Witterung" },
+];
+
+/* Skalen der Bereichsbalken */
+const pct = (v, lo, hi) => Math.max(0, Math.min(100, ((v - lo) / (hi - lo)) * 100));
+const logPct = (v) => pct(Math.log10(v), Math.log10(10), Math.log10(900));
+const range = (a, b, lo, hi) => { const l = pct(a, lo, hi); return `left:${l.toFixed(1)}%;width:${Math.max(3, pct(b, lo, hi) - l).toFixed(1)}%`; };
+const priceRange = (a, b) => { const l = logPct(a); return `left:${l.toFixed(1)}%;width:${Math.max(3, logPct(b) - l).toFixed(1)}%`; };
+/* Temperaturfarbe: kühl gelb → heiß rot, nach Bereichsmitte */
+const heat = (a, b, lo, hi) => `--hue:${Math.round(48 - (pct((a + b) / 2, lo, hi) / 100) * 48)}`;
+
+const count = (id) => F.filter((f) => f.cat === id).length;
 ---
-<div class="kurz"><b>Das Filament entscheidet mehr über das fertige Teil als der Drucker.</b> PLA und PETG decken den Alltag ab; alles darüber kostet beheizten Bauraum, trockenes Material und eine härtere Düse. Die Tabelle listet 36 Filamente mit Temperaturen, Kennwerten (1–10) und Preisspanne.</div>
+<div class="kurz"><b>Das Filament entscheidet mehr über das fertige Teil als der Drucker.</b> PLA und PETG decken den Alltag ab; alles darüber kostet beheizten Bauraum, trockenes Material und eine härtere Düse. Die Tabelle vergleicht {F.length} Filamente, darunter {count("cf")} Carbon- und {count("gf")} Glasfaser-Varianten.</div>
 
 <h2>Schnellwahl</h2>
 <div class="grid3">
-  <div class="card"><div class="ct">Deko, Modelle, Einstieg</div><div class="cd"><b>PLA</b>, für belastete Teile <b>PLA+</b>. Kein Bauraum nötig, kaum Warping, ab ca. 55 °C aber weich — nichts fürs Auto im Sommer.</div></div>
-  <div class="card"><div class="ct">Funktionsteile im Haus</div><div class="cd"><b>PETG</b> als Standard, <b>ABS</b> oder <b>PC-ABS</b> wenn es warm wird oder acetongeglättet werden soll (Einhausung).</div></div>
-  <div class="card"><div class="ct">Dauerhaft draußen</div><div class="cd"><b>ASA</b> ist ABS mit UV-Schutz. <b>PETG</b> geht auch, vergilbt aber langsam; <b>TPC</b> für flexible Außenteile.</div></div>
-  <div class="card"><div class="ct">Steif und leicht</div><div class="cd"><b>PETG-CF</b> als einfacher Einstieg, <b>PA-CF</b> und <b>PA6-GF30</b> für echte Strukturteile. Gehärtete Düse ist Pflicht.</div></div>
+  <div class="card"><div class="ct">Deko, Modelle, Einstieg</div><div class="cd"><b>PLA</b>, für belastete Teile <b>PLA+</b>. Kein Bauraum nötig, kaum Warping, ab ca. 55 °C aber weich. Nichts fürs Auto im Sommer.</div></div>
+  <div class="card"><div class="ct">Funktionsteile im Haus</div><div class="cd"><b>PETG</b> oder <b>PCTG</b> als Standard, <b>ABS</b> oder <b>PC-ABS</b> wenn es warm wird oder acetongeglättet werden soll (Einhausung).</div></div>
+  <div class="card"><div class="ct">Dauerhaft draußen</div><div class="cd"><b>ASA</b> ist ABS mit UV-Schutz, <b>ASA-CF</b> die steife Variante. <b>PETG</b> geht auch, vergilbt aber langsam; <b>TPC</b> für flexible Außenteile.</div></div>
+  <div class="card"><div class="ct">Steif und leicht (CF)</div><div class="cd"><b>PETG-CF</b> als einfacher Einstieg, <b>PET-CF</b> wenn Feuchte stört, <b>PA-CF</b> und <b>PAHT-CF</b> für echte Strukturteile. Gehärtete Düse ist Pflicht.</div></div>
+  <div class="card"><div class="ct">Zäh und günstig (GF)</div><div class="cd">Glasfaser ist weniger steif als Carbon, dafür zäher und billiger: <b>PETG-GF</b>, <b>ABS-GF</b> für große Gehäuse, <b>PA6-GF30</b> als Spritzguss-Ersatz.</div></div>
   <div class="card"><div class="ct">Weich und elastisch</div><div class="cd"><b>TPU 95A</b> ist der beherrschbare Standard. 85A und 60A brauchen Direktextruder und sehr niedrige Geschwindigkeit.</div></div>
+  <div class="card"><div class="ct">Hitze im Motorraum</div><div class="cd"><b>PAHT-CF</b>, <b>PPA-CF</b> oder <b>PPA-GF</b> halten bis 190 bis über 200 °C. Darüber beginnt PEI und PEEK mit Spezial-Hotend.</div></div>
   <div class="card"><div class="ct">Löslicher Support</div><div class="cd"><b>PVA</b> oder das schnellere <b>BVOH</b> für PLA und PETG, <b>HIPS</b> für ABS (löst sich in D-Limonen).</div></div>
+  <div class="card"><div class="ct">CF oder GF?</div><div class="cd"><b>CF</b>: maximal steif, matt, leicht, aber spröder. <b>GF</b>: zäher, schlagfester, günstiger. Beide schleifen Messing in wenigen Spulen ab.</div></div>
 </div>
 
 <h2>Alle Filamente im Vergleich</h2>
-<p>Kennwerte 1–10, relativ zueinander: <b>Fest.</b> Zugfestigkeit und Steifigkeit, <b>Hitze</b> Formbeständigkeit in der Wärme, <b>Flex</b> Dehnbarkeit, <b>Druckbar</b> wie gutmütig sich das Material verhält, <b>Chem</b> und <b>UV</b> Beständigkeit gegen Medien und Sonne.</p>
-<div data-scope>
-  <input class="search" type="search" data-search placeholder="Suchen: Material, Eigenschaft, Anwendung …" aria-label="Filamente durchsuchen" />
-  <div class="controls">
-    <button type="button" data-filter="all" class="active">Alle</button>
-    <button type="button" data-filter="standard">Standard</button>
-    <button type="button" data-filter="engineering">Engineering</button>
-    <button type="button" data-filter="composite">Composite</button>
-    <button type="button" data-filter="flexible">Flexibel</button>
-    <button type="button" data-filter="highperf">Hochleistung</button>
-    <button type="button" data-filter="specialty">Spezial</button>
-    <button type="button" data-filter="support">Support</button>
+<div class="fil-wide">
+<div class="fil-legend" aria-label="Legende der Kennwerte">
+  {METRICS.map((m) => <span class={`lg s-${m.id}`}><i></i><b>{m.l}</b> {m.d}</span>)}
+  <span class="lg lg-note">Balken 1 bis 10, relativ zueinander. Spaltenkopf anklicken zum Sortieren.</span>
+</div>
+<div class="fil" data-scope>
+  <div class="fil-bar">
+    <input class="search" type="search" data-search placeholder="Suchen: Material, Eigenschaft, Anwendung …" aria-label="Filamente durchsuchen" />
+    <div class="count" data-count></div>
   </div>
-  <div class="count" data-count></div>
-  <div class="tbl-wrap"><table style="min-width:1180px">
-    <thead><tr><th data-s="text">Filament</th><th>Kategorie</th><th data-s="num">Düse °C</th><th data-s="num">Bett °C</th><th data-s="num">€ / kg</th><th data-s="num">Fest.</th><th data-s="num">Hitze</th><th data-s="num">Flex</th><th data-s="num">Druckbar</th><th>Chem · UV</th><th>Düse &amp; Charakter</th></tr></thead>
-    <tbody data-list="Filamenten">
-      <tr data-item data-cat="standard" data-k="prototyp deko figur vase architekturmodell schule gehaeuse indoor biobasiert"><td><b>PLA</b></td><td><span class="cb">Standard</span></td><td>190–230</td><td>20–60</td><td>12–25</td><td>4</td><td>2</td><td>2</td><td>10</td><td>2 · 2</td><td><span class="b ok">Messing</span> Der Einstieg: biobasiert, geruchsarm, kaum Schrumpfung — ab etwa 55 °C aber weich.</td></tr>
-      <tr data-item data-cat="standard" data-k="funktionsprototyp spielzeug halterung clip cosplay zaeh"><td><b>PLA+ / PLA Pro</b></td><td><span class="cb">Standard</span></td><td>200–230</td><td>50–60</td><td>16–30</td><td>5</td><td>3</td><td>3</td><td>9</td><td>2 · 2</td><td><span class="b ok">Messing</span> Zäheres PLA mit besserer Schichthaftung. Clips, Spielzeug, Halter im Innenraum.</td></tr>
-      <tr data-item data-cat="standard" data-k="kueche behaelter outdoor schild funktionsteil visier aquarium werkzeughalter lebensmittel allrounder"><td><b>PETG</b></td><td><span class="cb">Standard</span></td><td>220–250</td><td>70–80</td><td>16–30</td><td>6</td><td>5</td><td>4</td><td>8</td><td>6 · 5</td><td><span class="b ok">Messing</span> Der Allrounder: zäh, chemisch beständig, wenig Verzug. Neigt zu Fäden, Trocknen hilft.</td></tr>
-      <tr data-item data-cat="engineering" data-k="gehaeuse elektronik kfz schnappverbindung jig aceton lego"><td><b>ABS</b></td><td><span class="cb">Engineering</span></td><td>220–260</td><td>95–110</td><td>15–28</td><td>6</td><td>6</td><td>4</td><td>4</td><td>6 · 3</td><td><span class="b ok">Messing</span> Schlagfest und acetonglättbar — ohne Einhausung reißen große Teile an den Ecken auf.</td></tr>
-      <tr data-item data-cat="engineering" data-k="outdoor garten auto aussenteil wetterstation kamerahalter briefkasten uv witterung"><td><b>ASA</b></td><td><span class="cb">Engineering</span></td><td>235–260</td><td>90–110</td><td>20–35</td><td>6</td><td>6</td><td>4</td><td>5</td><td>6 · 8</td><td><span class="b ok">Messing</span> ABS mit UV-Schutz und damit erste Wahl für alles, was dauerhaft draußen bleibt.</td></tr>
-      <tr data-item data-cat="engineering" data-k="zahnrad getriebe scharnier gleitlager buchse werkzeuggriff sport abriebfest nylon"><td><b>PA6 / Nylon 6</b></td><td><span class="cb">Engineering</span></td><td>240–270</td><td>70–90</td><td>30–65</td><td>8</td><td>7</td><td>6</td><td>3</td><td>7 · 4</td><td><span class="b mid">Gehärtet</span> Zäh und abriebfest. Stark hygroskopisch — ungetrocknet schäumt es und wird spröde.</td></tr>
-      <tr data-item data-cat="engineering" data-k="living hinge scharnier snapfit clip rastnase dichtring outdoor nylon ermuedung"><td><b>PA12 / Nylon 12</b></td><td><span class="cb">Engineering</span></td><td>240–270</td><td>70–90</td><td>35–70</td><td>7</td><td>6</td><td>7</td><td>4</td><td>7 · 4</td><td><span class="b mid">Gehärtet</span> Nimmt deutlich weniger Wasser auf als PA6 und ist ermüdungsfester. Filmscharniere, Snap-Fits.</td></tr>
-      <tr data-item data-cat="composite" data-k="drohne rahmen roboter struktur cnc vorrichtung rc gimbal leichtbau carbon steif"><td><b>PA-CF (Nylon-Carbon)</b></td><td><span class="cb">Composite</span></td><td>250–280</td><td>80–100</td><td>50–170</td><td>9</td><td>8</td><td>3</td><td>3</td><td>7 · 5</td><td><span class="b mid">Gehärtet</span> Sehr steif und leicht, dafür spröder als reines PA und stark abrasiv.</td></tr>
-      <tr data-item data-cat="composite" data-k="motorhalter gehaeuse lehre automotive maschinen abdeckung glasfaser"><td><b>PA-GF (Nylon-Glas)</b></td><td><span class="cb">Composite</span></td><td>250–280</td><td>80–100</td><td>40–90</td><td>8</td><td>7</td><td>4</td><td>3</td><td>7 · 5</td><td><span class="b mid">Gehärtet</span> Günstiger als CF und weniger spröde, bei gleicher Abrasion an der Düse.</td></tr>
-      <tr data-item data-cat="composite" data-k="stativ halterung jig drohne teleskop schiene fuehrung formstabil carbon"><td><b>PETG-CF</b></td><td><span class="cb">Composite</span></td><td>230–260</td><td>70–85</td><td>35–65</td><td>7</td><td>6</td><td>3</td><td>5</td><td>6 · 5</td><td><span class="b mid">Gehärtet</span> Der einfache Einstieg in Composites: formstabil, matt, ohne Trockenschrank-Zwang.</td></tr>
-      <tr data-item data-cat="composite" data-k="optik prototyp modellbau laptop staender kabelmanagement deko carbonlook"><td><b>PLA-CF</b></td><td><span class="cb">Composite</span></td><td>200–230</td><td>50–60</td><td>25–50</td><td>6</td><td>3</td><td>2</td><td>7</td><td>2 · 2</td><td><span class="b mid">Gehärtet</span> Steifer Carbon-Look, aber die Temperaturgrenze von PLA bleibt. Kein Lastträger.</td></tr>
-      <tr data-item data-cat="flexible" data-k="huelle bumper daempfer dichtung oring sohle griff flexibel shore"><td><b>TPU 95A</b></td><td><span class="cb">Flexibel</span></td><td>210–230</td><td>30–60</td><td>22–40</td><td>5</td><td>4</td><td>9</td><td>5</td><td>5 · 5</td><td><span class="b ok">Messing</span> Der beherrschbare Flex-Standard. Direktextruder, kurze Retraction, unter 30 mm/s.</td></tr>
-      <tr data-item data-cat="flexible" data-k="griff schutzkappe wearable armband polster tierspielzeug weich"><td><b>TPU 85A</b></td><td><span class="cb">Flexibel</span></td><td>210–230</td><td>30–60</td><td>30–55</td><td>4</td><td>4</td><td>10</td><td>3</td><td>5 · 5</td><td><span class="b ok">Messing</span> Deutlich weicher und entsprechend zickig im Vorschub — knickt gern vor dem Antriebsrad.</td></tr>
-      <tr data-item data-cat="flexible" data-k="dichtung faltbar dehnbar einlage verbinder gummi elastomer"><td><b>TPE</b></td><td><span class="cb">Flexibel</span></td><td>200–230</td><td>30–50</td><td>30–55</td><td>3</td><td>3</td><td>10</td><td>3</td><td>4 · 4</td><td><span class="b ok">Messing</span> Gummiartig; funktioniert nur mit kurzem, rundum gestütztem Filamentweg.</td></tr>
-      <tr data-item data-cat="flexible" data-k="dichtung outdoor manschette schwingungsdaempfer schlauch adapter copolyester"><td><b>TPC (Copolyester-Flex)</b></td><td><span class="cb">Flexibel</span></td><td>210–240</td><td>40–60</td><td>35–65</td><td>5</td><td>5</td><td>8</td><td>5</td><td>6 · 6</td><td><span class="b ok">Messing</span> Flexibel und dabei chemie- und UV-fester als TPU. Für Dichtungen im Freien.</td></tr>
-      <tr data-item data-cat="highperf" data-k="transparent abdeckung visier helm scheinwerfer isolator hochtemperatur schlagfest"><td><b>PC (Polycarbonat)</b></td><td><span class="cb">Hochleistung</span></td><td>260–310</td><td>100–120</td><td>35–65</td><td>9</td><td>9</td><td>4</td><td>2</td><td>6 · 6</td><td><span class="b mid">Gehärtet · Einhausung</span> Sehr schlagfest und hitzefest, klar druckbar. Trocknen ist Pflicht, sonst wird es milchig.</td></tr>
-      <tr data-item data-cat="highperf" data-k="automotive verkleidung elektronikgehaeuse schalttafel industrie blend"><td><b>PC-ABS</b></td><td><span class="cb">Hochleistung</span></td><td>250–280</td><td>100–110</td><td>40–75</td><td>8</td><td>8</td><td>4</td><td>3</td><td>6 · 4</td><td><span class="b mid">Gehärtet · Einhausung</span> Zähigkeit von PC bei der Druckbarkeit von ABS — der praktikable Kompromiss.</td></tr>
-      <tr data-item data-cat="composite" data-k="enduse industrie formwerkzeug jig motorsport waermequelle carbon steifste"><td><b>PC-CF</b></td><td><span class="cb">Composite</span></td><td>260–300</td><td>100–115</td><td>60–130</td><td>10</td><td>9</td><td>2</td><td>2</td><td>7 · 6</td><td><span class="b mid">0,6 mm gehärtet</span> Das steifste bezahlbare Filament und zugleich eines der abrasivsten.</td></tr>
-      <tr data-item data-cat="highperf" data-k="luftfahrt kabine autoklav sterilisierbar isolator raumfahrt testadapter flammschutz ultem"><td><b>PEI / ULTEM</b></td><td><span class="cb">Hochleistung</span></td><td>340–380</td><td>120–160</td><td>150–350</td><td>9</td><td>10</td><td>3</td><td>1</td><td>9 · 7</td><td><span class="b bad">Spezial-Hotend</span> Flammschutz und Dauerwärme weit über 170 °C — nur auf Hochtemperaturdruckern.</td></tr>
-      <tr data-item data-cat="highperf" data-k="implantat aerospace ventil pumpe lagerbuchse oel gas wafer medizin"><td><b>PEEK</b></td><td><span class="cb">Hochleistung</span></td><td>370–410</td><td>120–160</td><td>350–700</td><td>10</td><td>10</td><td>3</td><td>1</td><td>10 · 8</td><td><span class="b bad">Spezial-Hotend</span> Das Referenzpolymer für Medizin und Aerospace. Braucht Bauraum über 120 °C.</td></tr>
-      <tr data-item data-cat="highperf" data-k="aerospace bracket satellit pruefvorrichtung militaer"><td><b>PEKK</b></td><td><span class="cb">Hochleistung</span></td><td>340–360</td><td>120–150</td><td>400–550</td><td>9</td><td>10</td><td>3</td><td>1</td><td>10 · 8</td><td><span class="b bad">Spezial-Hotend</span> Wie PEEK, kristallisiert aber langsamer und verzieht sich dadurch weniger.</td></tr>
-      <tr data-item data-cat="highperf" data-k="chemie ventil filter isolator abgas pharma polyphenylensulfid"><td><b>PPS</b></td><td><span class="cb">Hochleistung</span></td><td>290–330</td><td>120–150</td><td>200–400</td><td>8</td><td>9</td><td>2</td><td>1</td><td>10 · 7</td><td><span class="b bad">Spezial-Hotend</span> Chemisch praktisch unangreifbar und schwer entflammbar, dafür spröde.</td></tr>
-      <tr data-item data-cat="engineering" data-k="behaelter spuelmaschine labor living hinge klappdeckel batteriefach polypropylen"><td><b>PP (Polypropylen)</b></td><td><span class="cb">Engineering</span></td><td>220–250</td><td>80–100</td><td>28–55</td><td>5</td><td>5</td><td>7</td><td>3</td><td>8 · 4</td><td><span class="b ok">Messing · PP-Bett</span> Zäh und chemikalienfest, schrumpft aber stark und haftet fast nur auf PP-Klebeband.</td></tr>
-      <tr data-item data-cat="support" data-k="support abs ueberhang loeslich limonen stuetzmaterial"><td><b>HIPS</b></td><td><span class="cb">Support</span></td><td>220–240</td><td>90–110</td><td>16–28</td><td>4</td><td>5</td><td>3</td><td>6</td><td>4 · 3</td><td><span class="b ok">Messing</span> Stützmaterial für ABS: löst sich in D-Limonen, druckt sich sonst wie leichtes ABS.</td></tr>
-      <tr data-item data-cat="support" data-k="support wasserloeslich pla hohlraum ueberhang kanal stuetzmaterial"><td><b>PVA</b></td><td><span class="cb">Support</span></td><td>180–210</td><td>45–60</td><td>30–65</td><td>2</td><td>2</td><td>2</td><td>4</td><td>1 · 1</td><td><span class="b ok">Messing</span> Wasserlöslicher Support. Zieht Feuchte wie ein Schwamm, über 215 °C zersetzt es sich.</td></tr>
-      <tr data-item data-cat="support" data-k="support wasserloeslich schnell multimaterial serie stuetzmaterial"><td><b>BVOH</b></td><td><span class="cb">Support</span></td><td>190–220</td><td>50–60</td><td>40–75</td><td>2</td><td>2</td><td>2</td><td>5</td><td>1 · 1</td><td><span class="b ok">Messing</span> Löst schneller als PVA und verträgt mehr Trägermaterialien — dafür teurer.</td></tr>
-      <tr data-item data-cat="engineering" data-k="zahnrad ritzel gleitlager buchse foerderband clip getriebe delrin acetal reibung"><td><b>POM (Acetal/Delrin)</b></td><td><span class="cb">Engineering</span></td><td>200–220</td><td>100–130</td><td>35–65</td><td>7</td><td>6</td><td>5</td><td>3</td><td>8 · 3</td><td><span class="b ok">Messing</span> Geringste Reibung im Feld, hält aber kaum auf dem Bett — Kleber und Brim einplanen.</td></tr>
-      <tr data-item data-cat="specialty" data-k="chemie rohr piezo halbleiter ventil ultraschall fluorpolymer"><td><b>PVDF</b></td><td><span class="cb">Spezial</span></td><td>230–260</td><td>80–100</td><td>150–300</td><td>7</td><td>7</td><td>4</td><td>2</td><td>10 · 8</td><td><span class="b bad">Spezial · Absaugung</span> Fluorpolymer, chemisch inert und piezoelektrisch — setzt überhitzt Flusssäure frei.</td></tr>
-      <tr data-item data-cat="specialty" data-k="esd tray leiterplatte chip reinraum antistatisch elektronik ableitend"><td><b>ESD-PETG / ESD-ABS</b></td><td><span class="cb">Spezial</span></td><td>230–260</td><td>70–100</td><td>40–80</td><td>6</td><td>5</td><td>3</td><td>5</td><td>6 · 4</td><td><span class="b mid">Gehärtet</span> Ableitend mit 10⁶–10⁹ Ω Oberflächenwiderstand; carbongefüllt und damit abrasiv.</td></tr>
-      <tr data-item data-cat="specialty" data-k="sensor touch schaltflaeche emi abschirmung elektrode leiterbahn leitfaehig"><td><b>Leitfähiges PLA / TPU</b></td><td><span class="cb">Spezial</span></td><td>200–230</td><td>40–60</td><td>30–60</td><td>3</td><td>2</td><td>5</td><td>5</td><td>2 · 2</td><td><span class="b mid">0,6 mm gehärtet</span> Reicht für Touch, Sensorik und Abschirmung — nicht für Leistungsströme.</td></tr>
-      <tr data-item data-cat="specialty" data-k="schmuck bueste replika requisite griff pokal steampunk metall polierbar"><td><b>Metall-Fill</b></td><td><span class="cb">Spezial</span></td><td>195–220</td><td>50–60</td><td>30–55</td><td>4</td><td>3</td><td>2</td><td>5</td><td>3 · 3</td><td><span class="b mid">0,6 mm gehärtet</span> PLA mit Metallpulver: schwer, polierbar, optisch überzeugend, mechanisch schwach.</td></tr>
-      <tr data-item data-cat="specialty" data-k="holz deko vase bilderrahmen modellbau schild lampenschirm holzoptik"><td><b>Holz-Fill</b></td><td><span class="cb">Spezial</span></td><td>180–220</td><td>50–60</td><td>25–45</td><td>3</td><td>2</td><td>2</td><td>6</td><td>1 · 2</td><td><span class="b ok">0,6 mm Messing</span> Schleif- und beizbar; die Düsentemperatur steuert den Farbton. Verstopft gern.</td></tr>
-      <tr data-item data-cat="specialty" data-k="keramik sinter stein architekturmodell kunst gruenkoerper"><td><b>Keramik-Fill</b></td><td><span class="cb">Spezial</span></td><td>190–220</td><td>50–60</td><td>35–60</td><td>3</td><td>3</td><td>1</td><td>4</td><td>4 · 5</td><td><span class="b mid">0,6 mm gehärtet</span> Steinoptik; als Grünkörper mit passendem Binder sinterbar.</td></tr>
-      <tr data-item data-cat="composite" data-k="spritzguss ersatzteil motorhalter industrie gehaeuse automotive enduse glasfaser"><td><b>PA6-GF30</b></td><td><span class="cb">Composite</span></td><td>260–290</td><td>90–110</td><td>60–130</td><td>9</td><td>8</td><td>3</td><td>2</td><td>7 · 5</td><td><span class="b mid">0,6 mm gehärtet</span> 30 % Glasfaser: der Spritzguss-Ersatz für Kleinserien. Trockenschrank und Einhausung.</td></tr>
-      <tr data-item data-cat="composite" data-k="motorraum turbolader automotive hochtemperatur aerospace vorrichtung polyphthalamid"><td><b>PPA-CF / PPA-GF</b></td><td><span class="cb">Composite</span></td><td>280–320</td><td>100–120</td><td>80–170</td><td>9</td><td>9</td><td>3</td><td>2</td><td>8 · 6</td><td><span class="b bad">Gehärtet · &gt;300 °C</span> Polyphthalamid mit HDT über 200 °C — hält im Motorraum, was PA-CF nicht mehr hält.</td></tr>
-      <tr data-item data-cat="flexible" data-k="dichtlippe silikon griff wearable band verschlusskappe stossabsorber ultraweich"><td><b>TPU 60A</b></td><td><span class="cb">Flexibel</span></td><td>200–220</td><td>30–50</td><td>35–65</td><td>3</td><td>3</td><td>10</td><td>2</td><td>4 · 4</td><td><span class="b ok">Direktextruder</span> Nahezu silikonweich und der Grenzfall des FDM-Verfahrens: unter 15 mm/s drucken.</td></tr>
-    </tbody>
-  </table></div>
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle <span class="fc">{F.length}</span></button>
+    {CATS.map((c) => <button type="button" data-filter={c.id} class={`cat-${c.id}`}><i class="cdot"></i>{c.l} <span class="fc">{count(c.id)}</span></button>)}
+  </div>
+  <div>
+    <div class="tbl-wrap fil-tbl"><table>
+      <thead><tr>
+        <th data-s="text">Filament</th>
+        <th data-s="num">Düse °C</th>
+        <th data-s="num">Bett °C</th>
+        <th data-s="num">€ / kg</th>
+        {METRICS.map((m) => <th data-s="num" class={`sc-h s-${m.id}`} title={m.d}><i class="dot"></i>{m.l}</th>)}
+        <th>Düse</th>
+        <th>Charakter</th>
+      </tr></thead>
+      <tbody data-list="Filamenten">
+        {F.map((f) => (
+          <tr data-item data-cat={f.cat} data-k={f.k} class={`cat-${f.cat}`}>
+            <td class="txt fn"><b>{f.n}</b><span class="cb">{CAT_SHORT[f.cat]}</span></td>
+            <td class="rg"><span class="rv">{f.duese[0]}–{f.duese[1]}</span><span class="rt"><i style={`${range(f.duese[0], f.duese[1], 170, 420)};${heat(f.duese[0], f.duese[1], 170, 420)}`}></i></span></td>
+            <td class="rg"><span class="rv">{f.bett[0]}–{f.bett[1]}</span><span class="rt"><i style={`${range(f.bett[0], f.bett[1], 20, 160)};${heat(f.bett[0], f.bett[1], 20, 160)}`}></i></span></td>
+            <td class="rg rg-eur"><span class="rv">{f.preis[0]}–{f.preis[1]}</span><span class="rt"><i style={priceRange(f.preis[0], f.preis[1])}></i></span></td>
+            {METRICS.map((m, i) => <td class={`sc s-${m.id}`}><span class="m" aria-hidden="true"><i style={`width:${f.r[i] * 10}%`}></i></span><span class="n">{f.r[i]}</span></td>)}
+            <td class="txt nz"><span class={`b ${f.nz[0]}`}>{f.nz[1]}</span></td>
+            <td class="txt ch">{f.t}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table></div>
+  </div>
   <div class="none" data-none hidden>Kein Filament passt zu dieser Auswahl.</div>
 </div>
-<div class="warn"><b>Richtwerte, keine Datenblätter.</b> Temperaturen und Preise (Richtpreise pro 1-kg-Spule, Stand Mitte 2026) schwanken zwischen Herstellern, Farben und Chargen erheblich; die Kennwerte 1–10 ordnen die Materialien nur zueinander ein. Für die Auslegung gilt das Datenblatt der Spule, gedruckte Kennwerte liegen zudem deutlich unter den Spritzgusswerten. Werkstoffkennwerte in einheitlichen Einheiten stehen in <a href="mechanik.html#auswahl">Mechanik &amp; Konstruktion</a>.</div>
+</div>
+<div class="warn"><b>Richtwerte, keine Datenblätter.</b> Temperaturen und Preise (Richtpreise pro 1-kg-Spule, Stand Mitte 2026) schwanken zwischen Herstellern, Farben und Chargen erheblich; die Kennwerte 1–10 ordnen die Materialien nur zueinander ein. Die Preisbalken sind logarithmisch skaliert (10 bis 900 €). Für die Auslegung gilt das Datenblatt der Spule, gedruckte Kennwerte liegen zudem deutlich unter den Spritzgusswerten. Werkstoffkennwerte in einheitlichen Einheiten stehen in <a href="mechanik.html#auswahl">Mechanik &amp; Konstruktion</a>.</div>
 
 <h2>Trocknen, Bauraum, Abluft</h2>
-<p>Feuchtes Filament ist die häufigste Ursache für schlechte Oberflächen und Brüche entlang der Schichten — es knistert beim Extrudieren und schäumt sichtbar aus der Düse.</p>
+<p>Feuchtes Filament ist die häufigste Ursache für schlechte Oberflächen und Brüche entlang der Schichten. Es knistert beim Extrudieren und schäumt sichtbar aus der Düse.</p>
 <div class="tbl-wrap"><table style="min-width:760px">
   <thead><tr><th data-s="text">Materialgruppe</th><th>Trocknen</th><th>Bauraum</th><th>Lagerung</th></tr></thead>
   <tbody>
-    <tr><td><b>PLA, PLA-CF, Holz-Fill</b></td><td>selten nötig, 45–55 °C / 4–6 h</td><td>offen, Bett 50–60 °C</td><td>Beutel mit Silikagel reicht</td></tr>
-    <tr><td><b>PETG, TPU, TPC</b></td><td>vor jedem längeren Druck, 55–65 °C / 4–6 h</td><td>offen, zugfrei</td><td>trocken, sonst Fäden und Blasen</td></tr>
-    <tr><td><b>ABS, ASA, PC-ABS</b></td><td>60–70 °C / 4–6 h</td><td>geschlossen, 40–50 °C</td><td>trocken; Zugluft erzeugt Risse</td></tr>
-    <tr><td><b>PA, PA-CF/GF, PC, PPA</b></td><td>Pflicht, 70–80 °C / 8–12 h</td><td>geschlossen und beheizt</td><td>Trockenbox im Betrieb</td></tr>
+    <tr><td><b>PLA, PLA-CF, Holz-Fill, LW-PLA</b></td><td>selten nötig, 45–55 °C / 4–6 h</td><td>offen, Bett 50–60 °C</td><td>Beutel mit Silikagel reicht</td></tr>
+    <tr><td><b>PETG, PCTG, PETG-CF/GF, TPU, TPC</b></td><td>vor jedem längeren Druck, 55–65 °C / 4–6 h</td><td>offen, zugfrei</td><td>trocken, sonst Fäden und Blasen</td></tr>
+    <tr><td><b>ABS, ASA, PC-ABS und ihre CF/GF-Varianten</b></td><td>60–80 °C / 4–6 h</td><td>geschlossen, 40–50 °C</td><td>trocken; Zugluft erzeugt Risse</td></tr>
+    <tr><td><b>PA, PA-CF/GF, PAHT-CF, PET-CF, PC, PPA</b></td><td>Pflicht, 70–90 °C / 8–12 h</td><td>geschlossen und beheizt</td><td>Trockenbox im Betrieb</td></tr>
+    <tr><td><b>PEI, PEEK, PPS und CF-Varianten</b></td><td>Pflicht, 120–150 °C / 4–6 h</td><td>aktiv beheizt, über 90 °C</td><td>luftdicht, direkt aus dem Trockner drucken</td></tr>
     <tr><td><b>PVA, BVOH</b></td><td>Pflicht, 45–55 °C / 6–10 h</td><td>wie das Trägermaterial</td><td>luftdicht, nie offen liegen lassen</td></tr>
   </tbody>
 </table></div>
-<div class="stop"><b>Abluft:</b> ABS, ASA, PC und alle Hochtemperaturmaterialien setzen beim Druck flüchtige organische Verbindungen und ultrafeine Partikel frei. Geschlossener Bauraum mit Aktivkohle- und Partikelfilter oder Aufstellung außerhalb des Wohnraums — nicht der Geruch ist das Problem, sondern was man nicht riecht. PVDF ist zusätzlich ein Sonderfall: bei Überhitzung entsteht Fluorwasserstoff.</div>
+<div class="stop"><b>Abluft:</b> ABS, ASA, PC und alle Hochtemperaturmaterialien setzen beim Druck flüchtige organische Verbindungen und ultrafeine Partikel frei. Geschlossener Bauraum mit Aktivkohle- und Partikelfilter oder Aufstellung außerhalb des Wohnraums: nicht der Geruch ist das Problem, sondern was man nicht riecht. PVDF ist zusätzlich ein Sonderfall: bei Überhitzung entsteht Fluorwasserstoff.</div>
 <div class="tip"><b>Abrasive Filamente:</b> Alles mit Carbon, Glasfaser, Metall-, Keramik- oder Leuchtpigment frisst eine Messingdüse in wenigen Spulen auf. Welche Düse wofür taugt, steht unter <a href="3d-druck.html#duesen">Düsen &amp; Nozzles</a>.</div>
 
 <div class="srcs">
   <div class="sh">Quellen zu diesem Abschnitt</div>
   <ul>
     <li><a href="https://help.prusa3d.com/materials">Prusa Knowledge Base — Materialtabelle</a>: Druck- und Betttemperaturen, Trocknungsempfehlungen je Material.</li>
-    <li><a href="https://wiki.bambulab.com/en/filament-acc/filament">Bambu Lab Wiki — Filament</a> und <a href="https://wiki.bambulab.com/en/software/bambu-studio/filament-drying">Filament Drying</a>: Trocknungszeiten und -temperaturen.</li>
+    <li><a href="https://wiki.bambulab.com/en/filament-acc/filament">Bambu Lab Wiki — Filament</a> und <a href="https://wiki.bambulab.com/en/software/bambu-studio/filament-drying">Filament Drying</a>: Trocknungszeiten und -temperaturen, Datenblätter zu PET-CF, PAHT-CF, PPA-CF/GF und PPS-CF.</li>
     <li><a href="https://www.simplify3d.com/resources/materials-guide/">Simplify3D Materials Guide</a> und <a href="https://www.matterhackers.com/3d-printer-filament-compare">MatterHackers Filament-Vergleich</a>: Eigenschaftsprofile und Preisniveau.</li>
     <li>UL Chemical Insights, <i>Characterization of Particle and VOC Emissions from Desktop 3D Printers</i> — Grundlage der Abluft-Empfehlung.</li>
   </ul>

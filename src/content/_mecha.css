@@ -169,6 +169,7 @@
   .mx-mecha .tbl-wrap tbody tr{display:block;background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:9px;padding:3px 0 5px}
   .mx-mecha .tbl-wrap tbody tr:hover td{background:transparent}
+  .mx-mecha .tbl-wrap tbody tr[hidden]{display:none}
   .mx-mecha .tbl-wrap tbody td{display:block;width:auto;border:none;border-top:none!important;
     padding:5px 14px;line-height:1.5;text-align:left}
   .mx-mecha .tbl-wrap tbody td:empty{display:none}

@@ -505,7 +505,7 @@
        "name": "3D-Druck",
        "icon": "🧵",
        "kind": "Referenz",
-       "updated": "2026-08-26",
+       "updated": "2026-10-31",
        "desc": "Material, Düse und Wirtschaftlichkeit des FDM-Drucks: der Filament-Vergleich von PLA bis Carbon-Nylon, Düsengrößen und -materialien, Infill-Muster — und der Rentabilitäts-Simulator für den Druck als Nebenerwerb.",
        "tags": [
         "filament",
@@ -514,6 +514,8 @@
         "abs",
         "tpu",
         "nylon",
+        "carbon",
+        "glasfaser",
         "düse",
         "nozzle",
         "infill",

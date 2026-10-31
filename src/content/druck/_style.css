@@ -68,3 +68,104 @@
   line-height:1.35;text-align:center}
 .mx-druck .card-b .note{font-size:11px;line-height:1.4;padding:7px 9px;border-radius:var(--radius-sm);
   display:flex;gap:6px;margin-top:2px;color:var(--text)}
+
+/* ============================================ FILAMENT-VERGLEICH (filamente.astro)
+   Breite Tabelle mit Balken statt Zahlen. Farben je Kennwert und je Kategorie
+   werden über --mc / --cc gesetzt und per color-mix an hell/dunkel angepasst. */
+.mx-druck .s-fest{--mc:#3d8bf0}
+.mx-druck .s-hitze{--mc:#ec6a3c}
+.mx-druck .s-flex{--mc:#a06cf2}
+.mx-druck .s-druck{--mc:#2fb57a}
+.mx-druck .s-chem{--mc:#22aebf}
+.mx-druck .s-uv{--mc:#e2ac2a}
+
+.mx-druck .cat-standard{--cc:#3fae6e}
+.mx-druck .cat-engineering{--cc:#3d8bf0}
+.mx-druck .cat-cf{--cc:#8f99a8}
+.mx-druck .cat-gf{--cc:#4fb6d6}
+.mx-druck .cat-flexible{--cc:#a06cf2}
+.mx-druck .cat-highperf{--cc:#ec6a3c}
+.mx-druck .cat-specialty{--cc:#d95fa8}
+.mx-druck .cat-support{--cc:#c9a227}
+
+/* Legende */
+.mx-druck .fil-legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.6px;color:var(--muted);
+  margin:.4rem 0 1rem;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface)}
+.mx-druck .fil-legend .lg{display:inline-flex;align-items:center;gap:6px}
+.mx-druck .fil-legend .lg b{color:var(--text);font-weight:650}
+.mx-druck .fil-legend .lg i{width:22px;height:8px;border-radius:3px;background:var(--mc)}
+.mx-druck .fil-legend .lg-note{flex-basis:100%;color:var(--faint);font-size:11.8px}
+
+/* Suche + Zähler in einer Zeile, Filter mit Farbpunkt und Anzahl */
+.mx-druck .fil-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin-bottom:.7rem}
+.mx-druck .fil-bar .search{margin:0;flex:1 1 260px;max-width:420px}
+.mx-druck .fil-bar .count{margin:0}
+.mx-druck .fil .controls button{display:inline-flex;align-items:center;gap:6px}
+.mx-druck .fil .controls .cdot{width:8px;height:8px;border-radius:50%;background:var(--cc)}
+.mx-druck .fil .controls .fc{font-family:var(--mono);font-size:10.5px;color:var(--faint);font-weight:500}
+.mx-druck .fil .controls button.active .fc{color:inherit}
+
+/* Ausbruch aus der 1040px-Spalte: auf großen Bildschirmen so breit wie der
+   Inhaltsbereich neben der Rail (max. 1680px), mittig zur Textspalte. */
+@media (min-width:1021px){
+  .mx-druck .fil-wide{--fw:min(1680px, calc(100vw - var(--rail-w, 288px) - 80px));
+    width:max(100%, var(--fw));margin-left:calc((100% - max(100%, var(--fw))) / 2)}
+}
+
+/* Tabelle: fester Kopf und erste Spalte beim Scrollen */
+.mx-druck .fil-tbl{max-height:min(82vh, 1100px);overflow:auto}
+.mx-druck .fil-tbl table{min-width:1180px;border-collapse:separate;border-spacing:0}
+.mx-druck .fil-tbl th{position:sticky;top:0;z-index:2}
+.mx-druck .fil-tbl th:first-child{left:0;z-index:3}
+.mx-druck .fil-tbl td{vertical-align:middle;padding:9px 12px}
+.mx-druck .fil-tbl td.fn{position:sticky;left:0;z-index:1;background:var(--surface);
+  box-shadow:inset 3px 0 0 var(--cc), 1px 0 0 var(--border);min-width:170px}
+.mx-druck .fil-tbl tbody tr:hover td.fn{background:var(--surface-hover)}
+.mx-druck .fil-tbl td.fn b{display:block;font-size:13.4px;line-height:1.3;font-weight:650}
+.mx-druck .fil-tbl .cb{margin-top:4px;font-size:10px;padding:1px 8px;
+  background:color-mix(in srgb, var(--cc) 16%, transparent);
+  color:color-mix(in srgb, var(--cc) 62%, var(--text));
+  border:1px solid color-mix(in srgb, var(--cc) 35%, transparent)}
+.mx-druck .fil-tbl th.sc-h .dot{display:inline-block;width:8px;height:8px;border-radius:2px;
+  background:var(--mc);margin-right:5px;vertical-align:0}
+
+/* Kennwert-Balken: 10 Segmente */
+.mx-druck .fil-tbl td.sc{white-space:nowrap;padding-right:6px}
+.mx-druck .fil-tbl .m{display:inline-block;vertical-align:middle;width:56px;height:10px;
+  background:color-mix(in srgb, var(--mc) 14%, var(--surface-2));border-radius:2px;overflow:hidden;
+  -webkit-mask:repeating-linear-gradient(90deg,#000 0 calc(10% - 2px),transparent calc(10% - 2px) 10%);
+          mask:repeating-linear-gradient(90deg,#000 0 calc(10% - 2px),transparent calc(10% - 2px) 10%)}
+.mx-druck .fil-tbl .m i{display:block;height:100%;background:var(--mc)}
+.mx-druck .fil-tbl .n{display:inline-block;width:2ch;margin-left:7px;text-align:right;vertical-align:middle;
+  font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+
+/* Bereichsbalken: Temperatur und Preis */
+.mx-druck .fil-tbl td.rg{min-width:100px}
+.mx-druck .fil-tbl .rv{display:block;font-family:var(--mono);font-size:12px;line-height:1.2}
+.mx-druck .fil-tbl .rt{display:block;position:relative;height:6px;margin-top:5px;border-radius:3px;
+  background:var(--surface-2);border:1px solid var(--border)}
+.mx-druck .fil-tbl .rt i{position:absolute;top:-1px;bottom:-1px;border-radius:3px;
+  background:hsl(var(--hue,30) 80% 52%)}
+.mx-druck .fil-tbl .rg-eur .rt i{background:var(--accent)}
+
+.mx-druck .fil-tbl td.nz{white-space:nowrap}
+.mx-druck .fil-tbl td.ch{min-width:240px;font-size:12.8px;color:var(--muted);line-height:1.5}
+
+/* Handy: Kartenansicht aus _mecha.css, ohne Sticky und Scrollfenster */
+@media (max-width:620px){
+  .mx-druck .fil-tbl{max-height:none;overflow:visible}
+  .mx-druck .fil-tbl th{position:static}
+  .mx-druck .fil-tbl td.fn{position:static;box-shadow:inset 3px 0 0 var(--cc)}
+  .mx-druck .fil-tbl tbody tr:not([hidden]){display:grid!important;grid-template-columns:1fr 1fr;column-gap:4px}
+  .mx-druck .fil-tbl tbody td.fn,.mx-druck .fil-tbl tbody td.ch,.mx-druck .fil-tbl tbody td.nz{grid-column:1 / -1}
+  .mx-druck .fil-tbl td.rg,.mx-druck .fil-tbl td.ch{min-width:0}
+  .mx-druck .fil-tbl .m{width:min(56px, 60%)}
+}
+
+@media print{
+  .mx-druck .fil-tbl{max-height:none}
+  .mx-druck .fil-tbl th,.mx-druck .fil-tbl td.fn{position:static}
+  .mx-druck .fil-wide{width:auto;margin-left:0}
+}
+.mx-druck .fil-tbl tbody tr[hidden]{display:none!important}
