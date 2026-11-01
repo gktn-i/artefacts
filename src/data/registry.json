@@ -497,7 +497,7 @@
     {
      "id": "druck",
      "name": "3D-Druck",
-     "desc": "Material wählen, Düse wählen, Preis kennen.",
+     "desc": "Material wählen, nachbearbeiten, verbinden, scannen, Preis kennen.",
      "modules": [
       {
        "id": "druck",
@@ -505,8 +505,8 @@
        "name": "3D-Druck",
        "icon": "🧵",
        "kind": "Referenz",
-       "updated": "2026-10-31",
-       "desc": "Material, Düse und Wirtschaftlichkeit des FDM-Drucks: der Filament-Vergleich von PLA bis Carbon-Nylon, Düsengrößen und -materialien, Infill-Muster — und der Rentabilitäts-Simulator für den Druck als Nebenerwerb.",
+       "updated": "2026-11-01",
+       "desc": "Material, Düse, Nachbearbeitung, Verbindungen und 3D-Scannen im FDM-Druck: der Filament-Vergleich von PLA bis Carbon-Nylon, Düsen und Infill, Schleifen bis Aceton-Dampf, Gewindeeinsätze bis Snap-Fit, Photogrammetrie bis Laserscanner — und der Rentabilitäts-Simulator für den Druck als Nebenerwerb.",
        "tags": [
         "filament",
         "pla",
@@ -520,7 +520,21 @@
         "nozzle",
         "infill",
         "rentabilität",
-        "preise"
+        "preise",
+        "nachbearbeitung",
+        "post-processing",
+        "schleifen",
+        "lackieren",
+        "aceton",
+        "tempern",
+        "verbindungen",
+        "gewindeeinsatz",
+        "heat-set insert",
+        "snap-fit",
+        "kleben",
+        "3d-scan",
+        "photogrammetrie",
+        "scanner"
        ],
        "sections": [
         {
@@ -534,6 +548,18 @@
         {
          "h": "infill",
          "t": "Infill-Muster"
+        },
+        {
+         "h": "nachbearbeitung",
+         "t": "Nachbearbeitung"
+        },
+        {
+         "h": "verbindungen",
+         "t": "Verbindungen"
+        },
+        {
+         "h": "scannen",
+         "t": "3D-Scannen"
         },
         {
          "h": "rechner",
@@ -550,6 +576,19 @@
          ]
         },
         {
+         "l": "Nach dem Druck",
+         "sections": [
+          "nachbearbeitung",
+          "verbindungen"
+         ]
+        },
+        {
+         "l": "Vorlagen",
+         "sections": [
+          "scannen"
+         ]
+        },
+        {
          "l": "Kalkulation",
          "sections": [
           "rechner"
@@ -559,7 +598,13 @@
        "alias": {
         "filament": "filamente",
         "nozzle": "duesen",
-        "simulator": "rechner"
+        "simulator": "rechner",
+        "postprocessing": "nachbearbeitung",
+        "schleifen": "nachbearbeitung",
+        "inserts": "verbindungen",
+        "kleben": "verbindungen",
+        "scan": "scannen",
+        "scanner": "scannen"
        },
        "related": [
         "mechanik"

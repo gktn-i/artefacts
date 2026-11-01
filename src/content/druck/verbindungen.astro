@@ -1,0 +1,158 @@
+---
+import "./_style.css";
+import RateTable from "../../components/RateTable.astro";
+
+/* Kennwerte r = [Halt, Lösbar, Einfach, Verzeiht, Günstig], 1–10,
+   relativ zueinander und immer „mehr ist besser“. */
+const CATS = [
+  { id: "gewinde", l: "Schrauben & Gewinde", c: "#3d8bf0" },
+  { id: "form", l: "Formschluss", c: "#2fb57a" },
+  { id: "stoff", l: "Kleben & Schweißen", c: "#ec6a3c" },
+  { id: "beweg", l: "Beweglich", c: "#a06cf2" },
+  { id: "spezial", l: "Magnet & Spezial", c: "#e2ac2a" },
+];
+const METRICS = [
+  { l: "Halt", d: "Last und Auszugskraft, die die Verbindung trägt", c: "#3d8bf0" },
+  { l: "Lösbar", d: "wie oft sie sich öffnen und wieder schließen lässt", c: "#a06cf2" },
+  { l: "Einfach", d: "Werkzeug, Übung und Konstruktionsaufwand", c: "#2fb57a" },
+  { l: "Verzeiht", d: "wie gutmütig sie mit Maßabweichungen des Drucks umgeht", c: "#22aebf" },
+  { l: "Günstig", d: "Kosten für Teile und Werkzeug", c: "#e2ac2a" },
+];
+const COLS = [
+  { l: "Faustwerte zum Konstruieren", key: "fw", w: 270 },
+  { l: "Wann nehmen", key: "t", w: 260 },
+];
+const ROWS = [
+  /* -------------------------------------------------- Schrauben & Gewinde */
+  { n: "Gewindeeinsatz (Heat-Set)", cat: "gewinde", k: "heat set insert gewindeeinsatz messing einschmelzen loetkolben ruthex m3", r: [9, 10, 6, 6, 6],
+    fw: "Loch nach Datenblatt des Einsatzes, meist 0,3 bis 0,5 mm unter dem Außen-Ø. Lochtiefe 1 mm länger, Wand ringsum mindestens 2 mm.",
+    t: "Alles, was öfter als ein paar Mal geschraubt wird: Gehäusedeckel, Vorrichtungen, Halter." },
+  { n: "Eingelegte Mutter", cat: "gewinde", k: "mutter sechskant tasche einlegen druckpause captive nut", r: [8, 9, 7, 6, 10],
+    fw: "Sechskanttasche Schlüsselweite plus 0,2 bis 0,3 mm (M3: SW 5,5 → 5,7 bis 5,8 mm). Seitlich einschieben oder per Druckpause einschließen.",
+    t: "Hohe Kräfte für ein paar Cent. Die einfachste Lösung mit voller Metallfestigkeit." },
+  { n: "Durchgangsschraube mit Mutter", cat: "gewinde", k: "schraube mutter unterlegscheibe durchgang klemmung bohrung", r: [9, 10, 9, 8, 9],
+    fw: "Bohrung Nenn-Ø plus 0,2 bis 0,4 mm (M3 → 3,2 bis 3,4 mm). Unterlegscheiben auf beiden Seiten.",
+    t: "Hohe Last und Klemmung. Scheiben verteilen den Druck, sonst kriecht PLA unter dem Kopf weg." },
+  { n: "Schraube direkt in Kunststoff", cat: "gewinde", k: "selbstformend kunststoffschraube direkt eindrehen kernloch pt schraube", r: [5, 4, 9, 8, 10],
+    fw: "Kernloch etwa 80 % des Schrauben-Ø (M3 → 2,5 mm), mindestens 3 Wände ums Loch. Schrauben für Thermoplaste halten deutlich besser.",
+    t: "Selten geöffnete Teile und Prototypen. Nach wenigen Montagen ist das Gewinde ausgeleiert." },
+  { n: "Gewinde schneiden", cat: "gewinde", k: "gewindebohrer gewinde schneiden nachschneiden kernloch m4 m5", r: [6, 5, 7, 8, 9],
+    fw: "Kernloch wie im Metall (M3 2,5 / M4 3,3 / M5 4,2 mm), ums Loch massiv drucken, viele Wände.",
+    t: "Nachträglich, wenn kein Einsatz geplant war. In PETG, ABS und PA haltbarer als in PLA." },
+  { n: "Gedrucktes Gewinde", cat: "gewinde", k: "gedrucktes gewinde schraubdeckel glas trapezgewinde gross m8", r: [4, 6, 7, 9, 10],
+    fw: "Sinnvoll ab etwa M8, Spiel 0,2 bis 0,3 mm je Seite. Achse senkrecht drucken, Flanken nicht zu spitz.",
+    t: "Deckel, Dosen, große Verschraubungen ganz ohne Metall." },
+
+  /* --------------------------------------------------------- Formschluss */
+  { n: "Presspassung", cat: "form", k: "presspassung presssitz einpressen kugellager achse lager stift", r: [6, 3, 6, 2, 10],
+    fw: "−0,05 bis 0 mm Spiel je Seite. Vorher einen Toleranztest drucken, der Wert hängt am Drucker.",
+    t: "Kugellager, Achsen und Stifte. Zu viel Übermaß reißt die Wand auf." },
+  { n: "Schnappverbindung (Snap-Fit)", cat: "form", k: "snap fit rasthaken schnapphaken clip rastnase gehaeuse batteriefach", r: [5, 6, 6, 4, 10],
+    fw: "Haken in der Schichtebene drucken, nie quer dazu. Hinterschnitt 0,5 bis 1 mm, Hakenlänge mindestens etwa 5-mal die Dicke.",
+    t: "Gehäuse ohne Schrauben, Batteriefächer, Clips. PETG, PA oder PP halten viele Zyklen, PLA bricht." },
+  { n: "Schwalbenschwanz & Steckung", cat: "form", k: "schwalbenschwanz dovetail steckverbindung teilen grosse drucke puzzle", r: [6, 7, 7, 5, 10],
+    fw: "0,1 bis 0,2 mm Spiel je Flanke, Fase am Einlauf. Für Kleben eher 0,1 mm, für Stecken eher 0,2 mm.",
+    t: "Große Teile, die zerlegt gedruckt werden; Modulsysteme und Wandhalter." },
+  { n: "Bajonett & Drehverschluss", cat: "form", k: "bajonett drehverschluss viertel drehung adapter deckel", r: [6, 9, 5, 5, 10],
+    fw: "Spiel 0,2 bis 0,3 mm, kleine Rastnase gegen Aufdrehen. Rampe statt Stufe am Einlauf.",
+    t: "Deckel, Adapter und Halter, die werkzeuglos und schnell wechseln sollen." },
+  { n: "Passstift", cat: "form", k: "passstift duebel stift filament ausrichten stahlstift", r: [5, 5, 8, 7, 10],
+    fw: "Ein Stück 1,75-mm-Filament in einem 1,8- bis 1,9-mm-Loch, oder ein Stahlstift mit 0,05 mm Übermaß.",
+    t: "Teile beim Kleben exakt ausrichten. Mit Kleber oder Heißspitze wird er zur festen Verbindung." },
+
+  /* --------------------------------------------------- Kleben & Schweißen */
+  { n: "Sekundenkleber (CA)", cat: "stoff", k: "sekundenkleber cyanacrylat ca aktivator kleben reparatur", r: [6, 1, 9, 6, 9],
+    fw: "Dünnflüssig für enge Fugen, Gel für Spalte. Aktivator härtet sofort. PP, PE und POM nur mit Primer.",
+    t: "Schnelle Reparaturen und kleine Teile aus PLA, PETG, ABS." },
+  { n: "2K-Epoxid", cat: "stoff", k: "epoxid zweikomponenten 2k kleber spalt metall mischmaterial", r: [8, 1, 6, 8, 7],
+    fw: "Flächen mit P120 anschleifen und entfetten, Topfzeit beachten. Füllt Spalten bis einige Millimeter.",
+    t: "Große Klebeflächen, Last, Spalten und Mischmaterial wie Druckteil mit Metall." },
+  { n: "Lösemittel-Kleben", cat: "stoff", k: "aceton abs brei asa loesemittel verschweissen chemisch", r: [8, 1, 7, 5, 9],
+    fw: "Nur ABS und ASA: Aceton pur oder mit ABS-Resten zu einem Brei gelöst, beidseitig auftragen und zusammenpressen.",
+    t: "ABS-Gehäuse aus mehreren Teilen. Die Naht wird zu Material und ist fast unsichtbar." },
+  { n: "Kunststoffschweißen", cat: "stoff", k: "schweissen loetkolben 3d stift pp pe petg riss reparatur", r: [7, 1, 5, 7, 8],
+    fw: "Gleiches Filament als Zusatzdraht, eigene Lötspitze. Naht V-förmig anfasen, mit Absaugung arbeiten.",
+    t: "PP, PE und PETG, wo Kleber versagt. Auch für Risse in fertigen Teilen." },
+  { n: "Reibschweißen", cat: "stoff", k: "reibschweissen friction welding dremel filament drehwerkzeug", r: [7, 1, 6, 6, 9],
+    fw: "Filamentstück im Spannfutter eines Drehwerkzeugs, mittlere Drehzahl, mit leichtem Druck entlang der Naht.",
+    t: "Schnelle, feste Naht bei PLA, PETG und ABS. Werkzeug siehe <a href=\"dremel-8250-cheatsheet.html#material\">Dremel</a>." },
+
+  /* -------------------------------------------------------------- Beweglich */
+  { n: "Print-in-Place-Scharnier", cat: "beweg", k: "print in place scharnier gelenk beweglich ohne montage", r: [4, 10, 7, 4, 10],
+    fw: "Spalt 0,3 bis 0,5 mm, kein Support im Spalt. Nach dem Druck einmal kräftig durchbewegen.",
+    t: "Kisten, Figuren und Demoteile, die in einem Stück vom Bett kommen." },
+  { n: "Achse mit Stift oder Schraube", cat: "beweg", k: "achse drehgelenk scharnier stahlstift schraube lager", r: [8, 9, 8, 7, 9],
+    fw: "Spiel 0,2 mm je Seite. Stahlstift, Schraube mit Sicherungsmutter oder Filamentstück als Achse.",
+    t: "Belastete Scharniere und Drehpunkte. Hält deutlich mehr als gedruckte Achsen." },
+  { n: "Filmscharnier", cat: "beweg", k: "filmscharnier living hinge pp pa12 klappdeckel", r: [5, 10, 5, 3, 10],
+    fw: "Steg 0,3 bis 0,6 mm dick, flach drucken, Bahnen quer zur Biegelinie. Nur PP und PA12 halten Tausende Zyklen.",
+    t: "Klappdeckel, Etuis und Clips aus einem Stück." },
+
+  /* -------------------------------------------------------- Magnet & Spezial */
+  { n: "Magnete", cat: "spezial", k: "magnet neodym tasche einlegen deckel halter modul", r: [3, 10, 8, 6, 7],
+    fw: "Tasche plus 0,1 bis 0,2 mm, Polung markieren. Einkleben oder per Druckpause ganz einschließen.",
+    t: "Deckel, Werkzeughalter und Module, die mit einem Griff ab und dran sollen." },
+  { n: "Einschmelzen beim Druck", cat: "spezial", k: "druckpause einlegen einbetten mutter magnet lager kugel gewicht", r: [9, 3, 6, 5, 9],
+    fw: "Pause in der Schicht über der Tasche, Teil bündig einlegen, die nächste Schicht überbrückt es.",
+    t: "Muttern, Magnete, Gewichte oder Elektronik unsichtbar und unverlierbar im Teil." },
+];
+---
+<div class="kurz"><b>Fast jedes Druckteil wird irgendwann mit etwas anderem verbunden.</b> Die Frage dahinter ist immer dieselbe: Soll es wieder aufgehen, wie viel Last muss es tragen, und wie genau druckt der Drucker? Die Tabelle vergleicht {ROWS.length} Verbindungen. Grundlegende Passungen und Konstruktionsregeln stehen unter <a href="mechanik.html#druck3d">Konstruieren für den 3D-Druck</a>.</div>
+
+<h2>Wann was: Schnellwahl und Vergleich</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Oft geschraubt</div><div class="cd"><b>Gewindeeinsatz</b> aus Messing. Hält Dutzende Montagen, das Gewinde im Kunststoff nur wenige.</div></div>
+  <div class="card"><div class="ct">Viel Kraft</div><div class="cd"><b>Durchgangsschraube mit Mutter</b> und Scheiben, oder eine <b>eingelegte Mutter</b>. Metall trägt, der Kunststoff hält nur in Position.</div></div>
+  <div class="card"><div class="ct">Ohne Werkzeug öffnen</div><div class="cd"><b>Snap-Fit</b> für Gehäuse, <b>Bajonett</b> für Deckel, <b>Magnete</b> für Abdeckungen.</div></div>
+  <div class="card"><div class="ct">Großer Druck in Teilen</div><div class="cd"><b>Schwalbenschwanz</b> oder <b>Passstifte</b> zum Ausrichten, dann kleben: Epoxid, bei ABS Aceton.</div></div>
+  <div class="card"><div class="ct">Dauerhaft und unsichtbar</div><div class="cd"><b>Lösemittel-Kleben</b> bei ABS und ASA, <b>Reibschweißen</b> bei PLA und PETG, dann spachteln und lackieren.</div></div>
+  <div class="card"><div class="ct">Klappen und drehen</div><div class="cd"><b>Achse mit Stahlstift</b> für Last, <b>Filmscharnier</b> aus PP oder PA12, <b>Print-in-Place</b> für Spielzeug.</div></div>
+</div>
+
+<h3>Alle Verbindungen im Vergleich</h3>
+<RateTable cats={CATS} metrics={METRICS} cols={COLS} rows={ROWS} list="Verbindungen" search="Suchen: Verbindung, Bauteil, Material …" minWidth={1180} first="Verbindung" />
+<div class="warn"><b>Spielmaße sind druckerabhängig.</b> Die Faustwerte passen für eine 0,4-mm-Düse und einen kalibrierten Drucker. Ein kurzer Toleranztest mit gestaffelten Spalten ist die beste Investition vor jedem Passteil. Schraubengrößen und Normteile stehen unter <a href="mechanik.html#normteile">Gewinde &amp; Normteile</a>.</div>
+
+<h2>Kleber nach Material</h2>
+<div class="tbl-wrap"><table style="min-width:760px">
+  <thead><tr><th data-s="text">Material</th><th>Sekundenkleber</th><th>2K-Epoxid</th><th>Lösemittel</th><th>Schweißen</th><th>Hinweis</th></tr></thead>
+  <tbody>
+    <tr><td><b>PLA</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">nein</span></td><td><span class="b ok">gut</span></td><td>Reibschweißen klappt besonders gut</td></tr>
+    <tr><td><b>PETG, PCTG</b></td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">nein</span></td><td><span class="b ok">gut</span></td><td>CA-Naht wird spröde, für Last Epoxid</td></tr>
+    <tr><td><b>ABS, ASA</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b ok">Aceton</span></td><td><span class="b ok">gut</span></td><td>Aceton ergibt die festeste Naht</td></tr>
+    <tr><td><b>PC, PC-ABS</b></td><td><span class="b ok">gut</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">nein</span></td><td><span class="b mid">bedingt</span></td><td>Flächen anschleifen</td></tr>
+    <tr><td><b>PA (Nylon), PA-CF</b></td><td><span class="b mid">bedingt</span></td><td><span class="b ok">gut</span></td><td><span class="b bad">nein</span></td><td><span class="b mid">bedingt</span></td><td>Gut anschleifen, trocken verkleben</td></tr>
+    <tr><td><b>PP, PE</b></td><td><span class="b mid">mit Primer</span></td><td><span class="b bad">schlecht</span></td><td><span class="b bad">nein</span></td><td><span class="b ok">gut</span></td><td>Schweißen oder spezieller Polyolefin-Kleber</td></tr>
+    <tr><td><b>TPU, TPE</b></td><td><span class="b mid">flexibler CA</span></td><td><span class="b bad">spröde</span></td><td><span class="b bad">nein</span></td><td><span class="b mid">bedingt</span></td><td>Flexible Kleber, sonst bricht die Naht beim Biegen</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Schritt für Schritt: Gewindeeinsatz setzen</h2>
+<div class="steps">
+  <div class="step"><h4>Loch richtig konstruieren</h4>Durchmesser nach Datenblatt des Einsatzes, Tiefe 1 mm länger als der Einsatz. Mindestens 3 Wände oder 2 mm Material ringsum, sonst platzt die Wand.</div>
+  <div class="step"><h4>Lötkolben vorbereiten</h4>Passende Einsetzspitze für die Gewindegröße. Temperatur etwa auf Drucktemperatur des Materials, bei PLA rund 200 bis 220 °C.</div>
+  <div class="step"><h4>Einsatz gerade aufsetzen</h4>Mit der schmalen Seite nach unten lose auf das Loch legen, Spitze senkrecht einführen. Ein schiefer Start lässt sich später nicht korrigieren.</div>
+  <div class="step"><h4>Einsinken lassen, nicht drücken</h4>Nur führen, das Gewicht des Kolbens reicht. Wer drückt, drückt Material ins Gewinde und den Einsatz schief.</div>
+  <div class="step"><h4>Bündig setzen und abkühlen</h4>Kurz vor bündig die Spitze herausziehen und den Einsatz mit einer kalten, flachen Metallfläche plan drücken. Einige Sekunden halten, bis es fest ist.</div>
+  <div class="step"><h4>Prüfen</h4>Nach dem Abkühlen eine Schraube einmal komplett eindrehen. Hakt es, sitzt Kunststoff im Gewinde; Gewindebohrer kurz durchdrehen.</div>
+</div>
+
+<h2>Schritt für Schritt: große Teile verkleben</h2>
+<div class="steps">
+  <div class="step"><h4>Teilung planen</h4>Trennfläche eben und so gelegt, dass jede Hälfte in ihrer besten Orientierung ohne Support druckt. Passstifte oder Schwalbenschwanz zum Ausrichten einplanen.</div>
+  <div class="step"><h4>Trocken anpassen</h4>Erst ohne Kleber zusammenstecken. Was jetzt nicht passt, wird mit Kleber nur schlimmer.</div>
+  <div class="step"><h4>Flächen vorbereiten</h4>Mit P120 anschleifen, entstauben, mit Isopropanol entfetten. Bei PVB stattdessen Wasser mit Spülmittel.</div>
+  <div class="step"><h4>Kleber nach Material</h4>Siehe Tabelle oben. Dünn und vollflächig auftragen, ein kleiner Überschuss zeigt, dass die Fuge voll ist.</div>
+  <div class="step"><h4>Fixieren</h4>Mit Zwingen, Klebeband oder Gummibändern während der ganzen Aushärtezeit. Nicht vorzeitig belasten.</div>
+  <div class="step"><h4>Naht verschwinden lassen</h4>Überschuss abziehen, die Fuge spachteln und schleifen, wie unter <a href="#nachbearbeitung">Nachbearbeitung</a> beschrieben.</div>
+</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>Datenblätter der Gewindeeinsatz-Hersteller zu Loch-Ø, Lochtiefe und Mindestwandstärke.</li>
+    <li><a href="https://help.prusa3d.com/">Prusa Knowledge Base</a>: Einlegen von Muttern und Magneten per Druckpause, Toleranztests.</li>
+    <li>CNC Kitchen (Stefan Hermann): Versuchsreihen zu Gewindeeinsätzen, direkten Schrauben und Reibschweißen in Druckteilen.</li>
+    <li>Klebstoffhersteller, technische Merkblätter zu Cyanacrylat, Epoxid und Polyolefin-Primern.</li>
+  </ul>
+</div>

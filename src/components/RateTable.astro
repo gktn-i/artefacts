@@ -1,0 +1,66 @@
+---
+/* Vergleichstabelle mit Segmentbalken, im Stil der Filament-Tabelle
+   (src/content/druck/filamente.astro). Die Optik kommt aus den .fil-*-Regeln
+   in src/content/druck/_style.css; Farben je Kennwert (--mc) und je Kategorie
+   (--cc) werden hier inline gesetzt, damit jede Tabelle eigene haben kann.
+
+   Props
+     cats     [{ id, l, c }]            Kategorien (Filterknöpfe, Farbleiste)
+     metrics  [{ l, d, c }]             Kennwerte 1–10, Reihenfolge wie row.r
+     cols     [{ l, key, w?, sort? }]   Textspalten nach den Balken
+     rows     [{ n, cat, k, r, ...cols }]
+     list     Wort für den Zähler („Methoden“)
+     search   Platzhalter der Suche
+     minWidth Mindestbreite der Tabelle in px
+     note     Zusatz in der Legende */
+interface Cat { id: string; l: string; c: string }
+interface Metric { l: string; d: string; c: string }
+interface Col { l: string; key: string; w?: number; sort?: boolean }
+interface Props {
+  cats: Cat[];
+  metrics: Metric[];
+  cols: Col[];
+  rows: Record<string, any>[];
+  list: string;
+  search: string;
+  minWidth?: number;
+  note?: string;
+  first?: string;
+}
+const { cats, metrics, cols, rows, list, search, minWidth = 1100, note, first = "Methode" } = Astro.props;
+const catOf = Object.fromEntries(cats.map((c) => [c.id, c]));
+const count = (id: string) => rows.filter((r) => r.cat === id).length;
+---
+<div class="fil-wide">
+<div class="fil-legend" aria-label="Legende der Kennwerte">
+  {metrics.map((m) => <span class="lg" style={`--mc:${m.c}`}><i></i><b>{m.l}</b> {m.d}</span>)}
+  <span class="lg lg-note">Balken 1 bis 10, relativ zueinander, mehr ist immer besser. Spaltenkopf anklicken zum Sortieren.{note ? ` ${note}` : ""}</span>
+</div>
+<div class="fil" data-scope>
+  <div class="fil-bar">
+    <input class="search" type="search" data-search placeholder={search} aria-label={search.replace(/[:…].*$/, "").trim()} />
+    <div class="count" data-count></div>
+  </div>
+  <div class="controls">
+    <button type="button" data-filter="all" class="active">Alle <span class="fc">{rows.length}</span></button>
+    {cats.map((c) => <button type="button" data-filter={c.id} style={`--cc:${c.c}`}><i class="cdot"></i>{c.l} <span class="fc">{count(c.id)}</span></button>)}
+  </div>
+  <div class="tbl-wrap fil-tbl"><table style={`min-width:${minWidth}px`}>
+    <thead><tr>
+      <th data-s="text">{first}</th>
+      {metrics.map((m) => <th data-s="num" class="sc-h" title={m.d} style={`--mc:${m.c}`}><i class="dot"></i>{m.l}</th>)}
+      {cols.map((c) => <th data-s={c.sort ? "text" : undefined}>{c.l}</th>)}
+    </tr></thead>
+    <tbody data-list={list}>
+      {rows.map((r) => (
+        <tr data-item data-cat={r.cat} data-k={r.k} style={`--cc:${catOf[r.cat].c}`}>
+          <td class="txt fn"><b>{r.n}</b><span class="cb">{catOf[r.cat].l}</span></td>
+          {metrics.map((m, i) => <td class="sc" style={`--mc:${m.c}`}><span class="m" aria-hidden="true"><i style={`width:${r.r[i] * 10}%`}></i></span><span class="n">{r.r[i]}</span></td>)}
+          {cols.map((c) => <td class="txt ch" style={c.w ? `min-width:${c.w}px` : undefined} set:html={r[c.key]} />)}
+        </tr>
+      ))}
+    </tbody>
+  </table></div>
+  <div class="none" data-none hidden>Nichts passt zu dieser Auswahl.</div>
+</div>
+</div>

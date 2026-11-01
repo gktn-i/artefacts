@@ -1,0 +1,135 @@
+---
+import "./_style.css";
+import RateTable from "../../components/RateTable.astro";
+
+/* Kennwerte r = [Genau, Detail, Einfach, Groß, Günstig], 1–10,
+   relativ zueinander und immer „mehr ist besser“. */
+const CATS = [
+  { id: "foto", l: "Foto & Handy", c: "#2fb57a" },
+  { id: "licht", l: "Streifenlicht", c: "#3d8bf0" },
+  { id: "laser", l: "Laser", c: "#ec6a3c" },
+  { id: "messen", l: "Messen statt Scannen", c: "#e2ac2a" },
+  { id: "industrie", l: "Industrie & Dienstleister", c: "#8f99a8" },
+];
+const METRICS = [
+  { l: "Genau", d: "Maßgenauigkeit des Ergebnisses", c: "#3d8bf0" },
+  { l: "Detail", d: "feine Strukturen und Kanten", c: "#22aebf" },
+  { l: "Einfach", d: "Einarbeitung, Vorbereitung, Nacharbeit", c: "#2fb57a" },
+  { l: "Groß", d: "eignet sich auch für große Objekte", c: "#a06cf2" },
+  { l: "Günstig", d: "Anschaffung oder Kosten pro Scan", c: "#e2ac2a" },
+];
+const COLS = [
+  { l: "Genauigkeit", key: "g", w: 120 },
+  { l: "Objektgröße", key: "s", w: 130 },
+  { l: "Kosten", key: "e", w: 140 },
+  { l: "Gut für · schwach bei", key: "t", w: 290 },
+];
+const ROWS = [
+  /* ----------------------------------------------------------- Foto & Handy */
+  { n: "Photogrammetrie mit dem Handy", cat: "foto", k: "photogrammetrie handy app fotos smartphone polycam realityscan", r: [4, 5, 7, 8, 10],
+    g: "grob 0,5 bis 2 mm", s: "Tasse bis Gebäude", e: "0 € bis App-Abo",
+    t: "<b>Gut:</b> matte, strukturierte Objekte, Statuen, Steine, Gelände. <b>Schwach:</b> glänzend, durchsichtig, einfarbig glatt. Ohne Maßstab keine echte Größe." },
+  { n: "Photogrammetrie mit Kamera & Drehteller", cat: "foto", k: "photogrammetrie kamera systemkamera drehteller studio meshroom realityscan", r: [6, 8, 4, 6, 8],
+    g: "etwa 0,1 bis 0,5 mm", s: "Münze bis Möbel", e: "vorhandene Kamera, Software frei",
+    t: "<b>Gut:</b> Figuren, Fundstücke, Texturen in Fotoqualität. <b>Schwach:</b> viel Rechenzeit, Licht und Fokus müssen stimmen." },
+  { n: "Handy-LiDAR", cat: "foto", k: "lidar iphone ipad pro raum grundriss tiefensensor", r: [2, 2, 9, 9, 8],
+    g: "Zentimeterbereich", s: "Möbel bis Raum", e: "im Gerät enthalten",
+    t: "<b>Gut:</b> Räume, Grundrisse, grobe Volumen für Einbauten. <b>Schwach:</b> alles unter Schuhkartongröße." },
+  { n: "Gaussian Splatting & NeRF", cat: "foto", k: "gaussian splatting nerf neural ki fotorealistisch video", r: [1, 6, 7, 8, 9],
+    g: "nicht maßhaltig", s: "Objekt bis Szene", e: "frei bis App-Abo",
+    t: "<b>Gut:</b> fotorealistische Ansichten aus einem Video. <b>Schwach:</b> liefert kein sauberes Netz, für den Druck kaum brauchbar." },
+
+  /* ---------------------------------------------------------- Streifenlicht */
+  { n: "Streifenlicht-Handscanner", cat: "licht", k: "structured light streifenlicht handscanner infrarot weisslicht einsteiger", r: [7, 7, 7, 6, 5],
+    g: "etwa 0,05 bis 0,1 mm", s: "Faust bis etwa 1 m", e: "einige hundert bis 1.500 €",
+    t: "<b>Gut:</b> Ersatzteile, Körper, Autoteile, Figuren. <b>Schwach:</b> schwarz, glänzend, durchsichtig, nur mit Scanspray." },
+  { n: "Streifenlicht mit Drehteller", cat: "licht", k: "desktop tischscanner drehteller streifenlicht klein detail", r: [8, 8, 8, 2, 5],
+    g: "etwa 0,02 bis 0,05 mm", s: "Münze bis etwa 25 cm", e: "einige hundert bis wenige tausend €",
+    t: "<b>Gut:</b> kleine Teile mit vielen Details, Schmuck, Miniaturen. <b>Schwach:</b> alles, was nicht auf den Teller passt." },
+
+  /* ------------------------------------------------------------------ Laser */
+  { n: "Laserlinien-Handscanner", cat: "laser", k: "laser blau laserlinien marker referenzpunkte handscanner metrologie", r: [9, 8, 5, 8, 3],
+    g: "etwa 0,02 bis 0,05 mm", s: "Handfläche bis mehrere Meter", e: "ab etwa 1.000 € bis weit über 10.000 €",
+    t: "<b>Gut:</b> Reverse Engineering, Karosserie, dunkle und glänzende Teile oft ohne Spray. <b>Schwach:</b> braucht Referenzmarker, Haare und Stoff." },
+
+  /* ------------------------------------------------------ Messen statt Scannen */
+  { n: "Messen und nachkonstruieren", cat: "messen", k: "messschieber messen nachkonstruieren cad reverse engineering passteil", r: [8, 4, 6, 5, 10],
+    g: "0,02 bis 0,1 mm je Maß", s: "alles mit Regelgeometrie", e: "Messschieber",
+    t: "<b>Gut:</b> Halter, Adapter, Gehäuse, alles mit Bohrungen und Passflächen. <b>Schwach:</b> Freiformen und organische Flächen." },
+  { n: "Foto oder Flachbett für Konturen", cat: "messen", k: "flachbettscanner foto raster kontur 2d nachzeichnen profil konturlehre", r: [5, 4, 9, 4, 10],
+    g: "etwa 0,2 bis 0,5 mm", s: "flache Teile bis A4", e: "Scanner oder Handy",
+    t: "<b>Gut:</b> 2D-Umrisse, Dichtungen, Griffprofile mit Konturlehre. <b>Schwach:</b> alles, was echte Tiefe hat. Foto immer senkrecht und mit Maßstab." },
+
+  /* ---------------------------------------------- Industrie & Dienstleister */
+  { n: "Industrie-CT", cat: "industrie", k: "ct computertomografie roentgen innenstruktur dienstleister pruefung", r: [10, 10, 3, 4, 1],
+    g: "bis unter 0,01 mm", s: "bis etwa Schuhkarton", e: "Dienstleister, ab einigen hundert € je Scan",
+    t: "<b>Gut:</b> Innenstrukturen, Hohlräume, Prüfen von Druckteilen. <b>Schwach:</b> Kosten, dicke Metallteile." },
+  { n: "Koordinatenmessgerät & Messarm", cat: "industrie", k: "kmg koordinatenmessmaschine messarm taktil antasten qualitaet", r: [10, 4, 2, 6, 1],
+    g: "Mikrometerbereich", s: "Bauteil bis Maschine", e: "Dienstleister",
+    t: "<b>Gut:</b> Prüfmaße und Passflächen mit Protokoll. <b>Schwach:</b> Freiformen dauern, kein Netz für Deko." },
+];
+---
+<div class="kurz"><b>Ein Scan ist kein fertiges Modell, sondern eine Vorlage.</b> Für Freiformen wie Figuren, Körper oder Fundstücke ist er unschlagbar; für Teile mit Bohrungen und Passflächen ist der Messschieber oft schneller und genauer. Die Tabelle vergleicht {ROWS.length} Verfahren vom Handy bis zum Industrie-CT.</div>
+
+<h2>Wann was: Schnellwahl und Vergleich</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Ersatzteil mit Passflächen</div><div class="cd"><b>Messen und im CAD nachkonstruieren.</b> Ein Scan hilft nur als Referenz für die Form drumherum.</div></div>
+  <div class="card"><div class="ct">Figur, Statue, Fundstück</div><div class="cd"><b>Photogrammetrie</b> mit Kamera und Drehteller, oder ein <b>Streifenlicht-Scanner</b> für schnelle, maßhaltige Ergebnisse.</div></div>
+  <div class="card"><div class="ct">Kleine Teile, viele Details</div><div class="cd"><b>Streifenlicht mit Drehteller.</b> Bis etwa 25 cm unschlagbar in Detail und Bedienung.</div></div>
+  <div class="card"><div class="ct">Körper und Ergonomie</div><div class="cd"><b>Streifenlicht-Handscanner</b> für Orthesen, Griffe, Helme. Die Person muss still halten können.</div></div>
+  <div class="card"><div class="ct">Autoteil, groß und glänzend</div><div class="cd"><b>Laserlinien-Scanner</b> mit Referenzmarkern, sonst Streifenlicht mit Scanspray.</div></div>
+  <div class="card"><div class="ct">Raum oder Einbau</div><div class="cd"><b>Handy-LiDAR</b> für die groben Maße, kritische Stellen mit dem Maßband nachmessen.</div></div>
+</div>
+
+<h3>Alle Verfahren im Vergleich</h3>
+<RateTable cats={CATS} metrics={METRICS} cols={COLS} rows={ROWS} list="Verfahren" search="Suchen: Verfahren, Objekt, Eigenschaft …" minWidth={1260} first="Verfahren" />
+<div class="warn"><b>Genauigkeit ist nicht gleich Auflösung.</b> Die Werte sind typische Bereiche unter guten Bedingungen. Hersteller nennen oft die Punktauflösung oder die Genauigkeit eines einzelnen Bilds; über ein großes Objekt summieren sich die Fehler. Vergleichbare Angaben folgen der Richtlinie VDI/VDE 2634.</div>
+
+<h2>Schritt für Schritt: vom Objekt zum Druck</h2>
+<div class="steps">
+  <div class="step"><h4>Brauche ich überhaupt einen Scan?</h4>Bohrungen, Passflächen und ebene Flächen werden gemessen, Freiformen gescannt. Oft ist die Kombination am besten: Scan als Hintergrund im CAD, Funktionsflächen sauber neu gezeichnet.</div>
+  <div class="step"><h4>Objekt vorbereiten</h4>Sauber und matt machen. Glänzende, schwarze oder durchsichtige Flächen mit Scanspray einsprühen; sublimierende Sprays verschwinden nach einigen Stunden von selbst. Für Handscanner Referenzmarker auf und um das Objekt kleben.</div>
+  <div class="step"><h4>Licht und Umgebung</h4>Diffuses, gleichmäßiges Licht ohne harte Schatten und ohne direkte Sonne. Das Objekt steht auf einem Drehteller oder vor einem strukturierten Hintergrund und bewegt sich nicht.</div>
+  <div class="step"><h4>Aufnehmen</h4>Bei Photogrammetrie 50 bis 200 Fotos mit 60 bis 80 % Überlappung, feste Belichtung, kein Zoom. Bei Scannern im Arbeitsabstand bleiben, langsam führen, Unterseite in einem zweiten Durchgang und später zusammenfügen.</div>
+  <div class="step"><h4>Netz bereinigen</h4>Ausreißer und Untergrund löschen, Löcher schließen, das Netz wasserdicht machen und die Polygonzahl reduzieren. Ein druckbares Netz braucht keine 10 Millionen Dreiecke.</div>
+  <div class="step"><h4>Maßstab und Ausrichtung prüfen</h4>Ein bekanntes Maß am Objekt messen und mit dem Netz vergleichen, besonders nach Photogrammetrie. Achsen ausrichten, eine Standfläche plan schneiden.</div>
+  <div class="step"><h4>Nachkonstruieren oder direkt drucken</h4>Deko und Figuren direkt aus dem Netz slicen. Für Funktionsteile Ebenen, Zylinder und Bohrungen im CAD an den Scan anlegen und sauber neu modellieren.</div>
+  <div class="step"><h4>Probe drucken</h4>Kritische Passstellen erst als dünnen Ausschnitt drucken und anhalten. Das kostet zehn Minuten statt eines ganzen Fehldrucks.</div>
+</div>
+
+<h2>Schwierige Oberflächen</h2>
+<div class="tbl-wrap"><table style="min-width:680px">
+  <thead><tr><th>Oberfläche</th><th>Warum es scheitert</th><th>Was hilft</th></tr></thead>
+  <tbody>
+    <tr><td><b>Glänzend, Chrom</b></td><td>Spiegelt das Muster weg oder zurück</td><td>Scanspray, Laserlinien, Kreuzpolarisation bei Fotos</td></tr>
+    <tr><td><b>Schwarz, dunkel</b></td><td>Schluckt das Licht, zu wenig Signal</td><td>Scanspray, Belichtung hoch, Laser statt Streifenlicht</td></tr>
+    <tr><td><b>Durchsichtig</b></td><td>Licht geht hindurch, keine Oberfläche erkennbar</td><td>Nur mit Scanspray</td></tr>
+    <tr><td><b>Einfarbig glatt</b></td><td>Keine Merkmale zum Ausrichten der Bilder</td><td>Marker kleben, Muster aufsprühen, Drehteller mit Struktur</td></tr>
+    <tr><td><b>Haare, Fell, Stoff</b></td><td>Zu fein und bewegt sich</td><td>Mit Mütze oder Haarnetz scannen, Form später modellieren</td></tr>
+    <tr><td><b>Dünne Kanten</b></td><td>Werden vom Netz verschluckt oder durchlöchert</td><td>Nachkonstruieren, Scan nur als Referenz</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Software</h2>
+<div class="tbl-wrap"><table style="min-width:680px">
+  <thead><tr><th>Programm</th><th>Wofür</th><th>Hinweis</th></tr></thead>
+  <tbody>
+    <tr><td><b>Meshroom</b></td><td>Photogrammetrie</td><td>Frei und quelloffen, läuft am besten mit NVIDIA-Grafikkarte</td></tr>
+    <tr><td><b>RealityScan</b></td><td>Photogrammetrie, Desktop und App</td><td>Früher RealityCapture, für die meisten Privatnutzer kostenlos</td></tr>
+    <tr><td><b>Polycam, Scaniverse</b></td><td>Handy-Scan, LiDAR, Splatting</td><td>Schnell für erste Versuche, Exportformate prüfen</td></tr>
+    <tr><td><b>Software des Scanners</b></td><td>Aufnahme, Zusammenfügen, Export</td><td>Liegt jedem Streifenlicht- und Laserscanner bei</td></tr>
+    <tr><td><b>MeshLab, Blender</b></td><td>Netz bereinigen, reduzieren, reparieren</td><td>Beide frei; Blender bringt eine 3D-Print-Toolbox mit</td></tr>
+    <tr><td><b>Fusion, FreeCAD</b></td><td>Nachkonstruieren am Netz</td><td>Netz als Referenz einfügen, Flächen und Körper daran anlegen</td></tr>
+  </tbody>
+</table></div>
+<div class="tip"><b>Rechte beachten:</b> Gekaufte Figuren für den Eigenbedarf zu scannen ist meist unproblematisch, Weitergeben und Verkaufen der Scans nicht. Menschen nur mit Einwilligung scannen, ein Körperscan ist ein personenbezogenes Datum.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li>VDI/VDE 2634: Optische 3D-Messsysteme, Abnahme und Überwachung. Grundlage für vergleichbare Genauigkeitsangaben.</li>
+    <li><a href="https://alicevision.org/">AliceVision / Meshroom</a> und <a href="https://www.meshlab.net/">MeshLab</a>: Dokumentation zu Aufnahme und Netzbearbeitung.</li>
+    <li><a href="https://blog.prusa3d.com/">Prusa Blog</a>: Photogrammetrie mit Handy und Kamera für den 3D-Druck.</li>
+    <li>Datenblätter von Streifenlicht- und Laserscannern der Einsteiger- und Profiklasse zu Genauigkeit und Arbeitsbereich.</li>
+  </ul>
+</div>

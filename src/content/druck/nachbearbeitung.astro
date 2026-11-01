@@ -1,0 +1,191 @@
+---
+import "./_style.css";
+import RateTable from "../../components/RateTable.astro";
+
+/* Kennwerte r = [Kaschiert, Maßhaltig, Einfach, Tempo, Sicher], 1–10,
+   relativ zueinander und immer „mehr ist besser“. */
+const CATS = [
+  { id: "slicer", l: "Vorbeugen im Slicer", c: "#2fb57a" },
+  { id: "abtragen", l: "Abtragen", c: "#3d8bf0" },
+  { id: "auftragen", l: "Beschichten", c: "#e2ac2a" },
+  { id: "chemie", l: "Chemisch", c: "#ec6a3c" },
+  { id: "waerme", l: "Wärme", c: "#d95fa8" },
+  { id: "farbe", l: "Färben & Bemalen", c: "#a06cf2" },
+];
+const METRICS = [
+  { l: "Kaschiert", d: "wie gut Schichtlinien, Nähte und Narben verschwinden", c: "#3d8bf0" },
+  { l: "Maßhaltig", d: "wie wenig Maße und Details sich verändern", c: "#22aebf" },
+  { l: "Einfach", d: "Werkzeug, Übung und Fehlertoleranz", c: "#2fb57a" },
+  { l: "Tempo", d: "Arbeits- und Wartezeit pro Teil", c: "#e2ac2a" },
+  { l: "Sicher", d: "wenig Dämpfe, Staub, Brand- und Hautrisiko", c: "#ec6a3c" },
+];
+const COLS = [
+  { l: "Material", key: "mat", w: 130 },
+  { l: "Mittel & Richtwerte", key: "mit", w: 230 },
+  { l: "Wann nehmen", key: "t", w: 250 },
+];
+const ROWS = [
+  /* ------------------------------------------------------------- Slicer */
+  { n: "Orientierung & Naht", cat: "slicer", k: "ausrichtung druckrichtung z-naht seam scarf naht verstecken sichtflaeche", r: [5, 9, 9, 10, 10],
+    mat: "alle", mit: "Sichtflächen nicht auf Support, Naht in eine Ecke oder nach hinten; Scarf-Naht in Orca und Bambu Studio",
+    t: "Immer zuerst. Kostet nichts und spart die halbe Schleifarbeit." },
+  { n: "Feine / variable Schichthöhe", cat: "slicer", k: "schichthoehe layer height adaptiv variable 0,08 feine schichten figur rundung", r: [6, 9, 9, 2, 10],
+    mat: "alle", mit: "0,08 bis 0,12 mm für Sichtteile, variable Schichthöhe nur an Rundungen",
+    t: "Figuren und gewölbte Flächen. Verdoppelt bis verdreifacht die Druckzeit." },
+  { n: "Ironing (Bügeln)", cat: "slicer", k: "ironing buegeln oberseite deckflaeche glatt top surface", r: [6, 9, 8, 4, 10],
+    mat: "PLA, PETG, ABS", mit: "Düse fährt die oberste Schicht ein zweites Mal mit 10 bis 15 % Fluss ab",
+    t: "Nur flache Oberseiten: Deckel, Schilder, Ablagen. Auf Seitenflächen wirkungslos." },
+  { n: "Fuzzy Skin", cat: "slicer", k: "fuzzy skin textur rau griff schichtlinien verstecken", r: [7, 6, 9, 7, 10],
+    mat: "alle", mit: "Zufällige Wandauslenkung von 0,2 bis 0,3 mm",
+    t: "Griffe, Gehäuse, Werkzeug: raue Textur statt Glätte, Linien sind trotzdem weg." },
+
+  /* ----------------------------------------------------------- Abtragen */
+  { n: "Support entfernen", cat: "abtragen", k: "stuetzen support entfernen narben seitenschneider tree baum", r: [2, 8, 8, 8, 7],
+    mat: "alle", mit: "Seitenschneider, Spachtel, Pinzette, Entgrater; Baum-Support von außen nach innen lösen",
+    t: "Immer der erste Schritt. Schneiden statt reißen, sonst bleiben Krater in der Fläche." },
+  { n: "Entgraten & Schaben", cat: "abtragen", k: "entgrater deburring klinge ziehklinge elefantenfuss naht kante grat", r: [4, 8, 9, 8, 7],
+    mat: "alle außer TPU", mit: "Entgrater, Bastelmesser, Ziehklinge; Klinge schräg ziehen, nicht schneiden",
+    t: "Elefantenfuß, Naht, Fadenreste an Kanten. Schneller und sauberer als Schleifen." },
+  { n: "Schleifen trocken", cat: "abtragen", k: "schleifen schleifpapier koernung p120 p240 exzenter staub", r: [6, 6, 6, 4, 5],
+    mat: "PLA, PETG, ABS, ASA, PA", mit: "P120 bis P240, von Hand oder langsam laufend; PLA schmiert bei Reibwärme",
+    t: "Linien anrauen und grob einebnen vor dem Füller. Nicht bis aufs Infill schleifen." },
+  { n: "Nassschleifen", cat: "abtragen", k: "nassschleifen wasser schleifpapier p400 p800 p1500 p2000 staubfrei", r: [8, 7, 5, 3, 8],
+    mat: "alle harten", mit: "Wasserfestes Papier P400 bis P2000, Wasser mit einem Tropfen Spülmittel",
+    t: "Auf Füller und Lack. Kein Staub, kein Schmieren, deutlich feineres Ergebnis." },
+  { n: "Strahlen (Glasperlen)", cat: "abtragen", k: "sandstrahlen glasperlen strahlen matt gleichmaessig kabine", r: [5, 8, 5, 8, 5],
+    mat: "PLA, PETG, ABS, PA, CF/GF", mit: "Strahlkabine, Glasperlen fein, 2 bis 4 bar",
+    t: "Gleichmäßig matte Serienteile, nimmt Glanz und feine Fäden. Glättet keine Linien." },
+  { n: "Polieren", cat: "abtragen", k: "polieren polierpaste filz hochglanz transparent klar petg", r: [9, 7, 4, 3, 8],
+    mat: "Lack, Epoxid, PETG, PCTG, PC", mit: "Nach P2000 nass: Polierpaste mit Filz oder Mikrofaser, niedrige Drehzahl",
+    t: "Hochglanz und klare Durchsicht bei transparenten Teilen." },
+  { n: "Drehwerkzeug", cat: "abtragen", k: "dremel multitool fraeser schleifhuelse bohren nacharbeiten", r: [4, 4, 6, 9, 5],
+    mat: "harte Kunststoffe", mit: "Niedrige Drehzahl, siehe <a href=\"dremel-8250-cheatsheet.html#material\">Dremel</a>",
+    t: "Bohrungen nacharbeiten, Support in Hohlräumen, grobe Korrekturen. Schmilzt bei zu viel Drehzahl." },
+
+  /* ---------------------------------------------------------- Beschichten */
+  { n: "Spachteln", cat: "auftragen", k: "spachtel feinspachtel 2k polyester fuge luecke naht fuellen", r: [7, 4, 4, 3, 6],
+    mat: "alle harten", mit: "1K-Feinspachtel für Poren, 2K-Polyesterspachtel für Fugen und Klebenähte",
+    t: "Klebenähte, Löcher, tiefe Linien. Danach P240 schleifen." },
+  { n: "Füllgrundierung", cat: "auftragen", k: "fueller filler primer grundierung spruehdose schichtlinien", r: [8, 6, 7, 6, 4],
+    mat: "PLA, PETG, ABS, ASA, PA", mit: "Spraydose, 2 bis 3 dünne Gänge, Zwischenschliff P320 bis P400",
+    t: "Der Standard für lackierte Sichtteile. Schluckt Linien bis etwa 0,2 mm Schichthöhe." },
+  { n: "Lackieren (Spraydose)", cat: "auftragen", k: "lackieren spraydose acryllack farbe decklack klarlack", r: [6, 7, 7, 6, 4],
+    mat: "auf Grundierung", mit: "Mehrere dünne Gänge, 20 bis 30 cm Abstand, 18 bis 25 °C",
+    t: "Gleichmäßige Farbe auf größeren Flächen. PP und PE brauchen Kunststoffhaftgrund." },
+  { n: "Airbrush", cat: "auftragen", k: "airbrush miniatur verlauf modellbau acrylfarbe detail", r: [6, 9, 4, 5, 6],
+    mat: "auf Grundierung", mit: "Wasserbasierte Acrylfarben, 1,5 bis 2 bar, Düse 0,2 bis 0,3 mm",
+    t: "Miniaturen, Verläufe, Tarnmuster. Trägt kaum auf, Details bleiben scharf." },
+  { n: "Epoxid-Beschichtung", cat: "auftragen", k: "epoxid harz xtc beschichtung selbstnivellierend glanz cosplay", r: [9, 3, 5, 4, 4],
+    mat: "PLA, PETG, ABS, PA", mit: "Dünnflüssiges 2K-Harz mit dem Pinsel, Topfzeit beachten, Handschuhe",
+    t: "Große glatte Flächen wie Helme und Cosplay in einem Durchgang. Feine Details verlaufen." },
+  { n: "Wassertransferdruck", cat: "auftragen", k: "hydrodipping wassertransferdruck carbon holz muster camouflage", r: [6, 7, 4, 5, 6],
+    mat: "auf Grundierung", mit: "Folie auf Wasser, Aktivator, eintauchen, Klarlack",
+    t: "Muster wie Carbon, Holz oder Camouflage auf gewölbten Teilen." },
+  { n: "Galvanisieren", cat: "auftragen", k: "galvanik verkupfern vernickeln metallisieren leitlack elektrolyt", r: [8, 6, 2, 2, 2],
+    mat: "PLA, ABS, PETG", mit: "Leitlack, dann Kupfer- und Nickelbad mit Netzteil; Elektrolyte sind giftig",
+    t: "Echte Metalloberfläche und spürbar steifer. Ein Projekt für sich, nichts für den Küchentisch." },
+
+  /* ------------------------------------------------------------ Chemisch */
+  { n: "Aceton-Dampf", cat: "chemie", k: "aceton dampf glaetten abs asa hochglanz vapor smoothing", r: [9, 4, 6, 6, 2],
+    mat: "ABS, ASA", mit: "Kalt in geschlossenem Glasgefäß, 30 min bis mehrere Stunden",
+    t: "Hochglanz und dichte Oberfläche bei ABS. Kanten runden sich, feine Details verschwinden." },
+  { n: "Isopropanol-Nebel (PVB)", cat: "chemie", k: "pvb polysmooth polysher isopropanol ipa nebel glaetten transparent", r: [9, 5, 7, 6, 5],
+    mat: "nur PVB-Filament", mit: "IPA-Nebel aus Ultraschallvernebler oder Dampf, 20 bis 40 min",
+    t: "Glatte, transparente Teile ohne Aceton. Funktioniert nur mit PVB." },
+  { n: "Support auflösen", cat: "chemie", k: "pva bvoh hips loeslich wasser limonen support aufloesen", r: [3, 10, 8, 2, 8],
+    mat: "PVA, BVOH, HIPS", mit: "PVA und BVOH in lauwarmem Wasser, HIPS in D-Limonen, Stunden bis einen Tag",
+    t: "Innenliegende Kanäle und Überhänge, an die kein Werkzeug kommt." },
+
+  /* ---------------------------------------------------------------- Wärme */
+  { n: "Heißluft", cat: "waerme", k: "heissluft foehn faeden stringing haare weiss bruch", r: [2, 8, 9, 10, 6],
+    mat: "PLA, PETG, ABS", mit: "Heißluftföhn, kurze Stöße aus 5 bis 10 cm",
+    t: "Fäden und Härchen in Sekunden weg, Weißbruch an PLA verschwindet. Kein Feuerzeug." },
+  { n: "Heißspitze nachbessern", cat: "waerme", k: "loetkolben spitze luecke loch schliessen nacharbeiten", r: [5, 5, 6, 7, 5],
+    mat: "alle Thermoplaste", mit: "Eigene Lötspitze, gleiches Filament als Zusatzmaterial",
+    t: "Kleine Löcher und Lücken im Gewebe schließen. Absaugung, die Dämpfe sind nicht harmlos." },
+  { n: "Tempern", cat: "waerme", k: "tempern annealing ofen kristallin hitzefest ht-pla festigkeit schrumpf", r: [1, 3, 6, 3, 8],
+    mat: "PLA, HT-PLA, PET-CF, PA-CF", mit: "Im Ofen über die Glasübergangstemperatur, PLA 80 bis 100 °C, langsam abkühlen",
+    t: "Für Hitzefestigkeit, nicht für Optik. Das Teil schrumpft in XY und wächst in Z." },
+
+  /* ------------------------------------------------------ Färben & Bemalen */
+  { n: "Pinsel & Acrylfarbe", cat: "farbe", k: "pinsel acrylfarbe bemalen wash drybrush miniatur figur", r: [3, 9, 8, 5, 9],
+    mat: "auf Grundierung", mit: "Acrylfarben, Washes für Tiefen, Drybrushing für Kanten",
+    t: "Figuren und Details. Grundierung zuerst, sonst perlt die Farbe von PLA ab." },
+  { n: "Nylon färben", cat: "farbe", k: "nylon faerben textilfarbe pa farbbad naturfarben", r: [1, 10, 7, 5, 8],
+    mat: "PA naturfarben", mit: "Textilfarbe im heißen Farbbad, 10 bis 30 min, danach trocknen",
+    t: "Durchgefärbte PA-Teile, die beim Kratzen nicht weiß werden." },
+  { n: "Beizen & Ölen", cat: "farbe", k: "holz fill beize oel wachs holzoptik", r: [4, 9, 8, 6, 8],
+    mat: "Holz-Fill", mit: "Anschleifen P240, Holzbeize oder Öl wie bei echtem Holz",
+    t: "Holzoptik vertiefen. Ölsorten und Verarbeitung im Modul <a href=\"holzarbeiten.html#oele\">Holzarbeiten</a>." },
+];
+---
+<div class="kurz"><b>Die meisten Drucke brauchen keine Nachbearbeitung, sondern einen besseren Slicer-Plan.</b> Was danach noch stört, wird in fester Reihenfolge abgearbeitet: Support weg, Kanten entgraten, Lücken füllen, schleifen, grundieren, lackieren. Die Tabelle zeigt {ROWS.length} Methoden, jede mit dem Material, für das sie taugt.</div>
+
+<h2>Wann was: Schnellwahl und Vergleich</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Nur Fäden und Härchen</div><div class="cd"><b>Heißluftföhn</b> in kurzen Stößen. Fertig in zehn Sekunden, kein Schleifen nötig.</div></div>
+  <div class="card"><div class="ct">Lackiertes Sichtteil</div><div class="cd"><b>Füllgrundierung</b> mit Zwischenschliff, dann Lack. Der Standardweg, Schritt für Schritt unten.</div></div>
+  <div class="card"><div class="ct">Hochglanz ohne Lack</div><div class="cd"><b>Aceton-Dampf</b> bei ABS und ASA, <b>Isopropanol-Nebel</b> bei PVB. PLA lässt sich so nicht glätten.</div></div>
+  <div class="card"><div class="ct">Große glatte Flächen</div><div class="cd"><b>Epoxid-Beschichtung</b> für Helme und Cosplay: ein Anstrich ersetzt drei Schleifgänge.</div></div>
+  <div class="card"><div class="ct">Figuren und Miniaturen</div><div class="cd"><b>0,08 mm Schichthöhe</b>, Grundierung aus der Dose, dann <b>Airbrush</b> oder Pinsel. Kein Spachtel, der schluckt Details.</div></div>
+  <div class="card"><div class="ct">Funktionsteil, warm</div><div class="cd"><b>Tempern</b> von HT-PLA oder PET-CF. Schrumpf vorher am Testkörper messen.</div></div>
+  <div class="card"><div class="ct">Griffige Oberfläche</div><div class="cd"><b>Fuzzy Skin</b> im Slicer statt Schleifen: Linien sind weg, das Teil liegt besser in der Hand.</div></div>
+  <div class="card"><div class="ct">Matte Serienteile</div><div class="cd"><b>Glasperlen strahlen</b>: gleichmäßig, schnell, ohne Lack. Braucht eine Strahlkabine.</div></div>
+  <div class="card"><div class="ct">Support in Hohlräumen</div><div class="cd"><b>PVA</b> oder <b>BVOH</b> als zweites Material und einfach auswaschen.</div></div>
+</div>
+
+<h3>Alle Methoden im Vergleich</h3>
+<RateTable cats={CATS} metrics={METRICS} cols={COLS} rows={ROWS} list="Methoden" search="Suchen: Methode, Material, Werkzeug …" minWidth={1240} />
+<div class="warn"><b>Richtwerte aus der Praxis.</b> Die Kennwerte ordnen die Methoden zueinander ein und ersetzen keinen Versuch an einem Probeteil aus derselben Spule. Lacke, Spachtel und Harze immer nach dem technischen Merkblatt des Herstellers verarbeiten.</div>
+
+<h2>Schritt für Schritt: lackierfertige Oberfläche</h2>
+<p>Der klassische Weg für Sichtteile aus PLA, PETG oder ABS. Jeder Schritt deckt nur auf, was der vorige übrig gelassen hat; ein Schritt zu viel kostet nur Zeit, einer zu wenig sieht man im Lack.</p>
+<div class="steps">
+  <div class="step"><h4>Support und Narben</h4>Stützen mit dem Seitenschneider abknipsen statt abreißen, Reste mit Entgrater oder Klinge abziehen. Elefantenfuß und Naht gleich mit entfernen.</div>
+  <div class="step"><h4>Grob schleifen, P120 bis P180</h4>Trocken und von Hand, bis die Schichtlinien angeraut, aber nicht verschwunden sind. Bei PLA langsam arbeiten: Reibwärme macht es schmierig.</div>
+  <div class="step"><h4>Lücken spachteln</h4>Poren mit 1K-Feinspachtel, Klebenähte und tiefe Stellen mit 2K-Spachtel. Durchtrocknen lassen, mit P240 einebnen.</div>
+  <div class="step"><h4>Füllgrundierung, zwei bis drei Gänge</h4>Dünn aus 20 bis 30 cm sprühen, zwischen den Gängen etwa 10 Minuten ablüften. Vor dem Schleifen nach Herstellerangabe durchtrocknen lassen, meist einige Stunden.</div>
+  <div class="step"><h4>Zwischenschliff nass, P320 bis P400</h4>Ein Hauch Kontrastfarbe oder Bleistift auf der Fläche zeigt, wo noch Tiefen sind. Schritt 4 und 5 wiederholen, bis nichts mehr durchscheint.</div>
+  <div class="step"><h4>Feinschliff P600 und reinigen</h4>Nass schleifen, abspülen, trocknen, mit Silikonentferner oder Isopropanol abwischen. Ab jetzt nur noch mit Handschuhen anfassen.</div>
+  <div class="step"><h4>Decklack in dünnen Gängen</h4>Lieber vier dünne als zwei dicke Gänge. 18 bis 25 °C, keine Sonne, kein Wind. Läufer erst nach dem Durchhärten wegschleifen.</div>
+  <div class="step"><h4>Klarlack und polieren</h4>Für Hochglanz nach dem Durchhärten mit P1500 bis P2000 nass schleifen und mit Polierpaste aufpolieren.</div>
+</div>
+<div class="tip"><b>PVB-Teile nicht mit Isopropanol reinigen:</b> Das löst die Oberfläche an. Hier Wasser mit Spülmittel nehmen.</div>
+
+<h2>Schritt für Schritt: Aceton-Dampf</h2>
+<div class="steps">
+  <div class="step"><h4>Teil vorbereiten</h4>Nur ABS oder ASA. Support entfernen und entgraten, denn der Dampf glättet Linien, aber keine Narben.</div>
+  <div class="step"><h4>Glasgefäß auskleiden</h4>Glas oder Metall mit Deckel, kein Kunststoff. Küchenpapier an die Innenwände legen und mit wenig Aceton tränken, so dass kein See am Boden steht.</div>
+  <div class="step"><h4>Teil auf ein Podest</h4>Auf Alufolie oder ein Glasstück, damit es das Papier nicht berührt. Deckel locker auflegen, nicht verschrauben.</div>
+  <div class="step"><h4>Kalt warten und kontrollieren</h4>Bei Raumtemperatur alle 10 bis 15 Minuten durch das Glas schauen. Je nach Temperatur dauert es 30 Minuten bis einige Stunden. Rausnehmen, sobald die Fläche glänzt.</div>
+  <div class="step"><h4>Aushärten lassen</h4>Nicht anfassen. Die Oberfläche bleibt einige Stunden weich, über Nacht an der frischen Luft ausgasen lassen.</div>
+</div>
+<div class="stop"><b>Aceton nie erhitzen.</b> Kein Druckbett, keine Heizplatte, kein Ofen. Aceton hat einen Flammpunkt um −20 °C, die Dämpfe sind schwerer als Luft und sammeln sich am Boden. Im Freien oder bei starker Lüftung arbeiten, keine Zündquelle in der Nähe, Nitrilhandschuhe tragen.</div>
+
+<h2>Schritt für Schritt: Tempern</h2>
+<div class="steps">
+  <div class="step"><h4>Testkörper zuerst</h4>Einen Würfel aus derselben Spule mittempern und vorher und nachher messen. So kennt man den Schrumpf und kann Passteile im CAD vorhalten.</div>
+  <div class="step"><h4>Ofen prüfen</h4>Backöfen schwanken um 10 bis 20 °C. Mit einem eigenen Thermometer messen; ein Mini-Backofen nur für die Werkstatt ist ideal.</div>
+  <div class="step"><h4>Einbetten</h4>Teil in feinen Sand oder Salz in einer Auflaufform drücken und verdichten. Das stützt alle Flächen und hält die Form.</div>
+  <div class="step"><h4>Halten</h4>PLA und HT-PLA bei 80 bis 100 °C etwa 30 bis 60 Minuten. Composites nach dem Datenblatt der Spule, die Werte unterscheiden sich stark.</div>
+  <div class="step"><h4>Im Ofen abkühlen</h4>Ofen aus, Tür zu, langsam auf Raumtemperatur kommen lassen. Schnelles Abkühlen erzeugt Spannungen und Verzug.</div>
+</div>
+
+<h2>Staub, Dämpfe, Haut</h2>
+<div class="grid3">
+  <div class="card"><div class="ct">Schleifstaub</div><div class="cd">Ist Mikroplastik. Nass schleifen oder absaugen, beim Trockenschliff <b>FFP2</b>. Carbon- und Glasfaserstaub reizt Haut und Lunge zusätzlich.</div></div>
+  <div class="card"><div class="ct">Lack und Grundierung</div><div class="cd">Im Freien sprühen. In Innenräumen eine Halbmaske mit <b>A2/P2-Kombifilter</b>, eine Staubmaske reicht nicht.</div></div>
+  <div class="card"><div class="ct">Harze und Spachtel</div><div class="cd">Epoxid und Polyester können bei Hautkontakt sensibilisieren. <b>Nitrilhandschuhe</b>, Reste aushärten lassen, nicht in den Abfluss.</div></div>
+</div>
+<div class="warn"><b>PLA lässt sich nicht sinnvoll chemisch glätten.</b> Die Lösemittel, die PLA wirklich anlösen, etwa Dichlormethan, sind gesundheitsschädlich und gehören nicht in die Hobbywerkstatt. Für PLA bleibt der Weg über Füller und Lack.</div>
+
+<div class="srcs">
+  <div class="sh">Quellen zu diesem Abschnitt</div>
+  <ul>
+    <li><a href="https://help.prusa3d.com/">Prusa Knowledge Base</a>: Ironing, Fuzzy Skin, Nachbearbeitung und Tempern von Druckteilen.</li>
+    <li><a href="https://wiki.bambulab.com/en/software/bambu-studio/">Bambu Lab Wiki — Bambu Studio</a>: Ironing, Scarf-Naht, Fuzzy Skin.</li>
+    <li><a href="https://polymaker.com/">Polymaker</a>: Verarbeitung von PolySmooth (PVB) mit Isopropanol.</li>
+    <li><a href="https://gestis.dguv.de/">IFA GESTIS-Stoffdatenbank</a>: Aceton, Isopropanol, Dichlormethan (Flammpunkt, Dampfdichte, Schutzmaßnahmen).</li>
+    <li>Technische Merkblätter der Lack-, Spachtel- und Harzhersteller zu Trocken- und Topfzeiten.</li>
+  </ul>
+</div>
