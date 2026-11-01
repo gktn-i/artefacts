@@ -125,8 +125,10 @@ window.__prepTables = function (root) {
         var t = td.textContent.trim();
         /* class="txt" schaltet die Zahlenerkennung ab: fuer Fliesstext, in dem
            zufaellig eine Zahl steckt (Typenbezeichnung, Sendername, Bahnnummer). */
+        /* Ein Wort aus vier und mehr Buchstaben ("offen", "Pflicht") macht die
+           Zelle zu Text; Einheiten wie mm, kHz, mAh oder °C bleiben Zahlen. */
         if (i > 0 && !td.classList.contains("txt") && t.length <= 26 && /\d/.test(t) &&
-            t.split(" ").length <= 5) td.classList.add("numcell");
+            t.split(" ").length <= 5 && !/[A-Za-zÄÖÜäöüß]{4,}/.test(t)) td.classList.add("numcell");
         else td.classList.remove("numcell");
         col += span;
       });

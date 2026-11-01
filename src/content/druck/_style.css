@@ -23,12 +23,12 @@
 
 /* Eingabefelder */
 .mx-druck .field{position:relative}
-.mx-druck .field label{display:block;font-size:10.5px;font-weight:600;letter-spacing:.03em;
+.mx-druck .field label{display:block;font-size:11px;font-weight:600;letter-spacing:.03em;
   color:var(--dim);margin-bottom:5px;text-transform:uppercase}
 .mx-druck .field input{width:100%;background:var(--inset);border:1px solid var(--border);color:var(--text);
   border-radius:var(--radius-sm);padding:8px 9px;font-family:var(--mono);font-size:13px;outline:none}
-.mx-druck .field input:focus{border-color:var(--accent);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.mx-druck .field input:focus{border-color:var(--accent)}
+.mx-druck .field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .mx-druck .suf{position:absolute;right:9px;top:30px;color:var(--faint);font-size:11px;
   font-family:var(--mono);pointer-events:none}
 
@@ -59,7 +59,7 @@
   border-bottom:1px dashed var(--borderSoft)}
 .mx-druck .kv:last-child{border-bottom:none}
 .mx-druck .kv .v{font-family:var(--mono)}
-.mx-druck .barwrap .lbl{display:flex;justify-content:space-between;font-size:10.5px;color:var(--faint);
+.mx-druck .barwrap .lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--faint);
   text-transform:uppercase;letter-spacing:.04em}
 .mx-druck .barwrap .bar{height:9px;border-radius:6px;background:var(--inset);border:1px solid var(--border);
   overflow:hidden;margin-top:6px}
@@ -95,7 +95,7 @@
 .mx-druck .fil-legend .lg{display:inline-flex;align-items:center;gap:6px}
 .mx-druck .fil-legend .lg b{color:var(--text);font-weight:650}
 .mx-druck .fil-legend .lg i{width:22px;height:8px;border-radius:3px;background:var(--mc)}
-.mx-druck .fil-legend .lg-note{flex-basis:100%;color:var(--faint);font-size:11.8px}
+.mx-druck .fil-legend .lg-note{flex-basis:100%;color:var(--faint);font-size:12.5px}
 
 /* Suche + Zähler in einer Zeile, Filter mit Farbpunkt und Anzahl */
 .mx-druck .fil-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin-bottom:.7rem}
@@ -103,7 +103,7 @@
 .mx-druck .fil-bar .count{margin:0}
 .mx-druck .fil .controls button{display:inline-flex;align-items:center;gap:6px}
 .mx-druck .fil .controls .cdot{width:8px;height:8px;border-radius:50%;background:var(--cc)}
-.mx-druck .fil .controls .fc{font-family:var(--mono);font-size:10.5px;color:var(--faint);font-weight:500}
+.mx-druck .fil .controls .fc{font-family:var(--mono);font-size:11px;color:var(--faint);font-weight:500}
 .mx-druck .fil .controls button.active .fc{color:inherit}
 
 /* Ausbruch aus der 1040px-Spalte: auf großen Bildschirmen so breit wie der
@@ -123,9 +123,9 @@
   box-shadow:inset 3px 0 0 var(--cc), 1px 0 0 var(--border);min-width:170px}
 .mx-druck .fil-tbl tbody tr:hover td.fn{background:var(--surface-hover)}
 .mx-druck .fil-tbl td.fn b{display:block;font-size:13.4px;line-height:1.3;font-weight:650}
-.mx-druck .fil-tbl .cb{margin-top:4px;font-size:10px;padding:1px 8px;
+.mx-druck .fil-tbl .cb{margin-top:4px;font-size:11px;padding:1px 8px;
   background:color-mix(in srgb, var(--cc) 16%, transparent);
-  color:color-mix(in srgb, var(--cc) 62%, var(--text));
+  color:color-mix(in srgb, var(--cc) 50%, var(--text));
   border:1px solid color-mix(in srgb, var(--cc) 35%, transparent)}
 .mx-druck .fil-tbl th.sc-h .dot{display:inline-block;width:8px;height:8px;border-radius:2px;
   background:var(--mc);margin-right:5px;vertical-align:0}

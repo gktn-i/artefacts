@@ -127,7 +127,7 @@ const count = (id) => F.filter((f) => f.cat === id).length;
 <div class="fil-wide">
 <div class="fil-legend" aria-label="Legende der Kennwerte">
   {METRICS.map((m) => <span class={`lg s-${m.id}`}><i></i><b>{m.l}</b> {m.d}</span>)}
-  <span class="lg lg-note">Balken 1 bis 10, relativ zueinander. Spaltenkopf anklicken zum Sortieren.</span>
+  <span class="lg lg-note">Balken 1 bis 10, relativ zueinander.<span class="sort-hint"> Spaltenkopf anklicken zum Sortieren.</span></span>
 </div>
 <div class="fil" data-scope>
   <div class="fil-bar">

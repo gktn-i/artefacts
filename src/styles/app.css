@@ -56,7 +56,7 @@
   --surface-2: #262b33;
   --text: #d8dce3;
   --muted: #a7afba;
-  --faint: #848d99;
+  --faint: #929ba7;
   --border: #2d323b;
   --border-strong: #3e454f;
   --c-soft: color-mix(in srgb, var(--c) 14%, transparent);
@@ -71,7 +71,7 @@
     --surface-2: #262b33;
     --text: #d8dce3;
     --muted: #a7afba;
-    --faint: #848d99;
+    --faint: #929ba7;
     --border: #2d323b;
     --border-strong: #3e454f;
     --c-soft: color-mix(in srgb, var(--c) 14%, transparent);
@@ -89,7 +89,7 @@
 
 /* ==================================================================== BASIS */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
+html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; scrollbar-color: var(--border-strong) transparent; }
 body {
   background: var(--bg);
   color: var(--text);
@@ -134,6 +134,7 @@ a { color: inherit; }
 }
 
 kbd {
+  white-space: nowrap;
   font: 500 11px/1 var(--mono);
   color: var(--faint);
   border: 1px solid var(--border-strong);
@@ -292,6 +293,7 @@ kbd {
   color: var(--text);
   font-weight: 600;
 }
+.modlink.on .ct { color: var(--muted); }
 
 /* --- Schnellzugriff: Aufgaben des Hubs mit Direktlinks ------------------- */
 .tree-label.ml { margin-top: 20px; }
@@ -387,7 +389,7 @@ kbd {
 /* Abschnitte des aktiven Moduls — vom Hash-Router bedient */
 .secnav { padding: 5px 7px 9px; }
 .secnav .gl {
-  font: 600 10.5px/1 var(--ui);
+  font: 600 11px/1 var(--ui);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--faint);
@@ -432,7 +434,7 @@ kbd {
 .rail-foot {
   padding: 12px 16px 14px;
   border-top: 1px solid var(--border);
-  font: 400 11.5px/1.7 var(--mono);
+  font: 400 12px/1.7 var(--mono);
   color: var(--faint);
 }
 .rail-foot a { color: var(--muted); text-decoration: none; }
@@ -658,7 +660,7 @@ html:has(.pal[open]) { overflow: hidden; }
 .pal .r:not(.sel):hover { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
 .pal .r .kd {
   flex: 0 0 auto;
-  font: 500 10.5px/1 var(--ui);
+  font: 500 11px/1 var(--ui);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--faint);
@@ -680,11 +682,6 @@ html:has(.pal[open]) { overflow: hidden; }
 
 /* ================================================================ DASHBOARD */
 .dash { max-width: var(--maxw); margin: 0 auto; padding: 36px 28px 44px; }
-.dash-kicker {
-  font: 500 12px/1 var(--mono);
-  letter-spacing: 0.05em;
-  color: var(--c);
-}
 .dash h1 {
   font: 700 clamp(28px, 4vw, 40px)/1.12 var(--display);
   letter-spacing: -0.015em;
@@ -740,7 +737,7 @@ html:has(.pal[open]) { overflow: hidden; }
   font: 700 20px/1.2 var(--display);
   letter-spacing: -0.01em;
 }
-.rowlabel .n { font: 400 12px/1 var(--mono); color: var(--faint); }
+.rowlabel .n { font: 400 12.5px/1.3 var(--ui); color: var(--faint); font-variant-numeric: tabular-nums; }
 .rowlabel .ln { flex: 1 1 auto; height: 1px; background: var(--border); align-self: center; }
 
 /* Hub-Kacheln — ruhige Karten, Akzent nur im Symbolfeld */
@@ -829,7 +826,7 @@ html:has(.pal[open]) { overflow: hidden; }
   text-decoration: none;
 }
 .dirgroup .gh a:hover { color: var(--hx); }
-.dirgroup .gh .ct { margin-left: auto; font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
+.dirgroup .gh .ct { margin-left: auto; font-size: 12px; color: var(--faint); font-variant-numeric: tabular-nums; }
 .dirgroup ul { list-style: none; column-width: 200px; column-gap: 24px; }
 .dirgroup li { break-inside: avoid; }
 .dirgroup li a {
@@ -1020,7 +1017,7 @@ html:has(.pal[open]) { overflow: hidden; }
 .modrow .hd a.name:hover { color: var(--c); }
 .modrow .hd a.name::after { content: ""; position: absolute; inset: 0; }
 .modrow .kind {
-  font: 600 10.5px/1 var(--ui);
+  font: 600 11px/1 var(--ui);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--faint);
@@ -1181,7 +1178,7 @@ html.no-js .msec { display: block; margin-bottom: 44px; }
 }
 .pager a:hover { border-color: color-mix(in srgb, var(--c) 45%, var(--border)); }
 .pager a.next { text-align: right; }
-.pager a .lb { font: 600 10.5px/1 var(--ui); letter-spacing: 0.07em; text-transform: uppercase; color: var(--faint); }
+.pager a .lb { font: 600 11px/1 var(--ui); letter-spacing: 0.07em; text-transform: uppercase; color: var(--faint); }
 .pager a .tt { font-size: 14px; font-weight: 600; color: var(--text); }
 .pager a:hover .tt { color: var(--c); }
 .pager .ghost { visibility: hidden; }
@@ -1307,7 +1304,7 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
 .mx-sys .sc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; flex-wrap: wrap; }
 .mx-sys .sc-head h3 { font: 600 17px/1.3 var(--display); letter-spacing: -0.005em; }
 .mx-sys .sc-badge {
-  font: 600 10.5px/1 var(--ui);
+  font: 600 11px/1 var(--ui);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--c);
@@ -1320,7 +1317,7 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
 .mx-sys .spec-rows { display: flex; flex-direction: column; gap: 6px; }
 .mx-sys .spec-row { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 10px; font-size: 13px; }
 .mx-sys .sr-label {
-  font: 600 10.5px/1.7 var(--ui);
+  font: 600 11px/1.7 var(--ui);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--faint);
@@ -1337,7 +1334,7 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
 .mx-sys .sr-val { color: var(--text); line-height: 1.55; }
 .mx-sys .steps { margin-top: 12px; }
 .mx-sys .steps-cap {
-  font: 600 10.5px/1 var(--ui);
+  font: 600 11px/1 var(--ui);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--faint);
@@ -1351,7 +1348,7 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
   border-radius: 50%;
   background: color-mix(in srgb, var(--c) 14%, transparent);
   color: var(--c);
-  font: 600 10.5px/18px var(--mono);
+  font: 600 11px/18px var(--mono);
   text-align: center;
 }
 .mx-sys .sm-text { color: var(--muted); line-height: 1.55; }
@@ -1405,7 +1402,17 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
   font-size: 14px;
   line-height: 1.6;
 }
-.mx-sys .note::before { content: "💡"; flex: 0 0 auto; }
+.mx-sys .note::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 1.05em;
+  height: 1.05em;
+  margin-top: .22em;
+  background: color-mix(in srgb, var(--c) 75%, var(--text));
+  -webkit-mask: var(--ico-bulb) center / contain no-repeat;
+  mask: var(--ico-bulb) center / contain no-repeat;
+  --ico-bulb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z'/%3E%3C/svg%3E");
+}
 
 .mx-sys .ingredients {
   background: var(--surface);
@@ -1432,9 +1439,9 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
   gap: 12px;
   margin: 20px 0;
   padding: 14px 18px;
-  border-left: 3px solid var(--c);
+  border: 1px solid color-mix(in srgb, var(--c) 34%, var(--border));
   background: var(--surface);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-radius: var(--radius-sm);
 }
 .mx-sys .pull-quote .mark { font: 700 26px/1 var(--display); color: var(--c); }
 .mx-sys .pull-quote p { font-size: 14px; color: var(--muted); font-style: italic; }
@@ -1448,10 +1455,10 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
 }
 .mx-sys .temp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 10px; }
 .mx-sys .temp-item { text-align: center; background: var(--surface-2); border-radius: var(--radius-sm); padding: 11px 8px; }
-.mx-sys .temp-item .level { font: 600 10.5px/1.45 var(--ui); text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.mx-sys .temp-item .level { font: 600 11px/1.45 var(--ui); text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
 .mx-sys .temp-item .deg { font: 700 16.5px/1.3 var(--display); color: var(--c); margin: 3px 0 6px; font-variant-numeric: tabular-nums; }
 .mx-sys .temp-divider { height: 1px; background: var(--border); margin: 0 12px 6px; }
-.mx-sys .temp-item .sub-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint); }
+.mx-sys .temp-item .sub-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--faint); }
 .mx-sys .temp-item .sub-deg { font: 600 13px/1.45 var(--mono); color: var(--text); font-variant-numeric: tabular-nums; }
 .mx-sys .temp-note { margin-top: 12px; font-size: 12px; color: var(--faint); }
 
@@ -1486,4 +1493,12 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
   .mcontent pre { white-space: pre-wrap; }
   .work-head, .msec-t, h2, h3, h4 { break-after: avoid; }
   tr, figure, .card, .modrow, .task { break-inside: avoid; }
+}
+
+/* ============================================================ TOUCH-ZIELE
+   Auf Touch-Geräten mindestens 40px hohe Bedienelemente (WCAG 2.5.8 + Luft). */
+@media (pointer: coarse) {
+  .tb-search { min-height: 40px; }
+  .modrow .secfold summary { min-height: 40px; display: flex; align-items: center; }
+  .dirgroup .gh a { padding-block: 8px; display: inline-block; }
 }

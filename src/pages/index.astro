@@ -20,7 +20,6 @@ const recent = modules
   description={`Nachschlagewerke für ${hubNames} — ein Hub für alles, mit Volltextsuche über alle Module und Abschnitte.`}
 >
   <div class="dash">
-    <div class="dash-kicker">bib.gktn.dev — selbstgebaute Nachschlagewerke</div>
     <h1>Die Werkbank für alles, was man zweimal nachschlägt.</h1>
     <p class="lead">
       {hubs.length} Hubs — {hubs.map((h, i) => <>{i === 0 ? "" : i === hubs.length - 1 ? " und " : ", "}<b>{h.name}</b></>)} — mit {modules.length} Modulen und {sectionCount} Abschnitten.
@@ -36,10 +35,7 @@ const recent = modules
     </button>
 
     <div class="statline">
-      <span><b>{hubs.length}</b> Hubs</span>
-      <span><b>{modules.length}</b> Module</span>
-      <span><b>{sectionCount}</b> Abschnitte</span>
-      <span>zuletzt <b>{fmtDate(lastUpdated)}</b></span>
+      <span>zuletzt aktualisiert <b>{fmtDate(lastUpdated)}</b></span>
     </div>
 
     <div class="rowlabel">

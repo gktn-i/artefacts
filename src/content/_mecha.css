@@ -11,11 +11,11 @@
 
 .mx-mecha{
   --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f1f3f6; --surface-hover:#f5f8fc;
-  --text:#1b1e23; --muted:#697079; --faint:#98a0aa;
+  --text:#1b1e23; --muted:#535c68; --faint:#5f6b7c; /* AA: 6.1:1 und 4.8:1 auch auf --surface-2 */
   --border:#e4e7ec; --border-strong:#d3d7de; --track:#e6e8ec;
 
   --accent: var(--c,#1e5bb8);
-  --accent-ink: var(--c,#1e5bb8);
+  --accent-ink: color-mix(in srgb, var(--c,#1e5bb8) 80%, #000); /* AA auch auf getönten Flächen */
   --accent-soft: color-mix(in srgb, var(--c,#1e5bb8) 11%, #ffffff);
   --accent-border: color-mix(in srgb, var(--c,#1e5bb8) 38%, #ffffff);
 
@@ -35,7 +35,7 @@
 @media screen and (prefers-color-scheme:dark){
   .mx-mecha{
     --bg:#171a20; --surface:#1e2229; --surface-2:#262b33; --surface-hover:#2a3039;
-    --text:#d8dce3; --muted:#a7afba; --faint:#848d99;
+    --text:#d8dce3; --muted:#a7afba; --faint:#929ba7;
     --border:#2d323b; --border-strong:#3e454f; --track:#353b45;
 
     --accent-ink: color-mix(in srgb, var(--c,#63a9f5) 72%, #d8dce3);
@@ -61,10 +61,11 @@
   margin:2rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
 .mx-mecha h3{font-size:14.5px;font-weight:600;margin:1.2rem 0 .5rem;color:var(--accent-ink)}
 .mx-mecha h4{font-size:13.5px;font-weight:600;margin:.9rem 0 .35rem;color:var(--text)}
-.mx-mecha p{font-size:13.8px;line-height:1.68;margin:0 0 .65rem}
+.mx-mecha p{font-size:14.4px;line-height:1.66;margin:0 0 .65rem;max-width:76ch}
 .mx-mecha a{color:var(--accent-ink)}
 .mx-mecha ul,.mx-mecha ol{margin:.4rem 0 .7rem 1.25rem;padding:0}
-.mx-mecha li{font-size:13.6px;line-height:1.62;margin-bottom:5px}
+.mx-mecha li{font-size:14.2px;line-height:1.62;margin-bottom:5px}
+.mx-mecha > ul,.mx-mecha > ol,.mx-mecha .sec-body > ul,.mx-mecha .sec-body > ol{max-width:76ch}
 .mx-mecha li::marker{color:var(--faint)}
 .mx-mecha b,.mx-mecha strong{font-weight:650}
 .mx-mecha code{font-family:var(--mono);font-size:12.5px;background:var(--surface-2);
@@ -78,11 +79,14 @@
 /* ============================================================== KERNAUSSAGE */
 .mx-mecha .kurz{display:block;border:1px solid var(--accent-border);background:var(--accent-soft);
   border-radius:var(--radius-sm);padding:12px 16px;margin:.4rem 0 1rem;
-  font-size:13.8px;line-height:1.62;color:var(--accent-ink)}
-.mx-mecha .kurz::before{content:"💡";margin-right:.55em}
-.mx-mecha .kurz b{font-weight:700}
-.mx-mecha .kurz.q::before{content:"❓"}
-.mx-mecha .kurz.z::before{content:"🎯"}
+  font-size:14.4px;line-height:1.62;color:var(--text)}
+.mx-mecha .kurz::before{content:"";display:inline-block;width:1.05em;height:1.05em;margin-right:.5em;
+  vertical-align:-.17em;background:var(--accent-ink);
+  -webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat;
+  --ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z'/%3E%3C/svg%3E")}
+.mx-mecha .kurz b{font-weight:700;color:var(--accent-ink)}
+.mx-mecha .kurz.q::before{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01'/%3E%3C/svg%3E")}
+.mx-mecha .kurz.z::before{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1'/%3E%3C/svg%3E")}
 
 /* ==================================================================== KARTEN */
 .mx-mecha .card{border:1px solid var(--border);border-radius:var(--radius);padding:15px 17px;
@@ -103,7 +107,7 @@
 .mx-mecha .card .ch{display:flex;align-items:center;gap:8px;margin:-15px -17px 10px;padding:9px 17px;
   border-bottom:1px solid var(--border);background:var(--surface-2);
   border-radius:var(--radius) var(--radius) 0 0;font-size:13.5px;font-weight:650}
-.mx-mecha .card .ch .n{margin-left:auto;font:500 10.5px/1 var(--mono);color:var(--faint);
+.mx-mecha .card .ch .n{margin-left:auto;font:500 11px/1 var(--mono);color:var(--faint);
   text-transform:uppercase;letter-spacing:.05em}
 
 /* ============================================================ LANDKARTE/NAV */
@@ -134,7 +138,7 @@
 .mx-mecha .frow .fn{font-weight:600}
 .mx-mecha .frow .fe{font-family:var(--mono);color:var(--accent-ink);font-size:12.6px;font-weight:500}
 .mx-mecha .frow .fx{color:var(--muted);font-size:12.4px;line-height:1.5}
-.mx-mecha .frow.hd{background:var(--surface-2);font:500 10.5px/1.4 var(--mono);text-transform:uppercase;
+.mx-mecha .frow.hd{background:var(--surface-2);font:500 11px/1.4 var(--mono);text-transform:uppercase;
   letter-spacing:.05em;color:var(--faint)}
 .mx-mecha .frow.hd span{font-family:var(--mono)}
 @media(max-width:680px){
@@ -146,7 +150,7 @@
 .mx-mecha .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
   background:var(--surface);box-shadow:var(--shadow-sm);margin:.6rem 0 .5rem}
 .mx-mecha table{width:100%;border-collapse:collapse;font-size:13.2px;min-width:640px}
-.mx-mecha th{text-align:left;padding:11px 13px;font-weight:600;font-size:10.5px;text-transform:uppercase;
+.mx-mecha th{text-align:left;padding:11px 13px;font-weight:600;font-size:11px;text-transform:uppercase;
   letter-spacing:.045em;color:var(--faint);background:var(--surface-2);
   border-bottom:1px solid var(--border);user-select:none;white-space:nowrap;vertical-align:bottom}
 .mx-mecha th[data-s]{cursor:pointer}
@@ -173,9 +177,9 @@
   .mx-mecha .tbl-wrap tbody td{display:block;width:auto;border:none;border-top:none!important;
     padding:5px 14px;line-height:1.5;text-align:left}
   .mx-mecha .tbl-wrap tbody td:empty{display:none}
-  .mx-mecha .tbl-wrap tbody td[data-l]::before{content:attr(data-l);display:block;font-family:var(--mono);
-    font-size:9.5px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;
-    color:var(--faint);margin-bottom:1px}
+  .mx-mecha .tbl-wrap tbody td[data-l]::before{content:attr(data-l);display:block;font-family:var(--sans);
+    font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--muted);margin-bottom:1px}
   .mx-mecha .tbl-wrap tbody td:first-child{font-weight:650;font-size:14px;padding-top:9px;padding-bottom:8px;
     border-bottom:1px solid var(--border)!important;margin-bottom:3px}
   .mx-mecha .tbl-wrap tbody td:first-child::before{display:none}
@@ -185,12 +189,12 @@
 
 /* ================================================== HINWEISE, WARNUNGEN, JA/NEIN */
 .mx-mecha .tip,.mx-mecha .warn,.mx-mecha .stop{padding:11px 15px;
-  border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:13.2px;line-height:1.6;margin:.7rem 0}
-.mx-mecha .tip{border-left:3px solid var(--ok-border);background:var(--ok-bg);color:var(--text)}
+  border-radius:var(--radius-sm);font-size:13.6px;line-height:1.6;margin:.7rem 0}
+.mx-mecha .tip{border:1px solid var(--ok-border);background:var(--ok-bg);color:var(--text)}
 .mx-mecha .tip b{color:var(--ok-ink)}
-.mx-mecha .warn{border-left:3px solid var(--mid-border);background:var(--mid-bg)}
+.mx-mecha .warn{border:1px solid var(--mid-border);background:var(--mid-bg)}
 .mx-mecha .warn b{color:var(--mid-ink)}
-.mx-mecha .stop{border-left:3px solid var(--bad-border);background:var(--bad-bg)}
+.mx-mecha .stop{border:1px solid var(--bad-border);background:var(--bad-bg)}
 .mx-mecha .stop b{color:var(--bad-ink)}
 .mx-mecha .tip p:last-child,.mx-mecha .warn p:last-child,.mx-mecha .stop p:last-child{margin-bottom:0}
 
@@ -219,7 +223,7 @@
 .mx-mecha .step > :last-child{margin-bottom:0}
 
 /* ====================================================== BADGES, PILLEN, LEVEL */
-.mx-mecha .b{display:inline-block;font-size:10.8px;padding:3px 9px;border-radius:999px;font-weight:650;
+.mx-mecha .b{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;font-weight:650;
   letter-spacing:.01em;white-space:nowrap;background:var(--surface-2);color:var(--muted);
   border:1px solid var(--border)}
 .mx-mecha .b.ok{background:var(--ok-bg);color:var(--ok-ink);border-color:var(--ok-border)}
@@ -240,10 +244,10 @@
    Breite mit Stark / Schwach / Nimm es für. Punktefarbe folgt der Stufe
    wie die Bewertungsbalken: 1–2 rot, 3 gelb, 4–5 grün. */
 .mx-mecha .prof-t th.pch{white-space:normal;line-height:1.25;min-width:66px;padding:11px 7px;
-  text-align:center;hyphens:manual;font-size:10.5px}
+  text-align:center;hyphens:manual;font-size:11px}
 .mx-mecha .prof-t th:first-child,.mx-mecha .prof-t td.pc:first-child,
 .mx-mecha .prof-t tr.pmain td:first-child{width:24%;min-width:150px}
-.mx-mecha .prof-t .ptag{display:block;font:500 10.5px/1.4 var(--mono);color:var(--faint);
+.mx-mecha .prof-t .ptag{display:block;font:500 11px/1.4 var(--mono);color:var(--faint);
   text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
 .mx-mecha .prof-t td.pc{padding:12px 6px;white-space:nowrap;text-align:center;font-family:inherit}
 .mx-mecha .dots{display:inline-flex;gap:2px;vertical-align:middle}
@@ -256,7 +260,7 @@
   font-size:12.4px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)}
 .mx-mecha .prof-t tbody tr.pdet:hover td{background:transparent}
 .mx-mecha .prof-t .pdg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px 22px;line-height:1.5}
-.mx-mecha .prof-t .pd b{display:block;font:600 9.5px/1.6 var(--mono);text-transform:uppercase;
+.mx-mecha .prof-t .pd b{display:block;font:600 11px/1.6 var(--mono);text-transform:uppercase;
   letter-spacing:.05em;color:var(--faint)}
 .mx-mecha .prof-t .pd.pro b{color:var(--ok-ink)}
 .mx-mecha .prof-t .pd.con b{color:var(--bad-ink)}
@@ -280,7 +284,7 @@
 .mx-mecha .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:.6rem 0 1rem}
 .mx-mecha .kpi{border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;
   background:var(--surface);box-shadow:var(--shadow-sm)}
-.mx-mecha .kpi .k{font:500 10.5px/1.4 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.mx-mecha .kpi .k{font:500 11px/1.4 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
 .mx-mecha .kpi .v{font-family:var(--display);font-weight:700;font-size:19px;color:var(--accent-ink);margin:3px 0 2px}
 .mx-mecha .kpi .s{font-size:11.8px;color:var(--muted);line-height:1.45}
 
@@ -313,7 +317,7 @@
 .mx-mecha .sym svg{width:100%;max-width:116px;height:auto;display:block;margin:0 auto 5px}
 .mx-mecha .sym .sn{font-size:12.4px;font-weight:650;line-height:1.3}
 .mx-mecha .sym .sd{font-size:11px;color:var(--muted);line-height:1.45;margin-top:2px}
-.mx-mecha .sym .sr{font-family:var(--mono);font-size:10.2px;color:var(--accent-ink);background:var(--accent-soft);
+.mx-mecha .sym .sr{font-family:var(--mono);font-size:11px;color:var(--accent-ink);background:var(--accent-soft);
   border-radius:4px;padding:0 5px;display:inline-block;margin-top:5px}
 
 /* Bildunterschrift */
@@ -323,7 +327,7 @@
 /* ================================================================== QUELLEN */
 .mx-mecha .srcs{border:1px dashed var(--border-strong);border-radius:var(--radius-sm);
   padding:11px 15px;margin:1.1rem 0 .3rem;background:var(--surface-2)}
-.mx-mecha .srcs .sh{font:600 10.5px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.06em;
+.mx-mecha .srcs .sh{font:600 11px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.06em;
   color:var(--faint);margin-bottom:6px}
 .mx-mecha .srcs ul{margin:0 0 0 1.05rem}
 .mx-mecha .srcs li{font-size:12.2px;color:var(--muted);margin-bottom:4px;line-height:1.5}
@@ -355,8 +359,8 @@
 .mx-mecha .search{font-family:inherit;padding:8px 12px;font-size:13.4px;border:1px solid var(--border-strong);
   border-radius:var(--radius-sm);background:var(--surface);color:var(--text);width:100%;max-width:340px;
   margin-bottom:.7rem;display:block}
-.mx-mecha .search:focus{outline:none;border-color:var(--accent-border);
-  box-shadow:0 0 0 3px var(--accent-soft)}
+.mx-mecha .search:focus{outline:none;border-color:var(--accent)}
+.mx-mecha .search:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .mx-mecha .count{font-size:12.4px;color:var(--muted);margin:0 0 10px;font-weight:500}
 .mx-mecha .none{padding:18px;text-align:center;color:var(--faint);font-size:13px;
   border:1px dashed var(--border-strong);border-radius:var(--radius)}
@@ -367,7 +371,7 @@
 .mx-mecha tr[data-n]{cursor:pointer}
 
 /* Kategorie-Farben (Komponenten-Katalog) */
-.mx-mecha .cb{display:inline-block;font-size:10.8px;padding:3px 9px;border-radius:999px;font-weight:650;white-space:nowrap}
+.mx-mecha .cb{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;font-weight:650;white-space:nowrap}
 .mx-mecha .c-passiv .cb{background:#E6F1FB;color:#0C447C}
 .mx-mecha .c-halbleiter .cb{background:#EEEDFE;color:#3C3489}
 .mx-mecha .c-analog .cb{background:#E3F2F9;color:#155E75}
@@ -442,7 +446,7 @@
   border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
 .mx-mecha .pstep .ph{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-bottom:4px}
 .mx-mecha .pstep .pn{font-family:var(--display);font-size:15px;font-weight:700}
-.mx-mecha .pstep .pw{font:500 10.5px/1 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.mx-mecha .pstep .pw{font:500 11px/1 var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
 .mx-mecha .pstep .pb{font-size:13.2px;color:var(--muted);line-height:1.6}
 .mx-mecha .pstep .pb ul{margin:.35rem 0 0 1.05rem}
 .mx-mecha .pstep .pb li{font-size:12.8px;margin-bottom:3px}
@@ -465,7 +469,7 @@
 .mx-mecha .sim .pl-w{stroke:var(--faint);stroke-width:1.2;stroke-dasharray:5 4;fill:none}
 .mx-mecha .sim .ax{stroke:var(--border-strong);stroke-width:1.2;fill:none}
 .mx-mecha .sim .gl{stroke:var(--border);stroke-width:1;fill:none}
-.mx-mecha .sim .tx{font-family:var(--mono);font-size:9.5px;fill:var(--faint)}
+.mx-mecha .sim .tx{font-family:var(--mono);font-size:11px;fill:var(--faint)}
 .mx-mecha .sim .sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px 16px;margin-top:.4rem}
 .mx-mecha .sim .sl label{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);
   margin-bottom:2px;font-weight:500}
@@ -495,7 +499,7 @@
 .mx-mecha .kn{font-family:var(--mono);font-size:11.2px;color:var(--faint)}
 .mx-mecha .kd{font-size:13.2px;color:var(--muted);margin-top:4px;line-height:1.5}
 .mx-mecha .kitem::after{content:"Antippen für Details";display:block;margin-top:6px;
-  font:600 10.5px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
+  font:600 11px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
 .mx-mecha .kitem:has(.det:not([hidden]))::after{content:"Antippen zum Zuklappen"}
 .mx-mecha .det{margin-top:11px;padding-top:11px;border-top:1px dashed var(--border);
   font-size:13.2px;line-height:1.6;color:var(--text);cursor:auto}
@@ -529,3 +533,16 @@
 .mx-mecha .map a .mt .bg{margin-left:auto;font-size:10px;font-weight:600;letter-spacing:.04em;
   text-transform:uppercase;color:var(--faint);border:1px solid var(--border);border-radius:20px;
   padding:1px 7px;flex:0 0 auto}
+
+/* ============================================================ TOUCH & SCROLL
+   Auf Touch-Geräten mindestens 40px hohe Bedienelemente; das interne
+   Scrollfenster breiter Tabellen trägt die Farben des Systems. */
+.mx-mecha .tbl-wrap{scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
+@media (pointer:coarse){
+  .mx-mecha .controls button,.mx-mecha .foldbar button{min-height:40px;padding-inline:14px}
+  .mx-mecha .search{min-height:44px;font-size:16px}
+  .mx-mecha .abc button{width:36px;height:36px}
+}
+@media (max-width:620px){
+  .mx-mecha .sort-hint{display:none}
+}

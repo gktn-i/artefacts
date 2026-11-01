@@ -34,7 +34,7 @@ const count = (id: string) => rows.filter((r) => r.cat === id).length;
 <div class="fil-wide">
 <div class="fil-legend" aria-label="Legende der Kennwerte">
   {metrics.map((m) => <span class="lg" style={`--mc:${m.c}`}><i></i><b>{m.l}</b> {m.d}</span>)}
-  <span class="lg lg-note">Balken 1 bis 10, relativ zueinander, mehr ist immer besser. Spaltenkopf anklicken zum Sortieren.{note ? ` ${note}` : ""}</span>
+  <span class="lg lg-note">Balken 1 bis 10, relativ zueinander, mehr ist immer besser.<span class="sort-hint"> Spaltenkopf anklicken zum Sortieren.</span>{note ? ` ${note}` : ""}</span>
 </div>
 <div class="fil" data-scope>
   <div class="fil-bar">
