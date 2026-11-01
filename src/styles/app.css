@@ -1502,3 +1502,24 @@ footer.site code { font: 400 11.5px/1 var(--mono); }
   .modrow .secfold summary { min-height: 40px; display: flex; align-items: center; }
   .dirgroup .gh a { padding-block: 8px; display: inline-block; }
 }
+
+/* ============================================================ RASTER OHNE WAISEN
+   auto-fit lässt bei 7, 8 oder 9 Karten gern eine einzelne in der letzten
+   Reihe stehen. Mengenabfragen über :has() wählen eine Spaltenzahl, die
+   aufgeht; wo das nicht geht, nimmt die letzte Karte die ganze Reihe. */
+@media (min-width: 560px) and (max-width: 1020px) {
+  .tiles:has(> :nth-child(4n):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .taskgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .taskgrid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+@media (min-width: 1021px) {
+  .tiles:has(> :nth-child(4n):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .taskgrid:has(> :nth-child(8):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .taskgrid:has(> :nth-child(7):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .taskgrid:has(> :nth-child(7):last-child) > :last-child { grid-column: 1 / -1; }
+  .taskgrid:has(> :nth-child(7):last-child) > :last-child ul { columns: 2; column-gap: 28px; }
+  .taskgrid:has(> :nth-child(7):last-child) > :last-child li { break-inside: avoid; }
+}
+@media (min-width: 1440px) {
+  .taskgrid:has(> :nth-child(8):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

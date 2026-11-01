@@ -546,3 +546,20 @@
 @media (max-width:620px){
   .mx-mecha .sort-hint{display:none}
 }
+
+/* Sortieren auf dem Handy: Auswahlfeld statt Tabellenkopf (mod-mecha.js) */
+.mx-mecha .msort{display:none}
+@media (max-width:620px){
+  .mx-mecha .msort{display:block;width:100%;max-width:340px;margin:0 0 .7rem;padding:8px 12px;min-height:44px;
+    font:500 16px/1.2 var(--sans);color:var(--text);background:var(--surface);
+    border:1px solid var(--border-strong);border-radius:var(--radius-sm)}
+  .mx-mecha .msort:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .mx-mecha .fil-bar .msort{margin:0;flex:1 1 100%;max-width:none}
+}
+
+/* Kartenraster ohne einzelne Karte in der letzten Reihe: 5, 6 oder 9 Karten
+   laufen in drei statt vier Spalten. */
+@media (min-width:700px){
+  .mx-mecha .grid3:has(> :nth-child(3n):last-child),
+  .mx-mecha .grid3:has(> :nth-child(5):last-child){grid-template-columns:repeat(3,minmax(0,1fr))}
+}

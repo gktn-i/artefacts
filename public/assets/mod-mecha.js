@@ -147,36 +147,77 @@ window.__prepTables();
     }
     return norm(t);
   }
+  /* Sortiert die Tabelle nach Spalte th; dir 1 = aufsteigend, -1 = absteigend,
+     0 = ursprüngliche Reihenfolge. */
+  function sortTable(tb, th, dir) {
+    $$("thead th[data-s]", tb).forEach(function (o) {
+      o.dataset.dir = "";
+      o.removeAttribute("aria-sort");
+      o.querySelector(".ar").textContent = "";
+    });
+    if (th && dir) {
+      th.dataset.dir = dir === 1 ? "1" : "-1";
+      th.setAttribute("aria-sort", dir === 1 ? "ascending" : "descending");
+      th.querySelector(".ar").textContent = dir === 1 ? "▲" : "▼";
+    }
+    var idx = th ? Array.prototype.indexOf.call(th.parentElement.children, th) : -1;
+    var body = tb.tBodies[0];
+    /* Zeilen mit colspan sind Detailzeilen (Profiles) oder Gruppentitel:
+       sie werden nicht sortiert, sondern bleiben an ihrer Hauptzeile. */
+    var rows = [], det = [];
+    $$("tr", body).forEach(function (r) {
+      if (r.querySelector("td[colspan]")) { if (rows.length) det[rows.length - 1] = r; }
+      else rows.push(r);
+    });
+    var pair = rows.map(function (r, i) { return [r, det[i]]; });
+    pair.sort(function (a, b) {
+      if (!dir) return a[0]._o - b[0]._o;
+      var x = keyOf(a[0], idx, th.dataset.s), y = keyOf(b[0], idx, th.dataset.s);
+      return x < y ? -dir : x > y ? dir : a[0]._o - b[0]._o;
+    });
+    pair.forEach(function (p) { body.appendChild(p[0]); if (p[1]) body.appendChild(p[1]); });
+  }
+
   $$("table").forEach(function (tb) {
     var ths = $$("thead th[data-s]", tb);
     if (!ths.length) return;
+    $$("tbody tr", tb).forEach(function (r, i) { r._o = i; });
+
+    /* Auf dem Handy ist der Tabellenkopf ausgeblendet (Kartenansicht).
+       Ein Auswahlfeld übernimmt dort das Sortieren. */
+    var sel = document.createElement("select");
+    sel.className = "msort";
+    sel.setAttribute("aria-label", "Sortieren nach");
+    sel.add(new Option("Sortieren: Standard", ""));
+    ths.forEach(function (th, i) {
+      var l = th.textContent.replace(/\s+/g, " ").trim();
+      if (th.dataset.s === "num") {
+        sel.add(new Option(l + ": höchste zuerst", i + ":-1"));
+        sel.add(new Option(l + ": niedrigste zuerst", i + ":1"));
+      } else {
+        sel.add(new Option(l + ": A bis Z", i + ":1"));
+      }
+    });
+    sel.addEventListener("change", function () {
+      if (!sel.value) { sortTable(tb, null, 0); return; }
+      var v = sel.value.split(":");
+      sortTable(tb, ths[+v[0]], +v[1]);
+    });
+    var wrap = tb.closest(".tbl-wrap") || tb;
+    var scope = wrap.closest("[data-scope]");
+    var bar = scope && scope.querySelector(".fil-bar");
+    if (bar) bar.appendChild(sel);
+    else wrap.parentNode.insertBefore(sel, wrap);
+
     ths.forEach(function (th) {
       var span = document.createElement("span");
       span.className = "ar";
       th.appendChild(span);
       th.addEventListener("click", function () {
-        var idx = Array.prototype.indexOf.call(th.parentElement.children, th);
         var dir = th.dataset.dir === "1" ? -1 : 1;
-        $$("thead th[data-s]", tb).forEach(function (o) {
-          o.dataset.dir = "";
-          o.querySelector(".ar").textContent = "";
-        });
-        th.dataset.dir = dir === 1 ? "1" : "-1";
-        span.textContent = dir === 1 ? "▲" : "▼";
-        var body = tb.tBodies[0];
-        /* Zeilen mit colspan sind Detailzeilen (Profiles) oder Gruppentitel:
-           sie werden nicht sortiert, sondern bleiben an ihrer Hauptzeile. */
-        var rows = [], det = [];
-        $$("tr", body).forEach(function (r) {
-          if (r.querySelector("td[colspan]")) { if (rows.length) det[rows.length - 1] = r; }
-          else rows.push(r);
-        });
-        var pair = rows.map(function (r, i) { return [r, det[i]]; });
-        pair.sort(function (a, b) {
-          var x = keyOf(a[0], idx, th.dataset.s), y = keyOf(b[0], idx, th.dataset.s);
-          return x < y ? -dir : x > y ? dir : 0;
-        });
-        pair.forEach(function (p) { body.appendChild(p[0]); if (p[1]) body.appendChild(p[1]); });
+        sortTable(tb, th, dir);
+        sel.value = ths.indexOf(th) + ":" + dir;
+        if (sel.selectedIndex < 0) sel.value = "";
       });
     });
   });
