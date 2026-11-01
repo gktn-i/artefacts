@@ -59,7 +59,8 @@ src/pages/[slug].astro     Hub-Panels + Modulseiten (URL bleibt <name>.html)
 src/pages/404.astro        404-Seite in der Shell
 src/layouts/Base.astro     Werkbank-Shell (Rail + Topbar + Inhalt), Schriften, Meta
 src/components/            Rail, Topbar, HubTiles, SectionBody (Überschriften-Anker),
-                           CutsSection, Profiles (Eignungstabellen)
+                           CutsSection, Profiles (Eignungstabellen),
+                           RateTable (Vergleichstabelle mit Segmentbalken, Filter, Suche)
 src/lib/anchors.mjs        vergibt beim Build die IDs aller Überschriften (h2–h4)
 src/content.config.ts      schaltet Astros Auto-Collections für src/content/ ab
 src/styles/app.css         Design-Tokens, Shell, Palette, Dashboard, Panels,
@@ -152,3 +153,16 @@ Pagefind-Index nachgeladen. Nur `dist` nach `npm run build` enthält den Index.
 
 **Keine externen Abhängigkeiten zur Laufzeit.** Auch die Schriften liegen auf
 der eigenen Domain, es geht keine Anfrage an Google.
+
+## Design-Skill
+
+Unter `.claude/skills/impeccable/` liegt der Skill
+[Impeccable](https://github.com/pbakaus/impeccable) (Apache 2.0) für
+Design-Reviews und Feinschliff mit Claude Code: `/impeccable critique`,
+`/impeccable audit`, `/impeccable polish` usw. Der Detektor läuft gegen den
+gebauten Stand, z. B.
+
+```
+npm run build && python3 -m http.server 4399 -d dist &
+.claude/skills/impeccable/scripts/impeccable detect http://localhost:4399/index.html
+```
