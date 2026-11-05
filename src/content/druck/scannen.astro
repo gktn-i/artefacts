@@ -22,51 +22,41 @@ const COLS = [
   { l: "Genauigkeit", key: "g", w: 120 },
   { l: "Objektgröße", key: "s", w: 130 },
   { l: "Kosten", key: "e", w: 140 },
-  { l: "Gut für · schwach bei", key: "t", w: 290 },
+  { l: "Schwach bei", key: "sw", w: 200 },
+  { l: "Wofür konkret", key: "w", w: 300 },
 ];
 const ROWS = [
   /* ----------------------------------------------------------- Foto & Handy */
   { n: "Photogrammetrie mit dem Handy", cat: "foto", k: "photogrammetrie handy app fotos smartphone polycam realityscan", r: [4, 5, 7, 8, 10],
-    g: "grob 0,5 bis 2 mm", s: "Tasse bis Gebäude", e: "0 € bis App-Abo",
-    t: "<b>Gut:</b> matte, strukturierte Objekte, Statuen, Steine, Gelände. <b>Schwach:</b> glänzend, durchsichtig, einfarbig glatt. Ohne Maßstab keine echte Größe." },
+    g: "grob 0,5 bis 2 mm", s: "Tasse bis Gebäude", e: "0 € bis App-Abo", sw: "Glänzend, durchsichtig, einfarbig glatt. Ohne Maßstab keine echte Größe.", w: ["Gartenzwerg, Felsen fürs Diorama, Statue im Park, Baumstumpf", "Streifenlicht-Scanner", "kostet nichts und klappt auch mit großen Objekten draußen"] },
   { n: "Photogrammetrie mit Kamera & Drehteller", cat: "foto", k: "photogrammetrie kamera systemkamera drehteller studio meshroom realityscan", r: [6, 8, 4, 6, 8],
-    g: "etwa 0,1 bis 0,5 mm", s: "Münze bis Möbel", e: "vorhandene Kamera, Software frei",
-    t: "<b>Gut:</b> Figuren, Fundstücke, Texturen in Fotoqualität. <b>Schwach:</b> viel Rechenzeit, Licht und Fokus müssen stimmen." },
+    g: "etwa 0,1 bis 0,5 mm", s: "Münze bis Möbel", e: "vorhandene Kamera, Software frei", sw: "Viel Rechenzeit, Licht und Fokus müssen stimmen.", w: ["Fossilien, Figuren aus dem Regal, Schuhe, Museumsstücke", "Handy-App", "deutlich schärfer und mit sauberen Texturen"] },
   { n: "Handy-LiDAR", cat: "foto", k: "lidar iphone ipad pro raum grundriss tiefensensor", r: [2, 2, 9, 9, 8],
-    g: "Zentimeterbereich", s: "Möbel bis Raum", e: "im Gerät enthalten",
-    t: "<b>Gut:</b> Räume, Grundrisse, grobe Volumen für Einbauten. <b>Schwach:</b> alles unter Schuhkartongröße." },
+    g: "Zentimeterbereich", s: "Möbel bis Raum", e: "im Gerät enthalten", sw: "Alles unter Schuhkartongröße.", w: ["Nische für ein Regal, Kofferraum für einen Einsatz, Raum für die Möbelplanung", "Zollstock", "ganze Räume in einer Minute erfasst"] },
   { n: "Gaussian Splatting & NeRF", cat: "foto", k: "gaussian splatting nerf neural ki fotorealistisch video", r: [1, 6, 7, 8, 9],
-    g: "nicht maßhaltig", s: "Objekt bis Szene", e: "frei bis App-Abo",
-    t: "<b>Gut:</b> fotorealistische Ansichten aus einem Video. <b>Schwach:</b> liefert kein sauberes Netz, für den Druck kaum brauchbar." },
+    g: "nicht maßhaltig", s: "Objekt bis Szene", e: "frei bis App-Abo", sw: "Liefert kein sauberes Netz, für den Druck kaum brauchbar.", w: ["3D-Erinnerung an Orte, Objekte im Web präsentieren", "Photogrammetrie", "fotorealistischer, solange nichts gedruckt werden soll"] },
 
   /* ---------------------------------------------------------- Streifenlicht */
   { n: "Streifenlicht-Handscanner", cat: "licht", k: "structured light streifenlicht handscanner infrarot weisslicht einsteiger", r: [7, 7, 7, 6, 5],
-    g: "etwa 0,05 bis 0,1 mm", s: "Faust bis etwa 1 m", e: "einige hundert bis 1.500 €",
-    t: "<b>Gut:</b> Ersatzteile, Körper, Autoteile, Figuren. <b>Schwach:</b> schwarz, glänzend, durchsichtig, nur mit Scanspray." },
+    g: "etwa 0,05 bis 0,1 mm", s: "Faust bis etwa 1 m", e: "einige hundert bis 1.500 €", sw: "Schwarz, glänzend, durchsichtig, nur mit Scanspray.", w: ["Unterarm für eine Orthese, Kopf für einen Helm, Motorradtank für einen Halter", "Photogrammetrie", "maßhaltig in Minuten und sofort auf dem Bildschirm"] },
   { n: "Streifenlicht mit Drehteller", cat: "licht", k: "desktop tischscanner drehteller streifenlicht klein detail", r: [8, 8, 8, 2, 5],
-    g: "etwa 0,02 bis 0,05 mm", s: "Münze bis etwa 25 cm", e: "einige hundert bis wenige tausend €",
-    t: "<b>Gut:</b> kleine Teile mit vielen Details, Schmuck, Miniaturen. <b>Schwach:</b> alles, was nicht auf den Teller passt." },
+    g: "etwa 0,02 bis 0,05 mm", s: "Münze bis etwa 25 cm", e: "einige hundert bis wenige tausend €", sw: "Alles, was nicht auf den Teller passt.", w: ["Schachfiguren, Schmuck, Miniaturen, kleine Ersatzknöpfe", "Handscanner", "feinere Details, läuft fast automatisch"] },
 
   /* ------------------------------------------------------------------ Laser */
   { n: "Laserlinien-Handscanner", cat: "laser", k: "laser blau laserlinien marker referenzpunkte handscanner metrologie", r: [9, 8, 5, 8, 3],
-    g: "etwa 0,02 bis 0,05 mm", s: "Handfläche bis mehrere Meter", e: "ab etwa 1.000 € bis weit über 10.000 €",
-    t: "<b>Gut:</b> Reverse Engineering, Karosserie, dunkle und glänzende Teile oft ohne Spray. <b>Schwach:</b> braucht Referenzmarker, Haare und Stoff." },
+    g: "etwa 0,02 bis 0,05 mm", s: "Handfläche bis mehrere Meter", e: "ab etwa 1.000 € bis weit über 10.000 €", sw: "Braucht Referenzmarker, Haare und Stoff.", w: ["Kotflügel für einen Spoileranbau, Anschlüsse am Motorblock, Gussteile für den Nachbau", "Streifenlicht", "genauer und kommt mit glänzendem Metall klar"] },
 
   /* ------------------------------------------------------ Messen statt Scannen */
   { n: "Messen und nachkonstruieren", cat: "messen", k: "messschieber messen nachkonstruieren cad reverse engineering passteil", r: [8, 4, 6, 5, 10],
-    g: "0,02 bis 0,1 mm je Maß", s: "alles mit Regelgeometrie", e: "Messschieber",
-    t: "<b>Gut:</b> Halter, Adapter, Gehäuse, alles mit Bohrungen und Passflächen. <b>Schwach:</b> Freiformen und organische Flächen." },
+    g: "0,02 bis 0,1 mm je Maß", s: "alles mit Regelgeometrie", e: "Messschieber", sw: "Freiformen und organische Flächen.", w: ["Ersatzhalter fürs Regal, Staubsauger-Adapter, Halter für Akkuwerkzeug, Platinengehäuse", "Scan", "Bohrungen und Passflächen werden exakt statt verrauscht"] },
   { n: "Foto oder Flachbett für Konturen", cat: "messen", k: "flachbettscanner foto raster kontur 2d nachzeichnen profil konturlehre", r: [5, 4, 9, 4, 10],
-    g: "etwa 0,2 bis 0,5 mm", s: "flache Teile bis A4", e: "Scanner oder Handy",
-    t: "<b>Gut:</b> 2D-Umrisse, Dichtungen, Griffprofile mit Konturlehre. <b>Schwach:</b> alles, was echte Tiefe hat. Foto immer senkrecht und mit Maßstab." },
+    g: "etwa 0,2 bis 0,5 mm", s: "flache Teile bis A4", e: "Scanner oder Handy", sw: "Alles, was echte Tiefe hat. Foto immer senkrecht und mit Maßstab.", w: ["Dichtungen nachbauen, Einsätze für Werkzeugkoffer, Schablonen, Griffschalen", "3D-Scan", "für flache Teile schneller und genauer"] },
 
   /* ---------------------------------------------- Industrie & Dienstleister */
   { n: "Industrie-CT", cat: "industrie", k: "ct computertomografie roentgen innenstruktur dienstleister pruefung", r: [10, 10, 3, 4, 1],
-    g: "bis unter 0,01 mm", s: "bis etwa Schuhkarton", e: "Dienstleister, ab einigen hundert € je Scan",
-    t: "<b>Gut:</b> Innenstrukturen, Hohlräume, Prüfen von Druckteilen. <b>Schwach:</b> Kosten, dicke Metallteile." },
+    g: "bis unter 0,01 mm", s: "bis etwa Schuhkarton", e: "Dienstleister, ab einigen hundert € je Scan", sw: "Kosten, dicke Metallteile.", w: ["Innenleben eines Gussteils, Druckteile auf Hohlräume prüfen", "Aufsägen", "zerstörungsfrei und zeigt auch das Innere"] },
   { n: "Koordinatenmessgerät & Messarm", cat: "industrie", k: "kmg koordinatenmessmaschine messarm taktil antasten qualitaet", r: [10, 4, 2, 6, 1],
-    g: "Mikrometerbereich", s: "Bauteil bis Maschine", e: "Dienstleister",
-    t: "<b>Gut:</b> Prüfmaße und Passflächen mit Protokoll. <b>Schwach:</b> Freiformen dauern, kein Netz für Deko." },
+    g: "Mikrometerbereich", s: "Bauteil bis Maschine", e: "Dienstleister", sw: "Freiformen dauern, kein Netz für Deko.", w: ["Prüfprotokoll für Passteile, Nachmessen von Serienteilen", "Messschieber", "dokumentiert und im Mikrometerbereich"] },
 ];
 ---
 <div class="kurz"><b>Ein Scan ist kein fertiges Modell, sondern eine Vorlage.</b> Für Freiformen wie Figuren, Körper oder Fundstücke ist er unschlagbar; für Teile mit Bohrungen und Passflächen ist der Messschieber oft schneller und genauer. Die Tabelle vergleicht {ROWS.length} Verfahren vom Handy bis zum Industrie-CT.</div>
