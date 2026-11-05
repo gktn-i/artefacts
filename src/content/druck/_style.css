@@ -151,6 +151,13 @@
 
 .mx-druck .fil-tbl td.nz{white-space:nowrap}
 .mx-druck .fil-tbl td.ch{min-width:240px;font-size:12.8px;color:var(--muted);line-height:1.5}
+.mx-druck .fil-tbl td.wn{min-width:270px}
+.mx-druck .fil-tbl td.wn span{display:block}
+.mx-druck .fil-tbl td.wn .wx{margin-top:4px}
+.mx-druck .fil-tbl td.wn b{display:inline-block;margin-right:5px;font-size:11px;font-weight:650;
+  text-transform:uppercase;letter-spacing:.04em}
+.mx-druck .fil-tbl td.wn .wg b{color:var(--ok-ink)}
+.mx-druck .fil-tbl td.wn .wx b{color:var(--bad-ink)}
 
 /* Handy: Kartenansicht aus _mecha.css, ohne Sticky und Scrollfenster */
 @media (max-width:620px){
@@ -159,6 +166,7 @@
   .mx-druck .fil-tbl td.fn{position:static;box-shadow:inset 3px 0 0 var(--cc)}
   .mx-druck .fil-tbl tbody tr:not([hidden]){display:grid!important;grid-template-columns:1fr 1fr;column-gap:4px}
   .mx-druck .fil-tbl tbody td.fn,.mx-druck .fil-tbl tbody td.ch,.mx-druck .fil-tbl tbody td.nz{grid-column:1 / -1}
+  .mx-druck .fil-tbl td.wn{min-width:0}
   .mx-druck .fil-tbl td.rg,.mx-druck .fil-tbl td.ch{min-width:0}
   .mx-druck .fil-tbl .m{width:min(56px, 60%)}
 }

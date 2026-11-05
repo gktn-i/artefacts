@@ -505,7 +505,7 @@
        "name": "3D-Druck",
        "icon": "🧵",
        "kind": "Referenz",
-       "updated": "2026-11-01",
+       "updated": "2026-11-05",
        "desc": "Material, Düse, Nachbearbeitung, Verbindungen und 3D-Scannen im FDM-Druck: der Filament-Vergleich von PLA bis Carbon-Nylon, Düsen und Infill, Schleifen bis Aceton-Dampf, Gewindeeinsätze bis Snap-Fit, Photogrammetrie bis Laserscanner — und der Rentabilitäts-Simulator für den Druck als Nebenerwerb.",
        "tags": [
         "filament",
