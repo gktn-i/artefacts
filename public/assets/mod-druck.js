@@ -116,3 +116,34 @@ document.getElementById("kleinToggle").addEventListener("click", function(){
 buildCards();
 render();
 })();
+
+/* Vergleichstabellen (.fil-tbl): die Tabelle hat kein eigenes Scrollfenster
+   nach unten, nur die Seite scrollt. Damit der Kopf trotzdem sichtbar bleibt,
+   wird er beim Scrollen per --hy unter die Topbar geschoben. Funktioniert
+   auch, wenn die Tabelle seitlich scrollt (dort greift position:sticky nicht). */
+(function () {
+  var wraps = Array.prototype.slice.call(document.querySelectorAll(".fil-tbl"));
+  if (!wraps.length) return;
+  var mobile = window.matchMedia("(max-width:620px)");
+  var raf = 0;
+  function topOffset() {
+    var tb = document.querySelector(".topbar");
+    return tb ? Math.max(0, tb.getBoundingClientRect().bottom) : 0;
+  }
+  function update() {
+    raf = 0;
+    var top = topOffset();
+    wraps.forEach(function (w) {
+      var t = w.querySelector("table"), th = t && t.tHead;
+      if (!th || !w.offsetParent || mobile.matches) { w.style.removeProperty("--hy"); return; }
+      var r = t.getBoundingClientRect();
+      var hy = Math.min(Math.max(0, top - r.top), Math.max(0, r.height - th.offsetHeight * 2));
+      w.style.setProperty("--hy", hy + "px");
+    });
+  }
+  function req() { if (!raf) raf = requestAnimationFrame(update); }
+  window.addEventListener("scroll", req, { passive: true });
+  window.addEventListener("resize", req);
+  document.addEventListener("click", function () { setTimeout(req, 60); });
+  update();
+})();

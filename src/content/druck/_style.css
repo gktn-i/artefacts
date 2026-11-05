@@ -114,7 +114,11 @@
 }
 
 /* Tabelle: fester Kopf und erste Spalte beim Scrollen */
-.mx-druck .fil-tbl{max-height:min(82vh, 1100px);overflow:auto}
+/* Kein eigenes Scrollfenster nach unten: die Seite scrollt, die Tabelle nur
+   seitlich, falls sie breiter ist als der Platz. Den Kopf haelt mod-druck.js
+   beim Scrollen unter der Topbar fest (--hy). */
+.mx-druck .fil-tbl{overflow-x:auto;overflow-y:hidden}
+.mx-druck .fil-tbl thead th{transform:translateY(var(--hy,0px));will-change:transform}
 .mx-druck .fil-tbl table{min-width:1180px;border-collapse:separate;border-spacing:0}
 .mx-druck .fil-tbl th{position:sticky;top:0;z-index:2}
 .mx-druck .fil-tbl th:first-child{left:0;z-index:3}
@@ -151,13 +155,13 @@
 
 .mx-druck .fil-tbl td.nz{white-space:nowrap}
 .mx-druck .fil-tbl td.ch{min-width:240px;font-size:12.8px;color:var(--muted);line-height:1.5}
-.mx-druck .fil-tbl td.wn{min-width:270px}
+.mx-druck .fil-tbl td.wn{min-width:300px}
 .mx-druck .fil-tbl td.wn span{display:block}
 .mx-druck .fil-tbl td.wn .wx{margin-top:4px}
 .mx-druck .fil-tbl td.wn b{display:inline-block;margin-right:5px;font-size:11px;font-weight:650;
   text-transform:uppercase;letter-spacing:.04em}
 .mx-druck .fil-tbl td.wn .wg b{color:var(--ok-ink)}
-.mx-druck .fil-tbl td.wn .wx b{color:var(--bad-ink)}
+.mx-druck .fil-tbl td.wn .wx b{color:var(--accent-ink);text-transform:none;letter-spacing:0;font-size:12.4px}
 
 /* Handy: Kartenansicht aus _mecha.css, ohne Sticky und Scrollfenster */
 @media (max-width:620px){
@@ -177,3 +181,15 @@
   .mx-druck .fil-wide{width:auto;margin-left:0}
 }
 .mx-druck .fil-tbl tbody tr[hidden]{display:none!important}
+
+/* Kompakter, damit mehr Spalten nebeneinander passen */
+@media (min-width:621px){
+  .mx-druck .fil-tbl th,.mx-druck .fil-tbl td{padding-left:9px;padding-right:9px}
+  .mx-druck .fil-tbl td.fn{min-width:140px}
+  .mx-druck .fil-tbl td.rg{min-width:86px}
+  .mx-druck .fil-tbl .m{width:44px}
+  .mx-druck .fil-tbl td.sc{padding-right:4px}
+  .mx-druck .fil-tbl td.nz{white-space:normal;min-width:96px;max-width:120px}
+  .mx-druck .fil-tbl td.nz .b{white-space:normal;line-height:1.3}
+  .mx-druck .fil-tbl td.ch{min-width:220px}
+}
