@@ -3,13 +3,34 @@
    Inhalt eines Modulabschnitts. Rendert den Abschnitt und gibt jeder
    Überschrift schon beim Build eine feste ID (lib/anchors.mjs) — Pagefind
    braucht sie, damit Volltext-Treffer direkt an die Fundstelle springen.
+
+   Sprungleiste: Steht im Abschnitt ein leeres <nav class="kb-jump"></nav>,
+   wird es hier mit Links auf alle Zwischenüberschriften (h3.section-label)
+   des Abschnitts gefüllt. So bleibt die Leiste immer synchron mit den
+   Überschriften und funktioniert ohne JavaScript.
    ========================================================================== */
 import { anchorHeadings } from "../lib/anchors.mjs";
 
 interface Props {
   sec: string;
 }
-const html = await Astro.slots.render("default");
+const raw = await Astro.slots.render("default");
+let html = anchorHeadings(raw, Astro.props.sec);
+
+const JUMP = /<nav class="kb-jump"><\/nav>/;
+if (JUMP.test(html)) {
+  const links = [...html.matchAll(/<h3 id="([^"]+)" class="section-label">([\s\S]*?)<\/h3>/g)]
+    /* Kurzform für die Leiste: nur der Teil vor „ · “, ohne Klammerzusatz. */
+    .map(([, id, inner]) => {
+      const t = inner.replace(/<[^>]*>/g, "").split(" · ")[0].replace(/\s*\([^)]*\)\s*$/, "");
+      return `<li><a href="#${id}">${t}</a></li>`;
+    })
+    .join("");
+  html = html.replace(
+    JUMP,
+    `<nav class="kb-jump" aria-label="Auf dieser Seite" data-pagefind-ignore><span class="kb-jump-l">Springe zu</span><ul>${links}</ul></nav>`,
+  );
+}
 ---
 
-<Fragment set:html={anchorHeadings(html, Astro.props.sec)} />
+<Fragment set:html={html} />

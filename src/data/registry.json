@@ -2551,7 +2551,7 @@
        "name": "Küchen-Basics",
        "icon": "🥘",
        "kind": "Referenz",
-       "updated": "2026-10-19",
+       "updated": "2026-11-08",
        "desc": "Garmethoden, Pfannenkunde, Pfannen- und Öltemperaturen, IR-Thermometer, Vorgehen für Hack, Hähnchen, Wings und Köfte, Rauchpunkte, Kerntemperaturen, Saucenbasen, Maße und die Faustregeln, die fast immer gelten. Mit Temperaturskalen, Vergleichstabellen und den Zahlen dahinter.",
        "tags": [
         "technik",
@@ -2565,6 +2565,10 @@
         "kerntemperatur"
        ],
        "sections": [
+        {
+         "h": "blick",
+         "t": "Auf einen Blick"
+        },
         {
          "h": "technik",
          "t": "Techniken"

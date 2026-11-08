@@ -102,6 +102,9 @@ URLs der aufgelösten Module weiter funktionieren — inklusive Anker.
 - **Anker entstehen beim Build:** Die Abschnittsüberschrift trägt die ID des
   Abschnitts, jede h2–h4 darin `<abschnitt>--<slug>` (`src/lib/anchors.mjs`,
   gleiches Schema wie der Router). Nur so kennt Pagefind die Fundstellen.
+- **Sprungleiste:** Ein leeres `<nav class="kb-jump"></nav>` im Abschnitt füllt
+  `SectionBody` beim Build mit Links auf alle `h3.section-label` des Abschnitts
+  (Kurzform vor „ · “). Im Einsatz in den Küchen-Basics.
 - **Modul-Verhalten** (Rechner, sortierbare Tabellen, Filter, Faltabschnitte) liegt in
   `public/assets/mod-<id>.js` und wird über die `PAGE_SCRIPTS`-Map in
   `src/pages/[slug].astro` eingebunden.
