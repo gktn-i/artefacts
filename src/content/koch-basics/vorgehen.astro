@@ -3,6 +3,8 @@ import "./_style.css";
 ---
 <p class="lede">Die Alltagsklassiker Schritt für Schritt: Hackfleisch, Hähnchen, Wings, Köfte und Co. Welche Pfanne, wie viel Fett, welche Hitze und wann es fertig ist. Die Kerntemperaturen dahinter stehen unter <a href="#temperatur">Temperaturen</a>.</p>
 
+<nav class="kb-jump"></nav>
+
 <div class="kb-kpis">
   <div class="kb-kpi"><div class="v">1 TL Öl</div><div class="k">Hack in Edelstahl</div><div class="s">Auch bei fettem Hack. Das Fett tritt erst aus, wenn es schon klebt.</div></div>
   <div class="kb-kpi"><div class="v">500 g</div><div class="k">Hack pro 28-cm-Pfanne</div><div class="s">Mehr kocht im eigenen Saft. Größere Mengen in zwei Runden.</div></div>
@@ -11,22 +13,22 @@ import "./_style.css";
 </div>
 
 <div class="block">
-  <div class="section-label">Überblick</div>
+  <h3 class="section-label">Überblick</h3>
   <div class="kb-tbl-wrap">
     <table class="kb-table">
-      <thead><tr><th>Stück</th><th>Pfanne</th><th>Fett</th><th>Pfanne heiß<small>Oberfläche</small></th><th>Zeit</th><th>Kern</th></tr></thead>
+      <thead><tr><th>Stück</th><th>Pfanne heiß<small>Oberfläche</small></th><th>Zeit</th><th>Kern</th><th>Fett</th><th>Pfanne</th></tr></thead>
       <tbody>
-        <tr><td>Hackfleisch, krümelig</td><td>Edelstahl, Eisen</td><td>1 TL</td><td class="m">200–220 °C</td><td class="m">8–10 min</td><td class="m">durch</td></tr>
-        <tr><td>Hähnchenbrust</td><td>Edelstahl, Guss</td><td>1 EL</td><td class="m">190–210 °C</td><td class="m">8–10 min</td><td class="m">70 → 72–74 °C</td></tr>
-        <tr><td>Hähnchenkeule mit Knochen</td><td>Guss, Edelstahl + Ofen</td><td>1 TL</td><td class="m">160–180 °C</td><td class="m">35–40 min</td><td class="m">80 °C</td></tr>
-        <tr><td>Hähnchenschenkel ohne Knochen</td><td>Edelstahl, Guss</td><td>1 TL</td><td class="m">180–200 °C</td><td class="m">12–15 min</td><td class="m">78–82 °C</td></tr>
-        <tr><td>Chicken Wings</td><td>Ofen, Airfryer</td><td>keins</td><td class="m">—</td><td class="m">70–80 min</td><td class="m">80 °C+</td></tr>
-        <tr><td>Hähnchengeschnetzeltes</td><td>Edelstahl, Wok</td><td>1 EL</td><td class="m">220–250 °C</td><td class="m">4–5 min</td><td class="m">durch</td></tr>
-        <tr><td>Köfte</td><td>Guss, Grillpfanne</td><td>Hauch</td><td class="m">200–220 °C</td><td class="m">7–8 min</td><td class="m">70–72 °C</td></tr>
-        <tr><td>Burger-Patty</td><td>Guss, Edelstahl</td><td>Hauch</td><td class="m">230–250 °C</td><td class="m">7–8 min</td><td class="m">72 °C</td></tr>
-        <tr><td>Schweinekotelett</td><td>Edelstahl, Guss</td><td>1 EL</td><td class="m">210–230 °C</td><td class="m">6–8 min</td><td class="m">60 → 63 °C</td></tr>
-        <tr><td>Bratwurst roh</td><td>Edelstahl, Guss</td><td>1 TL</td><td class="m">150–170 °C</td><td class="m">12–15 min</td><td class="m">72 °C</td></tr>
-        <tr><td>Lachs mit Haut</td><td>beschichtet, Edelstahl</td><td>1 EL</td><td class="m">190–210 °C</td><td class="m">5–7 min</td><td class="m">48 → 50–52 °C</td></tr>
+        <tr><td><a href="#vorgehen--hackfleisch-anbraten">Hackfleisch, krümelig</a></td><td class="m">200–220 °C</td><td class="m">8–10 min</td><td class="m">durch</td><td>1 TL</td><td>Edelstahl, Eisen</td></tr>
+        <tr><td><a href="#vorgehen--hähnchenbrust">Hähnchenbrust</a></td><td class="m">190–210 °C</td><td class="m">8–10 min</td><td class="m">70 → 72–74 °C</td><td>1 EL</td><td>Edelstahl, Guss</td></tr>
+        <tr><td><a href="#vorgehen--hähnchenkeule-mit-knochen">Hähnchenkeule mit Knochen</a></td><td class="m">160–180 °C</td><td class="m">35–40 min</td><td class="m">80 °C</td><td>1 TL</td><td>Guss, Edelstahl + Ofen</td></tr>
+        <tr><td>Hähnchenschenkel ohne Knochen</td><td class="m">180–200 °C</td><td class="m">12–15 min</td><td class="m">78–82 °C</td><td>1 TL</td><td>Edelstahl, Guss</td></tr>
+        <tr><td><a href="#vorgehen--chicken-wings">Chicken Wings</a></td><td class="m">—</td><td class="m">70–80 min</td><td class="m">80 °C+</td><td>keins</td><td>Ofen, Airfryer</td></tr>
+        <tr><td><a href="#vorgehen--hähnchengeschnetzeltes">Hähnchengeschnetzeltes</a></td><td class="m">220–250 °C</td><td class="m">4–5 min</td><td class="m">durch</td><td>1 EL</td><td>Edelstahl, Wok</td></tr>
+        <tr><td><a href="#vorgehen--köfte">Köfte</a></td><td class="m">200–220 °C</td><td class="m">7–8 min</td><td class="m">70–72 °C</td><td>Hauch</td><td>Guss, Grillpfanne</td></tr>
+        <tr><td><a href="#vorgehen--burger-patty">Burger-Patty</a></td><td class="m">230–250 °C</td><td class="m">7–8 min</td><td class="m">72 °C</td><td>Hauch</td><td>Guss, Edelstahl</td></tr>
+        <tr><td><a href="#vorgehen--schweinekotelett">Schweinekotelett</a></td><td class="m">210–230 °C</td><td class="m">6–8 min</td><td class="m">60 → 63 °C</td><td>1 EL</td><td>Edelstahl, Guss</td></tr>
+        <tr><td><a href="#vorgehen--bratwurst-roh">Bratwurst roh</a></td><td class="m">150–170 °C</td><td class="m">12–15 min</td><td class="m">72 °C</td><td>1 TL</td><td>Edelstahl, Guss</td></tr>
+        <tr><td><a href="#vorgehen--lachs-mit-haut">Lachs mit Haut</a></td><td class="m">190–210 °C</td><td class="m">5–7 min</td><td class="m">48 → 50–52 °C</td><td>1 EL</td><td>beschichtet, Edelstahl</td></tr>
       </tbody>
     </table>
   </div>
@@ -35,7 +37,7 @@ import "./_style.css";
 </div>
 
 <div class="block">
-  <div class="section-label">Öl oder kein Öl?</div>
+  <h3 class="section-label">Öl oder kein Öl?</h3>
   <div class="kb-tbl-wrap">
     <table class="kb-table">
       <thead><tr><th>Was</th><th class="c">Edelstahl</th><th class="c">Guss / Eisen</th><th class="c">Beschichtet</th><th>Warum</th></tr></thead>
@@ -54,7 +56,7 @@ import "./_style.css";
 </div>
 
 <div class="block">
-  <div class="section-label">Schritt für Schritt</div>
+  <h3 class="section-label">Schritt für Schritt</h3>
 </div>
 
 <div class="card spec-card">

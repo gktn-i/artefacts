@@ -220,7 +220,7 @@
 .mx-sys .kb-table th,
 .mx-sys .kb-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: middle; }
 .mx-sys .kb-table thead th {
-  font: 600 10.5px/1.4 var(--ui);
+  font: 600 11px/1.4 var(--ui);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--faint);
@@ -233,7 +233,7 @@
 .mx-sys .kb-table td.m { font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .mx-sys .kb-table tr.grp td {
   background: var(--surface-2);
-  font: 600 10.5px/1.4 var(--ui);
+  font: 600 11px/1.4 var(--ui);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--faint);
@@ -348,4 +348,147 @@
   .mx-sys .kb-vline b { display: none; }
   .mx-sys .kb-scale.pad-b .kb-body { padding-bottom: 0; }
   .mx-sys .kb-bars-wrap .kb-vline b { display: block; font-size: 9.5px; }
+}
+
+/* ============================================================================
+   Küchen-Basics · Nachschlage-Struktur
+   Zwischenüberschriften sind echte h3 (Rail-Subnav, Suchtreffer, Sprungleiste),
+   die Sprungleiste oben im Abschnitt, Tipps als ruhige Liste statt Kartenwand,
+   der Spickzettel „Auf einen Blick“ und Tabellen, die auf dem Handy die erste
+   Spalte festhalten.
+   ========================================================================== */
+.mx-koch-basics h3.section-label {
+  font: 600 17px/1.3 var(--display);
+  letter-spacing: -0.005em;
+  text-transform: none;
+  color: var(--text);
+  gap: 14px;
+  margin: 36px 0 12px;
+  text-wrap: balance;
+}
+.mx-koch-basics .block > h3.section-label:first-child { margin-top: 36px; }
+.mx-koch-basics h3.section-label + figure.kb-fig { margin-top: 0; }
+
+/* ---------------------------------------------------------- Sprungleiste */
+.mx-koch-basics .kb-jump {
+  display: flex;
+  align-items: baseline;
+  gap: 8px 12px;
+  margin: 0 0 22px;
+  padding: 0 0 16px;
+  border-bottom: 1px solid var(--border);
+}
+.mx-koch-basics .kb-jump-l {
+  flex: 0 0 auto;
+  font: 500 12.5px/1 var(--ui);
+  color: var(--faint);
+}
+.mx-koch-basics .kb-jump ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mx-koch-basics .kb-jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 11px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--surface);
+  font: 500 13px/1.2 var(--ui);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+.mx-koch-basics .kb-jump a:hover {
+  border-color: color-mix(in srgb, var(--c) 45%, var(--border));
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 6%, var(--surface));
+}
+.mx-koch-basics .kb-jump a:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+
+/* ------------------------------------------------ Links in Tabellenzellen */
+.mx-koch-basics .kb-table td a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--c) 45%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.mx-koch-basics .kb-table td a:hover { color: var(--c); text-decoration-color: var(--c); }
+
+/* ------------------------------------------- Tipps als Liste statt Karten */
+.mx-koch-basics dl.kb-tips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 32px;
+  margin: 0;
+}
+.mx-koch-basics .kb-tips > div {
+  padding: 12px 0 13px;
+  border-top: 1px solid var(--border);
+}
+.mx-koch-basics .kb-tips dt { font: 600 14.5px/1.4 var(--ui); color: var(--text); margin-bottom: 3px; }
+.mx-koch-basics .kb-tips dd { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--muted); max-width: 62ch; }
+
+/* ------------------------------------------- Spickzettel „Auf einen Blick“ */
+.mx-koch-basics .kb-glance {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 28px;
+  margin-top: 4px;
+}
+.mx-koch-basics .kb-glance .block { margin: 0; min-width: 0; }
+.mx-koch-basics .kb-glance h3.section-label { margin-top: 26px; }
+.mx-koch-basics .kb-glance .kb-tbl-wrap { margin-bottom: 8px; }
+.mx-koch-basics .kb-glance .kb-table td:first-child { white-space: normal; }
+.mx-koch-basics .kb-glance .kb-table td:not(.m):not(:first-child) { color: var(--muted); }
+.mx-koch-basics .kb-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  font: 500 13px/1.3 var(--ui);
+  color: var(--c);
+  text-decoration: none;
+}
+.mx-koch-basics .kb-more::after { content: "→"; transition: transform 0.15s ease; }
+.mx-koch-basics .kb-more:hover { text-decoration: underline; text-underline-offset: 3px; }
+.mx-koch-basics .kb-more:hover::after { transform: translateX(2px); }
+
+/* Tabellen: Sticky-Spalte braucht clip statt hidden (hidden wäre ein
+   eigener Scroll-Container und hielte die Spalte fest). */
+.mx-koch-basics table.kb-table { overflow: clip; }
+
+@media (max-width: 760px) {
+  .mx-koch-basics .kb-glance,
+  .mx-koch-basics dl.kb-tips { grid-template-columns: minmax(0, 1fr); }
+  .mx-koch-basics h3.section-label,
+  .mx-koch-basics .block > h3.section-label:first-child { margin-top: 30px; font-size: 16px; }
+
+  .mx-koch-basics .kb-jump { flex-direction: column; gap: 8px; }
+
+  /* Erste Spalte bleibt beim seitlichen Scrollen stehen, darf umbrechen */
+  .mx-koch-basics .kb-table td:first-child,
+  .mx-koch-basics .kb-table th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    white-space: normal;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    min-width: 7.5em;
+    max-width: 10em;
+    box-shadow: 1px 0 0 var(--border);
+  }
+  .mx-koch-basics .kb-table td:first-child { background: var(--surface); }
+  .mx-koch-basics .kb-table th:first-child { background: var(--surface-2); }
+  .mx-koch-basics .kb-table tr.grp td:first-child { position: static; max-width: none; box-shadow: none; background: var(--surface-2); }
+  /* Fließtext-Spalten nicht zu schmalen Türmen quetschen */
+  .mx-koch-basics .kb-table td:last-child:not(.c):not(.m):not(:first-child) { min-width: 22ch; }
+  .mx-koch-basics .kb-glance .kb-table td:last-child:not(.c):not(.m):not(:first-child) { min-width: 0; }
 }
